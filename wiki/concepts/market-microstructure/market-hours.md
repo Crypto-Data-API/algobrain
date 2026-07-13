@@ -51,7 +51,7 @@ The practical rule: an after-hours price is an *indication*, not a settled price
 
 Trading hours are venue-specific:
 
-- **ASX (Australia):** regular trading roughly 10:00 AM – 4:00 PM Australian Eastern time, with opening and closing single-price auctions; relevant for the Australian stocks in ALFRED's coverage.
+- **ASX (Australia):** regular trading roughly 10:00 AM – 4:00 PM Australian Eastern time, with opening and closing single-price auctions.
 - **London (LSE), Tokyo (TSE), and other exchanges** each keep their own local sessions, so global investors face a near-continuous relay of regional opens and closes.
 - **Futures** (e.g. equity-index futures) trade nearly around the clock on electronic platforms, which is why overnight futures are watched as a proxy for where stocks will open.
 - **Crypto markets never close** — they trade 24 hours a day, 7 days a week, with no opening bell, no closing auction, and no holidays. This is a fundamental structural difference from equities: there is no "after-hours" because every hour is trading hours. See [[crypto-trading-sessions]] for how liquidity still varies by time of day even in a 24/7 market.

@@ -32,7 +32,7 @@ kill_criteria: |
 
 A **delta-neutral or near-neutral carry strategy** that collects [[funding-rate|funding payments]] from the leveraged side of perpetual futures markets without taking significant directional price risk. When funding is persistently positive (longs paying shorts), the basket opens a short perp position to collect the rate; when persistently negative (shorts paying longs), it opens a long. Where possible, directional exposure is hedged with an offsetting spot or equivalent position to isolate the funding yield. The strategy works best during rangebound, high-leverage market conditions where the underlying asset's price drifts predictably while funding remains elevated.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ---
 

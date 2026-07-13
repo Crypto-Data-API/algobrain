@@ -31,11 +31,11 @@ kill_criteria: |
 
 # Full Bear Short Book (Hyperliquid Basket)
 
-> **Not investment advice** — this page documents the strategy design. Positioning decisions are downstream of Alfred's regime detection and live portfolio management.
+> **Not investment advice** — this page documents the strategy design. Positioning decisions are downstream of the system's regime detection and live portfolio management.
 
-A directional short-only [[trading-strategy-baskets|basket]] of [[hyperliquid|Hyperliquid]] [[perpetual-futures|perp]] positions, activated exclusively during **confirmed macro downtrends** — not corrections, not pullbacks, but full bear-market conditions characterised by sustained lower highs and lower lows, deteriorating on-chain fundamentals, and broad derivatives fragility. The basket opens short perpetual positions across a diversified universe of assets, ranging from major-caps to select mid-caps, with maximum allowable short exposure across the eligible universe. The "full" label is intentional: this is not a hedging sleeve — it is an aggressive directional bet that the bear trend continues. It is gated by the bear phase of Alfred's [[macro-trend-regime]] within the broader [[market-regime]] framework.
+A directional short-only [[trading-strategy-baskets|basket]] of [[hyperliquid|Hyperliquid]] [[perpetual-futures|perp]] positions, activated exclusively during **confirmed macro downtrends** — not corrections, not pullbacks, but full bear-market conditions characterised by sustained lower highs and lower lows, deteriorating on-chain fundamentals, and broad derivatives fragility. The basket opens short perpetual positions across a diversified universe of assets, ranging from major-caps to select mid-caps, with maximum allowable short exposure across the eligible universe. The "full" label is intentional: this is not a hedging sleeve — it is an aggressive directional bet that the bear trend continues. It is gated by the bear phase of the [[macro-trend-regime]] within the broader [[market-regime]] framework.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

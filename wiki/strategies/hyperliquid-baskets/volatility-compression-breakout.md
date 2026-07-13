@@ -32,7 +32,7 @@ kill_criteria: |
 
 Monitors [[bollinger-bands|Bollinger Band width]], [[atr|ATR]], and historical volatility percentiles to identify periods of **abnormally low volatility** — compression. After prolonged compression, volatility typically expands sharply in one direction. This basket **pre-positions** before the directional break (or enters on an early breakout trigger), targeting the explosive directional move when compression resolves. The setup is often described as a coiled spring: the longer and tighter the compression, the more potential energy stored, and the larger the expected expansion.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 > **Not investment advice.** This page is a design document for a systematic trading basket. All performance figures are ILLUSTRATIVE ESTIMATES.
 

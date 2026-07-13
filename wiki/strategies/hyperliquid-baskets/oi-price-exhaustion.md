@@ -29,13 +29,13 @@ kill_criteria: |
 
 # OI / Price Exhaustion (Hyperliquid Basket)
 
-> **Not investment advice** — this page documents the setup for the Alfred systematic framework. Fading a trend on exhaustion signals is a reversal strategy; it loses when the trend continues with a new wave of participants.
+> **Not investment advice** — this page documents the setup for the systematic trading framework. Fading a trend on exhaustion signals is a reversal strategy; it loses when the trend continues with a new wave of participants.
 
 A mean-reversion basket that detects **trend exhaustion** by tracking divergence between price and [[open-interest|Open Interest]]. When price continues making new highs or new lows but OI is declining — meaning existing positions are *closing* rather than new capital *entering* — the trend is losing participation and is structurally fragile. The basket fades the trend direction, anticipating a mean reversion once the exhausted move rolls over.
 
 This basket is the **reversal counterpart to [[oi-confirmed-trend]]**, which confirms and rides trends when OI is *expanding* alongside price. The two baskets share the same underlying data (price + OI) but express opposite views. Where OI-confirmed-trend requires alignment between price and OI as a trend-continuation signal, OI-price-exhaustion treats the *divergence* of the same two variables as a reversal signal. They should not be active simultaneously on the same asset.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

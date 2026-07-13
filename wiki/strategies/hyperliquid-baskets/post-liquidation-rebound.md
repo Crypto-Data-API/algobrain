@@ -32,13 +32,13 @@ kill_criteria: |
 
 A [[mean-reversion]] strategy that enters **immediately after a significant liquidation event has flushed overleveraged positions from the market**. The logic: once a cascade of forced liquidations has completed, the market is structurally cleaner — weak hands are gone, the forced supply (or demand) that caused the overshoot has exhausted itself, and remaining position holders are better-capitalised. Price typically mean-reverts sharply from the liquidation extreme as patient capital re-enters and the asset reprices toward fair value. Entries are timed using liquidation volume spikes, [[rsi|RSI]] oversold/overbought readings at the flush point, and order-flow exhaustion signals.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ---
 
 ## Relationship to [[liquidation-cascade-fade]]
 
-This basket is the **closest sibling to the existing [[liquidation-cascade-fade]] page** in the Alfred wiki. Both strategies:
+This basket is the **closest sibling to the existing [[liquidation-cascade-fade]] page** in this wiki. Both strategies:
 - Enter in the direction opposite to the completed liquidation flush
 - Target mean-reversion to the pre-cascade level
 - Use liquidation volume spikes as the primary timing signal

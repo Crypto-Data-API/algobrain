@@ -8,27 +8,6 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "path:wiki/alfred",
-      "color": {
-        "a": 1,
-        "rgb": 4193776
-      }
-    },
-    {
-      "query": "file:fred",
-      "color": {
-        "a": 1,
-        "rgb": 4193776
-      }
-    },
-    {
-      "query": "path:wiki/markets/stocks",
-      "color": {
-        "a": 1,
-        "rgb": 52224
-      }
-    },
-    {
       "query": "path:wiki/markets/crypto",
       "color": {
         "a": 1,

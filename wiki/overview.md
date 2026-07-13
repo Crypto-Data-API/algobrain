@@ -1,79 +1,56 @@
 ---
-title: "Trading Wiki Overview"
+title: "AI Trading Strategy Brain — Overview"
 type: overview
 created: 2026-04-06
-updated: 2026-04-07
-status: draft
+updated: 2026-07-13
+status: good
 tags: [overview, meta]
 ---
 
-# Trading Wiki Overview
+# AI Trading Strategy Brain — Overview
 
-This page provides a high-level synthesis of the wiki's current state: major themes, knowledge density, gaps, and emerging insights.
+This page provides a high-level synthesis of the wiki's current state: mission, major themes, knowledge density, gaps, and emerging insights.
+
+## Mission
+
+A crypto-trading-strategy knowledge base for AI-assisted strategy research and generation. Scope: **crypto, blockchain, DeFi, trading, algorithms, and markets** — plus the macro context (FX, rates, commodities, market history) and AI/ML knowledge that feed crypto strategy development. Stock-picking and equity-fundamental content is deliberately out of scope.
 
 ## Current State
 
-The wiki has grown from a single data source to a comprehensive trading knowledge base backed by 57 source summaries spanning on-chain data, professional trading methodology (ITPM), and 40 published book sources covering the canon of trading and investing literature -- from foundational investing (Graham, Fisher) through quantitative and algorithmic trading (Chan, de Prado, Narang) to AI/ML for finance (Jansen, Hilpisch, Dixon), market microstructure (Harris, Cartea, Aldridge), and statistical arbitrage (Pole, Vidyamurthy).
+Forked from a broader trading wiki on 2026-07-13 and pruned to crypto scope (~3,500 pages). The knowledge base spans:
 
-**Sources ingested**: 57 (1 data, 16 ITPM video/article, 40 books)
-**Wiki pages with content**: 300+ (+ 49 category indexes)
-**Data confidence**: HIGH (on-chain verified data, named practitioner statements, published books)
-**Book sources**: 40 canonical trading/investing books providing high-confidence citations across concept, strategy, and entity pages
+- **Strategies** (~370 pages): funding-rate harvesting, basis/carry, liquidation-cascade plays, MEV, memecoin sniping, market making, grid/mean-reversion/momentum systems, the 27-basket Hyperliquid signal library, and a 100+ page arbitrage encyclopedia from medieval bills of exchange to cross-L2 MEV
+- **Concepts** (~1,000 pages): market microstructure, indicators, portfolio theory, risk management, backtesting methodology, behavioral finance, anomalies, options mechanics, on-chain metrics (MVRV, SOPR, NUPL, HODL waves), macro
+- **Markets** (~1,150 pages): 1,000+ crypto asset pages plus commodities, forex, and bonds for macro context
+- **Entities** (~300 pages): crypto exchanges, DeFi protocols, quant/crypto funds, trading legends, miners and treasury companies, regulators
+- **Crypto narratives** (backtester-ready catalog): 19 categories, 69 archetypes, 290 quantified historical instances
+- **AI & AI-trading** (~300 pages): ML models, trading bots, backtesting frameworks, LLM finance applications, and the general AI knowledge base
+- **History & news**: crypto market history (Mt. Gox → FTX → ETF era) plus macro/trading history (1987, LTCM, GFC, Volmageddon)
 
-## Knowledge Map
+**Flagship clusters:** [[crypto-market-regime-taxonomy|14-Basket Crypto Regime Taxonomy]] (regime detection → strategy gating, see [[regime-strategy-playbook]]) · [[hyperliquid-baskets-overview|Hyperliquid Basket Library]] · [[regime-matrix|Strategy Regime Matrix]] · [[crypto-perp-backtesting-pitfalls|Crypto-Perp Backtesting]] · [[arbitrage-overview|Arbitrage Hub]] · [[crypto-narratives-overview|Narrative Impact Catalog]].
 
-| Category | Pages | Sources | Status |
-|----------|-------|---------|--------|
-| Markets | 20+ | 1 | Crypto, equities, commodities, forex covered |
-| Strategies | 90+ | 17+ | Comprehensive: mainstream through exotic |
-| Concepts | 50+ | 17+ | Core concepts, risk management, portfolio theory |
-| History | 10+ | 10+ | Major crashes and market events |
-| Entities | 30+ | 17+ | Traders, funds, exchanges, regulators |
-| AI Trading | 5+ | 6+ | ML, algo trading, backtesting |
-| News | 1 | 1 | [[hyperliquid-market-snapshot-2026-04-06]] |
-| Education | 40 | 40 | 40 book pages with source summaries |
+## Data Layer
 
-**Flagship clusters:** [[crypto-market-regime-taxonomy|14-Basket Crypto Regime Taxonomy]] (Hyperliquid-native regime detection → strategy gating, see [[regime-strategy-playbook]]) · [[regime-matrix|Strategy Regime Matrix]] · [[crypto-perp-backtesting-pitfalls|Crypto-Perp Backtesting]].
-
-## Key Intelligence (from first ingestion)
-
-- **Hyperliquid** is a major DEX with 229 perpetual markets, handling 3-10M daily fills
-- BTC 24h volume on HL: **$1.87B** across 452K trades (Apr 6, 2026)
-- Platform also trades traditional assets: SP500, Gold, Silver, Oil, TSLA, NVDA
-- Active whale trading: multiple $1M-$2.3M single trades daily
-- Top trader did **$276M** in 24h volume
-- FARTCOIN has elevated funding rate (0.0074%) — strong long bias signal
-- Builder ecosystem active: $114K daily builder fees
+**[[cryptodataapi|CryptoDataAPI]]** (https://cryptodataapi.com) is the canonical data source for this wiki: 190+ REST endpoints covering prices/klines, funding rates, open interest, liquidations, order-book depth, volatility/market/meme/event/security/policy regimes, HMM quant probabilities, on-chain flows, miner metrics, whale tracking, Hyperliquid trader intelligence, sentiment, ETF flows, and a Parquet backtesting archive back to 2020. Pages that map to an endpoint carry a **"Getting the Data (CryptoDataAPI)"** section with live + historical access patterns.
 
 ## Knowledge Gaps
 
 Priority areas to fill next:
-1. **Real-time market data**: More current market snapshots beyond the initial Hyperliquid data
-2. **News events**: Current market-moving events (2025-2026)
-3. **Comparisons**: Side-by-side strategy and platform comparisons
-4. **Backtesting results**: Empirical data backing strategy pages
-5. **Additional book sources**: Sequels (New Market Wizards), Hull's derivatives textbook, Covel's TurtleTrader, Taleb's Antifragile
-6. **ITPM entity pages**: Remaining mentors and case studies from ITPM content
-7. **Book citation coverage**: Many existing wiki pages still lack citations from the 14 newly added AI/ML, stat arb, and HFT books
+1. **Backtesting results**: empirical validation data for the strategy pages, using the CryptoDataAPI backtesting archive
+2. **Regime-gated performance**: which strategies actually work in which of the 14 regimes
+3. **Current market snapshots**: refresh market-state pages via CryptoDataAPI live endpoints
+4. **On-chain strategy depth**: more strategies built on exchange-flow, dry-powder, and whale-score signals
+5. **Cross-venue microstructure**: Hyperliquid vs CEX funding/basis divergence patterns
 
 ## Emerging Themes
 
-1. **DEX-TradFi convergence**: Hyperliquid trading traditional assets (SP500, Gold, TSLA) on a decentralized platform signals blurring lines between DeFi and traditional finance
-2. **Algorithmic dominance**: Top traders show characteristics of algorithmic market makers (100K+ trades/day, multi-coin coverage)
-3. **Meme coin speculation**: FARTCOIN's elevated funding rate vs. stable major coin funding suggests speculative froth in low-cap tokens
-4. **ITPM methodology**: Professional-grade long/short equity with options overlay — 80/20 fundamental/technical split, 10-position portfolios, systematic risk management
-5. **Canonical book knowledge**: 40 published books now provide high-confidence source citations across the wiki, spanning value investing (Graham/Dodd), quantitative trading (Chan, de Prado), behavioral finance (Kahneman, Taleb), market microstructure (Harris, Cartea, Aldridge), AI/ML for finance (Jansen, Hilpisch, Dixon), statistical arbitrage (Pole, Vidyamurthy), and quant history (Patterson, Mallaby, Derman, Thorp)
-
-## Source Composition
-
-| Source Type | Count | Confidence | Notes |
-|-------------|-------|------------|-------|
-| On-chain data | 1 | HIGH | Hyperliquid via QuickNode |
-| ITPM videos | 16 | HIGH | Direct practitioner statements |
-| Books | 40 | HIGH | Published, widely-validated titles |
-| **Total** | **57** | | |
+1. **Regime-first strategy design**: every strategy gated to explicit market-regime conditions rather than run unconditionally
+2. **AI-exploit risk as tradeable edge**: frontier-model vulnerability discovery compressing disclosure cycles (see the AI-exploit cluster)
+3. **DEX-TradFi convergence**: Hyperliquid trading traditional assets on-chain; CME/ETF institutional rails maturing
+4. **Whale/copy-trading intelligence**: wallet-level positioning data as a first-class signal
+5. **Narrative quantification**: mapping world events → crypto price impact with backtestable priors
 
 ## Contradictions & Open Questions
 
-- Efficient market hypothesis ([[a-random-walk-down-wall-street]]) vs. active trading methodologies (ITPM, technical analysis books) — both perspectives well-sourced
-- Quantitative/systematic approaches (de Prado, Chan) vs. discretionary trading (Market Wizards) — wiki covers both without favoring either
+- Efficient-market skepticism vs. documented anomaly persistence in crypto (funding, listing effects, session patterns) — both perspectives well-sourced
+- Quantitative/systematic approaches (de Prado, Chan) vs. discretionary trading (Market Wizards) — the wiki covers both without favoring either

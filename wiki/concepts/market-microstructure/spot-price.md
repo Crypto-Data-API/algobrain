@@ -23,7 +23,7 @@ difficulty: beginner
 
 # Spot Price
 
-The spot price is the current market price at which an asset can be bought or sold for **immediate delivery and settlement**, as opposed to a futures or forward price, which applies to a transaction agreed today but settled at a future date. It is the "price now" — the number quoted on a ticker, the last trade on an exchange, the live FX rate — and it answers the everyday ALFRED-user question *"is the price I see on the screen the 'real' price?"* For a stock, the answer is essentially yes: the quoted price is a spot price for near-immediate settlement.
+The spot price is the current market price at which an asset can be bought or sold for **immediate delivery and settlement**, as opposed to a futures or forward price, which applies to a transaction agreed today but settled at a future date. It is the "price now" — the number quoted on a ticker, the last trade on an exchange, the live FX rate — and it answers the everyday trader question *"is the price I see on the screen the 'real' price?"* For a stock, the answer is essentially yes: the quoted price is a spot price for near-immediate settlement.
 
 ## How the Spot Price Is Determined
 

@@ -34,7 +34,7 @@ kill_criteria: |
 
 A position-timeframe [[trading-strategy-baskets|basket]] of [[hyperliquid|Hyperliquid]] [[perpetual-futures|perpetual]] positions that tracks real-money institutional demand signals: spot Bitcoin and Ethereum [[etf-flows|ETF inflow/outflow]] data, the Coinbase premium/discount versus global exchanges, and custody-level on-chain flows from institutional-grade wallets. Strong sustained ETF inflows indicate institutional accumulation — the strategy adds long exposure. Persistent outflows signal distribution — the strategy reduces or neutralises. This is the **demand-signal counterpart** to the macro liquidity basket: [[global-liquidity-expansion-contraction]] reads the supply of money (see [[global-liquidity]]); this basket reads where that money is flowing within crypto. It is a [[market-regime]]-aware sleeve, most active in the [[institutional-flow-regime]].
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -147,7 +147,7 @@ def etf_flow_basket(state, portfolio) -> dict:
 - **[[funding-rate]]** — secondary signal: if ETF flows are bullish but funding rate is already extreme (> 0.15% per 8h), longs are overcrowded and the structural-floor thesis does not justify adding more leverage. See [[hyperliquid-funding-rate-microstructure]].
 - **[[open-interest]]** — cross-reference: strong ETF inflows + rising OI = structurally strong demand (real + synthetic); strong ETF inflows + falling OI = positioning unwind being absorbed by real demand. Source: [[coinglass]].
 
-**Data-feed mapping (cryptodataapi.com).** Alfred sources the Hyperliquid-side inputs — perp [[funding-rate]], [[open-interest]], mark/oracle price, and the liquidation feed — from cryptodataapi.com's Hyperliquid endpoints; ETF flow totals and the Coinbase-premium index are overlaid from [[cryptoquant]] / [[the-block]]. The ETF flow signal itself is exogenous to cryptodataapi (it tracks fund-level disclosures); cryptodataapi supplies the venue execution context (depth, funding carry, OI confirmation) on which the basket is implemented.
+**Data-feed mapping (cryptodataapi.com).** The system sources the Hyperliquid-side inputs — perp [[funding-rate]], [[open-interest]], mark/oracle price, and the liquidation feed — from cryptodataapi.com's Hyperliquid endpoints; ETF flow totals and the Coinbase-premium index are overlaid from [[cryptoquant]] / [[the-block]]. The ETF flow signal itself is exogenous to cryptodataapi (it tracks fund-level disclosures); cryptodataapi supplies the venue execution context (depth, funding carry, OI confirmation) on which the basket is implemented.
 
 ## Example Trade
 

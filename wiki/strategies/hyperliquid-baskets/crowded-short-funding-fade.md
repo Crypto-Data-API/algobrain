@@ -32,7 +32,7 @@ kill_criteria: |
 
 When a crypto asset falls sharply, retail and momentum traders pile into short perp positions expecting further downside. As the short book swells, [[funding-rate|funding]] flips deeply negative — meaning **shorts are paying longs** — signalling an overcrowded trade. This basket goes **long** into that negativity: it collects the funding payment, positions for mean-reversion as shorts are forced to cover, and exits once funding normalises or the squeeze completes. The edge is both a carry trade (earn funding while waiting) and a behavioural fade (crowded sentiment historically resolves against the crowd).
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ---
 
@@ -276,7 +276,7 @@ Per [[when-to-retire-a-strategy]]:
 ## Sources
 
 - [[hyperliquid-funding-rate-microstructure]] — core mechanics, hourly settlement formula, mark-oracle deviation, funding sign convention.
-- [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — source framework for the Alfred basket library; basket categorisation and regime mapping.
+- [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — source framework for the basket library; basket categorisation and regime mapping.
 - [[coinglass]] — cross-venue funding aggregation and liquidation heatmaps.
 - [[hypurrscan]] — Hyperliquid-native funding heatmaps and OI data.
 - [[funding-rate-arbitrage]] — strategy family parent; delta-neutral funding harvest mechanics.

@@ -58,7 +58,7 @@ Domain choice matters: a finance-tuned embedding model places "duration risk" an
 | **Qdrant** | Open-source / managed | Rust-based, filtered search on metadata |
 | **Milvus** | Open-source | Large-scale, billion-vector deployments |
 
-For most personal trading-research stacks, **Chroma** or **pgvector** are sufficient — there is no need for a managed service until corpus size or query volume becomes large. (Alfred's own wiki search is backed by a Chroma vector store.)
+For most personal trading-research stacks, **Chroma** or **pgvector** are sufficient — there is no need for a managed service until corpus size or query volume becomes large.
 
 ## A Concrete Caveat for Traders
 

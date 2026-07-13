@@ -12,7 +12,7 @@ difficulty: beginner
 related: ["[[herding]]", "[[loss-aversion]]", "[[recency-bias]]", "[[disposition-effect]]", "[[overtrading]]", "[[market-bubbles]]", "[[meme-stocks]]", "[[trading-psychology]]", "[[cognitive-biases]]", "[[momentum]]", "[[risk-management]]"]
 ---
 
-FOMO — the fear of missing out — is the anxiety that other people are profiting from a move you are not part of, which pushes you to buy (or add) after a price has already run, usually near a local top and usually without a plan. It is one of the most common questions ALFRED users ask in a different form: *"why did I buy right at the top?"* The short answer is that the decision to enter was driven by the emotional discomfort of watching others win, not by a forward-looking assessment of value or risk.
+FOMO — the fear of missing out — is the anxiety that other people are profiting from a move you are not part of, which pushes you to buy (or add) after a price has already run, usually near a local top and usually without a plan. It is one of the most common questions traders ask in a different form: *"why did I buy right at the top?"* The short answer is that the decision to enter was driven by the emotional discomfort of watching others win, not by a forward-looking assessment of value or risk.
 
 ## How It Shows Up in Trading
 

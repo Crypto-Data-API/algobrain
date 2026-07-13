@@ -68,18 +68,15 @@ User receives natural language answer with citations
 | **Strategy discussion** | High | "Should I hedge my ETH position?" → multi-step analysis with market context |
 | **Trade execution** | Very high | "Buy 1 BTC at market" → authentication, confirmation, execution |
 
-## Alfred: A Case Study
+## Reference Architecture: A Trading Wiki Chatbot
 
-Alfred is this wiki's trading chatbot — a formal British butler persona powered by:
-- [[anthropic|Claude]] for reasoning and conversation
+A typical LLM trading assistant over a knowledge base like this one combines:
+- [[anthropic|Claude]] (or another frontier LLM) for reasoning and conversation
 - Wiki search via [[retrieval-augmented-generation|RAG]] for knowledge base access
-- CryptoData API for live crypto prices
-- StockMarket API for equity prices
-- Tavily for web search
-- Perplexity for deep research
-- ElevenLabs for text-to-speech (voice interface)
-
-Conversations are logged to `wiki/alfred/conversations/` and summarized in alfred-log.
+- [[cryptodataapi|CryptoDataAPI]] for live and historical crypto market data
+- A web-search tool (e.g. Tavily) for current events
+- A deep-research tool (e.g. Perplexity) for long-form questions
+- Text-to-speech (e.g. ElevenLabs) for a voice interface
 
 ## Sources
 

@@ -1,20 +1,20 @@
 ---
-title: "Trading Wiki Index"
+title: "AI Trading Strategy Brain — Index"
 type: index
 created: 2026-04-06
-updated: 2026-06-13
+updated: 2026-07-13
 status: good
 tags: [index, meta]
 ---
 
-# Trading Wiki Index
+# AI Trading Strategy Brain — Index
 
-A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
+A comprehensive, LLM-maintained knowledge base for crypto trading strategy: crypto, blockchain, DeFi, trading, algorithms, and markets — with macro and AI context.
 
 ## Categories
 
 ### Markets
-- [[markets-overview|Markets Overview]] — Crypto, Stocks, Forex, Commodities, Options, Futures, Bonds
+- [[markets-overview|Markets Overview]] — Crypto, Forex, Commodities, Options, Futures, Bonds (macro context for crypto)
 
 #### Commodities
 - Hub pages: [[commodities]], [[commodities-overview]], [[commodity-trading]]
@@ -42,7 +42,7 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 - [[itpm-ratio-calendar-spread|ITPM Ratio Calendar Spread]] — The core ITPM options structure: 2:1 ratio calendar spreads with credit collection and asymmetric payoffs
 - [[regime-matrix|Strategy Regime Matrix]] — Which strategies work in which market conditions
 - [[live-journal|Live Strategy Journal]] — Production strategies and their lifecycle history
-- [[hyperliquid-baskets-overview|Alfred Hyperliquid Basket Library]] — The 27 live signal baskets (Defensive Majors, OI-Confirmed Trend, funding fades, liquidation rides, breakout/range, macro-flow, event sleeves), each a full strategy page gated to a [[crypto-market-regime-taxonomy|market regime]]
+- [[hyperliquid-baskets-overview|Hyperliquid Basket Library]] — The 27 live signal baskets (Defensive Majors, OI-Confirmed Trend, funding fades, liquidation rides, breakout/range, macro-flow, event sleeves), each a full strategy page gated to a [[crypto-market-regime-taxonomy|market regime]]
 - Live bot strategies (excellent coverage): [[funding-rate-arbitrage]], [[stock-perp-oracle-basis]], [[liquidation-cascade-fade]], [[rsi-mean-reversion]], [[moving-average-crossover]], [[grid-trading]]
 - Price-action / order-flow strategies: [[volume-profile-trading-strategy|Volume Profile Trading Strategy]] (value-area rotation, LVN breakouts, naked-POC retests) · [[arc-strategy|ARC (Area·Range·Candle)]] (box/swing levels + range filter + John Wick candle entries)
 - AI/Macro themes:
@@ -60,12 +60,11 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 - [[strategy-monitoring|Strategy Monitoring & Alerting]] — Dashboard design, alert thresholds, kill criteria operationalization
 - [[arbitrage-opportunity-map|Arbitrage Opportunity Map]] — Cross-wiki synthesis of explicit, implicit, and hidden arbitrage opportunities
 - [[arbitrage-overview|Arbitrage Hub]] — 45+ arbitrage strategies, from cash-and-carry to MEV to historical LTCM relative value
-  - Risk / event-driven: risk-arbitrage, merger-arbitrage, tender-offer-arbitrage, spac-arbitrage, rights-issue-arbitrage, warrant-arbitrage
-  - Fixed income / relative value: [[relative-value-arbitrage]], [[on-off-the-run-treasury-arbitrage]], [[swap-spread-arbitrage]], [[tips-treasury-arbitrage]], [[mbs-basis-arbitrage]], [[cds-bond-basis-arbitrage]], capital-structure-arbitrage
-  - Cross-listing / NAV: dual-listed-company-arbitrage, adr-arbitrage, [[closed-end-fund-arbitrage]]
+  - Fixed income / relative value: [[relative-value-arbitrage]], [[on-off-the-run-treasury-arbitrage]], [[swap-spread-arbitrage]], [[tips-treasury-arbitrage]], [[mbs-basis-arbitrage]], [[cds-bond-basis-arbitrage]]
+  - NAV / fund structure: [[closed-end-fund-arbitrage]], [[etf-arbitrage]]
   - Macro / FX: [[covered-interest-arbitrage]], [[currency-peg-break-arbitrage]], [[gold-silver-ratio-arbitrage]]
   - Options parity: [[put-call-parity-arbitrage]]
-  - Historical frauds: cum-ex-dividend-stripping (illegal — documented), [[cum-ex-scandal]], [[archegos-blowup-2021]]
+  - Historical blowups: [[cum-ex-scandal]], [[archegos-blowup-2021]]
   - Classical / gold-standard era: [[gold-point-arbitrage]], [[specie-flow-arbitrage]], [[mint-parity-arbitrage]], [[bill-broking-arbitrage]], [[shipping-certificate-arbitrage]], [[regional-currency-arbitrage]], [[historical-cable-arbitrage]], [[grain-futures-basis-arbitrage]]
   - Historical entities: rothschild-family, baring-brothers, jay-cooke-co, overend-gurney, [[liverpool-cotton-exchange]]
   - Historical context: [[gold-standard-mechanics]], [[telegraph-impact-on-arbitrage]]
@@ -74,22 +73,21 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
   - Triangular variants: [[triangular-arbitrage]], [[medieval-bill-of-exchange-arbitrage]], [[eurodollar-triangular-arbitrage]], [[crisis-currency-triangular-arbitrage]], [[yen-carry-triangular-arbitrage]], [[crypto-spot-perp-futures-triangle]], [[dex-pool-triangular-arbitrage]]
   - Triangular arb history: [[champagne-fairs]], [[medieval-italian-banking]], [[1992-black-wednesday-erm-crisis]], [[1994-tequila-crisis]]
   - Modern execution-layer: [[intent-based-arbitrage]], [[private-mempool-arbitrage]], [[multi-leg-arbitrage]], [[cross-l2-arbitrage]], [[zkml-predictive-mev]], [[slippage-optimal-pathfinding]], [[mev-burn-economics]]
-  - Archegos cluster: [[archegos-blowup-2021]], [[bill-hwang]], [[block-trade-flipping-arbitrage]], [[prime-broker-cascade-trading]], 2020-05-muddy-waters-gsx-short, [[total-return-swap]]
-  - Risk-arbitrage family: risk-arbitrage, hostile-takeover-arbitrage, stub-trading, secondary-offering-arbitrage, dutch-auction-tender-arbitrage, [[distressed-debt-arbitrage]], appraisal-rights-arbitrage, regulatory-approval-arbitrage, class-action-arbitrage
-  - M&A regulation concepts: hsr-review, cfius, ec-merger-regulation
+  - Archegos cluster: [[archegos-blowup-2021]], [[bill-hwang]], [[block-trade-flipping-arbitrage]], [[prime-broker-cascade-trading]], [[total-return-swap]]
+  - Distressed / credit: [[distressed-debt-arbitrage]], [[bankruptcy-claim-arbitrage]]
   - Historic triangular FX wins: [[1987-andy-krieger-nzd-short]], [[1998-08-russia-ruble-default]], [[1999-01-brazil-real-devaluation]], [[2001-12-argentina-convertibility-break]], [[2015-01-snb-swiss-franc-unpeg]], [[2018-08-turkish-lira-crisis]], [[2022-09-uk-mini-budget-crisis]], [[2024-08-yen-carry-unwind]]
   - Historic crypto triangular wins: [[2013-04-cyprus-banking-crisis-btc-pump]], [[2017-08-bitcoin-cash-fork-arbitrage]], [[2017-12-cme-bitcoin-futures-launch]], [[2020-03-12-black-thursday-crypto]], [[2022-06-three-arrows-blowup]], [[2022-11-ftx-collapse-arbitrage]]
   - Crypto triangular strategies: [[wrapped-asset-triangular-arbitrage]], [[fork-airdrop-triangulation]], [[restaking-token-arbitrage]]
   - Exotic crypto arb (2024-2025): [[polymarket-prediction-market-arbitrage]], [[pendle-pt-yt-arbitrage]], [[pump-fun-bonding-curve-sniping]], [[uniswap-v4-hooks-arbitrage]], [[velodrome-aerodrome-bribe-arbitrage]], [[bitcoin-runes-brc20-arbitrage]], [[babylon-bitcoin-staking-arbitrage]], [[jito-solana-mev-arbitrage]], [[ai-agent-token-arbitrage]], [[hyperliquid-hlp-basis-arbitrage]]
-  - Edge-of-wiki gold: [[sports-betting-arbitrage]], [[matched-betting-arbitrage]], [[parallel-market-currency-arbitrage]], carbon-credit-arbitrage, weather-derivatives-arbitrage
+  - Edge-of-wiki gold: [[sports-betting-arbitrage]], [[matched-betting-arbitrage]], [[parallel-market-currency-arbitrage]]
   - AI-exploit cluster (2026): [[ai-amplified-exploit-arbitrage]], [[post-hack-incident-response-arb]], [[governance-restitution-arbitrage]], [[2026-exploit-target-watchlist]], [[ai-vulnerability-discovery]], [[smart-contract-vulnerability-taxonomy]], [[ai-auditor-arms-race]], [[insurance-as-unreliable-signal]], [[frontier-models-and-crypto-exploits]], [[2026-04-07-claude-mythos-project-glasswing]]
-  - AI-exploit derived strategies (2026): [[audit-recency-tvl-growth-short]], [[compound-fork-donation-short]], [[multi-dvn-bridge-config-arbitrage]], [[cross-chain-contagion-hedge]], mythos-capability-overhang-vol, [[mythos-release-window-exploit-short]], glasswing-partner-long-basket
+  - AI-exploit derived strategies (2026): [[audit-recency-tvl-growth-short]], [[compound-fork-donation-short]], [[multi-dvn-bridge-config-arbitrage]], [[cross-chain-contagion-hedge]], [[mythos-release-window-exploit-short]]
   - AI-exploit operational playbook: [[exploit-arb-implementation-guide]]
   - April 2026 incident post-mortems: [[2026-04-01-drift-protocol-exploit]], [[2026-04-18-kelp-layerzero-exploit]], [[2026-01-20-makina-finance-exploit]]
   - June 2026 AI-discovered bug: [[2026-06-05-zcash-orchard-counterfeiting-bug]] (Opus 4.8 finds ZEC Orchard counterfeiting flaw; ZEC −38%)
   - Exploit attack-vector concept pages: [[solana-durable-nonce-governance-attacks]], [[rpc-poisoning]], [[dvn-compromise-patterns]], [[donation-attacks]], [[move-clmm-vulnerability-class]]
   - Tier-1 exploit-watchlist protocols: [[jupiter-lend]], [[hyperevm]], [[megaeth]]
-  - **Legendary trade case studies (2026 batch):** [[2020-03-ackman-pandemic-cds-trade]] (100× CDS), [[2007-2008-burry-subprime-cds-trade]] (subprime Big Short), [[2006-09-amaranth-natural-gas-blowup]] (Arnold vs Hunter), 2008-10-vw-porsche-short-squeeze, [[1815-rothschild-waterloo-info-arbitrage]]
+  - **Legendary trade case studies (2026 batch):** [[2020-03-ackman-pandemic-cds-trade]] (100× CDS), [[2007-2008-burry-subprime-cds-trade]] (subprime Big Short), [[2006-09-amaranth-natural-gas-blowup]] (Arnold vs Hunter), [[1815-rothschild-waterloo-info-arbitrage]]
   - **Pattern-extraction synthesis:** [[fastest-profitable-trades]] — common architecture across history's largest single trades
   - **Derived strategies from legendary trades:** [[counterparty-stress-arbitrage]] (Arnold framework), [[convex-tail-hedge-arbitrage]] (Ackman/Burry framework), [[information-arbitrage]] (Rothschild→HFT→on-chain framework)
   - **Supporting trader entities (2026 batch):** [[john-arnold]], [[brian-hunter]]
@@ -134,20 +132,12 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 
 ### Concepts
 - [[concepts-overview|Concepts Overview]] — Risk Management, Portfolio Theory, Market Microstructure, Indicators
-- **Stock-Market FAQ (educational, for ALFRED users)** — hub: Stock-Market FAQ index · plain-English explainers (hourly FAQ loop):
-  - Valuation & fundamentals: net-margin, tangible-book-value, free-cash-flow-yield, price-to-cash-flow, interest-coverage-ratio, working-capital, shares-outstanding, ebitda-vs-net-income, dupont-analysis
-  - Financial statements & accounting: income-statement, cash-flow-statement, goodwill, deferred-revenue, capex, share-based-compensation, ifrs-vs-gaap, intangible-assets, asset-impairment
-  - Filings & reporting: 10-k, 10-q, 8-k, form-4
-  - Intrinsic value & DCF: dividend-discount-model, terminal-value, discount-rate, owner-earnings, cost-of-equity
-  - Risk & portfolio: [[risk-reward-ratio]], [[risk-tolerance]], [[calmar-ratio]], [[covariance]], [[expectancy]], [[downside-deviation]], [[treynor-ratio]], [[information-ratio]], [[risk-free-rate]], [[fama-french-three-factor-model]], capital-allocation, [[win-rate]], [[tracking-error]]
+- **Core Trading Concepts (plain-English explainers)**:
+  - Risk & portfolio: [[risk-reward-ratio]], [[risk-tolerance]], [[calmar-ratio]], [[covariance]], [[expectancy]], [[downside-deviation]], [[treynor-ratio]], [[information-ratio]], [[risk-free-rate]], [[fama-french-three-factor-model]], [[win-rate]], [[tracking-error]]
   - Behavioral finance: [[fomo]], [[sunk-cost-fallacy]], [[recency-bias]], [[gamblers-fallacy]], [[base-rate-neglect]]
   - Technical & strategy: [[overbought-oversold]], [[trendline]], [[gap-trading]], [[pullback-trading]], [[accumulation-distribution]], [[double-top]], [[pivot-points]], [[wedge]], [[advance-decline-line]], [[doji]], [[neckline]], [[measured-move]], [[whipsaw]], [[seasonality]], [[reversal-patterns]]
-  - Macro for stock investors: [[equity-risk-premium]], [[bond-yields-and-stock-prices]], interest-rate-sensitive-sectors, [[inflation-and-stocks]]
-  - Investing styles: garp-investing, income-vs-total-return-investing, [[day-trading-vs-swing-trading-vs-position-trading]]
-  - Dividends & income: qualified-vs-ordinary-dividends, dividend-aristocrats, dividend-trap, shareholder-yield
-  - Corporate actions: tender-offer, delisting, mergers-and-acquisitions
-  - Stock types & categories: penny-stock, over-the-counter-markets, american-depositary-receipt
-  - Market mechanics: [[market-hours]], stock-split, earnings-season, t-plus-one-settlement, ticker-symbol, odd-lot, [[primary-vs-secondary-market]], etf-vs-mutual-fund-vs-index-fund, analyst-ratings-and-price-targets, extended-hours-trading, fractional-shares, [[expense-ratio]], reg-t-margin
+  - Macro: [[equity-risk-premium]], [[bond-yields-and-stock-prices]], [[inflation-and-stocks]]
+  - Market mechanics: [[market-hours]], [[primary-vs-secondary-market]], [[expense-ratio]], [[day-trading-vs-swing-trading-vs-position-trading]]
 - **Crypto Market Regimes** — [[crypto-market-regime-taxonomy|14-Basket Regime Taxonomy]] (Hyperliquid-native). Baskets: [[macro-trend-regime]], [[bitcoin-cycle-regime]], [[meme-speculative-regime]], [[derivatives-native-regime]], [[event-catalyst-regime]], [[crypto-macro-correlation-regime]], [[on-chain-regime]], [[basis-carry-regime]], [[liquidity-depth-regime]], [[institutional-flow-regime]], [[security-black-swan-regime]], [[policy-shock-regime]], [[volatility-regime-classification]], [[technical-structural-regime]]. Playbook: [[regime-strategy-playbook|Regime → Strategy Playbook]]. See also [[regime-matrix]], [[market-regime-detection-ml]], [[regime-adaptive-strategy]]
 - Arbitrage Execution: [[leg-risk|Leg Risk]], [[execution-sequencing|Execution Sequencing]], [[crowding-indicators|Crowding Indicators]]
 - Arbitrage Operations: [[arbitrage-parameter-cheatsheet|Arb Parameter Cheatsheet]], [[multi-venue-capital-management|Multi-Venue Capital Management]]
@@ -173,30 +163,28 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 - Technical Indicators: [[indicators-overview|Indicators Overview]], [[rsi]], [[macd]], [[bollinger-bands]], [[ichimoku]], [[donchian-channels]], [[williams-percent-r]], [[aroon]], [[chaikin-money-flow]], [[money-flow-index]], [[mcclellan-oscillator]], [[arms-index]], [[point-and-figure]]
 - Crisis Alpha & Tail Risk: [[crisis-alpha]], [[convexity]], [[dragon-portfolio]], [[trend-plus-tail-hedge]], [[tail-risk-hedging]], [[asymmetric-barbell]]
 - Dealer flow & gamma: [[gamma-exposure]] (GEX + gamma-flip + crypto-perp/liquidation analog & data spec, Jun 2026), [[dealer-gamma-hedging]], [[gamma-squeeze]], [[options-pinning]], [[max-pain]]
-- Index-Options cluster (gap-fill, May 2026):
-  - Hub: index-options
-  - Index option products: ndx-options, rut-options, [[vix-options]], dax-options, ftse-100-options, nikkei-options
-  - Settlement/microstructure: soq-settlement, [[assignment-risk]], [[options-pinning]], [[liquidity-evaporation]]
-  - Benchmarks/market structure: bxm-index, put-index, [[clob]]
-  - Strategies/research: [[ratio-calendar-spread]], [[5-percent-otm-put-overlay]], [[0dte-impact-on-spx]], [[itpm-options-portfolio-management]], tastytrade-spx-research
-  - Stub upgrades: [[max-pain]] (12→176), [[variance-swap]] (12→325 — singular mechanics deep-dive, distinct from [[variance-swaps]] market hub)
+- Options market-structure cluster:
+  - Vol products: [[vix-options]], [[vix-futures]], [[variance-swap]], [[variance-swaps]]
+  - Settlement/microstructure: [[assignment-risk]], [[options-pinning]], [[liquidity-evaporation]], [[clob]]
+  - Strategies/research: [[ratio-calendar-spread]], [[5-percent-otm-put-overlay]], [[0dte-impact-on-spx]], [[itpm-options-portfolio-management]]
+  - Deep dives: [[max-pain]], [[gamma-exposure]]
 - Options-Risk-Budgeting cluster (gap-fill, May 2026):
   - Hub: [[options-risk-budgeting]]
   - Higher-order Greeks: [[beta-weighted-delta]], [[gamma-pnl]], [[volga]], [[vol-of-vol]], [[non-linear-payoff]]
   - Options structures: [[long-call]], [[long-put]], [[vix-call]], [[long-dated-options]], [[interest-rate-options]]
   - Vol concepts: [[correlation-regime]], [[volatility-spike]], [[vol-regime-detection]], [[skew]] (disambig hub)
   - Hedging/scenario: [[book-dynamic-hedging]], [[scenario-analysis]], [[historical-stress-test]], earnings-announcement
-  - Factors & sectors: [[low-vol-factor]], [[momentum-factor]], [[size-factor]], [[value-factor]], gics-sector
+  - Factors: [[low-vol-factor]], [[momentum-factor]], [[size-factor]], [[value-factor]]
   - Stub upgrade: [[risk-off]] (full rewrite)
 - Theta-Targeting cluster (gap-fill, May 2026):
   - Hub: [[theta-targeting]]
   - Decay/time metrics: [[time-to-expiration]], [[theta-decay-curve]], [[theta-realisation-ratio]], [[gamma-to-theta-ratio]], [[gamma-explosion]]
   - Vol regimes: [[volatility-regime]], [[volatility-regime-switching]], [[volatility-term-structure]], [[volatility-risk-premium-decay]]
-  - Foundations: [[black-scholes-model]], [[options-buying-power-reduction]], [[probability-of-touch]], index-options
+  - Foundations: [[black-scholes-model]], [[options-buying-power-reduction]], [[probability-of-touch]]
   - Strategy structures: [[strangle]], [[iron-fly]], [[zero-dte-options]], [[managing-winners]]
-  - Earnings/macro: earnings-volatility, earnings-iv-crush, [[fomc-meetings]], [[diversification-in-options]]
+  - Macro: [[fomc-meetings]], [[diversification-in-options]]
   - Methodology: [[itpm-trading-philosophy]], [[the-theta-trap]], [[stress-test]]
-  - Tooling: orats-research, livevol, [[optionnet-explorer]], [[deribit-position-builder]], [[tastytrade-platform]]
+  - Tooling: [[optionnet-explorer]], [[deribit-position-builder]], [[tastytrade-platform]]
   - Stub upgrades: [[expected-shortfall]] (full rewrite), [[pin-risk]] (full rewrite), [[options-income]] (full rewrite)
 - Crypto Intraday Session Liquidity cluster (gap-fill, May 2026):
   - Sessions framework: [[crypto-trading-sessions]] (hub — Asia/London/NY/LNY overlap), [[session-overlap-liquidity]], [[crypto-weekday-weekend-etf-era]] (ETF-era extension of [[btc-weekend-effect]])
@@ -222,10 +210,10 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 - AI Labor & Macro Risk (2025-2026):
   - Foundational cascade: [[ai-layoff-trap]], [[citrini-2028-global-intelligence-crisis]], [[ai-driven-demand-destruction]], [[service-sector-multiplier]], [[capital-vs-labor-asymmetry]], [[skill-bifurcation]], [[wage-compression-vs-job-loss]]
   - Sector/regional: [[tech-hub-concentration-risk]], [[stranded-office-real-estate]], [[junior-analyst-stranding]], [[legal-services-ai-disruption]], [[skilled-trades-wage-boom]], [[ai-data-center-power-demand]]
-  - Macro/finance: margin-expansion-disparity, ai-capex-vs-cash-flow-divergence, [[solow-paradox-2026]], [[productivity-j-curve]], [[esrb-ai-systemic-risk-channels]]
+  - Macro/finance: [[solow-paradox-2026]], [[productivity-j-curve]], [[esrb-ai-systemic-risk-channels]]
   - Policy: [[pigouvian-automation-tax]]
 - Behavioral Finance (Taleb cluster): [[survivorship-bias]], [[narrative-fallacy]], [[ergodicity]], [[outcome-bias]], [[hindsight-bias]], [[signal-vs-noise]]
-- Behavioral Finance (cognitive biases): [[prospect-theory]], [[loss-aversion]], [[overconfidence-bias]], [[confirmation-bias]], [[anchoring-bias]], [[disposition-effect]], [[herding]], value-trap
+- Behavioral Finance (cognitive biases): [[prospect-theory]], [[loss-aversion]], [[overconfidence-bias]], [[confirmation-bias]], [[anchoring-bias]], [[disposition-effect]], [[herding]]
 - Market Microstructure: [[order-flow]], [[absorption]], [[volume-imbalance]], [[footprint-chart]], [[market-profile]], [[volume-profile]]
 - FX Microstructure: [[last-look]] (dealer rejection protocol), [[cross-currency-basis-swap]] (CIP deviation / funding-stress signal), [[covered-interest-rate-parity]] (no-arbitrage FX/rates condition), [[settlement-risk]] (Herstatt / principal risk)
 - NFT Microstructure: [[nft-rarity-scoring]], [[nft-floor-price]], [[nft-aggregators]], [[nft-royalty-enforcement]], [[phygital-nfts]]
@@ -240,6 +228,7 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 
 ### Data Sources
 - [[data-sources-overview|Data Sources]] — Free, paid, alternative, crypto, options, macro, news data providers
+- [[cryptodataapi|CryptoDataAPI]] — **Canonical data layer for this wiki**: 190+ endpoints for prices, funding, OI, liquidations, regimes, on-chain, sentiment, whale tracking, and backtesting archives
 - [[exchange-api-reference|Exchange API Reference]] — Normalized API endpoints for arbitrage across Binance, Coinbase, Hyperliquid, OKX, Bybit, Kraken
 - [[historical-spread-data|Historical Spread Data]] — Funding rate, basis, cross-exchange spread, and IV surface data sources for arb backtesting
 - [[alternative-me|Alternative.me]] — Crypto Fear & Greed Index (0-100 sentiment gauge, free API)
@@ -277,8 +266,6 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 - AI Labor Trap economists: [[brett-hemenway-falk]], [[gerry-tsoukalas]] (Wharton/BU, "AI Layoff Trap" mathematical model)
 - Macroprudential regulators: [[esrb|European Systemic Risk Board]] (Dec 2025 AI systemic risk report)
 
-#### Ventures & Projects
-
 ### Artificial Intelligence
 - [[artificial-intelligence|Artificial Intelligence]] — AI Companies, Agent Frameworks, DeFAI, AI Narrative
 
@@ -306,7 +293,7 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 
 ### News & Events
 - [[news-overview|News & Events]] — Verified market-moving news and events
-- AI Recession Watch (2026): 2026-02-citrini-tech-selloff, [[2026-03-bls-900k-jobs-revision]], 2026-04-09-saas-agent-selloff, 2026-04-meta-ai-layoffs, 2026-05-08-cloudflare-ai-layoff-selloff
+- AI Recession Watch (2026): [[2026-03-bls-900k-jobs-revision]]
 - AI Finance Push (2026): [[2026-anthropic-blackstone-jv]], [[2026-anthropic-finance-agents-launch]], [[2026-claude-opus-4-7-finance-benchmark]], [[2026-chatgpt-mainstream-adoption]]
 - DeFi Infrastructure (2026): [[2026-uniswap-v4-launch]]
 
@@ -335,10 +322,10 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 ### Comparisons
 - [[comparisons-overview|Comparisons]] — Side-by-side analysis of strategies, tools, markets
 
-### Risk patterns
-
-### AI Infrastructure (single-name coverage)
+### Crypto Miners & Treasury Companies
 - [[hive-digital-technologies|HIVE Digital Technologies (HIVE)]] — Nordic renewable HPC-pivot miner
+- [[microstrategy]] — Largest corporate bitcoin treasury; see [[mstr-bitcoin-treasury-premium-unwind-short]]
+- Miners: [[mara]], [[riot-platforms]], [[cleanspark]], [[core-scientific]], [[cipher-mining]], [[bitfarms]], [[hut-8]], [[iren]], [[terawulf]], [[bitdeer-technologies]], [[bit-digital]]
 
 ### Funds & Investors
 - [[leopold-aschenbrenner|Leopold Aschenbrenner]] — *Situational Awareness* essay author; AI-scaling-thesis hedge fund manager
@@ -355,8 +342,6 @@ A comprehensive, LLM-maintained knowledge base covering all aspects of trading.
 - [[lost-or-stolen-crypto-au-tax|Lost or Stolen Crypto — AU Tax]] — CGT event C1/C2 for crypto, ATO evidence requirements, lost vs stolen distinction
 - [[self-custody-tax-evidence-checklist|Self-Custody Tax-Evidence Checklist]] — Pre-loss documentation framework for cold-storage holders
 - Pre-existing: [[australian-investor-tax]], [[capital-gains-tax-discount]], [[tax-efficient-investing]], [[tax-loss-harvesting-australia]], [[cryptocurrency-tax-australia]], [[stage-3-tax-cuts]]
-
-### Alfred
 
 ### Sources
 - [[sources-overview|Source Summaries]] — Summaries of all ingested sources

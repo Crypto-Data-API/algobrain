@@ -52,7 +52,7 @@ Entries are append-only and dated. Modifications and reversals are recorded as n
 
 ## Active Strategies
 
-The user's live trading bot ("Alfred") runs a six-strategy stack on a perpetual DEX (primarily AsterDEX). Two strategies are currently ON; four are paper-traded and gated by regime triggers. All six pages are at `status: excellent`. See the regime stack mapping in [[regime-matrix#Portfolio D Live Bot Six-Strategy Stack this user's deployed system]].
+The live trading bot runs a six-strategy stack on a perpetual DEX (primarily AsterDEX). Two strategies are currently ON; four are paper-traded and gated by regime triggers. All six pages are at `status: excellent`. See the regime stack mapping in [[regime-matrix#Portfolio D Live Bot Six-Strategy Stack this user's deployed system]].
 
 ### Currently ON
 

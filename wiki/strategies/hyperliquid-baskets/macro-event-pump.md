@@ -34,7 +34,7 @@ kill_criteria: |
 
 An event-driven basket that positions ahead of or immediately after known macro catalysts: FOMC decisions, CPI prints, spot Bitcoin ETF flow data releases, and major regulatory announcements. The strategy captures two distinct behavioral patterns: the **pre-event drift** (assets trend toward the expected outcome in the days before a catalyst) and the **buy-the-rumour/sell-the-news reversal** (the initial move on the print fades as positioned traders exit into the reaction). Entries are predefined by event type; exits are tied to event resolution, not arbitrary time stops.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

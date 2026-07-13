@@ -34,7 +34,7 @@ Tracks the rotation of speculative capital into meme-coin perpetuals, which occu
 
 > **Not investment advice.** This is a high-risk speculative design document. All performance figures are illustrative estimates. This strategy carries material risk of loss including total capital loss on individual positions. The pattern it exploits is late-cycle, volatile, and ends in violent reversals.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -243,7 +243,7 @@ Numeric kill rules (see [[when-to-retire-a-strategy]]):
 
 ## Hyperliquid Execution Notes
 
-**This basket is the highest-risk application of Hyperliquid perpetuals in the Alfred library.** Every thin-perp hazard documented in the JELLY case study ([[2025-03-jellyjelly-hlp-attack]]) applies here with maximum force: meme coins are thin, low-float, high-social-velocity assets with minimal fundamental anchor and highly leveraged holder bases on both sides.
+**This basket is the highest-risk application of Hyperliquid perpetuals in the basket library.** Every thin-perp hazard documented in the JELLY case study ([[2025-03-jellyjelly-hlp-attack]]) applies here with maximum force: meme coins are thin, low-float, high-social-velocity assets with minimal fundamental anchor and highly leveraged holder bases on both sides.
 
 **JELLY setup applies to every meme perp long.** Even on the long side: if a coordinated seller or a macro shock dumps the meme perp 40% in an hour, a 2.5x long is liquidated before the hard stop can fire at the mark price. Isolated margin is mandatory — not to avoid liquidation (which may still occur) but to ensure the liquidation of one leg does not cascade into other positions. See [[hyperliquid-liquidation-engine]].
 

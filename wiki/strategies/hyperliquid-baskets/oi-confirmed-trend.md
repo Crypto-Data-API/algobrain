@@ -35,20 +35,20 @@ next_review: 2026-07-16
 
 # OI-Confirmed Trend (Hyperliquid Basket)
 
-> **Live status (2026-06-16 dashboard snapshot):** Most active basket in the Alfred system. 4 open positions, $2,375 allocated capital. Positions are directional (long or short) in assets where price movement was confirmed by a simultaneous OI increase at signal time.
+> **Live status (2026-06-16 dashboard snapshot):** Most active basket in the trading system. 4 open positions, $2,375 allocated capital. Positions are directional (long or short) in assets where price movement was confirmed by a simultaneous OI increase at signal time.
 
 The OI-Confirmed Trend basket enters trend-following positions — long or short — only when **price movement is confirmed by a simultaneous increase in Open Interest**. The logic is simple: rising price + rising OI signals genuine capital commitment backing the move (new longs entering); falling price + rising OI signals a genuine short trend (new shorts entering). Either pattern filters out noise moves driven by low-conviction covering or thin-book order flow, where OI stays flat or declines as price moves.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
 **Behavioral** + **structural** (see [[edge-taxonomy]]).
 
 - **Behavioral** — in crypto perpetuals markets, a large proportion of price moves are driven by low-conviction flow: short-term covering, liquidation cascades, and thin-book moves that mean-revert quickly ([[mean-reversion]]). Retail participants chase these moves, entering on the breakout and stopping out on the reversion. The OI filter identifies the minority of moves where real capital is entering — those trends persist because they reflect genuine position build, not noise.
-- **Structural** — [[open-interest]] is a Hyperliquid-native, publicly auditable signal. The protocol's transparent on-chain architecture makes OI data available in near-real-time with no third-party lag ([[hypurrscan]]). Other traders operate on delayed or synthesized data; Alfred's Hyperliquid-native data pipeline provides a timing advantage.
+- **Structural** — [[open-interest]] is a Hyperliquid-native, publicly auditable signal. The protocol's transparent on-chain architecture makes OI data available in near-real-time with no third-party lag ([[hypurrscan]]). Other traders operate on delayed or synthesized data; a Hyperliquid-native data pipeline provides a timing advantage.
 
-**Honest framing:** OI-confirmation is a widely known filter in crypto derivatives trading. The edge is real but not unique — many systematic traders apply similar filters. The advantage at Alfred's scale is disciplined execution and the ability to combine OI confirmation with the regime gate, funding carry analysis, and HL-native data that less integrated systems miss.
+**Honest framing:** OI-confirmation is a widely known filter in crypto derivatives trading. The edge is real but not unique — many systematic traders apply similar filters. The advantage at small scale is disciplined execution and the ability to combine OI confirmation with the regime gate, funding carry analysis, and HL-native data that less integrated systems miss.
 
 ## Why This Edge Exists
 
@@ -211,7 +211,7 @@ Setup: SOL-PERP has been consolidating between $130–$145 for 8 days. A 4-hour 
 
 ## Capacity Limits
 
-The strategy trades the top 20–50 Hyperliquid perps by liquidity. Most top-20 perps support $5–50M per position without meaningful market impact at 2.5x leverage. At Alfred's current scale ($2,375 active), capacity is entirely unconstrained. At fund scale ($10M+), the entry/exit orders need to be split across bars to avoid self-signalling. Strategy-level capacity estimate: **$150M** across a diversified universe before OI self-contamination (entering a position that itself generates the OI signal the strategy uses) becomes a concern.
+The strategy trades the top 20–50 Hyperliquid perps by liquidity. Most top-20 perps support $5–50M per position without meaningful market impact at 2.5x leverage. At small-account scale, capacity is entirely unconstrained. At fund scale ($10M+), the entry/exit orders need to be split across bars to avoid self-signalling. Strategy-level capacity estimate: **$150M** across a diversified universe before OI self-contamination (entering a position that itself generates the OI signal the strategy uses) becomes a concern.
 
 ## What Kills This Strategy
 

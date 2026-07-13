@@ -29,11 +29,11 @@ kill_criteria: |
 
 # Liquidity-Vacuum Momentum (Hyperliquid Basket)
 
-> **Not investment advice** — this page documents the setup for the Alfred systematic framework. Liquidity-vacuum trades are among the highest-execution-sensitivity strategies in the basket library; slippage, latency, and adverse fills can invert the edge entirely. Treat as experimental until live-traded at small size.
+> **Not investment advice** — this page documents the setup for the systematic trading framework. Liquidity-vacuum trades are among the highest-execution-sensitivity strategies in the basket library; slippage, latency, and adverse fills can invert the edge entirely. Treat as experimental until live-traded at small size.
 
-A scalping [[trading-strategy-baskets|basket]] that identifies moments when [[hyperliquid|Hyperliquid]]'s [[perpetual-futures|perpetual futures]] order book becomes **thin on one side** — a "liquidity vacuum" — and enters in the direction of the vacuum to capture the fast momentum move before liquidity re-enters. When asks are thin relative to bids (vacuum above the price), a modest buy order can run price up rapidly with minimal resistance; the inverse holds when bids are thin. These are **short-duration, high-frequency reversal or momentum trades** designed to capture the impulsive move, not the subsequent normalisation. It is the [[liquidity-depth-regime]] microstructure expression within Alfred's [[market-regime]] framework.
+A scalping [[trading-strategy-baskets|basket]] that identifies moments when [[hyperliquid|Hyperliquid]]'s [[perpetual-futures|perpetual futures]] order book becomes **thin on one side** — a "liquidity vacuum" — and enters in the direction of the vacuum to capture the fast momentum move before liquidity re-enters. When asks are thin relative to bids (vacuum above the price), a modest buy order can run price up rapidly with minimal resistance; the inverse holds when bids are thin. These are **short-duration, high-frequency reversal or momentum trades** designed to capture the impulsive move, not the subsequent normalisation. It is the [[liquidity-depth-regime]] microstructure expression within the [[market-regime]] framework.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

@@ -231,7 +231,7 @@ Free data is the default fuel for prototypes, dashboards, and AI research agents
 Practical notes:
 
 - **Point-in-time vs. convenience.** For anything where *when you knew it* matters, prefer the authoritative point-in-time source: ALFRED over FRED for macro (see the [ALFRED](#alfred-archival-fred) section below), SEC EDGAR over restated-fundamentals APIs. Convenience APIs trade correctness for ease.
-- **AI agents prefer summarized, low-cardinality inputs.** An LLM reasons better over FRED's CPI series or a DefiLlama TVL snapshot than over a 10-K's raw XBRL. Pre-summarize before feeding a model. Alfred's own pipelines lean on REST JSON endpoints (FRED, CoinGecko, DefiLlama) for exactly this reason.
+- **AI agents prefer summarized, low-cardinality inputs.** An LLM reasons better over FRED's CPI series or a DefiLlama TVL snapshot than over a 10-K's raw XBRL. Pre-summarize before feeding a model. Production pipelines lean on REST JSON endpoints (FRED, CoinGecko, DefiLlama) for exactly this reason.
 - **Rate limits force caching.** Free tiers throttle aggressively (Alpha Vantage 5/min, Yahoo soft-blocks heavy use). A local cache or scheduled batch pull is mandatory past prototyping.
 - **Always cross-source.** Free adjusted prices and corporate actions are error-prone; spot-check against a second free source before trusting any single one.
 

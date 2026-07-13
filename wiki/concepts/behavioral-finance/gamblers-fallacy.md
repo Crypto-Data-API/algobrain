@@ -12,7 +12,7 @@ difficulty: beginner
 related: ["[[recency-bias]]", "[[mean-reversion]]", "[[loss-aversion]]", "[[overconfidence-bias]]", "[[disposition-effect]]", "[[narrative-fallacy]]", "[[trading-psychology]]", "[[cognitive-biases]]", "[[risk-management]]", "[[position-sizing]]"]
 ---
 
-The gambler's fallacy is the mistaken belief that, in a sequence of independent events, a streak in one direction makes the opposite outcome "due." In trading it is the voice that says *"it has fallen five days in a row, so it has to bounce now"* — and it answers a frequent ALFRED user question: *"why do I keep assuming a falling stock is about to turn just because it's dropped a lot?"* The fallacy treats independent or weakly-related price moves as if a hidden law of averages must rebalance them in the short run.
+The gambler's fallacy is the mistaken belief that, in a sequence of independent events, a streak in one direction makes the opposite outcome "due." In trading it is the voice that says *"it has fallen five days in a row, so it has to bounce now"* — and it answers a frequent trader question: *"why do I keep assuming a falling stock is about to turn just because it's dropped a lot?"* The fallacy treats independent or weakly-related price moves as if a hidden law of averages must rebalance them in the short run.
 
 ## The Core Idea
 

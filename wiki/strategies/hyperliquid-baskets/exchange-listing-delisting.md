@@ -30,11 +30,11 @@ kill_criteria: |
 
 # Exchange Listing / Delisting (Hyperliquid Basket)
 
-An event-driven [[trading-strategy-baskets|basket]] that captures the predictable price impact of new exchange listings (pump) and delistings (dump) by entering [[perpetual-futures|perpetual]] positions on [[hyperliquid|Hyperliquid]] immediately upon a confirmed announcement, targeting the initial speculation surge on the long side and the panic-selling cascade on the short side. Hold times are measured in hours to days; the edge lives almost entirely in the first few hours after confirmation. Speed of signal ingestion is the core operational requirement. It is the [[event-catalyst-regime]] expression within Alfred's [[market-regime]] framework.
+An event-driven [[trading-strategy-baskets|basket]] that captures the predictable price impact of new exchange listings (pump) and delistings (dump) by entering [[perpetual-futures|perpetual]] positions on [[hyperliquid|Hyperliquid]] immediately upon a confirmed announcement, targeting the initial speculation surge on the long side and the panic-selling cascade on the short side. Hold times are measured in hours to days; the edge lives almost entirely in the first few hours after confirmation. Speed of signal ingestion is the core operational requirement. It is the [[event-catalyst-regime]] expression within the [[market-regime]] framework.
 
 > **Not investment advice.** This is a design document for a systematic strategy. All performance figures are illustrative estimates, not backtest results.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

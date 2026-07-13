@@ -32,7 +32,7 @@ kill_criteria: |
 
 A confirmation-first breakout strategy that enters a perpetual-futures position only **after** price has broken a well-defined [[support]] or [[resistance]] level **and** returned to successfully retest that level as a new zone of support (or resistance). The extra patience filters the majority of false breaks that destroy naive breakout entries, at the cost of occasionally missing fast-moving, no-pullback breakouts. Stop is placed just beyond the retested level; target is the measured move of the prior range projected from the breakout point.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 > **Not investment advice.** This page is a design document for a systematic trading basket. All performance figures are ILLUSTRATIVE ESTIMATES.
 
@@ -240,7 +240,7 @@ See [[when-to-retire-a-strategy]] for the full framework.
 
 ## Sources
 
-- [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — the 14-basket regime framework that contextualises this basket within the Alfred system
+- [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — the 14-basket regime framework that contextualises this basket within the trading system
 - [[breakout-trading]] — foundational breakout strategy page; retest approach documented in "False Breakout Filtering" section
 - [[technical-structural-regime]] — primary regime for this basket; defines the range/breakout/consolidation conditions
 - [[volatility-regime-classification]] — secondary regime overlay; compressed-vol environments precede the cleanest breakouts

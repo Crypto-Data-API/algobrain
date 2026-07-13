@@ -21,7 +21,7 @@ related:
 
 # Calmar Ratio
 
-The **Calmar ratio** measures risk-adjusted return by dividing a strategy's annualized return by its worst peak-to-trough loss — its [[maximum-drawdown]]. Where the [[sharpe-ratio|Sharpe ratio]] penalizes *volatility* and the [[sortino-ratio|Sortino ratio]] penalizes *downside volatility*, the Calmar ratio penalizes the single most painful experience an investor actually lives through: the deepest decline. That makes it a favourite of managed-futures and trend-following traders, and an intuitive answer to the ALFRED-user question *"how much return am I getting for the worst loss I'd have had to sit through?"*
+The **Calmar ratio** measures risk-adjusted return by dividing a strategy's annualized return by its worst peak-to-trough loss — its [[maximum-drawdown]]. Where the [[sharpe-ratio|Sharpe ratio]] penalizes *volatility* and the [[sortino-ratio|Sortino ratio]] penalizes *downside volatility*, the Calmar ratio penalizes the single most painful experience an investor actually lives through: the deepest decline. That makes it a favourite of managed-futures and trend-following traders, and an intuitive answer to the common trader question *"how much return am I getting for the worst loss I'd have had to sit through?"*
 
 ## Formula
 

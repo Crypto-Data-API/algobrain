@@ -32,7 +32,7 @@ kill_criteria: |
 
 Buys at the lower boundary and sells (or shorts) at the upper boundary of an established range, on the assumption that the range will hold until price evidence proves otherwise. Statistical measures — [[bollinger-bands|Bollinger Band]] extremes, [[rsi|RSI]] divergence, z-score from range mean — time entries at over-extensions near the boundaries, capturing the mean-reversion pull back to the midpoint or the opposite boundary.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 > **Live status (2026-06-16 dashboard snapshot):** This is the **most capital-efficient active basket** — **81.1% of allocated capital deployed** across 3 long and 1 short position simultaneously.
 

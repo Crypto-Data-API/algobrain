@@ -31,7 +31,7 @@ kill_criteria: |
 
 The Defensive Majors basket holds long perpetual positions in the highest-liquidity, highest-market-cap crypto assets — primarily BTC, ETH, and optionally SOL — with deliberately reduced leverage during periods of market uncertainty or elevated volatility. Its core mandate is **capital preservation and portfolio anchoring**, not alpha generation: it sacrifices upside convexity to remain solvent and positioned when other baskets are inactive or net-short.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -177,7 +177,7 @@ def defensive_majors(state, book_size):
 
 ## Capacity Limits
 
-BTC-PERP and ETH-PERP on Hyperliquid support multi-hundred-million dollar positions; SOL-PERP is shallower. Realistic strategy-level capacity is bounded by the total book size, not the venue — at the scale of Alfred's current portfolio ($10K–$100K range) this basket operates well inside any liquidity constraint. At institutional scale ($50M+) BTC/ETH perps remain liquid but block-entry requires TWAP execution to avoid moving the mark. SOL-PERP caps out around $5–10M comfortable notional.
+BTC-PERP and ETH-PERP on Hyperliquid support multi-hundred-million dollar positions; SOL-PERP is shallower. Realistic strategy-level capacity is bounded by the total book size, not the venue — at small systematic-portfolio scale ($10K–$100K range) this basket operates well inside any liquidity constraint. At institutional scale ($50M+) BTC/ETH perps remain liquid but block-entry requires TWAP execution to avoid moving the mark. SOL-PERP caps out around $5–10M comfortable notional.
 
 ## What Kills This Strategy
 
@@ -204,7 +204,7 @@ See [[when-to-retire-a-strategy]] for the general framework. Specific numeric co
 - **Simplicity and clarity** — one regime gate, three liquid perps, defined ladders. Easy to monitor and audit.
 - **Massive liquidity buffer** — BTC/ETH perps on Hyperliquid are the most liquid instruments on the venue; execution is clean even in stressed markets.
 - **Low crowding risk** — this is not an obscure strategy; however, the basket's *safety function* means being long alongside many others is often correct (trend-following into strength).
-- **Portfolio anchor function** — provides positive delta when the other baskets are inactive, so Alfred always has a market-facing position during constructive regimes.
+- **Portfolio anchor function** — provides positive delta when the other baskets are inactive, so the system always has a market-facing position during constructive regimes.
 - **Funding neutrality** — at low leverage, funding costs are manageable; near tops, the 0.10%/8h trim rule limits carry bleeding.
 
 ## Disadvantages

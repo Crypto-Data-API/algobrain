@@ -1,17 +1,17 @@
 ---
-title: "Alfred Hyperliquid Basket Library"
+title: "Hyperliquid Basket Library"
 type: overview
 created: 2026-06-16
 updated: 2026-06-16
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, quantitative, market-regime, risk-management, methodology]
-aliases: ["Hyperliquid Baskets", "Alfred Baskets", "Trading Baskets", "Basket Library", "Signal Baskets"]
+aliases: ["Hyperliquid Baskets", "Trading Baskets", "Basket Library", "Signal Baskets"]
 related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-matrix]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[live-journal]]", "[[hyperliquid]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
 ---
 
-# Alfred Hyperliquid Basket Library
+# Hyperliquid Basket Library
 
-A **basket** is one self-contained trading sleeve in the Alfred systematic perpetual-futures system on [[hyperliquid|Hyperliquid]]: a defined signal, entry/exit logic, position-sizing rule, and kill criteria, run with its own capital allocation and tracked independently. This page is the index of all **27 baskets**, each documented on its own page following the wiki's standard [[strategies-overview#strategy-page-sections|strategy-page structure]].
+A **basket** is one self-contained trading sleeve in the systematic perpetual-futures system on [[hyperliquid|Hyperliquid]]: a defined signal, entry/exit logic, position-sizing rule, and kill criteria, run with its own capital allocation and tracked independently. This page is the index of all **27 baskets**, each documented on its own page following the wiki's standard [[strategies-overview#strategy-page-sections|strategy-page structure]].
 
 > **Not investment advice.** These pages document *how each setup is designed to work* — the edge thesis, rules, and failure modes. Positioning, sizing, and deployment are downstream decisions. Every performance figure on the basket pages is a clearly-labelled **illustrative estimate**, not a backtest result.
 

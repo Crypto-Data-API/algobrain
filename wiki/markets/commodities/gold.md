@@ -38,7 +38,7 @@ Gold entered a powerful structural bull market through 2025-2026. It broke the l
 
 ## Gold Price Performance
 
-Gold has averaged 7.78% yearly increase over the past 10 years in AUD terms, beating CPI inflation (2.60% avg). No negative year in AUD since 2013. Over 20 years: +553% AUD. (Source: alfred-report-gold-commodity)
+Gold has averaged 7.78% yearly increase over the past 10 years in AUD terms, beating CPI inflation (2.60% avg). No negative year in AUD since 2013. Over 20 years: +553% AUD.
 
 | Metric | USD | AUD |
 |--------|-----|-----|
@@ -49,7 +49,7 @@ Gold has averaged 7.78% yearly increase over the past 10 years in AUD terms, bea
 
 ## Supply and Demand
 
-Global supply: 3,040 tonnes/year. Demand: 2,730 tonnes/year. Net surplus: +310 tonnes. Switzerland refines 50-70% of the world's gold (no VAT on bullion). (Source: alfred-report-gold-commodity)
+Global supply: 3,040 tonnes/year. Demand: 2,730 tonnes/year. Net surplus: +310 tonnes. Switzerland refines 50-70% of the world's gold (no VAT on bullion).
 
 Top producers: China (370t), Australia (310t), Russia (310t), Canada (200t), USA (170t).
 
@@ -57,7 +57,7 @@ Demand by use: Jewellery (2,191t), Gold bars (777t), Electronics (241t), Officia
 
 ## Gold vs Silver
 
-Silver outperforms gold in bull markets and falls further in bear markets. The gold-to-silver ratio above 80 historically signals a silver rally — it crossed 80 for the 4th time in early 2024. Silver has unique industrial demand (56% of supply vs 12% for gold) and declining stockpiles. (Source: alfred-report-gold-commodity)
+Silver outperforms gold in bull markets and falls further in bear markets. The gold-to-silver ratio above 80 historically signals a silver rally — it crossed 80 for the 4th time in early 2024. Silver has unique industrial demand (56% of supply vs 12% for gold) and declining stockpiles.
 
 ## ASX Gold Mining Stocks
 
@@ -70,7 +70,7 @@ See asx-gold-sector for the full ASX Gold Sub-Industry analysis (17 stocks). Key
 | Perseus Mining | PRU:ASX | 535,281 oz | A$1,459/oz | — |
 | Ramelius Resources | RMS:ASX | 240,996 oz | A$1,895/oz | — |
 
-Only 5 of 10 top global gold producers outperformed gold's +94% (5Y AUD) return, highlighting the importance of stock selection. (Source: alfred-report-gold-commodity)
+Only 5 of 10 top global gold producers outperformed gold's +94% (5Y AUD) return, highlighting the importance of stock selection.
 
 ## COT Positioning
 

@@ -24,7 +24,7 @@ difficulty: beginner
 
 # Speculation
 
-Speculation is the act of taking a financial position in pursuit of profit from an expected *change in price*, rather than from an asset's underlying cash flows or use value, while knowingly accepting a higher risk of loss. A speculator buys (or short-sells) because they believe the price will move in their favour — not because they want to own the business, collect the dividend, or take delivery of the commodity. This answers a question ALFRED users ask constantly in different words: *"Am I actually investing here, or am I speculating?"* — and the honest answer changes how much risk is prudent and how the position should be sized and managed.
+Speculation is the act of taking a financial position in pursuit of profit from an expected *change in price*, rather than from an asset's underlying cash flows or use value, while knowingly accepting a higher risk of loss. A speculator buys (or short-sells) because they believe the price will move in their favour — not because they want to own the business, collect the dividend, or take delivery of the commodity. This answers a question traders ask constantly in different words: *"Am I actually investing here, or am I speculating?"* — and the honest answer changes how much risk is prudent and how the position should be sized and managed.
 
 ## Speculation vs. Investing
 

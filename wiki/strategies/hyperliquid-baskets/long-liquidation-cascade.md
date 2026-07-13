@@ -34,7 +34,7 @@ kill_criteria: |
 
 When a cluster of leveraged long positions accumulates near a price level, a sustained offer at that level triggers a mechanical chain reaction: as mark price falls through the long liquidation thresholds, Hyperliquid's liquidation engine is forced to close (sell) those longs into the order book. Each liquidation-forced sell pushes price lower, triggering the next tier of long liquidations below — a self-reinforcing cascade of mechanical selling. This basket enters **short just above the identified liquidation cluster**, riding the non-economic forced selling down through the cascade. It is the direct mirror of [[short-liquidation-squeeze]]; where that basket rides forced *buying* upward, this basket rides forced *selling* downward.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ---
 

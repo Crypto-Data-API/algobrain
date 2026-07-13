@@ -35,7 +35,7 @@ Each stage is a distinct industry with its own pricing and capacity constraints;
 
 ## Demand Drivers
 
-- **New reactor builds and restarts** — over 60 reactors are under construction globally (China leading), with dozens more planned, creating multi-year fuel demand growth and a structural uranium supply deficit (Source: [[uranium]]; alfred-report-uranium-commodity).
+- **New reactor builds and restarts** — over 60 reactors are under construction globally (China leading), with dozens more planned, creating multi-year fuel demand growth and a structural uranium supply deficit (Source: [[uranium]]).
 - **Reactor life extensions** — existing reactors granted licence extensions keep baseload demand for fuel.
 - **AI data-centre power demand** — the new secular driver: major tech companies have signed PPAs and restart deals (e.g., interest in restarting shuttered plants) to secure firm, low-carbon baseload power for data centres.
 - **Decarbonisation policy** — nuclear is increasingly classified as clean/low-carbon (including in some green taxonomies), supporting policy tailwinds toward net-zero targets.
@@ -54,7 +54,7 @@ Nuclear competes with [[natural-gas]], [[coal]], and renewables for baseload and
 
 ## Sources
 
-- (Source: alfred-report-uranium-commodity)
+-
 - See [[uranium]] for detailed price history, supply/demand data, and the producer landscape.
 
 ## Related

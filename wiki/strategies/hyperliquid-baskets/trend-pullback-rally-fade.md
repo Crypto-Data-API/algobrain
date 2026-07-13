@@ -39,7 +39,7 @@ next_review: 2026-07-16
 
 The Trend Pullback / Rally Fade basket trades **with the primary trend by entering on counter-trend moves**. In an uptrend, it buys weakness — entering long positions when price pulls back to a key level (Fibonacci retracement, EMA support, session VWAP) and pullback momentum fades. In a downtrend, it sells strength — entering short positions when price rallies to a key level and rally momentum fades. The critical distinction from pure momentum strategies: this basket **buys weakness in bull trends and sells strength in bear trends**, always trading with the higher-timeframe structure but entering at better prices by waiting for the counter-move to exhaust.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -225,7 +225,7 @@ Setup: ETH has trended from $2,200 to $2,850 over 3 weeks (the primary up-swing)
 
 ## Capacity Limits
 
-The entry pattern is a limit order at a specific level — not scalable by definition to unlimited size, since very large limit orders at key levels become visible to other market participants and can be front-run. At Alfred's current scale ($2,375), no constraint. At $5M+ per trade, the order should be broken into 3–5 limit tranches across the entry zone. Strategy-level capacity: **$100M** across a diversified universe of 20+ assets.
+The entry pattern is a limit order at a specific level — not scalable by definition to unlimited size, since very large limit orders at key levels become visible to other market participants and can be front-run. At small-account scale, no constraint. At $5M+ per trade, the order should be broken into 3–5 limit tranches across the entry zone. Strategy-level capacity: **$100M** across a diversified universe of 20+ assets.
 
 ## What Kills This Strategy
 

@@ -33,7 +33,7 @@ kill_criteria: |
 
 A regime-aware signal basket that measures the *width* of a crypto-market move — how many assets are genuinely participating — against the *headline* momentum of BTC or a broad index. When BTC or ETH is printing new highs but the majority of altcoins are declining or failing to confirm, the rally is narrowing: a structurally weak, distribution-prone environment. Conversely, broad altcoin participation — rising breadth alongside the index — signals a healthy, momentum-sustaining move. The basket trades the divergence between these two layers, and is additionally deployed as a **regime filter overlay** for the directional baskets.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

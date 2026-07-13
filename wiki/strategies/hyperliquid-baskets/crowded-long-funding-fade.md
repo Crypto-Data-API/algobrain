@@ -32,7 +32,7 @@ kill_criteria: |
 
 When crypto assets rally sharply, retail and momentum traders pile into long perpetual positions expecting further upside. As the long book swells, [[funding-rate|funding]] turns significantly positive — meaning **longs are paying shorts** — signalling an overcrowded trade. This basket goes **short** into that positivity: it collects the funding payment, positions for mean-reversion as the crowded long trade exhausts itself, and exits when funding normalises or the correction completes. The edge is both a carry trade (earn funding while waiting) and a behavioural fade (crowded longs historically resolve against the crowd at extremes).
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 > **Live status (2026-06-16 dashboard snapshot):** 2 open signals detected (conditions exist and entry criteria are met or close to met), but **$0 deployed** — full entry criteria have not yet been satisfied. Monitoring in standby.
 
@@ -279,7 +279,7 @@ Per [[when-to-retire-a-strategy]]:
 
 **Sibling baskets:** [[crowded-short-funding-fade]] (the mirror long basket), [[funding-rate-harvest]] (delta-neutral carry without the directional fade), [[long-liquidation-cascade]] (the more aggressive version that specifically rides the mechanical cascade when longs begin liquidating).
 
-**Cross-reference to [[2026-06-03-cryptodataapi-14-basket-regime-framework]]:** This basket is mapped to the **derivatives-native-regime** and **basis-carry-regime** in the Alfred framework. In a macro-trend-regime or on-chain-regime, this basket's entry criteria may be structurally satisfied but the underlying signal may be a rational bull market rather than overcrowding — context filters are especially important in those regimes.
+**Cross-reference to [[2026-06-03-cryptodataapi-14-basket-regime-framework]]:** This basket is mapped to the **derivatives-native-regime** and **basis-carry-regime** in the regime framework. In a macro-trend-regime or on-chain-regime, this basket's entry criteria may be structurally satisfied but the underlying signal may be a rational bull market rather than overcrowding — context filters are especially important in those regimes.
 
 ---
 

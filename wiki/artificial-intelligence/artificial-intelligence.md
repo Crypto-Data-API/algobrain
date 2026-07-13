@@ -113,7 +113,7 @@ Also see: [[transformer-architecture]] (in Core Concepts), [[neural-networks]] (
 | [[named-entity-recognition]] | Extracting companies, amounts, dates from financial text |
 | [[text-preprocessing-finance]] | Cleaning SEC filings, earnings calls, social media |
 | [[text-classification-finance]] | Beyond sentiment — event type, urgency, hawkish/dovish |
-| [[chatbot-architectures]] | Conversational AI from rule-based to LLM-powered (Alfred) |
+| [[chatbot-architectures]] | Conversational AI from rule-based to LLM-powered |
 | [[speech-and-audio-ai]] | Whisper, ElevenLabs, earnings call audio analysis |
 
 Also see: [[nlp-sentiment-analysis]], [[finbert]], [[llm-market-analysis]], earnings-call-analysis in AI Trading

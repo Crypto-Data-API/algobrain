@@ -13,7 +13,7 @@ related: ["[[chatbot-architectures]]", "[[nlp-overview]]", "[[foundation-models]
 
 # Speech & Audio AI
 
-**Speech and audio AI** encompasses speech-to-text (STT), text-to-speech (TTS), speaker identification, and audio analysis. In trading, these technologies power voice interfaces (Alfred), earnings call analysis, central bank speech processing, and real-time audio monitoring of financial broadcasts.
+**Speech and audio AI** encompasses speech-to-text (STT), text-to-speech (TTS), speaker identification, and audio analysis. In trading, these technologies power voice interfaces, earnings call analysis, central bank speech processing, and real-time audio monitoring of financial broadcasts.
 
 ## Core Technologies
 
@@ -30,7 +30,7 @@ related: ["[[chatbot-architectures]]", "[[nlp-overview]]", "[[foundation-models]
 
 | Model | Provider | Quality | Trading Use |
 |-------|---------|---------|-------------|
-| **ElevenLabs** | ElevenLabs | Most natural voices, voice cloning | Alfred's voice interface |
+| **ElevenLabs** | ElevenLabs | Most natural voices, voice cloning | voice-assistant interfaces |
 | **OpenAI TTS** | [[openai]] | Good quality, simple API | Audio alerts, portfolio summaries |
 | **Bark** | Suno | Open-source, expressive | Self-hosted voice bots |
 | **Coqui TTS** | Open-source | Fully local, customizable | Privacy-sensitive deployments |
@@ -53,7 +53,7 @@ Audio recording → Whisper (STT) → Speaker diarization → Transcript
 Management tone in earnings calls has been shown to predict post-earnings price drift — CFOs who use more hedging language ("somewhat", "approximately") tend to precede negative surprises.
 
 ### Voice-Activated Trading Assistant
-Alfred demonstrates the full pipeline:
+A voice trading assistant demonstrates the full pipeline:
 1. User speaks → Deepgram STT → text
 2. Text → [[anthropic|Claude]] (reasoning, tool calls, wiki search)
 3. Response text → ElevenLabs TTS → audio playback

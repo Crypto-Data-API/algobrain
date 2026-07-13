@@ -34,7 +34,7 @@ Monitors on-chain vesting schedules and known token unlock calendars to position
 
 > **Not investment advice.** This is a design document for a systematic strategy. All performance figures are illustrative estimates, not backtest results.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

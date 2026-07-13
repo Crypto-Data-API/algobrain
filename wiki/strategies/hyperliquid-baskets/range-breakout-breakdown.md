@@ -32,7 +32,7 @@ kill_criteria: |
 
 Enters a [[perpetual-futures]] position **the moment price breaks cleanly above a well-defined range high or below a well-defined range low**, without waiting for a retest. The thesis is that the stop-loss cascade and momentum surge triggered at the break are themselves the edge — the first mover captures the best fills before the move is priced in. Stop is placed just inside the range; target is the measured move from range height.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 > **Live status (2026-06-16 dashboard snapshot):** This is the **best-performing active basket** at **27.4% capital utilisation**, with both a long and a short position open simultaneously across different assets.
 

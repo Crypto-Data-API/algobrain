@@ -14,7 +14,7 @@ Uranium is a naturally occurring radioactive heavy metal and the primary fuel so
 
 ## Overview
 
-There are 440 nuclear power plants operating in 33 countries, providing 10% of the world's electricity. A further 90 reactors are on order or planned, with over 300 in the proposal stage. Nuclear energy is increasingly viewed as a scalable, low-carbon energy source essential for net-zero targets (Source: alfred-report-uranium-commodity).
+There are 440 nuclear power plants operating in 33 countries, providing 10% of the world's electricity. A further 90 reactors are on order or planned, with over 300 in the proposal stage. Nuclear energy is increasingly viewed as a scalable, low-carbon energy source essential for net-zero targets.
 
 ## How Uranium Is Traded
 
@@ -49,7 +49,7 @@ Uranium has no liquid exchange-traded futures market comparable to oil or copper
 
 Global production expected to grow 4.1% CAGR from 2024-2030. Supply is elastic — mines can be reopened when demand rises, but high-grade uranium is scarce.
 
-**Electricity demand** expected to grow 3.4% annually through 2026, driven by data centres, AI, cryptocurrency, and industrial growth (Source: alfred-report-uranium-commodity).
+**Electricity demand** expected to grow 3.4% annually through 2026, driven by data centres, AI, cryptocurrency, and industrial growth.
 
 ### World Electricity Mix
 
@@ -115,7 +115,7 @@ Spot U3O8 has held roughly in the **$80-$95/lb** range through early-to-mid 2026
 
 ## Forecast
 
-Supply squeeze currently in effect. Experts predict demand this decade could exceed production capacity. A third price boom is possible with another catalyst (mine disruption, war, policy change) — followed inevitably by a bust as new supply comes online and alternative energy advances. (Source: alfred-report-uranium-commodity)
+Supply squeeze currently in effect. Experts predict demand this decade could exceed production capacity. A third price boom is possible with another catalyst (mine disruption, war, policy change) — followed inevitably by a bust as new supply comes online and alternative energy advances.
 
 ## Related
 

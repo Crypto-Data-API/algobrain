@@ -233,7 +233,7 @@ Practical ingestion notes:
 
 - **Streaming vs. polling.** Latency-sensitive consumers (arb, MEV, liquidations) must use WebSocket streams and a private/low-latency RPC; polling REST loses races. Research and AI consumers can poll REST on a schedule.
 - **Normalization is the recurring cost.** Every venue uses different symbols (`BTCUSDT` vs. `BTC-USD` vs. `XBT/USD`), funding conventions, and timestamp units. A canonical internal schema is mandatory before data from multiple venues is combined.
-- **AI/LLM agents prefer pre-computed metrics.** Feeding an LLM raw L2 books is wasteful; feeding it Glassnode/DefiLlama/Coinglass *summaries* (MVRV, TVL, funding, OI) is dense and decision-relevant. Alfred's own pipelines lean on aggregated REST endpoints for this reason.
+- **AI/LLM agents prefer pre-computed metrics.** Feeding an LLM raw L2 books is wasteful; feeding it Glassnode/DefiLlama/Coinglass *summaries* (MVRV, TVL, funding, OI) is dense and decision-relevant. Production pipelines lean on aggregated REST endpoints for this reason.
 - **Rate limits drive architecture.** Free tiers throttle hard. A caching layer between the provider and the strategy (or a paid tier) is required for anything beyond prototyping.
 
 ## A Recommended Crypto Stack

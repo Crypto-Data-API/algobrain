@@ -34,7 +34,7 @@ A market-neutral (within-sector) long-short perpetual basket that ranks assets w
 
 > **Not investment advice.** This is a design document for a systematic strategy. All performance figures are illustrative estimates, not backtest results.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -49,7 +49,7 @@ A market-neutral (within-sector) long-short perpetual basket that ranks assets w
 2. **Momentum persists at the sector-relative level.** Empirical evidence in equities (Fama-French, Jegadeesh-Titman) and in crypto (multiple academic studies) shows that recent relative outperformers within a sector tend to continue outperforming over 5–20 day windows. This is driven by underreaction to idiosyncratic news, capital rotation from sector-level thesis buyers, and reflexive momentum (rising relative price attracts more capital to that name within the sector).
 3. **Funding rate is a positioning signal.** On Hyperliquid, the funding rate measures the imbalance between levered longs and shorts in real time. An asset within a sector that has persistently high positive funding (longs paying heavily) is likely to mean-revert — the overextended long position unwinds, dragging price relative to its peers. Conversely, deeply negative funding within a sector signals a crowded short that may cover, outperforming peers. Incorporating funding into the ranking turns a pure momentum signal into a positioning-adjusted momentum signal. Source: [[hyperliquid-funding-rate-microstructure]].
 4. **OI momentum confirms conviction.** Rising OI into a price move (within the sector) confirms that new money is entering on the directional side; falling OI into a price move suggests the move is driven by position liquidation rather than new buying, and is less likely to persist. OI context allows the ranking to separate "conviction outperformers" from "short-squeeze survivors."
-5. **Dollar-neutral construction reduces regime dependence.** Because the basket is long-short within each sector (equal dollar notional on long and short legs), broad market rallies and sell-offs cancel out in P&L terms. The strategy's return is largely independent of whether BTC is in a bull, bear, or chop regime — it depends only on the ranking signal's validity. This differentiates it from every other basket in the Alfred library, most of which carry directional market exposure.
+5. **Dollar-neutral construction reduces regime dependence.** Because the basket is long-short within each sector (equal dollar notional on long and short legs), broad market rallies and sell-offs cancel out in P&L terms. The strategy's return is largely independent of whether BTC is in a bull, bear, or chop regime — it depends only on the ranking signal's validity. This differentiates it from every other basket in the basket library, most of which carry directional market exposure.
 6. **Counterparty analysis.** The underperformers that the basket shorts are held by: (a) passive index investors who rebalance slowly; (b) narratively-driven retail who chase the sector story without differentiating within it; (c) long-only funds that are fully invested in the sector and cannot easily reduce the weakest names. These holders do not respond to within-sector relative signals quickly enough to arb the spread.
 
 This strategy is the perps cousin of [[pairs-trading]] and [[statistical-arbitrage]], applied cross-sectionally. Unlike a bilateral pair trade (e.g., SOL vs AVAX), which is exposed to the specific relationship between two assets, a cross-sectional portfolio of ranked pairs is diversified across the ranking signal's overall validity and is less vulnerable to a single pair relationship breaking down.
@@ -265,7 +265,7 @@ Numeric kill rules (see [[when-to-retire-a-strategy]]):
 
 ## Advantages
 
-- Market-neutral within sectors — the most regime-independent basket in the Alfred library; earns in bull, bear, and chop.
+- Market-neutral within sectors — the most regime-independent basket in the basket library; earns in bull, bear, and chop.
 - Diversified across multiple simultaneous positions; no single event drives P&L.
 - Both the long and short legs are individually motivated by the composite ranking — not just a hedge.
 - Funding as a signal and cost-capture opportunity: well-ranked assets often have attractive funding carry.

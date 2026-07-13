@@ -29,11 +29,11 @@ kill_criteria: |
 
 # Distribution / Post-Peak Short Book (Hyperliquid Basket)
 
-> **Not investment advice** — this page documents the setup for the Alfred systematic framework. Distribution shorts are aggressive reversal plays entered against a recently bullish tape; position accordingly.
+> **Not investment advice** — this page documents the setup for the systematic trading framework. Distribution shorts are aggressive reversal plays entered against a recently bullish tape; position accordingly.
 
 A selective short book targeting assets that have **already peaked** and are entering the distribution phase — where early-cycle or institutional holders sell into retail buying near all-time highs or major resistance. Unlike the [[full-bear-short-book]], which fires after a bear trend is established, this basket is a **precursor**: it enters earlier, when distribution signals are present but the crowd still holds a bullish narrative. The tradeoff is a higher false-positive rate in exchange for entering at structurally better prices.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 

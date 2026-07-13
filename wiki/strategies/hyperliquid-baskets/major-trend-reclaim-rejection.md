@@ -33,7 +33,7 @@ kill_criteria: |
 
 The Major Trend Reclaim / Rejection basket focuses on **the most significant structural price levels in crypto** — the 200-day moving average, weekly EMAs, and major historical support/resistance zones — and trades **binary outcomes** at those levels. When price reclaims one of these levels (breaks above and holds for a confirmation period), the basket goes long, expecting an outsized upside continuation. When price tests a level but fails to hold (rejection), the basket goes short, expecting an outsized move back down. These are high-conviction, low-frequency setups that anticipate the largest moves in a cycle, because the most watched levels generate the most violent reactions.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -94,7 +94,7 @@ Under no-edge conditions, the 200-day MA is a lagging indicator that identifies 
 **Position sizing:**
 - Reclaim long: 3–4% of book, 2–2.5x leverage, isolated margin.
 - Rejection short: 2–3% of book, 2x leverage, isolated margin (lower size due to higher squeeze risk on shorts near critical levels).
-- These are the largest single-asset positions in the Alfred system — justified by the high-conviction, low-frequency nature of the setups.
+- These are the largest single-asset positions in the trading system — justified by the high-conviction, low-frequency nature of the setups.
 
 **Exit / take-profit:**
 - Reclaim long: Target = next major structural level above (e.g., prior cycle ATH); ATR trailing stop at 1.5× 14-day ATR.
@@ -238,7 +238,7 @@ def major_trend_reclaim_rejection(state, book_size):
 
 ## Capacity Limits
 
-BTC and ETH perps on Hyperliquid absorb the largest positions of any asset on the venue — hundreds of millions in notional. At Alfred's current scale the position sizes (3–4% of book) are microscopic relative to venue depth. At institutional scale ($50M+ per trade), block entries near major levels require TWAP or iceberg execution to avoid telegraphing the size. Strategy-level capacity: **$200M** across a BTC/ETH-dominant universe, constrained only by execution impact near the target level rather than market depth in aggregate.
+BTC and ETH perps on Hyperliquid absorb the largest positions of any asset on the venue — hundreds of millions in notional. At small-account scale the position sizes (3–4% of book) are microscopic relative to venue depth. At institutional scale ($50M+ per trade), block entries near major levels require TWAP or iceberg execution to avoid telegraphing the size. Strategy-level capacity: **$200M** across a BTC/ETH-dominant universe, constrained only by execution impact near the target level rather than market depth in aggregate.
 
 ## What Kills This Strategy
 

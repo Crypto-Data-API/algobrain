@@ -149,13 +149,9 @@ No page connects them, but: **FOMC days are when crypto funding rates are most v
 
 Compound trade: position for pre-FOMC equity drift (long S&P futures 2pm day before) AND pre-position crypto funding rate arb to capture the post-announcement funding spike. Same macro catalyst, two uncorrelated profit mechanisms across two asset classes.
 
-### Hidden Opportunity #7: Alfred Screening + Demerger Catalyst
+### Hidden Opportunity #7: Token-Unlock Forced-Flow Screening
 
-The alfred methodology documents Fred's principle: "demergers are always worth a good look." The Coles/Wesfarmers example showed significant outperformance post-separation.
-
-Cross-reference with Alfred's screening benchmarks (P/E < 20, Div Yield > 3.8%, ROE > 13.4%, D/E < 0.5): a systematic strategy screens all upcoming ASX demergers through the Alfred fundamental filter. The demerger creates structural catalyst (forced selling by index funds, institutional rebalancing, analyst coverage gaps), while Alfred identifies which demerged entity is genuinely cheap.
-
-The gold sector data reinforces this pattern: PRU screens at P/E 7.48, gross margin 59.5%, zero debt — dramatically undervalued versus sector average P/E 39.19. This is Alfred finding a mispricing the broader market misses because of a coverage gap (informational edge).
+The demerger playbook generalizes to crypto: [[token-unlock-arbitrage]] events create the same structural catalyst pattern — forced selling pressure, mechanical rebalancing, and coverage gaps around unlock dates. Cross-referencing the [[token-unlocks]] calendar with fundamental protocol screens (revenue via Token Terminal, TVL trend, holder concentration) identifies which post-unlock selloffs are genuinely cheap protocols being mispriced by mechanical flows versus fair repricings of low-float tokens (informational + structural edge).
 
 ---
 
@@ -274,7 +270,7 @@ Based on wiki content cross-referenced against current market events:
 
 2. **Contrarian-extremes on tariff-whipsawed sectors** — The [[2026-02-supreme-court-tariffs|Feb 2026 Supreme Court ruling]] + Trump 15% tariff reversal created massive sector rotations in days. Industrials gapped 3-5% both directions. Buy the forced sellers per [[contrarian-extremes]] framework.
 
-3. **Demerger screening with Alfred filters** — Structural catalyst + fundamental undervaluation. PRU-type mispricings (P/E 7.48 in a P/E 39 sector) demonstrate the pattern.
+3. **Token-unlock forced-flow screening** — Structural catalyst + fundamental undervaluation, crypto-native: screen the unlock calendar against protocol fundamentals to separate mechanical selloffs from fair repricings.
 
 ### Highest Return, Moderate Risk
 
@@ -352,7 +348,7 @@ This analysis was produced by a full cross-wiki synthesis on 2026-04-14, reading
 - `wiki/strategy-development/`
 - `wiki/news/`, `wiki/history/`
 - `wiki/sources/`, `wiki/markets/`
-- `wiki/ai-trading/`, `wiki/alfred/`
+- `wiki/ai-trading/`
 
 Cross-references were identified by matching edge sources, regime profiles, failure modes, and correlation data across pages that do not directly link to each other. Hidden opportunities are patterns that emerge from the *intersection* of multiple pages rather than from any single page.
 

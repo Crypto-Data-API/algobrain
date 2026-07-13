@@ -12,7 +12,7 @@ difficulty: beginner
 related: ["[[availability-bias]]", "[[herding]]", "[[fomo]]", "[[overconfidence-bias]]", "[[market-bubbles]]", "[[mean-reversion]]", "[[trading-psychology]]", "[[cognitive-biases]]", "[[market-regime]]", "[[risk-management]]"]
 ---
 
-Recency bias is the tendency to give disproportionate weight to recent events and to assume that the recent past will continue into the future. In markets it shows up as extrapolation — *"it has gone up for weeks, so it will keep going up"* — and it answers a very common ALFRED user question: *"why do I keep assuming the current trend will just continue?"* The recent stretch of price action feels far more representative of "how things are" than a longer, calmer history would justify.
+Recency bias is the tendency to give disproportionate weight to recent events and to assume that the recent past will continue into the future. In markets it shows up as extrapolation — *"it has gone up for weeks, so it will keep going up"* — and it answers a very common trader question: *"why do I keep assuming the current trend will just continue?"* The recent stretch of price action feels far more representative of "how things are" than a longer, calmer history would justify.
 
 ## How It Shows Up in Trading
 

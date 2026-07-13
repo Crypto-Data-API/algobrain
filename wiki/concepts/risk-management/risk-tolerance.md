@@ -24,7 +24,7 @@ related:
 
 # Risk Tolerance
 
-**Risk tolerance** is the amount of investment risk — chiefly the size and duration of losses — that an investor is *willing and able* to accept in pursuit of returns. It is the anchor for almost every portfolio decision an ALFRED user makes: [[asset-allocation|how much to put in stocks versus bonds]], [[position-sizing|how big each position should be]], and how much [[maximum-drawdown|drawdown]] to plan for. Get it wrong and even a sound strategy fails, because the investor abandons it at the worst possible moment.
+**Risk tolerance** is the amount of investment risk — chiefly the size and duration of losses — that an investor is *willing and able* to accept in pursuit of returns. It is the anchor for almost every portfolio decision a trader makes: [[asset-allocation|how much to put in stocks versus bonds]], [[position-sizing|how big each position should be]], and how much [[maximum-drawdown|drawdown]] to plan for. Get it wrong and even a sound strategy fails, because the investor abandons it at the worst possible moment.
 
 ## Three Distinct Things People Conflate
 
@@ -65,7 +65,7 @@ These bands are *teaching heuristics*, not advice or guarantees — actual drawd
 
 ## Worked Example (hypothetical)
 
-An ALFRED user says: *"I could not sleep if my $200,000 portfolio fell more than $40,000."* That is a **20% drawdown budget**. If we assume a deep equity bear market could cut stocks roughly in half (50%), then to keep the *whole-portfolio* drawdown near 20%:
+A trader says: *"I could not sleep if my $200,000 portfolio fell more than $40,000."* That is a **20% drawdown budget**. If we assume a deep equity bear market could cut stocks roughly in half (50%), then to keep the *whole-portfolio* drawdown near 20%:
 
 ```
 Equity weight ≈ 20% / 50% = ~40%

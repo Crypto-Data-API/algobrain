@@ -34,7 +34,7 @@ kill_criteria: |
 
 When a cluster of short positions accumulates near a price level, a sustained bid at that level triggers a chain reaction: as mark price rises through the short liquidation thresholds, Hyperliquid's liquidation engine is forced to close (buy) those shorts into the order book. Each liquidation-forced buy pushes price higher, triggering the next tier of short liquidations above — a mechanical, self-reinforcing squeeze. This basket enters **long just below the identified liquidation cluster**, riding the non-economic forced buying cascade before it exhausts. The strategy is a more aggressive, faster-timeframe evolution of the directional funding fade — it does not wait for funding to turn; it specifically targets the **imminent mechanical squeeze** visible in liquidation heatmaps.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ---
 

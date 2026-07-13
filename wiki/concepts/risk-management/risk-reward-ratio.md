@@ -22,7 +22,7 @@ related:
 
 # Risk-Reward Ratio
 
-The **risk-reward ratio** (often written R:R, or expressed as a reward-to-risk multiple) compares how much a trader stands to lose if a trade goes wrong against how much they stand to gain if it goes right. It is one of the first questions an ALFRED user asks before placing a trade: *"If I'm wrong, what's the damage, and is the potential upside worth it?"*
+The **risk-reward ratio** (often written R:R, or expressed as a reward-to-risk multiple) compares how much a trader stands to lose if a trade goes wrong against how much they stand to gain if it goes right. It is one of the first questions a trader asks before placing a trade: *"If I'm wrong, what's the damage, and is the potential upside worth it?"*
 
 ## Definition
 
@@ -68,7 +68,7 @@ This is why trend-following systems with low win rates (often 30-40%) can still 
 
 ## Worked Example (hypothetical)
 
-Suppose an ALFRED user is looking at a stock trading at **$100**:
+Suppose a trader is looking at a stock trading at **$100**:
 
 - **Entry:** $100
 - **Stop-loss:** $95 (risk = $5 per share)

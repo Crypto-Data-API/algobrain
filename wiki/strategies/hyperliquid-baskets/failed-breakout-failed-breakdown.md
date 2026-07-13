@@ -32,7 +32,7 @@ kill_criteria: |
 
 A technical [[trading-strategy-baskets|basket]] of [[hyperliquid|Hyperliquid]] [[perpetual-futures|perp]] trades that explicitly **fades** breakouts and breakdowns that immediately reverse back into the range — the "trap" pattern. When price breaks above [[resistance]] (or below [[support]]) and then collapses back through the broken level in the same session, it reveals that the breakout was false: weak-hand positions were flushed at the boundary, the move lacked genuine directional conviction, and the market's true equilibrium remains inside the range. The basket enters **counter to the initial breakout direction** once re-entry into the range is confirmed, targeting a mean-reversion to the range midpoint or the opposite boundary. It is most active in ranging [[market-regime]] conditions (the [[technical-structural-regime]] and [[liquidity-depth-regime]] overlays).
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 > **Not investment advice.** This page is a design document for a systematic trading basket. All performance figures are ILLUSTRATIVE ESTIMATES.
 

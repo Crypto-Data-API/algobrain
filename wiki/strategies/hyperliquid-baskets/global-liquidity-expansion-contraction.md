@@ -31,9 +31,9 @@ kill_criteria: |
 
 > **Not investment advice.** This is a design-doc draft for a systematic strategy sleeve. Performance figures are illustrative estimates only. Macro data levels (M2, balance sheets, reverse repo) are framed as heuristics, not verified current data — the direction of travel matters more than any specific level.
 
-A macro-driven position [[trading-strategy-baskets|basket]] of [[hyperliquid|Hyperliquid]] [[perpetual-futures|perp]] positions that tracks the [[global-liquidity|global monetary liquidity cycle]] — central bank balance sheets, dollar liquidity conditions, and the broad [[dxy|DXY]] trend — and tilts long risk-crypto during expansion phases, reduces or flips short during contraction. This is the **slowest basket in the Alfred library**: the signal operates on a weeks-to-months timeframe, making it a structural backdrop for all other baskets rather than a source of frequent trading opportunities. Unlike the intraday and swing baskets, this sleeve may hold a position for 4–12 weeks between meaningful changes. It corresponds to the [[crypto-macro-correlation-regime]] within Alfred's [[market-regime]] framework.
+A macro-driven position [[trading-strategy-baskets|basket]] of [[hyperliquid|Hyperliquid]] [[perpetual-futures|perp]] positions that tracks the [[global-liquidity|global monetary liquidity cycle]] — central bank balance sheets, dollar liquidity conditions, and the broad [[dxy|DXY]] trend — and tilts long risk-crypto during expansion phases, reduces or flips short during contraction. This is the **slowest basket in the basket library**: the signal operates on a weeks-to-months timeframe, making it a structural backdrop for all other baskets rather than a source of frequent trading opportunities. Unlike the intraday and swing baskets, this sleeve may hold a position for 4–12 weeks between meaningful changes. It corresponds to the [[crypto-macro-correlation-regime]] within the [[market-regime]] framework.
 
-*Part of the [[hyperliquid-baskets-overview|Alfred Hyperliquid basket library]].*
+*Part of the [[hyperliquid-baskets-overview|Hyperliquid basket library]].*
 
 ## Edge Source
 
@@ -164,7 +164,7 @@ Data sourced via [[the-block]], [[coinglass]], and public central bank data APIs
 
 ## Capacity Limits
 
-Expressed entirely through BTC and ETH perps on Hyperliquid — effectively uncapped at the strategy's scale ($200M+). Hyperliquid's BTC and ETH perps are the deepest in the venue; multi-million-dollar positions can be entered/exited over hours without material impact. The strategy has no liquidity constraint at the size Alfred is likely to run. The binding constraint is model risk (the strategy is untested systematically) rather than market impact.
+Expressed entirely through BTC and ETH perps on Hyperliquid — effectively uncapped at the strategy's scale ($200M+). Hyperliquid's BTC and ETH perps are the deepest in the venue; multi-million-dollar positions can be entered/exited over hours without material impact. The strategy has no liquidity constraint at the sizes a small systematic book is likely to run. The binding constraint is model risk (the strategy is untested systematically) rather than market impact.
 
 ## What Kills This Strategy
 
