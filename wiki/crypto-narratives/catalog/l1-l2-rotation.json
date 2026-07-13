@@ -1,0 +1,718 @@
+{
+  "category_id": "l1-l2-rotation",
+  "category_name": "L1 / L2 Capital Rotation",
+  "summary": "Crypto capital constantly rotates between smart-contract platform tokens (Layer-1s like Ethereum, Solana, BNB, Avalanche, Sui, Aptos and Layer-2s like Arbitrum, Optimism, Base) chasing the \"next Ethereum killer\" narrative. The dominant pattern is reflexive: a chain ships an incentive program, a hot app, a token launch, or a usage milestone, capital and attention flood in, the native token outperforms the market by multiples, and then mean-reverts as the catalyst fades or a newer chain steals the narrative. These moves are large (often +200% to +1500% on the way up, -50% to -90% on the way down), follow identifiable on-chain leading signals (TVL, DEX volume, active addresses, stablecoin inflows), and rotate predictably from \"old\" leaders to \"new\" challengers.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "incentive-pump-and-fade",
+      "name": "Incentive-Driven Ecosystem Pump (and Fade)",
+      "mechanism": "A chain foundation deploys a large liquidity-mining / DeFi incentive program (e.g. Avalanche Rush $180M, BSC's accelerator funds) that subsidizes yield far above competing chains. Mercenary capital bridges in to farm the rewards, TVL spikes, dApp activity explodes, and the native gas/governance token reflexively rallies as people must buy it to transact and as narrative momentum draws in spot speculators. Who is on the other side: late retail and trend-followers who buy the token at the top to chase the yield narrative, then hold the bag when incentives taper, farmed liquidity exits to the next chain, and TVL/price collapse together. The foundation and early farmers win; latecomers lose.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named L1 token",
+        "ecosystem DeFi tokens on that chain",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "supply-restriction"
+      ],
+      "typical_lag": "days to weeks after the incentive announcement; reflexive run-up builds over 1-3 months",
+      "typical_duration": "2-4 months of outperformance, then multi-month or multi-year mean reversion once incentives taper",
+      "typical_magnitude_pct": "+200% to +1500% on the L1 token during the incentive window; -70% to -95% on the subsequent unwind",
+      "recurrence": "every cycle - 1-2 major instances per bull market",
+      "leading_signals": [
+        "foundation announces 8-9 figure incentive/grant program",
+        "TVL inflow acceleration (TVL_7d_pct_change spike)",
+        "DEX volume surge relative to chain baseline",
+        "stablecoin net inflow to the chain",
+        "rising bridge inflows",
+        "native token funding rates turning positive"
+      ],
+      "backtest_features": [
+        "incentive_program_size_usd",
+        "chain_tvl_7d_pct_change",
+        "chain_tvl_zscore_90d",
+        "dex_volume_zscore",
+        "stablecoin_netflow_to_chain",
+        "bridge_inflow_usd_7d",
+        "token_price_vs_eth_ratio",
+        "funding_rate_zscore",
+        "days_since_incentive_announcement"
+      ],
+      "volume_or_flow_change": "TVL typically multiplies 5-20x during incentive windows; DEX volume and bridge inflows spike multiples above baseline before reverting",
+      "historical_instances": [
+        {
+          "date": "2021-08-18",
+          "date_range": "2021-08-18 to 2021-11-21",
+          "trigger": "Avalanche Rush announced - $180M liquidity-mining incentive program bringing Aave and Curve to Avalanche, igniting the subnet/DeFi narrative",
+          "description": "AVAX ran from roughly $25-26 around the Rush announcement (mid-August 2021) to its all-time high of ~$146.22 on Nov 21 2021 as TVL exploded and mercenary DeFi capital flooded in. Classic incentive-driven reflexive pump. Note: sources disagree on the exact mid-August starting price (estimates range ~$20-43), so the precise percentage is uncertain.",
+          "price_impacts": [
+            {
+              "asset": "AVAX",
+              "pct_change": "+460%",
+              "window": "2021-08-18 to 2021-11-21",
+              "direction": "up",
+              "measured_by": "estimate"
+            },
+            {
+              "asset": "AVAX",
+              "pct_change": "-94%",
+              "window": "Nov 2021 peak to 2022 bear low",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AVAX",
+            "JOE",
+            "QI"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "Avalanche TVL rose from a few hundred million to ~$12B+ during the Rush window",
+          "confidence": "medium",
+          "sources": [
+            "https://blockworks.com/news/avalanche-to-add-defi-protocols-aave-and-curve",
+            "https://coinmarketcap.com/currencies/avalanche/",
+            "https://www.coingecko.com/en/coins/avalanche"
+          ]
+        },
+        {
+          "date": "2021-01",
+          "date_range": "2021-01 to 2021-05-10",
+          "trigger": "BSC (Binance Smart Chain, launched Sep 2020) DeFi/yield-farm boom plus Binance accelerator funds; PancakeSwap and cheap-fee farming drove the 'BSC season'",
+          "description": "BNB surged from ~$44 in January 2021 to an all-time high of ~$690 on May 10 2021 (about +1,460%) as BSC's low-fee DeFi ecosystem absorbed users priced out of Ethereum gas fees.",
+          "price_impacts": [
+            {
+              "asset": "BNB",
+              "pct_change": "+1460%",
+              "window": "2021-01 to 2021-05-10",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BNB",
+              "pct_change": "-68%",
+              "window": "2021-05-10 peak to 2021-07 low",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BNB",
+            "CAKE"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "BSC daily transactions briefly overtook Ethereum during peak 2021 farming",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/bnb",
+            "https://coinmarketcap.com/currencies/bnb/historical-data/"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2025-08-25",
+          "trigger": "Ethereum L1 revival - ETH treasury-company buying, ETF inflows, and renewed staking/DeFi narrative pulled capital back to the original smart-contract L1",
+          "description": "ETH rallied +69.3% from ~$2,595 to ~$4,393 over the summer 2025 rotation back into Ethereum, with an intra-window run-up of +126% to a high near $4,926 (and a -24% max drawdown). Capital rotated from underperforming alt-L1s back into ETH.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+69.3%",
+              "window": "2025-06-04 to 2025-08-25",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "+126.2%",
+              "window": "intra-window run-up to peak ~$4,926",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "L2 scaling",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "ETH spot ETF inflows and treasury accumulation drove the rotation",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/ethereum",
+            "https://www.coingecko.com/research/publications/solana-vs-ethereum-2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "challenger-revival-rotation",
+      "name": "Challenger / 'Next Ethereum-Killer' Revival Rotation",
+      "mechanism": "Capital rotates out of the incumbent leader (usually ETH) into a faster/cheaper challenger L1 that has a fresh catalyst - a killer app, a usage milestone, or a recovery from a crisis low. The challenger's smaller market cap and float make it far more reflexive: a given dollar inflow moves it far more than ETH. Who is on the other side: ETH-maxis and index holders who underweight the challenger and miss the rotation, plus the eventual top-buyers when the narrative peaks. The challenger token tends to massively outperform ETH on the SOL/ETH-type ratio during the rotation, then the ratio mean-reverts once the catalyst saturates or the broader market turns risk-off. Solana's post-FTX revival is the archetypal modern instance.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the challenger L1 token (SOL, SUI, APT, AVAX)",
+        "the SOL/ETH-type ratio",
+        "ecosystem tokens on the challenger chain"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "typical_lag": "rotation builds over weeks to months as the ratio (challenger/ETH) trends; reaction to a single catalyst (e.g. app going viral) can be immediate",
+      "typical_duration": "a full bull-cycle leg (3-12 months) of outperformance, then ratio mean-reversion",
+      "typical_magnitude_pct": "+200% to +1100% on the challenger over a rotation leg; relative outperformance vs ETH of 30-90% on the ratio",
+      "recurrence": "1-2 major rotations per cycle; the named challenger changes each cycle (BSC->SOL/AVAX->SOL/SUI)",
+      "leading_signals": [
+        "challenger/ETH price ratio breaking to new highs",
+        "challenger DEX volume overtaking ETH for sustained periods",
+        "viral dApp launch driving fee revenue",
+        "monthly active addresses surpassing rivals",
+        "recovery from a crisis/forced-seller low",
+        "media 'flippening' headlines (often a late/contrarian signal)"
+      ],
+      "backtest_features": [
+        "sol_eth_ratio",
+        "challenger_eth_ratio_zscore",
+        "challenger_dex_volume_vs_eth_ratio",
+        "monthly_active_addresses_yoy",
+        "chain_fee_revenue_30d",
+        "days_since_crisis_low",
+        "challenger_market_cap_to_eth_market_cap",
+        "relative_strength_vs_eth_30d"
+      ],
+      "volume_or_flow_change": "challenger DEX volume can overtake ETH for many consecutive months at peak rotation (Solana DEX volume > ETH for many months in 2024)",
+      "historical_instances": [
+        {
+          "date": "2023-10-01",
+          "date_range": "2023-10-01 to 2023-12-31",
+          "trigger": "Solana post-FTX revival - SOL recovered as FTX-estate overhang got priced in/auctioned, Visa USDC settlement on Solana (Sep 2023), and the ecosystem proved it survived the FTX collapse",
+          "description": "SOL rallied from ~$21-22 in early October 2023 to ~$101 by year-end 2023 (about +370% over the quarter). For the full year 2023, SOL ran from ~$24 (Jan 1) to ~$101.50 (Dec 31), roughly +320%. CoinDesk noted a 26% gain in a single week (mid-Oct 2023) despite FTX-sale fears. Capital rotated aggressively into the surviving 'ETH-killer'. (Note: the previously stated '+997%' full-year figure was incorrect.)",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "+324%",
+              "window": "full-year 2023 (~$24 to ~$101.5)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "+26%",
+              "window": "7d (mid-Oct 2023)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "SOL",
+            "RAY",
+            "PYTH",
+            "JTO"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "DeFi",
+            "Solana ecosystem"
+          ],
+          "volume_or_flow_change": "Solana DEX volume and active addresses surged through Q4 2023 into 2024",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2023/10/20/solana-rallies-26-in-a-week-despite-ftx-sale-fears-whats-behind-the-move",
+            "https://coinmarketcap.com/currencies/solana/historical-data/",
+            "https://www.coingecko.com/en/coins/solana"
+          ]
+        },
+        {
+          "date": "2024-01",
+          "date_range": "2024-01 to 2025-01-19",
+          "trigger": "Solana memecoin season - Pump.fun launch and Solana becoming the global memecoin trading hub; DEX volume overtook Ethereum for an extended run",
+          "description": "SOL rose from ~$97 in January 2024 to an all-time high of ~$293-295 on Jan 19 2025 (about +200%) as memecoin retail flow made Solana the most-used chain. Pure reflexive usage-driven rotation. (Note: the prior '~$83 start, +255%' figure overstated the move; SOL opened 2024 near $97.)",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "+200%",
+              "window": "2024-01 to 2025-01-19 ATH",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "SOL",
+            "WIF",
+            "BONK",
+            "POPCAT"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "memecoins",
+            "Solana ecosystem"
+          ],
+          "volume_or_flow_change": "Solana DEX volume exceeded Ethereum's for an extended multi-month run in 2024",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/solana",
+            "https://coinmarketcap.com/currencies/solana/"
+          ]
+        },
+        {
+          "date": "2024-10-01",
+          "date_range": "2024-10-01 to 2024-12-31",
+          "trigger": "Sui (SUI) Move-language L1 breakout - SUI overtook Aptos in market cap (Sep 2024), DEX volume tripled, claimed 'next Solana' status",
+          "description": "SUI ran from ~$1.78-1.97 in late September/October 2024 to a December high of ~$4.12 - roughly +110% to +130% over Q4 2024 - as the Move-L1 narrative caught fire and capital rotated into the newest challenger. (Note: the prior '+430%' figure was not supported; the move from the Q4 base to the December peak was closer to +110-130%.)",
+          "price_impacts": [
+            {
+              "asset": "SUI",
+              "pct_change": "+110% to +130%",
+              "window": "Q4 2024 (Oct-Dec, base ~$1.78-1.97 to ~$4.12)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "SUI",
+            "APT",
+            "DEEP",
+            "CETUS"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "Move-language L1s",
+            "Sui ecosystem"
+          ],
+          "volume_or_flow_change": "Sui DEX trading volume tripled since September 2024",
+          "confidence": "medium",
+          "sources": [
+            "https://altfins.com/blog/sui-price-and-market-overview/",
+            "https://blockworks.co/news/sui-aptos-compete-for-next-solana-title",
+            "https://www.coingecko.com/en/coins/sui"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2025-09-15",
+          "trigger": "Solana mid-2025 rally leg - renewed SOL momentum amid possible SOL ETF anticipation and usage strength; capital rotated back into SOL",
+          "description": "SOL rallied +50.3% from ~$156 to ~$234 over the summer 2025 leg, with a +84% intra-window run-up to a high of ~$243 (and a -23% max drawdown). A challenger-rotation leg that lagged ETH's same-period rally, foreshadowing the SOL/ETH ratio top.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "+50.3%",
+              "window": "2025-06-04 to 2025-09-15",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "+84.1%",
+              "window": "intra-window run-up to ~$243",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "Solana ecosystem"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/solana",
+            "https://www.coingecko.com/research/publications/solana-vs-ethereum-2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "token-launch-airdrop-rotation",
+      "name": "L2 / New-Chain Token Launch & Airdrop Rotation",
+      "mechanism": "A Layer-2 or new chain that ran without a token (Arbitrum, Optimism, Base, Solana-era pre-token chains) launches or airdrops its governance token. Pre-launch, mercenary 'airdrop farmers' inflate on-chain activity to qualify. At the token-generation event, recipients receive free supply they are inclined to sell (sell-pressure), while the broad market front-runs the rotation into the new ticker. Who is on the other side: airdrop farmers who dump into launch-day liquidity vs. spot speculators and index funds buying the new listing. The token typically peaks near launch or in a first follow-on rally, then bleeds as unlocks and farmed supply hit. Base (Coinbase L2) is a variant where the catalyst flows into the parent equity (COIN) and into speculative 'Base' meme tokens rather than a native chain token.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "the new L2/chain token (ARB, OP)",
+        "competing L2 tokens",
+        "the L2 sector basket",
+        "parent equity for Base (COIN)"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "dry-powder-injection"
+      ],
+      "typical_lag": "immediate at TGE (price discovery in first hours); first follow-on rally within weeks",
+      "typical_duration": "launch pop fades over days-weeks; multi-month downtrend as unlocks/farmed supply sell off",
+      "typical_magnitude_pct": "wide launch-day price discovery; first-month follow-on rallies of +20% to +30% in single sessions, then multi-month -50%+ bleed",
+      "recurrence": "every major L2/chain TGE - several per cycle",
+      "leading_signals": [
+        "airdrop snapshot / TGE date announced",
+        "farmed on-chain activity spike pre-snapshot",
+        "exchange listing announcements",
+        "large token unlock dates on the vesting schedule",
+        "FDV-to-circulating ratio (high = future sell-pressure)"
+      ],
+      "backtest_features": [
+        "airdrop_pct_of_supply",
+        "circulating_to_fdv_ratio",
+        "days_to_first_unlock",
+        "unlock_pct_of_circulating_supply",
+        "exchange_listing_count_at_launch",
+        "pre_tge_active_address_spike",
+        "first_day_volume_usd",
+        "days_since_tge"
+      ],
+      "volume_or_flow_change": "ARB generated ~$1.8B market cap in its first 2 hours; launch-day volumes are extreme then decay",
+      "historical_instances": [
+        {
+          "date": "2023-03-23",
+          "trigger": "Arbitrum ARB airdrop / token generation event - 12.75% of supply airdropped to early users and DAOs",
+          "description": "ARB airdrop claiming opened March 23 2023; the token reached ~$1.8B market cap within ~2 hours of trading. Heavy launch-day volume; farmed supply created persistent sell-pressure thereafter. Exact first-day spot price varied across venues (estimates ~$1.3-2.0).",
+          "price_impacts": [
+            {
+              "asset": "ARB",
+              "pct_change": "~$1.8B market cap in first ~2 hours; launch-day price discovery",
+              "window": "launch day 2023-03-23",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "ARB",
+            "OP"
+          ],
+          "affected_sectors": [
+            "L2 scaling",
+            "Ethereum ecosystem"
+          ],
+          "volume_or_flow_change": "~$1.8B market cap generated in first ~2 hours of trading",
+          "confidence": "high",
+          "sources": [
+            "https://fortune.com/crypto/2023/03/23/arb-arbitrum-airdrop-1-7-billion-market-cap-2-hours-dao/",
+            "https://thedefiant.io/news/defi/arbitrum-airdrop-set-for-march-23"
+          ]
+        },
+        {
+          "date": "2023-04-14",
+          "trigger": "ARB first post-launch follow-on rally (reported daily jump)",
+          "description": "ARB reportedly rallied in mid-April 2023, its first notable post-airdrop bounce, before mean-reverting. The specific '+25% on April 14 2023' figure could not be corroborated against price-history sources and may be inaccurate. ARB's all-time high of ~$2.39 came later, on Jan 12 2024, during the altcoin bull run.",
+          "price_impacts": [
+            {
+              "asset": "ARB",
+              "pct_change": "~+25% (unverified)",
+              "window": "24h (2023-04-14)",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "ARB"
+          ],
+          "affected_sectors": [
+            "L2 scaling"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.coingecko.com/en/coins/arbitrum"
+          ]
+        },
+        {
+          "date": "2023-08-09",
+          "trigger": "Coinbase Base L2 public mainnet launch - 'Onchain Summer' campaign; no native token, speculation routed into COIN equity and Base-themed memecoins",
+          "description": "Base went live to the public on Aug 9 2023 with ~$139M in deposits pre-launch and ~$68M of ETH bridged the prior weekend. Because Base has no native token, the rotation flowed into Base meme tokens and Coinbase (COIN) equity rather than a chain token.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "~$68M ETH bridged pre-launch (flow signal, not a price move)",
+              "window": "launch weekend",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "COIN (equity)",
+            "BALD (Base memecoin)",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "L2 scaling",
+            "Ethereum ecosystem",
+            "exchange equities"
+          ],
+          "volume_or_flow_change": "~$139M deposited pre-launch; ~$68M ETH bridged the weekend before",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/tech/2023/08/09/coinbase-officially-launches-base-blockchain-milestone-for-a-public-company",
+            "https://www.coindesk.com/tech/2023/08/03/coinbase-sets-public-launch-of-base-layer-2-blockchain-for-next-week"
+          ]
+        },
+        {
+          "date": "2023-05-03",
+          "trigger": "Sui (SUI) mainnet and token launch - heavily marketed Move-language L1 debut",
+          "description": "SUI launched its mainnet and token on May 3 2023 with major exchange listings. Like other launches it saw early price-discovery volatility before settling, then re-rated in the Q4 2024 challenger rotation (see challenger archetype). Exact launch-day price is uncertain across sources.",
+          "price_impacts": [
+            {
+              "asset": "SUI",
+              "pct_change": "launch-day price discovery (volatile debut)",
+              "window": "launch 2023-05-03",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "SUI"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "Move-language L1s"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.coingecko.com/en/coins/sui",
+            "https://blockworks.co/news/sui-aptos-compete-for-next-solana-title"
+          ]
+        },
+        {
+          "date": "2022-10-19",
+          "trigger": "Aptos (APT) mainnet token launch - 'Solana-killer' Move L1 from ex-Meta Diem team, launched into a bear market",
+          "description": "APT began trading on Oct 19 2022 with immediate exchange listings amid 'tokenomics opacity' criticism. Launched into a bear market, it saw high initial volatility and broadly disappointed vs hype, later overtaken by Sui in the Move-L1 race.",
+          "price_impacts": [
+            {
+              "asset": "APT",
+              "pct_change": "launch-day price discovery, volatile debut",
+              "window": "launch 2022-10-19",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "APT",
+            "SUI"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "Move-language L1s"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://blockworks.co/news/sui-aptos-compete-for-next-solana-title",
+            "https://messari.io/compare/aptos-vs-sui"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ratio-mean-reversion-unwind",
+      "name": "Rotation Unwind / Challenger Ratio Mean-Reversion",
+      "mechanism": "The mirror image of the revival rotation. After a challenger L1 has massively outperformed (ratio vs ETH at extremes, narrative saturated, media calling a 'flippening'), the catalyst saturates, leverage is crowded long, and the broader market turns risk-off. The high-beta challenger then de-rates far harder than the incumbent: forced liquidations and reflexive deleveraging compound because the challenger has thinner real demand and more mercenary/farmed holders. Who is on the other side: the late top-buyers and over-leveraged longs who get liquidated; disciplined sellers and ETH-relative-value traders win. The challenger/ETH ratio mean-reverts sharply. 2025-2026 Solana underperformance is the live instance.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the previously-leading challenger token (SOL, AVAX, SUI)",
+        "the challenger/ETH ratio",
+        "high-beta ecosystem alts"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "forced-liquidation",
+        "sentiment-shock",
+        "sell-pressure"
+      ],
+      "typical_lag": "the ratio top forms over weeks; the unwind accelerates over days once leverage flushes",
+      "typical_duration": "months to a full bear leg of underperformance",
+      "typical_magnitude_pct": "-40% to -90% on the challenger; challenger/ETH ratio reverts 25-50%+ off its high",
+      "recurrence": "follows every challenger rotation - the back half of each cycle",
+      "leading_signals": [
+        "challenger/ETH ratio at multi-year highs with negative momentum divergence",
+        "extreme positive funding rates / high open interest on the challenger",
+        "'flippening' media saturation",
+        "decelerating on-chain growth (active addresses, fees rolling over)",
+        "broad-market risk-off (BTC dominance rising)",
+        "incentive programs tapering"
+      ],
+      "backtest_features": [
+        "challenger_eth_ratio_zscore_extreme",
+        "challenger_funding_rate_zscore",
+        "open_interest_to_marketcap_ratio",
+        "active_address_30d_momentum",
+        "btc_dominance_change",
+        "challenger_realized_vol_spike",
+        "drawdown_from_60d_high"
+      ],
+      "volume_or_flow_change": "open interest and funding peak before the unwind; liquidation volume spikes during the flush",
+      "historical_instances": [
+        {
+          "date": "2026-06-03",
+          "date_range": "Jun 1-4 2026 (early June risk-off)",
+          "trigger": "SOL high-beta drawdown in the June-2026 'Bitcoin Season' risk-off — NOT the widely-claimed rally.",
+          "description": "Contrary to a widely-circulated claim of a 'SOL +9% June-2026 rally to its highest since July 2025', SOL was actually CRASHING: -15.93% over Jun 1-4 2026 ($82->$69, low $68.73) and -18.6% over the prior week — near a local low, far below July-2025 levels ($145-205). A textbook high-beta L1 drawdown amplifying BTC's -13.6% over the same window in a Bitcoin-Season, risk-off tape (see [[bitcoin-dominance-rotation]]). Data-integrity correction: the 'rally' figures were a stale 2025 snapshot.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "-15.93%",
+              "window": "Jun 1-4 2026 ($82->$69; low $68.73)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "layer-1",
+            "altcoins"
+          ],
+          "volume_or_flow_change": "Risk-off; SOL underperformed BTC (high beta) in a Bitcoin-Season drawdown.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/solana"
+          ]
+        },
+        {
+          "date": "2025-10-01",
+          "date_range": "2025-10-01 to 2025-12-31",
+          "trigger": "Solana Q4 2025 rotation unwind - SOL de-rated hard as the 2024-25 challenger narrative saturated and the market turned risk-off; ETH held up far better",
+          "description": "SOL fell -40.3% from ~$209 to ~$125 in Q4 2025 with a -49% intra-window max drawdown. SOL was among the weakest of the major assets despite strong on-chain usage - the usage/price paradox of an unwinding rotation.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "-40.3%",
+              "window": "2025-10-01 to 2025-12-31",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-49.1%",
+              "window": "intra-window max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "Solana ecosystem"
+          ],
+          "volume_or_flow_change": "SOL de-rated far harder than ETH over the period",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/research/publications/solana-vs-ethereum-2025",
+            "https://www.coingecko.com/en/coins/solana"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2026-06-03",
+          "trigger": "Full-year Solana unwind - the complete round-trip of the 2025 challenger rotation into a deep drawdown",
+          "description": "Over the trailing year (Jun 2025-Jun 2026), SOL fell -53.9% from ~$156 to ~$72, with a -71% max drawdown from a ~$248 high. A textbook ratio mean-reversion: SOL gave back the entire rotation premium against ETH.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "-53.9%",
+              "window": "2025-06-04 to 2026-06-03",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-71.1%",
+              "window": "peak-to-trough max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "Solana ecosystem"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/solana",
+            "https://www.coingecko.com/research/publications/solana-vs-ethereum-2025"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2026-06-03",
+          "trigger": "BNB full-cycle round-trip - BNB ran to a ~$1,312 high then unwound back below its starting level",
+          "description": "Over the trailing year BNB net -6.2% (~$661 to ~$620) but with a +113% run-up to ~$1,312 followed by a -55.5% max drawdown - a clean rotation pump-and-unwind on a major incumbent L1 token.",
+          "price_impacts": [
+            {
+              "asset": "BNB",
+              "pct_change": "+113%",
+              "window": "intra-window run-up to ~$1,312",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BNB",
+              "pct_change": "-55.5%",
+              "window": "intra-window max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BNB"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "BNB Chain ecosystem"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/bnb"
+          ]
+        },
+        {
+          "date": "2021-11-21",
+          "date_range": "2021-11-21 to 2022-12-31",
+          "trigger": "Post-2021-bull L1 unwind - AVAX and all 2021 'ETH-killers' collapsed as incentive programs tapered and the bear market began",
+          "description": "AVAX fell ~-94% from its Nov 21 2021 ATH of ~$146 into the 2022 bear market as Avalanche Rush incentives dried up and farmed TVL exited. Representative of the whole alt-L1 cohort (SOL, LUNA, FTM) unwinding together.",
+          "price_impacts": [
+            {
+              "asset": "AVAX",
+              "pct_change": "-94%",
+              "window": "2021-11-21 ATH to 2022 bear low",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AVAX",
+            "SOL",
+            "FTM",
+            "LUNA"
+          ],
+          "affected_sectors": [
+            "L1 platforms",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "Avalanche TVL collapsed from its ~$12B peak as mercenary capital exited",
+          "confidence": "high",
+          "sources": [
+            "https://coinmarketcap.com/currencies/avalanche/",
+            "https://www.coingecko.com/en/coins/avalanche"
+          ]
+        }
+      ]
+    }
+  ]
+}

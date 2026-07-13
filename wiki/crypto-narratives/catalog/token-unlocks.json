@@ -1,0 +1,540 @@
+{
+  "category_id": "token-unlocks",
+  "category_name": "Token Unlocks & Vesting Cliffs",
+  "summary": "When crypto projects launch, large chunks of the token supply are held back from early investors, teams, and treasuries and released on a schedule. When those tokens \"unlock,\" new sellers can hit the market, diluting holders and often pushing the price down. The effect is strongest for big one-time \"cliff\" unlocks of insider tokens, but markets frequently anticipate scheduled unlocks and drift lower beforehand, so the unlock day itself is sometimes a muted or even \"sell-the-rumor, buy-the-news\" event.",
+  "directional_bias": "bearish",
+  "archetypes": [
+    {
+      "id": "cliff-unlock",
+      "name": "Cliff Unlock (large discrete insider release)",
+      "mechanism": "A vesting cliff releases a large discrete tranche of previously-locked tokens (team, investors, treasury) on a single date. Early investors who bought at seed/private valuations a fraction of spot have enormous unrealized gains and limited remaining lockups, so they have strong incentive to distribute. The counterparty is spot/retail buyers and market makers who must absorb a step-change in float. Because circulating supply can jump 10-90% in a day, even partial selling overwhelms organic demand. Sophisticated insiders often pre-hedge via perp shorts or OTC, so visible spot selling understates true distribution.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin",
+        "low-float high-FDV alts",
+        "same-vintage L1/L2 tokens"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "dilution",
+        "supply-shock",
+        "sentiment-shock"
+      ],
+      "typical_lag": "Pre-unlock drift begins 1-4 weeks ahead; the sharpest realized move is often 0-7 days AROUND the date, frequently bottoming on or just before the unlock (priced in)",
+      "typical_duration": "Acute pressure lasts days to ~2 weeks; persistent overhang on tokens with repeated large cliffs can suppress price for months",
+      "typical_magnitude_pct": "-10% to -25% on the named token over the surrounding window; extreme launch/megacliff cases (ICP) -80%+ over weeks",
+      "recurrence": "Per-token: usually a one-year initial cliff then periodic; across the market: dozens of large cliffs per year (every major 2021-2023 vintage L1/L2 token)",
+      "leading_signals": [
+        "days_to_unlock counting down",
+        "unlock_pct_of_circulating_supply > 5%",
+        "rising perp open interest + negative funding pre-unlock (pre-hedging shorts)",
+        "negative price drift in the 2-4 weeks before the date",
+        "spike in exchange inflows from vesting/treasury wallets",
+        "low float / high FDV ratio at launch"
+      ],
+      "backtest_features": [
+        "unlock_pct_of_circulating_supply",
+        "unlock_usd_value",
+        "days_to_unlock",
+        "float_to_fdv_ratio",
+        "recipient_type (insider_vs_ecosystem)",
+        "exchange_netflow_zscore_pre_unlock",
+        "perp_funding_rate_pre_unlock",
+        "open_interest_change_pre_unlock",
+        "cumulative_return_t_minus_30_to_0"
+      ],
+      "historical_instances": [
+        {
+          "date": "2021-05-10",
+          "date_range": "2021-05-10 to 2021-06-30",
+          "trigger": "Internet Computer (ICP) public launch with aggressive early seed/investor token availability and ~$40B+ FDV; effective megacliff of float at debut",
+          "description": "ICP listed near $700 (CoinGecko ATH ~$700.65 on 2021-05-10) and collapsed intraday, then continued down sharply over the following weeks as early seed holders and treasury-linked deposits flooded exchanges. By late June 2021 ICP traded in the low single/double digits, a ~95-99% drawdown from the launch peak. Cited as the largest insider-launch unwind of the cycle.",
+          "price_impacts": [
+            {
+              "asset": "ICP",
+              "pct_change": "-39%",
+              "window": "launch-day intraday",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ICP",
+              "pct_change": "-82%",
+              "window": "launch to 2021-05-19",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ICP",
+              "pct_change": "-95%",
+              "window": "launch to late-June 2021",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.coingecko.com/en/coins/internet-computer",
+            "https://captainaltcoin.com/internet-computer-crashes-99-is-icp-finally-dead-or-still-a-sleeping-giant/",
+            "https://wiki.internetcomputer.org/wiki/History"
+          ]
+        },
+        {
+          "date": "2024-03-16",
+          "date_range": "2024-03-16 to 2024-03-23",
+          "trigger": "Arbitrum (ARB) first major cliff: ~1.11B ARB unlocked (team/investors/DAO, ~$1.2B notional), expanding circulating supply by ~87% (nearly quadrupling float from ~1.275B to ~2B)",
+          "description": "Massive scheduled cliff after the one-year initial lockup, beginning a four-year phased unlock running until 2027. ARB did not collapse in a single candle; it bled slowly over the following weeks as the supply overhang and a broader L2-sector sell-off weighed on price. Reports of a precise +3% day-1 / -21% 7-day path are not firmly corroborated, so the magnitude is treated as approximate.",
+          "price_impacts": [
+            {
+              "asset": "ARB",
+              "pct_change": "~flat day 1",
+              "window": "day 1",
+              "direction": "flat",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ARB",
+              "pct_change": "-15% to -25%",
+              "window": "weeks post-unlock (approx)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Circulating supply expanded ~87% (from ~1.275B to ~2B ARB) in a single event",
+          "confidence": "medium",
+          "sources": [
+            "https://www.ccn.com/analysis/more-than-billion-arb-unlocked-on-march-16-will-arbitrum-price-dump/",
+            "https://cryptobriefing.com/arbitrum-unlocking-1b-tokens/",
+            "https://defillama.com/unlocks/arbitrum"
+          ],
+          "affected_coins": [
+            "OP",
+            "APT"
+          ],
+          "affected_sectors": [
+            "L2 / scaling",
+            "2023-vintage governance tokens"
+          ]
+        },
+        {
+          "date": "2023-11-12",
+          "trigger": "Aptos (APT) scheduled monthly cliff unlock (~24.8M APT, ~10.9% of circulating supply; one of the recurring large APT releases)",
+          "description": "APT fell around the November token unlock as part of a series of large APT monthly cliffs that kept persistent overhang on the token through 2023-2024. A precise day-of percentage could not be independently corroborated from price-series data, so the magnitude is treated as approximate.",
+          "price_impacts": [
+            {
+              "asset": "APT",
+              "pct_change": "~-10% to -20% (approx)",
+              "window": "around unlock",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://cryptorank.io/news/feed/48f9f-aptos-blockchain-to-unlock-24-8m-apt-tokens-on-november-12-2023",
+            "https://defillama.com/unlocks/aptos"
+          ],
+          "affected_coins": [
+            "ARB",
+            "SUI"
+          ],
+          "affected_sectors": [
+            "high-FDV L1"
+          ]
+        },
+        {
+          "date": "2023-12-01",
+          "trigger": "dYdX (DYDX) cliff unlock: 150M DYDX (~$505M, ~30% of allocation / ~80% of then-circulating supply) released to investors/employees/consultants (originally scheduled Feb 2023, twice delayed)",
+          "description": "Large insider cliff. DYDX declined only ~2-5% in the 24h around the unlock; far weaker than feared because much of the supply went to team/VCs who trade less frequently and the event was heavily anticipated. Three whale wallets moved ~6.8M DYDX (~$21M) to Binance. Followed by a series of smaller ~33M-token monthly unlocks (Jan-Jun 2024) that added grinding pressure.",
+          "price_impacts": [
+            {
+              "asset": "DYDX",
+              "pct_change": "-2% to -5%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~150M tokens (~$505M; ~$280M of it to investors) added; followed by ~33M monthly unlocks H1 2024",
+          "confidence": "medium",
+          "sources": [
+            "https://www.cryptotimes.io/2023/12/01/dydx-unlock-massive-token-supply-of-150m-worth-over-500m/",
+            "https://cryptopotato.com/heres-how-whales-navigated-dydxs-150m-token-unlock/",
+            "https://www.theblock.co/post/264697/dydx-to-unlock-500-million-of-tokens-30-of-supply"
+          ]
+        },
+        {
+          "date": "2025-08-16",
+          "date_range": "2025-08-14 to 2025-08-20",
+          "trigger": "Arbitrum (ARB) recurring large monthly cliff (team/investor/DAO tranche, ~mid-August 2025)",
+          "description": "Measured via CoinGecko over the surrounding window: ARB fell -9.5% close-to-close with a -16.8% intra-window drawdown, illustrating that ARB's repeated monthly cliffs continued to apply bearish pressure into 2025.",
+          "price_impacts": [
+            {
+              "asset": "ARB",
+              "pct_change": "-9.52%",
+              "window": "6d (2025-08-14 to 2025-08-20)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ARB",
+              "pct_change": "-16.76%",
+              "window": "intra-window max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://defillama.com/unlocks/arbitrum"
+          ]
+        },
+        {
+          "date": "2025-07-25",
+          "date_range": "2025-07-22 to 2025-07-28",
+          "trigger": "Worldcoin (WLD) large scheduled unlock tranche (investor/team/foundation), late July 2025",
+          "description": "WLD is a perennial high-inflation unlock token. Measured via CoinGecko: -9.8% close-to-close with a -21.9% intra-window drawdown around the late-July 2025 unlock window.",
+          "price_impacts": [
+            {
+              "asset": "WLD",
+              "pct_change": "-9.78%",
+              "window": "6d (2025-07-22 to 2025-07-28)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "WLD",
+              "pct_change": "-21.9%",
+              "window": "intra-window max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/worldcoin-wld"
+          ]
+        },
+        {
+          "date": "2025-08-01",
+          "date_range": "2025-07-29 to 2025-08-04",
+          "trigger": "Sui (SUI) monthly cliff unlock (early-investor/team tranche), August 2025",
+          "description": "Measured via CoinGecko: SUI -7.6% close-to-close with a -17.6% intra-window drawdown across the unlock window. SUI's large recurring monthly unlocks make it a repeat short-side candidate.",
+          "price_impacts": [
+            {
+              "asset": "SUI",
+              "pct_change": "-7.56%",
+              "window": "6d (2025-07-29 to 2025-08-04)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SUI",
+              "pct_change": "-17.59%",
+              "window": "intra-window max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/sui"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "continuous-emission",
+      "name": "Continuous / Linear Vesting Emission",
+      "mechanism": "After the initial cliff, most tokens vest linearly (daily/weekly/monthly) over 2-4 years. Each tranche adds a steady stream of new sellable supply. Because the schedule is fully known and small relative to daily volume, individual unlocks rarely cause a clean one-day crash. Instead they create persistent structural sell-pressure that suppresses price relative to no-unlock peers and produces 'unlock-day' mean-reverting volatility (drift down into the date, relief bounce after). The counterparty earning the bleed is whoever shorts perps into recurring unlocks or fades pre-unlock weakness. Effect is strongest when the recurring tranche is a meaningful % of float and demand is weak.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin",
+        "high-emission L1/L2 governance tokens",
+        "VC-heavy low-float launches"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "dilution",
+        "supply-shock"
+      ],
+      "typical_lag": "Slow grind; modest -2% to -8% drift into each monthly date, frequent post-date relief bounce",
+      "typical_duration": "Structural — persists for the multi-year vesting horizon; per-event effect dissipates within days",
+      "typical_magnitude_pct": "-2% to -10% per individual monthly unlock window; chronic relative underperformance vs sector over the vesting period",
+      "recurrence": "Monthly/weekly per token, for 2-4 years — extremely high recurrence and thus the most backtestable sub-pattern",
+      "leading_signals": [
+        "recurring unlock_pct_of_circulating_supply (monthly)",
+        "annualized emission/inflation rate",
+        "negative cumulative return in 5-10 days before each monthly date",
+        "weak relative strength vs sector",
+        "elevated perp short OI into the date"
+      ],
+      "backtest_features": [
+        "monthly_unlock_pct_of_circulating",
+        "annualized_emission_rate",
+        "days_to_next_unlock",
+        "cumulative_return_t_minus_10_to_0",
+        "post_unlock_t_plus_1_to_5_return (relief-bounce)",
+        "relative_strength_vs_sector_index",
+        "perp_funding_zscore"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-07-16",
+          "date_range": "2025-07-14 to 2025-07-22",
+          "trigger": "Arbitrum (ARB) recurring monthly linear unlock tranche, mid-July 2025",
+          "description": "Counter-example showing emission unlocks do NOT always sell off: ARB rose +16.3% over the window (max run-up +28%) as a broad alt rally overwhelmed the modest scheduled supply. Illustrates that continuous-emission edge is conditional on weak demand — net flow, not just supply, drives the outcome.",
+          "price_impacts": [
+            {
+              "asset": "ARB",
+              "pct_change": "+16.33%",
+              "window": "8d (2025-07-14 to 2025-07-22)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://defillama.com/unlocks/arbitrum"
+          ]
+        },
+        {
+          "date": "2025-07-13",
+          "date_range": "2025-07-10 to 2025-07-16",
+          "trigger": "Aptos (APT) recurring monthly cliff/emission tranche, mid-July 2025",
+          "description": "APT rose +13.1% over the unlock window (max run-up +16%) amid alt strength, again showing the scheduled monthly emission was absorbed when demand was strong. APT's chronic large monthly unlocks nonetheless contributed to its multi-year underperformance.",
+          "price_impacts": [
+            {
+              "asset": "APT",
+              "pct_change": "+13.08%",
+              "window": "6d (2025-07-10 to 2025-07-16)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://defillama.com/unlocks/aptos"
+          ]
+        },
+        {
+          "date": "2025-07-01",
+          "date_range": "2025-06-28 to 2025-07-04",
+          "trigger": "Optimism (OP) recurring monthly unlock tranche, early July 2025",
+          "description": "OP was roughly flat close-to-close (-0.1%) but with a -14.1% intra-window drawdown and +15% run-up — i.e. high two-sided volatility around the scheduled unlock with no durable directional bleed, the classic continuous-emission signature.",
+          "price_impacts": [
+            {
+              "asset": "OP",
+              "pct_change": "-0.12%",
+              "window": "6d (2025-06-28 to 2025-07-04)",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "OP",
+              "pct_change": "-14.14%",
+              "window": "intra-window max drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/optimism"
+          ]
+        },
+        {
+          "date": "2024-01-01",
+          "date_range": "2024-01 to 2024-06",
+          "trigger": "dYdX (DYDX) six recurring monthly unlocks of ~33M tokens each (H1 2024) following the December 2023 cliff",
+          "description": "Each ~33M-token monthly tranche added grinding supply; DYDX persistently underperformed through H1 2024, with at least one tranche explicitly cited alongside a technical 'pattern breakdown' as adding to bearish sentiment.",
+          "price_impacts": [
+            {
+              "asset": "DYDX",
+              "pct_change": "-5% to -10%",
+              "window": "per monthly unlock window",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "~33M DYDX added per month, Jan-Jun 2024",
+          "confidence": "low",
+          "sources": [
+            "https://www.ccn.com/analysis/crypto/dydx-price-plummets-pattern-breakdown-33-million-token-unlock/",
+            "https://messari.io/project/dydx/token-unlocks"
+          ]
+        },
+        {
+          "date": "2025-05-20",
+          "date_range": "2025-05-13 to 2025-05-20",
+          "trigger": "Pyth Network (PYTH) first major unlock: 2.13B PYTH (~$290M, ~21.3% of total supply / ~58.8% of market cap)",
+          "description": "PYTH drifted lower in the week leading into the unlock — a textbook pre-unlock drift, broadly anticipated by the market. Nuance: the bulk (~1.13B) was earmarked for ecosystem/programmatic allocations not immediately tradable, so the headline supply % overstated true free-float sell-pressure. Date corrected to 2025-05-20 (prior catalog listed 2025-05-19).",
+          "price_impacts": [
+            {
+              "asset": "PYTH",
+              "pct_change": "-13%",
+              "window": "7d pre-unlock",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "PYTH",
+              "pct_change": "-8%",
+              "window": "into unlock",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "2.13B PYTH (~$290M nominal, ~21.3% of total supply / ~58.8% of market cap); ~1.13B locked into ecosystem programs",
+          "confidence": "medium",
+          "sources": [
+            "https://invezz.com/news/2025/05/20/pyth-price-sinks-8-as-pyth-networks-280m-token-unlock-looms/",
+            "https://beincrypto.com/token-unlocks-to-watch-fourth-week-may-2025/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "estate-distribution",
+      "name": "Estate / Bankruptcy Locked-Token Distribution",
+      "mechanism": "A bankruptcy estate (FTX/Alameda) or large institutional holder controls a huge stack of LOCKED tokens it cannot freely sell. It monetizes them via discounted OTC/private auctions to institutions (Galaxy, Pantera, etc.) with future unlock dates, or via creditor distributions on a fixed vesting schedule. Because the sale is OTC and the tokens stay locked until a scheduled date, the immediate spot impact is muted or even positive (removes a feared overhang, signals demand from sophisticated buyers). The eventual scheduled unlock to discounted buyers/creditors is fully telegraphed and largely priced in. The losers are those who short the headline 'overhang' too early; the winners are discount buyers and 'buy-the-news' traders.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "the named coin (primarily SOL)",
+        "tokens with large estate/locked overhangs"
+      ],
+      "analog_mechanisms": [
+        "supply-overhang",
+        "dry-powder-injection",
+        "sentiment-shock",
+        "sell-pressure"
+      ],
+      "typical_lag": "Often immediate relief on OTC sale announcement; the scheduled unlock itself is anticipated weeks ahead",
+      "typical_duration": "Multi-quarter overhang narrative; individual events resolve in days",
+      "typical_magnitude_pct": "Highly variable: muted-to-modestly-negative on the sale-announcement (SOL ~-6% in 24h on the April 2024 sale, amid broader weakness), vs muted-to-flat on the eventual unlock; downside mainly via anticipation",
+      "recurrence": "Episodic — tied to specific estate proceedings (FTX 2024-2026 creditor rounds); rare but very large in notional",
+      "leading_signals": [
+        "announced OTC discount % vs spot",
+        "named institutional buyer (signals smart-money demand)",
+        "scheduled creditor/vesting unlock date",
+        "estate wallet on-chain movements to exchanges",
+        "size of locked stack as % of circulating supply"
+      ],
+      "backtest_features": [
+        "estate_locked_balance_pct_of_supply",
+        "otc_sale_discount_pct",
+        "days_to_scheduled_creditor_unlock",
+        "estate_wallet_exchange_inflow",
+        "buyer_is_institutional_flag",
+        "pre_event_cumulative_return"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-04-05",
+          "date_range": "2024-04",
+          "trigger": "FTX estate sold ~25-30M locked SOL at $64/token (~62% discount) to institutions including Galaxy Digital and Pantera Capital (~$1.9-2.0B notional)",
+          "description": "One of the largest single SOL dispositions. Contrary to the prior catalog (which dated this to March 1, 2024 and called the reaction flat), reporting places the sale around April 5, 2024 and shows SOL was DOWN ~6-6.5% over the surrounding 24h, though commentators attributed most of that to broader market weakness rather than the OTC sale itself, since the tokens were locked with future unlock dates and the buyers were long-term institutions.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "-6% to -6.5%",
+              "window": "24h around sale",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~25-30M SOL sold OTC at ~62% discount; ~$1.9-2.0B raised by estate",
+          "confidence": "medium",
+          "sources": [
+            "https://unchainedcrypto.com/ftx-estate-sells-off-up-to-1-9-billion-of-solana-at-deep-discount-report/",
+            "https://gulfnews.com/business/markets/ftx-offloads-solana-tokens-worth-19-billion-drawing-galaxy-pantera-1.1712663293639"
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "Solana ecosystem"
+          ]
+        },
+        {
+          "date": "2024-05-01",
+          "trigger": "FTX estate third SOL sale round: ~1.8M SOL for ~$232M, part of ~41M SOL liquidated across three auctions",
+          "description": "The prior catalog claimed SOL jumped ~11% in a day on this round; that figure could not be corroborated. Reporting describes SOL as dipping or rebounding only modestly around the period rather than spiking 11%. Confidence downgraded and the magnitude removed pending a credible source.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "unclear / not corroborated (no clean +11% confirmed)",
+              "window": "24h",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~1.8M SOL sold (~$232M) as the third of three estate auctions (~41M SOL total)",
+          "confidence": "low",
+          "sources": [
+            "https://beincrypto.com/massive-solana-token-unlock-for-ftx-bankruptcy-estate/"
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "Solana ecosystem"
+          ]
+        },
+        {
+          "date": "2025-03-01",
+          "trigger": "FTX-related vested SOL fully unlocked (~11.2M SOL, ~2.2% of supply; the biggest single SOL unlock to date), the largest tranche from the discounted estate sales coming free",
+          "description": "Long-telegraphed unlock of SOL bought at ~$64 by estate-sale buyers. Widely described as priced in; SOL had already fallen earlier in 2025 (driven largely by broader market and memecoin unwind rather than this specific date). SOL was around $136 the week before and rebounded to ~$140 around the event; no clean adverse next-day spike attributable solely to the unlock.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "priced-in / no clean adverse day-of move (slight rebound ~$136 to ~$140)",
+              "window": "around 2025-03-01",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~11.2M SOL (~2.2% of supply) unlocked to discounted buyers/creditors",
+          "confidence": "medium",
+          "sources": [
+            "https://protos.com/solana-supply-to-jump-2-2-this-saturday-in-biggest-unlock-to-date/",
+            "https://blockworks.com/news/sol-investors-shrug-off-unlocks",
+            "https://beincrypto.com/massive-solana-token-unlock-for-ftx-bankruptcy-estate/"
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "Solana ecosystem"
+          ]
+        },
+        {
+          "date": "2023-11-01",
+          "date_range": "2023-11 onward",
+          "trigger": "FTX/Alameda estate began redeeming staked SOL and routing it through estate-controlled addresses for OTC/private sale",
+          "description": "By a later on-chain summary, ~8.98M SOL (~$1.2B at avg ~$134) had been redeemed/transferred since Nov 2023. Reporting noted these redemptions did NOT negatively affect SOL's price — the estate deliberately used locked-token OTC structures to avoid spot impact. Single-source on-chain estimate; confidence low.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "no material negative impact",
+              "window": "ongoing",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~8.98M SOL (~$1.2B) redeemed/transferred from Nov 2023",
+          "confidence": "low",
+          "sources": [
+            "https://www.binance.com/en/square/post/29583431057066"
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "Solana ecosystem"
+          ]
+        }
+      ]
+    }
+  ]
+}

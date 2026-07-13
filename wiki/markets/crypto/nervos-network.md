@@ -1,0 +1,143 @@
+---
+title: "Nervos Network"
+type: entity
+created: 2026-04-09
+updated: 2026-06-21
+status: excellent
+tags: [crypto]
+aliases: ["CKB", "Nervos"]
+entity_type: protocol
+founded: 2019
+headquarters: "Decentralized"
+website: "http://nervos.org"
+related: ["[[crypto-markets]]", "[[bitcoin]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-work]]", "[[proof-of-stake]]"]
+---
+
+# Nervos Network
+
+**Nervos Network** (ticker **CKB**) is a [[proof-of-work]] [[layer-1]] built around the **Common Knowledge Base (CKB)** — a UTXO-style "store of assets" chain whose generalized **Cell model** extends [[bitcoin|Bitcoin's]] UTXO design to hold arbitrary state and run smart contracts. Nervos is architected as a layered crypto-economy: CKB (layer 1) serves as a secure, censorship-resistant trust and value-preservation root, while higher [[layer-2]] generation layers handle high-throughput transactions. It is designed for sustainable security and decentralization, and carries quantum-resistance among its design goals.
+
+---
+
+## Market Data
+
+| Field | Value |
+|---|---|
+| **Ticker** | CKB |
+| **Market Cap Rank** | #443 |
+| **Market Cap** | $51.35M |
+| **Current Price** | $0.00104816 |
+| **24h Change** | -0.34% |
+| **7d Change** | -8.58% |
+| **24h Volume** | $3.47M |
+| **Circulating Supply** | ~48.99B CKB |
+| **Fully Diluted Valuation** | ~$52.20M |
+| **All-Time High** | $0.0437 (2021-03-31) — now -97.6% |
+| **All-Time Low** | $0.00099 (2026-06-06) — now +5.6% |
+
+> *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
+
+The macro backdrop is risk-off: the crypto [[fear-and-greed-index|Fear & Greed Index]] reads **23 (extreme fear)** and the long-horizon regime is an **Established Bear Market** as of 2026-06-21. CKB is the *weakest* 7-day performer in this peer group (-8.58%). It trades roughly 6% above its fresh all-time low (~$0.00099, set 2026-06-06) and about 98% below its March-2021 all-time high of $0.0437.
+
+---
+
+## Tokenomics & Supply
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | ~48.99B CKB |
+| **Total Supply** | ~49.81B CKB |
+| **Max Supply** | Uncapped base + capped hard cap (see note) |
+| **Fully Diluted Valuation (FDV)** | ~$52.20M |
+| **Market Cap / FDV** | ~0.98 |
+
+CKB uses a distinctive **dual-issuance** model. There is a hard-capped **"base issuance" of 33.6B CKB** released to miners on a halving schedule (Bitcoin-like), plus a **"secondary issuance" of 1.344B CKB/year** that continues indefinitely to pay for state-storage rent. Crucially, CKB tokens represent on-chain **storage capacity** (1 CKB ≈ 1 byte of state), so holding state on-chain consumes CKB — a state-rent design that ties token demand to actual data storage. Secondary issuance effectively charges occupied state space, while CKB locked in the Nervos DAO is shielded from this inflation. MC/FDV ≈ 0.98 indicates near-full circulation of the currently issued supply.
+
+---
+
+## How & Where It Trades
+
+**Spot venues.** CKB is listed on [[binance]] (CKB/USDT), Upbit (CKB/KRW), Bitget, KuCoin, and Crypto.com, among others.
+
+**Derivatives.** CKB perpetuals are available on major centralized derivatives venues. The wiki's prior snapshot did **not** record a CKB perp on [[hyperliquid]], so do not assume one exists — verify the live venue list before trading derivatives. With a ~$51M market cap and ~$3.1M daily volume, liquidity is thin; funding/OI should be checked live before any leveraged exposure.
+
+---
+
+## Technology & Consensus
+
+Nervos CKB is secured by **[[proof-of-work]]** using **Eaglesong**, a custom hash function intended to resist early ASIC centralization. Distinctive elements:
+
+- **Cell model.** A generalization of [[bitcoin|Bitcoin's]] UTXO: each "Cell" can store arbitrary data and is governed by lock/type scripts, enabling general smart contracts on a UTXO substrate while preserving UTXO's parallelism and verifiability.
+- **CKB-VM.** A RISC-V–based virtual machine that runs scripts as native binaries, giving developers broad language flexibility and forward-compatibility (e.g., adding new cryptographic primitives, including quantum-resistant signatures, without hard forks).
+- **Layered design.** CKB is the trust/settlement layer-1; throughput scales via [[layer-2]] generation layers, and Nervos has pursued Bitcoin-interoperability initiatives positioning CKB as a programmability layer adjacent to Bitcoin.
+
+---
+
+## Use Case, Narrative & Category
+
+Nervos sits in the **store-of-value / interoperability L1** category, with a Bitcoin-adjacent thesis: a [[proof-of-work]], UTXO-based, quantum-resistant chain optimized for asset preservation and as a programmable settlement root. More recent positioning has leaned into **Bitcoin layer-2 / RGB++**-style interoperability narratives. Tagged categories include Smart Contract Platform, Interoperability, Layer 2 (L2), Rollup, Proof of Work (PoW), Quantum-Resistant, Made in China, plus VC-portfolio tags (Multicoin, DragonFly, Sequoia, Blockchain Capital, Polychain).
+
+---
+
+## Valuation Framing (qualitative)
+
+- **MC/FDV ~0.98:** near-full circulation of currently issued supply, so there is little near-term unlock overhang on the *issued* tokens. However, CKB is *not* hard-capped — the perpetual secondary issuance (1.344B CKB/year) means supply grows indefinitely to fund state-rent, a slow structural dilution distinct from a one-time unlock.
+- **State-demand-as-value:** uniquely, CKB's fundamental demand is tied to *on-chain storage* (1 CKB ≈ 1 byte of state). In principle, more applications storing state = more CKB locked = tighter float. In practice, low application traction means this demand sink is largely theoretical today.
+- **At the floor:** trading only ~6% above a fresh all-time low ($0.00099, 2026-06-06) and ~98% below ATH. Recovery to prior highs implies a ~42x move, so the realistic bull case is a partial re-rating on the Bitcoin-L2/RGB++ interoperability narrative rather than a return to peak.
+- **Security-budget reflexivity:** as a smaller PoW chain, a depressed CKB price weakens miner economics and the security budget — a reflexive risk that compounds in deep drawdowns (see Risks).
+
+---
+
+## Peer Comparison
+
+CKB against other small/mid-cap L1s in this cohort (data as of 2026-06-21):
+
+| Token | Ticker | Price | Market Cap | Rank | 7d % | MC/FDV | Consensus / category |
+|---|---|---|---|---|---|---|---|
+| **Nervos** | CKB | $0.00104816 | $51.3M | #443 | -8.58% | 0.98 | PoW UTXO / store-of-value |
+| [[oasis-network]] | ROSE | $0.0066718 | $52.0M | #439 | +4.12% | 0.78 | PoS / confidential compute |
+| [[dusk-network]] | DUSK | $0.085452 | $50.4M | #449 | -5.68% | 1.00 | PoS / regulated RWA |
+| [[aelf]] | ELF | $0.064383 | $52.9M | #432 | -0.72% | 0.82 | DPoS / AI L1 |
+| [[theta-token\|Theta]] | THETA | $0.15476 | $154.8M | #206 | -3.34% | 1.00 | PoS / DePIN compute |
+
+CKB is the only [[proof-of-work]] chain in this group; all peers are [[proof-of-stake]] variants. It was the weakest 7-day performer of the cohort, reflecting both the soft RGB++ narrative and PoW security-budget concerns under sustained price weakness.
+
+---
+
+## Notable History
+
+- Founded in 2019; the CKB mainnet ("Lina") launched on **2019-11-15** (genesis date).
+- CKB printed its all-time high of **$0.0437 on 2021-03-31** during the prior bull cycle.
+- It has since declined ~98%, reaching a fresh all-time low of **$0.00099 on 2026-06-06**.
+- As of 2026-06-21 it trades at ~$0.00105, about 6% off the low, with a soft -8.6% weekly print amid the broad bear regime.
+
+---
+
+## Risks
+
+- **Proof-of-work cost / sustainability.** As a smaller PoW chain, CKB's security budget depends on token price and miner economics; depressed prices can pressure hashrate and security.
+- **State-rent complexity.** The CKB-as-storage / secondary-issuance model is unusual and can be hard for users and developers to reason about, raising adoption friction.
+- **Adoption gap.** Despite a long track record, on-chain application traction has been modest relative to leading smart-contract platforms.
+- **Narrative dependence.** Recent upside has hinged on the Bitcoin-L2/RGB++ interoperability narrative, which is competitive and unproven at scale.
+- **Severe drawdown / liquidity.** Down ~98% from ATH, only ~6% above a fresh all-time low, with thin (~$3.5M/day) volume under an extreme-fear macro backdrop.
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bitcoin]]
+- [[layer-1]]
+- [[layer-2]]
+- [[proof-of-work]]
+- [[proof-of-stake]]
+- [[oasis-network]]
+- [[dusk-network]]
+
+---
+
+## Sources
+
+- (Source: [[coingecko-top-1000-2026-04-09]])
+- Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoint), `raw/data/crypto-loop/coingecko-markets.json`.
+- General market knowledge; no specific wiki source ingested yet.

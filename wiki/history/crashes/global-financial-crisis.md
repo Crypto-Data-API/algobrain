@@ -1,0 +1,16 @@
+---
+title: "Global Financial Crisis"
+type: redirect
+created: 2026-04-13
+updated: 2026-06-12
+status: good
+tags: [history, crashes, stocks, bonds]
+aliases: ["GFC", "2008 Financial Crisis", "Great Recession", "global-financial-crisis"]
+related: ["[[2008-global-financial-crisis]]"]
+---
+
+See [[2008-global-financial-crisis]] for the comprehensive timeline, causes, casualties, and trading lessons of the 2007-2009 crisis. See also [[gfc]] for the volatility-book perspective (long-vol vs short-vol performance through the crisis).
+
+## Fred's GFC Trades (preserved note)
+
+Fred bought Commonwealth Bank ([[commonwealth-bank|CBA]]) at $19 during the GFC, which went on to become one of his best-ever investments. Like the [[crash-of-1987]], the GFC reinforced Fred's philosophy that severe market downturns, while painful, are the single greatest wealth-building opportunities for prepared investors who maintain [[cash-as-asset|cash reserves]]. The lesson is structural: markets overshoot during panics because forced selling (margin calls, fund redemptions, risk-model-driven deleveraging) drives prices well below intrinsic value, creating asymmetric opportunities for those with liquidity and conviction (Source: [[fred-sam-session-2024-01-04]]).

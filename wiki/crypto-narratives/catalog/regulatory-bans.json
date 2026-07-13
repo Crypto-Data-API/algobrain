@@ -1,0 +1,656 @@
+{
+  "category_id": "regulatory-bans",
+  "category_name": "Regulatory Bans & Crackdowns",
+  "summary": "Government bans and enforcement actions are among crypto's most reliable bearish shocks: the announcement triggers a fast, sharp sell-off (often the same day) driven by forced de-risking, exchange delistings, and fear of access loss. The two biggest sub-patterns are China-style sovereign trading/mining bans, which hit the entire market (BTC -8% in 24h up to -40% to -55% peak-to-trough), and US SEC securities enforcement, which clobbers the specifically-named token (XRP fell ~52% in 24h and ~73% over the week, other named alts -15-20%) via exchange delistings while barely moving BTC. Crucially, most of these shocks were retraced within weeks-to-months because the underlying network was unaffected, and by 2024-2026 the pattern inverted: dropping lawsuits and lifting sanctions became bullish catalysts.",
+  "directional_bias": "bearish",
+  "archetypes": [
+    {
+      "id": "sovereign-trading-mining-ban",
+      "name": "Sovereign Trading / Mining Ban (China model)",
+      "mechanism": "A large nation-state (overwhelmingly China, which at peak hosted >50% of BTC hashrate and a huge share of trading volume) bans banks from servicing crypto, bans exchanges, or bans mining outright. On the other side: leveraged longs and Chinese domestic holders are forced to dump into thin liquidity, and miners must liquidate inventory and relocate, creating mechanical sell-pressure. Buyers who keep losing are those who try to catch the falling knife before the cascade of liquidations completes. Because the bans never actually break the decentralized network, supply that was sold gets re-accumulated and price retraces, so the loser over the full cycle is whoever panic-sold the bottom.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap",
+        "mining stocks"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "state media or PBOC/NDRC statements signaling tightening",
+        "rising funding rates / open interest into the news (fuel for liquidation cascade)",
+        "USDT/CNY or local-exchange premium going negative",
+        "hashrate concentration in the banning jurisdiction",
+        "prior leak/rumor cycle (e.g. Sep 2017 exchange-closure rumors preceded confirmation)"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (sovereign_ban)",
+        "btc_24h_return",
+        "btc_peak_to_trough_pct_7d",
+        "open_interest_zscore_pre_event",
+        "funding_rate_pre_event",
+        "perp_liquidations_usd_24h",
+        "jurisdiction_share_of_global_hashrate",
+        "jurisdiction_share_of_spot_volume",
+        "days_to_pre_event_price_recovery"
+      ],
+      "typical_lag": "immediate (intraday to 24h); cascade completes over 2-5 days",
+      "typical_duration": "acute shock 1-2 weeks; full retrace weeks to a few months",
+      "typical_magnitude_pct": "BTC -8% to -16% in 24h; -30% to -55% peak-to-trough over a multi-week crackdown wave",
+      "recurrence": "Recurred repeatedly 2013-2021 (roughly annual China escalations); structurally exhausted after Sep 2021 'all transactions illegal' because China's market share had already been driven near zero",
+      "historical_instances": [
+        {
+          "date": "2013-12-05",
+          "date_range": "2013-12-05 to 2013-12-18",
+          "trigger": "People's Bank of China bars financial institutions from handling Bitcoin transactions; BTC China then halts CNY deposits (Dec 18)",
+          "description": "First major sovereign action. BTC fell from a then-record peak near $1,240 toward ~$550 over the following weeks (roughly -55% peak-to-trough). The Dec 18 BTC China CNY-deposit halt accelerated the decline, but reporting does not support a clean single-day -50% crash on Dec 18; it was a multi-day/multi-week decline tied to several China-related events.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-55%",
+              "window": "peak-to-trough ~weeks",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "volume_or_flow_change": "BTC China (then world's largest exchange) halted CNY deposits Dec 18, draining Chinese liquidity",
+          "confidence": "medium",
+          "sources": [
+            "https://www.coinbase.com/bytes/archive/a-history-of-chinas-crypto-crackdowns",
+            "https://en.wikipedia.org/wiki/Cryptocurrency_bubble",
+            "https://techcrunch.com/2013/12/18/bitcoin-drops-50-overnight-as-chinas-biggest-btc-exchange-stops-deposits-in-chinese-yuan/"
+          ]
+        },
+        {
+          "date": "2017-09-04",
+          "date_range": "2017-09-04 to 2017-09-15",
+          "trigger": "PBOC + CSRC joint statement declares ICOs illegal fundraising; days later China orders domestic exchange shutdowns (confirmed ~Sep 11-15)",
+          "description": "The ICO ban knocked BTC sharply on the day; estimates of the same-day move vary widely (early reports cited ~5%, but a fuller intraday reading is ~16-18% from the low-$4,900s toward ~$4,100), so the day-of figure is treated with low confidence. The subsequent exchange-closure order extended the decline: BTC fell from ~$4,950 (Sep 1) to ~$2,817 by Sep 15, roughly -43% peak-to-trough; ETH fell ~35% in tandem. Fully retraced within ~6 weeks as BTC went on to new highs.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-5% to -18%",
+              "window": "24h (estimates conflict)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-43%",
+              "window": "peak-to-trough 2w",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-35%",
+              "window": "peak-to-trough 2w",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "ICO-tokens",
+            "broad-market"
+          ],
+          "volume_or_flow_change": "Chinese exchanges (BTCC, Huobi, OKCoin) wound down domestic CNY trading, shifting volume offshore",
+          "confidence": "medium",
+          "sources": [
+            "https://www.cnbc.com/2017/09/04/bitcoin-digital-currency-price-falls-on-china-ico-ban.html",
+            "https://www.cnbc.com/2017/09/11/bitcoin-price-falls-on-reports-that-china-is-closing-local-exchanges.html",
+            "https://en.wikipedia.org/wiki/Initial_coin_offering"
+          ]
+        },
+        {
+          "date": "2021-05-18",
+          "date_range": "2021-05-12 to 2021-05-23",
+          "trigger": "Three Chinese financial associations reiterate ban on financial firms providing crypto services; State Council later flags crackdown on mining and trading (May 21)",
+          "description": "Triggered the largest leverage-driven liquidation cascade in crypto history at the time. BTC fell from ~$58k (May 12) to a ~$36k low (May 19) and ~$31-34k by May 23; ETH fell from ~$4,308 toward ~$2,200. May 19 alone saw a violent intraday flash crash with billions in liquidations.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-38%",
+              "window": "peak-to-trough (May12-May19 low ~$36k)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-41%",
+              "window": "peak-to-trough (May12-May23 low ~$34k)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-49%",
+              "window": "peak-to-trough 2w",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "DOGE",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "broad-market",
+            "mining-stocks"
+          ],
+          "volume_or_flow_change": "Record perp liquidations on May 19 (~$8-9B reported across venues); open interest collapsed",
+          "confidence": "high",
+          "sources": [
+            "https://www.chainalysis.com/blog/cryptocurrency-price-crash-may-2021/",
+            "https://www.cnbc.com/2021/05/21/bitcoin-falls-after-china-calls-for-crackdown-on-bitcoin-mining-and-trading-behavior.html"
+          ]
+        },
+        {
+          "date": "2021-06-21",
+          "trigger": "China intensifies mining crackdown; Sichuan and other provinces order miners to shut down, accelerating the great mining migration",
+          "description": "BTC fell ~10% intraday from ~$34k toward ~$30,560 and broke below $32k for the first time since early June. Hashrate dropped sharply as Chinese miners went offline; difficulty later posted record negative adjustments.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-10%",
+              "window": "intraday",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "mining-stocks",
+            "broad-market"
+          ],
+          "volume_or_flow_change": "Global hashrate fell ~50% over following weeks; largest BTC mining-difficulty downward adjustment on record at the time",
+          "confidence": "medium",
+          "sources": [
+            "https://www.cnbc.com/2021/06/21/bitcoin-btc-price-drops-on-china-crypto-mining-crackdown.html",
+            "https://www.chainalysis.com/blog/cryptocurrency-price-crash-may-2021/"
+          ]
+        },
+        {
+          "date": "2021-09-24",
+          "trigger": "PBOC and ten agencies declare ALL cryptocurrency-related transactions illegal",
+          "description": "The 'final' China ban. Despite the sweeping language, global BTC fell only ~8% (close-to-close, roughly $44k to $40k) and recovered within days — because China's market share had already been throttled to near zero by the 2017 and 2021 actions, so the marginal impact was modest. BTC went on to its all-time high (~$69k) about six weeks later. Intraday peak-to-trough (~9%) is plausible but not precisely corroborated.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-8%",
+              "window": "24h close-to-close",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-9%",
+              "window": "intraday peak-to-trough (approx)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "volume_or_flow_change": "Exchanges (Huobi, Binance) restricted Chinese users; effect muted by prior offshore migration",
+          "confidence": "high",
+          "sources": [
+            "https://www.reuters.com/world/china/china-says-all-cryptocurrency-related-transactions-illegal-2021-09-24/",
+            "https://www.china-briefing.com/news/china-makes-cryptocurrency-transactions-illegal-an-explainer/"
+          ]
+        },
+        {
+          "date": "2018-01-11",
+          "trigger": "South Korea justice minister says the government is preparing a bill to ban crypto exchanges",
+          "description": "Korea was a major trading hub (the 'kimchi premium' era). BTC fell as much as ~12% intraday before paring losses as officials walked back the comments. Demonstrates the sovereign-ban template applied to a non-China hub.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-12%",
+              "window": "intraday",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "XRP"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "volume_or_flow_change": "Korean exchanges (Bithumb, Upbit) saw heavy sell-side flow; kimchi premium compressed",
+          "confidence": "medium",
+          "sources": [
+            "https://www.latimes.com/business/la-fi-bitcoin-cryptocurrency-trading-20180111-story.html",
+            "https://en.wikipedia.org/wiki/Cryptocurrency_bubble"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "us-securities-enforcement",
+      "name": "US Securities Enforcement (SEC vs token / exchange)",
+      "mechanism": "The SEC (acutely in the Gensler era) sues an issuer or exchange and names specific tokens as unregistered securities. The mechanism is delisting-driven, not network-driven: US-regulated venues (Coinbase, Kraken, Bittrex, eToro) preemptively suspend the named token to avoid liability, which destroys on-venue liquidity and forces holders to exit before delisting deadlines. On the other side are market makers pulling quotes and US retail dumping into the delisting window. The named token gets crushed; BTC barely moves. Because the legal claim is contestable, the loser over the full cycle is whoever sold the litigation low — XRP, SOL, and others violently re-rated upward on favorable rulings and the 2025 case dismissals.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin",
+        "alt-L1s named as securities",
+        "exchange tokens",
+        "COIN equity"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "Wells notice disclosure (precedes suit by weeks)",
+        "SEC press-release calendar / enforcement cadence",
+        "exchange listing-risk language in filings",
+        "a token appearing on a prior SEC complaint's named-securities list (read-across to peers)",
+        "options skew / put demand on COIN equity"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (sec_enforcement)",
+        "token_named_as_security_flag",
+        "us_exchange_delisting_announced_flag",
+        "days_to_delisting_deadline",
+        "token_24h_return",
+        "token_7d_return",
+        "btc_beta_during_event",
+        "us_listed_volume_share",
+        "wells_notice_to_suit_lag_days"
+      ],
+      "typical_lag": "immediate on named token (intraday); delisting-driven leg over days as venues announce suspensions",
+      "typical_duration": "named-token weakness persists weeks-months while litigation unresolved; sharp reversal on favorable ruling",
+      "typical_magnitude_pct": "named token -15% to -25% (alt-L1s) up to -50% to -73% (XRP, due to broad delisting); BTC roughly flat to -7%",
+      "recurrence": "Clustered 2020-2023 (Ripple Dec 2020; Coinbase/Binance June 2023); reversed in 2024-2025 as cases settled or were dropped",
+      "historical_instances": [
+        {
+          "date": "2020-12-22",
+          "date_range": "2020-12-22 to 2020-12-29",
+          "trigger": "SEC sues Ripple Labs and executives, alleging XRP was a $1.3B unregistered securities offering",
+          "description": "The archetype's clearest case. XRP fell ~52% in the 24 hours after the suit and roughly -73% over the following week as Coinbase, Bittrex, Crypto.com, OKCoin and others announced suspensions/delistings. BTC was unaffected (in a bull run). XRP later re-rated massively on the July 2023 partial win and the 2025 case resolution. (Earlier catalog figures of -37%/-60% understated the move.)",
+          "price_impacts": [
+            {
+              "asset": "XRP",
+              "pct_change": "-52%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "XRP",
+              "pct_change": "-73%",
+              "window": "7d",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+0%",
+              "window": "7d",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "XRP"
+          ],
+          "affected_sectors": [
+            "payment-tokens"
+          ],
+          "volume_or_flow_change": "Coinbase suspended XRP trading Jan 19 2021; multiple US/global venues delisted, collapsing on-venue liquidity",
+          "confidence": "high",
+          "sources": [
+            "https://www.binance.com/en/square/post/19375500252346",
+            "https://www.coindesk.com/markets/2020/12/28/coinbase-to-suspend-xrp-trading-following-sec-suit-against-ripple",
+            "https://www.bankingdive.com/news/sec-drop-ripple-case-xrp-lawsuit-125-million-penalty-garlinghouse-alderoty-gensler/743089/"
+          ]
+        },
+        {
+          "date": "2023-06-05",
+          "date_range": "2023-06-05 to 2023-06-10",
+          "trigger": "SEC sues Binance (June 5) and Coinbase (June 6), naming ~12-13 tokens (SOL, ADA, MATIC, FIL, SAND, AXS, etc.) as securities",
+          "description": "Hit the named alts hardest while BTC was relatively resilient. SOL fell ~17%, ADA ~15%, MATIC ~15% in the days after; BNB fell ~7%; COIN equity fell ~13%; BTC ~7%. The 'named as a security' list created direct read-across selling to any token on it. Both cases later collapsed/were dismissed in 2024-2025. (Exact alt percentages widely reported but not independently re-derived here, so confidence is medium.)",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "-17%",
+              "window": "few days",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ADA",
+              "pct_change": "-15%",
+              "window": "few days",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "MATIC",
+              "pct_change": "-15%",
+              "window": "few days",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BNB",
+              "pct_change": "-7%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-7%",
+              "window": "few days",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "SOL",
+            "ADA",
+            "MATIC",
+            "BNB",
+            "FIL",
+            "SAND",
+            "AXS"
+          ],
+          "affected_sectors": [
+            "alt-L1s",
+            "exchange-tokens",
+            "gaming-tokens"
+          ],
+          "volume_or_flow_change": "US-listing risk spiked; Robinhood later delisted SOL/ADA/MATIC (June 2023), removing US retail venue access",
+          "confidence": "medium",
+          "sources": [
+            "https://techcrunch.com/2023/06/06/after-binance-us-sec-sues-coinbase-for-securities-laws-violations/",
+            "https://www.sec.gov/newsroom/press-releases/2023-101-sec-files-13-charges-against-binance-entities-founder-changpeng-zhao",
+            "https://www.goodwinlaw.com/en/insights/publications/2023/06/alerts-otherindustries-ftec-sec-sues-binance-and-coinbase"
+          ]
+        },
+        {
+          "date": "2023-03-22",
+          "trigger": "Coinbase discloses SEC Wells notice (leading indicator of the June 2023 suit)",
+          "description": "Example of the Wells-notice leading signal. COIN equity and crypto sentiment softened on the disclosure, weeks ahead of the actual lawsuit, illustrating that the enforcement event is often pre-telegraphed and tradable before the headline. The specific -8% next-day move is an unverified estimate.",
+          "price_impacts": [
+            {
+              "asset": "COIN",
+              "pct_change": "-8%",
+              "window": "next-day estimate",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [],
+          "affected_sectors": [
+            "exchange-tokens",
+            "crypto-equities"
+          ],
+          "volume_or_flow_change": "Heightened put demand on COIN equity ahead of suit",
+          "confidence": "low",
+          "sources": [
+            "https://www.sec.gov/newsroom/press-releases/2023-101-sec-files-13-charges-against-binance-entities-founder-changpeng-zhao"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "national-tax-access-throttle",
+      "name": "National Tax / Access Throttling (India / Nigeria model)",
+      "mechanism": "A government doesn't ban crypto outright but throttles it via punitive taxes (India's 30% gains tax + 1% transaction TDS) or by cutting off banking/internet access to exchanges (Nigeria blocking exchange URLs, detaining Binance staff; RBI's 2018 banking ban). The mechanism is a local-liquidity drain rather than a global price shock: domestic volumes collapse and activity migrates to P2P/offshore/grey markets. Because the throttle is jurisdiction-specific, global BTC price is largely unaffected; the loser is the local exchange ecosystem and local traders, while activity simply reroutes (e.g. Nigerian P2P volume surged after the 2024 crackdown).",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "local-exchange volumes",
+        "local stablecoin premium",
+        "the named coin only on local venues"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "budget-speech / finance-ministry calendar",
+        "central-bank banking-access circulars (RBI-style)",
+        "local USDT/fiat premium widening or going negative",
+        "domestic exchange volume falling vs offshore",
+        "P2P volume migration"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (tax_or_access_throttle)",
+        "local_exchange_volume_change_pct",
+        "local_stablecoin_premium_pct",
+        "p2p_volume_change_pct",
+        "btc_global_return_during_event (expected ~0)",
+        "tax_rate_or_tds_bps",
+        "days_since_policy_effective_date"
+      ],
+      "typical_lag": "local volume reaction immediate-to-days; structural volume decline plays out over weeks once tax/access is effective",
+      "typical_duration": "persistent — local volume often does not recover (structural, not a dip)",
+      "typical_magnitude_pct": "local exchange volume -70% to -82% (India TDS); local price gap ~-13-17% intraday on announcement; global BTC ~0%",
+      "recurrence": "Recurring policy-driven events in emerging markets (India 2018/2021/2022, Nigeria 2021/2024); each is largely contained to its jurisdiction",
+      "historical_instances": [
+        {
+          "date": "2021-11-23",
+          "trigger": "Indian government lists 'The Cryptocurrency and Regulation of Official Digital Currency Bill, 2021' to ban private cryptocurrencies",
+          "description": "Local-amplified shock. On Indian venues like WazirX, BTC dumped ~15-17% intraday (some prints showed ~-14.8% in two hours); DOGE and SHIB fell >15%. The move was sharply amplified on Indian platforms; global venues also dipped that day (a broad sell-off was underway) but far less than Indian prints, illustrating the jurisdiction-amplified mechanism rather than a clean global-flat decoupling.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-15% to -17%",
+              "window": "intraday (Indian venues)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "DOGE",
+              "pct_change": "-15%",
+              "window": "hours (Indian venues)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-5%",
+              "window": "24h (global venues, smaller)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "DOGE",
+            "SHIB"
+          ],
+          "affected_sectors": [
+            "local-india-exchanges"
+          ],
+          "volume_or_flow_change": "Mass sell-off concentrated on Indian exchanges; global price fell far less",
+          "confidence": "medium",
+          "sources": [
+            "https://www.ndtv.com/india-news/crypto-prices-crash-after-centre-says-will-bring-bill-to-prohibit-private-cryptocurrencies-2622263",
+            "https://cointelegraph.com/news/crypto-prices-in-india-tumble-after-crypto-bill-announced"
+          ]
+        },
+        {
+          "date": "2022-07-01",
+          "trigger": "India's 1% TDS on crypto transfers takes effect (announced Feb 1 2022 budget alongside 30% gains tax)",
+          "description": "The throttle worked exactly as designed: Indian exchange volumes collapsed ~70% across the board within days, WazirX volume fell ~82% (from $14.53M on June 30 to $3.65M on July 4), ZebPay ~76%, CoinDCX ~70%. A structural, persistent liquidity drain rather than a price dip — global BTC was unaffected.",
+          "price_impacts": [
+            {
+              "asset": "the named coin",
+              "pct_change": "0%",
+              "window": "global price (no effect)",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [],
+          "affected_sectors": [
+            "local-india-exchanges"
+          ],
+          "volume_or_flow_change": "WazirX volume -82%, ZebPay -76%, CoinDCX -70% within first week of TDS; ~83% of surveyed traders said they reduced trading frequency",
+          "confidence": "high",
+          "sources": [
+            "https://bitcoinist.com/crypto-volume-indian-exchanges-drops-70-1-tds-rule/",
+            "https://cointelegraph.com/news/indian-crypto-trading-volumes-slump-following-hefty-taxes",
+            "https://inc42.com/buzz/1-tds-provision-brings-down-over-70-trading-volume-of-crypto-exchanges/"
+          ]
+        },
+        {
+          "date": "2024-02-21",
+          "date_range": "2024-02 to 2024-05",
+          "trigger": "Nigeria blocks access to crypto exchange websites (Binance, Coinbase, etc.) and detains two Binance executives, blaming crypto for naira depreciation",
+          "description": "Access-throttle variant. Binance removed NGN trading pairs and converted NGN balances to USDT, disrupting the on-platform naira/USDT market. Rather than killing volume, activity migrated to P2P channels (reports cited large surges in Africa P2P usage). Demonstrates the 'activity reroutes, it doesn't disappear' property of throttles. The +2,228% / +387% figures are single-source reports and not independently verified.",
+          "price_impacts": [
+            {
+              "asset": "the named coin",
+              "pct_change": "0%",
+              "window": "global price (no measurable effect)",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [],
+          "affected_sectors": [
+            "local-nigeria-exchanges",
+            "p2p-markets"
+          ],
+          "volume_or_flow_change": "Binance removed NGN pairs; Africa P2P usage reportedly surged sharply as activity migrated off centralized NGN markets (single-source figures)",
+          "confidence": "medium",
+          "sources": [
+            "https://african.business/2024/05/technology-information/nigeria-targets-binance-in-crypto-clampdown",
+            "https://www.voanews.com/a/nigeria-s-cryptocurrency-crackdown-will-have-consequences-experts-say/7523302.html"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deregulation-reversal",
+      "name": "Deregulation / Crackdown Reversal (the inverse, 2024-2026)",
+      "mechanism": "The mirror image of the crackdown archetype: when a previously-imposed ban, sanction, or lawsuit is lifted or dropped, the overhang that suppressed a token clears and price re-rates upward. The mechanism is the removal of forced sellers and the return of access — US exchanges can relist, the litigation discount unwinds, and sidelined capital re-enters. On the other side are shorts and pessimists who had priced in permanent regulatory damage. This pattern became dominant in 2025-2026 as US policy shifted pro-crypto (SEC dropping Coinbase/Ripple actions, Treasury lifting Tornado Cash sanctions), inverting the category's historical bearish bias.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the previously-targeted coin",
+        "exchange tokens",
+        "privacy tokens",
+        "broad-market sentiment"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "court rulings against the regulator (e.g. Fifth Circuit Tornado Cash ruling)",
+        "change in administration / SEC chair (enforcement-cadence regime change)",
+        "exchange relisting announcements",
+        "settlement / dismissal headlines",
+        "litigation-discount narrowing in token's price vs peers"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (deregulation_reversal)",
+        "lawsuit_dropped_or_settled_flag",
+        "sanctions_lifted_flag",
+        "relisting_announced_flag",
+        "token_24h_return",
+        "token_30d_return",
+        "prior_litigation_discount_pct",
+        "policy_regime_dummy (pro_vs_anti_crypto)"
+      ],
+      "typical_lag": "immediate on the named token; broader regime re-rating over weeks-months",
+      "typical_duration": "can be durable (regime change) rather than a transient pop",
+      "typical_magnitude_pct": "named token +40% to +100%+ on full relief (e.g. TORN ~+60% on the day); broad sentiment tailwind",
+      "recurrence": "Episodic, tied to legal milestones and political regime change; clustered 2024-2026",
+      "historical_instances": [
+        {
+          "date": "2025-03-21",
+          "trigger": "US Treasury OFAC lifts sanctions on Tornado Cash after Nov 2024 Fifth Circuit ruling that immutable smart contracts are not sanctionable 'property'",
+          "description": "Clear reversal-as-bullish-catalyst. TORN rose ~60% (from roughly $10.20 to ~$16.30 intraday) as the sanctions overhang that had crushed the privacy-mixer token cleared. (Criminal charges against the developers remained pending, which capped the upside.) The earlier catalog figure of +88% / 'doubled from $8 to $15' was overstated.",
+          "price_impacts": [
+            {
+              "asset": "TORN",
+              "pct_change": "+60%",
+              "window": "post-announcement intraday",
+              "direction": "up",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "TORN"
+          ],
+          "affected_sectors": [
+            "privacy-tokens"
+          ],
+          "volume_or_flow_change": "TORN trading activity and protocol usage rebounded after delisting reversal",
+          "confidence": "medium",
+          "sources": [
+            "https://www.venable.com/insights/publications/2025/04/a-legal-whirlwind-settles-treasury-lifts-sanctions",
+            "https://home.treasury.gov/news/press-releases/sb0057",
+            "https://caldwelllaw.com/news/tornado-cash-sanctions-lifted-privacy-crypto/"
+          ]
+        },
+        {
+          "date": "2025-02-21",
+          "trigger": "SEC agrees in principle to dismiss its enforcement lawsuit against Coinbase under the new (Trump-era, post-Gensler) leadership; formal stipulation followed Feb 27 2025",
+          "description": "Removal of the June-2023 enforcement overhang on the largest US exchange. Marked the regime inversion: the same agency that drove the 2023 crackdown began unwinding it, removing the litigation discount on COIN and on tokens previously named as securities (SOL, ADA, MATIC), which could be relisted on US venues without the security-status cloud. The +5% COIN move is an unverified estimate.",
+          "price_impacts": [
+            {
+              "asset": "COIN",
+              "pct_change": "+5%",
+              "window": "post-news estimate",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "SOL",
+            "ADA",
+            "MATIC"
+          ],
+          "affected_sectors": [
+            "crypto-equities",
+            "exchange-tokens",
+            "alt-L1s"
+          ],
+          "volume_or_flow_change": "Removed US-listing/securities overhang on previously-named tokens",
+          "confidence": "medium",
+          "sources": [
+            "https://fortune.com/crypto/2025/02/21/coinbase-sec-brian-armstrong-lawsuit-dismissed-donald-trump/",
+            "https://www.sec.gov/newsroom/press-releases/2025-47"
+          ]
+        }
+      ]
+    }
+  ]
+}

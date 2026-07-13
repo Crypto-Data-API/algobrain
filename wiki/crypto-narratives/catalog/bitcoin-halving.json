@@ -1,0 +1,478 @@
+{
+  "category_id": "bitcoin-halving",
+  "category_name": "Bitcoin Halving Cycle",
+  "summary": "Every ~4 years (every 210,000 blocks) Bitcoin's mining reward is cut in half, halving the rate of new BTC supply hitting the market. Historically this has anchored a repeatable ~4-year cycle: a pre-halving rally into the event, a few months of post-halving chop/lag, then a 12-18 month bull run that tops out, followed by a deep bear market. The catch is diminishing returns — the halving-day-to-peak multiple has fallen from roughly 90x+ (2012) to ~30x (2016) to ~8x (2020) to only ~2x (2024) as Bitcoin's market cap has grown and ETF flows have changed price formation. CYCLE-BREAKER (4th halving): 2025 became the first-ever RED post-halving calendar year - BTC closed ~-6% (~$87,700, BELOW its January open), unprecedented vs the hugely-green 2012/2016/2020 post-halving years - with only ~+31% at the 1-year mark vs ~+300%/+567% in prior cycles. The supply-shock narrative is structurally fading: ETF flows and macro (S&P/Nasdaq) correlation now dominate the price signal far more than miner selling. The 4-year-cycle playbook may be over; the next halving (~2028) is already being floated as a 'buy the dip' narrative for 2026-27.",
+  "directional_bias": "bullish",
+  "archetypes": [
+    {
+      "id": "post-halving-bull-cycle",
+      "name": "Post-Halving Bull Cycle (the 12-18 month parabolic run)",
+      "mechanism": "The halving cuts new BTC issuance in half overnight (50->25->12.5->6.25->3.125 BTC/block). Daily new supply that miners must sell to cover costs drops sharply, while demand is steady or rising. With miners' structural sell-pressure halved, a smaller marginal buy-side flow is enough to clear the market at higher prices. The move is reflexive: rising price draws media attention and retail/institutional FOMO, which lifts price further, which draws more attention. Who is on the other side and loses: short sellers and skeptics who fade the rally early, and miners/early holders who sell into strength too soon. The top forms when the marginal buyer is exhausted and leverage is maxed; late entrants are left holding the bag into the subsequent bear market.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "entire crypto market"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "backtest_features": [
+        "days_since_last_halving",
+        "block_reward_btc",
+        "daily_new_supply_btc",
+        "miner_sell_pressure_usd_per_day",
+        "issuance_pct_of_circulating_supply_annualized",
+        "stock_to_flow_ratio",
+        "months_to_prior_cycle_top_analog",
+        "halving_to_date_return_pct"
+      ],
+      "typical_lag": "weeks to months — the parabolic phase typically begins 3-6 months after the halving",
+      "typical_duration": "12-18 months from halving to cycle top",
+      "typical_magnitude_pct": "halving-day-to-peak: ~+9000% (2012), ~+2900% (2016), ~+700% (2020), ~+95% (2024) — diminishing each cycle",
+      "recurrence": "once per ~4-year halving cycle; 4 occurrences 2012-2024",
+      "leading_signals": [
+        "halving event occurs (block height multiple of 210,000)",
+        "stock-to-flow ratio doubles",
+        "miner reserves declining",
+        "BTC reclaims prior cycle ATH",
+        "rising spot ETF net inflows (2024+ cycle)",
+        "funding rates turning persistently positive"
+      ],
+      "historical_instances": [
+        {
+          "date": "2012-11-28",
+          "date_range": "2012-11-28 to 2013-11-30",
+          "trigger": "First Bitcoin halving at block 210,000; block reward cut 50 -> 25 BTC",
+          "description": "Halving-day close ~$12.38. After a brief chop, BTC entered its first major parabolic run, reaching ~$1,100-$1,160 by late November 2013 (~12 months later), roughly a 90x+ gain.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+9000%",
+              "window": "halving to cycle top (~12mo)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "LTC"
+          ],
+          "affected_sectors": [
+            "broad crypto (early market)"
+          ],
+          "volume_or_flow_change": "New issuance halved from ~7,200 to ~3,600 BTC/day; trading volume expanded dramatically into the 2013 top",
+          "sources": [
+            "https://bitbo.io/calendar/2012-halving/",
+            "https://www.kraken.com/learn/bitcoin-halving-history",
+            "https://www.coingecko.com/research/publications/bitcoin-halving-price-history"
+          ],
+          "confidence": "high"
+        },
+        {
+          "date": "2016-07-09",
+          "date_range": "2016-07-09 to 2017-12-17",
+          "trigger": "Second Bitcoin halving at block 420,000; block reward cut 25 -> 12.5 BTC",
+          "description": "Halving-day price ~$640-$670. Sideways/choppy for months, then a strong run; roughly +290% to ~$2,500-$2,560 by the one-year anniversary (2017-07-09), peaking near $19,700-$19,800 on 2017-12-17 (~17 months), roughly a 30x gain from the halving day.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+290%",
+              "window": "12mo (to 2017-07-09)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~+2900%",
+              "window": "halving to cycle top (~17mo)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "XRP",
+            "LTC"
+          ],
+          "affected_sectors": [
+            "large-cap alts",
+            "ICO tokens (2017 alt season)"
+          ],
+          "volume_or_flow_change": "New issuance halved from ~3,600 to ~1,800 BTC/day; massive 2017 ICO-era volume expansion",
+          "sources": [
+            "https://bitbo.io/calendar/2016-halving/",
+            "https://www.kraken.com/learn/bitcoin-halving-history",
+            "https://www.coingecko.com/research/publications/bitcoin-halving-price-history"
+          ],
+          "confidence": "high"
+        },
+        {
+          "date": "2020-05-11",
+          "date_range": "2020-05-11 to 2021-11-10",
+          "trigger": "Third Bitcoin halving at block 630,000; block reward cut 12.5 -> 6.25 BTC",
+          "description": "Halving-day price ~$8,600 (one source: $8,601.80). Range-bound to upward initially, then a strong run peaking at ~$68,800 (often rounded to ~$69,000) on 2021-11-10 (~18 months), roughly a 7.5-8x gain. Double-top with an interim high near $64,800 in April 2021.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+700%",
+              "window": "halving to cycle top (~18mo)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "DOGE",
+            "BNB"
+          ],
+          "affected_sectors": [
+            "large-cap alts",
+            "DeFi tokens",
+            "meme coins",
+            "NFTs"
+          ],
+          "volume_or_flow_change": "New issuance halved from ~1,800 to ~900 BTC/day; 2021 DeFi/NFT volume boom and institutional adoption (MicroStrategy, Tesla)",
+          "sources": [
+            "https://bitbo.io/calendar/2020-halving/",
+            "https://www.kraken.com/learn/bitcoin-halving-history",
+            "https://bitcoinsuisse.com/learn/bitcoin-halving-market-cycle"
+          ],
+          "confidence": "high"
+        },
+        {
+          "date": "2024-04-20",
+          "date_range": "2024-04-20 to 2025-10-06",
+          "trigger": "Fourth Bitcoin halving at block 840,000; block reward cut 6.25 -> 3.125 BTC",
+          "description": "Halving-day price ~$64,000-$65,000 (~$64,994). Notably, BTC had already made a new ATH (~$73,750 on 2024-03-13) BEFORE the halving — a first, driven by spot-ETF demand. The post-halving run was the weakest on record: BTC topped at ~$126,223 on 2025-10-06, roughly a 2x gain from the halving day (vs 8x prior cycle), confirming diminishing returns. CYCLE-BREAKER: the halving fired Apr 19-20 2024 with BTC ~$63,762; the cycle then delivered only ~+31% at the 1-year mark (vs ~+300%/+567% in prior cycles) and - decisively - 2025 became the FIRST-EVER red post-halving calendar year (BTC ~-6% to ~$87,700, below its Jan open). BTC's correlation with the S&P 500/Nasdaq rose sharply (it traded as a macro/rates asset), and ETF flows displaced miner-selling as the dominant supply-side signal - structurally weakening the halving supply-shock thesis and the 4-year cycle itself.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+95%",
+              "window": "halving to cycle top (~18mo, to 2025-10-06)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "large-cap alts (muted alt season)",
+            "Bitcoin spot ETFs"
+          ],
+          "volume_or_flow_change": "New issuance halved from ~900 to ~450 BTC/day; US spot Bitcoin ETFs (launched Jan 2024) absorbed large sell pressure, changing price formation",
+          "sources": [
+            "https://bitbo.io/calendar/2024-halving/",
+            "https://www.kraken.com/learn/bitcoin-halving-history",
+            "https://www.coingecko.com/en/coins/bitcoin/bitcoin-halving",
+            "https://www.calebandbrown.com/blog/is-bitcoins-four-year-cycle-broken/",
+            "https://cryptopotato.com/bitcoin-btc-breaks-history-first-post-halving-year-ends-in-the-red/",
+            "https://www.ccn.com/news/crypto/bitcoin-yearly-return-post-halving-negative-first-time-4-year-cycle/"
+          ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "pre-halving-rally-and-buy-the-rumor",
+      "name": "Pre-Halving Rally / Buy-the-Rumor",
+      "mechanism": "In the 6-12 months ahead of a halving, the upcoming supply cut is a well-telegraphed, calendar-certain event. Traders and investors front-run the expected post-halving scarcity narrative, accumulating into the event ('buy the rumor'). Demand front-loads while issuance is still at the old, higher rate, lifting price into the halving. Who is on the other side: late sellers and those who wait for the halving day itself to buy, who often find the easy gains already priced. In the 2024 cycle this front-running was so strong (amplified by ETF launch) that BTC set a new ATH BEFORE the halving for the first time ever — a structural shift in the pattern.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging"
+      ],
+      "backtest_features": [
+        "days_to_next_halving",
+        "halving_countdown_block_distance",
+        "btc_return_trailing_6m_into_halving",
+        "search_trend_halving_zscore",
+        "etf_net_inflow_zscore",
+        "realized_cap_growth_rate"
+      ],
+      "typical_lag": "builds over 6-12 months before the halving date",
+      "typical_duration": "6-12 months pre-event",
+      "typical_magnitude_pct": "roughly +100% to +180% in the ~12 months leading into the halving",
+      "recurrence": "once per ~4-year cycle, ahead of each halving",
+      "leading_signals": [
+        "halving date within 12 months",
+        "rising Google search interest in 'bitcoin halving'",
+        "accelerating spot ETF inflows (2024+)",
+        "BTC trending above 200-day moving average",
+        "improving funding/open-interest"
+      ],
+      "historical_instances": [
+        {
+          "date": "2019-07",
+          "date_range": "2019-07 to 2020-05-11",
+          "trigger": "Accumulation ahead of the May 2020 halving (buy-the-rumor)",
+          "description": "Pre-halving rally ran roughly 10 months; BTC rose from ~$4,000 (mid-2019) toward ~$8,600 by the halving date despite the March 2020 COVID crash to ~$5,000 mid-window. Magnitude is an approximation from monthly price context.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+115%",
+              "window": "~10mo into halving",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap alts"
+          ],
+          "volume_or_flow_change": "Rising accumulation into the event; interrupted by COVID liquidity shock",
+          "sources": [
+            "https://www.kraken.com/learn/bitcoin-halving-history",
+            "https://www.vaneck.com/us/en/blogs/digital-assets/matthew-sigel-bitcoin-halving-explained-history-impact-and-2024-predictions/"
+          ],
+          "confidence": "low"
+        },
+        {
+          "date": "2023-04",
+          "date_range": "2023-04 to 2024-04-20",
+          "trigger": "Accumulation ahead of the April 2024 halving, supercharged by spot ETF anticipation/launch",
+          "description": "Pre-halving rally ran roughly 12 months; BTC rose from ~$28,000-$30,000 (April 2023) to ~$73,750 ATH on 2024-03-13 — the first time BTC made a new all-time high BEFORE a halving, driven by US spot Bitcoin ETF demand (approved Jan 2024). The exact percentage depends on the chosen April 2023 base (~+150% to +160% from ~$29k).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+150% to +160%",
+              "window": "~12mo into halving (to ~$73.75k ATH)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "Bitcoin spot ETFs",
+            "large-cap alts"
+          ],
+          "volume_or_flow_change": "US spot Bitcoin ETFs launched Jan 2024, pulling in billions of net inflows pre-halving",
+          "sources": [
+            "https://www.calebandbrown.com/blog/is-bitcoins-four-year-cycle-broken/",
+            "https://www.fidelitydigitalassets.com/research-and-insights/2024-bitcoin-halving-one-year-later",
+            "https://bitbo.io/calendar/2024-halving/"
+          ],
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "id": "post-cycle-bear-market",
+      "name": "Post-Cycle Bear Market (the deflationary back half of the 4-year cycle)",
+      "mechanism": "After the post-halving bull tops out (~12-18 months post-halving), the reflexive process runs in reverse. Late buyers who entered on leverage near the top are underwater; as price falls, forced liquidations and capitulation cascade, and the same FOMO that drove the run becomes fear. Long-term holders who accumulated cheap distribute into the prior strength, becoming the supply overhang. The bear market typically erases 70-85% of the peak before the next pre-halving rally rebuilds a base. Who loses: top-buyers and over-levered longs; who wins: patient accumulators buying the capitulation low. This archetype is the bearish mirror image that completes the ~4-year cycle.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "entire crypto market"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "backtest_features": [
+        "months_since_cycle_top",
+        "drawdown_from_ath_pct",
+        "btc_below_200d_ma_flag",
+        "long_term_holder_supply_distribution",
+        "funding_rate_negative_streak",
+        "realized_loss_zscore"
+      ],
+      "typical_lag": "begins immediately after the cycle top (~18mo post-halving)",
+      "typical_duration": "~12 months of decline into the cycle low, roughly the second half of the 4-year cycle",
+      "typical_magnitude_pct": "-70% to -85% peak-to-trough",
+      "recurrence": "once per ~4-year cycle, following each bull-market top",
+      "leading_signals": [
+        "BTC loses 200-day moving average after a parabolic run",
+        "funding rates flip persistently negative",
+        "exchange net-inflows spike (holders moving to sell)",
+        "failure to make new highs for >8 weeks after a blowoff top",
+        "long-term-holder distribution rising"
+      ],
+      "historical_instances": [
+        {
+          "date": "2013-12",
+          "date_range": "2013-12 to 2015-01",
+          "trigger": "Top of the 2012-halving cycle (~$1,160) gives way to bear market, amplified by the Feb 2014 Mt. Gox collapse",
+          "description": "BTC fell from ~$1,160 (Dec 2013) to ~$170-$200 by early 2015, roughly -85% peak-to-trough.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-85%",
+              "window": "peak-to-trough (~13mo)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "LTC"
+          ],
+          "affected_sectors": [
+            "broad crypto"
+          ],
+          "volume_or_flow_change": "Mt. Gox insolvency (~850k BTC) created a major supply/sentiment shock",
+          "sources": [
+            "https://www.coingecko.com/research/publications/bitcoin-halving-price-history",
+            "https://bitcoinsuisse.com/learn/bitcoin-halving-market-cycle"
+          ],
+          "confidence": "high"
+        },
+        {
+          "date": "2017-12",
+          "date_range": "2017-12-17 to 2018-12",
+          "trigger": "Top of the 2016-halving cycle (~$19,700-$19,800) gives way to the 2018 'crypto winter'",
+          "description": "BTC fell from ~$19,783 (Dec 2017) to ~$3,100-$3,200 (low ~$3,122 on 2018-12-15), roughly -84% peak-to-trough, as the ICO bubble deflated.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-84%",
+              "window": "peak-to-trough (~12mo)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "XRP"
+          ],
+          "affected_sectors": [
+            "ICO tokens",
+            "large-cap alts"
+          ],
+          "volume_or_flow_change": "Collapse of 2017 ICO-era speculative volume; many alts fell -90% to -99%",
+          "sources": [
+            "https://www.coingecko.com/research/publications/bitcoin-halving-price-history",
+            "https://www.kraken.com/learn/bitcoin-halving-history"
+          ],
+          "confidence": "high"
+        },
+        {
+          "date": "2021-11",
+          "date_range": "2021-11-10 to 2022-11",
+          "trigger": "Top of the 2020-halving cycle (~$69,000) gives way to the 2022 bear, amplified by Terra/LUNA, Celsius, 3AC, and FTX collapses",
+          "description": "BTC fell from ~$68,800 (Nov 2021) to ~$15,500-$16,000 (low ~$15,480 on 2022-11-21), roughly -77% peak-to-trough, driven by macro tightening and a chain of crypto-credit failures.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-77%",
+              "window": "peak-to-trough (~12mo)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "LUNA",
+            "FTT"
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "CeFi lenders",
+            "large-cap alts"
+          ],
+          "volume_or_flow_change": "Cascading forced liquidations: Terra/LUNA (May 2022), Celsius/3AC (Jun 2022), FTX (Nov 2022)",
+          "sources": [
+            "https://bitcoinsuisse.com/learn/bitcoin-halving-market-cycle",
+            "https://www.kraken.com/learn/bitcoin-halving-history"
+          ],
+          "confidence": "high"
+        },
+        {
+          "date": "2025-10",
+          "date_range": "2025-10-06 to 2026-06-04",
+          "trigger": "Top of the 2024-halving cycle (~$126,223 on 2025-10-06) gives way to a sharp drawdown",
+          "description": "After topping at ~$126,223 on 2025-10-06, BTC fell hard. CoinGecko measurement over 2025-06-04 to 2026-06-04 shows a max drawdown of -49.6% within the window, with price falling to a ~$62,854 low and ending ~$64,022 on 2026-06-04 (the period high in this window was $124,773 on the way up). The full peak-to-trough off the $126k ATH is roughly -50%. THE FULL 2025-26 BEAR EPISODE: total crypto market cap fell ~$4.4T (Oct 6 2025) to ~$2.4T (Q1 2026, ~-$2T); ETH -61.9% peak-to-trough ($4,926->$1,820), SOL ~-71%. The macro-trigger stack: the Oct-10-2025 record ~$19B liquidation cascade (Trump 100% China tariff) kicked it off; then Kevin Warsh's hawkish Fed-Chair nomination (Jan 30 2026, BTC -14% in 10d), broad tariff threats, $1B+ of BTC-ETF outflows, USDT-depeg FEARS (Feb 2026, no actual depeg), a Feb-5 Nasdaq-correlated drop, and MSTR's first BTC sale since 2022 (Jun 2026). A textbook diminishing-returns 4th-cycle: the shallowest post-halving top and a macro-driven, ETF-era bear correlated with risk assets rather than a pure crypto-credit blowup.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-49.6%",
+              "window": "max drawdown within 2025-06-04 to 2026-06-04",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-39.3%",
+              "window": "2025-06-04 to 2026-06-04",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~-50%",
+              "window": "peak (2025-10-06) to early 2026",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "total-market-cap",
+              "pct_change": "~-45% (~$4.4T -> ~$2.4T, ~-$2T)",
+              "window": "Oct 2025 peak to Q1 2026",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-61.9%",
+              "window": "Aug 24 2025 ($4,926) to Feb 11 2026 ($1,820) peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "~-71%",
+              "window": "2025 peak to 2026 trough (see l1-l2-rotation)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "large-cap alts",
+            "Bitcoin spot ETFs"
+          ],
+          "volume_or_flow_change": "ETF outflows and deleveraging into the drawdown; bear unfolding as expected ~18-24 months post-halving",
+          "sources": [
+            "https://www.reuters.com/technology/bitcoin-hits-record-high-2025-10-06/",
+            "https://stealthex.io/blog/bitcoin-price-history-2009-2026/",
+            "https://www.vaneck.com/us/en/blogs/digital-assets/matthew-sigel-what-triggered-bitcoins-major-selloff-in-february-2026/",
+            "https://cryptobriefing.com/bitcoin-falls-kevin-warsh-fed-chair-rate-hike/"
+          ],
+          "confidence": "medium"
+        }
+      ]
+    }
+  ]
+}

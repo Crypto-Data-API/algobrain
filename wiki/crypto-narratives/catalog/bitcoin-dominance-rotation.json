@@ -1,0 +1,147 @@
+{
+  "category_id": "bitcoin-dominance-rotation",
+  "category_name": "Bitcoin Dominance & Alt-Season Rotation",
+  "summary": "Bitcoin dominance (BTC.D = BTC market cap / total crypto market cap) is the master regime gauge for capital rotation *within* crypto. When dominance rises, capital concentrates in Bitcoin — typically early-bull accumulation, ETF-driven legs, or risk-off flight-to-quality. When dominance falls, capital rotates down the risk curve into altcoins ('alt-season'), historically a late-cycle, risk-on, euphoria signal. The Altcoin Season Index (share of top-50 alts beating BTC over 90 days) operationalizes it: >75 = alt-season, <25 = Bitcoin season. A backtester should treat dominance as a regime filter, not a directional bet on total market cap.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "btc-dominance-regime",
+      "name": "BTC dominance regime (risk-on/off rotation within crypto)",
+      "mechanism": "Crypto capital rotates along a risk curve anchored by Bitcoin. In early-bull and risk-off phases, money concentrates in BTC (the 'reserve asset' of crypto) and dominance rises; the 2024-2025 spot-ETF era amplified this because ETF flows are overwhelmingly BTC-only, structurally lifting dominance. In late-bull euphoria, having made multiples on BTC, capital chases higher-beta alts and dominance falls. The people 'on the other side' of a dominance call are traders fighting the prevailing regime — buying alts in a BTC-dominant tape (bleed vs BTC) or hiding in BTC during a genuine alt-season (underperformance). The signal is the *regime*, not the level of any single coin.",
+      "directional_bias": "mixed",
+      "affected_scope": ["BTC.D", "ETH/BTC ratio", "large-cap alts", "total-market-cap-ex-BTC (TOTAL2)"],
+      "analog_mechanisms": ["sector-rotation", "sentiment-shock", "mean-reversion"],
+      "typical_magnitude_pct": "BTC.D swings of 15-35 percentage points across a full cycle; alt baskets can out/under-perform BTC by 50-200%+ over a rotation",
+      "typical_lag": "regime-scale (weeks-to-months); not an intraday signal",
+      "typical_duration": "months per regime leg",
+      "recurrence": "every cycle: BTC-led accumulation -> mid-cycle ETH/large-cap rotation -> late-cycle alt/meme blow-off -> risk-off flight back to BTC",
+      "leading_signals": [
+        "BTC.D level and 30-day slope",
+        "Altcoin Season Index (>75 alt-season / <25 BTC season)",
+        "ETH/BTC ratio and its 50/200-day MA crosses",
+        "TOTAL2 / TOTAL ratio (alt share of market cap)",
+        "BTC spot-ETF net flows vs alt-ETF/alt-fund flows",
+        "days since last confirmed alt-season"
+      ],
+      "backtest_features": [
+        "btc_dominance_level",
+        "btc_dominance_30d_change_pp",
+        "altcoin_season_index",
+        "eth_btc_ratio",
+        "eth_btc_ratio_50dma_cross",
+        "total2_total_ratio",
+        "days_since_last_altseason",
+        "alt_basket_beta_to_btc_30d"
+      ],
+      "historical_instances": [
+        {
+          "date": "2021-05-10",
+          "date_range": "2021-01 to 2021-05",
+          "trigger": "2021 alt-season: BTC dominance collapses as DOGE/BNB/altcoins blow off.",
+          "description": "Through early 2021 BTC dominance fell from ~73% (January) to ~40% (mid-May) as capital rotated into BNB, DOGE, and the broad altcoin complex — a textbook late-cycle alt-season. The dominance bottom and alt euphoria immediately preceded the May 19 2021 leverage-driven crash.",
+          "price_impacts": [
+            {"asset": "BTC.D", "pct_change": "~73% to ~40% (-33pp)", "window": "Jan-May 2021", "direction": "down", "measured_by": "web"}
+          ],
+          "affected_coins": ["DOGE", "BNB", "ETH", "altcoins"],
+          "affected_sectors": ["altcoins", "memecoins"],
+          "volume_or_flow_change": "Alt volumes overtook BTC; alt-season euphoria peaked just before the May-19 crash.",
+          "confidence": "medium",
+          "sources": ["https://www.coingecko.com/en/charts", "https://coinmarketcap.com/charts/bitcoin-dominance/"]
+        },
+        {
+          "date": "2025-07-14",
+          "date_range": "2024 to 2025-10",
+          "trigger": "ETF-era BTC-led leg: BTC sets records ($122,838 on Jul 14 2025; $126,210 ATH Oct 6 2025) while dominance stays elevated.",
+          "description": "The 2024-2025 cycle was unusually BTC-dominant: spot-ETF flows (BTC-only at first) concentrated demand in Bitcoin, which printed $122,838 on 2025-07-14 and an all-time high of $126,210 on 2025-10-06 while altcoins broadly lagged — the opposite of a classic alt-season. Dominance held in the high-50s/low-60s%, frustrating alt-season callers.",
+          "price_impacts": [
+            {"asset": "BTC", "pct_change": "ATH $122,838 (Jul 14 2025); $126,210 (Oct 6 2025)", "window": "2024-2025 cycle", "direction": "up", "measured_by": "coingecko"},
+            {"asset": "BTC.D", "pct_change": "elevated (high-50s to low-60s%); alts lagged", "window": "2024-2025", "direction": "up", "measured_by": "web"}
+          ],
+          "affected_coins": ["BTC", "ETH", "altcoins"],
+          "affected_sectors": ["large-cap", "store-of-value"],
+          "volume_or_flow_change": "Spot-BTC-ETF inflows concentrated demand in BTC; alt share (TOTAL2) suppressed.",
+          "confidence": "high",
+          "sources": [
+            "https://www.mexc.com/learn/article/what-is-bitcoin-all-time-high-btc-record-prices-explained/1",
+            "https://carboncredits.com/bitcoin-breaks-records-passing-126k-the-bull-run-thats-redefining-digital-gold-and-climate-debate/"
+          ]
+        },
+        {
+          "date": "2026-06-03",
+          "date_range": "early June 2026",
+          "trigger": "Bitcoin Season persists: BTC.D ~58-58.7%, Altcoin Season Index ~49, ~249 days since the last alt-season.",
+          "description": "As of early June 2026 BTC dominance is ~58-58.7% with the Altcoin Season Index ~49 (below the 75 alt-season threshold) and ~249 days since the last confirmed alt-season — firmly 'Bitcoin Season.' A widely-circulated claim of a 'June 2026 alt-season rally' (with BTC at a $122,800 ATH and a $4.13T total market cap) is INCORRECT: those figures are a stale 2025 snapshot. In reality BTC was ~$63,500 and falling (-18% over the prior week) and total market cap was ~$2.35-2.5T — a risk-off drawdown, not an alt-season.",
+          "price_impacts": [
+            {"asset": "BTC.D", "pct_change": "~58.7% (Bitcoin Season; ASI ~49)", "window": "early June 2026", "direction": "flat", "measured_by": "web"},
+            {"asset": "BTC", "pct_change": "-13.6%", "window": "Jun 1-4 2026 ($73,570 to $63,563; low $62,115)", "direction": "down", "measured_by": "coingecko"}
+          ],
+          "affected_coins": ["BTC", "altcoins"],
+          "affected_sectors": ["large-cap", "altcoins"],
+          "volume_or_flow_change": "Risk-off drawdown; no alt-season rotation despite a minor 59.9%->58.7% dominance dip.",
+          "confidence": "high",
+          "sources": [
+            "https://news.bitcoin.com/altcoin-season-index-at-49-traders-need-bitcoin-dominance-below-55-to-trigger-rotation/",
+            "https://www.tv-hub.org/guide/bitcoin-dominance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "altseason-exhaustion-top-signal",
+      "name": "Alt-season extreme as a late-cycle top signal",
+      "mechanism": "An alt-season is the last leg of the crypto risk curve: once BTC and ETH have run, the most speculative capital chases low-quality alts and memecoins. Historically the dominance *bottom* (alts most euphoric) coincides with cycle tops, because it marks maximum risk appetite and leverage with no higher-beta buyer left. The reversal — a sharp dominance spike as alts crater faster than BTC — is the risk-off 'flight to (crypto) quality' that confirms the regime has flipped. Traders fading the euphoria win; late alt-chasers are left holding the highest-beta bag into the drawdown.",
+      "directional_bias": "bearish",
+      "affected_scope": ["altcoins", "memecoins", "total-market-cap-ex-BTC", "BTC.D"],
+      "analog_mechanisms": ["sentiment-shock", "mean-reversion", "sector-rotation"],
+      "typical_magnitude_pct": "post-peak alt baskets routinely draw down 70-90%+; BTC.D rebounds 15-30pp off the bottom",
+      "typical_lag": "the top signal is coincident-to-leading by days/weeks; confirmation on the dominance reversal",
+      "typical_duration": "the unwind runs the length of the ensuing bear (months-to-a-year)",
+      "recurrence": "once per cycle at the euphoria peak",
+      "leading_signals": [
+        "Altcoin Season Index spiking >75",
+        "BTC.D making a multi-month low",
+        "memecoin/low-cap volume share at extremes (see [[memecoin-mania]])",
+        "ETH/BTC and alt/BTC ratios parabolic then rolling over",
+        "funding/leverage extremes across alts"
+      ],
+      "backtest_features": [
+        "altcoin_season_index_peak",
+        "btc_dominance_local_min",
+        "memecoin_volume_share",
+        "alt_funding_rate_zscore",
+        "eth_btc_ratio_rate_of_change"
+      ],
+      "historical_instances": [
+        {
+          "date": "2018-01-07",
+          "date_range": "2017-12 to 2018-01",
+          "trigger": "ICO-era alt-mania drives BTC dominance to a cycle low (~33%) at the top.",
+          "description": "At the January 2018 peak, ICO/altcoin mania drove BTC dominance down to ~33% as speculative capital flooded alts — the dominance bottom marked the cycle top, and the subsequent bear wiped 80-95% off most alts.",
+          "price_impacts": [
+            {"asset": "BTC.D", "pct_change": "fell to ~33% at the top", "window": "Dec 2017-Jan 2018", "direction": "down", "measured_by": "web"}
+          ],
+          "affected_coins": ["altcoins", "ICO-tokens"],
+          "affected_sectors": ["altcoins"],
+          "volume_or_flow_change": "Alt volume share peaked; the 2018 bear followed.",
+          "confidence": "medium",
+          "sources": ["https://www.statista.com/statistics/1269669/bitcoin-dominance-historical-development/"]
+        },
+        {
+          "date": "2021-05-19",
+          "date_range": "2021-05",
+          "trigger": "2021 alt-season bottom in dominance precedes the May-19 leverage crash.",
+          "description": "The May 2021 dominance low (~40%) and peak alt euphoria immediately preceded the May-19 2021 leverage-driven crash (BTC -30%+ intraday). Classic alt-season-exhaustion -> risk-off reversal, with dominance rebounding as alts fell faster than BTC.",
+          "price_impacts": [
+            {"asset": "BTC.D", "pct_change": "bottomed ~40%, then rebounded", "window": "May 2021", "direction": "up", "measured_by": "web"},
+            {"asset": "altcoins", "pct_change": "-50% to -70%+ (faster than BTC)", "window": "May 2021 crash", "direction": "down", "measured_by": "estimate"}
+          ],
+          "affected_coins": ["altcoins", "DOGE", "ETH"],
+          "affected_sectors": ["altcoins", "memecoins"],
+          "volume_or_flow_change": "Flight to BTC quality as leverage unwound; see [[technical-signals]] and [[memecoin-mania]].",
+          "confidence": "medium",
+          "sources": ["https://coinmarketcap.com/charts/bitcoin-dominance/"]
+        }
+      ]
+    }
+  ]
+}

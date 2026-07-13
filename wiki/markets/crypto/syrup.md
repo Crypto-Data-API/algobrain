@@ -1,0 +1,152 @@
+---
+title: "Maple Finance"
+type: entity
+created: 2026-04-09
+updated: 2026-06-21
+status: excellent
+tags: [crypto, defi]
+aliases: ["SYRUP", "Maple", "syrupUSDC"]
+entity_type: protocol
+founded: 2019
+headquarters: "Decentralized"
+website: "https://maple.finance/"
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[aave]]", "[[base]]", "[[pendle]]"]
+---
+
+# Maple Finance
+
+**Maple Finance** (SYRUP) is "DeFi's institutional lender" — an on-chain asset manager whose lending engine offers institutional-quality yield, overcollateralized by digital assets, through products like syrupUSDC and syrupUSDT. With $4.6B+ AUM and over $20B in cumulative loan originations by 2026, it is one of the largest real-revenue protocols in DeFi, and SYRUP (which replaced the old MPL token in late 2024) is the canonical "institutional DeFi credit" trade.
+
+---
+
+## Market Data
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SYRUP (successor token to MPL, ~100:1 migration, late 2024) |
+| **Asset class** | [[defi\|DeFi]] lending / asset-management governance + revenue token |
+| **Market Cap Rank** | #193 |
+| **Market Cap** | $163.53M |
+| **Current Price** | $0.13719 |
+| **24h Volume** | $3.60M |
+| **24h Change** | +1.88% |
+| **7d Change** | +5.11% |
+| **All-Time High** | $0.653229 (2025-06-25) |
+| **All-Time Low** | $0.085229 (2025-04-07) |
+| **Native Chain** | [[ethereum\|Ethereum]] (also deployed on [[base\|Base]]) |
+| **Protocol AUM** | $4.6B+ — as of 2026 (Maple official); syrupUSDC + syrupUSDT crossed $2.2B in Dec 2025 |
+| **Loan originations** | $20B+ cumulative |
+| **Categories** | DeFi, Lending/Borrowing, [[real-world-assets\|RWA]], Yield, Ethereum Ecosystem, Base Ecosystem |
+| **Website** | [https://maple.finance/](https://maple.finance/) |
+
+> *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
+
+SYRUP was a relative out-performer in its cohort into 2026-06-21, up ~+5% on the week and modestly green on the day, even as the broader market sat in **extreme fear (Fear & Greed = 23)** within an **Established Bear Market** regime. At ~$0.137 it trades roughly 79% below its June-2025 ATH of $0.653 but ~61% above the April-2025 ATL of $0.085 — resilience that the bull case attributes to SYRUP being one of the few alts anchored to measurable, recurring protocol revenue rather than pure narrative.
+
+---
+
+## Overview
+
+Maple is "DeFi's Institutional Lender". The Maple Finance lending engine powers institutional yield for both Maple and Syrup, providing lenders with institutional-quality yield overcollateralized by digital assets. The protocol combines the best of institutional lending and DeFi. Syrup is the permissionless-access product line built on Maple's lending engine, integrated with the broader DeFi ecosystem including Balancer, [[pendle|Pendle]], and (since 2026) [[aave|Aave]].
+
+Business model in one line: borrowers (trading firms, institutions) post collateral and pay interest; lenders deposit USDC/USDT into syrup pools; the protocol takes a spread — making SYRUP one of the few DeFi tokens backed by measurable, recurring revenue.
+
+---
+
+## 2025–2026 Developments
+
+- **AUM scale-up** — syrupUSDC and syrupUSDT deposits crossed **$2.2B AUM in December 2025**; total platform AUM reached **$4.6B+** with **$20B+ cumulative originations**; Maple exceeded its 2025 AUM target with record monthly revenue.
+- **$100M ARR target (2026)** — leadership publicly targets $100M annual recurring revenue by end-2026.
+- **Buyback proposal** — governance proposed ending SYRUP staking and allocating **25% of protocol revenue to a "Syrup Strategic Fund"** for token buybacks and liquidity — a shift to direct value accrual.
+- **Aave partnership (2026)** — strategic partnership integrating Maple's yield-bearing stablecoins into Aave, a major institutional-DeFi distribution win.
+- **Revolut listing** — SYRUP listed on Revolut, exposing it to 70M+ retail users in the UK/EU.
+- **Bitcoin yield product** — launched after resolving the dispute with Core Foundation.
+- **Builder Codes (2026)** — transition from MapleKit to permissionless "Maple Builder Codes" integrations with Aave, Fluid, Sky, Kamino, and Jupiter.
+- **Price history**: ATH $0.6532 (25 June 2025); ATL $0.0852 (7 Apr 2025). The April 2026 snapshot showed $0.2393 / $277M mcap (rank #135); by the 2026-06-21 snapshot it had retraced with the broader bear tape to **$0.13719 / $163.53M mcap (rank #193)** — a reminder that even a real-revenue token re-rates downward when sector multiples compress.
+
+---
+
+## Tokenomics & Supply
+
+As of the 2026-06-21 snapshot (CoinGecko):
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | ~1.19B SYRUP |
+| **Total Supply** | ~1.24B SYRUP |
+| **Max Supply** | None (no hard cap; emissions schedule governs issuance) |
+| **Fully Diluted Valuation** | ~$170.78M |
+| **MC / FDV Ratio** | ~0.96 — nearly fully diluted, minimal unlock overhang |
+
+The ~0.96 MC/FDV ratio is one of SYRUP's structural strengths: with circulating supply (~1.19B) close to total supply (~1.24B), there is little hidden dilution waiting to hit the market — a sharp contrast to emissions-heavy DeFi tokens where MC/FDV can sit at 0.2–0.5. The remaining gap reflects modest scheduled emissions and the governance-proposed shift toward **revenue-funded buybacks** (25% of protocol revenue to the Syrup Strategic Fund), which would convert recurring revenue into direct demand for the token.
+
+---
+
+## Trading Relevance
+
+- **Where it trades**: spot on Binance, Kraken, Upbit, Bitget, KuCoin, Crypto.com, Revolut, Uniswap v3; perps as **SYRUP-PERP on [[hyperliquid|Hyperliquid]]**.
+- **Narrative baskets**: institutional DeFi / on-chain credit (with Aave, Sky), RWA-adjacent yield, "real revenue" fundamental tokens. SYRUP is one of the few alts where AUM/revenue dashboards (Messari, vaasblock, token terminal-style metrics) give a fundamental anchor.
+- **Key catalysts**: buyback program activation (25% of revenue), ARR trajectory toward $100M, Aave integration TVL flows, BTC yield product growth.
+- **Key risks**: credit risk — a borrower default cycle (cf. Maple's 2022 Orthogonal episode under the old MPL token) is the recurring bear case; yield compression if Fed cuts compress stablecoin lending spreads; governance shift away from staking could alienate existing stakers.
+- **Pair logic**: long SYRUP vs short an emissions-heavy DeFi token is a common "real yield vs dilution" expression.
+
+### Peer Comparison
+
+| Token | Niche | Backing of yield | Approx. MC rank | MC/FDV | Differentiator |
+|---|---|---|---|---|---|
+| **Maple / SYRUP** | Institutional on-chain credit | Borrower interest (overcollateralized loans) | #193 | ~0.96 | Real AUM/revenue; institutional borrowers; Aave integration |
+| [[pendle\|Pendle (PENDLE)]] | Yield tokenization / trading | Splits any yield into PT/YT | Mid-cap | high | Marketplace for fixed vs. variable yield |
+| [[ethena\|Ethena (ENA)]] | Synthetic-dollar yield | Perp funding (basis carry) | Top ~50 | low (overhang) | USDe scale; funding-rate dependent |
+| Goldfinch (GFI) | Uncollateralized RWA credit | Off-chain private credit | Small-cap | moderate | Emerging-market real-world loans |
+| Centrifuge (CFG) | RWA tokenization / structured credit | Tokenized real-world debt | Small-cap | moderate | Structured pools, institutional RWA rails |
+
+SYRUP's edge in this set is that its yield is sourced from **overcollateralized institutional loans with measurable AUM and revenue**, giving it a fundamental valuation anchor (price-to-revenue / AUM multiples) that most narrative-driven DeFi tokens lack. The recurring bear case is **credit risk** — a borrower-default cycle (cf. the 2022 Orthogonal episode under the legacy MPL token) — versus Ethena's funding-rate risk or Pendle's dependence on third-party yield supply.
+
+---
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66` |
+| Base | `0x688aee022aa544f150678b8e5720b6b96a9e9a2f` |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://maple.finance/](https://maple.finance/) |
+| **Twitter** | [@maplefinance](https://twitter.com/maplefinance) |
+| **Telegram** | [maplefinance](https://t.me/maplefinance) |
+| **GitHub** | [https://github.com/maple-labs](https://github.com/maple-labs) |
+| **Docs** | [https://docs.maple.finance/](https://docs.maple.finance/) |
+
+---
+
+## Related
+
+- [[aave]]
+- [[pendle]]
+- [[ethereum]]
+- [[base]]
+- [[lending]]
+- [[real-world-assets]]
+- [[stablecoin-yields]]
+- [[stablecoins]]
+- [[crypto-markets]]
+- [[hyperliquid]]
+
+---
+
+## Sources
+
+- CoinGecko / cryptodataapi.com top-1000 snapshot, 2026-06-21 (rank #193, $163.53M mcap, $0.13719, 7d +5.11%) (Source: [[coingecko-top-1000-2026-04-09]])
+- CoinGecko April 2026 snapshot (Source: [[coingecko-top-1000-2026-04-09]])
+- Maple Finance — official site ($4.6B+ AUM, $20B+ originations): https://maple.finance/
+- Maple Finance — "syrupUSDC and syrupUSDT: Built for Scale": https://maple.finance/insights/syrupusdc-and-syrupusdt-built-for-scale
+- CoinMarketCap AI updates (buyback proposal, Aave partnership, Revolut listing, $100M ARR target): https://coinmarketcap.com/cmc-ai/maple-finance/latest-updates/
+- VaasBlock — "Maple Finance Review: SYRUP Performance, On-Chain Credit, and Risks (2026)": https://www.vaasblock.com/research/maple-finance-syrup-token-risks-onchain-credit-2026/
+- Messari project page: https://messari.io/project/syrup
+- Verified via web search, 2026-06-10

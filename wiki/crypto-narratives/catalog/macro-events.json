@@ -1,0 +1,761 @@
+{
+  "category_id": "macro-events",
+  "category_name": "Macro Events & Risk-On/Off",
+  "summary": "Crypto now trades as a high-beta risk asset tightly coupled to global macro liquidity and the US rates cycle. When dollar liquidity tightens (rate hikes, hot CPI, surging DXY/yen, tariff shocks) crypto sells off harder than equities; when liquidity loosens (rate cuts, soft CPI, falling DXY) it rallies harder. Because the crypto market is structurally over-leveraged, macro shocks routinely trigger forced-liquidation cascades that overshoot the underlying macro move by 2-4x.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "macro-risk-off-shock",
+      "name": "Macro Risk-Off Liquidity Shock",
+      "mechanism": "An exogenous macro shock (surprise hawkish Fed, hot CPI, tariff escalation, global VIX spike) forces a synchronized de-risking across all risk assets. Crypto sits at the far end of the risk curve, so multi-asset funds and leveraged retail dump it first and hardest to raise cash and meet margin. The other side is forced sellers (margin desks, risk-parity/vol-targeting funds shedding the highest-vol sleeve) hitting thin weekend/off-hours order books; passive HODLers and a few dip-buyers absorb at a discount. Sellers 'lose' because they liquidate at panic prices into illiquidity, but they are price-insensitive (compliance/risk-mandated), so the move overshoots fundamentals.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap",
+        "high-beta alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "sell-pressure",
+        "reflexive-deleveraging",
+        "forced-liquidation"
+      ],
+      "typical_lag": "immediate to hours (intraday on the headline; equities/futures lead by minutes)",
+      "typical_duration": "1-7 days for the acute drop; full risk-off regime can persist weeks to months",
+      "typical_magnitude_pct": "BTC -8% to -20% peak-to-trough; alts -20% to -45%",
+      "recurrence": "several times per year; clusters around FOMC days, CPI prints, and geopolitical/tariff headlines",
+      "leading_signals": [
+        "DXY breaking out higher",
+        "US 2Y/10Y yields spiking",
+        "equity VIX > 25 and rising",
+        "Nasdaq futures gapping down",
+        "BTC-Nasdaq 30d correlation > 0.5",
+        "funding rates very positive (crowded longs) into the event",
+        "perp open interest at local highs"
+      ],
+      "backtest_features": [
+        "dxy_1d_pct_change",
+        "vix_level_and_1d_change",
+        "nasdaq_futures_overnight_gap",
+        "btc_nasdaq_30d_rolling_corr",
+        "us2y_yield_1d_bps_change",
+        "perp_funding_rate_zscore",
+        "open_interest_zscore",
+        "fomc_or_cpi_event_dummy",
+        "headline_shock_dummy"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-02-04",
+          "date_range": "2026-02-04 to 2026-02-06",
+          "trigger": "Crypto sells off ~7-9% on USDT-depeg FEARS (no actual depeg) + Tether's retreat from a $20B raise.",
+          "description": "BTC fell ~9.3% (Feb 1-6 2026, $78.6k->$71.3k; intra-window low $62,822, max DD -20.5%) and the total market dropped to ~$2.42T (from ~$3.5T in late 2025) as retail sentiment cracked on FEARS that USDT (60% of the stablecoin market) might lose its peg, compounded by Tether walking back a reported $20B raise target. ~$775M was liquidated in 24h with ETH/SOL/XRP/DOGE all -6% to -9%. KEY LESSON: USDT did NOT actually depeg (it held ~$1.00 throughout, low $0.9977) - the crash was driven purely by depeg FEAR, a reminder that stablecoin-confidence shocks move markets even with no real depeg.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-9.34%",
+              "window": "Feb 1-6 2026 ($78,641->$71,297; low $62,822)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "altcoins (ETH/SOL/XRP/DOGE)",
+              "pct_change": "-6% to -9%",
+              "window": "24h around Feb 4-5 2026",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "XRP",
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "macro",
+            "stablecoins",
+            "sentiment"
+          ],
+          "volume_or_flow_change": "~$775M liquidated in 24h; total mcap to ~$2.42T; USDT held its peg (fear, not fact).",
+          "confidence": "high",
+          "sources": [
+            "https://www.fxstreet.com/cryptocurrencies/news/crypto-market-suffers-775-million-liquidation-as-altcoins-slide-tether-concerns-mount-202602050608",
+            "https://www.vaneck.com/us/en/blogs/digital-assets/matthew-sigel-what-triggered-bitcoins-major-selloff-in-february-2026/"
+          ]
+        },
+        {
+          "date": "2026-01-30",
+          "date_range": "2026-01-30 (nom.) to 2026-05-15 (confirmed)",
+          "trigger": "Trump nominates Kevin Warsh (a known inflation hawk) as Fed Chair; rate fears sink risk assets.",
+          "description": "Trump named Kevin Warsh his Fed Chair pick on Jan 30 2026. Markets priced him as the worst-case HAWKISH outcome and sold risk: BTC -6% on the day and -14% over the next 10 days; gold -9% (worst session in a decade), silver -30%, XRP -15% the same week. A key trigger of the early-2026 leg of the 2025-26 bear. The paradox: Warsh is crypto-FRIENDLY on regulation (a Bitwise investor) but HAWKISH on rates - markets weighted the rate stance. He replaced Powell on May 15 2026 and BTC still slid to ~$74,190 as the 2y yield held above the Fed target (no rapid cuts expected). Lesson: a 'pro-crypto regulator' is NOT 'dovish' - the Fed chair's RATE stance dominates crypto's liquidity-driven beta.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-6%",
+              "window": "2026-01-30 day-of nomination",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-14%",
+              "window": "10 days post-nomination (cumulative)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "XRP",
+              "pct_change": "-15%",
+              "window": "same week",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "gold/silver (read-across)",
+              "pct_change": "gold -9%, silver -30%",
+              "window": "nomination week",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "XRP",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "macro",
+            "rates",
+            "monetary-policy"
+          ],
+          "volume_or_flow_change": "Broad risk-off; hawkish-rate repricing across crypto, metals, and equities.",
+          "confidence": "high",
+          "sources": [
+            "https://cryptobriefing.com/bitcoin-falls-kevin-warsh-fed-chair-rate-hike/",
+            "https://www.dlnews.com/articles/markets/bitcoin-price-could-benefit-under-warsh/",
+            "https://cointelegraph.com/markets/why-is-bitcoin-falling-despite-pro-crypto-kevin-warsh-becoming-fed-chair"
+          ]
+        },
+        {
+          "date": "2025-11-01",
+          "date_range": "2025-11-01 to 2025-11-21",
+          "trigger": "Sustained macro risk-off / liquidity drain through November 2025 (post-October-crash deleveraging, weakening risk sentiment)",
+          "description": "Extended risk-off bleed: BTC fell from ~$109.6k to ~$84.2k (-23.19%), peak-to-trough drawdown -26.01% (CoinGecko-measured). Illustrates the multi-week regime version of a risk-off shock rather than a one-day event.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-23.19%",
+              "window": "20d (Nov 1 to Nov 21)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-26.01%",
+              "window": "peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "all crypto"
+          ],
+          "volume_or_flow_change": "Elevated drawdown volume; risk-off regime",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com"
+          ]
+        },
+        {
+          "date": "2025-04-03",
+          "date_range": "2025-04-02 to 2025-04-07",
+          "trigger": "Trump 'Liberation Day' tariffs — 10% baseline on all imports, higher rates on China/EU; broad risk-off, S&P 500 sold off sharply over two sessions",
+          "description": "BTC fell to a low of ~$74,700 on Apr 7 (~-5% from ~$78.7k that morning, and roughly -12% off the early-April high); crypto market cap shed roughly $200B. Classic risk-off correlation with collapsing equities. Event predates CoinGecko free-tier window, so figures are web-sourced.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-12%",
+              "window": "~48h (early-April high to Apr 7 low ~$74.7k)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "total-market-cap",
+              "pct_change": "~-$200B",
+              "window": "few days",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "all crypto",
+            "US equities",
+            "commodities"
+          ],
+          "volume_or_flow_change": "~$200B total crypto market cap erased",
+          "confidence": "medium",
+          "sources": [
+            "https://fortune.com/crypto/2025/04/07/bitcoin-plunges-trump-tariff-announcement-stock-market-downturn/",
+            "https://www.21shares.com/en-us/research/trumps-liberation-day-the-impact-of-tariffs-on-the-crypto-market"
+          ]
+        },
+        {
+          "date": "2024-08-05",
+          "date_range": "2024-08-04 to 2024-08-05",
+          "trigger": "Yen carry-trade unwind — BoJ hike + weak US jobs data caused the JPY to surge, margin-calling global leveraged carry positions; equity VIX spiked above 60 intraday",
+          "description": "Synchronized de-risking. BTC fell ~15% and ETH ~20% on Aug 5 as leveraged carry funding evaporated and retail faced margin calls in unrelated assets. BIS later characterized crypto losses of 'up to 20%' during the unwind.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-15%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-20%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "all crypto",
+            "Japanese equities (Nikkei -12%)",
+            "US tech"
+          ],
+          "volume_or_flow_change": "Large global cross-asset deleveraging; spike in liquidations",
+          "confidence": "high",
+          "sources": [
+            "https://www.bis.org/publ/bisbull90.pdf",
+            "https://cryptoslate.com/yen-carry-trade-unwind-margin-call-bitcoin-btc/"
+          ]
+        },
+        {
+          "date": "2020-03-12",
+          "date_range": "2020-03-12 to 2020-03-13",
+          "trigger": "COVID-19 global panic; S&P 500 limit-down; worldwide dash-for-cash forced liquidation of all risk assets",
+          "description": "'Black Thursday' — Bitcoin fell roughly 40-50% over ~24-48h from ~$8,000 toward $3,800-$4,000; BitMEX leveraged longs were force-liquidated, order books emptied. Total crypto market cap lost ~40%.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-40%",
+              "window": "24h (Mar 12)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-50%",
+              "window": "peak-to-trough (Mar 8 high ~$8k to Mar 12-13 low ~$3.8-4k)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "total-market-cap",
+              "pct_change": "-40%",
+              "window": "24-48h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "XRP"
+          ],
+          "affected_sectors": [
+            "all crypto",
+            "equities",
+            "commodities"
+          ],
+          "volume_or_flow_change": ">$200M long BTC perps liquidated on BitMEX during the worst phase (broader two-day liquidations widely cited around $700M); record sell volume",
+          "confidence": "high",
+          "sources": [
+            "https://www.cnbc.com/2020/03/13/bitcoin-loses-half-of-its-value-in-two-day-plunge.html",
+            "https://multicoin.capital/2020/03/17/march-12-the-day-crypto-market-structure-broke/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leveraged-liquidation-cascade",
+      "name": "Crypto Leverage Liquidation Cascade (macro-triggered)",
+      "mechanism": "A macro headline pierces a market that is structurally over-leveraged (high perp open interest, positive funding, crowded longs). The initial drop hits liquidation prices, exchanges force-close longs at market, which pushes price lower into thin books, triggering the next tranche of liquidations — a reflexive doom-loop amplified by auto-deleveraging (ADL) and stablecoin/oracle dislocations. The other side is liquidation engines and a handful of opportunistic market-makers buying the air-pocket; over-leveraged longs are wiped out. The crypto-specific wrinkle vs. a plain risk-off shock is that the move is multiples larger than the underlying macro shock because of the leverage stack, and it round-trips fast once forced selling exhausts.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "high-beta alts",
+        "perp markets"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "typical_lag": "minutes to a few hours (mechanical, faster than fundamentals warrant)",
+      "typical_duration": "hours to 2-3 days; sharp V-shaped partial recovery common within 24-72h",
+      "typical_magnitude_pct": "BTC -10% to -16% intraday; alts -25% to -50% intraday wicks",
+      "recurrence": "1-3 major cascades per year, plus many smaller ones; triggered by macro headlines or exchange events",
+      "leading_signals": [
+        "perp open interest near all-time highs",
+        "funding rates persistently positive / elevated",
+        "long/short ratio skewed long",
+        "estimated leverage ratio rising",
+        "thin order-book depth",
+        "a binary macro/headline catalyst pending",
+        "stablecoin supply not keeping pace with OI"
+      ],
+      "backtest_features": [
+        "aggregate_perp_open_interest_usd",
+        "funding_rate_8h_and_zscore",
+        "long_short_account_ratio",
+        "estimated_leverage_ratio",
+        "24h_liquidation_volume_usd",
+        "orderbook_depth_2pct",
+        "oi_to_marketcap_ratio",
+        "headline_event_dummy",
+        "alt_btc_beta"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-10-10",
+          "date_range": "2025-10-10 to 2025-10-12",
+          "trigger": "Trump announces 100% tariffs on Chinese imports via social media — macro headline into a heavily leveraged market",
+          "description": "Largest liquidation event in crypto history: ~$19B in leveraged positions wiped in 24h. BTC fell ~14% at the worst phase; CoinGecko-measured Oct 9-12 windows: BTC -6.38% close-to-close with -11.01% intra-window drawdown; ETH -18.57% drawdown; SOL -24.12% drawdown. Rebounded sharply by Oct 12 — classic cascade V-recovery.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-6.38%",
+              "window": "Oct 9-12 close-to-close",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-11.01%",
+              "window": "intra-window peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-18.57%",
+              "window": "intra-window peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-24.12%",
+              "window": "intra-window peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-14%",
+              "window": "intraday worst phase (reported)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "all crypto",
+            "perpetual futures",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "~$19B liquidations in 24h (record); large market-cap recovery by Oct 12",
+          "confidence": "high",
+          "sources": [
+            "https://www.cnn.com/2025/10/11/business/trump-tariffs-crypto-selloff",
+            "https://www.coingecko.com/learn/october-10-crypto-crash-explained",
+            "https://www.coingecko.com"
+          ]
+        },
+        {
+          "date": "2020-03-12",
+          "date_range": "2020-03-12",
+          "trigger": "COVID dash-for-cash hit a leveraged BitMEX-dominated market; cascade amplified the macro shock",
+          "description": "Within Black Thursday, BTC perps were force-liquidated on BitMEX (>$200M of longs during the worst phase; broader figures around $700M widely cited); the liquidation engine and a brief BitMEX outage helped wick BTC toward ~$3,800-4,000 before a sharp bounce — the prototypical macro-triggered cascade.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-50%",
+              "window": "intraday wick (~$8k to ~$3.8-4k)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "leveraged derivatives",
+            "all crypto"
+          ],
+          "volume_or_flow_change": ">$200M long BTC perp liquidations on BitMEX during the worst phase; only ~$20M of bids left on the book at one point",
+          "confidence": "high",
+          "sources": [
+            "https://multicoin.capital/2020/03/17/march-12-the-day-crypto-market-structure-broke/"
+          ]
+        },
+        {
+          "date": "2024-08-05",
+          "date_range": "2024-08-05",
+          "trigger": "Yen carry unwind margin calls cascaded into crypto perps",
+          "description": "The Aug 5 risk-off was amplified in crypto by leveraged longs being force-closed; BTC's -15%/ETH -20% same-day moves were larger than the underlying equity/FX shock due to the leverage stack, then partially retraced over the following sessions.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-15%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-20%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "perp futures",
+            "all crypto"
+          ],
+          "volume_or_flow_change": "Spike in cross-asset and crypto liquidations",
+          "confidence": "medium",
+          "sources": [
+            "https://www.bis.org/publ/bisbull90.pdf",
+            "https://cryptoslate.com/yen-carry-trade-unwind-margin-call-bitcoin-btc/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "macro-liquidity-risk-on",
+      "name": "Macro Liquidity / Risk-On Tailwind",
+      "mechanism": "When the market prices easier policy (a dovish Fed surprise, a rate CUT, a cooler-than-expected CPI, a falling DXY, expanding M2/global liquidity), the discount rate on long-duration risk assets drops and dry powder gets injected. Crypto, as the highest-beta liquidity sponge, rallies hardest. The 'other side' is short sellers and underweight allocators who must cover/chase as liquidity expectations shift; they lose because they fade a regime tailwind. These moves are often anticipatory (price runs into the dovish print) and can fade intraday if the easing was already priced ('buy the rumor, sell the news').",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "typical_lag": "immediate on the print, often with anticipatory run-up over prior days/weeks",
+      "typical_duration": "the headline pop is hours-days; the regime tailwind can run weeks-months",
+      "typical_magnitude_pct": "BTC +3% to +12% on the print; multi-week regime moves +20% to +60%",
+      "recurrence": "several FOMC/CPI prints per year; major easing-cycle inflections every few years",
+      "leading_signals": [
+        "DXY rolling over / making lower highs",
+        "Fed funds futures pricing cuts",
+        "softening CPI/PCE trend",
+        "real yields falling",
+        "global M2 / central-bank balance sheets expanding",
+        "BTC outperforming on up-days (positive beta)",
+        "negative funding flipping positive (shorts covering)"
+      ],
+      "backtest_features": [
+        "dxy_1d_and_20d_pct_change",
+        "fed_funds_futures_implied_cuts_next_meeting",
+        "cpi_surprise_actual_minus_consensus",
+        "real_10y_yield_change",
+        "global_m2_yoy",
+        "fomc_cut_dummy",
+        "btc_nasdaq_corr",
+        "pre_event_run_up_5d"
+      ],
+      "historical_instances": [
+        {
+          "date": "2022-11-10",
+          "date_range": "2022-11-10",
+          "trigger": "US October CPI came in cooler than expected (7.7% YoY vs 8.0% est; 0.4% MoM vs 0.6% est) — sparked hope of slower Fed hikes",
+          "description": "BTC, sitting near a 2-year low (~$15.5k) from the FTX blowup, jumped roughly 10% in the hours after the print; Nasdaq +~7%, S&P +~5.5% on the day, 10Y yield fell sharply. Textbook soft-CPI risk-on pop.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+10%",
+              "window": "intraday (hours after print)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "all crypto",
+            "US equities",
+            "bonds"
+          ],
+          "volume_or_flow_change": "Sharp short-covering volume spike on the print",
+          "confidence": "medium",
+          "sources": [
+            "https://www.coindesk.com/markets/2022/11/10/us-consumer-prices-rose-in-october-bitcoin"
+          ]
+        },
+        {
+          "date": "2024-09-18",
+          "date_range": "2024-09-18 to 2024-09-19",
+          "trigger": "Fed delivers a larger-than-expected 50bp rate cut (start of easing cycle)",
+          "description": "BTC climbed toward $61k on the print and was up roughly 5% near ~$63k the following day; the cut helped fuel a strong stretch for the broad crypto index. Initial pop, brief pullback, then sustained risk-on regime.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+5%",
+              "window": "24h (next day)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "all crypto",
+            "crypto equities"
+          ],
+          "volume_or_flow_change": "Broadening crypto rally following the cut",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2024/09/18/fed-cuts-interest-rates-by-50-basis-points-bitcoin-briefly-hits-61k",
+            "https://research.grayscale.com/market-commentary/september-2024-crypto-gets-a-lift-from-fed-rate-cuts"
+          ]
+        },
+        {
+          "date": "2025-09-17",
+          "date_range": "2025-09-16 to 2025-09-19",
+          "trigger": "September 2025 FOMC rate cut (anticipated/priced)",
+          "description": "Muted 'sell-the-news' reaction: BTC essentially flat (+0.25% close-to-close) with a +2.46% run-up and -2.29% drawdown inside the window (CoinGecko-measured) — illustrates that when easing is fully priced, the risk-on pop is small/anticipatory.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0.25%",
+              "window": "Sep 16-19 close-to-close",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+2.46%",
+              "window": "intra-window run-up",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "all crypto"
+          ],
+          "volume_or_flow_change": "Modest; priced-in event",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flight-to-quality-bitcoin",
+      "name": "Banking/Fiat Stress Flight-to-Bitcoin",
+      "mechanism": "When the stress is in the traditional banking/fiat system itself (bank runs, stablecoin-reserve scares, sovereign-currency wobble) rather than a generic risk-off, Bitcoin can decouple and act as a flight-to-quality / 'opt-out-of-the-banking-system' asset. The other side is depositors and stablecoin holders fleeing counterparty risk and bidding BTC as a bearer alternative. This is the rarer, contrarian-bullish macro archetype: the same headline that crushes equities/regional banks lifts BTC. It works when the perceived threat is to fiat plumbing specifically; it fails when the stress is broad liquidity/risk-off (then BTC trades risk-on per archetype 1).",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "the named coin",
+        "large-cap alts (partial)"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "typical_lag": "hours to a few days (often resolves over a weekend as the banking story develops)",
+      "typical_duration": "days to a couple of weeks while the banking stress is acute",
+      "typical_magnitude_pct": "BTC +15% to +30% over the stress window",
+      "recurrence": "rare — a few times per cycle; requires fiat-system-specific stress",
+      "leading_signals": [
+        "regional-bank equity index falling sharply while BTC holds/rises",
+        "a major stablecoin (USDC/DAI) depegging",
+        "spike in bank CDS",
+        "deposit-flight headlines",
+        "BTC-equity correlation breaking down / going negative",
+        "stablecoin redemptions and flight to 'unaffected' stablecoins (USDT premium)"
+      ],
+      "backtest_features": [
+        "bank_equity_index_1d_change",
+        "stablecoin_peg_deviation_bps",
+        "bank_cds_spread_change",
+        "btc_equity_corr_breakdown_flag",
+        "usdt_vs_usdc_premium",
+        "btc_return_minus_spx_return_spread",
+        "banking_stress_headline_dummy"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-05-22",
+          "date_range": "2025-05-16 (Moody's) to 2025-05-22",
+          "trigger": "BTC prints a then-record ~$112K as Moody's US credit downgrade (Aaa->Aa1) drives a safe-haven bid, with GENIUS Act Senate passage.",
+          "description": "Bitcoin hit a then-all-time-high of ~$111,970 on May 22 2025 (intraday ~$112K May 23). Primary driver: Moody's stripped the US of its last Aaa rating (->Aa1) on May 16, and investors bid BTC as a non-sovereign hedge ('debasement trade'). Amplifiers: the Senate advanced the GENIUS Act 66-22 (May 21), JPMorgan said it would let clients buy BTC, and easing US-China trade tensions. Reportedly ~$226M of BTC was liquidated as it broke $112K, ~$214M of it shorts being squeezed (short-squeeze magnitude uncorroborated -> lower confidence). The sovereign-downgrade -> BTC-bid is the distinct macro pattern; $112K was later exceeded ($122,838 Jul 2025, $126,210 Oct 2025).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "to ~$111,970 ATH (then-record)",
+              "window": "May 16-22 2025 (Moody's downgrade week)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~$226M liquidated (~$214M shorts squeezed) breaking $112K",
+              "window": "May 2025 (short-squeeze magnitude uncorroborated)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "store-of-value",
+            "macro",
+            "safe-haven"
+          ],
+          "volume_or_flow_change": "Safe-haven inflows on the US downgrade; short squeeze accelerated the break to a new ATH.",
+          "confidence": "medium",
+          "sources": [
+            "https://www.fool.com/investing/2025/05/22/did-moodys-just-pump-bitcoin/",
+            "https://alphanode.global/insights/crypto-market-recap-bitcoin-may-22-2025/"
+          ]
+        },
+        {
+          "date": "2023-03-10",
+          "date_range": "2023-03-10 to 2023-03-20",
+          "trigger": "Silicon Valley Bank failure + USDC depeg (Circle disclosed $3.3B reserves stuck at SVB); FDIC backstop announced Mar 12",
+          "description": "USDC fell to ~$0.87-0.88 over the weekend, then re-pegged after the backstop. Bitcoin decoupled and rallied as a banking-system hedge: ~$19,600 on Mar 10 -> ~$22,386 by Mar 13 (+~18% around the backstop) -> above $28,000 by Mar 20 (~+40% over the window). Flight-to-quality, not risk-off.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+18%",
+              "window": "~24h (around Mar 13 backstop)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+40%",
+              "window": "Mar 10 (~$19.6k) to Mar 20 (~$28k)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "USDC",
+              "pct_change": "-13%",
+              "window": "weekend trough (~$0.87)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "USDC",
+            "USDT"
+          ],
+          "affected_sectors": [
+            "BTC/large-caps (up)",
+            "stablecoins (depeg)",
+            "regional bank equities (down)"
+          ],
+          "volume_or_flow_change": "Flight from USDC/DAI/GUSD into USDT (traded above peg); BTC gained ~$26B market cap",
+          "confidence": "high",
+          "sources": [
+            "https://www.cnbc.com/2023/03/13/usdc-nearly-regains-1-peg-after-circle-says-svb-deposit-is-available.html",
+            "https://techcrunch.com/2023/03/13/bitcoin-rallies-18-percent-in-wake-of-svb-crisis/",
+            "https://www.cnbc.com/2023/03/20/bitcoin-gains-26-billion-as-banking-crisis-sparks-rally.html"
+          ]
+        },
+        {
+          "date": "2013-03-16",
+          "date_range": "2013-03-16 to 2013-04-10",
+          "trigger": "Cyprus banking crisis / bail-in of depositors (haircut on bank deposits)",
+          "description": "Widely cited early flight-to-Bitcoin episode. Around the Cyprus bail-in BTC was in the low-$40s (~$42 on Mar 7, ~$46 on Mar 9), roughly doubled to ~$90 by end of March (~+119%), then continued a parabolic run to nearly $250 by early-to-mid April before a blow-off — cementing the 'banking-stress hedge' narrative. Older event; magnitude reported, exact start/end points fuzzy.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+~120%",
+              "window": "~Mar 7 (~$42) to Mar 31 (~$92)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+~300% (approx, parabolic)",
+              "window": "mid-March to early-April 2013 (~$40s to ~$200-250)",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "BTC",
+            "European bank deposits (stress)"
+          ],
+          "volume_or_flow_change": "Surge in EU-driven BTC buying; narrative-driven inflows",
+          "confidence": "low",
+          "sources": [
+            "https://www.statmuse.com/money/ask/bitcoin-price-day-by-day-march-2013",
+            "https://coincodex.com/article/31832/bitcoin-price-history/"
+          ]
+        }
+      ]
+    }
+  ]
+}

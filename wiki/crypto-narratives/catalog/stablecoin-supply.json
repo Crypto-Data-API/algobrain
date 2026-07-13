@@ -1,0 +1,646 @@
+{
+  "category_id": "stablecoin-supply",
+  "category_name": "Stablecoin Supply (Tether/USDC Mints & Burns)",
+  "summary": "Stablecoins (mainly USDT and USDC) are the dollar on-ramp for crypto, so changes in how many of them exist act as a proxy for buying power entering or leaving the market. When issuers mint new coins, that \"dry powder\" tends to precede or accompany rallies; when holders redeem coins and supply shrinks, it tends to mark deleveraging and weak demand. Sudden doubts about whether a stablecoin is actually backed (a depeg) trigger panic-selling and a flight to safety, briefly crashing the whole market.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "net-mint-expansion",
+      "name": "Net Mint Expansion (Dry-Powder Injection)",
+      "mechanism": "Tether and Circle mint new stablecoins on-demand when authorized resellers and exchanges wire in USD (or pre-mint inventory in anticipation of demand). Newly issued USDT/USDC lands on exchange order books and becomes immediate quote-currency buying power. The counterparty is whoever sells crypto into that fresh bid; structurally, rising net supply reflects net USD inflow into the ecosystem, which is a leading-to-coincident demand signal. The reflexive part: traders watch Whale Alert mint notifications and front-run expected inflows, so price can react within minutes on sentiment alone even before the coins are deployed.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "liquidity-expansion"
+      ],
+      "leading_signals": [
+        "Tether Treasury / Circle mint transactions on-chain (Whale Alert tags)",
+        "30-day net change in aggregate stablecoin market cap turning positive / accelerating",
+        "USDT minted to Tron/Ethereum 'authorized but not issued' inventory then moved to exchanges",
+        "rising stablecoin balances on exchange hot wallets (exchange stablecoin reserves up)",
+        "stablecoin market-cap making new ATH while BTC consolidates"
+      ],
+      "backtest_features": [
+        "stablecoin_mktcap_30d_pct_change",
+        "usdt_supply_7d_delta_usd",
+        "usdc_supply_7d_delta_usd",
+        "aggregate_stablecoin_netflow_to_exchanges_zscore",
+        "single_mint_size_usd (>=1e9 flag)",
+        "days_since_last_billion_mint",
+        "stablecoin_mktcap_at_ath_flag"
+      ],
+      "typical_lag": "minutes-to-hours on sentiment for large discrete mints; days-to-weeks for the aggregate-supply-growth trend to map onto price",
+      "typical_duration": "discrete mint pop fades within 24-72h; sustained net-supply expansion can fuel multi-week to multi-month uptrends",
+      "typical_magnitude_pct": "+0.4% to +2.5% on BTC within hours of a discrete >=$1B mint; +10% to +300% on BTC over multi-month sustained supply-expansion regimes",
+      "recurrence": "very frequent — discrete $1B+ USDT mints occur dozens of times per year; sustained-expansion regimes align with each major bull leg (2020-21, late-2024, 2025)",
+      "historical_instances": [
+        {
+          "date": "2026-05-26",
+          "date_range": "May 2026 (record)",
+          "trigger": "Total stablecoin market cap hits a record ~$322B (exceeds the FX reserves of 95 nations).",
+          "description": "Total stablecoin supply reached a record ~$318-323B in late May 2026 (USDT ~$189.7B + USDC ~$77.9B = ~85%), exceeding the FX reserves of 95 countries — a structural dry-powder build driven by payments and DeFi/AI-agent demand. IMPORTANT nuance: this dry powder kept EXPANDING while BTC fell ~40% YTD and crashed into June — confirming that aggregate stablecoin supply is a slow structural tailwind, NOT a timing signal for spot direction in a risk-off regime (the dry powder sits idle until risk appetite returns).",
+          "price_impacts": [
+            {
+              "asset": "stablecoin-supply",
+              "pct_change": "record ~$322B (dry powder); no spot lift — BTC fell ~40% YTD into June 2026",
+              "window": "May 2026",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "USDT",
+            "USDC",
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "stablecoins",
+            "payments",
+            "liquidity"
+          ],
+          "volume_or_flow_change": "~$322B stablecoin cap; ~85% USDT+USDC; growth from payments + DeFi + AI-agent machine-payment rails (Coinbase/Stripe/Visa). Corporate payment-rail adoption underpins the growth: Visa USDC settlement went live in the US (Dec 16 2025), now spanning 9 settlement blockchains with a ~$3.5B annualized run rate, plus Bridge stablecoin-linked cards expanding toward 100 countries - structural demand, not a spot catalyst.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/05/26/at-usd318-billion-the-stablecoin-market-value-exceeds-the-fx-reserves-of-95-nations",
+            "https://defillama.com/stablecoins",
+            "https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.21951.html"
+          ]
+        },
+        {
+          "date": "2025-09",
+          "trigger": "Routine $1B+ USDT mints during the bull market",
+          "description": "Representative discrete-mint reflexive pop. BTC historically ticks up modestly right after a $1B mint print, with FOMO sentiment occasionally driving larger intra-hour moves. The specific +2.3%/1h figure could not be independently corroborated and should be treated as illustrative.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0.4% to +2%",
+              "window": "1h",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "discrete $1B USDT issuance",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://coingape.com/trending/why-tether-mint-1-billion-usdt-today-and-what-it-means-for-btc-eth-price/",
+            "https://finbold.com/tether-just-minted-1-billion-usdt-what-does-it-mean-for-bitcoin-price/"
+          ]
+        },
+        {
+          "date": "2025-07-01",
+          "date_range": "2025-07-01 to 2025-08-15",
+          "trigger": "Sustained stablecoin supply growth through 2025 H2 (aggregate cap heading from ~$250B toward $300B); USDC and USDT both growing",
+          "description": "Measured dry-powder expansion regime. With stablecoin supply expanding steadily, BTC rose ~10% over the window with a +17% peak run-up, illustrating the coincident bullish bias of net-supply growth. Price move re-measured via CoinGecko.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+9.96%",
+              "window": "2025-07-01 to 2025-08-15",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+17.41%",
+              "window": "max run-up within window",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "volume_or_flow_change": "aggregate stablecoin market cap climbing toward $300B during 2025 H2",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "total-market"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://info.arkm.com/research/how-stablecoins-reached-a-300-billion-market-cap-in-2025",
+            "https://crystalintelligence.com/thought-leadership/usdt-maintains-dominance-while-usdc-faces-headwinds/"
+          ]
+        },
+        {
+          "date": "2025-05-21",
+          "trigger": "Tether minted $2B USDT (held as inventory) on Tron; BTC made a new ATH around $111,970 the next day (May 22, 2025)",
+          "description": "Large discrete pre-mint coinciding with a record high. Total USDT circulation pushed over $151B; mints were positioned as inventory for anticipated exchange inflows. The directional 24h pop attributable to the mint itself is small and hard to isolate from the broader uptrend. An independent source corroborates a $2B USDT mint coinciding with a BTC all-time high (with $1B routed to Binance), pushing Tether supply past $160B; the exact 24h BTC return was not independently quantified, so confidence is unchanged.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+1% to +3%",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "USDT circulation surpassed $151B; 2025 YTD issuance ~$15B",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://thedefiant.io/news/blockchains/tether-mints-2-billion-usdt-on-tron-surpassing-ethereum-reaching-15b-2025-169fe182",
+            "https://www.ainvest.com/news/tether-2-billion-usdt-mint-signal-institutional-liquidity-bullish-momentum-bitcoin-2509/",
+            "https://bitbo.io/news/tether-mints-160b-record/"
+          ]
+        },
+        {
+          "date": "2024-11-05",
+          "date_range": "2024-11-05 to 2024-12-17",
+          "trigger": "Trump election victory; stablecoin supply expanded sharply as capital poured into crypto, with aggregate stablecoin market cap crossing the $200B milestone (Dec 14, 2024)",
+          "description": "Post-election dry-powder surge. Aggregate stablecoin supply growth accelerated alongside the strongest leg of the 2024 rally, with BTC running from ~$69.4K (Nov 5) to ~$104K (Dec 17 peak), about +50%. Prior catalog understated the move at +35%.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+50%",
+              "window": "Nov 5 - Dec 17 2024",
+              "direction": "up",
+              "measured_by": "perplexity"
+            }
+          ],
+          "volume_or_flow_change": "stablecoin supply expanded by tens of billions in weeks; total stablecoin market cap crossed $200B on 2024-12-14",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "total-market"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://coinmarketcap.com/historical/20241105/",
+            "https://www.statmuse.com/money/ask/bitcoin-price-day-by-day-november-2024"
+          ]
+        },
+        {
+          "date": "2020-08",
+          "date_range": "2020-08 to 2021-01",
+          "trigger": "USDT supply grew strongly (Aug 2020 through Jan 2021) as DeFi summer and the bull market drew USD inflows; mints clustered around the run-up",
+          "description": "Sustained net-mint expansion regime that accompanied the 2020-21 bull leg. USDT market cap roughly doubled (from ~$11.9B to ~$21.3B) while BTC rose ~300%+ over the same window — the canonical 'supply growth = fuel' episode. Note the prior catalog understated BTC's gain (~130%); credible sources put the Aug 2020-Jan 2021 BTC move above +300%.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+311%",
+              "window": "Aug 2020 - Jan 2021",
+              "direction": "up",
+              "measured_by": "perplexity"
+            }
+          ],
+          "volume_or_flow_change": "USDT market cap grew from ~$11.9B (Aug 2020) to ~$21.3B (Jan 2021), roughly doubling",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "defi"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.coinlore.com/coin/tether/historical-data",
+            "https://en.wikipedia.org/wiki/Tether_(cryptocurrency)",
+            "https://coinmarketcap.com/historical/20210103/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "net-burn-redemption",
+      "name": "Net Burn / Redemption Contraction",
+      "mechanism": "When holders redeem stablecoins for USD, issuers burn the coins and supply contracts. Shrinking supply means dollars are leaving the crypto ecosystem (or being parked off-exchange), removing quote-currency buying power. Burns cluster after corrections as deleveraged traders cash out, so falling supply is a coincident-to-confirming bearish signal: less dry powder, weaker bid. The counterparty narrative reverses — there's progressively less new money to absorb sell pressure.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "liquidity-contraction",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "30-day net change in aggregate stablecoin market cap turning negative",
+        "large USDT/USDC burns on-chain (Treasury redemptions)",
+        "exchange stablecoin reserves declining",
+        "USDT market cap falling sharply over days (mass redemption)",
+        "stablecoin supply rolling over after a parabolic expansion"
+      ],
+      "backtest_features": [
+        "stablecoin_mktcap_30d_pct_change_negative_flag",
+        "usdt_supply_7d_delta_usd (negative)",
+        "redemption_volume_usd_per_day",
+        "exchange_stablecoin_reserve_zscore (declining)",
+        "supply_peak_drawdown_pct (from local max)"
+      ],
+      "typical_lag": "coincident-to-lagging — supply contraction typically follows the price correction by days, confirming weakness rather than leading it",
+      "typical_duration": "weeks-to-months; supply contraction regimes persist through bear phases",
+      "typical_magnitude_pct": "contraction confirms ongoing drawdowns; standalone signal, hard to isolate, but accompanied BTC drawdowns of -30% to -70% in 2022",
+      "recurrence": "occasional regime-level events — major contractions tied to 2022 bear market and acute redemption scares; routine small burns are frequent but low-signal",
+      "historical_instances": [
+        {
+          "date": "2022-05-12",
+          "date_range": "2022-05-12 to 2022-05-17",
+          "trigger": "Terra/UST collapse triggered a redemption run on Tether; USDT processed billions in redemptions and supply fell sharply, reportedly ~$7.4B over the following week",
+          "description": "Acute redemption contraction during the Terra contagion. USDT supply fell sharply (reported ~$7.4B over the week) as holders fled to safety, and USDT briefly broke peg to roughly $0.95-0.99 intraday. This coincided with one of the sharpest crypto drawdowns of the cycle. BTC's week-of move (May 5-12) was ~-13%, not -25% as previously stated.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-13%",
+              "window": "May 5-12 2022 (Terra week)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "USDT",
+              "pct_change": "-1% to -5% (brief depeg, low ~$0.95-0.99)",
+              "window": "intraday May 12",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "USDT supply reported down ~$7.4B over the week amid heavy redemptions; precise circulating-supply delta is not cleanly sourced",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "LUNA",
+            "UST"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "stablecoins",
+            "defi"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.nationandstate.com/2022/05/17/stablecoin-tether-supply-plunged-7-4b-amid-depegging-scare-terra-carnage/",
+            "https://www.cnbc.com/2022/05/13/tether-usdt-stablecoin-regains-peg-after-3-billion-in-withdrawals.html",
+            "https://www.hkma.gov.hk/media/eng/publication-and-research/research/research-memorandums/2022/RM09-2022.pdf"
+          ]
+        },
+        {
+          "date": "2022-05",
+          "date_range": "2022-05 to 2022-07",
+          "trigger": "Sustained redemptions through the post-Terra bear deepening (3AC, Celsius collapses)",
+          "description": "Multi-month USDT supply contraction. Tether market cap fell materially over two months (reported on the order of ~$16B), confirming the bear regime as dry powder drained from the system. The exact contraction figure is approximate.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-50%",
+              "window": "May-Jun 2022",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Tether market cap reportedly fell ~$16B over ~2 months (approximate)",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "stablecoins"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.coindesk.com/markets/2022/07/26/tether-finds-stable-dollar-peg-after-terras-collapse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "depeg-shock",
+      "name": "Stablecoin Depeg Shock (Backing-Doubt)",
+      "mechanism": "When the market loses confidence that a stablecoin is fully backed (reserves stuck at a failed bank, opaque attestations, or an algorithmic peg breaking), the coin trades below $1. Because stablecoins are core collateral and quote currency, a depeg triggers a scramble: holders dump the suspect coin, DeFi positions backed by it get liquidated, and capital flees to BTC/ETH or fiat. The result is a sharp, fast risk-off shock across the whole market. Counterparties who keep the peg are arbitrageurs who buy below $1 betting on redemption — they win if backing is real, lose catastrophically (UST) if it isn't.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin",
+        "BTC",
+        "large-cap alts",
+        "total-market-cap",
+        "DeFi"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "flight-to-safety"
+      ],
+      "leading_signals": [
+        "stablecoin secondary-market price deviating >50bps from $1",
+        "issuer disclosure of reserve exposure to a stressed counterparty/bank",
+        "spiking redemption queue / mint-burn imbalance",
+        "Curve/DEX stablecoin pool imbalance (one coin dominating the pool)",
+        "rising funding-rate stress and CEX withdrawal spikes"
+      ],
+      "backtest_features": [
+        "stablecoin_price_deviation_from_1_bps",
+        "curve_pool_imbalance_ratio",
+        "redemption_queue_size_usd",
+        "max_depeg_depth_pct",
+        "time_to_repeg_hours",
+        "btc_realized_vol_spike_zscore"
+      ],
+      "typical_lag": "immediate — the market reacts within minutes to hours of the depeg headline",
+      "typical_duration": "acute phase 24-72h; full peg recovery hours-to-days if backing is real, permanent if not (UST)",
+      "typical_magnitude_pct": "depegged coin -3% to -100%; BTC/ETH -8% to -16% in the acute window, with sharp V-recoveries when backing is confirmed",
+      "recurrence": "rare but high-impact — a handful of major events (UST May 2022, USDC Mar 2023, USDe Oct 2025); minor wobbles more frequent",
+      "historical_instances": [
+        {
+          "date": "2022-05-09",
+          "date_range": "2022-05-08 to 2022-05-13",
+          "trigger": "TerraUSD (UST) algorithmic stablecoin lost its $1 peg and entered a death spiral with LUNA; UST went to near-zero, LUNA from ~$80 to fractions of a cent",
+          "description": "The archetypal terminal depeg. UST began slipping May 8 and lost its peg for good around May 9-10, 2022; its algorithmic backing failed, destroying tens of billions (~$40-60B in combined UST+LUNA value depending on measurement) and triggering market-wide contagion. BTC fell ~13% over May 5-12 (prior catalog's -25% overstated the week-of move).",
+          "price_impacts": [
+            {
+              "asset": "UST",
+              "pct_change": "-100%",
+              "window": "May 8-13",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "LUNA",
+              "pct_change": "-99.99%",
+              "window": "May 8-13",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-13%",
+              "window": "May 5-12",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "volume_or_flow_change": "~$40-60B in combined UST+LUNA value destroyed; mass USDT redemptions followed",
+          "affected_coins": [
+            "UST",
+            "LUNA",
+            "BTC",
+            "ETH",
+            "USDT"
+          ],
+          "affected_sectors": [
+            "stablecoins",
+            "defi",
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.chainalysis.com/blog/how-terrausd-collapsed/",
+            "https://www.eko.law/terra-stablecoin-collapse"
+          ]
+        },
+        {
+          "date": "2023-03-11",
+          "date_range": "2023-03-10 to 2023-03-13",
+          "trigger": "Circle disclosed $3.3B of USDC reserves were stuck at the failed Silicon Valley Bank; USDC depegged to ~$0.87-0.88",
+          "description": "Reserve-backing scare depeg. USDC fell to ~$0.87-0.88 over the weekend, dragging DAI/USDD/USDP off peg. BTC fell ~11% into the March 10 low (~$19,670) but then rallied strongly over the weekend (toward ~$26K by March 14, ~+17% off the low) as capital rotated into BTC as a safe-haven from stablecoin risk; USDC re-pegged once the US backstopped SVB depositors.",
+          "price_impacts": [
+            {
+              "asset": "USDC",
+              "pct_change": "-12% to -13% (to ~$0.87-0.88)",
+              "window": "Mar 11",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-11%",
+              "window": "Mar 8-10 (into the low)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+17%",
+              "window": "Mar 10 low to Mar 14 (recovery)",
+              "direction": "up",
+              "measured_by": "perplexity"
+            }
+          ],
+          "volume_or_flow_change": "mass USDC redemptions queued; flight from USDC into USDT and BTC",
+          "affected_coins": [
+            "USDC",
+            "DAI",
+            "USDD",
+            "USDP",
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "stablecoins",
+            "defi",
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.cnbc.com/2023/03/11/stablecoin-usdc-breaks-dollar-peg-after-firm-reveals-it-has-3point3-billion-in-svb-exposure.html",
+            "https://www.chainalysis.com/blog/crypto-market-usdc-silicon-valley-bank/",
+            "https://www.galaxy.com/insights/research/usdcs-fall-below-usd1-sends-ripples-across-defi"
+          ]
+        },
+        {
+          "date": "2025-10-10",
+          "date_range": "2025-10-10 to 2025-10-11",
+          "trigger": "Trump 100% China tariff post triggered a ~$19B liquidation cascade; synthetic stablecoin USDe (Ethena) depegged on Binance as recursive USDe-collateral loops unwound",
+          "description": "Synthetic-stablecoin-amplified flash crash. USDe (funding-rate-backed, not cash-reserve) lost peg on Binance (low ~$0.65) while holding closer to peg elsewhere, as forced liquidations unwound recursive borrowing loops — the largest single-day liquidation event in crypto history. BTC fell ~8.7% on an hourly-close basis (peak-to-trough drawdown ~9.4% in the Oct 10-11 window via CoinGecko); web sources citing the daily low (~$104,782) put the drop at ~14.5%. SOL fell ~19.5% (intraday low ~-21%), not -40%.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-8.68%",
+              "window": "2025-10-10 to 2025-10-11 (hourly close)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-14.5%",
+              "window": "peak-to-low (web, daily low ~$104,782)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-14.26%",
+              "window": "2025-10-10 to 2025-10-11 (hourly close)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-19.53%",
+              "window": "2025-10-10 to 2025-10-11 (hourly close; intraday low ~-21%)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "USDe",
+              "pct_change": "-35% (to ~$0.65 on Binance)",
+              "window": "intraday Oct 10",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~$19B forced liquidations; >1.6M accounts liquidated",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "USDe"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "stablecoins",
+            "defi",
+            "total-market"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/learn/october-10-crypto-crash-explained",
+            "https://aurpay.net/aurspace/crypto-crash-october-2025-bitcoin-liquidation-explained/",
+            "https://insights4vc.substack.com/p/inside-the-19b-flash-crash"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "low-ssr-loaded-reserves",
+      "name": "Low SSR / Loaded Exchange Reserves (Positioning Indicator)",
+      "mechanism": "The Stablecoin Supply Ratio (SSR = BTC market cap / stablecoin market cap) measures how much BTC the existing stablecoin pile could buy. A low SSR means stablecoins have outsized buying power relative to BTC — the 'fuel tank' is full — and historically precedes rallies because the dry powder is already sitting on exchanges. The counterparty: shorts and sellers who get overwhelmed when that sidelined stablecoin liquidity deploys. Caveat: a low SSR can also be produced by capital LEAVING (BTC market cap falling faster than stablecoins), which inverts the signal — so it must be read alongside whether stablecoin supply is actually growing.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "positioning-extreme",
+        "mean-reversion"
+      ],
+      "leading_signals": [
+        "SSR falling to historically low band (cited ~13-21 range at cycle bottoms)",
+        "SSR oscillator below lower Bollinger band",
+        "rising exchange stablecoin reserves concurrent with low SSR (confirms accumulation vs outflow)",
+        "stablecoin market cap rising while BTC consolidates (SSR compressing for bullish reason)"
+      ],
+      "backtest_features": [
+        "ssr_value",
+        "ssr_zscore_vs_trailing_2y",
+        "ssr_oscillator_bollinger_position",
+        "exchange_stablecoin_reserve_30d_change (to disambiguate accumulation vs outflow)",
+        "btc_mktcap_vs_stablecoin_mktcap_ratio"
+      ],
+      "typical_lag": "days-to-weeks — a positioning indicator, not a precise timing trigger",
+      "typical_duration": "the bullish deployment phase can run weeks-to-months once dry powder is confirmed loaded",
+      "typical_magnitude_pct": "historically preceded multi-month BTC rebounds of tens of percent when accompanied by genuine stablecoin accumulation",
+      "recurrence": "cyclical — low-SSR readings clustered at the mid-2021, late-2022, and 2024 rebound phases",
+      "historical_instances": [
+        {
+          "date": "2022-11",
+          "trigger": "Post-FTX collapse bottom; SSR fell into a historically low band as stablecoin supply held while BTC market cap was crushed",
+          "description": "Low-SSR reading at a cyclical bottom. SSR in the low band coincided with the late-2022 base that preceded the 2023 recovery — a classic loaded-dry-powder setup (though partly driven by BTC cap collapse). The +60% rebound figure is an unverified estimate.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+50% to +60% (estimate)",
+              "window": "Nov 2022 low to mid-2023",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "stablecoin supply relatively stable while BTC market cap fell, compressing SSR",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://cryptoquant.com/asset/btc/chart/market-indicator/stablecoin-supply-ratio-ssr",
+            "https://www.fxempire.com/forecasts/article/bitcoins-dry-powder-ratio-returns-to-levels-seen-before-past-bull-runs-1560401"
+          ]
+        },
+        {
+          "date": "2024-09",
+          "trigger": "SSR returned to a low band (~13 cited) that previously coincided with mid-2021, late-2022 and 2024 rebound phases, ahead of the post-election rally",
+          "description": "Pre-rally low-SSR signal. SSR near a low band flagged that stablecoin buying power relative to BTC was high; the subsequent Q4-2024 rally deployed that dry powder as supply expanded post-election. The +50% rebound figure is an unverified estimate.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+50% (estimate)",
+              "window": "Sep-Dec 2024",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "stablecoin supply expanding into the rally (genuine accumulation)",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "total-market"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.fxempire.com/forecasts/article/bitcoins-dry-powder-ratio-returns-to-levels-seen-before-past-bull-runs-1560401",
+            "https://studio.glassnode.com/charts/indicators.Ssr?a=BTC"
+          ]
+        },
+        {
+          "date": "2026-01",
+          "trigger": "SSR fell toward a low band (~21 cited) / liquidity equilibrium, but analysts (Axel Adler Jr.) flagged the drop was driven by capital LEAVING the ecosystem (BTC outflows), not stablecoin accumulation — the inverted-signal case",
+          "description": "Cautionary low-SSR reading. Demonstrates the failure mode: a low SSR produced by shrinking BTC cap amid outflows is NOT bullish dry powder, illustrating why the signal must be paired with exchange-reserve direction. Forward-looking and unverified.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "flat-to-down",
+              "window": "early 2026",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "low SSR driven by outflows, not stablecoin accumulation",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://cryptopotato.com/bitcoins-dry-powder-myth-busted-outflows-not-buyers-driving-low-ssr/",
+            "https://www.onesafe.io/blog/stablecoin-supply-ratio-plummets-21-bitcoin"
+          ]
+        }
+      ]
+    }
+  ]
+}

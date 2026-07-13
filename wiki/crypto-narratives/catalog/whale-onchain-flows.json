@@ -1,0 +1,624 @@
+{
+  "category_id": "whale-onchain-flows",
+  "category_name": "Whale & On-Chain Exchange Flows",
+  "summary": "On-chain analysts watch where large holders move coins: Bitcoin or Ether flowing INTO exchanges is treated as sell-pressure (bearish), while coins flowing OUT into private wallets signals accumulation (bullish), and stablecoins flowing in is buy-side 'dry powder'. Discrete events — governments dumping seized BTC, Mt Gox returning coins to long-waiting creditors, and decade-dormant Satoshi-era wallets suddenly moving — create supply overhangs the market front-runs on fear, even when the actual selling is gradual or fully absorbed by ETF/treasury buyers. Net bias is bearish on confirmed exchange-bound supply shocks, but increasingly muted in 2024-2025 as deep institutional bid absorbs the flow; note that the 'stablecoin inflow = bullish' signal is unreliable (the March 2026 record USDT inflow preceded a BTC decline, not a rally).",
+  "directional_bias": "bearish",
+  "archetypes": [
+    {
+      "id": "exchange-netflow-signal",
+      "name": "Exchange Netflow / Whale Deposit Signal (continuous flow)",
+      "mechanism": "Coins in self-custody cannot be sold on a CEX order book, so a spike in exchange inflows (especially concentrated in the top-10 deposits — the 'whale ratio') front-runs distribution by holders to liquidity-seeking buyers. The reverse — large outflows to cold storage — removes liquid supply and signals accumulation. Stablecoin inflows are claimed to be the cleanest read (a USDT/USDC deposit ostensibly has only one purpose, buying, so it is treated as dry powder), but this signal is unreliable: the March 2026 record Binance USDT inflow preceded a BTC decline, not a rally. The other side of an inflow dump is dip-buyers/market makers; the other side of a stablecoin-inflow rally is short-term holders selling into strength. Edge erodes from false positives (custodian rotation, internal transfers, margin top-ups).",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "backtest_features": [
+        "exchange_netflow_zscore (inflow-outflow, rolling 30d z-score)",
+        "exchange_inflow_total_7dma",
+        "exchange_whale_ratio (top-10 deposits/total inflow, >0.85=whale-dominated selling)",
+        "stablecoin_exchange_netflow (positive=buy-side dry powder)",
+        "exchange_reserve_change_pct",
+        "large_transfer_count_to_exchange (>$1m tx tagged to CEX deposit addrs)",
+        "spent_output_age_bands"
+      ],
+      "typical_lag": "hours to 1-3 days",
+      "typical_duration": "intraday to 1 week",
+      "typical_magnitude_pct": "-2% to -8% on BTC for large confirmed inflow spikes; stablecoin-inflow follow-through is direction-uncertain (claimed +3% to +10%, but observed cases include BTC declines)",
+      "recurrence": "continuous — fires multiple times per month; the most repeatable, backtestable archetype in the category",
+      "leading_signals": [
+        "7-day MA of exchange inflows spikes above rolling mean (local-top marker)",
+        "exchange whale ratio rises above ~0.85",
+        "single large stablecoin deposit (e.g. >$1B USDT to Binance) — note unreliable as a directional signal",
+        "exchange reserves declining for weeks = supply squeeze/accumulation",
+        "Whale Alert flags of large BTC/ETH transfers TO exchange deposit wallets"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-05",
+          "description": "CryptoQuant reportedly flagged whale-led Bitcoin exchange deposits with top-10 deposits accounting for a large share of total inflow, a bearish exchange-whale-ratio reading. Both the ~64% figure and the associated price move are uncorroborated estimates.",
+          "trigger": "Exchange whale ratio spike (top-10 deposits a large share of inflow)",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-3% to -6%",
+              "window": "7d",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "exchange whale ratio reportedly elevated (specific ~64% figure uncorroborated)",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://cryptoquant.com/asset/btc/chart/flow-indicator/exchange-whale-ratio"
+          ]
+        },
+        {
+          "date": "2026-03-18",
+          "description": "Binance recorded a ~$2.2B USDT single-day inflow, the largest stablecoin deposit since Nov 2025, which CryptoQuant framed as potential buy-side dry powder. Contrary to the bullish 'dry powder' interpretation, BTC fell over the following days rather than rallying — a clear illustration that large stablecoin inflows do NOT reliably precede upside.",
+          "trigger": "Largest single-day USDT exchange inflow since Nov 2025 (CryptoQuant), framed as buy-side dry powder",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-6.18%",
+              "window": "Mar 16-22 (net); -10.31% intra-window drawdown",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "volume_or_flow_change": "+$2.2B USDT exchange inflow in one day (verified via CryptoQuant and multiple secondary reports)",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://coinpedia.org/news/binance-usdt-inflow-hits-2-2-billion-in-one-day-are-whales-about-to-move-the-market/",
+            "https://cryptoquant.com/insights/quicktake/69ba1a128d720a25909cb34e-Binance-recorded-a-22-billion-USDT-inflow-the-largest-single-day-stablecoin-depo"
+          ]
+        },
+        {
+          "date": "2026-03",
+          "description": "US Bitcoin ETFs saw net inflows after a period of large outflows; on-chain commentary suggested a portion of apparent outflows reflected institutional repositioning via OTC/DEX pathways rather than true selling — an illustration of netflow false-positive risk. The specific magnitudes ($1.32B inflow / $6.3B outflow / 40% reclassified) could not be independently corroborated.",
+          "trigger": "Large apparent ETF outflows partly attributed to institutional repositioning",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "flat-to-down",
+              "window": "weeks",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "reported gross ETF outflows partly reclassified as repositioning (figures uncorroborated)",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://ambcrypto.com/bitcoins-q1-2026-trend-will-bears-stay-in-control-as-lth-buying-etf-flows-shift/"
+          ]
+        },
+        {
+          "date": "2026-02-23",
+          "date_range": "Feb 23 - Mar 3 2026 (accumulate dip), then ~$74K bounce (distribute)",
+          "trigger": "Smart-money whales accumulate the Feb-2026 $60-70K panic, then SELL 66% into the bounce to $74K.",
+          "description": "During the Feb-2026 crash, wallets holding 10-10,000 BTC accumulated heavily while BTC traded the $62,900-$69,600 panic range (Feb 23-Mar 3) - a contrarian accumulation-during-fear divergence (Santiment also flagged 100+-BTC wallets rising toward ~20,000 ahead of the CLARITY Act as bullish; XRP added 42 new millionaire wallets in January while price dipped ~4%). BUT the diamond-hands narrative is overstated: once BTC bounced ~13% off the ~$60K low to ~$74,000, those same whales SOLD ~66% of their recent buys (profit-taking). Backtester signal: whale accumulation into capitulation is a bottoming tell, but track the DISTRIBUTION on the bounce - whales fade strength, they don't hold it.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+13% bounce off ~$60K low, then capped as whales distributed at ~$74K",
+              "window": "Feb 23 - Mar 2026",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "XRP"
+          ],
+          "affected_sectors": [
+            "on-chain",
+            "accumulation-divergence"
+          ],
+          "volume_or_flow_change": "10-10k BTC cohort accumulated the $62.9-69.6K range; 100+ BTC wallets ~20,000 (Santiment); whales sold ~66% of buys at $74K.",
+          "confidence": "medium",
+          "sources": [
+            "https://app.santiment.net/insights/read/this-week-in-crypto-full-written-summary-w1-february-2026-10534",
+            "https://coingape.com/bitcoin-price-faces-further-crash-as-whales-liquidates-recently-bought-btc-report/"
+          ]
+        },
+        {
+          "date": "2026-01-15",
+          "date_range": "Jan-Feb 2026 (multiple weeks)",
+          "trigger": "Large ETH holders move hundreds of millions to exchanges; ETH slips, triggering liquidation cascades.",
+          "description": "Across Jan-Feb 2026, large ETH holders moved hundreds of millions of ETH to exchanges (rising exchange inflows = sell-signal), and ETH slipped sharply in multiple weeks, triggering leveraged-liquidation cascades - the bearish counterpart to BTC's accumulation divergence over the same window (whales were rotating OUT of ETH and into BTC, consistent with Bitcoin-Season dominance). Exchange-inflow z-score is the tradeable feature.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "sharp multi-week slides + liquidation cascades (part of ETH's -40% YTD / -62% peak-to-trough)",
+              "window": "Jan-Feb 2026",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "on-chain",
+            "exchange-flows"
+          ],
+          "volume_or_flow_change": "Hundreds of millions of ETH to exchanges; ETH exchange-inflow spikes preceded the slides.",
+          "confidence": "medium",
+          "sources": [
+            "https://app.santiment.net/insights/read/this-week-in-crypto-full-written-summary-w1-february-2026-10534"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sovereign-seized-btc-dump",
+      "name": "Government / Seized-BTC Distribution (sovereign overhang)",
+      "mechanism": "Governments that seize BTC (Germany/Movie2k, US/Silk Road) are non-economic, price-insensitive sellers liquidating for fiat/legal reasons, not profit. They move large tranches to exchanges (or Coinbase Prime) in publicly trackable transactions, creating a visible supply overhang. The market often front-runs the announcement and on-chain transfers with fear-selling — though, as the Dec 2024 Silk Road transfer showed, a tracked transfer to Coinbase Prime can produce essentially no price move when there is no actual sale. The other side is dip-buyers and, increasingly, ETFs/treasuries who absorb the supply; the sellers 'lose' by dumping into weakness (Germany left ~$2.3B on the table). Edge: trackable wallets + public court filings give explicit leading signals.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "backtest_features": [
+        "gov_wallet_transfer_to_exchange_btc (tagged sovereign addrs -> CEX/Coinbase Prime)",
+        "remaining_gov_holdings_btc (overhang size)",
+        "days_since_court_forfeiture_ruling",
+        "tranche_size_pct_of_daily_spot_volume",
+        "headline_sentiment_flag (gov-sale news)",
+        "btc_drawdown_from_pre_announcement_high"
+      ],
+      "typical_lag": "immediate to 24h on each transfer/headline; a transfer without a sale may produce no move",
+      "typical_duration": "days to several weeks (duration of the liquidation program)",
+      "typical_magnitude_pct": "flat (transfer-only, no sale) to -17% peak-to-trough over a multi-week active liquidation campaign",
+      "recurrence": "episodic — a few major sovereign liquidations per cycle (Germany 2024, US Silk Road 2024-25, earlier US Marshals auctions)",
+      "leading_signals": [
+        "court/forfeiture ruling clearing a government to sell (e.g. Dec 30 2024 Silk Road greenlight)",
+        "on-chain transfer from a known government-tagged wallet to an exchange or Coinbase Prime (transfer alone is not a sale)",
+        "size of remaining tagged government stash (overhang capping rallies)",
+        "Arkham/Whale Alert labels on sovereign addresses moving"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-05-30",
+          "date_range": "2026-05-30",
+          "trigger": "US Treasury (Bessent) announces seizure of ~$1B in Iranian crypto under 'Operation Economic Fury'.",
+          "description": "Treasury Secretary Bessent says the US seized ~$1B of Iran-linked crypto (updating an earlier ~$500M), with 'direct control over these wallets.' Adds to the US-controlled seized stack (potential future SBR/overhang). No isolable price impact — BTC's -10.81% over the window was the broad late-May/June-2026 drawdown, not the seizure (correlation, not causation).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-10.81%",
+              "window": "May 28-Jun 2 2026 (broad crash, NOT seizure-driven)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "USDT"
+          ],
+          "affected_sectors": [
+            "geopolitics",
+            "sanctions",
+            "supply-overhang"
+          ],
+          "volume_or_flow_change": "~$1B Iranian crypto frozen/controlled; no direct market flow.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/business/2026/05/30/u-s-says-it-seized-about-usd1-billion-in-iranian-crypto-as-pressure-campaign-expands",
+            "https://www.foxbusiness.com/media/scott-bessent-says-us-seized-roughly-1b-iranian-crypto-regime-nears-end-tether.amp"
+          ]
+        },
+        {
+          "date": "2026-05-06",
+          "date_range": "2026-05-06 (announcement teased 'next few weeks')",
+          "trigger": "White House confirms legal breakthrough on the Strategic Bitcoin Reserve covering ~328,372 BTC; no-sale hold policy.",
+          "description": "Patrick Witt (exec dir, President's Council of Advisors for Digital Assets) tells Consensus 2026 the White House has cleared the legal path for the Strategic Bitcoin Reserve (~328,372 BTC, ~$25B, ~1.56% of supply) accumulated from Silk Road, the 2022 Bitfinex hack recovery, and forfeitures — the largest known sovereign BTC holder. The March-2025 EO bars Treasury sales, converting a long-feared seized-coin DUMP overhang into a structural HOLD (the inverse of the German-government and Silk-Road DOJ sales). Mild +2.8% over the window (within noise).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+2.80%",
+              "window": "May 4-9 2026 (mild, within noise)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "store-of-value",
+            "policy",
+            "supply-overhang"
+          ],
+          "volume_or_flow_change": "~328,372 BTC removed from feared-sale overhang by the no-sell policy; structurally supply-restrictive.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/policy/2026/05/06/u-s-bitcoin-reserve-update-coming-in-next-few-weeks-white-house-s-adviser-says",
+            "https://news.bitcoin.com/white-house-patrick-witt-strategic-bitcoin-reserve-announcement/",
+            "https://en.wikipedia.org/wiki/U.S._Strategic_Bitcoin_Reserve"
+          ]
+        },
+        {
+          "date": "2025-01-09",
+          "description": "News that a federal judge (ruling Dec 30 2024) cleared the DOJ to sell ~69,370 Silk Road BTC (~$6.5B) revived sovereign-overhang fears about two weeks before the Trump inauguration; BTC fell roughly 3% in 24h to the low-$90,000s on the headline despite no immediate on-chain sale.",
+          "trigger": "Court greenlight for DOJ to liquidate ~69,370 Silk Road BTC",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-3%",
+              "window": "24h (to ~$93,500)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "no immediate on-chain sale; announcement/sentiment effect",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://fortune.com/crypto/2025/01/09/federal-government-allowed-sell-bitcoin-silk-road-courts/",
+            "https://decrypt.co/300451/this-week-bitcoin-btc-plunges-sell-silk-road-billions",
+            "https://uk.finance.yahoo.com/news/bitcoin-price-slides-us-government-silk-road-102430810.html"
+          ]
+        },
+        {
+          "date": "2024-12-02",
+          "description": "The US government moved roughly ~$2B of Silk Road-linked BTC (~19,800 BTC) to a Coinbase Prime deposit address, which traders read as possible preparation to sell. Despite the bearish framing, the actual price reaction was minimal — reports put BTC roughly flat (around +0.4% / ~-0.03%) in the 24h after the transfer, since no sale followed. The catalog's earlier -2.5% figure could not be corroborated.",
+          "trigger": "US government transfers ~$2B Silk Road BTC to Coinbase Prime",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~flat (approx +0.4% to -0.03%)",
+              "window": "24h",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~19,800 BTC transferred to Coinbase Prime (no immediate sale)",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.binance.com/en/square/post/17063517453609",
+            "https://crypto.news/us-govt-sent-594m-silk-road-bitcoin-to-coinbase/",
+            "https://bitcoinmagazine.com/markets/us-government-preparing-to-sell-30000-silk-road-bitcoin-on-chain-data-shows"
+          ]
+        },
+        {
+          "date": "2024-06-19",
+          "date_range": "2024-06-19 to 2024-07-12",
+          "description": "The German government (BKA) liquidated 49,858 BTC (~$2.89B) seized from the Movie2k piracy case, sending tranches to Kraken, Bitstamp and Coinbase over roughly three weeks in a price-insensitive emergency sale. BTC fell from a mid-June local high near ~$65,000 to a ~$53,900 low — about a 17% peak-to-trough drop measured over the campaign — and Germany left an estimated $2.3B on the table by selling early. (A wider drawdown of ~25% exists if measured from the March 2024 all-time high near $73,800, but that conflates the BKA sale with broader market weakness.)",
+          "trigger": "German BKA dumping ~50,000 seized BTC to exchanges over three weeks",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-17%",
+              "window": "campaign peak-to-trough (Jun 19 ~$65,000 to early-Jul ~$53,900)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-3%",
+              "window": "24h (single large tranche)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~49,858 BTC distributed to exchanges; holdings fell to <5k BTC by ~Jul 11",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "altcoins"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2024/07/08/bitcoin-drops-as-german-government-moves-another-500m-of-assets",
+            "https://thedefiant.io/news/markets/germany-sold-49858-bitcoin-2-89-billion-june-july-2024-missing-over-2-3-billion-8dd1711e",
+            "https://www.coindesk.com/markets/2024/07/11/germany-almost-done-selling-bitcoin-holding-less-than-5k-tokens-after-latest-moves"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mt-gox-creditor-overhang",
+      "name": "Mt Gox / Estate Creditor Repayment Overhang",
+      "mechanism": "The Mt Gox rehabilitation trustee held ~142,000 BTC owed to creditors since the 2014 collapse. Because creditors sit on enormous unrealized gains (cost basis near zero) and coins were locked for a decade, the market assumed a wave of profit-taking once coins became spendable. The trustee moving coins from cold storage to distribution exchanges (Kraken, Bitstamp, BitGo) is the trackable trigger; the market front-runs each transfer and each repayment-date announcement. The other side is buyers betting most creditors are conviction holders who won't dump; in practice realized selling was far smaller than feared, but the overhang repeatedly capped rallies and repeated deadline extensions keep it alive.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "BCH",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "backtest_features": [
+        "trustee_wallet_outflow_btc (Mt Gox cold-wallet -> distribution exchange)",
+        "btc_remaining_in_trustee_custody",
+        "days_to_repayment_deadline",
+        "bch_btc_relative_drawdown (BCH sold harder than BTC by creditors)",
+        "repayment_announcement_flag"
+      ],
+      "typical_lag": "immediate to 24-48h on transfer/announcement headlines",
+      "typical_duration": "days per event; overhang persists across multiple deadline extensions (years)",
+      "typical_magnitude_pct": "-5% to -8% on BTC around major transfer/repayment dates; sharper on BCH",
+      "recurrence": "episodic but recurring — clusters around each repayment announcement (Jun 2024 notice, Jul 2024 start, extensions)",
+      "leading_signals": [
+        "trustee announcement of a repayment start/deadline date",
+        "on-chain movement of coins out of Mt Gox cold wallets to exchanges (Kraken/Bitstamp/BitGo)",
+        "BCH weakness leading BTC (creditors also received BCH)",
+        "size of BTC still in trustee custody (remaining overhang)"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-07-05",
+          "description": "Around the start of Mt Gox creditor repayments (trustee notice dated Jun 24, 2024; repayments commencing early July a decade after the collapse), large tranches of BTC moved out of cold wallets to distribution exchanges (Kraken, Bitstamp, BitGo), triggering a repayment-fear selloff. BTC fell from roughly ~$62,800 to ~$57,900, about -7.8% in 24h.",
+          "trigger": "Mt Gox trustee starts BTC creditor repayments; tens of thousands of BTC moved to exchanges",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-7.8%",
+              "window": "24h (~$62,800 to ~$57,900)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "large BTC tranches moved from trustee cold storage to Kraken/Bitstamp/BitGo",
+          "affected_coins": [
+            "BTC",
+            "BCH"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.cnbc.com/2024/07/05/mt-gox-begins-repaying-bitcoin-to-creditors-a-decade-on-from-collapse.html",
+            "https://cryptoslate.com/mt-gox-to-begin-bitcoin-repayments-to-creditors-in-july-2024-spooking-market/",
+            "https://koinly.io/blog/mt-gox/"
+          ]
+        },
+        {
+          "date": "2024-05-28",
+          "description": "The Mt Gox trustee reshuffled a very large amount of BTC (reported around ~140,000 BTC, ~$9B) within wallets ahead of the repayment window, spooking the market about imminent distribution and pressuring BTC. The exact reshuffle amount and the precise price move are not firmly corroborated.",
+          "trigger": "Large trustee wallet reshuffle ahead of repayment window",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-3% to -5%",
+              "window": "24-48h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~140,000 BTC trustee wallet reshuffle (amount approximate)",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.cnbc.com/2024/07/05/mt-gox-begins-repaying-bitcoin-to-creditors-a-decade-on-from-collapse.html"
+          ]
+        },
+        {
+          "date": "2025-10",
+          "description": "The trustee pushed back the repayment deadline to October 2026 (from Oct 2025), extending the supply overhang; periodic large BTC transfers continued to spark selloff speculation with only modest, sentiment-driven price reaction. The specific ~$739M transfer figure is approximate.",
+          "trigger": "Repayment deadline extended to Oct 2026; periodic large BTC transfers",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "modest / sentiment-driven",
+              "window": "24h",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "large BTC transfer flagged (~$739M reported, approximate)",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://decrypt.co/346053/mt-gox-pushes-back-bitcoin-repayments-by-another-year",
+            "https://cryptonews.net/news/bitcoin/32952665/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dormant-satoshi-era-awakening",
+      "name": "Dormant / Satoshi-Era Wallet Awakening",
+      "mechanism": "Wallets dormant 10-14+ years (Satoshi-era 2010-2011 coins) suddenly moving generate intense speculation about a giant holder cashing out — the ultimate latent supply overhang since these coins are deep in profit (cost basis near zero). The knee-jerk reaction is a sentiment dip on the alert. The decisive directional discriminator is DESTINATION — coins moving to a fresh self-custody/SegWit address (a security/format migration) produce only a brief dip and quick rebound, whereas coins moving to exchanges or OTC desks (Galaxy Digital) signal genuine distribution. In 2024-2025 even confirmed multi-billion-dollar OG sales were largely absorbed by ETFs and corporate treasuries (Strategy et al.), muting realized impact. The other side is treasuries/ETFs accumulating; the awakening whales realize once-in-a-cycle gains.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction",
+        "dry-powder-injection"
+      ],
+      "backtest_features": [
+        "coin_age_at_spend_years (dormancy, >10y=Satoshi-era flag)",
+        "dormant_supply_revived_btc (Coin Days Destroyed spike)",
+        "destination_is_exchange_or_otc_desk (boolean — key directional discriminator)",
+        "destination_is_segwit_migration (boolean — benign reformat)",
+        "btc_dip_on_whale_alert_24h",
+        "treasury_etf_net_buying_same_window (absorption capacity)"
+      ],
+      "typical_lag": "immediate (minutes-hours) on the Whale Alert; full price resolution within 1-3 weeks as destination/intent clarifies",
+      "typical_duration": "intraday dip if benign; multi-week if confirmed distribution",
+      "typical_magnitude_pct": "-1% to -3% knee-jerk dip on benign/non-exchange moves; larger drawdowns if confirmed exchange/OTC-bound, but increasingly absorbed (net flat)",
+      "recurrence": "sporadic — several notable awakenings per year; clustered in 2025 as OG holders exited near highs",
+      "leading_signals": [
+        "Whale Alert / Arkham flag of a wallet last active 2010-2013 spending coins",
+        "Coin Days Destroyed (CDD) / dormant-supply-revived metric spike",
+        "destination address tagged to an exchange or OTC desk (e.g. Galaxy Digital) vs a fresh SegWit wallet",
+        "follow-on transfers within days (staged distribution) vs single move that then sits idle"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-01-20",
+          "date_range": "mid-Jan 2026",
+          "trigger": "A 13-year-dormant Bitcoin whale moves 909 BTC (~$84-85M) from a 2013 wallet to a new address.",
+          "description": "A wallet dormant since 2013 (coins acquired under $7, ~13,000% unrealized gain) moved 909 BTC (~$84-85M) in mid-Jan 2026. Traders initially panicked fearing sell pressure, but the transfer was WALLET-TO-WALLET with no exchange deposits detected - most likely a custody upgrade/consolidation. No isolable price impact. Canonical lesson: dormant-whale awakenings trigger fear headlines, but wallet movement != intent to sell (only an exchange deposit signals likely selling).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "no isolable impact (panic headline; no exchange deposit, no follow-through sell)",
+              "window": "mid-Jan 2026",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "on-chain",
+            "sentiment"
+          ],
+          "volume_or_flow_change": "909 BTC moved wallet-to-wallet; zero exchange inflow.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/01/20/bitcoin-whale-wakes-up-after-12-years-to-move-usd84-million-fortune",
+            "https://cointelegraph.com/news/dormant-bitcoin-wallet-wakes-up-after-13-years"
+          ]
+        },
+        {
+          "date": "2025-07-18",
+          "date_range": "2025-07-14 to 2025-07-25",
+          "description": "The same OG whale routed its ~80,000 BTC (~$9B) to Galaxy Digital, which confirmed selling it in a $9B Satoshi-era estate transaction. Strategy and other BTC treasuries absorbed the coins, so BTC dipped then rebounded — net roughly flat over the window with a measured intra-window drawdown of ~6% — a confirmed multi-billion-dollar sale almost fully absorbed.",
+          "trigger": "OG whale's ~80,000 BTC routed to Galaxy Digital OTC desk and sold ($9B estate sale)",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0.31% (Jul 14-27 net); -6.19% intra-window drawdown",
+              "window": "Jul 14-27 (~10-day sale program)",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            }
+          ],
+          "volume_or_flow_change": "~80,000 BTC moved to OTC desk and sold; absorbed by treasuries/ETFs",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/07/18/satoshi-era-bitcoin-whale-moves-final-48b-to-galaxy-digital-likely-prepping-sale",
+            "https://www.coindesk.com/markets/2025/07/25/bitcoin-rebounds-after-galaxy-completes-sale-of-usd9b-btc-from-satoshi-era-whale",
+            "https://www.coindesk.com/markets/2025/07/27/usd9-billion-exit-by-satoshi-era-btc-whale-sparks-debate-are-bitcoin-ogs-losing-faith"
+          ]
+        },
+        {
+          "date": "2025-07-04",
+          "description": "Eight Satoshi-era wallets (coins dormant ~14 years) moved 80,000 BTC (~$8.6B) in the largest dormant-coin movement of its kind. Because the coins initially went to new addresses and NOT directly to exchanges, the immediate price impact was small — BTC traded roughly flat-to-slightly-down (intraday measured drawdown ~-2.6% over the surrounding days, net ~flat) before continuing higher.",
+          "trigger": "Eight Satoshi-era wallets move 80,000 BTC to new (non-exchange) addresses",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0.04% (Jul 3-8 net); -2.57% intra-window drawdown",
+              "window": "Jul 3-8 (surrounding days)",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            }
+          ],
+          "volume_or_flow_change": "80,000 BTC revived; massive Coin Days Destroyed spike",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/07/05/eight-bitcoin-wallets-move-80000-btc-in-largest-ever-satoshi-era-transfers",
+            "https://cointelegraph.com/explained/quantum-threat-to-bitcoin-80-000-btc-just-moved-after-14-years"
+          ]
+        },
+        {
+          "date": "2025",
+          "description": "Multiple Satoshi-era / 2011 dormant whales reactivated through 2025 and sold billions in BTC, but the net market impact was muted because spot ETFs and corporate treasuries absorbed the supply, leaving BTC roughly flat-to-up over the year.",
+          "trigger": "Year-long wave of dormant-whale reactivations and sales",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "net flat-to-up over year despite billions sold",
+              "window": "2025 full year",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "billions in dormant BTC distributed; absorbed by spot ETFs + treasuries",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://decrypt.co/350811/bitcoin-whales-woke-up-2025-moved-billions-why",
+            "https://www.mexc.co/news/360920"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,532 @@
+{
+  "category_id": "exchange-collapses",
+  "category_name": "Exchange & Counterparty Collapses",
+  "summary": "When a major crypto exchange or lender becomes insolvent and freezes customer funds, the market reacts violently: prices of the affected platform's token collapse near-zero, and fear spreads to Bitcoin and the broadest market because users no longer trust anyone holding their coins. These collapses cluster — one failure (e.g. Terra/Luna) bankrupts the lenders exposed to it (3AC, Celsius, Voyager), whose failures then bankrupt the firms exposed to THEM (BlockFi, Genesis), producing a multi-month contagion cascade rather than a single drop. A distinct, slower pattern is the \"estate overhang,\" where coins recovered from a defunct exchange (Mt Gox) are eventually returned to creditors who are expected to sell, weighing on price for months in anticipation.",
+  "directional_bias": "bearish",
+  "archetypes": [
+    {
+      "id": "acute-insolvency-bank-run",
+      "name": "Acute Insolvency / Bank-Run Freeze",
+      "mechanism": "A platform reveals (or is revealed) to be insolvent and freezes withdrawals. Depositors who believed their balance was money they could withdraw on demand discover the platform was running a fractional-reserve / leveraged book against their assets. The platform's native token (which was often the thing propping up the balance sheet) collapses toward zero as the reflexive loop — token used as collateral, falling token destroys collateral value, forcing more selling — runs in reverse. Bitcoin and the broad market sell off because every holder re-prices counterparty risk simultaneously and rushes to self-custody or to exit entirely. The other side: leveraged longs and the platform's own token holders are forcibly wiped; the winners are short sellers and those who withdrew early or held self-custody.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin / exchange token",
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "ecosystem tokens tied to the failed entity"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "counterparty-risk-repricing"
+      ],
+      "backtest_features": [
+        "exchange_token_price_drawdown_24h",
+        "exchange_token_to_circulating_collateral_ratio",
+        "stablecoin_depeg_flag (platform stablecoin or USDT premium)",
+        "exchange_btc_netflow_zscore (deposits/withdrawals spike)",
+        "withdrawal_halt_event_flag",
+        "open_interest_drop_pct_24h",
+        "funding_rate_negative_extreme_flag",
+        "social_volume_spike_zscore (mentions of insolvency/bankruptcy)",
+        "proof_of_reserves_gap_flag"
+      ],
+      "leading_signals": [
+        "Leaked balance sheet showing native-token concentration (CoinDesk's FTX/Alameda report on 2022-11-02)",
+        "A large rival publicly announcing it will dump its holdings of the platform's token (CZ's 2022-11-06 tweet)",
+        "Anomalous exchange outflows / large BTC moving off the platform before the halt",
+        "Token trading at a discount on the affected venue vs. other exchanges",
+        "Withdrawal delays / 'temporary pause due to extreme market conditions' language",
+        "Negative funding and rising borrow rates on the token"
+      ],
+      "typical_lag": "immediate to hours — the token gaps down within minutes of the trigger; BTC/broad-market reacts within hours to 1-2 days",
+      "typical_duration": "Token impact is permanent (near-total loss). Broad-market acute drop plays out over 3-10 days, with a depressed regime lasting weeks to months.",
+      "typical_magnitude_pct": "Platform token: -70% to -95% in 24-72h. BTC: -8% to -20% over the acute window. Closely-tied ecosystem coins: -40% to -60%.",
+      "recurrence": "Episodic but recurring across every cycle — roughly one major instance per bear-market liquidity crunch (2014 Gox, 2022 Celsius/FTX). Smaller exchange freezes occur more frequently.",
+      "historical_instances": [
+        {
+          "date": "2022-11-08",
+          "date_range": "2022-11-06 to 2022-11-09",
+          "trigger": "CoinDesk report (Nov 2) exposed Alameda Research's balance sheet was dominated by FTX's own FTT token; Binance CEO CZ announced (Nov 6) he would liquidate ~$500M of FTT; a bank run on FTX followed and FTX halted withdrawals on Nov 8, with Binance signing a non-binding LOI to acquire it the same day (later abandoned).",
+          "description": "FTX/Alameda insolvency. FTT collapsed and FTX froze customer funds; FTX, Alameda and 100+ entities filed Chapter 11 on Nov 11, 2022.",
+          "price_impacts": [
+            {
+              "asset": "FTT",
+              "pct_change": "-75% to -78%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "FTT",
+              "pct_change": "-90%",
+              "window": "peak-to-trough (~$22 to ~$2, Nov 7-13)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-22%",
+              "window": "peak-to-trough (~$20,600 Nov 7 to ~$15,500 low Nov 9)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-25%",
+              "window": "over next several weeks (cycle low ~$15,500)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-58%",
+              "window": "days (~$36 to <$15)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-70%+",
+              "window": "weeks (below $10 by year-end)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "FTT",
+            "BTC",
+            "SOL",
+            "SRM (Serum)",
+            "ETH",
+            "RAY",
+            "MAPS"
+          ],
+          "affected_sectors": [
+            "Solana ecosystem",
+            "exchange tokens",
+            "DeFi",
+            "centralized lenders"
+          ],
+          "volume_or_flow_change": "Massive BTC/stablecoin outflows from centralized exchanges to self-custody; spike in liquidations; FTT volume exploded then evaporated to near-zero post-halt.",
+          "confidence": "high",
+          "sources": [
+            "https://decrypt.co/113928/ftx-ftt-token-crashes-78-24-hours-bitcoin-hits-yearly-low",
+            "https://www.cnbc.com/2022/11/08/ftxs-ftt-token-plunges-80percent-wiping-out-over-2-billion-in-value.html",
+            "https://en.wikipedia.org/wiki/Bankruptcy_of_FTX",
+            "https://coinledger.io/learn/the-ftx-collapse"
+          ]
+        },
+        {
+          "date": "2014-02-07",
+          "date_range": "2014-02-07 to 2014-03-31",
+          "trigger": "Mt Gox — then the largest Bitcoin exchange — halted all BTC withdrawals on Feb 7, suspended trading Feb 24, and filed for bankruptcy protection in Tokyo on Feb 28, citing ~850,000 BTC missing/stolen.",
+          "description": "Mt Gox insolvency, the original crypto exchange collapse. BTC quoted on Gox fell to a deep discount versus other exchanges during the freeze.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-36%",
+              "window": "1 Feb 2014 to end of March 2014 (Mt Gox problem period)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "deep discount (Gox-quoted price fell far below other venues during freeze)",
+              "window": "Feb 2014 freeze",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "centralized exchanges",
+            "the entire (then-tiny) crypto market"
+          ],
+          "volume_or_flow_change": "Gox order book froze; arbitrage gap blew out as Gox BTC became unwithdrawable.",
+          "confidence": "high",
+          "sources": [
+            "https://www.statmuse.com/money/ask?q=bitcoin+price+february%2C+2014",
+            "https://bitcoinmagazine.com/guides/bitcoin-price-history",
+            "https://cryptoanarchy.wiki/events/mtgox",
+            "https://en.wikipedia.org/wiki/Mt._Gox"
+          ]
+        },
+        {
+          "date": "2022-06-12",
+          "date_range": "2022-06-12 to 2022-06-18",
+          "trigger": "Celsius Network paused all withdrawals, swaps and transfers on June 12, 2022 citing 'extreme market conditions,' revealing it could not meet redemptions on its loan book.",
+          "description": "Celsius bank-run freeze, the first domino of the post-Luna lender contagion (also feeds the contagion archetype). Celsius filed Chapter 11 on July 13, 2022.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-15%",
+              "window": "24h (from ~$27k to ~$23,300 on Jun 13)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-33% to -35%",
+              "window": "~1 week (to ~$17,600 / sub-$20k low Jun 18)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "CEL",
+              "pct_change": "-50%+",
+              "window": "24-48h",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "CEL",
+            "stETH"
+          ],
+          "affected_sectors": [
+            "centralized lenders",
+            "DeFi staking (stETH depeg)"
+          ],
+          "volume_or_flow_change": "stETH/ETH peg widened sharply as Celsius and 3AC were forced sellers; liquidation cascade across lending desks.",
+          "confidence": "high",
+          "sources": [
+            "https://techcrunch.com/2022/06/12/crypto-lender-celsius-pauses-withdrawals-transfers-citing-extreme-market-conditions/",
+            "https://www.cnbc.com/2022/06/13/crypto-lender-celsius-pauses-withdrawals-bitcoin-slides.html",
+            "https://www.washingtonpost.com/business/2022/06/18/bitcoin-falls-below-20k/",
+            "https://www.jdsupra.com/legalnews/celsius-suspends-withdrawals-amid-1940024/"
+          ]
+        },
+        {
+          "date": "2022-11-16",
+          "trigger": "Genesis Global Capital halted withdrawals on its lending arm on Nov 16, 2022 due to FTX exposure; Gemini Earn (which routed customer funds to Genesis) froze ~$900M of customer redemptions the same day.",
+          "description": "Genesis/Gemini Earn freeze — direct second-order FTX contagion. Genesis filed Chapter 11 on Jan 19, 2023.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-2% to -4%",
+              "window": "24h (added to ongoing FTX selloff)",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "GUSD (Gemini stablecoin, brief depeg)"
+          ],
+          "affected_sectors": [
+            "centralized lenders",
+            "exchange earn-products"
+          ],
+          "volume_or_flow_change": "GUSD traded at a discount; further exchange outflows.",
+          "confidence": "low",
+          "sources": [
+            "https://www.consumernotice.org/legal/crypto-bankruptcies/genesis/",
+            "https://en.wikipedia.org/wiki/Genesis_(cryptocurrency_company)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contagion-cascade-deleveraging",
+      "name": "Contagion Cascade / Counterparty Domino",
+      "mechanism": "Crypto lenders and funds form a tightly interconnected credit web — the same collateral (often a token like LUNA, GBTC, or stETH) is rehypothecated across multiple desks. When one large borrower (Three Arrows Capital) defaults, every lender exposed to it (Voyager, Genesis, BlockFi, Celsius) takes a hole in its balance sheet, is forced to liquidate collateral into a falling market, and may itself become insolvent — bankrupting the next firm down the chain. This is reflexive forced-deleveraging: selling begets lower prices begets more margin calls begets more selling. Unlike the acute single-venue freeze, this archetype grinds the whole market lower over weeks-to-months as each domino falls. The other side: anyone who lent unsecured to these funds loses; macro/spot holders who deleveraged early survive; the structural lesson is that opaque rehypothecation concentrates tail risk.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "lender/CeFi tokens",
+        "the entire market cap"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "forced-liquidation",
+        "sell-pressure",
+        "contagion",
+        "credit-crunch",
+        "collateral-spiral"
+      ],
+      "backtest_features": [
+        "lender_default_event_count_trailing_30d",
+        "stETH_discount_to_eth_pct",
+        "GBTC_discount_to_nav_pct",
+        "aggregate_perp_open_interest_drop_pct",
+        "realized_volatility_30d_zscore",
+        "btc_dominance_change (alts bleed faster in contagion)",
+        "cross_lender_exposure_graph_centrality",
+        "stablecoin_market_cap_change (redemptions)",
+        "rolling_drawdown_from_cycle_high"
+      ],
+      "leading_signals": [
+        "A large fund missing a margin call / a public notice of default issued to it (Voyager's default notice to 3AC, Jun 2022)",
+        "A widening stETH or GBTC discount (forced sellers exiting locked collateral)",
+        "A 'systemically important' token already collapsing (LUNA in May 2022 preceded the lender failures)",
+        "Lenders cutting yields / pausing new deposits / seeking emergency lines (Celsius, BlockFi raising rescue capital)",
+        "Falling aggregate open interest as leverage is purged",
+        "Rumors of insolvency clustering across multiple named firms within days"
+      ],
+      "typical_lag": "days to weeks — the first default is acute, but the full cascade unfolds over 1-6 months as each linked entity fails in sequence.",
+      "typical_duration": "Months. The 2022 cascade ran from the May Luna shock through the November FTX failure and into the January 2023 Genesis bankruptcy — roughly 8 months of grinding decline / suppressed prices.",
+      "typical_magnitude_pct": "BTC: -50% to -65% peak-to-trough over the full cascade. ETH and large alts: -70% to -80%. The compounding of multiple shocks, not any single one, drives the depth.",
+      "recurrence": "Once per major leverage build-up / bear cycle. The 2022 episode is the canonical full cascade; isolated defaults that don't chain (single fund blow-ups) are more frequent.",
+      "historical_instances": [
+        {
+          "date": "2022-06-27",
+          "date_range": "2022-06-15 to 2022-06-29",
+          "trigger": "Three Arrows Capital (3AC), a multi-billion-dollar crypto hedge fund, defaulted after its LUNA/stETH/GBTC bets imploded; Voyager Digital issued a notice of default on a >$665M loan; a BVI court ordered 3AC into liquidation on June 27, 2022.",
+          "description": "3AC default — the keystone of the 2022 contagion. Its failure directly holed Voyager, Genesis, BlockFi and Celsius.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-33% to -35%",
+              "window": "~2 weeks into the Jun 18 low (~$17,600)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-45%+",
+              "window": "~2 weeks (sub-$1,000 mid-June)",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "stETH",
+            "GBTC",
+            "AVAX",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "crypto hedge funds",
+            "centralized lenders",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "Forced unwinds of stETH and GBTC positions; lending desks margin-called across the board.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/business/2022/06/29/three-arrows-capital-liquidation-ordered-in-british-virgin-isles-report",
+            "https://en.wikipedia.org/wiki/Three_Arrows_Capital",
+            "https://www.s-rminform.com/latest-thinking/crypto-crash-three-arrows-capital"
+          ]
+        },
+        {
+          "date": "2022-07-05",
+          "date_range": "2022-07-01 to 2022-07-05",
+          "trigger": "Voyager Digital suspended all trading, deposits and withdrawals on July 1, 2022, then filed for Chapter 11 bankruptcy on July 5, 2022 after 3AC defaulted on its $665M loan.",
+          "description": "Voyager bankruptcy — second domino, direct 3AC contagion.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "flat to -3%",
+              "window": "24h (largely priced in by then, BTC ~$20k)",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "VGX (Voyager token)"
+          ],
+          "affected_sectors": [
+            "centralized lenders",
+            "retail-facing CeFi"
+          ],
+          "volume_or_flow_change": "VGX collapsed; customer funds locked.",
+          "confidence": "low",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Three_Arrows_Capital",
+            "https://www.consumernotice.org/legal/crypto-bankruptcies/genesis/",
+            "https://www.mintz.com/insights-center/viewpoints/2831/2022-07-18-charting-new-and-familiar-territory-voyager-crypto",
+            "https://help.coinledger.io/en/articles/8737058-how-do-i-report-my-voyager-bankruptcy-losses-on-my-taxes-2023-and-earlier"
+          ]
+        },
+        {
+          "date": "2022-11-28",
+          "trigger": "BlockFi filed for Chapter 11 bankruptcy, citing exposure to FTX/Alameda (FTX had extended BlockFi a credit line earlier in 2022, then itself collapsed).",
+          "description": "BlockFi bankruptcy — third-order contagion (3AC hurt it in summer, FTX finished it in November).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-1% to -3%",
+              "window": "24h (BTC ~$16,400, deep in post-FTX malaise)",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "centralized lenders"
+          ],
+          "volume_or_flow_change": "Further confidence drain from CeFi yield products; continued exchange outflows.",
+          "confidence": "low",
+          "sources": [
+            "https://milkroad.com/bankruptcies/",
+            "https://en.wikipedia.org/wiki/Bankruptcy_of_FTX"
+          ]
+        },
+        {
+          "date": "2023-01-19",
+          "trigger": "Genesis Global Capital filed for Chapter 11 bankruptcy, the final major domino, after halting withdrawals in November 2022 due to 3AC and FTX exposure.",
+          "description": "Genesis bankruptcy — closes out the 2022-23 cascade. By this point most impact was priced in; BTC was already recovering off the FTX-driven lows.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+2% to flat",
+              "window": "24h (BTC ~$21,000 and rising — market had bottomed)",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "GBTC (discount narrowed afterwards)"
+          ],
+          "affected_sectors": [
+            "centralized lenders",
+            "Grayscale/DCG complex"
+          ],
+          "volume_or_flow_change": "GBTC discount had blown out during the cascade; began narrowing as the credit crisis cleared.",
+          "confidence": "low",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Genesis_(cryptocurrency_company)",
+            "https://www.consumernotice.org/legal/crypto-bankruptcies/genesis/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "estate-distribution-overhang",
+      "name": "Estate Distribution / Repayment Supply Overhang",
+      "mechanism": "Years after an exchange collapses, the bankruptcy estate recovers a large stash of coins and is scheduled to return them to creditors. Because many creditors bought claims cheaply or have held through a 10x+ appreciation, the market PRICES IN the expectation that they will sell on receipt — creating a persistent supply overhang. The reaction is anticipatory and recurring: every on-chain movement of the estate's wallets or every announcement of a repayment date triggers a fresh, usually modest, sell-the-news dip. The actual realized selling is typically smaller and slower than feared (distributions are staggered, some creditors hold), so the overhang fear is often larger than the impact. The other side: the overhang is a known, scheduled, telegraphed event, so it tends to cap upside / add resistance rather than cause a crash. Note that a feared regulatory outcome being RESOLVED with the entity surviving (Binance DOJ settlement Nov 2023) removes existential uncertainty for the broad market, even though the entity's own token can still sell off on the headline.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC (Mt Gox)",
+        "BCH (Mt Gox also held BCH)",
+        "the named coin held by the estate"
+      ],
+      "analog_mechanisms": [
+        "supply-overhang",
+        "sell-pressure",
+        "anticipated-distribution",
+        "sentiment-shock",
+        "sell-the-news"
+      ],
+      "backtest_features": [
+        "estate_wallet_onchain_movement_flag",
+        "estate_btc_as_pct_of_circulating_supply",
+        "days_to_scheduled_repayment_date",
+        "repayment_announcement_event_flag",
+        "creditor_claim_secondary_market_price",
+        "btc_exchange_inflow_from_known_estate_addresses_zscore"
+      ],
+      "leading_signals": [
+        "Trustee announces a repayment start date or deadline (Mt Gox notices)",
+        "On-chain trackers flag movement of dormant estate wallets (e.g., $739M / $1B Mt Gox BTC transfers)",
+        "Creditor-claim secondary prices rising (claim buyers front-running)",
+        "Coinciding overhang from other forced sellers (German government BTC sales in summer 2024)"
+      ],
+      "typical_lag": "Anticipatory — dips occur on the announcement/on-chain-movement, often days to weeks BEFORE actual distribution; repayment dates are frequently delayed, resetting the overhang.",
+      "typical_duration": "A persistent multi-month overhang punctuated by sharp 1-3 day dips on each fresh trigger; individual dips fade within days as feared selling fails to fully materialize.",
+      "typical_magnitude_pct": "BTC: roughly -5% to -8% on a given trigger (e.g. the July 2024 ~-6% 24h move); rarely the primary cause of a deep crash, more a drag/resistance.",
+      "recurrence": "Specific to large defunct-exchange estates (Mt Gox is the dominant example, ~140,000 BTC). Recurs each time the estate moves coins or a deadline approaches; the Mt Gox repayment deadline has been repeatedly pushed (most recently to October 2026).",
+      "historical_instances": [
+        {
+          "date": "2024-07-05",
+          "date_range": "2024-06-24 to 2024-07-08",
+          "trigger": "Mt Gox rehabilitation trustee announced repayments would begin in early July and started distributing on July 5, 2024, returning over 140,000 BTC (worth ~$9B) to creditors a decade after the collapse. Coincided with German government (Saxony) selling seized BTC.",
+          "description": "Mt Gox creditor repayment overhang materializing — the canonical estate-distribution event. Fear of 140k BTC hitting the market drove an anticipatory selloff.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-6%",
+              "window": "24h around the early-July move",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "toward ~$53,000-$54,000 intraweek",
+              "window": "early July 2024",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "~-11%",
+              "window": "around the early-July move",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "BCH",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "broad market / Bitcoin spot"
+          ],
+          "volume_or_flow_change": "Negative spot-ETF flows during the window; liquidation spikes; estate moved $739M-$1B in tracked on-chain transfers.",
+          "confidence": "medium",
+          "sources": [
+            "https://www.cnbc.com/2024/07/05/mt-gox-begins-repaying-bitcoin-to-creditors-a-decade-on-from-collapse.html",
+            "https://koinly.io/blog/mt-gox/",
+            "https://nftplazas.com/mt-gox-moves-739m-bitcoin-during-btc-selloff-could-bitcoin-fall-to-60000/"
+          ]
+        },
+        {
+          "date": "2023-11-21",
+          "trigger": "Binance settled US DOJ/CFTC/Treasury criminal charges for $4.3B; CEO Changpeng Zhao (CZ) resigned and pleaded guilty. Crucially, Binance SURVIVED as a going concern rather than collapsing.",
+          "description": "COUNTER-EXAMPLE / non-collapse resolution. A feared existential regulatory threat to the largest exchange was resolved with the exchange intact. The exchange's own token BNB sold off on the headline, but Bitcoin and the broad market were resilient — there was no contagion because Binance remained solvent.",
+          "price_impacts": [
+            {
+              "asset": "BNB",
+              "pct_change": "-7%+",
+              "window": "intraday Nov 21 (sold off on the settlement news, not a relief rally)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "roughly flat / under -1%",
+              "window": "24h (BTC stayed ~$36k-$37k)",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BNB",
+            "BTC"
+          ],
+          "affected_sectors": [
+            "exchange tokens"
+          ],
+          "volume_or_flow_change": "Brief volume spike; notably NO contagion outflows because the exchange remained solvent and operational — the key differentiator from the FTX/Celsius freezes.",
+          "confidence": "high",
+          "sources": [
+            "https://www.justice.gov/criminal/case/united-states-v-binance-holdings-limited-dba-binancecom",
+            "https://home.treasury.gov/news/press-releases/jy1925",
+            "https://cointelegraph.com/news/bnb-price-pops-then-drops-following-news-of-doj-binance-settlement"
+          ]
+        }
+      ]
+    }
+  ]
+}

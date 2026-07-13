@@ -1,0 +1,694 @@
+{
+  "category_id": "technical-signals",
+  "category_name": "Technical & On-Chain Signals",
+  "summary": "Technical and on-chain signals are computed triggers — moving-average crosses, leverage/funding extremes, and valuation ratios — that traders watch to time crypto entries and exits. The most backtestable patterns split into two families: lagging trend signals (death/golden cross, 200-day MA loss/reclaim) that confirm moves already underway, and positioning/valuation extremes (funding spikes, open-interest washouts, MVRV Z-score, realized price) that mark exhaustion and tend to mean-revert. In practice the cleanest edges come from forced-liquidation washouts (sharp down, fast bounce) and on-chain undervaluation (MVRV < 1 = multi-month accumulation zone), while MA crosses mostly confirm rather than predict.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "ma-regime-cross",
+      "name": "Moving-average regime cross (golden/death cross, 200-DMA loss/reclaim)",
+      "mechanism": "The 50/200-day cross and the 200-day MA are lagging trend filters. They do not cause moves; they confirm a regime that price already entered. The 'other side' is momentum/CTA-style systematic flows that flip exposure on the cross, plus retail that treats the cross as a headline-driven signal. Because the 200-DMA is a widely-watched support/resistance line, it becomes a self-fulfilling cluster of stops and limit orders: losing it triggers stop cascades; reclaiming it triggers breakout buying. The recurring loser is the trader who treats the death cross as a fresh short entry near the local low — historically returns in the first ~3 weeks after a BTC death cross are roughly a coin flip and 2-3 months later average a 15-26% recovery.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "typical_lag": "lagging — the cross prints days-to-weeks AFTER the price move; the 200-DMA break itself reacts within hours",
+      "typical_duration": "regime label persists weeks to months; the acute stop-cascade on a 200-DMA loss plays out in 1-3 days",
+      "typical_magnitude_pct": "200-DMA loss often accompanies a -10% to -25% drawdown already in progress; reclaim tends to precede +15% to +40% over 1-3 months",
+      "recurrence": "BTC has printed multiple death crosses 2018-2025; 200-DMA tested multiple times per cycle",
+      "leading_signals": [
+        "50-DMA flattening and converging toward 200-DMA",
+        "price closing below 200-DMA on rising volume",
+        "50/200 spread narrowing to within 1-2%",
+        "200-DMA slope turning negative"
+      ],
+      "backtest_features": [
+        "sma_50_minus_sma_200_spread",
+        "price_minus_sma_200_pct",
+        "days_since_50_200_cross",
+        "sma_200_slope_20d",
+        "close_below_sma200_volume_zscore",
+        "consecutive_closes_below_sma200"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-11-16",
+          "date_range": "2025-11-14 to 2025-11-22",
+          "trigger": "BTC 50-DMA crossed below 200-DMA (death cross) ~6 weeks after the Oct 6 ATH near $126k; price had already fallen ~25% and broke below the 200-DMA region; coincided with record IBIT/ETF outflows (~$1.26B mid-Nov).",
+          "description": "Confirmed death cross arriving well after the top — a textbook lagging signal that printed as BTC continued lower toward $82k.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-14.46%",
+              "window": "2025-11-14 to 2025-11-22 (8d)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-17.48%",
+              "window": "peak-to-trough in window",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "volume_or_flow_change": "BlackRock IBIT ~$1.26B net outflows mid-November; record cumulative BTC ETF withdrawals.",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "ETF-linked"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/11/16/bitcoin-approaches-death-cross-as-market-tests-major-historical-pattern",
+            "https://beincrypto.com/bitcoin-death-cross-price-history-2025/"
+          ]
+        },
+        {
+          "date": "2021-05-19",
+          "trigger": "BTC closed below its 200-day SMA (~$39,825) for the first time since 29 Apr 2020, breaking a key watched support and triggering stop cascades; Musk/Tesla BTC-payment reversal added sentiment shock.",
+          "description": "Classic 200-DMA loss: the break of the widely-watched line accelerated a forced-liquidation crash and confirmed the cycle had topped. Intraday low ~$28,758 (max drawdown ~33.9% from the day's open).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-30%",
+              "window": "intraday 19 May 2021 (open ~$43k to low ~$28.8k; ~33.9% max drawdown)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-35%",
+              "window": "May 2021 month",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": ">$8B in crypto-market liquidations over 24h.",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2021/05/19/bitcoin-drops-below-31k-before-rebounding-8b-in-liquidations-triggered",
+            "https://www.chainalysis.com/blog/cryptocurrency-price-crash-may-2021/"
+          ]
+        },
+        {
+          "date": "2024-02-27",
+          "date_range": "2024-02 to 2024-03",
+          "trigger": "BTC formed a daily golden cross (50-DMA above 200-DMA) in late February 2024 as the spot-ETF-driven rally accelerated.",
+          "description": "Golden cross confirming an uptrend that then carried BTC to a new ATH (~$74k) in mid-March 2024 — illustrates the cross as trend confirmation, not entry timing.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+15% to +30%",
+              "window": "~30-45d post-cross (to mid-March ATH)",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "volume_or_flow_change": "Heavy US spot-ETF net inflows.",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "ETF-linked"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.tradingview.com/news/cointelegraph:4e918462b094b:0-bitcoin-is-signaling-a-golden-cross-what-does-it-mean-for-btc-price/",
+            "https://www.chainalysis.com/blog/spot-bitcoin-etfs/"
+          ]
+        },
+        {
+          "date": "2020-04",
+          "trigger": "BTC daily golden cross (50-DMA above 200-DMA) coming out of the March 2020 COVID crash.",
+          "description": "Golden cross preceding the 2020-2021 bull run; confirmed recovery from the COVID liquidation low.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+30% to +50%",
+              "window": "~90d post-cross",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://charts.bitbo.io/50-200-day-ma/"
+          ]
+        },
+        {
+          "date": "2023-09",
+          "trigger": "BTC death cross printed in September 2023 near a local low of the 2023 chop.",
+          "description": "Counter-example showing the death cross firing as a contrarian bottom marker rather than a continuation short — weakness was short-lived, a golden cross followed in October 2023, and price ultimately rallied toward the $74k March 2024 ATH.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+10% to +20%",
+              "window": "~60d post-cross",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.binance.com/en/square/post/12027276741986",
+            "https://charts.bitbo.io/50-200-day-ma/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oi-washout-liquidation-cascade",
+      "name": "Open-interest washout / forced-liquidation cascade",
+      "mechanism": "When perpetual-futures open interest and leverage build up (often alongside elevated funding), a sharp price move triggers margin calls. Exchange liquidation engines market-sell (or buy) collateral, pushing price further into the same direction, triggering the next tier of liquidations — a reflexive deleveraging cascade. The losers are the over-leveraged longs (in a down-washout) whose stops/liquidations become the fuel; the winners are spot buyers and patient capital who absorb the forced selling at a discount. Because the move is mechanical (positions, not fundamentals), it typically overshoots and snaps back fast — the washout itself is often a short-term bottom.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "typical_lag": "immediate — minutes to hours; the full cascade often completes inside 24h",
+      "typical_duration": "acute crash 1-2 days; OI/leverage reset persists weeks; price often recovers a large fraction within 1-2 weeks",
+      "typical_magnitude_pct": "BTC -8% to -30% in 24h; alts/high-beta -15% to -50%; bounce of +5% to +15% within days",
+      "recurrence": "the largest cascades cluster ~1-2 per year, with the biggest in May 2021, Aug 2024, and Oct 2025",
+      "leading_signals": [
+        "aggregate open interest at cycle highs",
+        "funding rate persistently positive/elevated",
+        "long/short ratio skewed heavily long",
+        "estimated-leverage-ratio rising",
+        "thin spot order-book depth into a macro catalyst"
+      ],
+      "backtest_features": [
+        "aggregate_oi_usd_zscore",
+        "oi_24h_pct_change",
+        "liquidations_usd_24h",
+        "long_liq_share",
+        "funding_rate_8h_zscore",
+        "oi_to_marketcap_ratio",
+        "estimated_leverage_ratio",
+        "max_intraday_drawdown_pct"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-10-10",
+          "date_range": "2025-10-10 to 2025-10-13",
+          "trigger": "Largest single-day crypto liquidation in history (~$19B+ across exchanges) — a leverage washout amplified by thin liquidity; high-beta alts hit hardest.",
+          "description": "Record forced-liquidation cascade: BTC, ETH and SOL gapped down within 24h then partially recovered, a classic deleveraging overshoot.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-8.68%",
+              "window": "2025-10-10 to 2025-10-11 (24h)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-14.26%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-19.53%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-11.01%",
+              "window": "peak-to-trough 2025-10-09 to 2025-10-13",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "volume_or_flow_change": "~$19B+ total liquidations in ~24h — the largest on record (multiple sources cite >$19B).",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "high-beta alts",
+            "DeFi",
+            "L1s"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/learn/october-10-crypto-crash-explained",
+            "https://coinshares.com/us/insights/knowledge/billions-in-liquidations-what-happened/",
+            "https://blog.amberdata.io/how-3.21b-vanished-in-60-seconds-october-2025-crypto-crash-explained-through-7-charts"
+          ]
+        },
+        {
+          "date": "2021-05-19",
+          "trigger": "Leverage washout as BTC broke the 200-DMA; >$8B liquidations across the market.",
+          "description": "One of the largest cascades of the cycle; >$8B liquidated and BTC plunged to an intraday low of ~$28,758 (~34% max drawdown) before a sharp rebound — a deleveraging overshoot.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-30%",
+              "window": "intraday 24h (to ~$28.8k low; ~33.9% max drawdown)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": ">$8B in 24h crypto-market liquidations.",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2021/05/19/bitcoin-drops-below-31k-before-rebounding-8b-in-liquidations-triggered",
+            "https://www.chainalysis.com/blog/cryptocurrency-price-crash-may-2021/"
+          ]
+        },
+        {
+          "date": "2024-08-05",
+          "trigger": "Yen carry-trade unwind (BOJ rate hike) margin-called risk assets globally; crypto leverage washed out with ~$1B liquidations.",
+          "description": "Macro-triggered forced deleveraging: BTC and ETH each fell ~20-25% intraday/over 1-2 days; worst crypto futures day in months.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-20% to -25%",
+              "window": "~24h peak-to-trough",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-20% to -25%",
+              "window": "~24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "~$1B crypto-futures liquidations in 24h (>275,000 traders); Nikkei -12%, Nasdaq -6%.",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "broad-market",
+            "macro-correlated risk"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2024/08/05/bitcoin-drops-15-against-japanese-yen-outpacing-declines-versus-usd-as-yen-carry-trades-unwind",
+            "https://cryptopragmatist.com/p/bitcoin-crash-25-unraveling-august-5th-market-meltdown"
+          ]
+        },
+        {
+          "date": "2022-11-08",
+          "date_range": "2022-11-08 to 2022-11-21",
+          "trigger": "FTX collapse / contagion forced deleveraging; funding turned deeply negative.",
+          "description": "Solvency-driven cascade that marked the cycle bottom; BTC fell from ~$21k to a ~$15.5k low (~26%), and deeply negative funding flagged the panic low before a multi-month recovery.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-26%",
+              "window": "~2 weeks (~$21k to ~$15.5k low)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Funding deeply negative; OI and leverage reset to cycle lows.",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "FTT"
+          ],
+          "affected_sectors": [
+            "broad-market",
+            "CEX-linked",
+            "FTX-ecosystem"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Bankruptcy_of_FTX",
+            "https://www.binance.com/en/square/post/7536871057817"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "onchain-valuation-extreme",
+      "name": "On-chain valuation extreme (MVRV Z-score, realized price, NUPL, Pi-cycle)",
+      "mechanism": "These metrics compare market price to aggregate cost basis (realized value). MVRV Z-score, realized price, NUPL and the Pi-cycle top indicator all measure how far price has stretched from what holders actually paid. At extreme highs (MVRV-Z > ~7, NUPL in euphoria, Pi-cycle crossover) holders are sitting on huge unrealized gains and the marginal buyer is exhausted — the other side is profit-taking long-term holders distributing into euphoric retail. At extreme lows (MVRV ratio < 1, price below realized price) the average holder is underwater — historically a maximum-pain accumulation zone where patient capital buys from capitulating sellers. Mean-reverting and slow: these are cycle markers, not day-trade triggers.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "typical_lag": "slow — signals fire days-to-weeks around tops/bottoms; full reversion plays out over months",
+      "typical_duration": "months; sub-1.0 MVRV windows lasted ~15 days (Mar 2020), ~178 days (2022), ~305 days (2018-19)",
+      "typical_magnitude_pct": "buying sub-1.0 MVRV historically returned triple-digit % within 12 months; selling MVRV-Z>7 avoided 50-80% cycle drawdowns",
+      "recurrence": "once or twice per ~4-year cycle for the full extreme",
+      "leading_signals": [
+        "MVRV Z-score crossing above 7 (top) or MVRV ratio below 1 (bottom)",
+        "price crossing below realized price",
+        "NUPL entering 'euphoria' (>0.75) or 'capitulation' (<0)",
+        "Pi-cycle 111DMA crossing above 2x350DMA",
+        "long-term-holder supply distributing"
+      ],
+      "backtest_features": [
+        "mvrv_z_score",
+        "mvrv_ratio",
+        "price_to_realized_price",
+        "nupl",
+        "pi_cycle_111dma_vs_2x350dma",
+        "lth_sopr",
+        "realized_cap_30d_change",
+        "days_mvrv_below_1"
+      ],
+      "historical_instances": [
+        {
+          "date": "2021-04",
+          "trigger": "MVRV Z-score spiked to roughly ~7 at the April 2021 local top.",
+          "description": "Extreme overvaluation reading at the first 2021 peak; the lower Z-score at the November higher price formed a bearish divergence warning the cycle was maturing.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-50%",
+              "window": "Apr to Jul 2021 (peak-to-trough)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.bitcoinmagazinepro.com/charts/mvrv-zscore/",
+            "https://www.ccn.com/education/crypto/mvrv-z-score-bitcoin-tops-bottoms/"
+          ]
+        },
+        {
+          "date": "2021-11-10",
+          "trigger": "Cycle ATH ~$69k with MVRV-Z making a LOWER high than April (bearish divergence) — realized cap had caught up to price.",
+          "description": "On-chain valuation flagged the final top via divergence; preceded the 2022 bear market.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-77%",
+              "window": "Nov 2021 to Nov 2022 (cycle)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.bitcoinmagazinepro.com/charts/mvrv-zscore/"
+          ]
+        },
+        {
+          "date": "2022-11",
+          "date_range": "2022-06 to 2023-01",
+          "trigger": "MVRV ratio fell below 1.0 (price below average cost basis / realized price) during the 2022 bear; ~178 days sub-1.0 in that cycle.",
+          "description": "Maximum-pain accumulation zone — buying the sub-1.0 MVRV window preceded triple-digit returns within 12 months.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+150%+",
+              "window": "12 months from sub-1.0 window",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://cryptoquant.com/asset/btc/chart/market-indicator/mvrv-ratio",
+            "https://www.bitcoinmagazinepro.com/charts/mvrv-zscore/"
+          ]
+        },
+        {
+          "date": "2020-03",
+          "trigger": "MVRV ratio dipped below 1.0 for ~15 days during the COVID crash.",
+          "description": "Brief but extreme undervaluation at the COVID low; accumulators in the sub-1.0 window earned triple-digit returns within 12 months.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+300%+",
+              "window": "12 months from Mar 2020 low",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://cryptoquant.com/asset/btc/chart/market-indicator/mvrv-ratio"
+          ]
+        },
+        {
+          "date": "2024-03",
+          "date_range": "2024-03 to 2025-06",
+          "trigger": "MVRV Z-score reached only ~3-4 at the $100k+ ATH — elevated but well below historical >7 extremes.",
+          "description": "ETF-driven cycle showed a muted valuation profile: the metric never reached classic euphoria, signalling a structurally different, institution-led regime rather than an imminent blow-off top.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0% (signal-flat, no extreme)",
+              "window": "n/a",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "ETF-linked"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.bitcoinmagazinepro.com/charts/mvrv-zscore/",
+            "https://en.macromicro.me/charts/30335/bitcoin-mvrv-zscore",
+            "https://bitcoinmagazine.com/markets/why-bitcoin-price-top-indicators-failed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "funding-rate-extreme",
+      "name": "Funding-rate / leverage-sentiment extreme (contrarian)",
+      "mechanism": "Perpetual funding is paid from the crowded side to the other side. Extreme positive funding (e.g. 0.2-0.3% per 8h sustained for weeks) means longs are paying heavily to stay long — crowded, over-leveraged positioning that signals euphoria and a vulnerable market near local tops. Deeply negative funding means shorts are paying — capitulation/panic positioning that often marks bottoms. The recurring losers are momentum-chasers piling into the crowded side at the extreme; the winners are contrarians who fade the crowd and/or harvest the funding (cash-and-carry). Funding extremes are a sentiment gauge, not precise timing — they identify fragility, with the actual reversal often needing a catalyst (which then becomes an OI washout).",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "sentiment-shock",
+        "sell-pressure",
+        "dry-powder-injection"
+      ],
+      "typical_lag": "days to weeks — extreme funding flags fragility; the reversal follows on a catalyst",
+      "typical_duration": "the positioning unwind resolves over days once triggered; funding normalizes within a week of a washout",
+      "typical_magnitude_pct": "fading sustained extreme-positive funding historically preceded -20% to -50% cycle corrections; buying deeply-negative funding preceded +30% to +600% recoveries",
+      "recurrence": "milder funding spikes several times a year; true multi-week extremes once or twice a cycle",
+      "leading_signals": [
+        "funding rate sustained >0.1-0.3% per 8h for days/weeks (top warning)",
+        "funding deeply negative (bottom signal)",
+        "OI rising while funding rich",
+        "perp basis / annualized basis at extreme",
+        "long/short account ratio skewed"
+      ],
+      "backtest_features": [
+        "funding_rate_8h",
+        "funding_rate_7d_avg",
+        "funding_rate_zscore_90d",
+        "annualized_perp_basis",
+        "oi_weighted_funding",
+        "days_funding_above_threshold",
+        "funding_sign_flip"
+      ],
+      "historical_instances": [
+        {
+          "date": "2021-04",
+          "trigger": "Perpetual funding (e.g. BitMEX XBTUSD) ran elevated, around 0.2-0.3% per 8h at times, into the April 2021 first peak.",
+          "description": "Sustained elevated-positive funding flagged euphoric over-leveraged longs ahead of the May 2021 crash — a textbook 'too crowded long' top warning, though exact sustained levels vary by source.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-50%",
+              "window": "Apr to Jul 2021",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Funding elevated near 0.2-0.3%/8h at peaks; OI at cycle highs.",
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "altcoins"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.bitmex.com/blog/2025q2-derivatives-report"
+          ]
+        },
+        {
+          "date": "2021-05-19",
+          "trigger": "Funding flipped to deep-negative values unseen for months during the May 19 crash.",
+          "description": "Negative-funding extreme at the panic acted as a leading indicator for the subsequent short-term rebound off the ~$30k area.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+30%+",
+              "window": "weeks post-crash rebound",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Funding deeply negative; >$8B liquidations cleared leverage.",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.chainalysis.com/blog/cryptocurrency-price-crash-may-2021/"
+          ]
+        },
+        {
+          "date": "2022-11",
+          "trigger": "Funding turned deeply negative during the FTX-collapse cascade.",
+          "description": "Deep-negative funding at the cycle bottom (~$15.5k) preceded a multi-hundred-percent recovery to new ATH — a high-conviction contrarian buy signal in hindsight.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+500%+",
+              "window": "Nov 2022 to early 2025",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Funding deeply negative; leverage reset to cycle lows.",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "broad-market"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://zipmex.com/blog/how-to-analyze-funding-rates-in-crypto/"
+          ]
+        },
+        {
+          "date": "2024-03",
+          "trigger": "BitMEX max funding only ~0.13% in 2024 even as BTC made new highs; sustained high rates effectively non-existent.",
+          "description": "Notable NON-signal: the 2024 ETF-led top lacked the euphoric funding spike of prior cycles, meaning the classic crowded-long warning never fully triggered — a regime-shift caveat for the backtest.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0% (signal-flat)",
+              "window": "n/a",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "volume_or_flow_change": "Funding muted vs prior cycles despite new ATHs.",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "ETF-linked"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.bitmex.com/blog/2025q2-derivatives-report",
+            "https://bitcoinmagazine.com/markets/why-bitcoin-price-top-indicators-failed"
+          ]
+        }
+      ]
+    }
+  ]
+}

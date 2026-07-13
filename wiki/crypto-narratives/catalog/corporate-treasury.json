@@ -1,0 +1,752 @@
+{
+  "category_id": "corporate-treasury",
+  "category_name": "Corporate Treasury Buys & Sells",
+  "summary": "Public companies that put crypto (mostly BTC, later ETH/SOL) on their balance sheet move prices through three repeatable patterns. First, the initial \"we're becoming a treasury company\" announcement reliably rockets the company's own STOCK (Semler ~+30-37%, Metaplanet thousands of %, SharpLink roughly +1,800% to +2,600%) while only mildly nudging the coin. Second, sustained accumulation funded by issuing stock/debt at a premium to net asset value (mNAV) acts as a steady demand pump that absorbs supply during bull phases. Third — the dangerous mirror image — when the coin falls and the mNAV premium collapses toward or below 1.0, these leveraged holders face distribution and \"death-spiral\" forced-selling risk that adds reflexive sell-pressure (Tesla's 2022 $936M dump; the Nov 2025 BTC ~-15% slide amid treasury-firm stress).",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "treasury-adoption-announcement",
+      "name": "Treasury-Adoption Announcement (company pivots to crypto reserve)",
+      "mechanism": "A public company announces it is adopting BTC/ETH as a primary treasury reserve asset, usually copying the MicroStrategy playbook. The other side of the trade is equity investors who suddenly re-rate the stock as a leveraged, tax-advantaged crypto proxy (and short-sellers who get squeezed). The stock pops violently because the announcement converts a sleepy small-cap into a high-beta crypto vehicle that can trade at a large premium to the crypto it holds (mNAV > 1). The underlying coin moves much less — the announced first purchase is small relative to coin market cap and is often already bought before disclosure — so the coin reaction is mild-bullish to neutral, driven by sentiment/adoption narrative rather than flow.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the announcing company stock",
+        "BTC",
+        "ETH",
+        "other treasury-stock peers (MSTR, SMLR, MARA, SBET)"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging"
+      ],
+      "typical_lag": "immediate (same session, often pre-market)",
+      "typical_duration": "stock pop intraday-to-days; narrative read-across can persist weeks; coin effect <24h",
+      "typical_magnitude_pct": "+20% to +4000%+ on the announcing stock (size-dependent); BTC/ETH typically -2% to +3% same day",
+      "recurrence": "very frequent in 2024-2025 — dozens of copycats; cluster events around each new high-profile entrant",
+      "leading_signals": [
+        "8-K / press release announcing treasury policy adoption",
+        "board approval of crypto-as-reserve",
+        "convertible-note or ATM equity raise filed days before",
+        "small beaten-down small-cap with a crypto-aligned chairman",
+        "sudden short-interest spike then squeeze"
+      ],
+      "backtest_features": [
+        "is_treasury_adoption_announcement (event flag)",
+        "announcing_mktcap_usd",
+        "first_purchase_usd / announcing_mktcap (relative size)",
+        "first_purchase_usd / coin_mktcap (coin-flow ratio)",
+        "pre_announcement_ytd_return (beaten-down screen)",
+        "stock_short_interest_pct",
+        "implied_mNAV_at_announcement"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-05-31",
+          "date_range": "Jan 2026 (~4.1M ETH) to 2026-05-31 (5.42M ETH)",
+          "trigger": "Bitmine Immersion (BMNR) reaches 5,416,901 ETH (~4.49% of supply) - the largest corporate ETH treasury (MSTR of ETH).",
+          "description": "Bitmine Immersion Technologies (BMNR, Tom Lee-linked) accumulated to 5,416,901 ETH (~4.49% of the ~120.7M supply, ~$10.9B at ~$2,003) by May 31 2026, plus 203 BTC and equity stakes - ~$11.6B total - pursuing an 'Alchemy of 5%' ETH-supply goal. It grew from ~4.1M ETH (Jan) to 5.4M (May), accumulating aggressively even as ETH fell ~40% YTD. The ETH analog of MicroStrategy's BTC flywheel: a structural demand sink, no clean single-day catalyst, with circular reflexivity/leverage risk if ETH keeps falling.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "structural demand (no clean single-day move; ETH fell ~40% YTD regardless)",
+              "window": "H1 2026 accumulation",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "corporate-treasury",
+            "crypto-equities",
+            "smart-contract-platforms"
+          ],
+          "volume_or_flow_change": "5.42M ETH (~4.49% of supply) accumulated; largest single corporate ETH holder.",
+          "confidence": "high",
+          "sources": [
+            "https://www.prnewswire.com/news-releases/bitmine-immersion-technologies-bmnr-announces-eth-holdings-reach-5-42-million-tokens-and-total-crypto-and-total-cash-holdings-of-11-6-billion-302786720.html",
+            "https://www.minichart.com.sg/2026/06/01/bitmine-immersion-technologies-bmnr-nears-5-ethereum-supply-ownership-with-11-6-billion-crypto-and-cash-holdings-in-2026/"
+          ]
+        },
+        {
+          "date": "2026-05-20",
+          "date_range": "2026-05-20 (holdings as of 2026-03-31)",
+          "trigger": "SpaceX S-1 IPO filing discloses 18,712 BTC (fair value $1.293B).",
+          "description": "SpaceX's S-1 (filed 2026-05-20, ahead of a record ~$1.75T IPO under ticker SPCX; roadshow ~Jun 4, trading ~Jun 12 2026) disclosed 18,712 BTC at fair value $1.293B / cost basis ~$661M (avg ~$35,300) as of Mar 31 2026 — more than double prior Arkham estimates. Notably SpaceX originally bought 25,724 BTC in 2021 and quietly sold ~27% down to 18,712 (corporate holders are not all diamond-hands). Ranks ~7th-8th among corporate holders (varies by source/methodology), ahead of Tesla (~11,509), Coinbase, and Block (~9,000), far behind Strategy's 843,706. The S-1 also disclosed a binding ~$45B compute agreement with Anthropic ($1.25B/mo through May 2029) for COLOSSUS/COLOSSUS II (post-xAI acquisition). A private-company disclosure of LEGACY holdings (no new buying) — no isolable BTC impact; BTC -2.3% over the window was the broad May-2026 downtrend. Tesla-SpaceX merger talks (May 2026) would create a combined ~30,221 BTC #5 holder.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-2.30%",
+              "window": "May 18-22 2026 (broad downtrend; no isolable disclosure impact)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "corporate-treasury",
+            "crypto-equities",
+            "space",
+            "ai"
+          ],
+          "volume_or_flow_change": "Disclosure only (no purchase); reveals a previously-private holder + a past ~7,000 BTC sell-down.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/05/20/elon-musk-s-spacex-holds-18-712-bitcoin-at-fair-value-of-usd1-29-billion-ipo-filing-shows",
+            "https://phemex.com/news/article/spacex-reveals-bitcoin-holdings-worth-1293-billion-in-ipo-filing-83838",
+            "https://kraneshares.com/spacex-ipo-5-key-takeaways-from-the-s-1-filing-and-how-to-get-exposure-today-with-agix/",
+            "https://www.coindesk.com/markets/2026/05/27/elon-musk-could-become-a-top-5-corporate-bitcoin-holder-if-tesla-and-spacex-merge"
+          ]
+        },
+        {
+          "date": "2025-05-28",
+          "trigger": "GameStop announces it bought 4,710 BTC (~$500M), first major crypto push; funded via $1.5B April convertible notes",
+          "description": "Counter-example: when the market already doubts the vehicle (dilution fears, meme-stock skepticism), the adoption pop FAILS — GME fell on the day despite the BTC buy. Sources diverge on magnitude: TradingView's recap shows a ~-3% close after gapping up, while another report cites -10.9% intraday after a +4.4% pre-market. Direction (down) is well-supported; exact magnitude is uncertain, so the range is widened.",
+          "price_impacts": [
+            {
+              "asset": "GME",
+              "pct_change": "-3% to -11%",
+              "window": "1d",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~flat",
+              "window": "24h",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "confidence": "medium",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "bitcoin-treasury-stocks",
+            "meme-stocks"
+          ],
+          "sources": [
+            "https://finance.yahoo.com/news/gamestop-stock-slides-10-as-company-announces-500-million-bitcoin-purchase-203238018.html",
+            "https://www.cbsnews.com/news/gamestop-is-buying-500-million-in-bitcoin/",
+            "https://www.tradingview.com/news/tradingview:d8b3f498f094b:0-gme-gamestop-stock-zig-zags-on-first-bitcoin-purchase-4-710-coins-worth-500-million/"
+          ]
+        },
+        {
+          "date": "2025-05-27",
+          "trigger": "SharpLink Gaming (SBET) announces pivot to an ETH treasury vehicle (Joe Lubin chairman)",
+          "description": "Extended the playbook from BTC to ETH. SBET spiked enormously from its base (sources range from ~+1,800% per Bybit, climbing ~$6.70 to ~$124, to ~+2,600% per ts2.tech) before later giving back ~86-92% from peak. Kicked off a wave of ETH treasury vehicles (later BitMine) that helped drive ETH +53% over late-June to mid-July 2025. Note: the ETH +53.3% window is a cohort-flywheel effect, not directly attributable to the SBET announcement day.",
+          "price_impacts": [
+            {
+              "asset": "SBET",
+              "pct_change": "~+1,800% to +2,600% (peak)",
+              "window": "peak run",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "+53.3%",
+              "window": "2025-06-25 to 2025-07-20",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "medium",
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "ethereum-treasury-stocks",
+            "altcoins"
+          ],
+          "sources": [
+            "https://ts2.tech/en/sharplink-gaming-sbet-stock-in-december-2025-ethereum-treasury-giant-at-a-discount-after-2600-spike-and-86-crash/",
+            "https://learn.bybit.com/en/tradfi/ethereum-treasury-strategy-sharplink"
+          ]
+        },
+        {
+          "date": "2024-05-28",
+          "trigger": "Semler Scientific (med-tech) announces BTC as primary treasury reserve, buys 581 BTC for ~$40M",
+          "description": "Classic small-cap re-rate. A beaten-down ~$210M med-tech (down >30% YTD) became a BTC proxy overnight; stock soared while BTC barely moved — textbook stock-pops-coin-flat signature. Perplexity puts the day's close gain at ~30%; the +37% figure appears to reflect an intraday peak. BTC roughly flat to slightly down.",
+          "price_impacts": [
+            {
+              "asset": "SMLR",
+              "pct_change": "~+30% (close); up to ~+37% intraday",
+              "window": "1d",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~-2%",
+              "window": "1d",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "bitcoin-treasury-stocks"
+          ],
+          "sources": [
+            "https://www.cnbc.com/2024/05/28/med-tech-stock-semler-scientific-surges-on-new-bitcoin-treasury-strategy.html",
+            "https://www.coindesk.com/business/2024/05/28/medical-device-maker-semler-scientific-stock-rises-25-after-40m-bitcoin-investment"
+          ]
+        },
+        {
+          "date": "2024-04-08",
+          "trigger": "Metaplanet (Japan) announces it is adopting BTC as a treasury reserve asset; begins accumulation",
+          "description": "Japanese 'MicroStrategy' birth (date 2024-04-08 confirmed). Stock ran thousands of percent over the following year on individual buy announcements; sources put the ~1-year gain anywhere from ~+4,000% to ~+8,850% depending on the endpoint chosen, so treat the precise multiple as approximate. The most extreme example of stock-side re-rating; coin effect negligible per-event.",
+          "price_impacts": [
+            {
+              "asset": "Metaplanet (3350.T)",
+              "pct_change": "~+4000% to ~+8850% (peak, ~1yr; endpoint-dependent)",
+              "window": "1y cumulative",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~flat per announcement",
+              "window": "24h",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "confidence": "medium",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "bitcoin-treasury-stocks",
+            "japan-equities"
+          ],
+          "sources": [
+            "https://beincrypto.com/metaplanet-stock-soars-bitcoin-accumulation-strategy/",
+            "https://www.ccn.com/news/business/metaplanet-bitcoin-japan-stock-2024/"
+          ]
+        },
+        {
+          "date": "2021-02-08",
+          "trigger": "Tesla discloses $1.5B BTC purchase (bought in January at ~$34,700 avg) and plans to accept BTC as payment",
+          "description": "Largest, highest-profile corporate adoption to date. Unlike most adoptions, Tesla's size + Musk halo moved the COIN hard, not just the stock — BTC jumped ~14.5% same day (roughly from the low-$39,000s to over $44,000), hitting a new ATH. Corrected from the prior '+15% to +20%' range, which overstated the move per Perplexity/bitbo price data.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+14.5%",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "TSLA",
+              "pct_change": "~+2%",
+              "window": "1d",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap-crypto"
+          ],
+          "sources": [
+            "https://fortune.com/2021/02/08/bitcoin-price-tesla-purchase-elon-musk-crypto/",
+            "https://www.cnbc.com/2021/02/08/tesla-buys-1point5-billion-in-bitcoin.html",
+            "https://charts.bitbo.io/price/2021"
+          ]
+        },
+        {
+          "date": "2020-08-11",
+          "trigger": "MicroStrategy announces first BTC purchase, 21,454 BTC for $250M at ~$11,653, calling BTC 'superior to cash' — the template for the entire category",
+          "description": "First major US public-company treasury adoption. MSTR re-rated as a BTC proxy; launched the playbook every later entrant copied. BTC reaction muted; the durable effect was the template itself. Perplexity-confirmed: MSTR rose ~9% (from ~$123.62 to ~$134.89); BTC roughly flat same day.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~+1%",
+              "window": "24h",
+              "direction": "flat",
+              "measured_by": "web"
+            },
+            {
+              "asset": "MSTR",
+              "pct_change": "~+9%",
+              "window": "few days",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "bitcoin-treasury-stocks"
+          ],
+          "sources": [
+            "https://www.coindesk.com/markets/2020/08/11/microstrategy-buys-250m-in-bitcoin-calling-the-crypto-superior-to-cash",
+            "https://www.sec.gov/Archives/edgar/data/0001050446/000119312520215604/d921849dex991.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accumulation-mnav-flywheel",
+      "name": "Sustained Accumulation / mNAV-Premium Flywheel (ongoing buys funded at a premium)",
+      "mechanism": "Once established, a treasury company runs a reflexive flywheel: because its stock trades at a premium to the crypto it holds (mNAV > 1), it issues equity/convertibles/preferreds ABOVE net asset value and uses the cash to buy more coin. Each buy is accretive (raises crypto-per-share), validating the premium, which lets it raise more — net new dry powder flowing INTO the coin. The other side is dilutive buyers of the stock who accept a premium for leveraged exposure, and coin sellers who get a persistent structural bid. Per individual buy the coin barely moves (each purchase is small vs daily volume), but in aggregate the cohort is a large, price-insensitive, sustained buyer. DATCos poured an estimated ~$42.7B into crypto in 2025 ($22.6B in Q3 alone per cited estimates), a real demand sink during the bull phase.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "SOL",
+        "treasury-stock cohort"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "supply-restriction"
+      ],
+      "typical_lag": "diffuse — builds over weeks/quarters rather than per-event",
+      "typical_duration": "persists as long as mNAV > ~1 and capital markets stay open (multi-quarter)",
+      "typical_magnitude_pct": "individually negligible (<1-2% per buy); cohort contributes meaningfully to multi-month uptrends",
+      "recurrence": "continuous through 2024-2025 bull phase; weekly purchase 8-Ks from MSTR and peers",
+      "leading_signals": [
+        "mNAV premium > 1 (especially > 2)",
+        "fresh ATM/convertible/preferred raise filings",
+        "weekly Monday MSTR purchase 8-Ks",
+        "rising 'BTC Yield'/coin-per-share metric",
+        "growing count of new treasury entrants (crowding)",
+        "exchange outflows to corporate custody addresses"
+      ],
+      "backtest_features": [
+        "aggregate_DATCo_net_purchases_usd_30d",
+        "issuer_mNAV_premium",
+        "new_treasury_raise_usd (ATM/convert/preferred)",
+        "btc_yield_metric_change",
+        "coin_per_share_growth_rate",
+        "count_active_treasury_vehicles",
+        "purchase_usd / coin_30d_adv (flow vs liquidity)"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-06-01",
+          "date_range": "ongoing accumulation milestone",
+          "trigger": "Strategy (MSTR) reaches 843,706 BTC — ~3/4 of all corporate-held BTC; nearing its 1M target.",
+          "description": "Strategy (formerly MicroStrategy) holds 843,706 BTC as of Jun 1 2026 (avg cost $66,385; ~$33.1B), ~3/4 of all corporate-treasury BTC and the largest corporate holder by far (e.g. >40x the largest private-company stacks). Late-April 2026 it added 3,273 BTC (~$255M) at 818,334. Ongoing accumulation — a structural demand sink, not a single-day catalyst.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "structural demand (no clean single-day move)",
+              "window": "ongoing through 2026-06-01",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "corporate-treasury",
+            "crypto-equities"
+          ],
+          "volume_or_flow_change": "843,706 BTC held; persistent ATM-funded accumulation toward a 1M-BTC target.",
+          "confidence": "high",
+          "sources": [
+            "https://bitbo.io/treasuries/microstrategy/",
+            "https://www.coindesk.com/markets/2026/04/27/michael-saylor-s-strategy-buys-3-273-bitcoin-as-it-inches-closer-to-its-1-million-target"
+          ]
+        },
+        {
+          "date": "2025-09-30",
+          "trigger": "Q3 2025: Digital Asset Treasury Companies (DATCos) estimated to deploy ~$22.6B into crypto in a single quarter (of ~$42.7B for full-year 2025, per cited estimates)",
+          "description": "Quantifies the flywheel at cohort scale. This wall of premium-funded buying supported BTC's climb to the >$126k October peak before the premium unwind began. The dollar-deployment figures are third-party estimates, not audited totals, hence medium confidence; the BTC trend move is approximate.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "to >$126k peak (~+100% from early-2025 lows; approximate)",
+              "window": "Jan-Oct 2025",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "medium",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "crypto-treasury-stocks",
+            "large-cap-crypto"
+          ],
+          "sources": [
+            "https://www.investing.com/analysis/bitcoin-encounters-a-hidden-wave-of-selling-from-overleveraged-treasury-firms-200670325",
+            "https://www.ainvest.com/news/bitcoin-corporate-treasuries-face-2025-death-spiral-risk-2507/"
+          ]
+        },
+        {
+          "date": "2025-07-01",
+          "trigger": "ETH-treasury accumulation wave: SharpLink + new entrants (BitMine, Tom Lee) ramp ETH buying through summer 2025",
+          "description": "Cohort flywheel applied to ETH. Aggregate treasury demand coincided with ETH +53% over late-June to mid-July 2025 (CoinGecko-measured); BitMine ultimately accumulated ~3-5% of all ETH supply, a major structural demand sink.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+53.3%",
+              "window": "2025-06-25 to 2025-07-20",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "ethereum-treasury-stocks",
+            "altcoins"
+          ],
+          "sources": [
+            "https://www.coindesk.com/business/2025/11/24/bitmine-immersion-added-nearly-70k-ether-last-week-now-holding-3-of-eth-supply",
+            "https://www.coindesk.com/business/2025/10/21/joe-lubin-s-sharplink-gaming-resumes-eth-purchases-bringing-holdings-over-usd3-5b"
+          ]
+        },
+        {
+          "date": "2024-11-11",
+          "trigger": "MicroStrategy buys ~27,200 BTC for ~$2.03B (Oct 31-Nov 10) at ~$74,463 avg; part of post-election mega-accumulation",
+          "description": "Peak-flywheel example: equity-funded multi-billion buys during BTC's run to $100k+, with mNAV premium reported near ~4x in late 2024. The cohort's relentless premium-funded bid coincided with the strongest leg of the 2024 bull market. The BTC and MSTR moves below are multi-week trend figures, not attributable to this single 8-K.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+35% to $100k area",
+              "window": "Nov-Dec 2024",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "MSTR",
+              "pct_change": "+60% to +100%+ (Q4 2024)",
+              "window": "Q4 2024",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "bitcoin-treasury-stocks",
+            "large-cap-crypto"
+          ],
+          "sources": [
+            "https://www.sec.gov/Archives/edgar/data/0001050446/000095017024118951/mstr-ex99_1.htm",
+            "https://www.tekedia.com/understanding-microstrategys-mnav-premium/"
+          ]
+        },
+        {
+          "date": "2024-07-01",
+          "trigger": "Marathon Digital (MARA) adopts full 'HODL' policy — retains all mined BTC and buys on open market (e.g. ~4,144 BTC / ~$249M in Aug 2024 at ~$59,500)",
+          "description": "Miner-turned-accumulator variant: converts a flow seller (miners normally sell coin to cover costs) into a holder/buyer, removing sell-pressure (supply-restriction) and adding demand. Stock becomes a leveraged BTC play. Price impacts are qualitative/structural rather than a measured single-event move; left as estimates.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "supportive (supply removed)",
+              "window": "ongoing",
+              "direction": "up",
+              "measured_by": "estimate"
+            },
+            {
+              "asset": "MARA",
+              "pct_change": "high-beta to BTC",
+              "window": "ongoing",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "confidence": "low",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "bitcoin-miners",
+            "bitcoin-treasury-stocks"
+          ],
+          "sources": [
+            "https://mispricedassets.substack.com/p/marathon-digital-bitcoin-treasury",
+            "https://bitbo.io/treasuries/marathon/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "distribution-mnav-unwind",
+      "name": "Distribution / Forced Selling / mNAV-Discount Unwind (the flywheel in reverse)",
+      "mechanism": "The reflexive flywheel runs backward. When the coin falls and the stock's premium collapses to or below net asset value (mNAV <= 1), accretive equity issuance stops, and pressure builds to monetize: either an outright corporate sale (Tesla 2022) or, for over-leveraged firms with debt covenants, forced liquidation to defend mNAV / service debt. Selling pushes the coin down, which drops more firms' mNAV below 1, forcing more sales — a 'death spiral.' The other side is whoever absorbs the supply at distressed prices. Direct corporate sales tend to produce a modest, sentiment-driven coin dip (the sale is often already done), but the SYSTEMIC risk — a cohort holding a large share of supply being forced out together — is the real bearish tail, amplified by leveraged longs in the treasury stocks unwinding simultaneously.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "treasury-stock cohort (MSTR, MARA, SBET, BMNR, Metaplanet)",
+        "broad crypto"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sentiment-shock"
+      ],
+      "typical_lag": "sentiment dip immediate; systemic forced-selling plays out over days-to-weeks",
+      "typical_duration": "single-sale dip hours-to-days; mNAV-unwind regimes persist weeks-to-months",
+      "typical_magnitude_pct": "-2% to -5% coin on a single disclosed corporate sale; -10% to -25% coin during a full premium-collapse/forced-selling regime",
+      "recurrence": "rare for outright sales (Strategy held through all of 2023-2025); systemic discount-unwind episodes clustered in late 2025",
+      "leading_signals": [
+        "mNAV falling toward / below 1.0",
+        "CEO comments about 'conditions to sell'",
+        "treasury stock down >50% YoY while coin down less (premium gone)",
+        "debt/preferred coverage stress, covenant headlines",
+        "treasury-stock share-buyback announcements (cash drain)",
+        "'one in three treasuries below NAV' breadth",
+        "rising correlation of treasury stocks crashing together"
+      ],
+      "backtest_features": [
+        "issuer_mNAV (level + 30d change)",
+        "pct_of_cohort_below_mNAV_1",
+        "is_disclosed_corporate_sale (event flag, qty/usd)",
+        "treasury_stock_drawdown_vs_coin_drawdown (premium-erosion spread)",
+        "DATCo_aggregate_holdings / coin_circulating_supply",
+        "convert/preferred_coverage_ratio",
+        "stock_buyback_announced (flag)"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-06-01",
+          "date_range": "sold May 26-31; disclosed 2026-06-01 (8-K)",
+          "trigger": "Strategy (MSTR) discloses its first BTC SALE since 2022 - 32 BTC (~$2.5M) for a preferred-dividend payment.",
+          "description": "Strategy's 8-K (Jun 1 2026) disclosed selling just 32 BTC (~$2.5M at ~$77,135) between May 26-31 to fund preferred-stock distributions - the first confirmed sale since Dec 2022 and a microscopic 0.0038% of its 843,706-BTC stack. Materially trivial, but the 'Saylor never-sell era cracks' NARRATIVE rattled the market: BTC fell ~4.5% to ~$69,800 (Jun 1-2; part of the broader June-2026 risk-off to ~$63k) amid $2.43B of May spot-BTC-ETF outflows (largest of 2026). A textbook case of a symbolically-loaded but fundamentally-immaterial event moving price via narrative, not flow - the inverse of the accumulation flywheel's reflexivity.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-4.5%",
+              "window": "Jun 1-2 2026 (8-K disclosure, to ~$69,800; broader June crash to ~$63k)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "MSTR"
+          ],
+          "affected_sectors": [
+            "corporate-treasury",
+            "crypto-equities"
+          ],
+          "volume_or_flow_change": "32 BTC sold (~$2.5M, 0.0038% of holdings) for a dividend; $2.43B May BTC-ETF outflows (largest of 2026).",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/06/01/analysts-agree-strategy-s-bitcoin-sale-was-immaterial-differ-on-future-signals",
+            "https://phemex.com/blogs/microstrategy-sells-btc-first-sale-since-2022",
+            "https://www.blockhead.co/2026/06/02/bitcoin-slides-bel-70-000-as-strategys-first-btc-sale-in-four-years-rattles-markets/"
+          ]
+        },
+        {
+          "date": "2026-05-22",
+          "date_range": "2026-05-22 (2nd transfer; ~2,000 BTC moved ~4 months earlier)",
+          "trigger": "Trump Media transfers 2,650 BTC (~$205M) to Crypto.com (says 'did not sell').",
+          "description": "Trump Media & Technology Group moves 2,650 BTC (~$205M) to Crypto.com, its 2nd large exchange transfer, amid steep losses (bought 11,542 BTC at avg $118,522, down ~$455M; Q1 net loss $405.9M; withdrew its spot-BTC-ETF application). Feared as distribution, but no isolable impact — BTC +0.44% over the window. Illustrates that exchange transfers != confirmed sells and that small-treasury distress is noise vs market.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+0.44%",
+              "window": "May 20-25 2026 (flat; 'bearish pressure' framing overstated)",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "corporate-treasury",
+            "crypto-equities"
+          ],
+          "volume_or_flow_change": "2,650 BTC to a CEX (custody/liquidity/possible-sale ambiguous; company says not sold).",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/05/22/trump-media-moves-another-usd205m-in-bitcoin-as-losses-on-crypto-bet-swell-to-usd455m",
+            "https://news.bitcoin.com/trump-media-2650-bitcoin-crypto-com-transfer-2026/"
+          ]
+        },
+        {
+          "date": "2025-12-31",
+          "trigger": "SharpLink (SBET) ETH-treasury vehicle down ~86-92% from peak; ETH-treasury cohort de-rates as premiums vanish",
+          "description": "Shows the unwind extends to the ETH cohort. The same vehicles that amplified ETH's summer rally became forced/willing distributors and de-rating stocks as mNAV collapsed, with BitMine sitting on multi-billion paper losses. SBET drawdown from peak is ~86% (ts2.tech) to ~92.5% (Bybit); the BitMine ~$8.66B paper-loss figure is a single forward-dated (2026) source, so this instance stays medium/low confidence.",
+          "price_impacts": [
+            {
+              "asset": "SBET",
+              "pct_change": "~-86% to -92% from peak",
+              "window": "peak to Dec 2025",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "sharp decline (BitMine ~$8.66B paper loss, per single 2026 source)",
+              "window": "Q4 2025-Q2 2026",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "low",
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "ethereum-treasury-stocks",
+            "altcoins"
+          ],
+          "sources": [
+            "https://ts2.tech/en/sharplink-gaming-sbet-stock-in-december-2025-ethereum-treasury-giant-at-a-discount-after-2600-spike-and-86-crash/",
+            "https://www.cryptotimes.io/2026/06/03/bitmine-faces-8-66b-paper-loss-amid-eth-price-decline-inside-tom-lees-alchemy-of-5-strategy/"
+          ]
+        },
+        {
+          "date": "2025-12-02",
+          "trigger": "Strategy CEO Phong Le comments on conditions under which the firm would sell BTC; reports note MSTR market cap falling near/below its BTC holdings, with MSTR down sharply YoY (~-45% to -63% per varying sources)",
+          "description": "Sentiment-shock on the mere prospect of the largest holder selling. BTC traded toward/below $86k in early December; demonstrates how reflexive-deleveraging fear in the treasury cohort transmits to spot even without an actual sale (Strategy did not sell BTC in 2025). The precise '-60% YoY' is endpoint-dependent — Perplexity cites figures from ~-45% (from Nov peak) to ~-63% (1-year), so a range is used and confidence stays medium. The 'below $86k toward ~$82k' figure is approximate/web-sourced.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "toward ~$82k-$86k low (approx)",
+              "window": "early Dec 2025",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "MSTR",
+              "pct_change": "~-45% to -63% YoY (endpoint-dependent)",
+              "window": "1y to late-Nov/early-Dec 2025",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "confidence": "medium",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "crypto-treasury-stocks",
+            "large-cap-crypto"
+          ],
+          "sources": [
+            "https://fortune.com/2025/12/02/stocks-bitcoin-strategy-ratio-market-cap/",
+            "https://www.barchart.com/story/news/36054832/down-40-in-the-past-6-months-should-you-buy-sell-or-hold-microstrategy-stock-in-november-2025"
+          ]
+        },
+        {
+          "date": "2025-11-12",
+          "trigger": "Strategy (MSTR) mNAV (market cap to BTC NAV) falls below 1.0 for the first time as BTC slides from ~$107k toward $95k; reports cite roughly one-in-three treasury firms dropping below NAV",
+          "description": "First time the category leader's NAV multiple slipped below 1.0 (corroborated by Cointelegraph/TradingView coverage around 2025-11-10/11-12; it recovered above ~1.09 shortly after). The earlier '0.97x' precision was unsourced and is removed; the exact sub-1 low is not published. This removed accretive issuance and crystallized 'death-spiral' fears — the regime flip from flywheel to unwind, with treasury stocks selling off as a correlated cohort. BTC move is CoinGecko-measured.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-14.77%",
+              "window": "2025-11-10 to 2025-12-05",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-22.89% peak-to-trough",
+              "window": "2025-11-10 to 2025-12-05",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "crypto-treasury-stocks",
+            "large-cap-crypto",
+            "altcoins"
+          ],
+          "sources": [
+            "https://www.tradingview.com/news/cointelegraph:d01b52bdc094b:0-strategy-s-nav-falls-under-1-critics-raise-alarm-after-5-7b-bitcoin-wallet-move/",
+            "https://www.dlnews.com/articles/markets/spiral-of-doom-as-one-in-three-treasury-companies-lose-premiums/"
+          ]
+        },
+        {
+          "date": "2025-10-10",
+          "trigger": "BTC tops ~$126k (early Oct) then rolls over; premium-funded buying stalls as mNAVs compress across the cohort",
+          "description": "The top of the 2025 flywheel and start of the unwind. As the premium that fueled accumulation evaporated, the marginal treasury bid disappeared, removing structural support. BTC move CoinGecko-measured for the Oct 5-15 window.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-9.5%",
+              "window": "2025-10-05 to 2025-10-15",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-12.85% peak-to-trough",
+              "window": "2025-10-05 to 2025-10-15",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "confidence": "high",
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "crypto-treasury-stocks",
+            "large-cap-crypto"
+          ],
+          "sources": [
+            "https://www.investing.com/analysis/bitcoin-encounters-a-hidden-wave-of-selling-from-overleveraged-treasury-firms-200670325",
+            "https://atlas21.com/bitcoin-treasury-companies-in-crisis-valuations-collapse-and-survival-at-risk/"
+          ]
+        },
+        {
+          "date": "2022-07-20",
+          "trigger": "Tesla reveals it converted ~75% of its BTC to fiat in Q2 2022 (~$936M, ~30k BTC sold at ~$29k avg), citing China-COVID cash needs",
+          "description": "The canonical corporate distribution event. Reaction was modest because the sale was already executed during the quarter and was framed as idiosyncratic (cash management, not a BTC view) — BTC dipped then recovered. Perplexity confirms the direction (BTC fell) but did not corroborate an exact same-day percentage from one source; the widely reported ~-2% intraday figure is retained as approximate. Confirms single disclosed sales are weak coin catalysts vs the announcement-buy asymmetry.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~-2% (approx)",
+              "window": "intraday post-report",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "confidence": "medium",
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap-crypto"
+          ],
+          "sources": [
+            "https://www.coindesk.com/business/2022/07/20/tesla-sold-936m-worth-of-bitcoin-in-second-quarter",
+            "https://www.cnbc.com/2022/07/20/tesla-converted-75percent-of-bitcoin-purchases-to-fiat-currency-in-q2-2022.html",
+            "https://techcrunch.com/2022/07/20/tesla-dumped-75-of-its-bitcoin-holdings/"
+          ]
+        }
+      ]
+    }
+  ]
+}

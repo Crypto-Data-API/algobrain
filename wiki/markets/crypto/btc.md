@@ -1,0 +1,12 @@
+---
+title: "BTC"
+type: redirect
+created: 2026-04-15
+updated: 2026-06-17
+status: good
+tags: [crypto]
+aliases: ["BTC"]
+related: ["[[bitcoin]]"]
+---
+
+See [[bitcoin]].

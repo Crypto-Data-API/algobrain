@@ -1,0 +1,147 @@
+---
+title: "Theta Network"
+type: entity
+created: 2026-04-09
+updated: 2026-06-21
+status: excellent
+tags: [crypto, depin, ai-trading]
+aliases: ["THETA"]
+entity_type: protocol
+founded: 2017
+headquarters: "Decentralized"
+website: "https://www.thetatoken.org/"
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[depin]]", "[[bitcoin]]", "[[theta-fuel]]", "[[layer-1]]", "[[proof-of-stake]]"]
+---
+
+# Theta Network
+
+**Theta Network** (ticker **THETA**) is a [[layer-1|Layer-1]] blockchain and decentralized physical infrastructure network ([[depin]]) for video, media and AI compute. It pairs the **Theta Blockchain** (an [[ethereum|EVM]]-compatible [[proof-of-stake|PoS]] chain that handles payments, rewards and smart contracts) with the **Theta Edge Network** (a peer-to-peer mesh of GPU/bandwidth-sharing nodes that powers Theta EdgeCloud, a hybrid cloud-edge AI compute platform). THETA is the staking and governance asset; a second token, **[[theta-fuel|TFUEL]]**, is the operational gas/utility token used to pay for streaming and compute.
+
+---
+
+## Market Data
+
+| Field | Value |
+|---|---|
+| **Ticker** | THETA |
+| **Current Price** | $0.15476 |
+| **Market Cap** | $154,760,006 |
+| **Market Cap Rank** | #206 |
+| **24h Volume** | $6,695,099 |
+| **24h Change** | +1.75% |
+| **7d Change** | -3.34% |
+| **Fully Diluted Valuation** | $154,760,006 |
+| **Circulating Supply** | 1.00B THETA |
+| **All-Time High** | $15.72 (2021-04-16) — now -99.0% |
+| **All-Time Low** | $0.0404 (2020-03-13) — now +283.1% |
+
+> *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
+
+Context: the broader market backdrop on 2026-06-21 is risk-off — the [[fear-and-greed-index|Crypto Fear & Greed Index]] reads **23 (extreme fear)** within what is being characterized as an **"Established Bear Market."** THETA managed a small +1.75% 24h bounce but is still -3.3% on the week, and thin ~$6.7M daily volume signals low liquidity typical of a deep drawdown. The token sits ~99% below its 2021 all-time high.
+
+---
+
+## Tokenomics & Supply
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.00B THETA |
+| **Total Supply** | 1.00B THETA |
+| **Max Supply** | 1.00B THETA |
+| **Market Cap / FDV Ratio** | 1.00 (fully circulating) |
+
+- **Fixed cap, no inflation on THETA:** the entire 1B supply is in circulation (MC = FDV, ratio 1.00), so there is no future dilution/unlock overhang on the governance token. This is unusual among Layer-1s and removes one common source of structural sell pressure.
+- **Dual-token model:** THETA is staked by Validator and Guardian nodes to secure the chain and is required for governance. **[[theta-fuel|TFUEL]]** is the *inflationary* gas token that pays for bandwidth/video delivery and EdgeCloud compute jobs; demand for network services accrues to TFUEL rather than THETA. The split deliberately localizes inflation/dilution risk to TFUEL while keeping THETA hard-capped — see [[theta-fuel]] for the operational-token side of the economy.
+- **Genesis:** mainnet launched 2019; original token sale era 2017–2018.
+
+---
+
+## How & Where It Trades
+
+THETA is a liquid, widely-listed altcoin available on most major centralized venues:
+
+- **Spot (CEX):** Binance (THETA/USDT), Upbit (THETA/KRW — Korea is historically a strong THETA market), KuCoin (THETA/USDT), Crypto.com. Korean Won pairs are notable because retail Korean flow has periodically driven THETA premia.
+- **Derivatives:** THETA perpetual futures are offered on major derivatives venues (e.g., Binance Futures). It is not among the deepest perp markets, so funding and open interest are modest relative to large-cap [[bitcoin]]/[[ethereum]] contracts; traders should expect wider spreads and thinner books during the current low-volume regime.
+- **Liquidity note:** with ~$5.6M of 24h volume against a ~$152M cap, THETA trades thinly enough that large orders move price. This is standard for a coin ~95%+ below its all-time high in a bear market.
+
+---
+
+## Use Case, Narrative & Category
+
+Theta sits at the intersection of three narratives that have driven its categorization on data aggregators: **DePIN** ([[depin]]), **AI compute**, and **video/media streaming**.
+
+- **Edge Network / EdgeCloud:** the original thesis was decentralized video delivery (offloading CDN costs to a mesh of viewer nodes that relay streams and earn TFUEL). The network has since been repositioned around **EdgeCloud**, a hybrid platform marketing distributed GPU compute for AI inference, video transcoding and 3D rendering.
+- **AI pivot:** Theta markets its edge-node GPU pool as supply for generative-AI workloads (text-to-video, rendering), aligning it with the DePIN-meets-AI thesis that drew capital into the sector in 2024–2025.
+- **EVM compatibility:** the chain supports Solidity smart contracts, NFTs and DeFi primitives, positioning it as a general-purpose L1 in addition to its media/compute specialization.
+
+---
+
+## Valuation Framing (qualitative)
+
+Valuing a DePIN/compute L1 like Theta is inherently speculative — there is no earnings stream, and the governance token (THETA) does not directly capture network fees (those accrue to [[theta-fuel|TFUEL]]). Useful qualitative anchors:
+
+- **MC = FDV ($155M):** because supply is fully circulating, there is no hidden dilution; the entire valuation is "live." This compares favorably to low-float L1s where headline market cap understates eventual fully-diluted value.
+- **Value accrual is indirect:** THETA upside depends on *staking demand* (security/governance) and the reflexive belief that a thriving EdgeCloud → more TFUEL burn/usage → more reason to stake THETA. Bears argue this linkage is weak; bulls treat THETA as a leveraged claim on the network narrative.
+- **Compute-utilization is the key fundamental:** the metric that would justify re-rating is *paid* EdgeCloud GPU utilization and TFUEL burn, not marketing FLOPS. As of this snapshot these remain hard to verify from price alone.
+- **Drawdown context:** ~99% below the 2021 ATH is typical for a 2021-cycle narrative coin; recovery to prior highs would require a ~64x move, so the realistic bull case is a partial re-rating on a credible AI-compute revenue story, not a return to the peak.
+
+---
+
+## Peer Comparison
+
+THETA against other narrative-driven small/mid-cap L1s and infrastructure tokens in this cohort (data as of 2026-06-21):
+
+| Token | Ticker | Price | Market Cap | Rank | 7d % | MC/FDV | Category |
+|---|---|---|---|---|---|---|---|
+| **Theta Network** | THETA | $0.15476 | $154.8M | #206 | -3.34% | 1.00 | DePIN / AI compute / video |
+| [[vaulta]] | A | $0.065723 | $108.4M | #255 | -9.38% | 0.79 | Web3-banking L1 (ex-EOS) |
+| [[aelf]] | ELF | $0.064383 | $52.9M | #432 | -0.72% | 0.82 | AI-focused L1 |
+| [[oasis-network]] | ROSE | $0.0066718 | $52.0M | #439 | +4.12% | 0.78 | Confidential-compute L1 |
+| [[nervos-network]] | CKB | $0.00104816 | $51.3M | #443 | -8.58% | 0.98 | PoW store-of-value L1 |
+| [[dusk-network]] | DUSK | $0.085452 | $50.4M | #449 | -5.68% | 1.00 | Regulated-RWA L1 |
+
+THETA is the largest-cap and most liquid name in this comparison group, reflecting its established brand and the durable pull of the DePIN + AI-compute narratives.
+
+---
+
+## Notable History
+
+- **2017–2018:** Founded by Mitch Liu and Jieyi Long; backed by investors including Node Capital and (later) prominent figures from Silicon Valley and the streaming/esports world.
+- **2019:** Theta mainnet launch; transition off Ethereum to its own Layer-1.
+- **2021 bull market:** THETA reached its all-time high of **$15.72 (2021-04-16)**, riding the streaming/NFT/metaverse narrative. The current price is roughly **99% below** that peak.
+- **2024:** Launch of **Theta EdgeCloud**, repositioning the edge network toward AI/GPU compute.
+- **2020 low:** all-time low of **$0.0404 (2020-03-13)** during the COVID liquidity crash.
+
+---
+
+## Risks
+
+- **Bear-market beta:** in an extreme-fear, "established bear market" regime, a high-beta, narrative-driven altcoin like THETA tends to fall harder than majors and recover later. Low volume amplifies drawdowns.
+- **Narrative dependence:** the AI/DePIN compute thesis must convert into real, paying EdgeCloud demand. Decentralized GPU networks face stiff competition from centralized cloud (AWS/GCP) and from other DePIN compute projects; utilization and revenue, not marketing FLOPS figures, are what matter.
+- **Value-accrual to THETA:** because network usage is paid in TFUEL, the link between protocol adoption and THETA price is indirect. Investors must believe staking demand and governance value will capture upside.
+- **Liquidity/concentration:** thin spot/derivatives liquidity and reliance on a few exchanges (notably Korean venues) create slippage and venue-risk.
+- **Competition:** crowded L1 and DePIN landscapes; differentiation on video/AI compute is not guaranteed.
+
+---
+
+## Related
+
+- [[crypto-markets]]
+- [[ethereum]]
+- [[bitcoin]]
+- [[depin]]
+- [[theta-fuel]]
+- [[layer-1]]
+- [[proof-of-stake]]
+- [[fear-and-greed-index]]
+- [[oasis-network]]
+- [[aelf]]
+- [[vaulta]]
+
+---
+
+## Sources
+
+- (Source: [[coingecko-top-1000-2026-04-09]])
+- Market snapshot 2026-06-21: cryptodataapi.com / CoinGecko markets data, `raw/data/crypto-loop/coingecko-markets.json`.
+- General market knowledge; no specific wiki source ingested yet.

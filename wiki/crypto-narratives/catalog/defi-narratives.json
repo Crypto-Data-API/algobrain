@@ -1,0 +1,754 @@
+{
+  "category_id": "defi-narratives",
+  "category_name": "DeFi Narratives (Summer, Yield, Restaking, RWA)",
+  "summary": "DeFi narratives move prices through a repeatable life-cycle: a new yield mechanism (liquidity mining, restaking points, RWA tokenization) ignites a reflexive TVL land-grab that pumps governance tokens hundreds to thousands of percent, capital rotates into the sector, then the eventual token-generation/airdrop event becomes a \"sell the news\" distribution as farmers dump. Layered on top are vote-bribe \"liquidity wars\" that bid up emission-control tokens, and periodic reflexive deleveraging events (exploits, founder-collateral liquidations, yield unwinds) that crater the whole sector at once. Net: violent up-moves on narrative ignition, chronic underperformance of governance tokens versus the underlying TVL growth, and sharp correlated drawdowns when leverage unwinds.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "narrative-ignition-tvl-landgrab",
+      "name": "Narrative ignition / TVL land-grab (yield-farming, restaking points, RWA hype)",
+      "mechanism": "A novel yield mechanism (liquidity mining 2020, restaking points 2023-24, tokenized treasuries 2024) creates a reflexive loop: emissions/points subsidize deposits, TVL spikes, the governance token pumps on the story, higher token price funds richer emissions, attracting more TVL. The other side is late retail and rotators buying the narrative from early farmers/VCs who accumulated cheap and harvest the emissions. Early movers win; the eventual marginal buyer holds the bag once emissions normalize.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named governance/sector token",
+        "DeFi sector",
+        "the host L1/L2 (ETH, SOL)",
+        "ETH (DeFi-beta)"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-leveraging",
+        "sector-rotation",
+        "supply-restriction (staking/locking TVL)"
+      ],
+      "backtest_features": [
+        "tvl_7d_pct_change",
+        "tvl_zscore_90d",
+        "sector_dominance_of_total_mcap",
+        "emissions_apy",
+        "points_program_active_flag",
+        "token_price_to_tvl_ratio",
+        "google_trends_or_social_mention_zscore",
+        "days_since_mechanism_launch",
+        "new_protocol_launches_per_week_in_sector"
+      ],
+      "leading_signals": [
+        "sharp TVL inflow before token price moves",
+        "launch of a points/airdrop program",
+        "first major institutional validation (e.g. BlackRock BUIDL)",
+        "rising social/search interest in the meta",
+        "copycat protocols launching same week"
+      ],
+      "typical_lag": "immediate to days for the flagship token; days-to-weeks for read-across into peer tokens",
+      "typical_duration": "weeks to a few months for the acute pump; the narrative regime can persist 1-2 quarters",
+      "typical_magnitude_pct": "+100% to +1,000%+ on flagship tokens during ignition; outlier fair-launch tokens (YFI) >100,000%",
+      "recurrence": "roughly one major sector-defining wave every 12-24 months (2020 DeFi Summer, 2021 Curve/L1, 2023-24 restaking, 2024 RWA)",
+      "historical_instances": [
+        {
+          "date": "2026-03-08",
+          "date_range": "2026 (ongoing institutional RWA ramp)",
+          "trigger": "Tokenized RWAs (ex-stablecoins) surge to ~$25-32B in 2026; Ethereum + L2s dominate.",
+          "description": "Tokenized real-world assets (ex-stablecoins) grew ~4x YoY to ~$26.4B by Mar 2026 (~$31-32B by May), with Ethereum hosting >60% and settlement increasingly on L2s (Base, Arbitrum). Composition: tokenized US Treasuries are the largest class (~$10B in Feb -> $13.4B by Apr, per RWA.xyz), then tokenized commodities/gold (~$5.9-7.3B) and private credit (~$4B+). BlackRock's BUIDL (~$2.24-2.4B across ~5 chains) and JPMorgan's Kinexys lead institutionally. KEY ROTATION DYNAMIC: in the 2026 risk-off tape, capital rotated FROM higher-risk DeFi yield-farming INTO lower-risk tokenized Treasuries as TVL dipped - on-chain 'flight to safety' (tokenized T-bills as the crypto-native cash leg). A structural fundamental tailwind, NOT a clean spot catalyst - every RWA milestone in 2026 coincided with crypto falling (ETH -40% YTD). Forward context (not price events): industry forecasts ~$16T tokenized by 2030; the BIS/IIF Project Agora (7 central banks, 40+ institutions) proved atomic wholesale cross-border settlement - but it is PERMISSIONED central-bank/bank infra, not a public-crypto-token catalyst.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "structural fundamental tailwind (no clean spot catalyst; ETH -40% YTD regardless)",
+              "window": "2026",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "ETH",
+            "ARB"
+          ],
+          "affected_sectors": [
+            "rwa",
+            "tokenization",
+            "layer-2",
+            "defi"
+          ],
+          "volume_or_flow_change": "RWA TVL ~$25-32B in 2026 (Ethereum >60%); BlackRock BUIDL multi-chain, JPMorgan Kinexys.",
+          "confidence": "medium",
+          "sources": [
+            "https://en.spaziocrypto.com/rwa/tokenized-rwa-27-billion-institutional-boom-2026/",
+            "https://www.panewslab.com/en/articles/019cf5dd-2514-70f8-87c2-cdd64e648642",
+            "https://app.rwa.xyz/treasuries",
+            "https://www.coingecko.com/research/publications/rwa-report-2026",
+            "https://www.bis.org/press/p260527.htm"
+          ]
+        },
+        {
+          "date": "2026-02-19",
+          "date_range": "Jan-Feb 2026 ($600M -> $1B)",
+          "trigger": "Aave (Horizon market) becomes the first DeFi lending protocol to cross $1B in tokenized-RWA deposits.",
+          "description": "Aave's Horizon market crossed $1B in real-world-asset deposits on Feb 19 2026 (up from ~$600M in January) — the first lending protocol to do so, concentrated in tokenized bonds/treasury-like products attracting institutions. Aave DAO revenue hit $142M in 2025 (> the prior three years combined). A structural institutional-DeFi-adoption milestone, supportive of AAVE fundamentals but not a clean spot catalyst (it coincided with broad crypto outflows). Part of the wider RWA ramp (total tokenized RWA ~$25-32B in 2026).",
+          "price_impacts": [
+            {
+              "asset": "AAVE",
+              "pct_change": "fundamental milestone (no clean spot catalyst; coincided with broad outflows)",
+              "window": "Feb 2026",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "AAVE"
+          ],
+          "affected_sectors": [
+            "rwa",
+            "defi",
+            "lending",
+            "tokenization"
+          ],
+          "volume_or_flow_change": "RWA deposits $600M (Jan) -> $1B (Feb 19 2026); tokenized bonds/treasuries led.",
+          "confidence": "high",
+          "sources": [
+            "https://coinedition.com/aave-becomes-first-lending-protocol-to-cross-1-billion-in-rwas/",
+            "https://www.banklesstimes.com/articles/2026/02/20/aaves-horizon-market-hits-1-billion-in-real-world-assets/"
+          ]
+        },
+        {
+          "date": "2024-03-20",
+          "date_range": "2024-03-20 to 2024-12-16",
+          "trigger": "BlackRock BUIDL tokenized treasury fund launch — institutional validation of RWA narrative",
+          "description": "BlackRock's BUIDL fund launched on 2024-03-20, institutionally validating tokenized real-world assets. ONDO (RWA flagship) rode the narrative from its ~Jan 2024 launch to a ~$2.14 ATH on 2024-12-16, roughly +1,200% launch-to-peak.",
+          "price_impacts": [
+            {
+              "asset": "ONDO",
+              "pct_change": "+~1,200%",
+              "window": "launch-to-peak (2024-01 to 2024-12-16)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "RWA",
+            "tokenized-treasuries",
+            "DeFi"
+          ],
+          "affected_coins": [
+            "ONDO",
+            "MKR",
+            "POLYX",
+            "OM",
+            "CFG"
+          ],
+          "volume_or_flow_change": "Tokenized RWA market (ex-stablecoins) reached ~$15B+ by late 2024",
+          "confidence": "medium",
+          "sources": [
+            "https://www.businesswire.com/news/home/20240320771318/en/BlackRock-Launches-Its-First-Tokenized-Fund-BUIDL-on-the-Ethereum-Network",
+            "https://www.coingecko.com/en/coins/ondo",
+            "https://www.coingecko.com/learn/what-are-real-world-assets-exploring-rwa-protocols"
+          ]
+        },
+        {
+          "date": "2023-06-14",
+          "date_range": "2023-06 to 2024-05-01",
+          "trigger": "EigenLayer opens restaking deposits / points farming begins — restaking narrative ignites",
+          "description": "EigenLayer's staged mainnet restaking launch began in June 2023 (exact day not confirmed across sources; full Stage-2 rollout came Apr 2024), launching the 'points' meta. LRT protocols (ether.fi, Renzo, Kelp) layered their own points on top, driving billions in TVL and a year-long restaking narrative ahead of token launches.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "narrative-driver, not single-token",
+              "window": "12 months",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "restaking",
+            "LST",
+            "LRT",
+            "DeFi",
+            "Ethereum staking"
+          ],
+          "affected_coins": [
+            "ETH",
+            "EIGEN",
+            "ETHFI",
+            "REZ",
+            "PENDLE",
+            "SSV"
+          ],
+          "volume_or_flow_change": "EigenLayer TVL grew to ~$15B+ at peak; LRT TVL into the billions; Pendle TVL expanded on points/yield trading",
+          "confidence": "medium",
+          "sources": [
+            "https://www.bankless.com/restaking-on-eigenlayer-mainnet",
+            "https://blockworks.com/news/eigenlayer-restaking-protocol-on-ethereum",
+            "https://metalamp.io/magazine/article/a-guide-to-eigenlayer-how-the-eth-restaking-protocol-attracted-15-billion-tvl"
+          ]
+        },
+        {
+          "date": "2020-08-28",
+          "trigger": "SushiSwap vampire attack on Uniswap — SUSHI emissions bribe LPs to migrate liquidity",
+          "description": "SushiSwap used SUSHI token emissions to drain Uniswap liquidity, demonstrating the emissions-as-acquisition mechanic; SUSHI spiked then faded after migration. Exact launch-week percentage is an estimate.",
+          "price_impacts": [
+            {
+              "asset": "SUSHI",
+              "pct_change": "+~200%",
+              "window": "launch week",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_sectors": [
+            "DEX",
+            "DeFi"
+          ],
+          "affected_coins": [
+            "SUSHI",
+            "UNI"
+          ],
+          "volume_or_flow_change": "~$1B+ liquidity temporarily migrated from Uniswap to SushiSwap",
+          "confidence": "low",
+          "sources": [
+            "https://www.coingecko.com/en/coins/sushi"
+          ]
+        },
+        {
+          "date": "2020-07-17",
+          "date_range": "2020-07-17 to 2020-09-13",
+          "trigger": "yearn.finance YFI fair launch (no premine, pure liquidity-mining distribution)",
+          "description": "YFI launched ~2020-07-17 at roughly $30-32 and rose to approximately $43,000 by September 2020 (~+143,000%) per CoinGecko's summary — the archetypal fair-launch yield-farming moonshot.",
+          "price_impacts": [
+            {
+              "asset": "YFI",
+              "pct_change": "+~143,000%",
+              "window": "~2 months (launch to ATH)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "yield-aggregator"
+          ],
+          "affected_coins": [
+            "YFI",
+            "COMP",
+            "AAVE",
+            "SUSHI"
+          ],
+          "volume_or_flow_change": "Yearn TVL surged on emissions; spawned vault-aggregator subsector",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/yearn-finance",
+            "https://www.bybit.com/en/price/yearn-finance/",
+            "https://coinmarketcap.com/academy/article/deep-dive-into-the-astronomic-growth-of-yearn-finance-yfi"
+          ]
+        },
+        {
+          "date": "2020-06-16",
+          "date_range": "2020-06-16 to 2020-09-30",
+          "trigger": "Compound launches COMP liquidity-mining distribution, kicking off DeFi Summer",
+          "description": "COMP governance-token distribution began on 2020-06-16. COMP traded ~$64-67 at launch and surged to roughly $372 by the end of the first day (market cap from ~$30M toward ~$2B on circulating-supply estimates), overtaking MKR's market cap almost immediately and igniting the yield-farming meta. Exact intraday figures vary by source.",
+          "price_impacts": [
+            {
+              "asset": "COMP",
+              "pct_change": "+~400% (intraday, ~$64 to ~$372)",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "DEX",
+            "lending"
+          ],
+          "affected_coins": [
+            "COMP",
+            "MKR",
+            "AAVE",
+            "YFI",
+            "SUSHI",
+            "ETH"
+          ],
+          "volume_or_flow_change": "COMP market cap reached the billions within ~24h, overtaking MKR; triggered sector-wide TVL surge",
+          "confidence": "medium",
+          "sources": [
+            "https://iq.wiki/wiki/compound",
+            "https://www.coingecko.com/en/coins/compound",
+            "https://www.bitstamp.net/learn/cryptocurrency-guide/what-is-compound-comp/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "airdrop-sell-the-news",
+      "name": "Points/airdrop 'sell the news' (TGE distribution dump)",
+      "mechanism": "Farmers accumulate points/eligibility expecting an airdrop. At the token-generation event (TGE) / claim, recipients who farmed for free have ~100% cost basis as profit and dump immediately into thin launch liquidity. VCs/team unlocks compound supply. The other side is narrative buyers and exchange listing FOMO who absorb the sell pressure. Recipients win, late spot buyers lose. Exceptions occur when float is tiny and the protocol has genuine product-market fit (HYPE), which can invert the dump into a squeeze.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the airdropped token",
+        "peer farm-and-dump tokens",
+        "the host chain governance token"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-shock (new float hitting market)",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "backtest_features": [
+        "days_since_tge",
+        "airdrop_pct_of_supply",
+        "initial_float_pct",
+        "fdv_to_float_ratio",
+        "recipient_wallet_count",
+        "exchange_listing_flag",
+        "pct_recipients_sold_7d",
+        "funding_rate_at_listing",
+        "pre_tge_points_program_duration_days"
+      ],
+      "leading_signals": [
+        "TGE/claim date announcement",
+        "large airdrop allocation %",
+        "high FDV vs low initial float",
+        "pre-market/IOU price far above implied float value",
+        "negative perp funding pre-listing",
+        "Dune dashboards showing rapid claim+sell"
+      ],
+      "typical_lag": "immediate (hours to first 7 days post-claim)",
+      "typical_duration": "the acute dump is days; the bleed often continues weeks-to-months as cliffs/emissions add supply",
+      "typical_magnitude_pct": "-30% to -85% from listing/ATH within weeks for typical farm-and-dump tokens",
+      "recurrence": "every major TGE in a hot meta — dozens per cycle; highly repeatable",
+      "historical_instances": [
+        {
+          "date": "2020-09-17",
+          "date_range": "2020-09-17 to 2020-12-17",
+          "trigger": "Uniswap UNI airdrop (400 UNI to every past user)",
+          "description": "Dune analysis: >75% of recipient wallets sold within 7 days and ~80% within 30 days; most cashed out at ~$2-$4 — the canonical airdrop-dump dataset. (The catalog's '85% within 90 days' is from the same Dune report but was not separately re-confirmed here.)",
+          "price_impacts": [
+            {
+              "asset": "UNI",
+              "pct_change": "75% of recipients sold within 7d",
+              "window": "7d",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "DEX",
+            "DeFi"
+          ],
+          "affected_coins": [
+            "UNI"
+          ],
+          "volume_or_flow_change": "Massive claim-and-sell volume; mostly exited at $2-$4",
+          "confidence": "high",
+          "sources": [
+            "https://dune.com/blog/uni-airdrop-analysis",
+            "https://tomtunguz.com/uniswap-airdrop-analysis/"
+          ]
+        },
+        {
+          "date": "2023-03-23",
+          "date_range": "2023-03-23 to 2023-03-27",
+          "trigger": "Arbitrum ARB airdrop / TGE",
+          "description": "ARB launched/claimed 2023-03-23 amid chaotic IOU/futures pricing (early prints reported as high as ~$8.67) before settling. It fell quickly to ~$1.20, briefly bounced to ~$1.53 on Mar 24, and traded around $1.20-1.25 by 2023-03-27. The exact 'percent drop' depends heavily on which launch reference price is used, so a precise figure is not reliable.",
+          "price_impacts": [
+            {
+              "asset": "ARB",
+              "pct_change": "settled to ~$1.20-1.25 within days of a much higher launch print",
+              "window": "~4 days",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "L2",
+            "Ethereum-scaling"
+          ],
+          "affected_coins": [
+            "ARB",
+            "OP"
+          ],
+          "volume_or_flow_change": "Heavy launch-day sell volume across fragmented venues",
+          "confidence": "medium",
+          "sources": [
+            "https://www.bybit.com/en/price/arbitrum/",
+            "https://coinmarketcap.com/academy/article/everything-you-need-to-know-about-the-arbitrum-airdrop"
+          ]
+        },
+        {
+          "date": "2024-04-02",
+          "date_range": "2024-04-11 to 2024-09-06",
+          "trigger": "Ethena ENA airdrop/claim opens; ATH 2024-04-11 then chronic bleed",
+          "description": "ENA opened claims ~2024-04-02, peaked at ~$1.52 on 2024-04-11, then declined through 2024, bottoming at ~$0.1953 on 2024-09-06 — roughly an 87% drawdown from the ATH as airdrop supply and unlocks hit. (The catalog's '~$0.28 by mid-2024' was imprecise; the corroborated 2024 low was ~$0.195 in September.)",
+          "price_impacts": [
+            {
+              "asset": "ENA",
+              "pct_change": "-~87%",
+              "window": "ATH (2024-04-11) to 2024 low (2024-09-06)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "synthetic-dollar",
+            "yield",
+            "DeFi"
+          ],
+          "affected_coins": [
+            "ENA"
+          ],
+          "volume_or_flow_change": "$750M ENA airdrop; high sell pressure post-claim",
+          "confidence": "medium",
+          "sources": [
+            "https://www.coinbase.com/price/ethena",
+            "https://www.coingecko.com/en/coins/ethena",
+            "https://dailycoin.com/ethena-labs-opens-750m-ena-airdrop-claims-as-token-goes-live/"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2026-06-04",
+          "trigger": "Post-TGE supply overhang + sector derating measured over trailing 12 months (ENA, PENDLE)",
+          "description": "Trailing-year CoinGecko measurement of post-airdrop yield/restaking-meta tokens shows continued bleed and brutal drawdowns: ENA -66.5% (intra-window max DD -90.2%), PENDLE -68.3% (intra-window max DD -83.4%) — the chronic supply-overhang tail of the sell-the-news archetype.",
+          "price_impacts": [
+            {
+              "asset": "ENA",
+              "pct_change": "-66.5%",
+              "window": "12m (intra-window max DD -90.2%)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "PENDLE",
+              "pct_change": "-68.3%",
+              "window": "12m (intra-window max DD -83.4%)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_sectors": [
+            "yield",
+            "restaking",
+            "DeFi"
+          ],
+          "affected_coins": [
+            "ENA",
+            "PENDLE"
+          ],
+          "volume_or_flow_change": "Ongoing emission/unlock supply vs fading narrative demand",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/ethena",
+            "https://www.coingecko.com/en/coins/pendle"
+          ]
+        },
+        {
+          "date": "2024-11-29",
+          "date_range": "2024-11-29 to 2024-12-01",
+          "trigger": "Hyperliquid HYPE airdrop — COUNTER-EXAMPLE (squeeze not dump)",
+          "description": "HYPE launched ~2024-11-29 at roughly $2 and ripped higher, reaching ~$9.8 by Dec 1 2024 (~5x from launch) — inverting the dump pattern due to tiny float, no VC unlocks, and real product traction. Shows when the archetype fails.",
+          "price_impacts": [
+            {
+              "asset": "HYPE",
+              "pct_change": "+~63%",
+              "window": "~first hours (early intraday)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "HYPE",
+              "pct_change": "+~5x from ~$2 launch (to ~$9.8)",
+              "window": "~48h (to ~$9.8 by Dec 1)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "perp-DEX",
+            "DeFi"
+          ],
+          "affected_coins": [
+            "HYPE"
+          ],
+          "volume_or_flow_change": "Billion-dollar airdrop yet buy pressure dominated due to low float / no team-VC sell side",
+          "confidence": "high",
+          "sources": [
+            "https://coinmarketcap.com/currencies/hyperliquid/",
+            "https://blockworks.com/news/hyperliquid-hype-airdrop",
+            "https://www.panewslab.com/en/articles/cdxgyb62"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vote-bribe-liquidity-wars",
+      "name": "Vote-bribe / liquidity wars (Curve wars, veTokenomics)",
+      "mechanism": "veTokenomics let token-lockers direct emissions to pools. Protocols needing deep liquidity bribe lockers to vote for their pool, creating demand for the emission-control token (CRV) and meta-governance layers (CVX). The other side: protocols paying bribes and late buyers of the governance token; lockers and the meta-governance layer capture the bribe yield. Bullish during the land-grab as bribe yields bid up the token; structurally decays as emissions inflate supply and bribe markets normalize.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "CRV",
+        "CVX",
+        "meta-governance tokens",
+        "stablecoin/liquidity-protocol governance tokens"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction (vote-locking)",
+        "dry-powder-injection (bribes)",
+        "reflexive-leveraging",
+        "yield-chasing-rotation"
+      ],
+      "backtest_features": [
+        "bribe_apr",
+        "vetoken_lock_ratio",
+        "convex_share_of_crv",
+        "emissions_inflation_rate",
+        "pool_tvl_directed_by_votes",
+        "token_locked_pct_of_supply",
+        "bribe_market_volume_weekly"
+      ],
+      "leading_signals": [
+        "rising bribe APRs",
+        "increasing lock ratios / falling liquid float",
+        "a new protocol entering the war (buying votes)",
+        "meta-governance TVL inflows (Convex)"
+      ],
+      "typical_lag": "days-to-weeks during accumulation; the structural decay plays out over many months",
+      "typical_duration": "the war phase lasts months; token decay persists for years post-peak",
+      "typical_magnitude_pct": "several hundred to ~+2,000%+ on the meta-governance token during the war (range depends on launch reference price); then -90%+ structural decline",
+      "recurrence": "the canonical instance was 2021-22; the veTokenomics template recurs across protocols (Balancer, Velodrome, etc.) but rarely at the same scale",
+      "historical_instances": [
+        {
+          "date": "2021-05-17",
+          "date_range": "2021-05-17 to 2022-01-01",
+          "trigger": "Convex Finance launches; battle to control CRV emissions (Curve wars) escalates",
+          "description": "CVX launched mid-May 2021 (exact day not confirmed across sources) and reached an ATH around $60 on/near 2022-01-01 as Convex accumulated CRV vote power; Convex TVL surpassed $20B in Jan 2022 — the war's liquidity peak. The launch-to-peak gain is variously cited from ~+950% (off a ~$5.72 base) to ~+2,300% (off an early ~$2.47 print), so the precise multiple is uncertain.",
+          "price_impacts": [
+            {
+              "asset": "CVX",
+              "pct_change": "+~950% to +~2,300% (base-price dependent)",
+              "window": "launch to peak (2021-05 to 2022-01)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "stablecoin-liquidity",
+            "meta-governance"
+          ],
+          "affected_coins": [
+            "CVX",
+            "CRV",
+            "FXS",
+            "MIM"
+          ],
+          "volume_or_flow_change": "Convex TVL >$20B around Jan 2022; large CRV lock-up",
+          "confidence": "medium",
+          "sources": [
+            "https://cryptorank.io/price/convex-finance",
+            "https://www.kraken.com/learn/what-is-convex-cvx",
+            "https://www.binance.com/en/price/convex-finance"
+          ]
+        },
+        {
+          "date": "2022-01-01",
+          "date_range": "2022-01-01 to 2023-12-31",
+          "trigger": "Curve wars peak then multi-year structural decay of emission tokens",
+          "description": "After the Jan 2022 peak, CVX and CRV entered a prolonged decline as emissions inflated supply, bribe yields normalized, and the broader 2022 bear hit DeFi — the structural-decay leg of veTokenomics. The -90%+ figure is an estimate of the peak-to-2023-lows decline.",
+          "price_impacts": [
+            {
+              "asset": "CVX",
+              "pct_change": "-90%+",
+              "window": "peak to 2023 lows",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "meta-governance"
+          ],
+          "affected_coins": [
+            "CVX",
+            "CRV"
+          ],
+          "volume_or_flow_change": "Emissions-driven supply inflation; declining bribe markets",
+          "confidence": "low",
+          "sources": [
+            "https://cryptorank.io/price/convex-finance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "defi-reflexive-deleveraging",
+      "name": "DeFi reflexive deleveraging / contagion (exploits, founder-collateral, yield unwind)",
+      "mechanism": "DeFi yields are often built on leverage and recursive collateral (looping, LST/LRT leverage, founder borrows against governance token). A shock — an exploit, a depeg, or a yield collapse — forces liquidations. Liquidations sell the token into thin liquidity, dropping price, triggering more liquidations (reflexive). Contagion spreads to correlated lending/governance tokens and to any large concentrated borrow position. The other side: liquidators and short sellers profit; leveraged farmers and lenders eat losses/bad debt.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the exploited/levered token",
+        "lending-protocol governance tokens",
+        "the whole DeFi sector",
+        "correlated LST/LRT tokens"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock",
+        "contagion"
+      ],
+      "backtest_features": [
+        "protocol_tvl_drop_24h",
+        "largest_borrow_position_collateral_ratio",
+        "stablecoin_peg_deviation",
+        "lending_utilization_rate",
+        "token_collateral_concentration",
+        "exchange_netflow_zscore",
+        "perp_funding_spike",
+        "oracle_price_gap"
+      ],
+      "leading_signals": [
+        "a single large borrow position near liquidation (e.g. founder collateral)",
+        "stablecoin/LST depeg starting",
+        "exploit/hack headline",
+        "spiking lending utilization",
+        "TVL outflow acceleration",
+        "negative funding flush"
+      ],
+      "typical_lag": "immediate (minutes to hours) for the levered token; hours-to-days for contagion read-across",
+      "typical_duration": "acute drop is hours-to-days; sentiment/TVL recovery can take weeks-to-months",
+      "typical_magnitude_pct": "-10% to -25% on the directly affected token in 24h; -5% to -15% sector contagion",
+      "recurrence": "multiple times per cycle — exploits and forced unwinds are frequent in DeFi",
+      "historical_instances": [
+        {
+          "date": "2026-04-18",
+          "date_range": "2026-04-18 to 2026-04-22",
+          "trigger": "KelpDAO LRT-collateral exploit cascades into a $15B+ Aave TVL flush (DeFi-wide ~$13B in 2 days).",
+          "description": "The $292M KelpDAO rsETH exploit (see hacks-exploits) cascaded through DeFi: Aave TVL fell from ~$48.5B to ~$30.7B by Apr 22 (~$15B+ in 4 days) and DeFi-wide TVL dropped ~$13B in two days as users de-risked from liquid-restaking-token (LRT) collateral. ~$196M Aave bad debt; AAVE -17.86%. Structural lesson: LRTs as recursive cross-protocol collateral amplify contagion (the DeFi analog of rehypothecation). Resolution: Aave governance temporarily adjusted the rsETH oracle to liquidate the hacker's positions cleanly on Ethereum + Arbitrum, recovering ~$20M and leaving ~10% short of full bad-debt recovery; the 'DeFi United' effort contributed >$320M. DeFi-wide TVL fell >7% in a single day on the breach.",
+          "price_impacts": [
+            {
+              "asset": "AAVE",
+              "pct_change": "-17.86%",
+              "window": "Apr 17-22 2026",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "AAVE",
+            "rsETH",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "defi",
+            "liquid-restaking",
+            "lending"
+          ],
+          "volume_or_flow_change": "Aave TVL ~$48.5B->~$30.7B; DeFi-wide ~$13B in 2 days.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/04/20/defi-tvl-drops-more-than-usd13-billion-in-two-days-following-kelp-dao-hack",
+            "https://unchainedcrypto.com/aaves-6-6-billion-tvl-drop-exposes-structural-risk-from-liquid-restaking-tokens/"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2026-06-04",
+          "trigger": "Trailing-12-month measure of DeFi/yield-token deleveraging and sector derating (CoinGecko)",
+          "description": "Over the trailing year DeFi governance/yield tokens posted deep drawdowns consistent with repeated leverage unwinds and fading narratives. CoinGecko intra-window max drawdowns: ENA -90.2%, PENDLE -83.4%, ONDO -80.3%, MKR -57.2%, SKY -56.7%, HYPE -64.3% — even though HYPE finished +105.4% net, showing how violent the deleveraging swings are.",
+          "price_impacts": [
+            {
+              "asset": "ONDO",
+              "pct_change": "-51.1%",
+              "window": "12m (max DD -80.3%)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "MKR",
+              "pct_change": "-15.5%",
+              "window": "12m (max DD -57.2%)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SKY",
+              "pct_change": "-12.9%",
+              "window": "12m (max DD -56.7%)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "HYPE",
+              "pct_change": "+105.4%",
+              "window": "12m (intra-window max DD -64.3%)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "RWA",
+            "yield",
+            "lending"
+          ],
+          "affected_coins": [
+            "ONDO",
+            "MKR",
+            "SKY",
+            "HYPE",
+            "ENA",
+            "PENDLE"
+          ],
+          "volume_or_flow_change": "Repeated leverage flushes; correlated sector drawdowns",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/ondo",
+            "https://www.coingecko.com/en/coins/maker",
+            "https://www.coingecko.com/en/coins/hyperliquid"
+          ]
+        },
+        {
+          "date": "2023-07-30",
+          "date_range": "2023-07-30 to 2023-08-05",
+          "trigger": "Curve Vyper reentrancy exploit drains multiple pools; Egorov's ~$60-100M CRV-backed loans threaten bad debt",
+          "description": "A Vyper reentrancy bug was exploited 2023-07-30, draining several Curve pools. CRV fell roughly 13% on the day (some coverage cites a larger intraday peak-to-trough, with prints near $0.58-0.48). Egorov's concentrated CRV-backed borrowing (~$60M on Aave V2, with total CRV-backed loans reported up to ~$100M) raised systemic liquidation fear across DeFi. Exploit-loss reporting ranges from ~$47M initial to >$70M total; broader at-risk TVL was withdrawn from affected pools.",
+          "price_impacts": [
+            {
+              "asset": "CRV",
+              "pct_change": "-~13%",
+              "window": "24h (larger intraday peak-to-trough reported)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ALCX",
+              "pct_change": "-~7%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_sectors": [
+            "DeFi",
+            "DEX",
+            "lending"
+          ],
+          "affected_coins": [
+            "CRV",
+            "ALCX",
+            "AAVE",
+            "FRAX",
+            "CVX"
+          ],
+          "volume_or_flow_change": "~$47M initial exploit loss, >$70M reported across the attacks; large at-risk TVL withdrawn from Curve pools; lending markets paused/scrutinized",
+          "confidence": "high",
+          "sources": [
+            "https://blockworks.com/news/curve-suffers-exploit",
+            "https://www.chainalysis.com/blog/curve-finance-liquidity-pool-hack/",
+            "https://blog.chainlight.io/curve-finance-analysis-and-post-mortem-ba55f2b26909"
+          ]
+        }
+      ]
+    }
+  ]
+}

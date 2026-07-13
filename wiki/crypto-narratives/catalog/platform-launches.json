@@ -1,0 +1,952 @@
+{
+  "category_id": "platform-launches",
+  "category_name": "Platform Launches, Airdrops & Points Farming",
+  "summary": "When a crypto platform finally launches its token (a \"TGE\" = token generation event), it usually airdrops a chunk of supply to the users who farmed it for points. The dominant, highly repeatable pattern is \"sell-the-news\": pre-launch hype peaks, the token opens high, and airdrop recipients plus farmers immediately dump for free profit, so the token falls 20-60% within hours to days (STRK, W, ZK, EIGEN, SCR, BLAST all did this). A rarer pattern is the launch-pump-and-hold, where a token with real product revenue and no VC overhang keeps rising for weeks (HYPE is the standout). Separately, the points-farming meta is a leading bullish signal: when a big launch is anticipated, mercenary capital floods the chain/protocol beforehand (deposits, TVL, fees), and that inflow tends to drain right after the airdrop (\"farm-and-dump\").",
+  "directional_bias": "bearish",
+  "archetypes": [
+    {
+      "id": "tge-sell-the-news",
+      "name": "TGE / Airdrop Sell-the-News Dump",
+      "mechanism": "On the launch day a large slice of supply (typically 7-20% of total) lands in the wallets of airdrop recipients and points farmers who paid little or nothing for it. Their cost basis is effectively zero, so the rational move is to sell immediately and lock in the gift. The buyers on the other side are pre-launch hype chasers, perp pre-market longs, and exchange retail FOMO who bought the top expecting a continued pump. Pre-launch perp/IOU markets and 'guess the price' threads set anchor prices far above what airdrop sellers will defend, so the open is the high. Farmers keep winning because the protocol's own marketing creates the demand that absorbs their supply exactly at peak. Sybil farmers amplify this: thin anti-sybil measures (STRK, ZK, SCR) mean a few whales/farmers control a disproportionate share and dump in size.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin",
+        "specific sector"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "typical_lag": "immediate (minutes to first 24-72h)",
+      "typical_duration": "weeks to months; many never reclaim debut price (W, ZK, SCR, BLAST, STRK, IP)",
+      "typical_magnitude_pct": "-20% to -60% on the named coin from open within 1-7 days; -50% to -90% peak-to-trough over weeks",
+      "recurrence": "Near-universal for VC-backed L1/L2 and infra airdrops 2023-2026. The default expectation for any farmed airdrop.",
+      "leading_signals": [
+        "pre-market/IOU perp price far above implied airdrop FDV",
+        "high points-farming TVL with mercenary (non-sticky) capital",
+        "low or absent anti-sybil controls / no per-wallet claim cap",
+        "large % of supply unlocked at TGE to farmers vs locked to insiders",
+        "spike in exchange inflows (deposit netflow z-score) right as claims open",
+        "community complaints about allocation fairness pre-launch"
+      ],
+      "backtest_features": [
+        "tge_airdrop_pct_of_total_supply",
+        "circulating_supply_pct_at_tge",
+        "premarket_perp_price_vs_debut_open_ratio",
+        "exchange_inflow_netflow_zscore_first_24h",
+        "pct_airdrop_wallets_selling_first_48h (Nansen-style)",
+        "anti_sybil_present_boolean",
+        "per_wallet_claim_cap_present_boolean",
+        "vc_insider_allocation_pct",
+        "days_since_tge",
+        "fdv_at_open_usd"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-09-25",
+          "date_range": "2025-09-25 to 2025-10-25",
+          "trigger": "Plasma XPL stablecoin-L1 launch + $25M airdrop to ICO pre-depositors; hyper-hyped '$0.1 deposit = $13k' meta",
+          "description": "XPL peaked ~$1.67 on debut then collapsed. Measured by CoinGecko from 2025-09-25 ($0.93) to 2025-10-25: -58.1%, with -79.6% max drawdown peak-to-trough (high $1.67, low $0.34). Extreme farm-and-dump after viral deposit campaign.",
+          "price_impacts": [
+            {
+              "asset": "XPL",
+              "pct_change": "-58.1%",
+              "window": "30d",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "XPL",
+              "pct_change": "-79.6%",
+              "window": "30d peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "XPL"
+          ],
+          "affected_sectors": [
+            "L1",
+            "stablecoins"
+          ],
+          "volume_or_flow_change": "Launch-day volume reported in the billions; one whale grabbed a large share of the airdrop",
+          "confidence": "high",
+          "sources": [
+            "https://bingx.com/en/learn/article/plasma-xpl-token-launch-airdrop-bonus-set-for-sep-25",
+            "https://www.panewslab.com/en/articles/1237e3c6-812c-46b4-b0f8-8a30a3ddc7dc"
+          ]
+        },
+        {
+          "date": "2025-09-21",
+          "date_range": "2025-09-21 to 2025-11-21",
+          "trigger": "Story Protocol IP post-spike unwind; large backer/contributor allocation vesting creates persistent overhang",
+          "description": "IP hit ATH ~$14.64-$14.74 around 2025-09-21 then bled out. CoinGecko 2025-09-21 to 2025-11-21: -80.3%, -84.65% max drawdown (start $11.82, low $2.25). Insider unlock overhang on top of launch sell pressure.",
+          "price_impacts": [
+            {
+              "asset": "IP",
+              "pct_change": "-80.3%",
+              "window": "~60d",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "IP"
+          ],
+          "affected_sectors": [
+            "L1",
+            "IP/RWA-narrative"
+          ],
+          "volume_or_flow_change": "Constant insider unlock supply requiring new demand to absorb",
+          "confidence": "high",
+          "sources": [
+            "https://coinmarketcap.com/currencies/story-protocol/",
+            "https://ventureburn.com/ip-price-prediction/"
+          ]
+        },
+        {
+          "date": "2025-07-12",
+          "date_range": "2025-07-12 to 2025-08-12",
+          "trigger": "Pump.fun PUMP $500M public sale (sold out in ~12 min) + listing; ~$5.5B FDV",
+          "description": "PUMP listed above its $0.004 ICO price, then faded. CoinGecko 2025-07-12 to 2025-08-12: -25.0% with -66.1% max drawdown (start $0.0054, low $0.0023). Sell-the-news on a hyped Solana launchpad token.",
+          "price_impacts": [
+            {
+              "asset": "PUMP",
+              "pct_change": "-25.0%",
+              "window": "30d",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "PUMP",
+              "pct_change": "-66.1%",
+              "window": "30d peak-to-trough",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "PUMP"
+          ],
+          "affected_sectors": [
+            "Solana-ecosystem",
+            "memecoin-launchpad"
+          ],
+          "volume_or_flow_change": "$500M raised in ~12 minutes; 12.5% of supply sold in ICO",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/07/12/pumpfun-swiftly-raises-500m-in-public-sale-at-4b-fully-diluted-valuation",
+            "https://coinmarketcap.com/currencies/pump-fun/"
+          ]
+        },
+        {
+          "date": "2025-07-12",
+          "date_range": "2025-07-12 (ICO) onward",
+          "trigger": "Pump.fun PUMP ICO raises $600M in 12 minutes (33% of supply, fully unlocked day 1) — then a textbook sell-the-news collapse.",
+          "description": "Pump.fun's PUMP launched via ICO on Jul 12 2025 at $0.004, raising $600M in 12 minutes (+$720M private ≈ $1.3B total; 150B tokens, 33% of supply, FULLY UNLOCKED day 1) - one of the most anticipated TGEs of the cycle, listed on Binance/Bybit futures. It popped to ~$0.0068 (~+60% on the Hyperliquid perp) but the fully-unlocked float plus 'mass-extraction-event' dynamics drove a textbook sell-the-news collapse: -53.6% in the first ~3 weeks ($0.0054->$0.0025, -66% max DD) and -69.7% to date ($0.0058->$0.0018, -81% max DD). Confirms the pattern: a hyped mega-raise with day-1 unlocks is a distribution event, not a floor.",
+          "price_impacts": [
+            {
+              "asset": "PUMP",
+              "pct_change": "-53.57%",
+              "window": "Jul 12-Aug 1 2025 ($0.0054->$0.0025; -66% max DD)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "PUMP",
+              "pct_change": "-69.67%",
+              "window": "Jul 12 2025 - Jun 4 2026 (-81% max DD, low $0.0016)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "PUMP"
+          ],
+          "affected_sectors": [
+            "memecoin-launchpad",
+            "solana",
+            "tge"
+          ],
+          "volume_or_flow_change": "$600M public + $720M private raise (~$1.3B); 33% of supply unlocked day 1; Binance/Bybit futures listings.",
+          "confidence": "high",
+          "sources": [
+            "https://fortune.com/crypto/2025/07/18/pump-fun-memecoin-raise-ico-era-600-million-1-3-billion/",
+            "https://www.coindesk.com/markets/2025/07/09/pumpfun-to-launch-pump-token-via-ico-on-july-12"
+          ]
+        },
+        {
+          "date": "2024-10-22",
+          "trigger": "Scroll SCR TGE; only 7% to airdrop + 5.5% Binance Launchpool, no claim cap so whales scooped supply",
+          "description": "SCR fell on its first day of trading as whales accumulated airdrop and farmers exited. CoinDesk reported a ~32% decline; BeInCrypto reported ~19% over a different intraday window. DeFi activity on Scroll had already dropped sharply ahead of the airdrop.",
+          "price_impacts": [
+            {
+              "asset": "SCR",
+              "pct_change": "-32%",
+              "window": "first day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "SCR"
+          ],
+          "affected_sectors": [
+            "L2",
+            "zk-rollups"
+          ],
+          "volume_or_flow_change": "Scroll on-chain activity fell sharply pre-airdrop (farmers leaving once snapshot expectations set)",
+          "confidence": "medium",
+          "sources": [
+            "https://www.coindesk.com/business/2024/10/23/scrolls-token-declines-32-as-whales-scoop-up-airdrop",
+            "https://beincrypto.com/scroll-scr-price-drops-19/",
+            "https://www.dlnews.com/articles/defi/scroll-transactions-drop-ahead-of-scr-token-airdrop/"
+          ]
+        },
+        {
+          "date": "2024-10-01",
+          "trigger": "EigenLayer EIGEN token transferability/debut at ~$6.51B FDV; contentious 5%-to-stakers airdrop, majority to insiders, geoblocking, non-transferable initially",
+          "description": "EIGEN slid ~12% on debut day and drifted to a $3-$4 range vs ~$13 OTC earlier in 2024. Unclear token utility + airdrop sell pressure cited as primary causes; the airdrop was seen as marking the decline of the 'points' meta.",
+          "price_impacts": [
+            {
+              "asset": "EIGEN",
+              "pct_change": "-12%",
+              "window": "debut day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "EIGEN"
+          ],
+          "affected_sectors": [
+            "restaking",
+            "Ethereum-ecosystem",
+            "points-farming"
+          ],
+          "volume_or_flow_change": "~68% of recipient wallets had NOT deposited to exchanges (mitigated dump vs peers)",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/business/2024/10/01/eigenlayers-eigen-token-debuts-at-651-fdv",
+            "https://www.coindesk.com/tech/2024/05/09/eigenlayers-eigen-airdrop-might-signal-demise-of-once-popular-points",
+            "https://www.chaincatcher.com/en/article/2147344"
+          ]
+        },
+        {
+          "date": "2024-06-26",
+          "trigger": "Blast BLAST token TGE (~17% of supply, ~$415-430M airdropped); debut ~$3B value",
+          "description": "BLAST debuted ~$0.025; recipients sold within minutes pushing price toward ~$0.02 (~-7.7% headline, deeper in practice). Reserved airdrop value fell from ~$354M to ~$289M.",
+          "price_impacts": [
+            {
+              "asset": "BLAST",
+              "pct_change": "-7.7%",
+              "window": "launch day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BLAST"
+          ],
+          "affected_sectors": [
+            "L2",
+            "Ethereum-ecosystem"
+          ],
+          "volume_or_flow_change": "~$415M airdropped; immediate farmer sell-off",
+          "confidence": "medium",
+          "sources": [
+            "https://cryptobriefing.com/blast-token-airdrop-launch/",
+            "https://decrypt.co/237127/ethereum-layer-2-blast-airdrop-354-million-why-upset",
+            "https://www.coindesk.com/markets/2024/06/26/blast-token-debuts-at-3b-value-as-17-of-supply-airdropped-to-early-adopters"
+          ]
+        },
+        {
+          "date": "2024-06-17",
+          "trigger": "ZKsync ZK airdrop (~17.5% supply, 'mother of all airdrops'); heavy farmer selling, weak anti-sybil design",
+          "description": "ZK opened ~$0.30 and fell ~27% to ~$0.22-$0.23 on day one as airdropped supply hit the market. Per Nansen-style tracking, ~37% of top recipients sold their entire allocation while ~33% retained theirs. (An alternative figure of -34.5% appears in some coverage over a slightly longer window; treated as less reliable.) Weak anti-sybil design widely criticized.",
+          "price_impacts": [
+            {
+              "asset": "ZK",
+              "pct_change": "-27%",
+              "window": "first day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "ZK"
+          ],
+          "affected_sectors": [
+            "L2",
+            "zk-rollups"
+          ],
+          "volume_or_flow_change": "Large airdropped supply hit market; ~37% of top recipients sold entire allocation",
+          "confidence": "high",
+          "sources": [
+            "https://coinpedia.org/news/zksyncs-zk-price-drops-34-5-amid-controversial-airdrop-and-massive-sell-off/",
+            "https://beincrypto.com/zksync-price-crashes-following-airdrop/",
+            "https://unchainedcrypto.com/zksync-unveils-mother-of-all-airdrops-with-17-5-token-supply-distribution/"
+          ]
+        },
+        {
+          "date": "2024-04-03",
+          "date_range": "2024-04-03 to 2024-04-13",
+          "trigger": "Wormhole W token debut + 617M-token airdrop (~$3B FDV); recipients cashed out",
+          "description": "W opened ~$1.59-$1.61 (ATH on 2024-04-03) and fell ~24% within hours of trading (some sources report a steeper intra-hours slide toward ~$0.40); by 2024-04-13 it bottomed near ~$0.46, ~55% off the open over ~10 days, and continued lower into mid-April.",
+          "price_impacts": [
+            {
+              "asset": "W",
+              "pct_change": "-24%",
+              "window": "first hours",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "W",
+              "pct_change": "-55%",
+              "window": "10d (peak-to-trough)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "W"
+          ],
+          "affected_sectors": [
+            "interoperability",
+            "bridges",
+            "Solana-ecosystem"
+          ],
+          "volume_or_flow_change": "Pre-launch staking-style yields evaporated as token fell",
+          "confidence": "high",
+          "sources": [
+            "https://blockworks.co/news/wormhole-token-slides-following-airdrop",
+            "https://www.coindesk.com/business/2024/04/03/wormhole-debuts-at-3b-valuation-in-617m-token-airdrop",
+            "https://crypto.news/wormholes-w-token-set-for-april-3-launch-secures-major-exchange-listings/"
+          ]
+        },
+        {
+          "date": "2024-02-20",
+          "date_range": "2024-02-20 to 2024-02-22",
+          "trigger": "Starknet STRK airdrop claims went live (~7% of supply); farmers and core dev Nethermind dumped",
+          "description": "STRK opened ~$4.41, spiked to ~$5.00 then eased, and roughly halved within ~48h to ~$2.0 as airdrop hunters and Nethermind (sold ~3.4M STRK) offloaded. Peak-to-trough was nearer -58% to -60%; the -50% figure is the conservative open-to-trough move. Classic farmed-L2 dump.",
+          "price_impacts": [
+            {
+              "asset": "STRK",
+              "pct_change": "-50%",
+              "window": "48h (open-to-trough)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "STRK"
+          ],
+          "affected_sectors": [
+            "L2",
+            "zk-rollups"
+          ],
+          "volume_or_flow_change": "Pre-airdrop Starknet deposits hit all-time high (mercenary inflow), then drained post-claim",
+          "confidence": "high",
+          "sources": [
+            "https://cointelegraph.com/news/starknet-strk-falls-nethermind-airdrop-hunters-dump-millions",
+            "https://blockworks.com/news/starknet-strk-airdrop-complaints",
+            "https://www.dlnews.com/articles/defi/strk-airdrop-hype-sends-starknet-deposits-to-all-time-high/"
+          ]
+        },
+        {
+          "date": "2024-01-31",
+          "date_range": "2024-01-31 to 2024-02-01",
+          "trigger": "Jupiter JUP first airdrop ('Jupuary', ~1B tokens); IDO ~$0.40-$0.55",
+          "description": "JUP spiked to an ATH ~$2.00-$2.04 on 2024-01-31 (launch day) then fell ~68% within ~24h to ~$0.63-$0.64 as airdrop claimers sold. Textbook hype-spike then dump on a popular Solana DEX aggregator. (The prior -75% figure overstated the move; corroborated decline is ~67-69%.)",
+          "price_impacts": [
+            {
+              "asset": "JUP",
+              "pct_change": "-68%",
+              "window": "24h (ATH to next day)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "JUP"
+          ],
+          "affected_sectors": [
+            "Solana-ecosystem",
+            "DEX"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://unchainedcrypto.com/jupiters-airdropped-token-jup-debuts-at-a-878-million-market-cap/",
+            "https://blockworks.com/news/solana-based-token-launch",
+            "https://coinmarketcap.com/currencies/jupiter-ag/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "launch-pump-and-hold",
+      "name": "Launch-Pump-and-Hold (Fair-Launch / Revenue-Backed)",
+      "mechanism": "The rare inverse of sell-the-news. When a token launches with (a) NO VC/private-investor allocation to dump, (b) a product with real, demonstrable revenue/usage, and (c) supply concentrated in users who believe in continued upside, the airdrop sell pressure is absorbed and the token keeps climbing for weeks. The buyers (exchange-listing retail, momentum funds, ecosystem believers) outweigh sellers because the float is small and the narrative is 'this is undervalued vs its fees.' Holders win because there is no insider cliff hanging over them and the protocol prints fees that justify the cap. This is fragile and reverts to the broad market eventually (see HYPE's later drawdown), but the launch window is structurally bullish.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named coin",
+        "specific sector"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "typical_lag": "hours to days for initial pump; momentum persists weeks",
+      "typical_duration": "2-8 weeks of outperformance, then reverts to market beta",
+      "typical_magnitude_pct": "+50% to +700% on the named coin within weeks of launch",
+      "recurrence": "Rare. Requires no-VC fair-ish distribution + real revenue. HYPE is the canonical case; most launches do NOT qualify.",
+      "leading_signals": [
+        "zero private investor / VC allocation (no insider cliff)",
+        "protocol has real, measurable revenue/fees pre-launch",
+        "large % of recipients NOT depositing to exchanges (low sell intent)",
+        "small initial float / high reserved-for-future emissions",
+        "rising open interest with positive funding but spot leading perps"
+      ],
+      "backtest_features": [
+        "vc_allocation_pct (==0 strong signal)",
+        "protocol_revenue_run_rate_usd",
+        "pct_recipients_not_sending_to_exchange",
+        "initial_circulating_float_pct",
+        "fdv_to_annualized_fees_ratio",
+        "spot_volume_vs_perp_volume_ratio"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-11-29",
+          "date_range": "2024-11-29 to 2024-12-22",
+          "trigger": "Hyperliquid HYPE genesis airdrop (31% of supply to ~94k points holders); ZERO VC/private allocation",
+          "description": "HYPE debuted ~$3.20 and rose above ~$6.80 within the first ~24-48h (~+110%), then reached ATH ~$35.02 on 2024-12-22. Real perp-DEX revenue + no insider overhang made it the defining pump-and-hold. From the ~$3.20 debut to the ATH that is roughly +990% (about +730-740% from a ~$4.18 open) over ~3 weeks.",
+          "price_impacts": [
+            {
+              "asset": "HYPE",
+              "pct_change": "+112%",
+              "window": "48h",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "HYPE",
+              "pct_change": "+730%",
+              "window": "~23d (open to ATH)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "HYPE"
+          ],
+          "affected_sectors": [
+            "perp-DEX",
+            "DeFi"
+          ],
+          "volume_or_flow_change": "Airdrop value swelled sharply in the first 48h as price rose; high holder retention",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/business/2024/11/29/hyper-liquids-native-token-debuts-at-fully-diluted-4-2-b-market-cap",
+            "https://coinmarketcap.com/currencies/hyperliquid/"
+          ]
+        },
+        {
+          "date": "2023-12-07",
+          "trigger": "Jito JTO airdrop (90M tokens, ~$165-225M) to Solana stakers/MEV users",
+          "description": "JTO opened low (~$1.70 area) and pumped ~+150% within 24h toward ~$4.30 amid CEX listings; rode the Solana-ecosystem bull. Caught the points/restaking-on-Solana wave rather than dumping. (Prior +85% figure understated the launch-day move.)",
+          "price_impacts": [
+            {
+              "asset": "JTO",
+              "pct_change": "+150%",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "JTO",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "Solana-ecosystem",
+            "liquid-staking",
+            "MEV"
+          ],
+          "volume_or_flow_change": "Helped lift SOL ecosystem sentiment during Dec-2023 Solana rally",
+          "confidence": "medium",
+          "sources": [
+            "https://cryptorank.io/news/feed/cd003-airdrop-emerge-in-the-wake-of-solanas-jto-success",
+            "https://blockworks.co/news/jito-airdrop-value",
+            "https://coinpedia.org/news/solana-price-surge-as-jitos-225-million-airdrop-stirs-excitement-in-crypto-community/"
+          ]
+        },
+        {
+          "date": "2023-11-20",
+          "date_range": "2023-11-20 to 2023-11-24",
+          "trigger": "Pyth Network PYTH retrospective airdrop to ~90k wallets (~$77-140M); debut ~$468M mcap",
+          "description": "PYTH debuted ~$0.32-$0.44 and ran higher over the following days (~+50%) before a pullback. Oracle-narrative + Solana tailwind produced an early pump rather than instant dump. The precise near-term peak (~$0.549 on 2024-11-24) and exact pct could not be independently corroborated, so confidence is downgraded.",
+          "price_impacts": [
+            {
+              "asset": "PYTH",
+              "pct_change": "+53%",
+              "window": "~4d",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "PYTH",
+              "pct_change": "-12%",
+              "window": "post-peak day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "PYTH"
+          ],
+          "affected_sectors": [
+            "oracles",
+            "Solana-ecosystem"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.coindesk.com/business/2023/11/20/pyth-token-debuts-near-500m-valuation-as-90000-wallets-receive-airdrop",
+            "https://www.cryptotimes.io/2023/11/25/pyth-networks-pyth-token-plunges-12-from-recent-highs-after-major-airdrop/",
+            "https://www.coingecko.com/en/coins/pyth-network"
+          ]
+        },
+        {
+          "date": "2024-12-09",
+          "date_range": "2024-12-09 to 2024-12-10",
+          "trigger": "Movement MOVE mainnet + token launch",
+          "description": "MOVE launched ~$0.87 on 2024-12-09 and hit ATH ~$1.45 on 2024-12-10 (~+66% in ~24h), outpacing the broader market on launch-momentum. (Prior '+100%+' figure was overstated; corroborated gain ~66%.) Later collapsed - momentum did not persist.",
+          "price_impacts": [
+            {
+              "asset": "MOVE",
+              "pct_change": "+66%",
+              "window": "~24h (to ATH)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "MOVE"
+          ],
+          "affected_sectors": [
+            "L1",
+            "Move-VM"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://www.coinlore.com/coin/movement/historical-data",
+            "https://icodrops.com/movement-labs/",
+            "https://coinmarketcap.com/currencies/movement/"
+          ]
+        },
+        {
+          "date": "2025-04-24",
+          "trigger": "Initia INIT mainnet launch + airdrop",
+          "description": "INIT launched ~$0.59-$0.62 on 2025-04-24 and rallied to ~$0.96 by 2025-04-25 (~+50-62% launch-day low-to-high) - a notable outlier that was relatively unaffected by the 2025 airdrop-dump pattern, briefly holding gains rather than collapsing on day one. Exact official opening print is uncertain, hence low confidence.",
+          "price_impacts": [
+            {
+              "asset": "INIT",
+              "pct_change": "+50%",
+              "window": "launch",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "INIT"
+          ],
+          "affected_sectors": [
+            "L1",
+            "modular",
+            "Cosmos-ecosystem"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.coingecko.com/en/coins/initia",
+            "https://crypto.news/init-crypto-surges-36-post-launch-edging-towards-1-as-volume-explodes-over-45000/",
+            "https://icodrops.com/initia/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points-farming-meta",
+      "name": "Points-Farming Meta - Pre-Launch Inflow & Post-Airdrop Outflow",
+      "mechanism": "Before a TGE, protocols run 'points' programs that promise a future airdrop weighted by deposits/usage. This pulls in mercenary capital: TVL, deposits, fees, and on-chain activity surge as farmers chase the largest expected allocation - a dry-powder-injection into the chain/protocol and often its native gas/ecosystem token. The capital is non-sticky. Once the snapshot/eligibility window closes or the airdrop lands, farmers withdraw and rotate to the next farm, draining TVL and on-chain activity (the 'farm-and-dump' at the protocol level, distinct from selling the token itself). The other side: the protocol effectively rents liquidity at the cost of future token dilution; late farmers who buy ecosystem tokens expecting sustained activity lose when the activity evaporates. The meta itself peaked/decayed around the EIGEN airdrop (Oct 2024), widely called the 'demise of points.'",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "specific sector",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "typical_lag": "inflow builds over weeks/months pre-snapshot; outflow within days of snapshot/claim",
+      "typical_duration": "TVL/activity reversion over days to weeks post-airdrop",
+      "typical_magnitude_pct": "protocol TVL/activity swings of -30% to -70% post-snapshot; ecosystem-token effect small unless airdrop is large",
+      "recurrence": "Was dominant 2023-mid-2024 (EigenLayer, Blast, restaking/LRTs, Solana farms); structurally decayed after EIGEN disappointment but recurs around every major anticipated launch (Plasma deposits 2025).",
+      "leading_signals": [
+        "announced points program without confirmed tokenomics",
+        "TVL/deposit growth far outpacing organic usage (fees-per-TVL falling)",
+        "concentration of deposits in 'farmable' assets right before rumored snapshot",
+        "on-chain transaction count rising while unique-user retention is low",
+        "social mentions of 'farming' + leverage loops (recursive LRT deposits)"
+      ],
+      "backtest_features": [
+        "tvl_growth_rate_pre_tge",
+        "fees_to_tvl_ratio (low = mercenary)",
+        "deposit_concentration_gini",
+        "tvl_drawdown_pct_post_snapshot",
+        "unique_active_address_retention_30d_post_airdrop",
+        "days_to_expected_snapshot",
+        "recursive_leverage_loop_flag (LRT/restaking)"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-02-20",
+          "trigger": "Starknet deposits spiked to all-time high ahead of STRK airdrop, then drained",
+          "description": "Pre-airdrop farming pushed Starknet bridge deposits to ATH; once STRK claimed, mercenary TVL exited - the inflow/outflow signature of the points meta on an L2. STRK price fell ~50% open-to-trough within 48h.",
+          "price_impacts": [
+            {
+              "asset": "STRK",
+              "pct_change": "-50%",
+              "window": "48h post-claim",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "STRK"
+          ],
+          "affected_sectors": [
+            "L2",
+            "zk-rollups"
+          ],
+          "volume_or_flow_change": "Bridge deposits ATH pre-snapshot, sharp drain post-claim",
+          "confidence": "medium",
+          "sources": [
+            "https://www.dlnews.com/articles/defi/strk-airdrop-hype-sends-starknet-deposits-to-all-time-high/"
+          ]
+        },
+        {
+          "date": "2024-06-26",
+          "trigger": "Blast points/gold program drove large pre-TGE TVL; activity fell sharply post-airdrop",
+          "description": "Blast's aggressive points (Blast Gold) campaign attracted large mercenary deposits pre-launch; post-TGE the token dumped (~-7.7% launch day) and on-chain activity normalized lower as farmers rotated out.",
+          "price_impacts": [
+            {
+              "asset": "BLAST",
+              "pct_change": "-7.7%",
+              "window": "launch day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BLAST"
+          ],
+          "affected_sectors": [
+            "L2",
+            "Ethereum-ecosystem",
+            "points-farming"
+          ],
+          "volume_or_flow_change": "Large pre-TGE TVL inflow followed by post-airdrop activity decline",
+          "confidence": "medium",
+          "sources": [
+            "https://www.coindesk.com/markets/2024/06/26/blast-token-debuts-at-3b-value-as-17-of-supply-airdropped-to-early-adopters",
+            "https://decrypt.co/237127/ethereum-layer-2-blast-airdrop-354-million-why-upset"
+          ]
+        },
+        {
+          "date": "2024-10-01",
+          "trigger": "EigenLayer EIGEN airdrop - widely seen as the 'demise of points'",
+          "description": "EigenLayer's restaking points program drove tens of billions in restaked TVL and a wave of LRT recursive-leverage farming through early 2024. The disappointing, geoblocked, non-transferable EIGEN airdrop (~-12% on debut) deflated the meta; commentators marked it the end of the points era. Notably ~68% of recipient wallets did NOT send tokens to exchanges, blunting the immediate token dump.",
+          "price_impacts": [
+            {
+              "asset": "EIGEN",
+              "pct_change": "-12%",
+              "window": "debut day",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "EIGEN"
+          ],
+          "affected_sectors": [
+            "restaking",
+            "LRTs",
+            "Ethereum-ecosystem",
+            "points-farming"
+          ],
+          "volume_or_flow_change": "Restaking TVL plateaued/declined as points-driven inflows reversed across the LRT sector",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/tech/2024/05/09/eigenlayers-eigen-airdrop-might-signal-demise-of-once-popular-points",
+            "https://www.chaincatcher.com/en/article/2147344",
+            "https://www.coindesk.com/business/2024/10/01/eigenlayers-eigen-token-debuts-at-651-fdv"
+          ]
+        },
+        {
+          "date": "2024-06-20",
+          "trigger": "LayerZero ZRO 'proof-of-donation' claim (donation required to claim) designed to suppress farmer sell pressure",
+          "description": "LayerZero required a mandatory donation to claim ZRO, an explicit anti-farm-dump mechanism. ZRO still fell ~17-22% (window-dependent: ~$4.79 to ~$3.39, or ~$4.45 to ~$3.66) amid 'not an airdrop' controversy, but reportedly saw less sell pressure than similarly sized 2024 airdrops - evidence that claim-friction is a tunable lever on the points/dump dynamic.",
+          "price_impacts": [
+            {
+              "asset": "ZRO",
+              "pct_change": "-17%",
+              "window": "launch",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "ZRO"
+          ],
+          "affected_sectors": [
+            "interoperability",
+            "messaging",
+            "points-farming"
+          ],
+          "volume_or_flow_change": "Donation friction reduced claim/sell volume vs peers; ~$121M claimed",
+          "confidence": "medium",
+          "sources": [
+            "https://cointelegraph.com/news/layerzero-zro-cryptocurrency-token-donation-launch-controversy",
+            "https://unchainedcrypto.com/layerzero-users-claim-nearly-121-million-from-airdrop-amid-proof-of-donation-controversy/",
+            "https://www.tradingview.com/news/newsbtc:7d6c074cc094b:0-layerzero-s-zro-token-airdrop-receives-backlash-for-proof-of-donation-mechanism/"
+          ]
+        },
+        {
+          "date": "2025-02-06",
+          "date_range": "2025-02-06 to 2025-09-04",
+          "trigger": "Berachain BERA mainnet + airdrop (~15.8% supply); large pre-launch vault deposits (Proof-of-Liquidity farming)",
+          "description": "Berachain's pre-launch vaults attracted billions in mercenary deposits. BERA debuted ~$8, spiked to ~$14.83, then fell ~49% to ~$8 amid a long-squeeze and farmer exit. CoinGecko 2025-06-04 to 2025-09-04: -13.2% with -38.3% max drawdown as the points-era capital continued to drain.",
+          "price_impacts": [
+            {
+              "asset": "BERA",
+              "pct_change": "-49%",
+              "window": "post-debut spike to settle",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BERA",
+              "pct_change": "-13.2%",
+              "window": "3mo (Jun-Sep 2025)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BERA"
+          ],
+          "affected_sectors": [
+            "L1",
+            "DeFi",
+            "points-farming"
+          ],
+          "volume_or_flow_change": "Large pre-launch vault TVL (Proof-of-Liquidity farming) at risk of post-airdrop drain",
+          "confidence": "high",
+          "sources": [
+            "https://decrypt.co/304738/berachain-bera-airdrop-mainnet-launch",
+            "https://www.ccn.com/analysis/crypto/berachain-bera-mainnet-debuts-airdrop-price-drops/",
+            "https://www.coindesk.com/markets/2025/02/06/berachain-s-bera-trades-at-usd8-ahead-of-79m-token-airdrop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revenue-buyback-flywheel",
+      "name": "Revenue-funded buyback flywheel (usage -> token demand)",
+      "mechanism": "A protocol routes the bulk of its trading-fee revenue into continuous open-market buybacks of its own token, turning exchange usage directly into automatic, price-insensitive token demand. Hyperliquid's Assistance Fund is the canonical case: ~99% of perps+spot revenue buys HYPE block-by-block, with >$1.16B bought back since launch. This is a supply-restriction + dry-powder demand flywheel that can DECOUPLE the token from the broad market while volume is high. The reflexive catch: buybacks scale with volume, so the flywheel reverses in a volume downturn (Hyperliquid's quarterly buybacks already fell from $316.8M in Q3-2025 to $192.3M in Q1-2026, -40%). The people on the other side are shorts fading a token that has a structural, mechanical bid as long as the venue is used.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the protocol token (HYPE)",
+        "perp-DEX / revenue-token peers"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "reflexive-leveraging",
+        "sentiment-shock"
+      ],
+      "typical_magnitude_pct": "can drive multi-month outperformance/decoupling (HYPE +82.9% in May 2026 to an ATH while majors fell); magnitude tracks fee revenue",
+      "typical_lag": "continuous (block-by-block); compounds over weeks-months",
+      "typical_duration": "persists while trading volume/fees stay high; reverses on a volume downturn",
+      "recurrence": "structural/ongoing per protocol with a buyback mandate; a growing 2025-2026 tokenomics meta",
+      "leading_signals": [
+        "protocol fee revenue + buyback wallet on-chain accumulation",
+        "token outperformance vs BTC (decoupling)",
+        "perp/spot volume trend (the flywheel's fuel)",
+        "FDV-to-annualized-revenue multiple",
+        "social dominance / attention spikes"
+      ],
+      "backtest_features": [
+        "protocol_fee_revenue_30d",
+        "buyback_pct_of_revenue",
+        "buyback_usd_per_period",
+        "token_return_minus_btc_return",
+        "revenue_to_volume_sensitivity",
+        "fdv_to_revenue_multiple",
+        "buyback_qoq_change"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-06-02",
+          "date_range": "May-Jun 2026 (ATH 2026-06-02)",
+          "trigger": "HYPE hits an ATH ~$75.51 (Jun 2 2026), decoupling UPWARD while BTC/ETH/SOL crash - driven by the Assistance Fund buyback, not the ETF.",
+          "description": "Hyperliquid's Assistance Fund (>$1.16B of fee-funded HYPE buybacks since launch, ~99% of revenue) drove HYPE to an all-time high of ~$75.51 on Jun 2 2026 (+82.9% in May, into the top 10 at ~$16B+ mcap), DECOUPLING upward while BTC fell ~13.6% and ETH/SOL crashed over the same window. Analysts widely credited the buyback flywheel - NOT the new Bitwise/21Shares HYPE spot ETFs (launched ~May 14 2026) - as the real driver ('the ETF had almost nothing to do with it'). HYPE briefly rivaled SOL on FDV. Reflexive risk: buybacks scale with volume (already -40% QoQ into Q1-2026); a volume downturn reverses the bid. HYPE then pulled back -7.35% Jun 1-4 with the broad tape.",
+          "price_impacts": [
+            {
+              "asset": "HYPE",
+              "pct_change": "+82.89%",
+              "window": "May 2026 ($39.67 -> $72.55)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "HYPE",
+              "pct_change": "ATH ~$75.51",
+              "window": "2026-06-02 (decoupled up while majors crashed)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "HYPE",
+              "pct_change": "-7.35%",
+              "window": "Jun 1-4 2026 (pullback from ATH with the broad tape)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "HYPE"
+          ],
+          "affected_sectors": [
+            "perp-dex",
+            "defi",
+            "exchange-tokens"
+          ],
+          "volume_or_flow_change": ">$1.16B cumulative buybacks; ~$2.6T cumulative notional volume (~2x Coinbase); ~$200B/mo perps.",
+          "confidence": "high",
+          "sources": [
+            "https://news.bitcoin.com/hyperliquid-buys-back-1-16b-hype-as-token-price-hits-record-highs/",
+            "https://nftplazas.com/hyperliquid-hype-all-time-high-etf-buyback-mechanism/",
+            "https://www.bloomberg.com/news/articles/2026-06-03/a-180-crypto-rally-shows-new-investing-era-as-bitcoin-stumbles",
+            "https://en.bloomingbit.io/feed/news/113353"
+          ]
+        },
+        {
+          "date": "2026-02-15",
+          "date_range": "Q1 2026 (confirmed; just launching)",
+          "trigger": "OpenSea confirms SEA token (Q1 2026): 50% community airdrop + 50% of revenue to buy back SEA (Hyperliquid-style).",
+          "description": "OpenSea confirmed its SEA token for Q1 2026 - 50% of supply to the community (airdrop) and 50% of platform REVENUE pledged to open-market SEA buybacks, explicitly the Hyperliquid revenue-buyback model. OpenSea hit $2.6B volume in Oct 2025 (>90% from token trading) as it pivoted from NFTs to 'trade everything.' A second high-profile adoption of the revenue-buyback flywheel - evidence the design is spreading across venues. Price impact TBD: the token was just launching at time of writing and is not yet cleanly measurable, so this is recorded as a design-confirmed pending TGE, not a measured move.",
+          "price_impacts": [
+            {
+              "asset": "SEA",
+              "pct_change": "TBD (design-confirmed; token just launching, not yet measurable)",
+              "window": "Q1 2026",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "SEA"
+          ],
+          "affected_sectors": [
+            "nft-marketplace",
+            "tge",
+            "revenue-buyback"
+          ],
+          "volume_or_flow_change": "50% supply airdropped; 50% of revenue → SEA buybacks; OpenSea $2.6B Oct-2025 volume (>90% token trading).",
+          "confidence": "low",
+          "sources": [
+            "https://unchainedcrypto.com/opensea-prepares-sea-token-airdrop-pledges-50-community-allocation/",
+            "https://finance.yahoo.com/news/morning-minute-opensea-says-sea-125541008.html"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pre-ipo-perp-oracle-risk",
+      "name": "Pre-IPO / synthetic-asset perp oracle-failure flash crash",
+      "mechanism": "New on-chain perp venues list contracts on illiquid, no-public-benchmark underlyings (pre-IPO names, synthetic equities) priced by a single third-party oracle. When the oracle mishandles a corporate action (stock split, dividend) or thin liquidity, the pricing engine treats an artifact as a real move and liquidates leveraged positions in minutes. The losers are high-leverage retail with tiny margins; the lesson is that pre-IPO/synthetic perps carry severe oracle and corporate-action risk distinct from the underlying token's health.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the specific pre-IPO/synthetic perp",
+        "leveraged retail positions"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "sentiment-shock"
+      ],
+      "typical_magnitude_pct": "-45% to -80% in minutes on the affected contract; underlying platform token typically unaffected",
+      "typical_lag": "instant (single-block oracle print)",
+      "typical_duration": "minutes (often partial recovery once the bad print clears)",
+      "recurrence": "rising as pre-IPO/prediction/synthetic-equity perps proliferate (Hyperliquid Ventuals, Bitget preSPCX, etc.)",
+      "leading_signals": [
+        "single-oracle dependency for an illiquid underlying",
+        "upcoming corporate action (split/dividend) on the referenced asset",
+        "thin order-book depth + high open leverage",
+        "low median position margin (retail-skewed)"
+      ],
+      "backtest_features": [
+        "oracle_source_concentration",
+        "underlying_liquidity_depth",
+        "pending_corporate_action_flag",
+        "open_leverage_ratio",
+        "median_position_margin"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-05-28",
+          "date_range": "2026-05-28 (single 30-minute window)",
+          "trigger": "Hyperliquid's SPACEX-USDH pre-IPO perp flash-crashes -45% on a faulty oracle mishandling SpaceX's 5-for-1 split.",
+          "description": "Hyperliquid's SPACEX-USDH pre-IPO perpetual (via Ventuals) plunged from an open of $2,277 to $1,254 (-45%) in ~30 minutes before recovering to ~$2,169. Cause: the Notice.co oracle fed SpaceX's 5-for-1 stock split into the pricing engine as an ~80% drop. ~$1.51M was liquidated across 1,393 positions (405 users; median margin just $31 - high-leverage retail). Bitget's preSPCX fell ~80% on the same corporate action. The HYPE token itself was unaffected (held near its highs) - a contained microstructure/oracle failure, not a protocol risk.",
+          "price_impacts": [
+            {
+              "asset": "SPACEX-USDH (pre-IPO perp)",
+              "pct_change": "-45%",
+              "window": "30 min on 2026-05-28 ($2,277 -> $1,254, recovered ~$2,169)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "HYPE",
+              "pct_change": "unaffected (held near highs)",
+              "window": "2026-05-28",
+              "direction": "flat",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "HYPE"
+          ],
+          "affected_sectors": [
+            "pre-ipo-perps",
+            "prediction-markets",
+            "oracles"
+          ],
+          "volume_or_flow_change": "$1.51M liquidated; 1,393 positions / 405 users; median margin ~$31.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2026/05/28/hyperliquid-s-pre-ipo-spacex-contracts-suffers-45-flash-crash-liquidating-usd1-5-million",
+            "https://unchainedcrypto.com/spacex-pre-ipo-contract-on-hyperliquid-ventuals-crashes-45-on-faulty-oracle-data-liquidating-hundreds/",
+            "https://www.kucoin.com/blog/spacex-pre-ipo-crash-explained"
+          ]
+        }
+      ]
+    }
+  ]
+}

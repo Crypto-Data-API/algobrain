@@ -1,0 +1,6066 @@
+{
+  "schema_version": 1,
+  "build_date": "2026-06-04",
+  "description": "Quantitative move-probability priors per narrative archetype (deterministic, from all-narratives.json). Enriched by the operational workflow with detection/regime/gate fields into narrative-signals.json.",
+  "n_archetypes": 69,
+  "signals": [
+    {
+      "archetype_id": "flagship-agent-launch-pump",
+      "category_id": "ai-agent-tokens",
+      "name": "Flagship AI-Agent Token Launch Pump (reflexive parabola)",
+      "directional_bias": "bullish",
+      "n_instances": 4,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 500.0,
+          "p25": 500.0,
+          "p75": 500.0,
+          "min": 500.0,
+          "max": 500.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate to hours; parabola plays out over days to ~2 weeks",
+      "typical_duration": "1-3 weeks of run-up, then weeks-to-months of decay",
+      "recurrence": "Clustered Oct 2024 - Jan 2025; recurs whenever a new flagship narrative coin appears",
+      "affected_scope": [
+        "the named coin",
+        "AI-agent sector",
+        "Solana memecoins",
+        "Base ecosystem"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "viral X/Twitter mentions of an AI agent",
+        "association/endorsement by a known VC/founder (a16z, Andreessen)",
+        "pump.fun coin crossing $100M then higher mcap",
+        "Virtuals bonding curve nearing 42,000 VIRTUAL graduation",
+        "rapid holder-count growth",
+        "exchange listing announcements (Binance/Coinbase)"
+      ],
+      "backtest_features": [
+        "days_since_token_launch",
+        "twitter_mention_velocity_zscore",
+        "holder_count_growth_rate",
+        "mcap_24h_pct_change",
+        "is_launchpad_graduation_event",
+        "first_cex_listing_flag",
+        "circulating_float_pct"
+      ],
+      "per_asset": {
+        "GOAT": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "AI16Z": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 500.0
+        },
+        "VIRTUAL": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "AI-agent sector": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 3,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "sector-rotation-comovement-and-crash",
+      "category_id": "ai-agent-tokens",
+      "name": "AI-Sector Rotation + Reflexive Crash (correlated cohort unwind)",
+      "directional_bias": "bearish",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 9,
+          "median": 60.0,
+          "p25": 33.8,
+          "p75": 82.5,
+          "min": 17.0,
+          "max": 90.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (hours) on the shock; cascade over days",
+      "typical_duration": "Drawdown unwinds over weeks; sector spent months below peak",
+      "recurrence": "The full cohort crash was a single Q1-2025 regime change; smaller correlated drawdowns recur on any AI macro shock",
+      "affected_scope": [
+        "AI-agent sector",
+        "large-cap AI infra (TAO, FET, RENDER)",
+        "Solana memecoins",
+        "broad altcoins"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "smart-money / top-PnL wallets distributing",
+        "sector aggregate mcap stalling after parabola",
+        "negative AI macro headline (DeepSeek)",
+        "declining new launches / launchpad volume",
+        "funding rates flipping / OI unwind",
+        "BTC dominance rising vs alts"
+      ],
+      "backtest_features": [
+        "sector_aggregate_mcap_zscore",
+        "ai_token_cross_correlation_30d",
+        "top_wallet_netflow_to_exchanges",
+        "btc_dominance_change",
+        "ai_token_basket_beta_to_btc",
+        "rolling_drawdown_from_60d_high",
+        "new_agent_launch_count_trend"
+      ],
+      "per_asset": {
+        "AI16Z": {
+          "up": 0,
+          "down": 4,
+          "flat": 0,
+          "median_abs_move_pct": 71.2
+        },
+        "AIXBT": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 52.9
+        },
+        "VIRTUAL": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 52.0
+        },
+        "AI-agent sector": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "NVDA (equity reference)": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 17.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.3
+    },
+    {
+      "archetype_id": "launchpad-graduation-and-infra-consolidation",
+      "category_id": "ai-agent-tokens",
+      "name": "Launchpad Graduation Pumps & AI-Infra Token Consolidation",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 850.0,
+          "p25": 850.0,
+          "p75": 850.0,
+          "min": 850.0,
+          "max": 850.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate on graduation; days-to-weeks on merger re-rating",
+      "typical_duration": "Graduation pumps fade within days; merger re-rating persists weeks-to-months",
+      "recurrence": "Graduations were near-daily on Virtuals during the Nov 2024 - Jan 2025 boom; mergers are rare one-offs",
+      "affected_scope": [
+        "the named coin",
+        "VIRTUAL",
+        "AI-infra tokens (FET/AGIX/OCEAN/ASI)"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "Virtuals bonding curve approaching 42,000 VIRTUAL",
+        "pending Uniswap liquidity deployment",
+        "merger/consolidation announcement",
+        "token conversion-ratio disclosure",
+        "exchange support announcements for the new ticker"
+      ],
+      "backtest_features": [
+        "bonding_curve_pct_to_graduation",
+        "graduation_event_flag",
+        "virtual_required_base_demand",
+        "merger_announcement_flag",
+        "supply_consolidation_ratio",
+        "days_to_conversion_deadline"
+      ],
+      "per_asset": {
+        "FET": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "AGIX": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "OCEAN": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "ASI": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "AIXBT": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "VIRTUAL": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 850.0
+        },
+        "GAME": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "agent-idiosyncratic-and-subnet-events",
+      "category_id": "ai-agent-tokens",
+      "name": "Idiosyncratic Agent/Protocol Events (hacks, subnet launches, dTAO)",
+      "directional_bias": "mixed",
+      "n_instances": 4,
+      "p_up": 0.25,
+      "p_down": 0.75,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 130.3,
+          "p25": 98.4,
+          "p75": 162.1,
+          "min": 66.5,
+          "max": 194.0
+        },
+        "down": {
+          "n": 4,
+          "median": 16.2,
+          "p25": 11.2,
+          "p75": 26.8,
+          "min": 4.6,
+          "max": 50.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (hours) on hacks; launch-day spike then multi-day dip on subnet alphas",
+      "typical_duration": "Hack drops partly recover in days; subnet-launch dips persist until emissions re-equilibrate",
+      "recurrence": "Hacks are sporadic; dTAO subnet alpha launches recur continuously since Feb 2025",
+      "affected_scope": [
+        "the named coin",
+        "Bittensor subnet alpha tokens",
+        "TAO"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "sell-pressure",
+        "supply-restriction",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "unusual agent wallet activity / dashboard access",
+        "deleted-account or anomalous agent posts",
+        "new Bittensor subnet registration",
+        "alpha-token liquidity-pool creation",
+        "TAO staking redistribution toward a new subnet"
+      ],
+      "backtest_features": [
+        "agent_wallet_anomalous_outflow_flag",
+        "subnet_registration_event",
+        "alpha_token_age_days",
+        "alpha_pool_liquidity_depth",
+        "tao_emission_share_change_by_subnet",
+        "days_since_dtao_launch"
+      ],
+      "per_asset": {
+        "TAO": {
+          "up": 1,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 13.4
+        },
+        "Templar (subnet token)": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 194.0
+        },
+        "AIXBT": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 19.0
+        },
+        "subnet alpha tokens": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 50.0
+        },
+        "subnet-token aggregate": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.43
+    },
+    {
+      "archetype_id": "btc-dominance-regime",
+      "category_id": "bitcoin-dominance-rotation",
+      "name": "BTC dominance regime (risk-on/off rotation within crypto)",
+      "directional_bias": "mixed",
+      "n_instances": 3,
+      "p_up": 0.33,
+      "p_down": 0.33,
+      "p_flat": 0.33,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 2,
+          "median": 35.0,
+          "p25": 24.3,
+          "p75": 45.8,
+          "min": 13.6,
+          "max": 56.5
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 58.7,
+          "p25": 58.7,
+          "p75": 58.7,
+          "min": 58.7,
+          "max": 58.7
+        }
+      },
+      "typical_lag": "regime-scale (weeks-to-months); not an intraday signal",
+      "typical_duration": "months per regime leg",
+      "recurrence": "every cycle: BTC-led accumulation -> mid-cycle ETH/large-cap rotation -> late-cycle alt/meme blow-off -> risk-off flight back to BTC",
+      "affected_scope": [
+        "BTC.D",
+        "ETH/BTC ratio",
+        "large-cap alts",
+        "total-market-cap-ex-BTC (TOTAL2)"
+      ],
+      "analog_mechanisms": [
+        "sector-rotation",
+        "sentiment-shock",
+        "mean-reversion"
+      ],
+      "leading_signals": [
+        "BTC.D level and 30-day slope",
+        "Altcoin Season Index (>75 alt-season / <25 BTC season)",
+        "ETH/BTC ratio and its 50/200-day MA crosses",
+        "TOTAL2 / TOTAL ratio (alt share of market cap)",
+        "BTC spot-ETF net flows vs alt-ETF/alt-fund flows",
+        "days since last confirmed alt-season"
+      ],
+      "backtest_features": [
+        "btc_dominance_level",
+        "btc_dominance_30d_change_pp",
+        "altcoin_season_index",
+        "eth_btc_ratio",
+        "eth_btc_ratio_50dma_cross",
+        "total2_total_ratio",
+        "days_since_last_altseason",
+        "alt_basket_beta_to_btc_30d"
+      ],
+      "per_asset": {
+        "BTC.D": {
+          "up": 1,
+          "down": 1,
+          "flat": 1,
+          "median_abs_move_pct": 57.6
+        },
+        "BTC": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 13.6
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.4
+    },
+    {
+      "archetype_id": "altseason-exhaustion-top-signal",
+      "category_id": "bitcoin-dominance-rotation",
+      "name": "Alt-season extreme as a late-cycle top signal",
+      "directional_bias": "bearish",
+      "n_instances": 2,
+      "p_up": 0.5,
+      "p_down": 0.5,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 40.0,
+          "p25": 40.0,
+          "p75": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        },
+        "down": {
+          "n": 2,
+          "median": 46.5,
+          "p25": 39.8,
+          "p75": 53.2,
+          "min": 33.0,
+          "max": 60.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "the top signal is coincident-to-leading by days/weeks; confirmation on the dominance reversal",
+      "typical_duration": "the unwind runs the length of the ensuing bear (months-to-a-year)",
+      "recurrence": "once per cycle at the euphoria peak",
+      "affected_scope": [
+        "altcoins",
+        "memecoins",
+        "total-market-cap-ex-BTC",
+        "BTC.D"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "mean-reversion",
+        "sector-rotation"
+      ],
+      "leading_signals": [
+        "Altcoin Season Index spiking >75",
+        "BTC.D making a multi-month low",
+        "memecoin/low-cap volume share at extremes (see [[memecoin-mania]])",
+        "ETH/BTC and alt/BTC ratios parabolic then rolling over",
+        "funding/leverage extremes across alts"
+      ],
+      "backtest_features": [
+        "altcoin_season_index_peak",
+        "btc_dominance_local_min",
+        "memecoin_volume_share",
+        "alt_funding_rate_zscore",
+        "eth_btc_ratio_rate_of_change"
+      ],
+      "per_asset": {
+        "BTC.D": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 36.5
+        },
+        "altcoins": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 60.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "post-halving-bull-cycle",
+      "category_id": "bitcoin-halving",
+      "name": "Post-Halving Bull Cycle (the 12-18 month parabolic run)",
+      "directional_bias": "bullish",
+      "n_instances": 4,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 5,
+          "median": 700.0,
+          "p25": 290.0,
+          "p75": 2900.0,
+          "min": 95.0,
+          "max": 9000.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "weeks to months — the parabolic phase typically begins 3-6 months after the halving",
+      "typical_duration": "12-18 months from halving to cycle top",
+      "recurrence": "once per ~4-year halving cycle; 4 occurrences 2012-2024",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "entire crypto market"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "halving event occurs (block height multiple of 210,000)",
+        "stock-to-flow ratio doubles",
+        "miner reserves declining",
+        "BTC reclaims prior cycle ATH",
+        "rising spot ETF net inflows (2024+ cycle)",
+        "funding rates turning persistently positive"
+      ],
+      "backtest_features": [
+        "days_since_last_halving",
+        "block_reward_btc",
+        "daily_new_supply_btc",
+        "miner_sell_pressure_usd_per_day",
+        "issuance_pct_of_circulating_supply_annualized",
+        "stock_to_flow_ratio",
+        "months_to_prior_cycle_top_analog",
+        "halving_to_date_return_pct"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 5,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 700.0
+        }
+      },
+      "confidence_mix": {
+        "high": 4,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "pre-halving-rally-and-buy-the-rumor",
+      "category_id": "bitcoin-halving",
+      "name": "Pre-Halving Rally / Buy-the-Rumor",
+      "directional_bias": "bullish",
+      "n_instances": 2,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 135.0,
+          "p25": 125.0,
+          "p75": 145.0,
+          "min": 115.0,
+          "max": 155.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "builds over 6-12 months before the halving date",
+      "typical_duration": "6-12 months pre-event",
+      "recurrence": "once per ~4-year cycle, ahead of each halving",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "halving date within 12 months",
+        "rising Google search interest in 'bitcoin halving'",
+        "accelerating spot ETF inflows (2024+)",
+        "BTC trending above 200-day moving average",
+        "improving funding/open-interest"
+      ],
+      "backtest_features": [
+        "days_to_next_halving",
+        "halving_countdown_block_distance",
+        "btc_return_trailing_6m_into_halving",
+        "search_trend_halving_zscore",
+        "etf_net_inflow_zscore",
+        "realized_cap_growth_rate"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 135.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "post-cycle-bear-market",
+      "category_id": "bitcoin-halving",
+      "name": "Post-Cycle Bear Market (the deflationary back half of the 4-year cycle)",
+      "directional_bias": "bearish",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 9,
+          "median": 61.9,
+          "p25": 49.6,
+          "p75": 77.0,
+          "min": 39.3,
+          "max": 85.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "begins immediately after the cycle top (~18mo post-halving)",
+      "typical_duration": "~12 months of decline into the cycle low, roughly the second half of the 4-year cycle",
+      "recurrence": "once per ~4-year cycle, following each bull-market top",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "entire crypto market"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "BTC loses 200-day moving average after a parabolic run",
+        "funding rates flip persistently negative",
+        "exchange net-inflows spike (holders moving to sell)",
+        "failure to make new highs for >8 weeks after a blowoff top",
+        "long-term-holder distribution rising"
+      ],
+      "backtest_features": [
+        "months_since_cycle_top",
+        "drawdown_from_ath_pct",
+        "btc_below_200d_ma_flag",
+        "long_term_holder_supply_distribution",
+        "funding_rate_negative_streak",
+        "realized_loss_zscore"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 6,
+          "flat": 0,
+          "median_abs_move_pct": 63.5
+        },
+        "total-market-cap": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 45.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 61.9
+        },
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 71.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.44
+    },
+    {
+      "archetype_id": "treasury-adoption-announcement",
+      "category_id": "corporate-treasury",
+      "name": "Treasury-Adoption Announcement (company pivots to crypto reserve)",
+      "directional_bias": "bullish",
+      "n_instances": 8,
+      "p_up": 0.62,
+      "p_down": 0.25,
+      "p_flat": 0.12,
+      "abs_move_pct": {
+        "up": {
+          "n": 8,
+          "median": 36.8,
+          "p25": 13.1,
+          "p75": 590.0,
+          "min": 2.0,
+          "max": 6425.0
+        },
+        "down": {
+          "n": 3,
+          "median": 2.3,
+          "p25": 2.1,
+          "p75": 4.7,
+          "min": 2.0,
+          "max": 7.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 1.0,
+          "p25": 1.0,
+          "p75": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "typical_lag": "immediate (same session, often pre-market)",
+      "typical_duration": "stock pop intraday-to-days; narrative read-across can persist weeks; coin effect <24h",
+      "recurrence": "very frequent in 2024-2025 — dozens of copycats; cluster events around each new high-profile entrant",
+      "affected_scope": [
+        "the announcing company stock",
+        "BTC",
+        "ETH",
+        "other treasury-stock peers (MSTR, SMLR, MARA, SBET)"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "8-K / press release announcing treasury policy adoption",
+        "board approval of crypto-as-reserve",
+        "convertible-note or ATM equity raise filed days before",
+        "small beaten-down small-cap with a crypto-aligned chairman",
+        "sudden short-interest spike then squeeze"
+      ],
+      "backtest_features": [
+        "is_treasury_adoption_announcement (event flag)",
+        "announcing_mktcap_usd",
+        "first_purchase_usd / announcing_mktcap (relative size)",
+        "first_purchase_usd / coin_mktcap (coin-flow ratio)",
+        "pre_announcement_ytd_return (beaten-down screen)",
+        "stock_short_interest_pct",
+        "implied_mNAV_at_announcement"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 1,
+          "down": 2,
+          "flat": 3,
+          "median_abs_move_pct": 2.1
+        },
+        "ETH": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 46.6
+        },
+        "GME": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.0
+        },
+        "SBET": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 2200.0
+        },
+        "SMLR": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 33.5
+        },
+        "Metaplanet (3350.T)": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 6425.0
+        },
+        "TSLA": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 2.0
+        },
+        "MSTR": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 9.0
+        }
+      },
+      "confidence_mix": {
+        "high": 5,
+        "medium": 3,
+        "low": 0
+      },
+      "measured_fraction": 0.14
+    },
+    {
+      "archetype_id": "accumulation-mnav-flywheel",
+      "category_id": "corporate-treasury",
+      "name": "Sustained Accumulation / mNAV-Premium Flywheel (ongoing buys funded at a premium)",
+      "directional_bias": "bullish",
+      "n_instances": 5,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 4,
+          "median": 66.7,
+          "p25": 48.7,
+          "p75": 85.0,
+          "min": 35.0,
+          "max": 100.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "diffuse — builds over weeks/quarters rather than per-event",
+      "typical_duration": "persists as long as mNAV > ~1 and capital markets stay open (multi-quarter)",
+      "recurrence": "continuous through 2024-2025 bull phase; weekly purchase 8-Ks from MSTR and peers",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "SOL",
+        "treasury-stock cohort"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "mNAV premium > 1 (especially > 2)",
+        "fresh ATM/convertible/preferred raise filings",
+        "weekly Monday MSTR purchase 8-Ks",
+        "rising 'BTC Yield'/coin-per-share metric",
+        "growing count of new treasury entrants (crowding)",
+        "exchange outflows to corporate custody addresses"
+      ],
+      "backtest_features": [
+        "aggregate_DATCo_net_purchases_usd_30d",
+        "issuer_mNAV_premium",
+        "new_treasury_raise_usd (ATM/convert/preferred)",
+        "btc_yield_metric_change",
+        "coin_per_share_growth_rate",
+        "count_active_treasury_vehicles",
+        "purchase_usd / coin_30d_adv (flow vs liquidity)"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 4,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 67.5
+        },
+        "ETH": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 53.3
+        },
+        "MSTR": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 80.0
+        },
+        "MARA": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.14
+    },
+    {
+      "archetype_id": "distribution-mnav-unwind",
+      "category_id": "corporate-treasury",
+      "name": "Distribution / Forced Selling / mNAV-Discount Unwind (the flywheel in reverse)",
+      "directional_bias": "bearish",
+      "n_instances": 7,
+      "p_up": 0.0,
+      "p_down": 0.86,
+      "p_flat": 0.14,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 8,
+          "median": 13.8,
+          "p25": 8.2,
+          "p75": 30.7,
+          "min": 2.0,
+          "max": 89.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.4,
+          "p25": 0.4,
+          "p75": 0.4,
+          "min": 0.4,
+          "max": 0.4
+        }
+      },
+      "typical_lag": "sentiment dip immediate; systemic forced-selling plays out over days-to-weeks",
+      "typical_duration": "single-sale dip hours-to-days; mNAV-unwind regimes persist weeks-to-months",
+      "recurrence": "rare for outright sales (Strategy held through all of 2023-2025); systemic discount-unwind episodes clustered in late 2025",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "treasury-stock cohort (MSTR, MARA, SBET, BMNR, Metaplanet)",
+        "broad crypto"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "mNAV falling toward / below 1.0",
+        "CEO comments about 'conditions to sell'",
+        "treasury stock down >50% YoY while coin down less (premium gone)",
+        "debt/preferred coverage stress, covenant headlines",
+        "treasury-stock share-buyback announcements (cash drain)",
+        "'one in three treasuries below NAV' breadth",
+        "rising correlation of treasury stocks crashing together"
+      ],
+      "backtest_features": [
+        "issuer_mNAV (level + 30d change)",
+        "pct_of_cohort_below_mNAV_1",
+        "is_disclosed_corporate_sale (event flag, qty/usd)",
+        "treasury_stock_drawdown_vs_coin_drawdown (premium-erosion spread)",
+        "DATCo_aggregate_holdings / coin_circulating_supply",
+        "convert/preferred_coverage_ratio",
+        "stock_buyback_announced (flag)"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 7,
+          "flat": 1,
+          "median_abs_move_pct": 9.5
+        },
+        "SBET": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 89.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "MSTR": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 54.0
+        }
+      },
+      "confidence_mix": {
+        "high": 4,
+        "medium": 2,
+        "low": 1
+      },
+      "measured_fraction": 0.45
+    },
+    {
+      "archetype_id": "narrative-ignition-tvl-landgrab",
+      "category_id": "defi-narratives",
+      "name": "Narrative ignition / TVL land-grab (yield-farming, restaking points, RWA hype)",
+      "directional_bias": "bullish",
+      "n_instances": 7,
+      "p_up": 0.71,
+      "p_down": 0.0,
+      "p_flat": 0.29,
+      "abs_move_pct": {
+        "up": {
+          "n": 4,
+          "median": 800.0,
+          "p25": 350.0,
+          "p75": 36650.0,
+          "min": 200.0,
+          "max": 143000.0
+        },
+        "down": null,
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 40.0,
+          "p25": 40.0,
+          "p75": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        }
+      },
+      "typical_lag": "immediate to days for the flagship token; days-to-weeks for read-across into peer tokens",
+      "typical_duration": "weeks to a few months for the acute pump; the narrative regime can persist 1-2 quarters",
+      "recurrence": "roughly one major sector-defining wave every 12-24 months (2020 DeFi Summer, 2021 Curve/L1, 2023-24 restaking, 2024 RWA)",
+      "affected_scope": [
+        "the named governance/sector token",
+        "DeFi sector",
+        "the host L1/L2 (ETH, SOL)",
+        "ETH (DeFi-beta)"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-leveraging",
+        "sector-rotation",
+        "supply-restriction (staking/locking TVL)"
+      ],
+      "leading_signals": [
+        "sharp TVL inflow before token price moves",
+        "launch of a points/airdrop program",
+        "first major institutional validation (e.g. BlackRock BUIDL)",
+        "rising social/search interest in the meta",
+        "copycat protocols launching same week"
+      ],
+      "backtest_features": [
+        "tvl_7d_pct_change",
+        "tvl_zscore_90d",
+        "sector_dominance_of_total_mcap",
+        "emissions_apy",
+        "points_program_active_flag",
+        "token_price_to_tvl_ratio",
+        "google_trends_or_social_mention_zscore",
+        "days_since_mechanism_launch",
+        "new_protocol_launches_per_week_in_sector"
+      ],
+      "per_asset": {
+        "ETH": {
+          "up": 1,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 40.0
+        },
+        "AAVE": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": null
+        },
+        "ONDO": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 1200.0
+        },
+        "SUSHI": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 200.0
+        },
+        "YFI": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 143000.0
+        },
+        "COMP": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 400.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 4,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "airdrop-sell-the-news",
+      "category_id": "defi-narratives",
+      "name": "Points/airdrop 'sell the news' (TGE distribution dump)",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.2,
+      "p_down": 0.8,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 63.0,
+          "p25": 63.0,
+          "p75": 63.0,
+          "min": 63.0,
+          "max": 63.0
+        },
+        "down": {
+          "n": 4,
+          "median": 71.7,
+          "p25": 67.8,
+          "p75": 78.0,
+          "min": 66.5,
+          "max": 87.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (hours to first 7 days post-claim)",
+      "typical_duration": "the acute dump is days; the bleed often continues weeks-to-months as cliffs/emissions add supply",
+      "recurrence": "every major TGE in a hot meta — dozens per cycle; highly repeatable",
+      "affected_scope": [
+        "the airdropped token",
+        "peer farm-and-dump tokens",
+        "the host chain governance token"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-shock (new float hitting market)",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "TGE/claim date announcement",
+        "large airdrop allocation %",
+        "high FDV vs low initial float",
+        "pre-market/IOU price far above implied float value",
+        "negative perp funding pre-listing",
+        "Dune dashboards showing rapid claim+sell"
+      ],
+      "backtest_features": [
+        "days_since_tge",
+        "airdrop_pct_of_supply",
+        "initial_float_pct",
+        "fdv_to_float_ratio",
+        "recipient_wallet_count",
+        "exchange_listing_flag",
+        "pct_recipients_sold_7d",
+        "funding_rate_at_listing",
+        "pre_tge_points_program_duration_days"
+      ],
+      "per_asset": {
+        "ENA": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 76.8
+        },
+        "HYPE": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 63.0
+        },
+        "UNI": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 75.0
+        },
+        "ARB": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "PENDLE": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 68.3
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.29
+    },
+    {
+      "archetype_id": "vote-bribe-liquidity-wars",
+      "category_id": "defi-narratives",
+      "name": "Vote-bribe / liquidity wars (Curve wars, veTokenomics)",
+      "directional_bias": "mixed",
+      "n_instances": 2,
+      "p_up": 0.5,
+      "p_down": 0.5,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 1625.0,
+          "p25": 1625.0,
+          "p75": 1625.0,
+          "min": 1625.0,
+          "max": 1625.0
+        },
+        "down": {
+          "n": 1,
+          "median": 90.0,
+          "p25": 90.0,
+          "p75": 90.0,
+          "min": 90.0,
+          "max": 90.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "days-to-weeks during accumulation; the structural decay plays out over many months",
+      "typical_duration": "the war phase lasts months; token decay persists for years post-peak",
+      "recurrence": "the canonical instance was 2021-22; the veTokenomics template recurs across protocols (Balancer, Velodrome, etc.) but rarely at the same scale",
+      "affected_scope": [
+        "CRV",
+        "CVX",
+        "meta-governance tokens",
+        "stablecoin/liquidity-protocol governance tokens"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction (vote-locking)",
+        "dry-powder-injection (bribes)",
+        "reflexive-leveraging",
+        "yield-chasing-rotation"
+      ],
+      "leading_signals": [
+        "rising bribe APRs",
+        "increasing lock ratios / falling liquid float",
+        "a new protocol entering the war (buying votes)",
+        "meta-governance TVL inflows (Convex)"
+      ],
+      "backtest_features": [
+        "bribe_apr",
+        "vetoken_lock_ratio",
+        "convex_share_of_crv",
+        "emissions_inflation_rate",
+        "pool_tvl_directed_by_votes",
+        "token_locked_pct_of_supply",
+        "bribe_market_volume_weekly"
+      ],
+      "per_asset": {
+        "CVX": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 857.5
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "defi-reflexive-deleveraging",
+      "category_id": "defi-narratives",
+      "name": "DeFi reflexive deleveraging / contagion (exploits, founder-collateral, yield unwind)",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 105.4,
+          "p25": 105.4,
+          "p75": 105.4,
+          "min": 105.4,
+          "max": 105.4
+        },
+        "down": {
+          "n": 6,
+          "median": 14.2,
+          "p25": 12.9,
+          "p75": 17.3,
+          "min": 7.0,
+          "max": 51.1
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (minutes to hours) for the levered token; hours-to-days for contagion read-across",
+      "typical_duration": "acute drop is hours-to-days; sentiment/TVL recovery can take weeks-to-months",
+      "recurrence": "multiple times per cycle — exploits and forced unwinds are frequent in DeFi",
+      "affected_scope": [
+        "the exploited/levered token",
+        "lending-protocol governance tokens",
+        "the whole DeFi sector",
+        "correlated LST/LRT tokens"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock",
+        "contagion"
+      ],
+      "leading_signals": [
+        "a single large borrow position near liquidation (e.g. founder collateral)",
+        "stablecoin/LST depeg starting",
+        "exploit/hack headline",
+        "spiking lending utilization",
+        "TVL outflow acceleration",
+        "negative funding flush"
+      ],
+      "backtest_features": [
+        "protocol_tvl_drop_24h",
+        "largest_borrow_position_collateral_ratio",
+        "stablecoin_peg_deviation",
+        "lending_utilization_rate",
+        "token_collateral_concentration",
+        "exchange_netflow_zscore",
+        "perp_funding_spike",
+        "oracle_price_gap"
+      ],
+      "per_asset": {
+        "AAVE": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 17.9
+        },
+        "ONDO": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 51.1
+        },
+        "MKR": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.5
+        },
+        "SKY": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 12.9
+        },
+        "HYPE": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 105.4
+        },
+        "CRV": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 13.0
+        },
+        "ALCX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.71
+    },
+    {
+      "archetype_id": "acute-insolvency-bank-run",
+      "category_id": "exchange-collapses",
+      "name": "Acute Insolvency / Bank-Run Freeze",
+      "directional_bias": "bearish",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 11,
+          "median": 36.0,
+          "p25": 23.5,
+          "p75": 64.0,
+          "min": 3.0,
+          "max": 90.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate to hours — the token gaps down within minutes of the trigger; BTC/broad-market reacts within hours to 1-2 days",
+      "typical_duration": "Token impact is permanent (near-total loss). Broad-market acute drop plays out over 3-10 days, with a depressed regime lasting weeks to months.",
+      "recurrence": "Episodic but recurring across every cycle — roughly one major instance per bear-market liquidity crunch (2014 Gox, 2022 Celsius/FTX). Smaller exchange freezes occur more frequently.",
+      "affected_scope": [
+        "the named coin / exchange token",
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "ecosystem tokens tied to the failed entity"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "counterparty-risk-repricing"
+      ],
+      "leading_signals": [
+        "Leaked balance sheet showing native-token concentration (CoinDesk's FTX/Alameda report on 2022-11-02)",
+        "A large rival publicly announcing it will dump its holdings of the platform's token (CZ's 2022-11-06 tweet)",
+        "Anomalous exchange outflows / large BTC moving off the platform before the halt",
+        "Token trading at a discount on the affected venue vs. other exchanges",
+        "Withdrawal delays / 'temporary pause due to extreme market conditions' language",
+        "Negative funding and rising borrow rates on the token"
+      ],
+      "backtest_features": [
+        "exchange_token_price_drawdown_24h",
+        "exchange_token_to_circulating_collateral_ratio",
+        "stablecoin_depeg_flag (platform stablecoin or USDT premium)",
+        "exchange_btc_netflow_zscore (deposits/withdrawals spike)",
+        "withdrawal_halt_event_flag",
+        "open_interest_drop_pct_24h",
+        "funding_rate_negative_extreme_flag",
+        "social_volume_spike_zscore (mentions of insolvency/bankruptcy)",
+        "proof_of_reserves_gap_flag"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 7,
+          "flat": 0,
+          "median_abs_move_pct": 23.5
+        },
+        "FTT": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 83.2
+        },
+        "SOL": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 64.0
+        },
+        "CEL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 50.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 0,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "contagion-cascade-deleveraging",
+      "category_id": "exchange-collapses",
+      "name": "Contagion Cascade / Counterparty Domino",
+      "directional_bias": "bearish",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 0.5,
+      "p_flat": 0.5,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 3,
+          "median": 34.0,
+          "p25": 18.0,
+          "p75": 39.5,
+          "min": 2.0,
+          "max": 45.0
+        },
+        "flat_or_mixed": {
+          "n": 2,
+          "median": 2.5,
+          "p25": 2.2,
+          "p75": 2.8,
+          "min": 2.0,
+          "max": 3.0
+        }
+      },
+      "typical_lag": "days to weeks — the first default is acute, but the full cascade unfolds over 1-6 months as each linked entity fails in sequence.",
+      "typical_duration": "Months. The 2022 cascade ran from the May Luna shock through the November FTX failure and into the January 2023 Genesis bankruptcy — roughly 8 months of grinding decline / suppressed prices.",
+      "recurrence": "Once per major leverage build-up / bear cycle. The 2022 episode is the canonical full cascade; isolated defaults that don't chain (single fund blow-ups) are more frequent.",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "lender/CeFi tokens",
+        "the entire market cap"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "forced-liquidation",
+        "sell-pressure",
+        "contagion",
+        "credit-crunch",
+        "collateral-spiral"
+      ],
+      "leading_signals": [
+        "A large fund missing a margin call / a public notice of default issued to it (Voyager's default notice to 3AC, Jun 2022)",
+        "A widening stETH or GBTC discount (forced sellers exiting locked collateral)",
+        "A 'systemically important' token already collapsing (LUNA in May 2022 preceded the lender failures)",
+        "Lenders cutting yields / pausing new deposits / seeking emergency lines (Celsius, BlockFi raising rescue capital)",
+        "Falling aggregate open interest as leverage is purged",
+        "Rumors of insolvency clustering across multiple named firms within days"
+      ],
+      "backtest_features": [
+        "lender_default_event_count_trailing_30d",
+        "stETH_discount_to_eth_pct",
+        "GBTC_discount_to_nav_pct",
+        "aggregate_perp_open_interest_drop_pct",
+        "realized_volatility_30d_zscore",
+        "btc_dominance_change (alts bleed faster in contagion)",
+        "cross_lender_exposure_graph_centrality",
+        "stablecoin_market_cap_change (redemptions)",
+        "rolling_drawdown_from_cycle_high"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 2,
+          "flat": 2,
+          "median_abs_move_pct": 2.5
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 45.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 0,
+        "low": 3
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "estate-distribution-overhang",
+      "category_id": "exchange-collapses",
+      "name": "Estate Distribution / Repayment Supply Overhang",
+      "directional_bias": "bearish",
+      "n_instances": 2,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 3,
+          "median": 7.0,
+          "p25": 6.5,
+          "p75": 9.0,
+          "min": 6.0,
+          "max": 11.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 1.0,
+          "p25": 1.0,
+          "p75": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "typical_lag": "Anticipatory — dips occur on the announcement/on-chain-movement, often days to weeks BEFORE actual distribution; repayment dates are frequently delayed, resetting the overhang.",
+      "typical_duration": "A persistent multi-month overhang punctuated by sharp 1-3 day dips on each fresh trigger; individual dips fade within days as feared selling fails to fully materialize.",
+      "recurrence": "Specific to large defunct-exchange estates (Mt Gox is the dominant example, ~140,000 BTC). Recurs each time the estate moves coins or a deadline approaches; the Mt Gox repayment deadline has been repeatedly pushed (most recently to October 2026).",
+      "affected_scope": [
+        "BTC (Mt Gox)",
+        "BCH (Mt Gox also held BCH)",
+        "the named coin held by the estate"
+      ],
+      "analog_mechanisms": [
+        "supply-overhang",
+        "sell-pressure",
+        "anticipated-distribution",
+        "sentiment-shock",
+        "sell-the-news"
+      ],
+      "leading_signals": [
+        "Trustee announces a repayment start date or deadline (Mt Gox notices)",
+        "On-chain trackers flag movement of dormant estate wallets (e.g., $739M / $1B Mt Gox BTC transfers)",
+        "Creditor-claim secondary prices rising (claim buyers front-running)",
+        "Coinciding overhang from other forced sellers (German government BTC sales in summer 2024)"
+      ],
+      "backtest_features": [
+        "estate_wallet_onchain_movement_flag",
+        "estate_btc_as_pct_of_circulating_supply",
+        "days_to_scheduled_repayment_date",
+        "repayment_announcement_event_flag",
+        "creditor_claim_secondary_market_price",
+        "btc_exchange_inflow_from_known_estate_addresses_zscore"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 2,
+          "flat": 1,
+          "median_abs_move_pct": 3.5
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 11.0
+        },
+        "BNB": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "defi-protocol-exploit",
+      "category_id": "hacks-exploits",
+      "name": "DeFi protocol exploit (governance/native token crash)",
+      "directional_bias": "bearish",
+      "n_instances": 8,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 2.1,
+          "p25": 2.1,
+          "p75": 2.1,
+          "min": 2.1,
+          "max": 2.1
+        },
+        "down": {
+          "n": 12,
+          "median": 28.8,
+          "p25": 16.0,
+          "p75": 46.4,
+          "min": 4.5,
+          "max": 50.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.5,
+          "p25": 0.5,
+          "p75": 0.5,
+          "min": 0.5,
+          "max": 0.5
+        }
+      },
+      "typical_lag": "immediate to hours (price reacts within minutes of the exploit tx being flagged)",
+      "typical_duration": "days to weeks; partial recovery if funds are returned/socialized, permanent impairment if protocol dies",
+      "recurrence": "very high — dozens per year across DeFi; the single most frequent crypto bearish catalyst",
+      "affected_scope": [
+        "the hacked protocol's native/governance token",
+        "directly composable protocols (lenders/pools exposed to the victim)",
+        "same-sector DeFi tokens (sympathy)"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "forced-liquidation",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "large anomalous outflow from protocol contracts (on-chain netflow spike)",
+        "security-firm/whitehat alert tweets before price fully reacts",
+        "TVL collapse on DeFiLlama",
+        "spike in DEX sell volume of the governance token",
+        "founder over-collateralized loan at liquidation risk (e.g. Curve/Aave)",
+        "third-party security-risk ratings / 'tokens to avoid' lists flagging the protocol (e.g. Mudrex)"
+      ],
+      "backtest_features": [
+        "protocol_tvl_pct_drained",
+        "governance_token_dex_sell_volume_zscore",
+        "contract_outflow_usd_24h",
+        "tvl_change_pct_24h",
+        "is_funds_returned_flag",
+        "time_since_exploit_tx_minutes",
+        "founder_loan_health_ratio",
+        "sector_tag (lending/dex/bridge)",
+        "security_risk_rating_flag"
+      ],
+      "per_asset": {
+        "MULTI": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 33.0
+        },
+        "EUL": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 48.2
+        },
+        "AAVE": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 17.9
+        },
+        "ETH": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 2.1
+        },
+        "DRIFT": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 29.5
+        },
+        "SOL": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 0.5
+        },
+        "BAL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 4.5
+        },
+        "GMX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 28.0
+        },
+        "CETUS": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 42.0
+        },
+        "SUI": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 14.0
+        },
+        "CRV": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 16.0
+        },
+        "CRV-TVL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 46.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 6,
+        "low": 0
+      },
+      "measured_fraction": 0.29
+    },
+    {
+      "archetype_id": "bridge-l1-exploit",
+      "category_id": "hacks-exploits",
+      "name": "Cross-chain bridge exploit (ecosystem L1/token drag-down)",
+      "directional_bias": "bearish",
+      "n_instances": 6,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 6,
+          "median": 15.2,
+          "p25": 11.2,
+          "p75": 21.5,
+          "min": 4.8,
+          "max": 96.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate to a few hours",
+      "typical_duration": "days; bounce often once a backer recapitalizes, but ecosystem narrative damage can persist weeks",
+      "recurrence": "high in 2021-2022 (bridge era); structurally fewer as bridges hardened, but still recurs",
+      "affected_scope": [
+        "ecosystem L1 token (SOL, RON, FTM)",
+        "in-ecosystem dApp tokens (AXS)",
+        "wrapped/bridged asset peg"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "anomalous bridge contract drain (large single mint/withdraw)",
+        "wrapped-asset depeg vs underlying",
+        "ecosystem TVL outflow",
+        "backer/foundation 'we will make users whole' statement (marks the bounce)",
+        "spike in L1 perp funding flipping negative"
+      ],
+      "backtest_features": [
+        "bridge_tvl_pct_drained",
+        "ecosystem_l1_token_return_24h",
+        "wrapped_asset_depeg_bps",
+        "ecosystem_tvl_outflow_usd",
+        "backer_bailout_announced_flag",
+        "l1_perp_funding_zscore"
+      ],
+      "per_asset": {
+        "DOT": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 7.7
+        },
+        "MAPO": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 96.0
+        },
+        "bridged-assets": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "RON": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 23.0
+        },
+        "AXS": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 17.0
+        },
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 13.5
+        },
+        "affected-tokens": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 4,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.25
+    },
+    {
+      "archetype_id": "cex-exchange-hack",
+      "category_id": "hacks-exploits",
+      "name": "Centralized exchange hack (market-wide sentiment shock, mean-reverting)",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 3,
+          "median": 4.5,
+          "p25": 4.1,
+          "p75": 12.2,
+          "min": 3.7,
+          "max": 20.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (minutes) for the headline; full sentiment effect over hours",
+      "typical_duration": "hours to a few days; rapid recovery once solvency is reassured",
+      "recurrence": "medium — a handful of major CEX hacks per cycle (Mt. Gox, KuCoin, Bybit), but each is large",
+      "affected_scope": [
+        "BTC",
+        "ETH (especially if ETH was stolen)",
+        "large-cap alts (amplified)",
+        "total crypto market cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "sell-pressure",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "abnormal large outflow from a known exchange cold wallet",
+        "exchange pauses withdrawals",
+        "spike in stablecoin inflows / flight to BTC dominance",
+        "stolen-asset (e.g. ETH) being moved to mixers/DEXs",
+        "exchange CEO 'all funds are safe / loss covered' statement (marks the bottom)"
+      ],
+      "backtest_features": [
+        "exchange_cold_wallet_outflow_usd",
+        "stolen_asset_ticker",
+        "btc_dominance_change_24h",
+        "stablecoin_exchange_inflow_zscore",
+        "withdrawals_paused_flag",
+        "loss_socialized_flag",
+        "stolen_asset_to_mixer_volume"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 3,
+          "flat": 0,
+          "median_abs_move_pct": 11.8
+        },
+        "ETH": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 4.5
+        },
+        "stolen-ERC20s": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.17
+    },
+    {
+      "archetype_id": "incentive-pump-and-fade",
+      "category_id": "l1-l2-rotation",
+      "name": "Incentive-Driven Ecosystem Pump (and Fade)",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 4,
+          "median": 293.1,
+          "p25": 112.0,
+          "p75": 710.0,
+          "min": 69.3,
+          "max": 1460.0
+        },
+        "down": {
+          "n": 2,
+          "median": 81.0,
+          "p25": 74.5,
+          "p75": 87.5,
+          "min": 68.0,
+          "max": 94.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "days to weeks after the incentive announcement; reflexive run-up builds over 1-3 months",
+      "typical_duration": "2-4 months of outperformance, then multi-month or multi-year mean reversion once incentives taper",
+      "recurrence": "every cycle - 1-2 major instances per bull market",
+      "affected_scope": [
+        "the named L1 token",
+        "ecosystem DeFi tokens on that chain",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "foundation announces 8-9 figure incentive/grant program",
+        "TVL inflow acceleration (TVL_7d_pct_change spike)",
+        "DEX volume surge relative to chain baseline",
+        "stablecoin net inflow to the chain",
+        "rising bridge inflows",
+        "native token funding rates turning positive"
+      ],
+      "backtest_features": [
+        "incentive_program_size_usd",
+        "chain_tvl_7d_pct_change",
+        "chain_tvl_zscore_90d",
+        "dex_volume_zscore",
+        "stablecoin_netflow_to_chain",
+        "bridge_inflow_usd_7d",
+        "token_price_vs_eth_ratio",
+        "funding_rate_zscore",
+        "days_since_incentive_announcement"
+      ],
+      "per_asset": {
+        "AVAX": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 277.0
+        },
+        "BNB": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 764.0
+        },
+        "ETH": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 97.8
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.33
+    },
+    {
+      "archetype_id": "challenger-revival-rotation",
+      "category_id": "l1-l2-rotation",
+      "name": "Challenger / 'Next Ethereum-Killer' Revival Rotation",
+      "directional_bias": "bullish",
+      "n_instances": 4,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 6,
+          "median": 102.0,
+          "p25": 58.7,
+          "p75": 180.0,
+          "min": 26.0,
+          "max": 324.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "rotation builds over weeks to months as the ratio (challenger/ETH) trends; reaction to a single catalyst (e.g. app going viral) can be immediate",
+      "typical_duration": "a full bull-cycle leg (3-12 months) of outperformance, then ratio mean-reversion",
+      "recurrence": "1-2 major rotations per cycle; the named challenger changes each cycle (BSC->SOL/AVAX->SOL/SUI)",
+      "affected_scope": [
+        "the challenger L1 token (SOL, SUI, APT, AVAX)",
+        "the SOL/ETH-type ratio",
+        "ecosystem tokens on the challenger chain"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "challenger/ETH price ratio breaking to new highs",
+        "challenger DEX volume overtaking ETH for sustained periods",
+        "viral dApp launch driving fee revenue",
+        "monthly active addresses surpassing rivals",
+        "recovery from a crisis/forced-seller low",
+        "media 'flippening' headlines (often a late/contrarian signal)"
+      ],
+      "backtest_features": [
+        "sol_eth_ratio",
+        "challenger_eth_ratio_zscore",
+        "challenger_dex_volume_vs_eth_ratio",
+        "monthly_active_addresses_yoy",
+        "chain_fee_revenue_30d",
+        "days_since_crisis_low",
+        "challenger_market_cap_to_eth_market_cap",
+        "relative_strength_vs_eth_30d"
+      ],
+      "per_asset": {
+        "SOL": {
+          "up": 5,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 84.1
+        },
+        "SUI": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 120.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.33
+    },
+    {
+      "archetype_id": "token-launch-airdrop-rotation",
+      "category_id": "l1-l2-rotation",
+      "name": "L2 / New-Chain Token Launch & Airdrop Rotation",
+      "directional_bias": "mixed",
+      "n_instances": 5,
+      "p_up": 0.2,
+      "p_down": 0.0,
+      "p_flat": 0.8,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 25.0,
+          "p25": 25.0,
+          "p75": 25.0,
+          "min": 25.0,
+          "max": 25.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate at TGE (price discovery in first hours); first follow-on rally within weeks",
+      "typical_duration": "launch pop fades over days-weeks; multi-month downtrend as unlocks/farmed supply sell off",
+      "recurrence": "every major L2/chain TGE - several per cycle",
+      "affected_scope": [
+        "the new L2/chain token (ARB, OP)",
+        "competing L2 tokens",
+        "the L2 sector basket",
+        "parent equity for Base (COIN)"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "airdrop snapshot / TGE date announced",
+        "farmed on-chain activity spike pre-snapshot",
+        "exchange listing announcements",
+        "large token unlock dates on the vesting schedule",
+        "FDV-to-circulating ratio (high = future sell-pressure)"
+      ],
+      "backtest_features": [
+        "airdrop_pct_of_supply",
+        "circulating_to_fdv_ratio",
+        "days_to_first_unlock",
+        "unlock_pct_of_circulating_supply",
+        "exchange_listing_count_at_launch",
+        "pre_tge_active_address_spike",
+        "first_day_volume_usd",
+        "days_since_tge"
+      ],
+      "per_asset": {
+        "ARB": {
+          "up": 1,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 25.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": null
+        },
+        "SUI": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": null
+        },
+        "APT": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 2,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "ratio-mean-reversion-unwind",
+      "category_id": "l1-l2-rotation",
+      "name": "Rotation Unwind / Challenger Ratio Mean-Reversion",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.2,
+      "p_down": 0.8,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 113.0,
+          "p25": 113.0,
+          "p75": 113.0,
+          "min": 113.0,
+          "max": 113.0
+        },
+        "down": {
+          "n": 7,
+          "median": 53.9,
+          "p25": 44.7,
+          "p75": 63.3,
+          "min": 15.9,
+          "max": 94.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "the ratio top forms over weeks; the unwind accelerates over days once leverage flushes",
+      "typical_duration": "months to a full bear leg of underperformance",
+      "recurrence": "follows every challenger rotation - the back half of each cycle",
+      "affected_scope": [
+        "the previously-leading challenger token (SOL, AVAX, SUI)",
+        "the challenger/ETH ratio",
+        "high-beta ecosystem alts"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "forced-liquidation",
+        "sentiment-shock",
+        "sell-pressure"
+      ],
+      "leading_signals": [
+        "challenger/ETH ratio at multi-year highs with negative momentum divergence",
+        "extreme positive funding rates / high open interest on the challenger",
+        "'flippening' media saturation",
+        "decelerating on-chain growth (active addresses, fees rolling over)",
+        "broad-market risk-off (BTC dominance rising)",
+        "incentive programs tapering"
+      ],
+      "backtest_features": [
+        "challenger_eth_ratio_zscore_extreme",
+        "challenger_funding_rate_zscore",
+        "open_interest_to_marketcap_ratio",
+        "active_address_30d_momentum",
+        "btc_dominance_change",
+        "challenger_realized_vol_spike",
+        "drawdown_from_60d_high"
+      ],
+      "per_asset": {
+        "SOL": {
+          "up": 0,
+          "down": 5,
+          "flat": 0,
+          "median_abs_move_pct": 49.1
+        },
+        "BNB": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 84.2
+        },
+        "AVAX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 94.0
+        }
+      },
+      "confidence_mix": {
+        "high": 5,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.88
+    },
+    {
+      "archetype_id": "macro-risk-off-shock",
+      "category_id": "macro-events",
+      "name": "Macro Risk-Off Liquidity Shock",
+      "directional_bias": "bearish",
+      "n_instances": 6,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 14,
+          "median": 17.2,
+          "p25": 12.5,
+          "p75": 25.3,
+          "min": 6.0,
+          "max": 50.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate to hours (intraday on the headline; equities/futures lead by minutes)",
+      "typical_duration": "1-7 days for the acute drop; full risk-off regime can persist weeks to months",
+      "recurrence": "several times per year; clusters around FOMC days, CPI prints, and geopolitical/tariff headlines",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap",
+        "high-beta alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "sell-pressure",
+        "reflexive-deleveraging",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "DXY breaking out higher",
+        "US 2Y/10Y yields spiking",
+        "equity VIX > 25 and rising",
+        "Nasdaq futures gapping down",
+        "BTC-Nasdaq 30d correlation > 0.5",
+        "funding rates very positive (crowded longs) into the event",
+        "perp open interest at local highs"
+      ],
+      "backtest_features": [
+        "dxy_1d_pct_change",
+        "vix_level_and_1d_change",
+        "nasdaq_futures_overnight_gap",
+        "btc_nasdaq_30d_rolling_corr",
+        "us2y_yield_1d_bps_change",
+        "perp_funding_rate_zscore",
+        "open_interest_zscore",
+        "fomc_or_cpi_event_dummy",
+        "headline_shock_dummy"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 9,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        },
+        "total-market-cap": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 40.0
+        },
+        "altcoins (ETH/SOL/XRP/DOGE)": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.5
+        },
+        "XRP": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        },
+        "gold/silver (read-across)": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 19.5
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 20.0
+        }
+      },
+      "confidence_mix": {
+        "high": 5,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.2
+    },
+    {
+      "archetype_id": "leveraged-liquidation-cascade",
+      "category_id": "macro-events",
+      "name": "Crypto Leverage Liquidation Cascade (macro-triggered)",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 8,
+          "median": 16.8,
+          "p25": 13.3,
+          "p75": 21.0,
+          "min": 6.4,
+          "max": 50.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "minutes to a few hours (mechanical, faster than fundamentals warrant)",
+      "typical_duration": "hours to 2-3 days; sharp V-shaped partial recovery common within 24-72h",
+      "recurrence": "1-3 major cascades per year, plus many smaller ones; triggered by macro headlines or exchange events",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "high-beta alts",
+        "perp markets"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "perp open interest near all-time highs",
+        "funding rates persistently positive / elevated",
+        "long/short ratio skewed long",
+        "estimated leverage ratio rising",
+        "thin order-book depth",
+        "a binary macro/headline catalyst pending",
+        "stablecoin supply not keeping pace with OI"
+      ],
+      "backtest_features": [
+        "aggregate_perp_open_interest_usd",
+        "funding_rate_8h_and_zscore",
+        "long_short_account_ratio",
+        "estimated_leverage_ratio",
+        "24h_liquidation_volume_usd",
+        "orderbook_depth_2pct",
+        "oi_to_marketcap_ratio",
+        "headline_event_dummy",
+        "alt_btc_beta"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 5,
+          "flat": 0,
+          "median_abs_move_pct": 14.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 19.3
+        },
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 24.1
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.5
+    },
+    {
+      "archetype_id": "macro-liquidity-risk-on",
+      "category_id": "macro-events",
+      "name": "Macro Liquidity / Risk-On Tailwind",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 0.67,
+      "p_down": 0.0,
+      "p_flat": 0.33,
+      "abs_move_pct": {
+        "up": {
+          "n": 3,
+          "median": 5.0,
+          "p25": 3.7,
+          "p75": 7.5,
+          "min": 2.5,
+          "max": 10.0
+        },
+        "down": null,
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.2,
+          "p25": 0.2,
+          "p75": 0.2,
+          "min": 0.2,
+          "max": 0.2
+        }
+      },
+      "typical_lag": "immediate on the print, often with anticipatory run-up over prior days/weeks",
+      "typical_duration": "the headline pop is hours-days; the regime tailwind can run weeks-months",
+      "recurrence": "several FOMC/CPI prints per year; major easing-cycle inflections every few years",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "DXY rolling over / making lower highs",
+        "Fed funds futures pricing cuts",
+        "softening CPI/PCE trend",
+        "real yields falling",
+        "global M2 / central-bank balance sheets expanding",
+        "BTC outperforming on up-days (positive beta)",
+        "negative funding flipping positive (shorts covering)"
+      ],
+      "backtest_features": [
+        "dxy_1d_and_20d_pct_change",
+        "fed_funds_futures_implied_cuts_next_meeting",
+        "cpi_surprise_actual_minus_consensus",
+        "real_10y_yield_change",
+        "global_m2_yoy",
+        "fomc_cut_dummy",
+        "btc_nasdaq_corr",
+        "pre_event_run_up_5d"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 3,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 3.8
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.5
+    },
+    {
+      "archetype_id": "flight-to-quality-bitcoin",
+      "category_id": "macro-events",
+      "name": "Banking/Fiat Stress Flight-to-Bitcoin",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 4,
+          "median": 80.0,
+          "p25": 34.5,
+          "p75": 165.0,
+          "min": 18.0,
+          "max": 300.0
+        },
+        "down": {
+          "n": 1,
+          "median": 13.0,
+          "p25": 13.0,
+          "p75": 13.0,
+          "min": 13.0,
+          "max": 13.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "hours to a few days (often resolves over a weekend as the banking story develops)",
+      "typical_duration": "days to a couple of weeks while the banking stress is acute",
+      "recurrence": "rare — a few times per cycle; requires fiat-system-specific stress",
+      "affected_scope": [
+        "BTC",
+        "the named coin",
+        "large-cap alts (partial)"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "regional-bank equity index falling sharply while BTC holds/rises",
+        "a major stablecoin (USDC/DAI) depegging",
+        "spike in bank CDS",
+        "deposit-flight headlines",
+        "BTC-equity correlation breaking down / going negative",
+        "stablecoin redemptions and flight to 'unaffected' stablecoins (USDT premium)"
+      ],
+      "backtest_features": [
+        "bank_equity_index_1d_change",
+        "stablecoin_peg_deviation_bps",
+        "bank_cds_spread_change",
+        "btc_equity_corr_breakdown_flag",
+        "usdt_vs_usdc_premium",
+        "btc_return_minus_spx_return_spread",
+        "banking_stress_headline_dummy"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 6,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 80.0
+        },
+        "USDC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 13.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "celebrity-influencer-pump",
+      "category_id": "memecoin-mania",
+      "name": "Celebrity / Influencer Pump on an Existing Memecoin",
+      "directional_bias": "bullish",
+      "n_instances": 5,
+      "p_up": 0.8,
+      "p_down": 0.2,
+      "p_flat": 0,
+      "abs_move_pct": {
+        "up": {
+          "n": 5,
+          "median": 200.0,
+          "p25": 140.0,
+          "p75": 600.0,
+          "min": 30.0,
+          "max": 750.0
+        },
+        "down": {
+          "n": 1,
+          "median": 30.0,
+          "p25": 30.0,
+          "p75": 30.0,
+          "min": 30.0,
+          "max": 30.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (minutes to hours after tweet/event)",
+      "typical_duration": "hours to a few days; scheduled-event pumps fade within 24h of the event",
+      "recurrence": "very high during bull markets — Musk alone moved DOGE on a dozen+ occasions across Jan-May 2021 and again in 2024-2026",
+      "affected_scope": [
+        "the named coin",
+        "DOGE",
+        "SHIB",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "spike in social mentions / Google Trends for the coin name",
+        "scheduled celebrity media appearance announced in advance",
+        "run-up in price + volume in days before a hyped event",
+        "influencer follower count vs coin float (thin float amplifies)",
+        "Robinhood/exchange app outages from order volume"
+      ],
+      "backtest_features": [
+        "twitter_mention_zscore_24h",
+        "google_trends_spike",
+        "scheduled_event_flag (days_to_event)",
+        "1h_volume_zscore",
+        "price_runup_pct_7d_pre_event",
+        "social_volume_to_marketcap_ratio",
+        "sell_news_flag (event_day_return < runup_return)"
+      ],
+      "per_asset": {
+        "DOGE": {
+          "up": 4,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 140.0
+        },
+        "SHIB": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 750.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 3,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "launch-day-pump-and-dump",
+      "category_id": "memecoin-mania",
+      "name": "Launch-Day Parabolic Token (Politician / Pump.fun / Celebrity Coin)",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.4,
+      "p_down": 0.6,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 5022.0,
+          "p25": 2533.0,
+          "p75": 7511.0,
+          "min": 44.0,
+          "max": 10000.0
+        },
+        "down": {
+          "n": 5,
+          "median": 89.0,
+          "p25": 79.0,
+          "p75": 90.0,
+          "min": 52.4,
+          "max": 96.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "the pump is immediate (minutes); the dump follows within hours to days",
+      "typical_duration": "peak within 24h; 80-98% collapse over days to weeks",
+      "recurrence": "extremely high during froth windows — pump.fun launched thousands daily in late 2024 / early 2025; politician coins clustered Jan-Feb 2025",
+      "affected_scope": [
+        "the named coin"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-restriction",
+        "forced-liquidation",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "insider/sniper wallets buying seconds-to-minutes before public announcement",
+        "pct of supply held by team/top wallets",
+        "no liquidity lock / no vesting",
+        "concentrated holder distribution (top-10 wallet share)",
+        "explosive first-hour volume with vertical price",
+        "official figure directly endorsing (legitimacy halo)"
+      ],
+      "backtest_features": [
+        "pct_supply_top10_wallets",
+        "insider_buy_before_announce_flag",
+        "liquidity_locked_flag",
+        "first_hour_return_pct",
+        "first_hour_volume_to_marketcap",
+        "holder_count_growth_rate",
+        "time_since_launch_hours",
+        "drawdown_from_ath_pct"
+      ],
+      "per_asset": {
+        "TRUMP": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 65.7
+        },
+        "LIBRA": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 92.5
+        },
+        "MELANIA": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 90.0
+        },
+        "BOME": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 10000.0
+        },
+        "FARTCOIN": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 44.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.14
+    },
+    {
+      "archetype_id": "memecoin-season-top-signal",
+      "category_id": "memecoin-mania",
+      "name": "Memecoin Season as a Late-Cycle Risk-On Top Signal",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.4,
+      "p_down": 0.6,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 6,
+          "median": 27.8,
+          "p25": 19.0,
+          "p75": 66.8,
+          "min": 8.8,
+          "max": 2000.0
+        },
+        "down": {
+          "n": 8,
+          "median": 67.5,
+          "p25": 47.5,
+          "p75": 79.0,
+          "min": 2.2,
+          "max": 87.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "froth peak leads the broad top by days to a few weeks",
+      "typical_duration": "sector drawdown plays out over months; -75% to -80% peak-to-trough in memecoin market cap",
+      "recurrence": "once per major cycle (2021, late-2024/early-2025); froth peaks recurred each bull phase",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "the whole memecoin sector",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "dry-powder-injection",
+        "sell-pressure"
+      ],
+      "leading_signals": [
+        "memecoin sector market cap at record + as a rising share of total crypto mcap",
+        "launchpad (pump.fun) daily revenue at record highs",
+        "politician/celebrity coins launching (peak novelty, then novelty exhaustion)",
+        "joke coins (Fartcoin) at ATHs",
+        "memecoin share of total mcap above a high threshold",
+        "negative funding flips / BTC dominance starting to rise"
+      ],
+      "backtest_features": [
+        "memecoin_sector_marketcap_zscore",
+        "memecoin_share_of_total_crypto_mcap",
+        "pumpfun_daily_revenue_zscore",
+        "new_token_launches_per_day",
+        "politician_celebrity_coin_count_30d",
+        "btc_dominance_rate_of_change",
+        "altseason_index",
+        "memecoin_mcap_drawdown_from_ath"
+      ],
+      "per_asset": {
+        "DOGE": {
+          "up": 1,
+          "down": 3,
+          "flat": 0,
+          "median_abs_move_pct": 19.9
+        },
+        "memecoin-sector-mcap": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 77.0
+        },
+        "WIF": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 1030.0
+        },
+        "PEPE": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 77.5
+        },
+        "BONK": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 34.9
+        },
+        "FLOKI": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 20.8
+        },
+        "SHIB": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 18.4
+        },
+        "TRUMP": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 79.0
+        },
+        "BTC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 53.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 2,
+        "low": 1
+      },
+      "measured_fraction": 0.5
+    },
+    {
+      "archetype_id": "tge-sell-the-news",
+      "category_id": "platform-launches",
+      "name": "TGE / Airdrop Sell-the-News Dump",
+      "directional_bias": "bearish",
+      "n_instances": 11,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 15,
+          "median": 53.6,
+          "p25": 26.0,
+          "p75": 67.0,
+          "min": 7.7,
+          "max": 80.3
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (minutes to first 24-72h)",
+      "typical_duration": "weeks to months; many never reclaim debut price (W, ZK, SCR, BLAST, STRK, IP)",
+      "recurrence": "Near-universal for VC-backed L1/L2 and infra airdrops 2023-2026. The default expectation for any farmed airdrop.",
+      "affected_scope": [
+        "the named coin",
+        "specific sector"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "pre-market/IOU perp price far above implied airdrop FDV",
+        "high points-farming TVL with mercenary (non-sticky) capital",
+        "low or absent anti-sybil controls / no per-wallet claim cap",
+        "large % of supply unlocked at TGE to farmers vs locked to insiders",
+        "spike in exchange inflows (deposit netflow z-score) right as claims open",
+        "community complaints about allocation fairness pre-launch"
+      ],
+      "backtest_features": [
+        "tge_airdrop_pct_of_total_supply",
+        "circulating_supply_pct_at_tge",
+        "premarket_perp_price_vs_debut_open_ratio",
+        "exchange_inflow_netflow_zscore_first_24h",
+        "pct_airdrop_wallets_selling_first_48h (Nansen-style)",
+        "anti_sybil_present_boolean",
+        "per_wallet_claim_cap_present_boolean",
+        "vc_insider_allocation_pct",
+        "days_since_tge",
+        "fdv_at_open_usd"
+      ],
+      "per_asset": {
+        "PUMP": {
+          "up": 0,
+          "down": 4,
+          "flat": 0,
+          "median_abs_move_pct": 59.8
+        },
+        "XPL": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 68.8
+        },
+        "W": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 39.5
+        },
+        "IP": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 80.3
+        },
+        "SCR": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 32.0
+        },
+        "EIGEN": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 12.0
+        },
+        "BLAST": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.7
+        },
+        "ZK": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 27.0
+        },
+        "STRK": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 50.0
+        },
+        "JUP": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 68.0
+        }
+      },
+      "confidence_mix": {
+        "high": 8,
+        "medium": 3,
+        "low": 0
+      },
+      "measured_fraction": 0.47
+    },
+    {
+      "archetype_id": "launch-pump-and-hold",
+      "category_id": "platform-launches",
+      "name": "Launch-Pump-and-Hold (Fair-Launch / Revenue-Backed)",
+      "directional_bias": "bullish",
+      "n_instances": 5,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 6,
+          "median": 89.0,
+          "p25": 56.2,
+          "p75": 140.5,
+          "min": 50.0,
+          "max": 730.0
+        },
+        "down": {
+          "n": 1,
+          "median": 12.0,
+          "p25": 12.0,
+          "p75": 12.0,
+          "min": 12.0,
+          "max": 12.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "hours to days for initial pump; momentum persists weeks",
+      "typical_duration": "2-8 weeks of outperformance, then reverts to market beta",
+      "recurrence": "Rare. Requires no-VC fair-ish distribution + real revenue. HYPE is the canonical case; most launches do NOT qualify.",
+      "affected_scope": [
+        "the named coin",
+        "specific sector"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "zero private investor / VC allocation (no insider cliff)",
+        "protocol has real, measurable revenue/fees pre-launch",
+        "large % of recipients NOT depositing to exchanges (low sell intent)",
+        "small initial float / high reserved-for-future emissions",
+        "rising open interest with positive funding but spot leading perps"
+      ],
+      "backtest_features": [
+        "vc_allocation_pct (==0 strong signal)",
+        "protocol_revenue_run_rate_usd",
+        "pct_recipients_not_sending_to_exchange",
+        "initial_circulating_float_pct",
+        "fdv_to_annualized_fees_ratio",
+        "spot_volume_vs_perp_volume_ratio"
+      ],
+      "per_asset": {
+        "HYPE": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 421.0
+        },
+        "PYTH": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 32.5
+        },
+        "JTO": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 150.0
+        },
+        "MOVE": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 66.0
+        },
+        "INIT": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 50.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 2,
+        "low": 2
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "points-farming-meta",
+      "category_id": "platform-launches",
+      "name": "Points-Farming Meta - Pre-Launch Inflow & Post-Airdrop Outflow",
+      "directional_bias": "mixed",
+      "n_instances": 5,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 6,
+          "median": 15.1,
+          "p25": 12.3,
+          "p75": 41.0,
+          "min": 7.7,
+          "max": 50.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "inflow builds over weeks/months pre-snapshot; outflow within days of snapshot/claim",
+      "typical_duration": "TVL/activity reversion over days to weeks post-airdrop",
+      "recurrence": "Was dominant 2023-mid-2024 (EigenLayer, Blast, restaking/LRTs, Solana farms); structurally decayed after EIGEN disappointment but recurs around every major anticipated launch (Plasma deposits 2025).",
+      "affected_scope": [
+        "specific sector",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "announced points program without confirmed tokenomics",
+        "TVL/deposit growth far outpacing organic usage (fees-per-TVL falling)",
+        "concentration of deposits in 'farmable' assets right before rumored snapshot",
+        "on-chain transaction count rising while unique-user retention is low",
+        "social mentions of 'farming' + leverage loops (recursive LRT deposits)"
+      ],
+      "backtest_features": [
+        "tvl_growth_rate_pre_tge",
+        "fees_to_tvl_ratio (low = mercenary)",
+        "deposit_concentration_gini",
+        "tvl_drawdown_pct_post_snapshot",
+        "unique_active_address_retention_30d_post_airdrop",
+        "days_to_expected_snapshot",
+        "recursive_leverage_loop_flag (LRT/restaking)"
+      ],
+      "per_asset": {
+        "BERA": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 31.1
+        },
+        "STRK": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 50.0
+        },
+        "BLAST": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.7
+        },
+        "EIGEN": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 12.0
+        },
+        "ZRO": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 17.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 3,
+        "low": 0
+      },
+      "measured_fraction": 0.17
+    },
+    {
+      "archetype_id": "revenue-buyback-flywheel",
+      "category_id": "platform-launches",
+      "name": "Revenue-funded buyback flywheel (usage -> token demand)",
+      "directional_bias": "bullish",
+      "n_instances": 2,
+      "p_up": 0.5,
+      "p_down": 0.0,
+      "p_flat": 0.5,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 82.9,
+          "p25": 82.9,
+          "p75": 82.9,
+          "min": 82.9,
+          "max": 82.9
+        },
+        "down": {
+          "n": 1,
+          "median": 7.3,
+          "p25": 7.3,
+          "p75": 7.3,
+          "min": 7.3,
+          "max": 7.3
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "continuous (block-by-block); compounds over weeks-months",
+      "typical_duration": "persists while trading volume/fees stay high; reverses on a volume downturn",
+      "recurrence": "structural/ongoing per protocol with a buyback mandate; a growing 2025-2026 tokenomics meta",
+      "affected_scope": [
+        "the protocol token (HYPE)",
+        "perp-DEX / revenue-token peers"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "reflexive-leveraging",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "protocol fee revenue + buyback wallet on-chain accumulation",
+        "token outperformance vs BTC (decoupling)",
+        "perp/spot volume trend (the flywheel's fuel)",
+        "FDV-to-annualized-revenue multiple",
+        "social dominance / attention spikes"
+      ],
+      "backtest_features": [
+        "protocol_fee_revenue_30d",
+        "buyback_pct_of_revenue",
+        "buyback_usd_per_period",
+        "token_return_minus_btc_return",
+        "revenue_to_volume_sensitivity",
+        "fdv_to_revenue_multiple",
+        "buyback_qoq_change"
+      ],
+      "per_asset": {
+        "HYPE": {
+          "up": 2,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 45.1
+        },
+        "SEA": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 0,
+        "low": 1
+      },
+      "measured_fraction": 0.5
+    },
+    {
+      "archetype_id": "pre-ipo-perp-oracle-risk",
+      "category_id": "platform-launches",
+      "name": "Pre-IPO / synthetic-asset perp oracle-failure flash crash",
+      "directional_bias": "bearish",
+      "n_instances": 1,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 1,
+          "median": 45.0,
+          "p25": 45.0,
+          "p75": 45.0,
+          "min": 45.0,
+          "max": 45.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "instant (single-block oracle print)",
+      "typical_duration": "minutes (often partial recovery once the bad print clears)",
+      "recurrence": "rising as pre-IPO/prediction/synthetic-equity perps proliferate (Hyperliquid Ventuals, Bitget preSPCX, etc.)",
+      "affected_scope": [
+        "the specific pre-IPO/synthetic perp",
+        "leveraged retail positions"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "single-oracle dependency for an illiquid underlying",
+        "upcoming corporate action (split/dividend) on the referenced asset",
+        "thin order-book depth + high open leverage",
+        "low median position margin (retail-skewed)"
+      ],
+      "backtest_features": [
+        "oracle_source_concentration",
+        "underlying_liquidity_depth",
+        "pending_corporate_action_flag",
+        "open_leverage_ratio",
+        "median_position_margin"
+      ],
+      "per_asset": {
+        "SPACEX-USDH (pre-IPO perp)": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 45.0
+        },
+        "HYPE": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "approval-sell-the-news",
+      "category_id": "regulatory-approvals-policy",
+      "name": "Pre-priced approval 'sell-the-news' then structural re-rating",
+      "directional_bias": "mixed",
+      "n_instances": 2,
+      "p_up": 0.5,
+      "p_down": 0.5,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 50.0,
+          "p25": 38.8,
+          "p75": 61.2,
+          "min": 27.5,
+          "max": 72.5
+        },
+        "down": {
+          "n": 2,
+          "median": 19.5,
+          "p25": 18.0,
+          "p75": 21.0,
+          "min": 16.5,
+          "max": 22.5
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (minutes-to-hours on the event); structural inflow effect over weeks-months",
+      "typical_duration": "sell-off 1-3 weeks; structural re-rating 1-9 months",
+      "recurrence": "once per product launch (BTC spot ETF, ETH spot ETF); recurs as new vehicles get approved",
+      "affected_scope": [
+        "the named asset (BTC, ETH)",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "supply-restriction",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "rising implied volatility / funding rates into the decision date",
+        "futures-basis blowout (annualized basis >15-20%)",
+        "spike in 'days_to_decision' search/social volume",
+        "exchange BTC balances declining pre-event",
+        "Polymarket/Kalshi approval-odds approaching ~100%"
+      ],
+      "backtest_features": [
+        "days_to_known_decision_date",
+        "perp_funding_rate_zscore_pre_event",
+        "futures_annualized_basis",
+        "implied_vol_term_structure_slope",
+        "approval_odds_prediction_market",
+        "etf_net_inflow_usd_daily_post_event",
+        "exchange_netflow_zscore"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 44.5
+        },
+        "ETH": {
+          "up": 1,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 25.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "procrypto-regime-shift",
+      "category_id": "regulatory-approvals-policy",
+      "name": "Pro-crypto policy regime shift (election / executive pivot)",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 0.67,
+      "p_down": 0.33,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 9,
+          "median": 28.0,
+          "p25": 12.5,
+          "p75": 54.0,
+          "min": 5.0,
+          "max": 125.0
+        },
+        "down": {
+          "n": 1,
+          "median": 5.5,
+          "p25": 5.5,
+          "p75": 5.5,
+          "min": 5.5,
+          "max": 5.5
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (overnight) and continuing for days-to-weeks",
+      "typical_duration": "weeks to a few months of sustained trend",
+      "recurrence": "rare / episodic — tied to major political or executive events",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "memecoins",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "prediction-market odds shifting toward the pro-crypto outcome",
+        "crypto-linked equities (COIN, MSTR) front-running",
+        "rising open interest with positive funding",
+        "campaign/policy statements (e.g. Bitcoin Conference promises)"
+      ],
+      "backtest_features": [
+        "election_outcome_dummy",
+        "prediction_market_odds_delta",
+        "policy_announcement_event_flag",
+        "altcoin_btc_beta_30d",
+        "total_market_cap_excl_btc_change",
+        "perp_open_interest_change",
+        "funding_rate_zscore"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 3,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 19.0
+        },
+        "SOL": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 17.8
+        },
+        "XRP": {
+          "up": 2,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 18.2
+        },
+        "DOGE": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 125.0
+        },
+        "ADA": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 64.5
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "idiosyncratic-regulatory-derisk",
+      "category_id": "regulatory-approvals-policy",
+      "name": "Idiosyncratic regulatory de-risking of a named coin",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 0.67,
+      "p_down": 0.0,
+      "p_flat": 0.33,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 13.8,
+          "p25": 8.1,
+          "p75": 19.4,
+          "min": 2.5,
+          "max": 25.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (hours)",
+      "typical_duration": "days to weeks; can mark a durable regime change for that asset",
+      "recurrence": "episodic per asset; XRP repeatedly re-rated on Ripple-SEC milestones",
+      "affected_scope": [
+        "the named coin",
+        "closely-related peers"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "news/rumor of regulator departure or settlement",
+        "litigation docket dates",
+        "options skew normalizing for the named asset",
+        "the asset's discount-to-peers narrowing",
+        "social-volume spike on the specific ticker"
+      ],
+      "backtest_features": [
+        "regulator_departure_event_flag",
+        "litigation_milestone_date",
+        "coin_idiosyncratic_return_vs_btc",
+        "single_asset_social_volume_zscore",
+        "single_asset_open_interest_change",
+        "accounting_rule_change_flag"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 2,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 2.5
+        },
+        "XRP": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 25.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "legislative-framework-sector-rerate",
+      "category_id": "regulatory-approvals-policy",
+      "name": "Legislative framework passage (stablecoin / market-structure)",
+      "directional_bias": "bullish",
+      "n_instances": 6,
+      "p_up": 0.5,
+      "p_down": 0.5,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 3,
+          "median": 25.0,
+          "p25": 14.0,
+          "p75": 25.1,
+          "min": 3.0,
+          "max": 25.2
+        },
+        "down": {
+          "n": 3,
+          "median": 5.8,
+          "p25": 3.9,
+          "p75": 7.3,
+          "min": 2.1,
+          "max": 8.8
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.6,
+          "p25": 0.6,
+          "p75": 0.6,
+          "min": 0.6,
+          "max": 0.6
+        }
+      },
+      "typical_lag": "days (often building over the legislative-debate week)",
+      "typical_duration": "1-4 weeks of sector outperformance; can extend if law actually signed",
+      "recurrence": "per major bill (FIT21, GENIUS, CLARITY); recurs as the legislative pipeline advances",
+      "affected_scope": [
+        "sector-specific (ETH, stablecoin infra, DeFi)",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "congressional calendar / committee markup dates",
+        "whip counts and procedural-vote outcomes",
+        "ETH/BTC ratio turning up",
+        "stablecoin-issuer and DeFi token relative strength",
+        "ETH ETF inflow acceleration"
+      ],
+      "backtest_features": [
+        "legislative_vote_event_date",
+        "bill_passage_chamber_flag",
+        "eth_btc_ratio_change",
+        "sector_relative_return_vs_btc",
+        "stablecoin_supply_growth",
+        "eth_etf_net_inflow_usd"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 1,
+          "down": 2,
+          "flat": 1,
+          "median_abs_move_pct": 2.5
+        },
+        "ETH": {
+          "up": 2,
+          "down": 1,
+          "flat": 1,
+          "median_abs_move_pct": 25.0
+        },
+        "USDT": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": null
+        },
+        "USDC": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": null
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 2
+      },
+      "measured_fraction": 0.6
+    },
+    {
+      "archetype_id": "government-reserve-accumulation",
+      "category_id": "regulatory-approvals-policy",
+      "name": "Sovereign / state strategic-reserve accumulation",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 0.67,
+      "p_down": 0.33,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 4.1,
+          "p25": 3.2,
+          "p75": 5.0,
+          "min": 2.2,
+          "max": 6.0
+        },
+        "down": {
+          "n": 1,
+          "median": 1.7,
+          "p25": 1.7,
+          "p75": 1.7,
+          "min": 1.7,
+          "max": 1.7
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate but typically negligible on the headline",
+      "typical_duration": "per-event minutes-to-hours; structural over years only if buying actually scales",
+      "recurrence": "rising 2025-2026 — federal SBR EO (Mar 2025), Texas (enacted + first buy), Arizona & New Hampshire (enabling laws, no buys), ARMA federal bill",
+      "affected_scope": [
+        "BTC",
+        "crypto-equities (MSTR, miners) sympathetically",
+        "store-of-value narrative"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "supply-restriction",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "state/federal strategic-reserve bill introductions and committee markups",
+        "state-treasurer investment mandates / appropriations",
+        "actual on-chain state or Treasury BTC purchases (size vs daily volume)",
+        "count of jurisdictions with enacted reserve authority",
+        "authorized annual purchase size vs market depth"
+      ],
+      "backtest_features": [
+        "reserve_bill_event_flag",
+        "reserve_bill_stage (introduced/committee/signed)",
+        "authorized_purchase_btc_per_year",
+        "actual_purchase_usd",
+        "purchase_usd_vs_30d_adv",
+        "sovereign_holder_jurisdiction_count",
+        "mandatory_lockup_years"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 2,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 2.2
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 1.0
+    },
+    {
+      "archetype_id": "regulated-access-expansion",
+      "category_id": "regulatory-approvals-policy",
+      "name": "Regulated domestic access / new-product expansion",
+      "directional_bias": "bullish",
+      "n_instances": 2,
+      "p_up": 0.0,
+      "p_down": 0.5,
+      "p_flat": 0.5,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 6.9,
+          "p25": 6.9,
+          "p75": 6.9,
+          "min": 6.9,
+          "max": 6.9
+        },
+        "down": {
+          "n": 1,
+          "median": 2.1,
+          "p25": 2.1,
+          "p75": 2.1,
+          "min": 2.1,
+          "max": 2.1
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.9,
+          "p25": 0.9,
+          "p75": 0.9,
+          "min": 0.9,
+          "max": 0.9
+        }
+      },
+      "typical_lag": "structural — builds over weeks-to-months, not a date-stamped spot move",
+      "typical_duration": "persistent (market-structure change)",
+      "recurrence": "ongoing as new products/venues are approved",
+      "affected_scope": [
+        "domestic derivatives volume/OI",
+        "COIN equity",
+        "basis/funding structure",
+        "prediction-market-linked plays"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "DCM self-certification filings (CFTC non-objection windows)",
+        "CFTC/SEC product listing approvals",
+        "appellate preemption rulings on event contracts",
+        "onshore vs offshore perp funding/OI divergence"
+      ],
+      "backtest_features": [
+        "product_launch_event_flag",
+        "self_certification_to_effective_lag_days",
+        "domestic_derivatives_oi_change",
+        "onshore_offshore_funding_spread",
+        "coin_equity_event_return"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 1,
+          "flat": 1,
+          "median_abs_move_pct": 1.5
+        },
+        "ETH": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 6.9
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 0,
+        "low": 1
+      },
+      "measured_fraction": 1.0
+    },
+    {
+      "archetype_id": "sovereign-trading-mining-ban",
+      "category_id": "regulatory-bans",
+      "name": "Sovereign Trading / Mining Ban (China model)",
+      "directional_bias": "bearish",
+      "n_instances": 6,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 11,
+          "median": 35.0,
+          "p25": 10.8,
+          "p75": 42.0,
+          "min": 8.0,
+          "max": 55.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (intraday to 24h); cascade completes over 2-5 days",
+      "typical_duration": "acute shock 1-2 weeks; full retrace weeks to a few months",
+      "recurrence": "Recurred repeatedly 2013-2021 (roughly annual China escalations); structurally exhausted after Sep 2021 'all transactions illegal' because China's market share had already been driven near zero",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap",
+        "mining stocks"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "state media or PBOC/NDRC statements signaling tightening",
+        "rising funding rates / open interest into the news (fuel for liquidation cascade)",
+        "USDT/CNY or local-exchange premium going negative",
+        "hashrate concentration in the banning jurisdiction",
+        "prior leak/rumor cycle (e.g. Sep 2017 exchange-closure rumors preceded confirmation)"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (sovereign_ban)",
+        "btc_24h_return",
+        "btc_peak_to_trough_pct_7d",
+        "open_interest_zscore_pre_event",
+        "funding_rate_pre_event",
+        "perp_liquidations_usd_24h",
+        "jurisdiction_share_of_global_hashrate",
+        "jurisdiction_share_of_spot_volume",
+        "days_to_pre_event_price_recovery"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 9,
+          "flat": 0,
+          "median_abs_move_pct": 12.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 42.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 4,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "us-securities-enforcement",
+      "category_id": "regulatory-bans",
+      "name": "US Securities Enforcement (SEC vs token / exchange)",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 8,
+          "median": 15.0,
+          "p25": 7.8,
+          "p75": 25.8,
+          "min": 7.0,
+          "max": 73.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "typical_lag": "immediate on named token (intraday); delisting-driven leg over days as venues announce suspensions",
+      "typical_duration": "named-token weakness persists weeks-months while litigation unresolved; sharp reversal on favorable ruling",
+      "recurrence": "Clustered 2020-2023 (Ripple Dec 2020; Coinbase/Binance June 2023); reversed in 2024-2025 as cases settled or were dropped",
+      "affected_scope": [
+        "the named coin",
+        "alt-L1s named as securities",
+        "exchange tokens",
+        "COIN equity"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "Wells notice disclosure (precedes suit by weeks)",
+        "SEC press-release calendar / enforcement cadence",
+        "exchange listing-risk language in filings",
+        "a token appearing on a prior SEC complaint's named-securities list (read-across to peers)",
+        "options skew / put demand on COIN equity"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (sec_enforcement)",
+        "token_named_as_security_flag",
+        "us_exchange_delisting_announced_flag",
+        "days_to_delisting_deadline",
+        "token_24h_return",
+        "token_7d_return",
+        "btc_beta_during_event",
+        "us_listed_volume_share",
+        "wells_notice_to_suit_lag_days"
+      ],
+      "per_asset": {
+        "XRP": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 62.5
+        },
+        "BTC": {
+          "up": 0,
+          "down": 1,
+          "flat": 1,
+          "median_abs_move_pct": 3.5
+        },
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 17.0
+        },
+        "ADA": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        },
+        "MATIC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        },
+        "BNB": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.0
+        },
+        "COIN": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 8.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "national-tax-access-throttle",
+      "category_id": "regulatory-bans",
+      "name": "National Tax / Access Throttling (India / Nigeria model)",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 0.33,
+      "p_flat": 0.67,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 3,
+          "median": 15.0,
+          "p25": 10.0,
+          "p75": 15.5,
+          "min": 5.0,
+          "max": 16.0
+        },
+        "flat_or_mixed": {
+          "n": 2,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "typical_lag": "local volume reaction immediate-to-days; structural volume decline plays out over weeks once tax/access is effective",
+      "typical_duration": "persistent — local volume often does not recover (structural, not a dip)",
+      "recurrence": "Recurring policy-driven events in emerging markets (India 2018/2021/2022, Nigeria 2021/2024); each is largely contained to its jurisdiction",
+      "affected_scope": [
+        "local-exchange volumes",
+        "local stablecoin premium",
+        "the named coin only on local venues"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "budget-speech / finance-ministry calendar",
+        "central-bank banking-access circulars (RBI-style)",
+        "local USDT/fiat premium widening or going negative",
+        "domestic exchange volume falling vs offshore",
+        "P2P volume migration"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (tax_or_access_throttle)",
+        "local_exchange_volume_change_pct",
+        "local_stablecoin_premium_pct",
+        "p2p_volume_change_pct",
+        "btc_global_return_during_event (expected ~0)",
+        "tax_rate_or_tds_bps",
+        "days_since_policy_effective_date"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 10.5
+        },
+        "the named coin": {
+          "up": 0,
+          "down": 0,
+          "flat": 2,
+          "median_abs_move_pct": 0.0
+        },
+        "DOGE": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "deregulation-reversal",
+      "category_id": "regulatory-bans",
+      "name": "Deregulation / Crackdown Reversal (the inverse, 2024-2026)",
+      "directional_bias": "bullish",
+      "n_instances": 2,
+      "p_up": 1.0,
+      "p_down": 0.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 32.5,
+          "p25": 18.8,
+          "p75": 46.2,
+          "min": 5.0,
+          "max": 60.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate on the named token; broader regime re-rating over weeks-months",
+      "typical_duration": "can be durable (regime change) rather than a transient pop",
+      "recurrence": "Episodic, tied to legal milestones and political regime change; clustered 2024-2026",
+      "affected_scope": [
+        "the previously-targeted coin",
+        "exchange tokens",
+        "privacy tokens",
+        "broad-market sentiment"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "court rulings against the regulator (e.g. Fifth Circuit Tornado Cash ruling)",
+        "change in administration / SEC chair (enforcement-cadence regime change)",
+        "exchange relisting announcements",
+        "settlement / dismissal headlines",
+        "litigation-discount narrowing in token's price vs peers"
+      ],
+      "backtest_features": [
+        "regulatory_event_flag (deregulation_reversal)",
+        "lawsuit_dropped_or_settled_flag",
+        "sanctions_lifted_flag",
+        "relisting_announced_flag",
+        "token_24h_return",
+        "token_30d_return",
+        "prior_litigation_discount_pct",
+        "policy_regime_dummy (pro_vs_anti_crypto)"
+      ],
+      "per_asset": {
+        "TORN": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 60.0
+        },
+        "COIN": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 5.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "etf-launch-sell-the-news",
+      "category_id": "spot-etf-flows",
+      "name": "Spot ETF launch day / approval 'sell the news'",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.2,
+      "p_down": 0.6,
+      "p_flat": 0.2,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 180.7,
+          "p25": 180.7,
+          "p75": 180.7,
+          "min": 180.7,
+          "max": 180.7
+        },
+        "down": {
+          "n": 6,
+          "median": 17.0,
+          "p25": 6.4,
+          "p75": 31.5,
+          "min": 3.5,
+          "max": 57.5
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "typical_lag": "immediate to hours; full drawdown plays out over days",
+      "typical_duration": "1-2 weeks to the local trough, then recovery",
+      "recurrence": "fires once per major product launch (BTC Jan 2024, ETH Jul 2024, HK Apr 2024); a recurring template for every future first-of-kind spot ETF launch (e.g. SOL, XRP)",
+      "affected_scope": [
+        "the named coin (BTC or ETH)",
+        "large-cap alts",
+        "BTC"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "sell-pressure"
+      ],
+      "leading_signals": [
+        "asset rallies 20-60% in the weeks INTO the approval/launch date",
+        "perpetual funding rates elevated / positive heading into launch",
+        "options skew bid for calls into the event date",
+        "legacy trust (GBTC/ETHE) discount to NAV has collapsed toward zero pre-launch (arbitrage primed to unwind)"
+      ],
+      "backtest_features": [
+        "days_to_etf_launch (event dummy)",
+        "trailing_30d_return_into_event",
+        "funding_rate_zscore_at_event",
+        "launch_day_etf_total_volume_usd",
+        "legacy_trust_discount_to_nav_pct",
+        "post_event_return_t+1_to_t+14"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 2,
+          "flat": 1,
+          "median_abs_move_pct": 14.1
+        },
+        "SOL": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 30.5
+        },
+        "ETH": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 19.6
+        },
+        "ZEC": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 180.7
+        }
+      },
+      "confidence_mix": {
+        "high": 4,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.38
+    },
+    {
+      "archetype_id": "sustained-net-flow-regime",
+      "category_id": "spot-etf-flows",
+      "name": "Sustained daily net inflows (bullish) / net outflows (bearish)",
+      "directional_bias": "mixed",
+      "n_instances": 9,
+      "p_up": 0.78,
+      "p_down": 0.22,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 9,
+          "median": 16.5,
+          "p25": 12.1,
+          "p75": 36.2,
+          "min": 3.8,
+          "max": 60.2
+        },
+        "down": {
+          "n": 5,
+          "median": 19.6,
+          "p25": 19.0,
+          "p75": 22.9,
+          "min": 13.5,
+          "max": 39.6
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "same-day to 1-3 days (flow tends to lead/coincide with price)",
+      "typical_duration": "as long as the streak persists — days to several weeks",
+      "recurrence": "ongoing and continuous — flows are reported every trading day; multiple distinct streaks per year",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sell-pressure",
+        "reflexive-deleveraging",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "consecutive-day net flow streak (sign and length)",
+        "single-day flow magnitude crossing prior records (>$1B in / >$500M out)",
+        "IBIT (BTC) / ETHA (ETH) flow dominance — the bellwether funds",
+        "rolling 5-day cumulative flow zscore",
+        "flow divergence from price (flows turning while price flat = leading signal)"
+      ],
+      "backtest_features": [
+        "daily_net_etf_flow_usd",
+        "flow_streak_length_days (signed)",
+        "rolling_5d_cum_flow_usd",
+        "flow_zscore_60d",
+        "ibit_or_etha_share_of_flow",
+        "single_day_flow_vs_trailing_max (record-flag)",
+        "flow_to_price_correlation_20d"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 5,
+          "down": 4,
+          "flat": 0,
+          "median_abs_move_pct": 16.5
+        },
+        "ETH": {
+          "up": 4,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 39.6
+        }
+      },
+      "confidence_mix": {
+        "high": 8,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.79
+    },
+    {
+      "archetype_id": "legacy-trust-conversion-outflow",
+      "category_id": "spot-etf-flows",
+      "name": "Converted legacy trust structural outflow (GBTC / ETHE)",
+      "directional_bias": "bearish",
+      "n_instances": 2,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 2,
+          "median": 27.7,
+          "p25": 23.9,
+          "p75": 31.5,
+          "min": 20.0,
+          "max": 35.4
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "begins day 1 of conversion; heaviest in first 2-4 weeks",
+      "typical_duration": "front-loaded over ~6-10 weeks then decays to equilibrium",
+      "recurrence": "once per converted trust (GBTC Jan 2024, ETHE Jul 2024); a template for any future closed-end-to-ETF conversion",
+      "affected_scope": [
+        "the converted asset (BTC then ETH)",
+        "BTC"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-restriction",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "trust discount-to-NAV collapsing toward 0% pre-conversion (signals imminent arbitrage unwind)",
+        "trust fee far above competing ETFs (fee gap drives rotation)",
+        "daily trust outflow magnitude and its decay rate (slowing = exhaustion / bottoming signal)",
+        "trust AUM as % of total category AUM"
+      ],
+      "backtest_features": [
+        "gbtc_or_ethe_daily_outflow_usd",
+        "trust_discount_to_nav_pct_pre_conversion",
+        "trust_fee_minus_min_competitor_fee_bps",
+        "cumulative_trust_outflow_vs_initial_aum_pct",
+        "outflow_decay_slope_5d (exhaustion signal)",
+        "trust_outflow_share_of_total_category_netflow"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 20.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 35.4
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "algo-death-spiral",
+      "category_id": "stablecoin-depegs",
+      "name": "Algorithmic / reflexive death-spiral depeg",
+      "directional_bias": "bearish",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 11,
+          "median": 35.0,
+          "p25": 20.5,
+          "p75": 98.0,
+          "min": 8.0,
+          "max": 100.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate to hours once the peg cracks; full collapse over 1-7 days",
+      "typical_duration": "terminal — days to a week to reach near-zero; no recovery",
+      "recurrence": "recurring; ~once every 6-18 months a notable algo design fails (2021 IRON, 2022 UST/USDD, 2025 xUSD/deUSD)",
+      "affected_scope": [
+        "the named stablecoin",
+        "its sister/governance token",
+        "DeFi lending",
+        "large-cap alts",
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "forced-liquidation",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "unsustainably high fixed yield (Anchor 19.5%, IRON farms hundreds of percent)",
+        "large single-address withdrawals from the anchor pool/farm",
+        "Curve/AMM pool tilting heavily to the stablecoin side",
+        "stablecoin trading 0.98-0.99 persistently before the break",
+        "concentration of backing in one risky counterparty (Stream Finance)",
+        "sister-token price rolling over while stablecoin still ~pegged"
+      ],
+      "backtest_features": [
+        "stablecoin_price_deviation_from_1usd",
+        "sister_token_supply_growth_rate",
+        "anchor_or_pool_TVL_outflow_24h",
+        "deposit_apy_vs_market_apy_spread",
+        "collateralization_ratio_below_1",
+        "dex_pool_imbalance_pct (e.g. Curve 4pool UST weight)",
+        "redemption_queue_size",
+        "circulating_supply_zscore_of_sister_token",
+        "exchange_netflow_zscore_of_sister_token",
+        "share_of_supply_in_single_yield_venue"
+      ],
+      "per_asset": {
+        "UST": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 98.0
+        },
+        "LUNA": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 100.0
+        },
+        "BTC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 33.0
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 35.0
+        },
+        "USDT": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 8.0
+        },
+        "IRON": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 25.0
+        },
+        "TITAN": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 100.0
+        },
+        "USDD": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 9.0
+        },
+        "TRX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 16.0
+        },
+        "xUSD": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 74.0
+        },
+        "deUSD": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 98.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "reserve-shock-depeg",
+      "category_id": "stablecoin-depegs",
+      "name": "Fiat/asset-backed reserve-shock depeg",
+      "directional_bias": "mixed",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 19.4,
+          "p25": 13.1,
+          "p75": 25.7,
+          "min": 6.8,
+          "max": 32.0
+        },
+        "down": {
+          "n": 7,
+          "median": 18.5,
+          "p25": 13.5,
+          "p75": 34.5,
+          "min": 12.0,
+          "max": 79.8
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate (minutes-hours of disclosure); worst during banking off-hours / weekends",
+      "typical_duration": "hours to days; full recovery if reserves are real, permanent partial loss if not",
+      "recurrence": "recurring; clustered around banking/custodian stress events",
+      "affected_scope": [
+        "the named stablecoin",
+        "stablecoins sharing its collateral (DAI, FRAX held USDC)",
+        "issuer governance token (MKR, FXS)",
+        "BTC",
+        "ETH"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "sell-pressure",
+        "dry-powder-injection",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "disclosure of reserve held at a stressed bank/custodian",
+        "issuer pausing or slowing redemptions",
+        "prominent insolvency accusation against the issuer",
+        "collateral concentration in illiquid/RWA assets vs cash",
+        "downstream protocols (Maker, Frax) carrying large balances of the coin"
+      ],
+      "backtest_features": [
+        "stablecoin_price_deviation_from_1usd",
+        "secondary_vs_primary_market_discount",
+        "reserve_exposure_to_impaired_counterparty_pct",
+        "redemption_window_open_closed_flag",
+        "downstream_stablecoin_collateral_overlap_pct (DAI/FRAX USDC weight)",
+        "issuer_gov_token_drawdown",
+        "btc_return_during_window (sign flip vs banking-stress trigger)",
+        "stablecoin_market_cap_outflow_72h",
+        "weekend_or_after_hours_flag (banking closed amplifies)"
+      ],
+      "per_asset": {
+        "USR": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 79.8
+        },
+        "FDUSD": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 18.5
+        },
+        "USDR": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 49.0
+        },
+        "USDC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 12.0
+        },
+        "DAI": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        },
+        "FRAX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 12.0
+        },
+        "BTC": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 32.0
+        },
+        "ETH": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 6.8
+        },
+        "FXS": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 20.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.11
+    },
+    {
+      "archetype_id": "venue-liquidity-flash-depeg",
+      "category_id": "stablecoin-depegs",
+      "name": "Venue-specific liquidity-cascade flash depeg",
+      "directional_bias": "neutral",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 6,
+          "median": 8.5,
+          "p25": 2.7,
+          "p75": 28.5,
+          "min": 0.3,
+          "max": 40.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "instantaneous wick; reverts in minutes to a few hours",
+      "typical_duration": "minutes to hours; usually fully recovered same day",
+      "recurrence": "frequent; minor venue wicks happen several times a year, severe ones during big liquidation cascades",
+      "affected_scope": [
+        "the named stablecoin (on one venue)",
+        "its governance token (ENA)",
+        "leveraged positions collateralized by it",
+        "broad market during liquidation cascades"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "market-wide forced-liquidation cascade in progress (Oct 10-11 2025)",
+        "single-venue order-book depth collapsing",
+        "AMM stable-pool weight skewing past ~70/30",
+        "high leverage / open interest using the stablecoin as margin",
+        "thin weekend/off-hours liquidity"
+      ],
+      "backtest_features": [
+        "per_venue_price_vs_aggregate_price_spread",
+        "amm_pool_imbalance_pct (Curve/Uniswap stable pool weights)",
+        "exchange_orderbook_depth_within_50bps",
+        "liquidation_volume_zscore_market_wide",
+        "time_to_revert_to_peg_minutes",
+        "share_of_stablecoin_used_as_exchange_collateral",
+        "oracle_vs_market_price_divergence",
+        "open_interest_zscore_at_event"
+      ],
+      "per_asset": {
+        "USDT": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 4.2
+        },
+        "USDe (Binance venue)": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 35.0
+        },
+        "USDe (aggregate)": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 0.9
+        },
+        "ENA": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 40.0
+        },
+        "BTC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 9.0
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.33
+    },
+    {
+      "archetype_id": "net-mint-expansion",
+      "category_id": "stablecoin-supply",
+      "name": "Net Mint Expansion (Dry-Powder Injection)",
+      "directional_bias": "bullish",
+      "n_instances": 6,
+      "p_up": 0.83,
+      "p_down": 0.0,
+      "p_flat": 0.17,
+      "abs_move_pct": {
+        "up": {
+          "n": 6,
+          "median": 13.7,
+          "p25": 4.0,
+          "p75": 41.9,
+          "min": 1.2,
+          "max": 311.0
+        },
+        "down": null,
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 40.0,
+          "p25": 40.0,
+          "p75": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        }
+      },
+      "typical_lag": "minutes-to-hours on sentiment for large discrete mints; days-to-weeks for the aggregate-supply-growth trend to map onto price",
+      "typical_duration": "discrete mint pop fades within 24-72h; sustained net-supply expansion can fuel multi-week to multi-month uptrends",
+      "recurrence": "very frequent — discrete $1B+ USDT mints occur dozens of times per year; sustained-expansion regimes align with each major bull leg (2020-21, late-2024, 2025)",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sentiment-shock",
+        "liquidity-expansion"
+      ],
+      "leading_signals": [
+        "Tether Treasury / Circle mint transactions on-chain (Whale Alert tags)",
+        "30-day net change in aggregate stablecoin market cap turning positive / accelerating",
+        "USDT minted to Tron/Ethereum 'authorized but not issued' inventory then moved to exchanges",
+        "rising stablecoin balances on exchange hot wallets (exchange stablecoin reserves up)",
+        "stablecoin market-cap making new ATH while BTC consolidates"
+      ],
+      "backtest_features": [
+        "stablecoin_mktcap_30d_pct_change",
+        "usdt_supply_7d_delta_usd",
+        "usdc_supply_7d_delta_usd",
+        "aggregate_stablecoin_netflow_to_exchanges_zscore",
+        "single_mint_size_usd (>=1e9 flag)",
+        "days_since_last_billion_mint",
+        "stablecoin_mktcap_at_ath_flag"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 6,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 13.7
+        },
+        "stablecoin-supply": {
+          "up": 0,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 40.0
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 3,
+        "low": 1
+      },
+      "measured_fraction": 0.29
+    },
+    {
+      "archetype_id": "net-burn-redemption",
+      "category_id": "stablecoin-supply",
+      "name": "Net Burn / Redemption Contraction",
+      "directional_bias": "bearish",
+      "n_instances": 2,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 3,
+          "median": 13.0,
+          "p25": 8.0,
+          "p75": 31.5,
+          "min": 3.0,
+          "max": 50.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "coincident-to-lagging — supply contraction typically follows the price correction by days, confirming weakness rather than leading it",
+      "typical_duration": "weeks-to-months; supply contraction regimes persist through bear phases",
+      "recurrence": "occasional regime-level events — major contractions tied to 2022 bear market and acute redemption scares; routine small burns are frequent but low-signal",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "liquidity-contraction",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "30-day net change in aggregate stablecoin market cap turning negative",
+        "large USDT/USDC burns on-chain (Treasury redemptions)",
+        "exchange stablecoin reserves declining",
+        "USDT market cap falling sharply over days (mass redemption)",
+        "stablecoin supply rolling over after a parabolic expansion"
+      ],
+      "backtest_features": [
+        "stablecoin_mktcap_30d_pct_change_negative_flag",
+        "usdt_supply_7d_delta_usd (negative)",
+        "redemption_volume_usd_per_day",
+        "exchange_stablecoin_reserve_zscore (declining)",
+        "supply_peak_drawdown_pct (from local max)"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 31.5
+        },
+        "USDT": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 3.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "depeg-shock",
+      "category_id": "stablecoin-supply",
+      "name": "Stablecoin Depeg Shock (Backing-Doubt)",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 17.0,
+          "p25": 17.0,
+          "p75": 17.0,
+          "min": 17.0,
+          "max": 17.0
+        },
+        "down": {
+          "n": 10,
+          "median": 14.4,
+          "p25": 12.6,
+          "p75": 31.1,
+          "min": 8.7,
+          "max": 100.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate — the market reacts within minutes to hours of the depeg headline",
+      "typical_duration": "acute phase 24-72h; full peg recovery hours-to-days if backing is real, permanent if not (UST)",
+      "recurrence": "rare but high-impact — a handful of major events (UST May 2022, USDC Mar 2023, USDe Oct 2025); minor wobbles more frequent",
+      "affected_scope": [
+        "the named coin",
+        "BTC",
+        "large-cap alts",
+        "total-market-cap",
+        "DeFi"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "flight-to-safety"
+      ],
+      "leading_signals": [
+        "stablecoin secondary-market price deviating >50bps from $1",
+        "issuer disclosure of reserve exposure to a stressed counterparty/bank",
+        "spiking redemption queue / mint-burn imbalance",
+        "Curve/DEX stablecoin pool imbalance (one coin dominating the pool)",
+        "rising funding-rate stress and CEX withdrawal spikes"
+      ],
+      "backtest_features": [
+        "stablecoin_price_deviation_from_1_bps",
+        "curve_pool_imbalance_ratio",
+        "redemption_queue_size_usd",
+        "max_depeg_depth_pct",
+        "time_to_repeg_hours",
+        "btc_realized_vol_spike_zscore"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 1,
+          "down": 4,
+          "flat": 0,
+          "median_abs_move_pct": 13.0
+        },
+        "UST": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 100.0
+        },
+        "LUNA": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 100.0
+        },
+        "USDC": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 12.5
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 14.3
+        },
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 19.5
+        },
+        "USDe": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 35.0
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.27
+    },
+    {
+      "archetype_id": "low-ssr-loaded-reserves",
+      "category_id": "stablecoin-supply",
+      "name": "Low SSR / Loaded Exchange Reserves (Positioning Indicator)",
+      "directional_bias": "bullish",
+      "n_instances": 3,
+      "p_up": 0.67,
+      "p_down": 0.0,
+      "p_flat": 0.33,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 52.5,
+          "p25": 51.2,
+          "p75": 53.8,
+          "min": 50.0,
+          "max": 55.0
+        },
+        "down": null,
+        "flat_or_mixed": null
+      },
+      "typical_lag": "days-to-weeks — a positioning indicator, not a precise timing trigger",
+      "typical_duration": "the bullish deployment phase can run weeks-to-months once dry powder is confirmed loaded",
+      "recurrence": "cyclical — low-SSR readings clustered at the mid-2021, late-2022, and 2024 rebound phases",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "positioning-extreme",
+        "mean-reversion"
+      ],
+      "leading_signals": [
+        "SSR falling to historically low band (cited ~13-21 range at cycle bottoms)",
+        "SSR oscillator below lower Bollinger band",
+        "rising exchange stablecoin reserves concurrent with low SSR (confirms accumulation vs outflow)",
+        "stablecoin market cap rising while BTC consolidates (SSR compressing for bullish reason)"
+      ],
+      "backtest_features": [
+        "ssr_value",
+        "ssr_zscore_vs_trailing_2y",
+        "ssr_oscillator_bollinger_position",
+        "exchange_stablecoin_reserve_30d_change (to disambiguate accumulation vs outflow)",
+        "btc_mktcap_vs_stablecoin_mktcap_ratio"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 2,
+          "down": 0,
+          "flat": 1,
+          "median_abs_move_pct": 52.5
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 0,
+        "low": 3
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "ma-regime-cross",
+      "category_id": "technical-signals",
+      "name": "Moving-average regime cross (golden/death cross, 200-DMA loss/reclaim)",
+      "directional_bias": "mixed",
+      "n_instances": 5,
+      "p_up": 0.6,
+      "p_down": 0.4,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": {
+          "n": 3,
+          "median": 22.5,
+          "p25": 18.8,
+          "p75": 31.2,
+          "min": 15.0,
+          "max": 40.0
+        },
+        "down": {
+          "n": 4,
+          "median": 23.7,
+          "p25": 16.7,
+          "p75": 31.2,
+          "min": 14.5,
+          "max": 35.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "lagging — the cross prints days-to-weeks AFTER the price move; the 200-DMA break itself reacts within hours",
+      "typical_duration": "regime label persists weeks to months; the acute stop-cascade on a 200-DMA loss plays out in 1-3 days",
+      "recurrence": "BTC has printed multiple death crosses 2018-2025; 200-DMA tested multiple times per cycle",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "reflexive-deleveraging"
+      ],
+      "leading_signals": [
+        "50-DMA flattening and converging toward 200-DMA",
+        "price closing below 200-DMA on rising volume",
+        "50/200 spread narrowing to within 1-2%",
+        "200-DMA slope turning negative"
+      ],
+      "backtest_features": [
+        "sma_50_minus_sma_200_spread",
+        "price_minus_sma_200_pct",
+        "days_since_50_200_cross",
+        "sma_200_slope_20d",
+        "close_below_sma200_volume_zscore",
+        "consecutive_closes_below_sma200"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 3,
+          "down": 4,
+          "flat": 0,
+          "median_abs_move_pct": 22.5
+        }
+      },
+      "confidence_mix": {
+        "high": 2,
+        "medium": 2,
+        "low": 1
+      },
+      "measured_fraction": 0.29
+    },
+    {
+      "archetype_id": "oi-washout-liquidation-cascade",
+      "category_id": "technical-signals",
+      "name": "Open-interest washout / forced-liquidation cascade",
+      "directional_bias": "bearish",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 1.0,
+      "p_flat": 0.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 8,
+          "median": 21.0,
+          "p25": 13.4,
+          "p75": 23.4,
+          "min": 8.7,
+          "max": 30.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate — minutes to hours; the full cascade often completes inside 24h",
+      "typical_duration": "acute crash 1-2 days; OI/leverage reset persists weeks; price often recovers a large fraction within 1-2 weeks",
+      "recurrence": "the largest cascades cluster ~1-2 per year, with the biggest in May 2021, Aug 2024, and Oct 2025",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "forced-liquidation",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "aggregate open interest at cycle highs",
+        "funding rate persistently positive/elevated",
+        "long/short ratio skewed heavily long",
+        "estimated-leverage-ratio rising",
+        "thin spot order-book depth into a macro catalyst"
+      ],
+      "backtest_features": [
+        "aggregate_oi_usd_zscore",
+        "oi_24h_pct_change",
+        "liquidations_usd_24h",
+        "long_liq_share",
+        "funding_rate_8h_zscore",
+        "oi_to_marketcap_ratio",
+        "estimated_leverage_ratio",
+        "max_intraday_drawdown_pct"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 5,
+          "flat": 0,
+          "median_abs_move_pct": 22.5
+        },
+        "ETH": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 18.4
+        },
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 19.5
+        }
+      },
+      "confidence_mix": {
+        "high": 4,
+        "medium": 0,
+        "low": 0
+      },
+      "measured_fraction": 0.5
+    },
+    {
+      "archetype_id": "onchain-valuation-extreme",
+      "category_id": "technical-signals",
+      "name": "On-chain valuation extreme (MVRV Z-score, realized price, NUPL, Pi-cycle)",
+      "directional_bias": "mixed",
+      "n_instances": 5,
+      "p_up": 0.4,
+      "p_down": 0.4,
+      "p_flat": 0.2,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 225.0,
+          "p25": 187.5,
+          "p75": 262.5,
+          "min": 150.0,
+          "max": 300.0
+        },
+        "down": {
+          "n": 2,
+          "median": 63.5,
+          "p25": 56.8,
+          "p75": 70.2,
+          "min": 50.0,
+          "max": 77.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "typical_lag": "slow — signals fire days-to-weeks around tops/bottoms; full reversion plays out over months",
+      "typical_duration": "months; sub-1.0 MVRV windows lasted ~15 days (Mar 2020), ~178 days (2022), ~305 days (2018-19)",
+      "recurrence": "once or twice per ~4-year cycle for the full extreme",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sell-pressure",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "MVRV Z-score crossing above 7 (top) or MVRV ratio below 1 (bottom)",
+        "price crossing below realized price",
+        "NUPL entering 'euphoria' (>0.75) or 'capitulation' (<0)",
+        "Pi-cycle 111DMA crossing above 2x350DMA",
+        "long-term-holder supply distributing"
+      ],
+      "backtest_features": [
+        "mvrv_z_score",
+        "mvrv_ratio",
+        "price_to_realized_price",
+        "nupl",
+        "pi_cycle_111dma_vs_2x350dma",
+        "lth_sopr",
+        "realized_cap_30d_change",
+        "days_mvrv_below_1"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 2,
+          "down": 2,
+          "flat": 1,
+          "median_abs_move_pct": 77.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 5,
+        "low": 0
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "funding-rate-extreme",
+      "category_id": "technical-signals",
+      "name": "Funding-rate / leverage-sentiment extreme (contrarian)",
+      "directional_bias": "mixed",
+      "n_instances": 4,
+      "p_up": 0.5,
+      "p_down": 0.25,
+      "p_flat": 0.25,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 265.0,
+          "p25": 147.5,
+          "p75": 382.5,
+          "min": 30.0,
+          "max": 500.0
+        },
+        "down": {
+          "n": 1,
+          "median": 50.0,
+          "p25": 50.0,
+          "p75": 50.0,
+          "min": 50.0,
+          "max": 50.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "typical_lag": "days to weeks — extreme funding flags fragility; the reversal follows on a catalyst",
+      "typical_duration": "the positioning unwind resolves over days once triggered; funding normalizes within a week of a washout",
+      "recurrence": "milder funding spikes several times a year; true multi-week extremes once or twice a cycle",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "reflexive-deleveraging",
+        "sentiment-shock",
+        "sell-pressure",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "funding rate sustained >0.1-0.3% per 8h for days/weeks (top warning)",
+        "funding deeply negative (bottom signal)",
+        "OI rising while funding rich",
+        "perp basis / annualized basis at extreme",
+        "long/short account ratio skewed"
+      ],
+      "backtest_features": [
+        "funding_rate_8h",
+        "funding_rate_7d_avg",
+        "funding_rate_zscore_90d",
+        "annualized_perp_basis",
+        "oi_weighted_funding",
+        "days_funding_above_threshold",
+        "funding_sign_flip"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 2,
+          "down": 1,
+          "flat": 1,
+          "median_abs_move_pct": 40.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 0,
+        "low": 4
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "cliff-unlock",
+      "category_id": "token-unlocks",
+      "name": "Cliff Unlock (large discrete insider release)",
+      "directional_bias": "bearish",
+      "n_instances": 7,
+      "p_up": 0.0,
+      "p_down": 0.86,
+      "p_flat": 0.14,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 12,
+          "median": 17.2,
+          "p25": 9.7,
+          "p75": 26.2,
+          "min": 3.5,
+          "max": 95.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "Pre-unlock drift begins 1-4 weeks ahead; the sharpest realized move is often 0-7 days AROUND the date, frequently bottoming on or just before the unlock (priced in)",
+      "typical_duration": "Acute pressure lasts days to ~2 weeks; persistent overhang on tokens with repeated large cliffs can suppress price for months",
+      "recurrence": "Per-token: usually a one-year initial cliff then periodic; across the market: dozens of large cliffs per year (every major 2021-2023 vintage L1/L2 token)",
+      "affected_scope": [
+        "the named coin",
+        "low-float high-FDV alts",
+        "same-vintage L1/L2 tokens"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "dilution",
+        "supply-shock",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "days_to_unlock counting down",
+        "unlock_pct_of_circulating_supply > 5%",
+        "rising perp open interest + negative funding pre-unlock (pre-hedging shorts)",
+        "negative price drift in the 2-4 weeks before the date",
+        "spike in exchange inflows from vesting/treasury wallets",
+        "low float / high FDV ratio at launch"
+      ],
+      "backtest_features": [
+        "unlock_pct_of_circulating_supply",
+        "unlock_usd_value",
+        "days_to_unlock",
+        "float_to_fdv_ratio",
+        "recipient_type (insider_vs_ecosystem)",
+        "exchange_netflow_zscore_pre_unlock",
+        "perp_funding_rate_pre_unlock",
+        "open_interest_change_pre_unlock",
+        "cumulative_return_t_minus_30_to_0"
+      ],
+      "per_asset": {
+        "ARB": {
+          "up": 0,
+          "down": 3,
+          "flat": 1,
+          "median_abs_move_pct": 16.8
+        },
+        "ICP": {
+          "up": 0,
+          "down": 3,
+          "flat": 0,
+          "median_abs_move_pct": 82.0
+        },
+        "WLD": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 15.8
+        },
+        "SUI": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 12.6
+        },
+        "APT": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 15.0
+        },
+        "DYDX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 3.5
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 3,
+        "low": 1
+      },
+      "measured_fraction": 0.46
+    },
+    {
+      "archetype_id": "continuous-emission",
+      "category_id": "token-unlocks",
+      "name": "Continuous / Linear Vesting Emission",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.4,
+      "p_down": 0.4,
+      "p_flat": 0.2,
+      "abs_move_pct": {
+        "up": {
+          "n": 2,
+          "median": 14.7,
+          "p25": 13.9,
+          "p75": 15.5,
+          "min": 13.1,
+          "max": 16.3
+        },
+        "down": {
+          "n": 4,
+          "median": 10.5,
+          "p25": 7.9,
+          "p75": 13.3,
+          "min": 7.5,
+          "max": 14.1
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.1,
+          "p25": 0.1,
+          "p75": 0.1,
+          "min": 0.1,
+          "max": 0.1
+        }
+      },
+      "typical_lag": "Slow grind; modest -2% to -8% drift into each monthly date, frequent post-date relief bounce",
+      "typical_duration": "Structural — persists for the multi-year vesting horizon; per-event effect dissipates within days",
+      "recurrence": "Monthly/weekly per token, for 2-4 years — extremely high recurrence and thus the most backtestable sub-pattern",
+      "affected_scope": [
+        "the named coin",
+        "high-emission L1/L2 governance tokens",
+        "VC-heavy low-float launches"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "dilution",
+        "supply-shock"
+      ],
+      "leading_signals": [
+        "recurring unlock_pct_of_circulating_supply (monthly)",
+        "annualized emission/inflation rate",
+        "negative cumulative return in 5-10 days before each monthly date",
+        "weak relative strength vs sector",
+        "elevated perp short OI into the date"
+      ],
+      "backtest_features": [
+        "monthly_unlock_pct_of_circulating",
+        "annualized_emission_rate",
+        "days_to_next_unlock",
+        "cumulative_return_t_minus_10_to_0",
+        "post_unlock_t_plus_1_to_5_return (relief-bounce)",
+        "relative_strength_vs_sector_index",
+        "perp_funding_zscore"
+      ],
+      "per_asset": {
+        "OP": {
+          "up": 0,
+          "down": 1,
+          "flat": 1,
+          "median_abs_move_pct": 7.1
+        },
+        "PYTH": {
+          "up": 0,
+          "down": 2,
+          "flat": 0,
+          "median_abs_move_pct": 10.5
+        },
+        "ARB": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 16.3
+        },
+        "APT": {
+          "up": 1,
+          "down": 0,
+          "flat": 0,
+          "median_abs_move_pct": 13.1
+        },
+        "DYDX": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 7.5
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.57
+    },
+    {
+      "archetype_id": "estate-distribution",
+      "category_id": "token-unlocks",
+      "name": "Estate / Bankruptcy Locked-Token Distribution",
+      "directional_bias": "mixed",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 0.25,
+      "p_flat": 0.75,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 1,
+          "median": 6.2,
+          "p25": 6.2,
+          "p75": 6.2,
+          "min": 6.2,
+          "max": 6.2
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 11.0,
+          "p25": 11.0,
+          "p75": 11.0,
+          "min": 11.0,
+          "max": 11.0
+        }
+      },
+      "typical_lag": "Often immediate relief on OTC sale announcement; the scheduled unlock itself is anticipated weeks ahead",
+      "typical_duration": "Multi-quarter overhang narrative; individual events resolve in days",
+      "recurrence": "Episodic — tied to specific estate proceedings (FTX 2024-2026 creditor rounds); rare but very large in notional",
+      "affected_scope": [
+        "the named coin (primarily SOL)",
+        "tokens with large estate/locked overhangs"
+      ],
+      "analog_mechanisms": [
+        "supply-overhang",
+        "dry-powder-injection",
+        "sentiment-shock",
+        "sell-pressure"
+      ],
+      "leading_signals": [
+        "announced OTC discount % vs spot",
+        "named institutional buyer (signals smart-money demand)",
+        "scheduled creditor/vesting unlock date",
+        "estate wallet on-chain movements to exchanges",
+        "size of locked stack as % of circulating supply"
+      ],
+      "backtest_features": [
+        "estate_locked_balance_pct_of_supply",
+        "otc_sale_discount_pct",
+        "days_to_scheduled_creditor_unlock",
+        "estate_wallet_exchange_inflow",
+        "buyer_is_institutional_flag",
+        "pre_event_cumulative_return"
+      ],
+      "per_asset": {
+        "SOL": {
+          "up": 0,
+          "down": 1,
+          "flat": 3,
+          "median_abs_move_pct": 8.6
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 2,
+        "low": 2
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "exchange-netflow-signal",
+      "category_id": "whale-onchain-flows",
+      "name": "Exchange Netflow / Whale Deposit Signal (continuous flow)",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.2,
+      "p_down": 0.6,
+      "p_flat": 0.2,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 13.0,
+          "p25": 13.0,
+          "p75": 13.0,
+          "min": 13.0,
+          "max": 13.0
+        },
+        "down": {
+          "n": 3,
+          "median": 6.2,
+          "p25": 5.3,
+          "p75": 28.6,
+          "min": 4.5,
+          "max": 51.0
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "hours to 1-3 days",
+      "typical_duration": "intraday to 1 week",
+      "recurrence": "continuous — fires multiple times per month; the most repeatable, backtestable archetype in the category",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "7-day MA of exchange inflows spikes above rolling mean (local-top marker)",
+        "exchange whale ratio rises above ~0.85",
+        "single large stablecoin deposit (e.g. >$1B USDT to Binance) — note unreliable as a directional signal",
+        "exchange reserves declining for weeks = supply squeeze/accumulation",
+        "Whale Alert flags of large BTC/ETH transfers TO exchange deposit wallets"
+      ],
+      "backtest_features": [
+        "exchange_netflow_zscore (inflow-outflow, rolling 30d z-score)",
+        "exchange_inflow_total_7dma",
+        "exchange_whale_ratio (top-10 deposits/total inflow, >0.85=whale-dominated selling)",
+        "stablecoin_exchange_netflow (positive=buy-side dry powder)",
+        "exchange_reserve_change_pct",
+        "large_transfer_count_to_exchange (>$1m tx tagged to CEX deposit addrs)",
+        "spent_output_age_bands"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 1,
+          "down": 2,
+          "flat": 1,
+          "median_abs_move_pct": 6.2
+        },
+        "ETH": {
+          "up": 0,
+          "down": 1,
+          "flat": 0,
+          "median_abs_move_pct": 51.0
+        }
+      },
+      "confidence_mix": {
+        "high": 0,
+        "medium": 3,
+        "low": 2
+      },
+      "measured_fraction": 0.2
+    },
+    {
+      "archetype_id": "sovereign-seized-btc-dump",
+      "category_id": "whale-onchain-flows",
+      "name": "Government / Seized-BTC Distribution (sovereign overhang)",
+      "directional_bias": "bearish",
+      "n_instances": 5,
+      "p_up": 0.2,
+      "p_down": 0.6,
+      "p_flat": 0.2,
+      "abs_move_pct": {
+        "up": {
+          "n": 1,
+          "median": 2.8,
+          "p25": 2.8,
+          "p75": 2.8,
+          "min": 2.8,
+          "max": 2.8
+        },
+        "down": {
+          "n": 4,
+          "median": 6.9,
+          "p25": 3.0,
+          "p75": 12.4,
+          "min": 3.0,
+          "max": 17.0
+        },
+        "flat_or_mixed": {
+          "n": 1,
+          "median": 0.2,
+          "p25": 0.2,
+          "p75": 0.2,
+          "min": 0.2,
+          "max": 0.2
+        }
+      },
+      "typical_lag": "immediate to 24h on each transfer/headline; a transfer without a sale may produce no move",
+      "typical_duration": "days to several weeks (duration of the liquidation program)",
+      "recurrence": "episodic — a few major sovereign liquidations per cycle (Germany 2024, US Silk Road 2024-25, earlier US Marshals auctions)",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "court/forfeiture ruling clearing a government to sell (e.g. Dec 30 2024 Silk Road greenlight)",
+        "on-chain transfer from a known government-tagged wallet to an exchange or Coinbase Prime (transfer alone is not a sale)",
+        "size of remaining tagged government stash (overhang capping rallies)",
+        "Arkham/Whale Alert labels on sovereign addresses moving"
+      ],
+      "backtest_features": [
+        "gov_wallet_transfer_to_exchange_btc (tagged sovereign addrs -> CEX/Coinbase Prime)",
+        "remaining_gov_holdings_btc (overhang size)",
+        "days_since_court_forfeiture_ruling",
+        "tranche_size_pct_of_daily_spot_volume",
+        "headline_sentiment_flag (gov-sale news)",
+        "btc_drawdown_from_pre_announcement_high"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 1,
+          "down": 4,
+          "flat": 1,
+          "median_abs_move_pct": 3.0
+        }
+      },
+      "confidence_mix": {
+        "high": 4,
+        "medium": 0,
+        "low": 1
+      },
+      "measured_fraction": 0.33
+    },
+    {
+      "archetype_id": "mt-gox-creditor-overhang",
+      "category_id": "whale-onchain-flows",
+      "name": "Mt Gox / Estate Creditor Repayment Overhang",
+      "directional_bias": "bearish",
+      "n_instances": 3,
+      "p_up": 0.0,
+      "p_down": 0.67,
+      "p_flat": 0.33,
+      "abs_move_pct": {
+        "up": null,
+        "down": {
+          "n": 2,
+          "median": 5.9,
+          "p25": 5.0,
+          "p75": 6.8,
+          "min": 4.0,
+          "max": 7.8
+        },
+        "flat_or_mixed": null
+      },
+      "typical_lag": "immediate to 24-48h on transfer/announcement headlines",
+      "typical_duration": "days per event; overhang persists across multiple deadline extensions (years)",
+      "recurrence": "episodic but recurring — clusters around each repayment announcement (Jun 2024 notice, Jul 2024 start, extensions)",
+      "affected_scope": [
+        "BTC",
+        "BCH",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "trustee announcement of a repayment start/deadline date",
+        "on-chain movement of coins out of Mt Gox cold wallets to exchanges (Kraken/Bitstamp/BitGo)",
+        "BCH weakness leading BTC (creditors also received BCH)",
+        "size of BTC still in trustee custody (remaining overhang)"
+      ],
+      "backtest_features": [
+        "trustee_wallet_outflow_btc (Mt Gox cold-wallet -> distribution exchange)",
+        "btc_remaining_in_trustee_custody",
+        "days_to_repayment_deadline",
+        "bch_btc_relative_drawdown (BCH sold harder than BTC by creditors)",
+        "repayment_announcement_flag"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 2,
+          "flat": 1,
+          "median_abs_move_pct": 5.9
+        }
+      },
+      "confidence_mix": {
+        "high": 1,
+        "medium": 1,
+        "low": 1
+      },
+      "measured_fraction": 0.0
+    },
+    {
+      "archetype_id": "dormant-satoshi-era-awakening",
+      "category_id": "whale-onchain-flows",
+      "name": "Dormant / Satoshi-Era Wallet Awakening",
+      "directional_bias": "mixed",
+      "n_instances": 4,
+      "p_up": 0.0,
+      "p_down": 0.0,
+      "p_flat": 1.0,
+      "abs_move_pct": {
+        "up": null,
+        "down": null,
+        "flat_or_mixed": {
+          "n": 2,
+          "median": 2.1,
+          "p25": 1.7,
+          "p75": 2.5,
+          "min": 1.3,
+          "max": 2.9
+        }
+      },
+      "typical_lag": "immediate (minutes-hours) on the Whale Alert; full price resolution within 1-3 weeks as destination/intent clarifies",
+      "typical_duration": "intraday dip if benign; multi-week if confirmed distribution",
+      "recurrence": "sporadic — several notable awakenings per year; clustered in 2025 as OG holders exited near highs",
+      "affected_scope": [
+        "BTC",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "sentiment-shock",
+        "supply-restriction",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "Whale Alert / Arkham flag of a wallet last active 2010-2013 spending coins",
+        "Coin Days Destroyed (CDD) / dormant-supply-revived metric spike",
+        "destination address tagged to an exchange or OTC desk (e.g. Galaxy Digital) vs a fresh SegWit wallet",
+        "follow-on transfers within days (staged distribution) vs single move that then sits idle"
+      ],
+      "backtest_features": [
+        "coin_age_at_spend_years (dormancy, >10y=Satoshi-era flag)",
+        "dormant_supply_revived_btc (Coin Days Destroyed spike)",
+        "destination_is_exchange_or_otc_desk (boolean — key directional discriminator)",
+        "destination_is_segwit_migration (boolean — benign reformat)",
+        "btc_dip_on_whale_alert_24h",
+        "treasury_etf_net_buying_same_window (absorption capacity)"
+      ],
+      "per_asset": {
+        "BTC": {
+          "up": 0,
+          "down": 0,
+          "flat": 4,
+          "median_abs_move_pct": 2.1
+        }
+      },
+      "confidence_mix": {
+        "high": 3,
+        "medium": 1,
+        "low": 0
+      },
+      "measured_fraction": 0.5
+    }
+  ]
+}

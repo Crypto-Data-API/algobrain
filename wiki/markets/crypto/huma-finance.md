@@ -1,0 +1,162 @@
+---
+title: "Huma Finance"
+type: entity
+created: 2026-04-09
+updated: 2026-06-21
+status: excellent
+tags: [crypto, defi, payment-solutions]
+aliases: ["HUMA"]
+entity_type: protocol
+headquarters: "Decentralized"
+website: "https://huma.finance/"
+related: ["[[crypto-markets]]", "[[solana]]", "[[stablecoins]]", "[[defi]]", "[[real-world-assets]]"]
+---
+
+# Huma Finance
+
+**Huma Finance** (HUMA) is the protocol token of what it bills as the first "PayFi" network — a [[defi|DeFi]] system that finances global payments by giving payment institutions instant, 24/7 access to on-chain stablecoin liquidity. The protocol is built primarily on [[solana|Solana]] (with a [[binance|BNB Chain]] deployment) and underwrites real-world payment receivables such as cross-border settlements, card pre-funding, and trade finance.
+
+Huma's core idea is "PayFi": rather than collateralizing loans with crypto, lenders supply [[stablecoins]] into pools that advance funds against short-duration, real-world payment receivables, earning yield as those receivables settle. It sits at the intersection of [[defi|DeFi]] and [[real-world-assets|real-world assets (RWA)]].
+
+---
+
+## Market Data
+
+| Field | Value |
+|---|---|
+| **Ticker** | HUMA |
+| **Chain** | [[solana]] (also [[binance|BNB Chain]]) |
+| **Current Price** | $0.02419808 |
+| **Market Cap** | $41.94M |
+| **Market Cap Rank** | #510 |
+| **24h Volume** | $9.59M |
+| **24h Change** | +2.43% |
+| **7d Change** | +3.40% |
+| **Fully Diluted Valuation** | $241.98M |
+| **All-Time High** | $0.115647 (2025-05-26) |
+| **All-Time Low** | $0.01107715 (2026-02-26) |
+
+> *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
+
+Trading backdrop: the broad crypto market sits in **extreme fear** ([[crypto-fear-and-greed-index|Crypto Fear & Greed Index]] ≈ 23) within an **established bear market** regime as of 2026-06-21. HUMA's mild positive 24h/7d move (+2.4% / +3.4%) is set against that risk-off tape. The token trades ~79% below its May 2025 ATH ($0.1156) but ~2.2x above its February 2026 ATL ($0.0111). Note the large gap between market cap ($41.9M) and FDV ($242M) — see Tokenomics for the dilution overhang this implies.
+
+---
+
+## Tokenomics & Supply
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1,733,333,333 HUMA |
+| **Total Supply** | 10,000,000,000 HUMA |
+| **Max Supply** | 10,000,000,000 HUMA |
+| **Fully Diluted Valuation** | $241.98M |
+| **Market Cap / FDV** | ~0.17 |
+
+The low market-cap-to-FDV ratio (~0.17) means roughly 83% of the maximum supply is not yet circulating. This is a meaningful future-emission / dilution overhang typical of recently launched tokens, and a key consideration for holders during the current bear regime: even flat demand implies downward price pressure as locked supply vests. The ~5.8x gap between FDV ($242M) and market cap ($41.9M) is the single most important number for valuing HUMA — at full dilution the token would need ~6x the current network usage to justify today's price.
+
+### Categories
+
+Decentralized Finance (DeFi), BNB Chain Ecosystem, Payment Solutions, Binance Alpha Spotlight.
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| [[solana|Solana]] | `HUMA1821qVDKta3u2ovmfDQeW2fSQouSKE8fkF44wvGw` |
+| [[binance|BNB Chain]] | `0x92516e0ddf1ddbf7fab1b79cac26689fdc5ba8e6` |
+
+---
+
+## How & Where It Trades
+
+### Spot venues (CEX)
+
+| Exchange | Pair |
+|---|---|
+| [[binance|Binance]] | HUMA/USDT |
+| Upbit | HUMA/BTC |
+| Bitget | HUMA/USDT |
+| KuCoin | HUMA/USDT |
+
+HUMA spot liquidity is concentrated on major centralized venues. With ~$9.8M of 24h volume against a ~$41.8M market cap, daily turnover is roughly 23% of cap — reasonably liquid for a small-cap token.
+
+### Protocol mechanics (PayFi receivables)
+
+The protocol itself is not a trading venue in the order-book sense; its on-chain "market" is the financing of payment **receivables**:
+
+1. **Liquidity providers** deposit [[stablecoins]] (e.g. USDC) into Huma pools.
+2. The protocol advances those funds to vetted payment institutions / borrowers against short-duration receivables (the right to a near-term payment that is already in transit).
+3. As receivables settle, principal returns to the pool and LPs earn yield plus, in some programs, HUMA incentives ("Feathers"/points).
+
+Because the advances are backed by real-world payment flows rather than volatile crypto collateral, returns are framed as receivable-financing yield rather than crypto-native lending rates. The HUMA token is used for governance and protocol incentives.
+
+---
+
+## Use Case, Narrative & Category
+
+Huma popularized the **"PayFi"** narrative — using on-chain [[stablecoins]] to pre-fund and accelerate real-world payments (cross-border remittances, card settlement, trade finance, DePIN financing). It is categorized as a [[defi|DeFi]] / [[real-world-assets|RWA]] payments protocol and benefits from the broader institutional-stablecoin and tokenized-credit narratives. Its inclusion in Binance Alpha Spotlight gave it retail distribution.
+
+PayFi sits in the wider **RWA-credit** family: rather than tokenizing a static asset (bonds, real estate), it tokenizes a *cash-flow* — short-duration payment receivables that self-liquidate as the underlying payment settles. The duration is days to weeks, not years, which (in theory) limits credit and rate risk versus longer RWA-lending books.
+
+---
+
+## Peer Comparison — RWA Credit / Stablecoin Yield Protocols
+
+| Protocol | Token | Collateral / yield source | Duration profile |
+|---|---|---|---|
+| **Huma Finance** | HUMA | Real-world payment receivables (PayFi) | Very short (days–weeks) |
+| [[spark-2\|Spark]] | SPK | [[sky\|Sky]]/MakerDAO reserves → DeFi/CeFi/RWA allocation | Mixed; backed by stablecoin reserves |
+| Centrifuge | CFG | Tokenized invoices, structured credit | Medium-term private credit |
+| Goldfinch | GFI | Off-chain private credit (emerging markets) | Longer-duration uncollateralized loans |
+| Maple Finance | SYRUP | Institutional under-collateralized lending | Medium-term |
+
+Huma's distinguishing feature is the **payment-receivable** angle: very short duration, self-liquidating advances tied to payment rails, rather than multi-month private-credit loans. This narrows duration risk but concentrates exposure on payment-counterparty settlement reliability.
+
+---
+
+## Valuation Framing (qualitative)
+
+- **FDV is the binding constraint:** market cap ~$41.9M but FDV ~$242M (MC/FDV ~0.17). The ~83% locked supply is the dominant valuation factor — HUMA is "cheap" on cap but expensive on FDV, and unlocks are a persistent headwind in a bear tape.
+- **Cash-flow-backed, not speculative collateral:** unlike crypto-collateralized DeFi, PayFi yield is sourced from real payment flows, which (if receivables perform) gives a more defensible, less reflexive revenue base — but introduces off-chain credit/settlement risk.
+- **Narrative optionality:** rides the institutional-stablecoin and [[real-world-assets|RWA]]/tokenized-credit themes; a re-rate depends on demonstrable receivable volume and credit performance, not just narrative.
+- **Versus Spark:** both are stablecoin-yield plays with heavy locked supply, but Huma's value is in *originating* real-world receivables while [[spark-2|Spark]] *allocates* an existing reserve — different points on the RWA-credit value chain.
+
+---
+
+## Notable History
+
+- Token reached an all-time high of **$0.1156** on 2025-05-26; the current price is ~79% below that ATH.
+- All-time low of **$0.0111** was printed on 2026-02-26, during the same broad bear market that persists in mid-2026.
+- Development is associated with the **00labs** GitHub organization.
+
+> *Notable protocol events and verified news will be added through the wiki's source-ingestion workflow as relevant articles are processed.*
+
+---
+
+## Risks
+
+- **Dilution / emissions:** ~83% of max supply is not yet circulating (MC/FDV ~0.17); future unlocks can pressure price.
+- **Real-world credit risk:** PayFi yield depends on payment counterparties actually settling their receivables; defaults, fraud, or settlement delays can impair LP capital — a risk that crypto-native lending does not carry in the same form.
+- **Regulatory risk:** financing real-world payments and using [[stablecoins]] for settlement intersects with money-transmission and securities regulation across jurisdictions.
+- **Smart-contract risk:** funds are custodied in [[smart-contracts]] on [[solana]] / [[binance|BNB Chain]]; exploits or [[oracle-manipulation|oracle]] issues are possible.
+- **Market regime:** with the [[crypto-fear-and-greed-index|Fear & Greed Index]] at ≈23 (extreme fear) in an established bear market, small-cap [[defi|DeFi]] tokens like HUMA are vulnerable to sharp liquidity-driven drawdowns.
+
+---
+
+## Related
+
+- [[crypto-markets]]
+- [[solana]]
+- [[defi]]
+- [[stablecoins]]
+- [[real-world-assets]]
+- [[spark-2]]
+- [[smart-contracts]]
+- [[crypto-fear-and-greed-index]]
+
+---
+
+## Sources
+
+- (Source: [[coingecko-top-1000-2026-04-09]])
+- Market snapshot 2026-06-21: cryptodataapi.com / CoinGecko top-1000 markets data (`raw/data/crypto-loop/coingecko-markets.json`).

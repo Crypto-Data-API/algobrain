@@ -1,0 +1,733 @@
+{
+  "category_id": "ai-agent-tokens",
+  "category_name": "AI & Agent Token Narrative",
+  "summary": "AI/agent tokens are a high-beta crypto narrative where a small piece of news (an AI agent posting on X, a16z association, a launchpad \"graduation\", a new Bittensor subnet) triggers explosive, reflexive parabolic moves followed by equally violent collapses. The sector rose from near-zero to roughly $17B-$20B aggregate market cap by mid-January 2025 (figure varies by data provider), then collapsed toward the $5B-$7B range within weeks as the same narrative liquidity unwound. It moves as a tight cohort: a flagship pump (GOAT, ai16z, VIRTUAL) drags every other AI-themed token up, and a flagship crash or macro AI shock (DeepSeek) drags them all down together.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "flagship-agent-launch-pump",
+      "name": "Flagship AI-Agent Token Launch Pump (reflexive parabola)",
+      "mechanism": "A novel AI-agent token launches via fair-launch/launchpad (pump.fun, Virtuals bonding curve) with a viral story (an autonomous AI, an a16z-themed DAO, a Marc Andreessen association). Early holders and bonding-curve buyers are on the winning side; the losing side is late retail FOMO chasing 50-100x narratives at the top. Price is reflexive: rising price = more attention = more buyers, with thin float and no fundamental anchor, so moves overshoot massively in both directions.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named coin",
+        "AI-agent sector",
+        "Solana memecoins",
+        "Base ecosystem"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging"
+      ],
+      "typical_lag": "immediate to hours; parabola plays out over days to ~2 weeks",
+      "typical_duration": "1-3 weeks of run-up, then weeks-to-months of decay",
+      "typical_magnitude_pct": "+500% to +8000% on the launch token over its first 1-4 weeks; co-movement +20% to +100% on sector peers",
+      "recurrence": "Clustered Oct 2024 - Jan 2025; recurs whenever a new flagship narrative coin appears",
+      "leading_signals": [
+        "viral X/Twitter mentions of an AI agent",
+        "association/endorsement by a known VC/founder (a16z, Andreessen)",
+        "pump.fun coin crossing $100M then higher mcap",
+        "Virtuals bonding curve nearing 42,000 VIRTUAL graduation",
+        "rapid holder-count growth",
+        "exchange listing announcements (Binance/Coinbase)"
+      ],
+      "backtest_features": [
+        "days_since_token_launch",
+        "twitter_mention_velocity_zscore",
+        "holder_count_growth_rate",
+        "mcap_24h_pct_change",
+        "is_launchpad_graduation_event",
+        "first_cex_listing_flag",
+        "circulating_float_pct"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-10-10",
+          "date_range": "2024-10-10 to 2024-10-25",
+          "trigger": "Goatseus Maximus (GOAT) launched on pump.fun, tied to the AI 'Truth Terminal' bot; went viral as an early AI-agent memecoin",
+          "description": "GOAT launched at a fraction of a cent and ran several thousand percent within about a week as it went viral. Peak market cap in October 2024 was reported in the ~$400M-$700M range (Binance cited >$400M, CoinSwitch >$700M); claims that it was 'the first pump.fun coin to exceed $1B market cap' are NOT supported by available sources and have been removed. GOAT helped kick off the AI-agent narrative.",
+          "price_impacts": [
+            {
+              "asset": "GOAT",
+              "pct_change": "+several thousand %",
+              "window": "~7d",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "GOAT",
+              "pct_change": "peak mcap ~$400M-$700M",
+              "window": "October 2024",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "GOAT",
+            "ai16z",
+            "VIRTUAL"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens",
+            "Solana memecoins"
+          ],
+          "volume_or_flow_change": "Explosive pump.fun volume; one of the largest pump.fun coins by mcap in late 2024",
+          "confidence": "medium",
+          "sources": [
+            "https://www.binance.com/en/square/post/24188951245994",
+            "https://coinswitch.co/coins/buy-goatseus-maximus-in-india",
+            "https://www.coingecko.com/en/coins/goatseus-maximus"
+          ]
+        },
+        {
+          "date": "2024-10-25",
+          "date_range": "2024-10-25 to 2025-01-02",
+          "trigger": "ai16z token launched as an AI-run investment DAO ('Marc AIndreessen'); boosted mid-Nov by a16z-related attention on X",
+          "description": "AI16Z launched in late October at fractions of a cent, rallied through November-December, and hit an ATH of ~$2.47-$2.48 on Jan 1-2, 2025. The exact launch-day price and percentage-from-launch figure (the prior '+50000%+' claim) could not be corroborated to that precision, so it has been downgraded; the ATH and its date are well supported.",
+          "price_impacts": [
+            {
+              "asset": "AI16Z",
+              "pct_change": "ATH ~$2.47-$2.48",
+              "window": "Jan 1-2, 2025",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "AI16Z",
+              "pct_change": "+500% (approx)",
+              "window": "December 2024",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "AI16Z",
+            "ZEREBRO",
+            "VIRTUAL",
+            "AIXBT"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens",
+            "Solana AI tokens"
+          ],
+          "volume_or_flow_change": "Whale accumulation; reports of a top trader realizing tens of millions of dollars",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2024/12/30/ai-agents-capture-attention-as-ai-xbt-ai16z-and-virtuals-surge",
+            "https://www.coinbase.com/price/ai16z",
+            "https://www.investing.com/crypto/ai16z/historical-data"
+          ]
+        },
+        {
+          "date": "2024-12-29",
+          "date_range": "2024-11 to 2025-01",
+          "trigger": "VIRTUAL (Virtuals Protocol, the AI-agent launchpad on Base) rallied as its agent ecosystem (AIXBT, LUNA, GAME) went viral",
+          "description": "VIRTUAL rose strongly into late 2024, hitting an ATH in the ~$3.71-$4.50 range around late December 2024 (sources conflict on the exact peak; CoinGecko-aligned figures cite ~$3.71, others ~$4.12-$4.50) with peak market cap reported above $1.6B. Acted as the index/beta for the Base AI-agent ecosystem.",
+          "price_impacts": [
+            {
+              "asset": "VIRTUAL",
+              "pct_change": "ATH ~$3.71-$4.50; peak mcap >$1.6B",
+              "window": "late Dec 2024",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "VIRTUAL",
+            "AIXBT",
+            "LUNA",
+            "GAME"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens",
+            "Base ecosystem"
+          ],
+          "volume_or_flow_change": "Ecosystem grew to thousands of agents; several agents reaching $130M-$300M+ mcap",
+          "confidence": "medium",
+          "sources": [
+            "https://www.kucoin.com/price/VIRTUAL",
+            "https://yellow.com/news/virtual-token-plunges-30-hours-after-record-peak",
+            "https://www.coingecko.com/en/coins/virtual-protocol"
+          ]
+        },
+        {
+          "date": "2025-01-20",
+          "date_range": "2025-01-17 to 2025-01-20",
+          "trigger": "Trump inauguration / peak risk-on sentiment lifted AI-agent tokens to sector-wide highs",
+          "description": "AIXBT, VIRTUAL and AI16Z all printed local/all-time highs into the Jan 20 Trump inauguration as the AI-agent sector aggregate mcap peaked. Peak aggregate figures cited by sources range from ~$17B to ~$20B depending on provider and token set.",
+          "price_impacts": [
+            {
+              "asset": "AI-agent sector",
+              "pct_change": "~$17B-$20B aggregate mcap peak",
+              "window": "early-mid Jan 2025",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AIXBT",
+            "VIRTUAL",
+            "AI16Z",
+            "GOAT",
+            "ZEREBRO"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens"
+          ],
+          "volume_or_flow_change": "Peak speculative inflows before the Q1 collapse",
+          "confidence": "medium",
+          "sources": [
+            "https://www.fxempire.com/forecasts/article/aixbt-virtual-ai16z-price-analysis-trump-inauguration-boost-ai-agent-tokens-1490631",
+            "https://crypto.com/us/crypto/learn/4-ai-agent-tokens-to-watch-in-2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sector-rotation-comovement-and-crash",
+      "name": "AI-Sector Rotation + Reflexive Crash (correlated cohort unwind)",
+      "mechanism": "AI-agent tokens trade as a single high-beta narrative basket. Capital rotates in together on hype and out together on shock. On the way up, latecomers buy the basket as a theme; on the way down, profit-takers ('smart money') dump first and trigger reflexive deleveraging across all names, because thin liquidity and shared holders mean one sell cascade hits the whole cohort. Late retail holding the basket at the top are the losers; early whales and macro-aware sellers win.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "AI-agent sector",
+        "large-cap AI infra (TAO, FET, RENDER)",
+        "Solana memecoins",
+        "broad altcoins"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "sell-pressure",
+        "forced-liquidation"
+      ],
+      "typical_lag": "immediate (hours) on the shock; cascade over days",
+      "typical_duration": "Drawdown unwinds over weeks; sector spent months below peak",
+      "typical_magnitude_pct": "-60% to -90% peak-to-trough on individual AI-agent tokens within ~6 weeks; sector mcap fell roughly -65% to -70% (from ~$17B-$20B toward $5B-$7B)",
+      "recurrence": "The full cohort crash was a single Q1-2025 regime change; smaller correlated drawdowns recur on any AI macro shock",
+      "leading_signals": [
+        "smart-money / top-PnL wallets distributing",
+        "sector aggregate mcap stalling after parabola",
+        "negative AI macro headline (DeepSeek)",
+        "declining new launches / launchpad volume",
+        "funding rates flipping / OI unwind",
+        "BTC dominance rising vs alts"
+      ],
+      "backtest_features": [
+        "sector_aggregate_mcap_zscore",
+        "ai_token_cross_correlation_30d",
+        "top_wallet_netflow_to_exchanges",
+        "btc_dominance_change",
+        "ai_token_basket_beta_to_btc",
+        "rolling_drawdown_from_60d_high",
+        "new_agent_launch_count_trend"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-01-27",
+          "date_range": "2025-01-27 to 2025-01-28",
+          "trigger": "DeepSeek R1 shock: cheap Chinese open-source AI model triggered a global AI/tech selloff (Nvidia ~-17%) that spilled into crypto AI tokens",
+          "description": "On Jan 27, 2025 the DeepSeek efficiency shock drove a sharp global AI/tech selloff (Nvidia fell ~17%) and hit AI tokens hardest, marking the top of the AI-agent narrative and the start of the cohort unwind. The specific '-$300B in a day' total-crypto-mcap figure could not be corroborated and has been downgraded to low confidence.",
+          "price_impacts": [
+            {
+              "asset": "AI-agent sector",
+              "pct_change": "sharp decline; sector top confirmed",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "NVDA (equity reference)",
+              "pct_change": "-17%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "NEAR",
+            "TAO",
+            "FET",
+            "RENDER",
+            "AIXBT",
+            "VIRTUAL",
+            "AI16Z"
+          ],
+          "affected_sectors": [
+            "AI tokens",
+            "AI infrastructure",
+            "AI-agent tokens"
+          ],
+          "volume_or_flow_change": "Risk-off; AI-token-specific selloff sharper than broad crypto",
+          "confidence": "high",
+          "sources": [
+            "https://www.cnbc.com/2025/01/27/nvidia-falls-10percent-in-premarket-trading-as-chinas-deepseek-triggers-global-tech-sell-off.html",
+            "https://cryptorank.io/news/feed/c59de-ai-token-prices-fall-following-deepseek-r1-release",
+            "https://www.coindesk.com/markets/2025/01/27/bitcoin-s-deepseek-triggered-selloff-is-a-buy-the-dip-opportunity-analysts-say"
+          ]
+        },
+        {
+          "date": "2025-02-21",
+          "date_range": "2025-01-20 to 2025-02-21",
+          "trigger": "Smart-money profit leaders dumped AI-agent positions as the narrative cooled; sector-wide drawdown accelerated",
+          "description": "By Feb 21, 2025 AI16Z and AIXBT were down sharply over the prior 30 days (reported ~60% and ~72% respectively), and AI16Z had corrected on the order of ~90% from its early-January high. Reports describe the top ai16z trader selling nearly his entire position.",
+          "price_impacts": [
+            {
+              "asset": "AI16Z",
+              "pct_change": "-60%",
+              "window": "30d",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "AIXBT",
+              "pct_change": "-72%",
+              "window": "30d",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "AI16Z",
+              "pct_change": "~-90%",
+              "window": "peak-to-trough",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AI16Z",
+            "AIXBT",
+            "VIRTUAL",
+            "ZEREBRO"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens"
+          ],
+          "volume_or_flow_change": "Profit-leader distribution; sector aggregate mcap fell from its January peak toward the $5B-$7B range",
+          "confidence": "medium",
+          "sources": [
+            "https://crypto.news/ai-tokens-ai16z-virtual-plunge-profit-leaders-dump/",
+            "https://cointelegraph.com/news/new-ai-agent-launches-virtuals-plummet-token-drawdowns"
+          ]
+        },
+        {
+          "date": "2025-02",
+          "date_range": "2025-01 to 2025-02",
+          "trigger": "Broad AI-agent narrative deflation; top platforms shed market cap and new agent launches collapsed",
+          "description": "AI-agent tokens were down as much as ~90% from 2024 highs; top platforms ai16z and Virtuals shed roughly 75-90% of market cap since January. New agent launches on Virtuals dried up alongside the token drawdown.",
+          "price_impacts": [
+            {
+              "asset": "AI16Z",
+              "pct_change": "-75% to -90%",
+              "window": "since Jan 2025",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "VIRTUAL",
+              "pct_change": "-75% to -90%",
+              "window": "since Jan 2025",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AI16Z",
+            "VIRTUAL",
+            "AIXBT",
+            "GOAT"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens",
+            "Base ecosystem",
+            "Solana AI tokens"
+          ],
+          "volume_or_flow_change": "New agent launch count collapsed; launchpad volume fell sharply",
+          "confidence": "medium",
+          "sources": [
+            "https://cointelegraph.com/news/new-ai-agent-launches-virtuals-plummet-token-drawdowns",
+            "https://crypto.news/ai-tokens-ai16z-virtual-plunge-profit-leaders-dump/"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2025-07-01",
+          "trigger": "Continued cohort drift lower in mid-2025; AI-agent tokens still bleeding well below their Q1 peaks",
+          "description": "Measured on CoinGecko: over Jun 4 - Jul 1, 2025 AI16Z fell 41.71% (max intra-window drawdown 48.4%), AIXBT fell 33.76% (max drawdown 44.3%), and VIRTUAL fell 21.42% (Jun 4-20, max drawdown 32.9%) - confirming the cohort still moved together and stayed in a downtrend long after the peak.",
+          "price_impacts": [
+            {
+              "asset": "AI16Z",
+              "pct_change": "-41.71%",
+              "window": "2025-06-04 to 2025-07-01",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "AIXBT",
+              "pct_change": "-33.76%",
+              "window": "2025-06-04 to 2025-07-01",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "VIRTUAL",
+              "pct_change": "-21.42%",
+              "window": "2025-06-04 to 2025-06-20",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "AI16Z",
+            "AIXBT",
+            "VIRTUAL"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens"
+          ],
+          "volume_or_flow_change": "Persistent net outflows; cohort cross-correlation remained high",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/ai16z",
+            "https://www.coingecko.com/en/coins/aixbt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "launchpad-graduation-and-infra-consolidation",
+      "name": "Launchpad Graduation Pumps & AI-Infra Token Consolidation",
+      "mechanism": "Two structural sub-patterns. (a) Launchpad graduation: on Virtuals, an agent's bonding curve filling 42,000 VIRTUAL triggers a Uniswap listing - a deterministic supply/liquidity event that pumps both the new agent token and VIRTUAL (the required base currency), as buyers must acquire VIRTUAL to participate. (b) Infra consolidation: established AI-infra tokens (FET, AGIX, OCEAN) merge into a single asset (ASI), restricting supply across three tickers into one and re-rating on the combined narrative. Losers are those who ignore the deterministic mechanics; winners front-run graduations and merger conversions.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named coin",
+        "VIRTUAL",
+        "AI-infra tokens (FET/AGIX/OCEAN/ASI)"
+      ],
+      "analog_mechanisms": [
+        "supply-restriction",
+        "dry-powder-injection",
+        "sentiment-shock"
+      ],
+      "typical_lag": "immediate on graduation; days-to-weeks on merger re-rating",
+      "typical_duration": "Graduation pumps fade within days; merger re-rating persists weeks-to-months",
+      "typical_magnitude_pct": "Agent graduation: token +50% to +1000% on listing; VIRTUAL +10% to +30% on graduation waves; merger: +50% to +300% on announcement (FET ATH ~$3.47)",
+      "recurrence": "Graduations were near-daily on Virtuals during the Nov 2024 - Jan 2025 boom; mergers are rare one-offs",
+      "leading_signals": [
+        "Virtuals bonding curve approaching 42,000 VIRTUAL",
+        "pending Uniswap liquidity deployment",
+        "merger/consolidation announcement",
+        "token conversion-ratio disclosure",
+        "exchange support announcements for the new ticker"
+      ],
+      "backtest_features": [
+        "bonding_curve_pct_to_graduation",
+        "graduation_event_flag",
+        "virtual_required_base_demand",
+        "merger_announcement_flag",
+        "supply_consolidation_ratio",
+        "days_to_conversion_deadline"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-03-28",
+          "date_range": "2024-03-28",
+          "trigger": "Announcement of the Fetch.ai / SingularityNET / Ocean Protocol merger into the Artificial Superintelligence Alliance (ASI)",
+          "description": "The ASI merger was announced on March 28, 2024. Around that period FET hit an all-time high of ~$3.47 (March 28, 2024; the prior '$3.49' was slightly overstated - better-supported figure is $3.47, with some feeds at $3.45-$3.48); AGIX and OCEAN also surged as the market priced the consolidation of three AI-infra tokens into one ASI ticker.",
+          "price_impacts": [
+            {
+              "asset": "FET",
+              "pct_change": "ATH ~$3.47",
+              "window": "around Mar 28, 2024 announcement",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "AGIX",
+              "pct_change": "sharp surge",
+              "window": "around announcement",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "OCEAN",
+              "pct_change": "sharp surge",
+              "window": "around announcement",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "FET",
+            "AGIX",
+            "OCEAN"
+          ],
+          "affected_sectors": [
+            "AI infrastructure tokens",
+            "decentralized AI"
+          ],
+          "volume_or_flow_change": "Re-rating on supply consolidation across 3 tickers into ASI",
+          "confidence": "high",
+          "sources": [
+            "https://www.fetch.ai/blog/artificial_superintelligence_alliance_update_ASI_token_merger",
+            "https://coinmarketcap.com/currencies/artificial-superintelligence-alliance/",
+            "https://www.coinbase.com/price/fetch"
+          ]
+        },
+        {
+          "date": "2024-07-01",
+          "date_range": "2024-07-01 to 2024-07-15",
+          "trigger": "ASI token merger went live (AGIX->ASI at ~0.4333, OCEAN->ASI at ~0.4332, 1 FET = 1 ASI); migration of AGIX/OCEAN into FET/ASI",
+          "description": "Merger migration began July 1, 2024 (Phase 1, 50%+ migrated), restricting supply into a single asset. Subsequent claims about a ~$9.2B ASI market cap and a precise '+22.7% post-merger' figure could not be corroborated and have been downgraded.",
+          "price_impacts": [
+            {
+              "asset": "ASI",
+              "pct_change": "supply consolidation; precise post-merger % uncorroborated",
+              "window": "post-merger",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "FET",
+            "ASI",
+            "AGIX",
+            "OCEAN"
+          ],
+          "affected_sectors": [
+            "AI infrastructure tokens",
+            "decentralized AI"
+          ],
+          "volume_or_flow_change": "Three-token supply consolidated into one; cross-chain bridge flows",
+          "confidence": "low",
+          "sources": [
+            "https://x.com/Fetch_ai/status/1815521320207028601",
+            "https://finst.com/en/blog/articles/fetch-ai-ocean-protocol-merger"
+          ]
+        },
+        {
+          "date": "2024-11",
+          "date_range": "2024-11 to 2024-12",
+          "trigger": "AIXBT and other flagship agents launched/graduated on the Virtuals bonding curve, driving demand for VIRTUAL as the mandatory base currency",
+          "description": "AIXBT (a leading Virtuals agent, launched Nov 2024) and peers graduated via the 42,000-VIRTUAL bonding curve onto Uniswap; the graduation mechanism forced buyers to acquire VIRTUAL, contributing to VIRTUAL's strong Q4 run. The specific AIXBT ATH (~$0.54) and VIRTUAL '+850%' figures are approximate and sourced to crypto media rather than measured.",
+          "price_impacts": [
+            {
+              "asset": "AIXBT",
+              "pct_change": "ATH ~$0.5 (approx)",
+              "window": "to late Dec 2024",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "VIRTUAL",
+              "pct_change": "+850% (approx)",
+              "window": "Q4 2024",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "GAME",
+              "pct_change": "surge",
+              "window": "around 2024-11-24",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AIXBT",
+            "VIRTUAL",
+            "GAME",
+            "LUNA"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens",
+            "Base ecosystem"
+          ],
+          "volume_or_flow_change": "Graduation-driven VIRTUAL demand; agents reaching $130M-$300M+ mcap",
+          "confidence": "medium",
+          "sources": [
+            "https://cryptopotato.com/what-is-virtuals-the-launchpad-for-ai-agents/",
+            "https://coinmarketcap.com/academy/article/9793fc11-32b0-492a-a97d-deb972164802"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "agent-idiosyncratic-and-subnet-events",
+      "name": "Idiosyncratic Agent/Protocol Events (hacks, subnet launches, dTAO)",
+      "mechanism": "Single-name catalysts specific to an agent or protocol. (a) Agent compromise/hack: an autonomous agent's wallet or dashboard is exploited, breaking the 'autonomous AI' trust thesis and triggering a sharp single-name drop. (b) Bittensor dTAO subnet launches: under Dynamic TAO (live Feb 13, 2025) each subnet gets its own Alpha token with a liquidity pool; new subnet/alpha tokens typically spike on launch then dip, and alpha-token prices directly route TAO emissions. Losers are holders trusting the agent's security or chasing fresh subnet alphas at launch; winners are exploiters and emission-aware stakers who rotate.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "the named coin",
+        "Bittensor subnet alpha tokens",
+        "TAO"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "sell-pressure",
+        "supply-restriction",
+        "dry-powder-injection"
+      ],
+      "typical_lag": "immediate (hours) on hacks; launch-day spike then multi-day dip on subnet alphas",
+      "typical_duration": "Hack drops partly recover in days; subnet-launch dips persist until emissions re-equilibrate",
+      "typical_magnitude_pct": "Hack: -15% to -22% single-name in 24h; subnet alpha launch: initial spike then -30% to -70% dip; TAO sector beta",
+      "recurrence": "Hacks are sporadic; dTAO subnet alpha launches recur continuously since Feb 2025",
+      "leading_signals": [
+        "unusual agent wallet activity / dashboard access",
+        "deleted-account or anomalous agent posts",
+        "new Bittensor subnet registration",
+        "alpha-token liquidity-pool creation",
+        "TAO staking redistribution toward a new subnet"
+      ],
+      "backtest_features": [
+        "agent_wallet_anomalous_outflow_flag",
+        "subnet_registration_event",
+        "alpha_token_age_days",
+        "alpha_pool_liquidity_depth",
+        "tao_emission_share_change_by_subnet",
+        "days_since_dtao_launch"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-03-20",
+          "date_range": "March 2026",
+          "trigger": "Bittensor's Templar subnet completes Covenant-72B - the largest-ever decentralized LLM pre-training run; TAO rallies.",
+          "description": "Bittensor Subnet 3 (Templar) trained Covenant-72B (72B params, 70+ independent contributors on commodity GPUs over home internet), scoring 67.1 on MMLU (~Meta Llama-2-70B class) - a proof-of-concept that decentralized AI training works. TAO rallied +66.5% in March 2026 ($183->$305 close-to-close; intra-month peak ~$371, +114% from the low), amplified by a Grayscale TAO ETF filing; the Templar subnet token jumped +194% in 7 days and the Bittensor ecosystem mcap hit ~$1.5B. A subnet/model-achievement idiosyncratic rally and the flagship of the broader DeAI sector (RENDER, Fetch/ASI, GRASS, Ocean). NOTE: high-beta and mean-reverting - TAO then fell ~35% from its May high into the June-2026 risk-off, and NEAR's AI-DeFi adoption (5M daily tx, Apr 2026) is an adoption metric, not a price catalyst.",
+          "price_impacts": [
+            {
+              "asset": "TAO",
+              "pct_change": "+66.53%",
+              "window": "March 2026 ($183->$305; intra-month peak ~$371, +114% from low)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "Templar (subnet token)",
+              "pct_change": "+194%",
+              "window": "7 days around the Covenant-72B launch",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "TAO",
+            "RENDER",
+            "ASI",
+            "GRASS"
+          ],
+          "affected_sectors": [
+            "decentralized-ai",
+            "ai-agents",
+            "depin-compute"
+          ],
+          "volume_or_flow_change": "Bittensor ecosystem mcap ~$1.5B; Grayscale TAO ETF filing; Yuma staked ~19% of supply.",
+          "confidence": "high",
+          "sources": [
+            "https://99bitcoins.com/news/altcoins/bittensor-tao-rally-covenant-72b-decentralized-ai/",
+            "https://phemex.com/blogs/bittensor-covenant-72b-decentralized-ai-tao",
+            "https://www.ainvest.com/news/bittensor-tao-surges-340-covenant-72b-validates-decentralized-ai-grayscale-files-etf-2604/"
+          ]
+        },
+        {
+          "date": "2025-06-04",
+          "date_range": "2025-06-04 to 2025-06-30",
+          "trigger": "TAO traded with the broad AI/alt downtrend in mid-2025, with high intra-window volatility around subnet/emission dynamics",
+          "description": "Measured on CoinGecko: TAO fell 13.43% from Jun 4 to Jun 30, 2025 ($387.19 to $335.18) but with a 33.12% max intra-window drawdown and ~24% max run-up - reflecting the high volatility of the dTAO emission/subnet regime even in a flagship AI-infra token.",
+          "price_impacts": [
+            {
+              "asset": "TAO",
+              "pct_change": "-13.43%",
+              "window": "2025-06-04 to 2025-06-30",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "TAO",
+              "pct_change": "-33.12% max drawdown / +24% max run-up",
+              "window": "intra-window",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "TAO"
+          ],
+          "affected_sectors": [
+            "AI infrastructure tokens",
+            "Bittensor ecosystem"
+          ],
+          "volume_or_flow_change": "High intra-window volatility tied to subnet emission rotation",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/bittensor"
+          ]
+        },
+        {
+          "date": "2025-03-18",
+          "date_range": "2025-03-18 to 2025-03-19",
+          "trigger": "AIXBT agent's autonomous dashboard was accessed by a hacker who queued malicious replies and drained ~55.5 ETH (~$100K) from a Simulacrum wallet",
+          "description": "The hack broke the 'secure autonomous agent' thesis; the AIXBT token fell roughly 16-22% in 24h despite the team insisting fundamentals were unchanged. The incident is dated March 18, 2025 (some coverage references March 19); the prior catalog date (March 19) has been corrected.",
+          "price_impacts": [
+            {
+              "asset": "AIXBT",
+              "pct_change": "-16% to -22%",
+              "window": "24h",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "AIXBT"
+          ],
+          "affected_sectors": [
+            "AI-agent tokens"
+          ],
+          "volume_or_flow_change": "Single-name selloff; limited contagion to broader cohort",
+          "confidence": "high",
+          "sources": [
+            "https://decrypt.co/310510/aixbt-ai-influencer-hacked-100k-ethereum",
+            "https://crypto.news/aixbt-agent-hacked-losing-55eth-aixbt-token-drops-2025/",
+            "https://www.theblock.co/post/346911/ai-crypto-bot-aixbt-lost-eth-hack-unauthorized-dashboard-access"
+          ]
+        },
+        {
+          "date": "2025-02-13",
+          "date_range": "2025-02-13 onward",
+          "trigger": "Bittensor Dynamic TAO (dTAO) upgrade went live, giving every subnet its own Alpha token and liquidity pool; market staking now routes TAO emissions",
+          "description": "dTAO launched Feb 13, 2025. New subnet alpha tokens characteristically surge at launch then dip as the market re-prices them; alpha prices directly determine each subnet's share of daily TAO emissions. The '~$1.5B cumulative subnet-token valuation by March 2026' figure is forward/uncorroborated and downgraded.",
+          "price_impacts": [
+            {
+              "asset": "subnet alpha tokens",
+              "pct_change": "launch spike then -30% to -70% dip",
+              "window": "days after each launch",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "subnet-token aggregate",
+              "pct_change": "cumulative valuation grew (precise figure uncorroborated)",
+              "window": "2025-2026",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "TAO",
+            "subnet alpha tokens"
+          ],
+          "affected_sectors": [
+            "AI infrastructure tokens",
+            "Bittensor ecosystem"
+          ],
+          "volume_or_flow_change": "Open-market staking redirects emissions; recurring launch-and-dip flow per subnet",
+          "confidence": "medium",
+          "sources": [
+            "https://oakresearch.io/en/analyses/fundamentals/bittensor-tao-dynamic-tao-dtao-upgrade-changes-everything",
+            "https://www.coingecko.com/learn/top-bittensor-subnets-dtao",
+            "https://learnbittensor.org/concepts/dynamic-tao"
+          ]
+        }
+      ]
+    }
+  ]
+}

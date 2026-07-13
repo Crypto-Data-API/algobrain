@@ -1,0 +1,914 @@
+{
+  "category_id": "regulatory-approvals-policy",
+  "category_name": "Regulatory Approvals & Pro-Crypto Policy",
+  "summary": "When governments approve new crypto investment products (like ETFs) or signal friendlier rules, prices tend to move in predictable ways. Pre-announced approvals often pump on rumor then dump on the actual news (\"sell the news\"), while genuine surprise policy shifts — a pro-crypto election win, a coin being named in a reserve, or a hostile regulator leaving — can trigger violent, durable rallies, with smaller altcoins moving far more than Bitcoin. Legislative frameworks (stablecoin/market-structure laws) tend to re-rate the specific sector they touch (e.g. Ethereum and stablecoin infrastructure) more than Bitcoin itself. By 2025-2026 the market entered a 'policy-fatigue' regime: after the Nov-2024 election and Mar-2025 reserve-naming, incremental legislative progress (committee markups, bill introductions, implementation rulemakings, state reserve actions, new-product approvals) produced little or no isolable spot move — broad market regime dominated the headline.",
+  "directional_bias": "bullish",
+  "archetypes": [
+    {
+      "id": "approval-sell-the-news",
+      "name": "Pre-priced approval 'sell-the-news' then structural re-rating",
+      "mechanism": "A long-telegraphed regulatory approval of an investment vehicle (spot ETF) gets priced in during the rumor/anticipation phase. On the actual approval, event-driven traders and pre-positioned funds take profit into the news, producing a short-term dump even though the long-term effect is structurally bullish (new persistent inflow channel). The people 'losing' short-term are late retail buyers chasing the headline; the structural winners are holders who survive the dip as ETF inflows create steady new demand (supply absorption) over the following months.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "the named asset (BTC, ETH)",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "supply-restriction",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "rising implied volatility / funding rates into the decision date",
+        "futures-basis blowout (annualized basis >15-20%)",
+        "spike in 'days_to_decision' search/social volume",
+        "exchange BTC balances declining pre-event",
+        "Polymarket/Kalshi approval-odds approaching ~100%"
+      ],
+      "backtest_features": [
+        "days_to_known_decision_date",
+        "perp_funding_rate_zscore_pre_event",
+        "futures_annualized_basis",
+        "implied_vol_term_structure_slope",
+        "approval_odds_prediction_market",
+        "etf_net_inflow_usd_daily_post_event",
+        "exchange_netflow_zscore"
+      ],
+      "typical_lag": "immediate (minutes-to-hours on the event); structural inflow effect over weeks-months",
+      "typical_duration": "sell-off 1-3 weeks; structural re-rating 1-9 months",
+      "typical_magnitude_pct": "-14% to -19% drawdown on the named asset in the 2 weeks post-approval; +50% to +150% over the following 6-12 months",
+      "recurrence": "once per product launch (BTC spot ETF, ETH spot ETF); recurs as new vehicles get approved",
+      "historical_instances": [
+        {
+          "date": "2024-01-10",
+          "date_range": "2024-01-10 to 2024-01-23",
+          "trigger": "SEC approves 11 US spot Bitcoin ETFs; trading begins Jan 11.",
+          "description": "SEC approves 11 US spot Bitcoin ETFs; trading begins Jan 11, 2024. Classic 'sell the news' after a multi-month rumor rally: BTC peaked near $49k on Jan 11 then fell to a Jan 23 trough of ~$39,567 before a structural re-rating to new ATHs by March.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-14% to -19%",
+              "window": "Jan 10-11 high (~$46k-$49k) to Jan 23 trough ($39,567)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+60% to +85%",
+              "window": "Jan 23 trough ($39,567) to mid-March 2024 (>$73k ATH)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "store-of-value"
+          ],
+          "volume_or_flow_change": "Day-one ETF trading volume ~$4.6B across 11 funds; net inflows turned strongly positive within weeks, GBTC outflows offset by IBIT/FBTC inflows.",
+          "confidence": "high",
+          "sources": [
+            "https://www.wisdomtree.com/investments/blog/2024/02/12/january-2024-month-in-review-us-spot-bitcoin-etfs-approved",
+            "https://www.nasdaq.com/articles/cryptos:-why-did-spot-bitcoin-etf-approval-cause-prices-to-decline",
+            "https://calendar.bitbo.io/price/2024/",
+            "https://www.aoshearman.com/en/insights/sec-approves-spot-bitcoin-etp-opening-new-pathway-to-bitcoin-investment",
+            "https://global.morningstar.com/en-gb/markets/sec-approves-spot-bitcoin-etfs-for-trading-in-watershed-move"
+          ]
+        },
+        {
+          "date": "2024-05-23",
+          "date_range": "2024-05-17 to 2024-08-05",
+          "trigger": "SEC approves spot Ethereum ETF 19b-4 filings (May 23); spot ETH ETFs begin trading July 23, 2024.",
+          "description": "SEC approves spot Ethereum ETF 19b-4 filings (May 23, 2024); spot ETH ETFs begin trading July 23. ETH ran up ~25-30% from ~$3,000 (May 17) toward ~$3,800-3,900 on approval expectations, then sold the actual July launch on weak first-month flows and ETHE outflows.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+25% to +30%",
+              "window": "May 17 (~$3,000) to May 23 (~$3,800-3,900) on approval anticipation",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-20% to -25%",
+              "window": "July 23 launch (~$3,500) into early-August 2024 sell-off",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "smart-contract-platforms",
+            "large-cap"
+          ],
+          "volume_or_flow_change": "Spot ETH ETFs saw weaker first-month flows than BTC; persistent ETHE (Grayscale) outflows pressured price post-launch.",
+          "confidence": "high",
+          "sources": [
+            "https://www.mayerbrown.com/en/insights/publications/2024/05/sec-approves-listings-of-spot-ether-etfs-waiting-is-the-hardest-part",
+            "https://blockchain.bakermckenzie.com/2024/07/23/ethereum-etfs-to-start-trading-today-in-the-united-states/",
+            "https://coinmarketcap.com/academy/article/breaking-sec-approves-spot-ethereum-etf-applications",
+            "https://www.foley.com/insights/publications/2024/07/next-ethereum-etfs-sec-approval/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "procrypto-regime-shift",
+      "name": "Pro-crypto policy regime shift (election / executive pivot)",
+      "mechanism": "A genuine, hard-to-fully-anticipate shift in the regulatory regime — a pro-crypto candidate winning, or an executive order signaling state endorsement — reprices the entire asset class's regulatory risk premium downward. Shorts and underweight institutions are forced to chase; the move is broad and reflexive. Altcoins exhibit high beta because they carried the most regulatory/securities-law overhang, so de-risking benefits them disproportionately. Those on the other side are bearish macro funds and regulators-friendly positioning caught offside.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "memecoins",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "reflexive-deleveraging",
+        "forced-liquidation"
+      ],
+      "leading_signals": [
+        "prediction-market odds shifting toward the pro-crypto outcome",
+        "crypto-linked equities (COIN, MSTR) front-running",
+        "rising open interest with positive funding",
+        "campaign/policy statements (e.g. Bitcoin Conference promises)"
+      ],
+      "backtest_features": [
+        "election_outcome_dummy",
+        "prediction_market_odds_delta",
+        "policy_announcement_event_flag",
+        "altcoin_btc_beta_30d",
+        "total_market_cap_excl_btc_change",
+        "perp_open_interest_change",
+        "funding_rate_zscore"
+      ],
+      "typical_lag": "immediate (overnight) and continuing for days-to-weeks",
+      "typical_duration": "weeks to a few months of sustained trend",
+      "typical_magnitude_pct": "BTC +25% to +55% over 1-6 weeks; high-beta alts +50% to +150%+",
+      "recurrence": "rare / episodic — tied to major political or executive events",
+      "historical_instances": [
+        {
+          "date": "2024-11-05",
+          "date_range": "2024-11-05 to 2024-12-17",
+          "trigger": "Trump wins US presidential election on an explicitly pro-crypto platform.",
+          "description": "Donald Trump wins the US presidential election on an explicitly pro-crypto platform (crypto council, strategic BTC stockpile, fire Gensler). Broad regulatory re-rating drove BTC up ~28% in the first week and to its first $100k+ print by Dec 17, with Musk-linked DOGE up triple digits.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+28%",
+              "window": "Election Day Nov 5 (~$69,539 close) to ~Nov 13 week",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+52% to +56%",
+              "window": "Nov 5 close (~$69,539) to Dec 17 peak (~$106k, first >$100k)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "DOGE",
+              "pct_change": "+100% to +150%",
+              "window": "election to ~1-2 weeks post (Musk-linked memecoin)",
+              "direction": "up",
+              "measured_by": "estimate"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "+10% to +15%",
+              "window": "election +24-48h",
+              "direction": "up",
+              "measured_by": "estimate"
+            },
+            {
+              "asset": "XRP",
+              "pct_change": "+5%",
+              "window": "election +24h (later much larger on Gensler exit)",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "DOGE",
+            "SOL",
+            "XRP",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "large-cap",
+            "store-of-value",
+            "payments"
+          ],
+          "volume_or_flow_change": "Record spot+perp volumes; spot BTC ETF inflows surged to multi-billion weekly; COIN and MSTR equities rallied sharply.",
+          "confidence": "high",
+          "sources": [
+            "https://www.washingtonpost.com/technology/2024/11/16/bitcoin-price-trump-doge-investors/",
+            "https://fortune.com/crypto/2024/11/12/crypto-trump-rally-bitcoin-soars-past-87000-all-time-high/"
+          ]
+        },
+        {
+          "date": "2025-03-02",
+          "date_range": "2025-03-02 to 2025-03-03",
+          "trigger": "Trump Truth Social post naming BTC, ETH, XRP, SOL, ADA for a US 'Crypto Strategic Reserve'.",
+          "description": "Trump Truth Social post naming XRP, SOL, ADA (then adding BTC, ETH) for a US 'Crypto Strategic Reserve'. Surprise endorsement of specific named coins triggered a weekend pump strongest in the smaller named alts (ADA +60-69% intraday) and more muted in BTC. Posts sparked a ~$300B crypto market-cap rally.",
+          "price_impacts": [
+            {
+              "asset": "ADA",
+              "pct_change": "+60% to +69%",
+              "window": "weekend Mar 2-3 (intraday peak)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "XRP",
+              "pct_change": "+30% to +33%",
+              "window": "weekend Mar 2-3",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "+20% to +26%",
+              "window": "weekend Mar 2-3",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+8% to +12%",
+              "window": "weekend Mar 2-3",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "XRP",
+            "SOL",
+            "ADA"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "layer-1",
+            "payments"
+          ],
+          "volume_or_flow_change": "Sharp thin-weekend volume spike; gains in named alts largely round-tripped within days as detail (no new buying) disappointed.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/policy/2025/03/02/trump-to-establish-u-s-crypto-reserve",
+            "https://www.axios.com/2025/03/02/trump-crypto-reserve-xrp-ada-sol",
+            "https://www.crypto-reporter.com/news/trump-unveils-u-s-crypto-reserve-sending-xrp-sol-and-ada-soaring-91549/"
+          ]
+        },
+        {
+          "date": "2025-03-06",
+          "date_range": "2025-03-06 to 2025-03-07",
+          "trigger": "Trump signs EO establishing the US Strategic Bitcoin Reserve.",
+          "description": "Trump signs EO establishing the US Strategic Bitcoin Reserve. 'Sell the news': reserve funded with already-seized BTC, no new open-market purchases promised, so BTC fell several percent and the Mar 2 reserve-naming alts gave back most gains.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-5% to -6%",
+              "window": "Mar 6 intraday high (~$91k) to Mar 7 (~$86k)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "XRP",
+            "SOL",
+            "ADA"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "store-of-value"
+          ],
+          "volume_or_flow_change": "Reserve-naming alts (XRP, SOL, ADA) gave back most of the Mar 2 weekend gains as 'no new buying' disappointed the market.",
+          "confidence": "medium",
+          "sources": [
+            "https://www.whitehouse.gov/fact-sheets/2025/03/fact-sheet-president-donald-j-trump-establishes-the-strategic-bitcoin-reserve-and-u-s-digital-asset-stockpile/",
+            "https://en.wikipedia.org/wiki/U.S._Strategic_Bitcoin_Reserve"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idiosyncratic-regulatory-derisk",
+      "name": "Idiosyncratic regulatory de-risking of a named coin",
+      "mechanism": "A regulatory overhang specific to one asset is lifted or expected to lift — a hostile regulator departs, a lawsuit settles, an asset is endorsed, or an accounting penalty is removed. Because the overhang was priced as a structural discount, its removal causes a sharp, asset-specific re-rating that decouples from the broad market. The losers are shorts and those who avoided the asset precisely because of the regulatory risk; the winners are holders who bet the overhang would lift. XRP (Ripple/SEC) is the canonical case.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named coin",
+        "closely-related peers"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "news/rumor of regulator departure or settlement",
+        "litigation docket dates",
+        "options skew normalizing for the named asset",
+        "the asset's discount-to-peers narrowing",
+        "social-volume spike on the specific ticker"
+      ],
+      "backtest_features": [
+        "regulator_departure_event_flag",
+        "litigation_milestone_date",
+        "coin_idiosyncratic_return_vs_btc",
+        "single_asset_social_volume_zscore",
+        "single_asset_open_interest_change",
+        "accounting_rule_change_flag"
+      ],
+      "typical_lag": "immediate (hours)",
+      "typical_duration": "days to weeks; can mark a durable regime change for that asset",
+      "typical_magnitude_pct": "+20% to +30%+ on the named coin in 24-72h, often with low BTC correlation",
+      "recurrence": "episodic per asset; XRP repeatedly re-rated on Ripple-SEC milestones",
+      "historical_instances": [
+        {
+          "date": "2024-11-21",
+          "date_range": "2024-11-21 to 2024-11-24",
+          "trigger": "Gary Gensler announces SEC resignation (effective Jan 20, 2025).",
+          "description": "Gary Gensler announces his SEC resignation (effective Jan 20, 2025). Markets read it as the end of the Ripple-SEC overhang; XRP spiked ~25% in 24h to a 3-year high (~$1.43) in a highly idiosyncratic move vs BTC.",
+          "price_impacts": [
+            {
+              "asset": "XRP",
+              "pct_change": "+25%",
+              "window": "24h around Nov 21-22 (3-year high ~$1.43)",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+2% to +3%",
+              "window": "Nov 21 (retook $90k+)",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "XRP",
+            "BTC"
+          ],
+          "affected_sectors": [
+            "payments",
+            "securities-overhang names"
+          ],
+          "volume_or_flow_change": "XRP volume and open interest spiked to multi-year highs; the move was highly idiosyncratic vs BTC.",
+          "confidence": "high",
+          "sources": [
+            "https://cryptonews.com/news/ripple-xrp-price-gary-gensler-sec-resignation/",
+            "https://finance.yahoo.com/news/xrp-soars-25-3-high-082121447.html",
+            "https://thecryptobasic.com/2024/11/22/xrp-surges-past-1-40-for-the-first-time-since-2021-as-gensler-confirms-his-resignation/"
+          ]
+        },
+        {
+          "date": "2025-01-23",
+          "date_range": "2025-01-23 to 2025-01-27",
+          "trigger": "SEC issues SAB 122, rescinding SAB 121.",
+          "description": "SEC issues SAB 122, rescinding SAB 121. Removes the balance-sheet liability rule that blocked banks from offering crypto custody — a structural de-risk for institutional custody, though little immediate spot move as it was part of an expected post-inauguration package.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "flat-to-modestly-positive",
+              "window": "Jan 23-27 (BTC near $103-105k post-inauguration highs)",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "custody",
+            "bank-crypto-infrastructure",
+            "exchanges"
+          ],
+          "volume_or_flow_change": "Structural positive for bank custody adoption (BNY, etc.); little immediate spot price move.",
+          "confidence": "medium",
+          "sources": [
+            "https://kpmg.com/us/en/frv/reference-library/2025/sec-rescinds-sab-121.html",
+            "https://www.ropesgray.com/en/insights/alerts/2025/01/updated-sec-staff-accounting-bulletin-rescinds-sab-121-crypto-accounting-guidance"
+          ]
+        },
+        {
+          "date": "2024-12-15",
+          "date_range": "2024-12 to 2025-01",
+          "trigger": "FASB ASU 2023-08 fair-value crypto accounting takes effect.",
+          "description": "FASB ASU 2023-08 fair-value crypto accounting takes effect (fiscal years beginning after Dec 15, 2024). Removes the impairment-only 'down-only' accounting drag for corporate BTC holders like MicroStrategy, enabling the corporate bitcoin-treasury strategy to scale.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "structural-bullish (no clean single-day move)",
+              "window": "diffuse over Q4 2024",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "corporate-treasury-holders",
+            "crypto-equities"
+          ],
+          "volume_or_flow_change": "Enabled corporate bitcoin-treasury accumulation (MSTR through 2024-2025); supportive of persistent corporate BTC demand.",
+          "confidence": "low",
+          "sources": [
+            "https://cryptorank.io/insights/research/genius-and-clarity-acts-crypto-regulation-adoption"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legislative-framework-sector-rerate",
+      "name": "Legislative framework passage (stablecoin / market-structure)",
+      "mechanism": "Passage (or near-passage) of a sweeping crypto law clarifies which assets fall under SEC vs CFTC and legitimizes a sub-sector (stablecoins, settlement layers). The re-rating concentrates in the sector the law touches: stablecoin/payments infrastructure and the chains that host most stablecoin/tokenization activity (Ethereum) benefit far more than Bitcoin, which is already 'regulatorily clean.' Those on the other side are skeptics who doubted Congress could pass crypto law and were underweight ETH/alts; the winners rotate into the freshly-legitimized sector.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "sector-specific (ETH, stablecoin infra, DeFi)",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection",
+        "supply-restriction"
+      ],
+      "leading_signals": [
+        "congressional calendar / committee markup dates",
+        "whip counts and procedural-vote outcomes",
+        "ETH/BTC ratio turning up",
+        "stablecoin-issuer and DeFi token relative strength",
+        "ETH ETF inflow acceleration"
+      ],
+      "backtest_features": [
+        "legislative_vote_event_date",
+        "bill_passage_chamber_flag",
+        "eth_btc_ratio_change",
+        "sector_relative_return_vs_btc",
+        "stablecoin_supply_growth",
+        "eth_etf_net_inflow_usd"
+      ],
+      "typical_lag": "days (often building over the legislative-debate week)",
+      "typical_duration": "1-4 weeks of sector outperformance; can extend if law actually signed",
+      "typical_magnitude_pct": "Sector/ETH +20% to +30% while BTC roughly flat to +5%",
+      "recurrence": "per major bill (FIT21, GENIUS, CLARITY); recurs as the legislative pipeline advances",
+      "historical_instances": [
+        {
+          "date": "2026-05-14",
+          "date_range": "2026-05-12 to 2026-05-18",
+          "trigger": "Senate Banking Committee advances the Digital Asset Market Clarity (CLARITY/DAMA) Act in a 15-9 bipartisan vote.",
+          "description": "Senate Banking Committee advances the CLARITY Act 15-9 (Dems Gallego and Alsobrooks crossing over), the most significant market-structure milestone since FIT21; it heads to reconciliation with the Senate Ag 'Digital Commodity Intermediaries Act' and the House bill. The landmark vote produced NO bullish reaction — BTC fell -5.79% and ETH -8.81% over the window as the broad May-2026 downtrend dominated. The clearest example of the 2025-2026 'policy-fatigue' regime: even a genuine bipartisan legislative breakthrough is priced as noise against the prevailing regime.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-5.79%",
+              "window": "May 12-18 2026 (fell despite the bullish milestone; regime dominated)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-8.81%",
+              "window": "May 12-18 2026",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "market-structure",
+            "smart-contract-platforms",
+            "DeFi",
+            "stablecoins"
+          ],
+          "volume_or_flow_change": "No positive flow response; market in a broad downtrend.",
+          "confidence": "high",
+          "sources": [
+            "https://www.banking.senate.gov/newsroom/majority/chairman-scott-senate-banking-committee-advance-clarity-act-in-historic-bipartisan-vote",
+            "https://www.cnbc.com/2026/05/14/clarity-act-congress-crypto-senate.html",
+            "https://www.coindesk.com/policy/2026/05/14/live-senate-banking-committee-holds-key-hearing-to-advance-clarity-act"
+          ]
+        },
+        {
+          "date": "2026-04-10",
+          "date_range": "2026-04-10 (comments due 2026-06-09)",
+          "trigger": "Treasury FinCEN + OFAC issue a joint proposed rule implementing the GENIUS Act's AML/sanctions requirements for stablecoin issuers.",
+          "description": "FinCEN and OFAC issue a joint proposed rule (Federal Register 2026-06963) implementing the GENIUS Act: permitted payment stablecoin issuers (PPSIs) are treated as financial institutions under the Bank Secrecy Act and must run risk-based AML and sanctions-compliance programs (with transaction-blocking). Reserve/capital/liquidity rules are tasked to the OCC, Fed, FDIC and NCUA. A GENIUS-implementation rulemaking that formalizes stablecoin oversight but produced no isolable spot move (BTC +2.96% over the window is noise).",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+2.96%",
+              "window": "Apr 8-14 2026 (noise; no isolable move)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "USDT",
+            "USDC",
+            "BTC"
+          ],
+          "affected_sectors": [
+            "stablecoins",
+            "payments",
+            "compliance"
+          ],
+          "volume_or_flow_change": "Structural compliance burden for stablecoin issuers; no immediate price/flow event.",
+          "confidence": "high",
+          "sources": [
+            "https://www.federalregister.gov/documents/2026/04/10/2026-06963/permitted-payment-stablecoin-issuer-anti-money-launderingcountering-the-financing-of-terrorism",
+            "https://home.treasury.gov/news/press-releases/sb0435",
+            "https://www.hklaw.com/en/insights/publications/2026/04/fincen-and-ofac-propose-aml-sanctions-rules-for-stablecoin-issuers"
+          ]
+        },
+        {
+          "date": "2025-07-14",
+          "date_range": "2025-07-14 to 2025-07-22",
+          "trigger": "US House 'Crypto Week'; CLARITY + GENIUS Acts; Trump signs GENIUS Act July 18.",
+          "description": "US House 'Crypto Week' debates and passes the CLARITY (market structure) and GENIUS (stablecoin) Acts; Trump signs GENIUS into law July 18, 2025. ETH re-rated +25.16% (intra-window run-up +30.35%) as the dominant stablecoin/settlement chain while BTC stayed flat (+0.64%).",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+25.16%",
+              "window": "Jul 14 ($2,974) to Jul 22 ($3,722); intra-window run-up +30.35%",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+0.64%",
+              "window": "Jul 14 ($119,145) to Jul 22 ($119,905)",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "ETH",
+            "BTC"
+          ],
+          "affected_sectors": [
+            "smart-contract-platforms",
+            "stablecoins",
+            "DeFi",
+            "payments"
+          ],
+          "volume_or_flow_change": "Spot ETH ETF inflows accelerated sharply during this window; ETH/BTC ratio broke out as capital rotated into the stablecoin-settlement narrative.",
+          "confidence": "high",
+          "sources": [
+            "https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-signs-genius-act-into-law/",
+            "https://en.wikipedia.org/wiki/GENIUS_Act"
+          ]
+        },
+        {
+          "date": "2025-06-17",
+          "date_range": "2025-06-17 to 2025-06-19",
+          "trigger": "US Senate passes the GENIUS Act (first federal payment-stablecoin framework).",
+          "description": "US Senate passes the GENIUS Act, the first federal payment-stablecoin framework. Reaction muted on the vote itself — BTC drifted slightly down (~-2%) holding ~$104-107k pending the Fed; the larger price leg came on the July House passage + signing.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-2.06%",
+              "window": "Jun 17 ($106,842) to Jun 19 ($104,639)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "~flat to mildly negative",
+              "window": "Jun 17-19",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "stablecoins",
+            "payments"
+          ],
+          "volume_or_flow_change": "Positive sentiment for stablecoin issuers/exchanges; price reaction deferred to the House passage + presidential signature in July.",
+          "confidence": "medium",
+          "sources": [
+            "https://www.trmlabs.com/resources/blog/genius-act-passes-senate-paving-the-way-for-landmark-us-crypto-legislation",
+            "https://www.lw.com/en/insights/the-genius-act-of-2025-stablecoin-legislation-adopted-in-the-us"
+          ]
+        },
+        {
+          "date": "2024-06-30",
+          "date_range": "2024-06-30 to 2025-03-31",
+          "trigger": "EU MiCA stablecoin rules apply; non-compliant stablecoin (USDT) delistings follow.",
+          "description": "EU MiCA stablecoin (EMT/ART) rules apply Jun 30 2024; CASP rules Dec 30 2024. Drove non-compliant stablecoin (USDT) delistings across EU venues into Q1 2025 — a supply/liquidity-restriction and market-share reallocation toward USDC/EURC, not a token price pump.",
+          "price_impacts": [
+            {
+              "asset": "USDT",
+              "pct_change": "EU venue volume sharply down",
+              "window": "Q4 2024 to Q2 2025 (USDT trading on EU venues)",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "USDC",
+              "pct_change": "EU venue volume/share up",
+              "window": "Q4 2024 to Q2 2025",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "USDT",
+            "USDC",
+            "EURC"
+          ],
+          "affected_sectors": [
+            "stablecoins"
+          ],
+          "volume_or_flow_change": "USDT/EUR order-book depth collapsed on EU exchanges; USDC/EURC depth expanded as MiCA-authorized issuers gained share.",
+          "confidence": "low",
+          "sources": [
+            "https://www.scorechain.com/blog/stablecoin-regulation-in-the-eu-what-mica-means-for-the-market",
+            "https://vaultody.com/blog/296-what-mica-means-for-tether-usdt-delistings-custody-and-the-future-of-stablecoins-in-the-eea"
+          ]
+        },
+        {
+          "date": "2024-05-22",
+          "date_range": "2024-05-20 to 2024-05-23",
+          "trigger": "US House passes FIT21 market-structure bill.",
+          "description": "US House passes FIT21 (Financial Innovation and Technology for the 21st Century Act), the first major crypto market-structure bill, with bipartisan support. Sentiment-positive for the regulatory-clarity narrative; coincided with ETH ETF approval optimism the next day, making a clean standalone price move hard to isolate.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+20% to +30% week-of (driven mainly by ETH-ETF approval anticipation, not FIT21)",
+              "window": "May 20-23",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "ETH",
+            "BTC"
+          ],
+          "affected_sectors": [
+            "smart-contract-platforms",
+            "regulatory-clarity-names"
+          ],
+          "volume_or_flow_change": "Hard to isolate from the concurrent ETH ETF approval catalyst; FIT21 itself produced no clean standalone price move.",
+          "confidence": "low",
+          "sources": [
+            "https://www.mayerbrown.com/en/insights/publications/2024/05/sec-approves-listings-of-spot-ether-etfs-waiting-is-the-hardest-part",
+            "https://www.dechert.com/knowledge/onpoint/2024/5/a-good-fit-for-crypto--the-house-passes-fit21.html",
+            "https://www.thomsonreuters.com/en-us/posts/government/crypto-regulation-fit-21/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "government-reserve-accumulation",
+      "name": "Sovereign / state strategic-reserve accumulation",
+      "mechanism": "A government (federal or US state) signals or executes strategic Bitcoin accumulation. Announcements and enabling bills are sentiment events; actual purchases create real demand. The structural bull case is large, sustained sovereign buying that withdraws float (a sovereign-scale analog of the corporate-treasury flywheel — dry-powder plus supply-restriction). In practice 2025-2026 per-event price impact is negligible: authorized/executed amounts are tiny versus market depth (Texas' first buy was ~$5M), purchases are telegraphed, and bills face long odds. The 'other side' is skeptics doubting follow-through; the structural winners are holders if sovereign demand ever scales.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "BTC",
+        "crypto-equities (MSTR, miners) sympathetically",
+        "store-of-value narrative"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "supply-restriction",
+        "sentiment-shock"
+      ],
+      "leading_signals": [
+        "state/federal strategic-reserve bill introductions and committee markups",
+        "state-treasurer investment mandates / appropriations",
+        "actual on-chain state or Treasury BTC purchases (size vs daily volume)",
+        "count of jurisdictions with enacted reserve authority",
+        "authorized annual purchase size vs market depth"
+      ],
+      "backtest_features": [
+        "reserve_bill_event_flag",
+        "reserve_bill_stage (introduced/committee/signed)",
+        "authorized_purchase_btc_per_year",
+        "actual_purchase_usd",
+        "purchase_usd_vs_30d_adv",
+        "sovereign_holder_jurisdiction_count",
+        "mandatory_lockup_years"
+      ],
+      "typical_lag": "immediate but typically negligible on the headline",
+      "typical_duration": "per-event minutes-to-hours; structural over years only if buying actually scales",
+      "typical_magnitude_pct": "per-event not isolable (<~3%, lost in market noise); structurally bullish only with sustained large sovereign buying",
+      "recurrence": "rising 2025-2026 — federal SBR EO (Mar 2025), Texas (enacted + first buy), Arizona & New Hampshire (enabling laws, no buys), ARMA federal bill",
+      "historical_instances": [
+        {
+          "date": "2025-06-22",
+          "date_range": "2025-06-22",
+          "trigger": "Texas Gov. Greg Abbott signs SB 21 creating the Texas Strategic Bitcoin Reserve.",
+          "description": "Texas Gov. Abbott signs SB 21 (Senate 25-5 in Mar 2025, House 101-42 in May 2025) creating the first US state strategic Bitcoin reserve; the reserve may buy crypto with a >=$500B 24-month average market cap (BTC-only at the time). No isolable price reaction — BTC drifted within mid-2025 chop.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+2.24%",
+              "window": "Jun 20-26 2025 (no isolable move, within noise)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "store-of-value",
+            "policy"
+          ],
+          "volume_or_flow_change": "Symbolic/structural; no measurable flow event (purchases came months later).",
+          "confidence": "medium",
+          "sources": [
+            "https://www.hunton.com/blockchain-legal-resource/texas-establishes-strategic-bitcoin-reserve",
+            "https://texasstandard.org/stories/texas-invests-crypto-bitcoin-sb-21-senate-bill/",
+            "https://legiscan.com/TX/text/SB21/id/3152029"
+          ]
+        },
+        {
+          "date": "2025-11-28",
+          "date_range": "2025-11 (late November 2025)",
+          "trigger": "Texas executes a ~$5M Bitcoin purchase — first US state to buy BTC with state funds.",
+          "description": "Texas executes a ~$5M BTC purchase under SB 21, becoming the first US state to actually hold Bitcoin with state funds. The amount is immaterial versus market depth; BTC's ~+6% over the surrounding window was a recovery bounce off the November 2025 drawdown low, not Texas-driven. Symbolic milestone for the sovereign-adoption narrative.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+5.98%",
+              "window": "Nov 24-Dec 2 2025 (market recovery bounce, NOT Texas-driven; $5M immaterial)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "store-of-value",
+            "policy"
+          ],
+          "volume_or_flow_change": "~$5M actual purchase — negligible vs ~$20-40B BTC daily spot volume.",
+          "confidence": "medium",
+          "sources": [
+            "https://blockchain.bakermckenzie.com/2025/12/16/texas-becomes-first-state-to-make-bitcoin-reserve-purchase/",
+            "https://www.governing.com/finance/texas-becomes-first-state-to-buy-bitcoin",
+            "https://en.wikipedia.org/wiki/Texas_Strategic_Bitcoin_Reserve"
+          ]
+        },
+        {
+          "date": "2026-05-21",
+          "date_range": "2026-05-21",
+          "trigger": "Reps. Nick Begich (R-AK) & Jared Golden (D-ME) introduce the American Reserve Modernization Act (ARMA).",
+          "description": "Bipartisan ARMA introduced — a revised BITCOIN Act that would authorize the US Treasury to buy up to 200,000 BTC/year for 5 years (1,000,000 BTC goal) with a 20-year mandatory hold. No bullish reaction: BTC fell ~2% over the window amid a broader May-2026 downtrend, a textbook policy-fatigue non-event.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-1.71%",
+              "window": "May 19-26 2026 (no positive reaction; market in downtrend)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "store-of-value",
+            "policy"
+          ],
+          "volume_or_flow_change": "Bill introduction only — no flow; long legislative odds.",
+          "confidence": "high",
+          "sources": [
+            "https://begich.house.gov/media/press-releases/congressman-nick-begich-leads-legislation-establish-strategic-bitcoin-reserve",
+            "https://news.bitcoin.com/arma-bill-strategic-bitcoin-reserve-20-year-hold-2026/",
+            "https://decrypt.co/368662/proposed-arma-bill-aims-enshrine-strategic-bitcoin-reserve-law"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regulated-access-expansion",
+      "name": "Regulated domestic access / new-product expansion",
+      "mechanism": "A regulator clears a new onshore product or venue (perpetual futures, leverage, new derivatives, prediction-market preemption) that widens domestic access, market depth, and legitimacy. The effect is structural — onshoring volume and bringing global-style products under US oversight — not a clean spot catalyst on the approval date. The 'other side' is offshore venues losing US share. For backtesting, the tradeable read-through is in domestic derivatives open interest, onshore-vs-offshore funding, and the listed exchange's (COIN) equity, more than in spot.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "domestic derivatives volume/OI",
+        "COIN equity",
+        "basis/funding structure",
+        "prediction-market-linked plays"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "dry-powder-injection"
+      ],
+      "leading_signals": [
+        "DCM self-certification filings (CFTC non-objection windows)",
+        "CFTC/SEC product listing approvals",
+        "appellate preemption rulings on event contracts",
+        "onshore vs offshore perp funding/OI divergence"
+      ],
+      "backtest_features": [
+        "product_launch_event_flag",
+        "self_certification_to_effective_lag_days",
+        "domestic_derivatives_oi_change",
+        "onshore_offshore_funding_spread",
+        "coin_equity_event_return"
+      ],
+      "typical_lag": "structural — builds over weeks-to-months, not a date-stamped spot move",
+      "typical_duration": "persistent (market-structure change)",
+      "typical_magnitude_pct": "no clean spot move on the event; structural depth/liquidity gain",
+      "recurrence": "ongoing as new products/venues are approved",
+      "historical_instances": [
+        {
+          "date": "2025-07-21",
+          "date_range": "2025-06-26 (self-cert) to 2025-07-21 (live)",
+          "trigger": "Coinbase launches the first CFTC-regulated crypto perpetual futures for US traders.",
+          "description": "Coinbase Financial Markets goes live with CFTC-regulated nano BTC and ETH perpetual futures (5-year-dated, up to 10x leverage) — the first onshore US retail perps, after self-certifying Jun 26 with no CFTC objection. Market-structure milestone (90% of global crypto derivatives volume is perps) with no isolable BTC reaction (-0.94% over the window); ETH's +6.91% same week is attributable to the concurrent House 'Crypto Week'/GENIUS catalyst, not the perps launch.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-0.94%",
+              "window": "Jul 18-24 2025 (no isolable move)",
+              "direction": "flat",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "+6.91%",
+              "window": "Jul 18-24 2025 (driven by concurrent Crypto Week, NOT the perps launch)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "derivatives",
+            "exchanges"
+          ],
+          "volume_or_flow_change": "Onshores perpetual-futures volume that previously routed to offshore venues (Binance, Bybit, Hyperliquid); structural depth gain for US-regulated derivatives.",
+          "confidence": "high",
+          "sources": [
+            "https://www.coinbase.com/blog/perpetual-futures-have-arrived-in-the-us",
+            "https://www.theblock.co/post/363796/coinbase-launches-perpetual-futures",
+            "https://www.pillsburylaw.com/en/news-and-insights/cftc-perpetual-futures-btc-eth-crypto-derivatives.html"
+          ]
+        },
+        {
+          "date": "2026-05-19",
+          "date_range": "2026-05-19 (Kalshi joins 2026-05-29)",
+          "trigger": "CFTC sues the State of Minnesota to block its prediction-market felony ban (federal preemption).",
+          "description": "CFTC files its 6th suit in 7 weeks against a state, suing Minnesota in federal court to block a law (signed by Gov. Walz, effective Aug 1 2026) criminalizing prediction/event-contract operation; the CFTC argues event contracts are 'swaps' under the CEA, preempting state gambling law for CFTC-registered DCMs. Prediction-market jurisdiction event with negligible direct crypto-spot impact (BTC -2.11% over the window is unrelated market drift) — relevant chiefly to Kalshi/Polymarket-linked and prediction-market-as-indicator strategies.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-2.11%",
+              "window": "May 17-23 2026 (unrelated market drift; negligible direct impact)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "prediction-markets",
+            "jurisdiction"
+          ],
+          "volume_or_flow_change": "Protects CFTC-registered prediction-market access (Kalshi, Polymarket); no direct crypto-spot flow.",
+          "confidence": "low",
+          "sources": [
+            "https://www.cftc.gov/PressRoom/PressReleases/9233-26",
+            "https://www.sheppard.com/insights/blogs/cftc-sues-minnesota-bringing-prediction-markets-preemption-fight-to-six-states",
+            "https://minnlawyer.com/2026/05/20/cftc-sues-block-minnesota-ban-prediction-markets/"
+          ]
+        }
+      ]
+    }
+  ]
+}

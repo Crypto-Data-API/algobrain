@@ -1,0 +1,625 @@
+{
+  "category_id": "spot-etf-flows",
+  "category_name": "Spot ETF Launches & Daily Flows",
+  "summary": "US spot crypto ETFs route traditional brokerage money into BTC and ETH; the daily net flow figure (published by Farside/SoSoValue) has become a primary demand gauge. Three repeatable patterns emerge: ETF launch days tend to \"sell the news\" (a known catalyst is bought into and dumped on the event), sustained multi-week net inflows are reliably bullish while sustained net outflows are bearish (ETFs are a marginal-buyer proxy), and one-time structural outflows from a converted high-fee legacy vehicle (GBTC, ETHE) create mechanical sell pressure independent of sentiment. Flow direction leads or coincides with spot price, making it a strong, computable backtest feature.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "etf-launch-sell-the-news",
+      "name": "Spot ETF launch day / approval 'sell the news'",
+      "mechanism": "A spot ETF launch is a heavily pre-announced, date-certain catalyst. Traders accumulate spot in the weeks before, pricing in the expected demand. On the actual launch the catalyst is realized, anticipatory longs and arbitrage/event traders take profit, and day-one ETF inflows (while large in headline trading volume) are partly offset by churn and by sellers of the legacy converted trust. Net result is a short-lived local top followed by a 1-2 week drawdown. The buyers who 'lose' are the late-cycle longs who bought the rumor at the highs and the retail crowd chasing the launch headline; the sellers are early accumulators and arbitrageurs unwinding the now-closed discount.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin (BTC or ETH)",
+        "large-cap alts",
+        "BTC"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "sell-pressure"
+      ],
+      "typical_lag": "immediate to hours; full drawdown plays out over days",
+      "typical_duration": "1-2 weeks to the local trough, then recovery",
+      "typical_magnitude_pct": "-7% to -20% on the launching asset over 1-2 weeks",
+      "recurrence": "fires once per major product launch (BTC Jan 2024, ETH Jul 2024, HK Apr 2024); a recurring template for every future first-of-kind spot ETF launch (e.g. SOL, XRP)",
+      "leading_signals": [
+        "asset rallies 20-60% in the weeks INTO the approval/launch date",
+        "perpetual funding rates elevated / positive heading into launch",
+        "options skew bid for calls into the event date",
+        "legacy trust (GBTC/ETHE) discount to NAV has collapsed toward zero pre-launch (arbitrage primed to unwind)"
+      ],
+      "backtest_features": [
+        "days_to_etf_launch (event dummy)",
+        "trailing_30d_return_into_event",
+        "funding_rate_zscore_at_event",
+        "launch_day_etf_total_volume_usd",
+        "legacy_trust_discount_to_nav_pct",
+        "post_event_return_t+1_to_t+14"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-03-25",
+          "date_range": "Mar-Jun 2026 (filing-anticipation rally)",
+          "trigger": "Zcash (ZEC) +180% as the Grayscale Zcash Trust files to convert to a spot ETF and Multicoin discloses a large position.",
+          "description": "ZEC surged ~+180% over 3 months (Mar 4 $222 -> Jun 4 $624; intra-window peak ~$670, +240% from the low) on the Grayscale Zcash Trust's S-3 filing to convert into a spot ETF plus Multicoin Capital disclosing a large position (+40% in 24h to ~$607). The pump came DESPITE a severe fundamental negative: the entire Electric Coin Co. team (CEO Josh Swihart) resigned in Jan 2026 over a governance battle. A clean case of ETF-conversion-anticipation + institutional accumulation overriding a leaderless-dev situation - the filing/flow bid dominates idiosyncratic fundamentals. (ETF not yet approved; this is the anticipation phase, with sell-the-news risk on the eventual decision.)",
+          "price_impacts": [
+            {
+              "asset": "ZEC",
+              "pct_change": "+180.68%",
+              "window": "Mar 4-Jun 4 2026 ($222 -> $624; peak ~$670, +240% from low)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "ZEC"
+          ],
+          "affected_sectors": [
+            "privacy-coins",
+            "etf-anticipation"
+          ],
+          "volume_or_flow_change": "Grayscale Zcash Trust S-3 ETF-conversion filing; Multicoin large position; ECC team walkout (Jan 2026) ignored by the bid.",
+          "confidence": "high",
+          "sources": [
+            "https://www.sec.gov/Archives/edgar/data/1720265/000119312526140340/zec_s-3_amendment_2.htm",
+            "https://dailycoin.com/multicoin-capital-zcash-zec-privacy-coin-dev-team-gone"
+          ]
+        },
+        {
+          "date": "2025-10-28",
+          "date_range": "2025-10-28 launch; -57% over the next 4 months",
+          "trigger": "US spot Solana ETFs launch (3rd crypto after BTC/ETH) - SOL then crashes ~57% over 4 months.",
+          "description": "US spot SOL ETFs began trading Oct 28 2025 (Bitwise, Grayscale, VanEck, Fidelity, Franklin, 21Shares, Canary) - the 3rd asset after BTC/ETH to get a US spot ETF. Sell-the-news on the launch (SOL -3.5% over Oct 26-31), then a brutal -57.5% over the next 4 months ($198->$84 by late Feb 2026, low $77.7, -61% max DD) as memecoin volume collapsed and TVL fell 56%. Emphatic confirmation (like ETH's ETF) that a spot-ETF launch is NOT a price floor - structural access ≠ demand when the use-case fades. Cumulative SOL-ETF inflows passed ~$1.12B but couldn't offset the fundamental deterioration.",
+          "price_impacts": [
+            {
+              "asset": "SOL",
+              "pct_change": "-3.47%",
+              "window": "Oct 26-31 2025 (launch sell-the-news)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SOL",
+              "pct_change": "-57.53%",
+              "window": "Oct 28 2025 - Feb 28 2026 ($198->$84; low $77.7)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "SOL"
+          ],
+          "affected_sectors": [
+            "layer-1",
+            "smart-contract-platforms"
+          ],
+          "volume_or_flow_change": "Cumulative SOL-ETF inflows ~$1.12B; SOL still crashed ~57% (memecoin volume collapse, TVL -56%).",
+          "confidence": "high",
+          "sources": [
+            "https://www.helius.dev/blog/solana-etfs",
+            "https://finance.yahoo.com/news/sec-approves-21shares-solana-spot-174532940.html"
+          ]
+        },
+        {
+          "date": "2024-07-23",
+          "date_range": "2024-07-23 to 2024-08-05",
+          "trigger": "First US spot Ethereum ETFs (ETHA, FETH, ETHE conversion, etc.) begin trading; >$1B day-one volume.",
+          "description": "ETH sold off after launch as ETHE (Grayscale) outflows dominated early net flows and anticipatory longs exited. The decline was sharply compounded by the broad Aug 5 2024 yen carry-trade unwind crash, so the multi-week figure is not purely ETF-attributable.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "-3.86%",
+              "window": "2024-07-22 close $3,449 to 2024-07-23 close $3,316 (launch-day)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-35.4%",
+              "window": "2024-07-22 close $3,449 to 2024-08-05 close $2,227 (incl. Aug 5 carry-trade crash)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "layer-1",
+            "defi"
+          ],
+          "volume_or_flow_change": ">$1B launch-day ETF volume; ETHE conversion outflows dominated early net flows",
+          "confidence": "high",
+          "sources": [
+            "https://blockchain.bakermckenzie.com/2024/07/23/ethereum-etfs-to-start-trading-today-in-the-united-states/",
+            "https://www.statmuse.com/money/ask/eth-price-on-july-2024"
+          ]
+        },
+        {
+          "date": "2024-04-30",
+          "trigger": "Asia's first spot BTC and ETH ETFs (China AMC, Bosera HashKey, Harvest) debut on HKEX with in-kind creation.",
+          "description": "Hugely hyped but volumes disappointed badly (~$300-350M total AUM, <$14M first-week inflows vs billions in the US). No meaningful price catalyst; demonstrates that an ETF launch with weak real flows produces no sustained move.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "~0% to slightly down",
+              "window": "2024-04-30 launch week",
+              "direction": "flat",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "volume_or_flow_change": "~$284M BTC ETF AUM + ~$66M ETH ETF AUM; <$14M first-week inflows — far below US",
+          "confidence": "medium",
+          "sources": [
+            "https://thedefiant.io/news/markets/crypto-markets-bleed-on-underwhelming-hong-kong-etf-flows",
+            "https://cointelegraph.com/news/hong-kong-spot-bitcoin-ether-etfs-struggle-gain-traction"
+          ]
+        },
+        {
+          "date": "2024-01-11",
+          "date_range": "2024-01-11 to 2024-01-23",
+          "trigger": "First 10-11 US spot Bitcoin ETFs (IBIT, FBTC, GBTC conversion, ARKB, etc.) begin trading; SEC approved Jan 10. ~$4.6B first-day trading volume.",
+          "description": "Classic sell-the-news: BTC had rallied into the approval, peaked ~$46-49k, then sold off as the catalyst realized and GBTC outflows began. Local top marked on the event.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-14.06%",
+              "window": "2024-01-11 close $46,369 to 2024-01-23 close $39,846 (close-to-close)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-20%",
+              "window": "2024-01-11 peak ~$49k to 2024-01-23 low ~$39.5k (peak-to-trough)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "layer-1"
+          ],
+          "volume_or_flow_change": "~$4.6B day-one ETF trading volume; GBTC outflows began immediately (~$5.9B left GBTC by end of Jan)",
+          "confidence": "high",
+          "sources": [
+            "https://phemex.com/academy/bitcoin-etf-approval-2024",
+            "https://cointelegraph.com/news/bitcoin-price-correction-grayscale-gbtc-etf-outflows",
+            "https://www.statmuse.com/money/ask/bitcoin-price-january-2024"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sustained-net-flow-regime",
+      "name": "Sustained daily net inflows (bullish) / net outflows (bearish)",
+      "mechanism": "Spot ETFs are a structural marginal buyer: every dollar of net inflow forces the authorized participant to buy spot BTC/ETH for creation, and every dollar of net outflow forces a redemption sale. Because ETF demand comes from RIAs, wealth platforms and 401k-adjacent money that does not trade intraday, multi-day/multi-week flow streaks are persistent and trend-reinforcing. Sustained inflows act as a dry-powder injection that lifts price; sustained outflows remove the marginal bid and amplify spot weakness. The losers in an outflow regime are leveraged longs who get liquidated as the structural bid vanishes; winners are those who read the flow tape early. Flow is reflexive — falling price triggers redemptions which push price lower.",
+      "directional_bias": "mixed",
+      "affected_scope": [
+        "BTC",
+        "ETH",
+        "large-cap alts",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "dry-powder-injection",
+        "sell-pressure",
+        "reflexive-deleveraging",
+        "forced-liquidation"
+      ],
+      "typical_lag": "same-day to 1-3 days (flow tends to lead/coincide with price)",
+      "typical_duration": "as long as the streak persists — days to several weeks",
+      "typical_magnitude_pct": "inflow streaks: +8% to +50% over the run; outflow streaks: -3% to -20% over the run",
+      "recurrence": "ongoing and continuous — flows are reported every trading day; multiple distinct streaks per year",
+      "leading_signals": [
+        "consecutive-day net flow streak (sign and length)",
+        "single-day flow magnitude crossing prior records (>$1B in / >$500M out)",
+        "IBIT (BTC) / ETHA (ETH) flow dominance — the bellwether funds",
+        "rolling 5-day cumulative flow zscore",
+        "flow divergence from price (flows turning while price flat = leading signal)"
+      ],
+      "backtest_features": [
+        "daily_net_etf_flow_usd",
+        "flow_streak_length_days (signed)",
+        "rolling_5d_cum_flow_usd",
+        "flow_zscore_60d",
+        "ibit_or_etha_share_of_flow",
+        "single_day_flow_vs_trailing_max (record-flag)",
+        "flow_to_price_correlation_20d"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-04-22",
+          "date_range": "2026-04-13 to 2026-04-22 (10-day streak)",
+          "trigger": "Spot ETH ETFs post a 10-day inflow streak (longest since the Jul-2024 launch) - a modest mechanical floor.",
+          "description": "US spot ETH ETFs logged 10 consecutive inflow days through Apr 22 2026, the longest since launch, but MODEST in size (~$50-65M/day total; ETHA $53.6M, FETH $40.6M on the final day) - a mechanical price floor absorbing sell pressure, not 'explosive demand'. ETH bounced +9.41% over the streak. The bid did not reverse the trend: ETH still fell ~40% YTD (to ~$1,811 by Jun 4 2026) with ~$401M of ETH-ETF outflows in May. Lesson: ETF inflow streaks are a floor, not a driver, in a risk-off regime. (Distinct from the Aug-2025 record, which was a $2.85B WEEKLY inflow / $1.02B single-day, not a single-day $2.85B.)",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+9.41%",
+              "window": "Apr 13-22 2026 ($2,192->$2,398, streak bounce)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "-39.63% YTD",
+              "window": "Jan 2-Jun 4 2026 ($3,000->$1,811); inflows did not stop the slide",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "smart-contract-platforms",
+            "large-cap"
+          ],
+          "volume_or_flow_change": "~$50-65M/day inflows (BlackRock ETHA/Fidelity FETH led); ~$401M ETH-ETF outflows in May 2026.",
+          "confidence": "high",
+          "sources": [
+            "https://finance.yahoo.com/markets/crypto/articles/ethereum-etfs-hit-10-day-102637975.html",
+            "https://www.panewslab.com/en/articles/019d7add-e2eb-77c8-a647-a37fe1720e4d"
+          ]
+        },
+        {
+          "date": "2026-04-14",
+          "date_range": "2026-04-14 to 2026-04-23 (8-day streak)",
+          "trigger": "US spot BTC ETFs post an 8-day, $2.1B net-inflow streak (longest since the Oct-2025 9-day run).",
+          "description": "An 8-day spot-BTC-ETF inflow streak totaling ~$2.1B (Apr 14-23 2026), part of April's $2.44B month (strongest of 2026, BlackRock ~70% of flows). Demand-supportive but modest: BTC rose +3.82% ($74.5k->$77.4k) — an inflow-driven bounce inside a broader 2026 downtrend, not an explosive move.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+3.82%",
+              "window": "Apr 14-24 2026 ($74,515 to $77,361)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "store-of-value"
+          ],
+          "volume_or_flow_change": "~$2.1B over 8 days; April total $2.44B net inflow.",
+          "confidence": "high",
+          "sources": [
+            "https://phemex.com/blogs/bitcoin-etfs-pulled-2-44-billion-april-2026",
+            "https://incrypted.com/en/april-inflows-into-spot-bitcoin-and-ethereum-etfs-exceeded-2-billion/"
+          ]
+        },
+        {
+          "date": "2025-11-18",
+          "date_range": "2025-11-10 to 2025-11-21",
+          "trigger": "Record IBIT single-day outflow of $523.2M (Nov 18); IBIT November outflows ~$2.34-2.7B (worst month ever) amid ~30% pullback from October highs.",
+          "description": "Largest sustained ETF outflow episode to date. Structural bid collapse compounded a -20%+ BTC drawdown. Measured directly on CoinGecko.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-19.62%",
+              "window": "2025-11-10 ($104,710) to 2025-11-21 ($84,164)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-22.89% drawdown",
+              "window": "2025-11-10 to 2025-11-21 intra-window (low $82,175)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "layer-1"
+          ],
+          "volume_or_flow_change": "IBIT record $523.2M one-day outflow Nov 18; ~$2.34-2.7B IBIT November outflows (record month)",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/11/19/blackrock-s-bitcoin-etf-ibit-posts-record-one-day-outflow-of-usd523-2-million",
+            "https://finance.yahoo.com/news/blackrock-bitcoin-etf-sheds-2-081140067.html"
+          ]
+        },
+        {
+          "date": "2025-10-06",
+          "date_range": "late-Sep to 2025-10-06 (9-day inflow streak)",
+          "trigger": "A 9-day US spot BTC ETF inflow streak carries BTC to its $126,210 all-time high (Oct 6 2025).",
+          "description": "A sustained 9-day spot-BTC-ETF net-inflow streak (the strongest run of 2025) drove BTC +12.4% over the window to its all-time high of $126,210 on 2025-10-06. Canonical 'sustained inflow regime = grind higher' instance; the cycle topped shortly after.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+12.41%",
+              "window": "Sep 28-Oct 8 2025 ($109.7k to $123.3k; high $126,080)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "store-of-value"
+          ],
+          "volume_or_flow_change": "9-day net-inflow streak (~$5.33B); BlackRock IBIT-led.",
+          "confidence": "high",
+          "sources": [
+            "https://finance.yahoo.com/markets/crypto/articles/spot-bitcoin-etfs-pull-1-153901598.html",
+            "https://carboncredits.com/bitcoin-breaks-records-passing-126k-the-bull-run-thats-redefining-digital-gold-and-climate-debate/"
+          ]
+        },
+        {
+          "date": "2025-08-11",
+          "date_range": "2025-08-04 to 2025-08-13",
+          "trigger": "Spot ETH ETFs cross $1B daily net inflow for the first time ever (Aug 11, ETHA $639.8M, FETH $277M).",
+          "description": "Record ETH ETF inflow day coincided with ETH ripping from ~$3,500 to ~$4,760. Best single example of inflow-driven momentum in ETH.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+36.2%",
+              "window": "2025-08-04 ($3,498) to 2025-08-13 ($4,764)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "layer-1",
+            "defi"
+          ],
+          "volume_or_flow_change": "First-ever >$1B single-day ETH ETF net inflow",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/08/12/u-s-spot-ether-etfs-hit-usd1b-daily-inflow-for-first-time",
+            "https://www.ainvest.com/news/ethereum-news-today-blackrock-etha-surpasses-10-billion-inflows-ethereum-hits-4-429-high-2508/"
+          ]
+        },
+        {
+          "date": "2025-07-11",
+          "date_range": "2025-07-01 to 2025-07-22",
+          "trigger": "Record ETH ETF inflow surge — ETHA largest daily inflow (>$300M), ~$700M weekly; July total $5.46B (+564% MoM).",
+          "description": "ETF inflows the dominant driver of ETH's ~50% July rally. Direct CoinGecko measurement.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "+49.62%",
+              "window": "2025-07-01 ($2,487) to 2025-07-22 ($3,722)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "ETH",
+              "pct_change": "+60.21% run-up",
+              "window": "2025-07-01 to 2025-07-22 intra-window",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "layer-1",
+            "defi"
+          ],
+          "volume_or_flow_change": "July ETH ETF net inflows $5.46B, +564% vs June",
+          "confidence": "high",
+          "sources": [
+            "https://www.coindesk.com/markets/2025/07/11/ethereum-etfs-see-inflow-surge-as-blackrocks-etha-draws-in-record-300m-in-a-day",
+            "https://en.cryptonomist.ch/2025/07/25/blackrock-eth-etf-surge-10-billion-reached-in-record-time/"
+          ]
+        },
+        {
+          "date": "2025-07-01",
+          "date_range": "2025-07-01 to 2025-07-14",
+          "trigger": "Heavy sustained spot BTC ETF inflows through early-mid July 2025.",
+          "description": "Inflow regime drove BTC to fresh highs above $120k. Measured directly on CoinGecko.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+12.09%",
+              "window": "2025-07-01 ($107,136) to 2025-07-14 ($120,085)",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "+16.46% run-up",
+              "window": "2025-07-01 to 2025-07-14 intra-window",
+              "direction": "up",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "confidence": "high",
+          "sources": [
+            "https://www.coinglass.com/etf/bitcoin"
+          ]
+        },
+        {
+          "date": "2025-02-25",
+          "date_range": "2025-02-24 to 2025-03-04",
+          "trigger": "Worst-ever spot BTC ETF outflow streak at the time — ~$1.14B single-day outflow Feb 25, multi-billion over the week (consecutive outflow sessions).",
+          "description": "Structural bid removed during macro risk-off; BTC slid from the high-$90k range to the high-$70k/low-$80k range. Confirms sustained outflows are bearish. (Note: original catalog had a Feb 24 2024 date typo and wrong start price; corrected to 2025 with verified prices.)",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-13.5%",
+              "window": "2025-02-24 close $96,984 to 2025-03-04 close $83,916",
+              "direction": "down",
+              "measured_by": "perplexity"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "~-19% peak-to-trough",
+              "window": "mid-Feb 2025 ~$97k peak (Feb 13) to late-Feb ~$78k low (Feb 28)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "layer-1"
+          ],
+          "volume_or_flow_change": "~$1.14B single-day outflow Feb 25 (record at the time); multi-billion weekly net outflow",
+          "confidence": "medium",
+          "sources": [
+            "https://www.investing.com/analysis/spot-bitcoin-etf-products-record-649m-in-net-outflows-largest-since-january-200680602",
+            "https://cryptorank.io/news/feed/570d2-spot-bitcoin-etf-inflows-february-2025-2"
+          ]
+        },
+        {
+          "date": "2024-11-07",
+          "date_range": "2024-11-05 to 2024-11-13",
+          "trigger": "Record single-day spot BTC ETF net inflow of $1.38B (IBIT $1.11B) amid the Trump election win; multi-week inflow streak.",
+          "description": "Post-election dry-powder surge. Record inflows coincided with BTC's breakout toward $90k. Strongest demonstration that record inflow days mark accelerating uptrends.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "+28%",
+              "window": "2024-11-05 (~$69,360) to 2024-11-13 ($90,584)",
+              "direction": "up",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "BTC",
+            "ETH",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "large-cap",
+            "layer-1"
+          ],
+          "volume_or_flow_change": "Record $1.38B single-day net inflow; IBIT $1.11B in one day",
+          "confidence": "high",
+          "sources": [
+            "https://beincrypto.com/spot-bitcoin-etfs-see-record-inflows/",
+            "https://www.statmuse.com/money/ask/bitcoin-price-day-by-day-november-2024"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legacy-trust-conversion-outflow",
+      "name": "Converted legacy trust structural outflow (GBTC / ETHE)",
+      "mechanism": "When a high-fee closed-end trust (GBTC at 1.5%, ETHE at 2.5%) converts to an open-ended ETF, two mechanical sell forces fire: (1) arbitrageurs who bought the trust at a deep discount to NAV finally redeem for the now-realizable arbitrage profit, and (2) holders rotate to the new low-fee ETFs (IBIT/ETHA at ~0.2%). Each redemption forces the trust to sell underlying spot BTC/ETH on the market. This is supply hitting the market that is independent of sentiment — it is a fee-and-arbitrage-driven, mechanical, front-loaded outflow that decays over weeks as the discount-buyers are flushed out. The 'losers' are spot holders who eat the sell pressure; the trust holders cashing out are realizing a long-awaited arbitrage.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the converted asset (BTC then ETH)",
+        "BTC"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-restriction",
+        "forced-liquidation"
+      ],
+      "typical_lag": "begins day 1 of conversion; heaviest in first 2-4 weeks",
+      "typical_duration": "front-loaded over ~6-10 weeks then decays to equilibrium",
+      "typical_magnitude_pct": "contributed -15% to -20% peak-to-trough on BTC over the Jan-Feb 2024 episode; effect fades as outflows slow",
+      "recurrence": "once per converted trust (GBTC Jan 2024, ETHE Jul 2024); a template for any future closed-end-to-ETF conversion",
+      "leading_signals": [
+        "trust discount-to-NAV collapsing toward 0% pre-conversion (signals imminent arbitrage unwind)",
+        "trust fee far above competing ETFs (fee gap drives rotation)",
+        "daily trust outflow magnitude and its decay rate (slowing = exhaustion / bottoming signal)",
+        "trust AUM as % of total category AUM"
+      ],
+      "backtest_features": [
+        "gbtc_or_ethe_daily_outflow_usd",
+        "trust_discount_to_nav_pct_pre_conversion",
+        "trust_fee_minus_min_competitor_fee_bps",
+        "cumulative_trust_outflow_vs_initial_aum_pct",
+        "outflow_decay_slope_5d (exhaustion signal)",
+        "trust_outflow_share_of_total_category_netflow"
+      ],
+      "historical_instances": [
+        {
+          "date": "2024-01-16",
+          "date_range": "2024-01-11 to 2024-03-22",
+          "trigger": "GBTC converts to spot ETF; ~$5.9B left GBTC in January alone, heavy daily forced selling.",
+          "description": "The dominant bearish force in the post-launch correction. Arbitrageurs who bought GBTC at deep discounts redeemed en masse; BTC fell from ~$49k to ~$39.5k. Cumulative GBTC outflows reached ~$14.5B by March 2024 before slowing toward equilibrium by April.",
+          "price_impacts": [
+            {
+              "asset": "BTC",
+              "pct_change": "-20%",
+              "window": "2024-01-11 ~$49,000 to 2024-01-23 ~$39,500 (peak-to-trough)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BTC"
+          ],
+          "affected_sectors": [
+            "large-cap"
+          ],
+          "volume_or_flow_change": "~$5.9B GBTC outflows in Jan 2024; ~$14.5B cumulative by March 2024; outflows slowed sharply by April 2024",
+          "confidence": "high",
+          "sources": [
+            "https://cointelegraph.com/news/bitcoin-price-correction-grayscale-gbtc-etf-outflows",
+            "https://www.coinglass.com/etf/bitcoin",
+            "https://www.coindesk.com/markets/2024/03/22/bitcoin-slips-to-64k-as-large-grayscale-gbtc-outflows-continue"
+          ]
+        },
+        {
+          "date": "2024-07-23",
+          "date_range": "2024-07-23 to 2024-08-05",
+          "trigger": "ETHE (Grayscale Ethereum Trust, 2.5% fee) converts to spot ETF; heavy outflows dominate early net ETH ETF flows.",
+          "description": "ETHE redemptions were the main reason aggregate ETH ETF net flows ran negative for weeks despite strong inflows into ETHA/FETH, capping ETH's launch. The deeper decline into Aug 5 was amplified by the broad yen carry-trade unwind crash, not by ETHE outflows alone.",
+          "price_impacts": [
+            {
+              "asset": "ETH",
+              "pct_change": "-35.4%",
+              "window": "2024-07-22 close $3,449 to 2024-08-05 close $2,227 (incl. Aug 5 carry-trade crash)",
+              "direction": "down",
+              "measured_by": "perplexity"
+            }
+          ],
+          "affected_coins": [
+            "ETH"
+          ],
+          "affected_sectors": [
+            "layer-1",
+            "defi"
+          ],
+          "volume_or_flow_change": "ETHE outflows dominated net ETH ETF flows for the first several weeks post-launch",
+          "confidence": "medium",
+          "sources": [
+            "https://www.morningstar.com/funds/whats-next-spot-ether-etfs",
+            "https://www.statmuse.com/money/ask/eth-price-on-july-2024"
+          ]
+        }
+      ]
+    }
+  ]
+}

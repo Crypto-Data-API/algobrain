@@ -1,0 +1,149 @@
+{
+  "collapse-filter": false,
+  "search": "-tag:#meta",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": false,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:wiki/alfred",
+      "color": {
+        "a": 1,
+        "rgb": 4193776
+      }
+    },
+    {
+      "query": "file:fred",
+      "color": {
+        "a": 1,
+        "rgb": 4193776
+      }
+    },
+    {
+      "query": "path:wiki/markets/stocks",
+      "color": {
+        "a": 1,
+        "rgb": 52224
+      }
+    },
+    {
+      "query": "path:wiki/markets/crypto",
+      "color": {
+        "a": 1,
+        "rgb": 6804839
+      }
+    },
+    {
+      "query": "path:wiki/markets",
+      "color": {
+        "a": 1,
+        "rgb": 52224
+      }
+    },
+    {
+      "query": "path:wiki/strategies",
+      "color": {
+        "a": 1,
+        "rgb": 16744448
+      }
+    },
+    {
+      "query": "path:wiki/concepts",
+      "color": {
+        "a": 1,
+        "rgb": 255
+      }
+    },
+    {
+      "query": "path:wiki/history",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    },
+    {
+      "query": "path:wiki/entities/people",
+      "color": {
+        "a": 1,
+        "rgb": 813411
+      }
+    },
+    {
+      "query": "path:wiki/entities/traders",
+      "color": {
+        "a": 1,
+        "rgb": 813411
+      }
+    },
+    {
+      "query": "path:wiki/entities/companies",
+      "color": {
+        "a": 1,
+        "rgb": 16776960
+      }
+    },
+    {
+      "query": "path:wiki/entities",
+      "color": {
+        "a": 1,
+        "rgb": 16776960
+      }
+    },
+    {
+      "query": "path:wiki/ai-trading",
+      "color": {
+        "a": 1,
+        "rgb": 10040319
+      }
+    },
+    {
+      "query": "path:wiki/artificial-intelligence",
+      "color": {
+        "a": 1,
+        "rgb": 8388736
+      }
+    },
+    {
+      "query": "path:wiki/sources",
+      "color": {
+        "a": 1,
+        "rgb": 13003884
+      }
+    },
+    {
+      "query": "path:wiki/news",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    },
+    {
+      "query": "path:wiki/education",
+      "color": {
+        "a": 1,
+        "rgb": 13003884
+      }
+    },
+    {
+      "query": "path:wiki/comparisons",
+      "color": {
+        "a": 1,
+        "rgb": 12938348
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": -2.8,
+  "nodeSizeMultiplier": 2.1671875,
+  "lineSizeMultiplier": 0.431770833333333,
+  "collapse-forces": false,
+  "centerStrength": 0.415,
+  "repelStrength": 20,
+  "linkStrength": 0.9,
+  "linkDistance": 148,
+  "scale": 0.021528718442430053,
+  "close": false
+}

@@ -1,0 +1,648 @@
+{
+  "category_id": "memecoin-mania",
+  "category_name": "Memecoin Mania & Risk-On Tops",
+  "summary": "Memecoins are coins with no cash flows or utility whose price is driven entirely by attention, celebrity endorsement, and reflexive speculation. Three repeatable patterns recur: (1) celebrity/influencer pumps where a single tweet or event spikes an existing coin, (2) brand-new \"launch-day\" tokens (politician coins, pump.fun coins) that go parabolic in hours then collapse 80-98% as insiders dump, and (3) the broader \"memecoin season\" where froth across the whole sector marks a late-cycle, risk-on top that precedes a market-wide drawdown. For a trader, peak memecoin euphoria has historically been a contrarian sell signal for the entire crypto market, while individual launch tokens are almost always a loss for late buyers.",
+  "directional_bias": "mixed",
+  "archetypes": [
+    {
+      "id": "celebrity-influencer-pump",
+      "name": "Celebrity / Influencer Pump on an Existing Memecoin",
+      "mechanism": "A high-follower individual (Elon Musk, Mark Cuban) tweets or publicly endorses an existing memecoin (DOGE, SHIB). Retail FOMO buyers chase the spike on near-zero float depth, driving a fast parabolic move. The other side is early holders and the influencer's own implicit positioning who distribute into the retail bid. Late buyers consistently lose because the catalyst is a one-off attention shock with no fundamental follow-through; once the news is priced and the tweet stops, liquidity vanishes and price mean-reverts. The 'sell-the-event' dynamic is acute when the catalyst is a scheduled, hyped event (e.g. the SNL appearance) — the run-up front-runs the event and the event itself triggers profit-taking.",
+      "directional_bias": "bullish",
+      "affected_scope": [
+        "the named coin",
+        "DOGE",
+        "SHIB",
+        "large-cap alts"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "dry-powder-injection"
+      ],
+      "typical_lag": "immediate (minutes to hours after tweet/event)",
+      "typical_duration": "hours to a few days; scheduled-event pumps fade within 24h of the event",
+      "typical_magnitude_pct": "+20% to +600% on the named coin into the catalyst; -20% to -40% sell-the-news reversal within 24-48h",
+      "recurrence": "very high during bull markets — Musk alone moved DOGE on a dozen+ occasions across Jan-May 2021 and again in 2024-2026",
+      "leading_signals": [
+        "spike in social mentions / Google Trends for the coin name",
+        "scheduled celebrity media appearance announced in advance",
+        "run-up in price + volume in days before a hyped event",
+        "influencer follower count vs coin float (thin float amplifies)",
+        "Robinhood/exchange app outages from order volume"
+      ],
+      "backtest_features": [
+        "twitter_mention_zscore_24h",
+        "google_trends_spike",
+        "scheduled_event_flag (days_to_event)",
+        "1h_volume_zscore",
+        "price_runup_pct_7d_pre_event",
+        "social_volume_to_marketcap_ratio",
+        "sell_news_flag (event_day_return < runup_return)"
+      ],
+      "historical_instances": [
+        {
+          "date": "2021-01-28",
+          "date_range": "2021-01-28 to 2021-02-08",
+          "trigger": "Elon Musk tweets 'Doge' and 'Dogecoin is the people's crypto' amid the WallStreetBets/SatoshiStreetBets retail frenzy; GameStop-style social pump",
+          "description": "DOGE spiked ~140% intraday on Jan 28 2021 (to ~$0.0176) and ran more than +600% over the late-January window on Musk tweets and Reddit coordination, reaching its first record high in early February 2021. Multi-day run-up exceeded +800% by the time brokers restricted trading.",
+          "price_impacts": [
+            {
+              "asset": "DOGE",
+              "pct_change": "+140%",
+              "window": "intraday Jan 28",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "DOGE",
+              "pct_change": "+600%",
+              "window": "late-Jan window",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "memecoins"
+          ],
+          "volume_or_flow_change": "Reddit/SatoshiStreetBets coordinated buying; exchange order surges",
+          "confidence": "medium",
+          "sources": [
+            "https://markets.businessinsider.com/currencies/news/dogecoin-price-crypto-reddit-traders-satoshistreetbets-trigger-copycat-wsb-rally-2021-1-1030015774",
+            "https://www.cnbc.com/2021/02/08/tweets-from-elon-musk-and-celebrities-send-dogecoin-to-a-record-high.html"
+          ]
+        },
+        {
+          "date": "2021-04-16",
+          "trigger": "Elon Musk tweet ('Doge Barking at the Moon') plus broad retail mania; DOGE hits record high",
+          "description": "DOGE surged roughly +200% in one day on Apr 16 2021, attributed to Musk rather than WallStreetBets, to a new record high.",
+          "price_impacts": [
+            {
+              "asset": "DOGE",
+              "pct_change": "+200%",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "memecoins"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://fortune.com/2021/04/16/dogecoin-price-elon-musk-wallstreetbets-reddit-news-record-high-crypto/"
+          ]
+        },
+        {
+          "date": "2021-05-08",
+          "date_range": "2021-05-04 to 2021-05-09",
+          "trigger": "Elon Musk hosts Saturday Night Live; called himself 'the Dogefather'. Classic scheduled-event sell-the-news.",
+          "description": "DOGE ran up to its all-time high ~$0.7316 (CoinGecko) ahead of SNL, then fell ~30% during/around the broadcast (from roughly $0.70-0.74 to ~$0.50) as holders sold into the event; Robinhood was overwhelmed by DOGE volume.",
+          "price_impacts": [
+            {
+              "asset": "DOGE",
+              "pct_change": "-30%",
+              "window": "during SNL broadcast (~hours)",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "memecoins"
+          ],
+          "volume_or_flow_change": "Robinhood briefly overwhelmed by DOGE trading volume during broadcast",
+          "confidence": "high",
+          "sources": [
+            "https://www.cnbc.com/2021/05/08/dogecoin-price-plummets-as-elon-musk-hosts-saturday-night-live-.html",
+            "https://www.coingecko.com/en/coins/dogecoin"
+          ]
+        },
+        {
+          "date": "2021-04-28",
+          "trigger": "Tweets from Elon Musk and Mark Cuban endorsing DOGE",
+          "description": "DOGE spiked again on Musk + Cuban tweets in late April 2021 amid the broader retail mania. Exact magnitude not corroborated; figure is an estimate.",
+          "price_impacts": [
+            {
+              "asset": "DOGE",
+              "pct_change": "+30%",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "memecoins"
+          ],
+          "confidence": "low",
+          "sources": [
+            "https://www.cnbc.com/2021/04/28/dogecoin-price-surges-after-tweets-from-elon-musk-and-mark-cuban.html"
+          ]
+        },
+        {
+          "date": "2021-10-28",
+          "date_range": "2021-10-01 to 2021-10-28",
+          "trigger": "Retail mania / 'Dogecoin-killer' narrative + Robinhood listing speculation drives SHIB to its all-time high",
+          "description": "SHIB rallied several hundred percent through October 2021 to an all-time high of ~$0.00008845 on Oct 28 2021, briefly topping a ~$34B market cap.",
+          "price_impacts": [
+            {
+              "asset": "SHIB",
+              "pct_change": "+700% to +800%",
+              "window": "30d",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "SHIB",
+            "DOGE"
+          ],
+          "affected_sectors": [
+            "memecoins"
+          ],
+          "confidence": "medium",
+          "sources": [
+            "https://fortune.com/2021/10/27/shiba-inu-coin-shib-crypto-dogecoin-killer-robinhood/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "launch-day-pump-and-dump",
+      "name": "Launch-Day Parabolic Token (Politician / Pump.fun / Celebrity Coin)",
+      "mechanism": "A brand-new token launches with almost all supply held by insiders/team and a thin public float. A loud endorsement or hype event (a politician's own announcement, a celebrity, or a viral pump.fun coin) drives a vertical price move within minutes to hours as retail piles in. Insiders and sniper bots that bought pre-announcement (sometimes seconds before) sell into the retail bid. Late buyers almost always lose because the float-unlock and insider distribution overwhelms demand once attention peaks. This is a near-pure wealth transfer from late retail to insiders/snipers; the LIBRA case showed ~86% of participants lost money. Directional bias is bullish only for the first minutes/hours and sharply bearish thereafter.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "the named coin"
+      ],
+      "analog_mechanisms": [
+        "sell-pressure",
+        "supply-restriction",
+        "forced-liquidation",
+        "sentiment-shock"
+      ],
+      "typical_lag": "the pump is immediate (minutes); the dump follows within hours to days",
+      "typical_duration": "peak within 24h; 80-98% collapse over days to weeks",
+      "typical_magnitude_pct": "+1000% to +10000% in the first hours, then -80% to -98% from peak within weeks",
+      "recurrence": "extremely high during froth windows — pump.fun launched thousands daily in late 2024 / early 2025; politician coins clustered Jan-Feb 2025",
+      "leading_signals": [
+        "insider/sniper wallets buying seconds-to-minutes before public announcement",
+        "pct of supply held by team/top wallets",
+        "no liquidity lock / no vesting",
+        "concentrated holder distribution (top-10 wallet share)",
+        "explosive first-hour volume with vertical price",
+        "official figure directly endorsing (legitimacy halo)"
+      ],
+      "backtest_features": [
+        "pct_supply_top10_wallets",
+        "insider_buy_before_announce_flag",
+        "liquidity_locked_flag",
+        "first_hour_return_pct",
+        "first_hour_volume_to_marketcap",
+        "holder_count_growth_rate",
+        "time_since_launch_hours",
+        "drawdown_from_ath_pct"
+      ],
+      "historical_instances": [
+        {
+          "date": "2025-01-17",
+          "date_range": "2025-01-17 to 2025-02-11",
+          "trigger": "Donald Trump launches the OFFICIAL TRUMP memecoin days before his inauguration",
+          "description": "TRUMP launched Jan 17 2025 and surged to a peak of ~$74.27 on Jan 19 (~$14.5B market cap) within ~2 days, then fell to ~$15.30 by Feb 11 — roughly -79% from peak in weeks. (CoinGecko measured -52.4% over Jun-Dec 2025 from a ~$11.18 base, reflecting continued bleed.)",
+          "price_impacts": [
+            {
+              "asset": "TRUMP",
+              "pct_change": "-79%",
+              "window": "peak (Jan 19) to Feb 11",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "TRUMP",
+              "pct_change": "-52.4%",
+              "window": "2025-06-04 to 2025-12-15",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "TRUMP",
+            "MELANIA"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "politifi",
+            "solana-ecosystem"
+          ],
+          "volume_or_flow_change": "massive inflows into Solana memecoins; pump.fun daily revenue hit ~$15M/day record early Jan 2025",
+          "confidence": "high",
+          "sources": [
+            "https://www.cbsnews.com/news/trump-coin-dinner-with-president-meme-coin-price/",
+            "https://www.coingecko.com/en/coins/official-trump"
+          ]
+        },
+        {
+          "date": "2025-01-19",
+          "date_range": "2025-01-19 to 2025-02-11",
+          "trigger": "Melania Trump launches the MELANIA memecoin one day after TRUMP",
+          "description": "MELANIA peaked ~$13.73 shortly after launch (~$2.1B market cap), then dropped to ~$1.44 by Feb 11 — roughly -90% within weeks (the $133.73 figure cited elsewhere appears spurious). 24 wallets bought ~$2.6M of MELANIA ~2.5 minutes before the public announcement, netting tens of millions — clear insider pre-positioning.",
+          "price_impacts": [
+            {
+              "asset": "MELANIA",
+              "pct_change": "-90%",
+              "window": "peak to Feb 11",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "MELANIA",
+            "TRUMP"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "politifi"
+          ],
+          "volume_or_flow_change": "insider wallets bought ~$2.6M ~2.5 min before announcement, multi-million-dollar payday",
+          "confidence": "high",
+          "sources": [
+            "https://www.financemagnates.com/trending/melania-trump-meme-coin-a-98-crash-and-the-pump-and-dump-party/",
+            "https://fortune.com/2025/05/07/melania-trump-memecoin-anonymous-traders-100-million-payday/"
+          ]
+        },
+        {
+          "date": "2025-02-14",
+          "date_range": "2025-02-14 to 2025-02-18",
+          "trigger": "Argentine President Javier Milei promotes the LIBRA memecoin on X",
+          "description": "LIBRA surged to ~$5.00-$5.20 (~$4.5-4.6B market cap) within ~40 minutes, then crashed ~89% within ~3 hours and >96% from peak shortly after as insiders dumped liquidity. Insiders extracted roughly $87-107M; ~86% of investors lost money. Triggered a federal fraud investigation of Milei.",
+          "price_impacts": [
+            {
+              "asset": "LIBRA",
+              "pct_change": "-89%",
+              "window": "~3 hours from peak",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "LIBRA",
+              "pct_change": "-96%",
+              "window": "peak to days after",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "LIBRA"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "politifi",
+            "solana-ecosystem"
+          ],
+          "volume_or_flow_change": "insiders withdrew liquidity; ~$87-107M extracted; large aggregate retail losses",
+          "confidence": "high",
+          "sources": [
+            "https://www.trmlabs.com/resources/blog/the-libra-affair-tracking-the-memecoin-that-launched-a-scandal-in-argentina",
+            "https://en.wikipedia.org/wiki/$Libra_cryptocurrency_scandal"
+          ]
+        },
+        {
+          "date": "2024-03-14",
+          "date_range": "2024-03-14 to 2024-03-17",
+          "trigger": "BOME (Book of Meme) launches on Solana during peak memecoin season; Binance listing within days",
+          "description": "BOME launched Mar 14 2024 and reached an all-time high ~$0.02805 on Mar 16 (~$1.9B market cap) — a roughly 56,000x move from a fractional launch price per Trust Wallet — listed on Binance within days. Archetypal launchpad parabola followed by a sharp reversal.",
+          "price_impacts": [
+            {
+              "asset": "BOME",
+              "pct_change": "+10000%+",
+              "window": "~2-3d from launch",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "BOME",
+            "SLERF",
+            "WIF",
+            "BONK"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "solana-ecosystem"
+          ],
+          "volume_or_flow_change": "Solana memecoin sector market cap surged past ~$5.8B in Q1 2024",
+          "confidence": "medium",
+          "sources": [
+            "https://trustwallet.com/blog/meme-coins/bome-meme-coin-explained",
+            "https://www.gate.com/learn/articles/what-is-bome-all-you-need-to-know-about-bome/2822"
+          ]
+        },
+        {
+          "date": "2025-01-02",
+          "trigger": "Fartcoin (largest pump.fun-launched token) hits a new all-time high during peak launchpad froth",
+          "description": "Fartcoin jumped sharply (reported ~+44% in a single day) to a new ATH in early January 2025; emblematic of pump.fun-driven memecoin fever where launchpad memecoins peaked at a high share of total memecoin market cap in Jan 2025. The exact single-day percent is not independently corroborated.",
+          "price_impacts": [
+            {
+              "asset": "FARTCOIN",
+              "pct_change": "+44%",
+              "window": "24h",
+              "direction": "up",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "FARTCOIN"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "solana-ecosystem",
+            "ai-agent-tokens"
+          ],
+          "volume_or_flow_change": "pump.fun ~$15M/day record revenue early Jan 2025; launchpad memecoins a large share of memecoin mcap",
+          "confidence": "low",
+          "sources": [
+            "https://www.tradingview.com/news/newsbtc:e403dedef094b:0-solana-based-pump-fun-records-15-million-daily-revenue-as-memecoin-mania-continues/",
+            "https://www.coingecko.com/research/publications/state-of-memecoins-2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memecoin-season-top-signal",
+      "name": "Memecoin Season as a Late-Cycle Risk-On Top Signal",
+      "mechanism": "When speculative capital rotates down the risk curve into the lowest-quality assets (memecoins), it signals that the marginal buyer is exhausted and dry powder is being spent on pure gambling rather than on BTC/large-caps. Peak memecoin froth — record launchpad revenue, parabolic joke coins, politician coins, celebrity coins — has repeatedly coincided with or immediately preceded the cycle top in the broader crypto market. The other side: smart money / early holders distribute large-cap and memecoin positions into euphoric retail. Once froth peaks, the whole sector deflates 75-80% and capital consolidates back into BTC, dragging alts down harder than BTC. Direction is bearish for the forward 1-6 month return of the broad market once the froth-peak signal fires.",
+      "directional_bias": "bearish",
+      "affected_scope": [
+        "BTC",
+        "large-cap alts",
+        "the whole memecoin sector",
+        "total-market-cap"
+      ],
+      "analog_mechanisms": [
+        "sentiment-shock",
+        "reflexive-deleveraging",
+        "dry-powder-injection",
+        "sell-pressure"
+      ],
+      "typical_lag": "froth peak leads the broad top by days to a few weeks",
+      "typical_duration": "sector drawdown plays out over months; -75% to -80% peak-to-trough in memecoin market cap",
+      "typical_magnitude_pct": "memecoin sector market cap -75% to -80% from cycle peak; broad market correction of -20% to -50%+",
+      "recurrence": "once per major cycle (2021, late-2024/early-2025); froth peaks recurred each bull phase",
+      "leading_signals": [
+        "memecoin sector market cap at record + as a rising share of total crypto mcap",
+        "launchpad (pump.fun) daily revenue at record highs",
+        "politician/celebrity coins launching (peak novelty, then novelty exhaustion)",
+        "joke coins (Fartcoin) at ATHs",
+        "memecoin share of total mcap above a high threshold",
+        "negative funding flips / BTC dominance starting to rise"
+      ],
+      "backtest_features": [
+        "memecoin_sector_marketcap_zscore",
+        "memecoin_share_of_total_crypto_mcap",
+        "pumpfun_daily_revenue_zscore",
+        "new_token_launches_per_day",
+        "politician_celebrity_coin_count_30d",
+        "btc_dominance_rate_of_change",
+        "altseason_index",
+        "memecoin_mcap_drawdown_from_ath"
+      ],
+      "historical_instances": [
+        {
+          "date": "2026-01-05",
+          "date_range": "early Jan 2026 (spike then intra-month round-trip)",
+          "trigger": "Memecoin sector spikes +$8B to ~$47B in days (early Jan 2026), then fully round-trips within the month.",
+          "description": "Memecoins rebounded from 2025 lows, adding >$8B to reach ~$47B market cap by Jan 5 2026 (+~30% in days; sector volume ~$9.2B, up ~87% YoY in 2026). The spikes were violent - intra-month MAX RUNUPS: PEPE +77%, BONK +76%, FLOKI +55%, SHIB +40%, DOGE +31% (DOGE briefly broke a year-long downtrend). But the froth fully ROUND-TRIPPED within January: every name closed the month NEGATIVE (DOGE -12.9%, FLOKI -13.5%, BONK -5.9%, SHIB -3.7%, PEPE ~flat) with -33% to -47% max drawdowns. A textbook risk-on memecoin spike-and-fade and an early-2026 froth top that preceded the broad 2025-26 bear. OFFICIAL TRUMP remains a political-beta play that pops on Trump-crypto-positive news. DATA-INTEGRITY NOTE: a separately-claimed 'DOGE +8% June-2026 alt-season rally' is FALSE - DOGE was -12.5% (Jun 1-4 2026) in the risk-off crash; June 2026 was Bitcoin Season, not alt-season.",
+          "price_impacts": [
+            {
+              "asset": "PEPE",
+              "pct_change": "+77.45% (then round-tripped to ~flat on the month)",
+              "window": "intra-Jan-2026 max runup",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "BONK",
+              "pct_change": "+75.65% (month close -5.9%)",
+              "window": "intra-Jan-2026 max runup",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "FLOKI",
+              "pct_change": "+55% (month close -13.5%)",
+              "window": "intra-Jan-2026 max runup",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "DOGE",
+              "pct_change": "+30.58% (broke a year-long downtrend; month close -12.9%)",
+              "window": "intra-Jan-2026 max runup",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "SHIB",
+              "pct_change": "+40.45% (month close -3.7%)",
+              "window": "intra-Jan-2026 max runup",
+              "direction": "up",
+              "measured_by": "coingecko"
+            },
+            {
+              "asset": "DOGE",
+              "pct_change": "-12.46% (DEBUNKS the claimed June-2026 '+8% alt-season')",
+              "window": "Jun 1-4 2026",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "DOGE",
+            "PEPE",
+            "BONK",
+            "SHIB",
+            "FLOKI",
+            "TRUMP"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "solana-memecoins"
+          ],
+          "volume_or_flow_change": "Sector +$8B to ~$47B (Jan 5); volume ~$9.2B (+87% YoY in 2026); PumpSwap record $1.2B day.",
+          "confidence": "high",
+          "sources": [
+            "https://finance.yahoo.com/news/memecoins-stage-stunning-2026-comeback-100215297.html",
+            "https://www.coindesk.com/markets/2026/01/06/solana-memecoin-frenzy-sends-pumpswap-trading-volume-to-record-usd1-2-billion",
+            "https://beincrypto.com/meme-coin-market-surges-2026/"
+          ]
+        },
+        {
+          "date": "2025-11-01",
+          "date_range": "2025-11-01 to 2025-12-15",
+          "trigger": "Post-froth deflation: DOGE (sector bellwether) continues bleeding as risk-off persists and capital consolidates into BTC",
+          "description": "Real CoinGecko measurement: DOGE -31.0% from 2025-11-01 to 2025-12-15 (start $0.186, end $0.129), with a -32.0% intra-window max drawdown — illustrating the sustained sector deflation that follows a memecoin-froth top.",
+          "price_impacts": [
+            {
+              "asset": "DOGE",
+              "pct_change": "-31.0%",
+              "window": "2025-11-01 to 2025-12-15 (45d)",
+              "direction": "down",
+              "measured_by": "coingecko"
+            }
+          ],
+          "affected_coins": [
+            "DOGE",
+            "SHIB",
+            "PEPE"
+          ],
+          "affected_sectors": [
+            "memecoins"
+          ],
+          "volume_or_flow_change": "intra-window max drawdown -32.0%, max run-up +18.9%",
+          "confidence": "high",
+          "sources": [
+            "https://www.coingecko.com/en/coins/dogecoin"
+          ]
+        },
+        {
+          "date": "2025-01-19",
+          "date_range": "2025-01-19 to 2025-02-28",
+          "trigger": "TRUMP/MELANIA launch + record pump.fun revenue mark peak memecoin novelty; LIBRA Feb 14 confirms exhaustion",
+          "description": "Memecoin mania peaked mid-to-late January 2025 (TRUMP ~$14.5B mcap, record pump.fun ~$15M/day revenue). The LIBRA collapse Feb 14 is widely cited as the late-cycle exhaustion signal that suppressed memecoin risk appetite for months; the 2024-25 memecoin sector peaked near ~$120-150B (CoinGecko) then declined roughly 75%.",
+          "price_impacts": [
+            {
+              "asset": "memecoin-sector-mcap",
+              "pct_change": "-75%",
+              "window": "peak-to-trough",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "TRUMP",
+              "pct_change": "-79%",
+              "window": "Jan 19 peak to Feb 11",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "TRUMP",
+            "MELANIA",
+            "LIBRA",
+            "WIF",
+            "BONK",
+            "FARTCOIN",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "politifi",
+            "solana-ecosystem",
+            "large-cap-alts"
+          ],
+          "volume_or_flow_change": "launchpad memecoins rose to a large share of memecoin mcap into Jan 2025, then collapsed; pump.fun revenue rolled over",
+          "confidence": "medium",
+          "sources": [
+            "https://www.coindesk.com/business/2025/02/18/will-argentina-president-milei-s-crypto-fisco-be-a-deathblow-for-memecoin-craze",
+            "https://www.coingecko.com/research/publications/state-of-memecoins-2025"
+          ]
+        },
+        {
+          "date": "2024-03-31",
+          "date_range": "2024-03-14 to 2024-04-15",
+          "trigger": "Solana memecoin season peaks (WIF ATH ~Mar 31, BOME/SLERF launches) ahead of a Q2 2024 alt drawdown",
+          "description": "dogwifhat (WIF) hit an all-time high near $4.85 in late March 2024; the SOL memecoin sector reached ~$5.8B+. This Q1-2024 froth peak preceded a multi-month memecoin/alt cooldown into mid-2024. WIF ATH date and pct gain not independently corroborated here.",
+          "price_impacts": [
+            {
+              "asset": "WIF",
+              "pct_change": "+2000%+",
+              "window": "2024 to ATH",
+              "direction": "up",
+              "measured_by": "web"
+            },
+            {
+              "asset": "WIF",
+              "pct_change": "-60%",
+              "window": "ATH into mid-2024",
+              "direction": "down",
+              "measured_by": "estimate"
+            }
+          ],
+          "affected_coins": [
+            "WIF",
+            "BONK",
+            "BOME",
+            "SLERF",
+            "SOL"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "solana-ecosystem"
+          ],
+          "volume_or_flow_change": "SOL memecoin sector mcap >$5.8B at Q1-2024 peak",
+          "confidence": "low",
+          "sources": [
+            "https://www.coinbase.com/price/dogwifhat",
+            "https://crypto.news/solana-memecoin-sector-now-worth-6b-bonk-wif-investors-driving-sol-price-to-250/"
+          ]
+        },
+        {
+          "date": "2021-05-08",
+          "date_range": "2021-05-08 to 2021-07-20",
+          "trigger": "Memecoin froth peaks (DOGE SNL ATH May 8, SHIB launch hype) coinciding with the 2021 cycle's first major top; memecoin sector mcap peaked ~$88-90B",
+          "description": "The 2021 memecoin sector peaked around $88-90B (spring/summer 2021) then crashed ~78-80% below $20B. DOGE's ~$0.73 ATH and the SNL sell-the-news marked froth exhaustion just before BTC's mid-May 2021 ~53% crash (~$64k to ~$30k by late July).",
+          "price_impacts": [
+            {
+              "asset": "memecoin-sector-mcap",
+              "pct_change": "-78% to -80%",
+              "window": "peak-to-trough",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "DOGE",
+              "pct_change": "-87%",
+              "window": "ATH to later 2021",
+              "direction": "down",
+              "measured_by": "web"
+            },
+            {
+              "asset": "BTC",
+              "pct_change": "-53%",
+              "window": "mid-May to July 2021",
+              "direction": "down",
+              "measured_by": "web"
+            }
+          ],
+          "affected_coins": [
+            "DOGE",
+            "SHIB",
+            "BTC",
+            "ETH"
+          ],
+          "affected_sectors": [
+            "memecoins",
+            "large-cap-alts"
+          ],
+          "volume_or_flow_change": "memecoin sector mcap from ~$88-90B to under $20B",
+          "confidence": "medium",
+          "sources": [
+            "https://bdc.consulting/insights/MarketResearch/memecoins",
+            "https://www.cnbc.com/2021/05/08/dogecoin-price-plummets-as-elon-musk-hosts-saturday-night-live-.html"
+          ]
+        }
+      ]
+    }
+  ]
+}
