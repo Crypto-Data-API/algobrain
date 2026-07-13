@@ -17,7 +17,6 @@ Each book page includes key takeaways, who should read it, and how to apply its 
 
 ## Start Here
 
-- [[the-intelligent-investor]] -- Benjamin Graham's timeless value investing bible
 - [[market-wizards]] -- Jack Schwager's interviews with legendary traders
 - [[a-random-walk-down-wall-street]] -- Burton Malkiel's case for efficient markets and index investing
 - [[trading-in-the-zone]] -- Mark Douglas on mastering trading psychology
@@ -27,12 +26,7 @@ Each book page includes key takeaways, who should read it, and how to apply its 
 ## All Books (40 total)
 
 ### Foundational Investing
-- [[the-intelligent-investor]] -- Benjamin Graham (1949)
-- [[security-analysis]] -- Benjamin Graham & David Dodd (1934)
-- [[common-stocks-and-uncommon-profits]] -- Philip Fisher (1958)
-- [[one-up-on-wall-street]] -- Peter Lynch (1989)
 - [[a-random-walk-down-wall-street]] -- Burton Malkiel (1973)
-- [[how-to-make-money-in-stocks]] -- William O'Neil (2009)
 
 ### Trading Psychology & Behavioral Finance
 - [[trading-in-the-zone]] -- Mark Douglas (2000)

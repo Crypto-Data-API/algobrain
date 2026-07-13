@@ -29,7 +29,7 @@ Three pillars sit underneath this hub. [[books-overview|Books]] catalogs ~40 ess
 
 - Market wisdom & psychology: [[market-wizards]], [[reminiscences-of-a-stock-operator]], [[trading-in-the-zone]], [[the-black-swan]]
 - Quant & ML: [[advances-in-financial-ml]], [[machine-learning-for-asset-managers]], [[the-man-who-solved-the-market]], [[inside-the-black-box]]
-- Value & fundamentals: [[the-intelligent-investor]], [[security-analysis]], [[one-up-on-wall-street]], [[common-stocks-and-uncommon-profits]]
+- Value & fundamentals: the-intelligent-investor, security-analysis, one-up-on-wall-street, common-stocks-and-uncommon-profits
 - Microstructure & HFT: [[trading-and-exchanges]], [[flash-boys]], [[dark-pools]], [[algorithmic-and-high-frequency-trading]]
 
 ## All Education Pages
