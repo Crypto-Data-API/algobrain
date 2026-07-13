@@ -2,7 +2,7 @@
 title: "Funding By Hour"
 type: concept
 created: 2026-05-16
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, derivatives, market-microstructure, arbitrage]
 aliases: ["Funding Cycle", "Funding Schedule", "Intraday Funding"]
@@ -10,6 +10,7 @@ domain: [derivatives, market-microstructure]
 prerequisites: ["[[funding-rate]]", "[[perpetual-futures]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[funding-rate]]"
   - "[[funding-rate-arbitrage]]"
   - "[[crypto-trading-sessions]]"
@@ -78,6 +79,25 @@ The standard real-time monitoring stack:
 - **Custom alerts.** Quant desks build alerts on (a) funding crossing predefined thresholds, (b) cross-venue funding spread widening past N basis points, and (c) funding sign flips, which often coincide with regime changes.
 
 For most discretionary traders, the operational rule is simple: know what time the next stamp is in your home venue's UTC clock, and never hold a leveraged position across a stamp without checking the predicted rate.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

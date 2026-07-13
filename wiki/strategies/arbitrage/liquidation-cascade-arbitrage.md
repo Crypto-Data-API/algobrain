@@ -2,7 +2,7 @@
 title: "Liquidation Cascade Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [arbitrage, crypto, defi, algorithmic]
 aliases: ["Liquidation Bot", "Cascade Front-Run", "Keeper Arbitrage", "MEV Liquidations", "Liquidator Strategy"]
@@ -21,7 +21,7 @@ expected_sharpe: 2.0
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 50
 decay_evidence: "Liquidation bonuses unchanged since 2018-2020; competition extreme; ~$1B+ extracted across DeFi history."
-related: ["[[mev-strategies]]", "[[flash-loan-arbitrage]]", "[[funding-rate-arbitrage]]", "[[aave]]", "[[compound]]", "[[makerdao]]", "[[liquity]]", "[[gmx]]", "[[hyperliquid]]", "[[2022-05-terra-luna-depeg-arb]]", "[[counterparty-stress-arbitrage]]", "[[2006-09-amaranth-natural-gas-blowup]]", "[[fastest-profitable-trades]]"]
+related: ["[[mev-strategies]]", "[[flash-loan-arbitrage]]", "[[funding-rate-arbitrage]]", "[[aave]]", "[[compound]]", "[[makerdao]]", "[[liquity]]", "[[gmx]]", "[[hyperliquid]]", "[[2022-05-terra-luna-depeg-arb]]", "[[counterparty-stress-arbitrage]]", "[[2006-09-amaranth-natural-gas-blowup]]", "[[fastest-profitable-trades]]", "[[cryptodataapi]]"]
 ---
 
 # Liquidation Cascade Arbitrage
@@ -235,6 +235,27 @@ No fabricated returns are quoted: realized P&L is the bonus minus these costs mi
 - Aave / Compound / Liquity protocol documentation
 - Data inputs (oracles, position graphs, mempool, DEX depth): [[crypto-data-sources]]
 - Verified via Perplexity (sonar), 2026-06-10 — confirmed Black Thursday zero-bid total (~$8.32M ETH for 0 DAI), the ~$4-4.5M+ unbacked-DAI shortfall, the rejected compensation vote, the March 12, 2020 ETH drop ($194 → ~$111, -43%), and that HLP *lost* ~$4M in 24h on the March 12, 2025 whale liquidation. Citations: https://insights.glassnode.com/what-really-happened-to-makerdao/, https://thedefiant.io/news/defi/maker-votes-to-not-compensate-black-thursday-victims, https://www.tradingview.com/news/coinpedia:abc3617e7094b:0-makerdao-s-black-thursday-how-one-bot-got-8-32m-in-eth-for-free/
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

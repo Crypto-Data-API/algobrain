@@ -2,13 +2,13 @@
 title: "Whale Alert"
 type: source
 created: 2026-05-16
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [data-provider, crypto, bitcoin, ethereum, news]
 aliases: ["WhaleAlert", "Whale Alert Feed"]
 source_type: data
 source_url: "https://whale-alert.io"
-related: ["[[arkham-intelligence]]", "[[cryptoquant]]", "[[crypto-trading-sessions]]", "[[crypto-weekday-weekend-etf-era]]", "[[session-overlap-liquidity]]", "[[coinbase-prime]]", "[[crypto-data-sources]]"]
+related: ["[[arkham-intelligence]]", "[[cryptoquant]]", "[[crypto-trading-sessions]]", "[[crypto-weekday-weekend-etf-era]]", "[[session-overlap-liquidity]]", "[[coinbase-prime]]", "[[crypto-data-sources]]", "[[cryptodataapi]]"]
 ---
 
 Whale Alert is a real-time monitoring and alert service that tracks large on-chain transactions across major blockchains, including Bitcoin, Ethereum, and many ERC-20 tokens. It is widely watched by intraday traders as an informal early-warning system for inflows to and outflows from exchanges and custodians (Source: [[2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect]]).
@@ -60,6 +60,26 @@ The practical heuristic: Whale Alert is most useful as a confirmation/context to
 - **[[cryptoquant]]** — aggregated exchange-flow metrics (netflow, reserves)
 - **Nansen** — wallet labeling and smart-money tracking across EVM chains
 - **[[glassnode]]** — on-chain aggregates with deeper time series
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

@@ -2,11 +2,11 @@
 title: "Macro-Event Pump (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, quantitative, event-driven, market-regime, momentum, risk-management]
 aliases: ["Event Pump Basket", "FOMC Crypto Trade", "Macro Catalyst Basket", "Event-Driven Crypto Perp"]
-related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[crypto-macro-correlation-regime]]", "[[macro-events]]", "[[spot-etf-flows]]", "[[token-unlocks]]", "[[macro-relative-value]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[etf-and-institutional-flow]]", "[[breadth-and-momentum-divergence]]", "[[volatility-compression-breakout]]", "[[oi-confirmed-trend]]", "[[funding-rate-harvest]]", "[[support]]", "[[resistance]]", "[[atr-position-sizing]]", "[[when-to-retire-a-strategy]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[crypto-macro-correlation-regime]]", "[[macro-events]]", "[[spot-etf-flows]]", "[[token-unlocks]]", "[[macro-relative-value]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[etf-and-institutional-flow]]", "[[breadth-and-momentum-divergence]]", "[[volatility-compression-breakout]]", "[[oi-confirmed-trend]]", "[[funding-rate-harvest]]", "[[support]]", "[[resistance]]", "[[atr-position-sizing]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
 strategy_type: hybrid
 timeframe: intraday
 markets: [crypto]
@@ -228,6 +228,22 @@ This is an **intraday-to-swing basket** (most legs closed within hours; pre-even
 - [[spot-etf-flows]] — ETF flow events as a standalone catalyst class.
 - [[2025-10-crypto-liquidation-cascade]] — worked example of post-event cascade dynamics and the limits of mean-reversion fades.
 - [[coinglass]], [[hypurrscan]], [[kaiko]] — OI, funding, and flow data sources for setup scoring.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

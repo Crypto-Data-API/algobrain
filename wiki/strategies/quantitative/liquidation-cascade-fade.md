@@ -2,7 +2,7 @@
 title: "Liquidation Cascade Fade"
 type: strategy
 created: 2026-04-27
-updated: 2026-04-27
+updated: 2026-07-13
 status: excellent
 tags: [mean-reversion, crypto, liquidations, contrarian, market-microstructure, behavioral-finance, volatility, derivatives, scalping]
 aliases: ["Liquidation Reversal", "Cascade Fade", "Falling Knife Catcher", "Panic Bid", "Liquidation Bid", "Liquidity Provision in Cascades"]
@@ -21,7 +21,7 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 25
 decay_evidence: "Cascades have become shorter and shallower as exchanges introduced partial liquidation, ADL, mark-price liquidations, and larger insurance funds (post-2020 BitMEX engineering changes). Compare BTC -50% in 24h on 2020-03-12 vs BTC -16% over ~36h on 2024-08-05 vs BTC -12% in 60s on 2025-10-10 — depth and recovery dynamics are not stationary."
-related: ["[[liquidation]]", "[[liquidation-cascade-arbitrage]]", "[[liquidation-risk]]", "[[insurance-fund]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[mean-reversion]]", "[[contrarian-extremes]]", "[[order-flow]]", "[[order-flow-analysis]]", "[[perpetual-futures]]", "[[leverage]]", "[[flash-crashes]]", "[[hyperliquid]]", "[[2020-03-12-black-thursday-crypto]]", "[[2022-05-terra-luna-depeg-arb]]", "[[2022-06-steth-depeg]]", "[[2022-06-three-arrows-blowup]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]"]
+related: ["[[liquidation]]", "[[liquidation-cascade-arbitrage]]", "[[liquidation-risk]]", "[[insurance-fund]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[mean-reversion]]", "[[contrarian-extremes]]", "[[order-flow]]", "[[order-flow-analysis]]", "[[perpetual-futures]]", "[[leverage]]", "[[flash-crashes]]", "[[hyperliquid]]", "[[2020-03-12-black-thursday-crypto]]", "[[2022-05-terra-luna-depeg-arb]]", "[[2022-06-steth-depeg]]", "[[2022-06-three-arrows-blowup]]", "[[behavioral-finance]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
 ---
 
 # Liquidation Cascade Fade
@@ -295,6 +295,27 @@ These are deliberately tight. The strategy is too easy to over-trust in calm reg
 - **2025-10-10/11 Trump 100% China tariff cascade.** ~$19B in liquidations over 36 hours; $3.21B in a single 60-second window at peak; BTC broke below $90,000 triggering the deepest known leverage flush. (Sources: Zeeshan Ali, *"Anatomy of the Oct 10–11, 2025 Crypto Liquidation Cascade,"* SSRN 5611392; Amberdata *"How $3.21B Vanished in 60 Seconds"*; CoinShares *"Billions in Crypto Liquidations: Inside October's $19B Crash"*; FTI Consulting *"Crypto Crash October 2025: Leverage Met Liquidity."*)
 - **CVD / order-flow exhaustion and Wyckoff selling climax.** Cumulative volume delta divergences and "selling climax" patterns (a final volume spike followed by absorption with declining volume on subsequent waves) connect classical Wyckoff methodology to modern microstructure. (Sources: Bookmap *"Cumulative Volume Delta Trading Strategy"*; Coinglass *"CVD Explained"*; ATAS *"CVD Pro: How to Use the Cumulative Volume Delta"*; Lux Algo *"Cumulative Volume Delta Explained."*) See [[order-flow]] and [[order-flow-analysis]].
 - **Academic / research on cascade amplification.** Ali, Z. *"Anatomy of the Oct 10–11, 2025 Crypto Liquidation Cascade: Macroeconomic Triggers, Market Microstructure, and Systemic Risk Lessons,"* SSRN 5611392 (2025) — quantifies reflexive feedback between leverage, liquidity, and volatility, with cross-asset contagion measured 20% stronger than 2018 trade-war spillovers. Amberdata research *"Liquidations in Crypto: How to Anticipate Volatile Market Moves"* covers practical detection from public derivatives data.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

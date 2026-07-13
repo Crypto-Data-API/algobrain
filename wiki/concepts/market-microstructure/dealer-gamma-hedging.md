@@ -2,11 +2,11 @@
 title: "Dealer Gamma Hedging"
 type: concept
 created: 2026-05-05
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [options, market-microstructure, market-makers, gamma, indicators]
 aliases: ["Dealer Hedging", "Market Maker Gamma Hedging", "Gamma Hedging Flows", "GEX"]
-related: ["[[gamma-exposure-trading]]", "[[gamma-scalping]]", "[[options-greeks]]", "[[volatility-regime-classification]]", "[[options-stress-testing]]", "[[max-pain]]", "[[vix-august-2024-spike]]", "[[itpm-trade-construction-playbook]]"]
+related: ["[[gamma-exposure-trading]]", "[[gamma-scalping]]", "[[options-greeks]]", "[[volatility-regime-classification]]", "[[options-stress-testing]]", "[[max-pain]]", "[[vix-august-2024-spike]]", "[[itpm-trade-construction-playbook]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, options]
 prerequisites: ["[[options-greeks]]", "[[gamma]]"]
 difficulty: advanced
@@ -239,6 +239,21 @@ The bottom line: GEX is a *probabilistic regime classifier*, not a deterministic
 A custom GEX calculator is feasible for a quantitatively-inclined trader: pull daily open interest by strike from CBOE / OPRA, compute per-contract gamma using the [[black-scholes|Black-Scholes]] greeks formula at current spot and IV, sum across the chain with appropriate sign assumptions. The methodology is described in [[squeezemetrics]]'s public white paper.
 
 For most discretionary traders, paying for spotgamma or [[tier1alpha]] is a better use of time than building custom GEX -- the analytics are sophisticated and the morning notes provide context (key levels, regime calls, OPEX setups) that a raw GEX number alone does not.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/quant/gex` — gamma exposure: MM inventory + liquidation profile (per-coin optional)
+- `GET /api/v1/quant/positioning` — trader-type split (market maker / whale / other)
+
+**Historical data:**
+- `GET /api/v1/quant/history` — point-in-time quant records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

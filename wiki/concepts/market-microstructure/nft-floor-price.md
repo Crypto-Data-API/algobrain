@@ -2,11 +2,11 @@
 title: "NFT Floor Price"
 type: concept
 created: 2026-04-22
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, nft, market-microstructure, liquidity]
 aliases: ["Floor", "Floor Price", "Collection Floor"]
-related: ["[[nft]]", "[[nft-trading]]", "[[nft-arbitrage]]", "[[nft-aggregators]]", "[[opensea]]", "[[blur]]", "[[benddao]]", "[[blend]]", "[[wash-trading]]", "[[liquidity]]"]
+related: ["[[nft]]", "[[nft-trading]]", "[[nft-arbitrage]]", "[[nft-aggregators]]", "[[opensea]]", "[[blur]]", "[[benddao]]", "[[blend]]", "[[wash-trading]]", "[[liquidity]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, liquidity]
 prerequisites: ["[[nft]]", "[[liquidity]]"]
 difficulty: beginner
@@ -109,6 +109,20 @@ The mechanics above remain accurate, but the venue landscape shifted:
 - Venue fragmentation means any single-venue floor is incomplete; aggregated floors are better but require trusted aggregation.
 - Floor is a worst case, not a valuation. Using it as market cap or collateral value systematically overstates collection value.
 - No floor exists for collections with zero active listings, which happens to illiquid collections; traders must fall back on last sale or top bid.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/nfts/overview` — NFT market overview
+- `GET /api/v1/nfts/collections` — collection list
+- `GET /api/v1/nfts/volume` — volume data
+- `GET /api/v1/nfts/correlations` — collection correlations
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/overview"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]].
 
 ## Related
 

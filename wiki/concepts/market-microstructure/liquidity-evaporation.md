@@ -2,11 +2,11 @@
 title: "Liquidity Evaporation"
 type: concept
 created: 2026-05-07
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [market-microstructure, risk-management, options, liquidity, derivatives, volatility]
 aliases: ["Liquidity Evaporation", "Liquidity Vacuum", "Bid-Ask Blowout", "Liquidity Black Hole"]
-related: ["[[gap-risk]]", "[[circuit-breakers]]", "[[market-makers]]", "[[liquidity-provider]]", "[[liquidity-risk]]", "[[adverse-selection]]", "[[vix-options]]", "[[short-strangle]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-pinning]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[gfc]]", "[[2010-flash-crash]]", "[[xiv]]", "[[long-vol-vs-short-vol]]", "[[tail-risk-hedging]]"]
+related: ["[[gap-risk]]", "[[circuit-breakers]]", "[[market-makers]]", "[[liquidity-provider]]", "[[liquidity-risk]]", "[[adverse-selection]]", "[[vix-options]]", "[[short-strangle]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-pinning]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[gfc]]", "[[2010-flash-crash]]", "[[xiv]]", "[[long-vol-vs-short-vol]]", "[[tail-risk-hedging]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[market-makers]]", "[[liquidity-risk]]"]
 difficulty: intermediate
@@ -192,6 +192,22 @@ Liquidity evaporation can break pinning patterns: if dealer auto-quoting trips, 
 7. **Holding overlay-hedge positions in low-OI strikes.** If your hedge is at a strike with 50 contracts of OI, exiting it in stress will move the strike. Use higher-OI strikes for hedges, even at the cost of slightly worse delta-match.
 8. **Underestimating the funding-liquidity feedback loop.** Even if your *position* doesn't evaporate, your broker's other clients' positions might force margin calls that liquidate yours. Liquidity evaporation is partially a *system-level* phenomenon that affects accounts even without direct order-book exposure.
 9. **Confusing post-halt reopens with continuous trading.** The post-halt auction is a discrete event with its own price-discovery dynamics. Orders resting through the halt don't fill at the halt price; they fill at the auction-clearing price.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+- `GET /api/v1/liquidity/oi-divergence` — OI vs price divergence (1h/4h/24h)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — raw L2 order book snapshot
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

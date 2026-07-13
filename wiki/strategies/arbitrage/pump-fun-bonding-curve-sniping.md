@@ -2,11 +2,11 @@
 title: "Pump.fun Bonding Curve Sniping"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-10
+updated: 2026-07-13
 status: good
 tags: [arbitrage, crypto, altcoins, algorithmic, scalping]
 aliases: ["Pump.fun Sniping", "Bonding Curve Arb", "Solana Memecoin Sniping"]
-related: ["[[pump-fun]]", "[[memecoin-sniping]]", "[[liquidity-sniping]]", "[[telegram-bot-trading]]"]
+related: ["[[pump-fun]]", "[[memecoin-sniping]]", "[[liquidity-sniping]]", "[[telegram-bot-trading]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic
 timeframe: scalp
 markets: [crypto]
@@ -161,6 +161,23 @@ Per-trade capacity bound by single-token liquidity (typically $500-50k per trade
 - **YouTube: "Coffeezilla" investigative reports on Pump.fun rugs (2024).**
 - *DUNE Analytics* Pump.fun dashboards.
 - Verified via Perplexity (sonar), 2026-06-10: BOME launched via presale 2024-03-14 (not Pump.fun); Pump.fun cumulative launches >6M by Dec 2024; graduation rate ~1% or less. Citations: en.wikipedia.org/wiki/Pump.fun, gate.com/learn/articles/what-is-bome-all-you-need-to-know-about-bome/2822, storm.partners/blog-post/meme-coin-mania-on-pump-fun-an-economic-and-legal-analysis.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

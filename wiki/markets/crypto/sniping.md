@@ -2,11 +2,11 @@
 title: "Sniping (Crypto)"
 type: concept
 created: 2026-04-15
-updated: 2026-05-04
+updated: 2026-07-13
 status: good
 tags: [crypto, defi, sniping, memecoins, mev, solana, ethereum, base, pump-fun, market-microstructure]
 aliases: ["Sniping", "Token Sniping", "Launch Sniping", "DEX Sniping"]
-related: ["[[memecoin-sniping]]", "[[liquidity-sniping]]", "[[pump-fun-bonding-curve-sniping]]", "[[token-migration-sniping]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[bonkbot]]", "[[trojan-bot]]", "[[banana-gun]]", "[[maestro-bot]]", "[[photon-sol]]", "[[gmgn]]", "[[bullx]]", "[[holder-concentration-analysis]]", "[[rug-detection-checklist]]", "[[telegram-bot-trading]]", "[[mev-strategies]]"]
+related: ["[[memecoin-sniping]]", "[[liquidity-sniping]]", "[[pump-fun-bonding-curve-sniping]]", "[[token-migration-sniping]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[bonkbot]]", "[[trojan-bot]]", "[[banana-gun]]", "[[maestro-bot]]", "[[photon-sol]]", "[[gmgn]]", "[[bullx]]", "[[holder-concentration-analysis]]", "[[rug-detection-checklist]]", "[[telegram-bot-trading]]", "[[mev-strategies]]", "[[cryptodataapi]]"]
 ---
 
 Sniping in crypto refers to the practice of executing buy transactions in the first few blocks (or first few seconds) after a tradable event - a new token launch, a liquidity addition, a contract migration, or a NFT mint - in order to capture price movement before the broader market can react. It is a latency-driven, infrastructure-heavy edge that sits at the intersection of [[market-microstructure]], [[mev-strategies]], and on-chain analytics. The category spans everything from automated [[liquidity-sniping]] of brand-new pools, to [[pump-fun-bonding-curve-sniping]] of Solana launchpads, to [[token-migration-sniping]] when a token graduates from one venue to another, to NFT mint sniping on Ethereum.
@@ -131,6 +131,23 @@ Sniping has the highest individual-trade variance of any commonly-practiced cryp
 - Without a tested rug/bundle filter, expected value is sharply negative
 
 See [[rug-detection-checklist]] and [[holder-concentration-analysis]] for the survival prerequisites. See [[memecoin-sniping]] for the strategy-level treatment with sizing and kill criteria.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

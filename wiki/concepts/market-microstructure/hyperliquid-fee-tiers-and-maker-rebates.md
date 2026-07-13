@@ -2,11 +2,11 @@
 title: "Hyperliquid Fee Tiers and Maker Rebates"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: draft
 tags: [crypto, market-microstructure, liquidity, derivatives, arbitrage]
 aliases: ["Hyperliquid Fees", "HL Fee Schedule", "Hyperliquid Maker Rebates", "Hyperliquid Fee Tiers"]
-related: ["[[hyperliquid]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperliquid-margining-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[perp-dex-aggregation]]", "[[clob]]", "[[order-book]]", "[[market-microstructure]]", "[[arbitrage]]", "[[slippage]]", "[[market-impact]]"]
+related: ["[[hyperliquid]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperliquid-margining-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[perp-dex-aggregation]]", "[[clob]]", "[[order-book]]", "[[market-microstructure]]", "[[arbitrage]]", "[[slippage]]", "[[market-impact]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[clob]]", "[[order-book]]"]
 difficulty: intermediate
@@ -102,6 +102,25 @@ expected_taker_pnl =
 ```
 
 These are structural relationships, not backtested numbers — the live coefficients come from the official fee schedule and depend on the trader's tier and the specific market (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]]).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

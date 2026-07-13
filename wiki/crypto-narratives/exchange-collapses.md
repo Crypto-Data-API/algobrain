@@ -2,11 +2,11 @@
 title: "Exchange & Counterparty Collapses — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Counterparty Collapses", "Exchange Insolvency", "Contagion Cascade", "Estate Overhang"]
-related: ["[[crypto-narratives-overview]]"]
+related: ["[[crypto-narratives-overview]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -130,6 +130,22 @@ Aggregated, deduplicated feature set a quant can consume (across all three arche
 - `btc_exchange_inflow_from_known_estate_addresses_zscore`
 
 **Analog mechanisms** (for tagging / cross-narrative matching): sentiment-shock, forced-liquidation, reflexive-deleveraging, sell-pressure, counterparty-risk-repricing, contagion, credit-crunch, collateral-spiral, supply-overhang, anticipated-distribution, sell-the-news.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/security/events` — recent hacks/depegs (10d lookback, filterable)
+- `GET /api/v1/security/regime/score` — security-stress composite (45% hack, 30% flow, 25% depeg)
+- `GET /api/v1/security/regime/{symbol}` — per-symbol security overlay
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

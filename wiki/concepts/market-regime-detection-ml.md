@@ -2,14 +2,14 @@
 title: "Market Regime Detection (Machine Learning)"
 type: concept
 created: 2026-05-05
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [machine-learning, backtesting, regime-detection, crypto, quantitative]
 aliases: ["ML Regime Detection", "Regime Classification", "HMM Regime Models", "Adaptive Regime Models"]
 domain: [backtesting, quantitative]
 difficulty: advanced
 prerequisites: ["[[regime-detection]]", "[[overfitting]]", "[[walk-forward-analysis]]"]
-related: ["[[walk-forward-analysis]]", "[[regime-matrix]]", "[[market-regime]]", "[[crypto-market-regime-taxonomy]]", "[[2026-market-regime-overview]]", "[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[funding-rate]]", "[[volatility]]", "[[volatility-regime-switching]]", "[[machine-learning]]", "[[selection-bias-research]]", "[[lookahead-bias]]", "[[regime-detection]]", "[[regime-adaptive-strategy]]", "[[pybroker]]"]
+related: ["[[walk-forward-analysis]]", "[[regime-matrix]]", "[[market-regime]]", "[[crypto-market-regime-taxonomy]]", "[[2026-market-regime-overview]]", "[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[funding-rate]]", "[[volatility]]", "[[volatility-regime-switching]]", "[[machine-learning]]", "[[selection-bias-research]]", "[[lookahead-bias]]", "[[regime-detection]]", "[[regime-adaptive-strategy]]", "[[pybroker]]", "[[cryptodataapi]]"]
 ---
 
 Market regime detection with machine learning is the use of unsupervised or semi-supervised statistical models — Hidden Markov Models (HMMs), clustering algorithms, neural networks, and change-point detectors — to classify the current market into a discrete state (high-vol, trend, mean-reversion, crash, low-liquidity) so that backtests and live strategies can adapt their parameters to the regime they actually face. In crypto perpetuals, where regime shifts every ~3-12 months are the norm rather than the exception, static-parameter backtests produce dangerously optimistic Sharpe ratios that collapse the moment the regime rotates. Modern ML regime detection combines volatility, funding, basis, on-chain flow, and dominance features to deliver a probabilistic regime label that downstream strategies can condition on.
@@ -169,6 +169,25 @@ The recurring theme: **size on the probability, not the hard label**, and treat 
 | `bayesian-changepoint-detection` (Adams & MacKay) | Online Bayesian change-point |
 | `pytorch` / `tensorflow` | LSTM, Transformer regime models |
 | `arch` | GARCH-family volatility regime estimation |
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

@@ -2,13 +2,13 @@
 title: "Crypto Weekday/Weekend Split (ETF Era)"
 type: concept
 created: 2026-05-16
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [anomalies, crypto, calendar-effects, market-microstructure, liquidity, bitcoin]
 aliases: ["ETF-Era Weekend Effect", "Crypto Two-Tier Market", "Weekday/Weekend Liquidity Split"]
 domain: [anomalies, market-microstructure]
 difficulty: intermediate
-related: ["[[btc-weekend-effect]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[liquidation]]", "[[crypto-perp-backtesting-pitfalls]]", "[[coinbase-prime]]", "[[cme-bitcoin-futures]]", "[[anomalies-overview]]", "[[calendar-effects-anomalies]]"]
+related: ["[[btc-weekend-effect]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[liquidation]]", "[[crypto-perp-backtesting-pitfalls]]", "[[coinbase-prime]]", "[[cme-bitcoin-futures]]", "[[anomalies-overview]]", "[[calendar-effects-anomalies]]", "[[cryptodataapi]]"]
 ---
 
 # Crypto Weekday/Weekend Split (ETF Era)
@@ -70,6 +70,25 @@ For backtesters: naive 24/7 backtests that assume uniform execution quality syst
 - **Weekend tail risk is one-sided in expectation.** Macro headlines and geopolitical shocks tend to hit at all hours; the question is which hours your book can absorb a 3-5% gap. The honest answer for most leveraged retail positions is: not weekends.
 - **Friday-into-weekend de-risking is rational, not paranoid.** Institutional desks do it for a reason. Retail traders who carry full leverage through the weekend are absorbing the risk that institutions explicitly priced out of.
 - **Weekend "alpha" claims warrant extra scrutiny.** If a strategy's Sharpe is driven by weekend trades, the question is whether that is true edge or just compensation for bearing institutional-grade tail risk on a thin book.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 ## Related
 

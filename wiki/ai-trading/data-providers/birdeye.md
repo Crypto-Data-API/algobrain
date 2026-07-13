@@ -2,13 +2,14 @@
 title: "Birdeye"
 type: entity
 created: 2026-05-04
-updated: 2026-06-10
+updated: 2026-07-13
 status: good
 tags: [data-provider, crypto, defi, altcoins]
 entity_type: company
 website: https://birdeye.so
 aliases: ["Birdeye.so"]
 related:
+  - "[[cryptodataapi]]"
   - "[[dex-screener]]"
   - "[[gmgn]]"
   - "[[solana]]"
@@ -96,6 +97,23 @@ Specific pricing changes frequently; check birdeye.so / bds.birdeye.so for curre
 - Verified via web search, 2026-06-10
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

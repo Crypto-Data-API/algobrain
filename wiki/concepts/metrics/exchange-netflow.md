@@ -2,7 +2,7 @@
 title: "Exchange Net Flows"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [indicators, bitcoin, behavioral-finance]
 aliases: ["Exchange Net Flows", "exchange-netflow", "Exchange Netflow", "Exchange Net Flow", "Exchange Reserve", "Net Exchange Flow"]
@@ -10,6 +10,7 @@ domain: [indicators]
 prerequisites: ["[[on-chain-analysis]]", "[[bitcoin]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[on-chain-analysis]]"
   - "[[hodl-waves]]"
   - "[[mvrv]]"
@@ -56,6 +57,26 @@ Suppose, over several weeks, the exchange reserve for [[bitcoin]] steadily decli
 - **Stablecoin confounding** — crypto outflows can coincide with stablecoin inflows (rotation, not exit), so reading coin flows in isolation can mislead. Pair the two.
 - **Aggregation hides who** — net flow nets deposits against withdrawals, so a quiet net number can mask large two-sided activity. Cohorting by entity size (e.g. whale deposits) adds context.
 - **Lagging/contextual** — like most on-chain flow metrics it is best as confirmation, not a standalone trigger.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

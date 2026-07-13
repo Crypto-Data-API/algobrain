@@ -2,11 +2,11 @@
 title: "Macro Events & Risk-On/Off — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Risk-On Risk-Off", "Macro Liquidity Shock", "Liquidation Cascade", "Flight to Bitcoin"]
-related: ["[[crypto-narratives-overview]]"]
+related: ["[[crypto-narratives-overview]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -132,6 +132,22 @@ Aggregated quant features and analog mechanisms across all four archetypes:
 - `btc_equity_corr_breakdown_flag`, `btc_return_minus_spx_return_spread`
 
 **Analog mechanisms (cross-archetype):** sentiment-shock, sell-pressure, reflexive-deleveraging, forced-liquidation, dry-powder-injection, supply-restriction.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

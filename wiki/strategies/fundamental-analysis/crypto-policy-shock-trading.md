@@ -2,7 +2,7 @@
 title: "Crypto Policy Shock Trading"
 type: strategy
 created: 2026-06-03
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, market-regime, regulation, news, event-driven, swing-trading]
 aliases: ["Crypto Policy Shock Trading", "Policy Event Trading", "Regulatory Event Trading"]
@@ -21,7 +21,7 @@ expected_sharpe: 0.4      # conservative hypothesis — strategy is untested; se
 expected_max_drawdown: 0.25  # matches the 25% kill criterion
 breakeven_cost_bps: 30    # swing trades on liquid majors; second-move horizon tolerates ~30 bps round-trip
 decay_evidence: "Event-reaction edges decay as algos price headlines faster; binary policy outcomes make this inherently high-variance. No reliable published Sharpe."
-related: ["[[policy-shock-regime]]", "[[crypto-market-regime-taxonomy]]", "[[event-catalyst-regime]]", "[[crypto-macro-correlation-regime]]", "[[regulatory-arbitrage]]", "[[news-trading]]", "[[regulatory-risk-map]]", "[[geopolitical-risk-premium]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]"]
+related: ["[[policy-shock-regime]]", "[[crypto-market-regime-taxonomy]]", "[[event-catalyst-regime]]", "[[crypto-macro-correlation-regime]]", "[[regulatory-arbitrage]]", "[[news-trading]]", "[[regulatory-risk-map]]", "[[geopolitical-risk-premium]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 # Crypto Policy Shock Trading
@@ -219,6 +219,22 @@ Retire or pause per [[when-to-retire-a-strategy]] when:
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — basket 12 (Geopolitical / Policy Shock) definition and reaction signatures.
 
 The strategy logic, signature playbooks, and base-rate framing are the wiki's own synthesis built on the regime taxonomy; no external performance claims are asserted.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/policy/headlines` — live regulatory feed (Federal Register / SEC / CFTC)
+- `GET /api/v1/policy/regime` — policy risk + signed tilt + rate calendar
+- `GET /api/v1/policy/regime/score` — policy-risk composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/policy/headlines"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: Liquidation Cascade
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: good
 tags: [market-microstructure, leverage, liquidity, volatility, derivatives]
 aliases: [liquidation-cascade, cascading-liquidations, liquidation-spiral, long-squeeze, short-squeeze]
@@ -10,6 +10,7 @@ domain: [market-microstructure]
 prerequisites: ["[[liquidation]]", "[[leverage]]", "[[mark-price]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[liquidation]]"
   - "[[mark-price]]"
   - "[[maintenance-margin]]"
@@ -61,6 +62,27 @@ Imagine longs clustered with liquidation levels stacked just below the current p
 - **Auto-deleveraging** — when liquidations cannot be absorbed, profitable opposing traders may be force-closed via ADL.
 - **Slippage and gaps** — exiting *during* a cascade can fill far from the mark; the price you see is not the price you get.
 - **Manipulation overlap** — actors can intentionally probe known clusters or attack the index ([[oracle-manipulation]]) to ignite a cascade.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

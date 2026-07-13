@@ -2,14 +2,14 @@
 title: Smart Money Concepts + Order Flow Combination
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [combinations, meta-strategy, smart-money, order-flow, institutional-trading, price-action]
 strategy_type: hybrid
 markets: [forex, futures, crypto]
 complexity: advanced
 backtest_status: untested
-related: [dca-technical-hybrid, sector-momentum-screen, multi-strategy-portfolio]
+related: [dca-technical-hybrid, sector-momentum-screen, multi-strategy-portfolio, "[[cryptodataapi]]"]
 ---
 
 # Smart Money Concepts + Order Flow Combination
@@ -103,3 +103,21 @@ Risk: 1-2% of account per trade. Risk-reward minimum 1:2, ideally 1:3+.
 Traders trained in [[ict-methodology]] (Inner Circle Trader) who add bookmap, jigsaw, or [[sierra-chart]] footprint analysis represent the primary users of this combo. Professional futures scalpers on the [[cme]] often use order flow as their primary tool with SMC-like structural analysis framing their bias.
 
 Prop trading firms like topstep and ftmo see the highest pass rates from traders using structural + flow approaches. The tools required -- bookmap for heatmaps, jigsaw for reconstructed tape, or quantower for footprint charts -- run $50-200/month but provide the edge that separates profitable SMC trading from chart decoration.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/top-traders` — scored trader leaderboard
+- `GET /api/v1/hyperliquid/copy-signals` — traders with recent entry/exit signals (one call)
+- `GET /api/v1/hyperliquid/wallet-positions` — current positions for tracked wallets
+- `GET /api/v1/hyperliquid/wallet-signals` — entry/exit/size-change signals
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/wallet-trades/{address}` — historical trades + summary for any address
+- `GET /api/v1/daily/hl-traders` — daily leaderboard snapshot
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/copy-signals"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid-traders]].

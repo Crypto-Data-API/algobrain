@@ -2,7 +2,7 @@
 title: "Memecoin Sniping"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, memecoins, sniping, pump-fun, raydium, solana, degen, bots, high-risk, token-launch, algorithmic]
 aliases: ["Memecoin Trading", "Token Launch Sniping", "Pump.fun Sniping", "Degen Sniping"]
@@ -21,7 +21,7 @@ expected_sharpe: null
 expected_max_drawdown: 0.95
 breakeven_cost_bps: null
 decay_evidence: "Pre-bond Pump.fun win rates fell from ~10% (early 2024) to <1% by mid-2025 before XXYY-style filters lifted top-quartile rates back to ~20%. See [[2026-04-22-gap-finder-low-cap-crypto-trading-microcaps-memecoi]]."
-related: ["[[telegram-bot-trading]]", "[[mev-strategies]]", "[[liquidity-sniping]]", "[[copy-trading]]", "[[2024-meme-coin-supercycle]]", "[[sniping]]", "[[pump-fun-bonding-curve-sniping]]", "[[token-migration-sniping]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[bonkbot]]", "[[trojan-bot]]", "[[banana-gun]]", "[[maestro-bot]]", "[[photon-sol]]", "[[gmgn]]", "[[bullx]]", "[[holder-concentration-analysis]]", "[[rug-detection-checklist]]"]
+related: ["[[telegram-bot-trading]]", "[[mev-strategies]]", "[[liquidity-sniping]]", "[[copy-trading]]", "[[2024-meme-coin-supercycle]]", "[[sniping]]", "[[pump-fun-bonding-curve-sniping]]", "[[token-migration-sniping]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[bonkbot]]", "[[trojan-bot]]", "[[banana-gun]]", "[[maestro-bot]]", "[[photon-sol]]", "[[gmgn]]", "[[bullx]]", "[[holder-concentration-analysis]]", "[[rug-detection-checklist]]", "[[cryptodataapi]]"]
 ---
 
 Memecoin sniping is the practice of using automated bots to buy newly launched [[meme-coins]] within seconds of liquidity being added to a DEX. The strategy targets the explosive price appreciation that occurs when memecoins launch on platforms like [[pump-fun|Pump.fun]] ([[solana|Solana]]), [[raydium|Raydium]], or Base DEXs and attract viral attention. Snipers aim to be among the first buyers, riding the initial pump before selling into retail demand. This is an extremely high-risk, high-reward strategy — the vast majority of memecoins go to zero, but early entries on tokens that gain traction can return 10-1000x within hours. The strategy is bot-driven, requires fast execution, and sits at the intersection of technical infrastructure and social-media sentiment reading. It is the most contested sub-game inside the [[meme-coin-cycle]], and the canonical example of a Solana-native execution race built on top of [[mev]] infrastructure. See [[sniping]] for the broader taxonomy and [[low-cap-crypto-trading-map]] for where it sits in the wider stack.
@@ -282,6 +282,23 @@ The economics: geyser subscriptions and dedicated RPC run hundreds of dollars a 
 ## Sources
 
 - [[2026-04-22-gap-finder-low-cap-crypto-trading-microcaps-memecoi]]
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

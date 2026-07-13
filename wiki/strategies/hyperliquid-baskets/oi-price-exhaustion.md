@@ -2,11 +2,11 @@
 title: "OI / Price Exhaustion (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, quantitative, swing-trading, mean-reversion, derivatives, market-microstructure, momentum]
 aliases: ["OI Exhaustion", "Price-OI Divergence Short", "Open-Interest Trend Exhaustion", "OI Fade"]
-related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[technical-structural-regime]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[crowded-long-funding-fade]]", "[[long-liquidation-cascade]]", "[[open-interest]]", "[[divergence]]", "[[mean-reversion]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[liquidation]]", "[[rsi]]", "[[bollinger-bands]]", "[[bollinger-band-reversion]]", "[[atr]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[technical-structural-regime]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[crowded-long-funding-fade]]", "[[long-liquidation-cascade]]", "[[open-interest]]", "[[divergence]]", "[[mean-reversion]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[liquidation]]", "[[rsi]]", "[[bollinger-bands]]", "[[bollinger-band-reversion]]", "[[atr]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[cryptodataapi]]"]
 strategy_type: quantitative
 timeframe: swing
 markets: [crypto]
@@ -305,6 +305,25 @@ Numeric conditions for retiring this basket (see [[when-to-retire-a-strategy]]):
 - [[hyperliquid-liquidation-engine]] — liquidation and ADL mechanics relevant to reversal positioning.
 - [[2025-10-crypto-liquidation-cascade]] — precedent for OI exhaustion resolving into a liquidation-driven cascade.
 - [[coinglass]] — cross-venue OI aggregation for signal validation.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

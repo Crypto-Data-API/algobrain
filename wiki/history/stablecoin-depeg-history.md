@@ -2,11 +2,11 @@
 title: "Stablecoin Depeg History"
 type: overview
 created: 2026-04-28
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, stablecoin, depeg, history, defi, banking, regulation, contagion]
 aliases: ["Stable Depeg Timeline", "Historical Stablecoin Depegs", "Depeg Master Timeline"]
-related: ["[[stablecoin-pair-arbitrage]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[lst-depeg-arbitrage]]", "[[depeg-risk]]", "[[defi-hacks-and-exploits]]", "[[history-overview]]"]
+related: ["[[stablecoin-pair-arbitrage]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[lst-depeg-arbitrage]]", "[[depeg-risk]]", "[[defi-hacks-and-exploits]]", "[[history-overview]]", "[[cryptodataapi]]"]
 ---
 
 # Stablecoin Depeg History
@@ -297,6 +297,22 @@ This is the empirical foundation for the [[stablecoin-depeg-profit-capture]] str
 - Curve Finance subgraph (3pool composition history)
 - Multiple regulatory body press releases (NYAG, SEC, NYDFS, FinCEN)
 - Industry publications (The Block, CoinDesk, Bloomberg Crypto)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/security/events` — recent hacks/depegs (10d lookback, filterable)
+- `GET /api/v1/security/regime/score` — security-stress composite (45% hack, 30% flow, 25% depeg)
+- `GET /api/v1/security/regime/{symbol}` — per-symbol security overlay
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

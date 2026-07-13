@@ -2,11 +2,11 @@
 title: "Meme-Coin Cycle (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, momentum, event-driven, quantitative, backtesting, risk-management, behavioral-finance]
 aliases: ["Meme Rotation Basket", "Meme Speculative Basket", "Degen Cycle Strategy", "Meme Pump Basket"]
-related: ["[[hyperliquid-baskets-overview]]", "[[meme-speculative-regime]]", "[[bitcoin-dominance-rotation]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[leverage]]", "[[liquidation]]", "[[squeeze]]", "[[momentum-rotation]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[liquidation-cascade-fade]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[behavioral-finance]]", "[[exchange-listing-delisting]]", "[[token-unlock-supply-event]]", "[[cross-sectional-relative-value]]", "[[dappradar]]", "[[hypurrscan]]", "[[coinglass]]", "[[the-block]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[meme-speculative-regime]]", "[[bitcoin-dominance-rotation]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[leverage]]", "[[liquidation]]", "[[squeeze]]", "[[momentum-rotation]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[liquidation-cascade-fade]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[behavioral-finance]]", "[[exchange-listing-delisting]]", "[[token-unlock-supply-event]]", "[[cross-sectional-relative-value]]", "[[dappradar]]", "[[hypurrscan]]", "[[coinglass]]", "[[the-block]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [crypto]
@@ -287,6 +287,23 @@ Numeric kill rules (see [[when-to-retire-a-strategy]]):
 - [[hypurrscan]] — Hyperliquid-native on-chain analytics for new depositor tracking
 - [[dappradar]] — on-chain new wallet creation and activity data
 - [[the-block]] — meme market share analytics and cycle research
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

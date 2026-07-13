@@ -2,13 +2,13 @@
 title: "Derivatives-Native Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, derivatives, market-regime, market-microstructure, leverage, quantitative]
 aliases: ["Derivatives-Native Regime", "Perps Regime", "Funding/OI Regime"]
 domain: [market-microstructure, derivatives]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[basis-carry-regime]]", "[[liquidity-depth-regime]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[liquidation-cascade-modeling]]", "[[liquidation-cascade-fade]]", "[[funding-rate-arbitrage]]", "[[short-squeeze]]", "[[2025-10-crypto-liquidation-cascade]]", "[[hyperliquid]]", "[[hyperliquid-funding-rate-microstructure]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[basis-carry-regime]]", "[[liquidity-depth-regime]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[liquidation-cascade-modeling]]", "[[liquidation-cascade-fade]]", "[[funding-rate-arbitrage]]", "[[short-squeeze]]", "[[2025-10-crypto-liquidation-cascade]]", "[[hyperliquid]]", "[[hyperliquid-funding-rate-microstructure]]", "[[cryptodataapi]]"]
 ---
 
 The **Derivatives-Native regime** is basket #4 of the 14-basket crypto regime taxonomy (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]). It groups the trading setups that exist *only* in perpetual-futures markets and have no spot-market analogue: funding-rate extremes, open-interest (OI) imbalance, liquidation cascades, and long/short squeezes. These are not directional theses about where price "should" go — they are positioning-fragility states detectable from derivatives plumbing. This basket is the most [[hyperliquid|Hyperliquid]]-relevant of the fourteen, because Hyperliquid combines high leverage with on-chain transparency, exposing per-coin positioning fragility in real time. Setups here play out on a minutes-to-days timescale and fire in both directions. This page is a regime synthesis: it frames the mechanics (explained elsewhere) as detectable *states* with a bias and a trade. See [[crypto-market-regime-taxonomy]] for the full basket map.
@@ -84,6 +84,25 @@ This is a **fragility detector, not a directional backdrop**. It does not tell y
 ## Sources
 
 - (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]) — defines the 14-basket taxonomy and the funding/OI/liquidation heuristics used here.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

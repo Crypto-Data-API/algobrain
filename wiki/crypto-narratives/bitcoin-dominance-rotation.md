@@ -2,11 +2,11 @@
 title: "Bitcoin Dominance & Alt-Season Rotation — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, market-regime, market-microstructure, narrative-impact]
 aliases: ["BTC Dominance", "Altcoin Season", "BTC.D"]
-related: ["[[crypto-narratives-overview]]", "[[l1-l2-rotation]]", "[[memecoin-mania]]"]
+related: ["[[crypto-narratives-overview]]", "[[l1-l2-rotation]]", "[[memecoin-mania]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -79,6 +79,21 @@ The signal is the **regime**, not any single coin's level. The people on the oth
 **Analog mechanisms:** sector-rotation, sentiment-shock, mean-reversion.
 
 > **Backtester takeaway:** use dominance as a *regime gate*. In a rising-dominance / Bitcoin-Season tape, fade alt strength and favour BTC; only switch to an alt-overweight when ASI confirms (>75) and BTC.D breaks down — and treat a dominance *bottom* with euphoric ASI as a cycle-top warning, not a buy signal.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-health/summary` — dual health scores + sentiment
+- `GET /api/v1/market-health/altcoin-breadth` — % of coins above N-day MA (default 200)
+
+**Historical data:**
+- `GET /api/v1/market-health/history?days=730` — historical health scores
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
 
 ## Related
 

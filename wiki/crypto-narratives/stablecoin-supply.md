@@ -2,11 +2,11 @@
 title: "Stablecoin Supply (Tether/USDC Mints & Burns) — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, liquidity, market-regime, event-driven, behavioral-finance, market-microstructure, narrative-impact]
 aliases: ["Stablecoin Mints and Burns", "Tether Supply Narrative", "Stablecoin Dry Powder", "USDT Mint Signal", "Stablecoin Supply Ratio", "SSR"]
-related: ["[[crypto-narratives-overview]]", "[[stablecoin-depegs]]", "[[whale-onchain-flows]]"]
+related: ["[[crypto-narratives-overview]]", "[[stablecoin-depegs]]", "[[whale-onchain-flows]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -166,6 +166,23 @@ Aggregated across all four archetypes — the quant-consumable signal set.
 - `btc_mktcap_vs_stablecoin_mktcap_ratio`
 
 **Analog mechanisms (for cross-narrative tagging):** dry-powder-injection, sentiment-shock, liquidity-expansion, supply-restriction, liquidity-contraction, reflexive-deleveraging, forced-liquidation, flight-to-safety, positioning-extreme, mean-reversion.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — Fear & Greed index
+- `GET /api/v1/sentiment/stablecoins` — stablecoin market cap + 14d/90d flows
+- `GET /api/v1/sentiment/macro` — EUR/USD, gold, yields
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — Fear & Greed timeseries
+- `GET /api/v1/sentiment/stablecoins/remote-history?days=365` — daily stablecoin history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-greed"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
 
 ## Related
 

@@ -2,11 +2,11 @@
 title: "Token Migration Sniping"
 type: strategy
 created: 2026-05-04
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [algorithmic, crypto, scalping, event-driven]
 aliases: ["Migration Sniping", "Pump.fun Migration Snipe", "Bond-to-Raydium Sniping", "Graduation Sniping"]
-related: ["[[pump-fun]]", "[[raydium]]", "[[pumpswap]]", "[[memecoin-sniping]]", "[[bitquery]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[trojan-bot]]", "[[pump-fun-bonding-curve-sniping]]", "[[low-cap-crypto-trading-map]]"]
+related: ["[[pump-fun]]", "[[raydium]]", "[[pumpswap]]", "[[memecoin-sniping]]", "[[bitquery]]", "[[jito-bundle-sniping]]", "[[axiom-pro]]", "[[trojan-bot]]", "[[pump-fun-bonding-curve-sniping]]", "[[low-cap-crypto-trading-map]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic
 timeframe: scalp
 markets: [crypto]
@@ -233,6 +233,23 @@ Retire the strategy if:
 - Pump.fun protocol documentation (program ID `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`).
 - Bitquery Pump.fun API docs — referenced in gap-finder source [8].
 - PumpSwap launch date (March 20, 2025), instant/free migrations, and Raydium-to-PumpSwap default switch verified via Perplexity (sonar), 2026-06-10: cryptoslate.com/pumpfun-launches-its-own-dex-called-pumpswap-amid-falling-revenue/, en.wikipedia.org/wiki/Pump.fun.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

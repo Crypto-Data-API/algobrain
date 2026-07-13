@@ -2,14 +2,14 @@
 title: "Hyperliquid Backtesting & Anti-Overfit Playbook"
 type: concept
 created: 2026-06-14
-updated: 2026-06-14
+updated: 2026-07-13
 status: excellent
 tags: [backtesting, crypto, derivatives, methodology, leverage, risk-management]
 aliases: ["Hyperliquid Backtesting", "Hyperliquid Anti-Overfit", "Backtesting Hyperliquid Perps"]
 domain: [backtesting]
 difficulty: advanced
 prerequisites: ["[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[in-sample-vs-out-of-sample]]"]
-related: ["[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[in-sample-vs-out-of-sample]]", "[[walk-forward-analysis]]", "[[purged-kfold-cv]]", "[[deflated-sharpe-ratio]]", "[[slippage-modeling]]", "[[liquidation-cascade-modeling]]", "[[intrabar-fill-modeling]]", "[[point-in-time-data]]", "[[lookahead-bias]]", "[[transaction-cost-modeling]]", "[[overfitting-detection]]", "[[hyperliquid]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-perp-trading-map]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[auto-deleveraging]]", "[[perpetual-futures]]", "[[2025-10-crypto-liquidation-cascade]]", "[[book-advances-in-financial-machine-learning]]"]
+related: ["[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[in-sample-vs-out-of-sample]]", "[[walk-forward-analysis]]", "[[purged-kfold-cv]]", "[[deflated-sharpe-ratio]]", "[[slippage-modeling]]", "[[liquidation-cascade-modeling]]", "[[intrabar-fill-modeling]]", "[[point-in-time-data]]", "[[lookahead-bias]]", "[[transaction-cost-modeling]]", "[[overfitting-detection]]", "[[hyperliquid]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-perp-trading-map]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[auto-deleveraging]]", "[[perpetual-futures]]", "[[2025-10-crypto-liquidation-cascade]]", "[[book-advances-in-financial-machine-learning]]", "[[cryptodataapi]]"]
 ---
 
 # Hyperliquid Backtesting & Anti-Overfit Playbook
@@ -289,6 +289,25 @@ Before trusting a backtest, require all of these to pass:
 - [PickMyTrade — Trading Strategy Validation / Backtest Overfitting](https://blog.pickmytrade.trade/trading-strategy-validation-backtest-overfitting/) — plateau vs cliff
 - [Medium (Dolejs) — Intrabar Accuracy Problem](https://medium.com/@kojott/why-your-trading-backtests-might-lying-to-you-the-intrabar-accuracy-problem-68f8b7decdb3) — checking SL/TP against candle high/low
 - [Shortform — Advances in Financial Machine Learning summary](https://www.shortform.com/summary/advances-in-financial-machine-learning-summary-marcos-lopez-de-prado)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

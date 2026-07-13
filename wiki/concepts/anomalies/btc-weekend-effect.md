@@ -2,13 +2,13 @@
 title: "Bitcoin Weekend Effect"
 type: concept
 created: 2026-04-11
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [anomalies, crypto, calendar-effects, seasonality]
 aliases: ["Crypto Weekend Effect", "BTC Weekend Anomaly"]
 domain: [anomalies]
 difficulty: beginner
-related: ["[[anomalies-overview]]", "[[weekend-effect]]", "[[calendar-effects-anomalies]]", "[[crypto-weekday-weekend-etf-era]]"]
+related: ["[[anomalies-overview]]", "[[weekend-effect]]", "[[calendar-effects-anomalies]]", "[[crypto-weekday-weekend-etf-era]]", "[[cryptodataapi]]"]
 ---
 
 # Bitcoin Weekend Effect
@@ -76,6 +76,25 @@ Not a standalone alpha source.
 - Aharon & Qadan (2019) "Bitcoin and the Day-of-the-Week Effect"
 - Kaiko, Glassnode, Coin Metrics liquidity reports (industry-side)
 - Caporale, Gil-Alana, Plastun (2019) "Is There a Day-of-the-Week Effect in Bitcoin?"
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 ## Related
 

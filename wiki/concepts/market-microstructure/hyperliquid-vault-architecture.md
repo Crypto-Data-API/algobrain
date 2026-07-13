@@ -2,11 +2,11 @@
 title: "Hyperliquid Vault Architecture"
 type: concept
 created: 2026-05-05
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, defi, derivatives, market-microstructure, liquidity]
 aliases: ["HLP Internals", "Hyperliquid HLP Architecture", "HLP Sub-Vaults"]
-related: ["[[hyperliquid]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-oracle-mechanics]]", "[[hlp-withdrawal-mechanics]]", "[[hlp-cascade-alongside-playbook]]", "[[lp-vault-comparison]]"]
+related: ["[[hyperliquid]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-oracle-mechanics]]", "[[hlp-withdrawal-mechanics]]", "[[hlp-cascade-alongside-playbook]]", "[[lp-vault-comparison]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[perpetual-futures]]", "[[market-making]]"]
 difficulty: advanced
@@ -256,6 +256,25 @@ Depositing **into** HLP is a different question — it requires assessing whethe
 See [[hyperliquid-hlp-basis-arbitrage]] for the full strategy stack and [[hyperliquid-perp-trading-map]] for HLP's place in the broader Hyperliquid opportunity set.
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

@@ -2,14 +2,14 @@
 title: "Sentiment Analysis"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-13
 status: good
 tags: [behavioral-finance, machine-learning, trading-psychology]
 aliases: ["Market Sentiment"]
 domain: [behavioral-finance, quantitative]
 prerequisites: ["[[behavioral-finance]]", "[[technical-analysis]]"]
 difficulty: intermediate
-related: ["[[behavioral-finance]]", "[[nlp-sentiment-analysis]]", "[[vix]]", "[[trading-psychology]]"]
+related: ["[[behavioral-finance]]", "[[nlp-sentiment-analysis]]", "[[vix]]", "[[trading-psychology]]", "[[cryptodataapi]]"]
 ---
 
 Sentiment analysis in trading is the practice of measuring the collective mood, positioning, and expectations of market participants. It serves as both a confirming indicator (trending sentiment aligns with price) and a powerful contrarian signal (extreme sentiment often marks turning points).
@@ -86,6 +86,23 @@ Sentiment can also confirm existing trends:
 - Social media sentiment is easily manipulated (bots, coordinated campaigns)
 - Different indicators can give conflicting signals
 - Timing is imprecise -- extreme sentiment tells you "what" but not "when"
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — Fear & Greed index
+- `GET /api/v1/sentiment/stablecoins` — stablecoin market cap + 14d/90d flows
+- `GET /api/v1/sentiment/macro` — EUR/USD, gold, yields
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — Fear & Greed timeseries
+- `GET /api/v1/sentiment/stablecoins/remote-history?days=365` — daily stablecoin history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-greed"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "RSI Mean Reversion"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-27
+updated: 2026-07-13
 status: excellent
 tags: [mean-reversion, rsi, oversold, overbought, quantitative, larry-connors, crypto, stocks, behavioral-finance, indicators]
 aliases: ["RSI Reversion", "RSI Oversold Bounce", "Connors RSI Strategy", "Connors RSI(2)", "Oversold Bounce"]
@@ -30,7 +30,7 @@ breakeven_cost_bps: 20
 # Decay history
 decay_evidence: "Connors' original SPY edge has compressed since 2010 publication; crypto adaptation may still have edge (recent academic work suggests behavioral biases are stronger in retail-dominated crypto)"
 
-related: ["[[rsi]]", "[[bollinger-band-reversion]]", "[[mean-reversion]]", "[[moving-average-crossover]]", "[[200-day-moving-average]]", "[[overreaction-anomaly]]", "[[sentiment]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[loss-aversion]]", "[[herding]]"]
+related: ["[[rsi]]", "[[bollinger-band-reversion]]", "[[mean-reversion]]", "[[moving-average-crossover]]", "[[200-day-moving-average]]", "[[overreaction-anomaly]]", "[[sentiment]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[loss-aversion]]", "[[herding]]", "[[cryptodataapi]]"]
 ---
 
 The **RSI Mean Reversion** strategy buys assets that have suffered short, sharp pullbacks inside an established uptrend, betting that the panic-driven selling will reverse within a few days. The canonical formulation is **Larry Connors' RSI(2)** rule from *Short Term Trading Strategies That Work* (2009): go long when RSI(2) drops below 10 while price is above its 200-day SMA, and exit when RSI(2) closes above 70. The user's live trading bot extends this to large-cap crypto by stacking a **Crypto Fear & Greed < 30** sentiment filter on top of the classic Connors trigger, restricting the universe to BTC/ETH/SOL on AsterDEX with 3x leverage.
@@ -343,6 +343,22 @@ The bot is currently OFF, so these criteria are aspirational. They will become b
 - StockCharts ChartSchool. "RSI(2)" article documenting Connors' rules with live SPY backtests. Forward link: [[stockcharts-rsi-2]].
 - QuantifiedStrategies.com. Independent backtests of Connors RSI on equity ETFs and selected crypto adaptations. Forward link: [[quantifiedstrategies-rsi-2]].
 - BIS Bulletin No 90, "The market turbulence and carry trade unwind of August 2024" — context for the example-trade discussion. See [[2024-08-yen-carry-unwind]].
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — price-structure state (SMA/BB/RSI) across assets
+- `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN state
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset detail + 60d history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — raw OHLCV for computing your own
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
 
 ## Related
 

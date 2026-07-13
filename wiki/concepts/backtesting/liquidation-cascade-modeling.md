@@ -2,11 +2,11 @@
 title: "Liquidation Cascade Modeling"
 type: concept
 created: 2026-05-05
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [backtesting, risk-management, crypto, derivatives, leverage, liquidity]
 aliases: ["Cascade Modeling", "Liquidation Cascade Backtest", "Cascade Stress Test"]
-related: ["[[auto-deleveraging]]", "[[liquidation-cascade-arbitrage]]", "[[liquidation-risk]]", "[[funding-rate]]", "[[slippage-modeling]]", "[[market-impact-models]]", "[[monte-carlo-permutation-test]]", "[[2025-10-crypto-liquidation-cascade]]", "[[coinglass]]", "[[kaiko]]", "[[crypto-perp-backtesting-pitfalls]]", "[[backtesting-pitfalls]]", "[[intrabar-fill-modeling]]", "[[backtesting]]"]
+related: ["[[auto-deleveraging]]", "[[liquidation-cascade-arbitrage]]", "[[liquidation-risk]]", "[[funding-rate]]", "[[slippage-modeling]]", "[[market-impact-models]]", "[[monte-carlo-permutation-test]]", "[[2025-10-crypto-liquidation-cascade]]", "[[coinglass]]", "[[kaiko]]", "[[crypto-perp-backtesting-pitfalls]]", "[[backtesting-pitfalls]]", "[[intrabar-fill-modeling]]", "[[backtesting]]", "[[cryptodataapi]]"]
 domain: [backtesting, risk-management, market-microstructure]
 prerequisites: ["[[liquidation-risk]]", "[[auto-deleveraging]]", "[[slippage-modeling]]"]
 difficulty: advanced
@@ -165,6 +165,27 @@ If the strategy survives all of these with bounded drawdown and intact hedge str
 - October 2025 liquidation cascade analysis: https://cryptoslate.com/bitcoin-sees-another-flash-crash-leading-to-1-52-billion-cascade-in-crypto-liquidations/
 - LuxAlgo on slippage and liquidity backtesting limits: https://www.luxalgo.com/blog/backtesting-limitations-slippage-and-liquidity-explained/
 - Glassnode on point-in-time data and lookahead-bias prevention: https://insights.glassnode.com/why-use-point-in-time-data/
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

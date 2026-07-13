@@ -2,11 +2,11 @@
 title: "Exchange Listing / Delisting (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, event-driven, quantitative]
 aliases: ["Listing Pump Basket", "Delisting Short Basket", "Exchange Listing Event", "HL Listing Catalyst"]
-related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[liquidation-cascade-fade]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[liquidity]]", "[[squeeze]]", "[[momentum-rotation]]", "[[when-to-retire-a-strategy]]", "[[token-unlock-supply-event]]", "[[meme-coin-cycle]]", "[[cross-sectional-relative-value]]", "[[macro-event-pump]]", "[[etf-and-institutional-flow]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[liquidation-cascade-fade]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[liquidity]]", "[[squeeze]]", "[[momentum-rotation]]", "[[when-to-retire-a-strategy]]", "[[token-unlock-supply-event]]", "[[meme-coin-cycle]]", "[[cross-sectional-relative-value]]", "[[macro-event-pump]]", "[[etf-and-institutional-flow]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic
 timeframe: scalp
 markets: [crypto]
@@ -264,6 +264,22 @@ This basket has acute venue-specific risks that must shape every sizing decision
 - [[2025-03-jellyjelly-hlp-attack]] — canonical thin-perp short-squeeze case study
 - [[coinglass]] — cross-venue OI and funding data for crowding assessment
 - [[event-catalyst-regime]] — regime classification for listing/delisting events
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

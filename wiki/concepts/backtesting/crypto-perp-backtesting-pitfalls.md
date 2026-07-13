@@ -2,13 +2,13 @@
 title: "Crypto Perp Backtesting Pitfalls"
 type: concept
 created: 2026-05-05
-updated: 2026-06-14
+updated: 2026-07-13
 status: excellent
 tags: [backtesting, crypto, derivatives, risk-management, methodology, leverage]
 aliases: ["Perpetual Futures Backtesting Pitfalls", "Crypto Perps Backtest Hazards"]
 domain: [backtesting]
 difficulty: advanced
-related: ["[[auto-deleveraging]]", "[[liquidation-cascade-modeling]]", "[[point-in-time-data]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[slippage-modeling]]", "[[lookahead-bias]]", "[[walk-forward-analysis]]", "[[purged-kfold-cv]]", "[[hyperliquid-backtesting]]", "[[backtesting-overview]]", "[[perpetual-futures]]", "[[hyperliquid]]", "[[bybit]]", "[[binance]]", "[[2025-10-crypto-liquidation-cascade]]", "[[oracle-manipulation]]", "[[depeg-risk]]", "[[book-advances-in-financial-machine-learning]]", "[[in-sample-vs-out-of-sample]]", "[[deflated-sharpe-ratio]]"]
+related: ["[[auto-deleveraging]]", "[[liquidation-cascade-modeling]]", "[[point-in-time-data]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[slippage-modeling]]", "[[lookahead-bias]]", "[[walk-forward-analysis]]", "[[purged-kfold-cv]]", "[[hyperliquid-backtesting]]", "[[backtesting-overview]]", "[[perpetual-futures]]", "[[hyperliquid]]", "[[bybit]]", "[[binance]]", "[[2025-10-crypto-liquidation-cascade]]", "[[oracle-manipulation]]", "[[depeg-risk]]", "[[book-advances-in-financial-machine-learning]]", "[[in-sample-vs-out-of-sample]]", "[[deflated-sharpe-ratio]]", "[[cryptodataapi]]"]
 ---
 
 # Crypto Perp Backtesting Pitfalls
@@ -143,6 +143,21 @@ Any strategy meeting three or more of these criteria with a backtest Sharpe > 2 
 - [Grayscale — January 2024: the debut of spot Bitcoin ETFs](https://research.grayscale.com/market-commentary/january-2024-the-debut-of-spot-bitcoin-etfs) — ETF launch volumes
 - [Kaiko — BTC ETFs' impact on spot market structure](https://research.kaiko.com/insights/btc-etfs-impact-on-spot-market-structure) — NAV-fixing volume spike
 - [AmberData — Liquidations in crypto: anticipating volatile moves](https://blog.amberdata.io/liquidations-in-crypto-how-to-anticipate-volatile-market-moves) — liquidation clustering (heuristic framing)
+
+## Getting the Data (CryptoDataAPI)
+
+**Historical archive:**
+- `GET /api/v1/backtesting/klines` — OHLCV candle archive
+- `GET /api/v1/backtesting/funding` — funding-rate archive
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot
+- `GET /api/v1/backtesting/archives` — Parquet dataset archive (since 2020)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symbols"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 ## Related
 

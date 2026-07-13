@@ -2,7 +2,7 @@
 title: "Arbitrage Backtesting Guide"
 type: strategy
 created: 2026-04-21
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [arbitrage, backtesting, quantitative, strategy-development]
 aliases: ["Arb Backtesting", "Multi-Leg Backtesting", "Arbitrage Simulation"]
@@ -11,7 +11,7 @@ timeframe: scalp|intraday|swing|position
 markets: [crypto, stocks, futures, options]
 complexity: advanced
 backtest_status: untested
-related: ["[[backtesting-overview]]", "[[transaction-cost-modeling]]", "[[walk-forward-analysis]]", "[[arbitrage-overview]]", "[[arbitrage-parameter-cheatsheet]]", "[[historical-spread-data]]", "[[leg-risk]]", "[[execution-sequencing]]", "[[data-snooping-and-p-hacking]]", "[[overfitting-detection]]"]
+related: ["[[backtesting-overview]]", "[[transaction-cost-modeling]]", "[[walk-forward-analysis]]", "[[arbitrage-overview]]", "[[arbitrage-parameter-cheatsheet]]", "[[historical-spread-data]]", "[[leg-risk]]", "[[execution-sequencing]]", "[[data-snooping-and-p-hacking]]", "[[overfitting-detection]]", "[[cryptodataapi]]"]
 ---
 
 # Arbitrage Backtesting Guide
@@ -341,6 +341,21 @@ Arb strategies are unusually prone to false positives because they are searched 
 ## Backtest-to-live reality gap
 
 Even a clean backtest overstates live performance. Carry the standard arb haircuts from [[arbitrage-parameter-cheatsheet]]: assume **30-50% Sharpe degradation** from backtest to live, deploy at ~25% of target capital first, and recalibrate costs quarterly against realized fills. The backtest's job is not to predict returns — it is to *falsify* the strategy cheaply before risking capital, and to bound the cost level at which the edge disappears.
+
+## Getting the Data (CryptoDataAPI)
+
+**Historical archive:**
+- `GET /api/v1/backtesting/klines` — OHLCV candle archive
+- `GET /api/v1/backtesting/funding` — funding-rate archive
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot
+- `GET /api/v1/backtesting/archives` — Parquet dataset archive (since 2020)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symbols"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 ## Related
 

@@ -2,13 +2,13 @@
 title: "Token Unlock Trackers"
 type: source
 created: 2026-05-16
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [data-provider, crypto, altcoins, event-driven]
 aliases: ["TokenUnlocks", "Token Unlock Calendar", "Vesting Calendar", "Token Unlock Trackers"]
 source_type: data
 source_url: "https://token.unlocks.app"
-related: ["[[token-unlock-arbitrage]]", "[[token-unlocks]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[whale-alert]]", "[[arkham-intelligence]]", "[[crypto-data-sources]]"]
+related: ["[[token-unlock-arbitrage]]", "[[token-unlocks]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[whale-alert]]", "[[arkham-intelligence]]", "[[crypto-data-sources]]", "[[cryptodataapi]]"]
 ---
 
 Token unlock trackers — most prominently **TokenUnlocks** (token.unlocks.app), plus unlock-calendar features on **CryptoRank**, **DefiLlama**, **Tokenomist**, and similar platforms — aggregate and visualize token unlock and vesting schedules across crypto projects. They surface upcoming supply events — cliffs, linear vests, ecosystem unlocks — that intraday and swing traders use to position around predictable supply pressure (Source: [[2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect]]). This page covers the unlock-calendar data category; for the broader directional/narrative impact of unlocks on price see [[token-unlocks|Token Unlocks & Vesting Cliffs (narrative)]]. Note that [[token-terminal|Token Terminal]] is a protocol-fundamentals platform, not an unlock tracker, and is covered separately.
@@ -53,6 +53,22 @@ Secondary uses:
 - **Already priced in** — large, well-known unlocks (e.g., scheduled at TGE for years) may be fully discounted by the time they hit. The edge is in tokens where the unlock is under-followed or unexpectedly large relative to circulating float
 - **Disclosure quality varies** — smaller or older projects may have incomplete or contradictory vesting documentation; data quality is best for major recent launches
 - **OTC sales hidden** — large unlock recipients sometimes pre-sell OTC; the on-chain unlock then doesn't move price because the supply is already with new holders
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

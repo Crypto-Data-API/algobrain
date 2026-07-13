@@ -2,13 +2,13 @@
 title: "Lookahead Bias"
 type: concept
 created: 2026-04-10
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [backtesting, bias, methodology, validation]
 aliases: ["Look-Ahead Bias", "Look Ahead Bias", "Future Leakage", "Information Leakage"]
 domain: [backtesting]
 difficulty: intermediate
-related: ["[[backtesting-overview]]", "[[backtesting]]", "[[survivorship-bias]]", "[[selection-bias-research]]", "[[data-snooping-and-p-hacking]]", "[[purged-kfold-cv]]", "[[overfitting-detection]]", "[[data-sources-overview]]", "[[point-in-time-data]]", "[[walk-forward-analysis]]", "[[pybroker]]"]
+related: ["[[backtesting-overview]]", "[[backtesting]]", "[[survivorship-bias]]", "[[selection-bias-research]]", "[[data-snooping-and-p-hacking]]", "[[purged-kfold-cv]]", "[[overfitting-detection]]", "[[data-sources-overview]]", "[[point-in-time-data]]", "[[walk-forward-analysis]]", "[[pybroker]]", "[[cryptodataapi]]"]
 ---
 
 # Lookahead Bias
@@ -198,6 +198,21 @@ No single check is sufficient. The discipline is treating leak-hunting as a stan
 - [[book-advances-in-financial-machine-learning]] — López de Prado on the full taxonomy of leakage
 - [[book-quantitative-trading-ernest-chan]] — Chan on practical lookahead detection
 - [[book-evidence-based-technical-analysis]] — Aronson on data integrity for TA research
+
+## Getting the Data (CryptoDataAPI)
+
+**Historical archive:**
+- `GET /api/v1/backtesting/klines` — OHLCV candle archive
+- `GET /api/v1/backtesting/funding` — funding-rate archive
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot
+- `GET /api/v1/backtesting/archives` — Parquet dataset archive (since 2020)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symbols"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 ## Related
 

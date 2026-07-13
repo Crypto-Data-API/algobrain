@@ -2,11 +2,11 @@
 title: "Breadth and Momentum Divergence (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, quantitative, momentum, market-regime, regime-detection, technical-analysis, risk-management]
 aliases: ["Breadth Divergence Basket", "Altcoin Breadth Signal", "Market Breadth Momentum Divergence", "Crypto Breadth Filter"]
-related: ["[[hyperliquid-baskets-overview]]", "[[macro-trend-regime]]", "[[bitcoin-cycle-regime]]", "[[on-chain-regime]]", "[[divergence]]", "[[relative-strength]]", "[[bitcoin-dominance-rotation]]", "[[200-day-moving-average]]", "[[moving-average]]", "[[momentum-rotation]]", "[[regime-strategy-playbook]]", "[[regime-adaptive-strategy]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[etf-and-institutional-flow]]", "[[macro-event-pump]]", "[[oi-confirmed-trend]]", "[[defensive-majors]]", "[[full-bear-short-book]]", "[[distribution-post-peak-short-book]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[macro-trend-regime]]", "[[bitcoin-cycle-regime]]", "[[on-chain-regime]]", "[[divergence]]", "[[relative-strength]]", "[[bitcoin-dominance-rotation]]", "[[200-day-moving-average]]", "[[moving-average]]", "[[momentum-rotation]]", "[[regime-strategy-playbook]]", "[[regime-adaptive-strategy]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[etf-and-institutional-flow]]", "[[macro-event-pump]]", "[[oi-confirmed-trend]]", "[[defensive-majors]]", "[[full-bear-short-book]]", "[[distribution-post-peak-short-book]]", "[[cryptodataapi]]"]
 strategy_type: quantitative
 timeframe: swing
 markets: [crypto]
@@ -198,6 +198,21 @@ This is a **swing-to-position-timeframe basket** (hold durations 3–20 days). K
 - [[divergence]], [[relative-strength]], [[bitcoin-dominance-rotation]] — core concept pages the signal is built on.
 - [[coinglass]], [[kaiko]], [[the-block]] — data sources for breadth metrics and dominance.
 - [[overfitting-detection]], [[crypto-perp-backtesting-pitfalls]] — calibration and validation caveats.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-health/summary` — dual health scores + sentiment
+- `GET /api/v1/market-health/altcoin-breadth` — % of coins above N-day MA (default 200)
+
+**Historical data:**
+- `GET /api/v1/market-health/history?days=730` — historical health scores
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
 
 ## Related
 

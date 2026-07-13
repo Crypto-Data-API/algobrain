@@ -2,7 +2,7 @@
 title: "Miner Capitulation Bottom"
 type: strategy
 created: 2026-06-03
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, bitcoin, market-regime, position-trading, quantitative, regime-detection]
 aliases: ["Miner Capitulation Bottom", "Hash Ribbon Strategy", "Miner Capitulation Trade"]
@@ -21,7 +21,7 @@ expected_sharpe: null        # deliberately unestimated — sample too small (se
 expected_max_drawdown: null  # mid-accumulation MTM drawdowns of 30-50% must be survivable (see Sizing)
 breakeven_cost_bps: null     # spot BTC, multi-month hold — costs are negligible relative to signal noise
 decay_evidence: "The signal rests on a SMALL sample (a handful of BTC cycles since 2012), and spot-ETF demand (2024+) plus industrial/public miners with balance-sheet buffers may dampen the classic forced-capitulation dynamic. Treat historical hit rate as low-n."
-related: ["[[on-chain-regime]]", "[[bitcoin-cycle-regime]]", "[[crypto-market-regime-taxonomy]]", "[[bitcoin-halving]]", "[[on-chain-analysis]]", "[[institutional-flow-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]"]
+related: ["[[on-chain-regime]]", "[[bitcoin-cycle-regime]]", "[[crypto-market-regime-taxonomy]]", "[[bitcoin-halving]]", "[[on-chain-analysis]]", "[[institutional-flow-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
 ---
 
 # Miner Capitulation Bottom
@@ -251,6 +251,26 @@ These are intentionally conservative because the underlying sample is too small 
 
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — the source that defines basket 7 (On-Chain Intelligence) and the "Miner Capitulation = late-bear bottoming signal" sub-state this page fills. The specific strategy construction (rules, pseudocode, kill criteria) is the wiki's own synthesis, framed against the regime taxonomy.
 - The Hash Ribbons indicator originates with Charles Edwards / Capriole Investments; the Puell Multiple with David Puell. These are referenced here as well-known public on-chain constructs — no specific external URL or backtest is asserted, in keeping with the small-sample caveat above.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

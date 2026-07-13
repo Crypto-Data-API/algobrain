@@ -2,13 +2,13 @@
 title: "Hyperliquid Perp Trading Map"
 type: concept
 created: 2026-04-14
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [strategy-development, hyperliquid, perpetual-futures, arbitrage, funding-rate, crypto, research]
 aliases: ["Hyperliquid Strategies", "Perp Trading Map", "Hyperliquid Opportunity Map"]
 domain: [strategy-development]
 difficulty: advanced
-related: ["[[arbitrage-opportunity-map]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[hyperliquid]]", "[[funding-rate-arbitrage]]", "[[basis-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation]]", "[[delta-neutral]]", "[[strategy-correlation-matrix]]", "[[failure-modes]]"]
+related: ["[[arbitrage-opportunity-map]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[hyperliquid]]", "[[funding-rate-arbitrage]]", "[[basis-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation]]", "[[delta-neutral]]", "[[strategy-correlation-matrix]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 ---
 
 # Hyperliquid Perp Trading Map
@@ -660,6 +660,25 @@ This analysis was produced on 2026-04-14 (last expanded 2026-06-20) by cross-ref
 | Order-book depth | HL CLOB; CEX WS | n/a |
 
 Key source pages are listed below.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Sources
 

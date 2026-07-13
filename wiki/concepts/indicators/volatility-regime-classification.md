@@ -2,11 +2,11 @@
 title: "Volatility Regime Classification"
 type: concept
 created: 2026-05-05
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [options, volatility, indicators, itpm, regime]
 aliases: ["Vol Regime", "Volatility Regimes", "Vol Environment Classification"]
-related: ["[[iv-rank-and-iv-percentile]]", "[[volatility-cone]]", "[[term-structure]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[vix]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[long-vol-vs-short-vol]]", "[[options-portfolio-construction]]", "[[crypto-market-regime-taxonomy]]", "[[technical-structural-regime]]"]
+related: ["[[iv-rank-and-iv-percentile]]", "[[volatility-cone]]", "[[term-structure]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[vix]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[long-vol-vs-short-vol]]", "[[options-portfolio-construction]]", "[[crypto-market-regime-taxonomy]]", "[[technical-structural-regime]]", "[[cryptodataapi]]"]
 domain: [volatility, indicators]
 prerequisites: ["[[implied-volatility]]", "[[realized-volatility]]"]
 difficulty: intermediate
@@ -280,6 +280,25 @@ This is intentionally simple. The point of regime classification is not predicti
 3. **Re-entering short-vol on first VIX downtick.** The transition out of *Stressed* is slower than the transition in. Wait for term structure confirmation.
 4. **Ignoring single-name regime divergence.** Macro can be *Calm* while a specific sector is *Stressed* (energy in 2014, regional banks in 2023). Apply the framework at portfolio level *and* at name level.
 5. **Using equity-style thresholds for [[crypto-options|crypto options]].** [[deribit|Deribit]] [[dvol|DVOL]] regimes are structurally hotter; thresholds need recalibration.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

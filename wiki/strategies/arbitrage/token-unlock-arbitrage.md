@@ -2,7 +2,7 @@
 title: "Token Unlock Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [arbitrage, crypto, derivatives, news, mean-reversion, event-driven]
 aliases: ["Cliff Unlock Short", "Vesting Arb", "Unlock Front-Running"]
@@ -20,7 +20,7 @@ crowding_risk: medium
 expected_sharpe: 1.1
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 50
-related: ["[[news-trading]]", "[[short-selling]]", "[[vampire-attack-arbitrage]]", "[[airdrop-farming]]", "[[perpetual-futures]]"]
+related: ["[[news-trading]]", "[[short-selling]]", "[[vampire-attack-arbitrage]]", "[[airdrop-farming]]", "[[perpetual-futures]]", "[[cryptodataapi]]"]
 ---
 
 # Token Unlock Arbitrage
@@ -201,6 +201,22 @@ The cost structure is why sizing is funding-gated: the trade is only worth doing
 - Messari research coverage of vesting and unlock dynamics
 - Block-level on-chain analytics from Nansen / Arkham
 - Aptos unlock schedule (2023-03-12 cliff, ~24M APT) verified via Perplexity (sonar), 2026-06-10 — citations: defillama.com/unlocks/aptos, coincarp.com/event/aptos, cryptorank.io/price/aptos/vesting
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

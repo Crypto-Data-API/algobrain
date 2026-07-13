@@ -2,13 +2,13 @@
 title: "Technical / Structural Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, market-regime, technical-analysis, market-microstructure, indicators]
 aliases: ["Technical Regime", "Structural Overlay", "Technical/Structural Regime", "Price Structure Overlay"]
 domain: [market-microstructure, technical-analysis]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[volatility-regime-classification]]", "[[derivatives-native-regime]]", "[[moving-average]]", "[[bollinger-bands]]", "[[range-trading]]", "[[multiple-timeframe-analysis]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[volatility-regime-classification]]", "[[derivatives-native-regime]]", "[[moving-average]]", "[[bollinger-bands]]", "[[range-trading]]", "[[multiple-timeframe-analysis]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 The **Technical / Structural regime** is basket #14 of the 14-basket crypto regime taxonomy (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]) — and unlike most of the other thirteen, it is **not a market state on its own**. It is a **universal overlay**: a family of price-structure setups that activate *inside* any of the directional baskets rather than describing one. Moving-average crossings, compression breakouts, range fades, and exhaustion fades fire in bull, bear, and chop alike — what changes is which of them works, and how hard you press it. The framework's core insight is that on crypto these structural signals are too noisy to trade on price alone; confirmation comes from **layering derivatives** ([[funding-rate|funding]] and [[open-interest|OI]]) on top of the price signal to separate a real break from a fakeout. Pair this overlay with [[volatility-regime-classification]] (the other universal overlay) and gate both by the active backdrop. This page is a regime synthesis — it frames the indicators (whose mechanics live elsewhere) as a confirmable *overlay*. See [[crypto-market-regime-taxonomy]] for the full basket map.
@@ -71,6 +71,25 @@ The Technical / Structural basket is one of the **two universal overlays** — t
 ## Sources
 
 - (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]) — defines the 14-basket taxonomy, frames basket #14 as a universal overlay, and specifies the 200MA institutional reference, the Bollinger-squeeze + OI breakout read, range-fade conditions, and the RSI/funding/OI exhaustion stack.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

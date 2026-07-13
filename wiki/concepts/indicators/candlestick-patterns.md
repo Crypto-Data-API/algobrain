@@ -2,7 +2,7 @@
 title: Candlestick Patterns
 type: concept
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [technical-analysis, indicators]
 aliases: ["candle patterns", "candlestick charting", "japanese candlesticks", "hammer", "doji", "red candle", "green candle", "morning star", "evening star", "shooting star"]
@@ -10,6 +10,7 @@ domain: [technical-analysis]
 prerequisites: ["[[price-action-trading]]"]
 difficulty: beginner
 related:
+  - "[[cryptodataapi]]"
   - "[[price-action-trading]]"
   - "[[trend]]"
   - "[[trading-volume]]"
@@ -84,6 +85,25 @@ Candlestick patterns are most reliable when confirmed by [[trading-volume]], key
 - **Context over shape.** Context matters more than the pattern itself — a hammer at a major support level is far more meaningful than one in the middle of a range.
 - **Timeframe dependence.** A reversal candle on a 1-minute chart is noise relative to the same shape on a weekly chart; align signals across timeframes.
 - **No price targets.** Patterns suggest *direction and timing*, not magnitude — pair them with measured moves, [[support-and-resistance]], or [[risk-management|risk-management]] rules.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 ## Related
 

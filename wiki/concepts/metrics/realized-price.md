@@ -2,14 +2,14 @@
 title: "Realized Price & Realized Cap"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["Realized Price", "Realized Cap", "Realized Capitalization", "realized-cap", "realized-capitalization", "Realised Price", "Realised Cap"]
 domain: [market-microstructure]
 prerequisites: ["[[on-chain-analysis]]", "[[market-capitalization]]"]
 difficulty: intermediate
-related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[nupl]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[hodl-waves]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]"]
+related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[nupl]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[hodl-waves]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]", "[[cryptodataapi]]"]
 ---
 
 **Realized Price** and **Realized Cap** (realized capitalization) are foundational [[on-chain-analysis|on-chain]] valuation measures that value each coin not at the current market price but at the **price it last moved** on-chain. Realized cap sums those last-moved values across the entire supply, giving the market's aggregate **cost basis**; realized price divides that by supply to express it as a single per-coin figure. Together they underpin a whole family of derived metrics — [[mvrv|MVRV]], [[mvrv-z-score|MVRV Z-Score]], and [[nupl|NUPL]] — and the realized price itself is widely watched as a dynamic support/resistance level. Both were popularised by analytics firms such as [[glassnode]] and [[cryptoquant]] (and originate in work by Coin Metrics).
@@ -50,6 +50,26 @@ Imagine [[bitcoin]]'s supply: a large block of coins last moved years ago at low
 - **Account-based vs UTXO chains**: realized cap is cleanest on UTXO chains like [[bitcoin]]; on account-based chains (e.g. Ethereum) the "last-moved price" must be approximated, making the figure noisier.
 - **Slow to update**: because it only changes when coins move, realized cap can lag genuine shifts in holder cost basis during fast accumulation/distribution.
 - **Provider differences**: dust filters, exchange labelling, and supply definitions differ between [[glassnode]], [[cryptoquant]], and others, so realized-price levels for the same date can vary across sources.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

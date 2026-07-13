@@ -2,13 +2,13 @@
 title: "Walk-Forward Analysis"
 type: concept
 created: 2026-04-10
-updated: 2026-06-14
+updated: 2026-07-13
 status: excellent
 tags: [backtesting, validation, methodology, walk-forward]
 aliases: ["Walk-Forward Optimization", "WFA", "WFO", "Rolling Out-of-Sample"]
 domain: [backtesting]
 difficulty: intermediate
-related: ["[[backtesting-overview]]", "[[in-sample-vs-out-of-sample]]", "[[overfitting-detection]]", "[[purged-kfold-cv]]", "[[hypothesis-to-backtest-workflow]]", "[[cross-validation]]", "[[deflated-sharpe-ratio]]"]
+related: ["[[backtesting-overview]]", "[[in-sample-vs-out-of-sample]]", "[[overfitting-detection]]", "[[purged-kfold-cv]]", "[[hypothesis-to-backtest-workflow]]", "[[cross-validation]]", "[[deflated-sharpe-ratio]]", "[[cryptodataapi]]"]
 ---
 
 # Walk-Forward Analysis
@@ -226,6 +226,21 @@ If the in-sample Sharpe averaged 1.4 and the walk-forward Sharpe is 0.8, walk-fo
 - [Medium — Respect the Order: Cross-Validation in Time Series](https://medium.com/@pacosun/respect-the-order-cross-validation-in-time-series-7d12beab79a1) — k-fold temporal-ordering failure
 - [[book-advances-in-financial-machine-learning]] — López de Prado, Chapter 7
 - [[book-evidence-based-technical-analysis]] — data-mining bias and out-of-sample testing context
+
+## Getting the Data (CryptoDataAPI)
+
+**Historical archive:**
+- `GET /api/v1/backtesting/klines` — OHLCV candle archive
+- `GET /api/v1/backtesting/funding` — funding-rate archive
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot
+- `GET /api/v1/backtesting/archives` — Parquet dataset archive (since 2020)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symbols"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 ## Related
 

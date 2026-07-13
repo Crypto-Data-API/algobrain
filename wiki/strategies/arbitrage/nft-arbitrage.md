@@ -2,7 +2,7 @@
 title: "NFT Arbitrage"
 type: strategy
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-13
 status: good
 tags: [arbitrage, nft, opensea, blur, marketplace, floor-price, traits, fractionalization, crypto]
 aliases: ["NFT Arb", "NFT Marketplace Arbitrage", "NFT Floor Arbitrage"]
@@ -11,7 +11,7 @@ timeframe: scalp|day
 markets: [crypto]
 complexity: advanced
 backtest_status: untested
-related: ["[[nft-trading]]", "[[nft]]", "[[decentralized-exchanges]]", "[[cross-exchange-arbitrage]]", "[[wash-trading]]"]
+related: ["[[nft-trading]]", "[[nft]]", "[[decentralized-exchanges]]", "[[cross-exchange-arbitrage]]", "[[wash-trading]]", "[[cryptodataapi]]"]
 ---
 
 # NFT Arbitrage
@@ -92,6 +92,20 @@ Beyond simple cross-marketplace arb, more sophisticated variants include trait-b
 - **Blur vs. OpenSea price war (2023):** Blur launched with zero fees and optional royalties, creating price discrepancies with OpenSea (which enforced royalties). Arbers bought cheaper on Blur and sold on OpenSea.
 - **NFTX vault arbitrage:** CryptoPunk vault tokens periodically traded at 3-5% discounts to the Punk floor price. Traders bought tokens, redeemed Punks, and sold at floor for profit.
 - **Sudoswap AMM arb:** Sudoswap's bonding curve model creates predictable pricing. When marketplace floors diverge from pool prices, arb bots buy from the cheaper source.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/nfts/overview` — NFT market overview
+- `GET /api/v1/nfts/collections` — collection list
+- `GET /api/v1/nfts/volume` — volume data
+- `GET /api/v1/nfts/correlations` — collection correlations
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/overview"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]].
 
 ## See Also
 - [[nft-trading]] and [[nft]] -- foundational knowledge about NFT technology and trading

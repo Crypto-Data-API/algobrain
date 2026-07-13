@@ -2,7 +2,7 @@
 title: "GBTC Premium-to-Discount Flip — The Trade That Killed 3AC"
 type: news
 created: 2026-04-24
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [news, arbitrage, crypto, etf, bitcoin, history]
 event_date: 2022-12-01
@@ -11,6 +11,7 @@ impact: high
 verified: true
 sources_count: 6
 related:
+  - "[[cryptodataapi]]"
   - "[[gbtc-discount-arbitrage]]"
   - "[[bankruptcy-claim-arbitrage]]"
   - "[[2022-05-terra-luna-depeg-arb]]"
@@ -120,6 +121,27 @@ The GBTC saga is the canonical example of how a "guaranteed" arbitrage can becom
 - Three Arrows Capital Chapter 15 filing (July 1, 2022); Voyager, Celsius, Genesis bankruptcy filings (2022-2023).
 - DCG / Genesis disclosures of the $1.1B promissory note and $2.36B 3AC exposure (2022-2023).
 - Bloomberg / CoinDesk coverage of the GBTC discount and 3AC contagion (2021-2024).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

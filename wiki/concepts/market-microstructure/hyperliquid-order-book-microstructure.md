@@ -2,11 +2,11 @@
 title: "Hyperliquid Order Book Microstructure"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: draft
 tags: [crypto, market-microstructure, liquidity, slippage, derivatives]
 aliases: ["Hyperliquid Order Book", "HyperCore Order Book Microstructure", "Hyperliquid Microstructure"]
-related: ["[[hyperliquid]]", "[[clob]]", "[[hypercore]]", "[[hyperbft]]", "[[hyperliquid-order-book-microstructure]]", "[[latency-and-mev-on-chain-clob]]", "[[hlp]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hip-3-builder-deployed-perps]]", "[[level-4-order-book-data]]", "[[market-microstructure]]", "[[slippage]]", "[[market-impact]]", "[[price-time-priority]]"]
+related: ["[[hyperliquid]]", "[[clob]]", "[[hypercore]]", "[[hyperbft]]", "[[hyperliquid-order-book-microstructure]]", "[[latency-and-mev-on-chain-clob]]", "[[hlp]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hip-3-builder-deployed-perps]]", "[[level-4-order-book-data]]", "[[market-microstructure]]", "[[slippage]]", "[[market-impact]]", "[[price-time-priority]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[clob]]"]
 difficulty: advanced
@@ -86,6 +86,25 @@ A research-grade **Level-4 Hyperliquid order-book dataset** has been captured by
 The generic [[clob]] page describes matching, price-time priority, and the CEX-style HFT/latency-arbitrage dynamics that arise when a private engine matches in microseconds. Hyperliquid keeps the *matching rule* but changes the *substrate*: matching is part of consensus, the book is public, and the relevant latency unit is the block, not the microsecond. Those substrate differences — and their MEV/front-running consequences — are the subject of [[latency-and-mev-on-chain-clob]]. The carry feedback from impact prices is the subject of [[hyperliquid-funding-rate-microstructure]].
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

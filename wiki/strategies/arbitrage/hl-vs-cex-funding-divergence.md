@@ -2,7 +2,7 @@
 title: "HL vs CEX Funding Divergence"
 type: strategy
 created: 2026-05-05
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [arbitrage, crypto, defi, derivatives]
 aliases: ["HL-Binance Funding Arb", "Cross-Venue Funding Spread", "Hyperliquid Funding Arb"]
@@ -20,7 +20,7 @@ crowding_risk: medium
 expected_sharpe: 2.5
 expected_max_drawdown: 0.15
 breakeven_cost_bps: 25
-related: ["[[funding-rate-arbitrage]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[funding-rate]]", "[[hyperliquid]]", "[[cross-exchange-arbitrage]]", "[[hlp-cascade-alongside-playbook]]"]
+related: ["[[funding-rate-arbitrage]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[funding-rate]]", "[[hyperliquid]]", "[[cross-exchange-arbitrage]]", "[[hlp-cascade-alongside-playbook]]", "[[cryptodataapi]]"]
 ---
 
 # HL vs CEX Funding Divergence
@@ -368,6 +368,25 @@ See [[when-to-retire-a-strategy]] for the broader framework. Like [[funding-rate
 - 2024 HYPE airdrop + memecoin period: peak HL-vs-CEX divergence; 100–300% APR windows widely reported by cross-venue arb desks.
 - Late-2024 to 2025 compression: BTC/ETH spreads on majors compressed sharply as more capital deployed; alts and memes remain wide.
 - HLP JELLYJELLY incident (March 2025) — coordinated thin-pair attack creating a transient HL-specific funding dislocation distinct from CEX. (See [[hyperliquid-hlp-basis-arbitrage]].)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

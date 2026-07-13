@@ -2,11 +2,11 @@
 title: "Token Unlock / Supply Event (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, event-driven, quantitative, backtesting]
 aliases: ["Token Unlock Short", "Cliff Unlock Basket", "Vesting Event Strategy", "Supply Shock Perp"]
-related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[on-chain-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[token-unlocks]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[leverage]]", "[[basis]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[exchange-listing-delisting]]", "[[meme-coin-cycle]]", "[[cross-sectional-relative-value]]", "[[cryptoquant]]", "[[coinglass]]", "[[the-block]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[on-chain-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[token-unlocks]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[leverage]]", "[[basis]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[exchange-listing-delisting]]", "[[meme-coin-cycle]]", "[[cross-sectional-relative-value]]", "[[cryptoquant]]", "[[coinglass]]", "[[the-block]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 strategy_type: quantitative
 timeframe: swing
 markets: [crypto]
@@ -266,6 +266,22 @@ Token unlock shorts on Hyperliquid carry the same thin-perp risks as any event-d
 - [[coinglass]] — cross-venue OI and funding for crowding corroboration
 - [[the-block]] — project-level fundamental context
 - [[atr-position-sizing]] — dynamic position sizing methodology
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

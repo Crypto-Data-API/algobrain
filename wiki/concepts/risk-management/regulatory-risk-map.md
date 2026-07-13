@@ -2,14 +2,14 @@
 title: "Regulatory Risk Map for Trading Strategies"
 type: concept
 created: 2026-04-20
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [risk-management, regulation, arbitrage, crypto, options, defi]
 aliases: ["Regulatory Risk Map", "Trading Regulation", "Compliance Map"]
 domain: [risk-management]
 prerequisites: ["[[risk-management-overview]]"]
 difficulty: intermediate
-related: ["[[regulatory-arbitrage]]", "[[arbitrage-overview]]", "[[counterparty-risk]]", "[[tax-implications-trading]]", "[[cross-exchange-arbitrage]]", "[[funding-rate-arbitrage]]", "[[flash-loan-arbitrage]]", "[[mev-strategies]]", "[[2017-2021-kimchi-premium]]"]
+related: ["[[regulatory-arbitrage]]", "[[arbitrage-overview]]", "[[counterparty-risk]]", "[[tax-implications-trading]]", "[[cross-exchange-arbitrage]]", "[[funding-rate-arbitrage]]", "[[flash-loan-arbitrage]]", "[[mev-strategies]]", "[[2017-2021-kimchi-premium]]", "[[cryptodataapi]]"]
 ---
 
 # Regulatory Risk Map for Trading Strategies
@@ -210,6 +210,22 @@ Related wiki context that contributed framing:
 - [[2017-2021-kimchi-premium]]
 - [[regulatory-arbitrage]]
 - [[failure-modes]]
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/policy/headlines` — live regulatory feed (Federal Register / SEC / CFTC)
+- `GET /api/v1/policy/regime` — policy risk + signed tilt + rate calendar
+- `GET /api/v1/policy/regime/score` — policy-risk composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/policy/headlines"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

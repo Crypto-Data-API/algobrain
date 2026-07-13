@@ -2,7 +2,7 @@
 title: "Level 4 Order Book Data (Hyperliquid)"
 type: source
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: draft
 tags: [data-provider, crypto, hyperliquid, market-microstructure, backtesting, on-chain]
 aliases: ["Level 4 Order Book Data", "L4 Order Book Data", "L4 data", "Hyperliquid Level 4 dataset"]
@@ -12,7 +12,7 @@ source_author: "SSRN working paper (authors per the SSRN listing) + research sum
 source_date: 2026-04-22
 source_file: "raw/articles/2026-04-22-gap-finder-hyperliquid-order-books.md"
 confidence: medium
-related: ["[[hyperliquid]]", "[[hypercore]]", "[[hyperliquid-order-book-microstructure]]", "[[hyperliquid-api-and-sdk]]", "[[market-microstructure]]", "[[clob]]", "[[hypurrscan]]", "[[exchange-api-reference]]"]
+related: ["[[hyperliquid]]", "[[hypercore]]", "[[hyperliquid-order-book-microstructure]]", "[[hyperliquid-api-and-sdk]]", "[[market-microstructure]]", "[[clob]]", "[[hypurrscan]]", "[[exchange-api-reference]]", "[[cryptodataapi]]"]
 ---
 
 **Level 4 (L4) order book data** is the most granular tier of order book data: a complete, message-by-message record of every order **addition, execution, cancellation, and update**, sufficient to reconstruct the entire state of the book over time. The grounding research highlights a research-grade L4 dataset for [[hyperliquid|Hyperliquid]] described in an SSRN working paper, **"Level 4 Order Book Data from the Hyperliquid Exchange,"** captured by running a **non-validating node** on Hyperliquid to record these extremely granular order-book events (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]]; SSRN). Because Hyperliquid runs a fully on-chain [[clob|CLOB]] in [[hypercore|HyperCore]], the venue is unusually well suited to producing this kind of complete, auditable event stream.
@@ -72,6 +72,25 @@ For *live* trading, the [[hyperliquid-api-and-sdk|public WebSocket/REST feeds]] 
 | **Level 4 dataset (this page)** | Full L4 event stream | Microstructure research, backtesting, MM-behavior studies |
 
 L4 data signals that Hyperliquid is not only a trading venue but also a fertile ground for cutting-edge microstructure research — a bridge between trading practice and academic insight.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

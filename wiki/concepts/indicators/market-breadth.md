@@ -2,7 +2,7 @@
 title: Market Breadth
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-13
 status: excellent
 tags: [indicators, technical-analysis, market-internals, market-breadth]
 aliases: ["breadth indicators", "advance-decline", "market internals", "Market Breadth"]
@@ -10,6 +10,7 @@ domain: [indicators]
 prerequisites: ["[[trend]]", "[[trading-volume]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[trend]]"
   - "[[divergence]]"
   - "[[relative-strength]]"
@@ -93,6 +94,21 @@ Before many major market tops, breadth begins deteriorating months in advance wh
 - Martin Zweig, *Winning on Wall Street* — the Zweig Breadth Thrust.
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — McClellan Oscillator and Arms Index construction.
 - General market knowledge — A/D-line worked example, formula table, and divergence interpretation are standard technical-analysis material.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-health/summary` — dual health scores + sentiment
+- `GET /api/v1/market-health/altcoin-breadth` — % of coins above N-day MA (default 200)
+
+**Historical data:**
+- `GET /api/v1/market-health/history?days=730` — historical health scores
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
 
 ## Related
 

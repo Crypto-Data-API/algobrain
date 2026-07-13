@@ -2,13 +2,13 @@
 title: "Depth of Market"
 type: concept
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [market-microstructure, liquidity]
 aliases: ["Depth of Market", "DOM", "Level 2", "Level II", "Order Book"]
 domain: [market-microstructure]
 difficulty: intermediate
-related: ["[[order-flow-analysis]]", "[[market-microstructure]]", "[[bid-ask-spread]]", "[[market-making]]", "[[liquidity]]", "[[liquidity-depth-regime]]", "[[crypto-market-regime-taxonomy]]", "[[open-interest]]", "[[slippage-modeling]]", "[[hyperliquid]]", "[[2025-10-crypto-liquidation-cascade]]"]
+related: ["[[order-flow-analysis]]", "[[market-microstructure]]", "[[bid-ask-spread]]", "[[market-making]]", "[[liquidity]]", "[[liquidity-depth-regime]]", "[[crypto-market-regime-taxonomy]]", "[[open-interest]]", "[[slippage-modeling]]", "[[hyperliquid]]", "[[2025-10-crypto-liquidation-cascade]]", "[[cryptodataapi]]"]
 ---
 
 Depth of Market (DOM), also known as Level 2 data, is a real-time display of all outstanding buy and sell limit orders for a security at each price level. While Level 1 data shows only the best bid and best ask (the inside quotes), DOM reveals the full stack of orders waiting behind the top of book, providing a granular view of supply and demand at every price. DOM is a primary tool for short-term and [[day-trading|day traders]], scalpers, and anyone practicing [[order-flow-analysis]].
@@ -79,6 +79,22 @@ The per-minute cadence is coarser than the millisecond churn of an equity DOM, w
 ## Limitations
 
 The modern DOM has significant limitations compared to when floor trading dominated. In today's fragmented electronic markets, the DOM for any single exchange shows only orders at that venue, not the consolidated book across all exchanges and dark pools. Hidden order types (iceberg, reserve, dark pool orders) do not appear in the DOM at all. [[high-frequency-trading|High-frequency traders]] can add and remove orders in microseconds, making the displayed book highly unstable -- what you see at one instant may be gone a millisecond later. For these reasons, many professional traders now supplement raw DOM data with aggregated order flow tools, cumulative delta analysis, and [[market-making|market maker]] positioning estimates.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+- `GET /api/v1/liquidity/oi-divergence` — OI vs price divergence (1h/4h/24h)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — raw L2 order book snapshot
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

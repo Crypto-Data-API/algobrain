@@ -2,13 +2,13 @@
 title: "Meme / Speculative Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, altcoins, market-regime, behavioral-finance, market-microstructure]
 aliases: ["Meme Regime", "Speculative Regime", "Memecoin Regime", "Lowcap Rotation"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[macro-trend-regime]]", "[[on-chain-regime]]", "[[event-catalyst-regime]]", "[[low-cap-crypto-trading-map]]", "[[liquidity-depth-regime]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[macro-trend-regime]]", "[[on-chain-regime]]", "[[event-catalyst-regime]]", "[[low-cap-crypto-trading-map]]", "[[liquidity-depth-regime]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 # Meme / Speculative Regime
@@ -80,6 +80,25 @@ The discipline that matters here is **position sizing and a pre-committed exit**
 
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — Crypto Data API (VENTURE AI LABS), basket #3 of the 14-basket framework (#meta source summary)
 - [[low-cap-crypto-trading-map]] — existing deep-dive on lowcap coin selection and execution
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

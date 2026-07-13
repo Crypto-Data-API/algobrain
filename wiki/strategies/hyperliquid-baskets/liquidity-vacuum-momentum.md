@@ -2,11 +2,11 @@
 title: "Liquidity-Vacuum Momentum (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, scalping, market-microstructure, momentum, quantitative, risk-management]
 aliases: ["Liquidity Vacuum", "Book Thinness Momentum", "Order-Book Vacuum Scalp", "Vacuum Momentum Trade"]
-related: ["[[hyperliquid-baskets-overview]]", "[[liquidity-depth-regime]]", "[[technical-structural-regime]]", "[[short-liquidation-squeeze]]", "[[long-liquidation-cascade]]", "[[volatility-compression-breakout]]", "[[breakout-trading]]", "[[liquidity]]", "[[order-flow]]", "[[bid-ask-spreads]]", "[[open-interest]]", "[[funding-rate]]", "[[atr]]", "[[leverage]]", "[[liquidation]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2024-03-hyperliquid-cascade]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[liquidity-depth-regime]]", "[[technical-structural-regime]]", "[[short-liquidation-squeeze]]", "[[long-liquidation-cascade]]", "[[volatility-compression-breakout]]", "[[breakout-trading]]", "[[liquidity]]", "[[order-flow]]", "[[bid-ask-spreads]]", "[[open-interest]]", "[[funding-rate]]", "[[atr]]", "[[leverage]]", "[[liquidation]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2024-03-hyperliquid-cascade]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic
 timeframe: scalp
 markets: [crypto]
@@ -325,6 +325,22 @@ Numeric conditions for retiring this basket (see [[when-to-retire-a-strategy]]):
 - [[liquidity]] — theoretical framework for order-book liquidity and depth.
 - [[order-flow]] — microstructure basis for directional momentum in thin markets.
 - [[crypto-perp-backtesting-pitfalls]] — execution-quality bias in scalp strategy backtests.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+- `GET /api/v1/liquidity/oi-divergence` — OI vs price divergence (1h/4h/24h)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — raw L2 order book snapshot
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

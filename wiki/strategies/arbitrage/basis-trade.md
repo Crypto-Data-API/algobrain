@@ -2,7 +2,7 @@
 title: "Basis Trade"
 type: strategy
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-07-13
 status: good
 tags: [arbitrage, quantitative, futures, leverage, market-neutral, crypto, risk-management]
 aliases: ["Cash-and-Carry", "Basis Trading", "Treasury Basis Trade", "Spot-Futures Basis"]
@@ -20,7 +20,7 @@ crowding_risk: high
 expected_sharpe: 1.5
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 5
-related: ["[[cash-and-carry]]", "[[basis]]", "[[arbitrage]]", "[[futures]]", "[[repo]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[contango]]", "[[edge-taxonomy]]"]
+related: ["[[cash-and-carry]]", "[[basis]]", "[[arbitrage]]", "[[futures]]", "[[repo]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[contango]]", "[[edge-taxonomy]]", "[[cryptodataapi]]"]
 ---
 
 # Basis Trade
@@ -140,6 +140,25 @@ def basis_trade(spot, future, dte, repo_rate, hurdle_bps):
 
 ## Sources
 General market knowledge; no specific wiki source ingested yet.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 - [[cash-and-carry]] — the same trade described for crypto/commodities

@@ -2,13 +2,13 @@
 title: "Carry Trade / Basis Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, derivatives, market-regime, market-microstructure, arbitrage, leverage]
 aliases: ["Basis Regime", "Carry Trade Regime", "Futures Basis Regime", "Basis Health"]
 domain: [market-microstructure, derivatives]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[derivatives-native-regime]]", "[[liquidity-depth-regime]]", "[[basis]]", "[[basis-trading]]", "[[funding-rate-arbitrage]]", "[[funding-rate]]", "[[2025-10-crypto-liquidation-cascade]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[derivatives-native-regime]]", "[[liquidity-depth-regime]]", "[[basis]]", "[[basis-trading]]", "[[funding-rate-arbitrage]]", "[[funding-rate]]", "[[2025-10-crypto-liquidation-cascade]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 The **Carry Trade / Basis regime** is basket #8 of the 14-basket crypto regime taxonomy (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]). Its central claim is that the futures [[basis]] — the spread between perpetual or dated-futures price and spot — is not merely a funding signal but a *regime in its own right, and specifically a fragility gauge*. The mechanics of how basis arises and how it is harvested are covered elsewhere: see [[basis]] and [[basis-trading]] for the cash-and-carry spread, and [[funding-rate-arbitrage]] for the delta-neutral perp/spot trade. This page does something different — it reads **basis health as a state of the system**. The framework's key observation is that *basis collapse historically precedes the clearest cascade warnings*: a persistently positive [[funding-rate]] paired with record open interest is fragility forming, and the basis is the dial that shows it building and breaking. See [[crypto-market-regime-taxonomy]] for the full basket map.
@@ -69,6 +69,25 @@ Basis collapse rarely happens in a vacuum: it usually *coincides with* a trigger
 ## Sources
 
 - (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]) — defines the 14-basket taxonomy and the basis-health bands (8%+ / 3–6% / <4% APR) used here.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

@@ -2,11 +2,11 @@
 title: "Max Pain"
 type: concept
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [options, derivatives, market-microstructure, behavioral-finance]
 aliases: ["Max Pain", "Maximum Pain Theory", "Max Pain Strike"]
-related: ["[[options-pinning]]", "[[pin-risk]]", "[[gamma-exposure]]", "[[dealer-hedging]]", "[[zero-dte-options]]", "[[volatility-skew]]", "[[options-open-interest]]", "[[opex]]", "[[gamma-flip]]", "[[implied-volatility]]"]
+related: ["[[options-pinning]]", "[[pin-risk]]", "[[gamma-exposure]]", "[[dealer-hedging]]", "[[zero-dte-options]]", "[[volatility-skew]]", "[[options-open-interest]]", "[[opex]]", "[[gamma-flip]]", "[[implied-volatility]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, options, behavioral-finance]
 difficulty: intermediate
 ---
@@ -175,6 +175,27 @@ Three related concepts get conflated and should be kept distinct.
 5. **"Max pain is predictive 1-2 weeks before expiration."** No. The pinning effect manifests in the final session or two of the contract life. OI weeks ahead of expiry is dominated by hedging and overlay flows that have nothing to do with where the underlying will settle.
 
 6. **"Max pain works on crypto / FX / commodities."** Largely no — most of the literature is on US single-stock and index options. Crypto options ([[deribit-options|Deribit]] BTC options) show some pinning behaviour around big monthly expiries, but the dealer composition is different and the 0DTE dilution is now acute on Deribit too.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

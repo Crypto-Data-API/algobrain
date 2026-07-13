@@ -2,14 +2,14 @@
 title: "Rug Pulls"
 type: concept
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-07-13
 status: good
 tags: [crypto, defi, risk-management, security, scams, exploits]
 aliases: ["rug pull", "rugpull", "exit scam", "soft rug", "hard rug"]
 domain: [risk-management, crypto]
 difficulty: beginner
 prerequisites: ["[[defi]]"]
-related: ["[[smart-contract-risk]]", "[[counterparty-risk]]", "[[defi-hacks-and-exploits]]", "[[2024-meme-coin-supercycle]]"]
+related: ["[[smart-contract-risk]]", "[[counterparty-risk]]", "[[defi-hacks-and-exploits]]", "[[2024-meme-coin-supercycle]]", "[[cryptodataapi]]"]
 ---
 
 A rug pull is a crypto scam where project creators drain liquidity, abandon the project, or otherwise steal user funds after attracting deposits. Unlike technical exploits where attackers find bugs, rug pulls are intentional fraud by insiders. The term comes from the image of "pulling the rug out from under" investors. Rug pulls are the most common form of crypto fraud by *number of incidents* (thousands per year) though individual amounts are typically smaller than protocol exploits. Chainalysis estimated rug pulls accounted for $2.8B in losses in 2021 alone.
@@ -101,6 +101,23 @@ Rug pulls are increasingly prosecuted:
 - In many jurisdictions, rug pulls constitute wire fraud, securities fraud, or theft — all criminal offenses
 
 However, prosecution is difficult when teams are anonymous and funds are laundered through mixers or cross-chain bridges.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

@@ -2,12 +2,12 @@
 title: "Pump.fun vs LetsBonk.fun vs Believe vs Moonshot vs Heaven"
 type: comparison
 created: 2026-05-04
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, solana, memecoin, launchpad, comparison]
 subjects: ["[[pump-fun]]", "[[letsbonk]]", "[[believe]]", "[[moonshot]]", "[[heaven-launchpad]]"]
 comparison_dimensions: [chain, fee-model, bonding-curve, graduation-threshold, target-audience, mobile-support, revenue-burn, ecosystem-stickiness]
-related: ["[[bonding-curve-analysis]]", "[[memecoin-sniping]]", "[[token-migration-sniping]]", "[[low-cap-crypto-trading-map]]", "[[axiom-pro]]", "[[gmgn]]", "[[bitquery]]", "[[raydium]]", "[[pumpswap]]", "[[solana]]"]
+related: ["[[bonding-curve-analysis]]", "[[memecoin-sniping]]", "[[token-migration-sniping]]", "[[low-cap-crypto-trading-map]]", "[[axiom-pro]]", "[[gmgn]]", "[[bitquery]]", "[[raydium]]", "[[pumpswap]]", "[[solana]]", "[[cryptodataapi]]"]
 ---
 
 # Pump.fun vs LetsBonk.fun vs Believe vs Moonshot vs Heaven
@@ -229,6 +229,23 @@ Implications for traders:
 - Public knowledge: Pump.fun expansion to Base and Blast (April 2024); 10M+ token launches milestone (Dec 2024)
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

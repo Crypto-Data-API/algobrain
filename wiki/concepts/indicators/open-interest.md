@@ -2,7 +2,7 @@
 title: "Open Interest"
 type: concept
 created: 2026-04-06
-updated: 2026-04-14
+updated: 2026-07-13
 status: good
 confidence: medium
 tags: [derivatives, indicators, open-interest, futures, commodities]
@@ -10,7 +10,7 @@ aliases: ["OI"]
 domain: [derivatives, indicators, market-microstructure]
 prerequisites: ["[[perpetual-futures]]", "[[futures-overview]]"]
 difficulty: beginner
-related: ["[[perpetual-futures]]", "[[funding-rate]]", "[[volume]]", "[[liquidation]]", "[[cot-report-analysis]]", "[[futures-overview]]", "[[speculative-positioning]]", "[[commercial-hedger-positioning]]", "[[commodities]]"]
+related: ["[[perpetual-futures]]", "[[funding-rate]]", "[[volume]]", "[[liquidation]]", "[[cot-report-analysis]]", "[[futures-overview]]", "[[speculative-positioning]]", "[[commercial-hedger-positioning]]", "[[commodities]]", "[[cryptodataapi]]"]
 ---
 
 # Open Interest
@@ -116,6 +116,25 @@ This breakdown adds a critical layer of information: not just how much open inte
 - [[speculative-positioning]] -- How speculator OI at extremes signals reversals
 - [[commercial-hedger-positioning]] -- How commercial hedger OI reflects fundamental conditions
 - [[commodities]] -- Physical commodity markets where OI analysis originated
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

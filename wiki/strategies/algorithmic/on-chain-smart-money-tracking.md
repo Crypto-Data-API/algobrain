@@ -2,7 +2,7 @@
 title: "On-Chain Smart Money Tracking"
 type: strategy
 created: 2026-05-04
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, algorithmic, scalping]
 aliases: ["Smart Wallet Tracking", "On-Chain Copy Trading", "Wallet Alpha"]
@@ -21,7 +21,7 @@ expected_sharpe: null   # no rigorous public Sharpe exists; see Performance char
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 300
 decay_evidence: "Memecoin smart-money alpha is documented as decaying within minutes-to-days as wallets become widely tracked; specific backtested numbers are not reliably published."
-related: ["[[copy-trading]]", "[[smart-money]]", "[[smart-money-concepts]]", "[[memecoin-sniping]]", "[[gmgn]]", "[[birdeye]]", "[[nansen]]"]
+related: ["[[copy-trading]]", "[[smart-money]]", "[[smart-money-concepts]]", "[[memecoin-sniping]]", "[[gmgn]]", "[[birdeye]]", "[[nansen]]", "[[cryptodataapi]]"]
 ---
 
 # On-Chain Smart Money Tracking
@@ -248,6 +248,26 @@ See [[when-to-retire-a-strategy]].
 
 - [[2026-04-22-gap-finder-low-cap-crypto-trading-microcaps-memecoi]]
 - [[2026-04-22-gap-finder-pump.fun-competitors-letsbonk-believe-mo]]
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

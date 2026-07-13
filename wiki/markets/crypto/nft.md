@@ -2,11 +2,11 @@
 title: "NFTs — Non-Fungible Tokens"
 type: market
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, nft, digital-assets, ethereum, history]
 aliases: ["non-fungible-token", "non-fungible-tokens", "nfts", "NFT"]
-related: ["[[nft-trading]]", "[[ethereum]]", "[[solana]]", "[[crypto-overview]]", "[[defi]]", "[[nft-arbitrage]]", "[[wash-trading]]", "[[opensea]]", "[[blur]]", "[[magic-eden]]", "[[looksrare]]", "[[bored-ape-yacht-club]]", "[[cryptopunks]]", "[[art-blocks]]", "[[autoglyphs]]", "[[nba-top-shot]]", "[[meebits]]", "[[cool-cats]]", "[[pudgy-penguins]]", "[[azuki]]", "[[gas-fees]]"]
+related: ["[[nft-trading]]", "[[ethereum]]", "[[solana]]", "[[crypto-overview]]", "[[defi]]", "[[nft-arbitrage]]", "[[wash-trading]]", "[[opensea]]", "[[blur]]", "[[magic-eden]]", "[[looksrare]]", "[[bored-ape-yacht-club]]", "[[cryptopunks]]", "[[art-blocks]]", "[[autoglyphs]]", "[[nba-top-shot]]", "[[meebits]]", "[[cool-cats]]", "[[pudgy-penguins]]", "[[azuki]]", "[[gas-fees]]", "[[cryptodataapi]]"]
 ---
 
 Non-fungible tokens (NFTs) are unique digital assets recorded on a [[blockchain]] that represent verifiable ownership of items such as art, collectibles, music, gaming assets, and virtual real estate. Unlike fungible tokens where one [[bitcoin]] or [[ethereum|ETH]] is interchangeable with another, each NFT carries a unique token ID and metadata that distinguishes it from every other token. NFTs emerged from experimental projects on Bitcoin in 2014, exploded into a multi-billion-dollar market in 2021, crashed violently in 2022, and have since settled into a smaller but persistent market where early "blue-chip" collections retain significant cultural and financial value.
@@ -201,6 +201,20 @@ NFT markets are illiquid and notoriously noisy — these are the gauges that mat
 | **Mint gas cost** | [[gas-fees\|Gas]] to mint during hot drops | Gas wars can cost more than the mint itself (Otherside: $180M+ in gas) |
 
 **Liquidity is the defining risk.** Unlike fungible tokens, an NFT's floor price is aspirational — during the 2022 crash, sellers found **no bids at any price**. Always read the bid side, not just the floor.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/nfts/overview` — NFT market overview
+- `GET /api/v1/nfts/collections` — collection list
+- `GET /api/v1/nfts/volume` — volume data
+- `GET /api/v1/nfts/correlations` — collection correlations
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/overview"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]].
 
 ## Related
 

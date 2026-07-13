@@ -2,7 +2,7 @@
 title: "Crypto Markets"
 type: index
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, markets, index]
 ---
@@ -110,6 +110,20 @@ FROM "wiki/markets/crypto"
 WHERE type != "index"
 SORT updated DESC
 ```
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/coins/top?limit=100` — top coins by market cap
+- `GET /api/v1/coins/{symbol}` — single coin profile (Pro+)
+- `GET /api/v1/coins/category-groups` — curated category themes
+- `GET /api/v1/daily/prices` — bulk daily snapshot of ~2,500 Binance spot pairs
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/coins/top?limit=20"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-coins]].
 
 ## Sources
 

@@ -2,14 +2,14 @@
 title: "Holder Concentration Analysis"
 type: concept
 created: 2026-05-04
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, risk-management, defi, market-microstructure, memecoin]
 aliases: ["holder analysis", "wallet concentration", "top-holder scan", "bundle detection"]
 domain: [risk-management]
 difficulty: intermediate
 prerequisites: ["[[rug-pulls]]", "[[memecoin-sniping]]"]
-related: ["[[rug-pulls]]", "[[rug-detection-checklist]]", "[[pump-fun]]", "[[memecoin-sniping]]", "[[birdeye]]", "[[gmgn]]", "[[bitquery]]"]
+related: ["[[rug-pulls]]", "[[rug-detection-checklist]]", "[[pump-fun]]", "[[memecoin-sniping]]", "[[birdeye]]", "[[gmgn]]", "[[bitquery]]", "[[cryptodataapi]]"]
 ---
 
 Holder concentration analysis is the pre-trade practice of inspecting a token's top wallet holders, looking for evidence of bundling, dev pre-allocation, and coordinated wallet clusters before risking capital on a low-cap launch. On Solana launchpads like [[pump-fun|Pump.fun]] — where thousands of new tokens appear daily and the great majority are scams or exit-liquidity traps — this scan is the single highest-leverage filter a trader can run, often discarding 80-99% of candidate plays in seconds. It is the most quantitative leg of the [[rug-detection-checklist|rug detection checklist]] and the foundation of nearly every serious sniper bot's filter stack.
@@ -87,6 +87,23 @@ The whole sequence takes 5-10 seconds with the right tooling and is the differen
 - **Tools lag the chain.** GMGN/Birdeye snapshots can be seconds to minutes stale during high-throughput launches; a "clean" scan can miss a dump already in flight.
 - **False positives.** Some legitimate community launches use multi-wallet seeders intentionally; not every clustered launch is a scam, just most of them.
 - **Concentration alone is not edge.** It is a *filter*. Profitability still depends on entry timing, [[market-cap-level-trading|MC level]] reads, exit discipline, and avoiding the long tail of soft rugs that pass the scan.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

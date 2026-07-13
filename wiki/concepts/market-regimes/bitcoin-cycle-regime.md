@@ -2,13 +2,13 @@
 title: "BTC Cycle Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, market-regime, market-microstructure, quantitative]
 aliases: ["BTC Cycle", "Bitcoin Cycle Regime", "Halving Cycle Regime", "BTC Dominance Regime"]
 domain: [market-microstructure]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[macro-trend-regime]]", "[[on-chain-regime]]", "[[institutional-flow-regime]]", "[[bitcoin-halving]]", "[[btc-dominance]]", "[[bull-vs-bear-market]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[macro-trend-regime]]", "[[on-chain-regime]]", "[[institutional-flow-regime]]", "[[bitcoin-halving]]", "[[btc-dominance]]", "[[bull-vs-bear-market]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 # BTC Cycle Regime
@@ -64,6 +64,27 @@ Each sub-state carries its own signal, directional bias, and an explicit *what-t
 ## Sources
 
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — Crypto Data API 14-basket regime framework (VENTURE AI LABS); source for the BTC Cycle sub-states, pre/post-halving windows, and dominance thresholds.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]]. Also see [[cryptodataapi-regimes]].
 
 ## Related
 

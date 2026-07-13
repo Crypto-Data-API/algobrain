@@ -2,11 +2,11 @@
 title: "Regulatory Approvals & Pro-Crypto Policy — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, regulation, event-driven, market-regime, behavioral-finance, bitcoin, ethereum, narrative-impact]
 aliases: ["Pro-Crypto Policy", "ETF Approval Narrative", "Regulatory De-Risking", "Crypto Legislation"]
-related: ["[[crypto-narratives-overview]]"]
+related: ["[[crypto-narratives-overview]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -197,6 +197,22 @@ Features a quant can engineer from this category, aggregated across all six arch
 **Analog mechanisms** (cross-narrative tags that let a model pool similar dynamics): sentiment-shock, dry-powder-injection, supply-restriction, forced-liquidation, reflexive-deleveraging.
 
 > **Backtester takeaway:** the highest-signal sub-patterns are the *surprise* regime shifts (election, reserve-naming) and *sell-the-news* on dated approvals. The 2025–2026 legislative-pipeline, sovereign-reserve, and access-expansion events are mostly **structural / low-signal for spot direction** — useful as regime context and for derivatives/equity read-throughs, not as standalone spot triggers.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/policy/headlines` — live regulatory feed (Federal Register / SEC / CFTC)
+- `GET /api/v1/policy/regime` — policy risk + signed tilt + rate calendar
+- `GET /api/v1/policy/regime/score` — policy-risk composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/policy/headlines"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

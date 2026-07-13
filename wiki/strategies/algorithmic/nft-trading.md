@@ -2,7 +2,7 @@
 title: "NFT Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [crypto, nft, floor-sweeping, rarity-sniping, launchpad, trait-arbitrage, opensea, blur, on-chain-analytics]
 aliases: ["NFT Trading Strategies", "NFT Flipping", "Rarity Sniping", "Floor Sweeping"]
@@ -11,7 +11,7 @@ timeframe: day|swing|position
 markets: [crypto]
 complexity: intermediate
 backtest_status: untested
-related: ["[[memecoin-sniping]]", "[[sentiment-trading]]", "[[on-chain-analysis]]", "[[copy-trading]]"]
+related: ["[[memecoin-sniping]]", "[[sentiment-trading]]", "[[on-chain-analysis]]", "[[copy-trading]]", "[[cryptodataapi]]"]
 ---
 
 # NFT Trading
@@ -47,6 +47,20 @@ A trader notices that the Pudgy Penguins collection is releasing a physical toy 
 - **Royalty and fee erosion** -- marketplace fees (2-5%) and creator royalties reduce margins on each trade
 - **Rug pulls** -- new collections can be abandoned by creators after mint revenue is collected
 - **Concentration risk** -- individual NFTs represent large single-position risk compared to fungible tokens
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/nfts/overview` — NFT market overview
+- `GET /api/v1/nfts/collections` — collection list
+- `GET /api/v1/nfts/volume` — volume data
+- `GET /api/v1/nfts/correlations` — collection correlations
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/overview"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]].
 
 ## See Also
 

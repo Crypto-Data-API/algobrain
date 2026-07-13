@@ -2,7 +2,7 @@
 title: "Sentiment Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [sentiment, nlp, fear-greed, social-media, contrarian, momentum, funding-rate, quantitative, machine-learning]
 aliases: ["Sentiment Analysis Trading", "Social Sentiment Strategy", "Fear and Greed Trading"]
@@ -11,7 +11,7 @@ timeframe: swing|intraday
 markets: [stocks, crypto]
 complexity: intermediate
 backtest_status: untested
-related: ["[[news-trading]]", "[[regime-detection]]", "[[momentum-rotation]]", "[[vix-trading]]", "[[mean-reversion]]", "[[social-arbitrage]]", "[[alternative-data-alpha]]", "[[informational-edge]]"]
+related: ["[[news-trading]]", "[[regime-detection]]", "[[momentum-rotation]]", "[[vix-trading]]", "[[mean-reversion]]", "[[social-arbitrage]]", "[[alternative-data-alpha]]", "[[informational-edge]]", "[[cryptodataapi]]"]
 ---
 
 # Sentiment Trading
@@ -101,6 +101,23 @@ The strategy can be implemented as **contrarian** (buy extreme fear, sell extrem
 - **Overfitting risk:** With dozens of sentiment indicators and weighting schemes, it is easy to optimize a model that worked historically but fails forward
 - Sentiment signals have **low frequency** in equity markets (extreme readings occur only a few times per year), limiting trading opportunities
 - The strategy requires **continuous data feeds** and processing infrastructure -- more complex than purely price-based strategies
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — Fear & Greed index
+- `GET /api/v1/sentiment/stablecoins` — stablecoin market cap + 14d/90d flows
+- `GET /api/v1/sentiment/macro` — EUR/USD, gold, yields
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — Fear & Greed timeseries
+- `GET /api/v1/sentiment/stablecoins/remote-history?days=365` — daily stablecoin history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-greed"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
 
 ## See Also
 

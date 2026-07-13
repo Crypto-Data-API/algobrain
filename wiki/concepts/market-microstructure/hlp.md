@@ -2,11 +2,11 @@
 title: "HLP (Hyperliquidity Provider)"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: draft
 tags: [crypto, market-microstructure, liquidity, derivatives, defi]
 aliases: ["Hyperliquidity Provider", "HLP Vault", "HLP"]
-related: ["[[hyperliquid]]", "[[hyperliquid-vault-architecture]]", "[[hlp-withdrawal-mechanics]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-order-book-microstructure]]", "[[latency-and-mev-on-chain-clob]]", "[[clob]]", "[[market-microstructure]]", "[[funding-rate]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]"]
+related: ["[[hyperliquid]]", "[[hyperliquid-vault-architecture]]", "[[hlp-withdrawal-mechanics]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-order-book-microstructure]]", "[[latency-and-mev-on-chain-clob]]", "[[clob]]", "[[market-microstructure]]", "[[funding-rate]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[clob]]", "[[market-making]]"]
 difficulty: intermediate
@@ -79,6 +79,25 @@ Because HLP captures both maker rebates on its own fills and a community share o
 This page (HLP) is the orientation hub that links the three; it deliberately summarizes rather than duplicates them.
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

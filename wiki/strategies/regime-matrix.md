@@ -2,11 +2,11 @@
 title: "Strategy Regime Matrix"
 type: index
 created: 2026-04-10
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [strategies, regime, regime-detection, portfolio-construction]
 aliases: ["Regime Map", "Strategy-Regime Mapping"]
-related: ["[[market-regime]]", "[[regime-detection]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[strategy-correlation-matrix]]", "[[crypto-market-regime-taxonomy]]", "[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[short-volatility-strategies]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+related: ["[[market-regime]]", "[[regime-detection]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[strategy-correlation-matrix]]", "[[crypto-market-regime-taxonomy]]", "[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[short-volatility-strategies]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 ---
 
 # Strategy Regime Matrix
@@ -297,6 +297,25 @@ When new strategies are added to the wiki, append a row to the relevant category
 - [[book-when-genius-failed]] — Lowenstein on LTCM's regime sensitivity
 - [[book-trend-following]] — Covel on trend-following's regime profile
 - Asness, Moskowitz, Pedersen (2013) "Value and Momentum Everywhere" — *Journal of Finance*
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

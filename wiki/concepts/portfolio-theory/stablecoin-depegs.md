@@ -2,11 +2,11 @@
 title: "Stablecoin De-Peg Events"
 type: concept
 created: 2026-04-07
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, stablecoin, risk-management, history]
 aliases: ["De-peg", "Stablecoin De-peg Events", "De-pegging"]
-related: ["[[stablecoins]]", "[[terra-luna-collapse]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[risk-management]]", "[[defi]]", "[[stablecoin-regulation]]"]
+related: ["[[stablecoins]]", "[[terra-luna-collapse]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[risk-management]]", "[[defi]]", "[[stablecoin-regulation]]", "[[cryptodataapi]]"]
 domain: [risk-management, crypto]
 difficulty: intermediate
 ---
@@ -226,6 +226,22 @@ Before holding significant amounts of any stablecoin:
 | **Over-concentration** | Holding 100% of cash in one stablecoin turns a single issuer's bad day into a portfolio-level loss |
 | **Chasing yield as a peg signal** | Unsustainable yield (Anchor's 20% on UST) is a *cause* of fragility, not a reward for it |
 | **Confusing soft and hard pegs** | A staked-ETH derivative like [[lido\|stETH]] trades on redeemability, not a $1 reserve — different mechanics, see [[steth]] |
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/security/events` — recent hacks/depegs (10d lookback, filterable)
+- `GET /api/v1/security/regime/score` — security-stress composite (45% hack, 30% flow, 25% depeg)
+- `GET /api/v1/security/regime/{symbol}` — per-symbol security overlay
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

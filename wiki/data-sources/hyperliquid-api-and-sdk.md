@@ -2,7 +2,7 @@
 title: "Hyperliquid API and SDK"
 type: source
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: draft
 tags: [data-provider, crypto, hyperliquid, market-microstructure, algorithmic, api-trading]
 aliases: ["Hyperliquid API", "Hyperliquid WebSocket API", "Hyperliquid Python SDK", "hyperliquid-python-sdk"]
@@ -12,7 +12,7 @@ source_author: "Hyperliquid (official docs) + hyperliquid-dex (GitHub)"
 source_date: 2026-04-22
 source_file: "raw/articles/2026-04-22-gap-finder-hyperliquid-order-books.md"
 confidence: high
-related: ["[[hyperliquid]]", "[[hypercore]]", "[[hyperevm]]", "[[hip-3-builder-deployed-perps]]", "[[hyperliquid-order-book-microstructure]]", "[[level-4-order-book-data]]", "[[exchange-api-reference]]", "[[ccxt]]", "[[hypurrscan]]", "[[clob]]", "[[market-microstructure]]"]
+related: ["[[hyperliquid]]", "[[hypercore]]", "[[hyperevm]]", "[[hip-3-builder-deployed-perps]]", "[[hyperliquid-order-book-microstructure]]", "[[level-4-order-book-data]]", "[[exchange-api-reference]]", "[[ccxt]]", "[[hypurrscan]]", "[[clob]]", "[[market-microstructure]]", "[[cryptodataapi]]"]
 ---
 
 **Hyperliquid API and SDK** refers to the native programmatic interfaces for the [[hyperliquid|Hyperliquid]] on-chain [[clob|central limit order book]] — a REST "info"/"exchange" HTTP API, a WebSocket feed for real-time data and order submission, and the official `hyperliquid-python-sdk` that wraps signing, authentication, and serialization. Because every order, cancel, trade, and liquidation on Hyperliquid executes fully on-chain through [[hypercore|HyperCore]], these interfaces are the canonical way to read the live order book state and to trade against it programmatically. This page is the on-chain-CLOB-specific companion to the generic [[exchange-api-reference|exchange API reference]] and to the multi-venue abstraction layer [[ccxt|CCXT]].
@@ -113,6 +113,25 @@ Because Hyperliquid settles on-chain, the latency profile differs from a CEX mat
 | [[hypurrscan]] | Read-only on-chain explorer/analytics; not an execution path — use for monitoring, not the trade decision |
 | [[exchange-api-reference]] | Cross-venue endpoint/schema reference; this page is its on-chain-CLOB worked example |
 | [[level-4-order-book-data]] | Research-grade L4 capture (via a non-validating node) — a different, deeper data path than the public API feeds |
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

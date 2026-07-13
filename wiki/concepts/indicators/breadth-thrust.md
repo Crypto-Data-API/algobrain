@@ -2,7 +2,7 @@
 title: "Breadth Thrust"
 type: concept
 created: 2026-07-02
-updated: 2026-07-02
+updated: 2026-07-13
 status: good
 tags: [technical-analysis, indicators, market-regime, momentum]
 aliases: ["Breadth Thrust", "breadth-thrust", "Zweig Breadth Thrust", "Breadth Thrust Indicator"]
@@ -10,6 +10,7 @@ domain: [indicators, technical-analysis]
 prerequisites: ["[[market-breadth]]", "[[exponential-moving-average]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[market-breadth]]"
   - "[[advance-decline-line]]"
   - "[[mcclellan-oscillator]]"
@@ -87,6 +88,21 @@ Like other breadth tools (see [[market-breadth]] and [[technical-analysis]]), th
 - Gregory Morris, *The Complete Guide to Market Breadth Indicators* (McGraw-Hill, 2005) — catalog of breadth measures including thrust-type signals.
 - John J. Murphy, *Technical Analysis of the Financial Markets* (NYIF, 1999) — market-internals and breadth chapter.
 - General technical-analysis knowledge — up/down-volume thrust framing (Wayne Whaley) and the interpretation of thrusts as broad regime-shift signals are standard, widely documented material.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-health/summary` — dual health scores + sentiment
+- `GET /api/v1/market-health/altcoin-breadth` — % of coins above N-day MA (default 200)
+
+**Historical data:**
+- `GET /api/v1/market-health/history?days=730` — historical health scores
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
 
 ## Related
 

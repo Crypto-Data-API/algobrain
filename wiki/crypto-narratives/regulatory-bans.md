@@ -2,11 +2,11 @@
 title: "Regulatory Bans & Crackdowns — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, regulation, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Crypto Bans", "Regulatory Crackdown", "China Crypto Ban", "SEC Enforcement Narrative", "Exchange Delisting Shock"]
-related: ["[[crypto-narratives-overview]]", "[[regulatory-approvals-policy]]"]
+related: ["[[crypto-narratives-overview]]", "[[regulatory-approvals-policy]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -155,6 +155,22 @@ Aggregated across archetypes — the quant-consumable feature set and the analog
 - `days_to_pre_event_price_recovery`
 
 **Analog mechanisms (cross-archetype):** sell-pressure, forced-liquidation, reflexive-deleveraging, sentiment-shock, supply-restriction, dry-powder-injection.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/policy/headlines` — live regulatory feed (Federal Register / SEC / CFTC)
+- `GET /api/v1/policy/regime` — policy risk + signed tilt + rate calendar
+- `GET /api/v1/policy/regime/score` — policy-risk composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/policy/headlines"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

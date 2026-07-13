@@ -2,7 +2,7 @@
 title: "Basis Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [basis-trade, cash-and-carry, futures, arbitrage, convergence, crypto, treasury, quantitative]
 aliases: ["Cash-and-Carry Trade", "Futures Basis Trade", "Spot-Futures Arbitrage"]
@@ -11,7 +11,7 @@ timeframe: swing
 markets: [crypto, bonds, commodities]
 complexity: intermediate
 backtest_status: untested
-related: ["[[pairs-trading]]", "[[hedging]]", "[[futures]]"]
+related: ["[[pairs-trading]]", "[[hedging]]", "[[futures]]", "[[cryptodataapi]]"]
 ---
 
 # Basis Trading
@@ -82,6 +82,25 @@ Size based on the margin requirements of the futures leg. For Treasuries, levera
 - **Funding rate reversal:** In crypto perpetual funding rate trades, the rate can flip negative, causing losses instead of income
 - **Regulatory and capital constraints:** Treasury basis trades face increasing regulatory scrutiny due to their systemic size ($1T+) and leverage
 - **Opportunity cost:** Capital is locked for weeks or months earning modest returns when markets may offer better directional opportunities
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## See Also
 - [[pairs-trading]] -- similar long/short structure, though driven by statistical rather than structural convergence

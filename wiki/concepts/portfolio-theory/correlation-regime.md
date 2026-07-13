@@ -2,11 +2,11 @@
 title: "Correlation Regime"
 type: concept
 created: 2026-05-07
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [portfolio-theory, risk-management, correlation, regime, diversification]
 aliases: ["Correlation Regime", "Correlation Spike", "Correlation Regimes"]
-related: ["[[correlation]]", "[[correlation-of-returns]]", "[[correlation-matrix]]", "[[implied-correlation]]", "[[diversification]]", "[[risk-parity]]", "[[modern-portfolio-theory]]", "[[options-risk-budgeting]]", "[[risk-budgeting]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[fat-tails]]", "[[covid-crash]]", "[[2008-financial-crisis]]", "[[vix-august-2024-spike]]", "[[volmageddon]]"]
+related: ["[[correlation]]", "[[correlation-of-returns]]", "[[correlation-matrix]]", "[[implied-correlation]]", "[[diversification]]", "[[risk-parity]]", "[[modern-portfolio-theory]]", "[[options-risk-budgeting]]", "[[risk-budgeting]]", "[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[fat-tails]]", "[[covid-crash]]", "[[2008-financial-crisis]]", "[[vix-august-2024-spike]]", "[[volmageddon]]", "[[cryptodataapi]]"]
 domain: [portfolio-theory, risk-management]
 prerequisites: ["[[correlation]]", "[[correlation-of-returns]]"]
 difficulty: intermediate
@@ -160,6 +160,25 @@ Real-time correlation regime detection mirrors [[vol-regime-detection|vol-regime
 - **Hidden Markov Models on the correlation matrix** — analogous to the [[volatility-regime-switching]] approach but applied to the cross-sectional correlation rather than single-asset variance.
 
 A simple operational rule used by many desks: **if the rolling 21-day cross-sectional dispersion of index components drops below the 20th percentile of its 5-year history *and* implied correlation rises by >10 points in 2 weeks, treat the book as if pairwise correlations are 0.85 and recheck concentration limits.**
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: MACD (Moving Average Convergence Divergence)
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [macd, indicators, technical-analysis]
 aliases: [MACD, "MACD Histogram", "Macd Histogram"]
@@ -10,6 +10,7 @@ domain: [indicators]
 prerequisites: ["[[moving-averages]]", "[[momentum]]"]
 difficulty: beginner
 related:
+  - "[[cryptodataapi]]"
   - "[[moving-averages]]"
   - "[[momentum]]"
   - "[[rsi]]"
@@ -91,6 +92,22 @@ One illustrative backtesting study across US equities reported MACD with a 40.1%
 - John J. Murphy, *Technical Analysis of the Financial Markets* (NYIF, 1999) — covers MACD construction, signal interpretation, and divergence.
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy covers MACD construction, signal interpretation, histogram analysis, and divergence techniques in detail
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Win-rate data, VWAP+MACD combination, cross-market applicability
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — price-structure state (SMA/BB/RSI) across assets
+- `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN state
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset detail + 60d history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — raw OHLCV for computing your own
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
 
 ## Related
 

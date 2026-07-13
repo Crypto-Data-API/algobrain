@@ -2,13 +2,13 @@
 title: "Crypto Macro Correlation Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, market-regime, correlation, market-microstructure, sp500, nasdaq]
 aliases: ["Macro Correlation Regime", "Crypto-Equities Correlation", "Risk-On Risk-Off Crypto", "BTC-Nasdaq Beta"]
 domain: [market-microstructure, portfolio-theory]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[correlation-regime]]", "[[dxy]]", "[[policy-shock-regime]]", "[[bitcoin-cycle-regime]]", "[[institutional-flow-regime]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[correlation-regime]]", "[[dxy]]", "[[policy-shock-regime]]", "[[bitcoin-cycle-regime]]", "[[institutional-flow-regime]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 # Crypto Macro Correlation Regime
@@ -67,6 +67,25 @@ Crucially, **this regime is defined by override**: when these macro signals domi
 ## Sources
 
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — Crypto Data API 14-basket regime framework (VENTURE AI LABS); source for the Macro Correlation sub-states, the DXY ~105 suppressor heuristic, copper/gold sentiment gauge, and BTC-Nasdaq beta regime-dependence.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

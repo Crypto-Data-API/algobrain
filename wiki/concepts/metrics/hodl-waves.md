@@ -2,7 +2,7 @@
 title: "HODL Waves"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [indicators, bitcoin, behavioral-finance]
 aliases: ["HODL Waves", "hodl-waves", "HODL Wave", "Realized Cap HODL Waves", "RHODL"]
@@ -10,6 +10,7 @@ domain: [indicators]
 prerequisites: ["[[on-chain-analysis]]", "[[bitcoin]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[on-chain-analysis]]"
   - "[[realized-price]]"
   - "[[mvrv]]"
@@ -54,6 +55,26 @@ Imagine a long, quiet bear market. On the HODL Waves chart, the older bands (1�
 - **Lost coins inflate old bands** — provably lost or forgotten coins never move, so they permanently swell the oldest cohorts and overstate "diamond-hand" conviction.
 - **Lagging and slow** — band shifts unfold over weeks to months; HODL Waves describe structural supply dynamics, not short-term timing.
 - **Asset coverage** — most mature for Bitcoin's UTXO model; account-based chains and exchange-custodied supply complicate age attribution.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

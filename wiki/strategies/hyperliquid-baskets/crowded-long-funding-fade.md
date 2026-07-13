@@ -2,11 +2,11 @@
 title: "Crowded-Long Funding Fade (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, funding-rate, mean-reversion, behavioral-finance, market-microstructure, derivatives]
 aliases: ["Long Squeeze Funding Play", "Positive Funding Short", "Crowded Long Fade", "Funding Rate Short Bias"]
-related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[basis-carry-regime]]", "[[crowded-short-funding-fade]]", "[[funding-rate-harvest]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[liquidation-cascade-fade]]", "[[funding-rate-arbitrage]]", "[[funding-rate]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[open-interest]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[coinglass]]", "[[hypurrscan]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[basis-carry-regime]]", "[[crowded-short-funding-fade]]", "[[funding-rate-harvest]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[liquidation-cascade-fade]]", "[[funding-rate-arbitrage]]", "[[funding-rate]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[open-interest]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[coinglass]]", "[[hypurrscan]]", "[[cryptodataapi]]"]
 strategy_type: quantitative
 timeframe: swing
 markets: [crypto]
@@ -294,6 +294,25 @@ Per [[when-to-retire-a-strategy]]:
 - [[edge-taxonomy]] — edge classification.
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

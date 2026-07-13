@@ -2,7 +2,7 @@
 title: "Perpetual Futures"
 type: concept
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 confidence: medium
 tags: [derivatives, crypto, futures, perpetual-futures]
@@ -11,6 +11,7 @@ domain: [derivatives, market-microstructure]
 prerequisites: ["[[futures]]", "[[leverage]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[funding-rate]]"
   - "[[liquidation]]"
   - "[[open-interest]]"
@@ -233,6 +234,25 @@ A backtest that uses 2024-funding history to project forward returns will dramat
 ## Implications for Backtesters
 
 Anyone building or evaluating a perp-based strategy should treat the standard pitfalls list ([[backtesting-pitfalls]]) as the floor, not the ceiling. Crypto perps add a layer of failure modes — auto-deleveraging breaking nominally hedged trades, depth-aware slippage during cascades, point-in-time on-chain data, fragmentation across CEX/DEX venues, stablecoin collateral risk, and oracle manipulation in DeFi-integrated strategies. The dedicated [[crypto-perp-backtesting-pitfalls]] page collects these with calibration recipes and references the relevant data vendors ([[coinglass]], [[glassnode]]).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Sources
 

@@ -2,7 +2,7 @@
 title: "Copy Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, stocks, social-trading, copy-trading, whale-watching, nansen, arkham, on-chain-analytics, mirror-trading]
 aliases: ["Mirror Trading", "Social Trading", "Whale Copying", "Follow Trading"]
@@ -17,7 +17,7 @@ data_required: [signal-provider-track-record, on-chain-tx, wallet-labels, ohlcv-
 min_capital_usd: 100
 capacity_usd: 1000000
 crowding_risk: high
-related: ["[[sentiment-trading]]", "[[on-chain-analysis]]", "[[momentum-rotation]]", "[[telegram-bot-trading]]", "[[social-trading]]", "[[whale]]", "[[nansen]]", "[[survivorship-bias]]", "[[front-running]]"]
+related: ["[[sentiment-trading]]", "[[on-chain-analysis]]", "[[momentum-rotation]]", "[[telegram-bot-trading]]", "[[social-trading]]", "[[whale]]", "[[nansen]]", "[[survivorship-bias]]", "[[front-running]]", "[[cryptodataapi]]"]
 ---
 
 # Copy Trading
@@ -139,6 +139,24 @@ See [[when-to-retire-a-strategy]]. Stop following a leader / the program when:
 ## Sources
 
 General market and crypto on-chain-analytics knowledge ([[social-trading]] platform mechanics, [[nansen]]/Arkham wallet tracking, the [[survivorship-bias]] critique of leaderboards); no specific wiki source ingested yet. See [[on-chain-analysis]] for the wallet-identification toolkit.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/top-traders` — scored trader leaderboard
+- `GET /api/v1/hyperliquid/copy-signals` — traders with recent entry/exit signals (one call)
+- `GET /api/v1/hyperliquid/wallet-positions` — current positions for tracked wallets
+- `GET /api/v1/hyperliquid/wallet-signals` — entry/exit/size-change signals
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/wallet-trades/{address}` — historical trades + summary for any address
+- `GET /api/v1/daily/hl-traders` — daily leaderboard snapshot
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/copy-signals"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid-traders]].
 
 ## Related
 

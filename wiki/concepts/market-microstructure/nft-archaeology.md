@@ -2,11 +2,11 @@
 title: "NFT Archaeology"
 type: concept
 created: 2026-04-22
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [nft, crypto, ethereum, history]
 aliases: ["NFT archaeology", "blockchain archaeology", "contract archaeology"]
-related: ["[[mooncats]]", "[[etherrock]]", "[[curio-cards]]", "[[cryptopunks]]", "[[ethereum]]", "[[nft]]", "[[nft-trading]]", "[[opensea]]"]
+related: ["[[mooncats]]", "[[etherrock]]", "[[curio-cards]]", "[[cryptopunks]]", "[[ethereum]]", "[[nft]]", "[[nft-trading]]", "[[opensea]]", "[[cryptodataapi]]"]
 domain: [market-microstructure]
 prerequisites: ["[[nft]]", "[[on-chain-analysis]]"]
 difficulty: advanced
@@ -147,6 +147,20 @@ Honest accounting requires acknowledging that most attempted archaeology does no
 The honest summary is that fewer than ten archaeology events have produced sustained markets above 0.1 ETH floor. MoonCats, EtherRock, and Curio Cards are cited repeatedly precisely because the successful cases are rare.
 
 The broader frame: archaeology as a strategy worked best during the 2021 NFT bull cycle, when attention and capital were abundant and the "historical NFT" narrative was still novel. As the market matured and attention fragmented across new chains (Bitcoin Ordinals, Solana collections) and new narratives, the economic returns to pure archaeology have compressed significantly (Source: [[2026-04-22-gap-finder-the-provided-wiki-pages]]).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/nfts/overview` — NFT market overview
+- `GET /api/v1/nfts/collections` — collection list
+- `GET /api/v1/nfts/volume` — volume data
+- `GET /api/v1/nfts/correlations` — collection correlations
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/overview"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]].
 
 ## Related
 

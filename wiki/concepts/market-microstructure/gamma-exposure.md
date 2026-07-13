@@ -2,11 +2,11 @@
 title: "Gamma Exposure (GEX)"
 type: concept
 created: 2026-06-27
-updated: 2026-07-02
+updated: 2026-07-13
 status: good
 tags: [options, derivatives, volatility, market-microstructure, indicators]
 aliases: ["GEX", "Gamma Exposure", "Dealer Gamma Exposure", "Net Dealer Gamma", "Gamma Flip", "Volatility Trigger"]
-related: ["[[dealer-gamma-hedging]]", "[[options-pinning]]", "[[gamma-squeeze]]", "[[max-pain]]", "[[delta]]", "[[gamma]]", "[[vanna]]", "[[charm]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility]]", "[[options-greeks]]", "[[0dte-impact-on-spx]]", "[[vix]]", "[[short-squeeze]]"]
+related: ["[[dealer-gamma-hedging]]", "[[options-pinning]]", "[[gamma-squeeze]]", "[[max-pain]]", "[[delta]]", "[[gamma]]", "[[vanna]]", "[[charm]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility]]", "[[options-greeks]]", "[[0dte-impact-on-spx]]", "[[vix]]", "[[short-squeeze]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, derivatives]
 prerequisites: ["[[delta]]", "[[gamma]]", "[[dealer-gamma-hedging]]"]
 difficulty: intermediate
@@ -106,6 +106,21 @@ Both are detailed on **[[dealer-gamma-hedging]]**.
 ## Data Providers
 
 SpotGamma (retail standard; HIRO real-time hedging oscillator), Tier1Alpha (institutional-grade modeling), MenthorQ (TradingView-native), SqueezeMetrics (free GEX and the DIX dark-pool indicator), and Unusual Whales (GammaLab). A custom calculator is feasible from an OPRA/CBOE open-interest feed plus a Black-Scholes greeks engine — see the methodology on **[[dealer-gamma-hedging]]**.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/quant/gex` — gamma exposure: MM inventory + liquidation profile (per-coin optional)
+- `GET /api/v1/quant/positioning` — trader-type split (market maker / whale / other)
+
+**Historical data:**
+- `GET /api/v1/quant/history` — point-in-time quant records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

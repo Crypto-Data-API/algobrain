@@ -2,13 +2,13 @@
 title: "Institutional Flow Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, market-regime, market-microstructure, bitcoin, quantitative]
 aliases: ["Institutional Flow Regime", "ETF Flow Regime", "Structural Floor Regime"]
 domain: [market-microstructure]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[on-chain-regime]]", "[[bitcoin-cycle-regime]]", "[[macro-trend-regime]]", "[[bitcoin-etfs]]", "[[eth-etf]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[on-chain-regime]]", "[[bitcoin-cycle-regime]]", "[[macro-trend-regime]]", "[[bitcoin-etfs]]", "[[eth-etf]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 The **Institutional Flow regime** is basket #10 of the 14-basket crypto regime taxonomy (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]). The arrival of spot [[bitcoin-etfs|Bitcoin ETFs]] and 401(k)/retirement-account access turned institutional demand from an opaque rumour into a *trackable regime driver*: net creations and redemptions are published daily, and sustained inflows accumulate into a large, cost-basis-anchored holder base that defends specific price levels. When that base is big enough, it sets a **structural floor** — a level below which a price-insensitive buyer steps in. The framework cites "$80K BTC was the 2025 ETF floor" as the canonical illustration of this mechanism (an *illustrative* claim, not a hard rule, Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]). This regime operates on a weeks-to-months timescale and is the slow, structural backdrop that fast perp setups on [[hyperliquid|Hyperliquid]] trade *against*. This page is the regime framing; for how the ETF products themselves work, see [[bitcoin-etfs]] and [[eth-etf]] and link out rather than duplicate. See [[crypto-market-regime-taxonomy]] for the full basket map.
@@ -68,6 +68,27 @@ This basket is the TradFi analogue of the on-chain exchange-flow reads in [[on-c
 ## Sources
 
 - (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]) — defines the 14-basket taxonomy and the institutional-flow heuristics ($500M/week inflow, $80K cost-basis floor) used here, all marked illustrative.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

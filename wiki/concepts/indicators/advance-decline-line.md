@@ -2,11 +2,11 @@
 title: "Advance/Decline Line"
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-13
 status: review
 tags: [indicators, technical-analysis, market-internals, market-breadth]
 aliases: ["Advance-Decline Line", "A/D Line", "AD Line", "Advance/Decline Line", "Breadth Line"]
-related: ["[[market-breadth]]", "[[divergence]]", "[[mcclellan-oscillator]]", "[[arms-index]]", "[[breadth-thrust]]", "[[momentum-breadth]]", "[[trading-volume]]", "[[relative-strength]]", "[[trend]]"]
+related: ["[[market-breadth]]", "[[divergence]]", "[[mcclellan-oscillator]]", "[[arms-index]]", "[[breadth-thrust]]", "[[momentum-breadth]]", "[[trading-volume]]", "[[relative-strength]]", "[[trend]]", "[[cryptodataapi]]"]
 domain: [indicators]
 prerequisites: ["[[market-breadth]]", "[[trend]]"]
 difficulty: beginner
@@ -52,6 +52,21 @@ Take a simplified 1,000-stock index over three sessions:
 | 3 | 4,070 (new high) | 460 | 540 | −60 | +220 |
 
 By session 3 the **index is at a fresh high (4,070)**, yet the **A/D line has turned down** (from +280 to +220) because decliners now outnumber advancers — the rally is being driven by a shrinking group of (likely large-cap) names while the average stock is falling. This price-vs-breadth **[[divergence]]** is the classic bearish non-confirmation: the "generals" advance while the "soldiers" retreat. (Illustrative numbers only — not real market data.)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-health/summary` — dual health scores + sentiment
+- `GET /api/v1/market-health/altcoin-breadth` — % of coins above N-day MA (default 200)
+
+**Historical data:**
+- `GET /api/v1/market-health/history?days=730` — historical health scores
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/altcoin-breadth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
 
 ## Related
 

@@ -2,11 +2,11 @@
 title: "Spot ETF Launches & Daily Flows — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, bitcoin, ethereum, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Bitcoin ETF Flows", "ETH ETF Flows", "IBIT Flows", "GBTC Outflows", "Spot ETF Net Flow Signal"]
-related: ["[[crypto-narratives-overview]]", "[[bitcoin-etf]]", "[[regulatory-approvals-policy]]"]
+related: ["[[crypto-narratives-overview]]", "[[bitcoin-etf]]", "[[regulatory-approvals-policy]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -111,6 +111,27 @@ Computable features a quant can extract for this narrative, aggregated across ar
 - `trust_outflow_share_of_total_category_netflow`
 
 Analog mechanisms (for cross-narrative tagging): `sentiment-shock`, `reflexive-deleveraging`, `sell-pressure`, `dry-powder-injection`, `forced-liquidation`, `supply-restriction`.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

@@ -2,14 +2,14 @@
 title: "Alternative.me — Crypto Fear & Greed Index"
 type: source
 created: 2026-04-22
-updated: 2026-04-27
+updated: 2026-07-13
 status: good
 tags: [data-provider, sentiment, behavioral-finance, crypto]
 source_type: data
 source_url: "https://alternative.me/crypto/fear-and-greed-index/"
 source_author: "Alternative.me"
 aliases: ["Crypto Fear & Greed Index", "Alternative.me", "Fear and Greed Index"]
-related: ["[[crypto-data-sources]]", "[[news-and-sentiment-sources]]", "[[behavioral-finance]]", "[[bitcoin]]", "[[mean-reversion]]", "[[contrarian-indicators]]"]
+related: ["[[crypto-data-sources]]", "[[news-and-sentiment-sources]]", "[[behavioral-finance]]", "[[bitcoin]]", "[[mean-reversion]]", "[[contrarian-indicators]]", "[[cryptodataapi]]"]
 ---
 
 Alternative.me provides the **Crypto Fear & Greed Index**, the most widely referenced sentiment gauge in [[crypto-markets|cryptocurrency markets]]. The index produces a daily score from 0 (Extreme Fear) to 100 (Extreme Greed) by aggregating multiple data sources into a single sentiment reading. It is free to access via both the website and a public API.
@@ -101,6 +101,23 @@ Selected extreme readings and subsequent 90-day [[bitcoin|BTC]] performance:
 | November 2021 (peak) | 84 (Extreme Greed) | ~$69,000 | -40% |
 
 Note: Past performance does not guarantee future results. The index failed to predict the extended 2022 bear market bottom with precision.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — Fear & Greed index
+- `GET /api/v1/sentiment/stablecoins` — stablecoin market cap + 14d/90d flows
+- `GET /api/v1/sentiment/macro` — EUR/USD, gold, yields
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — Fear & Greed timeseries
+- `GET /api/v1/sentiment/stablecoins/remote-history?days=365` — daily stablecoin history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-greed"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
 
 ## Related
 

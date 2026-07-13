@@ -2,11 +2,11 @@
 title: "October 2025 Crypto Liquidation Cascade & ADL Crisis"
 type: news
 created: 2026-05-05
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, history, risk-management, derivatives, liquidity, leverage]
 aliases: ["Oct 2025 crypto crash", "October 10-11 2025 crash", "2025 ADL crisis", "$20B liquidation cascade"]
-related: ["[[auto-deleveraging]]", "[[liquidation-cascade-modeling]]", "[[liquidation-risk]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[crypto-perp-backtesting-pitfalls]]", "[[hyperliquid]]", "[[binance]]", "[[bybit]]", "[[okx]]", "[[insurance-fund]]", "[[crypto-flash-crashes]]", "[[basis-trading]]"]
+related: ["[[auto-deleveraging]]", "[[liquidation-cascade-modeling]]", "[[liquidation-risk]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[crypto-perp-backtesting-pitfalls]]", "[[hyperliquid]]", "[[binance]]", "[[bybit]]", "[[okx]]", "[[insurance-fund]]", "[[crypto-flash-crashes]]", "[[basis-trading]]", "[[cryptodataapi]]"]
 event_date: 2025-10-10
 markets_affected: [crypto]
 impact: high
@@ -183,6 +183,27 @@ The lesson for backtest construction: any one of these assumptions, *if it were 
 - CryptoSlate, "Bitcoin sees another flash crash leading to multi-billion cascade in crypto liquidations" (chronicled cascade in real time)
 - Hyperliquid HLP post-cascade transparency report, October 2025
 - Perplexity research summary, *Backtesting pitfalls in crypto perps* (2026-04-22): identifies October 10-11 2025 as watershed event for ADL modelling
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

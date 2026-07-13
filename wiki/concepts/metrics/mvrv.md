@@ -2,14 +2,14 @@
 title: "MVRV Ratio"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["MVRV", "Market Value to Realized Value", "MVRV Ratio", "market-value-to-realized-value"]
 domain: [market-microstructure]
 prerequisites: ["[[on-chain-analysis]]", "[[realized-price]]"]
 difficulty: intermediate
-related: ["[[realized-price]]", "[[mvrv-z-score]]", "[[nupl]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]"]
+related: ["[[realized-price]]", "[[mvrv-z-score]]", "[[nupl]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]", "[[cryptodataapi]]"]
 ---
 
 The **MVRV Ratio** (Market Value to Realized Value) is an on-chain [[on-chain-analysis|valuation metric]] that divides an asset's [[market-capitalization|market cap]] by its [[realized-price|realized cap]]. Because realized cap values every coin at the price it last moved (its aggregate on-chain cost basis), MVRV measures how far the current market price has stretched above or below the average price the supply was acquired at — making it a proxy for the **aggregate unrealized profit or loss** held across all holders. It is one of the most widely cited [[bitcoin]] cycle-valuation tools, popularised by analytics platforms such as [[glassnode]] and [[cryptoquant]].
@@ -48,6 +48,26 @@ Suppose [[bitcoin]] has a market cap reflecting a current price well above the a
 - **Exchange and entity adjustments**: internal exchange transfers and custodial reshuffles can move coins without a genuine change of ownership, polluting the "last-moved price." Entity-adjusted variants attempt to strip these, but the label layer is provider-produced and revised over time (see [[on-chain-analysis#Leading vs Lagging, and Data Caveats]]).
 - **Cross-cycle threshold drift**: the MVRV levels that marked tops and bottoms in earlier cycles have not repeated precisely; market maturation, ETFs, and institutional custody shift the bands. Treat historical zones qualitatively, never as fixed lines.
 - **Asset specificity**: MVRV is best understood for [[bitcoin]] and large-cap assets with deep, mature on-chain data; for thin or newer chains the realized cap is noisier and the signal weaker.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

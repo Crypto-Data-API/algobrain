@@ -2,11 +2,11 @@
 title: "Vol Regime Detection"
 type: concept
 created: 2026-05-07
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [volatility, indicators, regime, machine-learning, risk-management]
 aliases: ["Vol Regime Detection", "Volatility Regime Detection", "Regime Detection"]
-related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[volatility-spike]]", "[[volatility-term-structure]]", "[[vix]]", "[[vix-futures]]", "[[vvix]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[options-risk-budgeting]]", "[[vega-budgeting]]", "[[risk-budgeting]]", "[[hidden-markov-model]]", "[[machine-learning]]", "[[correlation-regime]]", "[[correlation-breakdown]]", "[[asymmetric-risk-reward]]", "[[convexity]]"]
+related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[volatility-spike]]", "[[volatility-term-structure]]", "[[vix]]", "[[vix-futures]]", "[[vvix]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[options-risk-budgeting]]", "[[vega-budgeting]]", "[[risk-budgeting]]", "[[hidden-markov-model]]", "[[machine-learning]]", "[[correlation-regime]]", "[[correlation-breakdown]]", "[[asymmetric-risk-reward]]", "[[convexity]]", "[[cryptodataapi]]"]
 domain: [volatility, indicators, risk-management]
 prerequisites: ["[[volatility-regime]]", "[[implied-volatility]]", "[[vix]]"]
 difficulty: advanced
@@ -219,6 +219,25 @@ Before a regime detector is allowed to drive real sizing, confirm each item. The
 5. **Overfitting ML detectors on small regime samples.** With only ~5–10 actual crisis episodes in 30 years of data, complex ML models almost certainly overfit. Bias toward simple, interpretable rules.
 6. **Ignoring single-name regime divergence.** Macro can be calm while a sector is stressed (e.g. [[regional-banks-2023|regional banks Q1 2023]]). Run a per-name detector alongside the macro detector for any concentrated exposure.
 7. **Detecting but not acting.** A detection system that doesn't wire into automated position-sizing rules will be overridden by discretionary feel exactly when discipline matters most. Pre-define the actions; let the detector trigger them.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

@@ -2,11 +2,11 @@
 title: "Hyperliquid Funding Rate Microstructure"
 type: concept
 created: 2026-05-05
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [crypto, defi, derivatives, market-microstructure, volatility]
 aliases: ["HL Funding Mechanics", "Hyperliquid Hourly Funding"]
-related: ["[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[hyperliquid]]", "[[hyperliquid-oracle-mechanics]]", "[[hyperliquid-vault-architecture]]", "[[hl-vs-cex-funding-divergence]]", "[[hyperliquid-hlp-basis-arbitrage]]"]
+related: ["[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[hyperliquid]]", "[[hyperliquid-oracle-mechanics]]", "[[hyperliquid-vault-architecture]]", "[[hl-vs-cex-funding-divergence]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[funding-rate]]", "[[perpetual-futures]]"]
 difficulty: advanced
@@ -350,6 +350,25 @@ The following tools are commonly used to monitor and act on HL funding microstru
 - **[[velo-data]] / Amberdata / Laevitas** — paid data providers that aggregate funding history across HL + CEXs with consistent units; useful for backtesting cross-venue strategies.
 
 Production-grade tooling typically combines the native API for HL data, a CEX SDK (Binance / Bybit / OKX) for the hedge leg, and a custom premium-TWAP estimator that updates faster than the 1-hour settlement cadence. See [[funding-rate-arbitrage]] for the canonical implementation pattern.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

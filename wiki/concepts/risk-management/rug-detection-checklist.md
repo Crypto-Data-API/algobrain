@@ -2,14 +2,14 @@
 title: "Rug Detection Checklist"
 type: concept
 created: 2026-05-04
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, risk-management, defi, security, memecoin, scams]
 aliases: ["rug check", "pre-trade rug check", "rug filter", "scam check"]
 domain: [risk-management]
 difficulty: beginner
 prerequisites: ["[[rug-pulls]]"]
-related: ["[[rug-pulls]]", "[[holder-concentration-analysis]]", "[[pump-fun]]", "[[memecoin-sniping]]", "[[birdeye]]", "[[gmgn]]", "[[axiom-pro]]", "[[trojan-bot]]"]
+related: ["[[rug-pulls]]", "[[holder-concentration-analysis]]", "[[pump-fun]]", "[[memecoin-sniping]]", "[[birdeye]]", "[[gmgn]]", "[[axiom-pro]]", "[[trojan-bot]]", "[[cryptodataapi]]"]
 ---
 
 A rug detection checklist is the short, mechanical list of contract and wallet checks a trader runs in the seconds before clicking buy on a low-cap or freshly launched memecoin. Where [[rug-pulls]] is the conceptual / historical reference page, this page is the **operational checklist** — the items a sniper, copy-trader, or low-cap discretionary trader actually ticks off (or has a bot tick off automatically) before every trade. On launchpads like [[pump-fun|Pump.fun]], where the base rate of profitable tokens is on the order of 1%, running this checklist is what separates a process from a slot machine.
@@ -96,6 +96,23 @@ The point of automation is not to skip the checklist — it is to make running i
 - **Tools lag the chain.** A "clean" scan can be seconds out of date during a busy launch; the dev may already be selling.
 - **The checklist filters scams, not edge.** Passing every item only means the token is *not provably a rug right now*. It says nothing about whether the trade will be profitable.
 - **Network coverage gaps.** Tools are strongest on Solana, Ethereum, Base, BSC. Newer chains and cross-chain memes often have no automated scanners — you must do the checks manually or pass.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

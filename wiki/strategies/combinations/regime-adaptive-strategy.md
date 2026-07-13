@@ -2,7 +2,7 @@
 title: "Regime-Adaptive Strategy"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [combinations, meta-strategy, regime-detection, adaptive, volatility, market-conditions]
 strategy_type: hybrid
@@ -10,7 +10,7 @@ timeframe: varies by regime
 markets: [stocks, crypto, futures]
 complexity: advanced
 backtest_status: untested
-related: ["[[trend-following]]", "[[mean-reversion]]", "[[volatility]]", "[[vix]]", "[[adx]]", "[[bollinger-bands]]", "[[options-hedging]]"]
+related: ["[[trend-following]]", "[[mean-reversion]]", "[[volatility]]", "[[vix]]", "[[adx]]", "[[bollinger-bands]]", "[[options-hedging]]", "[[cryptodataapi]]"]
 ---
 
 # Regime-Adaptive Strategy
@@ -99,3 +99,22 @@ The key insight: market regimes are persistent. A trending market tends to keep 
 **Bridgewater Associates** uses a form of regime thinking in their All-Weather portfolio — constructing a portfolio that is designed to perform acceptably across all economic regimes (growth/inflation rising or falling) rather than switching between strategies.
 
 **See also:** [[trend-following]], [[mean-reversion]], [[volatility]], [[vix]], [[adx]], [[hidden-markov-model]], [[position-sizing]], [[risk-management]]
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].

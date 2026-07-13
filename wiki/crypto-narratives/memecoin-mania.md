@@ -2,11 +2,11 @@
 title: "Memecoin Mania & Risk-On Tops — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: good
 tags: [crypto, event-driven, market-regime, behavioral-finance, liquidity, narrative-impact]
 aliases: ["Memecoin Season", "Celebrity Coin Pump", "Launch-Day Token", "Risk-On Top Signal"]
-related: ["[[crypto-narratives-overview]]"]
+related: ["[[crypto-narratives-overview]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -107,6 +107,23 @@ Aggregated across all three archetypes — features and analog mechanisms a quan
 - `memecoin_mcap_drawdown_from_ath`
 
 **Analog mechanisms:** sentiment-shock, reflexive-deleveraging, dry-powder-injection, sell-pressure, supply-restriction, forced-liquidation
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

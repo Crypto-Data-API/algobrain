@@ -2,11 +2,11 @@
 title: "Hyperliquid Margining Modes"
 type: concept
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: draft
 tags: [crypto, market-microstructure, derivatives, leverage, margin]
 aliases: ["Hyperliquid Margin Modes", "HL Cross vs Isolated", "Hyperliquid No-Cross Margin", "Hyperliquid Maintenance Margin"]
-related: ["[[hyperliquid]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[hyperliquid-funding-rate-microstructure]]", "[[funding-rate]]", "[[clob]]", "[[order-book]]", "[[market-microstructure]]", "[[slippage]]", "[[market-impact]]", "[[liquidation]]", "[[perpetual-futures]]"]
+related: ["[[hyperliquid]]", "[[hypercore]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[hyperliquid-funding-rate-microstructure]]", "[[funding-rate]]", "[[clob]]", "[[order-book]]", "[[market-microstructure]]", "[[slippage]]", "[[market-impact]]", "[[liquidation]]", "[[perpetual-futures]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[perpetual-futures]]", "[[liquidation]]"]
 difficulty: advanced
@@ -80,6 +80,25 @@ The combination matters: a HIP-3 market can pair aggressive leverage limits with
 - **Account for funding in the equity calculation.** Hourly [[hyperliquid-funding-rate-microstructure|funding]] payments debit/credit equity and can push a marginal position into liquidation independent of price; high positive [[funding-rate]] also signals a heavy leveraged-long book and elevated cascade risk.
 - **Re-underwrite each HIP-3 market.** Deployer-set leverage, a builder oracle, and a separate backstop contract mean HIP-3 margin risk is *not* comparable to core markets even at identical leverage.
 - **Liquidation cost is a book-depth question.** Because closeouts are market orders into the live book, position sizing should account for the [[slippage]] / [[market-impact]] your own forced exit would create in that market's depth.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

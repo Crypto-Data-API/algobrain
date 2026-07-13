@@ -2,7 +2,7 @@
 title: Slippage
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [slippage, market-microstructure, liquidity, backtesting]
 aliases: [price slippage, execution slippage, Slippage]
@@ -10,6 +10,7 @@ domain: [market-microstructure]
 prerequisites: ["[[liquidity]]", "[[order-book]]", "[[bid-ask-spread]]"]
 difficulty: beginner
 related:
+  - "[[cryptodataapi]]"
   - "[[liquidity]]"
   - "[[order-book]]"
   - "[[bid-ask-spread]]"
@@ -61,6 +62,22 @@ Slippage is a hidden, recurring cost that compounds against active traders. In [
 - Kissell, R. (2013), *The Science of Algorithmic Trading and Portfolio Management* — transaction-cost and market-impact modeling
 - Almgren, R. & Chriss, N. (2000), "Optimal Execution of Portfolio Transactions," *Journal of Risk* — the canonical impact/slippage execution framework
 - SEC Rule 605/606 disclosures — execution-quality and price-improvement reporting
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+- `GET /api/v1/liquidity/oi-divergence` — OI vs price divergence (1h/4h/24h)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — raw L2 order book snapshot
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

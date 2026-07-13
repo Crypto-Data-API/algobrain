@@ -2,11 +2,11 @@
 title: "Volatility Regime Switching"
 type: concept
 created: 2026-05-07
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [volatility, indicators, quantitative, regime, backtesting]
 aliases: ["Regime-Switching Models", "Markov-Switching Volatility", "Vol Regime Switching"]
-related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-term-structure]]", "[[market-regime]]", "[[market-regime-detection-ml]]", "[[hidden-markov-model]]", "[[garch]]", "[[backtesting]]", "[[lookahead-bias]]", "[[overfitting]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[volmageddon]]", "[[covid-crash]]", "[[vix-august-2024-spike]]"]
+related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-term-structure]]", "[[market-regime]]", "[[market-regime-detection-ml]]", "[[hidden-markov-model]]", "[[garch]]", "[[backtesting]]", "[[lookahead-bias]]", "[[overfitting]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[volmageddon]]", "[[covid-crash]]", "[[vix-august-2024-spike]]", "[[cryptodataapi]]"]
 domain: [quantitative, volatility]
 prerequisites: ["[[volatility-regime]]", "[[garch]]"]
 difficulty: advanced
@@ -137,6 +137,25 @@ The honest fix is to backtest under *forced regime stratification* — e.g., com
 4. **Building strategies that work only at the regime boundary.** Backtests that look spectacular often turn out to be earning their P&L on the 2–3 regime transitions in the sample. Strip out those days and the edge disappears.
 5. **Using regime models without a non-econometric sanity check.** When the model says *"low-vol regime"* but credit spreads are widening, breadth is collapsing, and term structure is flat, trust the cross-asset evidence over the single-asset model.
 6. **Fitting Markov-switching GARCH and then using a single-regime simulator for risk.** The whole point of fitting the switching model is that risk is regime-conditional — use the switching model in the risk simulation too.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

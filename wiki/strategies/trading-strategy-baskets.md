@@ -2,7 +2,7 @@
 title: "Trading Strategy Baskets"
 type: strategy
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-07-13
 status: good
 tags: [quantitative, portfolio-theory, risk-management, stocks, correlation]
 aliases: ["Basket Trading", "Strategy Baskets", "Thematic Baskets", "Long/Short Baskets"]
@@ -17,7 +17,7 @@ crowding_risk: medium
 data_required: [ohlcv-daily, fundamentals, correlation-matrix, sector-classification]
 min_capital_usd: 25000
 capacity_usd: 100000000
-related: ["[[edge-taxonomy]]", "[[pairs-trading]]", "[[correlation]]", "[[diversification]]", "[[sector-rotation]]", "[[position-sizing]]", "[[risk-parity]]", "[[beta]]", "[[narrative-trading]]", "[[rebalancing]]"]
+related: ["[[edge-taxonomy]]", "[[pairs-trading]]", "[[correlation]]", "[[diversification]]", "[[sector-rotation]]", "[[position-sizing]]", "[[risk-parity]]", "[[beta]]", "[[narrative-trading]]", "[[rebalancing]]", "[[cryptodataapi]]"]
 ---
 
 # Trading Strategy Baskets
@@ -150,6 +150,21 @@ Baskets generally have **higher [[strategy-capacity|capacity]]** than single-nam
 - General practitioner usage of thematic and long/short basket trading on equity desks
 
 General market knowledge; no specific wiki source ingested yet.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/trading-strategy-baskets` — 50 meta-baskets across 6 thematic groups (Pro+)
+- `GET /api/v1/regimes/current` — current market regime for basket gating
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily regime labels for basket backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/trading-strategy-baskets"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-strategy-baskets]].
 
 ## Related
 

@@ -2,14 +2,14 @@
 title: "FOMC Meetings"
 type: concept
 created: 2026-05-07
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [macro, federal-reserve, monetary-policy, volatility, options, calendar-effects]
 aliases: ["FOMC", "Federal Open Market Committee", "FOMC Date"]
 domain: [macroeconomics, market-microstructure]
 prerequisites: ["[[federal-reserve]]", "[[interest-rates]]"]
 difficulty: intermediate
-related: ["[[federal-reserve]]", "[[fomc]]", "[[fomc-drift]]", "[[interest-rates]]", "[[interest-rate-risk]]", "[[fed-funds-futures]]", "[[us-treasury-bonds]]", "[[implied-volatility]]", "[[volatility-term-structure]]", "[[volatility-regime]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[expiration-laddering]]", "[[macro-events]]", "[[options-portfolio-construction]]"]
+related: ["[[federal-reserve]]", "[[fomc]]", "[[fomc-drift]]", "[[interest-rates]]", "[[interest-rate-risk]]", "[[fed-funds-futures]]", "[[us-treasury-bonds]]", "[[implied-volatility]]", "[[volatility-term-structure]]", "[[volatility-regime]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[expiration-laddering]]", "[[macro-events]]", "[[options-portfolio-construction]]", "[[cryptodataapi]]"]
 ---
 
 The Federal Open Market Committee (FOMC) holds **eight scheduled meetings per year** plus occasional unscheduled meetings during crises. The scheduled meetings are the single highest-impact recurring events on the US economic calendar — they reset the path of the federal-funds rate, drive the short end of the [[us-treasury-bonds|Treasury]] curve, and produce some of the most reliable short-window patterns in equity returns and the [[implied-volatility|IV]] surface. For a [[theta-targeting|theta-targeted]] options book, FOMC dates are not just macro noise to weather — they are surface-distorting events that should be explicitly *shaped around* in the [[expiration-laddering|DTE ladder]]. This page focuses on the **market-microstructure and options-vol implications** of FOMC dates; for the institutional structure and policy mechanics of the committee, see [[fomc]].
@@ -109,6 +109,22 @@ Sunday-evening 100-bp cut to zero plus QE restart. Monday: SPX -12% (limit-down 
 - **Carrying single-name short-vol books through unscheduled meetings** — the index-level vol shock spreads to single names via implied correlation, and short-strangle sellers on individual names are blown up alongside index sellers.
 - **Confusing the policy decision with the surprise** — what moves markets is the *tone*, *dots*, and *path-revision*, not the rate change itself. The market prices the rate decision in advance most of the time; the surface reaction is to the *unexpected* component.
 - **Ignoring the SOMA / balance-sheet announcement** — QE and QT pace changes are sometimes the most consequential element of the meeting, even when the rate decision is uneventful.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/event/calendar` — forward catalyst calendar up to 30d out (filter by type/symbol/bias)
+- `GET /api/v1/event/regime/score` — event-risk composite (0-100)
+- `GET /api/v1/event/regime/{symbol}` — per-symbol pending catalysts
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time snapshots for event backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

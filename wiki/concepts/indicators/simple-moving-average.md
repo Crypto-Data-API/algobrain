@@ -2,11 +2,11 @@
 title: "Simple Moving Average"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-13
 status: good
 tags: [technical-analysis, indicators, trend-following]
 aliases: ["SMA"]
-related: ["[[exponential-moving-average]]", "[[moving-averages]]", "[[trend-following]]", "[[macd]]", "[[bollinger-bands]]", "[[support-and-resistance]]"]
+related: ["[[exponential-moving-average]]", "[[moving-averages]]", "[[trend-following]]", "[[macd]]", "[[bollinger-bands]]", "[[support-and-resistance]]", "[[cryptodataapi]]"]
 domain: [technical-analysis]
 difficulty: beginner
 ---
@@ -82,6 +82,22 @@ Plot bands at a fixed percentage above and below the SMA (e.g., +/- 3%). Price r
 - **Lagging indicator** -- by definition, the SMA reacts after the fact
 - **Whipsaws in ranging markets** -- crossover signals produce frequent false signals when price moves sideways
 - **Equal weighting** -- a sharp price change N periods ago affects the SMA just as much as today's price, which can produce counterintuitive jumps when the old price drops out of the window
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — price-structure state (SMA/BB/RSI) across assets
+- `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN state
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset detail + 60d history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — raw OHLCV for computing your own
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
 
 ## Related
 

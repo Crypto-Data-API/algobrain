@@ -2,11 +2,11 @@
 title: "ETF and Institutional Flow (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, quantitative, market-regime, regime-detection, risk-management, momentum]
 aliases: ["ETF Flow Basket", "Institutional Flow Signal", "Spot ETF Demand Basket", "Coinbase Premium Basket"]
-related: ["[[hyperliquid-baskets-overview]]", "[[institutional-flow-regime]]", "[[on-chain-regime]]", "[[spot-etf-flows]]", "[[macro-trend-regime]]", "[[crypto-macro-correlation-regime]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[macro-event-pump]]", "[[breadth-and-momentum-divergence]]", "[[defensive-majors]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[full-bear-short-book]]", "[[trend-following]]", "[[multi-strategy-portfolio]]", "[[when-to-retire-a-strategy]]", "[[cryptoquant]]", "[[coinglass]]", "[[the-block]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[institutional-flow-regime]]", "[[on-chain-regime]]", "[[spot-etf-flows]]", "[[macro-trend-regime]]", "[[crypto-macro-correlation-regime]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[macro-event-pump]]", "[[breadth-and-momentum-divergence]]", "[[defensive-majors]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[full-bear-short-book]]", "[[trend-following]]", "[[multi-strategy-portfolio]]", "[[when-to-retire-a-strategy]]", "[[cryptoquant]]", "[[coinglass]]", "[[the-block]]", "[[cryptodataapi]]"]
 strategy_type: quantitative
 timeframe: position
 markets: [crypto]
@@ -228,6 +228,27 @@ This is a **position-timeframe basket** (hold durations 1–8 weeks). Hyperliqui
 - [[the-block]] — ETF flow aggregator.
 - [[coinglass]] — OI cross-reference data.
 - [[crypto-market-regime-taxonomy]] — the full taxonomy placing this basket in context.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

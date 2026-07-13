@@ -2,11 +2,11 @@
 title: "Hyperliquid Basket Library"
 type: overview
 created: 2026-06-16
-updated: 2026-06-16
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, quantitative, market-regime, risk-management, methodology]
 aliases: ["Hyperliquid Baskets", "Trading Baskets", "Basket Library", "Signal Baskets"]
-related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-matrix]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[live-journal]]", "[[hyperliquid]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-matrix]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[live-journal]]", "[[hyperliquid]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 ---
 
 # Hyperliquid Basket Library
@@ -117,6 +117,21 @@ Every basket inherits the same venue constraints (detailed on each page):
 - [[regime-strategy-playbook]] — the regime → concrete-strategy mapping these baskets implement.
 - [[hyperliquid-funding-rate-microstructure]], [[hyperliquid-liquidation-engine]] — venue mechanics every basket inherits.
 - [[edge-taxonomy]], [[failure-modes]] — the edge classification and failure-mode vocabulary each page uses.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/trading-strategy-baskets` — 50 meta-baskets across 6 thematic groups (Pro+)
+- `GET /api/v1/regimes/current` — current market regime for basket gating
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily regime labels for basket backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/trading-strategy-baskets"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-strategy-baskets]].
 
 ## Related
 

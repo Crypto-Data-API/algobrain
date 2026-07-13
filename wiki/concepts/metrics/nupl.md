@@ -2,14 +2,14 @@
 title: "Net Unrealized Profit/Loss (NUPL)"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["NUPL", "Net Unrealized Profit/Loss", "Net Unrealized Profit Loss", "net-unrealized-profit-loss"]
 domain: [market-microstructure]
 prerequisites: ["[[mvrv]]", "[[realized-price]]"]
 difficulty: intermediate
-related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[realized-price]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]"]
+related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[realized-price]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]", "[[cryptodataapi]]"]
 ---
 
 **Net Unrealized Profit/Loss (NUPL)** is an [[on-chain-analysis|on-chain]] sentiment-and-valuation metric that expresses the aggregate paper profit or loss held across all holders as a *fraction of* [[market-capitalization|market cap]]. It is closely related to [[mvrv|MVRV]] — both compare market cap to [[realized-price|realized cap]] — but where MVRV is a ratio, NUPL is a normalised percentage that maps neatly onto a set of named psychological "colour bands" describing market mood. It is a popular [[bitcoin]] cycle gauge on [[glassnode]] and [[cryptoquant]].
@@ -55,6 +55,26 @@ If [[bitcoin]]'s market cap is well above its realized cap — say realized cap 
 - **Entity/exchange adjustments**: internal custodial transfers can reset the "last-moved price" without a real ownership change; entity-adjusted variants help, but the label layer is provider-produced and revised over time (see [[on-chain-analysis#Leading vs Lagging, and Data Caveats]]).
 - **Band drift across cycles**: the percentage thresholds that named earlier euphoria/capitulation phases have shifted as the asset matured; treat the colour bands qualitatively, not as fixed lines.
 - **Best for mature assets**: most reliable for [[bitcoin]]; noisier on thin or newer chains.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Funding Rate Arbitrage"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-27
+updated: 2026-07-13
 status: excellent
 tags: [arbitrage, crypto, funding-rate, perpetual-futures, market-neutral, defi, quantitative, derivatives]
 aliases: ["Funding Arb", "Perp Funding Trade", "Cash and Carry (Perps)", "Cash-and-Carry Perp", "Crypto Carry"]
@@ -41,7 +41,7 @@ kill_criteria: |
 last_review: 2026-04-27
 next_review: 2026-05-27
 
-related: ["[[cash-and-carry]]", "[[basis-trading]]", "[[cross-exchange-arbitrage]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[basis]]", "[[ethena-usde]]", "[[hyperliquid]]", "[[asterdex]]", "[[binance]]", "[[ftx]]", "[[kelly-criterion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-a-man-for-all-markets]]"]
+related: ["[[cash-and-carry]]", "[[basis-trading]]", "[[cross-exchange-arbitrage]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[basis]]", "[[ethena-usde]]", "[[hyperliquid]]", "[[asterdex]]", "[[binance]]", "[[ftx]]", "[[kelly-criterion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[book-a-man-for-all-markets]]", "[[cryptodataapi]]"]
 ---
 
 # Funding Rate Arbitrage
@@ -371,6 +371,25 @@ See [[when-to-retire-a-strategy]] for the broader framework. Funding-arb is a *p
 **Regime/event evidence:**
 - AMBCrypto and DLNews coverage of the 2025-10-10 funding crash: USDe outflows of $5.7B in October 2025; TVL fell from $14.8B to $7.6B; sUSDe yield collapsed; ENA token down 62%. Concrete record of what funding-arb decay looks like during a regime flip.
 - [[ftx|FTX]] collapse (November 2022) — canonical counterparty-risk event; funding-arb operators with capital on FTX lost the spot or perp leg outright.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

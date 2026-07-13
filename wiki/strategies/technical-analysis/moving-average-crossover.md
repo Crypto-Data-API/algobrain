@@ -2,7 +2,7 @@
 title: "Moving Average Crossover"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-27
+updated: 2026-07-13
 status: excellent
 tags: [trend-following, moving-averages, technical-analysis, crossover, momentum, indicators]
 aliases: ["MA Crossover", "Golden Cross Strategy", "Death Cross Strategy", "Golden/Death Cross", "50/200 SMA System"]
@@ -21,7 +21,7 @@ expected_sharpe: 0.5
 expected_max_drawdown: 0.30
 breakeven_cost_bps: 25
 decay_evidence: "Brock et al 1992 edge largely arbitraged out post-publication. Time-series momentum (Moskowitz 2012) still robust in cross-asset universes but compressed in single-asset settings."
-related: ["[[supertrend]]", "[[ichimoku-cloud]]", "[[parabolic-sar]]", "[[exponential-moving-average]]", "[[simple-moving-average]]", "[[macd]]", "[[atr]]", "[[trend-following]]", "[[time-series-momentum]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[live-journal]]", "[[book-technical-analysis-of-the-financial-markets]]"]
+related: ["[[supertrend]]", "[[ichimoku-cloud]]", "[[parabolic-sar]]", "[[exponential-moving-average]]", "[[simple-moving-average]]", "[[macd]]", "[[atr]]", "[[trend-following]]", "[[time-series-momentum]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[live-journal]]", "[[book-technical-analysis-of-the-financial-markets]]", "[[cryptodataapi]]"]
 ---
 
 # Moving Average Crossover
@@ -347,6 +347,22 @@ Pausing is preferred over retiring; the underlying edge has survived a century, 
 - **Moskowitz, Tobias J., Yao Hua Ooi, and Lasse Heje Pedersen (2012)**, *Time Series Momentum*, Journal of Financial Economics 104(2), pp. 228–250. Documents 1-to-12-month positive autocorrelation across 58 liquid futures markets 1985–2009. The cross-asset framework in which moving-average crossovers fit as one specific implementation.
 - **Hurst, Brian, Yao Hua Ooi, and Lasse Heje Pedersen (2017)**, *A Century of Evidence on Trend-Following Investing*, Journal of Portfolio Management 44(1), pp. 15–29. AQR-authored extension showing positive returns to a simple TSMOM strategy in every decade since 1880 across global markets.
 - [[book-technical-analysis-of-the-financial-markets]] — John Murphy. Standard practitioner reference on moving-average construction, signal generation, and the Golden/Death Cross terminology.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — price-structure state (SMA/BB/RSI) across assets
+- `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN state
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset detail + 60d history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — raw OHLCV for computing your own
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
 
 ## Related
 

@@ -2,11 +2,11 @@
 title: "Historical Spread & Basis Data Sources"
 type: reference
 created: 2026-04-20
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [data, arbitrage, backtesting, crypto, options, futures, meta]
 aliases: ["Spread Data", "Basis Data Sources", "Funding Rate History", "Historical Arbitrage Data"]
-related: ["[[data-sources-overview]]", "[[crypto-data-sources]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[arbitrage-overview]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[transaction-cost-modeling]]", "[[exchange-api-reference]]", "[[etf-arbitrage]]"]
+related: ["[[data-sources-overview]]", "[[crypto-data-sources]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[arbitrage-overview]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[transaction-cost-modeling]]", "[[exchange-api-reference]]", "[[etf-arbitrage]]", "[[cryptodataapi]]"]
 ---
 
 # Historical Spread & Basis Data Sources
@@ -241,6 +241,21 @@ The practical upshot: for crypto, **Tardis.dev** is the dominant retail-accessib
 ## Sources
 
 - General market knowledge; no specific wiki source ingested yet. Vendor coverage, pricing, and history-depth figures are drawn from vendor pages and community reports circa 2024-2026 and should be confirmed at the source.
+
+## Getting the Data (CryptoDataAPI)
+
+**Historical archive:**
+- `GET /api/v1/backtesting/klines` — OHLCV candle archive
+- `GET /api/v1/backtesting/funding` — funding-rate archive
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot
+- `GET /api/v1/backtesting/archives` — Parquet dataset archive (since 2020)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symbols"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 ## Related
 

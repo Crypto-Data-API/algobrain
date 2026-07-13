@@ -2,13 +2,13 @@
 title: "Point-in-Time Data"
 type: concept
 created: 2026-05-05
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [backtesting, data-provider, methodology, crypto, risk-management]
 aliases: ["PiT Data", "Point in Time Data", "Vintage Data", "As-Of Data"]
 domain: [backtesting]
 difficulty: intermediate
-related: ["[[lookahead-bias]]", "[[selection-bias-research]]", "[[glassnode]]", "[[coinapi]]", "[[kaiko]]", "[[crypto-perp-backtesting-pitfalls]]", "[[backtesting-pitfalls]]", "[[execution-model-differences]]"]
+related: ["[[lookahead-bias]]", "[[selection-bias-research]]", "[[glassnode]]", "[[coinapi]]", "[[kaiko]]", "[[crypto-perp-backtesting-pitfalls]]", "[[backtesting-pitfalls]]", "[[execution-model-differences]]", "[[cryptodataapi]]"]
 ---
 
 # Point-in-Time Data
@@ -92,6 +92,21 @@ A useful diagnostic from [[lookahead-bias]]: shift every input feature forward o
 - [Glassnode — Why Use Point-in-Time Data](https://insights.glassnode.com/why-use-point-in-time-data/) — definitive explanation of PiT data for on-chain analytics and how revised entity labels create lookahead bias in crypto backtests
 - [CoinAPI — How to Eliminate Survivorship Bias in Crypto Backtesting](https://www.coinapi.io/blog/how-to-eliminate-survivorship-bias-in-crypto-backtesting) — vintage handling for delisted instruments and immutable trade archives
 - [Corporate Finance Institute — Look-Ahead Bias](https://corporatefinanceinstitute.com/resources/career-map/sell-side/capital-markets/look-ahead-bias/) — TradFi framing of PiT fundamentals and restated-data leakage
+
+## Getting the Data (CryptoDataAPI)
+
+**Historical archive:**
+- `GET /api/v1/backtesting/klines` — OHLCV candle archive
+- `GET /api/v1/backtesting/funding` — funding-rate archive
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot
+- `GET /api/v1/backtesting/archives` — Parquet dataset archive (since 2020)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symbols"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
 
 ## Related
 

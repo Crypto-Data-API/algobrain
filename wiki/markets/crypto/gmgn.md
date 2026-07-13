@@ -2,13 +2,14 @@
 title: "GMGN.ai"
 type: entity
 created: 2026-05-04
-updated: 2026-06-12
+updated: 2026-07-13
 status: draft
 tags: [crypto, solana, sniping, trading-bots]
 aliases: ["GMGN", "gmgn.ai", "GMGN AI"]
 entity_type: company
 website: "https://gmgn.ai"
 related:
+  - "[[cryptodataapi]]"
   - "[[solana]]"
   - "[[pump-fun]]"
   - "[[memecoin-sniping]]"
@@ -107,6 +108,23 @@ Where [[photon-sol|Photon]] and [[axiom-pro|Axiom Pro]] compete on raw execution
 - Pump.fun ecosystem context: https://coinmarketcap.com/view/pump-fun-ecosystem/ and https://pump.fun
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: Bid-Ask Spread
 type: concept
 created: 2026-04-06
-updated: 2026-07-01
+updated: 2026-07-13
 status: good
 tags: [market-microstructure, liquidity, slippage]
 aliases: [bid-ask, bid-offer-spread, bid-ask-spreads]
@@ -10,6 +10,7 @@ domain: [market-microstructure]
 prerequisites: ["[[order-book]]", "[[liquidity]]"]
 difficulty: beginner
 related:
+  - "[[cryptodataapi]]"
   - "[[spread]]"
   - "[[order-book]]"
   - "[[liquidity]]"
@@ -82,6 +83,22 @@ The takeaway: a strategy that needs to enter and exit frequently can be profitab
 ## Sources
 
 - [[book-trading-and-exchanges]] — comprehensive treatment of the bid-ask spread, including its components (adverse selection, inventory, order processing costs), determinants, and role in market microstructure
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+- `GET /api/v1/liquidity/oi-divergence` — OI vs price divergence (1h/4h/24h)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — raw L2 order book snapshot
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

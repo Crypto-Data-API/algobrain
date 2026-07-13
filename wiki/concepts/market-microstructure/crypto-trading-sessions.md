@@ -2,13 +2,13 @@
 title: "Crypto Trading Sessions (Asia / London / New York)"
 type: concept
 created: 2026-05-16
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, market-microstructure, liquidity, day-trading]
 aliases: ["Crypto Sessions", "Asia London New York Crypto", "Crypto Intraday Sessions", "LNY Overlap"]
 domain: [market-microstructure]
 difficulty: intermediate
-related: ["[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[btc-weekend-effect]]", "[[overnight-vs-intraday]]", "[[funding-by-hour]]", "[[session-overlap-momentum]]", "[[kaiko]]", "[[coinglass]]", "[[cryptoquant]]", "[[crypto-perp-backtesting-pitfalls]]"]
+related: ["[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[btc-weekend-effect]]", "[[overnight-vs-intraday]]", "[[funding-by-hour]]", "[[session-overlap-momentum]]", "[[kaiko]]", "[[coinglass]]", "[[cryptoquant]]", "[[crypto-perp-backtesting-pitfalls]]", "[[cryptodataapi]]"]
 ---
 
 # Crypto Trading Sessions (Asia / London / New York)
@@ -71,6 +71,25 @@ The empirical work above relies on a small set of institutional-grade data provi
 - [[cryptoquant]] — exchange inflow/outflow analytics and the canonical [[spot-vs-derivatives-volume-ratio]] chart for diagnosing when derivatives are driving session price action.
 
 For most retail-scale work, CoinGlass and CryptoQuant are the practical starting point; Kaiko is the institutional research backbone.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 ## Related
 

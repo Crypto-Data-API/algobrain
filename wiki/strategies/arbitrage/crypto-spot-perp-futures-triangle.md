@@ -2,11 +2,11 @@
 title: "Crypto Spot-Perp-Futures Triangular Arbitrage"
 type: strategy
 created: 2026-04-25
-updated: 2026-06-10
+updated: 2026-07-13
 status: good
 tags: [arbitrage, crypto, derivatives, futures]
 aliases: ["Three-Wrapper Triangle", "Spot-Perp-Future Box"]
-related: ["[[funding-rate-arbitrage]]", "[[basis-trading]]", "[[cash-and-carry]]", "[[triangular-arbitrage]]"]
+related: ["[[funding-rate-arbitrage]]", "[[basis-trading]]", "[[cash-and-carry]]", "[[triangular-arbitrage]]", "[[cryptodataapi]]"]
 strategy_type: quantitative
 timeframe: swing
 markets: [crypto, futures]
@@ -136,6 +136,25 @@ Per-venue OI limits and funding-rate concavity. Realistic single-account capacit
 - Deribit Insights basis-trade explainers.
 - Hyperliquid HLP performance reports.
 - BitMEX perpetual-swap contract documentation — the original funding-rate mechanism design (Arthur Hayes et al., launched May 2016).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding rates (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange open interest
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=BTC` — all-in-one derivatives overview (markdown format available)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding-rate history
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
 ## Related
 

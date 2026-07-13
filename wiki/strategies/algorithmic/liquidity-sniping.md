@@ -2,7 +2,7 @@
 title: "Liquidity Sniping"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [liquidity-sniping, dex, token-launch, bot-trading, mempool, frontrunning, crypto, algorithmic]
 aliases: ["Liquidity Snipe", "Token Launch Sniping", "DEX Sniping Bot"]
@@ -11,7 +11,7 @@ timeframe: intraday
 markets: [crypto]
 complexity: advanced
 backtest_status: untested
-related: ["[[mev-strategies]]", "[[airdrop-farming]]", "[[defi-yield-farming]]", "[[sentiment-trading]]", "[[algorithmic-trading]]"]
+related: ["[[mev-strategies]]", "[[airdrop-farming]]", "[[defi-yield-farming]]", "[[sentiment-trading]]", "[[algorithmic-trading]]", "[[cryptodataapi]]"]
 ---
 
 # Liquidity Sniping
@@ -101,6 +101,23 @@ Even with automation, apply rapid filters:
 - **Legal gray area:** In some jurisdictions, bot-driven frontrunning of other traders may violate market manipulation regulations
 - **Emotional toll:** Watching most positions go to zero while waiting for the occasional winner requires significant psychological resilience
 - Profits are highly variable: a week of losses can be followed by a single massive winner, making the strategy difficult to evaluate short-term
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## See Also
 

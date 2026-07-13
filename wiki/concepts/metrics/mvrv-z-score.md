@@ -2,14 +2,14 @@
 title: "MVRV Z-Score"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["MVRV Z-Score", "MVRV Z Score", "mvrv-zscore", "Bitcoin MVRV Z-Score"]
 domain: [market-microstructure]
 prerequisites: ["[[mvrv]]", "[[realized-price]]"]
 difficulty: intermediate
-related: ["[[mvrv]]", "[[realized-price]]", "[[nupl]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]"]
+related: ["[[mvrv]]", "[[realized-price]]", "[[nupl]]", "[[sopr]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]", "[[cryptodataapi]]"]
 ---
 
 The **MVRV Z-Score** is a standardised version of the [[mvrv|MVRV Ratio]] that expresses the gap between an asset's [[market-capitalization|market cap]] and its [[realized-price|realized cap]] in units of standard deviation. By normalising the spread, it produces a smoother cycle oscillator that has *historically* helped identify [[bitcoin]] cycle tops and bottoms more cleanly than the raw MVRV ratio. It is a staple [[on-chain-analysis|on-chain]] cycle gauge on platforms such as [[glassnode]] and [[cryptoquant]].
@@ -46,6 +46,26 @@ When [[bitcoin]] is deep in a bull market and price has run far above the averag
 - **Cross-cycle drift**: the Z-Score levels that flagged previous tops and bottoms have compressed as the asset has matured (smaller percentage swings on a larger base), so historical red/green edges are not guaranteed to repeat.
 - **Lost-supply and entity caveats**: it inherits realized cap's weaknesses — lost coins, dormant supply, and internal exchange transfers distort the cost basis (see [[mvrv]] and [[on-chain-analysis#Leading vs Lagging, and Data Caveats]]).
 - **Best for mature assets**: most reliable for [[bitcoin]]; on thin or newer chains the realized cap and its volatility are noisy, weakening the signal.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

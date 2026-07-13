@@ -2,14 +2,14 @@
 title: "Market Regime"
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-13
 status: review
 tags: [market-regime, regime-detection, quantitative, risk-management]
 aliases: ["Market Regime", "Market Regimes", "Trading Regime", "Regime"]
 domain: [portfolio-theory, market-regime]
 prerequisites: ["[[volatility]]", "[[correlation]]", "[[market-cycles]]"]
 difficulty: intermediate
-related: ["[[market-cycles]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[correlation-regime]]", "[[regime-matrix]]", "[[regime-strategy-playbook]]", "[[business-cycle]]", "[[risk-on-risk-off-framework]]", "[[sector-rotation]]", "[[mean-reversion]]", "[[trend-following]]", "[[asset-allocation]]", "[[vix]]"]
+related: ["[[market-cycles]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[correlation-regime]]", "[[regime-matrix]]", "[[regime-strategy-playbook]]", "[[business-cycle]]", "[[risk-on-risk-off-framework]]", "[[sector-rotation]]", "[[mean-reversion]]", "[[trend-following]]", "[[asset-allocation]]", "[[vix]]", "[[cryptodataapi]]"]
 ---
 
 A **market regime** is a persistent statistical "state" of a market — a stretch of time during which the behaviour of returns (their trend, volatility, correlation, and risk appetite) is broadly consistent, before shifting to a qualitatively different state. Regimes are the reason a strategy that prints money for two years can quietly stop working: its edge was conditional on a regime that ended. Identifying which regime you are in, and sizing for the possibility that it changes, is one of the central problems of quantitative and discretionary trading alike.
@@ -64,6 +64,25 @@ Regimes are **sticky** — volatility clusters, trends persist — which is what
 - **Lookahead bias.** Labelling regimes with data that would not have been available in real time inflates backtests catastrophically. Regime signals must be strictly causal.
 - **Treating regimes as periodic.** Like [[market-cycles]], regimes have no fixed clock; assuming a regime "is due" to flip is the classic error.
 - **Single-axis tunnel vision.** A market can be a "bull" on price while breadth and correlation quietly signal a regime change underneath.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

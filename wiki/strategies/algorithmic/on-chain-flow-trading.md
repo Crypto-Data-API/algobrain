@@ -2,7 +2,7 @@
 title: "On-Chain Flow Trading"
 type: strategy
 created: 2026-06-03
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, bitcoin, ethereum, quantitative, market-regime, algorithmic]
 aliases: ["On-Chain Flow Trading", "Exchange Flow Trading", "On-Chain Signal Trading"]
@@ -21,7 +21,7 @@ expected_sharpe: null   # no reliable public Sharpe exists; see Performance char
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 30
 decay_evidence: "On-chain signals were stronger pre-2020; the spot-ETF era (2024+) routes large flows through custodians/ETFs that are partly off the classic exchange-flow radar, weakening some signals. No reliable published Sharpe."
-related: ["[[on-chain-regime]]", "[[crypto-market-regime-taxonomy]]", "[[on-chain-analysis]]", "[[whale-trade]]", "[[on-chain-smart-money-tracking]]", "[[institutional-flow-regime]]", "[[point-in-time-data]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]"]
+related: ["[[on-chain-regime]]", "[[crypto-market-regime-taxonomy]]", "[[on-chain-analysis]]", "[[whale-trade]]", "[[on-chain-smart-money-tracking]]", "[[institutional-flow-regime]]", "[[point-in-time-data]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 # On-Chain Flow Trading
@@ -218,6 +218,26 @@ Numeric halt conditions (see [[when-to-retire-a-strategy]]):
 
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — defines the 14-basket crypto regime taxonomy, including basket 7 (On-Chain Intelligence) that this strategy operationalises.
 - The specific signal-combination, gating, and sizing logic above is the **wiki's own synthesis**, not a reproduction of any single external system. No external performance numbers are claimed.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

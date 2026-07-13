@@ -2,14 +2,14 @@
 title: "Bonding Curve Analysis"
 type: concept
 created: 2026-05-04
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [crypto, defi, bonding-curve, memecoin, sniping, market-microstructure]
 aliases: ["Bonding Curve", "BC Analysis", "Pump.fun Bonding Curve"]
 domain: [defi, market-microstructure]
 prerequisites: ["[[automated-market-maker]]", "[[liquidity-pool]]"]
 difficulty: intermediate
-related: ["[[pump-fun]]", "[[letsbonk]]", "[[heaven-launchpad]]", "[[memecoin-sniping]]", "[[token-migration-sniping]]", "[[holder-concentration-analysis]]"]
+related: ["[[pump-fun]]", "[[letsbonk]]", "[[heaven-launchpad]]", "[[memecoin-sniping]]", "[[token-migration-sniping]]", "[[holder-concentration-analysis]]", "[[cryptodataapi]]"]
 ---
 
 A **bonding curve** is a deterministic mathematical formula that prices a token as a function of its circulating supply. On memecoin launchpads like [[pump-fun]], [[letsbonk]], and [[heaven-launchpad]], the curve replaces traditional order-book or AMM-style price discovery: every buy pushes price up the curve, every sell pushes it down, with no counterparty other than the curve itself. This makes early-entry vs late-entry tradeoffs, time-to-graduation, and rug risk *legible* to a trader — if you know how to read the curve.
@@ -192,6 +192,23 @@ Before entering a bonding-curve position:
 
 - [[2026-04-22-gap-finder-pump.fun-competitors-letsbonk-believe-mo]]
 - [[2026-04-22-gap-finder-low-cap-crypto-trading-microcaps-memecoi]]
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Related
 

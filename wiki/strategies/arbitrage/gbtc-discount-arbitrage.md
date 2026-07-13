@@ -2,7 +2,7 @@
 title: "GBTC Discount/Premium Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-13
 status: excellent
 tags: [arbitrage, crypto, bitcoin, history]
 aliases: ["GBTC Arb", "Grayscale Premium Trade", "GBTC NAV Arb", "Grayscale Discount Trade"]
@@ -21,7 +21,7 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 200
 decay_evidence: "Premium collapsed Feb 2021; discount closed Jan 2024 with ETF conversion."
-related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[2020-03-bond-etf-dislocation]]", "[[basis-trade]]", "[[depeg-risk]]", "[[three-arrows-capital]]", "[[blockfi]]"]
+related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[2020-03-bond-etf-dislocation]]", "[[basis-trade]]", "[[depeg-risk]]", "[[three-arrows-capital]]", "[[blockfi]]", "[[cryptodataapi]]"]
 ---
 
 # GBTC Discount/Premium Arbitrage
@@ -225,6 +225,27 @@ The headline lesson: a deep discount is necessary but not sufficient. A -40% dis
 - BlockFi Chapter 11 filings (November 2022)
 - Celsius bankruptcy disclosures (July 2022)
 - Premium-peak timing (GBTC +132% in May 2017; ETHE ~+270-300% in June 2019) verified via Perplexity (sonar), 2026-06-10 — citations: ycharts.com GBTC premium/discount history, news.bitcoin.com
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

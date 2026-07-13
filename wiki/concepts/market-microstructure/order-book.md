@@ -2,7 +2,7 @@
 title: Order Book
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [market-microstructure, liquidity, order-types]
 aliases: [order-books, "Order Books", depth-of-market, "Depth of Market", DOM, "Level 2", "Level 1", "limit order book"]
@@ -10,6 +10,7 @@ domain: [market-microstructure]
 prerequisites: ["[[order-types]]", "[[bid-ask-spread]]"]
 difficulty: intermediate
 related:
+  - "[[cryptodataapi]]"
   - "[[bid-ask-spread]]"
   - "[[liquidity]]"
   - "[[market-maker]]"
@@ -55,6 +56,22 @@ When a marketable order arrives, it "walks the book," consuming resting liquidit
 Active traders use the order book to gauge real-time supply/demand imbalance and to estimate execution cost before sending an order. A bid-heavy book signals short-term buying pressure; an ask-heavy book the reverse. But the book is a *snapshot of intentions, not commitments* — resting orders can be cancelled at any moment, and displayed size understates true interest (icebergs) or overstates it (spoofs).
 
 For this reason, [[order-flow]] analysis — tracking the actual *execution* of aggressive orders against resting liquidity — provides more reliable signals than the static book alone. Algorithmic execution systems consume L2/L3 books to drive [[smart-order-routing]] and to compute microstructure signals such as [[order-flow-imbalance|order flow imbalance]].
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+- `GET /api/v1/liquidity/oi-divergence` — OI vs price divergence (1h/4h/24h)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — raw L2 order book snapshot
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history, 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

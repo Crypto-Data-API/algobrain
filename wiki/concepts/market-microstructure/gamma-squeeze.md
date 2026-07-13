@@ -2,7 +2,7 @@
 title: Gamma Squeeze
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [options, market-microstructure, volatility, derivatives]
 aliases: ["gamma exposure squeeze", "dealer hedging squeeze", "gamma squeeze"]
@@ -10,6 +10,7 @@ domain: [market-microstructure]
 prerequisites: ["[[options-greeks]]", "[[delta-hedging]]", "[[short-squeeze]]"]
 difficulty: advanced
 related:
+  - "[[cryptodataapi]]"
   - "[[short-squeeze]]"
   - "[[short-interest]]"
   - "[[float]]"
@@ -50,6 +51,21 @@ The hedging quantity is mechanical: a dealer short calls with aggregate delta Δ
 ## Trading Relevance
 
 Gamma squeezes produce extreme, non-linear price moves that defy fundamental valuation. They are short-lived and collapse rapidly when the feedback loop breaks (options expire, traders sell, or implied volatility spikes enough to deter new call buying). Trading these events is extremely risky -- the reversal can be as violent as the squeeze itself. Practitioners track aggregate dealer gamma exposure (GEX) to gauge whether dealer hedging will amplify or dampen moves around a given price/expiry, and watch the largest open-interest strikes ("gamma walls") that can act as magnets or pinning levels into expiration. See [[dealer-gamma-positioning]].
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/quant/gex` — gamma exposure: MM inventory + liquidation profile (per-coin optional)
+- `GET /api/v1/quant/positioning` — trader-type split (market maker / whale / other)
+
+**Historical data:**
+- `GET /api/v1/quant/history` — point-in-time quant records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Sources
 

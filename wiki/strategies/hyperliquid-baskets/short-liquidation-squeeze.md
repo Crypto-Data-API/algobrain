@@ -2,11 +2,11 @@
 title: "Short-Liquidation Squeeze (Hyperliquid Basket)"
 type: strategy
 created: 2026-06-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: good
 tags: [crypto, perpetuals, hyperliquid, liquidation, market-microstructure, algorithmic, scalping, derivatives]
 aliases: ["Short Squeeze Cascade Rider", "Liquidation Heatmap Long", "Short Flush Long", "Squeeze Hunter Long"]
-related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[liquidity-depth-regime]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[liquidation]]", "[[open-interest]]", "[[leverage]]", "[[squeeze]]", "[[order-flow]]", "[[funding-rate]]", "[[coinglass]]", "[[hypurrscan]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
+related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[liquidity-depth-regime]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[liquidation]]", "[[open-interest]]", "[[leverage]]", "[[squeeze]]", "[[order-flow]]", "[[funding-rate]]", "[[coinglass]]", "[[hypurrscan]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic
 timeframe: scalp
 markets: [crypto]
@@ -297,6 +297,27 @@ Per [[when-to-retire-a-strategy]]:
 - [[edge-taxonomy]], [[failure-modes]] — classification frameworks.
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
 
 ## Related
 

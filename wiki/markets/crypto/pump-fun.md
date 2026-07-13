@@ -2,7 +2,7 @@
 title: "Pump.fun"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [crypto, defi]
 aliases: ["PUMP", "pumpdotfun"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://pump.fun"
-related: ["[[crypto-markets]]", "[[solana]]", "[[pumpswap]]", "[[letsbonk]]", "[[bonk]]", "[[memecoin-mania]]", "[[hyperliquid]]", "[[pump-fun-bonding-curve-sniping]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[pumpswap]]", "[[letsbonk]]", "[[bonk]]", "[[memecoin-mania]]", "[[hyperliquid]]", "[[pump-fun-bonding-curve-sniping]]", "[[cryptodataapi]]"]
 ---
 
 # Pump.fun
@@ -277,6 +277,23 @@ Rank fell from #67 to #107 and volume nearly halved April→June 2026 as memecoi
 - [[pump-fun-bonding-curve-sniping]] — related strategy
 
 ---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 
 ## Sources
 

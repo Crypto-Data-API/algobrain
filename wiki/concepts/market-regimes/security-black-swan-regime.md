@@ -2,13 +2,13 @@
 title: "Security / Black Swan Regime"
 type: concept
 created: 2026-06-03
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, market-regime, risk-management, market-microstructure, defi]
 aliases: ["Black Swan Regime", "Security Regime", "Hack Regime", "Crypto Tail Risk"]
 domain: [market-microstructure, risk-management]
 difficulty: advanced
-related: ["[[crypto-market-regime-taxonomy]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[liquidity-depth-regime]]", "[[stablecoin-depegs]]", "[[defi-hacks-and-exploits]]", "[[2025-10-crypto-liquidation-cascade]]", "[[hyperliquid]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[liquidity-depth-regime]]", "[[stablecoin-depegs]]", "[[defi-hacks-and-exploits]]", "[[2025-10-crypto-liquidation-cascade]]", "[[hyperliquid]]", "[[cryptodataapi]]"]
 ---
 
 The **Security / Black Swan regime** is basket #11 of the fourteen-basket [[crypto-market-regime-taxonomy]] — the tail-risk basket, triggered by exchange hacks, protocol exploits, and stablecoin depegs. What separates it from undifferentiated panic is that these shocks produce *measurable, repeatable patterns*: a **short-then-long-reversal shape** that plays out over hours to days rather than a one-way collapse. The framework's canonical example is the 2025 Bybit hack — reported at ~$1.46B (a vendor figure, unverified here) — which it characterises as a "forensic regime": an immediate [[open-interest|OI]] unwind, followed by users withdrawing to self-custody, followed eventually by institutional reaccumulation (Source: [[2026-06-03-cryptodataapi-14-basket-regime-framework]]). The edge here is not predicting the shock but reading which phase of the forensic sequence you are standing in. See [[defi-hacks-and-exploits]] and [[stablecoin-depegs]].
@@ -82,6 +82,25 @@ This basket is best read as a shock layer that temporarily *overrides* the preva
 ## Sources
 
 - [[2026-06-03-cryptodataapi-14-basket-regime-framework]] — the 14-basket regime framework defining the Security / Black Swan states, the 2025 Bybit hack (~$1.46B, vendor figure) forensic-regime example, sub-regime biases, and detection signals.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/regimes/current` — current long-horizon market regime (10-state taxonomy)
+- `GET /api/v1/quant/market` — HMM regime probabilities, 4h/24h horizons (15-min refresh)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/quant/timeline` — daily market regime labels, 2019-now
+- `GET /api/v1/quant/regimes/history` — full 6-regime Parquet download (2020-yesterday)
+- `GET /api/v1/quant/history` — point-in-time probability records for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 ## Related
 

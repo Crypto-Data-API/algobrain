@@ -2,14 +2,14 @@
 title: "Spent Output Profit Ratio (SOPR)"
 type: concept
 created: 2026-06-24
-updated: 2026-06-24
+updated: 2026-07-13
 status: draft
 tags: [crypto, bitcoin, indicators, valuation, market-microstructure, behavioral-finance]
 aliases: ["SOPR", "Spent Output Profit Ratio", "aSOPR", "Adjusted SOPR", "spent-output-profit-ratio"]
 domain: [market-microstructure]
 prerequisites: ["[[on-chain-analysis]]", "[[realized-price]]"]
 difficulty: intermediate
-related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[nupl]]", "[[realized-price]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[hodl-waves]]", "[[exchange-netflow]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]"]
+related: ["[[mvrv]]", "[[mvrv-z-score]]", "[[nupl]]", "[[realized-price]]", "[[on-chain-analysis]]", "[[market-capitalization]]", "[[bitcoin]]", "[[market-cycle]]", "[[hodl-waves]]", "[[exchange-netflow]]", "[[glassnode]]", "[[cryptoquant]]", "[[behavioral-finance]]", "[[cryptodataapi]]"]
 ---
 
 The **Spent Output Profit Ratio (SOPR)** is an [[on-chain-analysis|on-chain]] metric that measures whether coins being spent (moved) on-chain are, on average, changing hands at a **profit or a loss** relative to the price they were last acquired. For each spent output it compares the price at the moment of spending to the price when that coin last moved; aggregated across all spends in a period, SOPR above 1 means the market is realising gains, and below 1 means it is realising losses. It is one of the most-watched [[behavioral-finance|behavioural]] on-chain gauges for [[bitcoin]], popularised on [[glassnode]] and [[cryptoquant]].
@@ -56,6 +56,26 @@ During an established [[bitcoin]] uptrend, price dips and aSOPR falls toward 1.0
 - **Lost/dormant supply**: coins that never move never contribute to SOPR, so it only describes the *active* float, not the silent majority of long-dormant supply.
 - **Cohort matters**: aggregate SOPR can mask divergence — STH-SOPR and LTH-SOPR may point in opposite directions (e.g. new buyers panicking while old holders accumulate). Reading the blended figure alone can mislead.
 - **Best for UTXO chains**: cleanest on [[bitcoin]]; account-based chains require approximating the "price paid," adding noise.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/on-chain/exchange-flows/{symbol}` — CEX inflow/outflow (1h/6h/24h/7d, per-exchange breakdown)
+- `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` — stablecoin dry-powder z-score signal
+- `GET /api/v1/on-chain/miners/reserves` — BTC miner pool reserves + flows
+- `GET /api/v1/on-chain/miners/hash-ribbon` — Hash Ribbon state (capitulation/recovery/normal)
+- `GET /api/v1/on-chain/dormancy/btc` — BTC MVRV + supply-shock zone classification
+- `GET /api/v1/on-chain/score` — On-Chain Health composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/on-chain/whale-score/{symbol}` — whale accumulation score timeseries
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchange-flows/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 
 ## Related
 

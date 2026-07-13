@@ -2,11 +2,11 @@
 title: "Hyperliquid Liquidation Engine"
 type: concept
 created: 2026-05-05
-updated: 2026-06-11
+updated: 2026-07-13
 status: good
 tags: [crypto, defi, derivatives, market-microstructure, leverage]
 aliases: ["HL Liquidation Engine", "Hyperliquid Forced Liquidation", "HL Liq Mechanics"]
-related: ["[[hyperliquid]]", "[[hyperliquid-vault-architecture]]", "[[hyperliquid-oracle-mechanics]]", "[[liquidation]]", "[[liquidation-cascade-fade]]", "[[liquidation-cascade-arbitrage]]", "[[insurance-fund]]", "[[mark-price]]", "[[auto-deleveraging]]", "[[2024-03-hyperliquid-cascade]]", "[[2025-03-jellyjelly-hlp-attack]]"]
+related: ["[[hyperliquid]]", "[[hyperliquid-vault-architecture]]", "[[hyperliquid-oracle-mechanics]]", "[[liquidation]]", "[[liquidation-cascade-fade]]", "[[liquidation-cascade-arbitrage]]", "[[insurance-fund]]", "[[mark-price]]", "[[auto-deleveraging]]", "[[2024-03-hyperliquid-cascade]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, crypto]
 prerequisites: ["[[perpetual-futures]]", "[[liquidation]]"]
 difficulty: advanced
@@ -213,6 +213,25 @@ For HLP depositors, JELLYJELLY revealed that pair-level exposure caps are essent
 - **Three-source-median lag is exploitable.** When all three of (HL mid, Binance mid, OKX mid) move together, mark moves immediately. When only one or two move, mark lags. A trader watching cross-venue spot can predict mark trajectory ahead of the engine — useful for entry timing.
 - **HLP positioning is your fade ally.** When HLP is heavily long after a cascade leg, HLP itself is *also* a trapped long, and HLP's eventual offloading provides a soft ceiling on the snapback. This is information no CEX cascade trader has.
 - **Beware ADL.** A perfectly-timed cascade fade on Hyperliquid is more vulnerable to ADL than the same trade on Binance, because HLP's failure-state directly triggers ADL on profitable counterparties. The fade trader's risk is asymmetric — they cannot win as much as the unconstrained trade implies because their *winning* trades are precisely the ones most likely to be ADL'd.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order book snapshot
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
 
 ## Related
 

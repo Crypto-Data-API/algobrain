@@ -2,7 +2,7 @@
 title: "Session Overlap Momentum"
 type: strategy
 created: 2026-05-16
-updated: 2026-06-20
+updated: 2026-07-13
 status: excellent
 tags: [crypto, quantitative, day-trading, derivatives, market-microstructure, mean-reversion]
 aliases: ["LNY Overlap Fade", "Asia-Range-Break Fade", "Session Breakout Fade"]
@@ -27,6 +27,7 @@ kill_criteria: |
   - funding regime shifts to sustained-negative on the targeted asset for >2 consecutive weeks (short-side carry flips from earner to payer)
   - structural regime shift: spot-led, ETF-flow-dominated tape where Asia ranges consistently hold into London
 related:
+  - "[[cryptodataapi]]"
   - "[[crypto-trading-sessions]]"
   - "[[session-overlap-liquidity]]"
   - "[[funding-by-hour]]"
@@ -275,6 +276,25 @@ The cleanest pairing inside a crypto book is with [[liquidation-cascade-fade]] (
 ## Sources
 
 - (Source: [[2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect]])
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC history + 200D MA
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 ## Related
 

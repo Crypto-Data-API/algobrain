@@ -2,12 +2,13 @@
 title: "DEX Screener"
 type: entity
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-13
 status: good
 tags: [data-provider, crypto, defi, free]
 entity_type: company
 website: https://dexscreener.com
 related:
+  - "[[cryptodataapi]]"
   - "[[defilama]]"
   - "[[etherscan]]"
   - "[[coingecko]]"
@@ -77,3 +78,20 @@ token = requests.get(
 - Volume-based momentum screening across all DEX-traded tokens
 - New pair monitoring for automated [[sniping]] strategies
 - Combining with [[etherscan]] contract verification for token due diligence
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending DEX pools (Solana/Ethereum/Base/BSC/Arbitrum)
+- `GET /api/v1/dex/new-pools` — newest launches, multi-chain
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (rug/honeypot detection)
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + meme_season flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
