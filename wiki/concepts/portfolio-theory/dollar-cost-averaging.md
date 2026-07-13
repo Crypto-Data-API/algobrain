@@ -147,11 +147,11 @@ Several Australian platforms offer automated regular investment features:
 
 | Platform | Feature | Minimum | Frequency |
 |----------|---------|---------|-----------|
-| [[bell-direct]] | AutoInvest | Varies | Weekly, fortnightly, monthly |
+| bell-direct | AutoInvest | Varies | Weekly, fortnightly, monthly |
 | Vanguard Personal Investor | Recurring investments | $200 | Monthly |
 | Pearler | Auto-invest | $100 | Weekly, fortnightly, monthly |
 | Raiz (micro-investing) | Round-ups + recurring | $5 | Various |
-| [[superhero]] | Recurring investments | $100 | Various |
+| superhero | Recurring investments | $100 | Various |
 | [[superannuation]] funds | Automatic SG contributions | N/A | Per pay cycle (forced DCA) |
 
 ## DCA in Different Market Conditions

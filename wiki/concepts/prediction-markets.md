@@ -123,7 +123,6 @@ Prediction markets lack the insider trading enforcement mechanisms of traditiona
 - AI agents actively trade on Polymarket (LLM-powered bots, OpenClaw framework)
 - Prediction markets host 133+ AI-specific markets ($15M+ volume)
 - Prediction market prices are used as calibration signals for AI forecasting models
-- [[palantir-technologies|Palantir]] partnership deploys Vergence AI for integrity monitoring
 
 See [[ai-prediction-markets]] for the full treatment.
 

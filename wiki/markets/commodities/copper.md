@@ -6,14 +6,14 @@ updated: 2026-06-12
 status: good
 tags: [commodities, industrial-metals, futures]
 aliases: ["Dr. Copper", "HG"]
-related: ["[[bhp]]", "[[commodities]]", "[[iron-ore]]", "[[gold]]", "[[aluminum]]", "[[nickel]]", "[[zinc]]", "[[london-metal-exchange]]", "[[dxy-commodity-correlation]]"]
+related: ["[[commodities]]", "[[iron-ore]]", "[[gold]]", "[[aluminum]]", "[[nickel]]", "[[zinc]]", "[[london-metal-exchange]]", "[[dxy-commodity-correlation]]"]
 ---
 
 # Copper
 
 Copper is a base metal commodity widely considered a barometer of global economic health, earning the nickname "Dr. Copper" — so called because it has a PhD in economics. Copper prices correlate strongly with global GDP growth and manufacturing activity, making it one of the most-watched leading indicators among macro traders.
 
-Fred discusses copper as a key driver in the materials sector, notably highlighting that [[bhp]]'s sole motivation for its bid on Anglo American was to acquire its copper assets. Copper is classified as a critical transition metal for the net-zero energy transition, with demand expected to grow substantially due to electric vehicles, renewable energy infrastructure, and grid upgrades. Australia is a significant copper producer, making copper prices relevant to [[australian-dollar]] movements and ASX-listed miners.
+Fred discusses copper as a key driver in the materials sector, notably highlighting that bhp's sole motivation for its bid on Anglo American was to acquire its copper assets. Copper is classified as a critical transition metal for the net-zero energy transition, with demand expected to grow substantially due to electric vehicles, renewable energy infrastructure, and grid upgrades. Australia is a significant copper producer, making copper prices relevant to [[australian-dollar]] movements and ASX-listed miners.
 
 ## How Copper Is Traded
 
@@ -78,5 +78,4 @@ Chinese PMI data — especially the **Caixin Manufacturing PMI** — is the most
 - [[iron-ore]] — related industrial commodity
 - [[london-metal-exchange]] — global copper benchmark
 - [[dxy-commodity-correlation]] — copper inversely correlated with USD
-- [[bhp]] — major copper producer
 - [[commodities]] — sector overview

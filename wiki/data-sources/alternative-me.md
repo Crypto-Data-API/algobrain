@@ -22,7 +22,7 @@ The Crypto Fear & Greed Index is a composite of six weighted data sources:
 |-----------|--------|-------------|
 | **Volatility** | 25% | Current [[bitcoin|BTC]] [[volatility]] vs. 30-day and 90-day averages; unusually high volatility signals fear |
 | **Market Momentum / Volume** | 25% | Current volume and momentum vs. 30/90-day averages; high buying volume in a rising market signals greed |
-| **Social Media** | 15% | [[twitter|Twitter/X]] post volume and engagement rates for crypto hashtags; rapid increases signal greed |
+| **Social Media** | 15% | Twitter/X post volume and engagement rates for crypto hashtags; rapid increases signal greed |
 | **Surveys** | 15% | Weekly crypto polling (currently paused in some periods) |
 | **BTC Dominance** | 10% | Rising BTC dominance suggests fear (flight to safety within crypto); falling dominance suggests greed (risk-on altcoin speculation) |
 | **Google Trends** | 10% | Search volume for crypto-related queries; spikes in "bitcoin crash" signal fear; spikes in "buy bitcoin" signal greed |

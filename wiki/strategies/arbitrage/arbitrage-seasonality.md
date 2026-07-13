@@ -11,7 +11,7 @@ timeframe: position|long-term
 markets: [crypto, stocks, futures, options, commodities]
 complexity: intermediate
 backtest_status: untested
-related: ["[[arbitrage-overview]]", "[[arbitrage-live-performance]]", "[[arbitrage-opportunity-map]]", "[[regime-matrix]]", "[[funding-rate-arbitrage]]", "[[merger-arbitrage]]", "[[volatility-arbitrage]]", "[[cross-chain-arbitrage]]", "[[commodity-seasonality-patterns]]", "[[anomalies-overview]]", "[[arbitrage-competitive-landscape]]", "[[multi-venue-capital-management]]", "[[calendar-spread-arbitrage]]", "[[volatility-risk-premium]]", "[[hyperliquid]]"]
+related: ["[[arbitrage-overview]]", "[[arbitrage-live-performance]]", "[[arbitrage-opportunity-map]]", "[[regime-matrix]]", "[[funding-rate-arbitrage]]", "[[volatility-arbitrage]]", "[[cross-chain-arbitrage]]", "[[commodity-seasonality-patterns]]", "[[anomalies-overview]]", "[[arbitrage-competitive-landscape]]", "[[multi-venue-capital-management]]", "[[calendar-spread-arbitrage]]", "[[volatility-risk-premium]]", "[[hyperliquid]]"]
 ---
 
 # Arbitrage Strategy Seasonality
@@ -256,7 +256,7 @@ A seasonal "peak" only matters if the elevated spread exceeds your all-in cost. 
 - [[arbitrage-opportunity-map]] — current opportunity catalog
 - [[regime-matrix]] — the regime signals that override the calendar
 - [[commodity-seasonality-patterns]] — deepest seasonal driver detail
-- [[calendar-spread-arbitrage]] · [[funding-rate-arbitrage]] · [[merger-arbitrage]] · [[volatility-arbitrage]] · [[cross-chain-arbitrage]] — strategies with seasonal structure
+- [[calendar-spread-arbitrage]] · [[funding-rate-arbitrage]] · merger-arbitrage · [[volatility-arbitrage]] · [[cross-chain-arbitrage]] — strategies with seasonal structure
 - [[anomalies-overview]] — pre-FOMC drift and related calendar anomalies
 
 ## Sources

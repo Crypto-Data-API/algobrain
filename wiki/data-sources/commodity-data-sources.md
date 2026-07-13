@@ -34,7 +34,7 @@ These are the highest-quality, most widely followed commodity data sources -- al
 | **[[cme-group|CME Group]]** | Energy, metals, agriculture, livestock | Real-time and historical futures pricing, options data, COT data |
 | **CBOT** | Agricultural commodities | Spot prices, futures, and forward prices (part of [[cme-group]]) |
 | **[[london-metal-exchange|LME]]** | Base metals (copper, aluminium, nickel, zinc) | Global benchmark pricing and warehouse stock levels |
-| **[[intercontinental-exchange|ICE]]** | Energy, softs (coffee, cocoa, cotton) | Brent crude, natural gas, soft commodity futures |
+| **ICE** | Energy, softs (coffee, cocoa, cotton) | Brent crude, natural gas, soft commodity futures |
 
 ## Professional & Premium Platforms
 
@@ -44,8 +44,8 @@ These are the highest-quality, most widely followed commodity data sources -- al
 | **Refinitiv Eikon (LSEG)** | All commodities | Comprehensive real-time data, news, and analytics |
 | **S&P Global Platts** | Energy, metals, petrochemicals | Price benchmarks used in physical commodity contracts |
 | **Wood Mackenzie** | Energy, metals, mining | Long-range supply/demand models, project-level analysis |
-| **[[iea|IEA]]** | Energy | Monthly Oil Market Report; medium-term outlook |
-| **[[opec|OPEC]] MOMR** | Crude oil | Production levels, demand forecasts, OECD inventory data |
+| **IEA** | Energy | Monthly Oil Market Report; medium-term outlook |
+| **OPEC MOMR** | Crude oil | Production levels, demand forecasts, OECD inventory data |
 | **Baker Hughes** | Oil & gas | Weekly US and international drilling rig count |
 
 ## Free/Accessible Tools for Independent Researchers
@@ -64,7 +64,7 @@ These are the highest-quality, most widely followed commodity data sources -- al
 
 ### Energy
 - Primary: [[eia|EIA]] weekly reports (petroleum, natural gas, electricity)
-- Secondary: [[opec|OPEC]] MOMR, Baker Hughes rig count, IEA Oil Market Report
+- Secondary: OPEC MOMR, Baker Hughes rig count, IEA Oil Market Report
 - See [[eia-data]] for detailed guide
 
 ### Agricultural

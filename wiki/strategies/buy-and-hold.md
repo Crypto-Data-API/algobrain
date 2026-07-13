@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [fundamental-analysis, position-trading, portfolio-theory, sp500]
 aliases: ["Buy and Hold", "Buy-and-Hold", "Long-Term Investing", "Passive Long-Only"]
-related: ["[[passive-investing]]", "[[index-funds]]", "[[dca-strategy]]", "[[value-investing]]", "[[diversification]]", "[[dollar-cost-averaging]]", "[[value-averaging]]", "[[efficient-market-hypothesis]]"]
+related: ["[[passive-investing]]", "[[index-funds]]", "[[dca-strategy]]", "[[diversification]]", "[[dollar-cost-averaging]]", "[[value-averaging]]", "[[efficient-market-hypothesis]]"]
 strategy_type: fundamental
 timeframe: long-term
 markets: [stocks, crypto]
@@ -125,6 +125,5 @@ Effectively unlimited for broad indices — buy-and-hold of the market portfolio
 - [[dca-strategy]]
 - [[dollar-cost-averaging]]
 - [[value-averaging]]
-- [[value-investing]]
 - [[diversification]]
 - [[efficient-market-hypothesis]]

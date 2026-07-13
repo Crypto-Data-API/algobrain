@@ -41,7 +41,7 @@ It was Druckenmiller who went to Soros with the trade idea, and it was Soros who
 
 ### The Dot-Com Era: Triumph and Humbling
 
-During the late 1990s, Druckenmiller made billions by riding the technology [[bubble|bubbles]] in [[stock-markets|stocks]]. He recognized early that the [[dot-com-bubble]] was forming but chose to participate on the long side rather than fight it, understanding that [[bubbles]] can persist far longer than skeptics expect.
+During the late 1990s, Druckenmiller made billions by riding the technology [[bubble|bubbles]] in stocks. He recognized early that the [[dot-com-bubble]] was forming but chose to participate on the long side rather than fight it, understanding that [[bubbles]] can persist far longer than skeptics expect.
 
 However, the experience ultimately humbled him. After initially profiting from tech stocks, he re-entered long positions near the top in early 2000, reportedly losing $3 billion in just six weeks when the bubble burst. He later called it "the worst personal mistake I've ever made" and attributed it to abandoning his disciplined process under the pressure of underperformance relative to peers. This episode illustrates a critical lesson about [[trading-psychology]]: even the greatest traders can succumb to [[loss-aversion|fear of missing out]] and social pressure.
 

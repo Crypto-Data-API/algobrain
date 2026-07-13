@@ -20,14 +20,14 @@ related: ["[[straddle-strangle]]", "[[strip-strap]]", "[[reverse-iron-condor]]",
 
 A Gut Spread (also called "Guts") is a straddle-like strategy constructed with **in-the-money** options instead of at-the-money options. A **Long Guts** position buys an ITM call and an ITM put, while a **Short Guts** position sells both. The payoff profile is functionally equivalent to a [[straddle-strangle]], but the use of ITM options changes the premium dynamics and practical considerations.
 
-Long Guts costs more than a straddle because both legs carry [[intrinsic-value]], but the break-even points are often **lower** since the extrinsic premium component may be smaller. Short Guts collects more premium upfront but faces higher [[assignment]] risk because both options are already ITM.
+Long Guts costs more than a straddle because both legs carry intrinsic-value, but the break-even points are often **lower** since the extrinsic premium component may be smaller. Short Guts collects more premium upfront but faces higher [[assignment]] risk because both options are already ITM.
 
 ## Setup
 
 ### Long Guts
 1. **Buy 1 ITM call** (strike 5-10% below current price) + **1 ITM put** (strike 5-10% above current price).
 2. Same expiration for both legs, typically 30-60 DTE.
-3. Total cost = call premium + put premium. Both will have large [[intrinsic-value]] components.
+3. Total cost = call premium + put premium. Both will have large intrinsic-value components.
 
 ### Short Guts
 1. **Sell 1 ITM call** and **sell 1 ITM put** at the same strikes as above.
@@ -58,7 +58,7 @@ Long Guts costs more than a straddle because both legs carry [[intrinsic-value]]
 ## Disadvantages
 - **Higher capital requirement** -- ITM options are more expensive than ATM or OTM
 - **Assignment risk** is elevated for Short Guts since both legs are already ITM
-- More complex to analyze due to the large [[intrinsic-value]] component in each leg
+- More complex to analyze due to the large intrinsic-value component in each leg
 - Short Guts carries **unlimited risk** in both directions with heavy margin demands
 
 ## See Also

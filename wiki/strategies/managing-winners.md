@@ -20,10 +20,10 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 25
-related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[strangle]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[gamma-explosion]]", "[[zero-dte-options]]", "[[tastytrade]]", "[[itpm-trading-philosophy]]", "[[karen-the-supertrader]]", "[[when-to-retire-a-strategy]]", "[[implied-volatility]]"]
+related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[strangle]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[gamma-explosion]]", "[[zero-dte-options]]", "[[itpm-trading-philosophy]]", "[[karen-the-supertrader]]", "[[when-to-retire-a-strategy]]", "[[implied-volatility]]"]
 ---
 
-Managing winners is the [[tastytrade]] / [[itpm-trading-philosophy|ITPM]] discipline of **closing short-premium positions early, mechanically, at predefined profit and time thresholds** rather than holding them to expiration. The canonical rule is *close at 50% of max profit OR 21 days to expiration, whichever comes first* -- a doctrine that empirically converts the negative-expectation expiration-tail of [[options-premium-selling|premium-selling]] into a positive-expectation realised P&L distribution. This page treats it as a strategy in its own right because the rule is the dominant determinant of long-run P&L for the underlying short-premium book; the mechanical discipline of *when to take winners off* matters more than the strike selection of the underlying [[short-strangle|strangles]] or [[iron-condor|condors]].
+Managing winners is the tastytrade / [[itpm-trading-philosophy|ITPM]] discipline of **closing short-premium positions early, mechanically, at predefined profit and time thresholds** rather than holding them to expiration. The canonical rule is *close at 50% of max profit OR 21 days to expiration, whichever comes first* -- a doctrine that empirically converts the negative-expectation expiration-tail of [[options-premium-selling|premium-selling]] into a positive-expectation realised P&L distribution. This page treats it as a strategy in its own right because the rule is the dominant determinant of long-run P&L for the underlying short-premium book; the mechanical discipline of *when to take winners off* matters more than the strike selection of the underlying [[short-strangle|strangles]] or [[iron-condor|condors]].
 
 ## Edge source
 
@@ -42,12 +42,12 @@ Short-premium positions accrue [[theta]] in a non-linear way. A 45-DTE short str
 - **Concentration risk** -- if the underlying is now far from the short strikes, a single mean-reverting move can give back days of decay; if the underlying is near a strike, gamma is enormous.
 - **Vega asymmetry** -- a short strangle held into the final week is essentially a pure short-gamma play with little remaining vega cushion. Any IV expansion materialises as immediate realised loss.
 
-The empirical [[tastytrade]] research (published 2014-2020) shows that on a 45-DTE 16-delta short strangle managed at 50% of max profit:
+The empirical tastytrade research (published 2014-2020) shows that on a 45-DTE 16-delta short strangle managed at 50% of max profit:
 
 - Realised win rate rises from ~85% (held to expiration) to ~95% (managed at 50%).
 - Average winner falls to roughly half the held-to-expiration average winner.
 - Average loser falls dramatically because losing positions are often closed early via the 21-DTE rule.
-- **Sharpe roughly doubles** from naive expiration-held to 50%/21-DTE managed in the [[tastytrade]] backtests.
+- **Sharpe roughly doubles** from naive expiration-held to 50%/21-DTE managed in the tastytrade backtests.
 
 The reason is mechanical. Holding to expiration captures the full theta but accepts the full gamma tail. Managing at 50% takes the easy half of the theta and skips the hard half plus the tail. On any single trade the early exit forfeits some expected return; across thousands of trades, the **realised distribution** is much tighter and the long-run wealth-multiplier outcome is better.
 
@@ -55,7 +55,7 @@ The reason is mechanical. Holding to expiration captures the full theta but acce
 
 If the [[theta-decay]] curve were linear and gamma were uniform across DTE, managing winners early would be **strictly worse** -- the trader would forfeit half the theoretical profit at no risk reduction. The position would be terminated before its full edge had been collected.
 
-The empirical reality is that theta and gamma are **non-linearly distributed across the trade's life**. In the first half of the holding period, the trader collects ~50-70% of the theta in exchange for gamma that is roughly uniform. In the second half, the remaining theta accrues against a vertically-rising gamma curve, with realised P&L commonly *negative* relative to theoretical theta inside 14 DTE on liquid index products. Under the empirical reality, the rule is positive-expectation; under the null (linear theta, flat gamma), it is negative-expectation. Empirical tests reject the null on [[sp500|SPX]], SPY, QQQ, IWM 30-45 DTE short premium with high confidence.
+The empirical reality is that theta and gamma are **non-linearly distributed across the trade's life**. In the first half of the holding period, the trader collects ~50-70% of the theta in exchange for gamma that is roughly uniform. In the second half, the remaining theta accrues against a vertically-rising gamma curve, with realised P&L commonly *negative* relative to theoretical theta inside 14 DTE on liquid index products. Under the empirical reality, the rule is positive-expectation; under the null (linear theta, flat gamma), it is negative-expectation. Empirical tests reject the null on SPX, SPY, QQQ, IWM 30-45 DTE short premium with high confidence.
 
 ## Rules
 
@@ -64,7 +64,7 @@ The canonical rule set, applied to a [[options-premium-selling|short-premium]] b
 **Profit-target exit**:
 
 - **Short strangles**: close at **50% of max profit** (credit-collected basis).
-- **Iron condors**: close at **50% of max profit** (or 25% in some [[tastytrade]] regimes -- regime-dependent).
+- **Iron condors**: close at **50% of max profit** (or 25% in some tastytrade regimes -- regime-dependent).
 - **Iron flies**: close at **25% of max profit** -- the gamma curve is too steep to wait longer.
 - **Single-leg credit spreads**: close at **50-75% of max profit**.
 - **Covered calls / cash-secured puts**: close at **50% of max profit** for short-vol harvest; or **80%+** if the trader's intent is the underlying assignment.
@@ -182,7 +182,7 @@ This is the **modal benefit** of the 21-DTE rule: it is the loser-management mec
 - **Hit rate**: 50% rule on 45-DTE 16-delta short strangle: ~95% of trades close as winners (vs ~85% held-to-expiration).
 - **Average winner**: roughly half of held-to-expiration average winner. Smaller wins.
 - **Average loser**: roughly 0.6-0.8x of held-to-expiration average loser, because the 21-DTE rule terminates losers before the gamma cliff.
-- **Sharpe**: in published [[tastytrade]] backtests on 2007-2020 SPY data, the 50%/21-DTE rule produces ~2x the Sharpe of the held-to-expiration variant of the same strategy, primarily by truncating the left tail.
+- **Sharpe**: in published tastytrade backtests on 2007-2020 SPY data, the 50%/21-DTE rule produces ~2x the Sharpe of the held-to-expiration variant of the same strategy, primarily by truncating the left tail.
 - **Annualised return**: roughly comparable to or slightly below held-to-expiration in **calm-vol regimes**, because the trader forfeits the back half of the theta. Materially higher in **shock regimes** because the rule prevents the gamma blowups.
 - **Best regime**: high-vol, mean-reverting markets where the underlying touches strikes frequently but reverts. The rule captures the easy half of the move repeatedly.
 - **Worst regime**: very-low-vol, trendless markets where the underlying barely moves. In these regimes, 50% of max profit may take 60-70% of the holding period to reach, leaving the trader's capital tied up unproductively. See *When the rule hurts* below.
@@ -226,7 +226,7 @@ The rule is not a free lunch. It hurts in three identifiable scenarios:
 - **Simple to implement** -- a one-line rule per position, encodable in any broker or spreadsheet.
 - **Frees capital** earlier for redeployment at the optimal DTE entry point. See [[expiration-laddering]].
 - **Truncates the left tail** of the realised P&L distribution.
-- **Empirically validated** in [[tastytrade]]'s published backtests across multiple decades.
+- **Empirically validated** in tastytrade's published backtests across multiple decades.
 
 ## Disadvantages
 
@@ -239,7 +239,6 @@ The rule is not a free lunch. It hurts in three identifiable scenarios:
 
 ## Sources
 
-- [[tastytrade]] research archive -- canonical source for the 50%/21-DTE rule. Multiple published backtests on SPY, IWM, single-name underlyings 2007-2020.
 - *Tom Sosnoff and Tony Battista, tastytrade research videos* (2014-2020) -- primary recorded source.
 - [[itpm-trading-philosophy]] -- institutional application of mechanical exits in a portfolio context.
 - [[karen-the-supertrader]] -- cautionary tale of running the rule without surrounding [[vega-budgeting|vega caps]] and loss-side stops.
@@ -251,7 +250,7 @@ The rule is not a free lunch. It hurts in three identifiable scenarios:
 - [[zero-dte-options]] -- the 0DTE variant compresses the rule to 50%-of-credit-or-end-of-day.
 - [[theta-targeting]] / [[vega-budgeting]] -- the daily-theta and vega frameworks that depend on this rule for realisation.
 - [[gamma-explosion]] -- the path-risk that the rule defends against.
-- [[tastytrade]] / [[itpm-trading-philosophy]] -- the institutional sources.
+- tastytrade / [[itpm-trading-philosophy]] -- the institutional sources.
 - [[karen-the-supertrader]] / [[when-to-retire-a-strategy]] -- the failure-case context.
 - [[long-call]] / [[long-put]] -- the long-premium side that buys the convexity the rule's positions sell.
 - [[market-regime]] -- the rule's value-add is regime-dependent (helps most in high-vol, mean-reverting tape).

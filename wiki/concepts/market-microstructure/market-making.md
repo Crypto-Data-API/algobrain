@@ -12,7 +12,7 @@ difficulty: advanced
 related: ["[[market-maker]]", "[[bid-ask-spread]]", "[[liquidity]]", "[[order-types-overview]]", "[[market-microstructure]]", "[[depth-of-market]]", "[[high-frequency-trading]]"]
 ---
 
-Market making is the practice of continuously quoting both buy and sell prices for a security, profiting from the [[bid-ask-spread]] while providing [[liquidity]] to other market participants. A [[market-maker]] takes on inventory risk in exchange for the spread. Referenced in ITPM content as one of the core functions of institutional trading desks at banks like [[goldman-sachs]], [[morgan-stanley]], and [[commerzbank]].
+Market making is the practice of continuously quoting both buy and sell prices for a security, profiting from the [[bid-ask-spread]] while providing [[liquidity]] to other market participants. A [[market-maker]] takes on inventory risk in exchange for the spread. Referenced in ITPM content as one of the core functions of institutional trading desks at banks like goldman-sachs, morgan-stanley, and commerzbank.
 
 ## How Market Making Works
 

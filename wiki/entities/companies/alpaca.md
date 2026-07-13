@@ -10,7 +10,7 @@ founded: 2015
 headquarters: "San Mateo, California, USA"
 website: "https://alpaca.markets"
 aliases: ["Alpaca Markets", "Alpaca Securities", "Alpaca Crypto"]
-related: ["[[interactive-brokers]]", "[[robinhood]]", "[[tastytrade]]", "[[oanda]]", "[[tiger-brokers]]", "[[hyperliquid]]", "[[alpaca-vs-options-brokers]]", "[[alpaca-vs-hyperliquid]]", "[[api-trading]]", "[[paper-trading]]", "[[algorithmic-trading-overview]]"]
+related: ["[[robinhood]]", "[[hyperliquid]]", "[[alpaca-vs-hyperliquid]]", "[[api-trading]]", "[[paper-trading]]", "[[algorithmic-trading-overview]]"]
 ---
 
 # Alpaca
@@ -123,8 +123,8 @@ The Python SDK and paper trading together make Alpaca the default "getting start
 ## Weaknesses
 
 1. **No crypto perpetual futures** -- disqualifying for crypto derivatives traders. See [[alpaca-vs-hyperliquid]].
-2. **No futures, no FX, no international equities** -- single-market scope relative to [[interactive-brokers|IBKR]].
-3. **No native options analytics UI** -- no risk graphs, no P&L curves, no options-chain visualizer. Users must build or source their own. [[tastytrade]] and IBKR TWS are dramatically ahead here.
+2. **No futures, no FX, no international equities** -- single-market scope relative to IBKR.
+3. **No native options analytics UI** -- no risk graphs, no P&L curves, no options-chain visualizer. Users must build or source their own. tastytrade and IBKR TWS are dramatically ahead here.
 4. **Options product is relatively new (2023/2025)** and the ecosystem around it (educational content, third-party options analytics, institutional volume data) is less developed than at tastytrade or IBKR.
 5. **Execution quality** has been adequate but not a differentiator. Alpaca routes primarily via wholesale market makers; direct-market-access options comparable to IBKR Pro are not available.
 6. **Data tier is bifurcated** -- the free IEX-only feed is insufficient for most serious work. Full-market data requires the paid subscription, which is cheap but is an additional step relative to IBKR's bundled market data.
@@ -133,14 +133,14 @@ The Python SDK and paper trading together make Alpaca the default "getting start
 ## Who Should Use Alpaca
 
 - **Retail algo developers on US equities** -- almost certainly yes. The paper-trading loop and SDK quality are hard to beat.
-- **Retail options traders** -- only for specific workflows. If you want API-first options and are willing to build your own analytics, yes. If you want a polished options UI with streaming Greeks, no -- use [[tastytrade]] or IBKR TWS.
+- **Retail options traders** -- only for specific workflows. If you want API-first options and are willing to build your own analytics, yes. If you want a polished options UI with streaming Greeks, no -- use tastytrade or IBKR TWS.
 - **Crypto spot traders** -- acceptable for stock/crypto dollar-cost-averaging and simple algos. Fees are higher than crypto-native venues; no perps.
 - **Crypto perp traders** -- no, period. Use [[hyperliquid]], [[dydx]], or [[binance|Binance Futures]]; see [[alpaca-vs-hyperliquid]].
 - **Fintechs building embedded brokerage** -- likely yes; the Broker API is the primary product.
 
 ## Comparisons in this Wiki
 
-- [[alpaca-vs-options-brokers]] -- Alpaca vs [[interactive-brokers]], [[tastytrade]], [[robinhood]] for options
+- alpaca-vs-options-brokers -- Alpaca vs interactive-brokers, tastytrade, [[robinhood]] for options
 - [[alpaca-vs-hyperliquid]] -- Alpaca vs [[hyperliquid]] for crypto perpetual futures
 
 ## Sources
@@ -154,10 +154,6 @@ The Python SDK and paper trading together make Alpaca the default "getting start
 
 ## Related
 
-- [[interactive-brokers]] -- the benchmark for professional API brokerage
 - [[robinhood]] -- the retail zero-commission comparison point
-- [[tastytrade]] -- the options-specialist comparison point
-- [[oanda]] -- the forex/CFD API broker analogue
-- [[tiger-brokers]] -- the regulated multi-asset broker analogue
 - [[hyperliquid]] -- the crypto-native alternative for anything leveraged
 - [[api-trading]], [[paper-trading]], [[algorithmic-trading-overview]] -- workflow concepts

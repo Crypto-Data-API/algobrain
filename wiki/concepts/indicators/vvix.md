@@ -12,7 +12,7 @@ prerequisites: ["[[vix]]", "[[implied-volatility]]"]
 difficulty: advanced
 ---
 
-The **Cboe VVIX Index** measures the expected 30-day [[implied-volatility|implied volatility]] of the [[vix|VIX]] itself -- the implied volatility of VIX options. Often nicknamed "vol of vol," VVIX is calculated using the same model-free methodology as the VIX, but applied to the chain of options written on the VIX index rather than on [[sp500|SPX]].
+The **Cboe VVIX Index** measures the expected 30-day [[implied-volatility|implied volatility]] of the [[vix|VIX]] itself -- the implied volatility of VIX options. Often nicknamed "vol of vol," VVIX is calculated using the same model-free methodology as the VIX, but applied to the chain of options written on the VIX index rather than on SPX.
 
 ## Overview
 

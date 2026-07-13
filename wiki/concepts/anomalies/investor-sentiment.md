@@ -9,7 +9,7 @@ aliases: ["Baker-Wurgler Sentiment", "Sentiment Index Anomaly", "Investor Sentim
 domain: [anomalies, behavioral-finance]
 prerequisites: ["[[behavioral-finance]]", "[[anomalies-overview]]"]
 difficulty: intermediate
-related: ["[[anomalies-overview]]", "[[lottery-stock-anomaly]]", "[[ipo-underperformance]]", "[[behavioral-finance]]"]
+related: ["[[anomalies-overview]]", "[[lottery-stock-anomaly]]", "[[behavioral-finance]]"]
 ---
 
 # Investor Sentiment Anomaly
@@ -66,7 +66,6 @@ Sophisticated quant funds use sentiment-conditional factor loadings as a standar
 ## Related Strategies
 
 - [[lottery-stock-anomaly]] — disproportionately affected by sentiment swings
-- [[ipo-underperformance]] — IPO volume is one of the sentiment proxies
 - [[idiosyncratic-volatility-anomaly]] — anchored in limits-to-arbitrage
 - Stambaugh-Yu-Yuan sentiment-conditional anomaly strategies
 
@@ -81,5 +80,4 @@ Sophisticated quant funds use sentiment-conditional factor loadings as a standar
 
 - [[anomalies-overview]]
 - [[lottery-stock-anomaly]]
-- [[ipo-underperformance]]
 - [[behavioral-finance]]

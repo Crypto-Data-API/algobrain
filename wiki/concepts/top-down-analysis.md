@@ -6,9 +6,9 @@ updated: 2026-06-21
 status: excellent
 tags: [fundamental-analysis, valuation, education]
 aliases: ["Top Down Analysis", "Top-Down Investing", "Top-Down Approach", "top-down-analysis"]
-related: ["[[fundamental-analysis]]", "[[macroeconomics]]", "[[sector-rotation]]", "[[valuation]]", "[[asset-allocation]]", "[[business-cycle]]", "[[bottom-up-analysis]]", "[[gics-classification]]", "[[interest-rates]]", "[[forward-pe]]"]
+related: ["[[macroeconomics]]", "[[sector-rotation]]", "[[asset-allocation]]", "[[business-cycle]]", "[[bottom-up-analysis]]", "[[interest-rates]]"]
 domain: [fundamental-analysis]
-prerequisites: ["[[fundamental-analysis]]", "[[macroeconomics]]"]
+prerequisites: ["[[macroeconomics]]"]
 difficulty: beginner
 ---
 
@@ -20,11 +20,11 @@ Top-down analysis is often described as a funnel that filters a large universe d
 
 1. **Macroeconomy.** Assess the global and national environment: GDP growth, inflation, interest-rate trajectory, central-bank policy, fiscal policy, currency trends, the [[business-cycle]] phase, and geopolitics. The goal is to decide which broad asset classes (equities, bonds, commodities, cash) and which regions are favored.
 2. **Sector / industry.** Within the chosen asset class, identify sectors poised to outperform given the macro view. Different sectors lead at different phases of the cycle — e.g. cyclicals and financials early in an expansion, defensives (utilities, staples, healthcare) late-cycle or in contraction. This is the basis of [[sector-rotation]].
-3. **Individual securities.** Only after the macro and sector calls are made does the analyst select specific stocks (or bonds) — typically the strongest names within the favored sectors, screened on [[valuation]], quality, and momentum.
+3. **Individual securities.** Only after the macro and sector calls are made does the analyst select specific stocks (or bonds) — typically the strongest names within the favored sectors, screened on valuation, quality, and momentum.
 
 ## Sector Leadership Across the Business Cycle
 
-The second funnel level rests on the empirical regularity that different [[gics-classification|GICS sectors]] tend to lead at different phases of the [[business-cycle]]. A stylized map (a guide, not a guarantee):
+The second funnel level rests on the empirical regularity that different GICS sectors tend to lead at different phases of the [[business-cycle]]. A stylized map (a guide, not a guarantee):
 
 | Cycle phase | Macro signature | Sectors that tend to lead |
 |-------------|-----------------|---------------------------|
@@ -39,7 +39,7 @@ This is the engine of [[sector-rotation]]: rotate toward cyclicals as the econom
 
 1. **Macro view.** Suppose GDP growth is firm, inflation is cooling, and the central bank is signaling rate *cuts*. Falling [[interest-rates|rates]] favor equities over cash and bonds, and growth/rate-sensitive sectors over defensives. → *Overweight equities.*
 2. **Sector call.** Early-cycle, rate-sensitive sectors look best: technology, consumer discretionary, financials. Defensives (utilities, staples) likely lag. → *Tilt toward those three GICS sectors.*
-3. **Security selection.** Inside technology, screen the favored names on [[forward-pe|forward P/E]] vs. peers, earnings-revision momentum, and balance-sheet quality, then buy the strongest two or three. → *Final holdings.*
+3. **Security selection.** Inside technology, screen the favored names on forward P/E vs. peers, earnings-revision momentum, and balance-sheet quality, then buy the strongest two or three. → *Final holdings.*
 
 The same funnel runs in reverse to *reduce* risk: a deteriorating macro view (inverted yield curve, rising unemployment) triggers a broad de-risking before any single company reports bad news.
 
@@ -69,18 +69,16 @@ Many professional processes blend the two: a top-down overlay sets allocation an
 - **Right sector, wrong stock** — a correct sector call still leaves security selection to do; the strongest sector contains weak names.
 - **Whipsaw and timing risk** — sector rotation depends on correctly timing cycle turns, which are obvious only in hindsight.
 - **Opportunity cost** — a cautious macro stance can keep you out of powerful single-stock runs (e.g. a great company in an out-of-favor sector).
-- **Over-aggregation** — treating a whole sector as homogeneous ignores wide intra-sector dispersion in [[valuation]] and quality.
+- **Over-aggregation** — treating a whole sector as homogeneous ignores wide intra-sector dispersion in valuation and quality.
 - **Confirmation bias** — analysts can cherry-pick macro data that fits a pre-formed view.
 - **Mitigation** — most professionals blend top-down (for allocation and risk control) with [[bottom-up-analysis|bottom-up]] (for stock selection) rather than relying on either alone.
 
 ## Related
 
-- [[fundamental-analysis]] — the broader discipline top-down belongs to
 - [[macroeconomics]] — the first level of the funnel
 - [[sector-rotation]] — the strategy that operationalizes the sector level
 - [[asset-allocation]] — the primary application of the macro view
 - [[business-cycle]] — the cyclical lens that drives sector and asset-class calls
-- [[valuation]] — applied at the security-selection stage
 - [[bottom-up-analysis]] — the contrasting approach
 
 ## Sources

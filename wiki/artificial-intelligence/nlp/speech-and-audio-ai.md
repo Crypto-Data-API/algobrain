@@ -8,12 +8,12 @@ tags: [ai-trading, machine-learning, education]
 aliases: ["Speech AI", "Audio AI", "Speech-to-Text", "TTS", "Whisper"]
 domain: [ai-trading]
 difficulty: intermediate
-related: ["[[chatbot-architectures]]", "[[alfred]]", "[[nlp-overview]]", "[[foundation-models]]", "[[openai]]", "[[natural-language-processing]]", "[[earnings-call-analysis]]", "[[artificial-intelligence]]"]
+related: ["[[chatbot-architectures]]", "[[nlp-overview]]", "[[foundation-models]]", "[[openai]]", "[[natural-language-processing]]", "[[artificial-intelligence]]"]
 ---
 
 # Speech & Audio AI
 
-**Speech and audio AI** encompasses speech-to-text (STT), text-to-speech (TTS), speaker identification, and audio analysis. In trading, these technologies power voice interfaces ([[alfred|Alfred]]), earnings call analysis, central bank speech processing, and real-time audio monitoring of financial broadcasts.
+**Speech and audio AI** encompasses speech-to-text (STT), text-to-speech (TTS), speaker identification, and audio analysis. In trading, these technologies power voice interfaces (Alfred), earnings call analysis, central bank speech processing, and real-time audio monitoring of financial broadcasts.
 
 ## Core Technologies
 
@@ -30,7 +30,7 @@ related: ["[[chatbot-architectures]]", "[[alfred]]", "[[nlp-overview]]", "[[foun
 
 | Model | Provider | Quality | Trading Use |
 |-------|---------|---------|-------------|
-| **ElevenLabs** | ElevenLabs | Most natural voices, voice cloning | [[alfred|Alfred's]] voice interface |
+| **ElevenLabs** | ElevenLabs | Most natural voices, voice cloning | Alfred's voice interface |
 | **OpenAI TTS** | [[openai]] | Good quality, simple API | Audio alerts, portfolio summaries |
 | **Bark** | Suno | Open-source, expressive | Self-hosted voice bots |
 | **Coqui TTS** | Open-source | Fully local, customizable | Privacy-sensitive deployments |
@@ -53,7 +53,7 @@ Audio recording → Whisper (STT) → Speaker diarization → Transcript
 Management tone in earnings calls has been shown to predict post-earnings price drift — CFOs who use more hedging language ("somewhat", "approximately") tend to precede negative surprises.
 
 ### Voice-Activated Trading Assistant
-[[alfred|Alfred]] demonstrates the full pipeline:
+Alfred demonstrates the full pipeline:
 1. User speaks → Deepgram STT → text
 2. Text → [[anthropic|Claude]] (reasoning, tool calls, wiki search)
 3. Response text → ElevenLabs TTS → audio playback
@@ -84,9 +84,7 @@ This is research-stage for trading but has shown promise in deception detection 
 
 ## See Also
 
-- [[alfred]] — Voice-powered trading assistant
 - [[chatbot-architectures]] — Conversational AI systems
-- [[earnings-call-analysis]] — Applied audio/text analysis
 - [[nlp-overview]] — NLP pipeline hub
 - [[openai]] — Creator of Whisper
 - [[natural-language-processing]] — NLP fundamentals

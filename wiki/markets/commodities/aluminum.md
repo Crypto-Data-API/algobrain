@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [commodities, futures]
 aliases: ["Aluminum", "Aluminium", "Al"]
-related: ["[[copper]]", "[[nickel]]", "[[zinc]]", "[[london-metal-exchange]]", "[[commodities]]", "[[iron-ore]]", "[[electric-vehicles]]"]
+related: ["[[copper]]", "[[nickel]]", "[[zinc]]", "[[london-metal-exchange]]", "[[commodities]]", "[[iron-ore]]"]
 ---
 
 # Aluminum
@@ -77,7 +77,7 @@ Smelting requires approximately 13,000-15,000 kWh of electricity per tonne of al
 
 ## EV and Renewable Energy Tailwinds
 
-The transition to [[electric-vehicles|EVs]] and renewable energy infrastructure is structurally supportive of aluminum demand:
+The transition to EVs and renewable energy infrastructure is structurally supportive of aluminum demand:
 
 - **EV lightweighting**: EVs use more aluminum than ICE vehicles to offset battery weight (battery enclosures, structural components)
 - **Solar panel frames**: Aluminum frames are standard for solar panels

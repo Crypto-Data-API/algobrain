@@ -9,7 +9,7 @@ aliases: ["MPT", "Portfolio Theory", "Markowitz", "Mean-Variance Optimization"]
 domain: [portfolio-theory]
 prerequisites: ["[[diversification]]", "[[correlation]]", "[[volatility]]"]
 difficulty: intermediate
-related: ["[[risk-management]]", "[[diversification]]", "[[correlation]]", "[[sharpe-ratio]]", "[[capital-asset-pricing-model]]", "[[volatility]]", "[[long-short-equity]]"]
+related: ["[[risk-management]]", "[[diversification]]", "[[correlation]]", "[[sharpe-ratio]]", "[[capital-asset-pricing-model]]", "[[volatility]]"]
 ---
 
 Modern Portfolio Theory (MPT) is a mathematical framework, introduced by Harry Markowitz in 1952, for constructing portfolios that maximize expected return for a given level of risk (or minimize risk for a target return). Its central insight is that a portfolio's risk depends not only on the volatility of its individual holdings but on the [[correlation|correlations]] between them, so combining imperfectly correlated assets can lower total risk without sacrificing expected return.
@@ -60,7 +60,7 @@ MPT's assumptions are routinely violated in practice:
 
 ## Trading and Portfolio Relevance
 
-Even discretionary traders who never run an optimizer benefit from MPT's core discipline: the goal is return *per unit of risk*, not raw return, and uncorrelated bets beat correlated ones. Five long positions in highly correlated names are effectively one large bet. Practitioners extend the framework beyond long-only optimization: [[long-short-equity]] strips out market beta to isolate stock-selection alpha, while [[risk-parity]] allocates by risk contribution rather than capital. (Source: [[itpm-education-methodology-overview]])
+Even discretionary traders who never run an optimizer benefit from MPT's core discipline: the goal is return *per unit of risk*, not raw return, and uncorrelated bets beat correlated ones. Five long positions in highly correlated names are effectively one large bet. Practitioners extend the framework beyond long-only optimization: long-short-equity strips out market beta to isolate stock-selection alpha, while [[risk-parity]] allocates by risk contribution rather than capital. (Source: [[itpm-education-methodology-overview]])
 
 ## Sources
 
@@ -76,4 +76,3 @@ Even discretionary traders who never run an optimizer benefit from MPT's core di
 - [[sharpe-ratio]] -- the risk-adjusted return measure MPT maximizes
 - [[capital-asset-pricing-model]] -- the equilibrium model that extends MPT
 - [[risk-management]] -- MPT as the foundation of institutional risk frameworks
-- [[long-short-equity]] -- extension allowing short positions

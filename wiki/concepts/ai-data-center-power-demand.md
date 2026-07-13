@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [ai-trading, machine-learning, commodities, market-regime]
 aliases: ["AI Power Bottleneck", "Data Center Grid Stress", "123 GW Thesis"]
-related: ["[[skilled-trades-wage-boom]]", "[[ai-sector-rotation-energy-hedge]]", "[[constellation-energy]]", "[[vistra]]", "[[nextera-energy]]", "[[duke-energy]]", "[[exelon]]", "[[southern-company]]", "[[oklo]]", "[[bloom-energy]]", "[[ge-vernova]]", "[[quanta-services]]", "[[eaton]]", "[[emerson-electric]]", "[[caterpillar]]", "[[2024-nvidia-ai-boom]]", "[[capex-cycle]]"]
+related: ["[[skilled-trades-wage-boom]]", "[[capex-cycle]]"]
 domain: [market-microstructure]
 prerequisites: ["[[capex-cycle]]"]
 difficulty: intermediate
@@ -16,7 +16,7 @@ The **AI Data Center Power Demand** thesis frames electrical power — generatio
 
 ## Overview
 
-GPU clusters consume electricity at densities that conventional commercial real estate never had to plan for. A single hyperscale AI campus can demand hundreds of megawatts at a single interconnect — comparable to a small city. Aggregated across [[microsoft]], [[meta-platforms]], [[alphabet]], [[amazon]], [[nvidia]]-customer build plans, and a long tail of neocloud and sovereign-AI projects, the result is a multi-decade re-rating of US power demand growth from "flat" to "structurally accelerating."
+GPU clusters consume electricity at densities that conventional commercial real estate never had to plan for. A single hyperscale AI campus can demand hundreds of megawatts at a single interconnect — comparable to a small city. Aggregated across microsoft, meta-platforms, alphabet, amazon, [[nvidia]]-customer build plans, and a long tail of neocloud and sovereign-AI projects, the result is a multi-decade re-rating of US power demand growth from "flat" to "structurally accelerating."
 
 This re-rating reaches into nearly every part of the energy and industrial complex: nuclear utilities, natural gas, transmission and distribution (T&D) infrastructure, electrical equipment OEMs, fuel cells, and skilled-trades labor (see [[skilled-trades-wage-boom]]).
 
@@ -44,33 +44,22 @@ These are not 2035 problems; they are 2025–2026 operational constraints showin
 
 The most explicit beneficiary thesis. Nuclear offers the combination hyperscalers want: **firm, 24/7, carbon-free baseload**. Hyperscaler power-purchase agreements (PPAs) and nuclear restart announcements are now a recurring catalyst.
 
-- [[constellation-energy]] — largest US nuclear operator; co-located deals and restart projects
-- [[vistra]] — nuclear + gas mix in ERCOT and PJM data-center regions
-- [[exelon]] — utility holding with significant nuclear footprint
-- [[oklo]] — small modular reactor (SMR) developer, optionality on next-decade capacity
-- [[bloom-energy]] — solid-oxide fuel cells used as on-site interim power
 
 ### Natural gas
 
 Gas turbines remain the fastest dispatchable capacity addition. Expect tightness in pipeline access and turbine OEM order books.
 
-- [[ge-vernova]] — heavy-duty gas turbines, grid equipment
 - Natural gas E&Ps with proximity to data-center hubs (Appalachia → Northern Virginia, Permian → Texas)
 
 ### Regulated utilities and grid operators
 
 Utilities serving data-center load growth re-rate as their rate base expands. Watch for accelerated capex plans and constructive regulatory rulings in data-center-heavy service territories.
 
-- [[duke-energy]], [[southern-company]], [[nextera-energy]], [[exelon]]
 
 ### Transmission, distribution, and electrical equipment
 
 The "picks and shovels" of the buildout. Transformers, switchgear, and high-voltage equipment are reportedly on multi-year backorder.
 
-- [[eaton]], [[emerson-electric]] — electrical components and process automation
-- [[ge-vernova]] — grid equipment
-- [[quanta-services]] — T&D contractor; revenue scales with grid capex
-- [[caterpillar]] — backup gensets, heavy machinery for site work
 
 ## Skilled-trades feedback loop
 
@@ -80,7 +69,7 @@ The labor scarcity itself is part of the thesis: even if hyperscalers will spend
 
 ## Risks and counter-arguments
 
-- **AI capex moderation.** A meaningful slowdown in [[microsoft]], [[meta-platforms]], [[alphabet]], [[amazon]] capex guidance — for instance triggered by a [[2026-02-citrini-tech-selloff]]-style narrative shock — would deflate the demand curve.
+- **AI capex moderation.** A meaningful slowdown in microsoft, meta-platforms, alphabet, amazon capex guidance — for instance triggered by a 2026-02-citrini-tech-selloff-style narrative shock — would deflate the demand curve.
 - **Algorithmic efficiency surprise.** Step-change improvements in model efficiency (smaller models, better inference economics, see [[anthropic]] competitive dynamics) could reduce GW per unit of AI workload.
 - **Permitting and interconnect bottlenecks** could push demand into curtailment rather than into utility revenue.
 - **Tariff and supply-chain shocks** on transformers, turbines, and electrical equipment can delay projects without reducing the headline demand number — the 123 GW becomes a 2040 number rather than a 2035 number.
@@ -88,33 +77,14 @@ The labor scarcity itself is part of the thesis: even if hyperscalers will spend
 
 ## Why this matters for the AI-recession thesis
 
-Power demand is the **physically real** counter-narrative to the "AI is a software bubble" thesis. Even in a [[ai-layoff-trap]] scenario where cognitive-labor displacement causes a [[recession]], the data-center buildout has multi-year inertia (signed PPAs, equipment orders, permitted projects) that decouples it from short-cycle consumer demand. This is the structural reason energy can act as the [[ai-sector-rotation-energy-hedge]] — the capex commitment is durable even when discretionary demand cracks.
+Power demand is the **physically real** counter-narrative to the "AI is a software bubble" thesis. Even in a [[ai-layoff-trap]] scenario where cognitive-labor displacement causes a [[recession]], the data-center buildout has multi-year inertia (signed PPAs, equipment orders, permitted projects) that decouples it from short-cycle consumer demand. This is the structural reason energy can act as the ai-sector-rotation-energy-hedge — the capex commitment is durable even when discretionary demand cracks.
 
 ## Related
 
 - [[skilled-trades-wage-boom]]
-- [[ai-sector-rotation-energy-hedge]]
 - [[ai-layoff-trap]]
 - [[ai-driven-demand-destruction]]
-- [[constellation-energy]]
-- [[vistra]]
-- [[nextera-energy]]
-- [[duke-energy]]
-- [[exelon]]
-- [[southern-company]]
-- [[oklo]]
-- [[bloom-energy]]
-- [[ge-vernova]]
-- [[quanta-services]]
-- [[eaton]]
-- [[emerson-electric]]
-- [[caterpillar]]
-- [[microsoft]]
-- [[meta-platforms]]
-- [[alphabet]]
-- [[amazon]]
 - [[nvidia]]
-- [[2024-nvidia-ai-boom]]
 - [[capex-cycle]]
 - [[commodity-super-cycle]]
 

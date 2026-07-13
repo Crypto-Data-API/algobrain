@@ -239,7 +239,6 @@ Mechanical retirement triggers (see [[when-to-retire-a-strategy]]):
 ## Sources
 
 - [[book-option-volatility-and-pricing]] -- Natenberg on the iron fly's gamma profile and the relationship between body and wings.
-- [[tastytrade]] research archive -- 25%-of-max-profit and 21-DTE management studies on iron flies vs iron condors.
 - [[options-premium-selling]] -- the broader VRP context.
 - [[zero-dte-options]] -- the modern 0DTE iron fly variant and its regulatory context.
 - [[volmageddon]] -- the 2018 short-vol blowup and what it implies for iron-fly tail behaviour despite the wings.
@@ -258,7 +257,6 @@ Mechanical retirement triggers (see [[when-to-retire-a-strategy]]):
 - [[probability-of-touch]] -- why ATM body strikes touch so often.
 - [[short-put-spread]] -- the directional, lower-gamma defined-risk cousin.
 - [[calendar-spread]] -- a long-vega alternative for low-IV regimes (the opposite vega sign).
-- [[implied-earnings-move]] -- sets the expected-move band an earnings-cycle iron fly sells.
 - [[iv-crush]] -- the early-P&L driver, especially in event-timed flies.
 - [[theta]] / [[vega]] / [[gamma]] -- the Greeks whose extreme values define this structure.
 - [[market-regime]] -- regime conditioning for this gamma-heavy structure.

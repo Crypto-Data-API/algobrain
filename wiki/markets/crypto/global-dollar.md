@@ -84,7 +84,7 @@ Issuance adheres to strict standards: value stability, capital adequacy, par red
 | **Attestation** | Monthly independent reserve attestations + annual audits, per [[paxos|Paxos]] standards and GENIUS Act disclosure requirements |
 | **Peg mechanism** | Par mint/redeem with Paxos; arbitrage against 1:1 redemption keeps the peg, the same mechanism as [[usdc|USDC]]/USDT |
 | **Custody** | Reserves in bankruptcy-remote segregated trust accounts held *for USDG holders*, separated from Paxos operating funds |
-| **Yield routing** | Reserve [[yield]] (T-bill income) is **shared with GDN distribution partners** (exchanges, brokers, wallets), not the issuer's float income and — under the [[genius-act|GENIUS Act]] — **not** paid to end-holders. This distributor yield-share is the competitive wedge vs Tether/Circle, who keep the float income |
+| **Yield routing** | Reserve yield (T-bill income) is **shared with GDN distribution partners** (exchanges, brokers, wallets), not the issuer's float income and — under the [[genius-act|GENIUS Act]] — **not** paid to end-holders. This distributor yield-share is the competitive wedge vs Tether/Circle, who keep the float income |
 | **Regulatory wrapper** | Dual-issued: Paxos Digital Singapore (MAS Major Payments Institution) and Paxos Issuance Europe Oy (FIN-FSA EMI, [[mica|MiCA]]-compliant); GENIUS Act-aligned in the US |
 
 > **De-peg risk profile:** USDG is a regulated, fully-reserved, attested fiat stablecoin — its de-peg risk is *low* and reserve-asset-driven (e.g. a T-bill custodian or banking failure) rather than the credibility-shock pattern that hit [[first-digital-usd|FDUSD]] in April 2025. The historical $1.65/$0.91 wicks are launch-illiquidity artifacts, not redemption-cleared depegs.
@@ -106,7 +106,7 @@ Issuance adheres to strict standards: value stability, capital adequacy, par red
 See the **Market Data** block above for the authoritative supply/price/market-cap snapshot (2026-06-20: 2.81B USDG, $0.9998, $2.81B mcap, rank #33, MC/FDV = 1.00). Structural notes:
 
 - **No max supply**: USDG is minted 1:1 against incoming reserves and burned on redemption, so float is a direct read on GDN distribution growth.
-- **Growth trajectory**: ~2.03B (April 2026) → ~2.75B (May 2026) → ~2.81B (2026-06-20) — driven by new GDN partners adding captive float, each routed reserve [[yield]].
+- **Growth trajectory**: ~2.03B (April 2026) → ~2.75B (May 2026) → ~2.81B (2026-06-20) — driven by new GDN partners adding captive float, each routed reserve yield.
 
 ### Peer comparison — fiat-backed USD stablecoins
 

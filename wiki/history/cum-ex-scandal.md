@@ -11,7 +11,7 @@ markets_affected: [stocks]
 impact: high
 verified: true
 sources_count: 6
-related: ["[[cum-ex-dividend-stripping]]", "[[dividend-arbitrage]]", "[[regulatory-arbitrage]]", "[[tax-arbitrage]]", "[[hanno-berger]]", "[[sanjay-shah]]", "[[warburg-bank]]"]
+related: ["[[regulatory-arbitrage]]", "[[tax-arbitrage]]", "[[hanno-berger]]", "[[sanjay-shah]]", "[[warburg-bank]]"]
 ---
 
 > **This is a criminal tax fraud, not a strategy.** The cum-ex variant has been ruled **criminal tax evasion** by Germany's highest criminal court (BGH, July 2021); architects and operators have received multi-year prison sentences. This page documents the scandal for historical and risk-management context **only**. The mechanics described here are illegal and are presented to explain how the fraud worked and was prosecuted — not as anything to replicate. See [[regulatory-arbitrage]] and [[tax-arbitrage]] for the legitimate (and the illegitimate) boundaries.
@@ -95,11 +95,11 @@ Investigations and lawsuits have implicated multiple tier-one banks as counterpa
 |-------------|------|----------|
 | [[deutsche-bank]] | Custodian, prime broker, lending | Paid EUR 3.9M settlement 2019; disclosed ongoing reviews |
 | [[barclays]] | Prime brokerage in London | Paid ~GBP 0.5B to tax authorities (reported) |
-| [[bank-of-america]] / Merrill Lynch | Prime brokerage, securities lending | Civil claims pending |
-| [[morgan-stanley]] | Custody / lending | Civil claims pending |
+| bank-of-america / Merrill Lynch | Prime brokerage, securities lending | Civil claims pending |
+| morgan-stanley | Custody / lending | Civil claims pending |
 | [[bnp-paribas]] | French angle (French dividend-stripping variants) | Paris investigation |
 | [[maple-bank]] | German mid-tier | Failed 2016 from EUR 450M cum-ex tax claim |
-| [[commerzbank]] | Counterparty | Provision taken 2017-2019 |
+| commerzbank | Counterparty | Provision taken 2017-2019 |
 | [[hypovereinsbank]] (UniCredit DE) | Counterparty | Settled EUR 9.8M with German courts |
 
 ## Investigations and Trials
@@ -129,9 +129,9 @@ On 18 October 2018, [[correctiv]] and 19 partner outlets published the "CumEx-Fi
 
 ## Connection to Broader Regulatory-Arbitrage Theme
 
-Cum-ex is the archetypal [[regulatory-arbitrage]] case study: exploiting the seams between two regulatory systems (securities settlement on one hand, tax refund processing on the other) where neither system fully validated the other's output. It also sits at the intersection of [[tax-arbitrage]] and [[dividend-arbitrage]] -- mechanically identical to many legitimate dividend-capture strategies, with the single distinguishing feature that no net tax was actually paid.
+Cum-ex is the archetypal [[regulatory-arbitrage]] case study: exploiting the seams between two regulatory systems (securities settlement on one hand, tax refund processing on the other) where neither system fully validated the other's output. It also sits at the intersection of [[tax-arbitrage]] and dividend-arbitrage -- mechanically identical to many legitimate dividend-capture strategies, with the single distinguishing feature that no net tax was actually paid.
 
-| Feature | Legitimate [[dividend-capture]] / [[dividend-arbitrage]] | Cum-ex (illegal) | Cum-cum (contested) |
+| Feature | Legitimate dividend-capture / dividend-arbitrage | Cum-ex (illegal) | Cum-cum (contested) |
 |---------|----------------------------------------------------------|------------------|---------------------|
 | Tax actually paid | Yes, once; refund only if entitled | Once (or zero) | Once |
 | Tax refunded | Once, to entitled party | **Two or three times** | Once, to a **non-entitled** party |
@@ -162,7 +162,7 @@ The scandal catalyzed:
 2. **Regulatory arbitrage has a half-life**: the gap was obvious to practitioners by 2005 and closed by 2012, but civil and criminal exposure now extends decades past the original trades.
 3. **Cross-border coordination is improving**: ESMA, DG TAXUD, and OECD have each set up information-sharing mechanisms specifically modelled on the cum-ex failure.
 4. **Prime-broker counterparty screening**: banks that merely facilitated (custody, securities lending) are being held jointly liable in civil recovery suits.
-5. **Dividend-capture strategies require enhanced diligence**: legitimate [[dividend-capture]] and [[dividend-arbitrage]] strategies now face heightened scrutiny across Europe.
+5. **Dividend-capture strategies require enhanced diligence**: legitimate dividend-capture and dividend-arbitrage strategies now face heightened scrutiny across Europe.
 
 ## Glossary
 
@@ -180,9 +180,6 @@ The scandal catalyzed:
 
 ## Related
 
-- [[cum-ex-dividend-stripping]] -- the strategy mechanics page
-- [[dividend-arbitrage]] -- legitimate sibling strategy
-- [[dividend-capture]] -- adjacent retail strategy
 - [[regulatory-arbitrage]] -- the general category
 - [[tax-arbitrage]] -- parent concept
 - [[hanno-berger]] -- architect
@@ -191,7 +188,6 @@ The scandal catalyzed:
 - [[correctiv]] -- investigative publisher
 - [[olaf-scholz]] -- politically connected figure
 - [[ltcm-collapse-1998]] / [[archegos-blowup-2021]] -- companion "lessons in leverage / structure" case studies
-- [[risk-arbitrage]] -- adjacent event-driven discipline
 
 ## Sources
 

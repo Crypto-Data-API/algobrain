@@ -18,7 +18,7 @@ Margin debt is the aggregate amount of money that investors have borrowed from b
 
 - **Debit balances** — total customer borrowing in margin accounts (the headline "margin debt" figure).
 - **Credit balances** — cash held in those accounts (free credit + cash in margin accounts). Net of debit balances, this is sometimes called "net investor credit"; deeply negative net credit signals heavy leverage.
-- Margin debt is typically viewed relative to GDP or to the [[sp500|S&P 500]] level, and especially as a **rate of change** (year-over-year growth), which is more informative than the absolute level.
+- Margin debt is typically viewed relative to GDP or to the S&P 500 level, and especially as a **rate of change** (year-over-year growth), which is more informative than the absolute level.
 
 > **Data note.** Absolute dollar levels of aggregate margin debt rise over time with the size of the market and inflation; this page deliberately frames the metric qualitatively and as a ratio/rate-of-change rather than quoting a specific current figure. For the live number, consult the FINRA "Margin Statistics" release directly.
 
@@ -62,7 +62,7 @@ The maintenance threshold is breached at roughly a −29% move. The trader must 
 
 Margin debt is used as a regime and risk-appetite gauge rather than a direct, mechanical trading signal. Practical applications:
 
-- **Late-cycle dashboard input.** Watch the YoY growth rate and its rollover as one flag among several to tighten risk, reduce [[leverage]], raise cash, and prepare for elevated forced-selling [[volatility]]. It pairs naturally with other froth indicators — [[market-bubbles|bubble]] signposts, IPO/SPAC issuance, call-option [[volume]], and rich [[valuation]] multiples.
+- **Late-cycle dashboard input.** Watch the YoY growth rate and its rollover as one flag among several to tighten risk, reduce [[leverage]], raise cash, and prepare for elevated forced-selling [[volatility]]. It pairs naturally with other froth indicators — [[market-bubbles|bubble]] signposts, IPO/SPAC issuance, call-option [[volume]], and rich valuation multiples.
 - **Drawdown sizing.** In a high-margin-debt environment, expect down moves to be faster and more cascade-prone because a thicker layer of leveraged holders sits above maintenance thresholds. This widens the expected left tail and raises the value of [[hedging|tail hedges]] (e.g. long [[put-options|puts]] or [[vix|VIX]]-linked protection).
 - **Sentiment confirmation, not entry.** Because it is coincident-to-lagging, margin debt confirms an existing regime far better than it calls a turn. Use it to *frame* risk appetite, then let price/structure provide entries and exits.
 - **Cross-check against other leverage.** Read it alongside Fed flow-of-funds leverage data, options/[[gamma]] positioning, and futures open interest, since the FINRA series misses large pockets of systemic leverage (see Limitations).

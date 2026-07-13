@@ -7,7 +7,7 @@ status: excellent
 tags: [person, history, momentum, breakout, swing-trading, stocks]
 entity_type: person
 aliases: ["Nicolas Darvas", "Darvas"]
-related: ["[[darvas-box]]", "[[breakout-trading]]", "[[breakout]]", "[[momentum]]", "[[william-oneil]]", "[[canslim]]", "[[trend-following]]", "[[jesse-livermore]]", "[[position-sizing]]", "[[stop-loss]]", "[[market-regime]]"]
+related: ["[[darvas-box]]", "[[breakout-trading]]", "[[breakout]]", "[[momentum]]", "[[trend-following]]", "[[jesse-livermore]]", "[[position-sizing]]", "[[stop-loss]]", "[[market-regime]]"]
 ---
 
 Nicolas Darvas (1920–1977) was a Hungarian-born professional ballroom dancer and self-taught stock speculator who reportedly turned roughly $36,000 into over $2 million in about 18 months during 1957–1959 while touring the world dancing. His book *How I Made $2,000,000 in the Stock Market* (1960) introduced the **[[darvas-box|Darvas Box]]** method — a volume-confirmed breakout system that remains a foundational template for [[momentum]] and [[breakout-trading|breakout]] traders.
@@ -64,7 +64,7 @@ Darvas wrote several follow-ups (*Wall Street: The Other Las Vegas*, 1964; *The 
 
 ## Trading Relevance
 
-- The [[darvas-box|Darvas Box]] is a direct ancestor of [[william-oneil|William O'Neil]]'s [[canslim|CAN SLIM]] (O'Neil cited Darvas) and of modern momentum/breakout systems; "boxes" are functionally consolidation ranges with volume-confirmed breakouts.
+- The [[darvas-box|Darvas Box]] is a direct ancestor of William O'Neil's CAN SLIM (O'Neil cited Darvas) and of modern momentum/breakout systems; "boxes" are functionally consolidation ranges with volume-confirmed breakouts.
 - His regime of **mechanical stops, position concentration in leaders, and indifference to news** anticipates systematic [[trend-following]] practice and parallels the price-action discipline of [[jesse-livermore]] a generation earlier.
 - The strategy is long-bull-market dependent: Darvas's run coincided with the strong 1957–1959 tape, and he openly admitted earlier discretionary years were net losers — a clean illustration of distinguishing edge from [[market-regime|regime]] tailwind. A breakout system bleeds on whipsaws in a choppy or range-bound market.
 - Darvas Box indicators ship in most modern platforms (TradingView, MetaStock, Amibroker), keeping the method in active retail use.
@@ -82,8 +82,6 @@ Darvas wrote several follow-ups (*Wall Street: The Other Las Vegas*, 1964; *The 
 - [[momentum]]
 - [[trend-following]]
 - [[stop-loss]] · [[position-sizing]]
-- [[william-oneil]]
-- [[canslim]]
 - [[jesse-livermore]]
 - [[market-regime]]
 

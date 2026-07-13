@@ -9,7 +9,7 @@ aliases: ["RED", "RedStone Oracles"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.redstone.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-manipulation]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-manipulation]]"]
 ---
 
 # RedStone
@@ -126,7 +126,6 @@ RED trades at ~$47M cap but a ~$112M FDV (MC/FDV ~0.42): only ~42% of the 1B cap
 - [[crypto-markets]]
 - [[ethereum]]
 - [[base]]
-- [[oracle]]
 - [[chainlink]]
 - [[pyth-network]]
 - [[api3]]

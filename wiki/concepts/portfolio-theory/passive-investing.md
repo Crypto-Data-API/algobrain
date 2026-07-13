@@ -6,12 +6,12 @@ updated: 2026-04-07
 status: good
 tags: [portfolio-theory, education, index-funds]
 aliases: ["Index Investing", "Passive Management"]
-related: ["[[market-efficiency]]", "[[compounding]]", "[[modern-portfolio-theory]]", "[[diversification]]", "[[warren-buffett]]", "[[sp500]]"]
+related: ["[[market-efficiency]]", "[[compounding]]", "[[modern-portfolio-theory]]", "[[diversification]]"]
 domain: [portfolio-theory]
 difficulty: beginner
 ---
 
-**Passive investing** is the strategy of buying and holding broad market [[index-funds|index funds]] that replicate a benchmark (such as the [[sp500|S&P 500]]) rather than attempting to select individual stocks or time the market. Pioneered by John Bogle, who founded Vanguard and launched the first retail index fund in 1976, passive investing is built on the evidence that most active managers fail to outperform their benchmarks after fees over meaningful time periods.
+**Passive investing** is the strategy of buying and holding broad market [[index-funds|index funds]] that replicate a benchmark (such as the S&P 500) rather than attempting to select individual stocks or time the market. Pioneered by John Bogle, who founded Vanguard and launched the first retail index fund in 1976, passive investing is built on the evidence that most active managers fail to outperform their benchmarks after fees over meaningful time periods.
 
 ## Overview
 
@@ -68,7 +68,6 @@ Passive investing has grown from a fringe idea mocked as "Bogle's Folly" to the 
 - [[compounding]] -- the mechanism by which low fees compound into massive savings
 - [[modern-portfolio-theory]] -- the academic framework behind portfolio construction
 - [[diversification]] -- a key benefit of broad index funds
-- [[warren-buffett]] -- famously recommends passive investing for most people, despite being an active investor himself
 - [[index-funds]] -- the primary vehicle for passive investing
 
 ## Sources

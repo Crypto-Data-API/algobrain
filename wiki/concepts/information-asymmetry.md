@@ -45,7 +45,7 @@ Information asymmetries between participants who can see order flow (brokers, ex
 Trading on material non-public information obtained through a breach of duty is [[insider-trading]] and illegal. The line between legitimate informational edge and illegal insider trading is:
 
 - **Legal**: analyzing public data faster or more creatively (satellite imagery, credit-card aggregates, [[social-arbitrage]])
-- **Legal**: proprietary research derived from public observation ([[philip-fisher]] scuttlebutt)
+- **Legal**: proprietary research derived from public observation (philip-fisher scuttlebutt)
 - **Legal gray area**: expert networks, channel checks that approach corporate confidentiality
 - **Illegal**: trading on material non-public information obtained in breach of a duty (corporate insiders, tippees)
 

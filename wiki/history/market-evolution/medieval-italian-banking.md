@@ -105,4 +105,4 @@ Practices invented to exploit slow communication and fragmented currency markets
 
 ## Related
 
-[[champagne-fairs]] · [[medieval-bill-of-exchange-arbitrage]] · [[lyon-fairs]] · [[gold-standard-mechanics]] · [[rothschild-family]] · [[baring-brothers]] · [[bill-broking-arbitrage]]
+[[champagne-fairs]] · [[medieval-bill-of-exchange-arbitrage]] · [[lyon-fairs]] · [[gold-standard-mechanics]] · rothschild-family · baring-brothers · [[bill-broking-arbitrage]]

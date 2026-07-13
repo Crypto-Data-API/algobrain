@@ -10,7 +10,7 @@ entity_type: person
 founded: 1974
 headquarters: "Dallas, Texas, USA"
 website: "https://dumbmoney.tv/"
-related: ["[[social-arbitrage]]", "[[tickertags]]", "[[unknown-market-wizards]]", "[[jack-schwager]]", "[[laughing-at-wall-street]]", "[[sentiment-trading]]", "[[alternative-data-alpha]]", "[[informational-edge]]", "[[behavioral-finance]]", "[[dumb-money-podcast]]"]
+related: ["[[social-arbitrage]]", "[[unknown-market-wizards]]", "[[jack-schwager]]", "[[laughing-at-wall-street]]", "[[sentiment-trading]]", "[[alternative-data-alpha]]", "[[informational-edge]]", "[[behavioral-finance]]", "[[dumb-money-podcast]]"]
 ---
 
 # Chris Camillo
@@ -35,7 +35,7 @@ Camillo began trading at age 14 but took it seriously only after 2006. The key m
 - **Post-2021**: self-reported account size of approximately $60-70 million+ as of 2025 (per Lewis Howes Ep. 1789 and Jack Schwager's public statements). These post-audit figures are **unaudited and self-reported** and should be treated as such.
 - **AUM**: zero -- he trades his own capital only and has publicly stated he will not accept outside money.
 
-Academic work on his returns (cited in Sahm Capital) notes that his portfolio volatility has run approximately 5× the [[sp500|S&P 500]], implying heavy use of options leverage -- a critical caveat when comparing his CAGR to conventional benchmarks.
+Academic work on his returns (cited in Sahm Capital) notes that his portfolio volatility has run approximately 5× the S&P 500, implying heavy use of options leverage -- a critical caveat when comparing his CAGR to conventional benchmarks.
 
 ## Social Arbitrage Methodology
 
@@ -60,7 +60,7 @@ These trades are sourced directly from [[laughing-at-wall-street]] (2011), Schwa
 - **Crocs + True Religion + Uggs** -- roughly $1,000 each initial positions in the mid-to-late 2000s combined to ~$750,000 in realized gains (from [[laughing-at-wall-street]]).
 - **Chuggington** (children's TV merchandise, ~+50%) -- tip sourced from Facebook, documented in his book.
 - **Snapple short** (~3× in 7 days) -- triggered by a teenager's observation at a 7-Eleven, documented in his book.
-- **Brexit referendum forecast** (June 2016) -- his firm [[tickertags]] correctly forecast the Leave result using social mention data; widely cited.
+- **Brexit referendum forecast** (June 2016) -- his firm tickertags correctly forecast the Leave result using social mention data; widely cited.
 - **Dorel Industries** ($DII.B, April 2020 entry ~$1.56 → November 2020 exit ~$11.38, approximately +629%) -- pandemic bike-shortage thesis. Referenced in his Schwager chapter and post-book interviews.
 - **Playa Hotels & Resorts** ($PLYA) and **Crocs** ($CROX) -- disclosed as current long positions in the Business Insider profile of August 18, 2021 (Source: [[business-insider-camillo-2021]]).
 - **Restaurant Brands International** ($QSR, 2019, -$750,000 loss) -- a long Burger King thesis that underweighted Tim Hortons' performance. Camillo has cited this as his most expensive single trade and as a lesson about the edges of his circle of competence.
@@ -73,7 +73,7 @@ These trades are sourced directly from [[laughing-at-wall-street]] (2011), Schwa
 These trades are frequently attributed to Camillo in blog posts, podcast summaries, and content aggregators but I could not locate primary-source confirmation (his book, the Schwager chapter, or his own tweets or Dumb Money episodes) during ingestion. Listed here for completeness; treat as `[LOW]` confidence.
 
 - Lululemon, Hain Celestial, Monster Beverage, Chipotle, Spirit Halloween, Wendy's pretzel bun, E.L.F. Beauty, Under Armour (unclear year and outcome)
-- Netflix (often cited as a [[tickertags]] forecast win around 2016 but specifics are sparse)
+- Netflix (often cited as a tickertags forecast win around 2016 but specifics are sparse)
 - Nintendo / Pokémon Go (2016, stock reportedly doubled on his social-buzz read) -- plausible, widely cited, but exact entry/exit not primary-sourced
 - Mattel ($MAT) Barbie options (2023, "six-figure" returns per aitradingkit blog)
 - Celsius Holdings ($CELH, ~$50 entry late 2021 → ~$94+ exit, +88%) -- Perplexity could not locate a primary source for these specific numbers
@@ -82,7 +82,7 @@ These trades are frequently attributed to Camillo in blog posts, podcast summari
 
 ## TickerTags
 
-In 2015 Camillo co-founded [[tickertags]], a social-listening alt-data platform that mapped roughly 350,000 tags (product names, brands, competitors) to approximately 8,000 tickers. Its best-known public output was a correct forecast of the 2016 Brexit referendum Leave outcome. TickerTags was acquired by **M Science** (the alt-data subsidiary of [[jefferies-financial-group|Jefferies]]) around June 2018. The standalone consumer product was wound down around 2020; the underlying technology lives on inside M Science's institutional research.
+In 2015 Camillo co-founded tickertags, a social-listening alt-data platform that mapped roughly 350,000 tags (product names, brands, competitors) to approximately 8,000 tickers. Its best-known public output was a correct forecast of the 2016 Brexit referendum Leave outcome. TickerTags was acquired by **M Science** (the alt-data subsidiary of [[jefferies-financial-group|Jefferies]]) around June 2018. The standalone consumer product was wound down around 2020; the underlying technology lives on inside M Science's institutional research.
 
 ## Dumb Money (YouTube and Podcast)
 
@@ -104,7 +104,7 @@ Site: **dumbmoney.tv**. Content is a mix of live trade discussions, trend-resear
 
 > "A losing trade is not necessarily a bad trade, if you followed your process."
 
-Schwager, on Camillo: "Chris had the most original trading methodology I ever encountered" -- and described him as the closest thing among the Market Wizards to a modern [[peter-lynch]].
+Schwager, on Camillo: "Chris had the most original trading methodology I ever encountered" -- and described him as the closest thing among the Market Wizards to a modern peter-lynch.
 
 ## Criticisms and Caveats
 
@@ -115,7 +115,7 @@ The track record is extraordinary but deserves careful framing:
 3. **No stop losses.** Willingness to add to losers on a maintained thesis is a powerful tool for a trader with genuine edge and disastrous for a trader who only believes they have edge.
 4. **Non-replicable skill.** The methodology rewards obsessive daily observation ("four hours a day" per his interviews) and consumer-trend intuition. It is hard to systematize and harder to teach.
 5. **Post-audit figures are self-reported.** The $60-70M+ figures cited in 2025 interviews have not been independently audited; only the $84K → $42M figure through May 2021 has been.
-6. **Strategy decay.** The 2018 acquisition of [[tickertags]] by M Science commoditized a component of his edge for institutions. Twitter/X API pricing changes in 2023 and the decline of open Reddit data have raised the cost of the retail version of his approach.
+6. **Strategy decay.** The 2018 acquisition of tickertags by M Science commoditized a component of his edge for institutions. Twitter/X API pricing changes in 2023 and the decline of open Reddit data have raised the cost of the retail version of his approach.
 
 ## Sources
 
@@ -133,8 +133,6 @@ The track record is extraordinary but deserves careful framing:
 ## Related
 
 - [[social-arbitrage]] -- his signature methodology
-- [[tickertags]] -- his alt-data company
 - [[sentiment-trading]], [[alternative-data-alpha]], [[news-trading]] -- adjacent strategies
 - [[informational-edge]], [[information-asymmetry]], [[behavioral-finance]] -- underlying concepts
-- [[peter-lynch]] -- the closest stylistic comparison from prior generations
 - [[jack-schwager]], [[unknown-market-wizards]] -- primary chronicler

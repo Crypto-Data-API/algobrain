@@ -44,7 +44,7 @@ This is the core hedging technique used by options market makers. The cost of de
 
 - **[[pairs-trading]]**: Going long one stock and short a correlated stock, hedging sector or market risk while expressing a view on the relative performance of the two names.
 - **Beta hedging**: Shorting an index or ETF in proportion to a portfolio's beta to isolate stock-specific (alpha) returns from market returns.
-- **[[long-short-equity]]**: Running a portfolio with both long and short positions, adjusting the ratio to control net market exposure. Hedge funds use this approach to extract alpha regardless of market direction.
+- **long-short-equity**: Running a portfolio with both long and short positions, adjusting the ratio to control net market exposure. Hedge funds use this approach to extract alpha regardless of market direction.
 
 ### Futures Hedging
 
@@ -88,7 +88,6 @@ Hedging is not only a preventative tool — it is also one of the five pillars o
 - [[collar]]
 - [[trade-repair-and-rolling]] — hedging as part of the professional recovery playbook
 - [[pairs-trading]]
-- [[long-short-equity]]
 - [[risk-management]]
 - [[options]]
 - [[black-swan]]

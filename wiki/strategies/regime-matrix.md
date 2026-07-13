@@ -104,8 +104,8 @@ Reading the matrix through this lens: the cleanest portfolio diversification com
 | [[channel-breakout]] | ✅ | ➕ | ❌ | ➕ | ⬜ | ⬜ |
 | [[volatility-breakout]] | ✅ | ✅ | ❌ | ✅ | ❌ | ➕ |
 | [[momentum-rotation]] | ✅ | ➖ | ➖ | ⬜ | ➕ | ➖ |
-| [[earnings-momentum]] | ✅ | ⬜ | ⬜ | ⬜ | ➕ | ➖ |
-| [[sector-momentum-screen]] | ✅ | ➖ | ➖ | ⬜ | ✅ | ❌ |
+| earnings-momentum | ✅ | ⬜ | ⬜ | ⬜ | ➕ | ➖ |
+| sector-momentum-screen | ✅ | ➖ | ➖ | ⬜ | ✅ | ❌ |
 
 **Pattern:** breakouts need direction *and* sufficient vol to push through resistance. Cross-sectional momentum (momentum rotation) is asymmetric — it works in up markets but fails in down markets because the "best" stocks become correlated with the broad decline.
 
@@ -117,7 +117,7 @@ Reading the matrix through this lens: the cleanest portfolio diversification com
 | [[funding-rate-arbitrage]] | ✅ | ➕ | ✅ | ❌ | ✅ | ➖ |
 | [[basis-trading]] | ✅ | ⬜ | ✅ | ❌ | ✅ | ➖ |
 | [[stock-perp-oracle-basis]] | ⬜ | ⬜ | ✅ | ➖ | ✅ | ➖ |
-| [[dividend-capture]] | ➕ | ⬜ | ✅ | ➖ | ✅ | ⬜ |
+| dividend-capture | ➕ | ⬜ | ✅ | ➖ | ✅ | ⬜ |
 | [[covered-call]] | ➕ | ❌ | ✅ | ❌ | ✅ | ➖ |
 | [[cash-secured-put]] | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ |
 | [[wheel-strategy]] | ➕ | ➖ | ✅ | ❌ | ✅ | ❌ |
@@ -128,10 +128,10 @@ Reading the matrix through this lens: the cleanest portfolio diversification com
 
 | Strategy | Up | Down | Chop | High Vol | Low Vol | Risk-Off |
 |---|---|---|---|---|---|---|
-| [[index-arbitrage]] | ⬜ | ⬜ | ⬜ | ✅ | ➕ | ⬜ |
+| index-arbitrage | ⬜ | ⬜ | ⬜ | ✅ | ➕ | ⬜ |
 | [[etf-arbitrage]] | ⬜ | ⬜ | ⬜ | ✅ | ⬜ | ⬜ |
-| [[merger-arbitrage]] | ✅ | ➖ | ✅ | ❌ | ✅ | ❌ |
-| [[convertible-arbitrage]] | ✅ | ➖ | ✅ | ➖ | ✅ | ❌ |
+| merger-arbitrage | ✅ | ➖ | ✅ | ❌ | ✅ | ❌ |
+| convertible-arbitrage | ✅ | ➖ | ✅ | ➖ | ✅ | ❌ |
 | [[triangular-arbitrage]] | ⬜ | ⬜ | ⬜ | ✅ | ➖ | ⬜ |
 | [[cross-exchange-arbitrage]] | ⬜ | ⬜ | ⬜ | ✅ | ➖ | ⬜ |
 | [[latency-arbitrage]] | ⬜ | ⬜ | ⬜ | ✅ | ➖ | ➕ |
@@ -162,12 +162,12 @@ Reading the matrix through this lens: the cleanest portfolio diversification com
 
 | Strategy | Up | Down | Chop | High Vol | Low Vol | Risk-Off |
 |---|---|---|---|---|---|---|
-| [[value-investing-strategy]] | ✅ | ➕ | ✅ | ➕ | ✅ | ➕ |
-| [[growth-investing-strategy]] | ✅ | ❌ | ⬜ | ➖ | ✅ | ❌ |
-| [[long-short-equity]] | ⬜ | ⬜ | ✅ | ⬜ | ✅ | ⬜ |
+| value-investing-strategy | ✅ | ➕ | ✅ | ➕ | ✅ | ➕ |
+| growth-investing-strategy | ✅ | ❌ | ⬜ | ➖ | ✅ | ❌ |
+| long-short-equity | ⬜ | ⬜ | ✅ | ⬜ | ✅ | ⬜ |
 | [[event-driven-trading]] | ➕ | ➕ | ✅ | ⬜ | ⬜ | ➖ |
 | [[news-trading]] | ⬜ | ⬜ | ⬜ | ✅ | ➖ | ➕ |
-| [[earnings-momentum]] | ✅ | ⬜ | ⬜ | ⬜ | ➕ | ➖ |
+| earnings-momentum | ✅ | ⬜ | ⬜ | ⬜ | ➕ | ➖ |
 | [[sector-rotation]] | ✅ | ➖ | ➕ | ⬜ | ✅ | ➖ |
 | [[fundamental-technical-fusion]] | ✅ | ⬜ | ➕ | ⬜ | ✅ | ⬜ |
 

@@ -33,7 +33,7 @@ This design closely mirrors the workflow described in Michael Halls-Moore's even
 
 **Indicators**: a comprehensive built-in technical-indicator library (SMA, EMA, RSI, MACD, Bollinger Bands, ATR, Stochastics, ROC, and many others). Indicators are computed incrementally as bars arrive, fitting the event-driven model cleanly.
 
-**Paper trading and live trading**: integrated paper-trading is one of PyAlgoTrade's distinguishing features versus simpler scripted backtesters — the same strategy code can be pointed at a simulated broker, a paper-trading broker, or (for the supported venues) live execution. Live broker support is narrower than [[backtrader-framework|Backtrader]]'s; historically it has covered Bitstamp and a handful of others rather than [[interactive-brokers]] in depth.
+**Paper trading and live trading**: integrated paper-trading is one of PyAlgoTrade's distinguishing features versus simpler scripted backtesters — the same strategy code can be pointed at a simulated broker, a paper-trading broker, or (for the supported venues) live execution. Live broker support is narrower than [[backtrader-framework|Backtrader]]'s; historically it has covered Bitstamp and a handful of others rather than interactive-brokers in depth.
 
 **TA-Lib integration**: PyAlgoTrade can wrap TA-Lib for higher-performance indicator calculation when the dependency is available.
 

@@ -9,7 +9,7 @@ event_date: 2007-08-06
 markets_affected: [stocks]
 impact: high
 aliases: ["August 2007 Quant Quake", "Quant Crisis", "Quant Meltdown"]
-related: ["[[2008-global-financial-crisis]]", "[[ltcm]]", "[[statistical-arbitrage]]", "[[long-short-equity]]", "[[deleveraging]]", "[[book-the-quants]]"]
+related: ["[[2008-global-financial-crisis]]", "[[ltcm]]", "[[statistical-arbitrage]]", "[[deleveraging]]", "[[book-the-quants]]"]
 ---
 
 # August 2007 Quant Meltdown

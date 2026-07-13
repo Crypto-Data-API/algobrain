@@ -13,10 +13,10 @@ source_file: "r2://trader-wiki/transcripts/2019-01-01-professional-traders-givin
 confidence: medium
 claims_count: 18
 aliases: ["Professional Traders Amazing Advice"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[chris-cathey]]", "[[ben-berggreen]]", "[[trading-psychology]]", "[[goldman-sachs]]", "[[risk-management-overview]]"]
+related: ["[[anton-kreil]]", "[[chris-cathey]]", "[[ben-berggreen]]", "[[trading-psychology]]", "[[risk-management-overview]]"]
 ---
 
-Documentary-style [[itpm|ITPM]] (Institute of Trading and Portfolio Management) marketing video following [[anton-kreil]] across conferences in Poland and London, featuring interviews with ITPM mentors [[chris-cathey]] (ex-[[goldman-sachs]]) and [[ben-berggreen|Ben Berggreen]]. It centers on the role of mentorship, emotional detachment in trading, and the shifting information advantage from institutional to retail traders. As promotional content for a paid trading-education business, its claims are largely first-person opinion and experiential anecdote — useful as a record of the ITPM teaching philosophy rather than as independently verifiable fact. Confidence is therefore MEDIUM overall, with individual claims marked below.
+Documentary-style ITPM (Institute of Trading and Portfolio Management) marketing video following [[anton-kreil]] across conferences in Poland and London, featuring interviews with ITPM mentors [[chris-cathey]] (ex-goldman-sachs) and [[ben-berggreen|Ben Berggreen]]. It centers on the role of mentorship, emotional detachment in trading, and the shifting information advantage from institutional to retail traders. As promotional content for a paid trading-education business, its claims are largely first-person opinion and experiential anecdote — useful as a record of the ITPM teaching philosophy rather than as independently verifiable fact. Confidence is therefore MEDIUM overall, with individual claims marked below.
 
 > **Note on confidence:** This is marketing material for a paid course. Claims reflect the presenters' stated views and recollections, not audited or third-party-verified data. Treat trading-philosophy claims as [MEDIUM] opinion and biographical claims as [MEDIUM] single-source.
 
@@ -59,8 +59,6 @@ Documentary-style [[itpm|ITPM]] (Institute of Trading and Portfolio Management) 
 
 - [[anton-kreil]] — Managing Partner, ITPM
 - [[chris-cathey]] — Senior Trading Mentor, ex-Goldman Sachs; Kreil's mentor at GS from 2000
-- [[goldman-sachs]] — where Kreil and Cathey worked together
-- [[itpm]] — Institute of Trading and Portfolio Management
 - [[jim-rogers|Jim Rogers]] — mentioned as conference speaker (4,000%+ return in the 1970s with [[george-soros]])
 - [[mark-faber]] — "Dr. Doom," mentioned as conference speaker
 
@@ -68,7 +66,6 @@ Documentary-style [[itpm|ITPM]] (Institute of Trading and Portfolio Management) 
 
 - [[trading-psychology]] — emotional detachment as the core skill
 - [[risk-management-overview|Risk Management]] — 50% of trading success
-- [[fundamental-analysis]] — drives positioning, not price action
 - [[mentor]] — critical for career development in any industry
 
 ## Sources

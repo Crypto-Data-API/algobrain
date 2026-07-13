@@ -11,7 +11,7 @@ related: ["[[gold]]", "[[silver]]", "[[palladium]]", "[[commodities]]", "[[londo
 
 # Platinum
 
-Platinum (Pt) is a precious metal with significant industrial applications, distinguishing it from [[gold]] and [[silver]] which are more heavily weighted toward investment and jewelry demand. Approximately 40% of platinum demand comes from automotive catalytic converters, specifically for [[diesel-vehicles|diesel engines]], where platinum is used to reduce harmful emissions.
+Platinum (Pt) is a precious metal with significant industrial applications, distinguishing it from [[gold]] and [[silver]] which are more heavily weighted toward investment and jewelry demand. Approximately 40% of platinum demand comes from automotive catalytic converters, specifically for diesel engines, where platinum is used to reduce harmful emissions.
 
 ## How Platinum Is Traded
 

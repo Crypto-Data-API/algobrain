@@ -9,7 +9,7 @@ aliases: ["Seasonal Patterns", "Seasonal Effects", "Market Seasonality"]
 domain: [behavioral-finance, market-microstructure]
 prerequisites: ["[[market-anomalies]]"]
 difficulty: beginner
-related: ["[[calendar-effects]]", "[[calendar-effects-anomalies]]", "[[commodity-seasonality-patterns]]", "[[seasonal-spread-trading]]", "[[arbitrage-seasonality]]", "[[tax-loss-harvesting]]", "[[market-anomalies]]", "[[behavioral-finance]]", "[[sector-rotation]]"]
+related: ["[[calendar-effects]]", "[[calendar-effects-anomalies]]", "[[commodity-seasonality-patterns]]", "[[seasonal-spread-trading]]", "[[arbitrage-seasonality]]", "[[market-anomalies]]", "[[behavioral-finance]]", "[[sector-rotation]]"]
 ---
 
 **Seasonality** is the tendency for an asset's returns, volatility, or supply/demand to follow recurring patterns tied to the time of year, month, week, or day rather than to price action or fundamentals. It is one of the oldest documented families of [[market-anomalies]], and it spans two quite different mechanisms: **calendar effects** in financial assets (driven by fund flows, taxes, and behaviour) and **physical seasonality** in commodities (driven by weather, harvests, and demand cycles). This page is the hub; the detailed treatments live in [[calendar-effects]] and [[commodity-seasonality-patterns]].
@@ -25,7 +25,7 @@ related: ["[[calendar-effects]]", "[[calendar-effects-anomalies]]", "[[commodity
 
 ## Equity Calendar Effects (summary)
 
-The most documented equity patterns — covered in full at [[calendar-effects]] — include the **January Effect** (small caps rebound after December [[tax-loss-harvesting]] selling), the **Sell in May / Halloween Indicator** (the Nov–Apr half historically beats May–Oct), the **Santa Claus Rally** (the last five sessions of December plus the first two of January), the **turn-of-month effect**, and quarter-end **window dressing**. Many have weakened as they became widely known; those tied to durable structural [[fund-flows]] (payrolls, pensions, mandatory rebalancing) have held up better than those tied to pure sentiment.
+The most documented equity patterns — covered in full at [[calendar-effects]] — include the **January Effect** (small caps rebound after December tax-loss-harvesting selling), the **Sell in May / Halloween Indicator** (the Nov–Apr half historically beats May–Oct), the **Santa Claus Rally** (the last five sessions of December plus the first two of January), the **turn-of-month effect**, and quarter-end **window dressing**. Many have weakened as they became widely known; those tied to durable structural [[fund-flows]] (payrolls, pensions, mandatory rebalancing) have held up better than those tied to pure sentiment.
 
 ## Commodity Seasonality (summary)
 

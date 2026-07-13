@@ -81,7 +81,7 @@ The Volume Weighted Average Price ([[vwap]]) represents the **average price an i
 - VWAP is the **institutional benchmark** -- aligning with how the largest market participants evaluate price gives a structural edge
 - Provides a clear, objective, and dynamically updating support/resistance level throughout the day
 - Anchored VWAP extends the concept beyond intraday, providing multi-day institutional reference points
-- Works on all liquid instruments: [[stocks]], [[futures]], [[crypto]]
+- Works on all liquid instruments: stocks, [[futures]], [[crypto]]
 - Standard deviation bands provide built-in overbought/oversold framework without additional indicators
 - Combines naturally with [[order-flow-scalping]] and [[opening-range-breakout]] strategies
 

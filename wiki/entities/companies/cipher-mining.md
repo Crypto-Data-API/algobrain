@@ -82,7 +82,7 @@ Cipher is best framed as a **contracted-cash-flow data-center developer with a m
 ## Trading & Options Playbook
 
 - **Catalysts calendar**: data-center delivery milestones (July-Q4 2026 AWS phases, September 2026 Fluidstack Phase I), new hyperscaler lease announcements, financing terms (junk-bond pricing), BTC price and hashprice, ERCOT power/grid events, quarterly business updates.
-- **Index/ETF membership**: not in the [[s-and-p-500]]; trades on the [[nasdaq]]. Held in bitcoin-miner and crypto-equity ETFs (e.g. WGMI and broader miner baskets), so sector ETF flows and rebalancing matter.
+- **Index/ETF membership**: not in the s-and-p-500; trades on the nasdaq. Held in bitcoin-miner and crypto-equity ETFs (e.g. WGMI and broader miner baskets), so sector ETF flows and rebalancing matter.
 - **High IV / retail behavior**: elevated [[implied-volatility]] and speculative retail [[options]] volume; the equity is effectively a levered call on AI data-center demand with a BTC kicker, so IV expands around delivery milestones, lease headlines and BTC volatility. Relevant for gamma traders and premium sellers (see [[options-greeks]]).
 - **Peer pairs**: long CIFR / short [[cleanspark]] to express "AI backlog beats BTC torque," reversed when spot [[bitcoin]] leads.
 
@@ -150,7 +150,7 @@ Bitcoin mining; speculative retail options volume correlated with BTC moves
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - Cipher Mining Q3 2025 business update: https://investors.ciphermining.com/news-releases/news-release-details/cipher-mining-provides-third-quarter-2025-business-update
 - Cipher Mining business update (SEC 8-K, FY2025): https://www.sec.gov/Archives/edgar/data/1819989/000181998925000110/ciphermining_businessupd.htm
 - AMBCrypto — Cipher's $5.5B AWS deal: https://ambcrypto.com/crypto-mining-meets-ai-cipher-ahead-of-the-curve-with-5-5b-aws-deal/

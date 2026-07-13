@@ -49,7 +49,7 @@ Context: the backdrop is risk-off — the [[fear-and-greed-index|Crypto Fear & G
 | **Fully Diluted Valuation** | ~$62.4M (at 20M cap) |
 | **Market Cap / FDV** | ~0.55 |
 
-MWC has a **capped max supply of 20M**, with ~11.01M circulating (~55% mined). Earlier snapshots set circulating = total = FDV, implying MC/FDV ≈ 1.00, but against the **hard 20M cap** the true fully-diluted figure is ~$62.4M, giving an MC/FDV of **~0.55** — i.e. ~45% of the eventual supply (~9M MWC) is **still to be mined via [[proof-of-work|PoW]] emission**, a real [[dilution|dilution]] overhang as block rewards are sold by miners. The small, hard-capped supply and base-layer privacy are MWC's core design selling points; the disinflationary emission schedule (halving-style reward reductions) tapers that overhang over time.
+MWC has a **capped max supply of 20M**, with ~11.01M circulating (~55% mined). Earlier snapshots set circulating = total = FDV, implying MC/FDV ≈ 1.00, but against the **hard 20M cap** the true fully-diluted figure is ~$62.4M, giving an MC/FDV of **~0.55** — i.e. ~45% of the eventual supply (~9M MWC) is **still to be mined via [[proof-of-work|PoW]] emission**, a real dilution overhang as block rewards are sold by miners. The small, hard-capped supply and base-layer privacy are MWC's core design selling points; the disinflationary emission schedule (halving-style reward reductions) tapers that overhang over time.
 
 ### All-Time Range
 

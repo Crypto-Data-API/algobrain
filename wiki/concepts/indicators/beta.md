@@ -12,7 +12,7 @@ difficulty: intermediate
 related: ["[[capm]]", "[[alpha]]", "[[sharpe-ratio]]", "[[volatility]]", "[[correlation]]", "[[diversification]]", "[[beta-weighted-delta]]"]
 ---
 
-**Beta** (β) measures the sensitivity of an asset's returns to the returns of a benchmark, usually a broad market index such as the [[sp500|S&P 500]]. A beta of 1.0 means the asset tends to move in line with the market; above 1.0 means it amplifies market moves (more systematic risk); below 1.0 means it dampens them (more defensive). Beta is the central risk measure of the [[capm|Capital Asset Pricing Model]] and the primary tool for separating a portfolio's market-driven returns (beta) from its skill-driven returns ([[alpha]]).
+**Beta** (β) measures the sensitivity of an asset's returns to the returns of a benchmark, usually a broad market index such as the S&P 500. A beta of 1.0 means the asset tends to move in line with the market; above 1.0 means it amplifies market moves (more systematic risk); below 1.0 means it dampens them (more defensive). Beta is the central risk measure of the [[capm|Capital Asset Pricing Model]] and the primary tool for separating a portfolio's market-driven returns (beta) from its skill-driven returns ([[alpha]]).
 
 ## How It Is Calculated
 
@@ -48,7 +48,7 @@ Total portfolio risk splits into:
 
 Beta is load-bearing in several practical contexts:
 
-- **Portfolio construction** — targeting a desired market exposure. A manager who wants 0.8× market exposure builds a portfolio with weighted-average beta of 0.8. Defensive, low-beta names (utilities, infrastructure such as [[transurban]], consumer staples) are held to lower portfolio beta; cyclicals and high-growth tech raise it.
+- **Portfolio construction** — targeting a desired market exposure. A manager who wants 0.8× market exposure builds a portfolio with weighted-average beta of 0.8. Defensive, low-beta names (utilities, infrastructure such as transurban, consumer staples) are held to lower portfolio beta; cyclicals and high-growth tech raise it.
 - **Hedging** — beta tells you how many index futures or how much [[beta-weighted-delta|beta-weighted option delta]] to short to neutralize market exposure. A $1M long book with beta 1.2 requires shorting ~$1.2M of index exposure to be market-neutral.
 - **Performance attribution** — separating beta (cheap, replicable with an index fund) from [[alpha]] (genuine skill). A fund returning 12% in a year the market returned 10% with beta 1.2 actually *underperformed* its beta-implied 12% — its alpha was zero. This is the core of "are you paying for beta dressed up as alpha?"
 - **Smart-beta and factor investing** — "low-beta" is itself a documented anomaly: low-beta stocks have historically delivered higher risk-adjusted returns than CAPM predicts (the *betting-against-beta* effect, Frazzini and Pedersen 2014), because leverage-constrained investors overpay for high-beta exposure.

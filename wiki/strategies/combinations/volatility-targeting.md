@@ -29,7 +29,7 @@ The deeper synergy: vol targeting **naturally de-risks during crises**. When vol
 Vol targeting is a meta-layer applied on top of any combination of base strategies:
 
 - **[[trend-following]]** on futures -- typically 15-25% vol; scale to your target
-- **[[equity-long-short]]** -- typically 10-18% vol; often already near target
+- **equity-long-short** -- typically 10-18% vol; often already near target
 - **[[options-income]]** (selling premium) -- typically 8-15% vol but with fat tails
 - **[[mean-reversion]] / [[statistical-arbitrage]]** -- typically 5-12% vol; scale up
 - **[[crypto-funding-rate-arbitrage]]** -- typically 10-30% vol depending on positioning
@@ -87,7 +87,7 @@ A $500,000 multi-strategy portfolio targeting 10% annual vol:
 | Strategy | Risk Budget | Current Vol | Target Weight | Capital |
 |----------|------------|-------------|---------------|---------|
 | [[trend-following]] (futures) | 30% | 18% | 16.7% | $83,500 |
-| [[equity-long-short]] | 25% | 14% | 17.9% | $89,500 |
+| equity-long-short | 25% | 14% | 17.9% | $89,500 |
 | [[options-income]] | 20% | 10% | 20.0% | $100,000 |
 | [[mean-reversion]] (stat arb) | 15% | 8% | 18.8% | $94,000 |
 | [[crypto-funding-rate-arb]] | 10% | 25% | 4.0% | $20,000 |

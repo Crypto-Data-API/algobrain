@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 1998
 headquarters: "Sydney, Australia"
 website: "https://apra.gov.au"
-related: ["[[asic]]", "[[austrac]]", "[[superannuation]]", "[[australian-investing]]", "[[negative-gearing]]", "[[regulation]]", "[[australian-regulatory-framework]]"]
+related: ["[[asic]]", "[[austrac]]", "[[superannuation]]", "[[negative-gearing]]", "[[regulation]]", "[[australian-regulatory-framework]]"]
 ---
 
 The Australian Prudential Regulation Authority (APRA) is Australia's prudential regulator, responsible for supervising banks, insurance companies, and superannuation (pension) funds to ensure they remain financially sound and can meet their obligations to depositors, policyholders, and fund members. APRA oversees institutions holding approximately **AUD $8 trillion** in total assets, making it one of the most significant financial regulators in the Asia-Pacific region.
@@ -127,7 +127,6 @@ APRA's actions affect investors in several direct ways:
 - [[austrac]]
 - [[superannuation]]
 - [[smsf]]
-- [[australian-investing]]
 - [[negative-gearing]]
 - [[regulation]]
 - [[australian-regulatory-framework]]

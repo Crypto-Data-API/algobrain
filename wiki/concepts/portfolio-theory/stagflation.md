@@ -83,7 +83,7 @@ Stagflation is the hardest macro regime to trade profitably. Most traditional po
 
 **The [[all-weather-portfolio|All Weather]] approach** — [[ray-dalio]]'s portfolio explicitly includes a stagflation quadrant: gold and inflation-linked bonds are designed to perform when growth falls and inflation rises.
 
-Fred discusses stagflation as a risk scenario for [[interest-rates]]-sensitive stocks, where companies with high debt loads and cyclical earnings face a double headwind of rising costs and weakening demand. (Source: [[fred-sam-sessions-overview]])
+Stagflation is a risk scenario for [[interest-rates]]-sensitive assets, where companies with high debt loads and cyclical earnings face a double headwind of rising costs and weakening demand.
 
 ## Key Stagflation Indicators to Monitor
 
@@ -107,7 +107,6 @@ Fred discusses stagflation as a risk scenario for [[interest-rates]]-sensitive s
 
 ## Sources
 
-- [[fred-sam-sessions-overview]] — Fred's commentary on stagflation risk for rate-sensitive stocks
 - Blinder, A. S. (1979). *Economic Policy and the Great Stagflation.* Academic Press.
 - Bernanke, B., Gertler, M., Watson, M. (1997). *"Systematic Monetary Policy and the Effects of Oil Price Shocks."* *Brookings Papers on Economic Activity.*
 - Volcker, P., Harper, C. (2018). *Keeping At It: The Quest for Sound Money and Good Government.* PublicAffairs.

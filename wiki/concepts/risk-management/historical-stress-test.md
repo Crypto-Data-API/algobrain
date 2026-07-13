@@ -102,8 +102,8 @@ For pre-trade screening, *intraday peak* is the most conservative choice. For da
 
 The accuracy of historical replay depends on the quality of the historical option surface data:
 
-- **[[orats]]** and **[[ivolatility]]** — historical surfaces back to the 2000s for US equity options, including skew and term-structure.
-- **[[cboe-livevol]]** / **CBOE DataShop** — granular tick-level option data back to ~2004 for index and ETF options.
+- **orats** and **[[ivolatility]]** — historical surfaces back to the 2000s for US equity options, including skew and term-structure.
+- **cboe-livevol** / **CBOE DataShop** — granular tick-level option data back to ~2004 for index and ETF options.
 - **[[bloomberg]] OVDV / OVME** — institutional surfaces with full-fit; scenario engines support replay directly.
 - **CME and ICE** — futures and futures-options historical data for cross-asset replay.
 - **Reconstructed from option chains** — for older episodes (pre-2003), reconstruct from end-of-day option chains and ATM straddle prices; lose skew and term-structure granularity.

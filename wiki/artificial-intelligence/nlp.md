@@ -39,7 +39,7 @@ Pretraining on huge corpora followed by fine-tuning (or prompting) on the target
 NLP is the engine behind text-driven alpha and research automation:
 
 - **Sentiment signals** — text-derived sentiment has documented short-horizon predictive power, especially around earnings and breaking news; see [[nlp-sentiment-analysis]] and [[social-sentiment-analysis]].
-- **Fundamental/document automation** — parsing 10-Ks, transcripts, and analyst reports at scale; see [[earnings-call-analysis]] and [[llm-market-analysis]].
+- **Fundamental/document automation** — parsing 10-Ks, transcripts, and analyst reports at scale; see earnings-call-analysis and [[llm-market-analysis]].
 - **Event detection** — flagging market-moving events from news faster than humans.
 - **Alternative data** — turning Reddit/X chatter, Glassdoor reviews, and consumer text into datasets.
 

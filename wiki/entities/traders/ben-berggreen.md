@@ -8,12 +8,12 @@ tags: [traders, person, itpm, quantitative, long-short-equity, asset-management]
 entity_type: person
 headquarters: "Los Angeles, USA"
 website: ""
-related: ["[[itpm]]", "[[anton-kreil]]", "[[franklin-templeton]]", "[[long-short-equity]]", "[[risk-management]]", "[[fundamental-analysis]]", "[[algorithmic-trading]]", "[[peter-lynch]]"]
+related: ["[[anton-kreil]]", "[[risk-management]]", "[[algorithmic-trading]]"]
 ---
 
 # Ben Berggreen
 
-Ben Berggreen is a senior trading mentor at [[itpm|the Institute of Trading and Portfolio Management]] based in Los Angeles, where he continues to actively trade daily. His career spans the full spectrum of asset management — from $200+ billion long-only funds ([[franklin-templeton]], [[ge-asset-management|GE Asset Management]]) to small startup hedge funds — giving him a rare perspective on how institutional and retail trading worlds compare. Before entering finance, Berggreen was a cargo pilot, making his transition into trading one of the most unconventional in the ITPM roster.
+Ben Berggreen is a senior trading mentor at the Institute of Trading and Portfolio Management based in Los Angeles, where he continues to actively trade daily. His career spans the full spectrum of asset management — from $200+ billion long-only funds (franklin-templeton, GE Asset Management) to small startup hedge funds — giving him a rare perspective on how institutional and retail trading worlds compare. Before entering finance, Berggreen was a cargo pilot, making his transition into trading one of the most unconventional in the ITPM roster.
 
 ## Career
 
@@ -23,15 +23,15 @@ Berggreen was educated in aeronautical science and began his career as a cargo p
 
 ### Franklin Templeton
 
-Joined [[franklin-templeton]] (~$200 billion fund) in Fort Lauderdale as a global long-only asset manager. Started in operations, worked his way onto the trading desk within a year, and traded European assets for the firm. Received and executed orders from legendary investors including Mark Hoeschele and Mark Mobius (Source: [[itpm-trading-legends-ben-berggreen]]).
+Joined franklin-templeton (~$200 billion fund) in Fort Lauderdale as a global long-only asset manager. Started in operations, worked his way onto the trading desk within a year, and traded European assets for the firm. Received and executed orders from legendary investors including Mark Hoeschele and Mark Mobius (Source: [[itpm-trading-legends-ben-berggreen]]).
 
 ### Head Capital — Quant Hedge Fund
 
-After 9/11 disrupted the industry, moved to London and joined Head Capital, a [[quantitative]] [[long-short-equity]] hedge fund startup in Chelsea. The fund used chaos mathematics and computer programming. Berggreen set up and managed their entire trading operation starting in 2001. The fund eventually shut down because its backers were real estate people who lacked the network to raise assets beyond ~$40–50 million (Source: [[itpm-trading-legends-ben-berggreen]]).
+After 9/11 disrupted the industry, moved to London and joined Head Capital, a [[quantitative]] long-short-equity hedge fund startup in Chelsea. The fund used chaos mathematics and computer programming. Berggreen set up and managed their entire trading operation starting in 2001. The fund eventually shut down because its backers were real estate people who lacked the network to raise assets beyond ~$40–50 million (Source: [[itpm-trading-legends-ben-berggreen]]).
 
 ### GE Asset Management
 
-Returned to the US and joined [[ge-asset-management|GE Asset Management]] in Connecticut, trading the entire Asian region (Australia open to India close — roughly 11 PM to 6 AM). This was GE's full pension fund (~$250 billion). He and one other person covered all of Asia (Source: [[itpm-trading-legends-ben-berggreen]]).
+Returned to the US and joined GE Asset Management in Connecticut, trading the entire Asian region (Australia open to India close — roughly 11 PM to 6 AM). This was GE's full pension fund (~$250 billion). He and one other person covered all of Asia (Source: [[itpm-trading-legends-ben-berggreen]]).
 
 ### Tradewinds Global Investors
 
@@ -58,12 +58,10 @@ This creates a sweet spot for retail traders: the 1–6 month horizon where qual
 2. **Match your approach to your personality.** Risk tolerance, time commitment, and temperament must align with your trading style. "You're not going to be successful until you match your trading approach to your personality."
 3. **Discipline is everything.** Demo accounts miss the emotional impact of real money losses, which fundamentally changes decision-making.
 4. **Being small is an edge.** Retail traders can invest in companies big funds cannot access, move faster, and have no compliance overhead.
-5. **Keep it simple.** References [[peter-lynch]]'s approach — observing the world, seeing what works — as effective for retail traders even though it would no longer fly in institutional settings obsessed with pedigree.
+5. **Keep it simple.** References peter-lynch's approach — observing the world, seeing what works — as effective for retail traders even though it would no longer fly in institutional settings obsessed with pedigree.
 
 ## Strategy Connections
 
-- [[long-short-equity]] — Core methodology across institutional and ITPM careers
-- [[fundamental-analysis]] — Idea generation through research, not algorithms
 - [[risk-management]] — Discipline and process as survival tools
 - [[algorithmic-trading]] — Understanding the quant landscape to avoid competing in it
 - [[position-sizing]] — Adapting from institutional scale to personal account management

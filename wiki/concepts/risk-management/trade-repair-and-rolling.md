@@ -7,9 +7,9 @@ status: excellent
 tags: [risk-management, options, trade-management, itpm, portfolio-management]
 aliases: ["Rolling Trades", "Trade Repair", "Position Repair", "Rolling Options", "Options Adjustment"]
 domain: [risk-management]
-prerequisites: ["[[options]]", "[[call-options]]", "[[put-options]]", "[[long-short-equity]]", "[[options-greeks]]"]
+prerequisites: ["[[options]]", "[[call-options]]", "[[put-options]]", "[[options-greeks]]"]
 difficulty: advanced
-related: ["[[risk-management-overview]]", "[[position-sizing]]", "[[options]]", "[[long-short-equity]]", "[[itpm]]", "[[covered-call]]", "[[iron-condors]]", "[[vertical-spread]]", "[[credit-spread]]", "[[protective-puts]]", "[[collar]]", "[[hedging]]", "[[gamma]]", "[[theta]]", "[[wheel-strategy]]", "[[stock-repair]]", "[[compounding]]", "[[trading-journal]]", "[[calendar-spread]]"]
+related: ["[[risk-management-overview]]", "[[position-sizing]]", "[[options]]", "[[covered-call]]", "[[iron-condors]]", "[[vertical-spread]]", "[[credit-spread]]", "[[protective-puts]]", "[[collar]]", "[[hedging]]", "[[gamma]]", "[[theta]]", "[[wheel-strategy]]", "[[compounding]]", "[[trading-journal]]", "[[calendar-spread]]"]
 ---
 
 # Trade Repair and Rolling
@@ -24,9 +24,9 @@ Before any adjustment, disciplined traders do a post-mortem: why did the trade f
 
 ## Overview
 
-In a [[long-short-equity]] portfolio using options, not every trade will work. Even with strong fundamental analysis, timing may be off, catalysts may be delayed, or the market may move against the thesis temporarily. Rather than viewing a losing position as binary (hold or cut), professional traders employ repair and rolling strategies to actively manage the position.
+In a long-short-equity portfolio using options, not every trade will work. Even with strong fundamental analysis, timing may be off, catalysts may be delayed, or the market may move against the thesis temporarily. Rather than viewing a losing position as binary (hold or cut), professional traders employ repair and rolling strategies to actively manage the position.
 
-[[anton-kreil]] and the [[itpm]] methodology emphasize that trade management is where professionals differentiate themselves from retail traders. The goal is not to avoid losing trades but to minimize losses on losers while maximizing gains on winners. (Source: [[itpm-god-like-trader-status]])
+[[anton-kreil]] and the itpm methodology emphasize that trade management is where professionals differentiate themselves from retail traders. The goal is not to avoid losing trades but to minimize losses on losers while maximizing gains on winners. (Source: [[itpm-god-like-trader-status]])
 
 ## Rolling Trades
 
@@ -160,7 +160,7 @@ Instead of repairing the individual trade, adding a portfolio-level hedge can pr
 
 ## ITPM Monthly Expiry Discipline
 
-The [[itpm]] methodology has specific rules for managing positions at monthly options expiry (third Friday of each month). [[anton-kreil]]'s directive: **"You are not allowed to bank a loss at monthly expiry."** The decision framework:
+The itpm methodology has specific rules for managing positions at monthly options expiry (third Friday of each month). [[anton-kreil]]'s directive: **"You are not allowed to bank a loss at monthly expiry."** The decision framework:
 
 1. **Position is winning** → Bank the profit. Book it to your [[equity-curve]].
 2. **Position could go further** → Book the profit now and roll the trade out 3 months to re-enter the thesis with fresh time. This locks in a winning node on the equity curve while keeping exposure.
@@ -214,7 +214,7 @@ A critical distinction that separates professional from retail recovery: **hedgi
 
 ### The Goldman Sachs Crisis Example
 
-[[chris-cathey]] described a day at [[goldman-sachs]] around 2001 during the NASDAQ bear market. The desk was very short — approximately $500 million — in telecoms and technology stocks. A vicious bear market rally squeezed their positions; by lunchtime they were down significantly.
+[[chris-cathey]] described a day at goldman-sachs around 2001 during the NASDAQ bear market. The desk was very short — approximately $500 million — in telecoms and technology stocks. A vicious bear market rally squeezed their positions; by lunchtime they were down significantly.
 
 Three possible responses:
 1. **Panic and cover everything** — locks in the full loss, abandons the thesis
@@ -239,7 +239,7 @@ This creates a clear framework:
 
 ## The Psychology of Executing Repairs
 
-The emotional challenge of trade repair is as important as the mechanical technique. The [[itpm]] methodology treats emotional detachment as a trainable skill, not an innate trait.
+The emotional challenge of trade repair is as important as the mechanical technique. The itpm methodology treats emotional detachment as a trainable skill, not an innate trait.
 
 ### Why Repairs Fail Psychologically
 
@@ -327,7 +327,6 @@ The throughline: repair is the risk-management half of trading (Cathey's "50% id
 - [[protective-puts]] — Downside insurance via long puts
 - [[collar]] — Combined put protection + call income
 - [[wheel-strategy]] — Short-premium strategy using the 21-DTE roll rule
-- [[stock-repair]] — 1x2 call spread to lower breakeven on underwater shares
 - [[gamma]] — The risk that spikes near expiration (gamma trap)
 - [[gamma-risk]] — The gamma trap and 21-DTE rule explained
 - [[theta]] — Time decay driving the 21-DTE roll threshold
@@ -335,7 +334,6 @@ The throughline: repair is the risk-management half of trading (Cathey's "50% id
 - [[compounding]] — Credits as portfolio-level loss armor
 - [[trading-journal]] — Post-mortem framework for diagnosing and recording repair decisions
 - [[options]] — Underlying instruments for these techniques
-- [[long-short-equity]] — Portfolio context for trade repair
 - [[portfolio-greeks-aggregation]] — Book-level Greeks a roll must respect
 - [[options-stress-testing]] — Stress the repaired book, not just the trade
 - [[portfolio-margin]] — How a roll can change stressed margin

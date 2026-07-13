@@ -44,7 +44,6 @@ Risk no more than 5-10% of the portfolio in a single covered call position. Dive
 - [[delta]] -- guides strike selection (0.20-0.35 OTM is typical)
 - [[theta]] -- measures daily time decay working in the seller's favor
 - [[support-and-resistance]] -- avoid selling calls below key resistance where a breakout is likely
-- [[earnings-calendar]] -- avoid selling calls through earnings if you fear a large move
 
 ## Example Trade
 **Asset:** AAPL trading at $185
@@ -73,11 +72,11 @@ Risk no more than 5-10% of the portfolio in a single covered call position. Dive
 - **Limited downside protection:** The premium collected is a small buffer, not a hedge
 - **Opportunity cost:** If the stock surges, you underperform simple buy-and-hold significantly
 - **Capital intensive:** Requires owning 100 shares per contract, which is expensive for high-priced stocks
-- **Assignment risk:** Early assignment is possible, especially near [[ex-dividend]] dates (Source: [[book-option-volatility-and-pricing]])
+- **Assignment risk:** Early assignment is possible, especially near ex-dividend dates (Source: [[book-option-volatility-and-pricing]])
 
 ## Covered Calls in Long/Short Portfolios
 
-Within a [[long-short-equity]] framework (as taught by [[itpm]]), covered calls play a specific role:
+Within a long-short-equity framework (as taught by itpm), covered calls play a specific role:
 
 - Used to generate income on long equity positions while waiting for a fundamental catalyst
 - The sold call partially funds the purchase of put options on short positions, reducing overall portfolio cost
@@ -90,7 +89,6 @@ Within a [[long-short-equity]] framework (as taught by [[itpm]]), covered calls 
 - [[implied-volatility]] -- the key driver of option premium pricing
 - [[theta]] -- the Greek that makes covered calls profitable over time
 - [[cash-secured-put]] -- the other side of the wheel, and a natural companion to covered calls
-- [[long-short-equity]] -- portfolio framework where covered calls are one component
 - [[trade-repair-and-rolling]] -- techniques for managing covered calls that go against you
 - [[covered-call-vs-cash-secured-put]] -- side-by-side comparison of these two income strategies
 

@@ -13,19 +13,19 @@ source_date: 2018-01-01
 source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-raj-malhotra.md"
 confidence: medium
 claims_count: 17
-related: ["[[anton-kreil]]", "[[itpm]]", "[[raj-malhotra]]", "[[options]]", "[[volatility]]", "[[bank-of-america]]", "[[nomura]]", "[[wharton]]", "[[risk-management-overview]]"]
+related: ["[[anton-kreil]]", "[[raj-malhotra]]", "[[options]]", "[[volatility]]", "[[risk-management-overview]]"]
 ---
 
-[[anton-kreil]] interviews [[raj-malhotra]], a senior trading mentor at [[itpm]], in New York. Raj had a career spanning three continents (Europe, Asia, America) as a professional [[options]] trader, culminating as head of all institutional options trading at [[bank-of-america]]. The interview covers his career, the 2008 financial crisis from inside a major Wall Street bank, and his insights on how retail traders misunderstand [[volatility]]. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and philosophy claims are first-person and single-source, so confidence is MEDIUM.
+[[anton-kreil]] interviews [[raj-malhotra]], a senior trading mentor at itpm, in New York. Raj had a career spanning three continents (Europe, Asia, America) as a professional [[options]] trader, culminating as head of all institutional options trading at bank-of-america. The interview covers his career, the 2008 financial crisis from inside a major Wall Street bank, and his insights on how retail traders misunderstand [[volatility]]. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and philosophy claims are first-person and single-source, so confidence is MEDIUM.
 
 > **Note on confidence:** Promotional interview for a paid trading-education business. Career details and opinions are the interviewee's own recollection, not independently verified — treat as [MEDIUM] single-source.
 
 ## Career Background
 
-- [MEDIUM] Started trading stocks in high school using Lotus 1-2-3 spreadsheets. Attended the [[wharton|Wharton School of Business]] at the University of Pennsylvania, graduating in 1998.
+- [MEDIUM] Started trading stocks in high school using Lotus 1-2-3 spreadsheets. Attended the Wharton School of Business at the University of Pennsylvania, graduating in 1998.
 - [MEDIUM] Joined a hedge fund owned by BNP Paribas after graduation, trading S&P 500 index [[options]]. In 2000, moved to their New York office trading options for the firm and customers until 2002.
-- [MEDIUM] Hired by [[bank-of-america]] in 2002 as head of index options. In 2006, named head of all institutional options trading. Made managing director before the age of 30, which he describes as "unheard of."
-- [MEDIUM] Left Bank of America in 2009 after the Merrill Lynch merger (Merrill kept their own employees; Bank of America Securities staff became redundant). Moved his team to [[nomura]] to help launch their US presence. Stayed at Nomura for approximately three years until retirement in 2012.
+- [MEDIUM] Hired by bank-of-america in 2002 as head of index options. In 2006, named head of all institutional options trading. Made managing director before the age of 30, which he describes as "unheard of."
+- [MEDIUM] Left Bank of America in 2009 after the Merrill Lynch merger (Merrill kept their own employees; Bank of America Securities staff became redundant). Moved his team to nomura to help launch their US presence. Stayed at Nomura for approximately three years until retirement in 2012.
 - [MEDIUM] Career spanned three continents: Europe, Asia, and America.
 
 ## Financial Crisis Experience

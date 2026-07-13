@@ -21,12 +21,12 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 200
 decay_evidence: "Premium collapsed Feb 2021; discount closed Jan 2024 with ETF conversion."
-related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[2020-03-bond-etf-dislocation]]", "[[basis-trade]]", "[[depeg-risk]]", "[[three-arrows-capital]]", "[[celsius]]", "[[blockfi]]"]
+related: ["[[funding-rate-arbitrage]]", "[[cash-and-carry]]", "[[2020-03-bond-etf-dislocation]]", "[[basis-trade]]", "[[depeg-risk]]", "[[three-arrows-capital]]", "[[blockfi]]"]
 ---
 
 # GBTC Discount/Premium Arbitrage
 
-Grayscale Bitcoin Trust ([[gbtc]]) discount/premium arbitrage exploited the persistent dislocation between GBTC's share price and its underlying Bitcoin net asset value (NAV). It is the crypto-native instance of the classic **[[closed-end-fund]] NAV-discount/premium trade** ([[arbitrage]] family; a structural cousin of [[merger-arbitrage]] and [[risk-arbitrage]] in that the edge is the *convergence to a known terminal value*). From 2017–2020, GBTC traded at a structural **premium** to NAV (typically +10% to +40%), enabling an in-kind creation arbitrage. From February 2021 onward, GBTC flipped to a deepening **discount** (reaching -48.9% on December 13, 2022) that was finally closed by the January 11, 2024 conversion to a spot [[bitcoin-etf]]. The full arc — premium → trap-flip → deep discount → ETF conversion → discount-close — is the single most instructive case study in [[limits-to-arbitrage]] in crypto history.
+Grayscale Bitcoin Trust ([[gbtc]]) discount/premium arbitrage exploited the persistent dislocation between GBTC's share price and its underlying Bitcoin net asset value (NAV). It is the crypto-native instance of the classic **[[closed-end-fund]] NAV-discount/premium trade** ([[arbitrage]] family; a structural cousin of merger-arbitrage and risk-arbitrage in that the edge is the *convergence to a known terminal value*). From 2017–2020, GBTC traded at a structural **premium** to NAV (typically +10% to +40%), enabling an in-kind creation arbitrage. From February 2021 onward, GBTC flipped to a deepening **discount** (reaching -48.9% on December 13, 2022) that was finally closed by the January 11, 2024 conversion to a spot [[bitcoin-etf]]. The full arc — premium → trap-flip → deep discount → ETF conversion → discount-close — is the single most instructive case study in [[limits-to-arbitrage]] in crypto history.
 
 ## Edge Source
 
@@ -47,7 +47,7 @@ This is the defining feature of a [[closed-end-fund]]: unlike an open-end fund o
 
 ## Why This Edge Exists
 
-US institutional and retirement-account investors who could not legally hold spot BTC (IRAs, 401(k)s, family offices with ISDA mandates) could buy GBTC in a brokerage account. That demand was structurally trapped on the buy-side and pushed GBTC above NAV. After the Purpose Bitcoin ETF launched in Canada (February 18, 2021) and the ProShares BITO futures ETF launched (October 19, 2021), better access alternatives appeared and the trapped premium evaporated. From there, forced selling by overleveraged unlock-arbitrage funds (notably [[three-arrows-capital]], [[blockfi]], [[celsius]]) drove GBTC to a deep discount that could only close via SEC approval of a redemption mechanism — i.e., ETF conversion.
+US institutional and retirement-account investors who could not legally hold spot BTC (IRAs, 401(k)s, family offices with ISDA mandates) could buy GBTC in a brokerage account. That demand was structurally trapped on the buy-side and pushed GBTC above NAV. After the Purpose Bitcoin ETF launched in Canada (February 18, 2021) and the ProShares BITO futures ETF launched (October 19, 2021), better access alternatives appeared and the trapped premium evaporated. From there, forced selling by overleveraged unlock-arbitrage funds (notably [[three-arrows-capital]], [[blockfi]], celsius) drove GBTC to a deep discount that could only close via SEC approval of a redemption mechanism — i.e., ETF conversion.
 
 ## Null Hypothesis
 
@@ -211,7 +211,7 @@ The headline lesson: a deep discount is necessary but not sufficient. A -40% dis
 - **Wrapper / counterparty risk** (DCG, Grayscale, Genesis exposure)
 - **Capital intensive** (must fund both spot/futures and trust holdings)
 - **Borrow / funding cost** can erode returns over multi-month holds
-- **Was central to the 2022 crypto credit cascade**: leveraged GBTC books at [[three-arrows-capital]], [[blockfi]], [[celsius]], and [[genesis-trading]] turned this trade into the systemic risk vector that took down the lending sector
+- **Was central to the 2022 crypto credit cascade**: leveraged GBTC books at [[three-arrows-capital]], [[blockfi]], celsius, and [[genesis-trading]] turned this trade into the systemic risk vector that took down the lending sector
 
 ## Sister Trade: ETHE
 
@@ -232,12 +232,11 @@ The headline lesson: a deep discount is necessary but not sufficient. A -40% dis
 - [[closed-end-fund]] — the wrapper structure that creates the NAV gap
 - [[bitcoin-etf]] — the terminal wrapper that closed the discount
 - [[limits-to-arbitrage]] — why a visible mispricing persisted for years
-- [[merger-arbitrage]], [[risk-arbitrage]] — convergence-to-known-value cousins
 - [[funding-rate-arbitrage]] — sister crypto basis trade
 - [[cash-and-carry]] — classical futures basis equivalent
 - [[2020-03-bond-etf-dislocation]] — comparable closed-end-style NAV dislocation in fixed income
 - [[basis-trade]] — general framework
 - [[depeg-risk]] — when wrappers break their NAV peg
 - [[lst-depeg-arbitrage]] — analogous "claim trades below intrinsic until a redemption mechanism opens" structure
-- [[three-arrows-capital]], [[blockfi]], [[celsius]], [[genesis-trading]] — funds blown up by leveraged GBTC books
+- [[three-arrows-capital]], [[blockfi]], celsius, [[genesis-trading]] — funds blown up by leveraged GBTC books
 - [[grayscale]], [[gbtc]], [[ethena]]

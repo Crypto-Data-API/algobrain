@@ -35,7 +35,7 @@ breakeven_cost_bps: 20
 
 A quantitative trading strategy that exploits statistical mispricings between related securities, most famously through [[pairs-trading]]. Positions are typically dollar- or beta-neutral (long the cheap leg, short the rich leg) and rely on [[mean-reversion]] of a price *relationship* rather than a directional view. It is a systematic, probabilistic form of [[arbitrage]] — unlike true arbitrage, each individual trade can lose; the edge only exists in aggregate across many spreads. The approach was pioneered at Morgan Stanley in the mid-1980s by Nunzio Tartaglia's quant group (with Gerry Bamberger credited for the original pairs idea) and later industrialized by firms such as D. E. Shaw and Renaissance Technologies.
 
-Statistical arbitrage is the systematic, market-neutral end of the [[mean-reversion]] family. Where [[contrarian-investing]] reverts on *sentiment* and [[commodity-value-strategy]] reverts on *fundamentals*, stat arb reverts on a *statistical relationship* between securities — and hedges out market direction so the only bet is convergence. [[pairs-trading]] is its simplest two-asset instance; factor-basket and ETF-residual variants generalize it to hundreds of names. The edge is real but well-understood and crowded, with a documented decay since the 1990s and a notorious tail-risk signature (the August 2007 quant quake).
+Statistical arbitrage is the systematic, market-neutral end of the [[mean-reversion]] family. Where contrarian-investing reverts on *sentiment* and [[commodity-value-strategy]] reverts on *fundamentals*, stat arb reverts on a *statistical relationship* between securities — and hedges out market direction so the only bet is convergence. [[pairs-trading]] is its simplest two-asset instance; factor-basket and ETF-residual variants generalize it to hundreds of names. The edge is real but well-understood and crowded, with a documented decay since the 1990s and a notorious tail-risk signature (the August 2007 quant quake).
 
 ### At a Glance
 
@@ -245,7 +245,6 @@ At the highest frequencies, stat arb strategies exploit microsecond-level mispri
 - [[ornstein-uhlenbeck]] — the mean-reversion model for half-life
 - [[kalman-filter-trading]] — dynamic hedge-ratio estimation
 - [[mean-reversion]] — the parent family
-- [[contrarian-investing]] — the discretionary, sentiment-based mean-reversion cousin
 - [[commodity-value-strategy]] — long-term reversal in commodities
 - [[arbitrage]] — the broader relative-value category
 - [[quantitative-trading]] — methodology context

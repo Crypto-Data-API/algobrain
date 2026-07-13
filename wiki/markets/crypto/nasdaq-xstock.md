@@ -9,12 +9,12 @@ aliases: ["QQQX", "Nasdaq-100 xStock", "QQQ xStock"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://xstocks.com/"
-related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[backed-finance]]", "[[nasdaq]]", "[[etf]]", "[[crypto-markets]]", "[[arbitrum]]"]
+related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[backed-finance]]", "[[etf]]", "[[crypto-markets]]", "[[arbitrum]]"]
 ---
 
 # Nasdaq xStock
 
-**Nasdaq xStock** (QQQX) is a tokenized exchange-traded fund ("xStock") issued by [[backed-finance|Backed Finance]] that tracks the **Invesco QQQ Trust**, the ETF that follows the **Nasdaq-100** index of the 100 largest non-financial companies on the [[nasdaq|Nasdaq]] exchange. QQQX is **not** the ETF itself: it is an on-chain wrapper whose value is designed to follow the off-chain QQQ share, backed 1:1 by real ETF shares held in custody by the issuer. It is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
+**Nasdaq xStock** (QQQX) is a tokenized exchange-traded fund ("xStock") issued by [[backed-finance|Backed Finance]] that tracks the **Invesco QQQ Trust**, the ETF that follows the **Nasdaq-100** index of the 100 largest non-financial companies on the Nasdaq exchange. QQQX is **not** the ETF itself: it is an on-chain wrapper whose value is designed to follow the off-chain QQQ share, backed 1:1 by real ETF shares held in custody by the issuer. It is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -24,7 +24,7 @@ As of 2026-06-21, QQQX trades at **$740.93**, ranks **#640** by market capitaliz
 
 ## What QQQX Actually Is
 
-QQQX is a **[[tokenization|tokenized]] [[etf|ETF]]** — a blockchain token engineered to mirror the economics of the Invesco QQQ Trust, which in turn tracks the [[nasdaq|Nasdaq-100]]. It belongs to the **xStock** product line operated by [[backed-finance|Backed Finance]], a Switzerland-based issuer of tokenized securities. For every QQQX token in circulation, Backed (via its custodial arrangements) holds a corresponding QQQ share off-chain. The token's price *tracks* the ETF's price; it does not set it. The exposure chains through two wrappers: **Nasdaq-100 index → QQQ ETF → QQQX token**.
+QQQX is a **[[tokenization|tokenized]] [[etf|ETF]]** — a blockchain token engineered to mirror the economics of the Invesco QQQ Trust, which in turn tracks the Nasdaq-100. It belongs to the **xStock** product line operated by [[backed-finance|Backed Finance]], a Switzerland-based issuer of tokenized securities. For every QQQX token in circulation, Backed (via its custodial arrangements) holds a corresponding QQQ share off-chain. The token's price *tracks* the ETF's price; it does not set it. The exposure chains through two wrappers: **Nasdaq-100 index → QQQ ETF → QQQX token**.
 
 Because the subject is a wrapper around a basket, holders effectively get broad, single-token exposure to the Nasdaq-100's largest technology and growth names without holding each constituent or the ETF directly. It is a **broad-index** instrument — not a single-name bet like [[tesla-ondo-tokenized-stock|TSLAon]] or [[nvidia-xstock|NVDAx]] — though the Nasdaq-100 is heavily concentrated in a handful of mega-cap tech names, so QQQX carries more single-sector risk than a total-market wrapper such as [[sp500-xstock|SPYX]]. Two prices coexist:
 
@@ -174,7 +174,6 @@ QQQX brings the **Nasdaq-100 / US mega-cap tech benchmark** on-chain as a compos
 
 ## See Also
 
-- [[nasdaq]] — the exchange / Nasdaq-100 index the underlying ETF tracks
 - [[etf]] — exchange-traded funds
 - [[backed-finance]] — the xStock issuer
 - [[tokenized-stocks]] · [[real-world-assets]] · [[tokenization]]

@@ -13,7 +13,6 @@ aliases: ["Following the Trend", "Clenow Trend"]
 related:
   - "[[trend-following]]"
   - "[[managed-futures]]"
-  - "[[ctas]]"
   - "[[momentum]]"
   - "[[turtle-traders]]"
   - "[[risk-parity]]"
@@ -80,7 +79,6 @@ Clenow has written follow-ups extending the same systematic framework:
 
 - [[trend-following]] — The strategy class
 - [[managed-futures]] — The asset class CTAs trade
-- [[ctas]] — Commodity Trading Advisors
 - [[momentum]] — Closely related signal type
 - [[turtle-traders]] — Predecessor system Clenow's rules echo
 - [[risk-parity]] — Sister approach in portfolio construction

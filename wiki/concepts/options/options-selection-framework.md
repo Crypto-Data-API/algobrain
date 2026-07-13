@@ -68,7 +68,7 @@ Before choosing direction or structure, check the volatility environment using [
 - **IVR 20-50** → neutral. Either side works; emphasize directional conviction and structure efficiency.
 - **IVR < 20** → premium-buying environment. Favor long calls/puts, debit spreads, calendars, diagonals. Vega and gamma both work *for* the buyer if the move materializes.
 
-This is the "[[tom-sosnoff|Sosnoff]] / [[tastytrade]] check" — match the structure to the regime before choosing strikes. Selling 16-delta puts at IVR 8 is the same structure as at IVR 80, but the expected value is dramatically different because the credit collected is half as large.
+This is the "[[tom-sosnoff|Sosnoff]] / tastytrade check" — match the structure to the regime before choosing strikes. Selling 16-delta puts at IVR 8 is the same structure as at IVR 80, but the expected value is dramatically different because the credit collected is half as large.
 
 ### 3. Expiration / DTE Selection
 

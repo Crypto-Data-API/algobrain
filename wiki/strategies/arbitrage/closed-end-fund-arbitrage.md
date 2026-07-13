@@ -20,7 +20,7 @@ crowding_risk: medium
 expected_sharpe: 0.8
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 20
-related: ["[[etf-arbitrage]]", "[[activist-investing]]", "[[nav-arbitrage]]", "[[bulldog-investors]]", "[[saba-capital]]", "[[arbitrage]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[corporate-action-arbitrage]]", "[[tender-offer-arbitrage]]"]
+related: ["[[etf-arbitrage]]", "[[activist-investing]]", "[[nav-arbitrage]]", "[[bulldog-investors]]", "[[saba-capital]]", "[[arbitrage]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
 ---
 
 # Closed-End Fund Arbitrage
@@ -88,7 +88,7 @@ In an efficient market with no frictions, CEF price = NAV and the discount is ze
 1. Daily: compute (price - NAV) / NAV for every U.S.-listed CEF.
 2. Enter long when discount is in the bottom decile of its own 5-year history and deeper than -12%.
 3. Prefer funds with (a) <20% leverage, (b) no pending rights offering, (c) clean portfolio (no gated or illiquid assets).
-4. Hedge NAV exposure with a basket of ETFs matching the underlying asset mix (for a muni CEF, short [[mub]] or [[tlt]] in matched duration).
+4. Hedge NAV exposure with a basket of ETFs matching the underlying asset mix (for a muni CEF, short [[mub]] or tlt in matched duration).
 
 **Activist variant.**
 1. Identify deep-discount CEFs with identifiable governance weakness (staggered board, supermajority voting for liquidation).
@@ -197,10 +197,7 @@ Passive: $200-500 mm per manager without moving individual funds (total universe
 - [[nav-arbitrage]]
 - [[bulldog-investors]]
 - [[saba-capital]]
-- [[corporate-action-arbitrage]]
-- [[tender-offer-arbitrage]]
 - [[relative-value-arbitrage]]
-- [[merger-arbitrage]]
 - [[limits-to-arbitrage]]
 - [[edge-taxonomy]]
 - [[failure-modes]]

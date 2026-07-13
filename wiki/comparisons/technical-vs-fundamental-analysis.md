@@ -10,7 +10,7 @@ tags:
   - trading
 subjects:
   - "[[technical-analysis]]"
-  - "[[fundamental-analysis]]"
+  - "fundamental-analysis"
 comparison_dimensions:
   - information
   - timeframe
@@ -21,7 +21,6 @@ comparison_dimensions:
   - combining
 related:
   - "[[fundamental-technical-fusion]]"
-  - "[[value-investing]]"
   - "[[trend-following]]"
 ---
 
@@ -29,7 +28,7 @@ related:
 
 ## Overview
 
-[[technical-analysis]] and [[fundamental-analysis]] are the two pillars of market analysis. Technical analysis studies price charts, volume, and indicators to forecast future price movements based on historical patterns. Fundamental analysis evaluates a company's financial health, earnings, and intrinsic value to determine whether a security is fairly priced. The debate between them has raged for decades, but the most successful market participants often use both -- see [[fundamental-technical-fusion]].
+[[technical-analysis]] and fundamental-analysis are the two pillars of market analysis. Technical analysis studies price charts, volume, and indicators to forecast future price movements based on historical patterns. Fundamental analysis evaluates a company's financial health, earnings, and intrinsic value to determine whether a security is fairly priced. The debate between them has raged for decades, but the most successful market participants often use both -- see [[fundamental-technical-fusion]].
 
 ## Comparison Table
 

@@ -72,7 +72,7 @@ A backtest that shows an 80%+ win rate on short strangles is therefore **not evi
 Strikes are typically chosen by [[delta]] rather than by absolute distance from spot, which makes the structure self-scaling across different underlyings and IV levels:
 
 1. **Pick an expiration**. 30-60 [[time-to-expiration|DTE]] is the canonical window for short strangles (see [[options-premium-selling]] and [[theta-targeting]]); 60-180 DTE is more common for long strangles where the buyer needs time for the thesis to play out.
-2. **Pick a delta**. The standard [[tastytrade]] / [[itpm-trading-philosophy|ITPM]] short-strangle convention is **16 [[delta|delta]] per side** (~1 standard-deviation strikes, ~84% [[probability-of-touch|probability]] each leg expires OTM in isolation, ~70% probability both do). Long strangles are often bought closer (25-40 delta per side) to keep the breakeven moves attainable.
+2. **Pick a delta**. The standard tastytrade / [[itpm-trading-philosophy|ITPM]] short-strangle convention is **16 [[delta|delta]] per side** (~1 standard-deviation strikes, ~84% [[probability-of-touch|probability]] each leg expires OTM in isolation, ~70% probability both do). Long strangles are often bought closer (25-40 delta per side) to keep the breakeven moves attainable.
 3. **Sell or buy each leg** at the resulting strikes, on the same expiration cycle.
 4. **Net premium** = (call price + put price). Paid as a debit for long; received as a credit for short.
 5. **Breakevens at expiration** = upper strike + total premium (upside); lower strike − total premium (downside). The width between breakevens is wider than the structure's strike gap by exactly the premium paid or received.
@@ -83,7 +83,7 @@ A typical SPX 45-DTE 16-delta short strangle in a 16-VIX environment might sell 
 
 The long strangle is purchased when the trader expects a **larger move than IV implies**, with no strong directional view. Common contexts:
 
-- **Pre-earnings** on single-name stocks, expecting the post-announcement move to exceed the IV-implied straddle price. (Note: this is a contested edge; the [[earnings-volatility]] surface usually prices earnings well, and the post-announcement [[earnings-iv-crush|IV crush]] punishes the long unless the move is genuinely large.)
+- **Pre-earnings** on single-name stocks, expecting the post-announcement move to exceed the IV-implied straddle price. (Note: this is a contested edge; the earnings-volatility surface usually prices earnings well, and the post-announcement IV crush punishes the long unless the move is genuinely large.)
 - **Pre-event** for catalyst-driven setups -- FDA decisions, merger votes, central-bank meetings -- where the *direction* is unknown but a meaningful gap is likely.
 - **Cheap-vol regimes** where [[implied-volatility|IV]] is in the bottom decile of its 252-day range, the [[vix-term-structure|VIX term structure]] is depressed, and the trader believes the next regime change is more likely to expand vol than compress it further. See [[vix-august-2024-spike]] for the canonical recent example -- a long strangle held through that event paid out 8-15x its cost depending on strikes and DTE.
 - **Tail-risk hedge** for an otherwise-short-vol book -- a small allocation to [[long-vol-overlay|long strangles]] caps the [[volmageddon]]-style worst case.
@@ -166,7 +166,7 @@ def manage(position):
 - **Options chain with Greeks** -- strikes selected by delta, not price distance.
 - **[[implied-volatility|IV]] percentile / IV Rank** (252-day) -- the primary regime filter for both variants.
 - **[[vix-term-structure|VIX term structure]]** -- contango/backwardation state; backwardation generally vetoes new short strangles.
-- **[[earnings-calendar|Earnings calendar]] and macro calendar** (FOMC, CPI, NFP) -- catalyst timing for longs, event-avoidance for shorts.
+- **Earnings calendar and macro calendar** (FOMC, CPI, NFP) -- catalyst timing for longs, event-avoidance for shorts.
 - **Implied vs. historical realised move** for the catalyst class -- the long buyer's mispricing test.
 - **[[probability-of-touch|Probability of touch]]** -- roughly 2x the delta of the short strike; sizing input for shorts.
 
@@ -226,7 +226,7 @@ This is the typical long-strangle path: the **vega expansion** does most of the 
 
 ### Expectancy with realistic costs
 
-- **Short strangle (index, 16-delta, 45 DTE, managed at 50% / 21 DTE)**: practitioner studies ([[tastytrade]]-style) report win rates in the 80-90% range with positive expectancy before costs; the unconditional [[variance-risk-premium]] on SPX supports a net Sharpe in the **0.3-0.6** range after slippage, with severe negative skew. A single 2018- or 2020-class shock can return 1-3 years of accumulated theta. These figures are directionally consistent with the VRP literature but are **not independently backtested for this wiki** (frontmatter `backtest_status: untested`).
+- **Short strangle (index, 16-delta, 45 DTE, managed at 50% / 21 DTE)**: practitioner studies (tastytrade-style) report win rates in the 80-90% range with positive expectancy before costs; the unconditional [[variance-risk-premium]] on SPX supports a net Sharpe in the **0.3-0.6** range after slippage, with severe negative skew. A single 2018- or 2020-class shock can return 1-3 years of accumulated theta. These figures are directionally consistent with the VRP literature but are **not independently backtested for this wiki** (frontmatter `backtest_status: untested`).
 - **Long strangle (unconditional)**: negative expectancy -- the buyer pays the same VRP the seller collects, plus two bid-ask spreads each way. On weekly single-name options the spread alone can be 5-10% of the debit per side.
 - **Long strangle (conditional: bottom-decile IV, mispriced catalyst)**: positive skew with low win rate (~30-40% of entries profitable), where the winners (3-15x payoffs in vol shocks) must carry the bleed. The honest framing: this is a **payoff-shape trade**, not a high-Sharpe trade; its book-level value is largest as a hedge against a short-vol core.
 - **Cost overlay**: the frontmatter `breakeven_cost_bps: 25` reflects round-trip friction on liquid index strangles (SPX/SPY); single names can run 3-5x that, which is usually fatal to the long variant's expectancy.
@@ -235,7 +235,7 @@ This is the typical long-strangle path: the **vega expansion** does most of the 
 
 Even when the trader is "right" that vol will expand, the long strangle has three persistent enemies:
 
-1. **IV crush after the event** -- the same expansion that created the opportunity often reverses violently *the moment uncertainty resolves*. Buying a strangle the day before earnings and holding through the print is usually a losing trade because the post-print IV crush more than offsets the price move. See [[earnings-iv-crush]].
+1. **IV crush after the event** -- the same expansion that created the opportunity often reverses violently *the moment uncertainty resolves*. Buying a strangle the day before earnings and holding through the print is usually a losing trade because the post-print IV crush more than offsets the price move. See earnings-iv-crush.
 2. **Theta decay accelerates** as DTE shrinks. Short-dated long strangles must move *fast* to outrun the bleed.
 3. **Bid-ask drag**. Long strangles are paying the spread on entry *and* exit; on weekly options this can be 5-10% of the debit each way.
 
@@ -270,7 +270,7 @@ Index strangles (SPX, SPY, QQQ, RUT) are among the deepest options markets in th
 
 **Operator errors (the classic mistakes):**
 
-- **Buying long strangles into earnings** without modelling the [[earnings-iv-crush|IV crush]]. The straddle implied move usually prices the announcement reasonably well; the long buyer needs a *bigger* move to win, not just a move.
+- **Buying long strangles into earnings** without modelling the IV crush. The straddle implied move usually prices the announcement reasonably well; the long buyer needs a *bigger* move to win, not just a move.
 - **Selling short strangles in a 12-VIX regime** to "buy theta" because the book is below target. This is the [[theta-targeting#The Theta Trap|theta trap]] -- the [[variance-risk-premium]] is thin to negative at extreme low-vol levels, and the next gamma shock will unwind years of harvested theta.
 - **Ignoring earnings or events on single-name short strangles**. A pre-earnings short strangle that gaps through a strike can produce a loss many multiples of the credit collected.
 - **Not laddering DTE**. Concentrating an entire short-strangle book in one expiration cycle is a single-point-of-failure for [[gamma-explosion|gamma]] near expiry.
@@ -311,7 +311,6 @@ Index strangles (SPX, SPY, QQQ, RUT) are among the deepest options markets in th
 ## Sources
 
 - [[book-option-volatility-and-pricing]] -- Natenberg on the structural Greeks of strangles and their relationship to straddles.
-- [[tastytrade]] -- the published research archive on 16-delta / 45-DTE / 50%-profit short strangles.
 - [[itpm-trading-philosophy]] -- institutional treatment of the strangle inside a [[options-portfolio-construction|portfolio]] context.
 - [[options-premium-selling]] -- the variance-risk-premium framework that justifies the short variant.
 - Bakshi, G. & Kapadia, N. (2003), "Delta-Hedged Gains and the Negative Market Volatility Risk Premium", *Review of Financial Studies* -- the academic anchor for the variance risk premium that drives the short variant's expectancy.

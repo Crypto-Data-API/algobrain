@@ -20,10 +20,10 @@ crowding_risk: medium
 expected_sharpe: 0.9
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 18
-related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[ivr]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[tastytrade]]", "[[tom-sosnoff]]", "[[itpm-framework]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[volatility-regime-classification]]"]
+related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[ivr]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[tom-sosnoff]]", "[[itpm-framework]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[volatility-regime-classification]]"]
 ---
 
-Systematic premium selling is the **mechanical, rules-based implementation of [[options-premium-selling]]**: 30-45 DTE index strangles, 16-delta short strikes, mechanical entries gated by [[ivr|IV Rank]], exits at 50% of max profit or 21 DTE (whichever comes first), with an [[itpm-framework|ITPM-style]] risk-discipline overlay including a permanent [[long-vol-overlay]]. The rule set is the [[tastytrade]] / [[tom-sosnoff]] research lineage cleaned up with institutional risk controls. This is the systematic implementation referenced in [[long-vol-vs-short-vol]]'s synthesis section and recommended for traders who do not want to (or cannot reliably) make discretionary calls under stress.
+Systematic premium selling is the **mechanical, rules-based implementation of [[options-premium-selling]]**: 30-45 DTE index strangles, 16-delta short strikes, mechanical entries gated by [[ivr|IV Rank]], exits at 50% of max profit or 21 DTE (whichever comes first), with an [[itpm-framework|ITPM-style]] risk-discipline overlay including a permanent [[long-vol-overlay]]. The rule set is the tastytrade / [[tom-sosnoff]] research lineage cleaned up with institutional risk controls. This is the systematic implementation referenced in [[long-vol-vs-short-vol]]'s synthesis section and recommended for traders who do not want to (or cannot reliably) make discretionary calls under stress.
 
 ## Edge source
 
@@ -256,7 +256,6 @@ The design intent is explicit: the engine harvests the [[variance-risk-premium|V
 
 ## Sources
 
-- [[tastytrade]] research archive -- the canonical empirical foundation for the rule set.
 - [[tom-sosnoff]] / Tony Battista interviews and books -- the mechanical-rules philosophy.
 - Carr, Peter and Wu, Liuren. "Variance Risk Premiums" (2009).
 - Bondarenko, Oleg. "Why Are Put Options So Expensive?" (2014).
@@ -270,7 +269,7 @@ The design intent is explicit: the engine harvests the [[variance-risk-premium|V
 - [[long-vol-overlay]] -- the mandatory overlay.
 - [[long-vol-vs-short-vol]] -- the comparison context.
 - [[short-strangle]], [[iron-condor]], [[short-put-spread]] -- the structures used.
-- [[tastytrade]], [[tom-sosnoff]] -- popularizers of the rule set.
+- tastytrade, [[tom-sosnoff]] -- popularizers of the rule set.
 - [[ivr]] -- the entry gate metric.
 - [[vega-budgeting]] -- the sizing framework.
 - [[options-portfolio-construction]] -- portfolio integration.
@@ -278,6 +277,6 @@ The design intent is explicit: the engine harvests the [[variance-risk-premium|V
 - [[itpm-framework]] -- institutional discipline overlay.
 - [[volatility-trading]] -- the broader vol-strategy family this sits inside.
 - [[cash-secured-puts]] -- a single-leg, conservative short-vol cousin.
-- [[spx-puts]], [[put-tree]] -- candidate structures for the mandatory long-vol overlay.
+- spx-puts, [[put-tree]] -- candidate structures for the mandatory long-vol overlay.
 - [[market-regime]] -- the regime that gates entries and drives the left tail.
 - [[theta]], [[vega]], [[delta]], [[gamma]] -- the Greeks the rule set bounds.

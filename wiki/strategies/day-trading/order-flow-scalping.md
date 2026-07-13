@@ -38,7 +38,7 @@ Order flow scalping reads **live market order data** to identify institutional b
 1. **Imbalance Detection:** On footprint charts, look for **diagonal imbalances** where the bid volume at one price level is 3x+ greater than the ask volume at the adjacent level (or vice versa). Stacked imbalances across 3+ price levels signal strong institutional participation.
 2. **Delta Divergence:** When price makes a new low but delta is rising (more aggressive buyers than sellers despite price dropping), it signals absorption -- institutions are buying the dip. Enter long. The reverse applies for shorts.
 3. **CVD Confirmation:** Cumulative Volume Delta trending in the direction of the intended trade confirms that net aggressive flow supports the setup. Divergence between CVD and price is a powerful reversal signal.
-4. **Absorption Entry:** Watch for large resting limit orders (visible on the DOM or heatmap tools like [[bookmap]]) absorbing aggressive market orders without price moving. When the aggressive flow exhausts and the resting orders hold, enter in the direction of the resting order side.
+4. **Absorption Entry:** Watch for large resting limit orders (visible on the DOM or heatmap tools like bookmap) absorbing aggressive market orders without price moving. When the aggressive flow exhausts and the resting orders hold, enter in the direction of the resting order side.
 5. **Breakout Flow:** When price approaches a key level and footprint shows a surge of aggressive buyers (market buy orders) stacking up, enter with the flow expecting a breakout of that level.
 
 ### Exit Rules
@@ -91,7 +91,7 @@ Order flow scalping reads **live market order data** to identify institutional b
 - **Extremely steep learning curve** -- most traders need 6+ months of dedicated screen time before profitability
 - Requires specialized (and often expensive) software: Bookmap, Sierra Chart, Jigsaw, Exocharts
 - Data feeds with sufficient granularity (tick-level, market-by-order) can be costly
-- Not applicable to [[forex]] spot (decentralized, no centralized order book) or most [[stocks]] (dark pools obscure true flow)
+- Not applicable to [[forex]] spot (decentralized, no centralized order book) or most stocks (dark pools obscure true flow)
 - Spoofing and layering by algorithms create false signals -- large displayed orders may be pulled before execution
 - Mentally exhausting; requires intense concentration for extended periods
 - Difficult to backtest systematically; order flow is inherently real-time and contextual

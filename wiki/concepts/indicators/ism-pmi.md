@@ -67,7 +67,7 @@ The Prices Paid sub-index carries additional weight in inflationary environments
 
 ## Relationship to the Business Cycle
 
-The ISM PMI is a core input in [[business-cycle]] phase identification. In [[sector-rotation]] strategies, a PMI crossing above 50 from below signals early expansion (favor [[gics-sectors|cyclical sectors]] like Technology and Consumer Discretionary), while a PMI crossing below 50 from above signals contraction (favor defensive sectors like Utilities and Healthcare). The rate of change matters as much as the level -- a PMI at 52 but falling carries different implications than a PMI at 52 and rising.
+The ISM PMI is a core input in [[business-cycle]] phase identification. In [[sector-rotation]] strategies, a PMI crossing above 50 from below signals early expansion (favor cyclical sectors like Technology and Consumer Discretionary), while a PMI crossing below 50 from above signals contraction (favor defensive sectors like Utilities and Healthcare). The rate of change matters as much as the level -- a PMI at 52 but falling carries different implications than a PMI at 52 and rising.
 
 ## Sources
 

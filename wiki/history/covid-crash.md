@@ -11,7 +11,7 @@ markets_affected: [stocks, options, credit, treasuries, oil, crypto]
 impact: high
 verified: true
 sources_count: 7
-related: ["[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[gfc]]", "[[black-monday]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[bill-ackman]]", "[[2020-03-ackman-pandemic-cds-trade]]", "[[circuit-breakers]]", "[[federal-reserve]]", "[[treasury-basis-trade]]", "[[crisis-alpha]]", "[[long-vol-overlay]]", "[[variance-risk-premium]]", "[[volatility-regime-classification]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[gfc]]", "[[black-monday]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[2020-03-ackman-pandemic-cds-trade]]", "[[circuit-breakers]]", "[[federal-reserve]]", "[[treasury-basis-trade]]", "[[crisis-alpha]]", "[[long-vol-overlay]]", "[[variance-risk-premium]]", "[[volatility-regime-classification]]"]
 ---
 
 The COVID crash of **February-March 2020** was the fastest 30%+ S&P 500 drawdown in history: SPX fell 33.9% from its **February 19, 2020** intraday high of 3393.52 to its **March 23, 2020** intraday low of 2191.86 in just 23 trading sessions. The CBOE [[vix-futures|VIX]] index closed at **82.69 on March 16, 2020**, the highest closing print on record (eclipsing the 80.86 close on November 20, 2008 during the [[gfc]]). Four [[circuit-breakers|Level 1 market-wide circuit breakers]] tripped in eight sessions. [[universa-investments|Universa Investments]] reportedly returned **+4,144%** for the month on its tail-risk strategy, the canonical empirical demonstration of the long-vol case. The episode is the single largest vol monetization of the modern era and the reference event for [[long-vol-vs-short-vol|long-vol versus short-vol]] book performance.
@@ -78,7 +78,7 @@ Vol on the way down was extreme but rational given the realized variance: SPX ha
 
 **Survivors and beneficiaries.**
 - **[[universa-investments]]** -- reportedly returned **+4,144% for March 2020** on the tail-risk overlay capital. For a client with a 3.3% allocation to Universa and 96.7% in equities, the portfolio-level math was approximately +4,144% × 3.3% ≈ +137% contribution from the overlay versus -34% × 96.7% ≈ -33% from the equity book, for a roughly **+104% net portfolio month** -- the textbook empirical case for [[tail-risk-hedging]].
-- **[[bill-ackman]] / Pershing Square.** Hedged the firm's portfolio in late February with **$27M of CDS protection on $71B notional of investment-grade and high-yield indices**, monetized for **$2.6B in late March** -- a roughly 100x return on the hedge. See [[2020-03-ackman-pandemic-cds-trade]].
+- **bill-ackman / Pershing Square.** Hedged the firm's portfolio in late February with **$27M of CDS protection on $71B notional of investment-grade and high-yield indices**, monetized for **$2.6B in late March** -- a roughly 100x return on the hedge. See [[2020-03-ackman-pandemic-cds-trade]].
 - **CTAs and managed-futures.** Trend models had been long stocks, long bonds, short oil; the rapid reversal hurt early but the late-March short-equity / long-bond positioning monetized through April-May. Full-year 2020 was strong for trend-following.
 - **Long-vol overlay sleeves.** The [[long-vol-overlay]] configuration described in [[long-vol-vs-short-vol]] absorbed the equity drawdown and freed allocators to **buy the lows** rather than be forced sellers.
 - **[[mark-spitznagel]]** publicly used the March 2020 result to argue that the prior decade of premium bleed was inexpensive insurance properly priced.
@@ -107,7 +107,7 @@ The episode also reinforced -- in a way Volmageddon had only sketched -- that vo
 - [[long-vol-vs-short-vol]] -- the framework into which the event slots
 - [[universa-investments]], [[mark-spitznagel]], [[nassim-taleb]] -- the canonical long-vol survivors
 - [[tail-risk-hedging]] -- the strategy validated by the event
-- [[bill-ackman]], [[2020-03-ackman-pandemic-cds-trade]] -- the CDS hedge case study
+- bill-ackman, [[2020-03-ackman-pandemic-cds-trade]] -- the CDS hedge case study
 - [[volmageddon]], [[vix-august-2024-spike]] -- adjacent vol shocks
 - [[gfc]], [[black-monday]] -- prior reference events
 - [[circuit-breakers]] -- the market-wide halt mechanism that triggered four times

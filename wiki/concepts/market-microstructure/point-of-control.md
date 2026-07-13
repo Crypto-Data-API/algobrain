@@ -29,7 +29,7 @@ There are two closely related constructs worth distinguishing:
 2. Sum the volume in each bucket.
 3. The bucket with the maximum summed volume is the POC.
 
-Because the POC depends on the bucket size and the period, the same data can yield slightly different POCs on different settings. Platforms such as [[sierra-chart]], [[ninjatrader]], [[quantower]], [[bookmap]] and [[tradingview]] let the user set the row size and the profile range (session, composite, or fixed/visible range).
+Because the POC depends on the bucket size and the period, the same data can yield slightly different POCs on different settings. Platforms such as [[sierra-chart]], [[ninjatrader]], quantower, bookmap and tradingview let the user set the row size and the profile range (session, composite, or fixed/visible range).
 
 ## Session POC vs developing POC
 

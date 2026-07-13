@@ -28,7 +28,7 @@ The following "reporting entities" must comply with the AML/CTF Act:
 | Entity Type | Examples |
 |-------------|---------|
 | **Banks and ADIs** | CBA, Westpac, NAB, ANZ, credit unions, building societies |
-| **Securities dealers** | [[commsec]], [[selfwealth]], [[nabtrade]], [[ig-markets]], [[cmc-markets]] |
+| **Securities dealers** | commsec, selfwealth, nabtrade, ig-markets, cmc-markets |
 | **Insurance companies** | General insurers, life insurers |
 | **Superannuation providers** | Industry funds, retail funds (APRA-regulated) |
 | **Gambling providers** | Casinos, online betting operators |

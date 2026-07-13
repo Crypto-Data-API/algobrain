@@ -100,7 +100,7 @@ For institutional crypto-options desks, the Position Builder is usually used **a
 Three structural reasons make the Position Builder dominant in crypto in a way no equivalent tool dominates equity options:
 
 1. **Deribit's flow concentration.** When a single venue clears ~85% of global BTC and ETH options volume, the venue's own pricing model becomes the de facto reference. There is no equivalent for SPX options — flow is fragmented across multiple Cboe exchanges and OTC venues, no single venue defines the surface.
-2. **No retail equity-options analogue is free with this depth.** [[tastytrade-platform|tastytrade]] and [[thinkorswim]] are free but tied to a brokerage account; standalone tools at this depth ([[optionnet-explorer]], [[orats]], [[livevol]]) all charge. The Position Builder being free, no-login, and exchange-canonical is genuinely unusual.
+2. **No retail equity-options analogue is free with this depth.** [[tastytrade-platform|tastytrade]] and [[thinkorswim]] are free but tied to a brokerage account; standalone tools at this depth ([[optionnet-explorer]], orats, livevol) all charge. The Position Builder being free, no-login, and exchange-canonical is genuinely unusual.
 3. **Crypto-options trader sophistication is high but capital deployed is small.** The active retail-and-small-shop crypto-options trader needs institutional-grade analytics on a retail-grade budget. The Position Builder fills that gap exactly.
 
 ## Related

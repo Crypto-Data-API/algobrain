@@ -11,7 +11,7 @@ website: "https://www.pring.com"
 related: ["[[kst]]", "[[know-sure-thing]]", "[[momentum]]", "[[rate-of-change]]", "[[john-murphy]]", "[[intermarket-analysis]]", "[[technical-analysis]]", "[[market-regime]]", "[[sector-rotation]]"]
 ---
 
-Martin J. Pring is a British-born technical analyst, author, and money manager best known for *Technical Analysis Explained* — often called "the bible of technical analysis" and required reading for the CMT (Chartered Market Technician) Level I exam — and for creating the **[[know-sure-thing|KST (Know Sure Thing)]]** momentum oscillator. His six-stage business-cycle framework remains one of the most widely used top-down models for rotating between [[stocks]], [[bonds]], and [[commodities]].
+Martin J. Pring is a British-born technical analyst, author, and money manager best known for *Technical Analysis Explained* — often called "the bible of technical analysis" and required reading for the CMT (Chartered Market Technician) Level I exam — and for creating the **[[know-sure-thing|KST (Know Sure Thing)]]** momentum oscillator. His six-stage business-cycle framework remains one of the most widely used top-down models for rotating between stocks, [[bonds]], and [[commodities]].
 
 ## Key Facts
 
@@ -58,7 +58,7 @@ The daily/long-term KST construction uses four [[rate-of-change|ROC]] components
 A derivative indicator that sums short-, intermediate-, and long-term KSTs into a single series intended to peak and trough with the price itself, used to identify primary trend reversals.
 
 ### Six-Stage Business Cycle
-Pring divides the cycle into six stages defined by the **sequential turning points of [[bonds]], [[stocks]], and [[commodities]]** — bonds bottom first (as the economy weakens and rates fall), then stocks, then commodities (as the recovery matures and inflation builds). The three asset classes peak in the same order on the way down. Each stage favors a different asset mix — an early, practical formulation of regime-based allocation (see [[market-regime]] and [[sector-rotation]]):
+Pring divides the cycle into six stages defined by the **sequential turning points of [[bonds]], stocks, and [[commodities]]** — bonds bottom first (as the economy weakens and rates fall), then stocks, then commodities (as the recovery matures and inflation builds). The three asset classes peak in the same order on the way down. Each stage favors a different asset mix — an early, practical formulation of regime-based allocation (see [[market-regime]] and [[sector-rotation]]):
 
 | Stage | Bonds | Stocks | Commodities | Economy | Bias |
 |---|---|---|---|---|---|

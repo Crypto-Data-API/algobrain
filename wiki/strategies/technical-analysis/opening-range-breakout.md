@@ -77,7 +77,7 @@ The Opening Range Breakout (ORB) strategy marks the **high and low of the first 
 
 - Clear, objective rules with defined entry, stop, and target levels
 - Captures the most liquid and volatile part of the trading day
-- Works well on [[stocks]] and [[futures]] with regular session opens
+- Works well on stocks and [[futures]] with regular session opens
 - Can be combined with [[vwap-trading]] for additional confluence
 - Simple enough for intermediate traders; no complex indicators required
 

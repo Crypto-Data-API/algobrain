@@ -74,7 +74,7 @@ In commodity futures, volume dynamics are closely tied to fundamental data relea
 
 - **Energy markets**: Volume spikes around [[eia|EIA]] weekly petroleum status reports (Wednesday 10:30 AM ET) and monthly Short-Term Energy Outlook. [[crude-oil]] and [[natural-gas]] routinely see 2-3x average volume on EIA release days.
 - **Agricultural markets**: [[usda|USDA]] WASDE (World Agricultural Supply and Demand Estimates) reports, released monthly, trigger major volume surges in [[corn]], [[wheat]], [[soybeans]], and soft [[commodities]]. USDA planting intention reports (March) and crop production estimates (August-October) are the highest-volume events in agricultural futures.
-- **Energy policy events**: [[opec|OPEC]]+ meeting decisions on production quotas create volume spikes across the entire energy complex.
+- **Energy policy events**: OPEC+ meeting decisions on production quotas create volume spikes across the entire energy complex.
 
 Confirming breakouts with volume is even more critical in commodity markets than in equities because of lower average liquidity. A breakout above resistance on a commodity chart that occurs on low volume is more likely to be a false breakout than the same pattern in a highly liquid equity market. Conversely, high-volume breakouts in commodities tend to produce larger and more persistent follow-through because the lower liquidity amplifies the price impact of new participants entering.
 

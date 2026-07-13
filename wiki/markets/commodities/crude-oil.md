@@ -6,12 +6,12 @@ updated: 2026-06-12
 status: good
 tags: [commodities, energy, futures]
 aliases: ["Crude Oil", "Oil", "WTI", "Brent Crude", "Petroleum"]
-related: ["[[natural-gas]]", "[[gasoline]]", "[[heating-oil]]", "[[coal]]", "[[commodities]]", "[[opec]]", "[[eia]]", "[[cme-group]]", "[[intercontinental-exchange]]", "[[crack-spread]]", "[[contango]]", "[[backwardation]]", "[[geopolitical-risk-premium]]", "[[inventory-cycle-analysis]]", "[[eia-data]]"]
+related: ["[[natural-gas]]", "[[gasoline]]", "[[heating-oil]]", "[[coal]]", "[[commodities]]", "[[eia]]", "[[cme-group]]", "[[crack-spread]]", "[[contango]]", "[[backwardation]]", "[[geopolitical-risk-premium]]", "[[inventory-cycle-analysis]]", "[[eia-data]]"]
 ---
 
 # Crude Oil
 
-Crude oil is the most important commodity market by dollar volume and the backbone of global energy markets. It serves as the primary input for transportation fuels, petrochemicals, and plastics, and its price ripples through virtually every sector of the global economy. Two benchmark grades dominate pricing: **WTI (West Texas Intermediate)** traded on [[cme-group|NYMEX]] and **Brent Crude** traded on [[intercontinental-exchange|ICE]]. (Source: [[2026-04-14-commodities-research-framework]])
+Crude oil is the most important commodity market by dollar volume and the backbone of global energy markets. It serves as the primary input for transportation fuels, petrochemicals, and plastics, and its price ripples through virtually every sector of the global economy. Two benchmark grades dominate pricing: **WTI (West Texas Intermediate)** traded on [[cme-group|NYMEX]] and **Brent Crude** traded on ICE. (Source: [[2026-04-14-commodities-research-framework]])
 
 ## Benchmark Grades
 
@@ -26,7 +26,7 @@ Crude oil is the most important commodity market by dollar volume and the backbo
 
 ### Brent Crude
 
-- **Exchange**: [[intercontinental-exchange|ICE]] — ticker **B**
+- **Exchange**: ICE — ticker **B**
 - **Delivery**: Waterborne delivery from North Sea fields (Brent, Forties, Oseberg, Ekofisk, Troll — the "BFOET" basket)
 - **Quality**: Light and sweet, though slightly heavier than WTI
 - **Primary use**: Global pricing reference — approximately **60% of the world's crude oil** is priced relative to Brent
@@ -40,7 +40,7 @@ The price difference between WTI and Brent is known as the **geographic spread**
 
 | Driver | Mechanism | Data Source |
 |--------|-----------|-------------|
-| [[opec]] production decisions | Supply management via quotas; OPEC+ (with Russia) controls ~40% of global output | OPEC monthly reports, JMMC meetings |
+| opec production decisions | Supply management via quotas; OPEC+ (with Russia) controls ~40% of global output | OPEC monthly reports, JMMC meetings |
 | [[eia]] inventory data | Weekly U.S. petroleum stocks — surprise vs consensus moves the market | Wednesday 10:30 AM ET release |
 | Geopolitics | Strait of Hormuz (~20% of global supply), sanctions (Iran, Russia, Venezuela), wars | Real-time news flow |
 | USD strength | Oil priced in USD — stronger dollar makes oil more expensive for non-USD buyers, suppressing demand | [[dxy]], Fed policy |
@@ -55,13 +55,13 @@ The price difference between WTI and Brent is known as the **geographic spread**
 ### Futures
 
 - **WTI (CL)**: [[cme-group|NYMEX]], 1,000 barrels/contract, monthly expiry, physically delivered to Cushing
-- **Brent (B/BZ)**: [[intercontinental-exchange|ICE]], 1,000 barrels, cash-settled against ICE Brent Index
+- **Brent (B/BZ)**: ICE, 1,000 barrels, cash-settled against ICE Brent Index
 - **E-mini Crude (QM)**: 500 barrels, electronically traded, popular with smaller accounts
 - **Micro WTI (MCL)**: 100 barrels, introduced for retail accessibility
 
 ### Options
 
-Actively traded options on CL and Brent futures. Key for hedging and strategies like [[crack-spread]]. Weekly options available for event-driven trading around [[eia]] releases and [[opec]] meetings.
+Actively traded options on CL and Brent futures. Key for hedging and strategies like [[crack-spread]]. Weekly options available for event-driven trading around [[eia]] releases and opec meetings.
 
 ### Spreads
 
@@ -106,7 +106,6 @@ The shape of the crude oil curve is a critical signal for [[trend-following-cta]
 
 ### Structural Risks
 
-- [[opec]] cartel dynamics — production cut compliance varies, member cheating is endemic
 - [[geopolitical-risk-premium]] — wars, sanctions, chokepoints (Strait of Hormuz, Red Sea, Suez Canal)
 - Energy transition — long-term demand destruction from EVs, renewables, policy changes
 - [[storage-economics]] — physical constraints can decouple futures from economic fundamentals

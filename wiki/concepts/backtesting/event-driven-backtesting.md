@@ -81,7 +81,7 @@ Several open-source Python frameworks implement event-driven backtesting:
 | [[quantconnect]] | QuantConnect | Cloud-hosted LEAN engine, multi-asset, free data | Proprietary platform lock-in |
 | Custom (Hilpisch) | DIY | Full control, educational value | No community, must maintain yourself |
 
-Hilpisch builds a custom event loop in *[[python-for-algorithmic-trading|Python for Algorithmic Trading]]* using [[oanda|OANDA]] and [[fxcm|FXCM]] APIs, which serves both as an educational exercise and as a deployable system for forex trading (Source: [[book-python-for-algorithmic-trading]]).
+Hilpisch builds a custom event loop in *[[python-for-algorithmic-trading|Python for Algorithmic Trading]]* using OANDA and FXCM APIs, which serves both as an educational exercise and as a deployable system for forex trading (Source: [[book-python-for-algorithmic-trading]]).
 
 ## When to Use
 

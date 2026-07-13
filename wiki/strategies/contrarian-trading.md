@@ -17,12 +17,12 @@ crowding_risk: low
 data_required: [ohlcv-daily, sentiment, positioning-data, fundamentals]
 min_capital_usd: 5000
 capacity_usd: 50000000
-related: ["[[edge-taxonomy]]", "[[mean-reversion]]", "[[sentiment]]", "[[behavioral-finance]]", "[[reflexivity]]", "[[value-investing]]", "[[capitulation]]", "[[noise-trader-risk]]", "[[narrative-trading]]", "[[position-sizing]]", "[[limits-to-arbitrage]]"]
+related: ["[[edge-taxonomy]]", "[[mean-reversion]]", "[[sentiment]]", "[[behavioral-finance]]", "[[reflexivity]]", "[[capitulation]]", "[[noise-trader-risk]]", "[[narrative-trading]]", "[[position-sizing]]", "[[limits-to-arbitrage]]"]
 ---
 
 # Contrarian Trading
 
-**Contrarian trading** is the practice of taking positions *against* the prevailing crowd — buying when others are fearful and selling when others are greedy. The thesis is that markets overreact to news and emotion, herding to [[sentiment]] extremes that push price away from fair value, and that these extremes mean-revert. Contrarianism spans a spectrum from **technical sentiment fades** (buying short-term oversold panic for a bounce) to **deep value contrarianism** (accumulating hated, washed-out assets for a multi-year re-rating). It is the natural opposite of [[momentum]] and [[narrative-trading]], and is closely allied with [[mean-reversion]] and [[value-investing]].
+**Contrarian trading** is the practice of taking positions *against* the prevailing crowd — buying when others are fearful and selling when others are greedy. The thesis is that markets overreact to news and emotion, herding to [[sentiment]] extremes that push price away from fair value, and that these extremes mean-revert. Contrarianism spans a spectrum from **technical sentiment fades** (buying short-term oversold panic for a bounce) to **deep value contrarianism** (accumulating hated, washed-out assets for a multi-year re-rating). It is the natural opposite of [[momentum]] and [[narrative-trading]], and is closely allied with [[mean-reversion]] and value-investing.
 
 ## Edge source
 
@@ -121,7 +121,7 @@ Contrarian trading has **moderate-to-good capacity** because entries are spread 
 - Naturally diversifying — negatively correlated to [[momentum]] / [[narrative-trading]] / trend strategies
 - Often favorable execution (providing liquidity into panic) and a higher base win rate
 - Strong theoretical grounding in [[behavioral-finance]] overreaction and [[mean-reversion]]
-- Scales from short-term sentiment fades to long-horizon [[value-investing]]
+- Scales from short-term sentiment fades to long-horizon value-investing
 - Low [[crowding|crowding]] relative to momentum — being contrarian is, by construction, uncrowded
 
 ## Disadvantages
@@ -148,7 +148,6 @@ General market knowledge; no specific wiki source ingested yet.
 - [[sentiment]] — the extremes the contrarian fades
 - [[behavioral-finance]] — the overreaction/herding root edge
 - [[capitulation]] — the panic that marks the best entries
-- [[value-investing]] — the long-horizon end of the contrarian spectrum
 - [[noise-trader-risk]] / [[limits-to-arbitrage]] — why timing is the hard part
 - [[momentum]] / [[narrative-trading]] — the opposite stance contrarians fade
 - [[reflexivity]] — the self-reinforcing extremes that overshoot

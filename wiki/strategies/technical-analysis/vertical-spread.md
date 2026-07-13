@@ -20,7 +20,7 @@ crowding_risk: medium
 expected_sharpe: 0.4
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 30
-related: ["[[call-option]]", "[[put-option]]", "[[equity-options]]", "[[covered-call]]", "[[iron-condor]]", "[[options-overview]]", "[[options]]", "[[credit-spread]]", "[[call-spread]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[theta-decay]]", "[[position-sizing]]", "[[support-and-resistance]]", "[[implied-volatility]]"]
+related: ["[[call-option]]", "[[put-option]]", "[[covered-call]]", "[[iron-condor]]", "[[options-overview]]", "[[options]]", "[[credit-spread]]", "[[call-spread]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[theta-decay]]", "[[position-sizing]]", "[[support-and-resistance]]", "[[implied-volatility]]"]
 ---
 
 # Vertical Spread
@@ -183,7 +183,7 @@ def roll(spread):
 - **Options chain with Greeks** -- strike selection by delta (credit side) and by price target (debit side).
 - **[[implied-volatility|IV]] Rank / percentile** -- regime selector: high IV favours credit structures, low IV favours debit structures.
 - **[[support-and-resistance|Support/resistance]] levels** -- short-strike placement for credit spreads; targets for debit spreads.
-- **[[earnings-calendar|Earnings calendar]]** and ex-dividend dates -- event and assignment-risk filters.
+- **Earnings calendar** and ex-dividend dates -- event and assignment-risk filters.
 - **Daily OHLCV** -- trend context and technical invalidation levels.
 - **Open interest and bid-ask width** at candidate strikes -- liquidity screen; reject markets wider than ~2% of the underlying-adjusted option price.
 

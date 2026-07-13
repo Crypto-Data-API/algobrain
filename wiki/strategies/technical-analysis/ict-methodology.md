@@ -215,7 +215,7 @@ The free YouTube content alone constitutes one of the most extensive retail trad
 
 ICT's influence on the retail trading community has been enormous. The [[smart-money-concepts]] framework used by millions of traders is derived almost entirely from ICT's teachings, though many practitioners learned SMC secondhand through other educators who repackaged ICT concepts. Terms like "order block," "fair value gap," and "liquidity sweep" were obscure before ICT popularized them -- they are now standard vocabulary in [[forex]] and [[crypto]] trading communities.
 
-The methodology has spawned an entire ecosystem of derivative content creators, indicator developers, and trading communities. Prop trading firms like [[topstep]] and [[ftmo]] have seen significant adoption of ICT-based strategies among their evaluation participants.
+The methodology has spawned an entire ecosystem of derivative content creators, indicator developers, and trading communities. Prop trading firms like topstep and ftmo have seen significant adoption of ICT-based strategies among their evaluation participants.
 
 ## Criticisms and controversies
 

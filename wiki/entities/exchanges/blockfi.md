@@ -10,7 +10,7 @@ founded: 2017
 headquarters: "Jersey City, New Jersey, USA (defunct)"
 website: "https://www.blockfi.com"
 aliases: ["BlockFi", "BlockFi Inc."]
-related: ["[[ftx]]", "[[crypto-winter]]", "[[terra-luna]]", "[[voyager-digital]]", "[[self-custody]]", "[[alameda-research]]", "[[celsius]]", "[[counterparty-risk]]"]
+related: ["[[ftx]]", "[[crypto-winter]]", "[[terra-luna]]", "[[voyager-digital]]", "[[self-custody]]", "[[alameda-research]]", "[[counterparty-risk]]"]
 ---
 
 # BlockFi
@@ -74,7 +74,6 @@ The recovery was driven less by BlockFi's own balance sheet than by the dramatic
 - [[ftx]] -- The exchange whose collapse triggered BlockFi's bankruptcy
 - [[alameda-research]] -- Borrower of customer assets and settlement counterparty
 - [[voyager-digital]] -- Another crypto lender that collapsed in 2022
-- [[celsius]] -- Peer CeFi lender that failed in 2022
 - [[crypto-winter]] -- The broader bear market context
 - [[self-custody]] -- The alternative to centralized lending platforms
 - [[aave]] -- Decentralized lending as a transparent alternative

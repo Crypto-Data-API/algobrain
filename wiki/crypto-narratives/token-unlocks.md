@@ -158,7 +158,6 @@ Aggregated across all three archetypes — the feature set a quant would build a
 - [[float]]
 - [[perpetual-futures]]
 - [[funding-rate]]
-- [[dilution]]
 - [[market-microstructure]]
 - [[behavioral-finance]]
 

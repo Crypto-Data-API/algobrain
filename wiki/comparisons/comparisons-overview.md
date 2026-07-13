@@ -19,8 +19,6 @@ Every page aims to be objective, name the contexts where each option wins, and l
 - [[crypto-vs-forex]] — On-chain assets vs foreign exchange
 - [[bitcoin-vs-ethereum]] — The two largest crypto assets
 - [[bull-vs-bear-market]] — Regime characteristics and positioning
-- [[value-vs-growth-investing]] — The two classic equity-style factors
-- [[active-vs-passive-investing]] — Stock-picking vs indexing
 
 ## Instruments & Trade Structures
 
@@ -46,13 +44,11 @@ Every page aims to be objective, name the contexts where each option wins, and l
 ## Exchanges, Brokers & Venues
 
 - [[binance-vs-coinbase]] — Two dominant crypto exchanges
-- [[nyse-vs-nasdaq]] — The two major US equity exchanges
 - [[cex-vs-dex]] — Centralized vs decentralized exchanges
 - [[centralized-vs-decentralized-finance]] — CeFi vs DeFi at the system level
 - [[hyperliquid-vs-dydx-vs-gmx]] — On-chain perp DEX shootout
 - [[hyperliquid-vs-asterdex-vs-tiger-brokers]] — Perp DEX vs hybrid broker
 - [[alpaca-vs-hyperliquid]] — API-first equity broker vs on-chain perps
-- [[robinhood-vs-interactive-brokers]] — Retail vs professional brokerages
 - [[polymarket-vs-kalshi]] — Decentralized vs CFTC-regulated prediction markets
 
 ## Indicators & Analysis Tools

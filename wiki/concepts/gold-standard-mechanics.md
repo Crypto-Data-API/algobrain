@@ -9,7 +9,7 @@ aliases: ["Classical Gold Standard", "Gold Standard"]
 domain: [forex, market-microstructure, history, macro]
 prerequisites: ["[[forex-basics]]", "[[fx-spot]]", "[[central-banks]]"]
 difficulty: intermediate
-related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[mint-parity-arbitrage]]", "[[bretton-woods]]", "[[nixon-shock]]", "[[book-golden-fetters]]", "[[rothschild-family]]", "[[baring-brothers]]", "[[overend-gurney]]", "[[covered-interest-arbitrage]]", "[[historical-cable-arbitrage]]", "[[telegraph-impact-on-arbitrage]]"]
+related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[mint-parity-arbitrage]]", "[[bretton-woods]]", "[[nixon-shock]]", "[[book-golden-fetters]]", "[[covered-interest-arbitrage]]", "[[historical-cable-arbitrage]]", "[[telegraph-impact-on-arbitrage]]"]
 ---
 
 # Gold Standard Mechanics
@@ -67,8 +67,8 @@ In practice central banks accelerated the adjustment through discount-rate polic
 
 Under classical gold standard central banks were expected to reinforce the price-specie-flow mechanism:
 
-- **Gold outflow** → raise the [[discount-rate]] → attract short-term capital via higher yields, tighten domestic credit, damp prices.
-- **Gold inflow** → lower the [[discount-rate]] → release gold abroad via lower yields, loosen domestic credit, allow prices to rise.
+- **Gold outflow** → raise the discount-rate → attract short-term capital via higher yields, tighten domestic credit, damp prices.
+- **Gold inflow** → lower the discount-rate → release gold abroad via lower yields, loosen domestic credit, allow prices to rise.
 
 Compliance was imperfect — the [[bank-of-england]] followed the rules most faithfully (earning it the label "conductor of the international orchestra"); France and Germany often sterilized gold flows to protect domestic economies.
 
@@ -92,7 +92,7 @@ For anyone studying historical [[forex]] microstructure, the gold standard expla
 
 - Why 19th-century FX volatility was an order of magnitude below post-1971 volatility — the gold points pinned rates inside a ~1% band.
 - Why [[covered-interest-arbitrage]] only becomes interesting under fiat — under the gold standard, interest-rate differentials were arbitraged primarily via gold movement, not forward FX.
-- Why [[rothschild-family]], [[baring-brothers]], and [[overend-gurney]] could build multi-generational franchises on seemingly thin spreads — cross-border gold, bill, and FX arbitrage inside tight bands, leveraged many times over.
+- Why rothschild-family, baring-brothers, and overend-gurney could build multi-generational franchises on seemingly thin spreads — cross-border gold, bill, and FX arbitrage inside tight bands, leveraged many times over.
 - The limits of central-bank credibility — when gold reserves are threatened (1931 UK, 1971 US, 1992 UK in ERM), peg breaks generate violent price moves — the template for modern [[central-bank-peg-breaks]] such as [[chf-floor-removal]] (2015).
 
 ## Modern Echoes
@@ -113,9 +113,6 @@ No currency is on a gold standard today, but several structures mirror its mecha
 - [[nixon-shock]]
 - [[covered-interest-arbitrage]]
 - [[telegraph-impact-on-arbitrage]]
-- [[rothschild-family]]
-- [[baring-brothers]]
-- [[overend-gurney]]
 - [[book-golden-fetters]]
 
 ## Sources

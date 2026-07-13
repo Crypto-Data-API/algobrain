@@ -25,7 +25,7 @@ Established by the Federal Reserve Act of 1913, the Fed operates through a Board
 
 - **Federal Funds Rate**: The FOMC sets the target range for the overnight lending rate between banks, which ripples through all borrowing costs, asset valuations, and economic activity.
 - **Quantitative Easing (QE) / Tightening (QT)**: The Fed buys or sells Treasury and mortgage-backed securities to expand or contract the money supply. QE following the [[2008-global-financial-crisis]] and COVID-19 pandemic fundamentally reshaped markets.
-- **Lender of Last Resort**: Provides emergency [[liquidity]] to prevent systemic collapses, as seen with [[bear-stearns]], [[aig]], and during the 2023 banking crisis.
+- **Lender of Last Resort**: Provides emergency [[liquidity]] to prevent systemic collapses, as seen with bear-stearns, aig, and during the 2023 banking crisis.
 - **Banking Regulation**: Supervises and regulates bank holding companies and financial institutions.
 
 ## Policy Path 2022-2026

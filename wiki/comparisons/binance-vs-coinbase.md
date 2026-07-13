@@ -12,7 +12,7 @@ related: ["[[cex-vs-dex]]", "[[crypto-markets]]", "[[kyc]]"]
 
 ## Overview
 
-[[binance]] and [[coinbase]] represent opposite philosophies in crypto exchange design. Binance optimized for traders: lowest fees, maximum leverage, and the widest asset selection on the planet. Coinbase optimized for compliance: publicly listed on [[nasdaq]] (COIN), fully regulated in the US, and built for institutional trust. Choosing between them depends on where you live, what you trade, and how much regulatory comfort you need.
+[[binance]] and [[coinbase]] represent opposite philosophies in crypto exchange design. Binance optimized for traders: lowest fees, maximum leverage, and the widest asset selection on the planet. Coinbase optimized for compliance: publicly listed on nasdaq (COIN), fully regulated in the US, and built for institutional trust. Choosing between them depends on where you live, what you trade, and how much regulatory comfort you need.
 
 ## Comparison Table
 

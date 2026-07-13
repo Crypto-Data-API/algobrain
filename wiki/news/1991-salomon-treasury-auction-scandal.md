@@ -11,7 +11,7 @@ markets_affected: [bonds, equities]
 impact: high
 verified: true
 sources_count: 5
-related: ["[[on-off-the-run-treasury-arbitrage]]", "[[corner-the-market]]", "[[ltcm-collapse-1998]]", "[[risk-arbitrage]]"]
+related: ["[[on-off-the-run-treasury-arbitrage]]", "[[corner-the-market]]", "[[ltcm-collapse-1998]]"]
 ---
 
 # Salomon Brothers Treasury Auction Scandal (1991)
@@ -128,4 +128,4 @@ Paul Mozer's loss to the firm was relatively modest in immediate dollar terms �
 
 ## Related
 
-[[on-off-the-run-treasury-arbitrage]] · [[corner-the-market]] · [[ltcm-collapse-1998]] · [[risk-arbitrage]] · [[1995-sumitomo-copper-scandal]] · [[2008-01-socgen-kerviel-rogue-trade]] · [[archegos-blowup-2021]]
+[[on-off-the-run-treasury-arbitrage]] · [[corner-the-market]] · [[ltcm-collapse-1998]] · risk-arbitrage · [[1995-sumitomo-copper-scandal]] · [[2008-01-socgen-kerviel-rogue-trade]] · [[archegos-blowup-2021]]

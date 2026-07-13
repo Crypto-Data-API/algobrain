@@ -9,10 +9,9 @@ aliases: ["Two-Portfolio Strategy", "Core-Satellite", "Two-Bucket Approach"]
 domain: [portfolio-theory]
 prerequisites: ["[[portfolio-construction]]", "[[diversification]]"]
 difficulty: beginner
-related: ["[[fred-mcnaught]]", "[[alfred]]", "[[diversification]]", "[[portfolio-construction]]", "[[dividend-yield]]", "[[capital-gains-tax-discount]]", "[[risk-management]]", "[[position-sizing]]"]
+related: ["[[diversification]]", "[[portfolio-construction]]", "[[capital-gains-tax-discount]]", "[[risk-management]]", "[[position-sizing]]"]
 ---
 
-A portfolio construction approach where an investor maintains two distinct portfolios with different objectives, time horizons, and sell disciplines. This is [[fred-mcnaught|Fred McNaught's]] core portfolio architecture and a foundational concept in [[alfred|Alfred's]] investment philosophy. It is a practical retail form of the institutional **core-satellite** model: a stable, low-turnover "core" that compounds, plus a smaller, active "satellite" bucket that takes opportunistic risk.
 
 ## The Two Portfolios
 
@@ -22,8 +21,8 @@ The core portfolio holds high-quality stocks for the long term. Positions are so
 
 **Characteristics:**
 - Held for years to decades
-- Focus on [[earnings-per-share|EPS]] growth and [[franking-credits|franked]] [[dividend-yield|dividends]]
-- [[compounding|Compound returns]] through [[dividend-yield|DRP]] (dividend reinvestment plans)
+- Focus on EPS growth and franked dividends
+- [[compounding|Compound returns]] through DRP (dividend reinvestment plans)
 - Diversified across sectors and geographies
 - Includes defensive assets (infrastructure, utilities funds)
 
@@ -48,11 +47,10 @@ Fred's key principle: the split between portfolios depends on age.
 - **While young:** Trading portfolio can be "somewhat high" — more risk tolerance, longer time to recover
 - **As you get older:** Must reduce trading allocation and revert to Portfolio 1 — prioritise income and capital preservation
 
-(Source: [[fred-sam-session-2024-01-02]], [[fred-sam-session-2024-01-18]])
 
 ## Fred's Allocation
 
-Fred allocates approximately **15-20% to the trading portfolio** and the remainder to core holdings. (Source: [[fred-sam-session-2024-01-02]])
+A common split allocates approximately **15-20% to the trading portfolio** and the remainder to core holdings.
 
 ## Why Separate the Books
 
@@ -67,12 +65,8 @@ This mirrors the institutional **core-satellite** construction, where a passive/
 
 ## Related
 
-- [[fred-mcnaught]] — Originator of this framework
 - [[portfolio-construction]] — Broader portfolio theory
 - [[diversification]] — Both portfolios should be diversified
-- [[dividend-yield]] — Core portfolio's income engine
 
 ## Sources
 
-- [[fred-sam-session-2024-01-02]] — Core principles clips 3 and 6
-- [[fred-sam-session-2024-01-18]] — Investing concepts clips 1 and 2

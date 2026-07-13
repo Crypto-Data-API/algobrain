@@ -12,7 +12,7 @@ prerequisites: ["[[correlation]]", "[[correlation-of-returns]]"]
 difficulty: intermediate
 ---
 
-A **correlation regime** is a persistent state of the cross-asset correlation structure: in calm regimes individual names diverge and pairwise correlations across the [[sp500|S&P 500]] sit around 0.30–0.50, while in shocks all correlations spike to roughly 0.85–0.95 — a phenomenon traders summarise as *"correlation goes to 1."* This regime dependency is the single most consequential reason that a portfolio diagnosed as *diversified* under a calm-regime correlation matrix stops being diversified exactly when diversification is needed. Risk-budgeting, [[modern-portfolio-theory|MPT]] optimisation, and [[risk-parity]] all silently assume a correlation matrix that does not exist in stressed regimes.
+A **correlation regime** is a persistent state of the cross-asset correlation structure: in calm regimes individual names diverge and pairwise correlations across the S&P 500 sit around 0.30–0.50, while in shocks all correlations spike to roughly 0.85–0.95 — a phenomenon traders summarise as *"correlation goes to 1."* This regime dependency is the single most consequential reason that a portfolio diagnosed as *diversified* under a calm-regime correlation matrix stops being diversified exactly when diversification is needed. Risk-budgeting, [[modern-portfolio-theory|MPT]] optimisation, and [[risk-parity]] all silently assume a correlation matrix that does not exist in stressed regimes.
 
 ## Overview
 
@@ -134,7 +134,7 @@ A common but incomplete stress test shocks each volatility independently. A *cor
 
 ### 5. Trade implied correlation directly
 
-For sophisticated desks, dispersion trading (long single-stock vol, short index vol, sized for vega-neutrality) is an explicit bet on correlation. Buying the implied correlation in calm regimes when dealers sell single-stock vol expensive vs index vol is a long-correlation-tail trade. See [[dispersion-trading]] for the full structure.
+For sophisticated desks, dispersion trading (long single-stock vol, short index vol, sized for vega-neutrality) is an explicit bet on correlation. Buying the implied correlation in calm regimes when dealers sell single-stock vol expensive vs index vol is a long-correlation-tail trade. See dispersion-trading for the full structure.
 
 ### 6. Hedge correlation tail with index vol
 
@@ -178,7 +178,6 @@ A simple operational rule used by many desks: **if the rolling 21-day cross-sect
 - [[volatility-regime-switching]] — formal regime models, applicable to correlations too
 - [[fat-tails]] — companion phenomenon: regime change brings both correlation spikes and tail events
 - [[2008-financial-crisis]] / [[covid-crash]] / [[vix-august-2024-spike]] / [[volmageddon]] — case studies
-- [[dispersion-trading]] — the strategy that explicitly trades correlation regime risk
 - [[reflexivity]] — the amplification mechanism that makes correlations overshoot
 
 ## Sources

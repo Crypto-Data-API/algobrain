@@ -9,7 +9,7 @@ aliases: ["Capital Gains", "Capital Gain", "Capital Gains Tax", "CGT", "Realized
 domain: [portfolio-theory, risk-management]
 prerequisites: ["[[tax-efficient-investing]]"]
 difficulty: beginner
-related: ["[[capital-gains-tax-discount]]", "[[tax-efficient-investing]]", "[[tax-loss-harvesting]]", "[[australian-investor-tax]]", "[[dividend]]", "[[rebalancing]]", "[[holding-period]]", "[[wash-sale-rule]]", "[[cryptocurrency-tax-australia]]"]
+related: ["[[capital-gains-tax-discount]]", "[[tax-efficient-investing]]", "[[australian-investor-tax]]", "[[rebalancing]]", "[[holding-period]]", "[[wash-sale-rule]]", "[[cryptocurrency-tax-australia]]"]
 ---
 
 A **capital gain** is the profit realised when a capital asset (shares, ETFs, property, cryptocurrency, collectibles) is sold for more than its **cost base** (purchase price plus allowable acquisition costs). The gain is "unrealised" while the position is held and becomes a taxable event only on disposal in most jurisdictions. Because tax codes treat capital gains differently from ordinary income — usually favouring long holding periods — capital-gains treatment is a first-order input into after-tax strategy design.
@@ -23,7 +23,7 @@ Net gain     = Total gains − Total capital losses (current year + carried forw
 Tax payable  = f(net gain, holding period, entity type, jurisdiction)
 ```
 
-Capital **losses** can typically offset capital gains (and sometimes a limited amount of ordinary income); unused losses carry forward. The interaction of gains, losses, and holding period is what makes [[tax-loss-harvesting]] and disposal timing material to net returns.
+Capital **losses** can typically offset capital gains (and sometimes a limited amount of ordinary income); unused losses carry forward. The interaction of gains, losses, and holding period is what makes tax-loss-harvesting and disposal timing material to net returns.
 
 ### Realized vs unrealized gains
 
@@ -95,7 +95,7 @@ The practical takeaway: the *spread* between short- and long-term treatment can 
 
 ## Tax-loss harvesting and the wash sale
 
-[[tax-loss-harvesting]] is the deliberate realization of losing positions to bank capital losses that offset realized gains (and, in the US, up to $3,000 of ordinary income per year, with the remainder carried forward). It converts a paper loss into a usable tax asset without necessarily abandoning the market exposure — the trader typically rotates into a *similar but not identical* security.
+tax-loss-harvesting is the deliberate realization of losing positions to bank capital losses that offset realized gains (and, in the US, up to $3,000 of ordinary income per year, with the remainder carried forward). It converts a paper loss into a usable tax asset without necessarily abandoning the market exposure — the trader typically rotates into a *similar but not identical* security.
 
 The constraint is the **[[wash-sale-rule|wash-sale rule]]**:
 
@@ -120,13 +120,11 @@ The wash-sale window is **61 calendar days** in the US (30 before + sale day + 3
 - [[capital-gains-tax]] — the tax instrument applied to realized gains
 - [[capital-gains-tax-discount]] — Australian 50% discount in detail
 - [[tax-efficient-investing]]
-- [[tax-loss-harvesting]] — banking losses to offset gains
 - [[wash-sale]] · [[wash-sale-rule]] — the constraint on harvesting
 - [[australian-investor-tax]]
 - [[cryptocurrency-tax-australia]] — crypto as a CGT asset
 - [[holding-period]] — the short-vs-long-term hinge
 - [[portfolio-turnover]] — turnover as the driver of realized-gain tax drag
-- [[dividend]] — the other taxable return stream
 - [[rebalancing]] — the recurring realization trigger
 
 ## Sources

@@ -10,7 +10,7 @@ entity_type: company
 founded: 2015
 headquarters: "San Francisco, USA"
 website: "https://www.openai.com"
-related: ["[[anthropic]]", "[[ai-trading-agents]]", "[[llm-market-analysis]]", "[[langchain]]", "[[artificial-intelligence]]", "[[ai-narrative-arc]]", "[[ai-agent-tokens]]", "[[nvidia]]", "[[microsoft]]"]
+related: ["[[anthropic]]", "[[ai-trading-agents]]", "[[llm-market-analysis]]", "[[langchain]]", "[[artificial-intelligence]]", "[[ai-narrative-arc]]", "[[ai-agent-tokens]]", "[[nvidia]]"]
 ---
 
 # OpenAI
@@ -81,7 +81,7 @@ Crypto traders have developed a playbook around OpenAI and broader AI news:
 
 **1. Identify the catalyst calendar**
 - OpenAI product launches (GPT model releases, API updates)
-- OpenAI partnership announcements ([[microsoft|Microsoft]], Apple, etc.)
+- OpenAI partnership announcements (Microsoft, Apple, etc.)
 - OpenAI funding rounds and valuation news
 - Competitor announcements ([[anthropic|Anthropic]], Google DeepMind, Meta AI) that raise overall AI attention
 - Major AI conferences (NeurIPS, ICML, developer days)
@@ -132,6 +132,5 @@ The AI narrative in crypto functions as a **beta play on AI progress**. Traders 
 - [[ai-narrative-arc]] — The 2024-2026 AI hype cycle in crypto
 - [[ai-agent-tokens]] — AI tokens that correlate with OpenAI news
 - [[nvidia]] — Public-market AI proxy that also moves crypto AI tokens
-- [[microsoft]] — OpenAI's primary investor and partner
 - [[worldcoin]] — Sam Altman's personal crypto project
 - [[artificial-intelligence]] — AI section hub

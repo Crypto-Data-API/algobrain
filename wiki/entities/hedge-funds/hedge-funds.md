@@ -6,7 +6,7 @@ updated: 2026-06-17
 status: good
 tags: [hedge-funds, institutions, concepts]
 aliases: ["Hedge Fund", "Hedge Fund Industry"]
-related: ["[[long-short-equity]]", "[[global-macro]]", "[[statistical-arbitrage]]", "[[short-selling]]", "[[leverage]]", "[[risk-management]]", "[[george-soros]]"]
+related: ["[[global-macro]]", "[[statistical-arbitrage]]", "[[short-selling]]", "[[leverage]]", "[[risk-management]]", "[[george-soros]]"]
 ---
 
 # Hedge Funds
@@ -33,7 +33,7 @@ Fee compression has pushed many funds below 2-and-20 (e.g. "1.5 and 15") amid co
 
 | Strategy | What it does | Edge / risk | Notable practitioners |
 |----------|--------------|-------------|----------------------|
-| **[[long-short-equity]]** | Long undervalued stocks, short overvalued; net exposure dialled up or down | Stock selection; reduces market beta | Tiger Management & "Tiger Cubs", [[citadel]] |
+| **long-short-equity** | Long undervalued stocks, short overvalued; net exposure dialled up or down | Stock selection; reduces market beta | Tiger Management & "Tiger Cubs", [[citadel]] |
 | **[[global-macro]]** | Top-down bets on rates, currencies, commodities, indices | Macro/policy views; can be very leveraged | [[george-soros]], Ray Dalio ([[bridgewater-associates]]), Paul Tudor Jones |
 | **Quant / [[statistical-arbitrage]]** | Systematic, data-driven models exploiting statistical price relationships | Speed, breadth, math; crowding risk | [[renaissance-technologies]], DE Shaw, Two Sigma |
 | **Event-driven** | Merger arbitrage, restructurings, spin-offs, special situations | Deal/legal analysis; deal-break risk | Elliott Management, Paulson & Co |
@@ -57,7 +57,7 @@ Hedge funds are often the "smart money" counterparties in markets. Understanding
 ## Related
 
 - [[hedge-funds-overview]] -- section index with notable funds
-- [[long-short-equity]] / [[global-macro]] / [[statistical-arbitrage]] -- core strategy pages
+- long-short-equity / [[global-macro]] / [[statistical-arbitrage]] -- core strategy pages
 - [[leverage]] / [[short-selling]] / [[derivatives]] -- the tools they use
 - [[risk-management]] -- the discipline that separates survivors
 - [[renaissance-technologies]] / [[citadel]] / [[bridgewater-associates]] -- exemplar firms

@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [options, market-microstructure, derivatives, behavioral-finance]
 aliases: ["Options Pinning", "Strike Pinning", "Pin Effect", "Max Pain Effect", "Pinning"]
-related: ["[[index-options]]", "[[spx-options]]", "[[spy-options]]", "[[pin-risk]]", "[[max-pain]]", "[[dealer-gamma-hedging]]", "[[market-makers]]", "[[am-vs-pm-settlement]]", "[[soq-settlement]]", "[[zero-dte-options]]", "[[gap-risk]]", "[[liquidity-evaporation]]", "[[gamma-explosion]]", "[[volmageddon]]", "[[gamestop-saga]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[variance-risk-premium]]"]
+related: ["[[pin-risk]]", "[[max-pain]]", "[[dealer-gamma-hedging]]", "[[market-makers]]", "[[zero-dte-options]]", "[[gap-risk]]", "[[liquidity-evaporation]]", "[[gamma-explosion]]", "[[volmageddon]]", "[[gamestop-saga]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[variance-risk-premium]]"]
 domain: [market-microstructure, options, behavioral-finance]
 prerequisites: ["[[options-greeks]]", "[[dealer-gamma-hedging]]"]
 difficulty: intermediate
@@ -80,11 +80,11 @@ Golez, B. and Jackwerth, J. C. (2012), *Pinning in the S&P 500 Futures*, *Journa
 
 - The S&P 500 e-mini futures contract pinned to round-number strikes on monthly OPEX Fridays, even though SPX-options settlement is on the cash index, not on the futures.
 - The mechanism appeared to be cross-product hedging: dealers running SPX-options books hedged their delta with SPX e-mini futures, producing the same gamma-hedging restoring force in the futures market that Ni-Pearson-Poteshman documented in cash equity markets.
-- The effect was strongest in the final hour of trading on Thursdays (the SPX monthly options stop trading Thursday afternoon for AM SOQ settlement — see [[soq-settlement]]).
+- The effect was strongest in the final hour of trading on Thursdays (the SPX monthly options stop trading Thursday afternoon for AM SOQ settlement — see soq-settlement).
 
 ### AAPL — the textbook pinner
 
-[[apple|Apple]] has been the textbook example of an individual-stock pinning case for over a decade. In the post-2015 sample of monthly expirations:
+Apple has been the textbook example of an individual-stock pinning case for over a decade. In the post-2015 sample of monthly expirations:
 
 - AAPL closed within $0.50 of a $5-multiple strike on more than 60% of monthly expirations.
 - The unconditional probability for that interval, given AAPL's typical daily range, would be closer to 35-40%.
@@ -104,7 +104,7 @@ Netflix, during its 2012-2017 period as a retail-favorite, showed pronounced pin
 
 ### TSLA — variable pinning
 
-[[tesla|Tesla]] has shown pronounced pinning in some periods and weak pinning in others. Practitioner studies suggest the variation tracks the gamma sign in dealer books: when retail is net short premium TSLA pins, when retail piles into long calls (e.g., into earnings or ahead of major product announcements) pinning weakens or inverts.
+Tesla has shown pronounced pinning in some periods and weak pinning in others. Practitioner studies suggest the variation tracks the gamma sign in dealer books: when retail is net short premium TSLA pins, when retail piles into long calls (e.g., into earnings or ahead of major product announcements) pinning weakens or inverts.
 
 ### The 0DTE-induced weakening (2022 onward)
 
@@ -127,7 +127,7 @@ A common practitioner pattern: SPX monthly OPEX Fridays show a "drift to the lar
 
 Pinning is *favorable* for traders who are short an at-the-money option at the pinning strike — the underlying is dragged toward the strike by dealer hedging, increasing the probability of expiring worthless. Many [[options-portfolio-construction|premium-selling]] curricula explicitly cite the pinning bias as a tailwind for income strategies (see [[variance-risk-premium]] for the broader edge).
 
-But the favorable pinning is paired with [[pin-risk|pin risk]]: a position pinned at the strike is in the *worst* state at expiration if it's a physically-settled American option (assignment uncertainty). The income trader's resolution: **trade [[index-options|cash-settled index options]]** to capture the pinning tailwind without the pin-risk operational cost.
+But the favorable pinning is paired with [[pin-risk|pin risk]]: a position pinned at the strike is in the *worst* state at expiration if it's a physically-settled American option (assignment uncertainty). The income trader's resolution: **trade cash-settled index options** to capture the pinning tailwind without the pin-risk operational cost.
 
 ### For long premium / tail-risk books
 
@@ -137,7 +137,7 @@ Pinning is *unfavorable* for long-premium positions at high-OI strikes. A long I
 
 0DTE strategies operate in the regime where pinning historically has been strongest — but where the rise of 0DTE itself has weakened the effect. Modern 0DTE traders should not rely on classical pinning patterns to bail out delta-exposure on positions held into the close. The intraday gamma profile is more diffuse than the monthly OPEX literature suggests.
 
-### Interaction with [[soq-settlement|SOQ settlement]]
+### Interaction with SOQ settlement
 
 For AM-settled monthly SPX, the *settlement* value is set by Friday morning's component opens, not by the Thursday-afternoon close where dealer-gamma hedging would otherwise pin. This means SPX monthlies' *settlement* is **not** subject to classical pinning, even if the cash SPX mark on Thursday afternoon was being pinned by hedging flow. The PM-settled SPXW weeklies, by contrast, settle to the Friday 4:00 pm close — and are subject to whatever pinning dynamics are operative in the final hour.
 
@@ -166,9 +166,6 @@ When the dealer gamma flips negative at a strike — typically because public fl
 - [[max-pain]] — the open-interest-weighted strike heuristic
 - [[dealer-gamma-hedging]] — the mechanism that drives pinning
 - [[market-makers]] — the agents whose hedging produces the effect
-- [[index-options]], [[spx-options]], [[spy-options]] — products where pinning is observed
-- [[am-vs-pm-settlement]] — AM-settled monthlies aren't pinned at settlement; PM-settled are
-- [[soq-settlement]] — settlement mechanism that bypasses Friday-afternoon pinning
 - [[zero-dte-options]] — 0DTE flow has weakened classical pinning
 - [[gamma-explosion]] — the gamma side of expiration risk
 - [[gap-risk]] — overnight gap risk that resets pinning patterns
@@ -188,4 +185,3 @@ When the dealer gamma flips negative at a strike — typically because public fl
 - SqueezeMetrics, Spotgamma, Goldman Sachs equity-derivatives research notes — practitioner observations on dealer gamma exposure (DGE / GEX) and the post-2022 weakening of pinning.
 - Cboe research notes on 0DTE option volume and the dispersion of dealer gamma.
 - [[itpm-options-portfolio-management]] — institutional treatment of pinning bias as a tailwind for short-premium books.
-- [[tastytrade-spx-research]] — empirical studies on SPX expiration-day return distributions, including pinning measurements.

@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [options, derivatives, market-microstructure, behavioral-finance]
 aliases: ["Max Pain", "Maximum Pain Theory", "Max Pain Strike"]
-related: ["[[options-pinning]]", "[[pin-risk]]", "[[gamma-exposure]]", "[[dealer-hedging]]", "[[index-options]]", "[[spx-options]]", "[[spy-options]]", "[[zero-dte-options]]", "[[volatility-skew]]", "[[options-open-interest]]", "[[opex]]", "[[gamma-flip]]", "[[implied-volatility]]"]
+related: ["[[options-pinning]]", "[[pin-risk]]", "[[gamma-exposure]]", "[[dealer-hedging]]", "[[zero-dte-options]]", "[[volatility-skew]]", "[[options-open-interest]]", "[[opex]]", "[[gamma-flip]]", "[[implied-volatility]]"]
 domain: [market-microstructure, options, behavioral-finance]
 difficulty: intermediate
 ---
@@ -19,7 +19,7 @@ Max pain has been a staple of retail options folklore since at least the early 2
 
 The mechanism behind the theory is that dealers, who are the structural counterparty to retail and institutional option flow, hedge their net short-gamma exposure by trading the underlying. When spot drifts away from heavy open-interest strikes, hedge flows push it back; the "stable" point is the strike that minimises the dealer's aggregate hedging cost. In its strong form, the theory predicts that closing prices on monthly OPEX Friday will systematically cluster at the max-pain strike. In its weaker form, it predicts a measurable bias of expiry prices toward strikes with heavy open interest — without claiming determinism.
 
-The strong form does not survive contact with data. The weak form does, on individual stocks, with effect sizes that are small relative to typical daily volatility. On broad indices ([[spx-options|SPX]], [[ndx-options|NDX]]) the effect is weaker still, partly because index OI is spread across more strikes and partly because index dealers run more sophisticated hedging strategies that do not concentrate at a single magnet point.
+The strong form does not survive contact with data. The weak form does, on individual stocks, with effect sizes that are small relative to typical daily volatility. On broad indices (SPX, NDX) the effect is weaker still, partly because index OI is spread across more strikes and partly because index dealers run more sophisticated hedging strategies that do not concentrate at a single magnet point.
 
 ### Strong form vs weak form at a glance
 
@@ -121,7 +121,7 @@ What pinning is *not*: it is not a 1-2% effect on close prices, it is not a dete
 
 Several structural changes since 2022 have eroded the max-pain effect on US indices and ETFs in particular.
 
-**1. 0DTE diffusion.** Beginning with [[spx-options|SPX]] daily expirations in May 2022 (followed by QQQ, IWM, and others), an enormous share of options volume has migrated to same-day-expiry contracts. By 2024-2025, [[zero-dte-options|0DTE]] options account for roughly 40-50% of total SPX options volume. These contracts open with zero open interest and accumulate OI through a single session before expiring. The traditional max-pain calculation — built on monthly OPEX OI accumulated over weeks — applies to a shrinking fraction of total options activity.
+**1. 0DTE diffusion.** Beginning with SPX daily expirations in May 2022 (followed by QQQ, IWM, and others), an enormous share of options volume has migrated to same-day-expiry contracts. By 2024-2025, [[zero-dte-options|0DTE]] options account for roughly 40-50% of total SPX options volume. These contracts open with zero open interest and accumulate OI through a single session before expiring. The traditional max-pain calculation — built on monthly OPEX OI accumulated over weeks — applies to a shrinking fraction of total options activity.
 
 **2. OI fragmentation across daily expirations.** With expirations Monday through Friday, OI no longer concentrates at the third-Friday monthly. Instead, it spreads across five expirations per week. The "magnet effect" of any single expiration's max-pain strike is mechanically diluted because each expiration carries a smaller share of total open interest.
 
@@ -129,7 +129,7 @@ Several structural changes since 2022 have eroded the max-pain effect on US indi
 
 **4. Algorithmic counterflow.** A generation of quantitative strategies explicitly trade *against* anticipated pinning — selling premium at heavy strikes, buying deep OTM into the close — which absorbs and damps the original effect. As soon as a market regularity becomes well-known, traders front-run it, and the regularity weakens. This is the standard arbitrage-decay mechanism.
 
-**5. Index dealer hedging is more diffuse.** Modern index-options market-makers hedge across the entire greek surface (delta, gamma, vanna, charm, vega) rather than at the strike-by-strike level. The aggregate hedge is more often expressed in [[vix-futures]] or [[spy-options|SPY]] than in raw index futures, further dispersing the strike-specific effect.
+**5. Index dealer hedging is more diffuse.** Modern index-options market-makers hedge across the entire greek surface (delta, gamma, vanna, charm, vega) rather than at the strike-by-strike level. The aggregate hedge is more often expressed in [[vix-futures]] or SPY than in raw index futures, further dispersing the strike-specific effect.
 
 The net result: max pain as a tradeable signal has roughly the same status as classical [[technical-analysis|technical analysis]] — it captures a real if modest market regularity, has been heavily front-run by sophisticated participants, and now exists mostly as a retail folk belief whose practical edge has compressed toward zero on the most liquid US underlyings.
 
@@ -182,8 +182,6 @@ Three related concepts get conflated and should be kept distinct.
 - [[pin-risk]] — the position-level risk of being close to a strike at settlement
 - [[gamma-exposure]] — the gamma-weighted (and more rigorous) cousin of max pain
 - [[dealer-hedging]] — the underlying mechanism
-- [[index-options]] — where max pain is most widely cited but most weakened post-2022
-- [[spx-options]] — the canonical US index where 0DTE has diluted max-pain effects
 - [[zero-dte-options]] — the structural change that has weakened max pain since 2022
 - [[opex]] — monthly options expiration, the traditional setting for max pain
 - [[options-open-interest]] — the input to the calculation

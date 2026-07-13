@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 1989
 headquarters: "Canberra, Australia"
 website: "https://austrac.gov.au"
-related: ["[[asic]]", "[[apra]]", "[[aml-ctf]]", "[[vasp-regulation]]", "[[australian-investing]]", "[[binance]]", "[[coinbase]]", "[[cryptocurrency-tax-australia]]", "[[sec]]", "[[regulation]]", "[[australian-regulatory-framework]]", "[[australian-crypto-regulation]]"]
+related: ["[[asic]]", "[[apra]]", "[[aml-ctf]]", "[[vasp-regulation]]", "[[binance]]", "[[coinbase]]", "[[cryptocurrency-tax-australia]]", "[[sec]]", "[[regulation]]", "[[australian-regulatory-framework]]", "[[australian-crypto-regulation]]"]
 ---
 
 AUSTRAC is Australia's financial intelligence agency and anti-money laundering/counter-terrorism financing (AML/CTF) regulator. Established in 1989, it serves as the Australian equivalent of the US FinCEN (Financial Crimes Enforcement Network), monitoring financial transactions for money laundering, terrorism financing, and other financial crimes. Since April 2018, AUSTRAC's remit has expanded to include digital currency exchanges (DCEs), making it a critical regulator for Australian crypto investors and traders.
@@ -173,7 +173,6 @@ The practical takeaways for a compliant trader: keep identity documents current,
 - [[apra]]
 - [[aml-ctf]]
 - [[vasp-regulation]]
-- [[australian-investing]]
 - [[binance]]
 - [[coinbase]]
 - [[cryptocurrency-tax-australia]]

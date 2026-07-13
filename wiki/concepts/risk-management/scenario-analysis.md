@@ -101,7 +101,7 @@ For *event hedging* the generic spot × IV grid is replaced with axes calibrated
 |---|---|---|---|
 | [[fomc\|FOMC]] decision | ±0.5% / ±1.5% / ±3% | front-month IV −5 / 0 / +5 | Rate-curve shift; the *dots* surprise |
 | CPI / payrolls | ±0.5% / ±1.5% / ±2.5% | −3 / 0 / +8 | Often a sharp IV crush after the print |
-| Single-name earnings | ±implied move ×{0.5, 1, 1.5, 2} | front-week IV −40 / −20 / 0 | The [[earnings-iv-crush\|IV crush]] dominates; see [[earnings-volatility-trading]] and [[implied-earnings-move]] |
+| Single-name earnings | ±implied move ×{0.5, 1, 1.5, 2} | front-week IV −40 / −20 / 0 | The IV crush dominates; see earnings-volatility-trading and implied-earnings-move |
 | Election / referendum | ±2% / ±5% / ±10% | −10 / 0 / +20 | Multi-day path; overnight gap risk |
 | Geopolitical / oil shock | ±3% / ±7% / ±15% | 0 / +15 / +40 | Cross-asset (oil, USD, gold) |
 | Index rebalance / OPEX | ±0.5% / ±1.5% | −5 / 0 / +5 | [[pin-risk\|Pinning]] and dealer-gamma flow |
@@ -113,9 +113,9 @@ The earnings row is the clearest example of why a catalyst-specific grid matters
 Several tools expose scenario analysis directly:
 
 - **[[thinkorswim]] Analyze tab** — supports custom slices of the surface; built-in spot/IV slider; beta-weights to SPX. Standard retail tool.
-- **[[interactive-brokers|IBKR]] Risk Navigator** — full Greeks repricing across the book under custom scenarios; supports historical-event replay.
+- **IBKR Risk Navigator** — full Greeks repricing across the book under custom scenarios; supports historical-event replay.
 - **OptionNet Explorer** — granular what-if for a defined book, including time-forward scenarios over several days.
-- **[[orats]]** — historical surfaces for replay; can run scenarios using surfaces from prior dates.
+- **orats** — historical surfaces for replay; can run scenarios using surfaces from prior dates.
 - **Custom Python** — for sophisticated books, the standard stack is QuantLib (pricing engine), pandas (grid), and a fitted vol-surface (e.g., SVI, SABR) so the scenarios can shift skew/term-structure realistically. py_vollib is the lightweight alternative for fast Greeks repricing.
 - **Bloomberg OVME / OVRA** — institutional desks; full-surface scenarios with derivatives modelling.
 

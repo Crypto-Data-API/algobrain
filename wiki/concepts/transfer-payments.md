@@ -34,7 +34,7 @@ Discretionary transfers — one-off stimulus checks, expanded unemployment benef
 
 ## Trading Relevance
 
-- **Consumption and the demand base.** Transfer payments flow disproportionately to lower-income households with a high marginal propensity to consume, so changes feed quickly into retail sales, consumer staples, and discount retail revenue. A surge (stimulus) is a near-term tailwind for [[consumer-discretionary]] and a driver of [[inflation]] when supply is constrained.
+- **Consumption and the demand base.** Transfer payments flow disproportionately to lower-income households with a high marginal propensity to consume, so changes feed quickly into retail sales, consumer staples, and discount retail revenue. A surge (stimulus) is a near-term tailwind for consumer-discretionary and a driver of [[inflation]] when supply is constrained.
 - **Inflation and rate expectations.** Large discretionary transfers expand the money in consumers' hands; the 2021-2022 inflation episode is widely attributed in part to pandemic-era transfers meeting supply bottlenecks. Traders watch transfer-heavy fiscal packages as inflationary inputs that bear on [[fed-policy]].
 - **Fiscal sustainability and bonds.** Entitlement transfers (pensions, healthcare) are the largest and fastest-growing budget line in most developed economies; their long-run trajectory feeds deficit and debt concerns that drive sovereign-bond yields and credit ratings.
 - **Recession signals.** Rising unemployment-benefit outlays are a real-time read on labor-market stress and a [[recession]] tell, often before headline data confirms it.

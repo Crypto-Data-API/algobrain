@@ -82,7 +82,7 @@ Key milestones:
 - Post-COVID QE peak (2022): ~$9 trillion
 - After QT (2026): ~$6.7 trillion
 
-Track via FRED series WALCL (Total Assets of the Federal Reserve). Changes in the balance sheet, particularly the pace of change, have been correlated with [[sp500|S&P 500]] performance since 2009.
+Track via FRED series WALCL (Total Assets of the Federal Reserve). Changes in the balance sheet, particularly the pace of change, have been correlated with S&P 500 performance since 2009.
 
 ## Money Supply and Markets
 

@@ -22,7 +22,7 @@ The economy emerges from recession. [[fed-policy|The Federal Reserve]] typically
 
 ### 2. Mid Expansion
 
-Growth is broadly established. Employment is strong, corporate earnings are growing, and GDP growth is above trend. The Fed may begin tightening gradually. **Industrials** (XLI) and **Information Technology** (XLK) tend to perform well as capital expenditure increases. This is often the longest phase, lasting several years. [[relative-strength]] analysis across [[gics-sectors|GICS sectors]] helps identify which groups are maintaining leadership.
+Growth is broadly established. Employment is strong, corporate earnings are growing, and GDP growth is above trend. The Fed may begin tightening gradually. **Industrials** (XLI) and **Information Technology** (XLK) tend to perform well as capital expenditure increases. This is often the longest phase, lasting several years. [[relative-strength]] analysis across GICS sectors helps identify which groups are maintaining leadership.
 
 ### 3. Late Expansion
 
@@ -49,7 +49,7 @@ Several [[economic-indicators]] are particularly useful for identifying cycle tr
 
 ## Trading Implications
 
-The business cycle framework is the backbone of [[sector-rotation]] strategies. The [[sector-momentum-screen|sector rotation + momentum screening]] combination uses cycle identification as its first filter, selecting the top-performing [[gics-sectors|GICS sectors]] aligned with the current phase, then applying [[momentum-trading|momentum screening]] within those sectors. The maxim "don't fight the Fed" reflects how [[fed-policy|Federal Reserve policy]] both responds to and shapes the business cycle's trajectory.
+The business cycle framework is the backbone of [[sector-rotation]] strategies. The sector rotation + momentum screening combination uses cycle identification as its first filter, selecting the top-performing GICS sectors aligned with the current phase, then applying [[momentum-trading|momentum screening]] within those sectors. The maxim "don't fight the Fed" reflects how [[fed-policy|Federal Reserve policy]] both responds to and shapes the business cycle's trajectory.
 
 ## Sources
 

@@ -23,7 +23,7 @@ The ESRB does not have direct supervisory power over individual firms. Instead i
 
 In December 2025 the ESRB published a landmark report identifying [[ai-trading|artificial intelligence]] as a **new source of systemic financial risk** distinct from previous waves of fintech innovation. The report named four channels through which AI can transmit and amplify shocks across the financial system (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]):
 
-1. **Overreliance** — financial-system dependence on a small number of foundation-model providers (e.g. [[openai|OpenAI]], [[anthropic|Anthropic]], [[alphabet|Google]]). Concentration creates a single-point-of-failure risk analogous to the pre-2008 dependence on a small number of credit-rating agencies.
+1. **Overreliance** — financial-system dependence on a small number of foundation-model providers (e.g. [[openai|OpenAI]], [[anthropic|Anthropic]], Google). Concentration creates a single-point-of-failure risk analogous to the pre-2008 dependence on a small number of credit-rating agencies.
 2. **Complexity** — opaque AI decision-making making oversight harder. Models whose reasoning cannot be audited create the same problem regulators had with structured products before 2008.
 3. **Liquidity cascades** — correlated AI trading reactions creating flash-crash dynamics. When many institutions deploy similar AI signals on similar data, the resulting order flow can reinforce moves rather than dampen them.
 4. **Model homogeneity** — banks, insurers, and asset managers using similar AI tools producing crowded behaviour. Even when individual models are private, they may be trained on similar data and fine-tuned in similar ways.
@@ -65,7 +65,6 @@ The ESRB has no direct US analogue. The Financial Stability Oversight Council (F
 - [[gerry-tsoukalas]]
 - [[anthropic]]
 - [[openai]]
-- [[microsoft]]
 - [[federal-reserve]]
 - [[crashes]]
 - [[fed-policy]]

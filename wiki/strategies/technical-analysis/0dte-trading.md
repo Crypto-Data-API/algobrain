@@ -212,7 +212,7 @@ There is active academic and industry debate about whether 0DTE flows amplify or
 
 **Dampening argument**: When market makers are long gamma, they do the opposite — buy dips and sell rallies — which dampens volatility. Additionally, the sheer volume of 0DTE trading provides liquidity that tightens spreads.
 
-The truth likely depends on aggregate dealer positioning. Services like [[spotgamma|SpotGamma]] track this positioning to determine which regime is dominant on any given day.
+The truth likely depends on aggregate dealer positioning. Services like SpotGamma track this positioning to determine which regime is dominant on any given day.
 
 ## Sources
 
@@ -229,7 +229,6 @@ The truth likely depends on aggregate dealer positioning. Services like [[spotga
 - [[straddle-strangle]] — 0DTE volatility buying
 - [[gamma-exposure-trading]] — dealer hedging flows
 - [[gamma-scalping]] — dynamic hedging of gamma positions
-- [[spotgamma]] — 0DTE analytics provider
 - [[zero-dte-options]] — instrument and market-structure overview
 - [[expiration-selection]] — where 0DTE sits on the DTE spectrum
 - [[non-linear-payoff]] — gamma/convexity dominance near expiry

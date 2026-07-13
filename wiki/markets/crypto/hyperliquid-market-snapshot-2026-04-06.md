@@ -23,7 +23,7 @@ All data sourced from **QuickNode SQL Explorer API** (2026-04-06).
 
 ## Top Markets by 24h Volume
 
-The table below ranks [[hyperliquid]] markets by 24-hour USD volume. Notably, traditional asset perpetuals (crude oil, silver, gold, equities) now sit alongside crypto pairs, reflecting Hyperliquid's expansion into [[commodity]] and [[equity-index]] derivatives.
+The table below ranks [[hyperliquid]] markets by 24-hour USD volume. Notably, traditional asset perpetuals (crude oil, silver, gold, equities) now sit alongside crypto pairs, reflecting Hyperliquid's expansion into [[commodity]] and equity-index derivatives.
 
 | Coin | Trades | Volume USD | Low | High | Avg Price |
 |------|--------|-----------|-----|------|-----------|
@@ -179,7 +179,7 @@ A week of platform-wide metrics for [[hyperliquid]], showing fills, active trade
 ## Summary & Takeaways
 
 1. **Broad market rally**: All major crypto assets posted positive day changes — [[bitcoin|BTC]] +3.06%, [[ethereum|ETH]] +3.60%, [[solana|SOL]] +2.37%. The market is in a mildly risk-on posture.
-2. **Traditional assets on-chain**: [[commodity]] and [[equity-index]] perpetuals now represent nearly $1B in daily volume on [[hyperliquid]], with crude oil alone at $414.5M. This diversification is a key differentiator for the platform.
+2. **Traditional assets on-chain**: [[commodity]] and equity-index perpetuals now represent nearly $1B in daily volume on [[hyperliquid]], with crude oil alone at $414.5M. This diversification is a key differentiator for the platform.
 3. **Funding rates are moderate**: Outside of FARTCOIN's elevated 0.00738% rate, funding is in healthy positive territory. No extreme leverage signals in majors.
 4. **Concentrated [[market-maker]] activity**: A handful of addresses dominate volume. The top 10 traders account for over $1.58B, and counterparty clustering in [[whale-trade]] data reveals identifiable [[market-maker]] pairs.
 5. **Liquidation risk in commodities**: The 774 crude oil liquidations at 02:00 UTC highlight that newer [[commodity]] [[perpetual-futures]] markets carry meaningful leverage risk that traders should monitor.

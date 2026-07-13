@@ -64,7 +64,6 @@ With [[foundation-models|modern LLMs]], you can often skip traditional preproces
 - [[named-entity-recognition]] — Extracting entities from preprocessed text
 - [[nlp-sentiment-analysis]] — Downstream task
 - [[feature-engineering-finance]] — Related concept for structured data
-- [[earnings-call-analysis]] — Applied preprocessing for earnings calls
 - [[artificial-intelligence]] — AI section hub
 
 ## Sources

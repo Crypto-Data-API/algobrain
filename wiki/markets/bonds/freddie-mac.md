@@ -14,26 +14,26 @@ aliases:
   - freddie-mac
   - FHLMC
   - federal-home-loan-mortgage-corp
-related: ["[[mortgage-backed-securities]]", "[[fannie-mae]]", "[[bond-market]]", "[[2008-global-financial-crisis]]", "[[subprime-mortgage]]"]
+related: ["[[mortgage-backed-securities]]", "[[bond-market]]", "[[2008-global-financial-crisis]]", "[[subprime-mortgage]]"]
 ---
 
 # Freddie Mac
 
-**Freddie Mac** (Federal Home Loan Mortgage Corporation, ticker FMCC) is a U.S. government-sponsored enterprise (GSE) that buys mortgages from lenders and packages them into [[mortgage-backed-securities|mortgage-backed securities (MBS)]]. Chartered by Congress in 1970 to compete with [[fannie-mae|Fannie Mae]] and broaden the secondary mortgage market, Freddie Mac is one of the two pillars of U.S. housing finance. Since September 2008 it has operated under federal **conservatorship**, and together with Fannie Mae it backs the large majority of new U.S. residential mortgages, making agency MBS one of the deepest and most liquid segments of the global [[bond-market]].
+**Freddie Mac** (Federal Home Loan Mortgage Corporation, ticker FMCC) is a U.S. government-sponsored enterprise (GSE) that buys mortgages from lenders and packages them into [[mortgage-backed-securities|mortgage-backed securities (MBS)]]. Chartered by Congress in 1970 to compete with Fannie Mae and broaden the secondary mortgage market, Freddie Mac is one of the two pillars of U.S. housing finance. Since September 2008 it has operated under federal **conservatorship**, and together with Fannie Mae it backs the large majority of new U.S. residential mortgages, making agency MBS one of the deepest and most liquid segments of the global [[bond-market]].
 
 ## Role in the Housing Market
 
-Freddie Mac and [[fannie-mae|Fannie Mae]] (chartered 1938) form the backbone of the U.S. housing finance system. Their primary function is to buy "conforming" mortgages from banks and other lenders, pool them, and issue [[mortgage-backed-securities|MBS]] sold to investors worldwide. This provides liquidity to lenders, who can recycle capital into new loans rather than holding mortgages on their balance sheets.
+Freddie Mac and Fannie Mae (chartered 1938) form the backbone of the U.S. housing finance system. Their primary function is to buy "conforming" mortgages from banks and other lenders, pool them, and issue [[mortgage-backed-securities|MBS]] sold to investors worldwide. This provides liquidity to lenders, who can recycle capital into new loans rather than holding mortgages on their balance sheets.
 
 By guaranteeing timely principal and interest on the MBS they issue, the GSEs transfer the **credit risk** of the underlying mortgages from individual lenders to themselves (and, implicitly, to the U.S. taxpayer). This guarantee is what makes the **30-year fixed-rate, freely prepayable mortgage** — a product essentially unique to the U.S. — economically viable and keeps borrowing costs lower than they would otherwise be.
 
 ### Conforming vs. non-conforming
 
-Freddie Mac can only buy loans that meet [[fannie-mae|FHFA]] criteria — the "conforming loan limit" (a baseline of $766,550 for a single-family home in 2024, higher in high-cost areas), documentation standards, and maximum loan-to-value ratios. Loans above the limit are "jumbo" loans, which banks hold themselves or securitize privately. This conforming/jumbo split is a key structural feature of the U.S. mortgage market.
+Freddie Mac can only buy loans that meet FHFA criteria — the "conforming loan limit" (a baseline of $766,550 for a single-family home in 2024, higher in high-cost areas), documentation standards, and maximum loan-to-value ratios. Loans above the limit are "jumbo" loans, which banks hold themselves or securitize privately. This conforming/jumbo split is a key structural feature of the U.S. mortgage market.
 
 ## Agency MBS Issuance
 
-Agency MBS — securities guaranteed by Freddie Mac, [[fannie-mae|Fannie Mae]], or Ginnie Mae — trade largely through the **TBA (To-Be-Announced) market**, one of the most liquid fixed-income markets after U.S. Treasuries. Key features relevant to traders:
+Agency MBS — securities guaranteed by Freddie Mac, Fannie Mae, or Ginnie Mae — trade largely through the **TBA (To-Be-Announced) market**, one of the most liquid fixed-income markets after U.S. Treasuries. Key features relevant to traders:
 
 | Feature | Detail |
 |---------|--------|
@@ -58,7 +58,6 @@ Under the later "net worth sweep," the Treasury swept nearly all GSE profits to 
 
 ## Related
 
-- [[fannie-mae]] — sister GSE
 - [[mortgage-backed-securities]] — the core instrument Freddie Mac issues
 - [[bond-market]] — agency MBS is a major segment
 - [[subprime-mortgage]] — the exposure that triggered conservatorship

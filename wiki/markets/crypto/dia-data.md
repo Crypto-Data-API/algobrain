@@ -9,12 +9,12 @@ aliases: ["DIA", "DIAdata", "DIA Data"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://diadata.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[chainlink]]", "[[band-protocol]]", "[[defi]]", "[[data-provider]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[band-protocol]]", "[[defi]]", "[[data-provider]]", "[[real-world-assets]]"]
 ---
 
 # DIA
 
-**DIA** (Decentralised Information Asset) is an open-source, transparent [[oracle|data oracle]] network that supplies customizable, fully traceable price and information feeds to smart contracts across many blockchains. Its defining feature versus competitors such as [[chainlink|Chainlink]] and [[band-protocol|Band Protocol]] is **transparency and customizability**: DIA sources raw trade data directly from a large number of on-chain and centralized venues and lets integrators tailor a feed's source set, methodology, and update frequency rather than consuming a one-size-fits-all aggregate. It ranks **#981** by market capitalization.
+**DIA** (Decentralised Information Asset) is an open-source, transparent data oracle network that supplies customizable, fully traceable price and information feeds to smart contracts across many blockchains. Its defining feature versus competitors such as [[chainlink|Chainlink]] and [[band-protocol|Band Protocol]] is **transparency and customizability**: DIA sources raw trade data directly from a large number of on-chain and centralized venues and lets integrators tailor a feed's source set, methodology, and update frequency rather than consuming a one-size-fits-all aggregate. It ranks **#981** by market capitalization.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -40,7 +40,7 @@ As of 2026-06-22, DIA trades at **$0.118947** with a market cap of about **$14,2
 
 ## Overview
 
-DIA addresses the [[oracle]] problem with a model built around openness. Rather than delivering opaque aggregated values, DIA's pipeline collects raw, individual trade data from a wide set of exchanges and on-chain pools and applies transparent, auditable methodologies (e.g., volume-weighted averages, median filters, configurable windows) to produce a price. Integrators can inspect exactly which sources and which computation produced any given value, and can request bespoke feeds suited to their asset's liquidity profile.
+DIA addresses the oracle problem with a model built around openness. Rather than delivering opaque aggregated values, DIA's pipeline collects raw, individual trade data from a wide set of exchanges and on-chain pools and applies transparent, auditable methodologies (e.g., volume-weighted averages, median filters, configurable windows) to produce a price. Integrators can inspect exactly which sources and which computation produced any given value, and can request bespoke feeds suited to their asset's liquidity profile.
 
 This emphasis on **traceability and customization** positions DIA particularly for long-tail and newly launched assets, [[real-world-assets|RWA]] tokenization, NFT-floor pricing, and other use cases where standard major-asset price feeds are insufficient. The DIA token is the network's utility and [[governance-token|governance]] asset, used to incentivize honest data provision, secure the data pipeline through staking, and govern protocol parameters.
 
@@ -59,7 +59,7 @@ This emphasis on **traceability and customization** positions DIA particularly f
 
 ## Competitive Position
 
-DIA competes with [[chainlink|Chainlink]] (the market leader), [[band-protocol|Band Protocol]], Pyth, API3 and others. Its differentiation is methodological transparency and per-feed customization, which appeals to projects needing [[oracle|oracles]] for assets the incumbents do not cover well, and to teams that want to audit exactly how a price is formed. As with all oracle challengers, DIA faces strong incumbent network effects and a much smaller share of total value secured; at ~$14.2M market cap (rank ~#981) it is a small-cap relative to the sector leader.
+DIA competes with [[chainlink|Chainlink]] (the market leader), [[band-protocol|Band Protocol]], Pyth, API3 and others. Its differentiation is methodological transparency and per-feed customization, which appeals to projects needing oracles for assets the incumbents do not cover well, and to teams that want to audit exactly how a price is formed. As with all oracle challengers, DIA faces strong incumbent network effects and a much smaller share of total value secured; at ~$14.2M market cap (rank ~#981) it is a small-cap relative to the sector leader.
 
 | Oracle | Data sourcing model | Update / delivery model | Distinguishing angle | Relative scale |
 |---|---|---|---|---|
@@ -167,7 +167,7 @@ DIA's clearest wedge is **assets the majors under-serve** — newly launched tok
 
 ## Risks
 
-- **Competitive / network-effect risk** — the [[oracle]] market is dominated by [[chainlink|Chainlink]]; transparent/customizable feeds are a real differentiator but must overcome the incumbent's integration moat.
+- **Competitive / network-effect risk** — the oracle market is dominated by [[chainlink|Chainlink]]; transparent/customizable feeds are a real differentiator but must overcome the incumbent's integration moat.
 - **Oracle integrity risk** — any oracle is a manipulation target. Although DIA's openness aids auditing, thinly traded long-tail assets are inherently easier to manipulate at the source, which can propagate into dependent [[defi|DeFi]] contracts.
 - **Liquidity / small-cap risk** — at ~$14.5M market cap (rank ~#971), DIA is small and volatile; it is highly sensitive to broad [[bitcoin|BTC]]-led sentiment and can suffer meaningful slippage.
 - **Demand / fee-capture risk** — token value depends on sustained, paid demand for feeds; absent organic usage growth, token economics lean on incentives rather than revenue.
@@ -191,7 +191,6 @@ DIA's clearest wedge is **assets the majors under-serve** — newly launched tok
 
 ## See Also
 
-- [[oracle]]
 - [[chainlink]]
 - [[band-protocol]]
 - [[defi]]

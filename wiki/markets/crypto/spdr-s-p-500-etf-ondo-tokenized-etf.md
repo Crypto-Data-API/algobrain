@@ -9,12 +9,12 @@ aliases: ["SPYON", "SPYon", "Ondo SPY"]
 entity_type: protocol
 headquarters: "Decentralized (issued by Ondo Global Markets)"
 website: "https://app.ondo.finance/assets/spyon"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[etf]]", "[[sp500]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[etf]]"]
 ---
 
 # SPDR S&P 500 ETF (Ondo Tokenized ETF)
 
-**SPDR S&P 500 ETF (Ondo Tokenized ETF)** (SPYON) is a tokenized [[real-world-assets|real-world asset]]: an on-chain wrapper issued by **[[ondo-finance|Ondo Global Markets]]** on [[ethereum|Ethereum]] (canonical, also BNB Chain and Solana) that tracks the **SPDR S&P 500 ETF (SPY)** — the largest [[etf|ETF]] tracking the [[sp500|S&P 500]] index. Each SPYON gives holders economic exposure similar to owning a SPY share (with dividends reinvested), but it is **not the ETF share itself** — it is a tokenized claim whose price tracks SPY, backed by real ETF shares held off-chain. The exposure chains through two wrappers: **S&P 500 index → SPY ETF → SPYON token**. As of 2026-06-21 it traded at **$750.49**, ranked **#506** by market capitalization with a market cap of **~$41.92M**.
+**SPDR S&P 500 ETF (Ondo Tokenized ETF)** (SPYON) is a tokenized [[real-world-assets|real-world asset]]: an on-chain wrapper issued by **[[ondo-finance|Ondo Global Markets]]** on [[ethereum|Ethereum]] (canonical, also BNB Chain and Solana) that tracks the **SPDR S&P 500 ETF (SPY)** — the largest [[etf|ETF]] tracking the S&P 500 index. Each SPYON gives holders economic exposure similar to owning a SPY share (with dividends reinvested), but it is **not the ETF share itself** — it is a tokenized claim whose price tracks SPY, backed by real ETF shares held off-chain. The exposure chains through two wrappers: **S&P 500 index → SPY ETF → SPYON token**. As of 2026-06-21 it traded at **$750.49**, ranked **#506** by market capitalization with a market cap of **~$41.92M**.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -43,7 +43,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[toke
 
 ## Overview
 
-SPYON is the [[ondo-finance|Ondo]]-tokenized version of the SPDR S&P 500 [[etf|ETF]], part of the **Ondo Global Markets** lineup of tokenized US equities and ETFs (alongside [[nvidia-ondo-tokenized-stock|NVDAon]] and [[invesco-qqq-etf-ondo-tokenized-etf|QQQon]]). It gives holders broad [[sp500|S&P 500]] exposure comparable to holding a SPY share, with dividends reinvested into the token's value. Ondo's tokenized products are built so **non-US retail and institutional users** can mint and redeem 24/5, with the on-chain price kept in line with the underlying via traditional exchange liquidity. *Additional restrictions apply.*
+SPYON is the [[ondo-finance|Ondo]]-tokenized version of the SPDR S&P 500 [[etf|ETF]], part of the **Ondo Global Markets** lineup of tokenized US equities and ETFs (alongside [[nvidia-ondo-tokenized-stock|NVDAon]] and [[invesco-qqq-etf-ondo-tokenized-etf|QQQon]]). It gives holders broad S&P 500 exposure comparable to holding a SPY share, with dividends reinvested into the token's value. Ondo's tokenized products are built so **non-US retail and institutional users** can mint and redeem 24/5, with the on-chain price kept in line with the underlying via traditional exchange liquidity. *Additional restrictions apply.*
 
 The token is a **wrapper**: its on-chain price **tracks the off-chain SPY price**, and its backing is real SPY shares held off-chain in the Ondo structure. It therefore carries equity-market (index) risk rather than the flat-NAV profile of the cash/T-bill RWAs in this cluster.
 
@@ -53,7 +53,7 @@ The token is a **wrapper**: its on-chain price **tracks the off-chain SPY price*
 
 - **Underlying asset / backing:** Real shares of the SPDR S&P 500 ETF (SPY) held off-chain within the Ondo Global Markets structure; each token represents economic exposure to one underlying ETF share.
 - **Issuer:** **Ondo Global Markets** (the tokenized-securities arm of [[ondo-finance|Ondo Finance]]).
-- **Price tracking:** The token tracks SPY (and thus the [[sp500|S&P 500]] index). Dividends are reinvested into the token's economic value.
+- **Price tracking:** The token tracks SPY (and thus the S&P 500 index). Dividends are reinvested into the token's economic value.
 - **Mint / redeem (issuance & redemption):** Issuance and redemption are **permissioned and KYC-gated** for eligible, onboarded non-US users. Minting causes Ondo to acquire SPY shares; redemption sells the shares and burns the token. This primary mint/redeem keeps the token tethered to SPY's price.
 - **No shareholder rights:** Holders get **economic exposure only** — no fund/voting rights, no record-holder status in SPY; they hold a claim against the issuer's structure.
 - **Transfer restrictions:** Secondary transfers can be limited to whitelisted / KYC'd addresses; the product is **not offered to US persons**.
@@ -65,7 +65,7 @@ The token is a **wrapper**: its on-chain price **tracks the off-chain SPY price*
 
 ## Tracking & Peg
 
-SPYON's fair value is the SPY share price (and thus the [[sp500|S&P 500]]). The peg is held by **primary-market arbitrage**: eligible, KYC'd participants mint SPYON when it trades rich to SPY and redeem when it trades cheap, pulling the token back to NAV while US markets are open.
+SPYON's fair value is the SPY share price (and thus the S&P 500). The peg is held by **primary-market arbitrage**: eligible, KYC'd participants mint SPYON when it trades rich to SPY and redeem when it trades cheap, pulling the token back to NAV while US markets are open.
 
 - **Premium / discount:** Small deviations are normal given thin secondary liquidity; they compress at the US open when arbitrageurs can act.
 - **Tracking error:** Because dividends are reinvested into the token, SPYON's path is total-return-like rather than price-return — a structural (and benign) difference from the headline SPY price.
@@ -220,7 +220,6 @@ SPYON is [[ondo-finance|Ondo Global Markets]]' on-chain wrapper for the single m
 - [[tokenized-stocks]]
 - [[ondo-finance]]
 - [[etf]]
-- [[sp500]]
 
 ---
 

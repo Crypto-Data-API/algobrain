@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [arbitrage, strategies, index]
 aliases: ["Arbitrage Strategies", "Arb Hub", "Arbitrage Index"]
-related: ["[[arbitrage]]", "[[relative-value-arbitrage]]", "[[risk-arbitrage]]", "[[limits-to-arbitrage]]", "[[statistical-arbitrage]]", "[[merger-arbitrage]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[volatility-arbitrage]]", "[[arbitrage-monitoring-setup]]", "[[arbitrage-worked-examples]]", "[[arbitrage-parameter-cheatsheet]]"]
+related: ["[[arbitrage]]", "[[relative-value-arbitrage]]", "[[limits-to-arbitrage]]", "[[statistical-arbitrage]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[volatility-arbitrage]]", "[[arbitrage-monitoring-setup]]", "[[arbitrage-worked-examples]]", "[[arbitrage-parameter-cheatsheet]]"]
 ---
 
 # Arbitrage
@@ -40,11 +40,11 @@ If arbitrage were truly free and instantaneous, every gap would close before it 
 | Limit to arbitrage | What it is | Strategies it sustains |
 |---|---|---|
 | **Execution / latency** | Speed gap between seeing and trading | [[cross-exchange-arbitrage]], [[triangular-arbitrage]], [[latency-arbitrage]], [[mev-strategies]] |
-| **Capital / funding** | Need balance sheet to hold both legs to convergence | [[cash-and-carry]], [[basis-trading]], [[relative-value-arbitrage]], [[convertible-arbitrage]] |
-| **Counterparty / settlement** | Risk one leg fails to deliver | [[funding-rate-arbitrage]], [[cross-chain-arbitrage]], OTC [[merger-arbitrage]] |
+| **Capital / funding** | Need balance sheet to hold both legs to convergence | [[cash-and-carry]], [[basis-trading]], [[relative-value-arbitrage]], convertible-arbitrage |
+| **Counterparty / settlement** | Risk one leg fails to deliver | [[funding-rate-arbitrage]], [[cross-chain-arbitrage]], OTC merger-arbitrage |
 | **Regulatory / capital controls** | Capital cannot move across the gap | [[2017-2021-kimchi-premium]], [[gbtc-discount-arbitrage]], [[regulatory-arbitrage]] |
-| **Model / convergence risk** | Mean-reversion may not happen on your horizon | [[statistical-arbitrage]], [[pairs-trading]], [[capital-structure-arbitrage]] |
-| **Event / deal risk** | Catalyst may not resolve as expected | [[merger-arbitrage]], [[spac-arbitrage]], [[risk-arbitrage]] |
+| **Model / convergence risk** | Mean-reversion may not happen on your horizon | [[statistical-arbitrage]], [[pairs-trading]], capital-structure-arbitrage |
+| **Event / deal risk** | Catalyst may not resolve as expected | merger-arbitrage, spac-arbitrage, risk-arbitrage |
 
 The single most important lesson of arbitrage history (LTCM 1998, the [[2020-03-bond-etf-dislocation|March 2020 ETF dislocation]], the [[2022-05-terra-luna-depeg-arb|Terra/LUNA]] collapse): **the residual risk that keeps a gap open is exactly the risk that detonates the trade in a crisis**. The leg you thought was a hedge becomes the loss. See [[leg-risk]] and [[limits-to-arbitrage]].
 
@@ -89,7 +89,7 @@ Model-driven strategies that exploit probabilistic mean-reversion, not determini
 | [[pairs-trading]] | Long one asset, short a correlated peer; bet on convergence | Equities, crypto |
 | [[mean-reversion]] | Bet that prices revert to historical averages | All markets |
 | [[ornstein-uhlenbeck]] | Model mean-reverting processes for optimal entry/exit | Quant |
-| [[long-short-equity]] | Factor-neutral portfolio exploiting relative value | Equities |
+| long-short-equity | Factor-neutral portfolio exploiting relative value | Equities |
 
 ### Volatility & Options Arbitrage
 
@@ -99,24 +99,24 @@ Strategies that exploit mispricings in implied vs realized volatility or options
 |----------|-------------|--------|
 | [[volatility-arbitrage]] | Trade implied vol vs realized vol divergence | Options |
 | [[gamma-scalping]] | Delta-hedge options to capture gamma as realized vol | Options |
-| [[dispersion-trading]] | Short index vol, long single-stock vol (or vice versa) | Options |
-| [[convertible-arbitrage]] | Long convertible bonds, short underlying equity | Equities, bonds |
+| dispersion-trading | Short index vol, long single-stock vol (or vice versa) | Options |
+| convertible-arbitrage | Long convertible bonds, short underlying equity | Equities, bonds |
 
-### Event-Driven Arbitrage (a.k.a. [[risk-arbitrage|Risk Arbitrage]])
+### Event-Driven Arbitrage (a.k.a. Risk Arbitrage)
 
-Strategies where the arb opportunity is created by a corporate event or structural catalyst. See [[risk-arbitrage]] for the full taxonomy.
+Strategies where the arb opportunity is created by a corporate event or structural catalyst. See risk-arbitrage for the full taxonomy.
 
 | Strategy | Description | Market |
 |----------|-------------|--------|
-| [[merger-arbitrage]] | Buy target, short acquirer; bet on deal completion | Equities |
-| [[tender-offer-arbitrage]] | Buy shares and tender above market; proration risk | Equities |
-| [[spac-arbitrage]] | Buy SPAC below trust value; redeem at trust or ride deal | Equities |
-| [[rights-issue-arbitrage]] | Arbitrage discount between rights, new shares, and stock | Equities |
-| [[warrant-arbitrage]] | Trade warrants vs underlying equity / call options | Equities |
+| merger-arbitrage | Buy target, short acquirer; bet on deal completion | Equities |
+| tender-offer-arbitrage | Buy shares and tender above market; proration risk | Equities |
+| spac-arbitrage | Buy SPAC below trust value; redeem at trust or ride deal | Equities |
+| rights-issue-arbitrage | Arbitrage discount between rights, new shares, and stock | Equities |
+| warrant-arbitrage | Trade warrants vs underlying equity / call options | Equities |
 | [[event-driven-trading]] | Trade around earnings, spin-offs, regulatory decisions | Equities |
-| [[dividend-capture]] | Capture dividend payments with hedged positions | Equities |
-| [[corporate-action-arbitrage]] | Exploit mispricings around corporate actions (spin-offs, splits, tender offers) | Equities |
-| [[dividend-arbitrage]] | Exploit dividend-related mispricings in options or equities | Equities |
+| dividend-capture | Capture dividend payments with hedged positions | Equities |
+| corporate-action-arbitrage | Exploit mispricings around corporate actions (spin-offs, splits, tender offers) | Equities |
+| dividend-arbitrage | Exploit dividend-related mispricings in options or equities | Equities |
 
 ### Fixed Income / Relative Value Arbitrage
 
@@ -129,7 +129,7 @@ Classical bond-market arbitrages — LTCM's playbook. Umbrella page: [[relative-
 | [[tips-treasury-arbitrage]] | Trade TIPS (inflation-linked) vs nominal Treasuries — breakeven inflation | Rates |
 | [[mbs-basis-arbitrage]] | Trade MBS vs Treasuries/swaps hedged for duration and convexity | Mortgages |
 | [[cds-bond-basis-arbitrage]] | Long cash bond + buy CDS protection — the negative basis trade | Credit |
-| [[capital-structure-arbitrage]] | Trade equity vs debt of same issuer using Merton-model linkage | Equities, credit |
+| capital-structure-arbitrage | Trade equity vs debt of same issuer using Merton-model linkage | Equities, credit |
 
 ### Cross-Listing / NAV Arbitrage
 
@@ -137,8 +137,8 @@ Strategies exploiting the same economic claim trading at different prices in dif
 
 | Strategy | Description | Market |
 |----------|-------------|--------|
-| [[dual-listed-company-arbitrage]] | Royal Dutch/Shell, BHP, Unilever — two listings, one cash flow | Equities |
-| [[adr-arbitrage]] | American Depository Receipts vs underlying foreign shares | Equities |
+| dual-listed-company-arbitrage | Royal Dutch/Shell, BHP, Unilever — two listings, one cash flow | Equities |
+| adr-arbitrage | American Depository Receipts vs underlying foreign shares | Equities |
 | [[closed-end-fund-arbitrage]] | Trade CEFs against NAV; activist discount-narrowing plays | Equities |
 
 ### Macro / Currency Arbitrage
@@ -157,11 +157,11 @@ Strategies from the gold-standard era — the ancestors of modern arb. Context: 
 | Strategy | Description | Market |
 |----------|-------------|--------|
 | [[medieval-bill-of-exchange-arbitrage]] | Triangular arb via bills of exchange across [[champagne-fairs|Champagne]] and [[lyon-fairs|Lyon]] fairs (12th-16th c) | FX |
-| [[gold-point-arbitrage]] | Ship bullion between mints when FX rate breaches gold points; dominated by [[rothschild-family]] | FX, bullion |
+| [[gold-point-arbitrage]] | Ship bullion between mints when FX rate breaches gold points; dominated by rothschild-family | FX, bullion |
 | [[specie-flow-arbitrage]] | Run ahead of Hume's price-specie-flow mechanism during trade-balance adjustment | FX, macro |
 | [[mint-parity-arbitrage]] | Exploit slow-moving deviations from mint parity within the gold points band | FX |
 | [[shipping-certificate-arbitrage]] | Cash vs futures grain/cotton at CBOT and [[liverpool-cotton-exchange]] 1860s-1920s | Commodities |
-| [[bill-broking-arbitrage]] | Pre-modern money market arb — London vs provincial discount rates ([[overend-gurney]], Bagehot) | Money market |
+| [[bill-broking-arbitrage]] | Pre-modern money market arb — London vs provincial discount rates (overend-gurney, Bagehot) | Money market |
 | [[regional-currency-arbitrage]] | Wildcat-era US state bank notes traded at discounts; Suffolk System, Thompson's reporters | Notes, FX |
 | [[historical-cable-arbitrage]] | 1920s-30s pound-dollar-franc triangle via transatlantic cable; ancestor of [[latency-arbitrage]] | FX |
 | [[grain-futures-basis-arbitrage]] | Early CBOT cash-futures basis; Harper 1866, Leiter 1888, Hutchinson 1897 corners | Commodities |
@@ -203,7 +203,7 @@ Arbitrage strategies built around the post-2023 shift from public mempool to pri
 | Strategy | Description | Market |
 |----------|-------------|--------|
 | [[regulatory-arbitrage]] | Exploit jurisdictional differences in regulation | All |
-| [[cum-ex-dividend-stripping]] | Multi-claim dividend tax refund fraud (illegal — €55B+ European scandal) | Equities |
+| cum-ex-dividend-stripping | Multi-claim dividend tax refund fraud (illegal — €55B+ European scandal) | Equities |
 
 ### Commodity & Energy Arbitrage
 
@@ -257,9 +257,9 @@ Mapping the taxonomy onto the [[edge-taxonomy|five edge sources]] clarifies *wha
 | Edge source | Mechanism | Representative arbs | Decay driver |
 |---|---|---|---|
 | **Latency / structural speed** | Be first to the gap | [[cross-exchange-arbitrage]], [[triangular-arbitrage]], [[latency-arbitrage]], [[mev-strategies]], [[flash-loan-arbitrage]] | Faster competitors, co-location, private order flow |
-| **Risk-bearing / carry** | Get paid to hold a hedged position to convergence | [[cash-and-carry]], [[funding-rate-arbitrage]], [[basis-trading]], [[merger-arbitrage]], [[convertible-arbitrage]] | More capital chasing the same carry |
-| **Informational / analytical** | Model relationships others misprice | [[statistical-arbitrage]], [[pairs-trading]], [[capital-structure-arbitrage]], [[volatility-arbitrage]], [[dispersion-trading]] | Crowding, factor commoditization |
-| **Structural / segmentation** | Same claim trapped in different wrappers/venues | [[etf-arbitrage]], [[adr-arbitrage]], [[dual-listed-company-arbitrage]], [[closed-end-fund-arbitrage]], [[gbtc-discount-arbitrage]] | Wrapper convergence, ETF conversion |
+| **Risk-bearing / carry** | Get paid to hold a hedged position to convergence | [[cash-and-carry]], [[funding-rate-arbitrage]], [[basis-trading]], merger-arbitrage, convertible-arbitrage | More capital chasing the same carry |
+| **Informational / analytical** | Model relationships others misprice | [[statistical-arbitrage]], [[pairs-trading]], capital-structure-arbitrage, [[volatility-arbitrage]], dispersion-trading | Crowding, factor commoditization |
+| **Structural / segmentation** | Same claim trapped in different wrappers/venues | [[etf-arbitrage]], adr-arbitrage, dual-listed-company-arbitrage, [[closed-end-fund-arbitrage]], [[gbtc-discount-arbitrage]] | Wrapper convergence, ETF conversion |
 | **Regulatory / jurisdictional** | Exploit rules that block capital flow | [[regulatory-arbitrage]], [[2017-2021-kimchi-premium\|capital-control premia]], [[covered-interest-arbitrage]] | Rule changes, controls lifted |
 
 For the full framework see [[edge-taxonomy]]; for why these edges survive at all, [[limits-to-arbitrage]].
@@ -277,9 +277,9 @@ For the full framework see [[edge-taxonomy]]; for why these edges survive at all
 | [[funding-rate-arbitrage]] | Low-Med | 10-40% APR | Medium | Days-weeks | Medium |
 | [[pairs-trading]] | Medium | 5-15% annual | Medium | Days-weeks | High |
 | [[statistical-arbitrage]] | Medium | 10-30% annual | High | Hours-days | Very High |
-| [[merger-arbitrage]] | Medium | 5-15% annualized | High | Weeks-months | Medium |
+| merger-arbitrage | Medium | 5-15% annualized | High | Weeks-months | Medium |
 | [[volatility-arbitrage]] | Medium-High | Variable | High | Days-weeks | Very High |
-| [[convertible-arbitrage]] | Medium | 6-12% annual | Very High | Weeks-months | High |
+| convertible-arbitrage | Medium | 6-12% annual | Very High | Weeks-months | High |
 | [[mev-strategies]] | Medium-High | Variable (high) | Low-Medium | Blocks | Very High |
 | [[defi-yield-farming]] | High | Variable | Medium | Days-months | Medium |
 
@@ -300,7 +300,7 @@ Once you understand the basics, expand to strategies with more moving parts:
 
 5. **[[triangular-arbitrage]]** -- Requires speed and precision but teaches you about market microstructure.
 6. **[[pairs-trading]]** -- Your entry point into statistical arbitrage; learn cointegration and z-scores.
-7. **[[merger-arbitrage]]** -- Event-driven arb that requires fundamental analysis skills.
+7. **merger-arbitrage** -- Event-driven arb that requires fundamental analysis skills.
 8. **[[basis-trading]]** -- Multi-leg trades across expirations and venues.
 9. **[[crack-spread]]** / **[[crush-spread]]** -- Commodity arbs that teach you about structural relationships.
 
@@ -310,9 +310,9 @@ These strategies require significant infrastructure, capital, or quantitative sk
 
 10. **[[statistical-arbitrage]]** -- Full quant models, factor analysis, and portfolio construction.
 11. **[[volatility-arbitrage]]** / **[[gamma-scalping]]** -- Deep options knowledge and Greeks management.
-12. **[[convertible-arbitrage]]** -- Complex multi-asset hedging across equity and credit.
+12. **convertible-arbitrage** -- Complex multi-asset hedging across equity and credit.
 13. **[[mev-strategies]]** -- Requires blockchain engineering, mempool analysis, and Solidity/smart contract skills.
-14. **[[dispersion-trading]]** -- Correlation trading with sophisticated vol surface analysis.
+14. **dispersion-trading** -- Correlation trading with sophisticated vol surface analysis.
 
 ## Arbitrage Operations & Execution
 
@@ -370,7 +370,6 @@ SORT updated DESC
 - [[arbitrage]] — the theoretical concept (law of one price, no-arbitrage pricing)
 - [[limits-to-arbitrage]] — why gaps persist; the residual risk that pays you
 - [[relative-value-arbitrage]] — umbrella for fixed-income / RV arbs (the LTCM playbook)
-- [[risk-arbitrage]] — umbrella for event-driven / merger arbs
 - [[statistical-arbitrage]] — model-driven mean-reversion arbs
 - [[edge-taxonomy]] — the five edge sources mapped above
 - [[leg-risk]] — the #1 operational arb risk (one leg fills, the other doesn't)

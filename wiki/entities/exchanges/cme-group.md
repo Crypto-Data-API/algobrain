@@ -10,7 +10,7 @@ founded: 1898
 headquarters: "Chicago, Illinois, USA"
 website: "https://www.cmegroup.com"
 aliases: ["CME", "Chicago Mercantile Exchange", "CME Group", "NYMEX", "COMEX", "CBOT", "The Merc"]
-related: ["[[futures-overview]]", "[[options-overview]]", "[[derivatives]]", "[[order-flow]]", "[[cftc]]", "[[intercontinental-exchange]]", "[[commodities]]", "[[cboe]]"]
+related: ["[[futures-overview]]", "[[options-overview]]", "[[derivatives]]", "[[order-flow]]", "[[cftc]]", "[[commodities]]", "[[cboe]]"]
 ---
 
 # CME Group
@@ -41,7 +41,7 @@ Key milestones:
 ### Equity Index Futures
 
 - **E-mini S&P 500 (ES)** -- the most liquid futures contract in the world, with daily volume regularly exceeding 1.5 million contracts. The benchmark for equity index trading
-- **E-mini NASDAQ-100 (NQ)** -- heavily traded by technology-focused traders, correlates with [[nasdaq]]
+- **E-mini NASDAQ-100 (NQ)** -- heavily traded by technology-focused traders, correlates with nasdaq
 - **Micro E-mini contracts** -- 1/10th the size of E-minis, launched in 2019 to serve retail traders and smaller accounts
 
 ### Interest Rate Futures
@@ -98,7 +98,7 @@ CME Clearing acts as the central counterparty (CCP) for all trades, guaranteeing
 CME Group is the most important venue for [[order-flow]] traders for several reasons:
 
 1. **Centralized order book**: All orders flow through Globex, providing a complete and unfragmented view of market depth. There is no hidden venue or dark pool equivalent
-2. **Transparent data**: CME provides full depth-of-market data (Level 2) showing all resting limit orders, enabling tools like [[bookmap]], [[sierra-chart]], and [[jigsaw]] to display accurate heatmaps and reconstructed tape
+2. **Transparent data**: CME provides full depth-of-market data (Level 2) showing all resting limit orders, enabling tools like bookmap, [[sierra-chart]], and jigsaw to display accurate heatmaps and reconstructed tape
 3. **Liquid markets**: Instruments like ES, NQ, and CL have deep order books where [[absorption]], [[iceberg-orders]], and [[delta-divergence]] patterns are reliable signals rather than noise
 4. **Regulated environment**: As a [[cftc]]-regulated exchange, CME markets have rules against spoofing and manipulation, making order flow data more trustworthy than unregulated venues
 
@@ -109,11 +109,9 @@ The [[smart-money-orderflow-combo|Smart Money + Order Flow Combo]] strategy is m
 - [[futures-overview]] -- The contract type that CME Group primarily trades
 - [[options-overview]] -- CME also offers options on futures across all asset classes
 - [[order-flow]] -- The analytical approach enabled by CME's transparent order book
-- [[bookmap]] -- Heatmap visualization of CME order book data
 - [[sierra-chart]] -- Professional charting platform for CME futures analysis
 - [[cftc]] -- The regulatory body overseeing CME Group
 - [[commodities]] -- CME is the dominant venue for commodity futures trading
-- [[intercontinental-exchange]] -- CME's primary competitor in derivatives
 - [[cboe]] -- Competitor in equity index options and volatility products; its CEO Craig Donohue is a former CME CEO
 - [[cme-bitcoin-futures]] -- Detail page on CME's flagship crypto contract
 - [[interest-rates]] -- The asset class at the heart of CME's franchise

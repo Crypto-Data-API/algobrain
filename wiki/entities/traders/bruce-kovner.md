@@ -33,7 +33,7 @@ After his initial soybean trading success, Kovner joined Commodities Corporation
 
 In 1983, Kovner founded Caxton Associates in New York. Over the next 28 years, Caxton became one of the most consistently profitable [[global-macro]] hedge funds in the world. The fund reportedly averaged annual returns of approximately 21% from 1983 through 2011, with remarkably low drawdowns relative to returns. At its peak, Caxton managed approximately $14 billion in assets.
 
-Kovner's trading spanned [[forex|currencies]], [[futures|commodity futures]], [[bond-market|fixed income]], and [[stock-markets|equity]] indices. He was known for making concentrated bets on macroeconomic themes -- such as interest rate movements by the [[federal-reserve]], currency realignments, or commodity supply/demand imbalances -- while maintaining iron discipline on risk.
+Kovner's trading spanned [[forex|currencies]], [[futures|commodity futures]], [[bond-market|fixed income]], and equity indices. He was known for making concentrated bets on macroeconomic themes -- such as interest rate movements by the [[federal-reserve]], currency realignments, or commodity supply/demand imbalances -- while maintaining iron discipline on risk.
 
 Unlike some macro traders who rely primarily on qualitative judgment, Kovner combined deep fundamental analysis with rigorous quantitative [[risk-management]]. Every position had a predefined [[stop-loss]] level, and he never allowed a single trade to risk more than 1-2% of total portfolio capital. This approach meant that even a string of losing trades would not materially impair the fund's capital base.
 
@@ -64,7 +64,7 @@ Kovner's philosophy, documented primarily through his interview in *Market Wizar
 
 6. **Emotional discipline is the ultimate edge.** Kovner has spoken extensively about the psychological challenges of trading. He views the ability to take losses without emotional damage -- and to press winners without becoming overconfident -- as the single most important skill a trader can develop. This connects directly to [[trading-psychology]] and the concept of [[loss-aversion]].
 
-7. **Diversify across uncorrelated bets.** While each individual position is sized at 1-2% risk, Kovner aims to hold a portfolio of uncorrelated macro trades across different markets ([[forex]], [[futures]], [[bond-market|bonds]], [[stock-markets|equities]]). This ensures that [[correlation]] does not turn multiple "different" positions into one giant bet.
+7. **Diversify across uncorrelated bets.** While each individual position is sized at 1-2% risk, Kovner aims to hold a portfolio of uncorrelated macro trades across different markets ([[forex]], [[futures]], [[bond-market|bonds]], equities). This ensures that [[correlation]] does not turn multiple "different" positions into one giant bet.
 
 ## Strategy Connections
 

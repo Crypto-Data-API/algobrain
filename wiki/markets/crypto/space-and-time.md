@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://www.spaceandtime.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[oracle]]", "[[chainlink]]", "[[depin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[chainlink]]", "[[depin]]"]
 ---
 
 # Space and Time
 
-**Space and Time** (SXT) is a decentralized, **verifiable data warehouse** — a blockchain-anchored database that can prove the correctness of SQL query results using zero-knowledge cryptography. Its flagship technology, **Proof of SQL**, lets a smart contract trustlessly verify that a query was executed accurately over untampered data, allowing on-chain applications to consume large-scale off-chain and cross-chain data without trusting a centralized [[oracle|oracle]] or indexer. The project is backed by **Microsoft's venture fund M12** and has been closely associated with [[chainlink|Chainlink]] for oracle/data delivery. It ranks **#810** by market capitalization.
+**Space and Time** (SXT) is a decentralized, **verifiable data warehouse** — a blockchain-anchored database that can prove the correctness of SQL query results using zero-knowledge cryptography. Its flagship technology, **Proof of SQL**, lets a smart contract trustlessly verify that a query was executed accurately over untampered data, allowing on-chain applications to consume large-scale off-chain and cross-chain data without trusting a centralized oracle or indexer. The project is backed by **Microsoft's venture fund M12** and has been closely associated with [[chainlink|Chainlink]] for oracle/data delivery. It ranks **#810** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).* SXT trades around **$0.007967**, market cap **~$20.7M** (rank #810), **+1.24% over 24h** and **-5.60% over 7d**, against an Extreme-Fear market (Fear & Greed 22, BTC ~$64,180).
 
@@ -37,7 +37,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[o
 
 ## Overview
 
-Space and Time is positioned as "the data blockchain securing on-chain finance." It indexes blockchain data and ingests off-chain/real-world data into a decentralized warehouse, then lets developers run analytical SQL queries whose results can be cryptographically proven and consumed on-chain. This addresses a core limitation of smart contracts: they cannot natively run complex queries over large datasets, and naively trusting an external indexer reintroduces an [[oracle|oracle]]-trust assumption.
+Space and Time is positioned as "the data blockchain securing on-chain finance." It indexes blockchain data and ingests off-chain/real-world data into a decentralized warehouse, then lets developers run analytical SQL queries whose results can be cryptographically proven and consumed on-chain. This addresses a core limitation of smart contracts: they cannot natively run complex queries over large datasets, and naively trusting an external indexer reintroduces an oracle-trust assumption.
 
 **Proof of SQL** is the differentiator. It is a [[zero-knowledge-proof|zero-knowledge]] proof system that generates a succinct cryptographic proof that a SQL query was executed correctly over a specific, untampered table. A smart contract can verify that proof on-chain cheaply, so the result is trustless even though the heavy computation happened off-chain. Use cases include tokenized real-world assets (RWA), stablecoin reserves attestation, institutional/DeFi analytics, on-chain gaming, and feeding [[artificial-intelligence|AI]] agents verifiable data. The project's Microsoft M12 backing and [[chainlink|Chainlink]] integration (for delivering proven query results as oracle data) are central to its institutional-trust narrative.
 
@@ -51,9 +51,9 @@ Space and Time combines a **decentralized data warehouse** with a **zero-knowled
 
 1. **Ingestion & indexing.** A decentralized network of operators indexes blockchain data (events, balances, transactions across multiple chains) and ingests off-chain / real-world data into tamper-evident tables. Tables are committed to a cryptographic commitment scheme so that any later query can be proven against a fixed, known dataset.
 2. **Query execution.** Developers write ordinary **SQL** against the warehouse. Heavy analytical work — joins, aggregations, scans over large tables — runs off-chain where it is cheap, because doing this on-chain is impossible at any reasonable cost.
-3. **Proof generation & on-chain verification (Proof of SQL).** The novel piece. **Proof of SQL** generates a *succinct cryptographic proof* that a specific SQL query was executed correctly over the committed table and was not altered. A smart contract verifies that proof cheaply on-chain. The result: a contract can consume the output of a complex query over a large off-chain dataset and be cryptographically certain it is correct — without re-running the query and without trusting a centralized indexer or [[oracle|oracle]].
+3. **Proof generation & on-chain verification (Proof of SQL).** The novel piece. **Proof of SQL** generates a *succinct cryptographic proof* that a specific SQL query was executed correctly over the committed table and was not altered. A smart contract verifies that proof cheaply on-chain. The result: a contract can consume the output of a complex query over a large off-chain dataset and be cryptographically certain it is correct — without re-running the query and without trusting a centralized indexer or oracle.
 
-**Why this matters.** Smart contracts are deliberately limited — they cannot natively scan or join large datasets, and naively trusting an external indexer or analytics provider reintroduces exactly the [[oracle|oracle]]-trust assumption that decentralization is supposed to remove. Proof of SQL replaces *trust* with *verification*: instead of "trust the indexer," it is "verify the proof." This is the same trust-minimization philosophy as a [[zero-knowledge-proof|ZK]] rollup, applied to databases.
+**Why this matters.** Smart contracts are deliberately limited — they cannot natively scan or join large datasets, and naively trusting an external indexer or analytics provider reintroduces exactly the oracle-trust assumption that decentralization is supposed to remove. Proof of SQL replaces *trust* with *verification*: instead of "trust the indexer," it is "verify the proof." This is the same trust-minimization philosophy as a [[zero-knowledge-proof|ZK]] rollup, applied to databases.
 
 **Delivery via Chainlink.** Proven query results can be delivered on-chain through [[chainlink|Chainlink]] infrastructure, letting SxT function as a verifiable-data source feeding existing oracle pipelines — a key part of its enterprise/institutional go-to-market.
 
@@ -221,7 +221,6 @@ SXT sits in the **ZK / verifiable-compute** and **on-chain-data infrastructure**
 - [[crypto-markets]]
 - [[ethereum]]
 - [[zero-knowledge-proof]]
-- [[oracle]]
 - [[chainlink]]
 - [[the-graph]]
 - [[depin]]

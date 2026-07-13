@@ -69,7 +69,7 @@ AI impacts every stage but doesn't replace wet-lab work entirely. The accelerati
 
 | Theme | Companies | Thesis |
 |-------|----------|-------|
-| **AI-first drug discovery** | [[recursion-pharmaceuticals|RXRX]], [[schrödinger|SDGR]], RLAY | 10x faster/cheaper drug development |
+| **AI-first drug discovery** | RXRX, SDGR, RLAY | 10x faster/cheaper drug development |
 | **Compute for science** | [[nvidia-ai|NVDA]], AMD, GOOGL | GPU demand from scientific AI |
 | **Weather/energy** | DTN, Maxar, energy traders | Better forecasts = trading edge |
 | **Genomics + AI** | ILMN, CRSP, NTLA | AI analyses genomic data for therapeutic targets |

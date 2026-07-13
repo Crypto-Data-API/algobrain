@@ -42,7 +42,7 @@ The four are reinforcing, not independent (see [[#Cross-channel interactions]]):
 
 ## Channel 1 — Overreliance
 
-**Definition.** Concentration of the financial system's AI dependency on a small number of foundation-model providers ([[openai|OpenAI]], [[anthropic|Anthropic]], [[alphabet|Google]]).
+**Definition.** Concentration of the financial system's AI dependency on a small number of foundation-model providers ([[openai|OpenAI]], [[anthropic|Anthropic]], Google).
 
 **Transmission mechanism.** A single point of failure (outage, governance crisis, regulatory action, security breach, training data contamination) at one provider transmits to all downstream financial-services consumers simultaneously. Risk is *correlated* across customers in a way the customers cannot diversify away from.
 
@@ -181,8 +181,6 @@ A multi-asset risk manager wants to size an "AI systemic shock" hedge for a book
 - [[pigouvian-automation-tax]]
 - [[anthropic]]
 - [[openai]]
-- [[microsoft]]
-- [[alphabet]]
 - [[brett-hemenway-falk]]
 - [[gerry-tsoukalas]]
 - [[capital-vs-labor-asymmetry]]

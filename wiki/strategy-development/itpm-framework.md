@@ -6,17 +6,17 @@ updated: 2026-06-21
 status: excellent
 tags: [strategy-development, itpm, portfolio-theory, risk-management, options, long-short-equity]
 aliases: ["ITPM Methodology", "Kreil Framework", "Institute of Trading and Portfolio Management Framework", "Anton Kreil Framework"]
-related: ["[[itpm]]", "[[anton-kreil]]", "[[itpm-trade-construction-playbook]]", "[[options-portfolio-construction]]", "[[itpm-five-principles]]", "[[long-vol-vs-short-vol]]", "[[long-short-equity]]", "[[long-vol-overlay]]", "[[barbell-portfolio]]", "[[risk-management-overview]]"]
+related: ["[[anton-kreil]]", "[[itpm-trade-construction-playbook]]", "[[options-portfolio-construction]]", "[[itpm-five-principles]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[barbell-portfolio]]", "[[risk-management-overview]]"]
 domain: [strategy-development, portfolio-theory, risk-management]
-prerequisites: ["[[options-greeks]]", "[[long-short-equity]]"]
+prerequisites: ["[[options-greeks]]"]
 difficulty: intermediate
 ---
 
-The ITPM framework is the top-down, professional-style trading methodology taught by [[anton-kreil|Anton Kreil]] and the [[itpm|Institute of Trading and Portfolio Management]]. It is not a single strategy but an *operating model* for converting macro views into a hedged book of equity and options positions, sized against pre-budgeted portfolio risk limits and managed under the same discipline used at the bulge-bracket banks where Kreil and his co-mentors trained. This page is the index for that methodology: the five principles, the seven-stage construction sequence, and the connection to the more detailed playbooks already in the wiki.
+The ITPM framework is the top-down, professional-style trading methodology taught by [[anton-kreil|Anton Kreil]] and the Institute of Trading and Portfolio Management. It is not a single strategy but an *operating model* for converting macro views into a hedged book of equity and options positions, sized against pre-budgeted portfolio risk limits and managed under the same discipline used at the bulge-bracket banks where Kreil and his co-mentors trained. This page is the index for that methodology: the five principles, the seven-stage construction sequence, and the connection to the more detailed playbooks already in the wiki.
 
 ## Overview
 
-ITPM was founded in 2011 by Kreil (a former [[goldman-sachs|Goldman Sachs]] proprietary trader and trader on the BBC's *Million Dollar Traders*) along with co-mentors [[jason-mcdonald|Jason McDonald]] and others. Its central pedagogical claim is that retail traders fail because they trade *bottom-up* (chart pattern, "looks cheap," a tip) without ever building the macro and sector view that institutional traders take as the starting point of any position. The framework is designed to invert that order: every trade is a *child* of a higher-level decision, and every higher-level decision constrains what trades are even allowed.
+ITPM was founded in 2011 by Kreil (a former Goldman Sachs proprietary trader and trader on the BBC's *Million Dollar Traders*) along with co-mentors [[jason-mcdonald|Jason McDonald]] and others. Its central pedagogical claim is that retail traders fail because they trade *bottom-up* (chart pattern, "looks cheap," a tip) without ever building the macro and sector view that institutional traders take as the starting point of any position. The framework is designed to invert that order: every trade is a *child* of a higher-level decision, and every higher-level decision constrains what trades are even allowed.
 
 The methodology has two layers:
 
@@ -186,7 +186,6 @@ The ITPM framework is a *discipline-and-process* methodology, so it sits natural
 
 ## Related
 
-- [[itpm]] — the school
 - [[anton-kreil]] — the founder
 - [[itpm-trade-construction-playbook]] — the single-trade workflow
 - [[options-portfolio-construction]] — the book-level risk-budgeting layer
@@ -194,7 +193,6 @@ The ITPM framework is a *discipline-and-process* methodology, so it sits natural
 - [[long-vol-vs-short-vol]] — the canonical synthesis the framework recommends
 - [[long-vol-overlay]] — the overlay leg of the recommended construction
 - [[barbell-portfolio]] — the higher-level shape an ITPM-aligned book takes
-- [[long-short-equity]] — the underlying portfolio archetype
 - [[options-greeks]] — the risk dimensions being budgeted
 - [[portfolio-margin]] — the infrastructure prerequisite
 - [[variance-risk-premium]] — the source of the premium-selling income
@@ -210,7 +208,6 @@ The ITPM framework is a *discipline-and-process* methodology, so it sits natural
 
 ## Sources
 
-- [[itpm]] — ITPM company page and curriculum overview
 - [[anton-kreil]] — primary articulator of the framework
 - [[itpm-five-principles]] — the underlying discipline framework
 - [[itpm-ten-secrets]] — companion source covering the popular packaging of the principles

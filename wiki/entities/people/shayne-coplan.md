@@ -7,12 +7,12 @@ status: good
 tags: [crypto, defi, event-driven, person]
 aliases: ["Shayne Coplan", "@shayne_coplan"]
 entity_type: person
-related: ["[[polymarket]]", "[[prediction-markets]]", "[[intercontinental-exchange]]", "[[cftc]]", "[[polygon]]"]
+related: ["[[polymarket]]", "[[prediction-markets]]", "[[cftc]]", "[[polygon]]"]
 ---
 
 # Shayne Coplan
 
-**Shayne Coplan** is the founder and CEO of [[polymarket|Polymarket]], the world's largest decentralized [[prediction-markets|prediction market]] platform. He founded the company in 2020 during the COVID-19 pandemic, launching the first major decentralized prediction market on [[polygon|Polygon]]. (Source: [[polymarket-wiki-guide]]) By 2025, after a $2B investment from [[intercontinental-exchange|ICE]] valued Polymarket at $9B, Coplan had become one of the youngest founders in the crypto-finance space to lead a venture-backed exchange of that scale.
+**Shayne Coplan** is the founder and CEO of [[polymarket|Polymarket]], the world's largest decentralized [[prediction-markets|prediction market]] platform. He founded the company in 2020 during the COVID-19 pandemic, launching the first major decentralized prediction market on [[polygon|Polygon]]. (Source: [[polymarket-wiki-guide]]) By 2025, after a $2B investment from ICE valued Polymarket at $9B, Coplan had become one of the youngest founders in the crypto-finance space to lead a venture-backed exchange of that scale.
 
 ## Background
 
@@ -71,13 +71,12 @@ Both predate and postdate the QCEX deal and reflect structural challenges in dec
 - **Early 2025** — Raised a (later-disclosed) $150M round at a ~$1.2B valuation
 - **June 2025** — Raised $200M from [[founders-fund|Peter Thiel's Founders Fund]] at a $1B valuation; secured partnership making Polymarket the official prediction market of Elon Musk's X (Twitter), combining X posts, Polymarket event contracts, and xAI's Grok (Verified via Perplexity / Bloomberg, 2026-06-11)
 - **July 2025** — Oversaw acquisition of [[qcex|QCEX]] (CFTC-licensed derivatives exchange) for $112M, enabling legal US re-entry; DOJ and CFTC dropped their investigations without charges
-- **October 2025** — Announced investment of up to $2B from [[intercontinental-exchange|ICE]] (~$8B pre-money / ~$9B valuation). Reported by Forbes/Bloomberg as the world's youngest self-made billionaire. Polymarket also reported to be in early talks to raise at a $12B-$15B valuation (Verified via Perplexity / Bloomberg, 2026-06-11)
+- **October 2025** — Announced investment of up to $2B from ICE (~$8B pre-money / ~$9B valuation). Reported by Forbes/Bloomberg as the world's youngest self-made billionaire. Polymarket also reported to be in early talks to raise at a $12B-$15B valuation (Verified via Perplexity / Bloomberg, 2026-06-11)
 
 ## See Also
 
 - [[polymarket]] — The platform he founded
 - [[prediction-markets]] — The broader concept and category
-- [[intercontinental-exchange]] — Strategic investor (October 2025, $2B at $9B valuation)
 - [[cftc]] — US regulator with jurisdiction over event contracts
 - [[polygon]] — L2 settlement layer for Polymarket
 - [[qcex]] — CFTC-licensed exchange acquired July 2025

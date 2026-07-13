@@ -108,7 +108,7 @@ Supply is large (~1.25B circulating of ~1.37B), with a market-cap/FDV ratio arou
 
 - **2017** — Loopring founded by Daniel Wang; LRC token launched (ICO era).
 - **2019–2020** — Loopring 3.0 and the launch of Loopring's zkRollup exchange and protocol, one of the first zkRollups live on Ethereum mainnet.
-- **2021** — Loopring drew significant attention amid the L2 narrative and a widely discussed (and ultimately materialized) [[gamestop|GameStop]] NFT-marketplace collaboration, contributing to LRC's run to its ~$3.75 all-time high in November 2021.
+- **2021** — Loopring drew significant attention amid the L2 narrative and a widely discussed (and ultimately materialized) GameStop NFT-marketplace collaboration, contributing to LRC's run to its ~$3.75 all-time high in November 2021.
 - **2022–2026** — As the L2 landscape expanded with general-purpose zkEVMs ([[zksync]], Starknet, Polygon zkEVM, Scroll, Linea) and large optimistic rollups ([[arbitrum]], [[optimism]]), Loopring's application-specific DEX rollup ceded mindshare; LRC declined sharply through the bear market.
 
 ---

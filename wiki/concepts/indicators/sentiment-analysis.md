@@ -9,7 +9,7 @@ aliases: ["Market Sentiment"]
 domain: [behavioral-finance, quantitative]
 prerequisites: ["[[behavioral-finance]]", "[[technical-analysis]]"]
 difficulty: intermediate
-related: ["[[behavioral-finance]]", "[[nlp-sentiment-analysis]]", "[[vix]]", "[[trading-psychology]]", "[[contrarian-investing]]"]
+related: ["[[behavioral-finance]]", "[[nlp-sentiment-analysis]]", "[[vix]]", "[[trading-psychology]]"]
 ---
 
 Sentiment analysis in trading is the practice of measuring the collective mood, positioning, and expectations of market participants. It serves as both a confirming indicator (trending sentiment aligns with price) and a powerful contrarian signal (extreme sentiment often marks turning points).
@@ -72,9 +72,9 @@ Quantitative approaches assign sentiment scores to text data and aggregate acros
 
 ### Contrarian Approach
 The most robust use of sentiment is as a **contrarian** indicator:
-- "Be fearful when others are greedy, and greedy when others are fearful" -- [[warren-buffett|Warren Buffett]]
+- "Be fearful when others are greedy, and greedy when others are fearful" -- Warren Buffett
 - Extreme sentiment readings have a strong historical track record of marking inflection points
-- Best used in conjunction with [[technical-analysis|technical]] and [[fundamental-analysis|fundamental]] analysis, not in isolation
+- Best used in conjunction with [[technical-analysis|technical]] and fundamental analysis, not in isolation
 
 ### Trend Confirmation
 Sentiment can also confirm existing trends:
@@ -92,7 +92,6 @@ Sentiment can also confirm existing trends:
 - [[behavioral-finance]] -- Theoretical foundation for why sentiment matters
 - [[trading-psychology]] -- Individual cognitive biases that aggregate into market sentiment
 - [[vix]] -- The primary institutional fear gauge
-- [[contrarian-investing]] -- Strategy that explicitly trades against consensus sentiment
 
 ## Sources
 

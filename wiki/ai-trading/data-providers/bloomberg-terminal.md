@@ -8,7 +8,6 @@ tags: [data-provider, institutional, stocks, bonds, forex, commodities]
 entity_type: company
 website: https://www.bloomberg.com/professional/solution/bloomberg-terminal/
 related:
-  - "[[koyfin]]"
   - "[[polygon-io]]"
   - "[[tradingview-platform]]"
 ---
@@ -40,7 +39,7 @@ The institutional gold standard for financial data. Bloomberg Terminal (commonly
 ## Alpha Edge
 
 - **Speed**: Bloomberg headlines move markets. Institutions see breaking news 30-60 seconds before it appears on free platforms. In fast markets, that gap is enormous
-- **Consensus estimates**: proprietary EPS/revenue estimates and revisions data powers [[earnings]]-based strategies
+- **Consensus estimates**: proprietary EPS/revenue estimates and revisions data powers earnings-based strategies
 - **Fixed income depth**: bond markets are opaque -- Bloomberg is the only source for real-time corporate bond pricing, municipal yields, and structured product analytics
 - **FLDS and custom screening**: screen the entire global equity universe on thousands of fields simultaneously
 - **Bloomberg Intelligence**: proprietary sector research and thematic analysis
@@ -65,7 +64,7 @@ The institutional gold standard for financial data. Bloomberg Terminal (commonly
 - Financial advisors at wirehouses
 - Anyone who needs to be taken seriously in institutional finance
 
-If you are a retail trader, Bloomberg is overkill and unaffordable. Look at [[koyfin]] for a Bloomberg-lite experience at 2% of the cost, or [[polygon-io]] for institutional-grade data APIs.
+If you are a retail trader, Bloomberg is overkill and unaffordable. Look at koyfin for a Bloomberg-lite experience at 2% of the cost, or [[polygon-io]] for institutional-grade data APIs.
 
 ## Options Analytics (OVDV, OVCV, OMON, OVME)
 

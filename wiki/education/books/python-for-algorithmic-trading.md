@@ -13,8 +13,6 @@ related:
   - "[[vectorized-backtesting]]"
   - "[[event-driven-backtesting]]"
   - "[[trading-system-deployment]]"
-  - "[[oanda]]"
-  - "[[fxcm]]"
   - "[[backtrader]]"
   - "[[zipline]]"
   - "[[quantconnect]]"
@@ -55,7 +53,7 @@ The book proceeds in the order you would actually build a system, idea to cloud:
 | [[event-driven-backtesting\|Event-driven backtesting]] | A more realistic bar-by-bar engine modeling order management and portfolio state |
 | Predictive modeling / ML | scikit-learn and TensorFlow/Keras signals with temporally-aware train/test splits |
 | Real-time data | Socket-based streaming of live prices and bar generation |
-| Automated trading | Connecting to [[oanda]]/[[fxcm]], placing orders, managing positions programmatically |
+| Automated trading | Connecting to oanda/fxcm, placing orders, managing positions programmatically |
 | [[trading-system-deployment\|Deployment & operations]] | Cloud hosting, scheduling, logging, exception handling, monitoring, and alerting |
 
 ## Key Takeaways
@@ -83,7 +81,7 @@ This book teaches the exact Python infrastructure needed for [[custom-python-bot
 
 - **The example strategies have no real edge.** SMA crossovers, simple momentum, and basic ML classifiers are vehicles for teaching the *infrastructure*, not profitable systems. Readers expecting alpha will be disappointed — the value is the plumbing, not the signals.
 - **Shallow ML and finance theory.** The modeling coverage is basic next to [[hands-on-ml-algorithmic-trading]] (Jansen), [[advances-in-financial-ml]] (de Prado), or [[machine-learning-in-finance]]; there is little on feature engineering, [[backtesting-pitfalls|overfitting controls]], or financial-data-specific cross-validation.
-- **Broker/asset lock-in.** Live examples are tied to [[oanda]] and [[fxcm]] and are FX/CFD-centric; equities, crypto, and other broker APIs require non-trivial adaptation, and FXCM's product/API availability has shifted since publication.
+- **Broker/asset lock-in.** Live examples are tied to oanda and fxcm and are FX/CFD-centric; equities, crypto, and other broker APIs require non-trivial adaptation, and FXCM's product/API availability has shifted since publication.
 - **Light on costs and risk.** Realistic transaction costs, slippage, capacity, and [[position-sizing|sizing]]/risk frameworks get little attention — yet these usually decide whether a strategy is viable.
 - **Ages with its dependencies.** As a hands-on code book, library and API changes (pandas, TensorFlow, broker SDKs) gradually break examples; the concepts last longer than the exact code.
 
@@ -100,8 +98,6 @@ This book teaches the exact Python infrastructure needed for [[custom-python-bot
 - [[vectorized-backtesting]] — The fast prototyping approach covered in early chapters
 - [[event-driven-backtesting]] — The realistic backtesting approach for strategy validation
 - [[trading-system-deployment]] — The deployment and monitoring material that distinguishes this book
-- [[oanda]] — Primary broker API used for live trading examples
-- [[fxcm]] — Secondary broker API used for live trading examples
 - [[backtrader]] — Alternative event-driven framework
 - [[zipline]] — Alternative backtesting framework
 - [[quantconnect]] — Cloud backtesting platform

@@ -12,7 +12,6 @@ related:
   - "[[capital-vs-labor-asymmetry]]"
   - "[[ai-driven-demand-destruction]]"
   - "[[capex-cycle]]"
-  - "[[ai-capex-vs-cash-flow-divergence]]"
   - "[[junior-analyst-stranding]]"
   - "[[wage-compression-vs-job-loss]]"
 domain: [market-microstructure, behavioral-finance]
@@ -64,7 +63,7 @@ The J-curve trough does not announce itself. Watch for:
 
 - **Corporate earnings call language shift**: from "investing in AI" toward "AI is delivering productivity gains" with quantified output per worker metrics
 - **Productivity statistics**: BLS multifactor productivity (MFP) and labor productivity series — sustained acceleration above trend
-- **Hyperscaler AI revenue acceleration**: enterprise AI revenue inflecting independently of the capex line — see [[ai-capex-vs-cash-flow-divergence]]
+- **Hyperscaler AI revenue acceleration**: enterprise AI revenue inflecting independently of the capex line — see ai-capex-vs-cash-flow-divergence
 - **Headcount-to-revenue ratios**: firms shrinking headcount while revenue grows — direct signature of J-curve resolution
 - **Capex digestion**: the first wave of $660B AI capex starts producing measurable ROI rather than ongoing investment
 
@@ -76,7 +75,7 @@ The J-curve framework distinguishes three positioning regimes:
 
 - Long capex enablers ([[nvidia]], data center / power infrastructure) capture continued investment-phase spend
 - Short narrative-disconnect plays: companies advertising AI productivity gains they cannot yet demonstrate
-- Watch for capex-vs-cash-flow stress — see [[ai-capex-vs-cash-flow-divergence]]
+- Watch for capex-vs-cash-flow stress — see ai-capex-vs-cash-flow-divergence
 
 ### Regime B: At Inflection (transition signal)
 
@@ -95,7 +94,7 @@ The J-curve framework distinguishes three positioning regimes:
 
 - **AI plateaus on capability**: if foundation-model scaling laws break down or commoditize before enterprise integration matures, the productivity inflection may not materialize at all
 - **Integration cost is structurally higher than prior GPTs**: AI requires constant data quality, security, and oversight overhead that consumes the productivity gain in perpetual maintenance
-- **Demand-side cascade arrives first**: [[ai-driven-demand-destruction]] could collapse customer revenue before productivity inflection, creating a Scenario 3 unwind from [[ai-capex-vs-cash-flow-divergence]] before the J resolves
+- **Demand-side cascade arrives first**: [[ai-driven-demand-destruction]] could collapse customer revenue before productivity inflection, creating a Scenario 3 unwind from ai-capex-vs-cash-flow-divergence before the J resolves
 
 ## Related
 
@@ -103,7 +102,6 @@ The J-curve framework distinguishes three positioning regimes:
 - [[ai-layoff-trap]] — first labor shock; J-curve threatens a second
 - [[capital-vs-labor-asymmetry]] — labor pays both shocks
 - [[ai-driven-demand-destruction]] — demand-side check on the inflection
-- [[ai-capex-vs-cash-flow-divergence]] — funding stress during the trough
 - [[junior-analyst-stranding]], [[wage-compression-vs-job-loss]]
 - [[capex-cycle]], [[market-cycles]], [[market-bubbles]]
 - [[skilled-trades-wage-boom]], [[pigouvian-automation-tax]]

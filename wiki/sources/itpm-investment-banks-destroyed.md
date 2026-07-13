@@ -13,20 +13,20 @@ source_file: "r2://trader-wiki/transcripts/2019-01-01-investment-banks-destroyed
 confidence: medium
 claims_count: 32
 aliases: ["Investment Banks Destroyed"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[goldman-sachs]]", "[[long-short-equity]]", "[[hedge-funds]]", "[[risk-management-overview]]"]
+related: ["[[anton-kreil]]", "[[hedge-funds]]", "[[risk-management-overview]]"]
 ---
 
-Combined source summary for the five-part "Investment Banks Destroyed" university lecture series by [[anton-kreil]], delivered at UCL. Kreil — former [[goldman-sachs]], [[lehman-brothers]], and [[jp-morgan]] trader — deconstructs the investment banking career path, compares it to hedge fund careers and independent trading, and quantifies the [[opportunity-cost]] of each pathway. **Confidence note:** the compensation figures, time-allocation percentages, and structural ratios are Kreil's own assertions (some described as cross-checked with managing directors) — directionally plausible but single-source and unverified, marked [MEDIUM]. The 10-year wealth projections are explicitly *spreadsheet models* with chosen assumptions (e.g. 20% net returns, 5x leverage for the independent-trading path) and are marked [MEDIUM] as illustrative, not forecasts. Generic, independently-verifiable facts (the standard hedge-fund "2-and-20" fee structure) are [HIGH].
+Combined source summary for the five-part "Investment Banks Destroyed" university lecture series by [[anton-kreil]], delivered at UCL. Kreil — former goldman-sachs, lehman-brothers, and jp-morgan trader — deconstructs the investment banking career path, compares it to hedge fund careers and independent trading, and quantifies the [[opportunity-cost]] of each pathway. **Confidence note:** the compensation figures, time-allocation percentages, and structural ratios are Kreil's own assertions (some described as cross-checked with managing directors) — directionally plausible but single-source and unverified, marked [MEDIUM]. The 10-year wealth projections are explicitly *spreadsheet models* with chosen assumptions (e.g. 20% net returns, 5x leverage for the independent-trading path) and are marked [MEDIUM] as illustrative, not forecasts. Generic, independently-verifiable facts (the standard hedge-fund "2-and-20" fee structure) are [HIGH].
 
 ## Key Claims
 
 ### Investment Bank Trader Function
 
-1. [MEDIUM] 90% of a professional trader's time at an [[investment-banking|investment bank]] is spent [[market-making]], not proprietary trading. (Source: [[anton-kreil]] direct statement — assertion)
+1. [MEDIUM] 90% of a professional trader's time at an investment bank is spent [[market-making]], not proprietary trading. (Source: [[anton-kreil]] direct statement — assertion)
 2. [MEDIUM] Of that 90%, approximately 80% is agency business (monitoring [[algorithmic-trading|algorithms]] executing client orders) and 20% is risk business (committing capital to clients). (Source: Kreil direct statement — assertion)
 3. [MEDIUM] 72% of a trader's day at an investment bank is spent monitoring algorithms — "there is no human skill in market making anymore." (Source: Kreil direct statement — assertion)
 4. [MEDIUM] The remaining 18% of market-making time is "putting out fires" — unwinding unwanted positions from the "negative selection portfolio." (Source: Kreil direct statement — assertion)
-5. [MEDIUM] Only ~10% of an investment bank trader's time is spent on [[proprietary-trading]], running [[long-short-equity]] portfolios with 1-3 month time horizons. (Source: Kreil direct statement — assertion)
+5. [MEDIUM] Only ~10% of an investment bank trader's time is spent on [[proprietary-trading]], running long-short-equity portfolios with 1-3 month time horizons. (Source: Kreil direct statement — assertion)
 
 ### Commission Decline and Structural Change
 
@@ -75,17 +75,13 @@ Combined source summary for the five-part "Investment Banks Destroyed" universit
 
 ## Entities Mentioned
 
-- [[goldman-sachs]], [[lehman-brothers]], [[jp-morgan]] — investment banks referenced
-- [[itpm]] — Institute of Trading and Portfolio Management
 - [[anton-kreil]] — speaker, ex-Goldman Sachs, Lehman Brothers, JP Morgan
 - [[sec|FCA]] — UK regulator
-- [[bear-stearns]] — example of stock lockup catastrophe (MDs lost $20-25M in 2007)
 
 ## Key Concepts
 
 - [[market-making]] — 90% of IB trader function
 - [[proprietary-trading]] — 10% of IB trader function, linked to bonuses
-- [[long-short-equity]] — standard hedge fund / prop trading approach
 - [[algorithmic-trading]] — "race to zero" destroying short-term human opportunities
 - [[opportunity-cost]] — central framework of the presentation
 - [[leverage]] — professional vs. retail norms

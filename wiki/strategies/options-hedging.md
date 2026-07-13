@@ -17,7 +17,7 @@ A long option is a one-sided insurance contract: a long put pays off when the un
 
 The two structural decisions are:
 - **Cost vs. coverage** — outright long puts give clean convexity but cost the most; spreads and collars cheapen the hedge by selling away tail or upside.
-- **Single-name vs. index** — hedging the whole book with [[spx-puts|index puts]] is cheaper per unit of beta than hedging each name, but leaves idiosyncratic and basis risk.
+- **Single-name vs. index** — hedging the whole book with index puts is cheaper per unit of beta than hedging each name, but leaves idiosyncratic and basis risk.
 
 ## Catalog of option hedges
 
@@ -25,7 +25,6 @@ The two structural decisions are:
 - [[protective-puts]] — buy a put against a long stock position; classic insurance, full convexity, highest carry.
 - [[long-put]] — outright bearish/hedging put, the building block of most downside overlays.
 - [[5-percent-otm-put-overlay]] — systematic out-of-the-money put overlay sized at ~5% below spot to cut cost while retaining crash protection.
-- [[spx-puts]] — index puts to hedge a diversified equity book by beta rather than name-by-name.
 - [[put-tree]] — a put ratio/tree structure that cheapens protection by financing it with extra short puts (introduces a sweet-spot and re-introduced tail risk).
 
 ### Cheaper, capped protection (spreads & collars)
@@ -47,7 +46,7 @@ The two structural decisions are:
 
 | Goal | Best fit |
 |------|----------|
-| Full crash insurance, willing to pay carry | [[protective-puts]], [[spx-puts]] |
+| Full crash insurance, willing to pay carry | [[protective-puts]], spx-puts |
 | Bounded down-move, lower cost | [[put-spread]] |
 | Hedge at near-zero cash cost, accept capped upside | Collar (puts + [[covered-calls]]) |
 | Protect against a volatility spike, not just price | [[vix-calls]], [[vix-call-spreads]] |

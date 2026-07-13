@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, risk-management, options, liquidity, derivatives, volatility]
 aliases: ["Liquidity Evaporation", "Liquidity Vacuum", "Bid-Ask Blowout", "Liquidity Black Hole"]
-related: ["[[gap-risk]]", "[[circuit-breakers]]", "[[market-makers]]", "[[liquidity-provider]]", "[[liquidity-risk]]", "[[adverse-selection]]", "[[index-options]]", "[[spx-options]]", "[[spy-options]]", "[[vix-options]]", "[[short-strangle]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[soq-settlement]]", "[[options-pinning]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[gfc]]", "[[2010-flash-crash]]", "[[xiv]]", "[[long-vol-vs-short-vol]]", "[[tail-risk-hedging]]"]
+related: ["[[gap-risk]]", "[[circuit-breakers]]", "[[market-makers]]", "[[liquidity-provider]]", "[[liquidity-risk]]", "[[adverse-selection]]", "[[vix-options]]", "[[short-strangle]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-pinning]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[gfc]]", "[[2010-flash-crash]]", "[[xiv]]", "[[long-vol-vs-short-vol]]", "[[tail-risk-hedging]]"]
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[market-makers]]", "[[liquidity-risk]]"]
 difficulty: intermediate
@@ -173,9 +173,9 @@ Large positions in thin instruments are particularly vulnerable. A 100-contract 
 
 Standard option-pricing models (Black-Scholes, SVI surfaces, local-vol models) assume a bid-ask spread that the trader can repeatedly cross. During evaporation, the spread is so wide that the "fair value" of the option becomes ill-defined. Marking the book to the midpoint of a $5-wide market is not a meaningful mark; nor is marking to the bid (the trader would never sell there in calm markets) or the ask (the trader would never buy there). The book's mark-to-market becomes uncertain in the worst possible moments, which compounds risk-management problems if margin is computed off the marks.
 
-### Interaction with [[options-pinning|pinning]] and [[soq-settlement|SOQ]]
+### Interaction with [[options-pinning|pinning]] and SOQ
 
-Liquidity evaporation can break pinning patterns: if dealer auto-quoting trips, the gamma-hedging restoring force to the strike vanishes, and the underlying can drift far from the would-be pin strike. Similarly, [[soq-settlement|SOQ-based settlement]] on stress mornings (the August 24, 2015 case is canonical) reflects component opens that printed in evaporated-liquidity auctions, producing settlement values far from the prior close.
+Liquidity evaporation can break pinning patterns: if dealer auto-quoting trips, the gamma-hedging restoring force to the strike vanishes, and the underlying can drift far from the would-be pin strike. Similarly, SOQ-based settlement on stress mornings (the August 24, 2015 case is canonical) reflects component opens that printed in evaporated-liquidity auctions, producing settlement values far from the prior close.
 
 ### Crypto-options weekend exposure
 
@@ -200,11 +200,10 @@ Liquidity evaporation can break pinning patterns: if dealer auto-quoting trips, 
 - [[market-makers]], [[liquidity-provider]] — agents whose withdrawal causes evaporation
 - [[liquidity-risk]] — broader liquidity-risk framework
 - [[adverse-selection]] — driver of stress-time spread widening
-- [[index-options]], [[spx-options]], [[spy-options]], [[vix-options]] — products where evaporation has been documented
+- index-options, spx-options, spy-options, [[vix-options]] — products where evaporation has been documented
 - [[short-strangle]], [[options-premium-selling]] — strategies most exposed to evaporation losses
 - [[options-portfolio-construction]] — portfolio-level handling of evaporation scenarios
 - [[options-risk-budgeting]] — explicit stress-testing for liquidity evaporation
-- [[soq-settlement]] — settlement-side interaction with evaporation
 - [[options-pinning]] — pinning breaks down when dealer quoting evaporates
 - [[volmageddon]] — Feb 2018, XIV liquidity collapse case study
 - [[vix-august-2024-spike]] — Aug 2024, options spread blowout case study

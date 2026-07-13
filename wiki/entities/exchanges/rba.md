@@ -10,7 +10,7 @@ aliases: ["Reserve Bank of Australia", "RBA"]
 founded: 1960
 headquarters: "Sydney, Australia"
 website: "https://www.rba.gov.au"
-related: ["[[interest-rates]]", "[[australian-dollar]]", "[[inflation]]", "[[australian-investing]]", "[[interest-rate-risk]]", "[[fomc]]", "[[federal-reserve]]", "[[asx-200]]", "[[carry-trade]]"]
+related: ["[[interest-rates]]", "[[australian-dollar]]", "[[inflation]]", "[[interest-rate-risk]]", "[[fomc]]", "[[federal-reserve]]", "[[carry-trade]]"]
 ---
 
 The Reserve Bank of Australia (RBA) is Australia's central bank, responsible for [[monetary-policy]], financial system stability, and the issuance of Australian currency. Established in 1960 when the central banking functions were separated from the Commonwealth Bank of Australia, the RBA operates independently of the government under the Reserve Bank Act 1959. Its cash rate decisions are the single most important scheduled driver of the [[australian-dollar|AUD]], Australian bond yields, and rate-sensitive ASX sectors.
@@ -31,7 +31,7 @@ This round trip — cuts to 3.60% then hikes back to 4.35% within twelve months 
 
 ## Market Impact
 
-RBA rate decisions are among the highest-impact scheduled events on the Australian economic calendar. The announcement can trigger sharp moves in AUD/USD, the [[asx-200|ASX 200]], and Australian government bond yields. The accompanying statement and quarterly Statement on Monetary Policy provide forward guidance that markets parse for signals about future rate direction. The RBA Governor's press conferences, introduced in 2023 as part of governance reforms recommended by an independent review, add an additional channel for communicating policy intent. For international portfolio managers, RBA policy divergence relative to the [[federal-reserve|Federal Reserve]] and other major central banks is a key input into [[currency-hedging]] and [[carry-trade]] strategies — the 2026 RBA hikes against a stable-to-easing Fed materially improved AUD carry. The ASX lists an **RBA Rate Tracker** based on 30-day interbank cash rate futures, giving traders a market-implied probability of each decision.
+RBA rate decisions are among the highest-impact scheduled events on the Australian economic calendar. The announcement can trigger sharp moves in AUD/USD, the ASX 200, and Australian government bond yields. The accompanying statement and quarterly Statement on Monetary Policy provide forward guidance that markets parse for signals about future rate direction. The RBA Governor's press conferences, introduced in 2023 as part of governance reforms recommended by an independent review, add an additional channel for communicating policy intent. For international portfolio managers, RBA policy divergence relative to the [[federal-reserve|Federal Reserve]] and other major central banks is a key input into [[currency-hedging]] and [[carry-trade]] strategies — the 2026 RBA hikes against a stable-to-easing Fed materially improved AUD carry. The ASX lists an **RBA Rate Tracker** based on 30-day interbank cash rate futures, giving traders a market-implied probability of each decision.
 
 ## Structure and Governance
 
@@ -42,8 +42,6 @@ The Reserve Bank Board historically consisted of nine members: the Governor (cha
 - [[interest-rates]]
 - [[australian-dollar]]
 - [[inflation]]
-- [[australian-investing]]
-- [[asx-200]]
 - [[interest-rate-risk]]
 - [[carry-trade]]
 - [[federal-reserve]]

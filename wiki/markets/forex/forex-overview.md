@@ -74,17 +74,12 @@ A trader buys **1 standard lot** of EUR/USD (100,000 units) at 1.0850, expecting
 
 ## Market Infrastructure
 
-- [[cls-group]] — Payment-versus-payment settlement utility that neutralizes Herstatt/settlement risk
 - [[last-look]] — Dealer execution protocol that allows trade rejection; a hidden execution cost
 - [[lmax-exchange]] — Regulated, firm, no-last-look exchange venue
-- [[fxall]] — LSEG institutional multi-dealer RFQ platform
 - [[settlement-risk]] — Herstatt/principal risk in cross-border FX settlement
 
 ## Brokers, Platforms & Data
 
-- [[oanda]] and [[fxcm]] — Retail FX/CFD brokers
-- [[metatrader]] — The dominant retail trading platform (MT4/MT5)
-- [[ctrader]] — ECN/algo-oriented platform; the main MetaTrader alternative
 - [[dukascopy]] — Free tick-level historical FX data for backtesting
 
 ## Hedging & Related Concepts

@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [regulation, ai-trading, machine-learning, behavioral-finance, education]
 aliases: ["AI Layoff Tax", "Automation Externality Tax", "Robot Tax"]
-related: ["[[ai-layoff-trap]]", "[[ai-driven-demand-destruction]]", "[[capital-vs-labor-asymmetry]]", "[[wage-compression-vs-job-loss]]", "[[skill-bifurcation]]", "[[citrini-2028-global-intelligence-crisis]]", "[[skilled-trades-wage-boom]]", "[[ai-data-center-power-demand]]", "[[ai-sector-rotation-energy-hedge]]", "[[microsoft]]", "[[meta-platforms]]", "[[alphabet]]", "[[anthropic]]"]
+related: ["[[ai-layoff-trap]]", "[[ai-driven-demand-destruction]]", "[[capital-vs-labor-asymmetry]]", "[[wage-compression-vs-job-loss]]", "[[skill-bifurcation]]", "[[citrini-2028-global-intelligence-crisis]]", "[[skilled-trades-wage-boom]]", "[[ai-data-center-power-demand]]", "[[anthropic]]"]
 domain: [risk-management, behavioral-finance]
 prerequisites: ["[[ai-layoff-trap]]"]
 difficulty: advanced
@@ -60,10 +60,10 @@ The source does not provide a probability estimate, but the broader policy liter
 
 The probability of Pigouvian automation tax adoption is itself a tradeable variable. Repricings to watch:
 
-- **Rising adoption probability** is bearish for AI-capex names whose ROI math depends on rapid headcount reduction, particularly software and services firms whose automation thesis maps directly onto layoffs (e.g., Block / Square's 50% workforce cut narrative). [[microsoft]], [[meta-platforms]], [[alphabet]], and [[anthropic]]-adjacent business models would face revised margin paths.
+- **Rising adoption probability** is bearish for AI-capex names whose ROI math depends on rapid headcount reduction, particularly software and services firms whose automation thesis maps directly onto layoffs (e.g., Block / Square's 50% workforce cut narrative). microsoft, meta-platforms, alphabet, and [[anthropic]]-adjacent business models would face revised margin paths.
 - **Falling probability** (e.g., political pushback, anti-tax administrations) is bullish for the same names and supports the [[capital-vs-labor-asymmetry]] regime continuing.
 - **Position-sizing under regime uncertainty.** Traders running long-AI-capex theses should think of Pigouvian-tax probability as a left-tail policy risk. Even a modest probability of a meaningful tax reshapes 5-year DCFs for automation-heavy business models.
-- **Sector rotation.** Higher policy probability strengthens the case for [[ai-sector-rotation-energy-hedge]]: physical-infrastructure plays are largely insulated because they create rather than destroy labor demand (see [[skilled-trades-wage-boom]], [[ai-data-center-power-demand]]).
+- **Sector rotation.** Higher policy probability strengthens the case for ai-sector-rotation-energy-hedge: physical-infrastructure plays are largely insulated because they create rather than destroy labor demand (see [[skilled-trades-wage-boom]], [[ai-data-center-power-demand]]).
 
 ## Critiques
 
@@ -86,17 +86,10 @@ The single-most important takeaway from the AI Layoff Trap framing is that **pol
 - [[citrini-2028-global-intelligence-crisis]]
 - [[skilled-trades-wage-boom]]
 - [[ai-data-center-power-demand]]
-- [[ai-sector-rotation-energy-hedge]]
 - [[service-sector-multiplier]]
-- [[margin-expansion-disparity]]
-- [[microsoft]]
-- [[meta-platforms]]
-- [[alphabet]]
 - [[anthropic]]
-- [[citrini-research]]
 - [[recession]]
 - [[fed-policy]]
-- [[2026-04-meta-ai-layoffs]]
 
 ## Sources
 

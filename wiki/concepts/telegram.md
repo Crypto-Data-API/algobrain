@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [crypto, company, behavioral-finance, news]
 aliases: ["Telegram", "Telegram Messenger"]
-related: ["[[ton]]", "[[pump-and-dump]]", "[[market-manipulation]]", "[[narrative-signals]]", "[[sentiment-analysis]]", "[[social-sentiment]]", "[[memecoins]]", "[[ai-microcap-pump-pattern]]", "[[discord]]"]
+related: ["[[ton]]", "[[pump-and-dump]]", "[[market-manipulation]]", "[[narrative-signals]]", "[[sentiment-analysis]]", "[[social-sentiment]]", "[[memecoins]]"]
 entity_type: company
 founded: 2013
 headquarters: "Dubai, UAE"
@@ -20,7 +20,7 @@ Telegram is a cloud-based messaging platform founded in 2013 by Pavel and Nikola
 ## Why Telegram Matters to Markets
 
 - **Project and community hubs.** Nearly every crypto project runs an official Telegram for announcements; group activity and member growth are coarse [[narrative-signals|narrative]] and demand proxies.
-- **Signal groups.** Paid and free "alpha" / signal groups broadcast entries and exits to thousands of followers simultaneously, creating self-reinforcing flow into thin-liquidity tokens — a key transmission mechanism in the [[ai-microcap-pump-pattern]] and memecoin cycles.
+- **Signal groups.** Paid and free "alpha" / signal groups broadcast entries and exits to thousands of followers simultaneously, creating self-reinforcing flow into thin-liquidity tokens — a key transmission mechanism in the ai-microcap-pump-pattern and memecoin cycles.
 - **Trading bots.** Telegram-native bots (e.g. Solana/EVM sniping and swap bots) let users trade directly in chat, compressing the gap between a call being posted and execution. This is a major retail order-flow channel for [[memecoins]].
 - **TON ecosystem.** Telegram is integrated with [[ton|The Open Network]], embedding wallets and mini-apps; Telegram engagement directly affects TON-ecosystem token demand.
 
@@ -40,8 +40,7 @@ Telegram's reach and pseudonymity make it the primary venue for coordinated [[pu
 - [[ton]] — the blockchain integrated with Telegram
 - [[pump-and-dump]], [[market-manipulation]] — schemes coordinated on the platform
 - [[narrative-signals]], [[sentiment-analysis]], [[social-sentiment]] — signal-extraction uses
-- [[ai-microcap-pump-pattern]], [[memecoins]] — assets most affected by Telegram flow
-- [[discord]] — the comparable crypto-community platform
+- ai-microcap-pump-pattern, [[memecoins]] — assets most affected by Telegram flow
 
 ## Sources
 

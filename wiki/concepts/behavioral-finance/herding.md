@@ -9,7 +9,7 @@ aliases: ["herd behavior", "herd mentality", "herding behavior"]
 domain: [behavioral-finance]
 difficulty: intermediate
 prerequisites: ["[[behavioral-finance]]"]
-related: ["[[behavioral-finance]]", "[[momentum]]", "[[market-bubbles]]", "[[sentiment]]", "[[disposition-effect]]", "[[aaii-sentiment-survey]]", "[[fear-and-greed-index]]", "[[contrarian-trading]]", "[[cognitive-biases]]"]
+related: ["[[behavioral-finance]]", "[[momentum]]", "[[market-bubbles]]", "[[sentiment]]", "[[disposition-effect]]", "[[fear-and-greed-index]]", "[[contrarian-trading]]", "[[cognitive-biases]]"]
 ---
 
 Herding (or herd behavior) is the tendency of investors and traders to mimic the actions of a larger group rather than relying on their own independent analysis. Herding drives [[momentum]], amplifies [[market-bubbles|bubbles]] and crashes, and creates the crowd extremes that [[contrarian-trading|contrarian]] strategies seek to exploit.
@@ -58,7 +58,7 @@ Traders can gauge herd behavior extremes using:
 
 | Indicator | What It Measures | Contrarian Signal |
 |---|---|---|
-| [[aaii-sentiment-survey]] | Retail investor bullish/bearish sentiment | Bullish >50% or bearish >50% |
+| aaii-sentiment-survey | Retail investor bullish/bearish sentiment | Bullish >50% or bearish >50% |
 | Put/Call ratio | Options market positioning | Extreme readings suggest crowded positioning |
 | [[cot-data\|COT data]] | Commercial vs speculative futures positioning | Extreme speculative positioning |
 | Fund flows | ETF/mutual fund inflows and outflows | Extreme inflows at tops, outflows at bottoms |
@@ -84,7 +84,6 @@ The difficulty is timing. Herding can persist far longer than rational analysis 
 - [[momentum]] — the price pattern herding creates
 - [[market-bubbles]] — the extreme outcome of prolonged herding
 - [[sentiment]] — measurement of crowd mood
-- [[aaii-sentiment-survey]] — specific retail sentiment measure
 - [[disposition-effect]] — the flip side: individual bias to sell too early during herds
 - [[cognitive-biases]] — broader category of decision errors
 - [[meme-stocks]] — modern example of social media-driven herding

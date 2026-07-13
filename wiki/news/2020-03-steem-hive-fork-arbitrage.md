@@ -115,7 +115,7 @@ Hive accumulated a ~$200M market cap at peak; Steem stalled around $80M and cont
 
 ## Related
 
-[[hard-fork]] · [[fork-airdrop-triangulation]] · [[2017-08-bitcoin-cash-fork-arbitrage]] · [[2022-05-terra-luna-2-fork-arbitrage]] · [[corporate-action-arbitrage]]
+[[hard-fork]] · [[fork-airdrop-triangulation]] · [[2017-08-bitcoin-cash-fork-arbitrage]] · [[2022-05-terra-luna-2-fork-arbitrage]] · corporate-action-arbitrage
 
 ## Sources
 

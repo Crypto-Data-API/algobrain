@@ -6,16 +6,16 @@ updated: 2026-06-21
 status: excellent
 tags: [commodities, agricultural, futures]
 aliases: ["Cotton", "CT", "Cotton No. 2"]
-related: ["[[corn]]", "[[soybeans]]", "[[commodities]]", "[[intercontinental-exchange]]", "[[usda]]", "[[usda-data]]", "[[commodity-seasonality-patterns]]", "[[seasonal-spread-trading]]", "[[cot-report-analysis]]", "[[contango]]", "[[backwardation]]", "[[crude-oil]]"]
+related: ["[[corn]]", "[[soybeans]]", "[[commodities]]", "[[usda]]", "[[usda-data]]", "[[commodity-seasonality-patterns]]", "[[seasonal-spread-trading]]", "[[cot-report-analysis]]", "[[contango]]", "[[backwardation]]", "[[crude-oil]]"]
 ---
 
-Cotton is a **dual agricultural/textile commodity** traded on [[intercontinental-exchange|ICE]] as Cotton No. 2 futures (CT). It bridges the agricultural and industrial/consumer sectors -- demand is driven by the global textile and apparel industry rather than food consumption. Major producers include China, India, the US, and Brazil, with the US as the world's largest exporter. Texas is the dominant US growing region, making **drought risk** the key weather variable. A distinctive feature of cotton is the **cotton-polyester substitution** effect: at high enough prices, textile manufacturers switch to synthetic fibers, creating a natural price ceiling. (Source: [[2026-04-14-commodities-research-framework]])
+Cotton is a **dual agricultural/textile commodity** traded on ICE as Cotton No. 2 futures (CT). It bridges the agricultural and industrial/consumer sectors -- demand is driven by the global textile and apparel industry rather than food consumption. Major producers include China, India, the US, and Brazil, with the US as the world's largest exporter. Texas is the dominant US growing region, making **drought risk** the key weather variable. A distinctive feature of cotton is the **cotton-polyester substitution** effect: at high enough prices, textile manufacturers switch to synthetic fibers, creating a natural price ceiling. (Source: [[2026-04-14-commodities-research-framework]])
 
 ## Key Specifications
 
 | Attribute | Detail |
 |-----------|--------|
-| **Exchange** | [[intercontinental-exchange|ICE US]] |
+| **Exchange** | ICE US |
 | **Ticker** | CT (Cotton No. 2) |
 | **Contract size** | 50,000 lbs (~100 bales) |
 | **Tick size** | $0.01/lb = $5.00 |
@@ -176,7 +176,7 @@ The 15-year seasonal average shows cotton prices tend to be strongest in late sp
 
 - [[corn]] -- competing acreage in some Southern US regions
 - [[soybeans]] -- agricultural commodity complex
-- [[coffee]] -- fellow [[intercontinental-exchange|ICE]]-traded soft commodity
+- [[coffee]] -- fellow ICE-traded soft commodity
 - [[sugar]] -- soft commodity complex
 - [[cocoa]] -- soft commodity complex
 - [[crude-oil]] -- cost floor for polyester, cotton's substitute fiber
@@ -184,7 +184,6 @@ The 15-year seasonal average shows cotton prices tend to be strongest in late sp
 - [[seasonal-spread-trading]] -- old-crop/new-crop (Jul vs Dec) calendar spreads
 - [[cot-report-analysis]] -- speculative/commercial positioning and on-call data
 - [[usda-data]] -- USDA cotton reports
-- [[intercontinental-exchange]] -- exchange listing cotton futures
 - [[commodities]] -- commodity markets overview
 
 ## Sources

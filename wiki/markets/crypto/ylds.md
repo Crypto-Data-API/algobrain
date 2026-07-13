@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2025
 headquarters: "Issuer: Figure Certificate Corp (Figure Technology Solutions), San Francisco, USA"
 website: "https://www.figuremarkets.com/c/ylds"
-related: ["[[crypto-markets]]", "[[solana]]", "[[stablecoins]]", "[[stablecoin]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[ousg]]", "[[yield]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[stablecoins]]", "[[stablecoin]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[ousg]]"]
 ---
 
 # YLDS
@@ -155,7 +155,7 @@ YLDS is purchased and redeemed via Figure Markets (USD or stablecoin funding) ra
 - [[crypto-markets]]
 - [[stablecoins]], [[stablecoin]]
 - [[ousg]], [[blackrock-usd-institutional-digital-liquidity-fund]] — tokenized-MMF route to on-chain yield
-- [[real-world-assets]], [[tokenized-treasuries]], [[yield]]
+- [[real-world-assets]], [[tokenized-treasuries]], yield
 - [[solana]]
 - [[treasuries]]
 - [[regulation]]

@@ -12,7 +12,6 @@ related:
   - "[[service-sector-multiplier]]"
   - "[[capital-vs-labor-asymmetry]]"
   - "[[tech-hub-concentration-risk]]"
-  - "[[margin-expansion-disparity]]"
   - "[[solow-paradox-2026]]"
   - "[[systemic-risk]]"
   - "[[contagion]]"
@@ -22,7 +21,7 @@ prerequisites: ["[[systemic-risk]]", "[[business-cycle]]", "[[recession]]"]
 difficulty: advanced
 ---
 
-AI-Driven Demand Destruction is the connecting cascade model linking AI-induced labor displacement to consumer demand collapse, credit stress, regional fiscal crisis, and equity repricing. It synthesizes three institutional frameworks — Wharton's [[ai-layoff-trap]], [[citrini-research|Citrini Research]]'s [[citrini-2028-global-intelligence-crisis]] scenario, and the European Systemic Risk Board's December 2025 advisory on AI and systemic risk — into a single causal chain traders can position against. The model treats AI capex booms and labor-share collapse as two sides of the same coin: capital captures productivity gains immediately while labor absorbs job losses on a 2-4 quarter delay (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
+AI-Driven Demand Destruction is the connecting cascade model linking AI-induced labor displacement to consumer demand collapse, credit stress, regional fiscal crisis, and equity repricing. It synthesizes three institutional frameworks — Wharton's [[ai-layoff-trap]], Citrini Research's [[citrini-2028-global-intelligence-crisis]] scenario, and the European Systemic Risk Board's December 2025 advisory on AI and systemic risk — into a single causal chain traders can position against. The model treats AI capex booms and labor-share collapse as two sides of the same coin: capital captures productivity gains immediately while labor absorbs job losses on a 2-4 quarter delay (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
 
 ## The Cascade
 
@@ -32,7 +31,7 @@ The destruction sequence runs through five sequential channels, each with its ow
 2. **Wage compression and income destruction** — 40-50% of displaced workers find new jobs at 15-40% lower pay. Unemployment may stay low (4.5-4.8% in 2026) while aggregate labor income falls. See [[wage-compression-vs-job-loss]].
 3. **Consumer demand collapse** — fewer dollars in worker hands compress retail sales, restaurant traffic, services consumption. The [[service-sector-multiplier]] amplifies initial tech job losses 3-5x over 2-4 quarters into restaurants, childcare, retail, transportation.
 4. **Regional fiscal crisis** — tech-concentrated metros (Bay Area, Austin, Seattle, Boston) face 3-7% sales tax revenue contractions starting Q4 2026. Municipal bond stress, school funding gaps, infrastructure deferrals follow. See [[tech-hub-concentration-risk]].
-5. **Credit and equity repricing** — regional banks with concentrated tech-hub commercial real estate (CRE) exposure face deposit flight and loan losses. Equity markets re-rate the [[margin-expansion-disparity]] trade as non-Mag-7 earnings deteriorate.
+5. **Credit and equity repricing** — regional banks with concentrated tech-hub commercial real estate (CRE) exposure face deposit flight and loan losses. Equity markets re-rate the margin-expansion-disparity trade as non-Mag-7 earnings deteriorate.
 
 ## Why this matters now
 
@@ -65,11 +64,11 @@ Three reinforcing loops make the cascade self-perpetuating:
 | Regional banks | KRE ETF, mid-cap bank equities | 3-6 quarters | NIM compression, CRE loan loss provisions |
 | Equity (non-Mag-7) | S&P 500 ex-tech, Russell 2000 | 1-3 quarters | Margin compression, earnings revisions |
 
-See [[reits]], [[mortgages]], [[bank-run]] for asset-class context.
+See reits, [[mortgages]], [[bank-run]] for asset-class context.
 
 ## Trading Implications
 
-- **Defensive rotation**: Energy ([[ai-sector-rotation-energy-hedge]]) gained +12% YTD early 2026 vs tech retreating; AI data center power demand creates structural tailwind via [[ai-data-center-power-demand]]
+- **Defensive rotation**: Energy (ai-sector-rotation-energy-hedge) gained +12% YTD early 2026 vs tech retreating; AI data center power demand creates structural tailwind via [[ai-data-center-power-demand]]
 - **Tail-risk hedging**: VIX (~$18 May 2026) and UVXY for cascade-event protection
 - **Short the cascade**: regional bank ETFs (KRE), tech-hub munis, office REITs as the lag plays out
 - **Long the inverse**: skilled trades infrastructure (electricians, HVAC) via [[skilled-trades-wage-boom]]; energy and utilities; vertical AI acquirers commanding M&A premiums
@@ -89,11 +88,10 @@ See [[reits]], [[mortgages]], [[bank-run]] for asset-class context.
 - [[service-sector-multiplier]] — 3-5x downstream amplification mechanism
 - [[capital-vs-labor-asymmetry]] — capex gains immediate, labor losses delayed
 - [[tech-hub-concentration-risk]] — geographic fiscal stress channel
-- [[margin-expansion-disparity]] — Mag 7 vs non-Mag-7 earnings bifurcation
 - [[solow-paradox-2026]] — productivity J-curve as cascade off-ramp or accelerator
 - [[systemic-risk]], [[contagion]], [[tail-risk]], [[recession]], [[crashes]]
 - [[employment]], [[business-cycle]], [[fed-policy]], [[capex-cycle]]
-- [[2024-nvidia-ai-boom]], [[2025-tariff-market-volatility]]
+- 2024-nvidia-ai-boom, [[2025-tariff-market-volatility]]
 
 ## Sources
 

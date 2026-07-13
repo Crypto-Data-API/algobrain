@@ -6,19 +6,19 @@ updated: 2026-06-11
 status: good
 tags: [portfolio-theory, quantitative, risk-management, factor-investing, correlation]
 aliases: ["Sector Neutral", "Sector-Neutral", "Industry Neutrality", "Sector Hedging"]
-related: ["[[long-short-equity]]", "[[factor-investing]]", "[[gics-sector]]", "[[risk-budgeting]]", "[[correlation]]", "[[statistical-arbitrage]]", "[[pairs-trading]]", "[[momentum]]"]
+related: ["[[factor-investing]]", "[[risk-budgeting]]", "[[correlation]]", "[[statistical-arbitrage]]", "[[pairs-trading]]", "[[momentum]]"]
 domain: [portfolio-theory, risk-management]
-prerequisites: ["[[long-short-equity]]", "[[correlation]]"]
+prerequisites: ["[[correlation]]"]
 difficulty: advanced
 ---
 
-Sector neutrality is a portfolio-construction constraint that holds the net exposure to each industry sector at (or near) zero, so that the portfolio's returns are driven by *within-sector* stock selection rather than by bets on which sectors rise or fall. It is a standard discipline in [[long-short-equity|long-short equity]] and quantitative factor strategies, where the goal is to isolate stock-specific alpha and strip out the large, slow-moving sector factor that would otherwise dominate the return stream.
+Sector neutrality is a portfolio-construction constraint that holds the net exposure to each industry sector at (or near) zero, so that the portfolio's returns are driven by *within-sector* stock selection rather than by bets on which sectors rise or fall. It is a standard discipline in long-short equity and quantitative factor strategies, where the goal is to isolate stock-specific alpha and strip out the large, slow-moving sector factor that would otherwise dominate the return stream.
 
 ## Overview
 
-A long-short book that simply buys the highest-ranked stocks and shorts the lowest-ranked ones will often, by accident, become a giant sector bet. If a [[value-investing-strategy|value]] signal ranks energy and financials cheap and ranks technology expensive, the unconstrained portfolio ends up long energy/financials and short tech — and its day-to-day P&L is then dominated by the energy-vs-tech sector spread, not by the manager's stock-picking skill. Sector neutrality forces the long and short dollar (or beta) exposure within each sector to offset.
+A long-short book that simply buys the highest-ranked stocks and shorts the lowest-ranked ones will often, by accident, become a giant sector bet. If a value signal ranks energy and financials cheap and ranks technology expensive, the unconstrained portfolio ends up long energy/financials and short tech — and its day-to-day P&L is then dominated by the energy-vs-tech sector spread, not by the manager's stock-picking skill. Sector neutrality forces the long and short dollar (or beta) exposure within each sector to offset.
 
-Mechanically, sectors are usually defined by a classification scheme such as [[gics-sector|GICS]] (11 sectors) or its finer industry-group / industry levels, or by statistically estimated factors. The constraint can be imposed at several strengths:
+Mechanically, sectors are usually defined by a classification scheme such as GICS (11 sectors) or its finer industry-group / industry levels, or by statistically estimated factors. The constraint can be imposed at several strengths:
 
 - **Dollar-neutral by sector** — equal long and short dollar value within each sector.
 - **Beta-neutral by sector** — equal beta-weighted exposure, accounting for the fact that high-beta and low-beta names contribute unequally to risk.
@@ -51,13 +51,11 @@ Sector neutrality is not free:
 
 ## Trading relevance
 
-Sector neutrality is the default risk posture for institutional [[long-short-equity|market-neutral]] and [[statistical-arbitrage|stat-arb]] desks. A practitioner deciding whether to impose it asks: *does my signal have a view on sectors, or only on individual stocks within sectors?* If only the latter, neutralize. [[pairs-trading|Pairs trades]] are the simplest sector-neutral structure — long and short two names in the same industry so the sector exposure cancels and only the relative-value spread remains. At the portfolio level, the same logic generalizes to the full optimizer constraint above. Most multi-factor equity products report both gross and sector-neutral backtests, and a large gap between them is a warning that the apparent edge is really a sector bet in disguise.
+Sector neutrality is the default risk posture for institutional market-neutral and [[statistical-arbitrage|stat-arb]] desks. A practitioner deciding whether to impose it asks: *does my signal have a view on sectors, or only on individual stocks within sectors?* If only the latter, neutralize. [[pairs-trading|Pairs trades]] are the simplest sector-neutral structure — long and short two names in the same industry so the sector exposure cancels and only the relative-value spread remains. At the portfolio level, the same logic generalizes to the full optimizer constraint above. Most multi-factor equity products report both gross and sector-neutral backtests, and a large gap between them is a warning that the apparent edge is really a sector bet in disguise.
 
 ## Related
 
-- [[long-short-equity]] — the strategy family where sector neutrality is standard
 - [[factor-investing]] — sector neutrality is one of several neutralization choices
-- [[gics-sector]] — the classification scheme most commonly used to define sectors
 - [[risk-budgeting]] — the broader optimizer framework that combines sector and style constraints
 - [[correlation]] — why unhedged sector exposure dominates variance
 - [[pairs-trading]] — the simplest sector-neutral structure

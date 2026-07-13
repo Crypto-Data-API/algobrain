@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [commodities, futures]
 aliases: ["Cocoa", "CC", "Cocoa Beans"]
-related: ["[[coffee]]", "[[sugar]]", "[[cotton]]", "[[commodities]]", "[[intercontinental-exchange]]", "[[commodity-seasonality-patterns]]", "[[seasonal-spread-trading]]", "[[cot-report-analysis]]", "[[contango]]", "[[backwardation]]"]
+related: ["[[coffee]]", "[[sugar]]", "[[cotton]]", "[[commodities]]", "[[commodity-seasonality-patterns]]", "[[seasonal-spread-trading]]", "[[cot-report-analysis]]", "[[contango]]", "[[backwardation]]"]
 ---
 
 Cocoa is one of the most **geographically concentrated** agricultural commodities, with West Africa producing ~60% of the world's supply. ICE Cocoa futures (CC) trade in New York, with a parallel London ICE contract. The 2024 cocoa price spike was one of the most dramatic commodity moves in recent history -- prices **tripled** from ~$3,000/tonne to over $10,000 in months due to El Nino-related drought, swollen shoot virus disease, aging tree stock, and chronic underinvestment by smallholder farmers in West Africa. This concentration risk makes cocoa uniquely vulnerable: a single weather event in one region can move global prices 50%+. (Source: [[2026-04-14-commodities-research-framework]])
@@ -15,7 +15,7 @@ Cocoa is one of the most **geographically concentrated** agricultural commoditie
 
 | Attribute | Detail |
 |-----------|--------|
-| **Exchange** | [[intercontinental-exchange|ICE US (New York)]], ICE Europe (London) |
+| **Exchange** | ICE US (New York), ICE Europe (London) |
 | **Ticker** | CC (New York), C (London) |
 | **Contract size** | CC: 10 metric tonnes |
 | **Tick size** | $1/tonne = $10 per contract |
@@ -29,7 +29,7 @@ Cocoa is unusual among softs in that it has **two deep, simultaneously traded fu
 
 | Contract | Exchange | Currency / unit | Role |
 |----------|----------|-----------------|------|
-| **CC (New York)** | [[intercontinental-exchange|ICE US]] | USD per tonne, 10 t | Global benchmark; deepest speculative flow |
+| **CC (New York)** | ICE US | USD per tonne, 10 t | Global benchmark; deepest speculative flow |
 | **C ("London cocoa")** | ICE Europe | GBP per tonne, 10 t | European physical/grindings hub; reflects EUR/GBP demand |
 
 **The London-New York arbitrage.** Because the two contracts price the same bean in different currencies (GBP vs USD), the **NY-London spread** embeds both a quality/origin-preference differential and a [[forex|GBP/USD]] currency view. Traders who trade the arb must hedge the FX leg or they are taking an unintended cable position. The spread widens when European demand (grindings) diverges from US speculative positioning, and it is one of the few clean relative-value structures in the cocoa market.
@@ -183,7 +183,6 @@ The marketing year for cocoa runs **October-September**. (Source: [[2026-04-14-c
 - [[cot-report-analysis]] -- managed-money positioning, crowding signals
 - [[forex]] -- the GBP/USD leg embedded in the London-NY arbitrage
 - [[contango]] / [[backwardation]] -- curve shape and certificated-stock dynamics
-- [[intercontinental-exchange]] -- exchange listing cocoa futures
 - [[commodities]] -- commodity markets overview
 
 ## Sources

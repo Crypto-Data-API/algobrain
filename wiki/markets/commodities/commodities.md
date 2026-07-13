@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [commodities, markets, futures, gold, oil]
 aliases: ["Commodities", "Commodity Markets", "Commodity"]
-related: ["[[futures-overview]]", "[[forex]]", "[[global-macro]]", "[[stock-markets]]", "[[inflation]]", "[[contango]]", "[[backwardation]]", "[[trend-following-cta]]", "[[commodity-trading]]"]
+related: ["[[futures-overview]]", "[[forex]]", "[[global-macro]]", "[[inflation]]", "[[contango]]", "[[backwardation]]", "[[trend-following-cta]]", "[[commodity-trading]]"]
 ---
 
 # Commodities
@@ -17,17 +17,17 @@ Commodities are raw materials and primary goods -- energy, metals, and agricultu
 
 | Category | Key Commodities | Primary Exchange | Key Price Drivers |
 |----------|----------------|-----------------|-------------------|
-| Energy | [[crude-oil|Crude oil]] (WTI/Brent), [[natural-gas|natural gas]], [[heating-oil|heating oil]], [[gasoline]], [[coal]] | NYMEX, [[intercontinental-exchange|ICE]] | [[opec|OPEC]] policy, inventory draws, geopolitics, seasonal demand |
+| Energy | [[crude-oil|Crude oil]] (WTI/Brent), [[natural-gas|natural gas]], [[heating-oil|heating oil]], [[gasoline]], [[coal]] | NYMEX, ICE | OPEC policy, inventory draws, geopolitics, seasonal demand |
 | Precious Metals | [[gold|Gold]], [[silver|silver]], [[platinum]], [[palladium]] | COMEX, [[lbma|LBMA]] | USD strength, [[real-interest-rates]], safe-haven demand |
 | Industrial Metals | [[copper|Copper]], [[aluminum]], [[nickel]], [[zinc]] | [[london-metal-exchange|LME]] | Chinese industrial demand, mining supply, EV transition |
 | Nuclear Fuel | [[uranium|Uranium]] | Spot/contract market | Reactor restarts, geopolitics, supply concentration |
-| Agriculture (Grains) | [[corn|Corn]], [[wheat]], [[soybeans]], [[rice]] | CBOT, [[intercontinental-exchange|ICE]] | Weather, WASDE reports, export demand, planting intentions |
-| Soft Commodities | [[coffee|Coffee]], [[sugar]], [[cocoa]], [[cotton]] | [[intercontinental-exchange|ICE]] | Weather in growing regions, EM currency moves |
+| Agriculture (Grains) | [[corn|Corn]], [[wheat]], [[soybeans]], [[rice]] | CBOT, ICE | Weather, WASDE reports, export demand, planting intentions |
+| Soft Commodities | [[coffee|Coffee]], [[sugar]], [[cocoa]], [[cotton]] | ICE | Weather in growing regions, EM currency moves |
 | Livestock | [[live-cattle|Live cattle]], [[lean-hogs|lean hogs]] | [[cme-group|CME]] | Feed costs, disease outbreaks, seasonal slaughter cycles |
 
 ### Energy
 
-Crude oil (WTI, Brent), [[natural-gas]], [[heating-oil]], [[gasoline]], and [[coal]]. Energy commodities are the most heavily traded by dollar volume and are deeply tied to geopolitics and global economic cycles. [[opec|OPEC]] production decisions are the single largest discretionary supply variable for crude oil.
+Crude oil (WTI, Brent), [[natural-gas]], [[heating-oil]], [[gasoline]], and [[coal]]. Energy commodities are the most heavily traded by dollar volume and are deeply tied to geopolitics and global economic cycles. OPEC production decisions are the single largest discretionary supply variable for crude oil.
 
 ### Precious Metals
 
@@ -47,13 +47,13 @@ Tropical and specialty agricultural products including [[coffee]], [[cocoa]], [[
 
 ## How Commodities Trade
 
-Most commodity trading occurs through [[futures-overview|futures]] contracts on exchanges like [[cme-group|CME Group]], [[intercontinental-exchange|ICE]], and [[london-metal-exchange|LME]]. Futures allow producers to hedge price risk and speculators to take directional positions. Commodity ETFs and ETNs provide exposure without futures account requirements.
+Most commodity trading occurs through [[futures-overview|futures]] contracts on exchanges like [[cme-group|CME Group]], ICE, and [[london-metal-exchange|LME]]. Futures allow producers to hedge price risk and speculators to take directional positions. Commodity ETFs and ETNs provide exposure without futures account requirements.
 
 Key concepts in commodity trading include [[contango]] (futures price above spot), [[backwardation]] (futures below spot), and the [[roll-yield]] that results from continuously holding futures positions. [[convenience-yield]] and [[storage-economics]] determine the shape of the futures curve. [[trend-following-cta|Managed futures (CTA)]] strategies have historically performed well in commodity markets due to persistent supply-demand imbalances and policy-driven trends.
 
 ## Key Drivers
 
-- **Supply and demand**: Weather, geopolitics, production decisions ([[opec|OPEC]] for oil), and inventory levels. The [[supply-demand-balance]] is the core output of commodity fundamental analysis.
+- **Supply and demand**: Weather, geopolitics, production decisions (OPEC for oil), and inventory levels. The [[supply-demand-balance]] is the core output of commodity fundamental analysis.
 - **U.S. dollar**: Commodities are USD-priced, so dollar strength generally pressures commodity prices ([[dxy-commodity-correlation]]).
 - **Inflation**: Commodities are both a cause and a hedge for inflation ([[commodity-inflation-link]]). Gold is viewed as the primary inflation hedge.
 - **Central bank policy**: [[interest-rates]] and [[quantitative-easing]] affect the opportunity cost of holding non-yielding commodities.

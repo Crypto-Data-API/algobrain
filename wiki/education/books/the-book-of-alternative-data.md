@@ -12,8 +12,6 @@ related:
   - "[[feature-engineering-finance]]"
   - "[[ml-trading-pipeline]]"
   - "[[data-providers]]"
-  - "[[finviz]]"
-  - "[[tradingview]]"
   - "[[alpha-vantage]]"
 ---
 
@@ -92,7 +90,7 @@ Portfolio managers and quants deciding whether to invest in alternative data; sy
 
 ## How It Applies to AI Trading
 
-Alternative data is the raw material that feeds an [[ml-trading-pipeline]] with features beyond price action. [[nlp-sentiment-analysis|NLP]] is the most accessible entry point — sentiment scores from news and social media that augment price-based features. The [[feature-engineering-finance]] surface expands dramatically once satellite-, web-, transaction-, and geolocation-derived features can sit alongside traditional inputs in the same [[machine-learning|ML]] model. The evaluation framework helps decide which [[data-providers]] are worth the cost and which "edges" are already commoditized. For traders using [[finviz]], [[tradingview]], or [[alpha-vantage]], the book contextualizes what they are missing and what more exotic data might add — while warning that the alpha half-life means the work of sourcing and validating new data never ends.
+Alternative data is the raw material that feeds an [[ml-trading-pipeline]] with features beyond price action. [[nlp-sentiment-analysis|NLP]] is the most accessible entry point — sentiment scores from news and social media that augment price-based features. The [[feature-engineering-finance]] surface expands dramatically once satellite-, web-, transaction-, and geolocation-derived features can sit alongside traditional inputs in the same [[machine-learning|ML]] model. The evaluation framework helps decide which [[data-providers]] are worth the cost and which "edges" are already commoditized. For traders using finviz, tradingview, or [[alpha-vantage]], the book contextualizes what they are missing and what more exotic data might add — while warning that the alpha half-life means the work of sourcing and validating new data never ends.
 
 ## Rating
 
@@ -106,7 +104,7 @@ Alternative data is the raw material that feeds an [[ml-trading-pipeline]] with 
 - [[feature-engineering-finance]] — Turning raw alternative data into model inputs
 - [[ml-trading-pipeline]] — Alternative data as additional input features for ML models
 - [[data-providers]] — Overview of data sources available to traders
-- [[finviz]] / [[tradingview]] / [[alpha-vantage]] — Traditional data platforms for comparison
+- finviz / tradingview / [[alpha-vantage]] — Traditional data platforms for comparison
 
 ## Sources
 

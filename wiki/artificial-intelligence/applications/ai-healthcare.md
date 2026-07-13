@@ -21,9 +21,9 @@ AI is transforming healthcare across the entire value chain — from drug discov
 
 | Application | AI Role | Impact | Key Players |
 |-------------|--------|--------|-------------|
-| **Target identification** | ML identifies novel drug targets from genomic/proteomic data | Reduces discovery timeline from years to months | [[recursion-pharmaceuticals|Recursion]] (RXRX), [[exscientia|Exscientia]], Insilico Medicine |
-| **Molecule design** | Generative AI designs candidate molecules with desired properties | 10-100x more candidates screened computationally | [[schrödinger|Schrödinger]] (SDGR), Relay Therapeutics (RLAY) |
-| **Clinical trial optimisation** | AI selects patients, predicts outcomes, identifies sites | Reduces trial cost and duration by 20-40% | [[tempus-ai|Tempus]] (TEM), Veracyte (VCYT) |
+| **Target identification** | ML identifies novel drug targets from genomic/proteomic data | Reduces discovery timeline from years to months | Recursion (RXRX), Exscientia, Insilico Medicine |
+| **Molecule design** | Generative AI designs candidate molecules with desired properties | 10-100x more candidates screened computationally | Schrödinger (SDGR), Relay Therapeutics (RLAY) |
+| **Clinical trial optimisation** | AI selects patients, predicts outcomes, identifies sites | Reduces trial cost and duration by 20-40% | Tempus (TEM), Veracyte (VCYT) |
 | **Protein structure prediction** | [[ai-science|AlphaFold]] predicts 3D protein structures from amino acid sequences | Accelerates understanding of disease mechanisms | [[google-deepmind|DeepMind]] (Alphabet) |
 
 The drug discovery pipeline is $50B+ annually. AI-driven efficiency gains represent massive cost savings and faster time-to-market.
@@ -61,10 +61,10 @@ Medical imaging AI is the most mature healthcare AI application — multiple pro
 | Company | Ticker | AI Focus | Market Cap |
 |---------|--------|---------|-----------|
 | **Intuitive Surgical** | ISRG | Robotic surgery (da Vinci) | ~$170B |
-| **[[veeva-systems|Veeva Systems]]** | VEEV | Life sciences cloud + AI | ~$35B |
-| **[[tempus-ai|Tempus AI]]** | TEM | Clinical data + AI diagnostics | ~$8B |
-| **[[recursion-pharmaceuticals|Recursion]]** | RXRX | AI drug discovery | ~$3B |
-| **[[schrödinger|Schrödinger]]** | SDGR | Computational drug design | ~$3B |
+| **Veeva Systems** | VEEV | Life sciences cloud + AI | ~$35B |
+| **Tempus AI** | TEM | Clinical data + AI diagnostics | ~$8B |
+| **Recursion** | RXRX | AI drug discovery | ~$3B |
+| **Schrödinger** | SDGR | Computational drug design | ~$3B |
 | **DexCom** | DXCM | AI-enhanced glucose monitoring | ~$30B |
 | **Illumina** | ILMN | Genomic sequencing (AI analysis) | ~$20B |
 | **Google (DeepMind)** | GOOGL | AlphaFold, Med-PaLM | ~$2T |

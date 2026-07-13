@@ -9,7 +9,7 @@ aliases: ["momentum screening", "momentum screen", "momentum stock screen", "Mom
 domain: [indicators]
 prerequisites: ["[[momentum]]", "[[relative-strength]]"]
 difficulty: intermediate
-related: ["[[relative-strength]]", "[[relative-strength-rating]]", "[[sector-rotation]]", "[[canslim]]", "[[momentum-investing]]", "[[momentum]]", "[[momentum-anomaly]]", "[[earnings-revision]]"]
+related: ["[[relative-strength]]", "[[sector-rotation]]", "[[momentum-investing]]", "[[momentum]]", "[[momentum-anomaly]]"]
 ---
 
 Momentum screening is the systematic process of filtering a large universe of stocks to identify those exhibiting the strongest price [[momentum]] and supporting fundamental catalysts. Unlike discretionary [[momentum-investing|momentum trading]] — simply buying what has gone up — a structured momentum screen applies multiple quantitative criteria simultaneously to rank and select candidates with the highest probability of continued outperformance.
@@ -20,9 +20,9 @@ A robust momentum screen typically combines five dimensions:
 
 1. **Price momentum (6-month and 12-month returns)** — The foundational signal. Stocks in the top decile of trailing returns have historically outperformed the bottom decile by 8-12% annually. The 12-month lookback captures intermediate trend persistence, while the 6-month lookback is more responsive to recent acceleration.
 
-2. **[[relative-strength]] vs. market and sector** — Raw returns can be misleading in a strong bull market (everything goes up). Measuring a stock's return relative to the S&P 500 or its [[gics-sectors|GICS sector]] isolates genuine outperformance from market beta. The [[relative-strength-rating]] developed by [[ibd]] formalized this into a 1-99 ranking system.
+2. **[[relative-strength]] vs. market and sector** — Raw returns can be misleading in a strong bull market (everything goes up). Measuring a stock's return relative to the S&P 500 or its GICS sector isolates genuine outperformance from market beta. The relative-strength-rating developed by ibd formalized this into a 1-99 ranking system.
 
-3. **[[earnings-revision]] momentum** — Analyst estimate upgrades serve as a fundamental confirmation of price momentum. A stock rising on deteriorating fundamentals is vulnerable to reversal; one rising alongside upward earnings revisions has a fundamental catalyst supporting the move.
+3. **earnings-revision momentum** — Analyst estimate upgrades serve as a fundamental confirmation of price momentum. A stock rising on deteriorating fundamentals is vulnerable to reversal; one rising alongside upward earnings revisions has a fundamental catalyst supporting the move.
 
 4. **Volume confirmation** — Strong momentum on expanding [[volume]] indicates institutional participation. Rising prices on declining volume suggest exhaustion. A 50-day average volume trend filter helps distinguish conviction-driven moves from low-liquidity noise.
 
@@ -33,8 +33,8 @@ A robust momentum screen typically combines five dimensions:
 | Dimension | Typical signal | Common threshold | What it screens out |
 |-----------|----------------|------------------|---------------------|
 | Price momentum | 6- and 12-month trailing return | Top decile/quintile of universe | Laggards and chop |
-| [[relative-strength]] | Return vs. S&P 500 / [[gics-sectors\|sector]] | [[relative-strength-rating\|RS Rating]] ≥ 80 | Stocks rising only on market beta |
-| [[earnings-revision]] | Net analyst estimate upgrades | Positive 1- and 3-month revisions | Price moves with no fundamental catalyst |
+| [[relative-strength]] | Return vs. S&P 500 / sector | RS Rating ≥ 80 | Stocks rising only on market beta |
+| earnings-revision | Net analyst estimate upgrades | Positive 1- and 3-month revisions | Price moves with no fundamental catalyst |
 | Volume confirmation | 50-day volume trend | Volume rising into the advance | Low-conviction, low-liquidity drifts |
 | Trend filter | Price vs. [[200-day-ma]] | Price > 200-day MA | Structural downtrends / dead-cat bounces |
 
@@ -60,14 +60,14 @@ Jegadeesh and Titman (1993) documented that momentum strategies perform better w
 
 ## Common Screening Tools
 
-- **[[ibd]] MarketSmith** — Proprietary [[relative-strength-rating]], EPS Rating, and Composite Rating combine momentum and fundamental factors in a single interface
+- **ibd MarketSmith** — Proprietary relative-strength-rating, EPS Rating, and Composite Rating combine momentum and fundamental factors in a single interface
 - **Finviz** — Free screener supporting performance, analyst recommendation, and technical filters
 - **Portfolio123** — Quantitative platform allowing custom multi-factor ranking systems with backtesting
 - **Koyfin / Seeking Alpha** — Earnings revision data and relative performance charting
 
 ## How Traders Use This
 
-- **Two-layer top-down workflow.** Many practitioners first rank [[gics-sectors|sectors]] by [[relative-strength]] ([[sector-rotation]]), then run the momentum screen only within the leading sectors. This concentrates capital in groups with institutional sponsorship and avoids "strong stock in a weak group" traps.
+- **Two-layer top-down workflow.** Many practitioners first rank sectors by [[relative-strength]] ([[sector-rotation]]), then run the momentum screen only within the leading sectors. This concentrates capital in groups with institutional sponsorship and avoids "strong stock in a weak group" traps.
 - **Watchlist generation, not blind buying.** The screen produces a ranked candidate list; entries are then timed with [[chart-patterns]], pullbacks to moving averages, or [[breakout]] setups rather than buying the open the morning a name appears.
 - **Rebalance cadence vs. cost.** Monthly rebalancing is the academic standard, but tighter cadences raise turnover and [[slippage|cost drag]]. Some run a buffered ranking (e.g., buy top 10%, only sell when a holding falls out of the top 30%) to cut churn while preserving the factor exposure.
 - **Combine with the skip month.** Apply the t-12 to t-1 lookback (below) so the screen does not chase names that just spiked and are due for a short-term reversal.
@@ -75,7 +75,7 @@ Jegadeesh and Titman (1993) documented that momentum strategies perform better w
 ## Common Pitfalls and Risks
 
 - **Momentum crashes.** The dominant tail risk: after a sharp market bottom, prior losers rip and prior winners stall, so a momentum book can suffer violent drawdowns (e.g., March 2009, March 2020). Volatility-scaling or a trend/[[200-day-ma]] overlay mitigates but does not eliminate this.
-- **Chasing extended names.** Raw price momentum buys what has already run; without the skip month and [[earnings-revision]] confirmation, screens load up on stocks near exhaustion.
+- **Chasing extended names.** Raw price momentum buys what has already run; without the skip month and earnings-revision confirmation, screens load up on stocks near exhaustion.
 - **Bull-market mirage.** In broad rallies "everything is up," so raw return screens fill with high-beta junk. [[relative-strength]] vs. benchmark and sector is what separates genuine leadership from beta.
 - **Crowding and factor decay.** Momentum is a well-known, heavily-traded factor; crowded positioning can sharpen reversals and compress forward returns.
 - **Liquidity and cost drag.** High turnover plus illiquid small caps can quietly erase the paper edge. Constraining the universe (e.g., minimum $500M market cap, minimum 500K average daily volume) and modeling realistic [[transaction-costs]] is essential.
@@ -84,12 +84,8 @@ Jegadeesh and Titman (1993) documented that momentum strategies perform better w
 ## Related
 
 - [[relative-strength]] — Core screening dimension; isolates leadership from beta
-- [[relative-strength-rating]] — IBD's 1-99 percentile RS rank used as a filter
 - [[momentum]] / [[momentum-anomaly]] — The underlying effect screens exploit
 - [[sector-rotation]] — Often combined with momentum screening in a two-layer approach
-- [[canslim]] — William O'Neil's methodology is fundamentally a momentum screen with fundamental overlays
-- [[quantitative-equity]] — Momentum is one of the core factors in systematic equity strategies
-- [[earnings-revision]] — Fundamental confirmation overlay for price momentum
 
 ## Sources
 

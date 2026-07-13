@@ -9,7 +9,7 @@ aliases: ["GenAI Options Trading", "LLM Options Analysis", "AI Options Copilot"]
 domain: [ai-trading, options, generative-ai]
 prerequisites: ["[[options]]", "[[options-greeks]]", "[[implied-volatility]]", "[[llm-market-analysis]]", "[[generative-ai-overview]]"]
 difficulty: intermediate
-related: ["[[llm-market-analysis]]", "[[generative-ai-overview]]", "[[claude]]", "[[finbert]]", "[[nlp-sentiment-analysis]]", "[[earnings-call-analysis]]", "[[deep-learning-option-pricing]]", "[[unusual-options-activity]]", "[[ai-trading-agents]]", "[[ai-trading-risks]]", "[[options-trading]]", "[[volatility-surface]]"]
+related: ["[[llm-market-analysis]]", "[[generative-ai-overview]]", "[[claude]]", "[[finbert]]", "[[nlp-sentiment-analysis]]", "[[deep-learning-option-pricing]]", "[[unusual-options-activity]]", "[[ai-trading-agents]]", "[[ai-trading-risks]]", "[[options-trading]]", "[[volatility-surface]]"]
 ---
 
 Generative AI for options trading refers to the application of large language models (LLMs) and other generative architectures to tasks across the options trading workflow — research, screening, structuring, risk attribution, and monitoring. Unlike narrow predictive ML models (e.g., [[deep-learning-option-pricing|neural option pricers]] or [[lstm-trading|LSTM-based forecasters]]), generative systems are designed to **synthesise** unstructured information (news, filings, earnings transcripts, options chains, regulatory disclosures) into structured outputs that humans or downstream systems act on.
@@ -33,7 +33,7 @@ For any single underlying, LLMs ingest: latest 10-K/10-Q, last four earnings cal
 
 Production grounding patterns:
 
-- **Retrieval-augmented generation (RAG)** over filings and transcripts ([[earnings-call-analysis]])
+- **Retrieval-augmented generation (RAG)** over filings and transcripts (earnings-call-analysis)
 - **Tool use** to query Bloomberg, options chain APIs, [[unusual-options-activity|unusual options activity]] feeds
 - **Structured output** (JSON) so the brief can be ingested by a downstream signal model
 
@@ -99,7 +99,6 @@ A typical professional options desk uses generative AI roughly as follows:
 - [[generative-ai-overview]], [[generative-ai-economics]], [[generative-ai-landscape]] — foundational gen-AI background
 - [[claude]] — frequently used foundation model
 - [[finbert]], [[nlp-sentiment-analysis]] — narrower NLP tools that complement LLMs
-- [[earnings-call-analysis]] — major LLM use case
 - [[deep-learning-option-pricing]] — adjacent ML stack for the pricing layer
 - [[unusual-options-activity]] — common LLM-input data source
 - [[ai-trading-agents]], [[ai-trading-risks]] — broader AI trading context

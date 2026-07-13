@@ -8,12 +8,12 @@ tags: [traders, person, itpm, mena, fundamental-analysis, commodities, risk-mana
 entity_type: person
 headquarters: "Dubai, UAE"
 website: ""
-related: ["[[itpm]]", "[[anton-kreil]]", "[[fundamental-analysis]]", "[[risk-management]]", "[[commodities]]", "[[oil]]", "[[volatility]]", "[[correlation]]", "[[covered-call]]", "[[diversification]]"]
+related: ["[[anton-kreil]]", "[[risk-management]]", "[[commodities]]", "[[oil]]", "[[volatility]]", "[[correlation]]", "[[covered-call]]", "[[diversification]]"]
 ---
 
 # Hichem Djouhri
 
-Hichem Djouhri is a senior trading mentor at [[itpm|the Institute of Trading and Portfolio Management]] based in Dubai, and one of the best-performing portfolio managers in the Middle East / North Africa (MENA) region. He won best-performing asset manager of the MENA region for seven consecutive years, a track record built on deep [[fundamental-analysis]], understanding commodity [[correlation|correlations]], and exploiting the behavioral inefficiencies of retail-dominated markets (Source: [[itpm-trading-legends-hichem-djouhri]]).
+Hichem Djouhri is a senior trading mentor at the Institute of Trading and Portfolio Management based in Dubai, and one of the best-performing portfolio managers in the Middle East / North Africa (MENA) region. He won best-performing asset manager of the MENA region for seven consecutive years, a track record built on deep fundamental-analysis, understanding commodity [[correlation|correlations]], and exploiting the behavioral inefficiencies of retail-dominated markets (Source: [[itpm-trading-legends-hichem-djouhri]]).
 
 ## Career
 
@@ -71,7 +71,6 @@ Due to Saudi Arabia's 10% daily circuit breaker limits, if you didn't sell in th
 
 ## Strategy Connections
 
-- [[fundamental-analysis]] — Core methodology — bottom-up company research within top-down macro framework
 - [[correlation]] — Exploiting oil/equity correlation mispricings in commodity-dependent markets
 - [[risk-management]] — Multi-layered hedging strategies adapted to high-volatility markets
 - [[covered-call]] — Income generation and downside protection in MENA portfolios

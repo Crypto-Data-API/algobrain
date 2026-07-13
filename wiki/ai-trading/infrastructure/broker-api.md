@@ -9,7 +9,6 @@ aliases: ["Broker API", "Broker APIs", "Trading API"]
 domain: [market-microstructure]
 related:
   - "[[fix-protocol]]"
-  - "[[interactive-brokers]]"
   - "[[low-latency-trading]]"
   - "[[cloud-trading-infrastructure]]"
   - "[[order-types]]"
@@ -23,7 +22,7 @@ A broker API is a programmatic interface that lets software place, modify, and c
 
 A broker API exposes two logical channels:
 
-1. **Trading / account** — submit orders, cancel/replace, fetch open orders, positions, P&L, margin, and account status. Usually authenticated via API key + secret (REST/WebSocket brokers) or a gateway session ([[interactive-brokers|IBKR]]).
+1. **Trading / account** — submit orders, cancel/replace, fetch open orders, positions, P&L, margin, and account status. Usually authenticated via API key + secret (REST/WebSocket brokers) or a gateway session (IBKR).
 2. **Market data** — streaming quotes, trades, and sometimes order-book depth, plus historical bars for [[backtesting]].
 
 Common transport styles:
@@ -45,7 +44,7 @@ Common transport styles:
 
 | Broker / venue | Interface | Notes |
 |---|---|---|
-| [[interactive-brokers|Interactive Brokers]] | TWS API, Client Portal API, FIX | Broadest multi-asset coverage; powerful but stateful gateway |
+| Interactive Brokers | TWS API, Client Portal API, FIX | Broadest multi-asset coverage; powerful but stateful gateway |
 | Alpaca | REST + WebSocket | Commission-free US equities/crypto; developer-friendly, good docs |
 | Tradier | REST | Equities + options, simple API |
 | Binance / Coinbase / Kraken | REST + WebSocket / FIX | Crypto; high rate limits, deep order-book streams |
@@ -59,7 +58,6 @@ The broker API is where a strategy meets execution reality. A backtest assuming 
 ## Related
 
 - [[fix-protocol]] — the institutional broker-API standard
-- [[interactive-brokers]] — the most widely used multi-asset retail/pro API
 - [[order-types]] — what the API must support
 - [[low-latency-trading]] — when API latency matters
 - [[deployment]] — running a bot against a broker API in production

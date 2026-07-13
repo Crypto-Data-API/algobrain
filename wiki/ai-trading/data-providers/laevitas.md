@@ -9,7 +9,6 @@ entity_type: company
 website: https://www.laevitas.ch
 related:
   - "[[glassnode]]"
-  - "[[spotgamma]]"
   - "[[santiment]]"
 ---
 
@@ -17,7 +16,7 @@ related:
 
 ## Overview
 
-Crypto derivatives analytics platform providing professional-grade data on options, perpetual futures, and futures across all major exchanges. Laevitas fills a critical gap: while [[spotgamma]] covers equity options and [[glassnode]] covers on-chain fundamentals, Laevitas is the go-to source for crypto derivatives market structure. It tracks funding rates, open interest, options volatility surfaces, term structure, basis trades, and liquidation data across Deribit, Binance, OKX, Bybit, and other exchanges. If you trade crypto derivatives -- especially options or perpetual swaps -- this data is essential.
+Crypto derivatives analytics platform providing professional-grade data on options, perpetual futures, and futures across all major exchanges. Laevitas fills a critical gap: while spotgamma covers equity options and [[glassnode]] covers on-chain fundamentals, Laevitas is the go-to source for crypto derivatives market structure. It tracks funding rates, open interest, options volatility surfaces, term structure, basis trades, and liquidation data across Deribit, Binance, OKX, Bybit, and other exchanges. If you trade crypto derivatives -- especially options or perpetual swaps -- this data is essential.
 
 ## Pricing
 
@@ -62,4 +61,4 @@ Crypto derivatives analytics platform providing professional-grade data on optio
 - Delta-neutral market makers tracking funding and OI dynamics
 - Anyone trading crypto with leverage who needs to understand where liquidation cascades will trigger
 
-Think of Laevitas as the [[spotgamma]] equivalent for crypto derivatives -- essential market structure data that reveals the mechanics driving price action beyond simple supply and demand.
+Think of Laevitas as the spotgamma equivalent for crypto derivatives -- essential market structure data that reveals the mechanics driving price action beyond simple supply and demand.

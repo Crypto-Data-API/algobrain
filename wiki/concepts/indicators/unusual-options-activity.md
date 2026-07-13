@@ -65,7 +65,7 @@ Major data vendors include **Cheddar Flow**, **Unusual Whales**, **FlowAlgo**, *
 - **Catalyst pre-positioning** — taking a small directional bet alongside what looks like informed flow
 - **Volatility regime change detection** — spike in OTM put buying often precedes [[volatility-spike|volatility spikes]] in single names
 - **Macro hedging confirmation** — heavy SPX put-buying at far OTM strikes is one of the cleanest tail-hedge demand signals
-- **Earnings expected-move calibration** — flow into ATM straddles around earnings reveals [[earnings-iv-crush|implied-move]] expectations
+- **Earnings expected-move calibration** — flow into ATM straddles around earnings reveals implied-move expectations
 
 ## Related
 
@@ -75,7 +75,6 @@ Major data vendors include **Cheddar Flow**, **Unusual Whales**, **FlowAlgo**, *
 - [[gamma-squeeze]] — UOA can pre-warn of dealer-hedging-driven squeezes
 - [[options-pinning]] — opposite phenomenon: options flow that suppresses moves
 - [[implied-volatility]] — UOA often manifests as IV moves before price
-- [[earnings-iv-crush]] — UOA into earnings calibrates the expected move
 - [[nlp-sentiment-analysis]] — UOA combined with text sentiment is a common AI feature stack
 
 ## Sources

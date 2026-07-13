@@ -26,7 +26,7 @@ Day trading, swing trading, and [[position-trading]] are three active trading st
 | **Screen time** | Hours daily, live, during the session | ~30-60 min/day, often evenings | Minutes most days; weekly review |
 | **Trades per month** | Dozens to hundreds | A handful to a dozen | A few; sometimes one |
 | **Capital notes (US stocks)** | Pattern-Day-Trader rule: $25k min in a margin account | No PDT constraint | No PDT constraint |
-| **Primary analysis** | Intraday price/volume, tape, momentum | Multi-day [[technical-analysis\|chart]] patterns | Trend + [[fundamental-analysis\|fundamentals]]/macro |
+| **Primary analysis** | Intraday price/volume, tape, momentum | Multi-day [[technical-analysis\|chart]] patterns | Trend + fundamentals/macro |
 | **Transaction costs** | Highest (many trades, spreads add up) | Moderate | Lowest (few trades) |
 | **Stress / pace** | High, real-time decisions | Moderate | Lower, slower |
 | **Compatible with a day job** | No (full-time during market hours) | Yes | Yes |
@@ -42,7 +42,7 @@ Day trading, swing trading, and [[position-trading]] are three active trading st
 
 **Costs and frequency.** Frequency and cost move together. Day trading places the most trades, so spreads, commissions, and [[slippage]] take the largest bite and the edge per trade must clear that hurdle. Position trading places the fewest trades, so frictions are nearly negligible — most of the challenge is analytical and psychological, not transactional.
 
-**Analysis style.** Day trading leans almost entirely on intraday [[technical-analysis|technicals]] — price, volume, and order flow. Swing trading uses multi-day chart patterns and momentum. Position trading increasingly blends [[technical-analysis|technicals]] with [[fundamental-analysis|fundamentals]] and macro, because over weeks-to-months the underlying business and the economic backdrop start to matter, not just the chart.
+**Analysis style.** Day trading leans almost entirely on intraday [[technical-analysis|technicals]] — price, volume, and order flow. Swing trading uses multi-day chart patterns and momentum. Position trading increasingly blends [[technical-analysis|technicals]] with fundamentals and macro, because over weeks-to-months the underlying business and the economic backdrop start to matter, not just the chart.
 
 **Temperament and schedule.** Day trading is effectively a full-time job that demands fast, repeated decisions under pressure — it cannot coexist with most other employment during market hours. Swing and position trading can be run around a job, with the analysis done in the evenings or on weekends. Position trading suits patient personalities who are comfortable doing very little for long stretches; day trading suits people who are energised, not rattled, by a fast pace.
 
@@ -61,7 +61,7 @@ Day trading, swing trading, and [[position-trading]] are three active trading st
 **Choose position trading when:**
 - You want the lowest screen time and transaction costs of the three
 - You can tolerate weeks-to-months holds and ride out noise and drawdowns
-- You like combining trend with [[fundamental-analysis|fundamentals]] and the macro backdrop
+- You like combining trend with fundamentals and the macro backdrop
 
 ## Verdict
 

@@ -19,7 +19,6 @@ related:
   - "[[vix]]"
   - "[[volatility-skew]]"
   - "[[options-greeks]]"
-  - "[[dispersion-trading]]"
 ---
 
 ## Overview
@@ -47,7 +46,7 @@ Unlike [[option-volatility-and-pricing|Natenberg]], which focuses on directional
 - **Smile dynamics**: How vol surfaces move when spot moves (sticky-strike vs. sticky-delta)
 
 ### Multi-Asset Vol
-- **[[dispersion-trading]]**: Long single-stock variance, short index variance — earns the implied correlation premium
+- **dispersion-trading**: Long single-stock variance, short index variance — earns the implied correlation premium
 - **Correlation swaps**: Direct expression of correlation views
 - **Cross-asset vol**: FX vs. equity vol, equity vs. credit vol
 
@@ -104,5 +103,4 @@ The original PDF (~470 pages) was distributed free by Santander Investment Bank 
 - [[vix]] — Standardized vol index
 - [[volatility-skew]] — The shape of the implied vol surface
 - [[options-greeks]] — The risk decomposition
-- [[dispersion-trading]] — Single-stock vs. index correlation trade
 - [[option-volatility-and-pricing|Natenberg]] — Directional options companion

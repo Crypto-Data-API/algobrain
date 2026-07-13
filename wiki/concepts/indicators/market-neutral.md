@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [portfolio-theory, hedge-funds, risk-management]
 aliases: ["Market Neutral Strategy", "Market-Neutral", "Zero Beta"]
-related: ["[[long-short-equity]]", "[[pairs-trading]]", "[[ed-thorp]]", "[[delta-neutral]]", "[[statistical-arbitrage]]", "[[hedging]]", "[[beta]]"]
+related: ["[[pairs-trading]]", "[[ed-thorp]]", "[[delta-neutral]]", "[[statistical-arbitrage]]", "[[hedging]]", "[[beta]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: advanced
 ---
@@ -57,13 +57,12 @@ Market neutral does not mean risk-free:
 
 - **[[statistical-arbitrage|Statistical arbitrage]]**: High-frequency or medium-frequency quantitative strategies that trade hundreds or thousands of stocks simultaneously, maintaining strict market neutrality while exploiting short-term pricing inefficiencies.
 - **[[pairs-trading]]**: The simplest form of market-neutral strategy -- going long one stock and short a correlated peer. The pair's spread is the source of P&L, not the market direction.
-- **[[long-short-equity]]**: While not always market neutral (many L/S equity funds run with a net long bias), the purest form targets zero beta exposure.
+- **long-short-equity**: While not always market neutral (many L/S equity funds run with a net long bias), the purest form targets zero beta exposure.
 - **Convertible arbitrage**: Buying convertible bonds and shorting the underlying stock to isolate the embedded option value. This was [[ed-thorp]]'s original hedge fund strategy.
 - **Merger arbitrage**: Going long the target and short the acquirer in announced deals, profiting from the deal spread while being approximately market neutral.
 
 ## Related
 
-- [[long-short-equity]]
 - [[pairs-trading]]
 - [[statistical-arbitrage]]
 - [[ed-thorp]]

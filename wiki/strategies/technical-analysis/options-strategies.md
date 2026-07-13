@@ -20,12 +20,12 @@ crowding_risk: high
 expected_sharpe: 0.5
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 20
-related: ["[[equity-options]]", "[[covered-call]]", "[[vertical-spread]]", "[[iron-condor]]", "[[straddle-strangle]]", "[[options-overview]]", "[[call-option]]", "[[put-option]]", "[[options]]", "[[covered-calls]]", "[[credit-spread]]", "[[volatility-risk-premium]]", "[[greeks]]", "[[edge-taxonomy]]"]
+related: ["[[covered-call]]", "[[vertical-spread]]", "[[iron-condor]]", "[[straddle-strangle]]", "[[options-overview]]", "[[call-option]]", "[[put-option]]", "[[options]]", "[[covered-calls]]", "[[credit-spread]]", "[[volatility-risk-premium]]", "[[greeks]]", "[[edge-taxonomy]]"]
 ---
 
 # Options Strategies
 
-Options strategies combine one or more [[call-option|call]] and [[put-option|put]] options to create defined risk/reward profiles. By structuring positions across different strikes, expirations, and option types, traders can express views on direction, volatility, time decay, or any combination of these factors. Options strategies are central to ITPM's [[long-short-equity]] methodology and span a wide range of complexity from single-leg trades to multi-leg structures. This page treats the family as a whole, with defined-risk premium selling (the one family with a documented persistent edge — the [[volatility-risk-premium]]) as the canonical implementation.
+Options strategies combine one or more [[call-option|call]] and [[put-option|put]] options to create defined risk/reward profiles. By structuring positions across different strikes, expirations, and option types, traders can express views on direction, volatility, time decay, or any combination of these factors. Options strategies are central to ITPM's long-short-equity methodology and span a wide range of complexity from single-leg trades to multi-leg structures. This page treats the family as a whole, with defined-risk premium selling (the one family with a documented persistent edge — the [[volatility-risk-premium]]) as the canonical implementation.
 
 ## Strategy Families
 
@@ -238,7 +238,6 @@ The cardinal rule: **sell premium when IV rank is high, buy premium (or hold lon
 ## Related
 
 - [[options]] -- options market overview
-- [[equity-options]] -- equity options specifics
 - [[vertical-spread]] -- bull/bear spreads
 - [[iron-condor]] -- range-bound income strategy
 - [[straddle-strangle]] -- volatility plays

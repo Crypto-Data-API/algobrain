@@ -9,7 +9,7 @@ aliases: ["Vanna", "DdeltaDvol", "DvegaDspot", "Delta-Vol Cross Greek"]
 domain: [risk-management, derivatives]
 prerequisites: ["[[options-greeks]]", "[[delta]]", "[[vega]]", "[[implied-volatility]]"]
 difficulty: advanced
-related: ["[[second-order-greeks]]", "[[vomma]]", "[[volga]]", "[[charm]]", "[[delta]]", "[[vega]]", "[[gamma]]", "[[implied-volatility]]", "[[dealer-gamma-hedging]]", "[[gamma-pnl]]", "[[volatility-spike]]", "[[gamma-explosion]]", "[[portfolio-greeks-aggregation]]", "[[options-stress-testing]]", "[[spotgamma]]"]
+related: ["[[second-order-greeks]]", "[[vomma]]", "[[volga]]", "[[charm]]", "[[delta]]", "[[vega]]", "[[gamma]]", "[[implied-volatility]]", "[[dealer-gamma-hedging]]", "[[gamma-pnl]]", "[[volatility-spike]]", "[[gamma-explosion]]", "[[portfolio-greeks-aggregation]]", "[[options-stress-testing]]"]
 ---
 
 **Vanna** is a second-order option Greek that measures how an option's [[delta]] changes when [[implied-volatility]] changes — or, equivalently by the symmetry of mixed partial derivatives, how its [[vega]] changes when the underlying price moves. It is the single most important "cross Greek" for understanding why a position that looks directionally neutral can suddenly develop directional exposure during a volatility shock, and it is the engine behind the dealer "vanna flows" that amplify equity-index moves around [[volatility-spike|volatility spikes]] and monthly options expiration.
@@ -47,7 +47,7 @@ The mechanism that links this to spot:
 3. To stay delta-hedged, dealers must **sell** the underlying (or futures) into a falling, more-volatile market.
 4. That selling pushes spot lower, which can feed back into higher IV — a self-reinforcing **vanna flow**.
 
-The same mechanism runs in reverse on the way up: as IV *falls* after a scare (vol crush), the negative-vanna book sheds negative delta, forcing dealers to **buy**, mechanically supporting rallies. This "vol-down, dealers-buy" dynamic is a documented driver of the slow grind higher that often follows a volatility event and into monthly OPEX. Services such as [[spotgamma|SpotGamma]] and similar dealer-positioning analytics estimate aggregate vanna exposure to anticipate these flows.
+The same mechanism runs in reverse on the way up: as IV *falls* after a scare (vol crush), the negative-vanna book sheds negative delta, forcing dealers to **buy**, mechanically supporting rallies. This "vol-down, dealers-buy" dynamic is a documented driver of the slow grind higher that often follows a volatility event and into monthly OPEX. Services such as SpotGamma and similar dealer-positioning analytics estimate aggregate vanna exposure to anticipate these flows.
 
 ## Worked Example
 
@@ -72,7 +72,6 @@ Overnight a headline lifts index IV from 16% to 22% with **no change in spot**. 
 - [[delta]] / [[vega]] — the first-order Greeks vanna connects
 - [[dealer-gamma-hedging]] — how dealer hedging converts vanna into market flow
 - [[gamma-explosion]] / [[volatility-spike]] — when vanna dominates P&L
-- [[spotgamma]] — dealer-positioning analytics that track aggregate vanna
 
 ## Sources
 

@@ -21,7 +21,7 @@ John Paulson is an American hedge fund manager who executed what is widely consi
 
 Born in 1955 in Queens, New York, Paulson grew up in a middle-class family. He graduated first in his class from New York University's business school and later earned an MBA from Harvard Business School, where he was a Baker Scholar (top 5% of the class). After Harvard, he worked at Boston Consulting Group and then the investment bank Bear Stearns, before moving to the merger [[arbitrage-overview|arbitrage]] desk at Gruss Partners.
 
-Paulson founded Paulson & Co. in 1994 with $2 million and a strategy focused on [[merger-arbitrage|merger arbitrage]] -- betting on the completion of announced mergers and acquisitions. For the first decade, the fund was modestly successful but unremarkable, managing around $600 million by 2005. Nothing in Paulson's track record suggested what was about to come.
+Paulson founded Paulson & Co. in 1994 with $2 million and a strategy focused on merger arbitrage -- betting on the completion of announced mergers and acquisitions. For the first decade, the fund was modestly successful but unremarkable, managing around $600 million by 2005. Nothing in Paulson's track record suggested what was about to come.
 
 ## Career and Key Trades
 
@@ -79,7 +79,7 @@ Paulson's career offers several critical lessons:
 - **[[short-selling]]** — While technically not a short sale, the CDS trade was economically equivalent to shorting [[subprime-mortgage]]-backed securities
 - **[[derivatives]]** — The trade was executed entirely through [[credit-default-swaps|credit default swaps]], a form of OTC derivative
 - **[[behavioral-finance]]** — The thesis depended on recognizing that consensus was wrong and that institutions were anchored to flawed models
-- **[[merger-arbitrage]]** — Paulson's original strategy before the housing trade, and the foundation of Paulson & Co.
+- **merger-arbitrage** — Paulson's original strategy before the housing trade, and the foundation of Paulson & Co.
 
 ## Sources
 

@@ -60,11 +60,11 @@ Simons stepped down as Renaissance CEO in 2010 (succeeded by Peter Brown and Rob
 
 ## Trading Relevance
 
-Simons proved that purely quantitative, model-driven approaches could dominate markets over decades. His success inspired an entire generation of [[algorithmic-trading]] firms and quant [[hedge-funds]]. The Medallion Fund's returns dwarf those of [[warren-buffett]], [[george-soros]], and [[ray-dalio]], though its capacity is extremely limited. Renaissance's other funds (RIEF, RIDA), open to outside investors, have delivered far more modest returns, highlighting the importance of strategy capacity constraints — a core lesson for anyone evaluating [[backtesting]] results and scalability.
+Simons proved that purely quantitative, model-driven approaches could dominate markets over decades. His success inspired an entire generation of [[algorithmic-trading]] firms and quant [[hedge-funds]]. The Medallion Fund's returns dwarf those of warren-buffett, [[george-soros]], and [[ray-dalio]], though its capacity is extremely limited. Renaissance's other funds (RIEF, RIDA), open to outside investors, have delivered far more modest returns, highlighting the importance of strategy capacity constraints — a core lesson for anyone evaluating [[backtesting]] results and scalability.
 
 ## Influence and Legacy
 
-Simons demonstrated that markets contain exploitable statistical patterns invisible to human traders. His approach represents the opposite end of the spectrum from discretionary traders like [[paul-tudor-jones]] and fundamental investors like [[warren-buffett]]. His hiring philosophy — "never hire anyone from Wall Street; hire scientists" — became the template for the modern quant industry.
+Simons demonstrated that markets contain exploitable statistical patterns invisible to human traders. His approach represents the opposite end of the spectrum from discretionary traders like [[paul-tudor-jones]] and fundamental investors like warren-buffett. His hiring philosophy — "never hire anyone from Wall Street; hire scientists" — became the template for the modern quant industry.
 
 His influence radiates across several fronts:
 
@@ -83,7 +83,6 @@ The enduring Simons paradox: the most successful trading record in history is al
 - [[quantitative-trading]]
 - [[backtesting]]
 - [[machine-learning]]
-- [[warren-buffett]]
 - [[george-soros]]
 - [[ray-dalio]]
 

@@ -19,7 +19,7 @@ Traditional equity and futures markets have structural safeguards that crypto la
 - **Extreme leverage** — Platforms like Binance, Bybit, and formerly BitMEX offer up to 100x leverage on [[perpetual-futures|perpetual futures]]. A 1% adverse move at 100x leverage wipes out an entire position. Mass liquidations create forced selling pressure that feeds on itself.
 - **Liquidation cascades** — The core mechanism: price drops → leveraged longs are liquidated → forced selling pushes price lower → more liquidations triggered → cascade continues until leverage is flushed from the system. This is the crypto equivalent of the [[flash-crash-2010|2010 Flash Crash]]'s stop-loss cascade, but far more violent because of the leverage multiples involved.
 - **Fragmented liquidity** — BTC trades on 100+ exchanges with varying depth. A large sell on one exchange can temporarily crash the price there, triggering cross-exchange arbitrage and liquidations on derivative platforms that reference that price feed.
-- **Thin order books** — Even [[bitcoin|BTC]] and [[ethereum|ETH]] have surprisingly thin order books compared to [[sp500|S&P 500]] futures or [[forex]] majors. A few million dollars of aggressive selling can move prices 2-5% on major exchanges.
+- **Thin order books** — Even [[bitcoin|BTC]] and [[ethereum|ETH]] have surprisingly thin order books compared to S&P 500 futures or [[forex]] majors. A few million dollars of aggressive selling can move prices 2-5% on major exchanges.
 - **Whale manipulation** — Large holders ("whales") can intentionally push prices through liquidation levels on leveraged exchanges, profiting from the cascade. This is the crypto equivalent of [[spoofing]] and [[stop-hunting-and-liquidity-sweeps|stop hunting]], but enforcement is minimal to nonexistent.
 
 ## Notable Crypto Flash Crashes
@@ -38,7 +38,7 @@ Traditional equity and futures markets have structural safeguards that crypto la
 
 The March 12-13, 2020 crash remains the most violent crypto flash crash by percentage decline from a high-liquidity starting point (excluding outright collapses like [[terra-luna|LUNA]]).
 
-- [[bitcoin|BTC]] was trading at ~$7,900 when COVID-19 panic hit global markets. [[sp500|S&P 500]] futures were limit down.
+- [[bitcoin|BTC]] was trading at ~$7,900 when COVID-19 panic hit global markets. S&P 500 futures were limit down.
 - BTC crashed to $3,800 — a **50% decline in roughly 24 hours**.
 - BitMEX, then the largest leveraged crypto platform, experienced **$700M+ in liquidations** in a single day.
 - BitMEX's matching engine became overloaded and slowed to a crawl. Ironically, this system lag **slowed the cascade** and may have prevented BTC from going even lower — accidental circuit breaking.

@@ -8,7 +8,7 @@ tags: [options, derivatives, weekly]
 aliases: ["Weeklys", "Weeklies", "SPXW", "Weekly Options"]
 domain: [derivatives, options]
 difficulty: intermediate
-related: ["[[spx-options]]", "[[spy-options]]", "[[xsp-options]]", "[[0dte-trading]]", "[[am-vs-pm-settlement]]", "[[gamma-scalping]]", "[[earnings-options-strategies]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
+related: ["[[0dte-trading]]", "[[gamma-scalping]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
 ---
 
 **Weekly options** ("Weeklys") are option contracts that expire within a week of listing rather than following the traditional monthly third-Friday cycle. The Cboe introduced them in 2005 as a small experiment on a handful of products; today they cover essentially every trading day on SPX and most liquid equity underliers, and weekly volume — including same-day [[0dte-trading|0DTE]] expirations — exceeds traditional monthly volume on the index complex. Weeklies have a fundamentally different Greeks profile from monthlies: faster theta decay, sharper gamma near expiration, and less vega — which makes them powerful tools for event-driven trading and dangerous tools for un-managed short positions.
@@ -60,7 +60,7 @@ For S&P 500 options specifically, weeklies and monthlies settle differently:
 - **SPX traditional monthlies (3rd Friday)** — **AM-settled** to the Special Opening Quotation (SOQ), calculated from opening prints of all 500 components on Friday morning. Final trading occurs Thursday afternoon.
 - **SPXW weeklies** (including 0DTE) — **PM-settled** to the 4:00pm ET closing print of the SPX index. Trading on the expiration day continues until 4:00pm.
 
-Spreads that mix AM- and PM-settled contracts (e.g., a calendar that buys a monthly and sells a weekly at the same strike) carry overnight gap risk because the two legs settle to different reference values. See [[am-vs-pm-settlement]] for full mechanics.
+Spreads that mix AM- and PM-settled contracts (e.g., a calendar that buys a monthly and sells a weekly at the same strike) carry overnight gap risk because the two legs settle to different reference values. See am-vs-pm-settlement for full mechanics.
 
 ## Tax Status
 
@@ -74,9 +74,9 @@ This is one of the key reasons active short-term SPX traders use SPXW rather tha
 
 ## ITPM Use Cases
 
-[[itpm|ITPM]]-style portfolios use weeklies in several specific scenarios:
+ITPM-style portfolios use weeklies in several specific scenarios:
 
-- **Precise event timing** — selling a weekly straddle into earnings or a specific data release captures the IV crush or realized move with no exposure beyond the event window. See [[earnings-options-strategies]].
+- **Precise event timing** — selling a weekly straddle into earnings or a specific data release captures the IV crush or realized move with no exposure beyond the event window. See earnings-options-strategies.
 - **Faster premium decay** — overlay strategies that systematically sell short-dated premium against a longer-dated position (e.g., diagonal calendars, double diagonals) extract theta faster on the short leg using weeklies.
 - **Defined-risk earnings** — buying a weekly butterfly or iron condor for a known event provides a fixed-cost bet with no overnight assignment risk on cash-settled SPX/XSP variants.
 - **Tactical gamma scalping** — long-gamma weekly positions in a known catalyst window, where the trader actively delta-hedges and harvests realized vol > implied vol. See [[gamma-scalping]].
@@ -93,11 +93,8 @@ This is one of the key reasons active short-term SPX traders use SPXW rather tha
 ## Related
 
 - [[0dte-trading]] — same-day weekly extreme
-- [[spx-options]] / [[spy-options]] / [[xsp-options]]
-- [[am-vs-pm-settlement]]
 - [[section-1256-contracts]]
 - [[gamma-scalping]]
-- [[earnings-options-strategies]]
 - [[implied-volatility]]
 - [[volatility-risk-premium]]
 - [[options-position-sizing]]

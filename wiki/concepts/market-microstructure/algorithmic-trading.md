@@ -9,7 +9,7 @@ aliases: ["algo trading", "Algorithmic", "Algorithmic Trading", "Algo Trading", 
 domain: [market-microstructure, quantitative]
 prerequisites: ["[[market-microstructure]]", "[[order-types-overview]]"]
 difficulty: intermediate
-related: ["[[high-frequency-trading]]", "[[execution-algorithms]]", "[[quantitative-trading]]", "[[jim-simons]]", "[[market-structure]]", "[[citadel]]", "[[nasdaq]]", "[[arbitrage]]", "[[market-microstructure]]", "[[market-maker]]", "[[backtesting]]"]
+related: ["[[high-frequency-trading]]", "[[execution-algorithms]]", "[[quantitative-trading]]", "[[jim-simons]]", "[[market-structure]]", "[[citadel]]", "[[arbitrage]]", "[[market-microstructure]]", "[[market-maker]]", "[[backtesting]]"]
 ---
 
 # Algorithmic Trading

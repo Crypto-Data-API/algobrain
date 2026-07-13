@@ -42,7 +42,7 @@ Several sector signals are consistent with junior-class compression already unde
 - **Investment banking**: analyst class hiring is shrinking at multiple bulge-bracket and elite boutique firms (industry reporting through 2025-2026)
 - **Law firms post-Anthropic Claude legal tool (April 2026)**: associate hiring slowdowns and explicit references to AI tooling reducing first-year-associate task load — see [[anthropic]] and [[legal-services-ai-disruption]]
 - **Big-4 accounting**: entry-level audit and tax headcount tightening as AI automates ledger work
-- **Management consulting**: junior-analyst headcount under pressure at firms whose business models depended on leveraged pyramid structures — [[accenture]] and peers face direct exposure
+- **Management consulting**: junior-analyst headcount under pressure at firms whose business models depended on leveraged pyramid structures — accenture and peers face direct exposure
 
 (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])
 
@@ -75,18 +75,18 @@ The under-35 cohort experiencing concentrated income destruction is also the coh
 
 ### Direct Equity Shorts
 
-- **Consulting firms with leveraged pyramid models**: [[accenture]] is the most-discussed name in this category given direct AI-displacement exposure plus AI-deployment-driven client revenue ambiguity (cannibalization risk on the staff augmentation business)
+- **Consulting firms with leveraged pyramid models**: accenture is the most-discussed name in this category given direct AI-displacement exposure plus AI-deployment-driven client revenue ambiguity (cannibalization risk on the staff augmentation business)
 - **Staffing agencies focused on white-collar contract placement**: the addressable demand for the work being automated is shrinking
 - **Big-Law-dependent commercial real estate**: see [[stranded-office-real-estate]] for the building-level exposure
 
 ### Long Plays
 
 - **Retraining / education**: long higher-education-adjacent firms positioned in skilled-trades retraining, AI-adjacent certification, and healthcare-skills programs (consistent with the [[skilled-trades-wage-boom]] thesis)
-- **AI tools that augment rather than replace**: where the cost-savings flow to the deployer ([[salesforce]] and similar enterprise SaaS, conditional on AI defensibility)
+- **AI tools that augment rather than replace**: where the cost-savings flow to the deployer (salesforce and similar enterprise SaaS, conditional on AI defensibility)
 
 ### Indirect Channels
 
-- **Multifamily residential REITs in tech hubs**: junior-analyst cohorts are renters; income destruction reduces rent-paying capacity. See [[invitation-homes]] (single-family) and [[stranded-office-real-estate]]
+- **Multifamily residential REITs in tech hubs**: junior-analyst cohorts are renters; income destruction reduces rent-paying capacity. See invitation-homes (single-family) and [[stranded-office-real-estate]]
 - **Regional retail and consumer discretionary**: see [[service-sector-multiplier]] for the 3-5x lag mechanism
 - **Municipal bonds in tech-hub-dependent jurisdictions**: see [[tech-hub-concentration-risk]]
 
@@ -111,10 +111,10 @@ Junior-analyst stranding is the white-collar mirror of the [[ai-layoff-trap]] dy
 - [[ai-driven-demand-destruction]] — feedback to corporate revenue
 - [[stranded-office-real-estate]] — physical-plant consequence
 - [[ai-layoff-trap]], [[citrini-2028-global-intelligence-crisis]]
-- [[accenture]], [[salesforce]], [[anthropic]]
+- accenture, salesforce, [[anthropic]]
 - [[pigouvian-automation-tax]], [[skilled-trades-wage-boom]]
-- [[tech-hub-concentration-risk]], [[invitation-homes]]
-- [[2026-02-citrini-tech-selloff]], [[2026-04-meta-ai-layoffs]], [[2026-03-bls-900k-jobs-revision]]
+- [[tech-hub-concentration-risk]], invitation-homes
+- 2026-02-citrini-tech-selloff, 2026-04-meta-ai-layoffs, [[2026-03-bls-900k-jobs-revision]]
 
 ## Sources
 

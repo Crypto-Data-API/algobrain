@@ -49,7 +49,7 @@ The standout figure is the **~$949 of reported 24h volume against a ~$99.5M mark
 | **Fully Diluted Valuation** | ~$124.0M |
 | **Market Cap / FDV** | ~0.80 |
 
-TKX is a fixed-cap (100M) ERC-20 fee-utility token. Holders use TKX to pay trading fees on Tokenize and receive fee discounts — the standard CEX-token utility model where the token captures a slice of exchange economics. The ~0.80 market-cap/FDV ratio indicates ~20M tokens (20% of supply) are still locked/uncirculated, a modest [[dilution|dilution]] overhang. Like most exchange tokens, **TKX's demand is endogenous to the exchange's trading volume**: fewer trades means less fee-token utility, and the near-zero observed turnover suggests the underlying exchange is itself very quiet.
+TKX is a fixed-cap (100M) ERC-20 fee-utility token. Holders use TKX to pay trading fees on Tokenize and receive fee discounts — the standard CEX-token utility model where the token captures a slice of exchange economics. The ~0.80 market-cap/FDV ratio indicates ~20M tokens (20% of supply) are still locked/uncirculated, a modest dilution overhang. Like most exchange tokens, **TKX's demand is endogenous to the exchange's trading volume**: fewer trades means less fee-token utility, and the near-zero observed turnover suggests the underlying exchange is itself very quiet.
 
 ---
 

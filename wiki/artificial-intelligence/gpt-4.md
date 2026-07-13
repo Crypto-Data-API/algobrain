@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [ai-trading, machine-learning, company]
 aliases: ["GPT 4", "GPT-4", "GPT-4o", "GPT-4 Turbo"]
-related: ["[[openai]]", "[[foundation-models]]", "[[llm-market-analysis]]", "[[bert]]", "[[finbert]]", "[[nlp]]", "[[earnings-call-analysis]]", "[[retrieval-augmented-generation]]"]
+related: ["[[openai]]", "[[foundation-models]]", "[[llm-market-analysis]]", "[[bert]]", "[[finbert]]", "[[nlp]]", "[[retrieval-augmented-generation]]"]
 difficulty: intermediate
 domain: [machine-learning]
 ---
@@ -25,7 +25,7 @@ GPT-4 is a [[transformer-trading|transformer]]-based, decoder-only model trained
 
 GPT-4 and its successors are used across the research and signal-generation stack, almost always as one component of a larger pipeline rather than a standalone trader:
 
-- **Document analysis** — summarizing and extracting structured facts from [[earnings-call-analysis|earnings calls]], SEC filings, and analyst reports, typically wired up with [[retrieval-augmented-generation|RAG]] over a document store.
+- **Document analysis** — summarizing and extracting structured facts from earnings calls, SEC filings, and analyst reports, typically wired up with [[retrieval-augmented-generation|RAG]] over a document store.
 - **News and sentiment** — classifying headlines and central-bank communications as hawkish/dovish or bullish/bearish; see [[llm-market-analysis]] and [[nlp]]. For high-volume, latency-sensitive sentiment, smaller fine-tuned models like [[finbert]] are often cheaper and faster than calling GPT-4.
 - **Idea generation and code** — drafting backtests, feature ideas, and data-cleaning code for quant workflows.
 - **Agents** — function calling lets GPT-4 drive [[ai-trading-agents|trading agents]] that query data, reason, and place orders, though autonomy in live trading remains experimental and risky (see [[ai-trading-risks]]).

@@ -8,10 +8,10 @@ tags: [technical-analysis, backtesting, algorithmic]
 aliases: ["Pine Script", "PineScript", "Pine"]
 domain: [algorithmic]
 difficulty: beginner
-related: ["[[tradingview]]", "[[backtesting]]", "[[indicators]]", "[[technical-analysis]]", "[[easylanguage]]", "[[python]]", "[[ninjatrader]]", "[[sierra-chart]]"]
+related: ["[[backtesting]]", "[[indicators]]", "[[technical-analysis]]", "[[easylanguage]]", "[[python]]", "[[ninjatrader]]", "[[sierra-chart]]"]
 ---
 
-Pine Script is the proprietary, domain-specific scripting language of [[tradingview|TradingView]], used to build custom [[indicators]], strategies, alerts, and screeners that run directly on TradingView charts. It is the most widely used retail strategy-development language in the world by user count, owing to TradingView's 30M+ monthly active users and a public library of hundreds of thousands of community-published scripts. Pine Script is deliberately constrained and chart-centric — closer to a spreadsheet formula language than a general-purpose language like [[python|Python]] — which makes it fast to learn but limited for anything beyond chart-bound logic.
+Pine Script is the proprietary, domain-specific scripting language of TradingView, used to build custom [[indicators]], strategies, alerts, and screeners that run directly on TradingView charts. It is the most widely used retail strategy-development language in the world by user count, owing to TradingView's 30M+ monthly active users and a public library of hundreds of thousands of community-published scripts. Pine Script is deliberately constrained and chart-centric — closer to a spreadsheet formula language than a general-purpose language like [[python|Python]] — which makes it fast to learn but limited for anything beyond chart-bound logic.
 
 ## What It Is and How It Works
 
@@ -62,7 +62,7 @@ For production systematic work, traders typically move from Pine prototypes to [
 
 | Language | Platform | Power | Use case |
 |---|---|---|---|
-| **Pine Script** | [[tradingview\|TradingView]] | Low-mid (chart-bound) | Fast retail indicator/strategy prototyping, alerts |
+| **Pine Script** | TradingView | Low-mid (chart-bound) | Fast retail indicator/strategy prototyping, alerts |
 | [[easylanguage\|EasyLanguage]] | TradeStation/MultiCharts | Mid | Retail systematic backtesting |
 | NinjaScript (C#) | [[ninjatrader\|NinjaTrader]] | Mid-high | Automated futures strategies |
 | ACSIL (C++) | [[sierra-chart\|Sierra Chart]] | High | Latency-sensitive order-flow studies |
@@ -70,7 +70,6 @@ For production systematic work, traders typically move from Pine prototypes to [
 
 ## Related
 
-- [[tradingview]] — the platform Pine Script runs on
 - [[backtesting]] — Pine's `strategy()` framework, and its pitfalls
 - [[indicators]] — what most Pine scripts compute
 - [[technical-analysis]] — the discipline Pine serves
@@ -81,4 +80,4 @@ For production systematic work, traders typically move from Pine prototypes to [
 ## Sources
 
 - TradingView Pine Script v6 reference and user manual — https://www.tradingview.com/pine-script-docs/
-- See [[tradingview]] for platform context (user base, Pine community library).
+- See tradingview for platform context (user base, Pine community library).

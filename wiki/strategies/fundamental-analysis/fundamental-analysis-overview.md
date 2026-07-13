@@ -6,12 +6,12 @@ updated: 2026-06-10
 status: good
 tags: [fundamental-analysis, valuation, event-driven]
 aliases: ["Fundamentals-Based Trading"]
-related: ["[[strategies-overview]]", "[[technical-analysis-overview]]", "[[quantitative-overview]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[technical-vs-fundamental-analysis]]", "[[benjamin-graham]]"]
+related: ["[[strategies-overview]]", "[[technical-analysis-overview]]", "[[quantitative-overview]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[technical-vs-fundamental-analysis]]"]
 ---
 
 # Fundamental Analysis
 
-Fundamental analysis is the family of strategies that determine what an asset is worth based on its underlying economic reality — earnings, revenue growth, cash flow, competitive position, and macroeconomic environment (Source: [[book-security-analysis]]). While technical analysis asks "what is the market doing?", fundamental analysis asks "what should the market be doing?" — and the gap between the two is where fundamentals-based traders find opportunity. The discipline was formalized by [[benjamin-graham]] and David Dodd in the 1930s and has been extended by practitioners ranging from [[philip-fisher]]'s qualitative "scuttlebutt" approach (Source: [[book-common-stocks-and-uncommon-profits]]) to [[william-o-neil]]'s growth-oriented CANSLIM system (Source: [[book-how-to-make-money-in-stocks]]).
+Fundamental analysis is the family of strategies that determine what an asset is worth based on its underlying economic reality — earnings, revenue growth, cash flow, competitive position, and macroeconomic environment (Source: book-security-analysis). While technical analysis asks "what is the market doing?", fundamental analysis asks "what should the market be doing?" — and the gap between the two is where fundamentals-based traders find opportunity. The discipline was formalized by benjamin-graham and David Dodd in the 1930s and has been extended by practitioners ranging from philip-fisher's qualitative "scuttlebutt" approach (Source: book-common-stocks-and-uncommon-profits) to william-o-neil's growth-oriented CANSLIM system (Source: book-how-to-make-money-in-stocks).
 
 ## What Distinguishes This Family
 
@@ -24,21 +24,11 @@ Fundamental analysis is the family of strategies that determine what an asset is
 
 ### Equity Styles
 
-- [[value-investing-strategy]] — Buying assets below intrinsic value with a margin of safety, in the Graham tradition
-- [[growth-investing-strategy]] — Paying up for businesses compounding revenue and earnings faster than the market expects
-- [[contrarian-investing]] — Buying what the consensus has abandoned, on evidence of overreaction
-- [[dividend-investing]] — Building income portfolios around sustainable, growing dividend payers
-- [[dividend-capture]] — Short-hold trades around ex-dividend dates to collect the payout
-- [[esg-investing]] — Screening and tilting portfolios on environmental, social, and governance factors
-- [[long-short-equity]] — Pairing fundamentally cheap longs against expensive shorts to isolate stock-picking skill
-- [[earnings-momentum]] — Trading the post-earnings-announcement drift: beats keep outperforming
 - [[sector-rotation]] — Shifting capital between industries as the economic cycle progresses
 
 ### Event-Driven & Catalyst
 
 - [[event-driven-trading]] — The umbrella approach: trading identifiable corporate and macro catalysts
-- [[merger-arbitrage]] — Capturing the spread between a target's price and the announced deal price
-- [[convertible-arbitrage]] — Long converts hedged with short stock, monetizing embedded optionality and credit
 - [[news-trading]] — Positioning around scheduled and breaking news with a fundamental read on impact
 - [[crypto-policy-shock-trading]] — Trading regulatory and policy surprises in crypto markets
 
@@ -50,14 +40,10 @@ Fundamental analysis is the family of strategies that determine what an asset is
 - [[spark-spread]] — Trading the margin between natural gas cost and electricity prices
 - [[geographic-spread-trading]] — Exploiting regional price differentials in the same commodity
 - [[seasonal-spread-trading]] — Calendar spreads driven by recurring supply/demand seasonality
-- [[emissions-trading]] — Trading carbon allowance markets (EUA, CCA) on policy and compliance fundamentals
-- [[weather-derivatives]] — Hedging and speculating on temperature and weather outcomes
 
 ## Start Here
 
-- [[earnings-momentum]] — trading the post-earnings drift anomaly
 - [[sector-rotation]] — cycling through sectors as the economy expands and contracts
-- [[merger-arbitrage]] — profiting from announced M&A deals
 
 ## All Pages in This Folder
 
@@ -92,9 +78,4 @@ SORT updated DESC
 
 ## Sources
 
-- [[book-security-analysis]] — Graham & Dodd's foundational text that formalized security analysis as a discipline
-- [[book-the-intelligent-investor]] — Graham's accessible guide to fundamental investing principles and margin of safety
-- [[book-common-stocks-and-uncommon-profits]] — Fisher's qualitative approach to evaluating growth companies
-- [[book-one-up-on-wall-street]] — Lynch's practical guide to finding fundamentally strong stocks
-- [[book-how-to-make-money-in-stocks]] — O'Neil's CANSLIM system combining fundamental and technical analysis
 - [[book-a-random-walk-down-wall-street]] — Malkiel's critique of active fundamental analysis and case for efficient markets

@@ -11,10 +11,8 @@ headquarters: "Chicago, IL, USA"
 website: "https://tastytrade.com"
 aliases: ["Tastytrade Platform", "Tastyworks", "tastyworks", "tastytrade desktop"]
 related:
-  - "[[tastytrade]]"
   - "[[ig-group]]"
   - "[[thinkorswim]]"
-  - "[[interactive-brokers]]"
   - "[[optionnet-explorer]]"
   - "[[options-premium-selling]]"
   - "[[probability-of-profit]]"
@@ -29,13 +27,13 @@ related:
   - "[[implied-volatility]]"
 ---
 
-The tastytrade platform is the order-entry, charting, and analytics software published by the [[tastytrade]] brokerage (formerly tastyworks), distinct from the tastytrade media network and the parent legal entity. It exists in three coordinated clients — a Windows/Mac **desktop** application, a **web platform** at tastytrade.com, and **iOS/Android mobile** apps — all sharing a single account and order book. The platform is purpose-built for [[options-premium-selling|options-premium sellers]] and exposes a distinct vocabulary of features built around that worldview: the Trade tab, Curve mode, [[probability-of-profit|Probability of Profit]] (POP), real-time theta/day, the Follow feed and copy-trade, [[options-buying-power-reduction|buying-power reduction]] previews, and a one-click Quick Roll function. The brokerage business behind the platform was sold by Tom Sosnoff and Scott Sheridan to [[ig-group|IG Group]] in **2021 for approximately $1 billion**.
+The tastytrade platform is the order-entry, charting, and analytics software published by the tastytrade brokerage (formerly tastyworks), distinct from the tastytrade media network and the parent legal entity. It exists in three coordinated clients — a Windows/Mac **desktop** application, a **web platform** at tastytrade.com, and **iOS/Android mobile** apps — all sharing a single account and order book. The platform is purpose-built for [[options-premium-selling|options-premium sellers]] and exposes a distinct vocabulary of features built around that worldview: the Trade tab, Curve mode, [[probability-of-profit|Probability of Profit]] (POP), real-time theta/day, the Follow feed and copy-trade, [[options-buying-power-reduction|buying-power reduction]] previews, and a one-click Quick Roll function. The brokerage business behind the platform was sold by Tom Sosnoff and Scott Sheridan to [[ig-group|IG Group]] in **2021 for approximately $1 billion**.
 
 ## Overview
 
 The platform launched as **tastyworks** in early 2017 to give viewers of the tastytrade media network a place to execute the trades being discussed on air. The split branding (tastyworks the broker, tastytrade the network) persisted for several years; following the 2021 IG Group acquisition the brand was unified and the broker was renamed **tastytrade** in 2022, with the media network retaining "tastylive" branding in some contexts.
 
-Where most retail platforms are built around a watchlist and chart with options bolted on, the tastytrade platform inverts that — the **options chain is the central UI element**, with stock charting, watchlists, and account views arranged around it. Every order-entry interaction shows the [[options-greeks|Greeks]], [[probability-of-profit|POP]], theta-per-day, and [[options-buying-power-reduction|buying-power reduction]] (BPR) live, before the order is sent. This bias is editorial as much as technical: the platform is opinionated software for premium sellers, in the same way [[tastytrade]]'s curriculum is opinionated.
+Where most retail platforms are built around a watchlist and chart with options bolted on, the tastytrade platform inverts that — the **options chain is the central UI element**, with stock charting, watchlists, and account views arranged around it. Every order-entry interaction shows the [[options-greeks|Greeks]], [[probability-of-profit|POP]], theta-per-day, and [[options-buying-power-reduction|buying-power reduction]] (BPR) live, before the order is sent. This bias is editorial as much as technical: the platform is opinionated software for premium sellers, in the same way tastytrade's curriculum is opinionated.
 
 The three clients are tightly aligned. The **desktop** is the most feature-complete (preferred by full-time traders); the **web** platform covers ~90% of desktop functionality without an install; the **mobile app** handles trade entry, position management, and Quick Roll but defers complex multi-leg construction to desktop or web.
 
@@ -56,7 +54,7 @@ The table summarizes the platform's signature features; each is detailed below.
 | Theta/day widget | Portfolio aggregate [[theta]] per day in dollars | Canonical [[theta-targeting]] number | [[vega-budgeting]] |
 | Beta-weighted delta | Whole-book [[delta]] beta-weighted to SPY | One equity-equivalent risk number | [[delta]] |
 | IV rank / percentile | Per-chain [[implied-volatility]] regime | Trade-selection filter (≥ 50 default) | [[iv-rank-and-iv-percentile]] |
-| Quick Roll | One-click roll to next cycle, pre-filled combo | Expresses *manage at 50% / 21 DTE* | [[tastytrade]] research |
+| Quick Roll | One-click roll to next cycle, pre-filled combo | Expresses *manage at 50% / 21 DTE* | tastytrade research |
 | Follow / copy-trade | Live trades of on-air researchers | Social learning + auto-replication | — |
 | Strategy presets | One-click 16-delta strangle, 30-delta vertical, etc. | Speed of construction | [[short-strangle]] |
 
@@ -67,7 +65,7 @@ The default workspace. A live options chain with strike-by-strike bid/ask, IV pe
 - **Net credit / debit**
 - **Probability of Profit ([[probability-of-profit|POP]])** — calculated from the lognormal model conditioned on current IV. The single most visible metric on the order ticket; tastytrade's editorial line is that 70%+ POP setups are the default.
 - **Probability of Touch** — chance the underlying touches a short strike before expiration.
-- **[[options-buying-power-reduction|Buying-power reduction]] (BPR)** — collateral the trade will tie up. For undefined-risk trades like [[short-strangle|short strangles]], this is the [[reg-t-margin|Reg-T]] or portfolio-margin requirement. For defined-risk trades, it is the max loss.
+- **[[options-buying-power-reduction|Buying-power reduction]] (BPR)** — collateral the trade will tie up. For undefined-risk trades like [[short-strangle|short strangles]], this is the Reg-T or portfolio-margin requirement. For defined-risk trades, it is the max loss.
 - **Greeks at trade level** — delta, theta, vega, gamma summed across the legs.
 - **Max profit / max loss / break-evens**.
 
@@ -90,7 +88,7 @@ The follow feed surfaces real positions, real fills, and real P&L (with the trad
 
 ### Quick Roll
 
-A one-click roll button on any open option position. The platform automatically suggests the same strike rolled to the next expiry cycle (or a user-selected target expiry), pre-fills the closing-and-opening combo order, and shows the net credit/debit and updated Greeks for the new position. This is the canonical mechanic for the [[tastytrade]] research convention of *managing winners at 50% / managing at 21 DTE* — Quick Roll is the platform expression of that workflow.
+A one-click roll button on any open option position. The platform automatically suggests the same strike rolled to the next expiry cycle (or a user-selected target expiry), pre-fills the closing-and-opening combo order, and shows the net credit/debit and updated Greeks for the new position. This is the canonical mechanic for the tastytrade research convention of *managing winners at 50% / managing at 21 DTE* — Quick Roll is the platform expression of that workflow.
 
 ### Other notable features
 
@@ -113,7 +111,7 @@ The platform itself is **free** to use for tastytrade brokerage clients. The cos
 - **No subscription fee** for the platform; data fees on real-time non-display use are a separate matter.
 - **Asset coverage** (2026): stocks, ETFs, options, futures, futures options, cryptocurrencies, and US Treasurys; accounts carry SIPC coverage up to $500,000 (including $250,000 for cash).
 
-The platform is **brokerage-tied** — to use it you must have a tastytrade brokerage account; it is not available standalone like [[optionnet-explorer]] or [[orats]].
+The platform is **brokerage-tied** — to use it you must have a tastytrade brokerage account; it is not available standalone like [[optionnet-explorer]] or orats.
 
 ## Automation and Integrations
 
@@ -122,7 +120,7 @@ The tastytrade platform is more open to programmatic access than most options-na
 - **Developer API** — tastytrade exposes an API for account, market-data, and order operations, enabling external systems to place and manage trades programmatically (subject to the broker's terms and entitlements). This makes it a common target for [[trading-automation|automated]] options workflows.
 - **Native copy-trade** — the Follow feed's copy-trade replicates another trader's structures into your account automatically, scaled to your capital — an in-platform automation that most US brokers do not offer.
 - **Webhook bridges** — signal sources (e.g. [[tradingview-platform|TradingView]] alerts) can be routed to tastytrade execution through automation layers such as [[traderspost]] or [[trade-automation-toolbox]] where supported, for traders who prefer external signal generation.
-- **Third-party analytics pairing** — for capabilities the platform lacks natively, traders pair it with [[orats]] (data and backtesting) or [[optionnet-explorer]] (time-and-price P&L grid and historical replay).
+- **Third-party analytics pairing** — for capabilities the platform lacks natively, traders pair it with orats (data and backtesting) or [[optionnet-explorer]] (time-and-price P&L grid and historical replay).
 
 A representative systematic pattern: generate or screen ideas externally (or via the API), construct and risk-check in the Trade tab / Curve mode, then place and manage — using Quick Roll and the theta/day widget — within the platform, optionally with execution automated through the API or a webhook bridge. See [[webhook-trading]] and [[trading-automation]] for the general architecture.
 
@@ -136,7 +134,7 @@ A representative systematic pattern: generate or screen ideas externally (or via
 
 **Strengths:**
 
-- **Options-native UI** — the chain-centric workspace is genuinely faster for multi-leg trade construction than [[thinkorswim]] or [[interactive-brokers|TWS]].
+- **Options-native UI** — the chain-centric workspace is genuinely faster for multi-leg trade construction than [[thinkorswim]] or TWS.
 - **POP and BPR on every order** — sets the cognitive frame for premium sellers.
 - **Aggregate theta/day** — a built-in feature that costs extra or requires custom dashboards on most other platforms.
 - **Quick Roll** — the canonical premium-seller management mechanic, one click.
@@ -149,9 +147,9 @@ A representative systematic pattern: generate or screen ideas externally (or via
 
 - **Editorial bias** — the entire platform assumes you are selling premium. Directional traders and option buyers find less affordance in the UI.
 - **Limited charting** — the chart is functional but not a [[tradingview-platform|TradingView]] replacement; serious technical analysts often pair tastytrade with an external chart.
-- **No backtester** — there is no equivalent of [[optionnet-explorer]]'s historical replay or [[orats]]' Backtests Generator built into the platform.
+- **No backtester** — there is no equivalent of [[optionnet-explorer]]'s historical replay or orats' Backtests Generator built into the platform.
 - **No time-and-price P&L grid** — Curve mode is single-expiry-friendly; serious calendar/diagonal traders still need [[optionnet-explorer]] or similar.
-- **Narrow product breadth** — international markets, mutual funds, and bonds are weak or absent compared with [[interactive-brokers]].
+- **Narrow product breadth** — international markets, mutual funds, and bonds are weak or absent compared with interactive-brokers.
 - **Customer service / reliability complaints during high-vol events** — periodic outages and slow support are a recurring complaint, common to many retail options brokers.
 - **Payment for order flow** — a meaningful revenue line on options, which some traders view as a conflict of interest.
 - **Brokerage-tied** — no standalone version; you must open an account to use the platform.
@@ -170,16 +168,13 @@ A representative discretionary [[options-premium-selling|premium-seller]] workfl
 8. **Daily portfolio review.** Aggregate theta/day, vega, and beta-weighted delta on the Positions tab serve as the morning health-check. Numbers feed directly into the mental [[theta-targeting]] model.
 9. **Optional: follow / copy-trade.** Learners follow on-air researchers' live trades to see real management decisions in real time. Copy-trade pipes those trades automatically into the user's own account at chosen sizes.
 
-For a discretionary income trader within the tastytrade worldview, the platform is the **single workspace** — broker, analytics, education, and social all in one. Traders who need richer historical backtests usually pair it with [[orats]]; traders who need richer time-and-price portfolio analysis usually pair it with [[optionnet-explorer]]; traders running a more diversified book often pair it with [[interactive-brokers]] for the products tastytrade does not cover.
+For a discretionary income trader within the tastytrade worldview, the platform is the **single workspace** — broker, analytics, education, and social all in one. Traders who need richer historical backtests usually pair it with orats; traders who need richer time-and-price portfolio analysis usually pair it with [[optionnet-explorer]]; traders running a more diversified book often pair it with interactive-brokers for the products tastytrade does not cover.
 
 ## Related
 
-- [[tastytrade]] — the parent company and media network; this page is specifically about the trading platform.
 - [[ig-group]] — current parent company since the 2021 acquisition.
 - [[thinkorswim]] — the platform Tom Sosnoff and Scott Sheridan built first, sold to TD Ameritrade in 2009; the conceptual ancestor of tastytrade.
-- [[interactive-brokers]] — broader-market alternative; less options-native but wider product universe.
 - [[optionnet-explorer]] — third-party options analytics with a richer time-and-price grid and historical simulator.
-- [[orats]] — third-party data and backtesting platform commonly paired with tastytrade.
 - [[traderspost]], [[trade-automation-toolbox]] — webhook automation bridges for routing external signals to execution.
 - [[trading-automation]], [[webhook-trading]] — general architecture for automated options execution.
 - [[options-premium-selling]] — the strategy class the platform is built around.
@@ -199,5 +194,4 @@ For a discretionary income trader within the tastytrade worldview, the platform 
 - NerdWallet tastytrade review (commission schedule: $1 to open / $0 to close, $10/leg cap, $0 minimum) — https://www.nerdwallet.com/investing/reviews/tastytrade
 - tastytrade media network on-air segments demonstrating platform features.
 - Retail trader reviews and broker comparison reports (NerdWallet, Investopedia broker reviews, BrokerChooser).
-- [[tastytrade]] companion entity page for parent-company context.
 - Commission schedule, promotion details, and active status verified via Perplexity (sonar, high search context), 2026-06-10.

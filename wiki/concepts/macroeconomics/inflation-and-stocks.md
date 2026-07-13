@@ -15,11 +15,9 @@ related:
   - "[[interest-rates]]"
   - "[[bond-yields-and-stock-prices]]"
   - "[[equity-risk-premium]]"
-  - "[[interest-rate-sensitive-sectors]]"
   - "[[real-interest-rates]]"
   - "[[fed-policy]]"
   - "[[stagflation]]"
-  - "[[stocks]]"
   - "[[gold]]"
 ---
 
@@ -65,12 +63,12 @@ Two companies with identical revenue can have opposite inflation outcomes purely
 |-------|-------------------------------|-----|
 | **Energy, Materials, [[gold|Gold]] miners** | Often **benefit** | Sell the very things whose prices are rising (real assets) |
 | **Value / cash-flow-now stocks** | Relatively resilient | Short [[duration]]; less hurt by rising discount rate |
-| **High-growth / profitless tech** | Hurt most | Long-duration cash flows discounted harder (see [[interest-rate-sensitive-sectors]]) |
+| **High-growth / profitless tech** | Hurt most | Long-duration cash flows discounted harder (see interest-rate-sensitive-sectors) |
 | **Consumer Staples with brands** | Mixed-defensive | Some pricing power, but margins can lag input costs |
 | **Capital-intensive, debt-heavy firms** | Hurt | Rising input *and* financing costs |
 | **Fixed-margin / regulated** | Hurt | Can't raise prices fast enough |
 
-This largely mirrors the [[interest-rate-sensitive-sectors|rate-sensitivity map]], because the main channel through which inflation hits stocks is *higher rates*.
+This largely mirrors the rate-sensitivity map, because the main channel through which inflation hits stocks is *higher rates*.
 
 ## Worked Illustration (Hypothetical)
 
@@ -107,7 +105,6 @@ For investors specifically worried about purchasing power, common complements to
 - [[interest-rates]] — the channel through which inflation hits valuations
 - [[bond-yields-and-stock-prices]] — rising yields as the discount-rate headwind
 - [[equity-risk-premium]] — inflation widens the premium and lifts required returns
-- [[interest-rate-sensitive-sectors]] — which stocks win and lose
 - [[real-interest-rates]] — the real-return lens for "hedge" claims
 - [[fed-policy]] — the central-bank reaction that transmits inflation to stocks
 - [[stagflation]] — the worst case for equities

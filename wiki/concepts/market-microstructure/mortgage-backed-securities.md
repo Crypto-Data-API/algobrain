@@ -17,7 +17,6 @@ aliases:
 related:
   - "[[subprime-mortgage]]"
   - "[[collateralized-debt-obligations]]"
-  - "[[fannie-mae]]"
   - "[[freddie-mac]]"
   - "[[2008-global-financial-crisis]]"
   - "[[quantitative-easing]]"
@@ -32,7 +31,7 @@ difficulty: intermediate
 
 **Mortgage-Backed Securities (MBS)** are bonds backed by pools of residential or commercial mortgages. Investors receive payments derived from the underlying mortgage interest and principal.
 
-MBS backed by [[subprime-mortgage]] loans were a primary catalyst of the [[2008-global-financial-crisis]]. Agencies like [[fannie-mae]] and [[freddie-mac]] were major issuers.
+MBS backed by [[subprime-mortgage]] loans were a primary catalyst of the [[2008-global-financial-crisis]]. Agencies like fannie-mae and [[freddie-mac]] were major issuers.
 
 ## How Securitization Works
 
@@ -50,7 +49,7 @@ Banks originate individual mortgages and then pool hundreds or thousands of them
 
 ## Agency vs. Private Label
 
-- **Agency MBS** -- issued or guaranteed by government-sponsored enterprises ([[fannie-mae]], [[freddie-mac]]) or the government agency Ginnie Mae. These carry an implicit or explicit government guarantee, making them among the safest fixed-income instruments after Treasuries.
+- **Agency MBS** -- issued or guaranteed by government-sponsored enterprises (fannie-mae, [[freddie-mac]]) or the government agency Ginnie Mae. These carry an implicit or explicit government guarantee, making them among the safest fixed-income instruments after Treasuries.
 - **Private-label MBS** -- issued by private institutions without government backing. These carried the subprime and Alt-A mortgages that were at the center of the 2008 crisis, and their losses devastated investors worldwide.
 
 ## Negative Convexity
@@ -68,7 +67,6 @@ The defining quirk of MBS for traders is **negative convexity**, a direct result
 
 - [[subprime-mortgage]]
 - [[collateralized-debt-obligations]]
-- [[fannie-mae]]
 - [[freddie-mac]]
 - [[2008-global-financial-crisis]]
 - [[quantitative-easing]] — the Fed's large-scale agency-MBS purchases

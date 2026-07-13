@@ -9,7 +9,7 @@ aliases: ["Execution Quality", "execution-quality", "fill quality", "TCA", "tran
 domain: [market-microstructure]
 prerequisites: ["[[transaction-costs]]", "[[bid-ask-spread]]", "[[slippage]]"]
 difficulty: intermediate
-related: ["[[best-execution]]", "[[transaction-costs]]", "[[implementation-shortfall]]", "[[slippage]]", "[[market-impact]]", "[[vwap]]", "[[twap]]", "[[smart-order-routing]]", "[[payment-for-order-flow]]", "[[reg-nms]]", "[[dark-pools]]"]
+related: ["[[best-execution]]", "[[transaction-costs]]", "[[implementation-shortfall]]", "[[slippage]]", "[[market-impact]]", "[[vwap]]", "[[twap]]", "[[smart-order-routing]]", "[[payment-for-order-flow]]", "[[dark-pools]]"]
 ---
 
 **Execution quality** is the measure of how well an order was actually filled relative to a chosen benchmark price, capturing the realized cost of converting a trading decision into a position. Where [[best-execution]] is the *obligation* to seek favourable terms and [[transaction-costs]] are the *components* of cost, execution quality is the *ex-post measurement* — the scorecard that tells a desk whether its routing, timing, and algorithms are actually saving or leaking money.
@@ -29,7 +29,7 @@ Execution quality is always measured *against something*. The common benchmarks:
 - **Arrival price (decision price)** — the mid-quote at the moment the order was released. The difference between arrival price and the average fill is [[implementation-shortfall]], the most rigorous benchmark because it captures every cost including delay and unfilled quantity.
 - **[[vwap|VWAP]]** — the volume-weighted average price over the order's lifetime. Beating VWAP means the desk traded better than the average market participant during that window. Easy to compute, but gameable (a trader can match VWAP by simply tracking volume) and blind to the cost of *deciding when to start*.
 - **[[twap|TWAP]]** — time-weighted average price; a simpler schedule benchmark.
-- **NBBO / quoted spread** — for retail and marketable orders, fills are compared to the [[reg-nms|National Best Bid and Offer]]. A fill *inside* the NBBO is **price improvement**; a fill outside it is a trade-through concern.
+- **NBBO / quoted spread** — for retail and marketable orders, fills are compared to the National Best Bid and Offer. A fill *inside* the NBBO is **price improvement**; a fill outside it is a trade-through concern.
 - **Close price** — relevant for index funds and end-of-day rebalancers benchmarked to the closing auction.
 
 ### The slippage decomposition

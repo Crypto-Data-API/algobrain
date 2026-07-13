@@ -7,13 +7,11 @@ status: excellent
 tags: [options, algorithmic, tools, broker, options-premium-selling]
 domain: [options, algorithmic]
 prerequisites:
-  - "[[tradestation]]"
   - "[[easylanguage]]"
   - "[[optionstation-pro]]"
 difficulty: intermediate
 aliases: ["TradeStation Options Workflow", "TradeStation options playbook", "TS options setup"]
 related:
-  - "[[tradestation]]"
   - "[[easylanguage]]"
   - "[[optionstation-pro]]"
   - "[[traderspost]]"
@@ -29,7 +27,7 @@ related:
 
 # TradeStation Options Workflow
 
-This page is a practical, end-to-end methodology — not a single trading strategy — for running a systematic options program on [[tradestation|TradeStation]]. It covers desktop setup, research, strategy templates, execution, monitoring, cloud-redundant automation, common pitfalls, and Greeks-based sizing. The audience is a trader who has already chosen TradeStation as the primary broker and wants to use it as a single research-to-execution stack rather than a pure order-entry terminal.
+This page is a practical, end-to-end methodology — not a single trading strategy — for running a systematic options program on TradeStation. It covers desktop setup, research, strategy templates, execution, monitoring, cloud-redundant automation, common pitfalls, and Greeks-based sizing. The audience is a trader who has already chosen TradeStation as the primary broker and wants to use it as a single research-to-execution stack rather than a pure order-entry terminal.
 
 ## Setup
 
@@ -103,7 +101,7 @@ For program-level strategies — running the [[wheel-strategy|wheel]] across 30 
 4. Run. Inspect the aggregated equity curve, max drawdown, Sharpe, and per-symbol contribution.
 5. **Critically**: enable realistic costs ($0.65/contract commission, $0.05 slippage minimum on multi-leg fills) before comparing to the naive run. Most "alpha" disappears here.
 
-The TradeStation historical options chain inside Portfolio Maestro covers ~5-10 years of liquid US equities reasonably well; depth on smaller-cap names and exotic expirations is thin. For longer-horizon validation, export trade lists and re-run in Python against [[orats]] or [[optionmetrics]] data.
+The TradeStation historical options chain inside Portfolio Maestro covers ~5-10 years of liquid US equities reasonably well; depth on smaller-cap names and exotic expirations is thin. For longer-horizon validation, export trade lists and re-run in Python against orats or optionmetrics data.
 
 ### RadarScreen for option scanners
 
@@ -235,7 +233,7 @@ The standard mitigation: pair TradeStation with **[[traderspost]]** as a cloud w
 
 1. EasyLanguage strategy fires entry/exit signals
 2. Strategy writes signal to a webhook URL via TradeStation's HTTP plug-in (or via a small companion script reading the TradeStation log file)
-3. TradersPost receives the webhook, validates it, and routes the order to a backup broker (often [[interactive-brokers]] or [[tastytrade]]) — or back to TradeStation via API
+3. TradersPost receives the webhook, validates it, and routes the order to a backup broker (often interactive-brokers or tastytrade) — or back to TradeStation via API
 4. Both the desktop and the cloud route attempt the order; idempotency keys prevent double-fills
 
 This gives you the EasyLanguage development environment plus cloud reliability, at the cost of running two routes and more failure modes to monitor. For overnight or unattended programs it is close to mandatory.
@@ -301,7 +299,6 @@ The full sequence is rare in practice — most retail traders skip steps 4-6 and
 
 ## Related
 
-- [[tradestation]] — host broker and platform
 - [[easylanguage]] — scripting language driving the workflow
 - [[optionstation-pro]] — the analysis workspace
 - [[traderspost]] — cloud webhook receiver for redundant automation

@@ -101,7 +101,7 @@ Run a regression of returns on factors (market, size, value); the residual is th
 Compute momentum at the industry level rather than the stock level. Less crowded than stock-level momentum, similar Sharpe.
 
 ### Fundamental Momentum / Earnings Momentum
-Use the trend in earnings revisions or earnings growth as the momentum signal instead of price momentum. See [[earnings-momentum]].
+Use the trend in earnings revisions or earnings growth as the momentum signal instead of price momentum. See earnings-momentum.
 
 ### 52-Week High
 A simple proxy: stocks near their 52-week high tend to continue rising. (George & Hwang 2004). Captures momentum without explicitly computing returns.
@@ -115,8 +115,6 @@ The right way to use momentum today is in a *factor combination*: value + moment
 ## Strategies That Implement It
 
 - [[momentum-rotation]] — generic momentum factor portfolio
-- [[sector-momentum-screen]] — momentum at the sector level
-- [[earnings-momentum]] — fundamentals-based variant
 - [[trend-following-cta]] — time-series momentum across asset classes
 - [[time-series-momentum]] — own-asset momentum
 

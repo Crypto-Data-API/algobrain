@@ -83,7 +83,7 @@ Bitcoin miners are not valued on conventional earnings multiples; the relevant q
 ## Trading & Options Playbook
 
 - **Catalysts calendar**: monthly production/BTC-holdings updates; quarterly earnings; BTC price and post-halving hashprice; **AI/HPC contract announcements (the key re-rating trigger)**; power-site acquisitions; convertible issuance (dilution events).
-- **Index/ETF membership**: not in the [[s-and-p-500]]; trades on the [[nasdaq]]. A component of bitcoin-miner and crypto-equity ETFs (e.g. WGMI, the Valkyrie/CoinShares miner products), so basket flows and BTC-equity ETF rebalancing matter.
+- **Index/ETF membership**: not in the s-and-p-500; trades on the nasdaq. A component of bitcoin-miner and crypto-equity ETFs (e.g. WGMI, the Valkyrie/CoinShares miner products), so basket flows and BTC-equity ETF rebalancing matter.
 - **High IV / retail behavior**: elevated [[implied-volatility]] and an active retail [[options]] community; favored for directional gamma into BTC moves and earnings. IV tends to expand into BTC volatility spikes and contract afterward — relevant for premium sellers (see [[options-greeks]]).
 - **Pair/basket context**: classic long/short candidate against AI-pivot miners ([[cipher-mining]], [[iren]], WULF) when the market rotates between "BTC torque" and "AI contracts" narratives.
 
@@ -150,7 +150,7 @@ Bitcoin mining; active retail options community; correlated BTC speculation
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - CleanSpark FY2025 results (SEC 8-K, filed late 2025): https://www.sec.gov/Archives/edgar/data/0000827876/000119312525297163/clsk-ex99_1.htm
 - CleanSpark Q1 FY2026 update (SEC 8-K): https://www.sec.gov/Archives/edgar/data/0000827876/000119312526039382/clsk-ex99_1.htm
 - insights4vc — "Bitcoin Mining's AI Pivot: 2026 Thesis Update": https://insights4vc.substack.com/p/bitcoin-minings-ai-pivot-2026-thesis

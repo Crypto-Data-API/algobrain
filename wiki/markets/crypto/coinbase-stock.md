@@ -7,7 +7,7 @@ updated: 2026-06-19
 status: excellent
 tags: [company, crypto, sp500, stocks]
 aliases: ["COIN", "Coinbase Global"]
-related: ["[[bitcoin]]", "[[coinbase]]", "[[crypto]]", "[[ethereum]]", "[[financials]]", "[[s-and-p-500]]", "[[stock-markets]]", "[[usdc]]", "[[circle]]"]
+related: ["[[bitcoin]]", "[[coinbase]]", "[[crypto]]", "[[ethereum]]", "[[usdc]]", "[[circle]]"]
 ticker: "COIN"
 exchange: "NASDAQ"
 sector: "Financials"
@@ -17,7 +17,7 @@ headquarters: "USA"
 
 # Coinbase Stock (COIN)
 
-Coinbase Global, Inc. (NASDAQ: COIN) is the publicly traded stock of [[coinbase]], the largest regulated cryptocurrency exchange in the United States. Listed via direct listing on **April 14, 2021** at a reference price of $250, COIN serves as a primary equity proxy for the cryptocurrency market within traditional [[stock-markets]]. In May 2025 it became the **first crypto-native company added to the [[s-and-p-500]]**. As a [[nasdaq]]-listed, [[financials]]-sector name, it gives equity investors regulated, index-accessible exposure to crypto-market cyclicality.
+Coinbase Global, Inc. (NASDAQ: COIN) is the publicly traded stock of [[coinbase]], the largest regulated cryptocurrency exchange in the United States. Listed via direct listing on **April 14, 2021** at a reference price of $250, COIN serves as a primary equity proxy for the cryptocurrency market within traditional stock-markets. In May 2025 it became the **first crypto-native company added to the s-and-p-500**. As a nasdaq-listed, financials-sector name, it gives equity investors regulated, index-accessible exposure to crypto-market cyclicality.
 
 ## Why COIN Matters as a Crypto Proxy
 
@@ -28,7 +28,7 @@ COIN's revenue is overwhelmingly driven by trading fees on its exchange, making 
 - **High beta to crypto**: COIN typically moves with greater magnitude than [[bitcoin]] itself, amplifying both gains and losses. It behaves like a levered, operationally-geared bet on crypto trading volume.
 - **TradFi accessible**: Available in standard brokerage accounts, IRAs, and ETFs -- unlike direct crypto holdings which require crypto-specific custody.
 - **Regulatory exposure**: As a regulated U.S. entity, COIN is subject to SEC oversight. The SEC sued Coinbase in June 2023 alleging it operated as an unregistered securities exchange, creating significant regulatory overhang. The case was litigated through 2023-2025 and remained part of the regulatory backdrop into 2026; shifts in the SEC's posture toward crypto are a major COIN catalyst in either direction.
-- **S&P 500 inclusion**: COIN was added to the [[s-and-p-500]] effective **May 19, 2025**, replacing Discover Financial — the first crypto-native company in the index, reflecting the mainstreaming of crypto-adjacent equities. Inclusion forced index-fund buying and broadened the holder base.
+- **S&P 500 inclusion**: COIN was added to the s-and-p-500 effective **May 19, 2025**, replacing Discover Financial — the first crypto-native company in the index, reflecting the mainstreaming of crypto-adjacent equities. Inclusion forced index-fund buying and broadened the holder base.
 - **Stablecoin upside**: A large and growing share of revenue comes from interest on [[usdc]] reserves via the partnership with [[circle]] — this makes COIN sensitive to both stablecoin float growth and the level of US interest rates.
 
 ## Business Segments
@@ -66,7 +66,7 @@ The spot-ETF era is a double-edged sword: ETFs commoditized simple crypto exposu
 
 **Bull case**
 
-- Crypto adoption keeps trending up; COIN is the regulated, trusted on-ramp with index-fund sponsorship via the [[s-and-p-500]].
+- Crypto adoption keeps trending up; COIN is the regulated, trusted on-ramp with index-fund sponsorship via the s-and-p-500.
 - Revenue diversification ([[usdc]], staking, custody, subscriptions) raises the trough-earnings floor and reduces pure volume dependence over time.
 - Regulatory clarity (a friendlier SEC posture, stablecoin and market-structure legislation) de-risks the model and could re-rate the multiple.
 - Custody of spot crypto ETFs and the **Base** L2 create durable, recurring revenue beyond trading.
@@ -94,7 +94,7 @@ COIN is best understood as a **cyclical, operationally-geared crypto-volume fran
 ## Trading & Options Playbook
 
 - **Catalysts calendar**: quarterly earnings (transaction vs. subscription mix, take-rate, MTU/AUC); crypto-price/volatility regime ([[bitcoin]] and [[ethereum]] moves drive the stock intra-quarter more than fundamentals); SEC/regulatory and legislative headlines; US interest-rate path (for [[usdc]] interest income); spot-ETF flows and custody news; [[circle]]/[[usdc]] developments.
-- **Index/ETF membership**: member of the [[s-and-p-500]] (since May 2025) and [[nasdaq]]-listed; held broadly across S&P 500 index funds and crypto-thematic ETFs. Index membership broadens the passive holder base and links COIN to broad-market flows on top of crypto-specific ones.
+- **Index/ETF membership**: member of the s-and-p-500 (since May 2025) and nasdaq-listed; held broadly across S&P 500 index funds and crypto-thematic ETFs. Index membership broadens the passive holder base and links COIN to broad-market flows on top of crypto-specific ones.
 - **High IV / retail behavior**: COIN carries elevated implied volatility, especially around earnings and crypto-volatility spikes; it is a heavy retail and options-trading name. Defined-risk structures dominate around earnings given large gap risk. COIN often trades as a *levered proxy* for [[bitcoin]] — useful for expressing a crypto view inside an equity/options account.
 - **Beta behavior**: amplifies crypto moves in both directions; can decouple from broad equities and trade on the crypto tape.
 
@@ -126,7 +126,7 @@ COIN provides a way to gain crypto market exposure through traditional equity ma
 | Field | Detail |
 |---|---|
 | **Ticker** | NASDAQ: COIN |
-| **Sector** | [[financials|Financials]] |
+| **Sector** | Financials |
 | **Headquarters** | USA |
 | **Listed** | April 14, 2021 (direct listing) |
 | **S&P 500** | Added May 19, 2025 |
@@ -135,9 +135,6 @@ COIN provides a way to gain crypto market exposure through traditional equity ma
 ## Related
 
 - [[coinbase]] — the underlying exchange/company
-- [[s-and-p-500]] — index membership (since May 2025)
-- [[nasdaq]] — listing venue
-- [[financials|Financials]] — GICS sector
 - [[robinhood]] / [[galaxy-digital]] — competitive/peer set
 - [[bitcoin]] / [[ethereum]] — assets driving trading-fee revenue
 - [[usdc]] / [[circle]] — stablecoin revenue partnership
@@ -145,7 +142,6 @@ COIN provides a way to gain crypto market exposure through traditional equity ma
 
 ## Sources
 
-- [[stockmarketapi-sp500-2026-04-13]] — point-in-time fundamentals snapshot
 - S&P Dow Jones Indices press release (May 2025, S&P 500 inclusion)
 - Perplexity sonar query, 2026-06-12 (S&P 500 status, revenue mix, SEC case status)
 

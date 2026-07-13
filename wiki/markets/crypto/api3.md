@@ -9,12 +9,12 @@ aliases: ["API3"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://api3.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[chainlink]]", "[[oracle-manipulation]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[oracle-manipulation]]"]
 ---
 
 # Api3
 
-**Api3** (ticker **API3**) is the governance token of the API3 DAO, an [[ethereum|Ethereum]]-based [[oracle]] protocol built around **first-party oracles** — data feeds operated directly by the API providers themselves rather than by third-party node middlemen. API3 is best known for **dAPIs** (decentralized APIs) and for pioneering **Oracle Extractable Value (OEV)**, a mechanism that recaptures the [[mev|MEV]] normally lost to searchers during oracle updates and returns it to the dApps consuming the data.
+**Api3** (ticker **API3**) is the governance token of the API3 DAO, an [[ethereum|Ethereum]]-based oracle protocol built around **first-party oracles** — data feeds operated directly by the API providers themselves rather than by third-party node middlemen. API3 is best known for **dAPIs** (decentralized APIs) and for pioneering **Oracle Extractable Value (OEV)**, a mechanism that recaptures the [[mev|MEV]] normally lost to searchers during oracle updates and returns it to the dApps consuming the data.
 
 ---
 
@@ -60,7 +60,7 @@ API3 uses an **inflationary staking model**: stakers lock API3 into a collateral
 
 ## Technology & Protocol
 
-API3's design departs from the [[chainlink|Chainlink]] third-party-node [[oracle|oracle]] model:
+API3's design departs from the [[chainlink|Chainlink]] third-party-node oracle model:
 
 - **First-party oracles** — Data providers run their own oracle nodes (using API3's **Airnode**), signing data directly. This removes the middleman node layer, improves transparency about data provenance, and lets providers be held accountable via the staking pool.
 - **dAPIs (decentralized APIs)** — Aggregated, managed price feeds that dApps subscribe to, available across many EVM chains via the API3 Market.
@@ -125,7 +125,6 @@ API3 sits in the **oracle / DeFi-infrastructure** category. Its narrative rests 
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[oracle]]
 - [[mev]]
 - [[defi]]
 - [[chainlink]]

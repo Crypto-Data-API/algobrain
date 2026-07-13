@@ -8,7 +8,7 @@ tags: [crypto, bitcoin, etf, institutional, tradfi, options]
 aliases: ["bitcoin-etf", "btc-etf", "spot-bitcoin-etf", "BTC-ETF", "Bitcoin ETF", "Spot Bitcoin ETF", "crypto-etf", "spot-crypto-etf"]
 domain: [crypto]
 difficulty: beginner
-related: ["[[bitcoin]]", "[[ethereum]]", "[[solana]]", "[[crypto-markets]]", "[[coinbase]]", "[[blackrock]]", "[[spy]]", "[[options]]", "[[etf-arbitrage]]", "[[basis-trading]]", "[[deribit]]", "[[index-inclusion-effect]]"]
+related: ["[[bitcoin]]", "[[ethereum]]", "[[solana]]", "[[crypto-markets]]", "[[coinbase]]", "[[blackrock]]", "[[options]]", "[[etf-arbitrage]]", "[[basis-trading]]", "[[deribit]]", "[[index-inclusion-effect]]"]
 ---
 
 # Bitcoin ETFs
@@ -173,7 +173,6 @@ The basis trade has attracted significant capital from macro hedge funds and arb
 - [[etf-arbitrage]] — creation/redemption mechanics
 - [[deribit]] — crypto-native options venue for IV comparison
 - [[staking]] — relevant to staked-ETH ETF structures
-- [[spy]] — comparison point for ETF structure and liquidity
 
 ## Sources
 

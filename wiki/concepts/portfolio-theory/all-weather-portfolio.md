@@ -14,7 +14,7 @@ difficulty: intermediate
 
 The **All-Weather Portfolio** is an asset allocation strategy developed by [[ray-dalio]] at [[bridgewater-associates]], designed to perform well across all economic environments -- growth, recession, inflation, and deflation. It is the retail-accessible expression of Bridgewater's institutional All Weather strategy, launched in 1996 and built on the firm's [[risk-parity]] framework.
 
-Built on [[risk-parity]] principles, the strategy balances exposure to [[stocks]], [[bonds]], [[commodities]], and inflation-linked assets so that no single economic regime dominates portfolio performance.
+Built on [[risk-parity]] principles, the strategy balances exposure to stocks, [[bonds]], [[commodities]], and inflation-linked assets so that no single economic regime dominates portfolio performance.
 
 ## Target Allocation
 

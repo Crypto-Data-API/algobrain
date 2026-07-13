@@ -63,8 +63,8 @@ Traders rarely treat the death cross as a standalone short trigger. Common refin
 - **Confirm the slope, not just the cross.** Require the 200-day average to itself be turning down (a falling long-term trend) rather than merely being pierced by a dipping 50-day in an otherwise rising market.
 - **Demand [[volume]] confirmation.** Expanding [[volume]] on the crossover suggests real distribution rather than a thin, holiday-week drift.
 - **Combine with structure.** Pair the cross with a break of [[support-resistance|support]] or a lower-high/lower-low sequence ([[dow-theory]]) for confluence.
-- **Use it as a regime filter, not an entry.** Many systematic traders simply reduce long exposure, tighten stops, or switch to [[defensive-sectors|defensive]] positioning while price trades below a falling 200-day average — and re-risk when a [[golden-cross]] reverses it.
-- **Mind reflexivity.** Because the cross is so widely reported for the [[sp500|S&P 500]] and major large-caps, it carries a degree of self-fulfilling influence as institutions de-risk around the headline.
+- **Use it as a regime filter, not an entry.** Many systematic traders simply reduce long exposure, tighten stops, or switch to defensive positioning while price trades below a falling 200-day average — and re-risk when a [[golden-cross]] reverses it.
+- **Mind reflexivity.** Because the cross is so widely reported for the S&P 500 and major large-caps, it carries a degree of self-fulfilling influence as institutions de-risk around the headline.
 
 ## Common Pitfalls
 

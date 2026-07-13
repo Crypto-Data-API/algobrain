@@ -9,7 +9,6 @@ entity_type: company
 website: https://money.cnn.com/data/fear-and-greed
 related:
   - "[[coinglass]]"
-  - "[[finviz]]"
   - "[[tradingview-platform]]"
 ---
 
@@ -72,7 +71,7 @@ for entry in response["data"]:
 - Contrarian entry timing for [[swing-trading]] and [[position-trading]]
 - Sentiment regime filter layered on top of [[technical-analysis]] strategies
 - [[risk-management]] overlay: reduce position sizes during extreme greed
-- Daily market briefing -- one-glance sentiment read alongside [[finviz]] heatmaps
+- Daily market briefing -- one-glance sentiment read alongside finviz heatmaps
 - Backtesting sentiment-based strategies using historical fear/greed data
 - Combining crypto fear/greed with [[coinglass]] funding rates for multi-signal confirmation
 - Educational tool for understanding crowd psychology in markets

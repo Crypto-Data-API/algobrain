@@ -32,7 +32,7 @@ There is also a monetary policy channel:
 Not all commodities respond equally to dollar moves:
 
 - **[[gold]]** has the strongest inverse relationship with the dollar — correlation often reaches -0.7 to -0.8 over rolling 12-month windows
-- **[[crude-oil]]** shows moderate inverse correlation (-0.3 to -0.5), but supply-side factors ([[opec]] cuts, geopolitical disruptions) can dominate
+- **[[crude-oil]]** shows moderate inverse correlation (-0.3 to -0.5), but supply-side factors (opec cuts, geopolitical disruptions) can dominate
 - **[[copper]]** and base metals respond to both dollar moves and global growth expectations
 - **Agricultural commodities** ([[corn]], [[wheat]], [[soybeans]]) have weaker and less consistent dollar sensitivity — weather, crop conditions, and local supply factors often dominate
 
@@ -40,7 +40,7 @@ Not all commodities respond equally to dollar moves:
 
 The DXY-commodity inverse relationship is not constant and can break down during:
 
-- **Supply shocks** — oil can rally even as the dollar strengthens if [[opec]] cuts supply aggressively or geopolitical conflict disrupts production
+- **Supply shocks** — oil can rally even as the dollar strengthens if opec cuts supply aggressively or geopolitical conflict disrupts production
 - **Synchronized global growth** — during strong global expansions, demand-pull forces can overwhelm the dollar headwind
 - **Safe-haven demand** — both the dollar and [[gold]] can rally simultaneously during extreme risk-off events (e.g., early 2020 COVID panic)
 - **Structural shifts** — the 2022 period saw [[commodities]] rally alongside a strong dollar due to Russia-Ukraine supply disruptions and post-COVID supply chain constraints

@@ -10,7 +10,7 @@ timeframe: swing to position (weeks to months)
 markets: [stocks]
 complexity: intermediate
 backtest_status: untested
-related: ["[[fundamental-analysis]]", "[[technical-analysis]]", "[[can-slim]]", "[[value-investing]]", "[[earnings-growth]]", "[[support-and-resistance]]"]
+related: ["[[technical-analysis]]", "[[support-and-resistance]]"]
 ---
 
 # Fundamental-Technical Fusion
@@ -25,7 +25,7 @@ Neither approach is complete alone. Pure fundamental investors often buy too ear
 
 The synergy is rooted in the different information each approach captures:
 
-**Fundamentals provide conviction.** When you know a company is growing earnings at 25% annually, has a fortress balance sheet, and trades at a reasonable [[price-to-earnings-ratio]], you can hold through volatility. You are not just trading a pattern — you are owning a business. This conviction prevents panic selling during normal pullbacks.
+**Fundamentals provide conviction.** When you know a company is growing earnings at 25% annually, has a fortress balance sheet, and trades at a reasonable price-to-earnings-ratio, you can hold through volatility. You are not just trading a pattern — you are owning a business. This conviction prevents panic selling during normal pullbacks.
 
 **Technicals provide timing and risk management.** Even the best company can be a terrible trade if you buy at the wrong price. Technical analysis tells you where institutional buyers are likely stepping in ([[support-and-resistance]]), when momentum is shifting in your favor ([[macd]], [[rsi]]), and where to place your stop loss to limit downside. You buy the great company, but only when the chart says "now."
 
@@ -35,10 +35,10 @@ The synergy is rooted in the different information each approach captures:
 
 | Component | Domain | Role |
 |-----------|--------|------|
-| [[earnings-growth]] screening | Fundamental | Identifies companies with accelerating profits |
-| [[price-to-earnings-ratio]] analysis | Fundamental | Ensures reasonable valuation |
-| [[revenue-growth]] analysis | Fundamental | Confirms top-line business strength |
-| [[return-on-equity]] analysis | Fundamental | Measures management effectiveness |
+| earnings-growth screening | Fundamental | Identifies companies with accelerating profits |
+| price-to-earnings-ratio analysis | Fundamental | Ensures reasonable valuation |
+| revenue-growth analysis | Fundamental | Confirms top-line business strength |
+| return-on-equity analysis | Fundamental | Measures management effectiveness |
 | [[support-and-resistance]] | Technical | Identifies optimal entry zones |
 | [[breakout-trading]] | Technical | Provides high-momentum entry signals |
 | [[rsi]] / [[macd]] | Technical | Confirms momentum at entry |
@@ -49,8 +49,6 @@ The synergy is rooted in the different information each approach captures:
 **Phase 1 — Fundamental Screening.** Use a stock screener to filter the universe down to quality. Key filters:
 - Earnings per share growth > 15% year-over-year (last 3 quarters)
 - Revenue growth > 10% year-over-year
-- [[return-on-equity]] > 15%
-- [[price-to-earnings-ratio]] below the industry average or below the stock's 5-year average
 - Debt-to-equity < 1.0 (balance sheet health)
 - Institutional ownership between 20-70% (smart money involved, but not overcrowded)
 
@@ -65,7 +63,7 @@ This should yield 20-50 candidates depending on market conditions.
 Narrow to 5-10 stocks with both fundamental quality AND constructive chart setups.
 
 **Phase 3 — Entry Trigger.** Wait for a specific technical event:
-- **Breakout entry:** Price breaks above a [[cup-and-handle]] pivot or [[consolidation]] range on volume 50%+ above average. This is the [[can-slim]] approach.
+- **Breakout entry:** Price breaks above a [[cup-and-handle]] pivot or [[consolidation]] range on volume 50%+ above average. This is the can-slim approach.
 - **Pullback entry:** Price pulls back to the 50-day MA or a key support level. [[rsi]] reaches 40-50 range and turns up. Buy on the first green candle with increasing volume.
 - **Oversold bounce:** After a market-wide selloff, fundamentally strong stocks with [[rsi]] below 30 are bought with the expectation of mean reversion. The fundamental quality provides confidence that the selloff is temporary.
 
@@ -93,10 +91,10 @@ A company reports earnings growth of 40% last quarter, 35% the quarter before. R
 
 ## Real-World Usage
 
-**William O'Neil's [[can-slim]]** is the most systematic implementation of fundamental-technical fusion. The CAN SLIM acronym encodes both fundamental criteria (Current earnings, Annual earnings, New products) and technical criteria (Supply/demand, Leader, Institutional sponsorship, Market direction). O'Neil's research showed that the biggest stock market winners of the past century almost always had both strong fundamentals AND specific chart patterns before their major advances.
+**William O'Neil's can-slim** is the most systematic implementation of fundamental-technical fusion. The CAN SLIM acronym encodes both fundamental criteria (Current earnings, Annual earnings, New products) and technical criteria (Supply/demand, Leader, Institutional sponsorship, Market direction). O'Neil's research showed that the biggest stock market winners of the past century almost always had both strong fundamentals AND specific chart patterns before their major advances.
 
 **Warren Buffett picks the company, the chart picks the price.** While Buffett himself does not use technical analysis, many Buffett-inspired investors use his fundamental framework for stock selection and then overlay basic [[technical-analysis]] for entry timing. Buying Berkshire-quality companies at technically oversold levels has historically been extremely effective.
 
-**Peter Lynch's approach** also combined fundamental insight (invest in what you know, check the numbers) with awareness of valuation timing — his [[peg-ratio]] essentially adds a timing element to fundamental valuation.
+**Peter Lynch's approach** also combined fundamental insight (invest in what you know, check the numbers) with awareness of valuation timing — his peg-ratio essentially adds a timing element to fundamental valuation.
 
-**See also:** [[can-slim]], [[value-investing]], [[growth-investing]], [[fundamental-analysis]], [[technical-analysis]], [[breakout-trading]]
+**See also:** can-slim, value-investing, growth-investing, fundamental-analysis, [[technical-analysis]], [[breakout-trading]]

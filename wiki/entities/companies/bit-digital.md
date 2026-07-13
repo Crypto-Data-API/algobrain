@@ -78,14 +78,14 @@ Bit Digital is best valued sum-of-the-parts rather than on earnings:
 - **Staking yield / annualized staking revenue** — recurring crypto-native income (see [[ethereum-staking]]).
 - **Stake in [[whitefiber]] (WYFI)** — market value of the majority equity interest; the AI-infrastructure component.
 - **NAV vs. market cap** — does BTBT trade at a premium/discount to (ETH treasury + WYFI stake)?
-- **Share count and [[dilution]]** — equity-raise cadence.
+- **Share count and dilution** — equity-raise cadence.
 - **WhiteFiber energized MW / contract backlog** — AI growth runway.
 
 The key analytical move is decomposing BTBT into its ETH treasury plus its WYFI stake, then judging whether the blended equity is cheap or rich versus that sum.
 
 ## Trading & Options Playbook
 
-- **Index membership:** not in the [[s-and-p-500]]; small-cap NASDAQ. Appears in crypto-equity ETF baskets.
+- **Index membership:** not in the s-and-p-500; small-cap NASDAQ. Appears in crypto-equity ETF baskets.
 - **Dual beta:** trades on [[ethereum]] price and staking economics AND on AI data-center sentiment (via [[whitefiber]]) — both high-volatility themes; can move sharply on ETH swings and AI-infra headlines.
 - **Options profile (Tier 3 - Popular):** moderate, speculative retail options interest with rich premiums; IV spikes into ETH moves, monthly treasury disclosures, and WYFI news. Liquidity thinner than mega-cap names.
 - **ETH correlation:** unlike the BTC-miner cohort, BTBT's primary crypto driver is [[ethereum]]; pairs traders watch BTBT vs. ETH and vs. WYFI.
@@ -94,7 +94,7 @@ The key analytical move is decomposing BTBT into its ETH treasury plus its WYFI 
 
 ## Capital Structure & Dilution Risk
 
-Bit Digital's balance sheet is dominated by its ETH treasury, which doubles as a financing buffer and a source of volatility. The company has financed WhiteFiber growth via debt (e.g., a ~$100M delayed-draw term loan facility for a WhiteFiber subsidiary), which funds AI expansion without immediately diluting parent shareholders. Like peers, however, it has historically used equity issuance (ATM, secondary offerings) to grow the ETH treasury and operations. Watch share count, ETH-treasury monetization/staking, WhiteFiber financing structure, and any parent-level raises. (See [[dilution]].)
+Bit Digital's balance sheet is dominated by its ETH treasury, which doubles as a financing buffer and a source of volatility. The company has financed WhiteFiber growth via debt (e.g., a ~$100M delayed-draw term loan facility for a WhiteFiber subsidiary), which funds AI expansion without immediately diluting parent shareholders. Like peers, however, it has historically used equity issuance (ATM, secondary offerings) to grow the ETH treasury and operations. Watch share count, ETH-treasury monetization/staking, WhiteFiber financing structure, and any parent-level raises. (See dilution.)
 
 ## Risks
 
@@ -102,7 +102,7 @@ Bit Digital's balance sheet is dominated by its ETH treasury, which doubles as a
 - **Staking risk** — slashing, validator failure, protocol changes, and US regulatory scrutiny of staking.
 - **WhiteFiber execution risk** — AI value depends on WYFI delivering capacity and revenue.
 - **Holding-company discount** — blended equity can trade below NAV.
-- **Dilution / financing risk** — capital raises to grow treasury and AI (see [[dilution]]).
+- **Dilution / financing risk** — capital raises to grow treasury and AI (see dilution).
 - **Regulatory risk** — digital-asset and staking regulation in the US and abroad.
 
 ## Related
@@ -115,19 +115,15 @@ Bit Digital's balance sheet is dominated by its ETH treasury, which doubles as a
 - [[implied-volatility]]
 - [[options]]
 - [[options-greeks]]
-- [[dilution]]
 - [[bitfarms]]
 - [[bitdeer-technologies]]
 - [[core-scientific]]
 - [[iren]]
 - [[mara]]
-- [[nasdaq]]
-- [[s-and-p-500]]
-- [[technology]]
 
 ## Sources
 
 - Bit Digital ETH treasury & staking / WhiteFiber disclosures — StockTitan, SEC EDGAR (https://www.stocktitan.net/news/BTBT/bit-digital-inc-reports-monthly-ethereum-treasury-and-staking-liz7afr1vqu0.html)
 - WhiteFiber loan facility (8-K) — SEC EDGAR (https://www.sec.gov/Archives/edgar/data/0001710350/000121390026061574/ea029203101ex99-1.htm)
 - Verified via WebSearch, 2026-06-10
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)

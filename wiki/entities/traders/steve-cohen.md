@@ -38,7 +38,7 @@ Despite the punitive fee structure, investors stayed with SAC because the net re
 
 ### Trading Style: Speed and Variant Perception
 
-Cohen's trading approach was fundamentally different from long-term investors like [[warren-buffett]] or macro traders like [[george-soros]]:
+Cohen's trading approach was fundamentally different from long-term investors like warren-buffett or macro traders like [[george-soros]]:
 
 - **Ultra-short holding periods**: SAC's portfolio turnover exceeded **300% per year**, meaning the average position was held for less than four months. Many of Cohen's personal trades lasted days or hours.
 - **Massive diversification**: SAC ran hundreds of positions simultaneously, managed by dozens of portfolio managers, each operating semi-independently. This structure resembled a trading floor more than a traditional hedge fund.
@@ -78,7 +78,7 @@ Cohen's philosophy centers on speed, information, and [[risk-management]]:
 
 3. **Variant perception drives alpha.** The most profitable trades come from identifying where the market's consensus view is wrong. This requires both better information and the analytical framework to interpret it differently from the crowd. Cohen's approach echoes [[george-soros]]'s emphasis on finding situations where market perception diverges from reality.
 
-4. **Diversify across many uncorrelated bets.** SAC's structure -- dozens of semi-independent portfolio managers running hundreds of positions -- was designed to generate returns from many small edges rather than a few concentrated bets. This is the opposite of [[warren-buffett]]'s concentrated approach but shares the mathematical logic of [[statistical-arbitrage]]: many small, uncorrelated bets produce smoother returns than a few large ones.
+4. **Diversify across many uncorrelated bets.** SAC's structure -- dozens of semi-independent portfolio managers running hundreds of positions -- was designed to generate returns from many small edges rather than a few concentrated bets. This is the opposite of warren-buffett's concentrated approach but shares the mathematical logic of [[statistical-arbitrage]]: many small, uncorrelated bets produce smoother returns than a few large ones.
 
 5. **Invest in information infrastructure.** Cohen spent enormous sums on analysts, technology, expert networks, and data. In his view, information is the raw material of trading, and the firm that processes information fastest and most thoroughly wins. This philosophy anticipates the modern arms race in [[alternative-data|alternative data]] and [[machine-learning]].
 

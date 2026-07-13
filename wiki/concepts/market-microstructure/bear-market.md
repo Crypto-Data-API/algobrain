@@ -9,10 +9,10 @@ aliases: ["bear-markets", "bear", "secular-bear-market"]
 domain: [market-microstructure, behavioral-finance]
 prerequisites: ["[[business-cycle]]", "[[market-regimes]]"]
 difficulty: beginner
-related: ["[[crashes]]", "[[recession]]", "[[business-cycle]]", "[[cash-as-asset]]", "[[contrarian-investing]]", "[[bubble]]", "[[drawdown]]", "[[volatility]]"]
+related: ["[[crashes]]", "[[recession]]", "[[business-cycle]]", "[[cash-as-asset]]", "[[bubble]]", "[[drawdown]]", "[[volatility]]"]
 ---
 
-A bear market is conventionally defined as a decline of 20% or more from a recent high in a broad market index (e.g. the [[sp500|S&P 500]]), sustained over weeks or months. It is the macro counterpart to a [[bubble]] — a regime of falling prices, deteriorating sentiment, and contracting valuations. Bear markets are distinct from short, sharp [[crashes]]: a crash is an event, a bear market is a regime that can persist for months or years.
+A bear market is conventionally defined as a decline of 20% or more from a recent high in a broad market index (e.g. the S&P 500), sustained over weeks or months. It is the macro counterpart to a [[bubble]] — a regime of falling prices, deteriorating sentiment, and contracting valuations. Bear markets are distinct from short, sharp [[crashes]]: a crash is an event, a bear market is a regime that can persist for months or years.
 
 ## How It Works
 
@@ -51,13 +51,12 @@ Bear markets invert the dynamics traders rely on in bull regimes:
 - **[[volatility]] spikes** — the [[vix|VIX]] typically rises sharply; option premiums expand, favouring premium sellers but punishing naked long calls.
 - **Correlations rise toward 1** — diversification fails when "everything sells off together," stressing [[portfolio-theory|portfolio]] construction.
 - **Defensive [[sector-rotation]]** — utilities, consumer staples, and healthcare outperform; cyclicals and high-multiple growth underperform.
-- **[[cash-as-asset|Cash becomes an asset]]** — [[fred-mcnaught|Fred]] views bear markets as the best wealth-building opportunity of a lifetime: holding dry powder lets a disciplined investor buy quality companies at depressed valuations during the despair phase. (Source: [[fred-sam-session-2024-01-04]])
+- **[[cash-as-asset|Cash becomes an asset]]** — Bear markets can be the best wealth-building opportunity of a lifetime: holding dry powder lets a disciplined investor buy quality companies at depressed valuations during the despair phase.
 
 The hard part is timing. "The market can remain irrational longer than you can remain solvent" applies equally to shorting near a bottom and to catching a falling knife. Robust practice favours [[risk-management|defined risk]], staged entries ([[dollar-cost-averaging]]), and waiting for confirmation of a regime change rather than predicting the exact turn.
 
 ## Sources
 
-- [[fred-sam-session-2024-01-04]] — Fred McNaught on treating bear markets and crashes as buying opportunities and keeping cash as an asset
 - Standard market convention (20% threshold) — widely documented in financial press and reference works such as Burton Malkiel, *A Random Walk Down Wall Street*
 
 ## Related
@@ -66,5 +65,4 @@ The hard part is timing. "The market can remain irrational longer than you can r
 - [[recession]] — the macroeconomic backdrop to most cyclical bears
 - [[business-cycle]] — bear markets cluster around contraction phases
 - [[bubble]] — the euphoric regime that precedes many bear markets
-- [[contrarian-investing]] — the discipline of buying into pessimism
 - [[cash-as-asset]] — holding dry powder for the despair phase

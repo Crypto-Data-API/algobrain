@@ -12,7 +12,7 @@ difficulty: intermediate
 related: ["[[futures]]", "[[gold]]", "[[oil]]", "[[commodities-overview]]", "[[trend-following]]", "[[macro-trading]]"]
 ---
 
-Commodity trading involves buying and selling physical goods -- metals, energy, agriculture, and livestock -- primarily through [[futures|futures contracts]]. Commodity markets are driven by real-world supply and demand dynamics, making them fundamentally different from [[stocks-overview|equities]] and offering unique diversification benefits.
+Commodity trading involves buying and selling physical goods -- metals, energy, agriculture, and livestock -- primarily through [[futures|futures contracts]]. Commodity markets are driven by real-world supply and demand dynamics, making them fundamentally different from equities and offering unique diversification benefits.
 
 ## Major Commodity Categories
 

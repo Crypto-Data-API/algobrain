@@ -6,19 +6,19 @@ updated: 2026-06-11
 status: good
 tags: [options, derivatives, risk-management, indicators, portfolio-theory]
 aliases: ["Beta-Weighted Delta", "SPY-Equivalent Delta"]
-related: ["[[delta]]", "[[options-greeks]]", "[[options-risk-budgeting]]", "[[portfolio-greeks-aggregation]]", "[[delta-neutral]]", "[[beta]]", "[[risk-navigator]]", "[[thinkorswim]]", "[[interactive-brokers]]", "[[scenario-analysis]]"]
+related: ["[[delta]]", "[[options-greeks]]", "[[options-risk-budgeting]]", "[[portfolio-greeks-aggregation]]", "[[delta-neutral]]", "[[beta]]", "[[risk-navigator]]", "[[thinkorswim]]", "[[scenario-analysis]]"]
 domain: [risk-management, portfolio-theory]
 prerequisites: ["[[delta]]", "[[options-greeks]]", "[[beta]]"]
 difficulty: advanced
 ---
 
-**Beta-weighted delta** translates raw option deltas across heterogeneous underlyings into a single benchmark-equivalent number — typically expressed in [[spy|SPY]] shares (or [[s-and-p-500|SPX]] dollars). Without this translation, a portfolio-level delta is meaningless: 100 long deltas of [[microsoft|MSFT]] is not the same directional exposure as 100 long deltas of [[tlt|TLT]], because their dollar values and market betas differ. Every serious options risk system (thinkorswim Analyze, [[interactive-brokers|IBKR]] Risk Navigator, [[orats]], [[livevol]]) computes beta-weighted deltas natively and treats them, not raw deltas, as the binding directional constraint inside [[options-risk-budgeting]].
+**Beta-weighted delta** translates raw option deltas across heterogeneous underlyings into a single benchmark-equivalent number — typically expressed in SPY shares (or SPX dollars). Without this translation, a portfolio-level delta is meaningless: 100 long deltas of MSFT is not the same directional exposure as 100 long deltas of TLT, because their dollar values and market betas differ. Every serious options risk system (thinkorswim Analyze, IBKR Risk Navigator, orats, livevol) computes beta-weighted deltas natively and treats them, not raw deltas, as the binding directional constraint inside [[options-risk-budgeting]].
 
 ## Overview
 
 Raw [[delta]] tells you how an option's price moves per $1 move in *its own underlying*. When you aggregate deltas across a multi-name book, you are summing dollars of MSFT exposure with dollars of TLT exposure with dollars of [[gold|GLD]] exposure — three different return streams with three different volatilities and three different correlations to the broad market. The resulting "net delta" number has no operational meaning. You cannot use it to size, to scenario, or to hedge.
 
-Beta-weighting rescales every position's delta into the units of a chosen benchmark — usually [[spy|SPY]] for equity-heavy retail books, [[spx|SPX]] for institutional books, or a sector ETF for sector-concentrated sleeves. After rescaling, summing across the book produces a single number — *SPY-equivalent delta* — that answers a clean question: "If SPY moves 1%, what is my expected book P&L from delta alone?"
+Beta-weighting rescales every position's delta into the units of a chosen benchmark — usually SPY for equity-heavy retail books, [[spx|SPX]] for institutional books, or a sector ETF for sector-concentrated sleeves. After rescaling, summing across the book produces a single number — *SPY-equivalent delta* — that answers a clean question: "If SPY moves 1%, what is my expected book P&L from delta alone?"
 
 This number can then be capped, hedged with index futures or SPY shares, and integrated into a [[scenario-analysis|scenario grid]]. Raw deltas cannot.
 
@@ -87,7 +87,7 @@ To genuinely flatten directional exposure, the trader shorts 236 SPY shares (or 
 
 ### thinkorswim and IBKR Risk Navigator
 
-Both platforms compute BWD natively. In thinkorswim's *Analyze → Risk Profile* tab, the user selects a "Beta Weighting" symbol (typically SPX or SPY); the position list, P&L plot, and aggregated Greeks immediately rescale. [[interactive-brokers|IBKR]] Risk Navigator does the same via its *Equity → Beta Weighting* setting. Beta is computed by the platform from a configurable lookback (often 60 days of daily returns); advanced users can override with custom betas for stress testing.
+Both platforms compute BWD natively. In thinkorswim's *Analyze → Risk Profile* tab, the user selects a "Beta Weighting" symbol (typically SPX or SPY); the position list, P&L plot, and aggregated Greeks immediately rescale. IBKR Risk Navigator does the same via its *Equity → Beta Weighting* setting. Beta is computed by the platform from a configurable lookback (often 60 days of daily returns); advanced users can override with custom betas for stress testing.
 
 ## Common Misuse / Pitfalls
 

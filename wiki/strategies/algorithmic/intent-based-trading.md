@@ -11,7 +11,7 @@ timeframe: scalp|day|swing
 markets: [crypto]
 complexity: intermediate
 backtest_status: untested
-related: ["[[mev-strategies]]", "[[dark-pool-trading]]", "[[implementation-shortfall]]", "[[uniswap]]", "[[ai-solvers]]", "[[cow-protocol]]", "[[1inch]]", "[[ai-mev]]"]
+related: ["[[mev-strategies]]", "[[implementation-shortfall]]", "[[uniswap]]", "[[ai-solvers]]", "[[cow-protocol]]", "[[1inch]]", "[[ai-mev]]"]
 ---
 
 # Intent-Based Trading
@@ -52,6 +52,5 @@ A trader wants to swap 50 ETH for USDC using UniswapX. They sign an intent speci
 ## See Also
 
 - [[mev-strategies]] -- the problem that intent-based trading is designed to mitigate
-- [[dark-pool-trading]] -- a TradFi parallel for reducing information leakage in order execution
 - [[implementation-shortfall]] -- the institutional execution benchmark that intent-based systems optimize toward
 - [[uniswap]] -- the protocol behind UniswapX, a leading intent-based system

@@ -105,7 +105,6 @@ PoP is useful as a single-number summary for new traders and for comparing struc
 - [[short-strangle]] — undefined-risk version with similar PoP framing
 - [[options-greeks]] — the family of risk measures including delta
 - [[volatility-skew]] — why model-PoP overstates true PoP on the put side
-- [[earnings-volatility-trading]] — event windows where PoP is most overstated
 - [[expected-value]] — the proper decision metric that PoP feeds into
 
 ## Sources

@@ -105,7 +105,7 @@ For [[iron-condors]], the equivalent rule is "1/3 of one-side's width" since you
 
 ## Width and Assignment Risk
 
-A wider spread does not increase per-trade [[assignment]] risk on the *short* leg — the short strike is the same. But if the short leg is breached and the trade is held into expiry, a wider spread means more dollars at risk between the strikes. For dividend-paying underlyings, see [[dividend-adjustments]] — wide spreads on dividend stocks compound the early-assignment risk because the long leg's protection is further away.
+A wider spread does not increase per-trade [[assignment]] risk on the *short* leg — the short strike is the same. But if the short leg is breached and the trade is held into expiry, a wider spread means more dollars at risk between the strikes. For dividend-paying underlyings, see dividend-adjustments — wide spreads on dividend stocks compound the early-assignment risk because the long leg's protection is further away.
 
 ## Width and the Gamma Trap
 

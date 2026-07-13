@@ -22,7 +22,7 @@ Born in 1954 in Memphis, Tennessee, Jones began trading cotton [[futures]] after
 
 ## The 1987 Call
 
-Jones used [[elliott-wave|Elliott Wave]] analysis and classic chart patterns to study the parallels between the 1987 market and the 1929 crash, noting similar technical patterns and excessive speculation. He positioned short ahead of Black Monday (October 19, 1987), when the [[dow-jones]] fell 22.6% in a single day — the largest one-day percentage decline in history. His fund reportedly earned ~200% that year, cementing his reputation (Source: [[2026-04-20-comprehensive-guide-technical-trading-indicators]]).
+Jones used [[elliott-wave|Elliott Wave]] analysis and classic chart patterns to study the parallels between the 1987 market and the 1929 crash, noting similar technical patterns and excessive speculation. He positioned short ahead of Black Monday (October 19, 1987), when the dow-jones fell 22.6% in a single day — the largest one-day percentage decline in history. His fund reportedly earned ~200% that year, cementing his reputation (Source: [[2026-04-20-comprehensive-guide-technical-trading-indicators]]).
 
 ## Major Trades After 1987
 

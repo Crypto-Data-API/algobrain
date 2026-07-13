@@ -9,10 +9,10 @@ aliases: ["Super", "Australian Superannuation", "Superannuation Fund"]
 domain: [portfolio-theory, risk-management]
 difficulty: beginner
 prerequisites: ["[[compounding]]", "[[diversification]]"]
-related: ["[[smsf]]", "[[franking-credits]]", "[[australian-investing]]", "[[compounding]]", "[[passive-investing]]", "[[diversification]]", "[[portfolio-construction]]", "[[risk-management]]", "[[reits]]", "[[dividend]]", "[[dollar-cost-averaging]]", "[[etf]]", "[[asic]]", "[[tax-efficient-investing]]", "[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[super-contribution-strategies]]"]
+related: ["[[smsf]]", "[[compounding]]", "[[passive-investing]]", "[[diversification]]", "[[portfolio-construction]]", "[[risk-management]]", "[[dollar-cost-averaging]]", "[[etf]]", "[[asic]]", "[[tax-efficient-investing]]", "[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[super-contribution-strategies]]"]
 ---
 
-Superannuation (commonly called "super") is Australia's compulsory retirement savings system, requiring employers to contribute a percentage of each employee's salary into a regulated investment fund. With over AUD $3.9 trillion in assets, it is one of the largest pools of managed retirement savings in the world — larger than the entire Australian GDP and roughly equal to the total market capitalisation of the [[australian-investing|ASX]]. Super is, in effect, the world's largest forced [[dollar-cost-averaging]] system, with 11.5% of every paycheck automatically invested for decades.
+Superannuation (commonly called "super") is Australia's compulsory retirement savings system, requiring employers to contribute a percentage of each employee's salary into a regulated investment fund. With over AUD $3.9 trillion in assets, it is one of the largest pools of managed retirement savings in the world — larger than the entire Australian GDP and roughly equal to the total market capitalisation of the ASX. Super is, in effect, the world's largest forced [[dollar-cost-averaging]] system, with 11.5% of every paycheck automatically invested for decades.
 
 ## Overview
 
@@ -24,7 +24,7 @@ Introduced in 1992 under the Keating Labor government, superannuation transforme
 
 The combination of compulsory contributions, concessional tax treatment, and decades of [[compounding]] makes superannuation the single most important investment vehicle for the vast majority of Australians.
 
-> **Figures disclaimer.** The contribution caps, tax rates, thresholds, and dollar limits below reflect specific Australian financial-year settings and *change frequently* — the Superannuation Guarantee rate, concessional/non-concessional caps, the transfer balance cap, and Division 293 threshold have all moved multiple times. Treat every dollar figure on this page as *indicative of how the system is structured*, not as a current authoritative number. Always confirm live figures against the [[ato|ATO]] and your fund before acting. This is general information, not personal financial or tax advice.
+> **Figures disclaimer.** The contribution caps, tax rates, thresholds, and dollar limits below reflect specific Australian financial-year settings and *change frequently* — the Superannuation Guarantee rate, concessional/non-concessional caps, the transfer balance cap, and Division 293 threshold have all moved multiple times. Treat every dollar figure on this page as *indicative of how the system is structured*, not as a current authoritative number. Always confirm live figures against the ATO and your fund before acting. This is general information, not personal financial or tax advice.
 
 ## Tax Structure
 
@@ -98,12 +98,12 @@ Different contribution levers suit different life stages and circumstances. The 
 | Non-concessional + bring-forward | Those with a lump sum (inheritance, asset sale) | Move after-tax capital into the low-tax wrapper, up to 3 years' cap at once | [[capital-gains-tax-discount]] |
 | Government co-contribution | Lower-income earners | Government partially matches after-tax contributions | — |
 | Spouse contribution | Couples with one low-income partner | Tax offset for contributing to a spouse's super | — |
-| Downsizer | Age 55+ selling the family home | Adds home-sale proceeds outside the normal caps | [[reits]] |
+| Downsizer | Age 55+ selling the family home | Adds home-sale proceeds outside the normal caps | reits |
 | First Home Super Saver | First-home buyers | Save a deposit at the ~15% rate, withdraw for a home | — |
 
 ### Worked Example: Salary Sacrifice Arithmetic
 
-*The following is an illustrative, hypothetical example using round numbers, not advice or a guarantee. Real rates and caps must be confirmed against the [[ato|ATO]].*
+*The following is an illustrative, hypothetical example using round numbers, not advice or a guarantee. Real rates and caps must be confirmed against the ATO.*
 
 Imagine an employee on a marginal tax rate of, say, 37% (plus Medicare levy) who diverts $10,000 of pre-tax salary into super via salary sacrifice rather than taking it as cash:
 
@@ -257,7 +257,7 @@ A periodic review (e.g., annually and at year-end) that captures most of the ava
 - [ ] **Use unused concessional cap** — if the balance is below the carry-forward threshold, prior-year unused cap can be used in a high-income year.
 - [ ] **Review insurance** — default cover may be inadequate (young family) or excessive (no dependants); premiums silently erode the balance.
 - [ ] **Nominate a beneficiary** — a binding death-benefit nomination keeps the balance out of generic estate processing.
-- [ ] **Search for lost super** — via the [[ato|ATO]]; large sums sit unclaimed across funds.
+- [ ] **Search for lost super** — via the ATO; large sums sit unclaimed across funds.
 - [ ] **Confirm SG is actually being paid** — employer non-payment is a real and common problem; cross-check payslips against fund inflows.
 
 ## Pitfalls and Failure Modes
@@ -272,7 +272,7 @@ Super is forgiving by design — automatic contributions and default investing c
 | Insurance erosion | Default premiums drain the balance unnoticed, sometimes for cover not needed | Review and right-size cover |
 | Excess contributions | Breaching the concessional or non-concessional cap triggers extra tax | Track all contributions including employer SG against the cap |
 | Liquidity trap | Over-contributing locks cash needed before preservation age | Keep an outside-super buffer; balance the [[#Worked Example: Salary Sacrifice Arithmetic\|sacrifice trade-off]] |
-| Legislation risk | Caps, rates, and access rules change; a strategy built on current settings can break | Build flexible plans; re-confirm figures with the [[ato\|ATO]] each year |
+| Legislation risk | Caps, rates, and access rules change; a strategy built on current settings can break | Build flexible plans; re-confirm figures with the ATO each year |
 | Unpaid SG | Employer fails to remit the guarantee | Cross-check payslips against fund statements; report to the ATO |
 | Lost / unclaimed super | Old accounts forgotten across job changes | Annual ATO search and consolidation |
 | Sequencing risk near retirement | A large drawdown just before drawdown phase is hard to recover (see [[#The First Principle|recovery math]] in [[risk-management]]) | Glide toward more defensive mixes approaching preservation age |
@@ -290,15 +290,11 @@ Superannuation is regulated by multiple bodies:
 ## Related
 
 - [[smsf]]
-- [[franking-credits]]
-- [[australian-investing]]
 - [[compounding]]
 - [[passive-investing]]
 - [[diversification]]
 - [[portfolio-construction]]
 - [[risk-management]]
-- [[reits]]
-- [[dividend]]
 - [[dollar-cost-averaging]]
 - [[etf]]
 - [[asic]]
@@ -306,7 +302,6 @@ Superannuation is regulated by multiple bodies:
 - [[australian-investor-tax]]
 - [[capital-gains-tax-discount]]
 - [[super-contribution-strategies]]
-- [[ato]]
 - [[industry-funds]]
 - [[retail-funds]]
 - [[tax-drag]]

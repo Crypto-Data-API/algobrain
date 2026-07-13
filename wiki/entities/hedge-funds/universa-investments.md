@@ -10,7 +10,7 @@ entity_type: fund
 founded: 2007
 headquarters: "Miami, Florida, USA"
 website: "https://www.universa.net"
-related: ["[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[tail-risk]]", "[[trend-plus-tail-hedge]]", "[[crisis-alpha]]", "[[convexity]]", "[[antifragility]]", "[[asymmetric-barbell]]", "[[black-swan]]", "[[fat-tails]]", "[[protective-put]]", "[[vix]]", "[[long-vol-overlay]]", "[[options-concentration-risk]]", "[[spx-puts]]", "[[vix-call-spreads]]", "[[put-tree]]", "[[ergodicity]]", "[[saba-capital-tail-fund]]", "[[longtail-alpha]]"]
+related: ["[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[tail-risk]]", "[[trend-plus-tail-hedge]]", "[[crisis-alpha]]", "[[convexity]]", "[[antifragility]]", "[[asymmetric-barbell]]", "[[black-swan]]", "[[fat-tails]]", "[[protective-put]]", "[[vix]]", "[[long-vol-overlay]]", "[[options-concentration-risk]]", "[[vix-call-spreads]]", "[[put-tree]]", "[[ergodicity]]", "[[saba-capital-tail-fund]]", "[[longtail-alpha]]"]
 ---
 
 Universa Investments is the world's preeminent [[tail-risk-hedging|tail risk hedge fund]], founded by [[mark-spitznagel]] in January 2007 with [[nassim-taleb]] serving as Distinguished Scientific Advisor. The fund specializes exclusively in buying deep out-of-the-money options and other [[convexity|convex]] instruments that protect client portfolios against extreme market crashes. Universa manages an estimated $16B+ in tail risk protection assets.
@@ -41,7 +41,7 @@ Universa maintains a portfolio of convex instruments — primarily deep OTM puts
 
 ### Core Mechanics
 
-- **Instruments**: Deep out-of-the-money [[spx-puts|SPX puts]] (typically 20-30% OTM), [[vix-call-spreads|VIX call spreads]], [[put-tree|put trees]], variance swaps, and other convex derivatives. The defining design constraint: **maximum loss is bounded at premium spent** — no short options inside the protective book, no margin-call risk, no forced liquidation. Universa is the explicit counterparty to variance-risk-premium harvesters, not a harvester itself.
+- **Instruments**: Deep out-of-the-money SPX puts (typically 20-30% OTM), [[vix-call-spreads|VIX call spreads]], [[put-tree|put trees]], variance swaps, and other convex derivatives. The defining design constraint: **maximum loss is bounded at premium spent** — no short options inside the protective book, no margin-call risk, no forced liquidation. Universa is the explicit counterparty to variance-risk-premium harvesters, not a harvester itself.
 - **Time horizon**: Positions are rolled monthly or quarterly as they approach expiration
 - **Normal market behavior**: The fund is typically down 10-20% annualized during calm markets — this is by design and represents the "cost of protection"
 - **Crisis behavior**: During major equity drawdowns, positions explode in value as puts move into the money and implied volatility spikes. Returns of 100-4,000%+ have been reported during significant crashes.
@@ -50,7 +50,7 @@ Universa maintains a portfolio of convex instruments — primarily deep OTM puts
 
 | Instrument | Role in the book | Payoff character |
 |------------|------------------|------------------|
-| Deep OTM [[spx-puts\|SPX puts]] (20-30% OTM) | Core crash convexity | Tiny cost; explosive payoff on large, fast drops + IV expansion |
+| Deep OTM SPX puts (20-30% OTM) | Core crash convexity | Tiny cost; explosive payoff on large, fast drops + IV expansion |
 | [[vix-call-spreads\|VIX call spreads]] | Capital-efficient vol-spike exposure | Caps cost while capturing the bulk of a [[vix]] surge |
 | [[put-tree\|Put trees]] / put ratios | Cheapen carry by selling far-OTM wings | Lowers premium bleed; reintroduces *some* tail cap |
 | Variance swaps | Pure realized-vol exposure | Linear in realized variance; institutional sizing |
@@ -217,7 +217,6 @@ For the practitioner alternative that funds the carry, see [[trend-plus-tail-hed
 - [[protective-put]] — the basic options concept Universa scales to institutional size
 - [[long-vol-overlay]] — the overlay concept Universa provides "as a service"
 - [[options-concentration-risk]] — the problem Universa-style overlays solve for short-premium books
-- [[spx-puts]] — primary instrument
 - [[vix-call-spreads]] / [[put-tree]] — complementary structures
 - [[ergodicity]] — time-average vs ensemble-average returns
 - [[long-vol-vs-short-vol]] — the philosophical framework

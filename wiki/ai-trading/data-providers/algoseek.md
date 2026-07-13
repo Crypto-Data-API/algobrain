@@ -12,16 +12,14 @@ headquarters: "New York, USA"
 aliases: ["AlgoSeek LLC", "Algoseek"]
 related:
   - "[[polygon-io]]"
-  - "[[opra]]"
   - "[[quantconnect-bootcamp]]"
-  - "[[unusual-whales]]"
   - "[[backtesting]]"
   - "[[options-greeks]]"
 ---
 
 # AlgoSeek
 
-Institutional-grade historical market data vendor specializing in tick-level and minute-frequency datasets across US equities, options, and futures. AlgoSeek is best known among quantitative retail traders as the historical options data provider integrated into [[quantconnect-bootcamp|QuantConnect]], where it supplies minute-bar options data covering 4,000+ underlying symbols since January 2012, sourced from [[opra|OPRA]]. For QuantConnect users, this eliminates the need to license and process raw OPRA feeds independently -- one of the most expensive and operationally heavy steps in options research.
+Institutional-grade historical market data vendor specializing in tick-level and minute-frequency datasets across US equities, options, and futures. AlgoSeek is best known among quantitative retail traders as the historical options data provider integrated into [[quantconnect-bootcamp|QuantConnect]], where it supplies minute-bar options data covering 4,000+ underlying symbols since January 2012, sourced from OPRA. For QuantConnect users, this eliminates the need to license and process raw OPRA feeds independently -- one of the most expensive and operationally heavy steps in options research.
 
 ## Overview
 
@@ -91,8 +89,6 @@ For most retail quants, the QuantConnect integration is the cheapest practical a
 
 - [[quantconnect-bootcamp]] -- primary retail integration path for AlgoSeek options data
 - [[polygon-io]] -- alternative options data API, more retail-friendly real-time but shorter history depth
-- [[opra]] -- the underlying source feed AlgoSeek normalizes
-- [[unusual-whales]] -- consumer-facing options flow built on similar OPRA-derived data
 - [[backtesting]]
 - [[options-greeks]]
 

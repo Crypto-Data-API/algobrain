@@ -131,7 +131,7 @@ Constrained by single-name option liquidity and the market impact of frequent un
 ## Advantages
 - **Isolates volatility** from direction — a clean, analytically grounded vol bet.
 - **Two-sided** — express long *or* short realized-vs-implied vol views.
-- **Foundation of options market-making** and the building block of [[gamma-scalping]], [[variance-swap]] replication, and [[dispersion-trade]] legs.
+- **Foundation of options market-making** and the building block of [[gamma-scalping]], [[variance-swap]] replication, and dispersion-trade legs.
 - Risk is well-characterized by [[the-greeks]].
 
 ## Disadvantages

@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [itpm, education, person, risk-management, behavioral-finance, portfolio-theory]
 aliases: ["Ten Secrets to Achieve Financial Success", "ITPM Ten Secrets"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[itpm-five-principles]]", "[[risk-management-overview]]", "[[behavioral-finance]]", "[[reits]]", "[[portfolio-theory]]"]
+related: ["[[anton-kreil]]", "[[itpm-five-principles]]", "[[risk-management-overview]]", "[[behavioral-finance]]", "[[portfolio-theory]]"]
 source_type: video
 source_url: "https://www.youtube.com/watch?v=4a51wQAOGR4"
 source_author: "Anton Kreil"
@@ -16,7 +16,7 @@ confidence: medium
 claims_count: 28
 ---
 
-The original flagship [[itpm|ITPM]] video, filmed as an "ask me anything" format with Tom following [[anton-kreil]] on a business trip from Singapore to New York to London (circa 2015). Kreil discusses foundational financial principles including understanding money, respecting it while being indifferent to it, distinguishing assets from liabilities, building your own infrastructure, and the importance of risk management as priority #1. The video includes scenes of Kreil managing live portfolios while traveling, revealing operational aspects of how professional traders work. As promotional content for a paid trading-education business, the claims are first-person opinion and life-philosophy rather than independently verifiable fact; confidence is MEDIUM overall.
+The original flagship ITPM video, filmed as an "ask me anything" format with Tom following [[anton-kreil]] on a business trip from Singapore to New York to London (circa 2015). Kreil discusses foundational financial principles including understanding money, respecting it while being indifferent to it, distinguishing assets from liabilities, building your own infrastructure, and the importance of risk management as priority #1. The video includes scenes of Kreil managing live portfolios while traveling, revealing operational aspects of how professional traders work. As promotional content for a paid trading-education business, the claims are first-person opinion and life-philosophy rather than independently verifiable fact; confidence is MEDIUM overall.
 
 > **Note on confidence:** This is marketing material for a paid course. Claims reflect Kreil's stated views and recollections, not audited or third-party data. Treat the financial-philosophy claims as [MEDIUM] opinion.
 
@@ -97,7 +97,6 @@ The original flagship [[itpm|ITPM]] video, filmed as an "ask me anything" format
 ## Entities Mentioned
 
 - [[anton-kreil]] — presenter, ITPM founder, living in Singapore
-- [[itpm]] — Institute of Trading and Portfolio Management, 40+ managed trading accounts
 - Tom — interviewer/filmmaker
 - Chris — ITPM back office, handles order execution
 - Alan — ITPM staff, monitors Institute traders' portfolios
@@ -107,9 +106,9 @@ The original flagship [[itpm|ITPM]] video, filmed as an "ask me anything" format
 
 - [[risk-management-overview]], [[behavioral-finance]]
 - [[portfolio-theory]], [[compounding]]
-- [[reits]], [[opportunity-cost]], [[freedom-as-asset]]
-- [[assets-vs-liabilities]], [[mortgages]], [[pensions]]
-- [[long-short-equity]], [[hedging]]
+- reits, [[opportunity-cost]], freedom-as-asset
+- assets-vs-liabilities, [[mortgages]], [[pensions]]
+- long-short-equity, [[hedging]]
 
 ## Sources
 

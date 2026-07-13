@@ -150,7 +150,7 @@ For options books, [[options-concentration-risk]] notes that a custom Python ris
 - **Rolling windows**: rolling Sharpe, rolling beta — useful for detecting regime changes that often coincide with concentration revealing itself
 - **Attribution**: when paired with pyfolio's tear sheets, empyrical-computed metrics let a trader see how the concentrated book performs vs benchmark across regimes
 
-It does *not* compute factor exposures (that's [[barra]] / [[axioma]] / [[northfield]] or a custom factor model on top), and it does *not* understand options Greeks at the position level. It works on returns series — what positions do, not why.
+It does *not* compute factor exposures (that's barra / axioma / northfield or a custom factor model on top), and it does *not* understand options Greeks at the position level. It works on returns series — what positions do, not why.
 
 ## Caveats
 

@@ -57,7 +57,7 @@ GPT-4o and Gemini process audio natively rather than transcribing first, preserv
 | **Document parsing** | Image (PDF/scan) + Text | Text (structured extraction) | [[optical-character-recognition|OCR]] + understanding in one step |
 | **Dashboard monitoring** | Image (trading dashboard screenshot) | Text (alert, anomaly detection) | "Are any positions in this dashboard showing unusual P&L?" |
 | **Video analysis** | Video (earnings webcast) + Text | Text (summary, sentiment) | Process CEO body language + words simultaneously |
-| **Voice trading assistant** | Audio (voice command) + Text (context) | Audio (spoken response) | [[alfred|Alfred]]-style natural voice interaction |
+| **Voice trading assistant** | Audio (voice command) + Text (context) | Audio (spoken response) | Alfred-style natural voice interaction |
 
 ## Multimodal vs Single-Modal Pipelines
 

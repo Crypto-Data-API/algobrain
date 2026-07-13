@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [australia, tax, superannuation, strategy]
 aliases: ["Super Contribution Strategies", "Salary Sacrifice", "Super Tax Strategies"]
-related: ["[[superannuation]]", "[[smsf]]", "[[australian-investor-tax]]", "[[tax-efficient-investing]]", "[[compounding]]", "[[dollar-cost-averaging]]", "[[capital-gains-tax-discount]]", "[[franking-credits]]", "[[stage-3-tax-cuts]]", "[[risk-management]]"]
+related: ["[[superannuation]]", "[[smsf]]", "[[australian-investor-tax]]", "[[tax-efficient-investing]]", "[[compounding]]", "[[dollar-cost-averaging]]", "[[capital-gains-tax-discount]]", "[[stage-3-tax-cuts]]", "[[risk-management]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: intermediate
 prerequisites: ["[[superannuation]]", "[[australian-investor-tax]]"]
@@ -331,8 +331,8 @@ The unifying logic: capture free money first, then the highest-rate tax arbitrag
 
 These strategies are structure-agnostic — they work in industry, retail, or self-managed funds — but several reach full potency only inside an [[smsf]]:
 
-- **Franking credit refunds** ([[franking-credits]]) flow directly to an SMSF in pension phase, amplifying the value of contributions invested in fully franked Australian shares.
-- **Contribution timing and asset selection** are under the trustee's direct control, allowing precise [[tax-efficient-investing|tax-efficient]] sequencing of contributions, [[dividend|dividends]], and [[capital-gains-tax-discount|capital gains]].
+- **Franking credit refunds** (franking-credits) flow directly to an SMSF in pension phase, amplifying the value of contributions invested in fully franked Australian shares.
+- **Contribution timing and asset selection** are under the trustee's direct control, allowing precise [[tax-efficient-investing|tax-efficient]] sequencing of contributions, dividends, and [[capital-gains-tax-discount|capital gains]].
 - **Re-contribution and estate planning** integrate with the SMSF's binding death benefit nominations.
 
 See [[smsf]] for the structural mechanics, trustee duties, and compliance obligations that govern how these contribution strategies are executed in a self-managed fund.
@@ -346,7 +346,6 @@ See [[smsf]] for the structural mechanics, trustee duties, and compliance obliga
 - [[compounding]]
 - [[dollar-cost-averaging]]
 - [[capital-gains-tax-discount]]
-- [[franking-credits]]
 - [[stage-3-tax-cuts]]
 - [[risk-management]]
 

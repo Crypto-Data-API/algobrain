@@ -13,13 +13,8 @@ related:
   - "[[macroeconomics]]"
   - "[[interest-rates]]"
   - "[[bond-yields-and-stock-prices]]"
-  - "[[earnings-yield]]"
   - "[[capital-asset-pricing-model]]"
-  - "[[dcf-analysis]]"
   - "[[treasuries]]"
-  - "[[stocks]]"
-  - "[[price-to-earnings]]"
-  - "[[value-vs-growth-investing]]"
 ---
 
 The **equity risk premium (ERP)** is the extra return investors demand for holding stocks instead of a "risk-free" government bond. It is the single number that links the bond market to the stock market: a stock's fair value is the present value of its future cash flows discounted at the risk-free rate *plus* the equity risk premium. This page answers the practical question for a stock investor — **"why does what bonds pay change what my stocks are worth?"**
@@ -43,7 +38,7 @@ A high-beta name (volatile, economically sensitive) carries a larger effective p
 
 ## Why It Matters for *My* Stocks
 
-The ERP is the bridge in the valuation chain. Stock prices are the discounted value of future cash flows (see [[dcf-analysis]]):
+The ERP is the bridge in the valuation chain. Stock prices are the discounted value of future cash flows (see dcf-analysis):
 
 ```
 price  =  Σ  cash_flow_t / (1 + r)^t       where  r = risk_free_rate + equity_risk_premium
@@ -73,13 +68,13 @@ A quick back-of-envelope proxy many investors watch is the **earnings-yield spre
 ERP_proxy  ≈  S&P 500 earnings yield  −  10-year Treasury yield
 ```
 
-See [[earnings-yield]] for the mechanics and the important caveats (it mixes a real and a nominal number, so it is a sentiment gauge, not a precise tool).
+See earnings-yield for the mechanics and the important caveats (it mixes a real and a nominal number, so it is a sentiment gauge, not a precise tool).
 
 ## Worked Illustration (Hypothetical)
 
 Suppose a broad index is expected to deliver a 7% earnings yield and the 10-year Treasury yields 3%. The implied ERP proxy is **7% − 3% = 4%**. Now imagine the Treasury yield climbs to 5% while expected earnings are unchanged:
 
-- If investors keep demanding the *same* 4% premium, the required return rises to 9%. To deliver a 9% earnings yield from unchanged earnings, the **index price must fall** (a higher earnings yield means a lower [[price-to-earnings|P/E]]).
+- If investors keep demanding the *same* 4% premium, the required return rises to 9%. To deliver a 9% earnings yield from unchanged earnings, the **index price must fall** (a higher earnings yield means a lower P/E).
 - Alternatively, if prices don't move, the realized premium has *shrunk* to 2% — stocks have become less attractive relative to bonds.
 
 Either way, a rise in the risk-free rate squeezes the cushion that equities offer over bonds. (These numbers are illustrative, not a forecast.)
@@ -93,7 +88,7 @@ Either way, a rise in the risk-free rate squeezes the cushion that equities offe
 
 ## What It Means for Positioning
 
-- A **thin ERP** (stocks barely out-yield bonds) means you are being paid little for equity risk — a reason for caution, more diversification, or favouring [[value-vs-growth-investing|value over long-duration growth]].
+- A **thin ERP** (stocks barely out-yield bonds) means you are being paid little for equity risk — a reason for caution, more diversification, or favouring value over long-duration growth.
 - A **fat ERP** (stocks yield far more than bonds) historically signals better long-run equity returns — the classic case for leaning in.
 - Because the ERP is partly driven by the risk-free rate, **rising bond yields are a headwind for stock valuations** unless earnings growth or a falling premium offsets them. This is the mechanism behind [[bond-yields-and-stock-prices|"stocks vs the 10-year yield"]].
 
@@ -110,12 +105,7 @@ Either way, a rise in the risk-free rate squeezes the cushion that equities offe
 - [[interest-rates]] — the risk-free rate, half of the required-return formula
 - [[bond-yields-and-stock-prices]] — how the 10-year yield competes with stocks
 - [[capital-asset-pricing-model]] — scales the market ERP to a single stock via beta
-- [[dcf-analysis]] — where the discount rate (risk-free + ERP) is applied
-- [[earnings-yield]] — the basis of the earnings-yield-spread ERP proxy
-- [[price-to-earnings]] — multiples move inversely to the required return
-- [[value-vs-growth-investing]] — duration and ERP sensitivity differ by style
 - [[treasuries]] — the risk-free benchmark
-- [[stocks]] — the asset class the premium compensates you for holding
 
 ## Sources
 

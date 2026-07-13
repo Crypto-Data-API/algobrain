@@ -8,7 +8,7 @@ tags: [anomalies, index-inclusion, structural, market-microstructure]
 aliases: ["Index Effect", "Index Reconstitution", "S&P 500 Inclusion"]
 domain: [anomalies, market-microstructure]
 difficulty: intermediate
-related: ["[[anomalies-overview]]", "[[index-arbitrage]]", "[[etf-arbitrage]]", "[[edge-taxonomy]]"]
+related: ["[[anomalies-overview]]", "[[etf-arbitrage]]", "[[edge-taxonomy]]"]
 ---
 
 # Index Inclusion Effect
@@ -118,7 +118,6 @@ These observations have shaped how academic finance thinks about market efficien
 
 ## Strategies That Implement It
 
-- [[index-arbitrage]] — direct implementation
 - [[etf-arbitrage]] — related ETF creation/redemption flows
 - [[expiration-and-rebalancing-flows]] — broader rebalancing flow strategy
 - [[structural-forced-selling]] — exploits forced exits
@@ -135,7 +134,6 @@ These observations have shaped how academic finance thinks about market efficien
 ## Related
 
 - [[anomalies-overview]]
-- [[index-arbitrage]]
 - [[etf-arbitrage]]
 - [[expiration-and-rebalancing-flows]]
 - [[structural-forced-selling]]

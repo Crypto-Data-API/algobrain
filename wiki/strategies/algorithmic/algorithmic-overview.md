@@ -27,16 +27,13 @@ Algorithmic trading is the family of strategies in which code — not discretion
 - [[algorithmic-trading]] — Foundations of automated trading systems: architecture, signal pipelines, execution
 - [[trend-following-cta]] — The managed-futures approach that has captured macro trends, uncorrelated with equities, for 40+ years
 - [[factor-investing]] — Harvesting systematic risk premia (value, momentum, quality, size) distilled from decades of academic research
-- [[long-short-equity]] — Market-neutral or net-biased equity books built from systematic stock ranking
 - [[black-litterman]] — Bayesian portfolio construction blending market equilibrium with active views
 - [[cppi]] — Constant proportion portfolio insurance: rule-based downside protection with upside participation
 - [[risk-budgeting]] — Allocating capital by risk contribution rather than notional weight
 - [[portable-alpha]] — Separating beta exposure (via derivatives) from an independent alpha engine
-- [[dispersion-trading]] — Selling index volatility against single-name volatility to harvest the correlation premium
 - [[basis-trading]] — Capturing spot-futures spreads, from bond basis to crypto cash-and-carry
 - [[commodity-index-rebalancing]] — Front-running predictable commodity index roll and rebalance flows
 - [[implementation-shortfall]] — Execution algorithms that minimize the gap between decision price and fill price
-- [[dark-pool-trading]] — Executing in non-displayed venues to reduce market impact and information leakage
 
 ### DeFi Yield & Liquidity
 

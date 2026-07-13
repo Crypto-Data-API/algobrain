@@ -13,10 +13,10 @@ source_file: "r2://trader-wiki/transcripts/2022-11-01-meet-dieter-the-doubler.md
 confidence: medium
 claims_count: 20
 aliases: ["Dieter the Doubler"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[options]]", "[[long-short-equity]]", "[[risk-management-overview]]"]
+related: ["[[anton-kreil]]", "[[options]]", "[[risk-management-overview]]"]
 ---
 
-Source summary of ITPM webinar featuring "Dieter," a Belgium-based ITPM mentoring program graduate who achieved a ~100% return in 6 months trading a [[long-short-equity]] [[options]] portfolio. Serves as an ITPM **marketing case study** demonstrating the mentoring program methodology. **Confidence note:** this is a promotional webinar showcasing a single successful student; the performance statistics were shown via on-screen brokerage data but are self-reported, unaudited, single-source, and selection-biased (ITPM showcases winners, not the full distribution of outcomes). All performance figures and vendor return *targets* are marked [MEDIUM]. Descriptions of the ITPM *method* and the four-stages-of-learning model are faithful summaries of what is taught and are marked [HIGH] as accurate records of the method, not as proof it works.
+Source summary of ITPM webinar featuring "Dieter," a Belgium-based ITPM mentoring program graduate who achieved a ~100% return in 6 months trading a long-short-equity [[options]] portfolio. Serves as an ITPM **marketing case study** demonstrating the mentoring program methodology. **Confidence note:** this is a promotional webinar showcasing a single successful student; the performance statistics were shown via on-screen brokerage data but are self-reported, unaudited, single-source, and selection-biased (ITPM showcases winners, not the full distribution of outcomes). All performance figures and vendor return *targets* are marked [MEDIUM]. Descriptions of the ITPM *method* and the four-stages-of-learning model are faithful summaries of what is taught and are marked [HIGH] as accurate records of the method, not as proof it works.
 
 ## Key Claims
 
@@ -46,7 +46,7 @@ Source summary of ITPM webinar featuring "Dieter," a Belgium-based ITPM mentorin
 ### Methodology and Process
 
 15. [HIGH] All trades are [[options]] (puts and calls) on individual stocks — never stock positions. Every trade is either a long put, long call, short put, or short call. (Source: Dieter showing trade log)
-16. [HIGH] Portfolio construction: [[long-short-equity]] options portfolio. Trades tracked in a detailed spreadsheet recording type (put/call), ticker, long/short, strike, expiry, entry/exit price, dates, contracts, and commissions. (Source: Dieter showing spreadsheet)
+16. [HIGH] Portfolio construction: long-short-equity options portfolio. Trades tracked in a detailed spreadsheet recording type (put/call), ticker, long/short, strike, expiry, entry/exit price, dates, contracts, and commissions. (Source: Dieter showing spreadsheet)
 17. [HIGH] Equity curve management: track realized P&L against an "ideal line" (target trajectory). Job as a trader is to "make the number at the bottom of the screen go higher — I didn't say lower." (Source: Kreil's direct statement)
 18. [HIGH] "Managing the business" — professionals manage statistics (win rate, R-score, Sharpe) not individual trades. "This is the difference between professional traders and retail traders — we have a professional process." (Source: Kreil's direct statement)
 
@@ -57,15 +57,11 @@ Source summary of ITPM webinar featuring "Dieter," a Belgium-based ITPM mentorin
 
 ## Entities Mentioned
 
-- [[itpm]] — mentoring program provider
 - [[anton-kreil]] — mentor in this case study
-- [[lululemon]] — first trade during mentoring
-- [[splunk]] — second trade during mentoring
 
 ## Key Concepts
 
 - [[options]] — all trades structured as options, not stock
-- [[long-short-equity]] — core portfolio strategy
 - [[risk-management-overview|Risk Management]] — R-score, Sharpe ratio, equity curve
 - [[trading-psychology]] — emotional detachment, managing the business
 

@@ -13,11 +13,9 @@ related:
   - "[[ai-driven-demand-destruction]]"
   - "[[capital-vs-labor-asymmetry]]"
   - "[[legal-services-ai-disruption]]"
-  - "[[ai-capex-vs-cash-flow-divergence]]"
-  - "[[reits]]"
   - "[[mortgages]]"
 domain: [risk-management, market-microstructure, behavioral-finance]
-prerequisites: ["[[reits]]", "[[market-cycles]]"]
+prerequisites: ["[[market-cycles]]"]
 difficulty: intermediate
 ---
 
@@ -65,7 +63,7 @@ The 2020-2024 office stress narrative was about *where workers sit* — workers 
 - Mixed-use buildings with retail, residential, and office components (option value via conversion)
 - Buildings with floorplates suitable for laboratory, research, or specialized residential conversion
 
-These properties hold value or modestly appreciate. Examples in the existing wiki coverage: [[boston-properties]] / [[bxp]] portfolio is concentrated in trophy CBD assets, mixing Tier 1 exposure with secondary tech-hub exposure.
+These properties hold value or modestly appreciate. Examples in the existing wiki coverage: boston-properties / bxp portfolio is concentrated in trophy CBD assets, mixing Tier 1 exposure with secondary tech-hub exposure.
 
 ### Tier 2: Commodity / Work-Container Properties
 
@@ -85,9 +83,9 @@ These properties face structural demand contraction. Cap rates expand; valuation
 
 ### Long Side
 
-- **Data-center REITs** as conversion candidates and as direct beneficiaries of AI capex: [[digital-realty]] and [[equinix]] capture the [[ai-data-center-power-demand]] thesis directly. Caveat: also exposed to [[ai-capex-vs-cash-flow-divergence]] Scenario 3 risk
-- **Industrial / logistics REITs**: [[duke-realty]] (now part of larger industrial complex) — benefits from continued e-commerce demand and partial office-to-industrial conversion
-- **Mixed-use / residential REITs**: [[invitation-homes]] (single-family rental) — captures any office-to-residential conversion and benefits from continued residential demand even as office stresses
+- **Data-center REITs** as conversion candidates and as direct beneficiaries of AI capex: digital-realty and equinix capture the [[ai-data-center-power-demand]] thesis directly. Caveat: also exposed to ai-capex-vs-cash-flow-divergence Scenario 3 risk
+- **Industrial / logistics REITs**: duke-realty (now part of larger industrial complex) — benefits from continued e-commerce demand and partial office-to-industrial conversion
+- **Mixed-use / residential REITs**: invitation-homes (single-family rental) — captures any office-to-residential conversion and benefits from continued residential demand even as office stresses
 
 ### Pair Trades
 
@@ -128,14 +126,9 @@ Office leases roll on 5-10-year cycles, so stranding repricing is gradual:
 - [[ai-driven-demand-destruction]] — broader demand cascade
 - [[capital-vs-labor-asymmetry]] — labor-share collapse driving the office demand collapse
 - [[legal-services-ai-disruption]] — Big-Law-dependent CBD office exposure
-- [[ai-capex-vs-cash-flow-divergence]] — data-center REIT risk on the long side
-- [[reits]], [[mortgages]], [[recession]]
-- [[boston-properties]], [[bxp]] — diversified office REIT exposure
-- [[digital-realty]], [[equinix]] — data-center REIT long candidates
-- [[duke-realty]] — industrial REIT
-- [[invitation-homes]] — residential REIT
+- reits, [[mortgages]], [[recession]]
 - [[contagion]], [[systemic-risk]], [[crashes]]
-- [[citrini-research]], [[citrini-2028-global-intelligence-crisis]]
+- citrini-research, [[citrini-2028-global-intelligence-crisis]]
 
 ## Sources
 

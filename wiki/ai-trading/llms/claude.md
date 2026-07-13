@@ -6,7 +6,7 @@ updated: 2026-06-10
 status: good
 tags: [llm, ai-trading, machine-learning, anthropic, nlp]
 aliases: ["Claude AI", "Claude Opus", "Claude Sonnet", "Claude Haiku", "Claude Fable", "Anthropic Claude"]
-related: ["[[anthropic]]", "[[llm-market-analysis]]", "[[ai-trading]]", "[[ai-trading-overview]]", "[[gpt]]", "[[gemini]]", "[[openai]]", "[[earnings-call-analysis]]", "[[nlp-sentiment-analysis]]", "[[ai-trading-agents]]", "[[finbert]]"]
+related: ["[[anthropic]]", "[[llm-market-analysis]]", "[[ai-trading]]", "[[ai-trading-overview]]", "[[gpt]]", "[[gemini]]", "[[openai]]", "[[nlp-sentiment-analysis]]", "[[ai-trading-agents]]", "[[finbert]]"]
 entity_type: ai-model
 website: "https://claude.ai"
 ---
@@ -67,7 +67,7 @@ The newest and top-most tier, introduced in 2026 above Opus. **Claude Fable 5** 
 
 Real-world use cases observed in 2025-2026:
 
-- **Earnings call analysis.** Feed the full transcript and the prior-quarter transcript; ask for a structured diff of guidance, tone changes, and management hedging. See [[earnings-call-analysis]].
+- **Earnings call analysis.** Feed the full transcript and the prior-quarter transcript; ask for a structured diff of guidance, tone changes, and management hedging. See earnings-call-analysis.
 - **SEC filing differencing.** Compare risk-factor sections across consecutive 10-Ks to surface new material risks. The 200K-1M context window enables side-by-side comparison without splitting the document.
 - **News and headline classification.** Zero-shot classification at scale into bullish / bearish / neutral or into more nuanced taxonomies. Often paired with [[finbert]] as an ensemble.
 - **Multi-document research synthesis.** Aggregate broker reports, conference call transcripts, and trade-press articles to produce a research memo on a single thesis.
@@ -115,7 +115,7 @@ For trading research, the practical upshot of 4.8 over 4.7 is **longer, more rel
 
 The single most important fact for traders is that **Fable 5 is the safety-wrapped, publicly accessible release of the Mythos-class model the wiki has been tracking** (see [[2026-04-07-claude-mythos-project-glasswing]] and [[2026-06-01-perplexity-mythos-public-rollout]]). Fable 5 and the concurrently-released, access-restricted **Claude Mythos 5** share the same underlying base model: Mythos 5 (Project Glasswing partners only) runs *without* the safety classifiers; Fable 5 wraps the identical system in a safety shell "safe for general use." On standard capability benchmarks the two score within 1-3 points of each other, so when Fable's classifiers don't trigger its output is effectively indistinguishable from Anthropic's internal frontier.
 
-This resolves the catalyst-window thesis behind [[mythos-release-window-exploit-short]] and [[mythos-capability-overhang-vol]] — the "Mythos public rollout" those nodes were positioned around **materialized on 9 June 2026** as Fable 5.
+This resolves the catalyst-window thesis behind [[mythos-release-window-exploit-short]] and mythos-capability-overhang-vol — the "Mythos public rollout" those nodes were positioned around **materialized on 9 June 2026** as Fable 5.
 
 ### Specifications and commercial terms
 
@@ -156,8 +156,8 @@ Two caveats matter: **Finance Agent v2 is the one finance benchmark where Fable 
 
 - **Capability ceiling for the hardest agentic finance work.** Fable 5 is the natural reasoning core for deep multi-document due diligence, complex DCF / credit modelling, and long-horizon research loops where an error is expensive — and where a 2× price premium is immaterial next to the cost of being wrong on a position.
 - **A third tier in the routing stack.** Production stacks already route bulk work (headline screening, classification) to Haiku / Sonnet and reserve Opus for hard cases. Analysts recommend sending ~80% of traffic to Opus 4.8 (or cheaper) and reserving Fable 5 for the hardest ~10-20% where its uplift changes outcomes.
-- **The Mythos overhang made tradeable.** Because Fable 5 is the public Mythos rollout, its release is the realization of the AI-vulnerability-discovery catalyst the wiki's [[mythos-release-window-exploit-short|exploit-window]] and [[mythos-capability-overhang-vol|capability-overhang vol]] strategies anticipate — with Mythos 5 (the un-nerfed Glasswing version, "strongest cybersecurity capabilities of any model in the world") sitting one access-tier above it.
-- **AI-adjacent equities.** Each frontier release sustains GPU demand (Anthropic's SpaceX deal alone cites 220,000+ NVIDIA GPUs), benefits the cloud hosts ([[amazon|Amazon]], [[microsoft|Microsoft]], [[google|Google]]), and pressures [[gpt|GPT]]-5.x and [[gemini|Gemini]] 3.x in high-end enterprise. Anthropic's **Series H ($65B at ~$965B post-money, late May 2026)** and reported confidential IPO filing make the model layer itself an emerging asset class — see [[anthropic]].
+- **The Mythos overhang made tradeable.** Because Fable 5 is the public Mythos rollout, its release is the realization of the AI-vulnerability-discovery catalyst the wiki's [[mythos-release-window-exploit-short|exploit-window]] and capability-overhang vol strategies anticipate — with Mythos 5 (the un-nerfed Glasswing version, "strongest cybersecurity capabilities of any model in the world") sitting one access-tier above it.
+- **AI-adjacent equities.** Each frontier release sustains GPU demand (Anthropic's SpaceX deal alone cites 220,000+ NVIDIA GPUs), benefits the cloud hosts (Amazon, Microsoft, Google), and pressures [[gpt|GPT]]-5.x and [[gemini|Gemini]] 3.x in high-end enterprise. Anthropic's **Series H ($65B at ~$965B post-money, late May 2026)** and reported confidential IPO filing make the model layer itself an emerging asset class — see [[anthropic]].
 
 ## Pricing and Access
 
@@ -202,7 +202,6 @@ Trading research workflows often use multiple models in ensemble: Claude for lon
 - [[gpt]] — primary commercial competitor
 - [[gemini]] — Google's LLM family
 - [[openai]] — primary competitive lab
-- [[earnings-call-analysis]] — concrete use case
 - [[nlp-sentiment-analysis]] — broader context
 - [[ai-trading-agents]] — agent architectures using Claude as reasoning core
 - [[finbert]] — financial-domain specialist often used alongside Claude for ensemble sentiment scoring

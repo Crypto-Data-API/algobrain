@@ -63,7 +63,7 @@ The 5-year yield falls ~80 bps *with no change to today's policy rate*. That rep
 
 - **Trade the surprise, not the headline.** Before each [[fomc|FOMC]] meeting, derive the market-implied path from [[fed-funds-futures]] / SOFR and the OIS strip; the tradeable edge is the *gap* between that and the statement, dots, and press conference. A "hold" can be hawkish or dovish depending on what was priced.
 - **Map the reaction across the curve.** Guidance hits the front and belly hardest; position 2s/5s steepeners or flatteners and SOFR-strip trades rather than betting on the spot decision.
-- **Rotate equity factors on the signal.** Dovish "lower-for-longer" guidance favours long-duration [[growth-stocks|growth]] and unprofitable tech; hawkish guidance favours [[value-investing|value]] and short-duration cash-flow names. See [[equity-duration]].
+- **Rotate equity factors on the signal.** Dovish "lower-for-longer" guidance favours long-duration growth and unprofitable tech; hawkish guidance favours value and short-duration cash-flow names. See [[equity-duration]].
 - **Pre-position vol.** The press conference and dot-plot release are scheduled vol events; the [[options|options surface]] embeds an FOMC-day "kink." Framework *changes* (not routine moves) are the largest repricings — keep dry powder for them.
 - **Watch credibility.** The most violent moves come when guidance is *abandoned* under pressure (a credibility break), as in 2013's taper tantrum — these are regime shifts, not noise.
 

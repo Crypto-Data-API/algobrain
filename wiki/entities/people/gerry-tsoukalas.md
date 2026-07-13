@@ -12,7 +12,7 @@ entity_type: person
 headquarters: "Boston, Massachusetts, USA"
 ---
 
-Gerry Tsoukalas is a **Full Professor in the Information Systems Department at Boston University's Questrom School of Business**, a Senior Fellow at the [[wharton|Wharton School]], and co-author, with [[brett-hemenway-falk|Brett Hemenway Falk]] of Penn, of the **AI Layoff Trap** mathematical model. A former Morgan Stanley structured-products trader, his research focuses on digital platforms, AI/ML analytics, and blockchain economics — and the paper's mathematical proof framework rattled markets when financial press picked it up in early 2026 (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
+Gerry Tsoukalas is a **Full Professor in the Information Systems Department at Boston University's Questrom School of Business**, a Senior Fellow at the Wharton School, and co-author, with [[brett-hemenway-falk|Brett Hemenway Falk]] of Penn, of the **AI Layoff Trap** mathematical model. A former Morgan Stanley structured-products trader, his research focuses on digital platforms, AI/ML analytics, and blockchain economics — and the paper's mathematical proof framework rattled markets when financial press picked it up in early 2026 (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
 
 ## Overview
 
@@ -55,7 +55,6 @@ The paper became one of several institutional reference points — alongside the
 - [[ai-layoff-trap]]
 - [[brett-hemenway-falk]]
 - [[pigouvian-automation-tax]]
-- [[wharton]]
 - [[capital-vs-labor-asymmetry]]
 - [[ai-driven-demand-destruction]]
 - [[citrini-2028-global-intelligence-crisis]]

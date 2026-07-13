@@ -34,7 +34,7 @@ The protocol gained early visibility through a Binance Wallet IDO (initial DEX o
 
 On-chain perpetual DEXs typically use one of two designs, and MYX sits in the pool/oracle-priced family rather than a pure central-limit-order-book model:
 
-- **Pooled liquidity / oracle pricing** — liquidity providers deposit assets into a shared pool that acts as the counterparty to traders. Trade prices are sourced from external [[oracle|oracles]] rather than from an internal order book, which reduces price impact for the trader (the protocol advertises low-slippage execution) but transfers directional risk to the liquidity pool.
+- **Pooled liquidity / oracle pricing** — liquidity providers deposit assets into a shared pool that acts as the counterparty to traders. Trade prices are sourced from external oracles rather than from an internal order book, which reduces price impact for the trader (the protocol advertises low-slippage execution) but transfers directional risk to the liquidity pool.
 - **Leverage and liquidations** — traders post collateral and select leverage; positions that breach maintenance-margin thresholds are liquidated, with the pool and liquidators absorbing the mechanics. This is closely related to how an [[automated-market-maker|AMM]]-style or pool-backed perp venue manages risk.
 
 Because the pool is the counterparty, the health of a pooled-liquidity perp DEX depends on balanced long/short open interest and an effective funding mechanism; persistent one-sided positioning is a structural risk to liquidity providers.
@@ -43,7 +43,7 @@ Because the pool is the counterparty, the health of a pooled-liquidity perp DEX 
 
 MYX markets a proprietary **MPM (Matching Pool Mechanism)** design intended to combine pooled-liquidity depth with order-book-like pricing. The salient features of an oracle/pool-priced perp DEX in this family:
 
-- **Zero/low price-impact execution** — because fills are priced off external [[oracle|oracle]] feeds rather than walking an internal order book, a trader's slippage is minimal regardless of size (up to pool limits). This is the headline UX advantage versus thin on-chain CLOBs.
+- **Zero/low price-impact execution** — because fills are priced off external oracle feeds rather than walking an internal order book, a trader's slippage is minimal regardless of size (up to pool limits). This is the headline UX advantage versus thin on-chain CLOBs.
 - **Pool as counterparty** — the liquidity pool takes the other side of aggregate trader positioning. The pool profits from fees and from trader losses but bears the directional risk when traders are net-correctly-positioned; this is the same global-LP risk model as [[gmx|GMX]]'s GLP.
 - **[[funding-rate|Funding]] + dynamic fees** — funding payments and dynamic open/close fees are the levers that nudge open interest back toward balance and compensate the pool for skew, since there is no natural maker on the other side to absorb imbalance.
 - **Cross-chain reach** — MYX is associated primarily with the [[bnb|BNB Chain]] ecosystem (and has pursued multi-chain deployment), targeting the high-retail-traffic BNB user base seeded via its Binance Wallet IDO.
@@ -89,7 +89,7 @@ MYX is the protocol's [[governance-token|governance token]], with the three stan
 
 - **Severe recent drawdown / momentum risk** — MYX fell **~36.9% in the trailing 7 days** and **~12.7% in 24 hours** to 2026-06-21, and trades more than 98% below its 2025 all-time high. This signals weak demand, potential unlock/sell pressure, and elevated volatility.
 - **Micro-cap liquidity** — at a ~$21.8M market cap (rank #783), the token is thinly capitalized; large orders can move price sharply and exit liquidity can evaporate in stress.
-- **Smart-contract and oracle risk** — as with any [[defi]] derivatives protocol, bugs, exploits, or [[oracle]] manipulation can cause losses; verify audit status independently.
+- **Smart-contract and oracle risk** — as with any [[defi]] derivatives protocol, bugs, exploits, or oracle manipulation can cause losses; verify audit status independently.
 - **Counterparty/pool risk** — in pooled-liquidity perp designs, liquidity providers bear directional and funding risk; imbalanced open interest can impair the pool.
 - **Leverage risk for users** — perpetual trading with leverage can result in rapid liquidation and total loss of collateral.
 - **Emissions / unlock overhang** — a large gap between circulating and max supply implies future dilution.

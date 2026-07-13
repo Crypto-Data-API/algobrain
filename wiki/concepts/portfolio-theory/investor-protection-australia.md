@@ -6,12 +6,12 @@ updated: 2026-06-21
 status: excellent
 tags: [regulation, australia, education, consumer-protection]
 aliases: ["Australian Investor Protection", "AFCA", "Investor Compensation"]
-related: ["[[chess-sponsorship]]", "[[asic]]", "[[australian-regulatory-framework]]", "[[afsl]]", "[[australian-investing]]", "[[risk-management]]", "[[regulation]]", "[[commsec]]", "[[selfwealth]]", "[[cmc-markets]]", "[[ig-markets]]", "[[vasp-regulation]]"]
+related: ["[[asic]]", "[[australian-regulatory-framework]]", "[[afsl]]", "[[risk-management]]", "[[regulation]]", "[[vasp-regulation]]"]
 domain: [regulation]
 difficulty: beginner
 ---
 
-Australia provides multiple layers of investor protection for retail investors — including direct share ownership through [[chess-sponsorship|CHESS]], free dispute resolution through AFCA, compensation through the National Guarantee Fund (NGF), and product regulation by [[asic|ASIC]]. However, these protections have significant boundaries: they primarily apply to regulated products traded through AFSL-holding brokers on Australian markets. Crypto on unregistered exchanges, [[defi]] protocols, international shares in custodial accounts, and unlicensed financial products fall outside most protections. Understanding what is and is not protected is essential for managing risk.
+Australia provides multiple layers of investor protection for retail investors — including direct share ownership through CHESS, free dispute resolution through AFCA, compensation through the National Guarantee Fund (NGF), and product regulation by [[asic|ASIC]]. However, these protections have significant boundaries: they primarily apply to regulated products traded through AFSL-holding brokers on Australian markets. Crypto on unregistered exchanges, [[defi]] protocols, international shares in custodial accounts, and unlicensed financial products fall outside most protections. Understanding what is and is not protected is essential for managing risk.
 
 > **Not legal or financial advice.** This page is general educational information about the Australian [[australian-regulatory-framework|investor-protection framework]]. Compensation caps, thresholds, and scheme rules are **indexed and amended frequently** — figures below are indicative as at the dates noted. Confirm current limits and eligibility directly with [[asic|ASIC]] (asic.gov.au), AFCA (afca.org.au), the ASX/SEGC, or a licensed adviser before relying on any figure.
 
@@ -25,7 +25,7 @@ Australian retail protection is best understood as five overlapping layers, each
 
 | Layer | Mechanism | Protects against | Administered by | Legislative basis |
 |---|---|---|---|---|
-| **1. Structural ownership** | [[chess-sponsorship\|CHESS]] / HIN | Broker insolvency (your shares survive) | ASX | Corporations Act, ASX rules |
+| **1. Structural ownership** | CHESS / HIN | Broker insolvency (your shares survive) | ASX | Corporations Act, ASX rules |
 | **2. Asset segregation** | Client money trust accounts | Misuse / commingling of client cash | [[asic\|ASIC]] | Corporations Act Part 7.8 |
 | **3. Last-resort compensation** | National Guarantee Fund (NGF) | Cash/unsettled trades lost in participant insolvency | SEGC | Corporations Act, SEGC rules |
 | **4. Conduct & product rules** | Product intervention, DDO, best-interests duty | Mis-selling, unsuitable products, bad advice | [[asic\|ASIC]] | Corporations Act, ASIC Act |
@@ -35,13 +35,13 @@ The recurring theme: **all five layers attach to AFSL-holding entities and on-ma
 
 ## CHESS Sponsorship — Direct Ownership
 
-[[chess-sponsorship|CHESS]] (Clearing House Electronic Subregister System) is the foundation of Australian investor protection for ASX-traded securities:
+CHESS (Clearing House Electronic Subregister System) is the foundation of Australian investor protection for ASX-traded securities:
 
 - When you buy shares through a CHESS-sponsored broker, your ownership is registered **directly in your name** on the ASX subregister
 - You receive a unique **Holder Identification Number (HIN)** — your shares are tied to you, not to your broker
 - **If your broker fails**: Your shares are safe — they are registered to your HIN, not to the broker's balance sheet. You simply transfer your HIN to a new broker
 - **No pooling**: Unlike the US "street name" system where a broker holds all client shares in its own name and maintains internal records of who owns what, CHESS creates a direct legal ownership record for each investor
-- CHESS-sponsored brokers include: [[commsec]], [[selfwealth]], [[nabtrade]], [[bell-direct]], [[ig-markets]], [[cmc-markets]], [[stake]] (for ASX), [[superhero]] (since 2023)
+- CHESS-sponsored brokers include: commsec, selfwealth, nabtrade, bell-direct, ig-markets, cmc-markets, stake (for ASX), superhero (since 2023)
 
 CHESS is widely regarded as one of the strongest share ownership protection systems in the world.
 
@@ -114,7 +114,7 @@ ASIC's client money regime (Corporations Act Part 7.8) requires AFSL holders to:
 - **Notification**: ASIC must be notified immediately if there is any shortfall in client money
 
 ### Important Limitation
-Client money rules apply to **money** (cash), not to **securities** — securities protection comes from CHESS (for ASX products) and the NGF. For CFD accounts ([[cmc-markets]], [[ig-markets]]), client money rules are particularly important because all client funds are held as cash (there are no CHESS-registered securities in a CFD account).
+Client money rules apply to **money** (cash), not to **securities** — securities protection comes from CHESS (for ASX products) and the NGF. For CFD accounts (cmc-markets, ig-markets), client money rules are particularly important because all client funds are held as cash (there are no CHESS-registered securities in a CFD account).
 
 ## Negative Balance Protection
 
@@ -206,7 +206,7 @@ These schemes are sometimes confused. They address different stages of the same 
 
 | Question | Scheme |
 |---|---|
-| "My broker collapsed and my shares were in my name." | [[chess-sponsorship\|CHESS]] (no claim — shares are yours) |
+| "My broker collapsed and my shares were in my name." | CHESS (no claim — shares are yours) |
 | "My broker collapsed and there's a shortfall in my cash/unsettled trades." | NGF (last-resort fund) |
 | "My broker is solvent but mishandled my money / gave bad advice / refused a claim." | AFCA (dispute resolution) |
 | "The product was unsuitable / mis-sold to me." | [[asic\|ASIC]] conduct rules + AFCA |
@@ -226,17 +226,11 @@ A common misconception is that AFCA or the NGF insures against *losses*. Neither
 
 ## Related
 
-- [[chess-sponsorship]]
 - [[asic]]
 - [[australian-regulatory-framework]]
 - [[afsl]]
-- [[australian-investing]]
 - [[risk-management]]
 - [[regulation]]
-- [[commsec]]
-- [[selfwealth]]
-- [[cmc-markets]]
-- [[ig-markets]]
 - [[vasp-regulation]]
 - [[australian-investor-tax]]
 - [[risk-management]]

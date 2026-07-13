@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, derivatives, volatility, risk-management]
 aliases: ["Variance Swap", "VS", "Variance Contract"]
-related: ["[[variance-swaps]]", "[[volatility-swap]]", "[[log-contract]]", "[[carr-madan-replication]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[volatility-skew]]", "[[vix]]", "[[vix-futures]]", "[[vega]]", "[[gamma]]", "[[long-vol-vs-short-vol]]", "[[jensens-inequality]]", "[[options-pinning]]", "[[pin-risk]]", "[[vega-budgeting]]", "[[dispersion-trade]]", "[[delta-hedged-options]]"]
+related: ["[[variance-swaps]]", "[[volatility-swap]]", "[[log-contract]]", "[[carr-madan-replication]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[volatility-skew]]", "[[vix]]", "[[vix-futures]]", "[[vega]]", "[[gamma]]", "[[long-vol-vs-short-vol]]", "[[jensens-inequality]]", "[[options-pinning]]", "[[pin-risk]]", "[[vega-budgeting]]", "[[delta-hedged-options]]"]
 domain: [risk-management, derivatives, volatility]
 prerequisites: ["[[implied-volatility]]", "[[black-scholes]]"]
 difficulty: advanced
@@ -249,7 +249,7 @@ The singular variance swap is the workhorse of:
 
 **3. Forward-variance and term-structure trades.** A [[forward-variance-swap|forward variance swap]] pays the realised variance over a future window (e.g., months 6-9 starting today). It is constructed from the difference between two spot variance swaps. Forward variance is the canonical instrument for trading the *vol term structure* — a carry trade between front-end and back-end vol.
 
-**4. Dispersion trading.** Selling index variance and buying single-name variance captures the [[dispersion-trade|implied-vs-realised correlation]] gap. The position is long single-name variance (which is dollar-weighted by index weights) and short index variance, with the difference being a clean correlation bet (see [[variance-swaps]]).
+**4. Dispersion trading.** Selling index variance and buying single-name variance captures the implied-vs-realised correlation gap. The position is long single-name variance (which is dollar-weighted by index weights) and short index variance, with the difference being a clean correlation bet (see [[variance-swaps]]).
 
 **5. Hedging structured-product short-vol exposure.** Bank desks that issue [[autocallables|autocallable]] notes, [[reverse-convertibles|reverse convertibles]], or [[principal-protected-notes|principal-protected notes]] absorb large amounts of vol from clients and hedge the residual with long-variance positions.
 
@@ -335,7 +335,6 @@ Key takeaways from the table:
 - [[vega]], [[gamma]] — the Greek exposures variance swaps embed
 - [[long-vol-vs-short-vol]] — variance swaps as the cleanest long-vol expression
 - [[jensens-inequality]] — the mathematical reason for the vol-vs-variance convexity adjustment
-- [[dispersion-trade]] — long single-name variance vs short index variance
 - [[forward-variance-swap]] — term-structure variance contracts
 - [[vega-budgeting]] — how to size a variance-swap position in a portfolio
 - [[options-pinning]], [[pin-risk]] — options-market microstructure (related but distinct)

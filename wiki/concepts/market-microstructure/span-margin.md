@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [margin, leverage, market-microstructure, risk-management, futures, options, derivatives]
 aliases: ["SPAN", "Standard Portfolio Analysis of Risk", "SPAN Margin", "CME SPAN", "SPAN 2"]
-related: ["[[portfolio-margin]]", "[[reg-t-margin]]", "[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[xiv-velocity-shares]]", "[[ljm-preservation-and-growth]]", "[[vix-futures]]", "[[short-strangle]]", "[[variance-swaps]]", "[[leverage]]", "[[forced-liquidation]]", "[[gap-risk]]", "[[cme-group]]", "[[ice]]", "[[clearing-house]]", "[[initial-margin]]", "[[maintenance-margin]]", "[[risk-management]]"]
+related: ["[[portfolio-margin]]", "[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[xiv-velocity-shares]]", "[[ljm-preservation-and-growth]]", "[[vix-futures]]", "[[short-strangle]]", "[[variance-swaps]]", "[[leverage]]", "[[forced-liquidation]]", "[[gap-risk]]", "[[cme-group]]", "[[clearing-house]]", "[[initial-margin]]", "[[maintenance-margin]]", "[[risk-management]]"]
 domain: [risk-management, market-microstructure, derivatives]
 prerequisites: ["[[futures]]", "[[options]]", "[[leverage]]"]
 difficulty: advanced
@@ -18,7 +18,7 @@ difficulty: advanced
 
 Pre-SPAN, futures margins were "strategy-based" -- exchanges defined fixed margin amounts for specific position structures (a long future, a short future, a long calendar spread, a short straddle, etc.) and summed the requirements across positions. The system was conservative but capital-inefficient: a portfolio long one future and short an offsetting future of similar risk paid full margin on both legs, even though the net risk was small.
 
-SPAN introduced **portfolio-level scenario analysis**. Instead of margining each position independently, the system revalues the entire portfolio across **16 standard scenarios** of price and volatility moves, identifies the worst loss, and sets margin equal to that loss (with adjustments for cross-product correlation and concentrated short-option exposure). This produces materially lower margin requirements for hedged or diversified portfolios -- and is the structural reason futures markets allow much higher gross leverage than [[reg-t-margin|Reg-T equity accounts]].
+SPAN introduced **portfolio-level scenario analysis**. Instead of margining each position independently, the system revalues the entire portfolio across **16 standard scenarios** of price and volatility moves, identifies the worst loss, and sets margin equal to that loss (with adjustments for cross-product correlation and concentrated short-option exposure). This produces materially lower margin requirements for hedged or diversified portfolios -- and is the structural reason futures markets allow much higher gross leverage than Reg-T equity accounts.
 
 SPAN is now the global standard. CME, ICE, Eurex, JSE, ASX, and most other major derivatives clearing houses use SPAN or close derivatives of it. The methodology is licensed from CME Group; exchanges configure their own scenario grids and parameters within the SPAN framework.
 
@@ -82,7 +82,7 @@ Long options have positive value; short options have negative value. SPAN credit
 
 ## SPAN vs Reg-T vs Portfolio Margin
 
-| Dimension | [[reg-t-margin|Reg-T]] | [[portfolio-margin|Portfolio Margin (TIMS)]] | SPAN |
+| Dimension | Reg-T | [[portfolio-margin|Portfolio Margin (TIMS)]] | SPAN |
 |---|---|---|---|
 | **Used for** | Equity options accounts <$110K, retail | Equity options accounts >$110K (US) | Futures and futures-options accounts globally |
 | **Methodology** | Strategy-based: fixed % per position | Risk-based: Theoretical Intermarket Margining System (TIMS) computes worst-case across price/vol scenarios | Risk-array-based across 16 scenarios |
@@ -164,14 +164,13 @@ This is the operational meaning of [[long-vol-vs-short-vol|"short vol is capital
 ## Related
 
 - [[portfolio-margin]] -- the equity-options-account analog (TIMS)
-- [[reg-t-margin]] -- the legacy strategy-based US retail framework
 - [[long-vol-vs-short-vol]] -- the strategy context where SPAN matters most
 - [[volmageddon]], [[vix-august-2024-spike]] -- canonical examples of the SPAN ratchet
 - [[xiv-velocity-shares]], [[ljm-preservation-and-growth]] -- vehicles destroyed by the SPAN ratchet
 - [[vix-futures]] -- the canonical SPAN-margined product where short-vol concentration risk lives
 - [[short-strangle]] -- the structure most affected by SPAN reprice-in-stress
 - [[variance-swaps]] -- OTC alternative; not SPAN-margined but follows analogous principles
-- [[cme-group]], [[ice]] -- the major exchanges and clearinghouses
+- [[cme-group]], ice -- the major exchanges and clearinghouses
 - [[clearing-house]] -- institutional context
 - [[initial-margin]], [[maintenance-margin]] -- adjacent margin concepts
 - [[forced-liquidation]] -- the operational consequence

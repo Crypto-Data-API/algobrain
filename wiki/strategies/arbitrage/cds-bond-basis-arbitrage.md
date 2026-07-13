@@ -20,12 +20,12 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.5
 breakeven_cost_bps: 15
-related: ["[[capital-structure-arbitrage]]", "[[credit-default-swap]]", "[[convertible-arbitrage]]", "[[repo-market]]", "[[ltcm-collapse-1998]]", "[[fixed-income-arbitrage]]", "[[dealer-balance-sheet]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[arbitrage]]"]
+related: ["[[credit-default-swap]]", "[[repo-market]]", "[[ltcm-collapse-1998]]", "[[fixed-income-arbitrage]]", "[[dealer-balance-sheet]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[arbitrage]]"]
 ---
 
 # CDS-Bond Basis Arbitrage
 
-CDS-Bond Basis Arbitrage trades the spread between a company's **cash bond spread** (yield over the matching Treasury or [[asset-swap-spread]]) and its **[[credit-default-swap|CDS]] spread** for the same maturity. In theory these should be equal because both instruments compensate for the same default risk. In practice a residual **basis** -- positive when CDS trades rich to bonds, negative when CDS trades cheap -- can be tens to hundreds of basis points. The classic **negative basis trade** buys the cash bond and buys CDS protection to "lock in" a riskless spread above Treasuries. It is a flagship [[fixed-income-arbitrage]] / [[convergence-arbitrage]] strategy and a sibling of [[capital-structure-arbitrage]] within [[relative-value-arbitrage]] — and its 2008 blowup is one of the most-studied cautionary tales of [[limits-to-arbitrage]].
+CDS-Bond Basis Arbitrage trades the spread between a company's **cash bond spread** (yield over the matching Treasury or [[asset-swap-spread]]) and its **[[credit-default-swap|CDS]] spread** for the same maturity. In theory these should be equal because both instruments compensate for the same default risk. In practice a residual **basis** -- positive when CDS trades rich to bonds, negative when CDS trades cheap -- can be tens to hundreds of basis points. The classic **negative basis trade** buys the cash bond and buys CDS protection to "lock in" a riskless spread above Treasuries. It is a flagship [[fixed-income-arbitrage]] / [[convergence-arbitrage]] strategy and a sibling of capital-structure-arbitrage within [[relative-value-arbitrage]] — and its 2008 blowup is one of the most-studied cautionary tales of [[limits-to-arbitrage]].
 
 At a glance:
 
@@ -192,10 +192,8 @@ Large -- multiple billions per name for IG, hundreds of millions for HY. Total s
 
 ## Related
 
-- [[capital-structure-arbitrage]]
 - [[credit-default-swap]]
 - [[repo-market]]
-- [[convertible-arbitrage]]
 - [[convergence-arbitrage]]
 - [[relative-value-arbitrage]]
 - [[ltcm-collapse-1998]]

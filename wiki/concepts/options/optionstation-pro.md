@@ -7,7 +7,6 @@ status: excellent
 tags: [options, derivatives, indicators, methodology]
 domain: [options]
 prerequisites:
-  - "[[tradestation]]"
   - "[[delta]]"
   - "[[gamma]]"
   - "[[theta]]"
@@ -15,7 +14,6 @@ prerequisites:
 difficulty: intermediate
 aliases: ["OptionStation", "OptionStation Pro", "OSP"]
 related:
-  - "[[tradestation]]"
   - "[[easylanguage]]"
   - "[[thinkorswim]]"
   - "[[iron-condors]]"
@@ -31,13 +29,13 @@ related:
 
 # OptionStation Pro
 
-OptionStation Pro is [[tradestation|TradeStation]]'s dedicated options analysis workspace — a multi-pane desktop window that combines a real-time option chain, a position builder, a P&L risk graph, a 3D volatility surface, scenario analysis, and Greeks aggregation in a single integrated view. It is what makes TradeStation a credible competitor to [[thinkorswim]] for serious options traders, and it is the front-end that EasyLanguage scripts hook into when they need chain data.
+OptionStation Pro is TradeStation's dedicated options analysis workspace — a multi-pane desktop window that combines a real-time option chain, a position builder, a P&L risk graph, a 3D volatility surface, scenario analysis, and Greeks aggregation in a single integrated view. It is what makes TradeStation a credible competitor to [[thinkorswim]] for serious options traders, and it is the front-end that EasyLanguage scripts hook into when they need chain data.
 
 ## At a glance
 
 | Attribute | Detail |
 |---|---|
-| Vendor | [[tradestation\|TradeStation]] |
+| Vendor | TradeStation |
 | Type | Options analysis + execution workspace (desktop) |
 | Cost | Free workspace inside the TradeStation desktop client (OPRA data fees apply) |
 | Data feed | OPRA real-time (subject to exchange fees) |
@@ -208,7 +206,6 @@ The decisive split: thinkorswim is the better pure analysis workbench but **does
 
 ## Related
 
-- [[tradestation]] — the host platform
 - [[easylanguage]] — programmatic counterpart that reads OptionStation's data
 - [[thinkorswim]] — Schwab/TDA competing tool with better polish, no native backtester
 - [[iron-condors]] — canonical structure built and managed in OptionStation Pro

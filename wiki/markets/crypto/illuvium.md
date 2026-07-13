@@ -14,7 +14,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[immutable]]", "[[gamefi]]", "
 
 # Illuvium
 
-**Illuvium** (ILV) is a suite of interconnected, AAA-aspiring blockchain games built on Ethereum and the [[immutable|Immutable]] Layer 2, combining high-production-value gameplay with verifiable on-chain asset ownership. The ILV token is used for [[staking]], protocol [[governance]] through a [[dao|DAO]], and capturing a share of in-game revenue. It is a flagship name in the [[gamefi|GameFi]] / [[play-to-earn]] sector.
+**Illuvium** (ILV) is a suite of interconnected, AAA-aspiring blockchain games built on Ethereum and the [[immutable|Immutable]] Layer 2, combining high-production-value gameplay with verifiable on-chain asset ownership. The ILV token is used for [[staking]], protocol governance through a [[dao|DAO]], and capturing a share of in-game revenue. It is a flagship name in the [[gamefi|GameFi]] / [[play-to-earn]] sector.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* In a broad crypto risk-off regime (BTC ~$64,508; Crypto [[fear-and-greed-index|Fear & Greed Index]] at 21, "Extreme Fear"), ILV traded around **$3.39**, ranked **#675** by market cap (~**$28.05M**), down **-3.81%** on the day and **-2.06%** over 7 days.
 

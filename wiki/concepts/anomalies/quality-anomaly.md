@@ -94,7 +94,7 @@ A simple 9-point composite quality score (Piotroski 2000) used to filter value s
 Combine value and quality screens. Avoids value traps while capturing both premiums. Now standard in most fundamental long-short funds.
 
 ### Earnings Quality
-Sub-component focused on accounting quality: how much of reported earnings is cash vs. accruals. Sloan (1996) showed low-accruals firms outperform high-accruals firms by ~10% per year — see [[accruals-anomaly]].
+Sub-component focused on accounting quality: how much of reported earnings is cash vs. accruals. Sloan (1996) showed low-accruals firms outperform high-accruals firms by ~10% per year — see accruals-anomaly.
 
 ## Current Viability
 
@@ -109,8 +109,6 @@ Pure long-short quality portfolios still earn 0.3-0.5 Sharpe in liquid markets, 
 
 ## Strategies That Implement It
 
-- [[value-investing-strategy]] — when combined with quality filters
-- [[long-short-equity]] — when long quality, short junk
 - [[fundamental-technical-fusion]]
 
 ## Sources
@@ -126,5 +124,4 @@ Pure long-short quality portfolios still earn 0.3-0.5 Sharpe in liquid markets, 
 - [[anomalies-overview]]
 - [[quality-factors]]
 - [[value-anomaly]]
-- [[accruals-anomaly]]
 - [[edge-taxonomy]]

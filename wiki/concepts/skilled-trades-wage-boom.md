@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [education, ai-trading, behavioral-finance, capex-cycle, machine-learning]
 aliases: ["Blue-Collar Boom", "Trades Wage Inflation", "Data Center Trades Premium"]
-related: ["[[ai-data-center-power-demand]]", "[[ai-layoff-trap]]", "[[capital-vs-labor-asymmetry]]", "[[skill-bifurcation]]", "[[ai-driven-demand-destruction]]", "[[ai-sector-rotation-energy-hedge]]", "[[quanta-services]]", "[[caterpillar]]", "[[eaton]]", "[[emerson-electric]]", "[[ge-vernova]]", "[[constellation-energy]]", "[[capex-cycle]]"]
+related: ["[[ai-data-center-power-demand]]", "[[ai-layoff-trap]]", "[[capital-vs-labor-asymmetry]]", "[[skill-bifurcation]]", "[[ai-driven-demand-destruction]]", "[[capex-cycle]]"]
 domain: [behavioral-finance]
 prerequisites: ["[[capital-vs-labor-asymmetry]]", "[[capex-cycle]]"]
 difficulty: intermediate
@@ -51,17 +51,17 @@ Several structural reasons keep the wage premium sticky:
 
 Direct public-equity vehicles for "long electricians" are limited — most trade laborers work for private contractors or themselves. The investable proxies are upstream and downstream of the trades wage boom:
 
-- **Specialty electrical and infrastructure contractors** — [[quanta-services]] (T&D and renewable infrastructure), MasTec, EMCOR, MYR Group: companies whose revenue scales with data-center, grid, and utility build activity.
-- **Industrial equipment makers** — [[caterpillar]] (heavy machinery, generators), [[eaton]] (electrical components, switchgear), [[emerson-electric]] (process automation, cooling), [[ge-vernova]] (turbines, grid) — picks-and-shovels exposure to the buildout.
+- **Specialty electrical and infrastructure contractors** — quanta-services (T&D and renewable infrastructure), MasTec, EMCOR, MYR Group: companies whose revenue scales with data-center, grid, and utility build activity.
+- **Industrial equipment makers** — caterpillar (heavy machinery, generators), eaton (electrical components, switchgear), emerson-electric (process automation, cooling), ge-vernova (turbines, grid) — picks-and-shovels exposure to the buildout.
 - **Industrial REITs** with logistics and data-center exposure where physical buildout pace is a key variable.
 - **Building-products and HVAC OEMs** — Carrier, Trane, Lennox, Johnson Controls — direct exposure to data-center cooling demand.
-- **Utilities** that fund and own the new generation/transmission — see [[ai-sector-rotation-energy-hedge]] for the broader sector framing.
+- **Utilities** that fund and own the new generation/transmission — see ai-sector-rotation-energy-hedge for the broader sector framing.
 
 The pure-play "electrician supply" trade does not exist publicly, which itself is part of the edge: the wage premium is captured by private operators and labor, and equity investors must take indirect exposure.
 
 ## Risks and counter-arguments
 
-- **AI capex cycle peaking.** If hyperscaler capex moderates, data-center construction demand cools and the wage premium normalizes. Track [[microsoft]], [[meta-platforms]], [[alphabet]], [[amazon]] guidance.
+- **AI capex cycle peaking.** If hyperscaler capex moderates, data-center construction demand cools and the wage premium normalizes. Track microsoft, meta-platforms, alphabet, amazon guidance.
 - **Modular / prefab data-center construction** could partly substitute factory labor for on-site trades labor, capping wage growth.
 - **Tariff inflation on materials** (steel, copper, electrical components) could raise project costs faster than wages, suppressing project starts.
 - **Recession spillover.** A deep [[ai-layoff-trap]]-style recession would eventually reach commercial construction even if data-center builds are insulated.
@@ -69,28 +69,18 @@ The pure-play "electrician supply" trade does not exist publicly, which itself i
 
 ## Why this matters for the AI-recession thesis
 
-The skilled-trades wage boom is the strongest piece of evidence that AI capex is **physically real**, not just a software phenomenon. It is what makes the "energy and infrastructure as AI hedge" thesis coherent — see [[ai-sector-rotation-energy-hedge]]. It also feeds into [[skill-bifurcation]]: a high-school graduate trained as an electrician now out-earns many displaced white-collar workers, inverting the historical income hierarchy in specific labor sub-markets.
+The skilled-trades wage boom is the strongest piece of evidence that AI capex is **physically real**, not just a software phenomenon. It is what makes the "energy and infrastructure as AI hedge" thesis coherent — see ai-sector-rotation-energy-hedge. It also feeds into [[skill-bifurcation]]: a high-school graduate trained as an electrician now out-earns many displaced white-collar workers, inverting the historical income hierarchy in specific labor sub-markets.
 
 ## Related
 
 - [[ai-data-center-power-demand]]
-- [[ai-sector-rotation-energy-hedge]]
 - [[ai-layoff-trap]]
 - [[capital-vs-labor-asymmetry]]
 - [[skill-bifurcation]]
 - [[wage-compression-vs-job-loss]]
 - [[ai-driven-demand-destruction]]
-- [[margin-expansion-disparity]]
-- [[quanta-services]]
-- [[caterpillar]]
-- [[eaton]]
-- [[emerson-electric]]
-- [[ge-vernova]]
-- [[constellation-energy]]
-- [[vistra]]
 - [[capex-cycle]]
 - [[commodity-super-cycle]]
-- [[2024-nvidia-ai-boom]]
 - [[2025-tariff-market-volatility]]
 
 ## Sources

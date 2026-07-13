@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [commodities, energy, futures]
 aliases: ["Shale Oil", "Tight Oil", "US Shale", "LTO"]
-related: ["[[crude-oil]]", "[[oil]]", "[[brent-crude]]", "[[natural-gas]]", "[[opec]]", "[[eia]]", "[[eia-data]]", "[[commodities]]", "[[geopolitical-risk-premium]]", "[[backwardation]]", "[[contango]]"]
+related: ["[[crude-oil]]", "[[oil]]", "[[brent-crude]]", "[[natural-gas]]", "[[eia]]", "[[eia-data]]", "[[commodities]]", "[[geopolitical-risk-premium]]", "[[backwardation]]", "[[contango]]"]
 ---
 
 # Shale Oil
@@ -56,7 +56,7 @@ There is no "shale futures" contract. Exposure is taken through:
 1. **Rig count** — the Baker Hughes weekly US rig count is the leading activity indicator. Falling rigs presage slowing supply growth.
 2. **Frac spread count / completions** — rigs drill; frac crews complete. Completions convert DUCs into flowing barrels.
 3. **DUCs (drilled but uncompleted wells)** — an inventory of near-term supply that can be brought online quickly without new drilling.
-4. **OPEC+ policy** — the strategic counterweight. OPEC+ supply decisions are explicitly framed around managing US shale's market share. See [[opec]].
+4. **OPEC+ policy** — the strategic counterweight. OPEC+ supply decisions are explicitly framed around managing US shale's market share. See opec.
 5. **Capital discipline** — post-2020, public E&Ps prioritized shareholder returns (buybacks/dividends) over volume growth, dampening the historical "drill at any price" supply response.
 6. **Breakeven economics and basis differentials** — Midland-Cushing and WTI-Brent spreads drive netbacks.
 7. **Takeaway/storage constraints** — pipeline and export capacity (Gulf Coast) can bottleneck production.
@@ -78,6 +78,5 @@ There is no "shale futures" contract. Exposure is taken through:
 - [[crude-oil]] — WTI benchmark that shale oil prices off
 - [[oil]] — broad oil market overview
 - [[brent-crude]] — international benchmark; WTI-Brent spread
-- [[opec]] — strategic counterweight to US shale
 - [[eia]] / [[eia-data]] — US production and inventory data
 - [[commodities]] — sector overview

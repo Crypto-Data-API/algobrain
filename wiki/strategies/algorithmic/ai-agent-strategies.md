@@ -39,7 +39,7 @@ There is **no latency edge** here — LLM inference takes seconds; anything requ
 
 ## Why this edge exists
 
-- **Who is on the other side**: slow readers — retail investors who see the news hours later, small funds without NLP pipelines, and index/passive flows that do not react to firm-specific text at all. In small and mid caps, analyst coverage is thin, so text-borne information genuinely takes days to be priced (the well-documented post-news drift and [[post-earnings-announcement-drift]] anomalies).
+- **Who is on the other side**: slow readers — retail investors who see the news hours later, small funds without NLP pipelines, and index/passive flows that do not react to firm-specific text at all. In small and mid caps, analyst coverage is thin, so text-borne information genuinely takes days to be priced (the well-documented post-news drift and post-earnings-announcement-drift anomalies).
 - **Why they keep losing**: attention is the binding constraint. The marginal human reader cannot expand to 500 names; the LLM can. Underreaction to public text is one of the most persistent behavioral findings in finance, and LLM agents are a cheap industrial harvester of it.
 - **Why the edge decays**: it is crowded and commoditizing fast. Since 2023, LLM sentiment scores are sold by data vendors (RavenPack-style feeds, Bloomberg's transcript NLP), so the half-life on any plain "score the headline" signal is short. Surviving edges require either better prompting/aggregation, faster pipelines, or niches (micro-caps, crypto, non-English filings) too small for institutions.
 
@@ -295,7 +295,6 @@ AI strategies require additional [[risk-management]] guardrails beyond tradition
 - [[risk-management]] — Managing risk in automated systems
 - [[artificial-intelligence]] — AI section hub
 - [[edge-taxonomy]] — Where informational/analytical edges fit
-- [[post-earnings-announcement-drift]] — The underlying anomaly LLM sentiment harvests
 - [[regime-matrix]] — Where this strategy sits across market regimes
 - [[long-vol-vs-short-vol]] — Why the strategy is long-information-vol but short-price-vol
 - [[momentum]] — The news-driven drift the trending-regime variant rides

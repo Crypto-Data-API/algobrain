@@ -9,7 +9,7 @@ aliases: ["Sung Kook Hwang", "Hwang Sung-kook"]
 entity_type: person
 founded: 1964
 headquarters: "New York, USA"
-related: ["[[archegos-blowup-2021]]", "[[tiger-management]]", "[[julian-robertson]]", "[[total-return-swap]]", "[[credit-suisse-collapse-2023]]"]
+related: ["[[archegos-blowup-2021]]", "[[tiger-management]]", "[[total-return-swap]]", "[[credit-suisse-collapse-2023]]"]
 ---
 
 # Bill Hwang
@@ -21,7 +21,7 @@ Sung Kook "Bill" Hwang (b. 1964, South Korea) was the founder of Tiger Asia Mana
 - Born 1964 in South Korea; emigrated to US 1982.
 - UCLA undergrad; Carnegie Mellon MBA (1988).
 - Hyundai Securities US sales role early 1990s.
-- Joined [[tiger-management]] in 1996 as analyst under [[julian-robertson]] — making him a charter "[[tiger-cubs|Tiger Cub]]."
+- Joined [[tiger-management]] in 1996 as analyst under julian-robertson — making him a charter "[[tiger-cubs|Tiger Cub]]."
 
 ## Tiger Asia Management (2001-2012)
 
@@ -105,4 +105,4 @@ Pre-collapse net worth estimated at $20B at peak (March 19, 2021). Post-collapse
 
 ## Related
 
-[[archegos-blowup-2021]] · [[tiger-management]] · [[julian-robertson]] · [[total-return-swap]] · [[contract-for-difference]] · [[credit-suisse-collapse-2023]] · [[block-trade-flipping-arbitrage]] · [[prime-broker-cascade-trading]] · [[ltcm-collapse-1998]]
+[[archegos-blowup-2021]] · [[tiger-management]] · julian-robertson · [[total-return-swap]] · [[contract-for-difference]] · [[credit-suisse-collapse-2023]] · [[block-trade-flipping-arbitrage]] · [[prime-broker-cascade-trading]] · [[ltcm-collapse-1998]]

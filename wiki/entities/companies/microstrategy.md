@@ -55,7 +55,7 @@ MSTR sits at the apex of the listed "bitcoin-equity" complex. It offers the larg
 | [[core-scientific]] (CORZ) | Miner pivoting to HPC/AI hosting | Increasingly an AI-datacenter story, not a pure BTC proxy |
 | [[cleanspark]] (CLSK) | Pure-play bitcoin miner | Operational beta to BTC + efficiency, not a treasury-premium model |
 | [[iren]] (IREN) | Miner + AI/HPC compute | Diversifying away from pure BTC |
-| [[gamestop\|GameStop (GME)]] | Adopted a [[bitcoin]] treasury (2025) | BTC is a small slice of a cash pile, not the whole thesis; a far milder NAV-premium dynamic |
+| GameStop (GME) | Adopted a [[bitcoin]] treasury (2025) | BTC is a small slice of a cash pile, not the whole thesis; a far milder NAV-premium dynamic |
 
 The critical distinction versus miners is **mechanism**: miners *produce* bitcoin and carry energy/operational risk, whereas Strategy *buys* bitcoin with capital-markets proceeds and carries premium/dilution/refinancing risk. Versus spot ETFs, MSTR adds leverage and the premium — more upside in BTC bull phases, more downside in bear phases.
 
@@ -125,7 +125,7 @@ Leveraged BTC exposure; extreme IV; widely used for Bitcoin proxy options at all
 ## Trading & Options Playbook
 
 **Index / ETF membership**
-- A [[nasdaq]]-listed large-cap; has been added to major large-cap indices, which created mechanical buy-flow on inclusion and makes MSTR a meaningful component of [[technology]]-tilted and Nasdaq-tracking ETFs.
+- A nasdaq-listed large-cap; has been added to major large-cap indices, which created mechanical buy-flow on inclusion and makes MSTR a meaningful component of technology-tilted and Nasdaq-tracking ETFs.
 - Functions as the de facto "bitcoin equity" in many index and thematic baskets; inclusion/exclusion events are themselves catalysts because of the leveraged-BTC profile they add to a fund.
 
 **Volatility behavior**
@@ -144,7 +144,7 @@ Leveraged BTC exposure; extreme IV; widely used for Bitcoin proxy options at all
 
 **Options use**
 - Extreme IV makes MSTR a favorite for [[gamma-scalping]], [[gamma-squeeze]] setups, covered calls written against BTC exposure, put-protection on leveraged BTC longs, and volatility-surface / dispersion trades against spot BTC.
-- Correlated names for spreads and pairs: bitcoin miners and treasury proxies — [[mara]], [[riot-platforms]], [[core-scientific]], [[cleanspark]], [[iren]] — plus spot bitcoin ETFs and [[gamestop|GME]]'s smaller BTC sleeve.
+- Correlated names for spreads and pairs: bitcoin miners and treasury proxies — [[mara]], [[riot-platforms]], [[core-scientific]], [[cleanspark]], [[iren]] — plus spot bitcoin ETFs and GME's smaller BTC sleeve.
 
 ## Risks
 
@@ -170,13 +170,10 @@ Leveraged BTC exposure; extreme IV; widely used for Bitcoin proxy options at all
 - [[core-scientific]]
 - [[iren]]
 - [[cleanspark]]
-- [[gamestop]]
-- [[technology]]
-- [[nasdaq]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - Strategy bitcoin holdings tracker (bitcointreasuries.net): https://bitcointreasuries.net/public-companies/strategy
 - Strategy bitcoin purchases (Bitbo treasuries): https://bitbo.io/treasuries/microstrategy
 - Strategy 8-K bitcoin purchase disclosures (SEC): https://www.sec.gov/Archives/edgar/data/0001050446/000119312526249768/mstr-20260530.htm

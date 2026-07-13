@@ -20,10 +20,10 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 20
-related: ["[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[premium-selling-systematic]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[volatility-regime-classification]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[tastytrade]]", "[[tom-sosnoff]]", "[[itpm-framework]]", "[[ergodicity]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[premium-selling-systematic]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[volatility-regime-classification]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[tom-sosnoff]]", "[[itpm-framework]]", "[[ergodicity]]"]
 ---
 
-Options premium selling is the **canonical short-vol strategy**: the trader systematically sells out-of-the-money puts, calls, strangles, or [[iron-condor|condors]] on liquid underlyings -- typically [[sp500|SPX]], SPY, QQQ, and large single names -- and harvests the [[variance-risk-premium]] (VRP), the persistent gap between [[implied-volatility]] and subsequently realized volatility. It is the **short-vol core** referenced throughout [[long-vol-vs-short-vol]]: the income engine that, paired with a [[long-vol-overlay]], forms the institutional [[options-portfolio-construction|portfolio construction]] template.
+Options premium selling is the **canonical short-vol strategy**: the trader systematically sells out-of-the-money puts, calls, strangles, or [[iron-condor|condors]] on liquid underlyings -- typically SPX, SPY, QQQ, and large single names -- and harvests the [[variance-risk-premium]] (VRP), the persistent gap between [[implied-volatility]] and subsequently realized volatility. It is the **short-vol core** referenced throughout [[long-vol-vs-short-vol]]: the income engine that, paired with a [[long-vol-overlay]], forms the institutional [[options-portfolio-construction|portfolio construction]] template.
 
 ## Edge source
 
@@ -257,7 +257,6 @@ Mechanical retirement triggers (also see [[when-to-retire-a-strategy]]):
 - Carr, Peter and Wu, Liuren. "Variance Risk Premiums" (2009) -- canonical academic measurement of VRP.
 - Bondarenko, Oleg. "Why Are Put Options So Expensive?" (2014) -- direct empirical case for VRP.
 - Spitznagel, Mark. *Safe Haven* (2021) -- the case for pairing premium selling with a [[long-vol-overlay]].
-- [[tastytrade]] research archive -- 16-delta, 45-DTE, 50%-profit-target rule set.
 - [[volmageddon]] post-mortem -- empirical worst-case for naked short vol.
 - [[vix-august-2024-spike]] -- recent shock evidencing crowding and margin-reprice risk.
 - [[ljm-preservation-and-growth]] case study -- discretionary deviation from rules accelerated ruin.

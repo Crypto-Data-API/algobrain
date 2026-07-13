@@ -95,7 +95,7 @@ The dopamine loop applies on **both sides** — to the casino owner who experien
 
 ### tastytrade and retail premium-selling culture
 
-[[tom-sosnoff]]'s [[tastytrade]] platform built a retail empire on the doctrine of selling 16-30 delta strangles, taking profits at 50% of credit, and "managing winners" aggressively. The platform's actual win rate is approximately what the math predicts (75-85% per trade), and their content emphasizes the daily-decay-as-paycheck framing that maximizes the dopamine-loop appeal. The result is a generation of retail traders structurally biased toward the most psychologically reinforcing strategy — which is also the most blow-up-prone in stress.
+[[tom-sosnoff]]'s tastytrade platform built a retail empire on the doctrine of selling 16-30 delta strangles, taking profits at 50% of credit, and "managing winners" aggressively. The platform's actual win rate is approximately what the math predicts (75-85% per trade), and their content emphasizes the daily-decay-as-paycheck framing that maximizes the dopamine-loop appeal. The result is a generation of retail traders structurally biased toward the most psychologically reinforcing strategy — which is also the most blow-up-prone in stress.
 
 This is not a critique of the platform's mechanics (the math is real, and disciplined application produces a positive expected return in calm regimes) but an observation about *why the strategy is so popular*. It is the most addictive available form of options trading, in the literal neurochemical sense.
 

@@ -9,7 +9,7 @@ aliases: ["Random Walk", "Random Walk Hypothesis", "Random Walk Down Wall Street
 domain: [portfolio-theory, behavioral-finance]
 prerequisites: ["[[efficient-market-hypothesis]]", "[[volatility]]"]
 difficulty: intermediate
-related: ["[[efficient-market-hypothesis]]", "[[contrarian-investing]]", "[[market-timing]]", "[[mean-reversion]]", "[[book-a-random-walk-down-wall-street]]", "[[momentum]]", "[[passive-investing]]", "[[backtesting]]", "[[alpha-decay]]"]
+related: ["[[efficient-market-hypothesis]]", "[[market-timing]]", "[[mean-reversion]]", "[[book-a-random-walk-down-wall-street]]", "[[momentum]]", "[[passive-investing]]", "[[backtesting]]", "[[alpha-decay]]"]
 ---
 
 Random walk theory holds that successive changes in stock prices are statistically independent and approximately unpredictable, so price movements resemble a "random walk" with no exploitable memory of past prices. If true, no amount of chart-reading or [[market-timing]] can consistently beat a buy-and-hold index, because tomorrow's price change is unrelated to today's. The idea was popularised by Burton Malkiel in *A Random Walk Down Wall Street* (1973) and is closely tied to the [[efficient-market-hypothesis|efficient market hypothesis]] (Source: [[book-a-random-walk-down-wall-street]]).
@@ -60,7 +60,7 @@ The random walk is the *empirical signature* of a weak-form efficient market: if
 ## Evidence For and Against
 
 - **For**: The persistent failure of the average active manager to beat passive benchmarks net of fees; the weak short-horizon autocorrelation of large-cap returns; the difficulty of detecting reliable technical patterns out-of-sample.
-- **Against**: Documented anomalies inconsistent with pure randomness — [[momentum]] (returns positively autocorrelated at 3–12 month horizons), long-horizon [[mean-reversion]], the value and size premia, and volatility clustering (large moves cluster, so volatility *is* forecastable even if direction is not). Behavioural finance attributes these to systematic investor biases; practitioners such as [[itpm]] argue information asymmetries and crowd psychology create exploitable inefficiencies.
+- **Against**: Documented anomalies inconsistent with pure randomness — [[momentum]] (returns positively autocorrelated at 3–12 month horizons), long-horizon [[mean-reversion]], the value and size premia, and volatility clustering (large moves cluster, so volatility *is* forecastable even if direction is not). Behavioural finance attributes these to systematic investor biases; practitioners such as itpm argue information asymmetries and crowd psychology create exploitable inefficiencies.
 
 ## Trading and Portfolio Relevance
 
@@ -90,6 +90,5 @@ If you accept a strong version of random walk theory, the rational response is l
 
 - [[efficient-market-hypothesis]] -- the theory the random walk is evidence for
 - [[mean-reversion]] -- a documented departure from pure randomness
-- [[contrarian-investing]] -- strategy premised on predictable reversals
 - [[market-timing]] -- what the theory says you cannot do
 - [[book-a-random-walk-down-wall-street]] -- Malkiel's popular treatment

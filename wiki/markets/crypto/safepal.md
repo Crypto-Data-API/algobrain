@@ -82,7 +82,7 @@ SFP is best framed as a **bet on SafePal wallet adoption and in-app swap volume*
 - **No burn floor** — with supply fully circulating and no revenue-funded buyback, SFP lacks the deflationary support that anchors [[bnb|BNB]]-style tokens; the offset is the absence of dilution overhang.
 - **Strategic-backing premium** — Binance Labs/YZi Labs and Animoca backing plus a Binance Launchpad pedigree give SFP distribution and listing advantages, but proximity to Binance is double-edged (see Risks).
 
-Qualitative framing only — see [[valuation]].
+Qualitative framing only — see valuation.
 
 ## Peer Comparison
 
@@ -148,7 +148,7 @@ SFP is mid-pack on market cap but, unlike the exchange tokens, derives demand fr
 - [[ethereum]] — secondary host chain
 - [[exchange-tokens]] — adjacent (but distinct) CEX-token category
 - [[coinex-token]] · [[bitmart-token]] — exchange-token comparison peers
-- [[liquidity]] · [[slippage]] · [[valuation]] · [[derivatives]]
+- [[liquidity]] · [[slippage]] · valuation · [[derivatives]]
 - [[crypto-markets]]
 
 ---

@@ -14,7 +14,6 @@ related:
   - "[[options-portfolio-construction]]"
   - "[[options-greeks]]"
   - "[[risk-management]]"
-  - "[[orats]]"
   - "[[trade-machine]]"
 ---
 
@@ -32,7 +31,7 @@ Based on publicly available product descriptions, Convex Trading offers some com
 - **Position tracking**: import positions from a broker (typically via manual entry or CSV)
 - **Volatility analytics**: IV surface views and historical volatility comparisons
 
-The product is positioned for serious retail / semi-pro options traders who have outgrown broker-supplied tools (Thinkorswim Analyze tab, IBKR Risk Navigator, tastytrade) but cannot or will not pay institutional pricing for [[bloomberg-terminal|Bloomberg]] or [[orats]] enterprise.
+The product is positioned for serious retail / semi-pro options traders who have outgrown broker-supplied tools (Thinkorswim Analyze tab, IBKR Risk Navigator, tastytrade) but cannot or will not pay institutional pricing for [[bloomberg-terminal|Bloomberg]] or orats enterprise.
 
 ## Pricing Tier
 
@@ -53,7 +52,7 @@ As an analytics-and-visualization layer rather than an execution engine, Convex 
 
 - **Risk read-out, not order routing** — a trader running a semi-automated options book can use the platform's aggregated [[options-greeks|Greeks]] and scenario views as a human-in-the-loop sanity check before an automated or rules-based strategy submits orders elsewhere.
 - **Scenario inputs for sizing logic** — payoff and stress outputs (P&L under price / vol / time shocks) can inform position-sizing rules even if the sizing itself is computed in a separate script.
-- **No documented public API** — available descriptions do not confirm a programmatic API, so any integration into an AI/automated pipeline is likely manual (CSV / screen review) rather than fully machine-driven. Verify directly with the vendor before assuming programmatic access. This is the main constraint on using it inside a fully automated stack, where API-first tools like [[orats]] or a custom build are usually preferred.
+- **No documented public API** — available descriptions do not confirm a programmatic API, so any integration into an AI/automated pipeline is likely manual (CSV / screen review) rather than fully machine-driven. Verify directly with the vendor before assuming programmatic access. This is the main constraint on using it inside a fully automated stack, where API-first tools like orats or a custom build are usually preferred.
 
 For traders building genuinely automated options systems, the realistic pattern is to use a tool like this for oversight and ad-hoc analysis while sourcing machine-readable data and execution from API-first providers.
 
@@ -79,11 +78,11 @@ For an active options trader looking at third-party analytics:
 |------|----------|
 | [[ibkr-risk-navigator|IBKR Risk Navigator]] | Free, IBKR-only, broad capability |
 | [[thinkorswim]] Analyze | Free, TD/Schwab-only |
-| [[tastytrade]] | Free, tasty-style book focus |
+| tastytrade | Free, tasty-style book focus |
 | **Convex Trading** | Third-party, multi-broker (claimed), prosumer pricing |
 | [[trade-machine]] (CML) | Backtester-focused, prosumer pricing |
 | [[pivolio]] | Niche options portfolio tool, prosumer pricing |
-| [[orats]] | More established options data + analytics |
+| orats | More established options data + analytics |
 | [[bloomberg-terminal]] | Institutional, comprehensive |
 
 The choice among prosumer tools comes down to specific feature fit, broker integration, and personal workflow preference.
@@ -95,7 +94,6 @@ The choice among prosumer tools comes down to specific feature fit, broker integ
 - [[options-greeks]] — what these tools aggregate
 - [[trade-machine]] — comparable third-party tool, backtester-focused
 - [[pivolio]] — comparable third-party options portfolio tool
-- [[orats]] — more established options data + analytics platform
 - [[ibkr-risk-navigator]] — free broker alternative
 - [[risk-management]] — broader risk-management context
 

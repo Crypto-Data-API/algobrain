@@ -121,7 +121,7 @@ The form of the edge changes (couriers → telegraphs → telephones → fiber �
 | [[ai-amplified-exploit-arbitrage]] | An implementation — fast aggregation of exploit-feed information |
 | [[latency-arbitrage]] | The HFT-specific form |
 | [[alternative-data-alpha]] | The alt-data-specific form |
-| [[fundamental-analysis]] | Adjacent — fundamental analysis is about understanding present-value; info-arb is about being early to information that changes valuations |
+| fundamental-analysis | Adjacent — fundamental analysis is about understanding present-value; info-arb is about being early to information that changes valuations |
 
 ## Trader frameworks
 

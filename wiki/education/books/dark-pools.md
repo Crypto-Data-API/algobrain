@@ -6,7 +6,6 @@ updated: 2026-06-21
 status: excellent
 tags: [education, book, hft, market-microstructure, electronic-trading, history]
 related:
-  - "[[dark-pool-trading]]"
   - "[[dark-pools]]"
   - "[[high-frequency-trading]]"
   - "[[market-microstructure]]"
@@ -15,11 +14,9 @@ related:
   - "[[market-making-strategy]]"
   - "[[flash-boys]]"
   - "[[the-quants]]"
-  - "[[nyse]]"
-  - "[[nasdaq]]"
 ---
 
-**Dark Pools: The Rise of the Machine Traders and the Rigging of the U.S. Stock Market** by Scott Patterson (2012) chronicles the transformation of American equity markets from human floor exchanges into the fragmented, algorithmic, high-speed electronic system that exists today. Patterson — who also wrote [[the-quants]] — structures the narrative around Josh Levine, a self-taught programmer who in the 1990s built **Island ECN**, the first fully electronic stock exchange, out of frustration with the slow, opaque [[nasdaq|NASDAQ]] dealer system. Island proved electronic matching was faster and cheaper than human market makers and set in motion the chain of innovation and disruption that produced modern [[high-frequency-trading]] and [[dark-pools|dark-pool]] market structure.
+**Dark Pools: The Rise of the Machine Traders and the Rigging of the U.S. Stock Market** by Scott Patterson (2012) chronicles the transformation of American equity markets from human floor exchanges into the fragmented, algorithmic, high-speed electronic system that exists today. Patterson — who also wrote [[the-quants]] — structures the narrative around Josh Levine, a self-taught programmer who in the 1990s built **Island ECN**, the first fully electronic stock exchange, out of frustration with the slow, opaque NASDAQ dealer system. Island proved electronic matching was faster and cheaper than human market makers and set in motion the chain of innovation and disruption that produced modern [[high-frequency-trading]] and [[dark-pools|dark-pool]] market structure.
 
 ## Key Facts
 
@@ -41,8 +38,8 @@ The electronic-markets revolution was driven by **technologists and entrepreneur
 
 ## Three Developments That Reshaped Markets
 
-1. **ECNs and alternative trading systems.** Electronic communication networks (Island and successors) competed with the [[nyse]] and [[nasdaq]], fragmenting liquidity across dozens of venues and ending open-outcry floor trading.
-2. **Dark pools.** Off-exchange venues created so institutions could trade large blocks without revealing intentions — but increasingly populated by HFT firms exploiting the very opacity the pools were meant to provide ([[dark-pool-trading]]).
+1. **ECNs and alternative trading systems.** Electronic communication networks (Island and successors) competed with the nyse and nasdaq, fragmenting liquidity across dozens of venues and ending open-outcry floor trading.
+2. **Dark pools.** Off-exchange venues created so institutions could trade large blocks without revealing intentions — but increasingly populated by HFT firms exploiting the very opacity the pools were meant to provide (dark-pool-trading).
 3. **Regulatory response (Reg NMS, 2005).** The order-protection rule forced brokers to route to the venue showing the best displayed price (the NBBO), which inadvertently *deepened* fragmentation and created the cross-venue latency-arbitrage opportunities HFT now harvests.
 
 ## Chapter / Section Themes
@@ -60,8 +57,8 @@ The electronic-markets revolution was driven by **technologists and entrepreneur
 | Concept | Takeaway |
 |---------|----------|
 | Island ECN | The first fully electronic exchange proved matching could be faster, cheaper, more transparent than dealers. |
-| Dark pools | Built to shield large institutional orders, but their opacity was exploited by faster, predatory traders ([[dark-pool-trading]]). |
-| Rapid electronification | The [[nyse]] floor gave way to electronic trading in just a few years, not the gradual evolution many expected. |
+| Dark pools | Built to shield large institutional orders, but their opacity was exploited by faster, predatory traders (dark-pool-trading). |
+| Rapid electronification | The nyse floor gave way to electronic trading in just a few years, not the gradual evolution many expected. |
 | Reg NMS unintended effects | Best-execution mandates fragmented markets and birthed cross-venue latency arbitrage. |
 | Algorithmic market making | Algos replaced human specialists — tighter spreads, but fragility when liquidity withdraws in unison. |
 | Payment for order flow | Selling retail order flow to wholesalers/HFT creates conflicts and can worsen execution prices. |
@@ -92,7 +89,7 @@ Anyone who wants to understand *why* modern markets look the way they do: why th
 
 ## Related
 
-- [[dark-pool-trading]] / [[dark-pools]] — The off-exchange venues at the center of the narrative
+- dark-pool-trading / [[dark-pools]] — The off-exchange venues at the center of the narrative
 - [[high-frequency-trading]] — The machine-trading business model the book chronicles
 - [[market-microstructure]] — The field that formally studies these dynamics
 - [[low-latency-trading]] — The speed arms race electronic markets created
@@ -100,7 +97,6 @@ Anyone who wants to understand *why* modern markets look the way they do: why th
 - [[market-making-strategy]] — How electronic market makers replaced human specialists
 - [[flash-boys]] — Michael Lewis's companion narrative on HFT and market structure
 - [[the-quants]] — Patterson's earlier book on the quant revolution
-- [[nyse]] / [[nasdaq]] — The legacy exchanges that Island ECN disrupted
 - [[trading-and-exchanges]] — Larry Harris's academic treatment of the same topics
 
 ## Sources

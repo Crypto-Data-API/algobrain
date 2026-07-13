@@ -18,7 +18,7 @@ related: ["[[point-and-figure]]", "[[heikin-ashi]]", "[[supertrend]]", "[[moving
 
 ## Overview
 
-Renko charts originated in Japan (the name comes from "renga," meaning "brick") and construct price charts using **fixed-size bricks** that only plot when price moves a specified amount. Unlike traditional candlestick or bar charts that create a new candle every time period, Renko charts create a **new brick only when price moves the set brick size** in one direction. If the brick size is $5, a new green (bullish) brick appears only when price rises $5 from the prior brick's close, and a new red (bearish) brick appears only when price falls $5. **Time is completely ignored** -- a single brick might represent 5 minutes or 5 days of price action, depending on volatility. This construction eliminates minor fluctuations, whipsaws, and noise, producing extremely clean trend visualization. A **brick color change** (green to red or red to green) is the simplest trading signal: a trend reversal. Renko charts combine well with [[moving-average-crossover]] overlays and the [[supertrend]] indicator for confirmation. The method is popular across [[stocks]], [[crypto]], and [[forex]] for traders who want clean, simple trend identification without complex indicator stacks.
+Renko charts originated in Japan (the name comes from "renga," meaning "brick") and construct price charts using **fixed-size bricks** that only plot when price moves a specified amount. Unlike traditional candlestick or bar charts that create a new candle every time period, Renko charts create a **new brick only when price moves the set brick size** in one direction. If the brick size is $5, a new green (bullish) brick appears only when price rises $5 from the prior brick's close, and a new red (bearish) brick appears only when price falls $5. **Time is completely ignored** -- a single brick might represent 5 minutes or 5 days of price action, depending on volatility. This construction eliminates minor fluctuations, whipsaws, and noise, producing extremely clean trend visualization. A **brick color change** (green to red or red to green) is the simplest trading signal: a trend reversal. Renko charts combine well with [[moving-average-crossover]] overlays and the [[supertrend]] indicator for confirmation. The method is popular across stocks, [[crypto]], and [[forex]] for traders who want clean, simple trend identification without complex indicator stacks.
 
 ## How It Works
 
@@ -63,7 +63,7 @@ Renko charts originated in Japan (the name comes from "renga," meaning "brick") 
 - Extremely simple signal generation -- brick color change is unambiguous and requires no interpretation
 - Built-in whipsaw reduction: the two-brick-size reversal requirement filters out minor counter-trend moves
 - ATR-based brick sizing automatically adapts to changing market volatility
-- Works across all markets ([[stocks]], [[crypto]], [[forex]]) and can be combined with standard indicators
+- Works across all markets (stocks, [[crypto]], [[forex]]) and can be combined with standard indicators
 - Ideal for beginners -- no need to interpret candlestick patterns, divergences, or complex indicator readings
 
 ## Disadvantages

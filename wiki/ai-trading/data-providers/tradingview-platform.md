@@ -10,7 +10,6 @@ website: https://www.tradingview.com
 founded: 2011
 headquarters: "New York, USA (incorporated in the UK)"
 related:
-  - "[[finviz]]"
   - "[[yahoo-finance]]"
   - "[[alpha-vantage]]"
   - "[[options]]"
@@ -92,14 +91,14 @@ if ta.crossunder(fast, slow)
 - **Backtest engine is naive**: Pine Script's Strategy Tester uses simple fill assumptions (no slippage model, no realistic market impact, fills at bar close). Results should be treated as directional indicators, not production-grade backtests. See [[backtesting-pitfalls]]
 - **Delayed data on free tier**: 15-20 minute delay on most markets. Real-time data requires paid exchange subscriptions ($1-5/mo per exchange)
 - **Alert limits**: free tier gets 1 alert; even Premium ($60/mo) caps at 400. Active traders monitoring many setups can hit this ceiling
-- **No multi-broker execution**: TradingView supports broker integration for some partners, but execution capabilities are limited compared to dedicated platforms like [[interactive-brokers]]
+- **No multi-broker execution**: TradingView supports broker integration for some partners, but execution capabilities are limited compared to dedicated platforms like interactive-brokers
 
 ## Competitive Positioning
 
 | Platform | Strength | Weakness vs TradingView |
 |----------|----------|------------------------|
 | **Bloomberg Terminal** | Institutional-grade data, news, analytics | $24,000/year; overkill for retail |
-| **[[finviz]]** | Fast screening, heatmaps | No charting depth, no Pine Script |
+| **finviz** | Fast screening, heatmaps | No charting depth, no Pine Script |
 | **MetaTrader 4/5** | Forex-focused, broker-integrated execution | Worse charting UX, smaller community |
 | **Thinkorswim** (Schwab) | Excellent options analytics | Broker-locked, US-only |
 | **TC2000** | Fast scanning, clean charts | Smaller community, no crypto |

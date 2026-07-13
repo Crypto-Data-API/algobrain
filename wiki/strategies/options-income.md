@@ -68,11 +68,11 @@ A book whose realised performance is materially worse than the null suggests one
 
 ## Rules
 
-A canonical, **conservative** options-income overlay (representative of [[tastytrade]], [[itpm-trading-philosophy|ITPM]]-aligned, and similar disciplined approaches):
+A canonical, **conservative** options-income overlay (representative of tastytrade, [[itpm-trading-philosophy|ITPM]]-aligned, and similar disciplined approaches):
 
 ### Universe and structure selection
 
-- **Underlyings**: liquid index ETFs and large-cap names with deep, tight option markets — [[spy|SPY]], [[qqq|QQQ]], [[iwm|IWM]], [[xsp]], [[spx-options|SPX]], plus a select handful of liquid mega-caps.
+- **Underlyings**: liquid index ETFs and large-cap names with deep, tight option markets — SPY, QQQ, [[iwm|IWM]], xsp, SPX, plus a select handful of liquid mega-caps.
 - **DTE band**: 30-50 days at entry (the canonical "45 DTE" bucket); avoid 0-7 DTE except as a deliberate sub-allocation.
 - **Structure mix** (representative split for a $250K account):
   - 50-60% [[iron-condor|iron condors]] — defined-risk premium with capped tails.
@@ -174,7 +174,7 @@ The pseudocode is deliberately mechanical. The discipline of options-income trad
 - **Macro calendar** — FOMC, CPI, NFP, ECB. These create predictable IV-ramp-then-crush patterns.
 - **Position-level realised P&L vs theoretical theta** — the [[theta-realisation-ratio|realisation ratio]] is the long-horizon scorecard.
 
-Most of this data is available at retail prices: [[orats]] for surfaces and historical IV, broker chains for live Greeks, [[cboe]] for VIX, [[barchart]] / [[market-chameleon]] for unusual options activity.
+Most of this data is available at retail prices: orats for surfaces and historical IV, broker chains for live Greeks, [[cboe]] for VIX, [[barchart]] / market-chameleon for unusual options activity.
 
 ## Payoff Diagram & Greeks Profile
 
@@ -251,8 +251,8 @@ The realistic distribution: roughly 60% of trades close at profit-take, 25% clos
 - **Realised P&L distribution**: approximately log-normal in calm regimes, with a fat left-tail clustered around vol-regime shifts.
 
 **Empirical examples**:
-- The CBOE PUT index ([[put-index]], systematic short SPX puts) has returned roughly 8-9% annualised since 1986, with a Sharpe of ~0.5 and a maximum drawdown of ~33% during 2008.
-- The [[bxm|BXM]] (Buy-Write Index, systematic SPX covered calls) has returned roughly 8% annualised with lower volatility but a clear upside cap during bull runs.
+- The CBOE PUT index (put-index, systematic short SPX puts) has returned roughly 8-9% annualised since 1986, with a Sharpe of ~0.5 and a maximum drawdown of ~33% during 2008.
+- The BXM (Buy-Write Index, systematic SPX covered calls) has returned roughly 8% annualised with lower volatility but a clear upside cap during bull runs.
 - Tail-shock years: 2008 (-25%), 2018 ([[volmageddon]] for short-vol funds), 2020 (March COVID, -20% to -40% for short-vol books), August 2024 ([[vix-august-2024-spike|yen-carry vol unwind]], -10% to -30% intraday for short-strangle traders).
 
 **Cost overlay** matters enormously:
@@ -336,7 +336,7 @@ The honest framing: **options income is selling tail-risk insurance**. It is pro
 - [[universa-research]] — Universa Investments / Spitznagel published commentary on the cycle-CAGR mismatch in short-vol strategies.
 - [[volmageddon|February 2018]] / [[vix-august-2024-spike|August 2024]] post-mortems — practitioner notes on what wiped which books and why.
 - Natenberg, [[book-option-volatility-and-pricing]] — chapters on option-selling strategy mechanics and Greek behavior near expiration.
-- [[orats-research]] — historical [[backtesting|backtests]] of systematic premium-selling structures across the post-2007 cycle.
+- orats-research — historical [[backtesting|backtests]] of systematic premium-selling structures across the post-2007 cycle.
 
 ## Related
 

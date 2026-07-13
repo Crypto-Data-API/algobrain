@@ -14,7 +14,7 @@ backtest_status: untested
 edge_source: [risk-bearing, behavioral]
 edge_mechanism: "Get paid the put premium (a risk-bearing variance premium) for committing to buy a stock you already want at a price you already like; the buyer overpays for downside insurance you are happy to underwrite."
 crowding_risk: medium
-related: ["[[put-options|put-option]]", "[[covered-call]]", "[[wheel-strategy]]", "[[value-investing]]", "[[protective-put]]", "[[the-greeks]]", "[[theta]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[edge-taxonomy]]"]
+related: ["[[put-options|put-option]]", "[[covered-call]]", "[[wheel-strategy]]", "[[protective-put]]", "[[the-greeks]]", "[[theta]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[edge-taxonomy]]"]
 ---
 
 # Cash-Secured Put

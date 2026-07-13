@@ -15,7 +15,6 @@ related:
   - "[[alpha-vantage]]"
   - "[[yahoo-finance]]"
   - "[[eod-historical-data]]"
-  - "[[opra]]"
 ---
 
 # Finnhub
@@ -24,7 +23,7 @@ Finnhub is a freemium financial data API founded in 2018 and headquartered in Ne
 
 ## Overview
 
-Finnhub is a freemium financial data API providing real-time and historical US equity quotes, options chains, fundamentals, news, alternative data, and global market coverage through REST and WebSocket endpoints. It occupies the middle ground between free providers like [[yahoo-finance]] and institutional vendors like [[bloomberg-terminal]] or [[optionmetrics]] — affordable enough for solo developers and small quant shops, but with broad enough coverage to power production fintech apps. The API surfaces US options chains with bid/ask, volume, open interest, and implied volatility, sourced downstream from [[opra]] via licensed redistributors.
+Finnhub is a freemium financial data API providing real-time and historical US equity quotes, options chains, fundamentals, news, alternative data, and global market coverage through REST and WebSocket endpoints. It occupies the middle ground between free providers like [[yahoo-finance]] and institutional vendors like [[bloomberg-terminal]] or optionmetrics — affordable enough for solo developers and small quant shops, but with broad enough coverage to power production fintech apps. The API surfaces US options chains with bid/ask, volume, open interest, and implied volatility, sourced downstream from opra via licensed redistributors.
 
 ## Pricing
 
@@ -69,11 +68,11 @@ Finnhub is a freemium financial data API providing real-time and historical US e
 - **Alternative datasets**: transcripts, sentiment, and government data are unusual at this price point
 
 **Limitations:**
-- **Not OPRA tick-grade for options**: options data is closer to consolidated/snapshot quality than raw [[opra]] tick stream — for microstructure work use [[polygon-io]], [[databento]], or direct OPRA
+- **Not OPRA tick-grade for options**: options data is closer to consolidated/snapshot quality than raw opra tick stream — for microstructure work use [[polygon-io]], [[databento]], or direct OPRA
 - **Rate limits bite quickly above the free tier**: high-volume scanning often pushes you to Standard or Premium
 - **Latency**: not designed for sub-second execution decisions; better for analytics and signal generation
 - **Data quality variability**: occasional gaps and corrections compared with institutional vendors
-- **Smaller historical depth on some endpoints**: years of options history are limited compared with [[optionmetrics]] or [[orats]]
+- **Smaller historical depth on some endpoints**: years of options history are limited compared with optionmetrics or orats
 
 ## Related
 
@@ -81,11 +80,9 @@ Finnhub is a freemium financial data API providing real-time and historical US e
 - [[alpha-vantage]] — similar freemium tier, weaker on options
 - [[yahoo-finance]] — free baseline, less reliable and no formal SLA
 - [[eod-historical-data]] — affordable EOD-focused alternative
-- [[opra]] — upstream source of US options data
 - [[options-greeks]] — Finnhub returns Greeks for chain endpoints
 - [[implied-volatility]] — included in options snapshots
 - [[backtesting]] — Finnhub is a common data source for retail backtesting
-- [[interactive-brokers]] — pair with Finnhub for execution
 
 ## Sources
 

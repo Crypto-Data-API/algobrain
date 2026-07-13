@@ -71,7 +71,7 @@ Livermore's rules, developed through decades of painful experience, form the fou
 
 ## "Reminiscences of a Stock Operator"
 
-Edwin Lefevre's "Reminiscences of a Stock Operator," published in 1923 and based on extensive interviews with Livermore (fictionalized as "Larry Livingston"), is widely considered the single most important book ever written about trading (Source: [[book-reminiscences-of-a-stock-operator]]). It has influenced generations of traders including [[paul-tudor-jones]], [[william-o-neil]], and countless others.
+Edwin Lefevre's "Reminiscences of a Stock Operator," published in 1923 and based on extensive interviews with Livermore (fictionalized as "Larry Livingston"), is widely considered the single most important book ever written about trading (Source: [[book-reminiscences-of-a-stock-operator]]). It has influenced generations of traders including [[paul-tudor-jones]], william-o-neil, and countless others.
 
 The book is not a how-to manual but a narrative of a trader's psychological and intellectual development. Its enduring power lies in its honest depiction of the emotional challenges of trading — greed, fear, hope, and the constant temptation to overtrade — and its insight that mastering these psychological forces is more important than any technical system. Key passages on the nature of [[speculation]], the behavior of crowds, and the importance of independent thinking remain as relevant in the age of [[algorithmic-trading]] and [[social-media]] as they were in the bucket shop era.
 

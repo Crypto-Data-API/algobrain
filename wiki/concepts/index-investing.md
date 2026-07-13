@@ -9,10 +9,10 @@ aliases: ["Index Investing", "Passive Investing", "Indexing"]
 domain: [portfolio-theory]
 prerequisites: ["[[index-funds]]", "[[efficient-market-hypothesis]]"]
 difficulty: beginner
-related: ["[[index-funds]]", "[[etf]]", "[[jack-bogle]]", "[[vanguard]]", "[[asset-allocation]]", "[[sp500]]", "[[active-vs-passive-investing]]", "[[rebalancing]]"]
+related: ["[[index-funds]]", "[[etf]]", "[[asset-allocation]]", "[[rebalancing]]"]
 ---
 
-Index investing is a passive investment strategy that seeks to replicate the returns of a market index rather than attempting to outperform it through stock selection or [[market-timing]]. The approach was pioneered by [[jack-bogle]], who founded [[vanguard|Vanguard]] in 1975 and launched the first publicly available index fund (tracking the [[sp500|S&P 500]]) in 1976. The core thesis is that, after accounting for management fees, transaction costs, and taxes, the majority of actively managed funds underperform their benchmark index over long horizons. (This page covers the *strategy*; for the *vehicles*, see [[index-funds]].)
+Index investing is a passive investment strategy that seeks to replicate the returns of a market index rather than attempting to outperform it through stock selection or [[market-timing]]. The approach was pioneered by jack-bogle, who founded Vanguard in 1975 and launched the first publicly available index fund (tracking the S&P 500) in 1976. The core thesis is that, after accounting for management fees, transaction costs, and taxes, the majority of actively managed funds underperform their benchmark index over long horizons. (This page covers the *strategy*; for the *vehicles*, see [[index-funds]].)
 
 ## The Core Thesis
 
@@ -36,7 +36,7 @@ The single most important number in indexing is the [[expense-ratio]], because f
 | 1.00% (typical active) | 7.00% | ~$761,000 | ~$227,000 |
 | 1.50% (expensive active) | 6.50% | ~$661,000 | ~$327,000 |
 
-A seemingly small 1% annual fee consumes roughly a quarter of the terminal wealth versus a near-zero-cost index fund — and that gap is *before* the active fund's tendency to also underperform its benchmark and generate taxable distributions (see [[tax-efficiency]]). This is why [[jack-bogle]] called costs the "tyranny of compounding costs" and treated the [[expense-ratio]] as the most reliable predictor of relative fund performance.
+A seemingly small 1% annual fee consumes roughly a quarter of the terminal wealth versus a near-zero-cost index fund — and that gap is *before* the active fund's tendency to also underperform its benchmark and generate taxable distributions (see [[tax-efficiency]]). This is why jack-bogle called costs the "tyranny of compounding costs" and treated the [[expense-ratio]] as the most reliable predictor of relative fund performance.
 
 ## Vehicles and Weighting
 
@@ -46,7 +46,7 @@ The most common weighting methodology is **market-capitalization weighting**, wh
 
 - **Equal-weight** -- each stock gets the same allocation, tilting toward smaller names and requiring more [[rebalancing]] turnover (e.g. RSP vs SPY for the S&P 500).
 - **Fundamental-weight** -- weighted by revenue, dividends, or book value, breaking the link between price and weight (associated with [[smart-beta]]).
-- **Factor-weighted** -- targeting characteristics like low [[volatility]], high [[momentum]], [[value-investing|value]], or [[quality-factor|quality]] (see [[factor-investing]] and [[smart-beta]]).
+- **Factor-weighted** -- targeting characteristics like low [[volatility]], high [[momentum]], value, or [[quality-factor|quality]] (see [[factor-investing]] and [[smart-beta]]).
 
 | Weighting scheme | Largest holdings | Turnover | Key trade-off |
 |------------------|------------------|----------|---------------|
@@ -78,7 +78,7 @@ Maintenance is trivial: contribute on a schedule (see [[dca-strategy|dollar-cost
 Even for active traders, the index is the benchmark every strategy must beat after costs and risk -- a strategy that fails to outperform a cheap index fund on a risk-adjusted basis (see [[sharpe-ratio]]) has no economic justification. The growth of passive flows also creates exploitable structure:
 
 - **Index-rebalancing flows.** Predictable buying/selling around constituent additions and deletions (and quarterly reweightings) is a well-documented [[event-driven]] pattern that front-runners and index funds both must navigate.
-- **Mega-cap concentration.** Mechanical buying of the largest names is a [[momentum]]-like concentration that can crowd and then violently unwind; by the mid-2020s a handful of names dominated the [[sp500|S&P 500]], raising single-name and sector-correlation risk inside a "diversified" index.
+- **Mega-cap concentration.** Mechanical buying of the largest names is a [[momentum]]-like concentration that can crowd and then violently unwind; by the mid-2020s a handful of names dominated the S&P 500, raising single-name and sector-correlation risk inside a "diversified" index.
 - **Benchmark for cost discipline.** Use the cheapest accessible index fund as the hurdle in any backtest's after-cost, after-tax overlay (see [[backtesting]] and [[tax-efficiency]]).
 
 For the individual investor, a core of broad index funds plus periodic [[rebalancing]] remains the strategy most likely to compound wealth; for the active trader, passive flows are both a benchmark to beat and a source of tradeable order flow.
@@ -95,11 +95,8 @@ For the individual investor, a core of broad index funds plus periodic [[rebalan
 ## Related
 
 - [[index-funds]] -- the vehicles used to implement index investing
-- [[active-vs-passive-investing]] -- the underlying debate
 - [[etf]] -- the dominant modern index vehicle
-- [[jack-bogle]] / [[vanguard]] -- pioneers of the approach
 - [[asset-allocation]] -- index funds as allocation building blocks
-- [[sp500]] -- the canonical index tracked
 - [[rebalancing]] -- the maintenance discipline that pairs with indexing
 
 ## Sources

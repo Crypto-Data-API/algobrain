@@ -9,12 +9,12 @@ aliases: ["NLP", "Natural Language Processing", "NLP Finance", "Natural Language
 domain: [ai-trading]
 prerequisites: ["[[machine-learning-overview]]", "[[artificial-intelligence]]"]
 difficulty: intermediate
-related: ["[[nlp-sentiment-analysis]]", "[[finbert]]", "[[foundation-models]]", "[[llm-market-analysis]]", "[[earnings-call-analysis]]", "[[transformer-architecture]]", "[[embeddings-vector-databases]]", "[[artificial-intelligence]]", "[[edge-taxonomy]]", "[[alternative-data-alpha]]"]
+related: ["[[nlp-sentiment-analysis]]", "[[finbert]]", "[[foundation-models]]", "[[llm-market-analysis]]", "[[transformer-architecture]]", "[[embeddings-vector-databases]]", "[[artificial-intelligence]]", "[[edge-taxonomy]]", "[[alternative-data-alpha]]"]
 ---
 
 # Natural Language Processing (NLP)
 
-**Natural Language Processing** (NLP) is the branch of AI that enables machines to understand, interpret, and generate human language. For trading, NLP is the technology behind [[nlp-sentiment-analysis|sentiment analysis]], [[earnings-call-analysis|earnings call parsing]], SEC filing analysis, news classification, and the conversational capabilities of [[foundation-models|LLMs]] like Claude and GPT-4.
+**Natural Language Processing** (NLP) is the branch of AI that enables machines to understand, interpret, and generate human language. For trading, NLP is the technology behind [[nlp-sentiment-analysis|sentiment analysis]], earnings call parsing, SEC filing analysis, news classification, and the conversational capabilities of [[foundation-models|LLMs]] like Claude and GPT-4.
 
 ## Evolution of NLP in Trading
 
@@ -90,7 +90,6 @@ In the [[edge-taxonomy]], NLP-based trading is primarily an **informational edge
 - [[nlp-sentiment-analysis]] — applied NLP for sentiment extraction
 - [[finbert]] — finance-specific NLP model
 - [[llm-market-analysis]] — LLMs for market analysis
-- [[earnings-call-analysis]] — NLP applied to earnings calls
 - [[foundation-models]] — modern NLP at scale
 - [[embeddings-vector-databases]] — semantic representation of text
 - [[transformer-architecture]] — architecture powering modern NLP

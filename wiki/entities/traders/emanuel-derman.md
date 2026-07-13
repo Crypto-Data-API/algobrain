@@ -8,12 +8,12 @@ tags: [person, quantitative, derivatives, volatility, options, education]
 entity_type: person
 aliases: ["Emanuel Derman", "Derman"]
 website: "https://emanuelderman.com"
-related: ["[[goldman-sachs]]", "[[volatility-smile]]", "[[black-derman-toy]]", "[[derman-kani]]", "[[black-scholes]]", "[[fischer-black]]", "[[local-volatility]]", "[[model-risk]]", "[[my-life-as-a-quant]]", "[[quantitative-trading]]", "[[implied-volatility]]", "[[bruno-dupire]]"]
+related: ["[[volatility-smile]]", "[[black-derman-toy]]", "[[derman-kani]]", "[[black-scholes]]", "[[fischer-black]]", "[[local-volatility]]", "[[model-risk]]", "[[my-life-as-a-quant]]", "[[quantitative-trading]]", "[[implied-volatility]]", "[[bruno-dupire]]"]
 ---
 
 # Emanuel Derman
 
-Emanuel Derman (born 1945, Cape Town, South Africa) is a physicist-turned-quant who became one of the most influential figures in quantitative finance, co-creating the [[black-derman-toy|Black-Derman-Toy]] interest-rate model and the [[derman-kani|Derman-Kani]] [[local-volatility|local volatility]] model at [[goldman-sachs|Goldman Sachs]]. His memoir *[[my-life-as-a-quant|My Life as a Quant]]* (2004) defined the public image of the Wall Street quant, and his later writing made him the field's leading critic of model overconfidence — essential reading for any trader using [[model-risk|models]] to price or trade [[derivatives]].
+Emanuel Derman (born 1945, Cape Town, South Africa) is a physicist-turned-quant who became one of the most influential figures in quantitative finance, co-creating the [[black-derman-toy|Black-Derman-Toy]] interest-rate model and the [[derman-kani|Derman-Kani]] [[local-volatility|local volatility]] model at Goldman Sachs. His memoir *[[my-life-as-a-quant|My Life as a Quant]]* (2004) defined the public image of the Wall Street quant, and his later writing made him the field's leading critic of model overconfidence — essential reading for any trader using [[model-risk|models]] to price or trade [[derivatives]].
 
 ## Key Facts
 
@@ -23,7 +23,7 @@ Emanuel Derman (born 1945, Cape Town, South Africa) is a physicist-turned-quant 
 | **Born** | 1945, Cape Town, South Africa |
 | **Education** | PhD theoretical particle physics, Columbia University (1973) |
 | **Pre-finance** | Academic physics; AT&T Bell Laboratories |
-| **Wall Street** | [[goldman-sachs\|Goldman Sachs]] 1985–2002 (MD, head of Quantitative Strategies); Salomon Brothers 1988–90 |
+| **Wall Street** | Goldman Sachs 1985–2002 (MD, head of Quantitative Strategies); Salomon Brothers 1988–90 |
 | **Known for** | [[black-derman-toy\|Black-Derman-Toy]] model (1990); [[derman-kani\|Derman-Kani local volatility]] (1994) |
 | **Signature book** | *[[my-life-as-a-quant\|My Life as a Quant]]* (2004) |
 | **Honors** | IAFE/SunGard Financial Engineer of the Year (2000); *Risk* Hall of Fame (2002) |
@@ -66,7 +66,6 @@ Derman is one of the people who turned "quant" from a niche backroom role into a
 
 ## Related
 
-- [[goldman-sachs]] — where he built his models (1985-2002)
 - [[fischer-black]] — co-author of the Black-Derman-Toy model
 - [[black-derman-toy]] — his no-arbitrage short-rate model
 - [[derman-kani]] — the implied-tree local volatility model

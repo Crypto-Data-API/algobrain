@@ -48,7 +48,7 @@ Because moving averages are computed from past prices, the golden cross is a **l
 
 ## Trading Relevance
 
-Traders use the golden cross less as a precise entry trigger and more as a **[[market-regime|regime]] filter** — a signal that the longer-term backdrop has turned constructive, justifying a bias toward long positions and [[trend-following|trend-continuation]] setups. It is most associated with liquid instruments tracked by institutions ([[sp500|S&P 500]], [[nasdaq|NASDAQ 100]], large-cap stocks), where widespread monitoring of the 50/200 cross can create a degree of self-fulfilling reflexivity as managers and the financial media react to the signal.
+Traders use the golden cross less as a precise entry trigger and more as a **[[market-regime|regime]] filter** — a signal that the longer-term backdrop has turned constructive, justifying a bias toward long positions and [[trend-following|trend-continuation]] setups. It is most associated with liquid instruments tracked by institutions (S&P 500, NASDAQ 100, large-cap stocks), where widespread monitoring of the 50/200 cross can create a degree of self-fulfilling reflexivity as managers and the financial media react to the signal.
 
 How traders actually apply it:
 

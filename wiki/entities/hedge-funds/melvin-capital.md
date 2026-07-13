@@ -8,7 +8,7 @@ tags: [hedge-funds, short-selling, history, stocks, options, risk-management, de
 entity_type: fund
 founded: 2014
 headquarters: "New York, USA"
-related: ["[[gamestop-short-squeeze]]", "[[gamestop]]", "[[short-selling]]", "[[short-interest]]", "[[float]]", "[[gamma-squeeze]]", "[[options-concentration-risk]]", "[[risk-of-ruin]]", "[[citadel]]", "[[robinhood]]", "[[reddit]]", "[[r-wallstreetbets]]", "[[point72]]", "[[sac-capital]]", "[[gabe-plotkin]]"]
+related: ["[[gamestop-short-squeeze]]", "[[short-selling]]", "[[short-interest]]", "[[float]]", "[[gamma-squeeze]]", "[[options-concentration-risk]]", "[[risk-of-ruin]]", "[[citadel]]", "[[robinhood]]", "[[reddit]]", "[[r-wallstreetbets]]", "[[point72]]", "[[sac-capital]]", "[[gabe-plotkin]]"]
 ---
 
 Melvin Capital Management was a long/short equity [[hedge-funds|hedge fund]] founded by Gabe Plotkin in 2014, named after his late grandfather, that became the most prominent casualty of the January 2021 [[gamestop-short-squeeze]]. The fund's destruction is the canonical modern case study for [[options-concentration-risk]], crowded short positioning in low-[[float]] names, and reflexivity between options flow and underlying price — and the lessons it teaches are now standard reference material for any options or short-biased trader.
@@ -21,7 +21,7 @@ Returns in the first years were exceptional. Melvin reportedly compounded at ove
 
 ## The GameStop Short — Why It Was Crowded
 
-Melvin held a large short position in [[gamestop|GameStop (GME)]] as part of a broader bet on secular decline in brick-and-mortar retail. By late 2020 the position was no longer unique: GME was the most heavily shorted name in the Russell 3000 by [[short-interest]] as a percentage of [[float]], with reported short interest exceeding **140% of the public float** — meaning more shares had been borrowed and sold short than actually existed in tradable form, a situation enabled by the mechanics of [[securities-lending]] and [[rehypothecation]].
+Melvin held a large short position in GameStop (GME) as part of a broader bet on secular decline in brick-and-mortar retail. By late 2020 the position was no longer unique: GME was the most heavily shorted name in the Russell 3000 by [[short-interest]] as a percentage of [[float]], with reported short interest exceeding **140% of the public float** — meaning more shares had been borrowed and sold short than actually existed in tradable form, a situation enabled by the mechanics of [[securities-lending]] and [[rehypothecation]].
 
 Several structural risk factors were stacked on the same trade:
 

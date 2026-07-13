@@ -30,7 +30,7 @@ Speculation is the act of taking a financial position in pursuit of profit from 
 
 The line between speculation and investing is blurry and sits on a spectrum rather than a hard boundary, but the two ends differ in **source of return, time horizon, and basis for the decision**:
 
-- **Investing** — Buying assets based on intrinsic-value analysis (see [[fundamental-analysis]] and [[intrinsic-value]]), expecting returns to come from the asset's own cash flows — [[dividends]], earnings growth, interest — compounded over long horizons. The thesis survives even if the market quote does not move for years.
+- **Investing** — Buying assets based on intrinsic-value analysis (see fundamental-analysis and intrinsic-value), expecting returns to come from the asset's own cash flows — dividends, earnings growth, interest — compounded over long horizons. The thesis survives even if the market quote does not move for years.
 - **Speculation** — Buying or selling based on an expected *price change*, often over shorter horizons, frequently with [[leverage]] or [[derivatives]], where the return depends on someone else paying a different price later.
 
 As Benjamin Graham put it: *"An investment operation is one which, upon thorough analysis, promises safety of principal and an adequate return. Operations not meeting these requirements are speculative."* Keynes drew a parallel distinction between **enterprise** ("forecasting the prospective yield of assets over their whole life") and **speculation** ("forecasting the psychology of the market"), and warned that markets get dangerous when speculation dominates enterprise.

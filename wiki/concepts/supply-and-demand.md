@@ -28,7 +28,7 @@ A **demand curve** slopes downward — buyers want more at lower prices. A **sup
 | | Demand curve shifts when… | Supply curve shifts when… |
 |---|---|---|
 | Cause | Incomes, tastes, substitutes, expectations change | Input costs, technology, capacity, regulation change |
-| Equities | Index inclusion, flows, sentiment, buybacks | New issuance / [[share-dilution\|dilution]], lock-up expiry |
+| Equities | Index inclusion, flows, sentiment, buybacks | New issuance / dilution, lock-up expiry |
 | Commodities | Weather, growth cycle, stimulus | Mine/well output, OPEC quotas, harvest |
 | Crypto | Adoption, ETF flows, narrative | Issuance schedule, [[2024-04-19-bitcoin-halving\|halving]], miner selling |
 | Result | New equilibrium price | New equilibrium price |
@@ -46,7 +46,7 @@ In a continuous market the principle operates at the level of the [[order-book]]
 Key market-specific applications:
 
 - **Commodities** — physical inventory, production, and consumption drive curves; [[contango]] and [[backwardation]] in the futures curve encode the market's read on the supply/demand balance and [[convenience-yield]]. Inventory reports (EIA, USDA) are pure supply/demand catalysts.
-- **Equities** — float, [[share-dilution|dilution]], buybacks, and index inclusion change effective supply; flows and sentiment change demand. Tight float plus a demand surge produces squeezes.
+- **Equities** — float, dilution, buybacks, and index inclusion change effective supply; flows and sentiment change demand. Tight float plus a demand surge produces squeezes.
 - **Crypto** — fixed or programmatic issuance schedules (e.g. the [[2024-04-19-bitcoin-halving|Bitcoin halving]]) are explicit supply shocks; exchange balances and [[on-chain-analysis|on-chain]] flows proxy demand.
 - **Liquidity** — thin [[liquidity]] means the same imbalance moves price more; [[slippage]] is the cost of demanding immediacy against limited supply.
 

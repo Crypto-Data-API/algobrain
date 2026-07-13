@@ -9,7 +9,7 @@ aliases: ["Pain Trade", "The Pain Trade", "Path of Maximum Pain", "Max Pain Trad
 domain: [behavioral-finance, risk-management]
 prerequisites: ["[[loss-aversion]]", "[[crowding-risk]]"]
 difficulty: intermediate
-related: ["[[crowding-risk]]", "[[positioning-data]]", "[[sentiment-indicators]]", "[[contrarian-investing]]", "[[short-squeeze]]", "[[deleveraging]]", "[[loss-aversion]]", "[[behavioral-finance-overview]]", "[[itpm-god-like-trader-status]]", "[[max-pain]]"]
+related: ["[[crowding-risk]]", "[[positioning-data]]", "[[sentiment-indicators]]", "[[short-squeeze]]", "[[deleveraging]]", "[[loss-aversion]]", "[[behavioral-finance-overview]]", "[[itpm-god-like-trader-status]]", "[[max-pain]]"]
 ---
 
 The **pain trade** (also "the path of maximum pain") is the market move that inflicts the greatest loss — or forgone gain — on the largest number of positioned participants. It is the direction the market is *least* prepared for: when positioning is overwhelmingly one-sided, the pain trade is the move *against* the crowd, because the crowd is already all-in and the marginal buyer/seller has been exhausted. It is a positioning-and-sentiment concept, not a valuation one — the pain trade can be against the fundamentally "correct" direction and still happen, precisely because everyone who agreed with the fundamentals has already acted.
@@ -44,7 +44,7 @@ The pain trade is primarily a **risk-management and contrarian-overlay tool**, n
 
 1. **Position-stress check.** Before sizing a trade, ask: "Is my thesis the consensus? If so, what's the pain trade, and can my book survive it?" If your trade *is* the crowded side, size down and tighten risk — you are short the pain trade.
 2. **Reading positioning data.** The pain trade is inferred, not observed directly. Inputs: [[positioning-data|CFTC Commitments of Traders]], [[aaii-sentiment|AAII / Investors Intelligence sentiment]], fund-flow data, put/call ratios, prime-broker positioning notes, and [[gamma-exposure|dealer gamma]] estimates. When these line up one-sided, the pain trade is the opposite move.
-3. **Contrarian timing filter.** Extreme positioning is a *necessary but not sufficient* condition — crowds can stay crowded for a long time. Pair the pain-trade read with a catalyst or a price/structure trigger ([[contrarian-investing]] discipline) rather than fading consensus blindly.
+3. **Contrarian timing filter.** Extreme positioning is a *necessary but not sufficient* condition — crowds can stay crowded for a long time. Pair the pain-trade read with a catalyst or a price/structure trigger (contrarian-investing discipline) rather than fading consensus blindly.
 4. **Expecting the "obvious" trade to fail first.** A widely telegraphed catalyst (an expected Fed cut, an "obvious" earnings beat) is often already in the price; the pain trade is frequently "buy the rumour, sell the news" or its inverse, because the consensus has pre-positioned.
 
 The asymmetry that makes the concept useful: betting *with* a crowded trade offers limited upside (most of the move has happened) and large downside (the unwind); betting on the pain trade offers the reverse payoff profile when positioning is genuinely extreme.
@@ -69,7 +69,6 @@ The asymmetry that makes the concept useful: betting *with* a crowded trade offe
 - [[crowding-risk]] — the condition that creates the pain trade; this page is the resolution side
 - [[positioning-data]] — COT and flow data used to infer the pain trade
 - [[sentiment-indicators]] — AAII, put/call, surveys that flag one-sided positioning
-- [[contrarian-investing]] — the discipline of trading against extreme consensus
 - [[short-squeeze]] — the pain trade when the crowd is short
 - [[deleveraging]] — the forced-flow mechanism that amplifies the move
 - [[gamma-exposure]] — dealer hedging as a pain-trade amplifier

@@ -14,7 +14,7 @@ difficulty: advanced
 
 A **VIX call** is a single listed call option on the [[vix|CBOE Volatility Index (VIX)]]: a cash-settled, European-style derivative whose terminal payoff is `max(VRO - K, 0) × $100`, where VRO is the [[vix-soq|special opening quotation]] of the VIX on expiration morning and K is the strike. This page describes what a VIX call **is** as an instrument -- its contract specification, pricing model, and Greek behaviour. The strategy of buying VIX calls as a portfolio hedge is covered separately in [[vix-calls]].
 
-The single most important fact about a VIX call is that **its underlying is not the spot VIX**. Spot VIX is not tradeable -- it is a 30-day forward implied vol synthesised from a strip of [[spx-options|SPX options]]. The economic underlying of a VIX call is the matching [[vix-futures|VIX futures contract]] expiring on the same date. Every Greek and every pricing intuition for VIX calls flows from this fact.
+The single most important fact about a VIX call is that **its underlying is not the spot VIX**. Spot VIX is not tradeable -- it is a 30-day forward implied vol synthesised from a strip of SPX options. The economic underlying of a VIX call is the matching [[vix-futures|VIX futures contract]] expiring on the same date. Every Greek and every pricing intuition for VIX calls flows from this fact.
 
 ## Overview
 

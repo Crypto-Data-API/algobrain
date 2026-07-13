@@ -47,7 +47,7 @@ The [[covid-crash|COVID crash]] of February-March 2020 was a different kind of s
 - **COVID (Feb-March 2020)** was a multi-week, multi-asset, [[liquidity-crisis|liquidity-crisis]] vol regime in which:
   - SPX implied vol exceeded 80, multi-year highs.
   - Euro Stoxx and Nikkei vols rose simultaneously, eliminating the diversification benefit of the cross-regional short.
-  - **Correlations spiked to ~1** across single names within indices, which is the worst possible regime for [[dispersion-trade|dispersion]] books -- the long-single-name-vol leg lagged the short-index-vol leg's losses.
+  - **Correlations spiked to ~1** across single names within indices, which is the worst possible regime for dispersion books -- the long-single-name-vol leg lagged the short-index-vol leg's losses.
   - Liquidity in OTM index options collapsed; bid-ask spreads in stressed wings widened many multiples.
 
 Public reporting in *Bloomberg*, *Wall Street Journal*, and *Institutional Investor* in March-April 2020 indicated Malachite told investors the funds had suffered losses sufficient to render the strategy non-viable, and that the firm would close positions and wind down. Institutional Investor's post-mortem ("How to Lose a Billion Dollars Without Really Trying") reported that the blow-up left losses roughly **twice the size of the ~$600M fund itself** — counterparties as well as investors absorbed the damage, which is why the episode also triggered investor-claims investigations against the consultant (Fund Evaluation Group) that had recommended the fund.
@@ -85,7 +85,6 @@ The Malachite case is now used alongside LJM in vol-strategy due diligence as a 
 - [[universa-investments]] -- the structural opposite
 - [[gap-risk]] -- the failure mechanism
 - [[liquidity-crisis]] -- the secondary failure mechanism
-- [[dispersion-trade]] -- a key Malachite strategy component
 - [[failure-modes]] -- failure-mode taxonomy
 
 ## Sources

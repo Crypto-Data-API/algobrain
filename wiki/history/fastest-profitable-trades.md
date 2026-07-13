@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [history, behavioral-finance, risk-management, derivatives, options]
 aliases: ["Fastest Trades", "Greatest Single Trades", "Asymmetric Trade Pattern Library", "Convex Trade Hall of Fame"]
-related: ["[[2020-03-ackman-pandemic-cds-trade]]", "[[2007-2008-burry-subprime-cds-trade]]", "[[2006-09-amaranth-natural-gas-blowup]]", "[[2008-10-vw-porsche-short-squeeze]]", "[[1815-rothschild-waterloo-info-arbitrage]]", "[[1992-black-wednesday-erm-crisis]]", "[[1987-andy-krieger-nzd-short]]", "[[counterparty-stress-arbitrage]]", "[[convex-tail-hedge-arbitrage]]", "[[crisis-alpha]]", "[[information-arbitrage]]", "[[history-overview]]", "[[risk-management]]"]
+related: ["[[2020-03-ackman-pandemic-cds-trade]]", "[[2007-2008-burry-subprime-cds-trade]]", "[[2006-09-amaranth-natural-gas-blowup]]", "[[1815-rothschild-waterloo-info-arbitrage]]", "[[1992-black-wednesday-erm-crisis]]", "[[1987-andy-krieger-nzd-short]]", "[[counterparty-stress-arbitrage]]", "[[convex-tail-hedge-arbitrage]]", "[[crisis-alpha]]", "[[information-arbitrage]]", "[[history-overview]]", "[[risk-management]]"]
 ---
 
 This page extracts the **structural patterns** common to the fastest large profits in modern trading history — Krieger 1987, Soros 1992, Druckenmiller, Burry 2005-08, Arnold 2006, Ackman 2020, and historical antecedents going back to the Rothschilds. The headline P&Ls are eye-catching ($1B+ in days, 100× on premium) but more useful is the **architecture** — what these trades share, what's repeatable, and what's not. Each represents a documented case where a trader extracted enormous value in a short window. The synthesis identifies four reusable patterns and the conditions required to find them in current markets.
@@ -274,7 +274,6 @@ The patterns are 200+ years old. The instruments change; the structures don't.
 - [[2020-03-ackman-pandemic-cds-trade]]
 - [[2007-2008-burry-subprime-cds-trade]]
 - [[2006-09-amaranth-natural-gas-blowup]]
-- [[2008-10-vw-porsche-short-squeeze]]
 - [[1815-rothschild-waterloo-info-arbitrage]]
 - [[1992-black-wednesday-erm-crisis]]
 - [[1987-andy-krieger-nzd-short]]

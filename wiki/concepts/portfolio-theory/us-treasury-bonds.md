@@ -49,7 +49,7 @@ The [[yield-curve]] plots Treasury yields across all maturities and is one of th
 
 ## Role in Financial Markets
 
-Treasury yields serve as the foundation for pricing virtually every financial instrument. Corporate bond yields are quoted as a spread over Treasuries of equivalent maturity. Mortgage rates are benchmarked to the 10-year note. The [[discounted-cash-flow|DCF]] discount rate, equity risk premiums, and [[weighted-average-cost-of-capital|WACC]] calculations all begin with the risk-free rate. When Treasury yields move, the repricing ripples across stocks, real estate, and credit markets globally. During periods of market stress, investors flee to Treasuries as a safe haven ("flight to quality"), pushing bond prices up and yields down. This inverse relationship between Treasury prices and yields is central to understanding [[interest-rate-risk]].
+Treasury yields serve as the foundation for pricing virtually every financial instrument. Corporate bond yields are quoted as a spread over Treasuries of equivalent maturity. Mortgage rates are benchmarked to the 10-year note. The DCF discount rate, equity risk premiums, and WACC calculations all begin with the risk-free rate. When Treasury yields move, the repricing ripples across stocks, real estate, and credit markets globally. During periods of market stress, investors flee to Treasuries as a safe haven ("flight to quality"), pushing bond prices up and yields down. This inverse relationship between Treasury prices and yields is central to understanding [[interest-rate-risk]].
 
 ## Monetary Policy Transmission
 
@@ -75,7 +75,7 @@ The note loses roughly 8.5% of its market value, partially offset by a small pos
 
 | Use case | Instrument / expression | Rationale |
 |---|---|---|
-| **Risk-free benchmark** | T-bill / SOFR-adjacent rate | Discount rate for [[discounted-cash-flow|DCF]], starting point for [[weighted-average-cost-of-capital|WACC]] and the [[risk-free-rate]] |
+| **Risk-free benchmark** | T-bill / SOFR-adjacent rate | Discount rate for DCF, starting point for WACC and the [[risk-free-rate]] |
 | **Safe-haven / flight-to-quality** | Long notes & bonds, futures | Bid up in crises; classic equity-drawdown hedge (pre-2022) |
 | **Macro rate view** | Move along the curve; extend/shorten [[duration]] | Long duration for cuts/recession, short for hikes |
 | **Curve view** | Steepeners / flatteners (e.g. 2s10s) | Trade the *shape* without taking outright level risk |

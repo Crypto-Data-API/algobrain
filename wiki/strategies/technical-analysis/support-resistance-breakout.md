@@ -24,7 +24,6 @@ related:
   - "[[volatility-breakout]]"
   - "[[rsi-divergence]]"
   - "[[book-technical-analysis-of-the-financial-markets]]"
-  - "[[book-how-to-make-money-in-stocks]]"
 ---
 
 # Support and Resistance Breakout Strategy
@@ -39,7 +38,7 @@ The Support and Resistance Breakout strategy trades price breaking through estab
 1. **Identify Key Levels:** Mark horizontal [[support-resistance]] levels that price has tested at least **2-3 times**. The more touches, the more significant the level.
 2. **Breakout Entry:** Enter when price closes **above resistance** (for longs) or **below support** (for shorts) on a candle with above-average [[volume]] (>1.5x the 20-bar average).
 3. **Retest Entry (Preferred):** Wait for price to break through the level, then pull back to retest the broken level (former resistance becomes support). Enter on the retest candle that holds the level. This avoids fakeouts.
-4. **Volume Confirmation:** The breakout candle must show a meaningful volume spike. Low-volume breakouts have a high probability of failure (Source: [[book-how-to-make-money-in-stocks]]).
+4. **Volume Confirmation:** The breakout candle must show a meaningful volume spike. Low-volume breakouts have a high probability of failure (Source: book-how-to-make-money-in-stocks).
 5. **Multiple Timeframe Alignment:** The breakout on the entry timeframe should align with the trend on one timeframe higher (e.g., break out on the 4H, trend is bullish on the daily).
 
 ### Exit Rules
@@ -82,7 +81,7 @@ The Support and Resistance Breakout strategy trades price breaking through estab
 
 - Conceptually simple and intuitive; beginner-friendly entry into [[technical-analysis]]
 - Clear, predefined levels remove ambiguity from trade planning
-- Works on all timeframes and all liquid markets ([[stocks]], [[crypto]], [[forex]])
+- Works on all timeframes and all liquid markets (stocks, [[crypto]], [[forex]])
 - The retest entry provides excellent risk/reward with tight stops
 - Breakout levels are visible to many traders, creating self-reinforcing dynamics
 
@@ -98,4 +97,3 @@ The Support and Resistance Breakout strategy trades price breaking through estab
 ## Sources
 
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy's foundational treatment of support/resistance theory, role reversal (broken support becoming resistance and vice versa), and breakout confirmation techniques
-- [[book-how-to-make-money-in-stocks]] -- O'Neil emphasizes volume confirmation on breakouts from bases as a core element of the CAN SLIM system, directly applicable to breakout trading

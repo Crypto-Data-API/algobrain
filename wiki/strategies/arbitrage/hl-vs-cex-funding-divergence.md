@@ -220,7 +220,7 @@ The strategy consumes four primary signal families: **[[funding-rate]]** (the sp
 | **Historical funding distribution** | Velo Data, Amberdata, Laevitas; cryptodataapi.com history | Backtest the per-pair spread distribution; size `MAX_HOLD_PERIODS` |
 | **HL + CEX mark prices** | Native WS | Divergence sanity check (skip if > 50 bp; see [[hyperliquid-oracle-mechanics]]) |
 | **HL + CEX top-of-book depth** | Native WS | Liquidity gate — need 3x intended size at top or slippage eats the spread |
-| **HL + CEX [[open-interest]]** | Native API; [[coinglass]]; cryptodataapi.com | Confirms the divergence is real flow, not an [[oracle]]/print artefact |
+| **HL + CEX [[open-interest]]** | Native API; [[coinglass]]; cryptodataapi.com | Confirms the divergence is real flow, not an oracle/print artefact |
 | **Spread persistence histogram (per pair)** | Derived from funding history | How long the spread holds > 5 bp before reverting; the persistence filter input |
 
 ## Example trade

@@ -264,5 +264,3 @@ Pearson correlation also only measures *linear* association. Two assets can have
 - [[tail-risk]] -- Where linear correlation breaks down and dependence concentrates
 - [[pairs-trading]] -- A strategy that directly exploits high correlation
 - [[diversification]] -- The free lunch that low correlation provides
-- [[quantitative-equity]] -- Multi-factor blends rely on low inter-factor correlation
-- [[ai-sector-rotation-energy-hedge]] -- A cross-sector hedge whose value depends on the correlation holding

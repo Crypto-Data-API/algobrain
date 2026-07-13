@@ -14,7 +14,6 @@ related:
   - "[[position-sizing]]"
   - "[[volatility]]"
   - "[[interest-rates]]"
-  - "[[book-the-intelligent-investor]]"
   - "[[book-a-random-walk-down-wall-street]]"
   - "[[book-machine-learning-for-asset-managers]]"
 ---
@@ -71,8 +70,8 @@ For an equal-weighted portfolio of *N* assets each with the same volatility σ a
 
 - **Correlation is key**: Diversification only works when holdings are not perfectly correlated. Holding 50 tech stocks provides far less diversification than holding 10 stocks across different sectors.
 - **Correlation spikes in crises**: During market panics, correlations increase toward 1.0, reducing diversification benefits precisely when they are needed most (Source: [[book-machine-learning-for-asset-managers]]).
-- **Over-diversification (diworsification)**: Too many holdings can dilute returns, increase costs, and make the portfolio unmanageable without meaningfully reducing risk further. Graham recommended that defensive investors hold 10-30 stocks across industries (Source: [[book-the-intelligent-investor]]).
-- **Diversification is about exposures, not counts**: Holding 50 tech stocks, or both [[spy-qqq|SPY and QQQ]] (which overlap heavily), feels diversified but concentrates a single factor bet. True diversification spreads *risk factors* — equity, rates, credit, inflation, growth — not just tickers.
+- **Over-diversification (diworsification)**: Too many holdings can dilute returns, increase costs, and make the portfolio unmanageable without meaningfully reducing risk further. Graham recommended that defensive investors hold 10-30 stocks across industries (Source: book-the-intelligent-investor).
+- **Diversification is about exposures, not counts**: Holding 50 tech stocks, or both SPY and QQQ (which overlap heavily), feels diversified but concentrates a single factor bet. True diversification spreads *risk factors* — equity, rates, credit, inflation, growth — not just tickers.
 
 ## The Limits of Diversification
 
@@ -105,7 +104,6 @@ Even within a single trading session, avoid concentrating risk in correlated pos
 ## Sources
 
 - [[book-a-random-walk-down-wall-street]] — Malkiel's case for diversification as the cornerstone of passive investing and efficient markets
-- [[book-the-intelligent-investor]] — Graham's practical guidance on diversification for defensive investors
 - [[book-machine-learning-for-asset-managers]] — de Prado (2020) introduces Hierarchical Risk Parity (HRP), a machine learning approach to portfolio diversification that uses hierarchical clustering to build more stable, diversified allocations than traditional mean-variance optimization
 
 ## Related

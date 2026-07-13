@@ -12,8 +12,6 @@ headquarters: "Chicago, IL, USA"
 website: "https://www.schwab.com/trading/thinkorswim"
 related:
   - "[[tom-sosnoff]]"
-  - "[[interactive-brokers]]"
-  - "[[tastytrade]]"
   - "[[implied-volatility]]"
   - "[[iron-condor]]"
   - "[[trading-platforms]]"
@@ -21,7 +19,7 @@ related:
   - "[[credit-spread]]"
 ---
 
-**thinkorswim** (TOS) is an advanced options and equities trading platform originally created by [[tom-sosnoff]] and Scott Sheridan in 1999. It was acquired by TD Ameritrade for approximately $750 million in 2009 and is now part of [[charles-schwab|Charles Schwab]] following Schwab's acquisition of TD Ameritrade in 2020. It is widely regarded as the de facto platform for retail options traders.
+**thinkorswim** (TOS) is an advanced options and equities trading platform originally created by [[tom-sosnoff]] and Scott Sheridan in 1999. It was acquired by TD Ameritrade for approximately $750 million in 2009 and is now part of Charles Schwab following Schwab's acquisition of TD Ameritrade in 2020. It is widely regarded as the de facto platform for retail options traders.
 
 ## History
 
@@ -34,7 +32,7 @@ thinkorswim was founded as a brokerage firm focused on options trading. [[tom-so
 - **2025**: Schwab announced a round of trading-experience enhancements to the thinkorswim suite, including a new Account Display
 - **2026**: Schwab added **24/7 cryptocurrency trading** availability on thinkorswim as part of its 2026 retail trading enhancements; thinkorswim remains Schwab's core advanced retail trading suite across desktop, web, and mobile
 
-After selling thinkorswim, Sosnoff went on to create [[tastytrade]] (media/education) and tastyworks (brokerage, later rebranded to tastytrade), applying similar design philosophies.
+After selling thinkorswim, Sosnoff went on to create tastytrade (media/education) and tastyworks (brokerage, later rebranded to tastytrade), applying similar design philosophies.
 
 ## Clients and Access
 
@@ -46,7 +44,7 @@ thinkorswim ships as a coordinated suite rather than a single app; the desktop a
 | **Web** | Browser access, no install | Reduced feature surface vs desktop |
 | **Mobile** (iOS/Android) | Trade entry, position management, charting on the go | Reduced functionality vs desktop |
 
-Access is **brokerage-tied**: a [[charles-schwab|Schwab]] account is required, and there is no standalone platform fee for account holders.
+Access is **brokerage-tied**: a Schwab account is required, and there is no standalone platform fee for account holders.
 
 ## Feature Reference
 
@@ -130,7 +128,7 @@ TOS includes a full-featured paper trading mode (called "paperMoney") that mirro
 
 ### Premium Selling
 
-TOS is particularly well-suited for premium selling strategies popularized by [[tom-sosnoff]] and the [[tastytrade]] methodology:
+TOS is particularly well-suited for premium selling strategies popularized by [[tom-sosnoff]] and the tastytrade methodology:
 
 - Quick construction of [[iron-condor|iron condors]], strangles, and [[credit-spread|credit spreads]]
 - [[iv-rank-and-iv-percentile|IV Rank and IV Percentile]] displayed prominently
@@ -141,7 +139,7 @@ TOS is particularly well-suited for premium selling strategies popularized by [[
 
 - Earnings calendar integration with options chain
 - Historical volatility crush data via thinkBack
-- Quick deployment of [[earnings-options-strategies|earnings strategies]] (straddles, strangles, iron condors)
+- Quick deployment of earnings strategies (straddles, strangles, iron condors)
 
 ### Portfolio Management
 
@@ -157,7 +155,7 @@ thinkorswim's automation surface is built around **thinkScript** rather than a g
 - **thinkScript** powers custom indicators, multi-condition scans, and conditional alerts, but it is an *analytical/alerting* language — it is not a transferable algorithmic-execution framework, and scripts do not port to other platforms.
 - **Conditional orders** (OCO, OTO, trailing, study-triggered) let traders pre-stage execution logic inside the platform without external code.
 - **Schwab developer API** — order routing into Schwab accounts is available through Schwab's API rather than through thinkorswim itself; automation tools commonly bridge signals into Schwab accounts via a webhook layer such as [[traderspost]] or [[trade-automation-toolbox]].
-- **Third-party analytics** — traders who want richer historical options backtesting than thinkBack provides often pair TOS with [[optionnet-explorer]] or [[orats]].
+- **Third-party analytics** — traders who want richer historical options backtesting than thinkBack provides often pair TOS with [[optionnet-explorer]] or orats.
 
 For systematic options traders, the common pattern is: generate signals/scan in thinkScript (or externally), then route execution through Schwab's API or a webhook automation layer. See [[trading-automation]] and [[webhook-trading]] for the general architecture.
 
@@ -171,14 +169,14 @@ A representative discretionary options workflow:
 4. **Paper-test** novel ideas in paperMoney before committing capital; study past behavior in thinkBack.
 5. **Manage** at the portfolio level using [[beta]]-weighted delta and aggregated [[greeks]] for market-neutral oversight.
 
-The platform's density makes it the de facto choice for serious retail options traders pursuing the [[options-premium-selling|premium-selling]] and [[earnings-options-strategies|earnings]] playbooks associated with [[tom-sosnoff]].
+The platform's density makes it the de facto choice for serious retail options traders pursuing the [[options-premium-selling|premium-selling]] and earnings playbooks associated with [[tom-sosnoff]].
 
 ## Competitors
 
 | Platform | Strengths | Weaknesses vs TOS |
 |----------|-----------|-------------------|
-| [[interactive-brokers\|Interactive Brokers TWS]] | Lower commissions, global markets, API access | Steeper learning curve, less intuitive options UI |
-| [[tastytrade]] | Cleaner UI, built for options, lower fees | Fewer charting features, no thinkScript equivalent |
+| Interactive Brokers TWS | Lower commissions, global markets, API access | Steeper learning curve, less intuitive options UI |
+| tastytrade | Cleaner UI, built for options, lower fees | Fewer charting features, no thinkScript equivalent |
 | [[tradingview-platform\|TradingView]] | Best charting, social features, [[pine-script\|Pine Script]] | Limited brokerage integration, weaker options tools |
 | [[ninjatrader\|NinjaTrader]] | Superior futures trading, advanced charting | Weak options support |
 
@@ -201,16 +199,12 @@ The platform's density makes it the de facto choice for serious retail options t
 ## Related
 
 - [[tom-sosnoff]] -- Creator of thinkorswim
-- [[tastytrade]] -- Sosnoff's subsequent platform and media company
 - [[tastytrade-platform]] -- the spiritual successor platform built by the same founders
-- [[interactive-brokers]] -- Primary competitor for active options traders
-- [[charles-schwab]] -- current owner since the 2020 TD Ameritrade acquisition
 - [[trading-platforms]] -- Overview of available platforms
 - [[optionnet-explorer]] -- third-party analytics often paired with TOS for richer backtesting
 - [[traderspost]] -- webhook automation layer that can route signals into Schwab accounts
 - [[trade-automation-toolbox]] -- alternative webhook/automation bridge for Schwab order routing
 - [[trading-automation]] -- general architecture for automating signals into broker execution
-- [[orats]] -- third-party options data and backtesting often paired with TOS
 - [[implied-volatility]] -- Core metric displayed throughout TOS
 - [[iron-condor]] -- Popular strategy easily built in TOS
 - [[options-position-sizing]] -- Position sizing for options trades

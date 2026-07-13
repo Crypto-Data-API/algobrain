@@ -28,7 +28,7 @@ Marc Chaikin (b. c. 1943) is an American stock analyst with a 50+ year Wall Stre
 | **Flagship product** | Power Gauge — 20-factor "quantamental" stock rating |
 | **Acquired by** | MarketWise (Stansberry/MarketWise parent), 2021 |
 | **Lineage** | Refined [[joseph-granville\|Granville]]'s [[on-balance-volume\|OBV]] and [[larry-williams\|Williams]]' accumulation work |
-| **Domain** | [[stocks]], [[indicators]], [[volume]]-based [[money-flow]] analysis |
+| **Domain** | stocks, [[indicators]], [[volume]]-based [[money-flow]] analysis |
 
 ## Career
 

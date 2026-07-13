@@ -20,7 +20,7 @@ crowding_risk: low
 expected_sharpe: 0.4
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 50
-related: ["[[lump-sum-investing]]", "[[rebalancing]]", "[[wealth-building]]", "[[market-timing]]", "[[behavioral-finance]]", "[[equity-risk-premium]]"]
+related: ["[[lump-sum-investing]]", "[[rebalancing]]", "[[market-timing]]", "[[behavioral-finance]]", "[[equity-risk-premium]]"]
 ---
 
 Dollar-cost averaging (DCA) is an investment strategy where a fixed dollar amount is invested at regular intervals (e.g., weekly or monthly) regardless of the asset's price. By investing a constant amount, the investor automatically buys more shares when prices are low and fewer when prices are high, resulting in an average cost per share that is mathematically lower than or equal to the average price over the same period (the harmonic mean of purchase prices is at most the arithmetic mean). DCA is not an alpha strategy — it is a risk-spreading and behavioral commitment device for harvesting the long-run [[equity-risk-premium]].
@@ -196,7 +196,6 @@ General market knowledge; no specific wiki source ingested yet.
 - [[lump-sum-investing]] — the statistically favored alternative when capital is already available
 - [[market-timing]] — the behavior DCA is designed to eliminate
 - [[rebalancing]] — the natural companion discipline for maintaining target weights
-- [[wealth-building]] — the broader goal DCA serves
 - [[behavioral-finance]] — the field explaining why DCA persists despite mean-variance suboptimality
 - [[equity-risk-premium]] — the return source DCA harvests
 - [[edge-taxonomy]] — classification of edge sources referenced above

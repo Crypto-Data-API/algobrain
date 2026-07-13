@@ -36,9 +36,9 @@ Exchange-native icebergs have a disadvantage: they lose time priority after each
 Despite the intent to hide, iceberg orders leave telltale footprints that modern order flow tools can identify:
 
 1. **Repeated fills at the same price**: The most basic detection method. If the same bid or ask price is hit 20, 50, or 100 times with similar-sized fills, it strongly suggests an iceberg. Normal limit orders fill once and are gone.
-2. **Replenishing depth**: On a depth-of-market (DOM) display or [[bookmap]] heatmap, you can see a level that keeps "refilling" after being consumed. The resting quantity at a price drops to zero, then immediately reappears.
+2. **Replenishing depth**: On a depth-of-market (DOM) display or bookmap heatmap, you can see a level that keeps "refilling" after being consumed. The resting quantity at a price drops to zero, then immediately reappears.
 3. **Volume vs. visible size mismatch**: A price level shows only 50 contracts on the book, but 2,000 contracts trade there in a short time. The volume far exceeds what was ever visible. [[footprint-charts]] make this mismatch obvious.
-4. **Algorithmic detection**: Tools like [[jigsaw|Jigsaw Trading]] and [[bookmap|Bookmap]] have built-in iceberg detection algorithms that flag suspected hidden orders in real time. They analyze fill patterns, timing between replenishments, and clip sizes to assign confidence scores.
+4. **Algorithmic detection**: Tools like Jigsaw Trading and Bookmap have built-in iceberg detection algorithms that flag suspected hidden orders in real time. They analyze fill patterns, timing between replenishments, and clip sizes to assign confidence scores.
 
 ## Trading Significance
 

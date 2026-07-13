@@ -10,7 +10,7 @@ entity_type: person
 founded: 1957
 headquarters: "Miami Beach, Florida, USA"
 website: ""
-related: ["[[value-investing]]", "[[fundamental-analysis]]", "[[risk-management]]", "[[2008-global-financial-crisis]]", "[[macro-trading]]", "[[behavioral-finance]]", "[[book-more-money-than-god]]", "[[hedge-funds]]"]
+related: ["[[risk-management]]", "[[2008-global-financial-crisis]]", "[[macro-trading]]", "[[behavioral-finance]]", "[[book-more-money-than-god]]", "[[hedge-funds]]"]
 ---
 
 # David Tepper
@@ -45,7 +45,7 @@ Tepper's most famous trade came in early 2009, during the darkest period of the 
 
 Tepper's analysis led him to a different conclusion:
 
-1. **The government would not let major banks fail.** After the chaos that followed [[lehman-brothers|Lehman Brothers]]' bankruptcy in September 2008, the [[federal-reserve]] and Treasury had demonstrated they would do whatever it took to prevent further systemic failures. TARP, the Fed's emergency lending facilities, and implicit government guarantees meant that bank equity had a floor -- it was not going to zero.
+1. **The government would not let major banks fail.** After the chaos that followed Lehman Brothers' bankruptcy in September 2008, the [[federal-reserve]] and Treasury had demonstrated they would do whatever it took to prevent further systemic failures. TARP, the Fed's emergency lending facilities, and implicit government guarantees meant that bank equity had a floor -- it was not going to zero.
 
 2. **Bank stocks were priced for nationalization, which was not going to happen.** Bank of America was trading around $3, Citigroup around $1. These prices implied total equity wipeout. But if the government's strategy was to recapitalize rather than nationalize, existing shareholders would survive and the stocks would recover dramatically.
 
@@ -63,7 +63,7 @@ In 2019, Tepper converted Appaloosa Management from a hedge fund to a family off
 
 ## Trading and Investment Philosophy
 
-Tepper's philosophy combines [[fundamental-analysis]], [[macro-trading]], and contrarian [[behavioral-finance|psychology]]:
+Tepper's philosophy combines fundamental-analysis, [[macro-trading]], and contrarian [[behavioral-finance|psychology]]:
 
 1. **Buy when fear is at maximum.** Tepper's greatest trades -- post-9/11, 2003 distressed debt, 2009 bank stocks -- all involved buying when the consensus was overwhelmingly bearish and most investors were liquidating. "The key is to wait. Sometimes the hardest thing to do is to do nothing." He waits for extreme dislocations where the [[risk-management|risk/reward]] is heavily skewed in his favor.
 
@@ -73,14 +73,14 @@ Tepper's philosophy combines [[fundamental-analysis]], [[macro-trading]], and co
 
 4. **Be the animal at the head of the pack.** Tepper's self-described philosophy is predatory and aggressive: "I am the animal at the head of the pack. I am the first one to get the kill." This means acting with conviction when the opportunity presents itself, sizing positions aggressively, and not waiting for confirmation from the crowd. In [[behavioral-finance]] terms, Tepper is the anti-herder.
 
-5. **Fundamentals matter, but timing matters more.** Tepper uses [[fundamental-analysis]] to determine what an asset is worth, but his edge is in timing -- buying when the market is most dislocated from fundamental value. Being right on valuation but wrong on timing can be catastrophic (as [[john-paulson]]'s post-crisis record demonstrates). Tepper's patience -- waiting for the "fat pitch" -- is a critical part of his process.
+5. **Fundamentals matter, but timing matters more.** Tepper uses fundamental-analysis to determine what an asset is worth, but his edge is in timing -- buying when the market is most dislocated from fundamental value. Being right on valuation but wrong on timing can be catastrophic (as [[john-paulson]]'s post-crisis record demonstrates). Tepper's patience -- waiting for the "fat pitch" -- is a critical part of his process.
 
-6. **Simplicity over complexity.** Unlike [[quantitative-trading]] shops like [[renaissance-technologies]] or [[two-sigma]], Tepper's analysis is relatively straightforward: identify distressed assets, determine whether the distress is permanent or temporary, assess the policy environment, and buy when the price reflects the worst case. There are no algorithms, no [[machine-learning]] models -- just rigorous [[fundamental-analysis]] and the nerve to act on it.
+6. **Simplicity over complexity.** Unlike [[quantitative-trading]] shops like [[renaissance-technologies]] or [[two-sigma]], Tepper's analysis is relatively straightforward: identify distressed assets, determine whether the distress is permanent or temporary, assess the policy environment, and buy when the price reflects the worst case. There are no algorithms, no [[machine-learning]] models -- just rigorous fundamental-analysis and the nerve to act on it.
 
 ## Strategy Connections
 
-- **[[value-investing]]** — Tepper's approach is value investing at its most aggressive: buying assets at extreme discounts to intrinsic value when others are panic-selling
-- **[[fundamental-analysis]]** — Every major trade is grounded in analysis of balance sheets, cash flows, and asset values
+- **value-investing** — Tepper's approach is value investing at its most aggressive: buying assets at extreme discounts to intrinsic value when others are panic-selling
+- **fundamental-analysis** — Every major trade is grounded in analysis of balance sheets, cash flows, and asset values
 - **[[risk-management]]** — The emphasis on asymmetric payoffs and diversification across multiple distressed positions is a sophisticated form of risk control
 - **[[macro-trading]]** — Tepper's framework incorporates [[federal-reserve]] policy, [[interest-rates]], and government intervention as key inputs
 - **[[behavioral-finance]]** — His contrarian approach explicitly exploits the emotional extremes of fear and greed that drive markets to irrational prices

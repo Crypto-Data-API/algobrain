@@ -39,7 +39,7 @@ Options at different [[strike-price]]s on the same underlying often have differe
 
 ### IV Crush
 
-A rapid decline in implied volatility, most commonly after a known [[catalyst]] such as [[earnings]] announcements, [[fomc]] decisions, or FDA rulings. Options lose extrinsic value sharply even if the underlying moves in the trader's direction. IV crush is the primary risk for pre-event [[straddle-strangle]] buyers and the primary profit mechanism for event-based [[iron-condor]] sellers.
+A rapid decline in implied volatility, most commonly after a known [[catalyst]] such as earnings announcements, [[fomc]] decisions, or FDA rulings. Options lose extrinsic value sharply even if the underlying moves in the trader's direction. IV crush is the primary risk for pre-event [[straddle-strangle]] buyers and the primary profit mechanism for event-based [[iron-condor]] sellers.
 
 ### Term Structure
 

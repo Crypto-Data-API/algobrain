@@ -50,7 +50,7 @@ The market backdrop is bearish: the [[fear-and-greed-index|Crypto Fear & Greed I
 | **Fully Diluted Valuation** | ~$61.96M |
 | **Market Cap / FDV Ratio** | ~0.87 |
 
-CCD has **no fixed maximum supply** — new tokens are minted as block rewards under the protocol's inflation schedule, distributing emissions to validators (bakers) and delegators. The market-cap/FDV ratio near 0.87 indicates most of the currently issued supply is already circulating (~12.62B of ~14.52B total), but ongoing inflation means supply grows over time, so holders must weigh staking yield against [[dilution|dilution]]. CCD is used for transaction fees (with a stable, predictable fee model denominated in EUR-pegged terms), [[staking]] via baking/delegation, and governance. Concordium's fee design deliberately keeps costs low and predictable to court enterprise users who cannot tolerate volatile gas pricing.
+CCD has **no fixed maximum supply** — new tokens are minted as block rewards under the protocol's inflation schedule, distributing emissions to validators (bakers) and delegators. The market-cap/FDV ratio near 0.87 indicates most of the currently issued supply is already circulating (~12.62B of ~14.52B total), but ongoing inflation means supply grows over time, so holders must weigh staking yield against dilution. CCD is used for transaction fees (with a stable, predictable fee model denominated in EUR-pegged terms), [[staking]] via baking/delegation, and governance. Concordium's fee design deliberately keeps costs low and predictable to court enterprise users who cannot tolerate volatile gas pricing.
 
 ---
 

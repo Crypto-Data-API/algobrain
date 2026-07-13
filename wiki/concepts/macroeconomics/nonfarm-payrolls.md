@@ -167,7 +167,7 @@ NFP exhibits the same theta-vs-vega-realisation tension as [[cpi-release|CPI]], 
 - **Beta-weighted delta to zero into the print** unless there's an explicit directional view
 - **Hard vega cap by NFP date** — explicit limit (e.g. max 20% of book vega in expiries within 5 days of NFP)
 - **No naked short single-name puts on rate-sensitive sectors over NFP** — homebuilders, regional banks, small-cap industrials all amplify the move
-- **Tail hedges**: small allocation to long [[vix-call-spreads]] or long out-of-the-money [[spx-puts]] specifically for the no-crush tail outcome (the August-2024 scenario)
+- **Tail hedges**: small allocation to long [[vix-call-spreads]] or long out-of-the-money spx-puts specifically for the no-crush tail outcome (the August-2024 scenario)
 - **Gamma-flat overnight**: many short-premium desks reduce gamma exposure to roughly zero on the Thursday close before NFP, accepting the loss of theta in exchange for limited overnight gap exposure
 - **Watch ADP, JOLTS, claims**: pre-NFP indicators inform the *sign* of the expected surprise; desks adjust expressed vega accordingly, though correlation between ADP and NFP is famously low
 

@@ -11,7 +11,7 @@ markets_affected: [commodities]
 impact: high
 verified: true
 sources_count: 2
-related: ["[[crude-oil]]", "[[storage-economics]]", "[[contango]]", "[[cme-group]]", "[[opec]]", "[[commodities]]", "[[basis-risk]]", "[[roll-yield]]", "[[2008-global-financial-crisis]]", "[[covid-crash]]", "[[crashes-overview]]"]
+related: ["[[crude-oil]]", "[[storage-economics]]", "[[contango]]", "[[cme-group]]", "[[commodities]]", "[[basis-risk]]", "[[roll-yield]]", "[[2008-global-financial-crisis]]", "[[covid-crash]]", "[[crashes-overview]]"]
 ---
 
 # 2020 WTI Negative Oil Price

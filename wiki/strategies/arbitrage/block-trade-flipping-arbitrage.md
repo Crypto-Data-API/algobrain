@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [arbitrage, stocks, event-driven, liquidity]
 aliases: ["Block Trade Arbitrage", "Forced-Block Flip", "Distressed Block Buying"]
-related: ["[[archegos-blowup-2021]]", "[[prime-broker-cascade-trading]]", "[[structural-forced-selling]]", "[[risk-arbitrage]]", "[[merger-arbitrage]]"]
+related: ["[[archegos-blowup-2021]]", "[[prime-broker-cascade-trading]]", "[[structural-forced-selling]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [stocks]
@@ -208,4 +208,4 @@ Per-event capacity ~$50-500M depending on the cascade. Annual flow opportunity ~
 
 ## Related
 
-[[archegos-blowup-2021]] · [[prime-broker-cascade-trading]] · [[structural-forced-selling]] · [[risk-arbitrage]] · [[merger-arbitrage]] · [[relative-value-arbitrage]] · [[secondary-offering-arbitrage]] · [[liquidation-cascade-arbitrage]] · [[index-rebalance-arbitrage]] · [[event-driven]] · [[limits-to-arbitrage]] · [[arbitrage]] · [[edge-taxonomy]] · [[failure-modes]]
+[[archegos-blowup-2021]] · [[prime-broker-cascade-trading]] · [[structural-forced-selling]] · risk-arbitrage · merger-arbitrage · [[relative-value-arbitrage]] · secondary-offering-arbitrage · [[liquidation-cascade-arbitrage]] · [[index-rebalance-arbitrage]] · [[event-driven]] · [[limits-to-arbitrage]] · [[arbitrage]] · [[edge-taxonomy]] · [[failure-modes]]

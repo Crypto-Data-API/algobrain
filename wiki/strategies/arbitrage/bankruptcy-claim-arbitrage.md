@@ -20,19 +20,19 @@ crowding_risk: medium
 expected_sharpe: 1.6
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 200
-related: ["[[merger-arbitrage]]", "[[distressed-debt-arbitrage]]", "[[ftx]]", "[[mt-gox]]", "[[celsius]]", "[[3ac]]", "[[governance-restitution-arbitrage]]", "[[ai-amplified-exploit-arbitrage]]"]
+related: ["[[distressed-debt-arbitrage]]", "[[ftx]]", "[[mt-gox]]", "[[3ac]]", "[[governance-restitution-arbitrage]]", "[[ai-amplified-exploit-arbitrage]]"]
 ---
 
 # Crypto Bankruptcy Claim Arbitrage
 
-Crypto bankruptcy claim arbitrage involves buying claims against failed crypto firms — [[mt-gox|Mt. Gox]], [[celsius|Celsius]], [[voyager|Voyager]], [[ftx|FTX]], [[blockfi|BlockFi]], [[genesis|Genesis]] — at a discount on secondary OTC markets, then waiting for the bankruptcy estate to distribute recoveries. It is the crypto-native branch of classic [[distressed-debt-arbitrage]] and sits in the event-driven [[arbitrage]] family alongside [[merger-arbitrage]] and [[risk-arbitrage]]: the edge is convergence of a discounted claim toward its ultimate court-determined recovery value. As with the [[gbtc-discount-arbitrage|GBTC discount trade]], the deep discount is necessary but not sufficient — it must beat the multi-year time value and litigation risk it compensates for ([[limits-to-arbitrage]]).
+Crypto bankruptcy claim arbitrage involves buying claims against failed crypto firms — [[mt-gox|Mt. Gox]], Celsius, [[voyager|Voyager]], [[ftx|FTX]], [[blockfi|BlockFi]], [[genesis|Genesis]] — at a discount on secondary OTC markets, then waiting for the bankruptcy estate to distribute recoveries. It is the crypto-native branch of classic [[distressed-debt-arbitrage]] and sits in the event-driven [[arbitrage]] family alongside merger-arbitrage and risk-arbitrage: the edge is convergence of a discounted claim toward its ultimate court-determined recovery value. As with the [[gbtc-discount-arbitrage|GBTC discount trade]], the deep discount is necessary but not sufficient — it must beat the multi-year time value and litigation risk it compensates for ([[limits-to-arbitrage]]).
 
 ### Major crypto estates (reference)
 
 | Estate | Filing | Case no. | Recovery currency | Status / note |
 |--------|--------|----------|-------------------|---------------|
 | [[mt-gox|Mt. Gox]] | 2014 (civil rehab) | Tokyo District | BTC / BCH / JPY | Distributions began 2024; embedded long-BTC |
-| [[celsius|Celsius]] | 2022-07 | 22-10964 (SDNY) | USD-equiv + coin mix | Plan effective 2024; CEL write-down risk |
+| Celsius | 2022-07 | 22-10964 (SDNY) | USD-equiv + coin mix | Plan effective 2024; CEL write-down risk |
 | [[voyager|Voyager]] | 2022-07 | 22-10943 (SDNY) | USD-equiv | FTX/Binance.US deals collapsed; self-liquidation |
 | [[ftx|FTX]] | 2022-11 | 22-11068 (D. Del.) | Petition-date USD | Plan confirmed Oct 2024; ~118% on USD claims |
 | [[blockfi|BlockFi]] | 2022-11 | 22-19361 (D.N.J.) | USD-equiv | Wind-down; FTX/Alameda cross-claims |
@@ -214,14 +214,10 @@ See [[failure-modes]].
 ## Related
 
 - [[arbitrage]] — parent concept
-- [[merger-arbitrage]] — event-driven cousin
-- [[risk-arbitrage]] — convergence-to-known-value family
 - [[distressed-debt-arbitrage]] — traditional analog
-- [[rights-issue-arbitrage]] — adjacent event-driven equity strategy
 - [[limits-to-arbitrage]] — why discounted claims persist
 - [[ftx]]
 - [[mt-gox]]
-- [[celsius]]
 - [[3ac]]
 - [[gbtc-discount-arbitrage]] — DCG/Genesis contagion link; same "discount-to-terminal-value" structure
 - [[governance-restitution-arbitrage]] — the DeFi-side analog (see contrast box above)

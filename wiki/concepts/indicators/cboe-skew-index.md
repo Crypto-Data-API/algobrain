@@ -12,7 +12,7 @@ prerequisites: ["[[implied-volatility]]", "[[volatility-skew]]"]
 difficulty: intermediate
 ---
 
-The **Cboe SKEW Index** (ticker: SKEW) measures the perceived [[tail-risk]] in [[sp500|S&P 500]] returns over the next 30 days, derived from the prices of out-of-the-money [[sp500|SPX]] options. Often called the "Black Swan Index," it quantifies how much the implied probability distribution of S&P 500 returns deviates from a normal distribution -- specifically, how heavily the market is pricing the left tail.
+The **Cboe SKEW Index** (ticker: SKEW) measures the perceived [[tail-risk]] in S&P 500 returns over the next 30 days, derived from the prices of out-of-the-money SPX options. Often called the "Black Swan Index," it quantifies how much the implied probability distribution of S&P 500 returns deviates from a normal distribution -- specifically, how heavily the market is pricing the left tail.
 
 ## Overview
 

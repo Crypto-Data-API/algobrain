@@ -117,9 +117,9 @@ Use these tables to navigate the full risk-management section. Each row links a 
 |------|--------|
 | [[model-risk]] | When pricing/risk models diverge from reality |
 | [[regulatory-risk-map]] | Which strategies face which jurisdictional limits |
-| [[pattern-day-trader-rule]] | US PDT account constraint |
+| pattern-day-trader-rule | US PDT account constraint |
 | [[tax-implications-trading]] | Tax profiles, Section 1256, wash sales |
-| [[wash-sale-rules-options]] | Wash-sale mechanics for options |
+| wash-sale-rules-options | Wash-sale mechanics for options |
 
 ### Crypto / DeFi Risk
 
@@ -228,9 +228,9 @@ When trading [[perpetual-futures]], risk management is even more critical: [[lev
 
 ## The ITPM Approach to Risk Management
 
-The [[itpm|Institute of Trading and Portfolio Management]] adds a portfolio-level dimension to risk management that goes beyond individual trade risk:
+The Institute of Trading and Portfolio Management adds a portfolio-level dimension to risk management that goes beyond individual trade risk:
 
-- **[[long-short-equity|Long/short portfolios]]** inherently manage market risk by holding both long and short positions, reducing net exposure
+- **Long/short portfolios** inherently manage market risk by holding both long and short positions, reducing net exposure
 - **[[trade-repair-and-rolling|Trade repair and rolling]]** — Instead of simply cutting losing options positions, professionals restructure them through rolling strikes/expirations or converting to spreads
 - **Half-size entries** — [[edward-shek]] advocates starting positions at half-size and scaling up on confirmation, rather than going full-size immediately
 - **Portfolio hedging** — Adding hedge positions (e.g., TLT calls to hedge a net-short equity book) to protect overall P&L rather than managing each trade in isolation
@@ -247,8 +247,6 @@ The [[itpm|Institute of Trading and Portfolio Management]] adds a portfolio-leve
 - [[portfolio-theory]] -- Academic frameworks for optimal allocation
 - [[trading-journal]] -- Recording and reviewing trades for improvement
 - [[trade-repair-and-rolling]] -- Restructuring losing options positions
-- [[long-short-equity]] -- Portfolio-level risk through long/short construction
-- [[stock-repair]] -- using options to reduce cost basis and repair losing stock positions
 - [[value-at-risk]] -- VaR methodology, limits, and the Taleb critique
 - [[model-risk]] -- When pricing and risk models diverge from reality, and how to defend against it
 - [[regulatory-risk-map]] -- Which strategies face regulatory constraints in which jurisdictions

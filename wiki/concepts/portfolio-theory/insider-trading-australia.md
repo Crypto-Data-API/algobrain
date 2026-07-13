@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [regulation, australia, law, compliance, market-microstructure]
 aliases: ["Insider Trading (Australia)", "ASX Insider Trading"]
-related: ["[[asic]]", "[[australian-regulatory-framework]]", "[[regulation]]", "[[wash-trading]]", "[[market-efficiency]]", "[[australian-investing]]", "[[insider-trading-australia]]"]
+related: ["[[asic]]", "[[australian-regulatory-framework]]", "[[regulation]]", "[[wash-trading]]", "[[market-efficiency]]", "[[insider-trading-australia]]"]
 domain: [regulation, market-microstructure]
 difficulty: intermediate
 ---
@@ -155,7 +155,7 @@ If continuous disclosure is working properly, the amount of genuinely non-public
 - **Significance**: One of Australia's largest insider trading cases; demonstrated the seriousness of trading on embargoed government data
 
 ### John Hartman (2013) — Broker Front-Running
-- **Offence**: Hartman, a [[commsec|CommSec]] broker, traded ahead of client orders (front-running) — placing personal trades before executing large client orders that he knew would move the price
+- **Offence**: Hartman, a CommSec broker, traded ahead of client orders (front-running) — placing personal trades before executing large client orders that he knew would move the price
 - **Method**: Bought shares in his own account shortly before executing large buy orders for clients
 - **Penalty**: **2 years imprisonment** (non-parole period of 12 months)
 - **Significance**: First criminal conviction for front-running by an Australian broker
@@ -181,7 +181,7 @@ If continuous disclosure is working properly, the amount of genuinely non-public
 | Curtis | 2016 | Tipping network (tipped by Hartman) | ~$1.4m | ~2 years imprisonment |
 | Xiao | 2021 | Trading on M&A advisory information | — | Convicted; imprisonment |
 
-These illustrate the breadth of liability: a government statistician (Hill), a broker (Hartman), a bank analyst (Xiao), and a non-professional tippee (Curtis) were all caught. The lesson for [[australian-investing|Australian investors]] is that the **tippee** path catches people who never set foot in a listed company.
+These illustrate the breadth of liability: a government statistician (Hill), a broker (Hartman), a bank analyst (Xiao), and a non-professional tippee (Curtis) were all caught. The lesson for Australian investors is that the **tippee** path catches people who never set foot in a listed company.
 
 ## Market Integrity Rules (MIR)
 
@@ -218,12 +218,9 @@ The notable difference: Australia (like the UK) does **not** require proof of a 
 
 - [[asic]] — the regulator and surveillance body
 - [[australian-regulatory-framework]] — broader compliance landscape
-- [[chess-sponsorship]] — direct registered ownership of ASX shares
 - [[regulation]]
 - [[wash-trading]] — a related market-manipulation offence
 - [[market-efficiency]] — the policy rationale for the prohibition
-- [[australian-investing]]
-- [[commsec]] — broker featured in the Hartman case
 
 ## Sources
 

@@ -10,7 +10,7 @@ entity_type: fund
 founded: 2009
 headquarters: "New York, New York, USA"
 website: "https://www.sabacapital.com"
-related: ["[[boaz-weinstein]]", "[[saba-capital]]", "[[tail-risk-hedging]]", "[[long-volatility-strategies]]", "[[long-vol-vs-short-vol]]", "[[crisis-alpha]]", "[[credit-default-swap]]", "[[convexity]]", "[[universa-investments]]", "[[longtail-alpha]]", "[[covid-crash]]", "[[london-whale]]", "[[deutsche-bank]]", "[[capital-structure-arbitrage]]", "[[volmageddon]]", "[[vix-calls]]"]
+related: ["[[boaz-weinstein]]", "[[saba-capital]]", "[[tail-risk-hedging]]", "[[long-volatility-strategies]]", "[[long-vol-vs-short-vol]]", "[[crisis-alpha]]", "[[credit-default-swap]]", "[[convexity]]", "[[universa-investments]]", "[[longtail-alpha]]", "[[covid-crash]]", "[[london-whale]]", "[[deutsche-bank]]", "[[volmageddon]]", "[[vix-calls]]"]
 ---
 
 Saba Capital Tail Fund is the dedicated tail-hedging vehicle within **Saba Capital Management**, the credit and volatility hedge fund founded by **Boaz Weinstein** in 2009. The strategy combines deeply-out-of-the-money equity puts and VIX optionality with cheap [[credit-default-swap|credit default swap]] convexity, expressing tail risk through both equity-vol and credit-vol channels. The vehicle attracted unusually large institutional inflows in 2020 after delivering reported returns above 90% in the first quarter during the [[covid-crash|COVID crash]], and is now one of the larger publicly known dedicated tail vehicles alongside [[universa-investments|Universa]] and [[longtail-alpha|LongTail Alpha]].
@@ -27,7 +27,7 @@ The Saba tail book is more diversified across instruments than the Universa or L
 
 - **Equity vol convexity**: OTM SPX puts and put spreads, plus [[vix-calls|VIX call]] structures sized for explosive monetization in vol shocks.
 - **Credit convexity**: Long protection on investment-grade and high-yield CDX indices, single-name CDS, and out-of-the-money credit options. In normal regimes credit spreads are tight and CDS protection is cheap; in stress regimes spreads can widen 5-10x, producing large convex P&L on small premium outlays. See [[credit-default-swap]].
-- **Capital-structure arbitrage tilt**: Some positions express the same tail view through both the credit and equity capital-structure of the same issuer, exploiting the [[capital-structure-arbitrage|relative pricing]] of equity puts vs. credit protection.
+- **Capital-structure arbitrage tilt**: Some positions express the same tail view through both the credit and equity capital-structure of the same issuer, exploiting the relative pricing of equity puts vs. credit protection.
 - **Active monetization**: Like LongTail Alpha, Saba sells convex exposures into stress and re-establishes them after vol normalizes -- the fund is not a buy-and-hold put owner.
 - **Negative carry**: The book pays carry every quiet quarter -- both the option premium bleed and the running cost of CDS protection. The carry cost has historically been comparable to other dedicated tail funds (1-3% per year of allocated capital).
 
@@ -56,7 +56,7 @@ This multi-channel design also helps in **non-equity-led shocks** -- e.g., regio
 ## Why It Matters / Lessons
 
 1. **Tail risk is not a one-Greek problem.** A serious institutional tail hedge can express convex protection through both equity vol and credit vol. Allocators with credit-heavy books in particular benefit from credit-channel tail hedging rather than retrofitting an equity-only hedge.
-2. **The London Whale lineage matters.** Weinstein is best known publicly for being on the other side of JPMorgan's 2012 [[london-whale]] trade -- a trade structurally similar to a short-credit-vol position. He profited from understanding how concentrated short-vol books mispriced their tail. That lineage informs the firm's ongoing hunt for [[capital-structure-arbitrage|cap-structure mispricings]] that look like cheap tail.
+2. **The London Whale lineage matters.** Weinstein is best known publicly for being on the other side of JPMorgan's 2012 [[london-whale]] trade -- a trade structurally similar to a short-credit-vol position. He profited from understanding how concentrated short-vol books mispriced their tail. That lineage informs the firm's ongoing hunt for cap-structure mispricings that look like cheap tail.
 3. **Liquidity design matters in shocks.** Both CDS and SPX options become illiquid in stress, but in different ways and at different times. Diversifying across the two reduces the chance that the book is "right but unable to monetize."
 4. **Same compounding case as Universa.** The institutional pitch is the familiar one: a small allocation to a convex hedge raises the geometric return of an equity- or credit-heavy book by reducing the depth of compoundable drawdowns.
 
@@ -90,7 +90,6 @@ For the tail fund specifically, no major public monetization event has been repo
 - [[crisis-alpha]] -- the return profile
 - [[convexity]] -- the payoff property
 - [[credit-default-swap]] -- the credit-side instrument
-- [[capital-structure-arbitrage]] -- a related Saba activity
 - [[london-whale]] -- the trade that made Weinstein famous
 - [[deutsche-bank]] -- the firm where Weinstein built the credit franchise
 - [[covid-crash]] -- the headline monetization event

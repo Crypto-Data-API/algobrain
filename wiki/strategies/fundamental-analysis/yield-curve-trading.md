@@ -17,7 +17,7 @@ data_required: [treasury-yields, futures-prices, dv01-by-tenor, repo-rates]
 min_capital_usd: 100000
 capacity_usd: 1000000000
 crowding_risk: medium
-related: ["[[convertible-arbitrage]]", "[[macro-trading]]", "[[interest-rate-risk]]", "[[duration]]", "[[treasury-bonds]]", "[[yield-curve]]", "[[dv01]]", "[[carry-trade]]"]
+related: ["[[macro-trading]]", "[[interest-rate-risk]]", "[[duration]]", "[[treasury-bonds]]", "[[yield-curve]]", "[[dv01]]", "[[carry-trade]]"]
 ---
 
 # Yield Curve Trading
@@ -151,6 +151,5 @@ General fixed-income market knowledge ([[dv01]]/duration mechanics, carry/roll, 
 - [[repo-rates]] -- financing for cash-Treasury legs; source of carry
 - [[carry-trade]] -- carry/roll is central to curve-trade P&L
 - [[macro-trading]] -- the broader framework for policy/economic themes
-- [[convertible-arbitrage]] -- another fixed-income relative-value strategy
 - [[edge-taxonomy]] -- analytical + informational + risk-bearing edges
 - [[transaction-costs]] / [[slippage]] / [[market-impact]] -- the execution overlay

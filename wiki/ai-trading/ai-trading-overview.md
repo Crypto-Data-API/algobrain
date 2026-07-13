@@ -57,7 +57,7 @@ The **workhorse of tabular financial ML** remains [[xgboost-trading|gradient-boo
 Using natural language processing to extract trading signals from text:
 
 - **[[nlp-sentiment-analysis|News sentiment]]**: Classify news articles as positive/negative/neutral for specific assets
-- **[[earnings-call-analysis|Earnings call analysis]]**: Extract tone, confidence, and key topics from CEO transcripts
+- **Earnings call analysis**: Extract tone, confidence, and key topics from CEO transcripts
 - **Social media sentiment**: Monitor Twitter/Reddit for retail sentiment shifts (see [[sentiment]])
 - **[[finbert|FinBERT]]**: Finance-specific language model fine-tuned for financial text classification
 - **[[llm-market-analysis|LLM-based analysis]]**: Using large language models for market research and signal generation
@@ -143,7 +143,7 @@ Running AI trading systems in production requires:
 
 - **Compute**: GPU/TPU for training deep learning models; CPU sufficient for tree-based models and execution
 - **Data feeds**: Real-time market data feeds with low latency (see [[broker-api]])
-- **Execution APIs**: Broker/exchange APIs for order submission ([[alpaca]], [[interactive-brokers]], exchange APIs)
+- **Execution APIs**: Broker/exchange APIs for order submission ([[alpaca]], interactive-brokers, exchange APIs)
 - **Monitoring**: Real-time monitoring of strategy performance, position sizes, and risk metrics
 - **Version control**: Track model versions, training data snapshots, and hyperparameters
 - **[[deployment|Deployment]]**: Containerized environments (Docker), cloud VMs, or [[co-location]] for latency-sensitive strategies

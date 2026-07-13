@@ -18,7 +18,7 @@ related: ["[[renko-trading]]", "[[moving-average-crossover]]", "[[supertrend]]",
 
 ## Overview
 
-Heikin-Ashi (Japanese for "average bar") is a **modified candlestick charting technique** that uses an averaged OHLC formula to smooth price action and make trends easier to identify visually. Unlike standard candlesticks where each candle reflects actual open-high-low-close prices, Heikin-Ashi candles are calculated using **averages of current and prior candle values**, which filters out intra-bar noise and produces a cleaner visual representation of the underlying trend. The key visual signals are intuitive: **green (hollow) candles with no lower wick** indicate a strong uptrend, **red (filled) candles with no upper wick** indicate a strong downtrend, and **small-bodied candles with wicks on both sides** (doji-like) indicate indecision or potential reversal. Heikin-Ashi is widely used across [[stocks]], [[crypto]], and [[forex]] by retail traders who want a simple, visual trend-following system. The trade-off is that the averaging formula obscures exact price levels, making Heikin-Ashi unsuitable for precise entries and exits -- it is best used as a **trend filter** alongside other tools.
+Heikin-Ashi (Japanese for "average bar") is a **modified candlestick charting technique** that uses an averaged OHLC formula to smooth price action and make trends easier to identify visually. Unlike standard candlesticks where each candle reflects actual open-high-low-close prices, Heikin-Ashi candles are calculated using **averages of current and prior candle values**, which filters out intra-bar noise and produces a cleaner visual representation of the underlying trend. The key visual signals are intuitive: **green (hollow) candles with no lower wick** indicate a strong uptrend, **red (filled) candles with no upper wick** indicate a strong downtrend, and **small-bodied candles with wicks on both sides** (doji-like) indicate indecision or potential reversal. Heikin-Ashi is widely used across stocks, [[crypto]], and [[forex]] by retail traders who want a simple, visual trend-following system. The trade-off is that the averaging formula obscures exact price levels, making Heikin-Ashi unsuitable for precise entries and exits -- it is best used as a **trend filter** alongside other tools.
 
 ## How It Works
 
@@ -70,7 +70,7 @@ This averaging creates **smoothed candles** that trend more consistently than st
 - The averaging formula introduces **lag**: trend reversals appear later on HA charts than on standard candle charts
 - Not suitable for strategies requiring precise price levels: [[fibonacci-trading]] retracements, [[supply-demand-zones]], or exact [[support-and-resistance]] levels should be analyzed on standard charts
 - In choppy, range-bound markets, HA candles alternate colors frequently, generating whipsaw signals
-- Gaps are hidden by the averaging formula, which can be problematic for [[stocks]] traders who use gap analysis
+- Gaps are hidden by the averaging formula, which can be problematic for stocks traders who use gap analysis
 
 ## See Also
 - [[renko-trading]] -- another smoothed charting method that eliminates noise, but by removing time instead of averaging

@@ -7,7 +7,7 @@ status: good
 tags: [comparisons, brokers, crypto, perps, derivatives, api-trading]
 subjects: ["[[alpaca]]", "[[hyperliquid]]"]
 comparison_dimensions: [product, custody, jurisdiction, leverage, fees, api, liquidity]
-related: ["[[crypto-perpetual-futures]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[alpaca-vs-options-brokers]]", "[[hyperliquid-vs-dydx-vs-gmx]]", "[[dydx]]", "[[binance]]"]
+related: ["[[crypto-perpetual-futures]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hyperliquid-vs-dydx-vs-gmx]]", "[[dydx]]", "[[binance]]"]
 ---
 
 # Alpaca vs Hyperliquid for Crypto Perpetuals
@@ -58,7 +58,7 @@ This is the most important practical constraint:
 
 For a US-based trader who wants crypto perps, the realistic options are:
 1. Move offshore (legally complex)
-2. Use CME crypto futures via a futures broker ([[interactive-brokers]], tastytrade, etc.) -- similar economic exposure but different market structure and higher minimums
+2. Use CME crypto futures via a futures broker (interactive-brokers, tastytrade, etc.) -- similar economic exposure but different market structure and higher minimums
 3. Use equity ETF / ETN proxies ([[ibit]], [[bito]], etc.) -- no leverage, different risk profile
 4. Accept the spot-only constraint and trade Alpaca, Coinbase, Kraken
 
@@ -100,7 +100,7 @@ For a retail developer in a US jurisdiction, Alpaca's paper-trading loop and tax
 
 ## What About CME Crypto Futures via Alpaca?
 
-Alpaca does not currently offer CME futures of any kind as of April 2026. The company's 2025 FICC membership is oriented toward fixed income, not futures. So even the "regulated US alternative to perps" path (CME micro BTC / ETH futures) is not available at Alpaca -- that requires [[interactive-brokers]] or a dedicated futures broker.
+Alpaca does not currently offer CME futures of any kind as of April 2026. The company's 2025 FICC membership is oriented toward fixed income, not futures. So even the "regulated US alternative to perps" path (CME micro BTC / ETH futures) is not available at Alpaca -- that requires interactive-brokers or a dedicated futures broker.
 
 ## Verdict
 
@@ -114,6 +114,4 @@ The single-sentence summary: **use Alpaca for equities and spot crypto; use Hype
 - [[hyperliquid-vs-dydx-vs-gmx]] -- the relevant competitive comparison for perps
 - [[hyperliquid-vs-asterdex-vs-tiger-brokers]] -- broader platform comparison
 - [[crypto-perpetual-futures]], [[perpetual-futures]], [[funding-rate]] -- concept pages
-- [[alpaca-vs-options-brokers]] -- where Alpaca actually competes
 - [[dydx]], [[gmx]], [[binance]], [[bybit]] -- other perp venues
-- [[interactive-brokers]] -- the fallback for US traders who want regulated crypto derivatives (via CME)

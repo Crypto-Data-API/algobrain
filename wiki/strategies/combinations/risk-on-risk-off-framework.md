@@ -16,7 +16,7 @@ related: [volatility-targeting, multi-strategy-portfolio, sector-momentum-screen
 
 ## Overview
 
-Instead of running one strategy through all market conditions, the Risk-On/Risk-Off (RORO) framework **shifts your entire portfolio posture** based on macro and market signals. When conditions favor growth, you lean into [[momentum-trading]], [[leverage]], and high-beta assets. When conditions deteriorate, you rotate into [[bonds]], [[gold]], cash, and [[defensive-sectors]]. The framework turns regime identification into a systematic allocation decision.
+Instead of running one strategy through all market conditions, the Risk-On/Risk-Off (RORO) framework **shifts your entire portfolio posture** based on macro and market signals. When conditions favor growth, you lean into [[momentum-trading]], [[leverage]], and high-beta assets. When conditions deteriorate, you rotate into [[bonds]], [[gold]], cash, and defensive-sectors. The framework turns regime identification into a systematic allocation decision.
 
 ## The Synergy
 
@@ -27,7 +27,7 @@ During risk-on periods (2020-2021), you ride momentum in equities and crypto. Du
 ## Component Strategies
 
 **Risk-ON allocation:**
-- Overweight equities, especially [[growth-stocks]] and [[small-cap-momentum]]
+- Overweight equities, especially growth-stocks and small-cap-momentum
 - [[crypto-exposure]] at full position size
 - High-beta sectors: technology, consumer discretionary, financials
 - Use [[leverage]] (1.2-1.5x) on conviction positions
@@ -73,7 +73,7 @@ A $100,000 portfolio with composite score at 75 (Risk-ON):
 
 | Asset | Allocation | Vehicle |
 |-------|-----------|---------|
-| US equities (growth tilt) | 45% | QQQ, individual [[momentum-stocks]] |
+| US equities (growth tilt) | 45% | QQQ, individual momentum-stocks |
 | International equities | 15% | EFA, emerging markets |
 | Crypto (BTC/ETH) | 15% | Direct or ETF |
 | Commodities (energy, metals) | 10% | GSG, individual futures |

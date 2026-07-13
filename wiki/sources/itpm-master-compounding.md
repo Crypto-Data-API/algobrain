@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [itpm, education, portfolio-theory, risk-management, options, volatility, stocks, compounding]
 aliases: ["Master Compounding as a Trader", "ITPM Compounding Webinar"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[long-short-equity]]", "[[options]]", "[[risk-management-overview]]", "[[calendar-spread]]", "[[compounding]]", "[[equity-curve]]", "[[portfolio-theory]]"]
+related: ["[[anton-kreil]]", "[[options]]", "[[risk-management-overview]]", "[[calendar-spread]]", "[[compounding]]", "[[equity-curve]]", "[[portfolio-theory]]"]
 source_type: video
 source_url: "https://www.youtube.com/watch?v=tRs1b0varTU"
 source_author: "Anton Kreil"
@@ -36,7 +36,7 @@ A webinar presented by [[anton-kreil]] with junior trading mentor Philip Klein (
 
 6. [HIGH] Buy-and-hold, day trading, and long-only pension strategies are all explicitly rejected. Day trading has a ~99% failure rate for retail traders. (Source: [[anton-kreil]])
 
-7. [HIGH] ITPM traders are "20-60 day [[long-short-equity]] options portfolio managers" — trading fundamental positioning, leveraging directional [[volatility]] through options, managing probabilistic payoffs, and running trading as a business. (Source: [[anton-kreil]])
+7. [HIGH] ITPM traders are "20-60 day long-short-equity options portfolio managers" — trading fundamental positioning, leveraging directional [[volatility]] through options, managing probabilistic payoffs, and running trading as a business. (Source: [[anton-kreil]])
 
 ### The Equity Curve as a Business
 
@@ -120,7 +120,6 @@ A webinar presented by [[anton-kreil]] with junior trading mentor Philip Klein (
 
 - [[anton-kreil]] — presenter, ITPM founder
 - Philip Klein — junior trading mentor at ITPM, from Austria, mentored by Kreil on Thailand program 2022
-- [[itpm]] — Institute of Trading and Portfolio Management
 - TradeStation — broker recommended by ITPM
 - [[edward-shek|Edward Shek]] — senior trading mentor at ITPM
 - Jason — senior trading mentor at ITPM
@@ -128,11 +127,11 @@ A webinar presented by [[anton-kreil]] with junior trading mentor Philip Klein (
 
 ## Concepts Referenced
 
-- [[compounding]], [[equity-curve]], [[long-short-equity]]
+- [[compounding]], [[equity-curve]], long-short-equity
 - [[calendar-spread]], [[vertical-spread]], [[options]]
 - [[risk-management-overview]], [[portfolio-theory]]
 - [[volatility]], [[sharp-ratio]]
-- [[fundamental-analysis]], [[r-core]]
+- fundamental-analysis, [[r-core]]
 
 ## Sources
 

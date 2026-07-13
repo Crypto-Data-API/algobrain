@@ -9,10 +9,10 @@ entity_type: person
 headquarters: "Los Angeles, California, USA"
 website: "https://itpm.com/mentor/ben-berggreen/"
 aliases: ["Ben Berggreen", "Ben Berg Greendam"]
-related: ["[[itpm]]", "[[itpm-professional-traders-amazing-advice]]", "[[anton-kreil]]"]
+related: ["[[itpm-professional-traders-amazing-advice]]", "[[anton-kreil]]"]
 ---
 
-Ben Berggreen is a retired institutional trader and Senior Trading Mentor at the [[itpm|Institute of Trading and Portfolio Management (ITPM)]], featured in Anton Kreil's "Trading Legends" interview series. Over a roughly 20-year buy-side career he traded for Franklin Templeton, Nuveen Investments, and Nuveen's boutique affiliate Tradewinds Global, where he rose to Senior Vice President of Institutional Trading. For traders he is a source of practitioner-level insight into institutional execution, futures and options trading, and quantitative systems development.
+Ben Berggreen is a retired institutional trader and Senior Trading Mentor at the Institute of Trading and Portfolio Management (ITPM), featured in Anton Kreil's "Trading Legends" interview series. Over a roughly 20-year buy-side career he traded for Franklin Templeton, Nuveen Investments, and Nuveen's boutique affiliate Tradewinds Global, where he rose to Senior Vice President of Institutional Trading. For traders he is a source of practitioner-level insight into institutional execution, futures and options trading, and quantitative systems development.
 
 ## Overview
 
@@ -33,7 +33,6 @@ Per his ITPM mentor biography and Trading Legends interview (itpm.com):
 
 ## Related
 
-- [[itpm]]
 - [[itpm-professional-traders-amazing-advice]]
 - [[anton-kreil]]
 

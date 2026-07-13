@@ -13,27 +13,27 @@ source_file: "r2://trader-wiki/articles/2026-04-07-itpm-education-overview.md"
 confidence: medium
 claims_count: 22
 aliases: ["ITPM Education Overview"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[edward-shek]]", "[[jason-mcdonald]]", "[[chris-cathey]]", "[[long-short-equity]]", "[[options]]", "[[fundamental-analysis]]", "[[goldman-sachs]]"]
+related: ["[[anton-kreil]]", "[[edward-shek]]", "[[jason-mcdonald]]", "[[chris-cathey]]", "[[options]]"]
 ---
 
-Source summary combining the [[itpm]] website education overview and mentor profile pages. Documents the formal program structure, methodology framework, teaching staff backgrounds, and the pathway from education through mentoring to professional-level trading. This is **promotional / marketing material** authored by ITPM about its own products and staff; program details and return targets are vendor claims and the mentor career backgrounds are self-reported (not independently verified). Treat all claims as MEDIUM confidence — useful for documenting what ITPM offers and asserts, not as audited fact.
+Source summary combining the itpm website education overview and mentor profile pages. Documents the formal program structure, methodology framework, teaching staff backgrounds, and the pathway from education through mentoring to professional-level trading. This is **promotional / marketing material** authored by ITPM about its own products and staff; program details and return targets are vendor claims and the mentor career backgrounds are self-reported (not independently verified). Treat all claims as MEDIUM confidence — useful for documenting what ITPM offers and asserts, not as audited fact.
 
 ## Key Claims
 
 ### Program Structure
 
-1. [MEDIUM] **IPLT** (Introduction to Professional Level Trading): introduces retail traders to professional methods for exploiting US stock market volatility using [[long-short-equity]] portfolio management. (Source: ITPM website)
+1. [MEDIUM] **IPLT** (Introduction to Professional Level Trading): introduces retail traders to professional methods for exploiting US stock market volatility using long-short-equity portfolio management. (Source: ITPM website)
 2. [MEDIUM] **PTM** (Professional Trading Masterclass): core program covering macroeconomic indicators, fundamentally driven trade ideas, technical timing, [[risk-management-overview|risk management]] of long/short stock portfolios, and trading psychology. Targets 20-30% annual returns in stocks. Includes exam. (Source: ITPM website)
 3. [MEDIUM] **POTM 2.0** (Professional Options Trading Masterclass): doubled in size, remastered. Prepares students for "outsized absolute returns from stock [[options]]." Incorporates lessons from mentoring programs. (Source: ITPM website)
 4. [MEDIUM] **PFTM** (Professional FOREX Trading Masterclass): fundamental data-driven approach emphasizing applied macroeconomics. Uses infrequent positioning (1-2 times yearly) for outsized returns. (Source: ITPM website)
 
 ### Methodology Framework
 
-5. [MEDIUM] Core framework: 80% [[fundamental-analysis]] / 20% [[technical-analysis-overview|Technical Analysis]]. "Fundamentals are frequently handled in the reverse way to the way in which retail traders perceive they are used." (Source: ITPM website FAQ)
+5. [MEDIUM] Core framework: 80% fundamental-analysis / 20% [[technical-analysis-overview|Technical Analysis]]. "Fundamentals are frequently handled in the reverse way to the way in which retail traders perceive they are used." (Source: ITPM website FAQ)
 6. [MEDIUM] PTM: Top-Down (macroeconomic) / Bottom-Up (microeconomic) systematic framework for US equities. (Source: ITPM website)
 7. [MEDIUM] POTM: Directional options trading strategies to structure trade ideas using equity options for enhanced returns. (Source: ITPM website)
 8. [MEDIUM] PFTM: Top-Down multi-asset class systematic framework emphasizing macroeconomic fundamentals for currency markets. (Source: ITPM website)
-9. [MEDIUM] Portfolio management centers on [[long-short-equity]] utilizing volatility assessment. Positions designed for 20-60 day holding period. (Source: ITPM website)
+9. [MEDIUM] Portfolio management centers on long-short-equity utilizing volatility assessment. Positions designed for 20-60 day holding period. (Source: ITPM website)
 
 ### Mentoring Program Details
 
@@ -62,21 +62,16 @@ Source summary combining the [[itpm]] website education overview and mentor prof
 
 ## Entities Mentioned
 
-- [[itpm]] — Institute of Trading and Portfolio Management
 - [[anton-kreil]] — Managing Partner, former Goldman Sachs / Lehman / JP Morgan
 - [[jason-mcdonald]] — Senior Trading Mentor, former BZW / CSFB / Commerzbank / Lehman
 - [[edward-shek]] — Senior Trading Mentor, former Goldman Sachs / Cazenove / JP Morgan
 - [[chris-quill|Christopher Quill]] — Research and Quantitative Analyst at ITPM
-- [[goldman-sachs]], [[lehman-brothers]], [[jp-morgan]], [[commerzbank]], [[cazenove]] — career institutions
 
 ## Key Concepts
 
-- [[long-short-equity]] — core strategy across all programs
 - [[options]] — POTM program for enhanced returns
-- [[fundamental-analysis]] — 80% of methodology
 - [[technical-analysis-overview|Technical Analysis]] — 20% timing overlay
 - [[risk-management-overview|Risk Management]] — portfolio volatility, position sizing
-- [[mentoring]] — 12-week structured path to independence
 
 ## Sources
 

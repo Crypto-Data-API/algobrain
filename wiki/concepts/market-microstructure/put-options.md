@@ -126,7 +126,7 @@ Where C is the call price, P is the put price, S is spot, K is strike, r is the 
 
 Long puts can decay rapidly even when the directional thesis is right. Common traps:
 
-- **IV crush.** When [[implied-volatility]] drops (post-earnings, post-event), vega losses can wipe out delta gains. Buying puts before earnings frequently loses money even if the stock falls — see [[earnings-volatility-trading]].
+- **IV crush.** When [[implied-volatility]] drops (post-earnings, post-event), vega losses can wipe out delta gains. Buying puts before earnings frequently loses money even if the stock falls — see earnings-volatility-trading.
 - **Theta acceleration.** Time decay is non-linear — extrinsic value decays roughly with the square root of time. The last 30 days lose half the remaining time value, the last 7 days the bulk of that.
 - **Rallies through strike.** OTM puts with a 0.20 delta lose value 20¢ on every $1 the stock rises, plus theta. A 5% rally over a week often takes a 30 DTE OTM put to near zero.
 - **Skew compression.** Crash-protection bids push OTM put IV above ATM (positive [[volatility-skew]]). When fear fades, that skew flattens, costing OTM put holders even with stable spot.
@@ -202,6 +202,5 @@ This is the canonical [[protective-puts]] structure scaled to a real book; refin
 - [[american-options]]
 - [[european-options]]
 - [[probability-of-profit]]
-- [[earnings-volatility-trading]]
 - [[married-put]]
 - [[calls-vs-puts]]

@@ -49,7 +49,7 @@ Several approaches reduce the tail without destroying the premium:
 - **Dynamic / "smart" momentum** — explicitly forecast the crash state (bear market + high vol) and reduce or hedge the short leg during it.
 - **Beta-neutralization (residual momentum)** — sort on factor-adjusted residual returns rather than raw returns (Blitz, Huij, Martens 2011), removing the time-varying market-beta that drives the crash.
 - **Long-only momentum** — most of the crash comes from the *short* leg (the exploding losers). Dropping or down-weighting the short side removes much of the tail at the cost of some long-short premium and market neutrality.
-- **Combination with [[value-investing|value]]** — value and momentum are negatively correlated and value tends to do well in the rebound regimes that hurt momentum, so a value+momentum blend smooths the combined drawdown (Asness, Moskowitz, Pedersen 2013).
+- **Combination with value** — value and momentum are negatively correlated and value tends to do well in the rebound regimes that hurt momentum, so a value+momentum blend smooths the combined drawdown (Asness, Moskowitz, Pedersen 2013).
 - **Explicit tail hedges** — cheap OTM index calls to cap the cost of a junk rally.
 
 ## Trading Relevance

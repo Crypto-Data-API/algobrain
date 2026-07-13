@@ -90,7 +90,7 @@ This is why the **VIX/VIX3M ratio crossing 1.00** is one of the most reliable si
 
 ### Single-name term structures
 
-For single equities, the term structure has a characteristic *event hump* on the chart: the cycle that spans a known catalyst (earnings, FOMC, FDA decision) prices in a higher IV than the cycles immediately bracketing it. This is the operational reason for [[earnings-iv-crush|earnings IV crush]] — the post-event IV collapses back to the regime-appropriate level, often 30–60% lower than pre-event.
+For single equities, the term structure has a characteristic *event hump* on the chart: the cycle that spans a known catalyst (earnings, FOMC, FDA decision) prices in a higher IV than the cycles immediately bracketing it. This is the operational reason for earnings IV crush — the post-event IV collapses back to the regime-appropriate level, often 30–60% lower than pre-event.
 
 ## Implications for Strategy
 
@@ -124,7 +124,6 @@ For single equities, the term structure has a characteristic *event hump* on the
 - [[theta-targeting]] / [[vega-budgeting]] — sizing inputs that should be regime-conditional via term structure
 - [[long-vol-vs-short-vol]] — the trade-off the curve mediates
 - [[calendar-spread]] / [[diagonal-spread]] — explicit term-structure trades
-- [[earnings-iv-crush]] — the single-name analog of macro term-structure events
 - [[volmageddon]], [[covid-crash]], [[vix-august-2024-spike]] — case studies in curve inversion
 
 ## Sources

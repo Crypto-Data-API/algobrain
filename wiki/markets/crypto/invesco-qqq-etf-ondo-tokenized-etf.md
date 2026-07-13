@@ -9,12 +9,12 @@ aliases: ["QQQON", "QQQon", "Ondo QQQ"]
 entity_type: protocol
 headquarters: "Decentralized (issued by Ondo Global Markets)"
 website: "https://app.ondo.finance/assets/qqqon"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[etf]]", "[[nasdaq]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[etf]]"]
 ---
 
 # Invesco QQQ ETF (Ondo Tokenized ETF)
 
-**Invesco QQQ ETF (Ondo Tokenized ETF)** (QQQON) is a tokenized [[real-world-assets|real-world asset]]: an on-chain wrapper issued by **[[ondo-finance|Ondo Global Markets]]** on [[ethereum|Ethereum]] (canonical, also BNB Chain and Solana) that tracks the **Invesco QQQ [[etf|ETF]]** — the ETF tracking the Nasdaq-100 index of the largest non-financial [[nasdaq|Nasdaq]]-listed companies. Each QQQON gives holders economic exposure similar to owning a QQQ share (with dividends reinvested), but it is **not the ETF share itself** — it is a tokenized claim whose price tracks QQQ, backed by real ETF shares held off-chain. The exposure chains through two wrappers: **Nasdaq-100 index → QQQ ETF → QQQON token**. As of 2026-06-21 it traded at **$740.36**, ranked **#544** by market capitalization with a market cap of **~$38.12M**.
+**Invesco QQQ ETF (Ondo Tokenized ETF)** (QQQON) is a tokenized [[real-world-assets|real-world asset]]: an on-chain wrapper issued by **[[ondo-finance|Ondo Global Markets]]** on [[ethereum|Ethereum]] (canonical, also BNB Chain and Solana) that tracks the **Invesco QQQ [[etf|ETF]]** — the ETF tracking the Nasdaq-100 index of the largest non-financial Nasdaq-listed companies. Each QQQON gives holders economic exposure similar to owning a QQQ share (with dividends reinvested), but it is **not the ETF share itself** — it is a tokenized claim whose price tracks QQQ, backed by real ETF shares held off-chain. The exposure chains through two wrappers: **Nasdaq-100 index → QQQ ETF → QQQON token**. As of 2026-06-21 it traded at **$740.36**, ranked **#544** by market capitalization with a market cap of **~$38.12M**.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -222,7 +222,6 @@ QQQON is [[ondo-finance|Ondo Global Markets]]' on-chain wrapper for the **Nasdaq
 - [[tokenized-stocks]]
 - [[ondo-finance]]
 - [[etf]]
-- [[nasdaq]]
 
 ---
 

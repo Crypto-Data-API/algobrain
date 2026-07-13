@@ -15,7 +15,7 @@ A **variance swap** is an over-the-counter (OTC) forward contract on the realize
 
 Variance swaps emerged in the mid-1990s as the institutional answer to the question: "how do I take a directional bet on volatility itself, without the path-dependent slippage of a [[delta-hedged-options|delta-hedged option]]?" A vanilla option's vol exposure changes constantly as spot moves and time passes. By contrast, a variance swap pays out exactly the difference between *realized* annualized variance and the *strike* variance set at trade inception, multiplied by the variance notional. That makes them the cleanest expression of a [[vega]] view, and the canonical instrument for trading the [[variance-risk-premium]].
 
-Variance swaps grew rapidly through 2000-2007, became core hedging tools for [[dispersion-trade|dispersion]], correlation, and tail-risk desks, then suffered a structural setback after the [[gfc|2008 GFC]] when several large dealer short-variance books incurred outsized losses. The market today is smaller and more conservatively traded, with most flow concentrated in single-name dispersion books, [[forward-variance-swap|forward var]] used by vol funds, and the construction of vol indices such as the [[vix|VIX]] -- which is itself, mechanically, a one-month variance swap on the SPX.
+Variance swaps grew rapidly through 2000-2007, became core hedging tools for dispersion, correlation, and tail-risk desks, then suffered a structural setback after the [[gfc|2008 GFC]] when several large dealer short-variance books incurred outsized losses. The market today is smaller and more conservatively traded, with most flow concentrated in single-name dispersion books, [[forward-variance-swap|forward var]] used by vol funds, and the construction of vol indices such as the [[vix|VIX]] -- which is itself, mechanically, a one-month variance swap on the SPX.
 
 ## Contract Mechanics
 
@@ -116,7 +116,7 @@ The variance term structure usually mirrors the [[vix-futures]] curve: **contang
 
 ## Dispersion Trading
 
-[[dispersion-trade|Dispersion]] is the single largest institutional use of variance swaps today. The trade is **short index variance, long a basket of single-name variance** (or the reverse), and it is fundamentally a bet on **correlation**:
+Dispersion is the single largest institutional use of variance swaps today. The trade is **short index variance, long a basket of single-name variance** (or the reverse), and it is fundamentally a bet on **correlation**:
 
 ```
 Index variance  ≈  Σ w_i^2 * (single-name variance_i)  +  cross-correlation terms
@@ -137,7 +137,7 @@ This connection makes variance swaps the natural arbitrage instrument against [[
 | Participant | Direction | Motive |
 |---|---|---|
 | **Dedicated vol funds** ([[capstone-investment-advisors]], [[parallax-volatility-advisers]]) | Long vol | Express directional vol view; hedge equity book |
-| **[[dispersion-trade|Dispersion desks]]** | Long single-name var, short index var | Bet on idiosyncratic risk vs correlation |
+| **Dispersion desks** | Long single-name var, short index var | Bet on idiosyncratic risk vs correlation |
 | **Bank exotic-option desks** | Short var (gamma seller) | Recycle vega received from selling structured products |
 | **Risk-parity allocators** | Long var as crisis-alpha overlay | Convex hedge to equity book |
 | **Pension / insurance** | Long var for [[tail-risk-hedging]] | Bounded-cost alternative to put protection |
@@ -199,7 +199,6 @@ Several structural changes have reshaped the market since 2008:
 - [[volatility-swap]] -- linear-in-vol cousin requiring convexity adjustment
 - [[log-contract]] -- the static-replication primitive
 - [[carr-madan-replication]] -- the formal replication theorem
-- [[dispersion-trade]] -- long single-name var vs short index var
 - [[tail-risk-hedging]] -- variance swaps as crisis-alpha vehicle
 - [[gamma]], [[vega]] -- the Greek exposures variance swaps embed
 - [[volmageddon]], [[vix-august-2024-spike]] -- events that repriced variance

@@ -10,12 +10,12 @@ aliases: ["TA", "Charting", "Chart Analysis", "technical-analysis"]
 domain: [technical-analysis]
 prerequisites: []
 difficulty: beginner
-related: ["[[fundamental-analysis]]", "[[indicators]]", "[[support-and-resistance]]", "[[moving-averages]]"]
+related: ["[[indicators]]", "[[support-and-resistance]]", "[[moving-averages]]"]
 ---
 
 # Technical Analysis
 
-**Technical analysis (TA)** is the study of past price and [[volume]] data to identify patterns, trends, and signals that may forecast future price movements. Unlike [[fundamental-analysis]], which evaluates intrinsic value from financial data or utility, TA assumes all relevant information is already reflected in the price.
+**Technical analysis (TA)** is the study of past price and [[volume]] data to identify patterns, trends, and signals that may forecast future price movements. Unlike fundamental-analysis, which evaluates intrinsic value from financial data or utility, TA assumes all relevant information is already reflected in the price.
 
 ## The Three Pillars
 
@@ -120,6 +120,5 @@ Crypto-specific factors: 24/7 markets (no gaps), higher [[volatility]] requiring
 - [[support-and-resistance]] -- Key price levels in TA
 - [[moving-averages]] -- The foundational trend-following indicator
 - [[rsi]] -- The most popular momentum oscillator
-- [[fundamental-analysis]] -- The complementary valuation approach
 - [[risk-management]] -- Essential companion to any TA-based strategy
 - [[behavioral-finance]] -- The psychology that underpins TA

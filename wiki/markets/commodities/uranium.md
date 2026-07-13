@@ -7,14 +7,14 @@ status: good
 tags: [commodities, uranium, energy, nuclear]
 aliases: ["U3O8", "Yellowcake"]
 markets_affected: [commodities]
-related: ["[[gold]]", "[[boss-energy]]", "[[paladin-energy]]", "[[alfred-report-uranium-commodity]]", "[[commodities]]"]
+related: ["[[gold]]", "[[commodities]]"]
 ---
 
 Uranium is a naturally occurring radioactive heavy metal and the primary fuel source for nuclear reactors. The commodity has a $3 billion USD market cap and one of the most volatile price histories of any commodity — comparable to [[bitcoin]] in its boom-bust cycles.
 
 ## Overview
 
-There are 440 nuclear power plants operating in 33 countries, providing 10% of the world's electricity. A further 90 reactors are on order or planned, with over 300 in the proposal stage. Nuclear energy is increasingly viewed as a scalable, low-carbon energy source essential for net-zero targets (Source: [[alfred-report-uranium-commodity]]).
+There are 440 nuclear power plants operating in 33 countries, providing 10% of the world's electricity. A further 90 reactors are on order or planned, with over 300 in the proposal stage. Nuclear energy is increasingly viewed as a scalable, low-carbon energy source essential for net-zero targets (Source: alfred-report-uranium-commodity).
 
 ## How Uranium Is Traded
 
@@ -23,7 +23,7 @@ Uranium has no liquid exchange-traded futures market comparable to oil or copper
 - **Spot price**: Quoted as U3O8 (triuranium octoxide, "yellowcake") in USD per pound. Reported by price-reporting agencies UxC and TradeTech. Most volume is **long-term contracting** between miners and utilities, not spot.
 - **Physical trusts**: **Sprott Physical Uranium Trust (SPUT, U.UN/U.U on TSX)** holds physical U3O8 and has become a major spot-market buyer, tightening supply when it raises capital. Yellow Cake plc (YCA:LSE) is a similar UK vehicle.
 - **Futures**: CME/NYMEX UxC uranium U3O8 futures (UX) exist but are illiquid.
-- **Equities and ETFs**: The most accessible exposure. **Sprott Uranium Miners ETF (URNM)** and **Global X Uranium ETF (URA)** hold producers and physical trusts. Single names: [[paladin-energy|Paladin]], [[boss-energy|Boss Energy]], Cameco (CCJ), Kazatomprom (KAP), NexGen (NXE).
+- **Equities and ETFs**: The most accessible exposure. **Sprott Uranium Miners ETF (URNM)** and **Global X Uranium ETF (URA)** hold producers and physical trusts. Single names: Paladin, Boss Energy, Cameco (CCJ), Kazatomprom (KAP), NexGen (NXE).
 
 ## Price Performance
 
@@ -49,7 +49,7 @@ Uranium has no liquid exchange-traded futures market comparable to oil or copper
 
 Global production expected to grow 4.1% CAGR from 2024-2030. Supply is elastic — mines can be reopened when demand rises, but high-grade uranium is scarce.
 
-**Electricity demand** expected to grow 3.4% annually through 2026, driven by data centres, AI, cryptocurrency, and industrial growth (Source: [[alfred-report-uranium-commodity]]).
+**Electricity demand** expected to grow 3.4% annually through 2026, driven by data centres, AI, cryptocurrency, and industrial growth (Source: alfred-report-uranium-commodity).
 
 ### World Electricity Mix
 
@@ -79,8 +79,8 @@ Australia has 67% fossil fuel and 33% renewable electricity. Nuclear power is ba
 
 | Company | Ticker | Status |
 |---------|--------|--------|
-| [[paladin-energy]] | PDN:ASX | Restarting mine in Namibia |
-| [[boss-energy]] | BOE:ASX | Honeymoon mine resumed production — first new Australian uranium producer in a decade |
+| paladin-energy | PDN:ASX | Restarting mine in Namibia |
+| boss-energy | BOE:ASX | Honeymoon mine resumed production — first new Australian uranium producer in a decade |
 | Lotus Resources | LOT:ASX | Planning to resume mine in Malawi |
 | Deep Yellow | DYL:ASX | Exploration/pre-development in Namibia and Africa. 54% institutional ownership (Canadian hedge fund, Macquarie Group, State Street) |
 
@@ -109,24 +109,19 @@ Spot U3O8 has held roughly in the **$80-$95/lb** range through early-to-mid 2026
 - **Data center / AI demand narrative**: Surging electricity demand from AI data centers has reinforced the structural bull case for nuclear baseload, including renewed interest in small modular reactors (SMRs) and big-tech power purchase agreements.
 - **SPUT accumulation**: The Sprott Physical Uranium Trust continues to influence the thin spot market via episodic buying.
 - **Kazatomprom guidance**: As the world's largest producer, Kazatomprom's production plans and sulfuric-acid/reagent constraints remain a central near-term supply variable.
-- **Restarts and expansions**: Selective mine restarts (including [[boss-energy|Boss]] and [[paladin-energy|Paladin]]) are adding supply, the classic late-cycle dynamic that eventually caps prices.
+- **Restarts and expansions**: Selective mine restarts (including Boss and Paladin) are adding supply, the classic late-cycle dynamic that eventually caps prices.
 
 (Source: Perplexity sonar research, 2026-06-12)
 
 ## Forecast
 
-Supply squeeze currently in effect. Experts predict demand this decade could exceed production capacity. A third price boom is possible with another catalyst (mine disruption, war, policy change) — followed inevitably by a bust as new supply comes online and alternative energy advances. (Source: [[alfred-report-uranium-commodity]])
+Supply squeeze currently in effect. Experts predict demand this decade could exceed production capacity. A third price boom is possible with another catalyst (mine disruption, war, policy change) — followed inevitably by a bust as new supply comes online and alternative energy advances. (Source: alfred-report-uranium-commodity)
 
 ## Related
 
 - [[gold]] — Fellow commodity, different dynamics
-- [[boss-energy]] — Australian uranium producer
-- [[paladin-energy]] — Australian uranium producer
 - [[commodities]] — Commodities overview
 
 ## Sources
 
-- [[alfred-report-uranium-commodity]]
-- [[alfred-report-boe-asx]]
-- [[alfred-report-pdn-asx]]
 - Perplexity sonar research (2026-06-12): mid-2026 spot price, SPUT/data-center demand, Kazatomprom guidance, trading-access mechanics

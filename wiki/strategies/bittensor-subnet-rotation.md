@@ -18,7 +18,7 @@ min_capital_usd: 5000
 capacity_usd: 2000000
 crowding_risk: medium
 breakeven_cost_bps: 50
-related: ["[[bittensor]]", "[[dtao]]", "[[bittensor-subnets]]", "[[alpha-token-arbitrage]]", "[[tao-validator-delegation]]", "[[momentum]]", "[[sector-momentum-screen]]"]
+related: ["[[bittensor]]", "[[dtao]]", "[[bittensor-subnets]]", "[[alpha-token-arbitrage]]", "[[tao-validator-delegation]]", "[[momentum]]"]
 ---
 
 # Bittensor Subnet Rotation
@@ -181,7 +181,7 @@ No published audited track record for systematic dTAO rotation strategies exists
 - [[bittensor-subnets]] -- subnet landscape
 - [[alpha-token-arbitrage]] -- a complementary bonding-curve arbitrage strategy
 - [[tao-validator-delegation]] -- yield-bearing alternative for passive TAO holders
-- [[sector-momentum-screen]], [[momentum]] -- sibling momentum strategies in other asset classes
+- sector-momentum-screen, [[momentum]] -- sibling momentum strategies in other asset classes
 
 ## Sources
 

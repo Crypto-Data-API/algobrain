@@ -9,12 +9,12 @@ aliases: ["AT", "APRO", "APRO Oracle"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.apro.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[oracle]]"]
+related: ["[[crypto-markets]]", "[[bnb]]"]
 ---
 
 # Apro
 
-**Apro** (token symbol **AT**) is a decentralized **[[oracle]] and data infrastructure** project that delivers off-chain data to on-chain applications by combining off-chain processing with on-chain verification. Marketed under the "APRO Oracle" / "APRO Data Service" brand, it provides price feeds and other data streams to decentralized applications across many chains, and increasingly positions itself at the intersection of oracle infrastructure and AI/agent data. It ranks **#601** by market capitalization.
+**Apro** (token symbol **AT**) is a decentralized **oracle and data infrastructure** project that delivers off-chain data to on-chain applications by combining off-chain processing with on-chain verification. Marketed under the "APRO Oracle" / "APRO Data Service" brand, it provides price feeds and other data streams to decentralized applications across many chains, and increasingly positions itself at the intersection of oracle infrastructure and AI/agent data. It ranks **#601** by market capitalization.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -40,7 +40,7 @@ At the snapshot, AT traded at **$0.146119** with a market cap of **$33,580,061**
 
 ## What APRO does
 
-APRO is an **[[oracle]]** — middleware that fetches, validates, and delivers real-world / off-chain data to smart contracts that cannot access the outside world on their own. The core product, **APRO Data Service**, is built on a pattern of off-chain aggregation and computation with on-chain verification, so consuming protocols can trust the delivered values. It supports two complementary delivery models:
+APRO is an **oracle** — middleware that fetches, validates, and delivers real-world / off-chain data to smart contracts that cannot access the outside world on their own. The core product, **APRO Data Service**, is built on a pattern of off-chain aggregation and computation with on-chain verification, so consuming protocols can trust the delivered values. It supports two complementary delivery models:
 
 - **Data Push** — the oracle proactively publishes updated values on-chain (e.g. when a price moves past a threshold or on a schedule), so contracts always have a fresh reference.
 - **Data Pull** — applications request the latest signed data on demand and submit it on-chain, trading constant updates for lower cost and just-in-time freshness.
@@ -228,7 +228,6 @@ Headwinds: entrenched competitors, oracle-specific exploit risk (a single high-p
 
 - [[crypto-markets]]
 - [[bnb]]
-- [[oracle]]
 - [[ethereum]]
 - [[ai-trading]]
 

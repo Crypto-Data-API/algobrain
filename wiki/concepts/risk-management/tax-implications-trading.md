@@ -47,7 +47,7 @@ All figures throughout this page are indicative — see the disclaimer above.
 |---|---|---|---|
 | **Short-term capital gains** | Ordinary income rate (up to 37%) | < 1 year | Most arb, day trading, swing trading |
 | **Long-term capital gains** | 0%, 15%, or 20% + 3.8% NIIT | > 1 year | Position trading, buy-and-hold |
-| **Section 1256 contracts** (futures, broad-based index options) | 60% long-term / 40% short-term (blended ~26.8% max) | Regardless of holding period | [[cash-and-carry]] (futures), [[index-arbitrage]], VIX options, SPX options |
+| **Section 1256 contracts** (futures, broad-based index options) | 60% long-term / 40% short-term (blended ~26.8% max) | Regardless of holding period | [[cash-and-carry]] (futures), index-arbitrage, VIX options, SPX options |
 | **Ordinary income** | Up to 37% + SE tax if applicable | N/A | Interest income, staking rewards, some DeFi yields |
 | **Net Investment Income Tax (NIIT)** | 3.8% surcharge | MAGI > $200K single / $250K joint | All investment income for high earners |
 
@@ -59,7 +59,7 @@ Futures and broad-based index options receive favorable 60/40 treatment under Se
 |---|---|---|---|
 | [[cash-and-carry]] with CME futures | BTC futures (CME) | Yes | ~26.8% |
 | [[cash-and-carry]] with Binance perps | BTCUSDT perpetual | No (not US-regulated) | Up to 37% |
-| [[index-arbitrage]] with ES futures | S&P 500 E-mini | Yes | ~26.8% |
+| index-arbitrage with ES futures | S&P 500 E-mini | Yes | ~26.8% |
 | SPX options vol arb | SPX index options | Yes | ~26.8% |
 | Single-stock options vol arb | Individual equity options | No | Up to 37% |
 | [[vix-trading]] | VIX futures and options | Yes | ~26.8% |
@@ -169,7 +169,7 @@ Section 1091: If you sell a security at a loss and repurchase a "substantially i
 | [[pairs-trading]] | **High** | Re-entering the same pair within 30 days after a losing exit |
 | [[statistical-arbitrage]] | **High** | Same stocks enter and exit the portfolio frequently |
 | [[cross-exchange-arbitrage]] (crypto) | **Unclear** | IRS has not confirmed whether wash sale applies to crypto. The 2021 Build Back Better Act proposed extending it to crypto but was not enacted as of 2026. Many tax professionals recommend treating crypto as wash-sale-exempt, but this could change |
-| [[merger-arbitrage]] | **Low** | Different deals involve different securities |
+| merger-arbitrage | **Low** | Different deals involve different securities |
 | [[funding-rate-arbitrage]] | **Low** | Typically hold continuously, not frequently trading in/out |
 
 ### Wash Sale Example
@@ -278,9 +278,9 @@ Before committing capital to a strategy, run it through the tax lens — the aft
 - [[regulatory-risk-map]] — the broader compliance/regulation landscape
 - [[risk-management]] / [[risk-management-overview]] — the parent discipline
 - [[arbitrage-overview]] — strategies whose viability tax treatment can decide
-- [[pairs-trading]], [[statistical-arbitrage]], [[merger-arbitrage]] — high-turnover books most exposed to wash sales
+- [[pairs-trading]], [[statistical-arbitrage]], merger-arbitrage — high-turnover books most exposed to wash sales
 - [[cross-exchange-arbitrage]], [[funding-rate-arbitrage]], [[flash-loan-arbitrage]] — crypto/DeFi strategies with unsettled treatment
-- [[cash-and-carry]], [[index-arbitrage]] — strategies that benefit from Section 1256
+- [[cash-and-carry]], index-arbitrage — strategies that benefit from Section 1256
 - [[options-overview]] — instrument-level tax treatment of options
 
 ## Sources

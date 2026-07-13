@@ -75,7 +75,7 @@ The structural inefficiencies that hard forks expose:
 
 ## Related
 
-[[fork-airdrop-triangulation]] · [[replay-attack]] · [[fork-futures-spot-basis]] · [[airdrop-farming]] · [[corporate-action-arbitrage]] · [[2017-10-bitcoin-gold-fork-arbitrage]] · [[2020-03-steem-hive-fork-arbitrage]] · [[2022-05-terra-luna-2-fork-arbitrage]] · [[2026-fork-watchlist]] · [[bitcoin-cash]] · [[ethereum-classic]] · [[ethereum-pow-iou]]
+[[fork-airdrop-triangulation]] · [[replay-attack]] · [[fork-futures-spot-basis]] · [[airdrop-farming]] · corporate-action-arbitrage · [[2017-10-bitcoin-gold-fork-arbitrage]] · [[2020-03-steem-hive-fork-arbitrage]] · [[2022-05-terra-luna-2-fork-arbitrage]] · [[2026-fork-watchlist]] · [[bitcoin-cash]] · [[ethereum-classic]] · [[ethereum-pow-iou]]
 
 ## Sources
 

@@ -150,7 +150,7 @@ The hurdle rate in April 2026 is high: with the Fed funds rate at ~4.25%, any ar
 | [[cross-exchange-arbitrage]] (alts) | 5-15% APY | 3-10% APY | 0.5-1.0 | Medium | Alive on illiquid pairs |
 | [[pairs-trading]] (crypto) | 10-20% | 7-15% | 0.5-1.2 | Medium | Viable with good pair selection |
 | [[pairs-trading]] (equities) | 5-12% | 3-8% | 0.3-0.8 | High | Crowded. Factor models needed |
-| [[merger-arbitrage]] | 6-10% | 5-8% | 0.5-0.8 | Medium | Alive. Spread = risk-free + regulatory risk |
+| merger-arbitrage | 6-10% | 5-8% | 0.5-0.8 | Medium | Alive. Spread = risk-free + regulatory risk |
 | [[volatility-arbitrage]] | Variable | 3-8% | 0.3-0.6 | Medium | VRP positive but thin |
 | [[cross-chain-arbitrage]] | 10-25% APY | 7-18% APY | 0.8-1.5 | Medium | Best current crypto arb opportunity |
 | [[flash-loan-arbitrage]] | Variable | Variable | High variance | Extreme | Dominated by sophisticated searchers |
@@ -237,5 +237,5 @@ This page should be refreshed **monthly** or after significant market regime cha
 - [[edge-taxonomy]] — why some edges decay and others don't
 - [[regime-matrix]] — which strategies fit which regime
 - [[failure-modes]] — how arb strategies break
-- [[funding-rate-arbitrage]] · [[cash-and-carry]] · [[cross-exchange-arbitrage]] · [[pairs-trading]] · [[merger-arbitrage]] · [[volatility-arbitrage]] · [[cross-chain-arbitrage]] · [[flash-loan-arbitrage]] · [[staking-yield-arbitrage]] — individual strategy pages
-- [[carbon-credit-arbitrage]] · [[multi-dvn-bridge-config-arbitrage]] — specialist arbs tracked elsewhere
+- [[funding-rate-arbitrage]] · [[cash-and-carry]] · [[cross-exchange-arbitrage]] · [[pairs-trading]] · merger-arbitrage · [[volatility-arbitrage]] · [[cross-chain-arbitrage]] · [[flash-loan-arbitrage]] · [[staking-yield-arbitrage]] — individual strategy pages
+- carbon-credit-arbitrage · [[multi-dvn-bridge-config-arbitrage]] — specialist arbs tracked elsewhere

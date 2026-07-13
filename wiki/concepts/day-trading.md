@@ -12,7 +12,7 @@ prerequisites: ["[[technical-analysis]]", "[[risk-management]]"]
 difficulty: beginner
 ---
 
-Day trading is a trading style in which all positions are opened and closed within the same trading session, with no overnight exposure. By ending the day flat (holding no positions), day traders avoid overnight gap risk -- the possibility that prices move significantly between the market close and the next open due to after-hours news, earnings reports, or global events. Day trading is practised across all major asset classes including [[stocks]], [[forex]], [[futures]], [[options]], and [[crypto-markets|crypto]], and ranges from discretionary manual trading to fully [[algorithmic]] execution.
+Day trading is a trading style in which all positions are opened and closed within the same trading session, with no overnight exposure. By ending the day flat (holding no positions), day traders avoid overnight gap risk -- the possibility that prices move significantly between the market close and the next open due to after-hours news, earnings reports, or global events. Day trading is practised across all major asset classes including stocks, [[forex]], [[futures]], [[options]], and [[crypto-markets|crypto]], and ranges from discretionary manual trading to fully [[algorithmic]] execution.
 
 ## Regulatory Requirements
 

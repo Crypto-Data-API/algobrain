@@ -14,15 +14,13 @@ related:
   - "[[backtesting]]"
   - "[[backtesting-overview]]"
   - "[[options-greeks]]"
-  - "[[orats]]"
-  - "[[orats-research]]"
   - "[[convex-trading]]"
   - "[[pivolio]]"
 ---
 
 Trade Machine is a retail-facing options strategy backtester operated by Capital Market Laboratories (CML, also known as CMLviz), a research and analytics firm best known for systematic options-strategy publications. The tool lets retail and semi-professional traders backtest defined options strategies (covered calls, iron condors, calendars, earnings strangles, etc.) across thousands of underlyings using point-and-click rule construction rather than code. Trade Machine is positioned as the most accessible options-specific backtester for traders who don't want to build a Python framework but need more than a payoff diagram.
 
-> **Note on naming**: "Trade Machine" / "Trade Machine Pro" is the CMLviz / Capital Market Laboratories product. [[orats|ORATS]] also has options-backtesting tooling under different product names; the two are distinct products from competing vendors.
+> **Note on naming**: "Trade Machine" / "Trade Machine Pro" is the CMLviz / Capital Market Laboratories product. ORATS also has options-backtesting tooling under different product names; the two are distinct products from competing vendors.
 
 ## What It Produces
 
@@ -63,7 +61,7 @@ Trade Machine is not primarily a portfolio-concentration tool — it is a backte
 What Trade Machine does *not* do:
 
 - Real-time portfolio aggregation (that's what [[ibkr-risk-navigator]], [[pivolio]], or [[convex-trading]] are for)
-- Factor decomposition (that's [[barra]] / [[axioma]] / [[northfield]])
+- Factor decomposition (that's barra / axioma / northfield)
 - Cross-position Greeks rollup
 - Stress testing of an existing book
 
@@ -82,7 +80,7 @@ For concentration management, Trade Machine is upstream of the live portfolio �
 - **Backtest-only**: no live trading, no portfolio aggregation, no concentration management
 - **Historical option data**: quality of backtests depends on the underlying option data feed; for retail-facing tools, the data tends to be end-of-day mid-prices, which underestimates real-world transaction costs and slippage
 - **Overfitting risk**: easy point-and-click parameter optimization is the most common path to [[backtesting-pitfalls|overfit backtests]]
-- **Limited customization**: rule constructor handles common patterns but not arbitrary logic; for complex multi-leg dynamic strategies, code-based frameworks (Python with [[orats]] or [[optionmetrics]] data) are more flexible
+- **Limited customization**: rule constructor handles common patterns but not arbitrary logic; for complex multi-leg dynamic strategies, code-based frameworks (Python with orats or optionmetrics data) are more flexible
 - **Cost stack**: monthly subscription adds up; for serious quants, building a custom backtester with bulk data once is often cheaper long-term
 - **Not a portfolio risk tool**: explicitly outside the concentration / Greeks-aggregation use case
 
@@ -102,8 +100,6 @@ For concentration management, Trade Machine is upstream of the live portfolio �
 - [[backtesting]] — broader backtesting context
 - [[backtesting-overview]] — framework comparison
 - [[backtesting-pitfalls]] — overfitting risks particularly relevant to no-code backtesters
-- [[orats]] — competing options data + backtesting vendor
-- [[orats-research]] — alternative systematic options research source
 - [[convex-trading]] — comparable third-party options analytics
 - [[pivolio]] — comparable third-party options portfolio tool
 - [[options-greeks]] — what backtests aggregate at the trade level

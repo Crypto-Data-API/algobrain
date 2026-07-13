@@ -51,7 +51,7 @@ Understanding where price discovery occurs is critical. In many assets, the futu
 Not all venues that *quote* a price actually *set* it. Price discovery tends to concentrate where the marginal informed trader can act fastest and cheapest:
 
 - **Derivatives often lead spot.** Index futures (e.g. S&P 500 E-mini) and liquid single-name [[options]] frequently move before the underlying cash market, because they offer leverage and lower transaction costs to traders acting on new information. The cash index then "catches up."
-- **The most liquid venue leads the fragmented ones.** When a stock trades across many venues (see [[market-fragmentation]] and [[reg-nms]]), the venue with the deepest book and tightest [[bid-ask-spread]] usually posts the price-setting quote; others follow via [[smart-order-routing|smart order routing]] and [[arbitrage]].
+- **The most liquid venue leads the fragmented ones.** When a stock trades across many venues (see [[market-fragmentation]] and reg-nms), the venue with the deepest book and tightest [[bid-ask-spread]] usually posts the price-setting quote; others follow via [[smart-order-routing|smart order routing]] and [[arbitrage]].
 - **Hasbrouck's information share** is the standard academic tool for measuring *what fraction* of permanent price movement originates in each venue when one asset trades in several places.
 
 ## Worked Example (Illustrative)

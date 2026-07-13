@@ -9,7 +9,7 @@ aliases: ["CFD Trading", "CFD", "Contract for Difference", "Contracts for Differ
 domain: [derivatives]
 prerequisites: ["[[leverage]]", "[[derivatives]]"]
 difficulty: beginner
-related: ["[[perpetual-futures]]", "[[leverage]]", "[[regulation]]", "[[margin]]", "[[funding-rate]]", "[[asic]]", "[[ig-markets]]", "[[cmc-markets]]"]
+related: ["[[perpetual-futures]]", "[[leverage]]", "[[regulation]]", "[[margin]]", "[[funding-rate]]", "[[asic]]"]
 ---
 
 # CFD Trading
@@ -64,8 +64,6 @@ CFD regulation varies dramatically by jurisdiction:
 
 ## Major CFD Brokers
 
-- [[ig-markets|IG Markets]] — largest CFD broker globally
-- [[cmc-markets|CMC Markets]] — major Australian/UK broker
 - Plus500, eToro, Saxo Bank, Interactive Brokers (non-US)
 
 ## Risks
@@ -82,8 +80,6 @@ CFD regulation varies dramatically by jurisdiction:
 - [[leverage]] — understanding leveraged trading
 - [[margin]] — margin and maintenance mechanics
 - [[regulation]] — regulatory landscape
-- [[ig-markets]] — major CFD broker
-- [[cmc-markets]] — major CFD broker
 
 ## Sources
 

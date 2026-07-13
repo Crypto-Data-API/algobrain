@@ -11,7 +11,7 @@ timeframe: intraday
 markets: [stocks, forex, crypto]
 complexity: advanced
 backtest_status: untested
-related: ["[[event-driven-trading]]", "[[earnings-momentum]]", "[[merger-arbitrage]]", "[[scalping]]", "[[volatility]]", "[[social-arbitrage]]", "[[sentiment-trading]]"]
+related: ["[[event-driven-trading]]", "[[scalping]]", "[[volatility]]", "[[social-arbitrage]]", "[[sentiment-trading]]"]
 ---
 
 # News Trading
@@ -83,7 +83,6 @@ Small positions (0.5-1% risk per trade) due to extreme [[volatility]] and [[slip
 
 ## See Also
 - [[event-driven-trading]] -- broader framework for trading catalysts beyond just news
-- [[earnings-momentum]] -- earnings-specific news trading with longer holding periods
 - [[scalping]] -- similar ultra-short-term approach used in normal market conditions
 - [[volatility]] -- understanding volatility regimes is critical for news trading
 - [[risk-management]] -- position sizing and stop-loss discipline is paramount

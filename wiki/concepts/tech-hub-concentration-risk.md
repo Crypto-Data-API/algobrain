@@ -10,7 +10,6 @@ related:
   - "[[ai-driven-demand-destruction]]"
   - "[[ai-layoff-trap]]"
   - "[[service-sector-multiplier]]"
-  - "[[reits]]"
   - "[[mortgages]]"
   - "[[bank-run]]"
   - "[[systemic-risk]]"
@@ -53,7 +52,7 @@ The Brookings Institution publishes a metropolitan AI readiness benchmark coveri
 - **Commercial real estate**: tech offices designed as "work containers" for high-volume process work (junior analyst floors, customer support pods) become stranded assets. Premium "decision hub" properties hold value; commodity office product faces structural demand collapse.
 - **Regional banks**: KRE-component banks with tech-metro CRE concentration face NIM compression, loan loss provisions, and deposit flight. Echoes 2023 SVB/First Republic dynamics but with slower-moving CRE catalyst rather than AFS bond mark-to-market. See [[bank-run]].
 - **Mortgages and residential**: tech-hub housing peaked 2022; AI layoffs accelerate the unwind. See [[mortgages]].
-- **REITs**: office-heavy REITs with tech-hub exposure face the brunt; data center REITs benefit from AI capex boom. See [[reits]].
+- **REITs**: office-heavy REITs with tech-hub exposure face the brunt; data center REITs benefit from AI capex boom. See reits.
 
 ## Specific Data Points
 
@@ -77,8 +76,8 @@ Three reasons traders cite for the risk being underpriced:
 
 - **Short tech-hub munis**: long-duration GO bonds in CA, WA, TX, MA tech-metro issuers; pair with broad muni index long for cleaner spread trade
 - **Short regional banks**: KRE ETF or single-name banks with disclosed tech-metro CRE concentration
-- **Short office REITs**: pair against data center REITs ([[reits]] context) for sector-neutral AI-cascade trade
-- **Long energy / data center infrastructure**: see [[ai-sector-rotation-energy-hedge]] and [[ai-data-center-power-demand]]
+- **Short office REITs**: pair against data center REITs (reits context) for sector-neutral AI-cascade trade
+- **Long energy / data center infrastructure**: see ai-sector-rotation-energy-hedge and [[ai-data-center-power-demand]]
 - **Long skilled trades exposure**: where data center buildouts are happening, electrician/HVAC wages are exploding ([[skilled-trades-wage-boom]])
 
 ## What Would Break This
@@ -93,10 +92,8 @@ Three reasons traders cite for the risk being underpriced:
 - [[ai-driven-demand-destruction]] — parent cascade model
 - [[service-sector-multiplier]] — amplifier from tech jobs into local services
 - [[ai-layoff-trap]] — Wharton's death-spiral framework
-- [[margin-expansion-disparity]] — Mag-7 winners insulated from regional pain
-- [[reits]], [[mortgages]], [[bank-run]] — asset-class context
+- reits, [[mortgages]], [[bank-run]] — asset-class context
 - [[systemic-risk]], [[contagion]], [[recession]]
-- [[microsoft]], [[amazon]], [[meta-platforms]], [[apple]], [[alphabet]] — Mag 7 employers concentrated in these hubs
 
 ## Sources
 

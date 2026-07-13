@@ -8,7 +8,7 @@ tags: [anomalies, value, factor-investing]
 aliases: ["Value Factor", "HML", "Book-to-Market Anomaly", "Fama-French Value"]
 domain: [anomalies, factor-investing]
 difficulty: intermediate
-related: ["[[anomalies-overview]]", "[[value-investing-strategy]]", "[[value-factor]]", "[[fundamental-analysis]]", "[[momentum-factor]]", "[[low-vol-factor]]", "[[quality-factor]]", "[[edge-taxonomy]]", "[[momentum-value-combination]]"]
+related: ["[[anomalies-overview]]", "[[value-factor]]", "[[momentum-factor]]", "[[low-vol-factor]]", "[[quality-factor]]", "[[edge-taxonomy]]", "[[momentum-value-combination]]"]
 ---
 
 # Value Anomaly
@@ -167,8 +167,6 @@ The right way to use value today is *not* as a standalone strategy but as one co
 
 ## Strategies That Implement It
 
-- [[value-investing-strategy]] — fundamental value approach
-- [[long-short-equity]] — when long value, short growth
 - [[fundamental-technical-fusion]] — value with technical timing
 - [[momentum-value-combination]] — value + momentum combination
 
@@ -179,15 +177,12 @@ The right way to use value today is *not* as a standalone strategy but as one co
 - Asness, Moskowitz, Pedersen (2013) "Value and Momentum Everywhere" — *Journal of Finance*
 - Asness, Frazzini, Pedersen (2019) "Quality Minus Junk" — *Review of Accounting Studies*
 - Park (2019) "Intangible Assets and the Book-to-Market Effect"
-- [[book-the-intelligent-investor]] — Graham, the original argument for value
 - [[book-expected-returns-antti-ilmanen]] — comprehensive value chapter
 
 ## Related
 
 - [[anomalies-overview]] — index of cross-sectional anomalies
 - [[value-factor]] — the tradeable factor built on this anomaly
-- [[value-investing-strategy]] — the fundamental discretionary cousin
-- [[fundamental-analysis]] — the analytical toolkit that finds cheap stocks
 - [[momentum-factor]] — the negatively-correlated complement
 - [[low-vol-factor]] — a different defensive factor (value is often high-vol)
 - [[quality-factor]] — combined with value as QARP to avoid value traps

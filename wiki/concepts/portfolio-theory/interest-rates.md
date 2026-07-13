@@ -17,7 +17,6 @@ related:
   - "[[inflation]]"
   - "[[bond-market]]"
   - "[[interest-rate-swaps]]"
-  - "[[fundamental-analysis]]"
   - "[[volatility]]"
   - "[[diversification]]"
   - "[[futures]]"
@@ -96,7 +95,6 @@ Interest rate decisions and forward guidance from central banks are among the hi
 - [[currency-dynamics]] — rate differentials drive exchange rates
 - [[sovereign-debt]] — government borrowing costs tied directly to rates
 - [[financial-conditions]] — rates as a component of financial conditions
-- [[fundamental-analysis]] — rates are a core macro input
 - [[volatility]] — rate decisions drive volatility spikes
 - [[futures]] — bond and rate futures enable rate trading
 - [[diversification]] — bonds diversify equity risk via rate dynamics

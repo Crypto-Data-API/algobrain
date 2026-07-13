@@ -10,7 +10,7 @@ strategy_type: quantitative
 markets: [stocks]
 complexity: intermediate
 backtest_status: untested
-related: ["[[collar]]", "[[risk-reversal]]", "[[leaps-strategies]]", "[[covered-call]]", "[[delta]]"]
+related: ["[[collar]]", "[[risk-reversal]]", "[[covered-call]]", "[[delta]]"]
 ---
 
 # Synthetic Long
@@ -52,12 +52,11 @@ A Synthetic Long replicates the profit-and-loss profile of owning 100 shares by 
 
 ## Disadvantages
 - The short put leg carries significant downside risk and requires margin
-- No [[dividend]] income since you do not own the actual shares
+- No dividend income since you do not own the actual shares
 - [[pin-risk|Pin risk]] near expiration can result in unwanted assignment on the short leg
 - Less liquid strikes or wide bid-ask spreads can increase execution cost
 
 ## See Also
 - [[risk-reversal]] -- closely related structure sometimes used synonymously
-- [[leaps-strategies]] -- another capital-efficient way to gain long exposure
 - [[collar]] -- adds protection to a synthetic or real stock position
 - [[covered-call]] -- requires actual share ownership unlike the synthetic

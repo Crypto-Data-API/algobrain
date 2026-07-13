@@ -104,7 +104,7 @@ Practical applications:
 3. **Conflating "high VIX" with "rich premium."** High VIX during a stressed regime usually means realized is matching or exceeding implied — the VRP is *compressed or negative* even though premium dollars look fat. This is the inverse trap of the calm-regime trap.
 4. **Doubling down after a bad week.** A bad week in compressed VRP is not "just noise" — it is exactly the kind of regime-transition signature that precedes much larger losses. Cut, don't add.
 5. **Selling more contracts to "make up the income."** Volume cannot compensate for a thinning per-unit edge. Doubling size in a regime where the per-contract VRP has halved doubles the risk while keeping expected income flat — terrible reward-to-risk.
-6. **Ignoring crowding.** The decay regime co-occurs with capital crowding. Open-interest concentration, ETP AUM, and dealer-positioning data ([[spotgamma|SpotGamma]], [[squeeze-metrics|SqueezeMetrics]]) help quantify when the short-vol trade is structurally crowded.
+6. **Ignoring crowding.** The decay regime co-occurs with capital crowding. Open-interest concentration, ETP AUM, and dealer-positioning data (SpotGamma, [[squeeze-metrics|SqueezeMetrics]]) help quantify when the short-vol trade is structurally crowded.
 7. **Mistaking a single-name decay for a macro signal.** A single ticker in a compressed-IV regime does not necessarily mean the index is. The VRP regime should be tracked at multiple levels.
 
 ## Related

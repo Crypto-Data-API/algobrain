@@ -14,7 +14,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[spik
 
 # Spiko US T-Bills Money Market Fund
 
-**Spiko US T-Bills Money Market Fund** (USTBL) is a [[tokenized-treasuries|tokenized]] EU-regulated USD money-market fund issued by Spiko (Paris, France), native on [[ethereum|Ethereum]] and deployed across Base, Polygon, Arbitrum, Starknet and Etherlink. It invests exclusively in short-dated [[treasury-bills|US Treasury Bills]] (maturities under six months, average portfolio maturity ≤ two months) and passes the [[yield]] through as a rising NAV. It is the **dollar leg** of Spiko's tokenized-MMF range; the euro counterpart is [[eutbl|EUTBL]]. As a fully licensed UCITS-style MMF accessible to retail and professional investors, USTBL is one of the most regulated retail-accessible [[real-world-assets|RWA]] cash products.
+**Spiko US T-Bills Money Market Fund** (USTBL) is a [[tokenized-treasuries|tokenized]] EU-regulated USD money-market fund issued by Spiko (Paris, France), native on [[ethereum|Ethereum]] and deployed across Base, Polygon, Arbitrum, Starknet and Etherlink. It invests exclusively in short-dated [[treasury-bills|US Treasury Bills]] (maturities under six months, average portfolio maturity ≤ two months) and passes the yield through as a rising NAV. It is the **dollar leg** of Spiko's tokenized-MMF range; the euro counterpart is [[eutbl|EUTBL]]. As a fully licensed UCITS-style MMF accessible to retail and professional investors, USTBL is one of the most regulated retail-accessible [[real-world-assets|RWA]] cash products.
 
 ---
 
@@ -67,7 +67,7 @@ The Spiko US T-Bills Money Market Fund is a fully licensed USD money market fund
 | Dimension | Detail |
 |---|---|
 | **Underlying assets** | 100% short-dated [[treasury-bills|US Treasury Bills]] (<6 months), average portfolio maturity ≤ 2 months — among the lowest-risk, most liquid instruments available |
-| **Yield source** | The short-term US T-bill rate, passed through by **NAV accrual** (the token price drifts up rather than paying a coupon). Realized return tracks the prevailing T-bill [[yield]] net of fund fees (qualitative — not a fixed APY) |
+| **Yield source** | The short-term US T-bill rate, passed through by **NAV accrual** (the token price drifts up rather than paying a coupon). Realized return tracks the prevailing T-bill yield net of fund fees (qualitative — not a fixed APY) |
 | **Wrapper** | A fully licensed EU money-market fund regulated by the French **AMF** — holders own regulated fund units, with fund-level investor protections rather than a bare note |
 | **Custody** | Fund assets held by regulated custodians under the MMF framework; the token is the on-chain share class |
 | **Redemption** | Subscribe/redeem directly with Spiko; no reliance on a secondary order book (24h on-chain volume ≈ $0) |
@@ -140,7 +140,7 @@ See the **Market Data** block above for the authoritative snapshot (2026-06-20: 
 | **24h Range** | $1.087 — $1.087 |
 | **Last Updated** | 2026-06-20 |
 
-> USTBL is **not a trading vehicle** — secondary on-chain volume is effectively zero by design. Exposure is gained by subscribing to the fund (USD/stablecoin in) and exited by redeeming. The token's value comes from accrued [[treasury-bills|T-bill]] [[yield]], not price action.
+> USTBL is **not a trading vehicle** — secondary on-chain volume is effectively zero by design. Exposure is gained by subscribing to the fund (USD/stablecoin in) and exited by redeeming. The token's value comes from accrued [[treasury-bills|T-bill]] yield, not price action.
 
 ---
 

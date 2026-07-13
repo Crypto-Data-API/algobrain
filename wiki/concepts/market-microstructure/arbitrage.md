@@ -48,8 +48,8 @@ Without the no-arbitrage principle, there would be no consistent way to price [[
 - **Funding rate arbitrage**: In perpetual futures markets, going long spot and short perps (or vice versa) to collect the [[funding-rate|funding rate]] differential while remaining delta-neutral. See [[funding-rate-arbitrage]].
 - **Cash-and-carry**: Buying the spot asset and selling the futures contract when futures trade at a premium ([[contango]]), locking in the basis as profit. See [[cash-and-carry]].
 - **Volatility arbitrage**: Trading the difference between implied and realized [[volatility]]. See [[volatility-arbitrage]].
-- **Merger arbitrage**: Buying the target and shorting the acquirer to capture the deal spread. See [[merger-arbitrage]].
-- **Convertible arbitrage**: Long convertible bonds, short the underlying equity. See [[convertible-arbitrage]].
+- **Merger arbitrage**: Buying the target and shorting the acquirer to capture the deal spread. See merger-arbitrage.
+- **Convertible arbitrage**: Long convertible bonds, short the underlying equity. See convertible-arbitrage.
 
 ## Limits to Arbitrage
 

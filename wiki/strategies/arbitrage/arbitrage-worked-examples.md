@@ -11,7 +11,7 @@ timeframe: scalp|intraday|swing|position
 markets: [crypto, stocks, futures, options]
 complexity: intermediate
 backtest_status: untested
-related: ["[[arbitrage-overview]]", "[[arbitrage-parameter-cheatsheet]]", "[[arbitrage-live-performance]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[merger-arbitrage]]", "[[flash-loan-arbitrage]]", "[[transaction-cost-modeling]]", "[[fees]]"]
+related: ["[[arbitrage-overview]]", "[[arbitrage-parameter-cheatsheet]]", "[[arbitrage-live-performance]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[flash-loan-arbitrage]]", "[[transaction-cost-modeling]]", "[[fees]]"]
 ---
 
 # Arbitrage Worked Examples
@@ -28,7 +28,7 @@ Individual strategy pages describe mechanics abstractly. This page walks through
 |---|---|---|---|---|---|---|
 | 1 | [[funding-rate-arbitrage]] | BTC, Nov 2024 | 15 days | ~0.08%/8h funding | Entry/exit fees, basis drift | Positive (golden period, atypical) |
 | 2 | [[cross-exchange-arbitrage]] | SOL, Mar 2024 | ~4 s | 0.34% quoted spread | Taker fees + slippage | Thin positive; fee-tier dependent |
-| 3 | [[merger-arbitrage]] | ATVI/MSFT, 2022-23 | 15 months | 22.6% deal spread | Deal-break risk, opportunity cost | Positive vs risk-free; tail was symmetric loss |
+| 3 | merger-arbitrage | ATVI/MSFT, 2022-23 | 15 months | 22.6% deal spread | Deal-break risk, opportunity cost | Positive vs risk-free; tail was symmetric loss |
 | 4 | [[flash-loan-arbitrage]] | ETH/USDC, representative | 1 block | 0.37% pool spread | 0.30%×2 swap fees + gas | **Negative** — instructive failure |
 | 5 | [[lst-depeg-arbitrage\|stETH depeg]] | Jun 2022 | ~6 months | 5.9% discount | Smart-contract / depeg tail risk | Positive if hedged; convergence + yield |
 
@@ -375,7 +375,7 @@ The single most common retail error is to stop at `gross_spread − explicit_fee
 - [[arbitrage-seasonality]] — why the Ex.1 funding rate was a "golden period"
 - [[transaction-cost-modeling]] — the cost-decomposition framework formalized
 - [[leg-risk]] / [[execution-sequencing]] — the operational risks the checklist targets
-- [[funding-rate-arbitrage]], [[cross-exchange-arbitrage]], [[merger-arbitrage]], [[flash-loan-arbitrage]], [[lst-depeg-arbitrage]] — the strategies illustrated
+- [[funding-rate-arbitrage]], [[cross-exchange-arbitrage]], merger-arbitrage, [[flash-loan-arbitrage]], [[lst-depeg-arbitrage]] — the strategies illustrated
 - [[limits-to-arbitrage]] — why the residual risk in each example exists at all
 
 ## Sources

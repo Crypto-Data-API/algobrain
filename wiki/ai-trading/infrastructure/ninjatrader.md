@@ -7,7 +7,7 @@ status: good
 tags: [trading-platforms, futures, backtesting, technology]
 aliases: ["NinjaTrader 8", "NT8"]
 domain: [trading-platforms]
-related: ["[[sierra-chart]]", "[[atas-platform]]", "[[order-flow]]", "[[futures]]", "[[backtesting]]", "[[cme-group]]", "[[tradingview]]"]
+related: ["[[sierra-chart]]", "[[atas-platform]]", "[[order-flow]]", "[[futures]]", "[[backtesting]]", "[[cme-group]]"]
 ---
 
 NinjaTrader is a widely used trading platform for [[futures]] and forex markets, offering charting, analysis, strategy development, [[backtesting]], and direct brokerage services. It serves as both a front-end trading platform and, since 2019, a [[futures]] brokerage (NinjaTrader Brokerage).
@@ -81,7 +81,6 @@ This vertical integration (platform + brokerage) distinguishes NinjaTrader from 
 - [[backtesting]] — strategy testing capabilities built into NinjaTrader
 - [[order-flow]] — analysis discipline supported via add-ons
 - [[cme-group]] — primary exchange for NinjaTrader users
-- [[tradingview]] — alternative charting platform (web-based, broader market coverage)
 
 ## Sources
 

@@ -6,12 +6,12 @@ updated: 2026-06-12
 status: good
 tags: [ai-trading, machine-learning, education]
 aliases: ["NLP for Trading", "NLP Overview", "NLP Pipeline"]
-related: ["[[natural-language-processing]]", "[[tokenization-nlp]]", "[[word-embeddings]]", "[[named-entity-recognition]]", "[[text-preprocessing-finance]]", "[[chatbot-architectures]]", "[[speech-and-audio-ai]]", "[[nlp-sentiment-analysis]]", "[[finbert]]", "[[llm-market-analysis]]", "[[earnings-call-analysis]]", "[[foundation-models]]", "[[retrieval-augmented-generation]]", "[[prompt-engineering-trading]]", "[[artificial-intelligence]]"]
+related: ["[[natural-language-processing]]", "[[tokenization-nlp]]", "[[word-embeddings]]", "[[named-entity-recognition]]", "[[text-preprocessing-finance]]", "[[chatbot-architectures]]", "[[speech-and-audio-ai]]", "[[nlp-sentiment-analysis]]", "[[finbert]]", "[[llm-market-analysis]]", "[[foundation-models]]", "[[retrieval-augmented-generation]]", "[[prompt-engineering-trading]]", "[[artificial-intelligence]]"]
 ---
 
 # Natural Language Processing for Trading
 
-This section covers the NLP pipeline in depth — from raw text to trading signal. For a high-level introduction see [[natural-language-processing]]. For applied implementations see [[nlp-sentiment-analysis]], [[finbert]], [[llm-market-analysis]], and [[earnings-call-analysis]] in the AI Trading section.
+This section covers the NLP pipeline in depth — from raw text to trading signal. For a high-level introduction see [[natural-language-processing]]. For applied implementations see [[nlp-sentiment-analysis]], [[finbert]], [[llm-market-analysis]], and earnings-call-analysis in the AI Trading section.
 
 ## The NLP Pipeline for Financial Text
 

@@ -19,7 +19,6 @@ related:
   - "[[2026-04-07-claude-mythos-project-glasswing]]"
   - "[[2026-06-01-perplexity-mythos-public-rollout]]"
   - "[[mythos-release-window-exploit-short]]"
-  - "[[mythos-capability-overhang-vol]]"
   - "[[2026-anthropic-finance-agents-launch]]"
   - "[[2026-claude-opus-4-7-finance-benchmark]]"
 ---
@@ -30,7 +29,7 @@ Perplexity `sonar-deep-research` run dated 2026-06-10 (~20-30 web searches, 59 c
 
 ## The headline finding: Fable 5 IS the Mythos public rollout
 
-**Claude Fable 5 (released 9 June 2026) is the safety-wrapped public release of the Mythos-class model the wiki has been tracking** via [[2026-04-07-claude-mythos-project-glasswing]] and [[2026-06-01-perplexity-mythos-public-rollout]]. Fable 5 and the concurrently-released, access-restricted **Claude Mythos 5** share the same underlying base model; Mythos 5 (Project Glasswing partners only) runs without the safety classifiers, while Fable 5 wraps the same system in a safety shell "safe for general use." This directly resolves the catalyst-window thesis behind [[mythos-release-window-exploit-short]] and [[mythos-capability-overhang-vol]]: the rollout those strategies were positioned around materialized on 9 June 2026. [HIGH] (Sources 1, 2, 3, 7, 9, 10)
+**Claude Fable 5 (released 9 June 2026) is the safety-wrapped public release of the Mythos-class model the wiki has been tracking** via [[2026-04-07-claude-mythos-project-glasswing]] and [[2026-06-01-perplexity-mythos-public-rollout]]. Fable 5 and the concurrently-released, access-restricted **Claude Mythos 5** share the same underlying base model; Mythos 5 (Project Glasswing partners only) runs without the safety classifiers, while Fable 5 wraps the same system in a safety shell "safe for general use." This directly resolves the catalyst-window thesis behind [[mythos-release-window-exploit-short]] and mythos-capability-overhang-vol: the rollout those strategies were positioned around materialized on 9 June 2026. [HIGH] (Sources 1, 2, 3, 7, 9, 10)
 
 ## Key extracted claims with confidence flags
 

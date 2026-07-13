@@ -9,7 +9,7 @@ aliases: ["best-execution", "duty-of-best-execution"]
 domain: [market-microstructure]
 prerequisites: ["[[order-types]]", "[[bid-ask-spread]]", "[[execution-costs]]"]
 difficulty: intermediate
-related: ["[[execution-costs]]", "[[execution-quality]]", "[[slippage]]", "[[payment-for-order-flow]]", "[[reg-nms]]", "[[smart-order-routing]]", "[[vwap]]", "[[twap]]", "[[dark-pools]]", "[[implementation-shortfall]]"]
+related: ["[[execution-costs]]", "[[execution-quality]]", "[[slippage]]", "[[payment-for-order-flow]]", "[[smart-order-routing]]", "[[vwap]]", "[[twap]]", "[[dark-pools]]", "[[implementation-shortfall]]"]
 ---
 
 Best execution is the regulatory and fiduciary obligation on brokers and dealers to seek the most favourable terms reasonably available when executing a client order. "Favourable" is multi-dimensional — it covers price, speed, likelihood of execution and settlement, order size, and total cost — not price alone. It is the legal backbone of how retail and institutional orders are routed in modern fragmented markets.
@@ -20,14 +20,14 @@ In a fragmented market a single stock may trade across many venues — lit excha
 
 The relevant factors a firm must weigh:
 
-- **Price** — relative to the prevailing [[bid-ask-spread]] and the consolidated best quote (the [[reg-nms|National Best Bid and Offer]] in the US).
+- **Price** — relative to the prevailing [[bid-ask-spread]] and the consolidated best quote (the National Best Bid and Offer in the US).
 - **Speed and likelihood of execution** — a marginally better price is worthless if the order does not fill or fills too late.
 - **Total transaction cost** — explicit [[fees]] plus implicit costs ([[slippage]], market impact, [[implementation-shortfall]]).
 - **Size and nature of the order** — a large block needs different handling (e.g. a [[dark-pools|dark venue]] or a [[vwap]]/[[twap]] schedule) than a 100-share marketable order.
 
 ### Regulatory framework
 
-- **United States** — FINRA Rule 5310 ("Best Execution and Interpositioning") requires reasonable diligence to ascertain the best market for a security. [[reg-nms|Regulation NMS]] underpins this with the **Order Protection Rule** (no trade-throughs of a better-priced protected quote) and the consolidated NBBO. The SEC's Rule 605/606 disclosures publish execution-quality and order-routing statistics.
+- **United States** — FINRA Rule 5310 ("Best Execution and Interpositioning") requires reasonable diligence to ascertain the best market for a security. Regulation NMS underpins this with the **Order Protection Rule** (no trade-throughs of a better-priced protected quote) and the consolidated NBBO. The SEC's Rule 605/606 disclosures publish execution-quality and order-routing statistics.
 - **Europe / UK** — [[mifid-ii|MiFID II]] imposes an explicit best-execution duty with detailed factor weighting and (historically) RTS 27/28 reporting requirements.
 
 ### The conflict: payment for order flow
@@ -43,7 +43,7 @@ The central tension in retail best execution is [[payment-for-order-flow]] (PFOF
 ## Sources
 
 - FINRA Rule 5310 — "Best Execution and Interpositioning" (official rulebook)
-- SEC Regulation NMS (Rule 611 Order Protection Rule; Rules 605/606 disclosure) — [[reg-nms]]
+- SEC Regulation NMS (Rule 611 Order Protection Rule; Rules 605/606 disclosure) — reg-nms
 - ESMA / FCA — MiFID II best-execution provisions ([[mifid-ii]])
 - Larry Harris, *Trading and Exchanges: Market Microstructure for Practitioners* — execution costs and venue selection ([[book-trading-and-exchanges]])
 
@@ -53,6 +53,5 @@ The central tension in retail best execution is [[payment-for-order-flow]] (PFOF
 - [[execution-quality]] — how realised fills are measured against benchmarks
 - [[slippage]] — the core implicit cost
 - [[payment-for-order-flow]] — the central conflict-of-interest in retail routing
-- [[reg-nms]] — the US rule framework enforcing protected quotes
 - [[smart-order-routing]] — the technology that operationalises best execution
 - [[implementation-shortfall]] — the arrival-price benchmark for execution quality

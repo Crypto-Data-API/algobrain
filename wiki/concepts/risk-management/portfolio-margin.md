@@ -6,13 +6,13 @@ updated: 2026-06-20
 status: excellent
 tags: [options, risk-management, regulation, itpm]
 aliases: ["PM Account", "Portfolio Margin Account", "Risk-Based Margin"]
-related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-position-sizing]]", "[[interactive-brokers]]", "[[tastytrade]]", "[[reg-t-margin]]", "[[options-stress-testing]]"]
+related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-position-sizing]]", "[[options-stress-testing]]"]
 domain: [risk-management, regulation]
 prerequisites: ["[[options-greeks]]", "[[options-position-sizing]]"]
 difficulty: advanced
 ---
 
-Portfolio margin (PM) is a risk-based [[margin|margining]] methodology that calculates account-wide margin requirements by stress-testing the entire book under a set of hypothetical underlying and [[volatility]] shocks, then charging the worst-case loss as the margin requirement. For traders running hedged options books — iron condors, ratio spreads, calendars, dispersion trades — PM typically requires 3-7x less capital than the strategy-based [[reg-t-margin|Reg T]] system, which sums per-trade margin requirements without recognizing offsetting positions. PM is not "free leverage" — it is a more accurate risk model (conceptually a single-day, broker-defined [[value-at-risk|VaR]] computed from a [[options-stress-testing|scenario grid]]) that exposes traders to non-linear margin expansion during volatility shocks, and the same hedged book that "fits" comfortably at normal vol can blow through the margin requirement when the [[vix]] doubles overnight.
+Portfolio margin (PM) is a risk-based [[margin|margining]] methodology that calculates account-wide margin requirements by stress-testing the entire book under a set of hypothetical underlying and [[volatility]] shocks, then charging the worst-case loss as the margin requirement. For traders running hedged options books — iron condors, ratio spreads, calendars, dispersion trades — PM typically requires 3-7x less capital than the strategy-based Reg T system, which sums per-trade margin requirements without recognizing offsetting positions. PM is not "free leverage" — it is a more accurate risk model (conceptually a single-day, broker-defined [[value-at-risk|VaR]] computed from a [[options-stress-testing|scenario grid]]) that exposes traders to non-linear margin expansion during volatility shocks, and the same hedged book that "fits" comfortably at normal vol can blow through the margin requirement when the [[vix]] doubles overnight.
 
 ## Margin Regimes at a Glance
 
@@ -21,13 +21,13 @@ Three margining regimes dominate U.S. retail and professional accounts. The dist
 | Dimension | Reg T (strategy-based) | Portfolio Margin / TIMS (risk-based) | SPAN (risk-based, futures) |
 |-----------|------------------------|--------------------------------------|----------------------------|
 | **Methodology** | Fixed per-strategy lookup formulas | Full-book revaluation across a price × IV scenario grid | Scanning-risk array of ~16 price/vol scenarios per product group |
-| **Operated / defined by** | Federal Reserve ([[reg-t-margin\|Reg T]]) + FINRA Rule 4210 | OCC's **TIMS** engine, passed through by brokers | CME Group's **SPAN** (Standard Portfolio Analysis of Risk) |
+| **Operated / defined by** | Federal Reserve (Reg T) + FINRA Rule 4210 | OCC's **TIMS** engine, passed through by brokers | CME Group's **SPAN** (Standard Portfolio Analysis of Risk) |
 | **Asset scope** | Equities + equity options | Equities, ETFs, equity/index options | Futures + futures options (cross-margined product groups) |
 | **Recognizes hedges?** | Within a single strategy only (e.g. one vertical) | Yes — across the entire account at the clearing level | Yes — within a product group + inter-commodity spread credits |
 | **Recognizes [[options-concentration-risk\|concentration]]?** | No (blind to it) | Yes — penalizes single-name concentration via add-ons | Yes — via concentration / liquidity charges |
 | **Capital efficiency on a hedged book** | Low (3-7x more capital) | High | High |
 | **Min. account equity** | None beyond Reg T basics | $125k FINRA minimum (broker overlays apply) | Set per product / broker |
-| **Who uses it** | Default retail accounts | Active options books, [[itpm]]-style long/short books | Futures traders, vol-on-futures (ES, /VX) books |
+| **Who uses it** | Default retail accounts | Active options books, itpm-style long/short books | Futures traders, vol-on-futures (ES, /VX) books |
 
 PM (via TIMS) and SPAN are siblings — both replace fixed formulas with worst-case scenario revaluation. The practical difference is jurisdiction: TIMS governs the equity/options world (OCC), SPAN governs the futures world (CME). Brokers like [[thinkorswim|Schwab/thinkorswim]] run both and stitch them together so a portfolio spanning ES futures and SPX options is margined coherently. See [[span-margin]] for the futures-side detail.
 
@@ -37,7 +37,7 @@ The U.S. options margin system has two parallel regimes:
 
 ### Reg T (Strategy-Based Margin)
 
-[[reg-t-margin|Regulation T]] is the default margin framework for retail brokerage accounts, originally designed in 1934 for cash equity margin and later extended to options through a strategy-by-strategy lookup table. Each position type has a fixed margin formula:
+Regulation T is the default margin framework for retail brokerage accounts, originally designed in 1934 for cash equity margin and later extended to options through a strategy-by-strategy lookup table. Each position type has a fixed margin formula:
 
 | Position | Reg T Margin Requirement |
 |----------|--------------------------|
@@ -146,8 +146,8 @@ Most brokers exceed FINRA minimums:
 
 | Broker | Minimum Equity | Notes |
 |--------|----------------|-------|
-| [[interactive-brokers]] | $110,000 (lower than FINRA min for some accounts) | TIMS-based; tightest spreads on requirements |
-| [[tastytrade]] | $250,000 (some accounts $125k) | "SPAN-style" methodology branded as Portfolio Margin |
+| interactive-brokers | $110,000 (lower than FINRA min for some accounts) | TIMS-based; tightest spreads on requirements |
+| tastytrade | $250,000 (some accounts $125k) | "SPAN-style" methodology branded as Portfolio Margin |
 | Charles Schwab / [[thinkorswim]] | $125,000 | Inherits TD Ameritrade's PM platform post-merger |
 | Tradier | $125,000 | Available for active options accounts |
 | E*TRADE | $250,000 | Higher minimum than most |
@@ -159,7 +159,7 @@ The actual requirement to *qualify* often differs from the requirement to *maint
 
 ### Interactive Brokers
 
-[[interactive-brokers|IBKR]] uses the OCC's TIMS methodology directly with minimal broker overlay. Their PM implementation is widely considered the most aggressive (i.e., lowest margin requirements) among retail brokers, particularly for delta-hedged and dispersion books. Key features:
+IBKR uses the OCC's TIMS methodology directly with minimal broker overlay. Their PM implementation is widely considered the most aggressive (i.e., lowest margin requirements) among retail brokers, particularly for delta-hedged and dispersion books. Key features:
 
 - Real-time PM calculation in [[trader-workstation|TWS]] — every order shows margin impact before submission
 - Stress test view: simulate ±10%, ±20%, ±30% shocks on any underlying and see resulting margin
@@ -167,7 +167,7 @@ The actual requirement to *qualify* often differs from the requirement to *maint
 - "What-if" portfolio: clone the live account and test trades hypothetically
 - House margin requirements: IBKR overlays additional requirements for very concentrated positions, illiquid names, and during market stress
 
-IBKR is the most popular choice for [[itpm]]-style hedged equity books because the PM methodology accurately reflects the risk of long/short pair trades with options overlays — see [[itpm-trade-construction-playbook]].
+IBKR is the most popular choice for itpm-style hedged equity books because the PM methodology accurately reflects the risk of long/short pair trades with options overlays — see [[itpm-trade-construction-playbook]].
 
 ### Charles Schwab / thinkorswim
 
@@ -212,7 +212,7 @@ PM converts the margin requirement from "sum of individual position requirements
 | Short strangle, delta-hedged | Full naked × 2 | Single shocked move | 70-85% |
 | Long/short pair (stocks + options) | Full margin both sides | Net beta exposure | 50-70% |
 
-These reductions enable strategies that are simply uneconomic under Reg T — particularly [[dispersion-trading|dispersion trades]], [[volatility-arbitrage|vol arbitrage]], and [[delta-neutral]] options books.
+These reductions enable strategies that are simply uneconomic under Reg T — particularly dispersion trades, [[volatility-arbitrage|vol arbitrage]], and [[delta-neutral]] options books.
 
 ## The Hidden Risks
 
@@ -384,12 +384,9 @@ The one-line synthesis: **size to your own risk and stress numbers; use PM only 
 - [[theta-targeting]] — premium-selling income that consumes PM via short vega
 - [[vega-budgeting]] — the vega limit that maps directly to PM consumption
 - [[trade-repair-and-rolling]] — adding hedges reduces stressed margin faster than cash
-- [[reg-t-margin]] — the strategy-based alternative
 - [[span-margin]] — the futures-equivalent scanning-risk engine
 - [[delta]], [[gamma]], [[vega]] — the exposures the TIMS grid prices
 - [[volatility]] — the IV dimension of the shock grid
-- [[interactive-brokers]] — most popular PM provider for active traders
-- [[tastytrade]] — PM marketed to retail premium sellers
 - [[thinkorswim]] — Schwab's PM-enabled platform
 - [[options-greeks]] — the risk measures PM is implicitly charging against
 - [[itpm-trade-construction-playbook]] — discretionary workflow that benefits from PM

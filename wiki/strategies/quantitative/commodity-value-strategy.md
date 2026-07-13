@@ -20,14 +20,14 @@ crowding_risk: low
 data_required: [futures-continuous-contracts, ohlcv-daily, fundamentals-commodity]
 capacity_usd: 3000000000
 min_capital_usd: 500000
-related: ["[[commodity-momentum]]", "[[commodity-carry-strategy]]", "[[supply-demand-balance]]", "[[capex-cycle]]", "[[commodity-super-cycle]]", "[[commodities]]", "[[value-investing-strategy]]"]
+related: ["[[commodity-momentum]]", "[[commodity-carry-strategy]]", "[[supply-demand-balance]]", "[[capex-cycle]]", "[[commodity-super-cycle]]", "[[commodities]]"]
 ---
 
 # Commodity Value Strategy
 
-Mean-reversion in commodity prices relative to long-run fundamentals -- buy commodities that have fallen the most over 3-5 years (or are cheapest relative to marginal production cost), short those that have risen the most. This is the commodity analog of the equity [[value-investing-strategy|value factor]], exploiting behavioral overreaction to recent supply/demand shocks and the physical anchoring of commodity prices to production cost (Source: [[2026-04-14-commodities-research-framework]]).
+Mean-reversion in commodity prices relative to long-run fundamentals -- buy commodities that have fallen the most over 3-5 years (or are cheapest relative to marginal production cost), short those that have risen the most. This is the commodity analog of the equity value factor, exploiting behavioral overreaction to recent supply/demand shocks and the physical anchoring of commodity prices to production cost (Source: [[2026-04-14-commodities-research-framework]]).
 
-Commodity value is the slow, contrarian member of the commodity factor triad alongside [[commodity-momentum]] (fast trend) and [[commodity-carry-strategy]] (curve-shape risk premium). Its defining feature is a strong negative correlation with momentum: where momentum rides recent trends, value bets on their exhaustion. It is rarely run alone — its standalone Sharpe is the weakest of the three — but it materially improves a multi-factor commodity book by diversifying the timing of when each leg pays off. It sits within the broader [[mean-reversion]] family and shares its DNA with equity [[contrarian-investing]].
+Commodity value is the slow, contrarian member of the commodity factor triad alongside [[commodity-momentum]] (fast trend) and [[commodity-carry-strategy]] (curve-shape risk premium). Its defining feature is a strong negative correlation with momentum: where momentum rides recent trends, value bets on their exhaustion. It is rarely run alone — its standalone Sharpe is the weakest of the three — but it materially improves a multi-factor commodity book by diversifying the timing of when each leg pays off. It sits within the broader [[mean-reversion]] family and shares its DNA with equity contrarian-investing.
 
 ### At a Glance
 
@@ -266,8 +266,6 @@ Because value is strongly negatively correlated with momentum and roughly uncorr
 - [[capex-cycle]] -- the investment cycle that creates value opportunities
 - [[commodity-super-cycle]] -- long-duration cycles that can overwhelm value signals
 - [[commodities]] -- market overview
-- [[value-investing-strategy]] -- equity analog
-- [[contrarian-investing]] -- the discretionary equity cousin of commodity value
 - [[mean-reversion]] -- the statistical principle underlying the signal
 - [[contango]] / [[roll-yield]] -- roll mechanics that distort raw value measurement
 - [[edge-taxonomy]] -- behavioral edge classification

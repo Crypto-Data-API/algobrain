@@ -8,12 +8,12 @@ tags: [strategy-development, itpm, options, trade-construction, playbook]
 aliases: ["ITPM Playbook", "Kreil Trade Construction", "Professional Trader Workflow"]
 domain: [strategy-development, options]
 difficulty: intermediate
-related: ["[[itpm]]", "[[anton-kreil]]", "[[strategy-development-overview]]", "[[research-checklist]]", "[[long-short-equity]]", "[[options-greeks]]", "[[itpm-five-principles]]"]
+related: ["[[anton-kreil]]", "[[strategy-development-overview]]", "[[research-checklist]]", "[[options-greeks]]", "[[itpm-five-principles]]"]
 ---
 
 # ITPM Trade Construction Playbook
 
-A workflow for *producing* trades from a market view, in the style taught by the [[itpm|Institute of Trading and Portfolio Management]] and [[anton-kreil|Anton Kreil]]. Most of this wiki catalogs strategies as static objects ("here is a covered call"); this page is about the *process* a discretionary professional trader uses to convert a market view into an actual portfolio of positions. Distinct from systematic strategy development because the inputs are qualitative (top-down macro view, sector relative strength, fundamental story) and the outputs are constructed trades (specific options structures sized to a thesis).
+A workflow for *producing* trades from a market view, in the style taught by the Institute of Trading and Portfolio Management and [[anton-kreil|Anton Kreil]]. Most of this wiki catalogs strategies as static objects ("here is a covered call"); this page is about the *process* a discretionary professional trader uses to convert a market view into an actual portfolio of positions. Distinct from systematic strategy development because the inputs are qualitative (top-down macro view, sector relative strength, fundamental story) and the outputs are constructed trades (specific options structures sized to a thesis).
 
 ## The Process at a High Level
 
@@ -322,7 +322,6 @@ The wiki has many pages on individual options strategies — [[bull-call-spread]
 
 ## Sources
 
-- [[itpm]] — ITPM company page
 - [[anton-kreil]] — founder
 - [[itpm-five-principles]] — Kreil's underlying framework
 - [[itpm-ten-secrets]] — companion source
@@ -334,7 +333,6 @@ The wiki has many pages on individual options strategies — [[bull-call-spread]
 - [[strategy-development-overview]]
 - [[research-checklist]] — systematic counterpart to the pre-trade checklist
 - [[edge-taxonomy]] — where the discretionary edge sits (analytical + informational)
-- [[long-short-equity]]
 - [[risk-management-overview]]
 - [[options-greeks]]
 - [[implied-volatility]] — the vol-view input to the structure matrix
@@ -349,6 +347,5 @@ The wiki has many pages on individual options strategies — [[bull-call-spread]
 - [[covered-call]]
 - [[wheel-strategy]]
 - [[sector-rotation]]
-- [[sector-momentum-screen]]
 - [[arbitrage-opportunity-map]] — cross-wiki view of where mispricings cluster
 - [[asterdex-perp-trading-map]] · [[low-cap-crypto-trading-map]] — venue-specific companion maps

@@ -5,7 +5,7 @@ created: 2026-04-06
 updated: 2026-04-06
 status: good
 tags: [llm, ai-trading, nlp]
-related: ["[[ai-trading-agents]]", "[[finbert]]", "[[earnings-call-analysis]]", "[[sentiment-analysis]]", "[[anthropic]]", "[[openai]]", "[[langchain]]", "[[artificial-intelligence]]"]
+related: ["[[ai-trading-agents]]", "[[finbert]]", "[[sentiment-analysis]]", "[[anthropic]]", "[[openai]]", "[[langchain]]", "[[artificial-intelligence]]"]
 ---
 
 # LLM Market Analysis
@@ -54,5 +54,4 @@ The key insight: LLMs don't replace quantitative models — they augment the res
 ## See Also
 
 - [[finbert]] — specialized financial sentiment model
-- [[earnings-call-analysis]] — structured approach to transcript analysis
 - [[ai-trading-agents]] — autonomous systems built on LLMs

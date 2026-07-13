@@ -9,7 +9,7 @@ aliases: ["BLS Benchmark Revisions", "Nonfarm Payrolls", "NFP", "BLS Employment 
 source_type: data
 source_url: "https://www.bls.gov/"
 confidence: high
-related: ["[[employment]]", "[[recession]]", "[[macro-data-sources]]", "[[fundamental-data-sources]]", "[[free-data-sources]]", "[[data-sources-overview]]", "[[2026-03-bls-900k-jobs-revision]]", "[[service-sector-multiplier]]", "[[ai-layoff-trap]]", "[[wage-compression-vs-job-loss]]", "[[ibkr-forecast-trader]]"]
+related: ["[[employment]]", "[[recession]]", "[[macro-data-sources]]", "[[free-data-sources]]", "[[data-sources-overview]]", "[[2026-03-bls-900k-jobs-revision]]", "[[service-sector-multiplier]]", "[[ai-layoff-trap]]", "[[wage-compression-vs-job-loss]]", "[[ibkr-forecast-trader]]"]
 ---
 
 # BLS Nonfarm Payrolls and Benchmark Revisions
@@ -55,7 +55,7 @@ Most traders consume BLS data via FRED, Bloomberg, or broker macro calendars rat
 - **CES (Current Employment Statistics)** — establishment survey; total nonfarm and sectoral payrolls. Track **information**, **professional and business services**, and **financial activities** for white-collar AI exposure; **construction** and **trade/transport/utilities** for the inverse (skilled trades) signal.
 - **CPS (Current Population Survey)** — household survey; unemployment rate, labor-force participation. Diverges from CES in ways that flag turning points.
 - **JOLTS** — quits rate is a leading indicator of labor-market tightness; layoffs/discharges rate is the direct AI-displacement print.
-- **QCEW** — by-county, by-industry near-census. Slow but authoritative; the basis for benchmark revisions and for [[citrini-research|Citrini-style]] regional analyses.
+- **QCEW** — by-county, by-industry near-census. Slow but authoritative; the basis for benchmark revisions and for Citrini-style regional analyses.
 - **OEWS (Occupational Employment and Wage Statistics)** — annual occupation-level wages; useful for tracking the [[skilled-trades-wage-boom]] and [[wage-compression-vs-job-loss]].
 
 ## Gotchas / Caveats
@@ -83,7 +83,6 @@ Most traders consume BLS data via FRED, Bloomberg, or broker macro calendars rat
 - [[wage-compression-vs-job-loss]]
 - [[ai-layoff-trap]]
 - [[macro-data-sources]]
-- [[fundamental-data-sources]]
 - [[free-data-sources]]
 - [[data-sources-overview]]
 - [[ibkr-forecast-trader]]

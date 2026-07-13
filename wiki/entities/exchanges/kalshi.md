@@ -10,7 +10,7 @@ entity_type: exchange
 founded: 2018
 headquarters: "New York City, USA"
 website: "https://kalshi.com"
-related: ["[[polymarket]]", "[[prediction-markets]]", "[[polymarket-vs-kalshi]]", "[[cftc]]", "[[robinhood]]", "[[intercontinental-exchange]]"]
+related: ["[[polymarket]]", "[[prediction-markets]]", "[[polymarket-vs-kalshi]]", "[[cftc]]", "[[robinhood]]"]
 ---
 
 # Kalshi
@@ -50,7 +50,7 @@ Kalshi focuses on **regulatory distribution channels and traditional brand expos
 | **Fees** | Yes | 0% |
 | **Scope** | Primarily US | Global |
 | **Architecture** | Centralized | Decentralized (Polygon) |
-| **Big backer** | Sequoia, CapitalG, Paradigm | [[intercontinental-exchange|ICE]] ($2B) |
+| **Big backer** | Sequoia, CapitalG, Paradigm | ICE ($2B) |
 
 See [[polymarket-vs-kalshi]] for a detailed comparison.
 
@@ -74,7 +74,6 @@ Kalshi markets are accessible to AI agents on Solana through Jupiter's predictio
 - [[polymarket-vs-kalshi]] — Head-to-head comparison
 - [[prediction-markets]] — The broader concept
 - [[prediction-market-strategies]] — Strategies applicable to both platforms
-- [[intercontinental-exchange]] — ICE's $2B Polymarket stake reframed the sector
 - [[cftc]] — primary regulator
 
 ## Sources

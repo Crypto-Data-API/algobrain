@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [portfolio-theory, risk-management, education]
 aliases: ["Compound Interest", "Compound Returns"]
-related: ["[[risk-management]]", "[[position-sizing]]", "[[warren-buffett]]", "[[passive-investing]]", "[[drawdown]]"]
+related: ["[[risk-management]]", "[[position-sizing]]", "[[passive-investing]]", "[[drawdown]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: beginner
 ---
@@ -19,7 +19,7 @@ The mechanics of compounding are simple: reinvested gains earn additional gains 
 
 The **Rule of 72** provides a quick mental shortcut: divide 72 by the annual return rate to approximate the number of years needed to double your money. At 8% returns, money doubles in about 9 years. At 12%, about 6 years. This means an investor earning 12% vs. 8% doesn't just end up with 50% more wealth -- over 30 years, the 12% investor has roughly 3x more.
 
-[[warren-buffett|Warren Buffett's]] fortune illustrates compounding's power. He began investing seriously at age 11 and has compounded at approximately 20% annually for over 70 years. Over 99% of his wealth was accumulated after age 50 -- not because his later years were better, but because compounding accelerates with time.
+Warren Buffett's fortune illustrates compounding's power. He began investing seriously at age 11 and has compounded at approximately 20% annually for over 70 years. Over 99% of his wealth was accumulated after age 50 -- not because his later years were better, but because compounding accelerates with time.
 
 ## How It Works
 
@@ -65,10 +65,9 @@ This means that even if two strategies have the same average return, the less vo
 - [[position-sizing]] -- managing bet sizes to preserve compounding
 - [[drawdown]] -- the enemy of compounding; recovery math is asymmetric
 - [[passive-investing]] -- the strategy that most directly harnesses compounding
-- [[warren-buffett]] -- the living embodiment of long-term compounding
 - [[diversification]] -- reduces volatility, which improves geometric returns
 
 ## Sources
 
-- (Source: [[book-the-intelligent-investor]]) -- Graham's emphasis on long-term investing and avoiding speculative losses that break compounding
+- (Source: book-the-intelligent-investor) -- Graham's emphasis on long-term investing and avoiding speculative losses that break compounding
 - (Source: [[book-a-man-for-all-markets]]) -- Ed Thorp's application of compounding principles and the Kelly criterion to optimize long-term growth

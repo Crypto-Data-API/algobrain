@@ -9,7 +9,7 @@ aliases: ["Assignment", "Options Assignment", "Exercise and Assignment", "Early 
 domain: [derivatives]
 prerequisites: ["[[options]]", "[[options-pricing]]"]
 difficulty: intermediate
-related: ["[[options]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[options-pricing]]", "[[theta]]", "[[ex-dividend-date]]", "[[occ]]", "[[pin-risk]]"]
+related: ["[[options]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[options-pricing]]", "[[theta]]", "[[occ]]", "[[pin-risk]]"]
 ---
 
 Assignment is the process by which a short [[options|option]] holder is obligated to fulfill the terms of the contract when the option buyer exercises their right. For a short call, assignment means the seller must deliver (sell) shares of the underlying at the strike price. For a short put, assignment means the seller must buy shares at the strike price. Assignment is the mechanism through which options obligations become actual stock transactions.
@@ -39,7 +39,7 @@ A special hazard at expiration is **pin risk**: when the underlying closes very 
 
 ## Managing Assignment
 
-For strategies like [[covered-calls]] and [[cash-secured-puts]], assignment is a planned outcome rather than a catastrophe -- the seller has the underlying shares (covered call) or sufficient cash (cash-secured put) to fulfill the obligation. For naked or spread positions, unexpected assignment can create unwanted stock positions and margin issues. Notably, with a vertical spread, getting assigned on the short leg before expiry while the long leg remains unexercised leaves the trader with a directional stock position plus financing/margin demands until they exercise the long leg or close out. Traders managing short options positions should monitor their options' proximity to being in-the-money, upcoming dividends (see [[ex-dividend-date]]), and the remaining [[theta|time value]] to anticipate and manage assignment risk.
+For strategies like [[covered-calls]] and [[cash-secured-puts]], assignment is a planned outcome rather than a catastrophe -- the seller has the underlying shares (covered call) or sufficient cash (cash-secured put) to fulfill the obligation. For naked or spread positions, unexpected assignment can create unwanted stock positions and margin issues. Notably, with a vertical spread, getting assigned on the short leg before expiry while the long leg remains unexercised leaves the trader with a directional stock position plus financing/margin demands until they exercise the long leg or close out. Traders managing short options positions should monitor their options' proximity to being in-the-money, upcoming dividends (see ex-dividend-date), and the remaining [[theta|time value]] to anticipate and manage assignment risk.
 
 ## Trading Relevance
 
@@ -51,7 +51,7 @@ A practical checklist for anyone running short-premium strategies:
 
 | Situation | Risk | Mitigation |
 |-----------|------|------------|
-| Short call, dividend approaching | Early assignment to capture the dividend | Compare remaining extrinsic value vs. dividend; roll or close before [[ex-dividend-date]] if extrinsic < dividend |
+| Short call, dividend approaching | Early assignment to capture the dividend | Compare remaining extrinsic value vs. dividend; roll or close before ex-dividend-date if extrinsic < dividend |
 | Deep ITM short put | Early exercise to free up capital | Roll down/out before extrinsic value disappears |
 | Near-the-money at expiration | [[pin-risk]] — assigned or not? | Close the short before the bell; do not gamble on the close |
 | Short leg of a vertical spread assigned | Naked stock position + margin call | Exercise the long leg or close the whole position promptly |
@@ -72,7 +72,6 @@ A practical checklist for anyone running short-premium strategies:
 - [[covered-calls]] -- strategy where assignment is a defined, acceptable outcome
 - [[cash-secured-puts]] -- strategy that accepts assignment as a way to acquire stock at a target price
 - [[options-pricing]] -- understanding time value is key to predicting assignment risk
-- [[ex-dividend-date]] -- the main trigger for early call assignment
 - [[theta]] -- remaining time value determines whether early exercise is rational
 
 ## Sources

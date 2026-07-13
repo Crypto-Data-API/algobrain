@@ -11,14 +11,14 @@ timeframe: swing
 markets: [stocks]
 complexity: advanced
 backtest_status: untested
-related: ["[[merger-arbitrage]]", "[[news-trading]]", "[[earnings-momentum]]", "[[value-investing-strategy]]", "[[factor-investing]]"]
+related: ["[[news-trading]]", "[[factor-investing]]"]
 ---
 
 # Event-Driven Trading
 
 ## Overview
 
-Event-Driven Trading is a [[fundamental-analysis]] strategy that profits from predictable price patterns around specific corporate events: **spinoffs**, **bankruptcies and restructurings**, **stock buybacks**, **index additions/removals**, **activist investor campaigns**, and **tender offers**. Each event type creates a temporary mispricing because of forced selling, institutional constraints, or information complexity. The approach was popularized by **Joel Greenblatt** in his book *You Can Be a Stock Market Genius* and is a core strategy at event-driven hedge funds like Elliott Management, Third Point, and Baupost Group.
+Event-Driven Trading is a fundamental-analysis strategy that profits from predictable price patterns around specific corporate events: **spinoffs**, **bankruptcies and restructurings**, **stock buybacks**, **index additions/removals**, **activist investor campaigns**, and **tender offers**. Each event type creates a temporary mispricing because of forced selling, institutional constraints, or information complexity. The approach was popularized by **Joel Greenblatt** in his book *You Can Be a Stock Market Genius* and is a core strategy at event-driven hedge funds like Elliott Management, Third Point, and Baupost Group.
 
 The key insight is that corporate events create **mechanical supply/demand imbalances** that have nothing to do with intrinsic value. When a company spins off a small subsidiary, index funds and institutions that cannot hold the new entity sell it indiscriminately, pushing the price below fair value. When a stock is added to the S&P 500, index funds must buy it regardless of valuation. These imbalances are temporary and predictable, creating opportunities for prepared investors.
 
@@ -81,7 +81,7 @@ The key insight is that corporate events create **mechanical supply/demand imbal
 - Each event has a well-studied historical playbook with documented average returns and timelines
 - Returns are driven by structural forces (forced buying/selling) rather than speculative forecasts
 - Low correlation to market direction -- profits from corporate actions regardless of bull or bear markets
-- Can be combined with [[value-investing-strategy]] principles (buy spinoffs at depressed valuations for a double catalyst)
+- Can be combined with value-investing-strategy principles (buy spinoffs at depressed valuations for a double catalyst)
 - The complexity barrier deters casual participants, preserving the edge for dedicated researchers
 
 ## Disadvantages
@@ -93,8 +93,5 @@ The key insight is that corporate events create **mechanical supply/demand imbal
 - Illiquidity in smaller spinoffs and removed index stocks can create wide bid-ask spreads and execution challenges
 
 ## See Also
-- [[merger-arbitrage]] -- the most formalized sub-strategy within event-driven investing
 - [[news-trading]] -- trading the initial reaction to event announcements
-- [[earnings-momentum]] -- earnings as a specific type of catalyst event
-- [[value-investing-strategy]] -- Greenblatt combines value principles with special situations
 - [[factor-investing]] -- event-driven returns can be partially captured by value and momentum factors

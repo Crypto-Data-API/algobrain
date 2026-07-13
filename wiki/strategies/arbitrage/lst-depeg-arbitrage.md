@@ -21,12 +21,12 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 50
 decay_evidence: "Post-Shapella (April 2023) withdrawals enabled; depegs now shallow (<1%)."
-related: ["[[funding-rate-arbitrage]]", "[[stablecoin-pair-arbitrage]]", "[[depeg-risk]]", "[[lido]]", "[[rocket-pool]]", "[[curve-finance]]", "[[2022-05-terra-luna-depeg-arb]]", "[[three-arrows-capital]]", "[[celsius]]", "[[ethena]]"]
+related: ["[[funding-rate-arbitrage]]", "[[stablecoin-pair-arbitrage]]", "[[depeg-risk]]", "[[lido]]", "[[rocket-pool]]", "[[curve-finance]]", "[[2022-05-terra-luna-depeg-arb]]", "[[three-arrows-capital]]", "[[ethena]]"]
 ---
 
 # LST Depeg Arbitrage
 
-Liquid Staking Token (LST) depeg arbitrage captures the spread between a [[liquid-staking]] derivative (stETH, rETH, cbETH) and underlying ETH when forced selling temporarily pushes the LST below its 1:1 redemption value. It is a convergence [[arbitrage]] trade: the LST is a *claim* on staked ETH redeemable only through a withdrawal queue, so the trader buys the discounted claim and either waits for the peg to mean-revert or redeems 1:1 through the queue. The flagship trade was the June 2022 stETH depeg, when [[three-arrows-capital]] and [[celsius]] forced-sold stETH on [[curve-finance]] driving the price to **0.935 ETH** before mean-reverting through the post-Shapella (April 2023) withdrawal queue.
+Liquid Staking Token (LST) depeg arbitrage captures the spread between a [[liquid-staking]] derivative (stETH, rETH, cbETH) and underlying ETH when forced selling temporarily pushes the LST below its 1:1 redemption value. It is a convergence [[arbitrage]] trade: the LST is a *claim* on staked ETH redeemable only through a withdrawal queue, so the trader buys the discounted claim and either waits for the peg to mean-revert or redeems 1:1 through the queue. The flagship trade was the June 2022 stETH depeg, when [[three-arrows-capital]] and celsius forced-sold stETH on [[curve-finance]] driving the price to **0.935 ETH** before mean-reverting through the post-Shapella (April 2023) withdrawal queue.
 
 Structurally this is the on-chain analog of the [[gbtc-discount-arbitrage|GBTC discount trade]]: a claim trades below intrinsic value while the redemption mechanism is constrained, and the discount closes when redemption opens (Shapella ≈ ETF conversion). The same [[limits-to-arbitrage]] logic applies — the discount is compensation for queue duration, smart-contract risk, and the inability to redeem on demand.
 
@@ -196,7 +196,7 @@ The net P&L is essentially **peg-restoration capture + funding harvest − slipp
 
 ## Historical Context
 
-- **June 2022 cascade:** [[three-arrows-capital]] held an estimated 240K stETH (contemporary estimates valued the position around $400–600M depending on the date marked). Its forced unwind through Curve was a proximate cause of the 6.5% peg break, which fed the contagion around [[celsius]]'s insolvency (Celsius had paused withdrawals on June 12–13, 2022, days before the 3AC liquidation reports). [[ethena]] later commercialized a *funding-rate* version of this kind of trade (separate but conceptually adjacent).
+- **June 2022 cascade:** [[three-arrows-capital]] held an estimated 240K stETH (contemporary estimates valued the position around $400–600M depending on the date marked). Its forced unwind through Curve was a proximate cause of the 6.5% peg break, which fed the contagion around celsius's insolvency (Celsius had paused withdrawals on June 12–13, 2022, days before the 3AC liquidation reports). [[ethena]] later commercialized a *funding-rate* version of this kind of trade (separate but conceptually adjacent).
 - **April 2023 Shapella:** First successful ETH withdrawals. The trade thesis ("hold until you can redeem") paid off cleanly for funds that absorbed mid-2022 dislocations.
 - **2024+ Pectra anticipation:** Subsequent upgrades changed validator exit dynamics, briefly creating shallow re-pegs.
 
@@ -217,4 +217,4 @@ The net P&L is essentially **peg-restoration capture + funding harvest − slipp
 - [[depeg-risk]], [[2022-05-terra-luna-depeg-arb]]
 - [[lido]], [[rocket-pool]], [[curve-finance]], [[ethena]]
 - [[hyperliquid]] — a venue for the ETH perp short leg
-- [[three-arrows-capital]], [[celsius]] — forced sellers in the canonical event
+- [[three-arrows-capital]], celsius — forced sellers in the canonical event

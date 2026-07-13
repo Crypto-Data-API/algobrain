@@ -61,7 +61,7 @@ A conventional constant-product [[automated-market-maker|AMM]] such as [[uniswap
 2. **Active inventory management** — quotes shift proactively as the market maker's inventory and the reference price move, in the spirit of [[dodo|DODO]]'s PMM but driven by a live trading desk rather than a static `k` parameter.
 3. **Capital concentration** — liquidity is concentrated tightly around the oracle mid, so a small notional of capital can quote CEX-like depth at the touch, achieving lower [[slippage]] than a constant-product pool many times its size.
 
-The trade-off is explicit: sPMM execution quality is only as good as the off-chain quote and the [[oracle]] feed. If the price feed lags or is manipulated, or the market maker withdraws, the curve degrades — the structural vulnerability behind WOOFi's past oracle exploit (see Risks).
+The trade-off is explicit: sPMM execution quality is only as good as the off-chain quote and the oracle feed. If the price feed lags or is manipulated, or the market maker withdraws, the curve degrades — the structural vulnerability behind WOOFi's past oracle exploit (see Risks).
 
 ### Worked example (illustrative)
 

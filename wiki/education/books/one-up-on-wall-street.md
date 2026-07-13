@@ -6,23 +6,17 @@ updated: 2026-06-21
 status: excellent
 tags: [education, book, fundamental-analysis, growth-investing]
 related:
-  - "[[fundamental-analysis]]"
-  - "[[growth-investing]]"
-  - "[[value-investing]]"
-  - "[[earnings-momentum]]"
   - "[[sector-rotation]]"
-  - "[[peter-lynch]]"
   - "[[tenbagger]]"
-  - "[[peg-ratio]]"
 ---
 
 ## Overview
 
-**One Up on Wall Street** by [[peter-lynch|Peter Lynch]] (with John Rothchild), published in 1989, distills the investment philosophy that made Lynch the most successful mutual fund manager of his era. As manager of Fidelity's Magellan Fund from 1977 to 1990, Lynch averaged roughly 29% annual returns — beating the S&P 500 in most years and growing the fund from about $18 million to roughly $14 billion. His central thesis is disarmingly simple: ordinary investors can beat the professionals by paying attention to products, companies, and industries they encounter in their daily lives.
+**One Up on Wall Street** by Peter Lynch (with John Rothchild), published in 1989, distills the investment philosophy that made Lynch the most successful mutual fund manager of his era. As manager of Fidelity's Magellan Fund from 1977 to 1990, Lynch averaged roughly 29% annual returns — beating the S&P 500 in most years and growing the fund from about $18 million to roughly $14 billion. His central thesis is disarmingly simple: ordinary investors can beat the professionals by paying attention to products, companies, and industries they encounter in their daily lives.
 
 Lynch introduces a practical taxonomy of stocks — slow growers, stalwarts, fast growers, cyclicals, turnarounds, and asset plays — each requiring different analytical approaches and return expectations. He argues that Wall Street's institutional structure creates blind spots that individual investors can exploit. Analysts chase the same large-cap names, ignore small and mid-cap companies, and are constrained by career risk from making unconventional bets. The individual investor faces none of these constraints and can build deep knowledge in sectors where they work or shop.
 
-The book is relentlessly practical, walking readers through how to read annual reports, assess balance sheet quality, calculate the [[peg-ratio|PEG ratio]], and recognize when a stock's "story" has changed. Lynch's emphasis on [[earnings-momentum]] as the primary driver of stock prices, combined with his PEG framework, anticipated many of the growth-at-a-reasonable-price (GARP) strategies that dominate institutional investing today.
+The book is relentlessly practical, walking readers through how to read annual reports, assess balance sheet quality, calculate the PEG ratio, and recognize when a stock's "story" has changed. Lynch's emphasis on earnings-momentum as the primary driver of stock prices, combined with his PEG framework, anticipated many of the growth-at-a-reasonable-price (GARP) strategies that dominate institutional investing today.
 
 ## Key Facts
 
@@ -32,7 +26,7 @@ The book is relentlessly practical, walking readers through how to read annual r
 | **First published** | 1989 (Simon & Schuster); updated edition 2000 with a "millennium" preface |
 | **Author's track record** | Fidelity Magellan, 1977–1990; ~29% annualized return |
 | **Genre** | Practical stock-picking / growth-investing classic |
-| **Signature concepts** | [[tenbagger|"tenbagger"]], "buy what you know," the six stock categories, the [[peg-ratio|PEG ratio]] |
+| **Signature concepts** | [[tenbagger|"tenbagger"]], "buy what you know," the six stock categories, the PEG ratio |
 | **Sequels** | *Beating the Street* (1993), *Learn to Earn* (1995) |
 | **Difficulty** | Beginner-to-intermediate; jargon-light and conversational |
 | **Coined term** | "Tenbagger" (a 10x stock), borrowed from baseball |
@@ -65,8 +59,8 @@ The amateur investor possesses a structural advantage over Wall Street: firsthan
 | **"Buy what you know"** | Use firsthand product/industry knowledge as an informational edge over analysts. |
 | **[[tenbagger]]** | A stock that returns 10x; the portfolio-transforming win Lynch hunts for among fast growers. |
 | **The six categories** | Classify every holding; each demands a different buy/sell logic and return expectation. |
-| **[[peg-ratio|PEG ratio]]** | P/E divided by earnings-growth rate; below 1.0 signals an attractively priced growth stock. |
-| **[[earnings-momentum]]** | Long term, price follows earnings; the rest is noise around that trend. |
+| **PEG ratio** | P/E divided by earnings-growth rate; below 1.0 signals an attractively priced growth stock. |
+| **earnings-momentum** | Long term, price follows earnings; the rest is noise around that trend. |
 | **The two-minute drill** | Be able to state, in two minutes, why you own a stock and what would change the thesis. |
 | **Story before story changes** | Buy when the story is intact but the price has dipped on temporary noise. |
 | **Concentrated conviction** | Own a manageable number of stocks you understand, not a basket you don't. |
@@ -82,11 +76,11 @@ The amateur investor possesses a structural advantage over Wall Street: firsthan
 
 ## Who Should Read This
 
-Beginner to intermediate investors who want a practical, jargon-light introduction to [[fundamental-analysis]] and stock picking. Lynch's conversational style and abundant real-world examples make this one of the most accessible investing books ever written. Experienced investors will appreciate the [[peg-ratio|PEG ratio]] framework and the stock classification system as portfolio management tools.
+Beginner to intermediate investors who want a practical, jargon-light introduction to fundamental-analysis and stock picking. Lynch's conversational style and abundant real-world examples make this one of the most accessible investing books ever written. Experienced investors will appreciate the PEG ratio framework and the stock classification system as portfolio management tools.
 
 ## How It Applies to AI Trading
 
-Lynch's stock classification framework — slow growers, stalwarts, fast growers, cyclicals, turnarounds, and asset plays — maps directly to supervised classification problems in machine learning. A model trained on financial statement features (earnings growth rate, debt ratios, revenue trajectory, sector) could automatically categorize stocks and apply category-specific valuation criteria. The [[peg-ratio|PEG ratio]] is a simple but effective feature for [[growth-investing]] factor models, and Lynch's emphasis on [[earnings-momentum]] as the primary price driver is validated by decades of quantitative research showing earnings surprise and earnings revision factors generate persistent alpha. An AI system could systematically scan for Lynch's ideal setup: stocks where the fundamental story is intact but the price has dropped on temporary negative sentiment — a classic mean-reversion-on-fundamentals signal.
+Lynch's stock classification framework — slow growers, stalwarts, fast growers, cyclicals, turnarounds, and asset plays — maps directly to supervised classification problems in machine learning. A model trained on financial statement features (earnings growth rate, debt ratios, revenue trajectory, sector) could automatically categorize stocks and apply category-specific valuation criteria. The PEG ratio is a simple but effective feature for growth-investing factor models, and Lynch's emphasis on earnings-momentum as the primary price driver is validated by decades of quantitative research showing earnings surprise and earnings revision factors generate persistent alpha. An AI system could systematically scan for Lynch's ideal setup: stocks where the fundamental story is intact but the price has dropped on temporary negative sentiment — a classic mean-reversion-on-fundamentals signal.
 
 ## Rating
 
@@ -94,14 +88,8 @@ Lynch's stock classification framework — slow growers, stalwarts, fast growers
 
 ## Related
 
-- [[fundamental-analysis]] — Lynch's entire approach is fundamental, focused on earnings and business quality
-- [[growth-investing]] — Lynch is the archetype of the growth-at-a-reasonable-price (GARP) investor
-- [[value-investing]] — Lynch bridges growth and value through the PEG ratio
-- [[earnings-momentum]] — Earnings growth as the primary driver of stock price appreciation
 - [[sector-rotation]] — Lynch's six stock categories implicitly require sector-aware allocation
-- [[peter-lynch]] — The author and Magellan Fund manager
 - [[tenbagger]] — Lynch's term for a 10x stock
-- [[peg-ratio]] — Lynch's signature valuation metric for growth stocks
 
 ## Sources
 

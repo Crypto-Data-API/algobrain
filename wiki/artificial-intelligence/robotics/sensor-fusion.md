@@ -54,10 +54,10 @@ The principle is the same: no single data source gives complete information. Rob
 
 | Company | Sensor Focus | Ticker |
 |---------|-------------|--------|
-| **[[luminar-technologies|Luminar]]** | Automotive lidar | LAZR |
+| **Luminar** | Automotive lidar | LAZR |
 | **Innoviz** | Automotive lidar | INVZ |
 | **Aeva** | Frequency-modulated lidar (velocity + range) | AEVA |
-| **[[mobileye-global|Mobileye]]** (Intel) | Camera-centric + radar fusion | MBLY |
+| **Mobileye** (Intel) | Camera-centric + radar fusion | MBLY |
 | **ON Semiconductor** | Image sensors for automotive | ON |
 | **Texas Instruments** | Automotive radar chips | TXN |
 

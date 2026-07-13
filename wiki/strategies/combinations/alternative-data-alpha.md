@@ -63,9 +63,9 @@ For the quantitatively inclined, build a composite factor model:
 
 1. **Score each stock** on 3-5 alt-data signals (app downloads momentum, credit card spend trend, job listing growth, web traffic delta, sentiment score)
 2. **Rank the universe** from strongest to weakest alt-data composite
-3. **Go long the top decile, short the bottom decile** -- a classic [[long-short-equity]] factor approach
+3. **Go long the top decile, short the bottom decile** -- a classic long-short-equity factor approach
 4. **Rebalance weekly or monthly** as new data arrives
-5. **Combine with traditional factors** ([[momentum-trading|momentum]], [[value-investing|value]], quality) for a multi-factor model
+5. **Combine with traditional factors** ([[momentum-trading|momentum]], value, quality) for a multi-factor model
 
 ## Example Setup
 

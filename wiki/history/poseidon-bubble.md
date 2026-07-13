@@ -8,7 +8,7 @@ tags: [history, stocks, behavioral-finance, commodities]
 domain: [behavioral-finance]
 difficulty: beginner
 aliases: ["Poseidon Bubble", "Poseidon NL", "Australian nickel boom 1969"]
-related: ["[[fred-mcnaught]]", "[[australian-investing]]", "[[gold]]", "[[commodities]]", "[[nickel]]", "[[asx-limited]]", "[[history]]", "[[behavioral-finance]]"]
+related: ["[[gold]]", "[[commodities]]", "[[nickel]]", "[[history]]", "[[behavioral-finance]]"]
 ---
 
 The Poseidon bubble was a speculative mania in Australian mining stocks in 1969-1970, triggered by a nickel discovery at Windarra, Western Australia by Poseidon NL. The stock price surged from around $0.80 to over $280 before collapsing, taking much of the Australian speculative mining sector with it. Often described as Australia's equivalent of the South Sea Bubble, the Poseidon episode remains one of the most extreme examples of speculative excess in modern market [[history]] and a formative event in the development of Australian securities regulation.
@@ -19,7 +19,7 @@ The Poseidon bubble was a speculative mania in Australian mining stocks in 1969-
 |-------|--------|
 | Event | Poseidon nickel bubble (Australian mining boom) |
 | Period | September 1969 – early/mid 1970 |
-| Market | Sydney & Melbourne stock exchanges (later merged into the [[asx-limited\|ASX]]) |
+| Market | Sydney & Melbourne stock exchanges (later merged into the ASX) |
 | Trigger | High-grade [[nickel]] sulfide discovery at Windarra, Western Australia by Poseidon NL |
 | Macro tailwind | Global nickel shortage from the Inco (Sudbury, Canada) miners' strike |
 | Price arc | ~A$0.80 (pre-announcement) → ~A$280 peak (Feb 1970) → under A$10 within months |
@@ -49,7 +49,7 @@ Poseidon's share price began its ascent immediately. From around $0.80 before th
 
 ## The Broader Mania
 
-The Poseidon discovery ignited speculation across the entire Australian mining sector. Hundreds of exploration companies saw their share prices surge on the slimmest of connections to nickel or Western Australian mining. Companies with no significant assets, no revenue, and no realistic prospect of a commercially viable discovery traded at wildly inflated prices. The Sydney and Melbourne stock exchanges (which would later merge to form the [[asx-limited|ASX]]) were overwhelmed by trading volumes, with settlement backlogs and administrative chaos. Retail investors who had never previously traded shares opened brokerage accounts to participate, drawn by media coverage of extraordinary overnight gains.
+The Poseidon discovery ignited speculation across the entire Australian mining sector. Hundreds of exploration companies saw their share prices surge on the slimmest of connections to nickel or Western Australian mining. Companies with no significant assets, no revenue, and no realistic prospect of a commercially viable discovery traded at wildly inflated prices. The Sydney and Melbourne stock exchanges (which would later merge to form the ASX) were overwhelmed by trading volumes, with settlement backlogs and administrative chaos. Retail investors who had never previously traded shares opened brokerage accounts to participate, drawn by media coverage of extraordinary overnight gains.
 
 The mania was not limited to mining stocks. Banks, brokerages, and property companies all rose as speculative enthusiasm spilled across the broader market. Margin lending expanded as investors borrowed to increase their exposure. The classic hallmarks of a [[behavioral-finance|bubble]] were all present: a compelling narrative (Australia as a resource powerhouse), a genuine catalyst (real nickel at Windarra), extrapolation of early gains into unlimited future returns, and the social proof of seeing friends and colleagues getting rich.
 
@@ -61,11 +61,10 @@ The broader market carnage was severe. The All Ordinaries index (the predecessor
 
 ## Regulatory Aftermath
 
-The Poseidon bubble exposed serious deficiencies in Australian securities regulation and market structure. At the time, securities regulation was fragmented across state-based exchanges with inconsistent rules. The crash accelerated reform efforts that eventually led to the establishment of national securities regulation, culminating in the creation of the Australian Securities Commission (later the Australian Securities and Investments Commission, ASIC) and the consolidation of state exchanges into the [[asx-limited|Australian Stock Exchange]] in 1987. Disclosure requirements for mining companies were tightened, and rules around continuous disclosure — requiring companies to promptly inform the market of material information — were strengthened.
+The Poseidon bubble exposed serious deficiencies in Australian securities regulation and market structure. At the time, securities regulation was fragmented across state-based exchanges with inconsistent rules. The crash accelerated reform efforts that eventually led to the establishment of national securities regulation, culminating in the creation of the Australian Securities Commission (later the Australian Securities and Investments Commission, ASIC) and the consolidation of state exchanges into the Australian Stock Exchange in 1987. Disclosure requirements for mining companies were tightened, and rules around continuous disclosure — requiring companies to promptly inform the market of material information — were strengthened.
 
 ## Key Lessons (per Fred)
 
-[[fred-mcnaught|Fred McNaught]] references this event as a cautionary tale about speculative manias and the disconnect between valuations and reality. It exemplifies his principle that "in every boom, a dominant theme emerges that provides scope for valuations to disengage with reality — and they are always false."
 
 - Speculative manias are recurrent and follow similar patterns
 - The dominant narrative always sounds compelling at the time
@@ -89,18 +88,12 @@ The Poseidon episode is a template for recognising and surviving resource/narrat
 
 ## Related
 
-- [[australian-investing]] — Australian market context
-- [[asx]] — the modern Australian exchange
 - [[history]] — broader financial history
-- [[asx-limited]] — the exchange where it played out
 - [[nickel]] — the underlying commodity
 - [[behavioral-finance]] — the psychology of speculative bubbles
 - [[market-bubbles]] — the general anatomy of manias
 - [[meme-stocks]] — a modern narrative-driven analog
 - [[commodities]] — resource sector context
-- [[fred-mcnaught]] — personal recollections of the event
 
 ## Sources
 
-- [[fred-sam-session-2024-01-05]] — Fred tells the Poseidon bubble story with personal recollections
-- [[fred-sam-session-2024-01-02]] — References boom themes disengaging from reality

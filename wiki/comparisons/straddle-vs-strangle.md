@@ -20,7 +20,6 @@ comparison_dimensions:
   - greeks
 related:
   - "[[implied-volatility]]"
-  - "[[earnings-plays]]"
   - "[[options-greeks]]"
 ---
 

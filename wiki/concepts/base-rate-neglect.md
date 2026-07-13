@@ -9,7 +9,7 @@ domain: [behavioral-finance]
 prerequisites: ["[[base-rate]]", "[[probability]]"]
 difficulty: intermediate
 aliases: ["Base-Rate Neglect", "Base Rate Neglect", "Base-Rate Fallacy", "Base Rate Fallacy", "Base-Rate Bias"]
-related: ["[[base-rate]]", "[[probability]]", "[[bayesian-inference]]", "[[representativeness-heuristic]]", "[[overconfidence-bias]]", "[[expected-value]]", "[[kelly-criterion]]", "[[win-rate]]", "[[financial-statement-analysis]]"]
+related: ["[[base-rate]]", "[[probability]]", "[[bayesian-inference]]", "[[representativeness-heuristic]]", "[[overconfidence-bias]]", "[[expected-value]]", "[[kelly-criterion]]", "[[win-rate]]"]
 ---
 
 **Base-rate neglect** (the *base-rate fallacy*) is the cognitive bias of ignoring the **prior, unconditional probability** of an outcome — the [[base-rate]] — and judging likelihood instead by how vivid, specific, or representative the individual case feels. It is one of the most consequential errors in trading and investing because it leads people to systematically overestimate the odds of compelling-but-rare outcomes, and to over-size positions on stories that the underlying statistics do not support. This page focuses on the **bias itself**; for the underlying statistic and the Bayesian machinery, see [[base-rate]].
@@ -36,7 +36,7 @@ Base-rate neglect is a direct, recurring source of negative [[expected-value]] i
 - **Write the base rate down.** Explicitly note the prior for the reference class as a counterweight to the vivid story (a written pre-mortem).
 - **Feed honest priors into sizing.** Inflated win probabilities propagate straight into [[expected-value]] and the [[kelly-criterion]], causing systematic over-sizing and elevated risk of ruin. Calibrate [[win-rate]] inputs to realistic base rates, not hopes.
 - **Demand diagnostic, not merely consistent, evidence.** Information that is equally likely under "win" and "lose" does not move the odds — only genuinely discriminating evidence justifies departing from the prior.
-- **Use it in research too.** Treat a single company's bullish narrative against the base rates that [[financial-statement-analysis]] reveals for similar firms.
+- **Use it in research too.** Treat a single company's bullish narrative against the base rates that financial-statement-analysis reveals for similar firms.
 
 ## Base rates worth knowing (equities)
 

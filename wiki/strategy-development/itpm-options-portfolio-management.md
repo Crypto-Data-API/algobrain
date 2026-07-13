@@ -6,9 +6,9 @@ updated: 2026-06-21
 status: excellent
 tags: [strategy-development, itpm, portfolio-theory, risk-management, options, long-short-equity]
 aliases: ["ITPM Options Portfolio Management", "ITPM Options Approach", "ITPM Options Book Methodology"]
-related: ["[[itpm-framework]]", "[[itpm-trade-construction-playbook]]", "[[itpm-trading-philosophy]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-position-sizing]]", "[[itpm-ratio-calendar-spread]]", "[[ratio-calendar-spread]]", "[[long-short-equity]]", "[[anton-kreil]]", "[[itpm]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[barbell-portfolio]]", "[[expiration-laddering]]", "[[portfolio-greeks-aggregation]]", "[[theta-targeting]]", "[[5-percent-otm-put-overlay]]", "[[volatility-risk-premium]]"]
+related: ["[[itpm-framework]]", "[[itpm-trade-construction-playbook]]", "[[itpm-trading-philosophy]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-position-sizing]]", "[[itpm-ratio-calendar-spread]]", "[[ratio-calendar-spread]]", "[[anton-kreil]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[barbell-portfolio]]", "[[expiration-laddering]]", "[[portfolio-greeks-aggregation]]", "[[theta-targeting]]", "[[5-percent-otm-put-overlay]]", "[[volatility-risk-premium]]"]
 domain: [strategy-development, portfolio-theory, options]
-prerequisites: ["[[itpm-framework]]", "[[options-greeks]]", "[[long-short-equity]]"]
+prerequisites: ["[[itpm-framework]]", "[[options-greeks]]"]
 difficulty: advanced
 ---
 
@@ -209,7 +209,7 @@ If any box fails, the fix is made before new risk is added — never the other w
 
 ## Distinction from Tastytrade-Style Premium-Selling
 
-The [[tastytrade|tastytrade]] doctrine (45 DTE, 50% profit-take, mechanical strangles and condors) is a *single layer* of an ITPM-style options book — specifically the income overlay. Critics from the ITPM camp argue that tastytrade's omission of an explicit long-vol overlay leaves the book structurally short tail risk and exposed to occasional catastrophic drawdowns that erase years of premium income. ITPM's options portfolio approach can be thought of as "tastytrade's premium-selling discipline plus an explicit long-vol hedge plus a top-down view-driven directional layer." See [[tastytrade-mechanics]] and [[tastytrade-spx-research]].
+The tastytrade doctrine (45 DTE, 50% profit-take, mechanical strangles and condors) is a *single layer* of an ITPM-style options book — specifically the income overlay. Critics from the ITPM camp argue that tastytrade's omission of an explicit long-vol overlay leaves the book structurally short tail risk and exposed to occasional catastrophic drawdowns that erase years of premium income. ITPM's options portfolio approach can be thought of as "tastytrade's premium-selling discipline plus an explicit long-vol hedge plus a top-down view-driven directional layer." See [[tastytrade-mechanics]] and tastytrade-spx-research.
 
 ## Common Failure Modes Specific to Options Books
 
@@ -246,8 +246,8 @@ This page is the options-instrument view of one layer of a larger stack. Above i
 - [[long-vol-overlay]] — the non-negotiable layer
 - [[long-vol-vs-short-vol]] — philosophical context
 - [[barbell-portfolio]] — Taleb-Spitznagel's parallel approach
-- [[anton-kreil]], [[itpm]] — the source institution
-- [[tastytrade-mechanics]], [[tastytrade-spx-research]] — the contrasted retail-quant approach
+- [[anton-kreil]], itpm — the source institution
+- [[tastytrade-mechanics]], tastytrade-spx-research — the contrasted retail-quant approach
 - [[itpm-trading-philosophy]] — the worldview layer above this page
 - [[itpm-playbook]] — the umbrella index for all ITPM material
 - [[hedging-program-failure-modes]] — how the hedge layer here fails in practice

@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [arbitrage, bonds, fundamental-analysis, event-driven]
 aliases: ["Distressed Securities", "Bankruptcy Trading", "Workout Arbitrage", "Vulture Investing"]
-related: ["[[bankruptcy-claim-arbitrage]]", "[[risk-arbitrage]]", "[[capital-structure-arbitrage]]", "[[cds-bond-basis-arbitrage]]"]
+related: ["[[bankruptcy-claim-arbitrage]]", "[[cds-bond-basis-arbitrage]]"]
 strategy_type: fundamental
 timeframe: position
 markets: [bonds, equities]
@@ -26,7 +26,7 @@ decay_evidence: "Distressed cycles roughly 7-10 years (post-recession peaks: 200
 
 # Distressed Debt Arbitrage
 
-The strategy of buying senior debt of distressed or bankrupt issuers at deep discounts, then realizing recovery value through Chapter 11 reorganization, out-of-court restructuring, or asset liquidation. Distinct from passive [[bankruptcy-claim-arbitrage]] (which trades general unsecured claims at discount) — distressed-debt arb actively engages in process: filing 2019 statements, voting on plans, joining ad hoc creditor committees, sometimes leading the restructuring. The dominant strategy at Oaktree, Centerbridge, Apollo (early), Elliott, Avenue Capital, and Davidson Kempner. It is the capital-structure / bankruptcy member of the broader [[arbitrage]] and [[relative-value-arbitrage|relative-value]] families, and overlaps directly with [[capital-structure-arbitrage]] (the cross-instrument version of the same issuer view) and [[risk-arbitrage|risk arbitrage]] (when the catalyst is a court-driven event rather than a merger).
+The strategy of buying senior debt of distressed or bankrupt issuers at deep discounts, then realizing recovery value through Chapter 11 reorganization, out-of-court restructuring, or asset liquidation. Distinct from passive [[bankruptcy-claim-arbitrage]] (which trades general unsecured claims at discount) — distressed-debt arb actively engages in process: filing 2019 statements, voting on plans, joining ad hoc creditor committees, sometimes leading the restructuring. The dominant strategy at Oaktree, Centerbridge, Apollo (early), Elliott, Avenue Capital, and Davidson Kempner. It is the capital-structure / bankruptcy member of the broader [[arbitrage]] and [[relative-value-arbitrage|relative-value]] families, and overlaps directly with capital-structure-arbitrage (the cross-instrument version of the same issuer view) and risk arbitrage (when the catalyst is a court-driven event rather than a merger).
 
 ## The Absolute-Priority Waterfall
 
@@ -201,4 +201,4 @@ Industry-wide distressed AUM ~$300-500B. Per-fund $5-20B sweet spot. Single-name
 
 ## Related
 
-[[bankruptcy-claim-arbitrage]] · [[risk-arbitrage]] · [[capital-structure-arbitrage]] · [[cds-bond-basis-arbitrage]] · [[convertible-arbitrage]] · [[archegos-blowup-2021]] · [[arbitrage]] · [[relative-value-arbitrage]] · [[class-action-arbitrage]] · [[limits-to-arbitrage]] · [[edge-taxonomy]] · [[failure-modes]] · [[when-to-retire-a-strategy]]
+[[bankruptcy-claim-arbitrage]] · risk-arbitrage · capital-structure-arbitrage · [[cds-bond-basis-arbitrage]] · convertible-arbitrage · [[archegos-blowup-2021]] · [[arbitrage]] · [[relative-value-arbitrage]] · class-action-arbitrage · [[limits-to-arbitrage]] · [[edge-taxonomy]] · [[failure-modes]] · [[when-to-retire-a-strategy]]

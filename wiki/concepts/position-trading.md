@@ -9,10 +9,10 @@ aliases: ["Position Trading", "Position Trader"]
 domain: [technical-analysis]
 prerequisites: ["[[trend-following]]", "[[risk-management-overview]]"]
 difficulty: intermediate
-related: ["[[swing-trading]]", "[[day-trading]]", "[[trend-following]]", "[[fundamental-analysis]]", "[[technical-analysis]]", "[[atr]]", "[[position-sizing]]", "[[asset-allocation]]"]
+related: ["[[swing-trading]]", "[[day-trading]]", "[[trend-following]]", "[[technical-analysis]]", "[[atr]]", "[[position-sizing]]", "[[asset-allocation]]"]
 ---
 
-Position trading is a longer-term trading style in which positions are held for weeks to months — and sometimes years — to capture major price trends or fundamental revaluation. Unlike [[day-trading]] or [[swing-trading]], position trading tolerates significant short-term fluctuations in pursuit of larger moves, typically targeting gains of 20%+ per trade. Position traders combine [[fundamental-analysis]] (identifying undervalued or improving companies) with [[technical-analysis]] (timing entries at support or breakouts and managing risk with wide trailing stops on higher timeframes).
+Position trading is a longer-term trading style in which positions are held for weeks to months — and sometimes years — to capture major price trends or fundamental revaluation. Unlike [[day-trading]] or [[swing-trading]], position trading tolerates significant short-term fluctuations in pursuit of larger moves, typically targeting gains of 20%+ per trade. Position traders combine fundamental-analysis (identifying undervalued or improving companies) with [[technical-analysis]] (timing entries at support or breakouts and managing risk with wide trailing stops on higher timeframes).
 
 ## Overview
 
@@ -63,7 +63,6 @@ A trader risking 1% of a $100,000 account on a stock entered at $50 with a $40 s
 - [[swing-trading]] — the next-shorter timeframe style
 - [[day-trading]] — the short-timeframe contrast
 - [[trend-following]] — the dominant position-trading methodology
-- [[fundamental-analysis]] — thesis generation for position trades
 - [[technical-analysis]] — entry/exit timing on higher timeframes
 - [[atr]] — volatility-based stop and sizing input
 - [[position-sizing]] — the core risk-control discipline

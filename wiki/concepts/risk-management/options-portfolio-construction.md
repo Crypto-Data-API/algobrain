@@ -12,7 +12,7 @@ prerequisites: ["[[options-position-sizing]]", "[[options-greeks]]"]
 difficulty: advanced
 ---
 
-Options portfolio construction is the discipline of running a *book* of options positions as a single coordinated risk system rather than as a stack of independent trades. Where [[options-position-sizing]] answers "how big should this trade be?", portfolio construction answers the harder question: "given the trades I already have on, what does *this* one do to my net risk, and is that something I want?" The [[itpm|Institute of Trading and Portfolio Management]] (Anton Kreil's school) treats this as the dividing line between hobbyists, who size each trade in isolation, and professionals, who size each trade against a pre-budgeted portfolio.
+Options portfolio construction is the discipline of running a *book* of options positions as a single coordinated risk system rather than as a stack of independent trades. Where [[options-position-sizing]] answers "how big should this trade be?", portfolio construction answers the harder question: "given the trades I already have on, what does *this* one do to my net risk, and is that something I want?" The Institute of Trading and Portfolio Management (Anton Kreil's school) treats this as the dividing line between hobbyists, who size each trade in isolation, and professionals, who size each trade against a pre-budgeted portfolio.
 
 ## Why a Portfolio View Matters
 
@@ -293,7 +293,6 @@ The loop is what converts a stack of individually-reasonable trades into a coher
 - [[variance-risk-premium]] — the theoretical edge behind theta-positive books
 - [[volatility-regime-classification]] — how regime selection drives portfolio bias
 - [[anton-kreil]] — founder of ITPM
-- [[itpm]] — the school
 - [[options-risk-budgeting]] — companion concept page
 - [[risk-management-overview]]
 - [[risk-management]] — the general discipline this specialises
@@ -303,7 +302,6 @@ The loop is what converts a stack of individually-reasonable trades into a coher
 
 ## Sources
 
-- [[itpm]] — ITPM curriculum on professional portfolio construction
 - [[anton-kreil]] — primary source for the top-down framework
 - [[itpm-five-principles]] — underlying discipline framework
 - [[itpm-trade-construction-playbook]] — single-trade workflow that feeds into the portfolio layer

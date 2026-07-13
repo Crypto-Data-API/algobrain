@@ -44,8 +44,8 @@ The hedging quantity is mechanical: a dealer short calls with aggregate delta Δ
 
 ## Notable Examples
 
-- **[[gamestop|GameStop]] (January 2021)** - Massive call option buying by retail traders forced dealer hedging that compounded the [[short-squeeze]]
-- **[[amc-entertainment|AMC]] (June 2021)** - Similar dynamics with heavy call option activity driving dealer buying
+- **GameStop (January 2021)** - Massive call option buying by retail traders forced dealer hedging that compounded the [[short-squeeze]]
+- **AMC (June 2021)** - Similar dynamics with heavy call option activity driving dealer buying
 
 ## Trading Relevance
 

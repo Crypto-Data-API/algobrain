@@ -11,7 +11,6 @@ aliases:
   - Kenneth C. Griffin
 related:
   - "[[citadel]]"
-  - "[[citadel-securities]]"
   - "[[book-the-quants]]"
   - "[[payment-for-order-flow]]"
   - "[[gamestop-short-squeeze]]"
@@ -62,7 +61,6 @@ Griffin's net worth was estimated at roughly **$51 billion in January 2026** (Bl
 ## Related
 
 - [[citadel]]
-- [[citadel-securities]]
 - [[market-making-strategy]]
 - [[payment-for-order-flow]]
 - [[market-maker]]

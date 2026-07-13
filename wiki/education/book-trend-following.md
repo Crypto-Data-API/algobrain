@@ -13,7 +13,6 @@ aliases: ["Trend Following", "Covel Trend Following"]
 related:
   - "[[trend-following]]"
   - "[[managed-futures]]"
-  - "[[ctas]]"
   - "[[turtle-traders]]"
   - "[[bill-dunn]]"
   - "[[ed-seykota]]"
@@ -92,7 +91,6 @@ For strategy validation: if your fancy ML model can't outperform a simple breako
 
 - [[trend-following]] — The strategy
 - [[managed-futures]] — The asset class
-- [[ctas]] — The institutional vehicle
 - [[turtle-traders]] — Famous case study Covel covers extensively
 - [[bill-dunn]] — Pioneering trend trader
 - [[ed-seykota]] — Computer-driven trend pioneer

@@ -9,7 +9,7 @@ aliases: ["Crashes", "Market Crash", "Stock Market Crash"]
 domain: [market-microstructure]
 prerequisites: ["[[bubble]]", "[[leverage]]"]
 difficulty: beginner
-related: ["[[bubble]]", "[[leverage]]", "[[risk-management]]", "[[behavioral-finance]]", "[[reflexivity]]", "[[crashes-overview]]", "[[citrini-2028-global-intelligence-crisis]]", "[[ai-layoff-trap]]", "[[citrini-research]]", "[[pigouvian-automation-tax]]", "[[ibkr-forecast-trader]]", "[[2026-02-citrini-tech-selloff]]", "[[tail-risk]]"]
+related: ["[[bubble]]", "[[leverage]]", "[[risk-management]]", "[[behavioral-finance]]", "[[reflexivity]]", "[[crashes-overview]]", "[[citrini-2028-global-intelligence-crisis]]", "[[ai-layoff-trap]]", "[[pigouvian-automation-tax]]", "[[ibkr-forecast-trader]]", "[[tail-risk]]"]
 ---
 
 # Market Crashes
@@ -49,11 +49,11 @@ Crashes destroy unprepared traders but create extraordinary opportunities for th
 
 A new addition to the crash taxonomy — alongside [[1929-crash]], 1987, dot-com 2000, [[2008-global-financial-crisis]], and 2020 COVID — has emerged: an AI-driven labor / demand shock as a named, quantified scenario in institutional discourse. Unlike prior crashes whose narratives were constructed in retrospect, this one is being explicitly modeled and priced in advance (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
 
-**Citrini Research's "2028 Global Intelligence Crisis"** — Published February 2026 by [[citrini-research]], the scenario specifies **10%+ unemployment combined with roughly a 40% equity decline** if superintelligent AI deployment outpaces labor reabsorption. It is the first organized tail-risk scenario for AI-driven labor displacement to gain institutional distribution. Its release **triggered the February 2026 tech sell-off**, with services bearing the brunt — finance, real estate, media, medical, and legal all sold off alongside software, breaking the prior pattern in which "AI fears" hit only software stocks. See [[citrini-2028-global-intelligence-crisis]] and [[2026-02-citrini-tech-selloff]].
+**Citrini Research's "2028 Global Intelligence Crisis"** — Published February 2026 by citrini-research, the scenario specifies **10%+ unemployment combined with roughly a 40% equity decline** if superintelligent AI deployment outpaces labor reabsorption. It is the first organized tail-risk scenario for AI-driven labor displacement to gain institutional distribution. Its release **triggered the February 2026 tech sell-off**, with services bearing the brunt — finance, real estate, media, medical, and legal all sold off alongside software, breaking the prior pattern in which "AI fears" hit only software stocks. See [[citrini-2028-global-intelligence-crisis]] and 2026-02-citrini-tech-selloff.
 
 **Wharton "AI Layoff Trap" (Falk & Tsoukalas)** — A peer-reviewed mathematical model showing how a competitive automation race triggers an economic-collapse spiral: each firm rationally automates, aggregate consumer demand collapses, surviving firms automate further to cut costs, and the loop repeats. The model's notable result is that **only a [[pigouvian-automation-tax]] breaks the loop** — voluntary restraint, retraining programs, and demand-side fiscal transfers do not, in the model, halt the cascade. This formalizes a mechanism by which a crash can originate in the labor channel rather than in credit or asset bubbles. See [[ai-layoff-trap]].
 
-**Goldman Sachs forecast** — [[goldman-sachs]] projects **11M US jobs displaced (6%+ of the workforce)** as the order-of-magnitude scale at which the AI labor channel becomes a [[recession]]-relevant systemic concern (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). This forecast has become the widely-cited institutional baseline.
+**Goldman Sachs forecast** — goldman-sachs projects **11M US jobs displaced (6%+ of the workforce)** as the order-of-magnitude scale at which the AI labor channel becomes a [[recession]]-relevant systemic concern (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). This forecast has become the widely-cited institutional baseline.
 
 **Forecast Trader (Interactive Brokers)** — As of 2026, the IBKR-hosted prediction venue prices a **41% probability of a US technical recession by end-2026**. This provides an explicit market-implied probability for the macro precondition under which the AI tail scenarios become live. See [[ibkr-forecast-trader]].
 
@@ -64,7 +64,7 @@ A new addition to the crash taxonomy — alongside [[1929-crash]], 1987, dot-com
 - The 2026 AI tail scenario originates in the **labor channel** — a slow-motion demand destruction with a 2-4 quarter lag, geographically concentrated in tech hubs, propagating to broader markets via service-sector multiplier effects and regional fiscal stress
 - This makes [[tail-risk]] sizing and hedge construction structurally different: the early warning indicators are wage and sales-tax data, not credit spreads or VIX
 
-The named-scenario character of "2028 Global Intelligence Crisis" matters for traders: it gives institutional desks a specific, quantitative tail to hedge against, and it has already moved markets ([[2026-02-citrini-tech-selloff]]) ahead of the underlying labor data confirming the thesis.
+The named-scenario character of "2028 Global Intelligence Crisis" matters for traders: it gives institutional desks a specific, quantitative tail to hedge against, and it has already moved markets (2026-02-citrini-tech-selloff) ahead of the underlying labor data confirming the thesis.
 
 ## Related
 

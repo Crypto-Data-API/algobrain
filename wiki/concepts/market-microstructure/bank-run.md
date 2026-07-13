@@ -9,7 +9,7 @@ aliases: ["bank runs", "run on the bank", "deposit run"]
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[liquidity]]", "[[counterparty-risk]]"]
 difficulty: beginner
-related: ["[[bear-stearns]]", "[[lehman-brothers]]", "[[federal-reserve]]", "[[liquidity]]", "[[counterparty-risk]]", "[[2008-global-financial-crisis]]", "[[ftx-collapse]]", "[[liquidity-risk]]", "[[moral-hazard]]"]
+related: ["[[federal-reserve]]", "[[liquidity]]", "[[counterparty-risk]]", "[[2008-global-financial-crisis]]", "[[ftx-collapse]]", "[[liquidity-risk]]", "[[moral-hazard]]"]
 ---
 
 # Bank Run
@@ -23,8 +23,8 @@ Banks typically hold only a fraction (3-10%) of deposits as liquid reserves, len
 ## Historical Examples
 
 - **1930s Great Depression**: Thousands of U.S. bank failures prompted the creation of FDIC deposit insurance.
-- **[[bear-stearns]] (2008)**: A modern "institutional bank run" where counterparties and prime brokerage clients pulled assets in 72 hours, collapsing the firm.
-- **[[lehman-brothers]] (2008)**: Clients and counterparties fled, draining [[liquidity]] and accelerating the bankruptcy.
+- **bear-stearns (2008)**: A modern "institutional bank run" where counterparties and prime brokerage clients pulled assets in 72 hours, collapsing the firm.
+- **lehman-brothers (2008)**: Clients and counterparties fled, draining [[liquidity]] and accelerating the bankruptcy.
 - **Silicon Valley Bank (2023)**: $42 billion withdrawn in a single day via digital banking, demonstrating how technology accelerates bank runs. Social media amplified the panic.
 - **[[ftx-collapse]] (2022)**: A crypto exchange version — user withdrawals triggered a liquidity crisis that exposed fraud and insolvency.
 
@@ -38,7 +38,6 @@ Bank runs create extreme, fast-moving trading opportunities and risks. Monitorin
 
 ## Related
 
-- [[bear-stearns]], [[lehman-brothers]] — institutional/wholesale bank runs in 2008
 - [[ftx-collapse]] — a crypto-exchange analog of a deposit run
 - [[liquidity]], [[liquidity-risk]] — the underlying vulnerability
 - [[counterparty-risk]] — what counterparties flee in a wholesale run

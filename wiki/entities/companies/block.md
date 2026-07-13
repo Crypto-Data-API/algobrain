@@ -12,7 +12,7 @@ ticker: "XYZ"
 exchange: "NYSE"
 sector: "Financials"
 sp500: true
-related: ["[[asx-200]]", "[[australian-investing]]", "[[financials]]", "[[s-and-p-500]]", "[[artificial-intelligence]]", "[[ai-finance]]"]
+related: ["[[artificial-intelligence]]", "[[ai-finance]]"]
 founded: 2009
 industry: "Transaction & Payment Processing Services"
 asx200: true
@@ -30,14 +30,14 @@ data_completeness_pct: 100
 fred_profile: "Cyclical / leveraged"
 ---
 
-Block, Inc. (NYSE: XYZ; ASX CDIs: XYZ) is Jack Dorsey's fintech ecosystem — Square merchant payments, Cash App consumer finance, Afterpay BNPL, and Bitcoin ventures. A dual NYSE/ASX-listed [[s-and-p-500]] (since July 2025) and [[asx-200]] constituent classified in the [[financials|Financials]] sector but operationally a payments-and-software [[technology]] business, it trades as a high-beta fintech/crypto-adjacent name and became the market's flagship AI-driven-layoff margin-expansion case study in February 2026.
+Block, Inc. (NYSE: XYZ; ASX CDIs: XYZ) is Jack Dorsey's fintech ecosystem — Square merchant payments, Cash App consumer finance, Afterpay BNPL, and Bitcoin ventures. A dual NYSE/ASX-listed s-and-p-500 (since July 2025) and asx-200 constituent classified in the Financials sector but operationally a payments-and-software technology business, it trades as a high-beta fintech/crypto-adjacent name and became the market's flagship AI-driven-layoff margin-expansion case study in February 2026.
 
 ## Key Facts
 
 | Field | Detail |
 |---|---|
 | **Ticker** | NYSE: XYZ |
-| **Sector** | [[financials|Financials]] |
+| **Sector** | Financials |
 | **Industry** | Transaction & Payment Processing Services |
 | **Founded** | 2009 |
 | **Headquarters** | Oakland, California, USA |
@@ -46,7 +46,7 @@ Block, Inc. (NYSE: XYZ; ASX CDIs: XYZ) is Jack Dorsey's fintech ecosystem — Sq
 
 ## Fundamentals
 
-*Source: [[stockmarketapi-fundamentals-2026-05-10]] · period end 2024-12-31 · primary sec_edgar · completeness 100% · pulled 2026-06-10*
+*Source: stockmarketapi-fundamentals-2026-05-10 · period end 2024-12-31 · primary sec_edgar · completeness 100% · pulled 2026-06-10*
 
 ### Snapshot
 
@@ -99,32 +99,19 @@ Block, Inc. (NYSE: XYZ; ASX CDIs: XYZ) is Jack Dorsey's fintech ecosystem — Sq
 
 ## Trading Relevance
 
-- Dual-listed: NYSE common stock plus ASX CDIs (XYZ) — one of the few US mega-fintechs directly tradable in AUD; included in both the [[s-and-p-500]] (July 2025) and [[asx-200]].
-- Deep, liquid US options; high IV around earnings. Trades with the fintech/payments basket ([[paypal]], Affirm, Coinbase for the Bitcoin-sensitivity leg) and with [[bitcoin]] itself, given Cash App Bitcoin revenue and treasury BTC holdings.
+- Dual-listed: NYSE common stock plus ASX CDIs (XYZ) — one of the few US mega-fintechs directly tradable in AUD; included in both the s-and-p-500 (July 2025) and asx-200.
+- Deep, liquid US options; high IV around earnings. Trades with the fintech/payments basket (paypal, Affirm, Coinbase for the Bitcoin-sensitivity leg) and with [[bitcoin]] itself, given Cash App Bitcoin revenue and treasury BTC holdings.
 - **Catalysts**: quarterly gross-profit growth by segment (Cash App vs Square), Cash App Borrow/Afterpay credit metrics, Bitcoin price moves, AI-efficiency margin updates following the Feb 2026 restructuring, buybacks.
-- **Risks**: consumer-credit deterioration in BNPL/Borrow, regulatory scrutiny of Cash App (AML/consumer protection), payments competition (Toast, Fiserv/Clover, [[paypal]]), execution risk from the 40%+ workforce reduction, Bitcoin drawdowns.
+- **Risks**: consumer-credit deterioration in BNPL/Borrow, regulatory scrutiny of Cash App (AML/consumer protection), payments competition (Toast, Fiserv/Clover, paypal), execution risk from the 40%+ workforce reduction, Bitcoin drawdowns.
 
 ## Related
 
-- [[s-and-p-500]]
-- [[asx-200]]
-- [[financials|Financials]]
-- [[technology]]
-- [[economic-moat]]
-- [[switching-costs]]
-- [[arch-capital]]
-- [[aflac]]
-- [[aig]]
-- [[assurant]]
-- [[arthur-j-gallagher]]
-- [[paypal]]
 - [[bitcoin]]
-- [[australian-investing]]
 - [[ai-layoff-trap]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-asx200-2026-04-15]])
+- (Source: stockmarketapi-asx200-2026-04-15)
 - https://block.xyz — corporate site (segments, leadership)
 - https://www.spglobal.com/spdji/en/ — S&P 500 inclusion (July 2025, replacing Hess)
 - Verified via Perplexity (sonar) and web search, 2026-06-10
@@ -134,7 +121,7 @@ Block, Inc. (NYSE: XYZ; ASX CDIs: XYZ) is Jack Dorsey's fintech ecosystem — Sq
 | Field | Detail |
 |---|---|
 | **Ticker** | ASX: XYZ (CDIs; formerly SQ2) |
-| **Sector** | [[financials|Financials]] |
+| **Sector** | Financials |
 | **Industry** | Software - Application |
 | **Headquarters** | Oakland, California, USA |
 | **Reporting Currency** | AUD |
@@ -185,19 +172,19 @@ Square and Cash App are the two segments that matter for gross-profit growth —
 
 ## Economic Moat & Competitive Position
 
-Block's [[economic-moat|moat]] is best understood as two distinct ecosystems that increasingly feed each other rather than a single defensible position:
+Block's moat is best understood as two distinct ecosystems that increasingly feed each other rather than a single defensible position:
 
-- **Square (merchant side)** — the durable edge is the bundling of payments with cloud software (POS, payroll, loans, online store, banking). Once a merchant runs its business on Square's software stack, ripping it out to save a few basis points on processing is disruptive, creating real [[switching-costs]]. The breadth of attached software, not the payment rail itself, is what retains merchants.
+- **Square (merchant side)** — the durable edge is the bundling of payments with cloud software (POS, payroll, loans, online store, banking). Once a merchant runs its business on Square's software stack, ripping it out to save a few basis points on processing is disruptive, creating real switching-costs. The breadth of attached software, not the payment rail itself, is what retains merchants.
 - **Cash App (consumer side)** — a two-sided **network effect** (P2P payments are more useful as more contacts use them) plus a cross-sell flywheel: a user arrives for free P2P, then adopts the Cash App Card, direct deposit, stock/Bitcoin investing, and Borrow. Each added product raises engagement, switching friction, and gross profit per user.
 - **Afterpay (the connective tissue)** — embeds BNPL into both the merchant checkout (Square) and the consumer wallet (Cash App), giving Block a lending primitive that spans both ecosystems and is being re-platformed as a native Cash App feature.
 
-The moat is **moderate, not wide**. Pure payment processing is intensely competitive and commoditising; the defensibility lives in the *software bundle* and the *consumer network*, not the transaction. The honest watch-items: Square competes with Toast, Fiserv/Clover, Stripe and [[paypal]]; Cash App competes with Venmo ([[paypal]]), neobanks (Chime), and big-tech wallets; Afterpay faces Affirm and Klarna; the Bitcoin franchise overlaps Coinbase. Brand, distribution scale, and the Square↔Cash App two-sided ecosystem are the defenses.
+The moat is **moderate, not wide**. Pure payment processing is intensely competitive and commoditising; the defensibility lives in the *software bundle* and the *consumer network*, not the transaction. The honest watch-items: Square competes with Toast, Fiserv/Clover, Stripe and paypal; Cash App competes with Venmo (paypal), neobanks (Chime), and big-tech wallets; Afterpay faces Affirm and Klarna; the Bitcoin franchise overlaps Coinbase. Brand, distribution scale, and the Square↔Cash App two-sided ecosystem are the defenses.
 
 ## Competitors / Peer Set
 
 | Company | Primary battleground | Notes |
 |---|---|---|
-| [[paypal]] / Venmo | Cash App (P2P + consumer wallet) and online checkout | The most direct consumer-finance and checkout rival; Venmo is Cash App's mirror image |
+| paypal / Venmo | Cash App (P2P + consumer wallet) and online checkout | The most direct consumer-finance and checkout rival; Venmo is Cash App's mirror image |
 | Toast | Square (restaurant/SMB POS + software) | Vertical-specialist POS taking share in food-service merchants |
 | Fiserv / Clover | Square (merchant acquiring + POS) | Incumbent-scale merchant acquirer; Clover is the volume POS competitor |
 | Stripe (private) | Square / online payments & developer platform | Dominant in online/developer payments; less SMB-storefront overlap |
@@ -229,7 +216,7 @@ Block is unusual in fielding credible competitors on **four** fronts at once —
 ### Bear case
 - Consumer-credit deterioration in BNPL/Borrow would hit the fastest-growing, highest-margin growth engine exactly when the macro turns.
 - Cash App carries persistent regulatory/AML and consumer-protection scrutiny risk.
-- Payments is structurally competitive (Toast, Fiserv/Clover, Stripe, [[paypal]]) — share and pricing are always under pressure.
+- Payments is structurally competitive (Toast, Fiserv/Clover, Stripe, paypal) — share and pricing are always under pressure.
 - Execution risk from cutting ~40% of the workforce: service quality, fraud control, and innovation could suffer if the AI substitution was overestimated.
 - High-beta and crypto-adjacent: Bitcoin drawdowns and risk-off rotations de-rate the stock sharply.
 
@@ -247,9 +234,9 @@ Block is unusual in fielding credible competitors on **four** fronts at once —
 
 Block trades as a **high-beta fintech** whose multiple swings on growth, credit, and crypto sentiment rather than on a stable earnings stream. Mechanically:
 
-- **Dual-listed** — NYSE common stock plus ASX CHESS Depositary Interests (XYZ), making it one of the few US mega-fintechs directly tradable in AUD; a member of both the [[s-and-p-500]] (since July 2025) and the [[asx-200]].
+- **Dual-listed** — NYSE common stock plus ASX CHESS Depositary Interests (XYZ), making it one of the few US mega-fintechs directly tradable in AUD; a member of both the s-and-p-500 (since July 2025) and the asx-200.
 - **Options & volatility** — deep, liquid US single-stock options with high implied volatility into earnings; the stock routinely gaps on segment gross-profit surprises.
-- **Basket behaviour** — trades with the payments/fintech basket ([[paypal]], Affirm, Coinbase) and with [[bitcoin]] itself, given Cash App Bitcoin revenue and treasury BTC.
+- **Basket behaviour** — trades with the payments/fintech basket (paypal, Affirm, Coinbase) and with [[bitcoin]] itself, given Cash App Bitcoin revenue and treasury BTC.
 - **Earnings driver** — the market prices **segment gross profit** (Cash App vs Square), not headline revenue, because Bitcoin sales inflate the top line at minimal margin.
 - **AI-margin narrative** — since February 2026 the AI-driven cost reduction has been a primary re-rating driver; margin-expansion updates move the stock as much as growth.
 - **Capital return** — no dividend; the swing to profitability funds buybacks, so total return is price- and repurchase-driven.
@@ -286,7 +273,7 @@ Block executed one of the most publicly visible AI-driven workforce reductions o
 ### Why this case study matters
 
 - **Paradigm shift**: Block is now cited across sell-side and independent research as the paradigm case where AI capability is sufficient to justify a ~50% workforce reduction. It moved the conversation from "AI augments workers" to "AI replaces functions."
-- **Tangible margin-expansion evidence**: the Block cut is one of the cleanest data points showing AI translating into labor cost reduction and therefore margin expansion — the market's main mechanism for rewarding AI adoption among non-frontier names (see [[margin-expansion-disparity]]).
+- **Tangible margin-expansion evidence**: the Block cut is one of the cleanest data points showing AI translating into labor cost reduction and therefore margin expansion — the market's main mechanism for rewarding AI adoption among non-frontier names (see margin-expansion-disparity).
 - **Functions automated**:
   - Fraud detection (transaction-level anomaly scoring)
   - Risk assessment (underwriting and credit decisioning)
@@ -304,7 +291,5 @@ Block executed one of the most publicly visible AI-driven workforce reductions o
 - [[ai-layoff-trap]]
 - [[capital-vs-labor-asymmetry]]
 - [[skill-bifurcation]]
-- [[margin-expansion-disparity]]
-- [[2026-04-meta-ai-layoffs]]
 
 (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])

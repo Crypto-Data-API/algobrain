@@ -9,7 +9,7 @@ aliases: ["Options Pitfalls", "Common Options Mistakes", "Options Trader Mistake
 domain: [risk-management, derivatives, options]
 prerequisites: ["[[options-greeks]]", "[[implied-volatility]]", "[[american-vs-european-options]]"]
 difficulty: intermediate
-related: ["[[iv-crush]]", "[[pin-risk]]", "[[assignment-risk]]", "[[options-trader-psychology]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[volatility-risk-premium-decay]]", "[[earnings-iv-crush]]", "[[earnings-volatility]]", "[[implied-earnings-move]]", "[[long-straddle]]", "[[short-volatility-strategies]]", "[[iron-condors]]", "[[wheel-strategy]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[managing-winners]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[behavioral-finance]]"]
+related: ["[[iv-crush]]", "[[pin-risk]]", "[[assignment-risk]]", "[[options-trader-psychology]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[volatility-risk-premium-decay]]", "[[long-straddle]]", "[[short-volatility-strategies]]", "[[iron-condors]]", "[[wheel-strategy]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[managing-winners]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[behavioral-finance]]"]
 ---
 
 **Options trading pitfalls** are the recurring failure modes that destroy retail and intermediate options accounts: the structural traps embedded in the product that catch traders who treat options like leveraged stock. Most options-specific losses do not come from being wrong on direction. They come from being right on direction but wrong on [[implied-volatility|implied vol]], on [[theta-decay|theta]], on [[assignment-risk|assignment]], or on position sizing. This page enumerates the ten most common pitfalls, the mechanism behind each, a real-world reference point, and how professional traders structurally avoid them. (Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls-tradesta]])
@@ -33,7 +33,7 @@ The full catalog of ten pitfalls, the Greek or mechanic each one violates, the r
 | 5 | [[#5 Buying OTM Lottery Tickets\|OTM lottery tickets]] | Negative expected value | [[lottery-stock-anomaly\|Lottery bias]] | Buy longer-dated, less-OTM; cap as entertainment |
 | 6 | [[#6 Doubling Down on Short Premium Losers Negative Gamma Blowups\|Doubling down short premium]] | Negative [[gamma]] | Loss-aversion; "roll for credit" | Predefine *exit* (close at 2x credit lost) |
 | 7 | [[#7 Wide Bid-Ask Spreads in Illiquid Options\|Illiquid wide spreads]] | Transaction cost | Ignoring liquidity | Filter: spread ≤5% mid, OI ≥500 |
-| 8 | [[#8 Holding Through Earnings Unintentionally\|Unintended earnings hold]] | [[vega]] ramp + gap | No [[earnings-calendar]] check | "No earnings within DTE" hard filter |
+| 8 | [[#8 Holding Through Earnings Unintentionally\|Unintended earnings hold]] | [[vega]] ramp + gap | No earnings-calendar check | "No earnings within DTE" hard filter |
 | 9 | [[#9 Theta Decay Misunderstanding Selling 90 DTE for Safety\|Theta misunderstanding (90+ DTE)]] | [[theta-decay\|theta]] vs [[vega]] | Confusing premium with risk-adj return | Default 30-45 DTE for short premium |
 | 10 | [[#10 Naked Options with Undefined Risk\|Naked undefined risk]] | Unbounded loss | Chasing higher credit | Always define risk with protective wings |
 
@@ -51,11 +51,11 @@ The full catalog of ten pitfalls, the Greek or mechanic each one violates, the r
 
 **What it is.** Buying calls or puts (or [[long-straddle|long straddles]]) before earnings, being directionally correct on the print, and *still losing money* because [[implied-volatility|IV]] crushes 30-50% the moment the announcement hits.
 
-**Why it happens.** Pre-earnings IV inflates because the market prices the binary information event into the option. Once the print resolves uncertainty, [[vega]] collapses. A $5.00 ATM straddle bought the afternoon of an earnings report routinely opens the next morning at $2.00-$2.50 even when the stock moves the [[implied-earnings-move|implied move]].
+**Why it happens.** Pre-earnings IV inflates because the market prices the binary information event into the option. Once the print resolves uncertainty, [[vega]] collapses. A $5.00 ATM straddle bought the afternoon of an earnings report routinely opens the next morning at $2.00-$2.50 even when the stock moves the implied move.
 
 **Real-world magnitude.** Empirically, the "long straddle into earnings" trade has historically lost money on average across S&P names — the [[variance-risk-premium|variance risk premium]] is positive precisely *because* IV crush systematically over-rewards short premium and punishes long. Documented in repeated academic work on the [[volatility-risk-premium-decay]].
 
-**How to avoid.** If you must take an earnings directional bet, use *spreads* (vertical or diagonal) that are vega-balanced or vega-negative. If you have no vol view, do not buy long premium ahead of a known event. See [[iv-crush]] and [[earnings-iv-crush]].
+**How to avoid.** If you must take an earnings directional bet, use *spreads* (vertical or diagonal) that are vega-balanced or vega-negative. If you have no vol view, do not buy long premium ahead of a known event. See [[iv-crush]] and earnings-iv-crush.
 
 ## 3. Assignment Surprises (American-Style)
 
@@ -65,7 +65,7 @@ The full catalog of ten pitfalls, the Greek or mechanic each one violates, the r
 
 **Real-world magnitude.** Robinhood's 2020 Alex Kearns suicide is the most extreme documented case: a 20-year-old saw a -$730k notional balance after one leg of a bull put spread was assigned overnight, despite the position's actual max loss being a fraction of that. Less catastrophically, dividend-driven early assignments on SPY, JPM, and high-dividend names happen in *every* dividend cycle.
 
-**How to avoid.** Scan all short calls before ex-dividend dates. Close any deep-ITM short whose remaining extrinsic is less than the next dividend. Index ETFs/[[xsp-options|XSP]]/[[spx-options|SPX]] (cash-settled European) eliminate this risk entirely.
+**How to avoid.** Scan all short calls before ex-dividend dates. Close any deep-ITM short whose remaining extrinsic is less than the next dividend. Index ETFs/XSP/SPX (cash-settled European) eliminate this risk entirely.
 
 ## 4. Pin Risk at Expiration
 
@@ -111,11 +111,11 @@ The full catalog of ten pitfalls, the Greek or mechanic each one violates, the r
 
 **What it is.** A trader holds a short premium position (covered call, credit spread, iron condor) on a name they did not realize had an earnings release inside the position's expiration window. The pre-earnings IV ramp drives the position into a mark-to-market loss; the post-earnings move can break the position entirely.
 
-**Why it happens.** No earnings-calendar awareness in the entry workflow. The trader screens for IV rank, picks a strike, and never checks the [[earnings-calendar]].
+**Why it happens.** No earnings-calendar awareness in the entry workflow. The trader screens for IV rank, picks a strike, and never checks the earnings-calendar.
 
 **Real-world magnitude.** Common on names like NFLX, NVDA, TSLA which routinely move 5-15% on earnings — far outside typical iron condor wings. A $100-wide iron condor on NVDA going into a 12% earnings move is a max-loss event by definition.
 
-**How to avoid.** Build "no earnings within DTE" as a hard filter into the entry workflow. If trading earnings is the *intent*, do it deliberately with [[earnings-volatility-trading|appropriate structure]]. See [[earnings-volatility]] and [[earnings-calendar]].
+**How to avoid.** Build "no earnings within DTE" as a hard filter into the entry workflow. If trading earnings is the *intent*, do it deliberately with appropriate structure. See earnings-volatility and earnings-calendar.
 
 ## 9. Theta Decay Misunderstanding (Selling 90+ DTE for "Safety")
 
@@ -145,7 +145,7 @@ A retail trader is bullish on a $50 stock reporting earnings in three days. They
 - **Pitfall 2 (IV crush):** Earnings IV is inflated to ~120%. The trader is paying a fat-tail premium *on top of* an event-inflated vol level.
 - **Pitfall 5 (OTM lottery ticket):** A 5-delta weekly call needs a ~12% up-move in three days just to reach the strike, and more to be profitable -- a tail outcome priced against them.
 
-**Outcome.** Earnings print is *mildly* good; the stock rises 4% to $52. The trader was directionally right -- but the call is still OTM, and post-print [[iv-crush|IV collapses]] from 120% to 45%. The $0.40 call is now worth $0.06. The position loses 85% despite a correct directional call. Every individual mistake was survivable; stacked together they were near-certain loss. The professional version of this trade -- if taken at all -- is a *defined, less-OTM, vega-aware* structure sized at <1% of equity, entered with full knowledge of the [[implied-earnings-move]].
+**Outcome.** Earnings print is *mildly* good; the stock rises 4% to $52. The trader was directionally right -- but the call is still OTM, and post-print [[iv-crush|IV collapses]] from 120% to 45%. The $0.40 call is now worth $0.06. The position loses 85% despite a correct directional call. Every individual mistake was survivable; stacked together they were near-certain loss. The professional version of this trade -- if taken at all -- is a *defined, less-OTM, vega-aware* structure sized at <1% of equity, entered with full knowledge of the implied-earnings-move.
 
 ## Professional Pre-Trade Checklist
 
@@ -180,10 +180,8 @@ Several pitfalls share root causes worth naming explicitly:
 - [[delta-hedging]], [[gamma-scalping]] — the professional flip side of pitfall #6
 - [[volatility-risk-premium-decay]] — why short premium tends to win on average
 - [[options-portfolio-construction]] — the sizing framework that defuses pitfalls 1, 6, 10
-- [[earnings-volatility]] — the cycle behind pitfalls 2 and 8
 - [[lottery-stock-anomaly]] — the equity analogue of pitfall #5 (overpaying for positive skew)
 - [[risk-management]] — the universal principles these pitfalls violate
-- [[earnings-calendar]] — the calendar awareness behind pitfalls 2, 3, 8
 
 ## Sources
 

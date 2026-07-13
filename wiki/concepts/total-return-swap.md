@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [derivatives, otc, prime-broker, leverage, equity, credit]
 aliases: ["TRS", "Total Return Swap", "Total-Rate-of-Return Swap", "Equity Total Return Swap"]
-related: ["[[contract-for-difference]]", "[[prime-broker]]", "[[archegos-blowup-2021]]", "[[counterparty-risk]]", "[[capital-structure-arbitrage]]"]
+related: ["[[contract-for-difference]]", "[[prime-broker]]", "[[archegos-blowup-2021]]", "[[counterparty-risk]]"]
 domain: [derivatives, market-microstructure]
 prerequisites: ["[[derivatives]]", "[[otc-markets]]"]
 difficulty: intermediate
@@ -35,7 +35,7 @@ If Stock X goes down 10%, the receiver pays $10M plus financing — wiping out t
 
 1. **Leverage.** 4-10x leverage with no securities-loan friction.
 2. **Cross-border tax efficiency.** UK investor accessing US equity dividends via TRS receives a single OTC payment rather than dealing with US withholding tax + treaty mechanics.
-3. **Disclosure avoidance.** TRS is a derivative — until the SEC's proposed Rule 10B-1 (2022, not yet finalized as of 2026), large TRS positions did *not* trigger 13D/13G filings, even when economic ownership exceeded the 5% threshold. This was a structural feature exploited by Hwang for ViacomCBS (~20% effective stake, zero public disclosure) and by [[bill-ackman]] for Herbalife earlier.
+3. **Disclosure avoidance.** TRS is a derivative — until the SEC's proposed Rule 10B-1 (2022, not yet finalized as of 2026), large TRS positions did *not* trigger 13D/13G filings, even when economic ownership exceeded the 5% threshold. This was a structural feature exploited by Hwang for ViacomCBS (~20% effective stake, zero public disclosure) and by bill-ackman for Herbalife earlier.
 4. **Short-side TRS.** "Pay-fixed" TRS gives synthetic short exposure without locating borrow.
 
 ## Why TRS Exists (Bank Side)
@@ -98,4 +98,4 @@ A [[contract-for-difference|CFD]] is functionally near-identical to TRS but hist
 
 ## Related
 
-[[contract-for-difference]] · [[prime-broker]] · [[archegos-blowup-2021]] · [[bill-hwang]] · [[counterparty-risk]] · [[capital-structure-arbitrage]] · [[block-trade-flipping-arbitrage]] · [[prime-broker-cascade-trading]] · [[ltcm-collapse-1998]]
+[[contract-for-difference]] · [[prime-broker]] · [[archegos-blowup-2021]] · [[bill-hwang]] · [[counterparty-risk]] · capital-structure-arbitrage · [[block-trade-flipping-arbitrage]] · [[prime-broker-cascade-trading]] · [[ltcm-collapse-1998]]

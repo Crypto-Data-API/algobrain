@@ -54,7 +54,7 @@ The 4th cycle is broadly tracking the 3rd (similar 12-month price action since h
 1. **BTC's stagflation resilience** — held $69K despite Iran shock that crashed equities. The [[2026-04-06-hyperliquid-volume-surge|April 2026 Hyperliquid surge]] shows active derivatives demand. ETF flows (IBIT, FBTC) continued positive through Q1 2026.
 2. **Equity-beta amplification** — MSTR holds ~600K BTC; its equity is a leveraged BTC bet (2–2.5x beta). COIN earnings are roughly proportional to crypto-trading volume, with explosive operating leverage in bull markets.
 3. **Options-skew asymmetry** — BTC spot options have expensive call skew (everyone knows the cycle thesis). But MSTR / COIN equity options have less skew, providing a cheaper way to express the same view. This is the structural edge.
-4. **Late-cycle macro backdrop** — when the BLS-stealth-recession trade ([[bls-stealth-recession-long-bonds-short-cyclicals]]) plays out and Fed pivots dovish, BTC historically rallies on the liquidity expansion. The two narratives reinforce.
+4. **Late-cycle macro backdrop** — when the BLS-stealth-recession trade (bls-stealth-recession-long-bonds-short-cyclicals) plays out and Fed pivots dovish, BTC historically rallies on the liquidity expansion. The two narratives reinforce.
 
 ## Why now
 
@@ -98,6 +98,4 @@ The bot's Stage 5 (structure) and Stage 6 (sizing) will confirm specific strikes
 - [[2026-04-06-hyperliquid-volume-surge]] — derivatives activity confirmation
 - [[bitcoin]] — base market
 - [[itpm-framework]] — top-down macro (Stage 4, name selection within crypto theme)
-- [[stagflation-tail-hedge-long-vol-overlay]] — the overlay this narrative sits underneath
-- [[bls-stealth-recession-long-bonds-short-cyclicals]] — sibling narrative (reinforces if Fed pivots dovish)
 - [[bull-call-spread]], [[long-call-vertical]] — primary expression structures

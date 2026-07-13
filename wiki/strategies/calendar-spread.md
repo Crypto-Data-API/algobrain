@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [options, derivatives, volatility, swing-trading]
 aliases: ["Calendar Spread", "Time Spread", "Horizontal Spread"]
-related: ["[[theta-decay]]", "[[options]]", "[[implied-volatility]]", "[[options-pricing]]", "[[covered-calls]]", "[[credit-spread]]", "[[cash-secured-puts]]", "[[edge-taxonomy]]", "[[options-premium-selling]]", "[[short-put-spread]]", "[[iron-fly]]", "[[iv-crush]]", "[[implied-earnings-move]]", "[[vega]]", "[[theta]]", "[[market-regime]]", "[[variance-risk-premium]]"]
+related: ["[[theta-decay]]", "[[options]]", "[[implied-volatility]]", "[[options-pricing]]", "[[covered-calls]]", "[[credit-spread]]", "[[cash-secured-puts]]", "[[edge-taxonomy]]", "[[options-premium-selling]]", "[[short-put-spread]]", "[[iron-fly]]", "[[iv-crush]]", "[[vega]]", "[[theta]]", "[[market-regime]]", "[[variance-risk-premium]]"]
 strategy_type: technical
 timeframe: swing
 markets: [stocks, options]
@@ -133,7 +133,7 @@ Net Greeks (a long-vega, positive-theta, defined-risk structure):
 | [[delta]] | ~0 near K | small near the strike; grows directional as price drifts away (long-ish above K for a call calendar, short-ish below) |
 | [[gamma]] | **negative** | the front short leg's gamma dominates near expiry, which is why the short leg must be closed/rolled before front-month expiry to avoid pin risk |
 
-The positive-theta / **positive-vega** combination is rare and valuable: it is one of the few defined-risk ways to be long volatility and still collect time decay. The cost is a narrow profit zone — the trade needs the underlying to stay near K. See [[implied-earnings-move]] for the event-timed variant (placing the calendar so an earnings catalyst falls *between* the two expirations to capture the front-vs-back IV differential).
+The positive-theta / **positive-vega** combination is rare and valuable: it is one of the few defined-risk ways to be long volatility and still collect time decay. The cost is a narrow profit zone — the trade needs the underlying to stay near K. See implied-earnings-move for the event-timed variant (placing the calendar so an earnings catalyst falls *between* the two expirations to capture the front-vs-back IV differential).
 
 ## Types of Calendar Spreads
 
@@ -257,7 +257,5 @@ Retire or pause the strategy when any of the following triggers:
 - [[options-premium-selling]] -- the short-vol family this is the long-vega complement to
 - [[short-put-spread]] / [[iron-fly]] -- short-vega credit structures the calendar pairs against
 - [[iv-crush]] -- the back-month vega-collapse loss mode (and the event-timed opportunity)
-- [[implied-earnings-move]] -- the term-structure read that drives event-timed calendars
 - [[vega]] / [[theta]] -- the defining Greeks (long vega, positive theta)
 - [[market-regime]] -- the regime conditioning that makes calendars the IVR-opposite of credit spreads
-- [[wash-sale-rules-options]] -- tax interaction when rolling the short leg on single names

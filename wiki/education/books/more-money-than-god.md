@@ -88,7 +88,7 @@ Mallaby's history reveals a recurring pattern: each generation of hedge fund inn
 - **The "less dangerous than banks" thesis is contested.** Mallaby's argument that hedge funds pose limited systemic risk was written in 2010 and reflects a particular reading of 2008. Critics note that the [[long-term-capital-management|LTCM]] rescue, the 2007 quant quake, and later episodes (Archegos, 2021) show that leveraged funds *can* transmit risk through prime-broker and counterparty channels.
 - **Survivorship bias in the narrative.** The book profiles the winners — Soros, Simons, Tudor Jones, Paulson. For every legend there are thousands of funds that closed quietly. The "skill" narrative is hard to fully disentangle from luck when the sample is the survivors.
 - **Breadth over depth.** Because it spans 60 years and a dozen funds, no single story gets the forensic treatment of a dedicated book. [[when-genius-failed]] covers LTCM in far more detail; [[the-man-who-solved-the-market]] goes far deeper on Simons.
-- **Light on the mechanics.** This is a history, not a how-to. A reader will understand *why* a strategy worked in context but will not learn to implement [[convertible-arbitrage]], [[pairs-trading]], or macro positioning from it.
+- **Light on the mechanics.** This is a history, not a how-to. A reader will understand *why* a strategy worked in context but will not learn to implement convertible-arbitrage, [[pairs-trading]], or macro positioning from it.
 - **Pre-dates a decade of change.** Written in 2010, it does not cover the rise of multi-strategy "pod shops" ([[citadel]], Millennium), the explosion of passive investing and its effect on alpha, crypto funds, or the machine-learning era — all of which reshaped the industry it describes.
 
 ## Rating

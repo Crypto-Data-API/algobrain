@@ -118,7 +118,6 @@ For long-only investors, low-vol smart-beta ETFs (USMV, SPLV) provide easy expos
 ## Strategies That Implement It
 
 - [[volatility-targeting]] — sizing by inverse volatility, related concept
-- [[long-short-equity]] — when long low-vol, short high-vol
 - [[risk-parity]] — extends low-vol to multi-asset
 
 ## Sources

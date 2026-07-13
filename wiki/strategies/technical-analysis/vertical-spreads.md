@@ -72,7 +72,7 @@ Family-level guidance; see each child page for specifics.
 - **Strike selection**: debit spreads — long leg ATM-to-slightly-ITM (delta ~0.45–0.65), short leg at the price target. Credit spreads — short leg ~delta 0.16–0.30 (≈70–84% OTM), long leg 1–5 strikes further out for protection.
 - **Width**: 1–5 strikes; debit ≤ ~⅔ of width, or credit ≥ ~⅓ of width.
 - **DTE**: 30–45 DTE for credit spreads (maximise [[theta]]); 45–60 DTE for debit spreads (give the move time).
-- **Management**: credit spreads — take profit at **50% of max credit**, manage/roll at **21 DTE**. Debit spreads — take profit at **50–75% of max profit**; close before the short leg goes deep ITM near ex-[[dividend]] dates ([[assignment]] risk).
+- **Management**: credit spreads — take profit at **50% of max credit**, manage/roll at **21 DTE**. Debit spreads — take profit at **50–75% of max profit**; close before the short leg goes deep ITM near ex-dividend dates ([[assignment]] risk).
 - **Sizing**: risk ≤ 1–3% of the account per spread; cap aggregate correlated short-premium (tail) exposure.
 
 ## Implementation pseudocode
@@ -133,7 +133,7 @@ Effectively unlimited for retail and small-fund size on liquid index ETFs and la
 
 - **Debit spreads**: sideways/flat tape ([[theta]] bleed), IV crush after entry, adverse gaps, and capped upside on a big move.
 - **Credit spreads**: a sharp adverse gap or trend through the short strike (max loss), volatility expansion before expiry (short [[vega]]), and correlated tail losses when many short-premium positions lose together.
-- **Both**: early [[assignment]] on the short leg near ex-[[dividend]] dates; end-of-life [[gamma]] and [[pin-risk]] if carried to expiration; edge compression in unfavorable IV regimes.
+- **Both**: early [[assignment]] on the short leg near ex-dividend dates; end-of-life [[gamma]] and [[pin-risk]] if carried to expiration; edge compression in unfavorable IV regimes.
 
 ## Kill criteria
 
@@ -160,7 +160,7 @@ Effectively unlimited for retail and small-fund size on liquid index ETFs and la
 - **Capped profit** -- even if the underlying moves dramatically in your favor, gains are limited
 - Credit spreads have unfavorable risk/reward ratios (risk more than you can make)
 - Debit spreads require the stock to move enough to overcome the net cost
-- Early [[assignment]] on the short leg is possible, especially near [[ex-dividend]] dates
+- Early [[assignment]] on the short leg is possible, especially near ex-dividend dates
 
 ## See Also
 - [[iron-condor]] -- two vertical credit spreads combined (one bull put, one bear call)

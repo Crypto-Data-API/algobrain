@@ -172,7 +172,7 @@ Most platforms (thinkorswim, tastytrade) offer beta-weighted portfolio views. Th
 
 ### The ITPM Approach
 
-The [[itpm]] methodology implicitly manages position sizing through portfolio construction:
+The itpm methodology implicitly manages position sizing through portfolio construction:
 - 20-40 positions across sectors, balanced long/short
 - Each position is typically 2-5% of portfolio notional
 - Natural delta hedging via the long/short balance
@@ -243,7 +243,6 @@ The lesson: dollar cost of these positions is irrelevant to the real risk pictur
 - [[iron-condor]] — common strategy requiring max-loss sizing
 - [[straddle-strangle]] — volatility strategy requiring vega-based sizing
 - [[portfolio-margin]] — margin regime that changes buying-power math for large books
-- [[pattern-day-trader-rule]] — regulatory constraint on small-account intraday options sizing
 - [[options-portfolio-construction]] — building the multi-position book that aggregate sizing governs
 - [[delta]] / [[gamma]] / [[theta]] / [[vega]] — the individual Greek dimensions
 

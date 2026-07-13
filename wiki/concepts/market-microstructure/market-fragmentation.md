@@ -9,7 +9,7 @@ aliases: ["Market Fragmentation", "market-fragmentation"]
 domain: [market-microstructure]
 prerequisites: ["[[order-book]]", "[[liquidity]]", "[[market-impact]]"]
 difficulty: intermediate
-related: ["[[dark-pool-trading]]", "[[liquidity]]", "[[market-impact]]", "[[high-frequency-trading]]", "[[price-discovery]]", "[[order-book]]", "[[slippage]]"]
+related: ["[[liquidity]]", "[[market-impact]]", "[[high-frequency-trading]]", "[[price-discovery]]", "[[order-book]]", "[[slippage]]"]
 ---
 
 **Market fragmentation** is the splitting of trading in a single security across many competing venues -- multiple lit exchanges, dark pools, and internalizers -- rather than concentrating it in one central order book. It is the defining feature of modern US and European equity markets, where a single stock like Apple trades simultaneously on a dozen-plus exchanges plus dozens of off-exchange venues.
@@ -20,7 +20,7 @@ In a fully consolidated market, all buy and sell interest meets in one place, so
 
 Fragmentation is driven by regulation and competition:
 
-- **United States** -- [[reg-nms|Regulation NMS]] (2005) mandated that orders route to the venue with the best displayed price (the "Order Protection Rule") and created the National Best Bid and Offer (NBBO), a consolidated quote stitched together across all exchanges. This encouraged new exchanges and alternative trading systems (ATSs) to compete, fragmenting volume. There are now ~16 registered US equity exchanges plus dozens of dark pools and wholesale internalizers (e.g., Citadel Securities, Virtu) that execute much of retail flow off-exchange.
+- **United States** -- Regulation NMS (2005) mandated that orders route to the venue with the best displayed price (the "Order Protection Rule") and created the National Best Bid and Offer (NBBO), a consolidated quote stitched together across all exchanges. This encouraged new exchanges and alternative trading systems (ATSs) to compete, fragmenting volume. There are now ~16 registered US equity exchanges plus dozens of dark pools and wholesale internalizers (e.g., Citadel Securities, Virtu) that execute much of retail flow off-exchange.
 - **Europe** -- [[mifid-ii|MiFID II]] and its predecessor MiFID I (2007) abolished the "concentration rule" that had funneled trading to national exchanges, spawning multilateral trading facilities (MTFs) like Cboe Europe and a large dark-trading ecosystem.
 
 ## How It Works
@@ -36,13 +36,12 @@ Because the same stock trades in many places, a layer of infrastructure exists t
 Fragmentation cuts both ways for a trader:
 
 - **Pros** -- venue competition has compressed exchange fees and [[bid-ask-spread|spreads]], and the maker-taker rebate model rewards posting liquidity. More venues mean more places to find a counterparty.
-- **Cons** -- displayed depth understates true liquidity, so naive execution against a single book causes excess [[slippage]] and [[market-impact]]. Hidden liquidity in [[dark-pool-trading|dark pools]] and iceberg orders means the visible [[order-book]] is an incomplete map. Fragmented [[price-discovery]] can also amplify dislocations: during the 2010 [[flash-crash-2010|Flash Crash]], liquidity evaporated unevenly across venues.
+- **Cons** -- displayed depth understates true liquidity, so naive execution against a single book causes excess [[slippage]] and [[market-impact]]. Hidden liquidity in dark pools and iceberg orders means the visible [[order-book]] is an incomplete map. Fragmented [[price-discovery]] can also amplify dislocations: during the 2010 [[flash-crash-2010|Flash Crash]], liquidity evaporated unevenly across venues.
 
 The practical takeaway: any trader executing meaningful size must use a smart order router or a broker that does, and must not assume the top-of-book quote on one exchange reflects the real cost of a large order. Measuring execution quality against the NBBO and [[implementation-shortfall]] is the standard discipline.
 
 ## Related
 
-- [[dark-pool-trading]] -- off-exchange venues are a major fragment of liquidity
 - [[high-frequency-trading]] -- HFT both feeds on and provides liquidity across fragmented venues
 - [[market-impact]] -- fragmentation makes true impact harder to read from one book
 - [[liquidity]] -- fragmentation disperses it across venues

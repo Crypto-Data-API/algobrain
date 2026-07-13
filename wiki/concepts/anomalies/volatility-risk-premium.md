@@ -8,7 +8,7 @@ tags: [anomalies, volatility, options, risk-premium]
 aliases: ["VRP", "Variance Risk Premium", "Variance Premium", "Implied vs Realized Vol"]
 domain: [anomalies, volatility]
 difficulty: advanced
-related: ["[[anomalies-overview]]", "[[volatility]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[vix]]", "[[vol-of-vol]]", "[[vvix]]", "[[volga]]", "[[carry-anomaly]]", "[[edge-taxonomy]]", "[[iron-condor]]", "[[short-strangle]]", "[[dispersion-trading]]", "[[gamma-scalping]]"]
+related: ["[[anomalies-overview]]", "[[volatility]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[vix]]", "[[vol-of-vol]]", "[[vvix]]", "[[volga]]", "[[carry-anomaly]]", "[[edge-taxonomy]]", "[[iron-condor]]", "[[short-strangle]]", "[[gamma-scalping]]"]
 ---
 
 # Volatility Risk Premium
@@ -156,7 +156,7 @@ Use a strategy-level volatility target. When realized volatility of the strategy
 | [[iron-condor]] / [[iron-butterfly]] | Yes (wings) | Medium | Most regimes; the default "managed-risk" form | Max loss = width − credit, but realized often |
 | Short [[vix]] futures (contango) | No | High + roll yield | Term structure in [[contango]] | Backwardation spikes — [[xiv-collapse\|XIV-style]] wipeout |
 | Sell [[variance-swap]] | No (linear in variance) | Medium | Institutional, hedge-able | Variance over-weights the tail; brutal in a crash |
-| [[dispersion-trading]] | Partially | Medium | When index IV >> single-name IV | [[implied-correlation]] spike (everything crashes together) |
+| dispersion-trading | Partially | Medium | When index IV >> single-name IV | [[implied-correlation]] spike (everything crashes together) |
 | [[calendar-spread]] (sell front) | Partially | Low | Stable term structure | Curve inversion |
 
 The vertical axis here *is* the risk-management spectrum: every move down the "tail capped" column trades premium for survivability. The historical graveyard (XIV, original SVXY) is populated entirely by the "No" rows run at leverage.
@@ -184,7 +184,7 @@ Sell a put spread and a call spread on the same underlying. Limited maximum loss
 Direct exposure to variance or VIX. Selling VIX futures (when curve is in contango) earns the vol risk premium plus the roll yield. Far more extreme tail risk than equity options.
 
 ### Dispersion Trading
-Sell index volatility and buy single-stock volatilities. Captures the difference between index implied vol (which is over-priced due to crash hedging demand) and single-name vols (less affected). See [[dispersion-trading]].
+Sell index volatility and buy single-stock volatilities. Captures the difference between index implied vol (which is over-priced due to crash hedging demand) and single-name vols (less affected). See dispersion-trading.
 
 ### Calendar Spreads
 Sell short-dated options (which have higher IV per unit time) and buy long-dated options. Captures the term structure premium with less directional exposure.
@@ -219,7 +219,6 @@ Recommended use: as one component of a larger portfolio, sized small enough that
 - [[options-selling]]
 - [[wheel-strategy]]
 - [[gamma-scalping]] (long side of VRP)
-- [[dispersion-trading]]
 - [[vix-trading]]
 
 ## Sources
@@ -243,7 +242,6 @@ Recommended use: as one component of a larger portfolio, sized small enough that
 - [[carry-anomaly]] — sibling risk-bearing premium
 - [[edge-taxonomy]] — VRP is the canonical risk-bearing edge
 - [[gamma-scalping]] — the long side of the same trade
-- [[dispersion-trading]] — relative-value form of the VRP
 - [[iron-condor]] — the default defined-risk implementation
 - [[deflated-sharpe-ratio]] — why short-vol backtests overstate Sharpe
 - [[options-greeks]]

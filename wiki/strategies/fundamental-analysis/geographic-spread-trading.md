@@ -20,7 +20,7 @@ crowding_risk: low
 data_required: [futures-continuous-contracts, ohlcv-daily, shipping-rates, pipeline-capacity, trade-flow-data]
 capacity_usd: 1000000000
 min_capital_usd: 1000000
-related: ["[[crude-oil]]", "[[copper]]", "[[basis-risk]]", "[[basis-trading]]", "[[commodities]]", "[[cme-group]]", "[[london-metal-exchange]]", "[[intercontinental-exchange]]"]
+related: ["[[crude-oil]]", "[[copper]]", "[[basis-risk]]", "[[basis-trading]]", "[[commodities]]", "[[cme-group]]", "[[london-metal-exchange]]"]
 ---
 
 # Geographic Spread Trading
@@ -35,7 +35,7 @@ Trading the price differential between the same commodity at different physical 
 
 | Spread | Locations | Driven by | Liquidity |
 |---|---|---|---|
-| WTI–Brent | Cushing, OK vs North Sea | US export capacity, Cushing inventories, [[opec]] cuts | Very high |
+| WTI–Brent | Cushing, OK vs North Sea | US export capacity, Cushing inventories, opec cuts | Very high |
 | Brent–Dubai | North Sea vs Middle East/Asia | East-of-Suez demand, sour-vs-sweet quality | High |
 | Permian (Midland)–Cushing | West Texas vs Cushing | Pipeline takeaway capacity | Medium |
 | Bakken–Cushing | North Dakota vs Cushing | Rail vs pipeline; Dakota Access (2017) reshaped it | Medium |
@@ -222,8 +222,6 @@ The `breakeven_cost_bps: 25` and `expected_sharpe: 0.5` in frontmatter already e
 - [[commodities]] -- market overview
 - [[cme-group]] -- primary exchange for WTI crude and US commodity futures
 - [[london-metal-exchange]] -- primary exchange for base metals
-- [[intercontinental-exchange]] -- primary exchange for Brent crude
-- [[opec]] -- supply decisions that shift oil-spread fair value
 - [[eia]] -- weekly inventory data (Cushing stocks) used as a catalyst
 - [[baltic-exchange]] -- tanker freight rates that anchor transportation cost
 - [[commodity-momentum]] -- complementary commodity strategy with a different (behavioral) edge

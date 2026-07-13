@@ -86,7 +86,7 @@ Blend's edge was distribution: it launched directly inside the [[blur]] marketpl
 - [[nft-trading]], [[nft]]
 - [[ethereum]]
 - [[bored-ape-yacht-club]], [[cryptopunks]], [[azuki]]
-- **Note:** the public mortgage/banking software company "Blend Labs, Inc." (NASDAQ: BLND) — peers [[ncino]] and rocket-companies — is a distinct entity and is not covered by this protocol page.
+- **Note:** the public mortgage/banking software company "Blend Labs, Inc." (NASDAQ: BLND) — peers ncino and rocket-companies — is a distinct entity and is not covered by this protocol page.
 
 ## Sources
 

@@ -59,7 +59,6 @@ Commodities are the raw materials that power the global economy. Unlike stocks o
 - [[london-metal-exchange]] -- Global benchmark for base metals (copper, aluminum, nickel, zinc)
 - [[lbma]] -- London Bullion Market Association; global gold/silver OTC trading center
 - [[cme-group]] -- COMEX precious metals, NYMEX energy, CBOT grains, CME livestock
-- [[intercontinental-exchange]] -- ICE soft commodities (coffee, sugar, cocoa, cotton)
 
 ## Pages
 

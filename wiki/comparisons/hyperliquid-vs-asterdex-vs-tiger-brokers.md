@@ -5,14 +5,14 @@ created: 2026-04-13
 updated: 2026-06-21
 status: excellent
 tags: [comparison, exchange, defi, derivatives, brokerage, api-trading]
-subjects: ["[[hyperliquid]]", "[[asterdex]]", "[[tiger-brokers]]"]
+subjects: ["[[hyperliquid]]", "[[asterdex]]", "tiger-brokers"]
 comparison_dimensions: [platform-type, assets, automation, fees, leverage, security, regulation]
 related: ["[[perpetual-futures]]", "[[decentralized-exchanges]]", "[[ai-trading-agents]]", "[[cex-vs-dex]]", "[[hype]]", "[[hype-token]]", "[[funding-rate]]", "[[liquidation]]", "[[counterparty-risk]]", "[[hip-3-builder-deployed-perps]]"]
 ---
 
 # Hyperliquid vs AsterDEX vs Tiger Brokers
 
-The automated trading landscape in 2026 spans two distinct categories: **decentralized perpetual DEXs** ([[hyperliquid|Hyperliquid]], [[asterdex|AsterDEX]]) built for crypto derivatives with native API automation, and **regulated multi-asset brokers** ([[tiger-brokers|Tiger Brokers]]) covering stocks, options, futures, and crypto under a unified account. Each platform suits a fundamentally different trader profile.
+The automated trading landscape in 2026 spans two distinct categories: **decentralized perpetual DEXs** ([[hyperliquid|Hyperliquid]], [[asterdex|AsterDEX]]) built for crypto derivatives with native API automation, and **regulated multi-asset brokers** (Tiger Brokers) covering stocks, options, futures, and crypto under a unified account. Each platform suits a fundamentally different trader profile.
 
 > **One-line verdict:** Choose **Hyperliquid** for the deepest, most mature self-custodial perp-DEX with the richest bot ecosystem; **AsterDEX** for MEV-protected hidden orders, the lowest maker fees, and extreme leverage; **Tiger Brokers** when you need regulated, custodial access to real stocks and *options* across global markets. They are not direct substitutes — the DEXs and the broker barely overlap in what they actually let you trade.
 
@@ -32,7 +32,7 @@ Decentralized perpetual exchanges (Perp DEXs) have matured rapidly. In 2025, the
 
 ## Head-to-Head Comparison
 
-| Feature | [[hyperliquid|Hyperliquid]] | [[asterdex|AsterDEX]] | [[tiger-brokers|Tiger Brokers]] |
+| Feature | [[hyperliquid|Hyperliquid]] | [[asterdex|AsterDEX]] | Tiger Brokers |
 |---------|-------------|----------|---------------|
 | **Platform Type** | Decentralized L1 DEX | Decentralized multi-chain DEX | Regulated centralized broker |
 | **Asset Classes** | Crypto perps, spot, TradFi perps, HIP-3 | Crypto perps, spot, US stock perps | Stocks, options, futures, ETFs, crypto, bonds |
@@ -136,7 +136,7 @@ Hyperliquid runs everything on its custom L1 — deep liquidity, zero fragmentat
 
 ### Asset Coverage
 
-Only [[tiger-brokers|Tiger Brokers]] offers true options trading (US equity options with multi-leg strategies). Both DEXs offer US stock perps as a synthetic alternative — 24/7 trading, crypto-settled, but no voting rights, dividends, or regulatory protections.
+Only Tiger Brokers offers true options trading (US equity options with multi-leg strategies). Both DEXs offer US stock perps as a synthetic alternative — 24/7 trading, crypto-settled, but no voting rights, dividends, or regulatory protections.
 
 ---
 
@@ -157,7 +157,7 @@ Only [[tiger-brokers|Tiger Brokers]] offers true options trading (US equity opti
 
 The deepest structural divide is **who holds your money** — and it changes the entire risk model. See [[counterparty-risk]] and [[cex-vs-dex]].
 
-| Dimension | [[hyperliquid\|Hyperliquid]] | [[asterdex\|AsterDEX]] | [[tiger-brokers\|Tiger Brokers]] |
+| Dimension | [[hyperliquid\|Hyperliquid]] | [[asterdex\|AsterDEX]] | Tiger Brokers |
 |-----------|------------------------------|------------------------|----------------------------------|
 | **Who holds funds** | You (self-custody, on-chain) | You (self-custody, on-chain) | Broker (custodial) |
 | **Primary failure mode** | L1/contract exploit, bridge-free single chain | Smart-contract or cross-chain bridge exploit (4 chains) | Broker insolvency, but with investor-protection schemes |
@@ -172,7 +172,7 @@ The trade-off is classic: the DEXs eliminate **custodial/broker-insolvency risk*
 
 - **[[hyperliquid\|Hyperliquid]]** — trading fees flow to the Assistance Fund, which buys back [[hype-token\|HYPE]]; the platform is *aligned* with high volume and routes value to token holders rather than equity holders. Funding-rate ([[funding-rate]]) and [[liquidation]] flows also accrue to the protocol/[[hlp]] vault.
 - **[[asterdex\|AsterDEX]]** — perp trading fees and the ASTER token economy; aggressive maker-fee discounting buys volume share.
-- **[[tiger-brokers\|Tiger Brokers]]** — traditional brokerage economics: commissions, financing/margin interest, payment for order flow where applicable, and currency conversion — a regulated revenue model, not a token flywheel.
+- **Tiger Brokers** — traditional brokerage economics: commissions, financing/margin interest, payment for order flow where applicable, and currency conversion — a regulated revenue model, not a token flywheel.
 
 ## Trader Profile Fit
 
@@ -181,10 +181,10 @@ The trade-off is classic: the DEXs eliminate **custodial/broker-insolvency risk*
 | Quant / HFT crypto-perp dev | [[hyperliquid\|Hyperliquid]] | Mature SDK, zero-gas orders, deepest perp liquidity, rich 3rd-party bots |
 | Size-sensitive / anti-MEV trader | [[asterdex\|AsterDEX]] | Hidden orders shield large positions from front-running |
 | Max-leverage degen | [[asterdex\|AsterDEX]] | 1001x Simple Mode (with correspondingly extreme [[liquidation]] risk) |
-| Options / multi-leg equity trader | [[tiger-brokers\|Tiger Brokers]] | Only one of the three with true listed options |
-| Multi-asset investor (stocks+crypto+bonds) | [[tiger-brokers\|Tiger Brokers]] | Unified regulated account across asset classes |
+| Options / multi-leg equity trader | Tiger Brokers | Only one of the three with true listed options |
+| Multi-asset investor (stocks+crypto+bonds) | Tiger Brokers | Unified regulated account across asset classes |
 | Self-custody maximalist | Hyperliquid or AsterDEX | No KYC, no custodian, on-chain settlement |
-| US-based retail (compliance-first) | [[tiger-brokers\|Tiger Brokers]] | Fully accessible and regulated; DEXs are geo/terms-restricted |
+| US-based retail (compliance-first) | Tiger Brokers | Fully accessible and regulated; DEXs are geo/terms-restricted |
 | On-chain TradFi exposure (stock/gold/oil perps) | Hyperliquid ([[hip-3-builder-deployed-perps\|HIP-3]]) or AsterDEX | Synthetic 24/7 TradFi perps — no dividends/voting/protections |
 
 ---
@@ -195,7 +195,7 @@ The trade-off is classic: the DEXs eliminate **custodial/broker-insolvency risk*
 |----------|---------------------|
 | High-frequency crypto bot trading (Python/API) | **[[hyperliquid|Hyperliquid]]** |
 | Leverage trading with MEV/privacy protection | **[[asterdex|AsterDEX]]** |
-| Options strategies (US stocks) | **[[tiger-brokers|Tiger Brokers]]** |
+| Options strategies (US stocks) | **Tiger Brokers** |
 | Copy trading automation | **AsterDEX** (EchoSync) or **Hyperliquid** (Vaults/Hyperbot) |
 | Multi-asset portfolio (stocks + crypto + options) | **Tiger Brokers** |
 | On-chain TradFi (stock perps, gold, oil) | **Hyperliquid** (HIP-3) or **AsterDEX** (stock perps) |
@@ -211,7 +211,7 @@ These three platforms answer three different questions:
 
 - **"How do I run sophisticated, self-custodial crypto-perp automation?"** → [[hyperliquid\|Hyperliquid]]. Deepest liquidity, most mature API/bot ecosystem, and value accrual to [[hype-token\|HYPE]] holders. Accept transparency (MEV exposure) and single-chain concentration.
 - **"How do I trade size privately, cheaply, and with extreme leverage on-chain?"** → [[asterdex\|AsterDEX]]. Hidden orders and the lowest maker fees, at the cost of a shorter track record and cross-chain bridge surface.
-- **"How do I trade *real* stocks, options, and bonds in one regulated account?"** → [[tiger-brokers\|Tiger Brokers]]. Custodial and KYC'd, but the only one offering genuine options and regulatory protection.
+- **"How do I trade *real* stocks, options, and bonds in one regulated account?"** → Tiger Brokers. Custodial and KYC'd, but the only one offering genuine options and regulatory protection.
 
 A serious 2026 trader may well use **more than one**: a regulated broker for the core multi-asset portfolio and a perp DEX for crypto leverage and 24/7 synthetic TradFi exposure. The choice is not "which is best" but "which job am I doing right now."
 
@@ -230,7 +230,6 @@ A serious 2026 trader may well use **more than one**: a regulated broker for the
 
 - [[hyperliquid]] — Dominant perp DEX
 - [[asterdex|AsterDEX]] — Second-largest perp DEX
-- [[tiger-brokers]] — Regulated multi-asset broker
 - [[cex-vs-dex]] — Centralized vs decentralized exchange tradeoffs
 - [[perpetual-futures]] — How perps work
 - [[funding-rate]] — Funding rate mechanics

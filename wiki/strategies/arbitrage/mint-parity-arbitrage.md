@@ -21,7 +21,7 @@ expected_sharpe: 1.0
 expected_max_drawdown: 0.08
 breakeven_cost_bps: 15
 decay_evidence: "Edge narrowed after 1866 transatlantic cable and again after 1878 compression of mint assay times; extinguished by 1914 gold standard suspension"
-related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[covered-interest-arbitrage]]", "[[gold-standard-mechanics]]", "[[gold-silver-ratio-arbitrage]]", "[[bank-of-england]]", "[[arbitrage]]", "[[arbitrage-overview]]", "[[edge-taxonomy]]", "[[rothschild-family]]", "[[mean-reversion]]"]
+related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[covered-interest-arbitrage]]", "[[gold-standard-mechanics]]", "[[gold-silver-ratio-arbitrage]]", "[[bank-of-england]]", "[[arbitrage]]", "[[arbitrage-overview]]", "[[edge-taxonomy]]", "[[mean-reversion]]"]
 ---
 
 # Mint Parity Arbitrage
@@ -188,7 +188,7 @@ Small relative to [[gold-point-arbitrage]]. Capacity bounded by:
 ## What Kills This Strategy
 
 1. **Gold standard suspension** — eliminates the mint-par anchor.
-2. **Coinage law changes** — [[rothschild-family|Rothschild]]-era arbs had to re-model after the US 1873 Coinage Act (demonetised silver) and 1878 Bland-Allison Act (re-monetised it partially).
+2. **Coinage law changes** — Rothschild-era arbs had to re-model after the US 1873 Coinage Act (demonetised silver) and 1878 Bland-Allison Act (re-monetised it partially).
 3. **Mint throughput changes** — improvements to assay technology compressed the friction window.
 4. **Bill-market data publication** — any public dissemination of remittance flows eroded the seasonal edge.
 5. **Bank of England open-market operations** — active management of reserves overrode the natural drift patterns.
@@ -247,7 +247,6 @@ In every case the edge is the same shape: a fixed anchor, a friction-defined ban
 - [[covered-interest-arbitrage]] — modern descendant
 - [[gold-standard-mechanics]] — monetary regime
 - [[bank-of-england]]
-- [[rothschild-family]] — dominant practitioner
 - [[arbitrage]] — concept
 - [[arbitrage-overview]] — the arbitrage family
 - [[covered-interest-arbitrage]] — modern descendant

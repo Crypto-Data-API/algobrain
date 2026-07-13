@@ -44,7 +44,7 @@ Quantitative watch signals: short interest % of float, days-to-cover (>5), utili
 
 ## Notable Examples
 
-- **[[gamestop|GameStop]] (GME), January 2021** — reported [[short-interest]] exceeded 100% of float; coordinated retail buying via WallStreetBets sent the stock from ~$20 to ~$483. Melvin Capital lost >50% on its short and later wound down. See [[gamestop-short-squeeze]].
+- **GameStop (GME), January 2021** — reported [[short-interest]] exceeded 100% of float; coordinated retail buying via WallStreetBets sent the stock from ~$20 to ~$483. Melvin Capital lost >50% on its short and later wound down. See [[gamestop-short-squeeze]].
 - **Volkswagen-Porsche, October 2008** — Porsche's disclosure of an effective ~75% stake left a tiny float against heavy shorts; VW briefly became the world's most valuable company, rallying ~5x in two days.
 - **AMC, mid-2021** — a similar retail-driven squeeze; AMC raised billions in equity into the spike and survived as a recapitalized company.
 - **Tesla, 2019-2020** — persistent short covering by chronic Tesla bears contributed to a multi-fold rally.

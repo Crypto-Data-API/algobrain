@@ -32,7 +32,7 @@ related: ["[[prediction-markets]]", "[[prediction-market-strategies]]", "[[ai-pr
 | **Dispute resolution** | UMA Optimistic Oracle (decentralized) | Centralized (internal) |
 | **Monthly visits** | 15.9M (May 2025, surpassed FanDuel) | Smaller |
 | **Token** | POLY (confirmed, not yet launched) | None |
-| **Key investor** | [[intercontinental-exchange|ICE]] ($2B), Founders Fund ($200M) | Various VC |
+| **Key investor** | ICE ($2B), Founders Fund ($200M) | Various VC |
 
 ## Strategic Positioning
 
@@ -84,7 +84,6 @@ Both platforms face the same existential legal question: **are prediction market
 Both platforms are accessible to AI trading agents:
 - Polymarket has the richer AI ecosystem: OpenClaw/Polyclaw bot framework, LLM-powered trading bots, 133 active AI-specific markets
 - Both accessible on Solana through Jupiter's prediction market infrastructure
-- [[palantir-technologies|Palantir]] partnership (Polymarket only) adds institutional-grade AI integrity monitoring
 
 See [[ai-prediction-markets]] for the full treatment.
 

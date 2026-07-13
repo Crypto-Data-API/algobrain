@@ -39,8 +39,8 @@ Meme stocks are publicly traded securities whose price movements are driven prim
 
 ## Notable Meme Stocks
 
-- **[[gamestop|GameStop]] (GME)**: The original and most famous. The [[gamestop-short-squeeze]] became a cultural phenomenon.
-- **[[amc-entertainment|AMC Entertainment]] (AMC)**: Theater chain that became the second-largest meme stock, with retail investors calling themselves "Apes."
+- **GameStop (GME)**: The original and most famous. The [[gamestop-short-squeeze]] became a cultural phenomenon.
+- **AMC Entertainment (AMC)**: Theater chain that became the second-largest meme stock, with retail investors calling themselves "Apes."
 - **Bed Bath & Beyond (BBBY)**: Experienced meme-driven surges before eventually filing for bankruptcy.
 - **BlackBerry (BB)**, **Nokia (NOK)**: Caught up in the January 2021 meme wave.
 
@@ -59,7 +59,7 @@ When these two dynamics fire together, with a community deliberately holding ("d
 
 ## Worked Example: GameStop, January 2021
 
-The [[gamestop|GameStop]] (GME) episode is the canonical case and its broad contours are well documented (figures are split-adjusted differently across sources; the order of magnitude is the point, not exact intraday ticks):
+The GameStop (GME) episode is the canonical case and its broad contours are well documented (figures are split-adjusted differently across sources; the order of magnitude is the point, not exact intraday ticks):
 
 - **Late 2020:** GME traded in the low single digits to ~$4 (pre-2022 4-for-1 split basis), a struggling brick-and-mortar retailer with very high reported [[short-interest]] — by some measures above 100% of the float, an unusually combustible setup.
 - **January 2021:** coordinated buying out of r/WallStreetBets, amplified by [[gamma-squeeze|gamma]] hedging on heavy call-option buying, drove the stock to an intraday peak around **$483** on January 28, 2021 — roughly a 100x move from a few months earlier.
@@ -91,7 +91,6 @@ Meme stocks have no fundamental floor, so the same [[herding]] dynamic that infl
 ## Related
 
 - [[gamestop-short-squeeze]] — the detailed January 2021 case study
-- [[gamestop]]
 - [[short-squeeze]]
 - [[gamma-squeeze]]
 - [[short-interest]]

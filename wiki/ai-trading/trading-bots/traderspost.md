@@ -12,7 +12,6 @@ website: "https://traderspost.io"
 related:
   - "[[tradingview-platform]]"
   - "[[thinkorswim]]"
-  - "[[interactive-brokers]]"
   - "[[alpaca]]"
   - "[[freqtrade]]"
   - "[[pine-script]]"
@@ -79,7 +78,7 @@ Common webhook fields (representative; consult the official docs for the authori
 
 As of June 2026, TradersPost advertises 17+ broker and exchange connections:
 
-- **Traditional brokers**: [[alpaca]] (stocks, commission-free), [[interactive-brokers]] (stocks, options, futures, forex), TradeStation, Tradier, E*TRADE, Robinhood, Webull, [[tastytrade-platform|tastytrade]], [[ninjatrader|NinjaTrader]], Charles Schwab / [[thinkorswim]] (legacy TD Ameritrade integration)
+- **Traditional brokers**: [[alpaca]] (stocks, commission-free), interactive-brokers (stocks, options, futures, forex), TradeStation, Tradier, E*TRADE, Robinhood, Webull, [[tastytrade-platform|tastytrade]], [[ninjatrader|NinjaTrader]], Charles Schwab / [[thinkorswim]] (legacy TD Ameritrade integration)
 - **Futures**: Tradovate, ProjectX
 - **Crypto exchanges**: Coinbase, [[binance]], [[kraken]], [[bybit]], Crypto.com
 - **Paper trading**: built-in TradersPost paper account
@@ -191,7 +190,6 @@ Published pricing as of June 2026 (billed yearly; monthly billing is higher):
 - [[tradingview-platform]] -- Primary signal source for TradersPost automations
 - [[pine-script]] -- Scripting language used to create TradingView alerts
 - [[thinkorswim]] -- Alternative platform that can be connected as a broker
-- [[interactive-brokers]] -- Supported broker with broad asset class coverage
 - [[alpaca]] -- Commission-free broker integration
 - [[bot-risks-and-pitfalls]] -- Risks of automated trade execution
 - [[freqtrade]] -- Open-source alternative for crypto automation

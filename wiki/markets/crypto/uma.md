@@ -9,12 +9,12 @@ aliases: ["UMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://uma.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-disputes]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-disputes]]"]
 ---
 
 # UMA
 
-**UMA** (ticker **UMA**) is the governance and dispute-resolution token of the UMA protocol, an [[ethereum|Ethereum]]-based [[oracle]] platform best known for its **Optimistic Oracle** — a mechanism that brings arbitrary off-chain data on-chain by assuming proposed values are correct unless economically challenged. UMA powers "priceless" financial contracts and is the data backbone of [[polymarket]] and other dispute-driven DeFi applications.
+**UMA** (ticker **UMA**) is the governance and dispute-resolution token of the UMA protocol, an [[ethereum|Ethereum]]-based oracle platform best known for its **Optimistic Oracle** — a mechanism that brings arbitrary off-chain data on-chain by assuming proposed values are correct unless economically challenged. UMA powers "priceless" financial contracts and is the data backbone of [[polymarket]] and other dispute-driven DeFi applications.
 
 ---
 
@@ -63,7 +63,7 @@ The UMA token does two jobs:
 
 ## Technology — the Optimistic Oracle
 
-UMA is not a price-feed [[oracle]] in the [[chainlink|Chainlink]] push model. Its core primitive is the **Optimistic Oracle (OO)**, which answers arbitrary questions — "did event X happen?", "what was the TWAP of asset Y?" — under an optimistic, game-theoretic assumption:
+UMA is not a price-feed oracle in the [[chainlink|Chainlink]] push model. Its core primitive is the **Optimistic Oracle (OO)**, which answers arbitrary questions — "did event X happen?", "what was the TWAP of asset Y?" — under an optimistic, game-theoretic assumption:
 
 1. **Assertion** — a proposer posts an answer on-chain together with a **bond**.
 2. **Challenge window** — a liveness period (often 2 hours to several days) during which anyone can dispute by posting a matching bond.
@@ -133,7 +133,6 @@ UMA trades at a ~$38M market cap and a low MC/FDV (~0.70) with no aggressive emi
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[oracle]]
 - [[chainlink]]
 - [[pyth-network]]
 - [[api3]]

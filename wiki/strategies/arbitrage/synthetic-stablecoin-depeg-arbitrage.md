@@ -30,7 +30,7 @@ A mechanism-aware extension of [[stablecoin-pair-arbitrage]] focused on **synthe
 
 > **Important distinction from [[stablecoin-pair-arbitrage]]**: that page covers fiat-backed stables (USDC, USDT, BUSD) where the peg-restoration path is *banking-system schedule* (T+1, business days). This page covers synthetic stables where the peg-restoration path is *mechanism-internal* — perp funding rates, collateral ratios, AMM-style liquidations, governance interventions. Different mechanism = different break modes = different trades. Run both strategies; they're complements, not duplicates.
 
-**Where this sits in the basket.** This strategy is one node in the [[trading-strategy-baskets|crypto strategy basket]]: it shares the exploit-aggregator and [[oracle]]-monitoring infrastructure with [[ai-amplified-exploit-arbitrage]], [[cross-chain-contagion-hedge]], and [[post-hack-incident-response-arb]]; it shares the [[funding-rate]]/[[hyperliquid]] hedge rails with [[funding-rate-arbitrage]] and the [[hyperliquid-perp-trading-map]] strategies; and the *capture* toolkit (how to maximize P&L once a depeg is verified tradeable) lives in [[stablecoin-depeg-profit-capture]]. Classification (this page) → capture (that page) → portfolio overlay ([[cross-chain-contagion-hedge]]).
+**Where this sits in the basket.** This strategy is one node in the [[trading-strategy-baskets|crypto strategy basket]]: it shares the exploit-aggregator and oracle-monitoring infrastructure with [[ai-amplified-exploit-arbitrage]], [[cross-chain-contagion-hedge]], and [[post-hack-incident-response-arb]]; it shares the [[funding-rate]]/[[hyperliquid]] hedge rails with [[funding-rate-arbitrage]] and the [[hyperliquid-perp-trading-map]] strategies; and the *capture* toolkit (how to maximize P&L once a depeg is verified tradeable) lives in [[stablecoin-depeg-profit-capture]]. Classification (this page) → capture (that page) → portfolio overlay ([[cross-chain-contagion-hedge]]).
 
 ## Edge Source
 
@@ -58,7 +58,7 @@ Counterparty: panic sellers; LP redemption forced selling; leveraged sUSDe posit
 |-----------|-----------|--------------------|----------------------|
 | **USDe / sUSDe** (Ethena) | Delta-neutral basket: long ETH/BTC spot + short equivalent perp; collects funding | Negative perp funding for extended periods (mechanism pays out, drains backing); secondary: counterparty risk on perp venues | sUSDe < $1.00 *and* [[funding-rate]] negative *and* reserve fund solvent |
 | **GHO** (Aave) | Over-collateralized minting against Aave deposits (USDC, ETH, etc.); GHO Stability Module (GSM, a PSM-style USDC swap facility) as backstop | Aave collateral health stress + GSM utilization spike during lending-protocol contagion | GHO 30-80 bp below peg *and* GSM non-empty *and* Aave governance functioning |
-| **crvUSD** (Curve) | Over-collateralized via LLAMMA AMM-based soft-liquidation; collateral price enters "liquidation band," gradually swaps into crvUSD | Sharp collateral price drops causing band exhaustion; or LLAMMA AMM [[oracle]] stress | crvUSD > 50 bp below peg *and* LLAMMA band has remaining depth |
+| **crvUSD** (Curve) | Over-collateralized via LLAMMA AMM-based soft-liquidation; collateral price enters "liquidation band," gradually swaps into crvUSD | Sharp collateral price drops causing band exhaustion; or LLAMMA AMM oracle stress | crvUSD > 50 bp below peg *and* LLAMMA band has remaining depth |
 | **FRAX** (hybrid) | Mix of collateral-backed + algorithmic; CR (collateral ratio) adjusted by governance | Collateral ratio governance lag + algorithmic-portion stress | FRAX off par *and* CR > target *and* governance responsive |
 | **sFRAX** (yield-bearing FRAX) | FRAX deposited in revenue-sharing vault | Same as FRAX + smart-contract risk on the staking layer | sFRAX/FRAX ratio dislocated *and* FRAX peg intact |
 | **sDAI** (yield-bearing DAI) | DAI deposited in MakerDAO DSR | DAI peg + DSR vault risk | sDAI/DAI off NAV *and* [[makerdao]] DSR funded |
@@ -77,7 +77,7 @@ Each variant has a single hard "structural vs solvable" gate. This is the most i
 | GHO lending contagion | GSM/PSM non-empty (< 85% utilization); Aave bad-debt ratio < 5% | GSM exhausted; bad-debt ratio > 5%; governance frozen | Aave PSM utilization + bad-debt tracker |
 | crvUSD AMM band | LLAMMA band depth > ~10%; [[curve-finance]] functioning | Band exhausted; LLAMMA insolvent | LLAMMA band depth (Curve subgraph) |
 | FRAX hybrid | CR adjustment lag only; governance responsive | Algorithmic portion unbacked; CR collapsing | FRAX CR + governance forum |
-| Sympathy (cluster) | No direct exposure to exploited asset; [[oracle]] median unchanged | Direct collateral exposure to the exploit | Exploit aggregator + exposure map |
+| Sympathy (cluster) | No direct exposure to exploited asset; oracle median unchanged | Direct collateral exposure to the exploit | Exploit aggregator + exposure map |
 | Bridge-wrapped | Recap credible (major app, diversified backing) | No recap path (niche app; Multichain precedent) | Bridge config + recap announcement |
 
 ## Variant: Negative Perp Funding (sUSDe-class)
@@ -232,7 +232,7 @@ def synthetic_stable_depeg_arb():
 
 ## Indicators / Data Used
 
-The four signal families are **peg** (deviation trigger), **[[funding-rate]]** (sUSDe mechanism health + hedge carry), **[[open-interest]]** (flow confirmation), and **[[oracle]]/mechanism state** (the structural-vs-solvable gate). Peg, funding, and OI are available cross-venue through aggregators such as cryptodataapi.com (REST/WS); mechanism-state feeds (reserve disclosures, PSM utilization, LLAMMA band depth) are protocol-specific and require subgraph/RPC reads.
+The four signal families are **peg** (deviation trigger), **[[funding-rate]]** (sUSDe mechanism health + hedge carry), **[[open-interest]]** (flow confirmation), and **oracle/mechanism state** (the structural-vs-solvable gate). Peg, funding, and OI are available cross-venue through aggregators such as cryptodataapi.com (REST/WS); mechanism-state feeds (reserve disclosures, PSM utilization, LLAMMA band depth) are protocol-specific and require subgraph/RPC reads.
 
 | Data | Source |
 |------|--------|

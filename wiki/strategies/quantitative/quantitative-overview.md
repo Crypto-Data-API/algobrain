@@ -66,8 +66,6 @@ Quantitative strategies use mathematics and statistics to identify patterns, tes
 
 - [[calendar-effects]] — Seasonal and day-of-week anomalies (turn-of-month, January effect, etc.).
 - [[sentiment-trading]] — Converting news and social sentiment data into systematic signals.
-- [[tax-loss-harvesting]] — Systematically realizing losses to improve after-tax returns.
-- [[quantitative-equity]] — Factor-based stock selection run as a systematic portfolio.
 
 ## All Pages (auto)
 

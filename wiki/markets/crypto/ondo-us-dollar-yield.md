@@ -15,7 +15,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[janus-hen
 
 # Ondo US Dollar Yield
 
-**Ondo US Dollar Yield** (USDY) is a [[tokenized-treasuries|tokenized]] note issued by [[ondo-finance|Ondo Finance]] (ticker USDY; native on [[ethereum|Ethereum]], deployed across 12+ chains), secured by short-term [[treasury-bills|US Treasuries]] and bank demand deposits, that passes Treasury [[yield]] through to holders — an **accumulating** token whose price rises over time (~$1.14 by mid-2026) rather than pegging to $1. It is one of the largest [[tokenized-treasuries|tokenized-Treasury]] products (~$2.16B market cap, rank #42 as of June 2026) and matters to traders as the flagship **yield-bearing dollar** in the [[real-world-assets|RWA]] sector and as on-chain collateral spreading across a dozen chains.
+**Ondo US Dollar Yield** (USDY) is a [[tokenized-treasuries|tokenized]] note issued by [[ondo-finance|Ondo Finance]] (ticker USDY; native on [[ethereum|Ethereum]], deployed across 12+ chains), secured by short-term [[treasury-bills|US Treasuries]] and bank demand deposits, that passes Treasury yield through to holders — an **accumulating** token whose price rises over time (~$1.14 by mid-2026) rather than pegging to $1. It is one of the largest [[tokenized-treasuries|tokenized-Treasury]] products (~$2.16B market cap, rank #42 as of June 2026) and matters to traders as the flagship **yield-bearing dollar** in the [[real-world-assets|RWA]] sector and as on-chain collateral spreading across a dozen chains.
 
 ---
 
@@ -48,7 +48,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[janus-hen
 | **Ticker** | USDY |
 | **Market Cap** | $2.16B (2026-06-20; 1.896B circulating at $1.14) |
 | **Market Cap Rank** | #42 (2026-06-20) |
-| **Type** | [[tokenized-treasuries|Tokenized]] note: short-term [[treasury-bills|US Treasuries]] + bank demand deposits; [[yield]] accrues into token price |
+| **Type** | [[tokenized-treasuries|Tokenized]] note: short-term [[treasury-bills|US Treasuries]] + bank demand deposits; yield accrues into token price |
 | **Backing** | Bankruptcy-remote note with first-priority security interest over the underlying T-bills and bank deposits |
 | **Eligibility** | Non-US persons; no qualified-purchaser requirement (unlike Ondo's [[ousg|OUSG]]) |
 | **Chains** | [[ethereum|Ethereum]] (native) + Solana, Sui, Aptos, Arbitrum, Mantle, Noble/Cosmos, Stellar, Sei, Plume, Osmosis, Mantra — 12+ deployments |
@@ -70,7 +70,7 @@ USDY is structured as a bankruptcy-remote note with first-priority security inte
 | Dimension | Detail |
 |---|---|
 | **Underlying assets** | Short-term [[treasury-bills|US Treasury bills]] plus bank demand deposits — the demand-deposit sleeve provides near-instant liquidity that a pure T-bill fund lacks |
-| **Yield source** | The short-term Treasury rate, passed through by **NAV accrual**: the redemption value and market price rise as interest accrues (from ~$1.00 at the Jan-2024 launch toward ~$1.14 by mid-2026). Realized return tracks the prevailing T-bill [[yield]] net of fees (qualitative — not a fixed APY) |
+| **Yield source** | The short-term Treasury rate, passed through by **NAV accrual**: the redemption value and market price rise as interest accrues (from ~$1.00 at the Jan-2024 launch toward ~$1.14 by mid-2026). Realized return tracks the prevailing T-bill yield net of fees (qualitative — not a fixed APY) |
 | **Wrapper** | A **note** (debt instrument), not a money-market fund or equity — holders have a first-priority security interest over the collateral. A rebasing variant **rUSDY** keeps a $1 unit price with a growing balance for integrations that prefer a peg |
 | **Custody** | Underlying T-bills and bank deposits held by third-party custodians/banks; structured as bankruptcy-remote from Ondo |
 | **Redemption** | Direct mint/redeem with [[ondo-finance|Ondo]]; freshly minted tokens carry a 40–50 day initial transfer restriction before they are freely transferable |

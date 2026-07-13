@@ -84,9 +84,8 @@ A comprehensive research framework covering the full commodity analysis workflow
 
 ## Entities Mentioned
 
-- [[cme-group|CME Group]], [[intercontinental-exchange|ICE]], [[london-metal-exchange|LME]], CBOT, COMEX, NYMEX
+- [[cme-group|CME Group]], ICE, [[london-metal-exchange|LME]], CBOT, COMEX, NYMEX
 - [[cftc|CFTC]], [[eia|EIA]], [[usda|USDA]], USGS, FAO, World Bank, IEA
-- [[opec|OPEC]], Baker Hughes, S&P Global Platts, Wood Mackenzie, Bloomberg, Refinitiv
 
 ## Concepts Referenced
 
@@ -105,7 +104,6 @@ A comprehensive research framework covering the full commodity analysis workflow
 - [[storage-economics]] (created)
 - [[open-interest]] (updated)
 - [[cot-report-analysis]] (created)
-- [[opec]] (created)
 - [[london-metal-exchange]] (created)
 - [[eia]] (created)
 - [[usda]] (created)

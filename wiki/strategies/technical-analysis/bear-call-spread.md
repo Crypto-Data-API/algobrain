@@ -58,7 +58,7 @@ Under the null (no variance risk premium, fairly priced calls), the short call-c
 - **Width**: sized so max loss fits position sizing; target a credit of roughly **⅓ of the width** (reward:risk ~1:2 with high win probability).
 - **DTE**: 30–45 days — the accelerating [[theta]] zone.
 - **IV environment**: enter when IV rank is elevated for richer premium; call-side premium is generally thinner than put-side, so be stricter on minimum acceptable credit.
-- **Exit / management**: take profit at **50% of max credit**; manage/roll at **21 DTE** to limit end-of-life [[gamma]] and [[pin-risk]]. Roll up-and-out for a credit only while the bearish/neutral thesis holds. Watch ex-[[dividend]] dates for early [[assignment]] on the short call.
+- **Exit / management**: take profit at **50% of max credit**; manage/roll at **21 DTE** to limit end-of-life [[gamma]] and [[pin-risk]]. Roll up-and-out for a credit only while the bearish/neutral thesis holds. Watch ex-dividend dates for early [[assignment]] on the short call.
 - **Position sizing**: max loss per spread = (width − credit) × 100; risk ≤ 1–3% of the account per position; cap aggregate short-call (upside-tail) exposure.
 
 ## Implementation pseudocode
@@ -128,7 +128,7 @@ Ample for retail and small funds on liquid index ETFs and large-caps. Constraint
 - **Sharp rally / gap up** through the long strike (earnings beat, buyout, short squeeze): realises max loss, correlated across positions in a broad melt-up.
 - **Volatility expansion**: a rising-IV rally marks the spread to a large unrealised loss before expiry (short [[vega]]).
 - **Single-name squeeze**: short calls on a heavily-shorted name can blow through both strikes violently.
-- **Early [[assignment]]** on the short call near ex-[[dividend]] dates, leaving an unwanted short stock position.
+- **Early [[assignment]]** on the short call near ex-dividend dates, leaving an unwanted short stock position.
 - **Edge compression**: thin call-side premium in a low-IV regime fails to cover costs and tail risk.
 
 ## Kill criteria
@@ -155,7 +155,7 @@ Ample for retail and small funds on liquid index ETFs and large-caps. Constraint
 ## Disadvantages
 - Max profit is capped at the credit received
 - A strong rally through the spread results in the full defined loss
-- Early assignment risk on the short call, especially around ex-[[dividend]] dates
+- Early assignment risk on the short call, especially around ex-dividend dates
 - Narrow spreads yield small profits; wide spreads require more risk capital
 
 ## See Also

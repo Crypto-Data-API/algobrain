@@ -11,7 +11,7 @@ timeframe: swing|position
 markets: [stocks]
 complexity: advanced
 backtest_status: untested
-related: ["[[tail-risk-hedging]]", "[[garch-volatility]]", "[[regime-detection]]", "[[dispersion-trading]]", "[[options]]"]
+related: ["[[tail-risk-hedging]]", "[[garch-volatility]]", "[[regime-detection]]", "[[options]]"]
 ---
 
 # VIX Trading
@@ -95,5 +95,4 @@ VIX is one of the most reliably mean-reverting instruments in finance. Spikes ab
 - [[tail-risk-hedging]] -- long-vol portfolio insurance strategy
 - [[garch-volatility]] -- volatility forecasting to time VIX entries
 - [[regime-detection]] -- identifying whether a VIX spike is a temporary event or a regime change
-- [[dispersion-trading]] -- another volatility strategy comparing index vs single-stock vol
 - [[options]] -- the underlying instruments from which VIX is derived

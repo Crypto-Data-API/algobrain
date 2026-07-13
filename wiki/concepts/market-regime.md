@@ -12,7 +12,7 @@ difficulty: intermediate
 related: ["[[market-cycles]]", "[[regime-detection]]", "[[market-regime-detection-ml]]", "[[volatility-regime]]", "[[correlation-regime]]", "[[regime-matrix]]", "[[regime-strategy-playbook]]", "[[business-cycle]]", "[[risk-on-risk-off-framework]]", "[[sector-rotation]]", "[[mean-reversion]]", "[[trend-following]]", "[[asset-allocation]]", "[[vix]]"]
 ---
 
-A **market regime** is a persistent statistical "state" of a market — a stretch of time during which the behaviour of returns (their trend, volatility, correlation, and risk appetite) is broadly consistent, before shifting to a qualitatively different state. Regimes are the reason a strategy that prints money for two years can quietly stop working: its edge was conditional on a regime that ended. Identifying which regime you are in, and sizing for the possibility that it changes, is one of the central problems of [[quantitative-equity|quantitative]] and discretionary trading alike.
+A **market regime** is a persistent statistical "state" of a market — a stretch of time during which the behaviour of returns (their trend, volatility, correlation, and risk appetite) is broadly consistent, before shifting to a qualitatively different state. Regimes are the reason a strategy that prints money for two years can quietly stop working: its edge was conditional on a regime that ended. Identifying which regime you are in, and sizing for the possibility that it changes, is one of the central problems of quantitative and discretionary trading alike.
 
 ## Regime vs Cycle
 

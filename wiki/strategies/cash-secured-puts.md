@@ -212,7 +212,7 @@ CSP returns are strongly conditioned on the [[market-regime]]; the IV-rank entry
 | Fast selloff / crash | Worst — whole book assigned near the highs while IV spikes | The signature clustered loss ([[volmageddon]], 2020) |
 | Post-crash high-IV recovery | Re-widened premium; richest entries | Re-arm here if collateral discipline held |
 
-Because the loss tail concentrates in the crash regime, a CSP book is the natural client for a long-vol overlay ([[spx-puts]] / [[put-tree]]) at the portfolio level — the same pairing that defines [[premium-selling-systematic|systematic premium selling]].
+Because the loss tail concentrates in the crash regime, a CSP book is the natural client for a long-vol overlay (spx-puts / [[put-tree]]) at the portfolio level — the same pairing that defines [[premium-selling-systematic|systematic premium selling]].
 
 ## Capacity limits
 
@@ -279,7 +279,7 @@ Retire or pause the program when any of the following triggers:
 - [[volatility-risk-premium]] -- the premium the strategy harvests
 - [[premium-selling-systematic]] -- the mechanical, multi-leg index version of the same edge
 - [[volatility-trading]] -- the broader short-vol / long-vol family
-- [[spx-puts]], [[put-tree]] -- long-vol overlays that hedge a CSP book's crash tail
+- spx-puts, [[put-tree]] -- long-vol overlays that hedge a CSP book's crash tail
 - [[market-regime]] -- the regime that drives the clustered-loss tail
 - [[implied-volatility]] -- the entry-filter and vega-exposure driver
 - [[theta]], [[delta]], [[vega]] -- the Greeks of a short put

@@ -9,10 +9,10 @@ aliases: ["ITM", "ATM", "OTM", "In-the-Money", "At-the-Money", "Out-of-the-Money
 domain: [market-microstructure]
 prerequisites: ["[[options]]", "[[strike-price]]"]
 difficulty: beginner
-related: ["[[options]]", "[[strike-price]]", "[[delta]]", "[[intrinsic-value]]", "[[implied-volatility]]", "[[black-scholes]]"]
+related: ["[[options]]", "[[strike-price]]", "[[delta]]", "[[implied-volatility]]", "[[black-scholes]]"]
 ---
 
-Moneyness describes the relationship between an option's [[strike-price]] and the current price of the underlying asset. It determines whether an option has [[intrinsic-value|intrinsic value]] and is the primary framework traders use for strike selection, probability assessment, and understanding how the [[options-greeks|Greeks]] behave across the options chain.
+Moneyness describes the relationship between an option's [[strike-price]] and the current price of the underlying asset. It determines whether an option has intrinsic value and is the primary framework traders use for strike selection, probability assessment, and understanding how the [[options-greeks|Greeks]] behave across the options chain.
 
 ## The Three States
 
@@ -118,7 +118,7 @@ Most professional options traders select strikes by delta rather than by price d
 
 ### ITPM Approach
 
-The [[itpm]] methodology typically uses:
+The itpm methodology typically uses:
 - ATM or slightly ITM options for core positions (delta 0.50–0.70)
 - 20–60 day expirations to balance theta cost against time for thesis to play out
 - Strike selection aligned with fundamental [[catalyst]] timing

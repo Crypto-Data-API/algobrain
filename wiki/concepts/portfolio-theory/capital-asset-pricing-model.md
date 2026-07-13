@@ -6,13 +6,13 @@ updated: 2026-06-21
 status: excellent
 tags: [portfolio-theory, valuation, risk-management]
 aliases: ["CAPM", "Capm", "Capital Asset Pricing Model", "Security Market Line"]
-related: ["[[modern-portfolio-theory]]", "[[efficient-frontier]]", "[[beta]]", "[[alpha]]", "[[sharpe-ratio]]", "[[diversification]]", "[[discounted-cash-flow]]", "[[multi-factor-portfolio]]", "[[value-factor]]", "[[equity-risk-premium]]", "[[risk-free-rate]]", "[[capital-market-line]]", "[[weighted-average-cost-of-capital]]"]
+related: ["[[modern-portfolio-theory]]", "[[efficient-frontier]]", "[[beta]]", "[[alpha]]", "[[sharpe-ratio]]", "[[diversification]]", "[[multi-factor-portfolio]]", "[[value-factor]]", "[[equity-risk-premium]]", "[[risk-free-rate]]", "[[capital-market-line]]"]
 domain: [portfolio-theory]
 prerequisites: ["[[modern-portfolio-theory]]", "[[beta]]", "[[diversification]]"]
 difficulty: intermediate
 ---
 
-The **Capital Asset Pricing Model (CAPM)** is an equilibrium model that prices a risky asset's expected return as a linear function of its sensitivity to overall market risk ([[beta]]). It formalizes the intuition that investors are compensated only for *systematic* (non-diversifiable) risk, not for idiosyncratic risk that can be eliminated through [[diversification]], and it provides the discount rate (cost of equity) used in most [[discounted-cash-flow|DCF]] valuation.
+The **Capital Asset Pricing Model (CAPM)** is an equilibrium model that prices a risky asset's expected return as a linear function of its sensitivity to overall market risk ([[beta]]). It formalizes the intuition that investors are compensated only for *systematic* (non-diversifiable) risk, not for idiosyncratic risk that can be eliminated through [[diversification]], and it provides the discount rate (cost of equity) used in most DCF valuation.
 
 ## The Formula
 
@@ -58,11 +58,11 @@ CAPM rests on the [[modern-portfolio-theory|Markowitz]] insight that rational in
 
 ## Trading and Portfolio Relevance
 
-- **Cost of equity for valuation.** CAPM supplies the discount rate in a [[discounted-cash-flow]] model. A higher beta raises the discount rate and lowers fair value, all else equal.
+- **Cost of equity for valuation.** CAPM supplies the discount rate in a discounted-cash-flow model. A higher beta raises the discount rate and lowers fair value, all else equal.
 - **Performance attribution.** Realized return minus CAPM-predicted return is **[[alpha]]** (Jensen's alpha) — the part of a manager's return not explained by market exposure. This is the foundational definition of skill versus beta.
 - **Hedging and exposure budgeting.** Beta tells you how much index exposure a position carries, enabling beta-neutral or beta-targeted construction.
 - **Benchmark for factor models.** CAPM is the single-factor base case that [[multi-factor-portfolio|multi-factor models]] (Fama-French, Carhart) extend by adding size, [[value-factor|value]], momentum, and quality factors to explain returns CAPM leaves unexplained.
-- **Cost of capital.** CAPM's cost of equity is one input to the [[weighted-average-cost-of-capital|WACC]], the blended hurdle rate firms use for capital budgeting.
+- **Cost of capital.** CAPM's cost of equity is one input to the WACC, the blended hurdle rate firms use for capital budgeting.
 
 ## CAPM Assumptions
 
@@ -91,7 +91,6 @@ Empirically, the SML is too flat: low-beta stocks earn *more* than CAPM predicts
 - [[beta]] — the single risk input CAPM prices
 - [[alpha]] — return in excess of the CAPM prediction
 - [[multi-factor-portfolio]] — models that extend CAPM with additional factors
-- [[discounted-cash-flow]] — uses CAPM's cost of equity as a discount rate
 
 ## Sources
 

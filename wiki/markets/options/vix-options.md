@@ -8,18 +8,18 @@ tags: [options, derivatives, volatility, indicators, sp500]
 aliases: ["VIX Options"]
 domain: [derivatives, options, volatility]
 difficulty: advanced
-related: ["[[index-options]]", "[[spx-options]]", "[[spy-options]]", "[[xsp-options]]", "[[ndx-options]]", "[[rut-options]]", "[[vix]]", "[[vix-futures]]", "[[vix-calls]]", "[[vix-term-structure]]", "[[contango]]", "[[backwardation]]", "[[long-vol-vs-short-vol]]", "[[tail-hedging]]", "[[volatility-of-volatility]]", "[[vvix]]", "[[section-1256-contracts]]", "[[soq-settlement]]", "[[am-vs-pm-settlement]]", "[[american-vs-european-options]]", "[[cash-vs-physical-settlement]]", "[[implied-volatility]]", "[[volatility-skew]]", "[[variance-risk-premium]]", "[[xiv-blowup-feb-2018]]"]
+related: ["[[vix]]", "[[vix-futures]]", "[[vix-calls]]", "[[vix-term-structure]]", "[[contango]]", "[[backwardation]]", "[[long-vol-vs-short-vol]]", "[[tail-hedging]]", "[[volatility-of-volatility]]", "[[vvix]]", "[[section-1256-contracts]]", "[[american-vs-european-options]]", "[[cash-vs-physical-settlement]]", "[[implied-volatility]]", "[[volatility-skew]]", "[[variance-risk-premium]]", "[[xiv-blowup-feb-2018]]"]
 ---
 
 VIX options are Cboe-listed, cash-settled, European-style options on the **Cboe Volatility Index (VIX)** — the headline measure of S&P 500 30-day implied volatility. They carry a $100 contract multiplier, qualify as [[section-1256-contracts|Section 1256 contracts]], settle on Wednesdays (matching VIX futures expiry), and have a single critical structural quirk that separates them from every other index option: they are **priced off VIX futures, not spot VIX**, because the spot VIX index cannot be hedged or replicated directly. This single fact creates the "VIX call term-structure trap" that has cost retail and institutional traders alike enormous sums chasing apparent tail-hedge bargains that fail to deliver as expected.
 
 ## Overview
 
-The VIX is computed from a strip of out-of-the-money [[spx-options|SPX]] options, encoding a 30-day forward-looking estimate of S&P 500 implied volatility. It is a calculation, not a tradable instrument — there is no VIX share to buy or borrow. To create options on VIX, Cboe instead pegs VIX options settlement to a **futures-style construction** that references the [[vix-futures|VIX futures]] curve.
+The VIX is computed from a strip of out-of-the-money SPX options, encoding a 30-day forward-looking estimate of S&P 500 implied volatility. It is a calculation, not a tradable instrument — there is no VIX share to buy or borrow. To create options on VIX, Cboe instead pegs VIX options settlement to a **futures-style construction** that references the [[vix-futures|VIX futures]] curve.
 
 Three properties together define VIX options' character:
 
-1. **Cash-settled, European-style** — like other [[index-options]], no physical delivery, no early assignment.
+1. **Cash-settled, European-style** — like other index-options, no physical delivery, no early assignment.
 2. **Wednesday expiry** — VIX futures and options expire on Wednesdays (specifically 30 days before the third Friday of the following month for monthly expirations), aligning with the 30-day SPX-options reference window that VIX itself measures.
 3. **Settled to the VRO (Special Opening Quotation)** — the VIX equivalent of an SOQ, computed from opening SPX option prices on the morning of expiration. Final settlement is published with ticker **VRO**.
 
@@ -54,7 +54,7 @@ This creates two practical subtleties:
 
 The VRO is published shortly after the open and is the value used to settle every open VIX options position, both calls and puts.
 
-See [[soq-settlement]] for the general SOQ methodology and [[am-vs-pm-settlement]] for the regime context.
+See soq-settlement for the general SOQ methodology and am-vs-pm-settlement for the regime context.
 
 ## The VIX Call Term-Structure Trap
 
@@ -228,7 +228,6 @@ VIX options are the **only listed vehicle that delivers genuine convexity** on t
 
 ## Related
 
-- [[index-options]] — overview of the franchise
 - [[vix]] — the underlying index
 - [[volatility]] — the asset class VIX options trade
 - [[vix-futures]] — the actual instrument VIX options reference
@@ -238,9 +237,7 @@ VIX options are the **only listed vehicle that delivers genuine convexity** on t
 - [[long-vol-vs-short-vol]] — the strategic split
 - [[tail-hedging]] — the dominant use case
 - [[xiv-blowup-feb-2018]] — short-vol disaster case study
-- [[spx-options]] — VIX is calculated from SPX option prices
 - [[section-1256-contracts]] — tax framework
-- [[soq-settlement]] — VRO methodology
 - [[american-vs-european-options]], [[cash-vs-physical-settlement]]
 - [[implied-volatility]], [[volatility-skew]]
 - [[variance-risk-premium]] — the structural premium short-vol harvests

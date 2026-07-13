@@ -374,7 +374,7 @@ You can build aggregation infrastructure yourself, but several tools provide it 
 
 ### Dedicated Options Analytics
 
-- **[[orats|ORATS]]** -- Implied volatility, Greeks, and surface analytics. Good for quants who want to compute their own aggregations from clean data.
+- **ORATS** -- Implied volatility, Greeks, and surface analytics. Good for quants who want to compute their own aggregations from clean data.
 - **[[greeks-live|Greeks.live]]** -- Real-time aggregated Greeks for crypto options (Deribit). Critical for crypto options traders running multi-strike books.
 - **OptionNet Explorer** -- Position modeling and Greek aggregation; popular among independent options traders.
 - **OptionVue** -- Older but well-regarded portfolio-level Greeks tool with stress testing.

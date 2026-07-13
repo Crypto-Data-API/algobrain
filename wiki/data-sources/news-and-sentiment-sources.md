@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [data, news, sentiment, nlp]
 aliases: ["News Data", "Sentiment Data", "News Providers", "Sentiment Providers"]
-related: ["[[data-sources-overview]]", "[[alternative-data-providers]]", "[[sentiment-analysis]]", "[[news-trading]]", "[[earnings-announcement]]", "[[fundamental-data-sources]]", "[[earnings-revision]]", "[[earnings-momentum]]"]
+related: ["[[data-sources-overview]]", "[[alternative-data-providers]]", "[[sentiment-analysis]]", "[[news-trading]]"]
 ---
 
 # News and Sentiment Sources
@@ -35,7 +35,7 @@ A consolidated view of the providers detailed below. Cost tiers are relative (ve
 | NewsCatcher | Structured news API | Mid | Some | Some | Affordable structured news |
 | Estimize | Earnings estimates | Free + paid | Ticker-level | n/a | Crowdsourced surprise prediction |
 | Earnings Whisper | Whisper estimates | Free + paid | Ticker-level | n/a | Informal consensus vs sell-side |
-| Refinitiv I/B/E/S | Analyst estimates | Institutional | Ticker-level | n/a | Sell-side consensus (see [[fundamental-data-sources]]) |
+| Refinitiv I/B/E/S | Analyst estimates | Institutional | Ticker-level | n/a | Sell-side consensus (see fundamental-data-sources) |
 | Wall Street Horizon | Corporate calendar | Institutional | Ticker-level | n/a | Clean event calendars |
 | SEC EDGAR | Regulatory filings | Free | CIK-level | n/a | 8-K/10-K/13F/Form 4, authoritative |
 
@@ -180,7 +180,7 @@ Tracks "whisper" estimates (informal consensus distinct from formal sell-side es
 
 ### Refinitiv I/B/E/S
 
-Institutional standard for sell-side analyst estimates. See [[fundamental-data-sources]].
+Institutional standard for sell-side analyst estimates. See fundamental-data-sources.
 
 ### Wall Street Horizon
 
@@ -236,8 +236,8 @@ Different consumers want different shapes of the same underlying data:
 
 | Consumer | What they ingest | Latency need | Typical use |
 |---|---|---|---|
-| Latency-sensitive event traders | Machine-readable headlines with publication timestamps | Sub-second | Trade the print on [[earnings-announcement|earnings]], M&A, macro |
-| Systematic equity factor models | Daily entity-tagged sentiment + novelty scores | End-of-day | Earnings-drift, [[earnings-revision]], sentiment factors |
+| Latency-sensitive event traders | Machine-readable headlines with publication timestamps | Sub-second | Trade the print on earnings, M&A, macro |
+| Systematic equity factor models | Daily entity-tagged sentiment + novelty scores | End-of-day | Earnings-drift, earnings-revision, sentiment factors |
 | Discretionary research desks | Searchable archive + alerts | Minutes | Context, thesis-building |
 | LLM / NLP pipelines | Raw text → embeddings → classification | Batch or streaming | FinBERT/finance-LLM scoring, summarization, entity linking |
 | Macro / geo-risk monitors | Theme- and country-level aggregates (GDELT, Predata) | Daily | Country risk, regime monitoring |
@@ -290,9 +290,5 @@ RavenPack + Bloomberg News + Wall Street Horizon + custom NLP infrastructure.
 
 - [[data-sources-overview]]
 - [[alternative-data-providers]]
-- [[fundamental-data-sources]] — sell-side estimates and I/B/E/S
 - [[sentiment-analysis]]
 - [[news-trading]]
-- [[earnings-announcement]] — the canonical scheduled news event for equities
-- [[earnings-momentum]]
-- [[earnings-revision]]

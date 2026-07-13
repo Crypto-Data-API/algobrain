@@ -6,18 +6,18 @@ updated: 2026-06-21
 status: excellent
 tags: [commodities, agricultural, futures]
 aliases: ["Sugar", "Raw Sugar", "SB", "Sugar No. 11"]
-related: ["[[coffee]]", "[[cocoa]]", "[[cotton]]", "[[corn]]", "[[commodities]]", "[[intercontinental-exchange]]", "[[commodity-seasonality-patterns]]"]
+related: ["[[coffee]]", "[[cocoa]]", "[[cotton]]", "[[corn]]", "[[commodities]]", "[[commodity-seasonality-patterns]]"]
 ---
 
 Sugar is a globally traded agricultural commodity with a unique **dual-use** profile: it serves as both a food sweetener and an **ethanol feedstock**. ICE Sugar No. 11 (SB) is the global benchmark for raw cane sugar. Brazil is both the largest producer (~20% of world output) and largest exporter, and Brazilian mills can switch between producing sugar and ethanol based on relative prices -- creating a distinctive "sugar-ethanol parity" that acts as a price floor/ceiling mechanism found in no other commodity. (Source: [[2026-04-14-commodities-research-framework]])
 
 ## Key Specifications
 
-> Contract terms below reflect publicly documented exchange specifications and may be updated by the exchanges; tick *values* are derived from contract size and quotation unit, not live prices. Confirm current specs with [[intercontinental-exchange|ICE]] before trading.
+> Contract terms below reflect publicly documented exchange specifications and may be updated by the exchanges; tick *values* are derived from contract size and quotation unit, not live prices. Confirm current specs with ICE before trading.
 
 | Attribute | Raw Sugar No. 11 (SB) | White Sugar No. 5 (QW) |
 |-----------|-----------------------|------------------------|
-| **Exchange** | [[intercontinental-exchange|ICE Futures US]] | ICE Futures Europe (London) |
+| **Exchange** | ICE Futures US | ICE Futures Europe (London) |
 | **Underlying** | Raw centrifugal cane sugar, FOB | Refined white sugar |
 | **Contract size** | 112,000 lbs (50.8 metric tonnes) | 50 metric tonnes |
 | **Quotation** | US cents per pound | US dollars per metric tonne |
@@ -205,7 +205,6 @@ Sugar is uniquely sensitive to **emerging market currencies** because production
 - [[wheat]] -- fellow agricultural future (relative liquidity comparison)
 - [[soybeans]] -- fellow agricultural future
 - [[commodity-seasonality-patterns]] -- seasonal analysis
-- [[intercontinental-exchange]] -- exchange listing sugar futures
 - [[commodities]] -- commodity markets overview
 
 ## Sources

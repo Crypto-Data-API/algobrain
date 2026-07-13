@@ -7,12 +7,12 @@ status: excellent
 tags: [fundamental-analysis, quantitative, portfolio-theory]
 aliases: ["quality factor", "quality factors", "quality premium", "profitability factor", "quality", "quality investing"]
 domain: [fundamental-analysis, portfolio-theory]
-prerequisites: ["[[factor-investing]]", "[[fundamental-analysis]]"]
+prerequisites: ["[[factor-investing]]"]
 difficulty: intermediate
-related: ["[[value-factors]]", "[[quantitative-equity]]", "[[momentum-screening]]", "[[factor-investing]]", "[[return-on-equity]]", "[[value-investing]]", "[[multi-factor-portfolio]]", "[[crowding]]"]
+related: ["[[value-factors]]", "[[momentum-screening]]", "[[factor-investing]]", "[[multi-factor-portfolio]]", "[[crowding]]"]
 ---
 
-Quality factors measure a company's financial health, profitability, and earnings stability, and are used in [[quantitative-equity]] strategies to distinguish genuinely strong businesses from firms that merely appear cheap. The quality premium -- the tendency of high-quality firms to outperform low-quality firms -- is one of the most robust and persistent anomalies in equity markets, and within [[factor-investing]] it sits alongside value, momentum, size, and low-volatility as a core "style" factor.
+Quality factors measure a company's financial health, profitability, and earnings stability, and are used in quantitative-equity strategies to distinguish genuinely strong businesses from firms that merely appear cheap. The quality premium -- the tendency of high-quality firms to outperform low-quality firms -- is one of the most robust and persistent anomalies in equity markets, and within [[factor-investing]] it sits alongside value, momentum, size, and low-volatility as a core "style" factor.
 
 ## What "Quality" Means
 
@@ -20,9 +20,9 @@ Unlike value or momentum, quality has no single canonical definition — it is a
 
 | Pillar | What it captures | Representative metrics |
 |--------|------------------|------------------------|
-| **Profitability** | Can the firm turn capital into profit? | [[return-on-equity]] (ROE), ROA, gross profitability, [[operating-margin]] |
+| **Profitability** | Can the firm turn capital into profit? | return-on-equity (ROE), ROA, gross profitability, operating-margin |
 | **Growth / consistency** | Are earnings stable and growing? | EPS-growth stability, low earnings volatility, sales-growth trend |
-| **Safety** | Is the balance sheet sound? | Low debt-to-equity, high interest coverage, low [[beta]], [[altman-z-score]] |
+| **Safety** | Is the balance sheet sound? | Low debt-to-equity, high interest coverage, low [[beta]], altman-z-score |
 | **Payout / management** | Is capital allocated for shareholders? | Net issuance (low dilution), low accruals, dividend reliability |
 
 The lack of one definition is both a strength (robust to any single metric failing) and a weakness (researcher degrees of freedom invite [[overfitting-detection|overfitting]]). Practitioners typically combine several metrics into a composite z-score rather than relying on a single ratio.
@@ -62,7 +62,7 @@ Firm A lands in the top quality quintile and Firm B in the bottom. A long-A / sh
 
 ## The Gross Profitability Factor
 
-Novy-Marx (2013) demonstrated that gross profitability (gross profit / total assets) is the single strongest quality signal. Firms in the top quintile of gross profitability outperform those in the bottom quintile by approximately 4% annually, with the effect persisting across size, industry, and geography. Critically, gross profitability works as a complement to [[value-investing]] -- profitable firms tend to be expensive, so combining a value tilt with a quality tilt captures two largely independent return premiums simultaneously.
+Novy-Marx (2013) demonstrated that gross profitability (gross profit / total assets) is the single strongest quality signal. Firms in the top quintile of gross profitability outperform those in the bottom quintile by approximately 4% annually, with the effect persisting across size, industry, and geography. Critically, gross profitability works as a complement to value-investing -- profitable firms tend to be expensive, so combining a value tilt with a quality tilt captures two largely independent return premiums simultaneously.
 
 ## Quality Minus Junk (QMJ)
 
@@ -74,9 +74,9 @@ The Fama-French five-factor model (2015) incorporated quality through two factor
 
 ## Practical Application: Avoiding Value Traps
 
-Quality factors are most valuable as a filter against [[value-investing|value traps]] -- stocks that appear cheap on price-to-earnings or price-to-book but are cheap for good reason (deteriorating fundamentals, declining margins, rising debt). A stock trading at 8x earnings with a 25% ROE and stable margins is a bargain. A stock at 8x earnings with negative ROE and rising debt is a trap. Screening for stocks that are both cheap AND high-quality dramatically improves the hit rate of value strategies.
+Quality factors are most valuable as a filter against value traps -- stocks that appear cheap on price-to-earnings or price-to-book but are cheap for good reason (deteriorating fundamentals, declining margins, rising debt). A stock trading at 8x earnings with a 25% ROE and stable margins is a bargain. A stock at 8x earnings with negative ROE and rising debt is a trap. Screening for stocks that are both cheap AND high-quality dramatically improves the hit rate of value strategies.
 
-In practice, [[quantitative-equity]] managers combine quality with value and [[momentum-screening|momentum]] in multi-factor portfolios. The low [[correlation]] between quality, value, and momentum means the combined portfolio achieves better risk-adjusted returns than any single factor alone.
+In practice, quantitative-equity managers combine quality with value and [[momentum-screening|momentum]] in multi-factor portfolios. The low [[correlation]] between quality, value, and momentum means the combined portfolio achieves better risk-adjusted returns than any single factor alone.
 
 ## How Traders Use Quality Factors
 
@@ -104,7 +104,5 @@ In practice, [[quantitative-equity]] managers combine quality with value and [[m
 - [[factor-investing]] — the parent framework
 - [[value-factors]] — the complement that prevents overpaying for quality
 - [[momentum-screening]] — the third leg of the value/quality/momentum blend
-- [[return-on-equity]] — the headline profitability metric
 - [[multi-factor-portfolio]] — how quality is combined in practice
-- [[quantitative-equity]] — the strategy context
 - [[crowding]] — the main risk to the premium

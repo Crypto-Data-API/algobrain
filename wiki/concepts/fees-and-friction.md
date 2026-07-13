@@ -14,8 +14,6 @@ related:
   - "[[slippage]]"
   - "[[market-microstructure]]"
   - "[[robinhood]]"
-  - "[[interactive-brokers]]"
-  - "[[etoro]]"
   - "[[portfolio-margin]]"
   - "[[tax-efficiency]]"
   - "[[capital-gains]]"
@@ -25,7 +23,6 @@ related:
   - "[[professional-vs-retail-mindset]]"
   - "[[capital-preservation]]"
   - "[[anton-kreil]]"
-  - "[[itpm]]"
   - "[[market-makers]]"
   - "[[options-portfolio-construction]]"
   - "[[democratization-of-markets]]"
@@ -106,7 +103,7 @@ The realised distribution of stop-out prices is typically 1.5-3× wider than the
 
 ### 6. Payment-for-Order-Flow (PFOF)
 
-The most opaque retail-specific layer. PFOF is the practice of retail brokers selling order flow to wholesale market-makers ([[citadel-securities|Citadel Securities]], Virtu, Susquehanna, others) who then execute the trades, typically by internalising against their own inventory or by routing to exchanges. The wholesaler pays the broker a per-share or per-contract rebate.
+The most opaque retail-specific layer. PFOF is the practice of retail brokers selling order flow to wholesale market-makers (Citadel Securities, Virtu, Susquehanna, others) who then execute the trades, typically by internalising against their own inventory or by routing to exchanges. The wholesaler pays the broker a per-share or per-contract rebate.
 
 The mechanism is legal in the US but banned in the UK, Canada, and (since 2025) in the EU. The empirical evidence on whether it *materially worsens* retail execution quality is mixed but the regulatory direction is clear: the SEC's Best Execution disclosures (Rule 605/606) consistently show that PFOF venues fill marketable retail orders at *price-improvement* levels — i.e., better than the displayed national best bid/offer (NBBO) — but the price improvement on retail-marketable flow is itself a function of the wholesaler's information advantage about the flow's directional bias. A retail buy order is statistically more likely to be a noise trade than an informed one, and the wholesaler's improvement reflects that. Retail traders do not see the institutional BBO they could have hit at a tier-1 prime brokerage.
 
@@ -274,8 +271,6 @@ The trader who runs the framework on a low-friction broker compresses the cost g
 - [[slippage]] — execution-quality friction
 - [[market-microstructure]] — the broader literature on how friction is generated
 - [[robinhood]] — canonical retail-broker / PFOF case study
-- [[interactive-brokers]] — the canonical low-friction retail broker
-- [[etoro]] — canonical spread-loaded retail broker
 - [[portfolio-margin]] — the financing-cost reduction lever
 - [[tax-efficiency]] — the tax-friction lever
 - [[capital-gains]] / [[mortgages]] — broader personal-finance friction
@@ -286,7 +281,7 @@ The trader who runs the framework on a low-friction broker compresses the cost g
 - [[market-makers]] — counterparties on the other side of the spread
 - [[democratization-of-markets]] — the structural shift creating modern retail friction
 - [[finra]] / [[esma]] / [[sec]] — regulators publishing the relevant disclosure data
-- [[anton-kreil]] / [[itpm]] — primary articulators of the friction-stack framing
+- [[anton-kreil]] / itpm — primary articulators of the friction-stack framing
 
 ## Sources
 

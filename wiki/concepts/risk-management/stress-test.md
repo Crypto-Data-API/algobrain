@@ -179,9 +179,9 @@ Each morning before the open:
 Tools that expose this directly:
 
 - **[[thinkorswim]] Analyze tab** — supports custom scenario columns with simultaneous spot and IV shifts; beta-weighted across the book.
-- **[[interactive-brokers|IBKR]] Risk Navigator** — full Greeks repricing under custom scenarios; supports historical-event replay.
+- **IBKR Risk Navigator** — full Greeks repricing under custom scenarios; supports historical-event replay.
 - **[[optionnet-explorer]]** — granular what-if for a defined book; includes time-forward scenarios.
-- **[[orats]]** — historical surfaces for replay; backtests through stress events.
+- **orats** — historical surfaces for replay; backtests through stress events.
 - **Custom Python (QuantLib, py_vollib, OptionPriceHandler)** — for sophisticated books, a custom stress engine over fitted vol surfaces is standard.
 
 ### Pre-trade screen

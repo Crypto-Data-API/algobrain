@@ -166,7 +166,7 @@ The single most important predictor of vol-trading P&L is the [[market-regime]].
 | Vol spike / crisis (backwardation) | Catastrophic — the Volmageddon tail | The payoff regime — convexity monetizes |
 | Post-spike normalization | Re-widened VRP; attractive re-entry | Theta resumes bleeding |
 
-This regime-dependence is why a complete vol book pairs a short-VRP engine (see [[premium-selling-systematic]]) with a permanent long-vol overlay (see [[spx-puts]] / [[vix-calls]]) rather than running either alone.
+This regime-dependence is why a complete vol book pairs a short-VRP engine (see [[premium-selling-systematic]]) with a permanent long-vol overlay (see spx-puts / [[vix-calls]]) rather than running either alone.
 
 ## Capacity limits
 
@@ -280,7 +280,5 @@ Volatility arbitrage strategies seek to profit from specific mispricings between
 - [[volatility-risk-premium]] -- the structural premium most short-vol variants harvest
 - [[premium-selling-systematic]] -- the mechanical short-VRP implementation
 - [[cash-secured-puts]] -- a conservative single-leg short-vol expression
-- [[spx-puts]] -- the long-vol tail hedge that offsets short-vol books
-- [[index-options]] -- the deepest, lowest-cost venue for vol trading
 - [[market-regime]] -- vol behaves discontinuously across regimes
 - [[theta]], [[vega]], [[delta]] -- the Greeks the strategy manages

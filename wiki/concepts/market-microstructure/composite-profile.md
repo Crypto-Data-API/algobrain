@@ -36,7 +36,7 @@ Composite profiles are critical for identifying levels that function as major in
 
 A closely related concept is the **fixed-range volume profile** (FRVP). Rather than aggregating by calendar session, the trader manually selects an arbitrary start and end point — for example, dragging from the start of a trend leg to its end, or across a prior consolidation block — and the platform computes the volume distribution over exactly that window (Source: [[2026-04-22-gap-finder-volume-profile-indicator-as-a-trading-st]]).
 
-Fixed-range profiles let a trader isolate the volume structure of a *specific event*: the morning session from the open to the current price, a particular swing move, or a multi-day base. This makes FRVP a flexible bridge between strict session profiles and broad composites — the trader chooses the window that matches the structure they are analysing. On [[tradingview|TradingView]], FRVP is a built-in volume-based indicator; [[sierra-chart|Sierra Chart's]] Volume by Price study and [[ninjatrader|NinjaTrader]] expose equivalent controls for how many bars or what time range to include in a given profile.
+Fixed-range profiles let a trader isolate the volume structure of a *specific event*: the morning session from the open to the current price, a particular swing move, or a multi-day base. This makes FRVP a flexible bridge between strict session profiles and broad composites — the trader chooses the window that matches the structure they are analysing. On TradingView, FRVP is a built-in volume-based indicator; [[sierra-chart|Sierra Chart's]] Volume by Price study and [[ninjatrader|NinjaTrader]] expose equivalent controls for how many bars or what time range to include in a given profile.
 
 ## Multi-Session Acceptance and Rejection
 

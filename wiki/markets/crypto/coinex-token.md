@@ -84,7 +84,7 @@ Exchange tokens are best understood as **call options on their host exchange's v
 - **Burn coverage** — how much CET does revenue actually retire per quarter relative to the ~2.5B circulating? Unverified burn cadence means the deflation thesis cannot be priced with confidence.
 - **Peer multiple** — CET trades at a fraction of [[bnb|BNB]]'s or [[htx-dao|HTX]]'s implied volume multiple, which is consistent with CoinEx being a smaller, lower-profile venue. There is no obvious mispricing signal here; the discount reflects franchise scale and liquidity.
 
-This is qualitative framing, not a price target — see [[valuation]].
+This is qualitative framing, not a price target — see valuation.
 
 ## Peer Comparison
 
@@ -152,7 +152,7 @@ CET is the smallest and least liquid of the listed [[exchange-tokens]] cohort: i
 - [[bitmart-token]] — exchange-token peer (BMX)
 - [[bitkub-coin]] — exchange/gas token peer
 - [[ethereum]] — host chain
-- [[liquidity]] · [[slippage]] · [[valuation]] · [[derivatives]]
+- [[liquidity]] · [[slippage]] · valuation · [[derivatives]]
 - [[crypto-markets]]
 
 ---

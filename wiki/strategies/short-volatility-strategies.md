@@ -20,7 +20,7 @@ crowding_risk: high
 expected_sharpe: 0.6
 expected_max_drawdown: 0.5
 breakeven_cost_bps: 25
-related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[vix-futures]]", "[[long-vol-overlay]]", "[[variance-risk-premium]]", "[[volatility-risk-premium]]", "[[volatility-regime-classification]]", "[[market-regime]]", "[[tastytrade]]", "[[tom-sosnoff]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[xiv-velocity-shares]]", "[[itpm-framework]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[vix-futures]]", "[[long-vol-overlay]]", "[[variance-risk-premium]]", "[[volatility-risk-premium]]", "[[volatility-regime-classification]]", "[[market-regime]]", "[[tom-sosnoff]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[xiv-velocity-shares]]", "[[itpm-framework]]"]
 ---
 
 # Short Volatility Strategies
@@ -125,7 +125,7 @@ Each entry links to its detailed strategy page or category page.
 
 ### Short strangles ([[short-strangle]])
 
-Sell OTM call + OTM put on the same underlying, same expiration. The canonical undefined-risk short-vol structure. Default tenor 30-45 DTE, default strikes 16 [[delta]] each side. The dominant retail premium-selling structure popularized by [[tastytrade]]. Capacity is the trader's [[buying-power]]; risk is undefined and was the dominant blow-up profile in [[volmageddon]] and [[vix-august-2024-spike]].
+Sell OTM call + OTM put on the same underlying, same expiration. The canonical undefined-risk short-vol structure. Default tenor 30-45 DTE, default strikes 16 [[delta]] each side. The dominant retail premium-selling structure popularized by tastytrade. Capacity is the trader's [[buying-power]]; risk is undefined and was the dominant blow-up profile in [[volmageddon]] and [[vix-august-2024-spike]].
 
 ### Iron condors ([[iron-condor]])
 
@@ -165,7 +165,7 @@ Modified strangles that eliminate one-sided risk (jade lizard removes upside ris
 
 ### Systematic premium selling ([[premium-selling-systematic]])
 
-The disciplined, mechanical implementation: 30-45 DTE, 16-delta wings, 50% profit target, 21 DTE time exit, [[ivr]] entry filter, paired with a [[long-vol-overlay]]. The institutional version of the [[tastytrade]] retail playbook.
+The disciplined, mechanical implementation: 30-45 DTE, 16-delta wings, 50% profit target, 21 DTE time exit, [[ivr]] entry filter, paired with a [[long-vol-overlay]]. The institutional version of the tastytrade retail playbook.
 
 ## Rules
 
@@ -220,7 +220,6 @@ maintain_long_vol_overlay(budget=0.01 * nav / year)
 - [[vix]] level and [[vix-term-structure]] (contango/backwardation regime gate)
 - [[skew]] (wing selection; relative richness of put vs call side)
 - Realized volatility (10/30-day) vs implied -- the live VRP estimate
-- [[earnings-calendar]] (single-name event exclusion)
 - Daily OHLCV for the underlyings
 - Portfolio margin / stress-test output from the broker (sizing constraint)
 
@@ -312,7 +311,6 @@ Numerical retirement/pause conditions (see [[when-to-retire-a-strategy]]):
 - Bondarenko, Oleg. "Why Are Put Options So Expensive?" *Quarterly Journal of Finance* (2014).
 - Spitznagel, Mark. *Safe Haven* (2021).
 - CBOE PutWrite Index (PUT) methodology and long-run performance data, CBOE (index inception 1986; backfilled history from mid-1986).
-- [[tastytrade]] research archive -- 16-delta, 45-DTE, 50%-profit-target rule set.
 - [[volmageddon]] post-mortem (Feb 5, 2018; XIV termination -96%).
 - [[vix-august-2024-spike]] post-mortem (Aug 5, 2024).
 - [[ljm-preservation-and-growth]] case study (-80%+ in Feb 2018).
@@ -335,5 +333,5 @@ Numerical retirement/pause conditions (see [[when-to-retire-a-strategy]]):
 - [[edge-taxonomy]] -- edge categorization framework.
 - [[short-strangle]], [[iron-condor]], [[short-put-spread]], [[covered-calls]], [[cash-secured-puts]] -- canonical implementations.
 - [[volmageddon]], [[vix-august-2024-spike]], [[ljm-preservation-and-growth]] -- shock case studies.
-- [[tom-sosnoff]], [[tastytrade]] -- popularization of retail short vol.
+- [[tom-sosnoff]], tastytrade -- popularization of retail short vol.
 - [[mark-spitznagel]] -- the case for always pairing short vol with overlay.

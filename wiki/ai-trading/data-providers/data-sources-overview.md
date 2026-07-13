@@ -20,7 +20,7 @@ A trader spending $0/month can access:
 | Data Type | Best Free Source | What You Get | Alpha Edge |
 |-----------|-----------------|-------------|-----------|
 | Stock prices & fundamentals | [[yahoo-finance]] | 5yr financials, delayed quotes, options chains | Screen for value/growth, track earnings |
-| Stock screening | [[finviz]] | Heatmaps, fundamental/technical filters | Quick sector overview, momentum screening |
+| Stock screening | finviz | Heatmaps, fundamental/technical filters | Quick sector overview, momentum screening |
 | Charting (all assets) | [[tradingview-platform]] | Multi-asset charts, 3 indicators, community scripts | Best free charting, Pine Script backtesting |
 | Crypto prices | [[coingecko]] | 10K+ coins, market cap, volume, exchange data | Altcoin momentum, market dominance shifts |
 | DeFi analytics | [[defilama]] | TVL, yields, stablecoin flows, bridge volume | Capital flow tracking, yield opportunities |
@@ -41,14 +41,14 @@ The free-to-paid boundary differs by trading style:
 
 ### You NEED paid data for:
 - **Real-time stock/options execution** — Free data is delayed 15-20 min. Useless for day trading.
-- **Options flow analysis** — [[unusual-whales]] or [[spotgamma]] show institutional positioning that free tools can't
+- **Options flow analysis** — unusual-whales or spotgamma show institutional positioning that free tools can't
 - **Institutional on-chain tracking** — [[nansen]] labels wallets (free data shows transactions but not WHO)
-- **Professional derivatives analytics** — [[laevitas]] for vol surfaces, [[spotgamma]] for GEX
-- **Alternative data** — [[quiver-quant]] for Congress trades, satellite data (no free source exists)
+- **Professional derivatives analytics** — [[laevitas]] for vol surfaces, spotgamma for GEX
+- **Alternative data** — quiver-quant for Congress trades, satellite data (no free source exists)
 
 ### You DON'T need paid data for:
 - **Crypto spot/perp trading** — Free data stack covers 90% of needs
-- **Long-term investing** — [[yahoo-finance]] + [[finviz]] + [[fred]] is sufficient
+- **Long-term investing** — [[yahoo-finance]] + finviz + [[fred]] is sufficient
 - **DeFi analytics** — [[defilama]] + [[dune-analytics]] + [[dex-screener]] = comprehensive
 - **Macro analysis** — [[fred]] is the gold standard and completely free
 - **Basic technical analysis** — [[tradingview-platform]] free tier works
@@ -59,21 +59,21 @@ The free-to-paid boundary differs by trading style:
 | Tool | Cost | Edge |
 |------|------|------|
 | [[tradingview-platform]] Pro | $15/mo | Unlimited indicators, alerts, multiple charts |
-| [[unusual-whales]] Basic | $50/mo | Options flow alerts, Congress tracker |
-| [[koyfin]] Pro | $50/mo | Bloomberg-lite fundamentals and screening |
+| unusual-whales Basic | $50/mo | Options flow alerts, Congress tracker |
+| koyfin Pro | $50/mo | Bloomberg-lite fundamentals and screening |
 
 ### Mid-Range ($50-200/mo)
 | Tool | Cost | Edge |
 |------|------|------|
 | [[polygon-io]] | $99/mo | SIP-grade real-time stock + options API |
-| [[quiver-quant]] | $50-200/mo | Congress trading, gov contracts, alt data |
+| quiver-quant | $50-200/mo | Congress trading, gov contracts, alt data |
 | [[santiment]] Pro | $50-300/mo | Crypto sentiment + dev activity signals |
 | [[laevitas]] Pro | $100+/mo | Crypto options vol surface, basis analytics |
 
 ### Professional ($200-1000/mo)
 | Tool | Cost | Edge |
 |------|------|------|
-| [[spotgamma]] | $200-500/mo | GEX levels predict S&P behavior |
+| spotgamma | $200-500/mo | GEX levels predict S&P behavior |
 | [[nansen]] | $150-1000/mo | Smart money wallet tracking |
 | [[glassnode]] Pro | $500+/mo | 200+ Bitcoin on-chain metrics |
 | [[arkham-intelligence]] | $500+/mo | Cross-chain entity deanonymization |
@@ -92,16 +92,16 @@ The free-to-paid boundary differs by trading style:
 Free stack + [[nansen]] + [[laevitas]] + [[quicknode]]
 
 ### Stock Swing Trader (Free)
-[[yahoo-finance]] + [[finviz]] + [[tradingview-platform]] + [[fred]]
+[[yahoo-finance]] + finviz + [[tradingview-platform]] + [[fred]]
 
 ### Stock Options Trader ($100-300/mo)
-[[tradingview-platform]] Pro + [[unusual-whales]] + [[spotgamma]]
+[[tradingview-platform]] Pro + unusual-whales + spotgamma
 
 ### Quant/Algo ($100-200/mo)
 [[alpha-vantage]] Premium + [[polygon-io]] + [[fred]] + Python/pandas
 
 ### Macro Investor (Free)
-[[fred]] + [[koyfin]] free + [[tradingview-platform]] + [[fear-and-greed-index]]
+[[fred]] + koyfin free + [[tradingview-platform]] + [[fear-and-greed-index]]
 
 ## See Also
 

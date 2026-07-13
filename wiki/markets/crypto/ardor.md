@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://www.ardorplatform.org/"
-related: ["[[crypto-markets]]", "[[nxt]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]"]
 ---
 
 # Ardor
 
-**Ardor** (ARDR) is a [[proof-of-stake|proof-of-stake]] [[layer-1]] blockchain-as-a-service (BaaS) platform built and maintained by **Jelurida**, the team behind the pioneering [[Nxt]] blockchain. Its defining feature is a "parent-child chain" architecture: a single security/forging parent chain (Ardor) anchors many lightweight, customizable **child chains** that businesses can launch without operating their own validator set. Ardor ranks **#687** by market capitalization.
+**Ardor** (ARDR) is a [[proof-of-stake|proof-of-stake]] [[layer-1]] blockchain-as-a-service (BaaS) platform built and maintained by **Jelurida**, the team behind the pioneering Nxt blockchain. Its defining feature is a "parent-child chain" architecture: a single security/forging parent chain (Ardor) anchors many lightweight, customizable **child chains** that businesses can launch without operating their own validator set. Ardor ranks **#687** by market capitalization.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -33,7 +33,7 @@ At the snapshot date ARDR traded at **$0.02682192** with a market cap of **$26,7
 | **Current Price** | $0.02682192 |
 | **24h Change** | -2.07% |
 | **7d Change** | -8.95% |
-| **Genesis Date** | 2018-01-01 ([[nxt|Nxt]] genesis 2013) |
+| **Genesis Date** | 2018-01-01 (Nxt genesis 2013) |
 | **Consensus** | [[proof-of-stake|Forging Proof-of-Stake]] |
 | **Categories** | Infrastructure, BaaS, [[smart-contracts|Smart Contract Platform]] |
 | **Website** | [https://www.ardorplatform.org/](https://www.ardorplatform.org/) |
@@ -43,7 +43,7 @@ At the snapshot date ARDR traded at **$0.02682192** with a market cap of **$26,7
 
 ## Overview
 
-Ardor is a [[layer-1]] blockchain-as-a-service (BaaS) platform developed by **Jelurida**, a Swiss-registered company that also stewards the original [[Nxt]] blockchain. It lets businesses and institutions leverage blockchain without building custom infrastructure: a single main (parent) chain handles security, consensus and decentralization, while customizable **child chains** come ready to use for various business applications. Ardor is the second-generation evolution of Nxt, designed to address blockchain bloat, scalability and customization.
+Ardor is a [[layer-1]] blockchain-as-a-service (BaaS) platform developed by **Jelurida**, a Swiss-registered company that also stewards the original Nxt blockchain. It lets businesses and institutions leverage blockchain without building custom infrastructure: a single main (parent) chain handles security, consensus and decentralization, while customizable **child chains** come ready to use for various business applications. Ardor is the second-generation evolution of Nxt, designed to address blockchain bloat, scalability and customization.
 
 ### Parent–child chain architecture
 
@@ -64,13 +64,13 @@ A core scalability claim is that Ardor child-chain transaction data can be **pru
 
 ### Consensus mechanics — forging proof-of-stake
 
-Ardor inherits [[nxt|Nxt]]'s **"forging"** [[proof-of-stake|Proof-of-Stake]] model, one of the earliest pure-PoS designs in crypto (Nxt, launched 2013, predates most PoS chains). There is **no mining and no inflationary block subsidy**: the entire ARDR supply was created at the Nxt genesis and migrated to Ardor at the 2018 snapshot. Forgers — accounts with staked ARDR — are selected to produce the next block with probability proportional to their balance, and they are compensated from **transaction fees** rather than newly minted coins. This makes ARDR a **fixed-supply, fee-funded** chain, structurally different from inflationary PoS L1s.
+Ardor inherits Nxt's **"forging"** [[proof-of-stake|Proof-of-Stake]] model, one of the earliest pure-PoS designs in crypto (Nxt, launched 2013, predates most PoS chains). There is **no mining and no inflationary block subsidy**: the entire ARDR supply was created at the Nxt genesis and migrated to Ardor at the 2018 snapshot. Forgers — accounts with staked ARDR — are selected to produce the next block with probability proportional to their balance, and they are compensated from **transaction fees** rather than newly minted coins. This makes ARDR a **fixed-supply, fee-funded** chain, structurally different from inflationary PoS L1s.
 
 Because each child chain can denominate its own fees, Ardor uses a **bundling** mechanism: "bundlers" collect child-chain transactions, pay the parent-chain ARDR fee on their behalf, and recoup the cost in the child token — decoupling end-user token requirements from the security token while still routing economic value back to ARDR forgers.
 
 ### Built-in feature set (no smart-contract VM required)
 
-Unlike EVM chains, Ardor (via [[nxt|Nxt]]'s heritage and the Ignis child) ships a **fixed library of built-in transaction types** rather than a general-purpose [[smart-contracts|smart-contract]] virtual machine: a decentralized asset exchange, a data/marketplace system, encrypted messaging, account control (multi-sig / phasing), voting, aliasing, and a "Lightweight Contracts" framework (off-chain Java contracts triggered by on-chain events). This trades the open-ended flexibility of Solidity for a curated, audited primitive set — fewer footguns, but less composability.
+Unlike EVM chains, Ardor (via Nxt's heritage and the Ignis child) ships a **fixed library of built-in transaction types** rather than a general-purpose [[smart-contracts|smart-contract]] virtual machine: a decentralized asset exchange, a data/marketplace system, encrypted messaging, account control (multi-sig / phasing), voting, aliasing, and a "Lightweight Contracts" framework (off-chain Java contracts triggered by on-chain events). This trades the open-ended flexibility of Solidity for a curated, audited primitive set — fewer footguns, but less composability.
 
 | Metric | Value |
 |---|---|
@@ -104,13 +104,13 @@ ARDR peaked during the January 2018 ICO mania and, like most 2017-era altcoins, 
 | **Fee settlement** | Child-chain transaction fees are ultimately converted to ARDR to reward forgers. |
 | **Network security anchor** | The economic weight behind every child chain is ARDR's stake. |
 
-ARDR has a fixed supply (~998M, created at the 2013 [[nxt|Nxt]] genesis and migrated to Ardor in 2018) with no inflationary block reward — forgers earn from transaction fees rather than newly minted coins.
+ARDR has a fixed supply (~998M, created at the 2013 Nxt genesis and migrated to Ardor in 2018) with no inflationary block reward — forgers earn from transaction fees rather than newly minted coins.
 
 ---
 
 ## History
 
-- **2013** — **[[nxt|Nxt]]** launches as one of the first 100%-[[proof-of-stake|proof-of-stake]] blockchains, with its full ~1B coin supply created at genesis; it pioneers built-in features (asset exchange, marketplace, messaging) instead of a scripting VM.
+- **2013** — **Nxt** launches as one of the first 100%-[[proof-of-stake|proof-of-stake]] blockchains, with its full ~1B coin supply created at genesis; it pioneers built-in features (asset exchange, marketplace, messaging) instead of a scripting VM.
 - **2016** — **Jelurida** is formed as the Swiss-registered steward of the Nxt codebase, holding the IP and leading development.
 - **2017** — Jelurida announces **Ardor** as Nxt's second-generation successor and runs the **Ignis ICO** (the first child chain), raising ~$15M; ARDR is distributed to NXT holders via snapshot.
 - **1 January 2018** — Ardor mainnet goes live; the parent-child architecture separates security (ARDR parent) from application chains (Ignis and later children).
@@ -128,7 +128,7 @@ ARDR has a fixed supply (~998M, created at the 2013 [[nxt|Nxt]] genesis and migr
 
 ## Ardor vs. Peer BaaS / Platform Chains
 
-| Dimension | Ardor (ARDR) | [[nxt|Nxt]] (NXT) | [[stratis]] (STRAX) | [[ethereum|Ethereum]] (ETH) |
+| Dimension | Ardor (ARDR) | Nxt (NXT) | [[stratis]] (STRAX) | [[ethereum|Ethereum]] (ETH) |
 |---|---|---|---|---|
 | **Consensus** | Forging [[proof-of-stake|PoS]] | Forging [[proof-of-stake|PoS]] | [[proof-of-stake|PoS]] (UTXO) | PoS (post-Merge) |
 | **Supply model** | Fixed (no inflation) | Fixed (no inflation) | Inflationary staking | Low net issuance |
@@ -218,7 +218,6 @@ Ardor's genuinely differentiated features are its **parent-child chain separatio
 ## See Also
 
 - [[crypto-markets]]
-- [[Nxt]]
 - [[layer-1]]
 - [[proof-of-stake]]
 - [[smart-contracts]]

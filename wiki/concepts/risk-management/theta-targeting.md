@@ -32,7 +32,7 @@ The objective (theta) is pursued *subject to* the constraints (T/V floor, Γ/θ 
 The instinctive metric for an income trader is daily mark-to-market P&L. It is also the wrong metric for steering a short-premium book on any horizon shorter than a month or two, because P&L is dominated by **path noise** that has nothing to do with the structural edge being harvested:
 
 - **[[gamma|Gamma]] noise** — short-premium books are short gamma. A 1% move in the underlying re-prices the entire book, often by multiples of a day's theta. The P&L on any single day is mostly a quote on realised volatility, not a measurement of how much decay was captured.
-- **[[vega|Vega]] noise** — a 1-point move in [[implied-volatility|IV]] revalues every option in the book. On an [[earnings-volatility|earnings]] week, vega P&L can swamp theta P&L by an order of magnitude.
+- **[[vega|Vega]] noise** — a 1-point move in [[implied-volatility|IV]] revalues every option in the book. On an earnings week, vega P&L can swamp theta P&L by an order of magnitude.
 - **Skew and term-structure noise** — even when ATM IV is stable, a steepening [[volatility-skew|skew]] or a shifting [[volatility-term-structure|term structure]] can mark the book up or down.
 
 Theta is far less noisy. The decay that an option *should* shed in a calendar day is a deterministic function of its current price, [[time-to-expiration|DTE]], moneyness, and surface — given those inputs, theta is essentially a derivative of the [[black-scholes-model|Black-Scholes]] formula with respect to time. It is a smoother, more stable signal of *how much structural [[variance-risk-premium|variance-risk-premium]] the book is collecting*. P&L tells you what the market did to you yesterday; theta tells you what the book is engineered to earn if the world stays the same. As [[itpm-trading-philosophy|ITPM]] practitioners put it, *manage to theta, get judged on P&L*.
@@ -43,7 +43,7 @@ The corollary: an honest income trader tracks **realised theta capture** — act
 
 The daily target is derived top-down from an annual return objective and the proportion of that return expected from premium-selling. A common ITPM-style framework:
 
-1. **Annual return target from options income** — set as a percentage of options-allocated capital, typically **8–18% per year** for a diversified short-premium book trading [[index-options]] and large-cap equity options. Anything materially above 18% implies leverage, concentration, or a vega budget large enough to make the strategy a vol-selling fund rather than an income overlay.
+1. **Annual return target from options income** — set as a percentage of options-allocated capital, typically **8–18% per year** for a diversified short-premium book trading index-options and large-cap equity options. Anything materially above 18% implies leverage, concentration, or a vega budget large enough to make the strategy a vol-selling fund rather than an income overlay.
 2. **Convert to daily** — divide by ~252 trading days, or 365 calendar days if positions accrue weekend decay (most do).
 3. **Express as $/day** — multiply by capital allocated to the book.
 
@@ -101,7 +101,7 @@ Theta is not uniform across the [[time-to-expiration|expiration]] curve, and the
 
 ### 30–45 DTE — the sweet spot
 
-This is the canonical short-premium window used by [[tastytrade]], [[itpm-trading-philosophy|ITPM]] practitioners, and most published [[options-premium-selling|premium-selling]] research:
+This is the canonical short-premium window used by tastytrade, [[itpm-trading-philosophy|ITPM]] practitioners, and most published [[options-premium-selling|premium-selling]] research:
 
 - Theta has begun its meaningful acceleration but [[gamma]] is still manageable.
 - Vega per dollar of theta is reasonable — T/V typically lands in the 0.08–0.15 range.
@@ -314,13 +314,13 @@ The effect is to flatter realised P&L versus theoretical theta in the days *arou
 
 ### Pre-earnings IV ramp
 
-In single-name options, [[implied-volatility|IV]] rises into [[earnings-volatility|earnings]] as the market prices in the binary event. The mechanical effect on theta:
+In single-name options, [[implied-volatility|IV]] rises into earnings as the market prices in the binary event. The mechanical effect on theta:
 
 - Premium **rises**, so theta per contract rises in absolute terms.
 - But the IV ramp is a vega *headwind* — the position is bleeding to vega expansion at the same time it is accruing theta.
 - **Realised** decay is muted or negative in the days before earnings; the genuine decay only arrives in the post-earnings IV crush.
 
-ITPM-style premium sellers either avoid earnings windows entirely (dodge the binary event) or explicitly trade [[earnings-iv-crush]] as a separate strategy with its own sizing rules. For a normal income book, do not count pre-earnings theta as collected income — it is unrealised and at risk to the announcement.
+ITPM-style premium sellers either avoid earnings windows entirely (dodge the binary event) or explicitly trade earnings-iv-crush as a separate strategy with its own sizing rules. For a normal income book, do not count pre-earnings theta as collected income — it is unrealised and at risk to the announcement.
 
 ### Macro events and central-bank dates
 
@@ -335,13 +335,11 @@ The conversion from annual return target to daily theta should use **calendar da
 Modern brokers and analytics platforms expose portfolio theta directly:
 
 - **Broker-native dashboards**:
-  - [[thinkorswim]] — *Beta Weighting* + *Position Statement* shows aggregate theta, vega, and delta for the book in real time, beta-weighted to [[spy]] or another benchmark.
-  - [[tastytrade-platform|tastytrade]] — *Portfolio Greeks* widget; the platform's *theta/day* number is the canonical reference for many [[tastytrade]] practitioners.
-  - [[interactive-brokers]] — Risk Navigator and the Greeks columns in the portfolio view.
+  - [[thinkorswim]] — *Beta Weighting* + *Position Statement* shows aggregate theta, vega, and delta for the book in real time, beta-weighted to spy or another benchmark.
+  - [[tastytrade-platform|tastytrade]] — *Portfolio Greeks* widget; the platform's *theta/day* number is the canonical reference for many tastytrade practitioners.
 - **Dedicated analytics**:
-  - [[orats]] — historical IV surfaces, [[backtesting|backtested]] theta-targeted strategies, scenario analysis. Useful for evaluating T/V and realisation across long histories.
+  - orats — historical IV surfaces, [[backtesting|backtested]] theta-targeted strategies, scenario analysis. Useful for evaluating T/V and realisation across long histories.
   - [[optionnet-explorer]] — granular what-if analysis for portfolio Greeks over a planned holding period; supports [[expiration-laddering|DTE laddering]] visualisation.
-  - [[livevol]] / [[cboe-livevol]] — institutional-grade surface and Greeks data.
   - [[deribit-position-builder]] — for crypto-options books, exposes equivalent portfolio-Greeks views.
 - **Spreadsheet workflow** — many discretionary traders maintain a simple sheet with one row per position (DTE, short delta, theta, vega, max loss) and SUMs at the bottom for portfolio theta, vega, and T/V. This is sufficient for a 5–20 position book and forces the trader to confront each line item.
 
@@ -382,5 +380,4 @@ What to look for in a tool:
 
 - [[book-option-volatility-and-pricing]] — Natenberg on theta, gamma, and the structure of decay across DTE.
 - [[itpm-trading-philosophy]] — institutional-style portfolio construction with explicit theta and vega targets.
-- [[tastytrade]] — published research on the 45 DTE / 21 DTE / 50% profit-take cadence and its theta efficiency.
-- [[orats-research]] — historical [[backtesting|backtests]] of theta-targeted index condor strategies.
+- orats-research — historical [[backtesting|backtests]] of theta-targeted index condor strategies.

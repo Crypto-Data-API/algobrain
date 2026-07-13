@@ -44,7 +44,7 @@ AQR's history is the canonical case study in factor-strategy drawdown and recove
 
 - **Research as a public good**: AQR's papers ("Value and Momentum Everywhere," "Time Series Momentum," "Betting Against Beta," "Buffett's Alpha") define how practitioners think about factor premia and are foundational reading for systematic strategy design (see [[edge-taxonomy]]).
 - **Crowding signal**: AQR's AUM cycle (peak → halving → recovery) is the clearest observable proxy for capital in liquid factor strategies — relevant to [[crowding-risk|crowding]] assessment for value/momentum trades.
-- **Buffett's Alpha**: AQR's decomposition of [[berkshire-hathaway]] returns into quality/low-beta factor exposure plus leverage is a key reference for evaluating discretionary track records.
+- **Buffett's Alpha**: AQR's decomposition of berkshire-hathaway returns into quality/low-beta factor exposure plus leverage is a key reference for evaluating discretionary track records.
 - **Trend-following capacity**: AQR's managed-futures funds are among the largest systematic trend programs, making the firm a meaningful participant in futures-market flows during regime shifts.
 
 ## Key People
@@ -66,7 +66,6 @@ AQR's history is the canonical case study in factor-strategy drawdown and recove
 - [[two-sigma]]
 - [[d-e-shaw]]
 - [[man-group]]
-- [[berkshire-hathaway]]
 - [[hedge-funds-overview]]
 
 ## Sources

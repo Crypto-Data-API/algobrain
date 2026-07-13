@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [portfolio-theory, risk-management, education]
 aliases: ["Tax Efficiency", "Tax-Efficient Investing", "After-Tax Returns"]
-related: ["[[tax-loss-harvesting]]", "[[wash-sale-rules-options]]", "[[index-funds]]", "[[etfs]]", "[[rebalancing]]", "[[capital-gains-tax]]", "[[holding-period]]", "[[dca-strategy]]"]
+related: ["[[index-funds]]", "[[etfs]]", "[[rebalancing]]", "[[capital-gains-tax]]", "[[holding-period]]", "[[dca-strategy]]"]
 domain: [portfolio-theory, risk-management]
 prerequisites: []
 difficulty: intermediate
@@ -45,7 +45,7 @@ Rates and brackets change by year and jurisdiction; the *structure* is the durab
 ## Core Levers
 
 - **Holding period.** Most jurisdictions tax long-term gains more favourably than short-term. The US splits at 12 months (long-term capital-gains rates vs ordinary income); Australia grants a 50% CGT discount on assets held >12 months. This directly penalises high-turnover [[day-trading|short-term]] strategies relative to [[position-trading]] on an after-tax basis.
-- **Loss harvesting.** Realising losses to offset realised gains (and, in some regimes, ordinary income) lowers the current tax bill while maintaining market exposure — see [[tax-loss-harvesting]]. Must respect [[wash-sale-rules-options|wash-sale rules]] (US) or the ATO's anti-avoidance "wash sale" guidance (Australia).
+- **Loss harvesting.** Realising losses to offset realised gains (and, in some regimes, ordinary income) lowers the current tax bill while maintaining market exposure — see tax-loss-harvesting. Must respect wash-sale rules (US) or the ATO's anti-avoidance "wash sale" guidance (Australia).
 - **Asset location.** Place tax-inefficient assets (high-turnover funds, bonds/interest income, REIT distributions) inside tax-sheltered accounts (US IRA/401(k), Australian superannuation) and tax-efficient assets (broad equity index funds) in taxable accounts — see [[asset-location]].
 - **Vehicle choice.** [[etfs|ETFs]] are generally more tax-efficient than mutual funds because the in-kind creation/redemption mechanism avoids forced capital-gains distributions (see below). Broad [[index-funds]] have low turnover and defer gains for decades.
 - **Realisation timing.** Defer gains where possible; accelerate losses into high-income years; harvest gains in low-income years to reset cost basis at low rates.
@@ -80,7 +80,7 @@ Turnover is the single biggest controllable driver of tax drag for an active tra
 ## Common Pitfalls
 
 - **Letting the tax tail wag the investment dog.** Refusing to sell a deteriorating position purely to avoid a gain is a classic [[behavioral-finance|behavioural]] error; the tax saving rarely outweighs holding a losing thesis.
-- **Wash-sale violations.** Harvesting a loss and then re-buying a "substantially identical" security inside the wash-sale window disallows the loss (US: 30 days before/after). The fix is to rotate into a *similar but not identical* fund — see [[wash-sale-rules-options]].
+- **Wash-sale violations.** Harvesting a loss and then re-buying a "substantially identical" security inside the wash-sale window disallows the loss (US: 30 days before/after). The fix is to rotate into a *similar but not identical* fund — see wash-sale-rules-options.
 - **Ignoring the after-tax overlay in backtests.** A high pre-tax [[sharpe-ratio]] can collapse after short-term tax drag; evaluating only gross or cost-corrected returns flatters high-turnover strategies (see [[backtesting]]).
 - **Wrong lot accounting.** Defaulting to FIFO when selling can needlessly realise the largest gains; specific-ID/HIFO is often better but must be elected at the time of sale.
 - **Mutual fund "phantom" distributions.** Buying a mutual fund just before its year-end capital-gains distribution can saddle you with a tax bill on gains you did not earn.
@@ -89,8 +89,6 @@ Turnover is the single biggest controllable driver of tax drag for an active tra
 
 ## Related
 
-- [[tax-loss-harvesting]] — the primary active tax-efficiency technique
-- [[wash-sale-rules-options]] — the constraint that governs loss harvesting
 - [[index-funds]], [[etfs]] — the most tax-efficient core vehicles
 - [[rebalancing]] — managing tax cost of staying on target
 - [[holding-period]], [[capital-gains-tax]] — the rules that create the levers

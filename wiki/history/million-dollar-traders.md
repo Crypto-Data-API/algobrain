@@ -8,17 +8,17 @@ tags: [history, education, stocks, behavioral-finance]
 domain: [behavioral-finance]
 difficulty: beginner
 aliases: ["Million Dollar Traders", "BBC Million Dollar Traders", "Lex van Dam experiment"]
-related: ["[[itpm-goldman-sachs-tells-truth]]", "[[itpm]]", "[[behavioral-finance]]", "[[risk-management]]", "[[trading-psychology]]", "[[turtle-traders]]", "[[stop-loss]]", "[[position-sizing]]", "[[history]]", "[[global-financial-crisis]]"]
+related: ["[[itpm-goldman-sachs-tells-truth]]", "[[behavioral-finance]]", "[[risk-management]]", "[[trading-psychology]]", "[[turtle-traders]]", "[[stop-loss]]", "[[position-sizing]]", "[[history]]", "[[global-financial-crisis]]"]
 ---
 
-*Million Dollar Traders* is a 2009 BBC two-part documentary in which hedge fund manager **Lex van Dam** and former trader **Anton Kreil** recruited eight members of the public, gave them two weeks of training, and set them loose to run a $1 million fund (van Dam's own capital) for roughly two months. The experiment ran straight into the **2008 financial crisis**, turning it into an unusually clean real-money laboratory for the gap between amateur and professional trading. It is frequently cited in [[itpm]] (Institute of Trading and Portfolio Management) material — Kreil co-founded ITPM — as evidence that discretionary trading success is dominated by psychology and risk control, not stock-picking flair.
+*Million Dollar Traders* is a 2009 BBC two-part documentary in which hedge fund manager **Lex van Dam** and former trader **Anton Kreil** recruited eight members of the public, gave them two weeks of training, and set them loose to run a $1 million fund (van Dam's own capital) for roughly two months. The experiment ran straight into the **2008 financial crisis**, turning it into an unusually clean real-money laboratory for the gap between amateur and professional trading. It is frequently cited in itpm (Institute of Trading and Portfolio Management) material — Kreil co-founded ITPM — as evidence that discretionary trading success is dominated by psychology and risk control, not stock-picking flair.
 
 ## Key Facts
 
 | Field | Detail |
 |---|---|
 | Format | BBC Two documentary, two parts, broadcast January 2009 |
-| Creators / mentors | Lex van Dam (hedge fund manager); Anton Kreil (ex-Goldman Sachs / JPMorgan / Lehman trader, later [[itpm]] co-founder) |
+| Creators / mentors | Lex van Dam (hedge fund manager); Anton Kreil (ex-Goldman Sachs / JPMorgan / Lehman trader, later itpm co-founder) |
 | Capital | $1 million of van Dam's own money |
 | Participants | 8 members of the public with no professional finance background |
 | Training | ~2 weeks before going live |
@@ -49,7 +49,7 @@ The series is a documentary, not a controlled study, and exact return figures va
 
 The show is used in trading education for a handful of durable points:
 
-1. **Psychology dominates.** With identical training, data, and capital, outcomes diverged enormously. The differentiator was emotional discipline — cutting losses, sizing sensibly, and not revenge-trading — far more than analytical insight. This is the central [[behavioral-finance]] message and a core [[itpm]] theme.
+1. **Psychology dominates.** With identical training, data, and capital, outcomes diverged enormously. The differentiator was emotional discipline — cutting losses, sizing sensibly, and not revenge-trading — far more than analytical insight. This is the central [[behavioral-finance]] message and a core itpm theme.
 2. **Risk management is the survivable skill.** Participants who blew up did so through poor [[risk-management]] (oversized positions, no [[stop-loss|stops]]), not bad ideas. The crisis backdrop made this immediate: a single un-stopped position could erase weeks of gains. Sound [[position-sizing]] was the dividing line.
 3. **A crisis is a target-rich environment for the disciplined.** A trending, high-[[volatility]] market gives well-controlled traders asymmetric opportunities (especially on the short side), while it destroys the undisciplined. Compare the lessons in [[market-crashes]].
 4. **Talent is teachable but unevenly distributed.** Like the [[turtle-traders|Turtle Traders]] experiment, the show suggests the *rules* of trading can be taught quickly, but the *temperament* to follow them under pressure cannot — at least not in two weeks.
@@ -73,7 +73,6 @@ The show is used in trading education for a handful of durable points:
 
 ## Related
 
-- [[itpm]] — trading education programme co-founded by participant-mentor Anton Kreil
 - [[itpm-goldman-sachs-tells-truth]] — related ITPM commentary on the retail/professional gap
 - [[turtle-traders]] — the 1980s precedent the show consciously echoed
 - [[behavioral-finance]] — the psychology that drove the dispersion in outcomes

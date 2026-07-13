@@ -6,13 +6,13 @@ updated: 2026-06-20
 status: excellent
 tags: [australia, tax, portfolio-theory, strategy]
 aliases: ["Tax-Efficient Investing", "Tax Optimisation"]
-related: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[franking-credits]]", "[[superannuation]]", "[[smsf]]", "[[tax-loss-harvesting-australia]]", "[[negative-gearing]]", "[[leverage]]", "[[portfolio-construction]]", "[[dividend]]", "[[super-contribution-strategies]]", "[[stage-3-tax-cuts]]", "[[compounding]]", "[[passive-investing]]", "[[etf]]", "[[index-funds]]", "[[margin]]", "[[risk-management]]"]
+related: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[superannuation]]", "[[smsf]]", "[[tax-loss-harvesting-australia]]", "[[negative-gearing]]", "[[leverage]]", "[[portfolio-construction]]", "[[super-contribution-strategies]]", "[[stage-3-tax-cuts]]", "[[compounding]]", "[[passive-investing]]", "[[etf]]", "[[index-funds]]", "[[margin]]", "[[risk-management]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: intermediate
-prerequisites: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[franking-credits]]"]
+prerequisites: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]"]
 ---
 
-Tax-efficient investing is the practice of structuring your investments to legally minimise the tax paid on returns, thereby maximising after-tax [[compounding]]. In Australia, the combination of the [[capital-gains-tax-discount]], [[franking-credits|dividend imputation]], concessional [[superannuation]] tax rates, and the absence of a wash sale rule creates one of the richest sets of legal tax optimisation strategies available to individual investors anywhere in the developed world. The key insight is that **it is not what you earn that matters, but what you keep** — a 10% pre-tax return at a 45% marginal rate produces a 5.5% after-tax return, while the same return in an [[smsf]] pension phase produces the full 10%.
+Tax-efficient investing is the practice of structuring your investments to legally minimise the tax paid on returns, thereby maximising after-tax [[compounding]]. In Australia, the combination of the [[capital-gains-tax-discount]], dividend imputation, concessional [[superannuation]] tax rates, and the absence of a wash sale rule creates one of the richest sets of legal tax optimisation strategies available to individual investors anywhere in the developed world. The key insight is that **it is not what you earn that matters, but what you keep** — a 10% pre-tax return at a 45% marginal rate produces a 5.5% after-tax return, while the same return in an [[smsf]] pension phase produces the full 10%.
 
 > **Not tax or financial advice.** This page is general educational information about how Australian tax structures interact with investing. Tax rates, contribution caps, transfer balance caps, and bracket thresholds change frequently and depend on your personal circumstances. Dollar figures below are indicative and may be out of date — confirm current rates, caps, and thresholds with the [ATO](https://www.ato.gov.au) and a registered tax agent or financial adviser before acting. See [[australian-investor-tax]] for the underlying rules.
 
@@ -51,7 +51,7 @@ The twelve core strategies at a glance, ranked by typical impact. "Lever" maps e
 | # | Strategy | Impact | Lever | Best for | Main trade-off |
 |---|----------|--------|-------|----------|----------------|
 | 1 | Hold >12 months for [[capital-gains-tax-discount|CGT discount]] | Very high | Timing | Everyone with gains | Must defer selling |
-| 2 | Maximise [[franking-credits]] | High | Character | Low-rate entities, retirees | Concentration in AU banks/miners |
+| 2 | Maximise franking-credits | High | Character | Low-rate entities, retirees | Concentration in AU banks/miners |
 | 3 | Salary sacrifice into [[superannuation]] | Very high | Structure | High earners | Locked until preservation age |
 | 4 | [[tax-loss-harvesting-australia|Tax-loss harvest]] before 30 June | Med–high | Offset | Volatile portfolios | Needs realised gains to offset |
 | 5 | Use an [[smsf]] | Very high | Structure | Balances $200K+ | Compliance cost and admin |
@@ -84,7 +84,7 @@ The [[capital-gains-tax-discount]] is the simplest and most powerful tax strateg
 
 **Impact: High (especially for low-tax entities)**
 
-Invest in companies paying fully franked [[dividend|dividends]] — the [[franking-credits]] provide a tax credit representing corporate tax already paid.
+Invest in companies paying fully franked dividends — the franking-credits provide a tax credit representing corporate tax already paid.
 
 - At the 30% tax bracket: fully franked dividends are effectively **tax-free** (credit exactly offsets tax owed)
 - At 15% ([[superannuation]]): you receive a **cash refund** for the 15% difference
@@ -92,7 +92,7 @@ Invest in companies paying fully franked [[dividend|dividends]] — the [[franki
 
 **Key stocks for franking credit investors**: CBA, WBC, NAB, ANZ, Telstra, Wesfarmers, Woolworths, BHP — the blue-chip, fully franked dividend payers that form the backbone of Australian income portfolios.
 
-**Note**: The 45-day holding rule requires you to hold shares "at risk" for at least 45 days to claim the franking credit (if total credits exceed $5,000/year). See [[franking-credits#The 45-Day Holding Rule]].
+**Note**: The 45-day holding rule requires you to hold shares "at risk" for at least 45 days to claim the franking credit (if total credits exceed $5,000/year). See franking-credits.
 
 ### 3. Salary Sacrifice into Super
 
@@ -219,7 +219,7 @@ The concept of "asset location" — holding the right assets in the right struct
 | Asset Type | Most Tax-Efficient Location | Reason |
 |------------|---------------------------|--------|
 | **Growth assets (capital gains)** | Personal name or family trust | [[capital-gains-tax-discount|50% CGT discount]] available |
-| **Fully franked dividends** | [[smsf]] pension phase, personal (low bracket) | Cash refund of [[franking-credits]] in pension; effective rate ≤30% for all |
+| **Fully franked dividends** | [[smsf]] pension phase, personal (low bracket) | Cash refund of franking-credits in pension; effective rate ≤30% for all |
 | **Unfranked dividends** | [[superannuation]] (accumulation) | 15% tax vs up to 47% personally |
 | **Interest-bearing assets** | [[superannuation]] or mortgage offset | 15% tax on interest in super vs 47% personally; offset is tax-free |
 | **International shares (growth)** | Personal name or super | 50% discount personally; 33.33% in super; no franking benefit anyway |
@@ -256,7 +256,7 @@ The Australian financial year ends **30 June**. Most timing-dependent strategies
 - [ ] **Check holding periods** — for any planned sale, confirm whether waiting past the 12-month mark unlocks the 50% discount.
 - [ ] **Top up concessional contributions** — ensure salary sacrifice / personal deductible contributions are *received by the fund* before 30 June (allow processing time; do not rely on a 29 June transfer).
 - [ ] **Consider carry-forward (catch-up) concessional caps** — if your super balance is under the threshold and you have unused cap from prior years (see [[super-contribution-strategies]]).
-- [ ] **Verify franking eligibility** — confirm the 45-day at-risk holding rule is met for dividends where total credits exceed the small-shareholder threshold (see [[franking-credits]]).
+- [ ] **Verify franking eligibility** — confirm the 45-day at-risk holding rule is met for dividends where total credits exceed the small-shareholder threshold (see franking-credits).
 - [ ] **Reconcile DRP and corporate-action records** — reinvested dividends are still taxable; corporate actions adjust cost base (see [[australian-investor-tax]]).
 - [ ] **Plan large sales across the 30 June / 1 July boundary** — splitting a big gain across two years can keep more of it in lower brackets.
 - [ ] **Make any planned DGR donations** — deductible in the year paid.
@@ -303,14 +303,12 @@ A tax saving is a *second-order* benefit applied to a *first-order* sound portfo
 
 - [[australian-investor-tax]]
 - [[capital-gains-tax-discount]]
-- [[franking-credits]]
 - [[superannuation]]
 - [[smsf]]
 - [[tax-loss-harvesting-australia]]
 - [[negative-gearing]]
 - [[leverage]]
 - [[portfolio-construction]]
-- [[dividend]]
 - [[super-contribution-strategies]]
 - [[stage-3-tax-cuts]]
 - [[compounding]]

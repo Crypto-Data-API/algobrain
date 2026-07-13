@@ -88,13 +88,13 @@ Riot is a hybrid that must be valued in **two parts**, because the bull thesis i
 - **Power-asset optionality.** Secured gigawatt-scale ERCOT power and interconnect is itself a scarce, valuable option — convertible to whichever use (mining vs HPC) pays more at the margin.
 - **Sum-of-the-parts.** The cleanest mental model: mining segment at a BTC-producer multiple + HPC segment at a data-center multiple + BTC holdings + power-asset optionality, net of dilution.
 
-See [[valuation]], [[bitcoin]], and [[ai-data-center-power-demand]].
+See valuation, [[bitcoin]], and [[ai-data-center-power-demand]].
 
 ## Trading & Options Playbook
 
 - **Catalyst calendar:** **bitcoin price moves** (the dominant driver), **monthly production updates**, hash-rate growth, **new AI/HPC colocation contracts and MW announcements** (the re-rate catalysts), ERCOT power-credit dynamics, and equity/BTC sales (dilution events).
 - **Options / IV:** **Tier-1 ultra-liquid** with extremely high daily options volume — a perennial retail favorite for leveraged BTC bets, [[gamma-squeeze|gamma squeezes]], and [[short-squeeze|short squeezes]]. Very high [[implied-volatility|implied volatility]]; commonly used for [[gamma-scalping|gamma scalping]] and short-dated directional structures around BTC moves.
-- **Index/ETF membership:** not in the [[s-and-p-500|S&P 500]]; a constituent of crypto-mining and blockchain thematic ETFs (e.g. WGMI) and a high-beta component of broad crypto-equity baskets, tying flows to [[bitcoin]] and crypto sentiment. Trades on the [[nasdaq|Nasdaq]].
+- **Index/ETF membership:** not in the S&P 500; a constituent of crypto-mining and blockchain thematic ETFs (e.g. WGMI) and a high-beta component of broad crypto-equity baskets, tying flows to [[bitcoin]] and crypto sentiment. Trades on the Nasdaq.
 - **Correlated names:** [[mara]], [[microstrategy]], [[core-scientific]], [[iren]], [[cleanspark]]; broadly tracks [[bitcoin]] with high beta, and increasingly co-moves with AI-data-center sentiment on HPC headlines.
 
 ## Capital Structure & Dilution
@@ -144,7 +144,6 @@ Bitcoin miner; ~30K avg daily contracts; active retail options trading tied to B
 - [[iren]] — HPC-pivot peer
 - [[cleanspark]] — pure-play miner peer
 - [[microstrategy]] — BTC-treasury benchmark
-- [[valuation]]
 - [[gamma-scalping]]
 - [[gamma-squeeze]]
 - [[short-squeeze]]
@@ -152,12 +151,10 @@ Bitcoin miner; ~30K avg daily contracts; active retail options trading tied to B
 - [[volatility]]
 - [[options]]
 - [[options-greeks]]
-- [[s-and-p-500]]
-- [[nasdaq]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - Riot Platforms Q1 2026 results (revenue $167M, data-center $33M): https://www.mexc.com/news/1068004
 - Riot sells 3,778 BTC in Q1 2026 for data-center expansion: https://news.bitcoin.com/riot-platforms-sells-3778-bitcoin-in-q1-2026-raising-289-5-million-for-data-center-expansion/
 - Riot Q1 2026 10-Q (SEC): https://www.sec.gov/Archives/edgar/data/0001167419/000110465926053120/riot-20260331x10q.htm

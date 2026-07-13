@@ -20,7 +20,7 @@ expected_sharpe: 1.0
 expected_max_drawdown: 0.40
 breakeven_cost_bps: 30
 backtest_status: walk-forward-validated
-related: ["[[variance-risk-premium]]", "[[options-premium-selling]]", "[[short-straddle]]", "[[short-strangle]]", "[[cboe-put-putwrite-index]]", "[[cboe-bxm-buywrite-index]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[vix-trading]]", "[[skew-trading]]", "[[tail-risk-hedging]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
+related: ["[[variance-risk-premium]]", "[[options-premium-selling]]", "[[short-straddle]]", "[[short-strangle]]", "[[delta-hedging]]", "[[gamma-scalping]]", "[[vix-trading]]", "[[skew-trading]]", "[[tail-risk-hedging]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
 ---
 
 # Volatility Carry
@@ -64,7 +64,7 @@ When dealers are net long volatility from customer flow, their gamma hedging sta
 
 ## Null Hypothesis
 
-Under no-edge conditions: **IV ≈ RV in expectation**, so expected gross return on a delta-hedged short straddle is ~zero. After bid-ask, slippage on delta hedges, and assignment/exercise costs, expected net return is **modestly negative**. A vol carry strategy that does not produce statistically significant outperformance over the [[cboe-put-putwrite-index|PUT]] or [[cboe-bxm-buywrite-index|BXM]] benchmarks (which are themselves the simplest possible vol carry implementations) provides no evidence of skill — it would be consistent with the null.
+Under no-edge conditions: **IV ≈ RV in expectation**, so expected gross return on a delta-hedged short straddle is ~zero. After bid-ask, slippage on delta hedges, and assignment/exercise costs, expected net return is **modestly negative**. A vol carry strategy that does not produce statistically significant outperformance over the PUT or BXM benchmarks (which are themselves the simplest possible vol carry implementations) provides no evidence of skill — it would be consistent with the null.
 
 A meaningful test for skill on top of the structural premium requires:
 
@@ -80,7 +80,7 @@ The canonical short-vol carry trade on SPX:
 
 ### Entry
 
-- **Underlying**: SPX (preferred — [[section-1256-contracts]] tax treatment, deep liquidity, no [[wash-sale-rules-options|wash sale]] friction). Alternatively SPY, ES futures options, or NDX/RUT for diversification.
+- **Underlying**: SPX (preferred — [[section-1256-contracts]] tax treatment, deep liquidity, no wash sale friction). Alternatively SPY, ES futures options, or NDX/RUT for diversification.
 - **Structure**: Short ATM straddle, ~30-delta strangle, or 25-delta cash-secured put. Strangles are the most common professional choice for risk balance.
 - **Tenor**: 30-45 days to expiration (DTE) at entry. This is the [[theta]]-rich zone where time decay accelerates without holding excessive [[gamma]] risk.
 - **Cadence**: New position every 1-2 weeks, laddered across expiries (avoids concentrating exposure in a single roll cycle). See [[expiration-laddering]].
@@ -118,8 +118,8 @@ For most retail/PM-account traders, **un-hedged short strangles are simpler** an
 |---|---|---|---|---|---|
 | Short ATM straddle (delta-hedged) | Highest (pure variance) | High (daily hedge) | Symmetric-ish gamma | [[section-1256-contracts\|§1256]] if SPX | Vol fund / PM |
 | Short ~25-delta strangle | High | Moderate | Wider safe band, fatter tail | §1256 if SPX | Professional default |
-| Cash-secured short put (25-delta) | Directional-tilted | Low | One-sided downside | §1256 if index | [[cboe-put-putwrite-index\|PUT]]-style |
-| Covered call | Capped-upside variant | Low | Long-equity + short call | varies | [[cboe-bxm-buywrite-index\|BXM]]-style |
+| Cash-secured short put (25-delta) | Directional-tilted | Low | One-sided downside | §1256 if index | PUT-style |
+| Covered call | Capped-upside variant | Low | Long-equity + short call | varies | BXM-style |
 | [[variance-swap]] (OTC) | Pure, path-independent | Low to trade, ISDA overhead | Convex; cap basis | OTC | Institutional |
 | Short [[vix-futures]] / inverse ETP | Term-structure carry, **not** realised VRP | Low | Catastrophic (XIV precedent) | varies | (Historically) retail — high blow-up risk |
 
@@ -315,9 +315,9 @@ Numerical thresholds at which the strategy should be paused or retired (see [[wh
 
 - **Persistent, well-documented premium** — VRP has been studied for 30+ years and survives across every major paper that has tested it
 - **Positive expectancy with defined edge mechanism** (insurance pricing, not behavioral arbitrage)
-- **Index implementation enjoys §1256 tax treatment** — 60/40 blended rate, no [[wash-sale-rules-options|wash sale]] complications
+- **Index implementation enjoys §1256 tax treatment** — 60/40 blended rate, no wash sale complications
 - **Capacity is large** at the index level — institutional-scale strategy
-- **Benchmarkable** — direct comparison to [[cboe-put-putwrite-index|CBOE PUT]] and [[cboe-bxm-buywrite-index|BXM]] indices; transparency on whether the implementation adds value
+- **Benchmarkable** — direct comparison to CBOE PUT and BXM indices; transparency on whether the implementation adds value
 - **High hit rate** at the trade level (70-80% with 50% profit targets) gives smooth-looking equity curves, supporting psychological discipline
 - **Non-directional** — does not require directional view on equities; complements directional/momentum books
 - **Funding-friendly** — naked short premium can be done in a [[portfolio-margin]] account at meaningful leverage
@@ -350,8 +350,6 @@ Numerical thresholds at which the strategy should be paused or retired (see [[wh
 - [[options-premium-selling]] — broader category
 - [[short-straddle]] — common implementation
 - [[short-strangle]] — preferred professional implementation
-- [[cboe-put-putwrite-index]] — benchmark index for cash-secured put writing
-- [[cboe-bxm-buywrite-index]] — benchmark index for covered calls (alternative VRP harvest)
 - [[delta-hedging]] — required for pure variance capture
 - [[gamma-scalping]] — diagnostic and the long-vol counterpart
 - [[vix-trading]] — related vol product complex

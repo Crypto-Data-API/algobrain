@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [commodities, agricultural, futures]
 aliases: ["Coffee", "KC", "Arabica Coffee"]
-related: ["[[sugar]]", "[[cocoa]]", "[[cotton]]", "[[commodities]]", "[[intercontinental-exchange]]", "[[commodity-seasonality-patterns]]"]
+related: ["[[sugar]]", "[[cocoa]]", "[[cotton]]", "[[commodities]]", "[[commodity-seasonality-patterns]]"]
 ---
 
 Coffee is the **second most traded commodity by physical volume** after crude oil and one of the world's most widely consumed beverages. ICE Arabica Coffee futures (KC) serve as the global pricing benchmark -- known as the "C market." Robusta coffee trades on ICE Europe (London). Brazil produces ~35% of the world's coffee (predominantly Arabica), followed by Vietnam (~15%, predominantly Robusta). Coffee is extremely weather-sensitive, with Brazilian frost events and droughts capable of causing historic price spikes. Demand is relatively **price-inelastic** -- people continue drinking coffee regardless of price, making supply shocks the dominant driver of volatility. (Source: [[2026-04-14-commodities-research-framework]])
@@ -15,7 +15,7 @@ Coffee is the **second most traded commodity by physical volume** after crude oi
 
 | Attribute | Detail |
 |-----------|--------|
-| **Exchange** | [[intercontinental-exchange|ICE US (Arabica)]], ICE Europe (Robusta) |
+| **Exchange** | ICE US (Arabica), ICE Europe (Robusta) |
 | **Ticker** | KC (Arabica), RC (Robusta) |
 | **Contract size** | KC: 37,500 lbs; RC: 10 tonnes |
 | **Tick size** | KC: $0.0005/lb = $18.75 |
@@ -131,7 +131,6 @@ The biennial cycle overlays this: off-year seasons (lower Brazilian production) 
 - [[cocoa]] -- fellow "soft" commodity with weather sensitivity
 - [[cotton]] -- soft commodity complex
 - [[commodity-seasonality-patterns]] -- seasonal trading analysis
-- [[intercontinental-exchange]] -- exchange listing coffee futures
 - [[commodities]] -- commodity markets overview
 
 ## Sources

@@ -140,7 +140,7 @@ Comfortable for retail and small funds on liquid, high-volume underlyings (index
 - **Volatility expansion**: a rising-IV environment marks the short-vega position to a loss well before expiry.
 - **High [[gamma]] near expiry**: in the final week, small price moves create large P&L swings around the ATM short strike.
 - **[[pin-risk]]**: at expiration with the underlying near the strike, it is uncertain whether the ATM shorts will be assigned, creating overnight directional risk.
-- **Early [[assignment]]**: American-style ATM shorts (especially the call near ex-[[dividend]] or the put when deep ITM) can be assigned early, breaking the hedge.
+- **Early [[assignment]]**: American-style ATM shorts (especially the call near ex-dividend or the put when deep ITM) can be assigned early, breaking the hedge.
 
 ## Kill criteria
 

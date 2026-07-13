@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2021
 headquarters: ""
 website: "https://artblocks.io"
-related: ["[[nft]]", "[[ethereum]]", "[[nft-trading]]", "[[autoglyphs]]", "[[generative-art]]"]
+related: ["[[nft]]", "[[ethereum]]", "[[nft-trading]]", "[[autoglyphs]]"]
 ---
 
 **Art Blocks** is an [[ethereum]]-based platform for long-form generative art [[nft|NFTs]], where artists upload algorithms that generate unique artworks at the moment of minting. Founded by Erick Calderon (known as **Snowfro**), Art Blocks launched in November 2020 and exploded in the summer of 2021, generating over **$1.4 billion** in total sales volume. Its flagship collection, **Fidenza** by Tyler Hobbs, is widely considered the pinnacle of generative art NFTs, with individual pieces selling for over $3 million. Art Blocks legitimized NFTs as a genuine art medium and attracted serious attention from the traditional art world.
@@ -152,7 +152,6 @@ The NFT market is deeply depressed in this cycle, with the crypto [[fear-and-gre
 - [[bored-ape-yacht-club]] -- The dominant PFP collection (contrasting approach to NFT value)
 - [[ethereum]] -- The blockchain Art Blocks operates on
 - [[nft-trading]] -- Trading strategies for NFTs
-- [[generative-art]] -- The broader generative art movement
 - [[erc-721]] -- Token standard underlying Art Blocks projects
 - [[nft-floor-price]], [[nft-rarity-scoring]], [[nft-aggregators]]
 - [[opensea]], [[blur]] -- Secondary marketplaces

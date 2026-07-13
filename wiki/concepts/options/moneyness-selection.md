@@ -28,7 +28,6 @@ related:
   - "[[debit-spread]]"
   - "[[iron-condors]]"
   - "[[leaps]]"
-  - "[[earnings-announcement]]"
   - "[[iv-crush]]"
   - "[[volatility-risk-premium]]"
   - "[[probability-of-profit]]"
@@ -173,7 +172,7 @@ A one-table cheat sheet that collapses the trade-offs above. Pair this with [[st
 | Tail hedge / portfolio insurance | **OTM put (5-16d)** | Cheap convexity; captures skew | Bleeds [[theta]] when nothing happens |
 | Finance a directional bet | **Debit spread: ITM long + OTM short** | Sell extrinsic to fund intrinsic | Caps upside at short strike |
 
-The single most consequential mistake in moneyness selection is buying OTM premium into an [[earnings-announcement]]: the [[iv-crush]] guts the entirely-extrinsic premium even when the directional call is right (see [[earnings-iv-crush]]).
+The single most consequential mistake in moneyness selection is buying OTM premium into an earnings-announcement: the [[iv-crush]] guts the entirely-extrinsic premium even when the directional call is right (see earnings-iv-crush).
 
 ## Greek Behavior Across Moneyness
 
@@ -254,7 +253,7 @@ Implications for moneyness selection:
 
 ## Common Pitfalls
 
-1. **Buying OTM premium into earnings.** The premium is entirely extrinsic and the [[earnings-announcement|earnings]] [[iv-crush]] destroys it regardless of direction. The directional move must beat the *full* premium plus the crush.
+1. **Buying OTM premium into earnings.** The premium is entirely extrinsic and the earnings [[iv-crush]] destroys it regardless of direction. The directional move must beat the *full* premium plus the crush.
 2. **Confusing absolute and percentage theta.** ATM has the largest *dollar* decay; OTM has the largest decay *as a percent of premium*. Income sellers want the latter, which is why short premium lives OTM.
 3. **Over-paying for OTM convexity.** Cheap-looking OTM calls/puts carry deeply negative expected value because of the [[volatility-risk-premium]]. "Cheap in dollars" is not "cheap in EV."
 4. **Treating deep ITM as risk-free leverage.** Deep-ITM stock replacement still carries the full directional downside down to the strike; the embedded put only caps loss at the premium paid.
@@ -275,7 +274,6 @@ Implications for moneyness selection:
 - [[spread-width-selection]] — width choice given a chosen moneyness
 - [[implied-volatility]], [[iv-rank-and-iv-percentile]] — IV context that shifts optimal moneyness
 - [[iv-crush]] — why OTM premium evaporates after earnings
-- [[earnings-announcement]] — event that punishes OTM premium buyers
 - [[volatility-risk-premium]] — structural reason OTM buyers lose on average
 - [[probability-of-profit]] — moneyness expressed as a probability
 - [[long-call]], [[long-put]], [[credit-spread]], [[debit-spread]], [[iron-condors]] — strategies with canonical moneyness choices

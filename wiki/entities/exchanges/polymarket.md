@@ -10,12 +10,12 @@ entity_type: exchange
 founded: 2020
 headquarters: "New York City, USA"
 website: "https://polymarket.com"
-related: ["[[kalshi]]", "[[prediction-markets]]", "[[polygon]]", "[[intercontinental-exchange]]", "[[shayne-coplan]]", "[[ai-prediction-markets]]", "[[prediction-market-strategies]]", "[[polymarket-vs-kalshi]]", "[[palantir-technologies]]", "[[market-efficiency]]", "[[wisdom-of-crowds]]", "[[event-driven]]", "[[arbitrage]]", "[[usdc]]"]
+related: ["[[kalshi]]", "[[prediction-markets]]", "[[polygon]]", "[[shayne-coplan]]", "[[ai-prediction-markets]]", "[[prediction-market-strategies]]", "[[polymarket-vs-kalshi]]", "[[market-efficiency]]", "[[wisdom-of-crowds]]", "[[event-driven]]", "[[arbitrage]]", "[[usdc]]"]
 ---
 
 # Polymarket
 
-**Polymarket** is the world's largest decentralized [[prediction-markets|prediction market]] platform, founded in 2020 by [[shayne-coplan|Shayne Coplan]]. Users trade binary "Yes" or "No" shares on real-world event outcomes — from elections and geopolitics to crypto prices, AI milestones, and pop culture — all denominated in USDC on the [[polygon|Polygon]] blockchain. As of October 2025, Polymarket carries a $9 billion valuation following a $2 billion strategic investment from [[intercontinental-exchange|Intercontinental Exchange (ICE)]], the parent company of the [[nyse|NYSE]]. (Source: [[polymarket-wiki-guide]])
+**Polymarket** is the world's largest decentralized [[prediction-markets|prediction market]] platform, founded in 2020 by [[shayne-coplan|Shayne Coplan]]. Users trade binary "Yes" or "No" shares on real-world event outcomes — from elections and geopolitics to crypto prices, AI milestones, and pop culture — all denominated in USDC on the [[polygon|Polygon]] blockchain. As of October 2025, Polymarket carries a $9 billion valuation following a $2 billion strategic investment from Intercontinental Exchange (ICE), the parent company of the NYSE. (Source: [[polymarket-wiki-guide]])
 
 ## How It Works
 
@@ -85,8 +85,8 @@ As of April 2026, Polymarket hosts **133 active LLM/AI-specific prediction marke
 | **Jul 2025** | Zelenskyy suit controversy — $58M bet; UMA oracle reverses decision twice; manipulation allegations |
 | **Jul 2025** | Acquires QCEX (CFTC-licensed derivatives exchange) for $112M; enables legal US relaunch |
 | **Aug 2025** | Donald Trump Jr. joins as advisor (via 1789 Capital) |
-| **Oct 2025** | [[intercontinental-exchange|ICE]] invests $2B at $9B valuation; becomes global distributor of Polymarket event data |
-| **Mar 2026** | Partnership with [[palantir-technologies|Palantir]] and TWG AI — Vergence AI engine for sports integrity monitoring |
+| **Oct 2025** | ICE invests $2B at $9B valuation; becomes global distributor of Polymarket event data |
+| **Mar 2026** | Partnership with Palantir and TWG AI — Vergence AI engine for sports integrity monitoring |
 | **2026** | 20+ federal lawsuits across 7 US states challenging prediction markets as gambling |
 
 (Source: [[polymarket-wiki-guide]])
@@ -238,7 +238,6 @@ As of April 2026, the POLY token has been confirmed but not launched:
 - [[ai-prediction-markets]] — AI integration with prediction markets
 - [[shayne-coplan]] — Founder
 - [[polygon]] — Underlying blockchain
-- [[intercontinental-exchange]] — Strategic investor (NYSE parent)
 - [[wisdom-of-crowds]] — Why real-money markets aggregate information
 - [[market-efficiency]] — The efficiency hypothesis applied to event markets
 - [[event-driven]] — Trading scheduled and unscheduled events

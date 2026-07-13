@@ -10,7 +10,6 @@ website: https://fred.stlouisfed.org
 related:
   - "[[alpha-vantage]]"
   - "[[fear-and-greed-index]]"
-  - "[[finviz]]"
 ---
 
 # FRED (Federal Reserve Economic Data)

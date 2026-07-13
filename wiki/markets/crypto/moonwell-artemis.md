@@ -9,7 +9,7 @@ aliases: ["WELL", "Moonwell Artemis", "Moonwell Apollo"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://moonwell.fi"
-related: ["[[crypto-markets]]", "[[lending]]", "[[base]]", "[[defi]]", "[[governance-token]]", "[[compound]]", "[[aave]]", "[[liquidity]]", "[[oracle]]"]
+related: ["[[crypto-markets]]", "[[lending]]", "[[base]]", "[[defi]]", "[[governance-token]]", "[[compound]]", "[[aave]]", "[[liquidity]]"]
 ---
 
 # Moonwell
@@ -179,7 +179,6 @@ Moonwell's strategy is to win share on a specific high-growth chain (Base) with 
 - [[base]]
 - [[compound]]
 - [[aave]]
-- [[oracle]]
 - [[defi]]
 
 ---

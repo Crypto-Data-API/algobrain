@@ -24,12 +24,12 @@ The first five categories describe *alpha* — returns from exploiting an ineffi
 Returns from being on the right side of a forced flow. Someone *has to* trade, regardless of price, and you provide the liquidity (or front-run the flow).
 
 Examples:
-- **Index rebalancing** — when a stock is added to the S&P 500, index funds *must* buy it. See [[index-arbitrage]].
+- **Index rebalancing** — when a stock is added to the S&P 500, index funds *must* buy it. See index-arbitrage.
 - **ETF creation/redemption** — authorized participants forced to deliver baskets. See [[etf-arbitrage]].
 - **Margin liquidations** — leveraged longs forced out at predictable price levels. See [[liquidation]], [[stop-hunting-and-liquidity-sweeps]].
 - **Quarter-end rebalancing** — pension funds forced to sell winners and buy losers to maintain target weights. See [[expiration-and-rebalancing-flows]].
-- **Convertible bond issuance** — convert arb desks forced to short the underlying. See [[convertible-arbitrage]].
-- **Dividend capture / ex-div mechanics** — see [[dividend-capture]], [[dividend-arbitrage]].
+- **Convertible bond issuance** — convert arb desks forced to short the underlying. See convertible-arbitrage.
+- **Dividend capture / ex-div mechanics** — see dividend-capture, dividend-arbitrage.
 
 **Who is on the other side?** A non-discretionary participant: a passive fund, a broker hedging client flow, a leveraged trader getting margin-called. They lose by design; you collect the premium for warehousing risk or providing liquidity.
 
@@ -42,7 +42,7 @@ Examples:
 Returns from systematic human cognitive biases. Market participants overreact, anchor, herd, and avoid losses irrationally — and these biases produce price patterns that mean-revert or extend predictably.
 
 Examples:
-- **Post-earnings drift** — investors underreact to earnings surprises; price drifts in the direction of the surprise for 60+ days. See [[earnings-momentum]], [[post-earnings-announcement-drift]].
+- **Post-earnings drift** — investors underreact to earnings surprises; price drifts in the direction of the surprise for 60+ days. See earnings-momentum, post-earnings-announcement-drift.
 - **Momentum** — winners keep winning because investors anchor to old prices and underreact to new information. See [[momentum-anomaly]].
 - **Lottery preference / low-vol anomaly** — investors overpay for high-volatility "lottery ticket" stocks, leaving low-vol stocks underpriced. See [[low-volatility-anomaly]].
 - **Disposition effect** — traders sell winners too early and ride losers too long, creating persistent mean-reversion in losers. See [[prospect-theory]].
@@ -76,10 +76,10 @@ Examples:
 Returns from having a better *model* of the same data everyone else has. The information is public; your interpretation is sharper.
 
 Examples:
-- **Better volatility surfaces** — superior options pricing models. See [[volatility-arbitrage]], [[dispersion-trading]].
+- **Better volatility surfaces** — superior options pricing models. See [[volatility-arbitrage]], dispersion-trading.
 - **Better correlation forecasting** — cleaner cointegration estimates for [[pairs-trading]] and [[statistical-arbitrage]].
 - **Better regime detection** — knowing which model to use when. See [[regime-detection]], [[regime-adaptive-strategy]].
-- **Better factor models** — proprietary risk decomposition that lets you isolate alpha from beta. See [[factor-investing]], [[long-short-equity]].
+- **Better factor models** — proprietary risk decomposition that lets you isolate alpha from beta. See [[factor-investing]], long-short-equity.
 - **Better term-structure models** — for [[yield-curve-trading]], [[carry-trade]].
 
 **Who is on the other side?** Participants using cruder models — usually because they're optimizing for simplicity, speed, or interpretability rather than accuracy.

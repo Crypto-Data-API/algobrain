@@ -13,7 +13,7 @@ source_date: 2026-05-14
 source_file: "raw/articles/2026-04-22-gap-finder-ai-2026-major-news-stories.md"
 confidence: medium
 claims_count: 30
-related: ["[[2026-anthropic-blackstone-jv]]", "[[2026-anthropic-finance-agents-launch]]", "[[2026-claude-opus-4-7-finance-benchmark]]", "[[2026-uniswap-v4-launch]]", "[[2026-chatgpt-mainstream-adoption]]", "[[llama-fin]]", "[[xai]]", "[[google]]", "[[xlstm-ts]]", "[[graph-neural-networks-finance]]", "[[federated-learning-aml]]", "[[causal-inference-finance]]", "[[earnings-surprise-prediction]]"]
+related: ["[[2026-anthropic-blackstone-jv]]", "[[2026-anthropic-finance-agents-launch]]", "[[2026-claude-opus-4-7-finance-benchmark]]", "[[2026-uniswap-v4-launch]]", "[[2026-chatgpt-mainstream-adoption]]", "[[llama-fin]]", "[[xai]]", "[[xlstm-ts]]", "[[graph-neural-networks-finance]]", "[[federated-learning-aml]]", "[[causal-inference-finance]]"]
 ---
 
 Perplexity deep-research run on 2026-05-14 via `tools/gap_finder.py --topic "AI 2026 major news stories" --deep`. Surveyed the wiki's coverage against the 2024-2026 landscape of AI-in-trading developments — AI agents, LLMs in finance, multimodal models, DeFi infrastructure, graph methods, federated learning, and causal inference. The output drove a wave of new entity pages (Anthropic finance-agents launch, Claude Opus 4.7 finance benchmark, Anthropic-Blackstone JV, Uniswap v4 launch), new news-event pages, and a set of concept pages including causal inference and earnings surprise prediction.
@@ -33,7 +33,7 @@ Perplexity deep-research run on 2026-05-14 via `tools/gap_finder.py --topic "AI 
 
 - **Anthropic** — Most aggressive financial-services push of 2026; deployments at JPMorgan Chase, Goldman Sachs, Citi, AIG, Visa.
 - **OpenAI** — Mainstream adoption metrics from Q1 2026 update.
-- **Google (Gemini)** — Stockbroker AI application; emotion-free analysis pitch. See [[google]].
+- **Google (Gemini)** — Stockbroker AI application; emotion-free analysis pitch. See google.
 - **xAI (Grok for Business)** — Enterprise AI controls for financial research teams. See [[xai]].
 - **JP Morgan LOXM** — Institutional algo-execution system reducing slippage; concrete example of proprietary AI at scale.
 - **Trade Ideas** — Retail AI stock-scanner counterpoint to institutional systems.
@@ -44,7 +44,7 @@ Perplexity deep-research run on 2026-05-14 via `tools/gap_finder.py --topic "AI 
 - **AI agents in trading** — Autonomous multi-agent systems dynamically interpreting market conditions, earnings calls, filings; distinct from traditional rule-based algos.
 - **Large language models in trading** — Surveyed across 84 studies (2022-2025) covering forecasting, sentiment, portfolio management, and document analysis.
 - **Multimodal AI and transformer architectures** — Modality-aware transformers fusing text, audio, visuals, and time-series for prediction.
-- **Earnings surprise prediction** — Multimodal LLMs over the FinCall-Surprise dataset (2,688 calls with synchronized text/audio/slides); gains over text-only but class-imbalance caveats. ⬛ page created 2026-05-14 — see [[earnings-surprise-prediction]].
+- **Earnings surprise prediction** — Multimodal LLMs over the FinCall-Surprise dataset (2,688 calls with synchronized text/audio/slides); gains over text-only but class-imbalance caveats. ⬛ page created 2026-05-14 — see earnings-surprise-prediction.
 - **Graph neural networks in finance** — Node-level Graph Attention Networks (NGAT) achieving >70% long-term stock prediction accuracy versus 50-60% benchmarks. See [[graph-neural-networks-finance]].
 - **Causal inference in finance** — Causal forests and Double Machine Learning revealing volatility of options-implied risk appetite and market liquidity as key causal drivers of market troughs. ⬛ page created 2026-05-14 — see [[causal-inference-finance]].
 - **Federated learning for AML** — Private Vertical FL for Anti-Money Laundering (PV4AML) combining cryptographic techniques to let banks build ensemble models without sharing private data. See [[federated-learning-aml]].

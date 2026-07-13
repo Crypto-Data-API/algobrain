@@ -19,7 +19,7 @@ Futures contracts and exchange-traded funds (ETFs) are the two primary vehicles 
 
 [[commodities]] are unique among asset classes because most investors cannot (or do not want to) take physical delivery. This creates a market for financial instruments that provide price exposure without warehouse receipts. The two dominant vehicles are:
 
-1. **Futures contracts** — standardized agreements to buy or sell a commodity at a future date, traded on exchanges like [[cme-group]] and [[intercontinental-exchange]]
+1. **Futures contracts** — standardized agreements to buy or sell a commodity at a future date, traded on exchanges like [[cme-group]] and intercontinental-exchange
 2. **Commodity ETFs** — exchange-traded funds that hold futures contracts, physical commodities, or commodity equities, accessible from any stock brokerage
 
 Each vehicle has structural advantages and disadvantages that materially affect returns, especially over longer holding periods.
@@ -204,6 +204,5 @@ The key asymmetry for vehicle choice: a **physically-backed** ETF (GLD, SLV) has
 - [[crude-oil]]
 - [[natural-gas]]
 - [[cme-group]]
-- [[intercontinental-exchange]]
 - [[physical-vs-paper-commodities]]
 - [[spot-vs-futures-trading]]

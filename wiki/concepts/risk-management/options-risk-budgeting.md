@@ -12,7 +12,7 @@ prerequisites: ["[[options-greeks]]", "[[risk-budgeting]]"]
 difficulty: advanced
 ---
 
-Options risk budgeting is the practice of allocating a portfolio's total risk capacity across [[options-greeks|Greek-based exposures]] (delta, gamma, vega, theta, rho) and across simultaneously running options trades, rather than allocating dollars of premium. Because individual options P&L is non-linear in the underlying — and because Greeks aggregate non-trivially across strikes, expirations, and underlyings — a budget expressed purely in dollars-at-risk is almost always misleading. The [[itpm|ITPM]] curriculum and most professional options desks therefore build their risk framework around *Greek caps* and *scenario losses* rather than dollar premium spent.
+Options risk budgeting is the practice of allocating a portfolio's total risk capacity across [[options-greeks|Greek-based exposures]] (delta, gamma, vega, theta, rho) and across simultaneously running options trades, rather than allocating dollars of premium. Because individual options P&L is non-linear in the underlying — and because Greeks aggregate non-trivially across strikes, expirations, and underlyings — a budget expressed purely in dollars-at-risk is almost always misleading. The ITPM curriculum and most professional options desks therefore build their risk framework around *Greek caps* and *scenario losses* rather than dollar premium spent.
 
 This page is the options-specific complement to [[risk-budgeting]] (which covers the linear, mean-variance/HRP world). It describes how to size a multi-Greek risk budget, allocate it across strategy sleeves and underlyings, and re-budget when conditions break the model. It is downstream of [[position-sizing]] and [[risk-management]] generally, and the binding tail constraint it enforces is the [[risk-of-ruin|risk-of-ruin]] survivability constraint — a Greek budget that passes every cap but allows a 4σ shock to halve the book has not actually been budgeted.
 
@@ -120,7 +120,7 @@ The tail-hedge sleeve is critical: short-premium books have hidden left-tail ris
 Greeks aggregate at the underlying level but risks correlate at the sector/factor level. Concentration limits:
 
 - **Single underlying**: no single name should contribute more than 20-25% of portfolio gamma, vega, or beta-weighted delta. For short-premium sleeves, more like 10-15% per name.
-- **Sector**: cap at 30-40% of any single Greek per [[gics-sector|GICS sector]]. A book of 8 short strangles all in tech is *one* trade, not 8 — they all crush together in a tech selloff.
+- **Sector**: cap at 30-40% of any single Greek per GICS sector. A book of 8 short strangles all in tech is *one* trade, not 8 — they all crush together in a tech selloff.
 - **Factor**: track exposure to [[size-factor]], [[value-factor]], [[momentum-factor]], and especially [[low-vol-factor]] (since low-vol stocks dominate short-premium screens). Cap factor exposure at ±0.5σ of the factor return.
 - **Correlation regime**: in a [[risk-off]] correlation spike (correlations → 1), the *effective* concentration is much higher than the nominal. Pre-stress concentration limits assuming correlations of 0.8 across longs and 0.8 across shorts.
 
@@ -137,7 +137,7 @@ Expiration buckets behave differently and need separate caps:
 | **Near-dated** | 45-90 days | Medium gamma | Medium-high vega | Calendar-spread anchor; vol-arb sleeve |
 | **Long-dated / LEAPS** | 90+ days | Low gamma | Highest vega, material rho | Directional bets with long horizon; small gamma but big vega |
 
-Suggested gamma cap: at most 60% of total portfolio gamma should sit in 0-21 DTE options. Anything more and a single 2-sigma move can blow through the daily VaR. Vega cap: limit *any single expiration cycle* to 40% of the portfolio's total vega — otherwise an idiosyncratic shock to one event (e.g. an [[earnings-announcement|earnings IV crush]]) dominates the book.
+Suggested gamma cap: at most 60% of total portfolio gamma should sit in 0-21 DTE options. Anything more and a single 2-sigma move can blow through the daily VaR. Vega cap: limit *any single expiration cycle* to 40% of the portfolio's total vega — otherwise an idiosyncratic shock to one event (e.g. an earnings IV crush) dominates the book.
 
 ## Re-Budgeting Triggers
 
@@ -293,7 +293,6 @@ The deepest failure is the [[the-theta-trap|theta trap]]: a Greek budget that lo
 
 ## Sources
 
-- [[itpm]] — risk-budgeting discipline as taught in the ITPM curriculum
 - [[itpm-trade-construction-playbook]] — companion workflow for trade construction
 - [[book-option-volatility-and-pricing]] — Natenberg on portfolio-level Greek management
 - [[book-dynamic-hedging]] — Taleb on non-linear risk and scenario thinking

@@ -64,7 +64,7 @@ Real rates affect commodities beyond precious metals through several channels:
 - **Gold positioning**: when real rates are falling or deeply negative, maintain or increase [[gold]] allocation. When real rates are rising sharply, reduce gold exposure or hedge.
 - **Regime identification**: a shift from positive to negative real rates (or vice versa) is a major regime change for precious metals and commodities generally.
 - **Divergence signal**: if gold rallies despite rising real rates, non-rate factors (geopolitical demand, central bank buying, supply constraints) are dominating — the move may have structural support beyond the rate cycle.
-- **Cross-asset**: real rates also drive [[growth-vs-value|growth vs value]] rotation in equities, making them a useful regime indicator beyond commodities.
+- **Cross-asset**: real rates also drive growth vs value rotation in equities, making them a useful regime indicator beyond commodities.
 
 ## Sources
 

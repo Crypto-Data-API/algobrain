@@ -9,12 +9,12 @@ aliases: ["PYTH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://pyth.network/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[defi]]", "[[ethereum]]", "[[bitcoin]]", "[[hyperliquid]]", "[[oracle]]", "[[chainlink]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[defi]]", "[[ethereum]]", "[[bitcoin]]", "[[hyperliquid]]", "[[chainlink]]"]
 ---
 
 # Pyth Network
 
-**Pyth Network** (ticker: PYTH) is a decentralised [[oracle]] network, native to [[solana]] but distributed across 50+ blockchains, designed to provide real-time financial market data (prices for crypto, equities, FX, and commodities) to decentralised applications (dApps). It sources first-party price data directly from major trading firms, exchanges, and market makers, and delivers low-latency, "pull"-based oracle feeds for mission-critical [[defi]] systems. PYTH is the network's governance token. Pyth is the second-largest oracle by integrations and total value secured, competing most directly with [[chainlink|Chainlink]].
+**Pyth Network** (ticker: PYTH) is a decentralised oracle network, native to [[solana]] but distributed across 50+ blockchains, designed to provide real-time financial market data (prices for crypto, equities, FX, and commodities) to decentralised applications (dApps). It sources first-party price data directly from major trading firms, exchanges, and market makers, and delivers low-latency, "pull"-based oracle feeds for mission-critical [[defi]] systems. PYTH is the network's governance token. Pyth is the second-largest oracle by integrations and total value secured, competing most directly with [[chainlink|Chainlink]].
 
 ---
 
@@ -53,7 +53,7 @@ Context: with the market in **extreme fear** (Fear & Greed = 23) and an **Establ
 
 ## Overview
 
-Pyth Network is a decentralised [[oracle]] network that provides real-time financial market data to decentralised applications (dApps) across multiple blockchains. It allows developers to secure smart contracts with reliable, low-latency market data from institutional sources, and to build apps with high-fidelity oracle feeds designed for mission-critical systems.
+Pyth Network is a decentralised oracle network that provides real-time financial market data to decentralised applications (dApps) across multiple blockchains. It allows developers to secure smart contracts with reliable, low-latency market data from institutional sources, and to build apps with high-fidelity oracle feeds designed for mission-critical systems.
 
 Pyth's key differentiator is its **first-party data model**: rather than scraping public APIs or relying on third-party node operators (the [[chainlink|Chainlink]] approach), it aggregates price contributions directly from trading firms, exchanges, and market makers who publish their own proprietary data on-chain. It uses a **pull oracle** design — consumers request and pay for a fresh price update on demand, rather than the oracle continuously pushing prices — which is well suited to high-frequency, cross-chain use. Pyth's feeds underpin derivatives, lending, and perp protocols across the [[solana]] and EVM ecosystems.
 
@@ -283,7 +283,6 @@ Pyth's clearest structural advantage is latency + first-party data for high-freq
 - [[solana]]
 - [[ethereum]]
 - [[defi]]
-- [[oracle]]
 - [[chainlink]] — primary oracle competitor
 - [[hyperliquid]] — PYTH-PERP venue
 - [[bitcoin]]

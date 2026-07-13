@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [technical-analysis, day-trading, breakout, mean-reversion, momentum]
 aliases: ["ARC Strategy", "Area Range Candle", "Area-Range-Candle", "ARC day trading"]
-related: ["[[box-and-swing-structure]]", "[[john-wick-candle]]", "[[support-and-resistance]]", "[[candlestick-patterns]]", "[[liquidity-pools]]", "[[vwap]]", "[[initial-balance]]", "[[tradingview]]", "[[ninjatrader]]"]
+related: ["[[box-and-swing-structure]]", "[[john-wick-candle]]", "[[support-and-resistance]]", "[[candlestick-patterns]]", "[[liquidity-pools]]", "[[vwap]]", "[[initial-balance]]", "[[ninjatrader]]"]
 strategy_type: technical
 timeframe: intraday
 markets: [stocks, futures, forex, crypto]
@@ -200,7 +200,7 @@ ARC is a **mean-reversion / fade** method and inherits mean-reversion's regime d
 - [[candlestick-patterns]] — hammer / inverted-hammer context
 - [[initial-balance]] — an alternative way to frame the day's decision zones
 - [[vwap]] — optional trend-context overlay
-- [[tradingview]] / [[ninjatrader]] — platforms ARC traders use
+- tradingview / [[ninjatrader]] — platforms ARC traders use
 - [[edge-taxonomy]] — the behavioral/structural edge framework ARC draws on
 - [[risk-management]] — stop placement and position sizing discipline
 - [[stop-hunting-and-liquidity-sweeps]] — the sweep mechanic ARC fades

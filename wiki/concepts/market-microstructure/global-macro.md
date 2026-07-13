@@ -14,7 +14,7 @@ related: ["[[george-soros]]", "[[reflexivity]]", "[[forex]]", "[[quantitative-ea
 
 # Global Macro
 
-Global macro is a trading and investment strategy that takes positions across asset classes -- [[forex]], [[bond-market|bonds]], [[stock-markets|equities]], and [[commodities]] -- based on analysis of macroeconomic trends, [[central-bank]] policy, geopolitical events, and capital flows. It is a top-down approach that focuses on the biggest forces moving markets rather than individual security analysis.
+Global macro is a trading and investment strategy that takes positions across asset classes -- [[forex]], [[bond-market|bonds]], equities, and [[commodities]] -- based on analysis of macroeconomic trends, [[central-bank]] policy, geopolitical events, and capital flows. It is a top-down approach that focuses on the biggest forces moving markets rather than individual security analysis.
 
 ## Core Approach
 

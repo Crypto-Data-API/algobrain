@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, exchange, regulation, order-types]
 aliases: ["market structure", "equity market structure", "trading mechanics"]
-related: ["[[market-microstructure]]", "[[algorithmic-trading]]", "[[payment-for-order-flow]]", "[[reg-nms]]", "[[sec]]", "[[nasdaq]]", "[[robinhood]]", "[[citadel]]", "[[market-fragmentation]]", "[[best-execution]]", "[[smart-order-routing]]"]
+related: ["[[market-microstructure]]", "[[algorithmic-trading]]", "[[payment-for-order-flow]]", "[[sec]]", "[[robinhood]]", "[[citadel]]", "[[market-fragmentation]]", "[[best-execution]]", "[[smart-order-routing]]"]
 domain: [market-microstructure]
 prerequisites: ["[[market-microstructure]]", "[[order-types]]"]
 difficulty: intermediate
@@ -18,7 +18,7 @@ Market structure refers to the rules, systems, and institutions that govern how 
 
 ## Overview
 
-Modern market structure encompasses exchanges (NYSE, [[nasdaq]], CME), alternative trading systems (dark pools), [[market-maker|market makers]] ([[citadel]] Securities, Virtu), brokers ([[robinhood]], Interactive Brokers), clearinghouses (DTCC, OCC), and the regulatory framework ([[sec]], [[cftc]]) that governs them all.
+Modern market structure encompasses exchanges (NYSE, nasdaq, CME), alternative trading systems (dark pools), [[market-maker|market makers]] ([[citadel]] Securities, Virtu), brokers ([[robinhood]], Interactive Brokers), clearinghouses (DTCC, OCC), and the regulatory framework ([[sec]], [[cftc]]) that governs them all.
 
 ## Key Components
 
@@ -30,7 +30,7 @@ Modern market structure encompasses exchanges (NYSE, [[nasdaq]], CME), alternati
 
 ## Trading Relevance
 
-Market structure directly affects execution quality, trading costs, and the strategies available to traders. Understanding how orders are routed, who is on the other side of your trade, and how [[liquidity]] behaves in different conditions is what separates informed traders from those operating blind. In the US, the regulatory backbone is **[[reg-nms|Regulation NMS]]** (2005), whose Order Protection Rule (the "trade-through" rule) requires orders to be routed to the venue showing the best displayed price (the National Best Bid and Offer, NBBO) — a major driver of both [[smart-order-routing]] and [[market-fragmentation]] across the dozens of US equity venues. The ongoing debates around PFOF reform, tick-size and access-fee changes, the proposed order-competition rule, and exchange competition make market structure a living, evolving topic that rewards continued study.
+Market structure directly affects execution quality, trading costs, and the strategies available to traders. Understanding how orders are routed, who is on the other side of your trade, and how [[liquidity]] behaves in different conditions is what separates informed traders from those operating blind. In the US, the regulatory backbone is **Regulation NMS** (2005), whose Order Protection Rule (the "trade-through" rule) requires orders to be routed to the venue showing the best displayed price (the National Best Bid and Offer, NBBO) — a major driver of both [[smart-order-routing]] and [[market-fragmentation]] across the dozens of US equity venues. The ongoing debates around PFOF reform, tick-size and access-fee changes, the proposed order-competition rule, and exchange competition make market structure a living, evolving topic that rewards continued study.
 
 ## Disambiguation
 

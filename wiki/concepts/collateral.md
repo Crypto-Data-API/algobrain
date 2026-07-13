@@ -79,7 +79,7 @@ The prudent rule mirrors all leverage discipline: keep a collateral buffer well 
 | Eligible collateral | Cash, bonds, equities — tiered by [[haircut]] | Whitelisted crypto assets with on-chain price feeds |
 | Reuse | [[rehypothecation|Rehypothecation]] common | Generally not reused (locked in contract) |
 
-DeFi protocols like Aave and Maker cannot pursue a defaulter, so they replace legal recourse with *over*-collateralization and ruthless automatic liquidation. That makes the collateral ratio and the reliability of the price [[oracle]] the entire trust model — an oracle failure or a sharp gap can liquidate healthy positions or, conversely, leave the protocol holding bad debt.
+DeFi protocols like Aave and Maker cannot pursue a defaulter, so they replace legal recourse with *over*-collateralization and ruthless automatic liquidation. That makes the collateral ratio and the reliability of the price oracle the entire trust model — an oracle failure or a sharp gap can liquidate healthy positions or, conversely, leave the protocol holding bad debt.
 
 ## Common Pitfalls
 

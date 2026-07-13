@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2015
 headquarters: "Decentralized (VeChain Foundation: San Marino)"
 website: "https://www.vechain.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[franklin-templeton]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]"]
 ---
 
 # VeChain
 
-**VeChain** (VET) is a sustainability- and enterprise-focused Layer 1 (VeChainThor, genesis 2017-08-15; project founded 2015 by Sunny Lu) known for supply-chain and real-world-adoption use cases with partners like Walmart China, UFC and BCG. It runs a **dual-token model** (VET for value transfer, VTHO for gas). Since 2024 the chain has been mid-way through its "Renaissance" reinvention — staking via StarGate NFTs (July 2025), the Hayabusa DPoS/tokenomics upgrade (Dec 2025), and full EVM compatibility (2026) — plus a [[franklin-templeton|Franklin Templeton]] BENJI tokenization partnership, making VET a turnaround/[[real-world-assets|RWA]]-adjacent trade rather than the dormant 2021-cycle relic it is often priced as. As of June 2026 it trades ~98% below its 2021 ATH in an [[crypto-market-regimes|Established Bear Market]] (Fear & Greed 23).
+**VeChain** (VET) is a sustainability- and enterprise-focused Layer 1 (VeChainThor, genesis 2017-08-15; project founded 2015 by Sunny Lu) known for supply-chain and real-world-adoption use cases with partners like Walmart China, UFC and BCG. It runs a **dual-token model** (VET for value transfer, VTHO for gas). Since 2024 the chain has been mid-way through its "Renaissance" reinvention — staking via StarGate NFTs (July 2025), the Hayabusa DPoS/tokenomics upgrade (Dec 2025), and full EVM compatibility (2026) — plus a Franklin Templeton BENJI tokenization partnership, making VET a turnaround/[[real-world-assets|RWA]]-adjacent trade rather than the dormant 2021-cycle relic it is often priced as. As of June 2026 it trades ~98% below its 2021 ATH in an [[crypto-market-regimes|Established Bear Market]] (Fear & Greed 23).
 
 ---
 
@@ -66,7 +66,7 @@ VeChain, founded in 2015, is a sustainability-focused blockchain driving mass ad
 - **2025-07** — **StarGate staking platform launched**, using NFTs as staking collateral with delegation, reward distribution and governance; advertised yields up to ~9% APY for long-term tiers.
 - **2025-12** — **Hayabusa upgrade** (testnet earlier in 2025): transition to Weighted Delegated Proof-of-Stake; VTHO generation cut ~50% overall and directed solely to StarGate stakers; inflation reduced by ~72%, a major deflationary shift in the dual-token economics.
 - **2026-04 (planned/rolling)** — **Interstellar phase**: full EVM compatibility, letting developers deploy with standard Ethereum tooling.
-- **Institutional** — Partnership with **[[franklin-templeton|Franklin Templeton]]** to integrate its BENJI tokenization platform (tokenized money-market fund infrastructure) with VeChain — part of VeChain's 2026 "utility over casino" positioning manifesto.
+- **Institutional** — Partnership with **Franklin Templeton** to integrate its BENJI tokenization platform (tokenized money-market fund infrastructure) with VeChain — part of VeChain's 2026 "utility over casino" positioning manifesto.
 
 ---
 
@@ -111,7 +111,7 @@ VeChain straddles "L1 usage" and "enterprise/RWA adoption" valuation lenses (no 
 - **On-chain transaction count / VTHO burned** — network activity and gas consumption; the core usage signal.
 - **StarGate staking participation** — VET locked in staking; reduces float and signals holder conviction.
 - **Enterprise integrations / VeBetter app users** — VeChain cites 2M+ active users on VeBetter-powered apps; adoption breadth for the real-world thesis.
-- **[[real-world-assets|RWA]] / BENJI integration progress** — the [[franklin-templeton|Franklin Templeton]] tokenization link is the institutional adoption proxy.
+- **[[real-world-assets|RWA]] / BENJI integration progress** — the Franklin Templeton tokenization link is the institutional adoption proxy.
 - **VTHO supply/price dynamics** — post-Hayabusa tightening of the gas token.
 
 The bull case: enterprise + RWA adoption + a fully-diluted, deflation-tilted token. The bear case: VeChain has cited enterprise partnerships for years with limited token value-capture; the market often prices it as a dormant 2021-cycle relic.
@@ -143,7 +143,7 @@ The bull case: enterprise + RWA adoption + a fully-diluted, deflation-tilted tok
 - **Supply-chain provenance** — VeChain's historical niche: tracking goods (luxury, food, pharma) via RFID/NFC + on-chain records (Walmart China, BMW, others).
 - **Sustainability / ESG (VeBetter)** — VeBetter-powered apps reward sustainable behavior; VeChain cites 2M+ active users.
 - **Enterprise partnerships** — UFC, BCG, and other brand integrations using VeChain ToolChain.
-- **RWA / tokenization** — the [[franklin-templeton|Franklin Templeton]] BENJI integration brings tokenized money-market fund infrastructure to VeChain ([[real-world-assets]]).
+- **RWA / tokenization** — the Franklin Templeton BENJI integration brings tokenized money-market fund infrastructure to VeChain ([[real-world-assets]]).
 - **EVM dApps (2026)** — Interstellar EVM compatibility opens VeChainThor to the broad Ethereum developer base.
 - **Staking (StarGate)** — NFT-based VET staking earning VTHO.
 
@@ -175,7 +175,7 @@ The bull case: enterprise + RWA adoption + a fully-diluted, deflation-tilted tok
 
 ## Trading Playbook
 
-- **Narrative baskets**: "2017-class L1 turnarounds", enterprise/supply-chain chains, and increasingly [[real-world-assets|RWA]] via the [[franklin-templeton|Franklin Templeton]] BENJI link. VET also retains a loyal retail base, giving it outsized beta to broad altcoin sentiment recoveries. See [[narrative-trading]].
+- **Narrative baskets**: "2017-class L1 turnarounds", enterprise/supply-chain chains, and increasingly [[real-world-assets|RWA]] via the Franklin Templeton BENJI link. VET also retains a loyal retail base, giving it outsized beta to broad altcoin sentiment recoveries. See [[narrative-trading]].
 - **Catalysts**: Interstellar EVM compatibility rollout (2026), Hayabusa deflation effects feeding through VTHO supply, StarGate staking participation milestones, and BENJI/institutional product announcements.
 - **Structural points**: essentially fully diluted (MC/FDV ≈ 1.0 — no unlock overhang, rare among L1s); staking lockups via StarGate reduce liquid float; VTHO emission cuts make the gas-token side tighter.
 - **Regime context**: high-beta retail-favored alt in an [[crypto-market-regimes|Established Bear Market]] (Fear & Greed 23); -5.15% on the week (2026-06-20) tracks broad alt weakness.
@@ -240,7 +240,6 @@ VeChain's edge is a long-running enterprise/supply-chain focus plus a fully-dilu
 - [[crypto-markets]]
 - [[ethereum]]
 - [[real-world-assets]]
-- [[franklin-templeton]]
 - [[proof-of-stake]]
 - [[narrative-trading]]
 - [[crypto-market-regimes]]

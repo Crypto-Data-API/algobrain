@@ -73,7 +73,7 @@ Even discretionary traders benefit from understanding algorithmic trading, becau
 - [[market-microstructure]] — the environment algos operate in
 - [[backtesting]] / [[overfitting-detection]] — validation methodology
 - [[stat-arb]], [[trend-following-cta]], [[factor-investing]], [[mev-strategies]] — major algorithmic strategy families
-- [[implementation-shortfall]], [[dark-pool-trading]] — execution-side topics
+- [[implementation-shortfall]], dark-pool-trading — execution-side topics
 - [[flash-crash-2010]], [[knight-capital]] — case studies
 - [[risk-management]], [[data-providers]]
 

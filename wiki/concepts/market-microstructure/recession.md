@@ -63,7 +63,7 @@ Post-WWII US recessions have averaged about 10-11 months in duration, though the
 
 ## Trading Recessions
 
-[[fred-mcnaught|Fred]] views recessions as buying opportunities — his principle of keeping [[cash-as-asset|cash as an asset]] ensures capital is available to buy quality stocks at depressed prices during downturns. The key insights for trading around recessions:
+Fred views recessions as buying opportunities — his principle of keeping [[cash-as-asset|cash as an asset]] ensures capital is available to buy quality stocks at depressed prices during downturns. The key insights for trading around recessions:
 
 1. **Don't try to time the exact bottom** — markets bottom on maximum fear, not on good news. Dollar-cost averaging into high-quality names during the recession works better than trying to catch the knife.
 2. **The first rally is the strongest** — the initial recovery rally off a recession bottom is typically 30-50% in the first 12 months. Missing the first few weeks can cost half the recovery.
@@ -92,5 +92,4 @@ Post-WWII US recessions have averaged about 10-11 months in duration, though the
 
 ## Sources
 
-- [[fred-sam-sessions-overview]] — Fred's commentary on recession risk and positioning
 - [[itpm-woym-ep27-recession-narrative]] — ITPM analysis of recession narratives

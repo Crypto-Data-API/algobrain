@@ -6,12 +6,12 @@ updated: 2026-06-16
 status: good
 tags: [crypto, perpetuals, hyperliquid, algorithmic, quantitative, market-regime, risk-management, methodology]
 aliases: ["Hyperliquid Baskets", "Alfred Baskets", "Trading Baskets", "Basket Library", "Signal Baskets"]
-related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-matrix]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[live-journal]]", "[[hyperliquid]]", "[[alfred]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
+related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-matrix]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[live-journal]]", "[[hyperliquid]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
 ---
 
 # Alfred Hyperliquid Basket Library
 
-A **basket** is one self-contained trading sleeve in the [[alfred|Alfred]] systematic perpetual-futures system on [[hyperliquid|Hyperliquid]]: a defined signal, entry/exit logic, position-sizing rule, and kill criteria, run with its own capital allocation and tracked independently. This page is the index of all **27 baskets**, each documented on its own page following the wiki's standard [[strategies-overview#strategy-page-sections|strategy-page structure]].
+A **basket** is one self-contained trading sleeve in the Alfred systematic perpetual-futures system on [[hyperliquid|Hyperliquid]]: a defined signal, entry/exit logic, position-sizing rule, and kill criteria, run with its own capital allocation and tracked independently. This page is the index of all **27 baskets**, each documented on its own page following the wiki's standard [[strategies-overview#strategy-page-sections|strategy-page structure]].
 
 > **Not investment advice.** These pages document *how each setup is designed to work* — the edge thesis, rules, and failure modes. Positioning, sizing, and deployment are downstream decisions. Every performance figure on the basket pages is a clearly-labelled **illustrative estimate**, not a backtest result.
 
@@ -125,5 +125,4 @@ Every basket inherits the same venue constraints (detailed on each page):
 - [[regime-matrix]] — strategy-by-regime performance map
 - [[multi-strategy-portfolio]] — combining uncorrelated baskets into a book
 - [[live-journal]] — deployment journal for anything actually running
-- [[alfred]] — the system that runs these baskets
 - [[strategies-overview]] — the full wiki strategy catalog

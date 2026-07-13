@@ -38,25 +38,6 @@ WHERE source_type = "book"
 SORT source_date ASC
 ```
 
-## Fred McNaught Written Sources (5 total)
-
-```dataview
-TABLE source_type, confidence, claims_count
-FROM "wiki/sources"
-WHERE contains(file.name, "fred-") AND !contains(file.name, "fred-sam-session")
-SORT file.name ASC
-```
-
-## Fred & Sam Recorded Sessions (26 total)
-
-See [[fred-sam-sessions-overview]] for the full session index with dates, speakers, and topics.
-
-```dataview
-TABLE source_date AS "Date", claims_count AS "Claims", status
-FROM "wiki/sources"
-WHERE contains(file.name, "fred-sam-session")
-SORT source_date ASC
-```
 
 ## Options Risk Management Sources
 

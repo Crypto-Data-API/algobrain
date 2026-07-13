@@ -104,7 +104,7 @@ As an [[exchange-tokens|exchange token]], HTX is a **claim on HTX-the-exchange's
 - **Verification caveat** — the burn math depends on self-reported revenue; an analyst cannot independently audit HTX's fee take, so the deflation thesis carries a trust assumption absent from on-chain-native protocols.
 - **Key-man premium/discount** — HTX's valuation is inseparable from Justin Sun's reputation and regulatory standing; the Sun complex tends to re-rate together on his news flow.
 
-Qualitative framing only — see [[valuation]].
+Qualitative framing only — see valuation.
 
 ## Peer Comparison
 
@@ -160,7 +160,7 @@ HTX is the dominant token of this batch by an order of magnitude on market cap, 
 - [[huobi-token]] — predecessor token (HT)
 - [[usdd]] — Sun-complex stablecoin
 - [[narrative-trading]] — Sun-complex correlation
-- [[liquidity]] · [[slippage]] · [[valuation]] · [[derivatives]]
+- [[liquidity]] · [[slippage]] · valuation · [[derivatives]]
 - [[crypto-markets]]
 
 ---

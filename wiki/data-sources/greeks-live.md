@@ -6,13 +6,13 @@ updated: 2026-06-21
 status: excellent
 tags: [data-provider, options, options-analytics, crypto, volatility, defi]
 aliases: ["GreeksLive", "Greeks Live"]
-related: ["[[deribit]]", "[[options-data-sources]]", "[[bitcoin-options]]", "[[ethereum-options]]", "[[implied-volatility]]", "[[options-greeks]]", "[[portfolio-greeks-aggregation]]", "[[volatility-surface]]"]
+related: ["[[deribit]]", "[[bitcoin-options]]", "[[ethereum-options]]", "[[implied-volatility]]", "[[options-greeks]]", "[[portfolio-greeks-aggregation]]", "[[volatility-surface]]"]
 source_type: data
 source_url: "https://greeks.live"
 confidence: high
 ---
 
-Greeks.live is a crypto-options analytics platform built primarily on top of [[deribit]] data, offering a real-time [[options-greeks|Greeks]] dashboard, [[volatility-surface|implied-vol surface]] visualization, position management, a block-trade tape, and an aggregated [[rfq|RFQ]] network for institutional size. It is the closest thing the crypto market has to a purpose-built equivalent of [[orats|ORATS]] or LiveVol — a single workspace where a [[bitcoin-options|BTC]] or [[ethereum-options|ETH]] options trader can monitor [[implied-volatility|IV]], build positions, see institutional flow, and source liquidity that the lit book cannot absorb. As of 2025 it is the most widely used third-party analytics layer for the [[deribit]]-centric crypto options market, and a hub for the crypto-options community on Telegram and Discord.
+Greeks.live is a crypto-options analytics platform built primarily on top of [[deribit]] data, offering a real-time [[options-greeks|Greeks]] dashboard, [[volatility-surface|implied-vol surface]] visualization, position management, a block-trade tape, and an aggregated [[rfq|RFQ]] network for institutional size. It is the closest thing the crypto market has to a purpose-built equivalent of ORATS or LiveVol — a single workspace where a [[bitcoin-options|BTC]] or [[ethereum-options|ETH]] options trader can monitor [[implied-volatility|IV]], build positions, see institutional flow, and source liquidity that the lit book cannot absorb. As of 2025 it is the most widely used third-party analytics layer for the [[deribit]]-centric crypto options market, and a hub for the crypto-options community on Telegram and Discord.
 
 ## At-a-Glance
 
@@ -24,9 +24,9 @@ Greeks.live is a crypto-options analytics platform built primarily on top of [[d
 | Volatility index | Visualizes [[deribit#DVOL Index — The "VIX of Crypto"\|DVOL]] (crypto's [[vix\|VIX]] analogue) |
 | Audience | Pro/prosumer crypto-options traders, MMs, structured-product desks |
 | Pricing | Generous free tier; Pro ~$30-$50/mo; institutional negotiated |
-| Closest analogues | [[orats\|ORATS]]/LiveVol (TradFi); [[paradigm-rfq\|Paradigm]], [[laevitas]] (crypto) |
+| Closest analogues | ORATS/LiveVol (TradFi); [[paradigm-rfq\|Paradigm]], [[laevitas]] (crypto) |
 | Key caveat | Deribit-centric, single-venue concentration; not a backtesting engine |
-| TradFi parallel | Greeks read identically to [[xsp-options]]/[[index-options]] desks -- only the venue differs |
+| TradFi parallel | Greeks read identically to xsp-options/index-options desks -- only the venue differs |
 
 ## Background
 
@@ -84,7 +84,7 @@ The free tier is unusually generous compared to TradFi analogues — most retail
 
 For traders applying an [[itpm-playbook|ITPM-style]] options playbook to crypto rather than equities, Greeks.live is effectively the workbench:
 
-- **Variance risk premium harvesting:** BTC [[implied-volatility|IV]] structurally trades meaningfully above realized vol — typically a wider spread than [[sp500|SPX]]'s VRP. Greeks.live makes it easy to monitor IV-vs-RV in real time and structure short-premium books (iron condors, strangles, ratio spreads) at favorable skew points. See [[variance-risk-premium]] and [[short-volatility-strategies]]
+- **Variance risk premium harvesting:** BTC [[implied-volatility|IV]] structurally trades meaningfully above realized vol — typically a wider spread than SPX's VRP. Greeks.live makes it easy to monitor IV-vs-RV in real time and structure short-premium books (iron condors, strangles, ratio spreads) at favorable skew points. See [[variance-risk-premium]] and [[short-volatility-strategies]]
 - **Hedging crypto spot exposure:** Holders of [[bitcoin|BTC]] or [[ethereum|ETH]] spot use Greeks.live to size protective puts or put-spreads at quantified vega/theta cost; the position-builder shows the marginal cost of insurance under different vol regimes
 - **Spotting institutional positioning:** The block-trade tape is one of the cleanest signals for "what are large desks doing" in crypto options. Heavy call-spread buying weeks before expiry is read as institutional bullishness; large downside-put accumulation is read as hedging or directional bearishness
 - **Sourcing size via RFQ:** Trades above ~$5M notional often cannot be cleanly filled on the Deribit lit book without moving the surface. The RFQ network lets traders quietly request quotes from multiple MMs and lift the best offer
@@ -99,7 +99,7 @@ For traders applying an [[itpm-playbook|ITPM-style]] options playbook to crypto 
 | **[[laevitas]]** | Deribit + alt venues | Strong derivatives dashboards, options + futures + funding in one view | Less position-builder focus; thinner block tape |
 | **[[amberdata]]** | Multi-venue, institutional | Enterprise-grade data feeds, normalized across exchanges | Enterprise pricing; not retail-friendly UI |
 | **[[coinglass]]** | Multi-venue derivatives | Free, broad derivatives coverage including liquidations | Less options-focused; surface tools are shallow |
-| **[[orats]]** | US listed equity options | Reference design for retail options analytics | Does not cover crypto |
+| **orats** | US listed equity options | Reference design for retail options analytics | Does not cover crypto |
 
 For a crypto-only options trader, Greeks.live + Deribit's native UI + occasional Paradigm for size covers most workflows.
 
@@ -153,7 +153,6 @@ These are reference cautions about how to interpret the platform's data, not all
 ## Related
 
 - [[deribit]] — the underlying venue Greeks.live wraps
-- [[options-data-sources]] — broader catalog of options data providers (TradFi and crypto)
 - [[bitcoin-options]] — BTC options market and strategy notes
 - [[ethereum-options]] — ETH options market
 - [[implied-volatility]] — IV concept and metrics

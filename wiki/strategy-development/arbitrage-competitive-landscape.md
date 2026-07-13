@@ -8,7 +8,7 @@ tags: [strategy-development, arbitrage, market-microstructure, risk-management]
 aliases: ["Arb Competition", "Arbitrage Market Structure", "Who Competes in Arb"]
 domain: [strategy-development]
 difficulty: advanced
-related: ["[[arbitrage-overview]]", "[[arbitrage-live-performance]]", "[[crowding-indicators]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[latency-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[funding-rate-arbitrage]]", "[[mev-strategies]]", "[[flash-loan-arbitrage]]", "[[jump-trading]]", "[[multi-venue-capital-management]]", "[[arbitrage-seasonality]]", "[[arbitrage-opportunity-map]]", "[[cross-chain-arbitrage]]", "[[merger-arbitrage]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[hyperliquid]]"]
+related: ["[[arbitrage-overview]]", "[[arbitrage-live-performance]]", "[[crowding-indicators]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[latency-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[funding-rate-arbitrage]]", "[[mev-strategies]]", "[[flash-loan-arbitrage]]", "[[jump-trading]]", "[[multi-venue-capital-management]]", "[[arbitrage-seasonality]]", "[[arbitrage-opportunity-map]]", "[[cross-chain-arbitrage]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[hyperliquid]]"]
 ---
 
 # Arbitrage Competitive Landscape
@@ -28,7 +28,7 @@ Per [[edge-taxonomy]], every arb edge ultimately rests on one of five sources, a
 | **Latency** | Winner-take-all | Fastest hardware/co-lo | [[latency-arbitrage]], triangular |
 | **Risk-bearing (capital)** | Capacity-constrained, multi-player | Cheapest funding + best fee tier | [[funding-rate-arbitrage]], [[cash-and-carry]] |
 | **Analytical (code/model)** | Algorithmically competitive | Best path-finder / model | [[mev-strategies]], [[flash-loan-arbitrage]], [[pairs-trading]] |
-| **Informational (domain knowledge)** | Open, expertise-gated | Deepest legal/regulatory read | [[merger-arbitrage]], convertible arb |
+| **Informational (domain knowledge)** | Open, expertise-gated | Deepest legal/regulatory read | merger-arbitrage, convertible arb |
 | **Structural (access/positioning)** | Semi-open, decaying | First mover, pre-positioned capital | [[cross-chain-arbitrage]], new-listing arb |
 
 **The strategic insight:** a new entrant should choose the strategy whose edge source matches their **comparative advantage**, not the one with the highest headline returns. A solo quant with strong code skills and $20K has no business in latency arb (a capital + hardware game) but is well-matched to analytical/structural edges.
@@ -191,7 +191,7 @@ What prevents new entrants from capturing arb profits:
 | $5-50K, Solidity/smart contract skills | [[flash-loan-arbitrage]] on niche protocols | Zero capital requirement, code skill is the moat |
 | $50-500K, exchange accounts | [[funding-rate-arbitrage]] | Still profitable at scale, straightforward mechanics |
 | $50-500K, options experience | [[volatility-arbitrage]] with SPX/VIX | Section 1256 tax advantage, moderate competition |
-| $500K+, legal/financial analysis | [[merger-arbitrage]] | Retail can replicate institutional returns on simple deals |
+| $500K+, legal/financial analysis | merger-arbitrage | Retail can replicate institutional returns on simple deals |
 | $1M+, quant/ML background | [[pairs-trading]] (crypto) | Less crowded than equities, cointegration still viable |
 | $10M+, institutional infrastructure | Multi-strategy portfolio | Combine 3-4 uncorrelated strategies per [[arbitrage-opportunity-map]] |
 

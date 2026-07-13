@@ -11,7 +11,7 @@ related: ["[[arbitrage]]", "[[convergence-arbitrage]]", "[[basis-trading]]", "[[
 
 # Relative Value Arbitrage
 
-**Relative-value arbitrage (RV)** is a family of trading strategies that exploit pricing discrepancies between closely related — often nearly identical — financial instruments. The RV trader is agnostic about the absolute direction of markets; the bet is that two instruments that *should* trade at a predictable spread will return to that spread after a dislocation. Most RV strategies live in **fixed income** (the focus of this catalog), but the concept extends to [[convertible-arbitrage|convertibles]], [[merger-arbitrage|merger arb]], [[equity-pairs-trading|equity pairs]], and [[volatility-arbitrage|volatility surfaces]]. The intellectual lineage runs through [[salomon-brothers|Salomon Brothers]]' arbitrage desk in the 1980s, [[ltcm-collapse-1998|Long-Term Capital Management]] in the 1990s, and today's multi-strategy pod shops ([[citadel]], [[millennium-management|Millennium]], [[balyasny]], [[point72]]).
+**Relative-value arbitrage (RV)** is a family of trading strategies that exploit pricing discrepancies between closely related — often nearly identical — financial instruments. The RV trader is agnostic about the absolute direction of markets; the bet is that two instruments that *should* trade at a predictable spread will return to that spread after a dislocation. Most RV strategies live in **fixed income** (the focus of this catalog), but the concept extends to convertibles, merger arb, [[equity-pairs-trading|equity pairs]], and [[volatility-arbitrage|volatility surfaces]]. The intellectual lineage runs through [[salomon-brothers|Salomon Brothers]]' arbitrage desk in the 1980s, [[ltcm-collapse-1998|Long-Term Capital Management]] in the 1990s, and today's multi-strategy pod shops ([[citadel]], [[millennium-management|Millennium]], [[balyasny]], [[point72]]).
 
 ## What Makes a Trade "Relative Value"?
 
@@ -32,7 +32,7 @@ When any of these three breaks, the "arbitrage" becomes a speculation.
 | Source of return | Riskless mispricing | Liquidity / balance-sheet / convexity / model premium | Risk premium + skill |
 | Typical leverage | Very high (small edge) | High (5-30x) | Low-moderate |
 | Failure trigger | Almost never | Correlated funding stress | Adverse direction |
-| Canonical example | [[index-arbitrage]], [[etf-arbitrage]] | [[on-off-the-run-treasury-arbitrage]], [[cds-bond-basis]] | long-only beta |
+| Canonical example | index-arbitrage, [[etf-arbitrage]] | [[on-off-the-run-treasury-arbitrage]], [[cds-bond-basis]] | long-only beta |
 
 The defining hazard of RV is that it *feels* like pure arbitrage in calm regimes (tight, mean-reverting spreads) but behaves like leveraged directional risk in a crisis (everything widens together). This page exists to keep that distinction front of mind — see [[limits-to-arbitrage]] for why the gap between the two cannot be closed.
 
@@ -52,20 +52,16 @@ The defining hazard of RV is that it *feels* like pure arbitrage in calm regimes
 ### Credit
 
 - [[cds-bond-basis]] — credit default swap premium vs cash bond asset swap spread. Should equal zero plus a small "basis" reflecting cheapest-to-deliver option. Large dislocations in 2008, 2015, 2020.
-- [[capital-structure-arbitrage]] — debt vs equity vs CDS of the same issuer. Model-intensive.
-- [[convertible-arbitrage]] — convertible bond vs underlying equity + rates + credit components.
 
 ### Equity
 
-- [[equity-pairs-trading]] — long one stock, short a related stock; historically pioneered by [[morgan-stanley|Morgan Stanley's]] Black Box in the 1980s.
+- [[equity-pairs-trading]] — long one stock, short a related stock; historically pioneered by Morgan Stanley's Black Box in the 1980s.
 - [[statistical-arbitrage]] — generalized high-dimensional version of pairs trading.
-- [[merger-arbitrage]] — long target, short acquirer of an announced deal. Deal-completion risk.
 - [[dual-listed-arbitrage]] — same company listed on two exchanges (Royal Dutch/Shell, BHP/Billiton, Unilever NV/PLC).
 
 ### Volatility
 
 - [[volatility-arbitrage]] — trading implied vs realized, or implied vs implied across strikes/maturities.
-- [[dispersion-trading]] — long index vol, short single-name vol (or vice versa).
 - [[variance-swap-arbitrage]] — variance swap vs replicating option portfolio.
 
 ### Commodities
@@ -93,9 +89,9 @@ Mapping each premium to the strategy that harvests it:
 | Liquidity | Investors overpay for the most-tradeable bond | [[on-off-the-run-treasury-arbitrage]], [[tips-treasury-arbitrage]] |
 | Balance-sheet / regulatory | Banks cannot expand balance sheet at zero cost ([[basel-iii]], [[supplementary-leverage-ratio]]) | [[covered-interest-arbitrage]], [[swap-spread-arbitrage]] |
 | Convexity | Investors dislike negative gamma / prepayment risk | [[mbs-basis-arbitrage]], [[variance-swap-arbitrage]] |
-| Credit / model | Hard-to-value securities trade cheap to model | [[cds-bond-basis]], [[capital-structure-arbitrage]] |
-| Deal-completion | Holders pay to shed deal-break risk | [[merger-arbitrage]], [[risk-arbitrage]] |
-| Cross-listing | Frictions across venues/currencies | [[adr-arbitrage]], [[dual-listed-company-arbitrage]] |
+| Credit / model | Hard-to-value securities trade cheap to model | [[cds-bond-basis]], capital-structure-arbitrage |
+| Deal-completion | Holders pay to shed deal-break risk | merger-arbitrage, risk-arbitrage |
+| Cross-listing | Frictions across venues/currencies | adr-arbitrage, dual-listed-company-arbitrage |
 
 See [[edge-taxonomy]] for the general framework, and [[convergence-arbitrage]] for the near-synonymous mechanism by which these spreads close.
 
@@ -165,7 +161,7 @@ Every strategy in this catalog is related to multiple others. Common pairings:
 | [[tips-treasury-arbitrage]] | [[inflation-swap]], [[on-off-the-run-treasury-arbitrage]] |
 | [[mbs-basis-arbitrage]] | [[swap-spread-arbitrage]], interest-rate options |
 | [[covered-interest-arbitrage]] | [[cross-currency-basis-swap]], FX forwards |
-| [[cds-bond-basis]] | [[capital-structure-arbitrage]], [[convertible-arbitrage]] |
+| [[cds-bond-basis]] | capital-structure-arbitrage, convertible-arbitrage |
 
 ## How to Use This Catalog
 

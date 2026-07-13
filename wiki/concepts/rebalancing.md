@@ -9,7 +9,7 @@ aliases: ["Rebalancing", "Portfolio Rebalancing"]
 domain: [portfolio-theory]
 prerequisites: ["[[asset-allocation]]"]
 difficulty: beginner
-related: ["[[asset-allocation]]", "[[portfolio-theory]]", "[[tax-loss-harvesting]]", "[[transaction-cost-modeling]]", "[[capital-gains]]", "[[diversification]]"]
+related: ["[[asset-allocation]]", "[[portfolio-theory]]", "[[transaction-cost-modeling]]", "[[capital-gains]]", "[[diversification]]"]
 ---
 
 Rebalancing is the process of realigning a portfolio's actual asset weights back to their target [[asset-allocation|allocation]] after market movements have caused drift. A 60/40 stock/bond portfolio that drifts to 70/30 after an equity rally has quietly taken on more risk than intended; rebalancing — selling stocks and buying bonds to return to 60/40 — is fundamentally a [[risk-management]] discipline that prevents a portfolio from becoming inadvertently concentrated in its best-performing (and often most overvalued) asset.
@@ -61,7 +61,7 @@ Tax-efficient alternatives:
 
 1. **Cash-flow rebalancing** — direct new contributions (or dividends) into underweight assets, restoring balance without selling.
 2. **Rebalance inside tax-advantaged accounts** — IRAs/401(k)s in the US, superannuation in Australia, where trades are not taxable events.
-3. **Pair with [[tax-loss-harvesting]]** — realise offsetting losses in the same window to neutralise gains.
+3. **Pair with tax-loss-harvesting** — realise offsetting losses in the same window to neutralise gains.
 4. **Lot selection** — sell highest-cost-basis (or long-term) lots first to minimise the realised gain per share sold.
 
 ### Cost / benefit trade-off
@@ -86,7 +86,6 @@ For long-term investors, rebalancing is the single most important ongoing portfo
 
 - [[asset-allocation]] — defines the targets rebalancing restores
 - [[portfolio-theory]] — the framework justifying fixed risk budgets
-- [[tax-loss-harvesting]] — pairs with rebalancing for tax efficiency
 - [[transaction-cost-modeling]] — quantifying the cost side
 - [[rebalancing-flows]] — trading the predictable rebalancing of large funds
 - [[diversification]] — the source of the rebalancing bonus

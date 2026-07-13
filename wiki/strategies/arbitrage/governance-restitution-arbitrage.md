@@ -39,9 +39,9 @@ Cetus (2025), Wormhole (2022), Beanstalk (2022 — total-loss reference), Euler 
 
 ## Where this sits in the arbitrage family
 
-This is an event-driven [[arbitrage]] strategy — the crypto-native analogue of [[risk-arbitrage]]'s legal/regulatory event sub-family, where the "deal" is a governance vote or recapitalization rather than a merger. It shares the short-volatility, binary-outcome profile of [[merger-arbitrage]] (collect on the high-base-rate good outcome, take a large loss on the tail), but trades on-chain governance and bridge mechanics instead of antitrust and proxy votes.
+This is an event-driven [[arbitrage]] strategy — the crypto-native analogue of risk-arbitrage's legal/regulatory event sub-family, where the "deal" is a governance vote or recapitalization rather than a merger. It shares the short-volatility, binary-outcome profile of merger-arbitrage (collect on the high-base-rate good outcome, take a large loss on the tail), but trades on-chain governance and bridge mechanics instead of antitrust and proxy votes.
 
-| Dimension | Governance & restitution arb (this page) | [[bankruptcy-claim-arbitrage]] | [[merger-arbitrage]] / [[risk-arbitrage]] |
+| Dimension | Governance & restitution arb (this page) | [[bankruptcy-claim-arbitrage]] | merger-arbitrage / risk-arbitrage |
 |---|---|---|---|
 | Event | DeFi exploit → governance vote / recap | CeFi bankruptcy (FTX, Celsius, Mt. Gox) | Announced M&A |
 | Instrument | Protocol-native token, bridge/wrapped token, sympathy peers | Tradeable bankruptcy claims (real OTC market) | Target equity (± acquirer short) |
@@ -242,7 +242,7 @@ The single most predictive variable is the *recovery mechanism* — it determine
 | Beanstalk | 2022 | Governance treasury drained; funds to Tornado Cash | **Total loss** | None — the null held; dip-buyers lost everything |
 | Multichain | 2023 | No recapitalization | **Total loss** | None — open-ended loss is not arbable |
 
-The two total-loss rows are the strategy's reason for sizing discipline: roughly ~15% of major events resolve with no recovery, and on those the dip is a trap, not an entry. This is the same short-volatility asymmetry that governs [[merger-arbitrage]] deal breaks — size off the tail, not the headline overshoot.
+The two total-loss rows are the strategy's reason for sizing discipline: roughly ~15% of major events resolve with no recovery, and on those the dip is a trap, not an entry. This is the same short-volatility asymmetry that governs merger-arbitrage deal breaks — size off the tail, not the headline overshoot.
 
 ## Performance Characteristics
 
@@ -308,4 +308,4 @@ Strategy-level capacity: ~$100M deployed across the strategy at current event fr
 
 ## Related
 
-[[arbitrage]] · [[arbitrage-overview]] · [[risk-arbitrage]] · [[merger-arbitrage]] · [[event-driven-trading]] · [[limits-to-arbitrage]] · [[ai-amplified-exploit-arbitrage]] · [[post-hack-incident-response-arb]] · [[2026-exploit-target-watchlist]] · [[smart-contract-vulnerability-taxonomy]] · [[ai-vulnerability-discovery]] · [[bankruptcy-claim-arbitrage]] · [[fork-airdrop-triangulation]] · [[fork-futures-spot-basis]] · [[governance-attacks]] · [[defi-hacks-and-exploits]] · [[2022-10-mango-markets-exploit]] · [[2022-04-beanstalk-governance-attack]] · [[2023-03-euler-finance-exploit]] · [[2021-08-poly-network-exploit]]
+[[arbitrage]] · [[arbitrage-overview]] · risk-arbitrage · merger-arbitrage · [[event-driven-trading]] · [[limits-to-arbitrage]] · [[ai-amplified-exploit-arbitrage]] · [[post-hack-incident-response-arb]] · [[2026-exploit-target-watchlist]] · [[smart-contract-vulnerability-taxonomy]] · [[ai-vulnerability-discovery]] · [[bankruptcy-claim-arbitrage]] · [[fork-airdrop-triangulation]] · [[fork-futures-spot-basis]] · [[governance-attacks]] · [[defi-hacks-and-exploits]] · [[2022-10-mango-markets-exploit]] · [[2022-04-beanstalk-governance-attack]] · [[2023-03-euler-finance-exploit]] · [[2021-08-poly-network-exploit]]

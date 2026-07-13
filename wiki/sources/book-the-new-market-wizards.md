@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [book, trading-psychology, risk-management, options, trend-following]
 aliases: ["The New Market Wizards", "New Market Wizards", "TNMW"]
-related: ["[[book-market-wizards]]", "[[jack-schwager]]", "[[stanley-druckenmiller]]", "[[bill-eckhardt]]", "[[linda-raschke]]", "[[susquehanna]]", "[[professional-vs-retail-mindset]]", "[[asymmetric-risk-reward]]", "[[capital-preservation]]", "[[position-sizing]]", "[[expectancy]]"]
+related: ["[[book-market-wizards]]", "[[jack-schwager]]", "[[stanley-druckenmiller]]", "[[bill-eckhardt]]", "[[linda-raschke]]", "[[professional-vs-retail-mindset]]", "[[asymmetric-risk-reward]]", "[[capital-preservation]]", "[[position-sizing]]", "[[expectancy]]"]
 source_type: book
 source_url: "https://www.goodreads.com/book/show/762457.The_New_Market_Wizards"
 source_author: "Jack Schwager"
@@ -16,7 +16,7 @@ confidence: high
 claims_count: 14
 ---
 
-The second volume in Jack Schwager's Market Wizards series, published in 1992 as a follow-up to the original 1989 [[book-market-wizards|Market Wizards]]. The book continues Schwager's interview format, profiling a new generation of traders across futures, currencies, equities, and — crucially for the options-trader audience — the first in-depth public conversation with Jeff Yass of [[susquehanna|Susquehanna International Group (SIG)]], one of the largest options market-making firms in the world. The book is widely considered the strongest of the four-volume Wizards series for its lineup quality and methodological depth, and it remains the canonical reference for understanding how professional traders frame [[asymmetric-risk-reward|asymmetric risk/reward]], [[position-sizing|position sizing]], and the difference between good trades and good outcomes.
+The second volume in Jack Schwager's Market Wizards series, published in 1992 as a follow-up to the original 1989 [[book-market-wizards|Market Wizards]]. The book continues Schwager's interview format, profiling a new generation of traders across futures, currencies, equities, and — crucially for the options-trader audience — the first in-depth public conversation with Jeff Yass of Susquehanna International Group (SIG), one of the largest options market-making firms in the world. The book is widely considered the strongest of the four-volume Wizards series for its lineup quality and methodological depth, and it remains the canonical reference for understanding how professional traders frame [[asymmetric-risk-reward|asymmetric risk/reward]], [[position-sizing|position sizing]], and the difference between good trades and good outcomes.
 
 ## Featured Traders
 
@@ -35,7 +35,7 @@ The second volume in Jack Schwager's Market Wizards series, published in 1992 as
 | **Linda Bradford Raschke** | Short-term swing trader; pattern-based discretionary equities and futures, one of the most respected female professional traders of the era |
 | **Mark Ritchie** | Floor-traded CRT (Chicago Research and Trading) options/grain trader; brother of Joe |
 | **Joe Ritchie** | Founder of [[chicago-research-and-trading|CRT]], one of the dominant 1980s options market-makers; pioneered systematic options pricing on the floor |
-| **Jeff Yass** | Founder of [[susquehanna|Susquehanna]]; game-theory-driven options market-maker; one of the very few elite options traders to discuss methodology publicly |
+| **Jeff Yass** | Founder of Susquehanna; game-theory-driven options market-maker; one of the very few elite options traders to discuss methodology publicly |
 | **Charles Faulkner** | NLP / trader-psychology consultant — modeled top performers' mental routines |
 | **Robert Krausz** | Hypnotherapist-turned-trader; explored the subconscious patterns of consistently profitable traders |
 
@@ -121,7 +121,6 @@ If you have limited time and are coming to this book as an options trader, read 
 - [[jack-schwager]] — author biographical and methodological source
 - [[stanley-druckenmiller]] — primary interview material on macro discretionary trading
 - [[bill-eckhardt]] — interview source for expectancy framework and Turtles methodology
-- [[susquehanna]] — Jeff Yass interview is the canonical public source on SIG's culture
 - [[linda-raschke]] — interview source for short-term pattern-based discretionary trading
 - [[asymmetric-risk-reward]] — most-cited concept across multiple interviews
 - [[professional-vs-retail-mindset]] — Eckhardt and Yass interviews exemplify the professional frame

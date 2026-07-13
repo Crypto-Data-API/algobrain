@@ -14,7 +14,6 @@ related:
   - "[[macd]]"
   - "[[moving-averages]]"
   - "[[book-technical-analysis-of-the-financial-markets]]"
-  - "[[book-how-to-make-money-in-stocks]]"
   - "[[john-murphy]]"
   - "[[j-welles-wilder]]"
   - "[[adx]]"
@@ -75,7 +74,6 @@ One illustrative backtesting study across US equities reported RSI(14) with a 79
 ## Sources
 
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy's comprehensive coverage of RSI, including Wilder's original formulation, divergence analysis, failure swings, and range-shift behavior in trending markets
-- [[book-how-to-make-money-in-stocks]] -- O'Neil's use of relative strength (distinct from RSI but conceptually related) as a stock selection criterion, reinforcing momentum-based filtering
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — RSI-2 pullback systems, hidden divergences, win-rate data, and best-practice combinations
 - Wilder, J. Welles (1978), *New Concepts in Technical Trading Systems*, Trend Research — original RSI, ADX, and ATR formulations
 - Connors, L. & Alvarez, C. (2009), *Short Term Trading Strategies That Work* — RSI-2 mean-reversion system

@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [australia, tax, portfolio-theory, strategy]
 aliases: ["CGT Discount", "50% CGT Discount", "12 Month CGT Discount"]
-related: ["[[australian-investor-tax]]", "[[tax-loss-harvesting-australia]]", "[[superannuation]]", "[[smsf]]", "[[position-trading-overview]]", "[[swing-trading-overview]]", "[[covered-call]]", "[[tax-efficient-investing]]", "[[stage-3-tax-cuts]]", "[[franking-credits]]", "[[portfolio-construction]]", "[[cryptocurrency-tax-australia]]"]
+related: ["[[australian-investor-tax]]", "[[tax-loss-harvesting-australia]]", "[[superannuation]]", "[[smsf]]", "[[position-trading-overview]]", "[[swing-trading-overview]]", "[[covered-call]]", "[[tax-efficient-investing]]", "[[stage-3-tax-cuts]]", "[[portfolio-construction]]", "[[cryptocurrency-tax-australia]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: beginner
 prerequisites: ["[[australian-investor-tax]]"]
@@ -89,7 +89,7 @@ Consider an investor in the 37% bracket who bought $50,000 of shares now worth $
 | **Wash sale rule** | No general wash sale rule | 30-day wash sale rule (stocks and crypto from 2026) |
 | **Net Investment Income Tax** | No equivalent | 3.8% NIIT for high earners |
 
-The Australian system is particularly advantageous for investors in the lower-middle brackets. An Australian investor at the 30% bracket pays an effective 15% on long-term gains — the same as a US investor earning $44,626-$492,300 pays on long-term gains — but the Australian can also access [[franking-credits]] on dividends and the no-wash-sale advantage for [[tax-loss-harvesting-australia|tax-loss harvesting]].
+The Australian system is particularly advantageous for investors in the lower-middle brackets. An Australian investor at the 30% bracket pays an effective 15% on long-term gains — the same as a US investor earning $44,626-$492,300 pays on long-term gains — but the Australian can also access franking-credits on dividends and the no-wash-sale advantage for [[tax-loss-harvesting-australia|tax-loss harvesting]].
 
 ## Strategy Implications
 
@@ -192,7 +192,6 @@ The [[stage-3-tax-cuts]] (effective 1 July 2024) altered the income tax brackets
 - [[covered-call]]
 - [[tax-efficient-investing]]
 - [[stage-3-tax-cuts]]
-- [[franking-credits]]
 - [[portfolio-construction]]
 - [[cryptocurrency-tax-australia]]
 - [[passive-investing]]

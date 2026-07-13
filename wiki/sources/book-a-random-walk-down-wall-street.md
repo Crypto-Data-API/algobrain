@@ -44,7 +44,7 @@ The most influential popular book arguing for passive index investing and the ef
 - [[passive-investing]], [[index-funds]], [[dollar-cost-averaging]]
 - [[diversification]], [[modern-portfolio-theory]], [[asset-allocation]]
 - [[behavioral-finance]], [[market-bubbles]]
-- [[technical-analysis-overview]], [[fundamental-analysis]]
+- [[technical-analysis-overview]], fundamental-analysis
 
 ## Pages Backed
 

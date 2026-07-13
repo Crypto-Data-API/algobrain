@@ -11,7 +11,7 @@ markets_affected: [stocks, options, credit, fixed-income, treasuries, swaps, mor
 impact: high
 verified: true
 sources_count: 7
-related: ["[[long-vol-vs-short-vol]]", "[[gfc]]", "[[volmageddon]]", "[[covid-crash]]", "[[black-monday]]", "[[vix-august-2024-spike]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[john-meriwether]]", "[[myron-scholes]]", "[[robert-merton]]", "[[salomon-brothers]]", "[[federal-reserve]]", "[[relative-value-arbitrage]]", "[[fixed-income-arbitrage]]", "[[swap-spread-trade]]", "[[on-the-run-vs-off-the-run]]", "[[merger-arbitrage]]", "[[variance-risk-premium]]", "[[long-vol-overlay]]", "[[volatility-regime-classification]]", "[[ergodicity]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[gfc]]", "[[volmageddon]]", "[[covid-crash]]", "[[black-monday]]", "[[vix-august-2024-spike]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[john-meriwether]]", "[[myron-scholes]]", "[[robert-merton]]", "[[salomon-brothers]]", "[[federal-reserve]]", "[[relative-value-arbitrage]]", "[[fixed-income-arbitrage]]", "[[swap-spread-trade]]", "[[on-the-run-vs-off-the-run]]", "[[variance-risk-premium]]", "[[long-vol-overlay]]", "[[volatility-regime-classification]]", "[[ergodicity]]"]
 ---
 
 Long-Term Capital Management (LTCM) was the most prestigious relative-value hedge fund of its era, founded in 1994 by John Meriwether (former head of bond arbitrage at Salomon Brothers) with Nobel laureates Myron Scholes and Robert Merton on its strategy committee. From inception to early 1998, the fund returned 20-40% net per year on equity capital, growing from $1.25B AUM at launch to roughly $4.7B at peak. In **August-September 1998**, following Russia's default on August 17 and the resulting global flight-to-quality, LTCM's relative-value spreads widened against it across multiple markets simultaneously; the fund lost approximately **$4.6B in the four weeks from late August to mid-September**, leaving roughly $400M of equity supporting $125B of balance-sheet positions and ~$1.25 trillion of off-balance-sheet derivatives notional. On **September 23 1998**, the Federal Reserve Bank of New York coordinated a $3.625B private-sector recapitalisation by 14 major banks. LTCM was wound down by 2000. The episode is the canonical pre-GFC example of a relative-value short-vol blow-up at scale and a recurring reference event in the [[long-vol-vs-short-vol]] literature.
@@ -105,7 +105,7 @@ LTCM is a slightly different shape of vol shock than the others on this comparis
 - [[john-meriwether]], [[myron-scholes]], [[robert-merton]] -- LTCM principals
 - [[salomon-brothers]] -- Meriwether's prior firm
 - [[federal-reserve]] -- the convening authority of the rescue
-- [[relative-value-arbitrage]], [[fixed-income-arbitrage]], [[swap-spread-trade]], [[on-the-run-vs-off-the-run]], [[merger-arbitrage]] -- the strategy categories LTCM ran
+- [[relative-value-arbitrage]], [[fixed-income-arbitrage]], [[swap-spread-trade]], [[on-the-run-vs-off-the-run]], merger-arbitrage -- the strategy categories LTCM ran
 - [[ergodicity]] -- why time-average and ensemble-average diverge
 - [[variance-risk-premium]] -- the structural premium relevant to all negative-skew strategies
 - [[volatility-regime-classification]] -- 1998 as a "Crisis" regime print

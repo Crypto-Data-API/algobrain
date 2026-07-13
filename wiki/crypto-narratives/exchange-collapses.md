@@ -137,7 +137,6 @@ Aggregated, deduplicated feature set a quant can consume (across all three arche
 - [[bitcoin]]
 - [[ethereum]]
 - [[ftx]]
-- [[celsius]]
 - [[three-arrows-capital]]
 - [[mt-gox]]
 - [[binance]]

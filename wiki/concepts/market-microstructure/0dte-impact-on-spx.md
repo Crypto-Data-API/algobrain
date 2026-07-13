@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [options, market-microstructure, sp500, indicators, derivatives, dealer-gamma-hedging]
 aliases: ["0DTE Market Impact", "0DTE on SPX", "Same-Day SPX Options Impact", "0DTE Microstructure"]
-related: ["[[zero-dte-options]]", "[[spx-options]]", "[[index-options]]", "[[dealer-gamma-hedging]]", "[[gamma-squeeze]]", "[[volatility-surface]]", "[[max-pain]]", "[[options-pinning]]", "[[am-vs-pm-settlement]]", "[[soq-settlement]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[volatility-risk-premium]]", "[[high-frequency-trading]]", "[[market-makers]]", "[[volmageddon]]"]
+related: ["[[zero-dte-options]]", "[[dealer-gamma-hedging]]", "[[gamma-squeeze]]", "[[volatility-surface]]", "[[max-pain]]", "[[options-pinning]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[volatility-risk-premium]]", "[[high-frequency-trading]]", "[[market-makers]]", "[[volmageddon]]"]
 domain: [market-microstructure, options, derivatives]
 prerequisites: ["[[zero-dte-options]]", "[[options-greeks]]", "[[dealer-gamma-hedging]]"]
 difficulty: advanced
@@ -125,11 +125,9 @@ Active areas of regulatory and exchange concern:
 ## Related
 
 - [[zero-dte-options]] — the parent strategy/product page
-- [[spx-options]], [[index-options]] — the underlying products
 - [[dealer-gamma-hedging]] — the mechanism behind the intraday effects
 - [[gamma-squeeze]] — extreme gamma-driven feedback (related but distinct)
 - [[options-pinning]], [[max-pain]] — traditional pinning vs 0DTE pinning
-- [[am-vs-pm-settlement]], [[soq-settlement]] — settlement mechanics, contrast with 0DTE
 - [[volatility-risk-premium]] — the structural quantity 0DTE compresses
 - [[volmageddon]] — the canonical vol-product cascade event
 - [[high-frequency-trading]], [[market-makers]] — the participants on the other side of 0DTE flow

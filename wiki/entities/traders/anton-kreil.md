@@ -10,16 +10,16 @@ entity_type: person
 founded: 1980
 headquarters: "Singapore"
 website: "https://antonkreil.com"
-related: ["[[itpm]]", "[[goldman-sachs]]", "[[jason-mcdonald]]", "[[edward-shek]]", "[[chris-quill]]", "[[raj-malhotra]]", "[[long-short-equity]]", "[[options]]"]
+related: ["[[jason-mcdonald]]", "[[edward-shek]]", "[[chris-quill]]", "[[raj-malhotra]]", "[[options]]"]
 ---
 
 # Anton Kreil
 
-Anton Kreil is a former [[goldman-sachs]] proprietary trader and the Managing Partner of the [[itpm|Institute of Trading and Portfolio Management (ITPM)]]. He is known for his systematic approach to [[long-short-equity]] portfolio management and his outspoken criticism of the retail trading education industry.
+Anton Kreil is a former goldman-sachs proprietary trader and the Managing Partner of the Institute of Trading and Portfolio Management (ITPM). He is known for his systematic approach to long-short-equity portfolio management and his outspoken criticism of the retail trading education industry.
 
 ## Overview
 
-Kreil began trading at age 16 and became one of Goldman Sachs' youngest Pan European Equities traders at age 20. After careers at [[goldman-sachs]], Lehman Brothers, and JP Morgan, he retired from banking in May 2007 — months before the Global Financial Crisis. He founded ITPM in 2011 to teach institutional-grade trading methodology to retail traders.
+Kreil began trading at age 16 and became one of Goldman Sachs' youngest Pan European Equities traders at age 20. After careers at goldman-sachs, Lehman Brothers, and JP Morgan, he retired from banking in May 2007 — months before the Global Financial Crisis. He founded ITPM in 2011 to teach institutional-grade trading methodology to retail traders.
 
 ## Key Facts
 
@@ -54,7 +54,7 @@ Kreil began trading at age 16 and became one of Goldman Sachs' youngest Pan Euro
 
 ### Media & Education (2009-present)
 - Featured on BBC's "Million Dollar Traders" reality TV series (2009), where he gave 8 novice traders $1 million of his own money to trade
-- Founded [[itpm]] in 2011
+- Founded itpm in 2011
 - Oversees 1,400+ traders across 30+ countries (ITPM marketing has also described the community as "500 traders across 22 countries" — figures vary by date and definition; see itpm.com)
 - Manages Jakubstadt Holdings global portfolio from Singapore
 
@@ -90,15 +90,12 @@ Only ~20% of the time do markets offer enough [[volatility]] for active trading.
 Kreil represents the institutional trading perspective in a retail-dominated education market. His methodology is most relevant for:
 
 - Medium-term equity and options traders (20-60 day horizons)
-- Traders interested in [[long-short-equity]] portfolio construction
+- Traders interested in long-short-equity portfolio construction
 - Those seeking to understand how investment bank proprietary desks operate
 - Options traders wanting to integrate directional strategies within portfolio management
 
 ## Related
 
-- [[itpm]]
-- [[goldman-sachs]]
-- [[long-short-equity]]
 - [[options]]
 - [[jason-mcdonald]]
 - [[raj-malhotra]]

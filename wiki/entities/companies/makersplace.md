@@ -10,10 +10,10 @@ entity_type: company
 founded: 2019
 headquarters: "San Francisco, California, USA"
 website: "https://makersplace.com"
-related: ["[[nft]]", "[[ethereum]]", "[[superrare]]", "[[knownorigin]]", "[[opensea]]", "[[christies]]"]
+related: ["[[nft]]", "[[ethereum]]", "[[superrare]]", "[[knownorigin]]", "[[opensea]]"]
 ---
 
-MakersPlace was a curated [[nft|NFT]] marketplace focused on digital art, launched in 2019 and backed by Uncork Capital. It operated an invitation and application-based model for artists, positioning itself as a premium destination for digital creators and collectors, and gained significant attention for hosting early NFT drops by Beeple (Mike Winkelmann), whose work later sold for $69.3 million at [[christies|Christie's]] — the most expensive NFT sale in history. **The platform announced its shutdown on 2025-01-16 and is now defunct**, one of the most prominent casualties of the post-2022 NFT market collapse.
+MakersPlace was a curated [[nft|NFT]] marketplace focused on digital art, launched in 2019 and backed by Uncork Capital. It operated an invitation and application-based model for artists, positioning itself as a premium destination for digital creators and collectors, and gained significant attention for hosting early NFT drops by Beeple (Mike Winkelmann), whose work later sold for $69.3 million at Christie's — the most expensive NFT sale in history. **The platform announced its shutdown on 2025-01-16 and is now defunct**, one of the most prominent casualties of the post-2022 NFT market collapse.
 
 ## History
 
@@ -23,7 +23,7 @@ The platform distinguished itself early on by focusing on the artist experience 
 
 MakersPlace's most significant early moment came through its relationship with Beeple (Mike Winkelmann), one of the most prolific digital artists in the world. Beeple used MakersPlace for his early NFT drops in 2020, including a series of works that sold for hundreds of thousands of dollars. This relationship helped establish MakersPlace's credibility and prestige within the emerging NFT art market.
 
-Beeple's trajectory from MakersPlace drops to the historic $69.3 million sale of "Everydays: The First 5000 Days" at [[christies|Christie's]] in March 2021 brought unprecedented mainstream attention to NFT art — and by extension, to the curated marketplace ecosystem that MakersPlace was part of.
+Beeple's trajectory from MakersPlace drops to the historic $69.3 million sale of "Everydays: The First 5000 Days" at Christie's in March 2021 brought unprecedented mainstream attention to NFT art — and by extension, to the curated marketplace ecosystem that MakersPlace was part of.
 
 ## Shutdown (January 2025)
 
@@ -62,7 +62,7 @@ MakersPlace occupied the curated tier alongside [[superrare|SuperRare]] and [[kn
 - **vs. [[superrare|SuperRare]]**: Both curated, but MakersPlace offered more mainstream-friendly features (credit card payments, custodial wallets) and had early ties to Beeple
 - **vs. [[knownorigin|KnownOrigin]]**: Similar curated approach; MakersPlace had a stronger Silicon Valley foundation and US-centric artist base
 - **vs. [[opensea|OpenSea]]** / **[[rarible|Rarible]]**: MakersPlace's curation stood in contrast to open, permissionless marketplaces
-- **vs. [[christies|Christie's]]** / **[[sothebys|Sotheby's]]**: Traditional auction houses entered NFTs in 2021; MakersPlace served as the crypto-native equivalent for high-end digital art
+- **vs. Christie's** / **Sotheby's**: Traditional auction houses entered NFTs in 2021; MakersPlace served as the crypto-native equivalent for high-end digital art
 
 ## Key Facts
 
@@ -76,7 +76,7 @@ MakersPlace occupied the curated tier alongside [[superrare|SuperRare]] and [[kn
 
 ## Significance
 
-MakersPlace's most enduring contribution to the NFT space may be its role in Beeple's trajectory. By providing an early, credible, and accessible platform for Beeple's initial NFT experiments, MakersPlace helped incubate the relationship between one of the world's most prolific digital artists and the blockchain art market. The path from MakersPlace drops (hundreds of thousands of dollars) to the [[christies|Christie's]] sale ($69.3 million) demonstrated how crypto-native platforms could serve as launchpads for artists who would go on to achieve recognition in the traditional art world.
+MakersPlace's most enduring contribution to the NFT space may be its role in Beeple's trajectory. By providing an early, credible, and accessible platform for Beeple's initial NFT experiments, MakersPlace helped incubate the relationship between one of the world's most prolific digital artists and the blockchain art market. The path from MakersPlace drops (hundreds of thousands of dollars) to the Christie's sale ($69.3 million) demonstrated how crypto-native platforms could serve as launchpads for artists who would go on to achieve recognition in the traditional art world.
 
 The platform's emphasis on fiat payment options and custodial wallets also represented an early recognition that mainstream NFT adoption required reducing friction for non-crypto-native users — a lesson that the broader Web3 ecosystem has continued to learn.
 
@@ -88,8 +88,6 @@ MakersPlace's Silicon Valley DNA (founders from Pinterest engineering) brought p
 - [[ethereum]] — Blockchain MakersPlace is built on
 - [[superrare]] — Fellow curated NFT art marketplace
 - [[knownorigin]] — Curated NFT art marketplace
-- [[christies]] — Auction house that sold Beeple's $69.3M NFT
-- [[sothebys]] — Major auction house also active in NFT sales
 - [[opensea]] — Largest NFT marketplace
 - [[art-blocks]] — Generative art NFT platform
 

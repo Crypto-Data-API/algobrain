@@ -9,7 +9,7 @@ aliases: ["options-contracts", "Options Trading", "options-trading", "Stock Opti
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[derivatives]]", "[[volatility]]"]
 difficulty: intermediate
-related: ["[[derivatives]]", "[[futures]]", "[[volatility]]", "[[leverage]]", "[[implied-volatility]]", "[[vix]]", "[[spy]]", "[[volatility-risk-premium]]", "[[black-scholes]]", "[[options-chain]]"]
+related: ["[[derivatives]]", "[[futures]]", "[[volatility]]", "[[leverage]]", "[[implied-volatility]]", "[[vix]]", "[[volatility-risk-premium]]", "[[black-scholes]]", "[[options-chain]]"]
 ---
 
 # Options
@@ -31,7 +31,7 @@ Options come in two forms: **calls** (right to buy) and **puts** (right to sell)
 | **Extrinsic value** | Time value + volatility premium. Decays to zero at expiration |
 | **Moneyness** | ITM (has intrinsic value), ATM (strike ≈ current price), OTM (no intrinsic value) |
 | **American-style** | Can be exercised any time before expiry (most equity options) |
-| **European-style** | Can only be exercised at expiry ([[spy|SPX]] options, index options) |
+| **European-style** | Can only be exercised at expiry (SPX options, index options) |
 | **Contract multiplier** | Standard equity options control 100 shares per contract |
 
 ## The Greeks
@@ -104,7 +104,7 @@ The vol surface (IV across strikes and expirations) is a rich source of market i
 
 ### The ITPM Approach
 
-The [[itpm|ITPM methodology]] (as demonstrated by [[anton-kreil]]) uses options exclusively for a [[long-short-equity]] portfolio:
+The ITPM methodology (as demonstrated by [[anton-kreil]]) uses options exclusively for a long-short-equity portfolio:
 
 - Every position is a long call, long put, short call, or short put on individual stocks
 - Options provide natural leverage (3-4x) without margin debt
@@ -118,7 +118,6 @@ See [[itpm-meet-dieter-the-doubler]] for a documented case study achieving ~100%
 
 Zero-days-to-expiration (0DTE) options — contracts expiring the same day — have exploded since 2022:
 
-- [[spy|SPY]] and SPX offer daily (Monday-Friday) expirations, meaning 0DTE is available every trading day
 - 0DTE options have grown to dominate SPX flow: ~59% of total SPX options volume in 2025, hitting record monthly highs of 62-63% in early-to-mid 2026 (up from roughly 5% in 2020). 0DTE was ~24% of all US-listed options volume in 2025 (Source: CBOE, verified via WebSearch, 2026-06-11)
 - **Gamma risk**: 0DTE options have extreme gamma near ATM — small underlying moves produce enormous percentage changes in the option price
 - **Market impact debate**: there is active debate about whether 0DTE flows amplify or dampen intraday market volatility. Market makers hedging 0DTE positions may create feedback loops
@@ -129,7 +128,7 @@ Zero-days-to-expiration (0DTE) options — contracts expiring the same day — h
 Key data sources for options traders:
 
 - **CBOE**: official volume and open interest data, VIX calculation methodology
-- **Options chains**: available on most brokers and [[tradingview-platform|TradingView]], [[finviz]], Yahoo Finance
+- **Options chains**: available on most brokers and [[tradingview-platform|TradingView]], finviz, Yahoo Finance
 - **Unusual options activity**: services like Unusual Whales, Cheddar Flow track large block trades that may signal institutional positioning
 - **OPRA feed**: the official US options data feed — extremely high bandwidth, expensive
 - **Put-call ratio**: total put volume / call volume. Extreme readings signal [[sentiment]] extremes. See [[contrarian-extremes]]
@@ -152,5 +151,4 @@ A trader buys a BTC $60,000 call for $2,000 premium expiring in 30 days. If BTC 
 - [[vix]] — the "fear index" derived from SPX option prices
 - [[volatility-risk-premium]] — the persistent gap between implied and realized vol
 - [[futures]] — often used alongside options for hedging
-- [[spy]] — most liquid options market in the world
 - [[black-scholes]] — the foundational option pricing model

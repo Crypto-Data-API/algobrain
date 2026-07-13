@@ -9,7 +9,7 @@ aliases: ["TradFi", "traditional finance", "CeFi", "legacy finance", "traditiona
 domain: [market-microstructure]
 prerequisites: ["[[defi]]"]
 difficulty: beginner
-related: ["[[defi]]", "[[stocks]]", "[[forex]]", "[[bonds]]", "[[options-overview]]", "[[macroeconomics]]", "[[market-microstructure]]", "[[cefi-yield-vs-defi-yield]]"]
+related: ["[[defi]]", "[[forex]]", "[[bonds]]", "[[options-overview]]", "[[macroeconomics]]", "[[market-microstructure]]", "[[cefi-yield-vs-defi-yield]]"]
 ---
 
 **Traditional finance (TradFi)** refers to the established, intermediated financial system — banks, broker-dealers, stock exchanges, clearing houses, central banks, and regulators — that channels the majority of global capital. The term is used chiefly as a contrast to [[defi|decentralized finance]] and crypto-native systems. The defining distinction is **trust architecture**: TradFi relies on trusted intermediaries (banks, custodians, regulators) backed by the legal system, while DeFi aims to replace them with smart contracts and on-chain logic ("trustless" / "code is law").
@@ -60,7 +60,6 @@ The TradFi/DeFi boundary is blurring rapidly:
 
 - [[defi]] — decentralized finance, the primary contrast to TradFi
 - [[cefi-yield-vs-defi-yield]] — comparison of intermediated vs. on-chain yield
-- [[stocks]] — TradFi equity markets
 - [[forex]] — TradFi foreign exchange
 - [[bonds]] — TradFi fixed income
 - [[macroeconomics]] — the macro framework TradFi operates within

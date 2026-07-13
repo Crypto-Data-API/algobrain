@@ -23,7 +23,7 @@ The Fibonacci sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89...) produces rat
 - **50%** -- not a true Fibonacci ratio but included due to Dow Theory and the observed tendency of markets to retrace half a move.
 - **78.6%** -- the square root of 0.618. A deep retracement level; if price reaches this level, the original move is significantly eroded.
 
-Fibonacci retracement is used across all markets -- [[stocks]], [[forex]], [[crypto]], [[commodities]], [[futures]] -- and all timeframes. Its widespread adoption by traders contributes to its effectiveness as a self-fulfilling prophecy: because many traders place orders at Fibonacci levels, price often does react at these levels.
+Fibonacci retracement is used across all markets -- stocks, [[forex]], [[crypto]], [[commodities]], [[futures]] -- and all timeframes. Its widespread adoption by traders contributes to its effectiveness as a self-fulfilling prophecy: because many traders place orders at Fibonacci levels, price often does react at these levels.
 
 ## How It Works
 

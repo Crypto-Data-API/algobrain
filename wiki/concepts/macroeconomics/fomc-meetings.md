@@ -9,7 +9,7 @@ aliases: ["FOMC", "Federal Open Market Committee", "FOMC Date"]
 domain: [macroeconomics, market-microstructure]
 prerequisites: ["[[federal-reserve]]", "[[interest-rates]]"]
 difficulty: intermediate
-related: ["[[federal-reserve]]", "[[fomc]]", "[[fomc-drift]]", "[[interest-rates]]", "[[interest-rate-risk]]", "[[fed-funds-futures]]", "[[us-treasury-bonds]]", "[[implied-volatility]]", "[[volatility-term-structure]]", "[[volatility-regime]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[expiration-laddering]]", "[[earnings-volatility]]", "[[macro-events]]", "[[options-portfolio-construction]]"]
+related: ["[[federal-reserve]]", "[[fomc]]", "[[fomc-drift]]", "[[interest-rates]]", "[[interest-rate-risk]]", "[[fed-funds-futures]]", "[[us-treasury-bonds]]", "[[implied-volatility]]", "[[volatility-term-structure]]", "[[volatility-regime]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[expiration-laddering]]", "[[macro-events]]", "[[options-portfolio-construction]]"]
 ---
 
 The Federal Open Market Committee (FOMC) holds **eight scheduled meetings per year** plus occasional unscheduled meetings during crises. The scheduled meetings are the single highest-impact recurring events on the US economic calendar — they reset the path of the federal-funds rate, drive the short end of the [[us-treasury-bonds|Treasury]] curve, and produce some of the most reliable short-window patterns in equity returns and the [[implied-volatility|IV]] surface. For a [[theta-targeting|theta-targeted]] options book, FOMC dates are not just macro noise to weather — they are surface-distorting events that should be explicitly *shaped around* in the [[expiration-laddering|DTE ladder]]. This page focuses on the **market-microstructure and options-vol implications** of FOMC dates; for the institutional structure and policy mechanics of the committee, see [[fomc]].
@@ -23,7 +23,7 @@ The FOMC is the monetary-policy arm of the [[federal-reserve|Federal Reserve Sys
 - **Press conference** — Fed Chair, beginning at 2:30 PM, runs ~45–60 minutes.
 - **Minutes** — released three weeks later.
 
-Each of these has measurable, distinct market impact. The intraday "FOMC drift" / "FOMC pump" pattern — abnormal equity returns running into and around the announcement window — is one of the most robust calendar effects in the US data, documented by Cieslak, Morse, & Vissing-Jorgensen (2019) in *American Economic Review*. The vol-surface effects — front-end IV ramp, term-structure inversion, and post-meeting crush — mirror the [[earnings-volatility|earnings-vol cycle]] in form, though at index level and with different magnitudes.
+Each of these has measurable, distinct market impact. The intraday "FOMC drift" / "FOMC pump" pattern — abnormal equity returns running into and around the announcement window — is one of the most robust calendar effects in the US data, documented by Cieslak, Morse, & Vissing-Jorgensen (2019) in *American Economic Review*. The vol-surface effects — front-end IV ramp, term-structure inversion, and post-meeting crush — mirror the earnings-vol cycle in form, though at index level and with different magnitudes.
 
 ## How It Works
 
@@ -126,7 +126,6 @@ Sunday-evening 100-bp cut to zero plus QE restart. Monday: SPX -12% (limit-down 
 - [[vega-budgeting]] — FOMC stress scenarios in the budget
 - [[expiration-laddering]] — laddering DTE explicitly around FOMC dates
 - [[options-portfolio-construction]] — where macro-event sizing fits in the broader book
-- [[earnings-volatility]] — the structurally analogous single-name cycle
 - [[macro-events]] — broader macro-event taxonomy
 - [[options-stress-testing]] — formal stress scenarios including FOMC
 

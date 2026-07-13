@@ -113,10 +113,10 @@ Also see: [[transformer-architecture]] (in Core Concepts), [[neural-networks]] (
 | [[named-entity-recognition]] | Extracting companies, amounts, dates from financial text |
 | [[text-preprocessing-finance]] | Cleaning SEC filings, earnings calls, social media |
 | [[text-classification-finance]] | Beyond sentiment — event type, urgency, hawkish/dovish |
-| [[chatbot-architectures]] | Conversational AI from rule-based to LLM-powered ([[alfred|Alfred]]) |
+| [[chatbot-architectures]] | Conversational AI from rule-based to LLM-powered (Alfred) |
 | [[speech-and-audio-ai]] | Whisper, ElevenLabs, earnings call audio analysis |
 
-Also see: [[nlp-sentiment-analysis]], [[finbert]], [[llm-market-analysis]], [[earnings-call-analysis]] in AI Trading
+Also see: [[nlp-sentiment-analysis]], [[finbert]], [[llm-market-analysis]], earnings-call-analysis in AI Trading
 
 ---
 
@@ -181,7 +181,7 @@ Also see: [[computer-vision-trading]] (in Fundamentals), [[cnn-chart-recognition
 | Page | Sector | Key Investment Angle |
 |------|--------|---------------------|
 | [[ai-applications-overview]] | Hub | Cross-industry AI adoption map, platform shift, data moats |
-| [[ai-healthcare]] | Healthcare ($4T) | Drug discovery ([[recursion-pharmaceuticals|RXRX]], [[schrödinger|SDGR]]), diagnostics, AlphaFold |
+| [[ai-healthcare]] | Healthcare ($4T) | Drug discovery (RXRX, SDGR), diagnostics, AlphaFold |
 | [[ai-finance]] | Finance ($26T) | Banking, insurance, lending, compliance — beyond trading |
 | [[ai-gaming]] | Gaming ($200B) | NPC AI, procedural content, RL research, NVIDIA convergence |
 | [[ai-science]] | Science | AlphaFold, materials discovery, weather forecasting, fusion |
@@ -387,7 +387,6 @@ Three cross-cutting cautions recur throughout this section and are worth holding
 - [[decentralized-ai]] — the crypto-native expression of AI
 - [[foundation-models]] / [[transformer-architecture]] — the core modern architectures
 - [[ai-narrative-arc]] — the 2024-2026 capability → mania → bust → utility cycle
-- [[alfred]] — the LLM-powered assistant built on this wiki
 
 ## Sources
 

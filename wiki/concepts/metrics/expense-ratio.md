@@ -6,17 +6,17 @@ updated: 2026-07-01
 status: review
 tags: [portfolio-theory, stocks, fundamental-analysis]
 domain: [portfolio-theory, valuation]
-prerequisites: ["[[etf]]", "[[mutual-funds]]"]
+prerequisites: ["[[etf]]"]
 difficulty: beginner
 aliases: ["Expense Ratio", "Total Expense Ratio", "TER", "Net Expense Ratio", "Gross Expense Ratio", "Fund Fee"]
-related: ["[[etf]]", "[[mutual-funds]]", "[[index-funds]]", "[[index-investing]]", "[[etf-vs-mutual-fund-vs-index-fund]]", "[[jack-bogle]]", "[[dividend-yield]]", "[[compounding]]"]
+related: ["[[etf]]", "[[index-funds]]", "[[index-investing]]", "[[compounding]]"]
 ---
 
-The **expense ratio** is the annual fee that a pooled investment fund -- an [[etf|exchange-traded fund (ETF)]], [[mutual-funds|mutual fund]], or [[index-funds|index fund]] -- charges its shareholders to cover operating costs, expressed as a percentage of the fund's average assets under management (AUM). It is the single most important and most controllable cost an ordinary fund investor faces, because it is deducted automatically and silently from the fund's returns every year regardless of whether the fund makes money.
+The **expense ratio** is the annual fee that a pooled investment fund -- an [[etf|exchange-traded fund (ETF)]], mutual fund, or [[index-funds|index fund]] -- charges its shareholders to cover operating costs, expressed as a percentage of the fund's average assets under management (AUM). It is the single most important and most controllable cost an ordinary fund investor faces, because it is deducted automatically and silently from the fund's returns every year regardless of whether the fund makes money.
 
 ## Overview
 
-A fund does not bill investors directly for the expense ratio. Instead, the fee accrues daily and is netted out of the fund's [[net-asset-value|net asset value (NAV)]] before any return is reported. If a fund earns a 10% gross return in a year and charges a 1.0% expense ratio, investors receive roughly 9% -- the fee is invisible on a statement but mathematically certain. This silent, continuous deduction is precisely why low-cost passive investing, popularized by [[jack-bogle|Jack Bogle]] and [[index-investing|index funds]], has been so powerful: the fee is one of the few variables an investor controls with near-perfect certainty.
+A fund does not bill investors directly for the expense ratio. Instead, the fee accrues daily and is netted out of the fund's [[net-asset-value|net asset value (NAV)]] before any return is reported. If a fund earns a 10% gross return in a year and charges a 1.0% expense ratio, investors receive roughly 9% -- the fee is invisible on a statement but mathematically certain. This silent, continuous deduction is precisely why low-cost passive investing, popularized by Jack Bogle and [[index-investing|index funds]], has been so powerful: the fee is one of the few variables an investor controls with near-perfect certainty.
 
 The expense ratio bundles several underlying costs:
 
@@ -77,17 +77,13 @@ These ranges shift over time; the secular trend since the 1990s has been sharply
 - **Tracking difference, not just fee, matters for index funds.** Two S&P 500 funds with identical expense ratios can deliver different net returns because of securities-lending revenue, sampling error, and execution quality. Compare realized tracking difference, not the headline fee alone.
 - **Net vs gross can mislead.** A temporarily waived (net) fee can revert to the higher gross fee when the waiver lapses. Read the prospectus expiration date.
 - **Cheap is not automatically better in absolute terms.** A higher-fee fund delivering genuine, persistent outperformance net of fees can still win -- but the empirical base rate for active managers clearing their fees over long horizons is low, which is the core argument behind [[index-investing|index investing]].
-- **Expense ratio ignores tax efficiency.** ETFs are generally more tax-efficient than equivalent mutual funds due to the in-kind creation/redemption mechanism, an advantage invisible in the expense ratio itself (see [[etf-vs-mutual-fund-vs-index-fund]]).
+- **Expense ratio ignores tax efficiency.** ETFs are generally more tax-efficient than equivalent mutual funds due to the in-kind creation/redemption mechanism, an advantage invisible in the expense ratio itself (see etf-vs-mutual-fund-vs-index-fund).
 
 ## Related
 
 - [[etf]] -- the most common low-expense-ratio vehicle
-- [[mutual-funds]] -- where 12b-1 and load fees compound the cost story
 - [[index-funds]] -- the structure that made ultra-low expense ratios mainstream
 - [[index-investing]] -- the philosophy built on minimizing controllable costs
-- [[etf-vs-mutual-fund-vs-index-fund]] -- structural cost and tax comparison
-- [[jack-bogle]] -- the investor who weaponized the expense ratio against the active-management industry
-- [[dividend-yield]] -- another fund metric investors weigh against fees
 - [[compounding]] -- the mechanism that turns a small fee into a large drag
 
 ## Sources

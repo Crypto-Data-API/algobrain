@@ -10,7 +10,7 @@ entity_type: company
 founded: 1988
 headquarters: "New York, USA"
 website: "https://www.blackrock.com"
-related: ["[[bitcoin-etfs]]", "[[bitcoin]]", "[[circle]]", "[[ethereum]]", "[[financials]]", "[[s-and-p-500]]", "[[sec]]", "[[stablecoin-attestations]]", "[[usdc]]", "[[coinbase]]", "[[tokenization]]", "[[institutional-adoption]]", "[[economic-moat]]", "[[etf]]"]
+related: ["[[bitcoin-etfs]]", "[[bitcoin]]", "[[circle]]", "[[ethereum]]", "[[sec]]", "[[stablecoin-attestations]]", "[[usdc]]", "[[coinbase]]", "[[tokenization]]", "[[institutional-adoption]]", "[[etf]]"]
 ticker: "BLK"
 exchange: "NYSE"
 sector: "Financials"
@@ -60,7 +60,7 @@ The strategic thrust of the mid-2020s has been a **push into private markets and
 
 ## Economic Moat & Competitive Position
 
-BlackRock has one of the widest [[economic-moat|economic moats]] in financial services, built on scale and interlocking platforms rather than any single product:
+BlackRock has one of the widest economic moats in financial services, built on scale and interlocking platforms rather than any single product:
 
 - **Scale economics** — at ~$10T+ AUM, BlackRock spreads fixed costs (research, compliance, technology, distribution) across the largest asset base in the industry, enabling rock-bottom [[etf|ETF]] fees that smaller managers cannot profitably match. Scale begets lower fees, which begets flows, which begets more scale — a flywheel.
 - **iShares brand & liquidity** — the largest, most liquid ETFs attract the most trading and the tightest spreads, which attracts more assets; incumbency in flagship ETFs is extremely hard to dislodge (the IBIT launch is a textbook example — first-mover liquidity compounded into dominance).
@@ -188,11 +188,11 @@ BlackRock competes across several fronts — passive/ETF scale, active managemen
 | Company | Primary battleground | Notes |
 |---|---|---|
 | **Vanguard** | Index funds & ETFs | The closest scale rival in passive; mutual-ownership structure lets it compete fiercely on fees (the main fee-compression pressure on iShares) |
-| [[state-street]] | ETFs (SPDR), custody | SPDR pioneered the ETF (SPY); also a custody/servicing giant — both rival and infrastructure peer |
-| [[invesco]] | ETFs & active (QQQ) | Mid-scale ETF and active manager; QQQ is a flagship competitor product |
-| [[franklin-resources|Franklin Templeton]] | Active + growing ETF/alts | Traditional active house diversifying into ETFs and tokenization |
-| [[t-rowe-price]] | Active equity & retirement | Active-heavy; more exposed to the active-to-passive shift than BlackRock |
-| [[northern-trust]] | Asset management & custody | Smaller; overlaps in institutional/custody |
+| state-street | ETFs (SPDR), custody | SPDR pioneered the ETF (SPY); also a custody/servicing giant — both rival and infrastructure peer |
+| invesco | ETFs & active (QQQ) | Mid-scale ETF and active manager; QQQ is a flagship competitor product |
+| Franklin Templeton | Active + growing ETF/alts | Traditional active house diversifying into ETFs and tokenization |
+| t-rowe-price | Active equity & retirement | Active-heavy; more exposed to the active-to-passive shift than BlackRock |
+| northern-trust | Asset management & custody | Smaller; overlaps in institutional/custody |
 | **Fidelity / Charlie / Schwab** | ETFs, brokerage, direct retail | Compete on fees and distribution; also crypto-ETF rivals (FBTC vs IBIT) |
 
 BlackRock's differentiator versus all of them is the **combination of #1 scale + the Aladdin technology platform** — no single rival matches both. In private markets, the GIP/HPS push puts it against Blackstone, Apollo, and KKR.
@@ -237,8 +237,8 @@ BlackRock trades as a **high-quality, market-levered financial compounder** — 
 - **Multiple** — typically a premium to traditional active asset managers (reflecting scale, Aladdin's recurring technology revenue, and the private-markets pivot) but below pure software names; the bull case is multiple expansion as the technology/alternatives mix grows.
 - **Earnings drivers** — the print turns on **net flows, period-end and average AUM, the blended fee rate, technology-services revenue, and operating margin**; markets-driven AUM swings move estimates more than the headline.
 - **Cyclicality / beta** — earnings track financial markets, so the stock behaves with a market beta tilted to risk-asset values; risk-off regimes compress both AUM and the multiple.
-- **Capital return** — a steady, growing dividend (a meaningful component of total return for a [[financials|financial]]) plus buybacks; income-and-quality investors own it for the compounding fee annuity.
-- **Index/flows** — a large-cap [[s-and-p-500]] [[financials|Financials]] constituent held across financial-sector and dividend funds; also a sentiment bellwether for the asset-management industry.
+- **Capital return** — a steady, growing dividend (a meaningful component of total return for a financial) plus buybacks; income-and-quality investors own it for the compounding fee annuity.
+- **Index/flows** — a large-cap s-and-p-500 Financials constituent held across financial-sector and dividend funds; also a sentiment bellwether for the asset-management industry.
 
 ## Trading Relevance
 
@@ -266,7 +266,7 @@ BlackRock trades as a **high-quality, market-levered financial compounder** — 
 
 ## Fundamentals
 
-*Source: [[stockmarketapi-fundamentals-2026-05-10]] · period end 2024-12-31 · primary sec_edgar · completeness 100% · pulled 2026-06-10*
+*Source: stockmarketapi-fundamentals-2026-05-10 · period end 2024-12-31 · primary sec_edgar · completeness 100% · pulled 2026-06-10*
 
 ### Snapshot
 
@@ -313,23 +313,10 @@ BlackRock trades as a **high-quality, market-levered financial compounder** — 
 
 ## Related
 
-- [[s-and-p-500]]
-- [[financials|Financials]]
-- [[economic-moat]]
 - [[etf]]
-- [[state-street]]
-- [[invesco]]
-- [[franklin-resources]]
-- [[t-rowe-price]]
-- [[northern-trust]]
 - [[bitcoin-etfs]]
 - [[tokenization]]
-- [[arch-capital]]
-- [[aflac]]
-- [[aig]]
-- [[assurant]]
-- [[arthur-j-gallagher]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-sp500-2026-04-13]])
+- (Source: stockmarketapi-sp500-2026-04-13)

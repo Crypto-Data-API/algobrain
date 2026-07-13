@@ -18,7 +18,6 @@ related:
   - "[[itaa-1997-overview]]"
   - "[[australian-investor-tax]]"
   - "[[capital-gains-tax-discount]]"
-  - "[[franking-credits]]"
 ---
 
 > **Not tax or financial advice.** SMSF tax treatment intersects superannuation law (the SIS Act), the ITAA, and ATO administrative practice. Every rate, cap, and threshold below is **indicative** and indexed/amended frequently. SMSF compliance is closely monitored by the ATO (the regulator of SMSFs — see [[australian-regulatory-framework]]). Confirm any structural decision with a registered tax agent and an approved SMSF auditor, and check current figures at ato.gov.au before relying on them.
@@ -38,7 +37,7 @@ Compare to an individual at the top marginal rate (47% incl. Medicare):
 - Same dividend in SMSF accumulation: ~0% effective (or modest refund)
 - Same dividend in SMSF pension: cash refund of franking credit
 
-This is why so much SMSF allocation goes to high-yielding, fully franked Australian shares ([[franking-credits]]).
+This is why so much SMSF allocation goes to high-yielding, fully franked Australian shares (franking-credits).
 
 ## Trading vs investing — the SMSF-specific question
 
@@ -132,7 +131,7 @@ Fully franked dividend → fund receives the cash dividend + franking credit att
 ### Pension phase
 Same dividend + franking credit. Fund tax rate is 0%. **Full $42.86 franking credit refunded in cash**. Net cash to fund: $142.86 on a $100 dividend.
 
-This is the foundation of the "high-yield fully franked Australian shares" portfolio that dominates SMSF allocation patterns. See [[franking-credits]] and the [[smsf]] page.
+This is the foundation of the "high-yield fully franked Australian shares" portfolio that dominates SMSF allocation patterns. See franking-credits and the [[smsf]] page.
 
 ## Transfer balance cap and contributions
 
@@ -235,7 +234,6 @@ Written from the public text of the ITAA 1997, ITAA 1936, SIS Act 1993, ATO publ
 - [[itaa-1997-overview]] — broader index
 - [[australian-investor-tax]] — broader tax framework
 - [[capital-gains-tax-discount]] — CGT discount mechanics
-- [[franking-credits]] — franking refund regime
 - [[australian-regulatory-framework]] — where the ATO sits as SMSF regulator
 - [[asic]] — conduct regulator (relevant if the SMSF holds AFSL-regulated products)
 - [[risk-management]] — sizing and preservation constraints inside super

@@ -6,13 +6,13 @@ updated: 2026-06-11
 status: good
 tags: [risk-management, ai-trading, history, behavioral-finance]
 aliases: ["2028 Global Intelligence Crisis", "Citrini AI Crisis Scenario", "GIC Scenario"]
-related: ["[[ai-layoff-trap]]", "[[capital-vs-labor-asymmetry]]", "[[service-sector-multiplier]]", "[[skill-bifurcation]]", "[[wage-compression-vs-job-loss]]", "[[ai-driven-demand-destruction]]", "[[citrini-research]]", "[[2026-02-citrini-tech-selloff]]", "[[tail-risk]]", "[[black-swan]]", "[[market-bubbles]]", "[[crashes]]", "[[2024-nvidia-ai-boom]]"]
+related: ["[[ai-layoff-trap]]", "[[capital-vs-labor-asymmetry]]", "[[service-sector-multiplier]]", "[[skill-bifurcation]]", "[[wage-compression-vs-job-loss]]", "[[ai-driven-demand-destruction]]", "[[tail-risk]]", "[[black-swan]]", "[[market-bubbles]]", "[[crashes]]"]
 domain: [risk-management, behavioral-finance]
 prerequisites: ["[[tail-risk]]", "[[market-cycles]]"]
 difficulty: advanced
 ---
 
-The **2028 Global Intelligence Crisis** is a named tail-risk scenario published by [[citrini-research]] in February 2026 that posits a US unemployment rate above 10% and a roughly 40% equity-market decline if superintelligent AI deployment outpaces the labor market's ability to reabsorb displaced workers. It triggered the [[2026-02-citrini-tech-selloff]] and has since become an institutional reference point for pricing AI-related tail risk (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
+The **2028 Global Intelligence Crisis** is a named tail-risk scenario published by citrini-research in February 2026 that posits a US unemployment rate above 10% and a roughly 40% equity-market decline if superintelligent AI deployment outpaces the labor market's ability to reabsorb displaced workers. It triggered the 2026-02-citrini-tech-selloff and has since become an institutional reference point for pricing AI-related tail risk (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
 
 ## Overview
 
@@ -77,8 +77,6 @@ The publication coincided with notable market action (Source: [[2026-04-22-gap-f
 - [[skill-bifurcation]]
 - [[wage-compression-vs-job-loss]]
 - [[ai-driven-demand-destruction]]
-- [[citrini-research]]
-- [[2026-02-citrini-tech-selloff]]
 - [[tail-risk]]
 - [[black-swan]]
 - [[fat-tails]]
@@ -86,7 +84,6 @@ The publication coincided with notable market action (Source: [[2026-04-22-gap-f
 - [[contagion]]
 - [[crashes]]
 - [[market-bubbles]]
-- [[2024-nvidia-ai-boom]]
 - [[anthropic]]
 
 ## Sources

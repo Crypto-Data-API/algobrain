@@ -59,7 +59,7 @@ Price made a **higher high** while CVD made a **lower high** (+3,200 → +1,100)
 ## How to Read It
 
 1. **Identify a trending move** on the 1-minute or 5-minute chart, ideally into a zone you have marked from higher timeframe [[smart-money-concepts]] analysis.
-2. **Watch the delta bar or cumulative delta line** on your [[footprint-charts|footprint chart]]. Most platforms (such as [[sierra-chart]], [[quantower]], or [[bookmap]]) offer a cumulative delta indicator that plots as a line or histogram beneath price.
+2. **Watch the delta bar or cumulative delta line** on your [[footprint-charts|footprint chart]]. Most platforms (such as [[sierra-chart]], quantower, or bookmap) offer a cumulative delta indicator that plots as a line or histogram beneath price.
 3. **Compare swing points**: if price makes a new extreme but cumulative delta does not confirm, you have divergence. The stronger the divergence (delta moving sharply against price), the higher the probability of reversal.
 4. **Combine with other order flow signals**: delta divergence is strongest when accompanied by [[absorption]] at the extreme (large passive orders defending the level) or [[iceberg-orders]] being detected. A delta divergence alone is a warning; delta divergence plus absorption is a high-conviction entry signal.
 

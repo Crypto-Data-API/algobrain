@@ -15,7 +15,7 @@ related: ["[[gamestop-short-squeeze]]", "[[citadel]]", "[[payment-for-order-flow
 
 # Robinhood
 
-Robinhood Markets, Inc. (NASDAQ: HOOD) is a commission-free brokerage platform that popularized zero-fee stock and [[options]] trading, fundamentally changing the retail brokerage industry. It became the center of intense controversy during the [[gamestop-short-squeeze]] when it restricted buying of heavily shorted stocks, then re-invented itself in 2024–2025 as a diversified "fintech super-app" spanning equities, options, crypto (via Bitstamp), retirement accounts, and [[prediction-markets|prediction-market]] event contracts — joining the [[s-and-p-500|S&P 500]] in September 2025.
+Robinhood Markets, Inc. (NASDAQ: HOOD) is a commission-free brokerage platform that popularized zero-fee stock and [[options]] trading, fundamentally changing the retail brokerage industry. It became the center of intense controversy during the [[gamestop-short-squeeze]] when it restricted buying of heavily shorted stocks, then re-invented itself in 2024–2025 as a diversified "fintech super-app" spanning equities, options, crypto (via Bitstamp), retirement accounts, and [[prediction-markets|prediction-market]] event contracts — joining the S&P 500 in September 2025.
 
 ## Overview
 
@@ -36,7 +36,7 @@ Robinhood's 2025 was transformational — HOOD rallied roughly **220% in 2025**,
 - **Bitstamp acquisition (closed June 2025)** — Robinhood completed its ~$200M acquisition of Bitstamp, a crypto exchange holding 50+ active licenses and registrations globally, giving it an institutional crypto business and regulatory footprint across Europe and Canada. Bitstamp notional crypto volumes were ~$7B in the period following the close.
 - **Prediction markets / event contracts** — launched with the 2024 US election (event contracts routed through CFTC-regulated venues, initially Kalshi). By Q3 2025, prediction markets were generating $100M+ in annualized revenue and tracking toward a ~$300M annualized run rate, with ~9 billion contracts traded in the first year. In November 2025, Connecticut issued cease-and-desist orders against Robinhood, [[kalshi]], and Crypto.com alleging the sports event contracts amount to unlicensed sports betting; Robinhood maintains the contracts are federally regulated by the [[cftc|CFTC]].
 - **Tokenized stocks (EU, June 2025)** — launched tokenized US stock and ETF trading for EU customers on-chain, plus crypto perpetual futures for European users.
-- **S&P 500 inclusion (22 September 2025)** — HOOD replaced Caesars Entertainment in the [[s-and-p-500|S&P 500]], pulling in billions in passive index flows; the announcement drove a ~14.5% surge.
+- **S&P 500 inclusion (22 September 2025)** — HOOD replaced Caesars Entertainment in the S&P 500, pulling in billions in passive index flows; the announcement drove a ~14.5% surge.
 
 ## Trading Relevance
 
@@ -57,7 +57,6 @@ As a stock, HOOD trades as a high-beta proxy for retail trading activity, crypto
 - [[prediction-markets]]
 - [[sec]]
 - [[cftc]]
-- [[robinhood-vs-interactive-brokers]] — comparison of Robinhood and Interactive Brokers for different trader profiles
 
 ## Sources
 

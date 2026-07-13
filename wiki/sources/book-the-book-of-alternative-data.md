@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [book, machine-learning, alternative-data, nlp-sentiment-analysis, data-provider]
 aliases: ["The Book of Alternative Data", "Denev Amen Alternative Data"]
-related: ["[[nlp-sentiment-analysis]]", "[[feature-engineering-finance]]", "[[ml-trading-pipeline]]", "[[finviz]]", "[[tradingview]]", "[[alpha-vantage]]", "[[data-providers]]", "[[the-book-of-alternative-data]]"]
+related: ["[[nlp-sentiment-analysis]]", "[[feature-engineering-finance]]", "[[ml-trading-pipeline]]", "[[alpha-vantage]]", "[[data-providers]]", "[[the-book-of-alternative-data]]"]
 source_type: book
 source_author: "Alexander Denev, Saeed Amen"
 source_date: 2020
@@ -42,9 +42,9 @@ The definitive practitioner guide to the alternative data ecosystem for investme
 
 - [[nlp-sentiment-analysis]], [[alternative-data]]
 - [[feature-engineering-finance]], [[ml-trading-pipeline]]
-- [[data-providers]], [[finviz]]
-- [[tradingview]], [[alpha-vantage]]
-- [[esg-investing]], [[web-scraping]]
+- [[data-providers]], finviz
+- tradingview, [[alpha-vantage]]
+- esg-investing, [[web-scraping]]
 
 ## Pages Backed
 

@@ -11,7 +11,7 @@ timeframe: long-term
 markets: [stocks]
 complexity: advanced
 backtest_status: untested
-related: ["[[value-investing-strategy]]", "[[growth-investing-strategy]]", "[[trend-following-cta]]", "[[sector-rotation]]", "[[momentum]]", "[[book-inside-the-black-box]]", "[[book-the-intelligent-investor]]"]
+related: ["[[trend-following-cta]]", "[[sector-rotation]]", "[[momentum]]", "[[book-inside-the-black-box]]"]
 ---
 
 # Factor Investing
@@ -20,13 +20,13 @@ related: ["[[value-investing-strategy]]", "[[growth-investing-strategy]]", "[[tr
 
 Factor Investing is a systematic, rules-based strategy that constructs portfolios by targeting specific **return drivers** (factors) that have been shown to deliver risk-adjusted excess returns over long periods. The approach is rooted in academic finance, primarily the work of **Eugene Fama** and **Kenneth French**, whose three-factor model (1993) demonstrated that stock returns are explained by market risk, **size** (small beats large), and **value** (cheap beats expensive). Since then, additional factors have been documented: **momentum** (winners keep winning), **quality** (profitable firms outperform), and **low volatility** (less risky stocks paradoxically deliver higher risk-adjusted returns).
 
-Factor investing bridges [[fundamental-analysis]] and [[algorithmic-trading]]. Factors are identified through academic research but implemented through systematic, quantitative portfolio construction (Source: [[book-inside-the-black-box]]). The strategy is used by major institutional firms including **AQR Capital Management**, **Dimensional Fund Advisors**, **BlackRock** (via iShares factor ETFs), and **Two Sigma**. Assets managed using factor strategies exceed $2 trillion globally.
+Factor investing bridges fundamental-analysis and [[algorithmic-trading]]. Factors are identified through academic research but implemented through systematic, quantitative portfolio construction (Source: [[book-inside-the-black-box]]). The strategy is used by major institutional firms including **AQR Capital Management**, **Dimensional Fund Advisors**, **BlackRock** (via iShares factor ETFs), and **Two Sigma**. Assets managed using factor strategies exceed $2 trillion globally.
 
 ## Rules
 
 ### Entry
 1. **Select target factors** based on investment goals and beliefs:
-   - **Value:** Buy stocks in the cheapest quintile by P/B, P/E, or EV/EBITDA. Sell/avoid the most expensive quintile. The [[value-investing-strategy|value premium]] has averaged 3-5% annually (Source: [[book-the-intelligent-investor]]).
+   - **Value:** Buy stocks in the cheapest quintile by P/B, P/E, or EV/EBITDA. Sell/avoid the most expensive quintile. The value premium has averaged 3-5% annually (Source: book-the-intelligent-investor).
    - **Momentum:** Buy stocks with the highest 12-month returns (excluding the most recent month). Sell/avoid the worst performers. The [[momentum]] premium has averaged 4-8% annually.
    - **Quality:** Buy stocks with high ROE, low debt, stable earnings growth. Avoid unprofitable, highly leveraged firms. Quality premium: 2-4% annually.
    - **Size:** Overweight small-cap stocks relative to large-caps. The size premium has averaged 2-3% annually (though it has weakened post-publication).
@@ -44,7 +44,6 @@ Factor investing bridges [[fundamental-analysis]] and [[algorithmic-trading]]. F
 Equal-weight or risk-parity across factors. Within each factor, equal-weight the constituent stocks (typically 50-200 stocks per factor quintile). Total portfolio: 200-500 stocks for broad diversification.
 
 ## Indicators Used
-- [[price-to-book|P/B ratio]], [[price-to-earnings|P/E ratio]], EV/EBITDA for value factor
 - 12-1 month price [[momentum]] (12-month total return minus the most recent month)
 - Return on equity (ROE), debt/equity, earnings stability for quality factor
 - Market capitalization for size factor
@@ -86,11 +85,8 @@ Equal-weight or risk-parity across factors. Within each factor, equal-weight the
 ## Sources
 
 - [[book-inside-the-black-box]] — quant fund architecture for factor-based strategies, including alpha model construction, risk models, and portfolio optimization
-- [[book-the-intelligent-investor]] — the intellectual foundation of the value factor, including margin of safety and systematic cheapness as a return driver
 
 ## See Also
-- [[value-investing-strategy]] -- the fundamental approach to the value factor
 - [[momentum]] -- the standalone momentum strategy and its mechanics
 - [[trend-following-cta]] -- applies momentum concepts to futures markets
 - [[sector-rotation]] -- rotates between sectors using macro signals, complementary to factor rotation
-- [[growth-investing-strategy]] -- growth stocks often load negatively on the value factor

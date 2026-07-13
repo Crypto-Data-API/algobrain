@@ -21,7 +21,7 @@ expected_sharpe: 0.5
 expected_max_drawdown: 0.03
 breakeven_cost_bps: 5
 decay_evidence: "Opportunities shrank dramatically after electronic market-making arrived in 2000s. Remaining edge concentrated in hard-to-borrow names and dividend capture windows."
-related: ["[[arbitrage]]", "[[convertible-arbitrage]]", "[[volatility-arbitrage]]", "[[options-strategies]]", "[[dividend-capture]]", "[[box-spread]]", "[[edge-taxonomy]]", "[[put-call-parity]]", "[[conversion-reversal-arbitrage]]", "[[limits-to-arbitrage]]"]
+related: ["[[arbitrage]]", "[[volatility-arbitrage]]", "[[options-strategies]]", "[[box-spread]]", "[[edge-taxonomy]]", "[[put-call-parity]]", "[[conversion-reversal-arbitrage]]", "[[limits-to-arbitrage]]"]
 ---
 
 # Put-Call Parity Arbitrage
@@ -114,7 +114,6 @@ for chain in option_chains_today:
 ## Indicators / Data Used
 
 - Real-time options chain with NBBO quotes for calls and puts across all strikes
-- [[dividend-capture]] calendar with declared-but-not-paid dividends
 - Equity **borrow/locate rates** from prime broker -- critical for hard-to-borrow and meme names
 - Risk-free curve (OIS/SOFR, not T-bill) at each expiry
 - American early-exercise premium from a binomial or trinomial tree
@@ -205,10 +204,8 @@ Capacity is constrained by (i) stock borrow availability for reversals, (ii) opt
 - [[arbitrage]] -- parent concept
 - [[put-call-parity]] -- the no-arbitrage identity this strategy enforces
 - [[conversion-reversal-arbitrage]] -- the locked-box construction in detail
-- [[convertible-arbitrage]] -- related embedded-option arb
 - [[volatility-arbitrage]] -- trades the same chain but on IV, not parity
 - [[box-spread]] -- the four-legged construction used to earn synthetic financing
-- [[dividend-capture]] -- related dividend-motivated options flow
 - [[options-strategies]] -- broader options playbook
 - [[limits-to-arbitrage]] -- why parity violations persist at all
 - [[edge-taxonomy]], [[failure-modes]] -- methodology

@@ -6,9 +6,9 @@ updated: 2026-06-22
 status: excellent
 tags: [fundamental-analysis, bonds, risk-management, valuation]
 aliases: ["Credit Analysis", "Credit Research", "Creditworthiness Assessment"]
-related: ["[[fundamental-analysis]]", "[[bonds]]", "[[credit-spread]]", "[[credit-risk]]", "[[counterparty-risk]]", "[[credit-rating-agencies]]", "[[financial-statement-analysis]]", "[[default-risk]]", "[[interest-coverage-ratio]]", "[[credit-cycle]]", "[[recession]]"]
+related: ["[[bonds]]", "[[credit-spread]]", "[[credit-risk]]", "[[counterparty-risk]]", "[[credit-rating-agencies]]", "[[default-risk]]", "[[credit-cycle]]", "[[recession]]"]
 domain: [fundamental-analysis, risk-management]
-prerequisites: ["[[fundamental-analysis]]", "[[bonds]]"]
+prerequisites: ["[[bonds]]"]
 difficulty: intermediate
 ---
 
@@ -38,17 +38,17 @@ Credit analysts evaluate a borrower across several dimensions, classically frame
 | **Collateral** | What backs the loan if they don't pay? | Pledged assets, security, lien priority |
 | **Conditions** | Is the environment supportive? | Macro/[[credit-cycle|cycle]], industry, rate environment, use of proceeds |
 
-For corporate issuers this is operationalized through [[financial-statement-analysis|financial-statement analysis]] focused on leverage and coverage:
+For corporate issuers this is operationalized through financial-statement analysis focused on leverage and coverage:
 
 | Dimension | Representative metric | What it gauges | Direction that helps credit |
 |---|---|---|---|
 | **Leverage** | Debt/EBITDA, Net Debt/EBITDA, Debt/Equity | Stock of obligation vs earnings power | Lower |
-| **Coverage** | [[interest-coverage-ratio|EBIT / interest]], EBITDA/interest, fixed-charge coverage | Cushion between earnings and required payments | Higher |
+| **Coverage** | EBIT / interest, EBITDA/interest, fixed-charge coverage | Cushion between earnings and required payments | Higher |
 | **Cash flow** | Free cash flow, FCF/Debt, cash-flow stability | Ability to service debt with *cash*, not accruals | Higher / steadier |
 | **Liquidity** | Current ratio, cash on hand, maturity-wall coverage | Can near-term obligations be met and debt rolled? | Higher |
 | **Structure** | Seniority, security, covenant package | Where you rank in bankruptcy → recovery | More senior / secured |
 
-Debt is serviced with cash, not accounting earnings, so cash-flow quality (see [[accrual-accounting]] and [[free-cash-flow]]) is central — a borrower with high reported profit but weak cash conversion is a classic credit trap. Seniority and security drive recovery rates: secured and senior creditors rank above subordinated holders and equity in bankruptcy.
+Debt is serviced with cash, not accounting earnings, so cash-flow quality (see accrual-accounting and free-cash-flow) is central — a borrower with high reported profit but weak cash conversion is a classic credit trap. Seniority and security drive recovery rates: secured and senior creditors rank above subordinated holders and equity in bankruptcy.
 
 The output is a credit assessment, often expressed on the scale used by the [[credit-rating-agencies|rating agencies]] (Moody's, S&P, Fitch). The further down the scale, the higher the modeled default probability and the wider the [[credit-spread|credit spread]] demanded.
 
@@ -93,7 +93,7 @@ Credit analysis drives several trading and risk activities:
 ### Common Pitfalls
 
 - **Over-reliance on agency ratings** — ratings are lagging, conflicted (issuer-paid), notch-coarse, and were badly wrong on structured credit in 2008. Watch market-implied spreads, which move faster than ratings.
-- **Earnings ≠ cash** — a borrower can show healthy accrual profit while burning cash; always validate coverage with [[free-cash-flow]] and watch the [[accrual-accounting|accruals]] gap.
+- **Earnings ≠ cash** — a borrower can show healthy accrual profit while burning cash; always validate coverage with free-cash-flow and watch the accruals gap.
 - **The maturity wall / refinancing risk** — a solvent issuer can still default if it cannot *roll* maturing debt when markets close; map the maturity schedule against expected market access.
 - **Covenant erosion** — "cov-lite" loans and aggressive EBITDA add-backs flatter leverage and reduce creditor protection; read the documents, not just the ratios.
 - **PD-LGD correlation** — defaults and low recoveries cluster in the same bad states (recessions), so models that assume independence understate tail loss.
@@ -115,7 +115,3 @@ Credit analysis drives several trading and risk activities:
 - [[credit-rating-agencies]] — institutional credit assessment
 - [[credit-cycle]] — the macro backdrop that swings default and recovery rates
 - [[counterparty-risk]] — applying credit analysis to trading counterparties
-- [[financial-statement-analysis]] — the toolkit for corporate credit
-- [[interest-coverage-ratio]] — a key coverage metric
-- [[free-cash-flow]] / [[accrual-accounting]] — the cash backing behind coverage
-- [[fundamental-analysis]] — the broader analytical discipline

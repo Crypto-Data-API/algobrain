@@ -47,7 +47,6 @@ For modelling relationships *between* instruments and entities.
 For extracting signal from filings, news, earnings calls, and social media.
 - [[nlp-sentiment-analysis]] -- sentiment extraction pipelines
 - [[finbert]] -- finance-domain BERT for sentiment/classification
-- [[earnings-call-analysis]] -- tone and content analysis of transcripts
 - [[llm-market-analysis]] -- large language models for research synthesis and signal generation
 
 ### Computer vision

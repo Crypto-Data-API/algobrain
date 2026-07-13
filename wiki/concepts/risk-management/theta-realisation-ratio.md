@@ -176,6 +176,4 @@ The book paid for 21 days of theoretical theta and lost half a month of income o
 ## Sources
 
 - [[book-option-volatility-and-pricing]] — Natenberg on the difference between theoretical and realised P&L for short-volatility positions.
-- [[tastytrade]] research on actual versus theoretical theta capture across DTE buckets and management styles, including the 50% profit-take rule's effect on realisation.
-- [[orats]] historical backtests of theta-targeted index condor strategies, decomposing P&L into theta, gamma, and vega components by window.
 - General market-making literature on gamma scalping by dealers as the source of the realisation gap on the other side of retail premium-selling flow.

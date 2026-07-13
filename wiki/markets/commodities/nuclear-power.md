@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [commodities, energy, nuclear]
 aliases: ["Nuclear Power", "Nuclear Energy", "Nuclear Fission"]
-related: ["[[uranium]]", "[[paladin-energy]]", "[[boss-energy]]", "[[santos]]", "[[natural-gas]]", "[[coal]]", "[[commodities]]", "[[commodities-overview]]"]
+related: ["[[uranium]]", "[[santos]]", "[[natural-gas]]", "[[coal]]", "[[commodities]]", "[[commodities-overview]]"]
 ---
 
 # Nuclear Power
@@ -18,7 +18,7 @@ Nuclear power is the generation of electricity using nuclear fission, currently 
 The investment case for nuclear power flows through several tradeable channels:
 
 - **[[uranium]] fuel** — physical uranium (U3O8 / "yellowcake"), the uranium investment trusts (e.g., Sprott Physical Uranium Trust), and uranium-focused ETFs.
-- **Uranium miners** — Kazatomprom, Cameco (CCJ), NexGen, and the ASX complex including [[paladin-energy]], [[boss-energy]], Deep Yellow, and Lotus Resources.
+- **Uranium miners** — Kazatomprom, Cameco (CCJ), NexGen, and the ASX complex including paladin-energy, boss-energy, Deep Yellow, and Lotus Resources.
 - **Utilities and reactor operators** — long-life cash-flow plays increasingly signing power-purchase agreements (PPAs) with tech firms.
 - **Fuel-cycle bottlenecks** — conversion and enrichment capacity, where Russia's Rosatom holds outsized market share, creating supply-chain risk premia for Western utilities.
 
@@ -35,7 +35,7 @@ Each stage is a distinct industry with its own pricing and capacity constraints;
 
 ## Demand Drivers
 
-- **New reactor builds and restarts** — over 60 reactors are under construction globally (China leading), with dozens more planned, creating multi-year fuel demand growth and a structural uranium supply deficit (Source: [[uranium]]; [[alfred-report-uranium-commodity]]).
+- **New reactor builds and restarts** — over 60 reactors are under construction globally (China leading), with dozens more planned, creating multi-year fuel demand growth and a structural uranium supply deficit (Source: [[uranium]]; alfred-report-uranium-commodity).
 - **Reactor life extensions** — existing reactors granted licence extensions keep baseload demand for fuel.
 - **AI data-centre power demand** — the new secular driver: major tech companies have signed PPAs and restart deals (e.g., interest in restarting shuttered plants) to secure firm, low-carbon baseload power for data centres.
 - **Decarbonisation policy** — nuclear is increasingly classified as clean/low-carbon (including in some green taxonomies), supporting policy tailwinds toward net-zero targets.
@@ -54,14 +54,12 @@ Nuclear competes with [[natural-gas]], [[coal]], and renewables for baseload and
 
 ## Sources
 
-- (Source: [[alfred-report-uranium-commodity]])
+- (Source: alfred-report-uranium-commodity)
 - See [[uranium]] for detailed price history, supply/demand data, and the producer landscape.
 
 ## Related
 
 - [[uranium]] — the traded fuel commodity and primary expression of the nuclear thesis
-- [[paladin-energy]] — ASX uranium producer
-- [[boss-energy]] — ASX uranium producer
 - [[natural-gas]] — competing baseload power source
 - [[coal]] — competing baseload power source
 - [[commodities]] — sector overview

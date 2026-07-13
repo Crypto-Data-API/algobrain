@@ -9,7 +9,7 @@ aliases: ["FUL", "Fulcrom Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://fulcrom.finance/"
-related: ["[[crypto-markets]]", "[[perpetual-futures]]", "[[cronos]]", "[[decentralized-exchange]]", "[[defi]]", "[[governance-token]]", "[[gmx]]", "[[gains-network]]", "[[funding-rate]]", "[[oracle]]", "[[leverage]]"]
+related: ["[[crypto-markets]]", "[[perpetual-futures]]", "[[cronos]]", "[[decentralized-exchange]]", "[[defi]]", "[[governance-token]]", "[[gmx]]", "[[gains-network]]", "[[funding-rate]]", "[[leverage]]"]
 ---
 
 # Fulcrom
@@ -35,7 +35,7 @@ Fulcrom launched its beta in early 2023 with an IDO on VVS Finance, and built in
 Fulcrom uses the GMX-style **multi-asset liquidity pool** design:
 
 - **Shared liquidity pool** — liquidity providers deposit a basket of assets into a single pool that acts as the counterparty to all traders. LPs earn trading and borrowing fees but take on the pool's net exposure to trader P&L.
-- **Oracle pricing / zero price impact** — trades execute at [[oracle]]-fed prices rather than against an order book, so individual trades have little to no price impact and slippage; this is a defining feature of the GMX model and a contrast to [[automated-market-maker|AMM]] constant-product pricing.
+- **Oracle pricing / zero price impact** — trades execute at oracle-fed prices rather than against an order book, so individual trades have little to no price impact and slippage; this is a defining feature of the GMX model and a contrast to [[automated-market-maker|AMM]] constant-product pricing.
 - **Leverage and liquidations** — traders post collateral and choose leverage; the protocol charges borrowing fees and liquidates positions that fall below maintenance margin.
 - **Multi-chain** — beyond Cronos, Fulcrom has extended to zkSync and Cronos zkEVM, broadening its reach.
 
@@ -48,7 +48,7 @@ Fulcrom mirrors [[gmx|GMX]]'s **GLP** design with its own pooled-liquidity token
 - **Basket of assets** — LPs mint the pool token by depositing into a multi-asset basket (majors like BTC/ETH plus stablecoins). The basket's composition is rebalanced via mint/redeem fees that nudge it toward target weights.
 - **LPs are the counterparty** — every leveraged trade is taken *against the pool*, so the pool's value rises when traders lose (fees + trader losses) and falls when traders win. LPs earn a share of **trading fees, borrowing fees, and liquidation proceeds** in exchange for bearing this net P&L exposure.
 - **Borrowing fee instead of pure funding** — in the GMX model, leveraged positions pay an ongoing **borrowing fee** based on how much of the pool's assets they are utilizing, on top of (or in place of) a classic [[funding-rate|funding rate]]. This compensates LPs for the assets locked behind a position.
-- **Oracle execution** — entries, exits, and liquidations price off [[oracle|oracle]] feeds, giving "zero price impact" within open-interest caps but creating a hard dependence on oracle integrity and latency.
+- **Oracle execution** — entries, exits, and liquidations price off oracle feeds, giving "zero price impact" within open-interest caps but creating a hard dependence on oracle integrity and latency.
 - **Open-interest caps & skew** — per-asset OI limits and long/short skew controls cap the pool's directional exposure so a single one-sided move cannot drain it.
 
 ### Worked example (illustrative)
@@ -110,7 +110,7 @@ Fulcrom's model is closest to GMX v1; its distinguishing factor is chain/distrib
 
 - **Micro-cap, low-liquidity token** — at ~$15.0M (rank #956) and a sub-cent price, FUL is thinly capitalized and highly volatile; reported token trading volume has been very low, implying poor exit liquidity.
 - **Pool/counterparty risk** — in the GMX-style model, liquidity providers bear net trader P&L; sustained trader profitability or oracle issues can impair the pool.
-- **Smart-contract and oracle risk** — exploits or [[oracle]] manipulation can cause losses; verify audit status independently.
+- **Smart-contract and oracle risk** — exploits or oracle manipulation can cause losses; verify audit status independently.
 - **Leverage risk for users** — leveraged perpetuals can be liquidated rapidly, causing total loss of posted collateral.
 - **Ecosystem concentration** — heavy reliance on Cronos ties Fulcrom's prospects to that chain's adoption.
 
@@ -186,7 +186,6 @@ Fulcrom's model is closest to GMX v1; its distinguishing factor is chain/distrib
 - [[gmx]]
 - [[gains-network]]
 - [[funding-rate]]
-- [[oracle]]
 - [[myx-finance]]
 - [[defi]]
 

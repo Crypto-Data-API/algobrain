@@ -10,7 +10,7 @@ strategy_type: quantitative
 markets: [stocks]
 complexity: beginner
 backtest_status: untested
-related: ["[[collar]]", "[[covered-call]]", "[[leaps-strategies]]", "[[vertical-spreads]]", "[[implied-volatility]]"]
+related: ["[[collar]]", "[[covered-call]]", "[[vertical-spreads]]", "[[implied-volatility]]"]
 ---
 
 # Married Put
@@ -23,7 +23,7 @@ A Married Put (also called a **Protective Put**) pairs a long stock position wit
 
 1. **Own 100 shares** (or buy shares and the put simultaneously -- hence "married").
 2. **Buy 1 ATM put** for maximum protection, or 1 slightly OTM put (2-5% below current price) to reduce cost.
-3. **Expiration:** 30-90 DTE for short-term event hedging; use [[leaps-strategies]] puts for multi-month coverage.
+3. **Expiration:** 30-90 DTE for short-term event hedging; use leaps-strategies puts for multi-month coverage.
 4. Purchase when [[implied-volatility]] is low to minimize insurance cost.
 
 ## Payoff Profile
@@ -58,5 +58,4 @@ A Married Put (also called a **Protective Put**) pairs a long stock position wit
 ## See Also
 - [[collar]] -- adds a sold call to offset the put's cost
 - [[covered-call]] -- generates income instead of buying protection
-- [[leaps-strategies]] -- long-dated puts for extended protection
 - [[bear-put-spread]] -- a cheaper defined-risk bearish alternative

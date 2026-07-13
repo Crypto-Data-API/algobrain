@@ -44,7 +44,7 @@ A **short-vol** book is **net short options**. The trader sells puts, calls, str
 
 The archetypal short-vol vehicles are:
 
-- **[[tastytrade]] retail premium sellers** -- the doctrine of selling 16-30 delta strangles, taking profits at 50% of credit, and managing winners aggressively. See [[tom-sosnoff]] and [[tastytrade-mechanics]].
+- **tastytrade retail premium sellers** -- the doctrine of selling 16-30 delta strangles, taking profits at 50% of credit, and managing winners aggressively. See [[tom-sosnoff]] and [[tastytrade-mechanics]].
 - **[[ljm-preservation-and-growth]]** -- a short-vol fund that lost ~80% in a single day on **February 5-6, 2018** ([[volmageddon]]) and was wound down. The textbook short-vol blow-up.
 - **Risk-parity short-vol overlays** -- many large allocators run "income enhancement" sleeves selling SPX puts to monetize the [[variance-risk-premium]].
 - **[[xiv-velocity-shares]]** and **SVXY** -- short-VIX-futures ETPs. XIV terminated on Feb 5, 2018 after losing 96% intraday.
@@ -73,7 +73,7 @@ The defining characteristic is that short-vol books **make money most days** and
 | **Margin call risk** | None (paid upfront) | Severe (portfolio margin reprices instantly) |
 | **Psychology** | Lonely losses; doubt during long calm | Dopamine cycle; sudden ruin |
 | **Survivor bias in track records** | Few funds, long histories ([[universa-investments]]) | Many funds, short histories (survivors only) |
-| **Typical archetype** | [[universa-investments]], [[longtail-alpha]] | [[tastytrade]] sellers, [[ljm-preservation-and-growth]] |
+| **Typical archetype** | [[universa-investments]], [[longtail-alpha]] | tastytrade sellers, [[ljm-preservation-and-growth]] |
 
 ## Why Short Vol Is More Popular
 
@@ -83,7 +83,7 @@ Short vol dominates retail options activity and accounts for a large share of fu
 2. **Sharpe is misleading for [[negative-skew|negatively skewed]] strategies.** Sharpe assumes [[gaussian-assumption|Gaussian returns]]; short vol violates this assumption catastrophically. A 2.0 Sharpe over five calm years tells you almost nothing about the sixth year's [[volmageddon|vol shock]]. See [[sharpe-ratio-pitfalls]] and [[deflated-sharpe-ratio]].
 3. **Broker margin treats it favorably.** Under [[portfolio-margin]] and [[span-margin]], short-vol positions in calm markets carry low buying-power requirements -- often 10-15% of notional. This makes leverage easy and invisible until margin reprices in a shock.
 4. **Theta is psychologically rewarding.** A trader sees daily P&L tick green almost every day. The [[dopamine-loop]] of frequent small wins is more reinforcing than the long, lonely bleed of long vol. See [[behavioral-finance]] and [[loss-aversion]].
-5. **Education-industrial complex.** [[tastytrade]], options-selling YouTube channels, and many retail brokers actively promote the short-vol playbook. Long-vol education is essentially limited to Spitznagel's books and a handful of academic papers.
+5. **Education-industrial complex.** tastytrade, options-selling YouTube channels, and many retail brokers actively promote the short-vol playbook. Long-vol education is essentially limited to Spitznagel's books and a handful of academic papers.
 6. **Survivorship bias in published track records.** The short-vol funds that blew up disappear from the data ([[ljm-preservation-and-growth]], [[malachite-capital]], [[catalyst-hedged-futures]]). The survivors look great, biasing perception of the strategy.
 
 ## Why Long Vol Is Institutionally Important

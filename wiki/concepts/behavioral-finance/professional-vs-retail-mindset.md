@@ -14,7 +14,6 @@ related:
   - "[[itpm-framework]]"
   - "[[itpm-five-principles]]"
   - "[[anton-kreil]]"
-  - "[[itpm]]"
   - "[[capital-preservation]]"
   - "[[asymmetric-risk-reward]]"
   - "[[fees-and-friction]]"
@@ -148,7 +147,7 @@ Kreil's three-stage developmental arc (also covered in [[itpm-trading-philosophy
 2. **Trader** — has discovered that hit rate is not the metric, that asymmetric pay-off matters, that costs compound. Begins reading [[option-volatility-and-pricing|Natenberg]], learning [[options-greeks|Greeks]], journaling. Position sizing improves. Hit rate may *fall* (because they are taking better-skewed trades) while expectancy rises. Most ITPM students enter at this stage.
 3. **Risk manager** — has internalised that the job is not to *make money on trades* but to *allocate risk capital across opportunities, including the opportunity of holding cash*. Sizes against book Greeks, not per-trade conviction. Treats hedges as positions, not insurance. Runs the book to survive *all* regimes rather than to optimise any one.
 
-The leap from 2 to 3 is the leap most retail-trained traders never make. They remain technically competent at stage 2 (good charts, decent setups) while never internalising the book-level risk-allocation mindset that the senior traders at [[goldman-sachs|Goldman]] and [[lehman-brothers|Lehman]] modelled.
+The leap from 2 to 3 is the leap most retail-trained traders never make. They remain technically competent at stage 2 (good charts, decent setups) while never internalising the book-level risk-allocation mindset that the senior traders at Goldman and Lehman modelled.
 
 ## Worked Example: The Same Trade, Two Mindsets
 
@@ -216,7 +215,7 @@ None of these steps is hard in isolation. Their *aggregate adoption sustained ov
 - [[itpm-five-principles]] — the source articulation
 - [[itpm-trade-construction-playbook]] — the per-trade workflow
 - [[itpm-trading-legends-raj-malhotra]] — interview-derived material on professional habits
-- [[anton-kreil]] / [[itpm]] — primary articulators
+- [[anton-kreil]] / itpm — primary articulators
 - [[capital-preservation]] — the first tenet
 - [[asymmetric-risk-reward]] — the second tenet
 - [[fees-and-friction]] — the structural side of retail underperformance

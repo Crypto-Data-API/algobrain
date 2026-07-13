@@ -10,7 +10,7 @@ aliases: ["Cboe", "CBOE", "Chicago Board Options Exchange"]
 founded: 1973
 headquarters: "Chicago, Illinois, USA"
 website: "https://www.cboe.com"
-related: ["[[options]]", "[[vix]]", "[[volatility]]", "[[cme-group]]", "[[nyse]]"]
+related: ["[[options]]", "[[vix]]", "[[volatility]]", "[[cme-group]]"]
 ---
 
 Cboe Global Markets (Cboe: CBOE) is a leading global exchange operator best known for creating listed [[options]] trading in the United States. Founded in 1973 as the Chicago Board Options Exchange — the world's first marketplace for trading standardized, listed equity options — Cboe has grown into a diversified exchange holding company that operates four US equities exchanges, a US [[options]] exchange, a [[futures]] exchange, and European and Asia-Pacific equities and derivatives venues. The company is perhaps most widely recognized as the home of the Cboe [[vix|Volatility Index (VIX)]], commonly referred to as the market's "fear gauge."
@@ -19,11 +19,11 @@ Cboe Global Markets (Cboe: CBOE) is a leading global exchange operator best know
 
 The creation of the Chicago Board Options Exchange in April 1973 was a watershed moment in financial history. Prior to Cboe, options traded informally in over-the-counter markets with no standardization, limited liquidity, and significant counterparty risk. Cboe introduced standardized option contracts with defined strike prices, expiration dates, and contract terms, combined with a central clearinghouse (the Options Clearing Corporation) that eliminated counterparty risk. This innovation, underpinned by the recently published Black-Scholes option pricing model (1973), transformed options from an obscure instrument used primarily by speculators into a mainstream tool for hedging, income generation, and risk management used by institutions and retail investors alike.
 
-Cboe introduced the CBOE Volatility Index ([[vix|VIX]]) in 1993, originally based on S&P 100 (OEX) options and later redesigned in 2003 to use [[sp500|S&P 500]] options. The VIX measures the market's expectation of 30-day forward [[volatility]] implied by option prices and has become one of the most widely quoted indicators in global finance. VIX [[futures]] (launched 2004) and VIX options (launched 2006) created an entirely new asset class — tradeable [[volatility]] — enabling strategies that were previously impossible. Events like [[volmageddon-2018|Volmageddon (2018)]], in which inverse VIX products collapsed, demonstrated both the importance and the dangers of the volatility products ecosystem that Cboe created.
+Cboe introduced the CBOE Volatility Index ([[vix|VIX]]) in 1993, originally based on S&P 100 (OEX) options and later redesigned in 2003 to use S&P 500 options. The VIX measures the market's expectation of 30-day forward [[volatility]] implied by option prices and has become one of the most widely quoted indicators in global finance. VIX [[futures]] (launched 2004) and VIX options (launched 2006) created an entirely new asset class — tradeable [[volatility]] — enabling strategies that were previously impossible. Events like [[volmageddon-2018|Volmageddon (2018)]], in which inverse VIX products collapsed, demonstrated both the importance and the dangers of the volatility products ecosystem that Cboe created.
 
 ## Modern Operations
 
-Today Cboe operates a diversified business spanning multiple asset classes and geographies. In the US, the company runs four equities exchanges (BZX, BYX, EDGX, EDGA) that collectively handle a significant share of US equity trading volume, competing directly with the [[nyse|NYSE]] and [[nasdaq|NASDAQ]]. Cboe's US options business includes its flagship options exchange plus the C2 Options Exchange. The company also operates Cboe Futures Exchange (CFE), which trades VIX futures and other [[volatility]]-linked products, as well as Cboe Europe (pan-European equities), Cboe Australia, Cboe Japan, and Cboe Canada.
+Today Cboe operates a diversified business spanning multiple asset classes and geographies. In the US, the company runs four equities exchanges (BZX, BYX, EDGX, EDGA) that collectively handle a significant share of US equity trading volume, competing directly with the NYSE and NASDAQ. Cboe's US options business includes its flagship options exchange plus the C2 Options Exchange. The company also operates Cboe Futures Exchange (CFE), which trades VIX futures and other [[volatility]]-linked products, as well as Cboe Europe (pan-European equities), Cboe Australia, Cboe Japan, and Cboe Canada.
 
 Cboe has also expanded into digital assets, launching regulated crypto derivatives and indices, and into data and analytics services. The company's market data feeds and proprietary indices (including the VIX family, Cboe S&P 500 BuyWrite Index, and various volatility benchmarks) generate significant recurring revenue and position Cboe as a key infrastructure provider for the global [[options]] and [[volatility]] ecosystem. For traders, Cboe's product innovations — from weekly options (Weeklys) to zero-days-to-expiration (0DTE) options that have exploded in popularity since 2022 — continue to shape the structure and behavior of modern derivatives markets.
 
@@ -43,8 +43,6 @@ For traders the practical upshot: Cboe is the venue and data source for the domi
 - [[volatility]]
 - [[futures]]
 - [[cme-group]]
-- [[nyse]]
-- [[nasdaq]]
 - [[volmageddon-2018]]
 
 ## Sources

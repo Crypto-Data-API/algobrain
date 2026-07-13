@@ -7,7 +7,6 @@ status: excellent
 tags: [strategy-development, itpm, education, options, risk-management, person]
 aliases: ["ITPM Playbook", "Kreil Playbook", "Institute of Trading and Portfolio Management Playbook", "ITPM Curriculum Hub"]
 related:
-  - "[[itpm]]"
   - "[[anton-kreil]]"
   - "[[itpm-trading-philosophy]]"
   - "[[itpm-framework]]"
@@ -29,7 +28,7 @@ related:
   - "[[strategy-development-overview]]"
 ---
 
-The ITPM playbook is the umbrella index for the [[itpm|Institute of Trading and Portfolio Management]] material in this wiki — the philosophy, the operational framework, the trade-construction workflow, the portfolio-management layer, the canonical structures, the source corpus, and the supporting interview material. ITPM, founded in 2011 by [[anton-kreil|Anton Kreil]] (former [[goldman-sachs|Goldman Sachs]] equity trader, [[lehman-brothers|Lehman Brothers]] proprietary trader, and on-screen trader on the BBC's *Million Dollar Traders*) and co-mentors drawn from London bulge-bracket trading floors, packages the desk practices of pre-2008 sell-side proprietary trading into a curriculum aimed at retail traders. This page exists to orient a reader to the materials in the order they should be read, and to make the connections between the philosophy layer, the operational layer, and the canonical structures explicit.
+The ITPM playbook is the umbrella index for the Institute of Trading and Portfolio Management material in this wiki — the philosophy, the operational framework, the trade-construction workflow, the portfolio-management layer, the canonical structures, the source corpus, and the supporting interview material. ITPM, founded in 2011 by [[anton-kreil|Anton Kreil]] (former Goldman Sachs equity trader, Lehman Brothers proprietary trader, and on-screen trader on the BBC's *Million Dollar Traders*) and co-mentors drawn from London bulge-bracket trading floors, packages the desk practices of pre-2008 sell-side proprietary trading into a curriculum aimed at retail traders. This page exists to orient a reader to the materials in the order they should be read, and to make the connections between the philosophy layer, the operational layer, and the canonical structures explicit.
 
 ## The Playbook in One Page
 
@@ -135,7 +134,7 @@ The ITPM material is drawn from a public corpus: [[anton-kreil|Kreil]]'s YouTube
 
 The *Trading Legends* series interviews ITPM mentors and other professionals on their careers, philosophy, and operational practices. These are the richest sources of *how the desk actually worked* material:
 
-- [[itpm-trading-legends-raj-malhotra]] — head of institutional options at [[bank-of-america|Bank of America]] / [[nomura]]
+- [[itpm-trading-legends-raj-malhotra]] — head of institutional options at Bank of America / nomura
 - [[itpm-trading-legends-jason-mcdonald]] — ITPM co-mentor
 - [[itpm-trading-legends-ben-berggreen]] — proprietary equity trader
 - [[itpm-trading-legends-chris-cathey]] — ITPM mentor
@@ -221,7 +220,6 @@ A few clarifications, because the ITPM material is sometimes mis-characterised:
 
 ## Related
 
-- [[itpm]] — the school
 - [[anton-kreil]] — the founder
 - [[itpm-trading-philosophy]] — philosophical core
 - [[itpm-framework]] — operational umbrella
@@ -248,7 +246,6 @@ A few clarifications, because the ITPM material is sometimes mis-characterised:
 
 ## Sources
 
-- [[itpm]] — ITPM company page and curriculum overview
 - [[anton-kreil]] — founder; primary articulator across all public artefacts
 - [[itpm-five-principles]] — primary articulation of the five-principle framework
 - [[itpm-ten-secrets]] — popular packaging
@@ -257,4 +254,3 @@ A few clarifications, because the ITPM material is sometimes mis-characterised:
 - [[itpm-trading-legends-raj-malhotra]] / [[itpm-trading-legends-jason-mcdonald]] / [[itpm-trading-legends-ben-berggreen]] / [[itpm-trading-legends-chris-cathey]] / [[itpm-trading-legends-hichem-djouhri]] — interview series
 - *Real Vision* / *Chat With Traders* / *Trading Nut* / *Capital Mind* interview corpus 2017-2024 — public-domain articulations
 - The *Professional Trading Masterclass*, *Professional Forex Trading Masterclass*, and *Professional Options Trading Masterclass* curriculum overviews — public syllabi
-- [[goldman-sachs]] / [[lehman-brothers]] — institutional background informing the desk-practice claims

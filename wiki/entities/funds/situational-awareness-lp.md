@@ -11,25 +11,14 @@ founded: 2024
 website: "n/a"
 related:
   - "[[leopold-aschenbrenner]]"
-  - "[[aschenbrenner-bifurcated-ai-thesis]]"
-  - "[[ai-capex-vs-cash-flow-divergence]]"
   - "[[ai-data-center-power-demand]]"
-  - "[[nebius-group]]"
-  - "[[coreweave]]"
-  - "[[bloom-energy]]"
   - "[[iren]]"
   - "[[core-scientific]]"
-  - "[[applied-digital]]"
   - "[[riot-platforms]]"
-  - "[[sandisk]]"
-  - "[[smh-vaneck-semiconductor-etf]]"
-  - "[[oracle]]"
   - "[[hive-digital-technologies]]"
-  - "[[t1-energy]]"
-  - "[[2026-05-31-aschenbrenner-13f-snapshot]]"
 ---
 
-Situational Awareness LP is a US hedge fund founded and managed by [[leopold-aschenbrenner|Leopold Aschenbrenner]], the AI researcher and author of the June 2024 *Situational Awareness* essay. Launched mid-2024 with a thesis directly drawn from that essay — that AI compute scaling will continue through 2027+ and that the *physical infrastructure layer* (power, data centres, storage, HPC) is structurally underpriced while the *semiconductor consensus beneficiaries* are overpriced — the fund had grown to manage approximately $13.7B by late May 2026 based on 13F regulatory disclosures. The fund expresses its view through a distinctive bifurcated structure: large equity and call positions in physical AI infrastructure names paired with significant put option exposure to crowded semiconductor names. See [[aschenbrenner-bifurcated-ai-thesis]] for the durable analytical breakdown.
+Situational Awareness LP is a US hedge fund founded and managed by [[leopold-aschenbrenner|Leopold Aschenbrenner]], the AI researcher and author of the June 2024 *Situational Awareness* essay. Launched mid-2024 with a thesis directly drawn from that essay — that AI compute scaling will continue through 2027+ and that the *physical infrastructure layer* (power, data centres, storage, HPC) is structurally underpriced while the *semiconductor consensus beneficiaries* are overpriced — the fund had grown to manage approximately $13.7B by late May 2026 based on 13F regulatory disclosures. The fund expresses its view through a distinctive bifurcated structure: large equity and call positions in physical AI infrastructure names paired with significant put option exposure to crowded semiconductor names. See aschenbrenner-bifurcated-ai-thesis for the durable analytical breakdown.
 
 ## Fund snapshot (late May 2026)
 
@@ -41,7 +30,7 @@ Situational Awareness LP is a US hedge fund founded and managed by [[leopold-asc
 | **Structure** | Hedge fund LP |
 | **Notable distinction** | High-conviction concentration; bifurcated long/short |
 
-(Source: [[2026-05-31-aschenbrenner-13f-snapshot]])
+(Source: 2026-05-31-aschenbrenner-13f-snapshot)
 
 ## Verified regulatory and performance data (June 2026)
 
@@ -58,31 +47,31 @@ Independent verification against public filings and reporting (2026-06-10):
 
 | Ticker | Position size | Notes |
 |---|---|---|
-| [[nebius-group\|NBIS]] | ~35% of long portfolio | **Core holding.** Disclosed 5.6% stake in the NVIDIA-backed neocloud |
-| [[sandisk\|SNDK]] | $1.1B combined (equity + calls) | Storage / HBM thesis — over 1.1M shares + call array |
-| [[bloom-energy\|BE]] | $879M equity (6.5M shares) + calls | Distributed power for data centres — the cleanest power play |
-| [[coreweave\|CRWV]] | $697M combined equity + calls | Selectively trimmed call exposure |
+| NBIS | ~35% of long portfolio | **Core holding.** Disclosed 5.6% stake in the NVIDIA-backed neocloud |
+| SNDK | $1.1B combined (equity + calls) | Storage / HBM thesis — over 1.1M shares + call array |
+| BE | $879M equity (6.5M shares) + calls | Distributed power for data centres — the cleanest power play |
+| CRWV | $697M combined equity + calls | Selectively trimmed call exposure |
 | [[iren\|IREN]] | $401M | Crypto miner pivoting to AI HPC |
 | [[core-scientific\|CORZ]] | $389M | Crypto miner with AI HPC pivot |
-| [[applied-digital\|APLD]] | $320M | Data centre / AI compute infrastructure |
+| APLD | $320M | Data centre / AI compute infrastructure |
 | [[riot-platforms\|RIOT]] | $142M | Crypto miner |
-| [[sharon-ai-holdings\|SHAZ]] | Initiated (size not disclosed) | Notable — see caution at end |
+| SHAZ | Initiated (size not disclosed) | Notable — see caution at end |
 | [[hive-digital-technologies\|HIVE]] | Initiated | Crypto miner / HPC pivot |
-| [[t1-energy\|TE]] | Initiated | Utility / power provider |
+| TE | Initiated | Utility / power provider |
 
 ### Short positions (put options)
 
 | Ticker | Put notional | Notes |
 |---|---|---|
-| [[smh-vaneck-semiconductor-etf\|SMH]] | **$2.04B** | **Largest single line item** — VanEck Semiconductor ETF basket short |
+| SMH | **$2.04B** | **Largest single line item** — VanEck Semiconductor ETF basket short |
 | [[nvidia\|NVDA]] | $1.57B | Direct chip short via puts |
-| [[oracle\|ORCL]] | $1.07B | AI cloud capex / valuation short |
-| [[broadcom\|AVGO]] | $1.01B | Custom silicon short |
-| [[amd\|AMD]] | $969M | Direct chip short via puts |
-| [[micron\|MU]] | $584M | Memory short via puts |
-| [[taiwan-semiconductor-manufacturing\|TSM]] | $535M | Foundry short via puts |
-| [[asml-holding\|ASML]] | $494M | Lithography/EUV short via puts |
-| [[intel\|INTC]] | $159M | Reversed prior long; now short via puts |
+| ORCL | $1.07B | AI cloud capex / valuation short |
+| AVGO | $1.01B | Custom silicon short |
+| AMD | $969M | Direct chip short via puts |
+| MU | $584M | Memory short via puts |
+| TSM | $535M | Foundry short via puts |
+| ASML | $494M | Lithography/EUV short via puts |
+| INTC | $159M | Reversed prior long; now short via puts |
 
 **Total put notional: ~$7.7B–$8.5B** across the semiconductor / chip complex.
 
@@ -99,7 +88,7 @@ Independent verification against public filings and reporting (2026-06-10):
 2. **Puts are sized to thesis, not as hedges.** The ~$7.7–8.5B in put notional is structural short positioning, not pair-hedging against the longs. If the chip complex falls, the puts pay out independently of what the longs do.
 3. **The crypto-miner basket has a pivot thesis.** IREN, CORZ, APLD, RIOT, HIVE are not held *as* crypto miners but as **public companies with installed data centre and power assets pivoting to AI HPC**. Their value is the underlying real estate, power contracts, and rack space — not Bitcoin mining economics.
 4. **Power and storage are the cleanest expressions of the thesis.** BE (fuel cells), TE (utility) on the power side; SNDK (storage) on the data layer. These are the bets least exposed to chip-cycle reversal.
-5. **The SHAZ inclusion is notable.** SHAZ matches the [[ai-microcap-pump-pattern]] checklist; its inclusion in a high-conviction infrastructure fund is unexpected. Possible explanations: (a) small position taken for narrative-momentum exposure, (b) Aschenbrenner has private information about SHAZ not in public filings, or (c) the inclusion is anomalous and the fund treats it as a tail-optionality lottery. **The wiki view on SHAZ does not change based on inclusion in this fund** — see [[sharon-ai-holdings]] for the standalone analysis.
+5. **The SHAZ inclusion is notable.** SHAZ matches the ai-microcap-pump-pattern checklist; its inclusion in a high-conviction infrastructure fund is unexpected. Possible explanations: (a) small position taken for narrative-momentum exposure, (b) Aschenbrenner has private information about SHAZ not in public filings, or (c) the inclusion is anomalous and the fund treats it as a tail-optionality lottery. **The wiki view on SHAZ does not change based on inclusion in this fund** — see sharon-ai-holdings for the standalone analysis.
 
 ## Why a wiki page for a private fund
 
@@ -115,16 +104,11 @@ This makes the fund a useful **reference point for AI infrastructure trading** i
 ## Related
 
 - [[leopold-aschenbrenner]] — the manager
-- [[aschenbrenner-bifurcated-ai-thesis]] — analytical thesis breakdown
-- [[2026-05-31-aschenbrenner-13f-snapshot]] — sourced 13F data
-- [[ai-capex-vs-cash-flow-divergence]] — broader cycle framework
 - [[ai-data-center-power-demand]] — power-as-binding-constraint thesis
-- [[nuclear-renaissance-small-cap-long]] — overlapping power-layer thesis
 - All individual position entities are linked in the table above
 
 ## Sources
 
-- [[2026-05-31-aschenbrenner-13f-snapshot]] — primary 13F data for the position tables
 - SEC 13F filings, Situational Awareness LP (CIK 0002045724) — https://13f.info/manager/0002045724-situational-awareness-lp
 - Radient Analytics, Form ADV summary for Situational Awareness LP — https://radientanalytics.com/firm/adv/situational-awareness-lp-333011
 - Fintel institutional holdings page — https://fintel.io/i/situational-awareness-lp-5020

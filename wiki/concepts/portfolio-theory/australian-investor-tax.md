@@ -6,13 +6,13 @@ updated: 2026-06-20
 status: excellent
 tags: [australia, tax, portfolio-theory, education, regulation]
 aliases: ["Australian Tax for Investors", "ATO Investment Tax", "Australian Capital Gains Tax"]
-related: ["[[franking-credits]]", "[[superannuation]]", "[[smsf]]", "[[tax-loss-harvesting-australia]]", "[[australian-investing]]", "[[capital-gains-tax-discount]]", "[[negative-gearing]]", "[[cryptocurrency-tax-australia]]", "[[tax-efficient-investing]]", "[[stage-3-tax-cuts]]", "[[super-contribution-strategies]]", "[[capital-gains]]", "[[covered-call]]", "[[options-overview]]", "[[asic]]"]
+related: ["[[superannuation]]", "[[smsf]]", "[[tax-loss-harvesting-australia]]", "[[capital-gains-tax-discount]]", "[[negative-gearing]]", "[[cryptocurrency-tax-australia]]", "[[tax-efficient-investing]]", "[[stage-3-tax-cuts]]", "[[super-contribution-strategies]]", "[[capital-gains]]", "[[covered-call]]", "[[options-overview]]", "[[asic]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: intermediate
-prerequisites: ["[[australian-investing]]"]
+prerequisites: []
 ---
 
-Australian investor tax is governed by the Australian Taxation Office (ATO) and applies to all investment income earned by Australian residents, including [[capital-gains|capital gains]], [[dividend|dividends]], interest, rental income, and [[cryptocurrency-tax-australia|cryptocurrency]] disposals. Unlike many countries, Australia does not have a separate capital gains tax rate — gains are added to assessable income and taxed at the individual's marginal rate, but a powerful [[capital-gains-tax-discount|50% CGT discount]] for assets held longer than 12 months makes holding period one of the most consequential tax decisions an Australian investor can make.
+Australian investor tax is governed by the Australian Taxation Office (ATO) and applies to all investment income earned by Australian residents, including [[capital-gains|capital gains]], dividends, interest, rental income, and [[cryptocurrency-tax-australia|cryptocurrency]] disposals. Unlike many countries, Australia does not have a separate capital gains tax rate — gains are added to assessable income and taxed at the individual's marginal rate, but a powerful [[capital-gains-tax-discount|50% CGT discount]] for assets held longer than 12 months makes holding period one of the most consequential tax decisions an Australian investor can make.
 
 > **Not tax or legal advice.** This page is general educational information. Australian tax brackets, the Medicare levy, contribution caps, withholding rates, and CGT rules change between financial years and depend on residency and personal circumstances. The rates and dollar thresholds shown are **indicative** and may be superseded — always confirm the current figures with the [ATO](https://www.ato.gov.au) and, where relevant, a registered tax agent before lodging or acting.
 
@@ -22,7 +22,7 @@ Australian investor tax is governed by the Australian Taxation Office (ATO) and 
 |-------------|-----------|---------------|-------------------|------------------|
 | Capital gain, asset held >12 months | Capital | Yes (50% for individuals) | Half the gain added to assessable income | Personal / trust |
 | Capital gain, asset held <12 months | Capital | No | Full gain added to assessable income | n/a — avoid by holding longer |
-| Fully franked [[dividend]] | Income | No | Grossed-up, offset by [[franking-credits]]; refundable below 30% | Low-rate entity / pension phase |
+| Fully franked dividend | Income | No | Grossed-up, offset by franking-credits; refundable below 30% | Low-rate entity / pension phase |
 | Unfranked dividend | Income | No | Full marginal rate, no credit | [[superannuation]] |
 | Interest | Income | No | Full marginal rate, no concession | Super or mortgage offset |
 | [[cryptocurrency-tax-australia\|Crypto]] disposal | Capital (usually) | Yes if >12 months | Same CGT framework as shares | Personal |
@@ -106,16 +106,16 @@ The ATO requires records of every acquisition and disposal for CGT purposes:
 - Any adjustments (return of capital, corporate actions)
 - Records must be kept for 5 years after the relevant CGT event
 
-Brokers like [[commsec]], [[nabtrade]], [[selfwealth]], and [[bell-direct]] provide annual tax summaries, but these may not capture all events (transfers, corporate actions, off-market transactions).
+Brokers like commsec, nabtrade, selfwealth, and bell-direct provide annual tax summaries, but these may not capture all events (transfers, corporate actions, off-market transactions).
 
 ## Dividend Taxation
 
-Australian [[dividend|dividends]] are taxed through the unique [[franking-credits|franking credit (imputation)]] system, which prevents double taxation of corporate profits.
+Australian dividends are taxed through the unique franking credit (imputation) system, which prevents double taxation of corporate profits.
 
 ### Franked Dividends
 
 - Company pays 30% corporate tax on profits before distributing dividends
-- Shareholders receive [[franking-credits]] representing tax already paid
+- Shareholders receive franking-credits representing tax already paid
 - Shareholders declare the "grossed-up" amount (dividend + franking credit) as income
 - The franking credit offsets personal tax liability
 - If marginal rate is below 30%, the excess credit is **refunded as cash** by the ATO
@@ -210,7 +210,7 @@ Australian tax residents are taxed on worldwide income, including:
 - **US shares**: 15% US withholding tax on dividends (under the AU-US tax treaty), claimable as a Foreign Income Tax Offset on your Australian return
 - **Currency gains**: If you hold foreign currency or assets denominated in foreign currency, exchange rate movements can create additional CGT events
 
-Investors holding US shares through [[interactive-brokers]], [[stake]], or [[commsec]] international accounts should complete a W-8BEN form to claim the reduced 15% US withholding rate (vs the default 30%).
+Investors holding US shares through interactive-brokers, stake, or commsec international accounts should complete a W-8BEN form to claim the reduced 15% US withholding rate (vs the default 30%).
 
 ## Investment-Related Deductions
 
@@ -264,7 +264,7 @@ The ATO's data-matching covers brokers, share registries, and crypto exchanges, 
 2. **Not declaring DRP dividends** — a frequent data-matching catch; reinvested dividends are still income.
 3. **Treating capital losses like deductions** — losses offset capital gains only, never salary or interest.
 4. **Applying the discount before losses** — wastes part of the discount; losses come first.
-5. **Ignoring franking refunds** — low-rate entities and retirees may be owed cash refunds they never claim (see [[franking-credits]]).
+5. **Ignoring franking refunds** — low-rate entities and retirees may be owed cash refunds they never claim (see franking-credits).
 6. **Assuming brokerage is a separate deduction** — it is folded into the CGT cost base, not claimed separately.
 7. **Mis-claiming trader status** — the 50% discount usually beats trader deductions for profitable retail investors; get a private ruling if borderline.
 
@@ -273,7 +273,7 @@ The ATO's data-matching covers brokers, share registries, and crypto exchanges, 
 Understanding Australian tax law is not an academic exercise — it directly affects which strategies are optimal:
 
 1. **Hold >12 months whenever possible** — the [[capital-gains-tax-discount]] halves your tax on gains. This structurally favours [[position-trading-overview|position trading]], [[swing-trading-overview|swing trading]] with longer horizons, and buy-and-hold over [[scalping]] and day trading
-2. **Prioritise fully franked dividends** — [[franking-credits]] make Australian dividend stocks more valuable after tax than headline yields suggest, especially in [[superannuation]] and [[smsf]]
+2. **Prioritise fully franked dividends** — franking-credits make Australian dividend stocks more valuable after tax than headline yields suggest, especially in [[superannuation]] and [[smsf]]
 3. **Harvest losses before 30 June** — [[tax-loss-harvesting-australia|Australian tax-loss harvesting]] exploits the absence of a wash sale rule
 4. **Use super for tax-inefficient assets** — interest-bearing and unfranked dividend assets are most tax-efficient inside [[superannuation]] (15% tax vs up to 47%). See [[tax-efficient-investing]]
 5. **Understand your classification** — incorrectly claiming trader status (or failing to claim it when applicable) can result in ATO audit and penalties
@@ -281,7 +281,6 @@ Understanding Australian tax law is not an academic exercise — it directly aff
 
 ## Related
 
-- [[franking-credits]]
 - [[superannuation]]
 - [[smsf]]
 - [[tax-loss-harvesting-australia]]
@@ -291,7 +290,6 @@ Understanding Australian tax law is not an academic exercise — it directly aff
 - [[tax-efficient-investing]]
 - [[stage-3-tax-cuts]]
 - [[super-contribution-strategies]]
-- [[australian-investing]]
 - [[capital-gains]]
 - [[covered-call]]
 - [[options-overview]]

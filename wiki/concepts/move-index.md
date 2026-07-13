@@ -9,7 +9,7 @@ aliases: ["MOVE", "ICE BofA MOVE Index", "Merrill Option Volatility Estimate", "
 domain: [market-microstructure, indicators, fixed-income]
 prerequisites: ["[[implied-volatility]]", "[[treasuries]]", "[[options]]"]
 difficulty: intermediate
-related: ["[[vix]]", "[[implied-volatility]]", "[[treasuries]]", "[[tlt]]", "[[ief]]", "[[bond-volatility]]", "[[interest-rate-options]]", "[[swaption]]", "[[10-year-treasury]]", "[[2-year-treasury]]", "[[fed-funds-rate]]", "[[fomc-meetings]]", "[[duration-risk]]", "[[carry-trade]]", "[[long-vol-vs-short-vol]]", "[[options-concentration-risk]]", "[[tail-risk-hedging]]", "[[volatility-regime-classification]]", "[[ice-bofa]]", "[[march-2023-banking-crisis]]"]
+related: ["[[vix]]", "[[implied-volatility]]", "[[treasuries]]", "[[bond-volatility]]", "[[interest-rate-options]]", "[[swaption]]", "[[10-year-treasury]]", "[[2-year-treasury]]", "[[fed-funds-rate]]", "[[fomc-meetings]]", "[[duration-risk]]", "[[carry-trade]]", "[[long-vol-vs-short-vol]]", "[[options-concentration-risk]]", "[[tail-risk-hedging]]", "[[volatility-regime-classification]]", "[[ice-bofa]]", "[[march-2023-banking-crisis]]"]
 ---
 
 The **MOVE Index** (officially the **ICE BofA MOVE Index**, ticker **MOVE**) is the bond-market analogue of the [[vix|VIX]]: a yield-curve-weighted index of one-month [[implied-volatility]] across the most liquid US Treasury maturities (2-year, 5-year, 10-year, and 30-year). It is the canonical measure of *forward-looking* US Treasury volatility and the single most-watched indicator of stress in the global rates complex. While VIX measures equity vol, MOVE measures the volatility the options market is pricing into Treasuries — and because Treasuries are the global reserve duration asset, the MOVE Index propagates risk pricing into mortgages, credit, FX, and emerging-market debt. A short premium book that ignores MOVE is implicitly assuming the rates regime stays calm; a [[options-concentration-risk|properly diversified]] book uses MOVE-driven structures as one of its uncorrelated [[long-vol-overlay|long-vol overlays]].
@@ -55,7 +55,7 @@ A common shorthand: **monthly expected one-sigma 10-year yield move ≈ MOVE / s
                                     ≈ 37.5 basis points
 ```
 
-So at MOVE = 130, the options market is pricing roughly a two-thirds chance the 10-year yield moves less than ~37 bp over the next month, and a one-third chance it moves more — in either direction. Translating to price: a 37 bp move on a 10-year note (duration ≈ 8.5) implies a price swing of roughly `8.5 × 0.375% ≈ 3.2%`, and on [[tlt]] (duration ≈ 16-17) closer to `~6%`. This is why a MOVE jump from 100 to 150 is a material widening of the expected [[tlt]] trading range, not a cosmetic number change.
+So at MOVE = 130, the options market is pricing roughly a two-thirds chance the 10-year yield moves less than ~37 bp over the next month, and a one-third chance it moves more — in either direction. Translating to price: a 37 bp move on a 10-year note (duration ≈ 8.5) implies a price swing of roughly `8.5 × 0.375% ≈ 3.2%`, and on tlt (duration ≈ 16-17) closer to `~6%`. This is why a MOVE jump from 100 to 150 is a material widening of the expected tlt trading range, not a cosmetic number change.
 
 ## Historical Levels and Notable Events
 
@@ -118,7 +118,7 @@ The MOVE Index itself is **not directly tradable** — it is a calculated index,
 | **MOVE-linked structured notes** | Long | Issued by major banks; not standardized |
 | **CME interest rate volatility (CVOL) futures** | Long or short | Newer product; tracks 10y rate vol implied surface |
 
-Most retail users trade rate vol via [[tlt]] options, accepting basis risk vs the MOVE Index in exchange for listed liquidity and standard margin treatment.
+Most retail users trade rate vol via tlt options, accepting basis risk vs the MOVE Index in exchange for listed liquidity and standard margin treatment.
 
 ## MOVE vs VIX
 
@@ -166,7 +166,7 @@ Compared to VIX, MOVE moves more deliberately — it rarely doubles intraday lik
 
 2. **Treating the post-2022 baseline as the long-run normal.** MOVE's structurally higher range since 2022 (80-130) reflects the abandonment of forward guidance. A short rate-vol strategy calibrated only on 2010-2019 data ([[implied-volatility]] suppressed by QE) will badly misprice the current variance risk premium. Segment by regime — see [[volatility-regime-classification]].
 
-3. **Assuming MOVE is tradable.** It is a calculated index, like [[vix|VIX]] *before* VIX futures existed — there is no direct MOVE future or option. Exposure is via [[swaption|swaptions]], TY options, or [[tlt]]/[[ief]] options, each carrying basis risk to the index itself.
+3. **Assuming MOVE is tradable.** It is a calculated index, like [[vix|VIX]] *before* VIX futures existed — there is no direct MOVE future or option. Exposure is via [[swaption|swaptions]], TY options, or tlt/ief options, each carrying basis risk to the index itself.
 
 4. **Ignoring the spillover lead/lag.** Rate vol frequently *leads* equity vol into stress (mortgages and carry unwind first). Watching only [[vix]] while short a rate-sensitive book misses the earliest warning. The [[options-concentration-risk]] page leans on exactly this lead for [[long-vol-overlay|long-vol overlays]].
 
@@ -179,8 +179,6 @@ Compared to VIX, MOVE moves more deliberately — it rarely doubles intraday lik
 - [[vix]] — the equity-vol counterpart
 - [[implied-volatility]] — the underlying concept
 - [[treasuries]] — the asset class measured
-- [[tlt]] — long-duration Treasury ETF; primary retail vehicle for MOVE-related trades
-- [[ief]] — 7-10 year Treasury ETF
 - [[bond-volatility]] — broader topic
 - [[interest-rate-options]] — the underlying instruments
 - [[swaption]] — the OTC option on a swap; primary input to MOVE

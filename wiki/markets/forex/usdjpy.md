@@ -164,7 +164,7 @@ A key structural relationship: because the yen funds carry trades against many h
 
 USD/JPY's correlations are regime-dependent, which is the single most important thing for a trader to internalize:
 
-- **Regime-switching correlation with [[sp500|SPX]].** Positive in carry-on regimes (both rise together), sharply negative in carry-unwind regimes (yen rallies as equities fall). See the Concentration-Risk Angle above.
+- **Regime-switching correlation with SPX.** Positive in carry-on regimes (both rise together), sharply negative in carry-unwind regimes (yen rallies as equities fall). See the Concentration-Risk Angle above.
 - **Positive with the [[us-dollar|DXY]] (USD-base).** A broad dollar rally lifts USD/JPY, the opposite sign to [[eurusd]].
 - **Tracks the UST-JGB yield spread.** The 10y UST-JGB differential is the cleanest leading indicator; when it widens, USD/JPY tends to rise.
 - **Inverse to [[gold]] and to the [[vix-futures|VIX]] in stress.** When VIX spikes and gold bids in a risk-off, the yen rallies and USD/JPY falls.

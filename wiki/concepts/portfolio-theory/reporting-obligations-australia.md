@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [regulation, australia, tax, compliance]
 aliases: ["Australian Reporting Obligations", "ATO Reporting", "Taxable Payments Reporting"]
-related: ["[[australian-investor-tax]]", "[[austrac]]", "[[asic]]", "[[cryptocurrency-tax-australia]]", "[[smsf]]", "[[franking-credits]]", "[[aml-ctf]]", "[[australian-regulatory-framework]]", "[[lost-or-stolen-crypto-au-tax]]", "[[self-custody-tax-evidence-checklist]]", "[[itaa-1997-overview]]"]
+related: ["[[australian-investor-tax]]", "[[austrac]]", "[[asic]]", "[[cryptocurrency-tax-australia]]", "[[smsf]]", "[[aml-ctf]]", "[[australian-regulatory-framework]]", "[[lost-or-stolen-crypto-au-tax]]", "[[self-custody-tax-evidence-checklist]]", "[[itaa-1997-overview]]"]
 domain: [regulation]
 difficulty: intermediate
 ---
@@ -40,7 +40,7 @@ The annual income tax return is the primary reporting obligation for Australian 
 
 | Income Type | Where to Report | Key Details |
 |-------------|----------------|-------------|
-| **Dividends** | Item 11 (Dividends) | Report gross amount (dividend + [[franking-credits|franking credit]]). Unfranked and franked dividends reported separately. Franking credits are a tax offset |
+| **Dividends** | Item 11 (Dividends) | Report gross amount (dividend + franking credit). Unfranked and franked dividends reported separately. Franking credits are a tax offset |
 | **Capital gains/losses** | Item 18 (Capital gains) + CGT schedule | CGT schedule required if total capital gains exceed $10,000 OR you have a net capital loss carried forward |
 | **Interest income** | Item 10 (Interest) | All interest from bank accounts, term deposits, bonds, peer-to-peer lending |
 | **Rental income** | Item 21 (Rental) + Rental schedule | Gross rent, deductible expenses (interest, repairs, depreciation, property management), [[negative-gearing]] claims |
@@ -146,7 +146,7 @@ Both are CGT assets, but the data-matching exposure differs in ways traders unde
 | CGT calculation pre-filled | No — investor calculates | No — investor calculates |
 | Cost-base method | FIFO / specific ID | FIFO / specific ID (record-keeping harder) |
 | ATO visibility | Very high — every buy/sell/dividend | High — AUSTRAC-registered exchanges + blockchain analysis |
-| Common error | Forgetting [[franking-credits\|franking]] gross-up | Treating swaps/spends as non-events (they are CGT events) |
+| Common error | Forgetting franking gross-up | Treating swaps/spends as non-events (they are CGT events) |
 
 See [[cryptocurrency-tax-australia]] and [[self-custody-tax-evidence-checklist]] for the crypto-specific record-keeping burden.
 
@@ -242,7 +242,7 @@ If you discover errors in previous tax returns:
 
 A resident retail trader over one financial year:
 
-1. **Shares** — sells ASX-listed shares for a gain and receives franked dividends. The broker's CHESS data pre-fills the dividend and the sale proceeds, but the trader must still compute the capital gain (proceeds − cost base, applying the 12-month [[capital-gains-tax-discount|CGT discount]] where eligible) and gross up dividends by [[franking-credits|franking credits]]. Because total gains exceed the (indicative) A$10,000 CGT-schedule threshold, a CGT schedule is required.
+1. **Shares** — sells ASX-listed shares for a gain and receives franked dividends. The broker's CHESS data pre-fills the dividend and the sale proceeds, but the trader must still compute the capital gain (proceeds − cost base, applying the 12-month [[capital-gains-tax-discount|CGT discount]] where eligible) and gross up dividends by franking credits. Because total gains exceed the (indicative) A$10,000 CGT-schedule threshold, a CGT schedule is required.
 2. **Crypto** — swaps one token for another and spends a little on a purchase. Each swap and spend is a separate CGT event, even though no AUD was withdrawn. Exchange data flows to the ATO via [[austrac|AUSTRAC]], so omitting these is a data-matching red flag (see [[cryptocurrency-tax-australia]]).
 3. **Foreign** — holds a US brokerage account; dividends and the account balance are reported to the ATO under CRS/FATCA. The trader declares the foreign income and claims a foreign income tax offset to avoid double taxation.
 4. **If an error is found later** — lodging a voluntary amendment *before* the ATO makes contact materially reduces the penalty exposure relative to waiting for an audit.
@@ -256,7 +256,6 @@ The throughline: pre-fill is a convenience, not a substitute for the taxpayer's 
 - [[asic]]
 - [[cryptocurrency-tax-australia]]
 - [[smsf]]
-- [[franking-credits]]
 - [[aml-ctf]]
 - [[australian-regulatory-framework]]
 - [[capital-gains-tax-discount]]

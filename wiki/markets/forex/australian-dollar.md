@@ -102,7 +102,7 @@ Since 2015 the AUD has traded mostly between 0.60 and 0.80 as the mining boom fa
 
 ## Implications for Australian Investors
 
-For Australian investors with international equity exposure (particularly U.S. [[stocks]]), AUD/USD movements create a secondary return layer. A falling AUD boosts the value of unhedged USD-denominated holdings when converted back to AUD, while a rising AUD erodes those returns -- which is why a weak-AUD period can flatter unhedged global portfolios. This creates a persistent dilemma around [[currency-hedging]]: hedging removes currency risk but also forfeits the cushion that AUD weakness provides during global sell-offs (when the AUD typically falls and US assets typically rise in USD terms). Fred McNaught's view is that currency-hedging decisions should be considered part of the overall portfolio strategy rather than ad hoc timing calls, since forecasting exchange rates is notoriously difficult even for professionals.
+For Australian investors with international equity exposure (particularly U.S. stocks), AUD/USD movements create a secondary return layer. A falling AUD boosts the value of unhedged USD-denominated holdings when converted back to AUD, while a rising AUD erodes those returns -- which is why a weak-AUD period can flatter unhedged global portfolios. This creates a persistent dilemma around [[currency-hedging]]: hedging removes currency risk but also forfeits the cushion that AUD weakness provides during global sell-offs (when the AUD typically falls and US assets typically rise in USD terms). Currency-hedging decisions are best treated as part of the overall portfolio strategy rather than ad hoc timing calls, since forecasting exchange rates is notoriously difficult even for professionals.
 
 ## Related
 

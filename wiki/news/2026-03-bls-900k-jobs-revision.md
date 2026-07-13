@@ -21,7 +21,7 @@ In **March 2026**, the Bureau of Labor Statistics released the **February 2026 j
 - The Bureau of Labor Statistics published the February 2026 jobs report.
 - It included a benchmark revision that **erased approximately 900,000 jobs from 2025**.
 - This was the **largest BLS benchmark revision in over a decade**.
-- The revision lands while AI-driven layoffs (see [[2026-04-meta-ai-layoffs]], [[block]]) are still accelerating — compounding rather than offsetting the new cuts.
+- The revision lands while AI-driven layoffs (see 2026-04-meta-ai-layoffs, [[block]]) are still accelerating — compounding rather than offsetting the new cuts.
 
 ## Why it matters
 
@@ -41,7 +41,7 @@ For traders, the cleanest expression is in the rates complex (front-end pricing 
 
 ## Market implications
 
-- **Stocks**: re-rates the consumer discretionary, service, and regional bank baskets lower; reinforces the AI-displacement short thesis from [[2026-02-citrini-tech-selloff]].
+- **Stocks**: re-rates the consumer discretionary, service, and regional bank baskets lower; reinforces the AI-displacement short thesis from 2026-02-citrini-tech-selloff.
 - **Bonds**: supports duration on a deeper-than-expected slowdown thesis; rate-cut probability rises as the [[federal-reserve|Fed]]'s employment-side risks grow.
 - **Forex**: USD pressure on weaker labor data; relative-value FX trades shift as US growth differential narrows.
 - **Tail-risk pricing**: the revision is now part of the input stack for the [[citrini-2028-global-intelligence-crisis]] scenario; sizing of AI-displacement tail hedges should be reviewed against the new baseline.
@@ -52,8 +52,8 @@ BLS benchmark revisions reconcile the monthly Current Employment Statistics (CES
 
 ## Cross-references
 
-- Companion firm-level events: [[2026-04-meta-ai-layoffs]], [[block]] (~50% AI-attributed cut).
-- Companion tail-risk publication: [[2026-02-citrini-tech-selloff]].
+- Companion firm-level events: 2026-04-meta-ai-layoffs, [[block]] (~50% AI-attributed cut).
+- Companion tail-risk publication: 2026-02-citrini-tech-selloff.
 - Recession probability monitor: [[ibkr-forecast-trader]] (41% recession probability by end-2026).
 
 ## Related

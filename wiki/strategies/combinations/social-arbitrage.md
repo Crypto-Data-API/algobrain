@@ -18,7 +18,7 @@ min_capital_usd: 5000
 capacity_usd: 5000000
 crowding_risk: medium
 breakeven_cost_bps: 100
-related: ["[[chris-camillo]]", "[[tickertags]]", "[[sentiment-trading]]", "[[alternative-data-alpha]]", "[[news-trading]]", "[[informational-edge]]", "[[information-asymmetry]]", "[[edge-taxonomy]]", "[[alternative-data-providers]]"]
+related: ["[[chris-camillo]]", "[[sentiment-trading]]", "[[alternative-data-alpha]]", "[[news-trading]]", "[[informational-edge]]", "[[information-asymmetry]]", "[[edge-taxonomy]]", "[[alternative-data-providers]]"]
 ---
 
 # Social Arbitrage
@@ -44,7 +44,7 @@ The counterparties to this trade are (a) fundamental long-only managers who buy 
 
 ## Null Hypothesis
 
-Under a no-edge null, this methodology reduces to concentrated long-call-option bets on small-to-mid-cap consumer names -- a distribution with very fat tails and a negative expectancy after option decay and bid-ask spreads. The claimed edge (Camillo's ~77% CAGR over 15 years, audited through May 2021) is roughly 12 standard deviations above the null on a naive return basis, but portfolio volatility at ~5× the [[sp500|S&P 500]] cuts the implied [[sharpe-ratio]] dramatically. See [[chris-camillo#Criticisms-and-Caveats]] for the sample-of-one caveat.
+Under a no-edge null, this methodology reduces to concentrated long-call-option bets on small-to-mid-cap consumer names -- a distribution with very fat tails and a negative expectancy after option decay and bid-ask spreads. The claimed edge (Camillo's ~77% CAGR over 15 years, audited through May 2021) is roughly 12 standard deviations above the null on a naive return basis, but portfolio volatility at ~5× the S&P 500 cuts the implied [[sharpe-ratio]] dramatically. See [[chris-camillo#Criticisms-and-Caveats]] for the sample-of-one caveat.
 
 ## Rules
 
@@ -53,7 +53,7 @@ Camillo's documented four-step process:
 1. **Observe.** Pay attention to consumer, cultural, product, and behavioral shifts in everyday life -- your own household, conversations at the checkout line, social-media feeds, sudden word-of-mouth.
 2. **Verify.** Validate the trend with public alt-data:
    - [[google-trends]] -- use the 5-year view to strip seasonality and confirm an inflection, not a cyclical peak
-   - Social mention frequency ([[tickertags]] historically; [[lunarcrush]], [[santiment]], or raw Twitter/Reddit scraping today)
+   - Social mention frequency (tickertags historically; [[lunarcrush]], [[santiment]], or raw Twitter/Reddit scraping today)
    - Web traffic ([[similarweb]]), app-store rankings ([[sensor-tower]])
    - On-the-ground retail channel checks (store visits, inventory levels, shelf placement)
 3. **Map.** Identify publicly-traded companies with meaningful revenue exposure to the trend. Prefer pure-plays (where the trend moves the needle) over conglomerates (where it gets diluted).
@@ -113,7 +113,7 @@ See [[alternative-data-providers]] for the full taxonomy. For social arbitrage s
 | Source | Access | Use case |
 |---|---|---|
 | [[google-trends]] | Free | Trend inflection detection, 5-year baseline |
-| [[tickertags]] (defunct as retail product) | Institutional via M Science | Tag-to-ticker social mention mapping |
+| tickertags (defunct as retail product) | Institutional via M Science | Tag-to-ticker social mention mapping |
 | [[lunarcrush]] | Freemium | Crypto and equity social sentiment |
 | [[santiment]] | Paid | Crypto-focused social and on-chain |
 | [[sensor-tower]] | Paid | App downloads and engagement |
@@ -187,7 +187,7 @@ The defining feature of social arbitrage versus the systematic neighbours is tha
 From [[failure-modes]]:
 
 1. **Crowding.** As more traders run the same social-listening screens (particularly post-[[unknown-market-wizards]] publication), the window between trend detection and price response shrinks.
-2. **Alt-data commoditization.** The 2018 acquisition of [[tickertags]] by [[m-science|M Science]] put institutional-grade social mention data in the hands of quant funds, partially closing the informational gap.
+2. **Alt-data commoditization.** The 2018 acquisition of tickertags by [[m-science|M Science]] put institutional-grade social mention data in the hands of quant funds, partially closing the informational gap.
 3. **Platform decay.** Twitter/X API pricing changes (2023), Reddit API pricing changes (2023), and the decline of public firehose access have raised the cost of the retail version.
 4. **Observer drift.** The methodology rewards a specific taste profile. As the trader ages or their household composition changes, the trends they notice change with them. Camillo has openly acknowledged that he relies increasingly on his community and co-hosts for coverage of demographics he doesn't live in.
 5. **Narrative capture.** The discretionary nature of the approach creates severe [[confirmation-bias]] risk. A social arbitrageur who falls in love with a thesis can ride it through a full round-trip.
@@ -227,7 +227,6 @@ Per [[when-to-retire-a-strategy]]:
 ## Related
 
 - [[chris-camillo]] -- the originator and primary live exemplar
-- [[tickertags]] -- the institutional tooling he built around the methodology
 - [[sentiment-trading]] -- the quant cousin of this approach
 - [[alternative-data-alpha]] -- the institutional, paid-data cousin
 - [[news-trading]] -- adjacent event-driven approach

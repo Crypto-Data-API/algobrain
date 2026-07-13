@@ -25,7 +25,7 @@ This extreme level of [[short-interest]] created the conditions for a potential 
 
 ## The Catalyst: Keith Gill and r/WallStreetBets
 
-The story of the GameStop squeeze is inseparable from Keith Gill, a financial educator and trader from Massachusetts who posted on [[reddit]]'s r/WallStreetBets under the username "DeepFuckingValue" (DFV) and on YouTube as "Roaring Kitty." Starting in mid-2019, Gill built a position in GME based on a fundamental [[value-investing]] thesis: he believed the stock was deeply undervalued, that the short sellers were overextended, and that new management (including incoming board member Ryan Cohen, co-founder of Chewy) could turn the company around.
+The story of the GameStop squeeze is inseparable from Keith Gill, a financial educator and trader from Massachusetts who posted on [[reddit]]'s r/WallStreetBets under the username "DeepFuckingValue" (DFV) and on YouTube as "Roaring Kitty." Starting in mid-2019, Gill built a position in GME based on a fundamental value-investing thesis: he believed the stock was deeply undervalued, that the short sellers were overextended, and that new management (including incoming board member Ryan Cohen, co-founder of Chewy) could turn the company around.
 
 Gill regularly posted screenshots of his portfolio showing his GME [[call-options]] and shares, which initially drew ridicule but increasingly attracted attention as the position grew in value. His conviction and transparency inspired a growing community of retail traders to research and buy GME.
 

@@ -35,7 +35,7 @@ related: ["[[robotics-overview]]", "[[motion-planning]]", "[[sensor-fusion]]", "
 | **Waymo** (Alphabet) | Lidar + cameras + radar, HD maps | L4 driverless robotaxi in SF, Phoenix, LA, Austin; expanding to Atlanta, Miami, Dallas, Nashville | GOOGL |
 | **Cruise** (GM) | Lidar + cameras, HD maps | **Robotaxi shut down** — GM ended Cruise robotaxi development Dec 2024, folded the team into GM's personal-autonomy / Super Cruise effort (~$1B+ annual savings) | GM |
 | **Aurora** | Trucking-first, lidar-heavy | Launched driverless commercial trucking (Dallas–Houston) in 2024; scaling lanes | AUR |
-| **[[mobileye-global|Mobileye]]** (Intel) | Camera + radar, chipset supplier | L2+ technology provider to OEMs | MBLY |
+| **Mobileye** (Intel) | Camera + radar, chipset supplier | L2+ technology provider to OEMs | MBLY |
 | **Pony.ai** | Robotaxi in China | L4 in Chinese cities | PONY |
 | **NVIDIA** | Compute platform (DRIVE) | Infrastructure provider | NVDA |
 

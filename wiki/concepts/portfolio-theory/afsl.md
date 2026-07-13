@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [regulation, australia, compliance, exchanges]
 aliases: ["AFSL", "Australian Financial Services Licence", "Financial Services Licence"]
-related: ["[[asic]]", "[[australian-regulatory-framework]]", "[[australian-investing]]", "[[regulation]]", "[[investor-protection-australia]]", "[[commsec]]", "[[selfwealth]]", "[[nabtrade]]", "[[cmc-markets]]", "[[ig-markets]]", "[[stake]]", "[[superhero]]"]
+related: ["[[asic]]", "[[australian-regulatory-framework]]", "[[regulation]]", "[[investor-protection-australia]]"]
 domain: [regulation]
 difficulty: beginner
 ---
@@ -29,7 +29,7 @@ An Australian Financial Services Licence (AFSL) is the licence required to provi
 | **Operating without one** | Criminal offence under s 911A — see penalties below |
 | **How to verify** | ASIC Connect; Financial Advisers Register; MoneySmart |
 
-This sits within the broader [[australian-regulatory-framework]] alongside crypto exchange ([[vasp-regulation]]) and [[chess-sponsorship|CHESS]] settlement protections. See [[australian-investing]] for the investor's-eye view.
+This sits within the broader [[australian-regulatory-framework]] alongside crypto exchange ([[vasp-regulation]]) and CHESS settlement protections. See australian-investing for the investor's-eye view.
 
 ## Overview
 
@@ -125,7 +125,7 @@ AFSL holders must comply with extensive ongoing obligations:
 ### Client Money
 - **Segregation**: Client money must be held in trust accounts, separate from the AFSL holder's own funds
 - **Cannot be used for the holder's own purposes** — client money is not an asset of the AFSL holder
-- This obligation is critical for broker insolvency protection — alongside [[chess-sponsorship]], it ensures investor assets are protected if the broker fails
+- This obligation is critical for broker insolvency protection — alongside chess-sponsorship, it ensures investor assets are protected if the broker fails
 
 ### Dispute Resolution
 - **Internal Dispute Resolution (IDR)**: Must have procedures to handle complaints directly
@@ -180,13 +180,13 @@ Always verify that a broker, adviser, or financial services provider holds a val
 
 | Broker | AFSL Status | AFSL Number | Services |
 |--------|-------------|-------------|----------|
-| **[[commsec|CommSec]]** | Active (held by Commonwealth Securities Limited) | 238814 | Dealing, advice |
-| **[[nabtrade|nabtrade]]** | Active (held by WealthHub Securities Limited, a NAB subsidiary) | 250508 | Dealing |
-| **[[selfwealth|SelfWealth]]** | Active | 421789 | Dealing |
-| **[[cmc-markets|CMC Markets]]** | Active (CMC Markets Asia Pacific Pty Ltd) | 238054 | Dealing (CFDs, forex, shares) |
-| **[[ig-markets|IG Markets]]** | Active (IG Australia Pty Ltd) | 515106 | Dealing (CFDs, forex, shares) |
-| **[[stake|Stake]]** | Active (Stake Securities Pty Ltd — for ASX; Sanlam Private Wealth Pty Ltd — for US) | Various | Dealing |
-| **[[superhero|Superhero]]** | Active (Superhero Securities Limited) | 517636 | Dealing |
+| **CommSec** | Active (held by Commonwealth Securities Limited) | 238814 | Dealing, advice |
+| **nabtrade** | Active (held by WealthHub Securities Limited, a NAB subsidiary) | 250508 | Dealing |
+| **SelfWealth** | Active | 421789 | Dealing |
+| **CMC Markets** | Active (CMC Markets Asia Pacific Pty Ltd) | 238054 | Dealing (CFDs, forex, shares) |
+| **IG Markets** | Active (IG Australia Pty Ltd) | 515106 | Dealing (CFDs, forex, shares) |
+| **Stake** | Active (Stake Securities Pty Ltd — for ASX; Sanlam Private Wealth Pty Ltd — for US) | Various | Dealing |
+| **Superhero** | Active (Superhero Securities Limited) | 517636 | Dealing |
 
 ## Consequences of Operating Without an AFSL
 
@@ -205,7 +205,7 @@ An Australian investor is offered an account with a new online "broker" promisin
 1. **Find the AFSL.** The broker's website should disclose an AFSL number (or the number of the AFSL holder it operates under). No AFSL and no authorised-representative relationship → walk away; offering financial services without one is a criminal offence (s 911A).
 2. **Verify it on ASIC Connect.** Search the AFSL number. Confirm it is **current** (not suspended/cancelled), the legal entity matches the brand, and the authorisations actually cover the service being offered (e.g., "dealing in derivatives" if they sell CFDs).
 3. **Check the client class.** Confirm the service is authorised for **retail** clients. If onboarding tries to classify you as **wholesale** (e.g., via an accountant's certificate), understand you are surrendering FSG/PDS disclosure, the best-interests duty, and AFCA access.
-4. **Confirm the safety net.** Membership of **AFCA** (external dispute resolution) and client-money **segregation** are the two protections that matter most if the firm fails. Pair this with [[chess-sponsorship|CHESS sponsorship]] for ASX holdings.
+4. **Confirm the safety net.** Membership of **AFCA** (external dispute resolution) and client-money **segregation** are the two protections that matter most if the firm fails. Pair this with CHESS sponsorship for ASX holdings.
 5. **Read the FSG and PDS.** These reveal how the firm is paid (conflicts) and the real risks/fees of the "high-yield" product. A reluctance to provide them to a retail client is itself a red flag.
 
 If steps 1-2 fail, the "broker" may be unlicensed or an overseas entity outside ASIC's protections — the single highest-frequency way Australian retail investors lose money to scams.
@@ -225,18 +225,9 @@ If steps 1-2 fail, the "broker" may be unlicensed or an overseas entity outside 
 
 - [[asic]]
 - [[australian-regulatory-framework]]
-- [[australian-investing]]
 - [[regulation]]
 - [[investor-protection-australia]]
-- [[chess-sponsorship]]
 - [[vasp-regulation]]
-- [[commsec]]
-- [[selfwealth]]
-- [[nabtrade]]
-- [[cmc-markets]]
-- [[ig-markets]]
-- [[stake]]
-- [[superhero]]
 
 ## Sources
 

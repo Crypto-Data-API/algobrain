@@ -43,7 +43,7 @@ The reliability of any pattern depends on context: the preceding trend, [[volume
 
 **Flags and Pennants**: Short, compact consolidations that slope against the prevailing trend. [[flags-and-pennants|Flags]] are parallelogram-shaped; pennants are small symmetrical triangles. Both resolve in the trend direction. Measured move equals the length of the prior impulse (the "flagpole"). Among the most reliable short-term patterns.
 
-**Cup and Handle**: Rounded bottom (cup) followed by a small downward drift (handle), then breakout. Identified by [[william-o-neil]] as a powerful continuation setup. See [[cup-and-handle]].
+**Cup and Handle**: Rounded bottom (cup) followed by a small downward drift (handle), then breakout. Identified by william-o-neil as a powerful continuation setup. See [[cup-and-handle]].
 
 **Ascending / Descending Triangle**: A flat boundary on one side (resistance for ascending, support for descending) with a converging trendline on the other. Ascending triangles are bullish; descending are bearish. Breakout direction matches the flat boundary side.
 

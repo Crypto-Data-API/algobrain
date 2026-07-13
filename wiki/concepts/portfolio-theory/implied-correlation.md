@@ -14,19 +14,17 @@ related:
   - "[[correlation-breakdown]]"
   - "[[implied-volatility]]"
   - "[[volatility-surface]]"
-  - "[[dispersion-trading]]"
   - "[[options-concentration-risk]]"
   - "[[variance-risk-premium]]"
   - "[[vega]]"
   - "[[vix]]"
-  - "[[index-options]]"
   - "[[skew]]"
   - "[[long-vol-vs-short-vol]]"
   - "[[diversification]]"
   - "[[modern-portfolio-theory]]"
 ---
 
-Implied correlation is the average pairwise correlation among the components of an equity index that is implicit in the relative pricing of index options versus options on the components. It is to correlation what [[implied-volatility]] is to volatility: a market-derived expectation of a future statistical quantity, extracted by inverting an option-pricing relationship. Where [[correlation|realised correlation]] looks backward over a sample of returns, implied correlation looks forward over the residual life of a chosen option tenor — and like all forward-looking implied quantities, it carries a [[variance-risk-premium|risk premium]] that traders systematically harvest through [[dispersion-trading|dispersion]] structures.
+Implied correlation is the average pairwise correlation among the components of an equity index that is implicit in the relative pricing of index options versus options on the components. It is to correlation what [[implied-volatility]] is to volatility: a market-derived expectation of a future statistical quantity, extracted by inverting an option-pricing relationship. Where [[correlation|realised correlation]] looks backward over a sample of returns, implied correlation looks forward over the residual life of a chosen option tenor — and like all forward-looking implied quantities, it carries a [[variance-risk-premium|risk premium]] that traders systematically harvest through dispersion structures.
 
 ## Definition and Derivation
 
@@ -122,7 +120,7 @@ The historical gap between COR1M and 30-day realised correlation has averaged ro
 
 ## Trading Angle: Dispersion
 
-[[dispersion-trading|Dispersion]] is the explicit harvesting of the implied-correlation premium. The textbook structure:
+Dispersion is the explicit harvesting of the implied-correlation premium. The textbook structure:
 
 ```
 Sell index options (e.g. SPX 30-day ATM straddle)
@@ -145,7 +143,7 @@ The variant trades:
 - **Calendar dispersion**: long single-name vol on near-term, short index vol on slightly longer-term
 - **Correlation swap**: synthetic exposure to (implied - realised) correlation; cleaner but more expensive and less liquid
 
-See [[dispersion-trading]] for the full strategy treatment.
+See dispersion-trading for the full strategy treatment.
 
 ## Concentration-Risk Angle
 
@@ -162,7 +160,7 @@ But also and more dangerously, the same book is structurally **short the correla
 
 This is the mechanism by which a "diversified" short-premium book — diversified across tickers, sectors, even tenors — can be a single concentrated short-correlation bet. Looking at [[implied-correlation]] alongside per-position [[vega]] is the diagnostic test.
 
-The practical rule of thumb: if your book contains both short index put exposure and short single-name put exposure on >25% of the index by weight, you are structurally short implied correlation, and you should size as if you are running a [[dispersion-trading|reverse-dispersion]] book — because that is what you are.
+The practical rule of thumb: if your book contains both short index put exposure and short single-name put exposure on >25% of the index by weight, you are structurally short implied correlation, and you should size as if you are running a reverse-dispersion book — because that is what you are.
 
 ## Reading the VIX × Implied-Correlation Plane
 
@@ -233,7 +231,6 @@ Realised correlation is what *happened*. Implied correlation is what the option 
 - [[correlation-breakdown]] — the stress-regime mechanism that elevates realised correlation toward implied
 - [[implied-volatility]] — the analogue concept on the volatility axis
 - [[volatility-surface]] — the full IV grid that implied correlation summarises
-- [[dispersion-trading]] — the canonical strategy that monetises the correlation risk premium
 - [[options-concentration-risk]] — the book-level structure that is structurally short implied correlation
 - [[variance-risk-premium]] — the parallel premium on the volatility axis
 - [[vix]] — the index-vol level that moves alongside but separately from implied correlation
@@ -252,6 +249,5 @@ Realised correlation is what *happened*. Implied correlation is what the option 
 - CBOE Implied Correlation Index methodology white papers (KCJ 2009 launch; COR1M / COR3M 2021 redesign)
 - Driessen, Maenhout, Vilkov (2009) "The Price of Correlation Risk: Evidence from Equity Options," *Journal of Finance* — academic foundation of the correlation risk premium
 - Marabel Romo (2012) "Dispersion Trading: Empirical Evidence from US Equity Options" — empirical study of dispersion P&L
-- [[dispersion-trading]] — wiki strategy treatment
 - [[vix-august-2024-spike]] — case study where implied correlation and realised correlation both spiked
 - Sell-side derivatives research on implied vs realised correlation (Goldman Sachs, JPMorgan, Barclays Equity Volatility Insights, 2010-2024)

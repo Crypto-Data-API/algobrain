@@ -11,7 +11,7 @@ markets_affected: [equities, futures]
 impact: high
 verified: true
 sources_count: 5
-related: ["[[counterparty-stress-arbitrage]]", "[[index-arbitrage]]", "[[archegos-blowup-2021]]", "[[ltcm-collapse-1998]]", "[[2008-global-financial-crisis]]", "[[risk-management]]", "[[fastest-profitable-trades]]"]
+related: ["[[counterparty-stress-arbitrage]]", "[[archegos-blowup-2021]]", "[[ltcm-collapse-1998]]", "[[2008-global-financial-crisis]]", "[[risk-management]]", "[[fastest-profitable-trades]]"]
 ---
 
 # Société Générale Kerviel Rogue Trade (January 2008)
@@ -22,7 +22,7 @@ SocGen's panicked unwinding of Kerviel's positions over **January 21-23, 2008** 
 
 ## Background
 
-**Jérôme Kerviel** (born 1977) joined SocGen in 2000 in the back-office (compliance/middle-office). Promoted to junior trader on the **Delta One** desk in 2005 — responsible for arbitrage between European equity index futures and the underlying baskets of stocks (a [[index-arbitrage|classic index arbitrage]] strategy).
+**Jérôme Kerviel** (born 1977) joined SocGen in 2000 in the back-office (compliance/middle-office). Promoted to junior trader on the **Delta One** desk in 2005 — responsible for arbitrage between European equity index futures and the underlying baskets of stocks (a classic index arbitrage strategy).
 
 **Delta One desk:**
 - Officially ran market-neutral arbitrage between futures and underlying baskets.
@@ -87,7 +87,7 @@ The Kerviel scandal created arbitrage opportunities for traders who anticipated 
 
 **Post-disclosure Fed-cut interaction:** The Fed's 75 bp emergency cut (responding to perceived crisis) inflated risk-asset prices once Kerviel was disclosed. Long risk assets at the dip captured the bounce.
 
-**Index-arbitrage convergence:** During the unwind, futures-vs-cash basis dislocated; specialist [[index-arbitrage|index arb]] desks captured the convergence as basis closed.
+**Index-arbitrage convergence:** During the unwind, futures-vs-cash basis dislocated; specialist index arb desks captured the convergence as basis closed.
 
 ## Lessons for Traders
 
@@ -113,7 +113,7 @@ The Kerviel scandal created arbitrage opportunities for traders who anticipated 
 
 ## Aftermath
 
-- **2008-2010:** SocGen wrote down losses; recapitalized via €5.5B rights issue (Feb 2008) — see [[rights-issue-arbitrage]].
+- **2008-2010:** SocGen wrote down losses; recapitalized via €5.5B rights issue (Feb 2008) — see rights-issue-arbitrage.
 - **2008:** Stock dropped 50%+ over 2008; eventually recovered.
 - **2010:** Daniel Bouton (CEO during scandal) resigned.
 - **2014:** Kerviel sued SocGen for unfair dismissal; mixed court rulings.
@@ -131,4 +131,4 @@ The Kerviel scandal created arbitrage opportunities for traders who anticipated 
 
 ## Related
 
-[[risk-arbitrage]] · [[1995-sumitomo-copper-scandal]] · [[1991-salomon-treasury-auction-scandal]] · [[archegos-blowup-2021]] · [[ltcm-collapse-1998]] · [[index-arbitrage]] · [[rights-issue-arbitrage]] · [[2008-global-financial-crisis]]
+risk-arbitrage · [[1995-sumitomo-copper-scandal]] · [[1991-salomon-treasury-auction-scandal]] · [[archegos-blowup-2021]] · [[ltcm-collapse-1998]] · index-arbitrage · rights-issue-arbitrage · [[2008-global-financial-crisis]]

@@ -9,12 +9,12 @@ aliases: ["Jason McDonald ITPM"]
 entity_type: person
 headquarters: "United Kingdom"
 website: "https://itpm.com/trader-mentoring/jason-mcdonald/"
-related: ["[[itpm]]", "[[anton-kreil]]", "[[edward-shek]]", "[[long-short-equity]]", "[[portfolio-theory]]", "[[risk-management]]"]
+related: ["[[anton-kreil]]", "[[edward-shek]]", "[[portfolio-theory]]", "[[risk-management]]"]
 ---
 
 # Jason McDonald
 
-Jason McDonald is a Senior Trading Mentor at the [[itpm|Institute of Trading and Portfolio Management]] with 17 years of professional trading experience as a hedge fund portfolio manager and proprietary trader across major financial institutions. He remains listed as an active ITPM mentor as of June 2026, making him one of the longest-serving mentors at the firm alongside [[anton-kreil]].
+Jason McDonald is a Senior Trading Mentor at the Institute of Trading and Portfolio Management with 17 years of professional trading experience as a hedge fund portfolio manager and proprietary trader across major financial institutions. He remains listed as an active ITPM mentor as of June 2026, making him one of the longest-serving mentors at the firm alongside [[anton-kreil]].
 
 ## Overview
 
@@ -47,7 +47,7 @@ McDonald's career spans BZW, CSFB, MAKO Volatility Hedge Fund, Commerzbank, Lehm
 - Became one of the largest Proprietary Traders on the Investment Bank side
 
 ### Lehman Brothers & TD Bank (2007-2009)
-- Managed $250M global [[long-short-equity|long/short portfolios]] at both firms
+- Managed $250M global long/short portfolios at both firms
 - Retired in 2009
 
 ### ITPM (2013-present)
@@ -59,14 +59,12 @@ McDonald's career spans BZW, CSFB, MAKO Volatility Hedge Fund, Commerzbank, Lehm
 
 ## Trading Relevance
 
-McDonald's background in proprietary trading and hedge fund management provides real-world context for ITPM's [[long-short-equity]] methodology. His experience spans multiple market cycles including the 2008 financial crisis, making his perspective on [[risk-management]] and portfolio construction particularly valuable.
+McDonald's background in proprietary trading and hedge fund management provides real-world context for ITPM's long-short-equity methodology. His experience spans multiple market cycles including the 2008 financial crisis, making his perspective on [[risk-management]] and portfolio construction particularly valuable.
 
 ## Related
 
-- [[itpm]]
 - [[anton-kreil]]
 - [[edward-shek]]
-- [[long-short-equity]]
 - [[portfolio-theory]]
 - [[risk-management]]
 

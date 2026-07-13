@@ -9,7 +9,7 @@ aliases: ["Footprint Charts", "Footprint Chart", "Bid-Ask Chart", "Cluster Chart
 domain: [market-microstructure, indicators]
 difficulty: advanced
 prerequisites: ["[[order-flow]]", "[[volume-profile]]"]
-related: ["[[order-flow]]", "[[delta]]", "[[volume-profile]]", "[[absorption]]", "[[delta-divergence]]", "[[bookmap]]", "[[sierra-chart]]", "[[support-and-resistance]]", "[[order-blocks]]"]
+related: ["[[order-flow]]", "[[delta]]", "[[volume-profile]]", "[[absorption]]", "[[delta-divergence]]", "[[sierra-chart]]", "[[support-and-resistance]]", "[[order-blocks]]"]
 ---
 
 **Footprint charts** (also called bid-ask charts or cluster charts) display the volume traded at each price level within each candle, broken down by trades executed at the bid versus trades executed at the ask. They provide a granular, inside-the-candle view of [[order-flow]] that standard candlestick charts cannot reveal, showing not just where price went but how buyers and sellers behaved at every tick along the way.
@@ -61,8 +61,8 @@ The footprint shows declining volume at the extreme of a move. For example, in a
 Several platforms offer footprint chart functionality:
 
 - **[[sierra-chart|Sierra Chart]]**: The most configurable and cost-effective option for footprint analysis. Popular among professional futures traders. Supports all footprint types with extensive customization.
-- **[[quantower|Quantower]]**: Modern platform with clean footprint visualization. Supports futures, crypto, and forex. Competitive pricing.
-- **[[bookmap|Bookmap]]**: Primarily a heatmap/depth visualization tool but includes footprint-style volume displays. Excels at showing order book depth alongside executed flow.
+- **Quantower**: Modern platform with clean footprint visualization. Supports futures, crypto, and forex. Competitive pricing.
+- **Bookmap**: Primarily a heatmap/depth visualization tool but includes footprint-style volume displays. Excels at showing order book depth alongside executed flow.
 - **ATAS (Order Flow Trading)**: Dedicated order flow platform with advanced footprint features and pattern detection.
 - **Exocharts**: Crypto-focused footprint tool with exchange-aggregated data.
 

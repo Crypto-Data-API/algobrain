@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [machine-learning, data-provider, quantitative]
 aliases: ["Alt Data"]
-related: ["[[nlp-sentiment-analysis]]", "[[feature-engineering-finance]]", "[[ml-trading-pipeline]]", "[[machine-learning]]", "[[fundamental-analysis]]", "[[information-arbitrage]]", "[[alternative-data-alpha]]", "[[fastest-profitable-trades]]"]
+related: ["[[nlp-sentiment-analysis]]", "[[feature-engineering-finance]]", "[[ml-trading-pipeline]]", "[[machine-learning]]", "[[information-arbitrage]]", "[[alternative-data-alpha]]", "[[fastest-profitable-trades]]"]
 domain: [quantitative, machine-learning]
 difficulty: intermediate
 ---
@@ -44,7 +44,7 @@ The field has grown from a niche practice used by a handful of quantitative hedg
 
 ## Trading Applications
 
-- **Earnings prediction**: Using credit card data, web traffic, and app downloads to forecast quarterly [[earnings]] before the official report. This is the most common and most studied application of alternative data.
+- **Earnings prediction**: Using credit card data, web traffic, and app downloads to forecast quarterly earnings before the official report. This is the most common and most studied application of alternative data.
 - **[[feature-engineering-finance|Feature engineering]]**: Alternative data fields become features in [[machine-learning]] models that predict returns, volatility, or other financial variables. The challenge is transforming raw alt data into clean, standardized features.
 - **Event detection**: Monitoring social media and news for early detection of product launches, scandals, regulatory actions, or geopolitical events that affect specific companies or sectors.
 - **Supply chain analysis**: Mapping corporate supply chain relationships and monitoring supplier/customer health to anticipate earnings impacts before they are reported.
@@ -57,7 +57,6 @@ The field has grown from a niche practice used by a handful of quantitative hedg
 - [[feature-engineering-finance]] — Transforming raw data into model-ready features
 - [[ml-trading-pipeline]] — End-to-end system for machine learning-based trading
 - [[machine-learning]] — Techniques for extracting signals from large datasets
-- [[fundamental-analysis]] — Traditional analysis that alternative data augments
 
 ## Sources
 

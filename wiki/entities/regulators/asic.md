@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 1998
 headquarters: "Sydney, Australia"
 website: "https://asic.gov.au"
-related: ["[[australian-investing]]", "[[sec]]", "[[regulation]]", "[[cmc-markets]]", "[[ig-markets]]", "[[commsec]]", "[[nabtrade]]", "[[chess-sponsorship]]", "[[superannuation]]", "[[smsf]]", "[[austrac]]", "[[apra]]", "[[australian-regulatory-framework]]", "[[afsl]]", "[[vasp-regulation]]"]
+related: ["[[sec]]", "[[regulation]]", "[[superannuation]]", "[[smsf]]", "[[austrac]]", "[[apra]]", "[[australian-regulatory-framework]]", "[[afsl]]", "[[vasp-regulation]]"]
 ---
 
 The Australian Securities and Investments Commission (ASIC) is Australia's primary regulator of financial markets, financial services, and corporate governance. Established in 1998 as the successor to the Australian Securities Commission, ASIC's mandate combines functions that in the United States are split across the [[sec|SEC]], FINRA, CFPB, and parts of the OCC — making it one of the broadest financial regulators in the developed world. Its retail-protection rules (CFD leverage caps, binary-option ban) closely mirror the EU's [[esma|ESMA]] intervention; see [[regulation]] for the global comparison.
@@ -25,7 +25,7 @@ The Australian Securities and Investments Commission (ASIC) is Australia's prima
 | **Headquarters** | Sydney, Australia |
 | **Governing statute** | ASIC Act 2001; Corporations Act 2001 |
 | **Jurisdiction** | Markets + corporate governance + financial services + consumer credit + insurance |
-| **Markets supervised** | [[australian-investing\|ASX]], Cboe Australia (formerly Chi-X) and other licensed markets |
+| **Markets supervised** | ASX, Cboe Australia (formerly Chi-X) and other licensed markets |
 | **Core license** | Australian Financial Services Licence ([[afsl\|AFSL]]) |
 | **Approx. budget** | ~AUD $500 million |
 | **Approx. staff** | ~1,800 |
@@ -38,7 +38,7 @@ The Australian Securities and Investments Commission (ASIC) is Australia's prima
 
 ASIC is an independent Commonwealth government body responsible for:
 
-- **Market integrity**: Surveillance of the [[australian-investing|ASX]] and other Australian financial markets
+- **Market integrity**: Surveillance of the ASX and other Australian financial markets
 - **Licensing**: Issuing and enforcing Australian Financial Services Licences (AFSLs) required by all brokers, fund managers, and financial advisers
 - **Consumer protection**: Ensuring financial products and services are fair, transparent, and appropriate for their target market
 - **Corporate regulation**: Overseeing company registrations, corporate governance, and financial reporting
@@ -64,8 +64,8 @@ ASIC operates the Market Analysis and Intelligence (MAI) system for automated su
 
 Every entity that provides financial services in Australia must hold an **Australian Financial Services Licence (AFSL)** or be authorised under someone else's AFSL. This includes:
 
-- Stockbrokers ([[commsec]], [[nabtrade]], [[bell-direct]], [[morgans]], [[selfwealth]])
-- CFD providers ([[cmc-markets]], [[ig-markets]])
+- Stockbrokers (commsec, nabtrade, bell-direct, morgans, selfwealth)
+- CFD providers (cmc-markets, ig-markets)
 - Fund managers and super fund trustees
 - Financial advisers and planners
 - Insurance providers
@@ -103,7 +103,7 @@ In March 2021, ASIC implemented sweeping restrictions on CFD and binary options 
 | **Negative balance protection** | **Required** — retail accounts cannot go below zero |
 | **Margin close-out** | Required at 50% of total margin required |
 
-These restrictions aligned Australia with similar rules in the EU (ESMA) and UK (FCA), and significantly impacted [[cmc-markets]], [[ig-markets]], and other CFD brokers operating in Australia.
+These restrictions aligned Australia with similar rules in the EU (ESMA) and UK (FCA), and significantly impacted cmc-markets, ig-markets, and other CFD brokers operating in Australia.
 
 ### Design and Distribution Obligations (DDO)
 
@@ -125,7 +125,7 @@ This means brokers must assess whether products like CFDs, options, or leveraged
 | **2020** | Sued NAB subsidiaries over fees charged for no service |
 | **2021** | Banned binary options, restricted CFD leverage |
 | **2022** | Prosecuted crypto-related fraud cases; issued guidance on crypto classification |
-| **2023** | Investigated ASX over [[chess-sponsorship|CHESS replacement project]] disclosures; sued multiple finfluencers for unlicensed financial advice |
+| **2023** | Investigated ASX over CHESS replacement project disclosures; sued multiple finfluencers for unlicensed financial advice |
 | **2024** | Continued enforcement of DDO obligations; fined multiple super funds for greenwashing claims |
 
 ## MoneySmart
@@ -191,7 +191,6 @@ These overlap heavily with the global retail-derivative protection wave that [[e
 
 ## Related
 
-- [[australian-investing]] — The Australian market ASIC supervises
 - [[sec]] — US analogue (narrower mandate, SRO model via FINRA)
 - [[esma]] — EU analogue; near-identical retail CFD intervention
 - [[regulation]] — Global financial-regulation overview
@@ -199,11 +198,6 @@ These overlap heavily with the global retail-derivative protection wave that [[e
 - [[apra]] — Prudential regulator (banks, insurers, APRA-regulated super)
 - [[austrac]] — AML/CTF and VASP regulator
 - [[risk-management]] — Why leverage caps and negative-balance protection aid survivorship
-- [[cmc-markets]] — CFD broker subject to ASIC rules
-- [[ig-markets]] — CFD broker subject to ASIC rules
-- [[commsec]] — AFSL-licensed retail broker
-- [[nabtrade]] — AFSL-licensed retail broker
-- [[chess-sponsorship]] — ASX settlement model ASIC oversees
 - [[superannuation]] — ASIC regulates products/advice, not the funds themselves
 - [[smsf]] — Regulated by the ATO, not ASIC
 

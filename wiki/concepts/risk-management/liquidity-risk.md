@@ -75,7 +75,7 @@ Funding and market liquidity feed on each other in a destructive loop, the mecha
 3. Selling into thin markets pushes prices down further (market impact)
 4. Further losses trigger more margin calls — back to step 2
 
-This is exactly how [[ltcm]] (1998) and the 2008 crisis unwound, and why liquidity "dries up when you need it most." It is the practical link between [[liquidity-risk]] and [[systemic-risk]]. The same spiral drove the [[convertible-arbitrage]] unwind of 2008 and the customer [[bank-run]] in the [[ftx-collapse]] (2022).
+This is exactly how [[ltcm]] (1998) and the 2008 crisis unwound, and why liquidity "dries up when you need it most." It is the practical link between [[liquidity-risk]] and [[systemic-risk]]. The same spiral drove the convertible-arbitrage unwind of 2008 and the customer [[bank-run]] in the [[ftx-collapse]] (2022).
 
 ## Gating, Halts and Forced Liquidation
 
@@ -118,7 +118,7 @@ Traders must account for liquidity risk in position sizing. A practical rule of 
 - [[trading-volume]], [[float]] — capacity proxies
 - [[systemic-risk]], [[counterparty-risk]], [[tail-risk]] — adjacent risks that liquidity risk amplifies
 - [[position-sizing]], [[leverage]], [[cash-equivalents]] — the management levers
-- [[ltcm]], [[ftx-collapse]], [[convertible-arbitrage]] — case studies in liquidity spirals
+- [[ltcm]], [[ftx-collapse]], convertible-arbitrage — case studies in liquidity spirals
 
 ## Sources
 

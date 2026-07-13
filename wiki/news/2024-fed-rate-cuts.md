@@ -10,7 +10,7 @@ markets_affected: [stocks, crypto, bonds, forex]
 impact: high
 verified: true
 sources_count: 1
-related: ["[[2024-12-bitcoin-100k]]", "[[2024-nvidia-ai-boom]]", "[[bitcoin]]"]
+related: ["[[2024-12-bitcoin-100k]]", "[[bitcoin]]"]
 ---
 
 # Federal Reserve Begins Rate Cutting Cycle
@@ -22,7 +22,7 @@ On September 18, 2024, the Federal Reserve cut the federal funds rate by 50 basi
 ## Market Impact
 
 - **S&P 500**: Rallied to new all-time highs, finishing 2024 up ~23%
-- **Nasdaq**: Outperformed on growth stock rotation, led by [[2024-nvidia-ai-boom]] and the AI sector
+- **Nasdaq**: Outperformed on growth stock rotation, led by 2024-nvidia-ai-boom and the AI sector
 - **Bitcoin**: Benefited from looser financial conditions; BTC thrives in expanding liquidity environments
 - **Bonds**: Treasury yields fell; TLT and long-duration bonds rallied
 - **US Dollar (DXY)**: Weakened as rate differential narrowed versus other currencies

@@ -6,13 +6,13 @@ updated: 2026-06-21
 status: excellent
 tags: [australia, tax, strategy, portfolio-theory]
 aliases: ["Australian Tax Loss Harvesting", "EOFY Selling"]
-related: ["[[tax-loss-harvesting]]", "[[wash-sale]]", "[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[calendar-effects]]", "[[portfolio-rebalancing]]", "[[franking-credits]]", "[[superannuation]]", "[[smsf]]", "[[cryptocurrency-tax-australia]]", "[[tax-efficient-investing]]", "[[risk-management]]"]
+related: ["[[wash-sale]]", "[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[calendar-effects]]", "[[portfolio-rebalancing]]", "[[superannuation]]", "[[smsf]]", "[[cryptocurrency-tax-australia]]", "[[tax-efficient-investing]]", "[[risk-management]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: intermediate
 prerequisites: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]"]
 ---
 
-Australian tax-loss harvesting is the practice of selling investments at a loss before 30 June (the end of the Australian financial year) to crystallise capital losses that offset capital gains, thereby reducing your tax bill. While the core concept is the same as [[tax-loss-harvesting|general tax-loss harvesting]], Australia's rules differ in one widely-cited way: **there is no US-style statutory 30-day wash sale rule**. However — and this is the critical 2026 nuance — the ATO has repeatedly signalled that artificial sell-and-rebuy "wash sales" can still be attacked under the general anti-avoidance provision (Part IVA). The "no wash sale rule" claim is true only in the narrow statutory sense; in substance the ATO does have a wash-sale stance (see [[wash-sale]] and the section below).
+Australian tax-loss harvesting is the practice of selling investments at a loss before 30 June (the end of the Australian financial year) to crystallise capital losses that offset capital gains, thereby reducing your tax bill. While the core concept is the same as general tax-loss harvesting, Australia's rules differ in one widely-cited way: **there is no US-style statutory 30-day wash sale rule**. However — and this is the critical 2026 nuance — the ATO has repeatedly signalled that artificial sell-and-rebuy "wash sales" can still be attacked under the general anti-avoidance provision (Part IVA). The "no wash sale rule" claim is true only in the narrow statutory sense; in substance the ATO does have a wash-sale stance (see [[wash-sale]] and the section below).
 
 > **Not financial or tax advice.** This page is general educational information about Australian tax concepts, not personal advice. Tax rates, thresholds, CGT discount mechanics, and ATO positions change between financial years and depend on your individual circumstances. **All figures below are indicative only** and may be out of date. Confirm current rules at [ato.gov.au](https://www.ato.gov.au) and consult a registered tax agent or financial adviser before acting.
 
@@ -162,7 +162,7 @@ Use the EOFY tax-loss harvest as an opportunity to [[portfolio-rebalancing|rebal
 
 ### Franking Credit Offset
 
-If you receive significant [[franking-credits|franking credit]] income from fully franked dividends, the grossed-up dividend amount increases your assessable income. Harvesting capital losses can offset capital gains that would otherwise push you into a higher bracket, indirectly protecting the value of your franking credits.
+If you receive significant franking credit income from fully franked dividends, the grossed-up dividend amount increases your assessable income. Harvesting capital losses can offset capital gains that would otherwise push you into a higher bracket, indirectly protecting the value of your franking credits.
 
 ### Crypto Tax-Loss Harvesting
 
@@ -194,13 +194,11 @@ The ATO requires detailed records for tax-loss harvesting:
 
 ## Related
 
-- [[tax-loss-harvesting]]
 - [[wash-sale]] — the US statutory rule Australia lacks (but partly replicates via Part IVA)
 - [[australian-investor-tax]]
 - [[capital-gains-tax-discount]]
 - [[calendar-effects]]
 - [[portfolio-rebalancing]]
-- [[franking-credits]]
 - [[superannuation]]
 - [[smsf]]
 - [[cryptocurrency-tax-australia]]

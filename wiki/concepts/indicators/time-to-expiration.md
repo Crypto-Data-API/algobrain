@@ -18,9 +18,9 @@ difficulty: intermediate
 
 DTE has three closely related but distinct definitions used in practice:
 
-1. **Calendar-day DTE** — raw number of calendar days until expiration. Dominant convention on most retail platforms ([[thinkorswim]], tastytrade, [[interactive-brokers|IBKR]]). A 45-DTE option opened on a Tuesday expires on a Thursday roughly six and a half weeks later.
+1. **Calendar-day DTE** — raw number of calendar days until expiration. Dominant convention on most retail platforms ([[thinkorswim]], tastytrade, IBKR). A 45-DTE option opened on a Tuesday expires on a Thursday roughly six and a half weeks later.
 2. **Trading-day DTE** — number of *trading sessions* remaining. Equals calendar DTE minus weekends and US market holidays. A "45 calendar-DTE" option is closer to **31 trading days** out.
-3. **Year fraction (t or τ)** — DTE expressed as a fraction of the year, used inside pricing models. Convention varies: `t = DTE/365` (calendar-year basis) or `t = DTE/252` (business-year basis). [[orats|ORATS]], CBOE's VIX methodology, and most quant libraries default to a calendar-year basis with a small weekend "decay tax" baked in.
+3. **Year fraction (t or τ)** — DTE expressed as a fraction of the year, used inside pricing models. Convention varies: `t = DTE/365` (calendar-year basis) or `t = DTE/252` (business-year basis). ORATS, CBOE's VIX methodology, and most quant libraries default to a calendar-year basis with a small weekend "decay tax" baked in.
 
 The choice matters. Black-Scholes uses a continuous time variable, but the market does not decay continuously over weekends — exchanges are closed. Different brokers, models, and analytics platforms make different compromises about weekend and holiday decay, which is why two screens may show meaningfully different theta numbers for the same option. See [[theta-decay-curve]] for the canonical shape and [[weekend-effect]] for the empirical evidence.
 
@@ -58,7 +58,7 @@ DTE is the dominant axis on which a short-premium book is engineered, for three 
 
 The fundamental tension in premium selling is that the steepest part of the [[theta-decay-curve]] — the last 30 days, especially the last 10 — is also where [[gamma]] is most violent. A trader who only sells front-week premium maximises theoretical theta per dollar of capital but accepts a [[gamma-to-theta-ratio]] above 1 and a typical [[theta-realisation-ratio]] of 30-50% (versus 60-90% for 30-45 DTE on liquid index products). DTE selection is the choice of how aggressively to sit on that trade-off.
 
-The canonical [[tastytrade]] / [[itpm-trading-philosophy|ITPM]] heuristic — *open at 45 DTE, manage at 21 DTE* — is a DTE-based discipline that puts the trade in the part of the curve where theta has begun its meaningful acceleration but gamma has not yet turned vertical.
+The canonical tastytrade / [[itpm-trading-philosophy|ITPM]] heuristic — *open at 45 DTE, manage at 21 DTE* — is a DTE-based discipline that puts the trade in the part of the curve where theta has begun its meaningful acceleration but gamma has not yet turned vertical.
 
 ### 2. DTE buckets are the unit of [[expiration-laddering|laddering]] and concentration limits
 
@@ -129,5 +129,3 @@ A trader running the [[theta-targeting]] worked example ($50/day on $150K) at 45
 
 - [[book-option-volatility-and-pricing]] — Natenberg, Chapters 6 and 8: time decay, the role of t in the Black-Scholes framework, and the asymmetry between calendar and trading days.
 - Hull, *Options, Futures and Other Derivatives*, 10th ed., Chapter 19 — Greeks as functions of t, including the 1/√t scaling for ATM gamma and the corresponding theta divergence.
-- [[tastytrade]] research on the 45 DTE / 21 DTE cadence and the realisation profile across DTE buckets.
-- [[orats]] historical data — empirical theta capture by DTE bucket on liquid index options.

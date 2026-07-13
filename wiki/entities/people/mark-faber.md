@@ -7,7 +7,7 @@ status: good
 tags: [person, stocks, commodities, gold]
 entity_type: person
 aliases: ["Mark Faber", "Dr. Doom"]
-related: ["[[jim-rogers]]", "[[commodities]]", "[[gold]]", "[[contrarian-investing]]", "[[emerging-markets]]"]
+related: ["[[jim-rogers]]", "[[commodities]]", "[[gold]]", "[[emerging-markets]]"]
 ---
 
 Marc Faber (born February 28, 1946) is a Swiss investor, economist, and publisher of the monthly *Gloom, Boom & Doom Report*, known by the nickname "Dr. Doom" for his persistently contrarian, bearish outlook. For traders he is a long-running source of contrarian macro views — gold, Asia, and anti-central-bank positioning — and a case study in how to calibrate perma-bear commentary as a sentiment input.
@@ -38,7 +38,6 @@ Faber, 80, continues to publish the *Gloom, Boom & Doom Report* from Thailand (s
 - [[gold]]
 - [[commodities]]
 - [[emerging-markets]]
-- [[contrarian-investing]]
 - [[1987-black-monday]]
 - [[1997-asian-financial-crisis]]
 

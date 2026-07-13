@@ -79,7 +79,7 @@ This is harder to measure because strategy AUM isn't publicly reported, but prox
 | [[cross-exchange-arbitrage]] | Cross-venue BTC/USDT bid-ask spread | Median spread declining month-over-month |
 | [[funding-rate-arbitrage]] | Average funding rate (30-day rolling) | Funding rates trending toward 0 or negative |
 | [[pairs-trading]] | Average z-score at entry | Tighter entry thresholds needed to find trades |
-| [[merger-arbitrage]] | Average deal spread at announcement | Spreads narrowing relative to deal-break probability |
+| merger-arbitrage | Average deal spread at announcement | Spreads narrowing relative to deal-break probability |
 | [[volatility-arbitrage]] | VRP (implied - realized vol) | VRP compressing below historical median |
 | [[cash-and-carry]] | Annualized futures basis | Basis narrowing toward risk-free rate |
 

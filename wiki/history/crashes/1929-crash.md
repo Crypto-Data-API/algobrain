@@ -11,7 +11,7 @@ impact: high
 verified: true
 sources_count: 2
 aliases: ["Black Thursday", "Black Tuesday", "1929 Crash", "Great Crash", "Wall Street Crash"]
-related: ["[[great-depression]]", "[[bubble]]", "[[leverage]]", "[[margin]]", "[[stock-markets]]", "[[black-monday]]", "[[crashes-overview]]", "[[market-crashes]]", "[[sec]]"]
+related: ["[[great-depression]]", "[[bubble]]", "[[leverage]]", "[[margin]]", "[[black-monday]]", "[[crashes-overview]]", "[[market-crashes]]", "[[sec]]"]
 ---
 
 # Wall Street Crash of 1929

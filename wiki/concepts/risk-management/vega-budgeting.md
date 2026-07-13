@@ -12,7 +12,7 @@ prerequisites: ["[[options-greeks]]", "[[vega]]"]
 difficulty: advanced
 ---
 
-**Vega budgeting** is the practice of setting a hard cap on net [[vega]] exposure across an entire options book and managing positions to stay within it. Where [[options-position-sizing]] looks at single trades and [[vega-hedging]] addresses tactical offsets, vega budgeting is the strategic, top-down constraint: it answers "how much volatility risk is the entire portfolio allowed to carry, in dollars per IV point, today?" Anyone running a net short-premium book — [[itpm]]-style traders, [[iron-condor]] sellers, [[short-strangle]] writers, [[credit-spread]] portfolios — needs an explicit vega budget, because volatility blowups are the dominant tail risk for these strategies and the path to ruin runs through net vega rather than net delta.
+**Vega budgeting** is the practice of setting a hard cap on net [[vega]] exposure across an entire options book and managing positions to stay within it. Where [[options-position-sizing]] looks at single trades and [[vega-hedging]] addresses tactical offsets, vega budgeting is the strategic, top-down constraint: it answers "how much volatility risk is the entire portfolio allowed to carry, in dollars per IV point, today?" Anyone running a net short-premium book — itpm-style traders, [[iron-condor]] sellers, [[short-strangle]] writers, [[credit-spread]] portfolios — needs an explicit vega budget, because volatility blowups are the dominant tail risk for these strategies and the path to ruin runs through net vega rather than net delta.
 
 ## Why Vega Is the Option Seller's Silent Killer
 
@@ -47,7 +47,7 @@ A useful sanity check: a vol move of +10 to +15 points in a single session is a 
 
 ### Dollar-Per-Vol-Point Method
 
-State the budget directly: "max net vega = -$1,000 per IV point." This is the operational form most platforms display ([[interactive-brokers|IBKR]] Risk Navigator, tastytrade, ORATS), and it makes the daily check trivial — read the portfolio vega number, compare to the cap, adjust if breached.
+State the budget directly: "max net vega = -$1,000 per IV point." This is the operational form most platforms display (IBKR Risk Navigator, tastytrade, ORATS), and it makes the daily check trivial — read the portfolio vega number, compare to the cap, adjust if breached.
 
 ### Scenario-Based Method
 
@@ -97,7 +97,7 @@ The DTE distribution of the vega budget matters as much as the total.
 
 A book that is "balanced" on total vega but loaded into 7-21 DTE will get hit harder on a vol shock than a book of equivalent total vega spread across 30-90 DTE, because the front-month IV moves more than the back-month IV in a shock — front-month [[volga]] (vega of vega) is higher.
 
-A practical balance rule used by some [[itpm]]-aligned discretionary traders:
+A practical balance rule used by some itpm-aligned discretionary traders:
 
 - No more than 50% of net negative vega in 0-30 DTE
 - At least 25% of net negative vega in 45+ DTE (the "anchor" positions)
@@ -148,7 +148,7 @@ Selling the front-month and buying the back-month at the same strike. Front-mont
 
 ### Diagonal Spreads
 
-Same idea as a calendar but with different strikes — short the front at one strike, long the back at another. Allows tuning of net delta and net vega independently. Common in [[itpm]] portfolios for adding directional bias without consuming vega budget.
+Same idea as a calendar but with different strikes — short the front at one strike, long the back at another. Allows tuning of net delta and net vega independently. Common in itpm portfolios for adding directional bias without consuming vega budget.
 
 ### Ratio Spreads
 
@@ -170,7 +170,7 @@ Standard iron condors have nearly the same vega as short strangles. Buying the l
 
 ## Worked Example
 
-A trader running an [[itpm]]-style discretionary book has the following state on a Monday morning:
+A trader running an itpm-style discretionary book has the following state on a Monday morning:
 
 - Account NLV: $250,000
 - Vega budget: -$1,250 (i.e., -$500 per $100K NLV, conservative)
@@ -277,7 +277,6 @@ Without all four, the budget is enforceable only on paper.
 - [[vix]] — the most common reference for index vol moves and the basis for VIX-derivative hedges
 - [[vix-august-2024-spike]] — recent case study in why books without a vega budget were wiped out
 - [[volmageddon-2018]] — earlier case study; same lesson
-- [[itpm]] — the discretionary fundamental framework whose risk module relies on vega budgeting
 - [[short-strangle]] / [[iron-condor]] / [[credit-spread]] — the strategies most exposed to vega risk
 
 ## Sources

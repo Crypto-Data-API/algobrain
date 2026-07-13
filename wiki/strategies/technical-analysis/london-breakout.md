@@ -67,7 +67,7 @@ The strategy leverages a fundamental structural feature of the 24-hour forex mar
 - No indicators required -- pure price action and session structure
 
 ## Disadvantages
-- **Only works in [[forex]]** -- entirely dependent on forex session timing with no application to [[stocks]] or [[crypto]]
+- **Only works in [[forex]]** -- entirely dependent on forex session timing with no application to stocks or [[crypto]]
 - **False breakouts are common:** Price may spike above the Asian range, trigger the buy stop, then reverse and stop out
 - The strategy has become widely known, and some institutional algorithms may exploit the predictable placement of retail stop orders
 - Performance varies significantly by pair and by market regime -- backtesting across different periods shows inconsistent results

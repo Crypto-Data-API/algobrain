@@ -15,7 +15,7 @@ edge_source: [behavioral, structural]
 edge_mechanism: "Recurring institutional fund flows (payroll/pension inflows, tax-loss selling, quarter-end window dressing) and behavioral biases create predictable seasonal demand/supply imbalances that calendar rules attempt to harvest."
 data_required: [ohlcv-daily, trading-calendar]
 crowding_risk: high
-related: ["[[momentum-rotation]]", "[[sentiment-trading]]", "[[sector-rotation]]", "[[tax-loss-harvesting]]", "[[market-anomalies]]", "[[seasonality]]", "[[behavioral-finance]]"]
+related: ["[[momentum-rotation]]", "[[sentiment-trading]]", "[[sector-rotation]]", "[[market-anomalies]]", "[[seasonality]]", "[[behavioral-finance]]"]
 ---
 
 # Calendar Effects
@@ -24,7 +24,7 @@ Calendar effects are recurring patterns in market returns tied to specific dates
 
 ## Overview
 
-The most documented effects include the **January Effect** (small-cap stocks outperform in January, partly a rebound from [[tax-loss-harvesting]] selling in December), the **Monday Effect / weekend effect** (markets historically show weaker or negative returns on Mondays), **Sell in May and Go Away** (the May-October half-year historically lags November-April -- the academic "Halloween Indicator"), the **Turn-of-Month Effect** (returns concentrate in the last 1-3 and first 1-3 trading days of each month), the **Santa Claus Rally** (the last 5 trading days of December plus the first 2 of January tend to be positive), and **Window Dressing** (fund managers buy recent winners and dump losers near quarter-end to flatter reported holdings). Many of these effects have weakened or partially decayed as they became widely known and arbitraged (see [[edge-taxonomy]] on decay), but those tied to durable structural [[fund-flows]] -- payrolls, pensions, mandatory rebalancing -- have proven stickier than those tied to pure sentiment.
+The most documented effects include the **January Effect** (small-cap stocks outperform in January, partly a rebound from tax-loss-harvesting selling in December), the **Monday Effect / weekend effect** (markets historically show weaker or negative returns on Mondays), **Sell in May and Go Away** (the May-October half-year historically lags November-April -- the academic "Halloween Indicator"), the **Turn-of-Month Effect** (returns concentrate in the last 1-3 and first 1-3 trading days of each month), the **Santa Claus Rally** (the last 5 trading days of December plus the first 2 of January tend to be positive), and **Window Dressing** (fund managers buy recent winners and dump losers near quarter-end to flatter reported holdings). Many of these effects have weakened or partially decayed as they became widely known and arbitraged (see [[edge-taxonomy]] on decay), but those tied to durable structural [[fund-flows]] -- payrolls, pensions, mandatory rebalancing -- have proven stickier than those tied to pure sentiment.
 
 ## Edge source
 
@@ -35,7 +35,7 @@ Per [[edge-taxonomy]], calendar effects draw on two edge categories:
 
 ## Why this edge exists
 
-The other side of the trade is a price-insensitive or biased participant. For the turn-of-month and turn-of-year effects, the counterparty is the **mechanical buyer**: index funds deploying scheduled contributions regardless of valuation, and pensions rebalancing to policy weights on a fixed calendar. For the January small-cap effect, December [[tax-loss-harvesting]] by individuals and funds depresses prices of recent losers (disproportionately small caps), and the supply pressure lifts in the new tax year. The "loser" who keeps losing is, in part, the tax-motivated seller who is optimizing after-tax wealth, not pre-tax price -- a rational decision that nonetheless leaves a seasonal footprint.
+The other side of the trade is a price-insensitive or biased participant. For the turn-of-month and turn-of-year effects, the counterparty is the **mechanical buyer**: index funds deploying scheduled contributions regardless of valuation, and pensions rebalancing to policy weights on a fixed calendar. For the January small-cap effect, December tax-loss-harvesting by individuals and funds depresses prices of recent losers (disproportionately small caps), and the supply pressure lifts in the new tax year. The "loser" who keeps losing is, in part, the tax-motivated seller who is optimizing after-tax wealth, not pre-tax price -- a rational decision that nonetheless leaves a seasonal footprint.
 
 ## Null hypothesis
 
@@ -131,7 +131,6 @@ General market knowledge; no specific wiki source ingested yet. Foundational ref
 
 - [[market-anomalies]] -- the parent category of empirical return regularities
 - [[seasonality]] -- the general phenomenon of date-conditioned returns
-- [[tax-loss-harvesting]] -- the tax-driven December selling behind the January Effect
 - [[fund-flows]] -- the structural driver of turn-of-month and turn-of-year strength
 - [[behavioral-finance]] -- mood/attention cycles underpinning sentiment-driven effects
 - [[edge-taxonomy]] -- where calendar edges fit (structural + behavioral) and why they decay

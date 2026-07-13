@@ -106,7 +106,7 @@ Most [[hedge-funds|hedge funds]] target a Sharpe Ratio above 1.0. [[renaissance-
 | **Treynor** | Excess return over R_f | [[beta]] (systematic risk) | Well-diversified portfolios |
 | **Deflated Sharpe** | Observed Sharpe | Adjusted for # of trials | [[overfitting-detection\|Overfitting]] correction |
 
-The key contrasts: the **[[sortino-ratio|Sortino Ratio]]** fixes the Sharpe's symmetric-volatility flaw by penalizing only downside deviation; the **[[information-ratio|Information Ratio]]** replaces the risk-free rate with a *benchmark* and uses tracking error, making it the standard yardstick for [[active-management|active]] managers measured against an index like the [[sp500|S&P 500]]. The **Calmar Ratio** swaps volatility for [[maximum-drawdown|max drawdown]], which many CTAs and [[trend-following|trend-followers]] prefer because drawdown is what actually triggers redemptions.
+The key contrasts: the **[[sortino-ratio|Sortino Ratio]]** fixes the Sharpe's symmetric-volatility flaw by penalizing only downside deviation; the **[[information-ratio|Information Ratio]]** replaces the risk-free rate with a *benchmark* and uses tracking error, making it the standard yardstick for [[active-management|active]] managers measured against an index like the S&P 500. The **Calmar Ratio** swaps volatility for [[maximum-drawdown|max drawdown]], which many CTAs and [[trend-following|trend-followers]] prefer because drawdown is what actually triggers redemptions.
 
 ## Sources
 

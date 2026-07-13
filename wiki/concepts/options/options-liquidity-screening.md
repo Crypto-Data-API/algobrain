@@ -13,7 +13,6 @@ related:
   - "[[bid-ask-spread]]"
   - "[[slippage]]"
   - "[[liquidity]]"
-  - "[[unusual-whales]]"
   - "[[options-selection-framework]]"
   - "[[strike-selection]]"
   - "[[expiration-selection]]"
@@ -21,14 +20,10 @@ related:
   - "[[market-microstructure]]"
   - "[[clob]]"
   - "[[thinkorswim]]"
-  - "[[tastytrade]]"
-  - "[[interactive-brokers]]"
-  - "[[tradestation]]"
   - "[[spread-width-selection]]"
   - "[[delta]]"
   - "[[probability-of-profit]]"
   - "[[vix-calls]]"
-  - "[[spx-puts]]"
 ---
 
 **Options liquidity screening** is the first filter in the [[options-selection-framework]]: discarding contracts that cannot be entered and exited at fair prices. Liquidity matters more in options than in stocks because options bid-ask spreads can dwarf the entire theta edge of a strategy. A "70%-PoP credit spread" on an illiquid contract is structurally a *negative* expected-value trade once round-trip slippage is priced in.
@@ -98,12 +93,12 @@ For multi-leg structures, the *combined* mid-to-mid spread matters. A 4-leg iron
 
 | Tier | Examples | Typical ATM bid-ask | Multi-leg fit |
 |---|---|---|---|
-| Tier 1 (index/mega-cap) | [[spy\|SPY]], [[sp500\|SPX]], QQQ, AAPL, NVDA, TSLA | $0.01-0.03 | Any size; combos fill at/near mid |
+| Tier 1 (index/mega-cap) | SPY, SPX, QQQ, AAPL, NVDA, TSLA | $0.01-0.03 | Any size; combos fill at/near mid |
 | Tier 2 (large-cap penny-pilot) | Most S&P 500 names | $0.03-0.10 | Standard retail multi-leg |
 | Tier 3 (mid-cap, non-penny-pilot) | Many Russell 2000 names | $0.10-0.30 | Single-leg only; spreads risky |
 | Tier 4 (thin / phantom) | Micro-caps, off-cycle weeklies | > $0.30 / > 10% | **Avoid** — quotes are auto-fills, not markets |
 
-Tier 1 names are where convex hedges such as [[vix-calls|VIX calls]], [[vix-call-spreads|VIX call spreads]], and [[spx-puts|SPX puts]] are actually executable at scale — a key reason tail-hedging programs concentrate there.
+Tier 1 names are where convex hedges such as [[vix-calls|VIX calls]], [[vix-call-spreads|VIX call spreads]], and SPX puts are actually executable at scale — a key reason tail-hedging programs concentrate there.
 
 ## Open Interest Minimums
 
@@ -163,13 +158,13 @@ Earnings-week IV inflation does not always come with proportional liquidity. Som
 ### Broker Built-Ins
 
 - **[[thinkorswim|ThinkOrSwim]] Options Hacker** — scans the universe by OI, volume, IV rank, delta with custom filters. The de facto standard for retail.
-- **[[tastytrade]] platform** — surfaces "liquidity score" alongside IV rank for scanned underlyings.
+- **tastytrade platform** — surfaces "liquidity score" alongside IV rank for scanned underlyings.
 - **TradeStation RadarScreen** — column-based scanner with OI, volume, bid-ask filters for options. EasyLanguage allows custom liquidity formulas.
 - **[[interactive-brokers|Interactive Brokers] Options Trader / Strategy Builder** — institutional-grade OI/volume display per strike with NBBO highlighting.
 
 ### Third-Party Flow Tools
 
-- **[[unusual-whales]]** — flow scanner that includes bid-ask, OI, and volume on individual prints. Useful for confirming a strike is actively traded before entering.
+- **unusual-whales** — flow scanner that includes bid-ask, OI, and volume on individual prints. Useful for confirming a strike is actively traded before entering.
 - **OptionAlert, FlowAlgo, BlackBoxStocks** — competing flow scanners with similar liquidity overlays.
 - **OptionStrat** — visualizes option chains with built-in liquidity color-coding by bid-ask width.
 
@@ -201,7 +196,7 @@ A common myth: "my broker has best execution, so the bid-ask doesn't matter." Fa
 
 *Illustrative arithmetic, not a backtest.* Two traders each sell a 30-DTE put credit spread for a stated **$0.50 mid credit** on a $5-wide spread. The only difference is liquidity.
 
-**Trader A — liquid penny-pilot name ([[spy|SPY]]):**
+**Trader A — liquid penny-pilot name (SPY):**
 
 - Per-leg bid-ask: $0.02. Filling each leg ~1 cent off mid.
 - Round-trip slippage (enter + exit, 2 legs): ~$0.04.
@@ -230,17 +225,16 @@ The wrong move: take the trade anyway because "the chain *has* a quote." A quote
 - [[bid-ask-spread]] — the dominant cost on illiquid options
 - [[slippage]] — realized cost beyond bid-ask
 - [[liquidity]] — general concept
-- [[unusual-whales]] — flow scanner with liquidity overlays
 - [[options-selection-framework]] — liquidity is filter 1
 - [[strike-selection]] — strike choice constrained by liquidity
 - [[expiration-selection]] — DTE choice constrained by liquidity
 - [[moneyness-selection]] — moneyness choice constrained by liquidity
 - [[market-microstructure]] — broader context for NBBO and routing
 - [[clob]] — central limit order book mechanics
-- [[thinkorswim]], [[tastytrade]], [[interactive-brokers]], [[tradestation]] — broker tools
+- [[thinkorswim]], tastytrade, interactive-brokers, tradestation — broker tools
 - [[spread-width-selection]] — wider spreads less punished by per-contract slippage
 - [[probability-of-profit]] — the metric slippage silently erodes
-- [[vix-calls]], [[spx-puts]] — Tier-1 instruments where convex hedges are executable
+- [[vix-calls]], spx-puts — Tier-1 instruments where convex hedges are executable
 
 ## Sources
 

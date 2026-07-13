@@ -9,7 +9,7 @@ aliases: ["Options Diversification"]
 domain: [risk-management, portfolio-theory]
 prerequisites: ["[[diversification]]", "[[options-greeks]]", "[[correlation]]"]
 difficulty: advanced
-related: ["[[diversification]]", "[[portfolio-diversification]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[expiration-laddering]]", "[[options-concentration-risk]]", "[[correlation]]", "[[implied-correlation]]", "[[volatility-regime]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[earnings-iv-crush]]", "[[earnings-volatility]]", "[[fomc-meetings]]", "[[failure-modes]]", "[[volmageddon]]"]
+related: ["[[diversification]]", "[[portfolio-diversification]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[expiration-laddering]]", "[[options-concentration-risk]]", "[[correlation]]", "[[implied-correlation]]", "[[volatility-regime]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[fomc-meetings]]", "[[failure-modes]]", "[[volmageddon]]"]
 ---
 
 Diversification in [[options]] portfolios is structurally harder than in [[portfolio-diversification|long-equity portfolios]] because the correlations that "diversify" the book in normal regimes collapse to ~1 in shocks — and shocks are exactly when the book most needs the diversification to work. A short-vol book holding 30 names across 8 sectors and 4 DTE buckets *looks* well-diversified by long-equity standards but is, in [[volatility-regime|vol-shock]] regimes, effectively a single bet on aggregate vol. This page covers why naive diversification fails for options books, which dimensions of diversification *do* work, and the practitioner-grade rules for building a genuinely diversified options portfolio.
@@ -95,7 +95,7 @@ Equity options vol, credit options vol, FX options vol, and rates options vol al
 
 ### Q1 2022 — clustered single-name earnings prints
 
-NFLX (-35% on 2022-04-19), META (-26% on 2022-02-03), SNAP (-40% on 2022-05-24), and PYPL (-25%) all delivered outlier earnings prints within a few weeks. A short-vol earnings book that held 5–10 mega-cap tech names that quarter took correlated losses across "diversified" positions because the underlying risk factor — mega-cap tech consumer-internet revenue revision — was a single factor. Sector quotas (no more than 2 per sector per week, see [[earnings-iv-crush]]) are the correct response.
+NFLX (-35% on 2022-04-19), META (-26% on 2022-02-03), SNAP (-40% on 2022-05-24), and PYPL (-25%) all delivered outlier earnings prints within a few weeks. A short-vol earnings book that held 5–10 mega-cap tech names that quarter took correlated losses across "diversified" positions because the underlying risk factor — mega-cap tech consumer-internet revenue revision — was a single factor. Sector quotas (no more than 2 per sector per week, see earnings-iv-crush) are the correct response.
 
 ### Asness on vol diversification
 
@@ -143,7 +143,7 @@ The prudent vega budget sizes the book to the *shock-regime* number. Then the ma
 ### Implications
 
 - **Use shock-regime correlations** when computing aggregate book vega and stress scenarios. Calm-regime correlations flatter the book and underestimate the worst-case.
-- **Concentration limits should be factor-aware**, not just underlying-aware. Two names in the same sector during the same earnings week are 90% one bet, not two; size accordingly. See [[options-concentration-risk]] and [[earnings-iv-crush]].
+- **Concentration limits should be factor-aware**, not just underlying-aware. Two names in the same sector during the same earnings week are 90% one bet, not two; size accordingly. See [[options-concentration-risk]] and earnings-iv-crush.
 - **Combine short-vol with explicit long-vol** in sleeve form — the only durable left-tail mitigation. Pure underlying-level diversification within short-vol is insufficient.
 - **Cross-asset is the highest-quality diversification** available to an options book — index, single-name, FX, rates, commodities, crypto. This is the dimension to expand into first when scaling capital.
 - **DTE laddering helps modestly, not heroically** — front and back vol are highly correlated; laddering smooths theta realisation but does not change factor exposure meaningfully. See [[expiration-laddering]].
@@ -173,7 +173,6 @@ The prudent vega budget sizes the book to the *shock-regime* number. Then the ma
 - [[long-vol-vs-short-vol]] — the strategic frame for cross-strategy diversification
 - [[variance-risk-premium]] — the underlying factor
 - [[crisis-alpha]] — the role of long-vol sleeves
-- [[earnings-iv-crush]], [[earnings-volatility]] — single-name event-vol concentration
 - [[fomc-meetings]] — macro-event correlation drivers
 - [[failure-modes]] — historical blow-ups
 - [[volmageddon]] — the canonical case study

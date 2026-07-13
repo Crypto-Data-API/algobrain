@@ -18,7 +18,6 @@ related:
   - "[[capital-vs-labor-asymmetry]]"
   - "[[tech-hub-concentration-risk]]"
   - "[[anthropic]]"
-  - "[[citrini-research]]"
 ---
 
 # Systemic Risk
@@ -59,7 +58,7 @@ A new class of systemic risk is being recognized at the institutional level: AI 
 
 **The "AI Layoff Trap" (Wharton / Boston University, Falk & Tsoukalas)** — A peer-reviewed mathematical model showing that a competitive automation race between firms can trigger a demand-collapse spiral: each firm rationally automates to cut labor costs, but the aggregate effect destroys consumer demand, which forces further automation, and so on. The paper finds that only a Pigouvian automation tax — pricing in the externality of destroyed consumer demand — breaks the loop. This formalizes a systemic-risk mechanism in which the labor channel, not the credit channel, is the source of cascading failure (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). See [[ai-layoff-trap]].
 
-**Citrini's "2028 Global Intelligence Crisis" scenario** — Citrini Research's February 2026 publication is now the named tail scenario in institutional discourse. The scenario specifies 10%+ unemployment combined with roughly a 40% equity decline if superintelligent AI deployment outpaces labor reabsorption. Its release coincided with a tech sell-off across services (finance, real estate, media, medical, legal). Unlike abstract warnings, the scenario is quantitative enough to be priced and hedged, and is now referenced by traders sizing tail-risk positions (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). See [[citrini-2028-global-intelligence-crisis]] and [[citrini-research]].
+**Citrini's "2028 Global Intelligence Crisis" scenario** — Citrini Research's February 2026 publication is now the named tail scenario in institutional discourse. The scenario specifies 10%+ unemployment combined with roughly a 40% equity decline if superintelligent AI deployment outpaces labor reabsorption. Its release coincided with a tech sell-off across services (finance, real estate, media, medical, legal). Unlike abstract warnings, the scenario is quantitative enough to be priced and hedged, and is now referenced by traders sizing tail-risk positions (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). See [[citrini-2028-global-intelligence-crisis]] and citrini-research.
 
 **Institutional adoption signal — Norges Bank Investment Management** — In April 2026 the world's largest sovereign wealth fund embedded LLMs into daily portfolio risk management, with portfolio managers receiving daily AI-generated risk assessments. This is significant because it both validates the productive use of AI in risk processes and instantiates the ESRB's "overreliance" and "model homogeneity" concerns at scale: when the largest allocators use the same handful of models to filter the same risk signals, idiosyncratic views thin out (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]).
 
@@ -69,4 +68,4 @@ A new class of systemic risk is being recognized at the institutional level: AI 
 - **Capital-vs-labor asymmetry** — AI productivity gains accrue to capital immediately while labor losses materialize on a 2-4 quarter delay. Markets can rally on capex even as the labor channel is silently building toward a demand shock. See [[capital-vs-labor-asymmetry]] and [[ai-driven-demand-destruction]].
 - **Geographic concentration** — losses concentrate in tech hubs ([[tech-hub-concentration-risk]]), creating regional fiscal stress that bleeds into [[bank-run]] vulnerability and muni bond markets in ways the 2008-era playbook does not anticipate.
 
-Goldman Sachs' forecast of 11M US jobs displaced (6%+ of the workforce) provides the order-of-magnitude scale at which the labor channel becomes a [[fed-policy]]-relevant systemic concern (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). See also [[goldman-sachs]] and [[recession]].
+Goldman Sachs' forecast of 11M US jobs displaced (6%+ of the workforce) provides the order-of-magnitude scale at which the labor channel becomes a [[fed-policy]]-relevant systemic concern (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]]). See also goldman-sachs and [[recession]].

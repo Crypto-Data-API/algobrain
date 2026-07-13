@@ -16,7 +16,6 @@ related:
   - "[[order-book]]"
   - "[[cost-of-carry]]"
   - "[[basis-trading]]"
-  - "[[t-plus-one-settlement]]"
 domain: [market-microstructure]
 prerequisites: ["[[spot-markets]]"]
 difficulty: beginner
@@ -53,7 +52,7 @@ Suppose gold trades at a spot price of **$2,000/oz**, the risk-free rate is 5%, 
 
 ## Where Spot Prices Are Used
 
-- **Equities** — Stock prices are effectively spot prices, settled at [[t-plus-one-settlement|T+1]] (one business day) in the US since 2024. The quote you see is the spot.
+- **Equities** — Stock prices are effectively spot prices, settled at T+1 (one business day) in the US since 2024. The quote you see is the spot.
 - **Forex** — Most currency trading is spot, conventionally settled at T+2.
 - **Commodities** — Gold, oil, and agricultural products have well-established physical spot (cash) markets alongside their futures curves.
 - **Crypto** — Exchange prices for immediate delivery (e.g. BTC/USD on a major venue) are spot prices, distinct from perpetual-futures prices.
@@ -74,7 +73,7 @@ Spot markets generally offer the most transparent and direct price exposure. The
 
 1. **Not a transactable single number** — the real cost to trade includes the [[bid-ask-spread|spread]] and [[slippage]], especially for size.
 2. **Venue dependence** — different exchanges can show slightly different spot prices; arbitrage usually keeps them close but not identical.
-3. **Spot ≠ fair value** — the market spot price is what people will pay *now*, which can diverge from an analyst's estimate of [[intrinsic-value]].
+3. **Spot ≠ fair value** — the market spot price is what people will pay *now*, which can diverge from an analyst's estimate of intrinsic-value.
 
 ## Related
 
@@ -83,7 +82,6 @@ Spot markets generally offer the most transparent and direct price exposure. The
 - [[contango]], [[backwardation]] — spot-futures basis regimes
 - [[cost-of-carry]] / [[basis-trading]] — what links spot to the futures curve
 - [[bid-ask-spread]] / [[order-book]] — how the spot price is actually formed
-- [[t-plus-one-settlement]] — the settlement timing behind "immediate" equity delivery
 - [[trading-volume]] — liquidity context
 
 ## Sources

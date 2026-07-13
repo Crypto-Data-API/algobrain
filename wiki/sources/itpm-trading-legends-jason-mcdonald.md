@@ -13,10 +13,10 @@ source_date: 2018-01-01
 source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-jason-mcdonald.md"
 confidence: medium
 claims_count: 18
-related: ["[[anton-kreil]]", "[[itpm]]", "[[jason-mcdonald]]", "[[proprietary-trading]]", "[[event-driven-trading]]", "[[long-short-equity]]", "[[risk-management-overview]]", "[[goldman-sachs]]"]
+related: ["[[anton-kreil]]", "[[jason-mcdonald]]", "[[proprietary-trading]]", "[[event-driven-trading]]", "[[risk-management-overview]]"]
 ---
 
-[[anton-kreil]] interviews [[jason-mcdonald]], a senior trading mentor at [[itpm]] with an 18-year proprietary trading career across multiple investment banks in London. The interview covers his career progression, trading through major market cycles including the Global Financial Crisis, and his transition to mentoring retail traders. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and philosophy claims are first-person and single-source, so confidence is MEDIUM.
+[[anton-kreil]] interviews [[jason-mcdonald]], a senior trading mentor at itpm with an 18-year proprietary trading career across multiple investment banks in London. The interview covers his career progression, trading through major market cycles including the Global Financial Crisis, and his transition to mentoring retail traders. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and philosophy claims are first-person and single-source, so confidence is MEDIUM.
 
 > **Note on confidence:** Promotional interview for a paid trading-education business. Career details and opinions are the interviewee's own recollection, not independently verified — treat as [MEDIUM] single-source.
 
@@ -27,9 +27,9 @@ related: ["[[anton-kreil]]", "[[itpm]]", "[[jason-mcdonald]]", "[[proprietary-tr
 - [MEDIUM] Risk arbitrage work included: announced takeover situations (playing the spread between acquirer and target), pre-announced takeover identification ("ratr"), dualistic company spreads (e.g., Shell/Royal Dutch, Unilever PLC vs NV — playing the discount between London and Amsterdam listings after FX adjustment), and cash extractions using warrants (long warrant, short underlying stock).
 - [MEDIUM] Moved to Credit Suisse First Boston (CSFB) when CSFB acquired BZW's equities business (~1997). Became part of an internal hedge fund called Modal Capital at CSFB. Was given his own book of approximately $250 million, continuing in [[event-driven-trading]].
 - [MEDIUM] Left CSFB around the dot-com implosion (~2000) to set up a volatility and event-driven hedge fund at Mako, a firm specializing in options market making. Ran that fund for three and a half years.
-- [MEDIUM] Returned to prop trading at Commerzbank with a team of six, running a fundamentally driven [[long-short-equity]] book of 2-3 billion euros, covering UK, Europe, North America, developed Asia (Singapore, Hong Kong, Australia), and structured trades in South Africa.
+- [MEDIUM] Returned to prop trading at Commerzbank with a team of six, running a fundamentally driven long-short-equity book of 2-3 billion euros, covering UK, Europe, North America, developed Asia (Singapore, Hong Kong, Australia), and structured trades in South Africa.
 - [MEDIUM] Moved to Lehman Brothers briefly (~2006), then to Toronto Dominion (TD) where he set up an equity [[proprietary-trading]] book with three people working under him, including his brother as analyst. Finished his City career at TD in 2010.
-- [MEDIUM] At TD, he was part of the credit products group but running an equity [[long-short-equity]] portfolio — a unique cross-divisional positioning that gave early intelligence on credit market stress ahead of the equity market.
+- [MEDIUM] At TD, he was part of the credit products group but running an equity long-short-equity portfolio — a unique cross-divisional positioning that gave early intelligence on credit market stress ahead of the equity market.
 
 ## Trading Through Market Cycles
 

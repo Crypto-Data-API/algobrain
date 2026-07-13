@@ -33,7 +33,7 @@ The most damaging anchor for individual traders. Once a position is opened at a 
 
 Traders and investors anchor to round-number reference points:
 - Stocks near their 52-week high are perceived as "expensive" even if fundamentals justify higher prices
-- Stocks near their 52-week low are perceived as "cheap" even if they're declining for fundamental reasons (see [[value-trap]])
+- Stocks near their 52-week low are perceived as "cheap" even if they're declining for fundamental reasons (see value-trap)
 - This creates measurable market effects: the 52-week high momentum strategy exploits the tendency of stocks to under-react when approaching the 52-week high (George & Hwang, 2004)
 
 ### Analyst Price Targets
@@ -77,7 +77,6 @@ Psychological anchoring to round numbers ($10, $50, $100, $1000) creates measura
 - [[disposition-effect]] — the trading consequence of anchoring to entry price
 - [[confirmation-bias]] — reinforces anchoring by filtering information
 - [[loss-aversion]] — amplifies the impact of the entry price anchor
-- [[value-trap]] — stocks that appear "cheap" relative to anchored reference points
 - [[daniel-kahneman]] — co-discoverer of the anchoring effect
 - [[trading-psychology]] — practical management of anchoring in trading
 

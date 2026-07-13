@@ -51,7 +51,7 @@ A spot purchase gives you the asset itself — the share, the coin, the bar of g
 
 - **No time decay or roll.** A spot holding does not expire, so there is no [[roll-yield]] drag or [[cost-of-carry]] to pay, unlike a long [[futures]] position that must be rolled forward.
 - **No leverage by default.** You fund the full notional. This caps your loss at 100% (the asset going to zero) and removes [[liquidation-risk|forced-liquidation risk]] — the asset cannot be margin-called out from under you.
-- **You receive the cash flows.** Spot equity holders collect [[dividends]] and keep voting rights; futures and most [[options]] holders do not.
+- **You receive the cash flows.** Spot equity holders collect dividends and keep voting rights; futures and most [[options]] holders do not.
 
 ## Worked Example (Illustrative)
 
@@ -67,7 +67,7 @@ The spot price ($2,400) is the gravitational center: the future's $2,430 is just
 ## Limitations and Pitfalls
 
 - **Capital intensity.** Outright spot ties up the full notional, which is inefficient if you only want directional exposure — a key reason institutions use [[futures]] and [[options]] instead.
-- **Custody and settlement risk.** Owning the asset means storing it: vaulting and insurance for [[commodities]], custodian/[[counterparty-risk]] for securities, and self-custody or exchange risk for crypto. Settlement is not always instant — equities settle [[t-plus-one-settlement|T+1]], FX spot T+2.
+- **Custody and settlement risk.** Owning the asset means storing it: vaulting and insurance for [[commodities]], custodian/[[counterparty-risk]] for securities, and self-custody or exchange risk for crypto. Settlement is not always instant — equities settle T+1, FX spot T+2.
 - **"Spot" is not always the deepest market.** The reference price can be thinner than its derivatives (notably crypto perps), so the headline spot quote may not reflect where real size trades.
 - **No built-in hedge or income.** A naked spot holding has no downside protection; pairing it with [[protective-puts]] or [[covered-calls|covered calls]] is how holders add insurance or yield.
 
@@ -80,7 +80,6 @@ The spot price ($2,400) is the gravitational center: the future's $2,430 is just
 - [[backwardation]]
 - [[cost-of-carry]]
 - [[basis-trading]]
-- [[t-plus-one-settlement]]
 - [[market-microstructure]]
 
 ## Sources

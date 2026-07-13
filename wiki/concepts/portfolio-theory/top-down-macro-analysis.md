@@ -7,14 +7,14 @@ status: good
 tags: [portfolio-theory, fundamental-analysis, macro, itpm, trading-methodology]
 aliases: ["Top-Down Analysis", "Macro-First Approach", "Top-Down/Bottom-Up Framework"]
 domain: [portfolio-theory]
-prerequisites: ["[[fundamental-analysis]]", "[[portfolio-theory]]"]
+prerequisites: ["[[portfolio-theory]]"]
 difficulty: intermediate
-related: ["[[itpm]]", "[[anton-kreil]]", "[[eighty-twenty-analysis]]", "[[long-short-equity]]", "[[sector-rotation]]", "[[interest-rates]]"]
+related: ["[[anton-kreil]]", "[[eighty-twenty-analysis]]", "[[sector-rotation]]", "[[interest-rates]]"]
 ---
 
 # Top-Down Macro Analysis
 
-Top-down macro analysis is a systematic approach to trade idea generation that starts with the broadest economic picture and narrows down to individual securities. It is the primary analytical framework taught by [[anton-kreil]] and the [[itpm|Institute of Trading and Portfolio Management]], forming the "80%" in their [[eighty-twenty-analysis|80/20 analysis framework]].
+Top-down macro analysis is a systematic approach to trade idea generation that starts with the broadest economic picture and narrows down to individual securities. It is the primary analytical framework taught by [[anton-kreil]] and the Institute of Trading and Portfolio Management, forming the "80%" in their [[eighty-twenty-analysis|80/20 analysis framework]].
 
 ## Overview
 
@@ -92,7 +92,7 @@ ITPM's "What's On Your Mind" (WOYM) series demonstrates this framework in practi
 3. Specific stock ideas (both long and short)
 4. How they are positioned in their portfolios
 
-This regular macro review is the foundation of the [[long-short-equity]] portfolio management process. (Source: [[itpm-woym-ep27-recession-narrative]])
+This regular macro review is the foundation of the long-short-equity portfolio management process. (Source: [[itpm-woym-ep27-recession-narrative]])
 
 ## Common Macro Indicators
 
@@ -114,7 +114,6 @@ By starting top-down, traders ensure their individual positions are aligned with
 ## Related Concepts
 
 - [[eighty-twenty-analysis]] — The broader framework this fits into
-- [[long-short-equity]] — The portfolio strategy built on this analysis
 - [[sector-rotation]] — A key output of macro analysis
 - [[interest-rates]] — Critical macro input
 - [[correlation]] — Understanding how macro forces connect markets

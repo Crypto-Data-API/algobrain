@@ -8,14 +8,14 @@ tags: [exchange, data-provider, regulation, fundamental-analysis]
 aliases: ["Official Exchange Data", "EDGAR", "ASX Data"]
 domain: [market-microstructure, fundamental-analysis]
 difficulty: intermediate
-related: ["[[asx-limited]]", "[[nyse]]", "[[nasdaq]]", "[[sec]]", "[[london-stock-exchange]]", "[[national-stock-exchange-india]]", "[[bombay-stock-exchange]]", "[[hong-kong-stock-exchange]]"]
+related: ["[[sec]]"]
 ---
 
 Master reference of official data sources for major stock exchanges and their regulatory filing systems. These are the authoritative, free (or low-cost) endpoints for company filings, tickers, announcements, and bulk data downloads.
 
 ## Australia — ASX
 
-The [[asx-limited|ASX]] (Australian Securities Exchange) requires companies to submit half-yearly and annual reports. Financial year ends June 30. Annual reports due end of October; half-yearly reports due end of February.
+The ASX (Australian Securities Exchange) requires companies to submit half-yearly and annual reports. Financial year ends June 30. Annual reports due end of October; half-yearly reports due end of February.
 
 | Resource | URL |
 |----------|-----|
@@ -48,7 +48,7 @@ The [[asx-limited|ASX]] (Australian Securities Exchange) requires companies to s
 
 ## USA — SEC / EDGAR
 
-US-listed companies on [[nyse|NYSE]] and [[nasdaq|NASDAQ]] report to the [[sec|SEC]] through the EDGAR (Electronic Data Gathering, Analysis, and Retrieval) system. Standard financial year ends December 30.
+US-listed companies on NYSE and NASDAQ report to the [[sec|SEC]] through the EDGAR (Electronic Data Gathering, Analysis, and Retrieval) system. Standard financial year ends December 30.
 
 | Filing | Description | Deadline |
 |--------|-------------|----------|
@@ -96,20 +96,18 @@ Data sources to be documented.
 
 ## United Kingdom — LSE
 
-The [[london-stock-exchange|London Stock Exchange]] (LON) is one of the oldest exchanges in the world.
+The London Stock Exchange (LON) is one of the oldest exchanges in the world.
 
 Data sources to be documented.
 
 ## India — NSE / BSE
 
-- [[national-stock-exchange-india|NSE]] — National Stock Exchange of India
-- [[bombay-stock-exchange|BSE]] — Bombay Stock Exchange (BOM)
 
 Data sources to be documented.
 
 ## Asia — HKEX
 
-The [[hong-kong-stock-exchange|Hong Kong Stock Exchange]] (HKG) is a major gateway for international investment into mainland China.
+The Hong Kong Stock Exchange (HKG) is a major gateway for international investment into mainland China.
 
 Data sources to be documented.
 
@@ -126,9 +124,5 @@ Data sources to be documented.
 
 ## Related
 
-- [[asx-limited]]
-- [[nyse]]
-- [[nasdaq]]
 - [[sec]]
-- [[stock-markets]]
 - [[fundamental-analysis-overview]]

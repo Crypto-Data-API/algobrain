@@ -288,8 +288,8 @@ After running any arb backtest, verify:
 | [[cross-exchange-arbitrage]] | 1-second OHLCV per exchange | Tick-level order book (L2) per exchange, synchronized | [[historical-spread-data\|Tardis.dev]] |
 | [[funding-rate-arbitrage]] | Settled funding rates per period + spot prices | Predicted + settled rates + perp mark prices | Coinglass, exchange APIs |
 | [[pairs-trading]] | Daily close prices | Intraday (1-min) prices + bid-ask | [[paid-data-providers\|Polygon.io, Norgate]] |
-| [[merger-arbitrage]] | Daily close prices + deal terms | Intraday + options chains + borrow rates | Bloomberg, SEC EDGAR |
-| [[volatility-arbitrage]] | Daily IV surface + underlying price | Intraday IV + bid-ask by strike | [[options-data-sources\|ORATS, OptionMetrics]] |
+| merger-arbitrage | Daily close prices + deal terms | Intraday + options chains + borrow rates | Bloomberg, SEC EDGAR |
+| [[volatility-arbitrage]] | Daily IV surface + underlying price | Intraday IV + bid-ask by strike | ORATS, OptionMetrics |
 | [[flash-loan-arbitrage]] | Pool reserves per block | Every swap event + pool state | Dune Analytics, archive node |
 
 ---
@@ -305,7 +305,7 @@ A round-trip arb cost is a *sum* of components, not a single number. Build the s
 | [[market-impact]] / depth slippage | Walk the [[order-book]] | Convex AMM slippage (see [[slippage-optimal-pathfinding]]) | Sin 3 |
 | Latency drift | Inter-leg price move | Block-time + reorg risk | Sin 2 |
 | Leg-failure / unwind | [[leg-risk]] × unwind cost | Reverted-tx gas (paid even on failure) | Sin 4 |
-| Funding / carry | [[funding-rate-arbitrage]] settlements, borrow | n/a (atomic) | Sin 6; also borrow on [[merger-arbitrage]] stock deals |
+| Funding / carry | [[funding-rate-arbitrage]] settlements, borrow | n/a (atomic) | Sin 6; also borrow on merger-arbitrage stock deals |
 | Gas / priority fee | n/a | Base gas + validator capture (60-90%) | See [[slippage-optimal-pathfinding]] |
 | Withdrawal / bridge | Inter-venue transfer + delay | Bridge fee + delay (cross-chain) | Opportunity cost of locked inventory |
 
@@ -320,7 +320,7 @@ A reproducible arb backtest, in order. Each step maps to a sin or a statistical-
 3. **Simulate fills against depth.** Walk the book/AMM curve for the intended size (Sin 3); record the size-dependent fill price, not the touch.
 4. **Apply inter-leg latency.** Price the second (and later) legs at `t + latency` using the realistic figure for the venue class — 50ms+ for co-located API, 100-500ms for retail API, one block (~12s ETH L1) for on-chain (Sin 2).
 5. **Model leg failure.** Apply a leg-failure rate and the cost of unwinding the stranded leg (Sin 4). Do not silently drop failed attempts.
-6. **Apply discrete carry.** For [[funding-rate-arbitrage]] / [[cash-and-carry]], settle funding at exact timestamps (Sin 6); for [[merger-arbitrage]] add financing/borrow carry over the hold.
+6. **Apply discrete carry.** For [[funding-rate-arbitrage]] / [[cash-and-carry]], settle funding at exact timestamps (Sin 6); for merger-arbitrage add financing/borrow carry over the hold.
 7. **Aggregate honestly.** Net P&L = successful net − failure costs − carry. Report the *net* equity curve only.
 8. **Walk-forward validate.** Split into rolling in-sample/out-of-sample windows (see [[walk-forward-analysis]]); expect 30-50% Sharpe decay out-of-sample.
 9. **Correct for multiple testing.** If you tried many parameter sets, deflate the Sharpe (see [[deflated-sharpe-ratio]] and [[data-snooping-and-p-hacking]]).
@@ -353,7 +353,7 @@ Even a clean backtest overstates live performance. Carry the standard arb haircu
 - [[leg-risk]] · [[execution-sequencing]] -- the multi-leg failure modes
 - [[historical-spread-data]] -- where to source synchronized data
 - [[slippage-optimal-pathfinding]] -- on-chain fill/slippage modeling
-- [[cross-exchange-arbitrage]] · [[funding-rate-arbitrage]] · [[pairs-trading]] · [[merger-arbitrage]] -- strategies with worked data requirements above
+- [[cross-exchange-arbitrage]] · [[funding-rate-arbitrage]] · [[pairs-trading]] · merger-arbitrage -- strategies with worked data requirements above
 - [[limits-to-arbitrage]] -- why honest costs matter so much
 
 ## Sources

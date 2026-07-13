@@ -11,7 +11,7 @@ timeframe: position
 markets: [stocks, bonds]
 complexity: advanced
 backtest_status: untested
-related: ["[[risk-budgeting]]", "[[portable-alpha]]", "[[factor-investing]]", "[[long-short-equity]]", "[[regime-detection]]"]
+related: ["[[risk-budgeting]]", "[[portable-alpha]]", "[[factor-investing]]", "[[regime-detection]]"]
 ---
 
 # Black-Litterman Model
@@ -114,4 +114,3 @@ Feed the posterior returns into a standard mean-variance optimizer. The resultin
 - [[portable-alpha]] -- institutional strategy that can use BL for the beta allocation and overlay
 - [[factor-investing]] -- factor views can be incorporated into the BL framework
 - [[regime-detection]] -- regime-conditional views improve BL allocations
-- [[long-short-equity]] -- BL can determine optimal long-short allocations within an equity portfolio

@@ -10,14 +10,14 @@ aliases: ["DRW Holdings", "DRW Trading Group"]
 founded: 1992
 headquarters: "Chicago, USA"
 website: "https://drw.com"
-related: ["[[market-maker]]", "[[options]]", "[[futures]]", "[[citadel-securities]]", "[[jump-trading]]", "[[hudson-river-trading]]", "[[susquehanna-international-group]]", "[[optiver]]", "[[deribit]]", "[[volatility-surface]]"]
+related: ["[[market-maker]]", "[[options]]", "[[futures]]", "[[jump-trading]]", "[[deribit]]", "[[volatility-surface]]"]
 ---
 
 DRW is a Chicago-based proprietary trading firm founded in 1992 by Don R. Wilson, originally as a CBOT pit trader operating in fixed-income options and futures. DRW has since grown into one of the largest privately-held trading firms in the world, with diversified businesses spanning [[market-maker|market making]], proprietary trading, real estate, venture capital and crypto.
 
 ## Overview
 
-DRW has approximately 2,000 employees across offices in Chicago, New York, London, Houston, Amsterdam, Montreal, Singapore, Tel Aviv and Tokyo. Like its Chicago peers ([[jump-trading]], [[citadel-securities]]), DRW is known for combining deep derivatives expertise with low-latency electronic execution.
+DRW has approximately 2,000 employees across offices in Chicago, New York, London, Houston, Amsterdam, Montreal, Singapore, Tel Aviv and Tokyo. Like its Chicago peers ([[jump-trading]], citadel-securities), DRW is known for combining deep derivatives expertise with low-latency electronic execution.
 
 The firm's name is the founder's initials. Don Wilson built the business around a pit-trading mindset (deep instrument-level understanding, aggressive position-taking, and tight risk discipline) and progressively layered electronic and quantitative methods on top. DRW operates several semi-autonomous business units, including:
 
@@ -72,7 +72,7 @@ For active options traders, DRW's behaviour matters in several ways:
 - [[options]] — core asset class
 - [[futures]] — major DRW business line
 - [[deribit]] — major venue for DRW's crypto options activity
-- [[jump-trading]], [[citadel-securities]], [[hudson-river-trading]], [[susquehanna-international-group]], [[optiver]], [[imc-trading]] — peer firms
+- [[jump-trading]], citadel-securities, hudson-river-trading, susquehanna-international-group, optiver, imc-trading — peer firms
 - [[bitcoin]], [[ethereum]] — Cumberland's main crypto products
 - [[volatility-surface]] — what DRW continuously fits in each product
 

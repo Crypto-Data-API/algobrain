@@ -11,10 +11,10 @@ markets_affected: [stocks, bonds]
 impact: high
 verified: true
 sources_count: 4
-related: ["[[bill-ackman]]", "[[convex-tail-hedge-arbitrage]]", "[[fastest-profitable-trades]]", "[[credit-default-swaps]]", "[[credit-default-swap-index-arbitrage]]", "[[2020-03-12-black-thursday-crypto]]", "[[tail-risk-hedging]]", "[[crisis-alpha]]", "[[convexity]]", "[[options]]", "[[risk-management]]", "[[2008-global-financial-crisis]]"]
+related: ["[[convex-tail-hedge-arbitrage]]", "[[fastest-profitable-trades]]", "[[credit-default-swaps]]", "[[credit-default-swap-index-arbitrage]]", "[[2020-03-12-black-thursday-crypto]]", "[[tail-risk-hedging]]", "[[crisis-alpha]]", "[[convexity]]", "[[options]]", "[[risk-management]]", "[[2008-global-financial-crisis]]"]
 ---
 
-In late February and early March 2020, [[bill-ackman|Bill Ackman]]'s Pershing Square Capital Management spent approximately **$27 million** purchasing credit-default-swap protection on the CDX IG (investment-grade) and CDX HY (high-yield) corporate-bond indices. Three to four weeks later, as COVID-19 lockdowns spread and credit spreads exploded wider, Ackman closed the position for approximately **$2.6 billion** — a roughly **100× return on premium in ~30 days**, almost certainly the largest realized profit-on-premium of any single hedge in modern markets. The trade is the canonical 21st-century example of the "buy convex tail hedges when implied volatility is cheap relative to tail probability" framework — see [[convex-tail-hedge-arbitrage]] for the repeatable strategy generalization and [[fastest-profitable-trades]] for the broader pattern.
+In late February and early March 2020, Bill Ackman's Pershing Square Capital Management spent approximately **$27 million** purchasing credit-default-swap protection on the CDX IG (investment-grade) and CDX HY (high-yield) corporate-bond indices. Three to four weeks later, as COVID-19 lockdowns spread and credit spreads exploded wider, Ackman closed the position for approximately **$2.6 billion** — a roughly **100× return on premium in ~30 days**, almost certainly the largest realized profit-on-premium of any single hedge in modern markets. The trade is the canonical 21st-century example of the "buy convex tail hedges when implied volatility is cheap relative to tail probability" framework — see [[convex-tail-hedge-arbitrage]] for the repeatable strategy generalization and [[fastest-profitable-trades]] for the broader pattern.
 
 ## Headline facts
 
@@ -190,7 +190,6 @@ The Ackman 2020 trade is the most-cited modern example. The framework is older �
 
 ## Related
 
-- [[bill-ackman]] — trader entity page
 - [[convex-tail-hedge-arbitrage]] — repeatable strategy generalization
 - [[fastest-profitable-trades]] — pattern-extraction across history
 - [[credit-default-swaps]] — instrument
@@ -204,7 +203,6 @@ The Ackman 2020 trade is the most-cited modern example. The framework is older �
 ## Sources
 
 - Pershing Square Capital Management public letters and investor communications (2020-2021)
-- [[bill-ackman]] entity page in this wiki
 - Public reporting on the trade: Bloomberg, FT, WSJ post-crisis coverage
 - CDX index data (March 2020 spread series)
 - Pershing Square Holdings annual report (2020)

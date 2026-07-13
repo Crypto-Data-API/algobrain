@@ -9,18 +9,18 @@ aliases: ["Christopher Cathey", "Dr. Christopher Cathey", "christopher-kathy"]
 entity_type: person
 headquarters: "London, UK"
 website: ""
-related: ["[[itpm]]", "[[anton-kreil]]", "[[goldman-sachs]]", "[[long-short-equity]]", "[[risk-management]]", "[[trading-psychology]]", "[[position-sizing]]", "[[stop-loss]]"]
+related: ["[[anton-kreil]]", "[[risk-management]]", "[[trading-psychology]]", "[[position-sizing]]", "[[stop-loss]]"]
 ---
 
 # Chris Cathey
 
-Dr. Christopher Cathey is a former [[goldman-sachs]] trader and the longest-serving senior mentor at [[itpm|the Institute of Trading and Portfolio Management]]. He traded European equities at Goldman Sachs from 1993 to 2006, spanning the 1990s bull market, the dot-com bust, and the subsequent recovery — making money in all environments. His career provides a masterclass in [[risk-management]], emotional detachment, and institutional-grade [[long-short-equity]] trading.
+Dr. Christopher Cathey is a former goldman-sachs trader and the longest-serving senior mentor at the Institute of Trading and Portfolio Management. He traded European equities at Goldman Sachs from 1993 to 2006, spanning the 1990s bull market, the dot-com bust, and the subsequent recovery — making money in all environments. His career provides a masterclass in [[risk-management]], emotional detachment, and institutional-grade long-short-equity trading.
 
 ## Career
 
 ### Goldman Sachs (1993–2006)
 
-Cathey joined [[goldman-sachs]] in New York in 1993 and moved to the European equities trading desk in London shortly after. Over 13 years at Goldman he held roles across multiple desks and geographies:
+Cathey joined goldman-sachs in New York in 1993 and moved to the European equities trading desk in London shortly after. Over 13 years at Goldman he held roles across multiple desks and geographies:
 
 - **London** (1993–1998): Pan-European equities trading, combining [[proprietary-trading|proprietary risk-taking]] with customer market-making and agency business
 - **New York**: Traded US and international markets
@@ -35,7 +35,7 @@ Left Goldman in 2006 to join a hedge fund, where he stayed for three years befor
 
 ### Private Equity and ITPM (2009–present)
 
-Now invests in [[private-equity]] — specifically established, cash-generative SMEs needing growth capital. Sectors include automotive supply chain, industrial manufacturing, and construction. Applies the same trading disciplines to private business investing.
+Now invests in private-equity — specifically established, cash-generative SMEs needing growth capital. Sectors include automotive supply chain, industrial manufacturing, and construction. Applies the same trading disciplines to private business investing.
 
 Simultaneously serves as ITPM's longest-running mentor, having completed 75–80+ mentoring programs. He estimates approximately two years for a mentee to become an "accomplished, all-around trader" (Source: [[itpm-trading-legends-chris-cathey]]).
 
@@ -47,7 +47,7 @@ Cathey's most detailed case study involves a day during the NASDAQ bear market (
 2. **Freeze** — "rabbit in headlights," equally destructive
 3. **Hedge and wait** — what they actually did
 
-They bought [[euro-stoxx]] futures to reduce net short exposure while maintaining their core thesis that the rally was temporary. This kept them functional as market makers. They printed the exact high tick of the day on their futures purchase. When the market turned in the afternoon, they re-increased short positions. They ended the day slightly positive and made a "very big amount of money" over the following two days (Source: [[itpm-trading-legends-chris-cathey]]).
+They bought euro-stoxx futures to reduce net short exposure while maintaining their core thesis that the rally was temporary. This kept them functional as market makers. They printed the exact high tick of the day on their futures purchase. When the market turned in the afternoon, they re-increased short positions. They ended the day slightly positive and made a "very big amount of money" over the following two days (Source: [[itpm-trading-legends-chris-cathey]]).
 
 **Key principle:** Never increase losing positions. Only add to positions that are working. Cut losers at predetermined [[stop-loss]] levels without hesitation, then re-enter with confirmation.
 
@@ -81,13 +81,11 @@ This is the [[eighty-twenty-analysis|80/20 framework]] in practice: 80% fundamen
 
 ## Strategy Connections
 
-- [[long-short-equity]] — Cathey's core methodology at Goldman and ITPM
 - [[risk-management]] — Emotional detachment and stop-loss discipline as survival tools
 - [[stop-loss]] — Predetermined exits executed without hesitation
 - [[position-sizing]] — Adding to winners, cutting losers as the same risk management process
 - [[trading-psychology]] — The "goldfish bowl" pressure of institutional trading floors
 - [[sector-rotation]] — Top-down sector allocation based on leading indicators
-- [[fundamental-analysis]] — Idea generation driven by economic data and company analysis
 - [[technical-analysis-overview]] — Used strictly for entry timing, never for idea generation
 
 ## Sources

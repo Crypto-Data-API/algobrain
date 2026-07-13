@@ -7,7 +7,7 @@ status: good
 tags: [person, ai-trading, machine-learning, risk-management, education]
 website: "https://www.cis.upenn.edu/~fbrett/"
 aliases: ["Brett Falk", "B. Hemenway Falk", "Brett Hemenway"]
-related: ["[[ai-layoff-trap]]", "[[gerry-tsoukalas]]", "[[pigouvian-automation-tax]]", "[[wharton]]", "[[capital-vs-labor-asymmetry]]", "[[ai-driven-demand-destruction]]", "[[citrini-2028-global-intelligence-crisis]]", "[[esrb-ai-systemic-risk-channels]]"]
+related: ["[[ai-layoff-trap]]", "[[gerry-tsoukalas]]", "[[pigouvian-automation-tax]]", "[[capital-vs-labor-asymmetry]]", "[[ai-driven-demand-destruction]]", "[[citrini-2028-global-intelligence-crisis]]", "[[esrb-ai-systemic-risk-channels]]"]
 entity_type: person
 headquarters: "Philadelphia, Pennsylvania, USA"
 ---
@@ -53,14 +53,13 @@ Trader implication: the political probability of such a tax becomes a tradeable 
 - Research areas: cryptography, coding theory, secure computation, and network analysis; teaches a popular blockchain course in Penn's MCIT program
 - Co-author (with Sarah Hammer) of "A Comprehensive Approach to Crypto Regulation", *University of Pennsylvania Journal of Business Law* (2023)
 
-Note on the earlier draft: this wiki previously described Falk as "affiliated with the [[wharton|Wharton School]]" — his primary appointment is in Penn's engineering school (CIS department), not Wharton; the Wharton connection runs through his co-author Tsoukalas, who is a Wharton Senior Fellow.
+Note on the earlier draft: this wiki previously described Falk as "affiliated with the Wharton School" — his primary appointment is in Penn's engineering school (CIS department), not Wharton; the Wharton connection runs through his co-author Tsoukalas, who is a Wharton Senior Fellow.
 
 ## Related
 
 - [[ai-layoff-trap]]
 - [[gerry-tsoukalas]]
 - [[pigouvian-automation-tax]]
-- [[wharton]]
 - [[capital-vs-labor-asymmetry]]
 - [[ai-driven-demand-destruction]]
 - [[citrini-2028-global-intelligence-crisis]]

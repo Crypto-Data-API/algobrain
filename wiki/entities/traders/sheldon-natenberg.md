@@ -17,7 +17,7 @@ Sheldon Natenberg is the author of *[[option-volatility-and-pricing|Option Volat
 
 ## Overview
 
-Natenberg's career bridged the gap between academic options theory (the [[black-scholes|Black-Scholes model]], the Greeks, volatility surfaces) and the practical realities of trading options on an exchange floor. His book distills this experience into a comprehensive guide that has trained generations of options professionals. It is standard reading at proprietary trading firms, hedge funds, and options market-making desks, and is the foundational text recommended by [[itpm|ITPM]] and many other options education programs.
+Natenberg's career bridged the gap between academic options theory (the [[black-scholes|Black-Scholes model]], the Greeks, volatility surfaces) and the practical realities of trading options on an exchange floor. His book distills this experience into a comprehensive guide that has trained generations of options professionals. It is standard reading at proprietary trading firms, hedge funds, and options market-making desks, and is the foundational text recommended by ITPM and many other options education programs.
 
 ## Key Contributions
 
@@ -62,7 +62,6 @@ Natenberg's book occupies the same position in options education that [[john-mur
 - [[black-scholes]]
 - [[cboe]]
 - [[options-strategies-overview]]
-- [[itpm]]
 
 ## Sources
 

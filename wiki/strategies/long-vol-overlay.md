@@ -23,7 +23,7 @@ breakeven_cost_bps: 0
 related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[vix-calls]]", "[[vix-call-spreads]]", "[[vix]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[volatility-regime-classification]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[itpm-framework]]", "[[crisis-alpha]]", "[[sharpe-ratio]]", "[[geometric-mean]]"]
 ---
 
-A **long-vol overlay** is a permanent, rolling allocation to long options (typically a [[spy]]/[[sp500|SPX]] put ladder plus a [[vix]] call ladder) attached to a short-vol core book to **cap the left tail** of the combined portfolio. It is not a stand-alone money-maker: in isolation it bleeds 1-3% of NAV per year. Its job is portfolio-level -- to convert a negatively-skewed [[options-premium-selling]] book into a roughly symmetric, survival-tolerant book whose **geometric return** dominates the naked premium-selling book over any horizon longer than a single calm regime. This page describes the mechanics, sizing, monetization rules, and integration with the short-vol core. Read [[long-vol-vs-short-vol]] for the conceptual frame, [[tail-risk-hedging]] for the stand-alone Universa-style implementation.
+A **long-vol overlay** is a permanent, rolling allocation to long options (typically a spy/SPX put ladder plus a [[vix]] call ladder) attached to a short-vol core book to **cap the left tail** of the combined portfolio. It is not a stand-alone money-maker: in isolation it bleeds 1-3% of NAV per year. Its job is portfolio-level -- to convert a negatively-skewed [[options-premium-selling]] book into a roughly symmetric, survival-tolerant book whose **geometric return** dominates the naked premium-selling book over any horizon longer than a single calm regime. This page describes the mechanics, sizing, monetization rules, and integration with the short-vol core. Read [[long-vol-vs-short-vol]] for the conceptual frame, [[tail-risk-hedging]] for the stand-alone Universa-style implementation.
 
 ## Edge source
 
@@ -63,7 +63,7 @@ The overlay has two legs that work in series, not parallel: an **SPY/SPX put lad
 
 | Leg | Instrument | Tenor | Strike | Annual budget | Fires |
 |---|---|---|---|---|---|
-| Slow-burn | [[spy\|SPY]] / [[sp500\|SPX]] puts | 5-6 months | 10-15% OTM | 1.5-2.5% NAV | Equity crash (days-weeks) |
+| Slow-burn | SPY / SPX puts | 5-6 months | 10-15% OTM | 1.5-2.5% NAV | Equity crash (days-weeks) |
 | Fast-fire | [[vix-calls\|VIX calls]] | 2-3 months | VIX+15 to VIX+25 | 0.5-1.0% NAV | Vol shock (hours-days) |
 
 The two legs are intentionally **non-redundant**: the SPY ladder is the primary protection against a grinding equity drawdown; the [[vix-calls|VIX call]] ladder fires faster in a pure vol shock (the [[vix-august-2024-spike|August 2024 spike]] is the canonical example, where VIX gapped before SPX had fully repriced). Some implementations substitute [[vix-call-spreads|VIX call spreads]] for naked VIX calls to lower the fast-fire leg's carry at the cost of capped tail payoff.
@@ -159,7 +159,7 @@ Net exposure: **net short vol with a hard floor.** The overlay does not flip the
 
 ## Indicators / data used
 
-- [[spy]] / [[sp500|SPX]] [[options-chain]] with greeks across 30-180 DTE.
+- spy / SPX [[options-chain]] with greeks across 30-180 DTE.
 - [[vix]] level, [[vix-term-structure]], VVIX (vol of vol).
 - Portfolio-level [[gamma]], [[vega]], [[delta]] aggregations.
 - Short-vol core position vega for sizing the overlay against it.

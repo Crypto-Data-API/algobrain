@@ -77,8 +77,8 @@ Momentum rotation is a [[quantitative-strategies|quantitative]] approach that sy
 
 - One of the most well-documented and academically supported [[factor-investing]] strategies
 - Systematic and rules-based, removing emotional decision-making
-- Works across asset classes: [[stocks]], [[crypto]], commodities, currencies
-- Can be combined with other factors ([[value]], [[quality]], [[low-volatility]]) for improved risk-adjusted returns
+- Works across asset classes: stocks, [[crypto]], commodities, currencies
+- Can be combined with other factors (value, [[quality]], [[low-volatility]]) for improved risk-adjusted returns
 - Scalable to large portfolios with proper execution
 
 ## Disadvantages

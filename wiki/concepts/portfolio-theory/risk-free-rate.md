@@ -6,7 +6,7 @@ updated: 2026-07-02
 status: good
 tags: [portfolio-theory, valuation, risk-management, bonds, treasuries]
 aliases: ["Risk Free Rate", "Risk-Free Rate of Return", "Rf", "riskless rate"]
-related: ["[[capital-asset-pricing-model]]", "[[sharpe-ratio]]", "[[treynor-ratio]]", "[[information-ratio]]", "[[discounted-cash-flow]]", "[[cost-of-equity]]", "[[wacc]]", "[[us-treasury-bonds]]", "[[fed-funds-rate]]", "[[inflation]]", "[[opportunity-cost]]", "[[beta]]"]
+related: ["[[capital-asset-pricing-model]]", "[[sharpe-ratio]]", "[[treynor-ratio]]", "[[information-ratio]]", "[[us-treasury-bonds]]", "[[fed-funds-rate]]", "[[inflation]]", "[[opportunity-cost]]", "[[beta]]"]
 domain: [portfolio-theory, valuation, risk-management]
 prerequisites: ["[[us-treasury-bonds]]"]
 difficulty: beginner
@@ -29,7 +29,7 @@ The rate quoted on these securities is a **nominal** rate: it includes expected 
 The risk-free rate is the anchor against which every other return is measured:
 
 1. **It is the floor on required return.** Any risky asset must be expected to return *more* than the risk-free rate, or a rational investor would simply hold the riskless asset. The extra return demanded is the **risk premium**.
-2. **It sets the discount rate.** In [[discounted-cash-flow|DCF]] valuation and the [[wacc|weighted average cost of capital]], the risk-free rate is the base to which equity and credit premiums are added. A higher risk-free rate mechanically lowers the present value of future cash flows — which is why rising Treasury yields tend to pressure long-duration growth-stock valuations.
+2. **It sets the discount rate.** In DCF valuation and the weighted average cost of capital, the risk-free rate is the base to which equity and credit premiums are added. A higher risk-free rate mechanically lowers the present value of future cash flows — which is why rising Treasury yields tend to pressure long-duration growth-stock valuations.
 3. **It defines excess return.** Performance ratios measure return *above* the risk-free rate. The [[sharpe-ratio]] uses (portfolio return − risk-free rate) ÷ volatility; the [[treynor-ratio]] and [[information-ratio]] are built on the same excess-return idea.
 4. **It is a pillar of asset pricing.** In the [[capital-asset-pricing-model|CAPM]], expected return = risk-free rate + [[beta]] × (market return − risk-free rate). The risk-free rate appears twice and is the line's intercept.
 5. **It frames [[opportunity-cost]].** When T-bills yield 5%, the hurdle for taking on any risk rises; when they yield near 0%, investors are pushed out the risk curve ("reach for yield").
@@ -63,7 +63,6 @@ Now imagine the central bank cuts rates and T-bills fall to **1.0%**, while the 
 
 - [[capital-asset-pricing-model]] — risk-free rate is the CAPM intercept
 - [[sharpe-ratio]], [[treynor-ratio]], [[information-ratio]] — all measure return above Rf
-- [[discounted-cash-flow]], [[wacc]], [[cost-of-equity]] — Rf is the base of the discount rate
 - [[us-treasury-bonds]] — the real-world proxy for the riskless asset
 - [[fed-funds-rate]] — policy rate that drives short-term Rf
 - [[inflation]], [[nominal-vs-real-return]] — real vs nominal risk-free rate

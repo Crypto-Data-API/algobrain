@@ -12,7 +12,6 @@ related:
   - "[[junior-analyst-stranding]]"
   - "[[capital-vs-labor-asymmetry]]"
   - "[[ai-driven-demand-destruction]]"
-  - "[[2026-04-meta-ai-layoffs]]"
   - "[[ai-trading-overview]]"
   - "[[stranded-office-real-estate]]"
 domain: [market-microstructure, behavioral-finance]
@@ -92,7 +91,7 @@ Legal-tech SaaS companies that automated specific workflows (eDiscovery platform
 
 ### Indirect
 
-- **Long [[anthropic]] enterprise-deployment exposure** — privately held, but public-market proxies include hyperscalers ([[microsoft]], [[amazon]], [[alphabet]]) reselling Claude or competing equivalents through cloud platforms. Mention as positioning context, not actionable trade
+- **Long [[anthropic]] enterprise-deployment exposure** — privately held, but public-market proxies include hyperscalers (microsoft, amazon, alphabet) reselling Claude or competing equivalents through cloud platforms. Mention as positioning context, not actionable trade
 - **Long compliance-resistant legal niches** — firms specialized in courtroom litigation, regulatory work, M&A negotiation — that capture share as commodity work compresses
 - **Long career retraining and certification plays** for displaced junior legal staff transitioning to compliance, regulatory, or AI-adjacent legal-ops roles
 
@@ -108,7 +107,7 @@ Legal services follow the same pattern documented across white-collar profession
 - Senior workers protected by tacit knowledge (see [[skill-bifurcation]])
 - Capital captures cost savings immediately; labor absorbs displacement with a 2-4 quarter lag (see [[capital-vs-labor-asymmetry]])
 - Aggregate effect compounds through [[service-sector-multiplier]] in legal-hub geographies
-- The [[2026-04-meta-ai-layoffs]] event the same month is the white-collar-tech parallel — both 2026-04 events made AI displacement transparent in their respective industries
+- The 2026-04-meta-ai-layoffs event the same month is the white-collar-tech parallel — both 2026-04 events made AI displacement transparent in their respective industries
 
 ## What To Monitor
 
@@ -125,12 +124,10 @@ Legal services follow the same pattern documented across white-collar profession
 - [[junior-analyst-stranding]] — the demographic effect
 - [[capital-vs-labor-asymmetry]] — capital-share gain mechanism
 - [[ai-driven-demand-destruction]] — downstream demand cascade
-- [[2026-04-meta-ai-layoffs]] — parallel transparency event same month
 - [[stranded-office-real-estate]] — real-estate channel
 - [[service-sector-multiplier]] — multiplier through legal-hub geographies
 - [[ai-trading-overview]], [[ai-layoff-trap]]
-- [[microsoft]], [[amazon]], [[alphabet]], [[salesforce]]
-- [[citrini-research]], [[citrini-2028-global-intelligence-crisis]]
+- citrini-research, [[citrini-2028-global-intelligence-crisis]]
 
 ## Sources
 

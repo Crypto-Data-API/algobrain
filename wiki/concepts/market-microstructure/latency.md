@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, high-frequency-trading, slippage, liquidity]
 aliases: ["Latency", "Trading Latency", "Network Latency", "Tick-to-Trade Latency"]
-related: ["[[high-frequency-trading]]", "[[latency-arbitrage]]", "[[co-location]]", "[[order-book]]", "[[slippage]]", "[[queue-position]]", "[[liquidity-provider]]", "[[reg-nms]]", "[[market-microstructure-overview]]"]
+related: ["[[high-frequency-trading]]", "[[latency-arbitrage]]", "[[co-location]]", "[[order-book]]", "[[slippage]]", "[[queue-position]]", "[[liquidity-provider]]", "[[market-microstructure-overview]]"]
 domain: [market-microstructure]
 prerequisites: ["[[order-book]]", "[[high-frequency-trading]]"]
 difficulty: intermediate
@@ -44,7 +44,7 @@ The pursuit of low latency drives a multi-billion-dollar infrastructure arms rac
 
 ## Trading Relevance
 
-For an HFT or systematic market-making firm, latency is the single most important infrastructure variable — it directly determines fill rates, adverse-selection exposure, and profitability of speed-sensitive strategies. For a discretionary or swing trader, raw microsecond latency is irrelevant, but the *concept* matters: it explains why retail orders rarely capture fleeting price dislocations, why "the price moved before my order filled" is structural rather than conspiratorial, and why [[reg-nms|Reg NMS]] order-protection and the SEC's scrutiny of speed advantages shape execution quality. Understanding latency also clarifies the limits of strategies that assume instantaneous, frictionless execution — backtests that ignore latency systematically overstate returns for any short-horizon edge.
+For an HFT or systematic market-making firm, latency is the single most important infrastructure variable — it directly determines fill rates, adverse-selection exposure, and profitability of speed-sensitive strategies. For a discretionary or swing trader, raw microsecond latency is irrelevant, but the *concept* matters: it explains why retail orders rarely capture fleeting price dislocations, why "the price moved before my order filled" is structural rather than conspiratorial, and why Reg NMS order-protection and the SEC's scrutiny of speed advantages shape execution quality. Understanding latency also clarifies the limits of strategies that assume instantaneous, frictionless execution — backtests that ignore latency systematically overstate returns for any short-horizon edge.
 
 ## Related
 
@@ -55,7 +55,6 @@ For an HFT or systematic market-making firm, latency is the single most importan
 - [[liquidity-provider]] — agents who must minimize latency to avoid being picked off
 - [[slippage]] — the cost slower participants pay from delay
 - [[order-book]] — the data structure latency races to act on
-- [[reg-nms]] — regulation shaping the role of speed across venues
 
 ## Sources
 

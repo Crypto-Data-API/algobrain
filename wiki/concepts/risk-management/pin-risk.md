@@ -54,10 +54,10 @@ The single most important fact about pin risk is that it is a property of **phys
 
 | Instrument | Settlement | Exercise style | Pin risk? |
 |---|---|---|---|
-| [[spy\|SPY]], QQQ, IWM (ETF options) | Physical (deliver shares) | American | **Yes** — full pin risk |
+| SPY, QQQ, IWM (ETF options) | Physical (deliver shares) | American | **Yes** — full pin risk |
 | Single-name equities (AAPL, TSLA, …) | Physical (deliver shares) | American | **Yes** — full pin risk |
-| [[spx-options\|SPX]], NDX, RUT (index options) | Cash | European | **No** — cash settles automatically |
-| [[xsp\|XSP]] (mini-SPX) | Cash | European | **No** |
+| SPX, NDX, RUT (index options) | Cash | European | **No** — cash settles automatically |
+| XSP (mini-SPX) | Cash | European | **No** |
 | Most futures options (ES, NQ) | Cash (on the future) / physical (into future) | American | Reduced — depends on contract |
 | VIX options | Cash | European | **No** |
 
@@ -67,7 +67,7 @@ The practical takeaway is direct: an [[options-income]] book with no need for si
 
 ### The exercise window
 
-US equity options trading closes at 4:00 pm ET. Holders of long options have until **5:30 pm ET** (90 minutes later, OCC standard) to submit explicit exercise or non-exercise instructions to their broker. The broker then submits to the OCC, which clears overnight. For [[index-options|cash-settled index options]] like SPX, this window is a non-issue (cash settlement is automatic). For physically settled options on individual equities, ETFs, and most futures-options, the 90-minute window is when pin risk lives.
+US equity options trading closes at 4:00 pm ET. Holders of long options have until **5:30 pm ET** (90 minutes later, OCC standard) to submit explicit exercise or non-exercise instructions to their broker. The broker then submits to the OCC, which clears overnight. For cash-settled index options like SPX, this window is a non-issue (cash settlement is automatic). For physically settled options on individual equities, ETFs, and most futures-options, the 90-minute window is when pin risk lives.
 
 The holder's incentive structure during this window:
 
@@ -94,12 +94,12 @@ The expected value of the bad outcome is large enough that it dwarfs the credit 
 
 ### Routine pinning in mega-caps
 
-[[apple|AAPL]], [[microsoft|MSFT]], [[tesla|TSLA]], [[nvidia|NVDA]], and [[spy|SPY]] all show pronounced pinning on monthly expiration days. AAPL, in particular, has closed within $0.50 of a $5 strike on more than 60% of monthly expirations in the post-2015 sample, materially more than the unconditional probability would predict. The Ni-Pearson-Poteshman work originally documented this effect on liquid US stocks; subsequent work by [[golez-jackwerth|Golez and Jackwerth]] (2012) extended it to index futures.
+AAPL, MSFT, TSLA, [[nvidia|NVDA]], and SPY all show pronounced pinning on monthly expiration days. AAPL, in particular, has closed within $0.50 of a $5 strike on more than 60% of monthly expirations in the post-2015 sample, materially more than the unconditional probability would predict. The Ni-Pearson-Poteshman work originally documented this effect on liquid US stocks; subsequent work by [[golez-jackwerth|Golez and Jackwerth]] (2012) extended it to index futures.
 
 ### High-profile pinning incidents
 
 - **[[gamestop-saga|GameStop January 2021]]**: GME closed Friday January 22, 2021 at $65.01 after wild intraday volatility, pinning to the $65 strike where the largest weekly call open interest sat. Many short-call positions written earlier in the week as low-probability tails were caught at-the-money, and the following Monday's gap (open near $96) generated huge pin-risk losses for unhedged short-call writers.
-- **[[tesla|Tesla]] earnings/expiry overlaps**: TSLA's habit of releasing significant news on or near expiration days has produced repeated pinning events at strikes that subsequently moved several percent overnight, generating exactly the asymmetric pin-risk loss profile.
+- **Tesla earnings/expiry overlaps**: TSLA's habit of releasing significant news on or near expiration days has produced repeated pinning events at strikes that subsequently moved several percent overnight, generating exactly the asymmetric pin-risk loss profile.
 - **Index futures options**: cash-settled SPX and ES futures options avoid the physical-settlement pin risk entirely, which is one reason institutional [[options-income]] books prefer them.
 
 ### A worked numerical example
@@ -137,13 +137,13 @@ The hierarchy of mitigations, ordered from cleanest to most reluctant. Use this 
 
 ### 1. Close before the close (the canonical rule)
 
-Close any short option whose strike is within ~1% of spot before the closing bell on expiration day. This is the universally recommended retail approach; [[tastytrade]], [[itpm-trading-philosophy|ITPM]], and most published [[options-income|options-income]] curricula state it as a hard rule. The cost is a small premium giveup (the option's residual extrinsic value, often pennies); the benefit is total elimination of pin risk.
+Close any short option whose strike is within ~1% of spot before the closing bell on expiration day. This is the universally recommended retail approach; tastytrade, [[itpm-trading-philosophy|ITPM]], and most published [[options-income|options-income]] curricula state it as a hard rule. The cost is a small premium giveup (the option's residual extrinsic value, often pennies); the benefit is total elimination of pin risk.
 
 A common heuristic: **close any short option for which $|S - K| < 0.5 \times \text{ATR(20)}$ as the bell approaches**, where ATR is the 20-day average true range of the underlying. For low-vol stocks this is a tight band; for high-vol stocks the safe distance is much wider.
 
 ### 2. Trade cash-settled instruments
 
-Cash-settled options ([[spx-options|SPX]], [[xsp]], [[ndx]], [[rut]], most index options globally) eliminate physical pin risk entirely. Settlement is in cash on the morning after expiration based on the official settlement print; there is no exercise decision and no resulting share position. For [[options-income]] books with no fundamental need for single-name exposure, switching from SPY to SPX (or QQQ to NDX) is the single cleanest mitigation. The cost is slightly different tax treatment (1256-contract, 60/40 treatment in the US for SPX), different position size granularity, and reduced selection — but pin risk goes away.
+Cash-settled options (SPX, xsp, ndx, [[rut]], most index options globally) eliminate physical pin risk entirely. Settlement is in cash on the morning after expiration based on the official settlement print; there is no exercise decision and no resulting share position. For [[options-income]] books with no fundamental need for single-name exposure, switching from SPY to SPX (or QQQ to NDX) is the single cleanest mitigation. The cost is slightly different tax treatment (1256-contract, 60/40 treatment in the US for SPX), different position size granularity, and reduced selection — but pin risk goes away.
 
 ### 3. Trade defined-risk structures
 
@@ -208,5 +208,4 @@ The wheel-strategy practitioner's standard rule: **always close or roll any pinn
 - Golez, B., and Jackwerth, J. C. (2012). *Pinning in the S&P 500 Futures*. *Journal of Financial Economics*, 106(3): 566-585. Extends the pinning literature to index futures.
 - [[occ]] Bylaws and Exercise Procedures — official documentation on the auto-exercise threshold and exercise windows.
 - [[cboe]] / [[cme]] settlement procedure guides — institutional descriptions of physical vs cash settlement and the practical implications for traders.
-- [[tastytrade]] research notes on closing-before-expiry as a standard income-trade discipline.
 - [[itpm-trading-philosophy|ITPM]] curriculum on operational discipline at expiry.

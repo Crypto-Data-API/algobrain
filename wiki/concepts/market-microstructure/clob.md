@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, order-types, liquidity, options, exchange]
 aliases: ["CLOB", "Central Limit Order Book", "Limit Order Book", "Order Book"]
-related: ["[[market-microstructure]]", "[[bid-ask-spread]]", "[[liquidity-provider]]", "[[high-frequency-trading]]", "[[market-maker]]", "[[order-types]]", "[[index-options]]", "[[spx-options]]", "[[maker-taker-fees]]", "[[dark-pools]]", "[[request-for-quote]]", "[[frequent-batch-auctions]]", "[[latency-arbitrage]]", "[[price-time-priority]]"]
+related: ["[[market-microstructure]]", "[[bid-ask-spread]]", "[[liquidity-provider]]", "[[high-frequency-trading]]", "[[market-maker]]", "[[order-types]]", "[[maker-taker-fees]]", "[[dark-pools]]", "[[request-for-quote]]", "[[frequent-batch-auctions]]", "[[latency-arbitrage]]", "[[price-time-priority]]"]
 domain: [market-microstructure]
 difficulty: intermediate
 ---
@@ -94,7 +94,7 @@ Listed options trade on CLOBs (Cboe, ISE, NYSE Arca Options, BOX, MIAX, CME for 
 - **Pegged and delta-protected orders** — option orders can be pegged to the underlying's NBBO, automatically requoted as the underlying moves
 - **Wide quoted spreads** — many strikes are illiquid; the [[bid-ask-spread]] on far OTM or far-dated options can be 5-20% of the option price, making the CLOB midprice often the only reliable reference
 
-The combination of CLOB plus auctions plus complex order books means real options execution is more nuanced than simple "hit the bid" — see [[index-options]] and [[spx-options]] for the SPX-specific microstructure.
+The combination of CLOB plus auctions plus complex order books means real options execution is more nuanced than simple "hit the bid" — see index-options and spx-options for the SPX-specific microstructure.
 
 ## Why CLOB Won
 
@@ -121,7 +121,6 @@ The CLOB has flaws, but no alternative has yet displaced it as the dominant cont
 - [[dark-pools]] — the hidden alternative
 - [[request-for-quote]] — the dealer-quote alternative
 - [[frequent-batch-auctions]] — the discrete-time alternative
-- [[index-options]] / [[spx-options]] — listed options that trade on CLOBs
 
 ## Sources
 

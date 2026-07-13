@@ -6,17 +6,17 @@ updated: 2026-06-21
 status: excellent
 tags: [strategy-development, itpm, behavioral-finance, risk-management, education, person]
 aliases: ["ITPM Philosophy", "Anton Kreil Philosophy", "Kreil Philosophy", "Professional Trader Mindset"]
-related: ["[[itpm-framework]]", "[[itpm]]", "[[anton-kreil]]", "[[options-portfolio-construction]]", "[[theta-targeting]]", "[[the-theta-trap]]", "[[long-vol-vs-short-vol]]", "[[capital-preservation]]", "[[asymmetric-risk-reward]]", "[[professional-vs-retail-mindset]]", "[[ergodicity]]", "[[fees-and-friction]]"]
+related: ["[[itpm-framework]]", "[[anton-kreil]]", "[[options-portfolio-construction]]", "[[theta-targeting]]", "[[the-theta-trap]]", "[[long-vol-vs-short-vol]]", "[[capital-preservation]]", "[[asymmetric-risk-reward]]", "[[professional-vs-retail-mindset]]", "[[ergodicity]]", "[[fees-and-friction]]"]
 domain: [strategy-development, behavioral-finance, risk-management]
 prerequisites: []
 difficulty: beginner
 ---
 
-The ITPM trading philosophy is the *worldview* underpinning the [[itpm-framework|operational framework]] taught by [[anton-kreil|Anton Kreil]] and the [[itpm|Institute of Trading and Portfolio Management]]. It answers the *why* questions — why capital preservation outranks return, why asymmetric expected value is the only edge worth pursuing, why professional traders behave so differently from retail, and why the median retail account loses money to fees-and-friction even in bull markets — rather than the *how* questions of book construction, which are covered in [[itpm-framework]] and [[options-portfolio-construction]]. The philosophy is the part of the curriculum that is publicly visible across [[anton-kreil|Kreil]]'s YouTube interviews and the InstaTrader trial videos; the operational machinery is downstream of it.
+The ITPM trading philosophy is the *worldview* underpinning the [[itpm-framework|operational framework]] taught by [[anton-kreil|Anton Kreil]] and the Institute of Trading and Portfolio Management. It answers the *why* questions — why capital preservation outranks return, why asymmetric expected value is the only edge worth pursuing, why professional traders behave so differently from retail, and why the median retail account loses money to fees-and-friction even in bull markets — rather than the *how* questions of book construction, which are covered in [[itpm-framework]] and [[options-portfolio-construction]]. The philosophy is the part of the curriculum that is publicly visible across [[anton-kreil|Kreil]]'s YouTube interviews and the InstaTrader trial videos; the operational machinery is downstream of it.
 
 ## Overview
 
-ITPM was founded in 2011 by [[anton-kreil|Kreil]] (a former [[goldman-sachs|Goldman Sachs]] equity-trading desk member, [[lehman-brothers|Lehman Brothers]] proprietary trader, and on-screen trader on the BBC's *Million Dollar Traders*) and co-founders drawn from London bulge-bracket trading floors. Its differentiator from the broader online-education industry is the explicit framing of trading as a **professional discipline**, modelled on the desk practices Kreil and his cohort observed at investment banks before the [[gfc|2008 crisis]] reshaped sell-side prop trading. The philosophy is summarised by Kreil himself in lines that recur across his published material:
+ITPM was founded in 2011 by [[anton-kreil|Kreil]] (a former Goldman Sachs equity-trading desk member, Lehman Brothers proprietary trader, and on-screen trader on the BBC's *Million Dollar Traders*) and co-founders drawn from London bulge-bracket trading floors. Its differentiator from the broader online-education industry is the explicit framing of trading as a **professional discipline**, modelled on the desk practices Kreil and his cohort observed at investment banks before the [[gfc|2008 crisis]] reshaped sell-side prop trading. The philosophy is summarised by Kreil himself in lines that recur across his published material:
 
 > *"Trading is a profession. The professionals are doing something specific, and the retail crowd is doing the opposite of it. Until you stop doing the opposite, you cannot win."*
 
@@ -90,7 +90,7 @@ A motif throughout Kreil's public material is the three-stage developmental arc:
 
 1. **Punter** — trades for entertainment, dopamine, or to "be a trader." Position sizing is conviction-based. Hit rate is the metric. Drawdowns trigger martingale behaviour. Most retail accounts never leave this stage. Lifespan: typically <2 years before account is destroyed or abandoned.
 2. **Trader** — has discovered that hit rate is not the metric, that asymmetric pay-off matters, that costs compound. Begins reading Natenberg, learning Greeks, journaling. Position sizing improves. Hit rate may *fall* (because they are taking better-skewed trades) while expectancy rises. Most ITPM students enter at this stage.
-3. **Risk manager** — has internalised that the job is not *to make money on trades* but *to allocate risk capital across opportunities, including the opportunity of holding cash*. Sizes against book Greeks, not per-trade conviction. Treats hedges as positions, not insurance. Runs the book to survive *all* regimes rather than to optimise any one. This is the destination ITPM points toward, modelled on Kreil's experience of how the senior traders at [[goldman-sachs|Goldman]] and [[lehman-brothers|Lehman]] actually operated.
+3. **Risk manager** — has internalised that the job is not *to make money on trades* but *to allocate risk capital across opportunities, including the opportunity of holding cash*. Sizes against book Greeks, not per-trade conviction. Treats hedges as positions, not insurance. Runs the book to survive *all* regimes rather than to optimise any one. This is the destination ITPM points toward, modelled on Kreil's experience of how the senior traders at Goldman and Lehman actually operated.
 
 The philosophical claim is that stage 3 is the only stage from which long-run wealth compounds, and that the leap from 2 to 3 is the leap most retail-trained traders never make — they remain technically competent at stage 2 (good charts, decent setups) while never internalising the book-level risk-allocation mindset.
 
@@ -106,7 +106,7 @@ The philosophical claim is that stage 3 is the only stage from which long-run we
 
 ### 5. Why most retail loses to fees-and-friction
 
-A recurring ITPM data point: retail-broker [[robinhood|payment-for-order-flow]] disclosures, the [[finra]] / SEC retail performance studies, and the [[etoro]] / [[interactive-brokers|IB]] account-distribution statistics all converge on roughly **70-90% of retail accounts being net losers over a 12-month window**, even in bull-market years. The ITPM explanation is not that retail traders are stupid; it is that they are caught in a stack of frictions that compounds against them:
+A recurring ITPM data point: retail-broker [[robinhood|payment-for-order-flow]] disclosures, the [[finra]] / SEC retail performance studies, and the etoro / IB account-distribution statistics all converge on roughly **70-90% of retail accounts being net losers over a 12-month window**, even in bull-market years. The ITPM explanation is not that retail traders are stupid; it is that they are caught in a stack of frictions that compounds against them:
 
 - **Commissions and bid-ask spreads** — small per trade, deadly per year on a high-turnover book.
 - **Slippage on illiquid options** — wide spreads on single-name far-OTM options can burn 5-10% of premium per round-trip.
@@ -122,9 +122,9 @@ ITPM's framing is that a retail trader trying to compete *as an active trader* a
 The philosophy is articulated across several public artefacts, none behind paywalls:
 
 - **[[anton-kreil|Kreil]]'s YouTube interviews** — the *Real Vision*, *Chat With Traders*, *Trading Nut*, and *Capital Mind* interviews from 2017-2024 form a coherent corpus on the philosophy. Recurring themes: capital preservation as objective #1, the inversion between retail and professional, the role of the bank training environment, the warning against guru content.
-- **The *InstaTrader* free trial** — a multi-day video curriculum that previews the philosophy before the paid course pitch. Available on the [[itpm]] website and YouTube.
+- **The *InstaTrader* free trial** — a multi-day video curriculum that previews the philosophy before the paid course pitch. Available on the itpm website and YouTube.
 - **The *Professional Trading Masterclass* curriculum overview** — published syllabus available without purchase; covers the structural framing of the courses (macro → sector → stock → structure → size → hedge).
-- **[[goldman-sachs|Goldman]] / [[lehman-brothers|Lehman]] background** — Kreil's pre-2008 prop-trading experience is the source of the *"this is how the desk did it"* claims that recur in the philosophy. The relevant practices (risk budgets, daily Greeks, end-of-day risk runs, written kill-criteria) are well-documented in the wider sell-side literature; ITPM packages them for retail.
+- **Goldman / Lehman background** — Kreil's pre-2008 prop-trading experience is the source of the *"this is how the desk did it"* claims that recur in the philosophy. The relevant practices (risk budgets, daily Greeks, end-of-day risk runs, written kill-criteria) are well-documented in the wider sell-side literature; ITPM packages them for retail.
 - **The 70-90% retail-loss statistics** — from European [[esma|ESMA]] CFD broker disclosures (mandated since 2018), [[finra]] retail studies, and broker-specific publications. The number varies by broker and product but consistently sits in this range.
 
 The philosophy itself does not have a single canonical text. It is reconstructed from the corpus and shows up in compressed form throughout the courses; this page captures the working summary used by ITPM-aligned practitioners.
@@ -158,7 +158,7 @@ The philosophy is most useful read defensively — each tenet exists because a s
 | Professional discipline | Pre-written daily action lists; [[itpm-framework#How To Apply|review cadence]]; rejection of post-hoc sizing |
 | Top-down process | The [[itpm-framework#3 Top-Down Process|seven-stage construction sequence]] |
 | Institutional infrastructure | [[portfolio-margin]] requirement; portfolio Greeks tooling; [[itpm-framework#4 Institutional Infrastructure|stage-4 prerequisites]] |
-| Punter → trader → risk manager | The progression encoded in the [[itpm]] curriculum sequencing |
+| Punter → trader → risk manager | The progression encoded in the itpm curriculum sequencing |
 | Fees-and-friction | The [[options-portfolio-construction|cost-discipline]] section; choice of liquid underlyings; turnover caps |
 
 Each operational layer derives from the philosophy. A trader who tries to lift one layer without the philosophy underneath usually finds it does not produce results — the layer is shape without the load-bearing logic.
@@ -170,7 +170,6 @@ The philosophy is the top of the ITPM stack: it is the *why* that the [[itpm-fra
 ## Related
 
 - [[itpm-framework]] — the operational construction sequence built on this philosophy
-- [[itpm]] — the school
 - [[anton-kreil]] — the founder and primary articulator
 - [[options-portfolio-construction]] — book-level risk-budgeting layer
 - [[theta-targeting]] — income-side discipline that depends on this philosophy
@@ -192,10 +191,8 @@ The philosophy is the top of the ITPM stack: it is the *why* that the [[itpm-fra
 ## Sources
 
 - [[anton-kreil]] — primary articulator across all public artefacts
-- [[itpm]] — the curriculum that packages the philosophy
 - [[itpm-five-principles]] — the underlying discipline framework that compresses the philosophy
 - [[itpm-ten-secrets]] — popular packaging of the principles
 - [[itpm-education-methodology-overview]] — broader methodology context
 - [[itpm-professional-traders-amazing-advice]] — practitioner notes and interview corpus
 - *Real Vision* / *Chat With Traders* / *Trading Nut* interview corpus 2017-2024 — public-domain articulations of the philosophy
-- [[goldman-sachs]] / [[lehman-brothers]] — institutional background that informs the desk-practice claims

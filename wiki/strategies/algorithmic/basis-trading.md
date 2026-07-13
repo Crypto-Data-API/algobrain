@@ -11,7 +11,7 @@ timeframe: swing
 markets: [crypto, bonds, commodities]
 complexity: intermediate
 backtest_status: untested
-related: ["[[merger-arbitrage]]", "[[pairs-trading]]", "[[dispersion-trading]]", "[[hedging]]", "[[futures]]"]
+related: ["[[pairs-trading]]", "[[hedging]]", "[[futures]]"]
 ---
 
 # Basis Trading
@@ -84,8 +84,6 @@ Size based on the margin requirements of the futures leg. For Treasuries, levera
 - **Opportunity cost:** Capital is locked for weeks or months earning modest returns when markets may offer better directional opportunities
 
 ## See Also
-- [[merger-arbitrage]] -- another convergence-based strategy with defined timelines
 - [[pairs-trading]] -- similar long/short structure, though driven by statistical rather than structural convergence
-- [[dispersion-trading]] -- another relative-value strategy exploiting structural mispricings
 - [[futures]] -- understanding futures pricing and cost of carry is essential
 - [[hedging]] -- basis trading is structurally a hedged position

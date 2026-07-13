@@ -47,7 +47,7 @@ Key reporting details:
 Markets do not wait for GDP prints to move — they are forward-looking. Several patterns matter for traders:
 
 - **Stocks bottom before GDP troughs** and peak before GDP peaks. By the time GDP confirms a [[recession]], equity markets have often already priced in the downturn and begun recovering.
-- **GDP surprise** — the difference between the actual print and the consensus forecast — drives short-term price action across [[equities]], [[bonds]], [[forex]], and [[commodities]]. A beat lifts risk assets; a miss pressures them.
+- **GDP surprise** — the difference between the actual print and the consensus forecast — drives short-term price action across equities, [[bonds]], [[forex]], and [[commodities]]. A beat lifts risk assets; a miss pressures them.
 - **Growth rate vs. level** — a positive but decelerating growth rate (e.g., 3.5% to 2.0% to 1.0%) is often a bearish signal for equities, even though the economy is still expanding. Markets price the second derivative.
 - **GDPNow and nowcasting** — the Atlanta Fed's GDPNow model and similar [[nowcasting]] tools provide real-time GDP estimates updated as component data arrives. These models have become essential for macro traders who need to position before the official release.
 

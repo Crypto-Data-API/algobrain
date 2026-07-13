@@ -81,7 +81,7 @@ EUR/USD options are the most liquid FX options block on earth. They trade in thr
 
 1. **OTC interbank** -- the deepest market, used by corporates, asset managers, and sell-side prop. Standard tenors: 1W, 2W, 1M, 3M, 6M, 1Y, 2Y. ATM, 25-delta risk reversals, and 25-delta butterflies are quoted directly. Volatility surfaces are mid-priced by [[bloomberg-terminal|Bloomberg]] OVDV / [[reuters-fx|Reuters]] FXALL pages.
 2. **[[cme-group|CME]] EUR/FX options on futures** (symbol: 6E options, also EUU and EUW for weekly variants) -- listed, exchange-cleared. Open interest typically runs 200-400K contracts per expiry on the front month. Used by [[commodity-trading-advisor|CTAs]], speculative funds, and traders who prefer central clearing.
-3. **[[fxe-etf|FXE]] options** -- equity-listed options on the Euro Trust ETF. Lower notional, retail-accessible, used by US-domiciled options traders who want EUR exposure inside an [[ibkr|IBKR]]-style equity options account.
+3. **[[fxe-etf|FXE]] options** -- equity-listed options on the Euro Trust ETF. Lower notional, retail-accessible, used by US-domiciled options traders who want EUR exposure inside an IBKR-style equity options account.
 
 **Surface characteristics.** EUR/USD risk reversals are typically near zero in calm regimes, modestly positive (call-skew, dollar-weak hedges in demand) during dollar-down trends, and modestly negative (put-skew, dollar-strength hedges) during dollar-up trends. The skew is *much flatter* than equity-index skew because FX has no structural one-sided demand for downside hedges -- importers and exporters hedge in both directions. Butterflies (vol of vol) are similarly tame versus equity vol surfaces.
 
@@ -97,7 +97,7 @@ EUR/USD vol is **genuinely diversifying** versus equity vol for a multi-asset sh
 
 The [[options-concentration-risk]] page identifies short EUR/USD options as one of the cleaner diversifiers for an equity-vol-heavy book, paired with [[usdjpy]] options for a more complete FX-vol overlay. The caveat: in *true* global crises ([[covid-crash|March 2020]], [[gfc|2008]]) FX vol does spike alongside equity vol, so EUR/USD options are *partial* not *unconditional* diversification.
 
-For a discretionary trader allocating across asset classes, a typical proportion might be 40-60% of the vol budget in equity vol (SPX, single-name), 15-25% in FX vol (split EUR/USD and USD/JPY), 10-15% in rate vol ([[move-index|MOVE]]-driven, [[tlt]] options), and 10-15% in commodity vol ([[gld]], [[uso]]). EUR/USD's role is the **stable carry leg** of the FX allocation; USD/JPY's role is the **shock-prone but high-premium leg**.
+For a discretionary trader allocating across asset classes, a typical proportion might be 40-60% of the vol budget in equity vol (SPX, single-name), 15-25% in FX vol (split EUR/USD and USD/JPY), 10-15% in rate vol ([[move-index|MOVE]]-driven, tlt options), and 10-15% in commodity vol (gld, uso). EUR/USD's role is the **stable carry leg** of the FX allocation; USD/JPY's role is the **shock-prone but high-premium leg**.
 
 ## Liquidity
 

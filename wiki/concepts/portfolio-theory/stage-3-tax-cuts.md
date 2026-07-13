@@ -6,13 +6,13 @@ updated: 2026-04-07
 status: good
 tags: [australia, tax, news, regulation, history]
 aliases: ["Stage 3 Tax Cuts", "2024 Tax Cuts"]
-related: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[franking-credits]]", "[[superannuation]]", "[[tax-efficient-investing]]"]
+related: ["[[australian-investor-tax]]", "[[capital-gains-tax-discount]]", "[[superannuation]]", "[[tax-efficient-investing]]"]
 domain: [portfolio-theory]
 difficulty: beginner
 prerequisites: ["[[australian-investor-tax]]"]
 ---
 
-The Stage 3 tax cuts are changes to Australian individual income tax brackets that took effect on 1 July 2024, reducing marginal tax rates for most Australians and altering the effective rate of tax on investment income including [[capital-gains|capital gains]], [[dividend|dividends]], and interest. Originally legislated by the Morrison Coalition government as a flat 30% rate for incomes between $45,001 and $200,000, the policy was controversially revised by the Albanese Labor government in January 2024 to spread the benefit more broadly, keeping a progressive bracket structure but lowering rates.
+The Stage 3 tax cuts are changes to Australian individual income tax brackets that took effect on 1 July 2024, reducing marginal tax rates for most Australians and altering the effective rate of tax on investment income including [[capital-gains|capital gains]], dividends, and interest. Originally legislated by the Morrison Coalition government as a flat 30% rate for incomes between $45,001 and $200,000, the policy was controversially revised by the Albanese Labor government in January 2024 to spread the benefit more broadly, keeping a progressive bracket structure but lowering rates.
 
 ## Overview
 
@@ -60,7 +60,7 @@ The most significant improvement is for earners in the $45,001-$135,000 range: t
 
 ### Dividend Income
 
-Lower marginal rates reduce the top-up tax owed on [[franking-credits|franked dividends]]:
+Lower marginal rates reduce the top-up tax owed on franked dividends:
 
 **Example: $1,000 fully franked dividend ($1,428.57 grossed up)**
 
@@ -114,7 +114,7 @@ The Stage 3 tax cuts were politically significant:
 - **Criticism**: Accused of breaking a "solemn promise" — potential trust deficit for future tax policy commitments
 - **Support**: Argued the revision was fairer, directing more benefit to lower incomes during a cost-of-living crisis
 
-The political willingness to revise legislated tax cuts is relevant for investors: it demonstrates that **no tax provision is truly guaranteed**, including the [[capital-gains-tax-discount]], [[franking-credits|franking credit refunds]], and [[superannuation]] concessions. Legislative risk should be factored into any long-term tax-dependent strategy.
+The political willingness to revise legislated tax cuts is relevant for investors: it demonstrates that **no tax provision is truly guaranteed**, including the [[capital-gains-tax-discount]], franking credit refunds, and [[superannuation]] concessions. Legislative risk should be factored into any long-term tax-dependent strategy.
 
 ## Comparison to Previous Brackets
 
@@ -129,7 +129,6 @@ The full history of recent Australian tax bracket changes:
 
 - [[australian-investor-tax]]
 - [[capital-gains-tax-discount]]
-- [[franking-credits]]
 - [[superannuation]]
 - [[tax-efficient-investing]]
 - [[super-contribution-strategies]]

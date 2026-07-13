@@ -44,7 +44,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[circle]]", "[[blackrock-usd-i
 | Field | Detail |
 |---|---|
 | **Ticker** | USYC |
-| **Type** | [[tokenized-treasuries|Tokenized money market fund]] ([[real-world-assets|RWA]] / tokenized T-bills) — NAV-accruing token, price slowly rises with [[yield]] |
+| **Type** | [[tokenized-treasuries|Tokenized money market fund]] ([[real-world-assets|RWA]] / tokenized T-bills) — NAV-accruing token, price slowly rises with yield |
 | **AUM / Market Cap** | $3.07B at rank #31 (CoinGecko, 2026-06-20); ~$2.9B (RWA.xyz, 2026-06-09); ~$2.68B / rank #37 at the April 2026 snapshot |
 | **Sector rank** | #1 tokenized Treasury product by AUM (June 2026), in a tokenized-Treasury market of ~$14.8B total |
 | **Issuer** | Hashnote (acquired by [[circle|Circle]], Jan 2025) |
@@ -61,7 +61,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[circle]]", "[[blackrock-usd-i
 
 USYC is the on-chain representation of the Hashnote International Short Duration Yield Fund Ltd., which invests in short-term U.S. Treasury Bills and performs repo/reverse-repo activities as the underlying asset of the USYC token. USYC earns short-term Fed-rate returns; tokenization enables rapid (near-instant) subscription/redemption against USDC, on-chain transparency, and composability while maintaining regulatory and credit controls.
 
-It is a **NAV token**, not a [[stablecoins|stablecoin]]: the price grinds upward as [[yield]] accrues (from ~$1.03 in late 2024 to ~$1.13 by mid-2026), so "price action" is essentially the compounded [[treasury-bills|T-bill]] yield.
+It is a **NAV token**, not a [[stablecoins|stablecoin]]: the price grinds upward as yield accrues (from ~$1.03 in late 2024 to ~$1.13 by mid-2026), so "price action" is essentially the compounded [[treasury-bills|T-bill]] yield.
 
 ---
 
@@ -101,7 +101,7 @@ It is a **NAV token**, not a [[stablecoins|stablecoin]]: the price grinds upward
 See the **Market Data** block above for the authoritative snapshot (2026-06-20: 2.723B USYC, $1.13/token, $3.07B mcap, rank #31, MC/FDV = 1.00). Structural notes:
 
 - **Supply tracks AUM**: no max supply; tokens mint/burn with fund subscriptions, so USYC float is a direct read on institutional collateral demand (~2.39B in April 2026 → ~2.72B by 2026-06-20).
-- **NAV-accrual price**: ATH $1.13 (2026-05-30), ATL $1.026 (2024-12-05); the ~+3–4% 1y "return" is just compounded short-rate [[yield]], not capital appreciation.
+- **NAV-accrual price**: ATH $1.13 (2026-05-30), ATL $1.026 (2024-12-05); the ~+3–4% 1y "return" is just compounded short-rate yield, not capital appreciation.
 
 ---
 

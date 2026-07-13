@@ -21,12 +21,12 @@ expected_sharpe: 2.0
 expected_max_drawdown: 0.05
 breakeven_cost_bps: 40
 decay_evidence: "Band narrowed from ~1.3% pre-1866 to ~0.5-0.7% post-1866 after the transatlantic cable; effectively extinguished by the 1914 suspension of the gold standard and the subsequent closing of gold windows"
-related: ["[[covered-interest-arbitrage]]", "[[mint-parity-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[gold-silver-ratio-arbitrage]]", "[[gold-standard-mechanics]]", "[[telegraph-impact-on-arbitrage]]", "[[rothschild-family]]", "[[baring-brothers]]", "[[arbitrage]]", "[[edge-taxonomy]]"]
+related: ["[[covered-interest-arbitrage]]", "[[mint-parity-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[gold-silver-ratio-arbitrage]]", "[[gold-standard-mechanics]]", "[[telegraph-impact-on-arbitrage]]", "[[arbitrage]]", "[[edge-taxonomy]]"]
 ---
 
 # Gold Point Arbitrage
 
-Gold point arbitrage was **the** core international [[arbitrage]] of the classical gold standard era (roughly 1821-1914). Under fixed mint parities, the sterling-dollar exchange rate could only drift inside a narrow band bounded by the all-in cost of physically shipping sovereigns or eagles across the Atlantic — the **gold export point** on the upper side and the **gold import point** on the lower side. When a bill of exchange traded outside this band, a well-capitalised merchant house could earn a near-riskless profit by remitting gold in one direction and drawing a bill in the other. The strategy was dominated by [[rothschild-family]] and a handful of other Anglo-American houses with private telegraph access and standing insurance lines at Lloyd's. It is the historical ancestor of [[covered-interest-arbitrage]]: the same no-arbitrage band, but bounded by the physical cost of moving bullion rather than the modern cost of renting bank balance sheet.
+Gold point arbitrage was **the** core international [[arbitrage]] of the classical gold standard era (roughly 1821-1914). Under fixed mint parities, the sterling-dollar exchange rate could only drift inside a narrow band bounded by the all-in cost of physically shipping sovereigns or eagles across the Atlantic — the **gold export point** on the upper side and the **gold import point** on the lower side. When a bill of exchange traded outside this band, a well-capitalised merchant house could earn a near-riskless profit by remitting gold in one direction and drawing a bill in the other. The strategy was dominated by rothschild-family and a handful of other Anglo-American houses with private telegraph access and standing insurance lines at Lloyd's. It is the historical ancestor of [[covered-interest-arbitrage]]: the same no-arbitrage band, but bounded by the physical cost of moving bullion rather than the modern cost of renting bank balance sheet.
 
 ## Edge Source
 
@@ -231,8 +231,6 @@ See [[failure-modes]].
 - [[covered-interest-arbitrage]] — the modern descendant
 - [[bill-broking-arbitrage]] — the money-market counterpart
 - [[telegraph-impact-on-arbitrage]] — the 1866 regime change
-- [[rothschild-family]] — the dominant practitioner
-- [[baring-brothers]] — a major competitor
 - [[gold-silver-ratio-arbitrage]] — contemporary cross-metal arb
 - [[arbitrage]] — concept
 - [[limits-to-arbitrage]] — the band as a physical limit to arbitrage

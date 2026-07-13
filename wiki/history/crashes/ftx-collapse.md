@@ -15,7 +15,7 @@ related: ["[[binance]]", "[[solana]]", "[[alameda-research]]", "[[sam-bankman-fr
 
 # FTX Collapse
 
-The collapse of FTX in November 2022 was one of the most dramatic and consequential failures in the history of [[cryptocurrency]]. What had been the second-largest crypto exchange by volume, valued at $32 billion just months earlier, imploded in less than a week when it was revealed that billions of dollars in customer funds had been misappropriated. The event deepened the ongoing [[crypto-winter]], triggered widespread [[contagion]], and led to the criminal conviction of founder [[sam-bankman-fried]]. At its core it was not a market crash but a **fraud** — a customer [[bank-run]] that exposed the misuse of deposits — making it the crypto-era analogue of [[lehman-brothers]] crossed with a Madoff-style governance failure.
+The collapse of FTX in November 2022 was one of the most dramatic and consequential failures in the history of [[cryptocurrency]]. What had been the second-largest crypto exchange by volume, valued at $32 billion just months earlier, imploded in less than a week when it was revealed that billions of dollars in customer funds had been misappropriated. The event deepened the ongoing [[crypto-winter]], triggered widespread [[contagion]], and led to the criminal conviction of founder [[sam-bankman-fried]]. At its core it was not a market crash but a **fraud** — a customer [[bank-run]] that exposed the misuse of deposits — making it the crypto-era analogue of lehman-brothers crossed with a Madoff-style governance failure.
 
 ## Background: The Rise of FTX and SBF
 
@@ -93,7 +93,7 @@ The FTX collapse accelerated regulatory scrutiny of the [[crypto]] industry worl
 
 The FTX collapse reinforced several critical principles for anyone trading in [[crypto]] or any market:
 
-1. **[[counterparty-risk]] is paramount**: Even the largest, most reputable-seeming institutions can fail. This echoes lessons from [[lehman-brothers]] in the [[2008-global-financial-crisis]].
+1. **[[counterparty-risk]] is paramount**: Even the largest, most reputable-seeming institutions can fail. This echoes lessons from lehman-brothers in the [[2008-global-financial-crisis]].
 2. **"Not your keys, not your coins"**: Keeping assets in [[self-custody]] wallets eliminates exchange [[counterparty-risk]], a foundational principle of [[crypto]] that many had begun to ignore.
 3. **Due diligence on exchanges**: Traders should evaluate an exchange's transparency, regulatory status, proof of reserves, and corporate governance before depositing funds.
 4. **Beware of conflicts of interest**: The FTX/Alameda relationship was a massive red flag that many overlooked. When an exchange also runs a proprietary trading firm, the potential for abuse is significant.
@@ -107,7 +107,7 @@ The FTX collapse reinforced several critical principles for anyone trading in [[
 - [[sam-bankman-fried]], [[alameda-research]], [[ftt]], [[binance]] — the principals and instruments
 - [[bank-run]], [[liquidity-risk]], [[counterparty-risk]], [[contagion]] — the mechanisms
 - [[terra-luna]], [[blockfi]], [[genesis]], [[voyager-digital]] — the 2022 contagion chain
-- [[lehman-brothers]], [[2008-global-financial-crisis]] — the closest traditional-finance analogues
+- lehman-brothers, [[2008-global-financial-crisis]] — the closest traditional-finance analogues
 - [[self-custody]], [[crypto-winter]], [[solana]], [[bitcoin]]
 
 ## Sources

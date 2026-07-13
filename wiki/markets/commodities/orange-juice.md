@@ -6,7 +6,7 @@ updated: 2026-06-22
 status: excellent
 tags: [commodities, futures, seasonal]
 aliases: ["Orange Juice", "OJ", "FCOJ", "Frozen Concentrated Orange Juice"]
-related: ["[[coffee]]", "[[sugar]]", "[[cocoa]]", "[[cotton]]", "[[commodities]]", "[[intercontinental-exchange]]", "[[commodity-seasonality-patterns]]", "[[geopolitical-risk-premium]]", "[[commodities-overview]]", "[[futures]]", "[[liquidity]]", "[[volatility]]", "[[diversification]]"]
+related: ["[[coffee]]", "[[sugar]]", "[[cocoa]]", "[[cotton]]", "[[commodities]]", "[[commodity-seasonality-patterns]]", "[[geopolitical-risk-premium]]", "[[commodities-overview]]", "[[futures]]", "[[liquidity]]", "[[volatility]]", "[[diversification]]"]
 ---
 
 # Orange Juice
@@ -21,7 +21,7 @@ Orange juice futures track the price of frozen concentrated orange juice, the st
 
 | Attribute | Detail |
 |-----------|--------|
-| Venue | [[intercontinental-exchange\|ICE Futures US]] |
+| Venue | ICE Futures US |
 | Ticker | **OJ** (FCOJ-A) |
 | Contract size | **15,000 lbs of orange-juice solids** |
 | Quote | US cents per pound |
@@ -90,6 +90,5 @@ OJ is a niche, high-volatility weather/disease market suited to specialist trade
 - [[cocoa]] — disease- and weather-driven soft commodity that also hit record highs
 - [[cotton]] — fellow soft commodity
 - [[commodity-seasonality-patterns]] — seasonal/weather risk framework
-- [[intercontinental-exchange]] — exchange listing OJ futures
 - [[diversification]] — OJ's low correlation as a portfolio benefit
 - [[commodities]] — sector overview

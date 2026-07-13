@@ -75,7 +75,7 @@ The MACD (Moving Average Convergence Divergence) crossover strategy trades signa
 ## Advantages
 
 - Simple to learn and execute, ideal for beginners entering [[technical-analysis]]
-- Works across all liquid markets ([[stocks]], [[crypto]], [[forex]])
+- Works across all liquid markets (stocks, [[crypto]], [[forex]])
 - Combines trend and momentum in a single indicator
 - The histogram provides early warning of crossover signals
 - Widely supported by every charting platform

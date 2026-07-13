@@ -68,7 +68,7 @@ The takeaway: a strategy that needs to enter and exit frequently can be profitab
 ## How to Reduce Spread Cost
 
 - **Use limit orders inside the spread.** Posting a buy at 50.01 (the mid) earns the spread instead of paying it — but risks non-execution if the market moves away.
-- **Trade liquid hours.** Spreads are widest at the open, near the close, in [[extended-hours-trading|pre/post-market]], and around news; they are tightest during the deep, high-volume midday session.
+- **Trade liquid hours.** Spreads are widest at the open, near the close, in pre/post-market, and around news; they are tightest during the deep, high-volume midday session.
 - **Avoid crossing on size.** Large orders consume multiple price levels, so the *effective* spread is wider than the top-of-book quote (see [[market-impact]] and [[slippage]]).
 - **Prefer instruments with natural market-making competition** — major index ETFs and large caps over illiquid single names or far out-of-the-money [[options]].
 

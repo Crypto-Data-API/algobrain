@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [itpm, education, portfolio-theory, risk-management, technical-analysis, fundamental-analysis, options, volatility, stocks]
 aliases: ["God Like Trader Status", "ITPM God Like Trader"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[long-short-equity]]", "[[options]]", "[[risk-management-overview]]", "[[implied-volatility]]", "[[calendar-spread]]", "[[tail-risk]]", "[[portfolio-theory]]"]
+related: ["[[anton-kreil]]", "[[options]]", "[[risk-management-overview]]", "[[implied-volatility]]", "[[calendar-spread]]", "[[tail-risk]]", "[[portfolio-theory]]"]
 source_type: video
 source_url: "https://www.youtube.com/watch?v=2poH1G7KlJA"
 source_author: "Anton Kreil"
@@ -16,15 +16,15 @@ confidence: medium
 claims_count: 35
 ---
 
-A seminar presented by [[anton-kreil]] in London (September 2023), his first public presentation since summer 2019. The video covers the full ITPM methodology for achieving top-tier trading performance, illustrated with real trade examples from the [[itpm]] Discord community (Society). It walks through portfolio construction, trade types, option structuring, risk management, business statistics, and the path to statistical significance. **Confidence note:** descriptions of the ITPM *methodology* (portfolio structure, option-spread mechanics, risk rules) are faithful summaries of what Kreil teaches and are marked [HIGH] as accurate records of his stated method — not as endorsements that the method is profitable. Self-reported *trade outcomes*, *return targets*, and *student case-study P&L* are marketing claims shown on Kreil's own slides/Discord and are marked [MEDIUM] (unverified, single-source, promotional).
+A seminar presented by [[anton-kreil]] in London (September 2023), his first public presentation since summer 2019. The video covers the full ITPM methodology for achieving top-tier trading performance, illustrated with real trade examples from the itpm Discord community (Society). It walks through portfolio construction, trade types, option structuring, risk management, business statistics, and the path to statistical significance. **Confidence note:** descriptions of the ITPM *methodology* (portfolio structure, option-spread mechanics, risk rules) are faithful summaries of what Kreil teaches and are marked [HIGH] as accurate records of his stated method — not as endorsements that the method is profitable. Self-reported *trade outcomes*, *return targets*, and *student case-study P&L* are marketing claims shown on Kreil's own slides/Discord and are marked [MEDIUM] (unverified, single-source, promotional).
 
 ## Key Claims
 
 ### Portfolio Construction and Trade Types
 
-1. [HIGH] A model [[long-short-equity]] portfolio consists of 10 positions: 5 longs and 5 shorts, each with equal cash sizing (e.g., $10,000 each on a $100,000 account). (Source: [[anton-kreil]])
+1. [HIGH] A model long-short-equity portfolio consists of 10 positions: 5 longs and 5 shorts, each with equal cash sizing (e.g., $10,000 each on a $100,000 account). (Source: [[anton-kreil]])
 
-2. [HIGH] Long stock positions are replaced with long [[call-options|call options]] and short stock positions are replaced with long [[put-options|put options]], leveraging the [[volatility]] of the portfolio using [[equity-options|equity options]]. (Source: [[anton-kreil]])
+2. [HIGH] Long stock positions are replaced with long [[call-options|call options]] and short stock positions are replaced with long [[put-options|put options]], leveraging the [[volatility]] of the portfolio using equity options. (Source: [[anton-kreil]])
 
 3. [HIGH] The portfolio should contain multiple trade types simultaneously: **bread-and-butter trades** (20-60 day time horizon, targeting 15-50% moves), **hedges**, **tail risk trades**, and **pain trades**. (Source: [[anton-kreil]])
 
@@ -76,7 +76,7 @@ A seminar presented by [[anton-kreil]] in London (September 2023), his first pub
 
 ### The 80/20 Rule
 
-23. [HIGH] Trade ideas must be rooted in [[fundamental-analysis|fundamentals]] with [[technical-analysis]] and price action in the minority — technicals are used only for timing. (Source: [[anton-kreil]])
+23. [HIGH] Trade ideas must be rooted in fundamentals with [[technical-analysis]] and price action in the minority — technicals are used only for timing. (Source: [[anton-kreil]])
 
 ### Process and Consistency
 
@@ -113,21 +113,14 @@ A seminar presented by [[anton-kreil]] in London (September 2023), his first pub
 ## Entities Mentioned
 
 - [[anton-kreil]] — presenter, former Goldman Sachs/Lehman/JP Morgan trader, ITPM founder
-- [[itpm]] — Institute of Trading and Portfolio Management
-- [[goldman-sachs]] — investment bank where Kreil started in 2000
-- [[lehman-brothers]] — investment bank (Kreil moved there 2004)
-- [[jp-morgan]] — investment bank
-- [[credit-suisse]] — subject of tail risk trade, collapsed March 2023
-- [[ubs]] — forced acquirer of Credit Suisse
-- [[carvana]] — subject of pain trade, stock recovered from $3.50 area
 - [[edward-shek|Edward Shek]] — ITPM senior mentor, introduced Kreil at the seminar
 
 ## Concepts Referenced
 
-- [[long-short-equity]], [[calendar-spread]], [[tail-risk]], [[pain-trade]]
+- long-short-equity, [[calendar-spread]], [[tail-risk]], [[pain-trade]]
 - [[options]], [[call-options]], [[put-options]], [[implied-volatility]]
 - [[sharp-ratio]], [[risk-management-overview]], [[portfolio-theory]]
-- [[fundamental-analysis]], [[technical-analysis]]
+- fundamental-analysis, [[technical-analysis]]
 - [[equity-curve]], [[compounding]]
 
 ## Sources

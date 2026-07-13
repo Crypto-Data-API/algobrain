@@ -18,7 +18,7 @@ On August 24, 2015, US equity markets opened into chaos. The Dow Jones Industria
 
 ### The Setup
 
-China had devalued the yuan on August 11, 2015, triggering a global selloff. On August 24 — dubbed "Black Monday" in China — the [[shanghai-composite|Shanghai Composite]] crashed 8.5% overnight. European markets were deep in the red. [[sp500|S&P 500]] futures hit limit-down before the US open, indicating a gap-down of roughly 5%.
+China had devalued the yuan on August 11, 2015, triggering a global selloff. On August 24 — dubbed "Black Monday" in China — the Shanghai Composite crashed 8.5% overnight. European markets were deep in the red. S&P 500 futures hit limit-down before the US open, indicating a gap-down of roughly 5%.
 
 The problem was not the magnitude of the decline. Markets can handle a 5% selloff. The problem was the *structure* of the open.
 

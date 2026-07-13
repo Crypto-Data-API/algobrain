@@ -10,7 +10,6 @@ source_type: data
 source_url: "https://www.interactivebrokers.com/en/trading/risk-navigator.php"
 confidence: high
 related:
-  - "[[interactive-brokers]]"
   - "[[options-concentration-risk]]"
   - "[[options-stress-testing]]"
   - "[[risk-management]]"
@@ -22,7 +21,7 @@ IBKR Risk Navigator is Interactive Brokers' built-in real-time portfolio risk an
 
 ## Pricing Tier
 
-Free for any [[interactive-brokers|IBKR]] Pro account. There is no separate license fee. IBKR Lite users have access to a more limited version. Risk Navigator runs as a desktop application (TWS module) and as a web component within Client Portal.
+Free for any IBKR Pro account. There is no separate license fee. IBKR Lite users have access to a more limited version. Risk Navigator runs as a desktop application (TWS module) and as a web component within Client Portal.
 
 ## What It Produces
 
@@ -86,7 +85,7 @@ What Risk Navigator does *not* do well:
 ## Limitations
 
 - **IBKR-only**: works only on IBKR-held positions; if you have accounts at multiple brokers, Risk Navigator misses them
-- **No factor models**: stops at sector-level decomposition; for true factor concentration analysis you need [[barra]] / [[axioma]] / [[northfield]] or a custom build
+- **No factor models**: stops at sector-level decomposition; for true factor concentration analysis you need barra / axioma / northfield or a custom build
 - **Scenario flexibility**: pre-built scenarios are useful, but truly bespoke multi-factor stress (e.g., "AI sector unwind + USD strengthening + rates +50bps") requires manual setup
 - **UI**: TWS interface is dense and dated; learning curve for new users
 - **Limited historical backtest**: the tool shows current state and stress; it does not back-test the same book through past stress regimes
@@ -98,7 +97,7 @@ What Risk Navigator does *not* do well:
 |------|----------|----------|
 | **IBKR Risk Navigator** | Free, real-time, broad asset coverage | No factor models, IBKR-only |
 | [[thinkorswim]] Beta-Weighted | Similar idea on TD/Schwab platform | TD-only |
-| [[tastytrade]] portfolio Greeks | Good for tasty-style books | Less stress-testing depth |
+| tastytrade portfolio Greeks | Good for tasty-style books | Less stress-testing depth |
 | [[bloomberg-terminal]] PORT/MARS | Institutional standard | $24K/year |
 | Custom Python | Maximum flexibility | Build cost |
 
@@ -106,7 +105,6 @@ For most serious options traders on IBKR, Risk Navigator is the first stop and o
 
 ## Related
 
-- [[interactive-brokers]] — the broker; Risk Navigator is bundled
 - [[options-concentration-risk]] — Risk Navigator is a primary tool for measuring concentration
 - [[options-stress-testing]] — the stress-test functionality
 - [[options-portfolio-construction]] — the broader workflow Risk Navigator supports
@@ -114,7 +112,6 @@ For most serious options traders on IBKR, Risk Navigator is the first stop and o
 - [[options-greeks]] — what Risk Navigator aggregates
 - [[risk-management]] — broader risk-management context
 - [[thinkorswim]] — competing tool on TD / Schwab side
-- [[tastytrade]] — tastytrade's portfolio Greeks view
 
 ## Sources
 

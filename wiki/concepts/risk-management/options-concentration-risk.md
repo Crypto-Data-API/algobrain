@@ -6,13 +6,13 @@ updated: 2026-06-20
 status: excellent
 tags: [options, risk-management, portfolio-theory, itpm, correlation]
 aliases: ["Options Portfolio Concentration", "Concentrated Options Book"]
-related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-stress-testing]]", "[[vega-budgeting]]", "[[correlation]]", "[[tail-risk]]", "[[dispersion-trading]]", "[[long-vol-vs-short-vol]]"]
+related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-stress-testing]]", "[[vega-budgeting]]", "[[correlation]]", "[[tail-risk]]", "[[long-vol-vs-short-vol]]"]
 domain: [risk-management, portfolio-theory]
 prerequisites: ["[[correlation]]", "[[options-greeks]]"]
 difficulty: advanced
 ---
 
-Concentration risk in an options portfolio is the gap between *apparent* diversification (many tickers, many expiries, many strikes) and *actual* diversification (independent sources of P&L). A book of eight short strangles across [[nvidia|NVDA]], [[broadcom|AVGO]], AMD, TSM, MU, ASML, ARM, and MRVL looks like eight positions; in a vol shock or AI sector unwind it acts like one position with eight times the size. Ticker-level diversification deceives because it ignores [[correlation]], factor exposure, sector clustering, and the dominant truth that nearly every short premium book is just a single bet on vol staying contained. Recognizing and measuring these stacked exposures is what separates a [[options-portfolio-construction|professionally constructed book]] from a collection of trades.
+Concentration risk in an options portfolio is the gap between *apparent* diversification (many tickers, many expiries, many strikes) and *actual* diversification (independent sources of P&L). A book of eight short strangles across [[nvidia|NVDA]], AVGO, AMD, TSM, MU, ASML, ARM, and MRVL looks like eight positions; in a vol shock or AI sector unwind it acts like one position with eight times the size. Ticker-level diversification deceives because it ignores [[correlation]], factor exposure, sector clustering, and the dominant truth that nearly every short premium book is just a single bet on vol staying contained. Recognizing and measuring these stacked exposures is what separates a [[options-portfolio-construction|professionally constructed book]] from a collection of trades.
 
 ## The Diversification Illusion
 
@@ -34,7 +34,7 @@ Consider a book of short strangles, sized "small" at $500 max risk per name:
 
 The trader sized each position at $500 risk. The book's *apparent* risk: $4,000 (8 × $500). The book's *actual* risk:
 
-- A single bad print from one of the leading names ([[nvidia|NVDA]], [[broadcom|AVGO]]) drags every other name with it via [[correlation]] cascade — historically observed pairwise daily correlations within US semis run 0.6-0.8 in calm tape and spike to 0.9+ on stress days
+- A single bad print from one of the leading names ([[nvidia|NVDA]], AVGO) drags every other name with it via [[correlation]] cascade — historically observed pairwise daily correlations within US semis run 0.6-0.8 in calm tape and spike to 0.9+ on stress days
 - All 8 are short [[vega]]; an [[implied-volatility]] regime shift adds losses across every position simultaneously
 - All 8 have above-1 beta; a 5% SPX drawdown produces an 8-9% sector drawdown, and short strangles with 16-delta strikes will be tested on roughly all of them at once
 - Six of the eight earnings dates fall within a 60-day window — the book has a concentrated earnings cluster
@@ -62,7 +62,7 @@ The most obvious form: too many positions on one underlying. A long call, short 
 
 ### 2. Sector Concentration
 
-Names within the same GICS sector (or sub-industry) co-move. The semis example above is the canonical case: NVDA, AVGO, AMD, MU, TSM, ASML, MRVL, LRCX, AMAT all behave as a *single asset* on stress days. Software (MSFT, GOOGL, META, AMZN, ORCL, CRM) is similar. Banks (JPM, BAC, WFC, GS, MS, C) are similar. [[xlk]], [[xlf]], [[xle]] make the underlying exposure visible — if you can replace your book with a position in the sector ETF, you weren't diversified.
+Names within the same GICS sector (or sub-industry) co-move. The semis example above is the canonical case: NVDA, AVGO, AMD, MU, TSM, ASML, MRVL, LRCX, AMAT all behave as a *single asset* on stress days. Software (MSFT, GOOGL, META, AMZN, ORCL, CRM) is similar. Banks (JPM, BAC, WFC, GS, MS, C) are similar. xlk, xlf, xle make the underlying exposure visible — if you can replace your book with a position in the sector ETF, you weren't diversified.
 
 ### 3. Factor Concentration
 
@@ -163,7 +163,7 @@ Project each underlying onto a small set of style factors:
 - Quality
 - Low-vol
 
-Tools: [[axioma]], [[barra]], [[northfield]], or open-source approximations using Fama-French + AQR factor data. For a discretionary trader without an institutional risk system, a simplified version is to bucket each name into 2-3 dominant factor labels and watch for over-loading.
+Tools: axioma, barra, northfield, or open-source approximations using Fama-French + AQR factor data. For a discretionary trader without an institutional risk system, a simplified version is to bucket each name into 2-3 dominant factor labels and watch for over-loading.
 
 ### Single-Name Notional Limits
 
@@ -188,7 +188,7 @@ Re-run with stress correlations (ρ = 0.85 for same-sector pairs, 0.75 for same-
 
 ## ITPM Rules of Thumb
 
-The [[itpm]] / [[itpm-trade-construction-playbook]] approach embeds concentration limits directly into [[options-portfolio-construction|portfolio construction]]:
+The itpm / [[itpm-trade-construction-playbook]] approach embeds concentration limits directly into [[options-portfolio-construction|portfolio construction]]:
 
 | Limit | Rule |
 |-------|------|
@@ -209,7 +209,7 @@ A repeatable weekly (or daily, for active books) checklist. The goal is to surfa
 1. **Export every open position** into one sheet: ticker, structure, signed [[delta]], [[gamma]], [[vega]], [[theta]], notional, sector, beta, earnings date, expiry.
 2. **Convert to dollar Greeks and beta-weight the delta** so positions are comparable across underlyings — this is [[portfolio-greeks-aggregation]]. Raw per-contract Greeks are not additive across tickers.
 3. **Single-name check** — sort by `|risk|` per underlying. Is any one ticker >10–20% of total delta, gamma, or vega? If yes, that name *is* the book.
-4. **Sector check** — group by GICS sector. Is any sector >25%? Ask the killer question: *could I replace most of this book with one position in the sector ETF ([[xlk]], [[xlf]], [[xle]])?* If yes, you weren't diversified.
+4. **Sector check** — group by GICS sector. Is any sector >25%? Ask the killer question: *could I replace most of this book with one position in the sector ETF (xlk, xlf, xle)?* If yes, you weren't diversified.
 5. **Factor check** — tag each name with 2–3 dominant style factors ([[factor-investing|momentum, quality, low-vol, size, value]]). Count how many names share each tag. A book where 70%+ of names are "mega-cap momentum" is one factor bet.
 6. **Index/beta check** — sum the beta-weighted [[delta]]. Is the book accidentally net long or short the market versus your stated view?
 7. **Vol-regime check** — compute net [[vega]] as a share of gross vega. Is the whole book short [[volatility]] with no long-vol offset? See [[long-vol-vs-short-vol]].
@@ -224,7 +224,7 @@ Concentration that doesn't show up in standard reports.
 
 ### Earnings Clusters
 
-A book of short strangles on NVDA, AVGO, AMD, MU, ARM with earnings dates spread over 60 days looks fine on calendar averages. But if 4 of the 5 report within a single week (typical for [[semiconductor-earnings-cycle|semis earnings]]), the book has *one trade* on "consensus is roughly right about AI demand this quarter."
+A book of short strangles on NVDA, AVGO, AMD, MU, ARM with earnings dates spread over 60 days looks fine on calendar averages. But if 4 of the 5 report within a single week (typical for semis earnings), the book has *one trade* on "consensus is roughly right about AI demand this quarter."
 
 Check: pull every position's earnings date and bucket by week. Any week containing >25% of book vega is a hidden concentration.
 
@@ -252,8 +252,8 @@ Genuine diversification of a short premium book requires reaching across:
 
 A short premium program that runs in equity options only is a single-asset bet. Add:
 
-- **Rate vol**: short premium on [[tlt]], [[ief]], or [[move-index|MOVE]]-driven structures
-- **Commodity vol**: short [[gld]], [[uso]], [[uup]] options
+- **Rate vol**: short premium on tlt, ief, or [[move-index|MOVE]]-driven structures
+- **Commodity vol**: short gld, uso, uup options
 - **FX vol**: short [[eurusd]], [[usdjpy]] options (lower vol, smaller premium, but uncorrelated to equity vol regimes)
 
 Equity vol, rate vol, FX vol, and commodity vol have meaningful but imperfect correlation. Spreading across them reduces the single-vol-regime concentration.
@@ -267,7 +267,7 @@ Mix 7 DTE / 30 DTE / 60 DTE / 90 DTE positions. Front-month vol mean-reverts qui
 Allocate 5-15% of the book's vega budget to long vol structures:
 
 - Long [[vix-call-spreads]]
-- Long out-of-the-money [[spx-puts]]
+- Long out-of-the-money spx-puts
 - Long [[put-tree|put trees]]
 - Long [[calendar-spread|long-vol calendar spreads]]
 - Tail risk products from [[universa]]-style approaches
@@ -276,7 +276,7 @@ These bleed during calm periods (negative carry) but pay multiples of premium du
 
 ### 4. Long Vol *Single-Name* Pairs
 
-Within a short premium book, going long vol on the most-likely-to-break name in a sector creates a [[dispersion-trading|dispersion]] structure. Short index vol, long the messiest single-name vol. The hedge pays exactly when concentration risk materializes.
+Within a short premium book, going long vol on the most-likely-to-break name in a sector creates a dispersion structure. Short index vol, long the messiest single-name vol. The hedge pays exactly when concentration risk materializes.
 
 ## Worked Example
 
@@ -361,10 +361,10 @@ The recurring patterns in retail and semi-pro options books:
 
 Practical tools for measuring and managing concentration:
 
-- **[[ibkr-risk-navigator|IBKR Risk Navigator]]** — built-in stress views including SPX shock, single-name shocks, and IV shocks across the entire book; sector exposure breakdown; beta-weighted deltas. Free if you trade with [[interactive-brokers|Interactive Brokers]].
-- **[[orats]]** — implied vol surface analytics; useful for spotting when your book is concentrated on a single skew shape.
-- **[[optionmetrics|OptionMetrics]] IvyDB** — institutional-grade historical options data; correlation regime studies.
-- **[[tastytrade]]** beta-weighted delta and net vega views — adequate for medium books.
+- **[[ibkr-risk-navigator|IBKR Risk Navigator]]** — built-in stress views including SPX shock, single-name shocks, and IV shocks across the entire book; sector exposure breakdown; beta-weighted deltas. Free if you trade with Interactive Brokers.
+- **orats** — implied vol surface analytics; useful for spotting when your book is concentrated on a single skew shape.
+- **OptionMetrics IvyDB** — institutional-grade historical options data; correlation regime studies.
+- **tastytrade** beta-weighted delta and net vega views — adequate for medium books.
 - **[[thinkorswim]]** beta-weighted analysis — usable for sector concentration.
 - **[[pivolio|PiVolio]] / [[convex-trading]] / [[trade-machine]]** — third-party concentration and Greek aggregation across complex options books.
 - **Custom risk system** — at sufficient scale, in-house Python with [[pyfolio]] / [[empyrical]] / Barra factor data for full factor decomposition.
@@ -390,7 +390,6 @@ For most discretionary traders the workflow is: IBKR Risk Navigator daily, suppl
 - [[correlation-breakdown]] — the stress-regime phenomenon
 - [[tail-risk]] — what concentration produces when it materializes
 - [[tail-risk-hedging]] — how to overlay protection
-- [[dispersion-trading]] — explicit trade structure that exploits index-vs-single-name correlation
 - [[long-vol-vs-short-vol]] — the fundamental vol-regime axis
 - [[beta-weighted-delta]] — measuring market exposure across underlyings
 - [[implied-correlation]] — the index-component correlation as priced by options

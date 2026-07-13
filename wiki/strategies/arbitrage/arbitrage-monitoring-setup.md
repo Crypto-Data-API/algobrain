@@ -76,7 +76,7 @@ Different signals demand different polling cadences. Polling too slowly misses f
 | [[funding-rate-arbitrage]] | 8h funding rate, basis | Funding inversion (longs pay shorts) | Spot vs perp leg parity |
 | [[cross-exchange-arbitrage]] | Best-bid/best-ask spread across venues | Spread compression below cost | Inventory drift across venues |
 | [[cash-and-carry]] / [[basis-trading]] | Spot-futures basis vs financing cost | Basis collapse / negative carry | Futures roll, margin headroom |
-| [[merger-arbitrage]] | Deal spread, regulatory headlines | Deal-break risk repricing | Long-target / short-acquirer ratio |
+| merger-arbitrage | Deal spread, regulatory headlines | Deal-break risk repricing | Long-target / short-acquirer ratio |
 | [[flash-loan-arbitrage]] / [[mev-strategies]] | On-chain pool prices, gas, mempool | Builder-bid erodes profit to ≤0 | Atomic — no leg risk, but revert risk |
 | [[statistical-arbitrage]] / [[pairs-trading]] | Z-score / spread vs cointegration band | Cointegration breakdown | Dollar-neutrality, factor drift |
 

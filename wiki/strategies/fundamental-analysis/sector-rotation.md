@@ -11,26 +11,26 @@ timeframe: position
 markets: [stocks]
 complexity: intermediate
 backtest_status: untested
-related: ["[[value-investing-strategy]]", "[[growth-investing-strategy]]", "[[factor-investing]]", "[[trend-following-cta]]", "[[relative-strength]]", "[[book-how-to-make-money-in-stocks]]", "[[book-one-up-on-wall-street]]"]
+related: ["[[factor-investing]]", "[[trend-following-cta]]", "[[relative-strength]]"]
 ---
 
 # Sector Rotation
 
 ## Overview
 
-Sector Rotation is a top-down [[fundamental-analysis]] strategy that shifts capital between equity sectors based on the current stage of the **business cycle**. Different sectors outperform at different phases of economic expansion and contraction, and by identifying the current phase, traders can overweight sectors poised to benefit and underweight those likely to lag. The framework was popularized by **Sam Stovall** of S&P Global and is used by institutional asset allocators worldwide.
+Sector Rotation is a top-down fundamental-analysis strategy that shifts capital between equity sectors based on the current stage of the **business cycle**. Different sectors outperform at different phases of economic expansion and contraction, and by identifying the current phase, traders can overweight sectors poised to benefit and underweight those likely to lag. The framework was popularized by **Sam Stovall** of S&P Global and is used by institutional asset allocators worldwide.
 
-The business cycle is typically divided into four stages: **Early Recovery** (coming out of recession), **Mid Expansion** (economy growing steadily), **Late Expansion** (economy overheating), and **Recession** (contraction). Each stage favors specific sectors due to shifting consumer behavior, interest rates, and corporate earnings trends. O'Neil's CANSLIM method emphasizes identifying leading industry groups as a key factor in stock selection (Source: [[book-how-to-make-money-in-stocks]]), while Lynch observed that understanding which sectors benefit from economic shifts is essential for finding growth opportunities (Source: [[book-one-up-on-wall-street]]). Implementation is straightforward using sector [[etf|ETFs]] like the SPDR Select Sector series (XLK, XLF, XLE, etc.).
+The business cycle is typically divided into four stages: **Early Recovery** (coming out of recession), **Mid Expansion** (economy growing steadily), **Late Expansion** (economy overheating), and **Recession** (contraction). Each stage favors specific sectors due to shifting consumer behavior, interest rates, and corporate earnings trends. O'Neil's CANSLIM method emphasizes identifying leading industry groups as a key factor in stock selection (Source: book-how-to-make-money-in-stocks), while Lynch observed that understanding which sectors benefit from economic shifts is essential for finding growth opportunities (Source: book-one-up-on-wall-street). Implementation is straightforward using sector [[etf|ETFs]] like the SPDR Select Sector series (XLK, XLF, XLE, etc.).
 
 ## Rules
 
 ### Entry
 1. **Identify the business cycle stage** using leading indicators: ISM Manufacturing PMI, yield curve shape, unemployment claims, [[fed-funds-rate]] trajectory, and Conference Board Leading Economic Index.
 2. **Rotate into favored sectors:**
-   - **Early Cycle:** [[consumer-discretionary]], [[financials]], [[real-estate]] -- consumers spend again, banks benefit from steepening yield curve.
-   - **Mid Cycle:** [[technology]], [[industrials]], [[materials]] -- capex increases, business investment drives growth.
-   - **Late Cycle:** [[energy]], [[materials]], [[healthcare]] -- commodity demand peaks, defensive positioning begins.
-   - **Recession:** [[utilities]], [[healthcare]], [[consumer-staples]] -- defensive, dividend-paying sectors hold up best.
+   - **Early Cycle:** consumer-discretionary, financials, real-estate -- consumers spend again, banks benefit from steepening yield curve.
+   - **Mid Cycle:** technology, industrials, materials -- capex increases, business investment drives growth.
+   - **Late Cycle:** energy, materials, healthcare -- commodity demand peaks, defensive positioning begins.
+   - **Recession:** utilities, healthcare, consumer-staples -- defensive, dividend-paying sectors hold up best.
 3. **Overweight 2-3 sectors** by allocating 60-70% of the portfolio to favored groups. Maintain 30-40% in broad market exposure.
 4. Use [[relative-strength]] rankings to confirm: favored sectors should be showing improving relative performance vs. SPY.
 
@@ -80,13 +80,8 @@ Allocate capital across 2-4 sector ETFs. No single sector should exceed 30% of t
 
 ## Sources
 
-- [[book-how-to-make-money-in-stocks]] — O'Neil's emphasis on leading industry groups and the "L" factor in CANSLIM
-- [[book-one-up-on-wall-street]] — Lynch's insights on sector and industry awareness in stock selection
 
 ## See Also
 - [[factor-investing]] -- quantitative approach to systematic factor exposure that complements rotation
-- [[value-investing-strategy]] -- often outperforms in early-cycle recoveries
-- [[growth-investing-strategy]] -- typically dominates mid-cycle expansion phases
 - [[trend-following-cta]] -- captures macro trends across asset classes, not just equities
 - [[relative-strength]] -- key tool for confirming sector rotation signals
-- [[sector-momentum-screen]] -- screening for sector momentum signals to inform rotation timing

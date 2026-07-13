@@ -6,10 +6,10 @@ updated: 2026-06-11
 status: good
 tags: [stocks, commodities]
 aliases: ["ETF", "ETFs", "Etfs", "Exchange-Traded Fund", "Exchange Traded Fund", "Exchange-Traded Funds"]
-related: ["[[index-investing]]", "[[s-and-p-500]]", "[[asx-200]]", "[[mutual-funds]]", "[[expense-ratio]]", "[[tracking-error]]", "[[etf-arbitrage]]", "[[leveraged-etf-rebalancing]]"]
+related: ["[[index-investing]]", "[[expense-ratio]]", "[[tracking-error]]", "[[etf-arbitrage]]", "[[leveraged-etf-rebalancing]]"]
 domain: [portfolio-theory]
 difficulty: beginner
-prerequisites: ["[[stocks]]", "[[index-investing]]"]
+prerequisites: ["[[index-investing]]"]
 ---
 
 An exchange-traded fund (ETF) is a pooled investment vehicle that trades on a stock exchange like an ordinary share. ETFs typically track an index, sector, commodity, or other asset class, allowing investors to gain diversified exposure without buying each underlying component individually. The first ETF, the SPDR S&P 500 ETF Trust (SPY), launched in 1993 and remains the most traded security in the world by dollar volume, with daily turnover frequently exceeding $30 billion. As of 2025, global ETF assets under management surpassed $14 trillion across more than 10,000 products.
@@ -22,7 +22,7 @@ This process keeps the ETF's market price tightly aligned with NAV during normal
 
 ## Types of ETFs
 
-- **Index ETFs**: Track a market index such as the [[s-and-p-500]], [[asx-200]], or MSCI World. These are the most common type. Examples: SPY, IVV, VTI, VAS.
+- **Index ETFs**: Track a market index such as the s-and-p-500, asx-200, or MSCI World. These are the most common type. Examples: SPY, IVV, VTI, VAS.
 - **Sector and industry ETFs**: Focus on a specific sector (e.g., XLF for financials, XLK for technology).
 - **Bond ETFs**: Track fixed income indices (e.g., AGG for US aggregate bonds, TLT for long-term Treasuries).
 - **Commodity ETFs**: Provide exposure to physical commodities like gold (GLD) or oil (USO), either through physical holdings or futures contracts.
@@ -57,9 +57,6 @@ This process keeps the ETF's market price tightly aligned with NAV during normal
 ## Related
 
 - [[index-investing]] -- the investment philosophy most associated with ETFs
-- [[s-and-p-500]] -- the most widely tracked ETF benchmark
-- [[asx-200]] -- Australian market ETF benchmark
-- [[mutual-funds]] -- the predecessor investment vehicle that ETFs largely displaced for index investing
 - [[expense-ratio]] -- the primary cost metric for ETFs
 - [[tracking-error]] -- the primary quality metric for index ETFs
 - [[etf-arbitrage]] -- trading the premium/discount to NAV

@@ -9,7 +9,7 @@ domain: [portfolio-theory, market-microstructure]
 prerequisites: ["[[interest-rates]]", "[[federal-reserve]]"]
 difficulty: intermediate
 aliases: ["ZIRP", "Zero Interest Rate Policy", "zero-bound", "zero lower bound"]
-related: ["[[interest-rates]]", "[[federal-reserve]]", "[[fomc]]", "[[quantitative-easing]]", "[[negative-interest-rates]]", "[[financial-repression]]", "[[discounted-cash-flow]]", "[[value-factor]]", "[[carry-trade]]", "[[market-crashes]]", "[[monetary-policy]]", "[[liquidity-trap]]"]
+related: ["[[interest-rates]]", "[[federal-reserve]]", "[[fomc]]", "[[quantitative-easing]]", "[[negative-interest-rates]]", "[[financial-repression]]", "[[value-factor]]", "[[carry-trade]]", "[[market-crashes]]", "[[monetary-policy]]", "[[liquidity-trap]]"]
 ---
 
 Zero Interest Rate Policy (ZIRP) is a monetary regime in which a central bank holds its short-term policy rate at or very near 0% to stimulate borrowing, spending, and investment when conventional rate cuts have been exhausted. It is the practical manifestation of hitting the **zero lower bound** (or **effective lower bound**) -- the point below which nominal rates cannot easily fall because savers would otherwise hoard physical cash that yields 0%. The US Federal Reserve ran ZIRP from December 2008 to December 2015, and again from March 2020 to March 2022; the Bank of Japan pioneered it in 1999 and the ECB and others followed after 2008.
@@ -30,7 +30,7 @@ ZIRP is most often reached for in a **[[liquidity-trap]]**: when rates are alrea
 
 ZIRP reshapes asset pricing because the risk-free rate sits in the denominator of nearly every valuation model:
 
-- **Long-duration assets re-rate higher.** In a [[discounted-cash-flow]], a near-zero discount rate inflates the present value of distant cash flows. This is why growth/tech equities, long bonds, and speculative "story" assets boomed during 2009-2021 ZIRP, while the [[value-factor]] suffered its worst drought in history -- value's near-term cash flows matter less when discount rates are negligible.
+- **Long-duration assets re-rate higher.** In a discounted-cash-flow, a near-zero discount rate inflates the present value of distant cash flows. This is why growth/tech equities, long bonds, and speculative "story" assets boomed during 2009-2021 ZIRP, while the [[value-factor]] suffered its worst drought in history -- value's near-term cash flows matter less when discount rates are negligible.
 
 > **Worked example — discount-rate sensitivity.** Consider $100 of cash flow arriving in 10 years. At a 2% discount rate its present value is $100 / 1.02¹⁰ ≈ **$82**. At an 8% discount rate the same cash flow is worth $100 / 1.08¹⁰ ≈ **$46** — a 44% haircut. The further out the cash flow, the larger the swing: a profit promised in 20 years is worth ~$67 at 2% but only ~$21 at 8%. This is the entire mechanism behind ZIRP inflating "long-duration" growth stocks (whose value sits in distant cash flows) and behind their violent de-rating when rates normalised in 2022. A small change in the [[interest-rates|discount rate]] is enormous for assets whose value lives far in the future.
 - **Reach for yield.** With cash and short bonds yielding nothing, capital floods into riskier assets -- high-yield credit, dividend stocks, private equity, real estate, and crypto -- compressing risk premia and credit spreads. This is the intended portfolio-rebalancing channel but also a financial-stability risk (asset bubbles, zombie firms kept alive by cheap debt).

@@ -99,7 +99,7 @@ USDai is a **credit-backed synthetic dollar** — its backing is a loan book, no
 
 - **Not a trading vehicle per se** — it is a yield instrument. The trade is the carry: mint/buy USDAI near or below $1, stake to sUSDai for the 15–25% target APR, monitor collateral health.
 - **Venues**: DEX-only; deepest pair is USDAI/USDC on Fluid (Arbitrum). No major CEX listings as of June 2026. Thin 24h volume (~$0.4M) — exit liquidity is the main risk for size.
-- **Key risks/signals**: peg deviations (history of ±20% moves in Sep 2025), GPU depreciation vs loan tenor (AI hardware amortizes fast), borrower concentration (e.g., QumulusAI facility), and the broader AI-capex cycle ([[ai-capex-vs-cash-flow-divergence]]). A sharp fall in GPU rental rates would impair collateral income across the book.
+- **Key risks/signals**: peg deviations (history of ±20% moves in Sep 2025), GPU depreciation vs loan tenor (AI hardware amortizes fast), borrower concentration (e.g., QumulusAI facility), and the broader AI-capex cycle (ai-capex-vs-cash-flow-divergence). A sharp fall in GPU rental rates would impair collateral income across the book.
 - **Narrative basket**: AI x DeFi / RWA-credit basket; comparable to [[ethena|Ethena]] in "synthetic dollar with exotic backing" but with credit risk instead of basis risk.
 
 ---
@@ -117,7 +117,7 @@ USDai is a **credit-backed synthetic dollar** — its backing is a loan book, no
 ## Risks
 
 - **Credit / borrower-concentration risk** — backing is a loan book; the $500M QumulusAI facility is a large single exposure, and a borrower default impairs the book.
-- **Collateral-depreciation risk** — AI hardware amortizes fast; if GPU resale or rental rates fall (a softening AI-capex cycle, see [[ai-capex-vs-cash-flow-divergence]]), collateral value and loan income both deteriorate.
+- **Collateral-depreciation risk** — AI hardware amortizes fast; if GPU resale or rental rates fall (a softening AI-capex cycle, see ai-capex-vs-cash-flow-divergence), collateral value and loan income both deteriorate.
 - **Peg risk** — history of ±20% deviations during the Sept 2025 launch window; thin liquidity can amplify dislocations.
 - **Liquidity risk** — DEX-only, ~$0.10M daily volume; large exits face heavy slippage.
 - **Smart-contract / oracle risk** — CALIBER NFT collateralization, liquidation logic, and cross-chain (M0) deployment are an attack surface.
@@ -163,7 +163,6 @@ USDai is a **credit-backed synthetic dollar** — its backing is a loan book, no
 - [[falcon-finance]]
 - [[usdtb]]
 - [[nvidia]]
-- [[ai-capex-vs-cash-flow-divergence]]
 
 ---
 

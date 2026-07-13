@@ -7,12 +7,12 @@ status: excellent
 tags: [portfolio-theory, behavioral-finance, valuation, risk-management]
 aliases: ["Market Timing", "tactical-asset-allocation"]
 domain: [portfolio-theory, behavioral-finance]
-prerequisites: ["[[portfolio-theory]]", "[[valuation]]"]
+prerequisites: ["[[portfolio-theory]]"]
 difficulty: intermediate
-related: ["[[contrarian-investing]]", "[[market-crashes]]", "[[cash-as-asset]]", "[[valuation]]", "[[yield-curve]]", "[[volatility]]", "[[dollar-cost-averaging]]", "[[trend-following]]", "[[fred-mcnaught]]"]
+related: ["[[market-crashes]]", "[[cash-as-asset]]", "[[yield-curve]]", "[[volatility]]", "[[dollar-cost-averaging]]", "[[trend-following]]"]
 ---
 
-Market timing is the strategy of moving in and out of the market — or switching between asset classes — based on predictive methods, in an attempt to buy before rallies and sell before declines. It sits in direct tension with the buy-and-hold doctrine, and the academic consensus is that consistent, profitable timing is extremely difficult because it requires being right *twice*: when to exit and when to re-enter. [[fred-mcnaught|Fred]] takes a nuanced view: "It's not timing, but time in the market that counts — this statement is only partially true. Timing is important. You wish to buy at the lowest possible price, so the time to buy is when the market as a whole dips."
+Market timing is the strategy of moving in and out of the market — or switching between asset classes — based on predictive methods, in an attempt to buy before rallies and sell before declines. It sits in direct tension with the buy-and-hold doctrine, and the academic consensus is that consistent, profitable timing is extremely difficult because it requires being right *twice*: when to exit and when to re-enter. Fred takes a nuanced view: "It's not timing, but time in the market that counts — this statement is only partially true. Timing is important. You wish to buy at the lowest possible price, so the time to buy is when the market as a whole dips."
 
 ## Why It Is So Hard
 
@@ -43,7 +43,7 @@ The standard illustration takes a fully-invested benchmark over a multi-decade w
 
 The key distinction is between **rules-based, systematic** timing and **reactive, emotional** timing. Tactical approaches that have empirical support when applied mechanically include:
 
-- **Valuation-based** — scaling equity exposure inversely to [[valuation]] (e.g. CAPE/Shiller PE). High starting valuations predict lower forward 10-year returns, but the signal is slow and can be early by years.
+- **Valuation-based** — scaling equity exposure inversely to valuation (e.g. CAPE/Shiller PE). High starting valuations predict lower forward 10-year returns, but the signal is slow and can be early by years.
 - **[[yield-curve]] / macro** — reducing net exposure when the 2s/10s curve inverts or when [[leading-indicators|leading indicators]] deteriorate.
 - **[[trend-following|Trend / momentum]]** — time-series momentum rules (e.g. hold equities only above the 200-day moving average) historically reduce drawdowns and improve risk-adjusted returns, at the cost of whipsaws in choppy markets.
 - **[[volatility]] targeting** — cutting exposure as realized/implied vol rises, raising it as vol falls; mechanically improves Sharpe by avoiding the highest-vol (and lowest-return) regimes.
@@ -60,7 +60,7 @@ These add value primarily by **reducing drawdowns and improving risk-adjusted re
 
 ## Trading / Portfolio Relevance
 
-For most investors, the practical conclusion is to favour [[dollar-cost-averaging]] and a strategic allocation over discretionary timing, while reserving systematic tactical overlays (trend, vol-targeting, valuation tilts) for a portion of the book. Fred's framing — buy *into weakness* when the whole market dips rather than trying to predict tops — is a contrarian, rules-light version of timing that aligns with [[contrarian-investing]] and the long-run upward drift of equities. The danger is the same one [[market-crashes]] expose: timing decisions made in panic almost always destroy value.
+For most investors, the practical conclusion is to favour [[dollar-cost-averaging]] and a strategic allocation over discretionary timing, while reserving systematic tactical overlays (trend, vol-targeting, valuation tilts) for a portion of the book. Fred's framing — buy *into weakness* when the whole market dips rather than trying to predict tops — is a contrarian, rules-light version of timing that aligns with contrarian-investing and the long-run upward drift of equities. The danger is the same one [[market-crashes]] expose: timing decisions made in panic almost always destroy value.
 
 **Worked example — DCA vs. waiting for the dip.** An investor has $24,000 to deploy and is tempted to "wait for a better entry." Compare two disciplined plans:
 
@@ -84,14 +84,11 @@ The asymmetry favours staying invested: the cost of being out during the drift i
 - **Survivorship in the story.** "I'd have sold before the crash" ignores the symmetric requirement to also buy back the rebound; the worst and best days are inseparable.
 - **Fighting the drift.** Equities have a long-run upward drift; persistent net-short or all-cash "timing" fights a structural tailwind and loses on average.
 
-(Source: [[fred-sam-session-2024-01-02]])
 
 ## Related
 
-- [[contrarian-investing]] — buying weakness, selling strength
 - [[dollar-cost-averaging]] — the systematic alternative to timing entries
 - [[trend-following]] — rules-based momentum timing
-- [[valuation]] — valuation-based tactical allocation
 - [[yield-curve]] — a macro timing signal
 - [[volatility]] — volatility-targeting overlays
 - [[cash-as-asset]] — holding cash as a timing/dry-powder decision
@@ -103,7 +100,6 @@ The asymmetry favours staying invested: the cost of being out during the drift i
 
 ## Sources
 
-- (Source: [[fred-sam-session-2024-01-02]])
 - Sharpe, W.F. (1975). *"Likely Gains from Market Timing."* *Financial Analysts Journal* — establishes the high accuracy required for timing to beat buy-and-hold.
 - Shiller, R. — cyclically-adjusted PE (CAPE) and the valuation-return relationship.
 - AQR / academic literature on time-series momentum and volatility targeting (Moskowitz, Ooi, Pedersen 2012).

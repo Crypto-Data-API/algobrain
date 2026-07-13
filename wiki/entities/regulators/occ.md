@@ -10,18 +10,18 @@ entity_type: company
 founded: 1973
 headquarters: "Chicago, IL and Dallas, TX, USA"
 website: "https://www.theocc.com"
-related: ["[[options-disclosure-document]]", "[[sec]]", "[[cftc]]", "[[finra]]", "[[cboe]]", "[[cboe-global-markets]]", "[[memx]]", "[[nyse]]", "[[nasdaq]]", "[[assignment-and-exercise]]", "[[flex-options]]", "[[counterparty-risk]]", "[[equity-options]]"]
+related: ["[[sec]]", "[[cftc]]", "[[finra]]", "[[cboe]]", "[[assignment-and-exercise]]", "[[counterparty-risk]]"]
 ---
 
 # OCC (Options Clearing Corporation)
 
-The Options Clearing Corporation (OCC) is the world's largest equity derivatives clearing organization and the sole central counterparty (CCP) for all standardized listed options on US securities exchanges. Founded in 1973 alongside the launch of the [[cboe|Chicago Board Options Exchange]], the OCC issues, guarantees, clears, and settles every listed [[equity-options|equity option]] contract traded in the United States, eliminating bilateral [[counterparty-risk]] for option buyers and writers.
+The Options Clearing Corporation (OCC) is the world's largest equity derivatives clearing organization and the sole central counterparty (CCP) for all standardized listed options on US securities exchanges. Founded in 1973 alongside the launch of the [[cboe|Chicago Board Options Exchange]], the OCC issues, guarantees, clears, and settles every listed equity option contract traded in the United States, eliminating bilateral [[counterparty-risk]] for option buyers and writers.
 
 ## Overview
 
 The OCC sits between every option buyer and seller through a process called **novation** — once a trade is executed on an exchange, the OCC becomes the buyer to every seller and the seller to every buyer. This means the credit risk of an option contract is the credit risk of the OCC, not of the original counterparty. Because the OCC guarantees performance, market participants can write options to anonymous counterparties without performing credit due diligence.
 
-The OCC is owned by its participant exchanges — including [[cboe-global-markets|Cboe]], [[nyse|NYSE]] (NYSE Arca and NYSE American Options), [[nasdaq|Nasdaq]] (Nasdaq PHLX, Nasdaq ISE, Nasdaq BX, Nasdaq GEMX, Nasdaq MRX), MIAX (MIAX Options, MIAX Pearl, MIAX Emerald, MIAX Sapphire), [[memx|MEMX Options]], and BOX Options Exchange — and is jointly regulated by the [[sec|SEC]] (for securities options) and the [[cftc|CFTC]] (for futures options it clears).
+The OCC is owned by its participant exchanges — including Cboe, NYSE (NYSE Arca and NYSE American Options), Nasdaq (Nasdaq PHLX, Nasdaq ISE, Nasdaq BX, Nasdaq GEMX, Nasdaq MRX), MIAX (MIAX Options, MIAX Pearl, MIAX Emerald, MIAX Sapphire), MEMX Options, and BOX Options Exchange — and is jointly regulated by the [[sec|SEC]] (for securities options) and the [[cftc|CFTC]] (for futures options it clears).
 
 In 2012, the Financial Stability Oversight Council (FSOC) designated the OCC as a **Systemically Important Financial Market Utility (SIFMU)** under Title VIII of the Dodd-Frank Act, recognizing that a failure of the OCC could threaten US financial stability. SIFMU designation imposes heightened risk-management, capital, and supervisory requirements.
 
@@ -46,7 +46,7 @@ As of 2025, the OCC clears options for the following US options exchanges (in al
 - **Cboe BZX Options**
 - **Cboe C2 Options**
 - **Cboe EDGX Options**
-- **MEMX Options** — see [[memx]] (added June 2024)
+- **MEMX Options** — see memx (added June 2024)
 - **MIAX Options Exchange**
 - **MIAX Pearl Options**
 - **MIAX Emerald Options**
@@ -56,7 +56,7 @@ As of 2025, the OCC clears options for the following US options exchanges (in al
 - **Nasdaq ISE**
 - **Nasdaq MRX**
 - **Nasdaq PHLX**
-- **NYSE American Options** — see [[nyse]]
+- **NYSE American Options** — see nyse
 - **NYSE Arca Options**
 
 The OCC also clears futures options for selected derivatives exchanges.
@@ -75,7 +75,7 @@ This triple regulatory regime makes the OCC one of the most heavily supervised e
 
 | Publication | Purpose |
 |-------------|---------|
-| **[[options-disclosure-document|Options Disclosure Document (ODD)]]** | "Characteristics and Risks of Standardized Options" — the prospectus-equivalent disclosure that brokers MUST deliver to every retail customer before approving them to trade options. Updated periodically; most recent material updates June 2024. |
+| **Options Disclosure Document (ODD)** | "Characteristics and Risks of Standardized Options" — the prospectus-equivalent disclosure that brokers MUST deliver to every retail customer before approving them to trade options. Updated periodically; most recent material updates June 2024. |
 | **Daily Volume and Open Interest Statistics** | Industry-standard volume figures published every trading day, broken down by exchange, product type (equity/index/ETF), and put/call. |
 | **OCC Annual Report** | Financial statements, risk disclosures, and operational summaries for clearing members and the public. |
 | **Information Memos and Bylaws** | Rule changes, contract specification updates, corporate action adjustments. |
@@ -94,24 +94,20 @@ The OCC cleared more than **12 billion contracts in 2024**, then a record annual
 ## Recent Initiatives
 
 - **T+1 Settlement (May 2024)** — The OCC supported the industry-wide transition from T+2 to T+1 settlement for options on equities, aligning option exercise settlement with the underlying stock settlement cycle (set by SEC Rule 15c6-1).
-- **[[flex-options|FLEX Options]] Expansion** — The OCC has expanded FLEX options (customizable strike, expiration, exercise style) to broader product sets, enabling institutional users to create non-standard contracts that still benefit from CCP clearing.
-- **MEMX Options Onboarding (June 2024)** — Added [[memx|MEMX Options]] as a cleared exchange, reflected in the June 2024 [[options-disclosure-document|ODD]] update.
+- **FLEX Options Expansion** — The OCC has expanded FLEX options (customizable strike, expiration, exercise style) to broader product sets, enabling institutional users to create non-standard contracts that still benefit from CCP clearing.
+- **MEMX Options Onboarding (June 2024)** — Added MEMX Options as a cleared exchange, reflected in the June 2024 ODD update.
 - **Risk Model Modernization** — Multi-year project to replace STANS with a next-generation margin model.
 - **Stress Testing and Default Fund Sizing** — Quarterly stress tests against extreme but plausible market scenarios; the OCC has multiple times publicly increased its Clearing Fund size in response to volatility events.
 - **Record Volume Handling (2025)** — The OCC processed back-to-back record volume days in 2025 (April 4 and October 10) without operational incident, a real-world stress test of CCP infrastructure during the retail-driven [[0dte|0DTE]] and tariff-volatility era.
 
 ## Related
 
-- [[options-disclosure-document]] — The ODD is the OCC's flagship retail disclosure
 - [[sec]] — Primary federal regulator
 - [[cftc]] — Co-regulator for futures options
 - [[finra]] — Sets broker-dealer rules including options approval levels
 - [[cboe]] — Largest options exchange, founding shareholder of the OCC
-- [[memx]] — Newest OCC member exchange (options market launched 2023)
 - [[assignment-and-exercise]] — Mechanics governed by OCC rules
-- [[flex-options]] — OCC-cleared customizable contracts
 - [[counterparty-risk]] — OCC novation eliminates this for listed options
-- [[equity-options]] — OCC clears all US-listed equity options
 
 ## Sources
 

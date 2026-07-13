@@ -59,7 +59,7 @@ Dennis gave each Turtle a set of explicit, mechanical trading rules and funded t
 - Maximum total portfolio risk: capped across all positions and correlated markets
 
 **Markets traded:**
-- Diversified across 20+ [[futures]] markets: bonds, [[forex|currencies]], commodities (grains, metals, energy), and [[stock-markets|stock index]] futures
+- Diversified across 20+ [[futures]] markets: bonds, [[forex|currencies]], commodities (grains, metals, energy), and stock index futures
 - The [[diversification]] ensured exposure to trends in any asset class
 
 #### Turtle Results

@@ -11,7 +11,7 @@ source_date: 2026-04-14
 source_file: "r2://trader-wiki/articles/2026-04-14-polymarket-wiki-guide.md"
 confidence: high
 claims_count: 52
-related: ["[[polymarket]]", "[[kalshi]]", "[[prediction-markets]]", "[[shayne-coplan]]", "[[ai-prediction-markets]]", "[[polygon]]", "[[intercontinental-exchange]]", "[[palantir-technologies]]", "[[prediction-market-strategies]]", "[[polymarket-vs-kalshi]]"]
+related: ["[[polymarket]]", "[[kalshi]]", "[[prediction-markets]]", "[[shayne-coplan]]", "[[ai-prediction-markets]]", "[[polygon]]", "[[prediction-market-strategies]]", "[[polymarket-vs-kalshi]]"]
 ---
 
 # Polymarket: A Comprehensive Wiki Guide
@@ -96,9 +96,9 @@ Compiled research document covering Polymarket's founding, technology stack, mar
 
 ## Entities Identified
 
-- **Exchanges/Platforms:** [[polymarket]], [[kalshi]], Azuro, Manifold Markets, [[draftkings]], FanDuel
+- **Exchanges/Platforms:** [[polymarket]], [[kalshi]], Azuro, Manifold Markets, draftkings, FanDuel
 - **People:** [[shayne-coplan]], [[vitalik-buterin]], Donald Trump Jr., Ritchie Torres
-- **Companies:** [[intercontinental-exchange]], [[palantir-technologies]], Founders Fund, 1789 Capital, TWG AI, Chainalysis, UMA
+- **Companies:** intercontinental-exchange, palantir-technologies, Founders Fund, 1789 Capital, TWG AI, Chainalysis, UMA
 - **Protocols:** [[polygon]], UMA Optimistic Oracle, Conditional Token Framework
 - **Concepts:** [[prediction-markets]], [[ai-prediction-markets]], [[prediction-market-strategies]]
 - **Regulators:** [[cftc]], FBI, DOJ

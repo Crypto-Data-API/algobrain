@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [book, hft, market-microstructure, electronic-trading, history]
 aliases: ["Dark Pools", "Dark Pools Patterson"]
-related: ["[[dark-pool-trading]]", "[[low-latency-trading]]", "[[co-location]]", "[[market-making-strategy]]", "[[flash-boys]]", "[[nyse]]", "[[nasdaq]]", "[[dark-pools]]"]
+related: ["[[low-latency-trading]]", "[[co-location]]", "[[market-making-strategy]]", "[[flash-boys]]", "[[dark-pools]]"]
 source_type: book
 source_author: "Scott Patterson"
 source_date: 2012
@@ -14,15 +14,15 @@ confidence: high
 claims_count: 10
 ---
 
-Scott Patterson's *Dark Pools* traces the transformation of US equity markets from human-operated floor exchanges to the fragmented, algorithmic, high-speed electronic system of today. The narrative centers on Josh Levine, the self-taught programmer who built Island ECN — the first fully electronic stock exchange — in 1996, and follows the chain of innovation, regulation, and disruption that made human floor trading obsolete. Patterson documents the rise of electronic communication networks (ECNs), the emergence of [[dark-pool-trading|dark pools]], the passage of Regulation NMS (2005), the ascendancy of high-frequency trading, and the systemic fragility revealed by the May 2010 flash crash. The book provides essential historical context for understanding why modern market structure is fragmented, fast, and complex.
+Scott Patterson's *Dark Pools* traces the transformation of US equity markets from human-operated floor exchanges to the fragmented, algorithmic, high-speed electronic system of today. The narrative centers on Josh Levine, the self-taught programmer who built Island ECN — the first fully electronic stock exchange — in 1996, and follows the chain of innovation, regulation, and disruption that made human floor trading obsolete. Patterson documents the rise of electronic communication networks (ECNs), the emergence of dark pools, the passage of Regulation NMS (2005), the ascendancy of high-frequency trading, and the systemic fragility revealed by the May 2010 flash crash. The book provides essential historical context for understanding why modern market structure is fragmented, fast, and complex.
 
 ## Key Claims
 
 1. [HIGH] Josh Levine's Island ECN, launched in 1996, was the first fully electronic stock exchange. Built by a self-taught programmer frustrated with NASDAQ's dealer-dominated inefficiency, Island demonstrated that electronic matching was faster, cheaper, and more transparent than human market-making. It democratized market access by eliminating the informational advantages of established dealers. (Source: Scott Patterson)
 
-2. [HIGH] [[dark-pool-trading|Dark pools]] emerged because institutional investors (mutual funds, pension funds) needed to trade large blocks without revealing their orders to the public market. Exposing large orders to lit exchanges causes adverse price movement (market impact), so dark pools provided private venues for crossing large orders anonymously. However, many dark pools subsequently invited HFT firms as liquidity providers, compromising the original purpose. (Source: Scott Patterson)
+2. [HIGH] Dark pools emerged because institutional investors (mutual funds, pension funds) needed to trade large blocks without revealing their orders to the public market. Exposing large orders to lit exchanges causes adverse price movement (market impact), so dark pools provided private venues for crossing large orders anonymously. However, many dark pools subsequently invited HFT firms as liquidity providers, compromising the original purpose. (Source: Scott Patterson)
 
-3. [HIGH] The transition from floor-based to electronic trading happened rapidly in the 2000s. The [[nyse|NYSE]], which had operated a human open-outcry floor for over two centuries, went predominantly electronic by 2006-2007. The speed of the transition surprised many industry participants who expected a gradual evolution. (Source: Scott Patterson)
+3. [HIGH] The transition from floor-based to electronic trading happened rapidly in the 2000s. The NYSE, which had operated a human open-outcry floor for over two centuries, went predominantly electronic by 2006-2007. The speed of the transition surprised many industry participants who expected a gradual evolution. (Source: Scott Patterson)
 
 4. [HIGH] Regulation NMS (2005) mandated best execution across all trading venues by establishing the "order protection rule" — brokers must route orders to the venue offering the National Best Bid and Offer (NBBO). This fragmented markets across dozens of exchanges and dark pools and created latency arbitrage opportunities exploitable only by the fastest participants, effectively creating the business model for modern HFT. (Source: Scott Patterson)
 
@@ -40,19 +40,16 @@ Scott Patterson's *Dark Pools* traces the transformation of US equity markets fr
 
 ## Concepts Referenced
 
-- [[dark-pool-trading]], [[low-latency-trading]], [[co-location]]
+- dark-pool-trading, [[low-latency-trading]], [[co-location]]
 - [[market-making-strategy]], [[market-microstructure]]
-- [[nyse]], [[nasdaq]], [[island-ecn]]
-- [[reg-nms]], [[payment-for-order-flow]]
+- nyse, nasdaq, [[island-ecn]]
+- reg-nms, [[payment-for-order-flow]]
 - [[flash-crash-2010]], [[algorithmic-trading]]
 - [[smart-order-routing]], [[execution-quality]]
 
 ## Pages Backed
 
-- [[dark-pool-trading]] — historical origin, purpose, and evolution of dark pools
 - [[low-latency-trading]] — speed arms race in electronic markets
 - [[co-location]] — infrastructure advantage in the fragmented electronic market
 - [[market-making-strategy]] — transition from human specialists to algorithmic market makers
-- [[nyse]] — transition from floor to electronic trading
-- [[nasdaq]] — disruption by Island ECN and electronic alternatives
 - [[dark-pools]] — primary source for the education/concept page

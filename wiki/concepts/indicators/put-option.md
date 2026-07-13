@@ -70,7 +70,6 @@ breakeven = strike_price − premium_paid
 - [[crash-fear-premium]] — the premium for tail-risk put protection
 - [[greeks]] — the full set of option sensitivities
 - [[put-call-parity]] — the relationship linking puts, calls, and the underlying
-- [[cboe-put-putwrite-index]] — benchmark for systematic put writing
 
 ## Sources
 

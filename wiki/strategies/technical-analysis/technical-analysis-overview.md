@@ -36,7 +36,7 @@ This folder contains two sub-families: **chart/indicator strategies** (classical
 | Take a directional view with defined risk | Directional Spreads | [[vertical-spread]], [[bull-call-spread]], [[risk-reversal]] |
 | Generate income / sell premium | Income & Premium Selling | [[wheel-strategy]], [[iron-condor]], [[covered-call]] |
 | Trade volatility itself | Volatility & Multi-Leg | [[gamma-scalping]], [[volatility-arbitrage]], [[calendar-spread]] |
-| Hedge an existing position | Hedging & Repair | [[protective-put]], [[collar]], [[stock-repair]] |
+| Hedge an existing position | Hedging & Repair | [[protective-put]], [[collar]], stock-repair |
 | Understand the *indicators* themselves | Concept hub | [[indicators-overview]], [[rsi]], [[macd]] |
 
 ## Match the Tool to the Regime
@@ -107,7 +107,6 @@ The single biggest performance lever (see [[regime-matrix]] and [[regime-detecti
 - [[backspread]] — Reverse ratio: long extra options for convex payoff on a big move.
 - [[risk-reversal]] — Selling a put to finance a call (or vice versa) for synthetic direction.
 - [[synthetic-long]] — Long call plus short put replicating stock exposure.
-- [[synthetic-long-stock]] — Companion page on the synthetic stock position and its uses.
 
 ### Income & Premium Selling
 
@@ -140,8 +139,6 @@ The single biggest performance lever (see [[regime-matrix]] and [[regime-detecti
 - [[gamma-scalping]] — Dynamically hedging a long-gamma position to monetize realized volatility.
 - [[volatility-arbitrage]] — Trading implied vs realized volatility mispricings.
 - [[0dte-trading]] — Trading zero-days-to-expiry options on expiration day.
-- [[earnings-options-strategies]] — Structures for playing earnings-day volatility and IV crush.
-- [[leaps-strategies]] — Long-dated options as stock substitutes and leverage.
 - [[options-strategies]] — Master index of option structures and when to deploy them.
 
 ### Hedging & Repair
@@ -150,7 +147,6 @@ The single biggest performance lever (see [[regime-matrix]] and [[regime-detecti
 - [[married-put]] — Buying stock and put together as a packaged insured position.
 - [[collar]] — Financing put protection by selling a covered call.
 - [[collar-strategy]] — Companion page on collar construction and management.
-- [[stock-repair]] — Call-ratio structure to recover a losing stock position without adding capital.
 
 ## All Pages (auto)
 

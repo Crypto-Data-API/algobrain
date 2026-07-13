@@ -10,14 +10,14 @@ timeframe: medium-term (monthly rebalancing)
 markets: [stocks]
 complexity: advanced
 backtest_status: untested
-related: ["[[momentum-investing]]", "[[value-investing]]", "[[factor-investing]]", "[[price-to-earnings-ratio]]", "[[price-to-book-ratio]]", "[[relative-strength]]"]
+related: ["[[momentum-investing]]", "[[factor-investing]]", "[[relative-strength]]"]
 ---
 
 # Momentum-Value Combination
 
 ## Overview
 
-Value and momentum are two of the most well-documented return factors in financial history. [[value-investing]] — buying cheap assets based on low [[price-to-earnings-ratio]] or [[price-to-book-ratio]] — has generated excess returns over nearly every multi-decade period studied, across virtually every market in the world. [[momentum-investing]] — buying recent winners and selling recent losers based on 6-12 month price performance — has done the same, with comparable magnitude.
+Value and momentum are two of the most well-documented return factors in financial history. value-investing — buying cheap assets based on low price-to-earnings-ratio or price-to-book-ratio — has generated excess returns over nearly every multi-decade period studied, across virtually every market in the world. [[momentum-investing]] — buying recent winners and selling recent losers based on 6-12 month price performance — has done the same, with comparable magnitude.
 
 Here is what makes combining them extraordinary: **value and momentum are negatively correlated.** When value has a terrible year, momentum often has a great one. When momentum crashes, value tends to hold up. This negative correlation is not occasional — it has been consistent across decades and geographies. Combining two independently profitable factors that hedge each other's drawdowns is as close to a free lunch as investing gets.
 
@@ -33,7 +33,7 @@ Here is what makes combining them extraordinary: **value and momentum are negati
 
 | Component | Signal | What It Captures |
 |-----------|--------|-----------------|
-| [[value-investing]] | Low [[price-to-earnings-ratio]], low [[price-to-book-ratio]], high [[earnings-yield]] | Cheap stocks likely to mean-revert upward |
+| value-investing | Low price-to-earnings-ratio, low price-to-book-ratio, high earnings-yield | Cheap stocks likely to mean-revert upward |
 | [[momentum-investing]] | Strong 6-12 month [[relative-strength]], positive trend | Stocks with established upward trajectory |
 | Composite rank | Value rank + Momentum rank | Cheap stocks that are also moving up |
 
@@ -46,10 +46,7 @@ This is the purest form. Monthly process:
 1. **Universe selection.** Start with the largest 1000 US stocks (or an equivalent universe). Exclude financial stocks and REITs if desired (their value metrics are distorted).
 
 2. **Value rank.** For each stock, compute a composite value score from:
-   - [[price-to-earnings-ratio]] (trailing 12-month, lower is cheaper)
-   - [[price-to-book-ratio]] (lower is cheaper)
    - Enterprise value to EBITDA (lower is cheaper)
-   - [[earnings-yield]] vs. treasury yield (wider spread = cheaper)
    Rank all stocks from 1 (cheapest) to 1000 (most expensive).
 
 3. **Momentum rank.** For each stock, compute:
@@ -118,4 +115,4 @@ Equal-weight 50 such stocks at 2% each. Rebalance monthly.
 
 **Academic foundation:** Fama and French documented the value factor. Jegadeesh and Titman documented momentum. Asness showed the combination. This is among the most researched and validated strategies in all of finance.
 
-**See also:** [[factor-investing]], [[value-investing]], [[momentum-investing]], [[relative-strength]], [[quantitative-strategies]], [[portfolio-rebalancing]]
+**See also:** [[factor-investing]], value-investing, [[momentum-investing]], [[relative-strength]], [[quantitative-strategies]], [[portfolio-rebalancing]]

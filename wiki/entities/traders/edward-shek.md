@@ -7,16 +7,16 @@ status: good
 tags: [person, education, stocks, risk-management]
 entity_type: person
 aliases: ["Ed Shek"]
-related: ["[[itpm]]", "[[anton-kreil]]", "[[jason-mcdonald]]", "[[goldman-sachs]]", "[[jp-morgan]]", "[[long-short-equity]]", "[[risk-management]]"]
+related: ["[[anton-kreil]]", "[[jason-mcdonald]]", "[[risk-management]]"]
 ---
 
 # Edward Shek
 
-Edward Shek is a Senior Trading Mentor at the [[itpm|Institute of Trading and Portfolio Management]] with 25 years of professional trading experience (1994-2019) across [[goldman-sachs]], Cazenove, [[jp-morgan|JP Morgan]], and BCS Global.
+Edward Shek is a Senior Trading Mentor at the Institute of Trading and Portfolio Management with 25 years of professional trading experience (1994-2019) across goldman-sachs, Cazenove, JP Morgan, and BCS Global.
 
 ## Overview
 
-Shek is notable for profitably navigating the 2008-2009 financial crisis while trading European bank and insurance equities at Cazenove — an experience very few traders worldwide achieved. His career spans developed and emerging market equities, with expertise in managing $100M+ [[long-short-equity|long/short portfolios]].
+Shek is notable for profitably navigating the 2008-2009 financial crisis while trading European bank and insurance equities at Cazenove — an experience very few traders worldwide achieved. His career spans developed and emerging market equities, with expertise in managing $100M+ long/short portfolios.
 
 ## Key Facts
 
@@ -71,12 +71,8 @@ Shek's track record through the 2008 crisis gives him unique credibility on [[ri
 
 ## Related
 
-- [[itpm]] — the Institute of Trading and Portfolio Management, where Shek mentors
 - [[anton-kreil]] — ITPM founder and fellow ex-Goldman trader
 - [[jason-mcdonald]] — fellow ITPM senior trading mentor
-- [[goldman-sachs]] — first employer (1994-2003)
-- [[jp-morgan]] — acquired Cazenove in 2009; Shek's employer 2009-2019
-- [[long-short-equity]] — his core strategy throughout his institutional career
 - [[risk-management]] — his crisis-honed specialty
 - [[emerging-markets]] — CEEMEA / South Africa desk experience
 

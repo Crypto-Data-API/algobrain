@@ -26,8 +26,6 @@ For a cost-tier walkthrough that maps the free-to-paid edge boundary by asset cl
 
 ### Equities, fundamentals & general market data
 - [[yahoo-finance]] — free fundamentals, delayed quotes, options chains
-- [[finviz]] — screening, heatmaps, fundamental/technical filters
-- [[koyfin]] — "Bloomberg-lite" fundamentals and screening
 - [[alpha-vantage]] — multi-asset REST API with a free tier
 - [[finnhub]] — stocks/fundamentals/news API
 - [[polygon-io]] — institutional-grade real-time + historical stock/options API
@@ -38,20 +36,8 @@ For a cost-tier walkthrough that maps the free-to-paid edge boundary by asset cl
 - [[bloomberg-terminal]] — the full institutional stack
 
 ### Options analytics & volatility
-- [[orats]] — Option Research & Technology Services: smoothed IV surface, historical chains, backtester
-- [[orats-research]] — ORATS' public research arm (the Wheel, Earnings Effect, ranked screeners)
-- [[cboe-livevol]] / [[livevol]] — CBOE's institutional options data and analytics
-- [[opra]] — the Options Price Reporting Authority consolidated feed (the raw source)
-- [[optionmetrics]] — academic-grade options history (IvyDB)
-- [[unusual-whales]] — retail options flow and Congress tracker
-- [[spotgamma]] — gamma exposure (GEX) levels and dealer-positioning analytics
-- [[trade-alert]] — institutional options-flow alerting
-- [[option-samurai]] / [[optionsplay]] — retail options screening and trade ideas
 
 ### Institutional risk models (factor risk & optimization)
-- [[barra]] — MSCI Barra; the industry-standard multi-factor equity risk models
-- [[axioma]] — Qontigo Axioma; flexible factor models + integrated optimizer
-- [[northfield]] — affordable institutional-grade factor risk models
 
 ### Crypto, DeFi & on-chain
 - [[coingecko]] — broad coin prices, market cap, volume
@@ -67,12 +53,10 @@ For a cost-tier walkthrough that maps the free-to-paid edge boundary by asset cl
 - [[birdeye]] — Solana/multi-chain DEX analytics
 - [[etherscan]] — Ethereum block explorer / raw chain data
 - [[the-graph]] — indexed/queryable on-chain data via subgraphs
-- [[whalestream]] — large-transaction / whale alerts
 
 ### Macro, sentiment & alternative data
 - [[fred]] — macroeconomic time series (the macro gold standard)
 - [[fear-and-greed-index]] — CNN (stocks) + Alternative.me (crypto) sentiment gauges
-- [[quiver-quant]] — Congress trades, gov contracts, and other alternative datasets
 
 ## Pages
 

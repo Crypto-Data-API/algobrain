@@ -6,7 +6,7 @@ updated: 2026-06-10
 status: good
 tags: [arbitrage, crypto, defi, event-driven]
 aliases: ["Fork Arb", "Airdrop Arbitrage", "Hard Fork Triangulation"]
-related: ["[[triangular-arbitrage]]", "[[airdrop-farming]]", "[[hard-fork]]", "[[replay-attack]]", "[[fork-futures-spot-basis]]", "[[2017-08-bitcoin-cash-fork-arbitrage]]", "[[2016-07-ethereum-dao-fork-arbitrage]]", "[[2017-10-bitcoin-gold-fork-arbitrage]]", "[[2018-11-bitcoin-cash-sv-fork-arbitrage]]", "[[2020-03-steem-hive-fork-arbitrage]]", "[[2022-05-terra-luna-2-fork-arbitrage]]", "[[2022-09-ethereum-merge-fork-arbitrage]]", "[[2026-fork-watchlist]]", "[[corporate-action-arbitrage]]", "[[ai-amplified-exploit-arbitrage]]", "[[2026-exploit-target-watchlist]]"]
+related: ["[[triangular-arbitrage]]", "[[airdrop-farming]]", "[[hard-fork]]", "[[replay-attack]]", "[[fork-futures-spot-basis]]", "[[2017-08-bitcoin-cash-fork-arbitrage]]", "[[2016-07-ethereum-dao-fork-arbitrage]]", "[[2017-10-bitcoin-gold-fork-arbitrage]]", "[[2018-11-bitcoin-cash-sv-fork-arbitrage]]", "[[2020-03-steem-hive-fork-arbitrage]]", "[[2022-05-terra-luna-2-fork-arbitrage]]", "[[2022-09-ethereum-merge-fork-arbitrage]]", "[[2026-fork-watchlist]]", "[[ai-amplified-exploit-arbitrage]]", "[[2026-exploit-target-watchlist]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [crypto]
@@ -177,4 +177,4 @@ Per-event capacity bound by parent-asset accumulation cost. Strategy-level capac
 
 ## Related
 
-[[hard-fork]] · [[replay-attack]] · [[fork-futures-spot-basis]] · [[triangular-arbitrage]] · [[airdrop-farming]] · [[2017-08-bitcoin-cash-fork-arbitrage]] · [[2016-07-ethereum-dao-fork-arbitrage]] · [[2017-10-bitcoin-gold-fork-arbitrage]] · [[2018-11-bitcoin-cash-sv-fork-arbitrage]] · [[2020-03-steem-hive-fork-arbitrage]] · [[2022-05-terra-luna-2-fork-arbitrage]] · [[2022-09-ethereum-merge-fork-arbitrage]] · [[2026-fork-watchlist]] · [[corporate-action-arbitrage]] · [[points-farming]] · [[crypto-spot-perp-futures-triangle]] · [[ai-amplified-exploit-arbitrage]] · [[2026-exploit-target-watchlist]]
+[[hard-fork]] · [[replay-attack]] · [[fork-futures-spot-basis]] · [[triangular-arbitrage]] · [[airdrop-farming]] · [[2017-08-bitcoin-cash-fork-arbitrage]] · [[2016-07-ethereum-dao-fork-arbitrage]] · [[2017-10-bitcoin-gold-fork-arbitrage]] · [[2018-11-bitcoin-cash-sv-fork-arbitrage]] · [[2020-03-steem-hive-fork-arbitrage]] · [[2022-05-terra-luna-2-fork-arbitrage]] · [[2022-09-ethereum-merge-fork-arbitrage]] · [[2026-fork-watchlist]] · corporate-action-arbitrage · [[points-farming]] · [[crypto-spot-perp-futures-triangle]] · [[ai-amplified-exploit-arbitrage]] · [[2026-exploit-target-watchlist]]

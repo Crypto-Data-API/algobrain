@@ -26,7 +26,7 @@ decay_evidence: "ETHW (Sep 2022) peak IOU $140 vs realized $5-10. UNI futures pr
 
 # Fork Futures / Spot IOU Basis Arbitrage
 
-The strategy of **shorting pre-fork IOU futures (or pre-launch perpetuals) against an expected delivery of the forked / airdropped asset at the snapshot**. It is an event-driven [[arbitrage]] trade in the basis/convergence family — conceptually a crypto cousin of [[risk-arbitrage]], where the "deal" is the fork/snapshot event and the convergence is the IOU price falling to realized post-fork distribution value. Specialization within [[fork-airdrop-triangulation]] focused specifically on the futures-vs-spot basis rather than cross-exchange spot lag. The canonical execution venue is OKEx (historical), Poloniex, [[hyperliquid|Hyperliquid]], MEXC, and Bybit; the canonical example is the [[2022-09-ethereum-merge-fork-arbitrage|ETHW Merge fork]] of September 2022.
+The strategy of **shorting pre-fork IOU futures (or pre-launch perpetuals) against an expected delivery of the forked / airdropped asset at the snapshot**. It is an event-driven [[arbitrage]] trade in the basis/convergence family — conceptually a crypto cousin of risk-arbitrage, where the "deal" is the fork/snapshot event and the convergence is the IOU price falling to realized post-fork distribution value. Specialization within [[fork-airdrop-triangulation]] focused specifically on the futures-vs-spot basis rather than cross-exchange spot lag. The canonical execution venue is OKEx (historical), Poloniex, [[hyperliquid|Hyperliquid]], MEXC, and Bybit; the canonical example is the [[2022-09-ethereum-merge-fork-arbitrage|ETHW Merge fork]] of September 2022.
 
 ### Pre-fork IOU vs. analogous "claim-below-intrinsic" trades
 
@@ -233,7 +233,6 @@ Total annual addressable: $200-500M industry-wide.
 ## Related
 
 - [[arbitrage]] — parent concept
-- [[risk-arbitrage]] — event-convergence cousin
 - [[limits-to-arbitrage]] — why IOUs stay over-priced
 - [[gbtc-discount-arbitrage]], [[lst-depeg-arbitrage]], [[bankruptcy-claim-arbitrage]] — claim-vs-terminal-value siblings
 - [[hyperliquid]] — execution venue for pre-launch perps

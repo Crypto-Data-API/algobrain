@@ -11,7 +11,7 @@ markets_affected: [stocks, options, credit, mortgage, treasuries, commodities]
 impact: high
 verified: true
 sources_count: 8
-related: ["[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[covid-crash]]", "[[vix-august-2024-spike]]", "[[black-monday]]", "[[long-term-capital-management]]", "[[lehman-brothers]]", "[[bear-stearns]]", "[[aig]]", "[[fannie-mae]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[2007-2008-burry-subprime-cds-trade]]", "[[michael-burry]]", "[[federal-reserve]]", "[[tarp]]", "[[mortgage-backed-securities]]", "[[credit-default-swap]]", "[[variance-risk-premium]]", "[[long-vol-overlay]]", "[[volatility-regime-classification]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[covid-crash]]", "[[vix-august-2024-spike]]", "[[black-monday]]", "[[long-term-capital-management]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[tail-risk-hedging]]", "[[2007-2008-burry-subprime-cds-trade]]", "[[michael-burry]]", "[[federal-reserve]]", "[[tarp]]", "[[mortgage-backed-securities]]", "[[credit-default-swap]]", "[[variance-risk-premium]]", "[[long-vol-overlay]]", "[[volatility-regime-classification]]"]
 ---
 
 The Global Financial Crisis (GFC) was the worst US financial crisis since the Great Depression. From its **October 9 2007** SPX peak of 1565.15 to its **March 9 2009** SPX intraday low of 666.79, the S&P 500 fell **-57.4%** over 17 months. The defining event was the **Lehman Brothers bankruptcy on September 15 2008**, which triggered a global cross-asset deleveraging cascade and the most rapid escalation of central-bank and fiscal interventions in postwar history. The GFC remains the largest peak-to-trough US equity drawdown of the modern era and is one of the formative reference events in [[long-vol-vs-short-vol|long-vol versus short-vol]] book performance, alongside [[black-monday|1987]] and [[covid-crash|2020]].
@@ -27,11 +27,11 @@ The crisis had a long fundamental fuse and a short violent climax. From 2003 to 
 | Feb 2007 | HSBC $10.5B subprime writedown; New Century files Ch.11 (Apr) | First cracks |
 | Jun-Aug 2007 | Bear Stearns funds collapse; BNP freezes funds (Aug 9); ECB injects EUR95B | LIBOR-OIS blows out |
 | Oct 9, 2007 | SPX all-time closing high **1565.15** | VIX ~16 |
-| Mar 16, 2008 | [[bear-stearns|Bear Stearns]] sold to JPMorgan ($2->$10/sh), $29B Fed loan | First bank rescue |
+| Mar 16, 2008 | Bear Stearns sold to JPMorgan ($2->$10/sh), $29B Fed loan | First bank rescue |
 | Jul 2008 | Oil peaks above **$147/bbl** | Commodity blow-off |
-| Sep 7, 2008 | [[fannie-mae|Fannie Mae]] & Freddie Mac into conservatorship | GSE backstop |
-| Sep 15, 2008 | **[[lehman-brothers|Lehman]] files Ch.11** ($639B assets); BofA buys Merrill | SPX -4.7%, VIX 25->31 |
-| Sep 16, 2008 | Fed **$85B** loan to [[aig|AIG]] (79.9% stake); Reserve Primary "breaks the buck" | MMF run |
+| Sep 7, 2008 | Fannie Mae & Freddie Mac into conservatorship | GSE backstop |
+| Sep 15, 2008 | **Lehman files Ch.11** ($639B assets); BofA buys Merrill | SPX -4.7%, VIX 25->31 |
+| Sep 16, 2008 | Fed **$85B** loan to AIG (79.9% stake); Reserve Primary "breaks the buck" | MMF run |
 | Sep 17-19, 2008 | [[tarp|TARP]] ($700B) proposed; SEC bans shorting 799 financials | SPX +4%/+4% |
 | Sep 29, 2008 | House **rejects TARP** 228-205 | SPX **-8.8%**; VIX 46.7 |
 | Oct 3, 2008 | Revised TARP passes | -- |
@@ -88,7 +88,7 @@ The **peak-to-trough was -57.4% over 17 months**. The full round-trip back to th
 |---|---|---|
 | Subprime default cascade | House prices fell ~30% (2006-2012); subprime defaults ran 5-10x model assumptions | Diversification assumptions failed in a *national* housing decline |
 | Securitisation pyramid | [[mortgage-backed-securities|MBS]] -> CDOs -> CDOs-of-CDOs | A 5% pool default could wipe 100% of mezzanine/subordinate tranches |
-| Counterparty contagion | [[aig|AIG]]'s ~$440B [[credit-default-swap|CDS]] on subprime CDOs | Opaque bilateral derivatives: nobody knew counterparties' counterparties |
+| Counterparty contagion | AIG's ~$440B [[credit-default-swap|CDS]] on subprime CDOs | Opaque bilateral derivatives: nobody knew counterparties' counterparties |
 | Funding-market freeze | Repo, commercial paper, interbank lending seized post-Lehman | Even IG firms could not roll CP; Fed had to fund non-banks |
 
 Four compounding mechanisms:
@@ -136,7 +136,7 @@ Implications for vol books:
 - **[[universa-investments|Universa]]'s 2008 result** is one of the two banner monetizations of the modern long-vol track record (the other being March 2020). The fund was barely two years old at year-end 2008; the result anchored Spitznagel's career and the broader [[tail-risk-hedging]] thesis.
 - **The skew got steeper.** Post-GFC, the SPX OTM-put skew widened further from the post-1987 level. The structural premium for crash protection -- and the reciprocal income for selling it -- has been visibly higher in the 2009-present regime than the 1990-2007 regime.
 - **[[long-vol-overlay]]** strategies -- the synthesis described in [[long-vol-vs-short-vol]] -- emerged as institutional best practice during 2009-2012 in direct response to the GFC. Allocators that had run naked short-vol or naked-equity books rebuilt with explicit overlays.
-- **CDS as tail hedge.** The GFC also legitimised CDS protection on credit indices (CDX IG, CDX HY) as a portfolio tail hedge. The same logic was deployed by [[bill-ackman]] in the [[2020-03-ackman-pandemic-cds-trade|March 2020 trade]].
+- **CDS as tail hedge.** The GFC also legitimised CDS protection on credit indices (CDX IG, CDX HY) as a portfolio tail hedge. The same logic was deployed by bill-ackman in the [[2020-03-ackman-pandemic-cds-trade|March 2020 trade]].
 
 ## Cross-Asset Impact and Policy Response
 
@@ -144,7 +144,7 @@ Peak-to-trough damage was broad; only the highest-quality safe havens carried po
 
 | Asset / market | Approximate move (2007 peak -> 2009 trough) | Note |
 |---|---|---|
-| S&P 500 ([[sp500]]) | **-57.4%** | Largest modern US equity drawdown |
+| S&P 500 (sp500) | **-57.4%** | Largest modern US equity drawdown |
 | VIX | ~16 -> intraday 89.53 / close 80.86 | Record close until [[covid-crash|March 2020]] |
 | US house prices (Case-Shiller) | ~-30% (2006 peak to 2012 trough) | The root collateral decline |
 | Crude oil | $147 (Jul 2008) -> ~$32 (Dec 2008) | Demand collapse and forced deleveraging |
@@ -157,9 +157,9 @@ The official response escalated from targeted rescues to a wholesale backstop of
 | Tool | Date | Purpose |
 |---|---|---|
 | Inter-meeting rate cuts | Jan 2008 onward | Ease funding stress |
-| [[bear-stearns|Bear Stearns]] facility | Mar 2008 | $29B JPMorgan-backed loan |
-| GSE conservatorship | Sep 7, 2008 | Stabilise [[fannie-mae|Fannie]]/Freddie |
-| [[aig|AIG]] bridge loan | Sep 16, 2008 | $85B for 79.9% stake; stop CDS cascade |
+| Bear Stearns facility | Mar 2008 | $29B JPMorgan-backed loan |
+| GSE conservatorship | Sep 7, 2008 | Stabilise Fannie/Freddie |
+| AIG bridge loan | Sep 16, 2008 | $85B for 79.9% stake; stop CDS cascade |
 | MMF guarantee + CPFF | Sep-Oct 2008 | Backstop money-market and commercial-paper runs |
 | [[tarp|TARP]] | Oct 3, 2008 | $700B troubled-asset / bank-capital program |
 | Bank-debt guarantee (FDIC TLGP) | Oct 2008 | Guarantee new senior bank debt |
@@ -179,8 +179,6 @@ The official response escalated from targeted rescues to a wholesale backstop of
 - [[long-term-capital-management]] -- 1998 LTCM, the credit-vol precursor
 - [[black-monday]] -- 1987, the original modern vol shock
 - [[covid-crash]], [[volmageddon]], [[vix-august-2024-spike]] -- subsequent vol shocks
-- [[lehman-brothers]] -- the bankruptcy that defined September 2008
-- [[bear-stearns]], [[aig]], [[fannie-mae]] -- the other major casualty firms
 - [[2007-2008-burry-subprime-cds-trade]], [[michael-burry]] -- canonical subprime short
 - [[universa-investments]], [[mark-spitznagel]], [[nassim-taleb]] -- long-vol survivors
 - [[tail-risk-hedging]] -- the strategy validated by 2008

@@ -6,18 +6,18 @@ updated: 2026-04-07
 status: good
 tags: [technical-analysis, breakout, momentum]
 aliases: ["Cup with Handle", "Cup & Handle Pattern"]
-related: ["[[breakout-strategies]]", "[[william-o-neil]]", "[[volume-analysis]]", "[[chart-patterns]]", "[[canslim]]", "[[relative-strength]]"]
+related: ["[[breakout-strategies]]", "[[volume-analysis]]", "[[chart-patterns]]", "[[relative-strength]]"]
 domain: [technical-analysis]
 difficulty: intermediate
 ---
 
-The cup and handle is a bullish continuation [[chart-patterns|chart pattern]] identified by [[william-o-neil]] as one of the most powerful base formations preceding major price advances. It consists of a rounded bottom (the cup) followed by a smaller downward consolidation (the handle), which resolves with a [[breakout-strategies|breakout]] to new highs. The pattern appears across all markets and timeframes but is most significant on daily and weekly charts.
+The cup and handle is a bullish continuation [[chart-patterns|chart pattern]] identified by william-o-neil as one of the most powerful base formations preceding major price advances. It consists of a rounded bottom (the cup) followed by a smaller downward consolidation (the handle), which resolves with a [[breakout-strategies|breakout]] to new highs. The pattern appears across all markets and timeframes but is most significant on daily and weekly charts.
 
 ## Overview
 
-William O'Neil documented the cup and handle extensively in [[book-how-to-make-money-in-stocks]], finding it in the majority of the best-performing stocks before their largest advances. The pattern represents a natural cycle of selling pressure, gradual recovery, a final shakeout of weak holders (the handle), and then the resumption of the uptrend with strong demand.
+William O'Neil documented the cup and handle extensively in book-how-to-make-money-in-stocks, finding it in the majority of the best-performing stocks before their largest advances. The pattern represents a natural cycle of selling pressure, gradual recovery, a final shakeout of weak holders (the handle), and then the resumption of the uptrend with strong demand.
 
-The cup and handle is central to the [[canslim]] methodology, where the "base breakout" is the primary buy signal. O'Neil's research, spanning decades of market history, showed that stocks forming proper cup-and-handle bases with strong [[relative-strength]] and [[fundamental-analysis|fundamentals]] had the highest probability of producing outsized gains.
+The cup and handle is central to the canslim methodology, where the "base breakout" is the primary buy signal. O'Neil's research, spanning decades of market history, showed that stocks forming proper cup-and-handle bases with strong [[relative-strength]] and fundamentals had the highest probability of producing outsized gains.
 
 Key characteristics:
 - **Duration**: cups typically form over 7 to 65 weeks; handles over 1 to several weeks
@@ -63,7 +63,7 @@ The minimum price target is the depth of the cup projected upward from the break
 ## Trading Applications
 
 ### Entry Rules (O'Neil Method)
-1. Identify a stock with strong [[fundamental-analysis|fundamentals]] (earnings growth, sales growth, ROE)
+1. Identify a stock with strong fundamentals (earnings growth, sales growth, ROE)
 2. Confirm the cup and handle meets the criteria above
 3. Buy as the stock breaks above the handle's resistance on heavy volume
 4. Set a [[stop-loss]] 7-8% below the purchase price -- O'Neil's maximum loss rule
@@ -86,13 +86,10 @@ A failed breakout that reverses below the buy point triggers the 7-8% stop-loss 
 
 - [[chart-patterns]] -- broader category of price formations
 - [[breakout-strategies]] -- trading approaches built around breakouts from bases
-- [[william-o-neil]] -- developed and popularized the cup and handle pattern
-- [[canslim]] -- O'Neil's full investment methodology incorporating the pattern
 - [[volume-analysis]] -- essential for confirming breakouts
 - [[relative-strength]] -- key filter for identifying the best cup and handle setups
 - [[flags-and-pennants]] -- related continuation patterns
 
 ## Sources
 
-- [[book-how-to-make-money-in-stocks]] -- O'Neil's definitive treatment of the cup and handle pattern
 - [[book-technical-analysis-of-the-financial-markets]] -- broader context of chart pattern analysis

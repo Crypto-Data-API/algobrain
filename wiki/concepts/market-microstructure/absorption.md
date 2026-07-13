@@ -35,7 +35,7 @@ Aggressive buyers push price up into a resistance zone. Passive sell limit order
 1. **High volume, low displacement**: The most basic signal. Look for price levels on the [[footprint-charts|footprint chart]] where traded volume is 3-5x or more the average for that session, but the candle body is small or the level shows no price movement.
 2. **Delta vs. price disagreement**: During buy-side absorption, delta is negative (more aggressive selling) but price is not falling. During sell-side absorption, delta is positive but price is not rising. This divergence between aggression and result is the hallmark of absorption.
 3. **Repeated prints at the same price**: On the time-and-sales (tape), you see the same bid price being hit over and over with large or rapid fills. The passive order is being "reloaded" -- each time a clip fills, a new one appears. This may also indicate [[iceberg-orders]].
-4. **Order book behavior**: On [[bookmap]] or depth-of-market tools, you may see a large resting order that does not deplete despite sustained aggressive flow. However, sophisticated participants often hide their orders (see [[iceberg-orders]]), so the order book alone is unreliable.
+4. **Order book behavior**: On bookmap or depth-of-market tools, you may see a large resting order that does not deplete despite sustained aggressive flow. However, sophisticated participants often hide their orders (see [[iceberg-orders]]), so the order book alone is unreliable.
 
 ## Significance
 

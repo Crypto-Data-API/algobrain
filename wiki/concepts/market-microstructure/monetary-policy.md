@@ -27,7 +27,7 @@ Changes in bank reserves alter lending capacity. When the [[federal-reserve|Fed]
 
 ### Asset Price Channel
 
-Lower rates mechanically increase the present value of future cash flows, pushing up [[equity-options|equity]] and bond valuations. Rising asset prices create a wealth effect — households and firms feel richer and spend more. This channel is the one traders interact with most directly: rate cuts tend to be bullish for [[stocks]], rate hikes tend to be bearish, all else equal.
+Lower rates mechanically increase the present value of future cash flows, pushing up equity and bond valuations. Rising asset prices create a wealth effect — households and firms feel richer and spend more. This channel is the one traders interact with most directly: rate cuts tend to be bullish for stocks, rate hikes tend to be bearish, all else equal.
 
 ### Exchange Rate Channel
 

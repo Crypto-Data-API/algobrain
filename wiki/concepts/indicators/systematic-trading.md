@@ -40,7 +40,7 @@ Most professional desks are not purely one or the other: a common hybrid is **sy
 A systematic trading strategy has several components:
 
 1. **Universe selection**: Which markets or instruments to trade. Some systems trade a single asset (e.g., S&P 500 futures); others trade across hundreds of instruments globally.
-2. **Signal generation**: Rules that produce buy/sell signals. Can be based on [[technical-analysis]] indicators (moving averages, [[rsi]], breakouts), fundamental data ([[earnings]], valuation ratios), statistical measures (mean reversion, momentum scores), or [[alternative-data]].
+2. **Signal generation**: Rules that produce buy/sell signals. Can be based on [[technical-analysis]] indicators (moving averages, [[rsi]], breakouts), fundamental data (earnings, valuation ratios), statistical measures (mean reversion, momentum scores), or [[alternative-data]].
 3. **Position sizing**: Rules determining how large each position should be, often based on [[volatility]]-adjusted methods (e.g., risk a fixed percentage of equity per trade, size inversely to [[atr]]).
 4. **Entry rules**: Exact conditions for opening a position. Must be unambiguous and computable.
 5. **Exit rules**: Conditions for closing positions — profit targets, [[stop-loss]] levels, [[trailing-stop]] levels, time-based exits, or signal reversals.

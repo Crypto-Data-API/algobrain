@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://chain.link/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[defi]]", "[[aave]]", "[[gmx]]", "[[curve-finance]]", "[[uniswap]]", "[[lido]]", "[[bitcoin]]", "[[hyperliquid]]", "[[pyth-network]]", "[[restaking]]", "[[narrative-trading]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[aave]]", "[[gmx]]", "[[curve-finance]]", "[[uniswap]]", "[[lido]]", "[[bitcoin]]", "[[hyperliquid]]", "[[pyth-network]]", "[[restaking]]", "[[narrative-trading]]"]
 ---
 
 # Chainlink
@@ -52,7 +52,7 @@ Backdrop: the [[crypto-fear-and-greed-index|Fear & Greed Index]] reads **22 (ext
 | **Market Cap Rank** | #20 (2026-06-20) |
 | **Market Cap** | $5.95B (2026-06-20) |
 | **Price** | $7.95 (2026-06-20); $8.77 at April 2026 snapshot |
-| **Chain / Sector** | Ethereum-native ERC-20, deployed on 20+ chains; [[oracle]] / interoperability / RWA infrastructure |
+| **Chain / Sector** | Ethereum-native ERC-20, deployed on 20+ chains; oracle / interoperability / RWA infrastructure |
 | **Supply Mechanics** | Fixed 1B max supply; ~748M circulating (June 2026); team/treasury holds the remainder |
 | **Genesis Date** | 2017-09-16 (ICO raised $32M) |
 | **Website** | [https://chain.link/](https://chain.link/) |
@@ -73,7 +73,7 @@ The LINK token is the native asset used to pay node operators for services, fund
 
 ### The oracle problem and Chainlink's architecture
 
-Blockchains are deterministic, isolated state machines: a smart contract cannot natively fetch an off-chain fact (a price, a sports result, weather, a Swift message) without a trusted bridge. That bridge is an [[oracle]], and a single oracle reintroduces a central point of failure. Chainlink's answer is a **Decentralized Oracle Network (DON)**: a committee of independent node operators each fetch a data point from multiple sources, the responses are aggregated (median/weighted), and a single consensus value is written on-chain. Crypto-economic security (staking + slashing + reputation) deters individual nodes from reporting bad data.
+Blockchains are deterministic, isolated state machines: a smart contract cannot natively fetch an off-chain fact (a price, a sports result, weather, a Swift message) without a trusted bridge. That bridge is an oracle, and a single oracle reintroduces a central point of failure. Chainlink's answer is a **Decentralized Oracle Network (DON)**: a committee of independent node operators each fetch a data point from multiple sources, the responses are aggregated (median/weighted), and a single consensus value is written on-chain. Crypto-economic security (staking + slashing + reputation) deters individual nodes from reporting bad data.
 
 ### Data delivery models
 
@@ -251,7 +251,7 @@ Chainlink is critical infrastructure for hundreds of DeFi protocols. A Chainlink
 
 LINK is hard to value on cash flows because oracle fees are still partially emission-subsidized. Useful handles:
 
-- **Protocol fee capture** — total fees paid to the network for Data Feeds, [[oracle|oracle]] services, VRF, Automation and CCIP, minus node-operator compensation. Net network revenue is the true numerator; track it on Token Terminal / Dune.
+- **Protocol fee capture** — total fees paid to the network for Data Feeds, oracle services, VRF, Automation and CCIP, minus node-operator compensation. Net network revenue is the true numerator; track it on Token Terminal / Dune.
 - **Value-accrual flywheel** — the **Chainlink Reserve** (Aug 2025) converts off-chain enterprise revenue into on-chain LINK accumulation. Reserve inflow rate is the cleanest new fundamental to watch: it is the first mechanism linking enterprise revenue to token demand.
 - **CCIP volume × take-rate** — cross-chain value secured × fee bps gives an addressable-revenue estimate as interop scales.
 - **Staking-locked supply / float** — staked LINK (45M in v0.2) removes float; a rising staked-supply ratio tightens effective supply.
@@ -443,7 +443,6 @@ Chainlink is deployed across 20+ blockchains. LINK token is available on virtual
 - [[lido]] -- stETH/ETH price feeds provided by Chainlink
 - [[uniswap]] -- v4 hooks can integrate Chainlink oracles
 - [[pyth-network]] -- leading oracle competitor (peer comparison above)
-- [[oracle]] -- the concept Chainlink operationalizes
 - [[restaking]] -- adjacent crypto-economic-security primitive
 
 ---

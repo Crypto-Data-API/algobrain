@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [itpm, education, person, risk-management, portfolio-theory, behavioral-finance]
 aliases: ["Five Principles Behind Ten Secrets", "ITPM Five Principles"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[itpm-ten-secrets]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[compounding]]", "[[reits]]", "[[behavioral-finance]]"]
+related: ["[[anton-kreil]]", "[[itpm-ten-secrets]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[compounding]]", "[[behavioral-finance]]"]
 source_type: video
 source_url: "https://www.youtube.com/watch?v=hzFl0uDwAQY"
 source_author: "Anton Kreil"
@@ -48,7 +48,7 @@ A London seminar presented by [[anton-kreil]] (May 2018) that distills the under
 
 12. [MEDIUM] Renting + investing the deposit at 10%: Even after paying $600K in rent over 30 years, you end up $708K richer than the mortgage scenario, with 100% freedom maintained. (Source: [[anton-kreil]] — illustrative calculation)
 
-13. [MEDIUM] "Passive income" from buy-to-let properties is a lie — landlords work constantly on properties. For genuine passive real estate income, buy [[reits|REITs (Real Estate Investment Trusts)]] instead. (REITs are legally required to distribute the large majority of taxable income to shareholders — e.g. ~90% under the US REIT regime — a verifiable statutory fact [HIGH]; the "buy-to-let is a lie" framing and the cited 6-9% residential REIT yields are opinion/period-specific.) (Source: [[anton-kreil]])
+13. [MEDIUM] "Passive income" from buy-to-let properties is a lie — landlords work constantly on properties. For genuine passive real estate income, buy REITs (Real Estate Investment Trusts) instead. (REITs are legally required to distribute the large majority of taxable income to shareholders — e.g. ~90% under the US REIT regime — a verifiable statutory fact [HIGH]; the "buy-to-let is a lie" framing and the cited 6-9% residential REIT yields are opinion/period-specific.) (Source: [[anton-kreil]])
 
 14. [MEDIUM] Demographic headwinds: Western birth rates are plummeting. If a country's birth rate is 1 child per family, the population halves over a generation. "The buildings will still be there but there's half the amount of people." This undermines long-term property speculation. (Source: [[anton-kreil]] — opinion; declining Western fertility is broadly verifiable but the property conclusion is argument)
 
@@ -99,15 +99,14 @@ A London seminar presented by [[anton-kreil]] (May 2018) that distills the under
 ## Entities Mentioned
 
 - [[anton-kreil]] — presenter, ITPM founder
-- [[itpm]] — Institute of Trading and Portfolio Management
 - [[milton-friedman]] — economist, quoted on capitalism
 - Tom — filmmaker who created the 10 Secrets video with Kreil
 
 ## Concepts Referenced
 
-- [[reits]], [[compounding]], [[opportunity-cost]]
+- reits, [[compounding]], [[opportunity-cost]]
 - [[risk-management-overview]], [[behavioral-finance]]
-- [[portfolio-theory]], [[freedom-as-asset]]
+- [[portfolio-theory]], freedom-as-asset
 - [[mortgages]], [[pensions]], [[tax-efficiency]]
 
 ## Sources

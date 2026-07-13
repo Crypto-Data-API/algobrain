@@ -12,7 +12,7 @@ difficulty: beginner
 related: ["[[diversification]]", "[[two-portfolio-strategy]]", "[[cash-as-asset]]", "[[portfolio-construction]]", "[[sector-rotation]]", "[[rebalancing]]", "[[risk-parity]]", "[[all-weather-portfolio]]", "[[modern-portfolio-theory]]"]
 ---
 
-Asset allocation is the process of dividing a portfolio across different asset classes (equities, bonds, cash, commodities, real estate) to balance risk and return. It is the practical implementation of [[diversification]] at the highest level of a portfolio and the lever that [[modern-portfolio-theory|Modern Portfolio Theory]] identifies as the primary driver of the risk/return outcome. [[fred-mcnaught|Fred]] practises asset allocation through his [[two-portfolio-strategy]] (core + trading), maintaining [[cash-as-asset|cash as a distinct asset class]], and diversifying across sectors ([[gics-classification|GICS sectors]]) and geographies (domestic + international via SelfWealth).
+Asset allocation is the process of dividing a portfolio across different asset classes (equities, bonds, cash, commodities, real estate) to balance risk and return. It is the practical implementation of [[diversification]] at the highest level of a portfolio and the lever that [[modern-portfolio-theory|Modern Portfolio Theory]] identifies as the primary driver of the risk/return outcome. Fred practises asset allocation through his [[two-portfolio-strategy]] (core + trading), maintaining [[cash-as-asset|cash as a distinct asset class]], and diversifying across sectors (GICS sectors) and geographies (domestic + international via SelfWealth).
 
 ## Why Asset Allocation Matters
 
@@ -26,7 +26,7 @@ Each asset class earns a distinct risk premium and behaves differently across th
 
 | Asset class | Primary role | Typical real return | Volatility | Behaves best in |
 |-------------|--------------|---------------------|------------|-----------------|
-| Equities ([[sp500\|stocks]]) | Growth engine | High (~5-7% real) | High | Expansion / disinflation |
+| Equities (stocks) | Growth engine | High (~5-7% real) | High | Expansion / disinflation |
 | Government [[bonds\|bonds]] | Deflation hedge, ballast | Low-moderate | Low-moderate | Recession / risk-off |
 | Credit (corporate bonds) | Yield with some growth beta | Moderate | Moderate | Mid-cycle |
 | [[cash-as-asset\|Cash]] / T-bills | Liquidity, dry powder, optionality | ~0% real | Near zero | Rate hikes / stress |
@@ -75,7 +75,7 @@ The portfolio is now meaningfully riskier than intended. [[rebalancing|Rebalanci
 - **Top-down framing:** decide the asset mix *first*, then populate each sleeve with specific holdings -- the opposite of starting from individual stock ideas.
 - **Risk budgeting:** treat the allocation as a risk budget. A [[two-portfolio-strategy]] separates a stable core (income, index, infrastructure) from an active trading book that carries a deliberately small, capped share of risk.
 - **Cash as a position:** holding [[cash-as-asset|cash]] is an active choice, not a failure to invest -- it provides optionality and dry powder for drawdowns.
-- **Sector and geographic tilts:** within equities, allocation extends to [[sector-rotation|sectors]] ([[gics-classification|GICS]]) and regions, capturing diversification benefits beyond the stock/bond split.
+- **Sector and geographic tilts:** within equities, allocation extends to [[sector-rotation|sectors]] (GICS) and regions, capturing diversification benefits beyond the stock/bond split.
 
 ## Common Pitfalls and Risks
 

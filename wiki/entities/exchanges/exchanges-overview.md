@@ -18,7 +18,6 @@ This section covers both centralized exchanges (CEXs) and decentralized exchange
 ## Start Here
 
 - [[exchange-data-sources]] -- Master reference of official data endpoints for all major exchanges
-- [[nyse-vs-nasdaq]] -- Comparison of the two dominant US exchanges
 - [[centralized-vs-decentralized-exchanges]] -- The CEX/DEX trade-off (custody, KYC, liquidity, smart-contract risk)
 - [[exchange-risk]] -- Counterparty and solvency risk (the [[ftx]] case study)
 
@@ -35,20 +34,20 @@ This section covers both centralized exchanges (CEXs) and decentralized exchange
 
 | Exchange | Ticker Prefix | Market Cap | Region |
 |----------|--------------|------------|--------|
-| [[nyse]] | — | ~$28T | USA |
-| [[nasdaq]] | — | ~$25T | USA |
-| [[london-stock-exchange]] | LON | ~$3.5T | UK |
-| [[hong-kong-stock-exchange]] | HKG | ~$4T | Asia |
-| [[national-stock-exchange-india]] | NSE | — | India |
-| [[bombay-stock-exchange]] | BOM | — | India |
-| [[asx-limited]] | ASX | ~AUD $1.5T | Australia |
+| nyse | — | ~$28T | USA |
+| nasdaq | — | ~$25T | USA |
+| london-stock-exchange | LON | ~$3.5T | UK |
+| hong-kong-stock-exchange | HKG | ~$4T | Asia |
+| national-stock-exchange-india | NSE | — | India |
+| bombay-stock-exchange | BOM | — | India |
+| asx-limited | ASX | ~AUD $1.5T | Australia |
 | [[euronext]] | — | — | Europe (pan-EU) |
 | [[deutsche-borse]] | ETR | — | Germany |
 | [[six-swiss-exchange]] | SIX | — | Switzerland |
 | [[tokyo-stock-exchange]] | TYO | — | Japan |
 | [[toronto-stock-exchange]] | TSE | — | Canada |
 
-Market-cap figures are approximate and move with the market; see each exchange's page for current detail. The two dominant US venues are compared in [[nyse-vs-nasdaq]]; the broader institutional plumbing is covered under [[market-microstructure]].
+Market-cap figures are approximate and move with the market; see each exchange's page for current detail. The two dominant US venues are compared in nyse-vs-nasdaq; the broader institutional plumbing is covered under [[market-microstructure]].
 
 ## Centralized Crypto Exchanges (CEX)
 
@@ -111,19 +110,19 @@ SORT updated DESC
 
 ## Australian Brokers & Platforms
 
-For a comprehensive overview of the Australian investment landscape — including CHESS sponsorship, franking credits, superannuation, and the ASX — see [[australian-investing]].
+For a comprehensive overview of the Australian investment landscape — including CHESS sponsorship, franking credits, superannuation, and the ASX — see australian-investing.
 
 | Broker | Type | ASX Fee | Key Feature |
 |--------|------|---------|-------------|
-| [[commsec]] | Bank-owned (CBA) | $10–$29.95 | Australia's largest broker, 3M+ accounts, comprehensive research |
-| [[selfwealth]] | Discount | $9.50 flat | Flat-fee disruptor, social portfolio comparison |
-| [[nabtrade]] | Bank-owned (NAB) | $14.95–0.11% | NAB banking integration, options, international shares |
-| [[morgans]] | Full-service | Adviser-negotiated | Largest full-service firm, 40+ offices, IPO access, in-house research |
-| [[stake]] | Fintech | $3 flat | Low-cost US share access, mobile-first |
-| [[superhero]] | Fintech | $2 flat ($0 ETFs) | Cheapest ASX brokerage, free ETF trades |
-| [[cmc-markets]] | CFD + Shares | $11 or 0.10% | CFDs and CHESS shares on one platform, advanced charting |
-| [[ig-markets]] | CFD + Shares | $8 flat | 17,000+ markets, 50+ year track record, ProRealTime |
-| [[bell-direct]] | Mid-range | $15–0.10% | Bell Potter research access, options, AutoInvest |
+| commsec | Bank-owned (CBA) | $10–$29.95 | Australia's largest broker, 3M+ accounts, comprehensive research |
+| selfwealth | Discount | $9.50 flat | Flat-fee disruptor, social portfolio comparison |
+| nabtrade | Bank-owned (NAB) | $14.95–0.11% | NAB banking integration, options, international shares |
+| morgans | Full-service | Adviser-negotiated | Largest full-service firm, 40+ offices, IPO access, in-house research |
+| stake | Fintech | $3 flat | Low-cost US share access, mobile-first |
+| superhero | Fintech | $2 flat ($0 ETFs) | Cheapest ASX brokerage, free ETF trades |
+| cmc-markets | CFD + Shares | $11 or 0.10% | CFDs and CHESS shares on one platform, advanced charting |
+| ig-markets | CFD + Shares | $8 flat | 17,000+ markets, 50+ year track record, ProRealTime |
+| bell-direct | Mid-range | $15–0.10% | Bell Potter research access, options, AutoInvest |
 
 All Australian brokers listed above are CHESS-sponsored for ASX share trading (Superhero transitioned to CHESS in 2023).
 
@@ -131,16 +130,16 @@ All Australian brokers listed above are CHESS-sponsored for ASX share trading (S
 
 | Region | Equities | Crypto |
 |--------|----------|--------|
-| North America | [[nyse]], [[nasdaq]], [[toronto-stock-exchange]] | [[coinbase]], [[kraken]], [[gemini]], [[cme-group]] |
-| Europe | [[london-stock-exchange]], [[euronext]], [[deutsche-borse]], [[six-swiss-exchange]] | [[bitstamp]] |
-| Asia-Pacific | [[hong-kong-stock-exchange]], [[tokyo-stock-exchange]], [[national-stock-exchange-india]], [[bombay-stock-exchange]], [[asx-limited]] | [[okx]], [[bybit]] |
+| North America | nyse, nasdaq, [[toronto-stock-exchange]] | [[coinbase]], [[kraken]], [[gemini]], [[cme-group]] |
+| Europe | london-stock-exchange, [[euronext]], [[deutsche-borse]], [[six-swiss-exchange]] | [[bitstamp]] |
+| Asia-Pacific | hong-kong-stock-exchange, [[tokyo-stock-exchange]], national-stock-exchange-india, bombay-stock-exchange, asx-limited | [[okx]], [[bybit]] |
 | Global / offshore | — | [[binance]], [[hyperliquid]], [[uniswap]], [[deribit]] |
 
 ## Exchanges by Asset Class
 
 | Asset class | Primary venues |
 |-------------|----------------|
-| Equities | [[nyse]], [[nasdaq]], [[london-stock-exchange]], [[euronext]] |
+| Equities | nyse, nasdaq, london-stock-exchange, [[euronext]] |
 | Crypto spot (CEX) | [[binance]], [[coinbase]], [[kraken]], [[okx]] |
 | Crypto spot (DEX) | [[uniswap]], [[raydium]], [[curve-finance]], [[jupiter-exchange-solana]] |
 | Crypto derivatives | [[cme-group]], [[deribit]], [[hyperliquid]], [[binance]] |
@@ -185,19 +184,17 @@ The deeper trade-off is covered in [[centralized-vs-decentralized-exchanges]].
 | Crypto options by open interest | [[deribit]] | Dominant BTC/ETH options venue |
 | Non-custodial spot swaps on Ethereum | [[uniswap]] | Reference AMM, deepest DEX liquidity |
 | On-chain perps with a transparent book | [[hyperliquid]] | Sub-second finality, on-chain order book |
-| US equities | [[nyse]], [[nasdaq]] | Deepest equity liquidity (see [[nyse-vs-nasdaq]]) |
-| ASX shares from Australia | [[commsec]], [[selfwealth]], [[stake]] | CHESS-sponsored brokers (see [[australian-investing]]) |
+| US equities | nyse, nasdaq | Deepest equity liquidity (see nyse-vs-nasdaq) |
+| ASX shares from Australia | commsec, selfwealth, stake | CHESS-sponsored brokers (see australian-investing) |
 
 ## Related
 
 - [[exchange-data-sources]] -- official data endpoints for all major exchanges
 - [[exchange-risk]] -- counterparty and solvency risk
 - [[centralized-vs-decentralized-exchanges]] -- the CEX/DEX trade-off
-- [[nyse-vs-nasdaq]] -- the two dominant US equity venues
 - [[market-microstructure]] -- how venue design shapes execution
 - [[cme-bitcoin-futures]] -- the regulated US crypto-futures anchor
 - [[perpetual-futures]] -- the offshore derivatives product
-- [[australian-investing]] -- the ASX broker landscape in depth
 
 ## Sources
 

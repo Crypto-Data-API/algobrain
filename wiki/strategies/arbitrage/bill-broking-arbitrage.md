@@ -21,12 +21,12 @@ expected_sharpe: 1.5
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 20
 decay_evidence: "Overend Gurney collapse 1866 wiped out the leading practitioner; WWI disrupted bill market; 1920s-30s central bank open-market operations rewrote money-market structure; classical bill broking essentially extinct post-1931"
-related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[mint-parity-arbitrage]]", "[[covered-interest-arbitrage]]", "[[overend-gurney]]", "[[overend-gurney-collapse-1866]]", "[[bank-of-england]]", "[[bagehot-lombard-street]]", "[[repo-arbitrage]]", "[[commercial-paper]]", "[[arbitrage]]", "[[edge-taxonomy]]", "[[ltcm-collapse-1998]]"]
+related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[mint-parity-arbitrage]]", "[[covered-interest-arbitrage]]", "[[overend-gurney-collapse-1866]]", "[[bank-of-england]]", "[[bagehot-lombard-street]]", "[[repo-arbitrage]]", "[[commercial-paper]]", "[[arbitrage]]", "[[edge-taxonomy]]", "[[ltcm-collapse-1998]]"]
 ---
 
 # Bill Broking Arbitrage
 
-Bill broking arbitrage was the pre-modern form of money-market [[arbitrage]] — the pre-1914 equivalent of today's repo, commercial paper, and short-rate relative-value desks. London bill brokers and discount houses like **[[overend-gurney|Overend Gurney]]**, **Alexander & Co.**, and later the National Discount Company bought bills of exchange at one discount rate and sold them at a tighter rate, exploiting **geographic dispersion** (London vs provincial centres like Manchester or Glasgow), **maturity dispersion** (short bills vs long bills), **credit-quality** spreads, and the gap between **Bank Rate** and the market's private discount rate. Walter Bagehot's 1873 *Lombard Street* is the definitive primary source, and the 1866 collapse of Overend Gurney is the canonical case study of how this business could end — a prefiguration of the 1998 [[ltcm-collapse-1998|LTCM collapse]] and a textbook lesson in the [[limits-to-arbitrage]]: a leveraged [[convergence-arbitrage]] funded short is solvent only as long as its funding rolls.
+Bill broking arbitrage was the pre-modern form of money-market [[arbitrage]] — the pre-1914 equivalent of today's repo, commercial paper, and short-rate relative-value desks. London bill brokers and discount houses like **Overend Gurney**, **Alexander & Co.**, and later the National Discount Company bought bills of exchange at one discount rate and sold them at a tighter rate, exploiting **geographic dispersion** (London vs provincial centres like Manchester or Glasgow), **maturity dispersion** (short bills vs long bills), **credit-quality** spreads, and the gap between **Bank Rate** and the market's private discount rate. Walter Bagehot's 1873 *Lombard Street* is the definitive primary source, and the 1866 collapse of Overend Gurney is the canonical case study of how this business could end — a prefiguration of the 1998 [[ltcm-collapse-1998|LTCM collapse]] and a textbook lesson in the [[limits-to-arbitrage]]: a leveraged [[convergence-arbitrage]] funded short is solvent only as long as its funding rolls.
 
 ### The four spreads a discount house harvested
 
@@ -158,7 +158,7 @@ def bill_broking_arb(date):
 
 ## Example Trade: Overend Gurney Pre-1866
 
-In 1860 [[overend-gurney|Overend, Gurney & Co.]] was the largest discount house in London, running a bill book of approximately £10-15M — at the time roughly **half of all English bills in circulation**. Typical day:
+In 1860 Overend, Gurney & Co. was the largest discount house in London, running a bill book of approximately £10-15M — at the time roughly **half of all English bills in circulation**. Typical day:
 
 - **Morning**: buy £500,000 of Manchester cotton-trade bills at 4.25% discount (90-day, first-class merchant names).
 - Funded by call money at 3.00%.
@@ -257,7 +257,6 @@ The 1866 [[overend-gurney-collapse-1866|Overend Gurney collapse]] and the 1998 [
 - [[arbitrage]] — concept
 - [[convergence-arbitrage]] — the leveraged-RV family this belongs to
 - [[limits-to-arbitrage]] — funding withdrawal as the binding limit (1866 and 1998)
-- [[overend-gurney]] — the dominant pre-1866 practitioner
 - [[overend-gurney-collapse-1866]] — the canonical failure
 - [[bank-of-england]] — counterparty / lender of last resort
 - [[bagehot-lombard-street]] — primary source

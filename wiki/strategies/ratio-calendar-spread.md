@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, derivatives, volatility, swing-trading]
 aliases: ["Ratio Calendar Spread", "Asymmetric Calendar", "Unbalanced Calendar", "Ratio Time Spread"]
-related: ["[[calendar-spread]]", "[[diagonal-spread]]", "[[ratio-spread]]", "[[itpm-ratio-calendar-spread]]", "[[itpm-trade-construction-playbook]]", "[[options-greeks]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[implied-volatility-term-structure]]", "[[volatility-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[index-options]]", "[[spx-options]]", "[[managing-winners]]", "[[trade-repair-and-rolling]]", "[[options-portfolio-construction]]"]
+related: ["[[calendar-spread]]", "[[diagonal-spread]]", "[[ratio-spread]]", "[[itpm-ratio-calendar-spread]]", "[[itpm-trade-construction-playbook]]", "[[options-greeks]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[implied-volatility-term-structure]]", "[[volatility-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[managing-winners]]", "[[trade-repair-and-rolling]]", "[[options-portfolio-construction]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [stocks, options, index-options]
@@ -23,7 +23,7 @@ expected_max_drawdown: 0.30
 breakeven_cost_bps: 40
 ---
 
-A **ratio calendar spread** is a calendar spread (long and short options at the same strike but different expirations) constructed with an *unequal* number of contracts on the two legs — 1:2, 2:1, 1:3, or any other deliberate ratio. Unlike a 1:1 calendar (pure vega/term-structure bet), the ratio variant injects an explicit directional or income tilt: more shorts make the spread a *credit-tilted income trade*, more longs make it a *long-volatility / convexity trade*. The structure is the generalised parent of the [[itpm-ratio-calendar-spread|ITPM 2:1 ratio calendar]], which is the canonical implementation taught at the [[itpm|Institute of Trading and Portfolio Management]].
+A **ratio calendar spread** is a calendar spread (long and short options at the same strike but different expirations) constructed with an *unequal* number of contracts on the two legs — 1:2, 2:1, 1:3, or any other deliberate ratio. Unlike a 1:1 calendar (pure vega/term-structure bet), the ratio variant injects an explicit directional or income tilt: more shorts make the spread a *credit-tilted income trade*, more longs make it a *long-volatility / convexity trade*. The structure is the generalised parent of the [[itpm-ratio-calendar-spread|ITPM 2:1 ratio calendar]], which is the canonical implementation taught at the Institute of Trading and Portfolio Management.
 
 ## Edge Source
 
@@ -225,7 +225,7 @@ The ratio is a free parameter precisely so it can be tuned to the prevailing [[m
 ## Capacity Limits
 
 - Per-name capacity is bounded by the open interest at the chosen strikes; for liquid US large-caps this is typically $5-25M of premium.
-- Index-options capacity ([[spx-options|SPX]], [[ndx-options|NDX]]) is effectively unlimited for retail and small-institutional sizes.
+- Index-options capacity (SPX, NDX) is effectively unlimited for retail and small-institutional sizes.
 - For book-level deployment, capacity scales with the diversification of name selection and expiration laddering. A diversified 10-position book on liquid names can run $50-100M before market impact dominates.
 
 ## What Kills This Strategy
@@ -279,7 +279,6 @@ Drawing from [[failure-modes]]:
 - [[implied-volatility-term-structure]] — the curve the trade is built on
 - [[volatility-risk-premium]] — the structural edge
 - [[short-strangle]], [[iron-condor]] — short-vol siblings
-- [[index-options]], [[spx-options]] — preferred underlyings for capacity
 - [[managing-winners]], [[trade-repair-and-rolling]] — exit and repair frameworks
 - [[options-portfolio-construction]] — fitting ratio calendars into a book
 - [[market-regime]] — the regime determines which ratio tilt to run

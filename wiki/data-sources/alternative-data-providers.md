@@ -6,12 +6,12 @@ updated: 2026-06-21
 status: excellent
 tags: [data, alternative-data, alpha]
 aliases: ["Alt Data", "Alternative Data Vendors"]
-related: ["[[data-sources-overview]]", "[[alternative-data]]", "[[alternative-data-alpha]]", "[[edge-taxonomy]]", "[[fundamental-data-sources]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[crypto-data-sources]]", "[[informational-edge]]"]
+related: ["[[data-sources-overview]]", "[[alternative-data]]", "[[alternative-data-alpha]]", "[[edge-taxonomy]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[crypto-data-sources]]", "[[informational-edge]]"]
 ---
 
 # Alternative Data Providers
 
-Vendors that supply non-traditional data — satellite imagery, credit card transactions, web traffic, app usage, sentiment, weather — for use as predictive signals in trading strategies. Alternative data is the canonical source of *informational edge* (see [[edge-taxonomy]]). The good ones are expensive, opaque, and often capacity-limited; the cheap ones are usually too well-known to provide alpha. This page is a reference catalogue of providers by category; see [[fundamental-data-sources]] for financial-statement data and [[crypto-data-sources]] for on-chain alt data. All cost figures below are public-domain rough ranges that change frequently — confirm current pricing directly with each vendor.
+Vendors that supply non-traditional data — satellite imagery, credit card transactions, web traffic, app usage, sentiment, weather — for use as predictive signals in trading strategies. Alternative data is the canonical source of *informational edge* (see [[edge-taxonomy]]). The good ones are expensive, opaque, and often capacity-limited; the cheap ones are usually too well-known to provide alpha. This page is a reference catalogue of providers by category; see fundamental-data-sources for financial-statement data and [[crypto-data-sources]] for on-chain alt data. All cost figures below are public-domain rough ranges that change frequently — confirm current pricing directly with each vendor.
 
 ## Category Overview
 
@@ -111,7 +111,7 @@ NLP-tagged news and social media.
 - **AccuWeather** — paid forecasts and historical
 - **Speedwell Weather** — derivatives and energy-focused weather data
 
-**Use cases:** [[weather-derivatives|weather derivatives]] trading, agricultural commodities, electricity demand forecasting, retail (snow boots in winter).
+**Use cases:** weather derivatives trading, agricultural commodities, electricity demand forecasting, retail (snow boots in winter).
 
 ### Shipping and Logistics
 
@@ -150,7 +150,7 @@ Cell phone location pings aggregated by venue.
 - **Sprout Social** — smaller business
 - **Twitter API** (paid tiers) — direct firehose access at high cost
 - **Reddit data dumps** — historical reddit data (free but bulky)
-- **[[tickertags]]** — founded 2015 by [[chris-camillo]]; mapped ~350K product/brand tags to ~8K tickers using social mention frequency. Acquired by [[m-science]] (a [[jefferies-financial-group|Jefferies]] subsidiary) in 2018; standalone product wound down ~2020, technology absorbed into M Science institutional research. Historically significant as an early productization of [[social-arbitrage]].
+- **tickertags** — founded 2015 by [[chris-camillo]]; mapped ~350K product/brand tags to ~8K tickers using social mention frequency. Acquired by [[m-science]] (a [[jefferies-financial-group|Jefferies]] subsidiary) in 2018; standalone product wound down ~2020, technology absorbed into M Science institutional research. Historically significant as an early productization of [[social-arbitrage]].
 
 ### Crypto-Specific Alt Data
 
@@ -250,7 +250,6 @@ A good test: take the alt data, regress it against the *next-period stock return
 ## Related
 
 - [[data-sources-overview]]
-- [[fundamental-data-sources]]
 - [[paid-data-providers]]
 - [[free-data-sources]]
 - [[informational-edge]]

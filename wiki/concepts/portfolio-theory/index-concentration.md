@@ -9,10 +9,10 @@ domain: [portfolio-theory, risk-management]
 prerequisites: ["[[market-capitalization]]", "[[diversification]]"]
 difficulty: intermediate
 aliases: ["Concentration Risk", "Index Concentration Risk", "Market Concentration", "Cap-Weight Concentration", "Top-Heavy Index"]
-related: ["[[market-capitalization]]", "[[equity-index]]", "[[diversification]]", "[[s-and-p-500]]", "[[magnificent-seven]]", "[[passive-investing]]", "[[index-funds]]"]
+related: ["[[market-capitalization]]", "[[diversification]]", "[[passive-investing]]", "[[index-funds]]"]
 ---
 
-Index concentration is the degree to which a market-capitalisation-weighted index — most prominently the [[s-and-p-500]] — derives its value and returns from a small number of its largest constituents. Because cap-weighted indices size each holding by [[market-capitalization|market capitalisation]], a handful of mega-cap winners can come to dominate the index, so that a broad "diversified" benchmark behaves increasingly like a concentrated bet on a few names. By the mid-2020s the [[magnificent-seven|Magnificent Seven]] had grown to roughly 30%+ of the S&P 500, the most top-heavy the index had been in modern history.
+Index concentration is the degree to which a market-capitalisation-weighted index — most prominently the s-and-p-500 — derives its value and returns from a small number of its largest constituents. Because cap-weighted indices size each holding by [[market-capitalization|market capitalisation]], a handful of mega-cap winners can come to dominate the index, so that a broad "diversified" benchmark behaves increasingly like a concentrated bet on a few names. By the mid-2020s the Magnificent Seven had grown to roughly 30%+ of the S&P 500, the most top-heavy the index had been in modern history.
 
 ## Overview
 
@@ -22,9 +22,9 @@ The investor implication is that the headline "diversification" of a broad index
 
 ## How the Magnificent Seven Came to Dominate the S&P 500
 
-The post-2010s rise of the [[magnificent-seven|Magnificent Seven]] — [[apple]], [[microsoft]], [[alphabet]], [[amazon]], [[nvidia]], [[meta-platforms]], and [[tesla]] — is the defining concentration episode of the modern era. Several forces compounded:
+The post-2010s rise of the Magnificent Seven — apple, microsoft, alphabet, amazon, [[nvidia]], meta-platforms, and tesla — is the defining concentration episode of the modern era. Several forces compounded:
 
-- **Genuine fundamental dominance** — these firms built wide [[economic-moat|economic moats]] ([[network-effects]], scale, ecosystem lock-in) and grew earnings far faster than the index, justifying much (not all) of their rising weight.
+- **Genuine fundamental dominance** — these firms built wide economic moats ([[network-effects]], scale, ecosystem lock-in) and grew earnings far faster than the index, justifying much (not all) of their rising weight.
 - **The AI re-rating (2023–2026)** — the artificial-intelligence capex cycle re-rated the mega-cap complex, with [[nvidia]] in particular driving an outsized share of index gains.
 - **Cap-weight mechanics** — as these names outperformed, their index weight rose automatically, so the index increasingly *was* them.
 - **Passive-flow reinforcement** — the secular shift from active to passive ([[passive-investing]]) meant new money flowed into constituents *in proportion to their existing weight*, sending the most dollars to the names already largest.
@@ -39,7 +39,7 @@ Index concentration is recurrent, not new. Each prior episode ended with the lea
 |---|---|---|---|
 | **Nifty Fifty** | Late 1960s–early 1970s | A set of "one-decision" blue chips (e.g. IBM, Xerox, Polaroid, Coca-Cola) bid to extreme multiples | Many de-rated severely in the 1973–74 bear market; several leaders never recovered their premiums |
 | **Dot-com peak** | 1999–2000 | Mega-cap tech/telecom (Microsoft, Cisco, Intel, Lucent) | The top concentrated names led the 2000–2002 collapse; cap-weighted indices fell far harder than equal-weight |
-| **Magnificent Seven** | 2020s | [[magnificent-seven|Mega-cap tech + AI]] | Ongoing as of the mid-2020s; the open question is whether fundamentals sustain the weights |
+| **Magnificent Seven** | 2020s | Mega-cap tech + AI | Ongoing as of the mid-2020s; the open question is whether fundamentals sustain the weights |
 
 The lesson practitioners draw is not that concentration *always* ends badly on the same timeline, but that extreme concentration historically coincides with elevated single-factor risk and eventual reversion. The leaders that drive an index up also drive it down when the theme breaks.
 
@@ -50,7 +50,7 @@ Several complementary metrics quantify how top-heavy an index is:
 - **Top-N weight** — the simplest and most-quoted measure: the combined index weight of the top 5 or top 10 constituents. "Top-10 weight" crossing ~35% is a common flag for an unusually concentrated S&P 500.
 - **Herfindahl–Hirschman Index (HHI)** — the sum of squared portfolio weights. Higher HHI = more concentration; the same statistic antitrust regulators use for market concentration. A perfectly equal-weight 500-stock index has a very low HHI; a top-heavy one is materially higher.
 - **Effective number of stocks (ENS)** — the reciprocal of the HHI (`1 / Σwᵢ²`). It translates HHI into an intuitive figure: "this 500-stock index has the diversification of only ~N equally-weighted stocks." When the S&P 500's effective number of stocks falls well below 100, the diversification benefit of holding 500 names has largely evaporated at the top.
-- **Concentration ratio vs. equal-weight spread** — comparing cap-weighted index returns against the equal-weighted version ([[s-and-p-500|S&P 500 Equal Weight]], ticker RSP) reveals how much of the cap-weighted return is coming from the mega-caps versus the typical stock.
+- **Concentration ratio vs. equal-weight spread** — comparing cap-weighted index returns against the equal-weighted version (S&P 500 Equal Weight, ticker RSP) reveals how much of the cap-weighted return is coming from the mega-caps versus the typical stock.
 
 ## The Passive-Flow Feedback Loop
 
@@ -89,12 +89,9 @@ The cap-weight-vs-equal-weight return spread is itself a watched indicator of ma
 ## Related
 
 - [[market-capitalization]] — the weighting mechanism that drives concentration
-- [[equity-index]] — how indices are constructed and weighted
 - [[diversification]] — what concentration erodes
-- [[s-and-p-500]] — the primary index where concentration is measured; equal-weight version (RSP) as a response
-- [[magnificent-seven]] — the defining modern concentration episode
 - [[passive-investing]] / [[index-funds]] — the flow channel that reinforces concentration
-- [[economic-moat]] / [[network-effects]] — why the dominant names earned (much of) their weight
+- economic-moat / [[network-effects]] — why the dominant names earned (much of) their weight
 
 ## Sources
 

@@ -9,7 +9,7 @@ tags: [futures, markets, index]
 
 # Futures Markets
 
-The hub for futures — standardized exchange-traded contracts to buy or sell an asset at a set price on a future date. Futures trade on regulated venues like [[cme-group|CME]] and [[intercontinental-exchange|ICE]], which act as central counterparties and largely eliminate bilateral credit risk. They require margin rather than full payment (built-in leverage) and settle daily through mark-to-market, so gains and losses are realized every session.
+The hub for futures — standardized exchange-traded contracts to buy or sell an asset at a set price on a future date. Futures trade on regulated venues like [[cme-group|CME]] and ICE, which act as central counterparties and largely eliminate bilateral credit risk. They require margin rather than full payment (built-in leverage) and settle daily through mark-to-market, so gains and losses are realized every session.
 
 Mastering futures means understanding contract specifications, margin and mark-to-market, roll dates, the [[contango]]/[[backwardation]] term structure, and physical-vs-cash settlement. In crypto, [[perpetual-futures|perpetual futures]] — contracts that never expire and stay tethered to spot via a [[funding-rate]] — have become the most-traded instrument by volume.
 
@@ -23,7 +23,7 @@ Futures are a *margined* instrument, not a purchase — you post a fraction of t
 - **Notional vs. margin** — a single contract's economic exposure (price × multiplier) can be many times the margin posted; this magnifies both returns and losses, which is why position sizing and the kill-criteria discipline of [[risk-management]] matter more here than in spot.
 - **Settlement** — contracts resolve by **physical delivery** (e.g. crude, grains) or **cash settlement** (e.g. equity indices, VIX). Knowing which determines whether you must roll before first-notice/expiry to avoid delivery.
 
-Because of daily settlement and central clearing through venues like [[cme-group|CME]] and [[intercontinental-exchange|ICE]], counterparty credit risk is largely mutualized away — the key risk shifts from "will my counterparty pay?" to "can I meet variation margin?"
+Because of daily settlement and central clearing through venues like [[cme-group|CME]] and ICE, counterparty credit risk is largely mutualized away — the key risk shifts from "will my counterparty pay?" to "can I meet variation margin?"
 
 ## Contract Categories
 
@@ -31,7 +31,7 @@ The futures complex spans every major asset class. The big categories and their 
 
 | Category | Representative contracts | Primary use |
 |---|---|---|
-| **Equity index** | [[s-and-p-500\|E-mini & Micro S&P 500 (ES/MES)]], Nasdaq-100 (NQ/MNQ), EURO STOXX 50 (FESX) | Hedging/positioning equity beta |
+| **Equity index** | E-mini & Micro S&P 500 (ES/MES), Nasdaq-100 (NQ/MNQ), EURO STOXX 50 (FESX) | Hedging/positioning equity beta |
 | **Rates / fixed income** | Treasury note & bond futures (ZN/ZB), SOFR/Fed Funds | Duration and rate-path views; the [[yield-curve]] |
 | **Energy** | [[crude-oil\|WTI & Brent crude]], [[natural-gas]], gasoline, heating oil | Physical energy supply/demand |
 | **Metals** | [[gold]], silver, [[copper]], platinum | Monetary hedge (gold) and industrial cycle (copper) |
@@ -66,7 +66,6 @@ The shape of the forward curve determines the hidden cost or benefit of holding 
 ## Exchanges & Infrastructure
 
 - [[cme-group]] — The largest derivatives exchange; equity, rate, FX, and commodity futures
-- [[intercontinental-exchange]] — ICE: energy, softs, and financial futures
 - [[london-metal-exchange]] — Benchmark venue for industrial metals
 
 ## Strategy & Risk
@@ -80,13 +79,12 @@ The shape of the forward curve determines the hidden cost or benefit of holding 
 - [[options-vs-futures]] — Non-linear vs linear derivative payoffs
 - [[spot-vs-futures-trading]] — Direct ownership vs leveraged contracts
 - [[commodity-futures-vs-etfs]] — Futures vs ETFs for commodity exposure
-- [[xsp-vs-mes-futures]] — Mini index options vs micro equity futures
 
 ## See Also
 
 - **Mechanics:** [[span-margin]] · [[roll-yield]] · [[contango]] · [[backwardation]] · [[funding-rate]] · [[mark-to-market]]
-- **Venues:** [[cme-group]] · [[intercontinental-exchange]] · [[london-metal-exchange]]
-- **Contracts:** [[s-and-p-500]] · [[crude-oil]] · [[gold]] · [[natural-gas]] · [[copper]] · [[corn]] · [[vix-futures]] · [[cme-bitcoin-futures]] · [[perpetual-futures]]
+- **Venues:** [[cme-group]] · intercontinental-exchange · [[london-metal-exchange]]
+- **Contracts:** s-and-p-500 · [[crude-oil]] · [[gold]] · [[natural-gas]] · [[copper]] · [[corn]] · [[vix-futures]] · [[cme-bitcoin-futures]] · [[perpetual-futures]]
 - **Strategy & risk:** [[trend-following-cta]] · [[commodity-carry-strategy]] · [[cot-report-analysis]] · [[risk-management]] · [[leverage]]
 - **Hubs:** [[markets-overview]] · [[commodities-overview]] · [[options-overview]] · [[crypto-overview]]
 

@@ -8,7 +8,7 @@ tags: [history, risk-management, stocks, crashes]
 related: ["[[crash-of-1987]]", "[[global-financial-crisis]]", "[[cash-as-asset]]", "[[crashes-overview]]", "[[deleveraging]]", "[[crowding-risk]]", "[[volatility]]"]
 ---
 
-Market crashes are severe, rapid declines in stock prices that historically have provided the greatest wealth-building opportunities for investors willing to buy during peak fear. Fred McNaught's core conviction, drawn from personal experience across the [[crash-of-1987]], the [[global-financial-crisis]], and the COVID-19 crash, is that "buying during crashes is the most significant wealth maker" over a lifetime. The prerequisite for capitalising on crashes is maintaining adequate [[cash-as-asset|cash reserves]] before the crash occurs, which means accepting lower returns during bull markets in exchange for dry powder during panics. See [[crashes-overview]] for a detailed catalogue of historical market crashes and their recoveries.
+Market crashes are severe, rapid declines in asset prices that historically have provided the greatest wealth-building opportunities for investors willing to buy during peak fear. A conviction shared by veterans of the [[crash-of-1987]], the [[global-financial-crisis]], and the COVID-19 crash is that buying during crashes is among the most significant wealth makers over a lifetime. The prerequisite for capitalising on crashes is maintaining adequate [[cash-as-asset|cash reserves]] before the crash occurs, which means accepting lower returns during bull markets in exchange for dry powder during panics. See [[crashes-overview]] for a detailed catalogue of historical market crashes and their recoveries.
 
 ## Why Crashes Create Opportunity
 
@@ -73,4 +73,3 @@ Every crash has unique triggers but shares common dynamics:
 
 ## Sources
 
-_Content informed by Fred McNaught's trading philosophy (from Alfred sessions) and general market history. No raw sources ingested._

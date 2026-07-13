@@ -102,7 +102,7 @@ The Meucci (2009) effective number of bets, N*, measures true portfolio diversif
 | Full spectrum (Carry + Cross-Exch + Merger + Vol Arb + Flash Loan) | 5 | ~4.2 | ~3.0 | Good — three distinct risk factors |
 | Full spectrum + Trend-Following (per [[arbitrage-opportunity-map]]) | 6 | ~5.0 | ~4.5 | **Best — trend-following is negatively correlated in crisis** |
 
-**Key finding:** Adding [[merger-arbitrage]] to a crypto arb book adds ~1.0 effective bet. Adding trend-following (not technically arb, but see the "portfolio construction arbitrage" in [[arbitrage-opportunity-map]]) adds ~1.5 effective bets. These are the highest-value diversifiers for an arb portfolio.
+**Key finding:** Adding merger-arbitrage to a crypto arb book adds ~1.0 effective bet. Adding trend-following (not technically arb, but see the "portfolio construction arbitrage" in [[arbitrage-opportunity-map]]) adds ~1.5 effective bets. These are the highest-value diversifiers for an arb portfolio.
 
 ---
 
@@ -133,8 +133,8 @@ The matrices above use generic strategy buckets. The wiki documents many *named*
 | [[tips-treasury-arbitrage]] | Convergence (liquidity) | **Liquidity premium** | Co-moves with OTR/OFR | Anything not liquidity-driven |
 | [[gold-silver-ratio-arbitrage]] | Pairs / mean-reversion | Commodity correlation regime | Correlation breaks (0.4-0.6) in crisis | Carry, merger arb |
 | [[wrapped-asset-triangular-arbitrage]] | Dislocation (crypto) | Custody/counterparty trust | Spikes with crypto stress | Equity-based arbs |
-| [[merger-arbitrage]] | Event-driven | M&A deal flow | Deal breaks rise; still lowest-corr | (it *is* the diversifier) |
-| [[cum-ex-dividend-stripping]] | (Retired / illegal) | Regulatory control failure | N/A — not deployable | N/A |
+| merger-arbitrage | Event-driven | M&A deal flow | Deal breaks rise; still lowest-corr | (it *is* the diversifier) |
+| cum-ex-dividend-stripping | (Retired / illegal) | Regulatory control failure | N/A — not deployable | N/A |
 
 **The hidden cluster:** note that the three Treasury/rates convergence trades ([[on-off-the-run-treasury-arbitrage]], [[swap-spread-arbitrage]], [[tips-treasury-arbitrage]]) all carry the *same* dominant factor — the [[limits-to-arbitrage|liquidity premium]]. This is exactly the LTCM trap: a "diversified" relative-value book that is really one giant bet on liquidity not drying up. In the matrices above this is the rates analogue of the Cash-Carry ↔ Funding-Arb 0.95 cluster. Always collapse same-factor strategies into a single allocation bucket before computing effective bets.
 
@@ -214,4 +214,4 @@ If two strategies have 0.90 crisis correlation, treat their combined allocation 
 - [[crowding-indicators]] — detecting when a factor is over-owned
 - [[failure-modes]] — the correlation-cascade failure mode
 - [[portfolio-theory]] — effective-bets and diversification foundations
-- Constituent strategies classified above: [[put-call-parity-arbitrage]], [[on-off-the-run-treasury-arbitrage]], [[gold-silver-ratio-arbitrage]], [[wrapped-asset-triangular-arbitrage]], [[merger-arbitrage]]
+- Constituent strategies classified above: [[put-call-parity-arbitrage]], [[on-off-the-run-treasury-arbitrage]], [[gold-silver-ratio-arbitrage]], [[wrapped-asset-triangular-arbitrage]], merger-arbitrage

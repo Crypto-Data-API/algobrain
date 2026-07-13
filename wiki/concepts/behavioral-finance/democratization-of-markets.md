@@ -8,7 +8,7 @@ tags: [behavioral-finance, market-microstructure, history]
 aliases: ["Retail Trading Revolution", "Democratized Finance", "Democratisation of Markets"]
 domain: [behavioral-finance, market-microstructure]
 difficulty: beginner
-related: ["[[meme-stocks]]", "[[gamestop-short-squeeze]]", "[[robinhood]]", "[[behavioral-finance]]", "[[market-microstructure]]", "[[payment-for-order-flow]]", "[[order-flow]]", "[[sentiment]]", "[[dopamine-loop]]", "[[short-selling]]", "[[gamification]]", "[[fractional-shares]]", "[[zero-commission-trading]]"]
+related: ["[[meme-stocks]]", "[[gamestop-short-squeeze]]", "[[robinhood]]", "[[behavioral-finance]]", "[[market-microstructure]]", "[[payment-for-order-flow]]", "[[order-flow]]", "[[sentiment]]", "[[dopamine-loop]]", "[[short-selling]]", "[[gamification]]", "[[zero-commission-trading]]"]
 ---
 
 # Democratization of Markets
@@ -31,7 +31,7 @@ Retail access to markets has been widening for decades, in waves driven by each 
 ## Key Enablers
 
 - **[[zero-commission-trading|Zero-commission trading]]**: Platforms like [[robinhood]] (launched 2013) eliminated per-trade fees, removing a major barrier for small accounts.
-- **[[fractional-shares|Fractional shares]]**: Allowed investors to buy portions of expensive stocks, making any stock accessible regardless of account size.
+- **Fractional shares**: Allowed investors to buy portions of expensive stocks, making any stock accessible regardless of account size.
 - **Social media**: Reddit, Twitter/X, YouTube, and TikTok created communities where retail traders share research, strategies, and trade ideas at scale.
 - **Mobile-first design**: Trading apps made markets accessible from smartphones, attracting younger demographics.
 - **Options accessibility**: Easy access to [[options]] trading -- including short-dated 0DTE contracts -- amplified retail traders' ability to generate leveraged returns (and losses).
@@ -80,7 +80,7 @@ Tradeable consequences include:
 - [[meme-stocks]] — the asset class the movement popularized
 - [[robinhood]] — the emblematic platform of the era
 - [[payment-for-order-flow]] — the hidden-cost mechanism behind "free" trading
-- [[zero-commission-trading]] / [[fractional-shares]] — core access enablers
+- [[zero-commission-trading]] / fractional-shares — core access enablers
 - [[gamification]] / [[dopamine-loop]] — the engagement mechanics critics flag
 - [[behavioral-finance]] — the lens on amplified retail biases
 - [[market-microstructure]] / [[order-flow]] — how retail flow reshapes price discovery

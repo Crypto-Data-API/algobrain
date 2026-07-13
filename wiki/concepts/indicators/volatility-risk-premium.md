@@ -56,7 +56,7 @@ Several factors sustain the premium:
 - **Covered calls** or cash-secured puts -- lower-risk variants
 - **Selling VIX futures or puts** -- direct volatility exposure
 
-**ITPM Approach:** [[itpm|ITPM's]] methodology emphasizes selling options when the VRP is elevated, using the IV/RV ratio as a primary filter. When the ratio exceeds 1.2-1.3, the odds favor premium sellers. When it collapses near 1.0 or below, the edge disappears and sellers should reduce exposure. (Source: [[book-option-volatility-and-pricing]])
+**ITPM Approach:** ITPM's methodology emphasizes selling options when the VRP is elevated, using the IV/RV ratio as a primary filter. When the ratio exceeds 1.2-1.3, the odds favor premium sellers. When it collapses near 1.0 or below, the edge disappears and sellers should reduce exposure. (Source: [[book-option-volatility-and-pricing]])
 
 **Risk Management is Critical:** The VRP's positive average return masks the extreme left-tail risk. Unhedged premium selling strategies can lose months or years of gains in a single event. Successful VRP harvesting requires:
 - [[position-sizing|Position sizing]] that survives tail events

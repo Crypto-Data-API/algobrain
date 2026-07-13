@@ -51,7 +51,6 @@ Vanna measures how [[delta]] changes when [[implied-volatility]] changes — or 
 - Market makers managing large OTM option inventory are heavily exposed to vanna
 - After a volatility spike, market makers with short OTM put exposure experience delta shifts that force them to sell stock (hedging the new delta), amplifying the sell-off
 - The "vanna flow" from dealer hedging is a significant driver of intraday market dynamics, particularly around [[vix]] spikes
-- [[spotgamma|SpotGamma]] and other gamma exposure services track aggregate vanna positioning to predict these dealer-driven flows
 
 ### Charm (Delta Decay) — Delta Sensitivity to Time
 
@@ -206,4 +205,4 @@ A portfolio that appears delta-neutral, gamma-neutral, and vega-neutral can stil
 
 - [[book-option-volatility-and-pricing]] — Natenberg discusses higher-order Greeks and their role in professional risk management
 - [[book-options-futures-other-derivatives]] — Hull's mathematical treatment of second-order partial derivatives of option pricing functions
-- General market-making and dealer-flow literature on vanna/charm hedging flows ([[spotgamma]], [[squeezemetrics]] and similar dealer-positioning analytics) for the market-impact mechanism.
+- General market-making and dealer-flow literature on vanna/charm hedging flows (spotgamma, [[squeezemetrics]] and similar dealer-positioning analytics) for the market-impact mechanism.

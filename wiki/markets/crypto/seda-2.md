@@ -9,12 +9,12 @@ aliases: ["SEDA", "Flux Protocol", "SEDA Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.seda.xyz/"
-related: ["[[crypto-markets]]", "[[oracle]]", "[[cross-chain]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[cross-chain]]", "[[smart-contracts]]"]
 ---
 
 # SEDA
 
-**SEDA** (SEDA) is a modular, multi-chain [[oracle]] and data-transport network — a permissionless protocol for fetching, aggregating, and delivering any data type to [[smart-contracts]] across many blockchains. SEDA grew out of the earlier **Flux protocol** oracle project and rebranded to SEDA; it is unrelated to the FLUX/Flux decentralized-compute network (see [[zelcash|Flux (FLUX, compute/DePIN)]]), despite the shared legacy name. Its tagline is "any data type, for all networks."
+**SEDA** (SEDA) is a modular, multi-chain oracle and data-transport network — a permissionless protocol for fetching, aggregating, and delivering any data type to [[smart-contracts]] across many blockchains. SEDA grew out of the earlier **Flux protocol** oracle project and rebranded to SEDA; it is unrelated to the FLUX/Flux decentralized-compute network (see [[zelcash|Flux (FLUX, compute/DePIN)]]), despite the shared legacy name. Its tagline is "any data type, for all networks."
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -52,7 +52,7 @@ SEDA is designed as a **modular oracle network** that separates data sourcing, a
 - **Data Request Network** — A decentralized network of operators (overlay nodes / executors) that pick up data requests, fetch the requested data from off-chain or on-chain sources, and reach consensus on a result.
 - **Modular & multi-chain** — Rather than living on one chain, SEDA pushes verified results to many destination chains. Its contracts/deployments span the Ethereum, Base, Osmosis (Cosmos/IBC), and HyperEVM ecosystems, making it a [[cross-chain]] data layer.
 - **Programmable data feeds** — Builders can define custom data requests ("any data type") via WASM-style logic, not just standard price feeds, so the network can serve prices, custom APIs, and arbitrary computations.
-- **Crypto-economic security** — Operators are incentivized and slashable, aligning the [[oracle]] result with economic stake to deter manipulation.
+- **Crypto-economic security** — Operators are incentivized and slashable, aligning the oracle result with economic stake to deter manipulation.
 
 ### The data-request lifecycle
 
@@ -142,7 +142,7 @@ Only dated, verifiable milestones are listed.
 
 ## Overview
 
-SEDA is a modular standard for data transport and querying — any data type, for all networks — delivering decentralized [[oracle]] results to [[smart-contracts]] across multiple chains.
+SEDA is a modular standard for data transport and querying — any data type, for all networks — delivering decentralized oracle results to [[smart-contracts]] across multiple chains.
 
 ---
 
@@ -245,7 +245,6 @@ SEDA is a modular standard for data transport and querying — any data type, fo
 ## See Also
 
 - [[crypto-markets]]
-- [[oracle]]
 - [[cross-chain]]
 - [[smart-contracts]]
 - [[zelcash|Flux (FLUX) — unrelated decentralized-compute network]]

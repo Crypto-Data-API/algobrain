@@ -114,7 +114,7 @@ The announcement was not universally praised:
 | Apr-May 2026 | Restricted partner access expanded/clarified; first-month defensive-use metrics show large vulnerability discovery volume across open-source projects |
 | **May 2026** | **Mythos-preview strings surface in Claude Code / Claude Security UI labels — productization signals** (Source: [[2026-06-01-perplexity-mythos-public-rollout]]) |
 | **May 2026** | **Anthropic publicly shifts language toward eventual general availability — confirms Mythos-class models "will roll out to the public" — language used: "in the coming weeks" without a fixed date** ([BleepingComputer](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-confirms-claude-mythos-class-models-will-roll-out-to-the-public/)) |
-| **Late May / June 2026** | **ACTIVE CATALYST WINDOW** — public rollout expected; volatility strategies in [[mythos-capability-overhang-vol]] enter live deployment window |
+| **Late May / June 2026** | **ACTIVE CATALYST WINDOW** — public rollout expected; volatility strategies in mythos-capability-overhang-vol enter live deployment window |
 
 ## June 2026 — Public rollout window (UPDATE)
 
@@ -128,7 +128,7 @@ Signals that the rollout is imminent:
 
 ### Why this matters for equity markets
 
-The wiki's [[mythos-capability-overhang-vol|capability-overhang volatility strategy]] was constructed for exactly this scenario. Key equity impacts:
+The wiki's capability-overhang volatility strategy was constructed for exactly this scenario. Key equity impacts:
 
 | Scenario | Equity impact |
 |---|---|
@@ -140,8 +140,8 @@ The wiki's [[mythos-capability-overhang-vol|capability-overhang volatility strat
 ### Portfolio-positioning implications (general framework)
 
 - **Cash positioning** before the rollout window is the highest-Sharpe retail-scale hedge
-- **Long-vol structures** (per [[mythos-capability-overhang-vol]]) only practical at institutional scale
-- **Gold** (per [[gold-safe-haven-real-rates-rollover-long]]) catches safe-haven bid in scenario 2
+- **Long-vol structures** (per mythos-capability-overhang-vol) only practical at institutional scale
+- **Gold** (per gold-safe-haven-real-rates-rollover-long) catches safe-haven bid in scenario 2
 - **AI mega-cap exposure** (NVDA, GOOGL, MSFT, AMZN) is high-beta to either positive or negative Mythos outcome — vol either direction
 - **Cybersecurity** (CRWD, PANW, CIBR) is the cleanest single-directional positive expression — long for the rollout
 

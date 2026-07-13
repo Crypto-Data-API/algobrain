@@ -9,10 +9,9 @@ aliases: ["Country Risk", "Political Risk", "Geopolitical Risk", "Sovereign Risk
 domain: [risk-management]
 prerequisites: ["[[bonds]]"]
 difficulty: intermediate
-related: ["[[risk-management]]", "[[perseus-mining]]", "[[diversification]]", "[[bonds]]", "[[emerging-markets]]", "[[dcf-analysis]]", "[[sovereign-debt]]", "[[credit-default-swap]]"]
+related: ["[[risk-management]]", "[[diversification]]", "[[bonds]]", "[[emerging-markets]]", "[[sovereign-debt]]", "[[credit-default-swap]]"]
 ---
 
-Sovereign risk is the risk that a government's actions -- such as expropriation, regulatory changes, capital controls, or political instability -- will negatively affect an investment's value. It encompasses both the risk of outright sovereign default on debt obligations and the broader risk of adverse government policy affecting private investments. It is particularly relevant for mining and resource companies operating in developing nations. Fred McNaught applies a discount to companies with significant sovereign risk exposure, citing African miners like [[perseus-mining|Perseus Mining]] as examples where operational quality is undermined by unpredictable government behaviour. He generally prefers companies operating in jurisdictions with stable rule of law, such as Australia, Canada, and the United States.
 
 ## Country Risk Ratings
 
@@ -34,7 +33,7 @@ Investors require higher returns to compensate for sovereign risk, manifesting a
 
 - **Higher bond yields** -- Emerging market sovereign bonds yield 200-600 bps above comparable US Treasuries (more during crises)
 - **Lower equity multiples** -- Companies with significant operations in high-risk jurisdictions trade at discounted P/E and EV/EBITDA multiples relative to peers in stable jurisdictions
-- **Higher cost of capital** -- Analysts add a country risk premium (CRP) to the discount rate in [[dcf-analysis|DCF models]], typically estimated using sovereign bond spreads or the Damodaran methodology
+- **Higher cost of capital** -- Analysts add a country risk premium (CRP) to the discount rate in DCF models, typically estimated using sovereign bond spreads or the Damodaran methodology
 
 ## Pricing Sovereign Risk: The Country Risk Premium
 
@@ -47,7 +46,7 @@ sovereign default spread = local-currency sovereign bond yield − base-country 
                            or the CDS spread, or implied from the country's credit rating
 ```
 
-The `σ_equity / σ_bond` multiplier (often ~1.2-1.5) scales the bond-market default spread up to reflect that equities are riskier than bonds in the same country. The CRP is then added to the discount rate in a [[dcf-analysis|DCF]]:
+The `σ_equity / σ_bond` multiplier (often ~1.2-1.5) scales the bond-market default spread up to reflect that equities are riskier than bonds in the same country. The CRP is then added to the discount rate in a DCF:
 
 ```
 cost of equity = risk-free rate + β·(equity risk premium) + CRP
@@ -68,7 +67,7 @@ Sovereign risk is the dimension that turns an otherwise good company or bond int
 - **Asymmetric, jump-style risk:** Expropriation, capital controls, or a coup are step-function events, not gradual drifts. They are poorly captured by volatility-based [[risk-management|risk metrics]] and require scenario thinking and position-size caps per jurisdiction.
 - **Geographic [[diversification]]:** Capping exposure to any single high-risk jurisdiction is the primary defense; correlated sovereign shocks (e.g., a regional contagion across emerging markets) limit how much diversification actually helps in a crisis.
 - **Macro/EM trades:** Sovereign CDS, EMBI spreads, and FX are direct expressions of a sovereign-risk view. Widening CDS ahead of an election or debt-restructuring catalyst is a recurring event-driven setup.
-- **Resource-sector specific:** Mining and energy assets are immobile and capital-intensive, making them the prime targets for royalty hikes, windfall taxes, and nationalisation — the reason resource analysts weight jurisdiction heavily (see [[perseus-mining]]).
+- **Resource-sector specific:** Mining and energy assets are immobile and capital-intensive, making them the prime targets for royalty hikes, windfall taxes, and nationalisation — the reason resource analysts weight jurisdiction heavily (see perseus-mining).
 
 ## Related
 
@@ -76,9 +75,7 @@ Sovereign risk is the dimension that turns an otherwise good company or bond int
 - [[bonds]] -- sovereign debt and credit risk
 - [[sovereign-debt]] -- the instrument-level view of government borrowing
 - [[credit-default-swap]] -- market-priced probability of sovereign default
-- [[dcf-analysis]] -- where the country risk premium enters valuation
 - [[diversification]] -- geographic diversification to manage sovereign risk
-- [[perseus-mining]] -- example of mining company with sovereign risk exposure
 - [[emerging-markets]] -- markets where sovereign risk is most prominent
 
 ## Sources

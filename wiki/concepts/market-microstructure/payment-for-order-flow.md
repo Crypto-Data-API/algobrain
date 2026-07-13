@@ -14,7 +14,6 @@ related:
   - "[[market-maker]]"
   - "[[bid-ask-spread]]"
   - "[[liquidity]]"
-  - "[[reg-nms]]"
   - "[[adverse-selection]]"
   - "[[high-frequency-trading]]"
 ---
@@ -63,7 +62,6 @@ Retail traders should understand that "commission-free" trading is not truly fre
 - [[market-maker]] — the wholesalers that pay for and internalize retail flow
 - [[adverse-selection]] — why uninformed retail flow is the valuable kind
 - [[bid-ask-spread]] — the source of the wholesaler's margin
-- [[reg-nms]] — the US national market system framework governing routing and best execution
 - [[high-frequency-trading]] — the technology layer wholesalers use to internalize profitably
 
 ## Sources

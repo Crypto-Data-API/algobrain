@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: good
 tags: [market-microstructure, order-types, indicators, volume, futures, crypto]
 aliases: ["CVD", "Cumulative Volume Delta", "Cumulative Delta", "Volume Delta", "Delta"]
-related: ["[[order-flow]]", "[[footprint-chart]]", "[[bookmap]]", "[[absorption]]", "[[volume]]", "[[volume-profile]]", "[[point-of-control]]", "[[volume-profile-trading-strategy]]", "[[volume-imbalance]]"]
+related: ["[[order-flow]]", "[[footprint-chart]]", "[[absorption]]", "[[volume]]", "[[volume-profile]]", "[[point-of-control]]", "[[volume-profile-trading-strategy]]", "[[volume-imbalance]]"]
 domain: [market-microstructure]
 prerequisites: ["[[order-flow]]", "[[volume]]"]
 difficulty: intermediate
@@ -27,7 +27,7 @@ CVD is plotted as its own line or sub-chart and read *against price*. The key in
 3. **Delta** = sum of signed volume in the period.
 4. **CVD** = cumulative running sum of delta.
 
-Because step 1 depends on accurate aggressor classification, CVD quality depends on data quality. Tick-accurate feeds on [[sierra-chart]], [[ninjatrader]], [[quantower]], [[bookmap]] and crypto perpetual exchanges give clean CVD; reconstructed delta from low-resolution data is approximate.
+Because step 1 depends on accurate aggressor classification, CVD quality depends on data quality. Tick-accurate feeds on [[sierra-chart]], [[ninjatrader]], quantower, bookmap and crypto perpetual exchanges give clean CVD; reconstructed delta from low-resolution data is approximate.
 
 ## Absorption vs initiative
 
@@ -82,7 +82,6 @@ The level is identical in both cases; CVD is what tells the trader whether the o
 
 - [[order-flow]] — the parent discipline; CVD is its summary directional metric
 - [[footprint-chart]] — shows per-price bid/ask volume that CVD aggregates
-- [[bookmap]] — order-book + CVD visualisation platform
 - [[absorption]] — the passive-side behaviour CVD helps detect
 - [[volume]] / [[volume-imbalance]] — raw and signed volume context
 - [[volume-profile]] / [[point-of-control]] — *where* volume traded, complemented by CVD's *who*

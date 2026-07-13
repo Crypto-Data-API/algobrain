@@ -10,7 +10,7 @@ source_url: "https://tokenterminal.com"
 source_author: "Token Terminal"
 confidence: high
 aliases: ["TokenTerminal"]
-related: ["[[defi]]", "[[yield-farming]]", "[[fundamental-analysis]]", "[[dune-analytics]]", "[[crypto-data-sources]]"]
+related: ["[[defi]]", "[[yield-farming]]", "[[dune-analytics]]", "[[crypto-data-sources]]"]
 ---
 
 Token Terminal is a crypto analytics platform that applies traditional financial metrics -- revenue, P/E ratios, price-to-sales, earnings, fees -- to blockchain protocols and decentralized applications. The platform is particularly valuable for evaluating whether [[yield-farming]] APYs are sustainable (funded by real protocol revenue) or unsustainable (funded primarily by token emissions that dilute holders).
@@ -57,7 +57,6 @@ Token Terminal is a crypto analytics platform that applies traditional financial
 - [[dune-analytics]] -- complementary on-chain analytics via custom SQL queries
 - [[defi]] -- the ecosystem Token Terminal analyzes
 - [[yield-farming]] -- the strategy Token Terminal's data helps evaluate
-- [[fundamental-analysis]] -- the analytical framework Token Terminal applies to crypto
 - [[crypto-data-sources]] -- broader catalog of crypto data providers
 - [[zapper]] -- portfolio-level DeFi tracking (complementary to Token Terminal's protocol-level data)
 

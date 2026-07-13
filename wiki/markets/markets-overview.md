@@ -18,7 +18,7 @@ The defining differences are practical: [[bitcoin|Bitcoin]] and [[crypto-markets
 | Sub-hub | What it covers | Trading hours | Distinguishing trait |
 |---|---|---|---|
 | [[crypto-overview\|Crypto]] | Cryptocurrencies, DeFi, exchanges, stablecoins, on-chain analytics | 24/7 | Highest volatility; permissionless leverage |
-| [[stocks-overview\|Stocks]] | Equities, indices, IPOs, exchange microstructure | Exchange sessions | Overnight/weekend gaps; earnings-driven |
+| Stocks | Equities, indices, IPOs, exchange microstructure | Exchange sessions | Overnight/weekend gaps; earnings-driven |
 | [[forex-overview\|Forex]] | Currency pairs, central banks, carry | ~24/5 continuous | Largest market by turnover; rate-differential driven |
 | [[commodities-overview\|Commodities]] | Energy, metals, agricultural markets | Venue sessions | Anchored to physical supply/demand and storage |
 | [[options-overview\|Options]] | Greeks, volatility surface, pricing, 70+ strategy pages | Tied to underlying | Non-linear payoffs; expiry and time decay |
@@ -31,18 +31,17 @@ The major regional benchmarks — useful for cross-market relative-value and mac
 
 | Index | Region | Construction note |
 |---|---|---|
-| [[s-and-p-500]] | United States | 500 names, free-float cap; the global risk benchmark |
-| [[euro-stoxx\|EURO STOXX 50]] | Eurozone | 50 blue chips, free-float cap; banks/luxury/semis tilt |
-| [[ftse-100]] | United Kingdom | 100 names; energy/miners/banks, mostly non-GBP earners |
-| [[nikkei-225]] | Japan | 225 names, **price-weighted** |
-| [[asx-200]] | Australia | 200 names; banks + materials, China-demand proxy |
-| [[shanghai-composite\|Shanghai Composite]] | Mainland China | All-share, total-cap; retail-led, capital-controlled |
+| s-and-p-500 | United States | 500 names, free-float cap; the global risk benchmark |
+| EURO STOXX 50 | Eurozone | 50 blue chips, free-float cap; banks/luxury/semis tilt |
+| ftse-100 | United Kingdom | 100 names; energy/miners/banks, mostly non-GBP earners |
+| nikkei-225 | Japan | 225 names, **price-weighted** |
+| asx-200 | Australia | 200 names; banks + materials, China-demand proxy |
+| Shanghai Composite | Mainland China | All-share, total-cap; retail-led, capital-controlled |
 
 ## Most-Referenced Instruments
 
 - [[bitcoin]] — The original cryptocurrency and most liquid digital asset; market bellwether
 - [[ethereum]] — Smart-contract settlement layer underpinning DeFi
-- [[s-and-p-500]] — The benchmark US equity index
 - [[crude-oil]] — The most actively traded physical commodity; macro growth proxy
 - [[gold]] — Monetary metal and safe-haven hedge
 - [[eurusd]] — The most liquid currency pair in the world
@@ -77,8 +76,7 @@ The asset classes are not independent silos — they are linked through a few ma
 
 ## See Also
 
-- [[stocks-overview]] · [[crypto-overview]] · [[forex-overview]] · [[commodities-overview]] · [[options-overview]] · [[futures-overview]] · [[bonds]]
-- [[s-and-p-500]] · [[euro-stoxx]] · [[ftse-100]] · [[nikkei-225]] · [[asx-200]] · [[shanghai-composite]]
+- stocks-overview · [[crypto-overview]] · [[forex-overview]] · [[commodities-overview]] · [[options-overview]] · [[futures-overview]] · [[bonds]]
 - [[bitcoin]] · [[ethereum]] · [[crude-oil]] · [[gold]] · [[eurusd]]
 - [[risk-management]] · [[portfolio-theory]] · [[market-microstructure]]
 

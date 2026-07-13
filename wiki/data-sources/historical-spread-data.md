@@ -6,12 +6,12 @@ updated: 2026-06-20
 status: excellent
 tags: [data, arbitrage, backtesting, crypto, options, futures, meta]
 aliases: ["Spread Data", "Basis Data Sources", "Funding Rate History", "Historical Arbitrage Data"]
-related: ["[[data-sources-overview]]", "[[crypto-data-sources]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[arbitrage-overview]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[transaction-cost-modeling]]", "[[exchange-api-reference]]", "[[market-chameleon]]", "[[merger-arbitrage]]", "[[etf-arbitrage]]"]
+related: ["[[data-sources-overview]]", "[[crypto-data-sources]]", "[[paid-data-providers]]", "[[free-data-sources]]", "[[arbitrage-overview]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[pairs-trading]]", "[[transaction-cost-modeling]]", "[[exchange-api-reference]]", "[[etf-arbitrage]]"]
 ---
 
 # Historical Spread & Basis Data Sources
 
-Arbitrage backtesting requires historical data on the *spreads themselves* — not just individual asset prices. A backtest that reconstructs spreads from two separate price feeds often underestimates slippage, misses synchronization issues, and overstates profitability. This page catalogs where to find pre-computed or properly synchronized spread, basis, and funding rate time series. It is the [[arbitrage-overview|arbitrage]]-focused companion to [[paid-data-providers]] and [[free-data-sources]]; for the options-analytics layer over OPRA see [[market-chameleon]], and for the broader catalog see [[data-sources-overview]].
+Arbitrage backtesting requires historical data on the *spreads themselves* — not just individual asset prices. A backtest that reconstructs spreads from two separate price feeds often underestimates slippage, misses synchronization issues, and overstates profitability. This page catalogs where to find pre-computed or properly synchronized spread, basis, and funding rate time series. It is the [[arbitrage-overview|arbitrage]]-focused companion to [[paid-data-providers]] and [[free-data-sources]]; for the options-analytics layer over OPRA see market-chameleon, and for the broader catalog see [[data-sources-overview]].
 
 > **Pricing & coverage disclaimer:** Cost figures and history-depth ranges below are ballpark, drawn from vendor pages and community reports circa 2024-2026, and change frequently. Confirm current pricing, coverage, and history depth on each vendor's own site before relying on them.
 
@@ -26,7 +26,7 @@ The page is organized by spread family. The table below is the index: for each a
 | Cross-exchange differentials | DIY from exchange APIs | Tardis.dev (L2 books) / Kaiko | No free pre-computed series; fee regime drift | [[cross-exchange-arbitrage]] |
 | Options IV surfaces | Deribit (crypto) / CBOE (VIX) | OptionMetrics IvyDB / ORATS | Mid vs bid/ask overstates fills by half-spread | [[volatility-arbitrage]] |
 | ETF premium/discount | ETF.com / provider sites | Bloomberg / Refinitiv | NAV vs market-price timestamp drift | [[etf-arbitrage]] |
-| Merger-arb spreads | SEC EDGAR (terms only) | Bloomberg MA / SDC Platinum | Snapshot-at-announcement ≠ spread time series | [[merger-arbitrage]] |
+| Merger-arb spreads | SEC EDGAR (terms only) | Bloomberg MA / SDC Platinum | Snapshot-at-announcement ≠ spread time series | merger-arbitrage |
 | Commodity spreads | CME / EIA / USDA | Norgate / CSI / Bloomberg | Roll gaps in raw contracts → phantom signals | [[crack-spread]], [[crush-spread]] |
 
 Many of these vendors are profiled in more general terms in [[paid-data-providers]]; this page focuses specifically on their fitness for *spread/basis/funding* reconstruction.
@@ -248,14 +248,11 @@ The practical upshot: for crypto, **Tardis.dev** is the dominant retail-accessib
 - [[crypto-data-sources]]
 - [[paid-data-providers]]
 - [[free-data-sources]]
-- [[options-data-sources]]
-- [[market-chameleon]]
 - [[transaction-cost-modeling]]
 - [[arbitrage-overview]]
 - [[funding-rate-arbitrage]]
 - [[cross-exchange-arbitrage]]
 - [[cash-and-carry]]
 - [[volatility-arbitrage]]
-- [[merger-arbitrage]]
 - [[etf-arbitrage]]
 - [[exchange-api-reference]]

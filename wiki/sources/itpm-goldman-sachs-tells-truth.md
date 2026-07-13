@@ -13,10 +13,10 @@ source_file: "r2://trader-wiki/transcripts/2013-02-07-ex-goldman-sachs-tells-tru
 confidence: medium
 claims_count: 28
 aliases: ["Goldman Sachs Tells Truth"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[goldman-sachs]]", "[[lehman-brothers]]", "[[jp-morgan]]", "[[million-dollar-traders]]", "[[trading-psychology]]"]
+related: ["[[anton-kreil]]", "[[million-dollar-traders]]", "[[trading-psychology]]"]
 ---
 
-Combined source summary for the six-part university Q&A interview with [[anton-kreil]], covering his career trajectory from age 16 through [[goldman-sachs]], [[lehman-brothers]], and [[jp-morgan]], his role in BBC's "Million Dollar Traders," the founding of [[itpm]], and his trading philosophy. Early-era ITPM content (2013) with more biographical detail than later presentations. **Confidence note:** the career autobiography is entirely self-reported by Kreil and cannot be independently verified — these claims are marked [MEDIUM] (single-source, plausible, but uncorroborated). Kreil's general market-structure and trading-psychology observations are opinion ([MEDIUM]). Verifiable public facts (the existence and air dates of BBC's "Million Dollar Traders", the broad statistic that most retail traders lose money) are marked [HIGH].
+Combined source summary for the six-part university Q&A interview with [[anton-kreil]], covering his career trajectory from age 16 through goldman-sachs, lehman-brothers, and jp-morgan, his role in BBC's "Million Dollar Traders," the founding of itpm, and his trading philosophy. Early-era ITPM content (2013) with more biographical detail than later presentations. **Confidence note:** the career autobiography is entirely self-reported by Kreil and cannot be independently verified — these claims are marked [MEDIUM] (single-source, plausible, but uncorroborated). Kreil's general market-structure and trading-psychology observations are opinion ([MEDIUM]). Verifiable public facts (the existence and air dates of BBC's "Million Dollar Traders", the broad statistic that most retail traders lose money) are marked [HIGH].
 
 ## Key Claims
 
@@ -50,7 +50,7 @@ Combined source summary for the six-part university Q&A interview with [[anton-k
 17. [MEDIUM] Humans are "very bad traders" because human psychology is the opposite of how you should trade. Success requires suppressing natural emotional responses over many years of practice. (Source: Kreil direct statement — opinion, consistent with [[behavioral-finance]])
 18. [MEDIUM] Computers have destroyed short-term opportunities but "can't make rational decisions" in extreme events. "We're still yet to see whether a computer can trade through a stock market crash and make money." (Source: Kreil direct statement — opinion, dated 2013)
 19. [MEDIUM] Approach: 1-3 month time horizon, not day trading. "I don't need to worry about the machines on a minute-to-minute basis." (Source: Kreil direct statement — stated method)
-20. [MEDIUM] Technical analysis is "not unimportant" — it serves as a "head check" overlay on [[fundamental-analysis]]. When fundamentals say buy but technicals say wait, the idea goes on the watch list. "Then all the planets are aligned." (Source: Kreil direct statement — stated method)
+20. [MEDIUM] Technical analysis is "not unimportant" — it serves as a "head check" overlay on fundamental-analysis. When fundamentals say buy but technicals say wait, the idea goes on the watch list. "Then all the planets are aligned." (Source: Kreil direct statement — stated method)
 21. [MEDIUM] Personal portfolio allocation: 65% equities (most volatile), 20% commodities, 10% forex, remainder in cash/margin reserve. (Source: Kreil direct statement — self-reported)
 22. [MEDIUM] Equities indices are 1.5-2x more volatile than major currency pairs historically (50+ years of data). (Source: Kreil direct statement — figure cited without source; directionally plausible)
 
@@ -68,16 +68,11 @@ Combined source summary for the six-part university Q&A interview with [[anton-k
 
 ## Entities Mentioned
 
-- [[goldman-sachs]] — primary career (2000-2004)
-- [[lehman-brothers]] — second stint (2004-2006), risk culture concerns
-- [[jp-morgan]] — third stint (2006-2007)
-- [[itpm]] — founded after BBC show
 - [[million-dollar-traders]] — BBC program with Lex van Dam concept
 
 ## Key Concepts
 
 - [[trading-psychology]] — humans as inherently bad traders, emotional suppression
-- [[fundamental-analysis]] — 80% of professional approach
 - [[technical-analysis-overview|Technical Analysis]] — 20% overlay for timing
 - [[volatility]] — lifeblood of trading, equities > forex historically
 - [[algorithmic-trading]] — destroying short-term opportunities

@@ -6,7 +6,7 @@ updated: 2026-06-10
 status: good
 tags: [crypto, bitcoin, stocks, risk-management, ai-trading, behavioral-finance]
 aliases: ["AI Recession Crypto Shorts", "Crypto AI Recession Playbook"]
-related: ["[[ai-recession-playbook]]", "[[citrini-2028-global-intelligence-crisis]]", "[[ai-driven-demand-destruction]]", "[[capital-vs-labor-asymmetry]]", "[[tech-hub-concentration-risk]]", "[[ai-capex-vs-cash-flow-divergence]]", "[[microstrategy]]", "[[mara]]", "[[riot-platforms]]", "[[coreweave]]", "[[coinbase]]", "[[bitcoin-halving]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]", "[[2025-10-crypto-liquidation-cascade]]"]
+related: ["[[citrini-2028-global-intelligence-crisis]]", "[[ai-driven-demand-destruction]]", "[[capital-vs-labor-asymmetry]]", "[[tech-hub-concentration-risk]]", "[[microstrategy]]", "[[mara]]", "[[riot-platforms]]", "[[coinbase]]", "[[bitcoin-halving]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]", "[[2025-10-crypto-liquidation-cascade]]"]
 strategy_type: hybrid
 timeframe: position
 markets: [crypto, stocks]
@@ -24,7 +24,7 @@ breakeven_cost_bps: 70
 decay_evidence: "Pair-trade dispersion edges decay as more participants identify them; this thesis is currently early — no evidence of crowding as of 2026-05."
 ---
 
-A basket of crypto-specific short and pair-trade legs designed to express the [[ai-recession-playbook]] thesis through digital assets. The core insight is that crypto bifurcates in an AI-driven labor recession — BTC may decouple as a monetary debasement hedge while alts, AI tokens, mining equities, and crypto-broker stocks face compounding wealth-destruction and VC-liquidity headwinds. (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])
+A basket of crypto-specific short and pair-trade legs designed to express the ai-recession-playbook thesis through digital assets. The core insight is that crypto bifurcates in an AI-driven labor recession — BTC may decouple as a monetary debasement hedge while alts, AI tokens, mining equities, and crypto-broker stocks face compounding wealth-destruction and VC-liquidity headwinds. (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])
 
 ## Edge Source
 
@@ -38,7 +38,7 @@ Primarily **behavioral** and **structural** with an **informational** overlay (s
 
 Three crypto-specific transmission channels for AI labor recession that are not visible in equity-market analysis:
 
-**1. Tech-worker wealth concentration.** Bay Area, Seattle, Austin, and Boston tech employees hold disproportionate crypto allocations versus the general population. AI-driven tech layoffs (see [[2026-04-meta-ai-layoffs]], [[skill-bifurcation]]) trigger forced selling: lifestyle adjustments, lost RSU vesting, 401(k) loans against crypto holdings, exercise of vested options at depressed valuations. The selling is non-economic (life-event-driven) and price-insensitive. This is the [[capital-vs-labor-asymmetry]] effect translated into crypto flows.
+**1. Tech-worker wealth concentration.** Bay Area, Seattle, Austin, and Boston tech employees hold disproportionate crypto allocations versus the general population. AI-driven tech layoffs (see 2026-04-meta-ai-layoffs, [[skill-bifurcation]]) trigger forced selling: lifestyle adjustments, lost RSU vesting, 401(k) loans against crypto holdings, exercise of vested options at depressed valuations. The selling is non-economic (life-event-driven) and price-insensitive. This is the [[capital-vs-labor-asymmetry]] effect translated into crypto flows.
 
 **2. Crypto VC liquidity collapse.** Crypto venture capital deployment tracks tech VC sentiment with a 6-12 month lag. A broad VC contraction (already visible in 2025-2026 deal volumes per the source research) means token unlock schedules continue arriving on calendar while the buyer base disappears. Vesting cliffs become forced-sell events into a thinning bid.
 
@@ -62,7 +62,7 @@ Disconfirming evidence to monitor:
 - [[ibkr-forecast-trader|IBKR Forecast Trader]] recession contract above 50%
 - BTC dominance trending up (alts already underperforming) — this signals the dispersion regime is active
 - VIX above 22 with persistent term-structure inversion
-- Major tech-hub muni spread widening (see [[tech-hub-muni-bond-short]])
+- Major tech-hub muni spread widening (see tech-hub-muni-bond-short)
 
 **Sizing.** Total notional capped at 100% of allocated capital (no internal leverage beyond what each leg structurally requires). Distribute as below:
 
@@ -216,10 +216,10 @@ Numerical conditions for retiring or hedging the position (see [[when-to-retire-
 
 ## Related
 
-- Master synthesis: [[ai-recession-playbook]]
-- Sibling strategies: [[white-collar-ai-displacement-short]], [[tech-hub-muni-bond-short]], [[ai-sector-rotation-energy-hedge]]
-- Concept anchors: [[citrini-2028-global-intelligence-crisis]], [[ai-driven-demand-destruction]], [[capital-vs-labor-asymmetry]], [[tech-hub-concentration-risk]], [[ai-capex-vs-cash-flow-divergence]], [[skill-bifurcation]]
-- Crypto-equity targets: [[microstrategy]], [[mara]], [[riot-platforms]], [[cleanspark]], [[hut-8]], [[bit-digital]], [[cipher-mining]], [[coreweave]]
+- Master synthesis: ai-recession-playbook
+- Sibling strategies: white-collar-ai-displacement-short, tech-hub-muni-bond-short, ai-sector-rotation-energy-hedge
+- Concept anchors: [[citrini-2028-global-intelligence-crisis]], [[ai-driven-demand-destruction]], [[capital-vs-labor-asymmetry]], [[tech-hub-concentration-risk]], ai-capex-vs-cash-flow-divergence, [[skill-bifurcation]]
+- Crypto-equity targets: [[microstrategy]], [[mara]], [[riot-platforms]], [[cleanspark]], [[hut-8]], [[bit-digital]], [[cipher-mining]], coreweave
 - Crypto exchanges/issuers: [[coinbase]], [[circle]]
 - Crypto microstructure: [[bitcoin]], [[ethereum]], [[solana]], [[tao]], [[render-token]], [[fetch-ai]], [[bittensor-subnets]]
 - Mechanics: [[funding-rate]], [[basis]], [[funding-rate-arbitrage]], [[liquidation-cascade-fade]], [[bitcoin-halving]]

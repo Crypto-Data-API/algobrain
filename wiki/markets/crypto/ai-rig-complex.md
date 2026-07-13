@@ -85,7 +85,7 @@ ARC is a **narrative-driven AI-agent token**, not a cash-flow asset — there is
 - **FDV = market cap** — with supply fully circulating (~1.00 Mcap/FDV), there is no hidden dilution denominator: the ~$76M cap *is* the fully-diluted value. The supply risk is therefore holder concentration, not forward emissions (see Tokenomics).
 - **Adoption is the only durable case** — like [[sahara-ai|SAHARA]], the bull thesis must be judged by real framework usage and developer traction over years, not by token price.
 
-Qualitative framing only — see [[valuation]].
+Qualitative framing only — see valuation.
 
 ## Peer Comparison
 
@@ -137,7 +137,7 @@ The token's value narrative is reflexive and attention-driven: demand is tied to
 - [[ai-narrative-arc]] — narrative-cycle driver
 - [[depin]] — adjacent infra cohort
 - [[solana]] — host chain
-- [[valuation]] · [[slippage]] · [[derivatives]]
+- valuation · [[slippage]] · [[derivatives]]
 - [[crypto-fear-and-greed-index]] · [[crypto-markets]]
 
 ---

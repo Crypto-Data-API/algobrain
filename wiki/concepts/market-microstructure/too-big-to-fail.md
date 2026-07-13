@@ -9,7 +9,7 @@ aliases: ["TBTF", "too big to fail", "Systemically Important", "SIFI"]
 domain: [market-microstructure]
 prerequisites: ["[[moral-hazard]]", "[[2008-global-financial-crisis]]"]
 difficulty: intermediate
-related: ["[[2008-global-financial-crisis]]", "[[dodd-frank-act]]", "[[lehman-brothers]]", "[[moral-hazard]]", "[[risk-management]]", "[[tarp]]", "[[subprime-mortgage]]"]
+related: ["[[2008-global-financial-crisis]]", "[[dodd-frank-act]]", "[[moral-hazard]]", "[[risk-management]]", "[[tarp]]", "[[subprime-mortgage]]"]
 ---
 
 # Too Big to Fail
@@ -18,7 +18,7 @@ related: ["[[2008-global-financial-crisis]]", "[[dodd-frank-act]]", "[[lehman-br
 
 ## Origin and 2008 Crisis
 
-The concept gained mainstream prominence during the [[2008-global-financial-crisis]]. The U.S. government bailed out Bear Stearns, AIG, Fannie Mae, Freddie Mac, and major banks through [[tarp]] and Federal Reserve facilities -- but allowed [[lehman-brothers]] to fail, triggering a global panic that demonstrated exactly why regulators feared TBTF collapses. The inconsistency in treatment (who gets saved, who does not) amplified uncertainty and market chaos.
+The concept gained mainstream prominence during the [[2008-global-financial-crisis]]. The U.S. government bailed out Bear Stearns, AIG, Fannie Mae, Freddie Mac, and major banks through [[tarp]] and Federal Reserve facilities -- but allowed lehman-brothers to fail, triggering a global panic that demonstrated exactly why regulators feared TBTF collapses. The inconsistency in treatment (who gets saved, who does not) amplified uncertainty and market chaos.
 
 ## Moral Hazard Problem
 
@@ -37,7 +37,6 @@ TBTF dynamics influence how markets price risk during crises. Traders who unders
 - [[2008-global-financial-crisis]] -- where the term entered the mainstream
 - [[moral-hazard]] -- the core incentive distortion TBTF creates
 - [[tarp]] -- the bailout mechanism for systemic U.S. banks in 2008
-- [[lehman-brothers]] -- the firm allowed to fail, demonstrating the cost of inconsistency
 - [[dodd-frank-act]] -- the SIFI / Orderly Liquidation Authority response
 - [[subprime-mortgage]] -- the asset class at the center of the crisis
 - [[risk-management]] -- systemic risk framing for portfolios

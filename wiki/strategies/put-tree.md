@@ -20,10 +20,10 @@ crowding_risk: low
 expected_sharpe: -0.3
 expected_max_drawdown: 0.03
 breakeven_cost_bps: 150
-related: ["[[spx-puts]]", "[[vix-call-spreads]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[ratio-spread]]", "[[debit-spread]]", "[[put-spread]]", "[[skew]]", "[[implied-volatility]]", "[[universa-investments]]", "[[convexity]]", "[[gamma]]", "[[vega]]", "[[1x2-ratio-spread]]"]
+related: ["[[vix-call-spreads]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[ratio-spread]]", "[[debit-spread]]", "[[put-spread]]", "[[skew]]", "[[implied-volatility]]", "[[universa-investments]]", "[[convexity]]", "[[gamma]]", "[[vega]]", "[[1x2-ratio-spread]]"]
 ---
 
-A **put tree** (or "Christmas tree put spread") is a defined-cost long-vol structure that stacks put exposure across three strikes: long one put at a higher strike, short one put at a middle strike, and long two puts at a lower strike — or variants of this 1×1×2 / 1×2×1 ratio. The structure is engineered to **maximize convex payoff in the 5-15% drawdown zone** while remaining funded (small debit) and capping the deepest-tail exposure. It is the structure of choice for traders who want long-vol overlay payoff but cannot stomach the bleed of a continuous OTM [[spx-puts|SPX put]] program — and is an explicit recommendation in the [[itpm|ITPM]] / [[options-concentration-risk]] long-vol overlay menu.
+A **put tree** (or "Christmas tree put spread") is a defined-cost long-vol structure that stacks put exposure across three strikes: long one put at a higher strike, short one put at a middle strike, and long two puts at a lower strike — or variants of this 1×1×2 / 1×2×1 ratio. The structure is engineered to **maximize convex payoff in the 5-15% drawdown zone** while remaining funded (small debit) and capping the deepest-tail exposure. It is the structure of choice for traders who want long-vol overlay payoff but cannot stomach the bleed of a continuous OTM SPX put program — and is an explicit recommendation in the ITPM / [[options-concentration-risk]] long-vol overlay menu.
 
 ## Edge Source
 
@@ -76,7 +76,7 @@ This is the classic "Christmas tree" — narrower payoff cone, no unbounded gain
 ### Sizing
 
 - Allocate **2-3% of NAV per year** (~0.2-0.25% per month) to put trees, in line with other long-vol overlay budgets — this is what produces the -2% to -3% calm-regime annual cost shown under Performance.
-- Granularity matters: one full-size SPX tree costs roughly $1,500-$2,500 of debit. Books under ~$1M should ladder with [[xsp|XSP]] (1/10th-size) trees monthly, or build full SPX trees quarterly, to stay inside the budget.
+- Granularity matters: one full-size SPX tree costs roughly $1,500-$2,500 of debit. Books under ~$1M should ladder with XSP (1/10th-size) trees monthly, or build full SPX trees quarterly, to stay inside the budget.
 - For a $1M book: one SPX tree per month at ~$1,500-$2,500 debit ≈ 2-3% of NAV per year.
 - Stack 2-3 expiry ladders so a portion of the structure is always 30+ DTE.
 
@@ -162,7 +162,7 @@ Net Greeks of the 1×1×2 tree, and how they map to the loss distribution:
 |---|---|---|
 | [[delta]] | Slightly negative | Grows negative as spot falls into the upper/middle strike band; the net +1 put above the short strike dominates first |
 | [[gamma]] | Mixed → net long | The short middle strike subtracts gamma in the plateau zone, but the two lower long legs make the structure strongly **long gamma** in the deep tail |
-| [[theta]] | Negative (small) | The bleed is the net debit amortized over tenor — far smaller than a naked [[spx-puts|OTM put]] program because the short middle leg funds it |
+| [[theta]] | Negative (small) | The bleed is the net debit amortized over tenor — far smaller than a naked OTM put program because the short middle leg funds it |
 | [[vega]] | Net long | An IV spike marks the whole tree up; but the short middle strike (priced on the steep part of the [[skew]]) gives back some vega, which is *why* the tree underperforms naked puts in a vol explosion |
 
 The structure is **long gamma, long vega, mildly short theta** — the long-vol signature — but with a deliberate notch cut out of the deep-tail vega via the short middle strike. That notch is the funding mechanism (cheaper carry) and simultaneously the disadvantage (deep-tail underperformance versus naked puts). The trade is, in Greeks terms, a bet that drawdowns resolve in the 5-15% band more often than the far tail — which historical [[market-regime|regime]] data broadly supports for typical corrections.
@@ -208,14 +208,14 @@ Below the lower strike the 1×1×2 is net long two puts, so absolute payoff keep
 
 ### Behaviour by market regime
 
-| Regime | Put-tree result | Versus naked [[spx-puts]] |
+| Regime | Put-tree result | Versus naked spx-puts |
 |---|---|---|
 | Low-vol grind | Small defined bleed (the net debit) | Cheaper carry — the tree wins on cost |
 | 5-15% correction | Best zone — 5-20x debit payoff | Tree wins decisively here |
 | 30%+ crash with vol spike | Strong absolute gain, but short middle leg drags | Naked deep-OTM puts dominate per premium dollar |
 | Slow-grind bear stalling near lower strike | Payoff already committed; underperforms | Naked puts keep gaining with continued decline |
 
-The structure is therefore a **correction-insurance** instrument, not a **catastrophe-insurance** instrument — the opposite emphasis from the far-OTM [[spx-puts]] program. Books that want both layer the two (see "Stacks well with other overlays" under Advantages) against a [[long-vol-vs-short-vol|short-vol core]].
+The structure is therefore a **correction-insurance** instrument, not a **catastrophe-insurance** instrument — the opposite emphasis from the far-OTM spx-puts program. Books that want both layer the two (see "Stacks well with other overlays" under Advantages) against a [[long-vol-vs-short-vol|short-vol core]].
 
 ## Capacity Limits
 
@@ -242,7 +242,7 @@ For SPX-based put trees, capacity is essentially unlimited at retail and small-f
 - **Optimized for moderate drawdowns.** Pays best in the 5-15% zone — exactly where most equity drawdowns historically resolve.
 - **Cheaper than naked OTM puts.** Net debit is typically 30-60% of an equivalent naked put position.
 - **Captures skew kink.** Unique among long-vol structures in monetizing the put-skew non-linearity.
-- **Stacks well with other overlays.** Combine with [[vix-call-spreads]] for vol-spike coverage and [[spx-puts|naked OTM puts]] for catastrophic crash coverage; the trio covers different parts of the loss distribution.
+- **Stacks well with other overlays.** Combine with [[vix-call-spreads]] for vol-spike coverage and naked OTM puts for catastrophic crash coverage; the trio covers different parts of the loss distribution.
 - **Funded structure.** Allocators allergic to "all bleed, no payoff most years" can get convex protection at a much lower premium.
 
 ## Disadvantages
@@ -265,7 +265,6 @@ For SPX-based put trees, capacity is essentially unlimited at retail and small-f
 
 ## Related
 
-- [[spx-puts]] — naked OTM put alternative
 - [[vix-call-spreads]] — alternative defined-debit long-vol overlay
 - [[tail-risk-hedging]] — broader strategy class
 - [[options-concentration-risk]] — the problem this addresses

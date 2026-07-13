@@ -11,10 +11,10 @@ markets_affected: [bonds]
 impact: high
 verified: true
 sources_count: 4
-related: ["[[rothschild-family]]", "[[fastest-profitable-trades]]", "[[telegraph-impact-on-arbitrage]]", "[[gold-standard-mechanics]]", "[[history-overview]]", "[[bonds]]", "[[information-arbitrage]]", "[[behavioral-finance]]"]
+related: ["[[fastest-profitable-trades]]", "[[telegraph-impact-on-arbitrage]]", "[[gold-standard-mechanics]]", "[[history-overview]]", "[[bonds]]", "[[information-arbitrage]]", "[[behavioral-finance]]"]
 ---
 
-In June 1815, **Nathan Mayer Rothschild** is said to have used an information advantage about the outcome of the Battle of Waterloo (June 18, 1815) to profit from British government bond ("Consols") trading on the London Stock Exchange. The legend — that Rothschild deliberately sold to drive the market down before buying en masse on the actual news — is **mostly myth and antisemitic embellishment from later decades**. The historical record is murkier and considerably more interesting: Rothschild had a faster information network than the British government via private courier service, knew Waterloo's outcome ~24-30 hours before the official dispatch arrived, and used that window to **buy aggressively into a market that was still uncertain**, generating profits estimated at hundreds of thousands of pounds (equivalent to tens to low-hundreds of millions in modern terms). The episode remains the canonical historical case study for **information arbitrage** as an edge — and a cautionary tale about how a documented, repeatable trading edge becomes wrapped in two centuries of distorted retelling. See [[fastest-profitable-trades]] for the broader pattern and [[rothschild-family]] for full family history.
+In June 1815, **Nathan Mayer Rothschild** is said to have used an information advantage about the outcome of the Battle of Waterloo (June 18, 1815) to profit from British government bond ("Consols") trading on the London Stock Exchange. The legend — that Rothschild deliberately sold to drive the market down before buying en masse on the actual news — is **mostly myth and antisemitic embellishment from later decades**. The historical record is murkier and considerably more interesting: Rothschild had a faster information network than the British government via private courier service, knew Waterloo's outcome ~24-30 hours before the official dispatch arrived, and used that window to **buy aggressively into a market that was still uncertain**, generating profits estimated at hundreds of thousands of pounds (equivalent to tens to low-hundreds of millions in modern terms). The episode remains the canonical historical case study for **information arbitrage** as an edge — and a cautionary tale about how a documented, repeatable trading edge becomes wrapped in two centuries of distorted retelling. See [[fastest-profitable-trades]] for the broader pattern and rothschild-family for full family history.
 
 ## Headline facts
 
@@ -136,7 +136,6 @@ For traders studying [[fastest-profitable-trades]] across history, the Rothschil
 
 ## Related
 
-- [[rothschild-family]] — full family history
 - [[fastest-profitable-trades]] — pattern-extraction across history
 - [[telegraph-impact-on-arbitrage]] — successor information-infrastructure shift
 - [[gold-standard-mechanics]] — financial context of the era

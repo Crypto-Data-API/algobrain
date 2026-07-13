@@ -6,7 +6,7 @@ updated: 2026-06-17
 status: good
 tags: [news, stocks, ai-trading, machine-learning, technology, company]
 aliases: ["Claude finance agents", "Anthropic financial agents", "Claude Market Researcher / Credit Analyst / Portfolio Manager / Risk Manager"]
-related: ["[[anthropic]]", "[[claude]]", "[[ai-trading]]", "[[bloomberg-terminal]]", "[[factset]]", "[[goldman-sachs]]", "[[2026-anthropic-blackstone-jv]]", "[[2026-claude-opus-4-7-finance-benchmark]]", "[[ai-trading-agents]]"]
+related: ["[[anthropic]]", "[[claude]]", "[[ai-trading]]", "[[bloomberg-terminal]]", "[[2026-anthropic-blackstone-jv]]", "[[2026-claude-opus-4-7-finance-benchmark]]", "[[ai-trading-agents]]"]
 event_date: 2026-01-01
 markets_affected: [stocks]
 impact: high
@@ -27,9 +27,9 @@ In **2026**, [[anthropic|Anthropic]] launched a suite of **pre-built financial A
 | Portfolio Manager | Portfolio construction, rebalancing analysis, performance attribution |
 | Risk Manager | Exposure aggregation, scenario analysis, limit monitoring |
 
-**Data integrations.** The agents connect to dozens of institutional financial data sources, including [[factset|FactSet]], **S&P Capital IQ**, **MSCI**, **PitchBook**, and **Morningstar**, alongside firm-internal systems (trade blotters, position books, internal research repositories). The pre-built data plumbing is the distinguishing feature versus generic chat interfaces — agents arrive with vendor authentication, schema handling, and entitlement-aware queries already configured.
+**Data integrations.** The agents connect to dozens of institutional financial data sources, including FactSet, **S&P Capital IQ**, **MSCI**, **PitchBook**, and **Morningstar**, alongside firm-internal systems (trade blotters, position books, internal research repositories). The pre-built data plumbing is the distinguishing feature versus generic chat interfaces — agents arrive with vendor authentication, schema handling, and entitlement-aware queries already configured.
 
-**Confirmed deployments.** JPMorgan Chase, [[goldman-sachs|Goldman Sachs]], Citi, AIG, and Visa are named as customers running the agents in production workflows.
+**Confirmed deployments.** JPMorgan Chase, Goldman Sachs, Citi, AIG, and Visa are named as customers running the agents in production workflows.
 
 ## Why it matters for traders
 
@@ -49,14 +49,13 @@ The combination of pre-built data integrations plus agentic output puts pressure
 
 - **Short legacy workflow vendors** at risk of seat compression (per-seat data-terminal incumbents, sell-side research-distribution platforms)
 - **Long Anthropic-adjacent infrastructure** — the agents run on inference compute, vector storage, and evaluation tooling
-- **Long the data-vendor layer that Anthropic integrates with** ([[factset|FactSet]], S&P Capital IQ, MSCI, PitchBook, Morningstar) — agents *consume* their data, not displace it; integration counterparties capture incremental volume
+- **Long the data-vendor layer that Anthropic integrates with** (FactSet, S&P Capital IQ, MSCI, PitchBook, Morningstar) — agents *consume* their data, not displace it; integration counterparties capture incremental volume
 - **Watch active-manager fee compression** as PM-per-AUM ratios fall
 
 ## Related events
 
 - [[2026-anthropic-blackstone-jv]] — the $1.5B JV that distributes these agents into mid-market enterprise
 - [[2026-claude-opus-4-7-finance-benchmark]] — the underlying model capability
-- [[2026-04-09-saas-agent-selloff]] — sector-wide repricing on agent-disruption fears
 - [[ai-trading]] — the broader machine-driven-trading shift this sits within
 - [[ai-trading-agents]] — broader concept page
 - [[anthropic]] — the vendor

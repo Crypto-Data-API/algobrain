@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [market-microstructure, behavioral-finance, quantitative]
 aliases: ["Efficient Market Hypothesis", "EMH"]
-related: ["[[behavioral-finance]]", "[[george-soros]]", "[[jim-simons]]", "[[passive-investing]]", "[[technical-analysis]]", "[[fundamental-analysis]]"]
+related: ["[[behavioral-finance]]", "[[george-soros]]", "[[jim-simons]]", "[[passive-investing]]", "[[technical-analysis]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -22,7 +22,7 @@ Fama defined three forms of market efficiency, each making progressively stronge
 | Form | Information Reflected | Implication |
 |------|----------------------|-------------|
 | **Weak** | All past price and volume data | [[technical-analysis]] cannot generate excess returns; past patterns don't predict future prices |
-| **Semi-Strong** | All publicly available information | [[fundamental-analysis]] cannot generate excess returns; financial statements, news, and analyst reports are already priced in |
+| **Semi-Strong** | All publicly available information | fundamental-analysis cannot generate excess returns; financial statements, news, and analyst reports are already priced in |
 | **Strong** | All information, including private/insider | Even insider trading cannot generate excess returns (widely rejected as too extreme) |
 
 Most academic evidence supports something between weak and semi-strong efficiency for large, liquid markets like U.S. equities. Smaller, less liquid markets (micro-caps, emerging markets, [[cryptocurrency|crypto]]) show more inefficiency.
@@ -47,7 +47,7 @@ The Grossman-Stiglitz paradox (1980) showed that perfectly efficient markets are
 
 2. **[[george-soros|Soros's Reflexivity]]** -- Markets don't passively reflect reality; they actively shape it. Rising stock prices can improve a company's ability to raise capital, which improves fundamentals, which raises prices further. This feedback loop creates bubbles and busts that EMH cannot explain. (Source: [[book-the-alchemy-of-finance]])
 
-3. **Quantitative Track Records** -- [[jim-simons|Jim Simons's]] Renaissance Technologies (Medallion Fund) has compounded at approximately 66% annually before fees since 1988. [[warren-buffett|Warren Buffett]] has beaten the market for over 60 years. Ed Thorp, D.E. Shaw, and other quants have generated persistent alpha. These track records are extraordinarily difficult to explain as luck.
+3. **Quantitative Track Records** -- [[jim-simons|Jim Simons's]] Renaissance Technologies (Medallion Fund) has compounded at approximately 66% annually before fees since 1988. Warren Buffett has beaten the market for over 60 years. Ed Thorp, D.E. Shaw, and other quants have generated persistent alpha. These track records are extraordinarily difficult to explain as luck.
 
 4. **Anomalies and Factors** -- Academic research has documented persistent return patterns that violate EMH: the value premium (cheap stocks outperform), momentum (winners keep winning), the size effect (small caps outperform), and low-volatility anomaly (less volatile stocks earn higher risk-adjusted returns). Whether these are "risk premia" or genuine inefficiencies remains debated.
 
@@ -75,7 +75,6 @@ The Grossman-Stiglitz paradox (1980) showed that perfectly efficient markets are
 - [[jim-simons]] -- the most compelling empirical challenge to EMH
 - [[passive-investing]] -- the practical conclusion of EMH for most investors
 - [[technical-analysis]] -- relies on patterns EMH says should not persist
-- [[fundamental-analysis]] -- relies on information EMH says is already priced in
 - [[modern-portfolio-theory]] -- the portfolio construction framework compatible with EMH
 
 ## Sources

@@ -39,7 +39,7 @@ For most of 2023–2025 the LLM race was scored on general benchmarks (MMLU, Hum
 
 ### 3. Competitive response from OpenAI and Google
 
-The release has visibly accelerated OpenAI's and Google's finance-tuned roadmaps. For traders this means **discrete event risk** around future finance-model releases — each major release can move workflow-incumbent equities (per-seat workflow vendors, terminal incumbents) and Anthropic-adjacent infrastructure on the same vector that drove the [[2026-04-09-saas-agent-selloff]].
+The release has visibly accelerated OpenAI's and Google's finance-tuned roadmaps. For traders this means **discrete event risk** around future finance-model releases — each major release can move workflow-incumbent equities (per-seat workflow vendors, terminal incumbents) and Anthropic-adjacent infrastructure on the same vector that drove the 2026-04-09-saas-agent-selloff.
 
 ### 4. Tradable implications
 
@@ -52,7 +52,6 @@ The release has visibly accelerated OpenAI's and Google's finance-tuned roadmaps
 
 - [[2026-anthropic-finance-agents-launch]] — agent products that ship on top of Opus 4.7
 - [[2026-anthropic-blackstone-jv]] — distribution channel for the model
-- [[2026-04-09-saas-agent-selloff]] — sector-wide repricing on agent-disruption fears
 
 ## Sources
 

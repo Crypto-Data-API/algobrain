@@ -100,6 +100,6 @@ Risk: 1-2% of account per trade. Risk-reward minimum 1:2, ideally 1:3+.
 
 ## Real-World Usage
 
-Traders trained in [[ict-methodology]] (Inner Circle Trader) who add [[bookmap]], [[jigsaw]], or [[sierra-chart]] footprint analysis represent the primary users of this combo. Professional futures scalpers on the [[cme]] often use order flow as their primary tool with SMC-like structural analysis framing their bias.
+Traders trained in [[ict-methodology]] (Inner Circle Trader) who add bookmap, jigsaw, or [[sierra-chart]] footprint analysis represent the primary users of this combo. Professional futures scalpers on the [[cme]] often use order flow as their primary tool with SMC-like structural analysis framing their bias.
 
-Prop trading firms like [[topstep]] and [[ftmo]] see the highest pass rates from traders using structural + flow approaches. The tools required -- [[bookmap]] for heatmaps, [[jigsaw]] for reconstructed tape, or [[quantower]] for footprint charts -- run $50-200/month but provide the edge that separates profitable SMC trading from chart decoration.
+Prop trading firms like topstep and ftmo see the highest pass rates from traders using structural + flow approaches. The tools required -- bookmap for heatmaps, jigsaw for reconstructed tape, or quantower for footprint charts -- run $50-200/month but provide the edge that separates profitable SMC trading from chart decoration.

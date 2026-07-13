@@ -129,7 +129,7 @@ Naked [[short-strangle]], [[iron-condor]], and [[short-vol-strategies|short-vol]
 
 ### Correlation-spread trades unwind
 
-[[dispersion-trade|Dispersion]] (long single-name vol, short index vol) and other correlation-trade structures rely on realised correlations being below implied. In risk-off, realised correlations spike toward 1 and exceed implied — the trade goes against the seller of correlation. Multiple sophisticated correlation desks lost money in March 2020 and August 2024 for this reason. See [[correlation-regime]] and [[implied-correlation]].
+Dispersion (long single-name vol, short index vol) and other correlation-trade structures rely on realised correlations being below implied. In risk-off, realised correlations spike toward 1 and exceed implied — the trade goes against the seller of correlation. Multiple sophisticated correlation desks lost money in March 2020 and August 2024 for this reason. See [[correlation-regime]] and [[implied-correlation]].
 
 ### Operational implications
 

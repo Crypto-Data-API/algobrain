@@ -9,12 +9,12 @@ aliases: ["Forecast Trader", "IBKR Forecast Trader", "IBKR Prediction Markets"]
 source_type: data
 source_url: "https://www.interactivebrokers.com/campus/traders-insight/forecast-trader/"
 confidence: high
-related: ["[[interactive-brokers]]", "[[prediction-markets]]", "[[recession]]", "[[tail-risk]]", "[[macro-data-sources]]", "[[data-sources-overview]]", "[[ai-layoff-trap]]", "[[capital-vs-labor-asymmetry]]", "[[2026-03-bls-900k-jobs-revision]]"]
+related: ["[[prediction-markets]]", "[[recession]]", "[[tail-risk]]", "[[macro-data-sources]]", "[[data-sources-overview]]", "[[ai-layoff-trap]]", "[[capital-vs-labor-asymmetry]]", "[[2026-03-bls-900k-jobs-revision]]"]
 ---
 
 # Interactive Brokers Forecast Trader
 
-**Forecast Trader** is [[interactive-brokers|Interactive Brokers]]' regulated prediction-market product offering futures-style contracts on macroeconomic indicators, scheduled economic releases, and other yes/no event outcomes. It functions as an institutional-grade [[prediction-markets|prediction market]] embedded directly inside the IBKR trading platform — useful both as a sentiment data source and as a hedging instrument for event-driven and recession-specific risk. (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])
+**Forecast Trader** is Interactive Brokers' regulated prediction-market product offering futures-style contracts on macroeconomic indicators, scheduled economic releases, and other yes/no event outcomes. It functions as an institutional-grade [[prediction-markets|prediction market]] embedded directly inside the IBKR trading platform — useful both as a sentiment data source and as a hedging instrument for event-driven and recession-specific risk. (Source: [[2026-04-22-gap-finder-possible-ai-fueled-global-job-loss-reces]])
 
 ## What It Tracks
 
@@ -62,11 +62,10 @@ Quotes are visible inside the IBKR trading platform; some prices and commentary 
 - **Recession-specific tail hedge.** Smaller capital outlay than buying SPX puts or VIX calls for an investor whose primary worry is a labor-driven downturn rather than generalized volatility.
 - **Sanity-check on macro forecasters.** Compare Forecast Trader's implied probability against bank research (e.g., Goldman Sachs' 11M-jobs displacement forecast, Morgan Stanley labor research) to spot consensus vs. market disagreement.
 - **Pair trade with VIX.** When recession contracts move but VIX is flat (or vice versa), the divergence often anticipates a regime shift in which risk the market is pricing.
-- **Calibrating [[ai-layoff-trap]] scenario sizing.** If Citrini-style scenarios are public ([[citrini-research]]) but Forecast Trader recession probability is not moving, that is information about how seriously the market takes the scenario.
+- **Calibrating [[ai-layoff-trap]] scenario sizing.** If Citrini-style scenarios are public (citrini-research) but Forecast Trader recession probability is not moving, that is information about how seriously the market takes the scenario.
 
 ## Related
 
-- [[interactive-brokers]]
 - [[prediction-markets]]
 - [[recession]]
 - [[tail-risk]]
@@ -75,7 +74,6 @@ Quotes are visible inside the IBKR trading platform; some prices and commentary 
 - [[data-sources-overview]]
 - [[capital-vs-labor-asymmetry]]
 - [[ai-layoff-trap]]
-- [[citrini-research]]
 
 ## Sources
 

@@ -25,14 +25,14 @@ The governing principle from the framework: **a strategy is only valid inside th
 | 2 | [[bitcoin-cycle-regime\|BTC Cycle]] | [[dollar-cost-averaging]], [[buy-and-hold]], [[value-averaging]], [[momentum-investing]] | Partial — no halving/cycle-timing play |
 | 3 | [[meme-speculative-regime\|Meme / Speculative]] | [[memecoin-sniping]], [[pump-fun-bonding-curve-sniping]], [[token-migration-sniping]], [[telegram-bot-trading]], [[social-arbitrage]], [[sentiment-trading]] | Strong |
 | 4 | [[derivatives-native-regime\|Derivatives-Native]] | [[funding-rate-arbitrage]], [[liquidation-cascade-fade]], [[liquidation-cascade-arbitrage]], [[hl-vs-cex-funding-divergence]], [[stop-hunting-and-liquidity-sweeps]] | Strongest |
-| 5 | [[event-catalyst-regime\|Event / Catalyst]] | [[event-driven-trading]], [[news-trading]], [[token-unlock-arbitrage]], [[regulatory-approval-arbitrage]] | Partial — mostly arb-framed |
+| 5 | [[event-catalyst-regime\|Event / Catalyst]] | [[event-driven-trading]], [[news-trading]], [[token-unlock-arbitrage]], regulatory-approval-arbitrage | Partial — mostly arb-framed |
 | 6 | [[crypto-macro-correlation-regime\|Macro Correlation]] | [[risk-on-risk-off-framework]], [[cross-asset-signals]], [[macro-relative-value]] | Partial — no crypto-beta-vs-DXY/Nasdaq play |
 | 7 | [[on-chain-regime\|On-Chain]] | [[on-chain-flow-trading]], [[miner-capitulation-bottom]], [[on-chain-smart-money-tracking]], [[copy-trading]] | Now covered |
 | 8 | [[basis-carry-regime\|Carry / Basis]] | [[basis-trading]], [[funding-rate-arbitrage]], [[cash-and-carry]], [[carry-trade]], [[stablecoin-yield]], [[hyperliquid-hlp-basis-arbitrage]] | Strong |
 | 9 | [[liquidity-depth-regime\|Liquidity / Depth]] | [[market-making-strategy]], [[jit-liquidity]], [[liquidity-sniping]], [[implementation-shortfall]], [[slippage-optimal-pathfinding]] | Partial — provision/execution, not gating |
 | 10 | [[institutional-flow-regime\|Institutional Flow]] | [[gbtc-discount-arbitrage]], [[etf-arbitrage]], [[structural-forced-selling]], [[expiration-and-rebalancing-flows]] | Partial — no flow-following directional play |
 | 11 | [[security-black-swan-regime\|Security / Black Swan]] | [[stablecoin-depeg-profit-capture]], [[post-hack-incident-response-arb]], [[cross-chain-contagion-hedge]], [[counterparty-stress-arbitrage]], [[tail-risk-hedging]] | Strong |
-| 12 | [[policy-shock-regime\|Geopolitical / Policy]] | [[crypto-policy-shock-trading]], [[news-trading]], [[regulatory-arbitrage]], [[regulatory-approval-arbitrage]], [[event-driven-trading]] | Now covered |
+| 12 | [[policy-shock-regime\|Geopolitical / Policy]] | [[crypto-policy-shock-trading]], [[news-trading]], [[regulatory-arbitrage]], regulatory-approval-arbitrage, [[event-driven-trading]] | Now covered |
 | 13 | [[volatility-regime-classification\|Volatility]] (overlay) | [[volatility-targeting]], [[volatility-breakout]], [[long-volatility-strategies]], [[short-volatility-strategies]], [[straddle-strangle]], [[gamma-scalping]], [[tail-risk-hedging]] | Strong |
 | 14 | [[technical-structural-regime\|Technical / Structural]] (overlay) | [[range-trading]], [[grid-trading]], [[mean-reversion]], [[bollinger-band-reversion]], [[rsi-mean-reversion]], [[breakout-strategies]], [[vwap-trading]], [[supply-demand-zones]] | Strong |
 

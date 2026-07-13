@@ -6,9 +6,9 @@ updated: 2026-06-11
 status: good
 tags: [fundamental-analysis, risk-management, valuation, crypto]
 aliases: ["Due Diligence", "DD", "DYOR", "Investment Due Diligence"]
-related: ["[[fundamental-analysis]]", "[[earnings-quality]]", "[[rug-detection-checklist]]", "[[economic-moat]]", "[[valuation]]", "[[risk-management-overview]]", "[[merger-arbitrage]]"]
+related: ["[[rug-detection-checklist]]", "[[risk-management-overview]]"]
 domain: [fundamental-analysis, risk-management]
-prerequisites: ["[[fundamental-analysis]]"]
+prerequisites: []
 difficulty: beginner
 ---
 
@@ -18,17 +18,17 @@ Due diligence (DD) is the systematic investigation an investor or trader perform
 
 Due diligence is the verification step between an *idea* and a *position*. A thesis ("this stock is cheap", "this token is the next narrative leader") is a hypothesis; due diligence is the evidence-gathering that either confirms it or kills it. The depth scales with the size and illiquidity of the commitment — a day trade in a liquid large-cap needs less than a multi-year position in a micro-cap or a private-market allocation.
 
-It is distinct from, but feeds into, [[valuation]]: due diligence establishes whether the *inputs* to a valuation are trustworthy before the valuation itself is performed.
+It is distinct from, but feeds into, valuation: due diligence establishes whether the *inputs* to a valuation are trustworthy before the valuation itself is performed.
 
 ## Domains of due diligence
 
 ### Equities / fundamentals
 
-- **Financial-statement review** — income statement, balance sheet, cash-flow statement; reconcile reported earnings against actual cash generation (see [[earnings-quality]]).
-- **Earnings quality and accounting red flags** — accruals far exceeding cash flow, frequent restatements, aggressive revenue recognition, off-balance-sheet vehicles ([[earnings-management]]).
-- **Competitive position** — durable advantages, the [[economic-moat]], pricing power, customer concentration.
+- **Financial-statement review** — income statement, balance sheet, cash-flow statement; reconcile reported earnings against actual cash generation (see earnings-quality).
+- **Earnings quality and accounting red flags** — accruals far exceeding cash flow, frequent restatements, aggressive revenue recognition, off-balance-sheet vehicles (earnings-management).
+- **Competitive position** — durable advantages, the economic-moat, pricing power, customer concentration.
 - **Management and governance** — track record, insider ownership and trading, board independence, related-party transactions.
-- **Legal / regulatory** — pending litigation, regulatory investigations, antitrust exposure (relevant to [[merger-arbitrage]] deals via [[hsr-review]] / [[ec-merger-regulation]]).
+- **Legal / regulatory** — pending litigation, regulatory investigations, antitrust exposure (relevant to merger-arbitrage deals via hsr-review / ec-merger-regulation).
 - **Valuation cross-check** — multiples vs peers and history, scenario / DCF sensitivity.
 
 ### Crypto / on-chain (DYOR)
@@ -52,7 +52,7 @@ Crypto due diligence is largely adversarial — the base rate of scams is high �
 - **Asymmetry of error.** A failed due-diligence process rarely costs you the upside you gave up; it costs you the catastrophic, often un-recoverable downside (fraud, insolvency, a rug). DD is therefore primarily a [[risk-management-overview|risk-management]] discipline, not an alpha-generation one.
 - **Position sizing follows DD depth.** The conviction earned through thorough due diligence is what justifies a larger allocation; thin DD should map to small, defined-risk exposure.
 - **Pre-mortem / disconfirmation.** Good DD actively hunts for the bear case rather than confirming the bull case — a direct antidote to [[confirmation-bias]] and [[overconfidence-bias]].
-- **Event-driven trades.** In [[merger-arbitrage]], due diligence on antitrust and financing risk *is* the edge — the spread compensates for the deal-break risk you assess.
+- **Event-driven trades.** In merger-arbitrage, due diligence on antitrust and financing risk *is* the edge — the spread compensates for the deal-break risk you assess.
 - **It is not infallible.** Even rigorous DD can be defeated by outright fraud (falsified statements, fake audits). DD reduces, never eliminates, risk — which is why diversification and sizing remain essential.
 
 ## A practical checklist
@@ -66,11 +66,7 @@ Crypto due diligence is largely adversarial — the base rate of scams is high �
 
 ## Related
 
-- [[fundamental-analysis]] — the analytical framework DD feeds
-- [[earnings-quality]] · [[earnings-management]] — accounting verification
-- [[economic-moat]] · [[valuation]] — competitive and value assessment
 - [[rug-detection-checklist]] — the crypto DYOR equivalent
-- [[merger-arbitrage]] — where deal DD is the source of edge
 - [[risk-management-overview]] — DD as risk control
 
 ## Sources

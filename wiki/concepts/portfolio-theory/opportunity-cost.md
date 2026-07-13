@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [portfolio-theory, risk-management, education]
 aliases: ["Opportunity Cost", "Cost of Capital (forgone)", "Implicit Cost"]
-related: ["[[risk-management]]", "[[position-sizing]]", "[[compounding]]", "[[portfolio-construction]]", "[[margin-of-safety]]", "[[cost-of-carry]]", "[[capital-allocation]]", "[[hurdle-rate]]", "[[diversification]]"]
+related: ["[[risk-management]]", "[[position-sizing]]", "[[compounding]]", "[[portfolio-construction]]", "[[cost-of-carry]]", "[[hurdle-rate]]", "[[diversification]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: beginner
 ---
@@ -15,11 +15,11 @@ Opportunity cost is the return foregone by choosing one investment or action ove
 
 ## Overview
 
-The concept originates in economics but has powerful applications in trading and investing. [[benjamin-graham]] implicitly used opportunity cost reasoning in [[book-the-intelligent-investor|The Intelligent Investor]] when arguing that investors should compare any potential equity investment against the risk-free bond yield — if a stock does not offer a sufficient premium over bonds, the opportunity cost of holding it is too high.
+The concept originates in economics but has powerful applications in trading and investing. benjamin-graham implicitly used opportunity cost reasoning in The Intelligent Investor when arguing that investors should compare any potential equity investment against the risk-free bond yield — if a stock does not offer a sufficient premium over bonds, the opportunity cost of holding it is too high.
 
 In the ITPM (Institute of Trading and Portfolio Management) methodology, opportunity cost is a central principle. Holding losing positions is not just a matter of unrealized loss — it is the active destruction of [[compounding]] potential. Capital locked in a losing or flat position cannot be redeployed to better opportunities. This framing transforms stop-loss discipline from "admitting defeat" into "freeing capital for its highest and best use."
 
-[[warren-buffett]] operationalized opportunity cost by comparing every potential investment against his best existing holdings. His famous "20-punch-card" mental model — imagining you could only make 20 investments in your lifetime — forces extreme selectivity that implicitly accounts for opportunity cost. Charlie Munger reduced it to a single sentence: "Opportunity cost is a huge filter in life. If you've got two suitors who are really eager to have you, and one is way the hell better than the other, you do not have to spend much time with the other."
+warren-buffett operationalized opportunity cost by comparing every potential investment against his best existing holdings. His famous "20-punch-card" mental model — imagining you could only make 20 investments in your lifetime — forces extreme selectivity that implicitly accounts for opportunity cost. Charlie Munger reduced it to a single sentence: "Opportunity cost is a huge filter in life. If you've got two suitors who are really eager to have you, and one is way the hell better than the other, you do not have to spend much time with the other."
 
 ## Explicit vs Implicit Cost
 
@@ -30,7 +30,7 @@ The discipline that makes opportunity cost actionable is choosing a **benchmark 
 | Capital state | Typical next-best alternative | Implied opportunity cost |
 |---------------|-------------------------------|--------------------------|
 | Idle cash | Money-market / T-bill yield | The risk-free rate (e.g. ~4–5% when short rates are high) |
-| Buy-and-hold equity | Broad index ([[sp500]]) total return | The market return + risk premium (~8–10% historically) |
+| Buy-and-hold equity | Broad index (sp500) total return | The market return + risk premium (~8–10% historically) |
 | A held position | Your *own best alternative idea* | The expected return of the trade you would replace it with |
 | A new trade | The position it displaces in a full book | The displaced position's expected return |
 
@@ -46,7 +46,7 @@ Opportunity cost operates at multiple levels:
 
 - **Position level**: Holding a stock down 20% with no catalyst for recovery means that capital cannot earn returns elsewhere. If the market returns 10% annually, the real cost of holding a dead position for a year is not just the 20% loss but the additional 10% you could have earned — a 30% gap.
 - **Cash level**: Sitting in 100% cash avoids losses but has an opportunity cost equal to the expected market return. Over long periods, the opportunity cost of staying in cash is substantial — the S&P 500 has returned roughly 10% annually over the past century.
-- **Time level**: Spending time analyzing low-quality opportunities is time not spent on higher-potential research. [[peter-lynch]] emphasized focusing on areas where you have an informational edge rather than spreading attention thinly.
+- **Time level**: Spending time analyzing low-quality opportunities is time not spent on higher-potential research. peter-lynch emphasized focusing on areas where you have an informational edge rather than spreading attention thinly.
 - **Portfolio level**: Over-[[diversification]] across 50+ positions may reduce volatility but increases opportunity cost — the best ideas are diluted by mediocre ones. Concentrated portfolios accept higher volatility in exchange for lower opportunity cost.
 
 ## Worked Example: The True Cost of a Dead Position
@@ -70,7 +70,7 @@ The longer capital sits in a no-edge position, the more the foregone [[compoundi
 - **Cash management**: Maintaining some cash is not idle — it preserves optionality to act on high-conviction opportunities when they arise. The opportunity cost of cash is lowest when markets are expensive and opportunities are scarce.
 - **Sizing decisions**: [[position-sizing]] should reflect conviction. Putting equal weight in your best and worst ideas maximizes opportunity cost. The best traders size up on their highest-conviction trades.
 - **Compounding awareness**: Because of [[compounding]], small differences in annual returns become enormous over decades. An investor earning 12% instead of 10% annually doubles their wealth roughly every 12 years instead of every 14 — the opportunity cost of suboptimal allocation compounds relentlessly.
-- **Capital allocation across a book**: At the firm level, [[capital-allocation]] is an explicit opportunity-cost problem — every dollar handed to one strategy or trader is a dollar denied to another. Marginal capital should flow to the highest risk-adjusted expected return until that opportunity is exhausted.
+- **Capital allocation across a book**: At the firm level, capital-allocation is an explicit opportunity-cost problem — every dollar handed to one strategy or trader is a dollar denied to another. Marginal capital should flow to the highest risk-adjusted expected return until that opportunity is exhausted.
 
 ## How Traders Use This
 
@@ -92,13 +92,11 @@ The longer capital sits in a no-edge position, the more the foregone [[compoundi
 - [[position-sizing]] — How much capital to allocate per trade
 - [[compounding]] — The exponential growth that opportunity cost erodes
 - [[portfolio-construction]] — Building portfolios that minimize opportunity cost
-- [[margin-of-safety]] — Requiring a return premium to justify capital allocation
 - [[cost-of-carry]] — The financing leg of carry is an opportunity cost
-- [[capital-allocation]] — Firm-level opportunity-cost optimization
 - [[hurdle-rate]] — The benchmark a position must clear
 - [[diversification]] — Trading off concentration against opportunity cost
 
 ## Sources
 
-- (Source: [[book-the-intelligent-investor]]) — Graham's framework for comparing equity returns against bond alternatives
+- (Source: book-the-intelligent-investor) — Graham's framework for comparing equity returns against bond alternatives
 - General market knowledge; no additional specific wiki source ingested yet.

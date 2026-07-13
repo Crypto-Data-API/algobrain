@@ -63,11 +63,11 @@ Volatility drives opportunity -- trending markets require volatility to produce 
 
 ## Volatility in Professional Portfolio Management
 
-[[chris-quill]] of [[itpm]] teaches a systematic approach to calculating and applying volatility:
+[[chris-quill]] of itpm teaches a systematic approach to calculating and applying volatility:
 
 - **Realized vs implied volatility comparison**: When implied volatility is higher than realized, options are "expensive" (favors selling); when lower, options are "cheap" (favors buying)
 - **Volatility as a timing signal**: The [[eighty-twenty-analysis|80/20 volatility rule]] suggests only ~20% of the time offers enough volatility for active directional trading; the other 80% is for portfolio management
-- **VIX trading**: [[raj-malhotra]] specializes in trading volatility directly through VIX-linked products as part of [[long-short-equity]] portfolio construction
+- **VIX trading**: [[raj-malhotra]] specializes in trading volatility directly through VIX-linked products as part of long-short-equity portfolio construction
 
 ## Related
 
@@ -75,7 +75,6 @@ Volatility drives opportunity -- trending markets require volatility to produce 
 - [[bollinger-bands]] -- visual volatility indicator
 - [[options]] -- priced using implied volatility
 - [[position-sizing]] -- scaled to volatility
-- [[long-short-equity]] -- portfolio framework leveraging volatility through options
 - [[eighty-twenty-analysis]] -- the 80/20 volatility rule
 - [[implied-volatility]] -- forward-looking, options-derived volatility
 - [[realized-volatility]] -- backward-looking, return-derived volatility

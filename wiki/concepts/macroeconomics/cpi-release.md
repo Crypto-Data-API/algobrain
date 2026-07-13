@@ -23,7 +23,7 @@ CPI is published by the [[bureau-of-labor-statistics|US Bureau of Labor Statisti
 - **Components** — shelter, food, energy, services ex-shelter, goods, used cars, medical care, transportation
 - **Supercore** ("services ex-shelter ex-energy") — a measure the [[federal-reserve|Fed]] has emphasized in recent cycles for sticky-services inflation
 
-The release is fed directly into the [[fed-funds-futures]] curve within seconds. A 0.1% surprise vs consensus on core CPI typically produces a 5–10 bp move in 2-year Treasuries and a 0.5–1.5% move in [[sp500|SPX]] within the first 30 minutes.
+The release is fed directly into the [[fed-funds-futures]] curve within seconds. A 0.1% surprise vs consensus on core CPI typically produces a 5–10 bp move in 2-year Treasuries and a 0.5–1.5% move in SPX within the first 30 minutes.
 
 CPI releases are **frequently the single largest scheduled-data move** in months when an [[fomc-meetings|FOMC]] meeting does not occur. In FOMC months, the CPI print roughly two weeks before the meeting often sets the tone for the meeting itself — a hot CPI three weeks before an expected cut can re-price the path within hours.
 
@@ -83,7 +83,7 @@ The canonical reflex map for a *core CPI surprise*, holding regime constant. Dir
 | 2-year UST | Yield up sharply | Yield down sharply | 2y is the policy-path tenor | Re-prices near-term [[fed-funds-futures\|Fed path]] |
 | 10-year UST | Yield up, smaller | Yield down, smaller | 10y / curve | Term premium + path; longer half-life |
 | USD ([[dxy\|DXY]]) | Up | Down | DXY, USD/JPY | Rate-differential widening |
-| [[sp500\|SPX]] | Down | Up | E-mini, [[nasdaq\|NDX]] (long-duration) | Discount-rate pressure on growth |
+| SPX | Down | Up | E-mini, NDX (long-duration) | Discount-rate pressure on growth |
 | Gold | Ambiguous, often down short-term | Often up | Real-rate-sensitive | Real rates up vs. inflation hedge — real rates usually win short-term |
 | [[bitcoin\|BTC]] / [[ethereum\|ETH]] | Down, amplified 1.5–3× | Up, amplified | High-beta risk proxy | Trades as a leveraged risk asset |
 | Front-week SPX IV | No-crush / re-ramp | Sharp crush | Expiry covering the print | Surprise re-prices path → vol stays bid |
@@ -93,7 +93,7 @@ The single most important cell for an options book is the bottom-left: a *hot su
 
 ### The 8:30 AM mechanic
 
-CPI prints at 8:30:00 AM Eastern. The *first* 60 seconds of trading on E-mini S&P futures and Treasury futures is where the bulk of the surface re-pricing happens. By 8:35, the IV of the front-week SPX cycle is typically already at its post-print equilibrium. The cash-open at 9:30 then re-prices single names against the new index level, often with overshoot in beta-heavy names ([[nvidia|NVDA]], [[tesla|TSLA]], small-cap names via [[iwm|IWM]]).
+CPI prints at 8:30:00 AM Eastern. The *first* 60 seconds of trading on E-mini S&P futures and Treasury futures is where the bulk of the surface re-pricing happens. By 8:35, the IV of the front-week SPX cycle is typically already at its post-print equilibrium. The cash-open at 9:30 then re-prices single names against the new index level, often with overshoot in beta-heavy names ([[nvidia|NVDA]], TSLA, small-cap names via [[iwm|IWM]]).
 
 ## Examples / Empirical Evidence
 

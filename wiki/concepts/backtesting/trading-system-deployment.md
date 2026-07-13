@@ -16,8 +16,6 @@ related:
   - "[[bot-architecture]]"
   - "[[bot-risks-and-pitfalls]]"
   - "[[backtesting-pitfalls]]"
-  - "[[oanda]]"
-  - "[[fxcm]]"
   - "[[book-python-for-algorithmic-trading]]"
 ---
 
@@ -70,7 +68,7 @@ The pilot stage exists specifically to surface what paper trading cannot: real [
 
 ### 1. Broker API Integration
 
-Connecting to broker REST/WebSocket APIs for order submission, position tracking, and account monitoring. Hilpisch uses [[oanda|OANDA's]] v20 REST API and [[fxcm|FXCM's]] fxcmpy library as examples. Key concerns:
+Connecting to broker REST/WebSocket APIs for order submission, position tracking, and account monitoring. Hilpisch uses OANDA's v20 REST API and FXCM's fxcmpy library as examples. Key concerns:
 
 - **Authentication** -- API keys, OAuth tokens, credential management and rotation
 - **Order types** -- Market, limit, stop, trailing stop -- each requires different parameters and has different fill behavior
@@ -154,9 +152,6 @@ Strategies that run on fixed intervals need reliable scheduling:
 
 Always run new strategies in paper/demo mode before deploying real capital. Most brokers offer paper trading APIs that mirror their live APIs:
 
-- [[oanda|OANDA]] provides a free practice account with realistic market data
-- [[fxcm|FXCM]] offers demo accounts through fxcmpy
-- [[interactive-brokers|Interactive Brokers]] has a paper trading mode
 - [[alpaca]] provides free paper trading for US equities
 
 Paper trading validates the entire stack -- data ingestion, signal generation, order routing, fill handling, and monitoring -- without financial risk. A strategy should run in paper mode for at least 2-4 weeks (or through one full market cycle) before live deployment (Source: [[book-python-for-algorithmic-trading]]).
@@ -220,9 +215,6 @@ Gate the move to real capital (maturity-ladder stage 3+) on every item:
 - [[bot-architecture]] -- Design patterns for trading bots
 - [[bot-risks-and-pitfalls]] -- What can go wrong with automated trading
 - [[backtesting-pitfalls]] -- Validation concerns before deployment
-- [[oanda]] -- Broker API used in Hilpisch's deployment examples
-- [[fxcm]] -- Secondary broker API in Hilpisch's examples
-- [[interactive-brokers]] -- Paper and live API for equities/futures/options
 - [[alpaca]] -- Free paper trading and commission-free US equities API
 - [[position-sizing]] -- Signal-to-order size calculation referenced in Order Management
 - [[risk-management]] -- Hard limits and kill-switch logic the deployment enforces

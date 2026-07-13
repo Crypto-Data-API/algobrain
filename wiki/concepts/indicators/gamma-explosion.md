@@ -169,6 +169,4 @@ A book that mechanically rotates 0DTE positions into existence each morning is s
 
 - [[book-option-volatility-and-pricing]] — Natenberg, Chapters 8 and 9: the structure of gamma near expiration, pin behaviour, and the asymmetric risk profile of short-dated short premium.
 - Hull, *Options, Futures and Other Derivatives*, 10th ed., Chapter 19 — formal Black-Scholes derivations of `1/√t` gamma scaling for ATM options.
-- [[tastytrade]] research on 0DTE short-premium realisation rates and the empirical underperformance versus theoretical theta.
-- [[orats]] historical surface data on intraday gamma evolution on expiry days.
 - Public research from [[squeezemetrics]] and similar dealer-positioning analytics on how aggregate dealer net gamma drives intraday SPX behaviour around 0DTE expiries.

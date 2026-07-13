@@ -17,7 +17,7 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 0
 crowding_risk: low
 capacity_usd: 100000000
-related: ["[[sector-momentum-screen]]", "[[risk-on-risk-off-framework]]", "[[crypto-yield-stack]]", "[[dollar-cost-averaging]]", "[[value-averaging]]", "[[moving-averages]]"]
+related: ["[[risk-on-risk-off-framework]]", "[[crypto-yield-stack]]", "[[dollar-cost-averaging]]", "[[value-averaging]]", "[[moving-averages]]"]
 ---
 
 # DCA + Technical Analysis Hybrid
@@ -157,7 +157,7 @@ Over years, these small edges compound substantially.
 ## When It Excels / When It Fails
 
 **Excels when:**
-- Accumulating volatile assets like [[btc]], [[eth]], or [[growth-stocks]]
+- Accumulating volatile assets like [[btc]], [[eth]], or growth-stocks
 - Markets experience regular pullbacks (most of the time)
 - The investor has a multi-year time horizon
 - Used by beginners who want a systematic approach without complex analysis
@@ -182,9 +182,9 @@ The base rules on this page use **ANY one of four** conditions deliberately — 
 
 ## Real-World Usage
 
-Many [[crypto-accumulation]] strategies implicitly use this approach. Platforms like [[swan-bitcoin]] and [[river]] offer automated DCA, but sophisticated users layer on manual technical checks. The concept mirrors what [[warren-buffett]] describes as "be greedy when others are fearful" -- systematized.
+Many [[crypto-accumulation]] strategies implicitly use this approach. Platforms like [[swan-bitcoin]] and [[river]] offer automated DCA, but sophisticated users layer on manual technical checks. The concept mirrors what warren-buffett describes as "be greedy when others are fearful" -- systematized.
 
-[[value-averaging]], formalized by Michael Edleson in 1991, is the academic version of this concept. Several [[robo-advisors]] now incorporate volatility-adjusted DCA, increasing investment amounts during high-vol drawdowns. The key principle: **do not abandon regular investing, just tilt it toward value**. Even a small edge in cost basis -- 5-15% -- compounds into significant outperformance over a decade of accumulation.
+[[value-averaging]], formalized by Michael Edleson in 1991, is the academic version of this concept. Several robo-advisors now incorporate volatility-adjusted DCA, increasing investment amounts during high-vol drawdowns. The key principle: **do not abandon regular investing, just tilt it toward value**. Even a small edge in cost basis -- 5-15% -- compounds into significant outperformance over a decade of accumulation.
 
 ## Performance Characteristics
 
@@ -247,5 +247,5 @@ Effectively unlimited. This strategy operates on scheduled retail-sized purchase
 - [[overfitting]] -- the main pitfall when tuning filter thresholds
 - [[backtesting]] -- how to verify the cost-basis edge on your own data
 - [[crypto-accumulation]] -- common home for this approach
-- [[sector-momentum-screen]], [[risk-on-risk-off-framework]], [[crypto-yield-stack]] -- companion combination strategies
+- sector-momentum-screen, [[risk-on-risk-off-framework]], [[crypto-yield-stack]] -- companion combination strategies
 - [[correlation]] -- relevant when accumulating multiple assets at once

@@ -19,9 +19,7 @@ prerequisites: ["[[market-microstructure]]"]
 difficulty: intermediate
 related:
   - "[[behavioral-finance]]"
-  - "[[fundamental-analysis]]"
   - "[[technical-analysis]]"
-  - "[[value-investing]]"
   - "[[anomalies]]"
   - "[[random-walk]]"
 ---
@@ -30,11 +28,11 @@ related:
 
 The **Efficient Market Hypothesis (EMH)**, developed by Eugene Fama, states that asset prices fully reflect all available information, making it impossible to consistently achieve above-market returns.
 
-EMH has three forms: **weak** (prices reflect all past trading data), **semi-strong** (prices reflect all public information), and **strong** (prices reflect all information, including insider knowledge). Critics like [[warren-buffett]] and [[jim-simons]] have outperformed benchmarks for decades, challenging EMH.
+EMH has three forms: **weak** (prices reflect all past trading data), **semi-strong** (prices reflect all public information), and **strong** (prices reflect all information, including insider knowledge). Critics like warren-buffett and [[jim-simons]] have outperformed benchmarks for decades, challenging EMH.
 
 ## Implications for Traders
 
-If EMH holds in its strong form, no analysis -- [[fundamental-analysis]], [[technical-analysis]], or insider knowledge -- can produce consistent excess returns. The logical conclusion is that investors should buy index funds and avoid active management entirely. In practice, most academics and practitioners accept that markets are "mostly efficient" but acknowledge persistent anomalies and inefficiencies.
+If EMH holds in its strong form, no analysis -- fundamental-analysis, [[technical-analysis]], or insider knowledge -- can produce consistent excess returns. The logical conclusion is that investors should buy index funds and avoid active management entirely. In practice, most academics and practitioners accept that markets are "mostly efficient" but acknowledge persistent anomalies and inefficiencies.
 
 ## Arguments For EMH
 
@@ -53,14 +51,12 @@ EMH remains one of the most debated ideas in finance and serves as an important 
 
 ## Trading Relevance
 
-EMH is the **null hypothesis every strategy must beat**. The practical discipline it imposes: before deploying capital, articulate *why* an edge exists in a market full of well-resourced, competitive participants — i.e. which form of efficiency the strategy claims is violated, and why that inefficiency persists rather than being arbitraged away. A momentum or [[value-investing|value]] strategy is implicitly a bet against semi-strong efficiency; an insider-information play bets against strong-form efficiency (and is usually illegal). The "[[anomalies|anomalies]]" literature catalogues documented, persistent violations (value, momentum, low-volatility, post-earnings drift), but EMH proponents counter that many decay after publication or are compensation for risk rather than free lunches. Either way, EMH disciplines a trader to be explicit about edge source and decay — see [[edge-taxonomy]].
+EMH is the **null hypothesis every strategy must beat**. The practical discipline it imposes: before deploying capital, articulate *why* an edge exists in a market full of well-resourced, competitive participants — i.e. which form of efficiency the strategy claims is violated, and why that inefficiency persists rather than being arbitraged away. A momentum or value strategy is implicitly a bet against semi-strong efficiency; an insider-information play bets against strong-form efficiency (and is usually illegal). The "[[anomalies|anomalies]]" literature catalogues documented, persistent violations (value, momentum, low-volatility, post-earnings drift), but EMH proponents counter that many decay after publication or are compensation for risk rather than free lunches. Either way, EMH disciplines a trader to be explicit about edge source and decay — see [[edge-taxonomy]].
 
 ## Related
 
 - [[behavioral-finance]] — the main competing framework
-- [[fundamental-analysis]] — implicitly bets against semi-strong efficiency
 - [[technical-analysis]] — implicitly bets against weak-form efficiency
-- [[value-investing]] — the value premium as an anomaly
 - [[anomalies]] — documented persistent inefficiencies
 - [[random-walk]] — the price-process model EMH implies
 

@@ -9,12 +9,12 @@ aliases: ["GOOGLX", "Alphabet Tokenized Stock"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://xstocks.com/"
-related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[backed-finance]]", "[[alphabet]]", "[[nasdaq]]", "[[alphabet-class-a-ondo-tokenized-stock]]", "[[crypto-markets]]", "[[arbitrum]]", "[[tokenization]]"]
+related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[backed-finance]]", "[[alphabet-class-a-ondo-tokenized-stock]]", "[[crypto-markets]]", "[[arbitrum]]", "[[tokenization]]"]
 ---
 
 # Alphabet xStock
 
-**Alphabet xStock** (ticker **GOOGLX**) is a tokenized equity ("xStock") issued by [[backed-finance|Backed Finance]] that tracks the shares of **Alphabet Inc.** — Google's parent — listed on the [[nasdaq|Nasdaq]] as **NASDAQ: GOOGL**. GOOGLX is **not** the underlying stock itself: it is an on-chain wrapper whose value is designed to follow the off-chain GOOGL share, backed 1:1 by real shares held in custody by the issuer. Issued as an SPL token on [[solana]] with bridged ERC-20 deployments (Arbitrum, Ethereum, BNB Chain, Mantle, TON), it is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
+**Alphabet xStock** (ticker **GOOGLX**) is a tokenized equity ("xStock") issued by [[backed-finance|Backed Finance]] that tracks the shares of **Alphabet Inc.** — Google's parent — listed on the Nasdaq as **NASDAQ: GOOGL**. GOOGLX is **not** the underlying stock itself: it is an on-chain wrapper whose value is designed to follow the off-chain GOOGL share, backed 1:1 by real shares held in custody by the issuer. Issued as an SPL token on [[solana]] with bridged ERC-20 deployments (Arbitrum, Ethereum, BNB Chain, Mantle, TON), it is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -24,7 +24,7 @@ As of 2026-06-21, GOOGLX trades at **$364.91**, ranks **#717** by market capital
 
 ## What GOOGLX Actually Is
 
-GOOGLX is a **[[tokenization|tokenized]] stock** — a blockchain token engineered to mirror the economics of a single underlying equity, [[alphabet|Alphabet]] (GOOGL). It belongs to the **xStock** product line operated by [[backed-finance|Backed Finance]], a Switzerland-based issuer of tokenized securities. For every GOOGLX token in circulation, Backed (via its custodial arrangements) holds a corresponding GOOGL share off-chain. The token's price *tracks* the share; it does not set it.
+GOOGLX is a **[[tokenization|tokenized]] stock** — a blockchain token engineered to mirror the economics of a single underlying equity, Alphabet (GOOGL). It belongs to the **xStock** product line operated by [[backed-finance|Backed Finance]], a Switzerland-based issuer of tokenized securities. For every GOOGLX token in circulation, Backed (via its custodial arrangements) holds a corresponding GOOGL share off-chain. The token's price *tracks* the share; it does not set it.
 
 GOOGLX is one of two tokenized representations of Alphabet in this wiki; the other is [[alphabet-class-a-ondo-tokenized-stock|GOOGLON]], issued by Ondo Global Markets. Same underlying, different issuer and access model. Two prices coexist:
 
@@ -148,11 +148,10 @@ GOOGLX sits in the **tokenized stocks / RWA** narrative — bringing US equities
 
 ## See Also
 
-- [[alphabet]] — the underlying company (NASDAQ: GOOGL)
 - [[alphabet-class-a-ondo-tokenized-stock]] — alternative GOOGL tokenization via Ondo Finance
 - [[backed-finance]] — the xStock issuer
 - [[tokenized-stocks]] · [[real-world-assets]] · [[tokenization]]
-- [[nasdaq]] · [[crypto-markets]] · [[arbitrum]] · [[solana]]
+- nasdaq · [[crypto-markets]] · [[arbitrum]] · [[solana]]
 
 ---
 

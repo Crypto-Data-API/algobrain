@@ -21,7 +21,6 @@ related:
   - "[[itpm-trading-philosophy]]"
   - "[[itpm-framework]]"
   - "[[anton-kreil]]"
-  - "[[itpm]]"
   - "[[options-portfolio-construction]]"
   - "[[long-vol-vs-short-vol]]"
   - "[[kill-criteria]]"
@@ -188,7 +187,7 @@ The ITPM operational layer ([[itpm-framework]], [[options-portfolio-construction
 - [[itpm-trading-philosophy]] — the philosophical context
 - [[itpm-framework]] — the operational expression
 - [[itpm-five-principles]] — the source articulation
-- [[anton-kreil]] / [[itpm]] — primary articulators
+- [[anton-kreil]] / itpm — primary articulators
 - [[kill-criteria]] / [[when-to-retire-a-strategy]] — the strategic-level expression
 - [[turtle-traders]] — the classical mechanical-rules forerunner
 - [[risk-management]]

@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, risk-management, sp500, indicators, derivatives, volatility]
 aliases: ["5% OTM Put Overlay", "SPY Put Overlay", "Shallow OTM Put Hedge", "5% Put Protection Program"]
-related: ["[[index-options]]", "[[spx-options]]", "[[spy-options]]", "[[xsp-options]]", "[[long-put]]", "[[protective-puts]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[tail-risk-hedging]]", "[[volatility-skew]]", "[[itpm-trade-construction-playbook]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[hedging-cost-budget]]", "[[barbell-portfolio]]", "[[volatility-risk-premium]]"]
+related: ["[[long-put]]", "[[protective-puts]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[tail-risk-hedging]]", "[[volatility-skew]]", "[[itpm-trade-construction-playbook]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[hedging-cost-budget]]", "[[barbell-portfolio]]", "[[volatility-risk-premium]]"]
 strategy_type: hybrid
 timeframe: position
 markets: [stocks, options, index-options, sp500]
@@ -31,13 +31,13 @@ last_review: 2026-05-07
 next_review: 2026-08-07
 ---
 
-A **5% OTM put overlay** is a continuous tail-hedging program that maintains long [[long-put|put options]] roughly 5% out-of-the-money on [[spx-options|SPX]], [[spy-options|SPY]], or [[xsp-options|XSP]], rolled at 60-90 [[days-to-expiration|DTE]], and sized to spend 1-3% of NAV per year on premium. It sits in the middle of the protective-put spectrum — shallower (and faster to monetise) than the 20%+ OTM "[[universa-investments|Universa]]-style" deep-tail hedge, and cheaper (with less convexity) than a near-the-money protective put. It is the canonical [[tail-risk-hedging|tail hedge]] / [[long-vol-overlay|long-vol overlay]] used to offset the left-tail exposure of a long-equity book or of short-premium sleeves elsewhere in the portfolio.
+A **5% OTM put overlay** is a continuous tail-hedging program that maintains long [[long-put|put options]] roughly 5% out-of-the-money on SPX, SPY, or XSP, rolled at 60-90 [[days-to-expiration|DTE]], and sized to spend 1-3% of NAV per year on premium. It sits in the middle of the protective-put spectrum — shallower (and faster to monetise) than the 20%+ OTM "[[universa-investments|Universa]]-style" deep-tail hedge, and cheaper (with less convexity) than a near-the-money protective put. It is the canonical [[tail-risk-hedging|tail hedge]] / [[long-vol-overlay|long-vol overlay]] used to offset the left-tail exposure of a long-equity book or of short-premium sleeves elsewhere in the portfolio.
 
 ## Quick Reference
 
 | Parameter | Value |
 |---|---|
-| **Instrument** | Long puts on [[spx-options\|SPX]] / [[spy-options\|SPY]] / [[xsp-options\|XSP]] |
+| **Instrument** | Long puts on SPX / SPY / XSP |
 | **Strike** | ~5% OTM (4-6% range acceptable) |
 | **DTE** | 60-90 days, rolled at ~30 DTE remaining |
 | **Premium budget** | 1-3% of NAV per year (a hard, pre-committed line item) |
@@ -96,7 +96,7 @@ Under the null that put options are fairly priced and the equity book has no spe
 ### Entry Mechanics
 
 1. **Compute long book notional.** Sum the dollar value of all long-equity exposure in the book to be hedged. SPY equivalents work for diversified large-cap; for tilted books beta-weight to the S&P first.
-2. **Choose product.** [[spx-options|SPX]] for tax efficiency (Section 1256 60/40 treatment) and large-account scale; [[spy-options|SPY]] for sub-$100K accounts where the smaller multiplier and penny tick matter; [[xsp-options|XSP]] for small accounts wanting Section 1256 treatment.
+2. **Choose product.** SPX for tax efficiency (Section 1256 60/40 treatment) and large-account scale; SPY for sub-$100K accounts where the smaller multiplier and penny tick matter; XSP for small accounts wanting Section 1256 treatment.
 3. **Strike selection.** Buy the strike closest to 5% below current index level. Round to nearest available strike interval. The "5%" is a guideline; in practice 4-6% range is acceptable.
 4. **Expiry selection.** 60-90 DTE. Avoid 30 DTE or shorter (gamma decay too fast); avoid 180+ DTE (vega exposure too large for hedge purpose).
 5. **Position size.** N puts where N × strike × multiplier ≈ 80-150% of long-book notional. For SPX with $100 multiplier and a $10M long book at SPX 5000, N ≈ 20-30 contracts.
@@ -256,7 +256,7 @@ Drawing from [[failure-modes]] and [[hedging-program-failure-modes]]:
 ## Sources
 
 - Spitznagel, Mark — *Safe Haven: Investing for Financial Storms* (2021). Chapter 10 on insurance-based portfolio construction. See [[safe-haven-spitznagel]].
-- Cboe research notes on the [[bxm-index|BXM]] and [[put-index|PUT]] indices for benchmark hedging cost data.
+- Cboe research notes on the BXM and PUT indices for benchmark hedging cost data.
 - Goldman Sachs portfolio strategy research on tail-hedging cost-benefit (annual reports 2018-2024).
 - Universa Investments client letters (multiple years) — comparison data on 20%+ OTM tail hedges. See [[universa-investments]].
 - AQR research papers on the [[volatility-risk-premium|VRP]] and the cost of put-buying programs.
@@ -268,7 +268,6 @@ Drawing from [[failure-modes]] and [[hedging-program-failure-modes]]:
 - [[long-vol-overlay]] — broader category this overlay sits within
 - [[universa-investments]], [[mark-spitznagel]] — deeper-tail comparison
 - [[long-vol-vs-short-vol]] — the philosophical context
-- [[index-options]], [[spx-options]], [[xsp-options]] — the preferred underlyings
 - [[hedging-cost-budget]] — the budgeting framework
 - [[volatility-skew]] — informs strike-distance economics
 - [[barbell-portfolio]] — the broader Taleb/Spitznagel approach this overlay supports

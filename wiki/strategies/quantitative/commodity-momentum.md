@@ -188,7 +188,7 @@ The momentum/value negative correlation is the key diversification result from A
 
 ## What Kills This Strategy
 
-1. **Sharp momentum reversals** -- sudden supply shocks ([[opec]] emergency meetings, weather events, export bans) can cause violent trend reversals that hit momentum portfolios before they can rebalance.
+1. **Sharp momentum reversals** -- sudden supply shocks (opec emergency meetings, weather events, export bans) can cause violent trend reversals that hit momentum portfolios before they can rebalance.
 2. **CTA crowding** -- if too many trend-followers hold the same positions, liquidation cascades amplify drawdowns (see 2008 commodity crash when CTAs unwound simultaneously).
 3. **Correlation spikes** -- in risk-off episodes, commodities become correlated with equities, reducing the diversification benefit and hitting long-short commodity portfolios.
 4. **Regulatory changes** -- position limits, speculative margin hikes (as in 2011 silver), or trading restrictions can force rapid deleveraging.

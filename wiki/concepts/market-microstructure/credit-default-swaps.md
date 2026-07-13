@@ -14,7 +14,7 @@ aliases:
 domain: [market-microstructure]
 prerequisites: ["[[derivatives]]", "[[bond-market]]"]
 difficulty: intermediate
-related: ["[[derivatives]]", "[[collateralized-debt-obligations]]", "[[2008-global-financial-crisis]]", "[[moral-hazard]]", "[[aig]]", "[[credit-cycle]]", "[[counterparty-risk]]"]
+related: ["[[derivatives]]", "[[collateralized-debt-obligations]]", "[[2008-global-financial-crisis]]", "[[moral-hazard]]", "[[credit-cycle]]", "[[counterparty-risk]]"]
 ---
 
 # Credit Default Swaps
@@ -31,7 +31,7 @@ Unlike traditional insurance, CDS buyers do not need to own the underlying debt.
 
 ## The AIG Collapse
 
-AIG Financial Products sold an enormous volume of CDS contracts guaranteeing [[collateralized-debt-obligations]] backed by subprime mortgages, collecting billions in premiums while assuming the underlying debt would never default at scale. When housing prices collapsed, AIG faced simultaneous payouts it could not cover. By 2007, the total notional value of outstanding CDS contracts globally exceeded $60 trillion -- dwarfing the actual underlying bond market. AIG required a $185 billion government bailout to prevent a systemic cascade. See [[aig]] for more detail.
+AIG Financial Products sold an enormous volume of CDS contracts guaranteeing [[collateralized-debt-obligations]] backed by subprime mortgages, collecting billions in premiums while assuming the underlying debt would never default at scale. When housing prices collapsed, AIG faced simultaneous payouts it could not cover. By 2007, the total notional value of outstanding CDS contracts globally exceeded $60 trillion -- dwarfing the actual underlying bond market. AIG required a $185 billion government bailout to prevent a systemic cascade. See aig for more detail.
 
 ## Market Significance
 
@@ -49,7 +49,6 @@ CDS serve three roles for market participants. **Hedgers** (bond holders, banks)
 - [[credit-cycle]]
 - [[counterparty-risk]]
 - [[moral-hazard]]
-- [[aig]]
 
 ## Sources
 

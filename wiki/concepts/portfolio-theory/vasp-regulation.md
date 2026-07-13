@@ -139,7 +139,7 @@ As of 2026, the major AUSTRAC-registered digital currency exchanges operating in
 | **BTC Markets** | Registered | Longest-running Australian crypto exchange; founded 2013 |
 | **CoinJar** | Registered | Australian-founded; now dual-headquartered in Melbourne and London |
 | **Digital Surge** | Registered | Brisbane-based; briefly entered administration in 2022 (FTX exposure) but restructured |
-| **Swyftx** | Registered | Australian-founded; merged with [[stake]] in 2023 (Swyftx brand retained for crypto) |
+| **Swyftx** | Registered | Australian-founded; merged with stake in 2023 (Swyftx brand retained for crypto) |
 
 ## Binance Australia: A Case Study
 

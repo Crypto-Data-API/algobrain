@@ -86,11 +86,11 @@ Hut 8 sits in the listed bitcoin-miner / digital-infrastructure cohort — compa
 | [[core-scientific]] | CORZ | Largest contracted HPC backlog (CoreWeave ~$10B) | Late |
 | [[terawulf]] | WULF | Low-carbon power; Fluidstack + Google-backstopped leases | Late |
 | [[iren]] | IREN | Australia/US renewable footprint; vertically integrated | Mid-to-late |
-| [[applied-digital]] | APLD | Pure data-center developer (CoreWeave anchor) | Late (least crypto residual) |
+| applied-digital | APLD | Pure data-center developer (CoreWeave anchor) | Late (least crypto residual) |
 | [[hive-digital-technologies]] | HIVE | Nordic/Paraguay renewable footprint; BUZZ HPC cloud | Mid |
 | [[riot-platforms]] | RIOT | Texas-scale mining; ERCOT power credits | Earlier-mid |
 
-Hut 8's distinctive feature is its **two-vehicle structure**: the parent retains power origination and AI hosting while bitcoin mining lives in the separately listed **American Bitcoin (ABTC)**. This isolates mining volatility, gives investors a cleaner infrastructure exposure in HUT, but also imports **headline/political risk** via the Trump-family association and ABTC's own flow. Versus the late-stage HPC names ([[core-scientific]], [[applied-digital]], [[terawulf]]), HUT's contracted lease book is real and large but its pipeline-to-energized conversion still carries execution risk.
+Hut 8's distinctive feature is its **two-vehicle structure**: the parent retains power origination and AI hosting while bitcoin mining lives in the separately listed **American Bitcoin (ABTC)**. This isolates mining volatility, gives investors a cleaner infrastructure exposure in HUT, but also imports **headline/political risk** via the Trump-family association and ABTC's own flow. Versus the late-stage HPC names ([[core-scientific]], applied-digital, [[terawulf]]), HUT's contracted lease book is real and large but its pipeline-to-energized conversion still carries execution risk.
 
 ## Bull vs Bear Case
 
@@ -124,7 +124,7 @@ HUT defies a single multiple; the market weighs several axes (no specific multip
 - **Headlines over earnings.** The textbook HUT pattern is jumping on contracted-capacity announcements (e.g., +~32% on the ~$9.8B Texas AI lease despite an earnings miss) — capacity/lease news, not reported P&L, drives the tape.
 - **Elevated implied volatility.** Tier-3 popular options with high IV (often >100%); frequently appears in 0DTE/weekly momentum screens during BTC rallies. Supports both directional bets and premium-selling structures (see [[implied-volatility]], [[options-greeks]]).
 - **Catalysts to trade around:** BTC price and [[bitcoin-halving|halving]]-cycle/hash-price economics, AI lease/colocation announcements, ERCOT power events, ABTC filings/flows, and quarterly results (BTC fair-value accounting makes net income swing wildly).
-- **Basket behavior:** moves with [[mara]], [[core-scientific]], [[terawulf]], [[iren]], [[applied-digital]], [[hive-digital-technologies]], [[riot-platforms]], and on treasury sentiment with [[microstrategy]]; cohort dispersion (lease leaders vs laggards) is a recurring setup.
+- **Basket behavior:** moves with [[mara]], [[core-scientific]], [[terawulf]], [[iren]], applied-digital, [[hive-digital-technologies]], [[riot-platforms]], and on treasury sentiment with [[microstrategy]]; cohort dispersion (lease leaders vs laggards) is a recurring setup.
 
 ## Capital Structure & Dilution Risk
 
@@ -156,14 +156,13 @@ HUT defies a single multiple; the market weighs several axes (no specific multip
 - [[core-scientific]]
 - [[terawulf]]
 - [[iren]]
-- [[applied-digital]]
 - [[hive-digital-technologies]]
 - [[data-center]]
 - [[ai-data-center-power-demand]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - Hut 8 energizes Vega data center (30 Jun 2025): https://www.hut8.com/2025/06/30/hut-8-energizes-vega-data-center/
 - Hut 8 Q2 2025 results ($137.5M net income): https://www.stocktitan.net/news/HUT/hut-8-reports-second-quarter-2025-dieo9ilbpr54.html
 - Sherwood News: Q1 2026 earnings miss + $9.8B Texas AI lease: https://sherwood.news/crypto/hut-8-q1-earnings/

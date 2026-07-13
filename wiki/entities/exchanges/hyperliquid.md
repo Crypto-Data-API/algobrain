@@ -119,8 +119,8 @@ Hyperliquid has expanded well beyond crypto-native assets. With 229 [[perpetual-
 - Precious Metals: [[gold|GOLD]], [[silver|SILVER]], PLATINUM
 
 **Equities / Indices** (via xyz: prefix markets):
-- Indices: [[sp500|SP500]]
-- Tech: [[tesla|TSLA]], [[nvidia|NVDA]], [[intel|INTC]]
+- Indices: SP500
+- Tech: TSLA, [[nvidia|NVDA]], INTC
 - Fintech/Crypto-adjacent: [[robinhood|HOOD]], [[coinbase-stock|COIN]]
 
 The inclusion of traditional assets as [[perpetual-futures|perpetual contracts]] on a decentralized platform is notable -- it positions Hyperliquid as a **universal derivatives venue** rather than a crypto-only DEX. These traditional asset perps use price feeds to synthesize exposure without holding the underlying.

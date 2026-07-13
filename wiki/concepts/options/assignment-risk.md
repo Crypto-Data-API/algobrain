@@ -6,13 +6,13 @@ updated: 2026-06-21
 status: excellent
 tags: [options, risk-management, derivatives, market-microstructure]
 aliases: ["Assignment Risk", "Early Assignment Risk"]
-related: ["[[index-options]]", "[[spx-options]]", "[[spy-options]]", "[[american-vs-european-options]]", "[[cash-vs-physical-settlement]]", "[[am-vs-pm-settlement]]", "[[pin-risk]]", "[[max-pain]]", "[[options-pinning]]", "[[gap-risk]]", "[[liquidity-evaporation]]", "[[wheel-strategy]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[short-strangle]]", "[[iron-condor]]", "[[ex-dividend-date]]", "[[occ]]", "[[options-buying-power-reduction]]", "[[options-portfolio-construction]]", "[[managing-winners]]"]
+related: ["[[american-vs-european-options]]", "[[cash-vs-physical-settlement]]", "[[pin-risk]]", "[[max-pain]]", "[[options-pinning]]", "[[gap-risk]]", "[[liquidity-evaporation]]", "[[wheel-strategy]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[short-strangle]]", "[[iron-condor]]", "[[occ]]", "[[options-buying-power-reduction]]", "[[options-portfolio-construction]]", "[[managing-winners]]"]
 domain: [risk-management, derivatives, options]
 prerequisites: ["[[options-greeks]]", "[[american-vs-european-options]]"]
 difficulty: intermediate
 ---
 
-**Assignment risk** is the risk that a short option position is exercised by its long counterparty, converting the option into a stock position (for equity options) before the trader expected — and, in the worst cases, at a moment when the conversion creates a margin call or unhedged delta exposure. Assignment risk is **only present in [[american-vs-european-options|American-style options]]** — primarily equity options, ETF options like [[spy-options|SPY]], and a handful of futures options. European-style index options ([[spx-options|SPX]], NDX, RUT, [[xsp-options|XSP]], VIX) cannot be early-assigned by construction. The concentration of real-world assignment risk falls into three categories: deep-ITM short calls before ex-dividend dates, deep-ITM short positions of any kind near expiration, and short calls on hard-to-borrow or about-to-be-acquired stocks where the long holder's capture-the-dividend or arbitrage incentive is large.
+**Assignment risk** is the risk that a short option position is exercised by its long counterparty, converting the option into a stock position (for equity options) before the trader expected — and, in the worst cases, at a moment when the conversion creates a margin call or unhedged delta exposure. Assignment risk is **only present in [[american-vs-european-options|American-style options]]** — primarily equity options, ETF options like SPY, and a handful of futures options. European-style index options (SPX, NDX, RUT, XSP, VIX) cannot be early-assigned by construction. The concentration of real-world assignment risk falls into three categories: deep-ITM short calls before ex-dividend dates, deep-ITM short positions of any kind near expiration, and short calls on hard-to-borrow or about-to-be-acquired stocks where the long holder's capture-the-dividend or arbitrage incentive is large.
 
 ## Overview
 
@@ -55,7 +55,7 @@ The textbook American-call-on-non-dividend-stock theorem says **early exercise i
 | Special dividend | short call | dividend below OCC adjustment threshold (no strike adjust) | episodic, bulk |
 | Index option (SPX/NDX/RUT/VIX) | none — cash-settled European | **never** — no exercise event by construction | n/a |
 
-The last row is the structural punchline of the whole page: [[index-options|cash-settled European options]] remove the trigger entirely, which is why institutional [[options-portfolio-construction|premium books]] gravitate to them. See [[cash-vs-physical-settlement]].
+The last row is the structural punchline of the whole page: cash-settled European options remove the trigger entirely, which is why institutional [[options-portfolio-construction|premium books]] gravitate to them. See [[cash-vs-physical-settlement]].
 
 ### The dividend-capture mechanic in detail
 
@@ -76,7 +76,7 @@ For a deep-ITM short put on a hard-to-borrow stock, the long holder is implicitl
 
 ### Routine dividend-driven assignment on SPY, dividend ETFs, and dividend-payers
 
-[[spy-options|SPY]] pays a quarterly dividend (typically March, June, September, December). Each quarter, the day before ex-date, brokers warn customers about likely early assignment on deep-ITM short SPY calls. Tastytrade and other broker-dealer research has shown that the rate of early assignment on deep-ITM SPY short calls in the 24 hours before ex-date is on the order of 70-95% — not deterministic, but the dominant outcome. The same pattern appears for AAPL (quarterly), MSFT (quarterly), and most dividend-paying equities.
+SPY pays a quarterly dividend (typically March, June, September, December). Each quarter, the day before ex-date, brokers warn customers about likely early assignment on deep-ITM short SPY calls. Tastytrade and other broker-dealer research has shown that the rate of early assignment on deep-ITM SPY short calls in the 24 hours before ex-date is on the order of 70-95% — not deterministic, but the dominant outcome. The same pattern appears for AAPL (quarterly), MSFT (quarterly), and most dividend-paying equities.
 
 ### LEAPS-call assignment around special dividends
 
@@ -129,7 +129,7 @@ Active short-premium traders running covered calls, [[cash-secured-puts|cash-sec
 
 ### Why index options are structurally cleaner
 
-[[index-options|Cash-settled European index options]] — SPX, NDX, RUT, XSP, VIX — eliminate assignment risk entirely. There is no exercise event, no resulting stock position, no dividend interaction. For a [[options-portfolio-construction|portfolio]] running short premium at scale, switching from SPY to SPX (or QQQ to NDX) removes the entire operational workload of assignment management at the cost of slightly different tax and sizing. Most institutional premium-selling books trade index options precisely for this reason. See [[cash-vs-physical-settlement]].
+Cash-settled European index options — SPX, NDX, RUT, XSP, VIX — eliminate assignment risk entirely. There is no exercise event, no resulting stock position, no dividend interaction. For a [[options-portfolio-construction|portfolio]] running short premium at scale, switching from SPY to SPX (or QQQ to NDX) removes the entire operational workload of assignment management at the cost of slightly different tax and sizing. Most institutional premium-selling books trade index options precisely for this reason. See [[cash-vs-physical-settlement]].
 
 ### Wheel strategy: assignment is *desired*, but only sometimes
 
@@ -166,19 +166,14 @@ A small short-options position can produce a much larger stock position post-ass
 5. **Underestimating hard-to-borrow exposure on short puts.** Names with high borrow rates (meme stocks, recent IPOs, heavily-shorted stocks) can produce surprise early-assignment on short puts that "looked safe" at the time of sale.
 6. **Trusting auto-exercise / do-not-exercise as a guarantee.** The OCC's $0.01 threshold is a default. Sophisticated holders override in either direction. A short option that's $0.05 OTM at the close can still be exercised; one that's $0.05 ITM can be allowed to expire. Plan for both.
 7. **Ignoring weekend-and-holiday compounding.** Friday assignment notifications appear Monday morning; if a Monday holiday intervenes, the notification arrives Tuesday. The resulting stock position has an additional day of overnight exposure before the trader can act.
-8. **Forgetting tax interaction with assignment.** Assignment of an ITM short call resets the trader's basis in the underlying (for tax purposes) at the strike price minus credit received. For US Section 1256 vs equity-option tax treatment, the assignment changes the character of the position. See [[ex-dividend-date]] and the Section 1256 discussion in [[index-options]].
+8. **Forgetting tax interaction with assignment.** Assignment of an ITM short call resets the trader's basis in the underlying (for tax purposes) at the strike price minus credit received. For US Section 1256 vs equity-option tax treatment, the assignment changes the character of the position. See ex-dividend-date and the Section 1256 discussion in index-options.
 
 ## Related
 
 - [[american-vs-european-options]] — exercise-style distinction; assignment risk is American-only
 - [[cash-vs-physical-settlement]] — settlement-type contrast; cash-settled has no assignment
-- [[index-options]] — cash-settled European products avoid assignment risk
-- [[spx-options]], [[xsp-options]] — no assignment risk
-- [[spy-options]] — physically-settled American, has assignment risk
-- [[am-vs-pm-settlement]] — interacts with assignment timing on AM-settled equity-style products
 - [[pin-risk]] — at-expiration assignment uncertainty
 - [[options-pinning]] — empirical price-clustering near strikes (different concept)
-- [[ex-dividend-date]] — primary trigger for early assignment on short calls
 - [[wheel-strategy]] — strategy where assignment is sometimes intentional
 - [[covered-calls]], [[cash-secured-puts]] — structures most exposed to routine assignment
 - [[short-strangle]], [[iron-condor]] — multi-leg structures with assignment exposure on the in-the-money leg

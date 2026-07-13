@@ -20,7 +20,7 @@ related: ["[[iron-condor]]", "[[gamma-scalping]]", "[[volatility-arbitrage]]", "
 
 Straddles and strangles are **long-volatility** strategies that profit from large price moves in either direction. A **straddle** involves buying a [[call-option]] and a [[put-option]] at the same [[strike-price]] and expiration. A **strangle** uses different strikes -- typically an OTM call and an OTM put -- making it cheaper but requiring a larger move to profit. Both strategies are directionally agnostic: the trader does not care which way the price moves, only that it moves *enough* to overcome the combined premium paid.
 
-These strategies are most commonly deployed before known [[catalyst]]s -- [[earnings]] announcements, [[fomc]] decisions, FDA rulings, or major crypto protocol upgrades. The core bet is that the actual realized move will exceed what [[implied-volatility]] has priced in (Source: [[book-option-volatility-and-pricing]]). The danger is well-known: [[implied-volatility]] tends to be elevated before events, and the post-event [[iv-crush]] can destroy the position's value even if the underlying moves moderately.
+These strategies are most commonly deployed before known [[catalyst]]s -- earnings announcements, [[fomc]] decisions, FDA rulings, or major crypto protocol upgrades. The core bet is that the actual realized move will exceed what [[implied-volatility]] has priced in (Source: [[book-option-volatility-and-pricing]]). The danger is well-known: [[implied-volatility]] tends to be elevated before events, and the post-event [[iv-crush]] can destroy the position's value even if the underlying moves moderately.
 
 ## Rules
 
@@ -46,7 +46,7 @@ Risk the entire premium paid. Size positions so that a total loss (both legs exp
 - [[gamma]] -- high gamma near ATM means the position accelerates in profit as the underlying moves
 - [[theta]] -- the daily cost of holding the position; the enemy of long options
 - [[atr]] / historical move analysis -- compare the straddle price to the stock's average move on the catalyst day
-- [[earnings-calendar]] / [[economic-calendar]] -- timing the catalyst
+- earnings-calendar / [[economic-calendar]] -- timing the catalyst
 
 ## Example Trade
 **Asset:** NVDA trading at $800, reporting earnings after the close. Weekly options expire in 3 days.
@@ -77,7 +77,7 @@ Risk the entire premium paid. Size positions so that a total loss (both legs exp
 
 ## Straddles and Strangles in Long/Short Portfolios
 
-In the [[itpm]] [[long-short-equity]] methodology, long straddles and strangles serve as volatility expansion bets within a broader portfolio:
+In the itpm long-short-equity methodology, long straddles and strangles serve as volatility expansion bets within a broader portfolio:
 
 - Used when a fundamental catalyst is expected but direction is uncertain (e.g., binary earnings events, regulatory decisions)
 - The POTM (Professional Options Trading Masterclass) teaches strap straddles and strip straddles for directionally biased volatility plays
@@ -89,8 +89,6 @@ In the [[itpm]] [[long-short-equity]] methodology, long straddles and strangles 
 - [[gamma-scalping]] -- a dynamic hedging approach to monetize long gamma positions
 - [[volatility-arbitrage]] -- systematically trading the spread between implied and realized volatility
 - [[implied-volatility]] -- the critical variable that determines whether a straddle is cheap or expensive
-- [[earnings]] -- the most common catalyst for straddle/strangle trades
-- [[long-short-equity]] -- portfolio context for volatility plays
 - [[straddle-vs-strangle]] -- detailed comparison of the two variants
 - [[gut-spread]] -- an ITM variation of the strangle
 

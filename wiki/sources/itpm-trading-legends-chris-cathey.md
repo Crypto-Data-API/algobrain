@@ -13,25 +13,25 @@ source_date: 2018-01-01
 source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-chris-cathey.md"
 confidence: medium
 claims_count: 27
-related: ["[[anton-kreil]]", "[[itpm]]", "[[chris-cathey]]", "[[goldman-sachs]]", "[[long-short-equity]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[technical-analysis]]", "[[private-equity]]"]
+related: ["[[anton-kreil]]", "[[chris-cathey]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[technical-analysis]]"]
 ---
 
-[[anton-kreil]] interviews [[chris-cathey|Dr. Christopher Cathey]], a senior trading mentor at [[itpm]] and former trader at [[goldman-sachs]]. Cathey worked at Goldman from 1993 to 2006 on the pan-European equities trading desk before moving to a hedge fund, accumulating approximately 15-16 years on the professional side. He is the longest-serving mentor at ITPM with 75-80 mentoring programs completed at the time of recording. The interview is notable for a detailed case study of emotional detachment during a live trading crisis at Goldman Sachs. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and philosophy claims are first-person and single-source, so confidence is MEDIUM.
+[[anton-kreil]] interviews [[chris-cathey|Dr. Christopher Cathey]], a senior trading mentor at itpm and former trader at goldman-sachs. Cathey worked at Goldman from 1993 to 2006 on the pan-European equities trading desk before moving to a hedge fund, accumulating approximately 15-16 years on the professional side. He is the longest-serving mentor at ITPM with 75-80 mentoring programs completed at the time of recording. The interview is notable for a detailed case study of emotional detachment during a live trading crisis at Goldman Sachs. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and philosophy claims are first-person and single-source, so confidence is MEDIUM.
 
 > **Note on confidence:** Promotional interview for a paid trading-education business. Career details and opinions are the interviewee's own recollection, not independently verified — treat as [MEDIUM] single-source.
 
 ## Career Background
 
-- [MEDIUM] Joined [[goldman-sachs]] in 1993 in New York, then traded on the European equities desk in London from 1993/94 to 1998. Spent time in New York trading US and international markets. Went to Frankfurt for a year and a half to run German risk, then returned to London from 1999 to 2006.
+- [MEDIUM] Joined goldman-sachs in 1993 in New York, then traded on the European equities desk in London from 1993/94 to 1998. Spent time in New York trading US and international markets. Went to Frankfurt for a year and a half to run German risk, then returned to London from 1999 to 2006.
 - [MEDIUM] Roles at Goldman were both [[proprietary-trading|proprietary]] and customer market-making: facilitating prices, working agency business, and taking proprietary risk.
 - [MEDIUM] Left Goldman in 2006 to join a hedge fund (appears to be connected to Merrill Lynch) where he stayed for three years, leaving just as the financial crisis started.
 - [MEDIUM] Traded through the bull market of the 1990s, the NASDAQ bubble and bust (2000-2001), the subsequent bear market, and the bull market from 2003/04 up to the financial crisis. Made money in all of these environments.
 - [MEDIUM] Risk appetite at Goldman increased over his career, and Goldman was at the forefront of risk-taking, though most places operated with similar levels.
-- [MEDIUM] Now invests in [[private-equity]] — specifically established, cash-generative, profitable SMEs that need capital to grow. Sectors include parts of the Nissan supply chain, refrigerator paneling, and construction. Describes it as "not sexy" but profitable, applying the same trading disciplines to private business investing.
+- [MEDIUM] Now invests in private-equity — specifically established, cash-generative, profitable SMEs that need capital to grow. Sectors include parts of the Nissan supply chain, refrigerator paneling, and construction. Describes it as "not sexy" but profitable, applying the same trading disciplines to private business investing.
 
 ## Emotional Detachment — Goldman Sachs Case Study
 
-- [MEDIUM] Detailed account of a day at [[goldman-sachs]] around 2001 during the NASDAQ bear market. The desk was very short (~$500 million) in telecoms and technology stocks. A vicious bear market rally squeezed their positions; by lunchtime they were down significantly.
+- [MEDIUM] Detailed account of a day at goldman-sachs around 2001 during the NASDAQ bear market. The desk was very short (~$500 million) in telecoms and technology stocks. A vicious bear market rally squeezed their positions; by lunchtime they were down significantly.
 - [MEDIUM] Three possible responses: (1) panic and cover everything, (2) freeze like a "rabbit in headlights" — both equally bad. Instead, they chose option (3): bought Euro Stoxx futures to reduce net short exposure even though they believed the rally was temporary. This allowed them to remain functional as market makers and continue providing liquidity.
 - [MEDIUM] They literally printed the high tick of the day on the Euro Stoxx purchase. When the market turned in the afternoon, they increased short positions again. Ended the day slightly positive, and over the next two days made a "very big amount of money."
 - [MEDIUM] Key principle: do not increase losing positions. Only add to positions when they are working. When a position moves against you and triggers your stop loss, exit. Then, when you get confirmation the trade is working again, increase. "Adding to winners and cutting losers is exactly the same process — all you're doing is risk managing and putting the risk-reward in your favor."

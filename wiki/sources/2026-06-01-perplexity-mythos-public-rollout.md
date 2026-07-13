@@ -15,7 +15,6 @@ confidence: medium
 claims_count: 6
 related:
   - "[[2026-04-07-claude-mythos-project-glasswing]]"
-  - "[[mythos-capability-overhang-vol]]"
   - "[[anthropic]]"
   - "[[ai-vulnerability-discovery]]"
   - "[[frontier-models-and-crypto-exploits]]"
@@ -56,7 +55,6 @@ The BleepingComputer source (1) is the authoritative source for the policy chang
 ## Pages this update contributed to
 
 - [[2026-04-07-claude-mythos-project-glasswing]] — added "June 2026 — Public rollout window (UPDATE)" section with new timeline rows
-- [[mythos-capability-overhang-vol]] — status moved from `draft` to `active-catalyst-window`; lead paragraph updated with 2026-06-01 callout
 
 ## Trader implications
 

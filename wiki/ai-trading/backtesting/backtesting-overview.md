@@ -211,7 +211,7 @@ The "5-10 bps" rule is a floor for liquid equities; other markets carry structur
 | **Options** | Spread (wide) + assignment + slippage | 50-200+ bps | Stale-quote / mid-fill assumption; vol-surface look-ahead |
 | **Futures** | Commission + spread + roll | ~2-8 bps + roll | Continuous-contract construction artifacts |
 
-A backtest that uses one flat cost number across asset classes is misleading. The funding term on a perp strategy, the borrow term on an equity short, and the roll cost on a futures strategy each behave like a *regime-dependent* expense that benign historical windows understate — this is exactly the failure the [[session-overlap-momentum]] and [[white-collar-ai-displacement-short]] pages flag in their cost overlays.
+A backtest that uses one flat cost number across asset classes is misleading. The funding term on a perp strategy, the borrow term on an equity short, and the roll cost on a futures strategy each behave like a *regime-dependent* expense that benign historical windows understate — this is exactly the failure the [[session-overlap-momentum]] and white-collar-ai-displacement-short pages flag in their cost overlays.
 
 ### Other Pitfalls
 

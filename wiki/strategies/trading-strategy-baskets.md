@@ -17,12 +17,12 @@ crowding_risk: medium
 data_required: [ohlcv-daily, fundamentals, correlation-matrix, sector-classification]
 min_capital_usd: 25000
 capacity_usd: 100000000
-related: ["[[edge-taxonomy]]", "[[pairs-trading]]", "[[correlation]]", "[[diversification]]", "[[sector-rotation]]", "[[long-short-equity]]", "[[position-sizing]]", "[[risk-parity]]", "[[beta]]", "[[narrative-trading]]", "[[rebalancing]]"]
+related: ["[[edge-taxonomy]]", "[[pairs-trading]]", "[[correlation]]", "[[diversification]]", "[[sector-rotation]]", "[[position-sizing]]", "[[risk-parity]]", "[[beta]]", "[[narrative-trading]]", "[[rebalancing]]"]
 ---
 
 # Trading Strategy Baskets
 
-A **trading strategy basket** is a group of related instruments traded together as a single position to express a thesis — for example, going long a basket of AI-infrastructure stocks, or long a basket of high-quality names while short a basket of low-quality names. By trading the *theme* through many names rather than betting on one, a basket diversifies away idiosyncratic single-name risk (an earnings miss, a CEO scandal, a fraud) and isolates the systematic driver the trader actually wants exposure to. Baskets are the workhorse of [[long-short-equity]] and thematic/[[sector-rotation]] trading, and a generalization of [[pairs-trading]] from two names to many.
+A **trading strategy basket** is a group of related instruments traded together as a single position to express a thesis — for example, going long a basket of AI-infrastructure stocks, or long a basket of high-quality names while short a basket of low-quality names. By trading the *theme* through many names rather than betting on one, a basket diversifies away idiosyncratic single-name risk (an earnings miss, a CEO scandal, a fraud) and isolates the systematic driver the trader actually wants exposure to. Baskets are the workhorse of long-short-equity and thematic/[[sector-rotation]] trading, and a generalization of [[pairs-trading]] from two names to many.
 
 ## Edge source
 
@@ -154,7 +154,6 @@ General market knowledge; no specific wiki source ingested yet.
 ## Related
 
 - [[pairs-trading]] — the two-name special case of a long/short basket
-- [[long-short-equity]] — the strategy family baskets serve
 - [[correlation]] / [[diversification]] — the risk-engineering basis
 - [[risk-parity]] — a common basket weighting scheme
 - [[beta]] — beta-neutralizing the basket

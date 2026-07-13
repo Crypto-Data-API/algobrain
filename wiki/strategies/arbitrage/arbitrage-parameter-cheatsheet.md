@@ -11,7 +11,7 @@ timeframe: scalp|intraday|swing|position
 markets: [crypto, stocks, futures, options, forex]
 complexity: advanced
 backtest_status: untested
-related: ["[[arbitrage-overview]]", "[[arbitrage-opportunity-map]]", "[[transaction-cost-modeling]]", "[[fees]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[pairs-trading]]", "[[statistical-arbitrage]]", "[[cash-and-carry]]", "[[merger-arbitrage]]", "[[volatility-arbitrage]]", "[[exchange-api-reference]]"]
+related: ["[[arbitrage-overview]]", "[[arbitrage-opportunity-map]]", "[[transaction-cost-modeling]]", "[[fees]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[pairs-trading]]", "[[statistical-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[exchange-api-reference]]"]
 ---
 
 # Arbitrage Parameter Cheatsheet
@@ -37,7 +37,7 @@ The single number that gates each trade, with the binding constraint. Click thro
 | [[pairs-trading]] | \|z\| > 2.0 entry | Cointegration p < 0.05, half-life | [Statistical](#statistical--quantitative-arbitrage) |
 | [[statistical-arbitrage]] | \|z\| > 1.5 residual | Market-neutrality, [[transaction-cost-modeling\|turnover cost]] | [Statistical](#statistical--quantitative-arbitrage) |
 | [[volatility-arbitrage]] | IV-RV > 3 vol pts | Gamma/vega limits, hedge cost | [Volatility](#volatility--options-arbitrage) |
-| [[merger-arbitrage]] | Annualized spread > 8% | Deal-break downside gap | [Event-Driven](#event-driven-arbitrage) |
+| merger-arbitrage | Annualized spread > 8% | Deal-break downside gap | [Event-Driven](#event-driven-arbitrage) |
 | [[flash-loan-arbitrage]] | Profit > 2× gas | Gas, MEV competition | [DeFi](#defi--crypto-native-arbitrage) |
 | Staking / LST | Yield spread > 3% or discount > 0.5% | Smart-contract + [[depeg-risk]] | [DeFi](#defi--crypto-native-arbitrage) |
 
@@ -309,7 +309,7 @@ This derive-then-validate loop applies to every threshold on this page: the form
 | Pitfall | Symptom | Fix |
 |---|---|---|
 | Using table values verbatim at retail fees | Live fills never trigger or trigger into losses | Derive your own floor from your actual [[fees]] tier |
-| Sizing off gross spread, not downside | One [[merger-arbitrage]] break wipes a year of carry | Size off the loss-given-break / depth, not the headline |
+| Sizing off gross spread, not downside | One merger-arbitrage break wipes a year of carry | Size off the loss-given-break / depth, not the headline |
 | Static thresholds year-round | Edge erodes in summer / low-VIX regimes | Apply the seasonal/regime tables above |
 | Ignoring [[leg-risk]] in multi-leg | Backtest shows 100% fills; live strands legs | Model leg-failure rate (Sin 4 in [[arbitrage-backtesting-guide]]) |
 | No cost recalibration | Drift between modeled and realized cost | Re-measure quarterly (Universal Parameters table) |
@@ -324,7 +324,6 @@ This derive-then-validate loop applies to every threshold on this page: the form
 - [[limits-to-arbitrage]] -- why the cost floor exists at all
 - [[cross-exchange-arbitrage]] · [[triangular-arbitrage]] · [[cash-and-carry]] · [[funding-rate-arbitrage]] -- pure-arb pages
 - [[pairs-trading]] · [[statistical-arbitrage]] · [[volatility-arbitrage]] -- statistical/vol pages
-- [[merger-arbitrage]] · [[risk-arbitrage]] -- event-driven pages
 - [[flash-loan-arbitrage]] · [[slippage-optimal-pathfinding]] -- DeFi pages
 - [[walk-forward-analysis]] · [[deflated-sharpe-ratio]] -- out-of-sample rigor
 - [[counterparty-risk]] · [[strategy-correlation-matrix]] -- portfolio-level caps

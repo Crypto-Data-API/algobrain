@@ -9,7 +9,6 @@ entity_type: company
 website: https://finance.yahoo.com
 related:
   - "[[alpha-vantage]]"
-  - "[[finviz]]"
   - "[[tradingview-platform]]"
 ---
 
@@ -35,9 +34,9 @@ Yahoo Finance does not offer a traditional paid API. The **Yahoo Finance Plus** 
 
 ## Alpha Edge
 
-- Screen for [[value-investing]] opportunities using free fundamental data (P/E, P/B, debt ratios)
-- Track [[earnings]] surprises and estimate revisions for momentum signals
-- Build basic [[fundamental-analysis]] pipelines without spending a dollar
+- Screen for value-investing opportunities using free fundamental data (P/E, P/B, debt ratios)
+- Track earnings surprises and estimate revisions for momentum signals
+- Build basic fundamental-analysis pipelines without spending a dollar
 - Monitor options unusual activity for sentiment signals
 - Backtest simple strategies using decades of daily price history
 

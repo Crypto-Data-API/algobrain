@@ -21,7 +21,7 @@ expected_sharpe: 1.2
 expected_max_drawdown: 0.10
 breakeven_cost_bps: 60
 decay_evidence: "Mechanism fully dependent on classical gold standard; dismantled by WWI moratorium (August 1914) and never restored to full form"
-related: ["[[gold-point-arbitrage]]", "[[mint-parity-arbitrage]]", "[[bill-broking-arbitrage]]", "[[covered-interest-arbitrage]]", "[[gold-standard-mechanics]]", "[[baring-crisis-1890]]", "[[panic-of-1907]]", "[[1914-moratorium]]", "[[bank-of-england]]", "[[rothschild-family]]", "[[baring-brothers]]", "[[arbitrage]]", "[[arbitrage-overview]]", "[[edge-taxonomy]]", "[[global-macro]]"]
+related: ["[[gold-point-arbitrage]]", "[[mint-parity-arbitrage]]", "[[bill-broking-arbitrage]]", "[[covered-interest-arbitrage]]", "[[gold-standard-mechanics]]", "[[baring-crisis-1890]]", "[[panic-of-1907]]", "[[1914-moratorium]]", "[[bank-of-england]]", "[[arbitrage]]", "[[arbitrage-overview]]", "[[edge-taxonomy]]", "[[global-macro]]"]
 ---
 
 # Specie Flow Arbitrage
@@ -152,7 +152,7 @@ These series survive in historical archives (Bank of England *Bank Return* runs,
 
 ## Example Trade: Baring Crisis, November 1890
 
-In late 1890 the merchant bank [[baring-brothers|Baring Brothers]] held vast claims on Argentine government paper that had become unmarketable. A sophisticated observer tracking:
+In late 1890 the merchant bank Baring Brothers held vast claims on Argentine government paper that had become unmarketable. A sophisticated observer tracking:
 
 - British trade data (worsening),
 - Bank of England bullion reserve (falling — gold flowing to Argentina to support commitments),
@@ -170,7 +170,7 @@ The classic positioning by informed houses (Rothschilds among them):
 - Short Consols into the Bank Rate hike (Bank Rate was raised to 6% on 7 November 1890, having already been lifted in stages from 4% earlier that autumn).
 - Maintain liquidity to participate in the eventual Baring rescue syndicate.
 
-The [[bank-of-england|Bank of England]] under Governor William Lidderdale organised the ~£17M Baring guarantee fund in November 1890; the [[rothschild-family|Rothschilds]] were among the largest subscribers and arranged a gold loan (~£2-3M) from the Banque de France to shore up the Bank's reserve. For houses positioned ahead of the crisis, the arb paid for the participation.
+The [[bank-of-england|Bank of England]] under Governor William Lidderdale organised the ~£17M Baring guarantee fund in November 1890; the Rothschilds were among the largest subscribers and arranged a gold loan (~£2-3M) from the Banque de France to shore up the Bank's reserve. For houses positioned ahead of the crisis, the arb paid for the participation.
 
 ## Performance Characteristics
 
@@ -224,7 +224,7 @@ See [[failure-modes]].
 ## Historical Episodes
 
 - **Panic of 1857**: Hamburg-London-NYC gold flows reversed sharply after US railroad bankruptcies.
-- **Overend Gurney collapse, 1866**: bill market seized; see [[bill-broking-arbitrage]] and [[overend-gurney]].
+- **Overend Gurney collapse, 1866**: bill market seized; see [[bill-broking-arbitrage]] and overend-gurney.
 - **Baring Crisis, 1890**: [[baring-crisis-1890]] — Rothschild-led rescue; BoE reserve fell to critical lows.
 - **Panic of 1907**: [[panic-of-1907]] — JP Morgan's New York rescue; gold flows from Europe to shore up NY trust companies.
 - **1914 moratorium**: [[1914-moratorium]] — the August 1914 suspension of convertibility ended the strategy permanently.
@@ -263,8 +263,6 @@ The edge survives wherever a credible reaction function is publicly observable o
 - [[baring-crisis-1890]] — key historical episode
 - [[panic-of-1907]] — key historical episode
 - [[1914-moratorium]] — the end of the regime
-- [[rothschild-family]] — dominant practitioner
-- [[baring-brothers]] — major competitor
 - [[arbitrage]] — concept
 - [[arbitrage-overview]] — the arbitrage family
 - [[global-macro]] — the modern descendant style

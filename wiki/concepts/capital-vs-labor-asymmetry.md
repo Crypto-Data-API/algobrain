@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [risk-management, ai-trading, behavioral-finance, education]
 aliases: ["Capital-Labor Timing Asymmetry", "Capital-Biased Innovation", "Margin-Wage Asymmetry"]
-related: ["[[ai-layoff-trap]]", "[[citrini-2028-global-intelligence-crisis]]", "[[service-sector-multiplier]]", "[[skill-bifurcation]]", "[[wage-compression-vs-job-loss]]", "[[ai-driven-demand-destruction]]", "[[margin-expansion-disparity]]", "[[systemic-risk]]", "[[recession]]", "[[business-cycle]]", "[[employment]]", "[[fed-policy]]", "[[market-cycles]]"]
+related: ["[[ai-layoff-trap]]", "[[citrini-2028-global-intelligence-crisis]]", "[[service-sector-multiplier]]", "[[skill-bifurcation]]", "[[wage-compression-vs-job-loss]]", "[[ai-driven-demand-destruction]]", "[[systemic-risk]]", "[[recession]]", "[[business-cycle]]", "[[employment]]", "[[fed-policy]]", "[[market-cycles]]"]
 domain: [risk-management, behavioral-finance]
 prerequisites: ["[[business-cycle]]"]
 difficulty: intermediate
@@ -94,7 +94,6 @@ The capital channel is dominating the headline numbers; the labor channel is for
 - [[skill-bifurcation]]
 - [[wage-compression-vs-job-loss]]
 - [[ai-driven-demand-destruction]]
-- [[margin-expansion-disparity]]
 - [[pigouvian-automation-tax]]
 - [[systemic-risk]]
 - [[tail-risk]]
@@ -103,7 +102,6 @@ The capital channel is dominating the headline numbers; the labor channel is for
 - [[employment]]
 - [[fed-policy]]
 - [[market-cycles]]
-- [[2024-nvidia-ai-boom]]
 
 ## Sources
 

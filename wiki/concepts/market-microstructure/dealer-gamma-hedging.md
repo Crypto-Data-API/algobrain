@@ -6,13 +6,13 @@ updated: 2026-06-11
 status: good
 tags: [options, market-microstructure, market-makers, gamma, indicators]
 aliases: ["Dealer Hedging", "Market Maker Gamma Hedging", "Gamma Hedging Flows", "GEX"]
-related: ["[[gamma-exposure-trading]]", "[[gamma-scalping]]", "[[spotgamma]]", "[[options-greeks]]", "[[volatility-regime-classification]]", "[[options-stress-testing]]", "[[max-pain]]", "[[vix-august-2024-spike]]", "[[itpm-trade-construction-playbook]]"]
+related: ["[[gamma-exposure-trading]]", "[[gamma-scalping]]", "[[options-greeks]]", "[[volatility-regime-classification]]", "[[options-stress-testing]]", "[[max-pain]]", "[[vix-august-2024-spike]]", "[[itpm-trade-construction-playbook]]"]
 domain: [market-microstructure, options]
 prerequisites: ["[[options-greeks]]", "[[gamma]]"]
 difficulty: advanced
 ---
 
-Dealer gamma hedging is the mechanical, non-discretionary process by which options [[market-makers|market makers]] buy and sell the underlying asset to keep their inventory [[delta]]-neutral as spot moves. Because dealers are the residual counterparty to most options trades and because their hedging is rule-based rather than view-driven, their flows are often the second-order mover of intraday equity prices -- frequently more important than fundamentals, news, or [[technical-analysis]] for explaining why [[sp500|SPX]] grinds sideways one day and trends violently the next. Understanding which side of [[gamma]] dealers are on is one of the few structural edges still available to discretionary traders, and it is foundational to [[itpm-trade-construction-playbook|ITPM-style]] trade construction.
+Dealer gamma hedging is the mechanical, non-discretionary process by which options [[market-makers|market makers]] buy and sell the underlying asset to keep their inventory [[delta]]-neutral as spot moves. Because dealers are the residual counterparty to most options trades and because their hedging is rule-based rather than view-driven, their flows are often the second-order mover of intraday equity prices -- frequently more important than fundamentals, news, or [[technical-analysis]] for explaining why SPX grinds sideways one day and trends violently the next. Understanding which side of [[gamma]] dealers are on is one of the few structural edges still available to discretionary traders, and it is foundational to [[itpm-trade-construction-playbook|ITPM-style]] trade construction.
 
 ## Overview
 
@@ -23,7 +23,7 @@ The direction of that re-hedging depends on the *sign* of the dealer's net gamma
 - **Long gamma (dealers stabilize):** dealers sell into rallies and buy into dips -- a [[mean-reversion|mean-reverting]], vol-suppressing flow
 - **Short gamma (dealers amplify):** dealers buy into rallies and sell into dips -- a trend-amplifying, vol-expanding flow
 
-The aggregate sign of dealer gamma is published daily by analytics shops including [[spotgamma]], [[tier1alpha]], and [[menthorq]]. The price at which it flips sign -- the **gamma flip level** -- is one of the most important intraday levels in the index complex.
+The aggregate sign of dealer gamma is published daily by analytics shops including spotgamma, [[tier1alpha]], and [[menthorq]]. The price at which it flips sign -- the **gamma flip level** -- is one of the most important intraday levels in the index complex.
 
 ## The Mechanics
 
@@ -39,7 +39,7 @@ Notice the pattern: when dealers are short puts (long gamma from the put side), 
 
 The opposite holds for short calls: dealers who sold calls are short gamma from the call side, and as spot rises through the strike they must keep buying SPX to chase the growing positive delta they need to offload. That flow amplifies the move.
 
-The aggregate book contains thousands of strikes across [[spx-options|SPX]], [[etf-options|SPY]], [[xsp-options|XSP]], and now massive [[zero-dte|0DTE]] flow. Whether dealers are net long or net short gamma depends on the *strike distribution* of all open interest, weighted by gamma per contract and current spot proximity. The number is recomputed continuously as spot moves and as new trades print.
+The aggregate book contains thousands of strikes across SPX, [[etf-options|SPY]], XSP, and now massive [[zero-dte|0DTE]] flow. Whether dealers are net long or net short gamma depends on the *strike distribution* of all open interest, weighted by gamma per contract and current spot proximity. The number is recomputed continuously as spot moves and as new trades print.
 
 > **Convention:** Most public GEX models assume dealers are *short calls* and *long puts* -- i.e., the natural counterparty to a customer base that buys puts for protection and sells calls for yield ([[covered-call|covered calls]], [[buy-write|buy-writes]]). This assumption is reasonable in normal regimes but breaks down in stress (when retail panic-buys calls) and in single names (where flow can run either direction).
 
@@ -82,7 +82,7 @@ The key insight: in a short-gamma regime, fading moves is mathematically fightin
 
 ## The Gamma Flip Level
 
-The **gamma flip** (sometimes called the "volatility trigger" -- [[spotgamma]]'s term) is the spot price at which aggregate dealer gamma changes sign from positive to negative. It is computed daily by aggregating gamma exposure across the entire options chain at a hypothetical spot price and finding where the sum crosses zero.
+The **gamma flip** (sometimes called the "volatility trigger" -- spotgamma's term) is the spot price at which aggregate dealer gamma changes sign from positive to negative. It is computed daily by aggregating gamma exposure across the entire options chain at a hypothetical spot price and finding where the sum crosses zero.
 
 Practical use:
 
@@ -97,7 +97,7 @@ The flip level acts like a *behavioral* support/resistance:
 
 This is one of the most-watched levels by [[itpm-trade-construction-playbook|ITPM]]-style discretionary desks. Many traders mark the flip level on their charts each morning and use it for sizing decisions, [[stop-loss|stop placement]], and [[target-setting|targets]].
 
-> **Caveat:** The exact flip level varies between providers because each models the dealer book differently. Differences of 1-2% across [[spotgamma]], [[tier1alpha]], and [[menthorq]] are common. Use the level as a *zone*, not a single price.
+> **Caveat:** The exact flip level varies between providers because each models the dealer book differently. Differences of 1-2% across spotgamma, [[tier1alpha]], and [[menthorq]] are common. Use the level as a *zone*, not a single price.
 
 ## GEX (Gamma Exposure)
 
@@ -125,7 +125,7 @@ Interpretation (rules of thumb -- thresholds are model-specific):
 
 These thresholds are nominal -- they have drifted with the explosion of [[zero-dte|0DTE]] volume and overall options market growth. Always reference the provider's *historical distribution* of GEX rather than a fixed number.
 
-Aggregate GEX is published daily by [[spotgamma]], [[squeezemetrics]], [[tier1alpha]], [[menthorq]], and [[unusual-whales|Unusual Whales]] (via GammaLab). Per-strike GEX is what matters for identifying [[call-wall|call walls]], [[put-wall|put walls]], and the gamma flip itself.
+Aggregate GEX is published daily by spotgamma, [[squeezemetrics]], [[tier1alpha]], [[menthorq]], and Unusual Whales (via GammaLab). Per-strike GEX is what matters for identifying [[call-wall|call walls]], [[put-wall|put walls]], and the gamma flip itself.
 
 ## Vanna and Charm Flows
 
@@ -162,7 +162,7 @@ The pattern that drives ITPM-style entries:
 3. **OPEX Friday afternoon (post-close for monthly settlement):** roughly 30-50% of [[open-interest]] expires and rolls off the dealer book
 4. **Following Monday/Tuesday:** the long-gamma "shock absorber" is gone or much smaller; small flows can move price meaningfully -> **vol expansion**
 
-Empirical studies (cited by [[spotgamma]] and others) show post-OPEX Mondays have historically averaged ~1.5-2x the realized vol of OPEX-week Mondays, though this is a tendency, not a guarantee. The release is most pronounced when:
+Empirical studies (cited by spotgamma and others) show post-OPEX Mondays have historically averaged ~1.5-2x the realized vol of OPEX-week Mondays, though this is a tendency, not a guarantee. The release is most pronounced when:
 
 - OPEX week saw heavy pinning to a specific strike
 - The pre-OPEX gamma flip level was tightly clustered around spot
@@ -213,10 +213,10 @@ The discipline: **let dealer gamma sign the trade idea, then use technicals/fund
 
 Dealer gamma analytics are powerful but imperfect. Known limitations:
 
-- **Estimated, not observed.** Public GEX numbers are estimates derived from listed [[open-interest|open interest]]. Dealers also run large [[over-the-counter|OTC]], FLEX, and structured-product books that are not visible. The true sign of dealer gamma can differ from the published sign at any moment
-- **Assumes full hedging.** Models assume dealers fully hedge to delta-neutral. In practice dealers run residual exposure -- sometimes intentionally (proprietary views), sometimes because hedging would itself move the market. Dispersion desks at [[citadel]], [[susquehanna]], and [[wolverine]] all run non-zero books
+- **Estimated, not observed.** Public GEX numbers are estimates derived from listed [[open-interest|open interest]]. Dealers also run large OTC, FLEX, and structured-product books that are not visible. The true sign of dealer gamma can differ from the published sign at any moment
+- **Assumes full hedging.** Models assume dealers fully hedge to delta-neutral. In practice dealers run residual exposure -- sometimes intentionally (proprietary views), sometimes because hedging would itself move the market. Dispersion desks at [[citadel]], susquehanna, and [[wolverine]] all run non-zero books
 - **Customer flow assumption.** Most models assume "customers buy puts, sell calls" -- a reasonable normal-state assumption that breaks during call-buying frenzies (meme stocks, AI rallies) and put-buying panics
-- **Large institutional flows can overwhelm dealer hedging.** [[volatility-control-funds|Vol-control fund]] de-leveraging, [[risk-parity]] re-balancing, [[cta]] trend-flow, and [[buyback|corporate buyback]] grids can dominate intraday tape regardless of dealer gamma. GEX is a *baseline*; large exogenous flows override it
+- **Large institutional flows can overwhelm dealer hedging.** [[volatility-control-funds|Vol-control fund]] de-leveraging, [[risk-parity]] re-balancing, [[cta]] trend-flow, and corporate buyback grids can dominate intraday tape regardless of dealer gamma. GEX is a *baseline*; large exogenous flows override it
 - **0DTE distortion.** The explosion of 0DTE volume since 2022 has fundamentally altered gamma dynamics. Daily expiration means the gamma profile resets every day rather than monthly. Some traders argue this has *reduced* the predictive power of monthly OPEX patterns (see [[zero-dte-options|0DTE options]] and [[zero-dte-impact-on-vix|0DTE impact on VIX]])
 - **Single-name vs. index.** Index GEX (SPX, QQQ) is reasonably well-modeled because option flow is concentrated. Single-name GEX is much noisier because flows are episodic and dealer assumptions are weaker
 - **Backtest difficulty.** Historical GEX data is hard to obtain and providers' methodologies have changed over time. Naive [[backtesting|backtests]] of GEX-based strategies are unreliable
@@ -228,17 +228,17 @@ The bottom line: GEX is a *probabilistic regime classifier*, not a deterministic
 
 | Tool | Coverage | Strength | Notes |
 |---|---|---|---|
-| [[spotgamma]] | SPX, QQQ, single names | Industry standard for retail discretionary | ~$200/mo Alpha, ~$500/mo Pro; HIRO real-time hedging oscillator |
+| spotgamma | SPX, QQQ, single names | Industry standard for retail discretionary | ~$200/mo Alpha, ~$500/mo Pro; HIRO real-time hedging oscillator |
 | [[tier1alpha]] | SPX, sectors, single names | Institutional-grade modeling, vol-control flow estimates | Premium pricing; used by hedge funds |
 | [[menthorq]] | SPX, ES, single names | TradingView integration, real-time | Mid-tier pricing |
 | [[squeezemetrics]] | SPX | Free GEX and DIX (dark pool indicator) | Limited but useful baseline |
-| [[unusual-whales]] | SPX + heavy single-name | GammaLab visualization, options flow | Combines flow with positioning |
+| unusual-whales | SPX + heavy single-name | GammaLab visualization, options flow | Combines flow with positioning |
 | [[cboe-skew]] | SPX | Implied tail-risk measure | Free; correlates with put-skew gamma exposure |
 | Custom build | Anything | Full control | Requires [[opra-feed|OPRA feed]] + [[open-interest]] data + Black-Scholes greeks engine |
 
 A custom GEX calculator is feasible for a quantitatively-inclined trader: pull daily open interest by strike from CBOE / OPRA, compute per-contract gamma using the [[black-scholes|Black-Scholes]] greeks formula at current spot and IV, sum across the chain with appropriate sign assumptions. The methodology is described in [[squeezemetrics]]'s public white paper.
 
-For most discretionary traders, paying for [[spotgamma]] or [[tier1alpha]] is a better use of time than building custom GEX -- the analytics are sophisticated and the morning notes provide context (key levels, regime calls, OPEX setups) that a raw GEX number alone does not.
+For most discretionary traders, paying for spotgamma or [[tier1alpha]] is a better use of time than building custom GEX -- the analytics are sophisticated and the morning notes provide context (key levels, regime calls, OPEX setups) that a raw GEX number alone does not.
 
 ## Related
 
@@ -253,7 +253,6 @@ For most discretionary traders, paying for [[spotgamma]] or [[tier1alpha]] is a 
 - [[zero-dte-options|0DTE options]] -- the structural change since 2022
 - [[volatility-regime-classification]] -- broader framework that includes GEX as one input
 - [[options-stress-testing]] -- using gamma scenarios for portfolio risk
-- [[spotgamma]] -- canonical data provider
 - [[tier1alpha]] -- institutional alternative
 - [[menthorq]] -- TradingView-native alternative
 - [[squeezemetrics]] -- free baseline data
@@ -266,8 +265,7 @@ For most discretionary traders, paying for [[spotgamma]] or [[tier1alpha]] is a 
 ## Sources
 
 - General market-microstructure knowledge -- dealer hedging mechanics, options Greeks
-- [[spotgamma]] educational materials and morning notes -- gamma flip, volatility trigger, call/put walls
 - [[squeezemetrics]] white paper on aggregate GEX calculation methodology
 - ITPM ([[institute-of-trading-and-portfolio-management]]) curriculum -- integration of dealer gamma into discretionary sizing and entries
 - Cboe research notes on 0DTE impact on dealer gamma profile
-- Public discussion of post-OPEX vol expansion (Goldman Sachs derivatives strategy notes, Nomura's QIS team commentary -- referenced in [[spotgamma]] and [[tier1alpha]] daily reports)
+- Public discussion of post-OPEX vol expansion (Goldman Sachs derivatives strategy notes, Nomura's QIS team commentary -- referenced in spotgamma and [[tier1alpha]] daily reports)

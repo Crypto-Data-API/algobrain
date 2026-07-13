@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [portfolio-theory, fundamental-analysis, valuation, anomalies, quantitative]
 aliases: ["Value Factor", "Value Factors", "value-factors", "HML", "Value Premium"]
-related: ["[[factor-investing]]", "[[momentum-factor]]", "[[low-vol-factor]]", "[[size-factor]]", "[[quality-factor]]", "[[multi-factor-portfolio]]", "[[fama-french-three-factor-model]]", "[[capital-asset-pricing-model]]", "[[graham-dodd-value-investing]]", "[[discounted-cash-flow]]", "[[options-risk-budgeting]]", "[[options-portfolio-construction]]", "[[implied-volatility]]", "[[volatility-regime]]", "[[behavioral-finance]]"]
+related: ["[[factor-investing]]", "[[momentum-factor]]", "[[low-vol-factor]]", "[[size-factor]]", "[[quality-factor]]", "[[multi-factor-portfolio]]", "[[fama-french-three-factor-model]]", "[[capital-asset-pricing-model]]", "[[graham-dodd-value-investing]]", "[[options-risk-budgeting]]", "[[options-portfolio-construction]]", "[[implied-volatility]]", "[[volatility-regime]]", "[[behavioral-finance]]"]
 domain: [portfolio-theory, fundamental-analysis, anomalies]
 prerequisites: ["[[fama-french-three-factor-model]]", "[[capital-asset-pricing-model]]"]
 difficulty: intermediate
@@ -205,7 +205,6 @@ Value's payoff is **regime-dependent**. In low-VIX, AI-momentum-led regimes (202
 - [[fama-french-three-factor-model]] — formal HML construction
 - [[capital-asset-pricing-model]] — the model value contradicts
 - [[graham-dodd-value-investing]] — discretionary value foundations
-- [[discounted-cash-flow]] — bottom-up intrinsic value methodology
 - [[behavioral-finance]] — extrapolation bias explanation
 - [[options-risk-budgeting]] — caps factor exposure
 - [[options-portfolio-construction]] — value/growth tilt considerations

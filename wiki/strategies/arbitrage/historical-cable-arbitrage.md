@@ -78,7 +78,7 @@ Under instantaneous, noise-free transmission, the product of GBP/USD × USD/FRF 
 Positions are closed by the nature of the trade: the triangle begins and ends in the starting currency (usually sterling, because the largest settlement balances were at London clearing banks). Any leg that fails to fill creates an unwanted open FX exposure that must be closed at market on the next available quote.
 
 ### Position Sizing
-Sized to (a) the liquidity on the thinnest of the three legs and (b) the dealer's available clearing balances at each of the three settlement points. Practical sizes at the largest houses ([[rothschild-family]], [[baring-brothers]], J.P. Morgan, Hambros) reached £100,000–£500,000 per execution (several million to tens of millions in 2026 dollars).
+Sized to (a) the liquidity on the thinnest of the three legs and (b) the dealer's available clearing balances at each of the three settlement points. Practical sizes at the largest houses (rothschild-family, baring-brothers, J.P. Morgan, Hambros) reached £100,000–£500,000 per execution (several million to tens of millions in 2026 dollars).
 
 ## Implementation Pseudocode
 
@@ -189,7 +189,5 @@ The direct intellectual descendants — covered-interest arbitrage and modern tr
 - [[gold-standard-mechanics]]
 - [[specie-flow-arbitrage]]
 - [[latency-arbitrage]]
-- [[rothschild-family]]
-- [[baring-brothers]]
 - [[regional-currency-arbitrage]]
 - [[bill-broking-arbitrage]]

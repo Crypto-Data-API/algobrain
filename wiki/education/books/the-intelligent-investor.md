@@ -7,34 +7,29 @@ status: excellent
 tags: [education, book, value-investing, fundamental-analysis, valuation]
 aliases: ["The Intelligent Investor", "Graham Intelligent Investor"]
 related:
-  - "[[benjamin-graham]]"
-  - "[[warren-buffett]]"
-  - "[[value-investing]]"
-  - "[[margin-of-safety]]"
   - "[[mr-market]]"
   - "[[factor-investing]]"
   - "[[xgboost-trading]]"
-  - "[[fundamental-analysis]]"
   - "[[risk-management]]"
 ---
 
-**The Intelligent Investor** is a foundational [[value-investing]] text by [[benjamin-graham|Benjamin Graham]], first published in 1949 (with major revisions through the 1973 fourth edition). Often called "the bible of value investing," it is the most influential book ever written on disciplined, defensive investing for the non-professional. Its three best-known ideas — [[mr-market|Mr. Market]], the [[margin-of-safety|margin of safety]], and the distinction between investment and speculation — remain the conceptual bedrock of modern fundamental analysis.
+**The Intelligent Investor** is a foundational value-investing text by Benjamin Graham, first published in 1949 (with major revisions through the 1973 fourth edition). Often called "the bible of value investing," it is the most influential book ever written on disciplined, defensive investing for the non-professional. Its three best-known ideas — [[mr-market|Mr. Market]], the margin of safety, and the distinction between investment and speculation — remain the conceptual bedrock of modern fundamental analysis.
 
 ## Author and Publication
 
 | Fact | Detail |
 |------|--------|
-| Author | [[benjamin-graham|Benjamin Graham]] (1894–1976), the "father of value investing" |
+| Author | Benjamin Graham (1894–1976), the "father of value investing" |
 | First published | 1949 (Harper & Brothers) |
 | Definitive edition | 4th revised edition, 1973 (the one Graham endorsed) |
 | Annotated edition | 2003, with commentary by Jason Zweig (recommended for modern readers) |
 | Graham's other major work | *Security Analysis* (1934, with David Dodd) — the technical companion |
-| Most famous student | [[warren-buffett|Warren Buffett]], who took Graham's class at Columbia |
+| Most famous student | Warren Buffett, who took Graham's class at Columbia |
 | Genre | Investing philosophy / personal finance for the defensive investor |
 
 ## Core Thesis
 
-Graham argues that intelligent investing is fundamentally about temperament and discipline, not IQ or forecasting skill. The market (personified as [[mr-market|Mr. Market]]) constantly offers prices driven by emotion; the investor's job is to value businesses independently and act only when price diverges sharply from value, always leaving a [[margin-of-safety|margin of safety]]. Investing is distinguished from speculation by thorough analysis, safety of principal, and an adequate (not maximal) return.
+Graham argues that intelligent investing is fundamentally about temperament and discipline, not IQ or forecasting skill. The market (personified as [[mr-market|Mr. Market]]) constantly offers prices driven by emotion; the investor's job is to value businesses independently and act only when price diverges sharply from value, always leaving a margin of safety. Investing is distinguished from speculation by thorough analysis, safety of principal, and an adequate (not maximal) return.
 
 ## Overview
 
@@ -50,7 +45,7 @@ Graham lays out a framework for investing based on intrinsic value, margin of sa
 - **Portfolio policy for the enterprising investor** — negative and positive criteria for the active stock-picker.
 - **Stock selection for the enterprising investor** — Graham's quantitative screens for bargains.
 - **The investor and market fluctuations (Chapter 8)** — the [[mr-market|Mr. Market]] parable.
-- **Investing in investment funds** — early, sober commentary on mutual funds and fees (a theme later carried by [[jack-bogle|Jack Bogle]]).
+- **Investing in investment funds** — early, sober commentary on mutual funds and fees (a theme later carried by Jack Bogle).
 - **Security analysis for the lay investor** — earnings power, capital structure, and growth-stock valuation.
 - **"Margin of Safety" as the central concept (Chapter 20)** — the closing synthesis of the entire book.
 
@@ -58,7 +53,7 @@ Graham lays out a framework for investing based on intrinsic value, margin of sa
 
 | Concept | What Graham means |
 |---------|-------------------|
-| [[margin-of-safety]] | Buy only well below intrinsic value so errors and bad luck do not become permanent losses. The book's central idea. |
+| margin-of-safety | Buy only well below intrinsic value so errors and bad luck do not become permanent losses. The book's central idea. |
 | [[mr-market]] | The market is an emotional partner quoting prices daily; transact with him only when his mood favors you. |
 | Investment vs. speculation | An investment "promises safety of principal and an adequate return upon thorough analysis." Everything else is speculation. |
 | Intrinsic value | A business has a value independent of its quoted price, estimable from earnings, assets, dividends, and growth. |
@@ -79,7 +74,7 @@ Graham lays out a framework for investing based on intrinsic value, margin of sa
 
 - **Dated examples.** Many specific companies, ratios, and tax figures reflect the mid-20th-century U.S. market; the Jason Zweig annotations exist precisely to modernize them.
 - **Deep-value screens have thinned out.** Graham's strict "net-net" and low-P/B bargains are far rarer in efficient, well-screened modern markets, so pure Graham-style stock-picking has lower capacity than in his era.
-- **Quality vs. cheapness debate.** [[warren-buffett|Buffett]] himself evolved (under Charlie Munger's influence) from buying "cigar-butt" cheap stocks toward paying fair prices for great businesses — a refinement of, not a rejection of, Graham.
+- **Quality vs. cheapness debate.** Buffett himself evolved (under Charlie Munger's influence) from buying "cigar-butt" cheap stocks toward paying fair prices for great businesses — a refinement of, not a rejection of, Graham.
 - **Says little about modern portfolio theory.** Graham predates [[capm|CAPM]], factor models, and [[index-fund|index funds]]; it is a security-selection book, not a portfolio-construction one.
 - **Behavioral, not predictive.** The book offers discipline and valuation principles rather than precise timing or forecasting tools.
 
@@ -97,16 +92,11 @@ Graham's quantitative screening criteria — low P/E, low debt-to-equity, strong
 
 ## Related
 
-- [[benjamin-graham]] — The author; father of value investing
-- [[warren-buffett]] — Graham's most famous student and the book's most prominent advocate
-- [[value-investing]] — The discipline this book codified
-- [[margin-of-safety]] — The book's central concept
 - [[mr-market]] — Graham's allegory for market sentiment
 - [[factor-investing]] — Modern systematic implementation of Graham's value principles
 - [[xgboost-trading]] — ML models that use fundamental features Graham pioneered
-- [[fundamental-analysis]] — The discipline Graham essentially invented
 - [[risk-management]] — Margin of safety is risk management for investors
-- [[jack-bogle]] — Carried forward Graham's low-cost, anti-speculation ethos into [[index-fund|index funds]]
+- jack-bogle — Carried forward Graham's low-cost, anti-speculation ethos into [[index-fund|index funds]]
 
 ## Sources
 

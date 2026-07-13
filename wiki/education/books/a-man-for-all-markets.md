@@ -26,7 +26,7 @@ related:
 | **First published** | 2017 (Random House) |
 | **Genre** | Memoir / intellectual autobiography |
 | **Foreword** | Nassim Nicholas Taleb |
-| **Career arc covered** | MIT physics → Las Vegas [[card-counting\|blackjack]] (1962) → warrant/[[convertible-arbitrage]] → statistical arbitrage → fund management |
+| **Career arc covered** | MIT physics → Las Vegas [[card-counting\|blackjack]] (1962) → warrant/convertible-arbitrage → statistical arbitrage → fund management |
 | **Signature fund** | Princeton Newport Partners — ~19.8% annualized over ~19 years, only 3 losing months |
 | **Earlier book** | *Beat the Dealer* (1962) — the book that proved blackjack could be beaten |
 | **Difficulty** | Beginner-friendly narrative; requires no advanced math |
@@ -54,7 +54,7 @@ The memoir moves chronologically through Thorp's "find structure, model it, size
 | Beating blackjack | [[card-counting]] and *Beat the Dealer* (1962) | Edge + bankroll discipline → reliable long-run profit |
 | The [[kelly-criterion]] | Optimal bet sizing | Bet edge/odds; over-betting risks ruin, under-betting wastes edge |
 | Warrant hedging | First systematic options arbitrage | Delta-neutral hedging isolates mispricing from direction |
-| [[convertible-arbitrage]] | Convertible bonds vs. underlying equity | Relative-value trading with hedged directional risk |
+| convertible-arbitrage | Convertible bonds vs. underlying equity | Relative-value trading with hedged directional risk |
 | Independent [[black-scholes]] derivation | Pricing warrants before the formula was published | Theory used as a trading tool, not just academia |
 | Princeton Newport Partners | Running the first quant [[hedge-fund]] | Diversified, hedged book → smooth equity curve |
 | Statistical arbitrage | Trading hundreds of [[pairs-trading\|pairs]] in the 1980s | Portfolio-scale mean reversion, predating the crowd |
@@ -109,7 +109,6 @@ Thorp's career embodies the principles that make AI trading viable: find hidden 
 - [[renaissance-technologies]] — The firm that later dominated quantitative trading
 - [[edward-thorp]] — The author's own entity page
 - [[card-counting]] — The blackjack edge that started his career
-- [[convertible-arbitrage]] — Relative-value strategy Thorp pioneered
 - [[hedge-fund]] — Princeton Newport as the first quant fund
 - [[efficient-market-hypothesis]] — The theory Thorp's track record argues against
 - [[quantitative-trading]] — The discipline the book helped found

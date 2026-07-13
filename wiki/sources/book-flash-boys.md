@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [book, hft, market-microstructure, co-location]
 aliases: ["Flash Boys", "Flash Boys Lewis"]
-related: ["[[low-latency-trading]]", "[[co-location]]", "[[market-making-strategy]]", "[[dark-pool-trading]]", "[[flash-boys]]"]
+related: ["[[low-latency-trading]]", "[[co-location]]", "[[market-making-strategy]]", "[[flash-boys]]"]
 source_type: book
 source_author: "Michael Lewis"
 source_date: 2014
@@ -22,7 +22,7 @@ Michael Lewis's investigation into [[low-latency-trading|high-frequency trading 
 
 2. [HIGH] **Co-location provides measurable, exploitable advantage**: By placing servers physically adjacent to exchange matching engines ([[co-location]]), HFT firms reduce round-trip latency to microseconds. This speed advantage allows them to see and react to orders before slower participants, creating a form of informational advantage that is technically legal but structurally unfair. (Source: Michael Lewis)
 
-3. [HIGH] **Dark pools became HFT hunting grounds**: [[dark-pool-trading|Dark pools]] were originally created to allow institutional investors to trade large blocks without market impact. In practice, many dark pools invited HFT firms in as liquidity providers, who then used their speed advantage to detect and trade against the very institutional orders the dark pools were designed to protect. (Source: Michael Lewis)
+3. [HIGH] **Dark pools became HFT hunting grounds**: Dark pools were originally created to allow institutional investors to trade large blocks without market impact. In practice, many dark pools invited HFT firms in as liquidity providers, who then used their speed advantage to detect and trade against the very institutional orders the dark pools were designed to protect. (Source: Michael Lewis)
 
 4. [HIGH] **Structural front-running is technically legal**: HFT firms detect large orders on one exchange (e.g., BATS) and race to other exchanges (e.g., NYSE, Nasdaq) to buy or sell ahead of the arriving order — profiting from the price impact they know is coming. This is not illegal front-running (which requires a fiduciary breach) but achieves a similar economic result through speed. (Source: Michael Lewis)
 
@@ -41,7 +41,7 @@ Michael Lewis's investigation into [[low-latency-trading|high-frequency trading 
 ## Concepts Referenced
 
 - [[low-latency-trading]], [[co-location]], [[market-microstructure]]
-- [[dark-pool-trading]], [[market-making-strategy]]
+- dark-pool-trading, [[market-making-strategy]]
 - [[smart-order-routing]], [[execution-quality]]
 - [[market-fragmentation]], [[latency-arbitrage]]
 - [[flash-crash-2010]]
@@ -50,6 +50,5 @@ Michael Lewis's investigation into [[low-latency-trading|high-frequency trading 
 
 - [[low-latency-trading]] — comprehensive account of how speed became the dominant edge in equity markets
 - [[co-location]] — detailed description of co-location economics and advantages
-- [[dark-pool-trading]] — how dark pools evolved from institutional protection to HFT venues
 - [[market-making-strategy]] — HFT market making as a speed-dependent business model
 - [[market-microstructure]] — brought microstructure concepts to mainstream awareness

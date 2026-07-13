@@ -6,12 +6,12 @@ updated: 2026-06-20
 status: excellent
 tags: [data, data-providers, paid]
 aliases: ["Commercial Market Data", "Quant Data Vendors"]
-related: ["[[data-sources-overview]]", "[[free-data-sources]]", "[[fundamental-data-sources]]", "[[options-data-sources]]", "[[crypto-data-sources]]", "[[historical-spread-data]]", "[[market-chameleon]]", "[[exchange-api-reference]]"]
+related: ["[[data-sources-overview]]", "[[free-data-sources]]", "[[crypto-data-sources]]", "[[historical-spread-data]]", "[[exchange-api-reference]]"]
 ---
 
 # Paid Data Providers
 
-Commercial vendors that supply data of sufficient quality for serious quantitative research. Each entry includes approximate price, what's covered, and known limitations. Pricing changes frequently — treat numbers as ballpark, not authoritative. This page is the paid-tier companion to [[free-data-sources]] and a sibling of [[fundamental-data-sources]], [[options-data-sources]], [[crypto-data-sources]], and [[historical-spread-data]]; see [[data-sources-overview]] for the full catalog.
+Commercial vendors that supply data of sufficient quality for serious quantitative research. Each entry includes approximate price, what's covered, and known limitations. Pricing changes frequently — treat numbers as ballpark, not authoritative. This page is the paid-tier companion to [[free-data-sources]] and a sibling of fundamental-data-sources, options-data-sources, [[crypto-data-sources]], and [[historical-spread-data]]; see [[data-sources-overview]] for the full catalog.
 
 > **Pricing disclaimer:** Every dollar figure on this page is a ballpark drawn from vendor pages and community reports circa 2024-2026. Vendors change plans, tiers, and per-product pricing frequently. Treat all numbers as order-of-magnitude only and confirm on the vendor's own site before committing budget. Nothing here is a quote.
 
@@ -36,7 +36,7 @@ The fastest way to read this page is the matrix below. It compresses every vendo
 | **ORATS** | Options (IV surfaces) | ~$199-$999 | Retail-accessible fitted vol surfaces | US equities focus |
 | **Sharadar** | Fundamentals (PIT) | ~$150 | Affordable point-in-time fundamentals | Narrower than Compustat |
 
-See [[historical-spread-data]] for the spread/basis/funding-rate–specific breakdown of several of these same vendors, and [[market-chameleon]] for a retail-priced options-analytics layer that sits on top of OPRA data.
+See [[historical-spread-data]] for the spread/basis/funding-rate–specific breakdown of several of these same vendors, and market-chameleon for a retail-priced options-analytics layer that sits on top of OPRA data.
 
 ## Equities
 
@@ -129,7 +129,7 @@ Institutional FX market data — interbank prices and trades. Expensive, profess
 
 ## Options
 
-See [[options-data-sources]] for the full breakdown, [[market-chameleon]] for a retail-priced analytics layer over OPRA data, and [[historical-spread-data#Options Implied Volatility Surfaces]] for what a [[volatility-arbitrage]] backtest actually needs. Headlines:
+See options-data-sources for the full breakdown, market-chameleon for a retail-priced analytics layer over OPRA data, and [[historical-spread-data#Options Implied Volatility Surfaces]] for what a [[volatility-arbitrage]] backtest actually needs. Headlines:
 
 - **OPRA via Polygon / Databento** — full US listed options tape
 - **OptionMetrics IvyDB** — academic standard for historical options data with calculated greeks and IVs
@@ -196,7 +196,7 @@ Range: free + paid tiers. SQL-based queryable blockchain data.
 ### Arkham Intelligence
 Range: free + paid. Wallet labeling and entity tracking.
 
-## Fundamentals (See Also [[fundamental-data-sources]])
+## Fundamentals (See Also fundamental-data-sources)
 
 - **Compustat (S&P)** — gold standard, point-in-time, institutional pricing
 - **S&P Capital IQ** — broader than Compustat, includes private companies
@@ -262,7 +262,7 @@ Portable, REST-or-flat-file vendors (Polygon, Databento, Tardis, Kaiko, Sharadar
 A serious quant or [[ai-trading|AI-driven]] system consumes paid data along a predictable pipeline, and the choice of vendor is mostly a function of where it sits in that pipeline:
 
 1. **Backtest / research layer** — needs deep, *point-in-time*, survivorship-free history. This is where Norgate, CRSP, Compustat, Sharadar, OptionMetrics, and Tardis earn their keep. Getting this layer wrong (restated fundamentals, survivorship bias, mid-price fills) silently inflates every downstream result; see [[lookahead-bias]], [[survivorship-bias]], and [[backtesting]].
-2. **Signal / feature layer** — pre-computed analytics that save reimplementation: Glassnode's on-chain metrics, ORATS' fitted surfaces, [[market-chameleon|Market Chameleon's]] earnings-vol statistics, RavenPack's news sentiment. AI/LLM feature stores increasingly ingest these directly.
+2. **Signal / feature layer** — pre-computed analytics that save reimplementation: Glassnode's on-chain metrics, ORATS' fitted surfaces, Market Chameleon's earnings-vol statistics, RavenPack's news sentiment. AI/LLM feature stores increasingly ingest these directly.
 3. **Live / execution layer** — needs low-latency, normalized real-time feeds: Polygon WebSockets, Databento streaming, Kaiko live, or direct exchange feeds (CQG/Rithmic for futures, [[exchange-api-reference|exchange APIs]] for crypto). Latency-sensitive strategies pay for venue-direct data; daily strategies do not.
 4. **Cost / TCA layer** — realistic [[transaction-cost-modeling|transaction-cost modeling]] requires bid/ask depth, not mid. Databento depth-of-book and Tardis L2/L3 orderbooks feed slippage models; backtests on mid prices overstate fills by roughly half the spread.
 
@@ -292,11 +292,8 @@ Paid does not mean clean. Recurring failure modes to guard against, regardless o
 
 - [[data-sources-overview]]
 - [[free-data-sources]]
-- [[fundamental-data-sources]]
-- [[options-data-sources]]
 - [[crypto-data-sources]]
 - [[historical-spread-data]]
-- [[market-chameleon]]
 - [[exchange-api-reference]]
 - [[transaction-cost-modeling]]
 - [[survivorship-bias]]

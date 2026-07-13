@@ -8,7 +8,7 @@ tags: [person, commodities, oil]
 aliases: ["Andurand Capital"]
 entity_type: person
 headquarters: "London, United Kingdom"
-related: ["[[crude-oil]]", "[[cocoa]]", "[[copper]]", "[[opec]]", "[[commodities]]", "[[supply-demand-balance]]", "[[geopolitical-risk-premium]]"]
+related: ["[[crude-oil]]", "[[cocoa]]", "[[copper]]", "[[commodities]]", "[[supply-demand-balance]]", "[[geopolitical-risk-premium]]"]
 ---
 
 Pierre Andurand (born 1977) is a French oil trader and hedge fund manager who founded Andurand Capital Management in 2010. He is one of the most prominent modern commodity traders, known for making large, concentrated directional bets on energy and soft commodities based on deep fundamental analysis.
@@ -25,7 +25,7 @@ Andurand founded his eponymous hedge fund in 2010 in London. The flagship **Andu
 
 #### Key Trades and Performance
 
-- **2014-2015**: Profited significantly from oil's collapse from $100+ to below $30, having positioned short based on US shale supply growth and [[opec]]'s November 2014 decision to maintain production
+- **2014-2015**: Profited significantly from oil's collapse from $100+ to below $30, having positioned short based on US shale supply growth and opec's November 2014 decision to maintain production
 - **2020**: The fund reportedly returned **+155%** during the COVID oil crash and recovery — one of the best single-year performances in hedge fund history. Andurand navigated both the collapse (oil went negative in April 2020) and the subsequent recovery
 - **2022**: Profited from the Russia-Ukraine energy crisis, with oil spiking above $120
 - **2023**: Record loss — the leveraged Andurand Commodities Discretionary Enhanced Fund fell roughly **-55%**, caught long oil as Brent declined about 10% on the year (Bloomberg, March 2024)
@@ -38,7 +38,7 @@ Andurand's methodology represents the modern fundamental commodity trader:
 
 1. **Physical market intelligence**: Builds a bottom-up view of [[supply-demand-balance|supply and demand]] using production data, shipping/tanker tracking, refinery throughput, inventory data, and conversations with physical market participants. This "boots on the ground" approach provides informational edge over traders relying solely on published data.
 
-2. **[[opec]] dynamics analysis**: Deep understanding of OPEC internal politics — Saudi Arabia's strategy, compliance/cheating behavior of member states, spare capacity constraints. OPEC decisions are among the most impactful single events for oil prices, and Andurand's track record suggests a strong ability to anticipate them.
+2. **opec dynamics analysis**: Deep understanding of OPEC internal politics — Saudi Arabia's strategy, compliance/cheating behavior of member states, spare capacity constraints. OPEC decisions are among the most impactful single events for oil prices, and Andurand's track record suggests a strong ability to anticipate them.
 
 3. **Macro and geopolitical overlay**: Integrates [[geopolitical-risk-premium|geopolitical analysis]] (sanctions, conflicts, elections) and macroeconomic factors (global growth, dollar, rates) with the physical supply/demand picture.
 
@@ -72,7 +72,6 @@ The 2023-2025 period is equally instructive as a **risk-management case study**:
 
 - [[crude-oil]]
 - [[cocoa]]
-- [[opec]]
 - [[commodities]]
 - [[supply-demand-balance]]
 - [[geopolitical-risk-premium]]

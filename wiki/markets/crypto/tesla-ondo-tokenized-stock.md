@@ -9,12 +9,12 @@ aliases: ["TSLAON", "TSLAon", "Tesla Ondo"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.ondo.finance/assets/tslaon"
-related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[tesla]]", "[[nasdaq]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # Tesla (Ondo Tokenized Stock)
 
-**Tesla (Ondo Tokenized Stock)** (TSLAON) is a tokenized equity issued by **Ondo Global Markets** ([[ondo-finance|Ondo Finance]]) that tracks the shares of **Tesla, Inc.** listed on the [[nasdaq|Nasdaq]] as **NASDAQ: TSLA**. TSLAON is **not** the underlying stock itself: it is an on-chain wrapper whose value is designed to follow the off-chain TSLA share, backed by real shares custodied off-chain. It gives holders economic exposure comparable to holding TSLA, but **no** shareholder rights. It is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
+**Tesla (Ondo Tokenized Stock)** (TSLAON) is a tokenized equity issued by **Ondo Global Markets** ([[ondo-finance|Ondo Finance]]) that tracks the shares of **Tesla, Inc.** listed on the Nasdaq as **NASDAQ: TSLA**. TSLAON is **not** the underlying stock itself: it is an on-chain wrapper whose value is designed to follow the off-chain TSLA share, backed by real shares custodied off-chain. It gives holders economic exposure comparable to holding TSLA, but **no** shareholder rights. It is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -29,7 +29,7 @@ TSLAON is a **[[tokenization|tokenized]] single-name equity** issued under the *
 - **The reference price** — what TSLA trades at on the Nasdaq during US market hours.
 - **The token price** — what TSLAON trades at on crypto venues, which can drift from the reference when traditional markets are closed or liquidity is thin.
 
-[[tesla|Tesla]] is among the most volatile large-cap US equities, so the tokenized wrapper inherits that volatility on top of the wrapper's own tracking and issuer risks.
+Tesla is among the most volatile large-cap US equities, so the tokenized wrapper inherits that volatility on top of the wrapper's own tracking and issuer risks.
 
 ### Architecture — how the wrapper works
 
@@ -162,10 +162,9 @@ TSLAON brings one of the most actively traded US equities on-chain as a composab
 
 ## See Also
 
-- [[tesla]] — the underlying company (NASDAQ: TSLA)
 - [[ondo-finance]] — the issuer
 - [[tokenized-stocks]] · [[real-world-assets]] · [[tokenization]]
-- [[nasdaq]] · [[crypto-markets]] · [[ethereum]]
+- nasdaq · [[crypto-markets]] · [[ethereum]]
 
 ---
 

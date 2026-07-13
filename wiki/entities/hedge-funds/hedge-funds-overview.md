@@ -5,7 +5,7 @@ created: 2026-04-06
 updated: 2026-06-17
 status: good
 tags: [hedge-funds, entities, index]
-related: ["[[hedge-funds]]", "[[long-short-equity]]", "[[global-macro]]", "[[statistical-arbitrage]]", "[[renaissance-technologies]]", "[[citadel]]", "[[bridgewater-associates]]"]
+related: ["[[hedge-funds]]", "[[global-macro]]", "[[statistical-arbitrage]]", "[[renaissance-technologies]]", "[[citadel]]", "[[bridgewater-associates]]"]
 ---
 
 # Hedge Funds Overview
@@ -25,7 +25,7 @@ Understanding how [[renaissance-technologies]] uses [[statistical-arbitrage]], h
 
 | Strategy | Description |
 |----------|-------------|
-| [[long-short-equity]] | Long undervalued, short overvalued stocks; reduces market beta |
+| long-short-equity | Long undervalued, short overvalued stocks; reduces market beta |
 | [[global-macro]] | Top-down bets on rates, currencies, commodities, indices |
 | [[statistical-arbitrage]] | Systematic models exploiting statistical price relationships |
 | [[trend-following]] | Managed-futures / CTA momentum across markets |

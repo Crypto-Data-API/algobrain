@@ -63,7 +63,7 @@ Trading is a negotiation between parties with different information, motives, an
 
 ## Criticisms / Limitations
 
-- **Dated in specifics.** Written in 2003 — it predates Reg NMS (2007), the explosion of [[high-frequency-trading]], maker-taker proliferation, and modern [[dark-pool-trading]]. The principles endure; the institutional details have moved on (see [[flash-boys]] for the post-2007 world).
+- **Dated in specifics.** Written in 2003 — it predates Reg NMS (2007), the explosion of [[high-frequency-trading]], maker-taker proliferation, and modern dark-pool-trading. The principles endure; the institutional details have moved on (see [[flash-boys]] for the post-2007 world).
 - **Not a strategy book.** It explains the arena, not how to win in it; readers wanting alpha must look elsewhere.
 - **Length and density.** ~640 pages; best used as a reference rather than a cover-to-cover read.
 - **U.S./equity bias.** Examples skew toward U.S. equities; crypto, FX, and modern electronic venues are not covered.

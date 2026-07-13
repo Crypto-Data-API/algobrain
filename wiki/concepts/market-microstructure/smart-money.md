@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, institutional-trading, order-flow]
 aliases: ["Smart Money", "smart-money", "informed money", "informed traders"]
-related: ["[[smart-money-concepts]]", "[[order-flow]]", "[[institutional-ownership]]", "[[dumb-money]]", "[[whale-trade]]", "[[on-chain-smart-money-tracking]]", "[[liquidity-sweeps]]"]
+related: ["[[smart-money-concepts]]", "[[order-flow]]", "[[dumb-money]]", "[[whale-trade]]", "[[on-chain-smart-money-tracking]]", "[[liquidity-sweeps]]"]
 domain: [market-microstructure]
 prerequisites: ["[[order-flow]]", "[[market-microstructure]]"]
 difficulty: intermediate
@@ -19,7 +19,7 @@ difficulty: intermediate
 "Smart money" is a loose, partly mythologised category rather than a precise classification. In practice it bundles several distinct groups:
 
 - **Sell-side and bank desks / market makers** — they see two-sided [[order-flow]] and inventory, giving an informational edge on short-term direction.
-- **Hedge funds and prop firms** — large discretionary or quant positions that move markets and leave footprints in [[institutional-ownership]] filings (13F) and exchange data.
+- **Hedge funds and prop firms** — large discretionary or quant positions that move markets and leave footprints in institutional-ownership filings (13F) and exchange data.
 - **Corporate insiders** — executives and directors whose buys/sells are disclosed and are statistically informative about future returns.
 - **Commercial hedgers in futures** — producers and consumers tracked via the [[cot-report-analysis|COT report]]; their net positioning is treated as a "smart money" signal versus speculators.
 - **Crypto whales / early wallets** — on-chain addresses with a track record of profitable entries, tracked via [[on-chain-smart-money-tracking]] and tools like Nansen.
@@ -44,7 +44,6 @@ For a trader, the practical value is less about reverence for institutions and m
 
 - [[smart-money-concepts]] — the retail SMC/ICT trading methodology built on inferring institutional flow
 - [[order-flow]] — the raw data smart-money inference is drawn from
-- [[institutional-ownership]] — 13F and ownership data
 - [[cot-report-analysis]] — futures positioning as a smart-money proxy
 - [[on-chain-smart-money-tracking]] — crypto wallet-following
 - [[whale-trade]] — large-participant flow in crypto

@@ -99,7 +99,7 @@ Market making is the strategy of continuously quoting **both a bid (buy) and an 
 - Inventory risk can cause catastrophic losses during flash crashes or extreme moves (e.g., the crypto LUNA collapse)
 - Infrastructure costs are significant: colocated servers, low-latency data feeds, exchange memberships
 - Highly competitive: retail traders cannot compete with Citadel's microsecond latency and billions in capital
-- Regulatory complexity: market makers in [[stocks]] face obligations (continuous quoting requirements) and scrutiny
+- Regulatory complexity: market makers in stocks face obligations (continuous quoting requirements) and scrutiny
 - Exchange fee structures can make or break profitability -- even small fee increases eliminate the edge
 - Not a viable strategy for individual retail traders; included here for educational understanding of market structure
 

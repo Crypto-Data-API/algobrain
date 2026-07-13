@@ -80,7 +80,7 @@ The Volatility Breakout strategy enters trades when price moves more than **X ti
 - Grounded in the well-established principle that [[volatility]] is mean-reverting
 - NR7 and similar patterns provide objective, scannable setup criteria
 - Excellent risk/reward when expansion materializes -- large moves from tight stops
-- Works across [[stocks]], [[futures]], and [[crypto]] markets
+- Works across stocks, [[futures]], and [[crypto]] markets
 - Can be fully systematized and backtested with clear rules
 
 ## Disadvantages
@@ -89,5 +89,5 @@ The Volatility Breakout strategy enters trades when price moves more than **X ti
 - False breakouts can trigger the entry then reverse, hitting the stop
 - Requires patience -- NR7 setups may only appear a few times per month per instrument
 - ATR multiplier (X) needs optimization per market; crypto requires different settings than equity indices
-- Overnight gaps in [[futures]] and [[stocks]] can blow past stop levels, creating slippage risk
+- Overnight gaps in [[futures]] and stocks can blow past stop levels, creating slippage risk
 - Not suitable for traders who need daily action; this is a setup-driven, event-triggered approach

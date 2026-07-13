@@ -43,7 +43,7 @@ In the special case `mu_adj = 0` (zero drift, equivalent to a futures or forward
 POT ≈ 2 * P(S_T crosses K) = 2 * N(d2-style argument)
 ```
 
-Most broker platforms ([[thinkorswim]], [[tastytrade-platform|tastytrade]], [[interactive-brokers]]) implement POT under the assumption `mu = 0` and report it as a single number on the option chain. The output is correct under [[black-scholes-model|BSM]] assumptions; it is wrong by the same amount BSM is wrong (no skew, no jumps, no stochastic vol — see "Common Misuse" below).
+Most broker platforms ([[thinkorswim]], [[tastytrade-platform|tastytrade]], interactive-brokers) implement POT under the assumption `mu = 0` and report it as a single number on the option chain. The output is correct under [[black-scholes-model|BSM]] assumptions; it is wrong by the same amount BSM is wrong (no skew, no jumps, no stochastic vol — see "Common Misuse" below).
 
 ### The 2×POE rule of thumb
 

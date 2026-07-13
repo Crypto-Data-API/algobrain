@@ -21,8 +21,6 @@ related:
   - "[[strike-selection]]"
   - "[[moneyness-selection]]"
   - "[[options-liquidity-screening]]"
-  - "[[earnings-announcement]]"
-  - "[[implied-earnings-move]]"
   - "[[gamma-pnl]]"
   - "[[theta-targeting]]"
 ---
@@ -85,7 +83,7 @@ The 30-45 DTE band is the consensus sweet spot for premium-selling structures (c
 - **Liquidity is best on monthlies** in the 30-45 day window
 - **Roll-out room exists** — if the trade goes wrong, traders can roll to the next monthly expiration
 
-The [[tom-sosnoff|tastytrade]] research stack has empirically backtested the 30-45 DTE band on SPX and confirmed it dominates 60+ DTE entries on theta-per-day-per-unit-of-gamma terms. See [[tastytrade-spx-research]].
+The [[tom-sosnoff|tastytrade]] research stack has empirically backtested the 30-45 DTE band on SPX and confirmed it dominates 60+ DTE entries on theta-per-day-per-unit-of-gamma terms. See tastytrade-spx-research.
 
 ### The 21 DTE Management Rule
 
@@ -177,7 +175,7 @@ A common mistake: assuming weeklies exist on a name because they exist on SPY. T
 
 ## How Earnings Dates Interact With DTE Choice
 
-[[earnings-announcement|Earnings]] events distort the IV term structure and create kinks in the theta curve.
+Earnings events distort the IV term structure and create kinks in the theta curve.
 
 **Pre-earnings**:
 
@@ -196,7 +194,7 @@ A common mistake: assuming weeklies exist on a name because they exist on SPY. T
 2. **To avoid earnings**: pick DTE such that the expiration is *before* the earnings date, or *more than 30 days after* (so the earnings move has been digested).
 3. **Worst choice**: a 30-45 DTE position that crosses earnings but doesn't capitalize on it — the trader takes the gamma risk of the binary event without explicitly pricing it.
 
-See [[implied-earnings-move]] and [[earnings-volatility]].
+See implied-earnings-move and earnings-volatility.
 
 ## Practical Decision Tree
 
@@ -231,7 +229,7 @@ The correct choice is **B**: when paying theta, the dominant failure mode is run
 | Pitfall | Why it hurts | Fix |
 |---|---|---|
 | **Buying short-dated to "save money"** | Cheaper options bleed theta faster; total cost is similar but time runs out | Match DTE to thesis horizon + buffer |
-| **Selling 30-45 DTE *through* earnings without pricing the event** | Takes binary [[gamma]] risk without harvesting the [[implied-earnings-move\|IV crush]] | Expire before earnings, or 30+ days after, or explicitly trade the crush |
+| **Selling 30-45 DTE *through* earnings without pricing the event** | Takes binary [[gamma]] risk without harvesting the IV crush | Expire before earnings, or 30+ days after, or explicitly trade the crush |
 | **Assuming weeklies exist everywhere** | Weeklies on mid/small-caps are illiquid or absent | Verify OI and bid-ask at the candidate expiration |
 | **Holding short premium into the gamma zone** | Marginal theta inside 21 DTE is small vs the gamma risk | Apply the 21-DTE management rule |
 | **Treating LEAPS like monthlies** | LEAPS are vega/rho/dividend trades, not theta trades | Model [[vega]] and [[interest-rate-options\|rates]], not decay |
@@ -254,11 +252,8 @@ DTE selection is inseparable from [[non-linear-payoff|non-linearity]]. The theta
 - [[strike-selection]] — paired decision (filter 5)
 - [[moneyness-selection]] — paired decision (filter 4)
 - [[options-liquidity-screening]] — DTE choice constrained by liquidity at the candidate expiration
-- [[earnings-announcement]] — earnings interaction with DTE
-- [[implied-earnings-move]] — DTE-bracketing logic for earnings
 - [[gamma-pnl]] — explains the 21 DTE management rule
 - [[theta-targeting]] — portfolio-level theta budget that drives DTE choice
-- [[tastytrade-spx-research]] — empirical backtests of 30-45 DTE band
 - [[time-to-expiration]] — the underlying variable DTE quantifies
 - [[non-linear-payoff]] — DTE concentrates curvature; short-DTE = more non-linear risk
 - [[convexity]] — gamma is spot convexity; theta curve is time convexity

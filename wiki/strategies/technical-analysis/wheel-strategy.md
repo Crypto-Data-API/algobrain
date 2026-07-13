@@ -20,7 +20,7 @@ related: ["[[covered-call]]", "[[cash-secured-put]]", "[[iron-condor]]", "[[impl
 
 The Wheel is a systematic [[options]] income strategy that cycles between selling [[cash-secured-put]]s and [[covered-call]]s on stocks the trader is willing to own at a discount. The process begins by selling a cash-secured put on a quality stock. If the put expires worthless, the trader keeps the premium and sells another put. If the put is assigned, the trader takes delivery of the shares (at an effective cost basis reduced by the premium collected), then immediately begins selling [[covered-call]]s against those shares until they are called away. The cycle then repeats.
 
-The Wheel works best on fundamentally strong stocks that the trader would be happy holding long-term. It transforms the typical buy-and-hold experience into a premium-collection engine, generating income in three ways: put premiums, call premiums, and [[dividends]] while holding shares (Source: [[book-option-volatility-and-pricing]]). The strategy requires patience, discipline, and enough capital to accept assignment -- it is inherently a cash-intensive, lower-return-but-consistent approach.
+The Wheel works best on fundamentally strong stocks that the trader would be happy holding long-term. It transforms the typical buy-and-hold experience into a premium-collection engine, generating income in three ways: put premiums, call premiums, and dividends while holding shares (Source: [[book-option-volatility-and-pricing]]). The strategy requires patience, discipline, and enough capital to accept assignment -- it is inherently a cash-intensive, lower-return-but-consistent approach.
 
 ## Rules
 
@@ -34,7 +34,7 @@ The Wheel works best on fundamentally strong stocks that the trader would be hap
 1. If assigned on the put, you now own 100 shares. Begin selling [[covered-call]]s.
 2. **Sell 1 OTM call** at or above your cost basis (strike price minus premium collected). Delta: 0.25-0.35.
 3. Continue selling calls each cycle until the shares are called away.
-4. Collect [[dividends]] while holding shares for additional income.
+4. Collect dividends while holding shares for additional income.
 
 ### Exit
 1. **Shares called away:** The stock rallies above your call strike. Shares are sold at a profit (strike above cost basis). Return to Phase 1 and sell puts again.
@@ -49,7 +49,7 @@ The wheel requires active rolling at both phases. The key adjustment scenarios:
 
 **Phase 2 — Managing underwater shares:** The wheel's biggest risk is "bag-holding" — being assigned on the put and then watching the stock continue to fall. When this happens:
 - **Sell calls at your cost basis strike**, not below it. Premiums will be small (the calls are far OTM), but this avoids locking in a loss if the stock rebounds.
-- **Consider the [[stock-repair|stock repair strategy]]** (buy 1 ATM call, sell 2 OTM calls at cost basis) to lower breakeven at zero cost if you expect a partial recovery.
+- **Consider the stock repair strategy** (buy 1 ATM call, sell 2 OTM calls at cost basis) to lower breakeven at zero cost if you expect a partial recovery.
 - **Do NOT sell calls below cost basis** unless you have deliberately decided to accept a smaller loss and exit the position.
 
 **The 21-DTE rule:** Both put and call legs should be managed at ~21 DTE. At that point [[theta]] accelerates but [[gamma-risk|gamma risk]] spikes — the "gamma trap." Rolling at 21 DTE captures the majority of time decay while avoiding the zone where small price moves cause outsized P&L swings. (Source: [[recovering-losing-options-positions]])
@@ -62,8 +62,6 @@ Allocate no more than 15-20% of the portfolio to a single wheel position. Divers
 - [[delta]] -- guides strike selection for both phases (0.20-0.30 typical)
 - [[theta]] -- the primary profit driver; daily time decay generates income
 - [[support-and-resistance]] -- choose put strikes near strong support levels for better assignment prices
-- [[fundamental-analysis]] -- stock selection is critical; only wheel stocks you would buy-and-hold
-- [[earnings-calendar]] -- avoid selling options through earnings unless you are comfortable with the risk
 
 ## Example Trade
 **Asset:** AMD trading at $155
@@ -99,11 +97,9 @@ Allocate no more than 15-20% of the portfolio to a single wheel position. Divers
 - [[cash-secured-put]] — Phase 1 of the wheel in isolation
 - [[trade-repair-and-rolling]] — complete rolling and adjustment framework for both phases
 - [[gamma-risk]] — the risk that drives the 21-DTE roll rule
-- [[stock-repair]] — zero-cost repair strategy for underwater assigned shares
 - [[iron-condor]] — a defined-risk alternative that does not require owning shares
 - [[theta]] — the Greek that powers the wheel's income generation
 - [[position-sizing]] — sizing each wheel position (15-20% max per underlying)
-- [[dividend-investing]] — complements the wheel by selecting stocks with strong dividend yields
 
 ## Sources
 - [[book-option-volatility-and-pricing]] — Natenberg covers the foundational mechanics of cash-secured puts, covered calls, and the premium-collection logic that underlies the wheel strategy

@@ -48,7 +48,7 @@ The chain is where contract selection happens, and reading it well is a core ski
 - **Reading implied volatility** — comparing IV across strikes within one expiry reveals the [[volatility-skew|volatility skew/smile]]; comparing ATM IV across expiries reveals the term structure. Elevated IV means options are "expensive" (favours sellers), depressed IV means "cheap" (favours buyers).
 - **Building structures** — multi-leg [[options-strategies|strategies]] (vertical spreads, iron condors, straddles) are assembled by picking specific strikes and expiries straight off the chain, netting the bids and asks to compute the structure's debit or credit.
 - **Positioning intelligence** — large open interest clustered at a strike ("max pain," dealer gamma walls) can act as a magnet or barrier for the underlying near expiry, a signal some traders watch around monthly expirations.
-- **Estimating the expected move** — the ATM straddle price (ATM call + ATM put) approximates the move the market is pricing into the underlying by expiry. In the table above, the ATM straddle costs roughly 3.60 + 3.00 = **$6.60**, implying a ~±6.6% move on a $100 stock — the break-even hurdle a long-volatility [[earnings]] play must clear.
+- **Estimating the expected move** — the ATM straddle price (ATM call + ATM put) approximates the move the market is pricing into the underlying by expiry. In the table above, the ATM straddle costs roughly 3.60 + 3.00 = **$6.60**, implying a ~±6.6% move on a $100 stock — the break-even hurdle a long-volatility earnings play must clear.
 
 ### The column meanings, summarised
 
@@ -73,7 +73,7 @@ Worked vertical: pay the 100-call ask (1.95 in the layout table) and sell the 10
 - **Crossing the spread twice.** Every round trip pays the [[bid-ask-spread]] on entry *and* exit. On a 1.40/1.55 strike that ~10% spread can dwarf any directional edge — the single biggest avoidable cost in options.
 - **Stale "Last" prices.** On thin strikes the last trade may be hours old and mislead you on value; price off the live bid/ask and the [[implied-volatility|IV]], not Last.
 - **Mid-price illusion.** Quoted mid is not where you fill on illiquid strikes — assume you give up a meaningful fraction of the spread.
-- **IV crush.** Buying rich [[implied-volatility]] before an [[earnings]] report or other event means a directionally correct trade can still lose when IV collapses afterward. Compare the chain's implied move to your expected move.
+- **IV crush.** Buying rich [[implied-volatility]] before an earnings report or other event means a directionally correct trade can still lose when IV collapses afterward. Compare the chain's implied move to your expected move.
 - **Pin / assignment risk near expiry.** Short ITM options can be assigned, and strikes near spot at expiry ("pinning") create unpredictable exercise; close or roll before expiry to avoid surprises.
 - **Reading OI direction wrong.** Open interest shows *that* positioning exists, not whether it is long or short — do not infer direction from OI alone.
 - **Wide-strike, low-liquidity wings.** Far OTM strikes look cheap in dollars but carry brutal percentage spreads and can be near-impossible to exit at a fair price.

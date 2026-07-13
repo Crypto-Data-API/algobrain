@@ -12,7 +12,6 @@ related:
   - "[[co-location]]"
   - "[[front-running]]"
   - "[[market-making-strategy]]"
-  - "[[dark-pool-trading]]"
   - "[[market-microstructure]]"
   - "[[trading-and-exchanges]]"
 ---
@@ -34,7 +33,7 @@ related:
 
 ## Core Thesis
 
-Lewis argues that fragmentation of U.S. equity trading across dozens of public exchanges and private [[dark-pool-trading|dark pools]] — accelerated by Regulation NMS (2005/2007) — created structural opportunities for the fastest traders to extract value from everyone else. The book's central, contested claim is that the stock market is "rigged" in favor of HFT intermediaries who profit from speed rather than from price discovery, and that this can be fixed by redesigning market structure rather than by adding regulation.
+Lewis argues that fragmentation of U.S. equity trading across dozens of public exchanges and private dark pools — accelerated by Regulation NMS (2005/2007) — created structural opportunities for the fastest traders to extract value from everyone else. The book's central, contested claim is that the stock market is "rigged" in favor of HFT intermediaries who profit from speed rather than from price discovery, and that this can be fixed by redesigning market structure rather than by adding regulation.
 
 ## Chapter / Section Themes
 
@@ -43,7 +42,7 @@ Lewis argues that fragmentation of U.S. equity trading across dozens of public e
 - **Ronan's problem.** Telecom specialist Ronan Ryan explains the physical, latency-driven nature of the advantage ([[co-location]], cross-connects, microwave).
 - **Tracking the predators.** The mechanics of [[front-running|latency/electronic front-running]]: detect a large order hitting one exchange, race to the others, and trade ahead.
 - **Putting a face on HFT.** Sergey Aleynikov, the Goldman Sachs programmer prosecuted over source code, illustrates how opaque and high-stakes the arms race had become.
-- **How to take billions from Wall Street.** The economics of [[dark-pool-trading|dark pools]], maker-taker rebates, and order-type gaming.
+- **How to take billions from Wall Street.** The economics of dark pools, maker-taker rebates, and order-type gaming.
 - **An army of one / the spider and the fly.** Katsuyama builds IEX and Thor (an order router that synchronizes arrival times) and recruits allies to launch a fairer exchange.
 
 ## Key Concepts / Takeaways
@@ -54,7 +53,7 @@ Lewis argues that fragmentation of U.S. equity trading across dozens of public e
 | **Electronic front-running** | Detecting a large order on one venue and racing to others to trade ahead — technically legal, ethically contested ([[front-running]]). |
 | **Co-location** | Placing servers next to the matching engine yields measurable, monetizable microsecond advantages ([[co-location]]). |
 | **Speed bump (IEX)** | A deliberate 350µs delay (coiled fiber) that neutralizes the latency edge for predatory strategies. |
-| **Dark pools** | Off-exchange venues marketed as protective but sometimes opened to the very HFT flow they claimed to shield ([[dark-pool-trading]]). |
+| **Dark pools** | Off-exchange venues marketed as protective but sometimes opened to the very HFT flow they claimed to shield (dark-pool-trading). |
 | **Maker-taker / rebates** | Exchange fee structures incentivize order-type gaming and venue routing decisions. |
 | **Market fragmentation** | Reg NMS split trading across many venues, creating the cross-venue races the book documents. |
 | **Order-type proliferation** | Exotic order types created interactions that advantaged the fastest, most knowledgeable participants. |
@@ -73,7 +72,7 @@ Anyone building trading systems who needs to understand what happens between pla
 
 ## How It Applies to AI Trading
 
-Flash Boys is directly relevant to execution algorithms, [[market-making-strategy]], and [[low-latency-trading]]. The structural issues Lewis describes — latency advantages, smart order routing, information leakage in [[dark-pool-trading]], and exchange fee structures — determine the real-world cost of implementing any strategy. A brilliant alpha signal is worthless if your execution is consistently anticipated. Even if you are not building HFT systems, the concepts explain *why your fills look the way they do* and how to design execution logic (arrival-time synchronization, venue selection, passive vs. aggressive posting) that protects your alpha. These are the practical, cost-side counterparts to the [[market-microstructure]] theory in [[trading-and-exchanges]].
+Flash Boys is directly relevant to execution algorithms, [[market-making-strategy]], and [[low-latency-trading]]. The structural issues Lewis describes — latency advantages, smart order routing, information leakage in dark-pool-trading, and exchange fee structures — determine the real-world cost of implementing any strategy. A brilliant alpha signal is worthless if your execution is consistently anticipated. Even if you are not building HFT systems, the concepts explain *why your fills look the way they do* and how to design execution logic (arrival-time synchronization, venue selection, passive vs. aggressive posting) that protects your alpha. These are the practical, cost-side counterparts to the [[market-microstructure]] theory in [[trading-and-exchanges]].
 
 ## Rating
 
@@ -86,7 +85,6 @@ Flash Boys is directly relevant to execution algorithms, [[market-making-strateg
 - [[co-location]] — Core infrastructure advantage in HFT
 - [[front-running]] — The electronic/latency form Lewis documents
 - [[market-making-strategy]] — How HFT firms profit from providing liquidity
-- [[dark-pool-trading]] — Alternative venues and their hidden dynamics
 - [[market-microstructure]] — The field these issues belong to
 - [[trading-and-exchanges]] — Academic deep dive into the concepts Lewis popularizes
 

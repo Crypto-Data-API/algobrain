@@ -40,7 +40,7 @@ This design removes the need for active market makers and lets retail users gain
 
 ## The HEGIC Token & Value Accrual
 
-HEGIC is the protocol's native [[governance]] and incentive token (max / total / circulating supply all ≈ 1.08B, giving a market-cap-to-FDV ratio of 1.00 — i.e. fully diluted, no emission overhang). Its roles:
+HEGIC is the protocol's native governance and incentive token (max / total / circulating supply all ≈ 1.08B, giving a market-cap-to-FDV ratio of 1.00 — i.e. fully diluted, no emission overhang). Its roles:
 
 - **Stake for fee share.** Staked HEGIC ("staking lots") entitled holders to a share of protocol settlement fees from options activity — the primary value-accrual channel.
 - **Govern.** Signal and vote on protocol parameters and treasury decisions.

@@ -9,10 +9,10 @@ aliases: ["SMSF", "Self-Managed Super Fund", "Self Managed Super Fund", "Self-Ma
 domain: [portfolio-theory, risk-management]
 difficulty: advanced
 prerequisites: ["[[superannuation]]", "[[portfolio-construction]]", "[[risk-management]]"]
-related: ["[[superannuation]]", "[[franking-credits]]", "[[australian-investing]]", "[[covered-call]]", "[[dividend]]", "[[value-investing]]", "[[growth-investing]]", "[[diversification]]", "[[portfolio-construction]]", "[[etf]]", "[[reits]]", "[[risk-management]]", "[[compounding]]", "[[chess-sponsorship]]", "[[commsec]]", "[[nabtrade]]", "[[bell-direct]]", "[[morgans]]", "[[dollar-cost-averaging]]", "[[portfolio-rebalancing]]", "[[asic]]", "[[tax-efficient-investing]]", "[[australian-investor-tax]]", "[[cryptocurrency-tax-australia]]", "[[smsf-trading-tax-treatment]]", "[[non-commercial-losses-div-35]]", "[[trader-vs-investor-classification-au]]", "[[itaa-1997-overview]]"]
+related: ["[[superannuation]]", "[[covered-call]]", "[[diversification]]", "[[portfolio-construction]]", "[[etf]]", "[[risk-management]]", "[[compounding]]", "[[dollar-cost-averaging]]", "[[portfolio-rebalancing]]", "[[asic]]", "[[tax-efficient-investing]]", "[[australian-investor-tax]]", "[[cryptocurrency-tax-australia]]", "[[smsf-trading-tax-treatment]]", "[[non-commercial-losses-div-35]]", "[[trader-vs-investor-classification-au]]", "[[itaa-1997-overview]]"]
 ---
 
-A Self-Managed Super Fund (SMSF) is an Australian [[superannuation]] fund with 1–6 members where the members are also the trustees — meaning YOU control the investment decisions rather than delegating them to a professional fund manager. With approximately 600,000 SMSFs managing around AUD $900 billion (roughly 25% of the total super pool), SMSFs are a major force in Australian investing and a significant source of retail trading volume on the [[australian-investing|ASX]]. An SMSF sits at the intersection of [[portfolio-theory]], [[risk-management]], and tax structuring — it is a vehicle, not a strategy, and its value depends entirely on how the trustee uses it.
+A Self-Managed Super Fund (SMSF) is an Australian [[superannuation]] fund with 1–6 members where the members are also the trustees — meaning YOU control the investment decisions rather than delegating them to a professional fund manager. With approximately 600,000 SMSFs managing around AUD $900 billion (roughly 25% of the total super pool), SMSFs are a major force in Australian investing and a significant source of retail trading volume on the ASX. An SMSF sits at the intersection of [[portfolio-theory]], [[risk-management]], and tax structuring — it is a vehicle, not a strategy, and its value depends entirely on how the trustee uses it.
 
 > **Figures disclaimer:** Dollar thresholds, caps, tax rates, fee ranges, and percentages on this page are indicative and change with legislation and indexation. Several figures below are illustrative examples to demonstrate mechanics, not current statutory values. Always confirm current caps, rates, and thresholds with the ATO or a licensed adviser before acting. Numbers are framed conceptually wherever possible.
 
@@ -27,7 +27,7 @@ This control comes with significant responsibility. SMSF trustees must comply wi
 | Motivation | Explanation |
 |------------|-------------|
 | **Investment control** | Choose exactly which shares, ETFs, bonds, and other assets to hold — not limited to a fund's menu |
-| **Direct share ownership** | Hold ASX shares directly via [[chess-sponsorship|CHESS]] with a personal HIN, receiving dividends and [[franking-credits]] directly |
+| **Direct share ownership** | Hold ASX shares directly via CHESS with a personal HIN, receiving dividends and franking-credits directly |
 | **Property investment** | Buy residential or commercial property within super (subject to strict rules) |
 | **Cost efficiency at scale** | For balances above $500K+, SMSF costs as a percentage can be lower than industry/retail fund fees |
 | **Tax planning flexibility** | Precise control over capital gains timing, pension drawdowns, and contribution strategies |
@@ -80,7 +80,7 @@ Establishing and running an SMSF is a defined sequence. Treat each step as a com
 5. **Set up a dedicated bank account** — fund assets must be held separately from members' personal money (the separation-of-assets rule).
 6. **Prepare a written investment strategy** — document [[diversification]], liquidity, risk/return, member circumstances, and insurance (see [[#Investment Strategy (Documented)]]).
 7. **Roll over existing super** — transfer balances from existing funds into the SMSF.
-8. **Open broker / platform accounts** — [[chess-sponsorship|CHESS]]-sponsored broker accounts in the fund's name with the fund's HIN (see [[#SMSF Trading and Broker Integration]]).
+8. **Open broker / platform accounts** — CHESS-sponsored broker accounts in the fund's name with the fund's HIN (see [[#SMSF Trading and Broker Integration]]).
 9. **Operate compliantly, ongoing** — keep minutes of trustee decisions, value assets at market, lodge the annual return, and arrange the independent audit (see [[#ATO Reporting Requirements]]).
 
 A missed step here is not a paperwork inconvenience — it can render the fund non-complying, which carries a punitive tax outcome (see [[#Compliance Burden]]).
@@ -123,7 +123,7 @@ SMSFs have extremely broad investment powers, subject to the rules above:
 
 | Asset Class | Details | Relevant Wiki Pages |
 |-------------|---------|-------------------|
-| **ASX shares** | Direct ownership via [[chess-sponsorship|CHESS]], full voting rights, direct dividends | [[australian-investing]], [[dividend]], [[franking-credits]] |
+| **ASX shares** | Direct ownership via CHESS, full voting rights, direct dividends | australian-investing, dividend, franking-credits |
 | **International shares** | Via broker or ETF; direct international shares require custodial holding | [[diversification]] |
 | **ETFs** | Vanguard, Betashares, iShares extremely popular in SMSFs — instant diversification at low cost | [[etf]], [[passive-investing]] |
 | **Managed funds** | Active or passive managed funds | [[portfolio-construction]] |
@@ -157,12 +157,12 @@ SMSFs trade ASX shares through the same brokers as individual investors, but usi
 
 | Broker | SMSF Support | Features | Link |
 |--------|-------------|----------|------|
-| [[commsec]] | Yes — dedicated SMSF accounts | CHESS, full research, options, international | [[commsec]] |
-| [[nabtrade]] | Yes — SMSF account type | CHESS, options, Morningstar research, mFunds | [[nabtrade]] |
-| [[bell-direct]] | Yes — SMSF accounts | CHESS, Bell Potter research, AutoInvest, options | [[bell-direct]] |
-| [[morgans]] | Yes — full SMSF administration + trading | CHESS, personal adviser, IPO access, SMSF setup | [[morgans]] |
-| [[selfwealth]] | Yes — SMSF accounts | CHESS, $9.50 flat fee | [[selfwealth]] |
-| [[interactive-brokers]] | Yes | CHESS, low fees for active traders, global access | [[interactive-brokers]] |
+| commsec | Yes — dedicated SMSF accounts | CHESS, full research, options, international | commsec |
+| nabtrade | Yes — SMSF account type | CHESS, options, Morningstar research, mFunds | nabtrade |
+| bell-direct | Yes — SMSF accounts | CHESS, Bell Potter research, AutoInvest, options | bell-direct |
+| morgans | Yes — full SMSF administration + trading | CHESS, personal adviser, IPO access, SMSF setup | morgans |
+| selfwealth | Yes — SMSF accounts | CHESS, $9.50 flat fee | selfwealth |
+| interactive-brokers | Yes | CHESS, low fees for active traders, global access | interactive-brokers |
 
 All CHESS-sponsored brokers register SMSF shares under the fund's HIN — separate from any personal HIN. This ensures clear separation between personal and SMSF assets.
 
@@ -173,10 +173,9 @@ All CHESS-sponsored brokers register SMSF shares under the fund's HIN — separa
 A popular SMSF approach, especially for funds approaching or in pension phase:
 
 - Build a portfolio of high-yielding, fully franked Australian shares (Big Four banks, Telstra, Wesfarmers, BHP)
-- [[franking-credits]] offset the 15% tax in accumulation phase — effective tax rate on fully franked dividends can be close to 0%
 - In **pension phase**: 0% tax on earnings AND full cash refunds of franking credits from the ATO
 - Example: CBA paying $4.50/share dividend fully franked → SMSF in pension phase receives $4.50 + $1.93 franking credit refund = $6.43 effective income per share
-- See [[dividend]] and [[franking-credits]] for detailed mechanics
+- See dividend and franking-credits for detailed mechanics
 
 ### Covered Call Income Strategy
 
@@ -200,13 +199,11 @@ Many SMSFs use low-cost [[etf|ETFs]] as core holdings for instant [[diversificat
 
 ### Value and Growth Approaches
 
-- [[value-investing]]: Screen for undervalued ASX companies based on P/E, P/B, dividend yield — suits patient SMSF investors in accumulation
-- [[growth-investing]]: Allocate a portion to higher-growth companies (tech, healthcare) for capital appreciation
 - Many SMSFs use a barbell approach: core of defensive, high-yield blue chips + satellite of growth opportunities
 
 ### Property Exposure via REITs
 
-Rather than buying direct property (which creates liquidity and borrowing complications), many SMSFs gain property exposure through [[reits|REITs]]:
+Rather than buying direct property (which creates liquidity and borrowing complications), many SMSFs gain property exposure through REITs:
 
 - **Goodman Group (GMG)**: Industrial/logistics property
 - **Scentre Group (SCG)**: Westfield shopping centres
@@ -310,7 +307,7 @@ Limited recourse borrowing for property carries specific risks:
 Consider a two-member SMSF (a couple) with a combined balance, both members in accumulation phase, who decide to move toward pension phase over time. Their decision chain illustrates how the structure's levers interact:
 
 1. **Structure choice** — they adopt a corporate trustee so that if one member becomes incapacitated, a replacement director can be appointed without re-titling every asset (see [[#Single-Trustee Risk]]).
-2. **Investment strategy** — they document a target allocation: a core of [[etf|ETFs]] for [[diversification]], a sleeve of fully franked blue-chip ASX shares for [[franking-credits]] income, a [[reits|REIT]] sleeve for property exposure without the liquidity problems of direct property, and a cash buffer sized to cover anticipated pension payments and fund expenses (the liquidity requirement).
+2. **Investment strategy** — they document a target allocation: a core of [[etf|ETFs]] for [[diversification]], a sleeve of fully franked blue-chip ASX shares for franking-credits income, a REIT sleeve for property exposure without the liquidity problems of direct property, and a cash buffer sized to cover anticipated pension payments and fund expenses (the liquidity requirement).
 3. **Income engine** — in accumulation, the 15% concessional rate on earnings combined with franking credits drives the effective tax on fully franked dividends well below 15%. The mechanics (not the exact numbers) are shown in [[#Dividend and Franking Credit Strategy]].
 4. **Transition to pension** — once a member meets a condition of release, the fund commences an account-based pension on that member's balance (up to the transfer balance cap). Earnings supporting the pension are taxed at 0% and franking credits become refundable in cash — the single most powerful feature of the structure (see [[#SMSF in Pension Phase]]).
 5. **Risk discipline** — they review the [[portfolio-rebalancing|rebalance]] annually, keep the cash buffer topped up so pension payments never force a fire sale, and avoid concentrating in a single illiquid asset.
@@ -323,7 +320,7 @@ The lesson the example carries: the SMSF's tax advantages are real, but they are
 |---------|-----------------|------------|
 | **Sub-scale balance** | Fixed running costs eat a large % of a small balance; SMSF underperforms a low-fee industry fund | Only establish above a cost-effective balance; review cost ratio annually |
 | **Sole purpose breach** | Using fund assets for present-day personal benefit (living in fund property, personal use of collectibles) | Keep all fund assets at arm's length; document that every asset serves retirement purpose |
-| **Liquidity trap** | Fund holds illiquid assets (direct property) and cannot meet minimum pension payments | Maintain a cash buffer; favour liquid [[reits]]/[[etf|ETFs]] over direct property where pension cash flow matters |
+| **Liquidity trap** | Fund holds illiquid assets (direct property) and cannot meet minimum pension payments | Maintain a cash buffer; favour liquid reits/[[etf|ETFs]] over direct property where pension cash flow matters |
 | **Asset concentration** | Whole balance in one stock, one property, or one theme; no [[diversification]] | Apply [[portfolio-construction]] discipline; document diversification in the investment strategy |
 | **Compliance lapse** | Late lodgement, no audit, no minutes; fund risks being made non-complying (severe tax penalty) | Calendar all deadlines; engage an SMSF accountant and approved auditor |
 | **Trustee incapacity / death** | Sole trustee becomes incapacitated and no one can act for the fund | Corporate trustee + enduring power of attorney + binding death benefit nomination |
@@ -333,25 +330,14 @@ The lesson the example carries: the SMSF's tax advantages are real, but they are
 ## Related
 
 - [[superannuation]]
-- [[franking-credits]]
-- [[australian-investing]]
 - [[covered-call]]
-- [[dividend]]
-- [[value-investing]]
-- [[growth-investing]]
 - [[diversification]]
 - [[portfolio-construction]]
 - [[etf]]
-- [[reits]]
 - [[risk-management]]
 - [[compounding]]
-- [[chess-sponsorship]]
 - [[portfolio-rebalancing]]
 - [[dollar-cost-averaging]]
-- [[commsec]]
-- [[nabtrade]]
-- [[bell-direct]]
-- [[morgans]]
 - [[asic]]
 - [[tax-efficient-investing]]
 - [[australian-investor-tax]]

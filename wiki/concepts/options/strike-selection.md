@@ -14,7 +14,6 @@ related:
   - "[[gamma]]"
   - "[[theta]]"
   - "[[vega]]"
-  - "[[implied-earnings-move]]"
   - "[[iv-rank-and-iv-percentile]]"
   - "[[options-selection-framework]]"
   - "[[options-liquidity-screening]]"
@@ -27,7 +26,6 @@ related:
   - "[[iron-condors]]"
   - "[[credit-spread]]"
   - "[[moneyness-selection]]"
-  - "[[earnings-announcement]]"
   - "[[iv-crush]]"
   - "[[volatility-risk-premium]]"
 ---
@@ -61,7 +59,7 @@ A 16-delta strike is approximately one standard deviation OTM. From the Black-Sc
 
 - ~84% probability of expiring OTM (single leg)
 - ~68% probability of profit on a credit spread once the credit cushion is added
-- The "[[tastytrade]] default" for short premium
+- The "tastytrade default" for short premium
 
 ### 30 Delta — Tighter Premium Sale
 
@@ -86,7 +84,7 @@ A 70-delta call has ~0.70 of the underlying's directional exposure. At 80-delta 
 
 - Used as the long leg in deep-ITM debit call spreads
 - Used for stock replacement with [[long-dated-options|LEAPS]] (see [[leaps]])
-- Captures dividend exposure differently than stock — see [[dividend-adjustments]]
+- Captures dividend exposure differently than stock — see dividend-adjustments
 - Lower vega than ATM, lower gamma — the position behaves more like delta-1 stock
 
 ## Probability of Profit (PoP) Calculation
@@ -227,11 +225,11 @@ Traders selling premium on indices systematically benefit from put-side skew —
 Around earnings, strike-selection logic shifts:
 
 - **IV term structure inverts**: front-month IV spikes above back-month IV (kink at the earnings date)
-- **Implied earnings move** ([[implied-earnings-move]]) gives the market-implied straddle move; strikes outside the implied move have markedly different P(ITM) than non-earnings periods
+- **Implied earnings move** (implied-earnings-move) gives the market-implied straddle move; strikes outside the implied move have markedly different P(ITM) than non-earnings periods
 - **Standard delta convention overstates safety**: a 16-delta pre-earnings put has higher gamma exposure to a single binary event than its delta suggests
 - **Practical rule**: for premium selling around earnings, use the implied move boundary as the short-strike floor (e.g., short put strike at least 1× implied move below spot)
 
-See [[earnings-announcement]] and [[iv-crush]] for the full event-volatility context.
+See earnings-announcement and [[iv-crush]] for the full event-volatility context.
 
 ## Worked Example — Selecting Strikes for a Put Credit Spread
 
@@ -243,7 +241,7 @@ A trader wants to sell premium on a neutral-to-bullish $200 stock, 45 DTE, with 
 4. **Compute breakeven and PoP.** Breakeven = 180 − 1.00 = **$179.00**. That breakeven strike is ~14-delta, so [[probability-of-profit|PoP]] ≈ 1 − 0.14 ≈ **86%**.
 5. **Apply probability-of-touch.** The 180 short has ~32% P(touch), so the trader should expect mark-to-market adversity on roughly one trade in three — and pre-decide a management point (e.g., close at 50% max profit or roll at 2× credit tested).
 6. **Check skew.** Equity put-side skew means the 180 put's IV exceeds the symmetric 220 call's IV by several vol points, so the put credit spread collects extra skew premium — a structural tailwind ([[volatility-risk-premium]]).
-7. **Check for events.** Confirm there is no [[earnings-announcement]] inside the 45-DTE window. If there were, the trader would move the short strike at least 1× the [[implied-earnings-move]] below spot, or skip the trade.
+7. **Check for events.** Confirm there is no earnings-announcement inside the 45-DTE window. If there were, the trader would move the short strike at least 1× the implied-earnings-move below spot, or skip the trade.
 
 The full loop: 1σ sanity-check → delta target by IVR → wing for defined risk → breakeven/PoP → touch-based management plan → skew/event overlay.
 
@@ -252,7 +250,7 @@ The full loop: 1σ sanity-check → delta target by IVR → wing for defined ris
 1. **Treating delta as exact probability.** |Delta| ≈ risk-neutral P(ITM), but skew, drift, and the risk-neutral-vs-physical gap make it an approximation — not a guarantee.
 2. **Ignoring probability of touch.** A "16-delta, 84%-safe" short is touched ~32% of the time; traders who manage at the touch face adversity at double the P(ITM) rate.
 3. **Using the same delta target across IV regimes.** In low IVR, go nearer ATM for long premium; in high IVR, go further OTM for short premium. A fixed 16-delta rule misprices both extremes.
-4. **Selling fixed deltas through earnings.** A 16-delta pre-earnings put carries far more single-event gamma than its delta implies; use the [[implied-earnings-move]] boundary instead (see [[iv-crush]]).
+4. **Selling fixed deltas through earnings.** A 16-delta pre-earnings put carries far more single-event gamma than its delta implies; use the implied-earnings-move boundary instead (see [[iv-crush]]).
 5. **Symmetric strangles on skewed underlyings.** A 16d/16d strangle collects asymmetric credit — the put pays more because of [[volatility-risk-premium|skew]]; treat the two sides as different bets.
 6. **Picking strikes with no liquidity.** Delta math is irrelevant if the strike can't be exited cleanly; pair strike picks with [[options-liquidity-screening]].
 
@@ -262,7 +260,6 @@ The full loop: 1σ sanity-check → delta target by IVR → wing for defined ris
 - [[gamma]] — peaks at ATM; informs how strikes behave under spot moves
 - [[theta]] — decay rate, peaks at ATM in absolute dollars
 - [[vega]] — IV sensitivity by strike
-- [[implied-earnings-move]] — strike sanity-check around binary events
 - [[iv-rank-and-iv-percentile]] — context that shifts the optimal delta target
 - [[options-selection-framework]] — strike selection is filter 5 in the framework
 - [[spread-width-selection]] — pairs with strike picks for credit spreads
@@ -270,7 +267,6 @@ The full loop: 1σ sanity-check → delta target by IVR → wing for defined ris
 - [[cash-secured-puts]], [[covered-calls]], [[iron-condors]], [[credit-spread]] — strategies with canonical delta targets
 - [[volatility-risk-premium]] — structural reason the put-side strike collects skew premium
 - [[moneyness-selection]] — the ITM/ATM/OTM framing of the same strike choice
-- [[earnings-announcement]] — why standard delta conventions overstate safety into events
 - [[iv-crush]] — the post-event collapse that punishes event-spanning strikes
 
 ## Sources

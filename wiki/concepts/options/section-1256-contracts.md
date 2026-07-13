@@ -8,10 +8,10 @@ tags: [options, derivatives, regulation, futures]
 aliases: ["Section 1256", "1256 Contracts", "60/40 Tax Treatment"]
 domain: [derivatives, options, taxation]
 difficulty: intermediate
-related: ["[[spx-options]]", "[[xsp-options]]", "[[spy-options]]", "[[vix]]", "[[american-vs-european-options]]", "[[wash-sale-rules-options]]", "[[tax-implications-trading]]", "[[capital-gains]]", "[[options-portfolio-construction]]"]
+related: ["[[vix]]", "[[american-vs-european-options]]", "[[tax-implications-trading]]", "[[capital-gains]]", "[[options-portfolio-construction]]"]
 ---
 
-**Section 1256 of the US Internal Revenue Code** governs the tax treatment of certain regulated derivatives — including broad-based stock index options, regulated futures contracts, and dealer equity options. Its defining feature is the **60/40 rule**: every realized gain or loss is automatically split 60% long-term capital gain/loss and 40% short-term, regardless of how long the position was held. For active traders of qualifying products like [[spx-options|SPX]], [[xsp-options|XSP]], NDX, RUT, and [[vix|VIX]] options, Section 1256 is one of the largest structural tax advantages available in US markets.
+**Section 1256 of the US Internal Revenue Code** governs the tax treatment of certain regulated derivatives — including broad-based stock index options, regulated futures contracts, and dealer equity options. Its defining feature is the **60/40 rule**: every realized gain or loss is automatically split 60% long-term capital gain/loss and 40% short-term, regardless of how long the position was held. For active traders of qualifying products like SPX, XSP, NDX, RUT, and [[vix|VIX]] options, Section 1256 is one of the largest structural tax advantages available in US markets.
 
 ## Overview
 
@@ -30,7 +30,7 @@ The IRS lists specific categories that qualify for Section 1256 treatment:
 | Category | Examples |
 |---|---|
 | **Regulated futures contracts** | E-mini S&P 500, crude oil, gold, treasury futures, etc. |
-| **Broad-based stock index options** | [[spx-options|SPX]], [[xsp-options|XSP]], NDX (Nasdaq-100), RUT (Russell 2000), [[vix|VIX]] options |
+| **Broad-based stock index options** | SPX, XSP, NDX (Nasdaq-100), RUT (Russell 2000), [[vix|VIX]] options |
 | **Foreign currency contracts** | Specified forex contracts traded on a qualified board/exchange |
 | **Dealer equity options** | Held by registered options dealers in their dealer capacity |
 | **Dealer securities futures contracts** | Same dealer condition |
@@ -39,7 +39,7 @@ The IRS lists specific categories that qualify for Section 1256 treatment:
 
 | Category | Reason |
 |---|---|
-| **[[spy-options|SPY options]]** | SPY is a single-fund ETF, not a "broad-based stock index" |
+| **SPY options** | SPY is a single-fund ETF, not a "broad-based stock index" |
 | **QQQ / IWM options** | Same reason — ETF options, not index options |
 | **Single-stock options** (AAPL, NVDA, etc.) | Equity options on individual stocks |
 | **Narrow-based index options** | Indices with too few components per IRS definition |
@@ -97,7 +97,7 @@ Brokers issue 1099-Bs that already segregate Section 1256 contracts, simplifying
 
 ## ITPM Implications
 
-For [[itpm|ITPM]]-style options portfolios, Section 1256 awareness is foundational:
+For ITPM-style options portfolios, Section 1256 awareness is foundational:
 
 - **Default to SPX/XSP for index exposure**, not SPY, unless there is a specific reason (e.g., IRA, account size, penny-tick advantage that outweighs tax over a known short hold).
 - **Account-size threshold for XSP vs SPX** — traders below ~$500K typically use XSP for granularity; above that, SPX dominates on commissions and operational simplicity.
@@ -111,16 +111,12 @@ For [[itpm|ITPM]]-style options portfolios, Section 1256 awareness is foundation
 - **State tax treatment varies** — a few states do not honor the 60/40 split and tax all the gain at ordinary rates.
 - **NIIT applies** — the 3.8% Net Investment Income Tax applies to Section 1256 gains for high-income filers, partially offsetting the federal advantage.
 - **Dealer status matters** — dealer equity options must actually be held in dealer capacity; a non-dealer cannot self-elect into this category.
-- **Wash sale interplay** — Section 1256 contracts are not subject to traditional §1091 wash sale rules in the same way, but coordinated positions across §1256 and non-§1256 products can trigger straddle and anti-abuse rules. See [[wash-sale-rules-options]].
+- **Wash sale interplay** — Section 1256 contracts are not subject to traditional §1091 wash sale rules in the same way, but coordinated positions across §1256 and non-§1256 products can trigger straddle and anti-abuse rules. See wash-sale-rules-options.
 
 ## Related
 
-- [[spx-options]] — primary §1256 product for index traders
-- [[xsp-options]] — mini-SPX with same §1256 treatment
-- [[spy-options]] — what NOT to use if §1256 matters
 - [[vix]] — VIX options qualify
 - [[american-vs-european-options]] — exercise style usually correlates with §1256 status
-- [[wash-sale-rules-options]]
 - [[tax-implications-trading]]
 - [[capital-gains]]
 - [[options-portfolio-construction]]

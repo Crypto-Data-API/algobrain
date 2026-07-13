@@ -25,7 +25,7 @@ PiVolio is a niche third-party options portfolio analytics tool referenced in ad
 
 PiVolio sits in the same prosumer / semi-pro third-party options analytics segment as [[convex-trading]] and certain configurations of [[trade-machine]]. The category exists because:
 
-- **Broker tools** ([[ibkr-risk-navigator]], [[thinkorswim]] Analyze, [[tastytrade]]) are free and adequate for single-broker books up to moderate size, but limited to one broker's positions
+- **Broker tools** ([[ibkr-risk-navigator]], [[thinkorswim]] Analyze, tastytrade) are free and adequate for single-broker books up to moderate size, but limited to one broker's positions
 - **Institutional tools** ([[bloomberg-terminal]], Barra, in-house Python) are vastly more powerful but expensive or build-intensive
 - **The middle band** — multi-broker aggregation, custom scenarios, options-specific concentration views — is the niche these third-party tools target
 
@@ -56,7 +56,7 @@ For [[options-concentration-risk]], a tool like PiVolio fits into the third-part
 Whether PiVolio specifically delivers on these features at a quality level worth its price should be evaluated against:
 
 - [[ibkr-risk-navigator]] (free for IBKR users, broad capability)
-- Building a small custom Python tool with broker API + [[orats]] data (more setup, more flexibility)
+- Building a small custom Python tool with broker API + orats data (more setup, more flexibility)
 - [[convex-trading]] / [[trade-machine]] (similar prosumer-tier alternatives)
 
 ## Use by automated and AI-assisted systems
@@ -65,7 +65,7 @@ Like its peers in this segment, a tool of PiVolio's described type would sit in 
 
 - **Human-in-the-loop risk check** — aggregated [[options-greeks|Greeks]] and concentration views serve as a review surface before a separate rules-based or automated system places trades.
 - **Scenario data into sizing logic** — stress/payoff outputs can feed position-sizing decisions even when sizing is computed elsewhere.
-- **API status unknown** — no documented public/programmatic API was found, so any integration into an automated pipeline cannot be assumed and would likely be manual. Teams building genuinely automated options systems generally rely on API-first data ([[orats]]) plus a custom build, using prosumer GUIs only for oversight.
+- **API status unknown** — no documented public/programmatic API was found, so any integration into an automated pipeline cannot be assumed and would likely be manual. Teams building genuinely automated options systems generally rely on API-first data (orats) plus a custom build, using prosumer GUIs only for oversight.
 
 ## Strengths (general for this product category)
 
@@ -77,7 +77,7 @@ Like its peers in this segment, a tool of PiVolio's described type would sit in 
 
 - **Limited public information**: independent reviews of PiVolio specifically are sparse; capability claims should be verified directly
 - **Smaller-vendor risk**: niche options-analytics tools come and go; vendor longevity, ongoing support, and data quality should be evaluated before relying on the tool for live risk management
-- **No institutional-grade factor models**: prosumer tools generally do not offer Barra/Axioma-style factor decomposition; for that, see [[barra]] / [[axioma]] / [[northfield]]
+- **No institutional-grade factor models**: prosumer tools generally do not offer Barra/Axioma-style factor decomposition; for that, see barra / axioma / northfield
 - **Data dependency**: stress / scenario analysis quality depends on the underlying market data feed
 - **Manual position entry**: many third-party tools rely on manual entry or CSV upload, which introduces errors
 

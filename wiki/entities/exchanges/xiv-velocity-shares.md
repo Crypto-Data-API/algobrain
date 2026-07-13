@@ -10,7 +10,7 @@ entity_type: company
 founded: 2010
 headquarters: "Zurich, Switzerland (issuer: Credit Suisse AG)"
 website: ""
-related: ["[[volmageddon]]", "[[credit-suisse]]", "[[vix]]", "[[vix-futures]]", "[[short-volatility-strategies]]", "[[long-vol-vs-short-vol]]", "[[ljm-preservation-and-growth]]", "[[malachite-capital]]", "[[catalyst-hedged-futures]]", "[[svxy]]", "[[svxy-proshares]]", "[[exchange-traded-note]]", "[[acceleration-event]]", "[[contango]]", "[[backwardation]]", "[[vix-term-structure]]", "[[universa-investments]]", "[[failure-modes]]", "[[gap-risk]]"]
+related: ["[[volmageddon]]", "[[vix]]", "[[vix-futures]]", "[[short-volatility-strategies]]", "[[long-vol-vs-short-vol]]", "[[ljm-preservation-and-growth]]", "[[malachite-capital]]", "[[catalyst-hedged-futures]]", "[[svxy]]", "[[svxy-proshares]]", "[[exchange-traded-note]]", "[[acceleration-event]]", "[[contango]]", "[[backwardation]]", "[[vix-term-structure]]", "[[universa-investments]]", "[[failure-modes]]", "[[gap-risk]]"]
 ---
 
 XIV was the ticker for the **VelocityShares Daily Inverse VIX Short-Term ETN**, an exchange-traded note issued by **Credit Suisse AG** in November 2010 that provided **-1x daily exposure** to the **S&P 500 VIX Short-Term Futures Index** (SPVXSP). For most of 2012-2017 the product compounded one of the highest realized [[sharpe-ratio|Sharpe ratios]] of any retail-accessible vehicle in the world, becoming a beloved short-vol trade for retail and institutional investors alike. On **February 5, 2018** ([[volmageddon|Volmageddon]]) XIV's [[indicative-value]] fell roughly **-96% in after-hours trading** as VIX futures repriced violently into a backwardated curve. Credit Suisse exercised the **acceleration event** clause in the prospectus and **terminated the note on February 21, 2018**, redeeming holders at the diminished cash value. XIV is the most widely cited single instrument in the history of short-volatility blow-ups.
@@ -71,7 +71,6 @@ The reflexive flows from XIV and SVXY rebalance hedging on the day are widely ci
 ## Related
 
 - [[volmageddon]] -- the event
-- [[credit-suisse]] -- the issuer
 - [[vix]] -- the underlying index family
 - [[vix-futures]] -- the actual instruments referenced
 - [[vix-term-structure]] -- the mechanism behind contango drift

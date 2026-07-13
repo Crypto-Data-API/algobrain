@@ -13,12 +13,12 @@ source_file: "r2://trader-wiki/transcripts/2017-01-01-annihilates-retail-brokers
 confidence: medium
 claims_count: 30
 aliases: ["Annihilates Retail Brokers", "ITPM Annihilates Retail Brokers"]
-related: ["[[anton-kreil]]", "[[itpm]]", "[[retail-trading]]", "[[leverage]]", "[[risk-management-overview]]", "[[long-short-equity]]"]
+related: ["[[anton-kreil]]", "[[retail-trading]]", "[[leverage]]", "[[risk-management-overview]]"]
 ---
 
 Source summary of [[anton-kreil]]'s seminar exposing the structural conflicts of interest in the retail brokerage industry. Previously shared only in closed ITPM seminars for ~5 years, this was the first public version. Covers the "inversion narrative" — how the retail trading infrastructure is built against the trader — and contrasts professional vs. retail approaches in detail.
 
-> **Confidence framing (read first):** This is a **promotional seminar by a trading-education vendor** ([[itpm|ITPM]] / [[anton-kreil|Anton Kreil]]). Its core argument — that the retail brokerage industry is structurally rigged against clients — is broadly corroborated by independent evidence (regulators' own CFD-loss disclosures, ESMA leverage restrictions, the 2010 US CFD ban), so the *direction* of the thesis is well-founded. However, the talk is also a **funnel for ITPM's paid programs**, and many specific figures are asserted from the stage without citation. Claims below are marked individually: structural/regulatory facts that can be independently verified are **[HIGH]**; plausible-but-uncited assertions and rhetorical figures are **[MEDIUM]**; promotional/self-serving claims are **[LOW]**. Treat unsourced statistics (e.g. exact financing-turn percentages, the precise "90/90/90" formulation) as indicative rather than authoritative. Overall source confidence: **medium**.
+> **Confidence framing (read first):** This is a **promotional seminar by a trading-education vendor** (ITPM / [[anton-kreil|Anton Kreil]]). Its core argument — that the retail brokerage industry is structurally rigged against clients — is broadly corroborated by independent evidence (regulators' own CFD-loss disclosures, ESMA leverage restrictions, the 2010 US CFD ban), so the *direction* of the thesis is well-founded. However, the talk is also a **funnel for ITPM's paid programs**, and many specific figures are asserted from the stage without citation. Claims below are marked individually: structural/regulatory facts that can be independently verified are **[HIGH]**; plausible-but-uncited assertions and rhetorical figures are **[MEDIUM]**; promotional/self-serving claims are **[LOW]**. Treat unsourced statistics (e.g. exact financing-turn percentages, the precise "90/90/90" formulation) as indicative rather than authoritative. Overall source confidence: **medium**.
 
 ## Key Claims
 
@@ -50,7 +50,7 @@ Source summary of [[anton-kreil]]'s seminar exposing the structural conflicts of
 
 ### Professional vs. Retail Trader Comparison
 
-15. [MEDIUM] Professional approach (per ITPM): systematic [[long-short-equity]] portfolio management across multiple asset classes, 80% [[fundamental-analysis]] / 20% [[technical-analysis-overview|technical analysis]], 10-20 positions, 5-10% position sizes. Reflects ITPM's house methodology — one professional style, presented as *the* professional style. (Source: direct statement / ITPM methodology)
+15. [MEDIUM] Professional approach (per ITPM): systematic long-short-equity portfolio management across multiple asset classes, 80% fundamental-analysis / 20% [[technical-analysis-overview|technical analysis]], 10-20 positions, 5-10% position sizes. Reflects ITPM's house methodology — one professional style, presented as *the* professional style. (Source: direct statement / ITPM methodology)
 16. [MEDIUM] Retail approach (per ITPM): short time frames (1-minute to 1-day candles), 1-3 positions, usually favorite forex pair + short S&P + one cheap long stock, seeking quick returns. Characterization/generalization. (Source: direct statement)
 17. [HIGH] Professional consistency: risk-adjusted returns with volatility caps. Example: 10% annual risk for 16% return beats 50% risk for 25% return because the first is more investable. The risk-adjusted-return principle is sound (cf. [[sharpe-ratio]]). (Source: direct statement)
 18. [MEDIUM] Professional outcome: capital preservation then growth, "get rich slowly," trade forever. Retail outcome: "big money quickly," capital destruction. Rhetorical framing aligned with [[capital-preservation]] orthodoxy. (Source: direct statement)
@@ -84,8 +84,8 @@ Source summary of [[anton-kreil]]'s seminar exposing the structural conflicts of
 
 ## Entities Mentioned
 
-- [[itpm]], [[anton-kreil]] — presenter and company
-- [[intercontinental-exchange|ICE]], [[cme-group|CME]] — exchange monopoly/duopoly
+- itpm, [[anton-kreil]] — presenter and company
+- ICE, [[cme-group|CME]] — exchange monopoly/duopoly
 - [[sec|FCA]] — UK regulator (passive/reactionary)
 - [[federal-reserve|The Fed]] — QE impact on volatility
 
@@ -93,8 +93,6 @@ Source summary of [[anton-kreil]]'s seminar exposing the structural conflicts of
 
 - [[leverage]] — 100x retail vs. 4-8x professional
 - [[volatility]] — crushed since 2009, lifeblood of trading
-- [[long-short-equity]] — professional portfolio approach
-- [[fundamental-analysis]] — 80% of pro approach
 - [[technical-analysis-overview|Technical Analysis]] — 20% overlay
 - [[risk-management-overview|Risk Management]] — position sizing, volatility caps
 - [[market-making]] — broker as counter-party

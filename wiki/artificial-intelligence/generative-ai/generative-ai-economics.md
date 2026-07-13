@@ -78,7 +78,7 @@ Frontier foundation-model labs ran at large operating losses through the 2023-20
 - [[anthropic|Anthropic]]: revenue scaled from roughly $1B (2024) to a multi-billion run-rate, funded by large investor rounds (notably from Amazon and Google).
 - The bet: inference gross margins are positive per-token, so as usage compounds and training costs are amortised across a larger base, the business converges to profitability.
 
-For investors, the core risk is **price compression**: as competition intensifies and [[open-source-ai-movement|open-source models]] close the quality gap, list prices fall (the table above shows several rounds of cuts since 2024). The durable winners are those with either a cost advantage (efficient training, owned compute) or a distribution/lock-in advantage, not those relying on a permanent quality moat. This is the central thesis underpinning the AI exposure in [[nvidia|NVIDIA]] and the hyperscalers ([[microsoft]], Google, Amazon) versus pure-play model labs.
+For investors, the core risk is **price compression**: as competition intensifies and [[open-source-ai-movement|open-source models]] close the quality gap, list prices fall (the table above shows several rounds of cuts since 2024). The durable winners are those with either a cost advantage (efficient training, owned compute) or a distribution/lock-in advantage, not those relying on a permanent quality moat. This is the central thesis underpinning the AI exposure in [[nvidia|NVIDIA]] and the hyperscalers (microsoft, Google, Amazon) versus pure-play model labs.
 
 ## See Also
 

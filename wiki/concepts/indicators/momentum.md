@@ -80,4 +80,3 @@ Momentum strategies range from simple trend-following (buy above the 200-day [[m
 - [[momentum-factor]] -- factor-investing treatment
 - [[momentum-investing]] -- the systematic trading strategy
 - [[time-series-momentum]] -- own-asset momentum / trend-following cousin
-- [[sector-momentum-screen]] -- screening for sector-level momentum signals

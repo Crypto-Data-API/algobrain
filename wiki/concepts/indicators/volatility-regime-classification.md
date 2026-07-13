@@ -243,11 +243,11 @@ The point: the regime classification, not a P&L stop or a feeling, drove the de-
 
 - **Cboe VIX dashboard** — VIX, VIX9D, VIX3M, VIX6M; raw data for term structure ratios. Cboe website and the [[cboe|Cboe]] data products.
 - **VIXCentral** (`vixcentral.com`) — free real-time VIX futures term structure visualization.
-- **Spotgamma / [[spotgamma|SpotGamma]]** — dealer positioning, gamma exposure, regime-flavored daily commentary.
+- **Spotgamma / SpotGamma** — dealer positioning, gamma exposure, regime-flavored daily commentary.
 - **[[squeeze-metrics|SqueezeMetrics]]** — DIX, GEX, and related dealer-flow indicators that often pre-signal regime shifts.
 - **[[sgx-volatility-data|CBOE/OCC]] daily volume and OI** — concentration in puts vs calls, weekly vs monthly.
 - **[[trading-economics]] / [[fred|FRED]]** — macro stress series ([[high-yield-credit-spreads|HY OAS]], [[treasury-yield-curve|yield curve]], [[dxy|DXY]]).
-- **[[market-chameleon|Market Chameleon]] / [[ivolatility|iVolatility]]** — IV rank/percentile across single names.
+- **Market Chameleon / [[ivolatility|iVolatility]]** — IV rank/percentile across single names.
 - **Custom Python regime scorer** — pull VIX, VIX3M, SPX OHLC, HY ETF data; compute the four-regime classification daily. ~80 lines of pandas.
 
 ### Python Sketch
@@ -304,4 +304,4 @@ This is intentionally simple. The point of regime classification is not predicti
 
 ## Sources
 
-This page synthesizes the regime-classification approach used in the [[itpm-playbook|ITPM]] short-volatility framework, [[tastytrade]] IV-rank methodology, and the academic literature on the [[variance-risk-premium]]. Specific operational thresholds reflect community practice rather than any single published reference; tune to your own historical analysis before deploying capital.
+This page synthesizes the regime-classification approach used in the [[itpm-playbook|ITPM]] short-volatility framework, tastytrade IV-rank methodology, and the academic literature on the [[variance-risk-premium]]. Specific operational thresholds reflect community practice rather than any single published reference; tune to your own historical analysis before deploying capital.

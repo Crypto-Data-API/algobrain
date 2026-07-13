@@ -205,7 +205,7 @@ Use [[iv-rank-and-iv-percentile|IV rank / IV percentile]] as the entry screen: l
 | Strangle scalp | Long OTM call + put | Lower theta, lower gamma; cheaper carry in range-bound names |
 | Calendar-financed | Long near-dated gamma, short far-dated vega | Reduces net theta; adds term-structure risk |
 | Ratio / back-spread | Asymmetric long gamma | Directional lean with positive gamma |
-| Index vs single-name | Long single-name gamma, short index vol | Bleeds into [[implied-correlation|implied-correlation]] and [[dispersion-trading|dispersion]] territory |
+| Index vs single-name | Long single-name gamma, short index vol | Bleeds into [[implied-correlation|implied-correlation]] and dispersion territory |
 | [[variance-swaps|Variance swap]] | Pure realized-vs-implied exposure | Removes path dependence and hedge-band noise entirely |
 
 ## Relationship to delta hedging and short-vol
@@ -265,7 +265,6 @@ Gamma scalping is the **long-gamma mirror image** of a short-vol [[delta-hedging
 - [[greeks]] — the full Greek framework
 - [[iv-rank-and-iv-percentile]] — the entry screen for "cheap" vol
 - [[implied-correlation]] — relevant to single-name-vs-index gamma structures
-- [[dispersion-trading]] — long single-name gamma vs short index vol
 - [[market-regime]] — vol regime determines when long gamma pays
 - [[volmageddon]] — the kind of vol explosion long-gamma books are positioned for
 - [[failure-modes]] — generic strategy failure modes

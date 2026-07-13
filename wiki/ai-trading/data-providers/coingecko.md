@@ -49,7 +49,7 @@ Paid tiers add on-chain DEX data, historical snapshots, and dedicated support.
 - Track [[market-dominance]] shifts between BTC, ETH, and altcoins for rotation strategies
 - Monitor altcoin momentum via volume surges and market cap rankings
 - Identify exchange flow anomalies (volume spikes on specific exchanges)
-- DeFi TVL tracking for protocol-level [[fundamental-analysis]]
+- DeFi TVL tracking for protocol-level fundamental-analysis
 - NFT market sentiment via floor price trends and volume changes
 - Cross-reference CoinGecko data with [[coinglass]] derivatives data for confirmation
 

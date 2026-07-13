@@ -7,7 +7,7 @@ updated: 2026-04-06
 status: good
 website: https://huggingface.co/ProsusAI/finbert
 tags: [nlp, sentiment, ml-models]
-related: ["[[earnings-call-analysis]]", "[[llm-market-analysis]]", "[[sentiment-analysis]]"]
+related: ["[[llm-market-analysis]]", "[[sentiment-analysis]]"]
 ---
 
 # FinBERT
@@ -35,7 +35,7 @@ Input:  "The company reported strong earnings beating expectations"
 Output: { positive: 0.92, negative: 0.03, neutral: 0.05 }
 ```
 
-The model processes text in chunks (max 512 tokens per input). For longer documents like [[earnings-call-analysis]] transcripts, you split into sentences or paragraphs and aggregate scores.
+The model processes text in chunks (max 512 tokens per input). For longer documents like earnings-call-analysis transcripts, you split into sentences or paragraphs and aggregate scores.
 
 ## Applications in Trading
 
@@ -64,6 +64,5 @@ For most trading applications, the best approach combines FinBERT for bulk senti
 
 ## See Also
 
-- [[earnings-call-analysis]] — primary use case for FinBERT
 - [[llm-market-analysis]] — complementary LLM-based approaches
 - [[sentiment-analysis]] — broader overview of sentiment in trading

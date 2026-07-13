@@ -92,7 +92,7 @@ The key insight: market regimes are persistent. A trending market tends to keep 
 
 **Renaissance Technologies** famously adapts strategies to market conditions using statistical models far more sophisticated than simple VIX thresholds, but the core concept is the same — the models detect which patterns are currently working and allocate capital accordingly.
 
-**AQR Capital Management** has published extensive research on regime-aware investing, particularly around combining [[momentum-investing]] and [[value-investing]] factors with volatility-scaling (reducing exposure when volatility rises, increasing when it falls).
+**AQR Capital Management** has published extensive research on regime-aware investing, particularly around combining [[momentum-investing]] and value-investing factors with volatility-scaling (reducing exposure when volatility rises, increasing when it falls).
 
 **Managed futures CTAs** (commodity trading advisors) are natural regime-adaptive strategies. Most CTAs run trend-following as their core, but the better ones incorporate regime detection to adjust speed parameters, position sizing, and market selection based on current conditions.
 

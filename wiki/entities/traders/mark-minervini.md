@@ -10,12 +10,12 @@ entity_type: person
 founded: 1965
 headquarters: "United States"
 website: "https://www.minervini.com"
-related: ["[[momentum]]", "[[breakout-strategies]]", "[[earnings-momentum]]", "[[relative-strength]]", "[[william-o-neil]]", "[[risk-management]]", "[[position-sizing]]", "[[moving-averages]]", "[[book-market-wizards]]"]
+related: ["[[momentum]]", "[[breakout-strategies]]", "[[relative-strength]]", "[[risk-management]]", "[[position-sizing]]", "[[moving-averages]]", "[[book-market-wizards]]"]
 ---
 
 # Mark Minervini
 
-Mark Minervini (born c. 1965) is an American stock trader, author, and two-time winner of the US Investing Championship who developed the SEPA (Specific Entry Point Analysis) methodology -- a systematic approach to [[momentum]]-based stock trading that combines the [[canslim|CAN SLIM]] principles of [[william-o-neil|William O'Neil]] with proprietary [[technical-analysis|chart pattern]] recognition and strict [[risk-management]] rules. Minervini averaged approximately **220% annual returns** for five consecutive years early in his career, reportedly turning $100,000 into over $30 million, and won the US Investing Championship in 1997 with a **155% return** and again in 2021 with a remarkable **334.8% return**. Featured in Jack Schwager's *Stock Market Wizards* (2001), Minervini is regarded as one of the most successful practitioners of [[momentum-trading|growth momentum]] trading in modern markets (Source: [[book-market-wizards]]).
+Mark Minervini (born c. 1965) is an American stock trader, author, and two-time winner of the US Investing Championship who developed the SEPA (Specific Entry Point Analysis) methodology -- a systematic approach to [[momentum]]-based stock trading that combines the CAN SLIM principles of William O'Neil with proprietary [[technical-analysis|chart pattern]] recognition and strict [[risk-management]] rules. Minervini averaged approximately **220% annual returns** for five consecutive years early in his career, reportedly turning $100,000 into over $30 million, and won the US Investing Championship in 1997 with a **155% return** and again in 2021 with a remarkable **334.8% return**. Featured in Jack Schwager's *Stock Market Wizards* (2001), Minervini is regarded as one of the most successful practitioners of [[momentum-trading|growth momentum]] trading in modern markets (Source: [[book-market-wizards]]).
 
 ## Quick Facts
 
@@ -26,7 +26,7 @@ Mark Minervini (born c. 1965) is an American stock trader, author, and two-time 
 | Methodology | SEPA -- Specific Entry Point Analysis |
 | Signature pattern | Volatility Contraction Pattern (VCP) within a Stage 2 uptrend |
 | Style | Growth [[momentum]] / [[breakout-strategies|breakout]] swing-to-position trading in US equities |
-| Influences | [[william-o-neil|William O'Neil]] / [[canslim|CAN SLIM]]; Stan Weinstein stage analysis; [[jesse-livermore]] |
+| Influences | William O'Neil / CAN SLIM; Stan Weinstein stage analysis; [[jesse-livermore]] |
 | Track record | 1997 US Investing Championship 155%; 2021 334.8%; ~220%/yr x5 (cited) |
 | Books | *Trade Like a Stock Market Wizard* (2013); *Think & Trade Like a Champion* (2017); *Mindset Secrets for Winning* (2021) |
 | Risk rule | Hard 5-8% max loss per position; 1-2% portfolio risk per trade |
@@ -38,7 +38,7 @@ Mark Minervini grew up in a working-class family in the northeastern United Stat
 
 His early years in trading were marked by significant losses and mistakes -- a period he later described as "paying tuition to the market." Through obsessive study of historical stock market leaders (companies like Cisco, Dell, Microsoft, and AOL during the 1990s tech boom), Minervini identified recurring patterns in how stocks behaved before, during, and after major price advances. This empirical research formed the foundation of his SEPA methodology.
 
-Minervini has cited [[william-o-neil|William O'Neil]]'s *How to Make Money in Stocks* and the [[canslim|CAN SLIM]] system as a major influence on his approach, particularly O'Neil's emphasis on buying stocks showing strong earnings growth and relative price strength (Source: [[book-how-to-make-money-in-stocks]]). However, Minervini refined and extended O'Neil's framework with more precise entry criteria, stricter loss-cutting rules, and a sophisticated understanding of [[volatility]]-based patterns.
+Minervini has cited William O'Neil's *How to Make Money in Stocks* and the CAN SLIM system as a major influence on his approach, particularly O'Neil's emphasis on buying stocks showing strong earnings growth and relative price strength (Source: book-how-to-make-money-in-stocks). However, Minervini refined and extended O'Neil's framework with more precise entry criteria, stricter loss-cutting rules, and a sophisticated understanding of [[volatility]]-based patterns.
 
 ## Career and Key Trades
 
@@ -124,12 +124,12 @@ The VCP is fundamentally a supply/demand pattern: each contraction shakes out we
 
 ### 3. Fundamental Fuel: Earnings Acceleration
 
-While Minervini's entry timing is technical, his stock selection requires strong [[fundamental-analysis|fundamentals]]:
+While Minervini's entry timing is technical, his stock selection requires strong fundamentals:
 
 - **Earnings growth**: Look for companies with accelerating quarterly earnings per share (EPS) growth -- e.g., 20%, then 30%, then 50% year-over-year
 - **Revenue growth**: Confirmed by top-line revenue increases, not just earnings management
 - **[[relative-strength]]**: The stock should be outperforming 90%+ of all other stocks on a 6-12 month [[relative-strength]] basis
-- This combines elements of O'Neil's [[canslim|CAN SLIM]] approach with Minervini's own empirical observations about what drives major stock advances
+- This combines elements of O'Neil's CAN SLIM approach with Minervini's own empirical observations about what drives major stock advances
 
 ### 4. Risk Management: Cut Losses Without Hesitation
 
@@ -151,7 +151,7 @@ Minervini's expected trade profile:
 - Let winning positions run as long as the [[trend]] remains intact
 - Add to winners ([[position-sizing|pyramiding]]) when the stock makes constructive consolidations after advancing
 
-This asymmetric risk/reward profile -- risking 5-8% to potentially gain 20-100%+ -- is the mathematical engine behind Minervini's compounding record. It is structurally similar to the approach used by [[william-o-neil]], [[jesse-livermore]], and other great [[momentum]] traders throughout history.
+This asymmetric risk/reward profile -- risking 5-8% to potentially gain 20-100%+ -- is the mathematical engine behind Minervini's compounding record. It is structurally similar to the approach used by william-o-neil, [[jesse-livermore]], and other great [[momentum]] traders throughout history.
 
 ## Lessons and Takeaways
 
@@ -168,14 +168,14 @@ Minervini's methodology connects to several core wiki concepts and strategies:
 
 - **[[momentum]]** and **[[momentum-trading]]** -- SEPA is fundamentally a [[momentum]] system: buy stocks that are already going up, with strong [[relative-strength]], and ride the [[trend]]
 - **[[breakout-strategies]]** -- The VCP breakout is a specific [[breakout-strategies|breakout pattern]]; Minervini is a master of timing entries at [[breakout-strategies|breakout]] points where risk is minimized
-- **[[earnings-momentum]]** -- Stock selection requires accelerating earnings growth, connecting fundamental and technical [[momentum]]
+- **earnings-momentum** -- Stock selection requires accelerating earnings growth, connecting fundamental and technical [[momentum]]
 - **[[relative-strength]]** -- One of the primary screening criteria; stocks must rank in the top 10% of [[relative-strength]] to qualify
 - **[[moving-averages]]** -- The Stage 2 template is defined entirely by [[moving-averages|moving average]] relationships (50-day, 150-day, 200-day)
 - **[[risk-management]]** -- The 5-8% maximum loss rule and [[position-sizing]] discipline are central to the methodology
 - **[[position-sizing]]** -- Precise [[position-sizing]] ensures that no single trade can cause significant portfolio damage
 - **[[technical-analysis-overview]]** -- VCP, stage analysis, and chart pattern recognition are all [[technical-analysis|technical analysis]] tools
 - **[[trading-psychology]]** -- Minervini emphasizes that cutting losses and letting winners run requires emotional discipline that most traders lack
-- **[[william-o-neil]]** -- O'Neil's [[canslim|CAN SLIM]] system is the intellectual ancestor of SEPA; Minervini refined and extended it
+- **william-o-neil** -- O'Neil's CAN SLIM system is the intellectual ancestor of SEPA; Minervini refined and extended it
 
 ## Key Quotes
 
@@ -193,15 +193,12 @@ Minervini's methodology connects to several core wiki concepts and strategies:
 - [[moving-averages]] -- the Stage 2 trend template is defined by MA relationships
 - [[risk-management]] and [[position-sizing]] -- the 5-8% stop and 1-2% portfolio risk
 - [[trading-psychology]] -- emotional discipline behind mechanical loss-cutting
-- [[william-o-neil]] / [[canslim|CAN SLIM]] -- intellectual ancestor of SEPA
 - [[jesse-livermore]] -- earlier exemplar of trend-riding momentum trading
-- [[earnings-momentum]] -- the fundamental fuel for SEPA candidates
 - [[technical-analysis-overview]] -- chart-pattern and stage-analysis toolkit
-- [[book-market-wizards]], [[book-how-to-make-money-in-stocks]] -- source texts
+- [[book-market-wizards]], book-how-to-make-money-in-stocks -- source texts
 
 ## Sources
 
 - [[book-market-wizards]] -- Jack Schwager's *Stock Market Wizards* (2001) includes an in-depth interview with Minervini covering his trading methodology and track record
-- [[book-how-to-make-money-in-stocks]] -- William O'Neil's classic, which forms the intellectual foundation for Minervini's CAN SLIM-influenced stock selection criteria
 - Minervini, Mark. *Trade Like a Stock Market Wizard* (2013) and *Think & Trade Like a Champion* (2017) -- primary statements of the SEPA methodology, Trend Template, and VCP
 - General market knowledge for biographical framing; the ~220%/year and $100k->$30M figures are self-reported via the Schwager interview and should be treated as cited testimony, not audited results

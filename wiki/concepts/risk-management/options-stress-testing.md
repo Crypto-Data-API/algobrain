@@ -89,7 +89,7 @@ Implied vol of OTM puts rises faster than ATM. A short put-skew trade (short OTM
 
 ### 6. Sector rotations and correlation regime flips
 
-For multi-name books, the dangerous scenario is **correlation going to 1**. In a normal regime, a [[long-short-equity|long-short]] book might be 30% correlated; in a crisis everything sells off together and correlation spikes to 0.9. Diversification benefits evaporate at exactly the moment they are most needed. See [[correlation-breakdown]].
+For multi-name books, the dangerous scenario is **correlation going to 1**. In a normal regime, a long-short book might be 30% correlated; in a crisis everything sells off together and correlation spikes to 0.9. Diversification benefits evaporate at exactly the moment they are most needed. See [[correlation-breakdown]].
 
 The stress version: revalue the entire equity book under "all longs −15%, all shorts −12%" — the asymmetric crash where shorts don't hedge as much as expected.
 
@@ -323,7 +323,7 @@ For most discretionary traders running portfolio-margined books, IBKR Risk Navig
 
 ## ITPM Context
 
-Anton Kreil's [[itpm|ITPM]] curriculum repeatedly emphasizes that the broker's static [[portfolio-margin|margin number]] is *not* a real risk metric — it's an arbitrary haircut the broker applies to comply with regulation. The *real* risk metric is the scenario stress test, run pre-trade and re-run daily. Specifically:
+Anton Kreil's ITPM curriculum repeatedly emphasizes that the broker's static [[portfolio-margin|margin number]] is *not* a real risk metric — it's an arbitrary haircut the broker applies to comply with regulation. The *real* risk metric is the scenario stress test, run pre-trade and re-run daily. Specifically:
 
 1. **Pre-trade stress on every new position.** No new position goes on without a worst-case scenario number computed before clicking buy. The trader has to be able to live with that number.
 2. **Daily revisit of the entire book.** Even unchanged positions get re-stressed daily because the surface and the calendar moved.

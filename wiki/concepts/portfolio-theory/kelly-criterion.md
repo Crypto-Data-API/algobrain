@@ -80,7 +80,7 @@ Kelly extends to multiple simultaneous positions. The multi-asset Kelly formula 
 
 ### Notable Practitioners
 
-- **[[ed-thorp]]** -- pioneered Kelly application in blackjack and [[convertible-arbitrage]], documented in [[a-man-for-all-markets]]
+- **[[ed-thorp]]** -- pioneered Kelly application in blackjack and convertible-arbitrage, documented in [[a-man-for-all-markets]]
 - **Warren Buffett** -- implicitly uses Kelly-like concentration when conviction is highest
 - **Jim Simons** -- [[renaissance-technologies]] reportedly uses Kelly-based sizing in its [[medallion-fund]]
 

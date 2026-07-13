@@ -49,7 +49,7 @@ Context: the snapshot was taken during an **extreme-fear** tape — the [[fear-a
 | **Fully Diluted Valuation** | ~$91.69M |
 | **Market Cap / FDV Ratio** | ~0.69 |
 
-QUBIC uses an extremely high token count (supply measured in **trillions**), which is why the unit price sits in the sub-microcent range — this is a denomination choice, not a signal in itself. The market-cap-to-FDV ratio of ~**0.69** means roughly **31% of fully-diluted value is still un-emitted**: ~61T more QUBIC remains to be minted to miners via uPoW on the way to the 200T cap, a non-trivial [[dilution|emission overhang]] that holders must out-earn. Unlike fixed-float tokens, Qubic's continuous mining emission means new supply is sold by miners to cover hardware/energy, creating persistent structural sell pressure. See [[token-unlocks]].
+QUBIC uses an extremely high token count (supply measured in **trillions**), which is why the unit price sits in the sub-microcent range — this is a denomination choice, not a signal in itself. The market-cap-to-FDV ratio of ~**0.69** means roughly **31% of fully-diluted value is still un-emitted**: ~61T more QUBIC remains to be minted to miners via uPoW on the way to the 200T cap, a non-trivial emission overhang that holders must out-earn. Unlike fixed-float tokens, Qubic's continuous mining emission means new supply is sold by miners to cover hardware/energy, creating persistent structural sell pressure. See [[token-unlocks]].
 
 ---
 

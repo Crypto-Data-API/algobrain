@@ -18,7 +18,7 @@ related: ["[[smart-money-concepts]]", "[[wyckoff-method]]", "[[support-and-resis
 
 ## Overview
 
-Supply and Demand Zone trading identifies specific price areas where **institutional orders** created significant imbalances between buyers and sellers, causing sharp price movements. Unlike traditional [[support-and-resistance]] which marks horizontal lines at previous highs and lows, supply and demand zones are **price ranges** (zones, not lines) that represent areas where large pending orders from banks, hedge funds, and other institutional participants are likely sitting unfilled. The concept was popularized by **Sam Seiden** and the Online Trading Academy, drawing on principles from the [[wyckoff-method]] and basic microeconomics. A **demand zone** is an area where institutional buyers overwhelmed sellers, creating a base before a rally -- unfilled buy orders may remain, making it a zone where price is likely to bounce. A **supply zone** is where sellers overwhelmed buyers before a price drop. The strategy is straightforward: wait for price to return to a previously established zone and enter in the direction of the original institutional move. Supply and demand analysis has become a foundational element of [[smart-money-concepts]] and is widely applied in [[forex]], [[stocks]], and [[crypto]].
+Supply and Demand Zone trading identifies specific price areas where **institutional orders** created significant imbalances between buyers and sellers, causing sharp price movements. Unlike traditional [[support-and-resistance]] which marks horizontal lines at previous highs and lows, supply and demand zones are **price ranges** (zones, not lines) that represent areas where large pending orders from banks, hedge funds, and other institutional participants are likely sitting unfilled. The concept was popularized by **Sam Seiden** and the Online Trading Academy, drawing on principles from the [[wyckoff-method]] and basic microeconomics. A **demand zone** is an area where institutional buyers overwhelmed sellers, creating a base before a rally -- unfilled buy orders may remain, making it a zone where price is likely to bounce. A **supply zone** is where sellers overwhelmed buyers before a price drop. The strategy is straightforward: wait for price to return to a previously established zone and enter in the direction of the original institutional move. Supply and demand analysis has become a foundational element of [[smart-money-concepts]] and is widely applied in [[forex]], stocks, and [[crypto]].
 
 ## How It Works
 
@@ -64,7 +64,7 @@ Supply and demand zones are created by specific price action sequences:
 - Provides specific, objective price zones for entries and exits rather than subjective judgment calls
 - Excellent risk-reward ratios: zones create tight stop-losses with wide profit targets to the opposing zone
 - Conceptually intuitive -- the idea that institutional orders create footprints that price revisits is logical and grounded in market microstructure
-- Works across all markets and timeframes, from 5-minute scalping in [[forex]] to weekly charts in [[stocks]]
+- Works across all markets and timeframes, from 5-minute scalping in [[forex]] to weekly charts in stocks
 - Complements and enhances [[smart-money-concepts]], [[wyckoff-method]], and [[fibonacci-trading]] analysis
 
 ## Disadvantages

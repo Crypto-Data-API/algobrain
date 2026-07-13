@@ -41,9 +41,6 @@ This folder does not yet contain dedicated strategy pages — swing-timeframe st
 - [[moving-average-crossover]] — Simple trend signal commonly traded on daily bars.
 - [[macd-crossover]] — Momentum crossover signal suited to multi-day holds.
 - [[rsi-divergence]] — Spotting swing reversals where price and momentum disagree.
-- [[small-cap-momentum]] — Multi-day momentum continuation in small-cap stocks.
-- [[momentum-stocks]] — Screening and riding stocks in strong momentum phases.
-- [[earnings-volatility-trading]] — Trading the multi-day move around earnings events.
 
 ### Risk Tools for Swing Trades
 

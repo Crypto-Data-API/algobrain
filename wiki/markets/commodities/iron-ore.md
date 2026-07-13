@@ -6,12 +6,12 @@ updated: 2026-06-12
 status: good
 tags: [commodities, industrial-metals, futures]
 aliases: ["Iron Ore", "62% Fe", "IODEX"]
-related: ["[[bhp]]", "[[commodities]]", "[[copper]]", "[[australian-dollar]]", "[[coal]]", "[[cme-group]]", "[[zinc]]", "[[steel]]", "[[commodities-overview]]"]
+related: ["[[commodities]]", "[[copper]]", "[[australian-dollar]]", "[[coal]]", "[[cme-group]]", "[[zinc]]", "[[steel]]", "[[commodities-overview]]"]
 ---
 
 # Iron Ore
 
-Iron ore is Australia's largest commodity export by value and a major driver of the national economy and the [[australian-dollar]]. The iron ore market is dominated by a small number of producers, with [[bhp]], Rio Tinto, and Fortescue Metals controlling a significant share of global seaborne supply. Fred discusses iron ore in the context of sector analysis and Australian market exposure, noting that iron ore price swings flow directly through to ASX materials sector earnings and broader market sentiment. China is the dominant buyer of Australian iron ore, making Chinese construction and infrastructure spending the single most important demand variable for the commodity.
+Iron ore is Australia's largest commodity export by value and a major driver of the national economy and the [[australian-dollar]]. The iron ore market is dominated by a small number of producers, with bhp, Rio Tinto, and Fortescue Metals controlling a significant share of global seaborne supply. Fred discusses iron ore in the context of sector analysis and Australian market exposure, noting that iron ore price swings flow directly through to ASX materials sector earnings and broader market sentiment. China is the dominant buyer of Australian iron ore, making Chinese construction and infrastructure spending the single most important demand variable for the commodity.
 
 ## How Iron Ore Is Traded
 
@@ -33,7 +33,7 @@ The seaborne iron ore market is dominated by four producers who collectively con
 | Company | Country | Annual Output | Notes |
 |---------|---------|--------------|-------|
 | Vale | Brazil | ~300 Mt | Largest single producer; Carajas high-grade ore |
-| [[bhp]] | Australia | ~280 Mt | Pilbara operations |
+| bhp | Australia | ~280 Mt | Pilbara operations |
 | Rio Tinto | Australia | ~330 Mt | Pilbara operations; largest by volume |
 | Fortescue | Australia | ~190 Mt | Lower grade (57-58% Fe); lowest cost |
 
@@ -77,7 +77,6 @@ The iron ore price has historically exhibited large swings: from $190/t in 2011 
 - [[steel]] — the end product driving iron ore demand
 - [[copper]] — fellow industrial commodity sensitive to China demand
 - [[coal]] — coking coal is the other key steelmaking input
-- [[bhp]] — major producer
 - [[australian-dollar]] — AUD closely correlated with iron ore prices
 - [[commodities]] — sector overview
 - [[cme-group]] — offers iron ore futures

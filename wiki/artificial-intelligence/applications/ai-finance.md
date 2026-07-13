@@ -102,7 +102,7 @@ A distinct but parallel trend: **domain-adapted small models** that outperform g
 
 ### Multimodal Models for Earnings Surprise Prediction
 
-Multimodal models combining **text transcripts, audio recordings, and presentation slides** from earnings conference calls are being applied to **earnings surprise prediction**. The **FinCall-Surprise dataset** (2,688 corporate conference calls with synchronized text, audio, and slide modalities) is the key public benchmark. Results so far: multimodal approaches outperform text-only baselines, but current LLMs still struggle with class imbalance and effective cross-modal reasoning. For traders this matters because earnings surprises drive significant single-name price moves, and any genuine edge in surprise prediction translates directly to event-driven alpha. See [[earnings-surprise-prediction]].
+Multimodal models combining **text transcripts, audio recordings, and presentation slides** from earnings conference calls are being applied to **earnings surprise prediction**. The **FinCall-Surprise dataset** (2,688 corporate conference calls with synchronized text, audio, and slide modalities) is the key public benchmark. Results so far: multimodal approaches outperform text-only baselines, but current LLMs still struggle with class imbalance and effective cross-modal reasoning. For traders this matters because earnings surprises drive significant single-name price moves, and any genuine edge in surprise prediction translates directly to event-driven alpha. See earnings-surprise-prediction.
 
 ### Multimodal AI Chip Market
 
@@ -127,7 +127,6 @@ Despite the deployment momentum, early 2026 saw a **sector rotation away from AI
 - [[2026-anthropic-blackstone-jv]]
 - [[2026-claude-opus-4-7-finance-benchmark]]
 - [[llama-fin]] — domain-adapted 8B finance LLM
-- [[earnings-surprise-prediction]] — multimodal application
 - [[2026-chatgpt-mainstream-adoption]]
 
 ## Sources

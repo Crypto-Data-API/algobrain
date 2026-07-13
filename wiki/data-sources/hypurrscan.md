@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [data-provider, crypto, defi, hyperliquid, on-chain, analytics]
 aliases: ["Hypurr Scan", "Hyperliquid Scan", "HyperliquidScan"]
-related: ["[[hyperliquid]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-vault-architecture]]", "[[hlp-cascade-alongside-playbook]]", "[[cascade-detection-signals]]", "[[options-data-sources]]"]
+related: ["[[hyperliquid]]", "[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-vault-architecture]]", "[[hlp-cascade-alongside-playbook]]", "[[cascade-detection-signals]]"]
 source_type: data
 source_url: "https://hypurrscan.io"
 confidence: high
@@ -168,7 +168,6 @@ For programmatic data pulls at scale, [[quicknode|QuickNode SQL Explorer]] is ge
 - [[defillama]] -- high-level TVL and yield aggregation
 - [[the-block]] -- broader crypto data context
 - [[dune-analytics]] -- bespoke SQL on indexed chain data
-- [[options-data-sources]] -- adjacent data-source reference
 - [[crypto-data-sources]] -- broader catalog
 
 ## Sources

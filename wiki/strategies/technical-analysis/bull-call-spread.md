@@ -13,7 +13,7 @@ backtest_status: untested
 edge_source: [analytical, risk-bearing]
 edge_mechanism: "A directional debit spread monetises a correct view that the underlying will rise to the short strike by expiry; the offsetting short call sells back some long-call vega/theta, so the edge is a directional forecast cheapened by giving up upside beyond the short strike."
 crowding_risk: low
-related: ["[[bear-put-spread]]", "[[bull-put-spread]]", "[[vertical-spreads]]", "[[leaps-strategies]]", "[[delta]]", "[[option-volatility-and-pricing]]"]
+related: ["[[bear-put-spread]]", "[[bull-put-spread]]", "[[vertical-spreads]]", "[[delta]]", "[[option-volatility-and-pricing]]"]
 ---
 
 # Bull Call Spread
@@ -59,7 +59,7 @@ Under the null (no directional edge, options priced fairly), the expected P&L of
 - **DTE**: 30–60 days. Longer expiries reduce [[theta]] drag on the long leg and give the thesis time; very short DTE amplifies [[gamma]] and time decay.
 - **Cost discipline**: pay no more than ~⅔ of the spread width as debit (so reward ≥ ~0.5× risk). Avoid spreads where the debit exceeds ~75% of width.
 - **Entry**: prefer entering when [[implied-volatility]] is low-to-moderate (cheaper long premium); a post-entry IV rise helps the position.
-- **Exit / management**: take profits at 50–75% of max profit rather than holding to expiry (avoids end-of-life [[gamma]]/[[pin-risk]]). Cut or roll if the thesis is invalidated. Close before expiry if the short leg is deep ITM near an ex-[[dividend]] date to avoid early [[assignment]].
+- **Exit / management**: take profits at 50–75% of max profit rather than holding to expiry (avoids end-of-life [[gamma]]/[[pin-risk]]). Cut or roll if the thesis is invalidated. Close before expiry if the short leg is deep ITM near an ex-dividend date to avoid early [[assignment]].
 - **Position sizing**: risk no more than 1–2% of the account on a single spread (max loss = debit paid × contracts × 100).
 
 ## Implementation pseudocode
@@ -117,7 +117,7 @@ Payoff at expiration:
 - **Cost drag is real**: each spread is two legs in and (usually) two legs out — up to four commissions and four bid/ask crossings. On a $2.20 debit, a few cents of slippage per leg is a meaningful fraction of edge. Use limit orders at the mid.
 - **Greeks**: net long [[delta]] (bullish), net long [[vega]] (a post-entry IV rise helps; IV crush after a catalyst hurts), net short [[theta]] (time decay works against you while the stock is below the long strike).
 - **No fabricated backtest**: realised performance depends entirely on the quality of the directional signal. With no edge the expectancy is roughly −costs (see Null hypothesis). Win rate tends to be moderate; the structure trades a capped, larger win for a defined loss.
-- **Assignment friction**: the short call can be assigned early near ex-[[dividend]] dates, converting the position to long stock + long call unexpectedly.
+- **Assignment friction**: the short call can be assigned early near ex-dividend dates, converting the position to long stock + long call unexpectedly.
 
 ## Capacity limits
 
@@ -156,12 +156,11 @@ Effectively unlimited for retail size on liquid underlyings (large-cap equities,
 - Max profit is capped at the spread width minus the debit -- you miss gains above the short strike
 - Requires the stock to move in your direction; [[theta]] decay works against you if the stock stays flat
 - If the stock rises only slightly, the debit may not be fully recovered
-- The sold call can be assigned early, especially near ex-[[dividend]] dates
+- The sold call can be assigned early, especially near ex-dividend dates
 
 ## See Also
 - [[bear-put-spread]] -- the bearish debit spread counterpart
 - [[bull-put-spread]] -- a bullish credit spread alternative
-- [[leaps-strategies]] -- a longer-term bullish debit approach
 - [[vertical-spreads]] -- the general family of directional spread strategies
 
 ## Sources

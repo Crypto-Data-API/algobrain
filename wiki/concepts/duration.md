@@ -78,7 +78,7 @@ Positive convexity is a benefit to the holder; callable bonds and MBS exhibit *n
 - **Interest-rate hedging.** Duration is the metric you neutralize. Matching the DV01 of a long bond position with a short futures or [[interest-rate-swap]] position immunizes a portfolio against parallel yield-curve shifts — see [[interest-rate-risk]].
 - **Immunization.** Pension funds and insurers match asset duration to liability duration so that a rate move changes both sides equally, locking in a funding ratio.
 - **Barbell vs bullet.** A barbell (short + long bonds) and a bullet (intermediate bonds) can share the same duration but differ in convexity — a positioning lever used in [[barbell-portfolio]] and [[macro-relative-value]] trades.
-- **Equity duration.** The concept extends to stocks: high-multiple growth names behave like long-duration assets because their value sits in distant cash flows, so they sell off hardest when discount rates rise. This is the link between rate moves and [[price-to-earnings|P/E]] compression.
+- **Equity duration.** The concept extends to stocks: high-multiple growth names behave like long-duration assets because their value sits in distant cash flows, so they sell off hardest when discount rates rise. This is the link between rate moves and P/E compression.
 - **Volatility of duration risk.** Aggregate Treasury-market rate volatility is tracked by the [[move-index|MOVE index]], the bond-market analogue of the VIX.
 - **Bank balance-sheet risk.** Borrowing short and lending long is a duration mismatch; the 2023 US regional-bank failures (e.g. Silicon Valley Bank) were a duration-risk event — long-duration bond holdings cratered as the [[fed-funds-rate]] rose.
 

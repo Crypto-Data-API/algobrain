@@ -9,12 +9,11 @@ aliases: ["Asset Bubble", "Speculative Bubble", "Price Bubble", "Bubbles"]
 domain: [behavioral-finance]
 prerequisites: ["[[behavioral-finance]]", "[[herding]]"]
 difficulty: intermediate
-related: ["[[herding]]", "[[market-crashes]]", "[[contrarian-investing]]", "[[meme-stocks]]", "[[poseidon-bubble]]", "[[sentiment]]", "[[volatility]]", "[[fred-mcnaught]]"]
+related: ["[[herding]]", "[[market-crashes]]", "[[meme-stocks]]", "[[poseidon-bubble]]", "[[sentiment]]", "[[volatility]]"]
 ---
 
 A market bubble occurs when asset prices rise far above any reasonable estimate of intrinsic value, driven by speculation, [[herding|herd behaviour]], easy credit, and a self-reinforcing narrative — followed by a sharp collapse when the marginal buyer disappears. Bubbles are among the most studied phenomena in [[behavioral-finance]] precisely because they recur with the same structure across centuries, instruments, and cultures despite the participants believing each time that "this time is different."
 
-[[fred-mcnaught|Fred McNaught]]: "In every boom, a dominant theme emerges that provides scope for valuations to disengage with reality — and they are always false." (Source: [[fred-sam-session-2024-01-02]])
 
 ## Anatomy of a Bubble
 
@@ -59,7 +58,7 @@ There is no reliable real-time bubble detector — Eugene Fama disputes the term
 
 ## Trading Relevance
 
-- **Contrarian framing** — extreme bubble conditions are the setup [[contrarian-investing|contrarian]] strategies seek, but timing is the killer: identifying a bubble and timing its collapse are entirely different problems.
+- **Contrarian framing** — extreme bubble conditions are the setup contrarian strategies seek, but timing is the killer: identifying a bubble and timing its collapse are entirely different problems.
 - **Riding vs fading** — trend-following and momentum profit from the boom and euphoria phases; the danger is overstaying. The asymmetry (slow grind up, violent crash down) means crash risk is poorly compensated near the top.
 - **Position sizing and leverage discipline** — bubbles destroy capital primarily through leverage and concentration. Surviving a bubble's collapse is mostly a [[risk-management|risk-management]] problem, not a forecasting one.
 - **Shorting hazards** — never short a parabola naively; borrow costs, squeezes (see [[short-squeeze]]), and "stay irrational longer than you stay solvent" dynamics mean defined-risk structures (puts) are usually safer than outright shorts.
@@ -68,16 +67,13 @@ There is no reliable real-time bubble detector — Eugene Fama disputes the term
 
 - [[herding]] — the behavioural engine of every bubble
 - [[market-crashes]] — the panic/revulsion phase
-- [[contrarian-investing]] — the strategy that fades extremes
 - [[meme-stocks]] — modern social-media-driven micro-bubbles
 - [[poseidon-bubble]] — the canonical Australian mining bubble
 - [[overconfidence-bias]] — drives late-stage participation
 - [[sentiment]] — measuring crowd euphoria
-- [[fred-mcnaught]] — on the false narrative at the centre of every boom
 
 ## Sources
 
-- (Source: [[fred-sam-session-2024-01-02]]) — Fred McNaught on dominant boom themes that "disengage with reality"
 - Kindleberger, C. & Aliber, R. *Manias, Panics, and Crashes: A History of Financial Crises* — the Minsky/Kindleberger five-stage model
 - Minsky, H. (1986). *Stabilizing an Unstable Economy* — the financial instability hypothesis
 - Shiller, R. (2000). *Irrational Exuberance* — valuation-based bubble identification and the CAPE ratio

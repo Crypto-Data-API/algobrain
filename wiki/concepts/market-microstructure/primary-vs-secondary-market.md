@@ -7,29 +7,29 @@ status: review
 tags: [market-microstructure, stocks, valuation]
 aliases: ["Primary vs Secondary Market", "Primary Market", "Secondary Market", "Primary vs Secondary", "Capital Markets (Primary and Secondary)"]
 domain: [market-microstructure]
-prerequisites: ["[[stocks]]", "[[ipo]]"]
+prerequisites: []
 difficulty: beginner
-related: ["[[ipo]]", "[[stocks]]", "[[nyse]]", "[[nasdaq]]", "[[etf]]", "[[market-maker]]", "[[liquidity]]", "[[capital-raise]]", "[[short-selling]]"]
+related: ["[[etf]]", "[[market-maker]]", "[[liquidity]]", "[[short-selling]]"]
 ---
 
-Securities markets split into two stages. The **primary market** is where a security is **created and sold for the first time** — the issuer (a company or government) sells new shares or bonds directly to investors and **receives the proceeds**. The **secondary market** is where those *already-issued* securities are subsequently **traded among investors** — the exchange you watch every day — and the issuing company is **not a party** and gets none of the money. An [[ipo|IPO]] is a primary-market event; every trade in that stock afterwards happens in the secondary market.
+Securities markets split into two stages. The **primary market** is where a security is **created and sold for the first time** — the issuer (a company or government) sells new shares or bonds directly to investors and **receives the proceeds**. The **secondary market** is where those *already-issued* securities are subsequently **traded among investors** — the exchange you watch every day — and the issuing company is **not a party** and gets none of the money. An IPO is a primary-market event; every trade in that stock afterwards happens in the secondary market.
 
 ## The primary market: where securities are born
 
 In the primary market the **issuer raises capital**. The cash flows from investors *to the company or government*. Common primary-market transactions:
 
-- **[[ipo|Initial Public Offering (IPO)]]** — a private company sells shares to the public for the first time, underwritten by investment banks and registered with the SEC via an S-1 prospectus.
+- **Initial Public Offering (IPO)** — a private company sells shares to the public for the first time, underwritten by investment banks and registered with the SEC via an S-1 prospectus.
 - **Follow-on / secondary offering (FPO)** — an already-public company issues *additional* new shares to raise more capital (this dilutes existing holders).
 - **Rights issue** — new shares offered first to existing shareholders, usually at a discount.
 - **Private placement** — securities sold directly to a small group of institutional or accredited investors without a public offering.
-- **Bond issuance** — a government or corporation sells new debt; the [[capital-raise|capital raised]] funds the issuer.
-- **DRP share issuance** — shares newly issued to fund a [[drp|dividend reinvestment plan]] are a small, continuous primary-market activity.
+- **Bond issuance** — a government or corporation sells new debt; the capital raised funds the issuer.
+- **DRP share issuance** — shares newly issued to fund a dividend reinvestment plan are a small, continuous primary-market activity.
 
 ## The secondary market: where investors trade with each other
 
 Once a security exists, it trades on the secondary market. Here the cash flows **between investors**, not to the issuer:
 
-- **Stock exchanges** — [[nyse|NYSE]], [[nasdaq|Nasdaq]], [[asx|ASX]] — the lit, order-driven venues where most retail and institutional trading happens.
+- **Stock exchanges** — NYSE, Nasdaq, ASX — the lit, order-driven venues where most retail and institutional trading happens.
 - **Over-the-counter (OTC)** and **dealer markets** — bonds and many smaller stocks trade dealer-to-dealer rather than on a central limit order book.
 - **Alternative venues** — dark pools and ECNs route secondary-market flow off the primary exchange.
 
@@ -62,26 +62,21 @@ Many IPOs are a mix: some **primary shares** (new, company raises money) bundled
 - **Capital formation vs liquidity.** Companies only raise money in the primary market; the secondary market never funds the business directly. But a deep, liquid secondary market is what *makes the primary market work* — investors will only buy new issues if they trust they can sell later.
 - **Dilution.** Primary issuance (IPO, follow-on, rights issue) increases the share count and can dilute existing holders; pure secondary-market trading does not change shares outstanding.
 - **Signal value.** A company tapping the primary market repeatedly may be funding growth — or struggling to self-fund. Heavy insider selling in a *secondary* offering is a different signal from a company raising fresh growth capital.
-- **Price discovery feeds issuance.** The secondary-market price is the reference point for pricing the next primary offering, rights issue, or [[capital-raise|capital raise]].
+- **Price discovery feeds issuance.** The secondary-market price is the reference point for pricing the next primary offering, rights issue, or capital raise.
 
 ## Practical takeaways for dashboard users
 
 - Every price on the dashboard is a **secondary-market** price — the company does not receive that money.
-- An **[[ipo|IPO]]** or **follow-on** is the only time the company itself raises cash from selling stock.
+- An **IPO** or **follow-on** is the only time the company itself raises cash from selling stock.
 - A **"secondary offering"** can be dilutive (new company shares) **or** non-dilutive (insiders selling) — check which, because the implications differ.
 - Deep secondary-market **[[liquidity]]** is what lets you enter and exit a position cheaply at the quoted [[bid-ask-spread|spread]].
 
 ## Related
 
-- [[ipo]] — the headline primary-market event
-- [[capital-raise]] — primary-market issuance of equity or debt
-- [[stocks]] — the security traded in both markets
-- [[nyse]] / [[nasdaq]] — secondary-market exchanges
 - [[etf]] — secondary trading plus primary-style creation/redemption
 - [[liquidity]] — the secondary market's core function
 - [[market-maker]] — provides secondary-market liquidity
 - [[short-selling]] — only possible in the secondary market
-- [[drp]] — small continuous primary-market share issuance
 
 ## Sources
 

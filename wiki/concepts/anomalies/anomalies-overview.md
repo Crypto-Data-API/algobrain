@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [anomalies, factors, academic-research, alpha]
 aliases: ["Anomalies Library", "Market Inefficiencies"]
-related: ["[[edge-taxonomy]]", "[[strategy-development-overview]]", "[[momentum-anomaly]]", "[[value-anomaly]]", "[[low-volatility-anomaly]]", "[[post-earnings-announcement-drift]]"]
+related: ["[[edge-taxonomy]]", "[[strategy-development-overview]]", "[[momentum-anomaly]]", "[[value-anomaly]]", "[[low-volatility-anomaly]]"]
 ---
 
 # Market Anomalies
@@ -50,10 +50,10 @@ These rank stocks at a point in time and go long the top, short the bottom of a 
 | [[low-volatility-anomaly]] | Low-vol stocks have higher risk-adjusted returns | Haugen & Heins 1972; Frazzini & Pedersen 2014 | Structural (leverage constraints) | Robust |
 | [[size-anomaly]] | Small caps outperform large caps | Banz 1981 | Risk / structural | Heavily decayed |
 | [[quality-anomaly]] | Profitable, stable firms outperform | Novy-Marx 2013 | Analytical | Robust |
-| [[investment-anomaly]] | Firms that invest less outperform | Cooper, Gulen, Schill 2008 | Behavioral | Moderate |
-| [[accruals-anomaly]] | Firms with low accruals outperform | Sloan 1996 | Informational | Decayed post-publication |
-| [[net-share-issuance]] | Issuers underperform; buyers-back outperform | Pontiff & Woodgate 2008 | Informational | Moderate |
-| [[asset-growth-anomaly]] | Low asset-growth firms outperform | Cooper, Gulen, Schill 2008 | Behavioral | Moderate |
+| investment-anomaly | Firms that invest less outperform | Cooper, Gulen, Schill 2008 | Behavioral | Moderate |
+| accruals-anomaly | Firms with low accruals outperform | Sloan 1996 | Informational | Decayed post-publication |
+| net-share-issuance | Issuers underperform; buyers-back outperform | Pontiff & Woodgate 2008 | Informational | Moderate |
+| asset-growth-anomaly | Low asset-growth firms outperform | Cooper, Gulen, Schill 2008 | Behavioral | Moderate |
 | [[idiosyncratic-volatility-anomaly]] | Low idiosyncratic-vol stocks outperform | Ang et al. 2006 | Behavioral | Contested |
 
 ### Time-Series Equity Anomalies
@@ -62,7 +62,7 @@ These are calendar or event-conditioned regularities in aggregate or single-name
 
 | Anomaly | Claim | Original paper | Edge category | Viability |
 |---------|-------|----------------|---------------|-----------|
-| [[post-earnings-announcement-drift]] | Prices drift toward earnings surprise for 60+ days | Bernard & Thomas 1989 | Behavioral / informational | Survives in small caps |
+| post-earnings-announcement-drift | Prices drift toward earnings surprise for 60+ days | Bernard & Thomas 1989 | Behavioral / informational | Survives in small caps |
 | [[january-effect]] | Small caps outperform in January | Keim 1983 | Structural (tax-loss) | Largely decayed |
 | [[turn-of-month-effect]] | Returns concentrate at last/first trading days | Ariel 1987 | Structural (flows) | Partially persistent |
 | [[fomc-drift]] | Returns concentrate in 24h pre-FOMC | Lucca & Moench 2015 | Structural / informational | Persistent, capacity-limited |
@@ -93,7 +93,7 @@ Rooted in systematic investor psychology and sentiment cycles (see [[behavioral-
 | [[investor-sentiment]] | High sentiment predicts low future returns | Baker & Wurgler 2006 | Behavioral | Persistent |
 | [[lottery-stock-anomaly]] | Lottery-payoff stocks underperform | Bali, Cakici, Whitelaw 2011 | Behavioral | Persistent |
 | [[max-anomaly]] | High max-daily-return stocks underperform next month | Bali et al. (related) | Behavioral | Persistent |
-| [[ipo-underperformance]] | IPOs underperform market in years 1-5 | Ritter 1991; Loughran & Ritter 1995 | Behavioral | Persistent |
+| ipo-underperformance | IPOs underperform market in years 1-5 | Ritter 1991; Loughran & Ritter 1995 | Behavioral | Persistent |
 
 ### Structural / Microstructure
 
@@ -163,7 +163,7 @@ The same anomalies, re-indexed by the [[edge-taxonomy|six edge categories]] — 
 |---------------|---------------------|--------------------------|
 | **Behavioral** | Systematic investor psychology | [[momentum-anomaly]], [[overreaction-anomaly]], [[disposition-effect]], [[lottery-stock-anomaly]] |
 | **Structural** | Constraints, mandates, predictable flows | [[low-volatility-anomaly]], [[index-inclusion-effect]], [[rebalancing-flows]], [[fomc-drift]] |
-| **Informational** | Slow diffusion of public/private info | [[post-earnings-announcement-drift]], [[short-interest-anomaly]], [[accruals-anomaly]] |
+| **Informational** | Slow diffusion of public/private info | post-earnings-announcement-drift, [[short-interest-anomaly]], accruals-anomaly |
 | **Analytical** | Superior modeling of fundamentals | [[quality-anomaly]], [[value-anomaly]] (partly) |
 | **Risk-bearing** | Compensation for bearing genuine risk | [[carry-anomaly]], [[volatility-risk-premium]], [[crash-fear-premium]], [[term-premium-anomaly]] |
 | **Latency** | Speed advantage (HFT) | Mostly outside this catalog; see [[market-microstructure-overview]] |

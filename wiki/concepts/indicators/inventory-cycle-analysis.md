@@ -49,7 +49,7 @@ Traders compare actual releases against the **Bloomberg/Reuters consensus survey
 | **API Weekly Statistical Bulletin** | American Petroleum Institute | Tuesday 4:30 PM ET | Weekly | Crude, products (used as preview of EIA) |
 | **Short-Term Energy Outlook (STEO)** | [[eia]] | Monthly | Monthly | All energy commodities |
 | **IEA Oil Market Report** | International Energy Agency | Monthly | Monthly | Global crude supply/demand outlook |
-| **OPEC Monthly Oil Market Report** | [[opec]] | Monthly | Monthly | Crude oil, OPEC production compliance |
+| **OPEC Monthly Oil Market Report** | opec | Monthly | Monthly | Crude oil, OPEC production compliance |
 
 The **EIA weekly petroleum report** is one of the most market-moving data releases in all of commodities. Key components include:
 - U.S. crude oil inventories (headline number)

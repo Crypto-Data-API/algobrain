@@ -30,7 +30,7 @@ The float is the number of a company's shares that are available for public trad
 
 For example, a company with 100 million shares outstanding where insiders hold 40 million has a float of 60 million shares.
 
-The restricted bucket that is subtracted typically includes: founder, officer, and director holdings; large strategic or controlling blocks (often defined as holders of >5%); shares still under lock-up after an IPO; and ESOP/treasury shares. As lock-ups expire or insiders sell, the float *grows* — an event that can pressure price by increasing tradeable supply. Conversely, [[stock-buybacks|buybacks]] and new insider accumulation *shrink* the float.
+The restricted bucket that is subtracted typically includes: founder, officer, and director holdings; large strategic or controlling blocks (often defined as holders of >5%); shares still under lock-up after an IPO; and ESOP/treasury shares. As lock-ups expire or insiders sell, the float *grows* — an event that can pressure price by increasing tradeable supply. Conversely, buybacks and new insider accumulation *shrink* the float.
 
 ## Why Float Matters
 

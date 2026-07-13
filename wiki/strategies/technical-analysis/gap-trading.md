@@ -21,7 +21,6 @@ related:
   - "[[volume]]"
   - "[[vwap]]"
   - "[[gap-risk]]"
-  - "[[earnings-calendar]]"
   - "[[trend]]"
   - "[[mean-reversion]]"
   - "[[stop-loss]]"
@@ -114,7 +113,6 @@ def classify_gap(bar, prev_close, avg_volume, has_catalyst, trend, level_context
 - The **opening range** (first 5–15 minutes) for breakout/failure triggers
 - [[vwap]] as the intraday line in the sand between buyers and sellers
 - [[support-and-resistance]] and [[trend]] context to locate the gap
-- [[earnings-calendar]] and a news feed to know whether a real catalyst exists
 - [[atr]] for stop and target sizing
 
 ## Example trade
@@ -145,7 +143,7 @@ Pause or revise the approach if: the win rate on *classified* setups deteriorate
 
 - Requires fast, disciplined execution and accurate gap classification; unforgiving of hesitation.
 - The "gaps always fill" myth lures beginners into fading strong trends — a classic blow-up.
-- Heavily reliant on pre-market data, news/[[earnings-calendar]] awareness, and tight spreads.
+- Heavily reliant on pre-market data, news/earnings-calendar awareness, and tight spreads.
 - Crowded and partly automated; the easy version of the edge is largely arbitraged.
 
 ## Related
@@ -155,7 +153,6 @@ Pause or revise the approach if: the win rate on *classified* setups deteriorate
 - [[support-and-resistance]] / [[trend]] — context that determines fade vs follow
 - [[vwap]] — the key intraday reference line for gap setups
 - [[volume]] — the primary filter separating real gaps from noise
-- [[earnings-calendar]] — the most common gap catalyst
 - [[mean-reversion]] — the logic behind the gap-fill side of the trade
 - [[opening-range-breakout]] — closely related intraday execution method
 

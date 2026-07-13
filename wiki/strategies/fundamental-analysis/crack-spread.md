@@ -57,7 +57,7 @@ The spread is expressed in dollars per barrel, representing the gross refining m
 - **Refinery utilization rates:** Low utilization (maintenance season, outages) reduces product supply, widening the crack spread.
 - **Inventory reports:** Weekly [[eia-data|EIA petroleum status report]] ([[crude-oil|crude]] inventories vs. product inventories) — see [[inventory-cycle-analysis]].
 - **Seasonal demand:** [[gasoline|Gasoline]] demand peaks in summer (driving season). [[heating-oil|Heating oil]] demand peaks in winter.
-- **[[crude-oil|Crude oil]] supply shocks:** [[opec|OPEC]] decisions, [[geopolitical-risk-premium|geopolitical disruptions]] (sanctions, wars) affect crude more than products.
+- **[[crude-oil|Crude oil]] supply shocks:** OPEC decisions, [[geopolitical-risk-premium|geopolitical disruptions]] (sanctions, wars) affect crude more than products.
 - **Regulatory changes:** IMO 2020 shipping fuel rules dramatically affected distillate crack spreads.
 
 ## Example

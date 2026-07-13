@@ -47,7 +47,7 @@ Each link adds [[leverage]] because the same collateral supports new credit at e
 ## Regulatory Limits
 
 - **United States:** SEC Rule 15c3-3 caps a broker-dealer's rehypothecation of customer securities at **140% of the customer's debit balance** (the amount the customer actually owes). Fully paid-for securities cannot be rehypothecated at all without explicit consent.
-- **United Kingdom / pre-2008:** UK rules historically imposed **no statutory cap**, allowing intermediaries to rehypothecate client assets without limit. This jurisdictional gap was central to the [[lehman-brothers|Lehman]] failure.
+- **United Kingdom / pre-2008:** UK rules historically imposed **no statutory cap**, allowing intermediaries to rehypothecate client assets without limit. This jurisdictional gap was central to the Lehman failure.
 
 ## The Lehman Brothers Example
 

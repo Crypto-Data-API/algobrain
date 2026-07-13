@@ -8,7 +8,7 @@ tags: [crypto, defi, machine-learning, ai-trading, prediction-markets]
 aliases: ["Prediction Markets AI", "AI Prediction Markets", "LLM Prediction Markets"]
 domain: [market-microstructure]
 difficulty: intermediate
-related: ["[[olas]]", "[[ai-trading-agents]]", "[[ai-oracles]]", "[[defai]]", "[[nlp-sentiment-analysis]]", "[[llm-market-analysis]]", "[[decentralized-ai]]", "[[polymarket]]", "[[kalshi]]", "[[prediction-markets]]", "[[prediction-market-strategies]]", "[[palantir-technologies]]"]
+related: ["[[olas]]", "[[ai-trading-agents]]", "[[ai-oracles]]", "[[defai]]", "[[nlp-sentiment-analysis]]", "[[llm-market-analysis]]", "[[decentralized-ai]]", "[[polymarket]]", "[[kalshi]]", "[[prediction-markets]]", "[[prediction-market-strategies]]"]
 ---
 
 # AI and Prediction Markets
@@ -88,7 +88,7 @@ A notable Reddit/algotrading experiment ran 60 days of live paper trading using 
 **Strategy Arena** pitted 9 AI models (Claude, Grok, ChatGPT, Gemini, DeepSeek, Perplexity, and others) against Polymarket human odds on 49 active crypto markets simultaneously. Each AI voted with a conviction percentage, and virtual P&L was tracked against Polymarket prices. Early results confirm the same pattern: AI models outperform on quantitative price threshold markets while lagging on event-based questions requiring real-world context.
 
 ### Palantir × Polymarket Integrity Partnership
-In March 2026, [[polymarket|Polymarket]] partnered with [[palantir-technologies|Palantir Technologies]] and TWG AI to develop a "next-generation sports integrity platform" using the **Vergence AI engine**. The system monitors trades in real-time, detects unusual market behaviors, coordinated manipulation, and insider trading, while supporting regulatory compliance reporting. This marks the deployment of enterprise AI specifically to protect prediction market integrity — a significant maturation signal for the category.
+In March 2026, [[polymarket|Polymarket]] partnered with Palantir Technologies and TWG AI to develop a "next-generation sports integrity platform" using the **Vergence AI engine**. The system monitors trades in real-time, detects unusual market behaviors, coordinated manipulation, and insider trading, while supporting regulatory compliance reporting. This marks the deployment of enterprise AI specifically to protect prediction market integrity — a significant maturation signal for the category.
 
 ### Active AI Markets on Polymarket
 As of April 2026, Polymarket hosts **133 active LLM/AI-specific prediction markets** with over **$15 million in combined trading volume**. These include markets on:

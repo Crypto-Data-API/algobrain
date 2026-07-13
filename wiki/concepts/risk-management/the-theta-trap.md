@@ -275,5 +275,4 @@ The trap is the trader confusing the ensemble average for the time average. The 
 - [[vix-august-2024-spike]] — Aug 5 2024 episode write-up
 - [[itpm-trading-philosophy]] — the worldview from which the diagnostic and exit playbook are drawn
 - [[book-option-volatility-and-pricing]] — Natenberg on the gamma/theta trade-off underlying mode 1
-- [[tastytrade]] — published research on realisation ratios and front-cycle decay
 - *Various r/options, r/thetagang, FinTwit post-mortems* — primary-source accounts of trader-level damage in each episode

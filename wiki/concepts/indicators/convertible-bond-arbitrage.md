@@ -6,14 +6,14 @@ updated: 2026-06-22
 status: excellent
 tags: [arbitrage, fixed-income, hedge-funds, quantitative]
 aliases: ["Convertible Arb", "Convert Arb"]
-related: ["[[convertible-arbitrage]]", "[[convertible-bonds]]", "[[arbitrage]]", "[[ed-thorp]]", "[[ken-griffin]]", "[[citadel]]", "[[delta-neutral]]", "[[delta-hedging]]", "[[hedging]]", "[[options]]", "[[liquidity-risk]]"]
+related: ["[[convertible-bonds]]", "[[arbitrage]]", "[[ed-thorp]]", "[[ken-griffin]]", "[[citadel]]", "[[delta-neutral]]", "[[delta-hedging]]", "[[hedging]]", "[[options]]", "[[liquidity-risk]]"]
 domain: [derivatives, quantitative]
 difficulty: advanced
 ---
 
 Convertible bond arbitrage is a hedge fund strategy that involves buying underpriced [[convertible-bonds|convertible bonds]] and shorting the underlying stock to isolate and profit from the embedded conversion option. The strategy seeks to capture the difference between the bond's market price and its theoretical value while maintaining a [[delta-neutral]] position (via [[delta-hedging]]) that eliminates directional stock risk. It was one of the earliest quantitative hedge fund strategies, pioneered by [[ed-thorp]] in the 1960s and later adopted by traders like [[ken-griffin]], who founded [[citadel]] on the back of convertible arb profits.
 
-> **Scope note.** This page covers the *mechanics and risk profile* of the trade. For the catalogued strategy entry — edge taxonomy, null hypothesis, kill criteria, capacity, and lifecycle — see the strategy page **[[convertible-arbitrage]]**. This page complements rather than duplicates it.
+> **Scope note.** This page covers the *mechanics and risk profile* of the trade. For the catalogued strategy entry — edge taxonomy, null hypothesis, kill criteria, capacity, and lifecycle — see the strategy page **convertible-arbitrage**. This page complements rather than duplicates it.
 
 ## Overview
 
@@ -78,8 +78,8 @@ The trade *loses* if implied vol collapses (vega), the issuer's credit deteriora
 
 Convertible arb is a textbook case of a "crowded carry" trade whose risks materialize all at once:
 
-- **2005 — the GM/Ford downgrade shock.** A wave of capital had crowded into convertible arb in 2003-04, compressing the edge. In May 2005, [[gm|General Motors]] and Ford were downgraded to junk *at the same time* that GM's stock rallied on a takeover rumor (Kirk Kerkorian's bid). Arbitrageurs were typically long GM credit (via the convert) and short GM equity — so both legs moved against them simultaneously. Forced de-leveraging caused a sharp, self-reinforcing drawdown across the strategy, an early lesson that the "delta-neutral" trade still carries large, correlated credit and crowding risk.
-- **2008 — the deleveraging cascade.** Convertible arb was one of the worst-hit hedge fund strategies in the [[2008-global-financial-crisis]]. Three forces hit together: (1) prime brokers cut [[leverage]] and pulled financing after the [[lehman-brothers]] failure; (2) short-selling bans on financials in September 2008 broke the equity hedge leg; and (3) [[liquidity-risk|liquidity]] in convertible bonds evaporated, so bonds gapped to deep discounts to theoretical value with no buyers. Convertible arb funds fell roughly 30-50% in 2008 — a [[liquidity-spiral|liquidity spiral]] in which funding stress forced fire-sales into a market with no bid. The trade snapped back hard in 2009 as bonds re-converged, rewarding survivors who could hold through the dislocation.
+- **2005 — the GM/Ford downgrade shock.** A wave of capital had crowded into convertible arb in 2003-04, compressing the edge. In May 2005, General Motors and Ford were downgraded to junk *at the same time* that GM's stock rallied on a takeover rumor (Kirk Kerkorian's bid). Arbitrageurs were typically long GM credit (via the convert) and short GM equity — so both legs moved against them simultaneously. Forced de-leveraging caused a sharp, self-reinforcing drawdown across the strategy, an early lesson that the "delta-neutral" trade still carries large, correlated credit and crowding risk.
+- **2008 — the deleveraging cascade.** Convertible arb was one of the worst-hit hedge fund strategies in the [[2008-global-financial-crisis]]. Three forces hit together: (1) prime brokers cut [[leverage]] and pulled financing after the lehman-brothers failure; (2) short-selling bans on financials in September 2008 broke the equity hedge leg; and (3) [[liquidity-risk|liquidity]] in convertible bonds evaporated, so bonds gapped to deep discounts to theoretical value with no buyers. Convertible arb funds fell roughly 30-50% in 2008 — a [[liquidity-spiral|liquidity spiral]] in which funding stress forced fire-sales into a market with no bid. The trade snapped back hard in 2009 as bonds re-converged, rewarding survivors who could hold through the dislocation.
 
 Both episodes illustrate the strategy's core hidden risks: it looks market-neutral on paper but is short liquidity, long credit, and vulnerable to crowding and forced deleveraging.
 
@@ -94,12 +94,11 @@ Both episodes illustrate the strategy's core hidden risks: it looks market-neutr
 
 - **As a diversifying sleeve.** Allocators add convertible arb for its low correlation to long-only equity and bonds, accepting that the diversification *fails in liquidity crises* (2005, 2008) — the price of the carry.
 - **With explicit credit hedging.** Modern desks strip out issuer credit with CDS so the position is cleaner long-gamma/long-vega, rather than implicitly long credit.
-- **Capacity-aware sizing.** Because the edge compresses as capital crowds in and the strategy is short liquidity, disciplined desks size to what they can *exit*, not what they can buy — see [[liquidity-risk]] and the strategy page [[convertible-arbitrage]] for capacity limits and kill criteria.
+- **Capacity-aware sizing.** Because the edge compresses as capital crowds in and the strategy is short liquidity, disciplined desks size to what they can *exit*, not what they can buy — see [[liquidity-risk]] and the strategy page convertible-arbitrage for capacity limits and kill criteria.
 - **As a primary-issuance play.** New convertible issues frequently come cheap (issuers pay an underpricing concession), so arbitrageurs are anchor buyers of new deals and hedge the equity at launch.
 
 ## Related
 
-- [[convertible-arbitrage]] — the catalogued strategy entry (edge taxonomy, capacity, kill criteria)
 - [[convertible-bonds]] — the instrument itself
 - [[arbitrage]] — broader category of strategies exploiting price discrepancies
 - [[delta-neutral]], [[delta-hedging]] — the hedging approach central to convertible arb

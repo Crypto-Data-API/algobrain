@@ -57,8 +57,8 @@ The same edge can be harvested by many strategies; this crosswalk routes from th
 |---|---|---|
 | Behavioral | Predictable human error / overreaction | [[momentum-investing]], [[mean-reversion]], [[sentiment-trading]], [[social-arbitrage]] |
 | Structural | Rules, flows, constraints of other participants | [[premium-selling-systematic]], [[leveraged-etf-rebalancing]], [[stat-arb]], [[managed-futures]] |
-| Informational | Knowing something sooner or processing it better | [[news-trading]], [[alternative-data-alpha]], [[earnings-volatility-trading]] |
-| Analytical | Superior modeling of the same public data | [[equity-long-short]], [[macro-relative-value]], [[cta-strategies]] |
+| Informational | Knowing something sooner or processing it better | [[news-trading]], [[alternative-data-alpha]], earnings-volatility-trading |
+| Analytical | Superior modeling of the same public data | equity-long-short, [[macro-relative-value]], [[cta-strategies]] |
 | Latency | Being faster to act | [[arbitrage-overview]], [[conversion-reversal-arbitrage]] |
 | Risk-bearing | Being paid to hold risk others shed | [[short-volatility-strategies]], [[cash-secured-puts]], [[stablecoin-yield]] |
 
@@ -122,7 +122,6 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 - [[itpm-ratio-calendar-spread]] — ITPM's institutional take on the ratio calendar
 - [[put-tree]] — Multi-strike put structure for cheap downside convexity
 - [[leaps]] — Long-dated options as stock substitutes
-- [[leaps-strategy]] — Companion page on LEAPS-based portfolio strategies
 - [[long-straddle]] — Buying call + put to profit from a large move either way
 
 ### Options — Hedging & Volatility
@@ -130,7 +129,6 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 - [[protective-puts]] — Insuring stock positions with bought puts
 - [[options-hedging]] — Survey of options-based hedging techniques
 - [[hedging-strategies]] — Broader hedging survey across instruments
-- [[spx-puts]] — Index put protection for equity portfolios
 - [[vix-calls]] — Tail protection via VIX call options
 - [[vix-call-spreads]] — Cheaper defined-cost tail hedges with VIX spreads
 - [[5-percent-otm-put-overlay]] — Systematic 5% OTM put protection overlay
@@ -138,8 +136,6 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 - [[long-volatility-strategies]] — Strategies that profit when volatility rises
 - [[short-volatility-strategies]] — Strategies that harvest the volatility risk premium
 - [[volatility-trading]] — Trading volatility as an asset class
-- [[earnings-volatility-trading]] — Positioning around earnings-driven IV swings
-- [[earnings-iv-crush]] — Trading the post-earnings collapse in implied volatility
 - [[delta-hedging]] — Neutralizing directional exposure to isolate other Greeks
 - [[gamma-scalping]] — Monetizing realized volatility around a delta-hedged options position
 - [[conversion-reversal-arbitrage]] — Locking in mispricing between synthetic and actual stock
@@ -150,9 +146,6 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 - [[dca-strategy]] — Dollar-cost averaging into positions on a fixed schedule
 - [[value-averaging]] — Path-dependent contribution sizing targeting a value growth path
 - [[momentum-investing]] — Buying recent winners; one of the most robust documented anomalies
-- [[momentum-stocks]] — Stock-level momentum selection and management
-- [[small-cap-momentum]] — Momentum applied to the small-cap universe
-- [[equity-long-short]] — Long undervalued / short overvalued equity books
 - [[range-trading]] — Buying support and selling resistance in sideways markets
 - [[leveraged-etf-rebalancing]] — Exploiting (or avoiding) volatility decay in leveraged ETFs
 - [[triple-screen-system]] — Elder's multi-timeframe filter combining trend and oscillator signals
@@ -176,14 +169,8 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 
 ### Thematic & AI-Cycle Theses
 
-- [[ai-recession-playbook]] — Positioning for an AI-driven economic downturn
-- [[ai-sector-rotation-energy-hedge]] — AI beneficiaries long vs energy-constraint hedges
 - [[crypto-ai-recession-shorts]] — Short candidates in crypto under an AI-recession scenario
-- [[white-collar-ai-displacement-short]] — Shorting sectors exposed to white-collar AI displacement
-- [[tech-hub-muni-bond-short]] — Shorting municipal credit of AI-disrupted metro economies
-- [[mythos-capability-overhang-vol]] — Volatility positioning around AI capability-release shocks
 - [[mythos-release-window-exploit-short]] — Shorting into AI model release windows (Hyperliquid perps)
-- [[glasswing-partner-long-basket]] — Long basket of named AI-infrastructure partners
 
 ### Risk & Process
 

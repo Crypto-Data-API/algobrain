@@ -122,7 +122,7 @@ if naked_poc_above_or_below():
 - [[volume-profile-shapes]] to classify the day type and pick the right setup.
 - [[cumulative-volume-delta|CVD]] and the [[footprint-chart]] for confirmation (absorption vs initiative).
 - [[vwap]] as a complementary dynamic fair-value reference alongside the static POC.
-- Tick or volumetric-bar data; platforms: [[sierra-chart]], [[ninjatrader]], [[quantower]], [[bookmap]], [[tradingview]].
+- Tick or volumetric-bar data; platforms: [[sierra-chart]], [[ninjatrader]], quantower, bookmap, tradingview.
 
 ## Example trade
 
@@ -147,7 +147,7 @@ The same levels apply wherever genuine volume is published, but the practicaliti
 | Market | Volume quality | Session convention | Notes |
 |--------|---------------|--------------------|-------|
 | Index [[futures]] (ES, NQ) | Excellent (true exchange volume) | Clean RTH/ETH split | The canonical home of the technique; [[market-profile]] originated here |
-| Large-cap [[stocks]] | Good (consolidated tape) | Regular session | Watch for off-exchange/dark prints distorting the histogram |
+| Large-cap stocks | Good (consolidated tape) | Regular session | Watch for off-exchange/dark prints distorting the histogram |
 | Crypto perpetuals | Mixed — risk of [[wash-trading]] | None natural (24/7) | Arbitrary daily cut produces arbitrary POC/value; use UTC or exchange convention consistently |
 | FX spot | Poor (no central tape) | Decentralized | Tick volume is a proxy, not true traded volume; profile is unreliable |
 

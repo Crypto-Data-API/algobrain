@@ -8,7 +8,7 @@ tags: [options, education, person]
 entity_type: person
 aliases: ["Thomas Sosnoff", "Sosnoff"]
 website: "https://www.tastylive.com"
-related: ["[[options]]", "[[iron-condor]]", "[[credit-spread]]", "[[iron-butterfly]]", "[[theta]]", "[[implied-volatility]]", "[[tastytrade]]"]
+related: ["[[options]]", "[[iron-condor]]", "[[credit-spread]]", "[[iron-butterfly]]", "[[theta]]", "[[implied-volatility]]"]
 ---
 
 Tom Sosnoff is an American entrepreneur, options trader, and financial media personality who has had an outsized influence on how retail traders approach [[options]] selling strategies. He co-founded the thinkorswim trading platform (sold to TD Ameritrade in 2009 in a deal announced at roughly $606 million, often cited at up to $750 million including stock appreciation at closing), created the tastytrade media network (now tastylive), and launched the tastyworks brokerage (now tastytrade brokerage). His core philosophy -- that selling [[options]] premium systematically with defined risk is the highest-probability approach for retail traders -- has shaped an entire generation of options traders. In September 2025 he stepped down after 15 years leading tastylive, remaining a shareholder and consultant while launching a new AI venture, Lossdog.

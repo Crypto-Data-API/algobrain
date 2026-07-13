@@ -246,7 +246,7 @@ The ITPM curriculum spends more time on the *adherence* skill (holding 3:1 trade
 - [[bull-call-spread]] / [[risk-reversal]] / [[diagonal-spread]] / [[ratio-spread]] — common expressions
 - [[capital-preservation]] — the first tenet, complementary to this one
 - [[risk-of-ruin]] — the failure mode positive skew protects against
-- [[anton-kreil]] / [[itpm]] — primary articulators
+- [[anton-kreil]] / itpm — primary articulators
 
 ## Sources
 

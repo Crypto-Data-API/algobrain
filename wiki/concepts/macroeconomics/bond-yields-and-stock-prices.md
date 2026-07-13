@@ -14,14 +14,10 @@ related:
   - "[[interest-rates]]"
   - "[[equity-risk-premium]]"
   - "[[yield-curve]]"
-  - "[[earnings-yield]]"
   - "[[treasuries]]"
   - "[[treasury-bonds]]"
   - "[[bonds]]"
-  - "[[stocks]]"
   - "[[duration]]"
-  - "[[interest-rate-sensitive-sectors]]"
-  - "[[price-to-earnings]]"
 ---
 
 The **10-year Treasury yield** is the most-watched number in finance, and stock investors track it for good reason: it is the benchmark "risk-free" return that every stock is implicitly measured against. This page answers a common investor FAQ — **"why do my stocks drop when the 10-year yield jumps, and what should I actually watch?"**
@@ -71,11 +67,11 @@ A sharply *falling* 10-year yield during a [[recession]] does not save stocks, b
 
 ## Not All Stocks React Equally (Duration)
 
-The discount-rate channel hits **long-[[duration]]** equities hardest — companies whose cash flows are mostly far in the future (high-growth, high-multiple, profitless tech). Their value sits in distant years that get discounted by many periods of `r`, so a yield move swings them like a long-dated bond. **Short-duration** equities — profitable, cash-generative value names and high-dividend payers — are less sensitive. This is the duration logic behind [[value-vs-growth-investing|value vs growth]] leadership and is detailed in [[interest-rate-sensitive-sectors]].
+The discount-rate channel hits **long-[[duration]]** equities hardest — companies whose cash flows are mostly far in the future (high-growth, high-multiple, profitless tech). Their value sits in distant years that get discounted by many periods of `r`, so a yield move swings them like a long-dated bond. **Short-duration** equities — profitable, cash-generative value names and high-dividend payers — are less sensitive. This is the duration logic behind value vs growth leadership and is detailed in interest-rate-sensitive-sectors.
 
 ## Worked Illustration (Hypothetical)
 
-Imagine the 10-year yield rises from 3% to 5% and the [[equity-risk-premium]] holds at 4%, so the required return `r` goes from 7% to 9%. For a stable-earnings index, a required earnings yield rising from 7% to 9% implies the [[price-to-earnings|P/E]] falling from about 14× to about 11× — roughly a 20% valuation hit, *with no change in earnings*. A long-duration growth basket might fall considerably more; a cash-rich value basket considerably less. (Illustrative arithmetic, not a forecast.)
+Imagine the 10-year yield rises from 3% to 5% and the [[equity-risk-premium]] holds at 4%, so the required return `r` goes from 7% to 9%. For a stable-earnings index, a required earnings yield rising from 7% to 9% implies the P/E falling from about 14× to about 11× — roughly a 20% valuation hit, *with no change in earnings*. A long-duration growth basket might fall considerably more; a cash-rich value basket considerably less. (Illustrative arithmetic, not a forecast.)
 
 ## The Earnings-Yield Comparison
 
@@ -85,7 +81,7 @@ A simple way investors gauge "stocks vs bonds" value is the earnings-yield sprea
 spread  =  S&P 500 earnings yield  −  10-year Treasury yield
 ```
 
-A wide positive spread says stocks are cheap relative to bonds; a thin or negative spread says bonds look competitive. This is the "Fed model." It is a useful *relative-value sentiment gauge* but is academically criticised (it compares a real earnings yield with a nominal bond yield) — see [[earnings-yield]] and [[equity-risk-premium]] for the caveats. Do not treat it as a precise fair-value signal.
+A wide positive spread says stocks are cheap relative to bonds; a thin or negative spread says bonds look competitive. This is the "Fed model." It is a useful *relative-value sentiment gauge* but is academically criticised (it compares a real earnings yield with a nominal bond yield) — see earnings-yield and [[equity-risk-premium]] for the caveats. Do not treat it as a precise fair-value signal.
 
 ## What to Actually Watch
 
@@ -108,12 +104,9 @@ A wide positive spread says stocks are cheap relative to bonds; a thin or negati
 - [[interest-rates]] — policy vs market rates and the discount-rate mechanism
 - [[equity-risk-premium]] — the premium added to the bond yield to value stocks
 - [[yield-curve]] — the term structure and its recession signal
-- [[earnings-yield]] — the basis of the stocks-vs-bonds "Fed model" spread
 - [[duration]] — why long-dated cash flows are most rate-sensitive
-- [[interest-rate-sensitive-sectors]] — which stocks move most when yields move
 - [[real-interest-rates]] — inflation-adjusted yields, a cleaner valuation driver
 - [[treasury-bonds]] / [[treasuries]] — the instruments behind the benchmark yield
-- [[stocks]] — the asset class on the other side of the comparison
 
 ## Sources
 

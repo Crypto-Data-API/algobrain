@@ -20,7 +20,7 @@ Breakout strategies are [[technical-analysis-overview|technical analysis]] appro
 
 Breakout trading is one of the oldest and most widely practiced forms of technical trading. The logic is straightforward: price consolidation represents equilibrium between buyers and sellers. When that equilibrium breaks, the resulting imbalance can drive a sustained directional move. Breakout strategies aim to capture the early portion of that move.
 
-The approach was popularized by traders like [[william-o-neil|William O'Neil]] (whose [[can-slim|CAN SLIM]] method relies heavily on breakout entries), [[nicolas-darvas|Nicolas Darvas]] (Darvas Box method), and [[richard-donchian|Richard Donchian]] (channel breakout systems). [[john-murphy|John Murphy's]] *[[technical-analysis-of-the-financial-markets|Technical Analysis of the Financial Markets]]* provides comprehensive coverage of breakout patterns and their interpretation. (Source: [[book-technical-analysis-of-the-financial-markets]])
+The approach was popularized by traders like William O'Neil (whose CAN SLIM method relies heavily on breakout entries), [[nicolas-darvas|Nicolas Darvas]] (Darvas Box method), and [[richard-donchian|Richard Donchian]] (channel breakout systems). [[john-murphy|John Murphy's]] *[[technical-analysis-of-the-financial-markets|Technical Analysis of the Financial Markets]]* provides comprehensive coverage of breakout patterns and their interpretation. (Source: [[book-technical-analysis-of-the-financial-markets]])
 
 ## Types of Breakouts
 
@@ -53,7 +53,7 @@ Uses volatility measures (like [[atr|ATR]] or [[bollinger-bands|Bollinger Bands]
 
 Classic [[chart-patterns|chart patterns]] that resolve with breakouts:
 
-- **[[cup-and-handle]]**: William O'Neil's signature pattern -- a U-shaped consolidation (cup) followed by a smaller pullback (handle), then breakout to new highs. The definitive growth stock entry signal in [[can-slim|CAN SLIM]]. (Source: [[book-how-to-make-money-in-stocks]])
+- **[[cup-and-handle]]**: William O'Neil's signature pattern -- a U-shaped consolidation (cup) followed by a smaller pullback (handle), then breakout to new highs. The definitive growth stock entry signal in CAN SLIM. (Source: book-how-to-make-money-in-stocks)
 - **Ascending triangle**: Flat resistance with rising support -- typically breaks upward
 - **Descending triangle**: Flat support with declining resistance -- typically breaks downward
 - **Symmetrical triangle**: Converging trendlines -- can break in either direction; the preceding trend usually determines direction
@@ -129,12 +129,10 @@ The primary risk in breakout trading is the false breakout -- price briefly pene
 - [[volume-analysis]]
 - [[chart-patterns]]
 - [[trend-following]]
-- [[can-slim]]
-- [[william-o-neil]]
 - [[turtle-traders]]
 - [[technical-analysis-overview]]
 
 ## Sources
 
-- (Source: [[book-how-to-make-money-in-stocks]])
+- (Source: book-how-to-make-money-in-stocks)
 - (Source: [[book-technical-analysis-of-the-financial-markets]])

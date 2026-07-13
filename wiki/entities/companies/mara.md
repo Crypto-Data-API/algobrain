@@ -48,7 +48,7 @@ MARA's economics rest on three reinforcing layers, and the relative weight of ea
 
 - **Self-mining ([[bitcoin]] production).** MARA runs one of the largest ASIC fleets in the world, converting electricity into hashrate and hashrate into BTC. Unit economics are governed by three variables: **fleet efficiency** (measured in joules per terahash, J/TH — lower is better; modern air-cooled rigs sit around the high-teens-to-low-20s J/TH and immersion/hydro can push lower), **all-in power cost** ($/kWh), and **hash price** (the revenue per unit of hashrate per day, set by BTC price and network difficulty). Post-[[bitcoin-halving|halving]], block subsidy fell to 3.125 BTC, structurally halving hash price and forcing every miner to drive down J/TH and $/kWh or shrink margins. See [[bitcoin-mining]] and [[hash-rate]].
 - **Energy ownership.** Rather than buying power on the open market, MARA has moved to **own generation and grid-interconnected sites** (the Long Ridge gas-fired plant being the flagship). Owning the megawatts converts a variable cost into a controllable, financeable asset and is the precondition for the AI pivot — hyperscalers buy *power-plus-shell*, not hashrate.
-- **AI / HPC data-center colocation.** The strategic pivot mirrors the cohort ([[core-scientific]], [[terawulf]], [[hut-8]], [[iren]], [[applied-digital]], [[hive-digital-technologies]]): convert energized, interconnected megawatts from variable-margin mining into **long-dated, take-or-pay HPC hosting leases**. Per-MW revenue from a creditworthy AI tenant is materially higher and far more predictable than mining, which is why the market re-rates capacity from a mining multiple to a data-center / infrastructure multiple as leases are signed. The scarce asset is **energized, interconnected power** — in a multi-year interconnection-queue backlog, existing capacity is the moat.
+- **AI / HPC data-center colocation.** The strategic pivot mirrors the cohort ([[core-scientific]], [[terawulf]], [[hut-8]], [[iren]], applied-digital, [[hive-digital-technologies]]): convert energized, interconnected megawatts from variable-margin mining into **long-dated, take-or-pay HPC hosting leases**. Per-MW revenue from a creditworthy AI tenant is materially higher and far more predictable than mining, which is why the market re-rates capacity from a mining multiple to a data-center / infrastructure multiple as leases are signed. The scarce asset is **energized, interconnected power** — in a multi-year interconnection-queue backlog, existing capacity is the moat.
 
 The simplest way to read the business: MARA is trying to migrate from a *price-taker on BTC* to a *landlord of compute*, using mining as the cash-flowing bridge that funds the conversion.
 
@@ -86,12 +86,12 @@ MARA is the scale leader of the listed bitcoin-miner / digital-infrastructure co
 | [[terawulf]] | WULF | Low-carbon (nuclear/hydro) power; Fluidstack + Google-backstopped leases | Late |
 | [[hut-8]] | HUT | Power-origination pipeline; American Bitcoin (ABTC) spin; Fluidstack/Google lease | Mid-to-late |
 | [[iren]] | IREN | Australia/US renewable footprint; vertically integrated build | Mid-to-late |
-| [[applied-digital]] | APLD | Pure data-center developer (CoreWeave anchor at Polaris Forge) | Late (least crypto residual) |
+| applied-digital | APLD | Pure data-center developer (CoreWeave anchor at Polaris Forge) | Late (least crypto residual) |
 | [[hive-digital-technologies]] | HIVE | Nordic/Paraguay renewable footprint; BUZZ HPC cloud | Mid |
 | [[riot-platforms]] | RIOT | Texas-scale mining; vertically integrated; ERCOT power credits | Earlier-mid |
 | [[cleanspark]] | CLSK | Mining-pure-play discipline, lower-cost expansion | Early |
 
-MARA's edge versus the cohort is **balance-sheet scale and treasury optionality**: the largest BTC holding among miners gives it the biggest swing factor on a BTC move (both ways) and the ability to monetize coins to fund the buildout, as it did in Q1 2026. Its relative weakness versus [[core-scientific]] and [[applied-digital]] is that it has *announced* AI capacity rather than a fully contracted, energizing backlog — so it carries more execution and "show-me" risk on the pivot.
+MARA's edge versus the cohort is **balance-sheet scale and treasury optionality**: the largest BTC holding among miners gives it the biggest swing factor on a BTC move (both ways) and the ability to monetize coins to fund the buildout, as it did in Q1 2026. Its relative weakness versus [[core-scientific]] and applied-digital is that it has *announced* AI capacity rather than a fully contracted, energizing backlog — so it carries more execution and "show-me" risk on the pivot.
 
 ## Bull vs Bear Case
 
@@ -115,7 +115,7 @@ There is no clean single multiple for MARA; the market triangulates several lens
 - **BTC treasury (NAV) value.** The mark-to-market value of held BTC is a hard floor/anchor that moves daily with price (FASB fair-value accounting now flows it through earnings).
 - **EV per EH/s.** The cohort's standard mining yardstick — enterprise value divided by exahashes of installed/effective hashrate — lets you compare MARA against [[riot-platforms]], [[cleanspark]] et al. on a fleet basis.
 - **Power-cost per kWh.** All-in $/kWh is the durable mining margin determinant and the gating factor on HPC competitiveness; owned generation is meant to lock this in.
-- **HPC-contract backlog / per-MW lease value.** As leases are signed, the market shifts weight toward contracted, recurring lease revenue valued like an infrastructure/REIT-style asset — the core of the re-rating (compare [[core-scientific]], [[applied-digital]]).
+- **HPC-contract backlog / per-MW lease value.** As leases are signed, the market shifts weight toward contracted, recurring lease revenue valued like an infrastructure/REIT-style asset — the core of the re-rating (compare [[core-scientific]], applied-digital).
 - **Dilution-adjusted per-share.** Because share count grows via ATMs and converts, EV-based and per-MW metrics matter more than headline market cap; always normalize for the share-count trajectory.
 
 ## Trading & Options Playbook
@@ -165,7 +165,7 @@ MARA's buildout is capital-intensive, and the financing mix is itself a core par
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - Q1 2026 shareholder letter (8-K): https://www.sec.gov/Archives/edgar/data/0001507605/000150760526000014/q126shareholderletter.htm
 - BTC sales / AI pivot: https://www.coinreporter.io/2026/05/mara-holdings-sells-1-5-billion-in-bitcoin-as-it-pivots-to-ai-infrastructure/
 - Q1 2026 results and pivot analysis: https://simplywall.st/stocks/us/software/nasdaq-mara/mara-holdings/news/mara-holdings-mara-is-up-182-after-pivoting-bitcoin-proceeds

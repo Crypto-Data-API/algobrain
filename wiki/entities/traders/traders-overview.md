@@ -11,7 +11,7 @@ tags: [traders, entities, index]
 
 Famous, influential, and historically significant traders.
 
-The stories of great traders are more than entertainment -- they are case studies in strategy, risk management, psychology, and adaptation. [[jesse-livermore]] pioneered tape reading and trend following a century ago, [[george-soros]] demonstrated the power of reflexivity and macro conviction, [[stanley-druckenmiller]] showed how to size positions with conviction, [[ed-seykota]] proved that systematic trend following could compound for decades, [[jim-simons]] proved that mathematics could systematically extract alpha, and [[warren-buffett]] showed that patience and fundamental analysis compound over decades.
+The stories of great traders are more than entertainment -- they are case studies in strategy, risk management, psychology, and adaptation. [[jesse-livermore]] pioneered tape reading and trend following a century ago, [[george-soros]] demonstrated the power of reflexivity and macro conviction, [[stanley-druckenmiller]] showed how to size positions with conviction, [[ed-seykota]] proved that systematic trend following could compound for decades, [[jim-simons]] proved that mathematics could systematically extract alpha, and warren-buffett showed that patience and fundamental analysis compound over decades.
 
 Each profile covers the trader's methodology, key trades, lessons learned, and how their approach remains relevant today.
 
@@ -21,7 +21,6 @@ Each profile covers the trader's methodology, key trades, lessons learned, and h
 - [[george-soros]] -- Reflexivity theory and the most famous macro trade in history
 - [[stanley-druckenmiller]] -- Macro conviction and position sizing, 30% annual returns for 30 years
 - [[jim-simons]] -- Mathematician who built Renaissance Technologies
-- [[warren-buffett]] -- Value investing and the power of long-term compounding
 
 ## Pages
 
@@ -66,14 +65,7 @@ SORT updated DESC
 
 ## Fundamental & Value Investors
 
-- [[julian-robertson]] -- Tiger Management, long/short equity pioneer, greatest talent tree in hedge fund history
-- [[peter-lynch]] -- "Buy what you know," Fidelity Magellan's 29.2% annual returns over 13 years
-- [[philip-fisher]] -- Father of growth investing, scuttlebutt method, held Motorola for 50 years
-- [[seth-klarman]] -- The Oracle of Boston, Baupost Group, margin of safety purist
 - [[howard-marks]] -- Oaktree Capital, distressed debt, second-level thinking and market cycles
-- [[carl-icahn]] -- The Corporate Raider, activist investing pioneer, the "Icahn Lift"
-- [[bill-ackman]] -- Pershing Square, concentrated activist investing, $27M to $2.6B COVID hedge
-- [[david-einhorn]] -- Greenlight Capital, forensic short selling, Lehman Brothers short, poker champion
 
 ## Momentum & Swing Traders
 

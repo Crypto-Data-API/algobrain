@@ -11,12 +11,12 @@ markets_affected: [commodities, stocks]
 impact: high
 verified: true
 sources_count: 2
-related: ["[[opec]]", "[[crude-oil]]", "[[geopolitical-risk-premium]]", "[[commodities]]", "[[black-monday]]", "[[gold]]", "[[crashes-overview]]"]
+related: ["[[crude-oil]]", "[[geopolitical-risk-premium]]", "[[commodities]]", "[[black-monday]]", "[[gold]]", "[[crashes-overview]]"]
 ---
 
 # 1973 Oil Crisis (OPEC Embargo)
 
-On October 17, 1973, the Organization of Arab Petroleum Exporting Countries (OAPEC — the Arab subset of [[opec]]) imposed an oil embargo against the United States, Canada, Japan, the Netherlands, and the United Kingdom in retaliation for their support of Israel during the Yom Kippur War. The embargo and accompanying production cuts caused [[crude-oil]] prices to quadruple from approximately **$3 to $12 per barrel** in a matter of months, triggering the first modern energy crisis and reshaping global energy policy for decades. (Source: [[2026-04-14-commodities-research-framework]])
+On October 17, 1973, the Organization of Arab Petroleum Exporting Countries (OAPEC — the Arab subset of opec) imposed an oil embargo against the United States, Canada, Japan, the Netherlands, and the United Kingdom in retaliation for their support of Israel during the Yom Kippur War. The embargo and accompanying production cuts caused [[crude-oil]] prices to quadruple from approximately **$3 to $12 per barrel** in a matter of months, triggering the first modern energy crisis and reshaping global energy policy for decades. (Source: [[2026-04-14-commodities-research-framework]])
 
 ## Timeline
 

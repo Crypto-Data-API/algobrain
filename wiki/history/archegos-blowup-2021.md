@@ -11,10 +11,10 @@ markets_affected: [stocks, derivatives]
 impact: high
 verified: true
 sources_count: 5
-related: ["[[total-return-swap]]", "[[prime-broker]]", "[[ltcm-collapse-1998]]", "[[risk-arbitrage]]", "[[credit-suisse]]", "[[nomura]]", "[[morgan-stanley]]", "[[goldman-sachs]]", "[[bill-hwang]]", "[[block-trade-flipping-arbitrage]]", "[[prime-broker-cascade-trading]]", "[[2020-05-muddy-waters-gsx-short]]", "[[structural-forced-selling]]"]
+related: ["[[total-return-swap]]", "[[prime-broker]]", "[[ltcm-collapse-1998]]", "[[bill-hwang]]", "[[block-trade-flipping-arbitrage]]", "[[prime-broker-cascade-trading]]", "[[structural-forced-selling]]"]
 ---
 
-The Archegos Capital Management blow-up in March 2021 was the largest single-fund prime-brokerage loss in modern finance: [[bill-hwang]]'s family office, running an undisclosed and extraordinarily leveraged concentrated book through [[total-return-swap|total-return swaps]] (TRS) with multiple prime brokers, faced a cascading margin call that triggered fire-sale liquidations. Bank losses exceeded roughly $10 billion in aggregate, with [[credit-suisse]] losing about $5.5 billion and [[nomura]] about $2.9 billion. The episode exposed catastrophic prime-broker risk-management failures, the opacity of synthetic-prime (TRS) books, and the regulatory gap for family offices. Hwang was convicted of fraud and market manipulation in July 2024.
+The Archegos Capital Management blow-up in March 2021 was the largest single-fund prime-brokerage loss in modern finance: [[bill-hwang]]'s family office, running an undisclosed and extraordinarily leveraged concentrated book through [[total-return-swap|total-return swaps]] (TRS) with multiple prime brokers, faced a cascading margin call that triggered fire-sale liquidations. Bank losses exceeded roughly $10 billion in aggregate, with credit-suisse losing about $5.5 billion and nomura about $2.9 billion. The episode exposed catastrophic prime-broker risk-management failures, the opacity of synthetic-prime (TRS) books, and the regulatory gap for family offices. Hwang was convicted of fraud and market manipulation in July 2024.
 
 ## Background
 
@@ -24,7 +24,7 @@ Because a family office manages only the principal's own capital, Archegos was e
 
 ## Strategy and Mechanics
 
-Archegos ran a long-biased, highly concentrated equity book in a small number of names -- notably [[viacomcbs]] (later Paramount Global), [[discovery-inc]], [[tencent-music]] ADRs, [[baidu]], [[gsx-techedu]], [[iqiyi]], [[vipshop]], [[rlx-technology]], [[farfetch]], and [[shopify]]. Rather than hold shares directly, Archegos built most positions via **[[total-return-swap|total-return swaps]] (TRS)** and **[[contract-for-difference|contracts for difference]] (CFDs)** with prime-broker counterparties.
+Archegos ran a long-biased, highly concentrated equity book in a small number of names -- notably [[viacomcbs]] (later Paramount Global), [[discovery-inc]], [[tencent-music]] ADRs, baidu, [[gsx-techedu]], [[iqiyi]], [[vipshop]], [[rlx-technology]], [[farfetch]], and shopify. Rather than hold shares directly, Archegos built most positions via **[[total-return-swap|total-return swaps]] (TRS)** and **[[contract-for-difference|contracts for difference]] (CFDs)** with prime-broker counterparties.
 
 Under a TRS:
 
@@ -37,7 +37,7 @@ This structure gave Hwang three decisive advantages:
 
 1. **Invisibility**: TRS positions do not trigger 13D/13G disclosure, even when effective economic ownership crosses 5%. Archegos's share of ViacomCBS was reportedly close to 20% on a look-through basis.
 2. **Leverage multiplication**: 15-20% initial margin equals 5-7x leverage on a single leg.
-3. **Fragmentation of counterparty view**: because Hwang ran similar positions at [[credit-suisse]], [[nomura]], [[morgan-stanley]], [[goldman-sachs]], [[ubs]], [[wells-fargo]], [[mufg]], and others, no single bank could see the aggregate.
+3. **Fragmentation of counterparty view**: because Hwang ran similar positions at credit-suisse, nomura, morgan-stanley, goldman-sachs, ubs, wells-fargo, [[mufg]], and others, no single bank could see the aggregate.
 
 ### Leverage mechanics worked example
 
@@ -61,11 +61,11 @@ This mark-to-market decline, combined with similar moves in other Archegos conce
 
 ## The Cascade (March 25-29, 2021)
 
-**Thursday March 25**: The primes convened a call to coordinate an orderly unwind. [[credit-suisse]] and [[nomura]] favored a staged liquidation; [[goldman-sachs]] and [[morgan-stanley]] refused to agree to a standstill.
+**Thursday March 25**: The primes convened a call to coordinate an orderly unwind. credit-suisse and nomura favored a staged liquidation; goldman-sachs and morgan-stanley refused to agree to a standstill.
 
-**Friday March 26**: [[goldman-sachs]] and [[morgan-stanley]] launched large block sales *before* market open and through the day -- reportedly $10.5 billion from Goldman and similar size from Morgan Stanley. Stocks collapsed: ViacomCBS fell ~27% on the day; Discovery -27%; Baidu -14%; Tencent Music -34%. The block-trade tickets that hit the tape became visible to the market and compounded the selling.
+**Friday March 26**: goldman-sachs and morgan-stanley launched large block sales *before* market open and through the day -- reportedly $10.5 billion from Goldman and similar size from Morgan Stanley. Stocks collapsed: ViacomCBS fell ~27% on the day; Discovery -27%; Baidu -14%; Tencent Music -34%. The block-trade tickets that hit the tape became visible to the market and compounded the selling.
 
-**Sunday March 28 - Monday March 29**: [[credit-suisse]] and [[nomura]], having moved slower, were left holding the worst of the exposure. Both disclosed preliminary loss estimates before the March 29 open.
+**Sunday March 28 - Monday March 29**: credit-suisse and nomura, having moved slower, were left holding the worst of the exposure. Both disclosed preliminary loss estimates before the March 29 open.
 
 ### Condensed timeline
 
@@ -88,14 +88,14 @@ This mark-to-market decline, combined with similar moves in other Archegos conce
 
 | Bank | Disclosed Loss | Notes |
 |------|----------------|-------|
-| [[credit-suisse]] | ~$5.5 billion | Largest single loss; contributed to the bank's 2023 [[credit-suisse-collapse-2023|collapse and forced merger with UBS]] |
-| [[nomura]] | ~$2.9 billion | Slow to exit; extensive internal review |
-| [[morgan-stanley]] | ~$911 million | Sold aggressively into the unwind; loss relatively contained |
-| [[ubs]] | ~$774 million | Disclosed in Q1 2021 results |
+| credit-suisse | ~$5.5 billion | Largest single loss; contributed to the bank's 2023 [[credit-suisse-collapse-2023|collapse and forced merger with UBS]] |
+| nomura | ~$2.9 billion | Slow to exit; extensive internal review |
+| morgan-stanley | ~$911 million | Sold aggressively into the unwind; loss relatively contained |
+| ubs | ~$774 million | Disclosed in Q1 2021 results |
 | [[mufg]] | ~$300 million | Smaller TRS book |
 | [[mizuho]] | ~$90 million | |
-| [[goldman-sachs]] | "immaterial" | First out the door; blocks executed near best levels |
-| [[wells-fargo]] | "no loss" | Fully collateralized; unwound at no cost |
+| goldman-sachs | "immaterial" | First out the door; blocks executed near best levels |
+| wells-fargo | "no loss" | Fully collateralized; unwound at no cost |
 
 Aggregate industry loss: roughly **$10-12 billion**.
 
@@ -119,7 +119,7 @@ Credit Suisse commissioned an external report by **Paul, Weiss** (published July
 
 ## Connection to Credit Suisse's Demise
 
-Archegos is widely cited as one of two catastrophic events ([[greensill-capital-collapse-2021|Greensill]] being the other, weeks earlier) that destroyed CS's remaining credibility with depositors, counterparties, and the Swiss regulator FINMA. CS's stock never recovered its March 2021 level. By March 2023, a run on deposits forced FINMA and the Swiss government to engineer an emergency acquisition by [[ubs]] (see [[credit-suisse-collapse-2023]]).
+Archegos is widely cited as one of two catastrophic events ([[greensill-capital-collapse-2021|Greensill]] being the other, weeks earlier) that destroyed CS's remaining credibility with depositors, counterparties, and the Swiss regulator FINMA. CS's stock never recovered its March 2021 level. By March 2023, a run on deposits forced FINMA and the Swiss government to engineer an emergency acquisition by ubs (see [[credit-suisse-collapse-2023]]).
 
 ## How People Made Money
 
@@ -141,11 +141,11 @@ Buyers — Citadel, Millennium, Point72, BlackRock event-driven funds, Renaissan
 
 ### 2. First-mover prime brokers (~$5B avoided losses)
 
-By moving Friday morning, [[goldman-sachs]] and [[morgan-stanley]] turned what would have been multi-billion-dollar losses into "immaterial" / $911M results — by selling at -10-20% rather than at -40-60% the following Monday. The prisoner's-dilemma payoff differential between first-mover and last-mover banks was approximately **$5B**. Wells Fargo had margined Archegos appropriately and unwound at $0 cost. Generalized as: see [[prime-broker-cascade-trading]].
+By moving Friday morning, goldman-sachs and morgan-stanley turned what would have been multi-billion-dollar losses into "immaterial" / $911M results — by selling at -10-20% rather than at -40-60% the following Monday. The prisoner's-dilemma payoff differential between first-mover and last-mover banks was approximately **$5B**. Wells Fargo had margined Archegos appropriately and unwound at $0 cost. Generalized as: see [[prime-broker-cascade-trading]].
 
 ### 3. Muddy Waters / Carson Block on GSX Techedu (~$200M+ on this name alone)
 
-Muddy Waters Research had published a fraud thesis on GSX Techedu (later Gaotu Techedu) in **May 2020**, alleging up to 70% of revenue was fabricated. GSX was a major Archegos position; the unwind crashed it from ~$130 (late February) to ~$16 by early April — a **88% drop in five weeks**. Muddy Waters' largest 2021 winner, validated by the forced-seller cascade. See [[2020-05-muddy-waters-gsx-short]].
+Muddy Waters Research had published a fraud thesis on GSX Techedu (later Gaotu Techedu) in **May 2020**, alleging up to 70% of revenue was fabricated. GSX was a major Archegos position; the unwind crashed it from ~$130 (late February) to ~$16 by early April — a **88% drop in five weeks**. Muddy Waters' largest 2021 winner, validated by the forced-seller cascade. See 2020-05-muddy-waters-gsx-short.
 
 ### 4. Single-name volatility longs
 
@@ -201,10 +201,8 @@ Promontory Financial Group, Oliver Wyman, and Big-4 prime-brokerage risk-consult
 - [[total-return-swap]] -- the instrument
 - [[prime-broker]] -- counterparty structure
 - [[contract-for-difference]] -- sister instrument
-- [[credit-suisse]] / [[credit-suisse-collapse-2023]] -- downstream consequence
-- [[nomura]], [[morgan-stanley]], [[goldman-sachs]], [[ubs]] -- other counterparties
+- credit-suisse / [[credit-suisse-collapse-2023]] -- downstream consequence
 - [[ltcm-collapse-1998]] -- prior prime-broker cascade
-- [[risk-arbitrage]] -- adjacent strategy area exposed to same counterparty infrastructure
 - [[concentration-risk]] -- general failure mode
 - [[counterparty-credit-risk]] -- core lesson
 

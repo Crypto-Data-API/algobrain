@@ -84,7 +84,7 @@ The Channel Breakout strategy trades price breaking out of well-defined geometri
 - Patterns are visually intuitive and widely recognized across the trading community
 - The measured move technique provides **objective, predefined targets**
 - Works on all timeframes from 5-minute to monthly charts
-- Applicable to all liquid markets: [[stocks]], [[crypto]], [[forex]], [[futures]]
+- Applicable to all liquid markets: stocks, [[crypto]], [[forex]], [[futures]]
 - Can be combined with [[volatility-breakout]] setups (e.g., [[bollinger-bands]] squeeze inside a triangle)
 - Ascending triangles and descending wedges have well-documented bullish bias
 

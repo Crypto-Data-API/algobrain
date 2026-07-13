@@ -63,7 +63,7 @@ Volume is the primary filter for distinguishing genuine breakouts from false one
 3. In the sessions following the breakout, above-average volume on continuation moves confirms institutional participation
 4. If volume dries up immediately after the breakout, the move is likely to fail and reverse
 
-This principle is central to [[william-o-neil]]'s [[canslim]] methodology, where heavy-volume breakouts from [[cup-and-handle]] bases are the primary buy signal.
+This principle is central to william-o-neil's canslim methodology, where heavy-volume breakouts from [[cup-and-handle]] bases are the primary buy signal.
 
 ### Climax Volume
 
@@ -106,4 +106,3 @@ Large institutional orders move markets and leave footprints in volume data. Unu
 ## Sources
 
 - [[book-technical-analysis-of-the-financial-markets]] -- foundational treatment of volume analysis principles
-- [[book-how-to-make-money-in-stocks]] -- volume as a key component of the CANSLIM system

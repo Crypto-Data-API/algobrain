@@ -44,7 +44,7 @@ Sebastian Mallaby's *More Money Than God* is the most comprehensive history of t
 - [[paul-tudor-jones]], [[jim-simons]], [[renaissance-technologies]]
 - [[ray-dalio]], [[bridgewater-associates]]
 - [[citadel]], [[ken-griffin]]
-- [[hedge-fund]], [[long-short-equity]]
+- [[hedge-fund]], long-short-equity
 - [[macro-trading]], [[trend-following]]
 - [[short-selling]], [[leverage]]
 - [[market-efficiency]], [[price-discovery]]

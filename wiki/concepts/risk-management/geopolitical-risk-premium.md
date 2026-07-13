@@ -9,7 +9,7 @@ aliases: ["Geopolitical Risk Premium", "GPR Premium", "War Premium", "Geopolitic
 domain: [risk-management]
 prerequisites: ["[[commodities]]", "[[crude-oil]]"]
 difficulty: intermediate
-related: ["[[crude-oil]]", "[[gold]]", "[[opec]]", "[[commodities]]", "[[1973-oil-crisis]]", "[[2020-negative-oil-price]]", "[[natural-gas]]", "[[tail-risk]]", "[[black-swan]]", "[[sovereign-risk]]", "[[volatility]]"]
+related: ["[[crude-oil]]", "[[gold]]", "[[commodities]]", "[[1973-oil-crisis]]", "[[2020-negative-oil-price]]", "[[natural-gas]]", "[[tail-risk]]", "[[black-swan]]", "[[sovereign-risk]]", "[[volatility]]"]
 ---
 
 # Geopolitical Risk Premium
@@ -50,7 +50,7 @@ The GPR index, developed by Caldara and Iacoviello (Federal Reserve Board), quan
 
 ### OPEC+ Production Decisions
 
-[[opec]] and its expanded OPEC+ coalition (including Russia) control approximately 40% of global crude oil production. OPEC decisions are inherently geopolitical:
+opec and its expanded OPEC+ coalition (including Russia) control approximately 40% of global crude oil production. OPEC decisions are inherently geopolitical:
 
 - Production cuts to support prices transfer wealth from consumers to producers
 - Quota compliance is uneven — member cheating erodes cartel discipline

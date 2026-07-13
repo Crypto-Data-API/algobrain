@@ -11,14 +11,14 @@ timeframe: day|swing|position
 markets: [crypto]
 complexity: intermediate
 backtest_status: untested
-related: ["[[defi-yield-farming]]", "[[funding-rate-arbitrage]]", "[[perpetual-futures]]", "[[oracle]]"]
+related: ["[[defi-yield-farming]]", "[[funding-rate-arbitrage]]", "[[perpetual-futures]]"]
 ---
 
 # Synthetic Asset Trading
 
 ## Overview
 
-Synthetic asset trading involves trading tokenized representations of real-world assets (stocks, commodities, forex, indices) on DeFi protocols. These synthetics track the price of their underlying asset via [[oracle]] price feeds (Chainlink, Pyth) without requiring custody of the actual asset. [[synthetix]] on Ethereum/Optimism is the leading protocol, offering sUSD-denominated trading of synthetic equities (sTSLA, sAAPL), commodities (sXAU, sOIL), and forex pairs. Mirror Protocol on Terra offered similar functionality before the UST collapse made it defunct. The appeal is 24/7 permissionless trading of traditional assets with no KYC, no broker, and no market hours -- though the approach introduces oracle risk, liquidity constraints, and regulatory uncertainty.
+Synthetic asset trading involves trading tokenized representations of real-world assets (stocks, commodities, forex, indices) on DeFi protocols. These synthetics track the price of their underlying asset via oracle price feeds (Chainlink, Pyth) without requiring custody of the actual asset. [[synthetix]] on Ethereum/Optimism is the leading protocol, offering sUSD-denominated trading of synthetic equities (sTSLA, sAAPL), commodities (sXAU, sOIL), and forex pairs. Mirror Protocol on Terra offered similar functionality before the UST collapse made it defunct. The appeal is 24/7 permissionless trading of traditional assets with no KYC, no broker, and no market hours -- though the approach introduces oracle risk, liquidity constraints, and regulatory uncertainty.
 
 ## How It Works
 
@@ -42,7 +42,7 @@ A trader wants exposure to gold during a geopolitical crisis but holds only cryp
 
 ## Disadvantages
 
-- **Oracle risk** -- prices depend on [[oracle]] feeds; oracle manipulation, delays, or failures can cause incorrect execution or liquidation
+- **Oracle risk** -- prices depend on oracle feeds; oracle manipulation, delays, or failures can cause incorrect execution or liquidation
 - **Liquidity constraints** -- synthetic markets have lower liquidity than their traditional counterparts, limiting position sizes
 - **Regulatory risk** -- tokenized securities may violate securities laws in many jurisdictions; protocols have faced SEC scrutiny
 - **Counterparty risk** -- some designs require a debt pool (Synthetix stakers absorb trader PnL), creating systemic risk during extreme moves

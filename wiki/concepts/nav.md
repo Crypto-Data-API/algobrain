@@ -7,9 +7,9 @@ status: good
 tags: [valuation, indicators, liquidity, education]
 aliases: ["NAV", "Net Asset Value", "net asset value", "iNAV", "intraday NAV", "indicative NAV"]
 domain: [valuation, market-microstructure]
-prerequisites: ["[[mutual-funds]]", "[[etf]]"]
+prerequisites: ["[[etf]]"]
 difficulty: beginner
-related: ["[[etf-arbitrage]]", "[[flash-crash-2015-etf]]", "[[mutual-funds]]", "[[etfs]]", "[[etf]]", "[[closed-end-fund]]", "[[liquidity]]", "[[index-fund]]"]
+related: ["[[etf-arbitrage]]", "[[flash-crash-2015-etf]]", "[[etfs]]", "[[etf]]", "[[closed-end-fund]]", "[[liquidity]]", "[[index-fund]]"]
 ---
 
 Net Asset Value (NAV) is the per-share value of a fund's total assets minus its liabilities. For mutual funds, NAV is calculated once daily after market close. For ETFs, an indicative NAV (iNAV) is published every 15 seconds during trading hours, and the market price can deviate from NAV — creating [[etf-arbitrage]] opportunities when premiums or discounts emerge.
@@ -50,7 +50,7 @@ Authorized participants (APs) arbitrage premiums/discounts by creating or redeem
 
 | Structure | NAV pricing | Can trade vs NAV? |
 |---|---|---|
-| [[mutual-funds|Mutual fund]] (open-end) | Struck once daily after close; all orders fill at that NAV | No — NAV is the only price |
+| Mutual fund (open-end) | Struck once daily after close; all orders fill at that NAV | No — NAV is the only price |
 | [[etf]] | Official NAV daily; iNAV every ~15s intraday | Yes — market price floats; APs arbitrage the gap |
 | [[closed-end-fund|Closed-end fund]] | NAV computed daily, but fixed share count | Persistent premium/discount is normal — no creation/redemption arbitrage |
 
@@ -67,7 +67,6 @@ The closed-end-fund discount is itself a documented anomaly: CEFs routinely trad
 
 - [[flash-crash-2015-etf]] — catastrophic NAV/price disconnection
 - [[etf-arbitrage]] — the creation/redemption mechanism that maintains price-NAV alignment
-- [[mutual-funds]] — open-end funds priced solely at daily NAV
 - [[closed-end-fund]] — fixed-share funds that trade at persistent NAV premiums/discounts
 - [[etf]] — intraday-traded funds with iNAV
 - [[liquidity]] — NAV discounts widen when underlying liquidity dries up

@@ -9,7 +9,7 @@ aliases: ["Wholesale Investor", "Accredited Investor", "sophisticated-investor",
 domain: [market-microstructure]
 prerequisites: ["[[regulation]]"]
 difficulty: intermediate
-related: ["[[regulation]]", "[[asx]]", "[[capital-raise]]", "[[ipo]]", "[[hedge-funds]]"]
+related: ["[[regulation]]", "[[hedge-funds]]"]
 ---
 
 A **sophisticated investor** (also **accredited**, **wholesale**, or **qualified** investor depending on jurisdiction) is a regulatory classification for individuals or entities that meet wealth, income, or expertise thresholds and are therefore presumed able to evaluate and bear the risks of investments that are off-limits to ordinary retail investors. The core regulatory bargain: in exchange for clearing the threshold, these investors gain access to private placements, hedge funds, pre-IPO rounds, and unregistered offerings — but forgo much of the disclosure and conduct protection that retail investors receive.
@@ -40,18 +40,14 @@ The EU uses "professional client" / "qualified investor" under MiFID II; the UK 
 
 ## Trading Relevance
 
-- **Deal access**: Sophisticated/accredited status is the entry ticket to placements and capital raises priced below market — a structural edge unavailable to retail. Fred McNaught discusses this classification in the context of [[buyouts]] and private placements, noting the advantages but also the reduced regulatory protections compared to retail investors.
-- **Capital raises**: Listed companies routinely issue discounted shares to sophisticated investors via placements (then sometimes a retail SPP at the same or worse terms) — the classification determines who gets the better deal. See [[capital-raise]].
+- **Capital raises**: Listed companies routinely issue discounted shares to sophisticated investors via placements (then sometimes a retail SPP at the same or worse terms) — the classification determines who gets the better deal. See capital-raise.
 - **Reduced protection**: Offerings to sophisticated investors carry less disclosure, so due-diligence burden shifts entirely to the investor. The label does not make the investment safer — it removes a safety net.
 - **Hedge-fund and private-fund access**: Most pooled vehicles legally restrict subscription to accredited/wholesale investors, which is why retail exposure to these strategies has historically required wrappers (ETFs, listed funds).
 
 ## Related
 
 - [[regulation]] — the broader regulatory framework
-- [[capital-raise]] — placements and offerings that target sophisticated investors
-- [[ipo]] — the public-markets alternative to private placements
 - [[hedge-funds]] — vehicles typically restricted to accredited/wholesale investors
-- [[asx]] — the Australian exchange where the wholesale-investor rules apply
 
 ## Sources
 

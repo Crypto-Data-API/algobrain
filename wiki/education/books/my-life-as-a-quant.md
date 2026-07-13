@@ -9,7 +9,6 @@ aliases: ["My Life as a Quant: Reflections on Physics and Finance", "Derman Memo
 related:
   - "[[emanuel-derman]]"
   - "[[black-derman-toy]]"
-  - "[[goldman-sachs]]"
   - "[[options-greeks]]"
   - "[[implied-volatility]]"
   - "[[black-scholes]]"
@@ -25,7 +24,7 @@ related:
 | **Author** | [[emanuel-derman|Emanuel Derman]] (PhD physics, Columbia) |
 | **Published** | 2004 (Wiley) |
 | **Genre** | Memoir / intellectual autobiography (not a textbook) |
-| **Career arc** | Theoretical particle physics → Bell Labs → [[goldman-sachs|Goldman Sachs]] (1985–2002, with a brief Salomon interlude) |
+| **Career arc** | Theoretical particle physics → Bell Labs → Goldman Sachs (1985–2002, with a brief Salomon interlude) |
 | **Signature work** | [[black-derman-toy|Black-Derman-Toy]] interest-rate model; Derman-Kani local volatility |
 | **Central thesis** | Financial models are *metaphors*, not physical laws — use them with humility |
 | **Best for** | Scientists entering [[quantitative-trading|quant finance]]; [[derivatives]] practitioners; anyone reliant on models |
@@ -51,7 +50,7 @@ The memoir moves chronologically through three lives — physicist, programmer, 
 |---------------|----------------|
 | **Physics apprenticeship** | Growing up in Cape Town, PhD at Columbia, the brutal competitiveness and slow grind of academic particle physics; the disillusionment that pushed him out |
 | **Bell Labs interlude** | A bridge job in programming and applied research before Wall Street; learning to build things that work rather than prove theorems |
-| **Arrival at [[goldman-sachs|Goldman]]** | The 1980s culture of hiring scientists; the relationship — sometimes collaborative, sometimes adversarial — between quants and traders |
+| **Arrival at Goldman** | The 1980s culture of hiring scientists; the relationship — sometimes collaborative, sometimes adversarial — between quants and traders |
 | **[[black-derman-toy|Black-Derman-Toy]]** | Building one of the first arbitrage-free short-rate models with Fischer Black and Bill Toy; pricing bond options on a binomial [[interest-rate-models|tree]] |
 | **The smile and local volatility** | Why the 1987 crash broke [[black-scholes|Black-Scholes]]'s constant-vol assumption; developing the Derman-Kani [[volatility-term-structure|local volatility]] tree to fit the [[implied-volatility|smile]] |
 | **Building the quant strategies group** | Institutionalising modelling at Goldman; the craft of turning research into production risk tools |
@@ -107,7 +106,6 @@ Derman's philosophical framework is directly applicable to AI/ML trading. Machin
 
 ## Related
 
-- [[goldman-sachs]] — Where Derman built his career and the BDT model
 - [[options-greeks]] — The risk sensitivities that Derman's models computed
 - [[implied-volatility]] — The volatility smile/skew that challenged Black-Scholes
 - [[black-scholes]] — The foundational model that Derman's work extended

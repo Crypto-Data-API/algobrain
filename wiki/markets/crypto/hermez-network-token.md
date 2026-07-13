@@ -50,7 +50,7 @@ Trading backdrop: the broad crypto market sits in **extreme fear** ([[fear-and-g
 | **Fully Diluted Valuation** | ~$33.95M |
 | **MC / FDV Ratio** | 1.00 |
 
-Supply is small and effectively fully circulating: circulating ≈ total ≈ max (~11.07M HEZ), so **MC = FDV (ratio 1.00)** with no meaningful [[dilution|dilution]] remaining. The compact supply gives HEZ a higher per-token price (~$3) than the other tokens in this group despite a similar ~$34M cap — a denomination artifact, not a sign of strength. Note that the *real* future supply question for HEZ is not emission but **migration**: holders are expected to convert HEZ into POL on terms set by the Polygon ecosystem.
+Supply is small and effectively fully circulating: circulating ≈ total ≈ max (~11.07M HEZ), so **MC = FDV (ratio 1.00)** with no meaningful dilution remaining. The compact supply gives HEZ a higher per-token price (~$3) than the other tokens in this group despite a similar ~$34M cap — a denomination artifact, not a sign of strength. Note that the *real* future supply question for HEZ is not emission but **migration**: holders are expected to convert HEZ into POL on terms set by the Polygon ecosystem.
 
 ---
 

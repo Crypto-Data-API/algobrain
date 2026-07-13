@@ -9,7 +9,7 @@ aliases: ["Wash Sale", "Wash Sales", "Wash Sale Rule", "IRC 1091", "Section 1091
 domain: [risk-management]
 prerequisites: ["[[capital-gains]]"]
 difficulty: beginner
-related: ["[[wash-sale-rules-options]]", "[[capital-gains]]", "[[tax-loss-harvesting]]", "[[tax-loss-harvesting-australia]]", "[[section-1256-contracts]]", "[[transaction-costs]]", "[[regulation]]"]
+related: ["[[capital-gains]]", "[[tax-loss-harvesting-australia]]", "[[section-1256-contracts]]", "[[transaction-costs]]", "[[regulation]]"]
 ---
 
 The **wash sale rule** (US tax law, **IRC §1091**) disallows a capital loss when an investor sells a security at a loss and buys back a "substantially identical" security within a **61-day window** — 30 days before through 30 days after the loss sale. The loss is not erased; it is **deferred** by adding the disallowed amount to the cost basis of the replacement shares (and extending their holding period). The rule exists to stop investors from booking a tax loss while keeping essentially the same economic position. This is a tax-mechanics page, not tax advice — consult a qualified professional for your facts.
@@ -32,13 +32,13 @@ You buy 100 shares at \$50 and sell them at \$40 (a \$1,000 loss). If you buy 10
 ## What Counts as "Substantially Identical"
 
 - **Clearly triggers:** repurchasing the *same* stock or the same option series; selling stock and buying a call on it; buying in an IRA what you sold at a loss in a taxable account (the IRS treats spousal and IRA purchases as yours).
-- **Generally does not:** rotating into a *different* company in the same sector, or swapping one broad index ETF for a *different-index* ETF (e.g. an S&P 500 fund for a total-market fund) — the standard tactic in [[tax-loss-harvesting]].
+- **Generally does not:** rotating into a *different* company in the same sector, or swapping one broad index ETF for a *different-index* ETF (e.g. an S&P 500 fund for a total-market fund) — the standard tactic in tax-loss-harvesting.
 - **Grey area:** two ETFs tracking the *same* index from different issuers. There is no bright-line IRS ruling, so conservative harvesters avoid same-index swaps.
 
 ## Why It Matters for Traders
 
-- **It taxes active loss-taking.** Frequent in-and-out trading and "trade repair" (rolling losers) can pile up disallowed losses and basis adjustments, turning [[transaction-costs|trading costs]] into a tax-accounting burden. See [[wash-sale-rules-options]] for the options-specific mechanics.
-- **It shapes [[tax-loss-harvesting]].** Harvesters deliberately sell losers to bank losses, then must wait 31 days or buy a *non*-identical proxy to keep market exposure without tripping the rule.
+- **It taxes active loss-taking.** Frequent in-and-out trading and "trade repair" (rolling losers) can pile up disallowed losses and basis adjustments, turning [[transaction-costs|trading costs]] into a tax-accounting burden. See wash-sale-rules-options for the options-specific mechanics.
+- **It shapes tax-loss-harvesting.** Harvesters deliberately sell losers to bank losses, then must wait 31 days or buy a *non*-identical proxy to keep market exposure without tripping the rule.
 - **Year-end danger zone.** A loss sale in late December with a repurchase in early January still falls inside the 61-day window, so the loss can be disallowed in the year you wanted it.
 - **Key carve-out — [[section-1256-contracts|§1256 contracts]].** Broad-based index options (SPX, NDX, RUT) and most futures are marked to market at year end and are **not** subject to the wash sale rule, which is one reason active index traders prefer SPX to SPY.
 
@@ -48,11 +48,9 @@ The wash sale rule as described is **US-specific**. Other countries have their o
 
 ## Related
 
-- [[wash-sale-rules-options]] — how §1091 applies to options and rolling
-- [[tax-loss-harvesting]] — the strategy the rule constrains
 - [[capital-gains]] — the broader tax framework
 - [[section-1256-contracts]] — the index-options exemption
 
 ## Sources
 
-No dedicated source summary yet — this page restates the statutory mechanics already documented in [[wash-sale-rules-options]] and referenced from [[capital-gains]] and [[tax-loss-harvesting]]. Add a source citation when a specific reference is ingested.
+No dedicated source summary yet — this page restates the statutory mechanics already documented in wash-sale-rules-options and referenced from [[capital-gains]] and tax-loss-harvesting. Add a source citation when a specific reference is ingested.

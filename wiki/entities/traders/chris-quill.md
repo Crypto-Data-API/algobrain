@@ -7,10 +7,10 @@ status: good
 tags: [traders, person, itpm, quantitative, options, volatility, indicators]
 entity_type: person
 aliases: ["Christopher Quill"]
-related: ["[[itpm]]", "[[anton-kreil]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[options]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[long-vol-vs-short-vol]]", "[[raj-malhotra]]"]
+related: ["[[anton-kreil]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[options]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[long-vol-vs-short-vol]]", "[[raj-malhotra]]"]
 ---
 
-Chris Quill is the Research and Quantitative Analyst at the [[itpm|Institute of Trading and Portfolio Management]] and a Senior Trading Mentor. He is the lead instructor for ITPM's Professional Options Trading Masterclass (POTM 2.0), co-teaches the Professional Trading Masterclass (PTM) alongside [[anton-kreil]], and is the ITPM mentor most associated with the quantitative side of the curriculum — particularly the [[realized-volatility|realized]] vs. [[implied-volatility]] gap as a tradable signal (Source: [[itpm-education-methodology-overview]]).
+Chris Quill is the Research and Quantitative Analyst at the Institute of Trading and Portfolio Management and a Senior Trading Mentor. He is the lead instructor for ITPM's Professional Options Trading Masterclass (POTM 2.0), co-teaches the Professional Trading Masterclass (PTM) alongside [[anton-kreil]], and is the ITPM mentor most associated with the quantitative side of the curriculum — particularly the [[realized-volatility|realized]] vs. [[implied-volatility]] gap as a tradable signal (Source: [[itpm-education-methodology-overview]]).
 
 ## Background
 
@@ -57,7 +57,7 @@ Quill's curriculum is explicit that the realized-vs-implied gap is a *conditiona
 It is *not* tradable — and is in fact a trap — when:
 
 - A catalyst is imminent and the IV is the market's price for that catalyst
-- The name has a [[options-concentration-risk|liquidity / float / borrow]] regime that makes the option chain non-representative (cf. [[gamestop]] in early 2021)
+- The name has a [[options-concentration-risk|liquidity / float / borrow]] regime that makes the option chain non-representative (cf. gamestop in early 2021)
 - The trader cannot articulate the *fundamental* reason the IV is wrong, only the statistical observation
 
 This is the structural reason ITPM teaches the vol gap *inside* the broader [[itpm-five-principles|fundamental-first]] framework rather than as a standalone systematic edge.
@@ -74,7 +74,7 @@ Quill's role at ITPM is best understood by contrast:
 
 | Mentor | Lens | Default question |
 |---|---|---|
-| [[anton-kreil]] | Buy-side fundamental discretionary | "What is the [[long-short-equity|long-short]] structure that fits this macro view?" |
+| [[anton-kreil]] | Buy-side fundamental discretionary | "What is the long-short structure that fits this macro view?" |
 | [[raj-malhotra]] | Sell-side options market-maker | "What [[volatility]] regime are we in, and which side of vol pays me?" |
 | **Chris Quill** | **Research / quantitative** | **"What does the realized-vs-implied gap say, and is the gap a real edge or a known catalyst?"** |
 | [[edward-shek]] | EM / cross-region equity | "Where is the cross-market [[correlation]] mispricing?" |

@@ -41,7 +41,7 @@ The two bolded rows — conditional and tail — are the numbers that decide whe
 
 ## The Tail Correlation Problem
 
-A canonical example: in normal markets, [[pairs-trading|stat-arb pairs trading]] has near-zero correlation with [[carry-trade|FX carry]], [[merger-arbitrage|merger arb]], and [[long-short-equity]]. They have different inputs, different time horizons, different mechanisms. A naive Markowitz-optimized portfolio combining them looks beautifully diversified.
+A canonical example: in normal markets, [[pairs-trading|stat-arb pairs trading]] has near-zero correlation with [[carry-trade|FX carry]], merger arb, and long-short-equity. They have different inputs, different time horizons, different mechanisms. A naive Markowitz-optimized portfolio combining them looks beautifully diversified.
 
 In August 2007, *all of them blew up at the same time* (see [[quant-meltdown-2007]]). A common driver — fund deleveraging — overwhelmed every strategy's normal-period independence. The "diversification" was an illusion that held during the easy years and vanished exactly when it was needed.
 

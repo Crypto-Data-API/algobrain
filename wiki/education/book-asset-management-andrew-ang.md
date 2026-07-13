@@ -16,7 +16,6 @@ related:
   - "[[risk-premia]]"
   - "[[portfolio-theory]]"
   - "[[fama-french-factors]]"
-  - "[[value-investing]]"
   - "[[momentum]]"
   - "[[low-volatility-anomaly]]"
 ---
@@ -63,7 +62,6 @@ For AI/ML trading specifically: Ang's central warning is that factor returns are
 - [[risk-premia]] — The economic justification for factor returns
 - [[portfolio-theory]] — Classical framework Ang extends
 - [[fama-french-factors]] — Foundational empirical work
-- [[value-investing]] — Prototype factor strategy
 - [[momentum]] — Most robust factor across markets
 - [[low-volatility-anomaly]] — Factor that contradicts CAPM
 - [[expected-returns-antti-ilmanen|Expected Returns (Ilmanen)]] — Companion text on factor premia

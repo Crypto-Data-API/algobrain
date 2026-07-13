@@ -9,7 +9,7 @@ strategy_type: quantitative
 markets: [stocks]
 complexity: advanced
 backtest_status: untested
-related: ["[[diagonal-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[leaps-strategies]]", "[[theta]]"]
+related: ["[[diagonal-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[theta]]"]
 ---
 
 # Double Diagonal
@@ -60,4 +60,3 @@ The Double Diagonal combines a diagonal call spread and a diagonal put spread in
 - [[diagonal-spread]] -- the single-side building block of the double diagonal
 - [[calendar-spread]] -- a simpler time-spread structure at a single strike
 - [[iron-condor]] -- a similar range-bound income strategy with same-expiration legs
-- [[leaps-strategies]] -- long-dated options used in a similar capital-efficient manner

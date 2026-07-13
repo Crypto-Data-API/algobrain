@@ -12,7 +12,7 @@ prerequisites: ["[[options-greeks]]", "[[theta-decay]]"]
 difficulty: intermediate
 ---
 
-Expiration laddering is the practice of distributing an [[options]] book's expirations across multiple weeks or months — rather than concentrating positions in a single expiry — in order to avoid [[gamma]] cliffs near expiration, smooth daily [[theta]] income, and reduce [[assignment-risk|assignment-clustering risk]]. It is a portfolio construction technique heavily emphasized by the [[itpm|Institute of Trading and Portfolio Management]] and a standard practice among professional premium sellers (Source: [[itpm-god-like-trader-status]]). The principle is simple: a book whose risk all rolls off the same Friday is exposed to a single, concentrated event; a book that breathes through expirations week after week behaves more like an annuity.
+Expiration laddering is the practice of distributing an [[options]] book's expirations across multiple weeks or months — rather than concentrating positions in a single expiry — in order to avoid [[gamma]] cliffs near expiration, smooth daily [[theta]] income, and reduce [[assignment-risk|assignment-clustering risk]]. It is a portfolio construction technique heavily emphasized by the Institute of Trading and Portfolio Management and a standard practice among professional premium sellers (Source: [[itpm-god-like-trader-status]]). The principle is simple: a book whose risk all rolls off the same Friday is exposed to a single, concentrated event; a book that breathes through expirations week after week behaves more like an annuity.
 
 ## The Problem That Laddering Solves
 
@@ -94,7 +94,7 @@ Each Friday (or rolling weekly), the trader closes the front rung, recycles the 
 
 ### Weekly Ladder (Aggressive Premium Capture)
 
-One position per weekly expiration for 6 weeks. Useful for indices with deep weekly options markets ([[spx]], [[spy]], [[qqq]]). Generates higher annualized [[theta]] but requires more active management because positions enter the gamma-cliff zone faster.
+One position per weekly expiration for 6 weeks. Useful for indices with deep weekly options markets ([[spx]], spy, qqq). Generates higher annualized [[theta]] but requires more active management because positions enter the gamma-cliff zone faster.
 
 ### Monthly Ladder (Lower Touch)
 
@@ -102,7 +102,7 @@ Equal weight at 30, 60, 90, 120 DTE. Easier to manage but loses the sweet spot o
 
 ### Hybrid: ITPM Approach
 
-The [[itpm]] curriculum teaches a ladder of 10 positions spread across 3-6 monthly expirations with [[itpm-ratio-calendar-spread|ratio calendar spreads]] as the building block. The structure layers expiration laddering on top of long/short [[long-short-equity|equity selection]]: every long-leaning position has a short-leaning counterpart on a different rung, balancing both directional and time exposure. See [[itpm-trade-construction-playbook]] (Source: [[itpm-god-like-trader-status]]).
+The itpm curriculum teaches a ladder of 10 positions spread across 3-6 monthly expirations with [[itpm-ratio-calendar-spread|ratio calendar spreads]] as the building block. The structure layers expiration laddering on top of long/short equity selection: every long-leaning position has a short-leaning counterpart on a different rung, balancing both directional and time exposure. See [[itpm-trade-construction-playbook]] (Source: [[itpm-god-like-trader-status]]).
 
 ## Theta Smoothing
 
@@ -160,7 +160,7 @@ The mechanics of *rolling* the front rung determine whether a ladder works in pr
 
 ### 1. Time-Based: Close at 21 DTE
 
-The classic [[tastytrade]] / [[itpm]] rule. At 21 DTE, [[gamma]] starts to accelerate sharply but is not yet in the dangerous zone. Closing here:
+The classic tastytrade / itpm rule. At 21 DTE, [[gamma]] starts to accelerate sharply but is not yet in the dangerous zone. Closing here:
 
 - Captures the bulk of the [[theta]] decay (the steepest part of the curve up to that point)
 - Avoids the gamma cliff
@@ -230,7 +230,7 @@ The three common ladder constructions trade off theta richness against managemen
 
 | Structure | Rungs / spacing | Theta capture | Management touch | Gamma exposure | Best for |
 |---|---|---|---|---|---|
-| **Weekly ladder** | 6 rungs × ~7 DTE apart (7-45 DTE) | Highest annualised | High — rungs hit the gamma zone fast | Higher (short rungs near cliff sooner) | Deep weekly markets ([[spx]], [[spy]], [[qqq]]) |
+| **Weekly ladder** | 6 rungs × ~7 DTE apart (7-45 DTE) | Highest annualised | High — rungs hit the gamma zone fast | Higher (short rungs near cliff sooner) | Deep weekly markets ([[spx]], spy, qqq) |
 | **Standard 6-rung (monthly cycle)** | 6 rungs, ~7 days apart, slid weekly | High (lives in 21-45 DTE band) | Moderate — one roll per week | Balanced | The default premium-selling ladder |
 | **Monthly ladder** | 30/60/90/120 DTE | Lower (misses the 21-45 DTE sweet spot) | Low | Lowest | [[diagonal-spread\|Diagonals]], [[ratio-spread\|ratio calendars]] |
 | **ITPM hybrid** | 10 positions across 3-6 monthly expiries | Moderate, balanced by long/short pairing | Moderate-high | Balanced by construction | [[itpm-ratio-calendar-spread\|Ratio-calendar]] books (Source: [[itpm-god-like-trader-status]]) |
@@ -263,7 +263,7 @@ If a trader buys [[long-call|long calls]] expecting a stock to rally over the ne
 
 ### 2. Event Trades Sized to a Catalyst Date
 
-If the trade is built around an [[earnings]] release, [[fomc]] decision, [[fda]] announcement, or [[sec-decision]], the expiration should be picked relative to the event — typically 1-2 weeks past the event date for short premium, exactly the event week for [[straddle-strangle|long straddles]]. Laddering across weeks dilutes the event capture.
+If the trade is built around an earnings release, [[fomc]] decision, [[fda]] announcement, or [[sec-decision]], the expiration should be picked relative to the event — typically 1-2 weeks past the event date for short premium, exactly the event week for [[straddle-strangle|long straddles]]. Laddering across weeks dilutes the event capture.
 
 ### 3. Single-Position [[itpm-ratio-calendar-spread|Calendar Spreads]]
 
@@ -289,7 +289,7 @@ A ladder is only as safe as its discipline. Traders who skip the 21 DTE close be
 
 ### 3. Ignoring Expiration-Day Liquidity
 
-Front-week SPX options may be liquid; front-week single-stock options on a small-cap name are often not. A trader who builds a ladder on a thinly-traded ticker discovers at 7 DTE that the bid/ask spread is 30%+ of the option price, and rolling the position destroys the [[theta]] earnings. Laddering only works on underlyings with real weekly or daily liquidity — [[spx]], [[spy]], [[qqq]], and the top ~50 [[stocks|single names]] by options volume.
+Front-week SPX options may be liquid; front-week single-stock options on a small-cap name are often not. A trader who builds a ladder on a thinly-traded ticker discovers at 7 DTE that the bid/ask spread is 30%+ of the option price, and rolling the position destroys the [[theta]] earnings. Laddering only works on underlyings with real weekly or daily liquidity — [[spx]], spy, qqq, and the top ~50 single names by options volume.
 
 ### 4. Building the Ladder All at Once
 
@@ -309,8 +309,8 @@ Most retail platforms offer calendar views that visualize expiration distributio
 
 | Platform | Feature | Notes |
 |----------|---------|-------|
-| [[interactive-brokers\|IBKR]] | Portfolio expiration grid | Filterable by underlying and DTE |
-| [[tastytrade]] | "Expirations" tab | Color-coded DTE buckets |
+| IBKR | Portfolio expiration grid | Filterable by underlying and DTE |
+| tastytrade | "Expirations" tab | Color-coded DTE buckets |
 | [[optionnet-explorer]] | Risk graph by expiration | Best-in-class for ladder visualization |
 | [[thinkorswim]] | "Beta Weighted" portfolio view | Shows aggregate Greeks by expiration |
 | Custom Python ([[risk-management|risk-management]] tooling) | Pull positions via broker API, group by expiry | For traders who want full programmatic control |
@@ -343,7 +343,7 @@ The minimum useful view shows: each expiration on the x-axis, total position the
 
 ## Sources
 
-- [[itpm-god-like-trader-status]] — the [[itpm]] portfolio construction approach with staggered expirations across 10 positions
+- [[itpm-god-like-trader-status]] — the itpm portfolio construction approach with staggered expirations across 10 positions
 - [[itpm-master-compounding]] — credit-collection cadence and roll discipline
 - [[tastytrade-mechanics-research]] — empirical evidence for 21 DTE close and 50% profit-taking rules on short premium
 - [[book-option-volatility-and-pricing]] — Natenberg's treatment of gamma and theta curves near expiration

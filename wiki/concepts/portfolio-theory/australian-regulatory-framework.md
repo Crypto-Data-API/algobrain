@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [regulation, australia, education, compliance]
 aliases: ["Australian Financial Regulation", "Twin Peaks Model"]
-related: ["[[asic]]", "[[apra]]", "[[austrac]]", "[[aml-ctf]]", "[[vasp-regulation]]", "[[australian-investing]]", "[[superannuation]]", "[[chess-sponsorship]]", "[[afsl]]", "[[investor-protection-australia]]", "[[regulation]]"]
+related: ["[[asic]]", "[[apra]]", "[[austrac]]", "[[aml-ctf]]", "[[vasp-regulation]]", "[[superannuation]]", "[[afsl]]", "[[investor-protection-australia]]", "[[regulation]]"]
 domain: [regulation]
 difficulty: intermediate
 ---
@@ -112,7 +112,6 @@ Governs [[superannuation]] funds:
 ### Income Tax Assessment Act 1997 (ITAA 1997)
 Tax treatment of investments:
 - Capital gains tax (CGT) — Division 104-118
-- [[franking-credits|Dividend imputation]] (franking credits) — Division 207
 - [[superannuation]] tax concessions — Division 290-295
 - Foreign income — Division 770
 
@@ -163,7 +162,7 @@ The Financial Adviser Standards and Ethics Authority (FASEA, functions now absor
 - **Mass exodus**: The number of financial advisers in Australia dropped from approximately **28,000** in 2018 to fewer than **16,000** by 2025 (figures indicative; ASIC's Financial Advisers Register is the authoritative count) — roughly a 40%+ decline
 - **Advice gap**: Fewer advisers means longer wait times and higher fees — comprehensive financial advice commonly costs in the order of $3,000-$5,000+ per year (indicative)
 - **Quality improvement**: Remaining advisers are better educated and held to higher ethical standards
-- **Self-directed investing growth**: The advice gap has pushed more Australians toward self-directed investing through platforms like [[commsec]], [[selfwealth]], and [[superhero]]
+- **Self-directed investing growth**: The advice gap has pushed more Australians toward self-directed investing through platforms like commsec, selfwealth, and superhero
 
 ## Council of Financial Regulators (CFR)
 
@@ -211,7 +210,7 @@ The practical takeaway: AUSTRAC registration of an exchange confirms AML complia
 Understanding the regulatory framework helps Australian investors:
 
 1. **Choose safe brokers**: Verify [[afsl|AFSL]] status on the ASIC register before depositing money
-2. **Understand protections**: Know what is protected ([[chess-sponsorship]], AFCA, NGF) and what is not (DeFi, unregistered platforms) — see [[investor-protection-australia]]
+2. **Understand protections**: Know what is protected (chess-sponsorship, AFCA, NGF) and what is not (DeFi, unregistered platforms) — see [[investor-protection-australia]]
 3. **Navigate compliance**: KYC requirements, source of funds requests, and reporting obligations are not optional
 4. **Assess product suitability**: DDO means products should be designed for people like you — but you still need to understand the product
 5. **Tax obligations**: The ATO, AUSTRAC, and exchange data-matching programs mean investment income is highly visible to authorities — see [[cryptocurrency-tax-australia]] and [[reporting-obligations-australia]]
@@ -224,9 +223,7 @@ Understanding the regulatory framework helps Australian investors:
 - [[austrac]]
 - [[aml-ctf]]
 - [[vasp-regulation]]
-- [[australian-investing]]
 - [[superannuation]]
-- [[chess-sponsorship]]
 - [[afsl]]
 - [[investor-protection-australia]]
 - [[regulation]]

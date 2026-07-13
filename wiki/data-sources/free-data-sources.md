@@ -13,7 +13,7 @@ related: ["[[data-sources-overview]]", "[[paid-data-providers]]", "[[crypto-data
 
 Free providers, ranked by usefulness for serious research. Most are usable for prototyping but have one or more biases that disqualify them for production research. The biases are documented per-source so you can decide when each one is acceptable.
 
-This page is the free-tier slice of the [[data-sources-overview]] hub. For paid/institutional vendors see [[paid-data-providers]]; for the crypto-specific catalog (which is unusually free-friendly) see [[crypto-data-sources]]; for macro detail see [[macro-data-sources]]; for fundamentals see [[fundamental-data-sources]].
+This page is the free-tier slice of the [[data-sources-overview]] hub. For paid/institutional vendors see [[paid-data-providers]]; for the crypto-specific catalog (which is unusually free-friendly) see [[crypto-data-sources]]; for macro detail see [[macro-data-sources]]; for fundamentals see fundamental-data-sources.
 
 ## The Free-Data Bargain
 
@@ -41,7 +41,7 @@ A consolidated index of every free provider on this page, with its asset class, 
 | CoinGecko / CoinMarketCap | Crypto | Aggregated price, market cap | Aggregated, some interpolation | No (execution) |
 | CoinAPI / CryptoCompare (free) | Crypto | Normalized cross-venue | Free tier too thin | Prototype |
 | Block explorers + analytics free tiers | Crypto (on-chain) | Wallet/flow/TVL queries | Free tiers limited | Prototype |
-| Yahoo options chains | Options | Fragmentary chains | No history, laggy | No (see [[options-data-sources]]) |
+| Yahoo options chains | Options | Fragmentary chains | No history, laggy | No (see options-data-sources) |
 | NewsAPI / GDELT / Google News RSS | News | Headlines, some full text | No entity tagging, rate limits | Prototype |
 | Reddit / Twitter (X) | Sentiment | Restricted public APIs | Free tiers heavily gated (2024-26) | No |
 
@@ -203,7 +203,7 @@ Blockchain explorers (Etherscan, Blockchair, Solscan) and free tiers of analytic
 
 ## Options
 
-There are no good free options data sources. The free options chains on Yahoo Finance are fragmentary, often lag, and have no historical depth. Anyone serious about options research has to pay for OPRA-derived data — see [[options-data-sources]].
+There are no good free options data sources. The free options chains on Yahoo Finance are fragmentary, often lag, and have no historical depth. Anyone serious about options research has to pay for OPRA-derived data — see options-data-sources.
 
 ## News and Sentiment
 
@@ -272,6 +272,4 @@ Strategies that survive this re-validation are real. Strategies that don't were 
 - [[paid-data-providers]]
 - [[crypto-data-sources]]
 - [[macro-data-sources]]
-- [[fundamental-data-sources]]
-- [[options-data-sources]]
 - [[survivorship-bias]], [[lookahead-bias]]

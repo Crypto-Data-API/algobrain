@@ -69,7 +69,7 @@ This is a survey page; each implementation page ([[tail-risk-hedging]], [[long-v
 
 **Entry / structure**
 - Budget: **0.5-1.5% of NAV per year** in premium (Spitznagel-style programs run 1-5% all-in including VIX overlays). The budget is fixed in advance and treated as an insurance expense.
-- Buy [[spy|SPY]]/[[sp500|SPX]] puts **10-15% OTM**, **2-3 months to expiry**. Ladder across 3 monthly expiries so one-third of the book rolls each month.
+- Buy SPY/SPX puts **10-15% OTM**, **2-3 months to expiry**. Ladder across 3 monthly expiries so one-third of the book rolls each month.
 - Optional kicker: 5-10% of the vol budget in [[vix]] calls struck VIX+15 to VIX+30, 1-3 months out, for faster-twitch payoff.
 
 **Roll / exit**
@@ -239,7 +239,7 @@ Each entry links to its detailed strategy page where one exists, or to a stub fl
 
 ### Protective puts on equity index ([[protective-puts]])
 
-Buy [[spy]] or [[sp500|SPX]] puts 5-15% OTM, 1-6 months out, against a long equity book. The simplest and most-deployed long-vol structure. Costs 1-3% NAV per year on rolling implementations; pays multiples in 20%+ drawdowns. Subset: [[long-vol-overlay]], the systematic version run alongside a [[options-premium-selling|short-vol core]].
+Buy spy or SPX puts 5-15% OTM, 1-6 months out, against a long equity book. The simplest and most-deployed long-vol structure. Costs 1-3% NAV per year on rolling implementations; pays multiples in 20%+ drawdowns. Subset: [[long-vol-overlay]], the systematic version run alongside a [[options-premium-selling|short-vol core]].
 
 ### VIX calls and call spreads ([[vix-calls]])
 

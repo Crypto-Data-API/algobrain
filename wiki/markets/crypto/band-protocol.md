@@ -9,12 +9,12 @@ aliases: ["BAND", "Band", "Band Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bandprotocol.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[chainlink]]", "[[defi]]", "[[data-provider]]", "[[cosmos]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[defi]]", "[[data-provider]]", "[[cosmos]]"]
 ---
 
 # Band Protocol
 
-**Band Protocol** (BAND) is a cross-chain [[oracle|data oracle]] platform that aggregates and connects real-world data and APIs to smart contracts. It is one of the longest-running competitors to [[chainlink|Chainlink]] in the decentralized [[oracle]] sector, distinguished by its use of a purpose-built Cosmos-SDK blockchain, **BandChain**, to compute and verify data feeds before relaying them to destination chains such as [[ethereum|Ethereum]]. It ranks **#657** by market capitalization.
+**Band Protocol** (BAND) is a cross-chain data oracle platform that aggregates and connects real-world data and APIs to smart contracts. It is one of the longest-running competitors to [[chainlink|Chainlink]] in the decentralized oracle sector, distinguished by its use of a purpose-built Cosmos-SDK blockchain, **BandChain**, to compute and verify data feeds before relaying them to destination chains such as [[ethereum|Ethereum]]. It ranks **#657** by market capitalization.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -41,7 +41,7 @@ As of 2026-06-22, BAND trades at **$0.16366** with a market cap of roughly **$29
 
 ## Overview
 
-Band Protocol solves the [[oracle]] problem: smart contracts cannot natively access off-chain data (prices, weather, sports results, API responses), yet most [[defi|DeFi]] applications depend on accurate external inputs. Band aggregates data from multiple independent sources, reaches consensus on a value, and delivers a cryptographically verifiable result to the requesting smart contract, reducing single-source and counterparty risk.
+Band Protocol solves the oracle problem: smart contracts cannot natively access off-chain data (prices, weather, sports results, API responses), yet most [[defi|DeFi]] applications depend on accurate external inputs. Band aggregates data from multiple independent sources, reaches consensus on a value, and delivers a cryptographically verifiable result to the requesting smart contract, reducing single-source and counterparty risk.
 
 Band's flagship product family has evolved through several versions. Its current architecture (Band 2.0 onward) runs oracle computation on **BandChain**, a dedicated public blockchain built with the Cosmos SDK and Tendermint consensus. Off-chain data is fetched and aggregated by BandChain validators according to programmable **oracle scripts**, then proofs are relayed cross-chain to consumer networks. This design lets Band serve many destination chains while keeping the heavy data-aggregation work off the (more expensive) destination chain itself.
 
@@ -191,7 +191,7 @@ BandChain is governed through standard **Cosmos-SDK on-chain governance**: BAND 
 
 ## Competitive Position
 
-Band competes directly with [[chainlink|Chainlink]], the dominant decentralized [[oracle]] provider, as well as [[dia-data|DIA]], Pyth, API3 and others. Band's relative strengths are its Cosmos-native design (well-suited to the Cosmos/IBC ecosystem and to custom, non-price data feeds) and its on-chain oracle-script model. Its principal challenge is the same one facing all Chainlink alternatives: oracle integrations exhibit strong network effects, and Chainlink's incumbency advantage in total value secured and integration count is large. Band's market cap (~$29M) is a small fraction of the leading oracle provider's.
+Band competes directly with [[chainlink|Chainlink]], the dominant decentralized oracle provider, as well as [[dia-data|DIA]], Pyth, API3 and others. Band's relative strengths are its Cosmos-native design (well-suited to the Cosmos/IBC ecosystem and to custom, non-price data feeds) and its on-chain oracle-script model. Its principal challenge is the same one facing all Chainlink alternatives: oracle integrations exhibit strong network effects, and Chainlink's incumbency advantage in total value secured and integration count is large. Band's market cap (~$29M) is a small fraction of the leading oracle provider's.
 
 ### Oracle Provider Comparison
 
@@ -233,7 +233,6 @@ The broad industry shift toward **pull / first-party** oracles (Pyth, API3) is a
 
 ## See Also
 
-- [[oracle]]
 - [[chainlink]]
 - [[dia-data]]
 - [[defi]]

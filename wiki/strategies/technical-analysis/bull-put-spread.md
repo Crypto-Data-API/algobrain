@@ -128,7 +128,7 @@ Ample for retail and small funds on liquid index ETFs and large-caps. Constraint
 - **Sharp gap down** through the long strike: realises max loss with no chance to manage; correlated across many positions in a market-wide selloff (the dominant tail risk for premium sellers).
 - **Volatility expansion**: a rising-IV selloff marks the spread to a large unrealised loss even before expiry (short [[vega]]).
 - **Over-sizing / over-crowding**: too many correlated short-put spreads turn a single bad day into account-threatening loss — the classic "picking up pennies in front of a steamroller" failure.
-- **Early [[assignment]]** on the short put when deep ITM near ex-[[dividend]], converting to unwanted long stock.
+- **Early [[assignment]]** on the short put when deep ITM near ex-dividend, converting to unwanted long stock.
 - **Edge compression**: a persistently low-IV regime offers premium too thin to cover costs and tail risk.
 
 ## Kill criteria

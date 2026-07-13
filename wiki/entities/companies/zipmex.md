@@ -27,7 +27,7 @@ Zipmex was a Southeast Asian cryptocurrency exchange (Thailand, Indonesia, Singa
 - **Yield is a credit decision:** advertised exchange yields are funded by lending customer deposits to third parties; the headline APY hides the counterparty's solvency risk.
 - **Contagion clusters:** Zipmex did not fail in isolation — it went down in the same 2022 wave as [[ftx|FTX]], [[blockfi|BlockFi]], [[voyager-digital|Voyager Digital]] and [[celsius-network|Celsius]], illustrating how interconnected crypto lenders transmit shocks.
 
-Fred McNaught references Zipmex in early crypto discussions as an example of the exchange [[counterparty-risk|counterparty risk]] present in the cryptocurrency market.
+Zipmex stands as an example of the exchange [[counterparty-risk|counterparty risk]] present in the cryptocurrency market.
 
 ## Related
 

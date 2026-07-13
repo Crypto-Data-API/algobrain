@@ -15,7 +15,7 @@ aliases:
 domain: [market-microstructure]
 prerequisites: ["[[liquidity]]", "[[order-book]]", "[[slippage]]"]
 difficulty: intermediate
-related: ["[[slippage]]", "[[liquidity]]", "[[order-book]]", "[[algorithmic-trading]]", "[[implementation-shortfall]]", "[[dark-pool-trading]]"]
+related: ["[[slippage]]", "[[liquidity]]", "[[order-book]]", "[[algorithmic-trading]]", "[[implementation-shortfall]]"]
 ---
 
 # Market Impact
@@ -39,7 +39,7 @@ Institutional traders use several execution strategies to reduce impact and the 
 
 - **TWAP (Time-Weighted Average Price)** -- spreads the order evenly over a specified time window, reducing the concentration of demand at any one moment.
 - **VWAP (Volume-Weighted Average Price)** -- distributes the order proportionally to historical volume patterns throughout the day, trading more during high-volume periods and less during quiet ones.
-- **Dark pools** -- alternative trading venues where orders are not displayed on public [[order-book]]s, allowing large blocks to match without revealing intent to the market. See [[dark-pool-trading]].
+- **Dark pools** -- alternative trading venues where orders are not displayed on public [[order-book]]s, allowing large blocks to match without revealing intent to the market. See dark-pool-trading.
 - **Iceberg orders** -- only a small portion of the total order is visible on the exchange, hiding the true size from other participants.
 
 ## Related
@@ -49,7 +49,6 @@ Institutional traders use several execution strategies to reduce impact and the 
 - [[order-book]]
 - [[algorithmic-trading]]
 - [[implementation-shortfall]]
-- [[dark-pool-trading]]
 
 ## Sources
 

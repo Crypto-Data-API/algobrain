@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [book, history, quantitative, derivatives, goldman-sachs]
 aliases: ["My Life as a Quant"]
-related: ["[[goldman-sachs]]", "[[options-greeks]]", "[[implied-volatility]]", "[[black-scholes]]", "[[derivatives]]", "[[my-life-as-a-quant]]"]
+related: ["[[options-greeks]]", "[[implied-volatility]]", "[[black-scholes]]", "[[derivatives]]", "[[my-life-as-a-quant]]"]
 source_type: book
 source_author: "Emanuel Derman"
 source_date: 2004
@@ -14,7 +14,7 @@ confidence: high
 claims_count: 10
 ---
 
-Emanuel Derman's *My Life as a Quant* is an intellectual memoir tracing his transition from theoretical particle physics to quantitative finance at [[goldman-sachs|Goldman Sachs]], where he spent 17 years (1985-2002). Derman co-developed the Black-Derman-Toy (BDT) interest rate model — one of the first arbitrage-free models for pricing bond options — and led the quantitative strategies group responsible for equity derivatives and [[implied-volatility|volatility smile]] modeling. The book is distinguished by its philosophical depth: Derman repeatedly and honestly confronts the fundamental differences between physics (where models describe immutable natural laws) and finance (where models approximate the behavior of reactive human participants). His central thesis — that financial models are useful metaphors, not physical truths — remains the most important epistemological statement in quantitative finance.
+Emanuel Derman's *My Life as a Quant* is an intellectual memoir tracing his transition from theoretical particle physics to quantitative finance at Goldman Sachs, where he spent 17 years (1985-2002). Derman co-developed the Black-Derman-Toy (BDT) interest rate model — one of the first arbitrage-free models for pricing bond options — and led the quantitative strategies group responsible for equity derivatives and [[implied-volatility|volatility smile]] modeling. The book is distinguished by its philosophical depth: Derman repeatedly and honestly confronts the fundamental differences between physics (where models describe immutable natural laws) and finance (where models approximate the behavior of reactive human participants). His central thesis — that financial models are useful metaphors, not physical truths — remains the most important epistemological statement in quantitative finance.
 
 ## Key Claims
 
@@ -30,7 +30,7 @@ Emanuel Derman's *My Life as a Quant* is an intellectual memoir tracing his tran
 
 6. [HIGH] The transition from physics to finance requires abandoning the expectation of elegant, universal laws. Markets are non-stationary, driven by human psychology, subject to regime changes, and lack the reproducible experimental conditions that make physics tractable. Intellectual humility is the prerequisite for effective financial modeling. (Source: Emanuel Derman)
 
-7. [HIGH] [[goldman-sachs|Goldman Sachs]]'s quantitative culture in the 1980s and 1990s was built by physicists, mathematicians, and engineers — outsiders to traditional finance who brought scientific rigor and quantitative methods. The firm's competitive advantage in derivatives pricing stemmed from this unconventional hiring approach. (Source: Emanuel Derman)
+7. [HIGH] Goldman Sachs's quantitative culture in the 1980s and 1990s was built by physicists, mathematicians, and engineers — outsiders to traditional finance who brought scientific rigor and quantitative methods. The firm's competitive advantage in derivatives pricing stemmed from this unconventional hiring approach. (Source: Emanuel Derman)
 
 8. [HIGH] Model risk — the gap between a model's assumptions and market reality — is a real and significant source of financial loss. Models calibrated on normal market conditions can fail catastrophically during stressed markets, producing prices and risk estimates that are dangerously wrong precisely when accuracy matters most. (Source: Emanuel Derman)
 
@@ -40,7 +40,7 @@ Emanuel Derman's *My Life as a Quant* is an intellectual memoir tracing his tran
 
 ## Concepts Referenced
 
-- [[goldman-sachs]], [[fischer-black]]
+- goldman-sachs, [[fischer-black]]
 - [[black-scholes]], [[implied-volatility]], [[volatility-smile]]
 - [[options-greeks]], [[derivatives]]
 - [[interest-rate-models]], [[bdt-model]]
@@ -49,7 +49,6 @@ Emanuel Derman's *My Life as a Quant* is an intellectual memoir tracing his tran
 
 ## Pages Backed
 
-- [[goldman-sachs]] — quant culture, hiring philosophy, and derivatives capabilities in the 1985-2002 period
 - [[implied-volatility]] — historical emergence of the volatility smile/skew after 1987
 - [[black-scholes]] — limitations of the constant-volatility assumption and post-1987 modifications
 - [[options-greeks]] — practical computation in the context of Goldman's derivatives desk

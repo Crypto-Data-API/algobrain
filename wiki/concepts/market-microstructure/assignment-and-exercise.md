@@ -9,7 +9,7 @@ aliases: ["Option Exercise", "Option Assignment", "Early Exercise", "Pin Risk", 
 domain: [market-microstructure]
 prerequisites: ["[[options]]", "[[call-options]]", "[[put-options]]", "[[moneyness]]"]
 difficulty: intermediate
-related: ["[[options]]", "[[american-vs-european-options]]", "[[moneyness]]", "[[covered-call]]", "[[cash-secured-put]]", "[[put-call-parity]]", "[[theta]]", "[[dividends]]"]
+related: ["[[options]]", "[[american-vs-european-options]]", "[[moneyness]]", "[[covered-call]]", "[[cash-secured-put]]", "[[put-call-parity]]", "[[theta]]"]
 ---
 
 Exercise is the act of converting an option contract into a position in the underlying asset. Assignment is what happens to the option seller (writer) when the buyer exercises — the seller is obligated to fulfill the contract. Understanding exercise and assignment mechanics is critical for avoiding unexpected stock positions, managing dividend risk, and making rational decisions about whether to exercise, hold, or close an option position.

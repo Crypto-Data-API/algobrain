@@ -34,8 +34,6 @@ Every hedge costs something: an explicit premium (buying [[put-option|puts]]), a
 ## Relative-value and cross-asset hedges (offset risk with another position)
 
 - [[pairs-trading]] — long one name, short a correlated peer, isolating the spread and hedging out shared (sector/market) risk.
-- [[long-short-equity]] — a hedged equity book where short positions neutralize market beta, leaving stock-selection alpha.
-- [[ai-sector-rotation-energy-hedge]] — example of using an uncorrelated/negatively-correlated sector as a thematic hedge.
 - [[cross-chain-contagion-hedge]] — crypto-native cross-asset hedge against contagion across chains/protocols.
 
 ## When to use which
@@ -46,7 +44,7 @@ Every hedge costs something: an explicit premium (buying [[put-option|puts]]), a
 | Broad equity book, fear a crash, can tolerate carry | [[tail-risk-hedging]] / [[vix-call-spreads]] |
 | Want protection with zero premium outlay | [[collar]] (zero-cost) or [[cppi|CPPI]] |
 | Mildly bearish, want to keep harvesting yield | [[covered-call]] |
-| Isolate stock-picking skill, remove market beta | [[long-short-equity]] / [[pairs-trading]] |
+| Isolate stock-picking skill, remove market beta | long-short-equity / [[pairs-trading]] |
 | Running an options book | [[delta-hedging]] |
 | Trend sleeve already on, plug the gap-risk hole | [[trend-plus-tail-hedge]] |
 

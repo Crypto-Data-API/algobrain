@@ -12,7 +12,7 @@ difficulty: intermediate
 related: ["[[sharpe-ratio]]", "[[treynor-ratio]]", "[[sortino-ratio]]", "[[alpha]]", "[[beta]]", "[[fundamental-law-of-active-management]]", "[[active-management]]", "[[modern-portfolio-theory]]"]
 ---
 
-The **information ratio (IR)** measures a portfolio's return *relative to a benchmark* per unit of the risk taken to deviate from that benchmark. It is the standard yardstick for [[active-management|active managers]]: it answers "how much excess return did this manager add for each unit of active risk, and how consistently?" Where the [[sharpe-ratio|Sharpe ratio]] compares a portfolio to the risk-free asset, the information ratio compares it to a chosen benchmark (such as the [[sp500|S&P 500]]) — making it the natural measure of skill at beating an index rather than at delivering absolute return.
+The **information ratio (IR)** measures a portfolio's return *relative to a benchmark* per unit of the risk taken to deviate from that benchmark. It is the standard yardstick for [[active-management|active managers]]: it answers "how much excess return did this manager add for each unit of active risk, and how consistently?" Where the [[sharpe-ratio|Sharpe ratio]] compares a portfolio to the risk-free asset, the information ratio compares it to a chosen benchmark (such as the S&P 500) — making it the natural measure of skill at beating an index rather than at delivering absolute return.
 
 ## Formula
 

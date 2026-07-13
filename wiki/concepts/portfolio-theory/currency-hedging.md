@@ -12,7 +12,7 @@ difficulty: intermediate
 related: ["[[australian-dollar]]", "[[us-dollar]]", "[[diversification]]", "[[hedging]]", "[[forex]]", "[[risk-management]]", "[[correlation]]", "[[hedge-ratio]]", "[[forward-contract]]", "[[carry-trade]]", "[[covered-interest-rate-parity]]"]
 ---
 
-Currency hedging is the practice of protecting an investment portfolio against adverse foreign exchange movements, typically using [[forward-contract|forward contracts]], options, or currency-hedged ETFs. For any investor holding assets denominated in a foreign currency, the total return is a combination of the asset's local-currency return and the exchange rate movement. When Australian investors hold international equities, a rising [[australian-dollar|AUD]] erodes returns while a falling AUD amplifies them. Fred McNaught does **not** hedge currency exposure, considering it "unpredictable and expensive." He views currency movements as largely unforecastable over the medium term and prefers to accept the volatility rather than pay the cost of hedging instruments, which can drag on long-term returns.
+Currency hedging is the practice of protecting an investment portfolio against adverse foreign exchange movements, typically using [[forward-contract|forward contracts]], options, or currency-hedged ETFs. For any investor holding assets denominated in a foreign currency, the total return is a combination of the asset's local-currency return and the exchange rate movement. When Australian investors hold international equities, a rising [[australian-dollar|AUD]] erodes returns while a falling AUD amplifies them. A common argument against hedging is that currency movements are largely unforecastable over the medium term, so accepting the volatility beats paying the cost of hedging instruments, which can drag on long-term returns.
 
 ## The Return Decomposition
 
@@ -38,7 +38,7 @@ The three primary tools for currency hedging are:
 
 ## Cost of Hedging
 
-The cost of currency hedging is primarily determined by the **interest rate differential** between the domestic and foreign currency. Under [[covered-interest-rate-parity|covered interest rate parity]], the forward rate reflects this differential. When Australian interest rates exceed US rates (as they did for much of 2023–2024), hedging AUD/USD exposure is relatively cheap or even **positive-carry**. When the differential reverses, hedging becomes a drag on returns. Over long holding periods, hedging costs compound and can reduce total returns by roughly 0.5–2.0% annually depending on the rate environment. This cost is the core of Fred McNaught's argument against hedging.
+The cost of currency hedging is primarily determined by the **interest rate differential** between the domestic and foreign currency. Under [[covered-interest-rate-parity|covered interest rate parity]], the forward rate reflects this differential. When Australian interest rates exceed US rates (as they did for much of 2023–2024), hedging AUD/USD exposure is relatively cheap or even **positive-carry**. When the differential reverses, hedging becomes a drag on returns. Over long holding periods, hedging costs compound and can reduce total returns by roughly 0.5–2.0% annually depending on the rate environment. This cost is the core of the argument against hedging.
 
 Note the link to the [[carry-trade]]: hedging away a high-yield currency means *giving up* the carry, while hedging a low-yield currency you're long *earns* carry. The two are the same coin viewed from opposite sides.
 

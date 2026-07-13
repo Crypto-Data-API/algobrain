@@ -9,7 +9,7 @@ aliases: ["USTB", "Superstate USTB", "Invesco Short Duration US Government Secur
 entity_type: fund
 founded: 2024
 website: "https://superstate.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[treasuries]]", "[[tokenized-treasuries]]", "[[real-world-assets]]", "[[usdc]]", "[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[ondo-finance]]", "[[invesco]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[treasuries]]", "[[tokenized-treasuries]]", "[[real-world-assets]]", "[[usdc]]", "[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[ondo-finance]]"]
 ---
 
 # Superstate Short Duration U.S. Government Securities Fund (USTB)
@@ -85,7 +85,7 @@ Superstate, an Exempt Reporting Adviser, originally served as the Fund's investm
 
 | Product | Issuer / Manager | Approx. on-chain AUM | Access | Backing |
 |---|---|---|---|---|
-| **USTB** | Superstate / [[invesco\|Invesco]] (mgr) | ~$1.0B (2026-06-21) | US Qualified Purchasers, allowlist | Short-duration US Treasuries & Agencies |
+| **USTB** | Superstate / Invesco (mgr) | ~$1.0B (2026-06-21) | US Qualified Purchasers, allowlist | Short-duration US Treasuries & Agencies |
 | [[blackrock-usd-institutional-digital-liquidity-fund\|BUIDL]] | BlackRock / Securitize | Largest tokenized treasury fund | Institutional, permissioned | US Treasuries, repo, cash |
 | Ondo OUSG / USDY | [[ondo-finance\|Ondo Finance]] | Multi-hundred-million | OUSG QP-gated; USDY broader | Short-term US Treasuries |
 | Franklin BENJI | Franklin Templeton | Multi-hundred-million | Retail-accessible (US) | US govt money market fund |
@@ -156,7 +156,6 @@ USTB is a low-risk cash-equivalent by crypto standards, but it is not risk-free:
 - [[blackrock-usd-institutional-digital-liquidity-fund]] — chief competitor (BUIDL)
 - [[ondo-finance]], [[ustbl-tokenized-u-s-treasury-bill]] — adjacent tokenized treasury products
 - [[usdtb]] — stablecoin built on tokenized-treasury reserves
-- [[invesco]] — investment manager since March 2026
 - [[usdc]] — subscription/redemption currency
 - [[crypto-fear-and-greed-index]]
 - [[crypto-markets]], [[ethereum]], [[solana]]

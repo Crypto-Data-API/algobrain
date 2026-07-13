@@ -17,7 +17,7 @@ data_required: [level1-quotes, level2-depth, intraday-volume, volatility-estimat
 min_capital_usd: 0
 capacity_usd: 100000000
 crowding_risk: low
-related: ["[[dark-pool-trading]]", "[[algorithmic-trading]]", "[[vwap]]", "[[twap]]", "[[market-microstructure]]", "[[market-impact]]", "[[transaction-costs]]", "[[slippage]]", "[[transaction-cost-analysis]]"]
+related: ["[[algorithmic-trading]]", "[[vwap]]", "[[twap]]", "[[market-microstructure]]", "[[market-impact]]", "[[transaction-costs]]", "[[slippage]]", "[[transaction-cost-analysis]]"]
 ---
 
 # Implementation Shortfall
@@ -41,7 +41,7 @@ Per [[edge-taxonomy]], IS is an **analytical / structural execution** edge, not 
 
 ## Why this edge exists
 
-The counterparties are **liquidity providers** (market makers, who charge the spread and widen against size) and **predatory / opportunistic algos** that detect large orders and trade ahead. Naive execution (a single market order) pays maximum impact and signals size; IS reduces both by slicing, randomizing, and routing across venues including [[dark-pool-trading|dark pools]]. The persistent "loser" is the unsophisticated executor who leaks the decision to the tape -- IS is how institutions stop being that loser. Because the alpha being protected belongs to the manager, the value of IS scales with both order size relative to [[adv]] and the underlying alpha's decay rate.
+The counterparties are **liquidity providers** (market makers, who charge the spread and widen against size) and **predatory / opportunistic algos** that detect large orders and trade ahead. Naive execution (a single market order) pays maximum impact and signals size; IS reduces both by slicing, randomizing, and routing across venues including dark pools. The persistent "loser" is the unsophisticated executor who leaks the decision to the tape -- IS is how institutions stop being that loser. Because the alpha being protected belongs to the manager, the value of IS scales with both order size relative to [[adv]] and the underlying alpha's decay rate.
 
 ## Null hypothesis
 
@@ -80,11 +80,11 @@ report_tca(shortfall, pretrade_estimate)
 
 ## Indicators / data used
 
-[[adv|Average daily volume]], real-time level-1 quotes and level-2 depth ([[market-microstructure]]), intraday volume curves, short-horizon volatility estimates, [[bid-ask-spread]], venue/liquidity maps (lit vs. [[dark-pool-trading|dark]]), and a calibrated [[market-impact]] model.
+[[adv|Average daily volume]], real-time level-1 quotes and level-2 depth ([[market-microstructure]]), intraday volume curves, short-horizon volatility estimates, [[bid-ask-spread]], venue/liquidity maps (lit vs. dark), and a calibrated [[market-impact]] model.
 
 ## Example trade
 
-A pension fund decides to buy **500,000 AAPL at $185.00** (decision price). [[adv]] is 50M shares, so the order is **1% of ADV** -- meaningful. The IS algo runs at **neutral urgency**, 2-hour target. It works **40-60 child orders**, mixing passive limits with small marketable orders and routing some to [[dark-pool-trading|dark pools]]. During execution AAPL drifts to $185.40; the volume-weighted fill is **$185.22**. Implementation shortfall: `($185.22 − $185.00) × 500,000 = $110,000`, i.e. **~12 bps** of slippage. A single market order's estimated impact would have been **30-50 bps ($277K-$462K)**. *(Illustrative round numbers.)* Note the trade-off made visible: had the algo been more aggressive it might have beaten the $185.40 drift but paid more impact; more passive, less impact but more exposure to the adverse drift.
+A pension fund decides to buy **500,000 AAPL at $185.00** (decision price). [[adv]] is 50M shares, so the order is **1% of ADV** -- meaningful. The IS algo runs at **neutral urgency**, 2-hour target. It works **40-60 child orders**, mixing passive limits with small marketable orders and routing some to dark pools. During execution AAPL drifts to $185.40; the volume-weighted fill is **$185.22**. Implementation shortfall: `($185.22 − $185.00) × 500,000 = $110,000`, i.e. **~12 bps** of slippage. A single market order's estimated impact would have been **30-50 bps ($277K-$462K)**. *(Illustrative round numbers.)* Note the trade-off made visible: had the algo been more aggressive it might have beaten the $185.40 drift but paid more impact; more passive, less impact but more exposure to the adverse drift.
 
 ## Performance characteristics
 
@@ -120,7 +120,7 @@ See [[when-to-retire-a-strategy]]. For an execution algo, "retire/intervene" cri
 
 - Realized shortfall persistently exceeds the pre-trade [[transaction-cost-analysis|TCA]] estimate beyond a tolerance across many orders → recalibrate or switch algo.
 - Participation cannot be met without breaching impact/footprint limits → switch to multi-day or liquidity-seeking mode.
-- Adverse-selection metrics (post-fill reversion) indicate detectable leakage → randomize / re-route to [[dark-pool-trading|dark]] venues.
+- Adverse-selection metrics (post-fill reversion) indicate detectable leakage → randomize / re-route to dark venues.
 
 ## Advantages
 
@@ -147,7 +147,6 @@ General execution and [[market-microstructure]] knowledge (Perold 1988 implement
 - [[transaction-costs]] / [[slippage]] -- the broader cost framework
 - [[transaction-cost-analysis]] -- how realized shortfall is benchmarked
 - [[vwap]] / [[twap]] -- alternative execution benchmarks (average price, not arrival)
-- [[dark-pool-trading]] -- venue strategy for reducing information leakage
 - [[adv]] -- average daily volume, the key sizing input
 - [[market-microstructure]] -- how trading mechanisms shape execution cost
 - [[algorithmic-trading]] -- the broader category of systematic execution

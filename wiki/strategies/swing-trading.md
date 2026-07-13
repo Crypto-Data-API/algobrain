@@ -104,7 +104,6 @@ for pos in open_positions:
 - [[macd]] — trend-following crossover confirmation on the daily timeframe
 - [[volume-analysis]] — breakout confirmation, accumulation/distribution
 - [[support-resistance]] levels and swing highs/lows
-- [[earnings-calendar]] — event-risk exclusion windows
 - [[atr]] — stop distance and gap-risk-adjusted sizing
 
 ## Example trade
@@ -175,7 +174,7 @@ See [[day-trading-vs-swing-trading]] for detailed comparison.
 - **[[support-resistance-breakout|Breakout trading]]** — enter when price breaks above resistance or below support with volume confirmation
 - **[[rsi-divergence|RSI divergence]]** — identify exhaustion in trending moves via divergence between price and RSI
 - **[[macd-crossover|MACD crossover]]** — trend-following signals on the daily timeframe
-- **Earnings gap strategies** — trade post-earnings momentum or mean-reversion over 2-5 day windows (related: [[post-earnings-announcement-drift]])
+- **Earnings gap strategies** — trade post-earnings momentum or mean-reversion over 2-5 day windows (related: post-earnings-announcement-drift)
 - **[[multi-timeframe-confluence|Multi-timeframe confluence]]** — use weekly charts for direction, daily for entry
 
 ### Variant comparison
@@ -242,7 +241,6 @@ Across all variants the [[risk-management]] discipline — pre-placed stop, 1-2%
 - [[edge-taxonomy]] — edge categorization framework
 - [[failure-modes]] — generic strategy failure catalog
 - [[market-regime]] — regime conditions that flip swing expectancy
-- [[post-earnings-announcement-drift]] — basis for earnings-gap variants
 - [[atr]] — volatility-adjusted stop and position sizing
 - [[when-to-retire-a-strategy]] — kill-criteria framework
 - [[backtesting]] / [[overfitting-detection]] — validating any specific rule set

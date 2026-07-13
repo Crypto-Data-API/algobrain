@@ -6,7 +6,7 @@ updated: 2026-06-10
 status: good
 tags: [data-provider, options, futures, commodities, stocks]
 aliases: ["Barchart.com", "Barchart Solutions", "cmdtyView"]
-related: ["[[orats]]", "[[market-chameleon]]", "[[finviz]]", "[[yahoo-finance]]", "[[unusual-whales]]", "[[cot-data]]", "[[commodity-data-sources]]", "[[options-flow-analysis]]", "[[futures-data-sources]]"]
+related: ["[[yahoo-finance]]", "[[cot-data]]", "[[commodity-data-sources]]", "[[options-flow-analysis]]", "[[futures-data-sources]]"]
 entity_type: company
 website: "https://www.barchart.com"
 founded: 1995
@@ -15,11 +15,11 @@ headquarters: "Chicago, USA"
 
 # Barchart
 
-**Barchart** is a long-running market-data and analytics provider founded in 1995 and headquartered in Chicago. It operates a free public site at barchart.com and a tiered paid product line (Barchart Premier, Barchart Pro, and an enterprise data services arm). Barchart is best known among options traders for its **free options screener** and among commodity and futures traders for its deep coverage of agricultural, energy, and metals contracts. Its cross-asset breadth makes it a useful complement to deeper options-specialist tools like [[orats]] or [[market-chameleon]].
+**Barchart** is a long-running market-data and analytics provider founded in 1995 and headquartered in Chicago. It operates a free public site at barchart.com and a tiered paid product line (Barchart Premier, Barchart Pro, and an enterprise data services arm). Barchart is best known among options traders for its **free options screener** and among commodity and futures traders for its deep coverage of agricultural, energy, and metals contracts. Its cross-asset breadth makes it a useful complement to deeper options-specialist tools like orats or market-chameleon.
 
 ## Overview
 
-Barchart sits in an unusual product niche. The free tier is one of the most generous in the industry — offering an options screener with filtering by IV rank, volume, OI, premium, and technicals; futures pages with COT data; and free commodity quotes — while the paid tiers compete with [[finviz]], [[yahoo-finance]], and the lower end of professional terminals. The company also runs a B2B data-services arm (Barchart Solutions) that provides market data to media outlets, agribusiness firms, and brokerages.
+Barchart sits in an unusual product niche. The free tier is one of the most generous in the industry — offering an options screener with filtering by IV rank, volume, OI, premium, and technicals; futures pages with COT data; and free commodity quotes — while the paid tiers compete with finviz, [[yahoo-finance]], and the lower end of professional terminals. The company also runs a B2B data-services arm (Barchart Solutions) that provides market data to media outlets, agribusiness firms, and brokerages.
 
 Asset coverage spans **equities, futures, options, forex, crypto, and cash commodities**. The futures and commodities depth is unusual among retail-focused platforms — Barchart maintains contract-level pages for grain, livestock, energy, and metals contracts that are typically only available through dedicated futures vendors.
 
@@ -54,7 +54,7 @@ Barchart's **free options screener** is the feature that drives most of its reta
 - **Earnings and dividend dates** — proximity-to-earnings filtering for IV-crush plays.
 - **Strategy presets** — covered calls, cash-secured puts, vertical spreads, iron condors, with pre-configured columns.
 
-The free screener has limits compared with paid options tools: results are capped, columns are fewer, real-time data is delayed, and some advanced filters require Premier. But the floor of "free, useful, broad-coverage options screening" is genuinely competitive — making Barchart a common starting point for retail traders before they upgrade to [[orats]] or [[market-chameleon]].
+The free screener has limits compared with paid options tools: results are capped, columns are fewer, real-time data is delayed, and some advanced filters require Premier. But the floor of "free, useful, broad-coverage options screening" is genuinely competitive — making Barchart a common starting point for retail traders before they upgrade to orats or market-chameleon.
 
 ## Strengths
 
@@ -67,9 +67,9 @@ The free screener has limits compared with paid options tools: results are cappe
 
 ## Weaknesses
 
-- **Less options-flow depth than specialists.** Compared with [[unusual-whales]] or [[whalestream]], Barchart's options-flow detection is rudimentary. It surfaces unusual volume but lacks the dedicated flow-attribution and sweep-detection features of flow-specific tools.
-- **Less analytical depth than ORATS / Market Chameleon.** No proprietary smoothed IV surface (compare [[orats]]), and scanners are less customizable than [[market-chameleon]].
-- **No built-in backtester.** Unlike [[orats]], Barchart does not include an options strategy backtester.
+- **Less options-flow depth than specialists.** Compared with unusual-whales or whalestream, Barchart's options-flow detection is rudimentary. It surfaces unusual volume but lacks the dedicated flow-attribution and sweep-detection features of flow-specific tools.
+- **Less analytical depth than ORATS / Market Chameleon.** No proprietary smoothed IV surface (compare orats), and scanners are less customizable than market-chameleon.
+- **No built-in backtester.** Unlike orats, Barchart does not include an options strategy backtester.
 - **Real-time tier needed for active trading.** The free 15-20 min delay disqualifies the free tier for active intraday options work; Premier upgrades resolve this.
 - **UI feels dated.** The site is information-dense in a way that some users find cluttered relative to newer competitors.
 
@@ -79,15 +79,11 @@ The free screener has limits compared with paid options tools: results are cappe
 - **Free options screening.** Retail options traders use the free screener for daily idea generation, particularly for IV-rank-based premium-selling and earnings IV plays.
 - **Macro / cross-asset monitoring.** Single dashboard for stocks, bonds, futures, forex, crypto when assembling a macro view.
 - **Agribusiness and corporate users.** Barchart Solutions distributes market data into farm-management software, broker apps, and media sites — many traders end up consuming Barchart data without realizing it.
-- **Education starting point.** New options traders frequently find Barchart's screener documentation and educational content a soft introduction before paying for [[orats]] or institutional tools.
+- **Education starting point.** New options traders frequently find Barchart's screener documentation and educational content a soft introduction before paying for orats or institutional tools.
 
 ## Related
 
-- [[orats]] — deeper options-analytics specialist; common upgrade from Barchart's free screener
-- [[market-chameleon]] — competing options-analytics platform with stronger flow analytics
-- [[finviz]] — equities-focused free screener; less options depth than Barchart
 - [[yahoo-finance]] — broader free portal, less options-specific tooling
-- [[unusual-whales]] — options-flow specialist, complements Barchart for active flow watching
 - [[cot-data]] — Commitment of Traders reports, surfaced free on Barchart
 - [[commodity-data-sources]] — broader catalog of commodity data providers
 - [[futures-data-sources]] — broader catalog of futures data providers

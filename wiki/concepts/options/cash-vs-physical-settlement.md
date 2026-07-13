@@ -8,10 +8,10 @@ tags: [options, derivatives, market-microstructure]
 aliases: ["Cash Settlement", "Physical Settlement", "Cash vs Physical", "Settlement Type"]
 domain: [derivatives, options, market-microstructure]
 difficulty: intermediate
-related: ["[[spx-options]]", "[[spy-options]]", "[[xsp-options]]", "[[american-vs-european-options]]", "[[am-vs-pm-settlement]]", "[[assignment-and-exercise]]", "[[pin-risk]]", "[[options-portfolio-construction]]"]
+related: ["[[american-vs-european-options]]", "[[assignment-and-exercise]]", "[[pin-risk]]", "[[options-portfolio-construction]]"]
 ---
 
-**Cash settlement** and **physical settlement** describe what actually changes hands when an option is exercised at (or before) expiration. Cash-settled options pay out the intrinsic value in cash with no transfer of the underlying instrument; physical-settled options deliver the underlying shares (or commodity) at the strike price. The distinction is foundational: cash settlement eliminates [[pin-risk|pin risk]], removes assignment-driven margin shocks, and enables clean European-style mechanics on indices like SPX, NDX, and VIX. Physical settlement is the default for almost all US equity options — including [[spy-options|SPY]], QQQ, and individual stocks — and creates assignment-management workload that drives most of the operational complexity in active options trading.
+**Cash settlement** and **physical settlement** describe what actually changes hands when an option is exercised at (or before) expiration. Cash-settled options pay out the intrinsic value in cash with no transfer of the underlying instrument; physical-settled options deliver the underlying shares (or commodity) at the strike price. The distinction is foundational: cash settlement eliminates [[pin-risk|pin risk]], removes assignment-driven margin shocks, and enables clean European-style mechanics on indices like SPX, NDX, and VIX. Physical settlement is the default for almost all US equity options — including SPY, QQQ, and individual stocks — and creates assignment-management workload that drives most of the operational complexity in active options trading.
 
 ## Overview
 
@@ -19,8 +19,8 @@ US options come in two settlement types:
 
 | Type | What happens at exercise | Examples |
 |---|---|---|
-| **Cash settlement** | Intrinsic value paid in cash; no underlying changes hands | [[spx-options|SPX]], NDX, RUT, [[xsp-options|XSP]], [[vix|VIX]] |
-| **Physical settlement** | Underlying shares delivered at strike (or short position created on a put) | [[spy-options|SPY]], QQQ, IWM, all single-stock equity options |
+| **Cash settlement** | Intrinsic value paid in cash; no underlying changes hands | SPX, NDX, RUT, XSP, [[vix|VIX]] |
+| **Physical settlement** | Underlying shares delivered at strike (or short position created on a put) | SPY, QQQ, IWM, all single-stock equity options |
 
 Settlement type often correlates with exercise style ([[american-vs-european-options]]) and underlying type:
 
@@ -35,7 +35,7 @@ But the correlation is not absolute — exceptions exist in international market
 
 When a cash-settled option finishes in-the-money:
 
-1. **Intrinsic value calculated** at the settlement reference value (SOQ for AM-settled, closing print for PM-settled — see [[am-vs-pm-settlement]]).
+1. **Intrinsic value calculated** at the settlement reference value (SOQ for AM-settled, closing print for PM-settled — see am-vs-pm-settlement).
 2. **Cash credit** posted to the long holder's account: (settlement value − strike) × multiplier for calls, or (strike − settlement value) × multiplier for puts.
 3. **Cash debit** posted to the short writer's account by the same amount.
 4. **No shares move.** No margin call from suddenly holding stock. No pin risk.
@@ -66,7 +66,7 @@ A short ITM SPY 500 call when SPY closes at 510 means the writer is short 100 SP
 
 **Cons:**
 
-- **Settlement-value ambiguity.** AM-settled cash options reference a derived SOQ that can differ from the prior close (see [[am-vs-pm-settlement]]).
+- **Settlement-value ambiguity.** AM-settled cash options reference a derived SOQ that can differ from the prior close (see am-vs-pm-settlement).
 - **Limited products.** Only available on broad-based indices and a few specialty contracts.
 - **No share-level customization.** A trader using options to acquire stock at a target price (e.g., cash-secured puts on individual names) cannot use cash-settled products.
 
@@ -84,7 +84,7 @@ A short ITM SPY 500 call when SPY closes at 510 means the writer is short 100 SP
 - **Assignment management workload** — checking ex-dividend dates, monitoring deep ITM positions, handling do-not-exercise.
 - **Margin shocks.** Unexpected assignment can convert a small option position into a much larger share position, triggering margin calls.
 - **Operational risk.** A long ITM call left untended at expiration becomes a stock position the trader may not have planned for (or have capital to support).
-- **Tax interaction with [[ex-dividend-date|ex-dividend]]** — early exercise of ITM calls before ex-date is the most common cause of unexpected assignment on dividend-paying ETFs/stocks.
+- **Tax interaction with ex-dividend** — early exercise of ITM calls before ex-date is the most common cause of unexpected assignment on dividend-paying ETFs/stocks.
 
 ## Pin Risk Implications
 
@@ -97,11 +97,11 @@ Pin risk only applies to **physical-settled** options. The mechanics:
 
 For cash-settled options, there is no analog: the option settles to a calculated value, and any "pin" simply produces a small final P&L. The net Friday move is whatever it is, and the position is closed Friday.
 
-This is one of the strongest practical arguments for [[spx-options|SPX]] over [[spy-options|SPY]] for active expiration-week strategies.
+This is one of the strongest practical arguments for SPX over SPY for active expiration-week strategies.
 
 ## ITPM Use (why we lean toward cash-settled for index hedges)
 
-[[itpm|ITPM]]-style portfolios prefer cash-settled options for portfolio-level work because the pros map directly onto portfolio-management requirements:
+ITPM-style portfolios prefer cash-settled options for portfolio-level work because the pros map directly onto portfolio-management requirements:
 
 - **Macro hedges need to pay in cash, not shares.** A long-short portfolio buying OTM SPX puts as catastrophe insurance wants cash on a crash, not a delivered short position to manage.
 - **Premium-selling at scale must avoid assignment-driven margin shocks.** A short SPX strangle does not turn into a multi-million-dollar stock position overnight; a comparable SPY strangle could.
@@ -113,11 +113,7 @@ For tactical or single-name positions where the trader actually wants the result
 
 ## Related
 
-- [[spx-options]] — primary cash-settled vehicle for index exposure
-- [[spy-options]] — physically-settled S&P alternative
-- [[xsp-options]] — cash-settled mini-SPX
 - [[american-vs-european-options]] — exercise style usually correlates with settlement type
-- [[am-vs-pm-settlement]] — within cash settlement, two timing variants
 - [[assignment-and-exercise]] — physical-settlement mechanics
 - [[pin-risk]] — only applies to physical settlement
 - [[options-portfolio-construction]]

@@ -48,7 +48,7 @@ The [[credit-spread]] is the extra yield a non-government bond pays over a compa
 
 ## The Bond Market and Other Assets
 
-The bond market is deeply interconnected with everything else. Rising Treasury yields raise the discount rate used to value future cash flows, pressuring [[stocks|equities]] (especially long-duration growth stocks), tend to strengthen the dollar in [[forex]], and tighten overall financial conditions. [[quantitative-easing]] -- central-bank purchases of bonds -- operates directly through this market, suppressing yields to stimulate the economy; quantitative tightening reverses it.
+The bond market is deeply interconnected with everything else. Rising Treasury yields raise the discount rate used to value future cash flows, pressuring equities (especially long-duration growth stocks), tend to strengthen the dollar in [[forex]], and tighten overall financial conditions. [[quantitative-easing]] -- central-bank purchases of bonds -- operates directly through this market, suppressing yields to stimulate the economy; quantitative tightening reverses it.
 
 ## Why It Matters for Traders
 

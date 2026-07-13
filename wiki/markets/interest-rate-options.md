@@ -199,7 +199,7 @@ Pension funds, insurance companies, and bank ALM desks use long-dated swaptions 
 
 ### 6. Volatility surface arbitrage
 
-Relative-value funds trade the slope of the [[move-index|MOVE]]-implied vol curve, the term structure of swaption vol, and the cross-asset vol spread between rates and equities. This is the rate-vol cousin of [[dispersion-trading]] in equity vol.
+Relative-value funds trade the slope of the [[move-index|MOVE]]-implied vol curve, the term structure of swaption vol, and the cross-asset vol spread between rates and equities. This is the rate-vol cousin of dispersion-trading in equity vol.
 
 ## Product Comparison
 

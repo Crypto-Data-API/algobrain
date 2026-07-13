@@ -55,5 +55,3 @@ Yves Hilpisch's *Python for Algorithmic Trading* is a practitioner's guide to bu
 - [[vectorized-backtesting]] — Fast array-based backtesting methodology
 - [[event-driven-backtesting]] — Realistic bar-by-bar backtesting methodology
 - [[trading-system-deployment]] — Production deployment, monitoring, and broker integration
-- [[oanda]] — Broker API integration patterns
-- [[fxcm]] — Broker API integration patterns

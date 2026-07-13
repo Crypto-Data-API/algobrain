@@ -20,7 +20,7 @@ An informational edge exists when a trader has material information that the mar
 Informational edges come in several distinct flavors:
 
 1. **Faster information** -- the same data everyone will eventually see, but earlier. Classic examples: satellite imagery of retailer parking lots before the earnings report, credit-card transaction data before quarterly revenue, [[social-arbitrage|social-media mention volume]] before sell-side revision. See [[alternative-data-alpha]] for the institutional version.
-2. **Proprietary information** -- data the trader generates that no one else has. Corporate scuttlebutt in the [[philip-fisher]] tradition, on-the-ground channel checks, proprietary survey panels.
+2. **Proprietary information** -- data the trader generates that no one else has. Corporate scuttlebutt in the philip-fisher tradition, on-the-ground channel checks, proprietary survey panels.
 3. **Synthesis edge** -- combining disparate public sources in ways that reveal information no single source exposes. Cross-referencing job postings, supply-chain container data, and app downloads to triangulate a revenue inflection.
 4. **Attention edge** -- the ability to notice information in the open that others overlook. This is the core of Camillo-style [[social-arbitrage]]: the information is public, free, and in plain sight, but no institutional investor has the mandate to trade on it.
 
@@ -42,7 +42,7 @@ Every informational edge decays. The timeline is a function of how easily the da
 - A **paid alt-data feed** has an edge-life measured in **years** -- the cost barrier slows adoption, but widely-subscribed feeds are eventually arbitraged out (see [[alternative-data-alpha]]).
 - A **proprietary data source** can retain edge **indefinitely** if the trader keeps it proprietary and the underlying phenomenon continues to produce signal.
 
-The 2018 acquisition of [[tickertags]] by M Science is a good case study in how informational edges move from retail-accessible to institutional-only to commoditized over ~3-5 years.
+The 2018 acquisition of tickertags by M Science is a good case study in how informational edges move from retail-accessible to institutional-only to commoditized over ~3-5 years.
 
 ## Relationship to Other Edges
 

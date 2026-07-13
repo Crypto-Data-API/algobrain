@@ -9,7 +9,7 @@ aliases: ["Fischer Sheffey Black"]
 entity_type: person
 founded: 1938
 headquarters: "Cambridge, Massachusetts, USA"
-related: ["[[myron-scholes]]", "[[robert-merton]]", "[[black-scholes]]", "[[goldman-sachs]]", "[[options-greeks]]", "[[book-my-life-as-a-quant]]"]
+related: ["[[myron-scholes]]", "[[robert-merton]]", "[[black-scholes]]", "[[options-greeks]]", "[[book-my-life-as-a-quant]]"]
 ---
 
 Fischer Black (January 11, 1938 – August 30, 1995) was an American economist and derivatives pioneer who, with [[myron-scholes]], derived the **[[black-scholes|Black-Scholes options pricing formula]]** in 1973. Black died of throat cancer in August 1995, two years before the Nobel committee awarded the prize for the work — Nobels are not awarded posthumously, so only Scholes and [[robert-merton]] received it, though the citation explicitly named Black. He is considered one of the most original financial thinkers of the 20th century and one of the few academics whose work transformed both finance theory and Wall Street practice.
@@ -23,7 +23,7 @@ Fischer Black (January 11, 1938 – August 30, 1995) was an American economist a
 | Known for | Co-creator of the [[black-scholes\|Black-Scholes(-Merton)]] option-pricing model (1973); [[black-litterman\|Black-Litterman]] (1991); Black-Derman-Toy (1990); "Noise" (1986) |
 | Collaborators | [[myron-scholes]], [[robert-merton]], [[jack-treynor]], [[emanuel-derman]], Bill Toy, Robert Litterman |
 | Academic posts | University of Chicago (1971–75); MIT Sloan (1975–84) |
-| Wall Street | Partner, [[goldman-sachs]] (1984–95), quantitative strategies group |
+| Wall Street | Partner, goldman-sachs (1984–95), quantitative strategies group |
 | Nobel | Ineligible (died 1995; prize awarded 1997) — Nobels are not posthumous; citation named him |
 | Honors | AFA President (1985); biennial Fischer Black Prize (est. 2002); MIT Fischer Black Professorship |
 
@@ -75,7 +75,6 @@ Posthumous recognition: the American Finance Association (of which Black was pre
 - [[options-greeks]]
 - [[implied-volatility]]
 - [[volatility-smile]]
-- [[goldman-sachs]]
 - [[jack-treynor]]
 - [[emanuel-derman]]
 - [[model-risk]]

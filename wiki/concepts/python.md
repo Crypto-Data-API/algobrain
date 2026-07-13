@@ -39,7 +39,7 @@ Speed and realism trade off: vectorized engines sweep thousands of parameter set
 ## Market Data Access
 
 - **yfinance** — free Yahoo Finance historical bars; fine for prototyping, unreliable for production.
-- **ib_insync** — async wrapper for [[interactive-brokers|Interactive Brokers]]' API (real-time + historical).
+- **ib_insync** — async wrapper for Interactive Brokers' API (real-time + historical).
 - **APIs** from [[alpaca]] (commission-free US equities/crypto), [[polygon-io|Polygon.io]] (tick and aggregate data), and CCXT (unified crypto-exchange API across dozens of venues).
 
 ## Machine Learning and Research

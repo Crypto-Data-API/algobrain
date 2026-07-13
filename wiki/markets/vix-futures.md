@@ -23,7 +23,7 @@ The dominant structural fact about VX futures is that they normally trade in **[
 
 | Specification | Value |
 |---|---|
-| **Exchange** | CBOE Futures Exchange (CFE), part of [[cboe-global-markets|Cboe]] |
+| **Exchange** | CBOE Futures Exchange (CFE), part of Cboe |
 | **Ticker root** | VX (monthly), VX01-VX05 (weekly contracts) |
 | **Underlying** | CBOE Volatility Index (VIX) |
 | **Contract multiplier** | $1,000 per VIX point |

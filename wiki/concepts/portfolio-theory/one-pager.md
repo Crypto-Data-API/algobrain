@@ -8,7 +8,7 @@ tags: [fundamental-analysis, education]
 aliases: ["1-Pager", "One Page Report", "One-Pager"]
 domain: [fundamental-analysis]
 difficulty: beginner
-related: ["[[fred-1page-report-template]]"]
+related: []
 ---
 
-See [[fred-1page-report-template]].
+See fred-1page-report-template.

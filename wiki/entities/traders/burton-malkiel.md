@@ -19,7 +19,7 @@ Burton G. Malkiel is a Princeton University economics professor and the author o
 
 Malkiel's central thesis is that stock prices follow a "random walk" -- meaning past price movements cannot predict future movements, and that most professional money managers fail to consistently outperform a simple index fund after accounting for fees. This argument, controversial when first published, has been validated by decades of data showing that the majority of actively managed funds underperform their benchmarks over long time horizons.
 
-His work provided the intellectual foundation for the passive investing movement that grew from [[jack-bogle|Jack Bogle's]] creation of the first retail index fund at [[vanguard|Vanguard]] in 1976.
+His work provided the intellectual foundation for the passive investing movement that grew from Jack Bogle's creation of the first retail index fund at Vanguard in 1976.
 
 ## Key Contributions
 
@@ -29,7 +29,7 @@ Now in its 13th edition, the book covers:
 
 - **The random walk thesis**: Why stock prices are inherently unpredictable in the short term
 - **Critique of [[technical-analysis-overview|technical analysis]]**: Malkiel argues that chart patterns, [[moving-averages|moving averages]], and momentum signals have no reliable predictive power after accounting for transaction costs
-- **Critique of [[fundamental-analysis|fundamental analysis]]**: Even value investing approaches face limitations due to the difficulty of consistently identifying mispriced securities
+- **Critique of fundamental analysis**: Even value investing approaches face limitations due to the difficulty of consistently identifying mispriced securities
 - **Market bubbles and manias**: Historical episodes from the Dutch tulip mania (1637) to the [[dot-com-bubble|dot-com bubble]] (1999-2000) demonstrating irrational investor behavior
 - **The case for indexing**: Data showing that low-cost index funds outperform the vast majority of actively managed funds over 10+ year periods
 - **Practical portfolio advice**: Asset allocation, [[diversification]], [[rebalancing]], and tax-efficient investing for individual investors
@@ -46,7 +46,7 @@ Malkiel is one of the most prominent advocates of the [[market-efficiency|effici
 | 1964 | Joined Princeton University economics faculty |
 | 1973 | Published *A Random Walk Down Wall Street* |
 | 1975-1977 | Member, Council of Economic Advisers under President Ford |
-| 1977-2005 | Served on the board of directors of [[vanguard|The Vanguard Group]] |
+| 1977-2005 | Served on the board of directors of The Vanguard Group |
 | 1980s-present | Continued updating *Random Walk* through 13 editions |
 | 2010s | Chief Investment Officer at Wealthfront (robo-advisor) |
 
@@ -57,13 +57,13 @@ Malkiel has been a persistent critic of actively managed funds, hedge funds, and
 - **Survivorship bias** inflates apparent active manager performance -- failed funds disappear from databases
 - **Fees compound dramatically** -- a 1% annual fee difference reduces a portfolio by roughly 25% over 30 years
 - **Past performance does not predict future results** -- funds that outperform in one period rarely do so in the next
-- **Even [[warren-buffett|Warren Buffett]]** has recommended index funds for most investors
+- **Even Warren Buffett** has recommended index funds for most investors
 
 ## Criticism and Counterarguments
 
 Critics of Malkiel's position include:
 
-- **Value investors** ([[benjamin-graham|Graham]], [[warren-buffett|Buffett]]) who have demonstrated long-term outperformance
+- **Value investors** (Graham, Buffett) who have demonstrated long-term outperformance
 - **Behavioral finance** researchers who document systematic market inefficiencies
 - **Quantitative traders** who exploit short-term price patterns using technology unavailable in 1973
 - **[[ed-thorp|Ed Thorp]]** and other pioneers who demonstrated that markets can be beaten with sufficiently rigorous quantitative methods
@@ -75,10 +75,7 @@ Malkiel acknowledges these critiques but maintains that for the vast majority of
 - [[a-random-walk-down-wall-street]]
 - [[passive-investing]]
 - [[market-efficiency]]
-- [[vanguard]]
-- [[jack-bogle]]
 - [[index-fund]]
-- [[benjamin-graham]]
 
 ## Sources
 

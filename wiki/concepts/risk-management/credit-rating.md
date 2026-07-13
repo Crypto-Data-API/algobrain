@@ -6,7 +6,7 @@ updated: 2026-07-02
 status: good
 tags: [risk-management, bonds, fundamental-analysis]
 aliases: ["Credit Rating", "credit-rating", "Bond Rating", "Credit Ratings"]
-related: ["[[credit-risk]]", "[[corporate-bonds]]", "[[bonds]]", "[[credit-default-swap]]", "[[basel-iii]]", "[[sovereign-debt]]", "[[altman-z-score]]", "[[credit-spread]]", "[[interest-coverage]]", "[[leverage]]"]
+related: ["[[credit-risk]]", "[[corporate-bonds]]", "[[bonds]]", "[[credit-default-swap]]", "[[basel-iii]]", "[[sovereign-debt]]", "[[credit-spread]]", "[[leverage]]"]
 domain: [risk-management]
 prerequisites: ["[[credit-risk]]", "[[bonds]]"]
 difficulty: intermediate
@@ -74,7 +74,7 @@ The line between investment grade and high yield is the single most consequentia
 Agency methodologies vary in detail but generally blend two broad pillars, scored qualitatively and quantitatively and combined into an indicative grade that a rating committee then finalises:
 
 - **Business risk** — the durability and predictability of the obligor's cash flows: industry cyclicality and structure, competitive position, scale, diversification, regulatory environment, and management/governance quality.
-- **Financial risk** — the balance sheet and its capacity to service debt, captured through **[[leverage]]** and **coverage ratios**. Typical inputs include debt/EBITDA, debt/capital, funds-from-operations to debt, free-cash-flow to debt, and interest coverage (see [[interest-coverage]]), alongside liquidity and refinancing profile. For financially distressed corporates, balance-sheet screens such as the [[altman-z-score]] point in the same direction the ratings do.
+- **Financial risk** — the balance sheet and its capacity to service debt, captured through **[[leverage]]** and **coverage ratios**. Typical inputs include debt/EBITDA, debt/capital, funds-from-operations to debt, free-cash-flow to debt, and interest coverage (see interest-coverage), alongside liquidity and refinancing profile. For financially distressed corporates, balance-sheet screens such as the altman-z-score point in the same direction the ratings do.
 
 Additional structural considerations:
 
@@ -117,8 +117,7 @@ Ratings are validated against outcomes through the agencies' published **annual 
 - [[corporate-bonds]], [[bonds]] — the instruments most commonly rated
 - [[sovereign-debt]] — sovereign ratings and the sovereign-ceiling effect
 - [[basel-iii]] — how external ratings enter bank regulatory capital
-- [[leverage]], [[interest-coverage]] — the financial-risk ratios that drive ratings
-- [[altman-z-score]] — a quantitative distress/bankruptcy screen that complements ratings
+- [[leverage]], interest-coverage — the financial-risk ratios that drive ratings
 
 ## Sources
 

@@ -6,20 +6,20 @@ updated: 2026-06-21
 status: excellent
 tags: [options, risk-management, margin, position-sizing, itpm]
 aliases: ["BPR", "Buying Power Reduction", "Options Margin Requirement", "Options BP", "Margin Reduction"]
-related: ["[[margin]]", "[[portfolio-margin]]", "[[span-margin]]", "[[reg-t-margin]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-position-sizing]]", "[[short-strangle]]", "[[iron-condor]]", "[[credit-spread]]", "[[naked-option]]", "[[options-premium-selling]]", "[[volatility-regime]]", "[[capacity-constraints]]", "[[liquidation-risk]]", "[[volmageddon]]", "[[delta]]", "[[implied-volatility]]"]
+related: ["[[margin]]", "[[portfolio-margin]]", "[[span-margin]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-position-sizing]]", "[[short-strangle]]", "[[iron-condor]]", "[[credit-spread]]", "[[naked-option]]", "[[options-premium-selling]]", "[[volatility-regime]]", "[[capacity-constraints]]", "[[liquidation-risk]]", "[[volmageddon]]", "[[delta]]", "[[implied-volatility]]"]
 domain: [risk-management]
 prerequisites: ["[[margin]]", "[[options-greeks]]", "[[options]]"]
 difficulty: advanced
 ---
 
-**Buying Power Reduction (BPR)** is the dollar amount a broker subtracts from a trader's available capital to collateralize an options position. Unlike a stock purchase — where BPR equals the cash outlay (or 50% under [[reg-t-margin|Reg-T]]) — options BPR is computed by a formula that depends on the structure (defined-risk vs undefined-risk), the underlying's volatility, and the margin regime ([[reg-t-margin|Reg-T]], [[portfolio-margin]], or [[span-margin|SPAN]]). For short-premium portfolios, BPR — not premium collected, not theta — is usually the binding capacity constraint, and it **reprices in real time as [[implied-volatility|IV]] expands**, mechanically shrinking the book at exactly the moments tail risk is highest.
+**Buying Power Reduction (BPR)** is the dollar amount a broker subtracts from a trader's available capital to collateralize an options position. Unlike a stock purchase — where BPR equals the cash outlay (or 50% under Reg-T) — options BPR is computed by a formula that depends on the structure (defined-risk vs undefined-risk), the underlying's volatility, and the margin regime (Reg-T, [[portfolio-margin]], or [[span-margin|SPAN]]). For short-premium portfolios, BPR — not premium collected, not theta — is usually the binding capacity constraint, and it **reprices in real time as [[implied-volatility|IV]] expands**, mechanically shrinking the book at exactly the moments tail risk is highest.
 
 ## Overview
 
 The BPR question is: *how much of my account does this position consume?* Three answers exist depending on margin regime:
 
-1. **Defined-risk position, any regime** — BPR = max loss = spread width × 100 − credit received. Predictable, simple, the same in [[reg-t-margin|Reg-T]] and [[portfolio-margin]].
-2. **Undefined-risk position, [[reg-t-margin|Reg-T]]** — BPR is computed by a formula derived from CBOE Rule 12.3 / FINRA 4210, scaling with stock price and out-of-the-moneyness. Typically **20-30% of notional** for naked short options on equities.
+1. **Defined-risk position, any regime** — BPR = max loss = spread width × 100 − credit received. Predictable, simple, the same in Reg-T and [[portfolio-margin]].
+2. **Undefined-risk position, Reg-T** — BPR is computed by a formula derived from CBOE Rule 12.3 / FINRA 4210, scaling with stock price and out-of-the-moneyness. Typically **20-30% of notional** for naked short options on equities.
 3. **Undefined-risk position, [[portfolio-margin]] or [[span-margin|SPAN]]** — BPR is the worst loss across a grid of stress scenarios (typically ±15% spot × ±IV shifts). Often **3-5x more capital-efficient** than Reg-T for diversified short-premium books.
 
 For an income trader running [[short-strangle|strangles]] and [[iron-condor|iron condors]], BPR is what determines how much theta the account can produce. A book whose theta target requires 60% BPR utilization in a 14-VIX environment will be **margin-deficient** if VIX moves to 24, because the existing positions' BPR will rise faster than the new theta they generate.
@@ -43,7 +43,7 @@ This is identical under Reg-T, portfolio margin, and SPAN. The defined-risk wrap
 
 ### Undefined-risk: Reg-T (CBOE / FINRA standard)
 
-For a naked short put or short call, [[reg-t-margin|Reg-T]] requires the **greater** of:
+For a naked short put or short call, Reg-T requires the **greater** of:
 
 ```
 Method A (the "20% rule"):
@@ -90,7 +90,7 @@ This is why institutional and serious retail short-premium traders move to portf
 
 ### Margin-regime comparison at a glance
 
-| Property | [[reg-t-margin\|Reg-T]] | [[portfolio-margin\|Portfolio Margin]] | [[span-margin\|SPAN]] |
+| Property | Reg-T | [[portfolio-margin\|Portfolio Margin]] | [[span-margin\|SPAN]] |
 |----------|--------|------------------|------|
 | Basis | Fixed formula (CBOE 12.3 / FINRA 4210) | Stress grid (±6% index / ±15% single-name × IV) | 16 risk arrays (±spot × ±vol) |
 | Vol-aware | Weakly (premium term only) | Yes — grid widens in stress | Yes — exchange resets scan range |
@@ -138,7 +138,7 @@ Approximate BPR per contract in moderate-vol (VIX ~16) on liquid US index option
 | 16-delta naked short put on $200 stock | ~$3,800 | ~$1,400 | Single-name PM uses ±15% grid, less generous |
 | Short 1 ES strangle (futures option) | $9,000-$15,000 (SPAN) | n/a | SPAN regime |
 
-These are approximate and broker-specific. [[tastytrade-platform|tastytrade]] tends to be more aggressive on PM than Schwab or Fidelity; [[interactive-brokers]] uses its own real-time risk model that often yields the lowest BPR for hedged books.
+These are approximate and broker-specific. [[tastytrade-platform|tastytrade]] tends to be more aggressive on PM than Schwab or Fidelity; interactive-brokers uses its own real-time risk model that often yields the lowest BPR for hedged books.
 
 ## Worked Example — BPR-Driven Capacity for a Theta-Targeted Book
 
@@ -167,7 +167,7 @@ Under PM, the broker's stress grid widens. New per-contract BPR for the strangle
 
 For the iron condor variant: per-contract BPR is unchanged at $4,400 (defined risk). Total BPR remains $26,400. **The defined-risk book is unaffected by vol expansion at the BPR level**, freeing the trader to deploy *more* premium-selling into the richer environment rather than being forced to cut.
 
-This is the primary reason ITPM-style and [[tastytrade]]-style portfolios prefer defined-risk structures even though naked strangles harvest more theta per dollar of BPR in calm markets. **Vol-shock BPR resilience is what determines whether a book survives.**
+This is the primary reason ITPM-style and tastytrade-style portfolios prefer defined-risk structures even though naked strangles harvest more theta per dollar of BPR in calm markets. **Vol-shock BPR resilience is what determines whether a book survives.**
 
 ## Common Misuse
 
@@ -211,7 +211,6 @@ Practitioners track all three simultaneously. See [[options-risk-budgeting]] for
 - [[margin]] — general margin mechanics
 - [[portfolio-margin]] — risk-array regime that dramatically reduces BPR
 - [[span-margin]] — futures-options analogue (CME)
-- [[reg-t-margin]] — the legacy formula-driven regime
 - [[theta-targeting]] — the income side of the sizing tripod
 - [[vega-budgeting]] — the vol-risk side of the sizing tripod
 - [[options-position-sizing]] — Greeks-based sizing that lives downstream of BPR

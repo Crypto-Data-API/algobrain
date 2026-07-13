@@ -10,7 +10,7 @@ entity_type: person
 founded: 1932
 headquarters: "Newport Beach, California, USA"
 website: ""
-related: ["[[arbitrage-overview]]", "[[options-overview]]", "[[kelly-criterion]]", "[[risk-management]]", "[[position-sizing]]", "[[black-scholes]]", "[[pairs-trading]]", "[[jim-simons]]", "[[book-a-man-for-all-markets]]", "[[statistical-arbitrage]]", "[[convertible-arbitrage]]", "[[renaissance-technologies]]"]
+related: ["[[arbitrage-overview]]", "[[options-overview]]", "[[kelly-criterion]]", "[[risk-management]]", "[[position-sizing]]", "[[black-scholes]]", "[[pairs-trading]]", "[[jim-simons]]", "[[book-a-man-for-all-markets]]", "[[statistical-arbitrage]]", "[[renaissance-technologies]]"]
 ---
 
 # Ed Thorp
@@ -35,7 +35,7 @@ In the mid-1960s, Thorp independently derived the options pricing formula now kn
 
 ### Princeton Newport Partners (1969-1988)
 
-In 1969, Thorp co-founded Princeton Newport Partners with Jay Regan. The fund pioneered [[convertible-arbitrage]] -- buying undervalued convertible bonds and warrants while hedging with short positions in the underlying stock. The results were extraordinary:
+In 1969, Thorp co-founded Princeton Newport Partners with Jay Regan. The fund pioneered convertible-arbitrage -- buying undervalued convertible bonds and warrants while hedging with short positions in the underlying stock. The results were extraordinary:
 
 - **19.8% annualized returns** over 19 years (1969-1988)
 - Only **3 losing months** out of 230
@@ -66,13 +66,13 @@ Thorp's philosophy centers on mathematical rigor, [[risk-management]], and the s
 
 5. **Avoid catastrophic risk.** No edge is worth pursuing if it exposes you to the risk of total loss. Thorp's positions were always hedged, always sized conservatively, and always diversified across many uncorrelated bets. He never used excessive [[leverage]].
 
-6. **Recognize that markets are not fully efficient.** While the [[efficient-market-hypothesis]] has merit, Thorp's career is proof that exploitable mispricings exist -- particularly in [[derivatives]], [[convertible-arbitrage|convertible bonds]], and statistically related stocks. The key is having better models and faster execution than the competition.
+6. **Recognize that markets are not fully efficient.** While the [[efficient-market-hypothesis]] has merit, Thorp's career is proof that exploitable mispricings exist -- particularly in [[derivatives]], convertible bonds, and statistically related stocks. The key is having better models and faster execution than the competition.
 
 ## Strategy Connections
 
 Thorp's work is foundational to multiple strategies covered in this wiki:
 
-- **[[arbitrage-overview|Arbitrage]]** — Thorp pioneered warrant and [[convertible-arbitrage]] as a systematic hedge fund strategy
+- **[[arbitrage-overview|Arbitrage]]** — Thorp pioneered warrant and convertible-arbitrage as a systematic hedge fund strategy
 - **[[pairs-trading]]** — His [[statistical-arbitrage]] work in the 1980s laid the groundwork for modern pairs trading
 - **[[statistical-arbitrage]]** — Thorp was among the first to trade hundreds of stock pairs simultaneously using computers
 - **[[options-overview|Options]]** — He independently derived the [[black-scholes]] formula and used it to find mispriced warrants

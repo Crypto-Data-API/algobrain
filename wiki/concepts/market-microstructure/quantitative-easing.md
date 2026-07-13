@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [bonds, history]
 aliases: ["QE", "quantitative tightening", "QT", "balance sheet policy"]
-related: ["[[2008-global-financial-crisis]]", "[[federal-reserve]]", "[[bond-market]]", "[[interest-rates]]", "[[stock-markets]]", "[[monetary-policy]]"]
+related: ["[[2008-global-financial-crisis]]", "[[federal-reserve]]", "[[bond-market]]", "[[interest-rates]]", "[[monetary-policy]]"]
 domain: [market-microstructure, fundamental-analysis]
 prerequisites: ["[[monetary-policy]]", "[[interest-rates]]"]
 difficulty: intermediate
@@ -27,7 +27,7 @@ The central bank creates new reserves electronically and uses them to buy assets
 
 ## Impact on Markets
 
-QE is one of the most powerful forces in modern markets. It suppresses bond yields (pushing investors into [[stock-markets]] and riskier assets), compresses [[volatility]], inflates asset prices, and weakens the currency. The phrase "don't fight the Fed" reflects the reality that QE can override fundamental valuations for extended periods. Quantitative tightening (QT) -- the reversal of QE -- has the opposite effect and has contributed to market selloffs.
+QE is one of the most powerful forces in modern markets. It suppresses bond yields (pushing investors into stock-markets and riskier assets), compresses [[volatility]], inflates asset prices, and weakens the currency. The phrase "don't fight the Fed" reflects the reality that QE can override fundamental valuations for extended periods. Quantitative tightening (QT) -- the reversal of QE -- has the opposite effect and has contributed to market selloffs.
 
 ## Why It Matters for Traders
 

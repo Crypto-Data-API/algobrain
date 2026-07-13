@@ -14,10 +14,10 @@ industry: "Financial Infrastructure / Stablecoin Issuer"
 founded: 2013
 headquarters: "Boston, Massachusetts, USA"
 website: "https://www.circle.com"
-related: ["[[usdc]]", "[[stablecoins]]", "[[coinbase]]", "[[regulation]]", "[[stablecoin-regulation]]", "[[stablecoin-depegs]]", "[[cctp]]", "[[blackrock]]", "[[centre-consortium]]", "[[base]]", "[[stablecoin-attestations]]", "[[financials]]", "[[technology]]", "[[tether-limited]]"]
+related: ["[[usdc]]", "[[stablecoins]]", "[[coinbase]]", "[[regulation]]", "[[stablecoin-regulation]]", "[[stablecoin-depegs]]", "[[cctp]]", "[[blackrock]]", "[[centre-consortium]]", "[[base]]", "[[stablecoin-attestations]]", "[[tether-limited]]"]
 ---
 
-Circle Internet Financial (NYSE: CRCL) is the issuer of [[usdc|USD Coin (USDC)]], the second-largest [[stablecoins|stablecoin]] by market capitalisation. Founded in 2013 by Jeremy Allaire and Sean Neville, Circle has evolved from a crypto payments startup into one of the most important [[financials|financial]]-infrastructure / [[technology]] companies in the digital-asset ecosystem, positioning itself as the "regulated" stablecoin issuer. After a long road to public markets (a failed 2021-22 SPAC and a 2024 S-1), Circle completed a US IPO in **June 2025**, making the public market's valuation of the reserve-income business model directly observable for the first time.
+Circle Internet Financial (NYSE: CRCL) is the issuer of [[usdc|USD Coin (USDC)]], the second-largest [[stablecoins|stablecoin]] by market capitalisation. Founded in 2013 by Jeremy Allaire and Sean Neville, Circle has evolved from a crypto payments startup into one of the most important financial-infrastructure / technology companies in the digital-asset ecosystem, positioning itself as the "regulated" stablecoin issuer. After a long road to public markets (a failed 2021-22 SPAC and a 2024 S-1), Circle completed a US IPO in **June 2025**, making the public market's valuation of the reserve-income business model directly observable for the first time.
 
 > **Recent-IPO / high-volatility caveat:** CRCL is a recently listed, single-product stock whose economics are almost entirely a leveraged bet on (a) USDC float and (b) short-term US interest rates. It carries limited public-market trading history, thin float dynamics around lock-up expiries, and unusually high sensitivity to rate expectations and crypto-market sentiment — treat valuation and any precise figures below as indicative, not settled.
 
@@ -36,14 +36,14 @@ Circle is effectively a **single-product company with adjacent infrastructure**:
 | **USDC reserve income** | Yield on short-term [[us-treasuries\|US Treasuries]] and cash backing USDC in circulation | The dominant revenue driver; a direct function of USDC float × short-term rates |
 | **[[cctp\|Cross-Chain Transfer Protocol (CCTP)]]** | Native burn-and-mint USDC bridging across blockchains | Infrastructure lock-in; positions Circle as cross-chain settlement rails, not just an issuer |
 | **Programmable wallets / developer platform** | APIs and SDKs for embedding USDC payments and wallets | Emerging, fee-based; aims to make USDC the default stablecoin for builders |
-| **Payments & settlement partnerships** | [[visa\|Visa]]/Mastercard/Stripe settlement and merchant payouts in USDC | Distribution and utility; drives USDC adoption (and thus float) |
+| **Payments & settlement partnerships** | Visa/Mastercard/Stripe settlement and merchant payouts in USDC | Distribution and utility; drives USDC adoption (and thus float) |
 | **EURC and other tokens** | Euro-denominated stablecoin and additional fiat tokens | Small today; geographic/currency optionality under MiCA |
 
 The key structural feature — and the central bear point — is that USDC holders receive **none** of the reserve yield; the entire interest income accrues to Circle (and is substantially shared with its distribution partner [[coinbase|Coinbase]]).
 
 ## Economic Moat & Competitive Position
 
-Circle's [[economic-moat|moat]] rests primarily on **regulatory positioning and trust** rather than technology, and is best described as **narrow-to-moderate and contested**. The defensible assets are: (1) the most aggressive regulatory-compliance posture of any stablecoin issuer (US money-transmitter licences, EU MiCA EMI licence, monthly Deloitte attestations, [[blackrock]]-managed Treasury reserves) — a genuine differentiator versus [[tether-limited|Tether]] in regulated markets; (2) [[network-effects]] around USDC liquidity and integration — the deeper USDC's exchange listings, DeFi collateral use, and merchant rails, the harder it is to dislodge; (3) brand as the "regulated" dollar token; and (4) the [[coinbase|Coinbase]] distribution partnership. Against that, a stablecoin is a near-commodity: USDC competes head-on with [[tether-limited|Tether (USDT)]], PayPal/Paxos ([[pyusd|PYUSD]]), bank-issued tokens, and potential entrants with far larger distribution. The moat protects Circle in regulated jurisdictions but does not protect its **margin**, which is structurally exposed to interest rates and to revenue-sharing with distributors.
+Circle's moat rests primarily on **regulatory positioning and trust** rather than technology, and is best described as **narrow-to-moderate and contested**. The defensible assets are: (1) the most aggressive regulatory-compliance posture of any stablecoin issuer (US money-transmitter licences, EU MiCA EMI licence, monthly Deloitte attestations, [[blackrock]]-managed Treasury reserves) — a genuine differentiator versus [[tether-limited|Tether]] in regulated markets; (2) [[network-effects]] around USDC liquidity and integration — the deeper USDC's exchange listings, DeFi collateral use, and merchant rails, the harder it is to dislodge; (3) brand as the "regulated" dollar token; and (4) the [[coinbase|Coinbase]] distribution partnership. Against that, a stablecoin is a near-commodity: USDC competes head-on with [[tether-limited|Tether (USDT)]], PayPal/Paxos ([[pyusd|PYUSD]]), bank-issued tokens, and potential entrants with far larger distribution. The moat protects Circle in regulated jurisdictions but does not protect its **margin**, which is structurally exposed to interest rates and to revenue-sharing with distributors.
 
 ## Competitors / Peer Set
 
@@ -61,7 +61,7 @@ Circle's edge is regulatory trust and crypto-native rails; its disadvantage is s
 
 - **USDC float growth** — the single most important driver; more USDC in circulation linearly grows reserve income.
 - **Stablecoin regulation passing** — clear US federal stablecoin rules (see [[stablecoin-regulation]]) would legitimize the asset class and favor the most-compliant issuer; the key catalyst.
-- **Payments adoption** — [[visa]]/Mastercard/Stripe settlement, merchant payouts, and cross-border use turning USDC into transactional money rather than just trading collateral.
+- **Payments adoption** — visa/Mastercard/Stripe settlement, merchant payouts, and cross-border use turning USDC into transactional money rather than just trading collateral.
 - **CCTP and developer platform** — fee-based, rate-insensitive revenue that diversifies away from the interest-rate bet.
 - **Institutional / tokenization tailwind** — tokenized cash and real-world assets increasing demand for a regulated dollar token.
 - **Recurring catalysts** — Fed rate path (the dominant macro lever), USDC market-cap prints, regulatory headlines, and crypto-market risk sentiment.
@@ -216,8 +216,7 @@ Circle occupies a unique position in the stablecoin market:
 - [[stablecoin-regulation]] -- Country-by-country stablecoin regulation
 - [[stablecoin-depegs]] -- SVB crisis and USDC de-peg
 - [[sec]] -- SEC oversight and IPO filing
-- [[financials]], [[technology]] -- sector classifications
-- [[economic-moat]], [[network-effects]] -- competitive-position frameworks
+- economic-moat, [[network-effects]] -- competitive-position frameworks
 - [[stablecoin-regulation]] -- regulatory landscape (key catalyst and risk)
 - [[bitcoin]] -- crypto-risk-sentiment correlate
 

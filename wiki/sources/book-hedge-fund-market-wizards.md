@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [book, hedge-funds, risk-management, options, trading-psychology]
 aliases: ["Hedge Fund Market Wizards", "HFMW"]
-related: ["[[book-market-wizards]]", "[[book-the-new-market-wizards]]", "[[book-stock-market-wizards]]", "[[jack-schwager]]", "[[ray-dalio]]", "[[ed-thorp]]", "[[joel-greenblatt]]", "[[asymmetric-risk-reward]]", "[[professional-vs-retail-mindset]]", "[[the-big-short]]", "[[cornwall-capital]]", "[[tail-risk-hedging]]", "[[long-volatility]]"]
+related: ["[[book-market-wizards]]", "[[book-the-new-market-wizards]]", "[[book-stock-market-wizards]]", "[[jack-schwager]]", "[[ray-dalio]]", "[[ed-thorp]]", "[[asymmetric-risk-reward]]", "[[professional-vs-retail-mindset]]", "[[the-big-short]]", "[[cornwall-capital]]", "[[tail-risk-hedging]]", "[[long-volatility]]"]
 source_type: book
 source_url: "https://www.goodreads.com/book/show/13153768-hedge-fund-market-wizards"
 source_author: "Jack Schwager"
@@ -36,7 +36,7 @@ The fourth and final volume in Jack Schwager's Market Wizards series, published 
 | **Joe Vidich** | Manalapan Capital; long/short equity; sharp tactical risk control |
 | **Kevin Daly** | Five Corners Partners; small-cap long/short equity; concentrated low-turnover book |
 | **Jimmy Balodimas** | First New York; equity prop trading; aggressive, contrarian short-term equity trading |
-| **Joel Greenblatt** | [[joel-greenblatt\|Gotham Capital]]; special-situations value; later founded the Magic Formula and Value Investors Club |
+| **Joel Greenblatt** | Gotham Capital; special-situations value; later founded the Magic Formula and Value Investors Club |
 
 ## Core Themes
 
@@ -115,16 +115,14 @@ If you have limited time and are coming to this book as an options trader, read 
 - [[asymmetric-risk-reward]], [[expected-value]], [[expectancy]]
 - [[risk-management]], [[position-sizing]], [[drawdown-management]]
 - [[tail-risk-hedging]], [[long-volatility]], [[deep-otm-options]]
-- [[convertible-arbitrage]], [[volatility-arbitrage]], [[statistical-arbitrage]]
+- convertible-arbitrage, [[volatility-arbitrage]], [[statistical-arbitrage]]
 - [[risk-parity]], [[macro-trading]]
-- [[special-situations]], [[merger-arbitrage]]
 - [[professional-vs-retail-mindset]]
 
 ## Pages Backed
 
 - [[ray-dalio]] — primary interview source on Bridgewater, All Weather, and the Principles framework
 - [[ed-thorp]] — interview source on Princeton Newport, convertible arbitrage, and the prehistory of quantitative options trading
-- [[joel-greenblatt]] — interview source on Gotham Capital and special-situations value
 - [[asymmetric-risk-reward]] — Cornwall Capital trade is the canonical case study
 - [[the-big-short]] — Mai interview is the detailed insider account of the trade dramatized in the book/film
 - [[cornwall-capital]] — primary public profile of the firm and Jamie Mai's trading methodology

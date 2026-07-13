@@ -6,7 +6,7 @@ updated: 2026-04-20
 status: good
 tags: [data, data-providers, infrastructure]
 aliases: ["Market Data", "Data Providers", "Data Feeds", "data-providers"]
-related: ["[[free-data-sources]]", "[[paid-data-providers]]", "[[alternative-data-providers]]", "[[crypto-data-sources]]", "[[fundamental-data-sources]]", "[[transaction-cost-modeling]]", "[[backtesting-overview]]", "[[fundamental-analysis-overview]]", "[[alfred-fundamental-analysis]]"]
+related: ["[[free-data-sources]]", "[[paid-data-providers]]", "[[alternative-data-providers]]", "[[crypto-data-sources]]", "[[transaction-cost-modeling]]", "[[backtesting-overview]]", "[[fundamental-analysis-overview]]"]
 ---
 
 # Data Sources
@@ -57,10 +57,8 @@ This section lists the main providers by category, their strengths and weaknesse
 
 - [[free-data-sources]] — Yahoo, FRED, Alpha Vantage, exchange APIs
 - [[paid-data-providers]] — Polygon, Databento, Norgate, Refinitiv, FactSet
-- [[fundamental-data-sources]] — Compustat, S&P Capital IQ, SEC EDGAR
 - [[alternative-data-providers]] — satellite, credit card, web scraping
 - [[crypto-data-sources]] — exchange APIs, Kaiko, on-chain analytics
-- [[options-data-sources]] — OPRA, ORATS, OptionMetrics
 - [[macro-data-sources]] — FRED, ALFRED, BEA, BLS, central banks
 - [[news-and-sentiment-sources]] — RavenPack, Bloomberg event tags
 - [[exchange-api-reference]] — Normalized API endpoints for arbitrage (Binance, Coinbase, Hyperliquid, OKX, Bybit, Kraken)

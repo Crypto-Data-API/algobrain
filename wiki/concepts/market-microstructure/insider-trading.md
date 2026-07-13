@@ -9,10 +9,10 @@ aliases: ["MNPI Trading", "Material Non-Public Information", "Insider Dealing"]
 domain: [market-microstructure]
 prerequisites: ["[[regulation]]", "[[market-efficiency]]"]
 difficulty: intermediate
-related: ["[[market-manipulation]]", "[[regulation]]", "[[asx]]", "[[insider-trading-australia]]", "[[spoofing]]", "[[sec]]", "[[information-arbitrage]]", "[[market-efficiency]]"]
+related: ["[[market-manipulation]]", "[[regulation]]", "[[insider-trading-australia]]", "[[spoofing]]", "[[sec]]", "[[information-arbitrage]]", "[[market-efficiency]]"]
 ---
 
-Insider trading is the buying or selling of securities based on material non-public information (MNPI). It is illegal in most jurisdictions, including Australia under the Corporations Act 2001. Fred McNaught references insider trading in his Poseidon-era stories from the 1960s-70s, when enforcement was far weaker and information asymmetry between insiders and retail investors was extreme. The practice undermines [[market-efficiency|market efficiency]] and erodes investor confidence. For details on the Australian regulatory framework, see [[insider-trading-australia]].
+Insider trading is the buying or selling of securities based on material non-public information (MNPI). It is illegal in most jurisdictions, including Australia under the Corporations Act 2001. During the Poseidon-bubble era of the 1960s-70s, enforcement was far weaker and information asymmetry between insiders and retail investors was extreme. The practice undermines [[market-efficiency|market efficiency]] and erodes investor confidence. For details on the Australian regulatory framework, see [[insider-trading-australia]].
 
 ## What Makes Trading Illegal: The Three-Element Test
 
@@ -41,7 +41,7 @@ Several high-profile cases have shaped insider trading law and enforcement. **Ma
 
 ## Legal Insider Transactions
 
-Not all insider trading is illegal. Corporate officers, directors, and significant shareholders (insiders) are permitted to buy and sell their company's stock provided they are not acting on MNPI and they report their transactions. In the US, these transactions must be disclosed via **SEC Form 4** filings within two business days. Investors often track legal insider buying as a bullish signal -- the logic being that insiders have deep knowledge of their company's prospects and are more likely to buy when they believe the stock is undervalued. Systematic insider-buying signals have been shown to generate modest alpha in academic studies, though the edge has diminished as the data has become more widely accessible. In Australia, directors must disclose changes in their interests via Appendix 3Y filings with the [[asx|ASX]].
+Not all insider trading is illegal. Corporate officers, directors, and significant shareholders (insiders) are permitted to buy and sell their company's stock provided they are not acting on MNPI and they report their transactions. In the US, these transactions must be disclosed via **SEC Form 4** filings within two business days. Investors often track legal insider buying as a bullish signal -- the logic being that insiders have deep knowledge of their company's prospects and are more likely to buy when they believe the stock is undervalued. Systematic insider-buying signals have been shown to generate modest alpha in academic studies, though the edge has diminished as the data has become more widely accessible. In Australia, directors must disclose changes in their interests via Appendix 3Y filings with the ASX.
 
 ## Related
 

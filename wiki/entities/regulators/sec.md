@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 1934
 headquarters: "Washington, D.C., USA"
 website: "https://www.sec.gov"
-related: ["[[cftc]]", "[[federal-reserve]]", "[[market-structure]]", "[[short-selling]]", "[[robinhood]]", "[[citadel]]", "[[exchange-data-sources]]", "[[nyse]]", "[[nasdaq]]", "[[bitcoin]]", "[[ethereum]]", "[[hyperliquid]]", "[[binance]]", "[[coinbase]]"]
+related: ["[[cftc]]", "[[federal-reserve]]", "[[market-structure]]", "[[short-selling]]", "[[robinhood]]", "[[citadel]]", "[[exchange-data-sources]]", "[[bitcoin]]", "[[ethereum]]", "[[hyperliquid]]", "[[binance]]", "[[coinbase]]"]
 ---
 
 # SEC (Securities and Exchange Commission)
@@ -66,7 +66,7 @@ Unlike [[asic|ASIC]] (which directly regulates brokers with no SRO layer), the S
 
 ## Overview
 
-The SEC enforces federal securities laws including the Securities Act of 1933 and the Securities Exchange Act of 1934. It oversees stock exchanges like the [[nasdaq]] and NYSE, broker-dealers like [[robinhood]], investment advisers, mutual funds, and public company disclosures. The SEC also regulates [[market-structure]], insider trading rules, and [[short-selling]] practices.
+The SEC enforces federal securities laws including the Securities Act of 1933 and the Securities Exchange Act of 1934. It oversees stock exchanges like the nasdaq and NYSE, broker-dealers like [[robinhood]], investment advisers, mutual funds, and public company disclosures. The SEC also regulates [[market-structure]], insider trading rules, and [[short-selling]] practices.
 
 ## Key Functions
 
@@ -77,7 +77,7 @@ The SEC enforces federal securities laws including the Securities Act of 1933 an
 
 ## EDGAR Filing System
 
-All US public company filings are submitted through EDGAR (Electronic Data Gathering, Analysis, and Retrieval). Companies listed on [[nyse|NYSE]] and [[nasdaq|NASDAQ]] must file:
+All US public company filings are submitted through EDGAR (Electronic Data Gathering, Analysis, and Retrieval). Companies listed on NYSE and NASDAQ must file:
 
 | Filing | Description | Deadline |
 |--------|-------------|----------|

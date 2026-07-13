@@ -10,7 +10,7 @@ entity_type: company
 founded: 2010
 headquarters: "London, UK"
 website: "https://deepmind.google"
-related: ["[[alphabet]]", "[[google]]", "[[anthropic]]", "[[openai]]", "[[foundation-models]]", "[[transformer-architecture]]", "[[reinforcement-learning-trading]]", "[[artificial-intelligence]]"]
+related: ["[[anthropic]]", "[[openai]]", "[[foundation-models]]", "[[transformer-architecture]]", "[[reinforcement-learning-trading]]", "[[artificial-intelligence]]"]
 ---
 
 # Google DeepMind
@@ -46,12 +46,10 @@ related: ["[[alphabet]]", "[[google]]", "[[anthropic]]", "[[openai]]", "[[founda
 
 ## Parent Company
 
-Google DeepMind is a division of [[alphabet|Alphabet Inc.]] (NASDAQ: GOOGL). Alphabet's AI capex is among the largest in the industry — guidance for 2026 capex (datacenters and TPUs) was raised repeatedly through 2025 into the hundreds of billions of dollars range industry-wide, with Alphabet alone committing $90B+ annually. DeepMind's research feeds directly into Google Search (AI Overviews/AI Mode), YouTube, Google Cloud, and Workspace.
+Google DeepMind is a division of Alphabet Inc. (NASDAQ: GOOGL). Alphabet's AI capex is among the largest in the industry — guidance for 2026 capex (datacenters and TPUs) was raised repeatedly through 2025 into the hundreds of billions of dollars range industry-wide, with Alphabet alone committing $90B+ annually. DeepMind's research feeds directly into Google Search (AI Overviews/AI Mode), YouTube, Google Cloud, and Workspace.
 
 ## Related
 
-- [[alphabet]] — Parent company (GOOGL)
-- [[google]] — Operating company
 - [[openai]] — Primary competitor (GPT)
 - [[anthropic]] — Primary competitor (Claude)
 - [[foundation-models]] — What Gemini is

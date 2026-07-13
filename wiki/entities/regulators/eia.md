@@ -6,7 +6,7 @@ updated: 2026-06-10
 status: good
 tags: [data-provider, commodities, oil]
 aliases: ["EIA", "Energy Information Administration", "US EIA"]
-related: ["[[crude-oil]]", "[[natural-gas]]", "[[eia-data]]", "[[commodity-data-sources]]", "[[commodities]]", "[[inventory-cycle-analysis]]", "[[opec]]"]
+related: ["[[crude-oil]]", "[[natural-gas]]", "[[eia-data]]", "[[commodity-data-sources]]", "[[commodities]]", "[[inventory-cycle-analysis]]"]
 entity_type: regulator
 founded: 1977
 headquarters: "Washington, D.C., USA"
@@ -79,7 +79,6 @@ The EIA's reliability came under unprecedented strain in 2025-2026 amid federal 
 - [[commodity-data-sources]] — Catalog of commodity data providers
 - [[commodities]] — Broader commodity market context
 - [[inventory-cycle-analysis]] — Trading approach built on EIA data
-- [[opec]] — OPEC production data compared against EIA tracking
 - [[usda]] — Analogous data agency for agricultural commodities
 
 ## Sources

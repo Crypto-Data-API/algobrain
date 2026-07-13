@@ -9,7 +9,7 @@ aliases: ["IV Crush", "Implied Volatility Crush", "Vol Crush", "Volatility Crush
 domain: [derivatives, options]
 prerequisites: ["[[implied-volatility]]", "[[vega]]", "[[options-greeks]]"]
 difficulty: intermediate
-related: ["[[earnings-volatility]]", "[[implied-earnings-move]]", "[[volatility-risk-premium-decay]]", "[[earnings-iv-crush]]", "[[long-straddle]]", "[[short-volatility-strategies]]", "[[options-trading-pitfalls]]", "[[options-trader-psychology]]", "[[earnings-calendar]]", "[[volatility-term-structure]]", "[[volatility-skew]]", "[[variance-risk-premium]]", "[[options-premium-selling]]", "[[earnings-announcement]]", "[[fed-meeting]]", "[[fda-decision]]", "[[managing-winners]]"]
+related: ["[[volatility-risk-premium-decay]]", "[[long-straddle]]", "[[short-volatility-strategies]]", "[[options-trading-pitfalls]]", "[[options-trader-psychology]]", "[[volatility-term-structure]]", "[[volatility-skew]]", "[[variance-risk-premium]]", "[[options-premium-selling]]", "[[fed-meeting]]", "[[fda-decision]]", "[[managing-winners]]"]
 ---
 
 **IV crush** is the abrupt collapse of [[implied-volatility|implied volatility]] in the seconds-to-hours after a known information event resolves. Pre-event, options pricing inflates [[vega|vega]] to reflect uncertainty about a binary outcome. The instant the outcome is known — earnings prints, FDA panel votes, M&A approvals announce, the FOMC statement releases — the uncertainty disappears, vega collapses, and every option that spans the event loses extrinsic value regardless of which way the underlying moved. IV crush is the canonical reason traders are *directionally correct on earnings and still lose money*.
@@ -89,7 +89,7 @@ expected_move ≈ front_atm_straddle_price / spot
 expected_move ≈ atm_iv × sqrt(days_to_expiration / 365)
 ```
 
-For practical use, the straddle-price approximation is preferred because it includes skew effects. If NVDA is at $500 and the day-of-earnings ATM straddle is bid $25.00, the market is pricing a ~5% move — meaning the straddle "breaks even" only if NVDA moves more than ~5% in either direction. See [[implied-earnings-move]].
+For practical use, the straddle-price approximation is preferred because it includes skew effects. If NVDA is at $500 and the day-of-earnings ATM straddle is bid $25.00, the market is pricing a ~5% move — meaning the straddle "breaks even" only if NVDA moves more than ~5% in either direction. See implied-earnings-move.
 
 A common backtest: compare *implied* move to *realized* move across all earnings announcements for a given name. If realized move is systematically smaller than implied, short premium across earnings has positive expectancy on that name. If realized exceeds implied, long premium does. Most large-cap names show the former.
 
@@ -112,13 +112,10 @@ After the crush, IV is often *too* low — the post-event IV may temporarily und
 
 ### What not to do
 
-Buying long premium *into* a known event without an explicit vol view is, on average, a losing trade. The [[variance-risk-premium]] is positive precisely because IV crush systematically over-rewards short premium and under-rewards long. See [[volatility-risk-premium-decay]] and [[earnings-iv-crush]].
+Buying long premium *into* a known event without an explicit vol view is, on average, a losing trade. The [[variance-risk-premium]] is positive precisely because IV crush systematically over-rewards short premium and under-rewards long. See [[volatility-risk-premium-decay]] and earnings-iv-crush.
 
 ## Related
 
-- [[earnings-volatility]] — the broader cyclical pattern around earnings
-- [[implied-earnings-move]] — how to compute the market's expected move
-- [[earnings-iv-crush]] — the systematic strategy harvesting this effect
 - [[long-straddle]] — the strategy most damaged by IV crush
 - [[short-volatility-strategies]] — strategies that benefit
 - [[volatility-risk-premium-decay]] — the broader risk-premium framework

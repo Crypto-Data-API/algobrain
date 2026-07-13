@@ -8,12 +8,12 @@ tags: [ai-trading, machine-learning, education]
 aliases: ["Chatbot", "Conversational AI", "Chat Architecture"]
 domain: [ai-trading]
 difficulty: intermediate
-related: ["[[foundation-models]]", "[[retrieval-augmented-generation]]", "[[langchain]]", "[[eliza-framework]]", "[[alfred]]", "[[prompt-engineering-trading]]", "[[nlp-overview]]", "[[artificial-intelligence]]"]
+related: ["[[foundation-models]]", "[[retrieval-augmented-generation]]", "[[langchain]]", "[[eliza-framework]]", "[[prompt-engineering-trading]]", "[[nlp-overview]]", "[[artificial-intelligence]]"]
 ---
 
 # Chatbot & Conversational AI Architectures
 
-**Conversational AI** systems enable natural language interaction with trading tools, data, and analysis. From simple rule-based bots to [[foundation-models|LLM]]-powered agents that can query live data, execute research, and maintain context across conversations. [[alfred|Alfred]], this wiki's voice assistant, is an example of an LLM-powered trading chatbot.
+**Conversational AI** systems enable natural language interaction with trading tools, data, and analysis. From simple rule-based bots to [[foundation-models|LLM]]-powered agents that can query live data, execute research, and maintain context across conversations. Alfred, this wiki's voice assistant, is an example of an LLM-powered trading chatbot.
 
 ## Architecture Evolution
 
@@ -22,7 +22,7 @@ related: ["[[foundation-models]]", "[[retrieval-augmented-generation]]", "[[lang
 | **Rule-based** (1990s) | If-then rules, pattern matching | "What is the price of AAPL?" → lookup price API |
 | **Intent-based** (2010s) | NLU classifies intent + extracts entities | Dialogflow/Alexa: "Buy 100 shares of AAPL" → parsed command |
 | **Retrieval-based** (2018+) | Search knowledge base for best response | FAQ bots for broker customer service |
-| **LLM-powered** (2023+) | [[foundation-models|Foundation model]] with tool access | [[alfred|Alfred]]: natural conversation with live data, wiki search, web research |
+| **LLM-powered** (2023+) | [[foundation-models|Foundation model]] with tool access | Alfred: natural conversation with live data, wiki search, web research |
 
 ## Modern LLM Chatbot Architecture
 
@@ -70,7 +70,7 @@ User receives natural language answer with citations
 
 ## Alfred: A Case Study
 
-[[alfred|Alfred]] is this wiki's trading chatbot — a formal British butler persona powered by:
+Alfred is this wiki's trading chatbot — a formal British butler persona powered by:
 - [[anthropic|Claude]] for reasoning and conversation
 - Wiki search via [[retrieval-augmented-generation|RAG]] for knowledge base access
 - CryptoData API for live crypto prices
@@ -79,7 +79,7 @@ User receives natural language answer with citations
 - Perplexity for deep research
 - ElevenLabs for text-to-speech (voice interface)
 
-Conversations are logged to `wiki/alfred/conversations/` and summarized in [[alfred-log]].
+Conversations are logged to `wiki/alfred/conversations/` and summarized in alfred-log.
 
 ## Sources
 
@@ -90,7 +90,6 @@ Conversations are logged to `wiki/alfred/conversations/` and summarized in [[alf
 
 ## See Also
 
-- [[alfred]] — This wiki's trading chatbot
 - [[foundation-models]] — The models powering modern chatbots
 - [[retrieval-augmented-generation]] — Grounding chatbot responses in data
 - [[langchain]] — Framework for building chatbot pipelines

@@ -13,14 +13,13 @@ related:
   - "[[polygon-io]]"
   - "[[alpha-vantage]]"
   - "[[yahoo-finance]]"
-  - "[[optionmetrics]]"
 ---
 
 # EOD Historical Data
 
 ## Overview
 
-EOD Historical Data (now branded **EODHD**, primary domain eodhd.com) is an affordable subscription-based market data API focused on end-of-day equities, ETFs, indices, and US options data. Coverage spans 70+ global exchanges with 30+ years of price history on US equities, plus daily options chains for US-listed underlyings. It targets the cost-conscious segment of the market: traders who do not need tick-level data, but want clean, reliable daily summaries delivered through a developer-friendly API at a fraction of the cost of [[optionmetrics]], [[databento]], or [[bloomberg-terminal]].
+EOD Historical Data (now branded **EODHD**, primary domain eodhd.com) is an affordable subscription-based market data API focused on end-of-day equities, ETFs, indices, and US options data. Coverage spans 70+ global exchanges with 30+ years of price history on US equities, plus daily options chains for US-listed underlyings. It targets the cost-conscious segment of the market: traders who do not need tick-level data, but want clean, reliable daily summaries delivered through a developer-friendly API at a fraction of the cost of optionmetrics, [[databento]], or [[bloomberg-terminal]].
 
 ## Pricing (verified June 2026, eodhd.com/pricing)
 
@@ -67,12 +66,12 @@ EODHD has also added AI/developer tooling: an **EODHD ChatGPT Assistant** and an
 - **Stable, mature API**: been operating since 2018 with consistent endpoints
 
 **Limitations:**
-- **Not real-time**: "live" endpoints are delayed; for real-time use [[polygon-io]], [[finnhub]], or direct [[opra]] vendors
+- **Not real-time**: "live" endpoints are delayed; for real-time use [[polygon-io]], [[finnhub]], or direct opra vendors
 - **No tick or sub-minute data**: 1-minute bars are the highest resolution
 - **Options coverage is daily-only**: insufficient for intraday options strategies, 0DTE work (see [[0dte-trading]]), or microstructure research
-- **Greeks are computed at end-of-day snapshots**: less precise than [[orats]] smoothed-surface methodology
+- **Greeks are computed at end-of-day snapshots**: less precise than orats smoothed-surface methodology
 - **Rate limits on smaller plans**: 100K calls/day is generous for EOD work but tight for high-frequency scanning
-- **No execution layer**: pair with [[interactive-brokers]] or another broker for trading
+- **No execution layer**: pair with interactive-brokers or another broker for trading
 
 ## Related
 
@@ -80,9 +79,6 @@ EODHD has also added AI/developer tooling: an **EODHD ChatGPT Assistant** and an
 - [[polygon-io]] — step up for tick-level and real-time options
 - [[alpha-vantage]] — similar tier, more limited international coverage
 - [[yahoo-finance]] — free baseline that EOD HD improves on with reliability and SLAs
-- [[optionmetrics]] — institutional alternative for deep historical options research
-- [[orats]] — better choice for intraday options analytics
-- [[opra]] — the upstream source of EOD HD's US options data
 - [[backtesting]] — EOD HD is a common cost-effective historical data source
 - [[implied-volatility]] — included in daily options snapshots
 - [[options-greeks]] — computed at EOD on chain data

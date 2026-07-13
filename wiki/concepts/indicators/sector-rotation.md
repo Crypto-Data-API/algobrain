@@ -127,7 +127,6 @@ The business cycle model is an idealized framework. In practice:
 - [[dxy-commodity-correlation]] -- dollar movements that affect sector performance
 - [[relative-strength]] -- the primary tool for measuring sector leadership
 - [[commodities]] -- the asset class whose price behavior signals cycle transitions
-- [[gics-sectors]] -- the sector classification framework used in rotation analysis
 - [[global-macro]] -- the broader macro approach that incorporates sector rotation
 
 ## Sources

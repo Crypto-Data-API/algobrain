@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [commodities, futures]
 aliases: ["Coal", "Thermal Coal", "Metallurgical Coal", "Coking Coal", "Steam Coal"]
-related: ["[[commodities]]", "[[natural-gas]]", "[[crude-oil]]", "[[iron-ore]]", "[[copper]]", "[[nuclear-power]]", "[[intercontinental-exchange]]", "[[energy]]", "[[whitehaven-coal]]"]
+related: ["[[commodities]]", "[[natural-gas]]", "[[crude-oil]]", "[[iron-ore]]", "[[copper]]", "[[nuclear-power]]"]
 ---
 
 # Coal
@@ -18,7 +18,7 @@ Coal is a combustible sedimentary rock and one of the oldest traded energy commo
 ### Thermal Coal (Steam Coal)
 
 - **Use**: Electricity generation in coal-fired power plants
-- **Benchmark**: Newcastle coal (Australia) — the primary seaborne thermal coal benchmark, traded on [[intercontinental-exchange|ICE]]
+- **Benchmark**: Newcastle coal (Australia) — the primary seaborne thermal coal benchmark, traded on ICE
 - **Other benchmarks**: Richards Bay (South Africa), API 2 (Northwest Europe)
 - **Trend**: Declining in OECD nations as renewable energy and [[natural-gas]] displace coal for power generation. However, demand remains strong in China, India, and Southeast Asia.
 
@@ -52,11 +52,11 @@ Coal presents a paradox for traders: the secular trend is bearish (energy transi
 
 ## ESG Divestment vs Asian Demand
 
-Coal is at the centre of a structural tension in global markets. Western institutional investors, pension funds, and sovereign wealth funds are divesting from thermal coal under ESG mandates -- Norway's Government Pension Fund Global, for example, has excluded companies deriving more than 30% of revenue from thermal coal. Many banks have restricted lending to new coal projects. This divestment pressure reduces the available capital for coal production, constrains supply, and paradoxically supports higher prices for remaining producers. Meanwhile, coal demand in Asia continues to grow: China approved over 100 GW of new coal-fired generation capacity in 2022-2023, and India's coal consumption is rising 5-7% annually. This bifurcation creates a market where Western capital avoids coal while Asian demand sustains it, leaving well-positioned producers like [[whitehaven-coal|Whitehaven Coal]], New Hope Group, and Yancoal with strong margins and limited competition for capital.
+Coal is at the centre of a structural tension in global markets. Western institutional investors, pension funds, and sovereign wealth funds are divesting from thermal coal under ESG mandates -- Norway's Government Pension Fund Global, for example, has excluded companies deriving more than 30% of revenue from thermal coal. Many banks have restricted lending to new coal projects. This divestment pressure reduces the available capital for coal production, constrains supply, and paradoxically supports higher prices for remaining producers. Meanwhile, coal demand in Asia continues to grow: China approved over 100 GW of new coal-fired generation capacity in 2022-2023, and India's coal consumption is rising 5-7% annually. This bifurcation creates a market where Western capital avoids coal while Asian demand sustains it, leaving well-positioned producers like Whitehaven Coal, New Hope Group, and Yancoal with strong margins and limited competition for capital.
 
 ## Key Australian Coal Producers
 
-- **[[whitehaven-coal|Whitehaven Coal]]** (ASX: WHC) -- Pure-play coal producer (thermal and metallurgical), NSW operations. Acquired Daunia and Blackwater coking coal mines from BHP in 2024
+- **Whitehaven Coal** (ASX: WHC) -- Pure-play coal producer (thermal and metallurgical), NSW operations. Acquired Daunia and Blackwater coking coal mines from BHP in 2024
 - **New Hope Group** (ASX: NHC) -- Thermal coal producer, New Acland mine in Queensland. High-cost but positioned in the premium Australian thermal coal market
 - **Yancoal Australia** (ASX: YAL) -- Major thermal and metallurgical coal producer, majority-owned by China's Yanzhou Energy. Operations across NSW and Queensland
 - **Stanmore Resources** (ASX: SMR) -- Metallurgical coal producer, acquired BHP's 80% stake in BMA's South Walker Creek and Poitrel mines
@@ -79,6 +79,4 @@ Coal is at the centre of a structural tension in global markets. Western institu
 - [[crude-oil]] — fellow fossil-fuel energy commodity
 - [[copper]] — base metal exposed to the same China-industrial demand cycle
 - [[nuclear-power]] — competing baseload generation
-- [[intercontinental-exchange]] — Newcastle coal futures venue
-- [[whitehaven-coal]] — pure-play Australian coal producer
 - [[commodities]] — sector overview

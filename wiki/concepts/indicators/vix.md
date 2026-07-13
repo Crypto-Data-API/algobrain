@@ -6,12 +6,12 @@ updated: 2026-04-07
 status: good
 tags: [volatility, indicators, options, risk-management]
 aliases: ["VIX", "CBOE Volatility Index", "Fear Index"]
-related: ["[[implied-volatility]]", "[[volatility-trading]]", "[[options-greeks]]", "[[realized-volatility]]", "[[volatility-risk-premium]]", "[[sp500]]"]
+related: ["[[implied-volatility]]", "[[volatility-trading]]", "[[options-greeks]]", "[[realized-volatility]]", "[[volatility-risk-premium]]"]
 domain: [volatility, risk-management]
 difficulty: intermediate
 ---
 
-The **VIX** (CBOE Volatility Index) is a real-time index that measures the market's expectation of 30-day forward-looking [[implied-volatility|volatility]] on the [[sp500|S&P 500 Index]]. Often called the "Fear Index," it is derived from the prices of S&P 500 index options and serves as the most widely followed barometer of investor sentiment and market risk in global finance.
+The **VIX** (CBOE Volatility Index) is a real-time index that measures the market's expectation of 30-day forward-looking [[implied-volatility|volatility]] on the S&P 500 Index. Often called the "Fear Index," it is derived from the prices of S&P 500 index options and serves as the most widely followed barometer of investor sentiment and market risk in global finance.
 
 ## Overview
 

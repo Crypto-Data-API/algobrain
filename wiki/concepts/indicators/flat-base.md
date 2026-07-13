@@ -9,10 +9,10 @@ domain: [indicators]
 difficulty: intermediate
 aliases: ["Flat Base Pattern", "Flat Base"]
 prerequisites: ["[[chart-patterns]]", "[[breakout-trading]]"]
-related: ["[[breakout-trading]]", "[[chart-patterns]]", "[[support-and-resistance]]", "[[technical-analysis]]", "[[trading-volume]]", "[[cup-and-handle]]", "[[canslim]]", "[[relative-strength]]", "[[base-pattern]]", "[[breakout]]", "[[volatility]]", "[[volatility-contraction-pattern]]"]
+related: ["[[breakout-trading]]", "[[chart-patterns]]", "[[support-and-resistance]]", "[[technical-analysis]]", "[[trading-volume]]", "[[cup-and-handle]]", "[[relative-strength]]", "[[base-pattern]]", "[[breakout]]", "[[volatility]]", "[[volatility-contraction-pattern]]"]
 ---
 
-A flat base is a chart [[chart-patterns|consolidation pattern]] where a stock trades in a tight, sideways range -- typically correcting no more than 10-15% from peak to trough -- for a minimum of five weeks after a prior advance. It signals institutional accumulation during a period of apparent rest and often precedes a [[breakout|breakout]] to new highs. The pattern is a core component of the [[canslim|CAN SLIM]] methodology developed by William O'Neil and is featured prominently in *How to Make Money in Stocks*. It belongs to the broader family of [[base-pattern|base patterns]] alongside the [[cup-and-handle|cup with handle]], double bottom, and ascending base.
+A flat base is a chart [[chart-patterns|consolidation pattern]] where a stock trades in a tight, sideways range -- typically correcting no more than 10-15% from peak to trough -- for a minimum of five weeks after a prior advance. It signals institutional accumulation during a period of apparent rest and often precedes a [[breakout|breakout]] to new highs. The pattern is a core component of the CAN SLIM methodology developed by William O'Neil and is featured prominently in *How to Make Money in Stocks*. It belongs to the broader family of [[base-pattern|base patterns]] alongside the [[cup-and-handle|cup with handle]], double bottom, and ascending base.
 
 ## Characteristics and Identification
 
@@ -55,7 +55,7 @@ This frames the asymmetry the pattern targets: a well-defined ~8% downside again
 
 ## How Traders Use the Flat Base
 
-Traders using flat bases as entry signals look for stocks with strong [[relative-strength]] rankings (RS 80+), robust earnings growth, and institutional sponsorship. The tight price action during the base suggests that large holders are unwilling to sell, creating a supply-demand imbalance that resolves to the upside when a catalyst (often an earnings report -- see [[earnings-calendar]]) arrives.
+Traders using flat bases as entry signals look for stocks with strong [[relative-strength]] rankings (RS 80+), robust earnings growth, and institutional sponsorship. The tight price action during the base suggests that large holders are unwilling to sell, creating a supply-demand imbalance that resolves to the upside when a catalyst (often an earnings report -- see earnings-calendar) arrives.
 
 - **Entry**: buy as price clears the pivot on volume at least 40-50% above average; many traders require the breakout to hold into the close rather than buying an intraday spike.
 - **Stop-loss**: placed just below the low of the base, giving a well-defined risk of approximately 5-8% from the buy point.
@@ -69,7 +69,7 @@ Traders using flat bases as entry signals look for stocks with strong [[relative
 - **Buying extended**: chasing a stock more than ~5% above the pivot turns a tight 8% stop into a much wider real loss.
 - **Failed breakouts (the "undercut")**: where the stock breaks down through the bottom of the range on heavy volume -- a bearish signal indicating that institutions have begun distributing. Traders should exit immediately to preserve capital.
 - **Whipsaws in choppy markets**: flat bases break out and fail repeatedly when the broad market is rangebound; the [[volatility-contraction-pattern]] (VCP) framework and a market-health filter help screen these out.
-- **Earnings landmines**: a base resolving right into an [[earnings-calendar|earnings]] date is a binary bet -- the breakout can be reversed by a post-report gap.
+- **Earnings landmines**: a base resolving right into an earnings date is a binary bet -- the breakout can be reversed by a post-report gap.
 
 ## Related
 
@@ -77,7 +77,6 @@ Traders using flat bases as entry signals look for stocks with strong [[relative
 - [[breakout]] / [[breakout-trading]] -- the entry technique used to trade a flat base pivot
 - [[chart-patterns]] -- the broader family of consolidation and continuation structures
 - [[cup-and-handle]] -- the deeper base pattern flat bases are often compared to; flat bases frequently form after one ("base on base")
-- [[canslim]] -- the William O'Neil methodology that codifies the flat base
 - [[relative-strength]] -- the screen used to select strong candidates before a flat base breakout
 - [[support-and-resistance]] -- the base's high (pivot) and low define near-term S/R
 - [[trading-volume]] -- volume contraction during the base and expansion on breakout is the key confirmation
@@ -86,6 +85,5 @@ Traders using flat bases as entry signals look for stocks with strong [[relative
 
 ## Sources
 
-- [[book-how-to-make-money-in-stocks]] -- William O'Neil's *How to Make Money in Stocks*, which defines the flat base, base-on-base, and CAN SLIM buy-point rules
 - Investor's Business Daily chart-pattern education on flat base depth, duration, and pivot/breakout volume requirements
 - General market knowledge on base-pattern taxonomy; no additional specific wiki source ingested yet.

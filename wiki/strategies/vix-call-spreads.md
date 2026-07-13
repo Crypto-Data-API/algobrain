@@ -20,10 +20,10 @@ crowding_risk: low
 expected_sharpe: -0.5
 expected_max_drawdown: 0.04
 breakeven_cost_bps: 50
-related: ["[[vix]]", "[[vix-futures]]", "[[vix-calls]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[spx-puts]]", "[[put-tree]]", "[[call-spread]]", "[[debit-spread]]", "[[implied-volatility]]", "[[vvix]]", "[[vega-budgeting]]", "[[options-selection-framework]]", "[[strike-selection]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[universa-investments]]", "[[contango]]", "[[backwardation]]", "[[sharpe-ratio]]"]
+related: ["[[vix]]", "[[vix-futures]]", "[[vix-calls]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[put-tree]]", "[[call-spread]]", "[[debit-spread]]", "[[implied-volatility]]", "[[vvix]]", "[[vega-budgeting]]", "[[options-selection-framework]]", "[[strike-selection]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[universa-investments]]", "[[contango]]", "[[backwardation]]", "[[sharpe-ratio]]"]
 ---
 
-A **VIX call spread** is a long-vol overlay structure: buy a near-the-money or modestly out-of-the-money [[vix-calls|VIX call]] and sell a higher-strike call against it for the same expiry, paying a small net debit in exchange for a defined-risk payoff if the VIX index spikes. The structure is the cheapest convex hedge widely used by [[options-concentration-risk|concentrated short-premium books]] and [[long-vol-vs-short-vol|short-vol portfolios]]: it caps the upside relative to a naked long call, but it also caps the cost — and the cost is what kills tail hedges over multi-year holding periods. It is the single most popular structure cited by the [[itpm|ITPM]] / institutional playbook as a [[long-vol-overlay|long-vol overlay]] on a short-strangle book.
+A **VIX call spread** is a long-vol overlay structure: buy a near-the-money or modestly out-of-the-money [[vix-calls|VIX call]] and sell a higher-strike call against it for the same expiry, paying a small net debit in exchange for a defined-risk payoff if the VIX index spikes. The structure is the cheapest convex hedge widely used by [[options-concentration-risk|concentrated short-premium books]] and [[long-vol-vs-short-vol|short-vol portfolios]]: it caps the upside relative to a naked long call, but it also caps the cost — and the cost is what kills tail hedges over multi-year holding periods. It is the single most popular structure cited by the ITPM / institutional playbook as a [[long-vol-overlay|long-vol overlay]] on a short-strangle book.
 
 ## Edge Source
 
@@ -191,7 +191,7 @@ Net exposure: **bounded long convexity, reduced carry.** Selling the upper call 
 |---|---|---|---|---|
 | **VIX call spread** (this page) | Low-moderate | Capped at strike width | Calm, steep [[contango]] | Cheapest convex hedge; saturates in extreme spikes |
 | [[vix-calls\|Naked VIX calls]] | High | Uncapped | Calm, very low VIX | Full convexity, highest bleed |
-| [[spx-puts\|SPX puts]] | High | Uncapped | Slow equity crash | Path-dependent; fires slower than VIX |
+| SPX puts | High | Uncapped | Slow equity crash | Path-dependent; fires slower than VIX |
 | [[put-tree\|Put trees / ratio]] | Very low / credit | Asymmetric, capped zone | Moderate selloffs | Adds short gamma in deep tail — careful |
 | [[long-vol-overlay\|Full long-vol overlay]] | 2-3.5%/yr | Blended | All | Combines VIX calls + SPX puts on a short-vol core |
 
@@ -199,7 +199,7 @@ A practitioner typically does not choose one structure but **ladders several** (
 
 ## Capacity Limits
 
-The VIX options market is liquid — listed open interest in front-month VIX calls regularly exceeds 500K contracts. A single trader running $50M+ of VIX-call-spread notional can begin to move the bid-ask on individual strikes; institutional [[universa-investments|tail funds]] running $1B+ rotate across multiple structures (VIX calls, [[spx-puts|SPX puts]], [[put-tree|put trees]], variance swaps) to spread market impact. For retail and small-fund users, capacity is effectively unlimited.
+The VIX options market is liquid — listed open interest in front-month VIX calls regularly exceeds 500K contracts. A single trader running $50M+ of VIX-call-spread notional can begin to move the bid-ask on individual strikes; institutional [[universa-investments|tail funds]] running $1B+ rotate across multiple structures (VIX calls, SPX puts, [[put-tree|put trees]], variance swaps) to spread market impact. For retail and small-fund users, capacity is effectively unlimited.
 
 ## What Kills This Strategy
 
@@ -212,7 +212,7 @@ The VIX options market is liquid — listed open interest in front-month VIX cal
 
 - **Annualized bleed > 6% of NAV** sustained over 24 months with no monetization opportunities.
 - **Realized sharpe contribution to combined book < 0.0** over 36 months (overlay is not paying for itself).
-- **Spread debit > 8% of upper-lower strike width** consistently — premium has become unattractive vs. raw [[spx-puts|SPX put]] alternatives.
+- **Spread debit > 8% of upper-lower strike width** consistently — premium has become unattractive vs. raw SPX put alternatives.
 - **VIX options bid-ask widens to >25% of mid** during normal hours — liquidity has degraded enough to make rolling impractical.
 
 ## Advantages
@@ -221,8 +221,8 @@ The VIX options market is liquid — listed open interest in front-month VIX cal
 - **Convex payoff in vol regime shifts.** Pays multiples of premium during VIX spikes — exactly the regime that hurts [[options-concentration-risk|short-premium books]].
 - **Cheaper than naked VIX calls.** The short upper call funds 30-60% of the long lower call premium.
 - **Capital-light.** A 2-3% NAV allocation is sufficient for meaningful protection.
-- **Listed and liquid.** Trades on [[cboe-global-markets|Cboe]], cash-settled, no counterparty risk.
-- **Complements other long-vol structures.** Stacks well with [[spx-puts|SPX puts]] and [[put-tree|put trees]] for diversified tail protection.
+- **Listed and liquid.** Trades on Cboe, cash-settled, no counterparty risk.
+- **Complements other long-vol structures.** Stacks well with SPX puts and [[put-tree|put trees]] for diversified tail protection.
 
 ## Disadvantages
 
@@ -249,7 +249,6 @@ The VIX options market is liquid — listed open interest in front-month VIX cal
 - [[options-concentration-risk]] — the problem this hedges
 - [[long-vol-vs-short-vol]] — the philosophical framework
 - [[long-vol-overlay]] — the overlay sizing approach
-- [[spx-puts]] — the alternative tail-hedge instrument
 - [[put-tree]] — another defined-risk long-vol structure
 - [[call-spread]] — the underlying structure type
 - [[long-volatility-strategies]] — the broader family of long-vol trades

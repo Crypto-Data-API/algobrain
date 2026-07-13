@@ -8,11 +8,9 @@ tags: [algorithmic, backtesting, programming, options]
 domain: [algorithmic, backtesting]
 prerequisites:
   - "[[backtesting]]"
-  - "[[tradestation]]"
 difficulty: intermediate
 aliases: ["EasyLanguage", "EL", "TradeStation EasyLanguage", "PowerLanguage"]
 related:
-  - "[[tradestation]]"
   - "[[backtesting]]"
   - "[[pine-script]]"
   - "[[thinkorswim]]"
@@ -27,7 +25,7 @@ related:
 
 # EasyLanguage
 
-EasyLanguage is [[tradestation|TradeStation]]'s proprietary, English-like scripting language used to author indicators, strategies, and automated order logic on the TradeStation desktop platform. It is the historical reason traders chose the platform in the 1990s and remains its biggest moat — a single environment where the same script can paint a chart study, drive a backtest, run a portfolio-level walk-forward, and fire live orders without ever leaving the desktop.
+EasyLanguage is TradeStation's proprietary, English-like scripting language used to author indicators, strategies, and automated order logic on the TradeStation desktop platform. It is the historical reason traders chose the platform in the 1990s and remains its biggest moat — a single environment where the same script can paint a chart study, drive a backtest, run a portfolio-level walk-forward, and fire live orders without ever leaving the desktop.
 
 ## What it is
 
@@ -38,13 +36,13 @@ EasyLanguage is a domain-specific language compiled into TradeStation's PowerLan
 - **Strategy** — generates buy/sell/short/cover signals that the simulator (or live broker) acts on
 - **Function** — reusable callable, like a Python def
 
-The development environment is the TradeStation Development Environment (TDE) — a Windows IDE with syntax highlighting, a verifier (compiler), and a code-completion sidebar. Scripts compile to `.eld` (EasyLanguage Document) archives that can be exported, imported, and sold via the [[tradestation|TradingApp Store]].
+The development environment is the TradeStation Development Environment (TDE) — a Windows IDE with syntax highlighting, a verifier (compiler), and a code-completion sidebar. Scripts compile to `.eld` (EasyLanguage Document) archives that can be exported, imported, and sold via the TradingApp Store.
 
 ## History (Omega Research origin)
 
 EasyLanguage predates TradeStation as a brand. It originated in the late 1980s at **Omega Research**, a Miami-based firm that sold a charting product called System Writer and later TradeStation 2000i. Omega rebranded to TradeStation Technologies in 2001 and merged into the TradeStation broker-dealer; the language survived every reorg. A near-identical fork called **PowerLanguage** ships with [[multicharts]], a competing platform that licensed the syntax — most EasyLanguage code is portable to MultiCharts with minimal changes, and vice versa.
 
-The 30+ year lineage explains both the strengths (a vast library of legacy indicators, an enormous installed base of working code, and the [[tradestation|TradingApp Store]] as a third-party marketplace) and the weaknesses (Pascal-flavored syntax, limited modern data structures, no first-class generics).
+The 30+ year lineage explains both the strengths (a vast library of legacy indicators, an enormous installed base of working code, and the TradingApp Store as a third-party marketplace) and the weaknesses (Pascal-flavored syntax, limited modern data structures, no first-class generics).
 
 ## Core concepts
 
@@ -164,7 +162,7 @@ EasyLanguage exposes options primitives that most scripting languages don't:
 - **Multi-leg strategies**: built-in primitives for verticals, iron condors, straddles, calendars, diagonals via `BuyVerticalSpread`, etc. The same primitives back the [[optionstation-pro|OptionStation Pro]] strategy templates.
 - **Automated rolling**: a script can monitor open option positions and, on a condition (50% max profit, 21 DTE, delta breach), close the leg and re-open at a further-dated strike — the classic [[wheel-strategy]] / [[options-premium-selling|premium-selling]] discipline encoded.
 
-The catch: TradeStation's historical options chain depth is shallower than dedicated vendors like [[orats]] or [[optionmetrics]]. Backtests over realistic option histories work for a few years; serious volatility-surface research still belongs upstream in Python with proper data. For the end-to-end "research in Python, automate the live legs in EasyLanguage" pattern, see [[tradestation-options-workflow]].
+The catch: TradeStation's historical options chain depth is shallower than dedicated vendors like orats or optionmetrics. Backtests over realistic option histories work for a few years; serious volatility-surface research still belongs upstream in Python with proper data. For the end-to-end "research in Python, automate the live legs in EasyLanguage" pattern, see [[tradestation-options-workflow]].
 
 ## Common Pitfalls
 
@@ -174,7 +172,7 @@ The catch: TradeStation's historical options chain depth is shallower than dedic
 | Look-ahead via `Close` inside IOG | `Close` only finalizes at bar end; intrabar reference peeks | Reference confirmed bars; validate IOG logic tick-by-tick |
 | Optimizing then reporting in-sample | Exhaustive grid search overfits to history | Always Walk-Forward; WFE ~50-60%+ before trusting |
 | Treating TradingApp Store curves as real | Listed curves are usually in-sample | Assume curve-fit until independently verified |
-| Shallow options history | TradeStation chain depth is limited | Do vol-surface research in Python / [[orats]] first |
+| Shallow options history | TradeStation chain depth is limited | Do vol-surface research in Python / orats first |
 | Forgetting variable persistence | `variables:` carry across bars; stale state | Reset state explicitly on new session/trade where needed |
 | Assuming portability | Code only runs on TradeStation / [[multicharts]] | Plan for a rewrite if migrating brokers |
 
@@ -194,7 +192,7 @@ TradeStation runs a marketplace where third-party developers sell EasyLanguage i
 
 ## Limitations
 
-- **Single-vendor lock-in**. Code does not port outside TradeStation / [[multicharts]]. Migrating a strategy to [[interactive-brokers]] or [[tastytrade]] means rewriting from scratch.
+- **Single-vendor lock-in**. Code does not port outside TradeStation / [[multicharts]]. Migrating a strategy to interactive-brokers or tastytrade means rewriting from scratch.
 - **Dated syntax**. Pascal-style `begin / end` blocks, no closures, no first-class functions, no list comprehensions, no real string library. Boilerplate is heavy.
 - **No Python interop**. There is no equivalent to MetaTrader's MQL-Python bridge or NinjaTrader's C# escape hatch. You cannot call a Python ML model from inside a strategy. Workarounds involve writing signals to a file or socket and reading them back — fragile.
 - **Limited data structures**. Arrays are first-class but maps/dicts are awkward; nested objects don't really exist. Anything beyond a single time series gets ugly fast.
@@ -219,7 +217,6 @@ For [[itpm-options-portfolio-management|ITPM-style options overlay programs]], t
 
 ## Related
 
-- [[tradestation]] — the host broker and platform
 - [[backtesting]] — general principles, of which EasyLanguage's backtester is one implementation
 - [[pine-script]] — TradingView's competing scripting language
 - [[thinkorswim]] — competing platform with thinkScript (analysis-focused, no native backtest)

@@ -13,7 +13,7 @@ website: ""
 related: ["[[ed-thorp]]", "[[sec]]", "[[risk-management]]"]
 ---
 
-Bernard Lawrence "Bernie" Madoff (1938-2021) was a former chairman of [[nasdaq|NASDAQ]] and Wall Street financier who orchestrated the largest Ponzi scheme in history, with fabricated client statements showing approximately $64.8 billion in assets. His fraud, which ran for at least 17 years, was exposed in December 2008 during the [[2008-global-financial-crisis|global financial crisis]] and resulted in a 150-year prison sentence.
+Bernard Lawrence "Bernie" Madoff (1938-2021) was a former chairman of NASDAQ and Wall Street financier who orchestrated the largest Ponzi scheme in history, with fabricated client statements showing approximately $64.8 billion in assets. His fraud, which ran for at least 17 years, was exposed in December 2008 during the [[2008-global-financial-crisis|global financial crisis]] and resulted in a 150-year prison sentence.
 
 ## Overview
 
@@ -92,7 +92,6 @@ The Madoff case is a critical study in [[risk-management|risk management]] and d
 - [[sec]]
 - [[risk-management]]
 - [[2008-global-financial-crisis]]
-- [[nasdaq]]
 - [[ponzi-scheme]]
 - [[due-diligence]]
 

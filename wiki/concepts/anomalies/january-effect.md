@@ -75,7 +75,6 @@ A trader trying to exploit this might tilt into a basket of beaten-down small-ca
 - [[size-anomaly]] — half of its historical premium was the January effect
 - [[turn-of-month-effect]] — related calendar concentration
 - [[calendar-effects-anomalies]] — broader overview
-- [[tax-loss-harvesting]] — the flow that drives the effect
 
 ## Sources
 

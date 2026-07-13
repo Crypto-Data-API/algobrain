@@ -8,14 +8,14 @@ tags: [order-flow, trading-tools, market-microstructure, data-provider, crypto, 
 entity_type: company
 website: "https://exocharts.com"
 aliases: ["Exocharts", "Exo Charts", "ExoCharts"]
-related: ["[[order-flow]]", "[[footprint-chart]]", "[[sierra-chart]]", "[[quantower]]", "[[bookmap]]", "[[volume-profile]]", "[[market-profile]]", "[[value-area]]", "[[point-of-control]]"]
+related: ["[[order-flow]]", "[[footprint-chart]]", "[[sierra-chart]]", "[[volume-profile]]", "[[market-profile]]", "[[value-area]]", "[[point-of-control]]"]
 ---
 
 **Exocharts** is an order-flow and volume-analysis charting platform that combines [[footprint-chart|footprint (cluster) charts]], depth-of-market (DOM), [[volume-profile|volume profiles]], [[composite-profile|composite profiles]], and [[market-profile|TPO (time-price opportunity)]] tooling in a single workflow. It is widely used in the futures and crypto-derivatives communities by traders who want to cross-compare volume and TPO distributions alongside [[order-flow]] detail (Source: [[2026-04-22-gap-finder-volume-profile-indicator-as-a-trading-st]]).
 
 ## Overview
 
-Exocharts occupies the same niche as [[sierra-chart|Sierra Chart]], [[bookmap|Bookmap]], and [[quantower|Quantower]] — specialised, order-flow-centric platforms rather than generic charting tools. Its distinguishing characteristic is the tight integration of three analytic lenses on one chart (Source: [[2026-04-22-gap-finder-volume-profile-indicator-as-a-trading-st]]):
+Exocharts occupies the same niche as [[sierra-chart|Sierra Chart]], Bookmap, and Quantower — specialised, order-flow-centric platforms rather than generic charting tools. Its distinguishing characteristic is the tight integration of three analytic lenses on one chart (Source: [[2026-04-22-gap-finder-volume-profile-indicator-as-a-trading-st]]):
 
 1. **Volume profiles** — horizontal volume-by-price histograms showing the [[point-of-control|POC]], [[value-area]], and high/low-volume nodes, with both session and composite modes.
 2. **Footprint / cluster charts** — intra-bar breakdowns of volume, delta, and trades at each price level (see [[footprint-chart]]).
@@ -34,9 +34,9 @@ This makes Exocharts a natural bridge between volume-profile theory and the cryp
 | Platform | Emphasis | Typical user |
 |----------|----------|--------------|
 | **Exocharts** | Footprint + volume profile + TPO + DOM, crypto & futures | Crypto-derivatives and futures order-flow traders |
-| [[bookmap]] | Order-book heatmap + liquidity + CVD | Scalpers reading resting liquidity |
+| bookmap | Order-book heatmap + liquidity + CVD | Scalpers reading resting liquidity |
 | [[sierra-chart]] | Low-latency execution + Volume by Price study | Professional futures traders |
-| [[quantower]] | Multi-asset charting + cluster charts + volume-analysis toolbar | Multi-asset discretionary traders |
+| quantower | Multi-asset charting + cluster charts + volume-analysis toolbar | Multi-asset discretionary traders |
 
 ## Related
 
@@ -44,7 +44,7 @@ This makes Exocharts a natural bridge between volume-profile theory and the cryp
 - [[footprint-chart]] — Exocharts' cluster-chart view
 - [[volume-profile]] / [[composite-profile]] — the profile tooling it provides
 - [[market-profile]] — its TPO view
-- [[sierra-chart]], [[quantower]], [[bookmap]] — peer order-flow platforms
+- [[sierra-chart]], quantower, bookmap — peer order-flow platforms
 - [[value-area]] / [[point-of-control]] — profile features it renders
 
 ## Sources

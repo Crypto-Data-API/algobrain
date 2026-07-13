@@ -6,13 +6,13 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, history, liquidity, order-types]
 aliases: ["Island ECN", "Island", "INET", "Island Electronic Communication Network"]
-related: ["[[electronic-communication-network]]", "[[order-book]]", "[[market-microstructure-overview]]", "[[high-frequency-trading]]", "[[reg-nms]]", "[[nasdaq]]", "[[liquidity-provider]]", "[[maker-taker-fees]]"]
+related: ["[[electronic-communication-network]]", "[[order-book]]", "[[market-microstructure-overview]]", "[[high-frequency-trading]]", "[[liquidity-provider]]", "[[maker-taker-fees]]"]
 domain: [market-microstructure]
 prerequisites: ["[[order-book]]", "[[electronic-communication-network]]"]
 difficulty: intermediate
 ---
 
-**Island ECN** was a pioneering electronic communication network (ECN) launched in 1996 by Joshua Levine for the brokerage Datek. It was one of the first venues to display a fully electronic, anonymous, price-time-priority limit order book to the public, and it played a central role in destroying the wide, dealer-controlled spreads of the 1990s Nasdaq market. Island's technology lineage — through its merger into Instinet and rebranding as **INET** — became the core matching engine of the modern [[nasdaq|Nasdaq]] stock market.
+**Island ECN** was a pioneering electronic communication network (ECN) launched in 1996 by Joshua Levine for the brokerage Datek. It was one of the first venues to display a fully electronic, anonymous, price-time-priority limit order book to the public, and it played a central role in destroying the wide, dealer-controlled spreads of the 1990s Nasdaq market. Island's technology lineage — through its merger into Instinet and rebranding as **INET** — became the core matching engine of the modern Nasdaq stock market.
 
 ## Overview
 
@@ -33,11 +33,11 @@ Island operated in regulatory tension with Nasdaq. Under the SEC's 1997 Order Ha
 
 ## Legacy and Trading Relevance
 
-- **Lineage to INET/Nasdaq.** Island merged with Instinet in 2002 to form INET. Nasdaq acquired INET in 2005, and the INET matching engine became Nasdaq's core trading platform — the same architecture still underpinning [[nasdaq|Nasdaq]] and licensed to dozens of exchanges worldwide.
+- **Lineage to INET/Nasdaq.** Island merged with Instinet in 2002 to form INET. Nasdaq acquired INET in 2005, and the INET matching engine became Nasdaq's core trading platform — the same architecture still underpinning Nasdaq and licensed to dozens of exchanges worldwide.
 - **Birthplace of HFT infrastructure.** Island's transparent, fast, fee-incentivized book created the environment in which automated market making and [[high-frequency-trading|HFT]] became viable. The traders who learned to read the Island BookViewer became the first generation of electronic market makers.
 - **Microstructure template.** Anonymous central-limit-order-book matching with price-time priority and maker-taker fees — Island's design choices — are now the default microstructure of global equity, futures, and crypto markets.
 
-For a trader, Island matters historically because it explains *why* modern markets look the way they do: tight spreads, a visible [[order-book]], rebate-driven liquidity, and an arms race in latency that culminated in [[reg-nms|Reg NMS]] and the present HFT-dominated structure.
+For a trader, Island matters historically because it explains *why* modern markets look the way they do: tight spreads, a visible [[order-book]], rebate-driven liquidity, and an arms race in latency that culminated in Reg NMS and the present HFT-dominated structure.
 
 ## Related
 
@@ -45,8 +45,6 @@ For a trader, Island matters historically because it explains *why* modern marke
 - [[order-book]] — the central data structure Island made public
 - [[maker-taker-fees]] — the rebate model Island helped popularize
 - [[high-frequency-trading]] — the trading style Island's infrastructure enabled
-- [[reg-nms]] — the 2005 regulation that codified the order-protection regime ECNs introduced
-- [[nasdaq]] — the market that absorbed Island's matching engine via INET
 - [[liquidity-provider]] — the electronic market makers Island attracted
 
 ## Sources

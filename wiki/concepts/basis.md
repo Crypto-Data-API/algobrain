@@ -39,7 +39,7 @@ Fair futures price  F = S × e^((r + u − y) × T)
   T = time to expiry (years)
 ```
 
-For equity index futures this simplifies to **F = S × e^((r − d) × T)**, where d is the [[dividends|dividend yield]]. The carry components push the curve into [[contango]] or [[backwardation]]:
+For equity index futures this simplifies to **F = S × e^((r − d) × T)**, where d is the dividend yield. The carry components push the curve into [[contango]] or [[backwardation]]:
 
 | Carry component | Pushes curve toward | Asset class where it dominates |
 |---|---|---|

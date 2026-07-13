@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [options, derivatives, risk-management, volatility]
 aliases: ["Income Strategies", "Income Trading", "Yield Strategies", "Cash-Flow Strategies"]
-related: ["[[options-income]]", "[[options-premium-selling]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[dividend-investing]]", "[[stablecoin-yield]]", "[[strategies-overview]]"]
+related: ["[[options-income]]", "[[options-premium-selling]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[stablecoin-yield]]", "[[strategies-overview]]"]
 ---
 
 **Income strategies** are approaches whose primary objective is to generate recurring cash flow — option premium, dividends, interest, or staking/lending yield — rather than capital appreciation from price moves. They trade some upside (capped gains, assignment risk, or duration/credit risk) for a steadier, more frequent return stream. This is a hub page; each linked strategy has its own detailed page.
@@ -37,7 +37,6 @@ The core family — selling option premium to harvest time decay ([[theta-decay]
 
 ## Equity / dividend income
 
-- [[dividend-investing]] — owning dividend-paying equities for a recurring payout.
 - [[buy-and-hold]] — long-horizon equity holding, the base layer many income overlays sit on.
 - [[dca-strategy]] — dollar-cost averaging to build the income-producing core.
 

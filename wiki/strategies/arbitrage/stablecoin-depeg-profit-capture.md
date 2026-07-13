@@ -57,7 +57,7 @@ The single most important decision is classifying *why* the [[stablecoins|stable
 | Scenario | Mechanism state | Verifiable signals | Tradeable? | Methods that apply | Canonical case |
 |----------|-----------------|--------------------|-----------:|--------------------|----------------|
 | **Banking scare** | Reserves observably intact; a banking partner failed but deposits likely backstopped | Issuer attestation; bank exposure disclosed and bounded; redemption channel still open | **Yes — aggressive** | 1, 2, 3, 4, 5, 6, 7 | [[2023-03-usdc-svb-depeg]] |
-| **Contagion sympathy** | This stable's own mechanism is healthy; it drops because a *different* protocol blew up | No direct exposure to the exploited asset; [[oracle]] median unchanged; reserves unchanged | **Yes — moderate** | 1, 2, 3, 5, 6 | [[2026-04-kelp-stable-sympathy-depeg]] |
+| **Contagion sympathy** | This stable's own mechanism is healthy; it drops because a *different* protocol blew up | No direct exposure to the exploited asset; oracle median unchanged; reserves unchanged | **Yes — moderate** | 1, 2, 3, 5, 6 | [[2026-04-kelp-stable-sympathy-depeg]] |
 | **Redemption suspension / wind-down** | Issuer halts minting/redemption; slow drain, not recovery | Issuer announces pause; [[arbitrage|arb]] channel closed | **No** (hold only in-flight claims) | none new | [[2023-02-busd-wind-down]] |
 | **Mechanism break** | Backing/hedge is depleting faster than it can recover (synthetic reserve burn, undercollateralization) | Reserve fund draining; collateral ratio falling; perp [[funding-rate]] inverted for days | **No** | none | (see [[synthetic-stablecoin-depeg-arbitrage]]) |
 | **Death spiral** | Reflexive collapse, no floor (pure algorithmic) | Mint/burn feedback loop; backing token in freefall | **Never** | none | [[2022-05-terra-luna-depeg-arb]] |
@@ -160,7 +160,7 @@ Each capture method consumes a specific feed set. The table maps the data input 
 | **Redemption-channel status** | Circle/Tether status pages + APIs; MakerDAO PSM + Aave GSM on-chain capacity | 2, 4 | Gates the near-risk-free redemption anchor; if closed, drop Method 2 |
 | **Curve pool composition** | Curve subgraph; Curve frontend | 5 (input) + 1 (severity gauge) | 3pool imbalance is both depeg severity and the LP rebalance-capture input |
 | **Lending-protocol borrow rates** | Aave/Compound/Morpho dashboards; on-chain reads | 4 | USDT borrow spiked >30% APR during SVB weekend — directly sets leverage-leg viability |
-| **Lending-protocol oracle setup** | Per-protocol oracle config (Chainlink feed vs hardcoded $1.00) | 4 (risk gate) | A market-tracking [[oracle]] marks depegged collateral down, cutting borrow power |
+| **Lending-protocol oracle setup** | Per-protocol oracle config (Chainlink feed vs hardcoded $1.00) | 4 (risk gate) | A market-tracking oracle marks depegged collateral down, cutting borrow power |
 | **Perp [[funding-rate]]s** | Exchange WS; [[coinglass]]; cryptodataapi.com | 6, 7 | Short-leg carry; sUSDe mechanism context (see [[synthetic-stablecoin-depeg-arbitrage]]) |
 | **[[open-interest]]** | Exchange APIs; [[coinglass]]; cryptodataapi.com | 6, 7 | Confirms the overshoot/short is supported by real flow, not a print artifact |
 | **Options IV by strike** | Deribit (BTC/ETH proxy); DeFi options venues (thin) | 7 | Where stablecoin-adjacent optionality exists; mostly proxy/OTC (see Method 7) |
@@ -542,7 +542,7 @@ The recurrence of depegs is the durability case for this strategy. The table is 
 | Event | Stable | Low | Mechanism | Outcome | Playbook lesson |
 |-------|--------|-----|-----------|---------|-----------------|
 | [[2017-2020-tether-banking-premium]] | USDT | premium/discount both ways | Banking-partner uncertainty | Recovered | Premium *and* discount are tradeable; pair-trade (Method 3) |
-| [[2020-03-dai-black-thursday]] | DAI | ~$1.10 (above par) | [[oracle]] stress + liquidation cascade | Recovered after MKR auctions | Oracle behavior under stress is the real risk to Method 4 |
+| [[2020-03-dai-black-thursday]] | DAI | ~$1.10 (above par) | oracle stress + liquidation cascade | Recovered after MKR auctions | Oracle behavior under stress is the real risk to Method 4 |
 | [[2022-05-terra-luna-depeg-arb]] | UST | →$0 | Death spiral (algorithmic) | Total loss | The counter-example: never long a structural break |
 | [[2022-06-steth-depeg]] | stETH | ~$0.93 | Liquidity discount (redemption queued) | Recovered post-Merge | LST depeg ≠ stablecoin depeg; see [[lst-depeg-arbitrage]] |
 | [[2023-02-busd-wind-down]] | BUSD | mild | Redemption suspension / wind-down | Slow drain | Hold only in-flight claims; don't add |

@@ -8,7 +8,7 @@ tags: [options, indicators, behavioral-finance, derivatives]
 aliases: ["Put/Call Ratio", "Put-Call Ratio", "P/C Ratio", "PCR"]
 domain: [behavioral-finance, indicators]
 difficulty: beginner
-related: ["[[options-greeks]]", "[[implied-volatility]]", "[[vix]]", "[[aaii-sentiment-survey]]", "[[put-call-parity]]", "[[max-pain]]", "[[volatility-skew]]", "[[cboe]]", "[[sentiment-analysis]]", "[[market-breadth]]"]
+related: ["[[options-greeks]]", "[[implied-volatility]]", "[[vix]]", "[[put-call-parity]]", "[[max-pain]]", "[[volatility-skew]]", "[[cboe]]", "[[sentiment-analysis]]", "[[market-breadth]]"]
 ---
 
 The put/call ratio (P/C ratio) is a sentiment indicator computed as the ratio of put option activity to call option activity over a given window, typically using either total volume or open interest. It is most often interpreted as a contrarian gauge: extreme readings of fear (high P/C) or greed (low P/C) tend to precede mean reversion in the underlying market. The ratio is published daily by the [[cboe|CBOE]] for both equity options and broad index options, and the two series carry meaningfully different interpretations.
@@ -96,13 +96,13 @@ Rough historical reference points (equity P/C, daily, smoothed):
 
 ### Combined with VIX and AAII
 
-P/C is strongest as a signal when it agrees with other sentiment series. A confluence of (1) elevated [[vix|VIX]], (2) high equity P/C, and (3) extreme bearish reading in the [[aaii-sentiment-survey|AAII sentiment survey]] is a classic capitulation setup. Conversely, low VIX + low P/C + extreme AAII bullishness is a complacency setup.
+P/C is strongest as a signal when it agrees with other sentiment series. A confluence of (1) elevated [[vix|VIX]], (2) high equity P/C, and (3) extreme bearish reading in the AAII sentiment survey is a classic capitulation setup. Conversely, low VIX + low P/C + extreme AAII bullishness is a complacency setup.
 
 #### Confluence signal matrix
 
 The contrarian signal is far more reliable when multiple sentiment series align at an extreme:
 
-| Equity P/C | [[vix|VIX]] | [[aaii-sentiment-survey|AAII]] | Composite read | Contrarian implication |
+| Equity P/C | [[vix|VIX]] | AAII | Composite read | Contrarian implication |
 |---|---|---|---|---|
 | > 1.0 (high) | Elevated / spiking | Extreme bearish | Capitulation / panic | Contrarian **buy** zone |
 | 0.7 - 1.0 | Rising | Bearish lean | Risk-off building | Watch for bottom |
@@ -125,7 +125,7 @@ For sentiment work, equity P/C (`$CPCE`) is the cleaner signal.
 - **Mean-reversion trade triggers** in oversold/overbought composite scoring
 - **Filter for long entries** on broader trend-following systems (avoid buying when complacency is extreme)
 - **Volatility-regime input** for systems that switch between long-vol and short-vol postures
-- See [[earnings-plays]] and [[earnings-volatility-trading]] for related volatility-sentiment workflows
+- See earnings-plays and earnings-volatility-trading for related volatility-sentiment workflows
 
 ## Limitations / What can go wrong
 
@@ -193,14 +193,11 @@ This is near the long-term average -- a neutral reading. Compare against the 21-
 - [[implied-volatility]]
 - [[volatility-skew]]
 - [[vix]]
-- [[aaii-sentiment-survey]]
 - [[max-pain]]
 - [[options-greeks]]
 - [[sentiment-analysis]]
 - [[market-breadth]]
 - [[cboe]]
-- [[earnings-plays]]
-- [[earnings-volatility-trading]]
 
 ## Sources
 

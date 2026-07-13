@@ -116,7 +116,7 @@ These metrics detect structural changes — the edge eroding or the market regim
 | **Strategy correlation** | Pairwise correlation of daily P&L across all active strategies | Any pair > 0.6 for 20+ days | Concentration risk. See [[strategy-correlation-matrix]] |
 | **Cost drift** | Actual execution costs vs. modeled costs | Actual > modeled by > 20% for 30+ days | Recalibrate cost model. See [[transaction-cost-modeling]] |
 | **Crowding proxy** | Open interest growth, AUM-to-volume ratio | OI growth > 50% in 30 days while spread compresses | Crowding — see [[crowding-indicators]]. Consider reducing size |
-| **Borrow rate changes** | Cost to borrow short-leg securities | Increases > 5% annualized | Affects [[pairs-trading]], [[merger-arbitrage]], [[convertible-arbitrage]] profitability |
+| **Borrow rate changes** | Cost to borrow short-leg securities | Increases > 5% annualized | Affects [[pairs-trading]], merger-arbitrage, convertible-arbitrage profitability |
 | **Regulatory change** | News monitoring, exchange announcements | Any relevant regulation proposed or enacted | See [[regulatory-risk-map]]. Assess impact within 24 hours |
 
 **Monthly edge health review checklist:**
@@ -166,8 +166,8 @@ if avg_profit_per_trade < breakeven_after_costs:
 | [[cross-exchange-arbitrage]] | Average spread < minimum viable spread for 14+ days | Edge has been arbitraged away |
 | [[pairs-trading]] | Cointegration p-value > 0.10 on rolling test | Relationship has broken |
 | [[pairs-trading]] | Z-score exceeds 4.0 and continues diverging | Structural break, not mean reversion |
-| [[merger-arbitrage]] | Deal officially terminated | Close position at market |
-| [[merger-arbitrage]] | Regulatory challenge announced | Re-evaluate spread vs. deal-break probability |
+| merger-arbitrage | Deal officially terminated | Close position at market |
+| merger-arbitrage | Regulatory challenge announced | Re-evaluate spread vs. deal-break probability |
 | [[volatility-arbitrage]] | Realized vol persistently > IV for 30+ days (if short vol) | Regime of underpriced options |
 | [[statistical-arbitrage]] | Net exposure > ±20% for 5+ days | Market-neutral constraint violated |
 

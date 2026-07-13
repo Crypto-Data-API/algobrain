@@ -24,7 +24,7 @@ Every commodity has a balance sheet, conceptually identical to a corporate incom
 **Demand = Consumption + Exports + Inventory Builds**
 **Balance = Supply - Demand = Change in Inventories**
 
-When the balance is negative (deficit), inventories draw down, and prices tend to rise as buyers compete for scarce supply. When the balance is positive (surplus), inventories build, storage fills, and prices tend to fall as sellers compete for limited demand. The relationship between the balance and price is the central mechanism of commodity [[fundamental-analysis]] (Source: [[2026-04-14-commodities-research-framework]]).
+When the balance is negative (deficit), inventories draw down, and prices tend to rise as buyers compete for scarce supply. When the balance is positive (surplus), inventories build, storage fills, and prices tend to fall as sellers compete for limited demand. The relationship between the balance and price is the central mechanism of commodity fundamental-analysis (Source: [[2026-04-14-commodities-research-framework]]).
 
 ## Key Components
 

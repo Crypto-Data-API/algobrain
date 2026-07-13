@@ -6,7 +6,7 @@ updated: 2026-06-22
 status: excellent
 tags: [bonds, leverage, interest-rates, derivatives]
 aliases: ["Mortgage", "Home Loan", "Mortgage Rates"]
-related: ["[[mortgage-backed-securities]]", "[[mbs]]", "[[securitization]]", "[[subprime-mortgage]]", "[[interest-rates]]", "[[yield-curve]]", "[[duration]]", "[[convexity]]", "[[fed-policy]]", "[[real-estate]]", "[[leverage]]", "[[credit-cycle]]", "[[credit-risk]]"]
+related: ["[[mortgage-backed-securities]]", "[[mbs]]", "[[securitization]]", "[[subprime-mortgage]]", "[[interest-rates]]", "[[yield-curve]]", "[[duration]]", "[[convexity]]", "[[fed-policy]]", "[[leverage]]", "[[credit-cycle]]", "[[credit-risk]]"]
 domain: [bonds, fixed-income]
 prerequisites: ["[[interest-rates]]", "[[bonds]]"]
 difficulty: beginner
@@ -97,7 +97,6 @@ The mortgage market is at the centre of the largest financial crisis of the mode
 - [[fed-policy]] — indirect influence via long rates and MBS holdings
 - [[credit-cycle]] / [[credit-risk]] — mortgage underwriting as a cycle indicator; default risk on the loans
 - [[leverage]] — mortgages as the primary household leverage instrument
-- [[real-estate]] — the underlying asset class
 
 ## Sources
 

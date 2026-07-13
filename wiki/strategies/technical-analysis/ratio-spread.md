@@ -11,7 +11,7 @@ timeframe: swing
 markets: [stocks]
 complexity: advanced
 backtest_status: untested
-related: ["[[backspread]]", "[[butterfly-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[implied-volatility]]", "[[delta]]", "[[gamma]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[stock-repair]]"]
+related: ["[[backspread]]", "[[butterfly-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[implied-volatility]]", "[[delta]]", "[[gamma]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]"]
 ---
 
 # Ratio Spread
@@ -76,7 +76,6 @@ The naked short option creates undefined risk. Size conservatively -- treat the 
 ## See Also
 - [[trade-repair-and-rolling]] — complete rolling and adjustment framework
 - [[gamma-risk]] — the risk driving the 21-DTE rule, especially dangerous for the naked leg
-- [[stock-repair]] — the 1x2 call ratio spread applied specifically to underwater stock positions
 - [[backspread]] — the opposite structure: buy more options than you sell for unlimited profit potential
 - [[butterfly-spread]] — a ratio spread with the risk capped by an additional long wing
 - [[broken-wing-butterfly]] — similar payoff achieved by adding a protective wing to a ratio spread

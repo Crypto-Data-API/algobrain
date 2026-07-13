@@ -17,7 +17,6 @@ related:
   - "[[tail-risk]]"
   - "[[tail-risk-hedging]]"
   - "[[long-vol-vs-short-vol]]"
-  - "[[dispersion-trading]]"
   - "[[vix-august-2024-spike]]"
   - "[[volmageddon]]"
   - "[[covid-crash]]"
@@ -186,11 +185,11 @@ Rebuild the portfolio variance and VaR estimate using stress correlations rather
 
 ### Long-Vol Overlays
 
-Allocate 5-15% of the book's vega budget to long-vol structures: long [[vix-call-spreads]], long out-of-the-money [[spx-puts]], long [[put-tree|put trees]], or [[universa-investments|tail-risk]] mandates. These bleed in calm regimes (negative carry) but pay multiples of their cost during the correlation spike, exactly the moment the rest of the book is haemorrhaging. This is the [[asymmetric-risk-reward|positive-skew]], [[convexity|convex]] leg of the book: a small steady cost bought back by a large payoff in the exact scenario where the diversified core fails. See [[tail-risk-hedging]] and [[long-vol-vs-short-vol]].
+Allocate 5-15% of the book's vega budget to long-vol structures: long [[vix-call-spreads]], long out-of-the-money spx-puts, long [[put-tree|put trees]], or [[universa-investments|tail-risk]] mandates. These bleed in calm regimes (negative carry) but pay multiples of their cost during the correlation spike, exactly the moment the rest of the book is haemorrhaging. This is the [[asymmetric-risk-reward|positive-skew]], [[convexity|convex]] leg of the book: a small steady cost bought back by a large payoff in the exact scenario where the diversified core fails. See [[tail-risk-hedging]] and [[long-vol-vs-short-vol]].
 
 ### Dispersion Structures
 
-[[dispersion-trading|Dispersion]] is an explicit short-implied-correlation trade: long single-name vol, short index vol. Within a short-premium book it functions as a partial hedge against the correlation-spike scenario — when realised correlation goes to one, the long single-name vol and short index vol legs converge, but the structure is sized to lose less than a pure short-index-vol position would.
+Dispersion is an explicit short-implied-correlation trade: long single-name vol, short index vol. Within a short-premium book it functions as a partial hedge against the correlation-spike scenario — when realised correlation goes to one, the long single-name vol and short index vol legs converge, but the structure is sized to lose less than a pure short-index-vol position would.
 
 ### Allocate to Genuinely Uncorrelated Strategies
 
@@ -236,7 +235,6 @@ The first row is the cheapest and most overlooked: simply *re-pricing* the book 
 - [[tail-risk]] — the broader category of risks correlation breakdown produces
 - [[tail-risk-hedging]] — the protective overlays
 - [[long-vol-vs-short-vol]] — the framework that anchors the asymmetry
-- [[dispersion-trading]] — explicit short-implied-correlation structure
 - [[vix-august-2024-spike]] — the most recent canonical case study
 - [[volmageddon]] — 2018 ETP-driven precedent
 - [[covid-crash]] — 2020 cross-asset spike

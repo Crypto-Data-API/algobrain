@@ -38,7 +38,7 @@ The generative AI market is projected to exceed $100B in annual revenue by 2028,
 | Microsoft | Cloud + OpenAI partnership | Azure AI, Copilot distribution | MSFT |
 | Amazon | Cloud (Bedrock) + Anthropic | AWS Bedrock multi-model platform | AMZN |
 | Google | Cloud + Gemini + TPU | Vertically integrated stack | GOOGL |
-| [[coreweave|CoreWeave]] | GPU cloud | AI-native cloud, NVIDIA partnership | CRWV |
+| CoreWeave | GPU cloud | AI-native cloud, NVIDIA partnership | CRWV |
 
 ### Application Layer (Where Users Interact)
 

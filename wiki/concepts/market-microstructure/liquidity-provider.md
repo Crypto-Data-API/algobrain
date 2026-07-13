@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [market-microstructure, market-making, liquidity, options, hft]
 aliases: ["Liquidity Provider", "Market Maker", "LP", "Designated Market Maker"]
-related: ["[[long-vol-vs-short-vol]]", "[[tail-risk-hedging]]", "[[gap-risk]]", "[[market-microstructure-overview]]", "[[adverse-selection]]", "[[bid-ask-spread]]", "[[order-types]]", "[[high-frequency-trading]]", "[[citadel-securities]]", "[[jane-street]]", "[[susquehanna]]", "[[optiver]]", "[[payment-for-order-flow]]", "[[maker-taker-fees]]", "[[queue-position]]", "[[inventory-risk]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[tail-risk-hedging]]", "[[gap-risk]]", "[[market-microstructure-overview]]", "[[adverse-selection]]", "[[bid-ask-spread]]", "[[order-types]]", "[[high-frequency-trading]]", "[[jane-street]]", "[[payment-for-order-flow]]", "[[maker-taker-fees]]", "[[queue-position]]", "[[inventory-risk]]"]
 domain: [market-microstructure]
 prerequisites: ["[[bid-ask-spread]]", "[[order-types]]"]
 difficulty: intermediate
@@ -29,7 +29,7 @@ A profitable LP's fundamental edge is being **slightly less informed than necess
 
 ### Posting two-sided quotes
 
-A market maker publishes quotes on both sides of the book at all times during their obligation window. For a registered NYSE [[designated-market-maker|DMM]], the obligation is continuous from open to close in their assigned names. For a [[citadel-securities|Citadel Securities]] equities market maker, the obligation is operational: stay competitive on tens of thousands of names. For an [[options-market-maker]] on CBOE, the obligation is to quote a defined fraction of all listed series in their assigned class.
+A market maker publishes quotes on both sides of the book at all times during their obligation window. For a registered NYSE [[designated-market-maker|DMM]], the obligation is continuous from open to close in their assigned names. For a Citadel Securities equities market maker, the obligation is operational: stay competitive on tens of thousands of names. For an [[options-market-maker]] on CBOE, the obligation is to quote a defined fraction of all listed series in their assigned class.
 
 A typical quote looks like: **bid 100 shares at $50.01, offer 100 shares at $50.03**. The LP makes 1 cent times 100 shares = $1 if they buy at $50.01 and immediately sell at $50.03. The realized P&L is rarely that clean — see Adverse Selection below.
 
@@ -55,7 +55,7 @@ LP profitability requires:
 
 - **Speed.** Cancel the quote before informed flow arrives (see [[high-frequency-trading]]).
 - **Information.** Use signals from related instruments, news feeds, futures, ETFs, options vs underlying to infer when informed flow is incoming and pull quotes.
-- **Order-flow segmentation.** Quote tighter on retail flow (low adverse selection) than on institutional flow (higher adverse selection). Internalizers ([[citadel-securities]], Virtu) explicitly take retail flow off-exchange to avoid mixing it with toxic institutional flow.
+- **Order-flow segmentation.** Quote tighter on retail flow (low adverse selection) than on institutional flow (higher adverse selection). Internalizers (citadel-securities, Virtu) explicitly take retail flow off-exchange to avoid mixing it with toxic institutional flow.
 
 ### Inventory risk
 
@@ -154,7 +154,7 @@ By contrast, a short-vol book in stress is the *opposite* of an LP: it is being 
 - [[payment-for-order-flow]] — the retail-flow segmentation mechanism
 - [[maker-taker-fees]] — the rebate structure
 - [[queue-position]] — the asset created by time-priority
-- [[citadel-securities]], [[jane-street]], [[susquehanna]], [[optiver]] — major LP firms
+- citadel-securities, [[jane-street]], susquehanna, optiver — major LP firms
 - [[variance-risk-premium]] — what options MMs are structurally collecting
 - [[options-premium-selling]] — retail's attempt to capture the same edge
 - [[market-microstructure-overview]] — surrounding context

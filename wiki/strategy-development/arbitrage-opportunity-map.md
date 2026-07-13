@@ -47,7 +47,7 @@ The wiki documents **26+ explicit arbitrage strategies** across `wiki/strategies
 | [[cross-chain-arbitrage|Cross-chain arb]] | 10-30% APY | 70-90% | $10K-$50M | Medium | Structural + latency |
 | [[triangular-arbitrage|Triangular arb]] | 0.01-0.5% per loop | 90-99% | Medium-High | Extreme | Latency |
 | [[flash-loan-arbitrage|Flash loan arb]] | Variable (high) | Atomic | Zero capital | Extreme | Latency + analytical |
-| [[index-arbitrage|Index arb]] | 5-10 bps per trade | High | Very High | Extreme | Structural |
+| Index arb | 5-10 bps per trade | High | Very High | Extreme | Structural |
 | [[etf-arbitrage|ETF arb]] | Variable | High | Very High (AP only) | Low | Structural |
 | [[convergence-arbitrage|Convergence arb]] | 1-3% unlevered | ~85% | Very High | Medium | Analytical + risk-bearing |
 
@@ -64,11 +64,11 @@ The wiki documents **26+ explicit arbitrage strategies** across `wiki/strategies
 
 | Strategy | Expected Return | Win Rate | Capital Required | Crowding | Edge Source |
 |---|---|---|---|---|---|
-| [[merger-arbitrage|Merger arb]] | 5-15% annualized | 85-92% | High | Low-medium | Structural |
-| [[convertible-arbitrage|Convertible arb]] | 6-12% annualized | ~70% | Very High | Medium | Analytical + structural |
+| Merger arb | 5-15% annualized | 85-92% | High | Low-medium | Structural |
+| Convertible arb | 6-12% annualized | ~70% | Very High | Medium | Analytical + structural |
 | [[pairs-trading|Pairs trading]] | 5-15% annual | ~60% | Medium | High | Analytical + behavioral |
 | [[statistical-arbitrage|Stat arb]] | 10-30% annual | ~55% | High | High | Analytical |
-| [[dispersion-trading|Dispersion trading]] | Variable | 65-75% | Very High | Medium | Analytical + risk-bearing |
+| Dispersion trading | Variable | 65-75% | Very High | Medium | Analytical + risk-bearing |
 
 ### DeFi / Crypto-Native
 
@@ -151,11 +151,11 @@ Compound trade: position for pre-FOMC equity drift (long S&P futures 2pm day bef
 
 ### Hidden Opportunity #7: Alfred Screening + Demerger Catalyst
 
-The [[alfred]] methodology documents Fred's principle: "demergers are always worth a good look." The Coles/Wesfarmers example showed significant outperformance post-separation.
+The alfred methodology documents Fred's principle: "demergers are always worth a good look." The Coles/Wesfarmers example showed significant outperformance post-separation.
 
 Cross-reference with Alfred's screening benchmarks (P/E < 20, Div Yield > 3.8%, ROE > 13.4%, D/E < 0.5): a systematic strategy screens all upcoming ASX demergers through the Alfred fundamental filter. The demerger creates structural catalyst (forced selling by index funds, institutional rebalancing, analyst coverage gaps), while Alfred identifies which demerged entity is genuinely cheap.
 
-The gold sector data reinforces this pattern: [[perseus-mining|PRU]] screens at P/E 7.48, gross margin 59.5%, zero debt — dramatically undervalued versus sector average P/E 39.19. This is Alfred finding a mispricing the broader market misses because of a coverage gap (informational edge).
+The gold sector data reinforces this pattern: PRU screens at P/E 7.48, gross margin 59.5%, zero debt — dramatically undervalued versus sector average P/E 39.19. This is Alfred finding a mispricing the broader market misses because of a coverage gap (informational edge).
 
 ---
 
@@ -201,11 +201,11 @@ Documented market anomalies that serve as raw material for arbitrage, with decay
 | Anomaly | Peak Magnitude | Current Magnitude | Decay Speed | Mechanism |
 |---|---|---|---|---|
 | [[momentum-anomaly|Momentum]] | ~1%/month | 0.2-0.3%/month | Medium | Behavioral (underreaction) |
-| [[post-earnings-announcement-drift|PEAD]] | 3-4% / 60d | ~1% / 60d | Medium-slow | Behavioral (anchoring) |
+| PEAD | 3-4% / 60d | ~1% / 60d | Medium-slow | Behavioral (anchoring) |
 | [[volatility-risk-premium|VRP]] | 0.8-1.0 Sharpe | 0.4-0.6 Sharpe | Slow | Risk-bearing (fear premium) |
 | [[carry-anomaly|Carry]] | 0.8 Sharpe | 0.5 Sharpe | Variable | Risk-bearing (yield compensation) |
 | [[low-volatility-anomaly|Low-vol]] | 1.0 Sharpe | 0.4-0.6 Sharpe | Slow | Behavioral (lottery preference) |
-| [[value-investing-strategy|Value]] | 5%/year | 0.3-0.5 Sharpe | Very slow | Behavioral + structural |
+| Value | 5%/year | 0.3-0.5 Sharpe | Very slow | Behavioral + structural |
 | Index inclusion | 3-5% | 0.5-1% | Slow | Structural (forced flow) |
 | Pre-FOMC drift | ~50 bps/24h | Compressed | Slow | Unknown (possibly informational) |
 | Turn-of-month | 0.8%/window | Decayed | Medium | Structural (pension flows) |
@@ -274,7 +274,7 @@ Based on wiki content cross-referenced against current market events:
 
 2. **Contrarian-extremes on tariff-whipsawed sectors** — The [[2026-02-supreme-court-tariffs|Feb 2026 Supreme Court ruling]] + Trump 15% tariff reversal created massive sector rotations in days. Industrials gapped 3-5% both directions. Buy the forced sellers per [[contrarian-extremes]] framework.
 
-3. **Demerger screening with Alfred filters** — Structural catalyst + fundamental undervaluation. [[perseus-mining|PRU]]-type mispricings (P/E 7.48 in a P/E 39 sector) demonstrate the pattern.
+3. **Demerger screening with Alfred filters** — Structural catalyst + fundamental undervaluation. PRU-type mispricings (P/E 7.48 in a P/E 39 sector) demonstrate the pattern.
 
 ### Highest Return, Moderate Risk
 
@@ -334,9 +334,9 @@ Step 4 — Size for true diversification (see [[strategy-correlation-matrix]])
 | Your situation | Cluster to look at | Primary risk to pre-hedge |
 |---|---|---|
 | Calm bull, want yield | Carry: [[funding-rate-arbitrage]], [[cash-and-carry]], [[delta-neutral-yield-farming]] | Regime change → pair with trend |
-| Expecting a vol spike / crisis | Structural: [[index-arbitrage]], [[triangular-arbitrage]], [[cross-exchange-arbitrage]]; plus [[contrarian-extremes]] | Counterparty failure, rule changes |
+| Expecting a vol spike / crisis | Structural: index-arbitrage, [[triangular-arbitrage]], [[cross-exchange-arbitrage]]; plus [[contrarian-extremes]] | Counterparty failure, rule changes |
 | Want a permanent allocation | Trend + Carry + Tail Hedge (Part 3) | Underperformance of trend in calm |
-| Event with a known date | [[merger-arbitrage]], pre-FOMC drift, [[convertible-arbitrage]] | Deal break / catalyst slip |
+| Event with a known date | merger-arbitrage, pre-FOMC drift, convertible-arbitrage | Deal break / catalyst slip |
 | Crypto-native capital | Crypto carry + [[mev-strategies]] + [[cross-chain-arbitrage]] | Bridge exploit, reflexivity |
 | Commodity exposure | [[crack-spread]], [[crush-spread]], [[geographic-spread-trading]] | Concentrated short squeeze |
 
@@ -368,7 +368,6 @@ Cross-references were identified by matching edge sources, regime profiles, fail
 - [[flash-crashes]] — Volmageddon, 2010, crypto cascades
 - [[2017-2021-kimchi-premium]] — persistent regulatory mispricing
 - [[convergence-arbitrage]] — LTCM case study
-- [[alfred]] — fundamental screening methodology
 
 ## Related
 

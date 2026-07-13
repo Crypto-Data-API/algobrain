@@ -39,7 +39,7 @@ TeraWulf's economics rest on converting **scarce, low-cost, low-carbon megawatts
 - **Bitcoin mining (legacy, run opportunistically).** Self-mining converts power into hashrate into BTC; unit economics turn on **fleet efficiency (J/TH)**, **all-in power cost ($/kWh)**, and **hash price** (BTC price × network difficulty). At Lake Mariner, low-cost nuclear/hydro power gives WULF one of the lower cost curves in the cohort — but mining is increasingly the *swing* use of power, reallocated toward HPC when hosting economics are better.
 - **The scarce asset: energized, interconnected, low-carbon power.** In a multi-year interconnection-queue backlog, secured grid interconnects plus clean baseload are the moat — and the reason hyperscalers (and Google) backstop TeraWulf's contracts.
 
-The throughline matches the cohort ([[core-scientific]], [[hut-8]], [[mara]], [[applied-digital]], [[iren]], [[hive-digital-technologies]]): use mining as the cash-flowing bridge and migrate from *price-taker on BTC* to *landlord of compute*. WULF's distinctive angle is **clean power** — a selling point as AI buyers face carbon scrutiny.
+The throughline matches the cohort ([[core-scientific]], [[hut-8]], [[mara]], applied-digital, [[iren]], [[hive-digital-technologies]]): use mining as the cash-flowing bridge and migrate from *price-taker on BTC* to *landlord of compute*. WULF's distinctive angle is **clean power** — a selling point as AI buyers face carbon scrutiny.
 
 ## 2025-2026 Developments
 
@@ -52,7 +52,7 @@ The throughline matches the cohort ([[core-scientific]], [[hut-8]], [[mara]], [[
 
 ## Trading Relevance
 
-- **Index membership:** not in the [[s-and-p-500]]; small/mid-cap, NASDAQ-listed.
+- **Index membership:** not in the s-and-p-500; small/mid-cap, NASDAQ-listed.
 - **Options liquidity:** Tier 3 - Popular, moderate-to-high volume; very high [[implied-volatility]] and heavy retail options speculation — a favourite for leveraged directional bets on both Bitcoin and the AI data-center theme.
 - **Typical catalysts:** Bitcoin price, new/expanded HPC contracts and tenant announcements, Google/hyperscaler news, power and interconnect milestones, data-center build progress (CB-5, Abernathy), financings/dilution, and quarterly results.
 - **Correlated names:** miner-to-AI peers — [[core-scientific]], [[iren]], [[mara]], [[riot-platforms]], [[microstrategy]]; broader AI data-center and Bitcoin sentiment.
@@ -87,7 +87,7 @@ TeraWulf is a member of the listed bitcoin-miner / digital-infrastructure cohort
 | [[hut-8]] | HUT | Power-origination pipeline; American Bitcoin (ABTC) spin; Fluidstack/Google lease | Mid-to-late |
 | [[mara]] | MARA | Largest hashrate + biggest BTC treasury; Starwood JV | Early-to-mid |
 | [[iren]] | IREN | Australia/US renewable footprint; vertically integrated | Mid-to-late |
-| [[applied-digital]] | APLD | Pure data-center developer (CoreWeave anchor) | Late (least crypto residual) |
+| applied-digital | APLD | Pure data-center developer (CoreWeave anchor) | Late (least crypto residual) |
 | [[hive-digital-technologies]] | HIVE | Nordic/Paraguay renewable footprint; BUZZ HPC cloud | Mid |
 | [[riot-platforms]] | RIOT | Texas-scale mining; ERCOT power credits | Earlier-mid |
 
@@ -125,7 +125,7 @@ WULF defies a single multiple; the market weighs several axes (no specific multi
 - **Very high implied volatility.** Tier-3 popular options with very high [[implied-volatility]] and heavy retail speculation; supports both directional plays and premium-selling structures (see [[options-greeks]], [[gamma-squeeze]] dynamics on squeezes).
 - **Validation headlines move it independently of BTC.** Google/hyperscaler news, new/expanded HPC contracts, and energization milestones (CB-5, Abernathy) can re-rate the stock apart from the BTC tape, weakening the historical crypto correlation on those days.
 - **Catalysts to trade around:** BTC price and [[bitcoin-halving|halving]]/hash-price economics, new or expanded HPC contracts and tenant announcements, Google/hyperscaler news, power and interconnect milestones, data-center build progress, financings/dilution, and quarterly results.
-- **Basket behavior:** moves with [[core-scientific]], [[hut-8]], [[mara]], [[iren]], [[applied-digital]], [[hive-digital-technologies]], [[riot-platforms]], and on treasury sentiment with [[microstrategy]]; cohort dispersion (lease leaders vs laggards) is a recurring setup.
+- **Basket behavior:** moves with [[core-scientific]], [[hut-8]], [[mara]], [[iren]], applied-digital, [[hive-digital-technologies]], [[riot-platforms]], and on treasury sentiment with [[microstrategy]]; cohort dispersion (lease leaders vs laggards) is a recurring setup.
 
 ## Capital Structure & Dilution Risk
 
@@ -145,7 +145,6 @@ WULF defies a single multiple; the market weighs several axes (no specific multi
 - [[hut-8]]
 - [[iren]]
 - [[mara]]
-- [[applied-digital]]
 - [[hive-digital-technologies]]
 - [[riot-platforms]]
 - [[microstrategy]]
@@ -155,7 +154,7 @@ WULF defies a single multiple; the market weighs several axes (no specific multi
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - TeraWulf 8-K / Fluidstack & Google agreements (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/0001083301/000108330126000026/a_wulfearningsrelease2026-.htm
 - TeraWulf investor relations — https://www.terawulf.com/investors
 - Verified via Perplexity (sonar) and WebSearch, 2026-06-10

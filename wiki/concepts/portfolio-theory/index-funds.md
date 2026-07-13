@@ -15,16 +15,16 @@ aliases:
 domain: [portfolio-theory]
 prerequisites: ["[[diversification]]", "[[efficient-market-hypothesis]]"]
 difficulty: beginner
-related: ["[[active-vs-passive-investing]]", "[[s-and-p-500]]", "[[etf]]", "[[all-weather-portfolio]]", "[[diversification]]", "[[index-investing]]", "[[passive-investing]]", "[[jack-bogle]]", "[[expense-ratio]]", "[[tracking-error]]", "[[capital-asset-pricing-model]]", "[[geometric-mean]]"]
+related: ["[[etf]]", "[[all-weather-portfolio]]", "[[diversification]]", "[[index-investing]]", "[[passive-investing]]", "[[expense-ratio]]", "[[tracking-error]]", "[[capital-asset-pricing-model]]", "[[geometric-mean]]"]
 ---
 
 # Index Funds
 
-Index funds are passively managed pooled vehicles (mutual funds or [[etf|ETFs]]) that hold the constituents of a market index such as the [[s-and-p-500]] in their benchmark weights, aiming to replicate the index's return at minimal cost rather than to beat it. By owning the whole market they deliver near-perfect [[diversification|diversification]] of idiosyncratic risk and capture the market (beta) return for fees an order of magnitude below active funds. Pioneered by John Bogle at Vanguard, they are now the dominant vehicle for both retail and institutional equity allocation.
+Index funds are passively managed pooled vehicles (mutual funds or [[etf|ETFs]]) that hold the constituents of a market index such as the s-and-p-500 in their benchmark weights, aiming to replicate the index's return at minimal cost rather than to beat it. By owning the whole market they deliver near-perfect [[diversification|diversification]] of idiosyncratic risk and capture the market (beta) return for fees an order of magnitude below active funds. Pioneered by John Bogle at Vanguard, they are now the dominant vehicle for both retail and institutional equity allocation.
 
 ## History
 
-[[jack-bogle|John C. "Jack" Bogle]] founded Vanguard in 1975 and launched the First Index Investment Trust (now the Vanguard 500 Index Fund) in 1976. Initially mocked as "Bogle's Folly," the fund was based on a simple thesis: most active managers fail to beat the market after fees, so investors are better served by owning the entire market at minimal cost. Bogle's insight has been vindicated by decades of data, and he later codified it in the "cost matters hypothesis" — gross return minus cost equals net return, so minimizing cost is the most reliable lever an investor controls.
+John C. "Jack" Bogle founded Vanguard in 1975 and launched the First Index Investment Trust (now the Vanguard 500 Index Fund) in 1976. Initially mocked as "Bogle's Folly," the fund was based on a simple thesis: most active managers fail to beat the market after fees, so investors are better served by owning the entire market at minimal cost. Bogle's insight has been vindicated by decades of data, and he later codified it in the "cost matters hypothesis" — gross return minus cost equals net return, so minimizing cost is the most reliable lever an investor controls.
 
 ## The Cost Advantage
 
@@ -55,7 +55,7 @@ An index fund's job is to *replicate*, not beat, its benchmark, so its quality i
 
 ## Active vs Passive Performance
 
-According to the S&P SPIVA scorecard, approximately 90% of large-cap active managers underperform the [[s-and-p-500]] over a 15-year period after fees. This finding holds across most asset classes and geographies. The implication is stark: for most investors, [[active-vs-passive-investing|passive investing]] is the rational default. The minority of managers who do outperform are difficult to identify in advance.
+According to the S&P SPIVA scorecard, approximately 90% of large-cap active managers underperform the s-and-p-500 over a 15-year period after fees. This finding holds across most asset classes and geographies. The implication is stark: for most investors, passive investing is the rational default. The minority of managers who do outperform are difficult to identify in advance.
 
 ## Popular Index Funds
 
@@ -72,12 +72,12 @@ Indexing rests on three pillars of portfolio theory. First, the [[efficient-mark
 
 ## Portfolio Relevance and Trade-offs
 
-For an asset allocator the index fund is the low-cost building block for expressing a strategic asset-allocation policy: combine a broad equity index fund, a bond index fund, and (optionally) international and real-asset sleeves to construct an efficient frontier portfolio with a handful of tickers. The cost advantage compounds geometrically -- a 0.9% annual fee gap, drag over decades, is a direct subtraction from the [[geometric-mean|compounded return]]. Caveats worth noting: cap-weighting mechanically overweights the most expensive mega-caps (a momentum-like concentration risk -- by 2025 the top handful of names dominated the [[s-and-p-500]]); index inclusion/exclusion creates predictable rebalancing flows; and the rise of passive ownership raises governance and price-discovery concerns that remain debated.
+For an asset allocator the index fund is the low-cost building block for expressing a strategic asset-allocation policy: combine a broad equity index fund, a bond index fund, and (optionally) international and real-asset sleeves to construct an efficient frontier portfolio with a handful of tickers. The cost advantage compounds geometrically -- a 0.9% annual fee gap, drag over decades, is a direct subtraction from the [[geometric-mean|compounded return]]. Caveats worth noting: cap-weighting mechanically overweights the most expensive mega-caps (a momentum-like concentration risk -- by 2025 the top handful of names dominated the s-and-p-500); index inclusion/exclusion creates predictable rebalancing flows; and the rise of passive ownership raises governance and price-discovery concerns that remain debated.
 
 ## Pitfalls and Risks
 
 - **Concentration creep** — cap-weighting means a handful of mega-caps can dominate a "diversified" index, quietly raising single-stock and sector risk.
-- **You get the whole market, including the crashes** — index funds give the full market drawdown (the [[s-and-p-500]] fell ~50% in 2008–09); they remove manager risk, not market risk.
+- **You get the whole market, including the crashes** — index funds give the full market drawdown (the s-and-p-500 fell ~50% in 2008–09); they remove manager risk, not market risk.
 - **Index inclusion effects** — front-running of additions/deletions imposes hidden costs around reconstitution.
 - **Tracking slippage** — high [[tracking-error|tracking error]] from poor management or illiquid underlyings defeats the purpose.
 - **Style/benchmark mismatch** — owning the "wrong" index (e.g. a narrow sector or thematic index) can negate diversification.
@@ -86,12 +86,9 @@ For an asset allocator the index fund is the low-cost building block for express
 
 ## Related
 
-- [[active-vs-passive-investing]]
-- [[s-and-p-500]]
 - [[all-weather-portfolio]]
 - [[diversification]]
 - [[etf]]
-- [[jack-bogle]] — founder of indexing and Vanguard
 - [[expense-ratio]] — the fee that drives the index advantage
 - [[tracking-error]] — how faithfully a fund replicates its benchmark
 - [[capital-asset-pricing-model]] — why the market portfolio is theoretically optimal

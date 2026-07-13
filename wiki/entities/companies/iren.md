@@ -36,7 +36,7 @@ IREN is best understood as a **vertically integrated power-and-compute platform*
 | **AI cloud / HPC (GPU compute)** | GPU clusters leased to AI customers; ramping toward the Microsoft contract | Contract backlog, GPU utilization, lease term/price, depreciation on GPU capex | AI-infrastructure sentiment; contract/customer-win headlines |
 | **Power & data-center development** | Securing grid interconnects, building shells, energizing capacity | MW secured vs. energized, capex per MW, construction timeline | Capacity-milestone and financing news |
 
-**The pivot mechanics.** A bitcoin-mining megawatt produces a volatile, BTC-priced cash flow that compresses every halving and with every difficulty increase. An AI/HPC megawatt under a long-term colocation or cloud contract produces contracted, dollar-denominated revenue at far higher revenue-per-MW — which is why the market re-rates "miners with power" into "AI infrastructure" multiples when they sign credible compute customers. The constraint is execution: securing GPUs, energizing capacity on time, and funding the capex without excessive [[dilution]]. (See [[ai-data-centers]] and [[bitcoin-mining]] for the underlying economics.)
+**The pivot mechanics.** A bitcoin-mining megawatt produces a volatile, BTC-priced cash flow that compresses every halving and with every difficulty increase. An AI/HPC megawatt under a long-term colocation or cloud contract produces contracted, dollar-denominated revenue at far higher revenue-per-MW — which is why the market re-rates "miners with power" into "AI infrastructure" multiples when they sign credible compute customers. The constraint is execution: securing GPUs, energizing capacity on time, and funding the capex without excessive dilution. (See [[ai-data-centers]] and [[bitcoin-mining]] for the underlying economics.)
 
 ## Competitive Positioning / Peers
 
@@ -50,10 +50,10 @@ IREN competes on two fronts: against bitcoin miners for power and efficiency, an
 | [[core-scientific]] | CORZ | Mining + colocation | Major CoreWeave HPC contracts | Furthest-along colocation pivot among peers |
 | [[cleanspark]] | CLSK | Pure-play efficient miner | Mining-focused | Low-cost operator, less HPC pivot |
 | [[cipher-mining]] | CIFR | Mining + HPC buildout | Securing HPC capacity | Power-development focus |
-| [[coreweave]] | CRWV | Pure GPU neocloud | N/A (already AI-native) | The "destination" model miners aspire to |
-| [[nebius]] | NBIS | AI cloud / neocloud | N/A | European AI-infra comparable |
+| coreweave | CRWV | Pure GPU neocloud | N/A (already AI-native) | The "destination" model miners aspire to |
+| nebius | NBIS | AI cloud / neocloud | N/A | European AI-infra comparable |
 
-IREN's bull framing is that it can compress the gap between miner valuation and neocloud valuation faster than peers because it has both a marquee customer and self-developed power. The bear framing is that hyperscalers and dedicated neoclouds ([[coreweave]], [[nebius]]) have deeper GPU access and software, leaving miners as commodity colocation landlords.
+IREN's bull framing is that it can compress the gap between miner valuation and neocloud valuation faster than peers because it has both a marquee customer and self-developed power. The bear framing is that hyperscalers and dedicated neoclouds (coreweave, nebius) have deeper GPU access and software, leaving miners as commodity colocation landlords.
 
 ## Bull vs Bear Case
 
@@ -65,7 +65,7 @@ IREN's bull framing is that it can compress the gap between miner valuation and 
 
 **Bear case**
 - Execution risk: energizing capacity and securing GPUs on schedule is hard; slippage hits the contract-backlog story directly.
-- Capital intensity → recurring equity/debt raises and [[dilution]]; the AI buildout is enormously capex-heavy.
+- Capital intensity → recurring equity/debt raises and dilution; the AI buildout is enormously capex-heavy.
 - BTC exposure cuts both ways — a bitcoin drawdown still pressures the mining segment and sentiment.
 - Multiple compression risk: if the market decides miners-turned-landlords deserve colocation multiples (not neocloud multiples), the re-rate partially unwinds.
 - Customer concentration around a single hyperscaler agreement.
@@ -78,14 +78,14 @@ IREN does not lend itself to a clean P/E (earnings are dominated by BTC marks an
 - **EV per EH/s and EV per MW** — comparing the enterprise value against mining hash rate and against secured/energized power capacity versus [[mara]], [[riot-platforms]], [[core-scientific]].
 - **All-in power cost (¢/kWh)** — the structural mining-margin driver and the AI-colocation cost advantage.
 - **HPC/AI contract backlog and revenue-per-MW** — the re-rate engine; converting the Microsoft agreement into recognized, growing revenue.
-- **Capex funding mix and [[dilution]]** — share-count growth, debt capacity, and how much of the buildout is equity-funded.
+- **Capex funding mix and dilution** — share-count growth, debt capacity, and how much of the buildout is equity-funded.
 - **Energized vs. secured MW** — the gap between contracted power and power actually producing revenue.
 
 The central tension: is IREN a bitcoin miner (cyclical, BTC-priced, capital-intensive) or an AI-infrastructure landlord (contracted, dollar-denominated, growth-multiple)? The stock price largely tracks where the market sits on that spectrum at any moment.
 
 ## Trading & Options Playbook
 
-- **Index membership:** not in the [[s-and-p-500]]; a NASDAQ-listed data-center/miner. May appear in crypto-equity and miner ETF baskets.
+- **Index membership:** not in the s-and-p-500; a NASDAQ-listed data-center/miner. May appear in crypto-equity and miner ETF baskets.
 - **Options profile (preserved):** Tier 2 - High Liquidity; high average daily options volume. Very elevated implied volatility; favored by retail and thematic traders for leveraged AI/bitcoin exposure.
 - **High IV regime:** premiums are rich; IV typically spikes into earnings and contract-announcement windows. Premium sellers face large gap risk; debit structures (call spreads, calendars) often preferred over naked long premium given decay.
 - **BTC correlation:** intraday and multi-day moves frequently track [[bitcoin]]; pairs/relative-value traders watch IREN vs. BTC and vs. miner peers ([[mara]], [[riot-platforms]], [[core-scientific]]).
@@ -94,15 +94,15 @@ The central tension: is IREN a bitcoin miner (cyclical, BTC-priced, capital-inte
 
 ## Capital Structure & Dilution Risk
 
-The AI/HPC buildout is among the most capital-intensive transitions in the listed-equity universe — GPUs, power infrastructure, cooling, and construction all front-load cash needs ahead of contracted revenue. IREN has historically funded growth through equity issuance and convertible/debt instruments. Watch share-count trajectory, any at-the-market (ATM) programs, convertible note terms, and the balance between debt capacity and equity raises. Funding that arrives before contracted AI revenue ramps is the principal [[dilution]] risk; conversely, debt secured against contracted cash flows can fund growth with less equity erosion. (See [[dilution]].)
+The AI/HPC buildout is among the most capital-intensive transitions in the listed-equity universe — GPUs, power infrastructure, cooling, and construction all front-load cash needs ahead of contracted revenue. IREN has historically funded growth through equity issuance and convertible/debt instruments. Watch share-count trajectory, any at-the-market (ATM) programs, convertible note terms, and the balance between debt capacity and equity raises. Funding that arrives before contracted AI revenue ramps is the principal dilution risk; conversely, debt secured against contracted cash flows can fund growth with less equity erosion. (See dilution.)
 
 ## Risks
 
 - **BTC price risk** — mining segment and overall sentiment remain bitcoin-correlated.
 - **Execution / timeline risk** — delays energizing capacity or sourcing GPUs directly damage the AI-contract story.
-- **Dilution / financing risk** — capital intensity forces recurring raises (see [[dilution]]).
+- **Dilution / financing risk** — capital intensity forces recurring raises (see dilution).
 - **Customer concentration** — heavy reliance on the anchor hyperscaler agreement.
-- **Competitive risk** — hyperscalers and pure neoclouds ([[coreweave]], [[nebius]]) may out-compete miners-turned-landlords on GPU access and software.
+- **Competitive risk** — hyperscalers and pure neoclouds (coreweave, nebius) may out-compete miners-turned-landlords on GPU access and software.
 - **Power / regulatory risk** — grid interconnection delays, energy-price moves, and data-center power scrutiny.
 - **Multiple-compression risk** — the re-rate can unwind if the market reclassifies the business.
 
@@ -115,7 +115,6 @@ The AI/HPC buildout is among the most capital-intensive transitions in the liste
 - [[crypto-trading]]
 - [[implied-volatility]]
 - [[options]]
-- [[dilution]]
 - [[riot-platforms]]
 - [[mara]]
 - [[core-scientific]]
@@ -124,12 +123,6 @@ The AI/HPC buildout is among the most capital-intensive transitions in the liste
 - [[bitfarms]]
 - [[bitdeer-technologies]]
 - [[bit-digital]]
-- [[coreweave]]
-- [[nebius]]
-- [[nasdaq]]
-- [[s-and-p-500]]
-- [[technology]]
-- [[energy]]
 
 ## Sources
 

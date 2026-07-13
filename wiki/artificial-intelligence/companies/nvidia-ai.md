@@ -40,7 +40,7 @@ related: ["[[nvidia]]", "[[foundation-models]]", "[[model-inference-vs-training]
 ## Trading Relevance
 
 ### As a Stock
-- NVDA is the highest-beta large-cap play on AI adoption and the single largest weight in [[sp500|S&P 500]]/[[nasdaq|Nasdaq]] indices — its moves mechanically move the market
+- NVDA is the highest-beta large-cap play on AI adoption and the single largest weight in S&P 500/Nasdaq indices — its moves mechanically move the market
 - Earnings (quarterly, usually late Feb/May/Aug/Nov) are major cross-asset events; whisper numbers center on Data Center revenue and next-quarter guidance
 - Supply-chain reads (TSMC monthly revenue, SK Hynix HBM, ASML orders) and hyperscaler capex guidance (MSFT, GOOGL, META, AMZN — collectively $600B+ planned for 2026) are the leading indicators
 - Key risks priced by the market: "AI capex bubble" debates, China export controls (H20 write-downs in 2025), custom-silicon competition (Google TPU, Amazon Trainium), and customer concentration

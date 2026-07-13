@@ -13,10 +13,10 @@ source_date: 2018-01-01
 source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-hichem-djouhri.md"
 confidence: medium
 claims_count: 18
-related: ["[[anton-kreil]]", "[[itpm]]", "[[hichem-djouhri]]", "[[fundamental-analysis]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[commodities]]", "[[correlation]]", "[[volatility]]"]
+related: ["[[anton-kreil]]", "[[hichem-djouhri]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[commodities]]", "[[correlation]]", "[[volatility]]"]
 ---
 
-[[anton-kreil]] interviews [[hichem-djouhri|Hichem Djouhri]], a senior trading mentor at [[itpm]] based in Dubai. Djouhri is described as one of the best-performing portfolio managers in the Middle East / North Africa (MENA) region over the preceding decade, having won best-performing asset manager of the region for seven consecutive years. The interview covers his career, MENA market dynamics, hedging strategies in commodity-correlated markets, and his observations on retail vs. professional trader mentality. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and performance claims are first-person and single-source, so confidence is MEDIUM.
+[[anton-kreil]] interviews [[hichem-djouhri|Hichem Djouhri]], a senior trading mentor at itpm based in Dubai. Djouhri is described as one of the best-performing portfolio managers in the Middle East / North Africa (MENA) region over the preceding decade, having won best-performing asset manager of the region for seven consecutive years. The interview covers his career, MENA market dynamics, hedging strategies in commodity-correlated markets, and his observations on retail vs. professional trader mentality. This is part of ITPM's "Trading Legends" promotional series for its paid courses; biographical and performance claims are first-person and single-source, so confidence is MEDIUM.
 
 > **Note on confidence:** Promotional interview for a paid trading-education business. Career details, the "seven consecutive years best-performing" award, and opinions are the interviewee's own statements, not independently verified — treat as [MEDIUM] single-source.
 

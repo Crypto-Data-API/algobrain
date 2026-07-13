@@ -18,7 +18,7 @@ related: ["[[support-resistance-breakout]]", "[[channel-breakout]]", "[[donchian
 
 ## Overview
 
-The Darvas Box Method was developed by **Nicolas Darvas**, a professional dancer who turned $36,000 into over **$2 million** in the stock market between 1957 and 1959 while touring the world -- receiving only daily stock quotes via telegram. He documented his system in the 1960 bestseller *How I Made $2,000,000 in the Stock Market*. The method is remarkably simple: when a stock makes a **new 52-week high**, Darvas drew a "box" around the consolidation range -- the **top of the box** is the new high, and the **bottom** is the lowest price during that consolidation. A **buy signal** occurs when price breaks above the box top on strong [[volume]]. The **stop-loss** is placed just below the box bottom. If the stock continues higher, a new box is drawn, and the stop ratchets up to the bottom of the new box. The method is essentially a **momentum breakout system** with a built-in trailing stop mechanism. Despite being over 60 years old, the core principles -- buying strength, cutting losers, and letting winners run -- remain timeless and are embedded in many modern [[stocks]] trading strategies.
+The Darvas Box Method was developed by **Nicolas Darvas**, a professional dancer who turned $36,000 into over **$2 million** in the stock market between 1957 and 1959 while touring the world -- receiving only daily stock quotes via telegram. He documented his system in the 1960 bestseller *How I Made $2,000,000 in the Stock Market*. The method is remarkably simple: when a stock makes a **new 52-week high**, Darvas drew a "box" around the consolidation range -- the **top of the box** is the new high, and the **bottom** is the lowest price during that consolidation. A **buy signal** occurs when price breaks above the box top on strong [[volume]]. The **stop-loss** is placed just below the box bottom. If the stock continues higher, a new box is drawn, and the stop ratchets up to the bottom of the new box. The method is essentially a **momentum breakout system** with a built-in trailing stop mechanism. Despite being over 60 years old, the core principles -- buying strength, cutting losers, and letting winners run -- remain timeless and are embedded in many modern stocks trading strategies.
 
 ## How It Works
 
@@ -68,7 +68,7 @@ Darvas combined **technical box construction** with a fundamental filter: he onl
 - Performs poorly in choppy, range-bound markets where breakouts frequently fail and reverse (whipsaws)
 - The method relies on stocks making new highs -- it misses bottoming patterns and reversal trades entirely
 - In modern markets with algorithmic trading, breakouts above obvious consolidation ranges are frequently trapped by institutional stop hunts
-- The original method was designed for [[stocks]] and does not directly translate to [[forex]] or other non-equity markets
+- The original method was designed for stocks and does not directly translate to [[forex]] or other non-equity markets
 - No guidance on how to size boxes in volatile versus calm environments
 
 ## See Also

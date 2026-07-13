@@ -25,7 +25,7 @@ Born Gyorgy Schwartz on August 12, 1930, in Budapest, Hungary, Soros survived th
 
 Soros moved to New York in 1956 and worked at several financial firms before founding the Soros Fund Management in 1970. In 1973, he established the [[quantum-fund]] (initially called the Soros Fund), which would become one of the most successful [[hedge-funds]] in history.
 
-Over the next three decades, the [[quantum-fund]] generated average annual returns of approximately 30%, turning an initial investment of $1,000 in 1969 into over $4 million by 2000. This track record places Soros alongside [[warren-buffett]], [[jim-simons]], and [[ray-dalio]] as one of the greatest investors of all time, though his approach — aggressive, macro-focused, and heavily leveraged — was radically different from traditional [[value-investing]].
+Over the next three decades, the [[quantum-fund]] generated average annual returns of approximately 30%, turning an initial investment of $1,000 in 1969 into over $4 million by 2000. This track record places Soros alongside warren-buffett, [[jim-simons]], and [[ray-dalio]] as one of the greatest investors of all time, though his approach — aggressive, macro-focused, and heavily leveraged — was radically different from traditional value-investing.
 
 ## Black Wednesday: Breaking the Bank of England
 

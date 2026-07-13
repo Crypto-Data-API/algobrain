@@ -14,7 +14,7 @@ ATAS (Advanced Time And Sales) is a trading and analysis platform specializing i
 
 ## Overview
 
-ATAS was designed from the ground up for [[order-flow]] analysis, unlike platforms such as [[ninjatrader|NinjaTrader]] or [[tradingview|TradingView]] that added order flow features to existing charting platforms. This focus makes it the preferred tool for traders whose primary methodology revolves around reading volume at price, detecting [[absorption]], identifying [[volume-imbalance|volume imbalances]], and analyzing the time and sales tape.
+ATAS was designed from the ground up for [[order-flow]] analysis, unlike platforms such as [[ninjatrader|NinjaTrader]] or TradingView that added order flow features to existing charting platforms. This focus makes it the preferred tool for traders whose primary methodology revolves around reading volume at price, detecting [[absorption]], identifying [[volume-imbalance|volume imbalances]], and analyzing the time and sales tape.
 
 The platform connects to [[futures]] exchanges (via CQG, Rithmic, and other data providers), [[crypto]] exchanges (Binance, Bybit, OKX), and equity markets. This cross-asset connectivity is useful for traders who apply order flow methodology across multiple markets.
 

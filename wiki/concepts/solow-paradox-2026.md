@@ -8,12 +8,10 @@ tags: [ai-trading, machine-learning, behavioral-finance, history, risk-managemen
 aliases: ["AI Productivity Paradox", "AI J-Curve", "Modern Solow Paradox"]
 related:
   - "[[ai-driven-demand-destruction]]"
-  - "[[margin-expansion-disparity]]"
   - "[[capital-vs-labor-asymmetry]]"
   - "[[ai-layoff-trap]]"
   - "[[capex-cycle]]"
   - "[[market-bubbles]]"
-  - "[[2024-nvidia-ai-boom]]"
 domain: [behavioral-finance, market-microstructure, risk-management]
 prerequisites: ["[[capex-cycle]]", "[[business-cycle]]"]
 difficulty: intermediate
@@ -50,7 +48,7 @@ The pattern matches the IT productivity paradox of 1987-1995 almost exactly.
 
 ## Cloudflare May 2026 — first firm-level data point
 
-On 8 May 2026, [[cloudflare]] announced an "agentic AI-first" restructuring of ~1,100 roles (~20% of headcount) on the same print where its **adjusted gross margin came in at 72.8% vs 75.1% consensus** — a ~230 bps miss attributed to mix-shift toward lower-margin developer products (Workers, R2, D1). The stock fell ~24%. See [[2026-05-08-cloudflare-ai-layoff-selloff]].
+On 8 May 2026, cloudflare announced an "agentic AI-first" restructuring of ~1,100 roles (~20% of headcount) on the same print where its **adjusted gross margin came in at 72.8% vs 75.1% consensus** — a ~230 bps miss attributed to mix-shift toward lower-margin developer products (Workers, R2, D1). The stock fell ~24%. See 2026-05-08-cloudflare-ai-layoff-selloff.
 
 This is the first datable case where a megacap publicly cut headcount citing AI **and** missed gross margin in the same quarter — exactly the firm-level signature the Solow Paradox 2026 predicts. The labor displacement happened *ahead of* the productivity / margin gain. If the cuts deliver in Q2 2026 (August earnings), the J-curve resolves and Hypothesis A gains support. If Q2 again shows margin compression despite the lower cost base, the data point hardens Hypothesis B and the [[ai-layoff-trap]] thesis (cuts without offsetting productivity).
 
@@ -58,12 +56,12 @@ This is the first datable case where a megacap publicly cut headcount citing AI 
 
 The 90%-zero-gain statistic is misleading at the index level because it averages a long tail of laggards with a short head of leaders. Where gains are showing up:
 
-- **Frontier AI deployers** — Mag 7, hyperscalers, and a handful of well-architected enterprise adopters capturing measurable cost savings (see [[margin-expansion-disparity]])
+- **Frontier AI deployers** — Mag 7, hyperscalers, and a handful of well-architected enterprise adopters capturing measurable cost savings (see margin-expansion-disparity)
 - **Specific high-volume task domains** — fraud detection, risk assessment, customer support (Block cut workforce 50% citing these), document review (legal), application processing (insurance underwriting)
 - **Code generation** — engineering productivity in a narrow set of well-instrumented codebases
 - **Capital efficiency at the firm level** — driven by labor displacement rather than output expansion (see [[capital-vs-labor-asymmetry]])
 
-The result: aggregate productivity statistics are flat, but a thin slice of the corporate world is capturing outsized gains. This is the same pattern as the [[margin-expansion-disparity]] trade.
+The result: aggregate productivity statistics are flat, but a thin slice of the corporate world is capturing outsized gains. This is the same pattern as the margin-expansion-disparity trade.
 
 ## Two Trader Hypotheses
 
@@ -88,7 +86,6 @@ Trader implication: even Hypothesis A (the bullish productivity case) implies a 
 
 ## Connecting To Other Concepts
 
-- [[margin-expansion-disparity]] — the 90%-zero-gain stat is precisely why margin expansion is concentrated in the Mag 7 and ex-Mag-7 margins are collapsing. The paradox at the firm level is the disparity at the index level.
 - [[ai-driven-demand-destruction]] — labor displacement runs ahead of productivity capture, creating the cascade window. Even if productivity eventually resolves, the demand destruction has already happened.
 - [[ai-layoff-trap]] — Wharton's model assumes the worst case where labor displacement happens without productivity gains flowing to consumers. The Solow Paradox 2026 is empirically consistent with this assumption.
 - [[capex-cycle]], [[market-bubbles]] — Hypothesis B implies the AI capex cycle ends like the 1999-2000 telecom buildout: assets stranded, capex written down, specific stocks (compare Cisco's path) collapsing while the underlying technology survives.
@@ -96,7 +93,7 @@ Trader implication: even Hypothesis A (the bullish productivity case) implies a 
 ## Trading Implications
 
 - **Watch hyperscaler capex guidance**: first signal of Hypothesis B is hyperscaler capex cuts; Mag 7 capex / revenue ratio inflection
-- **NVIDIA hyperscaler revenue concentration**: degree of customer concentration is a leading indicator of capex cycle peak ([[2024-nvidia-ai-boom]])
+- **NVIDIA hyperscaler revenue concentration**: degree of customer concentration is a leading indicator of capex cycle peak (2024-nvidia-ai-boom)
 - **Productivity statistics**: BLS productivity reports are the macro signal for J-curve resolution — currently flat
 - **ROI disclosures**: Thomson Reuters / Gartner enterprise AI ROI surveys are the firm-level signal
 - **Spread trade**: long well-architected AI adopters (proxy: Mag 7 + frontier labs) vs short laggards (proxy: legacy SaaS, high-AI-exposure white-collar service firms)
@@ -112,14 +109,13 @@ Trader implication: even Hypothesis A (the bullish productivity case) implies a 
 ## Related
 
 - [[ai-driven-demand-destruction]] — the cascade that runs concurrently regardless of J-curve resolution
-- [[margin-expansion-disparity]] — firm-level paradox manifesting as index-level disparity
 - [[capital-vs-labor-asymmetry]] — productivity gains accruing to capital, not labor
 - [[ai-layoff-trap]] — Wharton's worst-case formalization
 - [[capex-cycle]], [[market-bubbles]], [[market-cycles]]
-- [[2024-nvidia-ai-boom]], [[2025-tariff-market-volatility]]
+- 2024-nvidia-ai-boom, [[2025-tariff-market-volatility]]
 - [[ai-trading]], [[ai-trading-overview]]
-- [[microsoft]], [[alphabet]], [[amazon]], [[nvidia]], [[meta-platforms]] — hyperscaler capex flows
-- [[anthropic]], [[citrini-research]]
+- microsoft, alphabet, amazon, [[nvidia]], meta-platforms — hyperscaler capex flows
+- [[anthropic]], citrini-research
 
 ## Sources
 

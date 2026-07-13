@@ -79,11 +79,11 @@ The purpose-built instrument for isolating and transferring credit risk is the *
 - **Counterparty credit risk** — in OTC derivatives, repo, and securities lending, the risk is that the party owing you a mark-to-market gain defaults before settling. This is the domain of [[counterparty-risk]], managed with collateral and netting.
 - **Bank loan books** — a bank's core business *is* warehousing credit risk; loan-loss provisioning and capital are built around expected and unexpected credit loss.
 - **Money-market and cash instruments** — even "safe" cash vehicles hold commercial paper and short bank paper, so a money-market fund can "break the buck" if an issuer defaults (as happened in 2008).
-- **Equity investors** — credit risk reaches equities as **distress risk**. A highly [[leverage|leveraged]] firm whose fundamentals deteriorate faces rising odds of default, and equity — the most junior claim — is wiped out first in bankruptcy. Analysts gauge this with balance-sheet screens such as the [[altman-z-score]] (a bankruptcy-prediction score) and coverage metrics like [[interest-coverage]] (EBIT ÷ interest expense), which show whether earnings comfortably service the debt. Widening credit spreads on a company's bonds are often an early warning for its stock.
+- **Equity investors** — credit risk reaches equities as **distress risk**. A highly [[leverage|leveraged]] firm whose fundamentals deteriorate faces rising odds of default, and equity — the most junior claim — is wiped out first in bankruptcy. Analysts gauge this with balance-sheet screens such as the altman-z-score (a bankruptcy-prediction score) and coverage metrics like interest-coverage (EBIT ÷ interest expense), which show whether earnings comfortably service the debt. Widening credit spreads on a company's bonds are often an early warning for its stock.
 
 ## Measuring and managing credit risk
 
-- **Credit analysis** — assessing an obligor's capacity and willingness to pay: cash flows, leverage, [[interest-coverage]], asset quality, and the structural protections in the bond's covenants.
+- **Credit analysis** — assessing an obligor's capacity and willingness to pay: cash flows, leverage, interest-coverage, asset quality, and the structural protections in the bond's covenants.
 - **Diversification across issuers** — because idiosyncratic default is largely uncorrelated across unrelated names, spreading exposure over many issuers and sectors sharply reduces portfolio credit risk (see [[diversification]]). It does *not*, however, remove **systematic** credit risk — the tendency for defaults to cluster in downturns.
 - **Position and concentration limits** — caps on exposure to any single name, sector, or rating bucket.
 - **Collateral and margin** — posting [[collateral]] against an exposure reduces LGD and EAD; daily variation margin on derivatives shrinks how much can be owed before default.
@@ -115,7 +115,7 @@ If the economy weakens and the manufacturer's sales fall, its interest coverage 
 - [[corporate-bonds]], [[bonds]], [[sovereign-debt]] — the instruments where credit risk lives
 - [[counterparty-risk]], [[collateral]] — credit risk in derivatives, repo, and securities lending
 - [[diversification]] — the primary tool against idiosyncratic default risk
-- [[leverage]], [[interest-coverage]], [[altman-z-score]] — how credit / distress risk reaches equity investors
+- [[leverage]], interest-coverage, altman-z-score — how credit / distress risk reaches equity investors
 - [[basel-iii]] — bank capital treatment of credit risk
 
 ## Sources

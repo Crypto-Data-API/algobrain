@@ -106,8 +106,8 @@ This volume is less directly applicable to options traders than the prior one, b
 - [[trading-psychology]], [[behavioral-finance]]
 - [[expectancy]], [[expected-value]], [[r-multiples]]
 - [[position-sizing]], [[risk-management]]
-- [[short-selling]], [[long-short-equity]]
-- [[momentum]], [[growth-investing]], [[concentration-vs-diversification]]
+- [[short-selling]], long-short-equity
+- [[momentum]], growth-investing, [[concentration-vs-diversification]]
 - [[tape-reading]], [[professional-vs-retail-mindset]]
 
 ## Pages Backed

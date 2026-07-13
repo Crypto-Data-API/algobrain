@@ -9,12 +9,12 @@ aliases: ["TRB", "Tellor"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://www.tellor.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[oracle]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-manipulation]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-manipulation]]"]
 ---
 
 # Tellor Tributes
 
-**Tellor Tributes** (ticker **TRB**) is the staking and dispute token of Tellor, an [[ethereum|Ethereum]]-based decentralized [[oracle]] that brings off-chain data on-chain through a **crypto-economic, dispute-driven mechanism**. Originally a proof-of-work-style oracle where miners competed to submit data, Tellor now runs a **staking-based** model: reporters stake TRB to submit values, and any incorrect data can be challenged and slashed via on-chain disputes. Tellor's design prioritizes censorship resistance and permissionless reporting over update speed.
+**Tellor Tributes** (ticker **TRB**) is the staking and dispute token of Tellor, an [[ethereum|Ethereum]]-based decentralized oracle that brings off-chain data on-chain through a **crypto-economic, dispute-driven mechanism**. Originally a proof-of-work-style oracle where miners competed to submit data, Tellor now runs a **staking-based** model: reporters stake TRB to submit values, and any incorrect data can be challenged and slashed via on-chain disputes. Tellor's design prioritizes censorship resistance and permissionless reporting over update speed.
 
 ---
 
@@ -58,7 +58,7 @@ TRB has a **small, low-float supply** (~2.8M tokens) and is **inflationary**: ne
 
 ## Technology — dispute-based oracle
 
-Tellor is a **dispute-based [[oracle]]**, conceptually closer to [[uma|UMA's]] optimistic model than to the always-on push feeds of [[chainlink|Chainlink]]. The lifecycle of a data point:
+Tellor is a **dispute-based oracle**, conceptually closer to [[uma|UMA's]] optimistic model than to the always-on push feeds of [[chainlink|Chainlink]]. The lifecycle of a data point:
 
 - **Data request & report** — A dApp tips (in TRB) for a data point (e.g., ETH/USD); **staked reporters** submit values on-chain. Each reporter must lock TRB collateral to participate.
 - **Dispute window** — Any party can stake TRB to dispute a value they believe is wrong; disputes are resolved by TRB-holder vote, with the loser's stake slashed.
@@ -126,7 +126,6 @@ TRB trades at ~$38.5M with MC/FDV near 0.97 (almost fully circulating), so dilut
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[oracle]]
 - [[chainlink]]
 - [[pyth-network]]
 - [[redstone-oracles]]

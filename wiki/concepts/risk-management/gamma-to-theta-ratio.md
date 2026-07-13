@@ -59,7 +59,7 @@ So a G/T of 1.0 implies a break-even daily move of √2 ≈ 1.4% — any move la
 
 - **Per-position G/T**, computed before sizing, predicts the structural path risk of a candidate trade independent of how many contracts are deployed.
 - **DTE-bucketed G/T** is more informative than aggregate G/T for laddered books. A 0-7 DTE bucket might run G/T of 5+ while a 45-DTE bucket runs G/T of 0.3; aggregate G/T can hide an unhealthy front-cycle concentration.
-- **Beta-weighted G/T** for multi-underlying books — both gamma and theta are first beta-weighted to a common reference (typically [[spy|SPY]]) and then ratio'd.
+- **Beta-weighted G/T** for multi-underlying books — both gamma and theta are first beta-weighted to a common reference (typically SPY) and then ratio'd.
 - **Realised G/T over a window** — the actual gamma P&L drawn over the window divided by realised theta. The forward-looking screen-G/T is the *expected* version of this; the realised version is what the [[theta-realisation-ratio]] captures.
 
 ## Why It Matters (for theta-targeted books)
@@ -168,5 +168,3 @@ The arc 0.31 → 0.43 → 0.68 → 1.33 over 44 days is the canonical ramp. A bo
 
 - [[book-option-volatility-and-pricing]] — Natenberg, on the relationship between gamma and theta as duals of the time-volatility surface; the "gamma rent" framing.
 - Hull, *Options, Futures and Other Derivatives*, 10th ed., Chapter 19 — Black-Scholes derivation of gamma and theta and their `1/√t` joint scaling.
-- [[tastytrade]] research relating front-cycle gamma/theta evolution to realised P&L distributions — justification for the 21-DTE management rule.
-- [[orats]] — historical surface data used to compute book-level G/T trajectories on backtested theta-targeted strategies.

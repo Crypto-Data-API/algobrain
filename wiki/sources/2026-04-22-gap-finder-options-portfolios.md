@@ -13,7 +13,7 @@ source_date: 2026-05-03
 source_file: "raw/articles/2026-04-22-gap-finder-options-portfolios.md"
 confidence: medium
 claims_count: 30
-related: ["[[tastytrade]]", "[[optionalpha]]", "[[optionstrat]]", "[[probability-of-profit]]", "[[spread-width-selection]]", "[[dividend-adjustments]]", "[[earnings-volatility-trading]]", "[[pyalgotrade]]", "[[put-options]]", "[[short-position]]", "[[iron-condors]]", "[[options-greeks]]"]
+related: ["[[probability-of-profit]]", "[[spread-width-selection]]", "[[pyalgotrade]]", "[[put-options]]", "[[short-position]]", "[[iron-condors]]", "[[options-greeks]]"]
 ---
 
 Perplexity research run on 2026-05-03 via `tools/gap_finder.py --topic "options portfolios"`. Surveyed gaps in the wiki's options-portfolio coverage: education platforms, visualization tools, risk metrics, structural mechanics, and event-driven strategies. Output drove a batch of 8 new pages plus 2 thin-page upgrades.

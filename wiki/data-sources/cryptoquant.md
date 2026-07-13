@@ -9,7 +9,7 @@ source_type: data
 source_url: "https://cryptoquant.com"
 source_author: "Ki Young Ju"
 aliases: ["CryptoQuant", "Crypto Quant"]
-related: ["[[crypto-data-sources]]", "[[bitcoin]]", "[[ethereum]]", "[[on-chain-analysis]]", "[[exchange-api-reference]]", "[[alternative-me]]", "[[fundamental-analysis]]"]
+related: ["[[crypto-data-sources]]", "[[bitcoin]]", "[[ethereum]]", "[[on-chain-analysis]]", "[[exchange-api-reference]]", "[[alternative-me]]"]
 ---
 
 CryptoQuant is a leading on-chain analytics platform founded by Ki Young Ju that provides exchange flow data, miner metrics, whale tracking, and derivative indicators for cryptocurrency markets. The platform aggregates blockchain data from major exchanges and mining pools to produce metrics that serve as leading indicators for [[bitcoin|BTC]] and [[ethereum|ETH]] price movements. CryptoQuant offers both free and paid tiers, with the free tier providing access to a subset of charts and indicators.
@@ -99,7 +99,7 @@ Pricing as of June 2026 (verify current rates at cryptoquant.com/pricing — ann
 
 ## Founder
 
-**Ki Young Ju** — Founded CryptoQuant and is active on [[twitter|X/Twitter]] where he shares on-chain analysis and has become one of the most followed crypto analysts. His exchange flow analysis during major market moves has driven significant attention to CryptoQuant as a platform.
+**Ki Young Ju** — Founded CryptoQuant and is active on X/Twitter where he shares on-chain analysis and has become one of the most followed crypto analysts. His exchange flow analysis during major market moves has driven significant attention to CryptoQuant as a platform.
 
 ## Related
 

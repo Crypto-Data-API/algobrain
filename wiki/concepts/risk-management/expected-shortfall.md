@@ -16,7 +16,7 @@ difficulty: advanced
 
 ## Overview
 
-VaR was the dominant trading-book risk number for two decades after [[jp-morgan|J.P. Morgan]]'s 1994 *RiskMetrics* publication, but it has two well-known defects:
+VaR was the dominant trading-book risk number for two decades after J.P. Morgan's 1994 *RiskMetrics* publication, but it has two well-known defects:
 
 1. **It says nothing about the size of losses beyond the threshold.** A 99% one-day VaR of $1M means there is a 1% chance of losing *more than* $1M — but whether "more" is $1.1M or $50M is not in the number.
 2. **It is not [[coherent-risk-measure|coherent]].** Specifically, VaR is not subadditive — combining two portfolios can produce a VaR larger than the sum of the two individual VaRs, which is the wrong sign for a sane risk metric. (Diversification should reduce risk, not increase it.) This was proved formally by [[artzner-delbaen-eber-heath|Artzner, Delbaen, Eber, and Heath]] in their 1999 paper *Coherent Measures of Risk* (*Mathematical Finance*, 9(3): 203-228).

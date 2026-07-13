@@ -8,7 +8,7 @@ tags: [hedge-funds, trading-psychology, history]
 aliases: ["Prop Trading", "Prop Firms"]
 domain: [market-microstructure, history]
 difficulty: intermediate
-related: ["[[goldman-sachs]]", "[[citadel]]", "[[jane-street]]", "[[jump-trading]]", "[[hedge-funds]]", "[[volcker-rule]]"]
+related: ["[[citadel]]", "[[jane-street]]", "[[jump-trading]]", "[[hedge-funds]]", "[[volcker-rule]]"]
 ---
 
 Proprietary trading ("prop trading") is the practice of a financial firm trading stocks, bonds, currencies, commodities, [[derivatives]], or other financial instruments using its own capital rather than client money. Profits and losses accrue directly to the firm.
@@ -24,7 +24,7 @@ In a typical prop trading arrangement:
 ## Historical Evolution
 
 ### Golden Era (1980s-2008)
-Major investment banks -- [[goldman-sachs|Goldman Sachs]], [[morgan-stanley|Morgan Stanley]], Lehman Brothers, Bear Stearns -- operated large proprietary trading desks alongside their client-facing businesses. These desks were often the most profitable divisions:
+Major investment banks -- Goldman Sachs, Morgan Stanley, Lehman Brothers, Bear Stearns -- operated large proprietary trading desks alongside their client-facing businesses. These desks were often the most profitable divisions:
 - Goldman Sachs' prop desk generated billions in annual revenue
 - Traders like [[john-paulson|John Paulson]] (at Bear Stearns) and many future [[hedge-funds|hedge fund]] founders cut their teeth on bank prop desks
 
@@ -69,7 +69,6 @@ Prop firms employ a wide range of strategies:
 - [[hedge-funds]] -- Alternative structure for professional trading with outside capital
 - [[jane-street]] -- Leading modern prop trading firm
 - [[citadel]] -- Citadel Securities is one of the largest market makers
-- [[goldman-sachs]] -- Historic prop trading before Volcker Rule
 
 ## Sources
 

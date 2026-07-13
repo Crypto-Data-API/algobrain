@@ -9,14 +9,14 @@ aliases: ["Market Hours", "Trading Hours", "Pre-Market", "Pre-Market Trading", "
 domain: [market-microstructure]
 prerequisites: ["[[liquidity]]", "[[bid-ask-spread]]"]
 difficulty: beginner
-related: ["[[liquidity]]", "[[bid-ask-spread]]", "[[gap-risk]]", "[[circuit-breakers]]", "[[nyse]]", "[[nasdaq]]", "[[earnings-season]]", "[[order-book]]", "[[slippage]]", "[[crypto-trading-sessions]]", "[[t-plus-one-settlement]]"]
+related: ["[[liquidity]]", "[[bid-ask-spread]]", "[[gap-risk]]", "[[circuit-breakers]]", "[[order-book]]", "[[slippage]]", "[[crypto-trading-sessions]]"]
 ---
 
 **Market hours** are the times at which a securities exchange accepts and executes orders. For US stocks the day is split into a **regular session**, when liquidity and price discovery are at their fullest, and **extended-hours** sessions (pre-market and after-hours) when trading is thinner, wider, and riskier. Understanding which session you are trading in is one of the most practical things a dashboard user can know, because the *same order* behaves very differently depending on the clock.
 
 ## The US trading day
 
-All times are US Eastern Time (ET); the [[nyse|NYSE]] and [[nasdaq|Nasdaq]] keep the same schedule.
+All times are US Eastern Time (ET); the NYSE and Nasdaq keep the same schedule.
 
 | Session | Hours (ET) | Character |
 |---------|-----------|-----------|
@@ -30,7 +30,7 @@ All times are US Eastern Time (ET); the [[nyse|NYSE]] and [[nasdaq|Nasdaq]] keep
 
 ## Extended hours: pre-market and after-hours
 
-Pre-market and after-hours trading (collectively **extended-hours** or **after-hours trading**) let participants trade outside 9:30–4:00 through electronic communication networks (ECNs). They exist mainly so the market can react to news that breaks outside the regular session — most importantly **earnings reports**, which companies release **before market open (BMO)** or **after market close (AMC)** precisely so the initial reaction prints in extended hours rather than mid-session. See [[earnings-season]].
+Pre-market and after-hours trading (collectively **extended-hours** or **after-hours trading**) let participants trade outside 9:30–4:00 through electronic communication networks (ECNs). They exist mainly so the market can react to news that breaks outside the regular session — most importantly **earnings reports**, which companies release **before market open (BMO)** or **after market close (AMC)** precisely so the initial reaction prints in extended hours rather than mid-session. See earnings-season.
 
 Extended-hours sessions carry materially higher risk than the regular session:
 
@@ -51,14 +51,14 @@ The practical rule: an after-hours price is an *indication*, not a settled price
 
 Trading hours are venue-specific:
 
-- **ASX (Australia):** regular trading roughly 10:00 AM – 4:00 PM Australian Eastern time, with opening and closing single-price auctions; relevant for the Australian stocks in [[alfred-investment-philosophy|ALFRED's]] coverage.
+- **ASX (Australia):** regular trading roughly 10:00 AM – 4:00 PM Australian Eastern time, with opening and closing single-price auctions; relevant for the Australian stocks in ALFRED's coverage.
 - **London (LSE), Tokyo (TSE), and other exchanges** each keep their own local sessions, so global investors face a near-continuous relay of regional opens and closes.
 - **Futures** (e.g. equity-index futures) trade nearly around the clock on electronic platforms, which is why overnight futures are watched as a proxy for where stocks will open.
 - **Crypto markets never close** — they trade 24 hours a day, 7 days a week, with no opening bell, no closing auction, and no holidays. This is a fundamental structural difference from equities: there is no "after-hours" because every hour is trading hours. See [[crypto-trading-sessions]] for how liquidity still varies by time of day even in a 24/7 market.
 
 ## When the market pauses: circuit breakers
 
-Even within the regular session, trading can halt. Market-wide [[circuit-breakers|circuit breakers]] pause all US equity trading when the [[s-and-p-500|S&P 500]] falls a set percentage from the prior close (Level 1 at −7% and Level 2 at −13% trigger 15-minute halts; Level 3 at −20% closes the market for the day). Individual stocks also have **Limit Up-Limit Down** bands that briefly pause a single name when it moves too far too fast. See [[circuit-breakers]].
+Even within the regular session, trading can halt. Market-wide [[circuit-breakers|circuit breakers]] pause all US equity trading when the S&P 500 falls a set percentage from the prior close (Level 1 at −7% and Level 2 at −13% trigger 15-minute halts; Level 3 at −20% closes the market for the day). Individual stocks also have **Limit Up-Limit Down** bands that briefly pause a single name when it moves too far too fast. See [[circuit-breakers]].
 
 ## Practical takeaways for dashboard users
 
@@ -74,11 +74,8 @@ Even within the regular session, trading can halt. Market-wide [[circuit-breaker
 - [[slippage]] — the cost of trading thin extended-hours books
 - [[gap-risk]] — overnight and weekend gaps from the market being closed
 - [[circuit-breakers]] — intraday halts that pause trading
-- [[earnings-season]] — BMO/AMC reports drive most extended-hours activity
 - [[order-book]] — sparse outside regular hours
 - [[crypto-trading-sessions]] — the 24/7 contrast with equities
-- [[t-plus-one-settlement]] — only business days count between trade and settlement
-- [[nyse]] / [[nasdaq]] — the venues that set the US schedule
 
 ## Sources
 

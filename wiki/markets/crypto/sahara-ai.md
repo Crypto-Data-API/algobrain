@@ -87,7 +87,7 @@ AI tokens like SAHARA are **narrative-driven**, not cash-flow assets — there i
 - **FDV is the honest denominator** — with only ~34% circulating, the ~$132M FDV (vs ~$45M market cap) is the figure that matters once emissions land. Re-rating requires demand to absorb ~6.6B more tokens.
 - **Fundamentals lag price by years** — the only durable bull case is developer adoption of the full-stack platform; that must be judged by on-chain/developer activity over a 1–2 year horizon, *not* by token price. See [[decentralized-ai]].
 
-Qualitative framing only — see [[valuation]].
+Qualitative framing only — see valuation.
 
 ## Peer Comparison
 
@@ -137,7 +137,7 @@ Sahara AI is a full-stack, AI-native blockchain platform where anyone can create
 - [[zero-gravity|0G]] — Competing modular approach
 - [[ocean-protocol]] · [[bittensor-subnets]] — specialist AI competitors
 - [[ai-narrative-arc]] — narrative-cycle driver
-- [[token-unlocks]] · [[valuation]] · [[bear-market]]
+- [[token-unlocks]] · valuation · [[bear-market]]
 - [[artificial-intelligence]] — AI section hub
 - [[crypto-markets]] · [[ethereum]]
 

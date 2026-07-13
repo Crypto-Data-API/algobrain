@@ -15,7 +15,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[real-world-asse
 
 # OUSG
 
-**OUSG** (Ondo Short-Term US Government Treasuries) is a [[tokenized-treasuries|tokenized short-term US Treasuries]] fund issued by [[ondo-finance|Ondo Finance]] (ticker OUSG; native on [[ethereum|Ethereum]], also Solana/Polygon/Ondo Chain), one of the founding products of the [[real-world-assets|real-world-asset (RWA)]] tokenization sector. It gives KYC'd qualified investors on-chain exposure to the "risk-free" [[treasury-bills|T-bill]] rate, with the bulk of the portfolio now held via institutional money-market funds including [[blackrock|BlackRock]]'s BUIDL. For traders, OUSG is not a speculation vehicle (its NAV accretes at roughly the T-bill [[yield]]) but a key barometer of institutional RWA adoption and the on-chain cash-management stack.
+**OUSG** (Ondo Short-Term US Government Treasuries) is a [[tokenized-treasuries|tokenized short-term US Treasuries]] fund issued by [[ondo-finance|Ondo Finance]] (ticker OUSG; native on [[ethereum|Ethereum]], also Solana/Polygon/Ondo Chain), one of the founding products of the [[real-world-assets|real-world-asset (RWA)]] tokenization sector. It gives KYC'd qualified investors on-chain exposure to the "risk-free" [[treasury-bills|T-bill]] rate, with the bulk of the portfolio now held via institutional money-market funds including [[blackrock|BlackRock]]'s BUIDL. For traders, OUSG is not a speculation vehicle (its NAV accretes at roughly the T-bill yield) but a key barometer of institutional RWA adoption and the on-chain cash-management stack.
 
 ---
 
@@ -51,7 +51,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[real-world-asse
 | **Underlying assets** | Majority held in [[blackrock|BlackRock]]'s tokenized MMF **BUIDL** (formerly iShares SHV ETF), plus small USDC/USD liquidity sleeve; all short-dated US government paper |
 | **Sector** | [[real-world-assets|Real World Assets (RWA)]], [[tokenized-treasuries|Tokenized Treasuries]] |
 | **Chains** | [[ethereum|Ethereum]] (native), Solana, Polygon; Ondo Chain (Ondo's institutional L1, launched by 2026) |
-| **Supply mechanics** | Open-ended fund; supply expands/contracts with subscriptions and redemptions; NAV/token accretes with [[yield]] (no max supply) |
+| **Supply mechanics** | Open-ended fund; supply expands/contracts with subscriptions and redemptions; NAV/token accretes with yield (no max supply) |
 | **Access** | KYC/AML-gated; qualified purchasers only; transfer-restricted token |
 | **Redemption** | Instant mint/redeem in USDC directly with Ondo (no order-book exit) |
 | **Website** | [https://ondo.finance/ousg](https://ondo.finance/ousg) |
@@ -75,7 +75,7 @@ OUSG was developed alongside two other fund tokens, OSTB and OHYG, by Ondo Finan
 | Dimension | Detail |
 |---|---|
 | **Underlying assets** | Short-dated US government securities, the majority now held via [[blackrock|BlackRock]]'s tokenized money-market fund **BUIDL** (originally the iShares Short Treasury Bond ETF, SHV), with a small USDC/USD sleeve for instant redemption liquidity |
-| **Yield source** | The "risk-free" short-term [[treasury-bills|US T-bill]] rate (front of the curve), net of fund fees. OUSG passes this through by **NAV accrual** — the token's price grinds upward rather than paying a coupon — so the realized return tracks the prevailing T-bill [[yield]] (qualitative; do not assume a fixed APY) |
+| **Yield source** | The "risk-free" short-term [[treasury-bills|US T-bill]] rate (front of the curve), net of fund fees. OUSG passes this through by **NAV accrual** — the token's price grinds upward rather than paying a coupon — so the realized return tracks the prevailing T-bill yield (qualitative; do not assume a fixed APY) |
 | **Custody** | Fund assets held with institutional custodians; BUIDL itself is administered within BlackRock/Securitize infrastructure. OUSG is structured as fund-ownership tokens, not a debt note |
 | **Redemption** | Instant mint/redeem against USDC directly with [[ondo-finance|Ondo]]; no reliance on a secondary order book |
 | **KYC / permissioning** | KYC/AML-gated, qualified-purchasers only; the token is transfer-restricted to a whitelist, so it cannot reach retail or non-qualified holders. This is the key contrast with Ondo's general-access [[ondo-us-dollar-yield|USDY]] note |

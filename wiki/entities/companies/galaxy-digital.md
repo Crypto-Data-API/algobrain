@@ -95,7 +95,7 @@ Galaxy is a sum-of-the-parts story; the qualitative levers:
 ## Trading & Options Playbook
 
 - **Catalysts calendar**: Helios lease-monetization milestones (Phase I rent from Q2 2026), new hyperscaler lease announcements, quarterly results (trading revenue, assets on platform), crypto market beta (BTC/ETH prices and volumes), ETF flows, and large OTC mandates.
-- **Index/ETF membership**: not in the [[s-and-p-500]]; trades on the [[nasdaq]] after the May 2025 uplist from the Toronto Stock Exchange. Held in crypto-equity/blockchain ETFs, so basket flows and BTC-equity rebalancing matter.
+- **Index/ETF membership**: not in the s-and-p-500; trades on the nasdaq after the May 2025 uplist from the Toronto Stock Exchange. Held in crypto-equity/blockchain ETFs, so basket flows and BTC-equity rebalancing matter.
 - **High IV / retail behavior**: a growing Nasdaq [[options]] market with elevated [[implied-volatility]] driven by crypto-cycle swings and Helios headlines; IV expands into crypto-volatility spikes and lease catalysts (see [[options-greeks]]).
 - **Pairs**: expressed long/short against [[coinbase-stock]] (crypto-desk beta) or against [[core-scientific]]/[[iren]] (AI-datacenter conversion) depending on which leg of the story is leading.
 
@@ -145,11 +145,10 @@ Crypto-focused financial services; growing NASDAQ options market
 - [[core-scientific]]
 - [[iren]]
 - [[cipher-mining]]
-- [[nasdaq]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - Galaxy Digital 8-K on Helios/CoreWeave milestones: https://www.stocktitan.net/sec-filings/GLXY/8-k-galaxy-digital-inc-reports-material-event-a930db7ae77e.html
 - Galaxy Digital 2026 bull case (Helios, CoreWeave 526 MW lease economics): https://www.theglobeandmail.com/investing/markets/stocks/CRWV/pressreleases/37072043/the-bullish-case-for-galaxy-digital-in-2026/
 - Market cap reference: https://www.wallstreetzen.com/stocks/us/nasdaq/glxy

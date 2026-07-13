@@ -213,7 +213,6 @@ Liquidity is thinner than [[corn]], [[crude-oil|energy]], or equity index future
 - [[cot-report-analysis]] -- speculative vs commercial positioning
 - [[cme-group]] -- exchange listing hog futures
 - [[grain-futures-basis-arbitrage]] -- historical commodity basis arbitrage
-- [[weather-derivatives-arbitrage]] -- weather risk affecting feed and herd productivity
 
 ## Sources
 

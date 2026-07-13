@@ -102,7 +102,7 @@ Raschke's [[risk-management]] principles:
 
 ### 5. Market-Agnostic Application
 
-Raschke trades across multiple [[futures]] markets -- stock index futures ([[sp500|S&P 500]], [[nasdaq|NASDAQ]]), [[bond-market|bonds]], [[forex|currencies]], [[commodities]] -- because her pattern-based methodology is not tied to any single asset class. The same [[momentum]], [[mean-reversion]], and [[breakout-strategies|breakout]] dynamics occur across all liquid markets.
+Raschke trades across multiple [[futures]] markets -- stock index futures (S&P 500, NASDAQ), [[bond-market|bonds]], [[forex|currencies]], [[commodities]] -- because her pattern-based methodology is not tied to any single asset class. The same [[momentum]], [[mean-reversion]], and [[breakout-strategies|breakout]] dynamics occur across all liquid markets.
 
 ## Strategy Connections
 

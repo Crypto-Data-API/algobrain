@@ -13,7 +13,7 @@ complexity: advanced
 backtest_status: untested
 edge_source: [structural]
 edge_mechanism: "Exploits violations of put-call parity — temporary mispricings between options and their synthetic equivalents"
-related: ["[[put-call-parity]]", "[[box-spread]]", "[[volatility-arbitrage]]", "[[arbitrage-overview]]", "[[options-overview]]", "[[delta-neutral]]", "[[dividend-arbitrage]]", "[[arbitrage-parameter-cheatsheet]]", "[[leg-risk]]"]
+related: ["[[put-call-parity]]", "[[box-spread]]", "[[volatility-arbitrage]]", "[[arbitrage-overview]]", "[[options-overview]]", "[[delta-neutral]]", "[[arbitrage-parameter-cheatsheet]]", "[[leg-risk]]"]
 ---
 
 # Conversion & Reversal Arbitrage
@@ -99,7 +99,7 @@ The headline "parity violation" is only the gross spread. The realized P/L is a 
 | **Borrow cost** | none (you own the stock) | you *pay* the borrow fee | kills reversals on HTB names |
 | **Financing of options** | net option debit/credit carries | net option debit/credit carries | small for ATM |
 
-The clean way to see this: a conversion is a **synthetic short position financed by owning the stock**, and a reversal is a **synthetic long financed by shorting the stock**. The options legs lock the price; the cash-and-stock leg generates (or consumes) carry. This is why a reversal on a high-yielding general-collateral name with a steep rate curve can be profitable even when the raw parity spread looks neutral — the interest earned on short proceeds *is* the trade. Conversely, a reversal on a [[dividend-arbitrage|dividend-paying]] or hard-to-borrow name can show a "violation" that vanishes once carry is loaded.
+The clean way to see this: a conversion is a **synthetic short position financed by owning the stock**, and a reversal is a **synthetic long financed by shorting the stock**. The options legs lock the price; the cash-and-stock leg generates (or consumes) carry. This is why a reversal on a high-yielding general-collateral name with a steep rate curve can be profitable even when the raw parity spread looks neutral — the interest earned on short proceeds *is* the trade. Conversely, a reversal on a dividend-paying or hard-to-borrow name can show a "violation" that vanishes once carry is loaded.
 
 ## Relationship to the Box Spread
 
@@ -272,14 +272,13 @@ Numerical conditions for standing down (see [[when-to-retire-a-strategy]]):
 | Strategy | Relationship |
 |---|---|
 | [[box-spread]] | A box spread = conversion + reversal at different strikes. Locks in risk-free rate |
-| [[dividend-arbitrage]] | Uses similar put-call parity logic but specifically targets dividend capture |
+| dividend-arbitrage | Uses similar put-call parity logic but specifically targets dividend capture |
 | [[volatility-arbitrage]] | Different mechanism — trades IV vs RV, not parity violations |
 
 ## Related
 
 - [[put-call-parity]] — the pricing identity being arbitraged
 - [[box-spread]] — conversion + reversal combined; the synthetic-rate instrument
-- [[dividend-arbitrage]] — adjacent put-call-parity play targeting dividends
 - [[volatility-arbitrage]] — different mechanism (IV vs RV), not parity
 - [[arbitrage-overview]] — the broader arbitrage family
 - [[options-overview]] — options market context

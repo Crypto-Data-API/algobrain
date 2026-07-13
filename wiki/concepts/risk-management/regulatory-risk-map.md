@@ -52,7 +52,7 @@ The most complex regulatory environment for trading. Multiple agencies with over
 
 | Regulator | Jurisdiction | Relevant Strategies |
 |---|---|---|
-| **SEC** | Securities, equity options, ETFs, security tokens | [[pairs-trading]], [[merger-arbitrage]], [[convertible-arbitrage]], [[etf-arbitrage]], [[statistical-arbitrage]] |
+| **SEC** | Securities, equity options, ETFs, security tokens | [[pairs-trading]], merger-arbitrage, convertible-arbitrage, [[etf-arbitrage]], [[statistical-arbitrage]] |
 | **CFTC** | Futures, commodity options, swaps, crypto derivatives (partially) | [[cash-and-carry]], [[crack-spread]], [[calendar-spread-arbitrage]], commodity arb |
 | **FINRA** | Broker-dealer oversight, pattern day trader rules | All equity strategies |
 | **FinCEN** | Money transmission, AML/KYC | Crypto exchanges, DeFi platforms |
@@ -62,7 +62,7 @@ The most complex regulatory environment for trading. Multiple agencies with over
 **Key US rules affecting arbitrage:**
 
 1. **Pattern Day Trader (PDT) rule:** Accounts under $25,000 are limited to 3 day trades per 5 business days. Affects high-frequency [[cross-exchange-arbitrage]] in equities. Does NOT apply to crypto or futures
-2. **Regulation SHO (short selling):** Short sales must have a "locate" — confirmed borrow availability. Affects [[pairs-trading]], [[merger-arbitrage]], [[statistical-arbitrage]]. Hard-to-borrow stocks may have 20-50%+ annual borrow rates
+2. **Regulation SHO (short selling):** Short sales must have a "locate" — confirmed borrow availability. Affects [[pairs-trading]], merger-arbitrage, [[statistical-arbitrage]]. Hard-to-borrow stocks may have 20-50%+ annual borrow rates
 3. **Wash sale rule (Section 1091):** Cannot deduct a loss on a sale if you repurchase a "substantially identical" security within 30 days. Critical for high-frequency [[pairs-trading]] and [[cross-exchange-arbitrage]] in equities. See [[tax-implications-trading]]
 4. **Accredited investor / QEP requirements:** Some strategies (hedge fund LPs, certain swap agreements) require accredited investor or Qualified Eligible Participant status
 5. **Crypto regulatory uncertainty:** SEC considers many tokens securities. Trading unregistered securities carries enforcement risk. Major cases: SEC vs. Ripple, SEC vs. Coinbase, SEC vs. Binance
@@ -179,7 +179,7 @@ Run this before any strategy that touches a new jurisdiction, venue, or instrume
 - [ ] **Venue licensing** — is every venue licensed in my jurisdiction, or am I relying on geofence-evasion (a red flag)?
 - [ ] **KYC consistency** — can I document fund flows across all venues to a tax authority / compliance officer? (See the KYC table above.)
 - [ ] **Short-selling rules** — locate/borrow availability and cost under [[reg-sho|Reg SHO]]; emergency short-ban exposure?
-- [ ] **Day-trading limits** — does the [[pattern-day-trader-rule|PDT]] $25k threshold bind for equity legs?
+- [ ] **Day-trading limits** — does the PDT $25k threshold bind for equity legs?
 - [ ] **Tax treatment mapped** — wash sale (S.1091), holding-period, franking/withholding (see [[tax-implications-trading]]).
 - [ ] **Reporting thresholds** — 13F / Form 13H / position limits triggered at my intended size?
 - [ ] **Sanctions screening** — OFAC address screening for any on-chain leg (Tornado Cash precedent).
@@ -218,6 +218,6 @@ Related wiki context that contributed framing:
 - [[tax-implications-trading]] — wash sale, franking, withholding, and holding-period detail
 - [[arbitrage-overview]] — the strategy family most exposed to regulatory step-changes
 - [[failure-modes]] — generic strategy-death taxonomy; regulatory risk is one branch
-- [[cross-exchange-arbitrage]], [[funding-rate-arbitrage]], [[flash-loan-arbitrage]], [[mev-strategies]], [[merger-arbitrage]] — strategy pages whose specific regulatory risks are tabled above
+- [[cross-exchange-arbitrage]], [[funding-rate-arbitrage]], [[flash-loan-arbitrage]], [[mev-strategies]], merger-arbitrage — strategy pages whose specific regulatory risks are tabled above
 - [[trading-system-deployment]] — operational deployment that must encode the compliance checks above
 - [[2017-2021-kimchi-premium]] — case study of capital-control-driven arbitrage

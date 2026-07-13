@@ -9,14 +9,14 @@ domain: [portfolio-theory, quantitative]
 difficulty: intermediate
 aliases: ["Tracking Error", "Active Risk", "Tracking Difference"]
 prerequisites: ["[[index-investing]]", "[[volatility]]"]
-related: ["[[etf]]", "[[index-funds]]", "[[etf-vs-mutual-fund-vs-index-fund]]", "[[expense-ratio]]", "[[information-ratio]]", "[[treynor-ratio]]", "[[sharpe-ratio]]", "[[alpha]]", "[[active-vs-passive-investing]]", "[[passive-investing]]", "[[nav]]", "[[etf-arbitrage]]", "[[s-and-p-500]]"]
+related: ["[[etf]]", "[[index-funds]]", "[[expense-ratio]]", "[[information-ratio]]", "[[treynor-ratio]]", "[[sharpe-ratio]]", "[[alpha]]", "[[passive-investing]]", "[[nav]]", "[[etf-arbitrage]]"]
 ---
 
 **Tracking error** measures how closely a fund's returns follow those of its benchmark. Formally, it is the **standard deviation of the difference between the fund's return and the benchmark's return** over a series of periods. For an index fund or [[etf|ETF]], low tracking error is a sign of good replication; for an actively managed fund, tracking error (often called **active risk**) quantifies how far the manager strays from the index in pursuit of [[alpha]].
 
 ## Why it matters
 
-The whole promise of a [[index-funds|passive index fund]] is to deliver the benchmark's return minus a small, known cost. Tracking error tells you whether that promise is being kept. Two funds tracking the same index — say the [[s-and-p-500|S&P 500]] — can charge similar fees yet deliver different real-world results because of how tightly each replicates the index day to day. For active funds, tracking error is the denominator of the **[[information-ratio]]** (active return ÷ tracking error), the standard measure of how efficiently a manager converts deviation from the benchmark into outperformance.
+The whole promise of a [[index-funds|passive index fund]] is to deliver the benchmark's return minus a small, known cost. Tracking error tells you whether that promise is being kept. Two funds tracking the same index — say the S&P 500 — can charge similar fees yet deliver different real-world results because of how tightly each replicates the index day to day. For active funds, tracking error is the denominator of the **[[information-ratio]]** (active return ÷ tracking error), the standard measure of how efficiently a manager converts deviation from the benchmark into outperformance.
 
 ## Tracking error vs. tracking difference
 
@@ -46,7 +46,7 @@ measured over a window (e.g. monthly returns annualised). An alternative regress
 
 ## How it is used
 
-- **Choosing index funds/ETFs.** All else equal, prefer the vehicle with the lowest tracking error *and* lowest [[expense-ratio]] (the two are linked but not identical — see [[etf-vs-mutual-fund-vs-index-fund]]).
+- **Choosing index funds/ETFs.** All else equal, prefer the vehicle with the lowest tracking error *and* lowest [[expense-ratio]] (the two are linked but not identical — see etf-vs-mutual-fund-vs-index-fund).
 - **Evaluating active managers.** A high [[information-ratio]] is more impressive than a high raw return if it is achieved with controlled tracking error. Many institutional mandates cap tracking error (e.g. "no more than 4% active risk").
 - **Risk budgeting.** Tracking error is the natural unit for an "enhanced index" or "core-satellite" portfolio: a tight tracking-error budget around a passive [[index-investing|core]] with active satellites.
 
@@ -64,10 +64,9 @@ Suppose an index ETF posts these monthly return gaps versus its benchmark: +0.02
 ## Related
 
 - [[etf]] · [[index-funds]] — vehicles for which tracking error is the key quality metric
-- [[etf-vs-mutual-fund-vs-index-fund]] — comparison where tracking error is a deciding factor
 - [[expense-ratio]] — a structural driver of tracking error
 - [[information-ratio]] — active return per unit of tracking error
-- [[alpha]] · [[active-vs-passive-investing]] — the active side of the trade-off
+- [[alpha]] · active-vs-passive-investing — the active side of the trade-off
 - [[etf-arbitrage]] — the mechanism that keeps ETF price near [[nav]]
 
 ## Sources

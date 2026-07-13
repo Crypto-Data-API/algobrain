@@ -9,7 +9,7 @@ aliases: ["BERT", "Bidirectional Encoder Representations from Transformers", "be
 domain: [ai-trading]
 difficulty: intermediate
 prerequisites: ["[[transformer-architecture]]", "[[word-embeddings]]"]
-related: ["[[transformer-architecture]]", "[[finbert]]", "[[word-embeddings]]", "[[nlp-overview]]", "[[nlp-sentiment-analysis]]", "[[named-entity-recognition]]", "[[text-classification-finance]]", "[[fine-tuning-llms]]", "[[earnings-call-analysis]]"]
+related: ["[[transformer-architecture]]", "[[finbert]]", "[[word-embeddings]]", "[[nlp-overview]]", "[[nlp-sentiment-analysis]]", "[[named-entity-recognition]]", "[[text-classification-finance]]", "[[fine-tuning-llms]]"]
 ---
 
 BERT (Bidirectional Encoder Representations from Transformers) is a language model introduced by Google in 2018 that learns deep, context-aware representations of text by reading a sentence in both directions at once. It was a watershed in [[nlp-overview|NLP]]: instead of training a bespoke model per task, you pre-train BERT once on a huge unlabeled corpus, then **fine-tune** it on a small labeled dataset for a specific task -- sentiment, classification, entity extraction. In finance this made high-quality text models accessible to teams without massive labeled datasets, and its domain-adapted descendant [[finbert|FinBERT]] became a standard tool for sentiment scoring.
@@ -30,7 +30,7 @@ BERT is an **encoder** (it produces representations; great for *understanding/cl
 ## Trading and Finance Relevance
 
 - **[[nlp-sentiment-analysis|Sentiment]]** -- [[finbert|FinBERT]] (BERT fine-tuned on financial text) classifies news, headlines, and social posts as positive/negative/neutral; the resulting sentiment series feeds news-driven and event-driven signals.
-- **[[earnings-call-analysis|Earnings-call analysis]]** -- classifying management tone (hawkish/dovish, confident/hedging) and detecting guidance changes in transcripts.
+- **Earnings-call analysis** -- classifying management tone (hawkish/dovish, confident/hedging) and detecting guidance changes in transcripts.
 - **[[text-classification-finance|Event and document classification]]** -- routing filings, tagging news by event type (M&A, downgrade, litigation), and triaging urgency.
 - **[[named-entity-recognition|Entity extraction]]** -- pulling companies, tickers, people, and amounts out of unstructured filings and news.
 - **Embeddings** -- BERT sentence embeddings power semantic search and clustering over filings, research notes, and a wiki like this one.
@@ -50,7 +50,6 @@ The practical advantages for trading desks are latency and cost: a fine-tuned en
 - [[word-embeddings]] -- BERT produces contextual embeddings
 - [[nlp-overview]] · [[nlp-sentiment-analysis]] · [[text-classification-finance]] · [[named-entity-recognition]]
 - [[fine-tuning-llms]] -- how BERT is adapted to financial tasks
-- [[earnings-call-analysis]] -- a key application
 
 ## Sources
 

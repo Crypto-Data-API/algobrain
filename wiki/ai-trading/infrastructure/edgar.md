@@ -11,9 +11,7 @@ source_url: "https://www.sec.gov/edgar"
 confidence: high
 related:
   - "[[sec]]"
-  - "[[fundamental-data-sources]]"
   - "[[free-data-sources]]"
-  - "[[fundamental-analysis]]"
   - "[[information-arbitrage]]"
   - "[[event-driven]]"
   - "[[data-sources-overview]]"
@@ -41,7 +39,7 @@ EDGAR (Electronic Data Gathering, Analysis, and Retrieval) is the U.S. [[sec|SEC
 
 ## Trading Use-Cases
 
-- **Fundamental analysis at scale** — pull standardized XBRL facts across the universe via the `frames` API to build screens, factor models, and quality/value metrics ([[fundamental-analysis]], [[fundamental-data-sources]]).
+- **Fundamental analysis at scale** — pull standardized XBRL facts across the universe via the `frames` API to build screens, factor models, and quality/value metrics (fundamental-analysis, fundamental-data-sources).
 - **Event-driven** — monitor 8-Ks for material events, M&A, guidance changes, auditor resignations ([[event-driven]]).
 - **Insider-flow signals** — Form 4 cluster buying/selling.
 - **13F replication / smart-money tracking** — parse institutional holdings each quarter.
@@ -56,9 +54,7 @@ EDGAR (Electronic Data Gathering, Analysis, and Retrieval) is the U.S. [[sec|SEC
 ## Related
 
 - [[sec]] — the regulator that operates EDGAR
-- [[fundamental-data-sources]] — fundamentals catalog
 - [[free-data-sources]] — where EDGAR sits among free feeds
-- [[fundamental-analysis]] — the discipline EDGAR feeds
 - [[event-driven]] — 8-K / Form 4 driven strategies
 - [[information-arbitrage]] — reading filings faster/deeper than the market
 

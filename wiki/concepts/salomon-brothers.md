@@ -28,10 +28,10 @@ Salomon Brothers was a New York investment bank, founded in 1910, that became th
 | **Dominated** | [[us-treasury-bonds|US Treasury]] primary dealing and auctions |
 | **Famous desk** | The Arbitrage Group under [[john-meriwether|John Meriwether]] |
 | **Defining crisis** | [[1991-salomon-treasury-auction-scandal|1991 Treasury auction scandal]] (trader Paul Mozer) |
-| **Rescuer** | [[warren-buffett|Warren Buffett]], largest shareholder, interim chairman (1991–92) |
+| **Rescuer** | Warren Buffett, largest shareholder, interim chairman (1991–92) |
 | **Cultural portrait** | Michael Lewis's *[[liars-poker|Liar's Poker]]* (1989) |
 | **Spin-off lineage** | [[ltcm|Long-Term Capital Management]] (Meriwether + colleagues, 1994) |
-| **End** | Acquired by Travelers (1997) → Salomon Smith Barney → [[citigroup|Citigroup]]; name retired 2003 |
+| **End** | Acquired by Travelers (1997) → Salomon Smith Barney → Citigroup; name retired 2003 |
 
 ## Overview
 

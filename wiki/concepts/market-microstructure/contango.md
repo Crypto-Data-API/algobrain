@@ -71,7 +71,7 @@ So even if oil's spot price is flat for a year, the ETF can lose ~6% purely to [
 - **Contango is not a forecast.** A higher futures price does not mean the market "expects" the spot price to rise; under [[cost-of-carry]] it mostly reflects storage and financing, and the futures price typically converges *down* to spot at expiry.
 - **Roll drag is not guaranteed loss.** If spot rises faster than the roll drag, a long futures position still profits; contango only describes the *carry* component, not the *spot* component, of total return.
 - **Curve shape changes.** Markets flip between contango and [[backwardation]] as inventories and [[convenience-yield]] shift, so a backtest that assumes permanent contango can mislead.
-- **Equity-index and financial futures** sit in mild contango from the [[cost-of-carry|carry]] of interest rates minus [[dividends]]; the storage-cost intuition that dominates physical commodities does not apply.
+- **Equity-index and financial futures** sit in mild contango from the [[cost-of-carry|carry]] of interest rates minus dividends; the storage-cost intuition that dominates physical commodities does not apply.
 
 ## Opposite
 

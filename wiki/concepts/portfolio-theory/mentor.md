@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [education]
 aliases: ["Mentor"]
-related: ["[[mentoring]]"]
+related: []
 ---
 
-See [[mentoring]].
+See mentoring.

@@ -10,7 +10,7 @@ entity_type: exchange
 founded: 1987
 headquarters: "London, United Kingdom"
 website: "https://www.lbma.org.uk"
-related: ["[[gold]]", "[[silver]]", "[[platinum]]", "[[palladium]]", "[[commodities]]", "[[london-metal-exchange]]", "[[world-gold-council]]"]
+related: ["[[gold]]", "[[silver]]", "[[platinum]]", "[[palladium]]", "[[commodities]]", "[[london-metal-exchange]]"]
 ---
 
 # LBMA (London Bullion Market Association)
@@ -88,5 +88,4 @@ The backdrop was a record bull market in the metal: gold broke **$3,000/oz in Ma
 - [[platinum]] — PGM benchmarked by LBMA
 - [[palladium]] — PGM benchmarked by LBMA
 - [[london-metal-exchange]] — sister London metals exchange (base metals)
-- [[world-gold-council]] — gold industry body; works closely with LBMA
 - [[commodities]] — sector overview

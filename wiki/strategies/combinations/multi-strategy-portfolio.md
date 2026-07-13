@@ -37,7 +37,7 @@ A robust multi-strategy portfolio includes 4-6 strategies spanning different ass
 | Strategy | Edge Type | Typical Sharpe | Correlation to Equities |
 |----------|----------|---------------|------------------------|
 | [[trend-following]] (managed futures) | Momentum across markets | 0.5-0.8 | -0.1 to 0.1 |
-| [[equity-long-short]] | Stock selection alpha | 0.6-1.0 | 0.3-0.5 |
+| equity-long-short | Stock selection alpha | 0.6-1.0 | 0.3-0.5 |
 | [[options-income]] (selling premium) | Volatility risk premium | 0.7-1.2 | -0.2 to 0.3 |
 | [[mean-reversion]] / [[stat-arb]] | Short-term price inefficiency | 0.8-1.5 | 0.0-0.2 |
 | [[crypto-funding-rate-arbitrage]] | Basis/funding rate capture | 0.5-1.0 | 0.1-0.3 |

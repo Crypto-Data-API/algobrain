@@ -39,7 +39,7 @@ Build or subscribe to a dashboard tracking these key relationships:
 | Signal | Relationship | Trading Implication |
 |---|---|---|
 | **DXY (Dollar Index) ↔ Crypto** | Inverse correlation (~-0.5 to -0.8) | DXY breaks above resistance → short crypto. DXY breaks down → long crypto |
-| **10Y Treasury Yield ↔ Equity Sectors** | Rising yields → financials outperform, growth/tech underperform | 10Y yield breakout above key level → rotate from [[sector-momentum-screen|tech to financials]] |
+| **10Y Treasury Yield ↔ Equity Sectors** | Rising yields → financials outperform, growth/tech underperform | 10Y yield breakout above key level → rotate from tech to financials |
 | **VIX Term Structure ↔ Market Regime** | Contango (VIX < VIX futures) = calm. Backwardation (VIX > futures) = fear | Backwardation → reduce equity exposure, buy puts, tighten stops |
 | **Credit Spreads (HY-IG) ↔ Risk Assets** | Widening spreads = risk-off incoming | HY spread expansion → fade equity rallies, reduce crypto exposure |
 | **Funding Rates ↔ Crypto Spot** | Extreme positive funding = longs overleveraged | Funding > 0.1%/8hr → expect spot correction within 1-3 days |

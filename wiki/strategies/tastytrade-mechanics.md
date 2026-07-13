@@ -21,10 +21,10 @@ expected_sharpe: 0.5
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 50
 decay_evidence: "VRP has compressed in SPX since the 2010s as more retail and systematic short-vol participants entered. Tastytrade's own 'Market Measures' research has acknowledged regime sensitivity. See [[variance-risk-premium]]."
-related: ["[[tastytrade]]", "[[tom-sosnoff]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put]]", "[[options-premium-selling]]", "[[variance-risk-premium]]", "[[probability-of-profit]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[karen-the-supertrader]]", "[[options-portfolio-construction]]"]
+related: ["[[tom-sosnoff]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put]]", "[[options-premium-selling]]", "[[variance-risk-premium]]", "[[probability-of-profit]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[karen-the-supertrader]]", "[[options-portfolio-construction]]"]
 ---
 
-The tastytrade mechanics are the canonical retail short-volatility playbook popularized by [[tom-sosnoff|Tom Sosnoff]] and the [[tastytrade]] media network: sell 16-30 [[delta]] [[short-strangle|strangles]] (or defined-risk equivalents) at roughly 45 days to expiration, manage winners by closing at 50% of credit received, manage losers (or runners) by closing or rolling at 21 days to expiration, gate entries on [[implied-volatility]] rank, and trade *small and often* across many tickers so the law of large numbers approximates the theoretical [[probability-of-profit|probability of profit]]. The mechanics are mechanical by design — the trader's job is to follow the rules, not to forecast direction — and they are the most-replicated single options playbook in retail trading. They are also genuinely controversial: proponents point to multi-year stretches of [[variance-risk-premium|VRP]]-driven returns, while critics point to negative-skew tail events ([[volmageddon|February 2018]], March 2020, [[vix-august-2024-spike|August 2024]]) that can erase years of theta in days for unhedged practitioners.
+The tastytrade mechanics are the canonical retail short-volatility playbook popularized by [[tom-sosnoff|Tom Sosnoff]] and the tastytrade media network: sell 16-30 [[delta]] [[short-strangle|strangles]] (or defined-risk equivalents) at roughly 45 days to expiration, manage winners by closing at 50% of credit received, manage losers (or runners) by closing or rolling at 21 days to expiration, gate entries on [[implied-volatility]] rank, and trade *small and often* across many tickers so the law of large numbers approximates the theoretical [[probability-of-profit|probability of profit]]. The mechanics are mechanical by design — the trader's job is to follow the rules, not to forecast direction — and they are the most-replicated single options playbook in retail trading. They are also genuinely controversial: proponents point to multi-year stretches of [[variance-risk-premium|VRP]]-driven returns, while critics point to negative-skew tail events ([[volmageddon|February 2018]], March 2020, [[vix-august-2024-spike|August 2024]]) that can erase years of theta in days for unhedged practitioners.
 
 ## Edge Source
 
@@ -226,7 +226,7 @@ Numerical conditions for retiring or pausing the strategy (cross-reference [[whe
 - **Real running income.** Theta is genuinely collected daily in calm regimes; the strategy is not a phantom edge.
 - **Capital-efficient under [[portfolio-margin]].** A $250K account can run a meaningful book of strangles at 10-15% of notional in BPR.
 - **High hit rate.** 70-80% winners is psychologically rewarding and supports adherence.
-- **Education ecosystem.** [[tastytrade]]'s media network, platform, and community provide more retail-accessible education on this playbook than on any other.
+- **Education ecosystem.** tastytrade's media network, platform, and community provide more retail-accessible education on this playbook than on any other.
 - **Combines well with overlays.** The strategy is a clean *core* for the [[long-vol-vs-short-vol|short-vol-core-plus-long-vol-overlay]] construction.
 
 ## Disadvantages
@@ -234,7 +234,7 @@ Numerical conditions for retiring or pausing the strategy (cross-reference [[whe
 - **Negative skew is brutal.** The tail event is not theoretical — it has hit short-vol books in 1987, 1998, 2008, 2018, 2020, and 2024. A trader running the strategy long enough will experience one.
 - **Survivor bias in published results.** Tastytrade's "Market Measures" research and the bulk of online testimonials come from traders and time periods that survived. The blow-ups disappear from the record. See [[karen-the-supertrader]] (the Karen Bruton / KKMFA episode of 2014-2016) as a high-profile case where the same playbook was alleged by the SEC to mask large losses with cherry-picked closed trades.
 - **Sharpe ratio is misleading.** Sharpe assumes Gaussian returns; short-vol violates this catastrophically. A 2.5 Sharpe over five calm years tells you almost nothing about year six. See [[sharpe-ratio-pitfalls]] and [[deflated-sharpe-ratio]].
-- **Education-industrial conflict of interest.** [[tastytrade]] is a brokerage; it has commercial incentive to encourage active trading. The research presented on air is not always reproducible by outside parties.
+- **Education-industrial conflict of interest.** tastytrade is a brokerage; it has commercial incentive to encourage active trading. The research presented on air is not always reproducible by outside parties.
 - **Crowded.** Many retail and institutional players run variations of the same mechanics. Cascade dynamics in shocks are partly endogenous to this crowding.
 - **Behavioral pitfall: the dopamine loop.** Frequent small wins are reinforcing in a way that frequent small losses are not. Retail traders running the strategy unhedged tend to *grow* the book in good times, increasing exposure exactly before the shock arrives.
 - **Edge decay.** The VRP has compressed; future cycles may deliver lower returns.
@@ -251,7 +251,6 @@ Both positions contain substantial truth. The most defensible synthesis is that 
 
 ## Sources
 
-- [[tastytrade]] — primary brokerage and media network teaching the playbook.
 - [[tom-sosnoff]] — primary articulator of the rules.
 - "Market Measures" — tastytrade's in-house research segment, repeatedly comparing 45-DTE vs 30-DTE entries, 50% management vs hold-to-expiration, and IV-rank filter variants.
 - [[karen-the-supertrader]] — Karen Bruton / Hope Advisers / KKMFA case (2014-2016), in which the SEC alleged the same mechanical playbook was used to hide large unrealized losses; a cautionary case for the failure mode of refusing to take losers.
@@ -265,7 +264,6 @@ Both positions contain substantial truth. The most defensible synthesis is that 
 
 ## Related
 
-- [[tastytrade]] — the brokerage and media network
 - [[tom-sosnoff]] — founder and primary articulator
 - [[short-strangle]] — the canonical structure
 - [[iron-condor]] — defined-risk variant

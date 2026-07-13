@@ -236,7 +236,6 @@ Versus the parent [[options-premium-selling]] and the neutral [[iron-condor]], t
 
 ## Sources
 
-- [[tastytrade]] research archive -- credit-spread mechanics and rule-set calibration.
 - [[itpm-framework]] -- the defined-risk discipline overlay.
 - Carr, Peter and Wu, Liuren. "Variance Risk Premiums" (2009).
 - Bondarenko, Oleg. "Why Are Put Options So Expensive?" (2014).
@@ -262,5 +261,4 @@ Versus the parent [[options-premium-selling]] and the neutral [[iron-condor]], t
 - [[iv-crush]] -- the post-event vega tailwind for short-premium spreads.
 - [[theta]] / [[vega]] / [[gamma]] -- the Greeks that define the structure's profile.
 - [[market-regime]] -- regime conditioning for the bullish tilt.
-- [[wash-sale-rules-options]] -- tax interaction when rolling losing spreads on single names.
 - [[itpm-framework]] -- institutional discipline.

@@ -84,11 +84,11 @@ Net income is misleading for Bitdeer; the better lens is operating and asset-bas
 - **EV per EH/s and EV per MW** — versus [[iren]], [[bitfarms]], [[core-scientific]], [[riot-platforms]].
 - **SEALMINER efficiency (J/TH) and external rig/cloud-hash revenue** — the integration premium.
 - **AI/HPC backlog (Tydal energized MW, annualized AI-cloud run-rate)** — the re-rate engine.
-- **Cash + digital-asset holdings vs. share count** — balance-sheet strength against [[dilution]].
+- **Cash + digital-asset holdings vs. share count** — balance-sheet strength against dilution.
 
 ## Trading & Options Playbook
 
-- **Index membership:** not in the [[s-and-p-500]]; mid/small-cap NASDAQ. Appears in crypto-equity / miner ETF baskets.
+- **Index membership:** not in the s-and-p-500; mid/small-cap NASDAQ. Appears in crypto-equity / miner ETF baskets.
 - **Triple narrative:** [[bitcoin]] price, ASIC/SEALMINER execution, and AI data-center buildout — all high-volatility drivers. Net income is noisy due to digital-asset/derivative marks; Adjusted EBITDA and hash-rate/efficiency metrics matter more.
 - **Options profile (Tier 3 - Popular):** moderate, speculative retail options interest; rich IV spiking into earnings and Tydal/SEALMINER milestones. Liquidity thinner than [[iren]]/[[mara]].
 - **BTC correlation:** trades with [[bitcoin]] and the miner cohort; relative-value traders watch BTDR vs. BTC and vs. peers, and vs. the Nvidia/AI-data-center ecosystem.
@@ -97,7 +97,7 @@ Net income is misleading for Bitdeer; the better lens is operating and asset-bas
 
 ## Capital Structure & Dilution Risk
 
-Bitdeer carries a meaningful cash and digital-asset balance, but ASIC manufacturing, mining-fleet refresh, and the AI/HPC buildout are all capital-intensive and tend to be funded with a mix of equity, convertibles, and debt. SPAC-listed miners commonly use ATM programs and convertible notes. Watch share-count trajectory, convertible terms, digital-asset monetization, and the balance between debt and equity funding for Tydal and SEALMINER scale-up. (See [[dilution]].)
+Bitdeer carries a meaningful cash and digital-asset balance, but ASIC manufacturing, mining-fleet refresh, and the AI/HPC buildout are all capital-intensive and tend to be funded with a mix of equity, convertibles, and debt. SPAC-listed miners commonly use ATM programs and convertible notes. Watch share-count trajectory, convertible terms, digital-asset monetization, and the balance between debt and equity funding for Tydal and SEALMINER scale-up. (See dilution.)
 
 ## Risks
 
@@ -106,7 +106,7 @@ Bitdeer carries a meaningful cash and digital-asset balance, but ASIC manufactur
 - **Execution risk** — concentrated across chip design, manufacturing yields, and the AI buildout.
 - **Foundry / supply risk** — SEALMINER depends on advanced foundry access.
 - **AI-pivot timing** — later than contracted leaders ([[iren]], [[core-scientific]]).
-- **Dilution / financing risk** — capital intensity (see [[dilution]]).
+- **Dilution / financing risk** — capital intensity (see dilution).
 - **Jurisdictional risk** — Singapore HQ, Norway data center, global operations add regulatory/FX exposure.
 
 ## Related
@@ -119,7 +119,6 @@ Bitdeer carries a meaningful cash and digital-asset balance, but ASIC manufactur
 - [[implied-volatility]]
 - [[options]]
 - [[options-greeks]]
-- [[dilution]]
 - [[bitfarms]]
 - [[bit-digital]]
 - [[core-scientific]]
@@ -129,14 +128,10 @@ Bitdeer carries a meaningful cash and digital-asset balance, but ASIC manufactur
 - [[cleanspark]]
 - [[cipher-mining]]
 - [[nvidia]]
-- [[nasdaq]]
-- [[s-and-p-500]]
-- [[technology]]
-- [[energy]]
 
 ## Sources
 
 - Bitdeer Q1 2026 results (6-K) — SEC EDGAR (https://www.sec.gov/Archives/edgar/data/0001899123/000121390026056587/ea029029701ex99-1.htm)
 - Q1 2026 results & Tydal AI data center — StockTitan (https://www.stocktitan.net/news/BTDR/bitdeer-reports-unaudited-financial-results-for-the-first-quarter-of-k8x5si3ll86m.html)
 - Verified via WebSearch, 2026-06-10
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)

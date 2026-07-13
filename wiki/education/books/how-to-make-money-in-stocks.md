@@ -6,18 +6,14 @@ updated: 2026-06-21
 status: excellent
 tags: [education, book, technical-analysis, fundamental-analysis, growth-investing, momentum]
 related:
-  - "[[william-oneil]]"
-  - "[[william-o-neil]]"
-  - "[[canslim]]"
   - "[[cup-with-handle]]"
   - "[[cup-and-handle]]"
-  - "[[earnings-momentum]]"
   - "[[momentum]]"
   - "[[breakout-strategies]]"
   - "[[relative-strength]]"
 ---
 
-**How to Make Money in Stocks** by [[william-oneil|William O'Neil]] (4th edition, 2009; first published 1988) is the canonical text for the [[canslim|CAN SLIM]] growth-investing system — a rules-based methodology that fuses [[fundamental-analysis]] and [[technical-analysis]] to identify high-growth stocks at optimal entry points. O'Neil, founder of *Investor's Business Daily* and the popularizer of the [[cup-with-handle]] chart pattern, derived the system from an exhaustive historical study of every major stock-market winner since the 1880s, identifying the characteristics they shared *before* their big advances.
+**How to Make Money in Stocks** by William O'Neil (4th edition, 2009; first published 1988) is the canonical text for the CAN SLIM growth-investing system — a rules-based methodology that fuses fundamental-analysis and [[technical-analysis]] to identify high-growth stocks at optimal entry points. O'Neil, founder of *Investor's Business Daily* and the popularizer of the [[cup-with-handle]] chart pattern, derived the system from an exhaustive historical study of every major stock-market winner since the 1880s, identifying the characteristics they shared *before* their big advances.
 
 ## Key Facts
 
@@ -26,7 +22,7 @@ related:
 | **Author** | William J. O'Neil (1933–2023), founder of *Investor's Business Daily* (IBD) and William O'Neil + Co. |
 | **First published** | 1988 (4th edition, 2009; later editions reprinted by McGraw-Hill) |
 | **Publisher** | McGraw-Hill |
-| **Core framework** | [[canslim|CAN SLIM]] — a seven-letter acronym for the criteria of winning stocks |
+| **Core framework** | CAN SLIM — a seven-letter acronym for the criteria of winning stocks |
 | **Signature pattern** | [[cup-with-handle]] base (also flat base, double bottom, saucer-with-handle) |
 | **Approach** | Hybrid growth/[[momentum]] system: fundamentals filter *what* to buy, technicals time *when* |
 | **Key rule** | Cut every loss at **7–8%** below purchase price, no exceptions |
@@ -40,7 +36,7 @@ The biggest stock-market winners are *not* cheap, contrarian, value plays. They 
 
 ## The CAN SLIM System
 
-Each letter is a screen that a candidate must pass before purchase (see [[canslim]] for the full strategy page):
+Each letter is a screen that a candidate must pass before purchase (see canslim for the full strategy page):
 
 | Letter | Criterion | O'Neil's threshold / guidance |
 |--------|-----------|-------------------------------|
@@ -67,7 +63,7 @@ Each letter is a screen that a candidate must pass before purchase (see [[cansli
 | Concept | Takeaway |
 |---------|----------|
 | Complete system | All seven CAN SLIM criteria must be met — no cherry-picking; discipline over discretion. |
-| Earnings acceleration | Current quarterly EPS ≥ 25% is the floor; acceleration signals expanding advantage ([[earnings-momentum]]). |
+| Earnings acceleration | Current quarterly EPS ≥ 25% is the floor; acceleration signals expanding advantage (earnings-momentum). |
 | Proper bases | Buy breakouts from tight, well-formed bases (5–26+ weeks); never chase extended stocks. |
 | Relative strength | RS rating ≥ 80 — buy leaders, not laggards ([[relative-strength]]). |
 | Volume confirmation | Breakout-day volume ≥ 40–50% above average confirms institutional demand. |
@@ -100,10 +96,7 @@ CAN SLIM is one of the most naturally automatable discretionary systems because 
 
 ## Related
 
-- [[william-oneil]] / [[william-o-neil]] — Founder of *Investor's Business Daily* and creator of CAN SLIM
-- [[canslim]] — The full strategy page for the seven-criteria system
 - [[cup-with-handle]] / [[cup-and-handle]] — O'Neil's signature base pattern and optimal entry point
-- [[earnings-momentum]] — Current and annual earnings acceleration anchor the system
 - [[momentum]] — Relative strength and volume confirmation are momentum signals
 - [[breakout-strategies]] — CAN SLIM is fundamentally a breakout system with fundamental filters
 - [[relative-strength]] — RS rating ≥ 80 is one of the seven CAN SLIM criteria

@@ -161,7 +161,7 @@ No single model dominates. Practitioners often use local volatility for pricing 
 ### Tools
 
 - **[[tradingview-platform|TradingView]]**: Basic IV plots by strike
-- **[[spotgamma|SpotGamma]]**: Dealer-centric surface analysis with gamma/vanna flows
+- **SpotGamma**: Dealer-centric surface analysis with gamma/vanna flows
 - **ORATS**: Professional vol surface analytics, skew metrics, historical surface data
 - **OptionMetrics**: Academic-grade historical surface data (IvyDB)
 - **Bloomberg OVDV**: Institutional standard for vol surface analysis

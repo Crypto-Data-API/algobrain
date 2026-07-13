@@ -12,7 +12,6 @@ difficulty: beginner
 related:
   - "[[volatility]]"
   - "[[volume]]"
-  - "[[fundamental-analysis]]"
   - "[[momentum]]"
   - "[[vix]]"
   - "[[funding-rate]]"
@@ -68,7 +67,6 @@ A recurring failure mode is treating a sentiment indicator as a precise timing t
 - [[momentum]] -- sentiment drives and confirms momentum
 - [[funding-rate]] -- the dominant crypto-perp sentiment proxy
 - [[mean-reversion]] -- the edge that extreme sentiment readings flag
-- [[fundamental-analysis]] -- sentiment can diverge from fundamentals
 - [[signal-vs-noise]] -- why mid-range sentiment carries little information
 - [[behavioral-finance]] -- the framework explaining why sentiment moves prices
 

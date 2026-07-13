@@ -67,6 +67,6 @@ data = requests.get(url, params=params).json()
 - Primary data source for learning [[quantitative-trading]] with a real API
 - Building multi-asset strategy pipelines (stocks + forex + crypto)
 - Technical indicator computation without local libraries
-- Fundamental screening for [[value-investing]] signals
+- Fundamental screening for value-investing signals
 - Macro data ingestion for [[regime-detection]] models
 - Feeding [[backtesting]] engines with clean historical OHLCV data

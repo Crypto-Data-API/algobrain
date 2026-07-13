@@ -6,7 +6,7 @@ updated: 2026-06-17
 status: good
 tags: [forex, markets, currencies]
 aliases: ["Forex", "Foreign Exchange", "FX", "Currency Market", "Currency", "Currencies", "Currency Trading", "FX Trading"]
-related: ["[[global-macro]]", "[[interest-rates]]", "[[central-bank]]", "[[leverage]]", "[[george-soros]]", "[[black-wednesday]]", "[[cls-group]]", "[[last-look]]", "[[cross-currency-basis-swap]]", "[[us-dollar]]", "[[carry-trade]]", "[[currency-hedging]]"]
+related: ["[[global-macro]]", "[[interest-rates]]", "[[central-bank]]", "[[leverage]]", "[[george-soros]]", "[[black-wednesday]]", "[[last-look]]", "[[cross-currency-basis-swap]]", "[[us-dollar]]", "[[carry-trade]]", "[[currency-hedging]]"]
 ---
 
 # Forex Market
@@ -17,7 +17,7 @@ The foreign exchange (forex or FX) market is the largest and most liquid financi
 
 Forex is a decentralized over-the-counter (OTC) market with no central exchange. The interbank market (major banks trading with each other) forms the core, with pricing cascading to institutional clients, brokers, and retail traders. Key participants include [[central-banks]], commercial banks, [[hedge-funds]], corporations hedging international exposure, and retail traders. The 2025 survey data shows a continued rise in the share of trading intermediated by non-bank financial institutions and electronic platforms relative to traditional dealer banks.
 
-Execution mechanics matter as much as price. Most FX trades settle through [[cls-group|CLS]] on a payment-versus-payment basis to neutralize [[settlement-risk|settlement (Herstatt) risk]], and dealer-quoted liquidity is often subject to [[last-look]] — a brief window in which a liquidity provider may reject a trade — whereas exchange-style venues such as [[lmax-exchange]] offer firm, no-last-look execution. The [[cross-currency-basis-swap|cross-currency basis]] embeds the true cost of funding and hedging across currencies.
+Execution mechanics matter as much as price. Most FX trades settle through CLS on a payment-versus-payment basis to neutralize [[settlement-risk|settlement (Herstatt) risk]], and dealer-quoted liquidity is often subject to [[last-look]] — a brief window in which a liquidity provider may reject a trade — whereas exchange-style venues such as [[lmax-exchange]] offer firm, no-last-look execution. The [[cross-currency-basis-swap|cross-currency basis]] embeds the true cost of funding and hedging across currencies.
 
 ## Instruments: Spot, Forward, Swap
 
@@ -43,7 +43,7 @@ FX swaps — not spot — are the single largest segment, because banks and asse
 
 - **Majors** — the seven most liquid pairs, all containing the [[us-dollar|USD]]. They carry the tightest spreads (EUR/USD often <1 pip) and the deepest liquidity.
 - **Minors / crosses** — liquid pairs that exclude the USD (EUR/GBP, EUR/JPY, GBP/JPY). Spreads are wider; many are derived by triangulating two USD legs.
-- **Exotics** — a major paired with an emerging-market currency (USD/TRY, USD/ZAR, USD/MXN, USD/SGD). Spreads can be 10-50x a major's, liquidity is thin, and many fall outside [[cls-group|CLS]] settlement, raising [[settlement-risk]].
+- **Exotics** — a major paired with an emerging-market currency (USD/TRY, USD/ZAR, USD/MXN, USD/SGD). Spreads can be 10-50x a major's, liquidity is thin, and many fall outside CLS settlement, raising [[settlement-risk]].
 
 ## Pips, Lots, and Leverage
 
@@ -71,7 +71,7 @@ The **London-New York overlap (13:00-17:00 GMT)** is the most liquid and volatil
 - **Corporates** — convert revenues and hedge import/export and balance-sheet exposure via [[currency-hedging]].
 - **Asset managers & pensions** — hedge the FX risk of foreign equity and bond holdings; their persistent hedging flows are a major driver of the [[cross-currency-basis-swap|cross-currency basis]].
 - **Hedge funds & CTAs** — express [[global-macro]] views, run the [[carry-trade]], and trade trend/momentum.
-- **Retail traders** — speculate on margin, typically via [[metatrader|MetaTrader]] brokers.
+- **Retail traders** — speculate on margin, typically via MetaTrader brokers.
 
 ## Key Drivers and the Carry Trade
 
@@ -79,7 +79,7 @@ Forex prices are driven by [[interest-rates]] differentials, [[central-bank]] po
 
 ## Why It Matters for Traders
 
-Forex is the purest expression of [[global-macro]] trading. Currency moves affect all other asset classes -- [[stock-markets]], [[commodities]], and [[bond-market|bonds]] all respond to currency dynamics. Understanding forex is essential even for traders who never directly trade currencies. The market's history is dotted with macro landmarks such as [[george-soros|George Soros]] breaking the pound on [[black-wednesday]] (1992).
+Forex is the purest expression of [[global-macro]] trading. Currency moves affect all other asset classes -- stock-markets, [[commodities]], and [[bond-market|bonds]] all respond to currency dynamics. Understanding forex is essential even for traders who never directly trade currencies. The market's history is dotted with macro landmarks such as [[george-soros|George Soros]] breaking the pound on [[black-wednesday]] (1992).
 
 ## Related
 
@@ -88,9 +88,7 @@ Forex is the purest expression of [[global-macro]] trading. Currency moves affec
 - [[currency-hedging]] — why and how foreign exposure is hedged
 - [[covered-interest-rate-parity]] — prices FX forwards and swaps
 - [[settlement-risk]] — the largest gross risk in FX
-- [[cls-group]] — the PvP settlement utility
 - [[global-macro]] — FX as the core macro asset class
-- [[metatrader]] — the dominant retail FX platform
 
 ## Sources
 

@@ -80,13 +80,13 @@ Bitfarms resists a clean earnings multiple (results swing with BTC and HPC capex
 - **All-in power cost (¢/kWh)** — the structural mining margin and colocation cost advantage.
 - **Panther Creek energized MW and HPC contract backlog** — the re-rate engine; the gap between secured (~350 MW) and revenue-producing capacity.
 - **Macquarie facility drawdowns and remaining capacity** — funding the buildout with less equity dilution.
-- **BTC treasury value and share count** — balance-sheet support vs. [[dilution]].
+- **BTC treasury value and share count** — balance-sheet support vs. dilution.
 
 The central question: how much credit does the market give Bitfarms' power for AI/HPC value before any anchor customer is signed?
 
 ## Trading & Options Playbook
 
-- **Index membership:** not in the [[s-and-p-500]]; small-cap NASDAQ/TSX dual-listed. Appears in crypto-equity / miner ETF baskets.
+- **Index membership:** not in the s-and-p-500; small-cap NASDAQ/TSX dual-listed. Appears in crypto-equity / miner ETF baskets.
 - **Pivot re-rating:** the bull case is that megawatts of secured power are worth more as AI/HPC capacity than as Bitcoin mining — Panther Creek milestones and HPC customer/lease announcements are the key swing catalysts.
 - **Options profile (Tier 3 - Popular):** moderate, speculative retail options community; rich IV that spikes into earnings and HPC-milestone windows. Liquidity thinner than [[iren]]/[[mara]], so spreads widen.
 - **BTC correlation:** trades closely with [[bitcoin]] and the miner cohort; relative-value traders watch BITF vs. BTC and vs. peers.
@@ -95,14 +95,14 @@ The central question: how much credit does the market give Bitfarms' power for A
 
 ## Capital Structure & Dilution Risk
 
-Bitfarms has secured up to ~$300M of debt financing from **Macquarie Group** to fund the HPC buildout (with ~$200M remaining on the Macquarie project facility for phase one / phase-two long-lead items), which is favorable because debt funds growth without immediate equity erosion. The company has also highlighted a strategic share buyback. Still, the HPC and mining-fleet buildout is capital-intensive, and bitcoin miners historically rely on equity issuance (ATM programs, convertibles) when BTC is strong. Watch share-count trajectory, the balance between Macquarie debt draws and equity raises, and BTC-treasury monetization. (See [[dilution]].)
+Bitfarms has secured up to ~$300M of debt financing from **Macquarie Group** to fund the HPC buildout (with ~$200M remaining on the Macquarie project facility for phase one / phase-two long-lead items), which is favorable because debt funds growth without immediate equity erosion. The company has also highlighted a strategic share buyback. Still, the HPC and mining-fleet buildout is capital-intensive, and bitcoin miners historically rely on equity issuance (ATM programs, convertibles) when BTC is strong. Watch share-count trajectory, the balance between Macquarie debt draws and equity raises, and BTC-treasury monetization. (See dilution.)
 
 ## Risks
 
 - **BTC price risk** — mining cash flow and sentiment remain bitcoin-correlated.
 - **Execution / timeline risk** — Panther Creek delays directly damage the HPC re-rate.
 - **No anchor HPC customer yet** — pivot is optionality, not contracted revenue.
-- **Dilution / financing risk** — capital intensity; equity raises despite buyback narrative (see [[dilution]]).
+- **Dilution / financing risk** — capital intensity; equity raises despite buyback narrative (see dilution).
 - **Jurisdictional risk** — South American (Paraguay, Argentina) operations add FX/regulatory exposure.
 - **Competitive risk** — better-capitalized peers ([[iren]], [[core-scientific]]) may win HPC customers first.
 - **Power / regulatory risk** — energy-price moves, interconnection delays, data-center scrutiny.
@@ -116,7 +116,6 @@ Bitfarms has secured up to ~$300M of debt financing from **Macquarie Group** to 
 - [[implied-volatility]]
 - [[options]]
 - [[options-greeks]]
-- [[dilution]]
 - [[bitdeer-technologies]]
 - [[bit-digital]]
 - [[core-scientific]]
@@ -125,14 +124,10 @@ Bitfarms has secured up to ~$300M of debt financing from **Macquarie Group** to 
 - [[riot-platforms]]
 - [[cleanspark]]
 - [[cipher-mining]]
-- [[nasdaq]]
-- [[s-and-p-500]]
-- [[technology]]
-- [[energy]]
 
 ## Sources
 
 - Bitfarms HPC pivot & Panther Creek / Macquarie financing — Markets Daily, AInvest (https://www.themarketsdaily.com/2026/01/17/bitfarms-conference-bitf-details-pivot-from-bitcoin-mining-to-ai-data-centers-and-hpc-power-play.html)
 - Bitfarms 6-K filings — SEC EDGAR (https://www.sec.gov/Archives/edgar/data/1812477/000121390026036845/ea028428001ex99-1.htm)
 - Verified via WebSearch, 2026-06-10
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)

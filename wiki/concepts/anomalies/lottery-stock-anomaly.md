@@ -170,7 +170,6 @@ A factor investor runs a monthly MAX sort on the US equity universe.
 ## Strategies That Implement It
 
 - [[low-volatility-anomaly]] — captures part of the lottery effect via volatility filtering
-- [[long-short-equity]] — when shorting lottery names is part of the trade
 - [[multi-factor-portfolio|multi-factor portfolio]] — lottery as a quality screen
 
 ## Sources
@@ -191,7 +190,6 @@ A factor investor runs a monthly MAX sort on the US equity universe.
 - [[low-vol-factor]]
 - [[behavioral-finance]]
 - [[prospect-theory]]
-- [[ipo-underperformance]]
 - [[edge-taxonomy]]
 - [[options-trading-pitfalls]] — the options analogue: buying OTM "lottery tickets"
 - [[skewness]]

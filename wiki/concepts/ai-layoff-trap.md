@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [risk-management, ai-trading, machine-learning, behavioral-finance, education]
 aliases: ["AI Death Spiral", "Falk-Tsoukalas Model", "Automation Death Spiral"]
-related: ["[[citrini-2028-global-intelligence-crisis]]", "[[capital-vs-labor-asymmetry]]", "[[service-sector-multiplier]]", "[[skill-bifurcation]]", "[[wage-compression-vs-job-loss]]", "[[ai-driven-demand-destruction]]", "[[pigouvian-automation-tax]]", "[[systemic-risk]]", "[[tail-risk]]", "[[wharton]]", "[[recession]]", "[[business-cycle]]"]
+related: ["[[citrini-2028-global-intelligence-crisis]]", "[[capital-vs-labor-asymmetry]]", "[[service-sector-multiplier]]", "[[skill-bifurcation]]", "[[wage-compression-vs-job-loss]]", "[[ai-driven-demand-destruction]]", "[[pigouvian-automation-tax]]", "[[systemic-risk]]", "[[tail-risk]]", "[[recession]]", "[[business-cycle]]"]
 domain: [risk-management, behavioral-finance]
 prerequisites: ["[[systemic-risk]]", "[[business-cycle]]"]
 difficulty: advanced
@@ -52,7 +52,7 @@ The model is consistent with [[capital-vs-labor-asymmetry]]: capital captures pr
 ### Stage-1 cuts the market initially rewarded
 
 - **Block (Square)**: 50% workforce cut (10K → 6K) explicitly attributed to AI in fraud detection, risk assessment, customer support — see [[block]]. Stock jumped on announcement.
-- **[[2026-04-meta-ai-layoffs|Meta April 2026]]**: ~10% workforce cut (~8,000 roles) explicitly tied to AI acceleration. Margin-expansion narrative held; stock supported.
+- **Meta April 2026**: ~10% workforce cut (~8,000 roles) explicitly tied to AI acceleration. Margin-expansion narrative held; stock supported.
 - **Klarna (private)**: workforce cut from 5,527 (Dec 2022) to 3,422 (Dec 2024) — ~40% reduction — with an AI customer-service agent (built with OpenAI) replacing ~700 customer-support roles. CEO publicly celebrated as paradigm of "AI replaces workers."
 
 ### The reversal — Klarna unwinds the cuts (2025)
@@ -68,14 +68,14 @@ The reversal was institutionalized in market pricing during 2026:
 | Event | Cut | Reaction | Driver |
 |-------|-----|----------|--------|
 | **IBM Q1 2025 earnings** (Apr 2025) | Tied to ongoing AI restructuring; revenue beat ($14.54B) | Stock **-6.8%** after-hours | Investors flagged consulting / infrastructure declines despite headline beat |
-| **[[2026-02-citrini-tech-selloff\|Citrini "2028 Intelligence Crisis"]]** (Feb 2026) | Sector-wide thesis publication | Broad service-sector selloff, energy +12% YTD | First quantified AI tail-risk scenario |
+| **Citrini "2028 Intelligence Crisis"** (Feb 2026) | Sector-wide thesis publication | Broad service-sector selloff, energy +12% YTD | First quantified AI tail-risk scenario |
 | **April 9, 2026 "SaaSpocalypse" day** | None — pure AI-agent-disruption fear | NET **-12%**, SNOW **-9%**, NOW **-7%**, CRM **-4%** in a single session | Anthropic Mythos / agent-orchestration repricing of seat-license SaaS |
 | **ServiceNow Q1 2026** | None | Beat revenue and op margin, **stock fell 11% intraday** | Multiple compression even on clean prints — "show me" stance |
 | **Salesforce 2026 YTD** | ~1,000 fresh AI-attributed roles | Stock **down ~30% YTD** | Persistent multiple compression; investor doubt on agentic AI uplift |
 | **Duolingo 2025 AI mandate** | Contractor replacement announcement, not a P&L cut | Stock **-38% YTD**, near 52-week low | TikTok-driven user backlash + investor skepticism; CEO walked back AI specific perf-review requirement |
 | **AMD April 2026** | None — AI rev concentration concern | **-17.3% in single day** (worst since 2017) | AI capex peak fears |
 | **Palantir April 2026** | None | **-17% over three days** | High-multiple AI premium repricing |
-| **[[2026-05-08-cloudflare-ai-layoff-selloff\|Cloudflare May 8, 2026]]** | ~1,100 / ~20% workforce | Stock **-24% to ~$195** | **First megacap punished on the cut itself** — gross margin missed (72.8% vs 75.1%) on the same print, confirming [[solow-paradox-2026]] |
+| **Cloudflare May 8, 2026** | ~1,100 / ~20% workforce | Stock **-24% to ~$195** | **First megacap punished on the cut itself** — gross margin missed (72.8% vs 75.1%) on the same print, confirming [[solow-paradox-2026]] |
 
 ### Mechanism — why the market reversed
 
@@ -120,7 +120,6 @@ Each of (1), (2), and (3) is exactly the asymmetry the Wharton model assumes: ca
 - [[recession]]
 - [[crashes]]
 - [[business-cycle]]
-- [[wharton]]
 - [[anthropic]]
 
 ## Sources

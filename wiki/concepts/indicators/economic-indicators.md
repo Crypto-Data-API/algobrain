@@ -81,7 +81,6 @@ Professional traders maintain a weekly economic calendar marking all scheduled r
 - [[money-supply]] — monetary aggregates as leading indicators
 - [[credit-cycle]] — credit spreads as real-time stress indicators
 - [[financial-conditions]] — composite measure of financial ease/tightness
-- [[fundamental-analysis]] — the discipline of trading based on economic data
 - [[sector-rotation]] — using indicators to identify favored sectors
 - [[macro-data-sources]] — where to get the data
 

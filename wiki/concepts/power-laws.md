@@ -49,7 +49,7 @@ A practical diagnostic: plot the survival function on log-log axes. A power law 
 - **Firm sizes and city sizes (Zipf's law)**: a special case where α ≈ 1; the largest firm is roughly twice the second-largest, three times the third, etc. Relevant to index concentration and the dominance of mega-cap stocks.
 - **Wealth and fund AUM**: the Pareto "80/20" principle is a power law; a small fraction of funds and traders capture most of the assets and most of the P&L.
 - **Drawdowns and crashes**: the magnitude of [[market-crash|market crashes]] follows a power law — there is no characteristic "typical" crash size, which is why historical worst-case is a poor bound on future worst-case.
-- **Venture and startup returns**: VC and early-stage [[private-equity]] returns are extreme power laws — a single investment can return the entire fund, which drives the "spray and pray" portfolio logic.
+- **Venture and startup returns**: VC and early-stage private-equity returns are extreme power laws — a single investment can return the entire fund, which drives the "spray and pray" portfolio logic.
 
 ## Trading relevance
 

@@ -11,7 +11,7 @@ timeframe: day
 markets: [stocks, bonds]
 complexity: advanced
 backtest_status: untested
-related: ["[[index-arbitrage]]", "[[structural-forced-selling]]", "[[net-asset-value]]", "[[leveraged-etf-rebalancing]]", "[[s-and-p-500]]"]
+related: ["[[structural-forced-selling]]", "[[net-asset-value]]", "[[leveraged-etf-rebalancing]]"]
 ---
 
 # ETF Arbitrage
@@ -94,7 +94,6 @@ The ETF market has grown to over $10 trillion in assets, and the arbitrage mecha
 - **Leveraged ETF rebalancing:** 3x leveraged ETFs like TQQQ must rebalance daily to maintain their leverage ratio. After a +3% day, TQQQ must buy ~9% more exposure at the close -- creating a predictable, exploitable flow. See [[structural-forced-selling]].
 
 ## See Also
-- [[index-arbitrage]] -- the broader index vs. derivative arbitrage that includes ETF arb
 - [[structural-forced-selling]] -- forced rebalancing flows, including [[leveraged-etf-rebalancing]]
 - [[net-asset-value]] -- the fundamental reference value for ETF pricing
 - [[market-efficiency]] -- the economic principle that ETF arbitrage enforces

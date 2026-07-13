@@ -9,12 +9,12 @@ aliases: ["GOOGLON", "GOOGLon", "Alphabet Ondo"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.ondo.finance/assets/googlon"
-related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[alphabet]]", "[[nasdaq]]", "[[alphabet-xstock]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[real-world-assets]]", "[[tokenized-stocks]]", "[[ondo-finance]]", "[[alphabet-xstock]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # Alphabet Class A (Ondo Tokenized Stock)
 
-**Alphabet Class A (Ondo Tokenized Stock)** (GOOGLON) is a tokenized equity issued by **Ondo Global Markets** ([[ondo-finance|Ondo Finance]]) that tracks the Class A shares of **[[alphabet|Alphabet Inc.]]** — Google's parent — listed on the [[nasdaq|Nasdaq]] as **NASDAQ: GOOGL**. GOOGLON is **not** the underlying stock itself: it is an on-chain wrapper whose value is designed to follow the off-chain GOOGL share, **backed 1:1 by real shares custodied off-chain**. It gives holders economic exposure comparable to holding GOOGL (including the economic effect of any dividends), but **no** shareholder rights. It is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
+**Alphabet Class A (Ondo Tokenized Stock)** (GOOGLON) is a tokenized equity issued by **Ondo Global Markets** ([[ondo-finance|Ondo Finance]]) that tracks the Class A shares of **Alphabet Inc.** — Google's parent — listed on the Nasdaq as **NASDAQ: GOOGL**. GOOGLON is **not** the underlying stock itself: it is an on-chain wrapper whose value is designed to follow the off-chain GOOGL share, **backed 1:1 by real shares custodied off-chain**. It gives holders economic exposure comparable to holding GOOGL (including the economic effect of any dividends), but **no** shareholder rights. It is a [[real-world-assets|real-world asset (RWA)]] token, not an independent cryptocurrency.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -24,7 +24,7 @@ As of 2026-06-21, GOOGLON trades at **$365.07**, ranks **#710** by market capita
 
 ## What GOOGLON actually is
 
-GOOGLON is a **[[tokenization|tokenized]] stock** issued under the **Ondo Global Markets** program — Ondo's framework for bringing tokenized U.S. equities and ETFs on-chain. It is one of two tokenized representations of Alphabet in this wiki; the other is [[alphabet-xstock|GOOGLX]], a [[backed-finance|Backed Finance]] xStock. Same underlying ([[alphabet|Alphabet]] / GOOGL), different issuer and mechanics.
+GOOGLON is a **[[tokenization|tokenized]] stock** issued under the **Ondo Global Markets** program — Ondo's framework for bringing tokenized U.S. equities and ETFs on-chain. It is one of two tokenized representations of Alphabet in this wiki; the other is [[alphabet-xstock|GOOGLX]], a [[backed-finance|Backed Finance]] xStock. Same underlying (Alphabet / GOOGL), different issuer and mechanics.
 
 For GOOGLON, real GOOGL shares are held in custody off-chain and the token is designed to track their value. Two prices coexist:
 
@@ -147,11 +147,10 @@ GOOGLON rides the **tokenized-equities / RWA** narrative — Ondo's push (alongs
 
 ## See Also
 
-- [[alphabet]] — the underlying company (NASDAQ: GOOGL)
 - [[alphabet-xstock]] — alternative GOOGL tokenization via Backed Finance / xStocks
 - [[ondo-finance]] — the issuer
 - [[tokenized-stocks]] · [[real-world-assets]] · [[tokenization]]
-- [[nasdaq]] · [[crypto-markets]] · [[ethereum]]
+- nasdaq · [[crypto-markets]] · [[ethereum]]
 
 ---
 

@@ -13,12 +13,12 @@ source_file: "r2://trader-wiki/transcripts/2019-08-23-woym-ep27-recession-narrat
 confidence: medium
 claims_count: 22
 aliases: ["WOYM Ep27", "What's On Your Mind Episode 27"]
-related: ["[[chris-cathey]]", "[[itpm]]", "[[yield-curve]]", "[[bonds]]", "[[options]]", "[[volatility]]", "[[recession]]"]
+related: ["[[chris-cathey]]", "[[yield-curve]]", "[[bonds]]", "[[options]]", "[[volatility]]", "[[recession]]"]
 ---
 
-Source summary of "What's On Your Mind" Episode 27, a roundtable discussion between [[itpm|ITPM]] senior trading mentors Chris Quill, Jason McDonald, and a third mentor transcribed as "Kathy" (most likely [[chris-cathey]] — the transcription is ambiguous and her contrarian-trade statements below are attributed as the transcript renders them). Recorded August 2019, the episode analyzes the recession narrative, bond market signals, the inverted [[yield-curve]], earnings stagnation outside the US, and contrarian trade ideas. It is a representative example of the ITPM macro analysis process applied in real time.
+Source summary of "What's On Your Mind" Episode 27, a roundtable discussion between ITPM senior trading mentors Chris Quill, Jason McDonald, and a third mentor transcribed as "Kathy" (most likely [[chris-cathey]] — the transcription is ambiguous and her contrarian-trade statements below are attributed as the transcript renders them). Recorded August 2019, the episode analyzes the recession narrative, bond market signals, the inverted [[yield-curve]], earnings stagnation outside the US, and contrarian trade ideas. It is a representative example of the ITPM macro analysis process applied in real time.
 
-**Confidence framing:** This is an [[itpm|ITPM]] educational/marketing video, so the page carries `medium` overall confidence. The *quantitative market-data claims* (bond yields, VIX levels, gold move, earnings/payout figures) are point-in-time observations checkable against contemporaneous market data and are marked [HIGH] where they state a verifiable number. The *interpretive and forward-looking claims* (recession narrative reasoning, "car crash waiting to happen," contrarian trade theses) are mentor opinion as of August 2019, presented here as attributed views rather than established fact — treat them as the speakers' contemporaneous reasoning, not predictions that came true.
+**Confidence framing:** This is an ITPM educational/marketing video, so the page carries `medium` overall confidence. The *quantitative market-data claims* (bond yields, VIX levels, gold move, earnings/payout figures) are point-in-time observations checkable against contemporaneous market data and are marked [HIGH] where they state a verifiable number. The *interpretive and forward-looking claims* (recession narrative reasoning, "car crash waiting to happen," contrarian trade theses) are mentor opinion as of August 2019, presented here as attributed views rather than established fact — treat them as the speakers' contemporaneous reasoning, not predictions that came true.
 
 ## Key Claims
 
@@ -68,12 +68,9 @@ Source summary of "What's On Your Mind" Episode 27, a roundtable discussion betw
 
 ## Entities Mentioned
 
-- [[itpm]] — "What's On Your Mind" series
 - [[chris-cathey]] — Senior Trading Mentor, contrarian trade ideas
 - [[federal-reserve|The Fed]] — insurance cut vs. easing cycle debate
 - [[ecb|ECB]] — deflation concerns, negative rates
-- [[morgan-stanley]] — leading indicator report referenced
-- [[intel]], [[microsoft]], [[comcast]] — specific trade idea names
 
 ## Key Concepts
 
@@ -82,7 +79,6 @@ Source summary of "What's On Your Mind" Episode 27, a roundtable discussion betw
 - [[volatility]] — cross-asset pickup, currency leading equity
 - [[options]] — calls on quality tech as contrarian play
 - [[recession]] — consensus narrative vs. contrarian positioning
-- [[fundamental-analysis]] — leading indicators, PMIs, earnings analysis
 - [[sector-rotation]] — defensive outperforming cyclical
 
 ## Sources

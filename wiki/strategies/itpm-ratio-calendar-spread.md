@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, calendar-spread, itpm, ratio-spread, credit-collection, theta-decay, volatility, swing-trading, long-short-equity]
 aliases: ["ITPM Calendar Spread", "Ratio Calendar Spread", "2:1 Calendar Spread", "ITPM Credit Calendar"]
-related: ["[[calendar-spread]]", "[[ratio-spread]]", "[[itpm]]", "[[anton-kreil]]", "[[long-short-equity]]", "[[trade-repair-and-rolling]]", "[[options-greeks]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[itpm-trade-construction-playbook]]", "[[tail-risk]]", "[[pain-trade]]", "[[diagonal-spread]]", "[[vertical-spread]]"]
+related: ["[[calendar-spread]]", "[[ratio-spread]]", "[[anton-kreil]]", "[[trade-repair-and-rolling]]", "[[options-greeks]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[itpm-trade-construction-playbook]]", "[[tail-risk]]", "[[pain-trade]]", "[[diagonal-spread]]", "[[vertical-spread]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [stocks, options]
@@ -23,7 +23,7 @@ expected_max_drawdown: 0.25
 breakeven_cost_bps: 50
 ---
 
-The ITPM ratio calendar spread is the primary options structure taught by the [[itpm|Institute of Trading and Portfolio Management]] and [[anton-kreil]]. It combines the mechanics of a standard [[calendar-spread]] with a [[ratio-spread]] — buying twice as many longer-dated options as shorter-dated options sold (2:1 ratio) — to create a structure that collects credit income first, then profits from directional moves. It is the core building block of the ITPM [[long-short-equity]] options portfolio, used across bread-and-butter trades, hedges, and tail risk positions.
+The ITPM ratio calendar spread is the primary options structure taught by the Institute of Trading and Portfolio Management and [[anton-kreil]]. It combines the mechanics of a standard [[calendar-spread]] with a [[ratio-spread]] — buying twice as many longer-dated options as shorter-dated options sold (2:1 ratio) — to create a structure that collects credit income first, then profits from directional moves. It is the core building block of the ITPM long-short-equity options portfolio, used across bread-and-butter trades, hedges, and tail risk positions.
 
 ## Edge Source
 
@@ -77,7 +77,7 @@ Under random conditions with no edge, the short leg would lose money as often as
 
 4. **Position sizing** — Net spend per position should be 5-10% of capital during learning, 6-7% during mentoring programs. Never more than 10% in a single position (Source: [[itpm-god-like-trader-status]]).
 
-5. **Portfolio context** — The trade is one of 10 positions (5 longs, 5 shorts) in a balanced [[long-short-equity]] portfolio. Stagger expirations across months to avoid concentration (Source: [[itpm-god-like-trader-status]]).
+5. **Portfolio context** — The trade is one of 10 positions (5 longs, 5 shorts) in a balanced long-short-equity portfolio. Stagger expirations across months to avoid concentration (Source: [[itpm-god-like-trader-status]]).
 
 ### Phase 1: Credit Collection
 
@@ -236,7 +236,7 @@ You need to form a top-down macro view (growth, inflation, central bank trajecto
 
 | Data Need | Free Source | Paid Source | Notes |
 |-----------|------------|-------------|-------|
-| GDP, CPI, employment, rates | [[fred\|FRED]] / [[alfred\|ALFRED]] (vintage) | Bloomberg, Refinitiv | ALFRED provides point-in-time releases — critical for understanding what the market *knew* at the time |
+| GDP, CPI, employment, rates | [[fred\|FRED]] / ALFRED (vintage) | Bloomberg, Refinitiv | ALFRED provides point-in-time releases — critical for understanding what the market *knew* at the time |
 | Central bank decisions & dot plots | Fed website, ECB, BOJ | Bloomberg | Free and timely; paid adds structured feeds |
 | Sector relative strength (1/3/6/12mo) | `yfinance` sector ETFs (XLK, XLF, XLE, etc.) | Koyfin ($25/mo), Bloomberg | Calculate relative strength vs SPY yourself from free ETF data |
 | AAII sentiment, CNN Fear & Greed | AAII website (free), CNN website | — | Manual collection; useful as contrarian timing overlay |
@@ -246,14 +246,14 @@ You need to form a top-down macro view (growth, inflation, central bank trajecto
 
 ### Stage 3-4: Stock Selection & Fundamental Analysis
 
-The ITPM approach is 80% fundamental / 20% technical. You need financial statements, analyst estimates, and earnings calendars. See [[fundamental-data-sources]] for full details.
+The ITPM approach is 80% fundamental / 20% technical. You need financial statements, analyst estimates, and earnings calendars. See fundamental-data-sources for full details.
 
 | Data Need | Free Source | Paid Source | Notes |
 |-----------|------------|-------------|-------|
 | Income statement, balance sheet, cash flow | SEC EDGAR (raw XBRL), Yahoo Finance | Sharadar SF1 ($150-$400/mo), Koyfin ($25/mo) | Fred's benchmarks (PE < 20, ROE > 13.4%, D/E < 0.5) require clean fundamentals. Yahoo is fine for discretionary screening; Sharadar for point-in-time backtesting |
 | Analyst EPS estimates & revisions | — | IBES/Refinitiv, FactSet, Visible Alpha | Critical for PEAD-style catalysts. No good free source exists |
 | Earnings calendar (dates) | Earnings Whispers (free), Yahoo Finance | Bloomberg, broker platforms | Know *exactly* when to time your short and long expirations around catalysts |
-| Short interest | FINRA (delayed 2x/month) | Ortex ($50/mo), S3 Partners | Identifies pain trade candidates (high SI + improving fundamentals, like the [[carvana]] trade) |
+| Short interest | FINRA (delayed 2x/month) | Ortex ($50/mo), S3 Partners | Identifies pain trade candidates (high SI + improving fundamentals, like the carvana trade) |
 | Insider transactions (SEC Form 4) | OpenInsider (free), SEC EDGAR | InsiderInsights | Confirms management conviction; aligns with fundamental thesis |
 | 13F institutional holdings | WhaleWisdom (free), Fintel | S&P Capital IQ | Shows institutional positioning; useful for identifying crowded trades |
 
@@ -274,7 +274,7 @@ The ITPM approach is 80% fundamental / 20% technical. You need financial stateme
 
 ### Stage 6-7: Options Chain Data & Structuring
 
-This is the most critical data domain. You need real-time options chains with greeks to structure the ratio calendar spread. See [[options-data-sources]] for full details.
+This is the most critical data domain. You need real-time options chains with greeks to structure the ratio calendar spread. See options-data-sources for full details.
 
 | Data Need | Free Source | Paid Source | Notes |
 |-----------|------------|-------------|-------|
@@ -314,7 +314,7 @@ The broker IS the primary data source for live trading. ITPM recommends specific
 
 *Research sourced from Perplexity Deep Research (60 sources, April 2026) cross-referenced with Tiger Brokers and TradeStation official documentation.*
 
-[[tiger-brokers|Tiger Brokers]] (itiger.com) is a viable alternative for traders in **Singapore, Australia, Hong Kong, and New Zealand** who may not have access to TradeStation or ThinkOrSwim. It supports US options trading with 18 built-in multi-leg strategies, but has meaningful limitations for the ITPM ratio calendar spread methodology.
+Tiger Brokers (itiger.com) is a viable alternative for traders in **Singapore, Australia, Hong Kong, and New Zealand** who may not have access to TradeStation or ThinkOrSwim. It supports US options trading with 18 built-in multi-leg strategies, but has meaningful limitations for the ITPM ratio calendar spread methodology.
 
 #### Commission Comparison (All-In Per Contract)
 
@@ -556,7 +556,7 @@ Total time: 1-2 hours/day during active management, less when no new trades are 
 
 ### Example 1: TLT Hedge (November-December 2022)
 
-**Context:** In Q4 2022, [[anton-kreil]] identified that the October market bottom was being missed by bearish consensus. He set up a tactical hedge on [[tlt|TLT]] (iShares 20+ Year Treasury Bond ETF) to protect against a rally that would hurt short positions.
+**Context:** In Q4 2022, [[anton-kreil]] identified that the October market bottom was being missed by bearish consensus. He set up a tactical hedge on TLT (iShares 20+ Year Treasury Bond ETF) to protect against a rally that would hurt short positions.
 
 | Component | Detail |
 |-----------|--------|
@@ -577,7 +577,7 @@ The 30 short Dec calls expire worthless — credit banked. Then all 60 long Jan 
 
 ### Example 2: Credit Suisse Bankruptcy Trade (December 2022 - March 2023)
 
-**Context:** A tail risk trade structured around the deteriorating fundamentals of [[credit-suisse]]. The ADR was trading around $3.30 with mounting concerns about the bank's solvency.
+**Context:** A tail risk trade structured around the deteriorating fundamentals of credit-suisse. The ADR was trading around $3.30 with mounting concerns about the bank's solvency.
 
 | Component | Detail |
 |-----------|--------|
@@ -628,7 +628,7 @@ The 30 short Dec calls expire worthless — credit banked. Then all 60 long Jan 
 
 ### Example 5: Carvana Pain Trade (May 2023)
 
-**Context:** A [[pain-trade]] — a contrarian position exploiting consensus positioning where fundamentals have changed. [[carvana|Carvana]] had fallen 99% from $350 to ~$15. Short interest was 40%+ of float. Market sentiment was extremely bearish — consensus expected bankruptcy. But fundamentals were quietly turning: the company was restructuring debt and showing early signs of operational improvement.
+**Context:** A [[pain-trade]] — a contrarian position exploiting consensus positioning where fundamentals have changed. Carvana had fallen 99% from $350 to ~$15. Short interest was 40%+ of float. Market sentiment was extremely bearish — consensus expected bankruptcy. But fundamentals were quietly turning: the company was restructuring debt and showing early signs of operational improvement.
 
 | Component | Detail |
 |-----------|--------|
@@ -778,7 +778,7 @@ If any two criteria are met simultaneously, pause trading and review the process
 - **Credit income stabilizes the equity curve** — $8K/month average in Phil Klein's case, regardless of directional success
 - **Defined risk** — Maximum loss is always the net debit paid. No margin calls, no unlimited risk (unlike naked [[ratio-spread]]s)
 - **Time agnosticism** — The 2:1 ratio means the trade profits whether the move happens before or after the short leg expires. If it moves early, net long contracts profit. If it moves late, the full long position profits after credit collection
-- **Portfolio synergy** — Works across bullish, bearish, and hedging contexts within a single [[long-short-equity]] framework
+- **Portfolio synergy** — Works across bullish, bearish, and hedging contexts within a single long-short-equity framework
 - **Compounding engine** — Monthly credit realization creates a compounding curve even with sub-60% win rates
 - **Can be done part-time** — Philip Klein ran this strategy alongside a full-time project management job in Austrian aviation (Source: [[itpm-master-compounding]])
 
@@ -863,7 +863,7 @@ The short leg can be assigned if it goes deep in-the-money before expiration:
 
 ### The Raj Malhotra Insight
 
-[[raj-malhotra]], ITPM senior mentor and former head of institutional options at [[bank-of-america]], provides a critical nuance on vol timing:
+[[raj-malhotra]], ITPM senior mentor and former head of institutional options at bank-of-america, provides a critical nuance on vol timing:
 
 > "There's a difference between being low and being cheap. When vol is low, doesn't make it cheap. Usually when vol is high, that's when it's cheap. And when it's low, that's when it's expensive."
 
@@ -922,7 +922,6 @@ The process becomes automatic. Trade construction flows naturally from macro vie
 - [[ratio-spread]] — Same-expiry ratio structure (different risk profile — unlimited risk on one side)
 - [[diagonal-spread]] — Calendar spread variant with different strikes (sometimes called "poor man's covered call")
 - [[itpm-trade-construction-playbook]] — The full 11-stage workflow for producing trades
-- [[long-short-equity]] — The portfolio framework this strategy operates within
 - [[trade-repair-and-rolling]] — How to manage losing positions
 - [[edge-taxonomy]] — Classification of trading edges
 - [[implied-volatility]] — The pricing variable that drives calendar spread profitability
@@ -932,4 +931,3 @@ The process becomes automatic. Trade construction flows naturally from macro vie
 - [[compounding]] — How monthly credit realization compounds the equity curve
 - [[vertical-spread]] — The 1:1 same-expiration alternative used for high-conviction catalysts
 - [[pain-trade]] — Contrarian trades exploiting consensus positioning (Carvana example)
-- [[carvana]] — Subject of the pain trade example

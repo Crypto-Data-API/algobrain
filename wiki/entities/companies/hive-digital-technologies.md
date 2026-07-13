@@ -20,13 +20,12 @@ market_cap_tier: "Small Cap"
 related:
   - "[[iren]]"
   - "[[core-scientific]]"
-  - "[[applied-digital]]"
   - "[[riot-platforms]]"
   - "[[ai-data-center-power-demand]]"
   - "[[situational-awareness-lp]]"
 ---
 
-HIVE Digital Technologies Ltd. (NASDAQ: HIVE) is a Canadian-listed digital infrastructure company that historically operated as HIVE Blockchain — one of the first publicly listed Bitcoin and Ethereum miners — and rebranded in 2024 to reflect a broader AI / HPC infrastructure strategy. The company operates data centres in Sweden, Iceland, Canada, and (since 2024-2025, now its largest growth vector) Paraguay, with renewable energy access and is part of the **HPC-pivot miner cohort** alongside [[iren|IREN]], [[core-scientific|CORZ]], [[applied-digital|APLD]], and [[riot-platforms|RIOT]] — public miners whose value is increasingly framed around physical data centre and power capacity rather than Bitcoin economics. HIVE was a new long position initiated by [[situational-awareness-lp|Situational Awareness LP]] per the late May 2026 13F filings; sizing was not specifically disclosed but indicated to be a niche initiation alongside [[sharon-ai-holdings|SHAZ]] and [[t1-energy|T1 Energy]].
+HIVE Digital Technologies Ltd. (NASDAQ: HIVE) is a Canadian-listed digital infrastructure company that historically operated as HIVE Blockchain — one of the first publicly listed Bitcoin and Ethereum miners — and rebranded in 2024 to reflect a broader AI / HPC infrastructure strategy. The company operates data centres in Sweden, Iceland, Canada, and (since 2024-2025, now its largest growth vector) Paraguay, with renewable energy access and is part of the **HPC-pivot miner cohort** alongside [[iren|IREN]], [[core-scientific|CORZ]], APLD, and [[riot-platforms|RIOT]] — public miners whose value is increasingly framed around physical data centre and power capacity rather than Bitcoin economics. HIVE was a new long position initiated by [[situational-awareness-lp|Situational Awareness LP]] per the late May 2026 13F filings; sizing was not specifically disclosed but indicated to be a niche initiation alongside SHAZ and T1 Energy.
 
 > **Disambiguation:** This page covers HIVE Digital Technologies (NASDAQ: HIVE) — a publicly listed AI / HPC company. The wiki also has pages on the **Hive blockchain** ([[hive]]) and **Hive Dollar** ([[hive_dollar]]) which are unrelated cryptocurrency projects.
 
@@ -47,14 +46,14 @@ The pivot value proposition: **the same renewable-powered Nordic data centres th
 HIVE runs two engines on a shared base of renewable-powered, owned data-centre capacity:
 
 - **Bitcoin mining (the cash-flowing core, scaling in Paraguay).** Self-mining converts low-cost hydro/renewable power into hashrate into BTC. Unit economics turn on **fleet efficiency (J/TH)**, **all-in power cost ($/kWh)**, and **hash price** (BTC price × network difficulty). HIVE's Paraguay hydro buildout (Yguazú/Valenzuela) is its main hashrate-growth vector, taking installed capacity toward the mid-30s EH/s. Post-[[bitcoin-halving|halving]], driving down J/TH and $/kWh is what protects margin. See [[bitcoin-mining]] and [[hash-rate]].
-- **BUZZ HPC (AI cloud / hosting, the re-rating engine).** Rather than only leasing shells, HIVE also operates an **AI cloud** (BUZZ), deploying GPUs (e.g., Nvidia B200) and selling compute on contract — a more operator-like model than the pure-landlord peers ([[applied-digital]], [[core-scientific]]). Per-MW economics for AI are materially better than mining, with longer durations and stronger counterparties, which is the basis for the re-rating from a mining multiple to a data-centre/compute multiple.
+- **BUZZ HPC (AI cloud / hosting, the re-rating engine).** Rather than only leasing shells, HIVE also operates an **AI cloud** (BUZZ), deploying GPUs (e.g., Nvidia B200) and selling compute on contract — a more operator-like model than the pure-landlord peers (applied-digital, [[core-scientific]]). Per-MW economics for AI are materially better than mining, with longer durations and stronger counterparties, which is the basis for the re-rating from a mining multiple to a data-centre/compute multiple.
 - **The scarce asset: owned, renewable, low-cost power.** HIVE's European (Sweden/Iceland) and Paraguayan (hydro) footprint is its differentiator — clean baseload that is increasingly valuable as European sovereign-AI and global AI power demand grows. The trade-off is **smaller US market access** than the US-listed peers.
 
-The throughline matches the cohort ([[iren]], [[core-scientific]], [[applied-digital]], [[riot-platforms]], [[hut-8]], [[terawulf]], [[mara]]): use mining as the cash-flowing bridge while migrating toward selling AI compute/capacity. HIVE's distinctive angle is running its *own* AI cloud (BUZZ) on a *renewable* power base.
+The throughline matches the cohort ([[iren]], [[core-scientific]], applied-digital, [[riot-platforms]], [[hut-8]], [[terawulf]], [[mara]]): use mining as the cash-flowing bridge while migrating toward selling AI compute/capacity. HIVE's distinctive angle is running its *own* AI cloud (BUZZ) on a *renewable* power base.
 
 ## Positioning vs HPC-pivot peers
 
-| Metric | HIVE | [[iren\|IREN]] | [[core-scientific\|CORZ]] | [[applied-digital\|APLD]] | [[riot-platforms\|RIOT]] |
+| Metric | HIVE | [[iren\|IREN]] | [[core-scientific\|CORZ]] | APLD | [[riot-platforms\|RIOT]] |
 |---|---|---|---|---|---|
 | Geography | Sweden / Iceland / Canada | Australia / US | US | US | US |
 | Power source | Renewable-heavy | Renewable-heavy | Grid mix | Grid mix | Grid mix |
@@ -76,7 +75,7 @@ Figures from company releases; HIVE's fiscal year ends March 31. Not covered by 
 
 - Dual-listed (NASDAQ: HIVE; TSX.V heritage); small-cap with high beta to [[bitcoin]] and to the AI-infrastructure trade; options exist but are thin relative to [[riot-platforms]] or [[core-scientific]].
 - Catalysts: monthly production updates, quarterly results (June/Sept/Dec/Feb), Paraguay energization milestones, BUZZ HPC GPU contract announcements, BTC halving-cycle economics.
-- Trades in a cohort basket with [[iren]], [[applied-digital]], [[cipher-mining]], [[hut-8]] — dispersion trades within the HPC-pivot cohort are common.
+- Trades in a cohort basket with [[iren]], applied-digital, [[cipher-mining]], [[hut-8]] — dispersion trades within the HPC-pivot cohort are common.
 
 ## Bull vs Bear Case
 
@@ -90,7 +89,7 @@ Figures from company releases; HIVE's fiscal year ends March 31. Not covered by 
 - Smaller scale and thinner liquidity than US-listed peers ([[riot-platforms]], [[core-scientific]]) — more volatility, less institutional sponsorship, options are thin.
 - Heavy crypto-cycle residual: mining revenue still tracks BTC/ETH cycles, so it remains a high-beta [[bitcoin]] name.
 - Paraguay expansion is capex-heavy (large accelerated depreciation already hitting GAAP results) and execution-dependent.
-- HPC-pivot/BUZZ targets are subject to GPU deployment timing and AI-demand conditions; the same [[ai-capex-vs-cash-flow-divergence|AI capex divergence]] risk applies.
+- HPC-pivot/BUZZ targets are subject to GPU deployment timing and AI-demand conditions; the same AI capex divergence risk applies.
 - Geographic dispersion adds regulatory and operational complexity.
 
 ## Valuation Framework (qualitative)
@@ -109,7 +108,7 @@ HIVE defies a single multiple; the market weighs several axes (no specific multi
 - **Small-cap, high-beta dual exposure.** HIVE trades on *both* [[bitcoin]] price and the AI-infrastructure theme, with the amplified moves of a small-cap; dual-listed (NASDAQ: HIVE; TSX.V heritage).
 - **Thinner options than peers.** Options exist but are thin relative to [[riot-platforms]] or [[core-scientific]] — wider spreads, less depth; size and slippage matter more here. See [[implied-volatility]] and [[options-greeks]].
 - **Catalysts to trade around:** monthly production updates, quarterly results (fiscal-year ends March; reports ~June/Sept/Dec/Feb), Paraguay energization milestones, BUZZ HPC GPU-contract announcements, and BTC [[bitcoin-halving|halving]]/hash-price economics.
-- **Basket / dispersion behavior:** trades in a cohort basket with [[iren]], [[applied-digital]], [[cipher-mining]], [[hut-8]], and the broader miner-to-AI group ([[core-scientific]], [[terawulf]], [[mara]], [[riot-platforms]]); dispersion trades (long the lease/ARR leaders vs the laggards) are common within the cohort.
+- **Basket / dispersion behavior:** trades in a cohort basket with [[iren]], applied-digital, [[cipher-mining]], [[hut-8]], and the broader miner-to-AI group ([[core-scientific]], [[terawulf]], [[mara]], [[riot-platforms]]); dispersion trades (long the lease/ARR leaders vs the laggards) are common within the cohort.
 
 ## Capital Structure & Dilution Risk
 
@@ -120,7 +119,7 @@ HIVE defies a single multiple; the market weighs several axes (no specific multi
 
 ## Notable positioning
 
-- **[[situational-awareness-lp|Situational Awareness LP]]**: new long position initiated late May 2026; sized as niche initiation. (Source: [[2026-05-31-aschenbrenner-13f-snapshot]])
+- **[[situational-awareness-lp|Situational Awareness LP]]**: new long position initiated late May 2026; sized as niche initiation. (Source: 2026-05-31-aschenbrenner-13f-snapshot)
 
 ## Risk profile
 
@@ -128,25 +127,23 @@ HIVE defies a single multiple; the market weighs several axes (no specific multi
 - **Crypto-cycle residual exposure** — HIVE's mining revenue still tracks BTC/ETH cycles
 - **HPC-pivot execution risk** — converting mining facilities to AI HPC requires different power densities, cooling, networking; not all facilities convert cleanly
 - **Geographic dispersion** can create regulatory and operational complexity
-- **Same [[ai-capex-vs-cash-flow-divergence|AI capex divergence]] cycle risk** if hyperscaler customer demand softens
+- **Same AI capex divergence cycle risk** if hyperscaler customer demand softens
 
 ## Related
 
-- [[iren]], [[core-scientific]], [[applied-digital]], [[riot-platforms]] — HPC-pivot miner cohort
+- [[iren]], [[core-scientific]], applied-digital, [[riot-platforms]] — HPC-pivot miner cohort
 - [[mara]], [[hut-8]], [[terawulf]], [[cipher-mining]] — broader miner-to-AI cohort / basket peers
 - [[bitcoin]] — primary beta driver
 - [[microstrategy]] — correlated crypto-treasury sentiment
 - [[data-center]] — infrastructure layer
 - [[ai-data-center-power-demand]] — demand-side framework
-- [[ai-capex-vs-cash-flow-divergence]] — cycle framework
 - [[situational-awareness-lp]] — notable holder
-- [[aschenbrenner-bifurcated-ai-thesis]] — thesis that includes HIVE long
 - [[hive]] — disambiguation (Hive blockchain, unrelated)
 - [[hive_dollar]] — disambiguation (Hive Dollar stablecoin, unrelated)
 
 ## Sources
 
-- (Source: [[2026-05-31-aschenbrenner-13f-snapshot]])
+- (Source: 2026-05-31-aschenbrenner-13f-snapshot)
 - HIVE FY2026 results ($297.8M revenue, +158% YoY): https://www.hivedigitaltechnologies.com/news/hive-achieves-fy2026-total-revenue-of-2978-million-158-yoy-hives-buzz-hpc-positioned-for-growth/ — Verified via web search, 2026-06-10
 - HIVE Q3 FY2026 record revenue release: https://www.hivedigitaltechnologies.com/news/hive-delivers-record-q3-revenue-of-931-million-with-321-million-gross-operating-margin-up-over-6x-year-over-year/
 - HIVE SEC filings (6-K/8-K, FY2026): https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001720424

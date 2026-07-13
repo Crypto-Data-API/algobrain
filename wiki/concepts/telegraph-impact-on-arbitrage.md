@@ -9,7 +9,7 @@ aliases: ["Transatlantic Cable Arbitrage", "Telegraph and Markets"]
 domain: [market-microstructure, history, arbitrage]
 prerequisites: ["[[arbitrage]]", "[[market-microstructure]]"]
 difficulty: intermediate
-related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[mint-parity-arbitrage]]", "[[rothschild-family]]", "[[baring-brothers]]", "[[shipping-certificate-arbitrage]]", "[[grain-futures-basis-arbitrage]]", "[[historical-cable-arbitrage]]", "[[covered-interest-arbitrage]]", "[[latency-arbitrage]]", "[[hft]]", "[[liverpool-cotton-exchange]]", "[[chicago-board-of-trade]]", "[[colocation]]"]
+related: ["[[gold-point-arbitrage]]", "[[specie-flow-arbitrage]]", "[[bill-broking-arbitrage]]", "[[mint-parity-arbitrage]]", "[[shipping-certificate-arbitrage]]", "[[grain-futures-basis-arbitrage]]", "[[historical-cable-arbitrage]]", "[[covered-interest-arbitrage]]", "[[latency-arbitrage]]", "[[hft]]", "[[liverpool-cotton-exchange]]", "[[chicago-board-of-trade]]", "[[colocation]]"]
 ---
 
 # Telegraph Impact on Arbitrage
@@ -22,7 +22,7 @@ Before the telegraph, cross-market prices were linked only through the physical 
 
 - **Sailing packet ships** carried newspapers, price lists, and private letters across the Atlantic in **12-14 days** under favorable winds; 18-30 days against the wind. The Black Ball Line (founded 1818) operated the first scheduled New York-Liverpool packet service.
 - **Signal towers and semaphore chains** (e.g. Paris-Lille optical telegraph, 1794) moved short messages ~200 miles in 10 minutes during daylight under clear skies — but capacity was tiny.
-- **Carrier pigeons** gave the [[rothschild-family]] a reputed information edge ahead of public dispatches.
+- **Carrier pigeons** gave the rothschild-family a reputed information edge ahead of public dispatches.
 
 The result was that London and New York often quoted the same asset (e.g. US Treasury bonds, cotton, sterling) at prices 0.5%-3% apart, with the spread closing only after the next packet arrived. Merchants who financed cross-Atlantic trade effectively held 12-30 day information-risk positions.
 
@@ -68,7 +68,7 @@ Peter Garbade and William Silber's influential 1978 paper (Journal of Finance) s
 
 **Winners:**
 
-- Firms with **capital, credit lines, and representation in both cities** could execute the arbitrage: [[rothschild-family]], [[baring-brothers]], Brown Brothers, J.P. Morgan's predecessors.
+- Firms with **capital, credit lines, and representation in both cities** could execute the arbitrage: rothschild-family, baring-brothers, Brown Brothers, J.P. Morgan's predecessors.
 - Exchanges with fast internal infrastructure — NYSE, [[liverpool-cotton-exchange]], [[chicago-board-of-trade]].
 - Newswire services (Reuters, founded 1851; AP; Dow Jones, 1882).
 
@@ -76,7 +76,7 @@ Peter Garbade and William Silber's influential 1978 paper (Journal of Finance) s
 
 - Provincial brokers whose edge was purely geographic.
 - Sailing packet operators (displaced as information carriers; freight-only after 1870).
-- Merchant banks that failed to invest in cable access — notably contributing to the [[overend-gurney]] collapse in 1866, whose discount-rate arbitrage model depended on informational asymmetry that was evaporating.
+- Merchant banks that failed to invest in cable access — notably contributing to the overend-gurney collapse in 1866, whose discount-rate arbitrage model depended on informational asymmetry that was evaporating.
 
 ## The Death of Geographic Arb as a Repeating Pattern
 
@@ -108,8 +108,6 @@ The lesson for traders: **any [[latency-arbitrage]] edge decays monotonically as
 - [[specie-flow-arbitrage]]
 - [[bill-broking-arbitrage]]
 - [[mint-parity-arbitrage]]
-- [[rothschild-family]]
-- [[baring-brothers]]
 - [[shipping-certificate-arbitrage]]
 - [[grain-futures-basis-arbitrage]]
 - [[historical-cable-arbitrage]]

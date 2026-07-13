@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 2007
 headquarters: "Washington, D.C., USA"
 website: "https://www.finra.org"
-related: ["[[sec]]", "[[occ]]", "[[options-disclosure-document]]", "[[pattern-day-trader-rule]]", "[[options-approval-levels]]", "[[regulation]]", "[[interactive-brokers]]", "[[robinhood]]", "[[charles-schwab]]", "[[etrade]]", "[[tastytrade]]", "[[webull]]"]
+related: ["[[sec]]", "[[occ]]", "[[regulation]]", "[[robinhood]]"]
 ---
 
 # FINRA (Financial Industry Regulatory Authority)
@@ -41,8 +41,8 @@ FINRA's rulebook contains several rules of direct relevance to options traders:
 
 | Rule | Subject | Trader Impact |
 |------|---------|---------------|
-| **Rule 2360** | Options | Governs broker-dealer options activity. Requires firms to assign customers an [[options-approval-levels|options approval level]] (commonly Level 1-4 or 1-5 depending on broker) before allowing them to trade options. Mandates delivery of the [[options-disclosure-document|Options Disclosure Document (ODD)]] before account approval. |
-| **Rule 4210** | Margin Requirements | Sets minimum margin requirements for equity, options, and security futures positions. Includes the **[[pattern-day-trader-rule|Pattern Day Trader (PDT) rule]]**: any margin account that executes 4 or more day trades within 5 business days must maintain minimum equity of $25,000. |
+| **Rule 2360** | Options | Governs broker-dealer options activity. Requires firms to assign customers an options approval level (commonly Level 1-4 or 1-5 depending on broker) before allowing them to trade options. Mandates delivery of the Options Disclosure Document (ODD) before account approval. |
+| **Rule 4210** | Margin Requirements | Sets minimum margin requirements for equity, options, and security futures positions. Includes the **Pattern Day Trader (PDT) rule**: any margin account that executes 4 or more day trades within 5 business days must maintain minimum equity of $25,000. |
 | **Rule 5310** | Best Execution and Interpositioning | Requires brokers to use reasonable diligence to obtain the best market for customer orders given prevailing conditions. Underpins debates over [[payment-for-order-flow]] and order routing. |
 | **Rule 2111** | Suitability | Requires reasonable basis to believe a recommended transaction or strategy is suitable for the customer based on their investment profile. Largely subsumed by SEC's [[regulation|Regulation Best Interest]] (Reg BI) for retail recommendations as of 2020, but the FINRA suitability rule still applies in institutional and non-recommendation contexts. |
 | **Rule 3110** | Supervision | Requires firms to establish and maintain a supervisory system reasonably designed to achieve compliance with securities laws and FINRA rules. |
@@ -93,7 +93,7 @@ Disciplinary decisions are appealable internally to the National Adjudicatory Co
 
 ## Why It Matters for Traders
 
-1. **Broker accountability** — Every US broker you can legally use ([[interactive-brokers]], [[charles-schwab]], [[robinhood]], [[etrade]], [[tastytrade]], [[webull]], etc.) is a FINRA member subject to its rules. FINRA fines and suspensions create real consequences for misconduct.
+1. **Broker accountability** — Every US broker you can legally use (interactive-brokers, charles-schwab, [[robinhood]], etrade, tastytrade, webull, etc.) is a FINRA member subject to its rules. FINRA fines and suspensions create real consequences for misconduct.
 2. **Complaint mechanism** — Retail customers can file complaints directly with FINRA, which will investigate and may force broker action. This is independent of any private litigation.
 3. **Public record of rep history** — Before opening an account with a financial advisor or trusting a tip from a registered rep, a 60-second BrokerCheck lookup can surface multiple prior customer disputes or regulatory violations.
 4. **Arbitration default** — Nearly every retail brokerage account agreement contains a mandatory FINRA arbitration clause. Disputes go to FINRA's arbitration forum, not federal court. Award outcomes vary, but the forum is the standard for broker-customer disputes.
@@ -118,16 +118,8 @@ Disciplinary decisions are appealable internally to the National Adjudicatory Co
 
 - [[sec]] — FINRA's federal regulator and parent oversight authority
 - [[occ]] — Options clearinghouse; operates alongside FINRA broker-dealer rules
-- [[options-disclosure-document]] — Required ODD delivery is a FINRA Rule 2360 obligation
-- [[pattern-day-trader-rule]] — FINRA Rule 4210 imposes the $25K minimum
-- [[options-approval-levels]] — Broker-assigned trading permission tiers under Rule 2360
 - [[regulation]] — Broader regulatory landscape
-- [[interactive-brokers]] — FINRA member firm
 - [[robinhood]] — FINRA member firm; multiple notable FINRA enforcement actions
-- [[charles-schwab]] — FINRA member firm
-- [[etrade]] — FINRA member firm
-- [[tastytrade]] — FINRA member firm
-- [[webull]] — FINRA member firm
 
 ## Sources
 

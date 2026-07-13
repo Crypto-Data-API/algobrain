@@ -209,4 +209,4 @@ Only the public-signal column is deployable. The leak-based column is documented
 
 ## Related
 
-[[archegos-blowup-2021]] · [[block-trade-flipping-arbitrage]] · [[ltcm-collapse-1998]] · [[structural-forced-selling]] · [[liquidation-cascade-arbitrage]] · [[risk-arbitrage]] · [[bankruptcy-claim-arbitrage]]
+[[archegos-blowup-2021]] · [[block-trade-flipping-arbitrage]] · [[ltcm-collapse-1998]] · [[structural-forced-selling]] · [[liquidation-cascade-arbitrage]] · risk-arbitrage · [[bankruptcy-claim-arbitrage]]

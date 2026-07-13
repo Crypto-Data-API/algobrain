@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading, derivatives]
 aliases: ["Forced Liquidation Arbitrage", "Stressed Counterparty Trade", "Capital Structure Arbitrage", "Forced Seller Arbitrage"]
-related: ["[[2006-09-amaranth-natural-gas-blowup]]", "[[2022-06-three-arrows-blowup]]", "[[2022-11-ftx-collapse-arbitrage]]", "[[2026-04-18-kelp-layerzero-exploit]]", "[[fastest-profitable-trades]]", "[[liquidation-cascade-arbitrage]]", "[[post-hack-incident-response-arb]]", "[[ai-amplified-exploit-arbitrage]]", "[[archegos-blowup-2021]]", "[[capital-structure-arbitrage]]", "[[risk-management]]", "[[behavioral-finance]]", "[[counterparty-risk]]", "[[stablecoin-depeg-profit-capture]]", "[[arbitrage-overview]]", "[[paid-data-providers]]", "[[historical-spread-data]]"]
+related: ["[[2006-09-amaranth-natural-gas-blowup]]", "[[2022-06-three-arrows-blowup]]", "[[2022-11-ftx-collapse-arbitrage]]", "[[2026-04-18-kelp-layerzero-exploit]]", "[[fastest-profitable-trades]]", "[[liquidation-cascade-arbitrage]]", "[[post-hack-incident-response-arb]]", "[[ai-amplified-exploit-arbitrage]]", "[[archegos-blowup-2021]]", "[[risk-management]]", "[[behavioral-finance]]", "[[counterparty-risk]]", "[[stablecoin-depeg-profit-capture]]", "[[arbitrage-overview]]", "[[paid-data-providers]]", "[[historical-spread-data]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [crypto, stocks, commodities]
@@ -265,4 +265,4 @@ Last review: 2026-04-28. Next review: 2026-07-28.
 
 ## Related
 
-[[2006-09-amaranth-natural-gas-blowup]] · [[2022-06-three-arrows-blowup]] · [[2022-11-ftx-collapse-arbitrage]] · [[2026-04-18-kelp-layerzero-exploit]] · [[fastest-profitable-trades]] · [[liquidation-cascade-arbitrage]] · [[post-hack-incident-response-arb]] · [[ai-amplified-exploit-arbitrage]] · [[archegos-blowup-2021]] · [[capital-structure-arbitrage]] · [[convex-tail-hedge-arbitrage]] · [[counterparty-risk]] · [[stablecoin-depeg-profit-capture]] · [[arbitrage-overview]] · [[paid-data-providers]] · [[historical-spread-data]] · [[risk-management]] · [[behavioral-finance]] · [[ltcm-collapse-1998]]
+[[2006-09-amaranth-natural-gas-blowup]] · [[2022-06-three-arrows-blowup]] · [[2022-11-ftx-collapse-arbitrage]] · [[2026-04-18-kelp-layerzero-exploit]] · [[fastest-profitable-trades]] · [[liquidation-cascade-arbitrage]] · [[post-hack-incident-response-arb]] · [[ai-amplified-exploit-arbitrage]] · [[archegos-blowup-2021]] · capital-structure-arbitrage · [[convex-tail-hedge-arbitrage]] · [[counterparty-risk]] · [[stablecoin-depeg-profit-capture]] · [[arbitrage-overview]] · [[paid-data-providers]] · [[historical-spread-data]] · [[risk-management]] · [[behavioral-finance]] · [[ltcm-collapse-1998]]

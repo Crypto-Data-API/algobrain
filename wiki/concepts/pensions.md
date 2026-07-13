@@ -9,7 +9,7 @@ aliases: ["Pension", "Pension Fund", "Defined Benefit", "Defined Contribution", 
 domain: [portfolio-theory, market-microstructure]
 prerequisites: ["[[compounding]]", "[[duration-risk]]"]
 difficulty: intermediate
-related: ["[[superannuation]]", "[[smsf]]", "[[duration-risk]]", "[[ldi]]", "[[liability-driven-investing]]", "[[treasuries]]", "[[move-index]]", "[[compounding]]", "[[diversification]]", "[[mutual-funds]]"]
+related: ["[[superannuation]]", "[[smsf]]", "[[duration-risk]]", "[[ldi]]", "[[liability-driven-investing]]", "[[treasuries]]", "[[move-index]]", "[[compounding]]", "[[diversification]]"]
 ---
 
 A **pension** is a long-term arrangement that provides income in retirement, funded by contributions invested over a working life. Pension **funds** — the institutional pools that manage these assets — are among the largest investors in global markets, and their structural constraints (long liabilities, regulatory funding rules, [[duration-risk|duration]] matching) make them important, occasionally market-moving, participants. Understanding how pensions are structured explains a major source of demand for bonds, equities, and long-duration assets, and a recurring source of systemic fragility.
@@ -97,7 +97,6 @@ Pension structure is normally a slow, stabilizing force — but its hidden lever
 - [[move-index]] — rate-volatility gauge that flags LDI stress
 - [[treasuries]] — the core duration-matching asset
 - [[compounding]] — the engine of long-horizon pension saving
-- [[mutual-funds]] — common DC investment vehicles
 
 ## Sources
 

@@ -52,16 +52,16 @@ Two binary distinctions govern what physically happens at expiration. They matte
 | **Exercise style** | American — exercisable any time before expiry (most equity/ETF options) | European — exercisable only at expiry (most cash index options) |
 | **Settlement** | Physical — shares change hands (equity, ETF options) | Cash — net cash difference paid (index options) |
 
-Practical consequences: American + physical options ([[equity-options]], ETF options like [[spy-options|SPY]]) carry **early-assignment risk** — especially short calls before ex-dividend and deep-ITM short puts — and create [[assignment-and-exercise|pin risk]] near the strike at expiry. European + cash options (index options like [[spx-options|SPX]], [[xsp-options|XSP]], [[rut-options|RUT]], [[ndx-options|NDX]]) cannot be assigned early and settle to an index print, eliminating delivery and pin risk but introducing **settlement-print risk** (AM [[soq-settlement|SOQ]] vs PM close — see [[am-vs-pm-settlement]]). See [[assignment-and-exercise]] and [[cash-vs-physical-settlement]] for full mechanics.
+Practical consequences: American + physical options (equity-options, ETF options like SPY) carry **early-assignment risk** — especially short calls before ex-dividend and deep-ITM short puts — and create [[assignment-and-exercise|pin risk]] near the strike at expiry. European + cash options (index options like SPX, XSP, RUT, NDX) cannot be assigned early and settle to an index print, eliminating delivery and pin risk but introducing **settlement-print risk** (AM SOQ vs PM close — see am-vs-pm-settlement). See [[assignment-and-exercise]] and [[cash-vs-physical-settlement]] for full mechanics.
 
 ## Tax Treatment at a Glance
 
 US tax treatment is a first-order determinant of after-tax return for active traders and is often the deciding factor between otherwise-equivalent products:
 
 - **[[section-1256-contracts|Section 1256]] (broad-based index options — SPX, XSP, RUT, NDX, VIX):** every gain/loss is taxed **60% long-term / 40% short-term** regardless of holding period, marked-to-market at year-end on Form 6781. The blended rate (~26.8% top-bracket vs ~37% short-term) is a structural edge for short-term-heavy strategies.
-- **Standard equity treatment (single-name and ETF options — SPY, QQQ, IWM, [[xle]], [[xlf]], [[xlk]]):** holding period determines short- vs long-term; subject to [[wash-sale-rules-options|wash-sale rules]].
+- **Standard equity treatment (single-name and ETF options — SPY, QQQ, IWM, xle, xlf, xlk):** holding period determines short- vs long-term; subject to wash-sale rules.
 
-This is why an active trader running an S&P premium-selling book will often accept the wider quoted spreads of [[xsp-options|XSP]] over [[spy-options|SPY]], or [[rut-options|RUT]] over IWM — the Section 1256 advantage compounds across a year of round trips. See [[section-1256-contracts]].
+This is why an active trader running an S&P premium-selling book will often accept the wider quoted spreads of XSP over SPY, or RUT over IWM — the Section 1256 advantage compounds across a year of round trips. See [[section-1256-contracts]].
 
 ## The US Index-Options Franchise
 
@@ -69,13 +69,13 @@ The cash-settled, European-style index options form a coherent family differenti
 
 | Product | Underlying | Notional / contract | Liquidity | Notes |
 |---|---|---|---|---|
-| [[spx-options\|SPX]] | S&P 500 | ~$500K | Deepest US index options | Institutional default; AM monthlies + PM weeklies |
-| [[xsp-options\|XSP]] | 1/10 S&P 500 | ~$50K | Growing | "SPX for retail size," same tax/settlement |
-| [[ndx-options\|NDX]] | Nasdaq-100 | ~$500K+ | Deep | Tech-concentrated; [[qqq-options\|QQQ]] is the ETF cousin |
-| [[rut-options\|RUT]] | Russell 2000 | ~$200K | Thinnest of the four | Small-cap; highest IV, steepest skew |
+| SPX | S&P 500 | ~$500K | Deepest US index options | Institutional default; AM monthlies + PM weeklies |
+| XSP | 1/10 S&P 500 | ~$50K | Growing | "SPX for retail size," same tax/settlement |
+| NDX | Nasdaq-100 | ~$500K+ | Deep | Tech-concentrated; [[qqq-options\|QQQ]] is the ETF cousin |
+| RUT | Russell 2000 | ~$200K | Thinnest of the four | Small-cap; highest IV, steepest skew |
 | [[vix-options\|VIX]] | VIX index | varies | Deep | Volatility-of-volatility; special settlement |
 
-Their ETF counterparts ([[spy-options|SPY]], [[qqq-options|QQQ]], IWM) are American-style, physically settled, penny-quoted, and taxed as standard equity — the retail-friendly, smaller-notional alternatives. The recurring trade-off across the franchise is **liquidity and penny pricing (ETF options) vs tax efficiency and no-early-assignment (index options)**.
+Their ETF counterparts (SPY, [[qqq-options|QQQ]], IWM) are American-style, physically settled, penny-quoted, and taxed as standard equity — the retail-friendly, smaller-notional alternatives. The recurring trade-off across the franchise is **liquidity and penny pricing (ETF options) vs tax efficiency and no-early-assignment (index options)**.
 
 ## Core Concepts
 
@@ -83,7 +83,6 @@ Their ETF counterparts ([[spy-options|SPY]], [[qqq-options|QQQ]], IWM) are Ameri
 - [[options]] — comprehensive overview of options contracts, terminology, and mechanics
 - [[call-options]] — right to buy the underlying
 - [[put-options]] — right to sell the underlying
-- [[equity-options]] — equity-specific options trading
 - [[moneyness]] — ITM, ATM, OTM mechanics, intrinsic vs. extrinsic value
 - [[strike-price]] — the fixed price in the contract
 - [[premium]] — option pricing components
@@ -146,7 +145,6 @@ Their ETF counterparts ([[spy-options|SPY]], [[qqq-options|QQQ]], IWM) are Ameri
 - [[gamma-scalping]] — dynamic delta hedging to harvest gamma
 - [[volatility-arbitrage]] — trading the IV vs RV spread
 - [[skew-trading]] — trading the shape of the volatility smile
-- [[earnings-options-strategies]] — pre/post earnings IV dynamics and event-driven options plays
 
 ### Multi-Leg & Advanced Spreads
 - [[butterfly-spread]] — three-strike spread for range targeting
@@ -164,10 +162,8 @@ Their ETF counterparts ([[spy-options|SPY]], [[qqq-options|QQQ]], IWM) are Ameri
 - [[married-put]] — protective put entered simultaneously with stock purchase
 - [[collar-strategy]] / [[collar]] — long stock + protective put + covered call
 - [[risk-reversal]] — OTM put + OTM call for directional exposure
-- [[stock-repair]] — repairing losing stock positions with options
 
 ### Long-Dated
-- [[leaps-strategies]] — long-term options as stock replacement (PMCC, stock replacement)
 
 ### Modern
 - [[0dte-trading]] — zero-days-to-expiration strategies, gamma mechanics, market impact
@@ -176,12 +172,11 @@ Their ETF counterparts ([[spy-options|SPY]], [[qqq-options|QQQ]], IWM) are Ameri
 
 - [[options-position-sizing]] — Greeks-based position sizing, portfolio limits, risk of ruin
 - [[trade-repair-and-rolling]] — rolling, repair, and adjustment techniques
-- [[options-equity-overlay]] — using options as an overlay on equity positions
 - [[delta-neutral-yield-farming]] — delta-neutral crypto strategies
 
 ## Options in Long/Short Portfolio Management
 
-The [[itpm|Institute of Trading and Portfolio Management]] teaches using options as the primary vehicle for [[long-short-equity]] portfolio construction:
+The Institute of Trading and Portfolio Management teaches using options as the primary vehicle for long-short-equity portfolio construction:
 
 - Replace stock positions with [[call-options|call]] and [[put-options|put]] options to leverage [[volatility]] while capping risk at premium paid
 - 20-60 day expiration horizons aligned with fundamental catalysts
@@ -193,11 +188,7 @@ Key ITPM practitioners: [[anton-kreil]], [[raj-malhotra]] (volatility/VIX), [[ch
 
 ## Data & Infrastructure
 
-- [[options-data-sources]] — OptionMetrics, ORATS, Polygon.io, and other data providers
-- [[spotgamma]] — gamma exposure analytics and dealer flow analysis
-- [[unusual-whales]] — unusual options activity tracking
 - [[open-interest]] — open interest as market structure indicator
-- [[earnings-calendar]] — timing event-driven strategies
 
 ## Education
 

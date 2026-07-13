@@ -7,25 +7,25 @@ status: good
 tags: [fundamental-analysis, risk-management, valuation, leverage]
 aliases: ["Solvency Analysis", "Long-Term Solvency", "Financial Solvency"]
 domain: [risk-management]
-prerequisites: ["[[debt-to-equity]]", "[[liquidity]]"]
+prerequisites: ["[[liquidity]]"]
 difficulty: beginner
-related: ["[[debt-to-equity]]", "[[current-ratio]]", "[[free-cash-flow]]", "[[liquidity]]", "[[risk-management]]", "[[fundamental-analysis]]", "[[capital-raise]]", "[[bonds]]", "[[basel-iii]]"]
+related: ["[[liquidity]]", "[[risk-management]]", "[[bonds]]", "[[basel-iii]]"]
 ---
 
-Solvency is a company's ability to meet its long-term financial obligations, distinct from [[liquidity]] which addresses short-term commitments. A solvent company generates sufficient cash flow to service its debt and continue operations indefinitely. Solvency analysis is a fundamental component of credit analysis and equity [[risk-management]], as insolvency leads to bankruptcy, restructuring, or liquidation -- the permanent loss of capital for equity investors. Fred McNaught checks solvency indicators as part of his fundamental screening process, particularly when evaluating companies that have undertaken [[capital-raise|capital raises]] or operate in capital-intensive industries like mining and infrastructure.
+Solvency is a company's ability to meet its long-term financial obligations, distinct from [[liquidity]] which addresses short-term commitments. A solvent company generates sufficient cash flow to service its debt and continue operations indefinitely. Solvency analysis is a fundamental component of credit analysis and equity [[risk-management]], as insolvency leads to bankruptcy, restructuring, or liquidation -- the permanent loss of capital for equity investors. Solvency indicators matter most when evaluating entities that have recently raised capital or operate in capital-intensive industries — a lesson that transfers directly to assessing crypto counterparties (exchanges, lenders, stablecoin issuers).
 
 ## Key Solvency Ratios
 
 The most commonly used solvency ratios include:
 
-- **[[debt-to-equity|Debt-to-Equity Ratio]]** -- Total debt divided by total shareholders' equity. Measures the proportion of financing from debt versus equity. A ratio above 2.0 is generally considered highly leveraged, though acceptable levels vary significantly by industry (utilities and REITs routinely operate at higher leverage than technology companies)
+- **Debt-to-Equity Ratio** -- Total debt divided by total shareholders' equity. Measures the proportion of financing from debt versus equity. A ratio above 2.0 is generally considered highly leveraged, though acceptable levels vary significantly by industry (utilities and REITs routinely operate at higher leverage than technology companies)
 - **Interest Coverage Ratio** -- EBIT (or EBITDA) divided by interest expense. Measures how many times over the company can cover its interest payments from operating earnings. Below 1.5x is a warning sign; below 1.0x means the company cannot cover interest from operations
 - **Debt-to-Assets Ratio** -- Total debt divided by total assets. Shows what percentage of the company's assets are financed by debt. Higher ratios indicate greater financial risk and less capacity to absorb losses
-- **[[free-cash-flow|Free Cash Flow]] to Debt** -- FCF divided by total debt. Indicates how quickly the company could theoretically repay all its debt from free cash flow. Higher is safer
+- **Free Cash Flow to Debt** -- FCF divided by total debt. Indicates how quickly the company could theoretically repay all its debt from free cash flow. Higher is safer
 
 ## Solvency vs Liquidity
 
-Solvency and [[liquidity]] are related but distinct concepts. Liquidity measures the ability to meet short-term obligations (within 12 months) and is assessed through metrics like the [[current-ratio]] (current assets / current liabilities) and quick ratio. Solvency measures the ability to meet long-term obligations and is assessed through the ratios above. A company can be liquid but insolvent (generating enough cash to pay this quarter's bills but unable to service its long-term debt load) or illiquid but solvent (temporarily short on cash but with strong long-term fundamentals and asset backing). In practice, liquidity crises often precipitate solvency crises -- short-term funding problems cascade into an inability to refinance long-term debt, leading to default.
+Solvency and [[liquidity]] are related but distinct concepts. Liquidity measures the ability to meet short-term obligations (within 12 months) and is assessed through metrics like the current-ratio (current assets / current liabilities) and quick ratio. Solvency measures the ability to meet long-term obligations and is assessed through the ratios above. A company can be liquid but insolvent (generating enough cash to pay this quarter's bills but unable to service its long-term debt load) or illiquid but solvent (temporarily short on cash but with strong long-term fundamentals and asset backing). In practice, liquidity crises often precipitate solvency crises -- short-term funding problems cascade into an inability to refinance long-term debt, leading to default.
 
 ## Banking Sector: Capital Adequacy
 
@@ -57,21 +57,16 @@ Variants exist for private firms (Z') and non-manufacturers/emerging markets (Z'
 
 Solvency analysis is fundamentally about avoiding the *permanent* loss of capital, which sits at the top of the [[risk-management]] hierarchy because no position-sizing or stop discipline recovers from an issuer going to zero.
 
-- **Equity screening:** Filter out names in the Z-score distress zone or with interest coverage below ~1.5x before they ever enter a [[fundamental-analysis|fundamental]] watchlist. Insolvency is a left-tail event that volatility-based risk metrics underweight.
+- **Equity screening:** Filter out names in the Z-score distress zone or with interest coverage below ~1.5x before they ever enter a fundamental watchlist. Insolvency is a left-tail event that volatility-based risk metrics underweight.
 - **Distressed/value plays:** The mirror trade — deliberately buying near-insolvent names where the market has over-discounted recovery value — depends on getting the solvency math (liquidation value, refinancing runway, covenant triggers) more right than the consensus. High reward, high ruin risk.
 - **Credit and bond selection:** Solvency ratios drive credit spreads. A deteriorating interest-coverage trend is an early-warning signal that a [[bonds|bond]] is heading toward a downgrade and forced institutional selling.
-- **Capital-raise dilution risk:** A company sliding toward insolvency typically does a dilutive [[capital-raise]] at the worst time, transferring value from existing equity holders. Spotting the looming raise (covenant breach, exhausted FCF, maturity wall) lets a trader exit or short ahead of it.
+- **Capital-raise dilution risk:** A company sliding toward insolvency typically does a dilutive capital-raise at the worst time, transferring value from existing equity holders. Spotting the looming raise (covenant breach, exhausted FCF, maturity wall) lets a trader exit or short ahead of it.
 - **Short candidates:** Persistent free-cash-flow-negative companies with a debt maturity wall and no refinancing path are classic short setups — the catalyst is the moment the market prices the solvency cliff.
 
 ## Related
 
 - [[risk-management]] -- broader risk management framework
-- [[fundamental-analysis]] -- solvency as part of fundamental screening
-- [[debt-to-equity]] -- primary solvency ratio
 - [[liquidity]] -- short-term counterpart to long-term solvency
-- [[current-ratio]] -- liquidity ratio (short-term counterpart)
-- [[free-cash-flow]] -- cash flow available for debt service
-- [[capital-raise]] -- equity issuance to improve solvency
 - [[bonds]] -- credit instruments priced off solvency
 - [[basel-iii]] -- banking-sector solvency / capital-adequacy framework
 

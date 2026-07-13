@@ -9,14 +9,14 @@ aliases: ["Leg Risk", "Legging Risk", "Execution Risk"]
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[order-types]]", "[[slippage]]", "[[arbitrage]]"]
 difficulty: intermediate
-related: ["[[execution-sequencing]]", "[[cross-exchange-arbitrage]]", "[[triangular-arbitrage]]", "[[pairs-trading]]", "[[merger-arbitrage]]", "[[transaction-costs]]", "[[slippage]]", "[[market-impact]]", "[[arbitrage-parameter-cheatsheet]]"]
+related: ["[[execution-sequencing]]", "[[cross-exchange-arbitrage]]", "[[triangular-arbitrage]]", "[[pairs-trading]]", "[[transaction-costs]]", "[[slippage]]", "[[market-impact]]", "[[arbitrage-parameter-cheatsheet]]"]
 ---
 
 # Leg Risk
 
 Leg risk is the risk that one side ("leg") of a multi-leg trade executes while the other side fails, leaving the trader with an unhedged directional position instead of the intended arbitrage or spread. It is the **single largest operational risk in arbitrage trading** and the primary reason that "risk-free" arbitrage is never truly risk-free in practice.
 
-A [[cross-exchange-arbitrage]] trade has two legs (buy on exchange A, sell on exchange B). A [[triangular-arbitrage]] trade has three. A [[dispersion-trading|dispersion trade]] can have 20+. Every additional leg multiplies the probability that something goes wrong.
+A [[cross-exchange-arbitrage]] trade has two legs (buy on exchange A, sell on exchange B). A [[triangular-arbitrage]] trade has three. A dispersion trade can have 20+. Every additional leg multiplies the probability that something goes wrong.
 
 ## Why Legs Fail
 
@@ -83,9 +83,9 @@ Example: You bought 10 BTC ($672,000) on Binance but the Coinbase sell leg faile
 | Strategy | Execute First | Execute Second |
 |---|---|---|
 | [[cross-exchange-arbitrage]] | Illiquid exchange (thinner book) | Liquid exchange (Binance) |
-| [[merger-arbitrage]] | Short acquirer (borrow may fail) | Long target (always fillable) |
+| merger-arbitrage | Short acquirer (borrow may fail) | Long target (always fillable) |
 | [[pairs-trading]] | Short leg (borrow availability uncertain) | Long leg |
-| [[convertible-arbitrage]] | Long convert (illiquid OTC) | Short equity (liquid) |
+| convertible-arbitrage | Long convert (illiquid OTC) | Short equity (liquid) |
 | [[cross-chain-arbitrage]] | Bridge transaction (slow, uncertain) | DEX swap (fast, atomic) |
 
 ### 2. Use Appropriate Order Types
@@ -157,8 +157,8 @@ If a leg is stranded and the unwind will take time, consider an **interim hedge*
 | [[funding-rate-arbitrage]] | 2 | Low | Legs execute independently; no timing pressure |
 | [[cash-and-carry]] | 2 | Low | Same as funding rate — no speed requirement |
 | [[pairs-trading]] | 2 | Medium | Borrow availability for short leg |
-| [[merger-arbitrage]] | 2 | Medium | Borrow availability, deal terms change |
-| [[dispersion-trading]] | 10-20+ | Very High | Partial fills across many names |
+| merger-arbitrage | 2 | Medium | Borrow availability, deal terms change |
+| dispersion-trading | 10-20+ | Very High | Partial fills across many names |
 | [[flash-loan-arbitrage]] | 2-5 | Zero | Atomic — reverts if any leg fails |
 | [[cross-chain-arbitrage]] | 2-3 | Very High | Bridge delays, chain congestion |
 | [[volatility-arbitrage]] | 2+ | Medium | Options liquidity, wide spreads |

@@ -7,9 +7,9 @@ status: good
 tags: [fundamental-analysis, valuation]
 aliases: ["NAV"]
 domain: [fundamental-analysis, valuation]
-prerequisites: ["[[financial-statement-analysis]]"]
+prerequisites: []
 difficulty: beginner
-related: ["[[intrinsic-value]]", "[[price-to-earnings-ratio]]", "[[etf]]", "[[mutual-funds]]", "[[value-investing]]"]
+related: ["[[etf]]"]
 ---
 
 Net Asset Value (NAV) is the per-share value of a fund or company calculated as total assets minus total liabilities, divided by the number of shares outstanding. It is the standard valuation metric for mutual funds, [[etf|ETFs]], closed-end funds, and REITs.
@@ -45,17 +45,17 @@ For investment funds, "total assets" means the current market value of all secur
 
 ## Graham's Net Current Asset Value (NCAV)
 
-[[benjamin-graham|Benjamin Graham]] popularized a stricter version of NAV for deep [[value-investing|value investing]]:
+Benjamin Graham popularized a stricter version of NAV for deep value investing:
 
 **NCAV = Current Assets - Total Liabilities**
 
-This ignores fixed assets entirely, asking: "If this company liquidated today, selling only current assets and paying all debts, what would shareholders receive?" Graham recommended buying stocks trading below 2/3 of NCAV -- a "net-net" strategy. These situations are rare in modern markets but historically produced exceptional returns. (Source: [[book-the-intelligent-investor]])
+This ignores fixed assets entirely, asking: "If this company liquidated today, selling only current assets and paying all debts, what would shareholders receive?" Graham recommended buying stocks trading below 2/3 of NCAV -- a "net-net" strategy. These situations are rare in modern markets but historically produced exceptional returns. (Source: book-the-intelligent-investor)
 
 ## Trading Applications
 
 1. **Closed-end fund discount arbitrage**: Buy funds trading at wide discounts to NAV, especially when catalysts exist (activist campaigns, fund conversion, liquidation)
 2. **ETF premium/discount monitoring**: Extreme premiums or discounts on ETFs signal market stress or illiquidity
-3. **Net-net screening**: Screen for stocks trading below NCAV for deep value candidates (Source: [[book-security-analysis]])
+3. **Net-net screening**: Screen for stocks trading below NCAV for deep value candidates (Source: book-security-analysis)
 4. **REIT valuation**: Compare REIT price to estimated NAV to identify over/undervaluation
 
 ## Limitations
@@ -67,12 +67,9 @@ This ignores fixed assets entirely, asking: "If this company liquidated today, s
 
 ## Related
 
-- [[intrinsic-value]] -- Broader concept of what a business is truly worth
-- [[value-investing]] -- Investment philosophy that often uses NAV-based metrics
-- [[financial-statement-analysis]] -- Required to calculate NAV from company filings
 - [[etf]] -- Funds where NAV tracking is a key mechanism
 
 ## Sources
 
-- (Source: [[book-the-intelligent-investor]]) -- Graham's framework for NAV and net-net investing
-- (Source: [[book-security-analysis]]) -- Detailed treatment of NCAV as a margin of safety metric
+- (Source: book-the-intelligent-investor) -- Graham's framework for NAV and net-net investing
+- (Source: book-security-analysis) -- Detailed treatment of NCAV as a margin of safety metric

@@ -100,7 +100,7 @@ Like all [[exchange-tokens]], BMX is best read as a **claim on BitMart's franchi
 - **Burn coverage** — the buyback-and-burn is revenue-funded; its credibility scales with BitMart's actual fee income. With ~47% of supply still uncirculated, the burn has to outpace future emissions to be net-deflationary.
 - **Relative strength** — BMX's modest drawdown (-49.7% vs ATH) versus 87–94% for the AI peers in this cohort marks it as a lower-beta, franchise-anchored name rather than a narrative trade.
 
-Qualitative framing only — see [[valuation]].
+Qualitative framing only — see valuation.
 
 ## Peer Comparison
 
@@ -149,7 +149,7 @@ Among the second-tier exchange tokens, BMX punches above CET on both market cap 
 - [[coinex-token]] — exchange-token peer (CET)
 - [[htx-dao]] — exchange-token peer (HTX)
 - [[ethereum]] — host chain
-- [[liquidity]] · [[slippage]] · [[valuation]] · [[derivatives]]
+- [[liquidity]] · [[slippage]] · valuation · [[derivatives]]
 - [[crypto-markets]]
 
 ---

@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [australia, tax, property, investment, education]
 aliases: ["Negative Gearing", "Negatively Geared"]
-related: ["[[australian-investor-tax]]", "[[leverage]]", "[[reits]]", "[[opportunity-cost]]", "[[capital-gains-tax-discount]]", "[[margin]]", "[[tax-efficient-investing]]", "[[superannuation]]", "[[portfolio-construction]]", "[[risk-management]]", "[[interest-rates]]"]
+related: ["[[australian-investor-tax]]", "[[leverage]]", "[[opportunity-cost]]", "[[capital-gains-tax-discount]]", "[[margin]]", "[[tax-efficient-investing]]", "[[superannuation]]", "[[portfolio-construction]]", "[[risk-management]]", "[[interest-rates]]"]
 domain: [portfolio-theory, risk-management]
 difficulty: intermediate
 prerequisites: ["[[australian-investor-tax]]", "[[leverage]]"]
@@ -79,14 +79,14 @@ While property dominates the negative gearing conversation, the strategy applies
 ### Margin Loan Negative Gearing
 
 - Borrow via a [[margin]] loan to purchase shares
-- If [[dividend]] income from the shares is less than the margin loan interest, you have a net investment loss
+- If dividend income from the shares is less than the margin loan interest, you have a net investment loss
 - This loss is deductible against your other income (salary, rental income, etc.)
 - The same [[capital-gains-tax-discount|CGT discount]] applies when you eventually sell the shares for a gain
 
 ### Example: Share Negative Gearing
 
 - Borrow $100,000 at 7% interest via margin loan = $7,000 annual interest
-- Invest in a portfolio yielding 4% fully franked dividends = $4,000 income (plus ~$1,700 in [[franking-credits]])
+- Invest in a portfolio yielding 4% fully franked dividends = $4,000 income (plus ~$1,700 in franking-credits)
 - Net investment loss: $7,000 - $4,000 = $3,000 (before considering franking credit offset)
 - Deduct $3,000 against salary
 - If the portfolio grows 8% per year, the capital gain after several years will be substantial — and taxed at the discounted rate
@@ -99,7 +99,7 @@ While property dominates the negative gearing conversation, the strategy applies
 | **Diversification** | Spread across dozens of companies | Concentrated in a single asset |
 | **Transaction costs** | Brokerage ($10-$30 per trade) | Stamp duty (2-5%), legal fees, agent fees |
 | **Maintenance** | None | Ongoing repairs, management, insurance |
-| **[[franking-credits]]** | Available on Australian dividends | Not applicable |
+| **franking-credits** | Available on Australian dividends | Not applicable |
 | **Leverage cost** | Margin rates (6-8%) | Mortgage rates (5-7%, typically lower) |
 | **Margin call risk** | Yes — forced selling if portfolio declines | No margin calls (but mortgage default risk) |
 | **Entry cost** | $1,000 minimum | Deposit of $50,000-$100,000+ |
@@ -124,7 +124,7 @@ Understanding negative gearing is critical for share investors even if they neve
 
 ### REIT Alternative
 
-Investors seeking property exposure without the complexity and illiquidity of direct property can invest in [[reits|REITs]], which:
+Investors seeking property exposure without the complexity and illiquidity of direct property can invest in REITs, which:
 
 - Provide diversified property exposure across sectors (industrial, commercial, retail)
 - Are liquid — trade on the ASX during market hours
@@ -183,7 +183,6 @@ The value of negative gearing is directly linked to [[interest-rates]]:
 
 - [[australian-investor-tax]]
 - [[leverage]]
-- [[reits]]
 - [[opportunity-cost]]
 - [[capital-gains-tax-discount]]
 - [[margin]]
@@ -192,8 +191,6 @@ The value of negative gearing is directly linked to [[interest-rates]]:
 - [[portfolio-construction]]
 - [[risk-management]]
 - [[interest-rates]]
-- [[franking-credits]]
-- [[dividend]]
 - [[trader-vs-investor-classification-au]]
 - [[smsf]]
 

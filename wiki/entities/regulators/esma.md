@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 2011
 headquarters: "Paris, France"
 website: "https://www.esma.europa.eu"
-related: ["[[finra]]", "[[sec]]", "[[etoro]]", "[[interactive-brokers]]", "[[ig-markets]]", "[[cmc-markets]]", "[[itpm-trading-philosophy]]", "[[fees-and-friction]]", "[[professional-vs-retail-mindset]]", "[[options]]", "[[futures]]", "[[robinhood]]"]
+related: ["[[finra]]", "[[sec]]", "[[itpm-trading-philosophy]]", "[[fees-and-friction]]", "[[professional-vs-retail-mindset]]", "[[options]]", "[[futures]]", "[[robinhood]]"]
 ---
 
 The European Securities and Markets Authority (ESMA) is the European Union's pan-EU financial markets regulator, headquartered in Paris and established in January 2011. ESMA's mandate is threefold: investor protection, the orderly functioning of EU financial markets, and the safeguarding of EU-wide financial stability. For traders, ESMA matters most for two things: it is the architect of [[mifid-ii|MiFID II]] (the post-2018 transparency, best-execution, and reporting regime that governs EU equity, options, and derivatives trading), and it is the regulator behind the 2018 retail-CFD intervention whose mandatory loss-disclosures provide the cleanest publicly available evidence on how retail derivative traders actually perform. It is the EU peer of the US [[sec|SEC]], Australia's [[asic|ASIC]], and shares derivatives turf conceptually with the US [[cftc|CFTC]]; see [[regulation]] for the cross-jurisdiction map.
@@ -137,7 +137,7 @@ ESMA's rule set creates a structurally **different operating environment for EU 
 1. **Lower CFD leverage in EU than offshore** — A retail trader in the EU who wants 100x leverage on a major FX pair cannot get it from an EU-licensed broker; the offshore alternatives (Vanuatu, Seychelles, Bahamas) carry counterparty and recovery risk that EU-licensed brokers do not.
 2. **Negative-balance protection as a free option** — EU retail traders effectively have a free out-of-the-money put on their CFD account losses, courtesy of the broker's residual exposure on flash crashes and gap moves. US futures and FX traders have no such protection.
 3. **Mandatory loss disclosure as a behavioural intervention** — The "XX% lose" warning shown on every CFD broker's homepage is an evidence-based behavioural nudge; surveys post-2018 found the disclosure modestly reduced retail account openings and shifted some demand toward [[options]] and equity products. The behavioural effect is small but real.
-4. **No PFOF until recently** — EU MiFID II best-execution and inducement rules effectively banned [[payment-for-order-flow]] long before the [[sec|SEC]] began considering similar restrictions. An EU MiFID II Refit in 2024 codified the PFOF ban explicitly. EU retail traders therefore use brokers like [[interactive-brokers]] EU, [[ig-markets]], [[cmc-markets]], and Saxo whose order-routing economics differ from US PFOF-funded brokers like [[robinhood]].
+4. **No PFOF until recently** — EU MiFID II best-execution and inducement rules effectively banned [[payment-for-order-flow]] long before the [[sec|SEC]] began considering similar restrictions. An EU MiFID II Refit in 2024 codified the PFOF ban explicitly. EU retail traders therefore use brokers like interactive-brokers EU, ig-markets, cmc-markets, and Saxo whose order-routing economics differ from US PFOF-funded brokers like [[robinhood]].
 5. **No US-style options market for retail** — EU equity options markets exist (Eurex) but retail access is far smaller and more expensive than US. EU retail derivative demand is therefore concentrated in CFDs and structured products rather than listed options.
 6. **Tighter algorithmic-trading controls** — EU retail-facing platforms running algorithmic features must register and meet operational standards under MiFID II RTS 6, raising the bar versus the US where retail algo platforms operate with lighter oversight.
 
@@ -152,7 +152,7 @@ The [[itpm-trading-philosophy|ITPM philosophy]] argues that 70-90% of retail acc
 - The number does **not** improve materially in bull-market years — losing 65% in a year the index rallied 25% is itself an indictment of how retail allocate, not of the tape
 - Brokers with the lowest leverage caps (and the most options-literate client bases) print the lowest numbers; high-leverage CFD-day-trade brokers print the highest
 
-The data is widely cited by professional-trader educators precisely because it is mandatory, comparable, and uncomfortable. It is also why [[etoro|eToro]]'s disclosure (which prints in the lower half of the range, near 51-77% depending on the period sampled) gets cited as the *favourable* example — even on the favourable end, the majority of retail accounts lose money.
+The data is widely cited by professional-trader educators precisely because it is mandatory, comparable, and uncomfortable. It is also why eToro's disclosure (which prints in the lower half of the range, near 51-77% depending on the period sampled) gets cited as the *favourable* example — even on the favourable end, the majority of retail accounts lose money.
 
 ## Limitations of ESMA Data
 
@@ -170,17 +170,12 @@ The data is widely cited by professional-trader educators precisely because it i
 - [[cftc]] — US derivatives regulator (EMIR is the EU clearing analogue)
 - [[regulation]] — Global financial-regulation overview
 - [[risk-management]] — Leverage caps and negative-balance protection as survivorship tools
-- [[etoro]] — Major EU-licensed retail platform whose ESMA disclosure is widely cited
-- [[interactive-brokers]] — EU and global broker subject to MiFID II
-- [[ig-markets]] — EU/UK CFD broker subject to ESMA rules
-- [[cmc-markets]] — EU/UK CFD broker subject to ESMA rules
 - [[robinhood]] — US contrast: PFOF model that ESMA effectively banned in EU
 - [[itpm-trading-philosophy]] — Cites ESMA disclosure data as the empirical floor under the 70-90%-lose claim
 - [[fees-and-friction]] — The structural drag the ESMA data ultimately measures
 - [[professional-vs-retail-mindset]] — ESMA codifies a formal version of the distinction via Professional-Client status
 - [[options]] — Listed-options access in the EU is structurally narrower than US, partly an ESMA / member-state outcome
 - [[mifid-ii]] — The framework regulation
-- [[mar]] — Market Abuse Regulation
 - [[emir]] — Derivatives clearing and reporting
 
 ## Sources

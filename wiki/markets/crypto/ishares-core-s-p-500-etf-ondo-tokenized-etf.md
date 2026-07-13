@@ -9,12 +9,12 @@ aliases: ["IVVON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.ondo.finance/assets/ivvon"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[ondo-finance]]", "[[sp500]]", "[[ethereum]]", "[[tokenization]]", "[[etf]]"]
+related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[ondo-finance]]", "[[ethereum]]", "[[tokenization]]", "[[etf]]"]
 ---
 
 # iShares Core S&P 500 ETF (Ondo Tokenized ETF)
 
-**iShares Core S&P 500 ETF (Ondo Tokenized ETF)** (ticker **IVVON**) is a [[tokenization|tokenized]] [[real-world-assets|real-world asset (RWA)]] issued by **[[ondo-finance|Ondo Global Markets]]** on [[ethereum|Ethereum]] (and bridged to Solana and BNB Chain) that gives non-US holders on-chain economic exposure to BlackRock's **iShares Core S&P 500 ETF (NYSE Arca: IVV)** — itself the lowest-cost flagship wrapper on the [[sp500|S&P 500]] index, with dividends reinvested into the token's reference value. IVVON is the broad-beta US-equity building block of the Ondo Global Markets line: a single on-chain token that delivers the same 500-stock large-cap exposure a US investor would get from IVV (or SPY/VOO), without the holder ever leaving the chain.
+**iShares Core S&P 500 ETF (Ondo Tokenized ETF)** (ticker **IVVON**) is a [[tokenization|tokenized]] [[real-world-assets|real-world asset (RWA)]] issued by **[[ondo-finance|Ondo Global Markets]]** on [[ethereum|Ethereum]] (and bridged to Solana and BNB Chain) that gives non-US holders on-chain economic exposure to BlackRock's **iShares Core S&P 500 ETF (NYSE Arca: IVV)** — itself the lowest-cost flagship wrapper on the S&P 500 index, with dividends reinvested into the token's reference value. IVVON is the broad-beta US-equity building block of the Ondo Global Markets line: a single on-chain token that delivers the same 500-stock large-cap exposure a US investor would get from IVV (or SPY/VOO), without the holder ever leaving the chain.
 
 ---
 
@@ -135,7 +135,6 @@ IVVON's thesis is **on-chain access to TradFi beta**: it lets non-US users hold 
 ## See Also
 
 - [[ondo-finance]] — issuer (Ondo Global Markets)
-- [[sp500]] — underlying index
 - [[ishares-core-msci-eafe-etf-ondo-tokenized-etf]] — intl-equity sibling
 - [[ishares-20-year-treasury-bond-etf-ondo-tokenized-etf]] — long-duration bond sibling
 - [[ishares-core-us-aggregate-bond-etf-ondo-tokenized-etf]] — aggregate-bond sibling

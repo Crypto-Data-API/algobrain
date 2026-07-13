@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [ai-trading, machine-learning, nlp, sentiment]
 aliases: ["Natural Language Processing Finance", "NLP in Finance", "Financial NLP", "FinNLP"]
-related: ["[[nlp]]", "[[nlp-overview]]", "[[nlp-sentiment-analysis]]", "[[finbert]]", "[[earnings-call-analysis]]", "[[llm-market-analysis]]", "[[social-sentiment-analysis]]", "[[named-entity-recognition]]", "[[text-preprocessing-finance]]", "[[gpt-4]]"]
+related: ["[[nlp]]", "[[nlp-overview]]", "[[nlp-sentiment-analysis]]", "[[finbert]]", "[[llm-market-analysis]]", "[[social-sentiment-analysis]]", "[[named-entity-recognition]]", "[[text-preprocessing-finance]]", "[[gpt-4]]"]
 difficulty: intermediate
 domain: [machine-learning]
 ---
@@ -36,7 +36,7 @@ See [[nlp-overview]] for the stage-by-stage detail.
 ## Trading use-cases
 
 - **News & headline sentiment** — short-horizon (1-5 day) predictive power, strongest around earnings and shocks; see [[nlp-sentiment-analysis]].
-- **Earnings-call analysis** — tone, management confidence, and Q&A evasiveness as signals; see [[earnings-call-analysis]].
+- **Earnings-call analysis** — tone, management confidence, and Q&A evasiveness as signals; see earnings-call-analysis.
 - **Filing analysis** — long-document QA over 10-Ks/10-Qs with [[retrieval-augmented-generation|RAG]] and large-context LLMs like [[gpt-4|GPT-4]] / Claude; see [[llm-market-analysis]].
 - **Central-bank communication** — hawkish/dovish scoring of FOMC and ECB statements to anticipate rate-path repricing.
 - **Social signals** — Reddit/X chatter for meme-stock and crypto momentum; see [[social-sentiment-analysis]].
@@ -60,7 +60,7 @@ Look-ahead bias from post-event corpora, overfitting to noisy social text, vendo
 - [[nlp]] — general NLP concept
 - [[nlp-overview]] — trading NLP section hub
 - [[finbert]] — finance-tuned sentiment model
-- [[nlp-sentiment-analysis]], [[social-sentiment-analysis]], [[earnings-call-analysis]]
+- [[nlp-sentiment-analysis]], [[social-sentiment-analysis]], earnings-call-analysis
 
 ## Sources
 

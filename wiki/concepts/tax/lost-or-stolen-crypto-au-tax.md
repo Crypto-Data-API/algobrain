@@ -24,7 +24,7 @@ related:
 
 When a holder loses access to crypto held in self-custody — typically cold storage — the question is whether the loss can be claimed as a **capital loss** in the Australian tax return. The ATO's position is that **lost cryptocurrency can give rise to a CGT event** under s 104-20 (CGT event C1 — loss or destruction) if the asset is genuinely irrecoverable and the loss can be substantiated. The bar is high; the evidence requirements are specific; and the line between "lost" and "stolen" matters because different CGT events apply. This page covers the law, the ATO's published position, the evidence standard, and how the claim is reported.
 
-> **Not tax or legal advice.** Thresholds, amendment periods and CGT-event mechanics described below are indicative of the published ATO position and may change. Confirm the current position with the [[ato|ATO]] or a registered tax agent before lodging.
+> **Not tax or legal advice.** Thresholds, amendment periods and CGT-event mechanics described below are indicative of the published ATO position and may change. Confirm the current position with the ATO or a registered tax agent before lodging.
 
 ## The legal framework
 

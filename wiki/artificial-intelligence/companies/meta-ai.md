@@ -10,12 +10,12 @@ entity_type: company
 founded: 2013
 headquarters: "Menlo Park, USA"
 website: "https://ai.meta.com"
-related: ["[[meta-platforms]]", "[[openai]]", "[[anthropic]]", "[[foundation-models]]", "[[open-source-ai-movement]]", "[[hugging-face]]", "[[fine-tuning-llms]]", "[[artificial-intelligence]]"]
+related: ["[[openai]]", "[[anthropic]]", "[[foundation-models]]", "[[open-source-ai-movement]]", "[[hugging-face]]", "[[fine-tuning-llms]]", "[[artificial-intelligence]]"]
 ---
 
 # Meta AI (Llama)
 
-**Meta AI** is the AI division of [[meta-platforms|Meta Platforms]] (NASDAQ: META), originating in the FAIR lab founded in 2013 under Yann LeCun, and most notable for the **Llama** family of open-weight models. Llama's 2023 release catalyzed the [[open-source-ai-movement|open-source AI movement]], enabling anyone to run powerful language models locally — including for trading applications — without API costs or data-privacy concerns. In mid-2025 Meta reorganized its AI effort into **Meta Superintelligence Labs (MSL)**, marking a strategic pivot that traders track closely as a driver of META's stock and the open-vs-closed AI narrative.
+**Meta AI** is the AI division of Meta Platforms (NASDAQ: META), originating in the FAIR lab founded in 2013 under Yann LeCun, and most notable for the **Llama** family of open-weight models. Llama's 2023 release catalyzed the [[open-source-ai-movement|open-source AI movement]], enabling anyone to run powerful language models locally — including for trading applications — without API costs or data-privacy concerns. In mid-2025 Meta reorganized its AI effort into **Meta Superintelligence Labs (MSL)**, marking a strategic pivot that traders track closely as a driver of META's stock and the open-vs-closed AI narrative.
 
 ## Key Models
 
@@ -50,7 +50,6 @@ The open-weight approach means quantized Llama models run on consumer GPUs, maki
 
 ## Related
 
-- [[meta-platforms]] — Parent company (META)
 - [[foundation-models]] — What Llama is
 - [[open-source-ai-movement]] — The movement Llama catalyzed (and partially retreated from)
 - [[fine-tuning-llms]] — Adapting Llama for financial tasks

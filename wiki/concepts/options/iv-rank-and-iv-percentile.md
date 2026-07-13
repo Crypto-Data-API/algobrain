@@ -15,13 +15,11 @@ related:
   - "[[iron-condor]]"
   - "[[credit-spread]]"
   - "[[tom-sosnoff]]"
-  - "[[tastytrade]]"
   - "[[thinkorswim]]"
   - "[[vega-hedging]]"
-  - "[[earnings-options-strategies]]"
 ---
 
-**IV Rank** and **IV Percentile** are two metrics that measure whether an asset's current [[implied-volatility]] is historically high or low. They are the primary tools options traders use to determine whether to sell premium (when options are expensive) or buy premium (when options are cheap). Both were popularized by [[tom-sosnoff]] and the [[tastytrade]] methodology.
+**IV Rank** and **IV Percentile** are two metrics that measure whether an asset's current [[implied-volatility]] is historically high or low. They are the primary tools options traders use to determine whether to sell premium (when options are expensive) or buy premium (when options are cheap). Both were popularized by [[tom-sosnoff]] and the tastytrade methodology.
 
 ## IV Rank (IVR)
 
@@ -44,7 +42,7 @@ An IV Rank of 50% means current IV is exactly midway between the annual high and
 - Ranges from 0% to 100%
 - Sensitive to outliers: a single IV spike (e.g., around earnings or a crash) can compress the rank for the rest of the year
 - Simple to calculate and interpret
-- Displayed on [[thinkorswim]] and [[tastytrade]] platforms by default
+- Displayed on [[thinkorswim]] and tastytrade platforms by default
 
 ### IV Rank Limitation
 
@@ -80,10 +78,10 @@ An IV Percentile of 79.4% means that IV was lower than today's level about 80% o
 | Formula | Range-based (min/max) | Distribution-based (days count) |
 | Sensitivity to spikes | High (one extreme day skews it) | Low (treats every day equally) |
 | Common reading | Often lower than IVP | Often higher than IVR |
-| Platform availability | [[thinkorswim]], [[tastytrade]] | [[tastytrade]], some third-party tools |
+| Platform availability | [[thinkorswim]], tastytrade | tastytrade, some third-party tools |
 | Best for | Quick gauge of range position | Robust historical context |
 
-In practice, [[tastytrade]] has shifted toward emphasizing IV Percentile over IV Rank because of its resistance to outlier distortion. Many traders use both in conjunction.
+In practice, tastytrade has shifted toward emphasizing IV Percentile over IV Rank because of its resistance to outlier distortion. Many traders use both in conjunction.
 
 ### Worked example — same data, two very different readings
 
@@ -130,7 +128,7 @@ When IV Rank < 20% (or IV Percentile < 20%), options are historically cheap. Thi
 
 ### Earnings Plays
 
-IV Rank is especially relevant around [[earnings-options-strategies|earnings events]]:
+IV Rank is especially relevant around earnings events:
 
 - IV typically expands heading into earnings as uncertainty increases
 - After the announcement, IV crushes sharply (often 30-60% overnight)
@@ -158,7 +156,7 @@ IV Rank is especially relevant around [[earnings-options-strategies|earnings eve
 ### Platform Support
 
 - **[[thinkorswim]]**: Displays IV Rank in the options chain and watchlist columns; available as thinkScript study
-- **[[tastytrade]]**: Shows both IV Rank and IV Percentile prominently on the trade page
+- **tastytrade**: Shows both IV Rank and IV Percentile prominently on the trade page
 - **Third-party tools**: Market Chameleon, iVolatility, barchart.com provide IV Rank data
 - **Custom calculation**: Straightforward to compute in Python using historical IV data from CBOE or options data providers
 
@@ -220,10 +218,8 @@ IVR/IVP are *relative* measures. A 90% IVR on a name whose IV range is 15-25% st
 - [[iron-condor]] -- Primary strategy deployed when IV Rank is high
 - [[credit-spread]] -- Directional premium selling
 - [[tom-sosnoff]] -- Popularized IV Rank as a trading filter
-- [[tastytrade]] -- Platform and methodology centered on IV Rank-driven trading
 - [[thinkorswim]] -- Platform where IV Rank is prominently displayed
 - [[vega-hedging]] -- Managing vega exposure based on IV levels
-- [[earnings-options-strategies]] -- Using IV Rank to time earnings trades
 - [[gamma-scalping]] -- Long-vol strategy screened by low IV rank
 - [[delta-hedging]] -- Short-vol strategy screened by high IV rank
 - [[variance-risk-premium]] -- Why selling high-IV options has a statistical edge

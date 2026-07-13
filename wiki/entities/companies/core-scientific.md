@@ -20,7 +20,7 @@ options_volume: "High"
 related: ["[[artificial-intelligence]]", "[[bitcoin]]", "[[crypto-trading]]", "[[implied-volatility]]", "[[options]]", "[[options-greeks]]"]
 ---
 
-Core Scientific Inc. (NASDAQ: CORZ) is an American digital infrastructure company founded in 2017 in Seattle and now headquartered in Austin, Texas. Originally focused on [[bitcoin]] mining, Core Scientific has pivoted to become a major provider of high-performance computing (HPC) hosting for AI workloads, leveraging its large-scale, energized data center footprint. The company emerged from Chapter 11 bankruptcy in January 2024 and relisted on NASDAQ; in October 2025 its shareholders **rejected a ~$9B all-stock takeover by [[coreweave]]**, leaving CORZ independent with roughly $10B of contracted HPC hosting revenue — and one of the most actively traded retail options names at the bitcoin/AI crossover.
+Core Scientific Inc. (NASDAQ: CORZ) is an American digital infrastructure company founded in 2017 in Seattle and now headquartered in Austin, Texas. Originally focused on [[bitcoin]] mining, Core Scientific has pivoted to become a major provider of high-performance computing (HPC) hosting for AI workloads, leveraging its large-scale, energized data center footprint. The company emerged from Chapter 11 bankruptcy in January 2024 and relisted on NASDAQ; in October 2025 its shareholders **rejected a ~$9B all-stock takeover by coreweave**, leaving CORZ independent with roughly $10B of contracted HPC hosting revenue — and one of the most actively traded retail options names at the bitcoin/AI crossover.
 
 ## Options Trading Profile
 
@@ -46,11 +46,11 @@ Core Scientific owns and operates large grid-connected data center campuses (Tex
 
 Core Scientific is the cohort's clearest example of a **mining-to-AI-landlord conversion**, and it is the furthest along on contracted backlog:
 
-- **AI/HPC colocation (primary engine).** Long-dated, **take-or-pay** hosting contracts where the tenant (chiefly [[coreweave]]) supplies GPUs and Core Scientific supplies powered shells, cooling, and operations. Take-or-pay means revenue is contracted whether or not the tenant fully utilizes the capacity — the most bond-like, infrastructure-grade cash flow in the group, which is why the market values it on an infrastructure/REIT-style multiple rather than a mining multiple. See [[data-center]] and [[ai-data-center-power-demand]].
+- **AI/HPC colocation (primary engine).** Long-dated, **take-or-pay** hosting contracts where the tenant (chiefly coreweave) supplies GPUs and Core Scientific supplies powered shells, cooling, and operations. Take-or-pay means revenue is contracted whether or not the tenant fully utilizes the capacity — the most bond-like, infrastructure-grade cash flow in the group, which is why the market values it on an infrastructure/REIT-style multiple rather than a mining multiple. See [[data-center]] and [[ai-data-center-power-demand]].
 - **Bitcoin mining (legacy, being wound down/monetized).** Self-mining and hosted mining convert power into hashrate into BTC; unit economics turn on **fleet efficiency (J/TH)**, **all-in power cost ($/kWh)**, and **hash price** (BTC price × network difficulty). CORZ is deliberately shrinking this to free up energized megawatts for higher-value HPC and to fund the conversion (e.g., the March 2026 BTC sale).
 - **The scarce asset: contracted, energized, interconnected megawatts.** In an interconnection-queue-constrained market, *existing* power access is the moat — the reason a company that exited Chapter 11 in early 2024 could attract a ~$9B buyout bid and ~$10B of contracted hosting revenue.
 
-The throughline matches the cohort ([[mara]], [[hut-8]], [[terawulf]], [[applied-digital]], [[iren]], [[hive-digital-technologies]]): migrate from *price-taker on BTC* to *landlord of compute*. CORZ's distinctive position is that the conversion is largely *done on paper* — the backlog is contracted; the remaining work is energization and customer diversification.
+The throughline matches the cohort ([[mara]], [[hut-8]], [[terawulf]], applied-digital, [[iren]], [[hive-digital-technologies]]): migrate from *price-taker on BTC* to *landlord of compute*. CORZ's distinctive position is that the conversion is largely *done on paper* — the backlog is contracted; the remaining work is energization and customer diversification.
 
 ## Key financials — as of June 2026 (approximate)
 
@@ -72,8 +72,8 @@ The throughline matches the cohort ([[mara]], [[hut-8]], [[terawulf]], [[applied
 
 - **Profile:** very high beta to both [[bitcoin]] and AI-infrastructure sentiment; high implied volatility, heavy retail options flow (Tier 2 liquidity). Post-deal-break, it trades as a pure "powered-land/AI colocation" story with residual BTC torque.
 - **Catalysts:** new HPC customer announcements (diversification beyond CoreWeave is the #1 re-rating lever), megawatt energization milestones, quarterly results, bitcoin price and halving-cycle economics, any renewed M&A interest (the failed CRWV bid validated strategic value).
-- **Case study:** the rejected CoreWeave deal is a reference example of fixed-ratio all-stock merger-arb risk — the spread blew out as the acquirer's stock fell, and target holders chose standalone value. Compare [[confluent]]'s clean cash deal with IBM as the opposite outcome.
-- **Correlated names:** [[iren]], [[cleanspark]], [[mara]], [[riot-platforms]], [[coreweave]], [[applied-digital]], [[terawulf]].
+- **Case study:** the rejected CoreWeave deal is a reference example of fixed-ratio all-stock merger-arb risk — the spread blew out as the acquirer's stock fell, and target holders chose standalone value. Compare confluent's clean cash deal with IBM as the opposite outcome.
+- **Correlated names:** [[iren]], [[cleanspark]], [[mara]], [[riot-platforms]], coreweave, applied-digital, [[terawulf]].
 
 ## Competitive Positioning / Peers
 
@@ -82,7 +82,7 @@ Core Scientific is the **late-stage benchmark** for the listed bitcoin-miner / d
 | Company | Ticker | Differentiator | HPC-pivot stage |
 |---|---|---|---|
 | **Core Scientific** | CORZ | Largest contracted HPC backlog (CoreWeave ~$10B, take-or-pay); spurned ~$9B CoreWeave buyout | Late |
-| [[applied-digital]] | APLD | Pure data-center developer (CoreWeave anchor at Polaris Forge) | Late (least crypto residual) |
+| applied-digital | APLD | Pure data-center developer (CoreWeave anchor at Polaris Forge) | Late (least crypto residual) |
 | [[terawulf]] | WULF | Low-carbon power; Fluidstack + Google-backstopped leases | Late |
 | [[hut-8]] | HUT | Power-origination pipeline; American Bitcoin (ABTC) spin; Fluidstack/Google lease | Mid-to-late |
 | [[iren]] | IREN | Australia/US renewable footprint; vertically integrated | Mid-to-late |
@@ -91,7 +91,7 @@ Core Scientific is the **late-stage benchmark** for the listed bitcoin-miner / d
 | [[riot-platforms]] | RIOT | Texas-scale mining; ERCOT power credits | Earlier-mid |
 | [[cleanspark]] | CLSK | Mining-pure-play discipline | Early |
 
-CORZ's edge versus the cohort is the **size and contractual quality of its backlog** (~$10B, take-or-pay) and the implicit strategic validation of the rejected ~$9B [[coreweave]] bid. Its key relative weakness is **customer concentration** — CoreWeave dominates the book — so the #1 re-rating lever from here is *diversifying* the tenant base. It carries the least crypto residual torque among the scaled miners alongside [[applied-digital]].
+CORZ's edge versus the cohort is the **size and contractual quality of its backlog** (~$10B, take-or-pay) and the implicit strategic validation of the rejected ~$9B coreweave bid. Its key relative weakness is **customer concentration** — CoreWeave dominates the book — so the #1 re-rating lever from here is *diversifying* the tenant base. It carries the least crypto residual torque among the scaled miners alongside applied-digital.
 
 ## Bull vs Bear Case
 
@@ -126,7 +126,7 @@ CORZ defies a single multiple; the market weighs several axes (no specific multi
 - **Headline-driven re-rating.** New HPC customer announcements (diversification beyond CoreWeave is the #1 lever), energization milestones, and any renewed M&A interest can move CORZ independently of the BTC tape.
 - **Merger-arb case study.** The rejected fixed-ratio all-stock CoreWeave deal is a reference example of merger-arb risk — the spread blew out as the acquirer's stock fell and target holders chose standalone value (contrast a clean cash deal). Useful template for evaluating any future cohort M&A.
 - **Catalysts to trade around:** new HPC customer/diversification news, megawatt energization milestones, quarterly results, BTC price and [[bitcoin-halving|halving]]/hash-price economics, financing events, and any renewed takeover interest.
-- **Basket behavior:** moves with [[applied-digital]], [[terawulf]], [[hut-8]], [[iren]], [[mara]], [[hive-digital-technologies]], [[riot-platforms]], [[cleanspark]], [[coreweave]], and on treasury sentiment with [[microstrategy]]; cohort dispersion (lease leaders vs laggards) is a recurring setup.
+- **Basket behavior:** moves with applied-digital, [[terawulf]], [[hut-8]], [[iren]], [[mara]], [[hive-digital-technologies]], [[riot-platforms]], [[cleanspark]], coreweave, and on treasury sentiment with [[microstrategy]]; cohort dispersion (lease leaders vs laggards) is a recurring setup.
 
 ## Capital Structure & Dilution Risk
 
@@ -160,14 +160,12 @@ CORZ defies a single multiple; the market weighs several axes (no specific multi
 - [[microstrategy]]
 - [[iren]]
 - [[cleanspark]]
-- [[coreweave]]
 - [[terawulf]]
-- [[applied-digital]]
 - [[hive-digital-technologies]]
 
 ## Sources
 
-- (Source: [[stockmarketapi-options-stocks-2026-04-13]])
+- (Source: stockmarketapi-options-stocks-2026-04-13)
 - [Data Center Dynamics — Core Scientific shareholders vote against CoreWeave acquisition, deal halted (Oct 2025)](https://www.datacenterdynamics.com/en/news/coreweave-core-scientific-deal-ended/)
 - [Bloomberg — Core Scientific investors spurn CoreWeave takeover in vote (30 Oct 2025)](https://www.bloomberg.com/news/articles/2025-10-30/core-scientific-investors-spurn-coreweave-takeover-bid-in-vote)
 - [Core Scientific — CoreWeave exercises final ~120 MW contract option (IR press release)](https://investors.corescientific.com/news-events/press-releases/detail/95/core-scientific-announces-exercise-of-final-contract-option-by-coreweave-for-delivery-of-approximately-120-mw-of-additional-digital-infrastructure-to-host-high-performance-computing-operations)

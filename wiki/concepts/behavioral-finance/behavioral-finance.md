@@ -65,7 +65,7 @@ Behavioral biases, operating at scale, produce market phenomena like [[bubble|bu
 
 ## Why It Matters for Traders
 
-Self-awareness of behavioral biases is a prerequisite for consistent profitability. The best [[risk-management]] systems are designed to protect traders from their own psychology — pre-committed stops, position limits, and mechanical execution that prevents System-1 errors from acting. Equally, behavioral biases are a *source of edge*: [[momentum]] and [[post-earnings-announcement-drift]] partly reflect under-reaction and the disposition effect, while [[contrarian-extremes|contrarian]] and [[mean-reversion]] strategies exploit herding-driven over-reaction at [[sentiment]] extremes.
+Self-awareness of behavioral biases is a prerequisite for consistent profitability. The best [[risk-management]] systems are designed to protect traders from their own psychology — pre-committed stops, position limits, and mechanical execution that prevents System-1 errors from acting. Equally, behavioral biases are a *source of edge*: [[momentum]] and post-earnings-announcement-drift partly reflect under-reaction and the disposition effect, while [[contrarian-extremes|contrarian]] and [[mean-reversion]] strategies exploit herding-driven over-reaction at [[sentiment]] extremes.
 
 ### Behavioral guardrails (the two faces of the field)
 
@@ -73,7 +73,7 @@ Behavioral finance is useful to a trader in two directions at once — defending
 
 | Bias / failure mode | Defensive guardrail (protect yourself) | Offensive edge (exploit others) |
 |---------------------|----------------------------------------|---------------------------------|
-| [[loss-aversion]] / [[disposition-effect]] | Pre-committed stop-losses; rules-based exits | [[momentum]] / [[post-earnings-announcement-drift]] from under-reaction |
+| [[loss-aversion]] / [[disposition-effect]] | Pre-committed stop-losses; rules-based exits | [[momentum]] / post-earnings-announcement-drift from under-reaction |
 | [[overconfidence-bias]] | Position-size limits, max-leverage cap | Fade crowded, over-leveraged positioning |
 | [[herding]] / FOMO | Checklist entries; no chasing extended price | [[contrarian-extremes|Contrarian]] entries at [[sentiment]] extremes |
 | [[recency-bias]] | Sample size discipline; track expectancy, not last trades | [[mean-reversion]] after over-extrapolated moves |
