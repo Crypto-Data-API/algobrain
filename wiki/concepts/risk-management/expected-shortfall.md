@@ -150,7 +150,7 @@ Options books have two structural features that make ES the appropriate risk mea
 
 Concretely, a typical short-strangle book might have a VaR(99%, 1-day) of -3% but an ES(99%, 1-day) of -8% — meaning the *average* of the bad-tail outcomes is more than twice the VaR. In a [[vix-august-2024-spike|VIX spike]] or [[volmageddon|vol detonation]], the realised loss can be 3-4x the VaR because the worst-case tail (which dominates the conditional expectation) is filled with margin-call cascades and forced unwinds.
 
-A practical rule used by [[itpm-trading-philosophy|ITPM]]-aligned and similar discretionary practitioners: **size short-premium positions to ES, not to VaR**. Concretely:
+A practical rule used by discretionary practitioners: **size short-premium positions to ES, not to VaR**. Concretely:
 
 - Set the per-trade and book-level loss budget against expected shortfall at 97.5% or 99%, not at 95% VaR.
 - Re-estimate ES weekly, conditioned on the current [[volatility-regime-classification|vol regime]] (a low-VIX regime has different tail dynamics than a high-VIX regime).

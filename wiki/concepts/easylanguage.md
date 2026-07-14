@@ -16,7 +16,6 @@ related:
   - "[[thinkorswim]]"
   - "[[optionstation-pro]]"
   - "[[wheel-strategy]]"
-  - "[[itpm-options-portfolio-management]]"
   - "[[traderspost]]"
   - "[[tradestation-options-workflow]]"
   - "[[multicharts]]"
@@ -213,7 +212,7 @@ A pragmatic split that most TradeStation power users converge on:
 | Multi-leg options entry/exit on signal | EasyLanguage (the chain primitives are unmatched in retail) |
 | Portfolio-level aggregation | Portfolio Maestro for quick checks, Python for anything subtle |
 
-For [[itpm-options-portfolio-management|ITPM-style options overlay programs]], the typical pattern is: research the rule in Python, port the entry/exit logic to EasyLanguage for live automation, and wire alerts to [[traderspost]] for cloud-redundant execution.
+For options overlay programs, the typical pattern is: research the rule in Python, port the entry/exit logic to EasyLanguage for live automation, and wire alerts to [[traderspost]] for cloud-redundant execution.
 
 ## Related
 
@@ -223,7 +222,6 @@ For [[itpm-options-portfolio-management|ITPM-style options overlay programs]], t
 - [[optionstation-pro]] — TradeStation's options workspace, scriptable from EasyLanguage
 - [[wheel-strategy]] — canonical premium-selling program often automated in EasyLanguage
 - [[multicharts]] — third-party platform that runs near-identical PowerLanguage code
-- [[itpm-options-portfolio-management]] — overlay framework that EasyLanguage can encode
 - [[tradestation-options-workflow]] — end-to-end research-to-live options workflow on TradeStation
 - [[backtrader]] — Python backtester used upstream of EasyLanguage automation
 - [[overfitting-detection]] / [[curve-fitting]] — the failure modes EasyLanguage backtests are prone to

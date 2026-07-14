@@ -76,12 +76,12 @@ Risk no more than 5-10% of the portfolio in a single covered call position. Dive
 
 ## Covered Calls in Long/Short Portfolios
 
-Within a long-short-equity framework (as taught by itpm), covered calls play a specific role:
+Within a long-short-equity framework, covered calls play a specific role:
 
 - Used to generate income on long equity positions while waiting for a fundamental catalyst
 - The sold call partially funds the purchase of put options on short positions, reducing overall portfolio cost
 - [[trade-repair-and-rolling|Rolling up and out]] is a key management technique when the underlying rallies through the strike
-- In the ITPM methodology, covered calls are a component of portfolio construction rather than a standalone strategy
+- In this framework, covered calls are a component of portfolio construction rather than a standalone strategy
 
 ## See Also
 - [[wheel-strategy]] -- extends the covered call into a full income cycle with cash-secured puts

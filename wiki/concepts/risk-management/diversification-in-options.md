@@ -181,6 +181,5 @@ The prudent vega budget sizes the book to the *shock-regime* number. Then the ma
 
 - Asness, C. (multiple AQR commentaries on volatility selling and factor exposure).
 - AQR / JPM / GS research on the [[variance-risk-premium]] and its factor structure.
-- [[itpm-trading-philosophy]] — practitioner framework for cross-asset and cross-strategy diversification in options books.
 - [[book-option-volatility-and-pricing]] — Natenberg's treatment of correlation in vol surfaces.
 - [[universa]] / [[taleb-spitznagel]] — long-vol and tail-hedge methodology as the durable complement to short-vol.

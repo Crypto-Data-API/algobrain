@@ -58,7 +58,7 @@ DTE is the dominant axis on which a short-premium book is engineered, for three 
 
 The fundamental tension in premium selling is that the steepest part of the [[theta-decay-curve]] — the last 30 days, especially the last 10 — is also where [[gamma]] is most violent. A trader who only sells front-week premium maximises theoretical theta per dollar of capital but accepts a [[gamma-to-theta-ratio]] above 1 and a typical [[theta-realisation-ratio]] of 30-50% (versus 60-90% for 30-45 DTE on liquid index products). DTE selection is the choice of how aggressively to sit on that trade-off.
 
-The canonical tastytrade / [[itpm-trading-philosophy|ITPM]] heuristic — *open at 45 DTE, manage at 21 DTE* — is a DTE-based discipline that puts the trade in the part of the curve where theta has begun its meaningful acceleration but gamma has not yet turned vertical.
+The canonical tastytrade-style heuristic — *open at 45 DTE, manage at 21 DTE* — is a DTE-based discipline that puts the trade in the part of the curve where theta has begun its meaningful acceleration but gamma has not yet turned vertical.
 
 ### 2. DTE buckets are the unit of [[expiration-laddering|laddering]] and concentration limits
 

@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, derivatives, volatility, swing-trading]
 aliases: ["Ratio Calendar Spread", "Asymmetric Calendar", "Unbalanced Calendar", "Ratio Time Spread"]
-related: ["[[calendar-spread]]", "[[diagonal-spread]]", "[[ratio-spread]]", "[[itpm-ratio-calendar-spread]]", "[[itpm-trade-construction-playbook]]", "[[options-greeks]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[implied-volatility-term-structure]]", "[[volatility-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[managing-winners]]", "[[trade-repair-and-rolling]]", "[[options-portfolio-construction]]"]
+related: ["[[calendar-spread]]", "[[diagonal-spread]]", "[[ratio-spread]]", "[[options-greeks]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[implied-volatility-term-structure]]", "[[volatility-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[managing-winners]]", "[[trade-repair-and-rolling]]", "[[options-portfolio-construction]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [stocks, options, index-options]
@@ -23,7 +23,7 @@ expected_max_drawdown: 0.30
 breakeven_cost_bps: 40
 ---
 
-A **ratio calendar spread** is a calendar spread (long and short options at the same strike but different expirations) constructed with an *unequal* number of contracts on the two legs — 1:2, 2:1, 1:3, or any other deliberate ratio. Unlike a 1:1 calendar (pure vega/term-structure bet), the ratio variant injects an explicit directional or income tilt: more shorts make the spread a *credit-tilted income trade*, more longs make it a *long-volatility / convexity trade*. The structure is the generalised parent of the [[itpm-ratio-calendar-spread|ITPM 2:1 ratio calendar]], which is the canonical implementation taught at the Institute of Trading and Portfolio Management.
+A **ratio calendar spread** is a calendar spread (long and short options at the same strike but different expirations) constructed with an *unequal* number of contracts on the two legs — 1:2, 2:1, 1:3, or any other deliberate ratio. Unlike a 1:1 calendar (pure vega/term-structure bet), the ratio variant injects an explicit directional or income tilt: more shorts make the spread a *credit-tilted income trade*, more longs make it a *long-volatility / convexity trade*.
 
 ## Edge Source
 
@@ -31,7 +31,7 @@ The ratio calendar draws from three of the [[edge-taxonomy]] categories:
 
 1. **Risk-bearing edge** — Selling shorter-dated options collects the [[volatility-risk-premium|volatility risk premium]]. When the ratio is short-heavy (e.g., 1 long / 3 short), the trade is mostly an income structure paying the trader for absorbing near-term tail risk. Index data shows IV exceeds RV roughly 80-85% of the time at 30-day horizons.
 2. **Analytical edge** — Selecting the ratio is itself the analytical work. The trader is expressing a view on the *shape* of the [[implied-volatility-term-structure|IV term structure]] and the *path* of the underlying. Getting the ratio wrong (too many longs in calm vol, too many shorts when term structure flips into backwardation) is what kills naive implementations.
-3. **Behavioral edge** — Retail traders default to the simplest 1:1 calendar and rarely consider asymmetric ratios. Professional desks and ITPM-style books harvest this gap by tailoring the ratio to the specific catalyst, vol regime, and directional bias.
+3. **Behavioral edge** — Retail traders default to the simplest 1:1 calendar and rarely consider asymmetric ratios. Professional desks harvest this gap by tailoring the ratio to the specific catalyst, vol regime, and directional bias.
 
 ## Why This Edge Exists
 
@@ -74,8 +74,6 @@ The dominant variant. Selling the near, buying the far, with ratio chosen to til
 | Long leg | Buy 2N or 3N far-dated options (60-180 DTE) |
 | Greeks at entry | Net long vega, long gamma (after near expires), small or net debit |
 | P&L profile | Income first (near-leg credit), then a long-options payoff if the underlying moves |
-
-This is the [[itpm-ratio-calendar-spread|ITPM 2:1 calendar]] variant — see that page for the canonical implementation, position sizing, and entry rules.
 
 #### Sub-variant 2b — Short-heavy (2:1, 3:1) — Income / Theta Trade
 
@@ -235,7 +233,7 @@ Drawing from [[failure-modes]]:
 1. **Term-structure inversion mid-trade** — A vol spike inverts contango into backwardation; the calendar's structural edge flips. Long-heavy variants get crushed (long-vega leg gets less benefit than the short-vega leg loses) when the curve re-flattens.
 2. **Wrong-ratio regime** — Running long-heavy ratios in a steep contango / range-bound regime drains theta; running short-heavy ratios in a vol-spike regime exposes the residual short to catastrophic loss before the wing kicks in.
 3. **Liquidity collapse on the back leg** — Single-name back-month options can have wide spreads, particularly on smaller-cap names. Repair operations cost 2-3x the entry slippage.
-4. **Pin risk at near-leg expiration** — If the underlying pins close to the short strike on expiration day, gamma explodes. Standard ITPM rule: close the short leg before expiration week, never let it run to settlement.
+4. **Pin risk at near-leg expiration** — If the underlying pins close to the short strike on expiration day, gamma explodes. Standard rule: close the short leg before expiration week, never let it run to settlement.
 5. **Ratio drift from corporate actions** — Stock splits, special dividends, and mergers adjust contracts non-uniformly across expirations and can leave the ratio mismatched.
 
 ## Kill Criteria
@@ -263,8 +261,6 @@ Drawing from [[failure-modes]]:
 
 ## Sources
 
-- [[itpm-ratio-calendar-spread]] — the canonical 2:1 long-heavy implementation with strict portfolio rules.
-- [[itpm-trade-construction-playbook]] — institutional methodology that hosts the ratio calendar as a primary structure.
 - [[options-portfolio-construction]] — book-level treatment.
 - McMillan, *Options as a Strategic Investment* (5th ed.) — Chapter on calendar and diagonal spreads.
 - Natenberg, *Option Volatility & Pricing* — pp. 200-235 on calendar spread Greeks and term-structure.
@@ -272,7 +268,6 @@ Drawing from [[failure-modes]]:
 
 ## Related
 
-- [[itpm-ratio-calendar-spread]] — canonical 2:1 implementation
 - [[calendar-spread]] — the 1:1 parent structure
 - [[diagonal-spread]] — calendar with different strikes
 - [[ratio-spread]] — same-expiration ratio (sibling structure)

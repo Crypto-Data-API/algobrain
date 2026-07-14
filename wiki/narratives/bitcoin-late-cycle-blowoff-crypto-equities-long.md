@@ -97,5 +97,4 @@ The bot's Stage 5 (structure) and Stage 6 (sizing) will confirm specific strikes
 - [[2026-market-regime-overview]] — BTC's stagflation resilience context
 - [[2026-04-06-hyperliquid-volume-surge]] — derivatives activity confirmation
 - [[bitcoin]] — base market
-- [[itpm-framework]] — top-down macro (Stage 4, name selection within crypto theme)
 - [[bull-call-spread]], [[long-call-vertical]] — primary expression structures

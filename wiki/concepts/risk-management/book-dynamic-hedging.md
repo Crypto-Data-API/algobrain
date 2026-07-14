@@ -282,4 +282,3 @@ The recurring failure modes of a hedging program, summarised before the detailed
 - Hull, *Options, Futures, and Other Derivatives* — Chapter on hedging in practice
 - Whalley & Wilmott (1997) "An asymptotic analysis of an optimal hedging model for option pricing with transaction costs" — closed-form band-width result
 - Leland (1985) "Option pricing and replication with transaction costs" — adjusted-volatility framework for discrete hedging
-- [[itpm-trade-construction-playbook]] — practitioner workflow embedding hedge policy in book construction

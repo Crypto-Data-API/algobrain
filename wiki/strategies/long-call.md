@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, derivatives, stocks, volatility, technical-analysis]
 aliases: ["Long Call", "Buy Call"]
-related: ["[[long-put]]", "[[bull-call-spread]]", "[[options-greeks]]", "[[implied-volatility]]", "[[options-risk-budgeting]]", "[[long-volatility-strategies]]", "[[long-vol-vs-short-vol]]", "[[long-dated-options]]", "[[volatility-skew]]", "[[theta]]", "[[gamma]]", "[[vega]]", "[[delta]]", "[[itpm-trade-construction-playbook]]"]
+related: ["[[long-put]]", "[[bull-call-spread]]", "[[options-greeks]]", "[[implied-volatility]]", "[[options-risk-budgeting]]", "[[long-volatility-strategies]]", "[[long-vol-vs-short-vol]]", "[[long-dated-options]]", "[[volatility-skew]]", "[[theta]]", "[[gamma]]", "[[vega]]", "[[delta]]"]
 strategy_type: technical
 timeframe: swing
 markets: [stocks, options, indices]
@@ -237,7 +237,6 @@ See [[when-to-retire-a-strategy]].
 - [[book-options-as-a-strategic-investment]] (McMillan) -- canonical text on listed options strategies.
 - [[book-option-volatility-and-pricing]] (Natenberg) -- pricing, Greeks, vol-surface mechanics.
 - [[book-dynamic-hedging]] (Taleb) -- the convexity argument and why long-gamma matters in tail regimes.
-- [[itpm-trade-construction-playbook]] -- ITPM curriculum on directional options expression.
 - [[cboe]] specifications for listed equity-index options.
 
 ## Related
@@ -253,7 +252,6 @@ See [[when-to-retire-a-strategy]].
 - [[long-vol-vs-short-vol]] -- the structural decision
 - [[risk-reversal]] -- long-call / short-put combination
 - [[volatility-risk-premium]] -- the headwind for long calls
-- [[itpm-trade-construction-playbook]] -- discretionary directional workflow
 - [[iron-condor]] -- a short-premium structure whose call-side wing is the counterparty to a long call
 - [[leaps]] -- deep-ITM long calls (LEAPS) used as a leveraged stock substitute
 - [[managing-winners]] -- exit discipline mirrored from the short-premium side

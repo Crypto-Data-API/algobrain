@@ -64,7 +64,7 @@ Consider an active trader making **$100,000 of net option-trading profit in a ye
 
 **After-tax difference: $10,200 saved annually**, or about 10.2% of gross P&L. For a trader compounding over a decade, the cumulative impact is enormous.
 
-This is the single biggest reason why ITPM-style and other professional options portfolios route nearly all S&P 500 exposure through SPX or XSP rather than SPY.
+This is the single biggest reason why professional options portfolios route nearly all S&P 500 exposure through SPX or XSP rather than SPY.
 
 ## Mark-to-Market Provision
 
@@ -95,9 +95,9 @@ The form has two main parts:
 
 Brokers issue 1099-Bs that already segregate Section 1256 contracts, simplifying preparation.
 
-## ITPM Implications
+## Portfolio Implications
 
-For ITPM-style options portfolios, Section 1256 awareness is foundational:
+For actively traded options portfolios, Section 1256 awareness is foundational:
 
 - **Default to SPX/XSP for index exposure**, not SPY, unless there is a specific reason (e.g., IRA, account size, penny-tick advantage that outweighs tax over a known short hold).
 - **Account-size threshold for XSP vs SPX** — traders below ~$500K typically use XSP for granularity; above that, SPX dominates on commissions and operational simplicity.

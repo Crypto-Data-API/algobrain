@@ -29,7 +29,7 @@ The goal: move beyond isolated strategy descriptions toward a unified map of whe
 | What is tradeable right now | [Part 6: Current Opportunity Assessment](#part-6-current-opportunity-assessment-april-2026) |
 | How to go from this map to a sized position | [Part 7: From Map to Position](#part-7-from-map-to-position-a-decision-framework) |
 
-This map is the cross-asset, cross-strategy synthesis. For venue-specific perp playbooks see [[asterdex-perp-trading-map]] and [[hyperliquid-perp-trading-map]]; for the Solana spot/memecoin meta see [[low-cap-crypto-trading-map]]; for the discretionary trade-construction process see [[itpm-trade-construction-playbook]]; for the execution plumbing see [[exchange-api-reference]] and [[defi-contract-registry]].
+This map is the cross-asset, cross-strategy synthesis. For venue-specific perp playbooks see [[asterdex-perp-trading-map]] and [[hyperliquid-perp-trading-map]]; for the Solana spot/memecoin meta see [[low-cap-crypto-trading-map]]; for the execution plumbing see [[exchange-api-reference]] and [[defi-contract-registry]].
 
 ---
 
@@ -370,7 +370,6 @@ Cross-references were identified by matching edge sources, regime profiles, fail
 - [[asterdex-perp-trading-map]] — venue-specific perp playbook (private order book)
 - [[hyperliquid-perp-trading-map]] — venue-specific perp playbook (transparent book)
 - [[low-cap-crypto-trading-map]] — Solana spot/memecoin meta map
-- [[itpm-trade-construction-playbook]] — discretionary trade-construction process
 - [[exchange-api-reference]] — endpoints/feeds for CEX/DEX arbitrage execution
 - [[defi-contract-registry]] — contract addresses for on-chain arbitrage execution
 - [[edge-taxonomy]] · [[regime-matrix]] · [[strategy-correlation-matrix]] · [[failure-modes]] · [[arbitrage-overview]] · [[anomalies-overview]] · [[research-checklist]] · [[regime-adaptive-strategy]] · [[regime-detection]]

@@ -53,7 +53,7 @@ Pricing of linear derivatives follows from no-arbitrage carry relationships (for
 Derivatives are essential for:
 
 - **Hedging** — a portfolio manager buys index puts or sells futures to neutralize downside without liquidating holdings.
-- **Leverage** — controlling large notional exposure with limited capital, enabling capital-efficient long/short books (e.g. the itpm options-only long-short-equity approach).
+- **Leverage** — controlling large notional exposure with limited capital, enabling capital-efficient long/short books (e.g. options-only long-short-equity approaches).
 - **Price discovery** — derivatives markets often *lead* spot, because they are where informed and hedging flow concentrates. The [[basis]] (futures minus spot) and the [[funding-rate]] encode positioning and carry.
 - **Volatility trading** — options let a trader bet on the *magnitude* of moves regardless of direction, capturing the [[volatility-risk-premium]].
 - **Risk transfer** — swaps and CDS let institutions isolate and trade a single risk factor (rates, credit) without touching the underlying bond or loan.

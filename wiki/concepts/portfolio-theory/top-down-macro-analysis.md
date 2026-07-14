@@ -4,23 +4,23 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-11
 status: good
-tags: [portfolio-theory, fundamental-analysis, macro, itpm, trading-methodology]
+tags: [portfolio-theory, fundamental-analysis, macro, trading-methodology]
 aliases: ["Top-Down Analysis", "Macro-First Approach", "Top-Down/Bottom-Up Framework"]
 domain: [portfolio-theory]
 prerequisites: ["[[portfolio-theory]]"]
 difficulty: intermediate
-related: ["[[anton-kreil]]", "[[eighty-twenty-analysis]]", "[[sector-rotation]]", "[[interest-rates]]"]
+related: ["[[eighty-twenty-analysis]]", "[[sector-rotation]]", "[[interest-rates]]"]
 ---
 
 # Top-Down Macro Analysis
 
-Top-down macro analysis is a systematic approach to trade idea generation that starts with the broadest economic picture and narrows down to individual securities. It is the primary analytical framework taught by [[anton-kreil]] and the Institute of Trading and Portfolio Management, forming the "80%" in their [[eighty-twenty-analysis|80/20 analysis framework]].
+Top-down macro analysis is a systematic approach to trade idea generation that starts with the broadest economic picture and narrows down to individual securities. It is the primary analytical framework used by institutional portfolio managers, forming the "80%" in the [[eighty-twenty-analysis|80/20 analysis framework]].
 
 ## Overview
 
 The top-down approach mirrors how institutional portfolio managers at hedge funds and investment bank proprietary desks construct their trading views. Rather than starting with an individual stock chart (bottom-up), the process begins with understanding global macroeconomic conditions and systematically narrows the focus.
 
-[[anton-kreil]] describes the macro environment as telling you "which way the wind is blowing" — it determines the overall directional bias and risk appetite before any individual trade ideas are considered. (Source: [[itpm-god-like-trader-status]])
+The macro environment tells you which way the wind is blowing — it determines the overall directional bias and risk appetite before any individual trade ideas are considered.
 
 ## The Framework: Four Levels
 
@@ -83,16 +83,16 @@ Use [[technical-analysis]] to time entries and exits for the selected trades:
 
 **Output:** Specific entry orders with stop-losses and targets.
 
-## The WOYM Process
+## The Regular Macro Review
 
-ITPM's "What's On Your Mind" (WOYM) series demonstrates this framework in practice. In each episode, mentors walk through:
+A recurring macro review — weekly or ahead of major data releases — keeps the framework live. A typical review walks through:
 
 1. Current macro landscape and key themes
 2. Sector-level implications
 3. Specific stock ideas (both long and short)
-4. How they are positioned in their portfolios
+4. How the portfolio is currently positioned
 
-This regular macro review is the foundation of the long-short-equity portfolio management process. (Source: [[itpm-woym-ep27-recession-narrative]])
+This regular macro review is the foundation of the long-short-equity portfolio management process.
 
 ## Common Macro Indicators
 
@@ -109,7 +109,7 @@ This regular macro review is the foundation of the long-short-equity portfolio m
 
 The key insight: individual stock performance is heavily influenced by macro and sector forces. A great company in the wrong sector at the wrong point in the cycle can still lose money. Conversely, a mediocre company in the right sector at the right time can generate strong returns.
 
-By starting top-down, traders ensure their individual positions are aligned with the broader macro current, dramatically improving the probability of success. (Source: [[itpm-five-principles]])
+By starting top-down, traders ensure their individual positions are aligned with the broader macro current, dramatically improving the probability of success.
 
 ## Related Concepts
 
@@ -121,7 +121,7 @@ By starting top-down, traders ensure their individual positions are aligned with
 
 ## Sources
 
-- (Source: [[itpm-god-like-trader-status]])
-- (Source: [[itpm-five-principles]])
-- (Source: [[itpm-woym-ep27-recession-narrative]])
-- (Source: [[itpm-education-methodology-overview]])
+-
+-
+-
+-

@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [options, risk-management, margin, position-sizing, itpm]
+tags: [options, risk-management, margin, position-sizing]
 aliases: ["BPR", "Buying Power Reduction", "Options Margin Requirement", "Options BP", "Margin Reduction"]
 related: ["[[margin]]", "[[portfolio-margin]]", "[[span-margin]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-position-sizing]]", "[[short-strangle]]", "[[iron-condor]]", "[[credit-spread]]", "[[naked-option]]", "[[options-premium-selling]]", "[[volatility-regime]]", "[[capacity-constraints]]", "[[liquidation-risk]]", "[[volmageddon]]", "[[delta]]", "[[implied-volatility]]"]
 domain: [risk-management]
@@ -167,13 +167,13 @@ Under PM, the broker's stress grid widens. New per-contract BPR for the strangle
 
 For the iron condor variant: per-contract BPR is unchanged at $4,400 (defined risk). Total BPR remains $26,400. **The defined-risk book is unaffected by vol expansion at the BPR level**, freeing the trader to deploy *more* premium-selling into the richer environment rather than being forced to cut.
 
-This is the primary reason ITPM-style and tastytrade-style portfolios prefer defined-risk structures even though naked strangles harvest more theta per dollar of BPR in calm markets. **Vol-shock BPR resilience is what determines whether a book survives.**
+This is the primary reason tastytrade-style and other professional portfolios prefer defined-risk structures even though naked strangles harvest more theta per dollar of BPR in calm markets. **Vol-shock BPR resilience is what determines whether a book survives.**
 
 ## Common Misuse
 
 - **Treating Reg-T BPR as the "true" risk** of a position. It's a regulatory minimum, often 5-15x the actual VaR. Sizing to Reg-T leaves enormous capacity unused.
 - **Treating PM BPR as the "true" risk.** Portfolio margin reprices BPR in stress; the BPR you see at trade open is not the BPR you'll have during a shock. Stress-test BPR under +5 vol points, not just current.
-- **Maxing out BPR at trade entry.** A book at 80% BPR utilization in calm markets has no room when vol spikes. Standard ITPM-style discipline: keep BPR utilization **under 35-40%** in calm markets, leaving 60% buffer for vol expansion and adjustments.
+- **Maxing out BPR at trade entry.** A book at 80% BPR utilization in calm markets has no room when vol spikes. Standard professional discipline: keep BPR utilization **under 35-40%** in calm markets, leaving 60% buffer for vol expansion and adjustments.
 - **Confusing BPR with collateral.** BPR is the deduction from buying power; the broker may also require additional **maintenance margin** if a position moves against you. Both can rise simultaneously in a stress.
 - **Ignoring the BPR of un-paired legs.** When closing one leg of a multi-leg structure, the remaining leg often becomes "undefined" and BPR jumps. Always close legs in an order that preserves the defined-risk wrapper.
 - **Over-relying on cross-product offsets.** Some platforms net BPR for SPX vs SPY positions; many do not. Read the broker's [[portfolio-margin]] disclosure for the specific offsets recognized.
@@ -185,7 +185,7 @@ A practical discipline guide for a short-premium book. Utilization = total BPR �
 | BPR utilization | Vol regime | State | Recommended action |
 |-----------------|------------|-------|--------------------|
 | < 25% | Calm (low [[iv-rank-and-iv-percentile\|IVR]]) | Under-deployed | Room to add; check vega/theta budgets bind first |
-| 25-40% | Calm | Healthy | ITPM-style target zone; keep buffer for expansion |
+| 25-40% | Calm | Healthy | Standard target zone; keep buffer for expansion |
 | 40-55% | Calm | Stretched | Stop adding; pre-stage rolls/defenses |
 | > 55% | Calm | Over-deployed | Trim; a routine vol pop forces liquidation |
 | Any | Vol expanding (IV rising) | Repricing risk | Stress-test BPR at +5 to +10 vol points *before* it happens |
@@ -232,5 +232,4 @@ Practitioners track all three simultaneously. See [[options-risk-budgeting]] for
 - CFTC / CME SPAN methodology documentation.
 - [[tastytrade-portfolio-margin-research]] — empirical comparison of PM vs Reg-T BPR for canonical short-premium structures.
 - [[book-option-volatility-and-pricing]] — Natenberg on margin as a portfolio-level risk constraint.
-- [[itpm-options-portfolio-management]] — institutional treatment of BPR as the binding capacity constraint.
 - Schwab / Interactive Brokers / tastytrade margin disclosure documents (per-broker variations in PM grid widths).

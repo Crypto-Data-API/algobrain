@@ -4,15 +4,14 @@ type: index
 created: 2026-05-08
 updated: 2026-05-08
 status: good
-tags: [narratives, theses, itpm]
+tags: [narratives, theses]
 ---
 
 # Narratives
 
 A **narrative** is a thematic position — a story-level thesis that parents one
-or more individual trades. The convention follows
-[[itpm-framework]] Stage 2 (*"These themes are the parents of all individual
-stock positions"*).
+or more individual trades: themes are the parents of all individual
+positions.
 
 This is the canon of every narrative the bot has acted on, with provenance,
 status, and downstream signals.
@@ -46,5 +45,3 @@ proposed → active → played-out
 
 - [[narratives-schema|Narrative frontmatter schema]]
 - [[narrative-log|Narrative chronological log]]
-- [[itpm-framework]] §"Worked Example" — thematic positions
-- [[itpm-trade-construction-playbook]] §"Stage 2: Geographic and Asset Class"

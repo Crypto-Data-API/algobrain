@@ -77,11 +77,10 @@ Risk the entire premium paid. Size positions so that a total loss (both legs exp
 
 ## Straddles and Strangles in Long/Short Portfolios
 
-In the itpm long-short-equity methodology, long straddles and strangles serve as volatility expansion bets within a broader portfolio:
+In a long-short-equity methodology, long straddles and strangles serve as volatility expansion bets within a broader portfolio:
 
 - Used when a fundamental catalyst is expected but direction is uncertain (e.g., binary earnings events, regulatory decisions)
-- The POTM (Professional Options Trading Masterclass) teaches strap straddles and strip straddles for directionally biased volatility plays
-- [[raj-malhotra]] focuses on VIX-based volatility trading as a complement to directional equity options
+- Strap straddles and strip straddles extend the structure into directionally biased volatility plays
 - Straddles/strangles can serve as portfolio hedges when positioned on index products
 
 ## See Also

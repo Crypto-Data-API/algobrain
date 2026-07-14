@@ -239,5 +239,4 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - CBOE Volatility-Index methodology and circuit-breaker specifications.
 - Spitznagel, Mark. *Safe Haven: Investing for Financial Storms* (2021). Practitioner treatment of monetizable vs notional tail hedging.
 - Taleb, Nassim Nicholas. *Dynamic Hedging* (1997). Practitioner treatment of stress-time hedging failures.
-- [[itpm-options-portfolio-management]] — institutional treatment of liquidity-evaporation stress scenarios.
 - Practitioner accounts and post-mortems: Volmageddon (Feb 2018), March 2020 COVID, August 2024 yen-carry unwind, multiple crypto flash crashes (2020, 2021, 2022).

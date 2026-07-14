@@ -71,7 +71,7 @@ Research supports rebalancing as a risk management tool but with nuanced conclus
 ## Application to Trading Strategies
 
 - **[[risk-parity]]**: Requires frequent rebalancing to maintain equal risk contribution across assets
-- **[[portfolio-construction|ITPM portfolio management]]**: Rebalancing option positions to maintain target Greeks and portfolio exposure
+- **[[portfolio-construction|Options portfolio management]]**: Rebalancing option positions to maintain target Greeks and portfolio exposure
 - **Crypto portfolios**: High [[volatility]] causes rapid drift, requiring more frequent rebalancing -- but high [[fees]] on some networks offset the benefit
 - **Factor portfolios**: Periodic rebalancing to maintain target factor exposures (value, momentum, quality)
 

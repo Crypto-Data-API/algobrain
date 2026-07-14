@@ -137,7 +137,7 @@ The hierarchy of mitigations, ordered from cleanest to most reluctant. Use this 
 
 ### 1. Close before the close (the canonical rule)
 
-Close any short option whose strike is within ~1% of spot before the closing bell on expiration day. This is the universally recommended retail approach; tastytrade, [[itpm-trading-philosophy|ITPM]], and most published [[options-income|options-income]] curricula state it as a hard rule. The cost is a small premium giveup (the option's residual extrinsic value, often pennies); the benefit is total elimination of pin risk.
+Close any short option whose strike is within ~1% of spot before the closing bell on expiration day. This is the universally recommended retail approach; tastytrade and most published [[options-income|options-income]] curricula state it as a hard rule. The cost is a small premium giveup (the option's residual extrinsic value, often pennies); the benefit is total elimination of pin risk.
 
 A common heuristic: **close any short option for which $|S - K| < 0.5 \times \text{ATR(20)}$ as the bell approaches**, where ATR is the 20-day average true range of the underlying. For low-vol stocks this is a tight band; for high-vol stocks the safe distance is much wider.
 
@@ -208,4 +208,3 @@ The wheel-strategy practitioner's standard rule: **always close or roll any pinn
 - Golez, B., and Jackwerth, J. C. (2012). *Pinning in the S&P 500 Futures*. *Journal of Financial Economics*, 106(3): 566-585. Extends the pinning literature to index futures.
 - [[occ]] Bylaws and Exercise Procedures — official documentation on the auto-exercise threshold and exercise windows.
 - [[cboe]] / [[cme]] settlement procedure guides — institutional descriptions of physical vs cash settlement and the practical implications for traders.
-- [[itpm-trading-philosophy|ITPM]] curriculum on operational discipline at expiry.

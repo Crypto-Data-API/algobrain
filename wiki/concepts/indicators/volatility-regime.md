@@ -152,4 +152,4 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - Hamilton, J. (1989). *A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle*. Econometrica 57(2). The foundational Markov-switching paper.
 - Whaley, R. (2000). *The Investor Fear Gauge*. Journal of Portfolio Management. The canonical reference for the [[vix|VIX]] as a vol-regime indicator.
 - CBOE — VIX, VIX9D, VIX3M, VIX6M methodology white papers; see [[volatility-term-structure]] for the constant-maturity construction.
-- Synthesis with the [[itpm-playbook|ITPM]] regime framework as documented elsewhere in the wiki.
+- Synthesis with the [[volatility-regime-classification]] framework as documented elsewhere in the wiki.

@@ -20,16 +20,7 @@ WHERE type = "source"
 SORT source_date DESC
 ```
 
-## ITPM Sources (16 total)
-
-```dataview
-TABLE source_type, source_date, confidence, claims_count
-FROM "wiki/sources"
-WHERE contains(file.name, "itpm")
-SORT source_date DESC
-```
-
-## Book Sources (40 total)
+## Book Sources
 
 ```dataview
 TABLE source_type, source_author, source_date, confidence, claims_count

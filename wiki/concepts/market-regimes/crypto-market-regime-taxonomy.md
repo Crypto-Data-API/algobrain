@@ -47,7 +47,7 @@ The 14 baskets are not parallel and mutually exclusive — they nest and overlay
 - **Shocks (5, 11, 12).** [[event-catalyst-regime|Event]], [[security-black-swan-regime|security/black-swan]], and [[policy-shock-regime|policy]] regimes are discrete, short-duration windows that temporarily override the backdrop — often with a repeatable short-then-reversal shape.
 - **The wildcard (3).** [[meme-speculative-regime|Meme/speculative]] cycles are largely uncorrelated to the majors and run on social momentum.
 
-> **Note on basket #13.** Volatility is co-equal with Technical/Structural as a universal overlay, but its page — [[volatility-regime-classification]] — lives under `concepts/indicators/` (it predates and also serves the options/ITPM material), not in the `market-regimes/` folder with the other thirteen. It is a full member of the taxonomy; only its file location differs.
+> **Note on basket #13.** Volatility is co-equal with Technical/Structural as a universal overlay, but its page — [[volatility-regime-classification]] — lives under `concepts/indicators/` (it predates and also serves the options material), not in the `market-regimes/` folder with the other thirteen. It is a full member of the taxonomy; only its file location differs.
 
 ### The Fragility Triad (canonical)
 

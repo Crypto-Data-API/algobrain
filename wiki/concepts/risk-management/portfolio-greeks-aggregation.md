@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, indicators, itpm]
+tags: [options, risk-management, indicators]
 aliases: ["Net Greeks", "Book-Level Greeks", "Aggregating Greeks"]
 related: ["[[options-greeks]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[delta-neutral]]", "[[vega-hedging]]", "[[beta-weighted-delta]]"]
 domain: [risk-management]
@@ -20,7 +20,7 @@ Every options trading platform shows you a column called "delta" or "vega" next 
 
 For directional exposure, the additional step is **beta weighting** -- expressing every position's delta in terms of how it would move against the SPX, so you get a single book-level beta-adjusted dollar delta. This is the number that tells you "if SPX moves 1%, my book moves $X." Without it, a long-tech, short-defensive book might look balanced when summing raw deltas, but actually carry substantial market beta.
 
-This is bread-and-butter institutional [[risk-management]]. Market makers, [[volatility]] funds, and serious retail options traders all live on a screen that shows aggregated Greeks in dollar terms, refreshed every few seconds. The [[itpm-trading-program|ITPM]] options curriculum, [[hari-krishnan]]'s work on tail risk, and any market-making textbook treat this aggregation as table stakes -- the floor below which you cannot meaningfully discuss [[options-risk-budgeting|risk budgeting]], [[position-sizing]], or [[vega-hedging]]. The aggregated book number is also the input to everything downstream: it sizes hedges, it is what [[portfolio-margin]] charges against, and it is the baseline that [[options-stress-testing]] perturbs.
+This is bread-and-butter institutional [[risk-management]]. Market makers, [[volatility]] funds, and serious retail options traders all live on a screen that shows aggregated Greeks in dollar terms, refreshed every few seconds. [[hari-krishnan]]'s work on tail risk and any market-making textbook treat this aggregation as table stakes -- the floor below which you cannot meaningfully discuss [[options-risk-budgeting|risk budgeting]], [[position-sizing]], or [[vega-hedging]]. The aggregated book number is also the input to everything downstream: it sizes hedges, it is what [[portfolio-margin]] charges against, and it is the baseline that [[options-stress-testing]] perturbs.
 
 ## The Trap of Summing Raw Greeks
 
@@ -424,6 +424,5 @@ Aggregated Greeks are necessary but not sufficient. They are the daily heartbeat
 
 ## Sources
 
-- General knowledge -- portfolio Greeks aggregation, dollar conversion, and beta weighting are standard practice on every institutional options desk; treatments appear in Natenberg's *Option Volatility and Pricing*, Sinclair's *Volatility Trading*, and the [[itpm-trading-program|ITPM]] options professional curriculum.
 - [[book-option-volatility-and-pricing]] -- Natenberg, ch. 18 ("Risk Considerations") covers per-position Greek calculation; book-level aggregation is implicit throughout.
 - [[book-volatility-trading]] -- Sinclair, ch. 11-12 cover portfolio-level vega normalization and cross-underlying risk aggregation.

@@ -53,7 +53,7 @@ Understanding [[macroeconomics]] is essential even for traders who focus on indi
 - [[business-cycle]] — the cyclical framework for macro positioning
 - [[credit-cycle]] — credit expansion and contraction as amplifiers
 - [[financial-conditions]] — real-time gauge of macro environment
-- [[top-down-macro-analysis]] — ITPM's structured macro → stock selection framework
+- [[top-down-macro-analysis]] — structured macro → stock selection framework
 - [[george-soros]] — the most famous discretionary macro trader
 - [[ray-dalio]] — systematic macro via Bridgewater
 - [[stanley-druckenmiller]] — macro trading with one of the best track records

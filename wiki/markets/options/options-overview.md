@@ -176,15 +176,13 @@ Their ETF counterparts (SPY, [[qqq-options|QQQ]], IWM) are American-style, physi
 
 ## Options in Long/Short Portfolio Management
 
-The Institute of Trading and Portfolio Management teaches using options as the primary vehicle for long-short-equity portfolio construction:
+Options can serve as the primary vehicle for long-short-equity portfolio construction:
 
 - Replace stock positions with [[call-options|call]] and [[put-options|put]] options to leverage [[volatility]] while capping risk at premium paid
 - 20-60 day expiration horizons aligned with fundamental catalysts
 - [[trade-repair-and-rolling|Rolling and repair]] techniques to manage losing positions
 - Portfolio-level hedging using options on index ETFs (e.g., TLT, SPY)
-- Focus on understanding [[implied-volatility]] as taught by [[chris-quill]]
-
-Key ITPM practitioners: [[anton-kreil]], [[raj-malhotra]] (volatility/VIX), [[chris-quill]] (quantitative analysis)
+- Focus on understanding [[implied-volatility]] as the driver of option pricing
 
 ## Data & Infrastructure
 

@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [options, risk-management, gamma, theta, itpm]
+tags: [options, risk-management, gamma, theta]
 aliases: ["G/T Ratio", "Gamma/Theta", "Path Risk Ratio"]
 related: ["[[gamma]]", "[[theta]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[theta-decay-curve]]", "[[gamma-explosion]]", "[[time-to-expiration]]", "[[theta-realisation-ratio]]", "[[options-portfolio-construction]]", "[[expiration-laddering]]", "[[zero-dte-options]]", "[[gamma-scalping]]", "[[managing-winners]]", "[[short-strangle]]", "[[iron-condor]]", "[[variance-risk-premium]]", "[[volmageddon-2018]]"]
 domain: [risk-management]
@@ -74,7 +74,7 @@ A book can satisfy any two of these and fail catastrophically on the third. The 
 
 ### Practical thresholds
 
-Empirical bands for ITPM-style short-premium books on liquid index products:
+Empirical bands for short-premium books on liquid index products:
 
 | G/T regime | Interpretation | Typical structures |
 |---|---|---|

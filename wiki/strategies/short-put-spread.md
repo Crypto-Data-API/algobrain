@@ -20,7 +20,7 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.25
 breakeven_cost_bps: 25
-related: ["[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[short-volatility-strategies]]", "[[iron-condor]]", "[[short-strangle]]", "[[cash-secured-puts]]", "[[credit-spread]]", "[[put-spread]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[vega-budgeting]]", "[[ivr]]", "[[skew]]", "[[itpm-framework]]"]
+related: ["[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[short-volatility-strategies]]", "[[iron-condor]]", "[[short-strangle]]", "[[cash-secured-puts]]", "[[credit-spread]]", "[[put-spread]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[vega-budgeting]]", "[[ivr]]", "[[skew]]"]
 ---
 
 A short put spread (also "bull put spread" or "put credit spread") sells a higher-strike put and simultaneously buys a lower-strike put with the same expiration. The result is a **defined-risk, bullish-biased, short-vol** structure: the trader collects a credit and is profitable if the underlying stays above the short strike at expiration. It is the canonical defined-risk implementation of bullish premium selling, sitting between [[cash-secured-puts]] (capital-intensive, undefined notional) and [[short-strangle]] (capital-efficient, undefined risk). The structure features prominently in [[premium-selling-systematic]] when traders want a directional tilt without naked tail.
@@ -39,7 +39,7 @@ Same persistent buyers as the broader [[options-premium-selling]] family: pensio
 
 - Retail traders who want bullish exposure with defined risk and lower buying-power use than [[cash-secured-puts]].
 - Income strategies in 401(k)-style accounts that disallow naked options.
-- Allocators running [[itpm-framework|ITPM]]-style books where every position must have explicit max loss for [[risk-budgeting]].
+- Allocators running professional books where every position must have explicit max loss for [[risk-budgeting]].
 
 The buyer of the spread (in aggregate, the long-put hedger) does not differentiate between buying a single OTM put and a put spread, so the seller can still extract VRP across the structure.
 
@@ -236,7 +236,6 @@ Versus the parent [[options-premium-selling]] and the neutral [[iron-condor]], t
 
 ## Sources
 
-- [[itpm-framework]] -- the defined-risk discipline overlay.
 - Carr, Peter and Wu, Liuren. "Variance Risk Premiums" (2009).
 - Bondarenko, Oleg. "Why Are Put Options So Expensive?" (2014).
 - Cboe research on [[skew]] persistence and put-credit-spread performance.
@@ -261,4 +260,3 @@ Versus the parent [[options-premium-selling]] and the neutral [[iron-condor]], t
 - [[iv-crush]] -- the post-event vega tailwind for short-premium spreads.
 - [[theta]] / [[vega]] / [[gamma]] -- the Greeks that define the structure's profile.
 - [[market-regime]] -- regime conditioning for the bullish tilt.
-- [[itpm-framework]] -- institutional discipline.

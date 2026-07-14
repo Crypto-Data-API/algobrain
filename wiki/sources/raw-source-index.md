@@ -2,51 +2,52 @@
 title: "Raw Source Index"
 type: index
 created: 2026-04-06
-updated: 2026-04-20
+updated: 2026-07-14
 status: good
 tags: [sources, raw, index, meta]
 ---
 
 # Raw Source Index
 
+Master index of the raw source documents retained in this vault. Raw files live in the repo-root `raw/` folder (kept outside `wiki/` so they stay off the Obsidian graph). Each row links a raw document to its source summary in `wiki/sources/`.
 
+Sources from the original wiki that were out of scope (equity research, personal transcripts, paid-course material, book excerpts) were not carried over; the kept source summaries stand on their own.
 
-
-| Date | Source ID | Type | Title | R2 Key |
-|------|-----------|------|-------|--------|
-| 2026-04-22 | 2026-04-22-gap-finder-nft-trading | article | Gap Finder: NFT Trading (Perplexity deep research, 50 sources) | `articles/2026-04-22-gap-finder-nft-trading.md` |
-| 2026-04-20 | recovering-losing-options-positions | article | Recovering Losing Options Positions (12 references) | `articles/2026-04-20-recovering-losing-options-positions.md` |
-| 2026-04-20 | 2026-04-20-comprehensive-guide-technical-trading-indicators | article | Comprehensive Guide to Technical Trading Indicators (29 references) | `articles/2026-04-20-comprehensive-guide-technical-trading-indicators.md` |
-| 2026-04-15 | 2026-04-15-defi-wiki-content-guide | article | DeFi Wiki Content Guide — Comprehensive DeFi Research (43 references) | `articles/2026-04-15-defi-wiki-content-guide.md` |
-| 2026-04-14 | polymarket-wiki-guide | article | Polymarket: A Comprehensive Wiki Guide (43 sources) | `articles/2026-04-14-polymarket-wiki-guide.md` |
-| 2026-04-06 | 2026-04-06-quicknode-hyperliquid-sql | data | QuickNode Hyperliquid SQL Explorer — Live Data | `data/2026-04-06-quicknode-hyperliquid-sql.md` |
-| 2018-01-01 | 2018-01-01-trading-legends-jason-mcdonald | video | Trading Legends — Anton Kreil Interviews Jason McDonald | `transcripts/2018-01-01-trading-legends-jason-mcdonald.md` |
-| 2018-01-01 | 2018-01-01-trading-legends-raj-malhotra | video | Trading Legends — Anton Kreil Interviews Raj Malhotra | `transcripts/2018-01-01-trading-legends-raj-malhotra.md` |
-| 2018-01-01 | 2018-01-01-trading-legends-chris-cathey | video | Trading Legends — Anton Kreil Interviews Chris Cathey | `transcripts/2018-01-01-trading-legends-chris-cathey.md` |
-| 2018-01-01 | 2018-01-01-trading-legends-hichem-djouhri | video | Trading Legends — Anton Kreil Interviews Hichem Djouhri | `transcripts/2018-01-01-trading-legends-hichem-djouhri.md` |
-| 2017-01-01 | 2017-01-01-trading-legends-ben-berggreen | video | Trading Legends — Anton Kreil Interviews Ben Berggreen | `transcripts/2017-01-01-trading-legends-ben-berggreen.md` |
-| 2023-09-20 | 2023-09-20-how-to-achieve-god-like-trader-status | video | How to Achieve God Like Trader Status — Anton Kreil | `transcripts/2023-09-20-how-to-achieve-god-like-trader-status.md` |
-| 2025-01-18 | 2025-01-18-how-to-master-compounding-as-a-trader | video | How to Master Compounding as a Trader — Anton Kreil & Philip Klein | `transcripts/2025-01-18-how-to-master-compounding-as-a-trader.md` |
-| 2018-05-01 | 2018-05-01-five-principles-behind-ten-secrets | video | The 5 Principles Behind the 10 Secrets — Anton Kreil | `transcripts/2018-05-01-five-principles-behind-ten-secrets.md` |
-| 2015-09-21 | 2015-09-21-ten-secrets-to-achieve-financial-success | video | 10 Secrets to Achieve Financial Success — Anton Kreil | `transcripts/2015-09-21-ten-secrets-to-achieve-financial-success.md` |
-| 2019-01-01 | 2019-01-01-investment-banks-destroyed-part-1 | video | Investment Banks Destroyed — Part 1 of 5 | `transcripts/2019-01-01-investment-banks-destroyed-part-1.md` |
-| 2019-01-01 | 2019-01-01-investment-banks-destroyed-part-2 | video | Investment Banks Destroyed — Part 2 of 5 | `transcripts/2019-01-01-investment-banks-destroyed-part-2.md` |
-| 2019-01-01 | 2019-01-01-investment-banks-destroyed-part-3 | video | Investment Banks Destroyed — Part 3 of 5 | `transcripts/2019-01-01-investment-banks-destroyed-part-3.md` |
-| 2019-01-01 | 2019-01-01-investment-banks-destroyed-part-4 | video | Investment Banks Destroyed — Part 4 of 5 | `transcripts/2019-01-01-investment-banks-destroyed-part-4.md` |
-| 2019-01-01 | 2019-01-01-investment-banks-destroyed-part-5 | video | Investment Banks Destroyed — Part 5 of 5 | `transcripts/2019-01-01-investment-banks-destroyed-part-5.md` |
-| 2013-02-07 | 2013-02-07-ex-goldman-sachs-tells-truth-part-1 | video | ex Goldman Sachs Trader Tells Truth — Part 1 of 6 | `transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-1.md` |
-| 2013-02-07 | 2013-02-07-ex-goldman-sachs-tells-truth-part-2 | video | ex Goldman Sachs Trader Tells Truth — Part 2 of 6 | `transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-2.md` |
-| 2013-02-07 | 2013-02-07-ex-goldman-sachs-tells-truth-part-3 | video | ex Goldman Sachs Trader Tells Truth — Part 3 of 6 | `transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-3.md` |
-| 2013-02-07 | 2013-02-07-ex-goldman-sachs-tells-truth-part-4 | video | ex Goldman Sachs Trader Tells Truth — Part 4 of 6 | `transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-4.md` |
-| 2013-02-07 | 2013-02-07-ex-goldman-sachs-tells-truth-part-5 | video | ex Goldman Sachs Trader Tells Truth — Part 5 of 6 | `transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-5.md` |
-| 2013-02-07 | 2013-02-07-ex-goldman-sachs-tells-truth-part-6 | video | ex Goldman Sachs Trader Tells Truth — Part 6 of 6 | `transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-6.md` |
-| 2017-01-01 | 2017-01-01-annihilates-retail-brokers-and-trading-educators | video | Annihilates Retail Brokers and Trading Educators | `transcripts/2017-01-01-annihilates-retail-brokers-and-trading-educators.md` |
-| 2022-11-01 | 2022-11-01-meet-dieter-the-doubler | video | Meet Dieter the Doubler — +100% Return in 6 Months | `transcripts/2022-11-01-meet-dieter-the-doubler.md` |
-| 2019-01-01 | 2019-01-01-professional-traders-giving-amazing-advice | video | Professional Traders Giving Amazing Advice | `transcripts/2019-01-01-professional-traders-giving-amazing-advice.md` |
-| 2019-08-23 | 2019-08-23-woym-ep27-recession-narrative | video | WOYM Ep27 — U.S. Recession Narrative | `transcripts/2019-08-23-woym-ep27-recession-narrative.md` |
-| 2026-04-07 | 2026-04-07-itpm-education-overview | article | ITPM Education Overview | `articles/2026-04-07-itpm-education-overview.md` |
-| 2026-04-07 | 2026-04-07-itpm-mentor-profiles | article | ITPM Mentor Profiles | `articles/2026-04-07-itpm-mentor-profiles.md` |
-| 2026-04-13 | 2026-04-13-ai-stocks-not-sp500 | data | AI Stocks Not Listed on S&P 500 — 150 Tickers with AI Involvement | `data/2026-04-13-ai-stocks-not-sp500.xlsx` |
-| 2026-04-13 | 2026-04-13-high-liquidity-options-stocks | data | High-Liquidity Options Stocks — 81 Tickers with Active Options Markets | `data/2026-04-13-high-liquidity-options-stocks.xlsx` |
-| 2026-04-14 | 2026-04-14-commodities-research-framework | article | Commodities Investing & Trading Research Framework | `misc/2026-04-14-commodities-research-framework.md` |
-| 2026-04-14 | 2026-04-14-backtesting-strategy-optimization-wiki | article | Backtesting & Strategy Optimization Wiki | `misc/2026-04-14-backtesting-strategy-optimization-wiki.md` |
+| Date | Source ID | Type | Title | Local Path |
+|------|-----------|------|-------|-----------|
+| 2026-06-19 | 2026-06-19-gap-finder-arc-strategy | article | Gap Finder: ARC Strategy | `raw/articles/2026-06-19-gap-finder-arc-strategy.md` |
+| 2026-06-14 | 2026-06-14-overfitting-backtesting-hyperliquid-techniques | article | Overfitting & Backtesting: Hyperliquid Techniques | `raw/articles/2026-06-14-overfitting-backtesting-hyperliquid-techniques.md` |
+| 2026-06-10 | 2026-06-10-claude-fable-5-finance | article | Claude Fable 5 — Finance Capabilities | `raw/articles/2026-06-10-claude-fable-5-finance.md` |
+| 2026-06-04 | 2026-06-04-reg-expansion-batch1 | article | Regulation Expansion Research (Batch 1) | `raw/articles/2026-06-04-reg-expansion-batch1.md` |
+| 2026-06-04 | 2026-06-04-reg-expansion-batch2 | article | Regulation Expansion Research (Batch 2) | `raw/articles/2026-06-04-reg-expansion-batch2.md` |
+| 2026-06-03 | 2026-06-03-cryptodataapi-14-basket-regime-framework | article | CryptoDataAPI 14-Basket Regime Framework | `raw/articles/2026-06-03-cryptodataapi-14-basket-regime-framework.md` |
+| 2026-04-22 | 2026-04-22-perplexity-defi-trading-strategies-sweep | article | Perplexity: DeFi Trading Strategies Sweep | `raw/articles/2026-04-22-perplexity-defi-trading-strategies-sweep.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-add-new-content-for-overfitting-backtest | article | Gap Finder: Overfitting & Backtesting | `raw/articles/2026-04-22-gap-finder-add-new-content-for-overfitting-backtest.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-ai-2026-major-news-stories | article | Gap Finder: AI 2026 Major News Stories | `raw/articles/2026-04-22-gap-finder-ai-2026-major-news-stories.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-ai-trading-bots-automated-strategies-bac | article | Gap Finder: AI Trading Bots & Automated Strategies | `raw/articles/2026-04-22-gap-finder-ai-trading-bots-automated-strategies-bac.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-behavioral-finance-trading-anomalies-mar | article | Gap Finder: Behavioral Finance & Trading Anomalies | `raw/articles/2026-04-22-gap-finder-behavioral-finance-trading-anomalies-mar.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-claude-mythos-public-release-announcemen | article | Gap Finder: Claude Mythos Public Release | `raw/articles/2026-04-22-gap-finder-claude-mythos-public-release-announcemen.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect | article | Gap Finder: Crypto Intraday Session Liquidity | `raw/articles/2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-crypto-market-structure-exchanges-stable | article | Gap Finder: Crypto Market Structure & Stablecoins | `raw/articles/2026-04-22-gap-finder-crypto-market-structure-exchanges-stable.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-crypto-on-chain-analytics-and-trader-met | article | Gap Finder: On-Chain Analytics & Trader Metrics | `raw/articles/2026-04-22-gap-finder-crypto-on-chain-analytics-and-trader-met.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-crypto-perpetual-futures-and-funding-rat | article | Gap Finder: Perpetual Futures & Funding Rates | `raw/articles/2026-04-22-gap-finder-crypto-perpetual-futures-and-funding-rat.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-defi-yield-farming-strategies | article | Gap Finder: DeFi Yield Farming Strategies | `raw/articles/2026-04-22-gap-finder-defi-yield-farming-strategies.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-defi-yield-farming-strategies-protocols- | article | Gap Finder: DeFi Yield Farming Protocols | `raw/articles/2026-04-22-gap-finder-defi-yield-farming-strategies-protocols-.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-hyperliquid-crypto-perpetual-exchange-lo | article | Gap Finder: Hyperliquid Perpetual Exchange | `raw/articles/2026-04-22-gap-finder-hyperliquid-crypto-perpetual-exchange-lo.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-hyperliquid-order-books | article | Gap Finder: Hyperliquid Order Books | `raw/articles/2026-04-22-gap-finder-hyperliquid-order-books.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-injest-forex-trading-strategies | article | Gap Finder: Forex Trading Strategies | `raw/articles/2026-04-22-gap-finder-injest-forex-trading-strategies.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-itaa-1997-division-35-non-commercial-los | article | Gap Finder: ITAA 1997 Division 35 (AU Tax) | `raw/articles/2026-04-22-gap-finder-itaa-1997-division-35-non-commercial-los.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-losing-access-to-a-cold-storage-crypto-h | article | Gap Finder: Lost Cold-Storage Crypto (AU Tax) | `raw/articles/2026-04-22-gap-finder-losing-access-to-a-cold-storage-crypto-h.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-market-microstructure-order-flow-tape-re | article | Gap Finder: Market Microstructure & Order Flow | `raw/articles/2026-04-22-gap-finder-market-microstructure-order-flow-tape-re.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-nft-trading | article | Gap Finder: NFT Trading (Perplexity deep research, 50 sources) | `raw/articles/2026-04-22-gap-finder-nft-trading.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-polymarket-as-crypto-leading-indicator | article | Gap Finder: Polymarket as Crypto Leading Indicator | `raw/articles/2026-04-22-gap-finder-polymarket-as-crypto-leading-indicator.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-risk-management-position-sizing-kelly-cr | article | Gap Finder: Risk Management & Kelly Sizing | `raw/articles/2026-04-22-gap-finder-risk-management-position-sizing-kelly-cr.md` |
+| 2026-04-22 | 2026-04-22-gap-finder-volume-profile-indicator-as-a-trading-st | article | Gap Finder: Volume Profile Trading | `raw/articles/2026-04-22-gap-finder-volume-profile-indicator-as-a-trading-st.md` |
+| 2026-04-20 | 2026-04-20-comprehensive-guide-technical-trading-indicators | article | Comprehensive Guide to Technical Trading Indicators (29 references) | `raw/articles/2026-04-20-comprehensive-guide-technical-trading-indicators.md` |
+| 2026-04-20 | recovering-losing-options-positions | article | Recovering Losing Options Positions (12 references) | `raw/articles/2026-04-20-recovering-losing-options-positions.md` |
+| 2026-04-15 | 2026-04-15-defi-wiki-content-guide | article | DeFi Wiki Content Guide (43 references) | `raw/articles/2026-04-15-defi-wiki-content-guide.md` |
+| 2026-04-14 | polymarket-wiki-guide | article | Polymarket: A Comprehensive Wiki Guide (43 sources) | `raw/articles/2026-04-14-polymarket-wiki-guide.md` |
+| 2026-04-14 | 2026-04-14-backtesting-strategy-optimization-wiki | misc | Backtesting & Strategy Optimization | `raw/misc/2026-04-14-backtesting-strategy-optimization-wiki.md` |
+| 2026-04-14 | 2026-04-14-commodities-research-framework | misc | Commodities Research Framework | `raw/misc/2026-04-14-commodities-research-framework.md` |
+| 2026-04-11 | 2026-04-11-perplexity-ai-crypto-gaps | article | Perplexity: AI × Crypto Gaps | `raw/articles/2026-04-11-perplexity-ai-crypto-gaps.md` |
+| 2026-04-06 | 2026-04-06-quicknode-hyperliquid-sql-explorer | data | QuickNode Hyperliquid SQL Explorer — Live Data | `raw/data/2026-04-06-quicknode-hyperliquid-sql.md` |

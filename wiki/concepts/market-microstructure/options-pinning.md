@@ -184,4 +184,3 @@ When the dealer gamma flips negative at a strike — typically because public fl
 - Ben-David, I., Franzoni, F., and Moussawi, R. (2018). *Do ETFs Increase Volatility?* *Journal of Finance*. Related microstructure work on ETF arbitrage and basket hedging.
 - SqueezeMetrics, Spotgamma, Goldman Sachs equity-derivatives research notes — practitioner observations on dealer gamma exposure (DGE / GEX) and the post-2022 weakening of pinning.
 - Cboe research notes on 0DTE option volume and the dispersion of dealer gamma.
-- [[itpm-options-portfolio-management]] — institutional treatment of pinning bias as a tailwind for short-premium books.

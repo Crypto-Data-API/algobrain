@@ -39,7 +39,6 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 
 ### Strategies
 - [[strategies-overview|Strategies Overview]] — Technical, Fundamental, Quantitative, Algorithmic, Day Trading, Swing Trading
-- [[itpm-ratio-calendar-spread|ITPM Ratio Calendar Spread]] — The core ITPM options structure: 2:1 ratio calendar spreads with credit collection and asymmetric payoffs
 - [[regime-matrix|Strategy Regime Matrix]] — Which strategies work in which market conditions
 - [[live-journal|Live Strategy Journal]] — Production strategies and their lifecycle history
 - [[hyperliquid-baskets-overview|Hyperliquid Basket Library]] — The 27 live signal baskets (Defensive Majors, OI-Confirmed Trend, funding fades, liquidation rides, breakout/range, macro-flow, event sleeves), each a full strategy page gated to a [[crypto-market-regime-taxonomy|market regime]]
@@ -97,7 +96,6 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
   - Rogue-trader / scandal cluster: [[1995-sumitomo-copper-scandal]], [[1991-salomon-treasury-auction-scandal]], [[2008-01-socgen-kerviel-rogue-trade]]
 - [[hyperliquid-perp-trading-map|Hyperliquid Perp Trading Map]] — Comprehensive strategy map for trading perpetual futures on Hyperliquid
 - [[asterdex-perp-trading-map|AsterDEX Perp Trading Map]] — Strategy map for AsterDEX perps with head-to-head Hyperliquid comparison
-- [[itpm-trade-construction-playbook|ITPM Trade Construction Playbook]] — Discretionary trade construction workflow
 
 ### DeFi (Decentralised Finance)
 - [[defi|DeFi Hub]] — Core architecture, protocol categories, glossary, strategies, market state, security, regulation
@@ -166,7 +164,6 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Options market-structure cluster:
   - Vol products: [[vix-options]], [[vix-futures]], [[variance-swap]], [[variance-swaps]]
   - Settlement/microstructure: [[assignment-risk]], [[options-pinning]], [[liquidity-evaporation]], [[clob]]
-  - Strategies/research: [[ratio-calendar-spread]], [[5-percent-otm-put-overlay]], [[0dte-impact-on-spx]], [[itpm-options-portfolio-management]]
   - Deep dives: [[max-pain]], [[gamma-exposure]]
 - Options-Risk-Budgeting cluster (gap-fill, May 2026):
   - Hub: [[options-risk-budgeting]]
@@ -183,7 +180,6 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
   - Foundations: [[black-scholes-model]], [[options-buying-power-reduction]], [[probability-of-touch]]
   - Strategy structures: [[strangle]], [[iron-fly]], [[zero-dte-options]], [[managing-winners]]
   - Macro: [[fomc-meetings]], [[diversification-in-options]]
-  - Methodology: [[itpm-trading-philosophy]], [[the-theta-trap]], [[stress-test]]
   - Tooling: [[optionnet-explorer]], [[deribit-position-builder]], [[tastytrade-platform]]
   - Stub upgrades: [[expected-shortfall]] (full rewrite), [[pin-risk]] (full rewrite), [[options-income]] (full rewrite)
 - Crypto Intraday Session Liquidity cluster (gap-fill, May 2026):
@@ -195,7 +191,6 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Long-Vol vs Short-Vol cluster (gap-fill, May 2026):
   - Master comparison: [[long-vol-vs-short-vol]]
   - Strategy pages: [[long-volatility-strategies]], [[short-volatility-strategies]], [[options-premium-selling]] (full rewrite), [[premium-selling-systematic]], [[long-vol-overlay]], [[short-put-spread]], [[tastytrade-mechanics]]
-  - Frameworks: [[itpm-framework]], [[barbell-portfolio]]
   - Funds: [[ljm-preservation-and-growth]], [[longtail-alpha]], [[saba-capital-tail-fund]], [[malachite-capital]], [[catalyst-hedged-futures]], [[xiv-velocity-shares]]
   - Vol-shock events: [[volmageddon]], [[vix-august-2024-spike]], [[covid-crash]], [[black-monday]], [[gfc]], [[long-term-capital-management]]
   - Instruments: [[variance-swaps]], [[vix-futures]], [[span-margin]]

@@ -20,10 +20,10 @@ crowding_risk: low
 expected_sharpe: 0.6
 expected_max_drawdown: 0.20
 breakeven_cost_bps: 25
-related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[strangle]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[gamma-explosion]]", "[[zero-dte-options]]", "[[itpm-trading-philosophy]]", "[[karen-the-supertrader]]", "[[when-to-retire-a-strategy]]", "[[implied-volatility]]"]
+related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[strangle]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[gamma-explosion]]", "[[zero-dte-options]]", "[[karen-the-supertrader]]", "[[when-to-retire-a-strategy]]", "[[implied-volatility]]"]
 ---
 
-Managing winners is the tastytrade / [[itpm-trading-philosophy|ITPM]] discipline of **closing short-premium positions early, mechanically, at predefined profit and time thresholds** rather than holding them to expiration. The canonical rule is *close at 50% of max profit OR 21 days to expiration, whichever comes first* -- a doctrine that empirically converts the negative-expectation expiration-tail of [[options-premium-selling|premium-selling]] into a positive-expectation realised P&L distribution. This page treats it as a strategy in its own right because the rule is the dominant determinant of long-run P&L for the underlying short-premium book; the mechanical discipline of *when to take winners off* matters more than the strike selection of the underlying [[short-strangle|strangles]] or [[iron-condor|condors]].
+Managing winners is the tastytrade discipline of **closing short-premium positions early, mechanically, at predefined profit and time thresholds** rather than holding them to expiration. The canonical rule is *close at 50% of max profit OR 21 days to expiration, whichever comes first* -- a doctrine that empirically converts the negative-expectation expiration-tail of [[options-premium-selling|premium-selling]] into a positive-expectation realised P&L distribution. This page treats it as a strategy in its own right because the rule is the dominant determinant of long-run P&L for the underlying short-premium book; the mechanical discipline of *when to take winners off* matters more than the strike selection of the underlying [[short-strangle|strangles]] or [[iron-condor|condors]].
 
 ## Edge source
 
@@ -240,7 +240,6 @@ The rule is not a free lunch. It hurts in three identifiable scenarios:
 ## Sources
 
 - *Tom Sosnoff and Tony Battista, tastytrade research videos* (2014-2020) -- primary recorded source.
-- [[itpm-trading-philosophy]] -- institutional application of mechanical exits in a portfolio context.
 - [[karen-the-supertrader]] -- cautionary tale of running the rule without surrounding [[vega-budgeting|vega caps]] and loss-side stops.
 
 ## Related
@@ -250,7 +249,6 @@ The rule is not a free lunch. It hurts in three identifiable scenarios:
 - [[zero-dte-options]] -- the 0DTE variant compresses the rule to 50%-of-credit-or-end-of-day.
 - [[theta-targeting]] / [[vega-budgeting]] -- the daily-theta and vega frameworks that depend on this rule for realisation.
 - [[gamma-explosion]] -- the path-risk that the rule defends against.
-- tastytrade / [[itpm-trading-philosophy]] -- the institutional sources.
 - [[karen-the-supertrader]] / [[when-to-retire-a-strategy]] -- the failure-case context.
 - [[long-call]] / [[long-put]] -- the long-premium side that buys the convexity the rule's positions sell.
 - [[market-regime]] -- the rule's value-add is regime-dependent (helps most in high-vol, mean-reverting tape).

@@ -10,7 +10,7 @@ entity_type: regulator
 founded: 2011
 headquarters: "Paris, France"
 website: "https://www.esma.europa.eu"
-related: ["[[finra]]", "[[sec]]", "[[itpm-trading-philosophy]]", "[[fees-and-friction]]", "[[professional-vs-retail-mindset]]", "[[options]]", "[[futures]]", "[[robinhood]]"]
+related: ["[[finra]]", "[[sec]]", "[[fees-and-friction]]", "[[professional-vs-retail-mindset]]", "[[options]]", "[[futures]]", "[[robinhood]]"]
 ---
 
 The European Securities and Markets Authority (ESMA) is the European Union's pan-EU financial markets regulator, headquartered in Paris and established in January 2011. ESMA's mandate is threefold: investor protection, the orderly functioning of EU financial markets, and the safeguarding of EU-wide financial stability. For traders, ESMA matters most for two things: it is the architect of [[mifid-ii|MiFID II]] (the post-2018 transparency, best-execution, and reporting regime that governs EU equity, options, and derivatives trading), and it is the regulator behind the 2018 retail-CFD intervention whose mandatory loss-disclosures provide the cleanest publicly available evidence on how retail derivative traders actually perform. It is the EU peer of the US [[sec|SEC]], Australia's [[asic|ASIC]], and shares derivatives turf conceptually with the US [[cftc|CFTC]]; see [[regulation]] for the cross-jurisdiction map.
@@ -97,7 +97,7 @@ Binary options to retail clients were **prohibited outright** in the same measur
 
 ### Why this matters for the wiki
 
-The retail-loss disclosure rule is the source of the 70-90% retail-loss statistic that appears across [[anton-kreil|Kreil]] interviews, the [[itpm-trading-philosophy|ITPM philosophy]], and most serious literature on retail derivative performance. Before 2018 the only such data came from leaked broker disclosures or academic studies of specific brokerages — neither continuous nor comparable. Post-2018, every regulated EU CFD broker must publish a continuously updated loss percentage, and the data has converged on a clear pattern:
+The retail-loss disclosure rule is the source of the 70-90% retail-loss statistic that appears across most serious literature on retail derivative performance. Before 2018 the only such data came from leaked broker disclosures or academic studies of specific brokerages — neither continuous nor comparable. Post-2018, every regulated EU CFD broker must publish a continuously updated loss percentage, and the data has converged on a clear pattern:
 
 - The single-broker numbers vary roughly **51% to 89%** depending on broker, year, and asset mix
 - Broker-level numbers tend to cluster between **65% and 80%** in typical years
@@ -143,9 +143,9 @@ ESMA's rule set creates a structurally **different operating environment for EU 
 
 For a trader sitting in the EU, the most consequential single fact about ESMA is the **5:1 retail equity CFD cap** and the **2:1 retail crypto cap** — both of which can be circumvented by qualifying as a Professional Client (€500K+ portfolio, 10+ trades per quarter, financial-sector experience). The Professional uplift gives access to leverage closer to US institutional norms but removes negative-balance protection. This is the formal version of the [[professional-vs-retail-mindset|professional vs retail]] distinction: in the EU, professional status is a regulatory category with measurable thresholds and a paperwork uplift, not just a mindset.
 
-## Why ESMA Data Matters for the ITPM-Style Argument
+## Why ESMA Data Matters for the Retail-Loss Argument
 
-The [[itpm-trading-philosophy|ITPM philosophy]] argues that 70-90% of retail accounts lose money in any given 12-month window, even in bull markets, primarily because of the [[fees-and-friction|fees-and-friction stack]] and behavioural inversion versus professionals. The ESMA-mandated CFD broker disclosures are the **single best public dataset to test that claim**. They consistently show:
+A long-standing professional-trading argument holds that 70-90% of retail accounts lose money in any given 12-month window, even in bull markets, primarily because of the [[fees-and-friction|fees-and-friction stack]] and behavioural inversion versus professionals. The ESMA-mandated CFD broker disclosures are the **single best public dataset to test that claim**. They consistently show:
 
 - Loss percentages in the **51%-89% range** depending on broker, year, and asset
 - A **central tendency around 70-77%** in typical mixed-tape years across major EU CFD brokers
@@ -171,7 +171,6 @@ The data is widely cited by professional-trader educators precisely because it i
 - [[regulation]] — Global financial-regulation overview
 - [[risk-management]] — Leverage caps and negative-balance protection as survivorship tools
 - [[robinhood]] — US contrast: PFOF model that ESMA effectively banned in EU
-- [[itpm-trading-philosophy]] — Cites ESMA disclosure data as the empirical floor under the 70-90%-lose claim
 - [[fees-and-friction]] — The structural drag the ESMA data ultimately measures
 - [[professional-vs-retail-mindset]] — ESMA codifies a formal version of the distinction via Professional-Client status
 - [[options]] — Listed-options access in the EU is structurally narrower than US, partly an ESMA / member-state outcome
@@ -185,5 +184,4 @@ The data is widely cited by professional-trader educators precisely because it i
 - ESMA press release, "ESMA selects EuroCTP to become the first Consolidated Tape Provider for shares and ETFs" (Dec 19, 2025): https://www.esma.europa.eu/press-news/esma-news/esma-selects-euroctp-become-first-consolidated-tape-provider-shares-and-etfs
 - ESMA, Consolidated Tape Providers hub: https://www.esma.europa.eu/esmas-activities/markets-and-infrastructure/consolidated-tape-providers
 - ESMA 2018 product-intervention decisions (CFD leverage caps, binary-option ban) and MiFID II / MiFIR / MAR / EMIR / MiCA official texts
-- Individual EU broker mandatory loss disclosures referenced in [[itpm-trading-philosophy]] and across [[anton-kreil|Kreil]]'s public interviews
 - 2025-2026 developments verified via Perplexity and web search, 2026-06-10

@@ -236,7 +236,6 @@ See [[when-to-retire-a-strategy]].
 - [[book-dynamic-hedging]] (Taleb) -- convexity, the case for systematic tail-hedging.
 - [[universa-investments]] / Mark Spitznagel -- the canonical institutional case for permanent put-based tail hedging.
 - [[cboe]] specifications for SPX/NDX/RUT puts.
-- [[itpm-trade-construction-playbook]] -- discretionary directional and hedging workflow.
 
 ## Related
 
@@ -253,7 +252,6 @@ See [[when-to-retire-a-strategy]].
 - [[long-volatility-strategies]] -- sleeve-level vol-long allocation
 - [[long-vol-vs-short-vol]] -- the structural decision
 - [[sequence-of-returns-risk]] -- why drawdown reduction compounds
-- [[itpm-trade-construction-playbook]] -- discretionary workflow
 - [[iron-condor]] -- a short-premium structure whose put-side wing is the counterparty to a long put
 - [[leaps]] -- long-dated puts can serve as multi-quarter portfolio insurance
 - [[managing-winners]] -- exit discipline (take-profit / time-stop) that also applies to speculative long puts

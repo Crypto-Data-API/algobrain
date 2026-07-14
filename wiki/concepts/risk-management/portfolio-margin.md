@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, regulation, itpm]
+tags: [options, risk-management, regulation]
 aliases: ["PM Account", "Portfolio Margin Account", "Risk-Based Margin"]
 related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-position-sizing]]", "[[options-stress-testing]]"]
 domain: [risk-management, regulation]
@@ -27,7 +27,7 @@ Three margining regimes dominate U.S. retail and professional accounts. The dist
 | **Recognizes [[options-concentration-risk\|concentration]]?** | No (blind to it) | Yes — penalizes single-name concentration via add-ons | Yes — via concentration / liquidity charges |
 | **Capital efficiency on a hedged book** | Low (3-7x more capital) | High | High |
 | **Min. account equity** | None beyond Reg T basics | $125k FINRA minimum (broker overlays apply) | Set per product / broker |
-| **Who uses it** | Default retail accounts | Active options books, itpm-style long/short books | Futures traders, vol-on-futures (ES, /VX) books |
+| **Who uses it** | Default retail accounts | Active options books long/short books | Futures traders, vol-on-futures (ES, /VX) books |
 
 PM (via TIMS) and SPAN are siblings — both replace fixed formulas with worst-case scenario revaluation. The practical difference is jurisdiction: TIMS governs the equity/options world (OCC), SPAN governs the futures world (CME). Brokers like [[thinkorswim|Schwab/thinkorswim]] run both and stitch them together so a portfolio spanning ES futures and SPX options is margined coherently. See [[span-margin]] for the futures-side detail.
 
@@ -167,7 +167,7 @@ IBKR uses the OCC's TIMS methodology directly with minimal broker overlay. Their
 - "What-if" portfolio: clone the live account and test trades hypothetically
 - House margin requirements: IBKR overlays additional requirements for very concentrated positions, illiquid names, and during market stress
 
-IBKR is the most popular choice for itpm-style hedged equity books because the PM methodology accurately reflects the risk of long/short pair trades with options overlays — see [[itpm-trade-construction-playbook]].
+IBKR is the most popular choice for hedged long/short equity books because the PM methodology accurately reflects the risk of long/short pair trades with options overlays.
 
 ### Charles Schwab / thinkorswim
 
@@ -191,9 +191,9 @@ TastyTrade markets its PM offering aggressively to its premium-selling retail ba
 
 Tradier offers PM through its brokerage layer at the FINRA minimum $125k threshold. Used primarily by API-driven retail traders and small fund operators who need PM-grade capital efficiency without IBKR's complexity.
 
-## Why ITPM-Scale Traders Use PM
+## Why Professional-Scale Traders Use PM
 
-Professional discretionary traders running [[itpm-trade-construction-playbook]]-style books typically run 20-40 simultaneous positions across long/short equity, with options overlays for risk management. Reg T margin makes this almost impossible at retail scale:
+Professional discretionary traders running long/short equity books typically run 20-40 simultaneous positions, with options overlays for risk management. Reg T margin makes this almost impossible at retail scale:
 
 - Each pair trade (long stock + short stock, or long call + short call across two tickers) requires full naked margin on the short side under Reg T
 - A 30-position book of small Greek exposures can require 5-8x more capital under Reg T than the actual portfolio risk warrants
@@ -389,7 +389,6 @@ The one-line synthesis: **size to your own risk and stress numbers; use PM only 
 - [[volatility]] — the IV dimension of the shock grid
 - [[thinkorswim]] — Schwab's PM-enabled platform
 - [[options-greeks]] — the risk measures PM is implicitly charging against
-- [[itpm-trade-construction-playbook]] — discretionary workflow that benefits from PM
 - [[finra]] — regulator that sets PM minimums
 - [[options-clearing-corporation]] — clearinghouse that runs the TIMS calculation
 - [[vix]] — volatility events that stress PM accounts
@@ -401,4 +400,3 @@ The one-line synthesis: **size to your own risk and stress numbers; use PM only 
 - OCC TIMS methodology documentation — the underlying calculation engine
 - Interactive Brokers Margin Requirements documentation
 - TastyTrade Portfolio Margin disclosure
-- [[itpm-trade-construction-playbook]] — implicit treatment of PM-enabled book construction

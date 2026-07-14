@@ -72,7 +72,7 @@ A backtest that shows an 80%+ win rate on short strangles is therefore **not evi
 Strikes are typically chosen by [[delta]] rather than by absolute distance from spot, which makes the structure self-scaling across different underlyings and IV levels:
 
 1. **Pick an expiration**. 30-60 [[time-to-expiration|DTE]] is the canonical window for short strangles (see [[options-premium-selling]] and [[theta-targeting]]); 60-180 DTE is more common for long strangles where the buyer needs time for the thesis to play out.
-2. **Pick a delta**. The standard tastytrade / [[itpm-trading-philosophy|ITPM]] short-strangle convention is **16 [[delta|delta]] per side** (~1 standard-deviation strikes, ~84% [[probability-of-touch|probability]] each leg expires OTM in isolation, ~70% probability both do). Long strangles are often bought closer (25-40 delta per side) to keep the breakeven moves attainable.
+2. **Pick a delta**. The standard tastytrade short-strangle convention is **16 [[delta|delta]] per side** (~1 standard-deviation strikes, ~84% [[probability-of-touch|probability]] each leg expires OTM in isolation, ~70% probability both do). Long strangles are often bought closer (25-40 delta per side) to keep the breakeven moves attainable.
 3. **Sell or buy each leg** at the resulting strikes, on the same expiration cycle.
 4. **Net premium** = (call price + put price). Paid as a debit for long; received as a credit for short.
 5. **Breakevens at expiration** = upper strike + total premium (upside); lower strike − total premium (downside). The width between breakevens is wider than the structure's strike gap by exactly the premium paid or received.
@@ -311,7 +311,6 @@ Index strangles (SPX, SPY, QQQ, RUT) are among the deepest options markets in th
 ## Sources
 
 - [[book-option-volatility-and-pricing]] -- Natenberg on the structural Greeks of strangles and their relationship to straddles.
-- [[itpm-trading-philosophy]] -- institutional treatment of the strangle inside a [[options-portfolio-construction|portfolio]] context.
 - [[options-premium-selling]] -- the variance-risk-premium framework that justifies the short variant.
 - Bakshi, G. & Kapadia, N. (2003), "Delta-Hedged Gains and the Negative Market Volatility Risk Premium", *Review of Financial Studies* -- the academic anchor for the variance risk premium that drives the short variant's expectancy.
 

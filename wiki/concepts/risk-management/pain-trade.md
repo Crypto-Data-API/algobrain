@@ -9,7 +9,7 @@ aliases: ["Pain Trade", "The Pain Trade", "Path of Maximum Pain", "Max Pain Trad
 domain: [behavioral-finance, risk-management]
 prerequisites: ["[[loss-aversion]]", "[[crowding-risk]]"]
 difficulty: intermediate
-related: ["[[crowding-risk]]", "[[positioning-data]]", "[[sentiment-indicators]]", "[[short-squeeze]]", "[[deleveraging]]", "[[loss-aversion]]", "[[behavioral-finance-overview]]", "[[itpm-god-like-trader-status]]", "[[max-pain]]"]
+related: ["[[crowding-risk]]", "[[positioning-data]]", "[[sentiment-indicators]]", "[[short-squeeze]]", "[[deleveraging]]", "[[loss-aversion]]", "[[behavioral-finance-overview]]", "[[max-pain]]"]
 ---
 
 The **pain trade** (also "the path of maximum pain") is the market move that inflicts the greatest loss — or forgone gain — on the largest number of positioned participants. It is the direction the market is *least* prepared for: when positioning is overwhelmingly one-sided, the pain trade is the move *against* the crowd, because the crowd is already all-in and the marginal buyer/seller has been exhausted. It is a positioning-and-sentiment concept, not a valuation one — the pain trade can be against the fundamentally "correct" direction and still happen, precisely because everyone who agreed with the fundamentals has already acted.
@@ -24,7 +24,7 @@ The pain trade is therefore the reflexive partner of [[crowding-risk]]. Crowding
 
 Two framings are common:
 
-1. **Contrarian-signal framing (ITPM / desk talk):** "What's the pain trade here?" is shorthand for "if I had to guess the move that wrong-foots the consensus, what is it?" It is a discipline for surfacing the trade you are *least* mentally prepared for. The [[itpm-god-like-trader-status|ITPM]] curriculum uses it as a sentiment-overlay check: when retail and fast-money positioning is extreme in one direction, the higher-probability surprise is the move that punishes that positioning.
+1. **Contrarian-signal framing (desk talk):** "What's the pain trade here?" is shorthand for "if I had to guess the move that wrong-foots the consensus, what is it?" It is a discipline for surfacing the trade you are *least* mentally prepared for. Discretionary desks use it as a sentiment-overlay check: when retail and fast-money positioning is extreme in one direction, the higher-probability surprise is the move that punishes that positioning.
 2. **Mechanical-flow framing (quant / dealer desks):** the pain trade is the move that maximises forced-flow feedback — margin calls, stop-runs, [[gamma-exposure|dealer hedging]] flips, [[risk-parity]] and [[vol-target]] deleveraging, redemption-driven liquidation. This version is measurable: it is the direction in which the most leveraged/positioned capital is forced to transact.
 
 ## Why It Happens — Mechanics
@@ -78,7 +78,6 @@ The asymmetry that makes the concept useful: betting *with* a crowded trade offe
 
 ## Sources
 
-- [[itpm-god-like-trader-status]] — ITPM treatment of positioning and the pain-trade contrarian overlay
 - [[crowding-risk]] — the structural mechanism, with the 2007 Quant Meltdown case study
 - [[2024-08-yen-carry-unwind]] — worked example of a carry pain trade
 - [[gamestop-saga]] — worked example of an upside pain trade (short squeeze)

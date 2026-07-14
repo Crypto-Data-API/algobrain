@@ -207,4 +207,3 @@ NFP exhibits the same theta-vs-vega-realisation tension as [[cpi-release|CPI]], 
 - Federal Reserve Economic Data (FRED) — *NFP and unemployment-rate historical series*.
 - CME Group — *Fed Funds futures and post-NFP repricing flows*.
 - [[vix-august-2024-spike]] — case study of an NFP-detonated vol spike
-- [[itpm-trading-philosophy]] — practitioner framework for laddering DTE around macro events.

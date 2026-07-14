@@ -60,7 +60,7 @@ The shape of the decay curve dictates almost every operational decision in a sho
 
 ### 1. The "hockey stick" defines the manage-and-roll cadence
 
-The standard tastytrade / [[itpm-trading-philosophy|ITPM]] cadence — open at 45 DTE, close or roll at 21 DTE — is a direct consequence of the curve. Between 45 DTE and 21 DTE a position captures roughly 40-50% of the original extrinsic value at relatively manageable [[gamma]]. Between 21 DTE and 0 DTE the remaining 50% is captured but [[gamma]] roughly doubles, and so does the [[gamma-to-theta-ratio|gamma-to-theta ratio]]. For a fixed expected return, the second half of the curve carries materially more variance.
+The standard tastytrade-style cadence — open at 45 DTE, close or roll at 21 DTE — is a direct consequence of the curve. Between 45 DTE and 21 DTE a position captures roughly 40-50% of the original extrinsic value at relatively manageable [[gamma]]. Between 21 DTE and 0 DTE the remaining 50% is captured but [[gamma]] roughly doubles, and so does the [[gamma-to-theta-ratio|gamma-to-theta ratio]]. For a fixed expected return, the second half of the curve carries materially more variance.
 
 The [[managing-winners|50% profit-take rule]] (close when 50% of credit is captured) is the same idea expressed in P&L space: lock in the smooth portion of the curve, let someone else stand for the hockey stick.
 

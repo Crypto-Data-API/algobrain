@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [options, risk-management, theta, itpm, performance-attribution]
+tags: [options, risk-management, theta, performance-attribution]
 aliases: ["Realised Theta", "Theta Capture Ratio", "Decay Capture Rate", "Realisation Rate"]
 related: ["[[theta]]", "[[theta-targeting]]", "[[theta-decay-curve]]", "[[gamma-to-theta-ratio]]", "[[gamma-explosion]]", "[[gamma-scalping]]", "[[time-to-expiration]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[expiration-laddering]]", "[[zero-dte-options]]", "[[managing-winners]]", "[[variance-risk-premium]]", "[[volmageddon-2018]]", "[[bid-ask-spread]]", "[[second-order-greeks]]", "[[vanna]]", "[[volatility-spike]]"]
 domain: [risk-management]
@@ -30,7 +30,7 @@ Realisation Ratio = Σ Realised P&L over window / Σ Theoretical Theta over wind
 
 Three windowing conventions are useful:
 
-1. **Rolling window** — typically 21 trading days or 30 calendar days. Smooth enough to ignore single-day noise, short enough to react to regime changes. Most ITPM-style books track a 21-day rolling realisation.
+1. **Rolling window** — typically 21 trading days or 30 calendar days. Smooth enough to ignore single-day noise, short enough to react to regime changes. Most disciplined books track a 21-day rolling realisation.
 2. **Per-cycle** — measure realisation from position open to position close (or roll). This is the cleanest attribution because it isolates a single decay cycle, but it gives spiky readings.
 3. **Year-to-date** — for the long-run scorecard. The denominator is the cumulative theoretical theta the book *would* have produced if every position decayed exactly at its theta number.
 

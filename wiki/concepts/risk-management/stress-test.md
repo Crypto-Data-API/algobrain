@@ -6,13 +6,13 @@ updated: 2026-06-20
 status: excellent
 tags: [risk-management, options, portfolio-theory, backtesting, volatility]
 aliases: ["Stress Testing", "Portfolio Stress Test", "Adverse Scenario Test"]
-related: ["[[expected-shortfall]]", "[[value-at-risk]]", "[[options-portfolio-construction]]", "[[theta-targeting]]", "[[the-theta-trap]]", "[[vega-budgeting]]", "[[itpm-framework]]", "[[itpm-trading-philosophy]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[reverse-stress-test]]", "[[monte-carlo-simulation]]", "[[volatility-of-volatility]]", "[[options-greeks]]", "[[skew]]", "[[volatility-term-structure]]"]
+related: ["[[expected-shortfall]]", "[[value-at-risk]]", "[[options-portfolio-construction]]", "[[theta-targeting]]", "[[the-theta-trap]]", "[[vega-budgeting]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[reverse-stress-test]]", "[[monte-carlo-simulation]]", "[[volatility-of-volatility]]", "[[options-greeks]]", "[[skew]]", "[[volatility-term-structure]]"]
 domain: [risk-management]
 prerequisites: ["[[options-greeks]]", "[[implied-volatility]]"]
 difficulty: intermediate
 ---
 
-A stress test re-prices a portfolio under a defined adverse scenario — a spot shock, a volatility shock, a combined shock, or a historical replay — and reports the resulting P&L against the book's risk budget. Stress testing complements [[value-at-risk|VaR]] (which gives a single percentile of the loss distribution) and [[expected-shortfall]] (which gives the average loss in the tail) by answering the operationally different question *"if this specific thing happens, what do I lose?"*. For an [[options-portfolio-construction|options book]] with material non-linear exposure to spot, volatility, skew, and time, stress testing is the only risk discipline that captures second-order effects accurately, and it is the standard pre-commitment tool used inside the [[itpm-framework|ITPM framework]] to size positions before they are entered.
+A stress test re-prices a portfolio under a defined adverse scenario — a spot shock, a volatility shock, a combined shock, or a historical replay — and reports the resulting P&L against the book's risk budget. Stress testing complements [[value-at-risk|VaR]] (which gives a single percentile of the loss distribution) and [[expected-shortfall]] (which gives the average loss in the tail) by answering the operationally different question *"if this specific thing happens, what do I lose?"*. For an [[options-portfolio-construction|options book]] with material non-linear exposure to spot, volatility, skew, and time, stress testing is the only risk discipline that captures second-order effects accurately, and it is the standard pre-commitment tool professional desks use to size positions before they are entered.
 
 ## Overview
 
@@ -192,13 +192,13 @@ Before adding any position:
 2. Run the same standard scenario set.
 3. Reject the candidate if it would push any scenario above its threshold.
 
-This is the discipline that makes the [[itpm-framework]]'s "stage 6" sizing rigorous rather than discretionary.
+This is the discipline that makes position sizing rigorous rather than discretionary.
 
 ### Worked example
 
 *All figures in this example are illustrative and hypothetical — they are not real market data or a real book.*
 
-A book with $250K NAV running an [[options-portfolio-construction|ITPM-style options portfolio]]:
+A book with $250K NAV running a [[options-portfolio-construction|professionally constructed options portfolio]]:
 
 - Current Greeks: delta +120 (beta-weighted to SPX), vega -800/IV pt, theta +$95/day, gamma -150.
 - Drawdown limit: -15% NAV = -$37,500.
@@ -219,7 +219,7 @@ The book passes most scenarios but **fails the tail combined shock**. The revers
 
 The action: *cut net vega in half before the next session*, primarily by closing back-month naked positions and replacing with closer-wing condors. Re-run scenarios after the adjustment; the tail scenario should now produce a loss inside the limit.
 
-This is the daily loop ITPM-aligned practitioners run, and it is the only discipline that catches the [[the-theta-trap|theta trap]] before it springs.
+This is the daily loop disciplined practitioners run, and it is the only discipline that catches the [[the-theta-trap|theta trap]] before it springs.
 
 ## Building a Stress Menu: A Checklist
 
@@ -266,8 +266,6 @@ The calibration principle: a book should be *uncomfortable but solvent* in the m
 - [[theta-targeting]] — uses stress tests in the worked-example sizing loop
 - [[the-theta-trap]] — the failure mode stress testing is most needed to detect
 - [[vega-budgeting]] — the constraint stress tests verify
-- [[itpm-framework]] — operational framework that embeds stress testing in stage 6
-- [[itpm-trading-philosophy]] — the worldview that requires stress testing as discipline rather than option
 - [[reverse-stress-test]] — the inverse formulation
 - [[monte-carlo-simulation]] — the stochastic complement
 - [[volatility-of-volatility]] — the higher-order risk dimension
@@ -278,8 +276,7 @@ The calibration principle: a book should be *uncomfortable but solvent* in the m
 
 ## Sources
 
-- [[options-portfolio-construction]] — ITPM-style book construction with explicit stress testing
-- [[itpm-framework]] — operational embedding of stress tests in the construction sequence
+- [[options-portfolio-construction]] — book construction with explicit stress testing
 - [[book-option-volatility-and-pricing]] — Natenberg on Greeks repricing under stress
 - [[basel-iii]] — institutional framework for stress testing capital adequacy (regulatory parallel)
 - [[ccar]] — Federal Reserve's Comprehensive Capital Analysis and Review, the canonical institutional stress-test programme

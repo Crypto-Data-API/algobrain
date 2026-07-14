@@ -190,5 +190,4 @@ A small short-options position can produce a much larger stock position post-ass
 - Hull, John C. *Options, Futures and Other Derivatives* — early-exercise theory for American options, including the dividend-capture mechanic.
 - Cox, J., Ross, S., and Rubinstein, M. (1979). "Option Pricing: A Simplified Approach." *Journal of Financial Economics*. Foundational treatment of American option early-exercise boundary.
 - Tastytrade research notes on assignment frequency and the closing-before-ex-dividend rule.
-- [[itpm-options-portfolio-management]] — institutional treatment of why index options dominate premium-selling at scale, with assignment-risk avoidance as a primary driver.
 - Practitioner accounts of mass early-assignment events in 2021 meme-stock short-put episodes (broker complaint data, regulatory filings).

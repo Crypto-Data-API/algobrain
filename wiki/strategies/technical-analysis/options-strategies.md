@@ -25,7 +25,7 @@ related: ["[[covered-call]]", "[[vertical-spread]]", "[[iron-condor]]", "[[strad
 
 # Options Strategies
 
-Options strategies combine one or more [[call-option|call]] and [[put-option|put]] options to create defined risk/reward profiles. By structuring positions across different strikes, expirations, and option types, traders can express views on direction, volatility, time decay, or any combination of these factors. Options strategies are central to ITPM's long-short-equity methodology and span a wide range of complexity from single-leg trades to multi-leg structures. This page treats the family as a whole, with defined-risk premium selling (the one family with a documented persistent edge — the [[volatility-risk-premium]]) as the canonical implementation.
+Options strategies combine one or more [[call-option|call]] and [[put-option|put]] options to create defined risk/reward profiles. By structuring positions across different strikes, expirations, and option types, traders can express views on direction, volatility, time decay, or any combination of these factors. Options strategies are central to long-short-equity portfolio construction and span a wide range of complexity from single-leg trades to multi-leg structures. This page treats the family as a whole, with defined-risk premium selling (the one family with a documented persistent edge — the [[volatility-risk-premium]]) as the canonical implementation.
 
 ## Strategy Families
 

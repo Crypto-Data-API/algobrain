@@ -20,7 +20,7 @@ crowding_risk: high
 expected_sharpe: 0.3
 expected_max_drawdown: 0.50
 breakeven_cost_bps: 50
-related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[gamma-explosion]]", "[[gamma-scalping]]", "[[managing-winners]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[dealer-gamma-positioning]]", "[[pin-risk]]", "[[implied-volatility]]", "[[cboe]]", "[[itpm-trading-philosophy]]"]
+related: ["[[options-premium-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[gamma-explosion]]", "[[gamma-scalping]]", "[[managing-winners]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[dealer-gamma-positioning]]", "[[pin-risk]]", "[[implied-volatility]]", "[[cboe]]"]
 ---
 
 Zero-DTE (0DTE) options are options that expire **on the same trading day they are traded**. The 0DTE phenomenon refers specifically to the explosive growth in volume of these same-day-expiry contracts on broad index products -- principally SPX, SPY, QQQ, and increasingly NDX -- following [[cboe|Cboe's]] completion of SPX expirations across all five weekdays in 2022 (Tuesday and Thursday expiries added in April-May 2022, joining the Monday and Wednesday weeklys listed since 2016). By 2024-2025, 0DTE volume routinely accounted for **40-50% of total SPX options volume**, making the 0DTE tape its own distinct market microstructure with measurable feedback into the underlying. Selling 0DTE premium is the front-end of the [[options-premium-selling|premium-selling]] world: the highest theta-per-dollar available on the listed surface, paired with the highest [[gamma-explosion|gamma]] of any tradeable structure.
@@ -234,7 +234,6 @@ Mechanical retirement triggers (see [[when-to-retire-a-strategy]]):
 - [[vix-august-2024-spike]] -- the most recent textbook 0DTE gamma shock.
 - [[volmageddon]] -- the 2018 short-vol blowup; not a 0DTE event but the canonical failure mode for short-gamma flow.
 - [[options-premium-selling]] -- the broader VRP context.
-- [[itpm-trading-philosophy]] -- the institutional view on why 0DTE concentrates rather than diversifies risk.
 
 ## Related
 

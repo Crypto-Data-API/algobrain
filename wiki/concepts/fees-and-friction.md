@@ -18,11 +18,8 @@ related:
   - "[[tax-efficiency]]"
   - "[[capital-gains]]"
   - "[[fees-and-friction]]"
-  - "[[itpm-trading-philosophy]]"
-  - "[[itpm-framework]]"
   - "[[professional-vs-retail-mindset]]"
   - "[[capital-preservation]]"
-  - "[[anton-kreil]]"
   - "[[market-makers]]"
   - "[[options-portfolio-construction]]"
   - "[[democratization-of-markets]]"
@@ -31,13 +28,13 @@ related:
   - "[[sec]]"
 ---
 
-Fees and friction is the umbrella term for the structural drag — commissions, bid-ask spreads, financing costs, slippage, payment-for-order-flow, taxes, currency conversion, account-minimum traps, behavioural friction — that compounds against active retail accounts and explains a material share of the 70-90% retail loss statistic that sits at the centre of the [[itpm-trading-philosophy|ITPM philosophy]] and the [[esma|ESMA]]/[[finra|FINRA]] retail-broker disclosures. The proposition is that *active trading is structurally biased against the retail trader* not because retail traders are stupid, and not primarily because they lack information, but because the cost stack between their P&L and the market price is materially thicker than the equivalent stack for an institutional desk — and that the difference compounds, often invisibly, into negative real returns even before any behavioural error is layered on top. Closing the friction gap is a prerequisite for active retail trading to have a reasonable expectancy at all.
+Fees and friction is the umbrella term for the structural drag — commissions, bid-ask spreads, financing costs, slippage, payment-for-order-flow, taxes, currency conversion, account-minimum traps, behavioural friction — that compounds against active retail accounts and explains a material share of the 70-90% retail loss statistic documented in the [[esma|ESMA]]/[[finra|FINRA]] retail-broker disclosures. The proposition is that *active trading is structurally biased against the retail trader* not because retail traders are stupid, and not primarily because they lack information, but because the cost stack between their P&L and the market price is materially thicker than the equivalent stack for an institutional desk — and that the difference compounds, often invisibly, into negative real returns even before any behavioural error is layered on top. Closing the friction gap is a prerequisite for active retail trading to have a reasonable expectancy at all.
 
 ## Why Friction Matters Disproportionately
 
 A trader with a 1.0 Sharpe ratio gross of costs has a roughly 16% expected return at 16% volatility. Strip out 200 bps of annual cost drag (commissions + slippage + spreads + financing) and the expected return drops to 14% — Sharpe falls to ~0.88. Strip out 500 bps and Sharpe falls to ~0.69. The drag is *larger* than most traders' realised excess return.
 
-The compounding consequence over a decade: $100K compounded at 14% net for 10 years = $371K. The same $100K compounded at 9% net for 10 years (with 500 bps friction stripped) = $237K. The friction, not the gross alpha, is the dominant determinant of realised wealth. This is why the [[itpm-framework|ITPM framework]] treats cost as a *first-pass filter* on every strategy — strategies that look attractive gross of costs are rejected at the design stage if their breakeven cost exceeds what the trader can plausibly execute.
+The compounding consequence over a decade: $100K compounded at 14% net for 10 years = $371K. The same $100K compounded at 9% net for 10 years (with 500 bps friction stripped) = $237K. The friction, not the gross alpha, is the dominant determinant of realised wealth. This is why professional frameworks treat cost as a *first-pass filter* on every strategy — strategies that look attractive gross of costs are rejected at the design stage if their breakeven cost exceeds what the trader can plausibly execute.
 
 The retail bias is to treat friction as *small* because individual costs look small in isolation. A $0.65 per contract commission. A 2-cent bid-ask. 0.05% PFOF rebate. 0.1% conversion fee. Each is small; their *aggregate annualised drag* is rarely modelled, and almost never modelled correctly.
 
@@ -147,7 +144,7 @@ Account-level rules and minimums that *force* friction-heavy structures on small
 - **Inactivity fees** at some brokers ($10-20/month) for accounts below thresholds.
 - **Dividend withholding** at non-resident-broker combinations (typically 30% US withholding on dividends paid to non-US accounts unless treaty rates apply).
 
-The structural consequence: small accounts pay disproportionately high friction. A $10K account running active options costs 5-10% of capital per year on commissions alone; the same activity at $500K is 0.2-0.5%. The friction is regressive, which is why ITPM emphasises that the framework is realistically only deployable above ~$125-200K of equity.
+The structural consequence: small accounts pay disproportionately high friction. A $10K account running active options costs 5-10% of capital per year on commissions alone; the same activity at $500K is 0.2-0.5%. The friction is regressive, which is why a professional-style options framework is realistically only deployable above ~$125-200K of equity.
 
 ### 10. Behavioural Friction
 
@@ -159,7 +156,7 @@ The least-discussed but often largest layer. Behavioural patterns systematically
 - **Chasing news**: produces high-friction entries at the worst spreads and slippage.
 - **Revenge trading**: produces oversized positions in the lowest-conviction setups.
 
-The friction is not measured on the trade ticket but on the *realised P&L distribution versus the strategy's theoretical distribution*. For active retail traders this gap is typically 200-500 bps annualised on top of the explicit cost stack. Closing the gap is the central programme of [[professional-vs-retail-mindset|the professional discipline]] and the [[itpm-trading-philosophy|ITPM philosophy]].
+The friction is not measured on the trade ticket but on the *realised P&L distribution versus the strategy's theoretical distribution*. For active retail traders this gap is typically 200-500 bps annualised on top of the explicit cost stack. Closing the gap is the central programme of [[professional-vs-retail-mindset|the professional discipline]].
 
 ## Per-Asset-Class Cost Sketch
 
@@ -234,7 +231,7 @@ The single most common mistake is inverting this list — agonising over commiss
 
 ## Cost Discipline as a Strategy Filter
 
-The ITPM-aligned approach is to make cost the *first* filter on any strategy idea. The questions:
+The professional approach is to make cost the *first* filter on any strategy idea. The questions:
 
 1. **What is the breakeven cost** in bps round-trip that the strategy can absorb and still be net-positive at the historical edge?
 2. **What is the realistic execution cost** at the trader's actual broker, account size, and instrument liquidity?
@@ -252,9 +249,9 @@ Strategies that fail this filter — high-frequency mean-reversion on liquid fut
 6. **Believing the institutional band is unreachable.** With portfolio margin and a top-tier broker (IBKR Pro / Tradestation Direct / similar), retail traders can compress most of the gap. The remaining gap is access to direct exchange routing on size and cross-asset prime brokerage, which only matters above ~$1M account size.
 7. **Believing all retail brokers are equivalent.** They are not. Robinhood's PFOF model, IBKR Pro's direct routing, eToro's spread-loaded model, and Schwab's pricing tiers produce materially different friction profiles. Broker choice is a strategy decision.
 
-## Cost Discipline in the ITPM Frame
+## Cost Discipline in the Professional Frame
 
-Fees-and-friction is the structural-side companion to the [[professional-vs-retail-mindset|behavioural divergence]]. The [[itpm-trading-philosophy|ITPM philosophy]]'s framing is that retail underperformance has *both* causes — behavioural inversion and structural cost stack — and that mindset work alone cannot close the gap without the structural fix, just as the structural fix alone cannot close the gap without the discipline. The complete ITPM operational layer ([[itpm-framework]], [[options-portfolio-construction]]) addresses both:
+Fees-and-friction is the structural-side companion to the [[professional-vs-retail-mindset|behavioural divergence]]. Retail underperformance has *both* causes — behavioural inversion and structural cost stack — and mindset work alone cannot close the gap without the structural fix, just as the structural fix alone cannot close the gap without the discipline. The complete operational layer ([[options-portfolio-construction]]) addresses both:
 
 - **Portfolio margin requirement** — closes the financing layer
 - **Liquid-underlyings preference** — closes the spread layer
@@ -274,20 +271,14 @@ The trader who runs the framework on a low-friction broker compresses the cost g
 - [[portfolio-margin]] — the financing-cost reduction lever
 - [[tax-efficiency]] — the tax-friction lever
 - [[capital-gains]] / [[mortgages]] — broader personal-finance friction
-- [[itpm-trading-philosophy]] — central framing of fees-and-friction as structural cause
-- [[itpm-framework]] — operational expression
 - [[professional-vs-retail-mindset]] — behavioural-side companion to this page
 - [[capital-preservation]] — the discipline that subsumes friction control
 - [[market-makers]] — counterparties on the other side of the spread
 - [[democratization-of-markets]] — the structural shift creating modern retail friction
 - [[finra]] / [[esma]] / [[sec]] — regulators publishing the relevant disclosure data
-- [[anton-kreil]] / itpm — primary articulators of the friction-stack framing
 
 ## Sources
 
-- [[itpm-trading-philosophy]] — fees-and-friction as structural cause of retail underperformance
-- [[itpm-framework]] — operational expression
-- [[anton-kreil]] — primary articulator of the friction-stack framing
 - ESMA CFD broker disclosure data 2018-2025 — empirical retail loss distributions
 - SEC Rule 605/606 best-execution disclosures — PFOF and execution-quality data
 - FINRA retail trading studies — US data on cost incidence

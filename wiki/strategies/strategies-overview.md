@@ -119,7 +119,6 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 - [[debit-spread]] — Paying net premium for defined-risk directional spreads
 - [[calendar-spread]] — Selling near-dated against longer-dated options to harvest time decay
 - [[ratio-calendar-spread]] — Calendar with unequal legs for asymmetric payoff
-- [[itpm-ratio-calendar-spread]] — ITPM's institutional take on the ratio calendar
 - [[put-tree]] — Multi-strike put structure for cheap downside convexity
 - [[leaps]] — Long-dated options as stock substitutes
 - [[long-straddle]] — Buying call + put to profit from a large move either way

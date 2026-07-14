@@ -20,7 +20,7 @@ crowding_risk: low
 expected_sharpe: -0.5
 expected_max_drawdown: 0.05
 breakeven_cost_bps: 0
-related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[vix-calls]]", "[[vix-call-spreads]]", "[[vix]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[volatility-regime-classification]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[itpm-framework]]", "[[crisis-alpha]]", "[[sharpe-ratio]]", "[[geometric-mean]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[vix-calls]]", "[[vix-call-spreads]]", "[[vix]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[volatility-regime-classification]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[crisis-alpha]]", "[[sharpe-ratio]]", "[[geometric-mean]]"]
 ---
 
 A **long-vol overlay** is a permanent, rolling allocation to long options (typically a spy/SPX put ladder plus a [[vix]] call ladder) attached to a short-vol core book to **cap the left tail** of the combined portfolio. It is not a stand-alone money-maker: in isolation it bleeds 1-3% of NAV per year. Its job is portfolio-level -- to convert a negatively-skewed [[options-premium-selling]] book into a roughly symmetric, survival-tolerant book whose **geometric return** dominates the naked premium-selling book over any horizon longer than a single calm regime. This page describes the mechanics, sizing, monetization rules, and integration with the short-vol core. Read [[long-vol-vs-short-vol]] for the conceptual frame, [[tail-risk-hedging]] for the stand-alone Universa-style implementation.
@@ -240,7 +240,6 @@ Net exposure: **net short vol with a hard floor.** The overlay does not flip the
 - Carr, Peter and Wu, Liuren. "Variance Risk Premiums" (2009) -- VRP measurement.
 - [[universa-investments]] / [[mark-spitznagel]] track record -- empirical demonstration of overlay payoffs in [[covid-crash|March 2020]] and [[gfc|2008]].
 - [[vix-august-2024-spike]] post-mortem -- recent case study of overlay payoffs.
-- [[itpm-framework]] -- portfolio-level integration of core and overlay.
 
 ## Related
 

@@ -210,4 +210,3 @@ This is why a CPI-cycle short-premium strategy is often run as: *open the positi
 - US Bureau of Labor Statistics — *Consumer Price Index release calendar and data*. https://www.bls.gov/cpi/
 - Federal Reserve Bank of Cleveland — *Inflation Nowcasting* (real-time CPI nowcasts).
 - CME Group — *Fed Funds futures and post-CPI repricing flows*.
-- [[itpm-trading-philosophy]] — practitioner framework for laddering DTE around macro events.

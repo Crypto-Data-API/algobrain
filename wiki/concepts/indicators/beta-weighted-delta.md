@@ -123,4 +123,3 @@ Both platforms compute BWD natively. In thinkorswim's *Analyze → Risk Profile*
 
 - [[book-option-volatility-and-pricing]] — Natenberg on portfolio-level Greek aggregation and beta-adjustment for cross-name books
 - [[book-options-futures-other-derivatives]] — Hull's treatment of delta hedging across heterogeneous underlyings
-- [[itpm-trade-construction-playbook]] — ITPM curriculum on beta-weighting as the discipline that makes a book's "directional bias" a real number

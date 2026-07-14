@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, risk-management, sp500, indicators, derivatives, volatility]
 aliases: ["5% OTM Put Overlay", "SPY Put Overlay", "Shallow OTM Put Hedge", "5% Put Protection Program"]
-related: ["[[long-put]]", "[[protective-puts]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[tail-risk-hedging]]", "[[volatility-skew]]", "[[itpm-trade-construction-playbook]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[hedging-cost-budget]]", "[[barbell-portfolio]]", "[[volatility-risk-premium]]"]
+related: ["[[long-put]]", "[[protective-puts]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[tail-risk-hedging]]", "[[volatility-skew]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[hedging-cost-budget]]", "[[barbell-portfolio]]", "[[volatility-risk-premium]]"]
 strategy_type: hybrid
 timeframe: position
 markets: [stocks, options, index-options, sp500]
@@ -260,7 +260,6 @@ Drawing from [[failure-modes]] and [[hedging-program-failure-modes]]:
 - Goldman Sachs portfolio strategy research on tail-hedging cost-benefit (annual reports 2018-2024).
 - Universa Investments client letters (multiple years) — comparison data on 20%+ OTM tail hedges. See [[universa-investments]].
 - AQR research papers on the [[volatility-risk-premium|VRP]] and the cost of put-buying programs.
-- ITPM curriculum on [[long-vol-overlay|long-vol overlays]] within institutional book construction.
 
 ## Related
 
@@ -272,7 +271,6 @@ Drawing from [[failure-modes]] and [[hedging-program-failure-modes]]:
 - [[volatility-skew]] — informs strike-distance economics
 - [[barbell-portfolio]] — the broader Taleb/Spitznagel approach this overlay supports
 - [[options-portfolio-construction]] — book-level integration
-- [[itpm-trade-construction-playbook]] — institutional methodology
 - [[tail-risk-hedging]] — the broad category this strategy implements
 - [[options-risk-budgeting]] — the budget framework the tail-hedge sleeve sits inside
 - [[the-theta-trap]] — the short-premium failure mode this overlay is designed to offset

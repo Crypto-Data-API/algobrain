@@ -72,9 +72,9 @@ For tax purposes, weekly options take the status of their underlying:
 
 This is one of the key reasons active short-term SPX traders use SPXW rather than SPY weeklies despite SPY's penny pricing.
 
-## ITPM Use Cases
+## Portfolio Use Cases
 
-ITPM-style portfolios use weeklies in several specific scenarios:
+Professionally managed options portfolios use weeklies in several specific scenarios:
 
 - **Precise event timing** — selling a weekly straddle into earnings or a specific data release captures the IV crush or realized move with no exposure beyond the event window. See earnings-options-strategies.
 - **Faster premium decay** — overlay strategies that systematically sell short-dated premium against a longer-dated position (e.g., diagonal calendars, double diagonals) extract theta faster on the short leg using weeklies.

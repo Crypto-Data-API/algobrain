@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, portfolio-theory, itpm, correlation]
+tags: [options, risk-management, portfolio-theory, correlation]
 aliases: ["Options Portfolio Concentration", "Concentrated Options Book"]
 related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[options-stress-testing]]", "[[vega-budgeting]]", "[[correlation]]", "[[tail-risk]]", "[[long-vol-vs-short-vol]]"]
 domain: [risk-management, portfolio-theory]
@@ -150,7 +150,7 @@ Every position's delta is converted into SPX-equivalent shares. A $250K book sho
 Sector exposure % = (Σ |notional in sector| ) / (total |notional|)
 ```
 
-ITPM rule of thumb: **no single GICS sector should hold more than 25% of the book's risk**. A 40% allocation to semis is a sector trade, not a diversified book.
+A common professional rule of thumb: **no single GICS sector should hold more than 25% of the book's risk**. A 40% allocation to semis is a sector trade, not a diversified book.
 
 ### Factor Exposure (Barra-Style)
 
@@ -186,9 +186,9 @@ Portfolio variance = Σᵢ Σⱼ wᵢ wⱼ ρᵢⱼ σᵢ σⱼ
 
 Re-run with stress correlations (ρ = 0.85 for same-sector pairs, 0.75 for same-factor pairs). Compare stress portfolio variance to baseline portfolio variance. The ratio is your concentration penalty: stress variance / baseline variance > 2.0 means you have a hidden concentrated bet.
 
-## ITPM Rules of Thumb
+## Rules of Thumb
 
-The itpm / [[itpm-trade-construction-playbook]] approach embeds concentration limits directly into [[options-portfolio-construction|portfolio construction]]:
+Professional trade construction embeds concentration limits directly into [[options-portfolio-construction|portfolio construction]]:
 
 | Limit | Rule |
 |-------|------|
@@ -394,13 +394,10 @@ For most discretionary traders the workflow is: IBKR Risk Navigator daily, suppl
 - [[beta-weighted-delta]] — measuring market exposure across underlyings
 - [[implied-correlation]] — the index-component correlation as priced by options
 - [[factor-investing]] — equity factor framework that translates to options books
-- [[itpm-trade-construction-playbook]] — book construction methodology
 - [[risk-management]] — broader risk framework
 - [[risk-of-ruin]] — what concentration ultimately threatens
 
 ## Sources
 
 - [[book-option-volatility-and-pricing]] — Natenberg on portfolio risk
-- [[itpm-five-principles]] — diversification and portfolio construction principles
-- [[itpm-trade-construction-playbook]] — book-level workflow
 - [[vix-august-2024-spike]] — case study of correlation breakdown event

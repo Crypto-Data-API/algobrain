@@ -208,7 +208,6 @@ The same grid run for an [[fomc|FOMC]] event would replace the IV axis with a FO
 
 ## Sources
 
-- [[itpm-trade-construction-playbook]] — practitioner workflow embedding scenario analysis
 - [[options-portfolio-construction]] — book construction with scenario grids
 - Hull, *Options, Futures, and Other Derivatives* — chapter on scenario analysis vs VaR
 - Jorion, *Value at Risk* (3rd ed.) — VaR vs scenario analysis comparison

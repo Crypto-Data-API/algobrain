@@ -120,7 +120,7 @@ Understanding negative gearing is critical for share investors even if they neve
 - Capital locked in a negatively geared property ($500K+ deposit + stamp duty + ongoing holding costs) could alternatively be invested in a diversified share portfolio
 - Historical returns: Australian residential property has averaged ~7% nominal (3-4% real) vs ASX All Ordinaries ~10% nominal (6-7% real) over 30 years
 - Property returns vary enormously by location; share returns are broadly accessible via [[index-funds]] and [[etf|ETFs]]
-- The ITPM philosophy emphasises opportunity cost analysis — capital in property is capital not deployed in potentially higher-returning strategies
+- Professional trading philosophy emphasises opportunity cost analysis — capital in property is capital not deployed in potentially higher-returning strategies
 
 ### REIT Alternative
 

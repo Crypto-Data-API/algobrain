@@ -90,7 +90,6 @@ Deribit's option chain supports the full range of strategies available in tradit
 - **Strangles**: Buy OTM call + OTM put; cheaper than straddles but requires larger move to profit
 - **Iron condors**: Sell OTM strangle + buy further-OTM strangle; profits from range-bound markets. Challenging in crypto due to frequent breakouts
 - **Butterfly spreads**: Concentrated bet on BTC settling near a specific price at expiry
-- **Calendar spreads**: Exploit term structure differences (see [[itpm-ratio-calendar-spread]] for the ITPM methodology)
 
 ### Skew and Surface Trades
 - **Risk reversals**: Buy OTM call, sell OTM put (or vice versa); trades the [[implied-volatility]] skew
@@ -221,7 +220,6 @@ Deribit's dominance is also a source of structural risk for the traders who depe
 - [[coinbase]] — Acquired Deribit in 2025 (closed August 14, 2025)
 - [[perpetual-futures]] — Perp contracts available on Deribit alongside options
 - [[funding-rate]] — Funding rate comparison across venues
-- [[itpm-ratio-calendar-spread]] — ITPM options methodology applicable to Deribit
 - [[alternative-me]] — Sentiment data to cross-reference with options positioning
 - [[cryptoquant]] — On-chain data to combine with derivatives signals
 - [[options]] — Core instrument class traded on Deribit

@@ -75,9 +75,9 @@ The two indices are largely orthogonal -- they can move together or independentl
 
 The "low VIX, high SKEW" regime is often watched as a warning signal -- it suggests sophisticated players are paying up for crash insurance even as broad volatility measures look benign.
 
-## ITPM Use Cases
+## Portfolio Use Cases
 
-For traders running an ITPM-style options portfolio, SKEW is useful for:
+For traders running an actively managed options portfolio, SKEW is useful for:
 
 - **Timing tail-hedge purchases** -- buying OTM puts when SKEW is depressed (puts are relatively cheap) and trimming when SKEW is extended
 - **Identifying skew arbitrage opportunities** -- comparing SKEW levels against historical ranges to size [[risk-reversal]] positions or [[convex-tail-hedge-arbitrage]] trades

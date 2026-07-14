@@ -133,4 +133,4 @@ Practical applications:
 - Eraker, B. and Wu, Y. (2017). *Explaining the Negative Returns to Volatility Claims*. Journal of Financial Economics 125(1). Why long-vol products lose money on average — the mirror of VRP-as-edge.
 - Demeterfi, K., Derman, E., Kamal, M., Zou, J. (1999). *More Than You Ever Wanted to Know About Volatility Swaps*. Goldman Sachs. Variance-swap pricing underpinning VRP measurement.
 - ORATS / Tastytrade — published research on the regime-conditional realized P&L of standard short-premium structures (45-DTE strangles, condors, etc.).
-- Synthesis with the [[itpm-playbook|ITPM]] regime-aware framework as documented elsewhere in the wiki, particularly the *theta trap* mechanism in [[theta-targeting]].
+- Synthesis with the regime-aware framework documented elsewhere in the wiki, particularly the *theta trap* mechanism in [[theta-targeting]].

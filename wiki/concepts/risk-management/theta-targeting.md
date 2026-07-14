@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, itpm, income]
+tags: [options, risk-management, income]
 aliases: ["Theta Goal", "Daily Theta Target", "Theta Budgeting"]
 related: ["[[options-risk-budgeting]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[portfolio-greeks-aggregation]]", "[[theta-decay]]", "[[options-premium-selling]]", "[[options-income]]", "[[variance-risk-premium]]", "[[expiration-laddering]]"]
 domain: [risk-management]
@@ -12,7 +12,7 @@ prerequisites: ["[[options-greeks]]", "[[theta-decay]]"]
 difficulty: advanced
 ---
 
-Theta targeting is the discipline of setting a desired daily [[theta]] income for a short-premium [[options]] book and sizing positions (see [[position-sizing]]) so the aggregate theta meets that target without breaching the [[vega-budgeting|vega budget]] or the book's [[delta]] and [[gamma]] limits. Where vega budgeting answers *"how much volatility risk can I take?"*, theta targeting answers the complementary question *"how much premium decay do I need to harvest, and is the structure of my book efficient at producing it?"*. Together the two form the core engineering loop of an income-seeking [[options-premium-selling|premium-selling]] portfolio in the [[itpm-trading-philosophy|ITPM]] tradition: vega is the constraint, theta is the objective, and every position is evaluated on how well it converts one into the other.
+Theta targeting is the discipline of setting a desired daily [[theta]] income for a short-premium [[options]] book and sizing positions (see [[position-sizing]]) so the aggregate theta meets that target without breaching the [[vega-budgeting|vega budget]] or the book's [[delta]] and [[gamma]] limits. Where vega budgeting answers *"how much volatility risk can I take?"*, theta targeting answers the complementary question *"how much premium decay do I need to harvest, and is the structure of my book efficient at producing it?"*. Together the two form the core engineering loop of an income-seeking [[options-premium-selling|premium-selling]] portfolio: vega is the constraint, theta is the objective, and every position is evaluated on how well it converts one into the other.
 
 ## Quick-Reference: The Four Metrics That Steer the Book
 
@@ -35,13 +35,13 @@ The instinctive metric for an income trader is daily mark-to-market P&L. It is a
 - **[[vega|Vega]] noise** — a 1-point move in [[implied-volatility|IV]] revalues every option in the book. On an earnings week, vega P&L can swamp theta P&L by an order of magnitude.
 - **Skew and term-structure noise** — even when ATM IV is stable, a steepening [[volatility-skew|skew]] or a shifting [[volatility-term-structure|term structure]] can mark the book up or down.
 
-Theta is far less noisy. The decay that an option *should* shed in a calendar day is a deterministic function of its current price, [[time-to-expiration|DTE]], moneyness, and surface — given those inputs, theta is essentially a derivative of the [[black-scholes-model|Black-Scholes]] formula with respect to time. It is a smoother, more stable signal of *how much structural [[variance-risk-premium|variance-risk-premium]] the book is collecting*. P&L tells you what the market did to you yesterday; theta tells you what the book is engineered to earn if the world stays the same. As [[itpm-trading-philosophy|ITPM]] practitioners put it, *manage to theta, get judged on P&L*.
+Theta is far less noisy. The decay that an option *should* shed in a calendar day is a deterministic function of its current price, [[time-to-expiration|DTE]], moneyness, and surface — given those inputs, theta is essentially a derivative of the [[black-scholes-model|Black-Scholes]] formula with respect to time. It is a smoother, more stable signal of *how much structural [[variance-risk-premium|variance-risk-premium]] the book is collecting*. P&L tells you what the market did to you yesterday; theta tells you what the book is engineered to earn if the world stays the same. As practitioners put it, *manage to theta, get judged on P&L*.
 
 The corollary: an honest income trader tracks **realised theta capture** — actual P&L over a window divided by cumulative target theta — as a long-horizon scorecard. A book whose realised capture is consistently below 60% of its theoretical theta is leaking edge to gamma scalping by the dealers on the other side. See [[theta-realisation-ratio]] and [[gamma-scalping]].
 
 ## Setting the Daily Theta Target
 
-The daily target is derived top-down from an annual return objective and the proportion of that return expected from premium-selling. A common ITPM-style framework:
+The daily target is derived top-down from an annual return objective and the proportion of that return expected from premium-selling. A common framework:
 
 1. **Annual return target from options income** — set as a percentage of options-allocated capital, typically **8–18% per year** for a diversified short-premium book trading index-options and large-cap equity options. Anything materially above 18% implies leverage, concentration, or a vega budget large enough to make the strategy a vol-selling fund rather than an income overlay.
 2. **Convert to daily** — divide by ~252 trading days, or 365 calendar days if positions accrue weekend decay (most do).
@@ -82,7 +82,7 @@ Empirical ranges on liquid index products:
 | 0.15 – 0.30 | High-decay regime — late-cycle, gamma-heavy | 7–21 DTE structures, [[short-straddle|short straddles]], 0DTE [[iron-fly|iron flies]] |
 | > 0.30 | Danger zone — gamma will dominate | 0DTE / [[zero-dte-options|0DTE]] short premium, [[pin-risk|pin-risk]] structures |
 
-ITPM-style practitioners typically *target a T/V floor* — for example, **T/V > 0.06 at all times, and reject any new trade that would lower portfolio T/V below 0.05**. This forces the book to remain efficient even as the trader is tempted to "buy theta" by chasing front-week premium.
+Disciplined practitioners typically *target a T/V floor* — for example, **T/V > 0.06 at all times, and reject any new trade that would lower portfolio T/V below 0.05**. This forces the book to remain efficient even as the trader is tempted to "buy theta" by chasing front-week premium.
 
 The intuition: in a vol-expansion event, vega P&L overwhelms theta P&L by orders of magnitude. The book that survives is the one that bought a lot of decay per unit of vega. T/V is the engineer's metric for that ratio.
 
@@ -101,7 +101,7 @@ Theta is not uniform across the [[time-to-expiration|expiration]] curve, and the
 
 ### 30–45 DTE — the sweet spot
 
-This is the canonical short-premium window used by tastytrade, [[itpm-trading-philosophy|ITPM]] practitioners, and most published [[options-premium-selling|premium-selling]] research:
+This is the canonical short-premium window used by tastytrade and most published [[options-premium-selling|premium-selling]] research:
 
 - Theta has begun its meaningful acceleration but [[gamma]] is still manageable.
 - Vega per dollar of theta is reasonable — T/V typically lands in the 0.08–0.15 range.
@@ -320,7 +320,7 @@ In single-name options, [[implied-volatility|IV]] rises into earnings as the mar
 - But the IV ramp is a vega *headwind* — the position is bleeding to vega expansion at the same time it is accruing theta.
 - **Realised** decay is muted or negative in the days before earnings; the genuine decay only arrives in the post-earnings IV crush.
 
-ITPM-style premium sellers either avoid earnings windows entirely (dodge the binary event) or explicitly trade earnings-iv-crush as a separate strategy with its own sizing rules. For a normal income book, do not count pre-earnings theta as collected income — it is unrealised and at risk to the announcement.
+Professional premium sellers either avoid earnings windows entirely (dodge the binary event) or explicitly trade earnings-iv-crush as a separate strategy with its own sizing rules. For a normal income book, do not count pre-earnings theta as collected income — it is unrealised and at risk to the announcement.
 
 ### Macro events and central-bank dates
 
@@ -363,7 +363,6 @@ What to look for in a tool:
 - [[expiration-laddering]] — diversifying across DTE buckets to smooth theta and vega.
 - [[gamma-to-theta-ratio]] — the path-risk sister metric to T/V.
 - [[managing-winners]] — closing at 50% of max profit as a realisation-locking rule.
-- [[itpm-trading-philosophy]] — the methodological context most practitioners come from.
 - [[options-position-sizing]] — Greeks-based sizing on which theta targeting depends.
 - [[position-sizing]] — the general risk-first sizing discipline theta targeting must reconcile with.
 - [[volatility-regime]] — why the right target is regime-dependent.
@@ -379,5 +378,4 @@ What to look for in a tool:
 ## Sources
 
 - [[book-option-volatility-and-pricing]] — Natenberg on theta, gamma, and the structure of decay across DTE.
-- [[itpm-trading-philosophy]] — institutional-style portfolio construction with explicit theta and vega targets.
 - orats-research — historical [[backtesting|backtests]] of theta-targeted index condor strategies.

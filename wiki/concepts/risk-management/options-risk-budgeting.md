@@ -4,15 +4,15 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, portfolio-theory, itpm]
+tags: [options, risk-management, portfolio-theory]
 aliases: ["Risk Budgeting for Options", "Options Risk Allocation"]
-related: ["[[options-portfolio-construction]]", "[[risk-budgeting]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[portfolio-greeks-aggregation]]", "[[options-position-sizing]]", "[[value-at-risk]]", "[[expected-shortfall]]", "[[itpm-trade-construction-playbook]]"]
+related: ["[[options-portfolio-construction]]", "[[risk-budgeting]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[portfolio-greeks-aggregation]]", "[[options-position-sizing]]", "[[value-at-risk]]", "[[expected-shortfall]]"]
 domain: [risk-management, portfolio-theory]
 prerequisites: ["[[options-greeks]]", "[[risk-budgeting]]"]
 difficulty: advanced
 ---
 
-Options risk budgeting is the practice of allocating a portfolio's total risk capacity across [[options-greeks|Greek-based exposures]] (delta, gamma, vega, theta, rho) and across simultaneously running options trades, rather than allocating dollars of premium. Because individual options P&L is non-linear in the underlying — and because Greeks aggregate non-trivially across strikes, expirations, and underlyings — a budget expressed purely in dollars-at-risk is almost always misleading. The ITPM curriculum and most professional options desks therefore build their risk framework around *Greek caps* and *scenario losses* rather than dollar premium spent.
+Options risk budgeting is the practice of allocating a portfolio's total risk capacity across [[options-greeks|Greek-based exposures]] (delta, gamma, vega, theta, rho) and across simultaneously running options trades, rather than allocating dollars of premium. Because individual options P&L is non-linear in the underlying — and because Greeks aggregate non-trivially across strikes, expirations, and underlyings — a budget expressed purely in dollars-at-risk is almost always misleading. Most professional options desks therefore build their risk framework around *Greek caps* and *scenario losses* rather than dollar premium spent.
 
 This page is the options-specific complement to [[risk-budgeting]] (which covers the linear, mean-variance/HRP world). It describes how to size a multi-Greek risk budget, allocate it across strategy sleeves and underlyings, and re-budget when conditions break the model. It is downstream of [[position-sizing]] and [[risk-management]] generally, and the binding tail constraint it enforces is the [[risk-of-ruin|risk-of-ruin]] survivability constraint — a Greek budget that passes every cap but allows a 4σ shock to halve the book has not actually been budgeted.
 
@@ -113,7 +113,7 @@ Allocation is made in *risk units*, not dollars. For example, on a $250k account
 - Vol arb gets $500-$1,000
 - Tail hedge typically *uses up* $250-$500/day in negative carry but provides asymmetric upside in scenarios
 
-The tail-hedge sleeve is critical: short-premium books have hidden left-tail risk, and a small allocation to long-gamma/long-vega protection often stabilizes portfolio Sharpe even though it bleeds in calm regimes. This is the [[itpm-trade-construction-playbook|ITPM]] insight that "the cost of insurance is the price of staying in business."
+The tail-hedge sleeve is critical: short-premium books have hidden left-tail risk, and a small allocation to long-gamma/long-vega protection often stabilizes portfolio Sharpe even though it bleeds in calm regimes. This is the professional insight that "the cost of insurance is the price of staying in business."
 
 ## Allocating Across Underlyings and Sectors
 
@@ -149,7 +149,7 @@ The risk budget is not static. It must shrink (or shift) when reality breaks the
 4. **Correlation regime shift**. If 1-month average pairwise correlation in the long book or the short book exceeds 0.7, treat the book as a single concentrated position and cut sleeve sizes accordingly.
 5. **Liquidity shock**. If bid-ask spreads on key positions widen >2x normal, exit-cost rises non-linearly. Cut size before [[liquidity-risk]] forces it.
 6. **Catalyst proximity**. As a position approaches its catalyst date (earnings, FDA, Fed), gamma and vega both grow toward expiration. Re-budget the position 5-7 days before the catalyst — either close, roll out, or hedge.
-7. **Macro regime change**. If the macro view that drove the directional sleeve flips (e.g. Fed pivots, growth data turns), the entire directional sleeve needs review — see [[itpm-trade-construction-playbook]] Stage 10.
+7. **Macro regime change**. If the macro view that drove the directional sleeve flips (e.g. Fed pivots, growth data turns), the entire directional sleeve needs review.
 
 ## Reporting
 
@@ -279,7 +279,6 @@ The deepest failure is the [[the-theta-trap|theta trap]]: a Greek budget that lo
 - [[value-at-risk]] — VaR methodology
 - [[expected-shortfall]] — tail-risk metric, complement to VaR
 - [[scenario-analysis]] — building the stress grid
-- [[itpm-trade-construction-playbook]] — discretionary workflow that this budget enforces discipline against
 - [[options-greeks]] — primer on the underlying risk measures
 - [[delta-neutral]] — delta-budget = 0 special case
 - [[gamma-pnl]] — the gamma component of P&L attribution
@@ -293,6 +292,5 @@ The deepest failure is the [[the-theta-trap|theta trap]]: a Greek budget that lo
 
 ## Sources
 
-- [[itpm-trade-construction-playbook]] — companion workflow for trade construction
 - [[book-option-volatility-and-pricing]] — Natenberg on portfolio-level Greek management
 - [[book-dynamic-hedging]] — Taleb on non-linear risk and scenario thinking

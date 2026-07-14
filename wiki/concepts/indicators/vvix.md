@@ -76,9 +76,9 @@ The VVIX/VIX ratio is itself watched as a signal -- elevated ratios mark complac
 
 In each case, VVIX gave a sharper, earlier signal of regime change than VIX-level changes alone.
 
-## ITPM Use
+## Portfolio Use
 
-For an ITPM-style options portfolio, VVIX is used to:
+For a professionally managed options portfolio, VVIX is used to:
 
 - **Time VIX call ladders** -- buying VIX calls when VVIX is depressed makes the convexity premium cheaper
 - **Calibrate [[options-premium-selling|vol-selling programs]]** -- avoiding short-vol positions when VVIX is suppressed *and* VIX term structure is steep [[contango|contango]] (a known crowded-trade signature)

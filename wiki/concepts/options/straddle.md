@@ -76,7 +76,6 @@ Use a short straddle when:
 
 - IV rank is elevated (often post-event) and likely to revert toward realized vol
 - The underlying is range-bound with no expected catalyst
-- The book has a long-vol overlay elsewhere to absorb the tail risk (see [[itpm-options-portfolio-management]])
 - The trader has portfolio margin and the discipline to manage the unbounded risk
 
 Short straddles are the backbone of many systematic premium-selling programs but are catastrophically exposed to gap moves. They are typically run delta-hedged or as iron butterflies (see below) to bound the risk.
@@ -121,7 +120,6 @@ For most retail traders and risk-budgeted books, the iron butterfly is the pract
 - [[delta]], [[vega]], [[theta]] — the dominant Greeks for straddle structures
 - [[implied-volatility]] — what the straddle premium prices
 - [[volatility-risk-premium]] — why short straddles have a long-run edge in calm regimes
-- [[itpm-options-portfolio-management]] — book-level context for short straddle deployment
 
 ## Sources
 

@@ -99,9 +99,9 @@ For cash-settled options, there is no analog: the option settles to a calculated
 
 This is one of the strongest practical arguments for SPX over SPY for active expiration-week strategies.
 
-## ITPM Use (why we lean toward cash-settled for index hedges)
+## Portfolio Use (why we lean toward cash-settled for index hedges)
 
-ITPM-style portfolios prefer cash-settled options for portfolio-level work because the pros map directly onto portfolio-management requirements:
+Professionally run portfolios prefer cash-settled options for portfolio-level work because the pros map directly onto portfolio-management requirements:
 
 - **Macro hedges need to pay in cash, not shares.** A long-short portfolio buying OTM SPX puts as catastrophe insurance wants cash on a crash, not a delivered short position to manage.
 - **Premium-selling at scale must avoid assignment-driven margin shocks.** A short SPX strangle does not turn into a multi-million-dollar stock position overnight; a comparable SPY strangle could.

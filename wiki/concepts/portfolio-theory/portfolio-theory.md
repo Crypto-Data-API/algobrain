@@ -60,14 +60,13 @@ MPT's assumptions are routinely violated in practice:
 
 ## Trading and Portfolio Relevance
 
-Even discretionary traders who never run an optimizer benefit from MPT's core discipline: the goal is return *per unit of risk*, not raw return, and uncorrelated bets beat correlated ones. Five long positions in highly correlated names are effectively one large bet. Practitioners extend the framework beyond long-only optimization: long-short-equity strips out market beta to isolate stock-selection alpha, while [[risk-parity]] allocates by risk contribution rather than capital. (Source: [[itpm-education-methodology-overview]])
+Even discretionary traders who never run an optimizer benefit from MPT's core discipline: the goal is return *per unit of risk*, not raw return, and uncorrelated bets beat correlated ones. Five long positions in highly correlated names are effectively one large bet. Practitioners extend the framework beyond long-only optimization: long-short-equity strips out market beta to isolate stock-selection alpha, while [[risk-parity]] allocates by risk contribution rather than capital.
 
 ## Sources
 
 - Markowitz, H. (1952). "Portfolio Selection." *The Journal of Finance*, 7(1), 77–91.
 - Sharpe, W.F. (1964). "Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk." *The Journal of Finance*.
 - Bodie, Kane & Marcus, *Investments* — standard textbook treatment of mean-variance optimization and the efficient frontier.
-- [[itpm-education-methodology-overview]] — practitioner extensions (long/short, top-down allocation).
 
 ## Related
 

@@ -23,7 +23,7 @@ breakeven_cost_bps: 150
 related: ["[[vix-call-spreads]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[ratio-spread]]", "[[debit-spread]]", "[[put-spread]]", "[[skew]]", "[[implied-volatility]]", "[[universa-investments]]", "[[convexity]]", "[[gamma]]", "[[vega]]", "[[1x2-ratio-spread]]"]
 ---
 
-A **put tree** (or "Christmas tree put spread") is a defined-cost long-vol structure that stacks put exposure across three strikes: long one put at a higher strike, short one put at a middle strike, and long two puts at a lower strike — or variants of this 1×1×2 / 1×2×1 ratio. The structure is engineered to **maximize convex payoff in the 5-15% drawdown zone** while remaining funded (small debit) and capping the deepest-tail exposure. It is the structure of choice for traders who want long-vol overlay payoff but cannot stomach the bleed of a continuous OTM SPX put program — and is an explicit recommendation in the ITPM / [[options-concentration-risk]] long-vol overlay menu.
+A **put tree** (or "Christmas tree put spread") is a defined-cost long-vol structure that stacks put exposure across three strikes: long one put at a higher strike, short one put at a middle strike, and long two puts at a lower strike — or variants of this 1×1×2 / 1×2×1 ratio. The structure is engineered to **maximize convex payoff in the 5-15% drawdown zone** while remaining funded (small debit) and capping the deepest-tail exposure. It is the structure of choice for traders who want long-vol overlay payoff but cannot stomach the bleed of a continuous OTM SPX put program — and is an explicit recommendation in the [[options-concentration-risk]] long-vol overlay menu.
 
 ## Edge Source
 
@@ -260,7 +260,6 @@ For SPX-based put trees, capacity is essentially unlimited at retail and small-f
 - McMillan, Lawrence. *Options as a Strategic Investment* (5th ed., 2012) — covers ratio backspreads and put trees
 - Natenberg, Sheldon. *Option Volatility and Pricing* (2nd ed., 1994)
 - Bhansali, Vineer. *Tail Risk Hedging* (2014) — covers structured tail hedges including ratio variants
-- [[itpm-trade-construction-playbook]] — long-vol overlay menu
 - Cboe Global Markets, *SPX Skew Reports* — input data for construction
 
 ## Related

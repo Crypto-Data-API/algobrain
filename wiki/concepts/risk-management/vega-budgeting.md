@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, indicators, itpm, volatility]
+tags: [options, risk-management, indicators, volatility]
 aliases: ["Vega Limit", "Vega Cap", "Net Vega Budget"]
 related: ["[[options-risk-budgeting]]", "[[options-portfolio-construction]]", "[[portfolio-greeks-aggregation]]", "[[vega-hedging]]", "[[vega]]", "[[theta-targeting]]", "[[volatility-regime-classification]]", "[[variance-risk-premium]]", "[[vix-august-2024-spike]]", "[[options-stress-testing]]"]
 domain: [risk-management, volatility]
@@ -12,7 +12,7 @@ prerequisites: ["[[options-greeks]]", "[[vega]]"]
 difficulty: advanced
 ---
 
-**Vega budgeting** is the practice of setting a hard cap on net [[vega]] exposure across an entire options book and managing positions to stay within it. Where [[options-position-sizing]] looks at single trades and [[vega-hedging]] addresses tactical offsets, vega budgeting is the strategic, top-down constraint: it answers "how much volatility risk is the entire portfolio allowed to carry, in dollars per IV point, today?" Anyone running a net short-premium book — itpm-style traders, [[iron-condor]] sellers, [[short-strangle]] writers, [[credit-spread]] portfolios — needs an explicit vega budget, because volatility blowups are the dominant tail risk for these strategies and the path to ruin runs through net vega rather than net delta.
+**Vega budgeting** is the practice of setting a hard cap on net [[vega]] exposure across an entire options book and managing positions to stay within it. Where [[options-position-sizing]] looks at single trades and [[vega-hedging]] addresses tactical offsets, vega budgeting is the strategic, top-down constraint: it answers "how much volatility risk is the entire portfolio allowed to carry, in dollars per IV point, today?" Anyone running a net short-premium book — discretionary options traders, [[iron-condor]] sellers, [[short-strangle]] writers, [[credit-spread]] portfolios — needs an explicit vega budget, because volatility blowups are the dominant tail risk for these strategies and the path to ruin runs through net vega rather than net delta.
 
 ## Why Vega Is the Option Seller's Silent Killer
 
@@ -97,7 +97,7 @@ The DTE distribution of the vega budget matters as much as the total.
 
 A book that is "balanced" on total vega but loaded into 7-21 DTE will get hit harder on a vol shock than a book of equivalent total vega spread across 30-90 DTE, because the front-month IV moves more than the back-month IV in a shock — front-month [[volga]] (vega of vega) is higher.
 
-A practical balance rule used by some itpm-aligned discretionary traders:
+A practical balance rule used by some discretionary traders:
 
 - No more than 50% of net negative vega in 0-30 DTE
 - At least 25% of net negative vega in 45+ DTE (the "anchor" positions)
@@ -148,7 +148,7 @@ Selling the front-month and buying the back-month at the same strike. Front-mont
 
 ### Diagonal Spreads
 
-Same idea as a calendar but with different strikes — short the front at one strike, long the back at another. Allows tuning of net delta and net vega independently. Common in itpm portfolios for adding directional bias without consuming vega budget.
+Same idea as a calendar but with different strikes — short the front at one strike, long the back at another. Allows tuning of net delta and net vega independently. Common in discretionary options portfolios for adding directional bias without consuming vega budget.
 
 ### Ratio Spreads
 
@@ -170,7 +170,7 @@ Standard iron condors have nearly the same vega as short strangles. Buying the l
 
 ## Worked Example
 
-A trader running an itpm-style discretionary book has the following state on a Monday morning:
+A trader running a discretionary options book has the following state on a Monday morning:
 
 - Account NLV: $250,000
 - Vega budget: -$1,250 (i.e., -$500 per $100K NLV, conservative)

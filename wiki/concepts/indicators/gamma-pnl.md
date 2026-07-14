@@ -237,4 +237,3 @@ Realized vol of 1%/day ≈ 16% annualized. If the iron condor was sold at IV = 1
 - [[book-options-futures-other-derivatives]] — Hull's derivation of the gamma-theta identity in Black-Scholes
 - [[book-option-volatility-and-pricing]] — Natenberg on dollar gamma and the practical mechanics of gamma P&L attribution
 - [[book-dynamic-hedging]] — Taleb on path-dependence and the gap between continuous-time gamma P&L and discrete hedging realities
-- [[itpm-trade-construction-playbook]] — ITPM treatment of gamma P&L as the dominant risk line for short-premium books

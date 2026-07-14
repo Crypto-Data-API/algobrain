@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-20
 status: excellent
-tags: [risk-management, options, trade-management, itpm, portfolio-management]
+tags: [risk-management, options, trade-management, portfolio-management]
 aliases: ["Rolling Trades", "Trade Repair", "Position Repair", "Rolling Options", "Options Adjustment"]
 domain: [risk-management]
 prerequisites: ["[[options]]", "[[call-options]]", "[[put-options]]", "[[options-greeks]]"]
@@ -26,7 +26,7 @@ Before any adjustment, disciplined traders do a post-mortem: why did the trade f
 
 In a long-short-equity portfolio using options, not every trade will work. Even with strong fundamental analysis, timing may be off, catalysts may be delayed, or the market may move against the thesis temporarily. Rather than viewing a losing position as binary (hold or cut), professional traders employ repair and rolling strategies to actively manage the position.
 
-[[anton-kreil]] and the itpm methodology emphasize that trade management is where professionals differentiate themselves from retail traders. The goal is not to avoid losing trades but to minimize losses on losers while maximizing gains on winners. (Source: [[itpm-god-like-trader-status]])
+Trade management is where professionals differentiate themselves from retail traders. The goal is not to avoid losing trades but to minimize losses on losers while maximizing gains on winners.
 
 ## Rolling Trades
 
@@ -68,9 +68,9 @@ The prose throughout this page reduces to a single triage decision: for any posi
 | Portfolio bleeding, individual theses still valid | Intact | **Hedge** (index/correlated overlay) | Reduce net exposure, stay functional, preserve the cores (Cathey rule) |
 | Roll requires net debit / uncapped risk | Any | **Do not roll** — cut or hedge instead | The cardinal rule: never add net debit or uncapped risk to a loser |
 | Single-name / sector exposure already at limit | Any | **Cut or hedge, never roll bigger** | Rolling that compounds [[options-concentration-risk|concentration]] is a sizing failure, not a repair |
-| Winner near expiry, more upside likely | Intact | **Book + roll out 3 months** | Lock the equity-curve node, keep exposure (ITPM monthly discipline) |
+| Winner near expiry, more upside likely | Intact | **Book + roll out 3 months** | Lock the equity-curve node, keep exposure (monthly expiry discipline) |
 
-(Source: [[recovering-losing-options-positions]]; ITPM monthly expiry discipline, Source: [[itpm-god-like-trader-status]])
+(Source: [[recovering-losing-options-positions]])
 
 ### Rolling a Losing Short Put — Worked Example
 
@@ -144,7 +144,7 @@ Instead of repairing the individual trade, adding a portfolio-level hedge can pr
 
 - If your put options are losing because the market is rallying, add a hedge (e.g., TLT calls, SPY calls) that profits from the rally
 - The hedge doesn't fix the individual trade but protects the portfolio P&L
-- Example: [[anton-kreil]]'s TLT hedge competition where a $882 spend could produce $31,500–$57,000 if the market rallied against a bearish portfolio (Source: [[itpm-god-like-trader-status]])
+- A small, well-chosen convex hedge can pay off at a large multiple of its cost if the market moves hard against the book's net direction
 
 ## The Professional Playbook
 
@@ -158,55 +158,28 @@ Instead of repairing the individual trade, adding a portfolio-level hedge can pr
 
 (Source: [[recovering-losing-options-positions]])
 
-## ITPM Monthly Expiry Discipline
+## Monthly Expiry Discipline
 
-The itpm methodology has specific rules for managing positions at monthly options expiry (third Friday of each month). [[anton-kreil]]'s directive: **"You are not allowed to bank a loss at monthly expiry."** The decision framework:
+Many professional books apply specific rules for managing positions at monthly options expiry (third Friday of each month). The governing rule: **do not bank a loss at monthly expiry while the thesis is intact.** The decision framework:
 
 1. **Position is winning** → Bank the profit. Book it to your [[equity-curve]].
 2. **Position could go further** → Book the profit now and roll the trade out 3 months to re-enter the thesis with fresh time. This locks in a winning node on the equity curve while keeping exposure.
 3. **Position is losing but thesis is intact** → Roll out 3 months. Do not book the loss. The 3-month roll buys time for the thesis to play out while maintaining the position.
 4. **Thesis is broken** → Close the trade and accept the loss. Do not roll a dead thesis.
 
-Plan expiry management **weeks in advance**, not on expiry day. The goal is to make the [[equity-curve]] go up at every monthly node — banking more winners than losers creates the compounding engine. (Source: [[itpm-god-like-trader-status]])
+Plan expiry management **weeks in advance**, not on expiry day. The goal is to make the [[equity-curve]] go up at every monthly node — banking more winners than losers creates the compounding engine.
 
-Kreil notes that reactive risk management — how to handle positions that move against you or in your favor — "can only be taught via mentoring, not video series." The framework above captures the rules, but the judgment of when a thesis is "intact" versus "broken" requires experience and mentorship. (Source: [[itpm-god-like-trader-status]])
+The framework above captures the rules, but the judgment of when a thesis is "intact" versus "broken" requires experience and mentorship.
 
 ## How Ratio Structures Mechanically Cap Losses
 
-One of the most powerful loss-mitigation mechanisms in the ITPM methodology is not a repair *decision* but a structural feature built into the trade at entry. When using [[calendar-spread|calendar spreads]] or [[vertical-spread|vertical spreads]] with a short leg, the credit collected from the short leg automatically reduces the maximum loss if the trade fails.
+One of the most powerful loss-mitigation mechanisms is not a repair *decision* but a structural feature built into the trade at entry. When using [[calendar-spread|calendar spreads]] or [[vertical-spread|vertical spreads]] with a short leg, the credit collected from the short leg automatically reduces the maximum loss if the trade fails.
 
-### Real Examples from Philip Klein's Portfolio
-
-Philip Klein (ITPM junior trading mentor) demonstrated this with actual TradeStation broker data over 32 months:
-
-**Snowflake put calendar spread** (trade went against him):
-- Long October $110 puts (30 contracts at $6.22)
-- Short September $108 puts (15 contracts at $2.55 — 2:1 ratio)
-- Collected $2,900 credit (75% of max) after 6 days
-- Trade went against him — long leg wrote off at **-$18,669**
-- But the short leg credit reduced total loss to **-$15,770**
-- The structure saved $2,900 automatically — no decision required
-
-**Boeing vertical spread** (trade went against him):
-- Long/short put vertical (1:1, 39 contracts)
-- Nearly full loss on the long leg
-- But the short leg reduced loss from **-$18,000 to -$12,380**
-- Structure saved ~$5,600 mechanically
-
-**ON Holdings calendar spread** (trade worked):
-- Long October $42.50 calls (64 contracts at $2.97)
-- Short August $43 calls (32 contracts at $1.39 — 2:1 ratio)
-- Collected $3,800 credit (85% of max) in 18 trading days
-- Then stock moved in his favor — booked **$30,000** on the long leg
-- Total profit: ~$33,800 — the credit was "free" income on top of the directional payoff
-
-The key insight: **credits are asymmetric**. During winning periods, credits add on top of trading profits. During losing periods, credits save you from the full loss. The structure provides automatic loss mitigation regardless of the trader's emotional state. (Source: [[itpm-master-compounding]])
+The key insight: **credits are asymmetric**. During winning periods, credits add on top of trading profits. During losing periods, credits save you from the full loss. The structure provides automatic loss mitigation regardless of the trader's emotional state.
 
 ### Credits as Portfolio-Level Loss Armor
 
-Over 32 months and ~102 credit-collecting trades, Klein accumulated **$254,000 in total credits** — approximately $8,000 per month, averaging ~$2,500 per individual credit. The credit equity curve (short legs only) formed a "nearly perfect 45-degree line" — stable monthly additions with minimal variation. This anchored the total equity curve even during flat or difficult trading periods. (Source: [[itpm-master-compounding]])
-
-This is the portfolio-level answer to "how do professionals survive losing streaks?" Not through individual trade recovery, but through systematic credit collection that compounds over time. Even with a 52.5% win rate and a below-target 1.28 R-core, Klein achieved ~100% annual returns because the credit engine kept the equity curve moving upward. (Source: [[itpm-master-compounding]])
+At the book level, systematic credit collection across many trades compounds into a steady income stream that anchors the equity curve during flat or difficult trading periods. This is the portfolio-level answer to "how do professionals survive losing streaks?" Not through individual trade recovery, but through structural credit collection that compounds over time — even a book with a modest win rate can keep its equity curve moving upward if the credit engine is consistent.
 
 ## Thesis-Preservation Hedging vs. Panic Covering
 
@@ -214,7 +187,7 @@ A critical distinction that separates professional from retail recovery: **hedgi
 
 ### The Goldman Sachs Crisis Example
 
-[[chris-cathey]] described a day at goldman-sachs around 2001 during the NASDAQ bear market. The desk was very short — approximately $500 million — in telecoms and technology stocks. A vicious bear market rally squeezed their positions; by lunchtime they were down significantly.
+chris-cathey described a day at goldman-sachs around 2001 during the NASDAQ bear market. The desk was very short — approximately $500 million — in telecoms and technology stocks. A vicious bear market rally squeezed their positions; by lunchtime they were down significantly.
 
 Three possible responses:
 1. **Panic and cover everything** — locks in the full loss, abandons the thesis
@@ -226,11 +199,11 @@ They chose option 3: bought Euro Stoxx futures to reduce their net short exposur
 - Allowed them to remain functional as market makers
 - Preserved their core short thesis for when the rally exhausted itself
 
-They literally printed the high tick of the day on the Euro Stoxx purchase. When the market turned in the afternoon, they increased short positions again. **Ended the day slightly positive**, and over the next two days made a "very big amount of money." (Source: [[itpm-trading-legends-chris-cathey]])
+They literally printed the high tick of the day on the Euro Stoxx purchase. When the market turned in the afternoon, they increased short positions again. **Ended the day slightly positive**, and over the next two days made a "very big amount of money."
 
 ### The Cathey Rule
 
-> "Do not increase losing positions. Only add to positions when they are working. When a position moves against you and triggers your stop loss, exit. Then, when you get confirmation the trade is working again, increase. Adding to winners and cutting losers is exactly the same process — all you're doing is risk managing and putting the risk-reward in your favor." — [[chris-cathey]] (Source: [[itpm-trading-legends-chris-cathey]])
+> "Do not increase losing positions. Only add to positions when they are working. When a position moves against you and triggers your stop loss, exit. Then, when you get confirmation the trade is working again, increase. Adding to winners and cutting losers is exactly the same process — all you're doing is risk managing and putting the risk-reward in your favor." — chris-cathey
 
 This creates a clear framework:
 - **Thesis intact, position losing** → Hedge (add a correlated offsetting position), don't increase the losing side
@@ -239,28 +212,28 @@ This creates a clear framework:
 
 ## The Psychology of Executing Repairs
 
-The emotional challenge of trade repair is as important as the mechanical technique. The itpm methodology treats emotional detachment as a trainable skill, not an innate trait.
+The emotional challenge of trade repair is as important as the mechanical technique. Professional training treats emotional detachment as a trainable skill, not an innate trait.
 
 ### Why Repairs Fail Psychologically
 
-[[chris-cathey]] identifies the core problem: **"The natural human nature is to take profits too quickly and to cut losers too late. We teach the reverse — cut losers quickly and let profits run — which is counterintuitive to human nature."** (Source: [[itpm-professional-traders-amazing-advice]])
+chris-cathey identifies the core problem: **"The natural human nature is to take profits too quickly and to cut losers too late. We teach the reverse — cut losers quickly and let profits run — which is counterintuitive to human nature."**
 
 This directly undermines repair decisions:
 - Traders hold losing positions too long hoping for recovery, reducing the available repair options (time decay erodes alternatives)
 - When they finally act, they over-repair — adding too much risk to "make back" what was lost
 - After booking a loss, they revenge-trade into the next position with inflated size
 
-### The ITPM Emotional Framework
+### The Emotional Framework
 
-1. **"Money is unemotional; you must be unemotional about your trading decisions and your P&L."** Losses are a cost of doing business, not a personal failure. (Source: [[itpm-professional-traders-amazing-advice]])
+1. **"Money is unemotional; you must be unemotional about your trading decisions and your P&L."** Losses are a cost of doing business, not a personal failure.
 
-2. **"The moment you press the button, you are losing"** — because you buy at the offer and are marked on the bid. Every trade starts in the red. Accepting this eliminates the shock of seeing red P&L. (Source: [[itpm-professional-traders-amazing-advice]])
+2. **"The moment you press the button, you are losing"** — because you buy at the offer and are marked on the bid. Every trade starts in the red. Accepting this eliminates the shock of seeing red P&L.
 
-3. **"When stopped out, you are admitting to yourself that you are wrong... that is very very difficult to learn how to do."** Once mastered, emotion leaves trading. (Source: [[itpm-professional-traders-amazing-advice]])
+3. **"When stopped out, you are admitting to yourself that you are wrong... that is very very difficult to learn how to do."** Once mastered, emotion leaves trading.
 
-4. **Trading is 50% idea generation, 50% risk management.** The repair decision is the risk management half — treat it with the same rigor as the original thesis. (Source: [[itpm-professional-traders-amazing-advice]])
+4. **Trading is 50% idea generation, 50% risk management.** The repair decision is the risk management half — treat it with the same rigor as the original thesis.
 
-5. **Paper trading cannot teach this.** Emotional detachment from P&L can only be learned with real money at stake. "You need to have skin in the game." (Source: [[itpm-professional-traders-amazing-advice]])
+5. **Paper trading cannot teach this.** Emotional detachment from P&L can only be learned with real money at stake. "You need to have skin in the game."
 
 Record every repair decision in your [[trading-journal]] — diagnosis, action taken, and outcome. Over time, this builds the data-driven confidence needed to execute repairs without emotional interference.
 
@@ -276,22 +249,22 @@ No. This is the question retail traders most want answered, and the honest profe
 
 What experts *do* accomplish consistently is (a) keeping individual losses small enough that a single bad trade cannot end a career, (b) using rolls and spreads to convert many would-be full losses into partial losses or scratches, and (c) relying on a positive expectancy process so that winners fund losers across many months. (Source: [[recovering-losing-options-positions]])
 
-## The [[edward-shek|Shek]] Approach
+## The Shek Approach
 
-[[edward-shek]]'s approach to trade management includes:
+edward-shek's approach to trade management includes:
 
 1. **Start with half positions** when market conditions are unclear
 2. **Scale up** once you receive confirmation (news, earnings, price action)
 3. **Cut losing trades early** at around 50% loss on the option premium
 4. **Repair positions later** — re-enter at better prices with fresh thesis confirmation rather than holding a deteriorating position
 
-This contrasts with the common retail approach of "holding and hoping." (Source: [[itpm-education-methodology-overview]])
+This contrasts with the common retail approach of "holding and hoping."
 
 ## Connection to Position Sizing and Greeks Aggregation
 
 Trade repair does not happen in a vacuum — every roll, spread conversion, or hedge changes the book's aggregate risk, so the repair decision must be made against the *portfolio* picture, not the single line item. This is where rolling connects to the broader risk framework:
 
-- **Sizing governs whether repair is even an option.** The reason ITPM and CBOE insist on ≤1–2% [[position-sizing|position sizing]] is that a correctly sized loser can always be rolled or cut without threatening the account. An oversized position removes the option to be patient — you are forced to act at the worst moment. Repair technique is downstream of disciplined sizing; it cannot rescue a position that was too big at entry. (Source: [[recovering-losing-options-positions]])
+- **Sizing governs whether repair is even an option.** The reason CBOE and professional risk frameworks insist on ≤1–2% [[position-sizing|position sizing]] is that a correctly sized loser can always be rolled or cut without threatening the account. An oversized position removes the option to be patient — you are forced to act at the worst moment. Repair technique is downstream of disciplined sizing; it cannot rescue a position that was too big at entry. (Source: [[recovering-losing-options-positions]])
 
 - **A roll changes the aggregate Greeks.** Rolling out adds [[vega]] and resets [[theta]]; rolling the untested side of an iron condor adds [[delta]] and [[theta]] while raising tail risk. Before executing, re-check the book-level numbers via [[portfolio-greeks-aggregation|Greeks aggregation]] — a roll that "fixes" one position can push net [[vega]] or beta-weighted [[delta]] outside the [[options-risk-budgeting|risk budget]]. The repair is only valid if the *post-roll book* is within limits.
 
@@ -303,7 +276,7 @@ Trade repair does not happen in a vacuum — every roll, spread conversion, or h
 
 - **VaR and tail metrics frame "how bad can the roll go."** A roll that buys time also extends the window over which a tail event can hit the position. Re-running [[value-at-risk|VaR]] / [[expected-shortfall]] on the rolled book keeps the decision honest about what was actually accomplished — risk was *moved in time*, not eliminated.
 
-The throughline: repair is the risk-management half of trading (Cathey's "50% idea generation, 50% risk management"), and risk management is always portfolio-level. Evaluate every adjustment as a fresh trade *and* as a change to the aggregate book. (Source: [[itpm-professional-traders-amazing-advice]])
+The throughline: repair is the risk-management half of trading (Cathey's "50% idea generation, 50% risk management"), and risk management is always portfolio-level. Evaluate every adjustment as a fresh trade *and* as a change to the aggregate book.
 
 ## Key Principles
 
@@ -330,7 +303,7 @@ The throughline: repair is the risk-management half of trading (Cathey's "50% id
 - [[gamma]] — The risk that spikes near expiration (gamma trap)
 - [[gamma-risk]] — The gamma trap and 21-DTE rule explained
 - [[theta]] — Time decay driving the 21-DTE roll threshold
-- [[calendar-spread]] — The ITPM ratio structure that mechanically caps losses
+- [[calendar-spread]] — The ratio structure that mechanically caps losses
 - [[compounding]] — Credits as portfolio-level loss armor
 - [[trading-journal]] — Post-mortem framework for diagnosing and recording repair decisions
 - [[options]] — Underlying instruments for these techniques
@@ -348,8 +321,5 @@ The throughline: repair is the risk-management half of trading (Cathey's "50% id
 ## Sources
 
 - (Source: [[recovering-losing-options-positions]])
-- (Source: [[itpm-god-like-trader-status]]) — Monthly expiry discipline, reactive risk management
-- (Source: [[itpm-master-compounding]]) — Phil Klein's real trade examples, credit compounding as loss armor
-- (Source: [[itpm-trading-legends-chris-cathey]]) — Goldman crisis example, thesis-preservation hedging, the Cathey rule
-- (Source: [[itpm-professional-traders-amazing-advice]]) — Emotional framework for executing repairs
-- (Source: [[itpm-education-methodology-overview]]) — The Shek approach to trade management
+- — Goldman crisis example, thesis-preservation hedging, the Cathey rule
+- — The Shek approach to trade management

@@ -20,7 +20,7 @@ crowding_risk: medium
 expected_sharpe: 0.7
 expected_max_drawdown: 0.35
 breakeven_cost_bps: 20
-related: ["[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[premium-selling-systematic]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[volatility-regime-classification]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[tom-sosnoff]]", "[[itpm-framework]]", "[[ergodicity]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[premium-selling-systematic]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[volatility-regime-classification]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[tom-sosnoff]]", "[[ergodicity]]"]
 ---
 
 Options premium selling is the **canonical short-vol strategy**: the trader systematically sells out-of-the-money puts, calls, strangles, or [[iron-condor|condors]] on liquid underlyings -- typically SPX, SPY, QQQ, and large single names -- and harvests the [[variance-risk-premium]] (VRP), the persistent gap between [[implied-volatility]] and subsequently realized volatility. It is the **short-vol core** referenced throughout [[long-vol-vs-short-vol]]: the income engine that, paired with a [[long-vol-overlay]], forms the institutional [[options-portfolio-construction|portfolio construction]] template.
@@ -277,5 +277,4 @@ Mechanical retirement triggers (also see [[when-to-retire-a-strategy]]):
 - [[iv-crush]] -- the favourable post-event vega move premium sellers harvest.
 - [[iron-fly]] -- the high-theta, high-gamma defined-risk member of the family.
 - [[calendar-spread]] -- the long-vega complement when IV is too low to sell.
-- [[itpm-framework]] -- the institutional discipline overlay.
 - [[ergodicity]] -- why time-average matters more than expected return for this profile.

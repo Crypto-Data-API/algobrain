@@ -4,23 +4,23 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-11
 status: good
-tags: [portfolio-theory, fundamental-analysis, technical-analysis, itpm, trading-methodology]
+tags: [portfolio-theory, fundamental-analysis, technical-analysis, trading-methodology]
 aliases: ["80/20 Framework", "80/20 Rule (Trading)", "Fundamental-Technical Split"]
 domain: [portfolio-theory]
 prerequisites: ["[[technical-analysis]]"]
 difficulty: intermediate
-related: ["[[anton-kreil]]", "[[top-down-macro-analysis]]", "[[portfolio-theory]]"]
+related: ["[[top-down-macro-analysis]]", "[[portfolio-theory]]"]
 ---
 
 # 80/20 Analysis Framework
 
-The 80/20 analysis framework is a trading methodology taught by [[anton-kreil]] and the Institute of Trading and Portfolio Management that allocates 80% of analytical effort to fundamental-analysis and 20% to [[technical-analysis]]. The key insight is that technical analysis should be used only for timing entries and exits — never for generating trade ideas.
+The 80/20 analysis framework is a trading methodology, common on professional trading desks, that allocates 80% of analytical effort to fundamental-analysis and 20% to [[technical-analysis]]. The key insight is that technical analysis should be used only for timing entries and exits — never for generating trade ideas.
 
 ## Overview
 
 Most retail traders invert this ratio, spending 80%+ of their time on charts and indicators. Professional traders at investment banks and hedge funds do the opposite: they develop trade ideas through fundamental research (macroeconomic analysis, earnings, industry dynamics) and use technical analysis as a secondary filter to time the execution.
 
-This framework underpins the long-short-equity portfolio management methodology. (Source: [[itpm-education-methodology-overview]])
+This framework underpins the long-short-equity portfolio management methodology.
 
 ## The 80% — Fundamental Analysis
 
@@ -49,7 +49,7 @@ The fundamental thesis determines:
 - The expected magnitude of the move
 - The catalyst and timeline
 
-(Source: [[itpm-god-like-trader-status]])
+
 
 ## The 20% — Technical Analysis
 
@@ -72,11 +72,11 @@ Technical analysis provides the "when" of a trade:
 - Does not override a fundamental thesis
 - Is not used in isolation
 
-(Source: [[itpm-education-methodology-overview]])
+
 
 ## The Professional vs Retail Inversion
 
-| Aspect | Professional (ITPM) | Typical Retail |
+| Aspect | Professional | Typical Retail |
 |--------|--------------------|----|
 | Idea generation | Fundamental research | Chart patterns |
 | Analysis split | 80% fundamental / 20% technical | 80% technical / 20% fundamental |
@@ -84,7 +84,7 @@ Technical analysis provides the "when" of a trade:
 | Macro awareness | Core requirement | Often ignored |
 | Fundamental data | Interpreted through professional lens | Taken at face value |
 
-A critical insight from ITPM: professionals interpret the same fundamental data differently from retail traders. The data itself is freely available, but the analytical framework for interpreting it produces different (often opposite) conclusions. (Source: [[itpm-education-methodology-overview]])
+A critical insight: professionals interpret the same fundamental data differently from retail traders. The data itself is freely available, but the analytical framework for interpreting it produces different (often opposite) conclusions.
 
 ## The 80/20 Volatility Rule
 
@@ -94,7 +94,7 @@ A related concept: only about 20% of the time do markets exhibit enough [[volati
 - Active trading should be concentrated in periods of elevated volatility
 - Boredom and patience are professional trading skills, not weaknesses
 
-(Source: [[itpm-god-like-trader-status]])
+
 
 ## Related Concepts
 
@@ -104,6 +104,6 @@ A related concept: only about 20% of the time do markets exhibit enough [[volati
 
 ## Sources
 
-- (Source: [[itpm-education-methodology-overview]])
-- (Source: [[itpm-god-like-trader-status]])
-- (Source: [[itpm-five-principles]])
+-
+-
+-

@@ -92,4 +92,3 @@ Fred views recessions as buying opportunities — his principle of keeping [[cas
 
 ## Sources
 
-- [[itpm-woym-ep27-recession-narrative]] — ITPM analysis of recession narratives

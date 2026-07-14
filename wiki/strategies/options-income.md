@@ -6,7 +6,7 @@ updated: 2026-06-20
 status: excellent
 tags: [options, derivatives, mean-reversion, risk-management, volatility]
 aliases: ["Options Income", "Income from Options", "Premium Income", "Options Income Overlay", "Yield Enhancement", "Premium Selling Overlay"]
-related: ["[[options-premium-selling]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[short-strangle]]", "[[iron-condor]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[wheel-strategy]]", "[[short-put]]", "[[short-call]]", "[[variance-risk-premium]]", "[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[expected-shortfall]]", "[[pin-risk]]", "[[gamma-explosion]]", "[[managing-winners]]", "[[expiration-laddering]]", "[[volatility-regime-classification]]", "[[zero-dte-options]]", "[[skew]]", "[[itpm-trading-philosophy]]"]
+related: ["[[options-premium-selling]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[short-strangle]]", "[[iron-condor]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[wheel-strategy]]", "[[short-put]]", "[[short-call]]", "[[variance-risk-premium]]", "[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[expected-shortfall]]", "[[pin-risk]]", "[[gamma-explosion]]", "[[managing-winners]]", "[[expiration-laddering]]", "[[volatility-regime-classification]]", "[[zero-dte-options]]", "[[skew]]"]
 strategy_type: hybrid
 timeframe: swing
 markets: [options, stocks, etf, crypto]
@@ -68,7 +68,7 @@ A book whose realised performance is materially worse than the null suggests one
 
 ## Rules
 
-A canonical, **conservative** options-income overlay (representative of tastytrade, [[itpm-trading-philosophy|ITPM]]-aligned, and similar disciplined approaches):
+A canonical, **conservative** options-income overlay (representative of tastytrade and similar disciplined approaches):
 
 ### Universe and structure selection
 
@@ -330,7 +330,6 @@ The honest framing: **options income is selling tail-risk insurance**. It is pro
 - [[bondarenko-2003]] — Bondarenko (2003), *Why Are Put Options So Expensive?*. Foundational paper documenting the variance-risk-premium and its persistence.
 - [[carr-wu-2009]] — Carr and Wu (2009), *Variance Risk Premiums*. *Review of Financial Studies*, 22(3): 1311-1341. The standard reference for the structural VRP.
 - [[tastytrade-research]] — extensive published research on 45 DTE / 21 DTE / 50% profit-take cadence and historical performance of systematic short-premium strategies.
-- [[itpm-trading-philosophy]] — institutional-style options-income overlay framework with explicit Greek budgeting.
 - [[cboe-put-index]] / [[cboe-bxm-index]] — public benchmark indices for systematic put-write and buy-write strategies.
 - [[spitznagel-safe-haven]] — Mark Spitznagel, *Safe Haven: Investing for Financial Storms*. The long-vol critique of short-vol "income."
 - [[universa-research]] — Universa Investments / Spitznagel published commentary on the cycle-CAGR mismatch in short-vol strategies.
@@ -357,4 +356,3 @@ The honest framing: **options income is selling tail-risk insurance**. It is pro
 - [[volatility-regime-classification]] — when to be larger, smaller, or absent.
 - [[zero-dte-options]] — a sub-category of income trading with distinct (worse) risk profile.
 - [[skew]] — the surface feature that drives the relative pricing of income structures.
-- [[itpm-trading-philosophy]] — the disciplined-discretionary methodological tradition.

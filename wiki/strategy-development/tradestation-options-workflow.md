@@ -17,7 +17,6 @@ related:
   - "[[traderspost]]"
   - "[[wheel-strategy]]"
   - "[[options-premium-selling]]"
-  - "[[itpm-options-portfolio-management]]"
   - "[[options-selection-framework]]"
   - "[[delta]]"
   - "[[theta]]"
@@ -252,7 +251,7 @@ This gives you the EasyLanguage development environment plus cloud reliability, 
 
 ## Greeks-based position sizing rules
 
-Per the [[itpm-options-portfolio-management|ITPM overlay framework]] and standard premium-selling discipline, size by Greeks rather than by contract count or dollar notional:
+Per standard premium-selling discipline, size by Greeks rather than by contract count or dollar notional:
 
 - **Delta budget**: cap |portfolio delta| at, e.g., 0.30 × account equity / SPX spot. For a $100K account at SPX 5000, that's a delta budget of 6 SPX-equivalents.
 - **Vega budget**: cap |portfolio vega| at 0.5%-1% of account equity per 1-vol point. For $100K, that's $500-$1,000 per vol point — i.e. a 10-vol IV jump moves the book ±$5-10K.
@@ -308,7 +307,6 @@ The full sequence is rare in practice — most retail traders skip steps 4-6 and
 - [[vertical-spread]] — the debit counterpart for low-IV directional views
 - [[covered-calls]] — the stock-plus-call leg of the wheel
 - [[options-premium-selling]] — the broader strategy family
-- [[itpm-options-portfolio-management]] — sizing/risk framework that overlays this workflow
 - [[options-selection-framework]] — how to pick which contracts to trade
 - [[delta]], [[theta]], [[vega]], [[gamma]] — the budget dimensions the workflow enforces
 - [[gamma-risk]] — the risk behind the 21-DTE close/roll discipline
@@ -319,4 +317,4 @@ The full sequence is rare in practice — most retail traders skip steps 4-6 and
 
 (Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls,-tradesta]]) — gap-analysis report identifying TradeStation tips/tricks and Greeks-based sizing as documentation gaps.
 
-Primary references: TradeStation Help → EasyLanguage Essentials, TradeStation OptionStation Pro user guide, Portfolio Maestro documentation, [[traderspost]] integration documentation, public premium-selling literature (tastytrade research notes, [[itpm-options-portfolio-management]]).
+Primary references: TradeStation Help → EasyLanguage Essentials, TradeStation OptionStation Pro user guide, Portfolio Maestro documentation, [[traderspost]] integration documentation, public premium-selling literature (tastytrade research notes).

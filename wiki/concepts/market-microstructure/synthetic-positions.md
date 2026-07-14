@@ -77,7 +77,7 @@ The implied interest rate from a conversion/reversal often differs from the risk
 
 ### 1. Capital Efficiency
 
-A synthetic long stock using ATM options on a $200 stock might cost $5 net (call premium minus put premium received), controlling $20,000 of notional exposure. This is dramatically more capital-efficient than buying 100 shares, which is why the itpm methodology uses options as stock replacements.
+A synthetic long stock using ATM options on a $200 stock might cost $5 net (call premium minus put premium received), controlling $20,000 of notional exposure. This is dramatically more capital-efficient than buying 100 shares, which is why many professional methodologies use options as stock replacements.
 
 ### 2. Recognizing Equivalent Positions
 

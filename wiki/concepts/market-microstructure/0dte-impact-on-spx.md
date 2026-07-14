@@ -131,7 +131,6 @@ Active areas of regulatory and exchange concern:
 - [[volatility-risk-premium]] — the structural quantity 0DTE compresses
 - [[volmageddon]] — the canonical vol-product cascade event
 - [[high-frequency-trading]], [[market-makers]] — the participants on the other side of 0DTE flow
-- [[itpm-trade-construction-playbook]] — institutional treatment of 0DTE within a portfolio framework
 
 ## Sources
 
@@ -142,4 +141,3 @@ Active areas of regulatory and exchange concern:
 - Bloomberg, *0DTE Options: A Year After CBOE's Daily Expirations*, May 2023.
 - Working paper: Beckmeyer, Branger, Hommel, *Same-Day Settled Options and the Intraday Volatility Surface*, 2023.
 - Cboe and OCC joint white paper on 0DTE clearing and risk management, 2024.
-- [[itpm-options-portfolio-management]] — institutional-grade portfolio treatment of 0DTE within a hedged book.

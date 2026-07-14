@@ -151,4 +151,3 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - Lucca, D. O., & Moench, E. (2015). *"The Pre-FOMC Announcement Drift."* *Journal of Finance*, 70(1), 329–371.
 - Federal Reserve Board — *FOMC Calendars and Statements*. https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 - CME Group — *FedWatch Tool* and the [[fed-funds-futures|fed funds futures]] complex.
-- [[itpm-trading-philosophy]] — practitioner framework for laddering DTE around macro events.

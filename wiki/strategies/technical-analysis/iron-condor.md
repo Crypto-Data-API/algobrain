@@ -80,7 +80,7 @@ Risk no more than 2-5% of the account per condor. The max loss per condor is (sp
 
 ## Iron Condors in Long/Short Portfolios
 
-The itpm methodology generally favors directional options strategies (long calls/puts) over premium-selling strategies like iron condors. However, iron condors may be used within a long-short-equity portfolio when:
+Some discretionary long-short methodologies favor directional options strategies (long calls/puts) over premium-selling strategies like iron condors. However, iron condors may be used within a long-short-equity portfolio when:
 
 - Markets are range-bound and the [[eighty-twenty-analysis|80/20 framework]] identifies low volatility conditions
 - As a complement to directional positions to generate income during the 80% of time when markets lack sufficient volatility for directional trading

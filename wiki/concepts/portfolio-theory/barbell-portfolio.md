@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [portfolio-theory, risk-management, convexity, tail-risk, antifragile, options]
 aliases: ["Barbell Strategy", "Barbell Allocation", "Taleb Barbell"]
-related: ["[[nassim-taleb]]", "[[mark-spitznagel]]", "[[universa-investments]]", "[[safe-haven-spitznagel]]", "[[asymmetric-barbell]]", "[[barbell-strategy]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[crisis-alpha]]", "[[ergodicity]]", "[[geometric-mean]]", "[[convexity]]", "[[antifragile]]", "[[itpm-framework]]"]
+related: ["[[nassim-taleb]]", "[[mark-spitznagel]]", "[[universa-investments]]", "[[safe-haven-spitznagel]]", "[[asymmetric-barbell]]", "[[barbell-strategy]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[crisis-alpha]]", "[[ergodicity]]", "[[geometric-mean]]", "[[convexity]]", "[[antifragile]]"]
 domain: [portfolio-theory, risk-management]
 prerequisites: ["[[convexity]]", "[[geometric-mean]]"]
 difficulty: intermediate
@@ -186,7 +186,7 @@ The barbell's edge appears not in the calm years (where 60/40 outperforms) but i
 
 ## Connection to Options Books
 
-Inside an options-trading book, the barbell logic reappears at smaller scale: the [[long-vol-vs-short-vol#The Synthesis: Short-Vol Core + Long-Vol Overlay|short-vol-core-plus-long-vol-overlay]] construction is a *book-level barbell*. The short-vol core earns the daily theta (the "safe-feeling" leg), and the long-vol overlay is the convex leg that funds the book's survival in a crash. The same mathematics — that a small allocation to convexity raises the geometric return of the combined book — applies. See [[long-vol-overlay]], [[options-portfolio-construction]], and [[itpm-framework]] for the book-level treatment.
+Inside an options-trading book, the barbell logic reappears at smaller scale: the [[long-vol-vs-short-vol#The Synthesis: Short-Vol Core + Long-Vol Overlay|short-vol-core-plus-long-vol-overlay]] construction is a *book-level barbell*. The short-vol core earns the daily theta (the "safe-feeling" leg), and the long-vol overlay is the convex leg that funds the book's survival in a crash. The same mathematics — that a small allocation to convexity raises the geometric return of the combined book — applies. See [[long-vol-overlay]] and [[options-portfolio-construction]] for the book-level treatment.
 
 ## Related
 
@@ -204,7 +204,6 @@ Inside an options-trading book, the barbell logic reappears at smaller scale: th
 - [[geometric-mean]] — the mathematical objective the barbell optimizes
 - [[convexity]] — the property the risky leg must have
 - [[antifragile]] — Taleb's broader framing
-- [[itpm-framework]] — the trading-desk methodology that nests inside a barbell-shaped allocation
 - [[hedging-program-failure-modes]] — how the convex leg fails when run as a bolt-on hedge
 - [[kelly-criterion]] / [[kelly-for-strategies]] — the log-wealth objective the barbell shares
 - [[risk-of-ruin]] — the left-tail penalty the barbell hard-caps

@@ -116,7 +116,7 @@ OptionStation Pro's killer feature for serious traders: portfolio-level Greeks. 
 - **Net portfolio theta** — daily decay collected (positive for net premium sellers) or paid (negative for net premium buyers)
 - **Net portfolio vega** — exposure to a 1-vol-point shift in IV across the book
 
-This is the workflow [[itpm-options-portfolio-management|ITPM-style overlay traders]] need: not "is this iron condor profitable" but "what is my net book exposure if SPX gaps down 3% and VIX spikes 8 points." Most retail platforms only show position-by-position Greeks. OptionStation Pro and [[thinkorswim]]'s Analyze tab are the two retail tools that aggregate properly.
+This is the workflow book-level overlay traders need: not "is this iron condor profitable" but "what is my net book exposure if SPX gaps down 3% and VIX spikes 8 points." Most retail platforms only show position-by-position Greeks. OptionStation Pro and [[thinkorswim]]'s Analyze tab are the two retail tools that aggregate properly.
 
 ## Strategy templates
 

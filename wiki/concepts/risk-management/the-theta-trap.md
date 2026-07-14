@@ -4,15 +4,15 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, behavioral-finance, itpm, volatility]
+tags: [options, risk-management, behavioral-finance, volatility]
 aliases: ["Theta Trap", "Premium Trap", "The Theta Trap"]
-related: ["[[theta-targeting]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[itpm-trading-philosophy]]", "[[itpm-framework]]", "[[options-premium-selling]]", "[[variance-risk-premium]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[ergodicity]]", "[[long-vol-vs-short-vol]]", "[[zero-dte-options]]", "[[expected-shortfall]]", "[[gamma-explosion]]", "[[implied-vs-realised-volatility]]"]
+related: ["[[theta-targeting]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[options-premium-selling]]", "[[variance-risk-premium]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[covid-crash]]", "[[ergodicity]]", "[[long-vol-vs-short-vol]]", "[[zero-dte-options]]", "[[expected-shortfall]]", "[[gamma-explosion]]", "[[implied-vs-realised-volatility]]"]
 domain: [risk-management, behavioral-finance]
 prerequisites: ["[[theta-targeting]]", "[[options-greeks]]", "[[implied-volatility]]"]
 difficulty: advanced
 ---
 
-The theta trap is the named failure mode in which a [[options-premium-selling|premium-selling]] book accumulates apparent income for an extended period, the trader scales size to lock in that income, and a single discontinuous move erases months or years of accrued theta in days. It is a [[ergodicity|non-ergodic]] failure: the time-averaged P&L of the strategy looks attractive in any sample that excludes the tail event, and ruinous in any sample that includes it. The trap is the canonical reason ITPM-trained practitioners (see [[itpm-trading-philosophy]]) treat naked premium-selling as a category error and insist on an explicit [[long-vol-overlay|long-vol overlay]]. The [[theta-targeting#The Theta Trap|theta-targeting page]] introduces the mechanism in summary form; this page expands it into five identified failure modes with empirical examples, a diagnostic checklist with concrete numbers, and an exit playbook.
+The theta trap is the named failure mode in which a [[options-premium-selling|premium-selling]] book accumulates apparent income for an extended period, the trader scales size to lock in that income, and a single discontinuous move erases months or years of accrued theta in days. It is a [[ergodicity|non-ergodic]] failure: the time-averaged P&L of the strategy looks attractive in any sample that excludes the tail event, and ruinous in any sample that includes it. The trap is the canonical reason professional practitioners treat naked premium-selling as a category error and insist on an explicit [[long-vol-overlay|long-vol overlay]]. The [[theta-targeting#The Theta Trap|theta-targeting page]] introduces the mechanism in summary form; this page expands it into five identified failure modes with empirical examples, a diagnostic checklist with concrete numbers, and an exit playbook.
 
 ## Overview
 
@@ -236,7 +236,7 @@ The trap is the trader confusing the ensemble average for the time average. The 
 
 ## Common Misapplications of the Concept
 
-1. **Treating "the theta trap" as a reason not to sell premium at all.** It is not. The trap is about *unhedged, oversized, low-VRP* premium selling. A risk-budgeted, hedged, regime-aware short-premium book inside the [[itpm-framework]] is a legitimate strategy.
+1. **Treating "the theta trap" as a reason not to sell premium at all.** It is not. The trap is about *unhedged, oversized, low-VRP* premium selling. A risk-budgeted, hedged, regime-aware short-premium book inside a disciplined portfolio framework is a legitimate strategy.
 2. **Assuming defined-risk = trap-immune.** Iron condors and credit spreads cap per-position loss but do not cap *book-level* loss when the entire book moves through the wings simultaneously. March 2020 had multiple defined-risk books down 60-90% in a fortnight.
 3. **Confusing the symptom with the cause.** Falling DTE and rising contract count are symptoms; the cause is the trader chasing a fixed income target through a regime that does not support it. The diagnostic checklist is downstream of the underlying decision to override regime conditions.
 4. **Believing the trap is a retail-only phenomenon.** Volmageddon (Feb 2018) bankrupted multiple regulated short-vol products run by institutional managers. August 2024 caught book-running quant funds along with retail.
@@ -246,8 +246,6 @@ The trap is the trader confusing the ensemble average for the time average. The 
 - [[theta-targeting]] — the discipline the trap subverts
 - [[vega-budgeting]] — the constraint the trap pushes through
 - [[options-portfolio-construction]] — the book-level discipline that prevents the trap
-- [[itpm-trading-philosophy]] — the worldview within which the trap is treated as a category error
-- [[itpm-framework]] — the operational construction sequence that prevents it
 - [[options-premium-selling]] — the strategy class subject to the trap
 - [[variance-risk-premium]] — the structural source of carry that the trap mis-prices
 - [[long-vol-vs-short-vol]] — the synthesis that contains the trap
@@ -273,6 +271,5 @@ The trap is the trader confusing the ensemble average for the time average. The 
 - [[volmageddon]] — Feb 5 2018 episode write-up
 - [[covid-crash]] — Mar 2020 episode write-up
 - [[vix-august-2024-spike]] — Aug 5 2024 episode write-up
-- [[itpm-trading-philosophy]] — the worldview from which the diagnostic and exit playbook are drawn
 - [[book-option-volatility-and-pricing]] — Natenberg on the gamma/theta trade-off underlying mode 1
 - *Various r/options, r/thetagang, FinTwit post-mortems* — primary-source accounts of trader-level damage in each episode

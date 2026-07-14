@@ -161,7 +161,7 @@ Small caps trade at materially higher [[implied-volatility|IV]] than large caps 
 1. **Concentration limits**. [[options-risk-budgeting]] recommends caps on sector and factor concentration. A small-cap-heavy options book has hidden factor exposure to size *and* a hidden exposure to liquidity risk.
 2. **Tail-hedge cost**. Hedging a small-cap-skewed book with IWM puts is more expensive than hedging a large-cap book with SPY puts because of higher IWM vol — but it is the appropriate hedge for the actual risk.
 3. **Earnings concentration**. Small-cap earnings IV crushes are larger in percentage terms than large-cap, making earnings premium-selling tempting but tail-risky.
-4. **Avoid single-name small-cap shorts unless liquidity is verified**. The standard ITPM-style discipline is to either use IWM/IJR for index-level small-cap exposure *or* to limit single-name small-cap options to a small allocation with strict liquidity screens.
+4. **Avoid single-name small-cap shorts unless liquidity is verified**. The standard professional discipline is to either use IWM/IJR for index-level small-cap exposure *or* to limit single-name small-cap options to a small allocation with strict liquidity screens.
 
 ## Related
 

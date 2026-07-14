@@ -170,9 +170,9 @@ Most platforms (thinkorswim, tastytrade) offer beta-weighted portfolio views. Th
 | Single stock gaps 20% | Largest single-name exposure | Cap single-name Greeks |
 | Time passes (2 weeks) | Theta erosion + charm effects | Assess whether theta is acceptable |
 
-### The ITPM Approach
+### The Portfolio-Construction Approach
 
-The itpm methodology implicitly manages position sizing through portfolio construction:
+Some discretionary long/short methodologies implicitly manage position sizing through portfolio construction:
 - 20-40 positions across sectors, balanced long/short
 - Each position is typically 2-5% of portfolio notional
 - Natural delta hedging via the long/short balance

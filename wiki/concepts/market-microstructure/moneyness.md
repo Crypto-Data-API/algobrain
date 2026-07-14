@@ -116,9 +116,9 @@ Most professional options traders select strikes by delta rather than by price d
 | Hedging / protective puts | 0.20–0.35 | Balance protection cost vs. coverage |
 | Lottery tickets / tail bets | 0.05–0.15 | Very cheap, very low probability |
 
-### ITPM Approach
+### Fundamental-Directional Approach
 
-The itpm methodology typically uses:
+Discretionary fundamental traders typically use:
 - ATM or slightly ITM options for core positions (delta 0.50–0.70)
 - 20–60 day expirations to balance theta cost against time for thesis to play out
 - Strike selection aligned with fundamental [[catalyst]] timing

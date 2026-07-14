@@ -6,13 +6,13 @@ updated: 2026-07-13
 status: good
 tags: [options, market-microstructure, market-makers, gamma, indicators]
 aliases: ["Dealer Hedging", "Market Maker Gamma Hedging", "Gamma Hedging Flows", "GEX"]
-related: ["[[gamma-exposure-trading]]", "[[gamma-scalping]]", "[[options-greeks]]", "[[volatility-regime-classification]]", "[[options-stress-testing]]", "[[max-pain]]", "[[vix-august-2024-spike]]", "[[itpm-trade-construction-playbook]]", "[[cryptodataapi]]"]
+related: ["[[gamma-exposure-trading]]", "[[gamma-scalping]]", "[[options-greeks]]", "[[volatility-regime-classification]]", "[[options-stress-testing]]", "[[max-pain]]", "[[vix-august-2024-spike]]", "[[cryptodataapi]]"]
 domain: [market-microstructure, options]
 prerequisites: ["[[options-greeks]]", "[[gamma]]"]
 difficulty: advanced
 ---
 
-Dealer gamma hedging is the mechanical, non-discretionary process by which options [[market-makers|market makers]] buy and sell the underlying asset to keep their inventory [[delta]]-neutral as spot moves. Because dealers are the residual counterparty to most options trades and because their hedging is rule-based rather than view-driven, their flows are often the second-order mover of intraday equity prices -- frequently more important than fundamentals, news, or [[technical-analysis]] for explaining why SPX grinds sideways one day and trends violently the next. Understanding which side of [[gamma]] dealers are on is one of the few structural edges still available to discretionary traders, and it is foundational to [[itpm-trade-construction-playbook|ITPM-style]] trade construction.
+Dealer gamma hedging is the mechanical, non-discretionary process by which options [[market-makers|market makers]] buy and sell the underlying asset to keep their inventory [[delta]]-neutral as spot moves. Because dealers are the residual counterparty to most options trades and because their hedging is rule-based rather than view-driven, their flows are often the second-order mover of intraday equity prices -- frequently more important than fundamentals, news, or [[technical-analysis]] for explaining why SPX grinds sideways one day and trends violently the next. Understanding which side of [[gamma]] dealers are on is one of the few structural edges still available to discretionary traders, and it is foundational to professional discretionary trade construction.
 
 ## Overview
 
@@ -59,7 +59,7 @@ Conditions that typically produce a long-gamma regime (rules of thumb -- specifi
 - After a sustained rally with low realized vol, dealers' net call gamma exceeds put gamma in absolute terms
 - Post-FOMC, post-CPI, or post-OPEX rallies that "release the [[vol-crush|vol crush]]" and leave the book deeply long gamma
 
-ITPM and other discretionary desks use this regime to size *up* short premium ([[iron-condor|iron condors]], [[strangle|short strangles]]) and to fade intraday extremes with tight stops. The key insight: in a long-gamma regime, the path of least resistance is *back to the middle*, not in the direction of the latest move.
+Discretionary desks use this regime to size *up* short premium ([[iron-condor|iron condors]], [[strangle|short strangles]]) and to fade intraday extremes with tight stops. The key insight: in a long-gamma regime, the path of least resistance is *back to the middle*, not in the direction of the latest move.
 
 ## Short-Gamma Dealer Regime
 
@@ -95,7 +95,7 @@ The flip level acts like a *behavioral* support/resistance:
 - When approached from above, dealers' long-gamma buying tends to defend it (acts like support)
 - When breached to the downside, dealers' new short-gamma selling tends to reinforce the breakdown (acts like resistance on bounces)
 
-This is one of the most-watched levels by [[itpm-trade-construction-playbook|ITPM]]-style discretionary desks. Many traders mark the flip level on their charts each morning and use it for sizing decisions, [[stop-loss|stop placement]], and [[target-setting|targets]].
+This is one of the most-watched levels by discretionary desks. Many traders mark the flip level on their charts each morning and use it for sizing decisions, [[stop-loss|stop placement]], and [[target-setting|targets]].
 
 > **Caveat:** The exact flip level varies between providers because each models the dealer book differently. Differences of 1-2% across spotgamma, [[tier1alpha]], and [[menthorq]] are common. Use the level as a *zone*, not a single price.
 
@@ -149,13 +149,13 @@ Charm is most powerful in the **last 1-2 hours of trading on OPEX days** and in 
 - A short OTM put dealer is long delta from that position (gamma-neutral but charm-accruing); as time passes the position becomes less long-delta -> dealer **sells** stock
 - A short OTM call dealer is short delta; as charm decays the position becomes less short-delta -> dealer **buys** stock
 
-In aggregate, charm flows on OPEX week tend to produce a slow-drift bias toward the highest-OI strike (the [[max-pain|max pain]] level) and a characteristic "afternoon drift" that experienced [[itpm-trade-construction-playbook|ITPM]] traders learn to recognize.
+In aggregate, charm flows on OPEX week tend to produce a slow-drift bias toward the highest-OI strike (the [[max-pain|max pain]] level) and a characteristic "afternoon drift" that experienced traders learn to recognize.
 
 ## OPEX Cycles
 
 Monthly options expiration ("OPEX") is the third Friday of each month. Quarterly OPEX (third Friday of Mar/Jun/Sep/Dec) is "[[quad-witching|quad witching]]" -- simultaneous expiry of stock options, index options, index futures, and stock futures. Quarterly OPEX produces the largest gamma roll-off of the year.
 
-The pattern that drives ITPM-style entries:
+The pattern that drives OPEX-aware entries:
 
 1. **OPEX week (Mon-Thu):** gamma is concentrated -- pinning is strong, ranges compress, the market feels "stuck"
 2. **OPEX Friday morning:** charm and gamma flows intensify; a few key strikes act as magnets
@@ -169,7 +169,7 @@ Empirical studies (cited by spotgamma and others) show post-OPEX Mondays have hi
 - Post-OPEX positioning leaves dealers near or below the new flip level
 - A macro catalyst (FOMC, [[non-farm-payrolls|NFP]], CPI) lands the week after OPEX
 
-ITPM traders use post-OPEX windows for *initiating* directional swings and for *de-grossing* short premium. The pre-OPEX week is for harvesting theta inside the pinning range.
+Experienced discretionary traders use post-OPEX windows for *initiating* directional swings and for *de-grossing* short premium. The pre-OPEX week is for harvesting theta inside the pinning range.
 
 ## How Retail Gets It Wrong
 
@@ -183,9 +183,9 @@ Most retail traders do not know dealer gamma exists, much less which side of it 
 
 The error pattern is consistent: retail interprets dealer-driven price action through a fundamentals/technicals lens, missing the structural cause.
 
-## ITPM Trade Integration
+## Trade Integration
 
-The [[itpm-trade-construction-playbook|ITPM trade construction playbook]] integrates dealer gamma in three concrete ways:
+A disciplined trade construction process integrates dealer gamma in three concrete ways:
 
 ### Sizing decisions
 
@@ -272,7 +272,6 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - [[menthorq]] -- TradingView-native alternative
 - [[squeezemetrics]] -- free baseline data
 - [[market-makers]] -- the dealers doing the hedging
-- [[itpm-trade-construction-playbook]] -- discretionary trade-construction methodology that integrates GEX
 - [[vix-august-2024-spike]] -- a textbook short-gamma blow-up
 - [[volmageddon]] -- the canonical historical short-gamma cascade
 - [[gamma-squeeze]] -- single-name short-call-gamma feedback loop
@@ -281,6 +280,5 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 
 - General market-microstructure knowledge -- dealer hedging mechanics, options Greeks
 - [[squeezemetrics]] white paper on aggregate GEX calculation methodology
-- ITPM ([[institute-of-trading-and-portfolio-management]]) curriculum -- integration of dealer gamma into discretionary sizing and entries
 - Cboe research notes on 0DTE impact on dealer gamma profile
 - Public discussion of post-OPEX vol expansion (Goldman Sachs derivatives strategy notes, Nomura's QIS team commentary -- referenced in spotgamma and [[tier1alpha]] daily reports)

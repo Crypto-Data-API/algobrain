@@ -226,17 +226,17 @@ When trading [[perpetual-futures]], risk management is even more critical: [[lev
 4. **"I'll manage risk after I'm profitable"** -- Risk management is what *makes* profitability possible. Every trader interviewed in *Market Wizards* emphasized that risk control is the foundation of longevity (Source: [[book-market-wizards]]).
 5. **"A stop loss means I'll always lose that amount"** -- Stops prevent *larger* losses. Not every stop gets hit.
 
-## The ITPM Approach to Risk Management
+## The Portfolio-Level Approach to Risk Management
 
-The Institute of Trading and Portfolio Management adds a portfolio-level dimension to risk management that goes beyond individual trade risk:
+Professional portfolio management adds a portfolio-level dimension to risk management that goes beyond individual trade risk:
 
 - **Long/short portfolios** inherently manage market risk by holding both long and short positions, reducing net exposure
 - **[[trade-repair-and-rolling|Trade repair and rolling]]** — Instead of simply cutting losing options positions, professionals restructure them through rolling strikes/expirations or converting to spreads
-- **Half-size entries** — [[edward-shek]] advocates starting positions at half-size and scaling up on confirmation, rather than going full-size immediately
+- **Half-size entries** — edward-shek advocates starting positions at half-size and scaling up on confirmation, rather than going full-size immediately
 - **Portfolio hedging** — Adding hedge positions (e.g., TLT calls to hedge a net-short equity book) to protect overall P&L rather than managing each trade in isolation
 - **The [[eighty-twenty-analysis|80/20 volatility rule]]** — Only ~20% of the time offers enough volatility for active trading; the other 80% should focus on managing existing positions
 
-(Source: [[itpm-god-like-trader-status]])
+
 
 ## Further Reading
 

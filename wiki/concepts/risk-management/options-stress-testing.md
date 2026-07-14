@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, portfolio-theory, itpm, stress-testing]
+tags: [options, risk-management, portfolio-theory, stress-testing]
 aliases: ["Options Scenario Analysis", "Options Risk Scenarios", "Options What-If Analysis"]
 related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[portfolio-greeks-aggregation]]", "[[vega-budgeting]]", "[[options-concentration-risk]]", "[[value-at-risk]]", "[[expected-shortfall]]", "[[portfolio-margin]]", "[[vix-august-2024-spike]]", "[[tail-risk]]"]
 domain: [risk-management]
@@ -187,7 +187,7 @@ Historical replay tells you what already happened; forward-looking scenarios str
 
 ## Setting Tolerance Limits
 
-Stress numbers are useful only if they map to action thresholds. The standard ITPM-style framework:
+Stress numbers are useful only if they map to action thresholds. A standard professional framework:
 
 | Limit type | Typical level | Action if breached |
 |------------|---------------|--------------------|
@@ -197,7 +197,7 @@ Stress numbers are useful only if they map to action thresholds. The standard IT
 | **Single-scenario max loss** | ≤ 10% in any individual scenario | Diversify across uncorrelated trades |
 | **Tail-vs-body asymmetry** | tail loss / expected gain ≤ 4× | Avoid trades where the tail dwarfs the prize |
 
-The 15-25% range is widely cited in professional risk frameworks (Source: [[itpm-trade-construction-playbook]]). Past 25% peak-to-trough drawdown, the math of recovery becomes brutal: a 25% drawdown requires a 33% rally to break even; a 50% drawdown requires 100%. Books that allow stress losses past that line tend not to come back.
+The 15-25% range is widely cited in professional risk frameworks. Past 25% peak-to-trough drawdown, the math of recovery becomes brutal: a 25% drawdown requires a 33% rally to break even; a 50% drawdown requires 100%. Books that allow stress losses past that line tend not to come back.
 
 ## Scenario Design Pitfalls
 
@@ -272,7 +272,7 @@ The stress test reveals what the Greeks hide. A book that "looks" balanced has a
 
 **Decision:** trader sizes down to 40 contracts. New max loss: −$74k (7.4% of account). New stress for Aug-2024: −$38k (3.8%). New stress for the 2020 crash: −$56k (5.6%). All inside the 15% tolerance limit. The 100-lot was over the line; the 40-lot is inside.
 
-This is the workflow ITPM teaches: the stress number is the binding constraint, not the [[risk-reward-ratio|R/R]] number, not the win-rate fantasy, not the Greeks. Size the position to make the worst stress survivable, then take the trade.
+This is the professional workflow: the stress number is the binding constraint, not the [[risk-reward-ratio|R/R]] number, not the win-rate fantasy, not the Greeks. Size the position to make the worst stress survivable, then take the trade.
 
 ## Connection to Position Sizing & Margin
 
@@ -321,9 +321,9 @@ Stress testing is the enforcement layer that connects the rest of the options-ri
 
 For most discretionary traders running portfolio-margined books, IBKR Risk Navigator's scenario tab plus a simple Python script for historical replay covers 90% of needs. Larger books move to ORATS or build internal tooling.
 
-## ITPM Context
+## Professional Practice
 
-Anton Kreil's ITPM curriculum repeatedly emphasizes that the broker's static [[portfolio-margin|margin number]] is *not* a real risk metric — it's an arbitrary haircut the broker applies to comply with regulation. The *real* risk metric is the scenario stress test, run pre-trade and re-run daily. Specifically:
+Professional risk practice treats the broker's static [[portfolio-margin|margin number]] as *not* a real risk metric — it's an arbitrary haircut the broker applies to comply with regulation. The *real* risk metric is the scenario stress test, run pre-trade and re-run daily. Specifically:
 
 1. **Pre-trade stress on every new position.** No new position goes on without a worst-case scenario number computed before clicking buy. The trader has to be able to live with that number.
 2. **Daily revisit of the entire book.** Even unchanged positions get re-stressed daily because the surface and the calendar moved.
@@ -331,7 +331,7 @@ Anton Kreil's ITPM curriculum repeatedly emphasizes that the broker's static [[p
 4. **Stress replaces P&L targets as the daily metric.** The screen the trader looks at first thing is the stress matrix, not the unrealized P&L. P&L tells you what happened; stress tells you what could happen.
 5. **The professional desk runs stress before lunch and again before close.** Retail traders run it never.
 
-The connection to the [[itpm-trade-construction-playbook]] is direct: the playbook's "Position Sizing" stage is *where* the stress test lives in the workflow. You pick a structure, you size it provisionally, you stress it, and the size is final only if the stress number is inside the tolerance limit. See [[itpm-trade-construction-playbook#Stage 8 Position Sizing]] for the integrated workflow.
+The connection to trade construction is direct: the position-sizing stage is *where* the stress test lives in the workflow. You pick a structure, you size it provisionally, you stress it, and the size is final only if the stress number is inside the tolerance limit.
 
 ## Stress Testing vs Other Risk Metrics
 
@@ -365,11 +365,9 @@ A complete risk framework uses all of them. Greeks for daily management, VaR for
 - [[position-sizing]] — the knob stress testing actually sets
 - [[theta-targeting]] — the income objective stress testing caps
 - [[trade-repair-and-rolling]] — what a live book's out-of-tolerance stress number triggers
-- [[itpm-trade-construction-playbook]] — the workflow stress lives inside
 
 ## Sources
 
-- [[itpm-trade-construction-playbook]] — ITPM/Kreil position-sizing methodology, with stress as the binding constraint
 - [[book-option-volatility-and-pricing]] — Natenberg on the limitations of Greeks for large moves
 - [[book-the-black-swan]] — Taleb on why local sensitivity measures (Greeks, VaR) miss the events that matter
 - [[vix-august-2024-spike]] — empirical case study of a vol-only stress event

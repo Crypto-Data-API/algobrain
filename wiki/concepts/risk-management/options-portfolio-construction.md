@@ -4,15 +4,15 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, portfolio-theory, itpm]
+tags: [options, risk-management, portfolio-theory]
 aliases: ["Building an Options Book", "Options Book Construction"]
-related: ["[[itpm-trade-construction-playbook]]", "[[options-risk-budgeting]]", "[[portfolio-greeks-aggregation]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[expiration-laddering]]", "[[options-concentration-risk]]", "[[options-stress-testing]]", "[[portfolio-margin]]", "[[anton-kreil]]"]
+related: ["[[options-risk-budgeting]]", "[[portfolio-greeks-aggregation]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[expiration-laddering]]", "[[options-concentration-risk]]", "[[options-stress-testing]]", "[[portfolio-margin]]"]
 domain: [risk-management, portfolio-theory]
 prerequisites: ["[[options-position-sizing]]", "[[options-greeks]]"]
 difficulty: advanced
 ---
 
-Options portfolio construction is the discipline of running a *book* of options positions as a single coordinated risk system rather than as a stack of independent trades. Where [[options-position-sizing]] answers "how big should this trade be?", portfolio construction answers the harder question: "given the trades I already have on, what does *this* one do to my net risk, and is that something I want?" The Institute of Trading and Portfolio Management (Anton Kreil's school) treats this as the dividing line between hobbyists, who size each trade in isolation, and professionals, who size each trade against a pre-budgeted portfolio.
+Options portfolio construction is the discipline of running a *book* of options positions as a single coordinated risk system rather than as a stack of independent trades. Where [[options-position-sizing]] answers "how big should this trade be?", portfolio construction answers the harder question: "given the trades I already have on, what does *this* one do to my net risk, and is that something I want?" Professional trading desks treat this as the dividing line between hobbyists, who size each trade in isolation, and professionals, who size each trade against a pre-budgeted portfolio.
 
 ## Why a Portfolio View Matters
 
@@ -26,9 +26,9 @@ The single most common error among self-taught options traders is treating each 
 
 A portfolio view exists to convert these hidden stack-ups into explicit, budgeted exposures. If you want net short vega across the book, fine — but it should be a deliberate choice with a number attached, not an emergent consequence of putting on whatever looked attractive that week.
 
-## The ITPM Portfolio Framework
+## The Top-Down Portfolio Framework
 
-ITPM teaches a strict top-down construction sequence. Every position is a *child* of a higher-level decision, and every higher-level decision constrains what positions are allowed:
+Institutional books are built through a strict top-down construction sequence. Every position is a *child* of a higher-level decision, and every higher-level decision constrains what positions are allowed:
 
 ```
 1. Macro thesis        →  net long / short / flat the world
@@ -40,11 +40,11 @@ ITPM teaches a strict top-down construction sequence. Every position is a *child
 7. Hedge layer         →  beta / vega / sector hedges to clean up unwanted risk
 ```
 
-This is the same flow described in [[itpm-trade-construction-playbook]] for a single trade — but at the portfolio level, steps 6 and 7 are the construction work. The first five stages produce a *candidate* trade. The portfolio framework decides whether and how to *fit* it into the existing book.
+At the portfolio level, steps 6 and 7 are the construction work. The first five stages produce a *candidate* trade. The portfolio framework decides whether and how to *fit* it into the existing book.
 
-The key ITPM principles for the portfolio layer:
+The key principles for the portfolio layer:
 
-- **Professional-grade discipline.** Set the risk limits *before* the market opens, write them down, and reject any trade that breaches them — even if the trade looks good. Most retail traders override their own rules in the moment; the ITPM framework treats this as the central skill to defeat.
+- **Professional-grade discipline.** Set the risk limits *before* the market opens, write them down, and reject any trade that breaches them — even if the trade looks good. Most retail traders override their own rules in the moment; a disciplined framework treats this as the central skill to defeat.
 - **Greeks dominate dollar P&L thinking.** A "small" trade by premium can be a "large" trade by vega or gamma. Always size against the relevant Greek for the strategy, not just the cash outlay (see [[options-position-sizing]]).
 - **Net before gross.** Every metric is computed at the *book* level first. Position-level numbers are an input, not a target.
 - **Hedges are explicit positions.** Don't assume "the longs hedge the shorts." Compute the residual and decide whether you want it.
@@ -58,11 +58,11 @@ Before any new trade is considered, the trader has set five numbers for the port
 
 The total dollar P&L per 1-vol-point move in implied volatility, aggregated across the book and (ideally) beta-weighted to a single benchmark like SPY or VIX.
 
-A typical ITPM-aligned book budget for a $250K account:
+A typical book budget for a $250K account:
 - Net long vega: up to +$2,000 per vol point (i.e., a 5-vol crush costs $10K, or 4% of the account)
 - Net short vega: up to -$1,500 per vol point (a 10-vol spike costs $15K, or 6%)
 
-The asymmetry is deliberate: short vega has unbounded loss potential during stress events and a fatter left tail than long vega does on the right tail. ITPM-style books typically run flat-to-slightly-long vega in compressed VIX regimes and flat-to-slightly-short vega in elevated VIX regimes (see [[volatility-regime-classification]] and [[variance-risk-premium]]).
+The asymmetry is deliberate: short vega has unbounded loss potential during stress events and a fatter left tail than long vega does on the right tail. Professional books typically run flat-to-slightly-long vega in compressed VIX regimes and flat-to-slightly-short vega in elevated VIX regimes (see [[volatility-regime-classification]] and [[variance-risk-premium]]).
 
 The vega number is checked daily, beta-weighted, and broken down by tenor bucket: front-month vega behaves very differently from 90-day vega, and a "flat vega" book that's actually short front-month and long back-month is a [[expiration-laddering|term structure trade]] in disguise. See [[vega-budgeting]] for the full sub-buckets.
 
@@ -70,7 +70,7 @@ The vega number is checked daily, beta-weighted, and broken down by tenor bucket
 
 The intended daily P&L from time decay, expressed in dollars per day and as a percentage of capital.
 
-Common ITPM-style targets:
+Common targets:
 - Theta-positive book: +0.10% to +0.25% of capital per day net theta
 - Theta-neutral book: |theta| < 0.05% of capital per day
 - Theta-negative book: -0.10% to -0.30% per day (paying for long convexity)
@@ -92,7 +92,7 @@ The reason is structural: expiration week gamma explodes, pin risk concentrates,
 
 The cap on net Greek exposure to any single sector or correlated group.
 
-ITPM-style rules:
+Typical rules:
 - No more than 25% of net beta-weighted delta in any one GICS sector
 - No more than 30% of net vega in any one sector (especially relevant for tech and energy, which have distinct vol regimes)
 - No more than 15-20% of total max-loss exposure in correlated themes (e.g., "AI winners," "China reopening," "rate-sensitive REITs")
@@ -103,7 +103,7 @@ This prevents the "five different tech names = one semi bet" trap. A trader who 
 
 The cap on dollar notional exposure (not premium) to any single underlying.
 
-Notional matters because options give leveraged exposure to the underlying price, not just the premium paid. A trader long 10 ATM AAPL calls at $5 has paid $5,000 but controls roughly $180,000 of AAPL stock — a 6% gap on AAPL is a $10,800 P&L event regardless of the premium. ITPM books typically cap single-name *notional* exposure (delta × shares × price, summed across all positions on that name) at 5-10% of account.
+Notional matters because options give leveraged exposure to the underlying price, not just the premium paid. A trader long 10 ATM AAPL calls at $5 has paid $5,000 but controls roughly $180,000 of AAPL stock — a 6% gap on AAPL is a $10,800 P&L event regardless of the premium. Professional books typically cap single-name *notional* exposure (delta × shares × price, summed across all positions on that name) at 5-10% of account.
 
 ## Risk Limits
 
@@ -143,7 +143,7 @@ The mechanical process:
 
 The crucial insight: net Greeks beat individual Greeks for risk decisions, but individual Greeks still matter for *attribution*. You want to know not just "the book is short $1,200 of vega" but "the book is short $2,000 of vega from the SPY iron condor and long $800 of vega from the AMZN earnings calendar." When vol moves, you need to know which leg drove the P&L.
 
-A common trap: layering trades that each individually pass the limits but collectively land at the limit on every dimension. A book at 95% of vega budget, 95% of theta budget, 95% of single-name notional, and 95% of sector concentration is *not* a robust book — any small adverse move pushes multiple metrics into breach simultaneously, removing the trader's ability to add hedges or new positions during stress. ITPM-style risk discipline keeps each axis at 60-70% of limit so there's room to maneuver.
+A common trap: layering trades that each individually pass the limits but collectively land at the limit on every dimension. A book at 95% of vega budget, 95% of theta budget, 95% of single-name notional, and 95% of sector concentration is *not* a robust book — any small adverse move pushes multiple metrics into breach simultaneously, removing the trader's ability to add hedges or new positions during stress. Disciplined risk practice keeps each axis at 60-70% of limit so there's room to maneuver.
 
 ## Hedging at the Book Level vs Trade Level
 
@@ -167,13 +167,13 @@ A book-level hedge is a single overlay position designed to neutralize an unwant
 
 The rule: hedge at the level where the risk lives. If five positions each have idiosyncratic tail risk, hedge each one. If five positions all have the same systematic short-vol risk, hedge once at the book level.
 
-Book-level hedges are where ITPM-style construction differs most from retail. Retail traders typically hedge each trade individually and end up with hedge premium drag of 2-4x what's needed. Professional books concentrate hedging into one or two efficient overlays, often using futures (for delta) and index options (for vol/tail), because index vol is consistently cheaper than the basket of single-name vols.
+Book-level hedges are where professional construction differs most from retail. Retail traders typically hedge each trade individually and end up with hedge premium drag of 2-4x what's needed. Professional books concentrate hedging into one or two efficient overlays, often using futures (for delta) and index options (for vol/tail), because index vol is consistently cheaper than the basket of single-name vols.
 
 ## Capital Allocation: Per-Trade vs Total-Risk
 
 Two distinct percentages, frequently confused:
 
-**Per-trade capital at risk.** The maximum dollar loss on a single trade as a fraction of total account. ITPM-style: 1-2% per trade for directional discretionary, 0.5-1% per trade for premium-selling positions (because their tail loss is larger than their stated max-loss in any non-defined-risk structure, and even defined-risk losses cluster in correlated stress events).
+**Per-trade capital at risk.** The maximum dollar loss on a single trade as a fraction of total account. Common professional practice: 1-2% per trade for directional discretionary, 0.5-1% per trade for premium-selling positions (because their tail loss is larger than their stated max-loss in any non-defined-risk structure, and even defined-risk losses cluster in correlated stress events).
 
 **Total portfolio risk.** The fraction of total account at risk *across all simultaneous positions* under a stress scenario. This is the sum that actually matters and is often missed by retail.
 
@@ -181,7 +181,7 @@ The math illustrates why:
 
 A $250K account running 20 trades each at 2% max-loss has $100K (40%) in cumulative max-loss exposure. In normal markets, max losses are uncorrelated and the *expected* drawdown is far smaller. But in a correlated stress event (March 2020, August 2024 yen carry unwind, any future volatility shock), losses correlate sharply, and the expected drawdown approaches the cumulative max-loss number. A 40% drawdown on a 20-trade book is not a tail event — it's the natural consequence of treating max-loss as an independent number per trade.
 
-ITPM-aligned rules:
+Standard rules:
 - Cumulative max-loss across all open positions: cap at 15-25% of account
 - Expected portfolio drawdown in a 2-sigma stress (computed via stress test): cap at 8-12% of account
 - Single-day VaR (95th percentile): cap at 3-5% of account
@@ -190,7 +190,7 @@ The expected-loss framing matters more than max-loss. A $1,000 max-loss trade wi
 
 ## Review Cadence
 
-The ITPM framework imposes three nested review loops:
+A well-run book imposes three nested review loops:
 
 ### Daily: Greeks Check
 Five-to-ten minute review every trading morning before the open:
@@ -201,7 +201,7 @@ Five-to-ten minute review every trading morning before the open:
 - Any expiry within 7 DTE that has more than 20% of book gamma (if so, plan close/roll today)
 - Overnight news scan for any underlying in the book
 
-The output of the daily check is a written list of *required actions* for the day, not a feeling. Actions are: close X, roll Y, hedge Z, do nothing. ITPM emphasizes the discipline of writing the action list before the market opens so that intra-day price action doesn't reroute the plan.
+The output of the daily check is a written list of *required actions* for the day, not a feeling. Actions are: close X, roll Y, hedge Z, do nothing. The discipline is to write the action list before the market opens so that intra-day price action doesn't reroute the plan.
 
 ### Weekly: Thesis Review
 Once a week (Friday close or Sunday afternoon):
@@ -228,7 +228,7 @@ The mistakes that destroy options books are predictable and most are portfolio-l
 3. **Ignoring net vega.** Each trade was sized "vega-neutral" at entry, but as IV moved and trades aged, net vega drifted to ±$2,000/point. The trader didn't notice until vol moved.
 4. **Sizing on max-loss instead of expected-loss.** Treating a 0.10-delta short put with $500 max loss as the same risk as a long ATM call with $500 max loss. The short put has a fat left tail; the long call doesn't.
 5. **Hedging trade-by-trade instead of book-level.** Buying a protective put on every long stock position rather than running one index put overlay against the net long book. The premium drag is 3-4x.
-6. **Adding to a losing book.** A trade goes against you, and the response is to add a "hedge" that's actually a new directional position. The book gets larger, not smaller, during drawdowns. ITPM rule: drawdowns shrink the book, never grow it.
+6. **Adding to a losing book.** A trade goes against you, and the response is to add a "hedge" that's actually a new directional position. The book gets larger, not smaller, during drawdowns. The rule: drawdowns shrink the book, never grow it.
 7. **No record of net Greeks over time.** The book's Greeks are computed only on the day a trade is added or removed. The drift between is invisible. A daily snapshot file (CSV, journal entry) is the minimum.
 8. **Confusing theta with edge.** A book that collects theta is not, by that fact, a book with edge. Theta is the *price* paid by long convexity holders. Whether you have edge depends on whether realized vol is below implied — see [[variance-risk-premium]]. A book that runs +$500/day theta in a regime where realized vol exceeds implied is losing money on every trade despite the positive theta.
 9. **Concentration creep.** The thesis was "long quality tech." Six weeks later it's "long NVDA, AMD, AVGO, MU, TSM" — same trade, less diversified, more risk.
@@ -236,7 +236,7 @@ The mistakes that destroy options books are predictable and most are portfolio-l
 
 ## Tools
 
-The ITPM framework is software-agnostic but requires a few categories of tooling:
+The framework is software-agnostic but requires a few categories of tooling:
 
 ### Portfolio Margin
 For accounts above $125K (the SEC minimum, often $150-200K in practice), [[portfolio-margin]] is the difference between a workable options book and a Reg-T-strangled one. Portfolio margin computes margin based on a stress-tested view of the entire book (-12% to +10% on equities, with vol-up and vol-down scenarios), giving 3-6x more buying power than Reg-T strategy-based margin for hedged books. Brokers offering portfolio margin: IBKR, Schwab (formerly thinkorswim), TastyTrade for accounts that qualify.
@@ -279,7 +279,6 @@ The loop is what converts a stack of individually-reasonable trades into a coher
 
 ## Related
 
-- [[itpm-trade-construction-playbook]] — single-trade construction workflow this page builds on
 - [[options-position-sizing]] — sizing math for individual positions
 - [[options-greeks]] — the risk dimensions being budgeted
 - [[portfolio-greeks-aggregation]] — beta-weighting and bucketing
@@ -289,10 +288,8 @@ The loop is what converts a stack of individually-reasonable trades into a coher
 - [[options-concentration-risk]] — single-name and sector caps
 - [[options-stress-testing]] — scenario analysis at the book level
 - [[portfolio-margin]] — capital efficiency for hedged books
-- [[itpm-ratio-calendar-spread]] — example of a structure used to express vega-and-theta views inside a book
 - [[variance-risk-premium]] — the theoretical edge behind theta-positive books
 - [[volatility-regime-classification]] — how regime selection drives portfolio bias
-- [[anton-kreil]] — founder of ITPM
 - [[options-risk-budgeting]] — companion concept page
 - [[risk-management-overview]]
 - [[risk-management]] — the general discipline this specialises
@@ -302,8 +299,4 @@ The loop is what converts a stack of individually-reasonable trades into a coher
 
 ## Sources
 
-- [[anton-kreil]] — primary source for the top-down framework
-- [[itpm-five-principles]] — underlying discipline framework
-- [[itpm-trade-construction-playbook]] — single-trade workflow that feeds into the portfolio layer
 - [[book-option-volatility-and-pricing]] — Natenberg on portfolio Greeks aggregation and stress testing
-- [[itpm-professional-traders-amazing-advice]] — practitioner notes on book construction discipline

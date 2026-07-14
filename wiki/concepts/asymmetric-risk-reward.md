@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-20
 status: excellent
-tags: [risk-management, options, behavioral-finance, itpm, derivatives, portfolio-theory]
+tags: [risk-management, options, behavioral-finance, derivatives, portfolio-theory]
 aliases: ["Asymmetric Risk Reward", "Asymmetric R/R", "Asymmetric Payoff", "Positive Skew", "Convex Payoff"]
 domain: [risk-management, portfolio-theory, options]
 prerequisites: ["[[expected-value]]", "[[options-greeks]]", "[[skewness]]"]
@@ -18,12 +18,6 @@ related:
   - "[[antifragility]]"
   - "[[barbell-strategy]]"
   - "[[barbell-portfolio]]"
-  - "[[itpm-trading-philosophy]]"
-  - "[[itpm-framework]]"
-  - "[[itpm-five-principles]]"
-  - "[[itpm-trade-construction-playbook]]"
-  - "[[itpm-ratio-calendar-spread]]"
-  - "[[anton-kreil]]"
   - "[[the-theta-trap]]"
   - "[[long-vol-vs-short-vol]]"
   - "[[long-vol-overlay]]"
@@ -35,7 +29,7 @@ related:
   - "[[ratio-spread]]"
 ---
 
-Asymmetric risk/reward is the property of a trade or strategy whose maximum gain is materially larger than its maximum loss in absolute terms — and, by extension, whose payoff distribution has *positive skew*. It is the second tenet of the [[itpm-trading-philosophy|ITPM philosophy]] and a near-universal characteristic of strategies that survive across regimes. The proposition is that the only edges worth pursuing in active trading are those whose expected value is positive *and* whose payoff geometry is right-tailed: many small losses paid for by a few large wins, rather than many small wins paid for by occasional ruinous losses. Hit-rate fixation is the canonical retail tell; payoff-asymmetry fixation is the canonical professional posture.
+Asymmetric risk/reward is the property of a trade or strategy whose maximum gain is materially larger than its maximum loss in absolute terms — and, by extension, whose payoff distribution has *positive skew*. It is a near-universal characteristic of strategies that survive across regimes. The proposition is that the only edges worth pursuing in active trading are those whose expected value is positive *and* whose payoff geometry is right-tailed: many small losses paid for by a few large wins, rather than many small wins paid for by occasional ruinous losses. Hit-rate fixation is the canonical retail tell; payoff-asymmetry fixation is the canonical professional posture.
 
 ## The Mathematics
 
@@ -66,7 +60,7 @@ This produces the table that every options-trained desk learns early:
 
 A 3:1 trade only needs a 25% hit rate to break even *gross of costs*. A 1:1 trade needs 50%. A 0.3:1 trade — the canonical short-premium, pick-up-pennies geometry — needs almost 77% just to break even, which is roughly where retail short-strangle accounts realise their hit rates *before* a stress event vaporises the rest. After a single 3-sigma move, the realised hit rate of the long-dated path drops well below the breakeven and the strategy is structurally negative-EV.
 
-The deeper consequence: **the breakeven hit rate falls hyperbolically as R rises**. Going from 1:1 to 3:1 cuts the required hit rate in half. Going from 3:1 to 10:1 cuts it by another factor of 2.7. This is why the ITPM curriculum, the [[turtle-traders|Turtle]] system, and most trend-following frameworks insist on minimum 3:1 R/R: it puts the trader on the gentle side of the hyperbola, where small skill edges (53-55% hit rates) translate into very robust positive expectancy.
+The deeper consequence: **the breakeven hit rate falls hyperbolically as R rises**. Going from 1:1 to 3:1 cuts the required hit rate in half. Going from 3:1 to 10:1 cuts it by another factor of 2.7. This is why the [[turtle-traders|Turtle]] system and most trend-following frameworks insist on minimum 3:1 R/R: it puts the trader on the gentle side of the hyperbola, where small skill edges (53-55% hit rates) translate into very robust positive expectancy.
 
 ## Positive Skew, Convex Payoffs
 
@@ -104,7 +98,7 @@ Both distributions can have *identical expected value* in calm regimes. Their di
 2. **Geometric (compound) returns**, where the negative-skew strategy's tail loss collapses geometric growth even when arithmetic mean is positive. See [[capital-preservation#Geometric vs Arithmetic Returns|the geometric/arithmetic divergence]].
 3. **Risk of ruin**, where the convex left tail of negative-skew strategies pushes [[risk-of-ruin|ruin probability]] far above the calm-regime model. See [[risk-of-ruin#Why Options Books Are Vulnerable]].
 
-The ITPM bias — and the bias of every long-careered options trader — is toward the positive-skew side, even though it requires accepting low hit rates and frequent small losses, both of which feel bad.
+The bias of every long-careered options trader is toward the positive-skew side, even though it requires accepting low hit rates and frequent small losses, both of which feel bad.
 
 ## Why Options Are the Natural Expression
 
@@ -119,9 +113,9 @@ The professional consequence: directional views with defined catalysts and short
 - **Risk reversals** ([[risk-reversal]]) — long call + short put = synthetic long with no premium, full upside
 - **Diagonals** ([[diagonal-spread]]) — long-dated long, short-dated short; finance the long with the short
 - **Ratio spreads** ([[ratio-spread]]) — buy 1 short-dated, sell 2 long-dated; engineered convex regions
-- **Calendar spreads** including the ITPM-specific [[itpm-ratio-calendar-spread|ratio calendar]] — see worked example below
+- **Calendar spreads** including the ratio calendar — see worked example below
 
-Where short premium is used in a professional book, it sits *inside a budget* alongside an explicit long-vol overlay (see [[long-vol-vs-short-vol]] and [[long-vol-overlay]]). Naked premium-selling without an overlay is a *category error* in the ITPM frame, not a strategy choice — it converts a positive-skew engine into a negative-skew engine without changing the marketing label.
+Where short premium is used in a professional book, it sits *inside a budget* alongside an explicit long-vol overlay (see [[long-vol-vs-short-vol]] and [[long-vol-overlay]]). Naked premium-selling without an overlay is a *category error*, not a strategy choice — it converts a positive-skew engine into a negative-skew engine without changing the marketing label.
 
 ## The Hit-Rate Trap
 
@@ -133,11 +127,11 @@ One of the most reliable retail tells is hit-rate fixation. Retail platforms and
 
 The cognitive bias is straightforward: humans feel good about being "right" and bad about being "wrong," and our intuitive rate-of-return estimate weights frequency over magnitude. The professional retraining is to weight magnitude correctly — to internalise that **a 30% hit rate at 4:1 makes more money than a 60% hit rate at 1:1**, with much smaller drawdowns.
 
-The deeper philosophical point, articulated by Kreil across the ITPM corpus: **edge does not come from being right more often. It comes from being asymmetric.** This is the second tenet of the [[itpm-trading-philosophy|ITPM philosophy]] and the central operational difference between professionals and retail.
+The deeper philosophical point: **edge does not come from being right more often. It comes from being asymmetric.** This is the central operational difference between professionals and retail.
 
-## Worked Example: ITPM Ratio Calendar Spread
+## Worked Example: Ratio Calendar Spread
 
-The canonical positive-skew structure in the ITPM playbook is the [[itpm-ratio-calendar-spread|ratio calendar spread]], which targets a 2:1 reward-to-risk geometry on a directional or thematic view. The construction (a stylised bullish version):
+A canonical positive-skew structure is the ratio calendar spread, which targets a 2:1 reward-to-risk geometry on a directional or thematic view. The construction (a stylised bullish version):
 
 ```
 Buy   2× SPY 580 calls,  60 DTE
@@ -155,7 +149,7 @@ The structure has multiple sources of edge:
 2. **Volatility skew favours the trader** if the short legs are at higher strikes than the long legs (typical bullish setup) — short strikes carry richer IV.
 3. **Convexity preserved** because the long legs are longer-dated; if SPY rips above 590, the long calls re-asymmetrise the position.
 
-The trade is a *positive-theta, positive-skew, defined-risk* structure — exactly the geometric profile the ITPM philosophy points to. It is not the only such structure, but it illustrates the principle: **engineer the asymmetry first, choose the underlying second**.
+The trade is a *positive-theta, positive-skew, defined-risk* structure — exactly the geometric profile the asymmetry principle points to. It is not the only such structure, but it illustrates the principle: **engineer the asymmetry first, choose the underlying second**.
 
 The trade fails if SPY moves violently down (long calls expire worthless, short calls expire worthless, total loss = debit) or moves violently up beyond the long strikes (long calls don't keep pace with the short losses). Both failure modes are *bounded* — the max loss is the premium paid — and the geometry is right-tailed within the bounded region.
 
@@ -179,7 +173,7 @@ Hit rate required to break even (ignoring costs): 25%. So even if the trader is 
 E[V] = 0.35 × $11.25 − 0.65 × $3.75 = $3.94 − $2.44 = +$1.50 per spread
 ```
 
-A 1.5/3.75 = 40% expected return per trade *per turn of capital*, before [[fees-and-friction|costs]]. A trader who can run 30 such trades per year at 35% hit rate compounds materially even before accounting for size scaling. This is the geometric profile that makes the [[itpm-framework|ITPM-style book]] work — not a high hit rate, but a high payoff per win and a bounded loss per loss.
+A 1.5/3.75 = 40% expected return per trade *per turn of capital*, before [[fees-and-friction|costs]]. A trader who can run 30 such trades per year at 35% hit rate compounds materially even before accounting for size scaling. This is the geometric profile that makes a positive-skew book work — not a high hit rate, but a high payoff per win and a bounded loss per loss.
 
 ## Sizing, Convexity, and Compounding
 
@@ -196,7 +190,7 @@ Before putting on any "asymmetric" trade, confirm:
 | Check | Pass condition |
 |-------|----------------|
 | Positive expectancy | E[V] > 0 *after* [[fees-and-friction\|costs]], not just gross |
-| Genuine asymmetry | Post-cost R/R ≥ ~2:1 (ITPM enforces 3:1 on directional) |
+| Genuine asymmetry | Post-cost R/R ≥ ~2:1 (many desks enforce 3:1 on directional) |
 | Right-tailed skew | Payoff distribution has a long right tail, not just defined risk |
 | Bounded loss | Max loss is known and survivable at the chosen size |
 | Repeatable generator | The setup, not the single outcome, has edge |
@@ -207,7 +201,7 @@ A trade that fails any row is not "asymmetric" in the operational sense, regardl
 
 ## Common Misapplications
 
-1. **Calling a 1.5:1 trade "asymmetric."** The threshold matters. Below 2:1, the asymmetry is weak enough that hit rate has to do most of the work. ITPM enforces 3:1 minimum on directional trades for this reason.
+1. **Calling a 1.5:1 trade "asymmetric."** The threshold matters. Below 2:1, the asymmetry is weak enough that hit rate has to do most of the work. Many professional frameworks enforce a 3:1 minimum on directional trades for this reason.
 2. **Confusing defined-risk with asymmetric.** An iron condor is defined-risk but typically *negatively* skewed (small premium collected, large width loss). Defined-risk is necessary but not sufficient.
 3. **Ignoring [[fees-and-friction|costs]].** A 3:1 trade that costs 30 bps round-trip is still 3:1 in the prospectus and approximately 2:1 in reality. The professional translates the in-prospectus geometry into the post-cost geometry before sizing.
 4. **Chasing convexity at the expense of expectancy.** Far-OTM options have very high R/R but very low hit rates and very high [[fees-and-friction|spreads]]. The expected value is often negative even though the R/R looks great. Edge is positive expectancy *and* positive skew, not just one of them.
@@ -215,16 +209,16 @@ A trade that fails any row is not "asymmetric" in the operational sense, regardl
 6. **Forgetting the strategy generator behind the win.** A single +800% lottery-ticket win does not validate the strategy if the setup that produced it is not repeatable. Asymmetric R/R is a property of the *generating process*, not of any single trade outcome.
 7. **Selling skew to fund the structure and then forgetting it's there.** Risk reversals and ratio structures often involve a short leg that is small in premium but large in convex tail. The trader who treats the short leg as "free" learns otherwise in the next stress event.
 
-## Asymmetric R/R in the ITPM Frame
+## Operationalising the Principle
 
-Asymmetric risk/reward is the second of the five [[itpm-five-principles|ITPM principles]] and the second tenet of the [[itpm-trading-philosophy|ITPM philosophy]]. [[anton-kreil|Kreil]]'s formulation: *edge does not come from being right more often. It comes from being asymmetric.* The operational expression:
+The operational expression of the asymmetry principle in a professional book:
 
 - **Minimum 3:1 R/R** on directional discretionary trades
 - **Positive-skew bias** in the structures used (long debit > short credit by default)
 - **Long-vol overlay** required whenever short premium is used
 - **Hit-rate** treated as a downstream output, not a target
 
-The ITPM curriculum spends more time on the *adherence* skill (holding 3:1 trades through chop, refusing the 0.3:1 high-hit-rate setups) than on the idea-generation skill, on the theory that human psychology defaults to hit-rate fixation and that the professional posture has to be re-trained. The full operational layer — see [[itpm-framework]] and [[options-portfolio-construction]] — is the implementation of this re-training as a book-level discipline.
+The *adherence* skill (holding 3:1 trades through chop, refusing the 0.3:1 high-hit-rate setups) matters more than the idea-generation skill, because human psychology defaults to hit-rate fixation and the professional posture has to be re-trained. The full operational layer — see [[options-portfolio-construction]] — is the implementation of this re-training as a book-level discipline.
 
 ## Related
 
@@ -238,23 +232,12 @@ The ITPM curriculum spends more time on the *adherence* skill (holding 3:1 trade
 - [[the-theta-trap]] — the canonical negative-skew failure mode
 - [[long-vol-vs-short-vol]] — the regime-asymmetric framework that operationalises it
 - [[long-vol-overlay]] — the explicit positive-skew leg of a hedged book
-- [[itpm-trading-philosophy]] — central tenet articulation
-- [[itpm-framework]] — operational expression
-- [[itpm-five-principles]] — primary source
-- [[itpm-trade-construction-playbook]] — single-trade implementation
-- [[itpm-ratio-calendar-spread]] — canonical positive-skew structure
 - [[bull-call-spread]] / [[risk-reversal]] / [[diagonal-spread]] / [[ratio-spread]] — common expressions
 - [[capital-preservation]] — the first tenet, complementary to this one
 - [[risk-of-ruin]] — the failure mode positive skew protects against
-- [[anton-kreil]] / itpm — primary articulators
 
 ## Sources
 
-- [[itpm-trading-philosophy]] — second tenet articulation
-- [[itpm-five-principles]] — primary source for the ITPM formulation
-- [[itpm-framework]] — operational expression
-- [[itpm-trade-construction-playbook]] — single-trade workflow
-- [[anton-kreil]] — primary articulator
 - Sheldon Natenberg, *Option Volatility and Pricing* (1994/2014) — canonical text on options structures and skew
 - Nassim Taleb, *Dynamic Hedging* (1997) and *Antifragile* (2012) — convex-payoff theory and the philosophical case for positive skew
 - Mark Spitznagel, *Safe Haven* (2021) — the long-vol / convex-payoff case for portfolio construction

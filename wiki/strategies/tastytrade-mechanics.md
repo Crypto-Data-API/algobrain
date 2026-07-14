@@ -247,7 +247,7 @@ The fair statement of the debate:
 - **Proponents** (Sosnoff, tastytrade research staff, many practitioners): argue that the rules-of-thumb are derived from extensive in-house backtesting, that the [[variance-risk-premium]] is a real and persistent edge, that the mechanical discipline is the strategy's central virtue, and that retail traders willing to follow the rules across many trades will harvest the premium over time.
 - **Critics** (academic researchers, hedged-overlay practitioners, post-mortems of [[ljm-preservation-and-growth]] / [[karen-the-supertrader]]): argue that the published backtests are calm-regime-biased, that survivor bias inflates the perceived edge, that the strategy's negative-skew tail is materially worse than published Sharpe ratios suggest, and that running the playbook unhedged is structurally indistinguishable from selling tail insurance with no reserves.
 
-Both positions contain substantial truth. The most defensible synthesis is that tastytrade mechanics are a *correct core* and an *insufficient stand-alone strategy* — they earn real income, but they need the [[long-vol-overlay|long-vol overlay]] to convert that income into a survivable, full-cycle compounding engine. This is the [[itpm-framework|ITPM-aligned]] reading and is consistent with how the most successful long-run options books actually run.
+Both positions contain substantial truth. The most defensible synthesis is that tastytrade mechanics are a *correct core* and an *insufficient stand-alone strategy* — they earn real income, but they need the [[long-vol-overlay|long-vol overlay]] to convert that income into a survivable, full-cycle compounding engine. This reading is consistent with how the most successful long-run options books actually run.
 
 ## Sources
 
@@ -274,7 +274,6 @@ Both positions contain substantial truth. The most defensible synthesis is that 
 - [[long-vol-vs-short-vol]] — the synthesis context
 - [[long-vol-overlay]] — the recommended hedge layer
 - [[options-portfolio-construction]] — book-level treatment
-- [[itpm-framework]] — the alternative methodology that nests this strategy as a core leg
 - [[volmageddon]] — Feb 2018 tail event
 - [[vix-august-2024-spike]] — Aug 2024 tail event
 - [[karen-the-supertrader]] — cautionary case study

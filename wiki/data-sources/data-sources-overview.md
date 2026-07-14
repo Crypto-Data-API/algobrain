@@ -29,11 +29,10 @@ This section lists the main providers by category, their strengths and weaknesse
 - CRSP/Compustat (academic licensing) or QuantConnect's bundled data
 - Refinitiv or FactSet for fundamentals point-in-time
 
-**I'm trading ITPM-style discretionary options (ratio calendar spreads):**
+**I'm trading discretionary options (ratio calendar spreads):**
 - A broker platform (TradeStation, IBKR, ThinkOrSwim) provides everything needed for live trading — chains, IV, greeks, P&L modeling
 - Free macro: FRED + ForexFactory. Free fundamentals: Yahoo Finance + Earnings Whispers + OpenInsider
 - Add ORATS ($199/mo) only if you want historical IV surfaces for research
-- See [[itpm-ratio-calendar-spread#Data Sources & Infrastructure]] for the complete stack
 
 **I'm building arbitrage strategies across multiple venues:**
 - [[exchange-api-reference]] for normalized API endpoints, WebSocket feeds, rate limits

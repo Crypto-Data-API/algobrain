@@ -102,17 +102,13 @@ The vol surface (IV across strikes and expirations) is a rich source of market i
 | **Long strangle** | Buy OTM call + buy OTM put | Unlimited | Both premiums | Cheaper than straddle, needs bigger move |
 | **Calendar spread** | Sell near-term, buy longer-term (same strike) | Variable | Net debit | Expect IV term structure to steepen |
 
-### The ITPM Approach
+### Options as Stock Replacement
 
-The ITPM methodology (as demonstrated by [[anton-kreil]]) uses options exclusively for a long-short-equity portfolio:
+Some professional discretionary approaches use options exclusively to express a long-short-equity portfolio:
 
 - Every position is a long call, long put, short call, or short put on individual stocks
 - Options provide natural leverage (3-4x) without margin debt
 - Portfolio is constructed as a balanced long/short book
-- Target statistics: 65/35 win-loss rate, 1.5+ R-score, 3+ Sharpe ratio
-- Average holding period: 20-25 days
-
-See [[itpm-meet-dieter-the-doubler]] for a documented case study achieving ~100% return in 6 months using this approach.
 
 ## The 0DTE Phenomenon
 
@@ -139,7 +135,6 @@ A trader buys a BTC $60,000 call for $2,000 premium expiring in 30 days. If BTC 
 
 ## Sources
 
-- [[itpm-meet-dieter-the-doubler]] — ITPM case study demonstrating options-only portfolio management
 - [[book-options-futures-other-derivatives]] — Hull's canonical options textbook
 - [CBOE — The State of the Options Industry / SPX 0DTE share](https://www.cboe.com/insights/posts/spx-0-dte-options-jump-to-record-62-share-in-august/) — 0DTE volume statistics. Verified via WebSearch, 2026-06-11
 

@@ -15,7 +15,7 @@ related: ["[[futures-overview]]", "[[options-overview]]", "[[derivatives]]", "[[
 
 # CME Group
 
-**CME Group** is the world's largest financial [[derivatives]] exchange, operating four major exchanges under a single holding company: the **Chicago Mercantile Exchange** (CME), the **Chicago Board of Trade** (CBOT), the **New York Mercantile Exchange** (NYMEX), and **COMEX**. Together these exchanges handle billions of contracts annually across asset classes including equity indices, [[interest-rates]], energy, metals, agriculture, [[forex]], and [[crypto]] [[futures-overview|futures]]. CME Group is the central venue for global futures trading and the primary market for [[order-flow]] analysis practitioners. Referenced in ITPM content as a core venue for professional derivatives trading.
+**CME Group** is the world's largest financial [[derivatives]] exchange, operating four major exchanges under a single holding company: the **Chicago Mercantile Exchange** (CME), the **Chicago Board of Trade** (CBOT), the **New York Mercantile Exchange** (NYMEX), and **COMEX**. Together these exchanges handle billions of contracts annually across asset classes including equity indices, [[interest-rates]], energy, metals, agriculture, [[forex]], and [[crypto]] [[futures-overview|futures]]. CME Group is the central venue for global futures trading and the primary market for [[order-flow]] analysis practitioners.
 
 ## History
 

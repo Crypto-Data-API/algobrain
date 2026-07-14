@@ -20,7 +20,7 @@ Catalysts can be broadly categorized by their nature and predictability. **Sched
 
 ## Catalyst Investing as a Strategy
 
-[[event-driven-trading|Catalyst investing]] focuses on taking positions ahead of identified catalysts with asymmetric risk/reward. The approach requires answering three questions: what is the catalyst, when will it occur, and what is the expected price impact? The ITPM framework treats catalysts as essential to trade construction -- a position without an identifiable catalyst is essentially a bet on valuation recognition, which can take indefinitely long. Catalysts compress the time horizon, which is important because carrying a position has costs (opportunity cost, margin, theta for options positions). Combining fundamental analysis (to identify mispricing) with catalyst identification (to determine when the mispricing will be resolved) is more powerful than either approach alone.
+[[event-driven-trading|Catalyst investing]] focuses on taking positions ahead of identified catalysts with asymmetric risk/reward. The approach requires answering three questions: what is the catalyst, when will it occur, and what is the expected price impact? Professional trade construction treats catalysts as essential -- a position without an identifiable catalyst is essentially a bet on valuation recognition, which can take indefinitely long. Catalysts compress the time horizon, which is important because carrying a position has costs (opportunity cost, margin, theta for options positions). Combining fundamental analysis (to identify mispricing) with catalyst identification (to determine when the mispricing will be resolved) is more powerful than either approach alone.
 
 ## Distinguishing Catalysts from Noise
 
@@ -33,5 +33,4 @@ Not every piece of news is a genuine catalyst. A catalyst must be material enoug
 ## Sources
 
 - Anson, A., Fabozzi, F. J., and Jones, F. J., *The Handbook of Traditional and Alternative Investment Vehicles* — coverage of event-driven and catalyst-based strategies.
-- Moerman, G. (ITPM, Institute of Trading and Portfolio Management) — catalyst-driven trade construction framework.
 - Pedersen, L. H., *Efficiently Inefficient* (Princeton, 2015) — event-driven and merger-arbitrage chapters on how catalysts resolve mispricing.

@@ -74,7 +74,6 @@ August 5 2024 reinforced the post-2018 evolution of the vol-book structure:
 
 - **Naked short-vol books** -- particularly retail strangle accounts -- took the maximum-asymmetry loss again, six and a half years after [[volmageddon]] supposedly taught the lesson. The lesson is recurring because the population of short-vol participants turns over every cycle.
 - **Defined-risk short-vol structures** ([[iron-condor|iron condors]], put-spread sales) bounded losses to the wing distance. They still lost, but losses were arithmetic, not geometric.
-- **Short-vol with explicit long-vol overlay.** The [[itpm-framework]] / institutional configuration sailed through with low-single-digit net drawdowns. The overlay's [[vega]] gain (front-month VIX calls trebled or more; 25-delta SPX puts up 5-10x) more than covered the strangle loss.
 - **Pure long-vol books.** Aug 5 2024 was a real but not banner monetization. Universa and similar mandates likely added several years of expected return in a session, but the move did not match the magnitude or duration of [[covid-crash|March 2020]] or [[gfc|2008]].
 
 The episode also accelerated regulatory and structural attention to **VIX-index quoting in stress**. Several proposals to amend the VIX calculation to exclude clearly stale wings, or to publish a parallel "tradable VIX" reference, gained traction at CBOE in late 2024 and 2025.

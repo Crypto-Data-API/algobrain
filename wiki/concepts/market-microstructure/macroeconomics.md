@@ -187,7 +187,7 @@ For data sources, see [[macro-data-sources]] — covering [[fred|FRED]], Bloombe
 Several trading methodologies are built directly on macro analysis:
 
 - **[[global-macro]]** — The broadest approach: taking positions across [[forex]], [[bond-market|bonds]], equities, and [[commodities]] based on macro trends. Practitioners include [[george-soros]], [[ray-dalio]], [[stanley-druckenmiller]], and [[paul-tudor-jones]].
-- **[[top-down-macro-analysis]]** — The ITPM framework: global macro → sectors → stock selection → technical timing. Start with the macro regime, filter to favored sectors, then pick individual names.
+- **[[top-down-macro-analysis]]** — The institutional framework: global macro → sectors → stock selection → technical timing. Start with the macro regime, filter to favored sectors, then pick individual names.
 - **[[sector-rotation]]** — Rotating equity exposure based on the [[business-cycle]] phase. Early expansion favors technology and consumer discretionary; late expansion favors energy and materials; contraction favors utilities and staples.
 - **[[carry-trade|Carry trades]]** — Exploiting [[interest-rates|interest rate]] differentials between currencies, which are directly determined by relative [[monetary-policy]].
 - **[[risk-parity]]** — Balancing risk across asset classes that respond to different macro environments (growth, inflation, both, neither).
@@ -238,5 +238,5 @@ All macroeconomics sub-pages in the wiki:
 
 ## Sources
 
-- [[top-down-macro-analysis]] — ITPM framework for macro-driven trading
+- [[top-down-macro-analysis]] — framework for macro-driven trading
 - [[macro-data-sources]] — Comprehensive guide to macro data providers

@@ -4,19 +4,19 @@ type: concept
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, risk-management, portfolio-theory, itpm]
+tags: [options, risk-management, portfolio-theory]
 aliases: ["Expiry Laddering", "Expiration Distribution", "Laddered Expirations"]
-related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[pin-risk]]", "[[gamma-scalping]]", "[[calendar-spread]]", "[[itpm-ratio-calendar-spread]]"]
+related: ["[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[pin-risk]]", "[[gamma-scalping]]", "[[calendar-spread]]"]
 domain: [risk-management]
 prerequisites: ["[[options-greeks]]", "[[theta-decay]]"]
 difficulty: intermediate
 ---
 
-Expiration laddering is the practice of distributing an [[options]] book's expirations across multiple weeks or months — rather than concentrating positions in a single expiry — in order to avoid [[gamma]] cliffs near expiration, smooth daily [[theta]] income, and reduce [[assignment-risk|assignment-clustering risk]]. It is a portfolio construction technique heavily emphasized by the Institute of Trading and Portfolio Management and a standard practice among professional premium sellers (Source: [[itpm-god-like-trader-status]]). The principle is simple: a book whose risk all rolls off the same Friday is exposed to a single, concentrated event; a book that breathes through expirations week after week behaves more like an annuity.
+Expiration laddering is the practice of distributing an [[options]] book's expirations across multiple weeks or months — rather than concentrating positions in a single expiry — in order to avoid [[gamma]] cliffs near expiration, smooth daily [[theta]] income, and reduce [[assignment-risk|assignment-clustering risk]]. It is a standard portfolio construction practice among professional premium sellers. The principle is simple: a book whose risk all rolls off the same Friday is exposed to a single, concentrated event; a book that breathes through expirations week after week behaves more like an annuity.
 
 ## The Problem That Laddering Solves
 
-A premium-selling book — short [[straddle-strangle|strangles]], [[iron-condor|iron condors]], short puts, or [[itpm-ratio-calendar-spread|ratio calendar spreads]] — looks placid for most of its life. The Greeks change slowly, the daily P&L is small, and the trader collects steady [[theta]]. Then, in the final week of any given expiration, three things happen at once:
+A premium-selling book — short [[straddle-strangle|strangles]], [[iron-condor|iron condors]], short puts, or ratio calendar spreads — looks placid for most of its life. The Greeks change slowly, the daily P&L is small, and the trader collects steady [[theta]]. Then, in the final week of any given expiration, three things happen at once:
 
 1. **[[Gamma]] explodes** — the rate of change of [[delta]] grows hyperbolically as time-to-expiry approaches zero
 2. **Liquidity thins** — bid/ask spreads widen as market makers price in pin risk and assignment risk
@@ -100,9 +100,9 @@ One position per weekly expiration for 6 weeks. Useful for indices with deep wee
 
 Equal weight at 30, 60, 90, 120 DTE. Easier to manage but loses the sweet spot of [[theta]] decay (which lives in the 21-45 DTE band). Better suited to longer-dated [[ratio-spread|ratio calendars]] or [[diagonal-spread|diagonals]] than to pure premium-selling structures.
 
-### Hybrid: ITPM Approach
+### Hybrid: Long/Short Ratio-Calendar Ladder
 
-The itpm curriculum teaches a ladder of 10 positions spread across 3-6 monthly expirations with [[itpm-ratio-calendar-spread|ratio calendar spreads]] as the building block. The structure layers expiration laddering on top of long/short equity selection: every long-leaning position has a short-leaning counterpart on a different rung, balancing both directional and time exposure. See [[itpm-trade-construction-playbook]] (Source: [[itpm-god-like-trader-status]]).
+Another approach spreads roughly 10 positions across 3-6 monthly expirations with ratio calendar spreads as the building block. The structure layers expiration laddering on top of long/short equity selection: every long-leaning position has a short-leaning counterpart on a different rung, balancing both directional and time exposure.
 
 ## Theta Smoothing
 
@@ -152,7 +152,7 @@ This is usually desirable because it concentrates [[implied-volatility|IV]] sens
 
 A common adjustment is to *underweight* the back rung in volatile environments — instead of 1/6, hold 1/8 in the 45 DTE rung and 1/4 in the 14 DTE rung. This trades smoother [[vega]] for slightly higher gamma exposure. See [[vega-budgeting]].
 
-For [[itpm-ratio-calendar-spread|ratio calendar spreads]], the structure already builds in vega imbalance (long back-month vega, short front-month vega), so the ladder is constructed primarily over the long-leg expirations rather than the short-leg ones.
+For ratio calendar spreads, the structure already builds in vega imbalance (long back-month vega, short front-month vega), so the ladder is constructed primarily over the long-leg expirations rather than the short-leg ones.
 
 ## Roll Cadence
 
@@ -160,7 +160,7 @@ The mechanics of *rolling* the front rung determine whether a ladder works in pr
 
 ### 1. Time-Based: Close at 21 DTE
 
-The classic tastytrade / itpm rule. At 21 DTE, [[gamma]] starts to accelerate sharply but is not yet in the dangerous zone. Closing here:
+The classic tastytrade rule. At 21 DTE, [[gamma]] starts to accelerate sharply but is not yet in the dangerous zone. Closing here:
 
 - Captures the bulk of the [[theta]] decay (the steepest part of the curve up to that point)
 - Avoids the gamma cliff
@@ -233,7 +233,7 @@ The three common ladder constructions trade off theta richness against managemen
 | **Weekly ladder** | 6 rungs × ~7 DTE apart (7-45 DTE) | Highest annualised | High — rungs hit the gamma zone fast | Higher (short rungs near cliff sooner) | Deep weekly markets ([[spx]], spy, qqq) |
 | **Standard 6-rung (monthly cycle)** | 6 rungs, ~7 days apart, slid weekly | High (lives in 21-45 DTE band) | Moderate — one roll per week | Balanced | The default premium-selling ladder |
 | **Monthly ladder** | 30/60/90/120 DTE | Lower (misses the 21-45 DTE sweet spot) | Low | Lowest | [[diagonal-spread\|Diagonals]], [[ratio-spread\|ratio calendars]] |
-| **ITPM hybrid** | 10 positions across 3-6 monthly expiries | Moderate, balanced by long/short pairing | Moderate-high | Balanced by construction | [[itpm-ratio-calendar-spread\|Ratio-calendar]] books (Source: [[itpm-god-like-trader-status]]) |
+| **Long/short hybrid** | 10 positions across 3-6 monthly expiries | Moderate, balanced by long/short pairing | Moderate-high | Balanced by construction | Ratio-calendar books |
 
 ### Single-Expiry vs Laddered: The Core Trade-Off
 
@@ -265,7 +265,7 @@ If a trader buys [[long-call|long calls]] expecting a stock to rally over the ne
 
 If the trade is built around an earnings release, [[fomc]] decision, [[fda]] announcement, or [[sec-decision]], the expiration should be picked relative to the event — typically 1-2 weeks past the event date for short premium, exactly the event week for [[straddle-strangle|long straddles]]. Laddering across weeks dilutes the event capture.
 
-### 3. Single-Position [[itpm-ratio-calendar-spread|Calendar Spreads]]
+### 3. Single-Position Calendar Spreads
 
 A standalone calendar spread already carries an internal expiration structure (short near, long far). Laddering across multiple calendar spreads is fine; trying to ladder *within* one calendar makes no sense.
 
@@ -275,7 +275,7 @@ Long [[strangle|strangles]] or [[straddle|straddles]] held for [[volatility]] ex
 
 ### 5. Capital-Constrained Accounts
 
-A 6-rung ladder requires 6x the capital of a single position to maintain the same per-position size. Accounts under ~$25,000 generally cannot run a meaningful ladder with [[itpm-ratio-calendar-spread|ratio calendars]] or [[iron-condor|iron condors]]; they should run a single rung and rotate.
+A 6-rung ladder requires 6x the capital of a single position to maintain the same per-position size. Accounts under ~$25,000 generally cannot run a meaningful ladder with ratio calendars or [[iron-condor|iron condors]]; they should run a single rung and rotate.
 
 ## Common Mistakes
 
@@ -330,8 +330,6 @@ The minimum useful view shows: each expiration on the x-axis, total position the
 - [[gamma-scalping]] — the opposite practice (deliberately taking on gamma)
 - [[theta-decay]] — the decay curve that laddering smooths
 - [[calendar-spread]] — the simplest two-rung ladder
-- [[itpm-ratio-calendar-spread]] — the building block of ITPM-style laddered books
-- [[itpm-trade-construction-playbook]] — full ITPM portfolio construction methodology
 - [[trade-repair-and-rolling]] — how to handle rungs that move against the book
 - [[zero-dte-options]] — the danger zone laddering is designed to avoid holding into
 - [[iron-condor]] — common structure laddered across expirations
@@ -343,7 +341,5 @@ The minimum useful view shows: each expiration on the x-axis, total position the
 
 ## Sources
 
-- [[itpm-god-like-trader-status]] — the itpm portfolio construction approach with staggered expirations across 10 positions
-- [[itpm-master-compounding]] — credit-collection cadence and roll discipline
 - [[tastytrade-mechanics-research]] — empirical evidence for 21 DTE close and 50% profit-taking rules on short premium
 - [[book-option-volatility-and-pricing]] — Natenberg's treatment of gamma and theta curves near expiration

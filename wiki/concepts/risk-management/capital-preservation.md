@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [risk-management, position-sizing, drawdown, itpm, behavioral-finance, portfolio-theory]
+tags: [risk-management, position-sizing, drawdown, behavioral-finance, portfolio-theory]
 aliases: ["Capital Preservation", "Preservation of Capital", "Survival First", "Stay in the Chair"]
 domain: [risk-management, portfolio-theory]
 prerequisites: ["[[risk-of-ruin]]", "[[position-sizing]]", "[[max-drawdown]]"]
@@ -18,16 +18,13 @@ related:
   - "[[drawdown-management]]"
   - "[[kelly-criterion]]"
   - "[[position-sizing]]"
-  - "[[itpm-trading-philosophy]]"
-  - "[[itpm-framework]]"
-  - "[[anton-kreil]]"
   - "[[options-portfolio-construction]]"
   - "[[long-vol-vs-short-vol]]"
   - "[[kill-criteria]]"
   - "[[risk-management]]"
 ---
 
-Capital preservation is the discipline of structuring a trading book so that *survival* — the ability to keep trading next year, next decade, through the next regime — outranks return generation as the primary objective. It is the central tenet of the [[itpm-trading-philosophy|ITPM trading philosophy]] and a near-universal characteristic of long-careered professional traders. The proposition is mechanical, not aesthetic: returns compound geometrically, drawdowns destroy that compounding asymmetrically, and a trader who has been forced out of the chair (by ruin, by margin call, by psychological collapse) cannot benefit from any future edge regardless of how good it is. Preservation is therefore not a defensive posture *against* return; it is the precondition for return to exist at all.
+Capital preservation is the discipline of structuring a trading book so that *survival* — the ability to keep trading next year, next decade, through the next regime — outranks return generation as the primary objective. It is a near-universal characteristic of long-careered professional traders. The proposition is mechanical, not aesthetic: returns compound geometrically, drawdowns destroy that compounding asymmetrically, and a trader who has been forced out of the chair (by ruin, by margin call, by psychological collapse) cannot benefit from any future edge regardless of how good it is. Preservation is therefore not a defensive posture *against* return; it is the precondition for return to exist at all.
 
 ## Why Preservation Outranks Return
 
@@ -75,7 +72,7 @@ The last row is the whole argument in one line: a strategy can have a *positive 
 
 ## Operational Mechanics
 
-Capital preservation is not an attitude. It is a stack of pre-committed mechanical rules that fire without discretion. The standard ITPM-aligned set:
+Capital preservation is not an attitude. It is a stack of pre-committed mechanical rules that fire without discretion. The standard professional set:
 
 ### 1. Per-trade max loss
 
@@ -141,11 +138,10 @@ Each layer is mechanical and fires without discretion — the entire design goal
 
 ## How Professionals Operationalise It
 
-The list above is mechanical; the *practice* requires infrastructure. ITPM-aligned and bulge-bracket-trained traders operationalise capital preservation through:
+The list above is mechanical; the *practice* requires infrastructure. Desk-trained professionals operationalise capital preservation through:
 
-- **Daily Greeks snapshot**: a CSV or screenshot of book-level delta, gamma, vega, theta, beta-weighted exposure, taken before the open. The snapshot is the input to the day's decisions; trades that would push any Greek beyond its limit are rejected before they are placed. See [[itpm-framework]].
 - **Pre-market action list**: the trades for the day are written down before the open, including roll points, stop-out actions, and add levels. The list is closed once the bell rings; no new trades are added intra-day except in pre-defined slots.
-- **Weekly thesis review**: every position is re-justified against its original thesis. Positions whose thesis has been invalidated are exited even if the price has not yet moved enough to trigger the stop. This is the [[itpm-trade-construction-playbook|ITPM]] "exit on thesis invalidation, not on price" rule.
+- **Weekly thesis review**: every position is re-justified against its original thesis. Positions whose thesis has been invalidated are exited even if the price has not yet moved enough to trigger the stop. This is the "exit on thesis invalidation, not on price" rule.
 - **Monthly book rebalance**: gross exposure, sector concentration, single-name concentration, and overlay sizing are checked against limits and rebalanced. Drift is the silent killer of preserved books.
 - **Quarterly strategy attribution**: P&L decomposed into edge, fees, slippage, and noise. Strategies whose realised edge is materially below backtest are flagged for review. See [[fees-and-friction]].
 
@@ -167,11 +163,11 @@ The point is asymmetric: the costs of preservation are paid every day (in forego
 6. **Removing hedges in calm regimes because they "cost money."** Hedges are the rent paid to stay in business. The traders who survive 2008, 2020, 2024-style events are the ones who refused to cancel the rent in 2007, 2019, 2023.
 7. **Mistaking a single regime's success for skill.** A trader who has only seen one regime cannot distinguish luck from edge, and is structurally over-confident about their preservation discipline. The test is the next regime, not this one.
 
-## Capital Preservation in the ITPM Frame
+## Preservation as the First Principle
 
-Capital preservation is the first of the five [[itpm-five-principles|ITPM principles]] and the first tenet of the [[itpm-trading-philosophy|ITPM philosophy]]. [[anton-kreil|Anton Kreil]]'s formulation is that the first job of any book is *to still be there next year*, and that this is the principle most violated by retail traders. The [[professional-vs-retail-mindset|professional/retail divergence]] starts here: professionals size for survival and accept lower hit rates and lower per-trade returns in exchange; retail traders size for hit-rate and per-trade return and produce higher [[risk-of-ruin|ruin probability]] for the same nominal edge.
+Capital preservation is the first principle of professional trading: the first job of any book is *to still be there next year*, and this is the principle most violated by retail traders. The [[professional-vs-retail-mindset|professional/retail divergence]] starts here: professionals size for survival and accept lower hit rates and lower per-trade returns in exchange; retail traders size for hit-rate and per-trade return and produce higher [[risk-of-ruin|ruin probability]] for the same nominal edge.
 
-The ITPM operational layer ([[itpm-framework]], [[options-portfolio-construction]]) is the implementation of the principle: per-trade and book-level loss caps, the long-vol overlay, the daily Greeks check, the written kill criteria. Each is a mechanical expression of "still be there next year." Without the philosophy underneath, the rules are arbitrary and get abandoned in the first stress event. With the philosophy, the rules are obvious and get held.
+The operational layer ([[options-portfolio-construction]]) is the implementation of the principle: per-trade and book-level loss caps, the long-vol overlay, the daily Greeks check, the written kill criteria. Each is a mechanical expression of "still be there next year." Without the philosophy underneath, the rules are arbitrary and get abandoned in the first stress event. With the philosophy, the rules are obvious and get held.
 
 ## Related
 
@@ -184,20 +180,12 @@ The ITPM operational layer ([[itpm-framework]], [[options-portfolio-construction
 - [[options-portfolio-construction]] — the book-level implementation
 - [[long-vol-vs-short-vol]] — the canonical preserving construction for options books
 - [[long-vol-overlay]] — the explicit hedge layer
-- [[itpm-trading-philosophy]] — the philosophical context
-- [[itpm-framework]] — the operational expression
-- [[itpm-five-principles]] — the source articulation
-- [[anton-kreil]] / itpm — primary articulators
 - [[kill-criteria]] / [[when-to-retire-a-strategy]] — the strategic-level expression
 - [[turtle-traders]] — the classical mechanical-rules forerunner
 - [[risk-management]]
 
 ## Sources
 
-- [[itpm-trading-philosophy]] — central tenet articulation
-- [[itpm-five-principles]] — primary source for the ITPM formulation
-- [[itpm-framework]] — operational expression
-- [[anton-kreil]] — primary articulator across public corpus
 - Ralph Vince, *The Mathematics of Money Management* (1992) — formal RoR and optimal-f framework
 - Edward Thorp, *The Kelly Criterion in Blackjack, Sports Betting, and the Stock Market* (1997) — fractional-Kelly rationale
 - Nassim Taleb, *The Black Swan* (2007) and *Antifragile* (2012) — convex-loss critique and survival-first framing

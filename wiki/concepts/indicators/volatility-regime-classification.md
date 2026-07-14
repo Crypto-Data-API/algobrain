@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-07-13
 status: excellent
-tags: [options, volatility, indicators, itpm, regime]
+tags: [options, volatility, indicators, regime]
 aliases: ["Vol Regime", "Volatility Regimes", "Vol Environment Classification"]
 related: ["[[iv-rank-and-iv-percentile]]", "[[volatility-cone]]", "[[term-structure]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[vix]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[long-vol-vs-short-vol]]", "[[options-portfolio-construction]]", "[[crypto-market-regime-taxonomy]]", "[[technical-structural-regime]]", "[[cryptodataapi]]"]
 domain: [volatility, indicators]
@@ -25,7 +25,7 @@ Options strategies are not regime-symmetric. Each posture has a regime where it 
 
 Without classification, the trader applies the wrong tool. A short-premium book run continuously from *Calm* through to *Stressed* gives back years of VRP harvest in a single drawdown. A long-vol hedge run continuously through extended *Calm* periods bleeds budget faster than the eventual payoff replenishes it. Regime classification is the simple discipline of *changing posture before posture changes you.*
 
-The framework is central to the [[itpm-playbook|ITPM-style]] approach to options portfolio construction: vol regime determines [[vega-budgeting|vega budget]], theta target, expiration ladder, and whether convexity is a buy or a sell.
+The framework is central to regime-aware options portfolio construction: vol regime determines [[vega-budgeting|vega budget]], theta target, expiration ladder, and whether convexity is a buy or a sell.
 
 ## Inputs to Classification
 
@@ -175,9 +175,9 @@ The asymmetry: *false signals are mostly cheap to act on* (you reduce size, miss
 - **Immediate.** Any one-day VIX move > 20%, any breach of VIX/VIX3M = 1.00, any [[high-yield-credit-spreads|HY OAS]] move > 25bps in one day. Do not wait for the weekly review.
 - **Pre-event.** Before known catalysts (FOMC, [[non-farm-payrolls|NFP]], [[cpi|CPI]], earnings season, elections), pre-define the regime threshold that would trigger an action and stage orders accordingly.
 
-## ITPM Integration
+## Portfolio Integration
 
-In an [[itpm-playbook|ITPM-style]] options portfolio, regime drives every dial:
+In a regime-aware options portfolio, regime drives every dial:
 
 ### Vega Budget
 
@@ -202,7 +202,7 @@ In *Calm/Normal*, the ladder can run out 30–60 DTE at the long end. In *Elevat
 
 ### Convexity Allocation
 
-A small persistent allocation to long convexity (long puts, [[vix-call|VIX calls]], [[ratio-backspread|put backspreads]]) is *cheap insurance in Calm/Normal* and *the only thing working in Stressed*. Most ITPM-style allocations run 50–200 bps annually on convexity overlay even in calm regimes — it is part of the cost of doing business as a short-premium operator.
+A small persistent allocation to long convexity (long puts, [[vix-call|VIX calls]], [[ratio-backspread|put backspreads]]) is *cheap insurance in Calm/Normal* and *the only thing working in Stressed*. Disciplined short-premium books typically run 50–200 bps annually on convexity overlay even in calm regimes — it is part of the cost of doing business as a short-premium operator.
 
 ## Worked Example
 
@@ -316,11 +316,10 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - [[volatility-risk-premium]] — alternative name for the variance risk premium this framework manages
 - [[market-regime]] — the broader regime concept this is a volatility-specific instance of
 - [[options-portfolio-construction]] — assembling a regime-aware book
-- [[itpm-playbook]] — broader methodology this fits into
 - [[move-index]] — bond-market vol companion to VIX
 - [[high-yield-credit-spreads]] — macro stress indicator
 - [[volmageddon]] — case study in what happens to undisciplined short-vol in regime change
 
 ## Sources
 
-This page synthesizes the regime-classification approach used in the [[itpm-playbook|ITPM]] short-volatility framework, tastytrade IV-rank methodology, and the academic literature on the [[variance-risk-premium]]. Specific operational thresholds reflect community practice rather than any single published reference; tune to your own historical analysis before deploying capital.
+This page synthesizes regime-classification approaches used by professional short-volatility practitioners, the tastytrade IV-rank methodology, and the academic literature on the [[variance-risk-premium]]. Specific operational thresholds reflect community practice rather than any single published reference; tune to your own historical analysis before deploying capital.

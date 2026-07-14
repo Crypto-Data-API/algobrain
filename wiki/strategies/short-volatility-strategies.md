@@ -20,7 +20,7 @@ crowding_risk: high
 expected_sharpe: 0.6
 expected_max_drawdown: 0.5
 breakeven_cost_bps: 25
-related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[vix-futures]]", "[[long-vol-overlay]]", "[[variance-risk-premium]]", "[[volatility-risk-premium]]", "[[volatility-regime-classification]]", "[[market-regime]]", "[[tom-sosnoff]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[xiv-velocity-shares]]", "[[itpm-framework]]"]
+related: ["[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[vix-futures]]", "[[long-vol-overlay]]", "[[variance-risk-premium]]", "[[volatility-risk-premium]]", "[[volatility-regime-classification]]", "[[market-regime]]", "[[tom-sosnoff]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[ljm-preservation-and-growth]]", "[[xiv-velocity-shares]]"]
 ---
 
 # Short Volatility Strategies
@@ -31,7 +31,7 @@ Short volatility strategies are options structures that are **net short premium*
 
 A book is "short volatility" when its options exposure is structurally short [[gamma]] and short [[vega]]. The defining empirical fact: **short-vol books make money most days and lose multiple years of P&L in a week** during vol shocks. Stand-alone, most short-vol strategies have **positive expected return** (5-12% per year on portfolio NAV) -- the harvest of the [[variance-risk-premium]] -- but **negative skew**: the loss distribution has a fat left tail with non-trivial probability of catastrophic loss in any given decade.
 
-The strategic case for short vol rests on the persistence of the [[variance-risk-premium]] (often called the [[volatility-risk-premium]]): implied vol on equity index options has averaged 1-3 vol points above subsequently realized vol, a statistically significant and economically meaningful premium that does not arbitrage away because the buyer side ([[pension-fund]] hedgers, structured-product issuers, retail crash-protection buyers) is structurally non-economic. The risk is that the same shocks that cause buyers to suddenly bid puts ([[volmageddon|Feb 2018]], [[vix-august-2024-spike|Aug 2024]], [[covid-crash|Mar 2020]]) cause short-vol books to lose 30-100% of NAV before they can react. The institutional discipline (see [[itpm-framework]]) is to run a short-vol core paired with a [[long-vol-overlay]].
+The strategic case for short vol rests on the persistence of the [[variance-risk-premium]] (often called the [[volatility-risk-premium]]): implied vol on equity index options has averaged 1-3 vol points above subsequently realized vol, a statistically significant and economically meaningful premium that does not arbitrage away because the buyer side ([[pension-fund]] hedgers, structured-product issuers, retail crash-protection buyers) is structurally non-economic. The risk is that the same shocks that cause buyers to suddenly bid puts ([[volmageddon|Feb 2018]], [[vix-august-2024-spike|Aug 2024]], [[covid-crash|Mar 2020]]) cause short-vol books to lose 30-100% of NAV before they can react. The institutional discipline is to run a short-vol core paired with a [[long-vol-overlay]].
 
 ## Edge source
 
@@ -157,7 +157,7 @@ Bank-issued notes that pay an above-market coupon in exchange for embedded short
 
 ### Calendar and diagonal short-vol ([[calendar-spread]] / [[diagonal-spread]])
 
-Short shorter-dated options vs long longer-dated, same strike. Net negative [[gamma]] near expiration but more capital-efficient than outright. Used by sophisticated traders to harvest term-structure VRP rather than level VRP. See [[itpm-ratio-calendar-spread]].
+Short shorter-dated options vs long longer-dated, same strike. Net negative [[gamma]] near expiration but more capital-efficient than outright. Used by sophisticated traders to harvest term-structure VRP rather than level VRP. See [[ratio-calendar-spread]].
 
 ### Jade lizards and ratio structures ([[jade-lizard]] / [[ratio-spread]])
 
@@ -328,7 +328,6 @@ Numerical retirement/pause conditions (see [[when-to-retire-a-strategy]]):
 - [[implied-volatility]] / [[realized-volatility]] -- the two measures whose gap is the edge.
 - [[volatility-regime-classification]] -- regime-conditional performance.
 - [[market-regime]] -- the broader regime context that gates the strategy.
-- [[itpm-framework]] -- institutional discipline overlay.
 - [[ergodicity]] -- the time-vs-ensemble-average problem.
 - [[edge-taxonomy]] -- edge categorization framework.
 - [[short-strangle]], [[iron-condor]], [[short-put-spread]], [[covered-calls]], [[cash-secured-puts]] -- canonical implementations.

@@ -30,7 +30,7 @@ However, theory and practice diverge significantly. Mean-variance optimization i
 - **Risk parity**: Allocate so that each asset contributes equally to total portfolio risk. Does not require return forecasts — only risk estimates. Popularized by [[ray-dalio]]'s [[all-weather-portfolio]]. Tends to overweight bonds and underweight equities relative to traditional allocations.
 - **Hierarchical Risk Parity (HRP)**: Developed by Marcos Lopez de Prado. Uses machine learning clustering to build a hierarchy of assets based on correlation structure, then allocates along the hierarchy. More stable than MVO because it does not require inverting the covariance matrix. Described in [[book-machine-learning-for-asset-managers|Machine Learning for Asset Managers]].
 - **Factor-based**: Allocate across risk factors (value, momentum, quality, low-volatility) rather than individual securities. Targets diversified exposure to compensated risk premia.
-- **Discretionary/conviction-weighted**: Size positions based on analyst conviction. Higher conviction = larger position. Used by most fundamental portfolio managers. The ITPM methodology falls here, emphasizing concentrated positions in high-conviction ideas with strict [[risk-management]] overlays.
+- **Discretionary/conviction-weighted**: Size positions based on analyst conviction. Higher conviction = larger position. Used by most fundamental portfolio managers, typically emphasizing concentrated positions in high-conviction ideas with strict [[risk-management]] overlays.
 
 **Constraints commonly applied**: maximum position size (e.g., 5% per stock), sector limits, liquidity requirements, turnover budgets, and tracking error limits relative to a benchmark.
 
@@ -60,7 +60,7 @@ A practical compromise many allocators use is the **Black-Litterman** model, whi
 ## How Practitioners Use It
 
 - **Top-down vs bottom-up.** Top-down construction sets asset-class and factor budgets first, then fills them; bottom-up sizes each idea on conviction and then checks the aggregate risk. Most real books blend the two.
-- **The conviction-to-weight map.** Discretionary managers (including the ITPM style) translate research conviction into [[position-sizing|position sizes]] but cap any single name and apply stop/risk overlays so that one bad call cannot sink the book.
+- **The conviction-to-weight map.** Discretionary managers translate research conviction into [[position-sizing|position sizes]] but cap any single name and apply stop/risk overlays so that one bad call cannot sink the book.
 - **Sleeves and overlays.** Large allocators split capital into sleeves (core beta, satellite alpha, hedges) and use derivative overlays (futures, options) to adjust net exposure cheaply without trading the underlying holdings.
 - **Tax and cost overlay.** In taxable accounts, harvesting losses and avoiding short-term gains is itself a construction decision; turnover budgets and threshold rebalancing keep implementation drag low.
 

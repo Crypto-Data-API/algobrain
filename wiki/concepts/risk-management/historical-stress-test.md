@@ -212,7 +212,6 @@ The cadence that ties these together: run the **scenario grid** ([[scenario-anal
 
 ## Sources
 
-- [[itpm-trade-construction-playbook]] — practitioner workflow embedding historical replay
 - [[options-portfolio-construction]] — book construction with historical replay
 - Hull, *Options, Futures, and Other Derivatives* — chapter on historical simulation in risk management
 - Jorion, *Value at Risk* (3rd ed.) — historical-simulation methodology

@@ -6,15 +6,13 @@ updated: 2026-06-21
 status: excellent
 tags: [risk-management, options, portfolio-theory, volatility, derivatives]
 aliases: ["Hedging Program Failure Modes", "Hedge Program Failures", "Why Hedging Programs Fail"]
-related: ["[[itpm-options-portfolio-management]]", "[[long-vol-overlay]]", "[[5-percent-otm-put-overlay]]", "[[delta-hedging]]", "[[vega-hedging]]", "[[correlation-breakdown]]", "[[volatility-trading]]", "[[volatility-risk-premium-decay]]", "[[failure-modes]]"]
+related: ["[[long-vol-overlay]]", "[[5-percent-otm-put-overlay]]", "[[delta-hedging]]", "[[vega-hedging]]", "[[correlation-breakdown]]", "[[volatility-trading]]", "[[volatility-risk-premium-decay]]", "[[failure-modes]]"]
 domain: [risk-management, options]
-prerequisites: ["[[options-greeks]]", "[[long-vol-overlay]]", "[[itpm-options-portfolio-management]]"]
+prerequisites: ["[[options-greeks]]", "[[long-vol-overlay]]"]
 difficulty: advanced
 ---
 
-Systematic hedging programs — the long-vol overlays, put-protection sleeves, collar programs, and tail-risk funds that sit beside long-equity books to limit drawdowns — fail in characteristic ways. This page catalogues those failure modes for the use of any trader running an [[itpm-options-portfolio-management|options-overlay book]] or evaluating an external hedge product. The failures are rarely about the hedge instrument being wrong in isolation; they are about the **interaction between the hedge, the book it protects, and the trader's behavior under sustained drag**.
-
-This page is referenced from [[itpm-options-portfolio-management]] as the catalogue of the most common reasons a properly-constructed long-vol overlay still fails to deliver protection when needed.
+Systematic hedging programs — the long-vol overlays, put-protection sleeves, collar programs, and tail-risk funds that sit beside long-equity books to limit drawdowns — fail in characteristic ways. This page catalogues those failure modes for the use of any trader running an options-overlay book or evaluating an external hedge product. The failures are rarely about the hedge instrument being wrong in isolation; they are about the **interaction between the hedge, the book it protects, and the trader's behavior under sustained drag**.
 
 ## Failure Modes at a Glance
 
@@ -41,7 +39,7 @@ A hedge program is, by construction, a negative-carry position: it pays out in t
 | Collar (long put / short call) | ~0% (self-financed) | Medium (capped upside cost) | Medium | Low |
 | Long bonds as equity hedge | Negative-to-positive carry | Regime-dependent (broke in 2022) | Low | Very high (correlation flip) |
 
-The table makes the central tension visible: the *cheaper* a hedge looks in carry terms (collars, long bonds), the more of its protection is paid for by a hidden risk — capped upside, or a correlation that breaks exactly when needed. The ITPM discipline (see [[itpm-framework]], [[itpm-options-portfolio-management]]) treats the drag line of a directly-negative-payoff put overlay as a *non-negotiable cost of doing business*, sized to a premium budget rather than a P&L expectation.
+The table makes the central tension visible: the *cheaper* a hedge looks in carry terms (collars, long bonds), the more of its protection is paid for by a hidden risk — capped upside, or a correlation that breaks exactly when needed. The professional discipline treats the drag line of a directly-negative-payoff put overlay as a *non-negotiable cost of doing business*, sized to a premium budget rather than a P&L expectation.
 
 ## Why Hedging Programs Fail
 
@@ -131,7 +129,7 @@ Multiple academic studies of external tail-risk funds find that the median subsc
 
 ## Mitigation Principles
 
-Five principles recurrently appear in the literature and the practitioner record (Spitznagel, Kreil, Taleb, Ang) as ways to make a hedge program survive the failure modes above:
+Five principles recurrently appear in the literature and the practitioner record (Spitznagel, Taleb, Ang) as ways to make a hedge program survive the failure modes above:
 
 ### 1. Rules-based, not discretionary
 
@@ -143,7 +141,7 @@ Rather than concentrating the hedge in a single expiration or single strike, spr
 
 ### 3. Accept negative carry as a cost of doing business
 
-The hedge premium is a cost line, not a P&L line. The book-level objective is risk-adjusted return after the hedge cost; the hedge sleeve itself should not be evaluated on standalone P&L. ITPM frames this explicitly: the long-vol overlay is non-negotiable and is sized to a premium budget, not a P&L expectation. See the discussion in [[itpm-options-portfolio-management#the-role-of-options-as-primary-vs-hedge-instruments]].
+The hedge premium is a cost line, not a P&L line. The book-level objective is risk-adjusted return after the hedge cost; the hedge sleeve itself should not be evaluated on standalone P&L. The long-vol overlay is non-negotiable and is sized to a premium budget, not a P&L expectation.
 
 ### 4. Avoid pro-cyclical re-hedging
 
@@ -151,7 +149,7 @@ Re-hedging rules that scale up the hedge when realised vol rises (i.e., buying m
 
 ### 5. Separate hedge book from alpha book
 
-The hedge book should have its own P&L attribution, its own kill criteria, and its own review cadence — separate from the long-only alpha book it protects. Mixing the two creates the temptation to evaluate the hedge as if it were an alpha source, which leads directly to failure mode 1 (abandonment due to drag). The book architecture in [[itpm-options-portfolio-management#the-options-specific-book-architecture]] enforces this separation.
+The hedge book should have its own P&L attribution, its own kill criteria, and its own review cadence — separate from the long-only alpha book it protects. Mixing the two creates the temptation to evaluate the hedge as if it were an alpha source, which leads directly to failure mode 1 (abandonment due to drag).
 
 ## Diagnostic: Symptom to Failure Mode to Fix
 
@@ -182,11 +180,10 @@ Before committing capital to a systematic hedge, confirm:
 
 ## How This Connects to the Rest of the Wiki
 
-Hedging-program failure is the negative image of good [[risk-management|risk management]]: every failure mode here is a place where a hedge that *looks* protective on paper fails to convert under stress. The page is the practitioner-facing complement to [[long-vol-overlay]] (the canonical structure), [[5-percent-otm-put-overlay]] (one rules-based implementation), and the book architecture in [[itpm-options-portfolio-management]], where hedging sits as one of four layers. The behavioral failure modes (1 and 5) connect to [[behavioral-finance-overview|behavioral finance]] and to the broader [[failure-modes|strategy-failure taxonomy]]; the structural ones (3 and 4) connect to [[correlation-breakdown]] and [[volatility-risk-premium-decay]]. For when a hedge program has decayed past usefulness, see [[when-to-retire-a-strategy]] — the same discipline that decides to retire an alpha strategy applies to retiring or restructuring a hedge sleeve. The structural alternative — building the *whole* portfolio so it is intrinsically tail-protected rather than bolting a hedge onto a fragile core — is the [[barbell-portfolio]].
+Hedging-program failure is the negative image of good [[risk-management|risk management]]: every failure mode here is a place where a hedge that *looks* protective on paper fails to convert under stress. The page is the practitioner-facing complement to [[long-vol-overlay]] (the canonical structure) and [[5-percent-otm-put-overlay]] (one rules-based implementation). The behavioral failure modes (1 and 5) connect to [[behavioral-finance-overview|behavioral finance]] and to the broader [[failure-modes|strategy-failure taxonomy]]; the structural ones (3 and 4) connect to [[correlation-breakdown]] and [[volatility-risk-premium-decay]]. For when a hedge program has decayed past usefulness, see [[when-to-retire-a-strategy]] — the same discipline that decides to retire an alpha strategy applies to retiring or restructuring a hedge sleeve. The structural alternative — building the *whole* portfolio so it is intrinsically tail-protected rather than bolting a hedge onto a fragile core — is the [[barbell-portfolio]].
 
 ## Related
 
-- [[itpm-options-portfolio-management]] — the parent framework where hedging fits as one of four book layers
 - [[long-vol-overlay]] — the canonical hedge structure
 - [[5-percent-otm-put-overlay]] — a specific rules-based implementation
 - [[delta-hedging]], [[vega-hedging]] — operational mechanics
@@ -206,5 +203,4 @@ Hedging-program failure is the negative image of good [[risk-management|risk man
 - Taleb, *Dynamic Hedging* (1997) — chapters on the operational failures of hedge programs.
 - Ang, *Asset Management* (2014) — chapters 8-10 on hedging cost and design.
 - AQR research papers on risk-parity drawdowns, 2022.
-- ITPM curriculum on long-vol overlays and book-level hedge architecture.
 - Academic studies of tail-risk fund subscriber returns (multiple, 2015-2024).

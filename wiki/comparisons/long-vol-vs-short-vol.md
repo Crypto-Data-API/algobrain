@@ -4,7 +4,7 @@ type: comparison
 created: 2026-05-05
 updated: 2026-06-20
 status: excellent
-tags: [options, volatility, comparison, strategy-types, itpm]
+tags: [options, volatility, comparison, strategy-types]
 aliases: ["Long Vol vs Short Vol", "Vol Buyer vs Vol Seller"]
 related: ["[[variance-risk-premium]]", "[[volatility-regime-classification]]", "[[tail-risk-hedging]]", "[[options-premium-selling]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[vix-august-2024-spike]]", "[[long-vol-overlay]]", "[[long-volatility-strategies]]", "[[short-volatility-strategies]]", "[[regime-matrix]]", "[[market-regime]]"]
 subjects: ["[[long-volatility-strategies]]", "[[short-volatility-strategies]]"]
@@ -132,7 +132,7 @@ This asymmetry is invisible in calm-regime backtests and is the single most impo
 
 ## The Synthesis: Short-Vol Core + Long-Vol Overlay
 
-The institutional answer to "long vol or short vol?" is **both, in deliberate proportion**. The [[itpm-framework|ITPM-style]] construction looks like this:
+The institutional answer to "long vol or short vol?" is **both, in deliberate proportion**. The canonical construction looks like this:
 
 - **Short-vol core (90-95% of vega budget).** Sell systematically priced premium where the [[variance-risk-premium]] is fattest -- index strangles, [[short-strangle]] sleeves, [[iron-condor]] sleeves, [[short-put-spread|put credit spreads]] in equities. The job of this book is to harvest the empirical 3-5% per year that implied vol prices over realized vol. See [[options-premium-selling]] and [[premium-selling-systematic]].
 - **Long-vol overlay (5-10% of capital, or ~10% of the vega budget).** A continuous ladder of long puts and/or VIX calls structured to cap the worst-case scenario. Sized so that during a 30%+ equity drawdown the overlay generates enough P&L to keep the combined book inside acceptable drawdown limits. See [[long-vol-overlay]] and [[vega-budgeting]].
@@ -213,7 +213,7 @@ The key empirical fact: the calendar weight of the four regimes over the last 30
 - You are systematically **harvesting [[variance-risk-premium]]** in size with [[portfolio-margin]] and a clear understanding of the [[ergodicity]] problem (most fail this test).
 - Note: nearly every fund that has run pure short vol at scale has eventually had a fund-ending event.
 
-**Blended is the answer for almost everyone else** -- particularly anyone running real capital across multiple cycles. See [[options-portfolio-construction]] and [[itpm-framework]].
+**Blended is the answer for almost everyone else** -- particularly anyone running real capital across multiple cycles. See [[options-portfolio-construction]].
 
 ## Quick-Reference Decision Table
 
@@ -268,7 +268,6 @@ The practical rule: **if you cannot describe the long-vol leg of your book, you 
 - [[deflated-sharpe-ratio]] -- statistical correction for in-sample short-vol Sharpe
 - [[short-strangle]] -- canonical short-vol structure
 - [[iron-condor]] -- defined-risk short-vol structure
-- [[itpm-framework]] -- the institutional approach combining both legs
 - [[long-volatility-strategies]] -- the full catalog of long-vol structures
 - [[short-volatility-strategies]] -- the full catalog of short-vol structures
 - [[regime-matrix]] -- the master strategy-regime map organized around this axis

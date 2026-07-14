@@ -23,7 +23,7 @@ breakeven_cost_bps: 50
 related: ["[[vix]]", "[[vix-futures]]", "[[vix-calls]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[options-concentration-risk]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[put-tree]]", "[[call-spread]]", "[[debit-spread]]", "[[implied-volatility]]", "[[vvix]]", "[[vega-budgeting]]", "[[options-selection-framework]]", "[[strike-selection]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[universa-investments]]", "[[contango]]", "[[backwardation]]", "[[sharpe-ratio]]"]
 ---
 
-A **VIX call spread** is a long-vol overlay structure: buy a near-the-money or modestly out-of-the-money [[vix-calls|VIX call]] and sell a higher-strike call against it for the same expiry, paying a small net debit in exchange for a defined-risk payoff if the VIX index spikes. The structure is the cheapest convex hedge widely used by [[options-concentration-risk|concentrated short-premium books]] and [[long-vol-vs-short-vol|short-vol portfolios]]: it caps the upside relative to a naked long call, but it also caps the cost — and the cost is what kills tail hedges over multi-year holding periods. It is the single most popular structure cited by the ITPM / institutional playbook as a [[long-vol-overlay|long-vol overlay]] on a short-strangle book.
+A **VIX call spread** is a long-vol overlay structure: buy a near-the-money or modestly out-of-the-money [[vix-calls|VIX call]] and sell a higher-strike call against it for the same expiry, paying a small net debit in exchange for a defined-risk payoff if the VIX index spikes. The structure is the cheapest convex hedge widely used by [[options-concentration-risk|concentrated short-premium books]] and [[long-vol-vs-short-vol|short-vol portfolios]]: it caps the upside relative to a naked long call, but it also caps the cost — and the cost is what kills tail hedges over multi-year holding periods. It is the single most popular structure cited in institutional playbooks as a [[long-vol-overlay|long-vol overlay]] on a short-strangle book.
 
 ## Edge Source
 
@@ -237,7 +237,6 @@ The VIX options market is liquid — listed open interest in front-month VIX cal
 - Cboe Global Markets, *VIX Options Methodology and Specifications*
 - Spitznagel, Mark. *Safe Haven: Investing for Financial Storms* (2021)
 - Bhansali, Vineer. *Tail Risk Hedging* (2014) — practitioner construction notes on VIX spreads
-- [[itpm-trade-construction-playbook]] — long-vol overlay sizing within a portfolio
 - US Joint CFTC/SEC Staff Report, *February 5, 2018 VIX Volatility Event*
 
 ## Related

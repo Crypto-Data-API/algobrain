@@ -80,9 +80,9 @@ Greeks.live is a crypto-options analytics platform built primarily on top of [[d
 
 The free tier is unusually generous compared to TradFi analogues — most retail crypto-options traders never need to upgrade. Pro is positioned for serious self-directed traders; institutional is for funds and desks.
 
-## How ITPM-Style Crypto Traders Use It
+## How Discretionary Crypto Options Traders Use It
 
-For traders applying an [[itpm-playbook|ITPM-style]] options playbook to crypto rather than equities, Greeks.live is effectively the workbench:
+For traders applying a professional options playbook to crypto rather than equities, Greeks.live is effectively the workbench:
 
 - **Variance risk premium harvesting:** BTC [[implied-volatility|IV]] structurally trades meaningfully above realized vol — typically a wider spread than SPX's VRP. Greeks.live makes it easy to monitor IV-vs-RV in real time and structure short-premium books (iron condors, strangles, ratio spreads) at favorable skew points. See [[variance-risk-premium]] and [[short-volatility-strategies]]
 - **Hedging crypto spot exposure:** Holders of [[bitcoin|BTC]] or [[ethereum|ETH]] spot use Greeks.live to size protective puts or put-spreads at quantified vega/theta cost; the position-builder shows the marginal cost of insurance under different vol regimes
@@ -121,14 +121,14 @@ For a crypto-only options trader, Greeks.live + Deribit's native UI + occasional
 - **Data quality on edge cases** — surface fitting in low-liquidity wings or near expiry can produce spurious skew readings
 - **Not a backtesting platform** — historical data exists, but the workflow is geared toward observation and execution, not systematic strategy research; serious quants still pull raw Deribit data via API or [[amberdata]]
 
-## Use Cases for ITPM
+## Key Use Cases
 
-For a trader applying [[itpm-playbook|ITPM]]-style methodology to crypto, Greeks.live is most useful for:
+For a trader applying a discretionary options methodology to crypto, Greeks.live is most useful for:
 
 1. **VRP capture on BTC and ETH** — BTC's [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] often runs 50-80% while realized vol sits 35-55%, a substantially fatter premium than [[vix|VIX]] vs S&P realized. Short-premium strategies ([[iron-condor|iron condors]], [[short-strangle|short strangles]], [[ratio-spread|ratio spreads]]) sized off Greeks.live's surface and Greek tools
 2. **Event hedging** — buying [[bitcoin-options|BTC]] or [[ethereum-options|ETH]] put-spreads ahead of [[bitcoin-halving|halvings]], protocol upgrades (Ethereum hard forks), CPI prints, or FOMC meetings, where IV typically rises into the event and crashes after; Greeks.live's surface replay makes it straightforward to see the historical event-vol pattern
 3. **Dealer-flow signal** — large block-trade prints often precede multi-day directional moves as dealers hedge their resulting exposure; the block tape is a leading indicator analogous to [[gamma-exposure|GEX]] in equities
-4. **Calendar and skew structures** — [[itpm-ratio-calendar-spread|ratio calendar spreads]] and skew trades (risk reversals) are easier to construct and monitor in Greeks.live than in Deribit's native UI
+4. **Calendar and skew structures** — ratio calendar spreads and skew trades (risk reversals) are easier to construct and monitor in Greeks.live than in Deribit's native UI
 5. **Cross-venue arb scouting** — comparing Greeks.live's Deribit IVs against [[cme|CME]] BTC options or [[binance]] options to find pricing discrepancies (occasional, but exploitable when they arise)
 
 ## Limitations to Note
@@ -165,7 +165,6 @@ These are reference cautions about how to interpret the platform's data, not all
 - [[amberdata]] — enterprise-grade multi-venue crypto data
 - [[coinglass]] — free crypto-derivatives dashboards
 - [[funding-rate]] — perp funding context Greeks.live displays alongside options data
-- [[itpm-playbook]] — ITPM methodology applied to options
 - [[short-volatility-strategies]] — strategies natural to build on Greeks.live's tooling
 
 ## Sources

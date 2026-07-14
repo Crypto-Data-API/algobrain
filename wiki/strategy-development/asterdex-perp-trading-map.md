@@ -17,7 +17,7 @@ A comprehensive strategy map for trading perpetual futures on [[asterdex|AsterDE
 
 The strategies that work on each platform overlap significantly — perps are perps. But the *way* you execute them, the *edge* you extract, and the *risks* you face are fundamentally different. This page covers AsterDEX-specific strategies first, then provides a head-to-head comparison.
 
-This is a *map*, not a strategy page. Each row below points to a strategy or concept page that documents the mechanism in full; this page indexes them, characterizes the AsterDEX-specific edge, and tells you how they combine and what kills them. For the systematic-vs-discretionary view of producing these trades, see [[itpm-trade-construction-playbook]]; for the cross-wiki view of where mispricings cluster, see [[arbitrage-opportunity-map]]; for the data plumbing, see [[exchange-api-reference]].
+This is a *map*, not a strategy page. Each row below points to a strategy or concept page that documents the mechanism in full; this page indexes them, characterizes the AsterDEX-specific edge, and tells you how they combine and what kills them. For the cross-wiki view of where mispricings cluster, see [[arbitrage-opportunity-map]]; for the data plumbing, see [[exchange-api-reference]].
 
 ---
 
@@ -572,7 +572,7 @@ The framework maps onto the [[edge-taxonomy]] directly: AsterDEX converts a *str
 
 ## Part 9: Worked Example — Building a Two-Strategy AsterDEX Book
 
-A concrete walk-through of the decision framework, in the style of [[itpm-trade-construction-playbook]] but for crypto perps:
+A concrete walk-through of the decision framework for crypto perps:
 
 1. **Regime read.** Funding is positive across BTC/ETH/SOL, VIX-equivalent (crypto vol) is low, USDF peg is 99.99%. Calm-bull regime per [[regime-matrix]]. Carry strategies are in favor.
 2. **Core allocation (60%): yield collateral carry (Strategy 9).** Deposit USDF, run delta-neutral funding arb on BTC and ETH. Collect funding (~18-24% APY) plus collateral yield (~4%). Edge is structural + capital efficiency.
@@ -599,7 +599,6 @@ This analysis synthesizes:
 - [[hyperliquid-perp-trading-map]] — companion transparent-book perp map
 - [[low-cap-crypto-trading-map]] — sibling map for Solana spot/memecoin meta
 - [[arbitrage-opportunity-map]] — wiki-wide synthesis of where mispricings cluster
-- [[itpm-trade-construction-playbook]] — discretionary trade-construction process
 - [[exchange-api-reference]] — endpoints/feeds for executing these strategies programmatically
 - [[edge-taxonomy]] · [[regime-matrix]] · [[strategy-correlation-matrix]] · [[failure-modes]]
 - [[asterdex]] · [[hyperliquid-vs-asterdex-vs-tiger-brokers]] · [[funding-rate-arbitrage]] · [[basis-trading]] · [[grid-trading]] · [[trend-following-cta]] · [[mean-reversion]] · [[pairs-trading]] · [[stop-hunting-and-liquidity-sweeps]] · [[delta-neutral]] · [[perpetual-futures]] · [[funding-rate]] · [[liquidation]]

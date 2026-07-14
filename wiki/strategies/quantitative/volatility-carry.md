@@ -359,7 +359,6 @@ Numerical thresholds at which the strategy should be paused or retired (see [[wh
 - [[options-portfolio-construction]]
 - [[options-stress-testing]]
 - [[crowding-risk]]
-- [[itpm-playbook]]
 - [[variance-swap]] — the cleanest (institutional, OTC) VRP-capture instrument
 - [[expiration-laddering]] — the portfolio-construction layer that makes carry survivable
 - [[volmageddon]] — the canonical short-vol blow-up event (Feb 5, 2018)

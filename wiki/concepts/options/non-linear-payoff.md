@@ -102,7 +102,7 @@ Inside [[options-risk-budgeting]], non-linearity is the reason every cap is mult
 
 3. **The tail is much fatter than parametric models suggest.** Linear VaR assumes Gaussian returns; real markets have [[fat-tails|fat tails]] and the second-order Greek loss is itself a function of squared moves. Combining the two — fat-tailed underlying with quadratic loss in moves — produces loss distributions where the 99th percentile is 5-10x the 95th percentile. See [[expected-shortfall]] for the relevant tail metric.
 
-4. **Long convexity is expensive but stabilizing.** Long convex sleeves (long puts, long [[vix|VIX]] calls) bleed in calm regimes and explode in stress. They are the only sleeves that *gain* from the non-linearity. A book with no long convexity has all-concave exposure, and its loss distribution has no left bound. The [[itpm-trade-construction-playbook|ITPM]] insight: "the cost of insurance is the price of staying in business" is a direct statement about non-linearity.
+4. **Long convexity is expensive but stabilizing.** Long convex sleeves (long puts, long [[vix|VIX]] calls) bleed in calm regimes and explode in stress. They are the only sleeves that *gain* from the non-linearity. A book with no long convexity has all-concave exposure, and its loss distribution has no left bound. The professional insight that "the cost of insurance is the price of staying in business" is a direct statement about non-linearity.
 
 5. **Re-pricing replaces sensitivity-based reporting in stress.** When the book is large or the market is volatile, Greek-based P&L estimates diverge from full re-pricing. Institutional desks run *full re-price* under each scenario cell — solving the option pricing function fresh at each stressed (S, σ, t) — rather than approximating with Greeks. The cost is computation; the benefit is accuracy in the tail.
 
@@ -241,4 +241,3 @@ The position has a *2D* P&L surface (spot × IV), not a 1D P&L curve. Risk repor
 - [[book-option-volatility-and-pricing]] — Natenberg on the practical reality of non-linear payoffs and why "max loss" numbers mislead
 - [[book-dynamic-hedging]] — Taleb's foundational treatment of non-linearity in options portfolios; convexity as the primary risk dimension
 - [[book-stochastic-volatility-modeling]] — Bergomi (2015) on the joint convexities (gamma, volga, vanna) under stochastic-vol pricing
-- [[itpm-trade-construction-playbook]] — ITPM curriculum on multi-dimensional sizing as a response to non-linearity
