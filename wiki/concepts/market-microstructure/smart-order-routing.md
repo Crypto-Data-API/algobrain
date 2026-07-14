@@ -2,14 +2,14 @@
 title: "Smart Order Routing"
 type: concept
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-07-14
 status: good
-tags: [market-microstructure, algorithmic-trading, order-types, stocks]
+tags: [market-microstructure, algorithmic-trading, order-types, stocks, crypto]
 aliases: ["smart order routing", "SOR", "smart router"]
 domain: [market-microstructure]
 difficulty: intermediate
 prerequisites: ["[[market-microstructure]]"]
-related: ["[[flash-crash-2010]]", "[[high-frequency-trading]]", "[[dark-pools]]", "[[order-types]]", "[[flash-crashes]]", "[[best-execution]]", "[[algorithmic-trading]]"]
+related: ["[[cross-venue-execution-crypto]]", "[[thin-market-execution]]", "[[flash-crash-2010]]", "[[high-frequency-trading]]", "[[dark-pools]]", "[[order-types]]", "[[flash-crashes]]", "[[best-execution]]", "[[algorithmic-trading]]"]
 ---
 
 Smart order routing (SOR) is the automated process of directing trade orders across multiple trading venues — stock exchanges, dark pools, alternative trading systems (ATSs), and electronic communication networks (ECNs) — to achieve the best available execution price. In fragmented modern markets where the same stock trades on 15+ venues simultaneously, SOR is essential for complying with best-execution obligations and minimizing market impact. SOR failures during stress are a contributing factor to [[flash-crashes|flash crashes]], as routers can fail to find liquidity when order books thin out across all venues simultaneously.
@@ -76,8 +76,16 @@ ML-based models that predict fill probability, optimize fee/rebate capture, and 
 ### Third Generation (2020s)
 Reinforcement learning-based routers that continuously optimize across hundreds of venues and dark pools, incorporating real-time signals about market maker behavior, short-term price prediction, and toxicity analysis.
 
+## Crypto-Venue Routing
+
+SOR translates directly to crypto, but the market structure differs in ways that change the routing problem. There is **no consolidated tape and no NBBO** — no Reg-NMS-style protected-quote rule forces one venue to honor another's better price — so best execution is a self-imposed discipline rather than a regulatory mandate. Fees are **personalized per trader** (each venue runs its own rolling-volume maker/taker tier), and perpetual-futures venues add a dimension equities lack: **[[funding-rate|funding]]**, a recurring carry that differs across venues and clocks (8h on CEXes, 1h on [[hyperliquid|Hyperliquid]]). Routing a *directional* crypto order therefore optimizes across live [[depth-of-market|book depth]], per-trader fee tier, and funding simultaneously, splitting size across Binance, Bybit, OKX, and Hyperliquid by depth-proportional allocation.
+
+This crypto-native form of SOR is treated in full — the venue set, depth-proportional allocation math, fee-tier selection, and funding-timing — in [[cross-venue-execution-crypto]]. That page also draws the line between cross-venue *execution* (one net directional position, cheapest) and cross-venue *[[perp-dex-aggregation|arbitrage]]* (offsetting legs capturing a spread), which the undifferentiated equities SOR literature does not need to distinguish. For working large orders in illiquid alt books, see [[thin-market-execution]].
+
 ## Related
 
+- [[cross-venue-execution-crypto]] — the crypto-native specialization: routing a directional order across Binance/Bybit/OKX/Hyperliquid by depth, fee tier, and funding
+- [[thin-market-execution]] — SOR primitives applied to illiquid crypto books
 - [[flash-crash-2010]] — SOR failures contributed to cascade
 - [[high-frequency-trading]] — HFT firms invest heavily in SOR for latency advantage
 - [[dark-pools]] — a key destination for SOR to minimize information leakage

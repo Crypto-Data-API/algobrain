@@ -2,13 +2,13 @@
 title: "Wash Trading"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-14
 status: good
 tags: [regulation, market-microstructure, crypto]
 aliases: ["Wash Trading", "Wash Sales"]
 domain: [market-microstructure, regulation]
 difficulty: beginner
-related: ["[[regulation]]", "[[binance]]", "[[market-manipulation]]", "[[crypto-overview]]", "[[volume]]"]
+related: ["[[regulation]]", "[[binance]]", "[[market-manipulation]]", "[[crypto-overview]]", "[[volume]]", "[[crypto-data-quality]]", "[[crypto-perp-backtesting-pitfalls]]"]
 ---
 
 Wash trading is the practice of simultaneously buying and selling the same asset to create the appearance of trading activity without any genuine change in beneficial ownership. It artificially inflates volume, misleads other market participants, and is illegal in regulated securities and commodities markets.
@@ -60,8 +60,38 @@ Crypto exchanges have historically operated in a regulatory gray area. Without c
 - **False liquidity**: Traders entering positions based on apparent liquidity may find no real depth when they try to exit
 - **Exchange selection**: Traders should prefer exchanges with verifiable volume ([[binance|Binance]], Coinbase, Kraken) over those with suspicious patterns
 
+## Backtesting Data-Quality Impact
+
+Wash-traded volume is not just a market-integrity problem — it is a **data-quality poison** that silently corrupts any backtest touching volume, and it is one of the seven corruption modes in the [[crypto-data-quality]] GIGO checklist.
+
+**Which venues to distrust.** Fabricated volume concentrates predictably:
+
+- **Low-cap and unregulated CEXs** — historically the worst offenders; the 2019 Bitwise estimate of ~95% fake Bitcoin volume was overwhelmingly these venues, not the majors.
+- **Self-trading DEX pools** — low-liquidity AMM pools and freshly launched tokens where the deployer or a bot trades against itself to fake activity and juice trending rankings (see [[dex-overview|DEX]] trending lists and promoted tokens).
+- **Newly listed / low-float pairs** — thin books make wash volume cheap to manufacture and easy to hide.
+- **Trust, roughly ranked** — on-chain-transparent venues (Hyperliquid, where flow is verifiable on-chain) and top regulated CEXs (Coinbase, Kraken, Binance) over long-tail exchanges and anonymous DEX pools.
+
+**How wash volume corrupts each signal:**
+
+| Signal | How wash volume breaks it |
+|--------|---------------------------|
+| **Raw volume / OBV** | Volume-breakout and [[on-balance-volume]] triggers fire on manufactured activity that never absorbed real size |
+| **VWAP** | The volume-weighted price anchors to self-matched trades, so VWAP execution and VWAP-reversion signals target prices no real order interacted with |
+| **Liquidity / ADV** | Average-daily-volume overstates tradeable size; a strategy sized to "1% of ADV" tries to trade size the real book cannot fill |
+| **Momentum / ranking** | Cross-sectional momentum and "trending" screens rank up coins whose interest is a bot trading itself, loading the book with fake winners |
+
+**Detection heuristics for the researcher:**
+
+- **Volume-to-depth ratio.** Real volume correlates with [[order-book]] depth and realised [[slippage]]; flag pairs where `volume / top-of-book depth` is a wild outlier (high volume, thin book).
+- **Trade-to-order and size fingerprints.** Suspiciously uniform trade sizes, round-number clustering, and buy/sell size symmetry are pre-arranged-trade tells.
+- **Prefer adjusted/real-volume feeds** (Messari, The Block, Kaiko) over raw exchange self-reports, and cross-check a venue's print against a second independent source.
+- **Filter the universe.** Drop distrusted venues and sub-threshold-liquidity pairs *before* research, and reconstruct the tradeable universe point-in-time so wash-inflated names do not sneak in (see [[crypto-data-quality]] and [[selection-bias-research]]).
+
+The net rule: **never let a volume-derived signal trust a venue you have not vetted.** A momentum or VWAP edge fitted on wash-traded pairs looks liquid in-sample and evaporates on the first live fill.
+
 ## Related
 
+- [[crypto-data-quality]] -- the GIGO checklist where wash volume is corruption mode #1
 - [[regulation]] -- Legal framework prohibiting market manipulation
 - [[binance]] -- Major exchange that has improved volume transparency
 - [[market-manipulation]] -- Broader category of deceptive trading practices

@@ -90,6 +90,10 @@ Key tools at each stage:
 
 A daily equity long-short strategy: (1) collect OHLCV + fundamentals for Russell 1000, (2) engineer 25 [[feature-engineering-finance|features]], (3) label with triple-barrier method, (4) split with 5-day purge gap, (5) train [[xgboost-trading|XGBoost]], (6) tune with Optuna, (7) walk-forward backtest with quarterly retraining, (8) paper trade 4 months, (9) deploy with 2% daily loss limit, (10) monitor with automated drift detection and monthly retraining.
 
+## Crypto Instantiation
+
+For a crypto-specific build of this pipeline, the generic steps map onto dedicated pages. Start from [[ml-crypto-price-prediction]] — an end-to-end, buildable crypto pipeline — which wires together a crypto feature stage, [[triple-barrier-labeling|triple-barrier labels]] whose barrier widths scale to crypto's high, liquidation-prone volatility (Step 3), a [[meta-labeling|meta-labeling]] primary/secondary architecture that pairs an economic side signal with an ML confidence gate (Steps 3 and 5), and [[purged-kfold-cv|purged/combinatorial cross-validation]] for leakage-free validation (Step 4). To satisfy Step 2's stationarity requirement without discarding memory, apply [[fractional-differentiation]] to persistent price and on-chain series, and where the side model draws on many weak signals, fuse them first with [[composite-alpha-blending]]. Because crypto history is short and statistically thin, weight these validation and overfitting defenses more heavily than you would in equities.
+
 ## Sources
 
 - [[book-advances-in-financial-ml]] — triple-barrier labeling, purged cross-validation, temporal train/test splits, and the overall ML pipeline framework for finance

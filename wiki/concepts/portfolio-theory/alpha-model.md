@@ -2,11 +2,11 @@
 title: "Alpha Model"
 type: concept
 created: 2026-04-15
-updated: 2026-06-22
+updated: 2026-07-14
 status: excellent
 tags: [portfolio-theory, quantitative, algorithmic]
 aliases: ["Alpha Model", "Forecasting Model", "Signal Model"]
-related: ["[[alpha]]", "[[alpha-decay]]", "[[multi-factor-portfolio]]", "[[edge-taxonomy]]", "[[backtesting]]", "[[overfitting-detection]]", "[[portfolio-construction]]", "[[risk-parity]]"]
+related: ["[[alpha]]", "[[alpha-decay]]", "[[multi-factor-portfolio]]", "[[edge-taxonomy]]", "[[backtesting]]", "[[overfitting-detection]]", "[[portfolio-construction]]", "[[risk-parity]]", "[[crypto-signal-library]]", "[[feature-engineering-crypto]]", "[[information-coefficient]]", "[[signal-orthogonalization]]"]
 domain: [portfolio-theory]
 prerequisites: ["[[alpha]]"]
 difficulty: advanced
@@ -54,7 +54,17 @@ The **Fundamental Law of Active Management** (Grinold) frames the output: $\math
 
 A stock-picker with strong views on **20** stocks and an Information Coefficient of **0.10** achieves IR ≈ 0.10 × √20 ≈ **0.45**. A systematic model with a weaker per-name IC of **0.04** but **2,000** independent positions achieves IR ≈ 0.04 × √2000 ≈ **1.79** — far higher despite each individual forecast being four times worse. *Breadth, not conviction, is the scalable lever* — the core insight behind broad cross-sectional quant strategies.
 
-The **Information Coefficient (IC)** itself is the correlation between the alpha model's forecast scores and subsequently realized returns. An IC of 0 is no skill; ICs of 0.03-0.10 are typical for real, durable equity signals. Comparing *realized* IC against *backtested* IC over time is the headline health check on a live model.
+The **[[information-coefficient|Information Coefficient]] (IC)** itself is the correlation between the alpha model's forecast scores and subsequently realized returns. An IC of 0 is no skill; ICs of 0.03-0.10 are typical for real, durable equity signals. Comparing *realized* IC against *backtested* IC over time is the headline health check on a live model.
+
+## Crypto Factor Instantiations
+
+The same alpha-model architecture instantiates directly on crypto data — the signal *families* above map onto crypto-native factors, each expressing an [[edge-taxonomy|edge]] with a specific counterparty. Three representative cross-sectional factors over a liquid perp universe:
+
+- **Funding-carry** (the crypto *carry* factor). Rank assets by their perpetual [[funding-rates|funding rate]]: harvest yield from the crowded, leverage-paying side (long the coins paying you to hold, short those you pay), or run it contrarian at extremes. This is the direct crypto analogue of FX carry and bond roll. See [[funding-rate-arbitrage]].
+- **On-chain value** (the crypto *value / mean-reversion* factor). Use [[mvrv|MVRV]]/[[mvrv-z-score|MVRV-Z]], dormancy, and [[exchange-netflow|exchange netflow]] to score whether holders are in aggregate under- or over-valuing the asset — a slow, weeks-to-months factor for accumulation/distribution timing.
+- **Cross-sectional perp momentum** (the crypto *momentum* factor). Rank perps by trailing risk-adjusted return and go long winners / short losers, sized against [[open-interest]] and liquidation dynamics. Faster-decaying and more reflexive than equity momentum because of leverage feedback.
+
+Because crypto factors are heavily [[signal-orthogonalization|BTC-beta-contaminated]], the raw [[information-coefficient|IC]] of each overstates true skill and *effective* breadth is far below nominal position count — so orthogonalizing each factor against BTC/ETH beta (and against each other) is a prerequisite, not an afterthought, before combining them. For the full catalog of crypto signal primitives with their data endpoints, transforms, and horizons, see **[[crypto-signal-library]]**; for how the raw features are built and normalized, see **[[feature-engineering-crypto]]**.
 
 ## The Signal Lifecycle
 
@@ -88,6 +98,9 @@ Every alpha model is subject to [[alpha-decay]]: as a signal becomes known and c
 - [[edge-taxonomy]] — the catalog of edges a signal can express
 - [[backtesting]] / [[overfitting-detection]] — how alpha models are validated
 - [[portfolio-construction]] — the module that turns forecasts into positions
+- [[crypto-signal-library]] — catalog of crypto signal primitives an alpha model can consume
+- [[information-coefficient]] — the metric used to triage and weight each signal
+- [[signal-orthogonalization]] — restoring independent breadth in a BTC-beta-heavy signal stack
 
 ## Sources
 

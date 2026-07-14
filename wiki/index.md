@@ -2,7 +2,7 @@
 title: "AI Trading Strategy Brain — Index"
 type: index
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-14
 status: good
 tags: [index, meta]
 ---
@@ -44,6 +44,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - [[hyperliquid-baskets-overview|Hyperliquid Basket Library]] — The 27 live signal baskets (Defensive Majors, OI-Confirmed Trend, funding fades, liquidation rides, breakout/range, macro-flow, event sleeves), each a full strategy page gated to a [[crypto-market-regime-taxonomy|market regime]]
 - Live bot strategies (excellent coverage): [[funding-rate-arbitrage]], [[stock-perp-oracle-basis]], [[liquidation-cascade-fade]], [[rsi-mean-reversion]], [[moving-average-crossover]], [[grid-trading]]
 - Price-action / order-flow strategies: [[volume-profile-trading-strategy|Volume Profile Trading Strategy]] (value-area rotation, LVN breakouts, naked-POC retests) · [[arc-strategy|ARC (Area·Range·Candle)]] (box/swing levels + range filter + John Wick candle entries)
+- Crypto options & flow strategies: [[crypto-options-volatility-selling|Crypto Options Volatility Selling]] (Deribit BTC/ETH short vol, DVOL-gated, no §1256) · [[crypto-options-dispersion|Crypto Options Dispersion]] (index vs single-name IV, correlation mean-reversion) · [[etf-flow-directional|ETF Flow Directional]] (spot-ETF net-flow momentum, not the arb) · [[crypto-beta-rotation|Crypto Beta Rotation]] (DXY/Nasdaq risk-on/off de-beta overlay) · [[bitcoin-halving-cycle-timing|Bitcoin Halving Cycle Timing]] (MVRV/NUPL/realized-price cycle zones)
 - AI/Macro themes:
   - [[crypto-ai-recession-shorts|Crypto AI Recession Shorts]] — BTC dominance long, alt + mining-equity + COIN shorts; expresses dispersion not direction
 
@@ -97,10 +98,20 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - [[hyperliquid-perp-trading-map|Hyperliquid Perp Trading Map]] — Comprehensive strategy map for trading perpetual futures on Hyperliquid
 - [[asterdex-perp-trading-map|AsterDEX Perp Trading Map]] — Strategy map for AsterDEX perps with head-to-head Hyperliquid comparison
 
+- **Strategy-Creation Toolkit (gap-fill, Jul 2026)** — full plan in [[coverage-gaps]]:
+  - Idea generation: [[crypto-idea-generation]] (inversion-based hypothesis mining), [[crypto-signal-library]] (signal→endpoint→transform→edge primitive index)
+  - Feature engineering: [[feature-engineering-crypto]], [[feature-selection-trading]], [[fractional-differentiation]], [[information-coefficient]], [[signal-orthogonalization]] (BTC-beta neutralisation), [[composite-alpha-blending]]
+  - ML labeling & pipeline: [[triple-barrier-labeling]], [[meta-labeling]], [[ml-crypto-price-prediction]]
+  - Crypto backtest validation: [[crypto-data-quality]], [[regime-conditional-validation]], [[crypto-short-history-statistical-power]], [[crypto-forward-testing]], [[probability-of-backtest-overfitting]]
+  - Execution & sizing: [[cross-venue-execution-crypto]], [[thin-market-execution]], [[funding-aware-position-sizing]], [[liquidation-price-aware-sizing]], [[crypto-portfolio-heat]]
+  - Portfolio & live ops: [[multi-strategy-crypto-portfolio]], [[paper-to-live-promotion]], [[bot-kill-switch-design]], [[position-reconciliation]], [[exchange-api-key-security]], [[proof-of-reserves]]
+  - New archetypes: [[hyperliquid-market-making]], [[loss-versus-rebalancing]], [[crypto-options-volatility-selling]], [[crypto-options-dispersion]], [[etf-flow-directional]], [[bitcoin-halving-cycle-timing]], [[crypto-beta-rotation]]
+  - Rewritten to buildable specs: [[concentrated-liquidity]], [[jit-liquidity]], [[market-making-strategy]], [[mev-strategies]], [[defi-yield-farming]]
+
 ### DeFi (Decentralised Finance)
 - [[defi|DeFi Hub]] — Core architecture, protocol categories, glossary, strategies, market state, security, regulation
-- Key concepts: [[automated-market-maker]], [[defi-lending]], [[impermanent-loss]], [[liquidity-pools]], [[smart-contracts]]
-- Strategies: [[defi-yield-farming]], [[mev-strategies]], [[crypto-yield-stack]], [[concentrated-liquidity]], [[leveraged-yield-farming]], [[cross-chain-yield-farming]]
+- Key concepts: [[automated-market-maker]], [[defi-lending]], [[impermanent-loss]], [[loss-versus-rebalancing]], [[liquidity-pools]], [[smart-contracts]]
+- Strategies: [[defi-yield-farming]], [[mev-strategies]], [[crypto-yield-stack]], [[concentrated-liquidity]], [[jit-liquidity]], [[leveraged-yield-farming]], [[cross-chain-yield-farming]]
 - Protocols: [[uniswap]], [[aave]], [[makerdao]], [[lido]], [[hyperliquid]], [[curve-finance]], [[pendle]], [[jupiter-exchange-solana|Jupiter]], [[eigenlayer]], [[beefy-finance]], [[thorchain]], [[alpha-homora]]
 - Concepts: [[restaking]]
 - Comparisons: [[centralized-vs-decentralized-finance]], [[cefi-yield-vs-defi-yield]]
@@ -216,10 +227,14 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Hyperliquid On-Chain CLOB cluster (gap-fill, Jun 2026):
   - Protocol primitives: [[hypercore]], [[hyperbft]], [[hip-3-builder-deployed-perps]], [[hlp]]
   - Order-book microstructure & economics: [[hyperliquid-order-book-microstructure]], [[hyperliquid-fee-tiers-and-maker-rebates]], [[hyperliquid-margining-modes]], [[latency-and-mev-on-chain-clob]]
-  - Strategy & data/tools: [[perp-dex-aggregation]], [[hyperliquid-api-and-sdk]], [[level-4-order-book-data]]
+  - Strategy & data/tools: [[hyperliquid-market-making]] (on-chain CLOB be-the-maker; CEX complement [[market-making-strategy]]), [[perp-dex-aggregation]], [[hyperliquid-api-and-sdk]], [[level-4-order-book-data]]
   - Comparable on-chain CLOB: [[econia]] (Aptos)
   - Upgrades: [[hyperevm]] (draft→good), [[orderly-network]] (draft→good)
   - Source: [[2026-04-22-gap-finder-hyperliquid-order-books]]
+- Crypto Execution & Perp Sizing cluster (Jul 2026):
+  - Execution: [[cross-venue-execution-crypto]] (route a directional order across Binance/Bybit/OKX/Hyperliquid by depth, fee tier, funding), [[thin-market-execution]] (illiquid alt books: depth-sized children, participation caps, iceberg/TWAP), [[smart-order-routing]] (+ crypto-venue routing section)
+  - Perp sizing: [[funding-aware-position-sizing]] (funding-adjusted Kelly), [[liquidation-price-aware-sizing]] (size beyond a named-wick stress move)
+  - Portfolio-level: [[crypto-portfolio-heat]] (beta-weighted BTC exposure budgeting), [[multi-strategy-crypto-portfolio]] (perp-carry + momentum + on-chain + memecoin sleeves in one book)
 
 ### Data Sources
 - [[data-sources-overview|Data Sources]] — Free, paid, alternative, crypto, options, macro, news data providers

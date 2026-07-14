@@ -2,11 +2,13 @@
 title: Feature Engineering for Financial ML
 type: concept
 created: 2026-04-06
-updated: 2026-04-07
+updated: 2026-07-14
 status: good
 tags: [ai-trading, machine-learning, data-engineering]
 difficulty: intermediate
 related:
+  - "[[feature-engineering-crypto]]"
+  - "[[feature-selection-trading]]"
   - "[[xgboost-trading]]"
   - "[[random-forest-trading]]"
   - "[[overfitting-in-trading]]"
@@ -55,6 +57,10 @@ Raw market data (prices, volumes, fundamentals) is not directly suitable for mos
 **6. Cross-asset features:**
 - Sector relative strength, rolling beta to SPY, yield curve slope, credit spreads
 
+## Crypto Features
+
+Crypto markets add a distinct feature layer that has no clean equity analogue — perpetual [[funding-rates|funding]] (both a positioning signal and a real carry cash-flow), [[open-interest]] and liquidation dynamics, L2 [[order-book]] imbalance, cross-venue [[basis|basis]] and [[coinbase-premium|premium]], and [[on-chain-analysis|on-chain]] flows ([[exchange-netflow|netflow]], [[mvrv|MVRV]]/dormancy, whale-score). They also bring crypto-specific pitfalls: 24/7 markets with no session boundaries, funding-as-carry, thin low-float alts, dead-token survivorship, token-age effects, and the need for regime-conditional z-scoring. See **[[feature-engineering-crypto]]** for the full treatment, and **[[crypto-signal-library]]** for a browsable menu of crypto signal primitives mapped to data endpoints.
+
 ## Strengths & Weaknesses
 
 **Strengths:**
@@ -92,6 +98,8 @@ Raw market data (prices, volumes, fundamentals) is not directly suitable for mos
 
 ## Related
 
+- [[feature-engineering-crypto]] — the crypto-native specialization of this page
+- [[feature-selection-trading]] — pruning the feature set with MDA/MDI and mutual information
 - [[xgboost-trading]] — benefits most from good feature engineering
 - [[random-forest-trading]] — feature importance helps guide engineering
 - [[overfitting-in-trading]] — too many features is a primary overfitting cause
