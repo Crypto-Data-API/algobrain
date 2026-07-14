@@ -9,6 +9,17 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-14 — Depth-parity rewrites (Wave 2)
+
+Rewrote 24 crypto-native strategy essays from descriptive prose into the buildable strategy schema (full frontmatter + 16-section structure + realistic cost overlays + `## Getting the Data (CryptoDataAPI)`), matching the funding-rate-arbitrage gold standard. Buildable strategy pages rose 215 → 251. Scope drift (equity/commodity tags) removed from latency-arbitrage, calendar-spread-arbitrage, cash-and-carry.
+
+- algorithmic: [[basis-trading]], [[restaking-strategies]], [[points-farming]], [[airdrop-farming]], [[liquidity-sniping]], [[synthetic-asset-trading]], [[intent-based-trading]], [[nft-trading]]
+- combinations: [[delta-neutral-yield-farming]], [[crypto-yield-stack]], [[smart-money-orderflow-combo]]
+- quantitative: [[sentiment-trading]], [[momentum-rotation]], [[skew-trading]], [[garch-volatility]]
+- day-trading: [[order-flow-scalping]], [[scalping]], [[vwap-trading]]
+- arbitrage: [[cross-exchange-arbitrage]], [[flash-loan-arbitrage]], [[latency-arbitrage]], [[staking-yield-arbitrage]], [[calendar-spread-arbitrage]], [[cash-and-carry]]
+- also created concept pages [[coinbase-premium]] and [[participation-rate]] (filled inbound forward-links).
+
 ## 2026-07-14 — Strategy-creation gap-fill (Wave 1)
 
 Filled the value-bearing gaps from the 2026-07-14 strategy-creation gap analysis (see [[coverage-gaps]]): 34 new pages + 5 essay→buildable rewrites + crypto sections on 6 existing pages, authored by 7 parallel agents. Adds the front-of-funnel methodology (idea generation, feature/signal engineering, ML labeling), crypto-specific backtest validation, missing archetypes (on-chain market-making, LVR, crypto options), execution/sizing, and live-ops runbooks. All new/rewritten pages carry the buildable schema and `## Getting the Data (CryptoDataAPI)` sections using only verified endpoints. Sub-clusters below.

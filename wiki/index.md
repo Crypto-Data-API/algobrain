@@ -221,6 +221,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 - Behavioral Finance (Taleb cluster): [[survivorship-bias]], [[narrative-fallacy]], [[ergodicity]], [[outcome-bias]], [[hindsight-bias]], [[signal-vs-noise]]
 - Behavioral Finance (cognitive biases): [[prospect-theory]], [[loss-aversion]], [[overconfidence-bias]], [[confirmation-bias]], [[anchoring-bias]], [[disposition-effect]], [[herding]]
 - Market Microstructure: [[order-flow]], [[absorption]], [[volume-imbalance]], [[footprint-chart]], [[market-profile]], [[volume-profile]]
+- Crypto flow & execution signals: [[coinbase-premium]] (US-institutional demand gauge), [[participation-rate]] (POV execution cap)
 - FX Microstructure: [[last-look]] (dealer rejection protocol), [[cross-currency-basis-swap]] (CIP deviation / funding-stress signal), [[covered-interest-rate-parity]] (no-arbitrage FX/rates condition), [[settlement-risk]] (Herstatt / principal risk)
 - NFT Microstructure: [[nft-rarity-scoring]], [[nft-floor-price]], [[nft-aggregators]], [[nft-royalty-enforcement]], [[phygital-nfts]]
 - NFT Risk: [[nft-lending]]
