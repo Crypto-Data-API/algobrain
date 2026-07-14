@@ -8,7 +8,7 @@ tags: [meta, nft, crypto, data-provider]
 aliases: ["NFT Gap Analysis 2026-04-22"]
 source_type: article
 source_url: "https://www.perplexity.ai/search (sonar-deep-research)"
-source_author: "Perplexity AI — gap_finder.py"
+source_author: "Perplexity AI"
 source_date: 2026-04-22
 source_file: "raw/articles/2026-04-22-gap-finder-nft-trading.md"
 confidence: medium
@@ -16,7 +16,7 @@ claims_count: 50
 related: ["[[nft]]", "[[nft-trading]]", "[[nft-arbitrage]]", "[[bitcoin-ordinals]]", "[[tensor]]", "[[sudoswap]]", "[[seaport]]", "[[nftfi]]", "[[blend]]", "[[benddao]]", "[[rarity-tools]]", "[[openrarity]]", "[[trait-sniper]]", "[[nft-price-floor]]", "[[zerion]]", "[[genie]]", "[[gem-nft]]", "[[x2y2]]", "[[floor-xyz]]", "[[nifty-gateway]]", "[[courtyard]]", "[[veve]]", "[[nft-rarity-scoring]]", "[[nft-floor-price]]", "[[nft-aggregators]]", "[[nft-royalty-enforcement]]", "[[nft-lending]]", "[[phygital-nfts]]"]
 ---
 
-Perplexity deep-research report run on 2026-04-22 via `tools/gap_finder.py --topic "NFT trading" --deep`. Surveyed gaps in the wiki's NFT trading coverage: marketplaces, analytics infrastructure, lending protocols, rarity tools, royalty mechanisms, emerging asset classes (Bitcoin Ordinals, phygital/RWA), and recent market shifts (2023-2026). Output used to drive a batch of 25 new pages plus the ordinals-protocol fix.
+Perplexity deep-research report run on 2026-04-22 via a Perplexity deep-research run. Surveyed gaps in the wiki's NFT trading coverage: marketplaces, analytics infrastructure, lending protocols, rarity tools, royalty mechanisms, emerging asset classes (Bitcoin Ordinals, phygital/RWA), and recent market shifts (2023-2026). Output used to drive a batch of 25 new pages plus the ordinals-protocol fix.
 
 ## Key Findings (by category)
 
@@ -104,4 +104,3 @@ None flagged at ingestion time. Any future contradictions with existing pages (n
 ## Raw File
 
 - Local: `raw/articles/2026-04-22-gap-finder-nft-trading.md`
-- R2: not yet uploaded to `r2://trader-wiki/articles/` (TBD)

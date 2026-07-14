@@ -10,7 +10,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=0Zls8M2izTo"
 source_author: "Anton Kreil / ITPM"
 source_date: 2018-01-01
-source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-chris-cathey.md"
 confidence: medium
 claims_count: 27
 related: ["[[anton-kreil]]", "[[chris-cathey]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[technical-analysis]]"]

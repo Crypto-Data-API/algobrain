@@ -8,7 +8,6 @@ tags: [crypto, defi, prediction-markets, regulation, ai-trading, meta]
 source_type: article
 source_author: "Compiled research (43 sources)"
 source_date: 2026-04-14
-source_file: "r2://trader-wiki/articles/2026-04-14-polymarket-wiki-guide.md"
 confidence: high
 claims_count: 52
 related: ["[[polymarket]]", "[[kalshi]]", "[[prediction-markets]]", "[[shayne-coplan]]", "[[ai-prediction-markets]]", "[[polygon]]", "[[prediction-market-strategies]]", "[[polymarket-vs-kalshi]]"]

@@ -44,7 +44,6 @@ For portfolio positioning purposes, Krugman's public views serve as a useful ind
 
 ## Sources
 
-- Fred/Sam session transcripts — counterpoint to Larry Summers on macro views
 - The Hill, "Paul Krugman laments 'age of resentment' in final New York Times column" (Dec 2024) — https://thehill.com/homenews/media/5034409-paul-krugman-new-york-times-retirement-final-column/
 - Deadline, "Paul Krugman to retire as columnist for The New York Times" (Dec 2024) — https://deadline.com/2024/12/paul-krugman-new-york-times-columnist-1236196177/
 - Wikipedia, "Paul Krugman" — https://en.wikipedia.org/wiki/Paul_Krugman (Nobel 2008, CUNY, Substack move)

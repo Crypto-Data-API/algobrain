@@ -11,7 +11,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=tRs1b0varTU"
 source_author: "Anton Kreil"
 source_date: 2025-01-18
-source_file: "r2://trader-wiki/transcripts/2025-01-18-how-to-master-compounding-as-a-trader.md"
 confidence: medium
 claims_count: 38
 ---

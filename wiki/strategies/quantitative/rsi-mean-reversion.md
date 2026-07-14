@@ -33,7 +33,7 @@ decay_evidence: "Connors' original SPY edge has compressed since 2010 publicatio
 related: ["[[rsi]]", "[[bollinger-band-reversion]]", "[[mean-reversion]]", "[[moving-average-crossover]]", "[[200-day-moving-average]]", "[[overreaction-anomaly]]", "[[sentiment]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[loss-aversion]]", "[[herding]]", "[[cryptodataapi]]"]
 ---
 
-The **RSI Mean Reversion** strategy buys assets that have suffered short, sharp pullbacks inside an established uptrend, betting that the panic-driven selling will reverse within a few days. The canonical formulation is **Larry Connors' RSI(2)** rule from *Short Term Trading Strategies That Work* (2009): go long when RSI(2) drops below 10 while price is above its 200-day SMA, and exit when RSI(2) closes above 70. The user's live trading bot extends this to large-cap crypto by stacking a **Crypto Fear & Greed < 30** sentiment filter on top of the classic Connors trigger, restricting the universe to BTC/ETH/SOL on AsterDEX with 3x leverage.
+The **RSI Mean Reversion** strategy buys assets that have suffered short, sharp pullbacks inside an established uptrend, betting that the panic-driven selling will reverse within a few days. The canonical formulation is **Larry Connors' RSI(2)** rule from *Short Term Trading Strategies That Work* (2009): go long when RSI(2) drops below 10 while price is above its 200-day SMA, and exit when RSI(2) closes above 70. The reference live bot extends this to large-cap crypto by stacking a **Crypto Fear & Greed < 30** sentiment filter on top of the classic Connors trigger, restricting the universe to BTC/ETH/SOL on AsterDEX with 3x leverage.
 
 ## Edge source
 
@@ -77,7 +77,7 @@ If the null cannot be rejected after a reasonable sample (~50 trades), the strat
 
 ## Rules
 
-The user's bot implements **Variant C** below. Variants A and B are documented for context and historical lineage.
+The reference bot implements **Variant C** below. Variants A and B are documented for context and historical lineage.
 
 ### Variant A: Classic RSI(14) (legacy, less effective)
 
@@ -98,7 +98,7 @@ This is the textbook Wilder formulation taught in most retail TA courses. Withou
 
 This is the rule set on which the 75-85% win rate claim is based. See [[rsi]] and [[200-day-moving-average]].
 
-### Variant C: Crypto-adapted RSI(2) + Fear & Greed filter (the user's bot — canonical)
+### Variant C: Crypto-adapted RSI(2) + Fear & Greed filter (the reference bot — canonical)
 
 1. **Universe:** BTCUSDT, ETHUSDT, SOLUSDT only — large-cap crypto with deep liquidity. No alts, no memecoins.
 2. **Trend filter:** spot price > 200-day SMA on each asset, evaluated independently.
@@ -257,7 +257,7 @@ These numbers are **in-sample** and survive normal robustness checks (parameter 
 
 ### Crypto adaptation expected performance (paper-tracked)
 
-The user's variant has not yet been deployed in size. Expected envelope from paper-trading and out-of-sample studies:
+This variant has not yet been deployed in size. Expected envelope from paper-trading and out-of-sample studies:
 
 - **Win rate:** 65-75%. Lower than Connors' equity numbers because crypto's higher volatility produces larger losing trades when regime breaks intra-trade.
 - **Average winner / average loser:** ~0.7 — more negatively skewed than the equity version. The 5-day timeout occasionally exits at a loss while RSI is still oversold but stalled.
@@ -285,9 +285,9 @@ The strategy's average per-trade gross return must clear ~20 bps to be viable. W
 This is a high-capacity strategy by design:
 
 - **BTC, ETH, SOL perp daily volumes** on major venues run from $5B (SOL) to $40B+ (BTC).
-- **Maximum prudent position size** (1% of average daily volume, the conservative impact threshold) is roughly $50M on BTC, $20M on ETH, $5M on SOL — i.e., the strategy can comfortably absorb $50-100M of book equity at the user's 5%/15%-notional sizing.
+- **Maximum prudent position size** (1% of average daily volume, the conservative impact threshold) is roughly $50M on BTC, $20M on ETH, $5M on SOL — i.e., the strategy can comfortably absorb $50-100M of book equity at the documented 5%/15%-notional sizing.
 - **Above ~$500M of book equity** dedicated to this single strategy, slippage on the entry leg starts to dominate during stress entries (which is precisely when the strategy needs to fire). This is the soft capacity ceiling.
-- **The user's bot at retail size** (single-digit thousands to low millions of book equity) has no capacity concerns whatsoever.
+- **The reference bot at retail size** (single-digit thousands to low millions of book equity) has no capacity concerns whatsoever.
 
 The frontmatter records `capacity_usd: 50000000` as a conservative single-strategy capacity. For a fund running this as one of many sleeves, that number is more than enough.
 
@@ -328,7 +328,7 @@ The bot is currently OFF, so these criteria are aspirational. They will become b
 
 - **Negatively skewed payoff.** Many small wins, occasional large losses. The 75-85% win rate marketing line obscures that the *expectancy* depends entirely on keeping the average loss bounded — exactly the thing that fails during regime breaks.
 - **Filter blindness at the worst moments.** The 200-day SMA filter correctly stays flat during the largest panics (March 2020, May 2022, August 2024) — but those panics include the highest-quality V-bottoms in history. The strategy structurally forfeits the best entries in exchange for not catching the worst falling knives. This is a deliberate design choice, but practitioners must not rationalize their way around it after the fact.
-- **No short side.** The strategy buys oversold inside an uptrend; the symmetric "sell overbought inside a downtrend" version has historically been far less profitable in equities and is a non-starter in a structurally-up crypto market. The user's bot is long-only by design.
+- **No short side.** The strategy buys oversold inside an uptrend; the symmetric "sell overbought inside a downtrend" version has historically been far less profitable in equities and is a non-starter in a structurally-up crypto market. The reference bot is long-only by design.
 - **Crowded.** Connors' original is one of the most-published retail systems in history. Public crowding has compressed the equity edge since 2010. The crypto adaptation may have a few more years of edge before similar crowding hits.
 - **Dependence on a single sentiment vendor.** alternative.me is a free public service. If methodology changes, API stability degrades, or the index gets co-opted by manipulators, the bot's filter quality drops. A backup sentiment proxy (e.g., put/call ratio for equities, perp funding extremes for crypto) should be developed.
 - **Discipline required.** Buying when markets feel terrible is psychologically brutal. The bot exists precisely to bypass that — but the operator must trust the bot during exactly the windows where their discretionary self would override it.

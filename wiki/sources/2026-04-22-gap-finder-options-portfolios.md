@@ -8,7 +8,7 @@ tags: [meta, options, derivatives, data-provider]
 aliases: ["Options Portfolios Gap Analysis 2026-05-03"]
 source_type: article
 source_url: "https://www.perplexity.ai/search (sonar)"
-source_author: "Perplexity AI — gap_finder.py"
+source_author: "Perplexity AI"
 source_date: 2026-05-03
 source_file: "raw/articles/2026-04-22-gap-finder-options-portfolios.md"
 confidence: medium
@@ -16,7 +16,7 @@ claims_count: 30
 related: ["[[probability-of-profit]]", "[[spread-width-selection]]", "[[pyalgotrade]]", "[[put-options]]", "[[short-position]]", "[[iron-condors]]", "[[options-greeks]]"]
 ---
 
-Perplexity research run on 2026-05-03 via `tools/gap_finder.py --topic "options portfolios"`. Surveyed gaps in the wiki's options-portfolio coverage: education platforms, visualization tools, risk metrics, structural mechanics, and event-driven strategies. Output drove a batch of 8 new pages plus 2 thin-page upgrades.
+Perplexity research run on 2026-05-03 via a Perplexity deep-research run. Surveyed gaps in the wiki's options-portfolio coverage: education platforms, visualization tools, risk metrics, structural mechanics, and event-driven strategies. Output drove a batch of 8 new pages plus 2 thin-page upgrades.
 
 ## Key Findings (by category)
 

@@ -9,7 +9,6 @@ source_type: article
 source_url: ""
 source_author: "Compiled research guide"
 source_date: 2026-04-15
-source_file: "r2://trader-wiki/articles/2026-04-15-defi-wiki-content-guide.md"
 confidence: medium
 claims_count: 48
 ---

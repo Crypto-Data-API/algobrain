@@ -22,7 +22,7 @@ related:
 
 #meta
 
-Perplexity API research dated 2026-06-01 on Claude Mythos public release status, run via `tools/gap_finder.py` in standard mode after user correctly flagged that Anthropic had publicly announced a release window the wiki's April 2026 page didn't reflect.
+Perplexity API research dated 2026-06-01 on Claude Mythos public release status, via a Perplexity deep-research run in standard mode after user correctly flagged that Anthropic had publicly announced a release window the wiki's April 2026 page didn't reflect.
 
 ## Why this was researched
 

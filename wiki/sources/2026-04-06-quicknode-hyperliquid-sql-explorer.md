@@ -9,7 +9,6 @@ source_type: data
 source_url: "https://www.quicknode.com/docs/sql-explorer/hyperliquid-queries"
 source_author: "QuickNode"
 source_date: 2026-04-06
-source_file: "r2://trader-wiki/data/2026-04-06-quicknode-hyperliquid-sql.md"
 confidence: high
 claims_count: 15
 ---

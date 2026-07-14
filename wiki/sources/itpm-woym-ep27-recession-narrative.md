@@ -9,7 +9,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=2UVYs9XLENg"
 source_author: "Anton Kreil / ITPM"
 source_date: 2019-08-23
-source_file: "r2://trader-wiki/transcripts/2019-08-23-woym-ep27-recession-narrative.md"
 confidence: medium
 claims_count: 22
 aliases: ["WOYM Ep27", "What's On Your Mind Episode 27"]

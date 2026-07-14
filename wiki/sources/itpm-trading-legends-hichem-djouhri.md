@@ -10,7 +10,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=dF5cjH-m6ps"
 source_author: "Anton Kreil / ITPM"
 source_date: 2018-01-01
-source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-hichem-djouhri.md"
 confidence: medium
 claims_count: 18
 related: ["[[anton-kreil]]", "[[hichem-djouhri]]", "[[risk-management-overview]]", "[[portfolio-theory]]", "[[commodities]]", "[[correlation]]", "[[volatility]]"]

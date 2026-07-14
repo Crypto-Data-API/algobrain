@@ -9,7 +9,6 @@ source_type: article
 source_url: "compiled research — 12 web references"
 source_author: "Multiple (StockGro, ImpliedOptions/CBOE, GammaLedger, ForexGDP, Schwab, Schaeffer's, InsiderFinance, SteelPeak, TradeWithThePros, YouTube)"
 source_date: 2026-04-20
-source_file: "r2://trader-wiki/articles/2026-04-20-recovering-losing-options-positions.md"
 confidence: medium
 claims_count: 28
 related: ["[[trade-repair-and-rolling]]", "[[position-sizing]]", "[[stop-loss]]", "[[hedging]]", "[[iron-condors]]", "[[protective-puts]]", "[[collar]]", "[[options-greeks]]", "[[wheel-strategy]]", "[[credit-spread]]", "[[vertical-spread]]"]

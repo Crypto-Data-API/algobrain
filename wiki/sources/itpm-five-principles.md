@@ -11,7 +11,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=hzFl0uDwAQY"
 source_author: "Anton Kreil"
 source_date: 2018-05-01
-source_file: "r2://trader-wiki/transcripts/2018-05-01-five-principles-behind-ten-secrets.md"
 confidence: medium
 claims_count: 30
 ---

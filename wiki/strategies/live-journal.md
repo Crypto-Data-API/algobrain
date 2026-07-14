@@ -52,7 +52,7 @@ Entries are append-only and dated. Modifications and reversals are recorded as n
 
 ## Active Strategies
 
-The live trading bot runs a six-strategy stack on a perpetual DEX (primarily AsterDEX). Two strategies are currently ON; four are paper-traded and gated by regime triggers. All six pages are at `status: excellent`. See the regime stack mapping in [[regime-matrix#Portfolio D Live Bot Six-Strategy Stack this user's deployed system]].
+The live trading bot runs a six-strategy stack on a perpetual DEX (primarily AsterDEX). Two strategies are currently ON; four are paper-traded and gated by regime triggers. All six pages are at `status: excellent`. See the regime stack mapping in [[regime-matrix#Portfolio D Live Bot Six-Strategy Stack the deployed production system]].
 
 ### Currently ON
 
@@ -111,7 +111,7 @@ Append-only chronological log of every lifecycle event. The dataview tables abov
 
 - **Context:** Wiki upgraded all six bot strategies to `status: excellent`. This entry establishes the canonical record of deployment status as of today. Previous deployments may exist but were not journaled.
 - **Stack composition:** Two ON (funding_arb, stock_basis), four paper-traded with regime gates (liquidation_reversal, mean_reversion, trend_following, grid).
-- **Diversification rationale:** The six strategies span complementary regimes per [[regime-matrix#Portfolio D Live Bot Six-Strategy Stack this user's deployed system]]. The cleanest inverse pair is `grid` (needs ADX < 20) vs. `trend_following` (needs sustained trend) — these should never be simultaneously ON over the same universe.
+- **Diversification rationale:** The six strategies span complementary regimes per [[regime-matrix#Portfolio D Live Bot Six-Strategy Stack the deployed production system]]. The cleanest inverse pair is `grid` (needs ADX < 20) vs. `trend_following` (needs sustained trend) — these should never be simultaneously ON over the same universe.
 - **Next review:** 2026-05-27 (1 month).
 
 ---

@@ -9,7 +9,6 @@ source_type: article
 source_url: ""
 source_author: "Compiled research guide"
 source_date: 2026-04-20
-source_file: "r2://trader-wiki/articles/2026-04-20-comprehensive-guide-technical-trading-indicators.md"
 confidence: medium
 claims_count: 60
 ---
@@ -196,4 +195,3 @@ One backtesting summary across US equities (source: newtrading.io) reported the 
 
 ## Sources
 
-- (Source: r2://trader-wiki/articles/2026-04-20-comprehensive-guide-technical-trading-indicators.md)

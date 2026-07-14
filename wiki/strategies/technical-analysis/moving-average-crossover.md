@@ -75,7 +75,7 @@ The edge does not look like "the strategy wins more often." It looks like a fat 
 - **Position sizing:** fixed 1–2% of capital risked per trade
 - Used canonically on cash equities and indices. This is the form Brock, Lakonishok, and LeBaron tested.
 
-### Variant 2 — Inverse-Volatility-Sized 50/200 SMA (canonical for the user's bot)
+### Variant 2 — Inverse-Volatility-Sized 50/200 SMA (canonical for the reference bot)
 
 - **Signal:** identical to Variant 1
 - **Sizing:** position size scaled inversely to recent realized volatility (ATR-normalized) — see [[#Inverse-Volatility Sizing]] below
@@ -83,7 +83,7 @@ The edge does not look like "the strategy wins more often." It looks like a fat 
 - **Caps:** maximum 8% of book per asset, maximum 2× gross leverage
 - **Hold horizon:** days to weeks; reversal exits via trailing stop, not signal flip
 - **Venue:** crypto perpetual futures DEX
-- This variant is the implementation in the user's live trading harness (see [[live-journal]]). It sacrifices the clean signal-flip exit of Variant 1 for tighter risk control on the high-volatility, high-whipsaw crypto perp universe.
+- This variant is the implementation in the live trading harness (see [[live-journal]]). It sacrifices the clean signal-flip exit of Variant 1 for tighter risk control on the high-volatility, high-whipsaw crypto perp universe.
 
 ### Variant 3 — 9/21 EMA Fast Crossover
 
@@ -102,7 +102,7 @@ All four variants share the same edge mechanism and the same fundamental fragili
 
 ## Implementation pseudocode
 
-The following sketch matches the user's live bot. It computes the 50/200 SMA cross, sizes by inverse ATR-normalized vol, caps at 8% per asset and 2× total leverage, and trails exits at 2× ATR from the high-water mark.
+The following sketch matches the reference live bot. It computes the 50/200 SMA cross, sizes by inverse ATR-normalized vol, caps at 8% per asset and 2× total leverage, and trails exits at 2× ATR from the high-water mark.
 
 ```python
 import numpy as np
@@ -218,7 +218,7 @@ This is a textbook winner: the trailing stop captures the bulk of the trend and 
 
 ## Inverse-Volatility Sizing
 
-The user's bot does not size every position equally. Instead, it sizes inversely to each asset's recent realized volatility, using ATR(14)/price as the volatility proxy. The formula:
+The reference bot does not size every position equally. Instead, it sizes inversely to each asset's recent realized volatility, using ATR(14)/price as the volatility proxy. The formula:
 
 ```
 position_notional = (equity * target_risk_pct) / (ATR / price)
@@ -273,7 +273,7 @@ This puts crypto trend-following in the same broad performance band as equity-fu
 
 ### Realistic cost overlay on perp DEX
 
-Frictions for the user's bot:
+Frictions for the reference bot:
 
 - **Taker fee on perp DEX:** roughly 5 bps per side, 10 bps round-trip
 - **Average slippage on inverse-vol-sized orders:** 1–3 bps in liquid coins, more in alts
@@ -377,5 +377,5 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
 - [[edge-taxonomy]] — framework for the behavioral / structural / risk-bearing classification used here
 - [[failure-modes]] — taxonomy of what kills strategies
 - [[when-to-retire-a-strategy]] — kill-criteria methodology
-- [[live-journal]] — current deployment status of this strategy in the user's bot
+- [[live-journal]] — current deployment status of this strategy in the reference bot
 - [[overfitting-detection]] — why naive single-asset backtests of MA crossovers mislead

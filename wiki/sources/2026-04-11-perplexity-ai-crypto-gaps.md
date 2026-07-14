@@ -10,7 +10,6 @@ source_type: article
 source_url: "https://api.perplexity.ai/chat/completions"
 source_author: "Perplexity sonar-deep-research"
 source_date: 2026-04-11
-source_file: "r2://trader-wiki/articles/2026-04-11-perplexity-ai-crypto-gaps.md"
 confidence: medium
 claims_count: 30
 related: ["[[decentralized-ai]]", "[[defai]]", "[[artificial-intelligence]]", "[[ai-narrative-arc]]", "[[zkml]]", "[[restaking-and-ai]]", "[[ai-mev]]", "[[llm-defi-interfaces]]", "[[truth-terminal-goat]]", "[[ai-solvers]]"]

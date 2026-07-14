@@ -8,7 +8,7 @@ tags: [meta, ai-trading, machine-learning, news]
 aliases: ["AI 2026 Major News Stories Gap Analysis"]
 source_type: article
 source_url: "https://www.perplexity.ai/search (sonar-deep-research)"
-source_author: "Perplexity AI — gap_finder.py"
+source_author: "Perplexity AI"
 source_date: 2026-05-14
 source_file: "raw/articles/2026-04-22-gap-finder-ai-2026-major-news-stories.md"
 confidence: medium
@@ -16,7 +16,7 @@ claims_count: 30
 related: ["[[2026-anthropic-blackstone-jv]]", "[[2026-anthropic-finance-agents-launch]]", "[[2026-claude-opus-4-7-finance-benchmark]]", "[[2026-uniswap-v4-launch]]", "[[2026-chatgpt-mainstream-adoption]]", "[[llama-fin]]", "[[xai]]", "[[xlstm-ts]]", "[[graph-neural-networks-finance]]", "[[federated-learning-aml]]", "[[causal-inference-finance]]"]
 ---
 
-Perplexity deep-research run on 2026-05-14 via `tools/gap_finder.py --topic "AI 2026 major news stories" --deep`. Surveyed the wiki's coverage against the 2024-2026 landscape of AI-in-trading developments — AI agents, LLMs in finance, multimodal models, DeFi infrastructure, graph methods, federated learning, and causal inference. The output drove a wave of new entity pages (Anthropic finance-agents launch, Claude Opus 4.7 finance benchmark, Anthropic-Blackstone JV, Uniswap v4 launch), new news-event pages, and a set of concept pages including causal inference and earnings surprise prediction.
+Perplexity deep-research run on 2026-05-14 via a Perplexity deep-research run. Surveyed the wiki's coverage against the 2024-2026 landscape of AI-in-trading developments — AI agents, LLMs in finance, multimodal models, DeFi infrastructure, graph methods, federated learning, and causal inference. The output drove a wave of new entity pages (Anthropic finance-agents launch, Claude Opus 4.7 finance benchmark, Anthropic-Blackstone JV, Uniswap v4 launch), new news-event pages, and a set of concept pages including causal inference and earnings surprise prediction.
 
 ## Key Findings (by category)
 

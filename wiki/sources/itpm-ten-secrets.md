@@ -11,7 +11,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=4a51wQAOGR4"
 source_author: "Anton Kreil"
 source_date: 2015-09-21
-source_file: "r2://trader-wiki/transcripts/2015-09-21-ten-secrets-to-achieve-financial-success.md"
 confidence: medium
 claims_count: 28
 ---

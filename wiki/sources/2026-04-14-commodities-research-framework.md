@@ -9,7 +9,6 @@ source_type: article
 source_url: ""
 source_author: "Research compilation"
 source_date: 2026-04-14
-source_file: "r2://trader-wiki/misc/2026-04-14-commodities-research-framework.md"
 confidence: medium
 claims_count: 42
 aliases: ["Commodities Research Framework"]

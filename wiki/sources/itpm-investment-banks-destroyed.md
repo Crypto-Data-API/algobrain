@@ -9,7 +9,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=vbuborn14Mc"
 source_author: "Anton Kreil / ITPM"
 source_date: 2019-01-01
-source_file: "r2://trader-wiki/transcripts/2019-01-01-investment-banks-destroyed-part-{1,2,3,4,5}.md"
 confidence: medium
 claims_count: 32
 aliases: ["Investment Banks Destroyed"]

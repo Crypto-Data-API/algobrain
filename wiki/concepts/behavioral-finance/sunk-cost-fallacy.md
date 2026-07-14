@@ -36,7 +36,7 @@ The mechanism is closely tied to [[loss-aversion]] and [[prospect-theory]]. Sell
 
 ## A Hypothetical Example
 
-*This example is illustrative, not a real event.* A trader, "Sam," buys a stock at $100 with a plan to exit at $90 if the thesis breaks. The stock falls to $88 on news that genuinely weakens the thesis. Instead of taking the planned $10 loss, Sam reasons "I have already lost $12 on paper and done all this research — I can't sell now." Sam holds, then adds more at $80 to "average down," doubling the exposure. The stock drifts to $65. The original $12 paper loss — money that was already gone the moment the thesis broke — has anchored Sam into a far larger, doubled-up loss. The correct question at $88 was never "how do I recover what I have lost?" but "would I open this position today, at this size, knowing what I now know?"
+*This example is illustrative, not a real event.* A trader, "Riley," buys a stock at $100 with a plan to exit at $90 if the thesis breaks. The stock falls to $88 on news that genuinely weakens the thesis. Instead of taking the planned $10 loss, Riley reasons "I have already lost $12 on paper and done all this research — I can't sell now." Riley holds, then adds more at $80 to "average down," doubling the exposure. The stock drifts to $65. The original $12 paper loss — money that was already gone the moment the thesis broke — has anchored Riley into a far larger, doubled-up loss. The correct question at $88 was never "how do I recover what I have lost?" but "would I open this position today, at this size, knowing what I now know?"
 
 ## How to Counter It
 

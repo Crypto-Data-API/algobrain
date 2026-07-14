@@ -11,7 +11,6 @@ source_type: book
 source_url: "https://www.wiley.com/en-us/Safe+Haven%3A+Investing+for+Financial+Storms-p-9781119401797"
 source_author: "Mark Spitznagel"
 source_date: 2021-08-01
-source_file: "r2://trader-wiki/books/spitznagel-safe-haven-2021.md"
 confidence: high
 claims_count: 12
 ---

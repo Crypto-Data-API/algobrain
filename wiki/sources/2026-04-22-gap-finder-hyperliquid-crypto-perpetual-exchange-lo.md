@@ -8,7 +8,7 @@ tags: [meta, backtesting, crypto, derivatives, market-microstructure, data-provi
 aliases: ["Hyperliquid LTF Backtesting Gap Finder", "Hyperliquid Perp Backtesting Gap Report"]
 source_type: data
 source_url: "https://hyperliquid.gitbook.io/hyperliquid-docs"
-source_author: "Perplexity (sonar) via tools/gap_finder.py"
+source_author: "Perplexity (sonar)"
 source_date: 2026-06-02
 source_file: "raw/articles/2026-04-22-gap-finder-hyperliquid-crypto-perpetual-exchange-lo.md"
 confidence: low
@@ -18,7 +18,7 @@ related: ["[[bar-resolution-selection]]", "[[intrabar-fill-modeling]]", "[[multi
 
 # Gap Finder: Hyperliquid Low-Timeframe Perp Backtesting
 
-#meta — this is a **gap-direction report**, not a factual source. It was produced by `tools/gap_finder.py` (Perplexity `sonar`) on 2026-06-02 to identify wiki coverage gaps for *Hyperliquid + low-timeframe (1m/3m/5m/15m) perpetuals backtesting*. The deep-research (`sonar-deep-research`) variant failed twice with a dropped connection; the fast `sonar` run succeeded. Use this report to decide **what to write**, not as content to copy — its specific figures are unverified and several "missing" venues it lists (Binance, Bybit, OKX, GMX, dYdX, CCXT, Kaiko, CoinAPI, Glassnode) already have wiki pages, so the report is partly out of date on coverage.
+#meta — this is a **gap-direction report**, not a factual source. It was produced by a Perplexity gap-analysis run (Perplexity `sonar`) on 2026-06-02 to identify wiki coverage gaps for *Hyperliquid + low-timeframe (1m/3m/5m/15m) perpetuals backtesting*. The deep-research (`sonar-deep-research`) variant failed twice with a dropped connection; the fast `sonar` run succeeded. Use this report to decide **what to write**, not as content to copy — its specific figures are unverified and several "missing" venues it lists (Binance, Bybit, OKX, GMX, dYdX, CCXT, Kaiko, CoinAPI, Glassnode) already have wiki pages, so the report is partly out of date on coverage.
 
 Raw report: `raw/articles/2026-04-22-gap-finder-hyperliquid-crypto-perpetual-exchange-lo.md`
 

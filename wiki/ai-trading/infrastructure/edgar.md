@@ -34,7 +34,7 @@ EDGAR (Electronic Data Gathering, Analysis, and Retrieval) is the U.S. [[sec|SEC
 
 - **Free**, no API key required.
 - **Rate limit**: max **10 requests/second**.
-- **User-Agent required**: requests must send a declared `User-Agent` header identifying the requester with contact info (e.g., `Sam Research sam@example.com`); requests without it are blocked.
+- **User-Agent required**: requests must send a declared `User-Agent` header identifying the requester with contact info (e.g., `Example Research contact@example.com`); requests without it are blocked.
 - Data is delivered as raw HTML/text/XBRL — expect to parse. XBRL frames provide the cleanest path to structured numbers.
 
 ## Trading Use-Cases

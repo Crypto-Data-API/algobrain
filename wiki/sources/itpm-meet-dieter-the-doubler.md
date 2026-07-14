@@ -9,7 +9,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=uRUYhzBmbdM"
 source_author: "Anton Kreil / ITPM"
 source_date: 2022-11-01
-source_file: "r2://trader-wiki/transcripts/2022-11-01-meet-dieter-the-doubler.md"
 confidence: medium
 claims_count: 20
 aliases: ["Dieter the Doubler"]

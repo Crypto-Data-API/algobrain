@@ -9,7 +9,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=L7G0OfJUON8"
 source_author: "Anton Kreil / ITPM"
 source_date: 2017-01-01
-source_file: "r2://trader-wiki/transcripts/2017-01-01-annihilates-retail-brokers-and-trading-educators.md"
 confidence: medium
 claims_count: 30
 aliases: ["Annihilates Retail Brokers", "ITPM Annihilates Retail Brokers"]
@@ -101,4 +100,3 @@ Source summary of [[anton-kreil]]'s seminar exposing the structural conflicts of
 ## Sources
 
 - Kreil, Anton / ITPM. *"The Institute of Trading and Portfolio Management Annihilates Retail Brokers and Trading Educators."* YouTube seminar, 2017. https://www.youtube.com/watch?v=L7G0OfJUON8
-- Raw transcript: `r2://trader-wiki/transcripts/2017-01-01-annihilates-retail-brokers-and-trading-educators.md`

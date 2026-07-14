@@ -41,6 +41,5 @@ Zipmex stands as an example of the exchange [[counterparty-risk|counterparty ris
 
 ## Sources
 
-- Fred/Sam session transcripts — early crypto discussions
 - [Zipmex collapse overview (Wikipedia)](https://en.wikipedia.org/wiki/Zipmex)
 - Verified via Perplexity (sonar), 2026-06-10

@@ -48,7 +48,6 @@ Note for current use: since November 2025 the "Summers channel" has largely gone
 
 ## Sources
 
-- Fred/Sam session transcripts — referenced in 3 sessions as top macro source
 - CBS News, "Larry Summers resigns from OpenAI board after release of Jeffrey Epstein emails" (Nov 2025) — https://www.cbsnews.com/news/larry-summers-resigns-openai-board-jeffrey-epstein-emails/
 - Politico, "Larry Summers steps down from OpenAI" (Nov 19, 2025) — https://www.politico.com/news/2025/11/19/larry-summers-steps-down-from-openai-00658779
 - PBS NewsHour, "Larry Summers steps down from public commitments after emails show friendly relationship with Jeffrey Epstein" (Nov 2025) — https://www.pbs.org/newshour/nation/larry-summers-steps-down-from-public-commitments-after-emails-show-friendly-relationship-with-jeffrey-epstein

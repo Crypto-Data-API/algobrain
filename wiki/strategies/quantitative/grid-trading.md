@@ -28,7 +28,7 @@ related: ["[[dollar-cost-averaging]]", "[[mean-reversion]]", "[[bollinger-band-r
 
 Grid trading is a systematic, no-directional-view strategy that places a ladder of buy and sell limit orders at fixed price intervals around a reference price. As price oscillates inside a range, the grid mechanically buys dips and sells rallies, harvesting the spacing between adjacent levels as realized profit on each completed cycle. The strategy is mathematically equivalent to a constrained, discretized form of [[market-making]]: the operator stands ready to provide passive liquidity on both sides and is paid the bid-ask spread plus a volatility premium for absorbing oscillating flow.
 
-Grid trading has become enormously popular in [[crypto]] markets through automated grid bots offered by [[pionex|Pionex]], 3Commas, KuCoin, [[bybit|Bybit]], and increasingly on perp DEXs like [[hyperliquid|Hyperliquid]]. In [[forex]], grid bots have been used for decades on range-bound currency pairs. The "set and forget" appeal masks a sharp, regime-dependent risk profile: a grid is a profitable structural strategy in tight, range-bound regimes and a catastrophic inventory accumulator in trends. The user's live bot, currently OFF, addresses this exact failure mode with a strict regime filter (ADX(14) < 20 and Bollinger Bandwidth percentile rank < 20) and a 2.0x ATR break-cancel rule.
+Grid trading has become enormously popular in [[crypto]] markets through automated grid bots offered by [[pionex|Pionex]], 3Commas, KuCoin, [[bybit|Bybit]], and increasingly on perp DEXs like [[hyperliquid|Hyperliquid]]. In [[forex]], grid bots have been used for decades on range-bound currency pairs. The "set and forget" appeal masks a sharp, regime-dependent risk profile: a grid is a profitable structural strategy in tight, range-bound regimes and a catastrophic inventory accumulator in trends. The reference live bot, currently OFF, addresses this exact failure mode with a strict regime filter (ADX(14) < 20 and Bollinger Bandwidth percentile rank < 20) and a 2.0x ATR break-cancel rule.
 
 ## Edge source
 
@@ -43,7 +43,7 @@ Critically, the strategy has **no informational** or **analytical** edge. It doe
 
 Range-bound markets exhibit short-horizon mean reversion: order flow noise (cancellations, retail market orders, liquidations of marginal positions, MM inventory rebalancing) generates oscillations around a stable reference price without an informed directional impulse. Under those conditions, a passive limit-order ladder is a near-optimal strategy class — it is the discretized, "model-free" cousin of the continuous quoting policy derived in [[avellaneda-stoikov-model|Avellaneda & Stoikov (2008)]] for a high-frequency market maker in a limit order book.
 
-The Avellaneda-Stoikov framework formalizes the intuition: an inventory-aware market maker chooses bid and ask quotes to maximize expected utility subject to inventory risk. The optimal quotes are symmetric around an "indifference price" that is *skewed* away from the mid by accumulated inventory. A symmetric grid with no inventory skew is the special case where (i) inventory aversion is zero or (ii) the operator believes price-process drift is exactly zero (perfect range). The closer the regime is to those assumptions — exactly what the user's ADX/BB filter tries to detect — the closer the simple grid is to optimal.
+The Avellaneda-Stoikov framework formalizes the intuition: an inventory-aware market maker chooses bid and ask quotes to maximize expected utility subject to inventory risk. The optimal quotes are symmetric around an "indifference price" that is *skewed* away from the mid by accumulated inventory. A symmetric grid with no inventory skew is the special case where (i) inventory aversion is zero or (ii) the operator believes price-process drift is exactly zero (perfect range). The closer the regime is to those assumptions — exactly what the ADX/BB filter tries to detect — the closer the simple grid is to optimal.
 
 The deeper foundation traces to [[market-microstructure|Garman (1976) "Market microstructure"]], which modeled buyer and seller arrivals as Poisson processes and derived dealer survival conditions: a dealer who quotes both sides earns the spread per round-trip and survives as long as buy and sell arrivals are roughly balanced. This is exactly the grid-trader's payoff when the regime is genuinely range-bound. When arrivals are *unbalanced* (i.e., a trend), the dealer accumulates inventory and dies — which is precisely why the regime filter is the entire game.
 
@@ -67,7 +67,7 @@ If spacing > 2x fee, gross-of-adverse-selection P&L is positive and grows linear
 
 ## Rules
 
-The "grid" is a family of strategies. The user's bot implements the **Filtered Grid (canonical)**.
+The "grid" is a family of strategies. The reference bot implements the **Filtered Grid (canonical)**.
 
 ### Generic neutral grid
 
@@ -77,7 +77,7 @@ The "grid" is a family of strategies. The user's bot implements the **Filtered G
 4. On any fill at level k, cancel that order and place the matching opposite-side limit at level k+1 (sell) or k-1 (buy) with the same notional.
 5. Run indefinitely until a manual exit or a hard stop.
 
-### Filtered grid (the user's bot — canonical)
+### Filtered grid (the reference bot — canonical)
 
 1. **Regime gate.** Only deploy when both:
    - ADX(14) on the 1-hour timeframe is **< 20** (no trend strength), and
@@ -189,7 +189,7 @@ while True:
 
 ## ADX + Bollinger Compression Filter
 
-This is the single most important component of the user's strategy. The two indicators are deliberately chosen because they capture **orthogonal** dimensions of "range-bound":
+This is the single most important component of the strategy. The two indicators are deliberately chosen because they capture **orthogonal** dimensions of "range-bound":
 
 - **ADX(14)** measures *directional movement strength*, normalized as a 0-100 score. Wilder's original interpretation: ADX < 20 = no trend, 20-25 = transitional, > 25 = trending, > 40 = strong trend. The grid wants ADX < 20 — i.e., the market is making no net progress in either direction over the lookback.
 - **Bollinger Bandwidth** (BBW = (upper - lower) / middle) measures *realized volatility* relative to its own recent history. A market can have low ADX (no trend) but high BBW (chaotic chop); a grid placed in chop with single ticks larger than the spacing gets shredded by adverse selection. We require *low* BBW — explicitly that today's BBW is in the bottom 20th percentile of the last 252 hours of BBW values.
@@ -210,7 +210,7 @@ The 2.0x ATR break-cancel acts as a **post-filter regime check**: even if ADX an
 
 ## Example trade
 
-**Asset:** ETH-PERP on a perp DEX, 1-hour timeframe, user's filtered-grid bot.
+**Asset:** ETH-PERP on a perp DEX, 1-hour timeframe, filtered-grid reference bot.
 
 - **2026-03-10 14:00 UTC.** ETH has been ranging $3,000-$3,500 for two weeks. ADX(14) on 1H = 14.2. BBW percentile rank (252h) = 0.08. Both gates pass; bot deploys.
 - **Grid center:** $3,250 (current mark). ATR(14) = $42. Spacing = 0.5 x $42 = $21, but rounded to $50 for clean tick alignment. 10 levels.
@@ -254,7 +254,7 @@ Grid trading is moderately capacity-constrained. The binding constraints:
 2. **Number of levels.** Wider grids on thin pairs cause the operator's own fills to move the local price, creating a market-impact loop where the grid is paying the spread to itself.
 3. **Cross-venue fragmentation.** A single grid on a single venue is the natural unit. Multi-venue grids face inventory-reconciliation latency that can produce phantom fills.
 
-Practical capacity: ~$5M per pair on a top-3 liquidity perp like ETH-PERP; ~$500K-$1M on mid-cap alts; <$100K on long-tail alts where the grid would *be* the order book. The user's 15% of book at $50K equity ($7,500) is comfortably within capacity on liquid pairs.
+Practical capacity: ~$5M per pair on a top-3 liquidity perp like ETH-PERP; ~$500K-$1M on mid-cap alts; <$100K on long-tail alts where the grid would *be* the order book. A 15%-of-book allocation on a $50K account ($7,500) is comfortably within capacity on liquid pairs.
 
 ## What kills this strategy
 
@@ -305,7 +305,7 @@ Numerical conditions for retiring or pausing the grid (see [[when-to-retire-a-st
 - "The Feasibility of Grid Trading Approach for Bitcoin Based on Backtesting" (EAI / EUDL, 2022). Backtest of grid trading on BTC daily data 2019-2021. Concluded that grid trading is feasible during high-volatility periods but produces low or negative returns in low-volatility periods without a regime filter. *(verified via WebSearch).*
 - Liu et al. (2025). "Dynamic Grid Trading Strategy: From Zero Expectation to Market Outperformance." arXiv:2506.11921. Proposes a dynamic-reset grid that materially outperforms static grids and buy-and-hold on minute-level BTC/ETH 2021-2024 data. Confirms the static-grid zero-expectation null and the value-add of regime adaptation. *(verified via WebSearch — paper at arXiv 2506.11921).*
 - Pionex Help Center (Grid Trading Bot, Futures Grid Bot). Industry/practitioner reference; documents the standard parameter set used by the largest consumer grid platform. *(verified via WebSearch — pages exist at support.pionex.com).*
-- Hyperliquid HLP vault risk-return analyses (Geronimo on Medium; KuCoin research desk; DefiLlama protocol page). Useful as a comparison: HLP is a sophisticated continuous-quoting market-making vault on the same venue category as the user's bot, and provides a benchmark for what professional market making looks like when the regime filter is replaced by an inventory-skewed Avellaneda-Stoikov-style policy. See [[hyperliquid-hlp-basis-arbitrage]]. *(verified via WebSearch).*
+- Hyperliquid HLP vault risk-return analyses (Geronimo on Medium; KuCoin research desk; DefiLlama protocol page). Useful as a comparison: HLP is a sophisticated continuous-quoting market-making vault on the same venue category as the reference bot, and provides a benchmark for what professional market making looks like when the regime filter is replaced by an inventory-skewed Avellaneda-Stoikov-style policy. See [[hyperliquid-hlp-basis-arbitrage]]. *(verified via WebSearch).*
 - Note on academic coverage: peer-reviewed grid-trading literature is sparse — most rigorous treatments are practitioner blogs, exchange documentation, and a handful of recent arXiv papers. The intellectual scaffolding sits in the broader market-microstructure / market-making literature rather than in a "grid trading" canon.
 
 ## Related

@@ -9,7 +9,6 @@ source_type: article
 source_url: "https://itpm.com/education/"
 source_author: "ITPM"
 source_date: 2026-04-07
-source_file: "r2://trader-wiki/articles/2026-04-07-itpm-education-overview.md"
 confidence: medium
 claims_count: 22
 aliases: ["ITPM Education Overview"]

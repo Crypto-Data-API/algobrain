@@ -10,7 +10,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=XlWPTmk8f3o"
 source_author: "Anton Kreil / ITPM"
 source_date: 2018-01-01
-source_file: "r2://trader-wiki/transcripts/2018-01-01-trading-legends-raj-malhotra.md"
 confidence: medium
 claims_count: 17
 related: ["[[anton-kreil]]", "[[raj-malhotra]]", "[[options]]", "[[volatility]]", "[[risk-management-overview]]"]

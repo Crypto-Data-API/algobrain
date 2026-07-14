@@ -9,9 +9,8 @@ tags: [sources, raw, index, meta]
 
 # Raw Source Index
 
-Master log of all raw source documents stored in Cloudflare R2 (`r2://venture-trading-wiki-raw/`).
 
-To download a source locally: `python tools/raw_sync.py download <key>`
+
 
 | Date | Source ID | Type | Title | R2 Key |
 |------|-----------|------|-------|--------|

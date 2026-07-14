@@ -9,7 +9,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=9h3lByx59ns"
 source_author: "Anton Kreil / ITPM"
 source_date: 2013-02-07
-source_file: "r2://trader-wiki/transcripts/2013-02-07-ex-goldman-sachs-tells-truth-part-{1,2,3,4,5,6}.md"
 confidence: medium
 claims_count: 28
 aliases: ["Goldman Sachs Tells Truth"]

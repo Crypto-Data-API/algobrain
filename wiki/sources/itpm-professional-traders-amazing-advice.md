@@ -9,7 +9,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=YPQiDuHqxe8"
 source_author: "Anton Kreil / ITPM"
 source_date: 2019-01-01
-source_file: "r2://trader-wiki/transcripts/2019-01-01-professional-traders-giving-amazing-advice.md"
 confidence: medium
 claims_count: 18
 aliases: ["Professional Traders Amazing Advice"]

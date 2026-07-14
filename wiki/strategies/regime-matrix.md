@@ -227,9 +227,9 @@ Three relatively uncorrelated strategies that depend on different market feature
 
 Limited diversification because most crypto strategies cluster in the same regime. Adding equity-side hedges or moving outside crypto entirely is usually necessary for true diversification.
 
-### Portfolio D: Live Bot Six-Strategy Stack (this user's deployed system)
+### Portfolio D: Live Bot Six-Strategy Stack (the deployed production system)
 
-The six strategies in this user's live bot are deliberately spread across regime profiles to allow regime-aware on/off toggling rather than continuous deployment of all six:
+The six strategies in the production live bot are deliberately spread across regime profiles to allow regime-aware on/off toggling rather than continuous deployment of all six:
 
 | Regime | Strategies that thrive |
 |---|---|

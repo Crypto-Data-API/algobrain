@@ -10,7 +10,6 @@ source_type: article
 source_url: "https://cryptodataapi.com/regimes"
 source_author: "Crypto Data API (VENTURE AI LABS)"
 source_date: 2026-06-03
-source_file: "r2://trader-wiki/articles/2026-06-03-cryptodataapi-14-basket-regime-framework.md"
 confidence: medium
 claims_count: 14
 related: ["[[crypto-market-regime-taxonomy]]", "[[regime-matrix]]", "[[market-regime-detection-ml]]", "[[hyperliquid]]"]
@@ -20,7 +19,6 @@ related: ["[[crypto-market-regime-taxonomy]]", "[[regime-matrix]]", "[[market-re
 
 #meta — source summary for the **Crypto Data API "Market Regimes" framework** (cryptodataapi.com/regimes), a product of **VENTURE AI LABS**. It defines **14 meta-baskets** that "capture every state crypto markets can be in," each implying a distinct set of coins, leverage levels, holding durations, and funding-cost tolerance. The framework is explicitly **designed for systematic perps trading on venues like [[hyperliquid|Hyperliquid]]**. This is the canonical structure the wiki's [[crypto-market-regime-taxonomy|crypto regime taxonomy]] is organised around.
 
-Raw capture: `r2://trader-wiki/articles/2026-06-03-cryptodataapi-14-basket-regime-framework.md`
 
 ## The 14 Meta-Baskets
 

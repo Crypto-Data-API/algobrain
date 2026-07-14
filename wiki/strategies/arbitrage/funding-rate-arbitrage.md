@@ -104,11 +104,11 @@ If your live funding-arb sleeve produces returns indistinguishable from the null
 - 1x leverage on the perp short (fully collateralised in the same instrument's margin currency). Higher leverage massively reduces capital requirement but introduces liquidation risk on the short leg during sharp upward moves; the cost is asymmetric.
 - Per-asset cap so a single oracle/exchange event cannot wipe the book.
 - Cap concurrent positions to bound operational complexity (rebalancing, monitoring, withdrawal scheduling).
-- Kelly-fractional sizing: realistic Kelly fraction for funding arb in current regime is ~0.05–0.10 of book per asset (see [[kelly-criterion]]); the user's bot stays well below this.
+- Kelly-fractional sizing: realistic Kelly fraction for funding arb in current regime is ~0.05–0.10 of book per asset (see [[kelly-criterion]]); the reference bot stays well below this.
 
 ### AsterDEX implementation
 
-This is the canonical, deployed instance of the strategy in this wiki: the user's `funding_arb` strategy on [[asterdex|AsterDEX]] (perp DEX), currently ON.
+This is the canonical, deployed instance of the strategy in this wiki: the deployed `funding_arb` strategy on [[asterdex|AsterDEX]] (perp DEX), currently ON.
 
 | Parameter | Value | Rationale |
 |---|---|---|

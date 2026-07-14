@@ -11,7 +11,6 @@ source_type: video
 source_url: "https://www.youtube.com/watch?v=2poH1G7KlJA"
 source_author: "Anton Kreil"
 source_date: 2023-09-20
-source_file: "r2://trader-wiki/transcripts/2023-09-20-how-to-achieve-god-like-trader-status.md"
 confidence: medium
 claims_count: 35
 ---

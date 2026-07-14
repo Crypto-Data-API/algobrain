@@ -15,7 +15,7 @@ claims_count: 12
 related: ["[[hyperliquid]]", "[[clob]]", "[[hypercore]]", "[[hyperbft]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]"]
 ---
 
-Deep-research gap analysis (Perplexity `sonar-deep-research`, 2026-04-22) on Hyperliquid order books and on-chain central-limit-order-book (CLOB) trading, run via `tools/gap_finder.py --topic "hyperliquid order books" --deep`. It compared the wiki's existing Hyperliquid coverage against the current (2024–2026) state of the venue and recommended ~24 entity/concept/data-source additions. The synthesis itself is **MEDIUM** confidence; its underlying primary sources (Hyperliquid's own GitBook docs) are **HIGH** confidence.
+Deep-research gap analysis (Perplexity `sonar-deep-research`, 2026-04-22) on Hyperliquid order books and on-chain central-limit-order-book (CLOB) trading, via a Perplexity deep-research run. It compared the wiki's existing Hyperliquid coverage against the current (2024–2026) state of the venue and recommended ~24 entity/concept/data-source additions. The synthesis itself is **MEDIUM** confidence; its underlying primary sources (Hyperliquid's own GitBook docs) are **HIGH** confidence.
 
 ## Key claims (with confidence)
 
