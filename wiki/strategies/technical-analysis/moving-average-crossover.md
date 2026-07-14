@@ -8,7 +8,7 @@ tags: [trend-following, moving-averages, technical-analysis, crossover, momentum
 aliases: ["MA Crossover", "Golden Cross Strategy", "Death Cross Strategy", "Golden/Death Cross", "50/200 SMA System"]
 strategy_type: technical
 timeframe: swing|position|long-term
-markets: [stocks, crypto, forex, commodities, futures]
+markets: [crypto, forex, commodities, futures]
 complexity: beginner
 backtest_status: paper-traded
 edge_source: [behavioral, structural, risk-bearing]

@@ -6,7 +6,7 @@ updated: 2026-04-14
 status: good
 tags: [combinations, alpha-edge, portfolio-construction, tail-risk, convexity, antifragile, risk-management]
 strategy_type: hybrid
-markets: [stocks, crypto, bonds]
+markets: [crypto, bonds]
 complexity: intermediate
 backtest_status: untested
 related: ["[[contrarian-extremes]]", "[[structural-forced-selling]]", "[[gamma-exposure-trading]]", "[[trend-plus-tail-hedge]]", "[[crisis-alpha]]", "[[convexity]]", "[[dragon-portfolio]]", "[[mark-spitznagel]]", "[[universa-investments]]"]

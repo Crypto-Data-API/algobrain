@@ -8,7 +8,7 @@ tags: [options, derivatives, volatility, swing-trading]
 aliases: ["Bull Put Spread", "Put Credit Spread", "Vertical Put Credit Spread", "Short Put Vertical"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: cost-corrected
 edge_source: [risk-bearing, behavioral, structural]

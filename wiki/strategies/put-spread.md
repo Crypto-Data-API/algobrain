@@ -9,7 +9,7 @@ aliases: ["Put Spread", "Vertical Put Spread", "Bear Put Spread", "Long Put Spre
 related: ["[[long-put]]", "[[short-put-spread]]", "[[credit-spread]]", "[[debit-spread]]", "[[protective-puts]]", "[[options]]", "[[implied-volatility]]", "[[theta-decay]]", "[[edge-taxonomy]]"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: naive-backtested
 edge_source: [analytical, behavioral]

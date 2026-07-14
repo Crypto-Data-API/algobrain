@@ -6,7 +6,7 @@ updated: 2026-04-14
 status: good
 tags: [combinations, alpha-edge, intermarket-analysis, cross-asset, macro, correlation, regime-detection]
 strategy_type: hybrid
-markets: [stocks, crypto, forex, bonds, commodities]
+markets: [crypto, forex, bonds, commodities]
 complexity: advanced
 backtest_status: untested
 related: [risk-on-risk-off-framework, regime-adaptive-strategy, gamma-exposure-trading, contrarian-extremes, intermarket-analysis, john-murphy, sector-rotation, dxy-commodity-correlation, commodity-inflation-link]

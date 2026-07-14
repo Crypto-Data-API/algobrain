@@ -8,7 +8,7 @@ tags: [options, volatility, derivatives, quantitative, risk-management]
 aliases: ["Short Vol", "Short Volatility", "Net Short Options Strategies"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, options, futures]
+markets: [options, futures]
 complexity: advanced
 backtest_status: cost-corrected
 edge_source: [risk-bearing, behavioral, structural]

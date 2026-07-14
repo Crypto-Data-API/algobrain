@@ -8,7 +8,7 @@ tags: [options, derivatives, volatility, risk-management, swing-trading]
 aliases: ["Premium Selling", "Theta Gang", "Short Vol Core", "Selling Premium"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: advanced
 backtest_status: cost-corrected
 edge_source: [risk-bearing, behavioral, structural]

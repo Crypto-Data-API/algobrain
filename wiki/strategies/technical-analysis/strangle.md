@@ -8,7 +8,7 @@ tags: [options, volatility, derivatives, swing-trading, quantitative]
 aliases: ["Strangle", "Long Strangle"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: untested
 edge_source: [behavioral, risk-bearing, structural]

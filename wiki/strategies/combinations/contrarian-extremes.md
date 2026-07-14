@@ -7,7 +7,7 @@ status: excellent
 tags: [combinations, alpha-edge, contrarian, sentiment, mean-reversion, behavioral-edge, fear-greed, risk-bearing]
 strategy_type: hybrid
 timeframe: swing
-markets: [stocks, crypto]
+markets: [crypto]
 complexity: intermediate
 backtest_status: untested
 edge_source: [behavioral, risk-bearing]

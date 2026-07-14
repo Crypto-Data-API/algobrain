@@ -8,7 +8,7 @@ tags: [arbitrage, strategy-development, quantitative, risk-management]
 aliases: ["Arb Seasonality", "Arbitrage Calendar", "Seasonal Arb Patterns"]
 strategy_type: quantitative
 timeframe: position|long-term
-markets: [crypto, stocks, futures, options, commodities]
+markets: [crypto, futures, options, commodities]
 complexity: intermediate
 backtest_status: untested
 related: ["[[arbitrage-overview]]", "[[arbitrage-live-performance]]", "[[arbitrage-opportunity-map]]", "[[regime-matrix]]", "[[funding-rate-arbitrage]]", "[[volatility-arbitrage]]", "[[cross-chain-arbitrage]]", "[[commodity-seasonality-patterns]]", "[[anomalies-overview]]", "[[arbitrage-competitive-landscape]]", "[[multi-venue-capital-management]]", "[[calendar-spread-arbitrage]]", "[[volatility-risk-premium]]", "[[hyperliquid]]"]

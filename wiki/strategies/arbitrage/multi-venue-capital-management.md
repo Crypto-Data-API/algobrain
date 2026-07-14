@@ -8,7 +8,7 @@ tags: [arbitrage, risk-management, execution, crypto, portfolio-theory]
 aliases: ["Capital Logistics", "Multi-Exchange Capital Management", "Inventory Management"]
 strategy_type: quantitative
 timeframe: position|long-term
-markets: [crypto, stocks, futures, forex]
+markets: [crypto, futures, forex]
 complexity: advanced
 backtest_status: untested
 related: ["[[cross-exchange-arbitrage]]", "[[funding-rate-arbitrage]]", "[[counterparty-risk]]", "[[leg-risk]]", "[[execution-sequencing]]", "[[fees]]", "[[exchange-api-reference]]", "[[arbitrage-parameter-cheatsheet]]", "[[risk-management-overview]]", "[[arbitrage-overview]]", "[[arbitrage-competitive-landscape]]", "[[arbitrage-seasonality]]", "[[hyperliquid]]", "[[hlp]]", "[[lp-vault-comparison]]", "[[liquidity-provider]]"]

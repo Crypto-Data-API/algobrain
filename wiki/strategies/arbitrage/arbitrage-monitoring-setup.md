@@ -8,7 +8,7 @@ tags: [arbitrage, execution, risk-management, strategy-development, algorithmic]
 aliases: ["Arb Monitoring Code", "Arb Alert Bot", "Trading Bot Monitoring"]
 strategy_type: algorithmic
 timeframe: scalp|intraday|swing|position
-markets: [crypto, stocks, futures, options]
+markets: [crypto, futures, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[strategy-monitoring]]", "[[arbitrage-parameter-cheatsheet]]", "[[exchange-api-reference]]", "[[multi-venue-capital-management]]", "[[leg-risk]]", "[[crowding-indicators]]", "[[arbitrage-live-performance]]"]

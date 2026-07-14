@@ -7,7 +7,7 @@ status: excellent
 tags: [combinations, meta-strategy, dca, dollar-cost-averaging, technical-analysis, accumulation, beginner-friendly, mean-reversion]
 strategy_type: hybrid
 timeframe: position
-markets: [stocks, crypto]
+markets: [crypto]
 complexity: beginner
 backtest_status: untested
 edge_source: [behavioral, analytical]

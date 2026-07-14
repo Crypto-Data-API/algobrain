@@ -8,7 +8,7 @@ tags: [technical-analysis, breakout, trend-following]
 aliases: ["Breakouts", "Range Breakout"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, crypto, forex]
+markets: [crypto, forex]
 complexity: intermediate
 backtest_status: untested
 edge_source: [behavioral, structural]

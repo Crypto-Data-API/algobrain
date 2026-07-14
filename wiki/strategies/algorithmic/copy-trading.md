@@ -4,11 +4,11 @@ type: strategy
 created: 2026-04-06
 updated: 2026-07-13
 status: excellent
-tags: [crypto, stocks, social-trading, copy-trading, whale-watching, nansen, arkham, on-chain-analytics, mirror-trading]
+tags: [crypto, social-trading, copy-trading, whale-watching, nansen, arkham, on-chain-analytics, mirror-trading]
 aliases: ["Mirror Trading", "Social Trading", "Whale Copying", "Follow Trading"]
 strategy_type: hybrid
 timeframe: swing|position
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: beginner
 backtest_status: untested
 edge_source: [informational, behavioral]

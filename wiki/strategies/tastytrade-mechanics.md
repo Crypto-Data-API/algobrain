@@ -8,7 +8,7 @@ tags: [options, derivatives, volatility, swing-trading, education]
 aliases: ["tastytrade Playbook", "tastytrade Rules", "Sosnoff Mechanics", "45-DTE 50% 21-DTE", "tastytrade Methodology"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: naive-backtested
 edge_source: [structural, behavioral, risk-bearing]

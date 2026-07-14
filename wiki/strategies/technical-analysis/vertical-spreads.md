@@ -7,7 +7,7 @@ status: excellent
 tags: [options, vertical-spread, bull-call, bear-put, credit-spread, debit-spread, defined-risk]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, crypto]
+markets: [crypto]
 complexity: beginner
 backtest_status: untested
 edge_source: [analytical, risk-bearing, behavioral]

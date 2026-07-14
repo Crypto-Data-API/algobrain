@@ -7,7 +7,7 @@ status: excellent
 tags: [options, bull-put-spread, put-credit-spread, credit-spread, bullish, defined-risk]
 aliases: ["Put Credit Spread"]
 strategy_type: quantitative
-markets: [stocks]
+markets: []
 complexity: beginner
 backtest_status: untested
 edge_source: [risk-bearing, behavioral]

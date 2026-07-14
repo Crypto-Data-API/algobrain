@@ -7,7 +7,7 @@ status: good
 tags: [combinations, meta-strategy, portfolio-construction, passive-investing, active-management, asset-allocation]
 strategy_type: hybrid
 timeframe: long-term core, varies for satellites
-markets: [stocks, crypto, bonds]
+markets: [crypto, bonds]
 complexity: intermediate
 backtest_status: untested
 related: ["[[index-investing]]", "[[covered-calls]]", "[[wheel-strategy]]", "[[dollar-cost-averaging]]", "[[momentum-investing]]", "[[crypto-allocation]]"]

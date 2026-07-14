@@ -9,7 +9,7 @@ aliases: ["Range Trading", "Channel Trading", "Range-Bound Trading", "Sideways M
 related: ["[[mean-reversion]]", "[[support-resistance]]", "[[bollinger-bands]]", "[[rsi]]", "[[breakout-trading]]", "[[grid-trading]]", "[[market-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
 strategy_type: technical
 timeframe: intraday
-markets: [stocks, forex, crypto, futures]
+markets: [forex, crypto, futures]
 complexity: beginner
 backtest_status: naive-backtested
 edge_source: [behavioral, structural]

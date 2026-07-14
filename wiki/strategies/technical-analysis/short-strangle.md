@@ -7,7 +7,7 @@ status: excellent
 tags: [options, short-strangle, premium-selling, theta-gang, neutral, undefined-risk]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks]
+markets: []
 complexity: advanced
 backtest_status: untested
 edge_source: [risk-bearing, behavioral]

@@ -4,11 +4,11 @@ type: strategy
 created: 2026-04-13
 updated: 2026-06-20
 status: excellent
-tags: [swing-trading, technical-analysis, momentum, stocks, risk-management]
+tags: [swing-trading, technical-analysis, momentum, risk-management]
 aliases: ["Swing Trader", "Swing Trade"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, crypto, forex]
+markets: [crypto, forex]
 complexity: beginner
 backtest_status: untested
 edge_source: [behavioral]

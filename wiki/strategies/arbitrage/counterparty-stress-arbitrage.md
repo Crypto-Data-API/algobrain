@@ -9,7 +9,7 @@ aliases: ["Forced Liquidation Arbitrage", "Stressed Counterparty Trade", "Capita
 related: ["[[2006-09-amaranth-natural-gas-blowup]]", "[[2022-06-three-arrows-blowup]]", "[[2022-11-ftx-collapse-arbitrage]]", "[[2026-04-18-kelp-layerzero-exploit]]", "[[fastest-profitable-trades]]", "[[liquidation-cascade-arbitrage]]", "[[post-hack-incident-response-arb]]", "[[ai-amplified-exploit-arbitrage]]", "[[archegos-blowup-2021]]", "[[risk-management]]", "[[behavioral-finance]]", "[[counterparty-risk]]", "[[stablecoin-depeg-profit-capture]]", "[[arbitrage-overview]]", "[[paid-data-providers]]", "[[historical-spread-data]]"]
 strategy_type: hybrid
 timeframe: swing
-markets: [crypto, stocks, commodities]
+markets: [crypto, commodities]
 complexity: advanced
 backtest_status: live
 edge_source: [structural, informational, analytical]

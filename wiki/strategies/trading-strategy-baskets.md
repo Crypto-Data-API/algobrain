@@ -4,11 +4,11 @@ type: strategy
 created: 2026-06-22
 updated: 2026-07-13
 status: good
-tags: [quantitative, portfolio-theory, risk-management, stocks, correlation]
+tags: [quantitative, portfolio-theory, risk-management, correlation]
 aliases: ["Basket Trading", "Strategy Baskets", "Thematic Baskets", "Long/Short Baskets"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks, crypto, futures]
+markets: [crypto, futures]
 complexity: intermediate
 backtest_status: untested
 edge_source: [behavioral, structural, analytical]

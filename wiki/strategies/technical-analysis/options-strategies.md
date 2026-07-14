@@ -8,7 +8,7 @@ tags: [options, derivatives, volatility, swing-trading]
 aliases: ["Option Strategies", "Options Structures", "Option Spreads", "Options Strategies Overview", "options-strategies-overview"]
 strategy_type: hybrid
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: untested
 edge_source: [risk-bearing, behavioral]

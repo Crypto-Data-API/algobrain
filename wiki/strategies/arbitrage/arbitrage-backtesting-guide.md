@@ -8,7 +8,7 @@ tags: [arbitrage, backtesting, quantitative, strategy-development]
 aliases: ["Arb Backtesting", "Multi-Leg Backtesting", "Arbitrage Simulation"]
 strategy_type: quantitative
 timeframe: scalp|intraday|swing|position
-markets: [crypto, stocks, futures, options]
+markets: [crypto, futures, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[backtesting-overview]]", "[[transaction-cost-modeling]]", "[[walk-forward-analysis]]", "[[arbitrage-overview]]", "[[arbitrage-parameter-cheatsheet]]", "[[historical-spread-data]]", "[[leg-risk]]", "[[execution-sequencing]]", "[[data-snooping-and-p-hacking]]", "[[overfitting-detection]]", "[[cryptodataapi]]"]

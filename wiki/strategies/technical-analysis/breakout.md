@@ -4,11 +4,11 @@ type: strategy
 created: 2026-06-22
 updated: 2026-06-22
 status: good
-tags: [technical-analysis, breakout, momentum, trend-following, stocks, crypto]
+tags: [technical-analysis, breakout, momentum, trend-following, crypto]
 aliases: ["Breakout Pattern", "Price Breakout", "Range Breakout"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, crypto, forex, futures]
+markets: [crypto, forex, futures]
 complexity: beginner
 backtest_status: untested
 edge_source: [behavioral, structural]

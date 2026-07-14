@@ -8,7 +8,7 @@ tags: [arbitrage, regulatory, jurisdiction, compliance, crypto, defi, eurodollar
 aliases: ["Reg Arb", "Jurisdictional Arbitrage", "Compliance Arbitrage"]
 strategy_type: fundamental
 timeframe: position
-markets: [crypto, forex, stocks]
+markets: [crypto, forex]
 complexity: advanced
 backtest_status: untested
 related: ["[[sec]]", "[[cftc]]", "[[defi]]", "[[stablecoins]]", "[[offshore-trading]]", "[[kyc]]"]

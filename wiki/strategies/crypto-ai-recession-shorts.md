@@ -4,12 +4,12 @@ type: strategy
 created: 2026-05-05
 updated: 2026-06-10
 status: good
-tags: [crypto, bitcoin, stocks, risk-management, ai-trading, behavioral-finance]
+tags: [crypto, bitcoin, risk-management, ai-trading, behavioral-finance]
 aliases: ["AI Recession Crypto Shorts", "Crypto AI Recession Playbook"]
 related: ["[[citrini-2028-global-intelligence-crisis]]", "[[ai-driven-demand-destruction]]", "[[capital-vs-labor-asymmetry]]", "[[tech-hub-concentration-risk]]", "[[microstrategy]]", "[[mara]]", "[[riot-platforms]]", "[[coinbase]]", "[[bitcoin-halving]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]", "[[2025-10-crypto-liquidation-cascade]]"]
 strategy_type: hybrid
 timeframe: position
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: advanced
 backtest_status: untested
 edge_source: [behavioral, structural, informational]

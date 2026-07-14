@@ -8,7 +8,7 @@ tags: [position-trading, portfolio-theory, education]
 aliases: ["DCA", "DCA Strategy", "Dollar Cost Averaging"]
 strategy_type: quantitative
 timeframe: long-term
-markets: [stocks, crypto, etf]
+markets: [crypto, etf]
 complexity: beginner
 backtest_status: untested
 edge_source: [behavioral]

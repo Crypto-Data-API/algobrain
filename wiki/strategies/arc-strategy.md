@@ -9,7 +9,7 @@ aliases: ["ARC Strategy", "Area Range Candle", "Area-Range-Candle", "ARC day tra
 related: ["[[box-and-swing-structure]]", "[[john-wick-candle]]", "[[support-and-resistance]]", "[[candlestick-patterns]]", "[[liquidity-pools]]", "[[vwap]]", "[[initial-balance]]", "[[ninjatrader]]"]
 strategy_type: technical
 timeframe: intraday
-markets: [stocks, futures, forex, crypto]
+markets: [futures, forex, crypto]
 complexity: intermediate
 backtest_status: untested
 edge_source: [behavioral, structural]

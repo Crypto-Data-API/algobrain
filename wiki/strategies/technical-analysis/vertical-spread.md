@@ -8,7 +8,7 @@ tags: [options, derivatives, technical-analysis, risk-management]
 aliases: ["Vertical Spread", "Vertical Spreads", "Bull Call Spread", "Bear Put Spread", "Bull Put Spread", "Bear Call Spread", "Debit Spread", "Debit Vertical Spread"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: untested
 edge_source: [risk-bearing, analytical]

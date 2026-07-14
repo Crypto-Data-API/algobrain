@@ -9,7 +9,7 @@ aliases: ["Volume Profile Strategy", "Value Area Rotation", "POC Reversion", "VP
 related: ["[[volume-profile]]", "[[value-area]]", "[[point-of-control]]", "[[value-area-high-and-low]]", "[[volume-nodes]]", "[[volume-profile-shapes]]", "[[cumulative-volume-delta]]", "[[market-profile]]", "[[order-flow]]", "[[footprint-chart]]", "[[support-and-resistance]]"]
 strategy_type: technical
 timeframe: intraday
-markets: [futures, crypto, stocks]
+markets: [futures, crypto]
 complexity: intermediate
 backtest_status: untested
 edge_source: [structural, behavioral]

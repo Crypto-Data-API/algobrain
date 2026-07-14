@@ -4,11 +4,11 @@ type: strategy
 created: 2026-06-22
 updated: 2026-06-22
 status: good
-tags: [behavioral-finance, momentum, crypto, stocks, swing-trading]
+tags: [behavioral-finance, momentum, crypto, swing-trading]
 aliases: ["Trade the Narrative", "Story Trading", "Theme Trading", "Narrative Rotation"]
 strategy_type: hybrid
 timeframe: swing
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: intermediate
 backtest_status: untested
 edge_source: [behavioral, informational]

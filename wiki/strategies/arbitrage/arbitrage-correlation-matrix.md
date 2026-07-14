@@ -8,7 +8,7 @@ tags: [arbitrage, portfolio-theory, risk-management, quantitative, strategy-deve
 aliases: ["Arb Correlations", "Arbitrage Portfolio Construction"]
 strategy_type: quantitative
 timeframe: position|long-term
-markets: [crypto, stocks, futures, options]
+markets: [crypto, futures, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[strategy-correlation-matrix]]", "[[arbitrage-overview]]", "[[arbitrage-opportunity-map]]", "[[regime-matrix]]", "[[arbitrage-live-performance]]", "[[crowding-indicators]]", "[[failure-modes]]", "[[portfolio-theory]]", "[[arbitrage]]", "[[limits-to-arbitrage]]", "[[convergence-arbitrage]]"]

@@ -8,7 +8,7 @@ tags: [arbitrage, execution, quantitative, risk-management, backtesting]
 aliases: ["Arb Parameters", "Arbitrage Thresholds", "Arb Entry Triggers"]
 strategy_type: quantitative
 timeframe: scalp|intraday|swing|position
-markets: [crypto, stocks, futures, options, forex]
+markets: [crypto, futures, options, forex]
 complexity: advanced
 backtest_status: untested
 related: ["[[arbitrage-overview]]", "[[arbitrage-opportunity-map]]", "[[transaction-cost-modeling]]", "[[fees]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[pairs-trading]]", "[[statistical-arbitrage]]", "[[cash-and-carry]]", "[[volatility-arbitrage]]", "[[exchange-api-reference]]"]

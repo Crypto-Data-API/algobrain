@@ -8,7 +8,7 @@ tags: [ai-trading, algorithmic, machine-learning, news]
 aliases: ["AI Agent Strategies", "LLM Trading Strategies", "Agentic Trading"]
 strategy_type: algorithmic
 timeframe: intraday
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: advanced
 backtest_status: untested
 edge_source: [informational, analytical]

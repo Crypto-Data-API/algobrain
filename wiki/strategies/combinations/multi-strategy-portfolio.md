@@ -6,7 +6,7 @@ updated: 2026-04-06
 status: good
 tags: [combinations, meta-strategy, portfolio-construction, diversification, sharpe-ratio, hedge-fund, alpha]
 strategy_type: hybrid
-markets: [stocks, futures, crypto, bonds]
+markets: [futures, crypto, bonds]
 complexity: advanced
 backtest_status: untested
 related: [volatility-targeting, risk-on-risk-off-framework, crypto-yield-stack]

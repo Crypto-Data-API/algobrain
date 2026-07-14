@@ -8,7 +8,7 @@ tags: [arbitrage, risk-management, backtesting, strategy-development, meta]
 aliases: ["Arb Performance", "Live Arb Tracker", "Arbitrage Returns"]
 strategy_type: quantitative
 timeframe: position|long-term
-markets: [crypto, stocks, futures, options]
+markets: [crypto, futures, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[arbitrage-overview]]", "[[arbitrage-opportunity-map]]", "[[strategy-monitoring]]", "[[failure-modes]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[arbitrage-parameter-cheatsheet]]", "[[crowding-indicators]]", "[[arbitrage-seasonality]]", "[[arbitrage-competitive-landscape]]"]

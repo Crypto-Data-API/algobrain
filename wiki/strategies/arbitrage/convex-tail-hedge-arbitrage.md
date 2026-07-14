@@ -9,7 +9,7 @@ aliases: ["Cheap-Convexity Trade", "Tail Hedge Arbitrage", "Implied-Vol-Cheap St
 related: ["[[2020-03-ackman-pandemic-cds-trade]]", "[[2007-2008-burry-subprime-cds-trade]]", "[[fastest-profitable-trades]]", "[[counterparty-stress-arbitrage]]", "[[crisis-alpha]]", "[[tail-risk-hedging]]", "[[convexity]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[nassim-taleb]]", "[[options]]", "[[credit-default-swaps]]", "[[risk-management]]", "[[ai-amplified-exploit-arbitrage]]"]
 strategy_type: hybrid
 timeframe: position
-markets: [stocks, bonds, commodities, crypto]
+markets: [bonds, commodities, crypto]
 complexity: advanced
 backtest_status: live
 edge_source: [structural, analytical, behavioral]

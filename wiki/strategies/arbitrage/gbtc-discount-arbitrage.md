@@ -8,7 +8,7 @@ tags: [arbitrage, crypto, bitcoin, history]
 aliases: ["GBTC Arb", "Grayscale Premium Trade", "GBTC NAV Arb", "Grayscale Discount Trade"]
 strategy_type: quantitative
 timeframe: position
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: intermediate
 backtest_status: retired
 edge_source: [structural]

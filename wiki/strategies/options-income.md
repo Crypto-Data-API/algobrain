@@ -9,7 +9,7 @@ aliases: ["Options Income", "Income from Options", "Premium Income", "Options In
 related: ["[[options-premium-selling]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[short-strangle]]", "[[iron-condor]]", "[[covered-calls]]", "[[cash-secured-puts]]", "[[wheel-strategy]]", "[[short-put]]", "[[short-call]]", "[[variance-risk-premium]]", "[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[expected-shortfall]]", "[[pin-risk]]", "[[gamma-explosion]]", "[[managing-winners]]", "[[expiration-laddering]]", "[[volatility-regime-classification]]", "[[zero-dte-options]]", "[[skew]]"]
 strategy_type: hybrid
 timeframe: swing
-markets: [options, stocks, etf, crypto]
+markets: [options, etf, crypto]
 complexity: intermediate
 backtest_status: cost-corrected
 

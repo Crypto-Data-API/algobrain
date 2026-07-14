@@ -4,11 +4,11 @@ type: strategy
 created: 2026-04-06
 updated: 2026-07-13
 status: excellent
-tags: [mean-reversion, rsi, oversold, overbought, quantitative, larry-connors, crypto, stocks, behavioral-finance, indicators]
+tags: [mean-reversion, rsi, oversold, overbought, quantitative, larry-connors, crypto, behavioral-finance, indicators]
 aliases: ["RSI Reversion", "RSI Oversold Bounce", "Connors RSI Strategy", "Connors RSI(2)", "Oversold Bounce"]
 strategy_type: quantitative
 timeframe: swing
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: beginner
 backtest_status: paper-traded
 

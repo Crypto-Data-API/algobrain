@@ -4,11 +4,11 @@ type: strategy
 created: 2026-04-27
 updated: 2026-04-27
 status: excellent
-tags: [arbitrage, crypto, defi, stocks, perpetual-futures, basis-trade, oracle, market-microstructure, mean-reversion, quantitative]
+tags: [arbitrage, crypto, defi, perpetual-futures, basis-trade, oracle, market-microstructure, mean-reversion, quantitative]
 aliases: ["Stock Perp Basis", "Off-Hours Perp Arb", "Pyth Oracle Drift Trade", "Stock-Perp Convergence", "NYSE-Closed Perp Fade"]
 strategy_type: quantitative
 timeframe: intraday
-markets: [crypto, stocks]
+markets: [crypto]
 complexity: intermediate
 backtest_status: live
 edge_source: [structural, informational, behavioral]

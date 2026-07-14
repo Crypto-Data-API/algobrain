@@ -8,7 +8,7 @@ tags: [accumulation, dca, passive-investing, risk-management, position-trading, 
 aliases: ["DCA", "Systematic Investment Plan", "SIP", "Regular Investment"]
 strategy_type: fundamental
 timeframe: long-term
-markets: [stocks, crypto]
+markets: [crypto]
 complexity: beginner
 backtest_status: untested
 related: ["[[grid-trading]]", "[[risk-management]]", "[[position-sizing]]", "[[value-averaging]]"]

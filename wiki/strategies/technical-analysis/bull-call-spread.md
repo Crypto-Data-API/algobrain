@@ -7,7 +7,7 @@ status: excellent
 tags: [options, bull-call-spread, call-debit-spread, debit-spread, bullish, defined-risk]
 aliases: ["Call Debit Spread", "Call Spread"]
 strategy_type: quantitative
-markets: [stocks]
+markets: []
 complexity: beginner
 backtest_status: untested
 edge_source: [analytical, risk-bearing]

@@ -9,7 +9,7 @@ aliases: ["Credit Spread", "Credit Spreads", "Vertical Credit Spread", "Bull Put
 related: ["[[options]]", "[[options-pricing]]", "[[risk-management]]", "[[theta-decay]]", "[[implied-volatility]]", "[[covered-calls]]", "[[iron-condor]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[vertical-spread]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[variance-risk-premium]]", "[[options-premium-selling]]", "[[iv-rank-and-iv-percentile]]", "[[market-regime]]", "[[edge-taxonomy]]", "[[position-sizing]]", "[[volatility-trading]]", "[[wheel-strategy]]", "[[tradestation-options-workflow]]"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, options]
+markets: [options]
 complexity: intermediate
 backtest_status: untested
 edge_source: [risk-bearing, behavioral]

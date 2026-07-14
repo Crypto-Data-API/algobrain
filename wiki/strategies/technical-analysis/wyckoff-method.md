@@ -8,7 +8,7 @@ tags: [wyckoff, accumulation, distribution, markup, markdown, volume-analysis, i
 aliases: ["Wyckoff Trading", "Wyckoff Accumulation", "Wyckoff Distribution", "Richard Wyckoff Method"]
 strategy_type: technical
 timeframe: swing
-markets: [stocks, crypto]
+markets: [crypto]
 complexity: advanced
 backtest_status: untested
 edge_source: [behavioral, structural]

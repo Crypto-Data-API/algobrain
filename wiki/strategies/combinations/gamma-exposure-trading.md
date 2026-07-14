@@ -6,7 +6,7 @@ updated: 2026-04-06
 status: good
 tags: [combinations, alpha-edge, options, gamma, dealer-hedging, market-microstructure, volatility]
 strategy_type: hybrid
-markets: [stocks, crypto]
+markets: [crypto]
 complexity: advanced
 backtest_status: untested
 related: [expiration-and-rebalancing-flows, cross-asset-signals, volatility-targeting, options-equity-overlay]

@@ -7,7 +7,7 @@ status: excellent
 tags: [options, bear-call-spread, call-credit-spread, credit-spread, bearish, defined-risk]
 aliases: ["Call Credit Spread"]
 strategy_type: quantitative
-markets: [stocks]
+markets: []
 complexity: beginner
 backtest_status: untested
 edge_source: [risk-bearing, behavioral]

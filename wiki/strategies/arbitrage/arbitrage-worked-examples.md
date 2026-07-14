@@ -8,7 +8,7 @@ tags: [arbitrage, backtesting, execution, education, meta]
 aliases: ["Arb Examples", "Real Arbitrage Trades", "Arbitrage Case Studies"]
 strategy_type: quantitative
 timeframe: scalp|intraday|swing|position
-markets: [crypto, stocks, futures, options]
+markets: [crypto, futures, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[arbitrage-overview]]", "[[arbitrage-parameter-cheatsheet]]", "[[arbitrage-live-performance]]", "[[funding-rate-arbitrage]]", "[[cross-exchange-arbitrage]]", "[[flash-loan-arbitrage]]", "[[transaction-cost-modeling]]", "[[fees]]"]
