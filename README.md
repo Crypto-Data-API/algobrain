@@ -9,6 +9,7 @@ Forked from the ALFRED trading wiki (2026-07-13) and pruned to crypto scope: all
 | Area | Content |
 |------|---------|
 | `wiki/strategies/` | ~370 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, the 27-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia |
+| `wiki/strategy-development/` | Methodology for *producing* strategies: edge taxonomy, hypothesis-to-backtest workflow, overfitting & p-hacking detection, capacity/failure-mode analysis, and per-venue trading maps (Hyperliquid, low-cap, arbitrage) |
 | `wiki/concepts/` | ~1,000 concept pages: microstructure, indicators, risk, portfolio theory, backtesting, behavioral finance, on-chain metrics, options mechanics |
 | `wiki/markets/` | 1,000+ crypto asset pages + commodities/forex/bonds macro context |
 | `wiki/entities/` | Crypto exchanges, DeFi protocols, quant/crypto funds, trading legends, miners, regulators |
