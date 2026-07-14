@@ -2,294 +2,158 @@
 title: "Conversion & Reversal Arbitrage"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-20
-status: excellent
-tags: [arbitrage, options, technical-analysis, market-microstructure]
-aliases: ["Conversion Reversal Arbitrage", "Conversion Arbitrage", "Reversal Arbitrage", "Synthetic Arbitrage"]
+updated: 2026-07-14
+status: good
+tags: [arbitrage, options, crypto, derivatives, market-microstructure, bitcoin, ethereum]
+aliases: ["Conversion Reversal Arbitrage", "Conversion Arbitrage", "Reversal Arbitrage", "Synthetic Arbitrage", "Crypto Conversion Reversal"]
 strategy_type: quantitative
-timeframe: intraday|swing
-markets: [stocks, options]
+timeframe: swing
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-edge_source: [structural]
-edge_mechanism: "Exploits violations of put-call parity — temporary mispricings between options and their synthetic equivalents"
-related: ["[[put-call-parity]]", "[[box-spread]]", "[[volatility-arbitrage]]", "[[arbitrage-overview]]", "[[options-overview]]", "[[delta-neutral]]", "[[arbitrage-parameter-cheatsheet]]", "[[leg-risk]]"]
+related: ["[[put-call-parity]]", "[[box-spread]]", "[[volatility-arbitrage]]", "[[cash-and-carry]]", "[[basis-trade]]", "[[deribit]]", "[[greeks-live]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[dvol]]", "[[skew]]", "[[section-1256-contracts]]", "[[leg-risk]]", "[[cryptodataapi]]"]
 ---
 
 # Conversion & Reversal Arbitrage
 
-Conversion and reversal arbitrage exploit violations of [[put-call-parity]] — the fundamental pricing relationship between calls, puts, and the underlying asset. When the relationship breaks (even briefly), an arbitrageur locks in a risk-free profit by constructing a synthetic position that replicates the mispriced instrument.
+## Overview
 
-These are among the **purest forms of options arbitrage** — in theory, completely risk-free. In practice, early exercise risk, borrow costs, dividend timing, and pin risk introduce residual risks that must be managed.
+Conversion and reversal arbitrage exploit violations of **[[put-call-parity]]** — the no-arbitrage relationship linking a call, a put at the same strike/expiry, and the underlying's forward. When one leg drifts out of line, an arbitrageur builds a **delta-neutral synthetic** that offsets the mispriced leg and locks the difference. These are among the **purest structural arbitrages**: no forecast, no risk premium harvested, just the mechanical constraint that the synthetic and the real position must cost the same.
 
-## Edge source
+In crypto these run on [[deribit]] BTC/ETH options against Deribit **perpetual or dated futures** as the hedge leg (you cannot cheaply borrow-and-short spot coin the way you short equities). Two crypto facts reshape the trade versus equities: Deribit options are **European and cash-settled**, so there is **no early-exercise risk** — the single largest risk of equity conversions/reversals disappears; and crypto pays **no dividends**, so the dividend term drops out of parity entirely. What replaces the equity "interest − borrow − dividends" carry stack is a single clean term — the **futures basis / [[funding-rate|perp funding]]** — which *is* crypto's synthetic financing rate. The edge is real but structurally thin and latency-dominated: violations are small and fleeting, captured almost entirely by market-maker and prop desks running them continuously.
 
-Per [[edge-taxonomy]], this is a pure **structural** edge — arguably the most structural in the entire strategy catalog. There is no forecast, no behavioral mispricing to exploit, and no risk premium being harvested. The "edge" is simply that the no-arbitrage condition [[put-call-parity]] must hold, and when transient supply/demand imbalances in one leg push the synthetic price away from the cash-plus-financing price, an arbitrageur can lock the difference. The profit is bounded above by the size of the parity violation, which is itself bounded by how far a competitive market lets prices drift before someone closes it.
+## Construction
 
-## Why this edge exists (and why it is thin)
+The identity (European options, no dividends, forward `F` = the Deribit future for that expiry):
 
-- **Who is on the other side**: whoever created the imbalance — a large directional buyer of one option lifting offers, a forced unwind dumping a leg, a market maker temporarily skewing quotes to manage inventory, or a retail order routed at a stale price. They are not "losing" in a behavioral sense; they are paying for immediacy or liquidity, and the conversion/reversal desk supplies it.
-- **Why it persists at all**: the arbitrage requires capital, balance-sheet (margin on stock + options), borrow access for reversals, and the operational ability to execute multiple legs near-simultaneously. These barriers mean the edge is never *fully* competed away — but they also mean it is captured almost entirely by market makers and proprietary desks running it continuously and at scale.
-- **Why the edge is structurally thin**: because the relationship is mechanical and continuously monitored by hundreds of automated systems, violations are tiny (typically **0.01-0.10% of notional**, see Performance Characteristics) and fleeting. The thinness is not a flaw in the strategy — it is the *signature* of a true structural arbitrage. A "fat" parity violation would mean either a calculation error (mismodeled dividend, rate, or borrow) or a real residual risk (impending early exercise, hard-to-borrow recall) that makes the trade not actually riskless. **If it looks too good, you are missing a cost.**
-
-## Null hypothesis
-
-Under a frictionless, no-arbitrage market, [[put-call-parity]] holds *exactly* at all times and expected profit from conversions/reversals is **zero** — the synthetic and the real position always cost the same. Any observed profit must therefore come from one of: (1) a real, transient violation net of *all* frictions, or (2) an un-modeled cost masquerading as profit. The discriminating test is brutal: after fully loading bid-ask on every leg, commissions, borrow/financing, dividend risk, and early-exercise probability, does positive expectancy survive? For all but the most efficient operators with the lowest cost base, the honest answer at retail scale is **no** — which is why this is a market-maker strategy, not a retail one.
-
-## The Put-Call Parity Relationship
-
-For European-style options:
 ```
-Call - Put = Stock - PV(Strike) - PV(Dividends)
+C − P = (F − K) · e^(−rT)
+
+C = call price, P = put price, F = forward/futures price,
+K = strike, r = USDC financing rate, T = time to expiry
 ```
 
-Or equivalently:
-```
-C - P = S - K × e^(-rT) - D × e^(-r×t_d)
-```
+When the executable market diverges from this, a conversion or reversal captures it.
 
-Where: C = call price, P = put price, S = stock price, K = strike price, r = risk-free rate, T = time to expiry, D = dividend, t_d = time to ex-dividend date.
-
-When this equation doesn't hold, a conversion or reversal captures the difference.
-
-## Strategy Mechanics
-
-### Conversion (Synthetic Short = Real Long)
-
-A conversion profits when the synthetic short (long put + short call at the same strike) is **more expensive** than shorting the stock:
+**Conversion (synthetic short offset by a long future):**
 
 | Leg | Position | Purpose |
 |---|---|---|
-| 1. **Buy stock** | Long 100 shares | Real long exposure |
-| 2. **Buy put** | Long 1 put (same strike, same expiry) | Downside protection |
-| 3. **Sell call** | Short 1 call (same strike, same expiry) | Upside cap |
+| Buy future | Long 1 BTC/ETH future (or perp) | real long exposure |
+| Buy put | Long 1 put (same `K`, same expiry) | + |
+| Sell call | Short 1 call (same `K`, same expiry) | = synthetic short |
 
-**Result:** Delta-neutral position. The combined position has zero directional exposure. Profit = any deviation from put-call parity.
+Delta-neutral; locked P&L ≈ `(C − P) − (F − K)` (discounting aside). Profitable when the synthetic short is **rich** to the future.
 
-**Profit formula:**
-```
-profit = (call_bid - put_ask) - (stock_ask - strike × e^(-rT)) - dividends - borrow_cost
-```
+**Reversal (synthetic long offset by a short future):** the mirror — short future, long call, short put. Locked P&L ≈ `(F − K) − (C − P)`; profitable when the synthetic long is **cheap** to the future.
 
-If this is positive, the conversion is profitable.
+A **[[box-spread]]** = a conversion at `K1` + a reversal at `K2`. All directional exposure cancels and there is no future leg left — a pure lending/borrowing instrument whose payoff equals the strike width and whose implied yield **is** crypto's synthetic risk-free (USDC financing) rate.
 
-### Reversal (Synthetic Long = Real Short)
+## Payoff & breakevens
 
-A reversal is the mirror image — profits when the synthetic long (long call + short put) is **cheaper** than buying the stock:
+There is no tent-shaped payoff — the P&L is **locked at entry** and does not depend on where spot finishes:
 
-| Leg | Position | Purpose |
-|---|---|---|
-| 1. **Short stock** | Short 100 shares | Real short exposure |
-| 2. **Buy call** | Long 1 call (same strike, same expiry) | Upside protection |
-| 3. **Sell put** | Short 1 put (same strike, same expiry) | Downside obligation |
+- **Locked profit** = the captured parity violation net of all frictions, realised at the **08:00 UTC** cash settlement.
+- **No directional breakevens:** a conversion's long future gains exactly offset its synthetic-short losses (and vice versa) at every price. The only "breakeven" is economic — the violation must exceed total costs.
+- **Max loss scenario:** not a market move but an *operational* one — a bad fill on one leg (leg risk), the basis moving against you between legs, or an inverse-settlement mismodel. Correctly executed and held to European cash settlement, the position converges to its locked value regardless of the underlying's path.
 
-**Profit formula:**
-```
-profit = (stock_bid - strike × e^(-rT)) - (call_ask - put_bid) - dividends + short_rebate - borrow_cost
-```
+## Greeks profile
 
-## Carry and Financing — Where the Real Economics Live
+- **[[delta]]:** ≈ 0 by construction — the synthetic and the future cancel. This is a [[delta-neutral]] structure with no directional stance.
+- **[[gamma]], [[vega]], [[theta]]:** all ≈ 0 net at the same strike/expiry — the long and short option legs offset. The position is **not** a vol trade; [[dvol|DVOL]] moves do not drive it (they only affect the *size* of the parity gap you can find).
+- **Residual exposure is rate/basis, not Greeks:** the real risk factor is the **futures basis / funding** carry to expiry and, on inverse contracts, the quanto curvature — not any option Greek.
 
-The headline "parity violation" is only the gross spread. The realized P/L is a **carry trade** dressed as an arbitrage: the position is held to expiry, and over that holding period interest, dividends, and borrow accrue. Decomposing the carry is the entire game, because the carry terms are usually *larger* than the parity violation itself.
+## Market view / when to use
 
-| Carry component | Conversion (long stock) | Reversal (short stock) | Notes |
-|---|---|---|---|
-| **Interest on strike** | you forgo interest by tying up cash in stock | you *earn* interest on short-sale proceeds | scales with [[interest-rate-options\|rate]] × T |
-| **Dividends** | you *receive* dividends on long stock | you *pay* dividends on the short | the dominant single-name risk |
-| **Borrow cost** | none (you own the stock) | you *pay* the borrow fee | kills reversals on HTB names |
-| **Financing of options** | net option debit/credit carries | net option debit/credit carries | small for ATM |
+- **No market view at all** — this is a relative-value / financing trade, not a directional or vol bet. You run it whenever an executable parity violation exceeds costs.
+- **Who is on the other side:** whoever created the dislocation — a large directional buyer lifting one option, a forced liquidation dumping a leg, a market maker skewing quotes to manage inventory, or retail routed at a stale price. They are paying for immediacy; the conversion/reversal desk supplies it.
+- **Why it is structurally thin:** the relationship is mechanical and monitored by many automated systems, so violations are tiny (typically **~0.05-0.3% of notional** in crypto — wider than equities because financing is messier and books are thinner, but still fleeting). A "fat" violation almost always means an un-modeled cost (basis, inverse quanto, funding spike) masquerading as profit. **If it looks too good, you are missing a cost.**
+- **Practically a market-maker / prop strategy:** it needs low latency, cheap USDC financing, and near-simultaneous multi-leg execution — barriers that keep it from being fully arbitraged away but also capture almost all of it for professionals.
 
-The clean way to see this: a conversion is a **synthetic short position financed by owning the stock**, and a reversal is a **synthetic long financed by shorting the stock**. The options legs lock the price; the cash-and-stock leg generates (or consumes) carry. This is why a reversal on a high-yielding general-collateral name with a steep rate curve can be profitable even when the raw parity spread looks neutral — the interest earned on short proceeds *is* the trade. Conversely, a reversal on a dividend-paying or hard-to-borrow name can show a "violation" that vanishes once carry is loaded.
+## Adjustments & management
 
-## Relationship to the Box Spread
+- **Hold to expiry:** the profit is locked at entry; the position converges at the 08:00 UTC cash settlement. There is no active exit decision in the base case.
+- **Leg sequencing:** fill the **hardest leg first** — usually the less-liquid option strike — then hedge with the future, which is the deepest, tightest book. Never leg into the future first and hope the option fills.
+- **Exit early only if** the funding/basis regime flips hard against a perp-hedged build (see Risks) or you can close the whole package for more than the locked value net of costs.
+- **Roll the hedge** if you built the long/short leg with a **perp** rather than a dated future — the perp must be carried and its funding managed until the option expiry.
 
-A [[box-spread]] is the cleanest way to understand what conversions and reversals actually trade. **A box spread = a conversion at strike K1 + a reversal at strike K2** (or equivalently a bull call spread + a bear put spread on the same strikes). Because all stock exposure cancels between the two synthetics, a box has **no directional risk and no stock leg at all** — it is a pure lending/borrowing instrument whose payoff at expiry equals the strike width. Its implied yield *is* the market's synthetic financing rate.
+## Crypto specifics
 
-| Instrument | Stock leg? | Directional risk | What it isolates |
-|---|---|---|---|
-| Conversion | yes (long) | none | parity violation + carry, one strike |
-| Reversal | yes (short) | none | parity violation + carry, one strike |
-| [[box-spread\|Box spread]] | no | none | the synthetic risk-free rate (lending/borrowing) |
-
-The famous failure mode here is the **short box blow-up**: traders who sold European-style index boxes as a cheap way to borrow (the 2019 "infinity squeeze" / Robinhood box-spread losses) discovered that *American-style* boxes carry early-assignment risk and that a box is not riskless if its components can be exercised against you. This is the same early-exercise risk that makes single-name conversions/reversals not truly riskless — see Risks below.
-
-## Rules
-
-### Entry
-
-1. **Screen for put-call parity violations:** Scan options chains for strikes where the synthetic and real position prices diverge by more than transaction costs. Focus on liquid underlyings with tight bid-ask spreads
-2. **Calculate theoretical parity value:** Include risk-free rate, dividends, and borrow cost in the calculation. Use bid-ask prices (not mid) for realistic fill assumptions
-3. **Minimum edge required:** The violation must exceed:
-   ```
-   min_edge = options_spread_cost + stock_spread_cost + commissions + borrow_cost + dividend_risk_buffer
-   ```
-   Typically 0.05-0.15% of the stock price for liquid names
-4. **Execute legs simultaneously** or near-simultaneously. See [[execution-sequencing]] — execute the harder leg (options, especially the illiquid strike) first
-
-### Exit
-
-Hold until expiration. The position converges to its theoretical value at expiry (options expire, stock position closes against assignment/exercise). There is no active exit decision — the profit is locked in at entry.
-
-**Exception:** Exit early if borrow becomes unavailable (recall risk) or if early exercise changes the economics.
-
-### Position Sizing
-
-- ≤ 5% of portfolio per position (single name concentration)
-- Account for full margin requirement (long stock + short call requires margin capacity)
-- Factor in borrow availability for reversals (short stock leg)
+- **European cash settlement — no early-exercise risk:** Deribit options are European, cash-settled to the ~30-minute index TWAP at **08:00 UTC**. Neither leg can be assigned early, so the **biggest risk of equity conversions/reversals is gone** and the trade is genuinely closer to riskless. It also means the [[box-spread]] does **not** carry the American short-box blow-up risk (the 2019 equity "infinity squeeze") — a Deribit box is a clean synthetic-rate instrument.
+- **No dividends:** crypto pays none, so the dividend term vanishes from parity — no ex-dividend early-exercise trap, no dividend-timing risk, no special-dividend surprise. (ETH staking yield is not passed through to Deribit's USDC-settled contracts, so it does not enter the parity either.)
+- **Futures basis / [[funding-rate|perp funding]] IS the carry:** the equity "interest − borrow − dividends" stack collapses to one clean term. A conversion's long future **pays away** a contango basis; a reversal's short future **earns** it. On a perp-hedged build the carry is realised as **funding** paid/collected each interval. A steep contango basis can *make* a reversal profitable (the earned basis is the trade) or *kill* a conversion.
+- **Inverse vs linear/USDC settlement:** on **USDC-margined (linear)** options and futures, parity is clean textbook. On **inverse (coin-margined)** contracts both the options and the future are BTC/ETH-settled and embed a **quanto-like curvature** — parity must be expressed in the inverse contract's own terms, and mismodeling it is a classic way to book a phantom "violation" that is really a coin-delta exposure. Prefer linear for a clean lock.
+- **[[perpetual-futures|Perp]] vs dated future as the hedge:** a **dated future** locks the basis to expiry (cleanest); a **perp** is deeper but leaves you carrying variable funding until the option expires — a source of drift a dated future avoids.
+- **24/7 & single-venue concentration:** continuous trading means dislocations can appear any hour, but also that Deribit is effectively the only deep venue — collateral and counterparty risk concentrate on one offshore exchange, an operational tail the equity version (multiple regulated venues) does not have.
+- **No [[section-1256-contracts|§1256]]:** offshore Deribit contracts get **no 60/40 blended US treatment** — the thin locked profit is ordinary/short-term (US) or trader-status-dependent (AU), which matters more here than elsewhere because the margins are so small.
+- **Alt-option liquidity:** only BTC/ETH have the option depth *and* the matching future for a clean multi-leg lock — alt parity gaps look bigger precisely because they cannot be executed at size.
 
 ## Risks
 
-### 1. Early Exercise Risk (American Options)
+- **Leg / execution risk:** the profit lives in a few tens of bps; a bad fill on the harder option leg, or the basis moving between legging the option and the future, can erase or invert it. See [[leg-risk]].
+- **Inverse-quanto mismodel:** treating an inverse-settled violation as textbook parity books a hidden coin-delta as "arbitrage" profit.
+- **Funding / basis drift (perp builds):** a funding spike after entry on a perp-hedged conversion/reversal erodes or reverses the locked carry before the option expires.
+- **Settlement mismatch:** the option settles to Deribit's TWAP index while your future/perp hedge marks continuously — a small basis at the 08:00 UTC print is residual slippage.
+- **Counterparty / venue risk:** single-exchange concentration (Deribit) — the dominant operational tail versus the multi-venue equity trade.
+- **Cost floor:** commissions plus two option crossings plus the future leg; at retail latency and fees the honest expectancy is usually **negative** — this is a professional, low-cost-base strategy.
 
-The most significant risk. American-style options (most US equity options) can be exercised early by the counterparty, breaking the arb:
+## Worked crypto example
 
-| Scenario | Risk | When It Happens |
-|---|---|---|
-| **Deep ITM call exercised early** | Your short call is assigned; you deliver shares but lose interest on the strike price for the remaining time | Call holder exercises to capture dividend |
-| **Deep ITM put exercised early** | Your short put is assigned; you must buy shares at the strike | Put holder exercises when carry cost exceeds time value |
-| **Dividend-related exercise** | Call holders exercise the day before ex-dividend to capture the dividend | When dividend > remaining time value of the call |
+**Reversal on Deribit (BTC, USDC-margined/linear), hypothetical.** Crash-hedgers have bid the ATM put, pushing the synthetic long *cheap* to the future.
 
-**Mitigation:** Avoid options with upcoming dividends where the call time value is less than the dividend amount. Monitor for early exercise signals (very low time value, approaching ex-date).
+- BTC spot **$60,000**; 30-day future **$60,290** (basis +$290 ≈ +0.5%/30d ≈ ~6% annualised — the earned carry).
+- 30-day options at `K = $60,000`: call ask **$1,700**, put bid **$1,560**.
+- Fair `C − P` = `(F − K)·e^{−rT}` ≈ $290 · 0.995 ≈ **$289**.
+- Executable `C − P` for a reversal (buy call at ask, sell put at bid) = 1,700 − 1,560 = **$140** — the synthetic long costs $140 versus a fair ~$289, so it is **~$149 cheap**: do the reversal.
 
-### 2. Borrow Cost and Availability
+**Trade (per 1-BTC contract):**
+1. Short 1 BTC 30-day future at $60,290 (locks the +$290 basis as it converges to settlement).
+2. Buy 1 BTC $60,000 call at $1,700.
+3. Sell 1 BTC $60,000 put at $1,560 → net options debit $140.
+4. **Locked gross** ≈ basis $290 − options debit $140 = **$150 per BTC**.
+5. **Fees:** two option legs (taker 0.03%, capped at 12.5% of premium) + future leg ≈ $25-40 round trip.
+6. **Locked net** ≈ **$110-125 per BTC** (~0.2% of the $60k notional), realised at the 08:00 UTC settlement regardless of where BTC finishes.
 
-For reversals (short stock), borrow cost directly eats into profit:
-- **General collateral (GC) stocks:** Borrow rate < 1% annualized. Manageable
-- **Hard-to-borrow (HTB) stocks:** Borrow rate 5-50%+ annualized. Can destroy the arb entirely
-- **Recall risk:** Lender can demand shares back, forcing you to close the short at a potentially adverse time
+**At expiry:** the long call + short put form a synthetic long at $60,000 that exactly offsets the short future; the basis is earned; the net is the locked figure. No early-exercise risk (European), no dividend to pay (crypto) — the two equity hazards are simply absent.
 
-**Mitigation:** Only run reversals on GC stocks. Check borrow availability and rate before entry. Lock in term borrow if possible.
+## Sources
 
-### 3. Pin Risk
+- [[greeks-live]] / [[deribit]] documentation — European cash settlement (08:00 UTC TWAP), USDC (linear) vs inverse settlement mechanics, futures/perp specs, taker-fee premium cap; the basis for treating funding/basis as crypto's synthetic financing rate.
+- Put-call parity and box-spread theory (Natenberg, *Option Volatility & Pricing*; McMillan, *Options as a Strategic Investment*) — mechanics port to crypto; the dividend and early-exercise terms drop out on Deribit's dividend-free European contracts.
+- [[box-spread]] failure-mode history (2019 equity short-box losses) — the American-assignment risk that Deribit's European settlement removes.
 
-At expiration, if the stock is **exactly at the strike price**, the options may or may not be exercised/assigned. This creates uncertainty:
-- Your short call might be assigned (you deliver shares) or not
-- Your long put might be worth exercising or not
-- If one side is exercised and the other isn't, you end up with an unhedged position over the weekend
+## Getting the Data (CryptoDataAPI)
 
-**Mitigation:** Close positions before expiry if the stock is within 1-2% of the strike. The cost of closing early is usually less than the risk of uncertain assignment.
+Live option quotes, per-strike IV/[[skew]], and the exact forward come from **Deribit / [[greeks-live]]**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the **funding / basis, open-interest, and dislocation-trigger** context — the carry side of the trade and the flow that opens parity gaps.
 
-### 4. Dividend Timing Risk
+**Live:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — perp funding: the carry on a perp-hedged build and the synthetic-financing read
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange OI (positioning behind basis moves)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, [[max-pain]] (which strikes carry the flow that dislocates parity)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations: the forced-unwind flow that transiently pushes one leg out of parity
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — spot reference for computing the futures basis vs the Deribit future
 
-Dividends affect put-call parity. If the dividend amount or timing changes after you enter the trade, the expected parity value shifts:
-- **Surprise special dividend:** Can make a conversion less profitable or a reversal more profitable
-- **Dividend cut:** Opposite effect
+**Historical:**
+- `GET /api/v1/backtesting/funding` — historical funding for basis/carry backtests
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — spot OHLCV to reconstruct the basis series
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive
 
-**Mitigation:** Avoid positions spanning earnings announcements or known dividend decision dates. Use confirmed forward dividend estimates, not trailing.
-
-## Indicators Used
-
-- [[put-call-parity]] — the theoretical relationship being exploited
-- **Implied volatility skew** — skew can indicate where parity violations are most likely
-- **Borrow rate** — critical input for reversal profitability
-- **Dividend schedule** — ex-dividend dates and amounts
-- **Risk-free rate** — treasury yield for the matching maturity
-- **Options bid-ask spread** — wider spreads reduce or eliminate arb profit
-
-## Example Trade
-
-**Setup (hypothetical):**
-- Stock XYZ: $100.00
-- 60-day ATM options (Strike $100)
-- Call bid: $4.50, Call ask: $4.60
-- Put bid: $4.20, Put ask: $4.30
-- Risk-free rate: 5% (60-day PV factor: 0.9918)
-- No dividends expected
-- Borrow rate: 0.5% annualized
-
-**Theoretical put-call parity:**
-```
-C - P = S - K × e^(-rT) = 100 - 100 × 0.9918 = $0.82
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
 ```
 
-**Market implies:**
-```
-C - P = 4.50 - 4.30 = $0.20 (using bid for C, ask for P — worst case for conversion)
-```
-
-**Discrepancy:** Theoretical $0.82, market $0.20. The call is cheap relative to the put (or the put is expensive).
-
-**Reversal trade (synthetic long is cheap):**
-1. Short 100 shares at $100.00 (receive $10,000)
-2. Buy 1 call at $4.60 (pay $460)
-3. Sell 1 put at $4.20 (receive $420)
-4. Net debit on options: $40
-5. Interest earned on short proceeds (60 days): $10,000 × 5% × 60/365 = $82.19
-6. Borrow cost (60 days): $10,000 × 0.5% × 60/365 = $8.22
-7. **Locked-in profit:** $82.19 - $40.00 - $8.22 - commissions ≈ $28-30
-
-**At expiry:** Regardless of where XYZ closes, the three positions cancel out, and you keep the locked-in profit. If XYZ rises, call gains offset short stock loss. If XYZ falls, short stock gains offset put assignment.
-
-## Performance Characteristics
-
-| Metric | Value |
-|---|---|
-| Expected return per trade | 0.01-0.10% of notional (very thin margins) |
-| Win rate | ~99% (mechanical, near-riskless) |
-| Max loss scenario | Early exercise + adverse move before re-hedging |
-| Typical holding period | Until expiration (1-90 days) |
-| Capital efficiency | Low — requires full margin on stock + options |
-| Capacity | Moderate — limited by option OI and borrow availability |
-| Crowding | High — market makers run these continuously |
-
-## What Kills This Strategy
-
-1. **Borrow cost spike:** If borrow rate increases after entry, reversal profit erodes or goes negative
-2. **Dividend surprise:** Unexpected dividend changes parity value
-3. **Early exercise:** American option holder exercises, breaking the hedge
-4. **Spread widening:** Options spreads widen, making entry/exit more expensive
-5. **Interest rate change:** Risk-free rate moves, shifting theoretical parity (usually minor for short-dated)
-6. **Competition / latency:** Faster, lower-cost market makers fill the violation before you can — at retail latency the opportunity is gone by the time it appears on a screen.
-
-## Kill criteria
-
-Numerical conditions for standing down (see [[when-to-retire-a-strategy]]):
-
-- **Net edge after all frictions < expected early-exercise loss** → the trade is not riskless; do not take it. (The single most important gate.)
-- **Borrow rate on a reversal name > the interest earned on short proceeds** → carry has gone negative; skip.
-- **Realized fill slippage > 50% of the modeled parity violation over a rolling 20 trades** → execution is no longer competitive; the desk is being adversely selected.
-- **Any single-name dividend or borrow surprise produces a loss exceeding the cumulative profit of the prior month** → the residual risks dominate the thin edge; retire the name from the universe.
-- **Average gross violation captured < commissions + 2× modeled bid-ask** → the cost base is too high for this venue/size.
-
-## Advantages
-
-- **Near-riskless when correctly modeled** — delta-neutral by construction; P/L is locked at entry and does not depend on the underlying's direction.
-- **Mechanical and scalable** for an operator with low costs and good borrow access — no forecasting, no discretion.
-- **Self-limiting downside** — the worst realistic case (early exercise + adverse re-hedge) is small relative to notional, not catastrophic, *provided* the dividend/borrow gates are respected.
-- **Complementary to a market-making book** — the legs hedge inventory and the carry is captured as a by-product of providing liquidity.
-
-## Disadvantages
-
-- **Vanishingly thin margins** (0.01-0.10% of notional) — only economic at very low cost base and meaningful size; uneconomic for almost all retail accounts.
-- **Capital- and balance-sheet-intensive** — requires full margin on stock plus options for tiny returns; capital efficiency is poor versus other uses of the same buying power.
-- **Borrow-dependent** for reversals — HTB names, recall risk, and rate spikes can turn a locked profit negative after entry.
-- **Early-exercise and pin risk** make the "riskless" label aspirational on American-style single-name options.
-- **Crowded and latency-sensitive** — dominated by automated market makers; a manual trader is structurally disadvantaged.
-
-## Relationship to Other Options Arbs
-
-| Strategy | Relationship |
-|---|---|
-| [[box-spread]] | A box spread = conversion + reversal at different strikes. Locks in risk-free rate |
-| dividend-arbitrage | Uses similar put-call parity logic but specifically targets dividend capture |
-| [[volatility-arbitrage]] | Different mechanism — trades IV vs RV, not parity violations |
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; funding/OI detail on [[cryptodataapi]]. Live option prices, the forward, and skew come from Deribit / [[greeks-live]].
 
 ## Related
 
 - [[put-call-parity]] — the pricing identity being arbitraged
-- [[box-spread]] — conversion + reversal combined; the synthetic-rate instrument
-- [[volatility-arbitrage]] — different mechanism (IV vs RV), not parity
-- [[arbitrage-overview]] — the broader arbitrage family
-- [[options-overview]] — options market context
-- [[delta-neutral]] — the position's directional stance
-- [[leg-risk]] — execution risk across the multiple legs
-- [[execution-sequencing]] — fill the hard leg first
-- [[arbitrage-parameter-cheatsheet]] — quick-reference inputs (rates, borrow, dividends)
-- [[interest-rate-options]] — rate sensitivity of the carry
-- [[edge-taxonomy]] — structural-edge classification
-- [[when-to-retire-a-strategy]] — kill-criteria framework
-
-## Sources
-
-- General market knowledge; no specific wiki source ingested yet.
+- [[box-spread]] — conversion + reversal combined; the synthetic-rate instrument (no American short-box risk on Deribit)
+- [[cash-and-carry]] / [[basis-trade]] — the futures-basis carry that *is* crypto's financing leg
+- [[volatility-arbitrage]] — a different mechanism (IV vs RV), not parity
+- [[deribit]], [[greeks-live]] — venue and analytics/RFQ workbench; option quotes and the forward
+- [[perpetual-futures]], [[funding-rate]] — the perp/funding hedge and carry
+- [[delta-neutral]] — the position's directional stance (none)
+- [[dvol]], [[skew]] — vol context that sizes the parity gaps (not a P&L driver here)
+- [[leg-risk]] — the dominant residual risk: multi-leg execution
+- [[section-1256-contracts]] — the tax treatment crypto options do *not* get
+- [[cryptodataapi]], [[cryptodataapi-market-intelligence]] — the data layer

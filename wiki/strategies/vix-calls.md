@@ -1,270 +1,249 @@
 ---
-title: "VIX Calls"
+title: "Crypto Long-Vol Overlay (DVOL / Deribit)"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-21
-status: excellent
-tags: [options, derivatives, volatility, risk-management, futures]
-aliases: ["VIX Calls", "VIX Call Options", "Volatility Hedge", "Tail-Risk Hedge"]
-related: ["[[vix]]", "[[vix-futures]]", "[[vix-call-spreads]]", "[[long-vol-overlay]]", "[[long-volatility-strategies]]", "[[volatility-trading]]", "[[risk-management]]", "[[protective-puts]]", "[[implied-volatility]]", "[[options]]", "[[variance-risk-premium]]", "[[tail-risk-hedging]]", "[[contango]]", "[[backwardation]]", "[[options-selection-framework]]", "[[strike-selection]]", "[[sharpe-ratio]]"]
+updated: 2026-07-14
+status: good
+tags: [options, derivatives, volatility, risk-management, crypto, dvol, hedging]
+aliases: ["Crypto Long-Vol Overlay", "DVOL Long Vol", "Deribit Straddle Hedge", "VIX Calls", "Crypto Volatility Hedge", "BTC Put Wings"]
 strategy_type: technical
 timeframe: swing
-markets: [options, futures]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: naive-backtested
-edge_source: [structural, risk-bearing]
-edge_mechanism: "Buys crash convexity from volatility sellers harvesting the variance risk premium; the hedger knowingly pays negative expected value standalone in exchange for cash exactly when equities crater, improving portfolio-level compounding."
-data_required: [options-chain, vix-futures-term-structure, ohlcv-daily]
-min_capital_usd: 10000        # sensible only as an overlay on a portfolio of this size or larger
-capacity_usd: 500000000       # annual premium spend before moving VIX option/futures markets
-crowding_risk: medium
-expected_sharpe: -0.2         # STANDALONE the hedge sleeve has negative carry; value is portfolio-level convexity
-expected_max_drawdown: 0.03   # worst-case annual portfolio drag = full loss of a 3% hedge budget
-breakeven_cost_bps: 200       # round-trip spread + roll cost as share of premium the overlay can absorb
-kill_criteria: |
-  - rolling 3-year hedge bleed exceeds 4%/yr of total portfolio value
-  - in any S&P 500 drawdown deeper than 15%, the hedge pays out less than 2x the trailing 12 months of premium spent
-  - VIX futures curve in persistent backwardation > 6 months (systematic call buying then buys the peak)
+related: ["[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[tail-hedging]]", "[[protective-puts]]", "[[crypto-options-volatility-selling]]", "[[variance-risk-premium]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[risk-reversal]]", "[[volatility-regime]]", "[[liquidation-cascade-fade]]", "[[risk-management]]"]
 ---
 
-# VIX Calls
+# Crypto Long-Vol Overlay (DVOL / Deribit)
 
-VIX calls are call options on the [[vix|CBOE Volatility Index (VIX)]] used primarily as a tail-risk hedge to protect portfolios against sharp market declines. Because the VIX tends to spike dramatically when equity markets sell off -- it rose from 14 to 82 in a single month during March 2020 -- owning VIX calls provides convex, leveraged exposure to volatility increases that can offset equity losses during crises. However, VIX calls are expensive to hold on an ongoing basis due to the structural headwinds of [[contango]] in VIX futures and the mean-reverting nature of volatility: standalone, systematic VIX call buying has **negative expected value**, and the strategy only makes sense as a portfolio overlay.
+A crypto long-vol overlay buys **convexity on [[bitcoin|BTC]]/[[ethereum|ETH]] volatility** — long OTM put "wings" and long straddles/strangles on [[deribit]] — used primarily as a tail-risk hedge to protect a crypto book against sharp declines and volatility spikes. Because [[dvol|DVOL]] (Deribit's 30-day implied-vol index, the "crypto VIX") spikes violently when crypto sells off — it has jumped from the 50s into the 100s+ during cascades — owning long-vol structures provides convex, leveraged exposure to volatility increases that offset spot losses. Like the equity VIX-call hedge it is modelled on, it is **expensive to hold continuously**: crypto vol mean-reverts hard, option theta bleeds daily, and standalone the overlay has **negative expected value** — it only makes sense as a portfolio overlay funded by carry elsewhere.
+
+## No clean "VIX call" analog in crypto
+
+The equity version of this hedge buys **VIX calls** — call options on a *tradeable volatility future*. **Crypto has no VIX call, because it has no tradeable vol index or vol future.** [[dvol|DVOL]] is a published reference index only. There is nothing to buy that pays off directly on "DVOL going up." The honest crypto substitutes for "a call on vol" are spot-option structures that are *net long vega and gamma*:
+
+| Equity instrument | Crypto substitute | What it captures | Caveat |
+|---|---|---|---|
+| VIX call (long a vol future call) | Long ATM/OTM **straddle** on Deribit | Long vega + gamma; pays on a DVOL spike either direction | Decays via theta; no vol-future leverage |
+| VIX call (crash hedge) | Long **OTM BTC/ETH put wing** | Directional-down convexity; DVOL spikes usually accompany crashes | Misses a *melt-up* vol spike a straddle would catch |
+| VIX call spread | Deribit **put spread / ratio backspread** | Capped-cost convexity | Path-dependent payoff |
+
+Because crypto DVOL spikes most violently on *down* moves, a **long OTM put wing** captures most of the crash-hedge value a VIX call would — but a **long straddle** is the truer "pays on any vol spike" analog. Neither is a call on a vol future; both are spot-option structures with their own theta and delta. Everywhere below, "long-vol" = this basket, not a VIX call.
 
 ## Overview
 
-The VIX Index measures the 30-day expected volatility of the S&P 500, derived from the prices of SPX options. It is often called the "fear gauge" because it tends to be inversely correlated with the S&P 500 -- when stocks drop sharply, the VIX spikes. Historically, the VIX has averaged around 19-20, but during acute market stress it can surge to 40, 60, or even above 80 (closing high: 82.69 on 16 March 2020; it also closed at 80.86 in November 2008).
+DVOL measures the 30-day expected volatility of BTC/ETH from the full [[deribit]] options surface. It is the crypto "fear gauge," though — unlike the VIX — a DVOL spike is not always fear: crypto rallies can be as violent as sell-offs, so DVOL can spike on melt-up gamma too. Historically BTC DVOL has ranged from the high-20s (deep calm) to 130+ during shocks (2020-03-12, LUNA, FTX, 2025-10-10).
 
-VIX options are European-style, cash-settled options that trade on the CBOE. Critically, VIX options are priced off VIX futures, not the spot VIX itself. This distinction is essential: because VIX futures are typically in contango (longer-dated futures trade above spot), VIX call options are priced relative to an already-elevated futures level, making them more expensive than a naive look at spot VIX would suggest.
+Deribit options are European-style and **cash-settled to the Deribit index**. Critically, they can be **coin-margined (inverse)** or **USDC-margined (linear)**; a long-vol overlay intended as clean USD protection should use linear options, because inverse options pay out in a collateral currency that is itself crashing. There is no VIX-futures-style term-structure contract, but the Deribit surface still shows a **vol term structure** (front- vs back-month implied vol) you can read for contango/backwardation.
 
-Despite their cost, VIX calls remain one of the most effective tail-risk hedges available to retail and institutional investors. A small allocation to VIX calls can produce outsized returns during market crashes, offsetting a significant portion of equity losses. The key challenge is sizing and timing the hedge to avoid excessive premium bleed during normal markets.
+Despite the cost, long-vol overlays remain one of the most effective crypto tail hedges available. A small allocation can produce outsized returns during a cascade, offsetting a significant share of spot/perp losses. The key challenge is sizing and timing to avoid excessive premium bleed during calm 24/7 markets.
 
-## Edge source
+## Why long-vol is expensive in crypto
 
-Per the [[edge-taxonomy]]: **structural** and **risk-bearing** -- but in an unusual, inverted sense. The VIX call buyer is *paying* the [[variance-risk-premium]] to volatility sellers, so the sleeve has negative standalone expected return (frontmatter Sharpe -0.2). The structural edge claimed is at the **portfolio level**: the payoff arrives precisely when equity capital is cheapest (crashes), so a disciplined hedger can rebalance crash winnings into depressed equities, raising long-run compound growth and cutting maximum drawdown. The edge, if it exists for a given investor, comes from (a) convexity -- 5-10x+ payoffs concentrated in the states of the world where a marginal dollar is most valuable -- and (b) the option to stay fully invested in equities (or run modest leverage) because tail risk is insured.
+Several structural factors make the overlay persistently costly — analogous to the equity headwinds, but re-based on crypto mechanics:
 
-## Why this edge exists
+1. **Mean reversion of DVOL.** Like the VIX, DVOL is strongly mean-reverting: a spike from 55 to 110 almost always reverts toward baseline within days. This limits the window in which long-vol structures are in the money and makes it hard to capture the full value of a spike.
+2. **Vol-of-vol premium.** The market charges a premium for options on volatile underlyings; crypto vol-of-vol is high, so straddles/wings tend to be expensive relative to realized movement.
+3. **Wide bid-ask on the wings.** Deribit OTM wing spreads run 3–8 vol points round-trip — far wider than SPX/VIX options — a real, recurring drag on cheap options.
+4. **Theta / roll cost.** Maintaining a continuous hedge means rolling across weekly/monthly Deribit expiries; each roll resets the theta clock and pays the spread. This is the crypto analogue of VIX roll cost — but it is *option theta*, not VIX-futures roll yield (there is no vol future to roll).
+5. **No §1256 shelter.** Unlike SPX/VIX options, offshore Deribit contracts get no 60/40 blended tax treatment, worsening after-tax economics.
 
-The counterparty is the volatility-selling complex: option overwriters, variance-swap desks, and short-VIX ETP flows harvesting the variance risk premium (implied volatility persistently exceeds subsequently realized volatility by roughly 2-4 vol points on average in SPX). They are not "losing" in expectation -- they are being paid to bear crash risk, and the hedger is the one paying. What the hedger receives in exchange is state-contingent liquidity: cash delivered in the worst states. The trade persists on both sides because the two parties value the crash state differently: a leveraged or drawdown-constrained investor rationally pays an actuarially unfair premium for insurance, just as homeowners do. Volatility sellers periodically do lose catastrophically (the February 2018 "Volmageddon" wiped out the XIV short-vol ETN, which lost ~95% in a day), which is the payoff the call buyer is positioned for.
+## Portfolio-level rationale
 
-### Why VIX calls are expensive
-
-Several structural factors make VIX calls persistently costly:
-
-1. **Contango in VIX futures**: VIX futures typically trade 2-5 points above spot VIX. A VIX call with a strike of 25 might require VIX futures (not spot VIX) to exceed 25 to be profitable. If spot VIX is 15 but the relevant futures contract is at 19, the call is closer to the money than it appears, but the holder still needs a meaningful volatility spike to profit.
-
-2. **Mean reversion of volatility**: Unlike stock prices, volatility is strongly mean-reverting. A VIX spike from 15 to 40 will almost certainly be followed by a decline back toward the long-run average. This limits the window during which VIX calls are in the money and makes it difficult to capture the full value of a spike.
-
-3. **Volatility-of-volatility premium**: The market charges a premium for options on volatility itself, since volatility is volatile. This "vol-of-vol" premium means VIX options tend to be expensive relative to the actual realized movement of VIX futures.
-
-4. **Roll cost**: If a trader maintains an ongoing VIX call hedge, they must roll to new expirations each month. Each roll resets the theta clock and incurs transaction costs, creating a persistent drag.
-
-## Null hypothesis
-
-Under the null -- no portfolio-level value to convexity, or an inability to monetize spikes -- systematic VIX call buying is simply a slow donation of the variance risk premium to vol sellers. The evidence for the null is strong on a standalone basis: long-VIX-futures products (e.g., buy-and-hold VXX since its 2009 inception) have lost essentially all of their value through roll decay, and the CBOE VIX Tail Hedge Index (VXTH), which systematically allocates ~1% of a portfolio to 30-delta VIX calls, has lagged the plain S&P 500 over long bull-market stretches. The strategy only beats the null if (1) spikes are actually sold near the highs rather than held to mean-reversion, and (2) proceeds are redeployed into depressed equities. A hedger who cannot demonstrate both behaviours should expect pure negative carry of 1-3% of portfolio value per year.
+Standalone, systematic long-vol buying is a slow donation of the [[variance-risk-premium|variance risk premium]] to crypto vol sellers ([[crypto-options-volatility-selling]]) — negative carry of a few percent of NAV per year. The overlay only beats that null if (1) spikes are actually *sold* near the highs rather than held to mean-reversion, and (2) proceeds are redeployed into depressed coins during the cascade. The value is **state-contingent liquidity**: cash delivered exactly when leveraged crypto books are being auto-liquidated, when a marginal dollar is most valuable. A hedger who cannot demonstrate both behaviours should expect pure negative carry.
 
 ## Rules
 
 ### When to buy (entry)
 
-VIX calls are most cost-effective and offer the best risk/reward when:
+Long-vol structures are most cost-effective when:
 
-- **VIX is low (12-16 range)**: Calls are cheapest when complacency is high and protection is least demanded. This is also when the next vol spike is statistically most likely to be large, since it starts from a compressed base.
-- **VIX term structure is steep**: When front-month VIX futures are well below back-month futures (steep contango), it signals complacency. Buying calls on the front month or second month can provide leveraged exposure to a contango-to-backwardation shift during a crisis.
-- **Ahead of known catalysts**: Elections, central bank meetings, debt ceiling deadlines, or other events with binary outcomes can trigger vol spikes. Buying VIX calls before these events can be a targeted hedge.
+- **DVOL is in the low part of its trailing-year percentile** (deep calm): premium is cheapest, and the next spike statistically starts from a compressed base.
+- **Funding is richly positive / call-skew regime:** when [[funding-rate|perp funding]] is deeply positive and 25-delta [[risk-reversal|risk reversal]] shows call skew, downside **puts are relatively cheap** — the ideal moment to buy put wings the crowd is ignoring in favour of upside calls.
+- **Vol term structure is in steep contango:** front-month implied vol well below back-month signals complacency.
+- **Ahead of known catalysts:** ETF decisions, major token unlocks, macro prints (CPI/FOMC), halving windows — binary events that can trigger vol spikes.
 
 Avoid initiating when:
 
-- **VIX is already elevated (above 25-30)**: Calls are expensive, and mean reversion works against the holder. Much of the vol spike may already be priced in.
-- **Term structure is in backwardation**: When front-month VIX is above back-month VIX, the market is already in crisis mode. Buying calls here often means buying the peak.
+- **DVOL is already elevated (upper percentile / backwardation):** you are buying the peak just before mean reversion.
+- **Realized vol already exceeds implied for weeks** (regime break like LUNA/FTX): the premium has inverted and the hedge is expensive.
 
 ### Entry decision table
 
-| Spot VIX | Term structure | Action | Rationale |
-|---|---|---|---|
-| 12-16 | Steep [[contango]] | **Buy** (best entry) | Cheap premium, maximum convexity, spike starts from a compressed base |
-| 16-22 | Mild contango | Buy normal tranche | Acceptable; size to budget |
-| 22-28 | Flat | Reduce / wait | Premium rich, less room for mean-reversion edge |
-| >28 | [[backwardation]] | **Do not initiate** | Buying the peak; pay-up just before reversion |
-| Any | Backwardation >6 months | Suspend program | Systematic buying is chasing a sustained crisis |
+| DVOL percentile (1y) | Skew / funding | Term structure | Action | Rationale |
+|---|---|---|---|---|
+| Low (<40th) | Call-skew (positive funding) | Steep contango | **Buy put wings (best entry)** | Cheap premium, max convexity, downside unloved |
+| Low–mid (40–60th) | Balanced | Mild contango | Buy straddle tranche | Acceptable; size to budget |
+| Mid–high (60–85th) | Put-skew (post-selloff) | Flat | Reduce / wait | Premium rich, less mean-reversion edge |
+| High (>85th) | Put-skew, funding negative | Backwardation | **Do not initiate** | Buying the peak just before reversion |
+| Any | — | Backwardation >3–4 weeks | Suspend program | Systematic buying is chasing a regime break |
 
 ### Contract selection and mechanics
 
-1. **Select the expiration**: 1-3 months out. Shorter expirations have more gamma (react faster to VIX moves) but decay faster. Longer expirations are more expensive but less sensitive to timing.
-2. **Select the strike**: OTM calls (e.g., strike of 25-35 when VIX is at 15-18) provide the most leverage but require a larger VIX move to profit. ATM calls are more expensive but profit from smaller moves.
-3. **Buy the calls**: Pay the premium upfront. This is the maximum loss on the hedge.
+1. **Structure:** long OTM put wing for crash-hedge convexity, or long straddle/strangle for direction-agnostic vol-spike exposure. Prefer **USDC-margined (linear)** for clean USD payoff.
+2. **Expiry:** 21–60 DTE. Shorter = more gamma (reacts faster) but faster decay; longer = more vega but costlier. Avoid weeklies for a *continuous* hedge (theta too hot).
+3. **Strike:** 15–30% OTM puts for the wing (max leverage, needs a real move); ATM/near-ATM for a straddle (profits from smaller spikes at higher cost).
+4. **Buy the structure:** pay the premium upfront — this is the maximum loss on the hedge leg.
 
-### Exit
+### Exit / monetization
 
-4. If VIX spikes, **sell some or all of the calls to lock in gains**. Do not wait for expiration -- VIX spikes are typically short-lived (days to weeks), and the special opening quotation (SOQ) settlement may land far from the spike high. A practical rule: scale out in thirds at 3x, 5x, and 8x cost.
-5. If calls approach expiration with VIX still low, let them expire and roll to the next cycle.
-6. **Roll periodically**: replace expiring calls with new ones to maintain continuous protection.
+5. **Monetize fast into a DVOL spike.** Crypto vol reverts within days — do not wait. A practical rule: scale out in thirds at 3×, 5×, and 8× cost.
+6. **Let calm-market structures expire** and roll to the next cycle.
+7. **Roll periodically** across staggered expiries to maintain continuous protection without a hedge gap.
+8. **Redeploy gains** into cheap BTC/ETH during the cascade — the rebalancing step that makes the overlay worth its bleed.
 
 ### Position sizing
 
-A common guideline for portfolio-level VIX call hedging is to allocate **1-3% of total portfolio value per year** to the hedge. This keeps the bleed manageable while providing meaningful crisis protection. Deploy the budget in quarterly (or monthly) tranches rather than all at once, and never exceed the annual budget chasing a spike already underway.
-
-**Example sizing**: A $1 million equity portfolio allocating 2% ($20,000) per year to VIX calls. The trader buys $5,000 in VIX calls each quarter, rolling before expiration. During a market crash where VIX spikes from 15 to 50, the calls might return 5-10x, generating $25,000-$50,000, which offsets a significant portion of the portfolio's equity losses (which might be $150,000-$250,000 in a 15-25% drawdown).
+Allocate a fixed **small % of NAV per year** to the overlay (fund it from short-vol carry where possible). Deploy in tranches rather than all at once, and never exceed the annual budget chasing a spike already underway.
 
 ## Implementation pseudocode
 
 ```python
-# Quarterly hedge cycle for portfolio P
-ANNUAL_BUDGET = 0.02 * P          # 1-3% of portfolio per year
+# Rolling crypto long-vol overlay on Deribit BTC/ETH
+ANNUAL_BUDGET = 0.02 * NAV          # small % of NAV per year
 TRANCHE       = ANNUAL_BUDGET / 4
 
-def quarterly_roll(spot_vix, curve):
-    if curve.is_backwardated() or spot_vix > 28:
-        hold_cash(TRANCHE)         # don't buy the peak; wait for normalization
+def roll_cycle(dvol_pctl, funding_8h, term_structure):
+    if term_structure.is_backwardated() or dvol_pctl > 0.85:
+        hold_stablecoin(TRANCHE)                 # don't buy the peak
         return
-    expiry = pick_expiry(months_out=2)             # 1-3 months
-    strike = round_to_strike(spot_vix + 10)        # ~25-35 when VIX is 15-18 (OTM)
-    qty    = TRANCHE // premium(expiry, strike)
-    buy_vix_calls(expiry, strike, qty)
+    expiry = pick_expiry(days_out=45)            # 21-60 DTE
+    if funding_8h > 0.0003:                       # call-skew: buy cheap downside
+        buy_otm_put_wing(underlying="BTC", otm=0.25, expiry=expiry, spend=TRANCHE)
+    else:                                         # direction-agnostic spike hedge
+        buy_straddle(underlying="BTC", expiry=expiry, spend=TRANCHE)
 
-def monitor(position):
-    m = position.mark / position.cost
-    if m >= 3:  sell_fraction(position, 1/3)       # scale out into the spike
-    if m >= 5:  sell_fraction(position, 1/2)       # of remainder
-    if m >= 8:  sell_all(position)
-    if position.days_to_expiry <= 5 and m < 1:
-        let_expire(position)                       # bleed is the insurance cost
-    redeploy_gains_into_equities()                 # the rebalancing step that makes it work
+def monitor(pos):
+    m = pos.mark / pos.cost
+    if m >= 3: sell_fraction(pos, 1/3)           # scale out fast; DVOL mean-reverts
+    if m >= 5: sell_fraction(pos, 1/2)
+    if m >= 8: sell_all(pos)
+    if pos.days_to_expiry <= 3 and m < 1:
+        let_expire(pos)                           # bleed is the insurance cost
+    redeploy_gains_into_coins()                   # the rebalance that makes it work
 ```
 
 ## Payoff & Greeks
 
-### Payoff sketch (long VIX call, single leg)
+### Net-Greeks table (long straddle / long put wing, low-DVOL entry)
 
-```
-P/L
-  ^
-  |                                    /
-  |                                  /
-  |                                /
-  |                              /
-0 +----------------------+----/----------------> VIX futures at expiry
-  |                      | K /  (strike, e.g. 25)
-  |______________________|_/
-  -premium                        breakeven = K + premium
-```
+| Greek | Sign | Trading meaning |
+|---|---|---|
+| Delta | put wing: − ; straddle: ~0 | Put wing gains as spot falls; straddle is direction-neutral until a leg dominates |
+| Gamma | + | Convexity engine — delta ramps into a cascade; the source of the multi-× payoff |
+| Vega (long DVOL) | + | Gains as implied vol / DVOL rises, even before a large spot move |
+| Theta | − | The persistent daily bleed; the reason base-case P/L is negative every calm week |
+| Vol-of-vol | + | The structure is long the volatility of DVOL itself |
 
-The payoff is the canonical long-call hockey stick, but with two VIX-specific distortions: (1) the x-axis is the **VIX futures** price at settlement (via the [[vix-futures|SOQ]]), not spot [[vix|VIX]], so a call looks further OTM than spot suggests when the curve is in [[contango]]; and (2) the realized profit window is short because volatility mean-reverts, so the holder rarely captures the theoretical peak intrinsic value.
-
-### Net-Greeks table (long VIX call, low-vol entry)
-
-| Greek | Sign | Magnitude | Trading meaning |
-|---|---|---|---|
-| Delta (vs VIX future) | + | 0.20-0.45 for a 1-3pt OTM call | Position gains as the relevant VIX future rises; delta accelerates into a spike |
-| Gamma | + | High near the strike; rises into a spike | Convexity engine — delta ramps up fast, the source of 5-10x payoffs |
-| Theta | − | Persistent daily bleed | The insurance cost; the reason base-case P/L is negative every calm year |
-| Vega (vol-of-vol) | + | Material; the option is long [[vvix\|vol-of-vol]] | Gains when VVIX (the IV of VIX options) rises, even before VIX moves much |
-| Rho | ~0 | Negligible | Short tenor and small notional make rate sensitivity immaterial |
-
-Net exposure: **long convexity (long gamma + long vega), short theta.** This is the mirror image of the variance seller, who is short gamma/vega and long theta. See [[long-vol-vs-short-vol]] for the framework and [[long-vol-overlay]] for how the net Greeks combine with a short-vol core.
+Net exposure: **long convexity (long gamma + long vega), short theta** — the mirror image of the [[crypto-options-volatility-selling|Deribit vol seller]], who is short gamma/vega and long theta. Unlike a VIX call, the x-axis is BTC/ETH *spot* (via the option), not a vol future — so a put wing looks "further OTM" in spot terms but captures the DVOL spike that co-moves with a crash.
 
 ## Indicators / data used
 
-- Spot VIX level and the **VIX futures term structure** (contango/backwardation, front- vs back-month spread)
-- VIX options chain (strikes, expirations, premiums, implied vol-of-vol)
-- S&P 500 level for portfolio-loss offset estimation
-- Event calendar (elections, FOMC, fiscal deadlines) for catalyst-timed tranches
-- Note: VIX options expire Wednesdays and settle to a special opening quotation (SOQ), not the prior close
+- **[[dvol|DVOL]] level and percentile** (BTC and ETH) — the primary entry gate (there is no VIX-futures curve; use DVOL percentile + front/back implied-vol spread from the surface).
+- **[[funding-rate|Perp funding]] and 25-delta [[risk-reversal|risk reversal]]** — crypto skew driver; positive funding → cheap downside puts.
+- **Deribit IV surface** (strikes, expiries, vol-of-vol) — strike/expiry selection via [[greeks-live]].
+- **[[realized-volatility]] (10/21/30-day)** — DVOL − RV shows how richly the tail is priced.
+- **Liquidation and [[gamma-exposure|dealer-gamma]] tape** — cascade fragility and monetization timing.
+- **Event calendar** (ETF, unlocks, halving, CPI/FOMC) — catalyst-timed tranches.
 
 ## Example trade
 
-A trader manages a $500,000 equity portfolio and budgets 2% ($10,000) per year for VIX call hedging. In January, with VIX at 14 and April VIX futures at 17:
+A desk runs a $500,000 BTC book and budgets ~2% ($10,000)/year for a long-vol overlay. In a calm regime with BTC at $60,000, DVOL at 48 (low percentile), and funding richly positive (call-skew → cheap puts):
 
-- **Buy**: 20 April VIX $25 calls at $1.20 each ($2,400 total)
-- These calls need VIX futures to rise above $26.20 at April expiration to profit
+- **Buy:** a 45-DTE BTC 25%-OTM put wing (strike $45,000), USDC-margined, for ~$2,400.
 
-**Scenario 1 -- Market remains calm**: VIX stays around 14-16. The calls expire worthless. Loss: $2,400. The trader buys a new batch for the next quarter.
+**Scenario 1 — Market stays calm:** DVOL drifts 48 → 44, BTC chops $58–62K. The wing decays and expires worthless. Loss: ~$2,400. Roll a new tranche next cycle.
 
-**Scenario 2 -- Market correction in March**: The S&P 500 drops 12%. VIX spikes from 14 to 38. April VIX futures surge to 34. The VIX $25 calls are now worth approximately $10.00 each. The trader sells for $20,000, an 8.3x return on the $2,400 investment. This $17,600 profit offsets roughly 30% of the portfolio's $60,000 equity loss.
+**Scenario 2 — Weekend cascade:** an exchange-solvency headline gaps BTC −25% to $45,000 over a Saturday; DVOL spikes 48 → 100. The put wing goes ITM and its vega/gamma explode — the structure marks up roughly 6–9×. Sell into the DVOL spike for ~$18,000, a ~7× return; the ~$15,600 gain offsets a large share of the book's spot loss and funds a rebalance into cheaper BTC.
 
-**Scenario 3 -- Flash crash**: VIX spikes to 60 for two days. The calls briefly trade at $35+ each. If the trader acts quickly, the $2,400 investment returns $70,000 -- more than covering the portfolio's equity losses.
+**Scenario 3 — Flash cascade (2025-10-10 style):** BTC drops −12% in 60 seconds with ~$19B liquidated; DVOL briefly triples. The wing spikes even harder; if the desk monetizes quickly (crypto vol reverts within hours here), the payoff can exceed the book's realized loss on the move.
 
 ## Performance characteristics
 
-- **Base case (most years)**: the hedge loses 50-100% of its annual budget -- i.e., a 1-3% drag on portfolio return. This matches the frontmatter `expected_max_drawdown: 0.03` (full loss of a 3% budget) and the negative standalone Sharpe.
-- **Crisis years**: payoffs of 5-10x deployed premium are realistic for OTM calls bought in low-vol regimes and sold into the spike (March 2020, Q4 2008); poorly timed monetization can cut this in half because spikes retrace within days.
-- **Cost overlay**: VIX option markets are liquid but spreads on OTM wings run $0.05-$0.10 on a ~$1.00-1.50 premium -- roughly 4-8% of premium per side. Add 4-12 rolls per year and total friction consumes on the order of 10-20% of the annual budget; the frontmatter `breakeven_cost_bps: 200` (2% of premium notional round-trip per leg beyond which edge erodes materially) reflects this tolerance. The convex payoff profile means the strategy survives wide spreads that would kill a fine-edged strategy.
-- **Portfolio level**: studies of VIX hedging (Szado 2009, on the 2008 crisis) found that small (~3%) allocations to VIX calls or futures meaningfully cut portfolio drawdown and improved risk-adjusted returns *across the crisis window* -- while long bull markets see the hedged portfolio lag an unhedged one by roughly the bleed.
+- **Base case (most months):** the overlay loses 50–100% of its budget — a few-percent drag on book return; negative standalone expectancy.
+- **Cascade months:** payoffs of several× deployed premium are realistic for OTM wings/straddles bought in low-DVOL regimes and sold into the spike (2020-03, LUNA, FTX, 2025-10-10). Poorly timed monetization can halve this because crypto spikes retrace within days — or hours.
+- **Cost overlay:** Deribit wing bid-ask (3–8 vol points round-trip) plus a taker fee capped at 12.5% of premium plus frequent rolls consume a meaningful share of the annual budget — heavier than the VIX-call version's friction. The convex payoff still survives wide spreads that would kill a fine-edged strategy.
+- **Portfolio level:** small allocations meaningfully cut book drawdown *across a cascade window* while long melt-ups see the hedged book lag the unhedged one by roughly the bleed. Judging it on calm-regime carry alone is the central analytical error — it is a portfolio component, not a standalone strategy.
 
-### VIX calls vs alternative tail hedges
+## Crypto specifics
 
-| Hedge | Convexity | Carry cost | Upside cap | Main weakness |
-|---|---|---|---|---|
-| **VIX calls** (this page) | Very high | High | None | Mean-reversion; SOQ settlement; monetization timing |
-| [[vix-call-spreads\|VIX call spreads]] | High | Lower (short call funds it) | Capped at strike width | Saturates in extreme spikes (VIX 50+) |
-| [[protective-puts\|SPX/SPY puts]] | High | High | None | Slower to fire than VIX; path-dependent |
-| [[long-vol-overlay\|Long-vol overlay]] | High (blended) | 2-3.5%/yr | Partial | Requires monetization discipline; not stand-alone |
-| Short-VIX-futures (inverse) | Negative | Positive carry | n/a | Blows up in a spike ([[volmageddon\|Volmageddon]]) — the opposite trade |
-
-VIX calls offer the most uncapped convexity of the listed-options hedges, which is why they pay the most in a true tail event but also bleed the hardest in calm regimes. The [[vix-call-spreads]] variant trades some of that uncapped upside for a materially lower carry cost.
-
-## Capacity limits
-
-VIX options are among the most liquid volatility instruments in the world, with daily volumes routinely in the hundreds of thousands of contracts. A systematic program spending up to a few hundred million dollars of annual premium (frontmatter: $500M) can execute without materially moving the vol-of-vol surface; famous large buyers (e.g., the "50 Cent" buyer of 2017, widely attributed to Ruffer LLP, who bought ~$0.50 VIX calls in enormous size) operated at this scale visibly but executably. Beyond that, persistent bid pressure on OTM VIX wings steepens the call skew against the buyer, raising the bleed -- market impact shows up as worse pricing rather than failed fills. Retail and mid-size institutional users face no practical capacity constraint.
+- **No VIX call / vol future** — long-vol is spot-option structures (put wings, straddles), not a call on a vol index.
+- **24/7 + weekend gaps** — the biggest DVOL spikes hit in thin weekend liquidity with no close; the hedge must be pre-positioned.
+- **DVOL spikes ≠ only fear** — melt-up gamma also spikes DVOL, so a straddle (not just a put wing) may be the right structure when the risk is a violent rally.
+- **Inverse (coin-margined) settlement** — coin-collateralised long-vol pays in a crashing currency; use USDC-margined (linear) options for clean USD protection.
+- **Perp-funding skew** — positive-funding euphoria makes downside puts cheap; the overlay's best entries are exactly when the leveraged crowd is paying up for calls.
+- **Single-venue counterparty tail** — Deribit is effectively the only deep options venue; an outage/insolvency during a cascade is un-hedgeable, and Deribit puts do not hedge Deribit's own solvency (an FTX-type exchange-failure needs a spot-put or exchange-token short).
+- **On-chain / depeg tail** — stablecoin depegs and DeFi exploits spike DVOL through a counterparty/protocol mechanism, not a price move; long-vol captures the vol spike but not the specific credit event.
+- **No §1256 shelter** — after-tax payoff is worse than the SPX/VIX version's.
 
 ## What kills this strategy
 
-- **Monetization failure**: holding through the spike. VIX mean-reverts within days; a hedger who waits for SOQ settlement frequently watches an 8x mark round-trip to zero. This is the single most common failure mode.
-- **Buying high**: initiating or up-sizing hedges after volatility has already exploded (backwardation), locking in expensive protection right before mean reversion.
-- **Budget creep**: letting the bleed exceed 3-4%/yr of the portfolio, which compounds into more damage than the drawdowns it insures against.
-- **Regime of grinding losses without vol spikes**: slow bear markets (e.g., much of 2000-2002) can produce significant equity losses while VIX stays only moderately elevated -- equity drawdown with little hedge payoff.
-- **Structural change in the VIX complex**: changes to SOQ settlement mechanics, ETP flows, or persistent flattening of contango altering the priced-in spike premium.
-
-## Kill criteria
-
-- Rolling **3-year** hedge bleed exceeds **4%/yr** of total portfolio value → halve the budget or stop.
-- In any S&P 500 drawdown deeper than **15%**, the hedge pays out **less than 2x** the trailing 12 months of premium spent → the chosen strikes/expiries are not delivering convexity; redesign or retire.
-- VIX futures curve in backwardation for **more than 6 consecutive months** → suspend systematic buying until contango resumes.
+- **Monetization failure:** holding through the spike. Crypto vol mean-reverts within days (sometimes hours); a hedger who waits watches an 8× mark round-trip to zero — the single most common failure mode.
+- **Buying high:** initiating or up-sizing after DVOL has already exploded (backwardation), locking in expensive protection right before reversion.
+- **Budget creep:** letting the bleed exceed a few % of NAV/year, which compounds into more damage than the drawdowns it insures.
+- **Slow grinding alt bleed:** a multi-month −25% drift where each put expires worthless before the strike is hit — the crypto analogue of a slow bear the wing never catches.
+- **Structural change:** compression of the crypto vol premium as covered-call ETFs and on-chain vaults scale, flattening the priced-in spike premium.
+- **Inverse-settlement wrong-way risk** and **Deribit single-venue failure** — crypto-specific.
 
 ## Advantages
 
-- **Convex payoff**: Small cost in normal markets, potentially massive returns during crises
-- **Negative correlation with equities**: Provides genuine diversification when it matters most
-- **Liquid market**: VIX options trade with tight spreads and high volume
-- **Defined risk**: Maximum loss is the premium paid
-- **Portfolio-level hedge**: One position can hedge an entire equity portfolio, unlike single-stock puts
+- **Convex payoff:** small cost in calm markets, potentially large returns during cascades that recur *annually* in crypto.
+- **Negative correlation with the book when it matters** — pays exactly when perp longs are being liquidated.
+- **Defined risk:** maximum loss is the premium paid.
+- **Favourable entry windows:** positive-funding euphoria makes downside protection cheap.
+- **Portfolio-level hedge:** one BTC/ETH overlay can hedge a diversified majors book.
+- **Cleaner than the ETP world:** no VXX-style roll-decay or ETP path-dependence — you hold exactly the options you chose.
 
 ## Disadvantages
 
-- **Persistent cost**: Most of the time, VIX calls expire worthless, creating a steady drag on returns (negative standalone expected value)
-- **Pricing off futures, not spot**: Contango means the strike price is misleading relative to spot VIX
-- **Mean reversion**: VIX spikes are short-lived; slow to react and the opportunity passes
-- **Complexity**: Understanding VIX options pricing, term structure, and settlement requires advanced knowledge
-- **Roll cost**: Maintaining continuous protection requires periodic rolling, each cycle resetting the premium cost
-- **Settlement quirk**: VIX options settle based on a special opening quotation (SOQ) that can differ significantly from the prior day's closing VIX level
+- **Persistent cost:** most of the time the structures expire worthless — steady negative standalone carry; Deribit spreads make the bleed heavier than VIX calls.
+- **No vol-future instrument:** you cannot isolate "long vol" cleanly; every structure carries delta and theta baggage.
+- **Mean reversion:** crypto vol spikes are short-lived; slow to act and the opportunity passes.
+- **Inverse-settlement and single-venue** hazards with no equity equivalent.
+- **Complexity:** requires managing the Deribit surface, skew, funding, and coin-vs-linear margin.
+- **No §1256 tax shelter.**
+
+## Getting the Data (CryptoDataAPI)
+
+[[dvol|DVOL]], the vol term structure, and the tradeable IV surface come from **[[deribit|Deribit]]** / [[greeks-live|Greeks.live]] — CryptoDataAPI does **not** serve DVOL or the option chain. [[cryptodataapi|CryptoDataAPI]] supplies the complementary volatility-regime, options-flow, dealer-gamma, and funding context used to time and size the overlay.
+
+**Live:**
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0–100)
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, [[max-pain]]
+- `GET /api/v1/quant/gex` — dealer [[gamma-exposure|Gamma Exposure]]
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding (skew driver)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (monetization timing)
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime + 60-day history
+- `GET /api/v1/backtesting/klines` — OHLCV archive for realized-vol computation (DVOL − RV)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
+```
+
+For DVOL levels/history and the full IV surface, use the Deribit API (`/api/v2/public/get_volatility_index_data`) or [[greeks-live]]. Full catalog: [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
 
 ## Sources
 
-- CBOE, "The VIX Index and Volatility-Based Global Indexes and Trading Instruments" (VIX white paper) -- methodology and settlement mechanics.
-- Szado, E. (2009). "VIX Futures and Options: A Case Study of Portfolio Diversification During the 2008 Financial Crisis." *Journal of Alternative Investments*, 12(2).
-- CBOE VIX Tail Hedge Index (VXTH) methodology -- benchmark for systematic 30-delta VIX call overlay performance.
-- Documented market events: VIX closing high 82.69 (16 Mar 2020) and 80.86 (20 Nov 2008); XIV ETN termination after ~95% one-day loss (5 Feb 2018, "Volmageddon"); the 2017 "50 Cent" VIX call buyer attributed to Ruffer LLP.
+- [[deribit]] / [[greeks-live]] documentation — DVOL construction, IV surface, coin-margined vs USDC-margined (linear) settlement.
+- Alexander & Imeraj, and Deribit Insights research on DVOL and the crypto variance risk premium.
+- Equity origins (for the convex-hedge logic that ports): CBOE VIX white paper; Szado (2009) on VIX hedging in the 2008 crisis; the CBOE VXTH systematic VIX-call overlay — cited as the *methodological ancestor*, not a crypto-tradeable instrument.
+- Crypto tail record: 2020-03-12 ([[covid-crash]]), 2022-05 [[terra-luna-collapse|LUNA]], 2022-11 [[ftx-collapse|FTX]], 2025-10-10 ([[2025-10-crypto-liquidation-cascade|liquidation cascade]]).
 
 ## Related
 
-- [[vix]] -- the underlying index
-- [[vix-futures]] -- the contracts VIX options actually price off
-- [[vix-call-spreads]] -- the defined-cost, capped-upside variant of this strategy
-- [[long-vol-overlay]] -- how a VIX call ladder blends with a short-vol core
-- [[long-volatility-strategies]] -- the broader family of long-vol trades
-- [[long-vol-vs-short-vol]] -- the conceptual frame (who is on each side)
-- [[volatility-trading]] -- broader overview of vol strategies
-- [[risk-management]] -- portfolio protection frameworks
-- [[protective-puts]] -- an alternative hedging approach using equity puts
-- [[implied-volatility]] -- the pricing input for VIX and VIX options
-- [[vvix]] -- the vol-of-vol that drives VIX-option vega
-- [[options]] -- the instruments used
-- [[options-selection-framework]] -- the general strike/expiry funnel
-- [[strike-selection]] -- choosing the OTM strike by delta
-- [[variance-risk-premium]] -- the premium the hedger pays
-- [[tail-risk-hedging]] -- the broader hedging discipline
-- [[contango]] -- the term-structure headwind
-- [[backwardation]] -- the regime signalling "do not buy the peak"
-- [[volmageddon]] -- the 2018 short-vol blowup this trade is positioned for
-- [[sharpe-ratio]] -- why the stand-alone sleeve has a negative Sharpe
-- [[edge-taxonomy]] -- classification of where edges come from
+- [[dvol]] — the crypto vol benchmark this overlay is long
+- [[deribit]], [[greeks-live]] — venue and IV-surface workbench
+- [[long-volatility-strategies]] — the broader long-vol family
+- [[tail-risk-hedging]], [[tail-hedging]] — the portfolio-insurance disciplines this implements
+- [[protective-puts]] — the put-wing expression
+- [[crypto-options-volatility-selling]] — the short-vol counterparty the overlay pays
+- [[variance-risk-premium]] — the premium the hedger pays
+- [[funding-rate]], [[risk-reversal]] — the crypto skew drivers
+- [[realized-volatility]], [[implied-volatility]] — the vol inputs
+- [[gamma-exposure]] — dealer-gamma / cascade-fragility context
+- [[volatility-regime]] — regime detection for entry timing
+- [[liquidation-cascade-fade]] — the cascade dynamic behind DVOL spikes
+- [[risk-management]] — portfolio-protection framework

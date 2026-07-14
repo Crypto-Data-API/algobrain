@@ -2,12 +2,12 @@
 title: "Regime-Adaptive Strategy"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-14
 status: good
 tags: [combinations, meta-strategy, regime-detection, adaptive, volatility, market-conditions]
 strategy_type: hybrid
 timeframe: varies by regime
-markets: [stocks, crypto, futures]
+markets: [crypto, futures]
 complexity: advanced
 backtest_status: untested
 related: ["[[trend-following]]", "[[mean-reversion]]", "[[volatility]]", "[[vix]]", "[[adx]]", "[[bollinger-bands]]", "[[options-hedging]]", "[[cryptodataapi]]"]

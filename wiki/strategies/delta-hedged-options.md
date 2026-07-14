@@ -1,153 +1,124 @@
 ---
-title: "Delta-Hedged Options"
+title: "Delta-Hedged Options (Crypto)"
 type: strategy
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-07-14
 status: good
-tags: [options, derivatives, volatility, quantitative, risk-management]
-aliases: ["Delta-Hedged Options", "Delta-Neutral Options", "Volatility Isolation"]
+tags: [options, crypto, derivatives, volatility, risk-management, bitcoin]
+aliases: ["Delta-Hedged Options", "Delta-Neutral Options", "Volatility Isolation", "Crypto Delta-Hedged Options"]
 strategy_type: quantitative
 timeframe: intraday
-markets: [options, stocks, futures]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-edge_source: [analytical, structural]
-edge_mechanism: "Continuously delta-hedging an options position strips out direction and isolates the difference between realized and implied volatility; the P&L is the gamma-weighted gap (realized vol − implied vol), so the edge is a vol-forecasting edge plus, for sellers, the variance risk premium."
-data_required: [options-chain, ohlcv-intraday, implied-volatility-surface]
-min_capital_usd: 25000
-capacity_usd: 50000000
-crowding_risk: medium
-expected_sharpe: 0.4
-expected_max_drawdown: 0.20
-breakeven_cost_bps: 5
-related: ["[[delta-hedging]]", "[[gamma-scalping]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[the-greeks]]", "[[variance-swap]]", "[[volatility-swap]]", "[[volatility-trading]]", "[[variance-risk-premium]]", "[[edge-taxonomy]]"]
+related: ["[[delta-hedging]]", "[[gamma-scalping]]", "[[straddle]]", "[[strangle]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[deribit]]", "[[greeks-live]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[dvol]]", "[[gamma-exposure]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[cryptodataapi]]"]
 ---
 
-# Delta-Hedged Options
+# Delta-Hedged Options (Crypto)
 
-Delta-hedged options is the practice of holding an options position and continuously trading the underlying to keep the net **delta** near zero, so the position's P&L is driven by **volatility (gamma) rather than direction**. By neutralizing delta, the trader isolates the gap between the **[[realized-volatility]]** the underlying actually delivers and the **[[implied-volatility]]** embedded in the option price. A **long-gamma** delta-hedged position (long options) profits when realized vol exceeds implied — this is [[gamma-scalping]]. A **short-gamma** position (short options) profits when realized vol stays below implied — harvesting the [[variance-risk-premium]]. The mechanism is the foundation of nearly all options-market-making and volatility trading.
+## Overview
 
-## Edge source
+Delta-hedged options is the structure of holding an [[options]] position and continuously trading the underlying to keep net [[delta]] near zero, so the position's P&L is driven by **volatility (gamma) rather than direction**. Neutralizing delta isolates the gap between the **[[realized-volatility]]** the coin actually delivers and the **[[implied-volatility]]** ([[dvol|DVOL]]) embedded in the option price. It is the foundational structure of options market-making and volatility trading, and it has two configurations:
 
-Per [[edge-taxonomy]], delta-hedged options is an **analytical** edge with a **structural** component:
+- **Long-gamma** (buy options, hedge delta) — profits when realized vol **exceeds** implied. This is [[gamma-scalping]].
+- **Short-gamma** (sell options, hedge delta) — profits when realized vol stays **below** implied, harvesting the [[variance-risk-premium]].
 
-- **Analytical** — the entire P&L reduces to a forecast: do you expect realized vol to be higher (go long gamma) or lower (go short gamma) than the implied vol you pay/receive? The edge is the quality of that volatility forecast versus the market's.
-- **Structural** — the short-gamma side systematically earns the variance risk premium because mandate-driven hedgers and protection buyers keep implied vol above subsequent realized vol; the long-gamma side exploits episodes where premium sellers leave IV too low into catalysts.
+Delta hedging is the shared *mechanism* (see the [[delta-hedging]] concept page for the math); this page treats the *structure* — the delta-hedged options position itself, how it is built, and its crypto specifics on [[deribit]] with [[perpetual-futures|perp]] hedging.
 
-## Why this edge exists
+## Construction
 
-- **Who is on the other side**: for a short-gamma seller, the counterparties are hedgers and long-vol funds *buying* protection; for a long-gamma buyer, the counterparties are systematic premium sellers (covered-call/put-write programs, short-vol ETPs) supplying options regardless of event risk.
-- **Why they keep losing (when they do)**: premium sellers do not condition on catalysts; they sell the same delta-targeted options into an earnings week as a quiet one, periodically leaving IV too cheap for the long-gamma trader. Conversely, persistent over-hedging keeps index IV rich, paying the short-gamma seller on average.
-- **Why it isn't free money**: long gamma bleeds theta on average (the variance premium runs against it); short gamma carries a fat left tail (a vol spike with negative gamma can produce large losses). Both sides require either a vol-forecasting edge or disciplined risk control to survive.
+1. **Choose the options leg**: a [[straddle]] or [[strangle]] for a vega-rich, gamma-heavy exposure; a single option or spread for a targeted one.
+2. **Set the sign**: long the leg for long-gamma (RV > IV view); short the leg for short-gamma (IV > RV view / variance-premium harvest).
+3. **Hedge to neutral at inception** by trading spot or, more commonly, the [[perpetual-futures|perp]].
+4. **Re-hedge on a rule**: fixed time interval, fixed delta band (re-hedge when |Δ| exceeds a threshold), or fixed price grid. Tighter hedging cuts P&L variance but pays more cost — the central trade-off (see [[delta-hedging#Hedging frequency: the core tradeoff]]).
+5. **Size to stressed gamma/vega**, not to expected carry — for short-gamma especially, cap notional so a multi-sigma weekend move is survivable.
 
-## The core P&L identity
+## Payoff & breakevens
 
-For a continuously delta-hedged option, the instantaneous P&L (the "gamma–theta identity") is, per unit time:
+A delta-hedged options position has **no fixed payoff diagram** — it is a path-dependent bet on realized vs implied variance. In continuous time:
 
+> dP&L ≈ 0.5 · Γ · S² · (σ²_realized − σ²_implied) · dt + ν · dσ_implied
+
+- **Long gamma** (Γ > 0): profit when realized variance beats the implied variance paid — you *want* movement.
+- **Short gamma** (Γ < 0): profit when implied beats realized — you *want* calm, and you collect the variance risk premium.
+
+Because `0.5 · Γ · S² · σ²_implied · dt` equals the [[theta]] bleed under [[black-scholes-model|Black-Scholes]], the structure is a clean wager on which volatility wins over the holding period.
+
+## Greeks profile
+
+| Greek | Long-gamma | Short-gamma | Role |
+|---|---|---|---|
+| [[delta]] (Δ) | ≈ 0 | ≈ 0 | The thing neutralized (re-hedged via perp/spot) |
+| [[gamma]] (Γ) | positive | negative | The engine (long) / the risk you're paid to bear (short) |
+| [[theta]] (Θ) | negative | positive | The rent paid (long) / the carry collected (short) |
+| [[vega]] (ν) | positive | negative | Windfall or loss when [[dvol|DVOL]] moves |
+
+## Market view / when to use
+
+- **Long-gamma** when DVOL is cheap versus a credible realized-vol catalyst inside the option's life — pre-event lulls, post-crush overshoots, or assets where realized persistently beats implied.
+- **Short-gamma** when DVOL is rich and range-bound conditions look likely — harvesting the crypto variance risk premium, sized for the tail.
+- The choice is a view on the implied-vs-realized spread; dealer positioning ([[gamma-exposure|GEX]]) tells you which realized-vol environment your hedge will trade into.
+
+## Adjustments & management
+
+- **Re-tune the band** as gamma and vol change — widen it as spreads/funding churn rise, tighten it as gamma rises (Whalley–Wilmott asymptotics).
+- **Roll** to keep gamma alive if the thesis persists; **close** when the vol view is realized or the catalyst passes.
+- **Short-gamma tail guard**: cut fast on a DVOL spike before negative gamma compounds — the weekend/expiry hours are the danger window.
+
+## Crypto specifics
+
+- **Hedge with perps; funding is a live P&L line.** Delta is flattened in spot or, usually, the [[perpetual-futures|perpetual future]] (deepest liquidity, easy shorting). Every perp hedge pays or receives **[[funding-rate|funding]]** — the crypto analogue of equity financing/borrow. A short-gamma book that ends up net-long the perp pays funding when funding is positive (crowded longs); net-short earns it. Funding must sit in the cost model alongside spread and impact, not as an afterthought.
+- **Inverse (coin) delta.** Deribit's flagship BTC/ETH options are coin-margined — the delta shown is a **coin delta** and must be converted to **cash (USD) delta** before hedging, and the coin collateral itself carries delta. Mis-reading coin delta as cash delta systematically mis-sizes the hedge. See [[black-scholes-model#Inverse vs linear settlement — the effect on price and Greeks]].
+- **24/7 hedging, thin weekends.** Crypto never closes, so hedging is genuinely continuous (closer to the Black-Scholes ideal). But weekend liquidity is thin — re-hedging is most expensive exactly when short-gamma books are most exposed, and around 08:00 UTC Deribit expiries.
+- **DVOL is the residual-vega benchmark.** After hedging delta, the live exposure is to [[dvol|DVOL]] — monitored the way an equity desk watches the VIX (a Deribit / [[greeks-live]] number, **not** on CryptoDataAPI).
+- **Dealer gamma shapes your slippage.** When Deribit market makers are net short gamma they hedge *with* the move (amplifying realized vol — friendly to long gamma); net long, they suppress it. Aggregate [[gamma-exposure|GEX]] predicts the very realized-vol environment your hedge trades into.
+- **Liquidity cliff beyond BTC/ETH.** Alt-coin option books are thin; hedge slippage and wide option spreads cap size quickly outside BTC/ETH.
+
+## Risks
+
+- **Short-gamma tail** — a vol spike (weekend gap, exchange/stablecoin shock, leverage flush) with negative gamma realizes the full convexity loss with no chance to re-hedge.
+- **Cost bleed** — over-frequent hedging pays spread, impact, and funding on noise; the re-hedge frequency is the key cost lever.
+- **Long-gamma carry drag** — theta plus funding grind the position when realized vol disappoints.
+- **Inverse-delta mis-hedge** — treating coin delta as cash delta.
+- **Operationally demanding** — continuous monitoring and re-hedging, 24/7.
+
+## Worked crypto example
+
+**Setup (illustrative, long-gamma).** BTC $60,000; a trader buys a **30-day ATM straddle** on Deribit at DVOL **45%** (premium ≈ $6,190/BTC) while forecasting ~60% realized. 45% DVOL implies a daily expected move of ≈ 45%/√365 · $60,000 ≈ **$1,413** (calendar-day vol — crypto trades 24/7).
+
+BTC then swings ~$2,500/day. Each time delta breaches the band, the trader hedges the [[perpetual-futures|perp]] — selling rallies, buying dips — banking scalps that at ~60% realized (60² = 3,600) versus 45% priced (45² = 2,025) run well above the theta paid. If DVOL also rises to 55% mid-trade, positive vega adds a windfall. If instead BTC goes quiet (~$800/day), theta plus any funding drag grinds the premium away — the standard long-gamma death. A **short**-gamma desk would have the mirror outcome: profit in the quiet tape, loss in the $2,500/day chop.
+
+## Getting the Data (CryptoDataAPI)
+
+A delta-hedged crypto book is priced by three streams — funding (hedge carry), vol regime (the IV-vs-RV edge), and dealer gamma (the hedging-flow environment):
+
+- **Funding — the perp-hedge carry** — `GET /api/v1/derivatives/funding-rates?coin=BTC`. See [[cryptodataapi-derivatives]].
+- **Volatility regime — is realized vol likely to beat implied?** — `GET /api/v1/volatility/regime` and `GET /api/v1/volatility/regime/score`. See [[cryptodataapi-regimes]].
+- **Dealer gamma (GEX) — hedging-flow environment** — `GET /api/v1/quant/gex` (market-maker inventory + liquidation profile). See [[cryptodataapi-regimes]].
+
+The IV surface and **DVOL** are Deribit / Greeks.live, not CryptoDataAPI.
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 ```
-dPnL ≈ 0.5 * Γ * S² * (σ_realized² − σ_implied²) * dt
-```
-
-- **Γ (gamma)** is positive for long options, negative for short.
-- If **realized vol > implied vol**, the long-gamma trader's gamma revenue beats theta → profit; the short-gamma trader loses.
-- If **realized vol < implied vol**, the reverse.
-
-This is why delta-hedged options is "trading the spread between realized and implied vol": the hedging just converts price moves into a clean, gamma-weighted bet on which volatility wins.
-
-## Null hypothesis
-
-If implied volatility equals subsequent realized volatility, a continuously delta-hedged option has **exactly zero** expected P&L before costs — gamma revenue offsets theta. After hedge transaction costs and the option bid-ask, expected P&L is **negative**. Moreover the unconditional base rate is adverse for the *long-gamma* side: index IV has historically exceeded realized vol the large majority of the time, so a long-gamma trader with no forecasting skill expects to lose the variance premium plus costs; a short-gamma trader expects to *earn* it but with a fat left tail. Any claimed edge must show realized-vs-implied vol selection skill beyond this hostile baseline.
-
-## Rules
-
-### Entry
-1. **Form a realized-vol view** vs. the option's implied vol. Long gamma if you expect RV > IV (e.g., into an underpriced catalyst); short gamma if you expect RV < IV (e.g., rich post-event IV).
-2. **Establish the options leg** — a [[straddle]]/[[strangle]] for a vega-rich, gamma-heavy position; a single option or spread for a more targeted exposure.
-3. **Delta-hedge to neutral** at inception by trading the underlying.
-
-### Ongoing hedging
-1. **Re-hedge on a rule**: fixed time interval, fixed delta band (e.g., re-hedge when |Δ| exceeds a threshold), or move-based. Tighter hedging reduces variance but raises transaction costs — the central tradeoff.
-2. **Monitor gamma and theta** — long gamma must out-scalp theta; short gamma must avoid a vol blowup.
-
-### Exit
-1. **Close when the vol view is realized** or the catalyst passes.
-2. **Roll** to maintain gamma if the thesis persists.
-3. **Risk stop** — for short gamma, cut on a vol spike before negative gamma compounds losses.
-
-### Position sizing
-- Size to gamma and vega risk under a stressed-vol scenario, not to expected carry. For short gamma especially, cap notional so a multi-sigma move is survivable.
-
-## Implementation pseudocode
-
-```python
-def delta_hedged_options(option_position, band):
-    establish(option_position)               # long or short straddle/strangle
-    hedge_to_zero_delta(option_position)
-    while open:
-        d = portfolio_delta(option_position)
-        if abs(d) > band:                    # delta-band re-hedge rule
-            trade_underlying(-d)             # restore delta-neutral
-        # realized P&L per step:
-        # 0.5 * gamma * S**2 * (rv**2 - iv**2) * dt  - hedge_costs
-        if short_gamma and vol_spiking():
-            reduce_or_close()                # tail guard
-```
-
-## Indicators / data used
-- **[[the-greeks]]** — delta (hedged), gamma, theta, vega (the exposures being managed).
-- **[[implied-volatility]]** (entry price of vol) vs. **[[realized-volatility]]** (delivered vol) — the P&L driver.
-- **Intraday OHLCV** — to compute realized vol and time hedges.
-- **[[variance-risk-premium]]** context and the IV surface.
-
-## Example trade
-
-*Illustrative, round numbers — not a backtest.*
-
-A trader buys a 1-month ATM straddle on a $100 stock at an implied vol of 20% and delta-hedges to neutral.
-- **High-realized scenario**: the stock chops in a wide ±2% daily range, realizing ~28% vol. The long-gamma hedging loop buys dips and sells rallies; the accumulated gamma scalps exceed the theta paid — the trade profits on the ~8-vol-point gap.
-- **Low-realized scenario**: the stock barely moves, realizing ~12% vol. Theta bleed overwhelms the meager gamma revenue and the position loses on the negative ~8-vol gap. A *short*-gamma trader would have made money in this second scenario and lost in the first. The hedging converts the direction-agnostic price path into a clean bet on realized-vs-implied vol.
-
-## Performance characteristics
-- **Long gamma**: many small losses (theta) and occasional large gains (vol spikes); long-convexity, positively skewed, usually negative expectancy unless vol is well-selected.
-- **Short gamma**: many small gains (variance premium) and rare large losses (vol spikes); short-convexity, negatively skewed.
-- **Cost sensitivity**: very high — hedge transaction costs and option spreads can consume the entire edge; the re-hedge frequency is the key cost lever.
-- **Best conditions**: long gamma in underpriced-vol/pre-catalyst spots; short gamma in persistently rich-vol, range-bound regimes.
-
-## Capacity limits
-Constrained by single-name option liquidity and the market impact of frequent underlying hedging. Index and large-cap underlyings support more notional; thin single-name options cap size quickly because hedge slippage scales with frequency and size. Crowding is moderate — heavy short-gamma positioning across dealers can amplify realized moves (dealers hedging short gamma chase price), which feeds back into the long-gamma trader's payoff.
-
-## What kills this strategy
-- **Transaction-cost bleed** from over-frequent hedging (see [[failure-modes]]).
-- **A vol spike against a short-gamma book** — negative gamma compounds losses fast.
-- **Persistent IV > RV** grinding down long-gamma programs (the variance premium working against you).
-- **Liquidity gaps** preventing clean hedging or exit.
-
-## Kill criteria
-- Short gamma: realized vol breaches implied at entry by a preset multiple → reduce/close.
-- Long gamma: cumulative theta bleed exceeds a set fraction of capital with no realized-vol pickup → cut.
-- Hedge transaction costs exceed modeled gamma revenue → widen the hedge band or exit.
-- Single-name option liquidity deteriorates such that hedge slippage dominates → close.
-
-## Advantages
-- **Isolates volatility** from direction — a clean, analytically grounded vol bet.
-- **Two-sided** — express long *or* short realized-vs-implied vol views.
-- **Foundation of options market-making** and the building block of [[gamma-scalping]], [[variance-swap]] replication, and dispersion-trade legs.
-- Risk is well-characterized by [[the-greeks]].
-
-## Disadvantages
-- **High path-dependence and transaction costs** — hedging error and fees can erase the edge.
-- **Short-gamma tail** — large losses in vol spikes.
-- **Long-gamma carry drag** — theta bleed when realized vol disappoints.
-- **Operationally demanding** — continuous monitoring and re-hedging.
-
-## Sources
-General market knowledge; no specific wiki source ingested yet.
 
 ## Related
-- [[delta-hedging]] — the hedging mechanism
-- [[gamma-scalping]] — the long-gamma application
-- [[the-greeks]] — the exposures managed
-- [[implied-volatility]], [[realized-volatility]] — the priced vs. delivered vol
-- [[variance-swap]], [[volatility-swap]] — instruments that package the same realized-vol exposure
-- [[volatility-trading]], [[variance-risk-premium]] — context
-- [[edge-taxonomy]] — classification
+
+- [[delta-hedging]] — the shared hedging mechanism and its math
+- [[gamma-scalping]] — the long-gamma configuration of this structure
+- [[straddle]] / [[strangle]] — the usual vega-rich options legs
+- [[implied-volatility]] / [[realized-volatility]] — the priced-vs-delivered vol this structure isolates
+- [[variance-risk-premium]] — what the short-gamma configuration harvests
+- [[deribit]] / [[greeks-live]] — venue, inverse settlement, DVOL, analytics
+- [[perpetual-futures]] / [[funding-rate]] — the crypto hedge instrument and its carry
+- [[dvol]] — the residual-vega benchmark
+- [[gamma-exposure]] — dealer positioning that shapes realized vol
+- [[delta]] / [[gamma]] / [[theta]] / [[vega]] — the Greeks managed and left on
+
+## Sources
+
+- Black, F. & Scholes, M. (1973), "The Pricing of Options and Corporate Liabilities", *Journal of Political Economy* — the replication argument
+- Boyle, P. & Emanuel, D. (1980), "Discretely Adjusted Option Hedges", *Journal of Financial Economics* — discrete hedging error
+- Carr, P. & Wu, L. (2009), "Variance Risk Premiums", *Review of Financial Studies* — the variance risk premium
+- Deribit / [[greeks-live]] documentation — inverse contract specs, coin-Greeks, DVOL

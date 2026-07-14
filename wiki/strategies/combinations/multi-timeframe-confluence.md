@@ -2,12 +2,12 @@
 title: "Multi-Timeframe Confluence"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
 tags: [combinations, meta-strategy, multi-timeframe, confluence, trend-alignment, technical-analysis]
 strategy_type: hybrid
 timeframe: multi (weekly/daily/1H/15m)
-markets: [stocks, crypto, forex]
+markets: [crypto, forex]
 complexity: intermediate
 backtest_status: untested
 related: ["[[moving-averages]]", "[[support-and-resistance]]", "[[fibonacci-retracement]]", "[[rsi]]", "[[macd]]", "[[volume-analysis]]", "[[triple-screen-system]]"]

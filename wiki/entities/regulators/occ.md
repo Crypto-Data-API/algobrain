@@ -98,7 +98,7 @@ The OCC cleared more than **12 billion contracts in 2024**, then a record annual
 - **MEMX Options Onboarding (June 2024)** — Added MEMX Options as a cleared exchange, reflected in the June 2024 ODD update.
 - **Risk Model Modernization** — Multi-year project to replace STANS with a next-generation margin model.
 - **Stress Testing and Default Fund Sizing** — Quarterly stress tests against extreme but plausible market scenarios; the OCC has multiple times publicly increased its Clearing Fund size in response to volatility events.
-- **Record Volume Handling (2025)** — The OCC processed back-to-back record volume days in 2025 (April 4 and October 10) without operational incident, a real-world stress test of CCP infrastructure during the retail-driven [[0dte|0DTE]] and tariff-volatility era.
+- **Record Volume Handling (2025)** — The OCC processed back-to-back record volume days in 2025 (April 4 and October 10) without operational incident, a real-world stress test of CCP infrastructure during the retail-driven [[0dte-trading|0DTE]] and tariff-volatility era.
 
 ## Related
 

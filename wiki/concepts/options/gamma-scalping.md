@@ -13,7 +13,7 @@ markets: [crypto, options]
 related: ["[[gamma]]", "[[theta]]", "[[delta]]", "[[vega]]", "[[delta-hedging]]", "[[black-scholes-model]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[straddle]]", "[[deribit]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[dvol]]", "[[gamma-exposure]]"]
 ---
 
-**Gamma scalping** is the long-volatility side of [[delta-hedging]]: a trader buys options (a long-[[gamma]] position, usually a [[straddle]] or strangle) and continuously delta-hedges the underlying, harvesting the realized price movement. It profits when the underlying's [[realized-volatility]] exceeds the [[implied-volatility]] paid for the options. This page is the **theory/concept** treatment (mechanism, math, Greeks, worked numbers, crypto grounding). For the buildable strategy — edge classification, backtest status, capacity, variants, and kill-criteria — see the [[gamma-scalping]] strategy page.
+**Gamma scalping** is the long-volatility side of [[delta-hedging]]: a trader buys options (a long-[[gamma]] position, usually a [[straddle]] or strangle) and continuously delta-hedges the underlying, harvesting the realized price movement. It profits when the underlying's [[realized-volatility]] exceeds the [[implied-volatility]] paid for the options. This page is the **theory/concept** treatment (mechanism, math, Greeks, worked numbers, crypto grounding). For the delta-hedged options position it belongs to (the long-gamma configuration, construction, sizing), see [[delta-hedged-options]].
 
 The name captures the mechanic: a long-gamma position gets **longer as price rises and shorter as it falls**, so hedging back to delta-neutral mechanically **sells high and buys low** in the underlying. Each scalp banks a small profit funded by the option's convexity; the daily cost is [[theta]].
 
@@ -100,7 +100,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 
 ## Related
 
-- [[gamma-scalping]] — the strategy build-out (edge, backtest, variants, kill-criteria)
+- [[delta-hedged-options]] — the delta-hedged options structure (long-gamma configuration)
 - [[delta-hedging]] — the shared hedging machinery; the short-vol mirror image
 - [[gamma]], [[theta]], [[delta]], [[vega]] — the Greeks that drive the trade
 - [[black-scholes-model]] — the gamma–theta identity; crypto/inverse pricing

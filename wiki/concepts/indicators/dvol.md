@@ -32,7 +32,7 @@ DVOL is computed from the full [[deribit|Deribit]] options order book using a mo
 ## Crypto specifics (vs the VIX)
 
 - **24/7 & weekend gaps** — crypto trades continuously, so DVOL prices weekend gamma and holiday-thin liquidity that the equity VIX (market-hours) never faces.
-- **Funding linkage** — perpetual [[funding-rate|funding]] and the [[options-skew|options skew]] co-move; crypto skew flips to *call*-skew in euphoric funding regimes, unlike equities' near-permanent put-skew, which changes DVOL's internal composition.
+- **Funding linkage** — perpetual [[funding-rate|funding]] and the [[skew-trading|options skew]] co-move; crypto skew flips to *call*-skew in euphoric funding regimes, unlike equities' near-permanent put-skew, which changes DVOL's internal composition.
 - **Two indices, thin alts** — liquid DVOL exists only for BTC and ETH; there is no deep listed-vol index for most alts, capping vol strategies to the majors.
 - **No fear-only reading** — because crypto rallies can be as violent as sell-offs, a DVOL spike is not automatically "fear"; it can be melt-up gamma.
 

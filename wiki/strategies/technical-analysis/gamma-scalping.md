@@ -12,6 +12,6 @@ related: ["[[gamma-scalping]]", "[[delta-hedging]]", "[[straddle]]", "[[gamma]]"
 This page has been consolidated to remove duplication.
 
 - For the **theory/concept** treatment — the gamma–theta mechanism, the P&L identity, hedge-band selection, worked crypto numbers, and crypto grounding (Deribit inverse contracts, perp-hedge funding, [[dvol|DVOL]], 24/7 & weekend gaps) — see the [[gamma-scalping]] concept page in `concepts/options/`.
-- For the **buildable strategy** — edge classification, null hypothesis, rules, backtest status, capacity, variants, and kill-criteria — see the [[gamma-scalping]] strategy page in `strategies/`.
+- For the **delta-hedged options structure** it belongs to (the long-gamma configuration, construction, sizing) — see [[delta-hedged-options]].
 
 Related: [[delta-hedging]], [[gamma]], [[theta]], [[vega]], [[implied-volatility]], [[realized-volatility]], [[straddle]], [[variance-risk-premium]], [[deribit]].

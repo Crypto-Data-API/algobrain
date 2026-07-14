@@ -2,173 +2,145 @@
 title: "Bull Put Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-22
-status: excellent
-tags: [options, bull-put-spread, put-credit-spread, credit-spread, bullish, defined-risk]
-aliases: ["Put Credit Spread"]
+updated: 2026-07-14
+status: good
+tags: [options, crypto, derivatives, bull-put-spread, credit-spread, bullish, defined-risk, volatility, ethereum]
+aliases: ["Put Credit Spread", "Short Put Spread", "Crypto Bull Put Spread", "Deribit Put Credit Spread"]
 strategy_type: quantitative
-markets: []
+timeframe: swing
+markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
-edge_source: [risk-bearing, behavioral]
-edge_mechanism: "A short put-credit spread sells overpriced downside insurance: it harvests the variance/volatility risk premium plus equity put-skew, taking the other side of investors and funds who systematically overpay for downside protection."
-crowding_risk: medium
-related: ["[[bear-call-spread]]", "[[bull-call-spread]]", "[[iron-condor]]", "[[vertical-spreads]]", "[[theta]]", "[[variance-risk-premium]]"]
+related: ["[[bear-call-spread]]", "[[bull-call-spread]]", "[[bear-put-spread]]", "[[iron-condor]]", "[[vertical-spread]]", "[[put-spread]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[delta]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
 ---
 
 # Bull Put Spread
 
 ## Overview
 
-The Bull Put Spread (also called a **Put Credit Spread**) is a bullish, defined-risk strategy that collects a net credit at entry. The trader sells a higher-strike [[put-option]] and simultaneously buys a lower-strike put at the same expiration. The sold put generates premium while the bought put limits the maximum loss. The position profits when the underlying stays above the short put strike through expiration, allowing both options to expire worthless and the trader to keep the full credit. It is one of the most widely traded credit spread structures due to its simplicity and favorable risk/reward in bullish or neutral markets.
+The bull put spread (a **put credit spread**) is a bullish-to-neutral, **defined-risk** structure that collects a net credit at entry. You sell a higher-strike [[put-option|put]] and buy a lower-strike put at the same expiry; the short put generates premium, the long put caps the loss. The position keeps the full credit when the underlying stays above the short strike at expiry. It is the bullish mirror of the [[bear-call-spread]] and the lower half of an [[iron-condor]] — one of the most widely traded credit structures because of its simplicity and favorable win probability.
 
-## Setup
+On [[deribit]] BTC and ETH options, the bull put spread is a defined-risk way to sell **overpriced downside** — harvesting the [[variance-risk-premium]] and the persistent crypto put skew that fattens after selloffs. The long wing hard-caps the tail a naked short put leaves open, which in crypto is essential: BTC/ETH have printed −50% in 24h. It works best entered when [[dvol|DVOL]] is **elevated** and you expect BTC/ETH to hold above a support level; it bleeds in a crash or a vol shock.
 
-1. **Sell 1 put** at a strike near or slightly below the current stock price (the higher strike).
-2. **Buy 1 put** at a lower strike to define the maximum risk. The width between strikes determines the max loss.
-3. **Same expiration** -- typically 30-45 DTE to benefit from accelerating [[theta]] decay.
-4. **Net credit received** = premium from sold put minus premium paid for bought put.
+## Construction
 
-## Payoff Profile
+Two legs, one expiry, same underlying (BTC or ETH), cash-settled to the Deribit index:
 
-| Scenario | Outcome |
-|---|---|
-| Stock above short put strike at expiry | Both puts expire worthless; keep full credit |
-| Stock between the two strikes | Partial loss; short put is ITM, long put provides floor |
-| Stock below long put strike | Max loss = spread width minus credit received |
+| Leg | Action | Strike (delta) | Purpose |
+|---|---|---|---|
+| 1 | Sell 1 put | OTM below spot (~25-35Δ), at/below support | the income leg |
+| 2 | Buy 1 put | further OTM (~10-20Δ) | protective lower wing, defines risk |
 
-**Max profit** = net credit received. **Max loss** = (higher strike - lower strike) - net credit. **Break-even** = short put strike - net credit.
+- **Strike selection:** sell the short put around 25-35 delta (≈65-75% probability of expiring OTM), at or below a tested support level. Buy the long wing one to a few strikes lower to define the loss.
+- **Ratios:** 1:1 — one contract per leg (Deribit contracts are 1 BTC or 1 ETH each).
+- **Net credit** = short-put bid − long-put ask. Aim to collect **~⅓ of the width** as credit; crypto put skew often makes the short put richer.
+- **Width** = short strike − long strike; sets max loss.
+- **Tenor:** 21-45 DTE is the theta-rich zone. Avoid weeklies (gamma too hot for crypto's continuous gaps).
 
-## Edge source
+## Payoff & breakevens
 
-Per the [[edge-taxonomy]], the bull put spread is primarily a **risk-bearing** edge with a **behavioral** overlay. By selling a put-credit spread you collect the [[variance-risk-premium]]: implied volatility tends to trade above subsequently realised volatility, so the put you sell is, on average, priced richer than the moves that actually occur. The additional behavioral component is the equity **put skew** — investors systematically overpay for downside protection — so OTM puts are especially rich. The long lower-strike put converts unlimited risk into defined risk while sacrificing a little of the premium.
+- **Max profit** = net credit, when the underlying is at or above the short strike at expiry.
+- **Max loss** = width − net credit, when the underlying is at or below the long wing at expiry.
+- **Breakeven** = short strike − net credit.
 
-## Why this edge exists
+The expiry payoff is flat at the max-profit ceiling above the short strike, sloping down between the strikes, flat at the capped-loss floor below the long wing.
 
-The other side is the buyer of downside protection: long-only funds hedging portfolios, retail traders buying puts, and crash-averse investors. They are willing to pay more than the actuarially fair price for insurance because losses hurt more than equivalent gains help (loss aversion) and because hedges have negative expected return but positive utility. The market-maker who buys your short put lays that risk off into the dealer complex. As a net seller of insurance, you earn the premium most of the time and pay out in the (rarer) selloffs — a positive-expectancy but negatively-skewed payoff. The edge is real but **not free**: it is compensation for bearing left-tail risk, and it is moderately **crowded** (premium-selling is a popular retail and fund strategy), which compresses the premium.
+## Greeks profile
 
-## Null hypothesis
+- **Delta:** net long (bullish) — the position wants spot to hold or rise.
+- **Gamma:** net short near the short strike — it accelerates against you as spot falls toward the short put into expiry (the crypto gamma trap; no market close to cap an overnight move).
+- **Theta:** net positive — time decay is the income engine.
+- **Vega:** net short — a **DVOL crush after entry helps**, a DVOL spike (which accompanies selloffs) hurts.
 
-Under the null (no variance risk premium, options fairly priced), a short put-credit spread has expected P&L ≈ **−costs**: the credit collected exactly compensates for expected payouts, and you are left paying commissions and bid/ask. The strategy's *entire* edge is the assumption that implied > realised volatility on average. If that premium is absent or already arbitraged away in a name, you are simply selling fairly-priced lottery tickets and lose the frictions. A high win rate is NOT evidence of edge — credit spreads win most of the time by construction (you can win small often and lose big occasionally); only positive expectancy net of the rare max losses proves edge.
+## Market view / when to use
 
-## Rules
+- You are **bullish-to-neutral** on BTC or ETH and expect spot to hold above a support level through expiry.
+- **DVOL is elevated** (roughly the 40th-90th percentile of its trailing year): the put is rich enough to pay for the wing and the tail, without selling into an active vol shock.
+- You want **defined-risk** downside-premium selling rather than a naked short put or [[cash-secured-put]] — essential in crypto's fat-tailed selloffs.
+- The crypto **put skew is fat** (typically after a shakeout), making the short put you sell richer.
 
-- **Direction / thesis**: bullish-to-neutral; you expect the underlying to stay above the short put strike.
-- **Strike selection**: sell the short put around delta 0.16–0.30 (≈70–84% probability OTM) — a common premium-selling sweet spot — at or below a support level. Buy the long put 1–5 strikes lower to define risk.
-- **Width**: chosen so max loss fits position sizing. Collect a credit of roughly **⅓ of the width** (e.g., $0.33 credit on a $1 wide spread) so reward:risk is ~1:2 with a high win probability.
-- **DTE**: 30–45 days — the zone of accelerating [[theta]] decay; many programs target ~45 DTE entry.
-- **IV environment**: enter when IV rank is elevated (richer premium); avoid selling cheap premium in low-IV regimes.
-- **Exit / management**: take profit at **50% of max credit** (the classic tastytrade-style rule). Manage/roll at **21 DTE** to reduce end-of-life [[gamma]] and [[pin-risk]]. Roll the spread out (and down) for a credit if tested, only while the bullish thesis holds.
-- **Position sizing**: max loss per spread = (width − credit) × 100; risk ≤ 1–3% of the account per position and cap aggregate short-premium exposure.
+## Adjustments & management
 
-## Implementation pseudocode
+- **Profit target:** close at **50% of max credit** (the tastytrade-standard rule ports directly).
+- **Time stop / roll:** manage or roll at **~21 DTE** to limit end-of-life [[gamma]]; roll down-and-out for a credit only while the bullish/neutral thesis holds.
+- **Defined-risk stop:** close on a tested spread when the buy-back cost reaches **~2× the credit received**, or flatten on a DVOL vol-shock signal.
+- **No early-assignment management** — Deribit options are European and cash-settled; the ex-dividend early-assignment risk of equity short puts does not exist here.
 
-```python
-def manage_bull_put_spread(spot, neutral_to_bullish, iv_rank, chain):
-    if not neutral_to_bullish or iv_rank < 30:   # only sell premium when it is rich
-        return None
-    short_put = chain.put(delta=-0.20, dte=45)            # ~80% OTM probability
-    long_put  = chain.put(strike=short_put.strike - width, dte=45)
-    credit = short_put.bid - long_put.ask
-    if credit < 0.30 * width:                             # not paid enough for the risk
-        return None
-    pos = open_spread(sell=short_put, buy=long_put, credit=credit)
+## Crypto specifics
 
-    while pos.open:
-        value = pos.mark()                                # cost to buy back
-        if value <= 0.50 * credit:                        # captured 50% of max profit
-            close(pos); break
-        if pos.dte <= 21:                                 # manage/roll near expiry
-            roll_or_close(pos); break
-        if value >= 2.0 * credit and short_put.itm:       # tested hard -> defined-risk stop
-            close(pos); break
-        if early_assignment_risk(pos.short_put):          # deep ITM near ex-dividend
-            close(pos); break
-```
+- **Venue & underlyings:** [[deribit]] holds the vast majority of BTC/ETH options OI. **Alt options (SOL and below) are too thin** for a clean two-leg credit spread — stick to BTC/ETH.
+- **Inverse vs linear/USDC settlement:** prefer **USDC-margined (linear)** options for clean USD credit, width, and breakeven. **Inverse (coin-margined)** options settle in BTC/ETH and embed quanto curvature — your coin collateral's USD value *falls with spot exactly as the short put loses*, compounding the drawdown on the tested put wing. Use inverse only if the embedded coin delta is intended.
+- **DVOL regime gate:** open new put-credit spreads inside the ~40th-90th [[dvol|DVOL]] percentile band. Below ~40th the credit is too thin to pay for the tail; above ~90th you are likely selling into a vol shock.
+- **24/7 & weekend gaps:** no close, no gap protection, but continuous trading. A thin-liquidity weekend headline can gap spot through the short strike at 03:00 UTC with no chance to react — the reason the protective long wing (not a naked short put) is mandatory. Expiry is **08:00 UTC**, cash-settled to Deribit's ~30-minute TWAP index, so there is **no assignment or pin risk**.
+- **No [[section-1256-contracts|§1256]]:** offshore Deribit contracts get **no 60/40 blended US tax treatment** — the credit is ordinary short-term income in the US, trader-status-dependent in AU. After-tax net is materially below an SPX put-credit spread's.
+- **Perp-funding interaction:** crypto skew is set by the [[perpetual-futures|perp]] book. After a selloff, **put skew fattens** (leveraged longs unwind, downside demand rises), making the short put richer to sell — the best entry window. Delta-hedging the residual with the perp pays or collects funding.
+- **Fees:** Deribit taker fee is 0.03% of the underlying, **capped at 12.5% of the option premium** — the cap dominates on the cheap OTM long wing and is a real drag on a two-leg structure.
 
-## Example trade
+## Risks
 
-*Illustrative hypothetical with round numbers — not a recommendation or backtest.*
+- **Sharp gap down** through the long wing (macro shock, deleveraging cascade): realises max loss with no chance to manage, correlated across a market-wide selloff — the dominant tail for premium sellers.
+- **Volatility expansion** — a rising-DVOL selloff marks the spread to a large unrealised loss before expiry (net short [[vega]]).
+- **Over-sizing / correlation** — many correlated short-put spreads turn one bad day into an account-threatening loss ("picking up pennies in front of a steamroller").
+- **Gamma trap** — holding the short put inside ~21 DTE amplifies delta swings.
+- **Edge compression** — a persistently low-DVOL regime offers premium too thin to cover costs and tail risk.
 
-Stock XYZ trades at **$100**, IV rank elevated, neutral-to-bullish, 45 DTE:
+## Worked crypto example
 
-- **Sell 1 × $95 put** for $1.50
-- **Buy 1 × $90 put** for $0.50
-- **Net credit** = $1.50 − $0.50 = **$1.00** ($100 per spread)
-- **Spread width** = $5.00
-- **Max profit** = **$1.00** ($100) when XYZ ≥ $95 at expiry
-- **Max loss** = $5.00 − $1.00 = **$4.00** ($400) when XYZ ≤ $90 at expiry
-- **Break-even** = $95 − $1.00 = **$94.00**
-- **Reward:risk** = 1.00 : 4.00 = **1 : 4** (high win probability, small reward, large tail loss)
+**Setup (ETH, USDC-margined/linear).** ETH spot **$3,000**; ETH DVOL **58** (~65th percentile, put skew fat after a shakeout); 30 DTE; support near $2,800.
 
-Payoff at expiration:
+**Trade (per 1-ETH contract):**
+- Sell 30Δ put @ **$2,800** for **$72**.
+- Buy 15Δ put @ **$2,600** for **$28**.
+- **Net credit = $44.** Width = $200. **Max loss = $200 − $44 = $156.**
+- **Breakeven = $2,800 − $44 = $2,756.** R:R ≈ 44 : 156 ≈ **1 : 3.5** (high win probability, small reward, large tail).
 
-| XYZ at expiry | Short $95 put | Long $90 put | Net | P&L (per spread) |
-|---|---|---|---|---|
-| $105 | 0 | 0 | keep credit | +$100 (max profit) |
-| $95 | 0 | 0 | keep credit | +$100 |
-| $94.00 | −$1.00 | 0 | credit − $1.00 | $0 (break-even) |
-| $92 | −$3.00 | 0 | credit − $3.00 | −$200 |
-| $90 | −$5.00 | 0 | credit − $5.00 | −$400 (max loss) |
-| $85 | −$10.00 | +$5.00 | credit − $5.00 | −$400 (capped) |
+**Path A — base case (holds).** ETH ranges $2,900-$3,150 and DVOL fades to 50. The short put decays; close at 50% for **+$22/contract**.
 
-## Performance characteristics
+**Path B — tested but holds.** ETH dips to $2,820, just above the short strike; DVOL ticks up. At 21 DTE the mark is ~$70 loss; roll down-and-out to a $2,650/$2,450 spread for a small credit, or close for a small loss.
 
-- **Negatively skewed**: many small wins, occasional large losses up to max loss. High win rate (~70–85% depending on short-strike delta) does NOT imply high expectancy; the rare full losses must be smaller in aggregate than the accumulated credits.
-- **Greeks**: net long [[delta]] (bullish), net short [[vega]] (an IV spike in a selloff hurts before expiry), net positive [[theta]] (time decay is your friend). The edge is structurally the [[variance-risk-premium]].
-- **Cost-aware**: four commissions/legs per round trip and bid/ask on each leg eat into a $1.00 credit — manage at 50% and use mid limits. Selling cheap (low-IV) spreads usually loses to costs.
-- **No fabricated backtest**: realised edge tracks the persistence of the VRP and disciplined loss management; under the null it is −costs (see Null hypothesis).
-
-## Capacity limits
-
-Ample for retail and small funds on liquid index ETFs and large-caps. Constraints: (1) **open interest / bid-ask** at the chosen OTM strikes — thin single-name puts have wide spreads that erase a small credit; (2) **aggregate tail exposure** — the binding limit is portfolio left-tail risk, not order size, because correlated short puts all lose together in a crash. The strategy is moderately **crowded**, so the premium per unit of risk has compressed over time.
-
-## What kills this strategy
-
-- **Sharp gap down** through the long strike: realises max loss with no chance to manage; correlated across many positions in a market-wide selloff (the dominant tail risk for premium sellers).
-- **Volatility expansion**: a rising-IV selloff marks the spread to a large unrealised loss even before expiry (short [[vega]]).
-- **Over-sizing / over-crowding**: too many correlated short-put spreads turn a single bad day into account-threatening loss — the classic "picking up pennies in front of a steamroller" failure.
-- **Early [[assignment]]** on the short put when deep ITM near ex-dividend, converting to unwanted long stock.
-- **Edge compression**: a persistently low-IV regime offers premium too thin to cover costs and tail risk.
-
-## Kill criteria
-
-- **Stop-loss at a debit of ≥ 2× the credit received** (or define max loss as the full width) on a tested spread.
-- **Take profit at 50% of max credit**; **manage or close at 21 DTE.**
-- Close immediately on **early-assignment risk** (short put deep ITM near ex-dividend).
-- **Portfolio rule**: if aggregate short-premium exposure or a single selloff drawdown exceeds the risk budget (e.g., >15–20% of the book on a stress day), cut size.
-- Retire a systematic put-credit program if **rolling 12-month net P&L ≤ 0** (the VRP has compressed below costs) or if a single uncontrolled tail event breaches the kill drawdown.
-
-## When to Use
-
-- You have a **bullish or neutral** outlook and expect the stock to hold above a certain support level.
-- You want to collect [[premium]] income with **defined risk** and no margin surprises.
-- [[implied-volatility]] is elevated, making the sold put premium attractive relative to realized moves.
-- You prefer a high-probability trade with a capped but limited profit potential.
-
-## Advantages
-- Credit received at entry -- you are paid to take the position
-- Defined risk with no margin blowup scenarios
-- Benefits from [[theta]] decay and [[implied-volatility]] contraction
-- Simple two-leg structure that is easy to manage and roll
-
-## Disadvantages
-- Max profit is capped at the credit received -- limited upside
-- A sharp drop through the spread results in the maximum defined loss
-- Requires the stock to stay above the short strike -- early assignment risk if the short put goes deep ITM
-- Narrow spreads offer small absolute profits; wide spreads require more capital at risk
-
-## See Also
-- [[bear-call-spread]] -- the bearish credit spread counterpart
-- [[bull-call-spread]] -- a bullish debit spread alternative
-- [[iron-condor]] -- combines a bull put spread and a [[bear-call-spread]]
-- [[vertical-spreads]] -- the general category of single-width directional spreads
-
-## Related
-- [[variance-risk-premium]] -- the structural source of the credit-spread edge
-- [[implied-volatility]], [[theta]], [[vega]] -- the Greeks that drive the position
-- [[assignment]], [[pin-risk]] -- key short-leg risks near expiration
-- [[edge-taxonomy]] -- classification of the risk-bearing/behavioral edge
+**Path C — flush.** A deleveraging cascade gaps ETH to $2,500 overnight; DVOL 58 → 95. The short $2,800 put is deep ITM but the long $2,600 wing caps the loss near the **−$156/contract** floor — the exact scenario the defined-risk wing exists to survive.
 
 ## Sources
-General market knowledge; no specific wiki source ingested yet.
+
+- [[deribit]] / [[greeks-live]] documentation — European cash settlement, 08:00 UTC expiry, DVOL construction, USDC-margined (linear) vs inverse settlement, put-skew behavior, taker-fee premium cap.
+- [[book-option-volatility-and-pricing]] — Natenberg on put-credit-spread construction, gamma near expiry, and the [[variance-risk-premium]] these structures harvest (mechanics port to crypto; costs, tails, and tax do not).
+- tastytrade 25-35Δ credit-spread / 50%-profit / 21-DTE management studies — mechanics port directly; sizing and stops must be tightened for the crypto crash tail.
+
+## Getting the Data (CryptoDataAPI)
+
+DVOL and the raw IV/skew surface come from **Deribit / [[greeks-live]]**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the volatility-regime, options-flow, dealer-gamma, and funding context used to *time* the credit spread and read the downside tail.
+
+**Live:**
+- `GET /api/v1/volatility/regime` — per-asset vol regime: the entry gate (want elevated/expanding, not vol_shock)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (downside dealer positioning; short-strike context)
+- `GET /api/v1/quant/gex` — Gamma Exposure (dealer inventory + liquidation profile): cascade risk below spot
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — perp funding, the put-skew driver
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations; early warning for the deleveraging flush that breaks a put-credit spread
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for realized-vol and support mapping
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+## Related
+
+- [[bear-call-spread]] — the bearish credit-spread mirror
+- [[bear-put-spread]] — the bearish *debit* put spread
+- [[bull-call-spread]] — the bullish debit alternative (buy cheap DVOL instead of selling rich)
+- [[iron-condor]] — combines a bull put spread and a [[bear-call-spread]] into a neutral structure
+- [[vertical-spread]], [[put-spread]] — the families this belongs to
+- [[deribit]], [[greeks-live]] — venue and analytics/RFQ workbench; DVOL and skew source
+- [[dvol]], [[implied-volatility]] — the vol inputs; DVOL regime gates entry
+- [[variance-risk-premium]] — the structural source of the credit-spread edge
+- [[funding-rate]] — the perp linkage that fattens crypto put skew
+- [[max-pain]], [[gamma-exposure]] — dealer-positioning and cascade context
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[theta]], [[vega]], [[delta]] — the Greeks that drive the position
+- [[cryptodataapi]], [[cryptodataapi-market-intelligence]] — the data layer

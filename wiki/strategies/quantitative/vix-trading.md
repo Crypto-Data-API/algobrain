@@ -1,98 +1,147 @@
 ---
-title: "VIX Trading"
+title: "Crypto Volatility Trading (DVOL)"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
-tags: [vix, volatility, vix-futures, contango, roll-yield, short-volatility, long-volatility, mean-reversion, quantitative]
-aliases: ["VIX Trading Strategy", "Volatility Trading", "Short Vol", "VIX Futures Trading"]
+tags: [crypto, options, volatility, dvol, short-volatility, long-volatility, mean-reversion, quantitative, derivatives]
+aliases: ["DVOL Trading", "Crypto Vol Trading", "VIX Trading", "Volatility Trading", "Deribit Volatility Trading"]
 strategy_type: quantitative
 timeframe: swing|position
-markets: [stocks]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-related: ["[[tail-risk-hedging]]", "[[garch-volatility]]", "[[regime-detection]]", "[[options]]"]
+related: ["[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[vix-calls]]", "[[variance-risk-premium]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[funding-rate]]", "[[volatility-regime]]", "[[liquidation-cascade-fade]]", "[[gamma-exposure]]"]
 ---
 
-# VIX Trading
+# Crypto Volatility Trading (DVOL)
 
 ## Overview
 
-VIX trading involves taking positions in VIX futures and exchange-traded products (ETPs) to profit from changes in market volatility expectations. The VIX -- the CBOE Volatility Index -- measures 30-day implied volatility of S&P 500 options and is often called the "fear gauge." But you **cannot trade the VIX index directly**. Instead, traders use VIX futures, VIX options, and ETPs like VXX (long vol), UVXY (2x long vol), and SVXY (short vol) to express volatility views.
+Crypto volatility trading means taking positions that profit from changes in the *price of optionality* — implied volatility — rather than from the direction of [[bitcoin|BTC]]/[[ethereum|ETH]] spot. The crypto "fear gauge" is [[dvol|DVOL]], [[deribit|Deribit]]'s 30-day forward implied-volatility index for BTC and ETH — the crypto analogue of the equity VIX. As with the VIX, **you cannot trade DVOL directly**: it is a *published reference index*, not an instrument. Volatility views are expressed through [[deribit]] options — long/short **straddles, strangles, calendars, and variance structures** — and, more crudely, through [[funding-rate|perp funding]] as a positioning proxy.
 
-The single most important structural feature of VIX markets is **contango** -- the tendency for VIX futures to trade above the VIX spot index. Because volatility is mean-reverting (spikes are temporary and revert to a long-run average of ~15-20), the futures curve is typically upward-sloping. This creates **roll yield decay** for long volatility positions: as a VIX futures contract approaches expiration, it converges downward toward the lower spot VIX, causing long vol ETPs to lose value over time. Conversely, short volatility positions **harvest this roll yield**, earning a steady income in calm markets.
+**The critical difference from equity VIX trading: crypto has no VIX-style futures or ETP complex.** In equities the whole machinery of vol trading runs on VIX *futures* and exchange-traded products — VXX (long vol), UVXY (2× long), SVXY (short vol) — and the structural **contango / roll-yield decay** that those futures create. None of that exists in crypto. There is no DVOL future to roll, no VXX-style decay engine, and no inverse-vol ETP that can implode Volmageddon-style. Crypto vol trading is therefore an **options-book discipline**, not an ETP/futures-roll discipline.
 
-This structural decay has made short volatility one of the most popular (and dangerous) strategies in modern markets. SVXY and similar products printed steady returns in low-vol regimes -- until they didn't. The February 2018 "Volmageddon" event saw XIV (inverse VIX ETP) lose 96% in a single day when VIX spiked from 17 to 50 and the entire short-vol complex imploded. The lesson: short vol is "picking up pennies in front of a steamroller" -- consistent small gains punctuated by catastrophic losses.
+## No clean "VIX future / ETP" analog in crypto
+
+Be explicit about what does and does not port:
+
+| Equity VIX-trading building block | Crypto reality |
+|---|---|
+| Tradeable VIX index proxy | **None.** DVOL is a reference index only |
+| VIX futures (roll the curve) | **None.** No listed DVOL future |
+| Long-vol ETP (VXX/UVXY) | **None.** Replicate with long Deribit straddles/strangles (which decay via theta, *not* ETP roll) |
+| Short-vol ETP (SVXY/XIV) | **None as an ETP.** Replicate by *selling* Deribit strangles/condors or via on-chain option vaults — see [[crypto-options-volatility-selling]] |
+| Structural contango roll-yield | Deribit vol *term structure* exists (front vs back implied vol from the surface), but there is no ETP mechanically forced to buy high / sell low each month, so the persistent VXX-style bleed does **not** exist |
+| "Volmageddon" ETP blow-up | Cannot happen to a non-existent ETP; the crypto analogue is a **short-strangle margin spiral / liquidation cascade** on Deribit |
+
+So the transferable ideas are **volatility mean reversion** and the **[[variance-risk-premium|variance risk premium]]**; the non-transferable ideas are **roll yield, ETP decay, and ETP path-dependence**. Where this page says "long vol" / "short vol," read it as *Deribit option structures*, not ETPs.
 
 ## How It Works
 
-### VIX Term Structure
-- **Contango (normal):** VIX futures > VIX spot. Occurs ~80% of the time. Short vol strategies profit from roll yield.
-- **Backwardation (fear):** VIX spot > VIX futures. Occurs during market stress (crashes, crises). Long vol strategies profit; short vol strategies suffer catastrophic losses.
+### DVOL term structure (the closest thing to a curve)
+Deribit lists multiple expiries, so you can read a **vol term structure** off the surface even though there is no DVOL future:
+- **Contango (calm):** back-month implied vol > front-month. Typical in low-DVOL regimes; favours calendar/carry structures.
+- **Backwardation (stress):** front-month implied vol > back-month. Appears in cascades (2020-03, LUNA, FTX, 2025-10-10) when near-dated gamma is bid. Long-vol structures profit; short-vol structures suffer.
 
-### Roll Yield Mechanics
-VIX ETPs hold futures contracts and must roll them monthly. In contango, they sell expiring (cheaper) contracts and buy deferred (more expensive) contracts -- buying high, selling low. This creates a structural drag of roughly 5-10% per month on long-VIX ETPs like VXX. Over time, VXX has lost 99.9%+ of its value due to this persistent decay.
+Unlike the VIX complex, no product is *forced* to roll this curve, so there is no automatic roll-yield harvest or bleed — you earn/pay carry only through the option structures you choose to hold.
 
-Short-vol ETPs (SVXY) earn this roll yield: they sell deferred (expensive) contracts and buy expiring (cheap), profiting from the convergence. But when contango flips to backwardation, the roll yield reverses and losses compound rapidly.
+### DVOL mean reversion
+DVOL is strongly mean-reverting, like the VIX: spikes into the 90s–130s (cascades) revert toward regime baselines (high-20s to 50s) within days to weeks. This creates the highest-win-rate vol trade in crypto — **selling vol after a DVOL spike** (short Deribit strangles/condors once the cascade rolls over). But the spikes that *don't* revert (LUNA→3AC→FTX, weeks of realized > implied) are book-ending, and margin expands exactly when liquidity vanishes.
 
-### Mean Reversion
-VIX is one of the most reliably mean-reverting instruments in finance. Spikes above 30-40 almost always revert within days to weeks. This creates opportunities to **sell VIX spikes** (short VIX futures or buy SVXY after fear events) with high win rates. However, the magnitude of the spikes that don't revert (2008, 2020) can be portfolio-ending for overleveraged positions.
+### Perp funding as a positioning proxy
+With no vol future, [[funding-rate|perp funding]] and open interest are the crude, high-frequency read on leverage/positioning that the VIX curve gives equity traders. Deeply positive funding flags a crowded leveraged long — a fragility signal that often precedes a downside DVOL spike.
 
 ## Rules / Application
 
-### Short Volatility (Harvesting Roll Yield)
-1. **Enter short VIX futures** or **buy SVXY** when the VIX term structure is in steep contango (front-month future / VIX spot ratio > 1.05).
-2. Hold through the contango, collecting roll yield as futures converge to spot.
-3. **Exit immediately** when contango flips to backwardation (term structure inverts) -- this signals a regime change to fear.
-4. **Position size conservatively:** Never allocate more than 5-10% of portfolio to short vol. The asymmetric risk (small gains, huge losses) demands small positions.
-5. **Hard stop:** Exit if VIX rises above 30 (or if VIX futures rise more than 20% in a single session).
+### Short volatility (harvest the variance risk premium)
+1. **Sell Deribit strangles/condors** when DVOL sits in the mid-to-upper part of its trailing-year percentile band (rich but not spiking) and DVOL − realized vol is a healthy positive spread. This is the core of [[crypto-options-volatility-selling]].
+2. Collect theta as implied vol reverts; **delta-hedge with the perp** on a band + funding-boundary schedule.
+3. **Exit immediately on a vol shock** — DVOL rising >50% in a session is the circuit breaker. There is no ETP to blow up, but a naked short strangle in a cascade is the crypto Volmageddon.
+4. **Size small** and use *defined-risk condors*, not naked strangles: crypto gaps are unbounded and continuous (no market close).
 
-### Long Volatility (Crash Protection)
-1. **Buy VIX call options** or **buy VXX/UVXY calls** when VIX is below 15 (complacency) and you anticipate a risk event.
-2. Accept the **time decay cost** -- long vol positions bleed value daily in calm markets.
-3. **Exit on VIX spikes** above 25-30 for partial profits, above 40 for full exit.
-4. Use as a [[tail-risk-hedging]] overlay: allocate 1-3% of portfolio to long-vol positions as portfolio insurance.
+### Long volatility (crash protection)
+1. **Buy Deribit straddles/strangles or OTM put wings** when DVOL is in the low part of its percentile band and [[funding-rate|funding]] is richly positive (call-skew → cheap downside). See [[vix-calls]] and [[tail-risk-hedging]].
+2. Accept **theta decay** — long-vol structures bleed daily in calm markets (the crypto equivalent of VXX decay, but driven by option theta, not ETP roll).
+3. **Exit into DVOL spikes** — monetize fast; crypto vol reverts within days.
+4. Use as a [[tail-risk-hedging]] overlay sized to a fixed small % of NAV per year.
 
-### Mean Reversion Trades
-1. After a VIX spike above 30, wait for the first close below the 10-day moving average.
-2. **Short VIX futures** or **buy SVXY** targeting a return to VIX 18-22.
-3. **Stop-loss:** If VIX makes a new high above the spike peak, exit.
-4. **Profit target:** VIX returns to 20 (or the 200-day average).
-5. Historical win rate for this setup: ~70-80% over the past 20 years.
+### DVOL mean-reversion trades
+1. After a DVOL spike accompanying a liquidation cascade, wait for the cascade to roll over (liquidations subside, front-month backwardation flattens).
+2. **Sell a defined-risk strangle/condor** targeting DVOL reversion to its regime baseline.
+3. **Stop:** if DVOL makes a new high above the spike peak (regime break, not spike), flatten.
+4. **Target:** DVOL back inside its normal percentile band.
 
 ## Example
 
-**Setup:** VIX mean-reversion trade after a market selloff.
+**Setup:** DVOL mean-reversion trade after a crypto cascade.
 
-1. **Day 0:** S&P 500 drops 4% on a geopolitical shock. VIX spikes from 16 to 34. VIX futures (front month) at 29. Term structure inverts to backwardation.
-2. **Day 3:** S&P stabilizes. VIX pulls back to 28. Futures remain at 27. Term structure flattens.
-3. **Day 5:** VIX closes at 24, below its 10-day MA (26.5). Term structure returns to mild contango. **Enter short:** Sell 2 VIX front-month futures at 24.50.
-4. **Day 12:** Fear dissipates. VIX falls to 19. VIX futures at 20. **Exit:** Buy back at 20.
-5. **Profit:** (24.50 - 20.00) x 2 contracts x $1,000/point = **$9,000**.
-6. The trade worked because the spike was event-driven (geopolitical) rather than structural (recession), and VIX's mean-reverting nature asserted itself within 2 weeks.
+1. **Day 0:** an exchange-solvency headline gaps BTC −12% over a weekend; ~$8B of perp longs are liquidated. BTC DVOL spikes 55 → 105. Front-month implied vol >> back-month (steep backwardation).
+2. **Day 2:** liquidations subside, spot stabilizes. DVOL pulls back to 85; term structure starts flattening.
+3. **Day 4:** DVOL closes at 74 and the cascade is clearly over. **Enter short:** sell a 30-DTE defined-risk BTC iron condor (short ~15-delta wings, long ~8-delta protective wings), sized to ≤1% NAV vega per vol point, delta-hedged on the perp.
+4. **Day 14:** fear dissipates, DVOL falls to 58 (regime baseline). The condor decays; **close at ~50% of max credit.**
+5. **Result:** the trade worked because the spike was event-driven (a liquidation cascade) rather than a regime break (LUNA/FTX-style), and DVOL's mean-reverting nature reasserted within two weeks. Had it been a regime break, the new-high stop would have flattened the position — the discipline that separates spike-fading from catching a falling knife.
+
+## Crypto specifics
+
+- **No tradeable vol index, no vol future, no ETPs** — the single biggest structural difference from VIX trading; everything is done with Deribit spot options.
+- **No structural roll-yield** — because nothing is forced to roll a vol curve, the persistent VXX-style long-vol bleed does not exist; long-vol cost is pure option theta instead.
+- **24/7 + weekend gaps** — the worst DVOL spikes hit in thin weekend liquidity with no close to cap the move; short-gamma positions can gap through stops.
+- **Inverse (coin-margined) settlement** — coin-collateralised options add quanto-like wrong-way risk; use USDC-margined (linear) options for clean USD P&L.
+- **Margin spiral is the crypto "Volmageddon"** — a DVOL spike multiplies Deribit portfolio-margin requirements and can force-liquidate a short-vol book at the worst tick; this replaces the ETP-termination risk of the equity complex.
+- **Single-venue concentration** — Deribit clears the overwhelming majority of crypto options; a venue outage during a vol event is un-hedgeable.
+- **Two liquid underlyings only** — deep DVOL/vol markets exist for BTC and ETH; alt vol is thin and unreliable.
+- **Perp funding is the positioning tape** — the crude, high-frequency substitute for the information the VIX futures curve gives equity traders.
 
 ## Advantages
 
-- **Structural edge:** VIX contango and mean reversion are well-documented, persistent market phenomena -- not ephemeral alpha
-- Short vol strategies produce **consistent income** in calm markets (which represent ~80% of the time)
-- VIX mean-reversion trades have **high win rates** (70-80%) after spikes
-- VIX products provide **portfolio insurance** -- a small long-vol allocation can offset large equity losses during crashes
-- Liquid market: VIX futures trade ~200K contracts/day with tight spreads
-- The VIX ecosystem (futures, options, ETPs) offers flexible ways to express volatility views across timeframes
+- **Real structural edge:** DVOL mean reversion and the crypto [[variance-risk-premium|variance risk premium]] are persistent and *fatter* than the S&P's (crypto IV−RV routinely 2–4× the SPX spread).
+- **Short-vol income** in calm regimes, which dominate ~80% of the time.
+- **High win rate** on DVOL spike-fades after event-driven (non-regime-break) cascades.
+- **No ETP path-dependence or roll-decay traps** — cleaner exposure than VXX/UVXY/SVXY; you hold exactly the options you chose.
+- **Long-vol structures** provide genuine [[tail-risk-hedging|portfolio insurance]] that pays exactly when leveraged books are liquidated.
 
 ## Disadvantages
 
-- **Catastrophic tail risk:** Short vol strategies can lose 50-100% in a single day during volatility explosions (Volmageddon 2018, COVID March 2020)
-- Long vol positions **bleed continuously** in calm markets -- the cost of protection is real and persistent (VXX loses ~60-70% per year from roll decay)
-- VIX ETPs are **not a direct proxy for VIX** -- tracking error, roll costs, and rebalancing create significant divergence from the spot index
-- **Path dependency:** VIX ETP returns depend heavily on the path of volatility, not just the level -- two identical VIX endpoint values can produce wildly different ETP returns
-- Regulatory and structural changes (XIV termination, SVXY leverage reduction from -1x to -0.5x) can alter the payoff profile without warning
-- [[regime-detection]] is critical: short vol in a true crisis regime (not just a spike) can be catastrophic, but distinguishing spikes from regime changes is extremely difficult in real-time
-- The popularity of short-vol strategies has compressed the roll yield premium over time, reducing expected returns
+- **Catastrophic tail on the short side:** a short-vol book can lose multiples of its carry in a single weekend gap (2020-03, LUNA, FTX, 2025-10-10) — the margin-spiral analogue of Volmageddon.
+- **Long-vol positions bleed continuously** via option theta in calm regimes.
+- **No tradeable vol index / future** — you cannot cleanly isolate "vol" the way a VIX future lets equity traders; every trade carries option-structure and delta-hedging baggage.
+- **Regime detection is critical and hard:** distinguishing an event-driven spike (fade it) from a regime break (do not) in real time is the central problem — see [[volatility-regime]] and [[liquidation-cascade-fade]].
+- **Single-venue (Deribit) and inverse-settlement** hazards with no equity equivalent.
+- **Crowding:** on-chain covered-call/put vaults and covered-call ETFs compress the call-side premium over time.
 
-## See Also
+## Getting the Data (CryptoDataAPI)
 
-- [[tail-risk-hedging]] -- long-vol portfolio insurance strategy
-- [[garch-volatility]] -- volatility forecasting to time VIX entries
-- [[regime-detection]] -- identifying whether a VIX spike is a temporary event or a regime change
-- [[options]] -- the underlying instruments from which VIX is derived
+[[dvol|DVOL]], the vol term structure, and the tradeable IV surface come from **[[deribit|Deribit]]** / [[greeks-live|Greeks.live]] — CryptoDataAPI does **not** serve DVOL or the option chain. [[cryptodataapi|CryptoDataAPI]] supplies the volatility-regime, dealer-gamma, funding, and liquidation context used for gating and hedging.
+
+**Live:**
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0–100)
+- `GET /api/v1/quant/market` — HMM regime probabilities, incl. `vol_spike` and `squeeze` buckets
+- `GET /api/v1/quant/gex` — dealer [[gamma-exposure|Gamma Exposure]] (long/short-gamma cascade read)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding (positioning proxy)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (spike/fade timing)
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime + 60-day history
+- `GET /api/v1/backtesting/klines` — OHLCV archive to compute realized vol for the DVOL−RV spread
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-regimes]] and [[cryptodataapi-market-intelligence]].
+
+## See Also / Related
+
+- [[dvol]] — the crypto vol benchmark this page trades around
+- [[deribit]], [[greeks-live]] — venue and IV-surface workbench
+- [[crypto-options-volatility-selling]] — the short-vol (SVXY-analogue) discipline in depth
+- [[long-volatility-strategies]] — the long-vol (VXX-analogue) family
+- [[vix-calls]] — crypto long-vol overlay via Deribit straddles / put wings
+- [[tail-risk-hedging]], [[tail-hedging]] — the portfolio-insurance use of long vol
+- [[variance-risk-premium]], [[realized-volatility]], [[implied-volatility]] — the vol inputs
+- [[volatility-regime]] — distinguishing a spike to fade from a regime break
+- [[liquidation-cascade-fade]] — the cascade dynamic behind DVOL spikes
+- [[funding-rate]] — the perp positioning proxy that substitutes for a vol future
+- [[gamma-exposure]] — dealer-gamma context for cascade fragility

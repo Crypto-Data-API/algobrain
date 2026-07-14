@@ -2,13 +2,13 @@
 title: "Volatility Carry"
 type: strategy
 created: 2026-05-06
-updated: 2026-06-20
+updated: 2026-07-14
 status: excellent
-tags: [quantitative, options, volatility, derivatives, sp500]
+tags: [quantitative, options, volatility, derivatives]
 aliases: ["Vol Carry", "VRP Harvesting", "Short Vol Carry", "Volatility Risk Premium Strategy"]
 strategy_type: quantitative
 timeframe: position
-markets: [stocks, options]
+markets: [options]
 complexity: advanced
 edge_source: [behavioral, structural]
 edge_mechanism: "Hedgers and asset owners systematically pay a premium for downside insurance and convexity; carry sellers underwrite that insurance, collecting the spread between implied and realized volatility (the variance risk premium)."

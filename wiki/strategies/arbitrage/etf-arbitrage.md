@@ -2,13 +2,13 @@
 title: "ETF Arbitrage"
 type: strategy
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-14
 status: good
 tags: [arbitrage, etf, nav, authorized-participant, creation-redemption, market-neutral, spy, bonds]
 aliases: ["ETF Arb", "Creation-Redemption Arbitrage", "NAV Arbitrage"]
 strategy_type: algorithmic
 timeframe: day
-markets: [stocks, bonds]
+markets: [bonds]
 complexity: advanced
 backtest_status: untested
 related: ["[[structural-forced-selling]]", "[[net-asset-value]]", "[[leveraged-etf-rebalancing]]"]

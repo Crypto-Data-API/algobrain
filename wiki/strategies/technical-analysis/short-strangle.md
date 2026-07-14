@@ -2,161 +2,164 @@
 title: "Short Strangle"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-22
-status: excellent
-tags: [options, short-strangle, premium-selling, theta-gang, neutral, undefined-risk]
+updated: 2026-07-14
+status: good
+tags: [options, crypto, short-strangle, premium-selling, volatility, neutral, derivatives]
+aliases: ["Crypto Short Strangle", "BTC Short Strangle", "Selling the Strangle", "OTM Premium Selling"]
 strategy_type: quantitative
 timeframe: swing
-markets: []
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-edge_source: [risk-bearing, behavioral]
-edge_mechanism: "Sell out-of-the-money implied volatility on both wings to hedgers and tail-buyers; collect the variance risk premium over a wide range in exchange for bearing undefined gap risk."
-crowding_risk: high
-related: ["[[short-straddle]]", "[[straddle-strangle]]", "[[iron-condor]]", "[[jade-lizard]]", "[[theta]]", "[[vega]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[the-greeks]]", "[[edge-taxonomy]]"]
+related: ["[[short-straddle]]", "[[strangle]]", "[[straddle-strangle]]", "[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[iron-fly]]", "[[gamma-scalping]]", "[[delta-hedging]]", "[[theta]]", "[[vega]]", "[[dvol]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[iv-crush]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
 ---
 
 # Short Strangle
 
 ## Overview
 
-The Short Strangle sells an OTM [[call-option]] and an OTM [[put-option]] at different strikes with the same expiration. By placing both short strikes away from the current price, the trader creates a **wider profit zone** than the [[short-straddle]] at the cost of collecting less total premium. The position profits when the underlying stays between the two strikes, letting [[theta]] decay erode both options to zero. It is a staple of premium-income strategies in **high-IV-rank** markets. Like the straddle, the risk is **undefined** -- a large move in either direction produces losses that can far exceed the credit collected.
+The short strangle sells an out-of-the-money [[call-option]] and an out-of-the-money [[put-option]] at **different strikes**, same expiration, on [[deribit]] BTC or ETH options. By placing both short strikes away from spot it creates a **wider profit zone** than the [[short-straddle]] at the cost of a smaller credit. The position profits when spot stays between the strikes so both legs decay via [[theta]], and — the crypto tailwind — when [[dvol|DVOL]] contracts after entry. It is the core structure of [[crypto-options-volatility-selling|systematic crypto vol selling]]: the seller collects the [[variance-risk-premium]] that the long-strangle buyer pays, winning when realized volatility comes in under the implied vol in the premium.
 
-## Edge source
+Like the straddle, the risk is **undefined** — a large move past a wing produces a loss that can dwarf the credit. Crypto sharpens this: a 24/7 tape and genuinely fat tail (2020-03, LUNA, FTX, 2025-10-10) mean the wing you sold can be breached on a weekend gap with no session break. The very-high win rate masks strong negative skew, so in crypto the short strangle is usually run as its defined-risk version, the [[iron-condor]] (buy protective wings), rather than naked.
 
-Like the [[short-straddle]], the strangle harvests the **[[variance-risk-premium]]**: a **risk-bearing** edge (paid an insurance premium for absorbing tail risk) layered on a **behavioral** edge (buyers overpay for OTM convexity / lottery payoffs). See [[edge-taxonomy]]. The strangle differs only in *where* on the distribution you sell vol -- the OTM wings -- giving a wider no-loss zone and a higher headline win rate, but the same fundamental short-tail exposure.
+## Construction
 
-## Why this edge exists
+Sell one OTM call and one OTM put, different strikes, same expiry `T`:
 
-The counterparties keep paying for the same reasons as in any short-vol trade:
+- Sell 1 OTM call (strike `K_c > S`, e.g. ~15–25 delta)
+- Sell 1 OTM put (strike `K_p < S`, e.g. ~15–25 delta)
+- Credit = call premium + put premium. Lower than the ATM straddle, but the profit band is much wider.
 
-- **Hedgers** buy OTM puts as cheap crash insurance and are price-insensitive about it; the implied vol on those wings (the "skew") trades persistently above realized.
-- **Tail / lottery buyers** bid up far-OTM calls and puts hoping for an outsized move, overweighting small probabilities.
-- **Structural demand for protection** exceeds the natural supply of sellers, so the clearing price of OTM vol sits above the fair price.
+On Deribit each BTC option represents **1 BTC** and each ETH option **1 ETH**; options are **cash-settled to the Deribit index** at expiry — **no physical delivery, no assignment**. Premium on classic inverse contracts is quoted/paid **in the coin**; on the USDC-margined line in **USDC** (see *Crypto specifics*). Strikes are typically chosen by [[delta]] (self-scaling across IV levels), with ~15–25 delta per side the crypto-standard band — tighter than 16-delta equity strangles because crypto's tail demands more distance from spot.
 
-The strangle seller is the willing insurer of both wings. The premium is real and recurring; the cost is that you eventually pay a large claim when a genuine move occurs.
+| Choice | Short strangle | Short straddle |
+|---|---|---|
+| Strikes | Split OTM (`K_p < S < K_c`) | Both at `K ≈ S` |
+| Credit collected | Lower | Higher (ATM is dearest) |
+| Profit zone | Wide (between strikes) | Narrow (a point) |
+| Short gamma | Lower, spread across two strikes | Highest, concentrated at `K` |
 
-## Null hypothesis
+## Payoff & breakevens
 
-With no edge, the OTM call and put are priced fairly and the expected P&L equals **minus costs**. The strategy then becomes a wide bet whose ~85% win rate is purely a function of the breakevens being far away -- it conveys no expectancy. Under the null, the rare losses are proportionally larger (because the strikes are far out, a breach implies a big move), so the negative skew is even more pronounced than the straddle's. A genuine edge requires net-of-cost expectancy above zero *after* the tail losses are fully counted, not a flattering win-rate statistic.
+Capped reward (the credit) and **undefined risk** both ways. Payoff at expiry, credit `C`:
 
-## Rules
+- Pays the full credit `C` between `K_p` and `K_c` (both legs expire worthless)
+- Upper breakeven = `K_c + C`
+- Lower breakeven = `K_p − C`
+- Max loss = **unbounded** beyond either breakeven — an inverted "V" with a flat top across the strike gap.
 
-**Strike & DTE selection**
-- Sell the OTM call near **~16 delta** (roughly one standard deviation above price) and the OTM put near **~16 delta** below. Lower delta = wider, safer, less premium.
-- **30-45 DTE** for optimal [[theta]] acceleration with room to manage.
-- Enter at **elevated IV rank** (e.g. IVR > 50) so the OTM premiums are rich relative to the expected move.
+Because crypto ATM implied vol is high (BTC DVOL commonly 40–60%), OTM premiums are rich and the breakevens sit far apart — a high headline probability of keeping the credit, paid for by a correspondingly larger loss when a wing finally breaks.
 
-**Entry**
-- Range-bound, non-trending underlying; no binary catalyst inside the window.
-- Net credit should give an acceptable return on buying-power reduction (a common heuristic is ~1/3 of strike width as credit on an undefined strangle, but treat this as a guideline, not a rule).
+## Greeks profile
 
-**Management & exit**
-- **Profit target**: close at ~50% of max credit.
-- **Defense**: roll the untested side toward price to recenter, roll out in time for a credit, or convert to an [[iron-condor]] by buying protective wings if risk needs capping.
-- **Time stop**: manage/close at ~21 DTE before gamma dominates.
+A short strangle is a stacked short-OTM-call + short-OTM-put:
 
-**Sizing**
-- Undefined risk: size on a **2-3 sigma stress gap**, not on margin. Keep single-position stress loss small (e.g. < 1-2% of account).
+| Greek | Short strangle | Comment |
+|---|---|---|
+| [[delta]] | ≈ 0 at inception | The bet is non-directional |
+| Gamma | **Negative** | The tail: losses accelerate once spot nears a short strike, worst into expiry |
+| [[vega]] | **Negative** | A DVOL/IV spike marks the book down before spot moves |
+| [[theta]] | **Positive** | The income engine: both legs decay every calm day |
+| Rho | Small | Minor in crypto's tenors |
 
-## Implementation pseudocode
+The position is **short gamma / short vega / long theta** — the same signature as the [[short-straddle]] and [[iron-condor]], with a wider dead-zone. It bleeds on a decisive move (gamma, via the tested wing) or a DVOL spike (vega); it profits on a quiet tape and DVOL contraction. See [[iv-crush]].
 
-```python
-def short_strangle(underlying, chain, call_delta=0.16, put_delta=0.16):
-    if iv_rank(underlying) < 50:
-        return None
-    if event_in_window(underlying, dte=45):
-        return None
-    exp  = pick_expiration(chain, target_dte=35)        # 30-45 DTE
-    call = sell(strike_by_delta(chain.calls(exp), call_delta))
-    put  = sell(strike_by_delta(chain.puts(exp),  put_delta))
-    credit = call.mid + put.mid
-    position = Strangle(call, put, credit)
-    position.profit_target = 0.50 * credit
-    position.time_stop_dte = 21
-    return position
+## Market view / when to use
 
-def manage(position, mark):
-    if position.pnl >= position.profit_target:   return close(position)
-    if position.dte <= position.time_stop_dte:   return close_or_roll(position)
-    if tested_side_breached(position):           return roll_untested_side(position)
-    if risk_too_large(position):                 return convert_to_iron_condor(position)
+Sell a short strangle when you expect **realized vol below implied** with room to be wrong on direction:
+
+- **When [[dvol|DVOL]] is rich and stable** (say > ~50–60th percentile of the trailing year) and the [[volatility-regime|vol regime]] reads "expanding/normal" rather than a live vol-shock. Selling rich OTM vol is the edge.
+- **Range-bound, catalyst-free windows.** Avoid selling across a discrete catalyst (protocol upgrade/fork, spot-ETF option-listing decision, large unlock, US [[fomc]]/CPI) unless the post-event DVOL crush is explicitly the trade and the wings are sized for the gap.
+- **Strangle vs straddle choice:** the short strangle for a wider, higher-probability zone with less premium and lower gamma; the [[short-straddle]] for maximum credit at a single strike; the [[iron-condor]] when you want the strangle's zone with a defined, capped tail (the default in crypto).
+
+Do not sell into a spiking DVOL — that is shorting vega into the tail. Skew-aware selling helps: read [[funding-rate|perp funding]] and 25-delta skew and weight the short toward whichever wing the leveraged crowd has overbid.
+
+## Adjustments & management
+
+- **Profit target:** buy back at ~**50% of max credit** (the tastytrade-standard rule ports directly).
+- **Roll the tested side:** as spot approaches one strike, roll that leg out/away for a credit to recenter, or roll the whole strangle out in time.
+- **Delta-hedge on the perp:** flatten residual delta with the Deribit **perpetual**; the hedge leg pays/collects [[funding-rate|funding]] — budget it (a tailwind when short delta into positive funding).
+- **Time stop:** manage/close before the final ~week; crypto gamma accelerates into expiry because gaps are unbounded and continuous.
+- **Cap the tail:** convert to an [[iron-condor]] by buying protective wings — the strongly preferred crypto default given weekend gap risk.
+- **Kill on a DVOL spike:** flatten rather than average down when DVOL jumps hard intraday.
+
+## Crypto specifics
+
+- **Venue & underlyings.** [[deribit]] is effectively "the market" for BTC/ETH options; liquid OTM strangles beyond BTC/ETH are scarce. [[greeks-live]] is the standard workbench (surface, per-leg Greeks, block tape). Block minimums are 25 BTC / 200 ETH.
+- **Inverse vs linear settlement.** Classic Deribit BTC/ETH options are **inverse (coin-margined)** — premium and P&L in the coin, so collateral moves with spot. **USDC-margined (linear)** options give clean USD P&L. Use linear for pure short-vol; inverse only if the embedded coin delta is intended.
+- **[[dvol|DVOL]] regime gauge.** DVOL is Deribit's 30-day forward IV index — the crypto VIX; sell when it is high in its own history and stable. **DVOL and the IV surface come from Deribit / [[greeks-live]], not [[cryptodataapi|CryptoDataAPI]]** (CDA gives the complementary regime/OI/GEX/funding context — see below).
+- **24/7 and weekend gamma.** No session break means a wing can be breached on a thin **weekend** air-pocket with nothing to halt the move — the defining short-gamma hazard in crypto.
+- **No [[section-1256-contracts|§1256]].** Offshore Deribit options get **no §1256 60/40 treatment** — US ordinary short-term rates; AU CGT/income by trader status. Coin-margined record-keeping is onerous.
+- **Perp-funding interaction.** [[funding-rate|Funding]] shapes skew: richly positive funding firms call skew and cheapens puts, telling you which wing the leveraged crowd overbid.
+- **Alt-option liquidity.** SOL and other alt options exist (Deribit; thinner OKX/Bybit) but are wide and shallow — short strangles on alts are gap-prone and best avoided in favor of BTC/ETH.
+
+## Risks
+
+- **Gap / weekend move** past a wing — the dominant failure mode; undefined loss with no session break to react.
+- **[[iv-crush|DVOL/IV spike]]** (short vega) that inflates both wings before theta accrues.
+- **Trending tape** that walks steadily through one strike (the strangle assumes mean reversion).
+- **Margin spiral / auto-liquidation:** a DVOL spike multiplies Deribit portfolio-margin; force-close at the worst tick.
+- **Coin-margin non-linearity** on inverse contracts; **single-venue** Deribit dependency.
+- **Over-selling the thin credit:** the temptation to add contracts to compensate for the smaller premium multiplies the tail — prefer the defined-risk [[iron-condor]] and keep stress loss ≤ 1–2% of book per structure.
+
+## Worked crypto example
+
+*Illustrative round numbers — not a recommendation or backtest.*
+
+**Setup (BTC, 30 DTE).** BTC spot **$60,000**. [[dvol|DVOL]] **50** in the upper half of its trailing-year range (rich, stable [[volatility-regime|regime]]); no discrete catalyst inside the window.
+
+**Trade — short strangle (USDC-margined, linear), ~20-delta wings:**
+- Sell 1 BTC 66,000 call ≈ **$1,650**
+- Sell 1 BTC 54,000 put ≈ **$1,650**
+- Credit ≈ **$3,300** per 1-BTC strangle
+- Breakevens: **$50,700** and **$69,300**; max profit = $3,300 between $54,000 and $66,000; max loss unbounded.
+
+**Path A — quiet tape + DVOL crush (the win).** Over three weeks BTC stays $57k–$63k and DVOL drifts 50 → 40. The strangle decays to ≈ $1,500 → buy back. Profit ≈ **+$1,800 (≈55% of credit)** — close at the 50%-plus target.
+
+**Path B — weekend gap (the loss).** BTC gaps to **$72,000** over a thin weekend. The 66,000 call is ≈ $6,300 ITM in value, the put ≈ $0 → buy back for ≈ $6,300. Loss ≈ **−$3,000**, and had it run to $76,000 the loss would be **−$7,000+** uncapped. This is why the crypto default is the defined-risk [[iron-condor]] with bought wings.
+
+## Getting the Data (CryptoDataAPI)
+
+**DVOL and the raw IV surface come from Deribit / [[greeks-live]]** (Deribit products; CDA does not serve them). [[cryptodataapi|CryptoDataAPI]] supplies the **complementary** context for timing and managing a short-vol entry — vol *regime*, options OI / max pain, dealer gamma, funding, and the catalyst calendar.
+
+**Live data:**
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal); sell into "expanding/normal", stand aside on "vol_shock"
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0–100)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (large OI walls pin monthly expiries — useful for strike placement)
+- `GET /api/v1/quant/gex` — [[gamma-exposure|Gamma Exposure]] (dealer inventory; long-gamma dealers dampen the tape a short strangle wants pinned)
+- `GET /api/v1/event/calendar` — forward catalyst calendar to *avoid* selling across events
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, the skew driver
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (vol-shock early warning)
+
+**Historical data:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]] (compare RV to DVOL)
+- `GET /api/v1/backtesting/klines` — deep kline archive for RV backtesting
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
 ```
 
-## Example trade
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
 
-*Illustrative hypothetical with round numbers -- not a real trade or backtest.*
+## Related
 
-Stock XYZ trades at $100, IV rank 65. Sell the 35-DTE 16-delta strangle:
-
-| Leg | Action | Strike | Premium |
-|---|---|---|---|
-| OTM call | Sell | $110 | $1.50 |
-| OTM put | Sell | $90 | $1.50 |
-| **Total credit** | | | **$3.00 ($300)** |
-
-- **Max profit** = $300 (both expire worthless with XYZ between $90 and $110).
-- **Breakevens** = $113 (up) and $87 (down).
-- **Max loss** = unlimited.
-
-| Outcome at expiration | P&L per contract |
-|---|---|
-| XYZ between $90-$110 | +$300 (full credit) |
-| XYZ at $112 (inside upper breakeven) | call worth $2 -> +$100 |
-| XYZ at $118 | call worth $8 -> -$500 |
-| XYZ gaps to $135 on news | call worth $25 -> **-$2,200** |
-
-Note the wide $90-$110 win zone (high probability) and the brutal tail when it finally breaks.
-
-## Performance characteristics
-
-- **Negative skew, very high win rate.** Wider breakevens than the straddle push the win rate up (often 80-90%) but the loss-when-wrong is correspondingly larger -- the same "**pennies in front of a steamroller**" dynamic.
-- **Less premium per trade** than a straddle, so traders are tempted to add size or contracts -- which amplifies tail exposure.
-- **Short gamma and short [[vega]].** A vol spike loses money via vega before any theta accrues; a realized move loses via gamma.
-- **Correlated tail.** A systemic vol event hits all short strangles simultaneously regardless of underlying diversification.
-- Edge is real but thin once spreads, slippage on rolls, and margin cost are netted out. (Qualitative -- not a backtested figure.)
-
-## Capacity limits
-
-Better single-name capacity than the straddle because OTM strikes on liquid names carry decent open interest, but still bounded: deep OTM wings on small caps are thin and gap-prone. Index/ETF strangles (SPX, /ES, RUT) offer the most depth for size. As with all short-vol, the binding constraint is **survivable stress loss**, and crowding into the trade compresses the very premium (especially put skew) that makes it work -- high crowding risk.
-
-## What kills this strategy
-
-- **Large move / gap past a wing** -- the dominant failure mode; undefined loss with no time to hedge on an overnight gap.
-- **Vol spike (vega)** that inflates both wings before theta works.
-- **Trending market** that walks steadily through one strike (the strangle assumes mean reversion).
-- **Over-trading the low premium** -- adding contracts to compensate for thin credit multiplies the tail.
-- **Assignment** on an ITM wing leaving an unwanted stock or short-stock position.
-- **Entering at low IV rank** -- no premium cushion, breakevens too close.
-
-## Kill criteria
-
-- Modeled 3-sigma stress loss on the position exceeds **2% of account** -> reduce or skip.
-- Realized loss reaches **2x the credit collected** -> close.
-- Underlying breaches a breakeven on a trending (not mean-reverting) move -> close/defend the tested side.
-- Portfolio short-vega exceeds the book limit -> stop adding strangles.
-- Strategy-level rolling 6-month net P&L negative after costs -> pause; the premium no longer compensates for the tail.
-
-## Advantages
-- Wider profit zone than a [[short-straddle]] -- higher probability of profit.
-- Collects premium from both sides of the market.
-- Benefits from [[theta]] decay and [[implied-volatility]] contraction simultaneously.
-- Flexible strike selection tailors probability and risk/reward.
-- Easily defended by rolling or converting to a defined-risk [[iron-condor]].
-
-## Disadvantages
-- **Undefined risk** in both directions -- catastrophic losses possible on a large gap.
-- **Negatively skewed**: very high win rate hides a thin, tail-exposed expectancy.
-- Less premium than a straddle, tempting over-sizing.
-- Requires substantial **margin** and careful sizing.
-- High [[gamma]] and short [[vega]] near expiration create rapid P&L swings.
-- A single large loss event can wipe out many months of premium income.
-
-## See Also
-- [[short-straddle]] -- more premium, narrower profit zone, same risk profile.
-- [[iron-condor]] -- adds protective wings to define the risk on a strangle.
-- [[jade-lizard]] -- a modified strangle that eliminates risk on one side.
-- [[straddle-strangle]] -- the long side of the volatility trade.
+- [[short-straddle]] — more credit, narrower zone, same short-vol signature
+- [[strangle]] — the conceptual hub (long vs short, definition, Greeks)
+- [[straddle-strangle]] — the long-volatility mirror (buying this structure)
+- [[crypto-options-volatility-selling]] — the systematic short-vol book this structure anchors
+- [[iron-condor]] — the defined-risk version (bought protective wings) — the crypto default
+- [[iron-fly]] — defined-risk version of the short straddle
+- [[gamma-scalping]], [[delta-hedging]] — managing the short gamma
+- [[dvol]], [[implied-volatility]], [[realized-volatility]] — the vol inputs
+- [[iv-crush]] — the DVOL contraction the seller wants
+- [[deribit]], [[greeks-live]] — venue and analytics; DVOL and surface source
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[funding-rate]] — the perp linkage that shapes crypto skew
 
 ## Sources
-General market knowledge; no specific wiki source ingested yet.
+
+- Natenberg, *Option Volatility and Pricing* (2nd ed.) — strangle mechanics and the implied-vs-realized relationship.
+- McMillan, *Options as a Strategic Investment* (5th ed.) — strangle construction, defense, and conversion to defined-risk condors.
+- tastytrade 15–25-delta strangle / 50%-profit management studies — mechanics port to crypto; sizing and stops must tighten for the fatter tail.
+- [[deribit]] / [[greeks-live]] documentation — DVOL construction, IV surface, cash settlement, block minimums (25 BTC / 200 ETH), inverse vs USDC-margined contracts.

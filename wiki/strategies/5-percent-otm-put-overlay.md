@@ -1,85 +1,68 @@
 ---
-title: "5% OTM Put Overlay"
+title: "5% OTM Put Overlay (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-06-20
-status: excellent
-tags: [options, risk-management, sp500, indicators, derivatives, volatility]
-aliases: ["5% OTM Put Overlay", "SPY Put Overlay", "Shallow OTM Put Hedge", "5% Put Protection Program"]
-related: ["[[long-put]]", "[[protective-puts]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[universa-investments]]", "[[mark-spitznagel]]", "[[tail-risk-hedging]]", "[[volatility-skew]]", "[[options-portfolio-construction]]", "[[options-risk-budgeting]]", "[[hedging-cost-budget]]", "[[barbell-portfolio]]", "[[volatility-risk-premium]]"]
+updated: 2026-07-14
+status: good
+tags: [options, risk-management, crypto, indicators, derivatives, volatility, hedging]
+aliases: ["5% OTM Put Overlay", "BTC Put Overlay", "Deribit Put Overlay", "Shallow OTM Put Hedge", "Crypto Put Protection Program"]
+related: ["[[protective-puts]]", "[[long-volatility-strategies]]", "[[tail-hedging]]", "[[tail-risk-hedging]]", "[[vix-calls]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[funding-rate]]", "[[variance-risk-premium]]", "[[volatility-regime]]", "[[liquidation-cascade-fade]]", "[[risk-management]]"]
 strategy_type: hybrid
 timeframe: position
-markets: [stocks, options, index-options, sp500]
+markets: [crypto, options]
 complexity: intermediate
-backtest_status: live
-edge_source: [risk-bearing, structural]
-edge_mechanism: "Pays an explicit, budgeted hedging premium in exchange for a stream of fast-monetising payouts during 5-15% drawdowns; sits between the cheap-but-slow Universa-style 20%+ OTM tail hedge and the expensive at-the-money put which monetises every wiggle."
-data_required: [options-chain, implied-volatility, volatility-skew, sp500-spot]
-min_capital_usd: 50000
-capacity_usd: 1000000000
-crowding_risk: low
-expected_sharpe: -0.4
-expected_max_drawdown: 0.05
-breakeven_cost_bps: 0
-deploy_date: 2026-05-07
-capital_allocation: "1-3% of NAV per year on premium budget"
-kill_criteria: |
-  - annual hedging cost exceeds 4% of NAV (skew became too rich)
-  - hedge has produced zero monetisation across 24+ months (regime change in tail behaviour)
-  - the underlying long book has materially shrunk such that overlay no longer matches notional
-last_review: 2026-05-07
-next_review: 2026-08-07
+backtest_status: untested
 ---
 
-A **5% OTM put overlay** is a continuous tail-hedging program that maintains long [[long-put|put options]] roughly 5% out-of-the-money on SPX, SPY, or XSP, rolled at 60-90 [[days-to-expiration|DTE]], and sized to spend 1-3% of NAV per year on premium. It sits in the middle of the protective-put spectrum — shallower (and faster to monetise) than the 20%+ OTM "[[universa-investments|Universa]]-style" deep-tail hedge, and cheaper (with less convexity) than a near-the-money protective put. It is the canonical [[tail-risk-hedging|tail hedge]] / [[long-vol-overlay|long-vol overlay]] used to offset the left-tail exposure of a long-equity book or of short-premium sleeves elsewhere in the portfolio.
+# 5% OTM Put Overlay (Crypto)
+
+A **5% OTM put overlay** in crypto maintains long [[protective-puts|put options]] roughly 5% out-of-the-money on [[bitcoin|BTC]]/[[ethereum|ETH]] via [[deribit]], rolled at 30–60 [[days-to-expiration|DTE]], sized to spend a fixed small % of NAV per year on premium. It is the shallow, fast-monetising end of the crypto protective-put spectrum — cheaper (and less convex) than a near-the-money put, but far more active than a deep 20–40% OTM "tail" hedge. It offsets the left-tail exposure of a long-BTC/ETH book or of short-premium sleeves elsewhere (e.g. [[crypto-options-volatility-selling]]). **Important scaling caveat:** because 30-day BTC vol runs roughly 3–5× the S&P's, a *5% OTM* strike is much closer to the money in standard-deviation terms in crypto than in equities — it monetises on routine moves and is correspondingly more expensive. The genuinely "middle of the spectrum" crypto equivalent of the equity 5% overlay sits closer to **10–20% OTM** (see the scaled table below).
+
+## No "VIX" component — this is a pure put overlay
+
+Unlike the [[vix-calls|crypto long-vol overlay]], this program uses **only long puts** — there is no volatility-index leg, so the absence of a tradeable crypto vol future (DVOL is a reference index, not an instrument) does not constrain it. The only adaptation from the equity version is the underlying (BTC/ETH instead of SPX), the venue (Deribit), the settlement mechanics (coin- vs USDC-margined), the tax treatment (no §1256), and the **volatility scaling** of the strike distance.
 
 ## Quick Reference
 
 | Parameter | Value |
 |---|---|
-| **Instrument** | Long puts on SPX / SPY / XSP |
-| **Strike** | ~5% OTM (4-6% range acceptable) |
-| **DTE** | 60-90 days, rolled at ~30 DTE remaining |
-| **Premium budget** | 1-3% of NAV per year (a hard, pre-committed line item) |
-| **Notional coverage** | 80-150% of long-book notional |
-| **Edge source** | [[edge-taxonomy\|Risk-bearing (in reverse) + structural]] — pays [[volatility-risk-premium\|VRP]] for fast convex payouts |
+| **Instrument** | Long puts on BTC / ETH (Deribit) |
+| **Strike** | ~5% OTM (shallow) — but see vol-scaling note; the equity-equivalent "middle" is ~10–20% OTM in crypto |
+| **DTE** | 30–60 days, rolled at ~15–20 DTE remaining |
+| **Margin type** | USDC-margined (linear) for clean USD protection; inverse only if the coin delta is intended |
+| **Premium budget** | Fixed small % of NAV per year (a hard, pre-committed line item) |
+| **Notional coverage** | 80–150% of long-book (beta/BTC-weighted) notional |
 | **Standalone expectancy** | Negative — it is insurance, not alpha |
-| **Portfolio effect** | Raises combined Sharpe ~0.1-0.3 (illustrative); cuts long-book max drawdown materially |
-| **Tax** | [[section-1256-contracts\|Section 1256]] 60/40 when on SPX/XSP |
-| **Position in spectrum** | Middle: faster than [[universa-investments\|20%+ Universa deep tail]], cheaper than ATM protective put |
+| **Portfolio effect** | Cuts long-book max drawdown; releases stablecoin exactly when the book is impaired |
+| **Tax** | **No [[section-1256-contracts|§1256]] shelter** — offshore Deribit contracts are ordinary gains |
+| **Venue risk** | Single-venue (Deribit) concentration; does not hedge Deribit's own solvency |
 
-### Where it sits in the protective-put spectrum
+### Where it sits in the crypto protective-put spectrum
 
-| Hedge | Strike | Cost (indicative) | Monetises on | Convexity / payoff per $ |
+Strike distances are **vol-scaled to crypto** (roughly 3–5× the equity equivalents):
+
+| Hedge | Strike (crypto) | Cost (indicative) | Monetises on | Convexity / payoff per $ |
 |---|---|---|---|---|
-| Near-the-money protective put | ~0-2% OTM | High (5%+/yr) | Every wiggle | Low — pays for noise |
-| **5% OTM overlay (this page)** | ~5% OTM | Moderate (1-3%/yr) | Garden-variety -7% to -15% drawdowns | Medium — the middle ground |
-| [[universa-investments\|Universa-style deep tail]] | 20%+ OTM | Low (<1%/yr) | Only 1-in-20-year crashes | Very high — explosive in true tails |
+| Near-the-money protective put | ~0–3% OTM | Very high | Every wiggle (crypto wiggles are large) | Low — pays for noise |
+| **5% OTM overlay (this page)** | ~5% OTM | High for crypto | Routine −5% to −12% moves (frequent) | Low–medium — shallow, active |
+| Middle-of-spectrum overlay | ~10–20% OTM | Moderate | Garden-variety −15% to −30% drawdowns | Medium — the true equity-5% analog |
+| Deep tail hedge | 30%+ OTM | Low | Cascades / black swans (2020-03, LUNA, FTX, 2025-10-10) | Very high — explosive in true tails |
 
-All cost figures are indicative and regime-dependent (skew drives them); see the disclaimer in Performance Characteristics.
-
-## Edge Source
-
-The 5% OTM put overlay is *not* a positive-expectancy trade in isolation. Like all explicit hedging programs, its expected return on the standalone leg is negative. The edge it provides at the *portfolio* level comes from two sources in the [[edge-taxonomy]]:
-
-1. **Risk-bearing edge (in reverse)** — The overlay buyer pays the [[volatility-risk-premium|VRP]] to other market participants in exchange for fast access to convex payoffs in left-tail scenarios. The cost of this insurance is real and recurring; the value is realised only when the equity book is suffering. In efficient markets the standalone NPV is negative, but the *portfolio* Sharpe can rise materially because the hedge releases capital exactly when the rest of the book is impaired.
-2. **Structural edge** — Funds with explicit drawdown limits, prop desks with VaR caps, and family offices with stated "no double-digit drawdowns" mandates derive utility from the hedge that exceeds the dollar cost. The overlay converts an unbudgetable tail risk into a budgeted line item, which has structural value even when the dollars net negative.
-
-Compare the design choices on the [[long-vol-vs-short-vol]] spectrum: a 5% OTM overlay sits at "cheap insurance, useful in 1-in-5-year events"; a 20%+ Universa-style overlay sits at "very cheap insurance, useful only in 1-in-20-year events but with much higher payoff."
+All cost figures are indicative and regime-dependent — crypto skew and DVOL level drive them; see the disclaimer in Performance Characteristics.
 
 ## Why This Edge Exists
 
-The hedge is needed because:
+The overlay is *not* a positive-expectancy trade in isolation — it pays the [[variance-risk-premium|VRP]] to crypto vol sellers. Its portfolio value comes from timing and survivorship:
 
-1. The S&P 500 has experienced 14 drawdowns of 10%+ since 1980 — roughly one every 3 years. A 5% OTM put rolled continuously will monetise meaningful payouts on most of these events.
-2. Long-equity portfolios cannot reliably reduce exposure during a stress event without crystallising losses. A pre-positioned put overlay monetises into cash without disturbing the underlying book.
-3. Pension and institutional capital is structurally short the put: their liabilities are convex while their equity holdings are roughly linear. Buying a put overlay shifts the convexity profile to match the liability stream.
+1. **Crypto drawdowns are frequent and violent.** BTC has drawdowns of 10%+ several times a year — an order of magnitude more often than the S&P. A shallow put rolled continuously monetises on most of them, providing cash without touching the core book.
+2. **Long-crypto books cannot cheaply de-risk in a cascade.** Selling spot into a −20% weekend gap crystallises losses and pays wide spreads; a pre-positioned put monetises into cash instead. And unlike equities, leveraged crypto positions face *auto-liquidation* — the survivorship value of pre-positioned protection is larger.
+3. **Favourable skew windows.** In positive-[[funding-rate|funding]] euphoria, crypto skew flips to *call*-skew, so downside puts can be bought relatively cheap — the opposite of equities' near-permanent put-skew.
 
-The overlay is *not* an arbitrage — it costs money in expectation. The strategy works because the buyer values the cash flow timing of the payouts (in a stress event) more than the dollars cost of the premium (in calm weeks).
+The overlay is *not* an arbitrage — it costs money in expectation. It works because the buyer values cash in a stress event more than the premium in calm weeks.
 
 ## Null Hypothesis
 
-Under the null that put options are fairly priced and the equity book has no special covariance with shocks, the overlay is a pure cost: ~1-3% of NAV per year forgone, with statistical breakeven only when realised tail magnitude exceeds the implied tail. Backtests since 1990 show that on average the overlay loses money on a standalone basis — the volatility risk premium is real and runs against the buyer. The strategy is justified only if (a) the holder believes their realised tail risk exceeds the market's implied tail, or (b) the holder values cash payoff in stress events at a higher utility than dollars cost in calm.
+Under the null that Deribit puts are fairly priced and the book has no special covariance with shocks, the overlay is a pure cost — a fixed % of NAV per year forgone, with breakeven only when realised tail magnitude exceeds implied. The crypto VRP is real and runs against the buyer. The program is justified only if (a) the holder believes their realised tail risk exceeds the market's implied tail (a defensible view given the 2020-03 / LUNA / FTX / 2025-10-10 record), or (b) they value cash payoff in a cascade at higher utility than premium cost in calm.
 
 ## Rules
 
@@ -87,193 +70,197 @@ Under the null that put options are fairly priced and the equity book has no spe
 
 | Parameter | Value | Notes |
 |---|---|---|
-| Strike distance from spot | 5% OTM (puts) | At SPX 5000, buy 4750 strike |
-| DTE at entry | 60-90 days | Optimal trade-off between gamma decay and theta cost |
-| Annual premium budget | 1-3% of NAV | "Insurance line item" |
-| Notional coverage | 80-150% of long book notional | Typically slight over-hedge for convexity |
-| Rolling frequency | At ~30 DTE remaining or upon -50% premium loss (theta) | Whichever first |
+| Strike distance | 5% OTM (shallow) | At BTC $60,000, buy $57,000 strike — but consider 10–20% OTM for the equity-equivalent "middle" |
+| DTE at entry | 30–60 days | Shorter than the equity version because crypto vol is higher and reverts faster |
+| Annual premium budget | Fixed small % of NAV | Hard "insurance line item"; fund from short-vol carry where possible |
+| Notional coverage | 80–150% of BTC-weighted long book | Slight over-hedge for convexity |
+| Margin type | USDC-margined (linear) | Clean USD payoff; inverse only if coin delta is intended |
+| Rolling frequency | ~15–20 DTE remaining or −50% premium loss | Whichever first |
 
 ### Entry Mechanics
 
-1. **Compute long book notional.** Sum the dollar value of all long-equity exposure in the book to be hedged. SPY equivalents work for diversified large-cap; for tilted books beta-weight to the S&P first.
-2. **Choose product.** SPX for tax efficiency (Section 1256 60/40 treatment) and large-account scale; SPY for sub-$100K accounts where the smaller multiplier and penny tick matter; XSP for small accounts wanting Section 1256 treatment.
-3. **Strike selection.** Buy the strike closest to 5% below current index level. Round to nearest available strike interval. The "5%" is a guideline; in practice 4-6% range is acceptable.
-4. **Expiry selection.** 60-90 DTE. Avoid 30 DTE or shorter (gamma decay too fast); avoid 180+ DTE (vega exposure too large for hedge purpose).
-5. **Position size.** N puts where N × strike × multiplier ≈ 80-150% of long-book notional. For SPX with $100 multiplier and a $10M long book at SPX 5000, N ≈ 20-30 contracts.
+1. **Compute long-book notional.** Sum long BTC/ETH exposure; BTC-weight tilted alt books first (alt options are thin — hedge with BTC/ETH).
+2. **Choose venue/margin.** Deribit BTC/ETH options; **USDC-margined (linear)** for USD protection.
+3. **Strike selection.** Nearest listed strike ~5% below spot (or deeper per the vol-scaling note). Round to the Deribit strike interval.
+4. **Expiry selection.** 30–60 DTE. Avoid weeklies (theta too hot for a continuous hedge) and 90+ DTE (vega too large for a shallow hedge).
+5. **Position size.** N puts where N × strike × contract-size ≈ 80–150% of long-book notional.
 
 ### Rolling Mechanics
 
 The overlay is continuously maintained — you do not "let it expire."
 
-1. **Monthly review.** At the start of each calendar month, check days remaining on each layer.
-2. **Roll trigger.** When DTE remaining ≤ 30, OR when premium has decayed to ≤ 50% of entry value, roll forward.
-3. **Roll mechanics.** Sell the existing put, buy a new 60-90 DTE 5% OTM put. The roll is a debit if vol has been calm (premium has decayed) and may be a credit if vol has expanded.
-4. **Layer rolling for smoothness.** Sophisticated implementations roll in tranches — divide the hedge into 3 or 4 layers, each rolled at a different month, so the program is never wholly expiring at once. This dampens the path dependence of single-roll timing.
-5. **Vol-regime adjustment.** When VIX is structurally elevated (>25), some implementations reduce the hedge size by 25-50% because puts become expensive and skew is rich; restore full size when VIX returns under 18.
+1. **Review at least weekly** (crypto moves fast; monthly is too slow).
+2. **Roll trigger.** DTE ≤ ~15–20, OR premium decayed to ≤ 50% of entry value.
+3. **Roll mechanics.** Sell the existing put, buy a new 30–60 DTE ~5% OTM put — a debit in calm regimes, possibly a credit if DVOL has expanded.
+4. **Layer for smoothness.** Split into 3–4 tranches rolled on different weeks so the program is never wholly expiring at once (a hedge gap in crypto is dangerous — gaps happen on weekends).
+5. **Vol-regime adjustment.** When [[dvol|DVOL]] is structurally elevated (high percentile / backwardation), trim size 25–50% (puts are expensive and skew rich) or float the strike deeper OTM; restore when DVOL normalises.
 
 ### Monetisation Rules
 
-When the underlying drops materially:
-
-1. **Threshold trigger.** If the index falls 5%+ from when the put was bought, the put is at-the-money or in-the-money. Decide whether to monetise the gain or hold for further drop.
-2. **Partial monetisation.** Common rule: sell half the puts when the underlying is 7-10% below entry strike, hold the rest as a continuing tail hedge.
-3. **Re-establish the overlay.** After monetisation, the hedge layer is missing. Re-buy 5% OTM puts at the *new* lower index level to maintain the program. This "reset" mechanic is the secret to compounding the hedge through a multi-leg drawdown.
-4. **Cash deployment.** The cash from monetised puts can be (a) added back to the long book at lower prices (rebalance), (b) used to buy more hedges, or (c) held as dry powder.
+1. **Threshold trigger.** If spot falls ~5%+ from entry, the put is ATM/ITM — decide to monetise or hold for further downside.
+2. **Partial monetisation.** Sell half when spot is 7–12% below entry strike; hold the rest as a continuing tail hedge. **Monetise faster than an equity hedger** — crypto vol reverts within days, sometimes hours.
+3. **Re-establish the overlay.** Re-buy ~5% OTM puts at the *new* lower spot to keep the program alive through a multi-leg cascade — the "reset" that compounds the hedge.
+4. **Cash deployment.** Add monetised cash back to the book at lower prices, buy more hedges, or hold as stablecoin dry powder.
 
 ## Implementation Pseudocode
 
 ```python
-def five_pct_otm_put_overlay(
+def crypto_put_overlay(
     long_book_notional_usd: float,
     nav_usd: float,
-    annual_premium_budget_pct: float = 0.02,  # 2% of NAV
-    target_dte: int = 75,
+    annual_premium_budget_pct: float = 0.03,   # crypto is dearer than SPX; budget higher
+    otm_pct: float = 0.05,                      # 0.05 shallow; 0.10-0.20 for equity-equivalent "middle"
+    target_dte: int = 45,
     layers: int = 4,
 ):
-    chain = get_options_chain("SPX")
-    spot = chain.spot
-    target_strike = round_to_strike_interval(spot * 0.95, interval=5)
-    target_expiry = today + timedelta(days=target_dte)
+    chain = deribit_chain("BTC")                # USDC-margined (linear)
+    spot  = chain.spot
+    strike = round_to_strike(spot * (1 - otm_pct))
+    expiry = today + timedelta(days=target_dte)
 
-    # Notional coverage 100% by default, can scale up to 150%
-    contracts_total = ceil(long_book_notional_usd / (target_strike * 100))
-
-    # Layer the hedge across 4 monthly tranches for smoothness
+    contracts_total = ceil(long_book_notional_usd / (strike * chain.contract_size))
     contracts_per_layer = ceil(contracts_total / layers)
 
-    # Premium budget check
-    quote = chain.quote(strike=target_strike, expiry=target_expiry, right="P")
-    annualised_cost = (quote.mid * 100 * contracts_total) * (12 / 3)  # quarterly roll
-    cost_pct = annualised_cost / nav_usd
-    if cost_pct > annual_premium_budget_pct * 1.5:
-        warn(f"Overlay costing {cost_pct:.2%} — exceeds budget. Reduce size or wait for vol mean-revert.")
+    quote = chain.quote(strike=strike, expiry=expiry, right="P")
+    annualised_cost = quote.mid * chain.contract_size * contracts_total * (365 / target_dte)
+    if annualised_cost / nav_usd > annual_premium_budget_pct * 1.5:
+        warn("Overlay over budget — DVOL/skew rich; float strike deeper OTM or trim size.")
 
-    # Place the bottom layer (this month's tranche)
-    return Order(
-        action="BUY",
-        underlying="SPX",
-        right="P",
-        strike=target_strike,
-        expiry=target_expiry,
-        qty=contracts_per_layer,
-    )
+    return Order("BUY", "BTC", "P", strike, expiry, qty=contracts_per_layer, margin="USDC")
 ```
 
 ## Indicators / Data Used
 
-- SPX or SPY spot level (continuous)
-- [[implied-volatility|IV]] of 60-90 DTE 5% OTM puts (the entry premium)
-- [[volatility-skew]] of the put wing — informs whether the strike is rich or cheap
-- VIX level — rough check on whether the hedge is in a "buy" or "wait" regime
-- Long book beta-adjusted notional — denominator for sizing
-- Realised drawdown of the long book — trigger for monetisation decisions
+- BTC/ETH spot (continuous, 24/7)
+- [[implied-volatility|IV]] / [[dvol|DVOL]] of 30–60 DTE ~5% OTM puts (the entry premium)
+- **Put-side skew and [[funding-rate|funding]]** — informs whether the strike is rich or cheap (positive funding → cheaper downside puts)
+- DVOL percentile — "buy" vs "wait" regime check
+- BTC-weighted long-book notional — sizing denominator
+- Realised drawdown of the long book — monetisation trigger
 
 ## Example Trade
 
-**Reference scenario: $5M long-equity book, deploying overlay in January 2026.**
+**Reference: $5M long-BTC book, deploying overlay with BTC at $60,000.**
 
-- January 2026: SPX at 5000. Long book notional $5M. Annual premium budget 2% of $5M = $100K.
-- Buy 10 SPX 4750 puts at 75 DTE for $25 each = $25,000 total cost (premium = 0.5% of NAV).
-- Quarterly cycle would cost $100K, matching budget exactly.
-- February 2026: SPX drops to 4700 on banking-stress headlines.
-  - 4750 puts now at $90 each. Position value: $90,000 (3.6x return on the put leg).
-  - Sell 5 puts at $90 = $45,000 cash booked.
-  - Re-establish overlay: buy 5 new SPX 4465 puts (5% OTM at 4700) at 75 DTE for $22 each = $11,000.
-  - Net cash captured: $45,000 - $11,000 = $34,000 = 0.68% of NAV.
-- Long book at this point down ~6% on the SPX move = -$300K. Overlay monetisation offsets ~10% of that.
-- April 2026: SPX recovers to 4900. Overlay puts decay. Roll forward as scheduled.
+- Long book notional $5M. Annual premium budget 3% of NAV = $150K. Funding richly positive → downside puts relatively cheap.
+- Buy ~5% OTM ($57,000-strike) BTC puts, 45 DTE, USDC-margined, sized to ~100% of book notional; this tranche costs ~$40K (≈0.8% of NAV — note how much dearer than the SPX equivalent, because 5% OTM is near-the-money in crypto vol terms).
+- **Cascade:** an exchange-solvency headline gaps BTC −11% to $53,400 over a weekend; DVOL spikes 55 → 95. The $57K puts are deep ITM: the tranche marks ~3–4×.
+  - Sell half at ~$120K captured; re-establish a new $50,700-strike (5% OTM at $53,400) overlay for the next leg.
+  - Cash captured this leg net of the re-buy ≈ a meaningful fraction of the book's drawdown.
+- Long book down ~11% = −$550K on the move; the overlay offsets a portion **and** funds a rebalance into cheaper BTC without a forced sale.
+- **Recovery:** BTC bounces to $58K; overlay puts decay, roll forward as scheduled.
 
-The example shows the overlay is *not* a profit centre — it offset 10% of the drawdown, far less than the long book's losses — but it provided the cash to rebalance into the dip without forcing a sale of the long book at distressed prices.
+The overlay is *not* a profit centre — it offsets part of the drawdown and, crucially, supplies stablecoin liquidity to rebalance into the dip while leveraged longs are being liquidated around you.
 
 ## Performance Characteristics
 
-> **No fabricated backtest.** The figures below are *qualitative orders of magnitude* describing the well-understood shape of a continuous put-overlay program (negative standalone carry, episodic large monetisations, drawdown compression at the portfolio level). They are illustrative, not the output of a specific proprietary backtest, and the realised numbers depend heavily on the [[volatility-skew|skew]] regime, roll discipline, and the path of the drawdown. Treat them as "this is the characteristic profile," not "this is what you will earn."
+> **No fabricated backtest.** The figures below are *qualitative orders of magnitude* describing the well-understood shape of a continuous crypto put-overlay (negative standalone carry, frequent shallow monetisations, drawdown compression at the portfolio level). They are illustrative, not the output of a specific backtest, and realised numbers depend heavily on the crypto [[volatility-skew|skew]] regime, DVOL level, roll discipline, and the drawdown path.
 
-The characteristic profile of a 5% OTM, 75-DTE rolling put overlay sized to a 1-2% NAV budget:
+Characteristic profile of a ~5% OTM, 45-DTE rolling BTC/ETH overlay:
 
-- **Annualised drag in calm regimes:** roughly -1.5 to -2.5% per year on the hedge leg in isolation (the cost of insurance; this is the [[volatility-risk-premium|VRP]] running against the buyer).
-- **Monetisation events in 10%+ drawdowns:** a multiple (order of several×) return on the premium spent *in that month* — convex payoff is the point.
-- **Long-book max-drawdown reduction:** materially lower combined drawdown — the overlay clips the left tail of the equity book rather than the body.
-- **Sharpe of the overlay leg:** negative (frontmatter `expected_sharpe: -0.4`) — by construction; insurance has negative standalone expectancy.
-- **Sharpe of long book + overlay (combined):** typically *improves* modestly vs the unhedged book, because the hedge releases cash exactly when the book is impaired.
-- **Tax efficiency:** SPX/XSP-based overlay benefits from [[section-1256-contracts|Section 1256]] 60/40 treatment, materially improving after-tax economics vs SPY or single-name puts. See [[tax-implications-trading]].
+- **Calm-regime drag:** higher than the SPX analog — a shallow crypto put is expensive and monetises often, so continuous theta cost is material (potentially several % of NAV/year at full size). Floating the strike deeper OTM (10–20%) cuts this sharply.
+- **Cascade monetisation:** a multiple (order of several×) on the premium spent *that cycle* — convex payoff, and it fires *frequently* in crypto.
+- **Long-book max-drawdown reduction:** materially lower combined drawdown; the overlay clips the left tail and funds rebalancing while perp liquidations clear.
+- **Standalone expectancy:** negative — by construction; insurance, not alpha.
+- **Combined book + overlay:** typically improves risk-adjusted return vs the unhedged book because the hedge releases stablecoin exactly when the book is impaired.
+- **Tax:** **no §1256 shelter** — offshore Deribit gains are ordinary; after-tax economics are worse than the SPX/XSP version, and coin-margined P&L record-keeping is onerous.
 
-The first-order takeaway is regime-dependent: in calm regimes the overlay is a steady, budgeted drag; in stress regimes it is a fast, convex source of cash. Judging it on its calm-regime Sharpe alone is the central analytical error — it is a portfolio component, not a standalone strategy.
+The takeaway is regime-dependent: in calm regimes a steady, budgeted drag; in cascades a fast, convex source of stablecoin. Judging it on calm-regime carry alone is the central error — it is a portfolio component, not a standalone strategy.
+
+## Crypto specifics
+
+- **Vol-scaled strikes** — 5% OTM is *near-the-money* in crypto vol terms; the equity-5% behaviour (monetise on garden-variety drawdowns, not noise) sits at ~10–20% OTM in crypto.
+- **24/7 + weekend gaps** — the worst moves hit in thin weekend liquidity with no close; layered rolling to avoid a weekend hedge gap is essential.
+- **Inverse (coin-margined) settlement** — coin-collateralised puts pay in a crashing currency; use USDC-margined (linear) for clean USD protection.
+- **Perp-funding skew** — positive-funding euphoria makes downside puts cheap; the best entry windows are when the leveraged crowd is long calls.
+- **Frequent monetisation** — crypto's high drawdown frequency means the overlay pays out far more often than an SPX overlay, but each payout is smaller relative to the (larger) drawdown.
+- **Single-venue counterparty tail** — Deribit concentration; the overlay does not hedge Deribit's own solvency (an FTX-type venue failure needs a spot-put or exchange-token short).
+- **On-chain / depeg tail** — stablecoin depegs and DeFi exploits are crypto-native left tails a spot price put only partially covers.
+- **No §1256** — unlike SPX/XSP puts, no 60/40 blended tax treatment.
 
 ## Monitoring Checklist
 
-Run this review at least monthly (and intraday during a stress event):
+Run at least weekly (and intraday during a cascade):
 
-1. **Coverage ratio.** Does current put notional still sit at 80-150% of the (beta-weighted) long-book notional? Drift here is the most common operational decay.
-2. **Strike distance.** Has spot moved enough that the active layer is no longer ~5% OTM? Re-strike on the next roll.
-3. **DTE ladder.** Are the layers staggered, or have they bunched into a single expiry (a hedge gap)?
-4. **Budget tracking.** Year-to-date premium spend vs the 1-3% NAV budget. If on pace to breach 4%, the [[volatility-skew|skew]] has richened — float the strike to 7-8% OTM rather than overspend.
-5. **Roll trigger status.** Any layer at ≤30 DTE remaining or ≤50% of entry premium? Roll it.
-6. **Monetisation readiness.** If the index is within ~5% of the active strike, pre-decide the partial-monetisation and re-establishment plan before the move, not during it.
-7. **Regime check.** [[vix|VIX]] level — in structurally elevated regimes (>25) consider trimming size 25-50%; restore when VIX returns under 18.
-
-## Capacity Limits
-
-- The 5% OTM SPX put market is the single deepest options market in the world; capacity is effectively unlimited for any individual or institutional account up to multi-billion-dollar scale.
-- For SPY-based implementations, capacity is constrained at extreme size (>$1B notional) by put-side liquidity in the wing strikes, but well within reach for retail accounts.
-- The strategy does not "saturate" the way alpha strategies do — it is a budgeted cost program, not an alpha extraction.
+1. **Coverage ratio** — put notional still 80–150% of BTC-weighted long book?
+2. **Strike distance** — has spot moved so the active layer is no longer ~5% OTM? Re-strike on the next roll.
+3. **DTE ladder** — layers staggered, or bunched into one expiry (a hedge gap)?
+4. **Budget tracking** — YTD premium vs the annual budget; if on pace to breach, float the strike deeper OTM rather than overspend.
+5. **Roll trigger status** — any layer ≤ 15–20 DTE or ≤ 50% of entry premium? Roll it.
+6. **Monetisation readiness** — if spot is within ~5% of the active strike, pre-decide the partial-monetisation and re-establishment plan before the move.
+7. **Regime check** — [[dvol|DVOL]] percentile and [[funding-rate|funding]]; in elevated-DVOL regimes trim 25–50% or float the strike.
 
 ## What Kills This Strategy
 
-Drawing from [[failure-modes]] and [[hedging-program-failure-modes]]:
+1. **Skew steepening** — in bear/cascade regimes crypto put skew steepens and the 5% strike balloons in cost; cap the budget and float the strike deeper OTM.
+2. **Slow grinding alt bleed** — a multi-month grind where each put expires before the strike is hit; deeper compounding-roll hedges address this better than a shallow overlay.
+3. **Boring-vol regime** — frequent −5% moves but no large cascade means continuous theta cost with modest payoffs.
+4. **Roll-timing / hedge gaps** — a weekend gap that hits just after a roll, before the new put has gamma, is the crypto version of the 2015 flash-crash overlay failure.
+5. **Operational decay** — unreviewed programs drift in size vs the book.
+6. **Inverse-settlement wrong-way risk** and **Deribit single-venue failure** — crypto-specific.
 
-1. **Skew steepening** — In persistent bear regimes, OTM put skew steepens dramatically and the 5% strike becomes much more expensive. Annual cost can balloon from 1.5% of NAV to 5%+ of NAV, breaking the budget. The fix is to cap the budget and let the strike float (e.g., 7-8% OTM in expensive regimes).
-2. **Slow grinding declines** — A multi-month -25% drawdown that takes longer than the put's DTE drops the long book without the overlay ever monetising effectively. Each new put expires worthless before the underlying hits the strike. Universa addresses this with deeper OTM puts that compound rolls; the 5% overlay is more vulnerable.
-3. **Vol regime change** — A regime where 5% drawdowns are common but 15%+ drawdowns are absent (the "boring volatility" regime of 2017) means continuous theta cost with no large-payoff events.
-4. **Roll timing mistakes** — Rolling at the wrong DTE or not staggering layers can leave the program with hedge gaps. The August 2015 flash crash hit some overlay programs that had just rolled; the new put hadn't yet developed gamma when the move hit.
-5. **Operational decay** — Hedging programs that aren't reviewed regularly drift in size relative to the long book, leaving the book under- or over-hedged.
+## Kill Criteria (risk discipline, not an alpha spec)
 
-## Kill Criteria
-
-- Annual hedging cost exceeds 4% of NAV → reduce strike to 7-8% OTM or pause.
-- Hedge has produced zero monetisation across 24+ months and underlying long book is materially smaller → review whether the overlay is still appropriate sizing.
-- Realised Sharpe of *combined* long + overlay book is materially lower than unhedged comparable over 36+ months → audit.
-- See [[when-to-retire-a-strategy]].
+- Annual hedging cost exceeds the pre-set budget → float strike deeper OTM (10–20%) or pause.
+- Zero effective monetisation across many months while the book has materially shrunk → review sizing/appropriateness.
+- Combined book + overlay risk-adjusted return materially worse than unhedged over a long window → audit.
 
 ## Advantages
 
-- Faster monetisation than [[universa-investments|Universa-style 20%+ OTM]] tail hedges — cash is realised on garden-variety -7% drawdowns that happen multiple times per decade.
-- Strict premium budget — the cost is bounded and predictable.
-- Tax-efficient when implemented on SPX or XSP (Section 1256 treatment).
-- Liquid markets — execution is easy at any size up to billions of notional.
-- Composable with short-vol income strategies elsewhere in the book — offsets the tail risk of [[short-strangle|strangles]] and [[iron-condor|condors]].
-- Preserves the long book's compounding without forcing realisation of gains.
+- **Frequent, fast monetisation** — crypto's high drawdown frequency means cash is realised often, on garden-variety moves.
+- **Strict premium budget** — bounded, predictable cost.
+- **Favourable entries** in positive-funding euphoria (cheap downside puts).
+- **Liquid majors** — BTC/ETH Deribit puts execute at meaningful size.
+- **Composable with short-vol income** — offsets the tail of [[crypto-options-volatility-selling|strangle/condor]] sleeves.
+- **Preserves book compounding** without forcing realisation into a cascade.
 
 ## Disadvantages
 
-- Negative expectancy on the standalone leg — costs money in calm regimes.
-- Lower convexity than deeper OTM hedges — a 30%+ shock pays out less per dollar spent than a 20%+ OTM Universa-style hedge would.
-- Path-dependent monetisation — slow drawdowns may never produce a payout even when the index ultimately drops 25%.
-- Roll mechanics matter — naive rolling at fixed dates loses to layered rolling.
-- Skew can make the program structurally unaffordable in certain regimes.
-- Compares unfavourably to deeper OTM tail hedges on shock-event Sharpe.
+- **Negative standalone expectancy** — costs money in calm regimes, and dearer than the SPX version because 5% OTM is near-the-money in crypto vol terms.
+- **Lower convexity than deep-tail hedges** — a 40%+ cascade pays out less per dollar than a 30%+ OTM tail hedge.
+- **Path-dependent monetisation** — slow grinds may never trigger a clean payout.
+- **Roll mechanics matter** — naive fixed-date rolling loses to layered rolling; weekend gaps punish hedge gaps.
+- **Skew can make the shallow strike unaffordable** in stressed regimes.
+- **Inverse-settlement wrong-way risk, single-venue (Deribit) concentration, and no §1256 shelter** — crypto-specific drawbacks.
+
+## Getting the Data (CryptoDataAPI)
+
+The tradeable put chain, [[dvol|DVOL]], and IV surface come from **[[deribit|Deribit]]** / [[greeks-live|Greeks.live]] — CryptoDataAPI does **not** serve the option chain or DVOL. [[cryptodataapi|CryptoDataAPI]] supplies the volatility-regime, options-flow, funding, and liquidation context used to time, size, and monetise the overlay.
+
+**Live:**
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0–100)
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, [[max-pain]]
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding (skew driver; cheap-downside signal)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (monetisation timing)
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime + 60-day history
+- `GET /api/v1/backtesting/klines` — OHLCV archive for drawdown / realized-vol study
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
+```
+
+For DVOL and the full IV surface, use the Deribit API or [[greeks-live]]. Full catalog: [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
 
 ## Sources
 
-- Spitznagel, Mark — *Safe Haven: Investing for Financial Storms* (2021). Chapter 10 on insurance-based portfolio construction. See [[safe-haven-spitznagel]].
-- Cboe research notes on the BXM and PUT indices for benchmark hedging cost data.
-- Goldman Sachs portfolio strategy research on tail-hedging cost-benefit (annual reports 2018-2024).
-- Universa Investments client letters (multiple years) — comparison data on 20%+ OTM tail hedges. See [[universa-investments]].
-- AQR research papers on the [[volatility-risk-premium|VRP]] and the cost of put-buying programs.
+- [[deribit]] / [[greeks-live]] documentation — BTC/ETH option chain, coin-margined vs USDC-margined (linear) settlement, DVOL.
+- Equity origins (for the overlay logic that ports): Spitznagel, *Safe Haven* (2021); Cboe PUT/BXM index research; AQR research on the VRP and put-buying cost. Cited as the *methodological ancestor* — the crypto version changes underlying, venue, settlement, tax, and strike-scaling.
+- Crypto tail record: 2020-03-12 ([[covid-crash]]), 2022-05 [[terra-luna-collapse|LUNA]], 2022-11 [[ftx-collapse|FTX]], 2025-10-10 ([[2025-10-crypto-liquidation-cascade|liquidation cascade]]).
 
 ## Related
 
-- [[long-put]], [[protective-puts]] — the parent structures
-- [[long-vol-overlay]] — broader category this overlay sits within
-- [[universa-investments]], [[mark-spitznagel]] — deeper-tail comparison
-- [[long-vol-vs-short-vol]] — the philosophical context
-- [[hedging-cost-budget]] — the budgeting framework
-- [[volatility-skew]] — informs strike-distance economics
-- [[barbell-portfolio]] — the broader Taleb/Spitznagel approach this overlay supports
-- [[options-portfolio-construction]] — book-level integration
-- [[tail-risk-hedging]] — the broad category this strategy implements
-- [[options-risk-budgeting]] — the budget framework the tail-hedge sleeve sits inside
-- [[the-theta-trap]] — the short-premium failure mode this overlay is designed to offset
-- [[risk-of-ruin]] — why a budgeted tail hedge improves long-run survivability
-- [[volatility-risk-premium]] — the premium the overlay buyer pays
-- [[tax-implications-trading]] — Section 1256 treatment of SPX/XSP puts
+- [[protective-puts]] — the parent structure
+- [[long-volatility-strategies]] — broader category this overlay sits within
+- [[tail-hedging]], [[tail-risk-hedging]] — the deep-tail comparison and the broad discipline
+- [[vix-calls]] — the long-vol (straddle/put-wing) overlay with an explicit vega leg
+- [[dvol]] — the crypto vol benchmark that prices the puts
+- [[deribit]], [[greeks-live]] — venue and analytics
+- [[crypto-options-volatility-selling]] — the short-premium sleeve this overlay offsets
+- [[funding-rate]] — the crypto skew driver (cheap-downside signal)
+- [[variance-risk-premium]] — the premium the overlay buyer pays
+- [[volatility-regime]] — regime detection for entry/trim decisions
+- [[liquidation-cascade-fade]] — the cascade dynamic the overlay monetises into
+- [[risk-management]] — portfolio-protection framework

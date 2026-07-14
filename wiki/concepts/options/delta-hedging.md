@@ -13,7 +13,7 @@ markets: [crypto, options]
 related: ["[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[black-scholes-model]]", "[[gamma-scalping]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[deribit]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[dvol]]", "[[gamma-exposure]]"]
 ---
 
-**Delta hedging** is the continuous adjustment of a position in the underlying to offset the directional exposure ([[delta]]) of an options position, holding the book delta-neutral. It is the mechanical foundation of options [[market-making]], [[gamma-scalping]], and every volatility-trading strategy: by stripping out direction, the hedger isolates exposure to volatility and time, so the residual P&L is a clean bet on [[implied-volatility|implied]] vs [[realized-volatility|realized]] vol. This page is the **theory/concept** treatment (mechanism, math, the Greeks, worked numbers, crypto grounding). For the buildable strategy — edge classification, backtest status, capacity, and kill-criteria — see the [[delta-hedging]] strategy page.
+**Delta hedging** is the continuous adjustment of a position in the underlying to offset the directional exposure ([[delta]]) of an options position, holding the book delta-neutral. It is the mechanical foundation of options [[market-making]], [[gamma-scalping]], and every volatility-trading strategy: by stripping out direction, the hedger isolates exposure to volatility and time, so the residual P&L is a clean bet on [[implied-volatility|implied]] vs [[realized-volatility|realized]] vol. This page is the **theory/concept** treatment (mechanism, math, the Greeks, worked numbers, crypto grounding). For the delta-hedged options position as a buildable structure (long-gamma vs short-gamma configuration, construction, sizing), see [[delta-hedged-options]].
 
 Strictly, delta hedging is a *technique*, not an edge. Applied to a fairly priced option with frictionless continuous hedging, its expected P&L is exactly zero; after costs it is negative. The edge lives entirely in the implied-vs-realized vol spread that hedging isolates (most commonly the short side of the [[variance-risk-premium]]).
 
@@ -110,7 +110,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 
 ## Related
 
-- [[delta-hedging]] — the strategy build-out (edge, backtest, capacity, kill-criteria)
+- [[delta-hedged-options]] — the delta-hedged options position as a buildable structure
 - [[delta]], [[gamma]], [[theta]], [[vega]] — the Greeks this book targets and leaves on
 - [[black-scholes-model]] — the replication argument that justifies delta hedging; crypto/inverse pricing
 - [[gamma-scalping]] — the long-gamma mirror image of the short-vol hedged book

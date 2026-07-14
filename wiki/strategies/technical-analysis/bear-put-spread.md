@@ -2,167 +2,145 @@
 title: "Bear Put Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-22
-status: excellent
-tags: [options, bear-put-spread, put-debit-spread, debit-spread, bearish, defined-risk]
-aliases: ["Put Debit Spread"]
+updated: 2026-07-14
+status: good
+tags: [options, crypto, derivatives, bear-put-spread, debit-spread, bearish, defined-risk, ethereum]
+aliases: ["Put Debit Spread", "Long Put Spread", "Crypto Bear Put Spread", "Deribit Put Debit Spread"]
 strategy_type: quantitative
-markets: [stocks]
+timeframe: swing
+markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
-edge_source: [analytical, risk-bearing]
-edge_mechanism: "A directional debit spread that monetises a correct view that the underlying will fall to the short strike by expiry; the offsetting short put sells back some long-put vega/theta, so the edge is a bearish forecast cheapened by giving up downside beyond the short strike."
-crowding_risk: low
-related: ["[[bull-call-spread]]", "[[bear-call-spread]]", "[[vertical-spreads]]", "[[married-put]]", "[[delta]]", "[[option-volatility-and-pricing]]"]
+related: ["[[bull-call-spread]]", "[[bear-call-spread]]", "[[bull-put-spread]]", "[[put-spread]]", "[[vertical-spread]]", "[[deribit]]", "[[dvol]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[max-pain]]", "[[gamma-exposure]]", "[[cryptodataapi]]"]
 ---
 
 # Bear Put Spread
 
 ## Overview
 
-The Bear Put Spread (also called a **Put Debit Spread**) is a bearish, defined-risk strategy that pays a net debit at entry. The trader buys a higher-strike [[put-option]] and sells a lower-strike put at the same expiration. The long put provides downside exposure while the short put reduces the overall cost and caps the maximum profit. The position profits when the underlying drops below the long put strike and reaches maximum value when the stock is at or below the short put strike at expiration. It is the bearish mirror image of the [[bull-call-spread]].
+The bear put spread (a **put debit spread**) is a bearish, **defined-risk** structure that pays a net debit at entry. You buy a higher-strike [[put-option|put]] and sell a lower-strike put at the same expiry; the long put gives the downside, the short put cheapens the position and caps the profit. It is the bearish mirror of the [[bull-call-spread]] and the debit-based, directional cousin of the credit-collecting [[bear-call-spread]].
 
-## Setup
+On [[deribit]] BTC and ETH options, the bear put spread is the cleanest way to express a *bounded* bearish view on crypto with a loss fully known before you enter. As a net premium *buyer* it is net long [[vega]] and pays [[theta]]: it works best entered when [[dvol|DVOL]] is **low**, so the long put is cheap, and a subsequent selloff (which usually spikes DVOL) helps twice. It does **not** harvest the [[variance-risk-premium]]; the edge is a correct directional forecast, cheapened by giving up gains below the short strike. Note the built-in headwind: crypto **put skew** makes long puts relatively expensive, so the sold lower-strike put — sitting further down that skew — is a valuable partial finance.
 
-1. **Buy 1 put** at a strike near or slightly below the current stock price (the higher strike).
-2. **Sell 1 put** at a lower strike to reduce cost. Spread width determines the profit cap.
-3. **Same expiration** -- 30-60 DTE is typical to balance cost and time for the move.
-4. **Net debit paid** = premium for bought put minus premium received from sold put.
+## Construction
 
-## Payoff Profile
+Two legs, one expiry, same underlying (BTC or ETH), cash-settled to the Deribit index:
 
-| Scenario | Outcome |
-|---|---|
-| Stock below short put strike at expiry | Max profit = spread width minus debit paid |
-| Stock between the two strikes | Partial profit; long put has intrinsic value |
-| Stock above long put strike | Max loss = net debit paid; both puts expire worthless |
+| Leg | Action | Strike (delta) | Purpose |
+|---|---|---|---|
+| 1 | Buy 1 put | ATM to slightly ITM (~50-65Δ) | the directional engine |
+| 2 | Sell 1 put | OTM, at your downside target (~30-40Δ) | finances the long, caps profit |
 
-**Max profit** = (higher strike - lower strike) - net debit. **Max loss** = net debit paid. **Break-even** = higher strike - net debit (Source: [[book-option-volatility-and-pricing]]).
+- **Strike selection:** buy the long put at-the-money to slightly in-the-money for a higher-probability spread; buy slightly OTM for a cheaper, higher-payoff structure. Place the short put at or just past your BTC/ETH downside target — deep on the fat put skew, which cheapens the spread.
+- **Ratios:** 1:1 — one contract per leg (Deribit contracts are 1 BTC or 1 ETH each).
+- **Net debit** = long-put ask − short-put bid. Discipline: pay no more than **~⅔ of the spread width** so max profit ≥ ~0.5× max loss.
+- **Width** = long strike − short strike; roughly 5-15% of spot is typical.
+- **Tenor:** 21-45 DTE. Longer tenors limit [[theta]] drag on the long leg and give the move time.
 
-## Edge source
+## Payoff & breakevens
 
-Per the [[edge-taxonomy]], the bear put spread is primarily an **analytical** edge (a bearish directional forecast) with a small **risk-bearing** element. As a *debit* structure you are a net buyer of put premium — net long [[vega]], net short [[theta]] — so it does NOT primarily harvest the [[variance-risk-premium]]; that is the domain of the credit-spread family ([[bear-call-spread]], [[bull-put-spread]]). The point of the spread versus a naked long [[put-option]] is cost reduction and defined exposure: selling the lower-strike put recovers part of the premium and trims vega/theta in exchange for capping how far the profit can run.
+- **Max profit** = width − net debit, when the underlying is at or below the short strike at expiry.
+- **Max loss** = net debit, when the underlying is at or above the long strike at expiry (both puts expire worthless).
+- **Breakeven** = long strike − net debit.
 
-## Why this edge exists
+The expiry payoff is a ramp: flat at the max-loss floor above the long strike, rising as spot falls between the strikes, flat at the max-profit ceiling below the short strike.
 
-The counterparty is a market-maker on the long leg and a put buyer on the short leg. The trade has positive expectancy only if your bearish view beats the distribution already priced into [[implied-volatility]] and [[the-greeks]]. Puts on equity indices and many single names carry a *premium* (the volatility skew / put-skew) because investors pay up for downside protection — which makes buying puts structurally a bit expensive. Your analytical edge (a catalyst, weak fundamentals, a broken technical level) must overcome that built-in cost. Absent a real view, the structure is fair minus frictions and minus the skew premium you pay to be long puts; there is no inherent edge in simply being long a bearish debit spread.
+## Greeks profile
 
-## Null hypothesis
+- **Delta:** net short (bearish) — the directional engine.
+- **Gamma:** net long from the bought leg, partly offset by the short leg — a muted single long put.
+- **Theta:** net negative — time decay works against you while spot sits above the long strike.
+- **Vega:** net long — a **DVOL rise after entry helps** (common in selloffs), a DVOL crush hurts. Hence the preference to enter in a low-DVOL regime.
 
-Under the null (no directional edge, options fairly priced including put skew), the expected P&L of a bear put spread is approximately **−(commissions + bid/ask + the slice of skew/variance premium embedded in long put premium)**. The risk-neutral expectation of the structure equals roughly its cost, so realised expectancy is slightly negative after frictions and skew. A series of bear put spreads that fails to beat breakeven net of costs is the null in action — your bearish signal has no edge and you are paying up for downside.
+## Market view / when to use
 
-## Rules
+- You are **moderately bearish** on BTC or ETH and expect spot at or below the short strike by expiry, ideally on an identifiable catalyst (unlock, macro risk-off, exhaustion at resistance).
+- **DVOL is low-to-moderate** (roughly the 10th-50th percentile of its trailing year) so the long put is cheap — the mirror of the credit-spread regime.
+- You want **defined risk** rather than an open-ended short perp position or the [[theta]] bleed of an outright long put.
+- You want a cheaper alternative to a standalone protective put, financed by selling deep put skew you do not expect to need.
 
-- **Direction / thesis**: moderately bearish; you expect the underlying at or below the short strike by expiry, ideally on an identifiable catalyst.
-- **Strike selection**: buy the long put at-the-money to slightly in-the-money (delta ≈ −0.50 to −0.70) for higher probability; buy slightly out-of-the-money (delta ≈ −0.35 to −0.45) for cheaper, higher-payoff spreads. Place the short put at or just past your downside target.
-- **Width**: 1–3 strikes (~5–10% of spot). Wider = larger max profit and debit; narrower = cheaper but smaller payoff.
-- **DTE**: 30–60 days to limit [[theta]] drag on the long leg and give the move time.
-- **Cost discipline**: pay no more than ~⅔ of the spread width as debit. Mind put skew — long puts are often richly priced.
-- **Entry**: prefer entering when [[implied-volatility]] is low-to-moderate; a post-entry IV spike (common in selloffs) helps the long-vega position.
-- **Exit / management**: take profits at 50–75% of max profit. Cut/roll on thesis invalidation. Close before expiry if the short put is deep ITM to avoid early [[assignment]].
-- **Position sizing**: risk ≤ 1–2% of the account per spread (max loss = debit × contracts × 100).
+## Adjustments & management
 
-## Implementation pseudocode
+- **Profit target:** take profits at **50-75% of max value** rather than grinding into expiry-week [[gamma]].
+- **Stop:** cut at roughly **−50-60% of the debit** or on thesis invalidation (support reclaimed, catalyst resolved bullishly).
+- **Time stop:** close by **~10-14 DTE** if neither target nor stop is hit — crypto gamma accelerates into the 08:00 UTC expiry.
+- **Roll down-and-out** for additional debit only if the thesis strengthens; never chase a losing directional debit with more premium.
+- **No early-assignment management needed** — Deribit options are European and cash-settled, removing the deep-ITM early-assignment risk that equity short puts carry.
 
-```python
-def manage_bear_put_spread(spot, signal_bearish, iv_rank, chain):
-    if not signal_bearish or iv_rank > 60:   # avoid buying expensive puts when IV is rich
-        return None
-    long_put  = chain.put(delta=-0.55, dte=45)        # ATM-ish long
-    short_put = chain.put(strike=long_put.strike - width, dte=45)
-    debit = long_put.ask - short_put.bid
-    if debit > 0.66 * width:                          # reward too small vs risk
-        return None
-    pos = open_spread(buy=long_put, sell=short_put, debit=debit)
+## Crypto specifics
 
-    while pos.open:
-        value = pos.mark()
-        if value >= 0.70 * pos.max_profit:            # take profit at 70%
-            close(pos); break
-        if thesis_invalidated() or value <= -0.60 * debit:  # cut a losing thesis
-            close(pos); break
-        if pos.dte <= 21 and pos.short_leg.itm:       # deep-ITM short put -> assignment risk
-            close(pos); break
-        if pos.dte <= 2:
-            close(pos); break                         # never carry into expiry gamma/pin
-```
+- **Venue & underlyings:** [[deribit]] is effectively "the market" for BTC/ETH options. **Alt options (SOL and below) are too thin** to leg a clean spread — stick to BTC/ETH.
+- **Inverse vs linear/USDC settlement:** prefer **USDC-margined (linear)** options so the debit, width, and breakeven are clean USD numbers. **Inverse (coin-margined)** options settle in BTC/ETH and embed a quanto-like curvature; a bearish inverse position also sees its coin collateral lose USD value as spot falls, muddying the payoff. Use inverse only if the embedded coin delta is intended.
+- **DVOL regime:** debit structures want **cheap** vol. Enter when [[dvol|DVOL]] is depressed; a selloff then lifts DVOL and helps the net-long-vega position. Avoid buying after a vol spike has already inflated both legs.
+- **24/7 & weekend gaps:** no close and no gap protection, but continuous trading. A weekend risk-off gap works *for* this position, but a gap the wrong way is capped at the debit. Expiry is **08:00 UTC**, cash-settled to Deribit's ~30-minute TWAP index — **no exercise, assignment, or pin risk**.
+- **No [[section-1256-contracts|§1256]]:** offshore Deribit contracts get **no 60/40 blended US tax treatment** — every leg is an ordinary short-term capital-gains event in the US, trader-status-dependent in AU. After-tax net is materially below an SPX put spread's.
+- **Perp-funding interaction:** crypto put skew is set by the [[perpetual-futures|perp]] book. After a selloff, **put skew fattens**, making the short put you sell richer — better financing for a *new* bear put spread, though it also means you paid up for the long leg. Delta-hedging the residual with the perp pays or collects funding.
+- **Fees:** Deribit taker fee is 0.03% of the underlying, **capped at 12.5% of the option premium** — the cap dominates on the cheaper OTM short leg and is a real drag on a two-leg structure.
 
-## Example trade
+## Risks
 
-*Illustrative hypothetical with round numbers — not a recommendation or backtest.*
+- **Sideways/up drift** — the most common killer: BTC/ETH fails to fall, [[theta]] erodes the long put, the debit decays.
+- **DVOL crush** — buying puts into an elevated-DVOL, already-skewed surface then suffering a vol collapse leaves the position underwater even on a small favorable move (net long [[vega]]).
+- **Adverse gap up** — a squeeze or ETF-inflow gap above the long strike realises the full debit; capped, but total.
+- **Capped downside profit** — a crash earns no more than max profit beyond the short strike; the give-up versus an outright put.
+- **Skew headwind + execution** — the fat crypto put skew makes long puts expensive, a structural drag; two-leg execution costs bite. Use combo/RFQ ([[greeks-live]] / Paradigm).
 
-Stock XYZ trades at **$100**. Moderately bearish into a catalyst, 45 DTE:
+## Worked crypto example
 
-- **Buy 1 × $100 put** for $4.00
-- **Sell 1 × $95 put** for $1.90
-- **Net debit** = $4.00 − $1.90 = **$2.10** ($210 per spread)
-- **Spread width** = $5.00
-- **Max profit** = $5.00 − $2.10 = **$2.90** ($290) when XYZ ≤ $95 at expiry
-- **Max loss** = **$2.10** ($210) when XYZ ≥ $100 at expiry
-- **Break-even** = $100 − $2.10 = **$97.90**
-- **Reward:risk** ≈ 2.90 : 2.10 ≈ **1.38 : 1**
+**Setup (ETH, USDC-margined/linear).** ETH spot **$3,000**; ETH DVOL **50** (~40th percentile, moderate); 35 DTE. Moderately bearish into a macro risk-off thesis.
 
-Payoff at expiration:
+**Trade (per 1-ETH contract):**
+- Buy 55Δ put @ **$3,000** for **$180**.
+- Sell 33Δ put @ **$2,700** for **$75**.
+- **Net debit = $105.** Width = $300. **Max profit = $300 − $105 = $195.** **Max loss = $105.**
+- **Breakeven = $3,000 − $105 = $2,895.** R:R ≈ 195 : 105 ≈ **1.86 : 1**.
 
-| XYZ at expiry | Long $100 put | Short $95 put | Spread value | P&L (per spread) |
-|---|---|---|---|---|
-| $105 | 0 | 0 | $0.00 | −$210 (max loss) |
-| $100 | 0 | 0 | $0.00 | −$210 |
-| $97.90 | $2.10 | 0 | $2.10 | $0 (break-even) |
-| $95 | $5.00 | 0 | $5.00 | +$290 (max profit) |
-| $90 | $10.00 | −$5.00 | $5.00 | +$290 (capped) |
+**Path A — thesis works.** ETH slides to $2,650 over two weeks and DVOL jumps to 62. The spread marks near full width (~$300 intrinsic minus the OTM short-put value); close at ~$210 realized (past the 75% target).
 
-## Performance characteristics
+**Path B — chop.** ETH oscillates $2,950-$3,100 and DVOL fades to 44. Theta and the DVOL fade erode the mark to ~$55; the time stop at 12 DTE closes it for **−$50/contract** (partial debit lost).
 
-- **Cost drag**: two legs in, usually two out — up to four commissions and four bid/ask crossings per round trip, material against a $2.10 debit. Use mid-price limit orders.
-- **Greeks**: net short [[delta]] (bearish), net long [[vega]] (helps in a selloff where IV rises, hurts if vol collapses), net short [[theta]].
-- **Skew headwind**: equity put skew makes long puts relatively expensive, a structural drag the directional view must overcome.
-- **No fabricated backtest**: realised performance depends on signal quality. With no edge, expectancy ≈ −costs − skew (see Null hypothesis).
-
-## Capacity limits
-
-Effectively unlimited for retail size on liquid underlyings. The constraint is **per-name put liquidity** — trade penny-wide strikes with healthy open interest, avoid illiquid back-month single-name puts where slippage swamps the edge. Index/ETF puts are deepest. Not a capacity-constrained alpha; it is a position tool, not a scalable institutional strategy.
-
-## What kills this strategy
-
-- **Sideways/up drift**: the underlying fails to fall, [[theta]] erodes the long put, you lose the debit.
-- **IV crush**: buying expensive puts (post-spike or pre-event) then suffering a vol collapse leaves you underwater even on a small favorable move.
-- **Adverse gap up**: realises the full debit loss.
-- **Capped downside profit**: a crash earns no more than max profit beyond the short strike.
-- **Early [[assignment]]** on the short put if it goes deep ITM near expiry, leaving short stock unexpectedly.
-
-## Kill criteria
-
-- Close at a **loss of ≥ 60% of the debit paid**.
-- **Hard exit at ≤ 2 DTE** regardless of P&L to avoid expiration [[gamma]]/[[pin-risk]].
-- **Take profit at 50–75% of max profit.**
-- Exit immediately on **thesis invalidation** (catalyst resolved bullishly, key support reclaimed).
-- Retire a systematic bear-put program if **rolling 6-month net P&L < −1× average debit per trade** — the bearish signal carries no edge.
-
-## When to Use
-
-- You are **moderately bearish** and expect the stock to decline to or past the short put strike by expiration.
-- You want defined risk rather than the unlimited exposure of a naked short position.
-- [[implied-volatility]] is relatively low, making purchased puts affordable (Source: [[book-option-volatility-and-pricing]]).
-- You want a cheaper alternative to buying a standalone protective put via [[married-put]].
-
-## Advantages
-- Defined risk -- maximum loss is the debit paid, known at entry
-- Lower cost than buying a naked put because the sold put offsets part of the premium
-- Simple two-leg structure suitable for beginners
-- Benefits from a rise in [[implied-volatility]] after entry
-
-## Disadvantages
-- Max profit is capped at the spread width minus the debit -- you miss gains below the short strike
-- Requires the stock to move lower; [[theta]] decay works against you if the stock stays flat or rises
-- If the stock drops only slightly, the debit may not be fully recovered
-- Early assignment risk on the short put if it goes deep ITM near expiration
-
-## See Also
-- [[bull-call-spread]] -- the bullish debit spread counterpart
-- [[bear-call-spread]] -- a bearish credit spread alternative
-- [[married-put]] -- a simpler but more expensive bearish hedge
-- [[vertical-spreads]] -- the general family of directional spread strategies
+**Path C — squeeze up.** ETH gaps to $3,250; both puts collapse. The position is worth ~$15; close for **≈ −$90/contract**, near the defined max loss the structure caps at.
 
 ## Sources
-- [[book-option-volatility-and-pricing]] — Natenberg covers vertical spread construction, payoff profiles, and the role of implied volatility in determining debit spread cost and value
+
+- [[deribit]] / [[greeks-live]] documentation — European cash settlement, 08:00 UTC expiry, DVOL construction, USDC-margined (linear) vs inverse settlement, put-skew behavior, taker-fee premium cap.
+- [[book-option-volatility-and-pricing]] — Natenberg on vertical-spread construction, payoff, and how [[implied-volatility]] and skew determine debit-spread cost (mechanics port to crypto; costs, tails, and tax do not).
+- tastytrade debit-spread management studies (50-75% profit-take, directional cost discipline) — mechanics port; sizing and stops tightened for crypto's continuous gaps.
+
+## Getting the Data (CryptoDataAPI)
+
+DVOL and the raw IV/skew surface come from **Deribit / [[greeks-live]]**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the volatility-regime, options-flow, dealer-gamma, and funding context used to *time* a debit spread (buy cheap vol) and read the downside tail.
+
+**Live:**
+- `GET /api/v1/volatility/regime` — per-asset vol regime: the entry gate — you want *compressed* for a debit spread
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (downside dealer positioning; short-strike context)
+- `GET /api/v1/quant/gex` — Gamma Exposure (dealer inventory + liquidation profile): cascade risk below spot that would help the position
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — perp funding, the crypto put-skew driver
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations; the deleveraging that drives a fast down-move
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history (find low-DVOL entry windows)
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for trend context and resistance mapping
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+## Related
+
+- [[bull-call-spread]] — the bullish debit-spread mirror
+- [[bear-call-spread]] — the bearish *credit* alternative (sell rich DVOL instead of buying cheap)
+- [[bull-put-spread]] — the bullish credit spread
+- [[put-spread]] — the put-vertical family overview
+- [[vertical-spread]] — the four-flavour vertical-spread family
+- [[deribit]], [[greeks-live]] — venue and analytics/RFQ workbench; DVOL and skew source
+- [[dvol]], [[implied-volatility]] — the vol inputs; DVOL regime gates entry
+- [[funding-rate]] — the perp linkage that shapes crypto put skew
+- [[max-pain]], [[gamma-exposure]] — dealer-positioning context
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[delta]], [[theta]], [[vega]], [[gamma]] — the Greeks that drive the position
+- [[cryptodataapi]], [[cryptodataapi-market-intelligence]] — the data layer

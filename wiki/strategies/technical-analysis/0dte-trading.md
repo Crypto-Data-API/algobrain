@@ -2,237 +2,148 @@
 title: "0DTE Options Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-06-20
-status: excellent
-tags: [options, day-trading, scalping, gamma, 0dte]
-aliases: ["Zero DTE", "0 DTE", "Zero Days to Expiration", "Same-Day Options", "0DTE"]
+updated: 2026-07-14
+status: good
+tags: [options, crypto, day-trading, scalping, gamma, 0dte, derivatives]
+aliases: ["Crypto 0DTE", "Same-Day Crypto Options", "BTC 0DTE", "Daily-Expiry Options Trading"]
 strategy_type: technical
 timeframe: intraday
-markets: [stocks, options]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-edge_source: [structural, behavioral]
-edge_mechanism: "Extreme gamma creates non-linear payoffs from small moves; retail participants consistently misprice intraday gamma risk while market makers hedge predictably"
-data_required: [ohlcv-1min, options-chain, gamma-exposure]
-min_capital_usd: 5000
-capacity_usd: 50000000
-crowding_risk: high
-expected_sharpe: 0.3
-expected_max_drawdown: 0.40
-breakeven_cost_bps: 50
-related: ["[[options]]", "[[gamma]]", "[[theta]]", "[[iron-condor]]", "[[straddle-strangle]]", "[[gamma-scalping]]", "[[second-order-greeks]]", "[[gamma-exposure-trading]]"]
+related: ["[[zero-dte-options]]", "[[options]]", "[[gamma]]", "[[theta]]", "[[iron-condor]]", "[[iron-fly]]", "[[short-strangle]]", "[[straddle-strangle]]", "[[gamma-scalping]]", "[[gamma-exposure]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
 ---
 
-0DTE (zero-days-to-expiration) options are contracts that expire on the same trading day they are bought or sold. Since 2022, when the CBOE expanded SPX expirations to every trading day (Monday through Friday), 0DTE has become the dominant force in US options markets — accounting for 40-50% of total SPX options volume. They offer extreme leverage, defined risk, and lottery-ticket-like payoffs that have attracted both sophisticated traders and retail speculators.
+# 0DTE Options Trading
 
-## Edge Source
+0DTE ("zero days to expiration") options are contracts that expire on the **same day** they are traded. In crypto this means [[deribit]] BTC and ETH options on their nearest daily expiry, which settles at **08:00 UTC** to the Deribit index. Deribit lists daily expiries (plus weeklies, monthlies and quarterlies), so on any given day there is a same-day-expiry chain to trade. Crypto 0DTE is far younger and smaller than the equity 0DTE complex — where same-day SPX options are ~40–50% of volume — but short-dated BTC/ETH options are a growing, distinctly-behaved corner of the Deribit tape. This page is the **how-to-trade playbook**; the instrument and market-structure overview lives on [[zero-dte-options]].
 
-**Structural**: 0DTE options have extreme [[gamma]] that creates non-linear payoffs — small underlying moves produce outsized percentage returns. Market makers who are short these options must hedge aggressively, creating predictable intraday flow patterns ([[gamma-exposure-trading|GEX flows]]) that informed traders can anticipate.
+0DTE is not "options with less time" — it is a qualitatively different instrument. With [[time-to-expiration]] measured in hours, [[gamma]] is at its absolute maximum and [[theta]] evaporates by the hour, while [[vega]] is nearly irrelevant (no time for [[dvol|DVOL]] to matter). It offers extreme leverage and defined-risk lottery payoffs, and it is genuinely dangerous: a small move produces outsized P&L swings, and crypto's 24/7 tape gives no session break to hide behind.
 
-**Behavioral**: Retail participants systematically misprice intraday gamma risk. Buyers treat 0DTE as binary lottery tickets without understanding that [[theta]] decay at this timescale is measured in hours, not days. Sellers underestimate the probability of intraday 2-3 sigma moves.
+## Construction
 
-## Why This Edge Exists
+The tradeable 0DTE structures on Deribit BTC/ETH are the short-dated versions of the standard menu:
 
-The other side of 0DTE trades consists of:
-- **Retail buyers** seeking lottery-ticket leverage who accept negative expected value
-- **Market makers** who must provide liquidity and manage gamma dynamically — their hedging flows create exploitable patterns
-- **Institutional sellers** who collect theta but face concentrated tail risk (a single large move can wipe out weeks of premium collected)
+- **Short-premium (the structural bet):** a 0DTE [[iron-condor]] (sell an OTM call spread + an OTM put spread) or [[iron-fly]] (ATM short straddle with bought wings). Defined risk via the long wings — essential at 0DTE gamma. Sell short strikes ~0.5–1.5% OTM, wings a few hundred dollars (BTC) wide.
+- **Long-premium (the convexity bet):** a 0DTE ATM [[straddle-strangle|straddle]] bought immediately before a scheduled catalyst (US CPI/[[fomc]], a major unlock or listing, a large on-chain event) for a fast, direction-agnostic gamma play.
+- **Directional:** a single 0DTE call or put, sized as a defined-risk lottery ticket, often placed in the direction of anticipated dealer hedging flow (see [[gamma-exposure|GEX]]).
 
-The edge is narrow and contested. It is not a reliable source of consistent profit for most participants.
+Each BTC option represents 1 BTC, each ETH option 1 ETH; both are **cash-settled to the Deribit index** at the 08:00 UTC expiry — **no assignment, no physical delivery**. Premium is quoted in the coin (inverse) or USDC (linear); use linear for clean USD P&L.
 
-## Greeks at 0DTE: Why the Day Is Different
+## Payoff & breakevens
 
-0DTE is not "options with less time" — it is a qualitatively different instrument because [[time-to-expiration]] is measured in hours, pushing every Greek to an extreme (see [[expiration-selection]] for the full DTE spectrum and [[non-linear-payoff]] for the curvature math).
+Same-day expiry does not change the payoff *shape* — a 0DTE short condor is the familiar flat-topped tent capped by its wings; a 0DTE long straddle is the "V". What changes is the *path*: every Greek is compressed into the hours before 08:00 UTC, so the diagram is realized violently.
+
+```
+ P/L (0DTE short condor at 08:00 UTC settle)
+  │        ┌──────────────────┐   ← max profit = net credit (full theta in hours)
+  │       /                    \
+ 0│──────/──────────────────────\──── spot →
+  │     /                        \
+  │____/                          \___ ← max loss = wing width − credit (realized in MINUTES)
+       LP SP                  SC LC
+   profit zone ≈ ±1× the day's expected move
+```
+
+- Short condor: max profit = net credit; max loss = wing width − credit; breakevens = short strike ± credit.
+- Long straddle: max loss = debit (both legs expire worthless if spot pins the strike); breakevens = strike ± debit; upside unbounded.
+
+## Greeks profile
+
+0DTE trades the [[gamma]]/[[theta]] axis almost exclusively — [[vega]] is negligible because there is no time for DVOL to play out. It is a *realized-vol* game, not an *implied-vol* game.
 
 | Greek | 0DTE behavior | Practical consequence |
 |---|---|---|
-| [[theta]] | Decays intraday, fastest in the morning, near-total by the close | A seller's edge is collected in hours; a buyer bleeds by the minute |
-| [[gamma]] | At its absolute maximum, exploding near ATM in the final 1-2 hours | A 0.5% move can take a strike from worthless to 5x; deltas flip violently |
-| [[delta]] | Increasingly binary as expiry nears (approaches 0 or 1) | The position behaves like a digital/binary bet by mid-afternoon |
-| [[vega]] | Tiny in absolute terms (little time left for IV to matter) | This is a *realized-vol* game, not an *implied-vol* game |
-| [[second-order-greeks\|charm]] | Extreme — delta drifts fast purely from time passing | Hedges must be re-struck constantly; "set and forget" is impossible |
+| [[theta]] | Decays fast, near-total by the 08:00 UTC settle | A seller's edge is collected in hours; a buyer bleeds by the minute |
+| [[gamma]] | At its absolute maximum, exploding near ATM in the final hours | A ~0.5–1% BTC move can take a strike from near-worthless to multiples; deltas flip violently |
+| [[delta]] | Increasingly binary as expiry nears (→ 0 or 1) | The position behaves like a digital/binary bet in the final hours |
+| [[vega]] | Tiny (little time for DVOL to matter) | Budget 0DTE against a **gamma** cap, not a vega budget |
+| charm | Extreme — delta drifts fast purely from time passing | Hedges must be re-struck constantly; "set and forget" is impossible |
 
-The headline: **0DTE trades the [[gamma]]/[[theta]] axis almost exclusively** — vega is negligible because there is no time for IV to play out. A 0DTE short condor is the most concave bet retail can place (maximum negative gamma per dollar of premium); a 0DTE long straddle is the most convex. This is the [[non-linear-payoff]] concept at its sharpest: the [[convexity]] term dominates and the linear delta term is almost irrelevant by the final hour.
+A 0DTE short condor is the most concave bet on the surface (maximum negative gamma per dollar of premium); a 0DTE long straddle is the most convex. This is [[gamma]]/convexity at its sharpest — the linear delta term is almost irrelevant by the final hour.
 
-## Null Hypothesis
+## Market view / when to use
 
-Under random walk assumptions, 0DTE options are fairly priced by the market. Theta collected by sellers equals the expected cost of gamma-driven losses. Any apparent strategy performance is likely explained by variance (a few lucky/unlucky sessions dominate results), bid-ask spread costs, and survivorship bias in published track records.
+- **0DTE short condor:** when short-dated realized vol is likely to come in *below* the day's implied move — a quiet, catalyst-free session with rich short-dated premium. Open after the immediate post-08:00-UTC-settle repositioning has settled; avoid days with a scheduled macro print inside the window.
+- **0DTE long straddle:** immediately before a *known* catalyst with uncertain direction (CPI/FOMC, a major listing or unlock). The bet is that the realized intraday move beats the (already-elevated) implied move — a high bar, so size it as a lottery ticket.
+- **GEX-informed directional:** use dealer [[gamma-exposure|gamma exposure]] to identify levels — when dealers are **short gamma** their hedging *amplifies* the move (momentum), when **long gamma** it *dampens* it (mean-reversion/pinning). Trade with the anticipated hedging flow toward the next gamma level.
 
-## Rules
+## Adjustments & management
 
-### 0DTE Iron Condor (Premium Selling)
+- **Short condor:** take profit at **50% of max credit**; hard stop at **~2× credit**; close immediately if spot breaches a short strike. Because crypto has no market close, the "singularity zone" is the final hours before the 08:00 UTC settle — flatten before it if the position is tested.
+- **Long straddle:** take profit at 50–100% gain (gamma cuts both ways); close if spot has not moved within 1–2 hours (theta is destroying value); never nurse a losing 0DTE long hoping for a move.
+- **Directional:** target the next gamma level; tight stop at ~50% of premium paid; close within 1–2 hours regardless.
+- **Delta-hedge on the perp:** flatten residual delta with the Deribit **perpetual**; the hedge leg pays/collects [[funding-rate|funding]] and lets a long-gamma 0DTE straddle be [[gamma-scalping|gamma-scalped]] intraday.
+- **Sizing:** max ~1–2% of book at risk per 0DTE position; budget against a *gamma* cap, not a vega cap.
 
-**Entry**:
-- Sell [[iron-condor]] on SPX/SPY at market open or after the first 30 minutes
-- Short strikes at 10-15 delta (approximately 0.5-1.0% OTM)
-- Wings 5-10 points wide (SPX) for defined risk
-- Target credit: 20-30% of wing width
+## Crypto specifics
 
-**Exit**:
-- Close at 50% of max profit (do not hold to expiration)
-- Stop loss at 2x credit received
-- Close immediately if underlying breaches short strike
+- **Venue & instrument.** [[deribit]] daily-expiry BTC/ETH options, settling **08:00 UTC** to the Deribit index. [[greeks-live]] is the workbench for the short-dated surface and per-leg Greeks. Liquidity thins fast off BTC/ETH and off the nearest expiry.
+- **Inverse vs linear settlement.** Inverse (coin-margined) options denominate premium/P&L in the coin (collateral moves with spot); USDC-margined (linear) options give clean USD P&L — preferred for a pure gamma/theta 0DTE bet.
+- **[[dvol|DVOL]] context.** DVOL is a *30-day* index, so it is background context, not the 0DTE signal — the 0DTE game is short-dated *realized* vol vs the day's implied move. **DVOL and the IV surface come from Deribit / [[greeks-live]], not [[cryptodataapi|CryptoDataAPI]]**.
+- **24/7 and weekend gamma.** There is **no market close** to cap a move — the equity 0DTE "close by 15:30" rule has no crypto analogue; the reference point is the 08:00 UTC settle. Weekend daily expiries exist and trade against thin liquidity, so a 0DTE short-gamma position can be run over by a weekend air-pocket.
+- **No [[section-1256-contracts|§1256]].** Offshore Deribit options get **no §1256 60/40 treatment** — US ordinary short-term rates; AU CGT/income by trader status. High-frequency 0DTE turnover makes the record-keeping heavy.
+- **Perp-funding & flow.** [[funding-rate|Funding]] and liquidation cascades drive the intraday path more than option flow does — crypto 0DTE is dominated by the perp/spot tape, unlike SPX 0DTE where option hedging *is* a large share of flow.
+- **Alt-option liquidity.** Daily-expiry options barely exist off BTC/ETH; 0DTE on alts is not a viable structure.
 
-**Position sizing**:
-- Maximum 2-3% of account per trade
-- Never exceed 5 simultaneous 0DTE positions
+## Risks
 
-### 0DTE Straddle/Strangle (Volatility Buying)
+- **Intraday gap / liquidation cascade:** a news event or forced-liquidation spiral can move BTC 2–5% in minutes, blowing through condor wings before any exit.
+- **Extreme gamma into the settle:** a position that is safe hours before 08:00 UTC can be in crisis near it; short gamma turns a small move into a max loss fast.
+- **Bid-ask erosion:** short-dated crypto option spreads are wide and widen further in stress; taker fees (0.03% of underlying, capped at 12.5% of premium) hit cheap 0DTE options hard.
+- **Weekend & 24/7 exposure:** no session break to halt a move.
+- **Behavioral ruin:** the high win rate of 0DTE selling breeds over-sizing and skipped stops — one session then destroys the account.
+- **Thin/nascent market:** off BTC/ETH and off the front expiry, liquidity is too thin to trade or exit reliably.
 
-**Entry**:
-- Buy ATM or near-ATM [[straddle-strangle|straddle]] when expecting a large intraday move
-- Best setups: FOMC announcement days, CPI releases, major earnings before open
-- Entry immediately before the catalyst
+## Worked crypto example
 
-**Exit**:
-- Take profit at 50-100% gain (do not get greedy — gamma works both ways)
-- Close if the underlying hasn't moved within 1-2 hours (theta is destroying value)
-- Never hold losing straddles hoping for a move — the math worsens every hour
+*Illustrative round numbers — not a recommendation or backtest.*
 
-### GEX-Informed Directional
+**0DTE iron condor on BTC.** BTC spot **$60,000** at 22:00 UTC, expiry at 08:00 UTC (~10 hours). Day's implied move ≈ $900. No scheduled macro.
+- Sell 60,750 call / buy 61,250 call (call spread credit ≈ $110).
+- Sell 59,250 put / buy 58,750 put (put spread credit ≈ $100).
+- Total credit ≈ **$210** per condor; wings $500 wide → max loss ≈ $500 − $210 = **$290**.
+- *Win:* BTC chops $59.6k–$60.4k into the settle; both spreads expire worthless → keep **$210** (full credit) — a 72% return on the $290 at risk in ~10 hours.
+- *Loss:* a liquidation cascade at 03:00 UTC gaps BTC to $61,400; the call spread goes max — loss ≈ **−$290** realized in minutes, with no session break to react. The defined wings are the only reason the loss is bounded.
 
-**Entry**:
-- Use [[gamma-exposure-trading|gamma exposure]] data (SpotGamma, GEX indicators) to identify key levels
-- Buy 0DTE calls/puts in the direction of anticipated dealer hedging flow
-- Enter when underlying approaches a gamma flip level (from positive to negative GEX)
+## Getting the Data (CryptoDataAPI)
 
-**Exit**:
-- Target the next significant gamma level as profit target
-- Tight stop — 50% of premium paid
-- Close within 1-2 hours regardless
+**DVOL and the raw IV surface come from Deribit / [[greeks-live]]** (Deribit products; CDA does not serve them). [[cryptodataapi|CryptoDataAPI]] supplies the intraday context — dealer gamma, funding, liquidations, options OI, and short-term momentum — that drives the 0DTE path.
 
-## Implementation Pseudocode
+**Live data:**
+- `GET /api/v1/quant/gex` — [[gamma-exposure|Gamma Exposure]] (dealer inventory + liquidation profile); short-gamma dealers amplify the tape, long-gamma dampen it — the core GEX-directional input
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (pin context into the settle)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, an intraday flow driver
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (the cascade that gaps 0DTE positions)
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics for intraday direction
+- `GET /api/v1/volatility/regime` — per-asset vol regime (a vol-shock reading vetoes 0DTE selling)
 
-```python
-# 0DTE Iron Condor — simplified decision logic
-def zero_dte_condor(chain, underlying_price, account_value):
-    # Select expiration = today
-    today_chain = chain[chain.expiration == today]
-    
-    # Find ~10-delta strikes
-    short_put = find_strike(today_chain, delta=-0.10, side='put')
-    short_call = find_strike(today_chain, delta=0.10, side='call')
-    
-    # Wings: 5 points wide (SPX)
-    long_put = short_put.strike - 5
-    long_call = short_call.strike + 5
-    
-    # Calculate credit
-    credit = (short_put.bid + short_call.bid 
-              - long_put.ask - long_call.ask)
-    max_loss = 5.0 - credit  # wing width minus credit
-    
-    # Position size: max 2% of account at risk
-    max_contracts = int(account_value * 0.02 / (max_loss * 100))
-    
-    # Require minimum credit/width ratio
-    if credit / 5.0 < 0.20:
-        return None  # not enough premium
-    
-    return {
-        'contracts': min(max_contracts, 3),
-        'profit_target': credit * 0.50,
-        'stop_loss': credit * 2.0
-    }
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=5m&limit=1000` — intraday OHLCV for short-dated realized-vol vs the implied move
+- `GET /api/v1/backtesting/klines` — deep archive for intraday backtesting
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 ```
 
-## Indicators / Data Used
-
-- **[[gamma-exposure-trading|Gamma Exposure (GEX)]]**: Aggregate dealer gamma positioning — positive GEX = market pinning (mean-reverting), negative GEX = momentum amplification
-- **Intraday IV levels**: Compare 0DTE IV to intraday realized vol to assess if premium is rich or cheap
-- **Volume/open interest**: Unusual concentration at specific strikes indicates potential pin targets
-- **[[vix]] intraday**: VIX spikes during the session often correspond to 0DTE-driven flows
-- **Time of day**: Gamma effects intensify in the final 2-3 hours; theta decay is fastest in the morning
-
-## Example Trade
-
-**0DTE Iron Condor on SPX (April 10, 2026)**:
-- SPX at 5,200 at 10:00 AM
-- Sell 5170/5165 put spread (5-wide) for $0.60
-- Sell 5230/5235 call spread (5-wide) for $0.55
-- Total credit: $1.15 per contract ($115)
-- Max loss: $5.00 - $1.15 = $3.85 per contract ($385)
-- SPX closes at 5,195 — both spreads expire worthless
-- Profit: $115 per contract (full credit retained)
-- Trade time: 6 hours. Annualized theta on this structure would be extreme, but any single day can produce max loss.
-
-## Performance Characteristics
-
-| Metric | 0DTE Selling | 0DTE Buying |
-|--------|-------------|-------------|
-| Win rate | 70-85% (high, but wins are small) | 15-30% (low, but wins can be very large) |
-| Avg win/loss ratio | 0.2-0.5x (small wins, large losses) | 2-5x (large wins, small losses) |
-| Sharpe (realistic) | 0.2-0.5 (after costs) | -0.5 to 0.3 (high variance) |
-| Key risk | Single large loss wipes weeks of gains | Chronic theta bleed |
-| Cost sensitivity | Moderate (bid-ask matters) | High (bid-ask is a large % of premium) |
-
-The bid-ask spread on 0DTE options is typically $0.05-$0.20 per leg, which on a $0.50 option represents 10-40% of the premium. Transaction costs are a dominant factor.
-
-## Capacity Limits
-
-0DTE SPX options have enormous liquidity — billions of dollars of notional trade daily. Individual retail traders face no capacity constraints. However, at institutional scale, the predictability of GEX flows diminishes as more participants trade the same signals, and execution quality degrades for large orders near key gamma levels.
-
-## What Kills This Strategy
-
-- **Intraday gap moves**: FOMC decisions, unexpected news, or flash crashes can move SPX 2-3% in minutes, blowing through iron condor wings before any exit is possible
-- **Bid-ask spread erosion**: In volatile conditions, market makers widen spreads dramatically — the cost to exit can exceed the premium collected
-- **Gamma acceleration**: Near ATM strikes in the final hour, gamma becomes extreme. A position that was safe at 2:00 PM can be in crisis by 3:30 PM
-- **Behavioral ruin**: The high win rate of 0DTE selling creates a false sense of mastery. Traders increase size, skip stops, or hold through breaches — then one session destroys them
-- **Structural crowding**: As 0DTE selling becomes more popular, premiums compress, reducing the margin of safety. The trade works until too many participants do it.
-
-## Kill Criteria
-
-- Rolling 30-day loss exceeding 15% of allocated capital
-- Three consecutive max-loss days
-- Bid-ask spread costs exceeding 30% of gross premium collected
-- Consistent inability to exit at stop-loss prices (fills significantly worse than theoretical)
-
-## Advantages
-
-- **Defined risk**: Maximum loss is known at entry (for spreads)
-- **No overnight risk**: Positions expire same day
-- **Capital efficiency**: Small absolute premium controls large notional
-- **High frequency of opportunities**: Every trading day is a new setup
-- **Theta works fast**: Premium selling collects decay in hours rather than weeks
-
-## Disadvantages
-
-- **Extreme gamma risk**: Small moves produce large P&L swings near expiration
-- **Transaction costs**: Bid-ask spreads consume a large percentage of profit
-- **Concentration risk**: One bad day can erase many good days (negative skew of returns)
-- **Psychological pressure**: Requires real-time monitoring and rapid decisions
-- **Market impact debate**: Aggregate 0DTE flows may destabilize intraday markets, creating self-referential feedback loops that are hard to model
-- **Regulatory risk**: If regulators conclude that 0DTE trading amplifies systemic risk, restrictions could follow
-
-## The Market Impact Debate
-
-There is active academic and industry debate about whether 0DTE flows amplify or dampen market volatility:
-
-**Amplification argument**: When market makers are short gamma (common in 0DTE), they must buy as the market rises and sell as it falls — a destabilizing positive feedback loop. This can amplify intraday moves and contribute to "0DTE-driven" rallies and selloffs.
-
-**Dampening argument**: When market makers are long gamma, they do the opposite — buy dips and sell rallies — which dampens volatility. Additionally, the sheer volume of 0DTE trading provides liquidity that tightens spreads.
-
-The truth likely depends on aggregate dealer positioning. Services like SpotGamma track this positioning to determine which regime is dominant on any given day.
-
-## Sources
-
-- [[book-option-volatility-and-pricing]] — Natenberg's treatment of gamma acceleration near expiration
-- [[gamma-exposure-trading]] — GEX-based market analysis framework
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
 
 ## Related
 
-- [[options]] — foundational options concepts
-- [[gamma]] — the dominant force in 0DTE pricing
-- [[theta]] — intraday time decay dynamics
-- [[second-order-greeks]] — charm and speed are extreme near expiration
-- [[iron-condor]] — the most common 0DTE structure
-- [[straddle-strangle]] — 0DTE volatility buying
-- [[gamma-exposure-trading]] — dealer hedging flows
-- [[gamma-scalping]] — dynamic hedging of gamma positions
-- [[zero-dte-options]] — instrument and market-structure overview
-- [[expiration-selection]] — where 0DTE sits on the DTE spectrum
-- [[non-linear-payoff]] — gamma/convexity dominance near expiry
-- [[convexity]] — the curvature that drives 0DTE P/L
-- [[time-to-expiration]] — intraday decay dynamics
-- [[options-strategies]] — the broader structure catalog
-- [[market-regime]] — positive vs negative GEX regimes
+- [[zero-dte-options]] — the instrument and market-structure overview (read alongside this playbook)
+- [[iron-condor]], [[iron-fly]] — the defined-risk structures used at 0DTE tenors
+- [[short-strangle]] — the longer-dated short-premium equivalent
+- [[straddle-strangle]] — 0DTE volatility buying (the long side)
+- [[gamma]], [[theta]] — the dominant Greeks at same-day expiry
+- [[gamma-scalping]] — dynamic hedging of a long-gamma 0DTE position
+- [[gamma-exposure]] — dealer hedging flows and the GEX-directional read
+- [[dvol]] — 30-day background vol context
+- [[deribit]], [[greeks-live]] — venue and analytics; DVOL and surface source
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[funding-rate]] — the perp linkage that drives the intraday path
+
+## Sources
+
+- Natenberg, *Option Volatility and Pricing* (2nd ed.) — gamma acceleration near expiration.
+- [[gamma-exposure]] — dealer-gamma framework for the directional variant.
+- [[deribit]] / [[greeks-live]] documentation — daily-expiry listing, 08:00 UTC index settlement, cash settlement, inverse vs USDC-margined contracts, fee schedule.

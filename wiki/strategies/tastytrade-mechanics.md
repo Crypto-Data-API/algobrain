@@ -1,38 +1,29 @@
 ---
-title: "tastytrade Mechanics"
-type: strategy
+title: "tastytrade Mechanics (Crypto)"
+type: concept
 created: 2026-05-07
-updated: 2026-06-20
-status: excellent
-tags: [options, derivatives, volatility, swing-trading, education]
+updated: 2026-07-14
+status: good
+tags: [options, crypto, derivatives, volatility, methodology, premium-selling, education, bitcoin, ethereum]
 aliases: ["tastytrade Playbook", "tastytrade Rules", "Sosnoff Mechanics", "45-DTE 50% 21-DTE", "tastytrade Methodology"]
-strategy_type: quantitative
-timeframe: swing
-markets: [options]
-complexity: intermediate
-backtest_status: naive-backtested
-edge_source: [structural, behavioral, risk-bearing]
-edge_mechanism: "Sells the [[variance-risk-premium]] in liquid index and large-cap-equity options to investors and dealers paying for portfolio insurance and lottery exposure."
-data_required: [options-chain, iv-rank, delta, dte, underlying-price, portfolio-greeks]
-min_capital_usd: 25000
-capacity_usd: 50000000
-crowding_risk: medium
-expected_sharpe: 0.5
-expected_max_drawdown: 0.50
-breakeven_cost_bps: 50
-decay_evidence: "VRP has compressed in SPX since the 2010s as more retail and systematic short-vol participants entered. Tastytrade's own 'Market Measures' research has acknowledged regime sensitivity. See [[variance-risk-premium]]."
-related: ["[[tom-sosnoff]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put]]", "[[options-premium-selling]]", "[[variance-risk-premium]]", "[[probability-of-profit]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[volmageddon]]", "[[vix-august-2024-spike]]", "[[karen-the-supertrader]]", "[[options-portfolio-construction]]"]
+domain: [volatility, options, risk-management]
+difficulty: intermediate
+markets: [crypto, options]
+related: ["[[tom-sosnoff]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put]]", "[[options-premium-selling]]", "[[premium-selling-systematic]]", "[[crypto-options-volatility-selling]]", "[[options-selling]]", "[[variance-risk-premium]]", "[[probability-of-profit]]", "[[long-vol-vs-short-vol]]", "[[long-vol-overlay]]", "[[managing-winners]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
 ---
 
-The tastytrade mechanics are the canonical retail short-volatility playbook popularized by [[tom-sosnoff|Tom Sosnoff]] and the tastytrade media network: sell 16-30 [[delta]] [[short-strangle|strangles]] (or defined-risk equivalents) at roughly 45 days to expiration, manage winners by closing at 50% of credit received, manage losers (or runners) by closing or rolling at 21 days to expiration, gate entries on [[implied-volatility]] rank, and trade *small and often* across many tickers so the law of large numbers approximates the theoretical [[probability-of-profit|probability of profit]]. The mechanics are mechanical by design — the trader's job is to follow the rules, not to forecast direction — and they are the most-replicated single options playbook in retail trading. They are also genuinely controversial: proponents point to multi-year stretches of [[variance-risk-premium|VRP]]-driven returns, while critics point to negative-skew tail events ([[volmageddon|February 2018]], March 2020, [[vix-august-2024-spike|August 2024]]) that can erase years of theta in days for unhedged practitioners.
+The tastytrade mechanics are the canonical retail short-volatility playbook popularized by [[tom-sosnoff|Tom Sosnoff]] and the tastytrade media network, **ported here to crypto**: sell 16-30 [[delta]] [[short-strangle|strangles]] (or defined-risk equivalents) at roughly 30-45 days to expiration on [[deribit]] BTC/ETH, manage winners by closing at 50% of credit received, manage losers/runners by closing or rolling in the gamma zone, gate entries on [[dvol|DVOL]] percentile, and trade *small and often* so the law of large numbers approximates the theoretical [[probability-of-profit|probability of profit]]. The mechanics are mechanical by design — the trader's job is to follow the rules, not to forecast direction. Ported to crypto, the rules survive but must be **tightened**: a shorter time stop, a tighter vega budget, and a hard DVOL kill switch, because crypto's tail is genuinely fatter and its 24/7 market has no session close to cap a gap. Proponents point to multi-year VRP-driven returns; critics point to negative-skew tail events — in crypto, 2020-03-12, the 2022 LUNA/FTX bear, and 2025-10-10 — that can erase months of theta in a day for unhedged practitioners.
+
+## Origin and scope
+
+The rule set is the tastytrade equity/index research lineage (SPX/SPY/large-cap options). This page keeps the *methodology* — the empirically-calibrated entry/management heuristics — and re-scopes the *application* to [[deribit]] BTC/ETH options, on-chain vaults, and BTC-ETF options. The equity origin is why the canonical numbers ("45-DTE, 50%, 21-DTE") are quoted; the crypto adaptations are flagged throughout.
 
 ## Edge Source
 
 Per the wiki's [[edge-taxonomy|edge taxonomy]], tastytrade mechanics combine three edge sources:
 
-- **Structural** (primary). Implied volatility on liquid index and large-cap options has historically priced *higher* than realized volatility by 2-4 vol points on average — the [[variance-risk-premium]]. The seller is paid this difference in expectation. The premium exists because portfolio managers pay up for insurance, retail buys lottery-ticket calls, and dealers must charge for the gamma risk they absorb.
-- **Risk-bearing** (primary). The seller is paid to absorb tail risk that other market participants will not hold. This is genuine compensation for genuine risk, not a free lunch.
-- **Behavioral** (secondary). Long-option buyers systematically overpay for OTM convexity due to lottery-ticket bias and probability-distortion of low-probability events ([[behavioral-finance]]). The seller is on the other side of this bias.
+- **Structural / risk-bearing** (primary). Implied volatility ([[dvol|DVOL]]) on liquid BTC/ETH options has historically priced *higher* than realized volatility — the [[variance-risk-premium]], which runs 2-4× the equity premium. The seller is paid this difference for absorbing tail risk that leveraged holders and lottery-ticket buyers will not hold.
+- **Behavioral** (secondary). Long-option buyers systematically overpay for OTM convexity due to lottery-ticket bias and probability-distortion of low-probability events ([[behavioral-finance]]) — the crypto "100x call" is the purest expression.
 
 The edge is *not* analytical — there is no informational asymmetry, no clever signal. The trader is simply willing to be the insurance writer in exchange for the empirical premium.
 
@@ -40,244 +31,274 @@ The edge is *not* analytical — there is no informational asymmetry, no clever 
 
 The other side of the trade:
 
-- **Portfolio managers buying SPX puts** as institutional insurance — they are not price-sensitive on the wings because the alternative (an unhedged equity book) is regulatorily or career-risk unacceptable.
-- **Retail call buyers** chasing OTM upside in NVDA, TSLA, meme stocks — overpaying for low-probability, high-payoff structures consistent with prospect-theory probability weighting.
-- **Dealers** who bake a vol risk premium into option prices to cover their hedging costs and gamma risk; the dealer flow is not the *source* of the premium but the *channel* through which it reaches end investors.
+- **Leveraged holders and funds buying BTC/ETH puts** as crash insurance — price-insensitive on the wings because the alternative (an unhedged, liquidatable book) is unacceptable.
+- **Retail call buyers** chasing OTM upside in majors and altcoins — overpaying for low-probability, high-payoff structures consistent with prospect-theory probability weighting.
+- **Market makers** who bake a vol risk premium into option prices to cover hedging and gamma costs; dealer flow is the *channel* through which the premium reaches end investors, not its source.
 
-The premium has compressed since the 2010s as more systematic short-vol players (institutions and retail) entered the trade. It has not disappeared — empirical SPX VRP remains positive on average — but the Sharpe ratios of naive premium-selling have come down meaningfully, and the negative-skew tail events have become more impactful relative to the smaller running income. tastytrade's own research staff has acknowledged regime-dependence on air. See [[variance-risk-premium]] and the regime treatment in [[volatility-regime-classification]].
+The premium has compressed as systematic short-vol supply grew (on-chain covered-call vaults, BTC covered-call ETFs, Deribit auction flow), but it has not disappeared — empirical BTC/ETH VRP remains positive on average, and *wider* than equities'. The negative-skew tail events, however, are more impactful in crypto because the gaps are larger and continuous. See [[variance-risk-premium]] and [[volatility-regime-classification]].
 
 ## Null Hypothesis
 
-If the strategy had no edge, three things would be true: (1) on a multi-cycle, properly-cost-adjusted basis, the average P&L would be near zero or negative, (2) the in-sample Sharpe ratio in a calm regime would tell you essentially nothing about the out-of-sample Sharpe through a cycle, and (3) the negative-skew tail events would erase running income in proportion to the years of accumulated theta.
+If the strategy had no edge: (1) on a multi-cycle, cost-adjusted basis the average P&L would be near zero or negative, (2) the calm-regime Sharpe would tell you nothing about the out-of-sample Sharpe through a cycle, and (3) the negative-skew tail events would erase running income in proportion to accumulated theta.
 
-A no-edge book would still *look* profitable in calm regimes (theta is collected daily regardless of edge) and would *blow up* during shocks at a rate determined entirely by realized vs implied vol. To distinguish edge from no-edge, the trader needs to run long enough through enough regime variation that the cycle-average return is statistically distinguishable from zero — which typically requires 7-10 years of live trading, not the 1-2 year backtests tastytrade research videos commonly present.
+A no-edge book would still *look* profitable in calm regimes (theta is collected daily regardless of edge) and would *blow up* during shocks at a rate set by realized vs implied vol. To distinguish edge from no-edge, the trader must run long enough through enough regime variation that the cycle-average return is statistically distinguishable from zero — harder in crypto, where the venue history is short and the shocks are large.
 
 ## Rules
 
-The published tastytrade rules, restated for execution. The full playbook fits on an index card:
+The published tastytrade rules, restated for crypto execution. The full playbook fits on an index card; the **crypto-adapted** column is the operative one:
 
-| Parameter | Rule | Why |
-|-----------|------|-----|
-| Entry DTE | ~45 days | Balance of theta acceleration vs gamma risk |
-| Strike delta | 16–30 delta short strikes | ~1 SD OTM, ~70–84% [[probability-of-profit\|POP]] |
-| IV filter | IV rank > 30–50% (prefer > 50) | [[variance-risk-premium\|VRP]] is fattest when IV is high vs its own history |
-| Winner exit | Close at 50% of credit | Captures most of expected P&L per unit time-at-risk |
-| Loser/runner | Close or roll at 21 DTE | Gamma risk accelerates sharply inside 3 weeks |
-| Roll discipline | Roll for credit only, never debit | Avoids leveraging a losing trade |
-| Per-trade size | 1–5% of account in BPR | "Trade small, trade often" — law of large numbers |
-| Book limit | ≤ 25–50% of NLV in short premium | Keeps dry powder to manage challenges |
+| Parameter | Equity-origin rule | Crypto adaptation | Why |
+|-----------|--------------------|-------------------|-----|
+| Entry DTE | ~45 days | **21-45 days** (avoid weeklies) | Balance theta vs gamma; crypto gamma hotter into expiry |
+| Strike delta | 16-30 delta short | 15-16 delta (tighter) | ~1 SD OTM, ~84% [[probability-of-profit\|POP]]; crypto tail favors further OTM |
+| IV filter | IV rank > 30-50% | **[[dvol\|DVOL]] percentile 40-90** + VRP > 5 vol pts | VRP fattest when DVOL is high vs its own history; skip active vol-shocks |
+| Winner exit | Close at 50% of credit | 50% of credit | Captures most expected P&L per unit time-at-risk |
+| Loser/runner | Close or roll at 21 DTE | **Close at 10-14 DTE** | Crypto gamma accelerates faster (24/7, unbounded gaps) |
+| Roll discipline | Roll for credit only | Roll for credit only | Avoids leveraging a losing trade |
+| Per-trade size | 1-5% of account | 1-3%; **vega ≤ ~1% NAV per DVOL point** | "Trade small, trade often"; DVOL moves 20-40 pts in a session |
+| Tail control | (implicit) | **Hard DVOL kill switch + [[long-vol-overlay]]** | Crypto's fatter, continuous tail makes this mandatory |
+| Venue | many liquid chains | **Deribit BTC/ETH** (deep); altcoins tiny | Deribit is effectively the market |
 
 ### Entry
 
-- **Underlying selection**: Liquid optionable underlyings — SPY, QQQ, IWM, large-cap single names with tight bid-ask spreads. Avoid earnings-binary names unless the trade is explicitly an earnings IV-crush trade. Avoid illiquid options chains (penny-wide spreads only).
-- **DTE**: Open at **~45 days to expiration** — the empirically-favored balance between theta acceleration (which is faster nearer expiration) and gamma risk (which is also faster nearer expiration). The 45-DTE choice is a sweet-spot compromise; tastytrade's "Market Measures" segments have published in-house comparisons of 30 / 45 / 60 DTE entries.
-- **Strike selection**: **16-30 delta** short strikes. Sosnoff's modal recommendation is around 16 delta (~1 standard deviation OTM, ~84% probability of expiring OTM); Tony Battista's segments have explored 30-delta variants for higher credit at the cost of higher hit-rate decay. Strangles use both a short put and a short call at symmetric deltas; iron condors add long wings 5-15 strikes further OTM.
-- **IV rank filter**: Open premium-selling positions when **IV rank > 30-50%** — ideally above 50%. IV rank is the percentile of current IV in the trailing 52-week range. The filter exists because the VRP is fattest when IV is high relative to its own history, so credits are larger and breakevens wider.
-- **Position size**: **1-5% of account per trade** in buying-power reduction. tastytrade emphasizes "trade small, trade often" — the small per-trade size is structurally important because the strategy depends on the law of large numbers across many trades.
+- **Underlying selection**: Deribit BTC and ETH (deep, penny-tight relative to altcoins). Altcoin chains only in small size. Avoid known-catalyst windows (large unlocks, protocol events) unless explicitly trading the IV crush.
+- **DTE**: Open at **21-45 DTE** — the theta-rich zone; avoid weeklies (crypto gamma too hot).
+- **Strike selection**: **15-16 delta** short strikes (~1 SD OTM). Strangles use symmetric put/call; iron condors add long wings 8-10 delta further OTM (the preferred crypto expression). **Skew-aware**: read [[funding-rate|perp funding]] and lean the short toward the overbid wing.
+- **DVOL filter**: open when **DVOL percentile is 40-90** and **DVOL − 30-day realized vol > 5 vol points**. The filter exists because the VRP is fattest when DVOL is rich relative to its own history, so credits are larger and breakevens wider — but selling *above* the 90th percentile is selling into an active shock.
+- **Position size**: **1-3% of account per trade**, with aggregate short vega capped at ~1% of NAV per DVOL point. "Trade small, trade often."
 
 ### Exit
 
-- **Manage winners at 50% of credit**: Close the position when the running P&L is **half of the original credit received**. The empirical justification is that holding to expiration captures the last 50% of credit at the cost of disproportionate gamma risk; closing at 50% locks in two-thirds of the expected P&L per unit of time-at-risk.
-- **Manage losers at 21 DTE**: At **21 days to expiration**, close or roll the position regardless of P&L. The 21-DTE rule exists because gamma risk inside 21 DTE accelerates sharply — a position that has been a steady winner for three weeks can give back its entire credit (and more) on a single adverse day inside the last three weeks.
-- **Roll for credit, not for hope**: If a position is challenged but the trader wants to maintain the view, *roll* the position to a further-dated expiration *for a credit* — never roll for a debit, as that would convert a losing trade into a leveraged version of the same trade.
-- **Take the loss when challenged**: When a strike is breached and the position is materially negative, close — do not "manage" by adding contracts or moving strikes for a debit. The mechanical discipline depends on cutting losers cleanly.
+- **Manage winners at 50% of credit**: close when running P&L is half the original credit. Holding to expiration captures the last 50% at the cost of disproportionate gamma risk; closing at 50% locks in most of the expected P&L per unit of time-at-risk. See [[managing-winners]].
+- **Manage losers/runners in the gamma zone**: at **10-14 DTE**, close or roll regardless of P&L. Crypto gamma inside two weeks accelerates sharply — a steady winner can give back its entire credit on a single 24/7 gap.
+- **Roll for credit, not for hope**: roll a challenged position to a further expiration *for a credit* only — never for a debit.
+- **Take the loss when challenged**: when a strike is breached and the position is materially negative, close. Do not "manage" by adding contracts.
+- **Vol-shock kill**: flatten short vega if **DVOL rises > 50% in a session** — the crypto-critical control the equity playbook lacks.
 
 ### Position Sizing
 
-- **No more than 25-50% of account in net liquidating value** committed to short-premium positions at any time. Leaves dry powder for new opportunities and for managing existing positions.
-- **Diversify across uncorrelated underlyings**: SPY, IWM, GLD, TLT, individual large-caps in different sectors. Beware the "five tech names = one tech bet" trap (see [[options-portfolio-construction]]).
-- **Buying-power-reduction discipline**: Track BPR, not just credit, as the binding constraint. A book at 70% BPR has no room to manage challenges.
+- **No more than 25-50% of NAV** committed to short-premium at any time; keep Deribit portfolio-margin utilisation low so a spike does not force liquidation.
+- **Diversify across genuinely uncorrelated risk**: BTC, ETH, and non-crypto sleeves. Beware the "five altcoins = one beta bet" trap — in crypto almost everything is one beta to BTC (see [[options-portfolio-construction]]).
+- **Track margin/BPR, not just credit**, as the binding constraint.
 
 ## Implementation Pseudocode
 
 ```python
-def tastytrade_strangle_book(account, underlyings, today):
+def tastytrade_crypto_book(account, underlyings, market, today):
+    if market.dvol_session_change >= 0.50:
+        return flatten_short_vega(account)          # vol-shock kill first
+
     book = account.open_positions
 
     # ENTRY LOOP
-    for u in underlyings:
-        if u.iv_rank < 30:                       # IV rank filter
-            continue
-        if u.options_liquidity_score < THRESHOLD:
-            continue
-        if account.buying_power_used > 0.5:      # capacity check
+    for u in underlyings:                            # ["BTC", "ETH"] primarily
+        if not (0.40 <= market.dvol_pctl(u) <= 0.90):
+            continue                                 # DVOL filter
+        if (market.dvol(u) - market.rv30(u)) < 5.0:
+            continue                                 # VRP too thin
+        if account.margin_used > 0.5:
             continue
         if u in [pos.underlying for pos in book]:
-            continue                             # one position per name
+            continue                                 # one position per name
 
-        chain = u.options_chain(dte_target=45)
+        chain = u.deribit_chain(dte_target=35)
         short_call = chain.find_call(delta=0.16)
         short_put  = chain.find_put(delta=-0.16)
-        credit     = short_call.bid + short_put.bid
-
-        size = position_size(account, credit, target_bpr_pct=0.02)
-        place_order(short_strangle(short_call, short_put, size, "open"))
+        tilt = "call" if market.funding_8h(u) > 0.0003 else "balanced"
+        size = position_size(account, target_vega_per_volpt=0.01)
+        place_order(iron_condor(short_call, short_put, wings_delta=0.09,
+                                skew_tilt=tilt, size=size))
 
     # MANAGEMENT LOOP
     for pos in book:
         running_pnl_pct = (pos.credit - pos.current_value) / pos.credit
         dte = (pos.expiry - today).days
-
-        if running_pnl_pct >= 0.5:               # 50% winners rule
+        if running_pnl_pct >= 0.5:                   # 50% winners rule
             close(pos)
-        elif dte <= 21:                          # 21 DTE rule
-            close(pos)                           # or roll if thesis intact
-        elif pos.is_challenged():                # short strike breached
-            close(pos)                           # mechanical loss-take
+        elif dte <= 12:                              # crypto gamma-zone exit
+            close(pos)                               # or roll for credit if thesis intact
+        elif pos.is_challenged():                    # short strike breached
+            close(pos)                               # mechanical loss-take
 ```
 
-The pseudocode is deliberately mechanical — the trader's role is execution and bookkeeping, not forecasting. tastytrade's pitch is that this is the *right* division of labor for retail.
+The pseudocode is deliberately mechanical — the trader's role is execution and bookkeeping, not forecasting.
 
 ## Indicators / Data Used
 
-- **[[delta]]** — strike-selection metric (16-30 delta target).
-- **[[implied-volatility]] rank** — IV percentile in trailing 52-week window; the entry filter.
-- **[[implied-volatility]] percentile** — alternate filter (% of days IV was below current).
-- **[[probability-of-profit]] (POP)** — derived from delta; tastytrade emphasizes ~70%+ POP setups.
-- **[[theta]]** — daily decay rate; the income being harvested.
-- **[[vega]]** — exposure to IV changes; the risk being absorbed.
-- **[[gamma]]** — rate-of-change of delta; the tail risk that accelerates inside 21 DTE.
-- **Buying-power reduction** — the broker's margin requirement; the binding capital constraint.
-- **DTE** — days to expiration; the time-axis of the rules.
+- **[[delta]]** — strike-selection metric (15-16 delta target).
+- **[[dvol|DVOL]] percentile** — the entry filter (Deribit's 30-day forward IV vs its trailing-year range).
+- **[[probability-of-profit]] (POP)** — derived from delta; ~70%+ POP setups.
+- **[[theta]]** — daily decay; the income harvested.
+- **[[vega]]** — exposure to DVOL changes; the risk absorbed and the budget constraint.
+- **[[gamma]]** — the tail risk that accelerates into the gamma zone.
+- **[[funding-rate]]** — the skew driver for wing selection.
+- **DTE and Deribit portfolio margin** — the time-axis of the rules and the binding capital constraint.
 
 No directional indicators (moving averages, RSI, MACD) are used in canonical tastytrade mechanics — the strategy is explicitly direction-agnostic.
 
 ## Payoff and Greeks
 
-The canonical [[short-strangle]] is **short-vega, short-gamma, positive-theta, and direction-neutral at entry**. The payoff is a wide plateau of maximum profit (the credit) between the short strikes, with losses that grow as the underlying breaches either strike — unbounded for naked strangles, capped at the wing width for the defined-risk [[iron-condor]] variant.
+The canonical [[short-strangle]] is **short-vega, short-gamma, positive-theta, and direction-neutral at entry**. The payoff is a wide plateau of maximum profit (the credit) between the short strikes, with losses that grow as the underlying breaches either strike — unbounded for naked strangles, capped at the wing width for the defined-risk [[iron-condor]] variant (preferred in crypto).
 
 | Greek | Sign at entry | Role in the mechanics |
 |-------|---------------|------------------------|
-| Theta | Long (positive) | The harvested income — collected daily; the reason the 50%/21-DTE rules exist (theta is fastest, then dangerous, near expiry). |
-| Vega | Short (negative) | The risk being paid for — a vol spike marks the position down hard; this is the [[variance-risk-premium]] source and the tail-event killer. |
-| Gamma | Short (negative) | Accelerating loss as the underlying nears/breaches a short strike — the reason the 21-DTE exit exists (gamma explodes inside 3 weeks). |
-| Delta | ~0 at entry | Symmetric strikes start neutral; becomes one-sided fast on a directional move, requiring management or the mechanical loss-take. |
+| Theta | Long (positive) | The harvested income — collected daily; the reason the 50% / gamma-zone rules exist. |
+| Vega | Short (negative) | The risk being paid for — a DVOL spike marks the position down hard; the [[variance-risk-premium]] source and the tail-event killer. |
+| Gamma | Short (negative) | Accelerating loss as the underlying nears/breaches a short strike — the reason the 10-14 DTE exit exists (crypto gamma explodes faster). |
+| Delta | ~0 at entry | Symmetric strikes start neutral; becomes one-sided fast on a directional gap, requiring management or the mechanical loss-take. |
 
-The 45-DTE entry, 50%-profit exit, and 21-DTE management rule are best understood as **gamma-risk-management heuristics dressed as P&L rules**: they keep the book in the slow-theta / low-gamma zone and force exits before the convex tail of short gamma dominates. The defining failure (Path D below) is precisely a simultaneous vega and gamma shock that the time-based rules cannot escape because liquidity vanishes.
+The DTE, 50%-profit, and gamma-zone rules are best understood as **gamma-risk-management heuristics dressed as P&L rules**: they keep the book in the slow-theta / low-gamma zone and force exits before the convex tail of short gamma dominates. The defining failure (Path D below) is a simultaneous vega and gamma shock that the time-based rules cannot escape because liquidity vanishes.
 
 ## Example Trade
 
-**Date**: hypothetical mid-cycle entry.
-**Underlying**: SPY at $580.
-**IV rank**: 45 (above the 30-threshold).
-**Setup**: 45-DTE short strangle.
-**Short strikes**: 555 put (~16 delta) and 605 call (~16 delta).
-**Credit**: $5.20 ($2.60 put + $2.60 call) per share = $520 per contract.
-**BPR**: ~$5,500 per contract under [[portfolio-margin]].
+**Underlying**: BTC at $68,000 on Deribit (USDC-margined).
+**DVOL**: 55 (63rd percentile, above the 40 threshold); RV30 = 40 → VRP ≈ 15 vol points.
+**Setup**: 35-DTE short strangle (or iron condor for defined risk).
+**Short strikes**: $60,000 put (~16 delta) and $76,000 call (~16 delta). Funding +0.03%/8h → tilt toward the call wing.
+**Credit**: ≈ $1,400 per 1-BTC strangle.
 
-Trader sells 5 contracts: $2,600 credit, ~$27,500 BPR (about 11% of a $250K account).
+Trader sells 3 contracts within the vega budget.
 
-**Path A — winner**: SPY drifts in the 560-595 range over 22 days. Position decays to $260 of running profit per contract. Trader closes all 5 contracts mechanically at 50% — total realized profit ~$1,300 minus commissions, in 22 days.
+**Path A — winner**: BTC drifts in the $63k-$74k range over 20 days. Position decays to ~50% of credit. Trader closes mechanically at 50% — banks the profit minus Deribit fees, in 20 days.
 
-**Path B — 21-DTE management**: SPY trades sideways but slowly; on day 24 the position is at +20% of credit, but DTE is now 21. Trader closes mechanically rather than holding into the gamma zone — realized profit ~$520 minus commissions.
+**Path B — gamma-zone management**: BTC trades sideways slowly; at 12 DTE the position is at +25% of credit. Trader closes mechanically rather than holding into the crypto gamma zone.
 
-**Path C — loser**: Earnings miss in a major SPX component triggers a 5% gap down on day 14. The 555 put short is now ITM; the position is at -150% of credit ($780 unrealized loss per contract). Trader closes — realized loss ~$3,900 across 5 contracts. The next several positive trades are needed to rebuild the credit.
+**Path C — loser**: a macro headline gaps BTC −8% on day 10. The put short is tested; the position is at -120% of credit. Trader closes; the next several positive trades rebuild the credit.
 
-**Path D — tail event** ([[vix-august-2024-spike|2024 yen-carry unwind]] or similar): VIX spikes from 16 to 65 intraday. The strangle's vega and gamma compound; the position is at -400% to -800% of credit. Bid-ask widens 10-20x; the trader cannot close at sane prices. A 5-contract position taking $10K-$20K of realized loss is the realistic outcome — not catastrophic if the rest of the book is small, but multiple years of running income in a single day. This path is the strategy's defining tail risk.
+**Path D — tail event** (2025-10-10-style): BTC gaps −12% in minutes and DVOL spikes from 55 to 120+. Vega and gamma compound; the position is deeply underwater and bid-ask widens sharply. **The DVOL kill switch fires**; a defined-risk condor caps the loss at the wings, a naked strangle does not. This path is the strategy's defining tail risk — and the reason crypto demands the kill switch, the tighter time stop, and defined-risk structures.
 
 ## Performance Characteristics
 
-The realistic, cost-adjusted performance picture (synthesizing tastytrade's published research, third-party academic studies, and practitioner postmortems):
+The realistic, cost-adjusted picture (crypto, paper/vault evidence):
 
-- **Win rate**: ~70-80% per trade — high, by design, because the strikes are far OTM.
+- **Win rate**: ~70-80% per trade — high by design, because the strikes are far OTM.
 - **Average winner**: ~50% of credit (closed early per the rule).
-- **Average loser**: -100% to -200% of credit (when the short strike is breached or the trade goes parabolic).
-- **Naive backtest Sharpe (calm regimes only)**: 1.5-2.5+. Looks excellent.
-- **Cycle-adjusted Sharpe (including 2018, 2020, 2024 shocks)**: 0.3-0.7 for unhedged practitioners; 0.6-1.0 if a [[long-vol-overlay|long-vol overlay]] is added on top.
-- **Expected annual return (cost-adjusted, full cycle)**: 4-10% on capital deployed, with substantial path-dependence.
-- **Max drawdown**: 30-60% in a vol shock for unhedged practitioners; 10-20% with a properly-sized overlay.
-- **Skew**: Strongly negative. The distribution looks like "many small wins, occasional very large losses."
+- **Average loser**: -100% to -200% of credit (when a strike is breached or the trade gaps).
+- **Naive backtest Sharpe (calm regimes only)**: high and misleading.
+- **Cycle-adjusted Sharpe (including 2020-03, 2022, 2025-10-10 shocks)**: ~0.3-0.7 unhedged; ~0.6-1.0 with a [[long-vol-overlay]].
+- **Max drawdown**: 30-60% in a vol shock for unhedged practitioners; 10-20% with a properly-sized overlay and DVOL kill switch.
+- **Skew**: strongly negative — "many small wins, occasional very large losses," and the losses are larger in crypto than in equities.
 
-The honest summary: in a calm regime, tastytrade mechanics deliver a pleasant equity-like return with a high hit rate and a smooth equity curve. Across a full cycle including at least one vol shock, the strategy's risk-adjusted return is *closer to mediocre than great*, and survival depends on either a long-vol overlay or extreme position-size discipline (or both). See [[long-vol-vs-short-vol]] for the full synthesis.
+The honest summary: in a calm regime, crypto tastytrade mechanics deliver a pleasant carry with a high hit rate and a smooth equity curve. Across a full cycle including at least one crypto vol shock, the risk-adjusted return is *closer to mediocre than great*, and survival depends on the overlay + kill switch and extreme size discipline. See [[long-vol-vs-short-vol]].
 
 ## Capacity Limits
 
-- **Retail capacity**: Effectively unlimited at the individual level — the strategy works across many liquid underlyings.
-- **Account-level capacity**: A single trader can run the playbook on $25K-$50M without market-impact issues, provided they stay in liquid SPX/large-cap names.
-- **Strategy-level capacity (across all participants)**: Hard to estimate. Empirically the [[variance-risk-premium]] persists despite enormous AUM in short-vol products; the trade does not arbitrage away because the marginal buyer of insurance and the marginal lottery-ticket retail trader are price-insensitive on the wings.
-- **Crowding risk**: Medium. The 2018 [[volmageddon|XIV blow-up]] and the 2024 [[vix-august-2024-spike|VIX spike]] both featured cascade dynamics partly attributable to crowded short-vol positioning. A trader in this strategy is correlated with thousands of other traders running similar mechanics; the *de facto* concentration is much higher than it appears.
+- **Retail capacity**: effectively unlimited at the individual level on BTC/ETH.
+- **Account-level capacity**: a single trader can run the playbook well into the tens of millions of notional without market-impact issues, provided they stay in Deribit BTC/ETH; altcoin chains are far thinner.
+- **Strategy-level capacity (across all participants)**: the crypto VRP persists despite growing vault/ETF short-vol supply, because the marginal insurance buyer and the marginal 100x-call retail buyer are price-insensitive on the wings — but call-side premium compresses as systematic writing scales.
+- **Crowding risk**: medium and rising. A trader in this strategy is correlated with on-chain vaults, covered-call ETFs, and thousands of other retail sellers; cascade dynamics ([[liquidation-cascade]]) in shocks are partly endogenous to this crowding.
 
 ## What Kills This Strategy
 
 The dominant failure modes (cross-reference [[failure-modes]]):
 
-1. **Negative-skew tail event**. A vol shock erases years of theta in days. [[volmageddon]] (Feb 2018), the [[covid-crash|March 2020]] gap-down, and the [[vix-august-2024-spike|August 2024]] yen-carry unwind are the recent canonical examples. Unhedged practitioners face 50-100% drawdowns; hedged practitioners face 10-20%.
-2. **Margin reprice during the shock**. Even if the trader has cash to cover, the broker may force liquidation at the worst possible prices because BPR can rise 5-10x intra-day.
-3. **Liquidity collapse on the wings**. Bid-ask spreads on OTM puts widen 10-20x in a panic; getting out costs another 5-15% of notional. This is *liquidity-driven ruin*, not directional ruin.
-4. **Behavioral failure: refusing to take losers**. The strategy's tail-risk profile makes loss-taking psychologically hard. Traders who let challenged positions ride through 21 DTE in defiance of the rules suffer the largest losses.
-5. **Concentration creep**. Five "uncorrelated" short-strangle positions in tech names are one tech bet. Five short-strangle positions across SPY, QQQ, IWM, large-cap-tech, and a dispersion proxy are *one short-vol bet*. Sector and factor concentration is the silent stack-up.
-6. **Edge decay**. The VRP has compressed since the 2010s. Future cycles may deliver lower running income with the same tail risk.
+1. **Negative-skew tail event**. A crypto vol shock erases months of theta in a day — 2020-03-12 (BTC −50% in 24h), 2022 ([[terra-luna|LUNA]]/[[ftx-collapse|FTX]]), 2025-10-10 (BTC −12% in 60 seconds). Unhedged: 50-100% drawdowns; hedged: 10-20%.
+2. **Margin reprice / Deribit auto-liquidation**. Even with cash to cover, portfolio margin can rise 5-10x intraday and the venue force-liquidates at the worst prices.
+3. **Liquidity collapse on the wings**. Bid-ask on OTM options widens sharply in a panic; getting out costs more. *Liquidity-driven ruin*, not directional ruin.
+4. **Behavioral failure: refusing to take losers**. The tail-risk profile makes loss-taking psychologically hard; letting challenged positions ride into the gamma zone produces the largest losses.
+5. **Concentration creep**. Five "uncorrelated" altcoin strangles are one BTC-beta bet. Sector/factor concentration is the silent stack-up — even sharper in crypto's high all-asset correlation.
+6. **Single-venue and coin-margin risks**. Deribit outage/insolvency during a shock is un-hedgeable; inverse-margined collateral falls in USD terms as the short goes against you.
+7. **Edge decay**. Vault/ETF supply compresses the call-side VRP over time.
 
-The proper hedge for failure modes 1-3 is a [[long-vol-overlay]] — see [[long-vol-vs-short-vol#The Synthesis: Short-Vol Core + Long-Vol Overlay|the canonical synthesis]] for sizing.
+The proper hedge for failure modes 1-3 is a [[long-vol-overlay]] plus the DVOL kill switch — see [[long-vol-vs-short-vol]] and [[premium-selling-systematic]] for sizing.
 
 ## Kill Criteria
 
-Numerical conditions for retiring or pausing the strategy (cross-reference [[when-to-retire-a-strategy]]):
+Numerical conditions for pausing (cross-reference [[when-to-retire-a-strategy]]):
 
-- **Drawdown > 25%** on the short-vol sleeve: pause new entries; close existing positions to half-size; review whether sizing was correct.
-- **Drawdown > 40%**: full pause; no new short-premium trades for 3 months; review whether the strategy itself is appropriate for current vol regime.
-- **Rolling 12-month Sharpe < 0**: review whether VRP has compressed beyond the strategy's profitability threshold; consider regime shift.
-- **3 consecutive months of breached strikes**: behavioral red flag — either the strikes are too aggressive (move to 12 delta), the IV rank filter is mistuned, or the underlying selection is poor.
-- **Liquidity stress event** (bid-ask spreads on the strategy's underlyings 5x normal): immediately reduce size by half regardless of P&L.
+- **DVOL rises > 50% in a session**: flatten short vega immediately.
+- **Drawdown > 25%** on the short-vol sleeve: pause new entries; close to half-size; review sizing.
+- **Drawdown > 40%**: full pause; no new short-premium trades; review whether the strategy fits the current DVOL regime.
+- **Rolling 12-month Sharpe < 0**: review whether the VRP has compressed beyond profitability.
+- **3 consecutive months of breached strikes**: behavioral red flag — strikes too aggressive, DVOL filter mistuned, or underlying selection poor.
+- **Deribit liquidity/margin stress event**: immediately halve size regardless of P&L.
+
+## Crypto specifics
+
+- **Deribit is the market.** Execution is on [[deribit]] BTC/ETH (or on-chain vaults / BTC-ETF options); altcoin chains are thin.
+- **DVOL, not VIX.** The entry gate is [[dvol|DVOL]] percentile, not VIX/IV-rank.
+- **Tighter and hard-stopped.** The crypto adaptations — 10-14 DTE time stop, ~1%-NAV-per-DVOL-point vega cap, mandatory DVOL kill switch and [[long-vol-overlay]] — exist because the tail is fatter and the market never closes.
+- **European, cash-settled.** No early [[assignment]], no delivery — a simplification versus American single-name options.
+- **Perp-funding sets the skew.** Richly positive [[funding-rate|funding]] firms call skew; lean the short toward the overbid wing.
+- **Inverse vs linear.** USDC-margined (linear) for clean USD P&L; coin-margined (inverse) carries quanto-like non-linearity.
+- **No [[section-1256-contracts|§1256]].** Crypto/crypto-ETF options get no 60/40 shelter — premium is ordinary/short-term income.
 
 ## Advantages
 
-- **Mechanical and learnable.** The rules can be written on an index card. Eliminates discretionary judgment errors.
-- **Real running income.** Theta is genuinely collected daily in calm regimes; the strategy is not a phantom edge.
-- **Capital-efficient under [[portfolio-margin]].** A $250K account can run a meaningful book of strangles at 10-15% of notional in BPR.
-- **High hit rate.** 70-80% winners is psychologically rewarding and supports adherence.
-- **Education ecosystem.** tastytrade's media network, platform, and community provide more retail-accessible education on this playbook than on any other.
-- **Combines well with overlays.** The strategy is a clean *core* for the [[long-vol-vs-short-vol|short-vol-core-plus-long-vol-overlay]] construction.
+- **Mechanical and learnable.** The rules fit on an index card; eliminates discretionary judgment errors.
+- **Real running income.** Theta is genuinely collected daily in calm regimes.
+- **Fatter premium than equities** — more room to absorb Deribit's wider costs.
+- **Cash-settled, European** Deribit options — no assignment, minimal pin risk.
+- **High hit rate.** 70-80% winners supports adherence.
+- **Combines well with overlays.** A clean *core* for the [[long-vol-vs-short-vol|short-vol-core-plus-long-vol-overlay]] construction.
 
 ## Disadvantages
 
-- **Negative skew is brutal.** The tail event is not theoretical — it has hit short-vol books in 1987, 1998, 2008, 2018, 2020, and 2024. A trader running the strategy long enough will experience one.
-- **Survivor bias in published results.** Tastytrade's "Market Measures" research and the bulk of online testimonials come from traders and time periods that survived. The blow-ups disappear from the record. See [[karen-the-supertrader]] (the Karen Bruton / KKMFA episode of 2014-2016) as a high-profile case where the same playbook was alleged by the SEC to mask large losses with cherry-picked closed trades.
-- **Sharpe ratio is misleading.** Sharpe assumes Gaussian returns; short-vol violates this catastrophically. A 2.5 Sharpe over five calm years tells you almost nothing about year six. See [[sharpe-ratio-pitfalls]] and [[deflated-sharpe-ratio]].
-- **Education-industrial conflict of interest.** tastytrade is a brokerage; it has commercial incentive to encourage active trading. The research presented on air is not always reproducible by outside parties.
-- **Crowded.** Many retail and institutional players run variations of the same mechanics. Cascade dynamics in shocks are partly endogenous to this crowding.
-- **Behavioral pitfall: the dopamine loop.** Frequent small wins are reinforcing in a way that frequent small losses are not. Retail traders running the strategy unhedged tend to *grow* the book in good times, increasing exposure exactly before the shock arrives.
-- **Edge decay.** The VRP has compressed; future cycles may deliver lower returns.
-- **Naked vs defined-risk mismatch.** Sosnoff's published research often assumes naked strangles; the implementation defaults for retail under Reg-T require defined-risk variants (iron condors), which have different P&L and risk dynamics and are not always interchangeable in tastytrade's research conclusions.
+- **Negative skew is brutal — and fatter in crypto.** The tail event is not theoretical; a trader running the strategy long enough will experience one.
+- **Survivor bias in published results.** Both the equity tastytrade record and crypto vault marketing over-represent survivors; the blow-ups disappear. The [[karen-the-supertrader]] case (equity) is the canonical cautionary tale of the roll-the-loser failure the playbook is prone to — a universal failure mode.
+- **Sharpe ratio is misleading.** Short-vol violates the Gaussian assumption catastrophically. See [[sharpe-ratio-pitfalls]] and [[deflated-sharpe-ratio]].
+- **Single-venue and coin-margin risks** absent from listed equity options.
+- **No [[section-1256-contracts|§1256]] shelter** — after-tax net is materially below an equity index program.
+- **Crowded.** On-chain vaults, covered-call ETFs, and retail run variations of the same mechanics; cascade dynamics in shocks are partly endogenous.
+- **Behavioral pitfall: the dopamine loop.** Frequent small wins reinforce oversizing right before the shock arrives.
+- **Naked vs defined-risk mismatch.** Much of the published research assumes naked strangles; crypto's tail makes defined-risk condors the responsible default, with different P&L dynamics.
 
 ### Proponents vs Critics
 
-The fair statement of the debate:
+- **Proponents** (Sosnoff, tastytrade research, many practitioners): the rules-of-thumb are derived from extensive backtesting, the [[variance-risk-premium]] is real and persistent (and fatter in crypto), the mechanical discipline is the central virtue, and traders who follow the rules across many trades harvest the premium over time.
+- **Critics** (academic researchers, hedged-overlay practitioners): the published backtests are calm-regime-biased, survivor bias inflates the perceived edge, the negative-skew tail is materially worse than published Sharpes suggest, and running the playbook unhedged is structurally selling tail insurance with no reserves — a critique that bites *harder* in crypto's fatter, 24/7 tail.
 
-- **Proponents** (Sosnoff, tastytrade research staff, many practitioners): argue that the rules-of-thumb are derived from extensive in-house backtesting, that the [[variance-risk-premium]] is a real and persistent edge, that the mechanical discipline is the strategy's central virtue, and that retail traders willing to follow the rules across many trades will harvest the premium over time.
-- **Critics** (academic researchers, hedged-overlay practitioners, post-mortems of [[ljm-preservation-and-growth]] / [[karen-the-supertrader]]): argue that the published backtests are calm-regime-biased, that survivor bias inflates the perceived edge, that the strategy's negative-skew tail is materially worse than published Sharpe ratios suggest, and that running the playbook unhedged is structurally indistinguishable from selling tail insurance with no reserves.
+The most defensible synthesis: tastytrade mechanics are a *correct core* and an *insufficient stand-alone strategy* — they earn real income, but in crypto they need the [[long-vol-overlay]], the tightened stops, and the DVOL kill switch to become a survivable, full-cycle engine.
 
-Both positions contain substantial truth. The most defensible synthesis is that tastytrade mechanics are a *correct core* and an *insufficient stand-alone strategy* — they earn real income, but they need the [[long-vol-overlay|long-vol overlay]] to convert that income into a survivable, full-cycle compounding engine. This reading is consistent with how the most successful long-run options books actually run.
+## Getting the Data (CryptoDataAPI)
+
+DVOL and the IV surface come from Deribit / [[greeks-live]]; [[cryptodataapi]] supplies the options-flow, vol-regime, dealer-gamma, funding, and liquidation context for gating entries and firing the kill switch.
+
+**Live data:**
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/quant/gex` — Gamma Exposure (dealer inventory + liquidation profile)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding (skew driver)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (vol-shock early warning)
+
+**Historical data:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
 
 ## Sources
 
-- [[tom-sosnoff]] — primary articulator of the rules.
-- "Market Measures" — tastytrade's in-house research segment, repeatedly comparing 45-DTE vs 30-DTE entries, 50% management vs hold-to-expiration, and IV-rank filter variants.
-- [[karen-the-supertrader]] — Karen Bruton / Hope Advisers / KKMFA case (2014-2016), in which the SEC alleged the same mechanical playbook was used to hide large unrealized losses; a cautionary case for the failure mode of refusing to take losers.
-- [[volmageddon]] — Feb 2018 vol shock that erased XIV and damaged many short-vol practitioners.
-- [[vix-august-2024-spike]] — Aug 5, 2024 yen-carry unwind, the largest *intraday* VIX spike on record (the Feb 5, 2018 [[volmageddon]] event remains the largest close-to-close percentage rise); canonical recent example of the strategy's tail risk.
-- [[ljm-preservation-and-growth]] — short-vol fund that lost ~80% in two days; canonical institutional blow-up of a related playbook.
+- [[tom-sosnoff]] — primary articulator of the rules (equity-origin).
+- "Market Measures" — tastytrade's in-house research segment (45- vs 30-DTE, 50% vs hold-to-expiration, IV-rank filter variants).
+- [[karen-the-supertrader]] — the Karen Bruton / KKMFA case, a cautionary example of the roll-the-loser failure the playbook is prone to (equity; the failure mode is universal).
+- [[crypto-options-volatility-selling]] — the wiki's canonical crypto short-vol treatment and kill-switch framework.
+- [[greeks-live]] / [[deribit]] documentation — DVOL, European cash settlement, coin-margined vs USDC-margined mechanics.
 - Carr and Wu, "Variance Risk Premiums" (2009) — academic measurement of the premium being harvested.
-- Israelov, Roni — practitioner research at AQR challenging naive premium-selling Sharpes.
-- [[options-premium-selling]] — wiki page on the broader strategy class.
-- [[long-vol-vs-short-vol]] — the canonical synthesis treatment.
+- Crash record: 2020-03-12, 2022-05 [[terra-luna|LUNA]], 2022-11 [[ftx-collapse|FTX]], 2025-10-10 [[liquidation-cascade|liquidation cascade]].
 
 ## Related
 
-- [[tom-sosnoff]] — founder and primary articulator
+- [[tom-sosnoff]] — primary articulator
 - [[short-strangle]] — the canonical structure
-- [[iron-condor]] — defined-risk variant
+- [[iron-condor]] — defined-risk variant (preferred in crypto)
 - [[short-put]] — single-leg variant
-- [[options-premium-selling]] — broader strategy class
+- [[options-premium-selling]] / [[premium-selling-systematic]] — the broader crypto strategy class and its systematic implementation
+- [[crypto-options-volatility-selling]] — the deep short-vol-book treatment
+- [[options-selling]] — the crypto premium-selling family hub
+- [[managing-winners]] — the 50% / time-stop management rule
 - [[probability-of-profit]] — the metric tastytrade emphasizes
 - [[variance-risk-premium]] — the underlying edge
+- [[dvol]] — the crypto vol gauge that gates entries
+- [[funding-rate]] — the perp linkage that shapes crypto skew
 - [[long-vol-vs-short-vol]] — the synthesis context
 - [[long-vol-overlay]] — the recommended hedge layer
 - [[options-portfolio-construction]] — book-level treatment
-- [[volmageddon]] — Feb 2018 tail event
-- [[vix-august-2024-spike]] — Aug 2024 tail event
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
 - [[karen-the-supertrader]] — cautionary case study
-- [[ljm-preservation-and-growth]] — institutional blow-up
-- [[ergodicity]] — why time-average matters more than ensemble-average for negative-skew strategies
-- [[deflated-sharpe-ratio]] — statistical correction for in-sample short-vol Sharpe
-- [[portfolio-margin]] — capital-efficiency prerequisite

@@ -2,11 +2,11 @@
 title: Volatility Targeting Across Multiple Strategies
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
 tags: [combinations, meta-strategy, volatility, risk-management, position-sizing, portfolio-construction]
 strategy_type: hybrid
-markets: [stocks, futures, crypto]
+markets: [futures, crypto]
 complexity: advanced
 backtest_status: untested
 related: [risk-on-risk-off-framework, multi-strategy-portfolio, mean-reversion]

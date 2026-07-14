@@ -2,12 +2,12 @@
 title: "Trend Following + Tail Risk Hedge"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-14
+updated: 2026-07-14
 status: good
 tags: [combinations, meta-strategy, trend-following, tail-risk, crisis-alpha, hedging, managed-futures]
 strategy_type: hybrid
 timeframe: medium to long-term (weeks to months)
-markets: [futures, stocks]
+markets: [futures]
 complexity: advanced
 backtest_status: untested
 related: ["[[trend-following]]", "[[managed-futures]]", "[[tail-risk-hedging]]", "[[protective-puts]]", "[[vix-calls]]", "[[risk-parity]]", "[[cta-strategies]]", "[[crisis-alpha]]", "[[dragon-portfolio]]", "[[convexity]]", "[[mark-spitznagel]]", "[[universa-investments]]", "[[antifragility]]", "[[fat-tails]]", "[[commodities]]"]
