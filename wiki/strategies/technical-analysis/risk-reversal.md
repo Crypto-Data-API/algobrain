@@ -2,76 +2,147 @@
 title: "Risk Reversal"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
-tags: [options, risk-reversal, directional, synthetic, leverage, hedging, skew]
-aliases: ["Combo", "Synthetic Forward", "Collar Without Stock"]
+tags: [options, crypto, risk-reversal, directional, synthetic, skew, hedging, derivatives]
+aliases: ["Combo", "Synthetic Forward", "25-Delta Risk Reversal", "Crypto Risk Reversal", "Collar Without Coin"]
 strategy_type: quantitative
-timeframe: swing|position
-markets: [stocks, forex]
+timeframe: swing
+markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
-related: ["[[covered-call]]", "[[jade-lizard]]", "[[straddle-strangle]]", "[[diagonal-spread]]", "[[implied-volatility]]", "[[delta]]", "[[vega]]"]
+related: ["[[skew-trading]]", "[[seagull-option]]", "[[covered-call]]", "[[jade-lizard]]", "[[straddle-strangle]]", "[[crypto-options-volatility-selling]]", "[[implied-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[delta]]", "[[vega]]", "[[deribit]]", "[[greeks-live]]", "[[cryptodataapi]]"]
 ---
 
 # Risk Reversal
 
 ## Overview
 
-A Risk Reversal is a two-leg options strategy that combines a **long OTM call** with a **short OTM put** (bullish risk reversal), or a **long OTM put** with a **short OTM call** (bearish risk reversal). The premium collected from the short option partially or fully finances the long option, often resulting in a **zero-cost or very low-cost** entry. The resulting position behaves like a synthetic forward -- it has strong directional exposure with significant leverage but no upfront capital outlay.
+A **risk reversal** combines a **long OTM call with a short OTM put** (bullish) or a **long OTM put with a short OTM call** (bearish). The short leg finances the long leg, usually producing a **zero-cost or very low-cost** entry, and the result behaves like a **synthetic forward** — strong directional exposure with leverage and little upfront capital. In crypto it is doubly important: beyond being a directional structure, the **25-delta risk reversal is the market's standard measure of [[volatility-surface|volatility skew]]** — the price of the call wing minus the put wing — quoted continuously by [[deribit]] and [[greeks-live]]. Trading a risk reversal is therefore both a directional bet and a **skew bet**: you sell whichever wing the leveraged crowd has overbid and buy the cheaper one (see [[skew-trading]]).
 
-Risk reversals are heavily used in **forex markets** for corporate hedging and by institutional traders to express [[volatility]] skew views. In equity markets, a bullish risk reversal is economically similar to owning the stock (or a [[covered-call]] without the stock) -- you participate in upside moves and are exposed to downside risk from the short put. The strategy is a pure directional bet with leveraged exposure. It is attractive when [[implied-volatility]] skew makes puts expensive relative to calls (or vice versa), as the trader sells the overpriced side and buys the underpriced side.
+## Construction
 
-## Rules / Setup
+Two OTM legs, same expiry `T`, on [[deribit]] BTC/ETH:
 
-### Entry
-1. **Bullish risk reversal:** Sell 1 OTM put (e.g., 0.20-0.30 delta) and buy 1 OTM call (e.g., 0.20-0.30 delta). Same expiration.
-2. **Bearish risk reversal:** Sell 1 OTM call and buy 1 OTM put. Same expiration.
-3. **Strike selection:** Choose strikes equidistant from the current price, or skew them based on your directional conviction. Wider strikes = less premium but wider dead zone.
-4. **Net cost:** Aim for zero or near-zero cost. If put skew is steep (puts more expensive), a bullish risk reversal may generate a small credit. In equity markets, puts typically carry higher IV than equidistant calls, which favors bullish risk reversals.
-5. **Expiration:** 45-90 DTE for swing trades; 6-12 months for longer-term directional bets or hedges.
+- **Bullish risk reversal** — sell 1 OTM put (e.g. 25-delta, strike `K_p < S`) + buy 1 OTM call (e.g. 25-delta, strike `K_c > S`).
+- **Bearish risk reversal** — sell 1 OTM call + buy 1 OTM put.
+- **Strikes** are chosen at matching deltas (the "25-delta risk reversal" convention) or skewed to conviction. Wider strikes → less premium, wider dead zone.
+- **Net cost** depends on skew: if the short wing is richer than the long wing, the structure prints a **credit**; if the long wing is richer, a small **debit**. In crypto, whether puts or calls are richer flips with [[funding-rate|perp funding]] and market regime — unlike equities' near-permanent put skew.
 
-### Exit
-1. **Profit target:** Close when the long option has doubled or tripled in value, or when the directional thesis is achieved.
-2. **Stop-loss (downside for bullish):** If the underlying drops through the short put strike, manage the position: close for a loss, roll the put down and out, or accept assignment (if using the strategy as a cash-secured stock entry).
-3. **Breakeven zone management:** Between the two strikes, both options are OTM and the position has little value. Avoid exiting in this dead zone unless the thesis has changed.
-4. **IV management:** A drop in IV hurts the long option but helps the short option. The net effect depends on which leg has more vega exposure.
+Deribit contracts are 1 BTC / 1 ETH, **European-exercise and cash-settled** (no early assignment). Choose USDC-margined (linear) for clean USD P&L; inverse (coin-margined) embeds a coin delta on the short-put collateral.
 
-### Position Sizing
-The short put creates substantial downside risk (strike x 100 minus credit). Size as you would a cash-secured put -- ensure you have the capital or willingness to take assignment. Never allocate more than 5-10% of the account to a single risk reversal.
+## Payoff & breakevens
 
-## Payoff Profile
-- **Max profit (bullish):** Unlimited to the upside. The long call appreciates dollar-for-dollar with the underlying above its strike.
-- **Max loss (bullish):** Short put strike x 100 minus any net credit. The loss profile is identical to being long the stock below the put strike.
-- **Break-even:** Depends on net credit/debit. For a zero-cost entry, approximately at the current stock price (between the two strikes).
-- **Dead zone:** Between the two strikes, the position has near-zero P&L. Both options expire worthless and the trade is flat.
+A bullish risk reversal replicates a **long synthetic forward with a gap** between the strikes:
 
-## Example Trade
-**Asset:** GOOGL trading at $170, 60 DTE, put IV skew makes the put slightly more expensive than the call.
-1. **Sell 1 GOOGL $160 put** (0.25 delta) for $4.20.
-2. **Buy 1 GOOGL $180 call** (0.25 delta) for $3.80.
-3. **Net credit:** $4.20 - $3.80 = **$0.40** ($40 per risk reversal).
-4. **Bullish scenario:** GOOGL rallies to $195. The $180 call is worth ~$16, the $160 put is worthless. Profit: $16.00 + $0.40 = **$16.40** ($1,640 on near-zero capital).
-5. **Bearish scenario:** GOOGL drops to $150. The $180 call is worthless, the $160 put is worth ~$10. Loss: $10.00 - $0.40 = **$9.60** ($960).
-6. **Neutral scenario:** GOOGL stays at $170. Both options expire worthless. Profit: **$0.40** ($40 -- the initial credit).
+- **Above `K_c`**: profit rises ~1:1 with spot (the long call) — **unbounded upside**.
+- **Below `K_p`**: loss grows ~1:1 with spot (the short put) — **downside like a long spot/perp position** below the put strike.
+- **Between `K_p` and `K_c` (the "dead zone")**: both legs are OTM; P&L ≈ the net credit/debit, roughly flat.
+- **Breakeven**: near `K_p + |debit|` or below `K_c − credit` depending on net cost; for a true zero-cost RR, breakeven sits inside the dead zone near spot.
+- **Max loss (bullish)**: `K_p − 0` in the limit (short put to zero), i.e. essentially the full downside of a long position below `K_p`, minus any credit. **Max gain**: unbounded.
 
-## Advantages
-- **Zero or low cost:** The short option finances the long option, requiring minimal upfront capital
-- **Unlimited profit potential:** The long option provides theoretically unlimited gains in the directional leg
-- **Exploits volatility skew:** Sells the overpriced side of the skew and buys the underpriced side
-- **Leveraged directional exposure:** Participates in large moves without owning the underlying asset
-- **Versatile hedging tool:** Widely used in [[forex]] for corporate currency hedging and in equities as a synthetic stock substitute
+The bearish risk reversal is the mirror: unbounded profit as spot falls below `K_p`, unbounded-like loss as it rises above `K_c`.
 
-## Disadvantages
-- **Substantial downside risk:** The short option creates a loss profile similar to stock ownership on the wrong side
-- **Margin intensive:** The naked short option requires significant buying power
-- **Dead zone between strikes:** If the price stays between the strikes, the trade expires flat despite capital being at risk
-- **Directional dependency:** Requires a strong view on direction; range-bound markets produce no returns
-- **Assignment risk:** The short option (especially a put approaching ITM) can be assigned early, requiring capital to take delivery
+## Greeks profile
 
-## See Also
-- [[covered-call]] -- similar risk profile to a bullish risk reversal but requires stock ownership
-- [[jade-lizard]] -- adds a call spread to a short put, capping upside risk
-- [[straddle-strangle]] -- non-directional volatility strategies vs. the risk reversal's directional nature
-- [[diagonal-spread]] -- another leveraged directional strategy using time spread mechanics
-- [[seagull-option]] -- extends the risk reversal concept with a third leg to reduce cost further
+A risk reversal is primarily a **delta and skew** trade, with small gamma and small *level*-vega when the wings are symmetric:
+
+| Greek | Bullish RR | Comment |
+|---|---|---|
+| [[delta]] | Strongly **positive** (~+0.5) | The point of the trade — synthetic long exposure |
+| Gamma | ≈ 0 | Long-call gamma offsets short-put gamma |
+| [[vega]] | ≈ 0 to level, **long skew** | Insensitive to parallel IV shifts; sensitive to the *put-vs-call* skew — gains if call skew firms relative to puts |
+| [[theta]] | Small, sign depends on net credit/debit | A credit RR collects small theta; a debit RR pays it |
+
+The key exposure is **skew (differential vega across the wings)**: a bullish risk reversal is long call-skew / short put-skew. When the 25-delta risk-reversal number moves in your favour (calls bid up relative to puts), the position gains independently of spot.
+
+## Market view / when to use
+
+- **Directional conviction with a skew tailwind.** Put on a bullish RR when you are bullish **and** put skew is rich (puts overpriced) — you get paid to be long. Put on a bearish RR when you are bearish **and** call skew is rich (crowded leveraged longs, richly positive funding).
+- **Skew relative value (`[[skew-trading]]`).** Even delta-hedged, the RR expresses "the market is paying too much for downside vs upside" (or vice versa) — a mean-reversion bet on the 25-delta risk-reversal number back toward its regime norm.
+- **Leveraged replacement for spot/perp.** A zero-cost bullish RR gives long BTC/ETH exposure without posting the full notional — cheaper carry than a leveraged perp long in some funding regimes (no funding on the option legs), at the cost of the dead zone and the short-put tail.
+- **Financing a hedge.** A bearish RR (long put funded by short call) protects a spot bag cheaply — the crypto analogue of a [[collar]] without the coin.
+
+## Adjustments & management
+
+- **Roll the short wing** down-and-out (bullish RR, if spot approaches the short put) to avoid the tail; or buy it back to remove the undefined leg.
+- **Cap the tail → seagull.** Add a further-OTM long option beyond the short wing to convert the RR into a defined-risk [[seagull-option]] — the standard way to bound the naked side.
+- **Bank the skew.** If the trade was a skew bet and the 25-delta RR has reverted, close for the skew P&L regardless of spot.
+- **Delta-hedge the level** on the Deribit perp if you only want the skew exposure; the hedge pays/collects [[funding-rate|funding]].
+- **Manage into expiry** as the dead zone shrinks — a small spot move near expiry flips the position from flat to directional quickly.
+
+## Crypto specifics
+
+- **The RR *is* the crypto skew metric.** The **25-delta risk reversal** (call IV − put IV) published by [[deribit]] / [[greeks-live]] is the headline skew gauge for BTC/ETH. Trading the structure is trading that number.
+- **Skew oscillates with funding.** Unlike equities' permanent put skew, crypto skew flips: in leveraged bull runs with richly positive [[funding-rate|funding]], **call skew can trade rich to puts** (a "perpetual-heavy" surface), making bearish risk reversals a credit; after a crash, put skew firms and bullish risk reversals pay. Read funding and perp OI before choosing the direction.
+- **Inverse vs linear settlement.** On inverse (coin-margined) contracts the short put's assignment-equivalent exposure and its collateral are both in the coin — a quanto-like double hit if spot falls; **USDC-margined (linear)** removes it. Match collateral to intent.
+- **European, cash-settled → no early assignment**, but the short wing still carries full undefined tail risk to the index at expiry.
+- **24/7 & weekend gaps.** The short wing can be blown through by an unbounded weekend gap with no ability to trade out — the single biggest hazard of an uncapped crypto RR. Size the short leg for a Black-Thursday move, not an average day.
+- **No §1256.** Offshore Deribit contracts get no [[section-1256-contracts|§1256]] 60/40 treatment.
+- **Alt-option liquidity.** Clean 25-delta wings exist mainly on BTC/ETH; alt risk reversals are wide and shallow.
+
+## Risks
+
+- **Naked short-wing tail** — a bullish RR loses like long spot below `K_p`, and crypto's weekend/overnight gaps are unbounded. This is the defining risk.
+- **Skew regime shift** — the skew you sold can get *richer* before it reverts (the RR number runs against you).
+- **Dead-zone drag** — range-bound tape leaves the trade flat while capital/margin is committed.
+- **Margin intensity** — the short wing consumes Deribit portfolio margin that expands on a DVOL spike.
+- **Coin-margin wrong-way risk** on inverse contracts.
+- **Directional dependency** — a pure RR needs the move; without a skew or spot thesis it is idle risk.
+
+## Worked crypto example
+
+**Setup (ETH, 30 DTE, bullish + put skew rich).** ETH spot **$3,000** after a sharp dip; DVOL elevated and **put skew rich** (25-delta risk reversal deeply negative — puts bid). You are bullish on a recovery.
+
+**Trade — bullish risk reversal (USDC-margined):**
+- **Sell** 1 ETH 25-delta **put @ $2,600** for ≈ **$130**
+- **Buy** 1 ETH 25-delta **call @ $3,450** for ≈ **$110**
+- **Net credit ≈ $20**; delta ≈ +0.5 (synthetic long). Dead zone $2,600–$3,450.
+
+**Path A — recovery (the win).** ETH rallies to **$3,700**. The call is worth ≈ $250, the short put expires worthless. Profit ≈ $250 + $20 = **≈ +$270** on near-zero capital. If put skew *also* normalized on the way up, the short put decayed even faster — a skew tailwind on top of the delta gain.
+
+**Path B — dead zone.** ETH finishes at **$3,100** (between strikes). Both legs expire worthless. P&L = **+$20** (the credit).
+
+**Path C — further crash (the tail).** ETH gaps to **$2,300** over a weekend. The short put is ≈ $300 ITM. Loss ≈ $300 − $20 = **≈ −$280**, and worse the further it falls — identical downside to holding spot below $2,600. This is why a disciplined desk caps it into a [[seagull-option]] by buying a $2,300 put.
+
+## Getting the Data (CryptoDataAPI)
+
+The **skew inputs** a risk reversal trades — the 25-delta risk-reversal number and the raw IV surface — are **Deribit / [[greeks-live]]** products and are *not* served by CryptoDataAPI. [[cryptodataapi]] supplies the drivers and context: funding (the skew driver), options OI/max-pain, dealer gamma, and vol regime.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding; richly positive → call-skew rich (favours bearish RR credit)
+- `GET /api/v1/market-intelligence/funding-rates` — cross-exchange funding
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — perp OI (crowded-long context for skew)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, [[max-pain]] strike
+- `GET /api/v1/quant/gex` — [[gamma-exposure|Gamma Exposure]] (dealer inventory / cascade risk into the short wing)
+- `GET /api/v1/volatility/regime` — vol regime (context for wing pricing)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history (skew-driver backtest)
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]]
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+## Related
+
+- [[skew-trading]] — trading the 25-delta risk-reversal number itself
+- [[seagull-option]] — extends the RR with a third leg to cap the naked tail
+- [[covered-call]], [[collar]] — related directional/hedging structures
+- [[jade-lizard]] — short put + call spread, a cousin credit structure
+- [[straddle-strangle]] — non-directional vol vs the RR's directional/skew nature
+- [[crypto-options-volatility-selling]] — where skew selection informs the vol book's wings
+- [[funding-rate]] — the perp linkage that flips crypto skew
+- [[volatility-surface]], [[implied-volatility]] — what the wings price
+- [[deribit]], [[greeks-live]] — venue and skew/surface source
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+
+## Sources
+
+- McMillan, *Options as a Strategic Investment* (5th ed.) — combos / synthetic forwards and their risk profile.
+- Natenberg, *Option Volatility and Pricing* (2nd ed.) — risk reversals and volatility skew.
+- [[deribit]] / [[greeks-live]] documentation — 25-delta risk-reversal skew quoting, European cash settlement, inverse vs USDC-margined contracts.

@@ -1,96 +1,143 @@
 ---
-title: "Covered Call"
+title: "Covered Call (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-07
+updated: 2026-07-14
 status: good
-tags: [options, income, premium-selling, covered-call, hedging, equity-options]
-aliases: ["Buy-Write", "Covered Call Writing", "covered-calls", "covered-call-strategy"]
+tags: [options, crypto, income, premium-selling, covered-call, derivatives, bitcoin, ethereum]
+aliases: ["Buy-Write", "Covered Call Writing", "Crypto Covered Call", "BTC Covered Call", "ETH Covered Call", "covered-calls", "covered-call-strategy"]
 strategy_type: hybrid
 timeframe: swing|position
-markets: [stocks, crypto]
+markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
-related: ["[[wheel-strategy]]", "[[iron-condor]]", "[[straddle-strangle]]", "[[implied-volatility]]", "[[delta]]", "[[option-volatility-and-pricing]]"]
+related: ["[[wheel-strategy]]", "[[cash-secured-put]]", "[[collar]]", "[[protective-put]]", "[[options-selling]]", "[[crypto-options-volatility-selling]]", "[[iron-condor]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[theta]]", "[[vega]]", "[[max-pain]]", "[[cryptodataapi]]"]
 ---
 
-# Covered Call
+# Covered Call (Crypto)
 
 ## Overview
 
-The Covered Call is the most common [[options]] income strategy. The trader owns 100 shares of the underlying stock (or equivalent crypto position) and sells one [[call-option]] against those shares, collecting the option [[premium]] as immediate income. The premium lowers the effective cost basis of the position, providing a small downside buffer, while capping the upside at the chosen [[strike-price]] (Source: [[book-option-volatility-and-pricing]]). The strategy is inherently **bullish-to-neutral** -- it performs best when the underlying drifts sideways or rises modestly, allowing the sold call to expire worthless so the trader keeps both the shares and the full premium.
+The covered call is the most common [[options]] income structure, re-scoped here for crypto. The trader holds spot [[bitcoin|BTC]] or [[ethereum|ETH]] (or a BTC ETF position) and sells one [[call-option|call]] against those coins on [[deribit]], collecting the option [[premium]] as immediate income. The premium lowers the effective cost basis and provides a small downside buffer, while capping the upside at the chosen [[strike-price]]. The structure is **bullish-to-neutral** — it performs best when spot drifts sideways or rises modestly, so the short call expires worthless and the writer keeps both the coins and the full premium.
 
-Covered calls are popular among long-term investors who want to generate yield on holdings they intend to keep. In sideways or slightly bullish markets, they consistently outperform a simple buy-and-hold approach. The trade-off is clear: you sacrifice unlimited upside potential in exchange for guaranteed premium income today.
+Because crypto [[implied-volatility|IV]] (measured by Deribit's [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]]) runs structurally far above equity IV, crypto covered-call premium yields are correspondingly richer — annualized premium on a monthly ~0.25-delta call routinely runs 15-40%+ versus 4-10% for large-cap equities. That yield is not free money: it is compensation for crypto's higher realized volatility and genuinely fatter tail. The strategy has been industrialized by on-chain option vaults (Ribbon/Aevo lineage) and by listed BTC covered-call ETFs.
 
-## Rules
+## Construction
 
-### Entry
-1. **Own 100 shares** (or the equivalent lot size) of the underlying asset. Ensure you are comfortable holding this stock long-term.
-2. **Sell 1 OTM call option** per 100 shares, typically 1-2 strikes above the current price. Select a strike with a [[delta]] of 0.20-0.35 for a balanced premium vs. assignment probability.
-3. **Choose expiration:** 30-45 days to expiration (DTE) captures the steepest portion of the [[theta]] decay curve. Weekly expirations offer more frequent premium but require more management.
-4. Favor periods of elevated [[implied-volatility]] (IV rank above 30) to maximize the premium collected.
+- **Underlying:** spot BTC/ETH held on the exchange or in custody, OR a BTC-ETF share position. On-chain, a covered-call vault deposits the coin and auto-writes calls.
+- **Short leg:** sell 1 out-of-the-money (OTM) call per unit of coin, typically at a [[delta]] of 0.20-0.35 — a balance between premium and cap probability. Deribit contracts are 1 BTC / 1 ETH per contract.
+- **Settlement choice:** sell a **USDC-margined (linear)** call for clean USD income, or a **coin-margined (inverse)** call to receive the premium in BTC/ETH and stack coin (accepting quanto-like non-linearity — see *Crypto specifics*).
+- **Tenor:** 21-45 DTE captures the steepest [[theta]] decay. Weeklies pay more frequently but carry hotter gamma into crypto's continuous gap risk.
+- **IV gate:** prefer writing when DVOL is in the upper half of its trailing range (rich premium); avoid selling calls into a suppressed-vol trough.
 
-### Exit
-1. **Max profit exit:** The call expires worthless (price stays below strike). Keep the premium and sell a new call for the next cycle.
-2. **Roll up and out:** If the stock rallies through your strike before expiration, buy back the call and sell a higher strike / further-dated call for a net credit.
-3. **Close early:** Buy back the call when it has decayed to 50-80% of the premium collected, then re-sell a new one.
-4. **Stop-loss on shares:** If the stock drops significantly (e.g., below a key [[support]] level), close the entire position. The collected premium provides only a small cushion, not full protection.
+## Payoff & breakevens
 
-### Position Sizing
-Risk no more than 5-10% of the portfolio in a single covered call position. Diversify across multiple underlyings to reduce concentration risk.
+At expiry the payoff is the classic bent line: long spot 1-for-1 below the strike (lifted by the premium), then flat above the strike.
 
-## Indicators Used
-- [[implied-volatility]] / IV rank -- higher IV means richer premiums
-- [[delta]] -- guides strike selection (0.20-0.35 OTM is typical)
-- [[theta]] -- measures daily time decay working in the seller's favor
-- [[support-and-resistance]] -- avoid selling calls below key resistance where a breakout is likely
+| Point | Value |
+|---|---|
+| **Breakeven** | Spot cost − premium received |
+| **Max profit** | (Strike − spot cost) + premium, reached at/above the strike |
+| **Max loss** | Spot → 0 minus premium (same as holding the coin, premium-buffered) |
 
-## Example Trade
-**Asset:** AAPL trading at $185
-1. Own 100 shares of AAPL (cost basis $180).
-2. Sell 1 AAPL $195 call, 35 DTE, for $3.20 premium ($320 total). The $195 strike has a delta of ~0.25.
-3. **Scenario A -- stock stays below $195:** The call expires worthless. Keep $320 premium. Annualized yield: ($320 / $18,500) x (365/35) = ~18%. Sell a new call for the next cycle.
-4. **Scenario B -- stock rallies to $200:** Shares are called away at $195. Profit: ($195 - $180) x 100 + $320 = $1,820. Good return, but you missed the move from $195 to $200.
-5. **Scenario C -- stock drops to $170:** Option expires worthless (keep $320), but shares lost $1,500 in value. Net loss: $1,180. The premium offset only ~21% of the decline.
+A covered call is **synthetically a short put**: identical economics to a [[cash-secured-put]], which is why both legs sit inside the [[wheel-strategy]]. On Deribit's cash-settled European options the "cap" is realized as a cash payment at expiry rather than by delivery of coin (see *Crypto specifics*), but the P&L shape is identical.
 
-## Performance Characteristics
-- **Win Rate:** 70-85%, since OTM calls expire worthless the majority of the time.
-- **Profit Factor:** 1.5-2.0. Frequent small wins offset by occasional larger losses when the stock drops sharply.
-- **Best Market Conditions:** Sideways to slightly bullish. Low-to-moderate [[volatility]] environments.
-- **Worst Market Conditions:** Strong bull markets (upside is capped) and sharp sell-offs (premium cushion is insufficient).
-- **Benchmark:** The CBOE S&P 500 BuyWrite Index (BXM) has historically matched or slightly trailed the S&P 500 in total return but with noticeably lower volatility.
+## Greeks profile
 
-## Advantages
-- Simple to understand and execute -- the ideal first options strategy for beginners
-- Generates consistent income on existing long positions, lowering cost basis over time
-- Reduces portfolio [[volatility]] compared to holding shares alone
-- [[theta]] decay works in your favor every day
-- Defined maximum loss (stock goes to zero minus premium received)
+Dominated by the long spot (delta ≈ +1.0) with the short-call overlay subtracted on top:
 
-## Disadvantages
-- **Capped upside:** You forgo all gains above the strike price, which stings in strong rallies
-- **Limited downside protection:** The premium collected is a small buffer, not a hedge
-- **Opportunity cost:** If the stock surges, you underperform simple buy-and-hold significantly
-- **Capital intensive:** Requires owning 100 shares per contract, which is expensive for high-priced stocks
-- **Assignment risk:** Early assignment is possible, especially near ex-dividend dates (Source: [[book-option-volatility-and-pricing]])
+| Greek | Sign | Driver |
+|---|---|---|
+| [[delta]] | Positive, < 1.0 (≈ +0.65-0.80 at a 0.25-delta call) | Long coin minus the short call's delta; upside progressively given up toward the strike |
+| [[gamma]] | Negative (small) | From the short call; matters near expiry/ATM — the reason to manage before the last week |
+| [[theta]] | Positive | The income engine; the short call decays in the writer's favor, fastest in the 21-45 DTE window |
+| [[vega]] | Negative | A DVOL spike marks the short call up (paper loss) even with spot flat; rich IV at *entry* is what makes the write worthwhile |
 
-## Covered Calls in Long/Short Portfolios
+Positive theta and negative vega are the short-premium signature: the writer is paid for time and is short volatility, harvesting the crypto [[variance-risk-premium|variance risk premium]].
 
-Within a long-short-equity framework, covered calls play a specific role:
+## Market view / when to use
 
-- Used to generate income on long equity positions while waiting for a fundamental catalyst
-- The sold call partially funds the purchase of put options on short positions, reducing overall portfolio cost
-- [[trade-repair-and-rolling|Rolling up and out]] is a key management technique when the underlying rallies through the strike
-- In this framework, covered calls are a component of portfolio construction rather than a standalone strategy
+- **Sideways-to-mildly-bullish** on the coin over the next few weeks; you would be content to sell at the strike.
+- You hold long-term BTC/ETH and want to **monetize the position's high IV** without selling the coins.
+- DVOL is elevated (rich premium) but you do not expect a violent breakout above the strike.
+- You want a yield overlay that stacks with [[staking|staking yield]] (ETH) or with the [[funding-rate|funding]] carry from a [[cash-and-carry]] leg.
 
-## See Also
-- [[wheel-strategy]] -- extends the covered call into a full income cycle with cash-secured puts
-- [[iron-condor]] -- a defined-risk premium-selling strategy that does not require owning shares
-- [[implied-volatility]] -- the key driver of option premium pricing
-- [[theta]] -- the Greek that makes covered calls profitable over time
-- [[cash-secured-put]] -- the other side of the wheel, and a natural companion to covered calls
-- [[trade-repair-and-rolling]] -- techniques for managing covered calls that go against you
-- [[covered-call-vs-cash-secured-put]] -- side-by-side comparison of these two income strategies
+Avoid in strong trending bull phases (the cap causes painful underperformance versus simply holding) and understand the premium is a thin cushion, not a hedge, in a crash.
+
+## Adjustments & management
+
+- **Take profit early:** buy the call back at 50-80% of max credit, then re-write — improves premium capture per unit of tail risk.
+- **Roll up and out:** if spot rallies through the strike, buy back the call and sell a higher-strike, later-dated call, ideally for a net credit, to lift the cap. See [[trade-repair-and-rolling]].
+- **Roll down after a drop:** if spot falls and the call is nearly worthless, roll to a lower strike for meaningful premium — only if you are comfortable capping at the new, lower level.
+- **Manage before the last week:** unlike equities there is no market close, so an ATM call can swing across the strike on a weekend move; close or roll ~7-14 DTE to sidestep the hottest gamma.
+- **Sizing:** one short call per unit of coin held — never more (that creates naked upside). Keep any single position to a sensible book weight; size the coin position as if the premium did not exist.
+
+## Crypto specifics
+
+- **Spot BTC/ETH or via Deribit.** The canonical construction is spot coin in custody + a Deribit short call. On-chain covered-call vaults and BTC covered-call ETFs (e.g., listed buy-write products) automate the same payoff.
+- **No early assignment / cash settlement.** Deribit options are **European and cash-settled to the Deribit index** — there is no early [[assignment]] and no shares are "called away." If the call finishes ITM it settles in cash (index − strike), which offsets your spot appreciation above the strike; **you keep the coins** (and any staked position) and pay the cap in cash. This is a genuine simplification versus American-style US equity options. Note that **BTC-ETF options (e.g., IBIT) are American-style and physically settled** in ETF shares, so those behave like equity covered calls with real early-assignment mechanics.
+- **Inverse vs linear settlement.** A **coin-margined (inverse)** call is quoted and settled in BTC/ETH — the premium arrives as coin, but payoff is non-linear in USD (a quanto-like effect: your collateral and the option both move with spot). A **USDC-margined (linear)** call gives a clean USD payoff at the cost of tying up stablecoin. Match the collateral to the exposure you actually want.
+- **DVOL makes the premium rich — and the risk real.** High DVOL is why crypto buy-write yields dwarf equity yields; it also means the moves the cap gives up (and the drawdowns the buffer fails to cover) are larger.
+- **24/7 markets.** Theta accrues over weekends and holidays; there is no session gap, but gap risk is continuous and weekend liquidity is thin. Weeklies are especially gamma-sensitive.
+- **No [[section-1256-contracts|§1256]] treatment.** Crypto options (and crypto-ETF options) do not receive the 60/40 blended rate that broad-based US index options enjoy — premium and cap events are ordinary/short-term capital events (ordinary income or CGT in AU depending on trader status). After-tax yield is materially below the headline.
+- **Perp-funding interaction.** In positive-[[funding-rate|funding]] (leveraged-long) regimes, call skew firms and buy-write premiums richen — a tailwind for the writer. The covered call competes with, and can be stacked on top of, [[cash-and-carry|cash-and-carry]] funding carry.
+- **Staking-yield interaction.** On ETH you can write calls against staked/liquid-staked ETH to stack **staking yield + call premium** on the same coin; because Deribit settles in cash you never have to deliver the (possibly locked) staked ETH. Watch liquidity of the staked asset if you must post it as margin.
+
+## Risks
+
+- **Capped upside:** all gains above the strike are forgone — acute in crypto's explosive rallies.
+- **Thin downside buffer:** the premium offsets only a few percent of a 30-50% crash.
+- **Coin-margined non-linearity:** using inverse options couples collateral and payoff to spot.
+- **Whipsaw / path dependency:** roll down after a drop, then a V-shaped recovery rips through the lower strike — locking the decline while forfeiting the rebound.
+- **Vol compression:** systematic vault and ETF call-writing supply compresses call-side premium over time.
+- **Venue concentration:** Deribit dominates crypto options; a venue outage during a vol event is hard to hedge.
+
+## Worked crypto example
+
+**Setup (illustrative).** Hold 10 ETH at spot $3,050. ETH DVOL 58 (rich). Sell 10 monthly (35 DTE) USDC-margined $3,450 calls (~0.22 delta) at ~$95 each → **$950 premium**.
+
+- **Spot below $3,450 at expiry:** calls expire worthless. Keep $950 (~1.0% of the $30,500 position for the month, ≈ 12-13% annualized) plus any spot drift; re-write next cycle.
+- **Spot rallies to $3,700:** calls settle ITM. You keep the 10 ETH (cash-settled, not called away) and pay ~$250 × 10 = $2,500 cap, offset by your $6,500 spot gain — net +$4,000 + $950 premium, but you "miss" the move above $3,450.
+- **Spot drops to $2,700:** calls expire worthless (keep $950), but the 10 ETH lost $3,500. Net −$2,550 — the premium offset ~21% of the decline.
+
+## Getting the Data (CryptoDataAPI)
+
+DVOL and the raw IV surface are Deribit / [[greeks-live]] products. [[cryptodataapi]] supplies the complementary options-flow, volatility-regime, and funding context for strike selection and timing.
+
+**Live data:**
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (dealer-positioning context for strike choice)
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding (call-skew driver; richer premium when positive)
+
+**Historical data:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime + 60-day history
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — OHLCV for realized-vol and cost-basis tracking
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+## Related
+
+- [[wheel-strategy]] — extends the covered call into a full income cycle with cash-secured puts
+- [[cash-secured-put]] — the synthetic-short-put counterpart; the other half of the wheel
+- [[collar]] — adds a protective put to a covered-call position
+- [[protective-put]] — the opposite structure (buying puts for protection rather than selling calls for income)
+- [[options-selling]] — the broader premium-selling family this belongs to
+- [[crypto-options-volatility-selling]] — the systematic short-vol book on Deribit BTC/ETH
+- [[iron-condor]] — defined-risk premium selling without holding the coin
+- [[deribit]] — the venue; DVOL and surface source
+- [[greeks-live]] — the analytics/RFQ workbench
+- [[implied-volatility]] — the driver of premium richness
+- [[funding-rate]] — the perp linkage that shapes crypto call skew
+- [[staking]] — stackable yield on ETH covered calls
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[theta]] — the income Greek; [[vega]] — the IV-spike risk
 
 ## Sources
-- [[book-option-volatility-and-pricing]] — Natenberg covers covered call mechanics, early assignment risk near dividends, and the trade-off between premium income and capped upside
+
+- [[deribit]] / [[greeks-live]] documentation — DVOL, European cash settlement, coin-margined vs USDC-margined (linear) option mechanics
+- [[crypto-options-volatility-selling]] — the wiki's canonical treatment of the crypto variance risk premium these premiums come from

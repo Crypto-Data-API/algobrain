@@ -2,9 +2,11 @@
 title: "Covered Call Strategy"
 type: redirect
 created: 2026-04-15
-updated: 2026-06-10
+updated: 2026-07-14
 status: good
 aliases: ["Covered Call Strategy", "Covered Call Writing", "Buy-Write"]
 ---
 
-See [[covered-calls]].
+# Covered Call Strategy
+
+See [[covered-call]].

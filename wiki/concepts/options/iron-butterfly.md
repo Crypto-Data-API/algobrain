@@ -2,15 +2,17 @@
 title: "Iron Butterfly"
 type: redirect
 created: 2026-04-22
-updated: 2026-06-11
+updated: 2026-07-14
 status: good
-tags: [options, neutral, theta]
+tags: [options, crypto, redirect]
 aliases: ["Iron Butterfly", "Iron Fly", "Ironfly"]
-related: ["[[iron-fly]]"]
+related: ["[[iron-butterfly]]", "[[iron-condor]]"]
 ---
 
-See [[iron-fly]] for the canonical treatment of the iron butterfly — a short ATM straddle wrapped in long OTM wings. That page covers the structure, Greeks profile (high theta, high gamma, negative vega), entry/exit and management rules (25%-of-max-profit, 21-DTE), the variance-risk-premium edge, capacity, and failure modes.
+# Iron Butterfly (redirect)
 
-For the head-to-head with its wider sibling, see [[iron-condor-vs-iron-butterfly]].
+The canonical, crypto-scoped treatment lives at **[[strategies/technical-analysis/iron-butterfly|Iron Butterfly]]** — a short ATM straddle wrapped in long OTM wings, framed for [[deribit]] BTC/ETH options: construction, payoff/breakevens, the strongly-negative-gamma / positive-theta / negative-vega Greeks profile, DVOL-regime timing, adjustments, crypto specifics (USDC vs inverse settlement, 24/7 gaps, no §1256, perp-funding skew), and a worked ETH example.
 
-Related: [[iron-condor]], [[credit-spread]], [[straddle]], [[theta]], [[vega]], [[gamma]], [[implied-volatility]].
+See also [[iron-condor]] (the wider, lower-gamma cousin), [[butterfly-spread]] (the debit version of the same tent), and the head-to-head [[iron-condor-vs-iron-butterfly]]. The equity/index treatment is at [[iron-fly]].
+
+Related: [[crypto-options-volatility-selling]], [[deribit]], [[implied-volatility]], [[theta]], [[vega]], [[gamma]].

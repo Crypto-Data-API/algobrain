@@ -2,61 +2,137 @@
 title: "Double Diagonal"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
-tags: [options, double-diagonal, diagonal-spread, income, range-bound, advanced, time-decay]
+tags: [options, double-diagonal, diagonal-spread, income, theta, crypto, derivatives]
+aliases: ["Double Diagonal Spread", "Calendarized Iron Condor"]
 strategy_type: quantitative
-markets: [stocks]
+timeframe: swing
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-related: ["[[diagonal-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[theta]]"]
+related: ["[[diagonal-spread]]", "[[calendar-spread]]", "[[iron-condor]]", "[[short-strangle]]", "[[theta]]", "[[vega]]", "[[funding-rate]]", "[[deribit]]", "[[crypto-options-volatility-selling]]", "[[trade-repair-and-rolling]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
 ---
 
 # Double Diagonal
 
 ## Overview
 
-The Double Diagonal combines a diagonal call spread and a diagonal put spread into a single position. The trader sells short-term OTM options on both sides (a call above and a put below the current price) and buys longer-dated options at different strikes as a hedge. This structure blends **directional flexibility** with **time decay income**: the short-dated options decay rapidly while the longer-dated wings retain value. It functions like a wider, more flexible [[iron-condor]] with the added dimension of differing expirations across the short and long legs.
+The double diagonal combines a **diagonal call spread** and a **diagonal put spread** into one position: sell a near-term OTM call and a near-term OTM put (a front-month [[short-strangle]]) and buy longer-dated OTM options further out on each side as protection. It blends **range-bound [[theta]] income** with **calendar structure** — the short-dated legs decay fast while the longer-dated wings retain value and define the risk. Think of it as a **[[iron-condor]] whose long wings are pushed to a later expiry**, giving a wider profit tent, net-long vega, and more room to adjust.
 
-## Setup
+In crypto this is a way to **collect the [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] premium on a range-bound BTC/ETH view** while keeping genuinely capped tails — essential given crypto's fat-tailed, 24/7 gaps. It sits between the pure short-vol [[crypto-options-volatility-selling|premium-selling]] book and a defined-risk condor, adding a long-vega tilt from the back-month wings.
 
-1. **Sell 1 short-term OTM call** (front-month, 30-45 DTE) above the current price.
-2. **Buy 1 longer-term OTM call** (back-month, 60-90 DTE) at a higher strike.
-3. **Sell 1 short-term OTM put** (same front-month expiration) below the current price.
-4. **Buy 1 longer-term OTM put** (same back-month expiration) at a lower strike.
-5. Net result is typically a small debit or near-neutral cost at entry. The short legs generate [[theta]] income; the long legs define risk.
+## Construction
 
-## Payoff Profile
+Four legs, two expiries, on BTC or ETH [[deribit]] options, around spot:
+
+| Leg | Action | Side | Strike | Tenor |
+|---|---|---|---|---|
+| Short | Sell call | Upper | OTM above spot | Front (21-45 DTE) |
+| Long | Buy call | Upper | Further OTM | Back (60-120 DTE) |
+| Short | Sell put | Lower | OTM below spot | Front (21-45 DTE) |
+| Long | Buy put | Lower | Further OTM | Back (60-120 DTE) |
+
+- **Net cost:** typically a small **debit or near-neutral** at entry; the front-month shorts fund most of the back-month wings.
+- The **short strikes** set the profit zone; the **long back-month wings** define maximum risk and carry residual value after the front-month expiry.
+
+## Payoff & Breakevens
 
 | Scenario | Outcome |
 |---|---|
-| Stock stays between short strikes | Short options decay; long options retain value; maximum profit zone |
-| Stock drifts toward one short strike | One side under pressure; the other decays favorably; partial profit |
-| Stock breaks past a long strike | Loss on that side; long option limits the damage; defined risk |
+| Spot stays between the short strikes | Front shorts decay, back wings retain value → **max-profit zone** |
+| Spot drifts toward one short strike | That side pressured, the other decays favourably → partial profit |
+| Spot breaks past a long strike | Loss on that side, capped by the back-month wing → **defined risk** |
 
-**Max profit** is realized when the stock sits between the two short strikes at front-month expiration. **Max loss** is limited by the long-dated wings, though exact figures depend on the time remaining on the long legs.
+- **Max profit:** spot between the two short strikes at **front-month expiry**.
+- **Max loss:** bounded by the back-month wings, but the exact figure depends on the time value remaining in the long legs at the front expiry (not a fixed number like a same-expiry condor).
+- **Breakevens:** just outside each short strike, adjusted for the net debit and the residual value of the long wings.
 
-## When to Use
+## Greeks Profile
 
-- You expect the stock to be **range-bound** in the near term but want flexibility to adjust if it drifts.
-- You want [[theta]] income from selling short-term options while maintaining longer-dated protection.
-- You prefer a wider profit zone and more adjustment opportunities than a standard [[iron-condor]].
-- You are comfortable managing a **four-leg, two-expiration** structure.
+- **[[delta]]:** ≈ neutral at entry (balanced call and put sides); tilts as spot approaches either short strike.
+- **[[gamma]]:** **net short** near the short strikes into front expiry — the range-holding risk.
+- **[[vega]]:** **net long** — the back-month longs carry more vega than the front shorts, so a rising [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] helps overall (a key contrast with a short-vega iron condor). Term structure matters: you are short front-month, long back-month vol.
+- **[[theta]]:** **net positive** while spot sits inside the tent — the front shorts decay faster than the back longs.
 
-## Advantages
-- Wider profit zone than an iron condor due to the calendar-like time spread component
-- Defined risk through the longer-dated protective wings
-- The surviving long options retain value after front-month expiration, allowing follow-up trades
-- Flexible to adjust -- short legs can be rolled to new strikes or expirations
+## Market View / When to Use
 
-## Disadvantages
-- Complex four-leg structure with two different expirations -- harder to manage and analyze
-- Wider bid-ask spreads on four simultaneous legs increase execution cost
-- Profit profile is non-linear and harder to visualize than simpler strategies
-- Requires active management: rolling short legs, monitoring both expirations, adjusting as the stock moves
-- [[vega]] risk cuts both ways -- an IV spike helps long legs but hurts profitability if you need to close early
+- You expect BTC/ETH to be **range-bound near-term** but want flexibility if it drifts.
+- You want **[[theta]] income** from the front-month strangle **plus** back-month protection — a wider, safer alternative to a bare [[short-strangle]].
+- **[[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] term structure** favours it: front-month IV rich relative to back-month (a downward-sloping term structure) improves the sell-front/own-back economics.
+- You are comfortable managing a **four-leg, two-expiry** book on [[deribit]].
 
-## See Also
-- [[diagonal-spread]] -- the single-side building block of the double diagonal
-- [[calendar-spread]] -- a simpler time-spread structure at a single strike
-- [[iron-condor]] -- a similar range-bound income strategy with same-expiration legs
+## Adjustments & Management
+
+- **Roll the front shorts:** as they decay or the front expiry nears, roll to the next cycle for fresh credit — the recurring income engine (see [[trade-repair-and-rolling]]).
+- **Recentre on drift:** if spot trends toward one short strike, roll that side's short out/away and/or shift strikes to re-centre the tent.
+- **Keep the wings:** after front-month expiry the back-month longs survive with residual value — reuse them as the protective side of the next front-month strangle.
+- **Manage front-leg gamma by ~21 DTE**, sharper in crypto given weekend gap risk.
+- **Vega awareness:** because the book is net-long vega, a DVOL collapse hurts if you must unwind early; a DVOL spike helps the wings but can widen the short-leg marks.
+
+## Crypto Specifics
+
+- **Venue & settlement.** [[deribit]] BTC/ETH options are **European, cash-settled** to the index — **no early assignment** on the front shorts and no delivery on any leg, which materially simplifies a four-leg, two-expiry structure versus American equity options.
+- **Fat tails make the wings non-negotiable.** Crypto can gap far past a short strike; the back-month long wings are what turn a naked short-strangle into a defined-risk trade — do not run this without them.
+- **[[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] term structure is the core edge.** The trade is explicitly short front-month vol and long back-month vol; a rich front / cheaper back structure is the ideal entry, and DVOL is the reference for both points.
+- **Inverse vs linear.** **USDC-margined (linear)** contracts give clean USD P&L and a symmetric tent — preferred here. **Coin-margined (inverse)** contracts skew the payoff because collateral value moves with spot, distorting the "range-bound, delta-neutral" intent.
+- **[[funding-rate|Perp-funding]] interaction.** Funding and 25-delta skew reveal which wing the leveraged crowd has overbid; tilt the short strikes to sell the richer wing. A residual delta can be hedged with the Deribit perp, paying/collecting funding on the hedge.
+- **24/7.** Continuous trading gives more adjustment windows but also removes the overnight halt that would otherwise cap an adverse move against the front shorts.
+- **No [[section-1256-contracts|§1256]].** No 60/40 treatment; the income is ordinary/short-term.
+- **Alt-option liquidity limits.** Four legs across two expiries need real depth — practical only on BTC and ETH; alt options are too thin and their dated-expiry coverage too sparse.
+
+## Risks
+
+- **Range-break loss** if spot trends hard past a short strike — capped by the wings but still the primary loss mode.
+- **Time-value uncertainty at front expiry:** max loss is not a clean fixed number because it depends on the back-month legs' remaining value.
+- **Net-long-vega give-back:** a DVOL collapse hurts the back-month wings if you must exit early.
+- **Execution & cost:** four simultaneous legs across two expiries in crypto's wider bid-ask raise entry/exit cost meaningfully — use combo/RFQ.
+- **Management intensity:** rolling front legs, monitoring two expiries, and recentring on drift make this an active book.
+- **Short-leg [[gamma-risk]]** into front expiry, worse without a session close.
+
+## Worked Crypto Example
+
+**Setup.** ETH at **$3,000** on [[deribit]] (USDC-margined). You expect ETH to hold roughly **$2,600-$3,400** near-term; front-month [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] (~60) sits rich to the back-month (~52).
+
+1. **Sell 1 ETH $3,300 call** (front, 30 DTE) at **$120**.
+2. **Buy 1 ETH $3,600 call** (back, 90 DTE) at **$110**.
+3. **Sell 1 ETH $2,700 put** (front, 30 DTE) at **$115**.
+4. **Buy 1 ETH $2,400 put** (back, 90 DTE) at **$105**.
+5. **Net cost ≈ ($120 + $115) − ($110 + $105) = +$20 credit** per structure (near-neutral entry).
+6. **Path — range holds:** ETH oscillates $2,800-$3,150 into front expiry; both front shorts expire worthless (keep ~$235 of decay), the back-month longs retain most of their value. **Roll a new front-month strangle** against the surviving wings for another cycle.
+7. **Path — drift up:** ETH pushes to $3,350 near front expiry; roll the $3,300 short call up-and-out for credit and let the $3,600 back call cap the risk.
+8. **Path — sharp break:** ETH gaps to $3,750; the front short call is ITM but the $3,600 back-month long wing caps the loss — the defined-risk feature doing its job.
+
+## Getting the Data (CryptoDataAPI)
+
+Strike/expiry selection and the [[deribit#DVOL Index — The "VIX of Crypto"|DVOL]] term structure come from [[deribit]] / [[greeks-live]]. [[cryptodataapi]] supplies the **volatility-regime, funding/skew, options-flow, and dealer-gamma** context for range assessment and short-leg timing.
+
+**Live data:**
+- `GET /api/v1/volatility/regime` — per-asset vol regime; sell the front strangle into *mean_reverting* / *normal*, avoid *vol_shock*
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, [[max-pain]] (range/pinning context for strike placement)
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — funding / skew read for wing tilt
+- `GET /api/v1/quant/gex` — dealer Gamma Exposure (long-gamma dealers dampen range; short-gamma amplify breakouts)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (breakout / vol-shock early warning)
+
+**Historical data:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive to study realized range vs the profit tent
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]] and volatility-regime detail on [[cryptodataapi]]. IV/DVOL surface and term structure are Deribit / [[greeks-live]].
+
+## Related
+
+- [[diagonal-spread]] — the single-side building block of the double diagonal
+- [[calendar-spread]] — the same-strike two-expiry structure it generalises
+- [[iron-condor]] — the same-expiry range trade; the double diagonal is its calendarised, net-long-vega cousin
+- [[short-strangle]] — the front-month core the wings protect
+- [[crypto-options-volatility-selling]] — the DVOL-premium engine this taps in a defined-risk form
+- [[funding-rate]] — the perp linkage shaping skew and wing tilt
+- [[trade-repair-and-rolling]] — the front-leg rolling framework
+- [[deribit]] — venue; European cash settlement, DVOL and term-structure source
+- [[section-1256-contracts]] — the tax treatment crypto options do **not** receive

@@ -2,85 +2,70 @@
 title: "IV Crush"
 type: concept
 created: 2026-05-07
-updated: 2026-06-11
+updated: 2026-07-14
 status: good
-tags: [options, volatility, derivatives, earnings, risk-management]
+tags: [options, volatility, derivatives, event-driven, risk-management, crypto]
 aliases: ["IV Crush", "Implied Volatility Crush", "Vol Crush", "Volatility Crush"]
 domain: [derivatives, options]
-prerequisites: ["[[implied-volatility]]", "[[vega]]", "[[options-greeks]]"]
+prerequisites: ["[[implied-volatility]]", "[[vega]]", "[[greeks]]"]
 difficulty: intermediate
-related: ["[[volatility-risk-premium-decay]]", "[[long-straddle]]", "[[short-volatility-strategies]]", "[[options-trading-pitfalls]]", "[[options-trader-psychology]]", "[[volatility-term-structure]]", "[[volatility-skew]]", "[[variance-risk-premium]]", "[[options-premium-selling]]", "[[fed-meeting]]", "[[fda-decision]]", "[[managing-winners]]"]
+markets: [crypto, options]
+related: ["[[long-straddle]]", "[[short-volatility-strategies]]", "[[volatility-term-structure]]", "[[volatility-skew]]", "[[variance-risk-premium]]", "[[vega]]", "[[dvol]]", "[[deribit]]", "[[funding-rate]]", "[[straddle]]", "[[bitcoin-halving]]"]
 ---
 
-**IV crush** is the abrupt collapse of [[implied-volatility|implied volatility]] in the seconds-to-hours after a known information event resolves. Pre-event, options pricing inflates [[vega|vega]] to reflect uncertainty about a binary outcome. The instant the outcome is known — earnings prints, FDA panel votes, M&A approvals announce, the FOMC statement releases — the uncertainty disappears, vega collapses, and every option that spans the event loses extrinsic value regardless of which way the underlying moved. IV crush is the canonical reason traders are *directionally correct on earnings and still lose money*.
+**IV crush** is the abrupt collapse of [[implied-volatility|implied volatility]] in the seconds-to-hours after a known information event resolves. Pre-event, options pricing inflates [[vega]] to reflect uncertainty about a binary outcome. The instant the outcome is known — an earnings print, an FDA vote, an M&A approval, an FOMC statement, a spot-ETF ruling, or a network upgrade — the uncertainty disappears, vega collapses, and every option spanning the event loses extrinsic value **regardless of which way the underlying moved**. IV crush is the canonical reason traders are *directionally correct and still lose money*. In crypto it is measured on [[deribit|Deribit]] and tracked through the [[dvol|DVOL]] index.
 
 ## Definition
 
-IV crush is the *negative* leg of the implied-volatility cycle around scheduled events. The cycle has two halves:
+IV crush is the *negative* leg of the implied-vol cycle around scheduled events. The cycle has two halves:
 
-1. **Pre-event IV ramp** — implied volatility rises in the days/hours before a known event as the market prices in event uncertainty. Front-cycle IV (the contract spanning the event) rises far faster than back-month IV, producing an inverted [[volatility-term-structure|term structure]].
-2. **Post-event IV crush** — the moment the event resolves, the front-cycle IV collapses. The drop is typically 30-50% of the pre-event IV in absolute vol points, sometimes more on names with extreme pre-event ramps.
+1. **Pre-event IV ramp** — IV rises in the days/hours before a known event as the market prices event uncertainty. The contract *spanning* the event rises far faster than back-dated contracts, producing an inverted [[volatility-term-structure|term structure]].
+2. **Post-event IV crush** — the moment the event resolves, front-cycle IV collapses, typically 30–50% of its pre-event level in absolute vol points (more on extreme names/events).
 
-The crush is *separate from* the directional move of the underlying. A stock can rise 8% on earnings while the ATM straddle still loses 60% of its value because the IV component dominates the intrinsic gain.
+The crush is *separate from* the underlying's directional move. A coin can rise 8% on a catalyst while the ATM straddle still loses over half its value because the IV component dominates the intrinsic gain.
 
 ## Mechanism
 
 ### Why IV inflates pre-event
 
-A scheduled event is a planned discontinuity in price discovery. For the minutes spanning the announcement, the market does not know the outcome. Two flows push IV up:
+A scheduled event is a planned discontinuity in price discovery. Two flows push IV up:
 
-- **Hedging demand** — long-stock holders buy puts (and sometimes calls) to hedge the gap. Dealers absorb that supply and re-mark IV upward to clear the imbalance.
-- **Speculative demand** — discretionary and retail traders buy short-dated calls and puts as binary-event lottery tickets, anchoring on prior outsized prints (TSLA's old +20% earnings moves, NVDA's recent prints, etc.).
+- **Hedging demand** — holders buy puts (and calls) to hedge the gap; dealers absorb the supply and re-mark IV upward.
+- **Speculative demand** — discretionary and retail traders buy short-dated options as binary-event lottery tickets, anchoring on prior outsized moves.
 
-The ramp concentrates in the front weekly or monthly cycle that *contains* the event date. Back-month IV barely moves. This produces a steeply inverted term structure: front-week IV at 80%, next-month at 35%, three-months at 28%. An inverted term structure of >10 vol points is itself a detection signal for an upcoming event.
+The ramp concentrates in the front cycle that *contains* the event; back-dated IV barely moves, producing a steeply inverted term structure. An inversion of >10 vol points is itself a detection signal for an upcoming catalyst.
 
 ### Why IV collapses post-event
 
-Once the event resolves, the front-cycle vega is no longer pricing future uncertainty — it is pricing only the residual realized-vol uncertainty over the remainder of the contract's life. That uncertainty is dramatically lower:
+Once the event resolves, front-cycle vega no longer prices future uncertainty — only the residual realized-vol uncertainty over the contract's remaining life, which is dramatically lower. The biggest known catalyst in the option's lifespan has occurred, remaining time is short, and dealers who absorbed pre-event vega mark down their offers. The bulk of the crush lands in the first minutes after the headline.
 
-- The biggest known catalyst in the option's lifespan has now occurred.
-- The remaining time to expiration may be days or hours, in which IV cannot reasonably justify its pre-event level.
-- Dealers who absorbed pre-event vega supply now mark down their offers.
+## Common venues (traditional and crypto)
 
-The collapse happens fast — typically the bulk of it in the first 1-5 minutes after the headline. By the next morning's open, post-event IV is back near the underlying's normal long-run level.
+| Event | Typical pre-event IV | Typical post-event IV | Crush |
+|-------|---------------------|----------------------|-------|
+| Single-stock earnings (mega-cap) | 60–90% | 30–40% | 30–50 vol pts |
+| Small-cap biotech FDA vote | 150–300% | 60–100% | 100–200 vol pts |
+| FOMC (front SPX/SPY weekly) | +5–10 IV pts | back to baseline | 5–10 vol pts |
+| **BTC spot-ETF ruling (Deribit BTC)** | DVOL ramp | "sell-the-news" crush | 15–40 vol pts |
+| **Ethereum network upgrade (ETH)** | large ETH IV ramp | sharp crush | 30–60 vol pts |
+| **Macro (CPI/FOMC) on BTC/ETH** | DVOL +5–15 pts | back to baseline | 5–15 vol pts |
 
-## Most Common Venues
+The classic equity illustration remains instructive: **NFLX Q3 2018** rose ~8% on earnings yet the pre-print ATM straddle lost ~40% because IV crushed from ~95% to ~38% — the textbook "directional win, IV-crush loss." Crypto's equivalents are documented below.
 
-| Event | Typical pre-event IV | Typical post-event IV | Crush magnitude |
-|-------|---------------------|----------------------|-----------------|
-| Single-stock earnings (mega-cap) | 60-90% | 30-40% | 30-50 vol points |
-| Single-stock earnings (small-cap biotech) | 150-300% | 60-100% | 100-200 vol points |
-| FDA PDUFA / panel vote | 100-250% | 40-80% | 60-170 vol points |
-| M&A close vote / regulatory approval | 50-120% | 20-40% | 30-80 vol points |
-| FOMC meeting (front SPX/SPY weekly) | +5-10 IV points | back to baseline | 5-10 vol points |
-| Major economic data (CPI, NFP) | +3-5 IV points | back to baseline | 3-5 vol points |
-
-The richest crushes are on small-cap biotechs around binary FDA decisions, where front-week IV can run 250%+ and crush to 60% intraday on the announcement. Single-stock earnings on liquid mega-caps (NVDA, NFLX, TSLA, META) run 60-90% pre-print and crush to 30-40%. Index events (FOMC, CPI) produce smaller crushes because the index implied vol baseline is much lower and the event uncertainty is a smaller fraction of total uncertainty.
-
-## Magnitude: Empirical Reference Points
-
-Documented historical magnitudes for IV crush:
-
-- **NVDA earnings (2024-2025 cycle)**: front-week ATM IV consistently ramped from ~50% to ~110% in the week before, crushing to ~45-55% in the first hour after the print.
-- **NFLX Q3 2018 earnings** (the canonical "directional win, IV-crush loss" case): stock rose ~8% on the print; the pre-print ATM straddle lost ~40% of its value because IV crushed from ~95% to ~38%.
-- **Beyond Meat 2019 IPO post-lockup events**: front-week IV exceeded 200% in 2019; routine 100-150 vol-point crushes intraday.
-- **FOMC days (2022-2023 hiking cycle)**: SPX 0DTE ATM IV typically ran 35-40% in the hour before the statement, crushing to 18-22% in the first 30 minutes after.
-
-## Impact on Strategies
+## Impact on strategies
 
 | Strategy | Vega exposure | IV crush impact |
 |----------|--------------|-----------------|
-| [[long-straddle]] / strangle through earnings | long vega | Severely negative — the canonical losing trade |
-| Long single-leg call or put through earnings | long vega | Negative — even directionally-correct trades often lose |
-| [[short-volatility-strategies\|Short straddle]] / strangle | short vega | Positive — harvests crush directly |
-| [[iron-condors\|Iron condor]] (defined-risk short premium) | short vega | Positive — collects crush within wing range |
-| Calendar spread (long back, short front) | net short vega front, long back | Profit *if* underlying pins between strikes |
-| Directional vertical spread | vega-neutral or slightly biased | Largely insulated — directional P&L dominates |
-| Diagonal spread | depends on construction | Mixed — front-leg crush helps short, hurts long |
+| [[long-straddle]] / strangle through event | long vega | Severely negative — the canonical losing trade |
+| Long single call/put through event | long vega | Negative — even directionally-correct trades often lose |
+| [[short-volatility-strategies\|Short straddle]] / strangle | short vega | Positive — harvests the crush directly |
+| [[iron-condor]] (defined-risk short premium) | short vega | Positive — collects crush within wing range |
+| Calendar (long back, short front) | net short front vega | Profit if underlying pins between strikes |
+| Directional vertical spread | ~vega-neutral | Largely insulated — directional P&L dominates |
 
-The structural lesson: **if you have no view on volatility, do not be net long vega across a known event**. If you have a directional view, express it through *vega-balanced* spreads, not single options.
+The structural lesson: **if you have no view on volatility, do not be net long vega across a known event.** Express directional views through *vega-balanced* spreads, not single options.
 
-## Measuring Expected Move from IV
+## Measuring expected move from IV
 
 The market's pre-event implied move is encoded in the front-cycle ATM straddle:
 
@@ -89,42 +74,74 @@ expected_move ≈ front_atm_straddle_price / spot
 expected_move ≈ atm_iv × sqrt(days_to_expiration / 365)
 ```
 
-For practical use, the straddle-price approximation is preferred because it includes skew effects. If NVDA is at $500 and the day-of-earnings ATM straddle is bid $25.00, the market is pricing a ~5% move — meaning the straddle "breaks even" only if NVDA moves more than ~5% in either direction. See implied-earnings-move.
+The straddle-price form is preferred because it captures skew. If BTC is at $60,000 and the day-of-event ATM straddle is $4,200, the market prices a ~7% move — the straddle only "breaks even" if BTC moves more than ~7% either way. Backtest: compare *implied* vs *realized* move across a name's past events; if realized is systematically smaller, short premium into that event has positive expectancy (the [[variance-risk-premium]] at work).
 
-A common backtest: compare *implied* move to *realized* move across all earnings announcements for a given name. If realized move is systematically smaller than implied, short premium across earnings has positive expectancy on that name. If realized exceeds implied, long premium does. Most large-cap names show the former.
+## Crypto specifics
 
-## How to Trade It
+### Crypto catalysts that ramp then crush DVOL on Deribit
+
+Crypto has its own calendar of scheduled binaries that produce the ramp-and-crush cycle on Deribit:
+
+- **Spot-ETF rulings** — the **US BTC spot-ETF approval (Jan 2024)** is the canonical crypto case: DVOL and front-cycle IV ran up into the decision, then crushed on the "sell-the-news" resolution even as the event itself was bullish.
+- **Network upgrades** — the **Ethereum Merge (15 Sep 2022)** ran ETH front-month IV to extreme levels for weeks, then crushed hard once the upgrade completed without incident.
+- **Macro prints** — **FOMC and CPI** move BTC/ETH materially; DVOL and front-weekly IV ramp into the release and normalize after, a smaller crush analogous to SPX FOMC weeklies.
+- **[[bitcoin-halving|Halvings]], major legal rulings (e.g., SEC cases), and large token unlocks** — each a dated catalyst around which front-cycle IV inflates and then decays.
+
+### 24/7 resolution — the crush happens live, not over a gap
+
+The key structural difference from equities: crypto trades **24/7**, so events resolve *while the market is fully open*. There is no post-market print and overnight gap — the crush unfolds continuously and can be watched (and traded) in real time on DVOL and the term structure. This means the crush is often faster and cleaner, and there is no "assignment / gap-open" step; a premium seller can buy back into the crush immediately rather than waiting for the next session. It also means the pre-event inverted term structure is a live, observable detection signal on Deribit.
+
+### Inverse settlement and funding
+
+Deribit options are **inverse** (coin-margined), so IV-crush P&L accrues in the coin and must be read in cash terms (see [[black-scholes-model#Inverse vs linear settlement — the effect on price and Greeks]]). Around big catalysts, perpetual [[funding-rate|funding]] often spikes with positioning, so an event trade that hedges delta with perps carries an extra funding line through the event window.
+
+### Weekend and unscheduled events
+
+Not every crypto vol event is a scheduled crush. Some of the largest DVOL moves have come from **unscheduled weekend shocks** (exchange failures, depegs, cascade liquidations) — these are vol *spikes*, the opposite of a crush, and they punish short-vega books that sold "cheap" post-crush premium. The lesson: the harvest trade (selling pre-event vega) is distinct from carrying naked short vega through crypto's tail-heavy, always-open tape.
+
+## How to trade it
 
 ### Selling premium pre-event (the harvest trade)
 
-Sell vega-rich front-cycle premium 1-3 days before the event, expecting to buy it back post-crush. Common structures:
+Sell vega-rich front-cycle premium 1–3 days before the event, buying it back post-crush. Structures: short ATM straddle (pure vega, undefined risk), short strangle (lower vega per margin), [[iron-condor]] (defined risk), or a calendar (long back / short front). Risk: a "tail print" outside the wings loses — size to the historical largest move on that asset (which for BTC/ETH can be large).
 
-- **Short ATM straddle** — pure vega harvest, undefined risk, requires conservative sizing
-- **Short strangle** — slightly OTM on each side, lower vega per dollar of margin
-- **[[iron-condors\|Iron condor]]** — defined-risk version, lower yield but bounded loss
-- **Calendar spread** — long back-month / short front-month at the same strike, profits if underlying pins near strike and front-month vega crushes
+### Fading the crush (rare long-vol entry)
 
-Risk: the crush helps, but a directional move outside the wings (a "tail print") loses. Position sizing must account for the historical largest move on that name.
-
-### Fading IV crush as a long-vol entry (the rare bullish-vol trade)
-
-After the crush, IV is often *too* low — the post-event IV may temporarily undershoot the realistic future-vol baseline. Long-vega positions established in the hour after a print can profit if vol normalizes upward over the following days. Less reliable than the harvest trade; mostly used by professional vol books.
+After the crush, post-event IV sometimes *undershoots* the realistic future-vol baseline; long-vega positions established in the hour after can profit if DVOL normalizes upward. Less reliable than the harvest trade; mostly a pro vol-book play.
 
 ### What not to do
 
-Buying long premium *into* a known event without an explicit vol view is, on average, a losing trade. The [[variance-risk-premium]] is positive precisely because IV crush systematically over-rewards short premium and under-rewards long. See [[volatility-risk-premium-decay]] and earnings-iv-crush.
+Buying long premium *into* a known event without an explicit vol view is, on average, a losing trade — the [[variance-risk-premium]] is positive precisely because IV crush systematically over-rewards short premium.
+
+## Getting the Data (CryptoDataAPI)
+
+IV crush is timed by the catalyst calendar and confirmed by the vol regime; the IV surface and DVOL themselves come from Deribit / Greeks.live:
+
+- **Event / catalyst calendar** — `GET /api/v1/event/calendar` (filterable events up to 30d out) and `GET /api/v1/event/regime` (forward catalyst bias). See [[cryptodataapi-regimes]].
+- **Volatility regime** — `GET /api/v1/volatility/regime` and `GET /api/v1/volatility/regime/score` to confirm compression/expansion around the event. See [[cryptodataapi-regimes]].
+- **Options positioning** — `GET /api/v1/market-intelligence/options` (BTC options OI, volume, max pain). See [[cryptodataapi-market-intelligence]].
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
+```
 
 ## Related
 
 - [[long-straddle]] — the strategy most damaged by IV crush
-- [[short-volatility-strategies]] — strategies that benefit
-- [[volatility-risk-premium-decay]] — the broader risk-premium framework
-- [[options-trading-pitfalls]] — IV crush is pitfall #2 in the options pitfalls catalog
+- [[short-volatility-strategies]] — strategies that harvest the crush
 - [[volatility-term-structure]] — how the inversion signals an upcoming event
+- [[volatility-skew]] — the strike dimension of the surface
+- [[variance-risk-premium]] — why short premium into events pays on average
+- [[vega]] — the exposure IV crush acts on
+- [[dvol|DVOL]] — the crypto IV index where the crush is measured (Deribit/Greeks.live)
+- [[deribit]] — the venue; inverse contracts and event dynamics
+- [[bitcoin-halving]] — a scheduled crypto catalyst
+- [[funding-rate]] — the correlated carry line through event windows
 
 ## Sources
 
-- Sheldon Natenberg, *Option Volatility and Pricing* (2nd ed., McGraw-Hill) — term structure of IV and event-driven vol behaviour
-- Euan Sinclair, *Volatility Trading* (Wiley) — variance risk premium and earnings-vol harvesting
+- [[book-option-volatility-and-pricing]] — Natenberg on the term structure of IV and event-driven vol
+- Sinclair, E. (2013), *Volatility Trading* — variance risk premium and event-vol harvesting
+- Deribit public documentation — DVOL methodology; BTC spot-ETF and Ethereum Merge IV history
 - CBOE Options Institute — educational materials on event-implied volatility and expected move
-- tastytrade research archive — empirical studies on IV crush and pre-earnings premium selling

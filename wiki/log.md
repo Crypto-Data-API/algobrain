@@ -9,6 +9,10 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-14 — Technique & options-structure theory upgrade (Wave 3)
+
+Upgraded ~58 charting-technique and options-structure pages from thin/equity-framed essays into comprehensive, crypto-scoped theory pages (9 parallel agents). Charting theories (Elliott wave, Fibonacci, Gann, harmonic patterns, Ichimoku, Heikin-Ashi, Renko, point-and-figure, Darvas, Supertrend, Parabolic SAR, supply-demand, breakout, Donchian, volatility-arb) re-typed `strategy`→`concept` with full method coverage. Options structures (iron-condor family, straddles/strangles, spreads, covered/protective/wheel) rewritten to a structure template (construction, payoff, greeks, adjustments, crypto specifics) and re-scoped from `[stocks]`/SPY to crypto/Deribit. Options-theory concepts (Black-Scholes, delta/vega hedging, IV-crush, moneyness, selection frameworks) given crypto grounding. No buildable-alpha schema was bolted onto theory/structure pages. Several duplicate stubs redirected (long-straddle, covered-calls, collar-strategy, protective-puts, concepts/options iron-butterfly + gamma-scalping). All endpoints verified; zero new dangling links.
+
 ## 2026-07-14 — Depth-parity rewrites (Wave 2)
 
 Rewrote 24 crypto-native strategy essays from descriptive prose into the buildable strategy schema (full frontmatter + 16-section structure + realistic cost overlays + `## Getting the Data (CryptoDataAPI)`), matching the funding-rate-arbitrage gold standard. Buildable strategy pages rose 215 → 251. Scope drift (equity/commodity tags) removed from latency-arbitrage, calendar-spread-arbitrage, cash-and-carry.

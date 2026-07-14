@@ -1,132 +1,143 @@
 ---
-title: "Collar"
+title: "Collar (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-20
+updated: 2026-07-14
 status: good
-tags: [options, hedging, collar, zero-cost-collar, protective-collar, defined-risk, equity-options, risk-management]
-aliases: ["Zero-Cost Collar", "Protective Collar", "Collar Strategy"]
+tags: [options, crypto, hedging, collar, defined-risk, risk-management, derivatives, bitcoin, ethereum]
+aliases: ["Zero-Cost Collar", "Protective Collar", "Collar Strategy", "Crypto Collar", "collar-strategy"]
 strategy_type: quantitative
 timeframe: position
-markets: [stocks, options]
+markets: [crypto, options]
 complexity: beginner
 backtest_status: untested
-related: ["[[married-put]]", "[[covered-call]]", "[[risk-reversal]]", "[[vertical-spreads]]", "[[bull-put-spread]]", "[[protective-puts]]", "[[delta]]", "[[trade-repair-and-rolling]]", "[[gamma-risk]]", "[[hedging]]"]
+related: ["[[protective-put]]", "[[married-put]]", "[[covered-call]]", "[[risk-reversal]]", "[[synthetic-long]]", "[[hedging]]", "[[tail-risk-hedging]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[staking]]", "[[delta]]", "[[trade-repair-and-rolling]]", "[[cryptodataapi]]"]
 ---
 
-# Collar
-
-The collar combines a long stock position with a purchased OTM [[put-option]] (to set a floor on losses) and a sold OTM [[call-option]] (to cap the upside and fund the put). When the premium received from the call equals the premium paid for the put, the hedge is known as a **zero-cost collar**. The result is a bounded risk/reward profile that protects existing gains without requiring a cash outlay. It is one of the most popular [[hedging]] structures for long-term equity holders who want to reduce exposure through uncertain periods while keeping their shares.
+# Collar (Crypto)
 
 ## Overview
 
-The collar is the combination of two familiar strategies: a [[protective-puts|protective put]] (downside insurance) and a [[covered-call|covered call]] (income/upside cap). Used together, the call premium finances the put premium, creating near-zero-cost protection. The payoff is bounded on both sides — losses are floored at the put strike and gains are capped at the call strike.
+The collar combines a long spot [[bitcoin|BTC]]/[[ethereum|ETH]] position with a purchased OTM [[put-option|put]] (a floor on losses) and a sold OTM [[call-option|call]] (a cap on gains that funds the put). When the call premium equals the put premium the hedge is a **zero-cost collar**. The result is a bounded risk/reward profile that protects existing coin gains without a net cash outlay — the crypto analogue of the equity executive's concentrated-stock hedge, used here by long-term holders, miners, treasuries, and DAOs to ride out uncertain windows while keeping their coins.
 
-Collars are used extensively by corporate executives hedging concentrated stock positions, institutional portfolio managers protecting gains ahead of macro events, and retail investors approaching retirement or liquidity events who cannot afford a large drawdown. (Source: [[recovering-losing-options-positions]])
+Structurally the collar is a [[protective-put|protective put]] (downside insurance) plus a [[covered-call|covered call]] (income/upside cap): the call finances the put, capping gains at the call strike and flooring losses at the put strike. In crypto the skew that governs the cap-versus-floor tradeoff is not the static put-skew of equities — it swings with [[funding-rate|perp funding]] and can even invert to call-skew in leveraged bull runs, which sometimes lets a zero-cost crypto collar be struck on unusually favorable terms.
 
-## Setup
+## Construction
 
-1. **Own 100 shares** of the underlying stock.
-2. **Buy 1 OTM put** — typically 5-10% below the current price. This sets the floor on losses.
-3. **Sell 1 OTM call** — typically 5-10% above the current price. Premium received funds the put.
-4. Both options share the **same expiration** (30-90 DTE). For a zero-cost collar, adjust strikes until the net premium is near zero.
+1. **Hold** spot BTC/ETH (or a BTC-ETF position).
+2. **Buy 1 OTM put** ~5-15% below spot on [[deribit]] → sets the floor.
+3. **Sell 1 OTM call** ~5-15% above spot → premium funds the put. Adjust strikes until the net premium ≈ 0 for a zero-cost collar.
+4. Both legs **same expiration**, 30-90 DTE; match the tenor to the risk window (a macro event, unlock, or halving aftermath).
 
-## Payoff Profile
+Prefer **USDC-margined (linear)** legs for a clean USD floor/cap; coin-margined (inverse) legs introduce quanto-like non-linearity in the hedge.
+
+## Payoff & breakevens
 
 | Scenario | Outcome |
 |---|---|
-| Stock below put strike | Loss capped at (stock price - put strike), adjusted for net premium |
-| Stock between strikes | Shares retained; small net debit or credit from premiums |
-| Stock above call strike | Shares called away; upside capped at call strike |
+| Spot below put strike | Loss floored at (put strike − spot entry) ± net premium |
+| Spot between strikes | Coins retained; small net debit/credit |
+| Spot above call strike | Upside capped at the call strike ± net premium |
 
-**Max profit** = call strike - stock entry + net credit (if any).
-**Max loss** = stock entry - put strike + net debit (if any).
+- **Max profit** = call strike − spot entry + net credit (if any)
+- **Max loss** = spot entry − put strike + net debit (if any)
 
-## Worked Example
+## Greeks profile
 
-Stock AAPL at $185. The trader holds 100 shares with a cost basis of $160 and wants to protect the $2,500 unrealized gain through an upcoming FOMC decision.
+Net of the three legs (long coin, long put, short call):
 
-- **Buy** 1 AAPL $175 put (45 DTE) for $3.00
-- **Sell** 1 AAPL $200 call (45 DTE) for $3.00
-- **Net cost**: $0.00 (zero-cost collar)
+| Greek | Sign | Note |
+|---|---|---|
+| [[delta]] | Positive, reduced | Long coin, trimmed by the long put and short call; flattest between the strikes |
+| [[gamma]] | Near-flat to slightly negative | Long-put gamma partly offsets short-call gamma |
+| [[theta]] | Small (put decay vs call decay net) | The put bleeds; the sold call's decay largely offsets it |
+| [[vega]] | Roughly neutral | Long put vega vs short call vega — the collar is far less vega-sensitive than an outright put or covered call |
 
-| Outcome | P&L |
-|---------|-----|
-| AAPL drops to $150 | Loss floored: sell at effective $175. P&L = ($175 - $160) = **+$15/share** (gains preserved) |
-| AAPL stays at $185 | Both options expire worthless. P&L = ($185 - $160) = **+$25/share** |
-| AAPL rallies to $220 | Called away at $200. P&L = ($200 - $160) = **+$40/share** (missed $20 above $200) |
+The near-vega-neutrality is a feature: the collar is a directional-risk truncation, not a volatility bet.
 
-The collar guarantees the trader keeps at least $15/share of their $25/share gain, regardless of how far AAPL falls. The cost is capping the upside at $40/share.
+## Market view / when to use
 
-## When to Use
+- You hold coins with **significant unrealized gains** and want protection through a defined uncertain window (macro print, election, major unlock, exchange-solvency scare).
+- You are willing to **sacrifice upside** to eliminate downside tail risk at near-zero cash cost.
+- **Concentrated exposure:** miners, treasuries, DAOs, early holders, or founders with an outsized single-coin allocation who cannot or will not sell.
+- Approaching a **liquidity event** (token vesting cliff, planned sale) where a drawdown would be damaging.
 
-- You hold a stock with **significant unrealized gains** and want protection through earnings, macro events, or elevated [[implied-volatility]]
-- You are willing to **sacrifice upside** in exchange for eliminating downside tail risk
-- IV is elevated enough that the sold call richly finances the protective put
-- **Concentrated positions**: Executives, founders, or employees with large allocations to a single stock
-- **Near retirement or liquidity events**: When a drawdown would be financially devastating due to timing
+## Adjustments & management
 
-## Rolling and Adjustments
+- **Roll up** the put (and call) after a rally to lock in more of the gain.
+- **Roll out** in time to extend protection through a longer window.
+- **Near the call strike:** decide to accept the cap (cash settlement on Deribit — you keep the coin and pay the cap) or roll the call up-and-out for a debit to free upside.
+- **Adjust width:** widen for more room (more risk), narrow for tighter protection (a steep-skew regime may force a narrow band).
+- Remove the collar once the catalyst passes if you want full upside back.
 
-Collars can be rolled and adjusted, though the mechanics are more involved than single-leg strategies because both the put and call legs need management. See [[trade-repair-and-rolling]] for the general framework.
+## Crypto specifics
 
-### Rolling the Collar at Expiration
+- **Hedging spot BTC/ETH or via Deribit.** Long spot + Deribit put + Deribit short call is the standard build; BTC-ETF options can collar an ETF holding.
+- **Cash settlement, no early assignment.** Deribit's European options settle in cash: the cap and floor are realized as cash payments at expiry — **you keep your coins** (and any staked position) rather than having them called away or delivered. No early [[assignment]] risk on either leg.
+- **Inverse vs linear settlement.** USDC-margined legs give a clean USD floor and cap; coin-margined (inverse) legs make both the collateral and the hedge payoff move with spot (quanto-like), muddying the floor.
+- **Skew swings with funding — the crypto twist.** Equity collars are dear on the put side (persistent put skew). Crypto skew oscillates: in richly positive [[funding-rate|funding]] (leveraged-long) regimes, call skew can trade rich to puts, so the sold call finances the put unusually well — a favorable zero-cost collar. After a crash, put skew dominates and the cap must sit closer to spot. Read the 25-delta [[risk-reversal]] before striking the collar.
+- **24/7 gap risk makes the floor valuable.** Weekend and overnight gaps (there is no market close) are exactly what the put floor protects against — a stronger case for collaring crypto than equities.
+- **No [[section-1256-contracts|§1256]].** No 60/40 treatment; cap-assignment and put settlement are ordinary capital events.
+- **Staking-yield interaction.** A collar on staked/liquid-staked ETH lets you keep earning **staking yield** while bounding price risk; cash settlement means the (possibly locked) staked ETH never needs delivery.
 
-If the stock is between the strikes at expiration (the most common outcome), both options expire worthless. To maintain protection, the trader rolls the entire collar:
+## Risks
 
-1. **Buy a new OTM put** for the next cycle
-2. **Sell a new OTM call** for the next cycle
-3. Adjust strikes based on the new stock price and desired protection range
+- **Capped upside** — the dominant long-run cost; repeatedly capping underperforms unhedged holding in crypto's big rallies.
+- **Skew cost** — a steep post-crash put skew forces an uncomfortably tight cap to stay zero-cost.
+- **No alpha** — a risk-transfer, not a return edge; expected return falls with volatility.
+- **Mismatched expiration** — protection expiring before the risk window leaves you unhedged at the worst moment.
+- **Coin-margined non-linearity** if inverse legs are used.
+- **Venue concentration** on Deribit during a vol event.
 
-The cost of rolling depends on [[implied-volatility]]: in high-IV environments, the call premium easily finances the put; in low-IV environments, the trader may need to accept a narrower range or pay a small net debit.
+## Worked crypto example
 
-### If the Stock Drops to the Put Strike
+**Setup (illustrative).** Hold 5 BTC bought at $52,000, now $68,000 — a $16,000/BTC unrealized gain to protect through a 45-day macro window. BTC DVOL moderate; funding mildly positive (call skew firm).
 
-The put provides protection — the trader can either:
-- **Exercise the put** and sell the shares at the put strike (booking the defined minimum profit)
-- **Sell the put** for its intrinsic value and hold the shares if the fundamental thesis is intact
-- **Roll down**: Buy back the put, sell a new lower-strike put, and roll the call down too to maintain the collar structure at lower levels
+- **Buy** 5 × $61,000 puts (45 DTE) at ~$2,000 each
+- **Sell** 5 × $78,000 calls (45 DTE) at ~$2,000 each → **net ≈ $0 (zero-cost collar)**
 
-### If the Stock Rallies to the Call Strike
+| Outcome at expiry | P&L per BTC |
+|---|---|
+| BTC to $45,000 | Put floors at $61,000 → **+$9,000** (vs −$7,000 unhedged) |
+| BTC at $68,000 | Both expire worthless → **+$16,000** |
+| BTC to $85,000 | Capped at $78,000 → **+$26,000** (forgo the move above $78k) |
 
-The call will be assigned if ITM at expiration. The trader can either:
-- **Accept assignment**: Sell shares at the call strike (booking the defined maximum profit)
-- **Roll the call up and out**: Buy back the ITM call and sell a higher-strike call at a later expiration for a net debit. This avoids assignment and raises the upside cap, but costs money. Only worthwhile if the trader has strong conviction in continued upside.
+The collar guarantees keeping at least $9,000 of the $16,000 gain per BTC, at the cost of capping the upside at $26,000.
 
-### Adjusting the Width
+## Getting the Data (CryptoDataAPI)
 
-If market conditions change, the trader can widen or narrow the collar:
-- **Widen** (move strikes further apart): More room for profit and loss — less restrictive but more risk
-- **Narrow** (move strikes closer together): Tighter protection but smaller profit window. Zero-cost collars often require accepting a narrow range.
+IV/DVOL and the 25-delta [[risk-reversal|risk reversal]] (skew) come from Deribit / [[greeks-live]]; [[cryptodataapi]] supplies the funding, regime, and flow context for striking and rolling the collar.
 
-## Advantages
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding (the crypto skew driver; positive funding → richer sold call)
+- `GET /api/v1/volatility/regime` — per-asset vol regime for timing the hedge
+- `GET /api/v1/market-intelligence/options` — BTC options OI / [[max-pain]] for strike context
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (tail-risk early warning the floor guards against)
 
-- Near-zero or zero cost when strikes are balanced properly
-- Defined, bounded risk on both sides with no margin surprises
-- Simple to construct — excellent first hedging strategy for beginners
-- Can overlay any long-term [[buy-and-hold]] position
-- Tax-efficient alternative to selling shares (avoids triggering capital gains)
+**Historical data:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for strike/floor tracking
 
-## Disadvantages
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
 
-- Upside is strictly capped at the call [[strike-price]] — you miss large rallies
-- Rolling the collar at expiration incurs transaction costs and potential slippage
-- Zero-cost collars often force a narrow profit window between the strikes
-- [[theta]] decay on the put erodes value if the stock stays flat (partially offset by call decay)
-- Complexity of managing two option legs vs. a single protective put
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL and skew from Deribit / [[greeks-live]].
 
 ## Related
 
-- [[protective-puts]] — the downside protection leg of the collar
-- [[covered-call]] — the income-generating leg of the collar
-- [[married-put]] — same downside protection without selling the call
-- [[risk-reversal]] — a related structure without the stock leg
-- [[vertical-spreads]] — the building blocks of the collar's option legs
-- [[trade-repair-and-rolling]] — rolling and adjustment framework
-- [[gamma-risk]] — risk consideration for near-expiry collar management
-- [[hedging]] — the broader discipline of portfolio protection
+- [[protective-put]] — the downside-only leg (floor without the cap)
+- [[married-put]] — long coin + long put established together
+- [[covered-call]] — the upside-cap-for-income leg (cap without the floor)
+- [[risk-reversal]] — the options-only analogue and the skew gauge for striking the collar
+- [[synthetic-long]] — the collar's cousin without the stock leg's insurance
+- [[hedging]] / [[tail-risk-hedging]] — the broader protection discipline
+- [[funding-rate]] — the perp linkage that shapes crypto skew and collar economics
+- [[staking]] — stackable yield while collared
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[deribit]] / [[greeks-live]] — venue and analytics
 
 ## Sources
 
-- (Source: [[recovering-losing-options-positions]])
-- Cross-referenced from [[protective-puts]], [[covered-calls]], [[hedging]]
+- [[deribit]] / [[greeks-live]] documentation — European cash settlement, coin-margined vs USDC-margined legs, DVOL and 25-delta risk reversal (skew)
+- [[crypto-options-volatility-selling]] — how funding-driven crypto skew differs from static equity put skew

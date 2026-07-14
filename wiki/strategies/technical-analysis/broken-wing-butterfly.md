@@ -2,79 +2,156 @@
 title: "Broken Wing Butterfly"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
-tags: [options, broken-wing-butterfly, directional, credit, defined-risk, asymmetric, advanced]
-aliases: ["BWB", "Skip-Strike Butterfly", "Unbalanced Butterfly"]
+tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
+aliases: ["BWB", "Skip-Strike Butterfly", "Unbalanced Butterfly", "Crypto Broken Wing Butterfly"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-related: ["[[butterfly-spread]]", "[[iron-butterfly]]", "[[ratio-spread]]", "[[iron-condor]]", "[[implied-volatility]]", "[[theta]]", "[[delta]]"]
+related: ["[[butterfly-spread]]", "[[iron-butterfly]]", "[[iron-condor]]", "[[christmas-tree-spread]]", "[[jade-lizard]]", "[[ratio-spread]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
 ---
 
 # Broken Wing Butterfly
 
 ## Overview
 
-The Broken Wing Butterfly (BWB) is an **asymmetric variation** of the standard [[butterfly-spread]] in which one wing is wider than the other. By skipping a strike on one side, the trader creates a directional butterfly that can be entered for a **net credit** or at zero cost, eliminating risk on the wider side entirely. The trade retains the butterfly's narrow profit zone but shifts it directionally and removes the risk of loss if the underlying moves against the wider wing.
+The broken wing butterfly (BWB) is an **asymmetric** variant of the [[butterfly-spread]] in which one wing is wider than the other (a "skipped" strike). By making one wing wider, the structure can be entered for a **net credit or zero cost** and eliminates loss entirely on *one* side, while retaining a narrow max-profit tent shifted directionally. It trades the standard fly's symmetry for a directional lean, cheaper (or credit) entry, and a "no-loss" side — at the cost of a capped tail on the wider side.
 
-The BWB is a popular variant among advanced options traders because it combines the best features of a [[butterfly-spread]] (defined risk, favorable reward-to-risk) with a directional lean and premium collection. A **put BWB** is commonly used as a bullish-to-neutral trade: the wider wing is below the current price, where there is no risk, and max profit occurs at the center strike. A **call BWB** is bearish-to-neutral. The strategy can be thought of as a [[ratio-spread]] with a protective long option added on the exposed side -- converting undefined risk into defined risk while often preserving the credit entry.
+On [[deribit]] BTC/ETH, the BWB is a favored way to take a **directional-but-hedged** view: e.g., a put BWB that keeps its full value if BTC rallies, pays best if BTC drifts toward the body, and caps the loss to a small, defined amount only if BTC crashes through the wide wing. Crypto's persistent put skew (puts richer than equidistant calls) makes credit/zero-cost put BWBs relatively easy to build.
 
-## Rules / Setup
+## Construction
 
-### Entry
-1. **Put BWB (bullish/neutral):** Buy 1 higher-strike put, sell 2 middle-strike puts, buy 1 lower-strike put -- but make the lower wing **wider** than the upper wing. Example: buy $105 put, sell 2x $100 puts, buy $90 put (upper wing = $5, lower wing = $10).
-2. **Call BWB (bearish/neutral):** Buy 1 lower-strike call, sell 2 middle-strike calls, buy 1 higher-strike call with a wider upper wing.
-3. **Credit entry:** The wider wing is cheaper to buy than a standard butterfly's equidistant wing, so the overall position can be entered for a net credit or zero cost.
-4. **No risk on the wide side:** If total credit received >= width of the narrow wing minus width to the wider wing difference, there is zero loss if the price goes through the wider wing.
-5. **Expiration:** 30-45 DTE for optimal theta characteristics.
-6. **IV environment:** Elevated [[implied-volatility]] helps generate a larger credit.
+Three strikes, four legs, one wing wider than the other, cash-settled:
 
-### Exit
-1. **Profit target:** Close at 50-75% of max profit if the underlying is near the center strike.
-2. **Narrow wing risk:** If the underlying moves toward the narrow wing, the position behaves like a standard butterfly wing -- losses are capped at (narrow wing width - credit received).
-3. **Wide wing (safe) side:** If the price moves toward the wide wing, the position reaches zero loss or locks in the credit. No action needed.
-4. **Time management:** The profit zone expands as expiration approaches (theta works for you near the center strike). Hold if price is near center; close early if price is at the narrow wing.
+**Put BWB (neutral-to-mildly-bearish body, no upside risk):**
 
-### Position Sizing
-Max loss = narrow wing width - net credit received. This is the only side at risk. Size so this max loss represents 2-4% of the account.
+| Leg | Action | Strike | Purpose |
+|---|---|---|---|
+| 1 | Buy 1 put | upper strike (K+n) | narrow-wing long |
+| 2 | Sell 2 puts | body strike (K) | the target |
+| 3 | Buy 1 put | lower strike (K−f), **skipped further out** | wide-wing long (cheap protection) |
 
-## Payoff Profile
-- **Max profit:** Occurs at the center (short) strike at expiration. Equals the narrow wing width minus debit (or plus credit) on that side.
-- **Max loss (narrow wing):** Narrow wing width minus credit received. This is the only at-risk side.
-- **Max loss (wide wing):** Zero (or a small profit equal to the credit received). The wider wing eliminates risk on that side.
-- **Break-even:** Center strike minus max profit (for a put BWB), adjusted for credit/debit.
+- **Narrow wing** width n = (upper − body); **wide wing** width f = (body − lower), with **f > n**.
+- **Ratios:** 1 : −2 : 1.
+- **Net entry:** because the wide-wing long is far OTM and cheap, the position often nets to **zero or a small credit**. Crypto put skew helps: the two short body puts are relatively rich.
+- **No-loss side:** for a put BWB, if price rises above the top strike all puts expire worthless → P&L = net credit (no loss). The at-risk side is the wide (lower) wing.
+- **Call BWB** mirrors this for a neutral-to-mildly-bullish body with no downside risk.
+- **Tenor:** 30-45 DTE for the theta profile.
 
-## Example Trade
-**Asset:** SPY trading at $510. You are neutral to slightly bullish and expect SPY to stay above $500.
-1. **Buy 1 SPY $510 put** at $8.00.
-2. **Sell 2 SPY $500 puts** at $4.50 each ($9.00 total credit).
-3. **Buy 1 SPY $480 put** at $1.50.
-4. **Net credit:** $9.00 - $8.00 - $1.50 = **-$0.50** (small debit). Let's adjust: use $485 put at $2.00. Net = $9.00 - $8.00 - $2.00 = **-$1.00** debit. Or sell the $502 puts: credit = $9.50. Net credit = $9.50 - $8.00 - $1.50 = **$0.00** (zero cost).
-5. **Simplified example at zero cost:** Upper wing ($510-$500) = $10 wide. Lower wing ($500-$480) = $20 wide.
-6. **Max profit at $500:** The $510 put is worth $10, the two $500 puts are worthless, the $480 put is worthless. Profit = $10.00 ($1,000).
-7. **If SPY drops to $480 or below:** The structure collapses to the value of the wide wing difference: $510 put - 2x$500 puts + $480 put = $10 - $0 + $0 = net loss is limited. With the wider lower wing, the max loss below $480 is = ($10 - $20) + credit = -$10 + $0 = $10 loss. Max loss on the wide side = $1,000.
-8. **If SPY stays above $510:** All puts expire worthless. P&L = net credit ($0 in this case).
-9. **The key tradeoff:** Risk on the downside (wide wing) in exchange for higher potential profit at the center.
+## Payoff & breakevens
 
-## Advantages
-- **Directional lean with defined risk:** The asymmetric wings create a built-in directional bias
-- **Credit or zero-cost entry:** The wider wing is cheap, allowing favorable entry pricing
-- **Eliminates one side of risk:** No loss on the wider wing side makes the trade simpler to manage
-- **Higher probability than standard butterfly:** The directional shift means the profitable zone is skewed toward the expected price range
-- **Flexible structure:** Wing widths, strikes, and ratios can all be customized for specific market views
+For the put BWB above (body K, narrow wing n up, wide wing f down, entered at ~zero cost):
 
-## Disadvantages
-- **Risk on the narrow wing:** While one side is protected, the other side carries meaningful risk if the underlying moves against the position
-- **Lower max profit than a standard butterfly:** The asymmetric structure and credit entry reduce the max potential compared to an equidistant butterfly
-- **Complex execution:** Three legs at non-standard strike intervals make the trade harder to execute with tight fills
-- **Difficult to model:** The payoff diagram is asymmetric and can be confusing; careful strike selection is required
-- **Pin risk near expiration:** The two short options at the center strike create assignment risk with American-style options
+- **Max profit** = narrow wing width n + net credit, on a body pin at expiry.
+- **No-loss side** (upside): above the top strike, P&L = net credit (zero-cost → $0, no loss).
+- **Max loss** (wide/lower side): (wide wing f − narrow wing n) − net credit, below the lowest strike. This is the only at-risk side, and it is capped.
+- **Downside breakeven** = between the body and the lowest strike, where the descending payoff crosses zero.
 
-## See Also
-- [[butterfly-spread]] -- the standard equidistant version of the butterfly
-- [[iron-butterfly]] -- credit butterfly with puts and calls at the ATM strike
-- [[ratio-spread]] -- similar concept without the protective wing (undefined risk)
-- [[christmas-tree-spread]] -- another asymmetric multi-leg structure with directional bias
+The tent is lopsided: a flat no-loss shelf on one side, a peak at the body, and a short slope to a small capped-loss floor on the wide side.
+
+## Greeks profile
+
+- **Delta:** carries a **directional lean** at entry (unlike a balanced fly) — a put BWB is slightly short delta (leans toward the body below spot / protected above), a call BWB slightly long.
+- **Gamma:** negative around the body (short two options there), flattening toward the no-loss side; concentrated near expiry at the body.
+- **Theta:** positive when spot is near or above the body (for a put BWB) — the no-loss side means time decay is largely a tailwind.
+- **Vega:** roughly negative (net short the body's extrinsic value); elevated DVOL helps build the credit at entry.
+
+## Market view / when to use
+
+- You lean **mildly directional** (or neutral) and want a structure that costs nothing if you are wrong on the protected side.
+- For a **put BWB:** you do not expect a rally to hurt you (no upside loss), you would like a drift toward the body, and you accept a small capped loss only on a crash.
+- **Elevated DVOL / rich skew** so the two short body options finance the structure to a credit or zero cost.
+- You want a defined, small tail rather than the naked exposure of a [[ratio-spread]].
+
+## Adjustments & management
+
+- **Profit target:** close at **50-75% of max profit** when spot is near the body.
+- **No-loss side:** if price moves onto the protected side, there is nothing to manage — the credit is safe; let it ride or close for the credit.
+- **Wide-wing side:** if price moves toward the wide wing, the loss is already capped; decide whether to hold to the defined floor or close early.
+- **Time management:** theta helps near the body/protected side; the profit zone widens into expiry.
+- **Vol-shock kill:** in a crash toward the wide wing, the loss is capped — but if DVOL explodes and you are short the body's gamma, closing at the defined floor is cleaner than riding pin uncertainty.
+
+## Crypto specifics
+
+- **Venue & underlyings:** [[deribit]] BTC/ETH — the skipped-strike construction needs the strike granularity that only BTC/ETH chains offer; **alts are too sparse**.
+- **Inverse vs linear/USDC settlement:** use **USDC-margined (linear)** so the credit, breakeven, and capped loss are clean USD figures. Inverse (coin-margined) options distort the asymmetric payoff badly — the "no-loss" side is only truly no-loss in the settlement currency, and coin collateral moving with spot can reintroduce loss on a put BWB during a selloff.
+- **Crypto put skew builds the credit:** BTC/ETH puts are usually richer than equidistant calls, so a **put BWB reaches zero-cost or credit more easily** than in equities. Read the 25-delta [[risk-reversal]] / skew before choosing the direction.
+- **DVOL regime:** elevated DVOL fattens the two short body options → easier credit. In compressed DVOL the structure tends to cost a debit (behaves more like a plain butterfly).
+- **24/7 & weekend gaps:** the capped, defined loss on the wide side is exactly what you want in a market that can gap −20% over a weekend — the BWB's tail is pre-limited. Expiry **08:00 UTC**, cash-settled to the Deribit index: **no assignment/pin-risk** on the short body (unlike US single-stock BWBs).
+- **No [[section-1256-contracts|§1256]]:** the credit and any gains are ordinary capital-gains events on offshore Deribit — no 60/40 US shelter.
+- **Perp funding interaction:** funding-driven skew tells you which side to protect cheaply; a richly-positive-funding regime (call skew firm) can make a **call BWB** the easier credit build.
+
+## Worked crypto example
+
+**Setup (BTC, USDC-margined/linear).** BTC spot **$108,000**; DVOL **48** (elevated enough to build a credit); you do not expect a rally to hurt you, would welcome a drift to ~$106k, and want a capped tail on a crash. 35 DTE. Put BWB: narrow upper wing **$6,000** ($112k → $106k), wide lower wing **$10,000** ($106k → $96k).
+
+**Trade (per 1-BTC contract, put BWB):**
+- Buy 1 $112,000 put for **$5,000**.
+- Sell 2 $106,000 puts for **$3,000** each ($6,000 credit).
+- Buy 1 $96,000 put for **$1,000**.
+- **Net = −$5,000 + $6,000 − $1,000 = $0 (zero cost).**
+- **Max profit = narrow wing $6,000 + credit $0 = $6,000** on a $106,000 pin.
+- **No upside loss:** above $112,000 all puts expire worthless → **P&L $0** (no loss if BTC rallies).
+- **Downside breakeven = $100,000.** **Max loss = (wide $10,000 − narrow $6,000) − $0 = $4,000**, reached below $96,000.
+
+Payoff at expiration:
+
+| BTC at expiry | P&L (per contract) | Note |
+|---|---|---|
+| ≥ $112,000 | $0 | no-loss upside shelf |
+| $106,000 | +$6,000 | max profit (body pin) |
+| $100,000 | $0 | downside breakeven |
+| $96,000 | −$4,000 | max loss reached |
+| ≤ $96,000 | −$4,000 | capped floor |
+
+**Path A — quiet/drift.** BTC eases to $105,500 by expiry → close near max for **+~$4,500/contract** (bank 50-75%, do not chase the exact pin).
+
+**Path B — rally.** BTC rips to $118,000; all puts expire worthless → **P&L $0**. You were "wrong" directionally and lost nothing — the point of the structure.
+
+**Path C — crash.** BTC gaps −15% to $92,000 over a weekend. The loss is pre-capped at **−$4,000/contract** by the long $96,000 wing — a defined, survivable tail versus the open risk of a naked short put.
+
+## Sources
+
+- [[greeks-live]] / [[deribit]] documentation — IV surface, 25-delta skew/[[risk-reversal]], USDC-margined vs inverse settlement, 08:00 UTC cash settlement.
+- [[book-option-volatility-and-pricing]] — Natenberg on unbalanced/skip-strike butterflies and ratioed structures (mechanics port to crypto).
+- Deribit / crypto-skew research — persistent put-skew that makes credit/zero-cost put BWBs achievable.
+
+## Getting the Data (CryptoDataAPI)
+
+The IV surface and 25-delta skew used to choose the direction and build the credit come from **Deribit / [[greeks-live]]**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the options-flow, dealer-gamma, funding, and volatility-regime context.
+
+**Live:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, the crypto skew driver (which side to protect cheaply)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (body-placement magnet)
+- `GET /api/v1/volatility/regime` — per-asset vol regime; elevated DVOL builds the credit
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/quant/gex` — Gamma Exposure (dealer inventory + liquidation profile)
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol / range context
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+## Related
+
+- [[butterfly-spread]] — the symmetric parent structure
+- [[iron-butterfly]] — credit ATM version of the balanced fly
+- [[christmas-tree-spread]] — another asymmetric multi-leg directional structure
+- [[jade-lizard]] — another "no-loss on one side" premium structure (no upside risk)
+- [[ratio-spread]] — the BWB without the protective wing (undefined risk)
+- [[crypto-options-volatility-selling]] — the short-vol context
+- [[deribit]], [[greeks-live]] — venue and analytics; surface and skew source
+- [[implied-volatility]], [[realized-volatility]], [[volatility-surface]] — the vol inputs
+- [[funding-rate]], [[gamma-exposure]], [[max-pain]] — skew and positioning context
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[theta]], [[vega]], [[gamma]], [[delta]] — the Greeks that drive the position
+- [[cryptodataapi]], [[cryptodataapi-market-intelligence]] — the data layer

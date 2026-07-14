@@ -2,79 +2,154 @@
 title: "Christmas Tree Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
-tags: [options, christmas-tree, ladder-spread, directional, low-cost, advanced, multi-leg]
-aliases: ["Ladder Spread", "Christmas Tree", "Call Ladder", "Put Ladder"]
+tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
+aliases: ["Ladder Spread", "Christmas Tree", "Call Ladder", "Put Ladder", "Crypto Christmas Tree"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-related: ["[[butterfly-spread]]", "[[broken-wing-butterfly]]", "[[ratio-spread]]", "[[backspread]]", "[[iron-condor]]", "[[implied-volatility]]", "[[delta]]"]
+related: ["[[butterfly-spread]]", "[[broken-wing-butterfly]]", "[[ratio-spread]]", "[[jade-lizard]]", "[[iron-condor]]", "[[crypto-options-volatility-selling]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
 ---
 
 # Christmas Tree Spread
 
 ## Overview
 
-The Christmas Tree Spread -- also called a **ladder spread** -- is a multi-leg options strategy that uses options at three (or more) different strikes in a ladder-like progression. The classic call christmas tree involves **buying 1 ATM call, selling 1 OTM call, and selling 1 further OTM call**, creating a low-cost directional bet that profits from a **moderate move** in the expected direction. The name comes from the visual appearance of the position on a risk graph: a peaked shape that narrows at the top, resembling a tree.
+The christmas tree spread — also called a **ladder spread** — uses options at three (or more) strikes in a ladder-like progression to express a **moderate directional** view at very low cost. The classic call christmas tree **buys 1 ATM call, sells 1 OTM call, and sells 1 further-OTM call**, financing a directional long into a target zone. The name comes from the peaked, narrowing shape on a risk graph. It profits from a controlled move *to* the first short strike, but the second (uncovered) short creates **open-ended risk beyond the outer strike** — a critical hazard in a 24/7, gap-prone crypto market.
 
-The strategy is a directional trade that combines elements of a [[ratio-spread]] and a [[broken-wing-butterfly]]. The first short option partially finances the long option, and the second short option further reduces the cost (sometimes to zero). The tradeoff is that the two short options create risk beyond the upper strike -- if the underlying moves too far, the position transitions from profitable to losing. The christmas tree profits from a moderate, controlled move to the first short strike zone. It is popular among traders who have a specific price target and want to express that view at minimal cost.
+On [[deribit]] BTC/ETH, the christmas tree is a cheap way to say "I expect a move to roughly level X but not far beyond." Unlike the [[butterfly-spread]] (defined risk both sides) or the [[jade-lizard]] (capped one side), the naked outer short means this structure carries a genuine **tail** that the crypto tape can hit — which is why strike placement and hard stops matter more here than in equities.
 
-## Rules / Setup
+## Construction
 
-### Entry
-1. **Call christmas tree (bullish):** Buy 1 ATM call, sell 1 OTM call (e.g., $5-10 above ATM), sell 1 further OTM call (e.g., $10-20 above ATM). All same expiration.
-2. **Put christmas tree (bearish):** Buy 1 ATM put, sell 1 OTM put, sell 1 further OTM put.
-3. **Equal spacing is not required:** The strikes can be at any intervals, but equal spacing is most common for simplicity.
-4. **Net cost:** The trade should be entered for a small net debit or zero cost. The two short options should largely finance the long option.
-5. **Expiration:** 30-60 DTE. Enough time for the directional move to occur.
-6. **IV environment:** Works best when [[implied-volatility]] is moderate to high, making the short options more valuable and reducing the entry cost.
+Three strikes, three legs (a ladder), one expiry, cash-settled:
 
-### Exit
-1. **Profit target:** Close at 50-75% of max profit when the underlying is near the first short strike.
-2. **Stop-loss:** Close if the underlying blows through the second short strike with momentum. Beyond this point, losses begin accelerating.
-3. **If the underlying does not move:** The position loses the small debit paid as all options expire worthless. Accept the loss.
-4. **Rolling:** If the move is taking longer than expected, consider rolling the entire structure out in time.
+| Leg | Action | Strike | Purpose |
+|---|---|---|---|
+| 1 | Buy 1 call | ATM (K0) | directional long |
+| 2 | Sell 1 call | OTM (K1, e.g. +$8k-$12k on BTC) | first short (finances the long) |
+| 3 | Sell 1 call | further OTM (K2, e.g. +$18k-$22k) | second short (uncovered) |
 
-### Position Sizing
-Max risk on the downside = net debit paid (small). Max risk on the upside (beyond the outer strikes) = potentially significant, depending on how far beyond the position extends. Size conservatively: 1-3% of the account.
+- **Strike selection:** long ATM; the two shorts placed at the target zone and beyond. Strikes need not be equally spaced, though equal spacing is common. A **put christmas tree** mirrors this for a bearish view.
+- **Ratios:** 1 long : 2 short (net short one extra option — the source of the uncovered tail).
+- **Net cost:** small **debit or near-zero** — the two shorts largely finance the long.
+- **Tenor:** 30-60 DTE so the directional move has time to arrive.
 
-## Payoff Profile
-- **Max profit:** Occurs when the underlying is at the **first short strike** at expiration. Equals (first short strike - long strike) minus net debit.
-- **Max loss (downside):** The net debit paid. Occurs if the underlying does not move and all options expire worthless.
-- **Max loss (upside/beyond):** Increases beyond the second short strike. The position has one uncovered short option past the outer strike, creating loss potential similar to a naked short option.
-- **Break-even (lower):** Long strike + net debit paid.
-- **Break-even (upper):** Depends on the structure; approximately the second short strike + max profit.
+## Payoff & breakevens
 
-## Example Trade
-**Asset:** AMZN trading at $190, 40 DTE. You expect a rally to approximately $200 but not beyond $210.
-1. **Buy 1 AMZN $190 call** at $7.50.
-2. **Sell 1 AMZN $200 call** at $3.50.
-3. **Sell 1 AMZN $210 call** at $1.50.
-4. **Net debit:** $7.50 - $3.50 - $1.50 = **$2.50** ($250 per christmas tree).
-5. **Max profit at $200:** The $190 call is worth $10, the $200 call is worthless, the $210 call is worthless. Profit = $10.00 - $2.50 = **$7.50** ($750).
-6. **At $210:** The $190 call is worth $20, the $200 call is worth $10 (loss), the $210 call is worthless. P&L = $20 - $10 - $2.50 = **$7.50** ($750). Still max profit range.
-7. **At $220:** The $190 call is worth $30, the $200 call is worth $20 (loss), the $210 call is worth $10 (loss). P&L = $30 - $20 - $10 - $2.50 = **-$2.50** ($-250). Back to break-even.
-8. **Above $220:** Losses increase $1 for $1 due to the uncovered short call.
-9. **Below $190:** All expire worthless. Loss = **$2.50** ($250, the net debit).
+For the call christmas tree (long K0, short K1, short K2, small net debit d):
 
-## Advantages
-- **Low cost entry:** The two short options substantially reduce or eliminate the cost of the long option
-- **Defined downside risk:** If the underlying does not move, the loss is limited to the small net debit
-- **Profits from moderate moves:** Ideal for traders with a specific price target zone rather than an open-ended directional view
-- **Wide profit zone:** Between the first and second short strikes, the trade is at or near max profit
-- **Flexible construction:** Strikes can be spaced to match specific chart levels, [[support-resistance-breakout|support/resistance]] zones, or expected move calculations
+- **Max profit** = (K1 − K0) − d, on a settle at the first short strike K1 (extends as a plateau from K1 to K2).
+- **Downside max loss** = the net debit d, if price does not move (all calls expire worthless).
+- **Upside tail (beyond K2):** losses **escalate $1-for-$1** past the upper breakeven — one uncovered short call. This is naked-short exposure.
+- **Lower breakeven** = K0 + d.
+- **Upper breakeven** = K2 + max profit (approx.); above it, open-ended loss.
 
-## Disadvantages
-- **Unlimited risk beyond the outer strike:** The uncovered short option creates escalating losses if the underlying overshoots
-- **Narrow optimal outcome:** Max profit requires the move to stop in a specific range
-- **Complex execution:** Three legs with potentially wide bid-ask spreads make clean fills difficult
-- **Requires active management:** The uncovered short leg demands monitoring; a runaway move must be closed quickly
+The graph rises from a small loss (no move) to a wide profit plateau between K1 and K2, then turns down through the upper breakeven into escalating loss — the "tree" that keeps falling on the far side.
 
-## See Also
-- [[butterfly-spread]] -- similar profit-at-a-target concept but with defined risk on both sides
-- [[broken-wing-butterfly]] -- another asymmetric multi-leg structure with directional bias
-- [[ratio-spread]] -- the christmas tree is essentially a ratio spread with an additional short leg
-- [[backspread]] -- the opposite approach: profits from big moves, not moderate ones
+## Greeks profile
+
+- **Delta:** **directional** at entry (long the ATM call → net long delta for a call tree); it flips negative once price runs past the shorts into the naked region.
+- **Gamma:** long near the ATM strike early, turning **increasingly negative** past the shorts — and dangerously so beyond K2 where the uncovered short dominates near expiry.
+- **Theta:** mixed early; **positive** once price sits inside the K1-K2 profit plateau (net short two options there).
+- **Vega:** roughly **negative** overall (net short two options); a DVOL spike while price is in the naked region is doubly painful.
+
+## Market view / when to use
+
+- You expect a **moderate, bounded move** to a specific target zone — not a runaway trend, not a range.
+- You want a **very cheap or free** directional expression and will accept a capped downside (the debit) plus a monitored tail.
+- **Moderate-to-elevated DVOL** so the two shorts finance the long — but you must be confident the move *stops* in the plateau.
+- You have a strong view on a ceiling/floor (a resistance level, an OI wall) beyond which you do not expect price to travel.
+
+## Adjustments & management
+
+- **Profit target:** close at **50-75% of max profit** when price is in the K1-K2 plateau. Do not hold the uncovered short into expiry-week gamma.
+- **Hard stop on the tail:** if price blows **through K2 with momentum**, close immediately — beyond this point losses accelerate like a naked short. This stop is non-negotiable in crypto.
+- **No move:** if the catalyst passes and price sits below K0, accept the small debit loss; do not roll indefinitely.
+- **Buy back the outer short** (convert to a [[butterfly-spread]] or [[broken-wing-butterfly]]) to cap the tail if you want to hold through an event.
+- **Roll out** in time only if the moderate-move thesis is intact but slow.
+
+## Crypto specifics
+
+- **The uncovered short is the crypto hazard.** Equities have a close each day; **crypto trades 24/7 and gaps on weekends**, so a melt-up (or, for a put tree, a liquidation cascade) can blow through K2 at 03:00 UTC with the naked short fully exposed and no chance to react. Treat the tail as real: size small, set alerts, and prefer converting to a defined-risk fly before major catalysts.
+- **Venue & underlyings:** [[deribit]] BTC/ETH only — the ladder needs strike granularity and depth; **alt options are too thin** and their gap risk on the naked leg is worse.
+- **Inverse vs linear/USDC settlement:** use **USDC-margined (linear)** so the debit, plateau, and breakevens are clean USD; inverse (coin-margined) distorts the ladder and worsens wrong-way risk on the naked leg.
+- **Portfolio-margin blow-up risk:** the uncovered short consumes Deribit **portfolio margin that balloons in a DVOL spike** — the classic short-gamma margin spiral, sharper in crypto. A gap toward the naked leg can force-liquidate the position at the worst tick.
+- **DVOL regime:** moderate-to-elevated DVOL funds the shorts; but selling naked convexity into a DVOL that then spikes is the losing setup — the naked leg's vega and gamma both turn against you.
+- **No [[section-1256-contracts|§1256]]:** gains and the naked-leg P&L are ordinary capital-gains events on offshore Deribit — no 60/40 US shelter; record-keeping across legs is onerous.
+- **Cash settlement (08:00 UTC):** removes single-stock-style assignment/pin risk, but does **not** remove the economic tail of the uncovered short.
+- **Perp funding / dealer gamma:** heavy dealer short-gamma above spot makes a melt-up cascade more likely — a warning for a call tree's naked upper leg. Funding-driven call skew makes the shorts richer (better financing) but also flags a crowded long-perp book that can squeeze.
+
+## Worked crypto example
+
+**Setup (BTC, USDC-margined/linear).** BTC spot **$108,000**; you expect a rally to ~**$118,000** on ETF-flow momentum but not beyond ~$128,000; DVOL **46**. 40 DTE. Call christmas tree.
+
+**Trade (per 1-BTC contract):**
+- Buy 1 $108,000 call for **$6,500**.
+- Sell 1 $118,000 call for **$3,200**.
+- Sell 1 $128,000 call for **$1,600**.
+- **Net debit = $6,500 − $3,200 − $1,600 = $1,700 = downside max loss.**
+- **Max profit = ($118,000 − $108,000) − $1,700 = $8,300**, on a settle between $118,000 and $128,000.
+- **Lower breakeven = $108,000 + $1,700 = $109,700.**
+- **Upper breakeven = $128,000 + $8,300 = $136,300** — **above this, escalating naked-short losses.**
+
+Payoff at expiration:
+
+| BTC at expiry | P&L (per contract) | Note |
+|---|---|---|
+| ≤ $108,000 | −$1,700 | debit lost (no move) |
+| $109,700 | $0 | lower breakeven |
+| $118,000 - $128,000 | +$8,300 | max-profit plateau |
+| $136,300 | $0 | upper breakeven |
+| $146,300 | −$10,000 | naked short: $1-for-$1 loss above breakeven |
+
+**Path A — target hit.** BTC grinds to $120,000 by expiry (inside the plateau) → close for **~+$6,000/contract** (bank ~70% of max; do not carry the naked $128k short into expiry week).
+
+**Path B — no move.** BTC chops around $107,000; all calls expire worthless → **−$1,700/contract** (the debit).
+
+**Path C — runaway (the tail).** A weekend short squeeze gaps BTC to $142,000. Above the $136,300 breakeven the naked $128k short bleeds $1-for-$1 → mark ≈ **−$5,700/contract** and climbing. The **hard stop at K2 ($128,000)** exists precisely to close before this — a 24/7 gap can skip the stop, which is why the position is sized small and converted to a fly before known catalysts.
+
+## Sources
+
+- [[greeks-live]] / [[deribit]] documentation — IV surface, USDC-margined vs inverse settlement, portfolio-margin behavior in vol spikes, 08:00 UTC cash settlement.
+- [[book-option-volatility-and-pricing]] — Natenberg on ladders and ratio structures with an uncovered short (mechanics port to crypto; the tail is worse in a 24/7 market).
+- Crypto liquidation-cascade record (2020-03, 2022 LUNA/FTX, 2025-10-10) — why the naked leg's gap risk is real, not theoretical.
+
+## Getting the Data (CryptoDataAPI)
+
+The IV surface used to price the ladder comes from **Deribit / [[greeks-live]]**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the flow, dealer-gamma, funding, liquidation, and volatility-regime context used to place the target zone and watch the naked-leg tail.
+
+**Live:**
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (resistance/OI walls to place K1/K2 against)
+- `GET /api/v1/quant/gex` — Gamma Exposure; short-dealer-gamma above spot flags squeeze/cascade risk toward the naked leg
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations, early warning for the runaway move that hits the tail
+- `GET /api/v1/volatility/regime` — per-asset vol regime; avoid selling naked convexity into an expanding-vol read
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, the skew driver and a crowded-positioning gauge
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol / range context and target sizing
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the move distribution
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+## Related
+
+- [[butterfly-spread]] — the defined-risk cousin (convert the tree to a fly to cap the tail)
+- [[broken-wing-butterfly]] — asymmetric structure with a *capped* tail instead of a naked one
+- [[ratio-spread]] — the christmas tree is a ratio spread with an extra short leg
+- [[jade-lizard]] — a premium structure that caps the upside instead of leaving it naked
+- [[iron-condor]] — defined-risk range structure for comparison
+- [[crypto-options-volatility-selling]] — the short-premium context
+- [[deribit]], [[greeks-live]] — venue and analytics; surface source
+- [[implied-volatility]], [[realized-volatility]], [[volatility-surface]] — the vol inputs
+- [[funding-rate]], [[gamma-exposure]], [[max-pain]] — positioning, squeeze, and level context
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[theta]], [[vega]], [[gamma]], [[delta]] — the Greeks that drive the position
+- [[cryptodataapi]], [[cryptodataapi-market-intelligence]] — the data layer

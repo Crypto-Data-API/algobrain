@@ -2,106 +2,111 @@
 title: "Weekly Options"
 type: concept
 created: 2026-05-06
-updated: 2026-06-11
+updated: 2026-07-14
 status: good
-tags: [options, derivatives, weekly]
-aliases: ["Weeklys", "Weeklies", "SPXW", "Weekly Options"]
+tags: [options, derivatives, weekly, crypto]
+aliases: ["Weeklys", "Weeklies", "SPXW", "Weekly Options", "Deribit Weeklies"]
 domain: [derivatives, options]
+prerequisites: ["[[options]]", "[[greeks]]", "[[theta]]", "[[gamma]]"]
 difficulty: intermediate
-related: ["[[0dte-trading]]", "[[gamma-scalping]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]"]
+markets: [crypto, options]
+related: ["[[0dte-trading]]", "[[gamma-scalping]]", "[[deribit]]", "[[dvol]]", "[[max-pain]]", "[[funding-rate]]", "[[implied-volatility]]", "[[iv-crush]]", "[[options-portfolio-construction]]"]
 ---
 
-**Weekly options** ("Weeklys") are option contracts that expire within a week of listing rather than following the traditional monthly third-Friday cycle. The Cboe introduced them in 2005 as a small experiment on a handful of products; today they cover essentially every trading day on SPX and most liquid equity underliers, and weekly volume — including same-day [[0dte-trading|0DTE]] expirations — exceeds traditional monthly volume on the index complex. Weeklies have a fundamentally different Greeks profile from monthlies: faster theta decay, sharper gamma near expiration, and less vega — which makes them powerful tools for event-driven trading and dangerous tools for un-managed short positions.
+**Weekly options** ("Weeklys") are option contracts that expire within a week of listing rather than following the traditional monthly cycle. Cboe introduced them for equities/indices in 2005; today they dominate index volume. In crypto they are the everyday tool: [[deribit|Deribit]] lists **daily, weekly (Friday), monthly, and quarterly** BTC/ETH options, all cash-settled to the Deribit index at **08:00 UTC**. Weeklies have a fundamentally different Greeks profile from monthlies — **faster [[theta]] decay, sharper [[gamma]] near expiry, and lower [[vega]]** — which makes them powerful for event-driven trading and dangerous for un-managed short positions. In crypto's high-[[realized-volatility|realized-vol]] tape, short weekly gamma is among the fastest ways to lose money.
 
 ## Overview
 
-The original options market settled on monthly third-Friday expirations as the standard cycle going back to the 1973 listing of the first listed equity options. Weeklies were an additive innovation: rather than wait for the next monthly, traders can now target almost any specific day for entry and exit.
+Weeklies were an additive innovation over the monthly third-Friday cycle: rather than wait for the next monthly, traders target almost any specific day for entry and exit. Origin and expansion in traditional markets:
 
-Cboe rolled them out gradually:
-
-- **2005** — first listing of "Weeklys" on a small set of products.
+- **2005** — first Cboe "Weeklys" on a small set of products.
 - **2010s** — broad expansion to hundreds of equity, ETF, and index underliers.
-- **November 2022** — Cboe completes daily SPX expirations by adding Tuesday and Thursday SPXW listings (Monday/Wednesday/Friday were already daily). This turns SPX into a continuous-expiration market: every business day of the week now has at least one expiration.
-- **2023+** — weekly and daily options exceed traditional monthly volume on SPX; 0DTE trading becomes a major share of total options activity.
+- **Nov 2022** — Cboe completes daily SPX expirations (adding Tuesday/Thursday SPXW), turning SPX into a continuous-expiration market.
+- **2023+** — weekly and daily options exceed monthly volume on the index complex; [[0dte-trading|0DTE]] becomes a major share of activity.
 
-Most equity options remain Friday-only weekly listings. The index complex (SPX, NDX, RUT, XSP) has the broadest daily coverage.
+Crypto followed the same arc: Deribit's short-dated and daily BTC/ETH options now carry a large share of volume, and 0DTE-style crypto trading has grown around daily expiries.
 
-## Cycle Mechanics
+## Weekly vs monthly: the Greeks (asset-agnostic core)
 
-- **Symbol convention** — SPX weeklies trade under the symbol **SPXW** (PM-settled), distinct from traditional monthly **SPX** (AM-settled).
-- **Listing horizon** — weeklies are typically listed 1–6 weeks before expiration; new listings appear continuously as old ones expire.
-- **Strike density** — comparable to or denser than monthly chains at the front, especially in the last week of life.
-- **Expiration day** — most equity weeklies expire Friday; SPX expires every business day; some products have Wed and/or Mon weeklies.
-
-## Weekly vs Monthly (theta/gamma comparison)
-
-The differences in Greeks structure are not just quantitative — they change strategy design.
+The differences in Greeks structure change strategy design, in crypto and TradFi alike.
 
 **Theta (time decay):**
 
-- Theta is non-linear and accelerates as expiration approaches. A weekly option spends its entire life inside that acceleration zone, so a same-strike weekly typically loses time value much faster per day than a monthly with the same delta.
-- For premium sellers, this means weeklies offer higher daily theta yield per unit of premium collected — but the position must be actively managed because everything else accelerates too.
+- Theta is non-linear and accelerates into expiration. A weekly spends its whole life inside that acceleration zone, so a same-strike weekly loses time value much faster per day than a monthly at the same delta.
+- For premium sellers, weeklies offer higher daily theta yield per unit of premium — but the position must be actively managed because everything else accelerates too.
 
 **Gamma:**
 
-- Gamma rises sharply in the final days. A weekly's gamma late in its life can be 5–10x its theoretical equivalent at the same delta on a 30-day option.
-- Sharp gamma means small moves in the underlying create outsized P&L swings — both ways. Short gamma positions in the last day or two of a weekly can suffer catastrophic losses on a single intraday move.
+- Gamma rises sharply in the final days; a weekly's late-life gamma can be 5–10× the same-delta 30-day option.
+- Sharp gamma means small underlying moves create outsized P&L swings both ways. **Short gamma in the last day or two of a weekly can suffer catastrophic losses on a single move** — acute in crypto, where a 5–10% intraday move is routine.
 
 **Vega:**
 
-- Vega declines as expiration approaches. Weeklies have low vega, which means [[implied-volatility]] changes contribute less to their P&L than for monthlies. They are a closer-to-pure bet on realized price movement (and time).
+- Vega declines toward expiration; weeklies have low vega, so [[implied-volatility|IV]]/[[dvol|DVOL]] changes contribute less to their P&L. They are a closer-to-pure bet on realized price movement and time.
 
-**Practical implication:** weeklies trade time and price; monthlies trade time, price, and vol. Strategy choice should reflect which exposure the trader actually wants.
+**Practical implication:** weeklies trade *time and price*; monthlies trade *time, price, and vol*. Choose the tenor whose exposure you actually want.
 
-## Settlement Differences (SPXW PM vs SPX AM)
+## Crypto specifics (Deribit)
 
-For S&P 500 options specifically, weeklies and monthlies settle differently:
+### Cycle and settlement — no AM/PM distinction
 
-- **SPX traditional monthlies (3rd Friday)** — **AM-settled** to the Special Opening Quotation (SOQ), calculated from opening prints of all 500 components on Friday morning. Final trading occurs Thursday afternoon.
-- **SPXW weeklies** (including 0DTE) — **PM-settled** to the 4:00pm ET closing print of the SPX index. Trading on the expiration day continues until 4:00pm.
+- **Expiries** on Deribit: **daily**, **weekly (Fridays)**, **monthly**, and **quarterly (last Friday of Mar/Jun/Sep/Dec)** — all at **08:00 UTC**.
+- **Settlement**: every Deribit option, weekly or quarterly, is **cash-settled to the Deribit index** (a composite of major spot venues) at 08:00 UTC. Unlike SPX's split between AM-settled monthlies (SOQ) and PM-settled SPXW weeklies, crypto has **no AM/PM settlement mismatch** — so a Deribit calendar spread does not carry the overnight settlement-basis risk that an SPX/SPXW calendar does. This is a genuine simplification for crypto calendar and diagonal structures.
+- **Inverse (coin-margined)**: settlement value is paid/received in the coin; read short-weekly risk in cash terms (see [[black-scholes-model#Inverse vs linear settlement — the effect on price and Greeks]]).
+- **European, cash-settled**: no physical assignment/pin-risk in the equity sense — the option settles to the index number, avoiding the "will I be assigned?" ambiguity of physically-settled weeklies.
 
-Spreads that mix AM- and PM-settled contracts (e.g., a calendar that buys a monthly and sells a weekly at the same strike) carry overnight gap risk because the two legs settle to different reference values. See am-vs-pm-settlement for full mechanics.
+### 24/7, weekend expiries, and funding
 
-## Tax Status
+- Crypto weeklies live **through weekends**, and the Friday 08:00 UTC expiry means a weekly's most dangerous final hours can coincide with thin overnight/weekend liquidity — amplifying the short-gamma risk above.
+- Rolling weekly hedges in [[perpetual-futures|perps]] pay/receive [[funding-rate|funding]] continuously; weekly and monthly Deribit expiries interact with **[[max-pain|max-pain]] gravitation** and dealer [[gamma-exposure|gamma]] hedging around 08:00 UTC, and with perp funding resets across venues (see [[deribit]]).
 
-For tax purposes, weekly options take the status of their underlying:
+### Tax note
 
-- **SPX/NDX/RUT/XSP weeklies** — qualify as [[section-1256-contracts|Section 1256]] contracts; 60/40 tax treatment applies regardless of how short the holding period is. A 2-minute SPXW scalp still gets the 60/40 blend.
-- **SPY/QQQ/IWM weeklies** — taxed as standard equity options; no Section 1256 treatment.
-- **Single-stock weeklies** — taxed as standard equity options.
+The US **[[section-1256-contracts|Section 1256]] / 60-40** treatment that makes SPXW attractive for TradFi traders is an equity-index feature and **does not apply to crypto options** — crypto options are taxed under local rules (e.g., AU trader tax; see the wiki's tax section). Do not import the SPX tax rationale into a crypto weekly-options plan.
 
-This is one of the key reasons active short-term SPX traders use SPXW rather than SPY weeklies despite SPY's penny pricing.
+## Portfolio use cases (crypto)
 
-## Portfolio Use Cases
-
-Professionally managed options portfolios use weeklies in several specific scenarios:
-
-- **Precise event timing** — selling a weekly straddle into earnings or a specific data release captures the IV crush or realized move with no exposure beyond the event window. See earnings-options-strategies.
-- **Faster premium decay** — overlay strategies that systematically sell short-dated premium against a longer-dated position (e.g., diagonal calendars, double diagonals) extract theta faster on the short leg using weeklies.
-- **Defined-risk earnings** — buying a weekly butterfly or iron condor for a known event provides a fixed-cost bet with no overnight assignment risk on cash-settled SPX/XSP variants.
-- **Tactical gamma scalping** — long-gamma weekly positions in a known catalyst window, where the trader actively delta-hedges and harvests realized vol > implied vol. See [[gamma-scalping]].
-- **Hedge layering** — buying weekly OTM puts as cheap, short-duration tail protection that rolls each week, allowing the portfolio to dynamically size hedge cost based on regime.
+- **Precise event timing** — sell a weekly straddle into a known catalyst (FOMC, CPI, an ETF ruling) to capture [[iv-crush]] or the realized move with no exposure beyond the event window.
+- **Tactical [[gamma-scalping|gamma scalping]]** — long-gamma weekly positions in a known catalyst window, actively delta-hedged on Deribit + perps, harvesting realized vol > implied.
+- **Faster premium decay** — diagonal/calendar overlays that sell short-dated Deribit weekly premium against longer-dated positions extract theta faster on the short leg.
+- **Defined-risk event bets** — a weekly butterfly or iron condor for a known event: fixed cost, cash-settled, no assignment risk.
+- **Rolling tail hedges** — buy weekly OTM puts as cheap, short-duration protection that rolls each week, sizing hedge cost to the current [[dvol|DVOL]] regime.
 
 ## Risks
 
-- **Gamma blowups** — short weekly positions can lose multiples of the premium collected on a single sharp underlying move; the worst single-day P&L losses in retail and pro options trading typically come from short gamma in the last 1–2 days of a weekly.
-- **Liquidity at non-standard strikes** — strikes outside the most heavily-traded ranges can have very wide bid/ask spreads in the final hours.
-- **Pin risk** for physically-settled (e.g., SPY weekly) — when the underlying closes near a strike at 4:00pm Friday, sellers do not know if they will be assigned.
-- **AM vs PM mismatch** — already noted; a SPX/SPXW calendar built without awareness of settlement type can produce surprise overnight P&L.
-- **Theta-style overcrowding** — daily and weekly premium-selling strategies have become consensus retail trades, which can erode the [[volatility-risk-premium]] specifically at the very front of the term structure.
+- **Gamma blowups** — short weekly positions can lose multiples of premium collected on a single sharp move; worst-case single-day losses in options trading come from short gamma in the last 1–2 days of a weekly. Crypto's move sizes make this worse than equities.
+- **Liquidity at non-standard strikes** — strikes outside the heavily-traded range can have very wide spreads in the final hours, especially over weekends.
+- **Front-of-curve vol crowding** — daily/weekly premium selling has become a consensus trade in both TradFi and crypto, which can erode the [[variance-risk-premium|volatility risk premium]] at the very front of the term structure.
+- **Funding through the roll** — weekly perp hedges accrue funding that must be netted against the theta harvested.
+
+## Getting the Data (CryptoDataAPI)
+
+Weekly-options positioning is read through options OI/max-pain, the catalyst calendar, and funding; the IV surface and DVOL come from Deribit / Greeks.live:
+
+- **Options OI / max pain — expiry positioning** — `GET /api/v1/market-intelligence/options` (BTC options OI, volume, max pain). See [[cryptodataapi-market-intelligence]].
+- **Event calendar — time weeklies to catalysts** — `GET /api/v1/event/calendar`. See [[cryptodataapi-regimes]].
+- **Funding — the roll carry** — `GET /api/v1/derivatives/funding-rates?coin=BTC`. See [[cryptodataapi-derivatives]].
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
 
 ## Related
 
-- [[0dte-trading]] — same-day weekly extreme
-- [[section-1256-contracts]]
-- [[gamma-scalping]]
-- [[implied-volatility]]
-- [[volatility-risk-premium]]
-- [[options-position-sizing]]
-- [[options-portfolio-construction]]
+- [[0dte-trading]] — the same-day weekly extreme
+- [[gamma-scalping]] — long-gamma weekly positions harvested via delta hedging
+- [[deribit]] — the crypto venue; daily/weekly/monthly/quarterly expiries at 08:00 UTC
+- [[dvol|DVOL]] — the vol benchmark for weekly IV (Deribit/Greeks.live)
+- [[max-pain]] — expiry gravitation around Deribit weeklies/monthlies
+- [[iv-crush]] — what a weekly straddle sold into an event harvests
+- [[funding-rate]] — the carry on rolling weekly perp hedges
+- [[implied-volatility]] — the vol input weeklies carry little of
+- [[options-portfolio-construction]] — fitting weeklies into a book
 
 ## Sources
 
-- Cboe Weeklys product history and listing schedules
-- Cboe SPXW specifications (Tuesday/Thursday additions, Nov 2022)
-- OCC settlement and exercise rules
+- Cboe Weeklys product history and SPXW specifications (Tuesday/Thursday additions, Nov 2022)
+- Deribit public documentation — expiry schedule, index cash settlement, and inverse contract specs
+- [[book-option-volatility-and-pricing]] — Natenberg on the theta/gamma acceleration of short-dated options
+- OCC settlement and exercise rules (traditional-market context)

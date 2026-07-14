@@ -1,24 +1,25 @@
 ---
-title: "Long-Dated Options (LEAPS)"
+title: "Long-Dated Options"
 type: concept
 created: 2026-05-07
-updated: 2026-06-21
-status: excellent
-tags: [options, derivatives, leaps, long-dated, vega, rho]
-aliases: ["LEAPS", "Long-Dated Options", "Long-Term Options"]
-related: ["[[long-call]]", "[[long-put]]", "[[options-greeks]]", "[[vega]]", "[[theta]]", "[[gamma]]", "[[rho]]", "[[implied-volatility]]", "[[options-risk-budgeting]]", "[[volatility-skew]]", "[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[stock-replacement]]", "[[poor-mans-covered-call]]", "[[interest-rate-options]]"]
+updated: 2026-07-14
+status: good
+tags: [options, derivatives, crypto, leaps, long-dated, vega, rho]
+markets: [crypto, options]
+aliases: ["LEAPS", "Long-Dated Options", "Long-Term Options", "Long-Dated Crypto Options"]
+related: ["[[deribit]]", "[[dvol]]", "[[funding-rate]]", "[[crypto-options-volatility-selling]]", "[[long-call]]", "[[long-put]]", "[[options-greeks]]", "[[vega]]", "[[theta]]", "[[gamma]]", "[[rho]]", "[[implied-volatility]]", "[[options-risk-budgeting]]", "[[volatility-skew]]", "[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[stock-replacement]]", "[[poor-mans-covered-call]]", "[[interest-rate-options]]"]
 domain: [options, portfolio-theory, risk-management]
 prerequisites: ["[[options-greeks]]", "[[implied-volatility]]", "[[long-call]]", "[[long-put]]"]
 difficulty: intermediate
 ---
 
-**LEAPS** -- Long-term Equity AnticiPation Securities -- are listed equity options with expirations 9 to 36 months out, distinguished from standard listed options (which typically expire within 12 months) only by their longer tenor. Originally introduced by the [[cboe|CBOE]] in 1990, LEAPS now exist on most large-cap US equities, the major US equity indices (SPX, NDX, RUT, DJX), and many ETFs. Their Greeks behave materially differently from short-dated options -- high [[vega]], low [[gamma]], low [[theta]], meaningful [[rho]] -- which makes them a distinct portfolio-construction tool rather than just "regular options with more time."
+**Long-dated options** are options whose expiration is many months to a few years out — far enough that their Greeks behave differently from short-dated contracts (high [[vega]], low [[gamma]], low [[theta]], meaningful rate/carry sensitivity), making them a distinct portfolio-construction tool rather than just "regular options with more time." The equity instance is **LEAPS** (Long-term Equity AnticiPation Securities) — listed equity options with 9-36-month tenors, introduced by the [[cboe|CBOE]] in 1990. **Crypto has no LEAPS**: on [[deribit|Deribit]], the deep long end of the BTC/ETH curve tops out near ~12 months (quarterly/annual expiries), it is European-style and cash-settled to a Deribit index, and its "rho" is really sensitivity to the [[perpetual-futures|perp]]/[[funding-rate|funding]]-and-basis forward rather than a risk-free discount rate. This page covers the long-dated-options concept in general and flags where the crypto version diverges from the equity LEAPS framing it was first written for (collected in **Crypto specifics**).
 
 ## Overview
 
 The defining trade-offs of long-dated options vs. short-dated options:
 
-| Greek | Short-dated (30 DTE) | LEAPS (730 DTE / 2yr) |
+| Greek | Short-dated (30 DTE) | Long-dated (~365 DTE / ~1yr — crypto's practical max) |
 |---|---|---|
 | Delta range | Sensitive: 0.05 to 0.95 across small price moves | Compressed: ~0.30 to ~0.85 even for far-OTM/ITM strikes |
 | Gamma | High, especially near ATM in last weeks | Low; nearly constant across strikes |
@@ -27,7 +28,7 @@ The defining trade-offs of long-dated options vs. short-dated options:
 | Rho | Negligible | Material; sensitive to forward rates |
 | IV impact on price | Modest | Large |
 
-This profile makes LEAPS structurally different instruments. A short-dated ATM call is a high-gamma, high-theta directional bet. A LEAPS ATM call is a long-vega, long-rho, slowly-decaying stock proxy with embedded leverage. The same insight is sometimes phrased as: short-dated options are bets on *price path*, while [[long-dated-options]] are bets on *price level plus volatility regime plus interest-rate regime*. See [[options-greeks]] for the full Greek framework and [[theta]] / [[vega]] / [[gamma]] / [[rho]] for the individual sensitivities.
+This profile makes long-dated options structurally different instruments. A short-dated ATM call is a high-gamma, high-theta directional bet. A long-dated ATM call is a long-vega, high-carry, slowly-decaying coin proxy with embedded leverage. The same insight is sometimes phrased as: short-dated options are bets on *price path*, while long-dated options are bets on *price level plus volatility regime plus carry/[[funding-rate|funding]] regime* (the crypto stand-in for the equity trader's interest-rate regime). See [[options-greeks]] for the full Greek framework and [[theta]] / [[vega]] / [[gamma]] / [[rho]] for the individual sensitivities.
 
 ### When to reach for LEAPS vs short-dated options
 
@@ -45,16 +46,20 @@ See [[stock-replacement]], [[poor-mans-covered-call]], and [[long-volatility-str
 
 ## Contract Specifications
 
-LEAPS share the same listed-options framework as standard options, with these differences:
+Long-dated options share the same framework as standard options; the specs differ sharply between the equity LEAPS instance and the crypto (Deribit) instance:
 
-- **Tenor**: 9-36 months at issuance. The CBOE typically lists January expirations 2 and sometimes 3 years out; some indices have additional June and December LEAPS expirations.
-- **Strike spacing**: Wider than near-month options for the same underlying (typically $5 increments on stocks above $50, $10 on stocks above $200).
-- **Conversion to standard option**: When a LEAPS contract reaches less than 9 months to expiration, it is reclassified as a standard option (no contract change; the symbol remains the same).
-- **Style**: American-style for individual stocks; European-style for cash-settled indices (SPX, NDX, RUT).
-- **Settlement**: Physical delivery for stock LEAPS; cash for index LEAPS.
-- **Listed venues**: [[cboe|Cboe]], NYSE Arca Options, NASDAQ PHLX -- LEAPS on major underlyings trade on multiple exchanges with shared liquidity.
+| Spec | Equity LEAPS | Crypto long-dated (Deribit BTC/ETH) |
+|---|---|---|
+| **Max tenor** | 9-36 months (CBOE lists January expiries 2-3 years out) | ~12 months — quarterly and annual (last-Friday) expiries; no multi-year contracts |
+| **Style** | American on single stocks; European on cash indices (SPX, NDX) | European-style only (no early exercise) |
+| **Settlement** | Physical delivery on stock LEAPS; cash on index LEAPS | Cash-settled to a Deribit BTC/ETH index — no delivery, minimal pin risk |
+| **Venues** | CBOE, NYSE Arca, NASDAQ PHLX (shared liquidity) | Effectively one venue (Deribit); OKX/Binance far thinner at the long end |
+| **Strike spacing** | Wider than near-month ($5-$10 increments) | Coarser at the long end; far fewer listed strikes than the front months |
+| **Reclassification** | A LEAPS becomes a "standard option" under 9 months (same symbol) | No LEAPS category exists — a contract is just longer-dated |
 
-(Source: [[cboe-leaps-product-specs]])
+The practical consequence: there is **no 2-3 year crypto option**. The longest liquid crypto tenor (~1 year, and realistically the 3-6 month part of the curve for anything but headline BTC/ETH strikes) is shorter than the equity trader's LEAPS toolkit, so multi-year theses cannot be expressed in a single crypto contract — they must be rolled.
+
+(Source: [[deribit]] contract specs; [[cboe-leaps-product-specs]] for the equity contrast)
 
 ## Pricing & Greeks
 
@@ -90,7 +95,9 @@ This is the most-overlooked feature of LEAPS:
 - For a 2-year ATM call, rho can be 5-12% of the premium per 100bp move in rates.
 - In the 2022-2024 rate-hike cycle, this materially affected LEAPS pricing -- ITM call premiums rose with rates (cheaper to delay payment for the strike), while LEAPS puts richened (better to receive cash sooner if rates are high).
 
-LEAPS books on a [[options-risk-budgeting]] dashboard *must* show net rho explicitly; equity-options books typically ignore rho but cannot ignore it once LEAPS are in the mix. See also [[interest-rate-options]] for the full rate-sensitivity dimension.
+Long-dated books on a [[options-risk-budgeting]] dashboard *must* show net rho explicitly; short-dated books typically ignore rho but cannot ignore it once long tenors are in the mix. See also [[interest-rate-options]] for the full rate-sensitivity dimension.
+
+**Crypto's rho is carry, not rates.** A Deribit option prices off the *forward*, which for BTC/ETH embeds the [[perpetual-futures|perp]]/futures **basis and [[funding-rate|funding]]**, not just a USD risk-free rate. So the long-dated crypto analog of rho is sensitivity to that carry — and crypto carry is far more volatile than the Fed funds path: futures basis and funding swing from deeply positive in leveraged bull runs (a long-dated call's forward is pushed up) to negative after a crash. A 6-12 month BTC call therefore carries a meaningful, *time-varying* carry sensitivity that a US-rates rho intuition understates. USDC-margined (linear) contracts also carry ordinary USD-rate rho on top; inverse (coin-margined) contracts fold the carry into the collateral leg. Track net carry sensitivity the way an equity LEAPS book tracks rho.
 
 ### Skew & term structure
 
@@ -112,46 +119,47 @@ The √T relationships mean a LEAPS is best understood as a *vega-and-rho instru
 
 ## Use Cases
 
-### 1. Stock replacement / leverage
+### 1. Coin replacement / leverage
 
-The dominant retail use. Buy a deep-ITM LEAPS call (delta 0.80-0.90) instead of buying 100 shares:
-- Capital outlay: a 24-month $150-strike call on a $200 stock might cost $60. Buying 100 shares costs $20,000; the call costs $6,000 for similar directional exposure.
-- Effective leverage: roughly 3-4x (you control $20,000 of stock for $6,000 of capital).
-- Trade-off: you pay theta (small but real) and lose any dividends. You also have a hard expiration -- a 24-month timeout that long-stock holders don't face. See [[stock-replacement]].
+The dominant retail use — the crypto analog of stock replacement. Buy a deep-ITM long-dated call (delta 0.80-0.90) instead of holding spot:
+- Capital outlay: a ~1-year $40,000-strike BTC call with BTC at $60,000 might cost ~$24,000; holding 1 BTC of spot costs $60,000. The call gives similar directional exposure for a fraction of the capital, with downside capped at the premium.
+- Effective leverage: roughly 2-3x, without the liquidation risk of a [[perpetual-futures|perp]] — the option cannot be margin-called out at a bad tick the way a leveraged perp can.
+- Trade-off: you pay theta (small but real), forgo any staking yield (for ETH), and accept a hard ~1-year expiration/roll. See [[stock-replacement]].
 
-### 2. Multi-month directional bets
+### 2. Multi-quarter directional bets
 
-For a thesis that plays out over 6-18 months (e.g. a corporate restructuring, a multi-quarter cyclical recovery, a product cycle), LEAPS deliver the directional exposure with a long enough runway to avoid timing being a P&L driver. A 30-day call on the same thesis would expire before the thesis can play out and lose to theta even if directionally correct.
+For a thesis that plays out over 6-12 months (e.g. a halving-cycle move, ETF-driven adoption, a major protocol upgrade, or a multi-quarter narrative), long-dated calls deliver directional exposure with enough runway that timing isn't the dominant P&L driver. A 1-week call on the same thesis would expire long before it plays out and bleed to theta even if directionally correct. Crypto's ~12-month tenor cap means genuinely multi-year theses must be *rolled* rather than held in one contract.
 
-### 3. Vol-of-vol arbitrage
+### 3. Vol-of-vol / term-structure trades
 
-LEAPS are the long leg in [[term-structure]] vol trades:
-- Long 24-month LEAPS, short 1-month options of the same strike: profits if long-end IV rises relative to short-end (term-structure steepening), or if realised vol over the next month is low.
-- This is a [[long-volatility-strategies|long-vol]] trade in the term-structure dimension.
+Long-dated crypto options are the long leg in [[term-structure]] vol trades:
+- Long a 6-12 month option, short a 1-week or 1-month of the same strike: profits if long-end [[dvol|DVOL]]/IV rises relative to the front (term-structure steepening), or if realised vol over the next month is low.
+- This is a [[long-volatility-strategies|long-vol]] trade in the term-structure dimension — readily expressed on Deribit's BTC/ETH surface.
 
 ### 4. Poor man's covered call
 
-Buy a deep-ITM 12-18 month LEAPS call as a stock substitute, then sell short-dated OTM calls against it for income. This [[poor-mans-covered-call]] structure mimics a [[covered-calls|covered call]] with a fraction of the capital outlay.
+Buy a deep-ITM 6-12 month call as a coin substitute, then sell short-dated OTM calls against it for income. This [[poor-mans-covered-call]] structure mimics a [[covered-calls|covered call]] on spot BTC/ETH with a fraction of the capital outlay (and is what several on-chain covered-call vaults automate).
 
-### 5. LEAPS puts as long-dated portfolio hedge
+### 5. Long-dated puts as portfolio hedge
 
-A long-dated OTM SPX put rolled annually is the cheapest form of [[tail-risk-hedging]] in many cycles -- the per-day theta cost is much lower than continuously rolling 60-day puts, though the convexity is also lower.
+A long-dated OTM BTC put rolled periodically is a relatively cheap form of [[tail-risk-hedging]] for a crypto book — the per-day theta cost is lower than continuously rolling short-dated puts, though the convexity is also lower and the ~12-month tenor limit means more frequent rolls than an equity SPX-put program.
 
 ### 6. Tax considerations
 
-Holding a LEAPS contract for more than 12 months can qualify gains for long-term capital gains treatment in many jurisdictions (notably the US), unlike short-dated options whose gains are typically short-term. This effective ~15-20% tax saving on the gain can be material for retail investors. Tax law is jurisdiction-specific and changes -- consult a tax professional. (Source: [[irs-publication-550]])
+There is **no [[section-1256-contracts|§1256]] treatment** for crypto options — the US 60/40 blended rate and mark-to-market that apply to broad-based index options (and the long-term-cap-gains benefit of a >12-month equity LEAPS hold) do **not** carry over to offshore Deribit contracts. Treatment is jurisdiction-specific: in the US, crypto-option gains are ordinary capital gains (short-term at full marginal rates unless a holding-period rule applies); in Australia, an *investor* holding >12 months may access the 50% CGT discount, but anyone with *trader* status is taxed on ordinary/trading-income account regardless of tenor. Record-keeping across coin-margined P&L is onerous. Tax law changes — consult a professional. (Source: [[section-1256-contracts]]; [[irs-publication-550]] for the US-equity contrast)
 
 ## Risks
 
-- **Liquidity is materially worse than near-month options**. Bid-ask spreads on stock LEAPS can be 5-15% of mid; spreads on index LEAPS (SPX, NDX) are tighter (1-3%) but still wider than near-month. A round-trip cost of 4-8% is common.
-- **Vega risk dominates** -- a long LEAPS call held through a vol-regime decline can lose money even with the underlying flat or up.
-- **Rho risk** -- a hike cycle damages LEAPS puts and helps LEAPS ITM calls; a cut cycle does the opposite. Easy to overlook.
-- **Dividend risk** -- LEAPS calls do not receive dividends; on high-yielding stocks, the implicit dividend cost over 2 years is substantial. Check the forward dividend stream before pricing the trade.
-- **Corporate actions** -- mergers, special dividends, and splits over multi-year tenors can trigger contract adjustments that change the economic exposure (see [[options-corporate-action-adjustments]]).
-- **Early exercise risk on American-style LEAPS calls** when a large dividend is imminent (rare but real).
-- **Pin risk at expiration** is generally low (low gamma), but a LEAPS contract that is near-ATM at expiration still faces a binary settlement.
-- **Model risk** -- the long-end of the IV surface is less observable and more model-dependent. Different brokers may price the same LEAPS materially differently.
-- **Time concentration** -- a portfolio of LEAPS expiring in the same January creates a single point of expiration risk; consider laddering.
+- **Liquidity is materially worse than near-month options** -- and worse in crypto than in equities. The long end of even the Deribit BTC/ETH curve carries wide vol-point spreads and thin OI; anything past ~6 months is sparse, and long-dated alt options effectively don't trade. Budget a large round-trip cost and use RFQ (Paradigm) for size.
+- **Vega risk dominates** -- a long-dated call held through a [[dvol|DVOL]]/vol-regime decline can lose money even with the underlying flat or up. Crypto vol regimes shift faster and further than equity ones.
+- **Carry (crypto "rho") risk** -- the forward embeds [[funding-rate|funding]] and futures basis, which swing widely; a long-dated call bought when carry is richly positive re-prices lower if funding collapses post-crash. USDC contracts add ordinary USD-rate rho on top.
+- **Forgone yield** -- long-dated ETH calls do not receive staking yield, and the forward already prices the carry; there are no equity-style cash dividends, but the yield/carry drag over ~1 year is real. Check the forward (basis) before pricing the trade.
+- **Corporate-action analogs** -- hard forks, token migrations, and large airdrops over a long tenor can trigger Deribit contract adjustments that change the economic exposure (the crypto counterpart of splits/special dividends; see [[options-corporate-action-adjustments]]).
+- **No early-exercise risk** -- Deribit options are European-style and cash-settled, so the American-style early-assignment risk that dogs equity LEAPS calls simply does not exist. A genuine advantage.
+- **Pin risk at expiration** is generally low (low gamma) and further muted by cash settlement to the Deribit index, but a near-ATM long-dated contract still faces a binary settlement print.
+- **Model risk** -- the long end of the crypto IV surface is even less observable than equities': DVOL is a 30-day index, so long-dated IV is extrapolated, and the sparse long-end strike grid makes the surface more model-dependent.
+- **Single-venue and collateral risk** -- Deribit *is* the long-dated crypto options market (no deep fallback), and inverse (coin-margined) contracts move the collateral with spot; use USDC-margined (linear) for clean USD exposure.
+- **Time concentration** -- a book of long-dated options all on the same quarterly/annual expiry is a single point of expiration risk; ladder across Deribit's quarterly cycles.
 
 ## Strike & Tenor Selection
 
@@ -159,44 +167,78 @@ LEAPS construction is dominated by two choices: how deep ITM to go, and how far 
 
 | Goal | Strike choice | Delta | Rationale |
 |---|---|---|---|
-| Tightest stock proxy | deep ITM | 0.80-0.90 | minimal extrinsic, behaves like shares, low theta drag |
+| Tightest coin proxy | deep ITM | 0.80-0.90 | minimal extrinsic, behaves like spot, low theta drag |
 | Maximum leverage | ATM / slightly OTM | 0.45-0.55 | most embedded leverage, most theta + vega risk |
-| Long-vol expression | ATM | ~0.50 | maximises vega-per-dollar; bet is on IV regime |
+| Long-vol expression | ATM | ~0.50 | maximises vega-per-dollar; bet is on the [[dvol\|DVOL]] regime |
 | PMCC base ([[poor-mans-covered-call]]) | deep ITM | 0.80+ | low extrinsic so short calls can be sold profitably |
-| Tail hedge ([[tail-risk-hedging]]) | OTM put | 0.10-0.25 | cheap convexity, rolled annually |
+| Tail hedge ([[tail-risk-hedging]]) | OTM put | 0.10-0.25 | cheap convexity, rolled periodically |
 
-Tenor: the practitioner default is the longest *liquid* expiration, then roll roughly 9-12 months before expiry to avoid the gamma/theta acceleration of the final months — i.e. stay in the slow-decay zone and never let a LEAPS become a short-dated option by accident. Laddering expirations across two or three January cycles diffuses the single-point expiration risk noted under Risks.
+Tenor: the practitioner default is the longest *liquid* expiration — in crypto that means the deep 3-6 month part of the Deribit curve, with ~12 months the outer bound rather than the 2-3 years an equity LEAPS trader can reach. Roll before the contract drifts into the thin, high-decay final weeks — stay in the slow-decay zone and never let a long-dated position become a short-dated one by accident. Ladder across Deribit's quarterly cycles to diffuse the single-point expiration risk noted under Risks.
 
 ## Worked Example
 
-**Setup**: 2026-05-07. Trader is bullish AAPL on a 24-month thesis: services-led margin expansion. AAPL at $192. The trader considers two paths:
+**Setup**: 2026-07-14. Trader is bullish BTC on a ~1-year thesis: halving-cycle continuation plus ETF-driven adoption. BTC at $60,000. The trader considers two paths (USDC-margined, 1 BTC per contract):
 
-1. Buy 100 shares: $19,200 outlay; full upside; full downside; receives $96/year in dividends.
-2. Buy 1x AAPL Jan 2028 $170 LEAPS call (~620 days out) at $42 per contract: $4,200 outlay; long 0.78 delta = ~78 shares of effective exposure; no dividend.
+1. Buy 1 BTC spot: $60,000 outlay; full upside; full downside; no yield.
+2. Buy 1x Deribit ~1-year (Jun 2027) $45,000-strike BTC call (deep ITM, ~0.80 delta) at ~$21,000: $21,000 outlay; ~0.80 delta = ~0.8 BTC of effective exposure; downside capped at the premium.
 
-**Greeks comparison** (per LEAPS contract):
+**Greeks comparison** (per contract, 1 BTC):
 
 | Greek | Value |
 |---|---|
-| Delta | +0.78 |
-| Gamma | +0.005 (very low) |
-| Vega | +$0.45 per IV point (vs. ~$0.10 on a 30-DTE call) |
-| Theta | -$0.04/day |
-| Rho | +$0.32 per 100bp |
+| Delta | +0.80 |
+| Gamma | +low (near-flat at this tenor) |
+| Vega | +$180 per DVOL/IV point (vs. ~$40 on a 30-DTE call) |
+| Theta | small per day (accumulates over the ~1-year hold) |
+| Carry (rho analog) | sensitive to [[funding-rate\|funding]]/basis — rich positive funding lifts the call's forward |
 
-**Scenarios at expiration (Jan 2028)**:
-- AAPL at $250: stock = +$5,800 + $192 dividends = +$5,992 (+31% on capital). LEAPS = max(250-170, 0) - 42 = $38 = +$3,800 per contract (+90% on capital). LEAPS wins on % return; stock wins on absolute dollars.
-- AAPL at $192 (flat): stock = +$192 dividends = +1%. LEAPS = max(192-170, 0) - 42 = -$20 = -$2,000 (-48%). Stock wins decisively in flat scenarios.
-- AAPL at $150: stock = -$4,200 + $192 = -$4,008 (-21%). LEAPS = -$4,200 (-100%). Both lose; LEAPS loss is bounded.
-- AAPL at $100: stock = -$9,200 + $192 = -$9,008 (-47%). LEAPS = -$4,200 (-100%). LEAPS loss is bounded; bigger drawdown protection.
+**Scenarios at expiration (Jun 2027)**:
+- BTC at $90,000: spot = +$30,000 (+50% on capital). Call = max(90k−45k, 0) − 21k = +$24,000 (+114% on capital). Call wins on % return; spot wins on absolute dollars.
+- BTC at $60,000 (flat): spot = 0%. Call = max(60k−45k, 0) − 21k = −$6,000 (−29%). Spot wins decisively in flat scenarios (theta + vega bleed).
+- BTC at $45,000: spot = −$15,000 (−25%). Call = −$21,000 (−100%). Both lose; here the strike floor means the deep-ITM call has actually lost more.
+- BTC at $30,000: spot = −$30,000 (−50%). Call = −$21,000 (bounded). Below ~$39,000 the call's capped loss beats holding spot — the bearish-tail protection.
 
-**Vega scenario**: AAPL flat at $192 but IV drops 5 points (large vol regime change). LEAPS = -$2.25 in vega P&L on top of theta -- a notable hidden loss the stock holder doesn't experience.
+**Vega scenario**: BTC flat at $60,000 but DVOL drops 10 points (a large but routine crypto vol-regime change). The call takes ~−$1,800 in vega P&L on top of theta — a notable hidden loss the spot holder doesn't experience, and larger in crypto than in equities because DVOL swings are wider.
 
-The LEAPS structure is asymmetric: better in the bullish tail and the bearish tail (bounded loss), worse in the middle (theta + vega bleed if flat). It's a leveraged bet on movement, not a stock substitute in the strict sense.
+The long-dated call is asymmetric: better in the bullish tail and the bearish tail (bounded loss below ~$39k), worse in the middle (theta + vega bleed if flat). It's a leveraged bet on movement with capped downside — and, unlike a [[perpetual-futures|perp]], it cannot be liquidated at a bad tick — not a spot substitute in the strict sense.
+
+## Crypto Specifics
+
+The Greek scaling (vega ∝ √T, gamma ∝ 1/√T, theta small-but-cumulative) is model-driven and identical for crypto. What changes going from equity LEAPS to long-dated crypto options:
+
+- **No LEAPS, and a ~12-month ceiling.** [[deribit|Deribit]] lists BTC/ETH options out to roughly a year (quarterly/annual expiries); there is no 2-3 year contract. Multi-year theses must be rolled, so "buy and forget" stock-replacement over 24 months has no crypto equivalent.
+- **"Rho" is carry, not rates.** Crypto options price off the perp/futures forward, which embeds [[funding-rate|funding]] and basis. That carry is far more volatile than a central-bank rate path and can flip sign around a crash — the dominant rate-like sensitivity of a long-dated crypto position. USDC (linear) contracts add ordinary USD rho on top.
+- **No dividends; forgone staking yield instead.** BTC pays nothing; ETH's staking yield is a soft carry the option holder forgoes, already reflected in the forward. There is no dividend-driven early-assignment problem because Deribit options are **European-style and cash-settled** — removing a whole class of equity-LEAPS risk.
+- **Thinner long end.** Liquidity past ~6 months is sparse even on BTC/ETH and non-existent on alts; expect wide vol-point spreads and use RFQ for size. The long-dated crypto surface is more model-dependent than equities' because [[dvol|DVOL]] is only a 30-day index and the long end is extrapolated.
+- **Fatter vol swings.** DVOL can move far more than VIX, so the vega that dominates a long-dated position is a larger, faster-moving risk than an equity LEAPS holder faces.
+
+## Getting the Data (CryptoDataAPI)
+
+The long-dated IV surface and DVOL term structure come from [[deribit|Deribit]] / [[greeks-live|Greeks.live]]. [[cryptodataapi|CryptoDataAPI]] supplies the carry (funding/basis), vol-regime, and options-positioning context that price the "rho" and vega of a long-dated book.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, the crypto carry / "rho" driver
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — futures/perp OI feeding the basis
+- `GET /api/v1/volatility/regime` — per-asset vol regime (the vega risk that dominates long tenors)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — historical funding for modeling carry over a long hold
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime detail + 60-day history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; funding/derivatives detail on [[cryptodataapi]].
 
 ## Related
 
-- [[long-call]] / [[long-put]] -- LEAPS are these structures with longer tenor
+- [[deribit]] — the venue and contract specs for long-dated crypto options
+- [[dvol]] — the crypto vol index; its 30-day tenor is why the long end is extrapolated
+- [[funding-rate]] — the carry that stands in for equity LEAPS rho
+- [[crypto-options-volatility-selling]] — the short-vol counterpart on the same surface
+- [[long-call]] / [[long-put]] -- long-dated options are these structures with longer tenor
 - [[options-greeks]] -- the Greek framework with LEAPS-specific behaviour
 - [[vega]] -- the dominant Greek for LEAPS
 - [[rho]] -- usually ignored; mandatory to track for LEAPS

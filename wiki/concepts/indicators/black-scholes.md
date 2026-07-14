@@ -6,7 +6,7 @@ updated: 2026-04-07
 status: good
 tags: [options, derivatives, quantitative, history]
 aliases: ["Black-Scholes-Merton", "BSM Model", "Black-Scholes Formula", "Black-Scholes"]
-related: ["[[options-greeks]]", "[[implied-volatility]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[ed-thorp]]", "[[options]]", "[[volatility-smile]]", "[[volatility-skew]]"]
+related: ["[[options-greeks]]", "[[implied-volatility]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[ed-thorp]]", "[[options]]", "[[volatility-smile]]", "[[volatility-skew]]", "[[black-scholes-model]]"]
 domain: [derivatives, quantitative]
 difficulty: advanced
 ---
@@ -82,6 +82,7 @@ Despite these limitations, Black-Scholes remains the universal starting point fo
 
 ## Related
 
+- [[black-scholes-model]] — Black-Scholes applied to crypto options (Deribit, inverse contracts, DVOL, 24/7)
 - [[options-greeks]]
 - [[implied-volatility]]
 - [[volatility-smile]]

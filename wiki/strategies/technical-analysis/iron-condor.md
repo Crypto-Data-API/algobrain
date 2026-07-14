@@ -2,96 +2,139 @@
 title: "Iron Condor"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-07
+updated: 2026-07-14
 status: good
-tags: [options, premium-selling, iron-condor, defined-risk, neutral, credit-spread, SPY-weekly]
-aliases: ["IC", "Iron Condor Spread"]
+tags: [options, crypto, derivatives, volatility, mean-reversion, bitcoin, ethereum]
+aliases: ["IC", "Iron Condor Spread", "Crypto Iron Condor"]
 strategy_type: quantitative
 timeframe: swing
-markets: [stocks]
+markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
-related: ["[[covered-call]]", "[[straddle-strangle]]", "[[implied-volatility]]", "[[theta]]", "[[delta]]", "[[bollinger-bands]]", "[[option-volatility-and-pricing]]"]
+related: ["[[crypto-options-volatility-selling]]", "[[iron-butterfly]]", "[[reverse-iron-condor]]", "[[jade-lizard]]", "[[short-strangle]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[volatility-surface]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[max-pain]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[gamma]]", "[[delta]]", "[[cryptodataapi]]"]
 ---
 
 # Iron Condor
 
 ## Overview
 
-The Iron Condor is a **market-neutral**, defined-risk options strategy that profits when the underlying asset stays within a range. It combines two [[credit-spread]]s: a short [[put-spread]] below the current price and a short [[call-spread]] above it. Premium is collected from both sides, and the trade profits as long as the price remains between the two short strikes at expiration. Maximum loss is capped at the width of the wider spread minus the total premium received.
+The iron condor is a **market-neutral, defined-risk** options structure that profits when the underlying stays inside a range. It is two [[credit-spread|credit spreads]] sold simultaneously: a short put spread below spot and a short call spread above it. You collect premium from both wings and keep the maximum credit if the underlying finishes between the two short strikes at expiry. Maximum loss is capped at the width of the wider spread minus the total credit received. It is the workhorse [[crypto-options-volatility-selling|short-volatility]] structure — a defined-risk way to sell the [[variance-risk-premium]] on a market whose tail is genuinely fat.
 
-Iron Condors are one of the most popular strategies among retail options traders, especially on high-liquidity underlyings like SPY, QQQ, and IWM weeklies. The strategy thrives in low-[[volatility]], range-bound markets and exploits the tendency of [[implied-volatility]] to overstate actual realized moves (Source: [[book-option-volatility-and-pricing]]). Traders who sell Iron Condors are essentially betting that the market will be less dramatic than the options market expects.
+On [[deribit]] BTC and ETH options, the iron condor is the preferred expression of a short-vol view because the long protective wings hard-cap the tail that a naked [[short-strangle]] leaves open — and in crypto that tail is not theoretical (BTC has printed −50% in 24h and −12% in 60s). The trade thrives when DVOL (Deribit's 30-day implied-vol index) is elevated relative to subsequently realized volatility, and it bleeds in a trend or a vol shock.
 
-## Rules
+## Construction
 
-### Entry
-1. **Identify a range-bound underlying** with elevated [[implied-volatility]] (IV rank > 30, ideally > 50). SPY weekly options are the most common choice.
-2. **Sell the put spread:** Sell an OTM put at approximately 0.15-0.20 [[delta]], buy a further OTM put 1-5 strikes below as protection.
-3. **Sell the call spread:** Sell an OTM call at approximately 0.15-0.20 delta, buy a further OTM call 1-5 strikes above.
-4. **Expiration:** 30-45 DTE for standard monthly cycles; 7-14 DTE for weekly SPY condors.
-5. **Target credit:** Aim to collect at least 1/3 of the spread width as premium (e.g., $1.00 credit on $3-wide spreads).
+Four legs, one expiry, cash-settled to the Deribit index:
 
-### Exit
-1. **Profit target:** Close the entire position when 50-75% of maximum profit is captured. Do not hold to expiration hoping for the last few cents.
-2. **Stop-loss:** Close if the position reaches 1.5-2x the credit received in losses. Alternatively, close the tested side when the short strike is breached.
-3. **Roll the tested side:** If the price approaches one short strike, buy back the threatened spread and sell a new one further out in time and/or price for a credit.
-4. **Expiration management:** If holding into the final week, close any spread where the short strike is within 1-2% of the current price to avoid [[gamma]] risk and pin risk.
+| Leg | Action | Strike (delta) | Purpose |
+|---|---|---|---|
+| 1 | Sell 1 put | ~15-20Δ OTM below spot | short put spread |
+| 2 | Buy 1 put | ~8-10Δ, further OTM | protective lower wing |
+| 3 | Sell 1 call | ~15-20Δ OTM above spot | short call spread |
+| 4 | Buy 1 call | ~8-10Δ, further OTM | protective upper wing |
 
-### Position Sizing
-Risk no more than 2-5% of the account per condor. The max loss per condor is (spread width - credit received) x 100. Size positions so that losing on three consecutive condors does not materially damage the account.
+- **Strike selection:** short strikes at 15-20 delta target ~70-85% probability of expiring OTM. Long wings sit one to a few strikes further out and define the loss.
+- **Ratios:** 1:1:1:1 — one contract per leg (Deribit contracts are 1 BTC or 1 ETH each).
+- **Net credit:** the sum of the two short premiums minus the two long-wing premiums. Aim to collect **≥ 1/3 of a wing's width** as credit. Balanced condors use equal-width wings; skew-tilted condors widen the richer wing (see *Crypto specifics*).
+- **Tenor:** 21-45 DTE is the theta-rich zone. Avoid weeklies (gamma too hot for crypto's continuous gaps) and > 60 DTE (vega exposure to a DVOL regime shift dominates).
 
-## Indicators Used
-- [[implied-volatility]] / IV rank -- enter when IV is elevated relative to its recent range
-- [[delta]] -- guides short strike selection (0.15-0.20 delta targets ~70-80% probability OTM)
-- [[bollinger-bands]] -- visually confirm that price is mean-reverting within a range
-- [[atr]] -- validate that expected move is contained within the short strikes
-- [[theta]] -- daily P&L from time decay; the engine of the strategy
-- [[vega]] -- exposure to IV changes; a drop in IV after entry accelerates profits
+## Payoff & breakevens
 
-## Example Trade
-**Asset:** SPY trading at $520, 35 DTE, IV rank at 45
-1. **Sell 1 SPY $500/$495 put spread** for $0.85 credit.
-2. **Sell 1 SPY $540/$545 call spread** for $0.80 credit.
-3. **Total credit:** $1.65 ($165 per condor). **Max loss:** $5.00 - $1.65 = $3.35 ($335).
-4. **Break-even points:** $498.35 on the downside, $541.65 on the upside.
-5. After 20 days, SPY has drifted from $520 to $525. Both spreads have decayed significantly. The condor can be closed for $0.50, locking in $1.15 profit (70% of max).
-6. **Result:** +$115 per condor on $335 max risk = 34.3% return on risk in ~20 days.
+- **Max profit** = net credit, when spot is between the two short strikes at expiry.
+- **Max loss** = wider spread width − net credit, when spot is at or beyond either long wing.
+- **Lower breakeven** = short put strike − net credit.
+- **Upper breakeven** = short call strike + net credit.
 
-## Performance Characteristics
-- **Win Rate:** 70-85% when short strikes are set at 0.15-0.20 delta.
-- **Profit Factor:** 1.2-1.8. High win rate offset by occasional max losses that erase several winners.
-- **Best Market Conditions:** Low-volatility, range-bound markets with elevated IV rank. Post-[[vix]]-spike environments are ideal.
-- **Worst Market Conditions:** Trending markets, sudden gaps (earnings, geopolitical events), and prolonged low-IV environments where premiums are too thin.
-- **Key Metric:** Long-term profitability depends on average winner vs. average loser ratio. Mechanical management rules (50% profit target, 2x loss stop) are critical.
+The payoff is a flat-topped plateau (the full-credit zone between the shorts) sloping down to two capped-loss floors at the wings — a "table" rather than the iron fly's "tent."
 
-## Advantages
-- **Defined risk:** Maximum loss is known at entry -- no margin calls or unlimited exposure
-- **High probability of profit:** Short strikes with 0.15-0.20 delta have 70-85% chance of expiring OTM
-- **Benefits from [[theta]] decay:** Profits accumulate daily as long as the price stays in range
-- **Benefits from IV crush:** A drop in [[implied-volatility]] after entry accelerates the position's profit
-- **Market-neutral:** No need to pick direction; only needs the underlying to stay within a range
+## Greeks profile
 
-## Disadvantages
-- **Asymmetric risk/reward:** You risk $3-4 to make $1-2 per condor; one max loss erases 2-3 winners
-- **[[gamma]] risk near expiration:** If the price is near a short strike in the final days, the position becomes extremely sensitive to small moves (Source: [[book-option-volatility-and-pricing]])
-- **Requires active management:** Cannot simply set and forget; rolling, adjusting, and closing are frequent
-- **Poor in trending markets:** A sustained directional move will breach one side and produce a max loss
-- **Commission drag:** Four legs per trade means higher transaction costs, especially on weeklies
+- **Delta:** ~0 at entry (balanced). Flips positive if spot falls toward the put spread, negative if it rises toward the call spread. A skew-tilted condor carries a small starting delta.
+- **Gamma:** negative throughout — the position dislikes movement, and the short gamma accelerates as spot approaches a short strike near expiry. In crypto this bites continuously (no market close to cap an overnight move).
+- **Theta:** positive — the income engine. Decay is slower than an [[iron-butterfly]] (strikes are OTM, less extrinsic value) but the profit zone is far wider.
+- **Vega:** negative — the structure profits from falling implied vol (DVOL crush after entry) and loses when DVOL spikes. This is the dominant early-life P&L driver.
 
-## Iron Condors in Long/Short Portfolios
+## Market view / when to use
 
-Some discretionary long-short methodologies favor directional options strategies (long calls/puts) over premium-selling strategies like iron condors. However, iron condors may be used within a long-short-equity portfolio when:
+- You expect BTC/ETH to **range** or grind through the life of the trade — no trend, no vol shock.
+- **DVOL is elevated** (roughly the 40th-90th percentile of its trailing year): premium is fat enough to pay for the wings and the tail, but you are not selling into an active vol shock.
+- **VRP confirmation:** DVOL − 30-day realized vol > ~5 vol points (crypto's healthy-premium threshold; wider than the SPX ~2-point rule because both readings run higher and noisier).
+- You want a **defined-risk** short-vol expression rather than a naked strangle — essential in crypto.
 
-- Markets are range-bound and the [[eighty-twenty-analysis|80/20 framework]] identifies low volatility conditions
-- As a complement to directional positions to generate income during the 80% of time when markets lack sufficient volatility for directional trading
+## Adjustments & management
 
-## See Also
-- [[straddle-strangle]] -- the opposite thesis: buying volatility instead of selling it
-- [[covered-call]] -- a simpler premium-selling strategy for stock owners
-- [[implied-volatility]] -- understanding IV is essential for iron condor timing
-- [[theta]] -- the primary profit mechanism for iron condors
-- [[credit-spread]] -- the building block of the iron condor (each side is a credit spread)
-- [[iron-condor-vs-iron-butterfly]] -- comparison of these two neutral premium-selling structures
+- **Profit target:** close at **50% of max credit** (the tastytrade-standard rule ports directly). Do not grind for the last few dollars into expiry-week gamma.
+- **Time stop:** close at **10-14 DTE** — crypto gamma accelerates faster into expiry than equity gamma because gaps are unbounded and continuous.
+- **Roll the tested side:** if spot approaches one short strike, buy back the threatened spread and sell a new one further out in price and/or time for a credit. Rolling the *untested* side down/up toward spot collects extra credit but narrows the range.
+- **Vol-shock kill:** flatten immediately if DVOL rises **> 50% in a session** or position delta exceeds **2× entry delta**. This is the explicit tail circuit-breaker.
+- **Convert to an [[iron-butterfly]]** or add a same-strike spread only if you are deliberately re-centering; otherwise close and re-open cleanly.
+
+## Crypto specifics
+
+- **Venue & underlyings:** [[deribit]] holds the overwhelming majority of crypto options open interest — for BTC and ETH it is effectively "the market." OKX and Binance run smaller books. **Alt options (SOL and below) are too thin for a clean four-leg condor** — stick to BTC/ETH.
+- **Inverse vs linear/USDC settlement:** prefer **USDC-margined (linear)** options so the payoff diagram and breakevens are clean USD numbers. **Inverse (coin-margined) options embed a quanto-like curvature** — your collateral is BTC/ETH, so its USD value moves with spot exactly as the position does, distorting the textbook plateau and adding wrong-way risk on the put wing. Only use inverse if the embedded coin delta is intended.
+- **DVOL regime gate:** open new condors only inside the ~40th-90th DVOL percentile band. Below ~40th the premium is too thin to pay for the tail; above ~90th you are likely selling into a vol shock.
+- **24/7 & weekend gaps:** there is no close and no overnight gap protection, but also continuous trading. Weekend books thin out; a thin-liquidity weekend headline can gap spot through a short strike at 03:00 UTC with no chance to react — the reason defined-risk wings (not a naked strangle) are non-negotiable. Expiry is **08:00 UTC**, cash-settled to Deribit's ~30-minute TWAP index, so there is **no pin/assignment risk** the way US single-stock condors have.
+- **No [[section-1256-contracts|§1256]]:** offshore Deribit contracts get **no 60/40 blended US tax treatment** — every leg is an ordinary capital-gains event (short-term at full marginal rates in the US; trader-status-dependent CGT/income treatment in AU). The after-tax net is materially below an SPX condor's.
+- **Perp funding interaction:** crypto skew is set by the [[perpetual-futures|perp]] book, not by hedgers. When [[funding-rate|funding]] is richly positive (leveraged longs paying), 25-delta call skew firms and the call wing is richer to sell; after a selloff, put skew fattens. Delta-hedging the condor's residual with the perp pays or collects funding.
+- **Fees:** Deribit taker fee is 0.03% of the underlying, **capped at 12.5% of the option premium** — the cap dominates on cheap OTM wings and is a real drag on a four-leg structure.
+
+## Worked crypto example
+
+**Setup (ETH, USDC-margined/linear).** ETH spot **$3,000**; ETH DVOL **52** (≈60th percentile); 30-day realized vol **44** → VRP = 52 − 44 = **8 vol points** (healthy). 33 DTE. Funding mildly positive (+0.02%/8h → slight call-skew richness).
+
+**Trade (per 1-ETH contract):**
+- Sell 18Δ call @ **$3,400** for **$40**; buy 8Δ call @ **$3,650** for **$16** → call spread credit $24.
+- Sell 18Δ put @ **$2,600** for **$48**; buy 8Δ put @ **$2,350** for **$20** → put spread credit $28.
+- **Net credit = $52.** Wing width = $250 each. **Max loss = $250 − $52 = $198.**
+- **Breakevens:** $3,400 + $52 = **$3,452** (up); $2,600 − $52 = **$2,548** (down).
+
+**Path A — base case (range).** Over three weeks ETH oscillates $2,850-$3,150 and DVOL drifts to 46. The condor decays to ~$24; close at 54% of credit for **+$28/contract**. Perp delta-hedging roughly nets to zero (small funding collection offsets slippage).
+
+**Path B — moderate spike.** A macro headline pushes ETH −6% and DVOL 52 → 70. The put wing is tested; hedging goes continuous. Mark −$40. Vol reverts over the next week; close at the 12-DTE time stop for **+$15/contract** (the long put wing capped the drawdown).
+
+**Path C — vol shock.** ETH gaps −18% overnight; DVOL 52 → 110. **Vol-shock kill triggers at the open.** The short put is deep ITM but the long $2,350 put caps the loss near the $198 floor. Net ≈ **−$180/contract** — roughly the sleeve's monthly carry, and the exact scenario the defined-risk wings exist to survive.
 
 ## Sources
-- [[book-option-volatility-and-pricing]] — Natenberg's treatment of multi-leg spreads, gamma risk near expiration, and the volatility risk premium that iron condors exploit
+
+- [[greeks-live]] / [[deribit]] documentation — DVOL construction, IV surface, USDC-margined (linear) vs inverse option settlement, taker-fee premium cap, 08:00 UTC cash settlement.
+- [[book-option-volatility-and-pricing]] — Natenberg on multi-leg credit spreads, gamma risk near expiry, and the volatility risk premium these structures harvest (mechanics port to crypto; costs and tails do not).
+- tastytrade 15-20Δ condor / 50%-profit / time-stop management studies — mechanics port directly; sizing and stops must be tightened for the crypto tail.
+
+## Getting the Data (CryptoDataAPI)
+
+DVOL and the raw IV surface come from **Deribit / [[greeks-live]]**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the complementary options-flow, volatility-regime, dealer-gamma, and funding context used to *time* the condor and read the tape.
+
+**Live:**
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and [[max-pain]] strike (dealer-positioning context for strike selection)
+- `GET /api/v1/volatility/regime` — per-asset vol regime (compressed / expanding / vol_shock / mean_reverting / normal): the entry gate
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/quant/gex` — Gamma Exposure (dealer inventory + liquidation profile): whether spot is likely pinned or cascade-prone
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — perp funding, the crypto skew driver
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations, early warning for the vol shock that breaks a short-premium structure
+
+**Historical:**
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for realized-vol computation
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtesting the structure
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+## Related
+
+- [[crypto-options-volatility-selling]] — the parent short-vol book; the iron condor is its core defined-risk structure
+- [[iron-butterfly]] — the ATM-bodied cousin: higher credit, narrower zone
+- [[reverse-iron-condor]] — the mirror trade (long vol / breakout)
+- [[jade-lizard]] — short put + short call spread; no upside risk
+- [[short-strangle]] — the undefined-risk version this improves on
+- [[deribit]], [[greeks-live]] — venue and analytics/RFQ workbench; DVOL and surface source
+- [[implied-volatility]], [[realized-volatility]], [[volatility-surface]] — the vol inputs
+- [[funding-rate]] — the perp linkage that shapes crypto skew
+- [[gamma-exposure]], [[max-pain]] — dealer-positioning context
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+- [[theta]], [[vega]], [[gamma]], [[delta]] — the Greeks that drive the position
+- [[cryptodataapi]], [[cryptodataapi-market-intelligence]] — the data layer

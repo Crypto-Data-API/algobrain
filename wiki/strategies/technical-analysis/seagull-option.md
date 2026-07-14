@@ -2,74 +2,147 @@
 title: "Seagull Option"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-14
 status: good
-tags: [options, seagull, hedging, directional, three-leg, low-cost, forex, corporate-hedging]
-aliases: ["Seagull Spread", "Bullish Seagull", "Bearish Seagull"]
+tags: [options, crypto, seagull, hedging, directional, three-leg, low-cost, skew]
+aliases: ["Seagull Spread", "Bullish Seagull", "Bearish Seagull", "Crypto Seagull"]
 strategy_type: quantitative
 timeframe: position
-markets: [forex, stocks]
+markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
-related: ["[[risk-reversal]]", "[[iron-condor]]", "[[covered-call]]", "[[butterfly-spread]]", "[[implied-volatility]]", "[[delta]]", "[[collar]]"]
+related: ["[[risk-reversal]]", "[[collar]]", "[[iron-condor]]", "[[covered-call]]", "[[butterfly-spread]]", "[[jade-lizard]]", "[[skew-trading]]", "[[implied-volatility]]", "[[funding-rate]]", "[[delta]]", "[[deribit]]", "[[greeks-live]]", "[[cryptodataapi]]"]
 ---
 
 # Seagull Option
 
 ## Overview
 
-The Seagull Option is a **three-leg** options strategy that provides **cheap directional protection** with an asymmetric payoff profile. The **bullish seagull** combines a call spread (buy lower call, sell higher call) with a short put, while the **bearish seagull** combines a put spread (buy higher put, sell lower put) with a short call. The premium collected from the short option finances part or all of the spread, often creating a **zero-cost or near-zero-cost** hedge with capped upside and significant downside exposure from the naked leg.
+The **seagull** is a **three-leg** structure that provides **cheap directional exposure or protection** with an asymmetric, three-strike payoff (the wings-and-body shape that gives it the name). A **bullish seagull** is a call spread (buy lower call, sell higher call) plus a **short put**; a **bearish seagull** is a put spread (buy higher put, sell lower put) plus a **short call**. The short option finances the spread, typically creating a **zero-cost or near-zero-cost** structure with a **capped** favourable move and a **naked-leg tail** on the opposite side. It is the natural extension of the [[risk-reversal]]: take a risk reversal and *cap* the long wing into a spread, cheapening it enough to self-finance. In crypto it fits two roles — cheap leveraged directional bets on [[deribit]] BTC/ETH, and low-cost hedging of a spot bag or a corporate/fund **BTC/ETH treasury**.
 
-Seagulls are **extremely popular in [[forex]] corporate hedging** where companies need to protect against adverse currency moves without paying large premiums. The strategy extends the [[risk-reversal]] concept by capping the protective side (turning the long option into a spread), generating enough premium to make the structure cost-free. The tradeoff: protection is capped, and the short option creates risk in the opposite direction.
+## Construction
 
-## Rules / Setup
+Three OTM legs, same expiry `T`, on Deribit BTC/ETH:
 
-### Entry
-1. **Bullish seagull:** Buy 1 OTM call (strike A), sell 1 further OTM call (strike B), sell 1 OTM put (strike C). All same expiration.
-2. **Bearish seagull:** Buy 1 OTM put (strike A), sell 1 further OTM put (strike B), sell 1 OTM call (strike C).
-3. **Zero-cost structure:** Adjust the strikes so the credit from the short option equals the debit of the spread. The short put (or call) premium should approximately equal the call spread (or put spread) cost.
-4. **Expiration:** 60-180 days for hedging; 30-60 DTE for speculative use.
-5. **Strike selection:** In forex, strikes are typically set at key levels or at specific delta targets (e.g., 25-delta wings).
+- **Bullish seagull** — buy 1 call (strike `A > S`), sell 1 further-OTM call (strike `B > A`), sell 1 OTM put (strike `C < S`). The call spread `A→B` is the payoff; the short put `C` funds it.
+- **Bearish seagull** — buy 1 put (strike `A < S`), sell 1 further-OTM put (strike `B < A`), sell 1 OTM call (strike `C > S`). The put spread `A→B` is the payoff; the short call `C` funds it.
+- **Zero-cost tuning**: set the strikes so the short-wing credit ≈ the spread's debit. Strikes are commonly placed at delta targets (e.g. buy 25-delta, sell 10-delta wing, sell 25-delta funding leg).
 
-### Exit
-1. **Hedging use:** Hold until the hedge is no longer needed (e.g., the currency exposure is realized).
-2. **Speculative use:** Close at 50-75% of max profit if the underlying moves toward the long strike.
-3. **Manage the naked leg:** If the short option is threatened, buy it back or roll it to limit losses.
-4. **Spread cap reached:** If the underlying moves past the short leg of the spread, close to capture the capped gain.
+Deribit contracts are 1 BTC / 1 ETH, **European-exercise and cash-settled** (no early assignment). Tenor 30–90 DTE for hedging, 21–45 for speculation. USDC-margined (linear) gives clean USD P&L; inverse (coin-margined) embeds a coin delta on the short-wing collateral.
 
-### Position Sizing
-In hedging contexts, size to match the exposure being hedged. For speculative use, size the naked leg as you would any naked option: max loss should represent no more than 3-5% of the account.
+## Payoff & breakevens
 
-## Payoff Profile
-- **Max profit:** Width of the spread (strike B - strike A). Capped when the underlying is beyond the short leg of the spread.
-- **Max loss:** Short option strike x 100 minus any credit. Occurs if the underlying moves sharply through the naked leg.
-- **Dead zone:** Between the naked short and the spread, all options expire worthless. P&L equals the net credit or debit.
-- **Break-even:** For zero-cost entries, approximately at the long option strike.
+Bullish seagull, with spread width `W = B − A`:
 
-## Example Trade
-**Asset:** EUR/USD at 1.1000, 90 DTE. A European exporter hedges EUR appreciation with a bullish seagull:
-1. **Buy 1 EUR/USD 1.1100 call** at 0.0080. **Sell 1 EUR/USD 1.1300 call** at 0.0030. **Sell 1 EUR/USD 1.0800 put** at 0.0050.
-2. **Net cost:** 0.0080 - 0.0030 - 0.0050 = **0.0000** (zero cost).
-3. **EUR/USD rises to 1.1250:** Profit = 0.0150 (150 pips of hedged protection).
-4. **EUR/USD rises to 1.1400:** Call spread at max value. **Profit: 0.0200** (200 pips, capped).
-5. **EUR/USD drops to 1.0700:** Short put costs 0.0100. **Loss: 100 pips.** Below 1.0800, losses grow pip-for-pip.
-6. **EUR/USD stays at 1.1000:** All options expire worthless. **P&L: zero.**
+- **Above `B`**: **max profit = `W`** (± net credit) — capped by the short call.
+- **Between `A` and `B`**: profit rises from ~0 to `W`.
+- **Between `C` and `A`**: flat, P&L ≈ net credit/debit (the "dead zone").
+- **Below `C`**: **loss grows ~1:1 with spot** (the short put) — the naked tail.
+- **Breakevens**: near `A + |debit|` on the upside; near `C − credit` on the downside.
+- **Max loss**: essentially the full downside below `C` (short put to zero), minus any credit.
 
-## Advantages
-- **Zero or very low cost:** The three-leg structure is designed to self-finance, eliminating upfront premium
-- **Directional protection:** Provides meaningful hedge or speculative exposure in the desired direction
-- **Popular and liquid in forex:** Widely quoted by banks and brokers as standard hedging structures
-- **Simple thesis:** Protection between two levels, funded by selling risk on the opposite side
-- **Customizable:** Strike selection allows fine-tuning the protection level, cap, and funding source
+The bearish seagull is the mirror: capped profit as spot falls into the `A→B` put spread, flat dead zone, and a naked short-call tail on a rally above `C`.
 
-## Disadvantages
-- **Capped profit:** The spread structure limits the maximum gain, unlike an outright long option
-- **Naked leg exposure:** The short option creates significant risk if the underlying moves in the opposite direction
-- **Not truly risk-free:** Despite zero cost, the trader takes on meaningful risk from the sold option
-- **Three-leg execution:** Wider bid-ask slippage across three options, especially in OTC forex markets where transparency is lower
+## Greeks profile
 
-## See Also
-- [[risk-reversal]] -- simpler two-leg version without the profit cap
-- [[iron-condor]] -- defined risk on both sides for range-bound markets
-- [[butterfly-spread]] -- another low-cost structure for specific price targets
-- [[jade-lizard]] -- similar three-leg credit structure with different risk characteristics
+A seagull is a directional/skew structure with capped convexity on the payoff side:
+
+| Greek | Bullish seagull | Comment |
+|---|---|---|
+| [[delta]] | **Positive** | Synthetic-long lean, capped above `B` |
+| Gamma | Small, mixed | Long-spread gamma partly offsets short-put gamma; flips sign near strikes |
+| [[vega]] | Small, **short skew** | Net short the funding wing's vega; sensitive to the put-vs-call skew like a risk reversal |
+| [[theta]] | Small, sign per net credit/debit | A credit seagull collects small theta |
+
+Like the [[risk-reversal]], the dominant secondary exposure is **skew** — a bullish seagull is short put-skew (it sold the put) and long a capped slice of call-skew.
+
+## Market view / when to use
+
+- **Cheap capped directional bet.** You expect a move toward `A→B` but want to pay little or nothing — you accept the capped upside and the tail on the funding side. Bullish seagull for an up-move you are willing to buy dips into; bearish seagull for a down-move you are willing to short rallies into.
+- **Hedging a crypto treasury.** A fund or company holding spot BTC/ETH can buy downside protection **for free** with a bearish seagull: buy a protective put spread, finance it by selling an upside call (giving up gains above `C`). This is the crypto analogue of the corporate FX seagull and a cheaper cousin of the [[collar]] (the put *spread* costs less than an outright put, at the cost of a protection floor).
+- **Skew harvest with a cap.** When one wing is richly bid (funding-driven crypto skew — see [[skew-trading]]), sell it as the funding leg and take the cheaper capped spread on the other side.
+
+## Adjustments & management
+
+- **Manage the naked funding leg** — the whole risk lives there. Buy it back or roll it away-and-out if spot approaches it; this is the crypto weekend-gap hazard.
+- **Take the capped gain** — once spot pushes past `B`, the profit is maxed; close to free capital and remove the short-wing risk.
+- **Widen or narrow the spread** to trade off cost vs payoff: a wider `A→B` needs more funding (a closer/riskier short wing).
+- **Convert a hedge as exposure rolls off** — for a treasury hedge, unwind when the spot exposure is realized or the thesis changes.
+- **Delta-hedge on the perp** if you only want the skew slice; the hedge pays/collects [[funding-rate|funding]].
+
+## Crypto specifics
+
+- **Venue & underlyings**: [[deribit]] BTC/ETH; [[greeks-live]] for the three-leg Greeks and skew. Alt seagulls are impractical (thin, wide chains).
+- **Skew-driven funding leg.** Which wing self-finances best depends on crypto skew, which flips with [[funding-rate|perp funding]]: richly positive funding firms call skew (a bearish seagull's short call funds richly); post-crash put skew firms (a bullish seagull's short put funds richly). Read funding before placing the funding leg.
+- **Inverse vs linear settlement.** On inverse (coin-margined) contracts the short wing's exposure and collateral are both in the coin — a double hit on a wrong-way move; **USDC-margined (linear)** keeps it clean.
+- **European, cash-settled → no early assignment**, but the naked funding leg still carries full undefined tail risk to the index at expiry.
+- **24/7 & weekend gaps.** The short funding leg can be blown through by an unbounded weekend gap with no chance to trade out — size it for a Black-Thursday move (2020-03-12, 2025-10-10), not an average session.
+- **No §1256.** Offshore Deribit contracts get no [[section-1256-contracts|§1256]] 60/40 treatment — relevant for corporate/treasury hedgers weighing after-tax cost.
+- **Treasury use is real in crypto.** Corporate and fund BTC/ETH treasuries make the "free downside protection" bearish seagull a genuine institutional use case, replacing the FX-exporter role it plays in traditional markets.
+
+## Risks
+
+- **Naked funding-leg tail** — the defining risk; loss grows 1:1 with spot beyond the short wing, and crypto gaps are unbounded.
+- **Capped payoff** — the favourable move is limited to the spread width, unlike an outright long option or a plain [[risk-reversal]].
+- **Not truly free** — "zero cost" hides meaningful directional risk in the sold wing.
+- **Three-leg slippage** — wider aggregate bid-ask across three Deribit legs; work the order or use an RFQ / block.
+- **Skew regime shift** — the wing you sold can richen before it reverts.
+- **Coin-margin wrong-way risk** on inverse contracts.
+
+## Worked crypto example
+
+**Setup (ETH, 60 DTE, bullish, willing to accumulate on a dip).** ETH spot **$3,000**. You want cheap, capped upside and are happy to buy ETH if it falls to $2,600.
+
+**Trade — bullish seagull (USDC-margined):**
+- **Buy** 1 ETH **3,200 call** @ **$180**
+- **Sell** 1 ETH **3,800 call** @ **$70** (caps the upside; `W = $600`)
+- **Sell** 1 ETH **2,600 put** @ **$110** (funds the spread)
+- **Net cost = 180 − 70 − 110 ≈ $0** (zero-cost).
+
+**Path A — rally into the cap (the target).** ETH to **$3,800+**. The call spread is worth its full **$600**; short put expires worthless. **Profit ≈ +$600** on ~zero capital.
+
+**Path B — partial rally.** ETH to **$3,500**. Call spread worth ≈ $300, short put worthless → **profit ≈ +$300**.
+
+**Path C — dead zone.** ETH finishes at **$2,900** (between $2,600 and $3,200). All legs expire worthless → **P&L ≈ $0**.
+
+**Path D — crash (the tail).** ETH gaps to **$2,300** over a weekend. The short 2,600 put is ≈ $300 ITM → **loss ≈ −$300**, growing the further ETH falls — exactly as if you had been long spot below $2,600 (which was the intent: accumulate on the dip, but sized for the gap).
+
+## Getting the Data (CryptoDataAPI)
+
+The **skew** that decides which wing self-finances a seagull — the 25-delta risk-reversal number and the IV surface — is a **Deribit / [[greeks-live]]** product, *not* served by CryptoDataAPI. [[cryptodataapi]] supplies the drivers and context: funding (the skew driver), options OI/max-pain, dealer gamma, and vol regime.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding; sets which wing is rich to sell as the funding leg
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — perp OI (crowded-positioning context)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, [[max-pain]] strike
+- `GET /api/v1/quant/gex` — [[gamma-exposure|Gamma Exposure]] (dealer inventory / cascade risk into the short wing)
+- `GET /api/v1/volatility/regime` — vol regime (context for wing pricing)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` — funding history (skew-driver backtest)
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol-regime detail + 60-day history
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — OHLCV for [[realized-volatility]]
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+## Related
+
+- [[risk-reversal]] — the two-leg parent (seagull caps its long wing into a spread)
+- [[collar]] — related spot-hedging structure; the seagull is its put-spread, self-funded cousin
+- [[iron-condor]] — defined risk on both sides for range-bound markets
+- [[butterfly-spread]] — another low-cost structure for a price target
+- [[jade-lizard]] — short put + call spread, a related credit structure
+- [[skew-trading]] — choosing which wing to sell as the funding leg
+- [[funding-rate]] — the perp linkage that flips crypto skew
+- [[deribit]], [[greeks-live]] — venue and skew/surface source
+- [[section-1256-contracts]] — the tax shelter crypto options do *not* get
+
+## Sources
+
+- McMillan, *Options as a Strategic Investment* (5th ed.) — three-leg combination structures and their risk.
+- Natenberg, *Option Volatility and Pricing* (2nd ed.) — skew-financed structures and wing selection.
+- [[deribit]] / [[greeks-live]] documentation — European cash settlement, contract specs, inverse vs USDC-margined contracts, 25-delta skew quoting.
