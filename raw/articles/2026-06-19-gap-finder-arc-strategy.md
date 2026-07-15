@@ -323,10 +323,3 @@ Taken together, these roughly twenty to thirty additions will not bloat your wik
     8. https://opentools.ai/youtube-summary/the-3-step-a-trading-strategy-i-use-every-day
     9. https://www.facebook.com/groups/865189615210446/posts/1158818575847547/
     10. https://www.youtube.com/watch?v=UxoAVe4VEBk
-Traceback (most recent call last):
-  File "C:\websites\VENTURE\alfred\tools\gap_finder.py", line 331, in <module>
-    main()
-  File "C:\websites\VENTURE\alfred\tools\gap_finder.py", line 315, in main
-    with open(out_file, "w", encoding="utf-8") as f:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-OSError: [Errno 22] Invalid argument: 'C:\\websites\\VENTURE\\alfred\\raw\\articles\\2026-04-22-gap-finder-https:\\www.youtube.com\\watch?v=t7qn-yqr.md'

@@ -107,4 +107,4 @@ Authored six new pages and extended two existing ones, filling gaps in the strat
 
 ## 2026-07-13 — Vault created
 
-Vault forked from the ALFRED wiki and pruned to crypto-trading scope ("AI Trading Strategy Brain"). Removed stock-market entities, stock news, personal/persona pages, and off-scope equity content; retained crypto, blockchain, DeFi, trading, algorithms, markets, macro context, and general AI knowledge. Added CryptoDataAPI data-source documentation and per-page "Getting the Data (CryptoDataAPI)" sections.
+Vault scoped to crypto-trading ("AI Trading Strategy Brain"). Removed stock-market entities, stock news, personal/persona pages, and off-scope equity content; retained crypto, blockchain, DeFi, trading, algorithms, markets, macro context, and general AI knowledge. Added CryptoDataAPI data-source documentation and per-page "Getting the Data (CryptoDataAPI)" sections.

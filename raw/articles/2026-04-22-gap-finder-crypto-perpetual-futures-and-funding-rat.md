@@ -18,7 +18,7 @@ You are missing critical gaps in **decentralized perpetuals (Perp DEXs)**, **reg
 | **Bitget** | Top-5 global perp exchange by volume, offering 125x leverage and USDT/USDC pairs. | High-leverage venue for altcoin perps; growing liquidity in emerging markets[9]. |
 | **Phemex** | Exchange with 500+ perps, 100x leverage, and pre-market perp trading before spot listing. | Unique for early altcoin exposure; 100% Proof of Reserves adds trust[2]. |
 | **Neutrl Protocol** | Issuer of NUSD (market-neutral synthetic dollar) backed by delta-neutral trading. | Provides stable, non-fiat collateral for perp strategies; avoids fiat stablecoin risk[8]. |
-| **Hyperliquid** | High-performance L1 for perp DEXs, hosting Alfred’s systematic basket library. | Core infrastructure for institutional perp strategies; supports HLP vault architecture[9]. |
+| **Hyperliquid** | High-performance L1 for perp DEXs, hosting systematic basket libraries. | Core infrastructure for institutional perp strategies; supports HLP vault architecture[9]. |
 
 ---
 
@@ -61,7 +61,7 @@ You are missing critical gaps in **decentralized perpetuals (Perp DEXs)**, **reg
 | **Perp DEXs on Non-Crypto Assets** | Platforms now offer perps on gold, silver, FX, and tokenized equities[3]. | Diversifies perp strategies beyond crypto; new arbitrage opportunities. |
 | **MetaMask Perps Integration** | Wallet now connects directly to onchain perp DEXs without CeFi accounts[3]. | Democratizes perp access; reduces counterparty risk. |
 | **Phemex Pre-Market Perps** | Trading perps before spot listing; 500+ perps with 100x leverage[2]. | Early alpha for altcoins; avoids spot listing volatility. |
-| **Hyperliquid L1 for Perps** | High-performance chain hosting Alfred’s systematic basket library[9]. | Enables institutional-grade perp strategies with low latency. |
+| **Hyperliquid L1 for Perps** | High-performance chain hosting systematic basket libraries[9]. | Enables institutional-grade perp strategies with low latency. |
 | **Mark Price Standardization** | CeFi exchanges (Binance, Bybit) now use mark price for liquidation[2]. | Reduces manipulation risk; affects leverage safety. |
 | **100% Proof of Reserves (Phemex)** | Cryptographically verifiable reserves, not just claimed[2]. | Adds trust for high-leverage perp trading; reduces counterparty risk. |
 | **Cross-Margin Perp Adoption** | CeFi exchanges now support cross-margin for perps (Binance, Bybit)[2]. | Improves capital efficiency; reduces blow-up risk. |
