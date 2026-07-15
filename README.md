@@ -1,4 +1,4 @@
-# AI Trading Strategy Brain
+# AI Crypto Trading Strategy Brain
 
 An LLM-maintained Obsidian knowledge base for **crypto trading strategy** — crypto, blockchain, DeFi, trading, algorithms, and markets, with macro and AI context. ~3,500 interlinked markdown pages.
 
