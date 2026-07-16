@@ -2,7 +2,7 @@
 title: "Destra Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["DSYNC"]
@@ -145,4 +145,4 @@ At the core lies $DSYNC, a deflationary utility token that powers and captures v
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

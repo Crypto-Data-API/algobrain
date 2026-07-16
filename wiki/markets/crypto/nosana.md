@@ -2,14 +2,14 @@
 title: "Nosana"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading, machine-learning]
+tags: [ai-trading, altcoins, crypto, machine-learning]
 aliases: ["NOS", "Nosana"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nosana.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[depin]]", "[[decentralized-compute]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-compute]]", "[[depin]]", "[[solana]]"]
 ---
 
 # Nosana

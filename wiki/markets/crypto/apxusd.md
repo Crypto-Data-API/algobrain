@@ -2,14 +2,14 @@
 title: "apxUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["APXUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://apyx.fi"
-related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[base]]", "[[real-world-assets]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # apxUSD
@@ -141,3 +141,119 @@ The 2026-06-18 ATL and the still-discounted 2026-06-21 print together represent 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - Protocol description from Apyx ([https://apyx.fi](https://apyx.fi)). General market knowledge; no specific wiki source ingested yet for the dividend-backed mechanism.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | APXUSD |
+| **Market Cap Rank** | #131 |
+| **Market Cap** | $305.35M |
+| **Current Price** | $0.8681 |
+| **Categories** | Stablecoins, USD Stablecoin |
+| **Website** | [https://apyx.fi](https://apyx.fi) |
+
+---
+
+## Overview
+
+Apyx is the first Dividend-Backed Stablecoin protocol. It acquires preferred equity issued by Digital Asset Treasuries (DATs), which are publicly-listed companies that hold digital assets on their balance sheets and issue preferred shares paying monthly cash dividends. Apyx holds these preferred shares as collateral and converts the offchain dividend cash flows into onchain yield.
+
+The protocol has two tokens. apxUSD is a synthetic dollar backed by over 100% collateral in DAT preferred shares. It does not pay yield directly and is designed to provide liquidity across DeFi and CeFi. apyUSD is an ERC-4626 vault where users lock apxUSD to receive enhanced yield from the underlying dividend streams. As dividends are distributed, apyUSD increases in value relative to apxUSD over time.
+
+The protocol manages risk through daily NAV reporting, auto-rebalancing based on issuer concentration and liquidity thresholds, stress testing across drawdown and rate shock scenarios, and a protocol-owned liquidity buffer that acts as additional overcollateralization. DeFi Development Corp. (Nasdaq: DFDV), the first SOL Digital Asset Treasury, is a core strategic partner.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 351.76M APXUSD |
+| **Total Supply** | 351.76M APXUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $305.35M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.11 (2026-03-23) |
+| **Current vs ATH** | -22.03% |
+| **All-Time Low** | $0.6995 (2026-06-26) |
+| **Current vs ATL** | +24.09% |
+| **24h Change** | -0.62% |
+| **7d Change** | +1.26% |
+| **30d Change** | -9.57% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x98a878b1cd98131b271883b390f68d2c90674665` |
+| Base | `0xd993935e13851dd7517af10687ec7e5022127228` |
+| Binance Smart Chain | `0x6b3788fd6604bbf03c5378d24e57bb334baad4af` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | APXUSD/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://apyx.fi](https://apyx.fi) |
+| **Twitter** | [@apyx_fi](https://twitter.com/apyx_fi) |
+| **Telegram** | [apyx_announcements](https://t.me/apyx_announcements) (342 members) |
+| **Discord** | [http://discord.gg/apyx-fi](http://discord.gg/apyx-fi) |
+| **GitHub** | [https://github.com/apyx-labs/](https://github.com/apyx-labs/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.87M |
+| **Market Cap Rank** | #131 |
+| **24h Range** | $0.8594 — $0.8809 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

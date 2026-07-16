@@ -2,15 +2,15 @@
 title: "Cronos"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, exchange]
-aliases: ["CRO", "Crypto.com Chain", "Crypto.com Coin", "Cronos Chain"]
+tags: [altcoins, crypto, exchange]
+aliases: ["CRO", "Cronos Chain", "Crypto.com Chain", "Crypto.com Coin"]
 entity_type: protocol
 founded: 2018
 headquarters: "Crypto.com — Singapore"
 website: "https://cronos.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[official-trump]]", "[[world-liberty-financial]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[official-trump]]", "[[world-liberty-financial]]"]
 ---
 
 # Cronos
@@ -289,3 +289,40 @@ CRO's structural disadvantages vs [[bnb]] are clear: a damaged burn narrative af
 - [Blockworks — Trump Media finalizes $105M Cronos purchase](https://blockworks.co/news/trump-media-finalizes-cronos-purchase)
 - [PBS News — How a Trump business deal with a crypto firm exposes potential conflicts of interest](https://www.pbs.org/newshour/politics/how-a-trump-business-deal-with-a-crypto-firm-exposes-potential-conflicts-of-interest)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 46.09B CRO |
+| **Total Supply** | 98.79B CRO |
+| **Max Supply** | 100.00B CRO |
+| **Fully Diluted Valuation** | $5.53B |
+| **Market Cap / FDV Ratio** | 0.47 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.04M |
+| **Market Cap Rank** | #36 |
+| **24h Range** | $0.0554 — $0.0562 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

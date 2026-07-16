@@ -2,14 +2,14 @@
 title: "Grass"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, machine-learning, ai-trading, data-provider]
+tags: [ai-trading, crypto, data-provider, machine-learning]
 aliases: ["GRASS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://grass.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[decentralized-ai]]", "[[tokenized-compute]]", "[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[data-daos]]", "[[depin]]", "[[hyperliquid]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[decentralized-ai]]", "[[depin]]", "[[hyperliquid]]", "[[solana]]", "[[tokenized-compute]]"]
 ---
 
 # Grass
@@ -135,3 +135,115 @@ Grass belongs to the **DePIN / decentralized-AI data** category. The product (Gr
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GRASS |
+| **Market Cap Rank** | #144 |
+| **Market Cap** | $249.90M |
+| **Current Price** | $0.3956 |
+| **Categories** | Artificial Intelligence (AI), DePIN, Binance Alpha Spotlight |
+| **Website** | [https://grass.io/](https://grass.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 632.08M GRASS |
+| **Total Supply** | 1.00B GRASS |
+| **Max Supply** | 1.00B GRASS |
+| **Fully Diluted Valuation** | $395.35M |
+| **Market Cap / FDV Ratio** | 0.63 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $3.89 (2024-11-08) |
+| **Current vs ATH** | -89.88% |
+| **All-Time Low** | $0.1668 (2026-02-06) |
+| **Current vs ATL** | +136.21% |
+| **24h Change** | +2.22% |
+| **7d Change** | +2.72% |
+| **30d Change** | -17.19% |
+| **1y Change** | -65.28% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | GRASS/USD | N/A |
+| Bitget | GRASS/USDT | N/A |
+| KuCoin | GRASS/USDT | N/A |
+| Crypto.com Exchange | GRASS/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | GRASS7B4RDKFBCJTKGSQNXKQJWIGVQYFBUSCUJR3XXJS/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://grass.io/](https://grass.io/) |
+| **Twitter** | [@grass](https://twitter.com/grass) |
+| **Whitepaper** | [https://wynd-network.gitbook.io/grass-docs](https://wynd-network.gitbook.io/grass-docs) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $27.08M |
+| **Market Cap Rank** | #144 |
+| **24h Range** | $0.3738 — $0.3961 |
+| **CoinGecko Sentiment** | 33% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

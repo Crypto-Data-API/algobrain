@@ -2,14 +2,14 @@
 title: "Pocket Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["POKT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.pokt.network/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[staking]]", "[[dao]]", "[[smart-contract-risk]]"]
+related: ["[[crypto-markets]]", "[[dao]]", "[[depin]]", "[[ethereum]]", "[[smart-contract-risk]]", "[[staking]]"]
 ---
 
 # Pocket Network

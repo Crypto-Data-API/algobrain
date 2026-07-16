@@ -2,14 +2,14 @@
 title: "USDa"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["USDA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.avalonfinance.xyz/"
-related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[dai]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[stablecoins]]"]
 ---
 
 # USDa
@@ -134,3 +134,116 @@ Native chain: [[ethereum|Ethereum]]. Also on Mantle and BNB Chain.
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDA |
+| **Market Cap Rank** | #269 |
+| **Market Cap** | $96.19M |
+| **Current Price** | $0.9834 |
+| **Categories** | Stablecoins |
+| **Website** | [https://www.avalonfinance.xyz/](https://www.avalonfinance.xyz/) |
+
+---
+
+## Overview
+
+Avalon Labs is creating an on-chain financial center for Bitcoin, offering BTC-backed
+lending, a Bitcoin-backed stablecoin, yield accounts, and a credit card. The goal is to
+make Bitcoin an active economic asset in global markets through a scalable and
+accessible network.
+USDa is the flagship CDP (Collateralized Debt Position) product based on Avalon's CeDeFi
+lending platform. The goal of USDa is to provide the best stablecoin solution for DeFi
+community with extremely high capital efficiency, stability and deep liquidity from BTC
+community.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 97.81M USDA |
+| **Total Supply** | 97.81M USDA |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $96.19M |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.02 (2025-01-13) |
+| **Current vs ATH** | -3.73% |
+| **All-Time Low** | $0.6900 (2026-05-21) |
+| **Current vs ATL** | +42.52% |
+| **24h Change** | N/A |
+| **7d Change** | +0.00% |
+| **30d Change** | -0.00% |
+| **1y Change** | -0.64% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x8a60e489004ca22d775c5f2c657598278d17d9c2` |
+| Mantle | `0x075df695b8e7f4361fa7f8c1426c63f11b06e326` |
+| Binance Smart Chain | `0x9356086146be5158e98ad827e21b5cf944699894` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.avalonfinance.xyz/](https://www.avalonfinance.xyz/) |
+| **Twitter** | [@avalonfinance_](https://twitter.com/avalonfinance_) |
+| **Telegram** | [AvalonLabs_Official](https://t.me/AvalonLabs_Official) (161,440 members) |
+| **Discord** | [https://discord.com/invite/avalonlabs](https://discord.com/invite/avalonlabs) |
+| **GitHub** | [https://github.com/avalonfinancexyz](https://github.com/avalonfinancexyz) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.27 |
+| **Market Cap Rank** | #269 |
+| **Last Updated** | 2026-07-06 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

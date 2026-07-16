@@ -2,14 +2,14 @@
 title: "Midas mTBILL"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, treasuries, bonds]
+tags: [bonds, crypto, real-world-assets, treasuries]
 aliases: ["MTBILL", "Midas US Treasury Bills Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.midas.app"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[treasuries]]", "[[tokenized-treasuries]]", "[[ondo-u-s-dollar-token]]", "[[openeden-open-dollar]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-u-s-dollar-token]]", "[[openeden-open-dollar]]", "[[real-world-assets]]", "[[tokenization]]", "[[tokenized-treasuries]]", "[[treasuries]]"]
 ---
 
 # Midas mTBILL
@@ -234,3 +234,15 @@ The near-zero daily volatility is expected: the token is a wrapper over T-bill N
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original listing snapshot
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific Midas source document ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 50.77M MTBILL |
+| **Total Supply** | 50.77M MTBILL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $54.14M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

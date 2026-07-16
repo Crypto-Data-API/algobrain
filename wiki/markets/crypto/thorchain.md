@@ -2,14 +2,14 @@
 title: "THORChain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["RUNE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://thorchain.org/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[cross-chain]]", "[[cross-chain-bridges]]", "[[defi]]", "[[hyperliquid]]"]
+related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]"]
 ---
 
 # THORChain

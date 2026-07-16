@@ -2,15 +2,15 @@
 title: "POL (ex-MATIC)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["POL", "MATIC", "Polygon Ecosystem Token"]
+aliases: ["MATIC", "POL", "Polygon Ecosystem Token"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (Polygon Foundation)"
 website: "https://polygon.technology/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polygon]]", "[[layer-2]]", "[[l1-l2-rotation]]", "[[real-world-assets]]", "[[arbitrum]]", "[[base]]", "[[decentralized-exchange]]", "[[stablecoins]]"]
+related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[polygon]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # POL (ex-MATIC)
@@ -288,3 +288,34 @@ Polygon's differentiation is the **payments + stablecoin + RWA** wedge and the *
 - The Coin Republic, "Polygon (POL) Eyes Breakout" (2026-03-29)
 - Polygon Labs blog (Heimdall v2, Rio upgrade, Gigagas roadmap) — https://polygon.technology/blog
 - Web verification (WebSearch + Perplexity), 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 10.68B POL |
+| **Total Supply** | 10.68B POL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $887.10M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

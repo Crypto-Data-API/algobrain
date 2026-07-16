@@ -2,14 +2,14 @@
 title: "StandX DUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["DUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://standx.com/"
-related: ["[[stablecoins]]", "[[ethena-usde]]", "[[usde]]", "[[bnb]]", "[[solana]]", "[[crypto-markets]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[solana]]", "[[stablecoins]]", "[[usde]]"]
 ---
 
 # StandX DUSD
@@ -129,3 +129,111 @@ DUSD belongs to the **perp-DEX yield-dollar** category — stablecoins issued by
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - Protocol description and overview from StandX ([https://docs.standx.com/docs/stand-x-overview](https://docs.standx.com/docs/stand-x-overview)). General market knowledge; no specific wiki source ingested yet beyond the CoinGecko snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DUSD |
+| **Market Cap Rank** | #253 |
+| **Market Cap** | $105.61M |
+| **Current Price** | $0.9980 |
+| **Categories** | Stablecoins, USD Stablecoin |
+| **Website** | [https://standx.com/](https://standx.com/) |
+
+---
+
+## Overview
+
+StandX is a Perps DEX that enables users to trade with yield-earning margins. DUSD is StandX’s first product - a yield-bearing stablecoin. Through DUSD, StandX allows users to generate returns on their margin balances. 
+
+DUSD is a yield-bearing stablecoin designed to deliver competitive returns. It is a fully collateralized, yield-bearing stablecoin that auto-distributes real yield to holders—no staking needed—offering secure, effortless returns with seamless DeFi integration.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 105.78M DUSD |
+| **Total Supply** | 105.78M DUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $105.61M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.04 (2025-11-21) |
+| **Current vs ATH** | -3.97% |
+| **All-Time Low** | $0.9650 (2025-11-21) |
+| **Current vs ATL** | +3.43% |
+| **24h Change** | -0.04% |
+| **7d Change** | -0.02% |
+| **30d Change** | -0.08% |
+| **1y Change** | -0.19% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xaf44a1e76f56ee12adbb7ba8acd3cbd474888122` |
+| Solana | `DUSDt4AeLZHWYmcXnVGYdgAzjtzU5mXUVnTMdnSzAttM` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://standx.com/](https://standx.com/) |
+| **Twitter** | [@StandX_Official](https://twitter.com/StandX_Official) |
+| **Discord** | [https://discord.com/invite/standx](https://discord.com/invite/standx) |
+| **Whitepaper** | [https://docs.standx.com/docs/stand-x-overview](https://docs.standx.com/docs/stand-x-overview) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $503,778.00 |
+| **Market Cap Rank** | #253 |
+| **24h Range** | $0.9967 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

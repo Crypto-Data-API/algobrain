@@ -2,14 +2,14 @@
 title: "Cartesi"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["CTSI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cartesi.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[optimistic-rollup]]", "[[layer-1]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[optimistic-rollup]]", "[[smart-contracts]]"]
 ---
 
 # Cartesi
@@ -287,3 +287,9 @@ Cartesi sits at the intersection of three live narratives: **modular blockchains
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

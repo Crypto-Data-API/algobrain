@@ -2,7 +2,7 @@
 title: "Pi Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["PI", "Pi Coin"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Social Chain Inc. (Pi Core Team), California, USA"
 website: "https://minepi.com/"
-related: ["[[crypto-markets]]", "[[okx]]", "[[kraken]]", "[[stellar]]"]
+related: ["[[crypto-markets]]", "[[kraken]]", "[[okx]]", "[[stellar]]"]
 ---
 
 # Pi Network
@@ -216,3 +216,99 @@ PI is hard to peer-map cleanly — it is a mobile-mining/social L1 rather than a
 - [CoinMarketCap — Pi latest updates](https://coinmarketcap.com/cmc-ai/pi/latest-updates/) (V23 smart contracts, node migration deadlines, June 2026 unlocks)
 - [CoinDCX — Pi Network price prediction/2026 status](https://coindcx.com/blog/price-predictions/pi-network-price-prediction/)
 - Web search verification, 2026-06-10
+
+## Overview
+
+Pi Network is a social cryptocurrency and developer platform designed to make digital currency mining accessible to everyday people through mobile devices. The project aims to build a widely distributed currency that facilitates transactions for real-world goods and services rather than purely speculative trading. Its main value proposition is a mobile-first mining system that allows users to earn rewards on their phones without requiring specialized hardware, draining battery life, or using excessive data.
+
+The network operates on the Stellar Consensus Protocol and a Federated Byzantine Agreement, which allows computers to reach agreement by trusting specific groups of other peers. Security is maintained through a global trust graph built from individual user groups called security circles where members vouch for each other. Users participate in four primary roles as pioneers, contributors, ambassadors, or nodes to ensure the network remains decentralized. This meritocratic distribution model rewards consistent engagement and network growth rather than financial wealth or technical power.
+
+Founded by Dr. Nicolas Kokkalis and Dr. Chengdiao Fan, both of whom hold doctoral degrees from Stanford University, the project is managed by Social Chain Inc. The ecosystem includes a native wallet, a dedicated browser, and a platform for decentralized applications where the PI token is used for peer-to-peer exchange and transaction fees. Additionally, tokens can be used for purchasing goods in an internal marketplace, staking in a launchpad, or voluntary lockups that support market stability while boosting personal mining rates. The project has focused on organic community growth and does not list any external institutional investors in its documentation.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 10.94B PI |
+| **Total Supply** | 16.83B PI |
+| **Max Supply** | 100.00B PI |
+| **Fully Diluted Valuation** | $1.28B |
+| **Market Cap / FDV Ratio** | 0.65 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.99 (2025-02-26) |
+| **Current vs ATH** | -97.46% |
+| **All-Time Low** | $0.0710 (2026-07-14) |
+| **Current vs ATL** | +7.10% |
+| **24h Change** | -7.38% |
+| **7d Change** | -24.72% |
+| **30d Change** | -44.22% |
+| **1y Change** | -83.06% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | PI/USD | N/A |
+| Bitget | PI/USDT | N/A |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 2,031 |
+| **GitHub Forks** | 547 |
+| **Commits (4 weeks)** | 1 |
+| **Pull Requests Merged** | 1 |
+| **Contributors** | 1 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $21.74M |
+| **Market Cap Rank** | #76 |
+| **24h Range** | $0.0730 — $0.0837 |
+| **CoinGecko Sentiment** | 70% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

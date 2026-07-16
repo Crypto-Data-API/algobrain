@@ -2,7 +2,7 @@
 title: "Zilliqa"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ZIL"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Decentralized"
 website: "https://www.zilliqa.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[bnb]]"]
+related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]"]
 ---
 
 # Zilliqa
@@ -150,3 +150,119 @@ Zilliqa's narrative is **scalability via sharding** — a third-generation [[lay
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ZIL |
+| **Market Cap Rank** | #393 |
+| **Market Cap** | $57.95M |
+| **Current Price** | $0.00296967 |
+| **Genesis Date** | 2019-01-31 |
+| **Hashing Algorithm** | Ethash |
+| **Categories** | Smart Contract Platform, Made in China |
+| **Website** | [https://www.zilliqa.com/](https://www.zilliqa.com/) |
+
+---
+
+## Overview
+
+Zilliqa (ZIL) is a token developed in the year 2017. Zilliqa is mainly based on the concept of Sharding and primarily aims at improving the scalability of the cryptocurrency networks as in case of Bitcoin or Ethereum. The white paper mentions that the transactions speed would be approximately a thousand times more than that of Ethereum network. Ziliqa is fast, secured and decentralized. Zilliqa’s high throughput means that you can focus on developing your ideas without worrying about network congestion, high transaction fees or security which are the key issues with legacy blockchain platforms. Zilliqa network uses a concept called Sharding where the transactions are grouped into smaller groups and divided among the miners for the parallel transactional verification. Developing smaller groups for transactional verification means the Consensus can be reached faster and hence a higher number of transactions can be processed in a given time frame. The capacity of the network linearly increases in other cryptocurrencies as the number of people joins the network, but in this case, the capacity is increased at a higher variable rate than the number of members joining the network. By incorporating the Sharding Technology, it can completely revolutionize the smart contract functionality too. Ziliqa has few pros as it has a great new technology. Zilliqa is the first platform to use sharding technology. This puts it ahead of the rest of the market. It’s a completely new kind of blockchain designed to solve the problem of scalability. Third-generation platforms like Zilliqa could be the big winners in the future of cryptocurrency. Ziliqa has a strong community. The platform has a lot of fans. The Zilliqa ICO only happened because there was so much demand for it. The Zilliqa ICO also shows that the crypto community is ready to see blockchain technology move to the next phase of its development.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 19.51B ZIL |
+| **Total Supply** | 20.52B ZIL |
+| **Max Supply** | 21.00B ZIL |
+| **Fully Diluted Valuation** | $60.93M |
+| **Market Cap / FDV Ratio** | 0.95 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2554 (2021-05-06) |
+| **Current vs ATH** | -98.84% |
+| **All-Time Low** | $0.00239616 (2020-03-13) |
+| **Current vs ATL** | +24.03% |
+| **24h Change** | -0.74% |
+| **7d Change** | -1.81% |
+| **30d Change** | -9.79% |
+| **1y Change** | -76.72% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xb86abcb37c3a4b64f74f59301aff131a1becc787` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ZIL/USDT | N/A |
+| Upbit | ZIL/KRW | N/A |
+| Bitget | ZIL/USDT | N/A |
+| KuCoin | ZIL/USDT | N/A |
+| Crypto.com Exchange | ZIL/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.zilliqa.com/](https://www.zilliqa.com/) |
+| **Twitter** | [@zilliqa](https://twitter.com/zilliqa) |
+| **Reddit** | [https://www.reddit.com/r/zilliqa/](https://www.reddit.com/r/zilliqa/) |
+| **Telegram** | [zilliqachat](https://t.me/zilliqachat) (11,112 members) |
+| **GitHub** | [https://github.com/Zilliqa/Zilliqa](https://github.com/Zilliqa/Zilliqa) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 1,129 |
+| **GitHub Forks** | 287 |
+| **Commits (4 weeks)** | 12 |
+| **Pull Requests Merged** | 3,032 |
+| **Contributors** | 62 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.56M |
+| **Market Cap Rank** | #393 |
+| **24h Range** | $0.00295860 — $0.00304213 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

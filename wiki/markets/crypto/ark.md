@@ -2,15 +2,15 @@
 title: "ARK"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, interoperability]
+tags: [altcoins, crypto, interoperability]
 aliases: ["ARK", "Ark Ecosystem"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://ark.io/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[delegated-proof-of-stake]]", "[[interoperability]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[interoperability]]", "[[layer-1]]", "[[smart-contracts]]"]
 ---
 
 # ARK

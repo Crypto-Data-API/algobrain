@@ -3,16 +3,17 @@ title: "Coinbase Stock (COIN)"
 type: entity
 entity_type: company
 created: 2026-04-06
-updated: 2026-06-19
+updated: 2026-07-16
 status: excellent
 tags: [company, crypto, sp500, stocks]
 aliases: ["COIN", "Coinbase Global"]
-related: ["[[bitcoin]]", "[[coinbase]]", "[[crypto]]", "[[ethereum]]", "[[usdc]]", "[[circle]]"]
-ticker: "COIN"
-exchange: "NASDAQ"
-sector: "Financials"
+related: ["[[bitcoin]]", "[[circle]]", "[[coinbase]]", "[[crypto-markets]]", "[[crypto]]", "[[ethereum]]", "[[solana]]", "[[usdc]]"]
+ticker: COIN
+exchange: NASDAQ
+sector: Financials
 sp500: true
 headquarters: "USA"
+website: "https://8bit.so"
 ---
 
 # Coinbase Stock (COIN)
@@ -154,3 +155,99 @@ COIN provides a way to gain crypto market exposure through traditional equity ma
 | **ROE** | 2.70% |
 
 > *Financial data from StockMarketAPI as of 2026-04-13. Point-in-time snapshot.*
+
+## Overview
+
+COIN is a community driven meme asset on Solana. Created by a few highly decorated Solana native founders and inspired by the 8-bit Mario Coin, COIN was created to level up game development on the Solana network. COIN is committed to onboarding the next wave of Web2 gamers into the magical world of Web3, contributing to the Solana network, and delivering endless fun as the first web3 gaming meme asset on Solana.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 100.00B COIN |
+| **Total Supply** | 100.00B COIN |
+| **Max Supply** | 100.00B COIN |
+| **Fully Diluted Valuation** | $2.44M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00078364 (2024-09-12) |
+| **Current vs ATH** | -96.88% |
+| **All-Time Low** | $0.00002362 (2026-06-25) |
+| **Current vs ATL** | +3.41% |
+| **24h Change** | +0.21% |
+| **7d Change** | +0.43% |
+| **30d Change** | -12.94% |
+| **1y Change** | -65.19% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `3xvLSHrLcM7246X1vu34cM9gNX741kQrzqj6T2HhLvXp` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | 3XVLSHRLCM7246X1VU34CM9GNX741KQRZQJ6T2HHLVXP/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://8bit.so](https://8bit.so) |
+| **Twitter** | [@Coin8Bit](https://twitter.com/Coin8Bit) |
+| **Telegram** | [coin_8_bit](https://t.me/coin_8_bit) (171 members) |
+| **Whitepaper** | [https://docs.8bit.so/introduction/prologue](https://docs.8bit.so/introduction/prologue) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $39.71 |
+| **Market Cap Rank** | #2076 |
+| **24h Range** | $0.00002437 — $0.00002589 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

@@ -2,7 +2,7 @@
 title: "Monad"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["MON", "Monad Labs"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2022
 headquarters: "New York, USA (Monad Labs / Monad Foundation)"
 website: "https://www.monad.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[coinbase]]", "[[narrative-trading]]"]
+related: ["[[coinbase]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[solana]]"]
 ---
 
 # Monad
@@ -157,3 +157,68 @@ Monad is the highest-quality-funded new-L1 launch of the cycle (~$244M raised, P
 - CoinDesk, "Monad Foundation Unveils Tokenomics Ahead of Nov. 24 MON Token Airdrop" (2025-11-10): https://www.coindesk.com/tech/2025/11/10/monad-unveils-tokenomics-ahead-of-nov-24-mon-token-airdrop
 - CCN, "Monad Blockchain: 10,000 TPS, $105 Million Airdrop": https://www.ccn.com/education/crypto/monad-105m-airdrop-mon-token-network-growth/
 - Web search verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 641.34M MON |
+| **Total Supply** | 942.30M MON |
+| **Max Supply** | 1.00B MON |
+| **Fully Diluted Valuation** | $20.64M |
+| **Market Cap / FDV Ratio** | 0.68 |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xc555d625828c4527d477e595ff1dd5801b4a600e` |
+| Avalanche | `0xfc87d55bc8bf441abfc24d04b2068a8f77bcfcc0` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XC555D625828C4527D477E595FF1DD5801B4A600E/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $122.32 |
+| **Market Cap Rank** | #985 |
+| **24h Range** | $0.00081095 — $0.0219 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

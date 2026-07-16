@@ -2,15 +2,15 @@
 title: "Gnosis"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
-aliases: ["GNO", "GnosisDAO", "Gnosis Chain"]
+aliases: ["GNO", "Gnosis Chain", "GnosisDAO"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized (origins: Gibraltar / Berlin)"
 website: "https://www.gnosis.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cow-protocol]]", "[[safe]]", "[[dao]]", "[[stablecoins]]"]
+related: ["[[cow-protocol]]", "[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[safe]]", "[[stablecoins]]"]
 ---
 
 # Gnosis
@@ -242,3 +242,92 @@ GNO's distinctive edge among "DAO treasury" plays is an **explicit redemption me
 - CoinMarketCap GNO latest updates (GIP-140, EEZ, Sorted Wallet): https://coinmarketcap.com/cmc-ai/gnosis-gno/latest-updates/
 - Crypto News Navigator, "GNO Price Ignores Fundamentals and That Creates Opportunity": https://www.cryptonewsnavigator.com/academy/article/gno-price-ignores-fundamentals-and-that-creates-opportunity
 - Web search verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.64M GNO |
+| **Total Supply** | 3.00M GNO |
+| **Max Supply** | 3.00M GNO |
+| **Fully Diluted Valuation** | $344.85M |
+| **Market Cap / FDV Ratio** | 0.88 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $644.20 (2021-11-08) |
+| **Current vs ATH** | -82.28% |
+| **All-Time Low** | $6.88 (2020-03-13) |
+| **Current vs ATL** | +1558.60% |
+| **24h Change** | -8.12% |
+| **7d Change** | +7.02% |
+| **30d Change** | +8.11% |
+| **1y Change** | -14.49% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | GNO/USDT | N/A |
+| Kraken | GNO/USD | N/A |
+| Crypto.com Exchange | GNO/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Balancer V2 | 0X6810E776880C02933D47DB1B9FC05908E5386B96/0XDEF1CA1FB7FBCDC777520AA7F396B4E015F497AB | Spot |
+| Uniswap V2 (Ethereum) | 0X6810E776880C02933D47DB1B9FC05908E5386B96/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0X6810E776880C02933D47DB1B9FC05908E5386B96/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 2,165 |
+| **GitHub Forks** | 1,142 |
+| **Pull Requests Merged** | 476 |
+| **Contributors** | 74 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $9.95M |
+| **Market Cap Rank** | #133 |
+| **24h Range** | $113.74 — $127.51 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

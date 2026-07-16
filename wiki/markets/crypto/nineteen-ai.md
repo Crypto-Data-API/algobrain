@@ -2,7 +2,7 @@
 title: "Nineteen.ai"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN19"]
@@ -20,10 +20,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** image generation, multimodal inference, and serverless scalable inference. Originally launched as the "Vision" subnet, focused on text-to-image and image understanding; Rayon Labs has since broadened it toward general multimodal workloads.
-- **Team:** Rayon Labs (also builds SN56 [[gradients|Gradients]] and the Rayon Finance front-end for alpha tokens).
-- **Trading relevance:** exposure to the image / multimodal AI category; Rayon Labs is a credible team with multi-subnet reach.
-- **Alpha token:** alpha-19.
+Decentralised permisonless, serverless, scalable inference
 
 ---
 
@@ -37,12 +34,6 @@ related: ["[[crypto-markets]]"]
 | **Current Price** | $5.23 |
 | **Categories** | Artificial Intelligence (AI), Bittensor Ecosystem, Bittensor Subnets |
 | **Website** | [https://nineteen.ai/](https://nineteen.ai/) |
-
----
-
-## Overview
-
-Decentralised permisonless, serverless, scalable inference
 
 ---
 
@@ -131,4 +122,4 @@ Decentralised permisonless, serverless, scalable inference
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

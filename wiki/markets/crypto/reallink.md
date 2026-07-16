@@ -2,14 +2,14 @@
 title: "RealLink"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bnb]
+tags: [bnb, crypto, defi]
 aliases: ["REAL", "RealLink"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.reallink.vip/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[tron]]"]
+related: ["[[base]]", "[[bnb]]", "[[crypto-markets]]", "[[tron]]"]
 ---
 
 # RealLink
@@ -132,3 +132,102 @@ RealLink sits in the **SocialFi / Web3 consumer-app** category, with reported ta
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - Macro framing as of 2026-06-23 (cryptodataapi.com / CoinGecko): Fear & Greed 21 (Extreme Fear), Bottoming / Accumulation regime.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | REAL |
+| **Market Cap Rank** | #2488 |
+| **Market Cap** | $1.46M |
+| **Current Price** | $0.00548219 |
+| **Categories** | Tokenized Real Estate, Decentralized Finance (DeFi), Real World Assets (RWA) |
+| **Website** | [https://defactor.com/](https://defactor.com/) |
+
+---
+
+## Overview
+
+Defactor is a modular toolkit powering the tokenization, financing, and on-chain management of real-world assets (RWAs). Designed for asset originators, institutions, and RWA-native projects, it enables users to create asset-backed tokens, borrow and lend against them, and access infrastructure such as staking, governance, and partner integrations. Built with production-ready smart contracts and API access, Defactor simplifies the complex RWA lifecycle,  reducing time to market from months to weeks. Deployed across Ethereum, Polygon, Base, and more, it supports ERC20/ERC3643 standards, integrates with Chainlink and LayerZero, and is already used in live pools spanning real estate, commodities, and stablecoin-based savings. As the ecosystem transitions from the FACTR token to REAL, value accrues through protocol fees, utility, and rewards for active participation.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 265.90M REAL |
+| **Total Supply** | 267.95M REAL |
+| **Max Supply** | 300.00M REAL |
+| **Fully Diluted Valuation** | $1.47M |
+| **Market Cap / FDV Ratio** | 0.99 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.00 (2025-09-10) |
+| **Current vs ATH** | -99.86% |
+| **All-Time Low** | $0.00001674 (2026-06-22) |
+| **Current vs ATL** | +32780.49% |
+| **24h Change** | -2.70% |
+| **7d Change** | +1.21% |
+| **30d Change** | +34.73% |
+| **1y Change** | -74.77% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0x0b0e6e32e4d69cb418630163574959108edcb80e` |
+| Polygon Pos | `0xe0bceef36f3a6efdd5eebfacd591423f8549b9d5` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://defactor.com/](https://defactor.com/) |
+| **Twitter** | [@defactor_](https://twitter.com/defactor_) |
+| **Telegram** | [defactor_official](https://t.me/defactor_official) (4,090 members) |
+| **GitHub** | [https://github.com/defactor-com/](https://github.com/defactor-com/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $431.50 |
+| **Market Cap Rank** | #2488 |
+| **24h Range** | $0.00548405 — $0.00572704 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

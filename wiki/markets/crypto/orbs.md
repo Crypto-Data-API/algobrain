@@ -2,9 +2,9 @@
 title: "Orbs"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum, defi]
+tags: [altcoins, crypto, defi, ethereum]
 aliases: ["ORBS", "Orbs Network"]
 entity_type: protocol
 headquarters: "Decentralized"
@@ -274,3 +274,9 @@ Orbs' narrative is **decentralized execution infrastructure / "Layer-3"** for [[
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Perp funding/derivatives data from CoinGlass funding feed (crypto-loop daily snapshot, 2026-06-22).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "deBridge"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["DBR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://debridge.com"
-related: ["[[crypto-markets]]", "[[solana]]", "[[ethereum]]", "[[cross-chain]]", "[[bridge]]", "[[cross-chain-bridge]]", "[[decentralized-exchange]]"]
+related: ["[[bridge]]", "[[cross-chain-bridge]]", "[[cross-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[solana]]"]
 ---
 
 # deBridge
@@ -141,3 +141,123 @@ DBR has the **best market-cap rank in this cohort (#327)** at ~$76M, but a ~$143
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DBR |
+| **Market Cap Rank** | #282 |
+| **Market Cap** | $88.17M |
+| **Current Price** | $0.0166 |
+| **Categories** | Bridge Governance Tokens, Cross-chain Communication, Intent, Governance |
+| **Website** | [https://debridge.com](https://debridge.com) |
+
+---
+
+## Overview
+
+deBridge is the bridge that moves at lightspeed. With zero locked liquidity or liquidity pools, deBridge enables value and information to flow anywhere virtually instantly with deep liquidity and guaranteed rates.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.33B DBR |
+| **Total Supply** | 10.00B DBR |
+| **Max Supply** | 10.00B DBR |
+| **Fully Diluted Valuation** | $165.58M |
+| **Market Cap / FDV Ratio** | 0.53 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0552 (2024-12-22) |
+| **Current vs ATH** | -69.98% |
+| **All-Time Low** | $0.0124 (2026-04-19) |
+| **Current vs ATL** | +33.80% |
+| **24h Change** | +1.72% |
+| **7d Change** | +3.26% |
+| **30d Change** | +14.56% |
+| **1y Change** | -25.37% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `DBRiDgJAMsM95moTzJs7M9LnkGErpbv9v6CUR1DXnUu5` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | DBR/USD | N/A |
+| Bitget | DBR/USDT | N/A |
+| KuCoin | DBR/USDT | N/A |
+| Crypto.com Exchange | DBR/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | DBRIDGJAMSM95MOTZJS7M9LNKGERPBV9V6CUR1DXNUU5/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://debridge.com](https://debridge.com) |
+| **Twitter** | [@debridge](https://twitter.com/debridge) |
+| **Discord** | [https://discord.com/invite/debridge](https://discord.com/invite/debridge) |
+| **GitHub** | [https://github.com/debridge-finance](https://github.com/debridge-finance) |
+| **Whitepaper** | [https://docs.debridge.com/](https://docs.debridge.com/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.35M |
+| **Market Cap Rank** | #282 |
+| **24h Range** | $0.0162 — $0.0168 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

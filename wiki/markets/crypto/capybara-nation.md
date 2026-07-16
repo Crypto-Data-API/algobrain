@@ -2,7 +2,7 @@
 title: "Capybara Nation"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["BARA"]
@@ -132,4 +132,4 @@ Leveraging Telegram’s massive user base, Capybara Nation is here to onboard th
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

@@ -2,14 +2,14 @@
 title: "CoW Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["COW"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cow.fi"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[ai-solvers]]", "[[ai-mev]]", "[[intent-based-trading]]", "[[mev-strategies]]"]
+related: ["[[ai-mev]]", "[[ai-solvers]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[intent-based-trading]]", "[[mev-strategies]]"]
 ---
 
 # CoW Protocol
@@ -142,3 +142,140 @@ CoW Protocol sits at the intersection of **DEX aggregation, MEV protection, and 
 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical snapshot context
 - Market data as of 2026-06-21 from the crypto-loop CoinGecko markets snapshot (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | COW |
+| **Market Cap Rank** | #290 |
+| **Market Cap** | $85.20M |
+| **Current Price** | $0.1474 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), MEV Protection, Intent |
+| **Website** | [https://cow.fi](https://cow.fi) |
+
+---
+
+## Overview
+
+COW token allows its holders the right to govern and curate the infrastructure of the CoW Protocol ecosystem through the CowDAO. Additionally, COW token holders receive fee discounts when trading on CowSwap &amp; some other perks.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 578.17M COW |
+| **Total Supply** | 1.00B COW |
+| **Max Supply** | 1.00B COW |
+| **Fully Diluted Valuation** | $147.36M |
+| **Market Cap / FDV Ratio** | 0.58 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.22 (2022-03-28) |
+| **Current vs ATH** | -93.36% |
+| **All-Time Low** | $0.0399 (2022-11-09) |
+| **Current vs ATL** | +269.44% |
+| **24h Change** | +1.71% |
+| **7d Change** | +7.40% |
+| **30d Change** | -8.60% |
+| **1y Change** | -66.40% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab` |
+| Binance Smart Chain | `0x5bfdaa3f7c28b9994b56135403bf1acea02595b0` |
+| Base | `0xc694a91e6b071bf030a18bd3053a7fe09b6dae69` |
+| Xdai | `0x177127622c4a00f3d409b75571e12cb3c8973d3c` |
+| Arbitrum One | `0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04` |
+| Polygon Pos | `0x2f4efd3aa42e15a1ec6114547151b63ee5d39958` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | COW/USDT | N/A |
+| Kraken | COW/EUR | N/A |
+| Upbit | COW/KRW | N/A |
+| Bitget | COW/USDT | N/A |
+| KuCoin | COW/USDT | N/A |
+| Crypto.com Exchange | COW/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Balancer V2 | 0X6810E776880C02933D47DB1B9FC05908E5386B96/0XDEF1CA1FB7FBCDC777520AA7F396B4E015F497AB | Spot |
+| Uniswap V3 (Ethereum) | 0XDEF1CA1FB7FBCDC777520AA7F396B4E015F497AB/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://cow.fi](https://cow.fi) |
+| **Twitter** | [@CoWSwap](https://twitter.com/CoWSwap) |
+| **Discord** | [https://discord.gg/cowprotocol](https://discord.gg/cowprotocol) |
+| **GitHub** | [https://github.com/gnosis/cow-token/](https://github.com/gnosis/cow-token/) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 67 |
+| **GitHub Forks** | 4 |
+| **Pull Requests Merged** | 137 |
+| **Contributors** | 5 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.84M |
+| **Market Cap Rank** | #290 |
+| **24h Range** | $0.1449 — $0.1500 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

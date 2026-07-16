@@ -2,14 +2,14 @@
 title: "Official FO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["FO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://fo.meme/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[narrative-trading]]"]
+related: ["[[crypto-markets]]", "[[narrative-trading]]", "[[solana]]"]
 ---
 
 # Official FO
@@ -91,3 +91,67 @@ Timeline of what is verifiable:
 - Perplexity verification attempted 2026-06-10 (sonar) and web search — no credible sources found on team, launch story, or supply restatement; page left as draft for that reason
 
 > *Market data refreshed 2026-06-12 (CoinGecko top-1000 snapshot).*
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 128.84M FO |
+| **Total Supply** | 977.67M FO |
+| **Max Supply** | 1.00B FO |
+| **Fully Diluted Valuation** | $292.63M |
+| **Market Cap / FDV Ratio** | 0.13 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.8300 (2025-09-28) |
+| **Current vs ATH** | -64.06% |
+| **All-Time Low** | $0.1633 (2026-06-04) |
+| **Current vs ATL** | +82.67% |
+| **24h Change** | +3.83% |
+| **7d Change** | +8.16% |
+| **30d Change** | +25.98% |
+| **1y Change** | -53.99% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $452,515.00 |
+| **Market Cap Rank** | #529 |
+| **24h Range** | $0.2843 — $0.2986 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

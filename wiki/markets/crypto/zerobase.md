@@ -2,14 +2,14 @@
 title: "ZEROBASE"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins, ethereum]
+tags: [altcoins, crypto, defi, ethereum]
 aliases: ["ZBT", "ZeroBase"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zerobase.pro/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[verifiable-compute]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]"]
 ---
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*

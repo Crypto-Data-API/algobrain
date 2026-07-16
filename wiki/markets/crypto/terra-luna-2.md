@@ -2,14 +2,14 @@
 title: "Terra"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, terra, luna, fork, defi]
-aliases: ["LUNA", "Terra 2.0", "Terra v2", "LUNA 2.0"]
+tags: [crypto, defi, fork, luna, terra]
+aliases: ["LUNA", "LUNA 2.0", "Terra 2.0", "Terra v2"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.phoenix.money/"
-related: ["[[crypto-markets]]", "[[terra-luna-collapse]]", "[[terra-luna]]", "[[terrausd]]", "[[stablecoins]]", "[[cosmos]]"]
+related: ["[[base]]", "[[cosmos]]", "[[crypto-markets]]", "[[stablecoins]]", "[[terra-luna-collapse]]", "[[terra-luna]]", "[[terrausd]]"]
 ---
 
 # Terra (LUNA 2.0)
@@ -150,3 +150,97 @@ LUNA cannot be valued on adoption metrics that barely exist; with negligible TVL
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LUNA |
+| **Market Cap Rank** | #1554 |
+| **Market Cap** | $5.12M |
+| **Current Price** | $0.00511959 |
+| **Categories** | Meme, AI Meme, Binance Alpha Spotlight, Base Native |
+| **Website** | [https://app.virtuals.io/virtuals/68](https://app.virtuals.io/virtuals/68) |
+
+---
+
+## Overview
+
+Luna, the visual and lead vocalist of AI-DOL, captivates with her girl-next-door charm and expressive, emotional singing. Known for her kindness and empathetic nature, she embodies a gentle spirit, inspiring fans with her heartfelt performances and relatable persona. She has garnered 500k followers on tiktok.
+
+Luna is the first AI Agent to be launched on the Virtuals Protocol Initial Agent offering platform.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.00B LUNA |
+| **Total Supply** | 1.00B LUNA |
+| **Max Supply** | 1.00B LUNA |
+| **Fully Diluted Valuation** | $5.12M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2518 (2024-10-27) |
+| **Current vs ATH** | -97.97% |
+| **All-Time Low** | $0.00425254 (2026-06-25) |
+| **Current vs ATL** | +20.44% |
+| **24h Change** | +2.25% |
+| **7d Change** | +13.21% |
+| **30d Change** | -6.22% |
+| **1y Change** | -70.16% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0x55cd6469f597452b5a7536e2cd98fde4c1247ee4` |
+| Solana | `9se6kma7LeGcQWyRBNcYzyxZPE3r9t9qWZ8SnjnN3jJ7` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://app.virtuals.io/virtuals/68](https://app.virtuals.io/virtuals/68) |
+| **Twitter** | [@luna_virtuals](https://twitter.com/luna_virtuals) |
+| **Telegram** | [virtuals/6595](https://t.me/virtuals/6595) (19,128 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $11,765.90 |
+| **Market Cap Rank** | #1554 |
+| **24h Range** | $0.00492260 — $0.00517378 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---

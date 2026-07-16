@@ -2,14 +2,14 @@
 title: "Decentralized Social"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["DESO", "DeSo", "BitClout"]
+tags: [altcoins, crypto]
+aliases: ["BitClout", "DESO", "DeSo"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.deso.com/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[socialfi]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[socialfi]]"]
 ---
 
 # Decentralized Social

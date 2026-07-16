@@ -2,14 +2,14 @@
 title: "Rain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, options]
 aliases: ["RAIN", "Rain Protocol (rain.one)"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://rain.one"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[polymarket]]", "[[predictions]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[polymarket]]", "[[predictions]]", "[[solana]]"]
 ---
 
 # Rain
@@ -225,3 +225,42 @@ Framing only — not advice. Against the 2026-06-23 macro backdrop (Fear & Greed
 - [Atomic Wallet Academy — What Is Rain Protocol? Prediction Market Infrastructure on Arbitrum](https://atomicwallet.io/academy/articles/what-is-rain-protocol)
 - [BingX Learn — What Is Rain (RAIN) Crypto Prediction Protocol](https://bingx.com/en/learn/article/what-is-rain-protocol-crypto-prediction-market-how-does-it-work)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0132 (2026-02-16) |
+| **Current vs ATH** | -67.90% |
+| **All-Time Low** | $0.00335087 (2026-06-30) |
+| **Current vs ATL** | +26.10% |
+| **24h Change** | -7.89% |
+| **7d Change** | -6.34% |
+| **30d Change** | -12.23% |
+| **1y Change** | +0.00% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $19,669.72 |
+| **Market Cap Rank** | #1682 |
+| **24h Range** | $0.00414348 — $0.00463148 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

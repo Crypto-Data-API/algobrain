@@ -2,14 +2,14 @@
 title: "Merlin Chain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bitcoin, altcoins, defi]
+tags: [altcoins, bitcoin, crypto, defi]
 aliases: ["MERL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://merlinchain.io/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[layer-2]]", "[[zk-rollup]]", "[[sequencer]]", "[[data-availability]]", "[[airdrop]]"]
+related: ["[[airdrop]]", "[[bitcoin]]", "[[crypto-markets]]", "[[data-availability]]", "[[layer-2]]", "[[sequencer]]", "[[zk-rollup]]"]
 ---
 
 # Merlin Chain

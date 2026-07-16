@@ -2,10 +2,10 @@
 title: "HashKey Platform Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, exchange]
-aliases: ["HSK", "HashKey EcoPoints", "HashKey Chain Token", "HashKey Platform Token"]
+tags: [altcoins, crypto, exchange]
+aliases: ["HSK", "HashKey Chain Token", "HashKey EcoPoints", "HashKey Platform Token"]
 entity_type: protocol
 headquarters: "Hong Kong"
 website: "https://hsk.xyz/"

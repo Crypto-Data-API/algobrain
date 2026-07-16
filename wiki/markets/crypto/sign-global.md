@@ -2,14 +2,14 @@
 title: "Sign"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
-aliases: ["SIGN", "Sign Global", "EthSign", "Sign Protocol"]
+tags: [altcoins, crypto, ethereum]
+aliases: ["EthSign", "SIGN", "Sign Global", "Sign Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sign.global/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[base]]", "[[attestation]]"]
+related: ["[[attestation]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # Sign

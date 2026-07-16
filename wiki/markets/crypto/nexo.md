@@ -2,14 +2,15 @@
 title: "NEXO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, company]
+tags: [company, crypto]
 aliases: ["NEXO", "Nexo Token", "Nexo platform"]
 entity_type: company
 founded: 2018
 website: "https://nexo.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[centralized-exchange]]", "[[stablecoin-yields]]", "[[stablecoins]]"]
+related: ["[[binance]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-yields]]", "[[stablecoins]]"]
+headquarters: "Decentralized"
 ---
 
 # NEXO
@@ -217,3 +218,103 @@ Nexo's standout trait among CeFi lenders is **survival**: where Celsius and Bloc
 - CoinDesk (2025-04-28): Nexo to return to US after 2022 exit — https://www.coindesk.com/policy/2025/04/28/nexo-to-return-to-us-after-2022-exit-citing-renewed-crypto-optimism-under-trump
 - The Daily Hodl (2025-04-29): Nexo returns to US market — https://dailyhodl.com/2025/04/29/crypto-lending-platform-nexo-returns-to-us-market-on-renewed-optimism-and-entrepreneurial-momentum/
 - Verified via Perplexity sonar + web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.00B NEXO |
+| **Total Supply** | 1.00B NEXO |
+| **Max Supply** | 1.00B NEXO |
+| **Fully Diluted Valuation** | $747.83M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.07 (2021-05-12) |
+| **Current vs ATH** | -81.61% |
+| **All-Time Low** | $0.0452 (2018-09-13) |
+| **Current vs ATL** | +1556.83% |
+| **24h Change** | -0.69% |
+| **7d Change** | +0.58% |
+| **30d Change** | -8.19% |
+| **1y Change** | -42.76% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xb62132e35a6c13ee1ee0f84dc5d40bad8d815206` |
+| Energi | `0x04640dc771edd73cbeb934fb5461674830baea11` |
+| Fantom | `0x7c598c96d02398d89fbcb9d41eab3df0c16f227d` |
+| Sora | `0x003005b2417b5046455e73f7fc39779a013f1a33b4518bcd83a790900dca49ff` |
+| Polygon Pos | `0x41b3966b4ff7b427969ddf5da3627d6aeae9a48e` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | NEXO/BTC | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XB62132E35A6C13EE1EE0F84DC5D40BAD8D815206/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0XB62132E35A6C13EE1EE0F84DC5D40BAD8D815206/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 112 |
+| **GitHub Forks** | 51 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.76M |
+| **Market Cap Rank** | #83 |
+| **24h Range** | $0.7404 — $0.7722 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

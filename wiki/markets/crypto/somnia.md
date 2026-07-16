@@ -2,14 +2,14 @@
 title: "Somnia"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, gamefi]
+tags: [altcoins, crypto, gamefi]
 aliases: ["SOMI", "Somnia Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://somnia.network/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[ethereum]]", "[[smart-contracts]]", "[[gamefi]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[smart-contracts]]"]
 ---
 
 # Somnia
@@ -250,3 +250,9 @@ Somnia rides the **gaming / metaverse / consumer L1** narrative with a **raw-per
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

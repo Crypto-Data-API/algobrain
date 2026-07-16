@@ -2,7 +2,7 @@
 title: "Alpha Quark"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, nft]
 aliases: ["AQT"]
@@ -132,4 +132,4 @@ Alpha Quark is a marketplace where users can buy or sell tokenized intellectual 
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

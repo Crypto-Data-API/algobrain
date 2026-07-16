@@ -2,14 +2,14 @@
 title: "Fulcrom"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["FUL", "Fulcrom Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://fulcrom.finance/"
-related: ["[[crypto-markets]]", "[[perpetual-futures]]", "[[cronos]]", "[[decentralized-exchange]]", "[[defi]]", "[[governance-token]]", "[[gmx]]", "[[gains-network]]", "[[funding-rate]]", "[[leverage]]"]
+related: ["[[cronos]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[funding-rate]]", "[[gains-network]]", "[[gmx]]", "[[governance-token]]", "[[leverage]]", "[[perpetual-futures]]"]
 ---
 
 # Fulcrom
@@ -196,3 +196,61 @@ Fulcrom's model is closest to GMX v1; its distinguishing factor is chain/distrib
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FUL |
+| **Market Cap Rank** | #2133 |
+| **Market Cap** | $2.26M |
+| **Current Price** | $0.00096188 |
+| **Categories** | Decentralized Finance (DeFi), Derivatives, Perpetuals |
+| **Website** | [https://fulcrom.finance/](https://fulcrom.finance/) |
+
+---
+
+## Overview
+
+What is the project about?
+Fulcrom is a decentralised perpetual exchange that allows users to trade leveraged positions with low fees and zero price impact, whilst having the peace of mind that all trades and collateral are stored transparently on-chain.
+
+What makes your project unique?
+Whilst we understand that Perpetuals are indeed a major form of innovation in the space, we also recognise that many of such perpetual contracts are being traded on centralised exchanges, many of which may not be transparent with usage of funds. The team is a strong believer of decentralisation and transparency and with the vision of bringing perpetuals on-chain, Fulcrom was born.
+
+History of your project.
+Fulcrom Beta went live on 28 Feb and had IDO on VVS Finance on 16 Mar. With a short period of around 1 month, we generated 100M accumulative trading volume with more than 5000 active traders.
+
+What’s next for your project?
+Fulcrom is planning to expand our tradable token in pool, further enhance our core product feature with more analytics and visualised data, improving user onboarding journey, as well as hosting trading competition and points system.
+
+What can your token be used for?
+FUL is fulcrom native governance token, with FUL, users can earn platform revenue with staking rewards. We are also planning to utilise FUL in the future trading competition and point system
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0400 (2023-04-05) |
+| **Current vs ATH** | -97.60% |
+| **All-Time Low** | $0.00040500 (2026-06-23) |
+| **Current vs ATL** | +137.28% |
+| **24h Change** | +2.03% |
+| **7d Change** | -1.25% |
+| **30d Change** | +1.34% |
+| **1y Change** | -85.69% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6,305.90 |
+| **Market Cap Rank** | #2133 |
+| **24h Range** | $0.00092135 — $0.00096110 |
+| **Last Updated** | 2026-07-16 |
+
+---

@@ -2,14 +2,14 @@
 title: "Smooth Love Potion"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi, altcoins]
+tags: [altcoins, crypto, gamefi, nft]
 aliases: ["SLP", "Smooth Love Potion"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://axieinfinity.com/"
-related: ["[[crypto-markets]]", "[[axie-infinity]]", "[[play-to-earn]]", "[[gamefi]]", "[[nft]]"]
+related: ["[[axie-infinity]]", "[[crypto-markets]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
 ---
 
 # Smooth Love Potion

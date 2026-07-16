@@ -2,14 +2,14 @@
 title: "Bit2Me"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, exchange]
+tags: [altcoins, crypto, exchange]
 aliases: ["B2M", "Bit2Me", "Bit2Me Token"]
 entity_type: company
 headquarters: "Madrid, Spain"
 website: "https://bit2me.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[exchange]]", "[[centralized-exchange]]"]
+related: ["[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange]]"]
 ---
 
 # Bit2Me

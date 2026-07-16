@@ -2,14 +2,14 @@
 title: "Tellor Tributes"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, oracle]
 aliases: ["TRB", "Tellor"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://www.tellor.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-manipulation]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[pyth-network]]"]
 ---
 
 # Tellor Tributes
@@ -141,3 +141,121 @@ TRB trades at ~$38.5M with MC/FDV near 0.97 (almost fully circulating), so dilut
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | TRB |
+| **Market Cap Rank** | #499 |
+| **Market Cap** | $41.97M |
+| **Current Price** | $15.00 |
+| **Categories** | Decentralized Finance (DeFi), Oracle, Made in USA |
+| **Website** | [http://www.tellor.io/](http://www.tellor.io/) |
+
+---
+
+## Overview
+
+Smart contracts on Ethereum are fully self contained and any information or access to off-chain data is restricted.  Tellor solves this problem by creating a system where parties can request the value of an off-chain data point (e.g. ETH/USD) and miners compete to add this value to an on-chain data bank, accessible by all Ethereum smart contracts.  Inputs to a data series are secured by a network of staked miners. The main Tellor smart contract creates a time series of each requested data series and aims to become the standard source of high value data for decentralized applications. This oracle, “Tellor”,  utilizes similar incentive mechanisms to other cryptocurrency systems through the issuance of Tellor’s token, Tributes, that are used to request a particular data series from miners.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.80M TRB |
+| **Total Supply** | 2.88M TRB |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $43.14M |
+| **Market Cap / FDV Ratio** | 0.97 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $593.09 (2023-12-31) |
+| **Current vs ATH** | -97.46% |
+| **All-Time Low** | $0.0100 (2019-11-01) |
+| **Current vs ATL** | +150182.99% |
+| **24h Change** | +1.55% |
+| **7d Change** | -4.98% |
+| **30d Change** | +4.89% |
+| **1y Change** | -64.18% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x88df592f8eb5d7bd38bfef7deb0fbc02cf3778a0` |
+| Xdai | `0xaad66432d27737ecf6ed183160adc5ef36ab99f2` |
+| Lisk | `0x665060707c3ea3c31b3eabad7f409072446e1d50` |
+| Polygon Pos | `0xe3322702bedaaed36cddab233360b939775ae5f1` |
+| Arbitrum One | `0xd58d345fd9c82262e087d2d0607624b410d88242` |
+| Optimistic Ethereum | `0xaf8ca653fa2772d58f4368b0a71980e9e3ceb888` |
+| Manta Pacific | `0x8d7090ddda057f48fdbbb2abcea22d1113ab566a` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | TRB/USDT | N/A |
+| Bitget | TRB/USDT | N/A |
+| KuCoin | TRB/USDT | N/A |
+| Crypto.com Exchange | TRB/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X88DF592F8EB5D7BD38BFEF7DEB0FBC02CF3778A0/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [http://www.tellor.io/](http://www.tellor.io/) |
+| **Twitter** | [@WeAreTellor](https://twitter.com/WeAreTellor) |
+| **Discord** | [https://discord.gg/n7drGjh](https://discord.gg/n7drGjh) |
+| **GitHub** | [https://github.com/tellor-io](https://github.com/tellor-io) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.80M |
+| **Market Cap Rank** | #499 |
+| **24h Range** | $14.75 — $15.31 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

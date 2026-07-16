@@ -2,14 +2,14 @@
 title: "COTI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["COTI", "Currency Of The Internet"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://coti.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[smart-contracts]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[layer-1]]", "[[smart-contracts]]"]
 ---
 
 # COTI

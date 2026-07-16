@@ -2,7 +2,7 @@
 title: "Quantum Resistant Ledger"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, infrastructure]
 aliases: ["QRL"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://www.theqrl.org"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[ethereum]]", "[[post-quantum-cryptography]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[post-quantum-cryptography]]"]
 ---
 
 # Quantum Resistant Ledger
@@ -158,3 +158,112 @@ QRL's pitch is precisely the **inverse** of the incumbents' quantum exposure —
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | QRL |
+| **Market Cap Rank** | #305 |
+| **Market Cap** | $77.36M |
+| **Current Price** | $0.9865 |
+| **Genesis Date** | 2018-06-26 |
+| **Hashing Algorithm** | RandomX |
+| **Categories** | Smart Contract Platform, Proof of Work (PoW), Quantum-Resistant |
+| **Website** | [https://www.theqrl.org](https://www.theqrl.org) |
+
+---
+
+## Overview
+
+Quantum Resistant Ledger is a cryptocurrency based on the Python programming language, aimed at combating future attacks by quantum computers. This cryptocurrency is the brainchild of Peter Waterland who realised that Bitcoin, Ethereum, and other such cryptocurrencies have no protection against future technology. It claims to be a “future-proof” cryptocurrency which enables transactions and decentralized communication while providing protection against classical as well as quantum computer attacks.
+
+The Quantum Resistant Ledger company was founded by Peter Waterland, who found that Bitcoin, as well as Ethereum signatures are susceptible to attacks by powerful quantum computers. His research on quantum computers and signature programs let to the development of this new cryptocurrency, designed to be resistant to the present classical attacks as well as any future quantum computer attacks. Their team is made up of a diverse range of members spread out across the world, including developers (core, blockchain, mobile developers, etc.), analysts, advisors, marketing managers, designers and more.
+
+Quantum Resistant Ledger is the first ever cryptocurrency and the only one in existence as of August 2018, to consider the threat that the future technology of quantum computing poses to cryptocurrencies and their working. It uses a technology specifically designed for post-quantum security, called XMSS, which makes it secure against powerful quantum computers even while using a Proof-of-Stake consensus mechanism. Security against cyber-attacks is a very serious concern in this digital age, especially when you have digital assets whose loss is likely to lead you to bankruptcy.
+
+QRL is the first blockchain technology that provides durability and stability through resistance to quantum computer attacks. The encryption methods used by modern blockchains can become vulnerable to quantum computers over the next ten years. QRL tries to create a blockchain with long-term stability. By ...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 78.39M QRL |
+| **Total Supply** | 78.39M QRL |
+| **Max Supply** | 105.00M QRL |
+| **Fully Diluted Valuation** | $77.36M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $3.87 (2018-01-09) |
+| **Current vs ATH** | -74.43% |
+| **All-Time Low** | $0.0412 (2023-12-01) |
+| **Current vs ATL** | +2301.17% |
+| **24h Change** | +9.98% |
+| **7d Change** | +31.44% |
+| **30d Change** | -3.26% |
+| **1y Change** | +19.47% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.theqrl.org](https://www.theqrl.org) |
+| **Reddit** | [https://www.reddit.com/r/qrl](https://www.reddit.com/r/qrl) |
+| **Telegram** | [QRLedgerOfficial](https://t.me/QRLedgerOfficial) (2,228 members) |
+| **Discord** | [https://www.theqrl.org/discord](https://www.theqrl.org/discord) |
+| **GitHub** | [https://github.com/theQRL/QRL](https://github.com/theQRL/QRL) |
+| **Whitepaper** | [https://github.com/theQRL/Whitepaper/blob/master/QRL_whitepaper.pdf](https://github.com/theQRL/Whitepaper/blob/master/QRL_whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $56,691.00 |
+| **Market Cap Rank** | #305 |
+| **24h Range** | $0.8792 — $0.9976 |
+| **CoinGecko Sentiment** | 83% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

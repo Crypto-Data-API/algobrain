@@ -2,14 +2,14 @@
 title: "Impossible Cloud Network Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, depin]
 aliases: ["ICNT", "Impossible Cloud Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.icn.global/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[depin]]", "[[base]]", "[[filecoin]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[filecoin]]"]
 ---
 
 # Impossible Cloud Network Token
@@ -147,3 +147,110 @@ ICN targets the **enterprise DePIN cloud** narrative: a decentralized alternativ
 - Market snapshot 2026-06-20 (cryptodataapi.com / CoinGecko top-markets dataset).
 - Macro framing: market snapshot 2026-06-23 (Fear & Greed 21, Extreme Fear; bottoming/accumulation regime).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ICNT |
+| **Market Cap Rank** | #484 |
+| **Market Cap** | $43.29M |
+| **Current Price** | $0.1595 |
+| **Categories** | Infrastructure, Storage, DePIN, Binance Alpha Spotlight, Base Native |
+| **Website** | [https://www.icn.global/](https://www.icn.global/) |
+
+---
+
+## Overview
+
+Impossible Cloud Network (ICN) is a decentralized infrastructure protocol that provides enterprise-grade cloud services including storage, compute, and networking. Built as a multi-service DePIN platform, ICN enables hardware providers to contribute resources and service providers to access them using the native token ICNT. The network supports real-world enterprise use cases and is designed to offer high performance, security, and censorship resistance. ICNT is used for collateral by node operators, access to resources by service providers, and staking by the community to secure and participate in the protocol.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 271.38M ICNT |
+| **Total Supply** | 700.00M ICNT |
+| **Max Supply** | 700.00M ICNT |
+| **Fully Diluted Valuation** | $111.66M |
+| **Market Cap / FDV Ratio** | 0.39 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.5911 (2025-12-19) |
+| **Current vs ATH** | -73.02% |
+| **All-Time Low** | $0.1099 (2025-10-10) |
+| **Current vs ATL** | +45.08% |
+| **24h Change** | +1.19% |
+| **7d Change** | -0.08% |
+| **30d Change** | -23.52% |
+| **1y Change** | -41.15% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xe5e0b73380181273abcfd88695f52c4d0c825661` |
+| Base | `0xe0cd4cacddcbf4f36e845407ce53e87717b6601d` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | ICNT/USD | N/A |
+| Bitget | ICNT/USDT | N/A |
+| KuCoin | ICNT/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.icn.global/](https://www.icn.global/) |
+| **Twitter** | [@ICN_Protocol](https://twitter.com/ICN_Protocol) |
+| **Telegram** | [ICN_Protocol](https://t.me/ICN_Protocol) (21,217 members) |
+| **Discord** | [https://discord.com/invite/icn-protocol](https://discord.com/invite/icn-protocol) |
+| **Whitepaper** | [https://console.impossiblecloud.com/static/icn/whitepaper.pdf](https://console.impossiblecloud.com/static/icn/whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.18M |
+| **Market Cap Rank** | #484 |
+| **24h Range** | $0.1559 — $0.1611 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

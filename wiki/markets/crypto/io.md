@@ -2,14 +2,14 @@
 title: "io.net"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading]
+tags: [ai-trading, crypto]
 aliases: ["IO", "io.net"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://io.net"
-related: ["[[crypto-markets]]", "[[solana]]", "[[depin]]", "[[ai-trading]]", "[[hyperliquid]]"]
+related: ["[[ai-trading]]", "[[crypto-markets]]", "[[depin]]", "[[hyperliquid]]", "[[solana]]"]
 ---
 
 # io.net
@@ -144,3 +144,122 @@ IO's hard cap and live derivatives market distinguish it from the uncapped, spot
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | IO |
+| **Market Cap Rank** | #396 |
+| **Market Cap** | $57.52M |
+| **Current Price** | $0.1574 |
+| **Categories** | Artificial Intelligence (AI), Internet of Things (IOT), Binance Launchpool, DePIN, Made in USA |
+| **Website** | [https://io.net](https://io.net) |
+
+---
+
+## Overview
+
+io.net the world’s largest decentralized computing network that allows machine learning engineers to access scalable distributed clusters at a small fraction of the cost of comparable centralized services.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 365.52M IO |
+| **Total Supply** | 798.80M IO |
+| **Max Supply** | 800.00M IO |
+| **Fully Diluted Valuation** | $125.70M |
+| **Market Cap / FDV Ratio** | 0.46 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $6.43 (2024-06-12) |
+| **Current vs ATH** | -97.55% |
+| **All-Time Low** | $0.0930 (2026-02-06) |
+| **Current vs ATL** | +69.21% |
+| **24h Change** | -1.36% |
+| **7d Change** | -7.71% |
+| **30d Change** | -16.16% |
+| **1y Change** | -80.86% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | IO/USDT | N/A |
+| Upbit | IO/KRW | N/A |
+| Bitget | IO/USDT | N/A |
+| KuCoin | IO/USDT | N/A |
+| Crypto.com Exchange | IO/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | BZLBGTNCSFFOTH2GYDTWR7E4IMWZPR5JQCUUGEWR646K/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://io.net](https://io.net) |
+| **Twitter** | [@ionet](https://twitter.com/ionet) |
+| **Whitepaper** | [https://docs.io.net](https://docs.io.net) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.26M |
+| **Market Cap Rank** | #396 |
+| **24h Range** | $0.1557 — $0.1632 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

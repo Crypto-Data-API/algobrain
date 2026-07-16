@@ -2,14 +2,14 @@
 title: "Chainflip"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["FLIP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://chainflip.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cross-chain-bridge]]", "[[bitcoin]]", "[[slashing]]", "[[smart-contract-risk]]"]
+related: ["[[bitcoin]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[slashing]]", "[[smart-contract-risk]]"]
 ---
 
 # Chainflip

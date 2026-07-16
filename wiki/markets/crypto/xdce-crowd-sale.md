@@ -2,15 +2,15 @@
 title: "XDC Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["XDC", "XinFin", "XinFin Network"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (XDC Foundation)"
 website: "https://xdc.org"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[narrative-trading]]", "[[bitcoin]]", "[[ethereum]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]", "[[real-world-assets]]"]
 ---
 
 # XDC Network
@@ -291,3 +291,21 @@ XDC's edge is the concrete **trade-finance** focus (TradeFinex, Contour) and nam
 - Crowdfund Insider (May 2026): "Animoca Brands Strengthens XDC Network As Key Institutional Validator" — https://www.crowdfundinsider.com/2026/05/280497-digital-assets-animoca-brands-strengthens-xdc-network-as-key-institutional-validator/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
 - Market data: 2026-06-20 snapshot (cryptodataapi.com / CoinGecko)
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.43M |
+| **Market Cap Rank** | #98 |
+| **24h Range** | $0.0273 — $0.0276 |
+| **CoinGecko Sentiment** | 60% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

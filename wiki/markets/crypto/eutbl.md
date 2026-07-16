@@ -2,15 +2,15 @@
 title: "Spiko EU T-Bills Money Market Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bonds, defi]
-aliases: ["EUTBL", "Spiko Euro", "Spiko EUTBL"]
+tags: [bonds, crypto, defi]
+aliases: ["EUTBL", "Spiko EUTBL", "Spiko Euro"]
 entity_type: protocol
 founded: 2023
 headquarters: "Paris, France (Spiko)"
 website: "https://www.spiko.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[spiko-us-t-bills-money-market-fund]]", "[[treasuries]]", "[[treasury-bills]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[spiko-us-t-bills-money-market-fund]]", "[[tokenized-treasuries]]", "[[treasuries]]", "[[treasury-bills]]"]
 ---
 
 # Spiko EU T-Bills Money Market Fund
@@ -185,3 +185,60 @@ No CEX or perp listings — EUTBL is acquired/redeemed via Spiko's primary marke
 - RWA.xyz EUTBL asset page — https://app.rwa.xyz/assets/EUTBL
 - Spiko Euro fund page — https://www.spiko.io/spiko-euro
 - Web verification (WebSearch + Perplexity), 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 816.91M EUTBL |
+| **Total Supply** | 818.59M EUTBL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $990.14M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.26 (2026-01-27) |
+| **Current vs ATH** | -4.09% |
+| **All-Time Low** | $1.01 (2024-08-15) |
+| **Current vs ATL** | +19.63% |
+| **24h Change** | +0.41% |
+| **7d Change** | +0.30% |
+| **30d Change** | -1.01% |
+| **1y Change** | +0.44% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #65 |
+| **24h Range** | $1.20 — $1.21 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

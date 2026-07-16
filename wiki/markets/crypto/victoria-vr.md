@@ -2,14 +2,14 @@
 title: "Victoria VR"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, gamefi, nft]
+tags: [altcoins, crypto, gamefi, nft]
 aliases: ["VR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://victoriavr.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[metaverse]]", "[[gamefi]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[metaverse]]", "[[nft]]"]
 ---
 
 # Victoria VR

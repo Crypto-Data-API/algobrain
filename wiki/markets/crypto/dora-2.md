@@ -2,14 +2,14 @@
 title: "DORA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["DORA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://www.dorausd1.com/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -150,10 +150,10 @@ This is Dora!
 ## See Also
 
 - [[crypto-markets]]
-- [[bnb]]
+- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

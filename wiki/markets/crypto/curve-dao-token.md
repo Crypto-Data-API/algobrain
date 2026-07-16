@@ -2,15 +2,15 @@
 title: "Curve DAO (CRV)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, arbitrage]
-aliases: ["CRV", "Curve", "Curve Finance", "Curve-Finance", "Curve DAO Token"]
+tags: [arbitrage, crypto, defi]
+aliases: ["CRV", "Curve", "Curve DAO Token", "Curve Finance", "Curve-Finance"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://curve.finance"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[curve-finance]]", "[[2023-07-curve-finance-exploit]]", "[[curve-gauge-wars-arbitrage]]", "[[hyperliquid]]"]
+related: ["[[2023-07-curve-finance-exploit]]", "[[crypto-markets]]", "[[curve-finance]]", "[[curve-gauge-wars-arbitrage]]", "[[ethereum]]", "[[hyperliquid]]", "[[stablecoins]]"]
 ---
 
 # Curve DAO (CRV)
@@ -263,3 +263,77 @@ CRV's edge vs Uniswap is purpose-built stable/pegged depth and a richer fee/emis
 - The Crypto Times fact-check on Egorov claims (2026-04-27): https://www.cryptotimes.io/2026/04/27/fact-check-did-michael-egorov-pull-100m-from-crv-to-buy-mansions-and-leave-bad-debt/
 - Curve, "Inside crvUSD Borrow Rate": https://news.curve.finance/inside-crvusd-borrow-rate/
 - Web search verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.54B CRV |
+| **Total Supply** | 2.40B CRV |
+| **Max Supply** | 3.03B CRV |
+| **Fully Diluted Valuation** | $512.77M |
+| **Market Cap / FDV Ratio** | 0.64 |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | CRV/USDT | N/A |
+| Kraken | CRV/USD | N/A |
+| Bitget | CRV/USDT | N/A |
+| KuCoin | CRV/USDT | N/A |
+| Crypto.com Exchange | CRV/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XD533A949740BB3306D119CC777FA900BA034CD52/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 1,112 |
+| **GitHub Forks** | 419 |
+| **Pull Requests Merged** | 105 |
+| **Contributors** | 13 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $37.68M |
+| **Market Cap Rank** | #125 |
+| **24h Range** | $0.2127 — $0.2236 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

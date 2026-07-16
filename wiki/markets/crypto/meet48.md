@@ -2,14 +2,14 @@
 title: "MEET48"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["IDOL", "Meet48"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.meet48.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[socialfi]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[socialfi]]"]
 ---
 
 # MEET48

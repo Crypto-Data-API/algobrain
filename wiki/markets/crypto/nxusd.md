@@ -2,14 +2,14 @@
 title: "NXUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
+tags: [crypto, defi, stablecoin]
 aliases: ["NXUSD", "Nereus USD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nereus.finance/"
-related: ["[[crypto-markets]]", "[[avalanche-2]]", "[[stablecoins]]", "[[collateral]]"]
+related: ["[[avalanche-2]]", "[[avalanche]]", "[[collateral]]", "[[crypto-markets]]", "[[stablecoins]]"]
 ---
 
 # NXUSD

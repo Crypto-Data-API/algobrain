@@ -2,7 +2,7 @@
 title: "Cosmos Hub"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ATOM", "Cosmos"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Decentralized (Interchain Foundation: Zug, Switzerland)"
 website: "https://cosmos.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[osmosis]]", "[[celestia]]", "[[injective-protocol]]", "[[dydx-chain]]", "[[atomone]]", "[[l1-l2-rotation]]", "[[polkadot]]", "[[layer-2]]", "[[decentralized-exchange]]"]
+related: ["[[atomone]]", "[[celestia]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[dydx-chain]]", "[[ethereum]]", "[[injective-protocol]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[osmosis]]", "[[polkadot]]"]
 ---
 
 # Cosmos Hub
@@ -305,3 +305,33 @@ The cleanest peer comparison is **Cosmos vs [[polkadot|Polkadot]]**: both are in
 - Simply Staking, "Cosmos, the ATOM Crypto, and the Future of Interchain"
 - Cosmoverse 2025 announcements (IBC Eureka, ATOM tokenomics research initiative, Nov 2025)
 - Web verification (WebSearch + Perplexity), 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 519.71M ATOM |
+| **Total Supply** | 519.71M ATOM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $796.72M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

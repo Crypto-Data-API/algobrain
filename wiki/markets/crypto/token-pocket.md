@@ -2,14 +2,14 @@
 title: "TokenPocket Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, cross-chain]
+tags: [altcoins, cross-chain, crypto, defi]
 aliases: ["TPT", "TokenPocket"]
 entity_type: protocol
 headquarters: "Hong Kong"
 website: "https://tp.xyz/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[wallet]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[wallet]]"]
 ---
 
 # TokenPocket Token
@@ -226,3 +226,11 @@ TPT is a BNB Chain BEP-20 (`0xeca4...5092`). The CoinGecko snapshot shows **no m
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Overview
+
+TokenPocket was founded in April 2018 and its global operations center is currently located in Hong Kong. After years of development, TokenPocket has formed three major business segments: wallet products, on-chain products and stablecoins payment. Among them, wallet products have become the world's largest decentralized stablecoin wallet, with services covering more than 200 countries and regions around the world, with a total of more than 30 million users and 5 million monthly active users.
+
+TPT, or TokenPocket Token, is the utility token of the TokenPocket ecosystem (referred to as the TP ecosystem). TPT can be used in various scenarios as a payment method and proof of membership benefits, serving as a connective thread throughout the TP ecosystem, with its rights and applications continuously expanding. TPT is a fully circulating token with a long-term deflationary model. Starting from July 1, 2025, the TokenPocket Foundation plans to implement a biannual buyback and burn program for TPT, aiming to reduce its total supply from 3.466 billion to 1 billion tokens.
+
+---

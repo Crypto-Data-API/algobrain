@@ -2,15 +2,15 @@
 title: "OriginTrail"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["TRAC", "OriginTrail"]
+aliases: ["OriginTrail", "TRAC"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://origintrail.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[base]]", "[[real-world-assets]]", "[[depin]]", "[[ai-trading]]", "[[ai-agents]]", "[[decentralized-ai]]", "[[polkadot]]"]
+related: ["[[ai-agents]]", "[[ai-trading]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[polkadot]]", "[[real-world-assets]]"]
 ---
 
 # OriginTrail
@@ -139,3 +139,135 @@ TRAC is best understood as a **usage-fee token**: its long-term value is a funct
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | TRAC |
+| **Market Cap Rank** | #234 |
+| **Market Cap** | $116.06M |
+| **Current Price** | $0.2595 |
+| **Genesis Date** | 2018-01-24 |
+| **Categories** | Artificial Intelligence (AI), Metaverse, Interoperability, Real World Assets (RWA), DePIN, Decentralized Science (DeSci), AI Agents, InfoFi (+1 more) |
+| **Website** | [https://origintrail.io/](https://origintrail.io/) |
+
+---
+
+## Overview
+
+What is OriginTrail (TRAC)?
+OriginTrail is an ecosystem building a trusted knowledge infrastructure for artificial intelligence (AI). It addresses the challenge of misinformation in the AI era by ensuring the origin of information and enabling discoverability of the world's most important knowledge and real-world assets (RWAs).
+OriginTrail is creating a verifiable Internet for decentralized AI by empowering world-class brands and builders. It utilizes its unique Decentralized Knowledge Graph and  NeuroWeb blockchain to deliver AI-powered search and solutions for enterprises and individuals worldwide.
+OriginTrail has gained support and partnerships with world-class organizations such as British Standards Institution, SCAN, Polkadot, Parity, Walmart, World Federation of Hemophilia, Oracle, the EU Commission's Next Generation Internet, and Microsoft Entrepreneurship for Positive Impact. These partnerships contribute to advancing OriginTrail's trusted knowledge foundation and its applicability in trillion-dollar industries, while providing a verifiable Internet of knowledge important in particular to drive the economies of RWAs.
+The best way to see the technology in action is by checking ChatDKG,  an experimental, question-answering bot on X (Twitter) based on trusted Knowledge Assets in OriginTrail Decentralized Knowledge Graph (DKG). The ChatDKG provides answers based on OriginTrail trusted AI.
+The Metcalfe phase of OriginTrail’s roadmap pursues an ambitious goal of creating the world’s largest verifiable Internet for AI, consisting of 100 billion Knowledge Assets, bringing a 100,000x scalability increase. As the name of the phase suggests, it seeks to produce network effects across the OriginTrail DKG and use novel techniques to pursue autonomous DKG growth based on the Genesis knowledge foundation being created by organizations and individuals alike. The Genesis part of the Metcalfe’s phase also introduces knowledge mining and knowledge signaling capabilities to dri...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 447.27M TRAC |
+| **Total Supply** | 500.00M TRAC |
+| **Max Supply** | 500.00M TRAC |
+| **Fully Diluted Valuation** | $129.74M |
+| **Market Cap / FDV Ratio** | 0.89 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $3.50 (2021-11-03) |
+| **Current vs ATH** | -92.63% |
+| **All-Time Low** | $0.00385262 (2020-03-13) |
+| **Current vs ATL** | +6601.46% |
+| **24h Change** | -0.79% |
+| **7d Change** | -1.10% |
+| **30d Change** | -28.76% |
+| **1y Change** | -22.27% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xaa7a9ca87d3694b5755f213b5d04094b8d0f0a6f` |
+| Base | `0xa81a52b4dda010896cdd386c7fbdc5cdc835ba23` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | TRAC/USD | N/A |
+| Upbit | TRAC/KRW | N/A |
+| KuCoin | TRAC/USDT | N/A |
+| Crypto.com Exchange | TRAC/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XAA7A9CA87D3694B5755F213B5D04094B8D0F0A6F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0XAA7A9CA87D3694B5755F213B5D04094B8D0F0A6F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://origintrail.io/](https://origintrail.io/) |
+| **Twitter** | [@origin_trail](https://twitter.com/origin_trail) |
+| **Reddit** | [https://www.reddit.com/r/origintrail](https://www.reddit.com/r/origintrail) |
+| **Telegram** | [origintrail](https://t.me/origintrail) (5,356 members) |
+| **GitHub** | [https://github.com/OriginTrail/ot-node](https://github.com/OriginTrail/ot-node) |
+| **Whitepaper** | [https://origintrail.io/ecosystem/whitepaper](https://origintrail.io/ecosystem/whitepaper) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 234 |
+| **GitHub Forks** | 87 |
+| **Pull Requests Merged** | 3,135 |
+| **Contributors** | 51 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.97M |
+| **Market Cap Rank** | #234 |
+| **24h Range** | $0.2578 — $0.2703 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

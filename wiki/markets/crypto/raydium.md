@@ -2,14 +2,14 @@
 title: "Raydium"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, solana, dex, yield-farming]
+tags: [crypto, defi, dex, solana, yield-farming]
 aliases: ["RAY", "Raydium DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://raydium.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[jupiter-exchange-solana]]", "[[orca]]", "[[uniswap]]", "[[kamino]]"]
+related: ["[[crypto-markets]]", "[[jupiter-exchange-solana]]", "[[kamino]]", "[[orca]]", "[[solana]]", "[[uniswap]]"]
 ---
 
 # Raydium

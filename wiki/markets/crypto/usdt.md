@@ -2,7 +2,7 @@
 title: "Tether (USDT)"
 type: entity
 created: 2026-04-07
-updated: 2026-04-09
+updated: 2026-07-16
 status: good
 tags: [controversy, crypto, ethereum, stablecoin, tron]
 aliases: ["Tether", "Tether USD", "USDT"]

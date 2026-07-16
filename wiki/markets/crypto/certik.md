@@ -2,14 +2,14 @@
 title: "Shentu (CertiK Chain)"
 type: entity
 created: 2026-04-09
-updated: 2026-04-22
+updated: 2026-07-16
 status: good
 tags: [crypto, cybersecurity, defi]
-aliases: ["CTK", "Shentu", "CertiK Chain", "CertiK"]
+aliases: ["CTK", "CertiK", "CertiK Chain", "Shentu"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.shentu.technology/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[smart-contract-auditing]]", "[[risk-management]]", "[[ethereum]]", "[[binance]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[risk-management]]", "[[smart-contract-auditing]]"]
 ---
 
 # Shentu (CertiK Chain)

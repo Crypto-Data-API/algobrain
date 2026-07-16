@@ -2,14 +2,14 @@
 title: "INFINIT"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins, ethereum]
+tags: [altcoins, crypto, defi, ethereum]
 aliases: ["IN", "Infinit"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://infinit.tech/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[ai-trading]]"]
+related: ["[[ai-trading]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]"]
 ---
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*

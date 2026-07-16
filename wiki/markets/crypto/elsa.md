@@ -2,7 +2,7 @@
 title: "Elsa"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["ELSA"]
@@ -135,4 +135,4 @@ HeyElsa operates through both a consumer-facing AI Copilot and a business-to-bus
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

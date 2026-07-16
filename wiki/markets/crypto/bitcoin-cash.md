@@ -2,15 +2,15 @@
 title: "Bitcoin Cash"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bitcoin, altcoins]
+tags: [altcoins, bitcoin, crypto]
 aliases: ["BCH", "BCash"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://bch.info/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[litecoin]]", "[[hyperliquid]]", "[[dogecoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dogecoin]]", "[[hyperliquid]]", "[[litecoin]]"]
 ---
 
 # Bitcoin Cash
@@ -316,3 +316,21 @@ The two legacy [[bitcoin]] forks/proxies traders most often pair are **[[litecoi
 - Buy Hodl Sell: "Bitcoin Cash May 2026 Upgrade Preview" (Loops, Pay-to-Script, Functions, Bitwise CHIPs) — https://buyhodlsell.com/articles/bch-may-2026-upgrade-preview
 - AInvest: "Why Bitcoin Cash (BCH) is the Best Performing L1 Blockchain of 2025" (Dec 2025) — https://www.ainvest.com/news/bitcoin-cash-bch-performing-l1-blockchain-2025-strong-buy-2026-2512/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 20.06M BCH |
+| **Total Supply** | 20.06M BCH |
+| **Max Supply** | 21.00M BCH |
+| **Fully Diluted Valuation** | $4.43B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

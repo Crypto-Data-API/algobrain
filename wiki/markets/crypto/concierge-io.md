@@ -2,14 +2,14 @@
 title: "AVA (Travala)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["AVA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.travala.com"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]"]
 ---
 
 # AVA (Travala)
@@ -137,10 +137,10 @@ What is the project about? AVA plans to tokenise the concept of loyalty reward p
 ## See Also
 
 - [[crypto-markets]]
-- [[ethereum]]
+- [[solana]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

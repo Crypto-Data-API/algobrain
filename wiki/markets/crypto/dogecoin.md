@@ -2,15 +2,15 @@
 title: "Dogecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["DOGE", "Doge"]
 entity_type: protocol
 founded: 2013
 headquarters: "Decentralized"
 website: "http://dogecoin.com/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[litecoin]]", "[[narrative-trading]]", "[[hyperliquid]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[litecoin]]", "[[narrative-trading]]"]
 ---
 
 # Dogecoin
@@ -306,3 +306,27 @@ DOGE's durable advantages over the basket: the deepest and most liquid spot/perp
 - SEC EDGAR: Bitwise Dogecoin ETF filings (S-1 Jan 2025; 10-Q noting operations commenced 2025-11-25) — https://www.sec.gov/Archives/edgar/data/0002053791/000119312526214119/bwow-20260331.htm
 - Brave New Coin: "Grayscale Pushes Forward with Dogecoin ETF Under 'GDOG' Ticker" — https://bravenewcoin.com/insights/grayscale-pushes-forward-with-dogecoin-etf-under-gdog-ticker
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 155.09B DOGE |
+| **Total Supply** | 155.09B DOGE |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $11.35B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,14 @@
 title: "Magma Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, automated-market-maker]
+tags: [automated-market-maker, crypto, defi]
 aliases: ["MAGMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://magmafinance.io/"
-related: ["[[crypto-markets]]", "[[sui]]", "[[decentralized-finance]]", "[[automated-market-maker]]", "[[liquidity]]", "[[cetus-protocol]]", "[[uniswap]]", "[[impermanent-loss]]"]
+related: ["[[automated-market-maker]]", "[[cetus-protocol]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[impermanent-loss]]", "[[liquidity]]", "[[sui]]", "[[uniswap]]"]
 ---
 
 # Magma Finance
@@ -163,3 +163,99 @@ Context: 2026-06-23 — **Extreme Fear** (F&G 21), long-horizon **Bottoming / Ac
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Project site: magmafinance.io (project self-description).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MAGMA |
+| **Market Cap Rank** | #376 |
+| **Market Cap** | $60.82M |
+| **Current Price** | $0.3203 |
+| **Categories** | Decentralized Finance (DeFi), Automated Market Maker (AMM), Binance Alpha Spotlight |
+| **Website** | [https://magmafinance.io/](https://magmafinance.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 190.00M MAGMA |
+| **Total Supply** | 1.00B MAGMA |
+| **Max Supply** | 1.00B MAGMA |
+| **Fully Diluted Valuation** | $320.08M |
+| **Market Cap / FDV Ratio** | 0.19 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.8033 (2026-07-04) |
+| **Current vs ATH** | -60.10% |
+| **All-Time Low** | $0.0698 (2026-04-02) |
+| **Current vs ATL** | +358.99% |
+| **24h Change** | +3.87% |
+| **7d Change** | -12.39% |
+| **30d Change** | -15.40% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Sui
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Sui | `0x9f854b3ad20f8161ec0886f15f4a1752bf75d22261556f14cc8d3a1c5d50e529::magma::MAGMA` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | MAGMA/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://magmafinance.io/](https://magmafinance.io/) |
+| **Twitter** | [@Magma_Finance](https://twitter.com/Magma_Finance) |
+| **Discord** | [https://discord.com/invite/magmafinance](https://discord.com/invite/magmafinance) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.67M |
+| **Market Cap Rank** | #376 |
+| **24h Range** | $0.2908 — $0.3299 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

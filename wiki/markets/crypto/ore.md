@@ -2,14 +2,14 @@
 title: "ORE"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["ORE", "ORE Supply"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ore.supply/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[proof-of-work]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[proof-of-work]]", "[[solana]]"]
 ---
 
 # ORE
@@ -236,3 +236,17 @@ Headwinds: no cash flow to anchor value, severe historical drawdown (-97% from t
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no other specific wiki source ingested yet.
+
+## Overview
+
+ORE is future-proof electronic cash. ORE exists to advance the original vision for crypto, identified by Satoshi Nakamoto: creating digital money that cannot be debased or controlled by centralized authorities. 
+
+Bitcoin solved the double-spend problem. Solana solved scalability at the Layer 1 level. Modern wallets improved self-custody user experience. ORE solved the Proof-of-Work value leak.
+
+Built on Solana, ORE inherits the network's scalability, composability, and future upgrades, including privacy enhancements, without requiring the tradeoffs traditionally associated with securing blockchain consensus. For these reasons, we describe ORE (after Bitcoin: "Peer-to-peer electronic cash") as:
+- ORE, the asset, is a future-proof electronic cash system.
+- ORE, the protocol, is a future-proof electronic cash system on Solana.
+
+ORE is named after Nicholas Oresme, the 14th-century philosopher and economist who argued that money should belong to the people who use it rather than rulers who debase it. That philosophy serves as the foundation for the protocol: in many ways, ORE is the continuation of a centuries-old idea — that monetary systems are strongest when they are governed by rules rather than rulers.
+
+---

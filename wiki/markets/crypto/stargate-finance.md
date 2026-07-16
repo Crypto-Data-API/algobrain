@@ -2,14 +2,14 @@
 title: "Stargate Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["STG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://stargate.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cross-chain-bridge]]", "[[layerzero]]", "[[smart-contract-risk]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[layerzero]]", "[[smart-contract-risk]]"]
 ---
 
 # Stargate Finance

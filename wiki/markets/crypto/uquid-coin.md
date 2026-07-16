@@ -2,9 +2,9 @@
 title: "Uquid Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, payments, defi]
+tags: [altcoins, crypto, defi, payments]
 aliases: ["UQC", "UQUID", "Uquid"]
 entity_type: protocol
 headquarters: "Decentralized"
@@ -227,3 +227,11 @@ Context: as of 2026-06-23 the market reads **Extreme Fear (F&G 21)** with a long
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Overview
+
+UQC is a decentralised virtual currency based on the ERC20 - token, one of Ethereum Technological trends.  The goal of this blockchain asset is to supplement the development of UQUID Ecosystem. In this virtual revolution, coin holders will have the benefit of instantly and effortlessly cash out their coins.
+
+The uquid card project started from 2016 was became the first project to issue prepaid payment cards for bitcoin and altcoins. Uquid cards now support over 100 types of altcoins. The uquid coin was born with the goal of supporting the uquid ecosystem in helping altcoins users to shop online (ebay, amazon) directly through the uquid ecosystem and build up an card-less system by 2020.
+
+---

@@ -2,7 +2,7 @@
 title: "Pump.fun"
 type: entity
 created: 2026-04-09
-updated: 2026-07-13
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["PUMP", "pumpdotfun"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://pump.fun"
-related: ["[[crypto-markets]]", "[[solana]]", "[[pumpswap]]", "[[letsbonk]]", "[[bonk]]", "[[memecoin-mania]]", "[[hyperliquid]]", "[[pump-fun-bonding-curve-sniping]]", "[[cryptodataapi]]"]
+related: ["[[bonk]]", "[[crypto-markets]]", "[[cryptodataapi]]", "[[hyperliquid]]", "[[letsbonk]]", "[[memecoin-mania]]", "[[pump-fun-bonding-curve-sniping]]", "[[pumpswap]]", "[[solana]]"]
 ---
 
 # Pump.fun
@@ -303,3 +303,34 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 - CoinMarketCap Top Stories, "Pump.fun (PUMP) Surges on Buybacks, Revenue, Upgrades" (2026)
 - CoinGecko PUMP page — https://www.coingecko.com/en/coins/pump-fun
 - Web verification (WebSearch + Perplexity), 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 400.88B PUMP |
+| **Total Supply** | 849.14B PUMP |
+| **Max Supply** | 1.00T PUMP |
+| **Fully Diluted Valuation** | $1.36B |
+| **Market Cap / FDV Ratio** | 0.47 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

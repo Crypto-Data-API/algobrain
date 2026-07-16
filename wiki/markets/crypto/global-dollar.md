@@ -2,15 +2,15 @@
 title: "Global Dollar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, regulation, stablecoins]
-aliases: ["USDG", "Global Dollar Network", "GDN"]
+aliases: ["GDN", "Global Dollar Network", "USDG"]
 entity_type: protocol
 founded: 2024
 headquarters: "Singapore (Paxos Digital Singapore); EU issuance: Helsinki, Finland"
 website: "https://globaldollar.com"
-related: ["[[crypto-markets]]", "[[solana]]", "[[paxos]]", "[[stablecoins]]", "[[genius-act]]"]
+related: ["[[crypto-markets]]", "[[genius-act]]", "[[paxos]]", "[[solana]]", "[[stablecoins]]"]
 ---
 
 # Global Dollar
@@ -198,3 +198,60 @@ See the **Market Data** block above for the authoritative supply/price/market-ca
 - White House fact sheet, GENIUS Act signing (2025-07-18) — https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-signs-genius-act-into-law/
 - CoinGecko / cryptodataapi.com market snapshot, 2026-06-20 ($2.81B mcap, rank #33, on-peg); earlier baseline CoinGecko top-1000 (2026-04-09)
 - Verified via web search, 2026-06-10
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.65 (2025-01-30) |
+| **Current vs ATH** | -39.45% |
+| **All-Time Low** | $0.9076 (2024-11-11) |
+| **Current vs ATL** | +10.38% |
+| **24h Change** | +0.14% |
+| **7d Change** | +0.17% |
+| **30d Change** | +0.16% |
+| **1y Change** | +0.19% |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 18 |
+| **GitHub Forks** | 6 |
+| **Pull Requests Merged** | 5 |
+| **Contributors** | 2 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $253.13M |
+| **Market Cap Rank** | #28 |
+| **24h Range** | $0.9993 — $1.00 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

@@ -2,7 +2,7 @@
 title: "BabyBoomToken"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["BBT"]
@@ -127,4 +127,4 @@ Launched in March 2023, BabyBoomToken (BBT) is a blockchain-based reward system 
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

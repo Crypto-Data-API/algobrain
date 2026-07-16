@@ -2,14 +2,14 @@
 title: "Flow"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, defi, nft]
 aliases: ["FLOW"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://flow.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[non-fungible-token]]", "[[gamefi]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[non-fungible-token]]"]
 ---
 
 # Flow
@@ -210,3 +210,33 @@ At a ~$47M market cap FLOW has compressed to roughly **0.1%** of its 2021 peak v
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data 2026-06-20 from `raw/data/crypto-loop/category-groups.json` (cryptodataapi.com / CoinGecko).
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 20.00M FLOW |
+| **Total Supply** | 25.00M FLOW |
+| **Max Supply** | 25.00M FLOW |
+| **Fully Diluted Valuation** | $2.19M |
+| **Market Cap / FDV Ratio** | 0.80 |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Cardano
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Cardano | `2d9db8a89f074aa045eab177f23a3395f62ced8b53499a9e4ad46c80464c4f57` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---

@@ -2,14 +2,14 @@
 title: "Dog (Bitcoin)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coin, bitcoin, speculation]
+tags: [bitcoin, crypto, meme-coin, nft, speculation]
 aliases: ["DOG", "Dog Go To The Moon"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dogofbitcoin.com/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[meme-coins]]", "[[meme-coin-cycle]]", "[[bitcoin-runes]]"]
+related: ["[[bitcoin-runes]]", "[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coins]]"]
 ---
 
 # Dog (Bitcoin)
@@ -152,3 +152,121 @@ DOG is unique among large memes for being **Bitcoin-native** (Runes UTXOs) rathe
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DOG |
+| **Market Cap Rank** | #1511 |
+| **Market Cap** | $5.44M |
+| **Current Price** | $0.00038863 |
+| **Categories** | NFT, Meme, Fractionalized NFT, Real World Assets (RWA), Dog-Themed, NFTFi, Base Native |
+| **Website** | [https://ownthedoge.com/](https://ownthedoge.com/) |
+
+---
+
+## Overview
+
+Own The Doge (ownthedoge.com) is the official Doge project, community, and token ($DOG) directly linked to The Doge NFT, endorsed by Atsuko Sato, the owner of Kabosu — the Shiba Inu behind the iconic Doge meme. As a provenance coin, $DOG is backed by the original Doge meme, purchased on-chain from Atsuko Sato, granting exclusive Doge IP rights to Own The Doge. This has enabled partnerships with entities like Revolut and D3 (.doge domains), and the creation of Doge-themed collectibles. Organized as a Doge fan club with DAO governance, holders can vote and submit grants for Doge-related public goods and cultural projects, such as a Hollywood-backed Doge documentary, the annual Doge Day on November 2nd, a bronze statue replica of the meme photo in Tokyo, and sending The Doge NFT to space on SpaceX’s DOGE-1 mission. Committed to 'Do Only Good Everyday,' the community has donated millions to charity, including being the largest crypto donor to Save The Children.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 13.99B DOG |
+| **Total Supply** | 16.97B DOG |
+| **Max Supply** | 16.97B DOG |
+| **Fully Diluted Valuation** | $6.59M |
+| **Market Cap / FDV Ratio** | 0.82 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0418 (2021-09-03) |
+| **Current vs ATH** | -99.07% |
+| **All-Time Low** | $0.00000020 (2023-08-11) |
+| **Current vs ATL** | +194209.25% |
+| **24h Change** | +2.29% |
+| **7d Change** | +6.71% |
+| **30d Change** | -0.75% |
+| **1y Change** | -79.88% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xbaac2b4491727d78d2b78815144570b9f2fe8899` |
+| Solana | `B9u8h65uM1oifqmP82VyUDb68iG2fKfZiyubmNMtu3h7` |
+| Polygon Pos | `0xeee3371b89fc43ea970e908536fcddd975135d8a` |
+| Binance Smart Chain | `0xaa88c603d142c371ea0eac8756123c5805edee03` |
+| Arbitrum One | `0x4425742f1ec8d98779690b5a3a6276db85ddc01a` |
+| Optimistic Ethereum | `0x8f69ee043d52161fd29137aedf63f5e70cd504d5` |
+| Base | `0xafb89a09d82fbde58f18ac6437b3fc81724e4df6` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X7F39C581F595B53C5CB19BD0B3F8DA6C935E2CA0/0XBAAC2B4491727D78D2B78815144570B9F2FE8899 | Spot |
+| Uniswap V3 (Ethereum) | 0XBAAC2B4491727D78D2B78815144570B9F2FE8899/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://ownthedoge.com/](https://ownthedoge.com/) |
+| **Twitter** | [@ownthedoge](https://twitter.com/ownthedoge) |
+| **Reddit** | [https://www.reddit.com/r/ownthedoge/](https://www.reddit.com/r/ownthedoge/) |
+| **Telegram** | [ownthedoge](https://t.me/ownthedoge) (1,303 members) |
+| **Discord** | [https://discord.com/invite/ownthedoge](https://discord.com/invite/ownthedoge) |
+| **Whitepaper** | [https://www.ownthedoge.com/yellowpaper](https://www.ownthedoge.com/yellowpaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6,345.37 |
+| **Market Cap Rank** | #1511 |
+| **24h Range** | $0.00037898 — $0.00039474 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

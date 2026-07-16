@@ -2,15 +2,15 @@
 title: "Stable"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["STABLE", "StableChain", "Stable Chain"]
+tags: [altcoins, crypto]
+aliases: ["STABLE", "Stable Chain", "StableChain"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized (Stable Foundation; Bitfinex/Tether-backed)"
 website: "https://www.stable.xyz/"
-related: ["[[crypto-markets]]", "[[tether]]", "[[stablecoins]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[tether]]"]
 ---
 
 # Stable
@@ -229,3 +229,33 @@ The incumbent to beat is **[[tron|Tron]]**, which already settles an enormous sh
 - Morningstar / PR Newswire (2025-12-08): "Stable Launches StableChain Mainnet and Unveils Both the Stable Foundation and Native Token STABLE" — https://www.morningstar.com/news/pr-newswire/20251208ny41404/stable-launches-stablechain-mainnet-and-unveils-both-the-stable-foundation-and-native-token-stable
 - Messari: "Stable: Mainnet and Token Generation Event" — https://messari.io/report/stable-mainnet-and-token-generation-event
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 24.53B STABLE |
+| **Total Supply** | 100.00B STABLE |
+| **Max Supply** | 100.00B STABLE |
+| **Fully Diluted Valuation** | $3.77B |
+| **Market Cap / FDV Ratio** | 0.25 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $14.63M |
+| **Market Cap Rank** | #70 |
+| **24h Range** | $0.0367 — $0.0377 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,14 @@
 title: "MYX Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["MYX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.myx.finance/en"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[perpetual-futures]]", "[[decentralized-exchange]]", "[[defi]]", "[[hyperliquid]]", "[[gmx]]", "[[dydx]]", "[[funding-rate]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[dydx]]", "[[funding-rate]]", "[[gmx]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 ---
 
 # MYX Finance
@@ -201,3 +201,54 @@ Context: 2026-06-23 — **Extreme Fear** (F&G 21), long-horizon **Bottoming / Ac
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MYX |
+| **Market Cap Rank** | #972 |
+| **Market Cap** | $14.48M |
+| **Current Price** | $0.0759 |
+| **Categories** | Decentralized Finance (DeFi), Derivatives, Perpetuals, Binance Wallet IDO |
+| **Website** | [https://www.myx.finance/en](https://www.myx.finance/en) |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $19.03 (2025-09-11) |
+| **Current vs ATH** | -99.60% |
+| **All-Time Low** | $0.0470 (2025-06-19) |
+| **Current vs ATL** | +62.76% |
+| **24h Change** | +8.28% |
+| **7d Change** | +6.56% |
+| **30d Change** | -53.30% |
+| **1y Change** | +6.52% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | MYX/USD | N/A |
+| Bitget | MYX/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $10.65M |
+| **Market Cap Rank** | #972 |
+| **24h Range** | $0.0692 — $0.0767 |
+| **CoinGecko Sentiment** | 33% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

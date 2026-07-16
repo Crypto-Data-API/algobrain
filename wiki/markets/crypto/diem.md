@@ -2,14 +2,14 @@
 title: "Diem"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: good
-tags: [crypto, ai-trading]
+tags: [ai-trading, crypto]
 aliases: ["DIEM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://venice.ai"
-related: ["[[crypto-markets]]", "[[base]]", "[[venice-token]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[venice-token]]"]
 ---
 
 # Diem
@@ -129,3 +129,87 @@ DIEM is an **AI-compute / "tokenized intelligence" asset**, not a meme. Its thes
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko top-1000 snapshot, 2026-06-20.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DIEM |
+| **Market Cap Rank** | #454 |
+| **Market Cap** | $46.53M |
+| **Current Price** | $1,231.45 |
+| **Categories** | Artificial Intelligence (AI), Base Native |
+| **Website** | [https://venice.ai](https://venice.ai) |
+
+---
+
+## Overview
+
+DIEM transforms AI compute from a service you rent into an onchain asset you own: tokenized intelligence. Each Diem token represents $1 per day of Venice API capacity that never expires and never changes value. 
+DIEM are ERC20 tokens on Base and can be transferred, traded, and staked. DIEM can only be minted by locking staked VVV (sVVV), making DIEM and VVV a foundational assets for onchain AI.
+Tokenizing intelligence with DIEM creates new possibilities:
+
+Developers/agents: 1 DIEM = $1/day Venice API access, forever
+VVV holders: Monetize unused compute as DIEM → earn yield → buy back later to unlock VVV
+Apps: Fixed AI costs, guaranteed capacity, no variable API bills
+Onchain economy: Agents own their intelligence, DeFi collateralizes compute
+
+Minting DIEM with VVV creates a brand-new onchain building block for AI – programmable, composable compute
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 37,786 DIEM |
+| **Total Supply** | 37,786 DIEM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $46.53M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1,931.15 (2026-05-20) |
+| **Current vs ATH** | -36.25% |
+| **All-Time Low** | $80.54 (2025-11-21) |
+| **Current vs ATL** | +1428.60% |
+| **24h Change** | -3.30% |
+| **7d Change** | -2.82% |
+| **30d Change** | -19.18% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $768,962.00 |
+| **Market Cap Rank** | #454 |
+| **24h Range** | $1,215.49 — $1,305.65 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

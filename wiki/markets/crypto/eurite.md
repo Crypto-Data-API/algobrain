@@ -2,14 +2,14 @@
 title: "Eurite"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["EURI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.eurite.com/"
-related: ["[[crypto-markets]]", "[[stablecoins]]", "[[euro-coin]]", "[[societe-generale-forge-eurcv]]", "[[bnb]]", "[[ethereum]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[euro-coin]]", "[[societe-generale-forge-eurcv]]", "[[stablecoins]]"]
 ---
 
 # Eurite
@@ -158,3 +158,62 @@ EURI sits in the **regulated/marketed-compliant euro stablecoin** category, with
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | EURI |
+| **Market Cap Rank** | #522 |
+| **Market Cap** | $38.81M |
+| **Current Price** | $1.15 |
+| **Categories** | Stablecoins, EUR Stablecoin, MiCA-Compliant Stablecoin, Bank-Issued Stablecoin |
+| **Website** | [https://www.eurite.com/](https://www.eurite.com/) |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.21 (2026-01-27) |
+| **Current vs ATH** | -5.03% |
+| **All-Time Low** | $1.01 (2025-01-13) |
+| **Current vs ATL** | +13.73% |
+| **24h Change** | +0.46% |
+| **7d Change** | +0.40% |
+| **30d Change** | -1.18% |
+| **1y Change** | -1.33% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.64M |
+| **Market Cap Rank** | #522 |
+| **24h Range** | $1.14 — $1.15 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

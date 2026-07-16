@@ -2,15 +2,15 @@
 title: "USDD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["USDD", "USDD 2.0", "Decentralized USD"]
+aliases: ["Decentralized USD", "USDD", "USDD 2.0"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized (TRON DAO Reserve)"
 website: "https://usdd.io/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdt]]", "[[htx-dao]]"]
+related: ["[[crypto-markets]]", "[[htx-dao]]", "[[stablecoin]]", "[[stablecoins]]", "[[tron]]", "[[usdt]]"]
 ---
 
 # USDD
@@ -174,3 +174,84 @@ A stablecoin is "valued" not by upside but by **peg integrity and backing qualit
 - [Justin Sun: USDD at 1.1B now, 2B soon — Blockchain.News, 2026-01-18](https://blockchain.news/flashnews/justin-sun-usdd-at-1-1b-now-2b-soon-stablecoin-update-traders-should-watch)
 - [Dubious 20% Returns Offered as Justin Sun Unveils USDD 2.0 — Cryptonews Australia](https://cryptonews.com.au/news/dubious-20-returns-offered-as-justin-suns-unveils-usdd-2-0-stablecoin-125785/)
 - Web search verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.45B USDD |
+| **Total Supply** | 1.45B USDD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $1.45B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.05 (2023-10-23) |
+| **Current vs ATH** | -5.01% |
+| **All-Time Low** | $0.9281 (2022-06-19) |
+| **Current vs ATL** | +7.65% |
+| **24h Change** | -0.01% |
+| **7d Change** | -0.04% |
+| **30d Change** | -0.00% |
+| **1y Change** | -0.12% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Tron
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Tron | `TXDk8mbtRbXeYuMNS83CfKPaYYT8XWv9Hz` |
+| Ethereum | `0x4f8e5de400de08b164e7421b3ee387f461becd1a` |
+| Binance Smart Chain | `0x45e51bc23d592eb2dba86da3985299f7895d66ba` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | USDD/USD | N/A |
+| KuCoin | USDD/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $25.20M |
+| **Market Cap Rank** | #52 |
+| **24h Range** | $0.9989 — $0.9995 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

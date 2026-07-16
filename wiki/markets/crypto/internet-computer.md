@@ -2,15 +2,15 @@
 title: "Internet Computer"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading]
-aliases: ["ICP", "DFINITY", "Internet Computer Protocol"]
+tags: [ai-trading, altcoins, crypto]
+aliases: ["DFINITY", "ICP", "Internet Computer Protocol"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized (DFINITY Foundation: Zurich, Switzerland)"
 website: "https://internetcomputer.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[layer-1-blockchains]]", "[[near]]", "[[ai-agent-tokens]]", "[[artificial-intelligence]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[narrative-trading]]", "[[near]]"]
 ---
 
 # Internet Computer
@@ -251,3 +251,60 @@ ICP's unique claims are **fully on-chain web hosting** and **native chain-key BT
 - DFINITY / Internet Computer official: https://internetcomputer.org/
 - Perplexity verification, 2026-06-10 (sonar): June 2026 developments confirmed.
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 555.08M ICP |
+| **Total Supply** | 555.08M ICP |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $1.20B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $700.65 (2021-05-10) |
+| **Current vs ATH** | -99.69% |
+| **All-Time Low** | $2.02 (2026-02-24) |
+| **Current vs ATL** | +6.99% |
+| **24h Change** | -1.73% |
+| **7d Change** | -4.22% |
+| **30d Change** | -11.72% |
+| **1y Change** | -61.16% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $33.29M |
+| **Market Cap Rank** | #60 |
+| **24h Range** | $2.15 — $2.24 |
+| **CoinGecko Sentiment** | 69% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

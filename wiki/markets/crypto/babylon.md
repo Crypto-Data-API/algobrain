@@ -2,14 +2,14 @@
 title: "Babylon"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["BABY", "Babylon Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://babylon.foundation/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[staking]]", "[[restaking]]", "[[proof-of-stake]]", "[[hyperliquid]]", "[[fear-and-greed-index]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[restaking]]", "[[staking]]"]
 ---
 
 # Babylon
@@ -141,3 +141,101 @@ BABY's defining feature for valuation is its **dilution profile**: with only ~34
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BABY |
+| **Market Cap Rank** | #417 |
+| **Market Cap** | $52.74M |
+| **Current Price** | $0.0132 |
+| **Categories** | Decentralized Finance (DeFi), LSDFi, Liquid Staking, Binance HODLer Airdrops, BTCfi Protocol |
+| **Website** | [https://babylon.foundation/](https://babylon.foundation/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 4.01B BABY |
+| **Total Supply** | 10.88B BABY |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $143.14M |
+| **Market Cap / FDV Ratio** | 0.37 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1661 (2025-04-12) |
+| **Current vs ATH** | -92.08% |
+| **All-Time Low** | $0.0107 (2026-03-07) |
+| **Current vs ATL** | +22.77% |
+| **24h Change** | -2.88% |
+| **7d Change** | -0.88% |
+| **30d Change** | -26.08% |
+| **1y Change** | -75.08% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | BABY/USDT | N/A |
+| Kraken | BABY/USD | N/A |
+| Upbit | BABY/KRW | N/A |
+| Bitget | BABY/USDT | N/A |
+| KuCoin | BABY/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://babylon.foundation/](https://babylon.foundation/) |
+| **GitHub** | [https://github.com/babylonlabs-io/](https://github.com/babylonlabs-io/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.30M |
+| **Market Cap Rank** | #417 |
+| **24h Range** | $0.0130 — $0.0136 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,14 @@
 title: "Arcblock"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading, decentralized-identity]
+tags: [ai-trading, altcoins, crypto, decentralized-identity]
 aliases: ["ABT", "ArcBlock"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.arcblock.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-identity]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[smart-contracts]]"]
 ---
 
 # Arcblock

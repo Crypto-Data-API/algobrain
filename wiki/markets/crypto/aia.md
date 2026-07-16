@@ -2,7 +2,7 @@
 title: "DeAgentAI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["AIA"]
@@ -137,4 +137,4 @@ The native token AIA functions as the backbone of the ecosystem. It is used to a
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

@@ -2,14 +2,14 @@
 title: "Noon USN"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
+tags: [crypto, defi, stablecoin]
 aliases: ["USN"]
 entity_type: protocol
 headquarters: "Decentralized (Noon Capital)"
 website: "https://www.noon.capital/"
-related: ["[[stablecoin]]", "[[synthetic-dollar]]", "[[delta-neutral]]", "[[funding-rate]]", "[[basis-trade]]", "[[crypto-markets]]", "[[ethereum]]", "[[depeg]]", "[[aegis-yusd]]", "[[ethena-usde]]"]
+related: ["[[aegis-yusd]]", "[[basis-trade]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[stablecoin]]", "[[synthetic-dollar]]"]
 ---
 
 # Noon USN
@@ -116,3 +116,106 @@ USN sits in the **delta-neutral synthetic-dollar / "internet bond"** category, w
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USN |
+| **Market Cap Rank** | #632 |
+| **Market Cap** | $30.64M |
+| **Current Price** | $0.9987 |
+| **Categories** | Stablecoins |
+| **Website** | [https://www.noon.capital/](https://www.noon.capital/) |
+
+---
+
+## Overview
+
+Noon Capital is building a yield-bearing stablecoin called USN, designed to maintain a 1:1 peg with the US Dollar while offering competitive yields. The project aims to provide a stable, interest-bearing asset for users seeking a secure store of value with returns that can potentially outpace inflation. USN generates revenue through a sophisticated basis yield strategy, combining different strategies to ensure consistent returns across various market conditions.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 30.68M USN |
+| **Total Supply** | 30.68M USN |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $30.64M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.12 (2026-03-02) |
+| **Current vs ATH** | -10.81% |
+| **All-Time Low** | $0.9881 (2025-02-03) |
+| **Current vs ATL** | +1.07% |
+| **24h Change** | -0.02% |
+| **7d Change** | +0.02% |
+| **30d Change** | +0.02% |
+| **1y Change** | -0.15% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xda67b4284609d2d48e5d10cfac411572727dc1ed` |
+| Zksync | `0x0469d9d1de0ee58fa1153ef00836b9bbcb84c0b6` |
+| Starknet | `0x01e6545cab7ba4ac866768ba5e1bd540893762286ed3fea7f9c02bfa147e135b` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XDA67B4284609D2D48E5D10CFAC411572727DC1ED/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.noon.capital/](https://www.noon.capital/) |
+| **Twitter** | [@noon_capital](https://twitter.com/noon_capital) |
+| **Telegram** | [nooncapital](https://t.me/nooncapital) (14,499 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2,445.79 |
+| **Market Cap Rank** | #632 |
+| **24h Range** | $0.9986 — $0.9990 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

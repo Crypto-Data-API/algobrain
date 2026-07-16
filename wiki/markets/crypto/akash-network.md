@@ -2,14 +2,14 @@
 title: "Akash Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, defi, machine-learning]
+tags: [ai-trading, crypto, defi, machine-learning]
 aliases: ["AKT", "Akash"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://akash.network"
-related: ["[[crypto-markets]]", "[[render-token]]", "[[aethir]]", "[[aioz-network]]", "[[artificial-intelligence]]", "[[depin]]", "[[cosmos]]", "[[solana]]"]
+related: ["[[aethir]]", "[[aioz-network]]", "[[artificial-intelligence]]", "[[cosmos]]", "[[crypto-markets]]", "[[depin]]", "[[render-token]]", "[[solana]]"]
 ---
 
 # Akash Network
@@ -283,3 +283,28 @@ This is a qualitative framing, not a price target.
 - [CoinMarketCap: Akash Network (AKT)](https://coinmarketcap.com/currencies/akash-network/)
 - [CoinGecko: Akash Network](https://www.coingecko.com/en/coins/akash-network)
 - Verified via WebSearch, 2026-06-11 (BME launch, Q1 2026 metrics, VM launch, chain-migration evaluation)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AKT |
+| **Market Cap Rank** | #186 |
+| **Market Cap** | $168.22M |
+| **Current Price** | $0.5755 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, DePIN, Proof of Stake (PoS), Made in USA |
+| **Website** | [https://akash.network](https://akash.network) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 292.08M AKT |
+| **Total Supply** | 295.82M AKT |
+| **Max Supply** | 388.54M AKT |
+| **Fully Diluted Valuation** | $170.37M |
+| **Market Cap / FDV Ratio** | 0.99 |
+
+---

@@ -2,14 +2,14 @@
 title: "Midas mF-ONE"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, real-world-assets]
 aliases: ["MF-ONE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://midas.app/mfone"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[ethereum]]", "[[morpho]]", "[[tokenized-treasuries]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[morpho]]", "[[real-world-assets]]", "[[tokenized-treasuries]]"]
 ---
 
 # Midas mF-ONE
@@ -142,3 +142,90 @@ mF-ONE sits in the **tokenized private credit** segment of the RWA narrative, wi
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MF-ONE |
+| **Market Cap Rank** | #326 |
+| **Market Cap** | $73.77M |
+| **Current Price** | $1.11 |
+| **Categories** | Yield-Bearing Tokens, Midas Liquid Yield Tokens |
+| **Website** | [https://midas.app/mfone](https://midas.app/mfone) |
+
+---
+
+## Overview
+
+mF-ONE is a tokenized certificate issued by Midas that provides on-chain exposure to Fasanara Capital’s F-ONE strategy, a diversified private credit and digital asset fund. The token enables qualified investors to access real-world credit returns via a blockchain-native instrument that can be used in DeFi lending markets such as Morpho. mF-ONE tracks a strategy comprising fintech-originated receivables, SME lending, real estate-backed credit, and delta-neutral crypto strategies. With built-in on-chain liquidity mechanics and institutional-grade compliance, it combines TradFi risk frameworks with DeFi composability.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 66.65M MF-ONE |
+| **Total Supply** | 66.65M MF-ONE |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $73.77M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.11 (2026-07-14) |
+| **Current vs ATH** | -0.06% |
+| **All-Time Low** | $1.01 (2025-07-21) |
+| **Current vs ATL** | +9.79% |
+| **24h Change** | +0.03% |
+| **7d Change** | +0.18% |
+| **30d Change** | +1.03% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://midas.app/mfone](https://midas.app/mfone) |
+| **Twitter** | [@midasrwa](https://twitter.com/midasrwa) |
+| **Telegram** | [midasrwa](https://t.me/midasrwa) (1.31M members) |
+| **Discord** | [https://discord.gg/midasrwa](https://discord.gg/midasrwa) |
+| **Whitepaper** | [https://docs.midas.app/](https://docs.midas.app/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #326 |
+| **24h Range** | $1.11 — $1.11 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

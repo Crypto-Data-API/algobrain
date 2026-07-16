@@ -2,15 +2,15 @@
 title: "AB (Newton Project)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, smart-contract-platform]
-aliases: ["AB", "NEW", "Newton Project", "Newton"]
+aliases: ["AB", "NEW", "Newton", "Newton Project"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://ab.org/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[real-world-assets]]", "[[layer-1]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[layer-1]]", "[[real-world-assets]]"]
 ---
 
 # AB (Newton Project)
@@ -134,3 +134,109 @@ AB belongs to the **RWA + interoperability + legacy-rebrand** category. Reported
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - Macro framing: market snapshot 2026-06-23 (Fear & Greed 21, Extreme Fear; bottoming/accumulation regime).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AB |
+| **Market Cap Rank** | #264 |
+| **Market Cap** | $97.84M |
+| **Current Price** | $0.00098992 |
+| **Genesis Date** | 2018-12-18 |
+| **Categories** | Binance Alpha Spotlight |
+| **Website** | [https://ab.org/](https://ab.org/) |
+
+---
+
+## Overview
+
+AB (prev. Newton) is an advanced blockchain ecosystem evolving from the Newton Project, designed for decentralization, interoperability, and real-world asset (RWA) integration. It features a high-performance mainnet, industry-specific sidechains, and cross-chain compatibility with Ethereum, Solana, and other networks.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 98.82B AB |
+| **Total Supply** | 98.82B AB |
+| **Max Supply** | 100.00B AB |
+| **Fully Diluted Valuation** | $97.84M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0173 (2025-03-22) |
+| **Current vs ATH** | -94.27% |
+| **All-Time Low** | $0.00000380 (2022-10-11) |
+| **Current vs ATL** | +25918.08% |
+| **24h Change** | +1.92% |
+| **7d Change** | -0.07% |
+| **30d Change** | -7.59% |
+| **1y Change** | -88.67% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x95034f653d5d161890836ad2b6b8cc49d14e029a` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | AB/USD | N/A |
+| Bitget | AB/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://ab.org/](https://ab.org/) |
+| **Twitter** | [@ABDAO_Global](https://twitter.com/ABDAO_Global) |
+| **Reddit** | [https://www.reddit.com/r/Newton_project/](https://www.reddit.com/r/Newton_project/) |
+| **Telegram** | [Newtonproject](https://t.me/Newtonproject) (14,193 members) |
+| **Whitepaper** | [https://ab.org/files/AB%20Litepaper.pdf](https://ab.org/files/AB%20Litepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $666,726.00 |
+| **Market Cap Rank** | #264 |
+| **24h Range** | $0.00096859 — $0.00099169 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

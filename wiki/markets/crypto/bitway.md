@@ -2,14 +2,14 @@
 title: "Bitway"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: good
-tags: [crypto, defi, bnb]
+tags: [bnb, crypto, defi]
 aliases: ["BTW"]
 entity_type: protocol
 headquarters: "Decentralized (Bitway Labs)"
 website: "https://bitway.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[ethereum]]", "[[defi]]", "[[yield-farming]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[yield-farming]]"]
 ---
 
 # Bitway
@@ -98,3 +98,116 @@ BTW sits in the **BNB-ecosystem DeFi / yield-farming / governance** narrative, b
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Project documentation: Bitway (https://bitway.com/, https://docs.bitway.com/).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BTW |
+| **Market Cap Rank** | #217 |
+| **Market Cap** | $132.91M |
+| **Current Price** | $0.0604 |
+| **Categories** | Decentralized Finance (DeFi), Yield Farming, Binance Alpha Spotlight, Governance |
+| **Website** | [https://bitway.com/](https://bitway.com/) |
+
+---
+
+## Overview
+
+BTW is the native utility and governance token of the Bitway ecosystem. It powers network operations, enables staking and governance participation, and aligns incentives across Bitway’s yield, payment, and financing products. BTW serves as the core asset that unifies the Bitway network and supports its long-term growth.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.20B BTW |
+| **Total Supply** | 10.00B BTW |
+| **Max Supply** | 10.00B BTW |
+| **Fully Diluted Valuation** | $604.15M |
+| **Market Cap / FDV Ratio** | 0.22 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1899 (2026-06-20) |
+| **Current vs ATH** | -68.48% |
+| **All-Time Low** | $0.00911805 (2026-03-03) |
+| **Current vs ATL** | +556.49% |
+| **24h Change** | -3.56% |
+| **7d Change** | -2.61% |
+| **30d Change** | -5.18% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa` |
+| Ethereum | `0x3a63de3572c69a1307ff08394f3ee7702c16d25d` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | BTW/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://bitway.com/](https://bitway.com/) |
+| **Twitter** | [@bitwayofficial](https://twitter.com/bitwayofficial) |
+| **Telegram** | [bitwaycommunity](https://t.me/bitwaycommunity) (25,118 members) |
+| **Discord** | [https://discord.com/invite/bitway](https://discord.com/invite/bitway) |
+| **GitHub** | [https://github.com/bitwaylabs](https://github.com/bitwaylabs) |
+| **Whitepaper** | [https://docs.bitway.com/](https://docs.bitway.com/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $9.68M |
+| **Market Cap Rank** | #217 |
+| **24h Range** | $0.0579 — $0.0629 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

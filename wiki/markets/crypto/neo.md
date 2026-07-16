@@ -2,7 +2,7 @@
 title: "NEO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["NEO"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://neo.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-1]]", "[[proof-of-stake]]", "[[hyperliquid]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]"]
 ---
 
 # NEO
@@ -159,3 +159,125 @@ NEO's narrative is the **"smart economy"**: combining tokenized assets, on-chain
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | NEO |
+| **Market Cap Rank** | #211 |
+| **Market Cap** | $137.76M |
+| **Current Price** | $1.95 |
+| **Genesis Date** | 2016-10-17 |
+| **Categories** | Smart Contract Platform, Proof of Stake (PoS), Made in China |
+| **Website** | [https://neo.org/](https://neo.org/) |
+
+---
+
+## Overview
+
+NEO is a next generation smart economy platform (formerly Antshares) and China's first open source blockchain that was founded in 2014, is often known as the “Ethereum of China”. 
+
+What is NEO?
+NEO uses a smart economy approach to implement its distributed network concept. Its main objective is to digitize assets using the decentralized network of blockchain technology and digital identity.
+
+Neo’s main aim is to be the distributed network for “smart economy”.  As their website states: "Digital Assets + Digital Identity + Smart Contract = Smart Economy." Neo was developed by Shanghai-based blockchain R&amp;D company “OnChain” and funded by two crowdsales: first crowdsale on October 2015 sold 17.5 million NEO tokens for $550,000 and the second crowdsale sold the remaining 22.5 million NEO tokens for $4.5 million.
+
+So why NEO?
+Asset digitization and identity on the NEO platform essentially creates a novel way for asset registration, issuance, and circulation. This means that tangible assets like real estate, company shares or even fiat money can be digitized and traded on the NEO network, thus giving rise to a whole new economy.
+
+Its digital identity system allows for integration between the platform and the real world economy. It has custom digital identity standards that enable the creation of electronic identity data for individuals, organizations and even entities. These electronic systems use multi-layered authentication models that include facial and voice recognition as well as fingerprints.
+
+All digital assets on the platform enjoy legal protection thanks to the use of digital certificates on its public blockchain. This, in turn, guarantees trust as the system offers an indelible and unalterable record of all entities’ holdings.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 70.53M NEO |
+| **Total Supply** | 100.00M NEO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $195.31M |
+| **Market Cap / FDV Ratio** | 0.71 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $198.38 (2018-01-15) |
+| **Current vs ATH** | -99.02% |
+| **All-Time Low** | $0.0783 (2016-10-21) |
+| **Current vs ATL** | +2393.28% |
+| **24h Change** | -0.58% |
+| **7d Change** | +1.23% |
+| **30d Change** | -14.85% |
+| **1y Change** | -69.97% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | NEO/USDT | N/A |
+| Kraken | NEO/USD | N/A |
+| Upbit | NEO/KRW | N/A |
+| Bitget | NEO/USDT | N/A |
+| KuCoin | NEO/USDT | N/A |
+| Crypto.com Exchange | NEO/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://neo.org/](https://neo.org/) |
+| **Twitter** | [@NEO_Blockchain](https://twitter.com/NEO_Blockchain) |
+| **Reddit** | [https://www.reddit.com/r/NEO](https://www.reddit.com/r/NEO) |
+| **Discord** | [https://discord.io/neo](https://discord.io/neo) |
+| **GitHub** | [https://github.com/neo-project/neo](https://github.com/neo-project/neo) |
+| **Whitepaper** | [https://github.com/AntShares/AntShares/wiki](https://github.com/AntShares/AntShares/wiki) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 3,534 |
+| **GitHub Forks** | 1,043 |
+| **Commits (4 weeks)** | 11 |
+| **Pull Requests Merged** | 1,981 |
+| **Contributors** | 70 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.17M |
+| **Market Cap Rank** | #211 |
+| **24h Range** | $1.95 — $1.99 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

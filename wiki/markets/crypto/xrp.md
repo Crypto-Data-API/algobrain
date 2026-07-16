@@ -2,13 +2,13 @@
 title: "XRP"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, payments, regulation, ripple, xrp, cross-border, etf]
+tags: [cross-border, crypto, etf, payments, regulation, ripple, xrp]
 entity_type: protocol
 aliases: ["Ripple", "XRP", "XRP-Ledger", "XRPL"]
 website: "https://xrpl.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[ripple-usd]]", "[[sec]]", "[[carry-trade]]", "[[xrp-ledger]]", "[[stablecoin]]"]
+related: ["[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethereum]]", "[[ripple-usd]]", "[[sec]]", "[[stablecoin]]", "[[xrp-ledger]]"]
 headquarters: "Decentralized"
 ---
 
@@ -280,3 +280,34 @@ XRP's price history is characterized by long periods of consolidation punctuated
 - Market data refreshed 2026-06-20 from `raw/data/crypto-loop/coingecko-markets.json` (cryptodataapi.com / CoinGecko snapshot); macro backdrop (Fear & Greed 23, "Established Bear Market") from the crypto-loop digest.
 - SEC v. Ripple Labs Inc., Case No. 1:20-cv-10832 (S.D.N.Y.)
 - Ripple Labs official announcements and escrow reports
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XRP |
+| **Market Cap Rank** | #6 |
+| **Market Cap** | $69.16B |
+| **Current Price** | $1.11 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), FTX Holdings, Made in USA |
+| **Website** | [https://ripple.com/currency/](https://ripple.com/currency/) |
+
+---
+
+## Overview
+
+XRP is a decentralized digital asset and the native token of the XRP Ledger, a Layer 1 blockchain designed for high-performance global payments. Its primary value proposition is offering a fast, cost-effective alternative to traditional banking systems by enabling near-instant cross-border settlements that finalize in three to five seconds. By serving as a neutral bridge asset between different fiat currencies, it helps financial institutions lower liquidity costs and eliminates the need for pre-funded accounts.
+
+The network is unique because it utilizes a federated consensus protocol instead of energy-intensive mining or staking. This system achieves deterministic finality through a Unique Node List of trusted validators who must reach an eighty percent agreement threshold to permanently record transactions. This infrastructure supports a sustained throughput of 1,500 transactions per second and includes a built-in decentralized exchange that allows for the automated trading of any tokenized asset without intermediaries.
+
+The project traces its origins back to 2004 with Ryan Fugger before being co-founded in its modern form by Jed McCaleb and Chris Larsen. The company, now known as Ripple, works with major financial institutions as partners and investors to build global payment solutions. To protect the network from spam, a small amount of XRP is burned during every transaction, and the token is further utilized by institutions as collateral to access traditional markets and manage digital asset infrastructure.
+
+Institutional adoption of the asset reached a major milestone in November 2025 when the SEC approved the first wave of spot XRP ETFs. These products, offered by major issuers including Bitwise, Grayscale, 21Shares, Canary Capital, and Franklin Templeton, are now listed on prominent exchanges like the NYSE Arca, Nasdaq, and Cboe BZX. While Ripple remains a key contributor to the ecosystem, the underlying XRP Ledger continues to operate as an open-source and ...
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---

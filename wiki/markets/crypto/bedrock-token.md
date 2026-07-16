@@ -2,14 +2,14 @@
 title: "Bedrock"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["BR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bedrockdao.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[ethereum]]", "[[restaking]]", "[[liquid-staking]]", "[[decentralized-finance]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]"]
 ---
 
 # Bedrock
@@ -136,3 +136,111 @@ BR is a **small-cap, multi-asset** entrant whose distinctive angle is extending 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000): price $0.138931, cap ~$34.91M, rank #582, ATH $0.257114 (2026-04-15), ATL $0.039208 (2025-04-18).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BR |
+| **Market Cap Rank** | #485 |
+| **Market Cap** | $43.25M |
+| **Current Price** | $0.1483 |
+| **Categories** | Decentralized Finance (DeFi), Liquid Staking Governance Tokens, BTCfi Protocol, Binance Alpha Spotlight, Binance Wallet IDO |
+| **Website** | [https://bedrockdao.com/](https://bedrockdao.com/) |
+
+---
+
+## Overview
+
+Bedrock DAO is a governance framework for managing decisions within the Bedrock ecosystem. It enables BR token holders to participate in governance by converting BR into veBR, a voting escrow token. Governance decisions include protocol parameters, incentive structures, and liquidity allocation.
+The governance system is based on veBR, which is obtained by locking BR tokens at a 1:1 ratio. The longer the lock duration, the greater the voting power. veBR holders vote on governance proposals, including gauge allocations that determine incentive distribution across liquidity pools.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 291.67M BR |
+| **Total Supply** | 1.00B BR |
+| **Max Supply** | 1.00B BR |
+| **Fully Diluted Valuation** | $148.29M |
+| **Market Cap / FDV Ratio** | 0.29 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2571 (2026-04-15) |
+| **Current vs ATH** | -42.36% |
+| **All-Time Low** | $0.0392 (2025-04-18) |
+| **Current vs ATL** | +278.00% |
+| **24h Change** | +1.07% |
+| **7d Change** | -0.65% |
+| **30d Change** | -12.20% |
+| **1y Change** | +107.31% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xff7d6a96ae471bbcd7713af9cb1feeb16cf56b41` |
+| Base | `0xd6122ddada244913521f3d62006eaf756c157660` |
+| Ethereum | `0x9b61879e91a0b1322f3d61c23aaf936231882096` |
+| Berachain | `0xd352dc6e5f0c45e2f2b38eb5565eb286a1ea4087` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | BR/USDT | N/A |
+| KuCoin | BR/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://bedrockdao.com/](https://bedrockdao.com/) |
+| **Twitter** | [@Bedrock_DeFi](https://twitter.com/Bedrock_DeFi) |
+| **Telegram** | [Bedrock_Official](https://t.me/Bedrock_Official) (23,209 members) |
+| **GitHub** | [https://github.com/Bedrock-Technology](https://github.com/Bedrock-Technology) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $9.51M |
+| **Market Cap Rank** | #485 |
+| **24h Range** | $0.1425 — $0.1497 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

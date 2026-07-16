@@ -2,14 +2,14 @@
 title: "Quantix Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, artificial-intelligence]
-aliases: ["QFI", "QuantixAI", "Quantix Finance"]
+tags: [artificial-intelligence, crypto, defi]
+aliases: ["QFI", "Quantix Finance", "QuantixAI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.quantixfinance.xyz/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[ai-agents]]", "[[defai]]", "[[ai-agent-tokens]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[crypto-markets]]", "[[defai]]", "[[tron]]"]
 ---
 
 # Quantix Finance
@@ -131,3 +131,106 @@ High-beta, low-float AI-credit names like QFI behave violently in both direction
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - Macro framing as of 2026-06-23 (cryptodataapi.com / CoinGecko): Fear & Greed 21 (Extreme Fear), Bottoming / Accumulation regime.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | QFI |
+| **Market Cap Rank** | #368 |
+| **Market Cap** | $62.80M |
+| **Current Price** | $62.80 |
+| **Categories** | Decentralized Finance (DeFi), Yield Farming, Lending/Borrowing Protocols |
+| **Website** | [https://www.quantixfinance.xyz/](https://www.quantixfinance.xyz/) |
+
+---
+
+## Overview
+
+Quantix Finance is an on-chain credit protocol that provides both permissioned infrastructure for institutions and open access frameworks within decentralized finance. It enables structured capital allocation across digital credit markets through a combination of identity based participation and blockchain native financial primitives.
+
+The platform supports multiple participant roles, including lenders, borrowers, and pool managers, operating across curated credit pools with transparent underwriting, risk segmentation, and performance tracking. Institutional participants engage through permissioned environments with compliance aligned access, while DeFi users can access structured yield opportunities within open market configurations.
+
+Built to improve capital efficiency in digital asset markets, Quantix Finance integrates real time monitoring, standardized reporting, and modular capital deployment systems. By combining institutional grade infrastructure with accessible on-chain credit markets, Quantix delivers a unified framework for scalable, transparent, and risk aware lending across the QFI ecosystem.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.00M QFI |
+| **Total Supply** | 10.00M QFI |
+| **Max Supply** | 10.00M QFI |
+| **Fully Diluted Valuation** | $627.99M |
+| **Market Cap / FDV Ratio** | 0.10 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $109.60 (2025-07-13) |
+| **Current vs ATH** | -42.71% |
+| **All-Time Low** | $0.2284 (2024-03-19) |
+| **Current vs ATL** | +27394.88% |
+| **24h Change** | -1.51% |
+| **7d Change** | +5.71% |
+| **30d Change** | +14.26% |
+| **1y Change** | -40.20% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Tron
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Tron | `TMVnKncD9NhAYEPoR6EutBrAKi8x6oZdR6` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.quantixfinance.xyz/](https://www.quantixfinance.xyz/) |
+| **Twitter** | [@quantixfinance](https://twitter.com/quantixfinance) |
+| **Telegram** | [quantixfinance](https://t.me/quantixfinance) (14,173 members) |
+| **Whitepaper** | [https://quantixfinance.gitbook.io/quantixfinance-docs](https://quantixfinance.gitbook.io/quantixfinance-docs) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.96M |
+| **Market Cap Rank** | #368 |
+| **24h Range** | $62.54 — $64.41 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

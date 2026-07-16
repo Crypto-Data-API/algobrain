@@ -2,14 +2,14 @@
 title: "Believe (believe.app)"
 type: entity
 created: 2026-05-04
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
-tags: [crypto, solana, memecoin, launchpad, sniping]
-aliases: ["Believe", "Believe App", "believe.app"]
+tags: [crypto, launchpad, memecoin, sniping, solana]
+aliases: ["BELIEVE", "Believe", "Believe App", "believe.app"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://believe.app"
-related: ["[[pump-fun]]", "[[solana]]", "[[memecoin-sniping]]", "[[bonding-curve-analysis]]"]
+related: ["[[bonding-curve-analysis]]", "[[crypto-markets]]", "[[memecoin-sniping]]", "[[pump-fun]]", "[[solana]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -113,3 +113,101 @@ See [[low-cap-crypto-trading-map]] for the broader strategy framework, and [[bon
 - [[axiom-pro]]
 - [[bonkbot]]
 - [[trojan-bot]]
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BELIEVE |
+| **Market Cap Rank** | #2209 |
+| **Market Cap** | $2.04M |
+| **Current Price** | $0.00159679 |
+| **Categories** | Launchpad, Meme, Solana Meme |
+| **Website** | [https://believe.app/](https://believe.app/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.28B BELIEVE |
+| **Total Supply** | 1.28B BELIEVE |
+| **Max Supply** | 1.33B BELIEVE |
+| **Fully Diluted Valuation** | $2.04M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.3569 (2025-05-15) |
+| **Current vs ATH** | -99.55% |
+| **All-Time Low** | $0.00007073 (2026-07-09) |
+| **Current vs ATL** | +2162.00% |
+| **24h Change** | -1.41% |
+| **7d Change** | -3.85% |
+| **30d Change** | +56.53% |
+| **1y Change** | -98.93% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `BLVxek8YMXUQhcKmMvrFTrzh5FXg8ec88Crp6otEaCMf` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://believe.app/](https://believe.app/) |
+| **Twitter** | [@launchcoin](https://twitter.com/launchcoin) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $689,691.00 |
+| **Market Cap Rank** | #2209 |
+| **24h Range** | $0.00158912 — $0.00171476 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

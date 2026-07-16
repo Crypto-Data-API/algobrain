@@ -2,14 +2,14 @@
 title: "Olympus"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["OHM", "OlympusDAO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://olympusdao.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[liquidity-pool]]", "[[yield-farming]]", "[[uniswap]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[liquidity-pool]]", "[[uniswap]]", "[[yield-farming]]"]
 ---
 
 # Olympus
@@ -138,3 +138,127 @@ Olympus is unusual because it has an explicit **balance-sheet anchor**: the trea
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 from CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet for protocol mechanics.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | OHM |
+| **Market Cap Rank** | #137 |
+| **Market Cap** | $272.32M |
+| **Current Price** | $18.23 |
+| **Categories** | Crypto-Backed Tokens, Decentralized Finance (DeFi), Lending/Borrowing Protocols, Cross-chain Communication, Governance |
+| **Website** | [https://olympusdao.finance/](https://olympusdao.finance/) |
+
+---
+
+## Overview
+
+Olympus is a decentralized financial (DeFi) protocol building programmable monetary infrastructure. At its core is OHM, a treasury-backed token held and managed on-chain.
+
+The protocol is built for solvency, self-sustaining liquidity, and policy-driven equilibrium. This guides how value, liquidity, and credit are managed, through on-chain mechanisms including Protocol Owned Liquidity (POL), Cooler Loans, Convertible Deposits (CDs), the Yield Repurchase Facility (YRF), and Range Bound Stability (RBS).
+
+Together, these components form a programmable central bank, without human bias.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 14.94M OHM |
+| **Total Supply** | 19.83M OHM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $361.52M |
+| **Market Cap / FDV Ratio** | 0.75 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1,415.26 (2021-04-25) |
+| **Current vs ATH** | -98.71% |
+| **All-Time Low** | $7.54 (2022-11-26) |
+| **Current vs ATL** | +141.68% |
+| **24h Change** | +0.92% |
+| **7d Change** | +6.50% |
+| **30d Change** | +13.36% |
+| **1y Change** | -14.21% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5` |
+| Berachain | `0x18878df23e2a36f81e820e4b47b4a40576d3159c` |
+| Optimistic Ethereum | `0x060cb087a9730e13aa191f31a6d86bff8dfcdcc0` |
+| Solana | `2Xva1NeLRuBFdK41gEuXqgeWtnKKDve9PKeCnMEpNG6K` |
+| Base | `0x060cb087a9730e13aa191f31a6d86bff8dfcdcc0` |
+| Arbitrum One | `0xf0cb2dc0db5e6c66b9a70ac27b06b878da017028` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X64AA3364F17A4D01C6F1751FD97C2BD3D7E7F1D5/0XA3931D71877C0E7A3148CB7EB4463524FEC27FBD | Spot |
+| Uniswap V2 (Ethereum) | 0X64AA3364F17A4D01C6F1751FD97C2BD3D7E7F1D5/0X857FFC55B1AA61A7FF847C82072790CAE73CD883 | Spot |
+| Sushiswap | 0X64AA3364F17A4D01C6F1751FD97C2BD3D7E7F1D5/0X6B175474E89094C44DA98B954EEDEAC495271D0F | Spot |
+| Balancer V2 | 0X64AA3364F17A4D01C6F1751FD97C2BD3D7E7F1D5/0X7F39C581F595B53C5CB19BD0B3F8DA6C935E2CA0 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://olympusdao.finance/](https://olympusdao.finance/) |
+| **Twitter** | [@OlympusDAO](https://twitter.com/OlympusDAO) |
+| **Reddit** | [https://www.reddit.com/r/olympusdao/](https://www.reddit.com/r/olympusdao/) |
+| **Telegram** | [OlympusTG](https://t.me/OlympusTG) (3,131 members) |
+| **Discord** | [https://discord.gg/olympusdao](https://discord.gg/olympusdao) |
+| **GitHub** | [https://github.com/OlympusDAO](https://github.com/OlympusDAO) |
+| **Whitepaper** | [https://docs.olympusdao.finance/](https://docs.olympusdao.finance/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6,721.54 |
+| **Market Cap Rank** | #137 |
+| **24h Range** | $17.84 — $18.56 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

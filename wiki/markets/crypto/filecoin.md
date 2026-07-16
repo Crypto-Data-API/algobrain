@@ -2,7 +2,7 @@
 title: "Filecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["FIL", "Filecoin Network"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://filecoin.io/"
-related: ["[[crypto-markets]]", "[[arweave]]", "[[bitcoin]]", "[[hyperliquid]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[arweave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]"]
 ---
 
 # Filecoin
@@ -261,3 +261,60 @@ Filecoin's edge: scale, FVM programmability, and proof-secured persistence. Its 
 - Filecoin blog: Filecoin in 2025 — Year in Review — https://filecoin.io/blog/posts/filecoin-in-2025-year-in-review/
 - MEXC blog (2026): Filecoin's Jan 2026 $1.58 rally & Onchain Cloud — https://blog.mexc.com/news/why-filecoins-jan-2026-1-58-rally-onchain-cloud-could-make-it-ai-infrastructures-12b-hidden-gem/
 - Verified via Perplexity sonar + web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 799.30M FIL |
+| **Total Supply** | 1.96B FIL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $1.52B |
+| **Market Cap / FDV Ratio** | 0.41 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $236.84 (2021-04-01) |
+| **Current vs ATH** | -99.67% |
+| **All-Time Low** | $0.6776 (2026-06-06) |
+| **Current vs ATL** | +14.62% |
+| **24h Change** | -1.39% |
+| **7d Change** | +0.14% |
+| **30d Change** | -3.29% |
+| **1y Change** | -70.46% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $55.19M |
+| **Market Cap Rank** | #91 |
+| **24h Range** | $0.7718 — $0.8028 |
+| **CoinGecko Sentiment** | 60% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

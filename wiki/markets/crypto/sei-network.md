@@ -2,15 +2,15 @@
 title: "Sei"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
-aliases: ["SEI", "Sei Network", "Sei V2", "Giga"]
+tags: [altcoins, crypto, defi]
+aliases: ["Giga", "SEI", "Sei Network", "Sei V2"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized (Sei Labs: San Francisco, USA)"
 website: "https://www.sei.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[aptos]]", "[[hyperliquid]]", "[[solana]]", "[[stablecoins]]"]
+related: ["[[aptos]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[stablecoins]]"]
 ---
 
 # Sei
@@ -254,3 +254,60 @@ SEI's edge is end-to-end trading optimization plus the regulated-rails (WYST) na
 - Sei Giga whitepaper (2025-05-19) and Sei whitepaper — https://github.com/sei-protocol/sei-chain
 - Messari — Sei Network profile — https://messari.io/project/sei-network/profile
 - Web search verification via Perplexity/WebSearch, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 6.73B SEI |
+| **Total Supply** | 10.00B SEI |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $476.69M |
+| **Market Cap / FDV Ratio** | 0.67 |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SEI/USDT | N/A |
+| Kraken | SEI/USD | N/A |
+| Upbit | SEI/KRW | N/A |
+| Bitget | SEI/USDT | N/A |
+| KuCoin | SEI/USDT | N/A |
+| Crypto.com Exchange | SEI/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $27.12M |
+| **Market Cap Rank** | #127 |
+| **24h Range** | $0.0475 — $0.0493 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

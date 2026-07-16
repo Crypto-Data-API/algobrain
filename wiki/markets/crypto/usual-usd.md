@@ -2,7 +2,7 @@
 title: "Usual USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["USD0", "USD0++", "Usual Protocol stablecoin"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized (Usual Labs, Paris)"
 website: "https://usual.money"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[usual]]", "[[stablecoins]]", "[[stablecoin-depegs]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[usual]]"]
 ---
 
 # Usual USD
@@ -232,3 +232,33 @@ USD0 is not "valued" the way a speculative token is — it is a $1-targeting sta
 - Usual Docs: "USD0++ Floor Price" — https://docs.usual.money/usual-products/usd0-liquid-staking-token/usd0++-floor-price
 - Usual Docs: "USD0++ Early Redemption Mechanism" — https://docs.usual.money/usual-products/usd0-liquid-staking-token/usd0++-early-redemption-mechanism
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 553.19M USD0 |
+| **Total Supply** | 553.19M USD0 |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $552.44M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $43,983.00 |
+| **Market Cap Rank** | #95 |
+| **24h Range** | $0.9983 — $0.9988 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

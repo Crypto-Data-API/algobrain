@@ -2,14 +2,14 @@
 title: "GoMining Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bitcoin]
-aliases: ["GOMINING", "GoMining", "GMT (GoMining)"]
+tags: [bitcoin, crypto]
+aliases: ["GMT (GoMining)", "GOMINING", "GoMining"]
 entity_type: protocol
 headquarters: "Decentralized / global"
 website: "https://gomining.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[bitcoin-mining]]", "[[real-world-assets]]", "[[binance]]", "[[gamefi]]"]
+related: ["[[binance]]", "[[bitcoin-mining]]", "[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[real-world-assets]]"]
 ---
 
 # GoMining Token
@@ -145,16 +145,6 @@ Versus other **mining/hashrate/RWA-style** exposure, GOMINING's edge is **fracti
 
 ## Notable History
 
-- **All-Time High:** $0.564703 (2024-12-16) — currently down roughly **51%** from peak.
-- **All-Time Low:** $0.069487 (2022-11-10), during the post-FTX bear market — current price is roughly **4x** above this trough.
-- The project rebranded/expanded from "GMT / GoMining" mining-token roots into a broader ecosystem (Digital Miners, wallet, Miner Wars, BTC finance suite). It has grown a large community (tens of thousands across Telegram/Discord).
-
-> *Notable corporate and product events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
-## Notable History
-
 - **All-Time High:** $0.5647 (2024-12-16) — currently down roughly 52% from peak.
 - **All-Time Low:** $0.0695 (2022-11-10), during the post-FTX bear market.
 - The project rebranded/expanded from "GMT / GoMining" mining-token roots into a broader ecosystem (Digital Miners, wallet, Miner Wars, BTC finance suite). It has grown a large community (tens of thousands across Telegram/Discord).
@@ -207,3 +197,130 @@ Versus other **mining/hashrate/RWA-style** exposure, GOMINING's edge is **fracti
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko markets snapshot (CoinGecko id `gmt-token`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GOMINING |
+| **Market Cap Rank** | #233 |
+| **Market Cap** | $115.77M |
+| **Current Price** | $0.2866 |
+| **Categories** | Gaming (GameFi) |
+| **Website** | [https://gomining.com/](https://gomining.com/) |
+
+---
+
+## Overview
+
+GoMining helps people everywhere unlock Bitcoin’s full potential. Built on real-world mining infrastructure and powered by the GOMINING utility token, it combines digital mining, wallet, and finance products into one simple, secure ecosystem. From earning Bitcoin daily to spending it with ease, GoMining turns Bitcoin from a distant cryptocurrency into part of everyday life — accessible to anyone, anywhere, regardless of income or experience.
+
+Digital Miners are GoMining’s core innovation — NFT-like assets backed by real Bitcoin mining power hosted in GoMining’s data centers. Each miner earns daily Bitcoin rewards automatically, with all operations (hardware, electricity, and maintenance) handled by GoMining.
+
+Users can start with any budget through flexible options like Mine-Now-Pay-Later, and can trade or upgrade miners anytime. This mining experience also extends into Miner Wars, a competitive GameFi arena where players use their mining power to join clans and compete for Bitcoin and GOMINING rewards — merging real mining and gameplay into one dynamic ecosystem.
+
+The GoMining Wallet is a secure and rewarding way to hold, spend, and grow your crypto. Within one app, users can store digital assets, buy crypto with fiat, top up their crypto, and spend anywhere with the GoMining Card (available in supported regions). Every transaction becomes more powerful — with cashback in mining power and transparent crypto-to-fiat conversion. The wallet connects seamlessly with GoMining’s mining and finance products, creating a unified experience for Bitcoin holders and newcomers alike.
+
+GoMining’s Bitcoin Finance suite is designed to help users get more from their Bitcoin — without complexity. It enables earning passive income in BTC on supported assets held in your account, without needing to lock funds. It also provides access to liquidity against Bitcoin or mining assets, all within a trusted and regulated environment (available in supported regions). By bridging mining, payme...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 403.89M GOMINING |
+| **Total Supply** | 403.89M GOMINING |
+| **Max Supply** | 436.92M GOMINING |
+| **Fully Diluted Valuation** | $115.77M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.5647 (2024-12-16) |
+| **Current vs ATH** | -49.38% |
+| **All-Time Low** | $0.0695 (2022-11-10) |
+| **Current vs ATL** | +311.39% |
+| **24h Change** | +0.91% |
+| **7d Change** | +4.51% |
+| **30d Change** | -0.54% |
+| **1y Change** | -34.48% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x7ddc52c4de30e94be3a6a0a2b259b2850f421989` |
+| Solana | `3KzAE8dPyJRgZ36Eh81v7WPwi6dm7bDhdMb8EAus2RAf` |
+| The Open Network | `EQD0laik0FgHV8aNfRhebi8GDG2rpDyKGXem0MBfya_Ew1-8` |
+| Binance Smart Chain | `0x7ddc52c4de30e94be3a6a0a2b259b2850f421989` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | GOMINING/USD | N/A |
+| Bitget | GOMINING/USDT | N/A |
+| KuCoin | GOMINING/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X7DDC52C4DE30E94BE3A6A0A2B259B2850F421989/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Orca | 3KZAE8DPYJRGZ36EH81V7WPWI6DM7BDHDMB8EAUS2RAF/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 6 |
+| **GitHub Forks** | 6 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.63M |
+| **Market Cap Rank** | #233 |
+| **24h Range** | $0.2813 — $0.2859 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

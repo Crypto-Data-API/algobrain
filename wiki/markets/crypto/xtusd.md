@@ -2,10 +2,10 @@
 title: "XT Stablecoin XTUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoin]
-aliases: ["XTUSD", "XT Stablecoin", "XT.com USD"]
+aliases: ["XT Stablecoin", "XT.com USD", "XTUSD"]
 entity_type: protocol
 headquarters: "Centralized (exchange-issued)"
 website: "https://www.xtusd.pro/main"

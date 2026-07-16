@@ -2,14 +2,14 @@
 title: "Janction"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, machine-learning]
+tags: [ai-trading, crypto, machine-learning]
 aliases: ["JCT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.janction.ai/home"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[depin]]", "[[ai-crypto]]", "[[jasmycoin]]", "[[render-network]]", "[[akash-network]]"]
+related: ["[[ai-crypto]]", "[[akash-network]]", "[[bnb]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[jasmycoin]]", "[[render-network]]"]
 ---
 
 # Janction
@@ -163,3 +163,109 @@ Context: 2026-06-23 — **Extreme Fear** (F&G 21), long-horizon **Bottoming / Ac
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Project site & docs: janction.ai, docs.janction.io (project self-description).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | JCT |
+| **Market Cap Rank** | #443 |
+| **Market Cap** | $48.82M |
+| **Current Price** | $0.00424802 |
+| **Categories** | DePIN, Binance Alpha Spotlight |
+| **Website** | [https://www.janction.ai/home](https://www.janction.ai/home) |
+
+---
+
+## Overview
+
+Janction is a resource sharing platform on the open web, serving your AI products. Janction offers resource sharing services such as computing power, storage, and images. You can use Janction to rent and lease various service resources. We ensure a secure, fair, and convenient marketplace for resource sharing, encompassing both traditional and decentralized scenarios.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 11.49B JCT |
+| **Total Supply** | 50.00B JCT |
+| **Max Supply** | 50.00B JCT |
+| **Fully Diluted Valuation** | $212.37M |
+| **Market Cap / FDV Ratio** | 0.23 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0106 (2025-11-10) |
+| **Current vs ATH** | -59.92% |
+| **All-Time Low** | $0.00105948 (2026-02-06) |
+| **Current vs ATL** | +300.24% |
+| **24h Change** | -2.49% |
+| **7d Change** | +26.03% |
+| **30d Change** | -34.85% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xc477b6dfd26ec2460b3b92de18837fd476ea7549` |
+| Binance Smart Chain | `0xea37a8de1de2d9d10772eeb569e28bfa5cb17707` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | JCT/USDT | N/A |
+| KuCoin | JCT/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.janction.ai/home](https://www.janction.ai/home) |
+| **Twitter** | [@JANCTION_Global](https://twitter.com/JANCTION_Global) |
+| **Telegram** | [jasmyofficial](https://t.me/jasmyofficial) (10,523 members) |
+| **GitHub** | [https://github.com/Janction-R-D](https://github.com/Janction-R-D) |
+| **Whitepaper** | [https://docs.janction.io/](https://docs.janction.io/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.31M |
+| **Market Cap Rank** | #443 |
+| **24h Range** | $0.00422992 — $0.00470666 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

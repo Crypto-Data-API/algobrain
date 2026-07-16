@@ -2,15 +2,15 @@
 title: "Siren"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading]
-aliases: ["SIREN", "SirenAI", "Siren AI"]
+tags: [ai-trading, altcoins, crypto]
+aliases: ["SIREN", "Siren AI", "SirenAI"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized"
 website: "https://sirenai.me/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[four]]", "[[ai-agent-tokens]]", "[[memecoin-mania]]", "[[binance]]"]
+related: ["[[ai-agent-tokens]]", "[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[four]]", "[[memecoin-mania]]"]
 ---
 
 # Siren
@@ -221,3 +221,46 @@ SIREN sits in the overlap of two baskets: [[ai-agent-tokens]] and BNB-Chain meme
 - bitcoinethereumnews.com — "Shocking Collapse of BNB Chain AI Project Amid Centralization Fears" (2026) — https://bitcoinethereumnews.com/tech/shocking-collapse-of-bnb-chain-ai-project-amid-centralization-fears/
 - DappBay (BNB Chain) — SirenAI listing — https://dappbay.bnbchain.org/detail/sirenai
 - Web search verification via Perplexity/WebSearch, 2026-06-10. Project-fundamental claims are MEDIUM confidence (crypto-media sourcing); price/event timeline corroborated across multiple outlets.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 724.13M SIREN |
+| **Total Supply** | 724.13M SIREN |
+| **Max Supply** | 1.00B SIREN |
+| **Fully Diluted Valuation** | $42.14M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.32M |
+| **Market Cap Rank** | #499 |
+| **24h Range** | $0.0572 — $0.0656 |
+| **CoinGecko Sentiment** | 67% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

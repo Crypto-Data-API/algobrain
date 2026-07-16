@@ -2,14 +2,15 @@
 title: "Figure Heloc"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, company, data-provider]
+tags: [company, crypto, data-provider]
 aliases: ["FIGR_HELOC", "Figure HELOC", "Figure Technologies"]
 entity_type: protocol
 founded: 2018
 website: "https://www.figure.com"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[rwa]]", "[[tokenization]]", "[[private-credit]]", "[[hastra-prime]]", "[[provenance-blockchain]]"]
+related: ["[[crypto-markets]]", "[[hastra-prime]]", "[[private-credit]]", "[[provenance-blockchain]]", "[[real-world-assets]]", "[[rwa]]", "[[tokenization]]"]
+headquarters: "Decentralized"
 ---
 
 # Figure Heloc
@@ -216,3 +217,9 @@ The supply grew from ~16.57B (April 2026) to ~19.04B (June 2026), reflecting **c
 - Business Wire: "Figure Technology Solutions, Inc. Announces Pricing of Initial Public Offering" (2025-09-10) — https://www.businesswire.com/news/home/20250910400753/en/
 - IPOScoop: "Figure (FIGR) Prices IPO at $25 – $3 Above Range" (Sept 2025) — https://www.iposcoop.com/the-ipo-buzz-figure-figr-prices-ipo-at-25-3-above-range/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

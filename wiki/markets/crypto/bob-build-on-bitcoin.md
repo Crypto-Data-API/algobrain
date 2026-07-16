@@ -2,14 +2,14 @@
 title: "BOB (Build on Bitcoin)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, bitcoin, ethereum, altcoins]
+tags: [altcoins, bitcoin, crypto, defi, ethereum]
 aliases: ["BOB"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.gobob.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[optimism]]", "[[sequencer]]", "[[data-availability]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimism]]", "[[optimistic-rollup]]", "[[sequencer]]"]
 ---
 
 # BOB (Build on Bitcoin)

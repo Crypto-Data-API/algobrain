@@ -2,15 +2,15 @@
 title: "Janus Henderson Anemoy AAA CLO Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, bonds]
-aliases: ["JAAA", "Anemoy AAA CLO Fund", "JH Anemoy CLO"]
+tags: [bonds, crypto, defi]
+aliases: ["Anemoy AAA CLO Fund", "JAAA", "JH Anemoy CLO"]
 entity_type: fund
 founded: 2025
 headquarters: "On-chain (issued via Anemoy/Centrifuge; Janus Henderson is the manager)"
 website: "https://www.anemoy.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[centrifuge-2]]", "[[real-world-assets]]", "[[rwa]]", "[[private-credit]]", "[[clo]]", "[[tokenized-treasuries]]", "[[sky]]", "[[aave]]", "[[ethena]]", "[[janus-henderson-anemoy-treasury-fund]]"]
+related: ["[[aave]]", "[[centrifuge-2]]", "[[clo]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[janus-henderson-anemoy-treasury-fund]]", "[[private-credit]]", "[[real-world-assets]]", "[[rwa]]", "[[sky]]", "[[tokenized-treasuries]]"]
 ---
 
 # Janus Henderson Anemoy AAA CLO Fund
@@ -194,3 +194,66 @@ Visible supply nearly **doubled** from ~390M (April 2026) to ~706M (June 2026) a
 - Janus Henderson press release — "Janus Henderson to partner with Anemoy and Centrifuge on its first tokenized fund" — https://www.janushenderson.com/corporate/press-releases/janus-henderson-to-partner-with-anemoy-and-centrifuge-on-its-first-tokenized-fund/
 - RWA.xyz asset page — https://app.rwa.xyz/assets/JAAA
 - Web search verification via Perplexity/WebSearch, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 657.18M JAAA |
+| **Total Supply** | 657.18M JAAA |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $684.07M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.04 (2026-07-13) |
+| **Current vs ATH** | -0.00% |
+| **All-Time Low** | $1.01 (2025-12-06) |
+| **Current vs ATL** | +3.11% |
+| **24h Change** | +0.00% |
+| **7d Change** | +0.04% |
+| **30d Change** | +0.29% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #88 |
+| **24h Range** | $1.04 — $1.04 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

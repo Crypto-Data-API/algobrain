@@ -2,15 +2,15 @@
 title: "USDS"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["USDS", "Sky Dollar", "Sky USDS"]
+aliases: ["Sky Dollar", "Sky USDS", "USDS"]
 entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://sky.money/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[makerdao]]", "[[dai]]", "[[tether]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[makerdao]]", "[[stablecoins]]", "[[tether]]"]
 ---
 
 # USDS
@@ -182,3 +182,120 @@ USDS itself is a peg asset and is not "valued"; the economics accrue to **SKY** 
 - Messari Sky Protocol profile — https://messari.io/project/sky-protocol
 - Eco: "Sky Savings Rate Deep Dive 2026: SSR, sUSDS, USDS Mechanics" — https://eco.com/support/en/articles/15254003-sky-savings-rate-deep-dive-2026-ssr-susds-usds-mechanics
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDS |
+| **Market Cap Rank** | #12 |
+| **Market Cap** | $9.97B |
+| **Current Price** | $0.9998 |
+| **Categories** | Stablecoins, USD Stablecoin, Fiat-backed Stablecoin, Base Native |
+| **Website** | [https://sky.money/](https://sky.money/) |
+
+---
+
+## Overview
+
+USDS is the stablecoin of the decentralized Sky ecosystem, designed to maintain a soft peg (a value intended to stay close) to the U.S. dollar. It functions as a versatile tool for&nbsp;decentralized finance (DeFi), allowing value to move through the system via peer-to-peer lending and saving without a middleman. The token is 'put to work' by being supplied to various protocol modules; for example, users can convert USDS into sUSDS to earn interest from protocol revenue or lock it to receive&nbsp;SKY governance tokens. As the ecosystem grows, this scales through "Sky Stars," which are semi-autonomous projects that expand the stablecoin’s utility into specialized areas like institutional credit and advanced lending.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 9.97B USDS |
+| **Total Supply** | 9.97B USDS |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $9.97B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.15 (2026-04-02) |
+| **Current vs ATH** | -13.22% |
+| **All-Time Low** | $0.9483 (2024-10-03) |
+| **Current vs ATL** | +5.43% |
+| **24h Change** | +0.01% |
+| **7d Change** | +0.02% |
+| **30d Change** | +0.01% |
+| **1y Change** | +0.01% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xdc035d45d973e3ec169d2276ddab16f1e407384f` |
+| Base | `0x820c137fa70c8691f0e44dc420a5e53c168921dc` |
+| Arbitrum One | `0x6491c05a82219b8d1479057361ff1654749b876b` |
+| Solana | `USDSwr9ApdHk5bvJKMjzff41FfuX8bSxdKcR81vTwcA` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | USDS/USDT | N/A |
+| Kraken | USDS/USD | N/A |
+| Upbit | USDS/KRW | N/A |
+| Bitget | USDS/USDT | N/A |
+| Crypto.com Exchange | USDS/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | USDSWR9APDHK5BVJKMJZFF41FFUX8BSXDKCR81VTWCA/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+| Uniswap V2 (Ethereum) | 0XDC035D45D973E3EC169D2276DDAB16F1E407384F/0X56072C95FAA701256059AA122697B133ADED9279 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://sky.money/](https://sky.money/) |
+| **Twitter** | [@SkyEcosystem](https://twitter.com/SkyEcosystem) |
+| **Whitepaper** | [https://developers.sky.money/](https://developers.sky.money/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $108.69M |
+| **Market Cap Rank** | #12 |
+| **24h Range** | $0.9997 — $0.9999 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

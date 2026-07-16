@@ -2,14 +2,14 @@
 title: "It's AI (SN32)"
 type: entity
 created: 2026-04-19
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
-tags: [crypto, bittensor, ai-detection]
-aliases: ["SN32", "It's AI", "ItsAI"]
+tags: [ai-detection, bittensor, crypto]
+aliases: ["It's AI", "ItsAI", "SN32"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://itsai.ai/"
-related: ["[[bittensor]]", "[[bittensor-subnets]]", "[[dtao]]", "[[bitmind]]"]
+related: ["[[bitmind]]", "[[bittensor-subnets]]", "[[bittensor]]", "[[crypto-markets]]", "[[dtao]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -33,5 +33,112 @@ Indirect. Text-authenticity detection is a moderation and trust/safety primitive
 
 ## Sources
 
-- itsai.ai
-- taostats.io
+- (Source: [[coingecko-top-1000-2026-07-16]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SN32 |
+| **Market Cap Rank** | #1751 |
+| **Market Cap** | $3.80M |
+| **Current Price** | $0.6845 |
+| **Categories** | Artificial Intelligence (AI), Bittensor Subnets |
+| **Website** | [https://its-ai.org/](https://its-ai.org/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.55M SN32 |
+| **Total Supply** | 5.55M SN32 |
+| **Max Supply** | 21.00M SN32 |
+| **Fully Diluted Valuation** | $3.80M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.79 (2025-06-10) |
+| **Current vs ATH** | -61.83% |
+| **All-Time Low** | $0.5073 (2025-10-10) |
+| **Current vs ATL** | +34.99% |
+| **24h Change** | +0.86% |
+| **7d Change** | -5.04% |
+| **30d Change** | -28.09% |
+| **1y Change** | -52.03% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Bittensor
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Bittensor | `32` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://its-ai.org/](https://its-ai.org/) |
+| **GitHub** | [https://github.com/It-s-AI/llm-detection](https://github.com/It-s-AI/llm-detection) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 45 |
+| **GitHub Forks** | 27 |
+| **Commits (4 weeks)** | 2 |
+| **Pull Requests Merged** | 76 |
+| **Contributors** | 5 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $17,642.57 |
+| **Market Cap Rank** | #1751 |
+| **24h Range** | $0.6783 — $0.7071 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

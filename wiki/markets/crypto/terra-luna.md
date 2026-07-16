@@ -2,14 +2,14 @@
 title: "Terra Luna Classic"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, terra, luna, collapse, stablecoin]
-aliases: ["LUNC", "LUNA Classic", "Terra Classic"]
+tags: [collapse, crypto, defi, luna, stablecoin, terra]
+aliases: ["LUNA Classic", "LUNC", "Terra Classic"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.terra-classic.io"
-related: ["[[crypto-markets]]", "[[terra-luna-collapse]]", "[[terrausd]]", "[[terra-luna-2]]", "[[stablecoins]]", "[[2022-05-terra-luna-depeg-arb]]", "[[three-arrows-capital]]", "[[defi]]"]
+related: ["[[2022-05-terra-luna-depeg-arb]]", "[[crypto-markets]]", "[[defi]]", "[[stablecoins]]", "[[terra-luna-2]]", "[[terra-luna-collapse]]", "[[terrausd]]", "[[three-arrows-capital]]"]
 ---
 
 # Terra Luna Classic
@@ -220,3 +220,105 @@ LUNC is best understood not as a competitor to live projects but as the **post-m
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - CoinGecko / cryptodataapi.com snapshot, 2026-06-20 (market data baseline)
 - On-chain supply data from Terra Classic blockchain
+
+## Overview
+
+Terra is a decentralized financial payment network that rebuilds the traditional payment stack on the blockchain. Luna is the reserve currency of the Terra platform. It has three core functions: i) mine Terra transactions through staking, ii) ensure the price stability of Terra stablecoins and iii) provide incentives for the platform’s blockchain validators.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.53T LUNC |
+| **Total Supply** | 6.45T LUNC |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $380.90M |
+| **Market Cap / FDV Ratio** | 0.86 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $119.18 (2022-04-05) |
+| **Current vs ATH** | -100.00% |
+| **All-Time Low** | $0.00000100 (2022-05-13) |
+| **Current vs ATL** | +5796.55% |
+| **24h Change** | -1.54% |
+| **7d Change** | -4.67% |
+| **30d Change** | -16.83% |
+| **1y Change** | -6.43% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | LUNC/USDT | N/A |
+| Kraken | LUNA/USD | N/A |
+| Bitget | LUNC/USDT | N/A |
+| KuCoin | LUNC/USDT | N/A |
+| Crypto.com Exchange | LUNC/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.terra-classic.io](https://www.terra-classic.io) |
+| **Twitter** | [@terra_money](https://twitter.com/terra_money) |
+| **Reddit** | [https://www.reddit.com/r/terraluna/](https://www.reddit.com/r/terraluna/) |
+| **Telegram** | [TerraLunaChat](https://t.me/TerraLunaChat) (45,513 members) |
+| **Discord** | [https://terra.sc/classicdiscord](https://terra.sc/classicdiscord) |
+| **GitHub** | [https://github.com/classic-terra/core](https://github.com/classic-terra/core) |
+| **Whitepaper** | [https://terra.money/static/Terra_White_Paper.pdf](https://terra.money/static/Terra_White_Paper.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 78 |
+| **GitHub Forks** | 60 |
+| **Pull Requests Merged** | 459 |
+| **Contributors** | 47 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.86M |
+| **Market Cap Rank** | #126 |
+| **24h Range** | $0.00005874 — $0.00006065 |
+| **CoinGecko Sentiment** | 80% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

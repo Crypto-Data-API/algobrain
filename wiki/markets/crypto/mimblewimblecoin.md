@@ -2,14 +2,14 @@
 title: "MimbleWimbleCoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, privacy]
 aliases: ["MWC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mwc.mw/"
-related: ["[[crypto-markets]]", "[[privacy-coins]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[privacy-coins]]"]
 ---
 
 # MimbleWimbleCoin
@@ -157,3 +157,104 @@ The honest read: a **small, illiquid, regulatory-pressured privacy coin** whose 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko snapshot.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MWC |
+| **Market Cap Rank** | #267 |
+| **Market Cap** | $97.50M |
+| **Current Price** | $8.85 |
+| **Categories** | Smart Contract Platform, Privacy Coins, Proof of Work (PoW), Privacy |
+| **Website** | [https://www.mwc.mw/](https://www.mwc.mw/) |
+
+---
+
+## Overview
+
+Mimblewimble applied in the base layer.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 11.01M MWC |
+| **Total Supply** | 11.01M MWC |
+| **Max Supply** | 20.00M MWC |
+| **Fully Diluted Valuation** | $97.50M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $38.81 (2025-01-31) |
+| **Current vs ATH** | -77.19% |
+| **All-Time Low** | $0.2987 (2019-12-05) |
+| **Current vs ATL** | +2863.84% |
+| **24h Change** | -1.17% |
+| **7d Change** | +26.06% |
+| **30d Change** | +204.44% |
+| **1y Change** | -76.75% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.mwc.mw/](https://www.mwc.mw/) |
+| **Twitter** | [@M_W_Coin](https://twitter.com/M_W_Coin) |
+| **Reddit** | [https://www.reddit.com/r/mimblewimblecoin](https://www.reddit.com/r/mimblewimblecoin) |
+| **Telegram** | [mimblewimble_coin](https://t.me/mimblewimble_coin) (770 members) |
+| **Discord** | [https://discordapp.com/invite/eUNwqf3](https://discordapp.com/invite/eUNwqf3) |
+| **GitHub** | [https://github.com/mwcproject/mwc-node](https://github.com/mwcproject/mwc-node) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $417.82 |
+| **Market Cap Rank** | #267 |
+| **24h Range** | $8.83 — $9.54 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

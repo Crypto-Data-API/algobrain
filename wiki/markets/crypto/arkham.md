@@ -2,14 +2,14 @@
 title: "Arkham"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, analytics, exchange]
+tags: [analytics, crypto, exchange]
 aliases: ["ARKM", "Arkham Intelligence"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://arkm.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[cex]]", "[[on-chain-analysis]]", "[[on-chain-analytics]]", "[[binance]]"]
+related: ["[[binance]]", "[[cex]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[on-chain-analysis]]", "[[on-chain-analytics]]"]
 ---
 
 # Arkham
@@ -138,3 +138,130 @@ At ~$86M cap, ~97% below ATH but ~42% above the ATL, the market is pricing ARKM 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ARKM |
+| **Market Cap Rank** | #335 |
+| **Market Cap** | $72.24M |
+| **Current Price** | $0.1096 |
+| **Categories** | Artificial Intelligence (AI), Exchange-based Tokens, Analytics, Derivatives, Perpetuals, Centralized Exchange (CEX) Token, Binance Launchpad, Made in USA (+1 more) |
+| **Website** | [http://arkm.com/](http://arkm.com/) |
+
+---
+
+## Overview
+
+Arkham is a cryptocurrency exchange and blockchain analytics platform offering a single site with everything a trader needs, including spot &amp; derivatives trading, intelligence &amp; analytics, and news &amp; research, to millions of users around the world. 
+
+Arkham Intel provides traders with advanced analytics to inform their trading and risk management with over 2 billion blockchain addresses labeled, 92% of on-chain value attributed, and $830 trillion of labeled asset flow. Arkham takes data directly from the blockchain and makes it usable and actionable by anyone via a searchable database of individuals and institutions showing their on-chain holdings, transactions, counterparties, and net worth. On top of this data, Arkham Intel offers a suite of advanced tooling, including alerts, network maps, custom dashboards, AI-powered market analysis, and an API.
+
+Arkham Exchange is a central limit order book (CLOB) spot and perpetuals exchange which integrates trading and intelligence for transparent and informed decision making. Select features include on-chain proof of funds verification, real-time analytics for deposits and withdrawals, REST and WebSocket APIs, and one-click analytics for any market. Arkham Exchange also offers a VIP affiliate program, points, referral commissions, trading competitions, and other incentives for rewarding users.
+
+Arkham was founded by Miguel Morel who serves as CEO. Miguel is a veteran entrepreneur in cryptocurrency markets. Miguel’s experience navigating crypto markets makes him familiar with the intelligence needs of decision makers in government, venture capital, and trading. He is also an investor in a number of technology startups.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 658.91M ARKM |
+| **Total Supply** | 1.00B ARKM |
+| **Max Supply** | 1.00B ARKM |
+| **Fully Diluted Valuation** | $109.63M |
+| **Market Cap / FDV Ratio** | 0.66 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $3.98 (2024-03-10) |
+| **Current vs ATH** | -97.24% |
+| **All-Time Low** | $0.0917 (2026-04-05) |
+| **Current vs ATL** | +19.57% |
+| **24h Change** | -1.39% |
+| **7d Change** | -1.43% |
+| **30d Change** | -20.86% |
+| **1y Change** | -80.06% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x6e2a43be0b1d33b726f0ca3b8de60b3482b8b050` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ARKM/USDT | N/A |
+| Kraken | ARKM/USD | N/A |
+| Upbit | ARKM/KRW | N/A |
+| Bitget | ARKM/USDT | N/A |
+| KuCoin | ARKM/USDT | N/A |
+| Crypto.com Exchange | ARKM/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X6E2A43BE0B1D33B726F0CA3B8DE60B3482B8B050/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [http://arkm.com/](http://arkm.com/) |
+| **Twitter** | [@arkham](https://twitter.com/arkham) |
+| **Telegram** | [arkhamintelligence](https://t.me/arkhamintelligence) (17,817 members) |
+| **Discord** | [https://discord.com/invite/arkham](https://discord.com/invite/arkham) |
+| **Whitepaper** | [https://info.arkm.com/whitepaper](https://info.arkm.com/whitepaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.88M |
+| **Market Cap Rank** | #335 |
+| **24h Range** | $0.1093 — $0.1138 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

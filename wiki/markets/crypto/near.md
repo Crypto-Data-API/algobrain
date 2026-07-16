@@ -2,15 +2,15 @@
 title: "NEAR Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading]
+tags: [ai-trading, crypto]
 aliases: ["NEAR"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (NEAR Foundation: Switzerland)"
 website: "https://near.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[internet-computer]]", "[[solana]]", "[[layer-1-blockchains]]", "[[proof-of-stake]]", "[[sharding]]", "[[narrative-trading]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[internet-computer]]", "[[layer-1-blockchains]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[sharding]]", "[[solana]]"]
 ---
 
 # NEAR Protocol
@@ -211,3 +211,92 @@ NEAR's edge vs. its AI-narrative peer [[internet-computer|ICP]] is a cleaner, fu
 - [CoinMarketCap — NEAR Protocol](https://coinmarketcap.com/currencies/near-protocol/)
 - [CoinGecko — NEAR Protocol](https://www.coingecko.com/en/coins/near)
 - Web search verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.30B NEAR |
+| **Total Supply** | 1.30B NEAR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.64B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $20.44 (2022-01-16) |
+| **Current vs ATH** | -90.10% |
+| **All-Time Low** | $0.5268 (2020-11-04) |
+| **Current vs ATL** | +284.22% |
+| **24h Change** | -0.86% |
+| **7d Change** | +5.76% |
+| **30d Change** | -18.84% |
+| **1y Change** | -24.48% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | NEAR/USDT | N/A |
+| Kraken | NEAR/USD | N/A |
+| Bitget | NEAR/USDT | N/A |
+| KuCoin | NEAR/USDT | N/A |
+| Crypto.com Exchange | NEAR/USD | N/A |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 2,590 |
+| **GitHub Forks** | 781 |
+| **Commits (4 weeks)** | 103 |
+| **Pull Requests Merged** | 8,632 |
+| **Contributors** | 213 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $185.65M |
+| **Market Cap Rank** | #34 |
+| **24h Range** | $2.01 — $2.10 |
+| **CoinGecko Sentiment** | 92% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

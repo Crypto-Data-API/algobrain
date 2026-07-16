@@ -2,14 +2,14 @@
 title: "Flare"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["FLR", "Flare Networks"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://flare.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-1]]", "[[proof-of-stake]]", "[[oracles]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[oracles]]", "[[proof-of-stake]]"]
 ---
 
 # Flare
@@ -169,3 +169,120 @@ Flare's differentiation is **owning the data/interoperability layer at the proto
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - CoinGecko / cryptodataapi.com snapshot, 2026-06-20 (market data baseline).
+
+## What is Flare (FLR)?
+
+Flare is an EVM-based Layer 1 blockchain designed to allow developers to build applications that are interoperable with blockchains and the internet. By providing decentralized access to high-integrity data, Flare enables new use cases and monetisation models.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FLR |
+| **Market Cap Rank** | #94 |
+| **Market Cap** | $571.00M |
+| **Current Price** | $0.00657701 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1) |
+| **Website** | [https://flare.network/](https://flare.network/) |
+
+---
+
+## Overview
+
+Flare is a blockchain for building applications that are interoperable with other blockchains and the internet.
+
+## What makes Flare unique?
+
+Flare's native interoperability protocols, the State Connector and the FTSO are secured by the network itself, allowing it to reliably deliver data from a wide variety of off-chain sources in a decentralized way. 
+
+The Flare Time Series Oracle delivers highly-decentralized price and data feeds to dapps on Flare, without relying on centralized providers. 
+
+The State Connector protocols enable information, both from other blockchains and the internet to be used securely, scalably and trustlessly with smart contracts on Flare.
+
+Risk is minimized by building this decentralized data infrastructure natively into the blockchain, powered by a large number of independent data providers.
+
+By incentivizing sets of independent providers to query, acquire, and process data without relying on single, centralized sources, Flare’s core protocols can facilitate the development of interoperable dapps with a broad range of potential innovative use cases.
+
+## What is the Flare (FLR) token used for?
+
+FLR is the native token used for payments, transaction fees to prevent spam attacks and staking in validator nodes. FLR can also be wrapped into an ERC-20 variant, WFLR. WFLR tokens serve various functions; they can be delegated to FTSO data providers, for example, or staked to participate in governance. These two uses are not mutually exclusive and do not prevent the tokens from being used in other EVM-compatible dapps and smart contracts on Flare.
+
+Wrapped FLR (WFLR) can be minted by depositing native FLR tokens into a smart contract and withdrawing the newly minted
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 86.81B FLR |
+| **Total Supply** | 106.18B FLR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $698.37M |
+| **Market Cap / FDV Ratio** | 0.82 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1501 (2023-01-10) |
+| **Current vs ATH** | -95.62% |
+| **All-Time Low** | $0.00633330 (2026-07-13) |
+| **Current vs ATL** | +3.74% |
+| **24h Change** | -0.75% |
+| **7d Change** | -0.34% |
+| **30d Change** | -17.81% |
+| **1y Change** | -62.41% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | FLR/USD | N/A |
+| KuCoin | FLR/USDT | N/A |
+| Crypto.com Exchange | FLR/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://flare.network/](https://flare.network/) |
+| **Twitter** | [@FlareNetworks](https://twitter.com/FlareNetworks) |
+| **Reddit** | [https://www.reddit.com/r/FlareNetworks](https://www.reddit.com/r/FlareNetworks) |
+| **Telegram** | [FlareNetwork](https://t.me/FlareNetwork) (16,262 members) |
+| **Discord** | [https://discord.com/invite/flarenetwork](https://discord.com/invite/flarenetwork) |
+| **Whitepaper** | [https://flare.network/whitepapers](https://flare.network/whitepapers) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.75M |
+| **Market Cap Rank** | #94 |
+| **24h Range** | $0.00654529 — $0.00671265 |
+| **CoinGecko Sentiment** | 60% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

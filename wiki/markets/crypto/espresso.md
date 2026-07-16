@@ -2,14 +2,14 @@
 title: "Espresso"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, layer-2]
 aliases: ["ESP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.espresso.foundation/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[modular-blockchains]]", "[[celestia]]", "[[sequencer]]", "[[arbitrum]]"]
+related: ["[[arbitrum]]", "[[celestia]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[modular-blockchains]]", "[[sequencer]]"]
 ---
 
 # Espresso
@@ -147,3 +147,120 @@ ESP is a **shared-sequencing / Rollups-as-a-Service infrastructure** narrative p
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 — cryptodataapi.com / CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`)
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ESP |
+| **Market Cap Rank** | #471 |
+| **Market Cap** | $44.45M |
+| **Current Price** | $0.0716 |
+| **Categories** | Infrastructure, Rollups-as-a-Service (RaaS), Binance Wallet IDO, Capital Launchpad (Kaito) |
+| **Website** | [https://www.espresso.foundation/](https://www.espresso.foundation/) |
+
+---
+
+## Overview
+
+Espresso is a global confirmation layer that provides L2 chains with fast, reliable transaction confirmations backed by BFT consensus.
+
+Espresso confirmations can improve cross-chain composability, as they provide chains with near-instant access to reliable, credibly neutral information about what’s happening not just on their own chain, but on all chains plugged into the network. Espresso's confirmation layer can prevent sequencer equivocation, protect against reorgs, and reduce finality risk for solvers in intent-based systems. Its versatility means chains can also use it as a decentralized sequencer and low-cost data availability layer.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 620.52M ESP |
+| **Total Supply** | 3.60B ESP |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $257.95M |
+| **Market Cap / FDV Ratio** | 0.17 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2174 (2026-02-24) |
+| **Current vs ATH** | -67.06% |
+| **All-Time Low** | $0.0522 (2026-02-15) |
+| **Current vs ATL** | +37.08% |
+| **24h Change** | +1.28% |
+| **7d Change** | +11.44% |
+| **30d Change** | -0.39% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x031de51f3e8016514bd0963d0b2ab825a591db9a` |
+| Arbitrum One | `0x3b8db18e69d6686ad9371a423afe3dd1065c94f1` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ESP/USDT | N/A |
+| Kraken | ESP/USD | N/A |
+| Upbit | ESP/KRW | N/A |
+| KuCoin | ESP/USDT | N/A |
+| Crypto.com Exchange | ESP/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.espresso.foundation/](https://www.espresso.foundation/) |
+| **Twitter** | [@EspressoSys](https://twitter.com/EspressoSys) |
+| **GitHub** | [https://github.com/EspressoSystems](https://github.com/EspressoSystems) |
+| **Whitepaper** | [https://docs.espressosys.com/network](https://docs.espressosys.com/network) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.25M |
+| **Market Cap Rank** | #471 |
+| **24h Range** | $0.0706 — $0.0730 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

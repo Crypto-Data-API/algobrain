@@ -2,14 +2,14 @@
 title: "Nillion"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, machine-learning, artificial-intelligence]
-aliases: ["NIL", "$NIL", "Nillion Network"]
+tags: [artificial-intelligence, crypto, machine-learning]
+aliases: ["$NIL", "NIL", "Nillion Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nillion.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[multi-party-computation]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[multi-party-computation]]"]
 ---
 
 # Nillion

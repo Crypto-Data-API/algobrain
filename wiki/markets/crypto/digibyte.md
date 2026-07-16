@@ -2,7 +2,7 @@
 title: "DigiByte"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["DGB"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "https://DigiByte.org"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[litecoin]]", "[[proof-of-work]]", "[[layer-1]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[litecoin]]", "[[proof-of-work]]"]
 ---
 
 # DigiByte
@@ -248,3 +248,22 @@ DGB's distinctive feature versus peers is its **MultiAlgo + DigiShield** securit
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data 2026-06-20 from `raw/data/crypto-loop/category-groups.json` (cryptodataapi.com / CoinGecko).
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | DGB/USDT | N/A |
+| Upbit | DGB/BTC | N/A |
+| KuCoin | DGB/USDT | N/A |
+| Crypto.com Exchange | DGB/USD | N/A |
+
+---

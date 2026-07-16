@@ -2,13 +2,13 @@
 title: "BNB (Binance Coin)"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [binance, bnb, crypto, exchange-token, layer1]
 entity_type: protocol
 aliases: ["BNB", "BNB-Chain", "BSC", "Binance-Coin"]
 website: "https://www.bnbchain.org"
-related: ["[[binance]]", "[[bnb-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[bitcoin]]", "[[solana]]", "[[hyperliquid]]", "[[layer-1]]"]
+related: ["[[binance]]", "[[bitcoin]]", "[[bnb-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[solana]]"]
 founded: 2017
 headquarters: "Decentralized"
 ---
@@ -275,3 +275,15 @@ Launched in 2017 by the Binance platform, the project initially distributed 50% 
 - [[defi]] — DeFi ecosystem on BNB Chain
 - [[hyperliquid]] — venue for BNB-PERP
 - [[crypto-markets]] — broader market context
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 133.17M BNB |
+| **Total Supply** | 133.17M BNB |
+| **Max Supply** | 200.00M BNB |
+| **Fully Diluted Valuation** | $76.84B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

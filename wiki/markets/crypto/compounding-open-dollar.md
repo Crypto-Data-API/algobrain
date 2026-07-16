@@ -2,14 +2,14 @@
 title: "Compounding OpenDollar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi, real-world-assets]
-aliases: ["CUSDO", "cUSDO", "Compounding Open Dollar"]
+tags: [crypto, defi, real-world-assets, stablecoin]
+aliases: ["CUSDO", "Compounding Open Dollar", "cUSDO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://openeden.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[real-world-assets]]", "[[treasury-bonds]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[treasury-bonds]]"]
 ---
 
 # Compounding OpenDollar

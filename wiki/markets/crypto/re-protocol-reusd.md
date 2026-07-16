@@ -2,14 +2,14 @@
 title: "Re Protocol reUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, real-world-assets]
+tags: [crypto, real-world-assets, stablecoins]
 aliases: ["REUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://re.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[stablecoins]]", "[[real-world-assets]]", "[[yield-bearing-stablecoin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin]]", "[[stablecoins]]", "[[yield-bearing-stablecoin]]"]
 ---
 
 # Re Protocol reUSD
@@ -211,3 +211,44 @@ reUSD sits in the **insurance-linked / RWA-yield** narrative — bringing reinsu
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | REUSD |
+| **Market Cap Rank** | #191 |
+| **Market Cap** | $159.48M |
+| **Current Price** | $1.09 |
+| **Categories** | Stablecoins, Yield-Bearing Stablecoin, Base Native |
+| **Website** | [https://re.xyz](https://re.xyz) |
+
+---
+
+## Overview
+
+Re Protocol (RE) is a blockchain-based platform that democratizes access to reinsurance risk by tokenizing exposure to insurance contracts. The protocol’s two deposit tokens—reUSD and reUSDe—let users choose between a principal-protected, fixed-yield product (reUSD, RF + 250 bps) or a risk-bearing, variable-yield option (reUSDe, up to ~23 % APR). Built on Ethereum, Avalanch, Arbitrum and Base, Re Protocol leverages decentralized underwriting pools to generate transparent, market-driven insurance returns. Governance and treasury functions are overseen by the Cayman-based Re Foundation to ensure regulatory compliance and capital efficiency. With integrations into DeFi ecosystems like Curve, Pendle, and Ethena, Re Protocol bridges traditional reinsurance markets and DeFi—opening institutional-grade risk diversification to crypto investors.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.09 (2026-07-12) |
+| **Current vs ATH** | -0.14% |
+| **All-Time Low** | $0.8734 (2025-07-17) |
+| **Current vs ATL** | +24.67% |
+| **24h Change** | -0.04% |
+| **7d Change** | +0.12% |
+| **30d Change** | +0.48% |
+| **1y Change** | +9.61% |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

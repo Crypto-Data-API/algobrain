@@ -2,10 +2,10 @@
 title: "Chromia"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
-aliases: ["CHR", "ChromaWay", "Chroma"]
+tags: [altcoins, crypto, nft]
+aliases: ["CHR", "Chroma", "ChromaWay"]
 entity_type: protocol
 headquarters: "Sweden"
 website: "https://chromia.com/"
@@ -250,3 +250,10 @@ Catalysts to watch (speculative): a flagship app reaching durable, high-volume u
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

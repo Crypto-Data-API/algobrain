@@ -2,14 +2,14 @@
 title: "SkyAI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, bnb]
+tags: [ai-trading, bnb, crypto]
 aliases: ["SKYAI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://skyai.pro/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[ai-trading]]", "[[ai-agent-tokens]]", "[[decentralized-ai]]", "[[mcp-model-context-protocol]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-trading]]", "[[bnb]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[mcp-model-context-protocol]]"]
 ---
 
 # SkyAI
@@ -158,3 +158,101 @@ Not financial advice; AI micro/mid-caps carry severe drawdown risk.
 - Macro context: 2026-06-22 snapshot (cryptodataapi.com / CoinGecko) — F&G 21 (Extreme Fear), bottoming/accumulation regime.
 - Project site: https://skyai.pro/ — self-reported; not independently verified.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SKYAI |
+| **Market Cap Rank** | #630 |
+| **Market Cap** | $30.73M |
+| **Current Price** | $0.0308 |
+| **Categories** | Binance Alpha Spotlight |
+| **Website** | [https://skyai.pro/](https://skyai.pro/) |
+
+---
+
+## Overview
+
+SkyAI is an all-in-one AI ecosystem powered by MCP, designed to seamlessly integrate intelligent solutions across industries.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 998.38M SKYAI |
+| **Total Supply** | 998.38M SKYAI |
+| **Max Supply** | 1.00B SKYAI |
+| **Fully Diluted Valuation** | $30.73M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.8543 (2026-05-06) |
+| **Current vs ATH** | -96.34% |
+| **All-Time Low** | $0.0143 (2025-10-11) |
+| **Current vs ATL** | +117.93% |
+| **24h Change** | +2.46% |
+| **7d Change** | -20.76% |
+| **30d Change** | -92.31% |
+| **1y Change** | -50.74% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x92aa03137385f18539301349dcfc9ebc923ffb10` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://skyai.pro/](https://skyai.pro/) |
+| **Twitter** | [@SKYAIpro](https://twitter.com/SKYAIpro) |
+| **Telegram** | [SKYAI_MCP](https://t.me/SKYAI_MCP) (3,029 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $10.86M |
+| **Market Cap Rank** | #630 |
+| **24h Range** | $0.0294 — $0.0321 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

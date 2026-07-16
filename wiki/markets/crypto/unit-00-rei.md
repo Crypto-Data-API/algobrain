@@ -2,14 +2,14 @@
 title: "Rei"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["REI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://reilabs.org/"
-related: ["[[crypto-markets]]", "[[base]]"]
+related: ["[[base]]", "[[crypto-markets]]"]
 ---
 
 # Rei
@@ -121,10 +121,9 @@ related: ["[[crypto-markets]]", "[[base]]"]
 ## See Also
 
 - [[crypto-markets]]
-- [[base]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

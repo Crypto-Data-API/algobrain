@@ -2,14 +2,14 @@
 title: "Drift Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["DRIFT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.drift.trade/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[2026-04-01-drift-protocol-exploit]]", "[[solana-durable-nonce-governance-attacks]]", "[[lazarus-group]]", "[[2026-exploit-target-watchlist]]"]
+related: ["[[2026-04-01-drift-protocol-exploit]]", "[[2026-exploit-target-watchlist]]", "[[crypto-markets]]", "[[lazarus-group]]", "[[solana-durable-nonce-governance-attacks]]", "[[solana]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -140,4 +140,4 @@ related: ["[[crypto-markets]]", "[[solana]]", "[[2026-04-01-drift-protocol-explo
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

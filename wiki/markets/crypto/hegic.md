@@ -2,14 +2,14 @@
 title: "Hegic"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, options, ethereum]
+tags: [crypto, defi, derivatives, ethereum, options]
 aliases: ["HEGIC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.hegic.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[arbitrum]]", "[[options]]", "[[decentralized-exchange]]", "[[defi]]", "[[derivatives]]", "[[volatility]]", "[[liquidity-pool]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[derivatives]]", "[[ethereum]]", "[[liquidity-pool]]", "[[options]]", "[[volatility]]"]
 ---
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
@@ -232,3 +232,26 @@ HEGIC the token is a thin-liquidity microcap traded primarily on [[ethereum|Ethe
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 via cryptodataapi.com / CoinGecko.
 - General market knowledge; no specific protocol source ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.08B HEGIC |
+| **Total Supply** | 1.08B HEGIC |
+| **Max Supply** | 1.08B HEGIC |
+| **Fully Diluted Valuation** | $14.79M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X584BC13C7D411C00C01A62E8019472DE68768430/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0X584BC13C7D411C00C01A62E8019472DE68768430/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---

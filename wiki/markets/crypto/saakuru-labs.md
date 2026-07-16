@@ -2,14 +2,14 @@
 title: "Saakuru"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, cross-chain]
+tags: [altcoins, cross-chain, crypto, defi]
 aliases: ["SKR", "Saakuru", "Saakuru Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://saakuru.com/"
-related: ["[[crypto-markets]]", "[[layer-2]]", "[[account-abstraction]]"]
+related: ["[[account-abstraction]]", "[[crypto-markets]]", "[[layer-2]]"]
 ---
 
 # Saakuru
@@ -227,3 +227,13 @@ Context: 2026-06-22, established bear market, Extreme Fear (F&G 21). For a deep 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Overview
+
+Saakuru is a consumer-centric L2 protocol with zero transaction fees based on OP Stack to create a frictionless experience for any application. Using the Saakuru Protocol alongside the Saakuru Developer Suite enables any product to add Web3 capability in just one day. The powerful and developer-friendly product suite allows a cost-efficient and seamless transition from Web2 to Web3.
+
+The Saakuru Protocol is already live &amp; records more than 1.4 million transactions/week*, which already puts it into the top 20 public blockchains by transactions per week only nine months after network launch. This quick transaction growth is mainly influenced by its gasless nature and very fast block time. On top of that, Saakuru Labs has launched its own Developer Suite: a comprehensive set of highly interoperable modules like Mobile Wallet SDK, NFT management platform, Blockchain data API, and Gamification API, which allows products to embed essential Web3 modules directly to their products significantly reducing cost and speed for any go-to-market strategy.
+
+The Saakuru token is a multi-purpose (utility &amp; governance) token of the Saakuru Protocol, notable for its innovative burning mechanism that methodically reduces supply through transaction fees, developer profits, and governance actions. Its demand is driven by a unique credit system that sustains a gas-less blockchain environment, enabling developers to stake SKR tokens to decrease operational costs. This model promotes active ecosystem participation, ensuring the token's utility and fostering sustainable growth.
+
+---

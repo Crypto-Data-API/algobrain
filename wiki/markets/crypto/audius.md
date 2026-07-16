@@ -2,14 +2,14 @@
 title: "Audius"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["AUDIO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://audius.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[governance-token]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[governance-token]]", "[[solana]]"]
 ---
 
 # Audius

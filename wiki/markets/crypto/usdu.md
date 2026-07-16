@@ -2,14 +2,14 @@
 title: "USDu"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, real-world-assets]
+tags: [crypto, real-world-assets, stablecoins]
 aliases: ["USDU"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://unitas.so"
-related: ["[[crypto-markets]]", "[[solana]]", "[[stablecoin]]", "[[stablecoins]]", "[[real-world-assets]]", "[[treasuries]]", "[[ondo-u-s-dollar-token]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-u-s-dollar-token]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoin]]", "[[stablecoins]]", "[[treasuries]]"]
 ---
 
 # USDu
@@ -214,3 +214,65 @@ USDu sits in the **tokenized-Treasury / yield-bearing stablecoin** narrative —
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDU |
+| **Market Cap Rank** | #708 |
+| **Market Cap** | $25.63M |
+| **Current Price** | $0.9992 |
+| **Categories** | Stablecoins, USD Stablecoin |
+| **Website** | [https://www.universal.ae/](https://www.universal.ae/) |
+
+---
+
+## Overview
+
+Universal USD (USDU) is a fiat-referenced token pegged 1:1 to the US Dollar. It is issued by Universal Digital Intl Limited, a financial entity based in Abu Dhabi Global Market. USDU is designed to provide a compliant, institutional-grade USD-denominated settlement layer for digital assets and virtual asset derivatives within regulated financial frameworks.
+
+USDU is aligned with the UAE’s broader ambition to become a leading global hub for digital assets, financial innovation, and regulated digital asset infrastructure. By operating within the ADGM/FSRA, and Central Bank of the UAE regulatory frameworks, USDU supports the development of onshore stablecoin settlement infrastructure for institutional virtual asset activity, treasury movement, and tokenized financial markets.
+
+Key features and mechanics
+
+1:1 asset backing: Each USDU token is backed 1:1 by liquid US dollar reserves. These assets are held in safeguarded accounts with regulated commercial banks, including Emirates NBD and Mashreq.
+
+Regulatory compliance: The issuing entity is regulated by the Financial Services Regulatory Authority in ADGM and registered with the Central Bank of the UAE as a Foreign Payment Token Issuer under the Payment Token Services Regulation.
+
+Auditing and transparency: USDU undergoes monthly independent reserve attestations conducted by an international accounting firm, alongside third-party smart contract audits.
+
+Target audience and use cases: USDU is structured primarily for professional clients and institutional market participants. Its primary use cases include digital asset trading settlement, corporate treasury management, cross-venue liquidity movement, virtual asset infrastructure, and tokenized asset settlement.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.00 (2026-06-20) |
+| **Current vs ATH** | -0.08% |
+| **All-Time Low** | $0.9977 (2026-07-09) |
+| **Current vs ATL** | +0.15% |
+| **24h Change** | +0.03% |
+| **7d Change** | +0.14% |
+| **30d Change** | -0.08% |
+| **1y Change** | +0.00% |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **Pull Requests Merged** | 9 |
+| **Contributors** | 3 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

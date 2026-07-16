@@ -2,14 +2,14 @@
 title: "Naoris Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["NAORIS", "Naoris"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.naorisprotocol.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[depin]]", "[[zero-knowledge-proof]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[zero-knowledge-proof]]"]
 ---
 
 # Naoris Protocol
@@ -229,3 +229,10 @@ NAORIS sits at the intersection of three narratives — **[[depin|DePIN]]**, **p
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "ChainOpera AI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-agents, artificial-intelligence]
+tags: [ai-agents, artificial-intelligence, crypto]
 aliases: ["COAI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://chainopera.ai/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[ai-agents]]", "[[ai-agent-tokens]]", "[[defai]]", "[[decentralized-ai]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[bnb]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[defai]]"]
 ---
 
 # ChainOpera AI
@@ -131,3 +131,106 @@ Not financial advice; ultra-low-float AI tokens carry severe drawdown, dilution,
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - Macro context: 2026-06-22 snapshot (cryptodataapi.com / CoinGecko) — F&G 21 (Extreme Fear), bottoming/accumulation regime.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | COAI |
+| **Market Cap Rank** | #395 |
+| **Market Cap** | $57.70M |
+| **Current Price** | $0.3067 |
+| **Categories** | Artificial Intelligence (AI), AI Applications, Binance Alpha Spotlight, AI Framework |
+| **Website** | [https://chainopera.ai/](https://chainopera.ai/) |
+
+---
+
+## Overview
+
+ChainOpera AI empowers collaborative intelligence through a network of AI agents co-created and co-operated by the community. It is built on a Super AI app and a full-stack AI infrastructure that supports a creator economy for designing, distributing, and using AI agents; agent-centric model training and inference on distributed GPUs; and an AI-native blockchain for verifiable ownership, attribution, and transparent participation. ChainOpera transforms how intelligence is created and shared by aligning users, developers, and infrastructure providers through shared participation mechanisms, enabling a new era of open and collaborative AI.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 188.00M COAI |
+| **Total Supply** | 1.00B COAI |
+| **Max Supply** | 1.00B COAI |
+| **Fully Diluted Valuation** | $306.91M |
+| **Market Cap / FDV Ratio** | 0.19 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $43.81 (2025-10-12) |
+| **Current vs ATH** | -99.30% |
+| **All-Time Low** | $0.1381 (2025-09-26) |
+| **Current vs ATL** | +122.21% |
+| **24h Change** | -1.39% |
+| **7d Change** | +0.07% |
+| **30d Change** | -12.85% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x0a8d6c86e1bce73fe4d0bd531e1a567306836ea5` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | COAI/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://chainopera.ai/](https://chainopera.ai/) |
+| **Twitter** | [@ChainOpera_AI](https://twitter.com/ChainOpera_AI) |
+| **Telegram** | [ChainOpera](https://t.me/ChainOpera) (30,913 members) |
+| **Whitepaper** | [https://paper.chainopera.ai/](https://paper.chainopera.ai/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.83M |
+| **Market Cap Rank** | #395 |
+| **24h Range** | $0.3067 — $0.3226 |
+| **CoinGecko Sentiment** | 33% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Goatseus Maximus"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["GOAT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://goatchan.xyz/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[truth-terminal-goat]]", "[[ai-narrative-arc]]", "[[ai-agent-tokens]]", "[[anthropic]]", "[[artificial-intelligence]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-narrative-arc]]", "[[anthropic]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[solana]]", "[[truth-terminal-goat]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -134,4 +134,4 @@ related: ["[[crypto-markets]]", "[[solana]]", "[[truth-terminal-goat]]", "[[ai-n
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

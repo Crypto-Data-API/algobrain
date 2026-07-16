@@ -2,15 +2,15 @@
 title: "Chainlink"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
-aliases: ["LINK", "Chainlink Labs"]
+tags: [altcoins, crypto, defi]
+aliases: ["Chainlink Labs", "LINK"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://chain.link/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[aave]]", "[[gmx]]", "[[curve-finance]]", "[[uniswap]]", "[[lido]]", "[[bitcoin]]", "[[hyperliquid]]", "[[pyth-network]]", "[[restaking]]", "[[narrative-trading]]"]
+related: ["[[aave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[gmx]]", "[[hyperliquid]]", "[[lido]]", "[[narrative-trading]]", "[[pyth-network]]", "[[restaking]]", "[[uniswap]]"]
 ---
 
 # Chainlink
@@ -457,3 +457,15 @@ Chainlink is deployed across 20+ blockchains. LINK token is available on virtual
 - The Block — "Chainlink integrates Swift messaging to streamline tokenized fund workflows with UBS": https://www.theblock.co/post/372876/chainlink-swift-tokenized-fund-workflows-ubs-pilot
 - CoinMarketCap / CoinGecko Chainlink pages (price, rank, Chainlink Reserve description), checked 2026-06-10
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 748.10M LINK |
+| **Total Supply** | 1.00B LINK |
+| **Max Supply** | 1.00B LINK |
+| **Fully Diluted Valuation** | $8.42B |
+| **Market Cap / FDV Ratio** | 0.75 |
+
+---

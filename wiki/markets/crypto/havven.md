@@ -2,15 +2,15 @@
 title: "Synthetix"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: good
 tags: [crypto, defi, derivatives]
-aliases: ["SNX", "Havven"]
+aliases: ["Havven", "SNX"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://www.synthetix.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[decentralized-exchange]]", "[[perpetual-futures]]", "[[funding-rate]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 ---
 
 # Synthetix
@@ -105,3 +105,128 @@ Synthetix pioneered **on-chain synthetic assets** and pivoted toward being the *
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical snapshot context
 - Market data as of 2026-06-20 from the crypto-loop CoinGecko markets snapshot (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet for protocol mechanics.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SNX |
+| **Market Cap Rank** | #216 |
+| **Market Cap** | $132.96M |
+| **Current Price** | $0.2288 |
+| **Genesis Date** | 2018-03-11 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), Yield Farming, Derivatives, Synthetic Issuer, Synthetic, Governance (+1 more) |
+| **Website** | [https://www.synthetix.io/](https://www.synthetix.io/) |
+
+---
+
+## Overview
+
+Synthetix is a decentralized perpetual futures protocol built on Ethereum Mainnet. Synthetix uses a hybrid design — off-chain order matching on a high-performance CLOB with on-chain settlement — to deliver low latency, deep liquidity, and MEV-resistant execution while keeping custody and finality on Ethereum. Traders get CEX-like performance with on-chain security and composability. The protocol’s liquidity is provided by the Synthetix Liquidity Provider (SLP) vault and backstopped by staked SNX collateral, which underwrites the issuance of the sUSD stablecoin and the solvency of the SLP vault.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 580.98M SNX |
+| **Total Supply** | 581.40M SNX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $133.05M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $28.53 (2021-02-14) |
+| **Current vs ATH** | -99.20% |
+| **All-Time Low** | $0.0348 (2019-01-06) |
+| **Current vs ATL** | +558.47% |
+| **24h Change** | -0.98% |
+| **7d Change** | +2.15% |
+| **30d Change** | -10.89% |
+| **1y Change** | -65.57% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f` |
+| Harmony Shard 0 | `0x7b9c523d59aefd362247bd5601a89722e3774dd2` |
+| Huobi Token | `0x777850281719d5a96c29812ab72f822e0e09f3da` |
+| Fantom | `0x56ee926bd8c72b2d5fa1af4d9e4cbb515a1e3adc` |
+| Base | `0x22e6966b799c4d5b13be962e1d117b56327fda66` |
+| Near Protocol | `c011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f.factory.bridge.near` |
+| Energi | `0xa255461ff545d6ece153283f421d67d2de5d0e29` |
+| Polygon Pos | `0x50b728d8d964fd00c2d0aad81718b71311fef68a` |
+| Optimistic Ethereum | `0x8700daec35af8ff88c16bdf0418774cb3d7599b4` |
+| Avalanche | `0xbec243c995409e6520d7c41e404da5deba4b209b` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SNX/USDT | N/A |
+| Kraken | SNX/USD | N/A |
+| Bitget | SNX/USDT | N/A |
+| KuCoin | SNX/USDT | N/A |
+| Crypto.com Exchange | SNX/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XC011A73EE8576FB46F5E1C5751CA3B9FE0AF2A6F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0XC011A73EE8576FB46F5E1C5751CA3B9FE0AF2A6F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Balancer V2 | 0XC011A73EE8576FB46F5E1C5751CA3B9FE0AF2A6F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.synthetix.io/](https://www.synthetix.io/) |
+| **Twitter** | [@synthetix](https://twitter.com/synthetix) |
+| **Reddit** | [https://www.reddit.com/r/synthetix_io/](https://www.reddit.com/r/synthetix_io/) |
+| **Discord** | [https://discord.com/invite/synthetix](https://discord.com/invite/synthetix) |
+| **GitHub** | [https://github.com/Synthetixio/synthetix](https://github.com/Synthetixio/synthetix) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $13.92M |
+| **Market Cap Rank** | #216 |
+| **24h Range** | $0.2254 — $0.2352 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "aPriori"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["APR", "aPriori", "Apriori"]
+aliases: ["APR", "Apriori", "aPriori"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://apr.io"
-related: ["[[crypto-markets]]", "[[liquid-staking]]", "[[monad]]", "[[slashing]]", "[[mev-strategies]]", "[[lido]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[lido]]", "[[liquid-staking]]", "[[mev-strategies]]", "[[monad]]", "[[slashing]]", "[[solana]]"]
 ---
 
 # aPriori
@@ -175,3 +175,62 @@ In the 2026-06-24 backdrop (Fear & Greed 22, established bear market, BTC ~$62.6
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge of aPriori's liquid-staking and MEV-infrastructure model; no dedicated wiki source ingested yet.
+
+## Overview
+
+aPriori is building the intelligent order flow coordination layer for high-performance blockchains.
+
+Its architecture comprises an Order Flow Segmentation Engine that classifies trades in real time and a flow-aware routing engine that directs benign orders into efficient liquidity pools while isolating riskier ones to resilient paths. The system integrates MEV capture with a redistribution mechanism, returning value to stakers and validators to better align incentives.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 246.87M APR |
+| **Total Supply** | 1.00B APR |
+| **Max Supply** | 1.00B APR |
+| **Fully Diluted Valuation** | $217.00M |
+| **Market Cap / FDV Ratio** | 0.25 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.7396 (2025-10-24) |
+| **Current vs ATH** | -70.67% |
+| **All-Time Low** | $0.0646 (2026-02-06) |
+| **Current vs ATL** | +235.89% |
+| **24h Change** | +0.28% |
+| **7d Change** | +9.80% |
+| **30d Change** | +6.14% |
+| **1y Change** | +0.00% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.61M |
+| **Market Cap Rank** | #410 |
+| **24h Range** | $0.2097 — $0.2199 |
+| **CoinGecko Sentiment** | 25% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Alchemist AI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, artificial-intelligence]
+tags: [artificial-intelligence, crypto]
 aliases: ["ALCH", "Alchemist"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.alchemistai.app/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[artificial-intelligence]]", "[[ai-agent-tokens]]", "[[decentralized-ai]]", "[[pump-fun]]", "[[ai-agents]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[pump-fun]]", "[[solana]]"]
 ---
 
 # Alchemist AI
@@ -138,3 +138,119 @@ ALCH's distinguishing feature within the AI-token cohort is its **high float / l
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ALCH |
+| **Market Cap Rank** | #759 |
+| **Market Cap** | $22.79M |
+| **Current Price** | $0.0268 |
+| **Categories** | Artificial Intelligence (AI), AI Applications, Binance Alpha Spotlight |
+| **Website** | [https://www.alchemistai.app/](https://www.alchemistai.app/) |
+
+---
+
+## Overview
+
+Alchemist AI is a no-code development platform (NCDP) that enables users to create software applications with just a simple description. By eliminating the need for coding expertise, our AI enables anyone from beginners to professionals to generate bespoke applications on the fly - ranging from simple utilities to games.
+
+Our system involves Natural Language Processing (NLP), Code Generation, Web Framework Integration, and access to a Limited OS API. The Large Language Model (LLM) plays a pivotal role throughout the process, handling everything from parsing user input to generating executable code.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 850.00M ALCH |
+| **Total Supply** | 999.95M ALCH |
+| **Max Supply** | 1.00B ALCH |
+| **Fully Diluted Valuation** | $26.81M |
+| **Market Cap / FDV Ratio** | 0.85 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2433 (2025-12-18) |
+| **Current vs ATH** | -88.91% |
+| **All-Time Low** | $0.0144 (2025-02-25) |
+| **Current vs ATL** | +87.98% |
+| **24h Change** | +0.69% |
+| **7d Change** | -49.23% |
+| **30d Change** | -65.97% |
+| **1y Change** | -80.67% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `HNg5PYJmtqcmzXrv6S9zP1CDKk5BgDuyFBxbvNApump` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | ALCH/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | HNG5PYJMTQCMZXRV6S9ZP1CDKK5BGDUYFBXBVNAPUMP/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.alchemistai.app/](https://www.alchemistai.app/) |
+| **Twitter** | [@alchemistAIapp](https://twitter.com/alchemistAIapp) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.49M |
+| **Market Cap Rank** | #759 |
+| **24h Range** | $0.0253 — $0.0277 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

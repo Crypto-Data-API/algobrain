@@ -2,7 +2,7 @@
 title: "Kaspa"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["KAS", "Kaspa BlockDAG"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2021
 headquarters: "Decentralized"
 website: "https://kaspa.org/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[hyperliquid]]", "[[monero]]", "[[litecoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[litecoin]]", "[[monero]]"]
 ---
 
 # Kaspa
@@ -297,3 +297,56 @@ Kaspa's edge: **PoW security + the highest throughput of any PoW network + a gen
 - HelloSafe Kaspa profile (June 2025 price/market cap, Crescendo confirmation) — https://hellosafe.ae/investing/crypto/coins/kaspa
 - CoinMarketCap Kaspa latest updates (Toccata fork window, June 2026) — https://coinmarketcap.com/cmc-ai/kaspa/latest-updates/
 - Verified via Perplexity sonar, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 27.50B KAS |
+| **Total Supply** | 27.58B KAS |
+| **Max Supply** | 28.70B KAS |
+| **Fully Diluted Valuation** | $785.58M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 529 |
+| **GitHub Forks** | 244 |
+| **Pull Requests Merged** | 1,695 |
+| **Contributors** | 31 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $9.31M |
+| **Market Cap Rank** | #80 |
+| **24h Range** | $0.0285 — $0.0291 |
+| **CoinGecko Sentiment** | 82% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

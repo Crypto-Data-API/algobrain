@@ -2,15 +2,15 @@
 title: "Litecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["LTC"]
 entity_type: protocol
 founded: 2011
 headquarters: "Decentralized (Litecoin Foundation, Singapore)"
 website: "https://litecoin.org"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[bitcoin-cash]]", "[[dogecoin]]", "[[monero]]", "[[proof-of-work]]", "[[hyperliquid]]", "[[etf]]", "[[narrative-trading]]"]
+related: ["[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]", "[[dogecoin]]", "[[etf]]", "[[hyperliquid]]", "[[monero]]", "[[narrative-trading]]", "[[proof-of-work]]"]
 ---
 
 # Litecoin
@@ -330,3 +330,21 @@ LTC and [[bitcoin-cash]] are the two canonical **[[bitcoin]] forks / "cheap BTC"
 - SEC EDGAR — Canary Litecoin ETF Form 10-K FY2025 and S-1/A filings: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0002039461
 - ETFGI — "Canary Capital Launches Canary Litecoin ETF (LTCC)": https://etfgi.com/news/stories/2025/10/canary-capital-launches-canary-litecoin-etf-ltcc
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 77.39M LTC |
+| **Total Supply** | 77.39M LTC |
+| **Max Supply** | 84.00M LTC |
+| **Fully Diluted Valuation** | $3.46B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

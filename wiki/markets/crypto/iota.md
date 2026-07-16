@@ -2,15 +2,15 @@
 title: "IOTA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto]
-aliases: ["IOTA", "MIOTA", "IOTA Rebased"]
+tags: [crypto, defi]
+aliases: ["IOTA", "IOTA Rebased", "MIOTA"]
 entity_type: protocol
 founded: 2015
 headquarters: "IOTA Foundation, Berlin, Germany"
 website: "https://iota.org/"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[ethereum]]", "[[sui]]", "[[narrative-trading]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sui]]"]
 ---
 
 # IOTA
@@ -188,3 +188,98 @@ IOTA is best framed as an **L1 security/utility token that the market has not re
 - CoinMarketCap — IOTA: https://coinmarketcap.com/currencies/iota/ (cap ~$203.8M, rank #131, supply ~4.49B, retrieved 2026-06-10)
 - YCharts — IOTA price: https://ycharts.com/indicators/iota_price (~$0.0471 on 2026-06-09, -74.02% YoY)
 - Perplexity verification, 2026-06-10 (market cap $201–216M, rank #131–175 across aggregators; real-world-trade positioning per Cryptorank/CMC)
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 4.54B IOTA |
+| **Total Supply** | 4.94B IOTA |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $175.86M |
+| **Market Cap / FDV Ratio** | 0.92 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $5.25 (2017-12-19) |
+| **Current vs ATH** | -99.32% |
+| **All-Time Low** | $0.0344 (2026-06-30) |
+| **Current vs ATL** | +3.73% |
+| **24h Change** | -3.62% |
+| **7d Change** | -3.31% |
+| **30d Change** | -27.97% |
+| **1y Change** | -84.05% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Iota
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Iota | `0x2::iota::IOTA` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | IOTA/USDT | N/A |
+| Upbit | IOTA/KRW | N/A |
+| KuCoin | IOTA/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://iota.org/](https://iota.org/) |
+| **Twitter** | [@iota](https://twitter.com/iota) |
+| **Reddit** | [https://www.reddit.com/r/Iota](https://www.reddit.com/r/Iota) |
+| **Telegram** | [IOTA_Official_Community](https://t.me/IOTA_Official_Community) (3,449 members) |
+| **Discord** | [https://discord.iota.org](https://discord.iota.org) |
+| **GitHub** | [https://github.com/iotaledger](https://github.com/iotaledger) |
+| **Whitepaper** | [https://www.iota.org/pdf/IOTA_Technical_and_Tokenomics_Whitepaper.pdf](https://www.iota.org/pdf/IOTA_Technical_and_Tokenomics_Whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.00M |
+| **Market Cap Rank** | #188 |
+| **24h Range** | $0.0356 — $0.0381 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

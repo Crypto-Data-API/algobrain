@@ -2,14 +2,14 @@
 title: "Helium"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["HNT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.helium.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[depin]]", "[[fear-and-greed-index]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[fear-and-greed-index]]", "[[solana]]"]
 ---
 
 # Helium
@@ -203,3 +203,28 @@ HNT is best valued on **real network usage** rather than pure speculation. The q
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | HNT |
+| **Market Cap Rank** | #530 |
+| **Market Cap** | $38.43M |
+| **Current Price** | $0.2113 |
+| **Categories** | Communication, Internet of Things (IOT), Smart Contract Platform, DePIN, Proof of Stake (PoS), Made in USA |
+| **Website** | [https://www.helium.com/](https://www.helium.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 181.86M HNT |
+| **Total Supply** | 181.86M HNT |
+| **Max Supply** | 223.00M HNT |
+| **Fully Diluted Valuation** | $38.43M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

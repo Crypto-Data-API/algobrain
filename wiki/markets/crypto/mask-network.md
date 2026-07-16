@@ -2,14 +2,14 @@
 title: "Mask Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["MASK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://mask.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[uniswap]]", "[[crypto-fear-and-greed-index]]"]
+related: ["[[crypto-fear-and-greed-index]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[uniswap]]"]
 ---
 
 # Mask Network
@@ -140,3 +140,132 @@ MASK's differentiator versus pure SocialFi peers is that it **augments existing 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MASK |
+| **Market Cap Rank** | #520 |
+| **Market Cap** | $39.27M |
+| **Current Price** | $0.3931 |
+| **Categories** | BNB Chain Ecosystem, Polygon Ecosystem, Ethereum Ecosystem, Animoca Brands Portfolio, DWF Labs Portfolio, Alameda Research Portfolio, Energi Ecosystem, YZi Labs (Prev. Binance Labs) Portfolio |
+| **Website** | [https://mask.io/](https://mask.io/) |
+
+---
+
+## Overview
+
+Mask Network is the core product of Dimension, which is positioned to become the bridge that connects internet users from Web 2.0 to Web 3.0. The foundational technology of Mask Network is a peer-to-peer encrypted messaging application, with new functions continuously being created around this foundation. We at Mask Network are strong believers in the ownership economy. People should own what they produce, people should own their data, their attention and the virtual space they choose to contribute to.
+
+Mask Network integrates decentralized social messaging, borderless payment network, and decentralized file storage and sharing to provide a safe and convenient portal for users to jump right into the continent of decentralized finance and then the new world of Web 3.0.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 100.00M MASK |
+| **Total Supply** | 100.00M MASK |
+| **Max Supply** | 100.00M MASK |
+| **Fully Diluted Valuation** | $39.27M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $41.45 (2021-02-24) |
+| **Current vs ATH** | -99.05% |
+| **All-Time Low** | $0.3324 (2026-06-06) |
+| **Current vs ATL** | +18.24% |
+| **24h Change** | -0.06% |
+| **7d Change** | -4.91% |
+| **30d Change** | +3.17% |
+| **1y Change** | -71.71% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x69af81e73a73b40adf4f3d4223cd9b1ece623074` |
+| Energi | `0x746514e2c7d91e1e84c20c54d1f6f537b28a7d8e` |
+| Polygon Pos | `0x2b9e7ccdf0f4e5b24757c1e1a80e311e34cb10c7` |
+| Binance Smart Chain | `0x2ed9a5c8c13b93955103b9a7c167b67ef4d568a3` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | MASK/USDT | N/A |
+| Kraken | MASK/USD | N/A |
+| Upbit | MASK/KRW | N/A |
+| Bitget | MASK/USDT | N/A |
+| KuCoin | MASK/USDT | N/A |
+| Crypto.com Exchange | MASK/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X69AF81E73A73B40ADF4F3D4223CD9B1ECE623074/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+| Sushiswap | 0X69AF81E73A73B40ADF4F3D4223CD9B1ECE623074/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+| Uniswap V3 (Ethereum) | 0X69AF81E73A73B40ADF4F3D4223CD9B1ECE623074/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://mask.io/](https://mask.io/) |
+| **Twitter** | [@realMaskNetwork](https://twitter.com/realMaskNetwork) |
+| **Reddit** | [https://www.reddit.com/r/MaskNetwork/](https://www.reddit.com/r/MaskNetwork/) |
+| **Telegram** | [maskbook_group](https://t.me/maskbook_group) (12,758 members) |
+| **Discord** | [https://discord.gg/4SVXvj7](https://discord.gg/4SVXvj7) |
+| **GitHub** | [https://github.com/DimensionDev](https://github.com/DimensionDev) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.82M |
+| **Market Cap Rank** | #520 |
+| **24h Range** | $0.3887 — $0.4004 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

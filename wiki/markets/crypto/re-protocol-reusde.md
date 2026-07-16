@@ -2,14 +2,14 @@
 title: "Re Protocol reUSDe"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
-aliases: ["REUSDE", "reUSDe", "Re Protocol reUSDe"]
+tags: [crypto, defi, stablecoin]
+aliases: ["REUSDE", "Re Protocol reUSDe", "reUSDe"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://re.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[yield-bearing-stablecoin]]", "[[ethena-usde]]"]
+related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoins]]", "[[yield-bearing-stablecoin]]"]
 ---
 
 # Re Protocol reUSDe

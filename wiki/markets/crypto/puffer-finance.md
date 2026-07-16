@@ -2,15 +2,15 @@
 title: "Puffer Finance"
 type: entity
 created: 2026-04-10
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, staking, restaking, ethereum, lst, lrt]
+tags: [crypto, defi, ethereum, lrt, lst, restaking, staking]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://www.puffer.fi"
-aliases: ["Puffer", "Puffer Finance", "Puffer-Finance", "PUFFER", "pufETH"]
-related: ["[[liquid-staking]]", "[[eigenlayer]]", "[[restaking]]", "[[ethereum]]", "[[etherfi]]"]
+aliases: ["PUFFER", "Puffer", "Puffer Finance", "Puffer-Finance", "pufETH"]
+related: ["[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[etherfi]]", "[[liquid-staking]]", "[[restaking]]"]
 ---
 
 **Puffer Finance** (governance token **PUFFER**; flagship LRT **pufETH**) is a decentralized, native liquid [[restaking]] protocol on [[ethereum|Ethereum]] built on top of [[eigenlayer|EigenLayer]]. Its flagship token, **pufETH**, is a **liquid restaking token (LRT)** representing staked ETH that is also restaked through EigenLayer to earn additional rewards. Puffer's core differentiator is **anti-slashing technology** that lets it lower the collateral barrier for solo node operators, positioning the protocol as a decentralization-first alternative to LRT competitors like [[etherfi|EtherFi]] and [[renzo|Renzo]].
@@ -122,3 +122,117 @@ Key risks for holders and traders:
 
 - General market knowledge; no specific wiki source ingested yet.
 - CoinGecko top-1000 snapshot, 2026-06-21: PUFFER not present (outside top 1000) — market block could not be refreshed.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PUFFER |
+| **Market Cap Rank** | #1380 |
+| **Market Cap** | $6.69M |
+| **Current Price** | $0.0132 |
+| **Categories** | Smart Contract Platform, Layer 2 (L2), Restaking, Liquid Restaking Governance Tokens, Rollup, Liquid Staking, Binance Alpha Spotlight, Made in USA |
+| **Website** | [https://www.puffer.fi/](https://www.puffer.fi/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 506.59M PUFFER |
+| **Total Supply** | 1.00B PUFFER |
+| **Max Supply** | 1.00B PUFFER |
+| **Fully Diluted Valuation** | $13.20M |
+| **Market Cap / FDV Ratio** | 0.51 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.9908 (2024-12-07) |
+| **Current vs ATH** | -98.66% |
+| **All-Time Low** | $0.0131 (2026-07-14) |
+| **Current vs ATL** | +1.40% |
+| **24h Change** | -3.10% |
+| **7d Change** | -3.42% |
+| **30d Change** | -40.38% |
+| **1y Change** | -93.28% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x4d1c297d39c5c1277964d0e3f8aa901493664530` |
+| Binance Smart Chain | `0x87d00066cf131ff54b72b134a217d5401e5392b6` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | PUFFER/USD | N/A |
+| Upbit | PUFFER/BTC | N/A |
+| Bitget | PUFFER/USDT | N/A |
+| KuCoin | PUFFER/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X4D1C297D39C5C1277964D0E3F8AA901493664530/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.puffer.fi/](https://www.puffer.fi/) |
+| **Twitter** | [@puffer_finance](https://twitter.com/puffer_finance) |
+| **Telegram** | [puffer_fi](https://t.me/puffer_fi) (28,351 members) |
+| **Discord** | [https://discord.com/invite/pufferfi](https://discord.com/invite/pufferfi) |
+| **Whitepaper** | [https://docs.puffer.fi/](https://docs.puffer.fi/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.91M |
+| **Market Cap Rank** | #1380 |
+| **24h Range** | $0.0132 — $0.0139 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,7 +2,7 @@
 title: "Ethena"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["ENA", "Ethena Labs"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://www.ethena.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ethena-usde]]", "[[usdtb]]", "[[stablecoins]]", "[[hyperliquid]]", "[[funding-rates]]", "[[stablecoin-yields]]", "[[sky]]", "[[aave]]", "[[restaking]]", "[[decentralized-exchange]]"]
+related: ["[[aave]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[restaking]]", "[[sky]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[usdtb]]"]
 ---
 
 # Ethena
@@ -311,3 +311,40 @@ Ethena's edge is **yield and scale**: USDe offers the highest sustainable on-cha
 - BeInCrypto: Ethena USDe stablecoin growth (peak $14.5B, ~$5.92B March 2026) — https://beincrypto.com/ethena-usde-stablecoin-growth/
 - DefiLlama USDe dashboard — https://defillama.com/stablecoin/ethena-usde
 - Verified via Perplexity sonar + web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 9.56B ENA |
+| **Total Supply** | 15.00B ENA |
+| **Max Supply** | 15.00B ENA |
+| **Fully Diluted Valuation** | $1.23B |
+| **Market Cap / FDV Ratio** | 0.64 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $126.22M |
+| **Market Cap Rank** | #79 |
+| **24h Range** | $0.0817 — $0.0852 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

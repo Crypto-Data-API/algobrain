@@ -2,10 +2,10 @@
 title: "Kaia"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["KAIA", "Klaytn", "Finschia"]
+aliases: ["Finschia", "KAIA", "Klaytn"]
 entity_type: protocol
 founded: 2024
 headquarters: "Kaia DLT Foundation, Abu Dhabi (chain is decentralized)"
@@ -130,3 +130,80 @@ KAIA is the largest-cap name in this basket and the cleanest listed proxy for th
 - PANews — "With the support of South Korea's policies, can Kaia enter the stablecoin summer?" (KB Kookmin pilot): https://www.panewslab.com/en/articles/f6dja1oa
 - Kaia official site (stablecoin settlement positioning): https://www.kaia.io/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | KAIA |
+| **Market Cap Rank** | #167 |
+| **Market Cap** | $200.73M |
+| **Current Price** | $0.0343 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1) |
+| **Website** | [https://kaia.io/](https://kaia.io/) |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.4067 (2024-12-03) |
+| **Current vs ATH** | -91.56% |
+| **All-Time Low** | $0.0324 (2026-06-25) |
+| **Current vs ATL** | +5.85% |
+| **24h Change** | +0.68% |
+| **7d Change** | -1.78% |
+| **30d Change** | -11.19% |
+| **1y Change** | -77.52% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | KAIA/USDT | N/A |
+| Bitget | KAIA/USDT | N/A |
+| KuCoin | KAIA/USDT | N/A |
+| Crypto.com Exchange | KAIA/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.62M |
+| **Market Cap Rank** | #167 |
+| **24h Range** | $0.0335 — $0.0345 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

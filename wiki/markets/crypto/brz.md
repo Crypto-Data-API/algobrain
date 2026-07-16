@@ -2,14 +2,14 @@
 title: "Brazilian Digital"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, forex]
+tags: [crypto, defi, forex, stablecoin]
 aliases: ["BRZ"]
 entity_type: protocol
 headquarters: "Brazil / Switzerland (Transfero Group)"
 website: "https://transfero.com/stablecoins/brz/"
-related: ["[[stablecoin]]", "[[brazilian-real]]", "[[forex]]", "[[crypto-markets]]", "[[ethereum]]", "[[depeg]]", "[[brla-digital-brla]]", "[[crown-brlv]]"]
+related: ["[[brazilian-real]]", "[[brla-digital-brla]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoin]]"]
 ---
 
 # Brazilian Digital
@@ -118,3 +118,110 @@ BRZ sits in the **regional / FX-denominated stablecoin** category. Catalysts tha
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BRZ |
+| **Market Cap Rank** | #419 |
+| **Market Cap** | $52.03M |
+| **Current Price** | $0.1943 |
+| **Hashing Algorithm** | Ethash |
+| **Categories** | Stablecoins, Decentralized Finance (DeFi), Fiat-backed Stablecoin |
+| **Website** | [https://transfero.com/stablecoins/brz/](https://transfero.com/stablecoins/brz/) |
+
+---
+
+## Overview
+
+BRZ is the first stable coin backed by Brazilian Reais (BRL). It'll allow Brazilian residents to directly ramp up in international exchanges and actively trade the Brazilian currency against pairs of different classes, including Bitcoin, other stable coins, utility and security tokens. It will be a powerful tool that will allow Brazilians to move and hedge Brazilians reais internationally. BRZ is always fully backed and holders can either purchase it for 1BRL or redeem it with a discount of 1% in Brazil.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 266.27M BRZ |
+| **Total Supply** | 266.27M BRZ |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $52.03M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $9.99 (2023-10-29) |
+| **Current vs ATH** | -98.04% |
+| **All-Time Low** | $0.00196567 (2026-03-07) |
+| **Current vs ATL** | +9840.27% |
+| **24h Change** | -0.11% |
+| **7d Change** | +0.47% |
+| **30d Change** | -1.57% |
+| **1y Change** | +8.43% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x01d33fd36ec67c6ada32cf36b31e88ee190b1839` |
+| Algorand | `112866019` |
+| Rootstock | `0xe355c280131dfaf18bf1c3648aee3c396db6b5fd` |
+| Solana | `BRZbFNQDcWLfcdHmAkqEVnLHCAWKTRf6eHyEaWdZp3JN` |
+| Polygon Pos | `0x4ed141110f6eeeaba9a1df36d8c26f684d2475dc` |
+| Binance Smart Chain | `0x71be881e9c5d4465b3fff61e89c6f3651e69b5bb` |
+| Avalanche | `0x491a4eb4f1fc3bff8e1d2fc856a6a46663ad556f` |
+| Stellar | `BRZ-GABMA6FPH3OJXNTGWO7PROF7I5WPQUZOB4BLTBTP4FK6QV7HWISLIEO2` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://transfero.com/stablecoins/brz/](https://transfero.com/stablecoins/brz/) |
+| **Twitter** | [@BrzToken](https://twitter.com/BrzToken) |
+| **Telegram** | [brztoken](https://t.me/brztoken) (283 members) |
+| **GitHub** | [https://github.com/TransferoSwiss](https://github.com/TransferoSwiss) |
+| **Whitepaper** | [https://drive.google.com/drive/folders/1p5IJH9xi0NOFHam42rFN59-XL0JvHg4t](https://drive.google.com/drive/folders/1p5IJH9xi0NOFHam42rFN59-XL0JvHg4t) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $34,027.00 |
+| **Market Cap Rank** | #419 |
+| **24h Range** | $0.1941 — $0.1957 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

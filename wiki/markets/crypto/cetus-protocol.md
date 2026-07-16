@@ -2,14 +2,14 @@
 title: "Cetus Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, liquidity]
-aliases: ["CETUS", "Cetus DEX", "Cetus CLMM"]
+aliases: ["CETUS", "Cetus CLMM", "Cetus DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.cetus.zone/"
-related: ["[[crypto-markets]]", "[[uniswap]]", "[[raydium]]", "[[orca]]", "[[move-clmm-vulnerability-class]]", "[[2026-exploit-target-watchlist]]", "[[ai-amplified-exploit-arbitrage]]", "[[governance-restitution-arbitrage]]"]
+related: ["[[2026-exploit-target-watchlist]]", "[[ai-amplified-exploit-arbitrage]]", "[[crypto-markets]]", "[[governance-restitution-arbitrage]]", "[[move-clmm-vulnerability-class]]", "[[orca]]", "[[raydium]]", "[[uniswap]]"]
 ---
 
 # Cetus Protocol

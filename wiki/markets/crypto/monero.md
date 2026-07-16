@@ -2,15 +2,15 @@
 title: "Monero"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["XMR"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "https://www.getmonero.org/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[zcash]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[dash]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dash]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[zcash]]"]
 ---
 
 # Monero
@@ -282,3 +282,48 @@ Monero is the textbook case of a **liquidity-constrained, delisting-exposed** as
 - CoinDesk — "Privacy tokens rally as XMR breaks all-time high" (2026-01-12): https://www.coindesk.com/markets/2026/01/12/privacy-tokens-rally-as-xmr-breaks-all-time-high
 - DL News — "Privacy coins continue to rally — how long will the hype last?": https://www.dlnews.com/articles/markets/privacy-coins-are-surging-but-for-how-much-longer/
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 18.78M XMR |
+| **Total Supply** | 18.78M XMR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $6.26B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $797.73 (2026-01-14) |
+| **Current vs ATH** | -58.20% |
+| **All-Time Low** | $0.2162 (2015-01-14) |
+| **Current vs ATL** | +154139.87% |
+| **24h Change** | +2.56% |
+| **7d Change** | +3.55% |
+| **30d Change** | -4.22% |
+| **1y Change** | -0.37% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $98.80M |
+| **Market Cap Rank** | #19 |
+| **24h Range** | $324.74 — $333.98 |
+| **CoinGecko Sentiment** | 84% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

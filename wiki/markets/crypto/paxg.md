@@ -2,7 +2,7 @@
 title: "PAX Gold (PAXG)"
 type: entity
 created: 2026-04-06
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, gold, paxos, stablecoin, tokenized-asset]
 entity_type: protocol
@@ -176,4 +176,4 @@ At any time, PAXG holders can lookup the serial number, value and physical chara
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

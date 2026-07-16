@@ -2,14 +2,14 @@
 title: "PRIME (Hastra)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
-aliases: ["PRIME", "Hastra PRIME", "Hastra"]
+tags: [altcoins, crypto, defi]
+aliases: ["Hastra", "Hastra PRIME", "PRIME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://hastra.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[figure-heloc]]", "[[real-world-assets]]", "[[rwa]]", "[[private-credit]]", "[[kamino]]", "[[chainlink]]", "[[stablecoin-yields]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[figure-heloc]]", "[[kamino]]", "[[private-credit]]", "[[real-world-assets]]", "[[rwa]]", "[[solana]]", "[[stablecoin-yields]]"]
 ---
 
 # PRIME (Hastra)
@@ -199,3 +199,33 @@ On-chain only as of the April 2026 snapshot: Solana DEX routing (Raydium/Jupiter
 - Phemex News, "PRIME RWA Asset Debuts on Solana's Kamino" — https://phemex.com/news/article/prime-rwa-asset-launches-on-solanas-kamino-platform-42393
 - Cryptonews, "Hastra Taps Chainlink to Support Yield Products Amid $19B+ Equity Backing From Figure" — https://cryptonews.net/news/defi/32030810/
 - Verified via web search, 2026-06-10: ~8% APY HELOC yield, wYLDS→PRIME staking mechanics, Figure $1B+/month originations Dec 2025, Kamino listing
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $929,632.00 |
+| **Market Cap Rank** | #115 |
+| **24h Range** | $1.05 — $1.05 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

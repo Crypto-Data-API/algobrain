@@ -2,14 +2,14 @@
 title: "KernelDAO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["KERNEL", "Kernel DAO", "KernelDAO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kerneldao.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[restaking]]", "[[bnb-chain]]"]
+related: ["[[bnb-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[restaking]]"]
 ---
 
 # KernelDAO

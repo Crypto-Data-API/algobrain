@@ -2,14 +2,14 @@
 title: "Metronome Synth USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, stablecoin]
 aliases: ["MSUSD", "msUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://metronome.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[collateralization]]", "[[depeg]]", "[[defi]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[stablecoin]]"]
 ---
 
 # Metronome Synth USD

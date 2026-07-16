@@ -2,14 +2,14 @@
 title: "Qtum"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["QTUM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://qtum.org/en/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zilliqa]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zilliqa]]"]
 ---
 
 # Qtum
@@ -148,3 +148,119 @@ Qtum's narrative is the **"Bitcoin-Ethereum hybrid"** — combining Bitcoin's ba
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | QTUM |
+| **Market Cap Rank** | #336 |
+| **Market Cap** | $71.60M |
+| **Current Price** | $0.6751 |
+| **Hashing Algorithm** | Proof of Stake |
+| **Categories** | Smart Contract Platform, Proof of Stake (PoS), Made in China |
+| **Website** | [https://qtum.org/en/](https://qtum.org/en/) |
+
+---
+
+## Overview
+
+Qtum is a decentralized and open-source smart contracts platform and value transfer protocol. Qtum uses proof-of-stake consensus, meaning node operators are rewarded for validating transactions. It is a DGP governed blockchain where community participants can vote to change certain network parameters. Qtum is built on a bitcoin core fork, but the foundation has created its own hybrid blockchain with the help of several key tools. The coin uses bitcoin’s chain because of its simple and stable nature, allowing the foundation to build upon it more easily.
+
+As the QTUM project is a hybrid of Bitcoin and Ethereum, its team comprises of members from both Bitcoin and Ethereum community. They also have team members who formerly worked with Tencent, Alibaba, Nasdaq etc. Apart from that, they are backed by some notable VCs and prominent people from the Blockchain community such as Patrick Dai (Project Co-Founder), Neil Mahi (Chief Blockchain Architect/Co-Founder) and Jordan Earls (Lead Developer/Co-Founder).
+
+Qtum provides a Turing-complete blockchain stack and is able to execute smart contracts and decentralised applications like the Ethereum blockchain.
+
+Qtum builds on Bitcoin's UTXO transaction model and uses the Proof-of-Stake algorithm. It is backed by some highly prominent members of the blockchain community such as Anthony Di Iorio, Xu Star, Bo Shen, David Lee, Jehan Chu and Roger Ver.
+
+Qtum sold over 10 million dollars’ worth of its tokens after only 90 minutes, eventually raising a total value of $15.7 million before stopping the campaign early after only 5 days. They raised a total amount of 11,156.766 bitcoins (BTC) and 77,081.031 ether (ETH) in exchange for the 51 million Qtum tokens being distributed to the public. In Qtum’s whitepaper, 51% of the coins were distributed to the public via the crowdfunding campaign. Of the remaining 49%, 29% of the coins would be allocated as community incentives, and the remaining 20% would be distributed to the early backers and ...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 106.07M QTUM |
+| **Total Supply** | 107.82M QTUM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $72.79M |
+| **Market Cap / FDV Ratio** | 0.98 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $100.22 (2018-01-06) |
+| **Current vs ATH** | -99.33% |
+| **All-Time Low** | $0.6399 (2026-06-25) |
+| **Current vs ATL** | +5.50% |
+| **24h Change** | -1.49% |
+| **7d Change** | -3.50% |
+| **30d Change** | -10.31% |
+| **1y Change** | -70.84% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | QTUM/USDT | N/A |
+| Kraken | QTUM/USD | N/A |
+| Upbit | QTUM/KRW | N/A |
+| Bitget | QTUM/USDT | N/A |
+| KuCoin | QTUM/USDT | N/A |
+| Crypto.com Exchange | QTUM/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://qtum.org/en/](https://qtum.org/en/) |
+| **Twitter** | [@qtum](https://twitter.com/qtum) |
+| **Reddit** | [https://www.reddit.com/r/Qtum](https://www.reddit.com/r/Qtum) |
+| **GitHub** | [https://github.com/qtumproject/qtum](https://github.com/qtumproject/qtum) |
+| **Whitepaper** | [https://qtum.org/wp-content/uploads/2017/02/Qtum_blockchain_economy_whitepaper_20170209_EN.pdf](https://qtum.org/wp-content/uploads/2017/02/Qtum_blockchain_economy_whitepaper_20170209_EN.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 1,187 |
+| **GitHub Forks** | 407 |
+| **Pull Requests Merged** | 427 |
+| **Contributors** | 30 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.82M |
+| **Market Cap Rank** | #336 |
+| **24h Range** | $0.6728 — $0.6977 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

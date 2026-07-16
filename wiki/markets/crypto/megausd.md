@@ -2,14 +2,14 @@
 title: "MegaUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["USDM", "USDm"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://megaeth.com/"
-related: ["[[stablecoins]]", "[[ethena-usde]]", "[[usde]]", "[[megaeth]]", "[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[megaeth]]", "[[stablecoins]]", "[[usde]]"]
 ---
 
 # MegaUSD
@@ -132,3 +132,102 @@ USDm sits at the intersection of two themes: **synthetic dollars** (Ethena-style
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - Protocol description from MegaETH ([https://megaeth.com/](https://megaeth.com/)) and Ethena stack documentation. General market knowledge; no specific wiki source ingested yet for the MegaETH/Ethena issuance details.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDM |
+| **Market Cap Rank** | #1997 |
+| **Market Cap** | $2.72M |
+| **Current Price** | $0.9992 |
+| **Categories** | Stablecoins, Algorithmic Stablecoin, Yield-Bearing Stablecoin |
+| **Website** | [https://www.monetrix.xyz/](https://www.monetrix.xyz/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.72M USDM |
+| **Total Supply** | 2.72M USDM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.72M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.01 (2026-07-07) |
+| **Current vs ATH** | -1.23% |
+| **All-Time Low** | $0.9812 (2026-07-13) |
+| **Current vs ATL** | +1.91% |
+| **24h Change** | -0.06% |
+| **7d Change** | +0.04% |
+| **30d Change** | +0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Hyperevm
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Hyperevm | `0xe2d2959f89b6389deb624bf076fe7d9e5401f377` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.monetrix.xyz/](https://www.monetrix.xyz/) |
+| **Twitter** | [@monetrix_xyz](https://twitter.com/monetrix_xyz) |
+| **Telegram** | [monetrix_announcement](https://t.me/monetrix_announcement) (1,010 members) |
+| **Discord** | [https://discord.com/invite/tmYep4sbVY](https://discord.com/invite/tmYep4sbVY) |
+| **Whitepaper** | [https://doc.monetrix.xyz/](https://doc.monetrix.xyz/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $516,825.00 |
+| **Market Cap Rank** | #1997 |
+| **24h Range** | $0.9941 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

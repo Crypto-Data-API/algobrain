@@ -2,14 +2,14 @@
 title: "Kusama"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["KSM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kusama.network/"
-related: ["[[crypto-markets]]", "[[polkadot]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-1]]", "[[proof-of-stake]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[polkadot]]", "[[proof-of-stake]]"]
 ---
 
 # Kusama
@@ -147,3 +147,122 @@ KSM is the smallest and highest-beta of the interoperability-L1 cohort, sharing 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | KSM |
+| **Market Cap Rank** | #382 |
+| **Market Cap** | $59.86M |
+| **Current Price** | $3.23 |
+| **Categories** | Smart Contract Platform, Proof of Stake (PoS), Made in USA |
+| **Website** | [https://kusama.network/](https://kusama.network/) |
+
+---
+
+## Overview
+
+Kusama is a public blockchain network that is running the exact same codebase as Polkadot. It is aimed to be a canary build for the Polkadot network which is an experimental and development environment for new features that will eventually be deployed to Polkadot. Because of the experimental nature of Kusama, the developmental speed is much faster and it has seen significant traction since launched in 2019.
+
+Kusama is an early, highly experimental version of Polkadot presenting real economic conditions. The community will own the network – there will be no central kill switch. Kusama will exist as long as its community maintains it and we envision it will cater to new, early functionality and projects preparing to develop and deploy on Polkadot.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 18.52M KSM |
+| **Total Supply** | 18.52M KSM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $59.86M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $621.71 (2021-05-18) |
+| **Current vs ATH** | -99.48% |
+| **All-Time Low** | $0.8766 (2020-01-14) |
+| **Current vs ATL** | +268.87% |
+| **24h Change** | -2.12% |
+| **7d Change** | -1.52% |
+| **30d Change** | -15.06% |
+| **1y Change** | -79.21% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Hydration | `asset_registry%2F1000771` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | KSM/USDT | N/A |
+| Kraken | KSM/USD | N/A |
+| Bitget | KSM/USDT | N/A |
+| KuCoin | KSM/USDT | N/A |
+| Crypto.com Exchange | KSM/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://kusama.network/](https://kusama.network/) |
+| **Twitter** | [@kusamanetwork](https://twitter.com/kusamanetwork) |
+| **GitHub** | [https://github.com/paritytech/polkadot-sdk](https://github.com/paritytech/polkadot-sdk) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 31 |
+| **GitHub Forks** | 23 |
+| **Commits (4 weeks)** | 8 |
+| **Pull Requests Merged** | 33 |
+| **Contributors** | 17 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.63M |
+| **Market Cap Rank** | #382 |
+| **24h Range** | $3.23 — $3.37 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

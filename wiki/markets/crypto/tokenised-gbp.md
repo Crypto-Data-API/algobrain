@@ -2,14 +2,14 @@
 title: "Tokenised GBP"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, forex, real-world-assets, tokenization]
+tags: [crypto, forex, real-world-assets, stablecoin, tokenization]
 aliases: ["TGBP", "tGBP"]
 entity_type: protocol
 headquarters: "United Kingdom"
 website: "https://www.tokenisedgbp.com"
-related: ["[[stablecoin]]", "[[forex]]", "[[british-pound]]", "[[real-world-assets]]", "[[tokenization]]", "[[treasuries]]", "[[depeg]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[british-pound]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[treasuries]]"]
 ---
 
 # Tokenised GBP
@@ -160,3 +160,104 @@ Context: as of 2026-06-23 the wider crypto market reads **Extreme Fear (F&G 21)*
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko). General market knowledge on GBP-pegged stablecoins; no additional specific wiki source ingested yet.
+
+## Overview
+
+tGBP is the first and only British Pound pegged stablecoin issued by a UK FCA-registered firm. tGBP maintains a 1:1 peg to the British Pound Sterling through a robust, transparent backing mechanism designed for stability, redeemability, and regulatory compliance. tGBP is fully collateralised by fiat and short term zero coupon bonds issued by HM Treasury. tGBP facilitates on-chain sterling payments, programmable transactions, and exposure to GBP-linked Real World Assets (RWAs) like tokenised bonds.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 25.59M TGBP |
+| **Total Supply** | 25.59M TGBP |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $34.56M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.38 (2026-01-29) |
+| **Current vs ATH** | -2.35% |
+| **All-Time Low** | $1.30 (2026-04-13) |
+| **Current vs ATL** | +3.82% |
+| **24h Change** | +0.79% |
+| **7d Change** | +0.73% |
+| **30d Change** | +0.67% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x27f6c8289550fce67f6b50bed1f519966afe5287` |
+| Solana | `2zMqyX4AYCk6mgy5UZ2S7zUaLxwERhK5WjqDzkPPbSpW` |
+| Base | `0x27f6c8289550fce67f6b50bed1f519966afe5287` |
+| Binance Smart Chain | `0x27f6c8289550fce67f6b50bed1f519966afe5287` |
+| Polygon Pos | `0x27f6c8289550fce67f6b50bed1f519966afe5287` |
+| Arbitrum One | `0x27f6c8289550fce67f6b50bed1f519966afe5287` |
+| Xdai | `0x1f34490f8e8e776ffc547b39b864364035eaf44f` |
+| Avalanche | `0x27f6c8289550fce67f6b50bed1f519966afe5287` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | TGBP/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | 2ZMQYX4AYCK6MGY5UZ2S7ZUALXWERHK5WJQDZKPPBSPW/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+| Uniswap V3 (Ethereum) | 0X27F6C8289550FCE67F6B50BED1F519966AFE5287/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.tokenisedgbp.com](https://www.tokenisedgbp.com) |
+| **Twitter** | [@tokenGBP](https://twitter.com/tokenGBP) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $405,886.00 |
+| **Market Cap Rank** | #569 |
+| **24h Range** | $1.34 — $1.35 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

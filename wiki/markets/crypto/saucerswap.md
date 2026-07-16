@@ -2,14 +2,14 @@
 title: "SaucerSwap"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, automated-market-maker]
+tags: [automated-market-maker, crypto, defi]
 aliases: ["SAUCE", "SaucerSwap Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.saucerswap.finance/"
-related: ["[[crypto-markets]]", "[[hedera]]", "[[hbar]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[defi]]", "[[uniswap]]", "[[liquidity-pool]]", "[[impermanent-loss]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[hbar]]", "[[hedera]]", "[[impermanent-loss]]", "[[liquidity-pool]]", "[[uniswap]]"]
 ---
 
 # SaucerSwap

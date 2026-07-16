@@ -2,15 +2,15 @@
 title: "Circle USYC"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, treasuries, defi]
-aliases: ["USYC", "Hashnote USYC", "Hashnote International Short Duration Yield Fund"]
+tags: [crypto, defi, ethereum, treasuries]
+aliases: ["Hashnote International Short Duration Yield Fund", "Hashnote USYC", "USYC"]
 entity_type: protocol
 founded: 2023
 headquarters: "Cayman Islands (fund); issuer owned by Circle, USA"
 website: "https://usyc.hashnote.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[circle]]", "[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[tokenized-treasuries]]"]
+related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[circle]]", "[[crypto-markets]]", "[[ethereum]]", "[[tokenized-treasuries]]"]
 ---
 
 # Circle USYC
@@ -181,3 +181,47 @@ USYC is a **permissioned institutional product** — no retail spot listings. Ac
 - CryptoSlate, "BlackRock just lost control of the $10B tokenized treasury market to Circle" (Jan 2026) — https://cryptoslate.com/blackrock-just-lost-control-of-the-10b-tokenized-treasury-market-to-circle-for-one-simple-mechanical-reason/
 - CoinGecko / cryptodataapi.com market snapshot, 2026-06-20 ($3.07B mcap, rank #31, $1.13 NAV); earlier baseline CoinGecko top-1000 (2026-04-09)
 - Verified via Perplexity sonar, 2026-06-10
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.13 (2026-07-14) |
+| **Current vs ATH** | -0.01% |
+| **All-Time Low** | $1.03 (2024-12-05) |
+| **Current vs ATL** | +10.23% |
+| **24h Change** | N/A |
+| **7d Change** | +0.20% |
+| **30d Change** | +0.46% |
+| **1y Change** | +3.48% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $105.19 |
+| **Market Cap Rank** | #30 |
+| **Last Updated** | 2026-07-14 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

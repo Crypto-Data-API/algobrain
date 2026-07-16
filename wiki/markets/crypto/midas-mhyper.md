@@ -2,14 +2,14 @@
 title: "Midas mHYPER"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, real-world-assets, tokenization, yield]
 aliases: ["MHYPER", "mHYPER"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://midas.app/mhyper"
-related: ["[[real-world-assets]]", "[[tokenization]]", "[[stablecoin]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]"]
 ---
 
 # Midas mHYPER
@@ -150,3 +150,91 @@ mHYPER sits in the **tokenized-fund / RWA yield** category — bringing a profes
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko). General market knowledge on Midas Liquid Yield Tokens and Hyperithm; no additional specific wiki source ingested yet.
+
+## Overview
+
+mHYPER is a tokenised certificate issued by Midas and intended to reference the performance of selected market-neutral, stablecoin-focused strategies deployed across on-chain markets and ecosystems. The strategy is monitored by Hyperithm, a digital asset manager based in Tokyo and Seoul, acting as the appointed Risk Manager. mHYPER is designed to provide on-chain access to diversified DeFi opportunities while maintaining a market-neutral investment profile.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 42.65M MHYPER |
+| **Total Supply** | 42.65M MHYPER |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $47.46M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.11 (2026-07-14) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $1.02 (2025-09-12) |
+| **Current vs ATL** | +8.64% |
+| **24h Change** | +0.00% |
+| **7d Change** | +0.22% |
+| **30d Change** | +0.89% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x9b5528528656dbc094765e2abb79f293c21191b9` |
+| Monad | `0xd90f6bfed23ffde40106fc4498dd2e9edb95e4e7` |
+| Plasma | `0xb31bea5c2a43f942a3800558b1aa25978da75f8a` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://midas.app/mhyper](https://midas.app/mhyper) |
+| **Twitter** | [@midasrwa](https://twitter.com/midasrwa) |
+| **Telegram** | [midasrwa](https://t.me/midasrwa) (1.31M members) |
+| **Discord** | [https://discord.gg/midasrwa](https://discord.gg/midasrwa) |
+| **Whitepaper** | [https://docs.midas.app/](https://docs.midas.app/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.07 |
+| **Market Cap Rank** | #448 |
+| **24h Range** | $1.11 — $1.11 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

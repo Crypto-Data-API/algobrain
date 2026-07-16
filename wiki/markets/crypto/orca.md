@@ -2,14 +2,14 @@
 title: "Orca"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["ORCA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.orca.so/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[yield-farming]]", "[[meteora]]", "[[impermanent-loss]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[impermanent-loss]]", "[[meteora]]", "[[solana]]", "[[yield-farming]]"]
 ---
 
 # Orca
@@ -139,3 +139,129 @@ Qualitatively, ORCA is a **real-revenue Solana DEX with a value-capture discount
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 from CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet for protocol mechanics.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ORCA |
+| **Market Cap Rank** | #328 |
+| **Market Cap** | $73.60M |
+| **Current Price** | $1.21 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), Yield Farming, Automated Market Maker (AMM), Made in USA |
+| **Website** | [https://www.orca.so/](https://www.orca.so/) |
+
+---
+
+## Overview
+
+Orca is the most user-friendly DEX on Solana.
+
+Orca is one of the first general-purpose AMMs launched on Solana. Users can swap assets, provide liquidity, and earn yield through an easy-to-use interface. Projects can use Orca as a money-lego to easily integrate swapping, farming, or on-chain data into their dApp.
+
+Orca strives to provide easy and effective financial tools for everyone, bringing DeFi to the masses.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 60.80M ORCA |
+| **Total Supply** | 75.00M ORCA |
+| **Max Supply** | 100.00M ORCA |
+| **Fully Diluted Valuation** | $90.78M |
+| **Market Cap / FDV Ratio** | 0.81 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $20.33 (2021-10-02) |
+| **Current vs ATH** | -94.04% |
+| **All-Time Low** | $0.3511 (2022-06-19) |
+| **Current vs ATL** | +245.19% |
+| **24h Change** | -0.02% |
+| **7d Change** | +0.48% |
+| **30d Change** | +2.33% |
+| **1y Change** | -52.74% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ORCA/USDT | N/A |
+| Kraken | ORCA/USD | N/A |
+| Upbit | ORCA/KRW | N/A |
+| Bitget | ORCA/USDT | N/A |
+| KuCoin | ORCA/USDT | N/A |
+| Crypto.com Exchange | ORCA/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | ORCAEKTDK7LKZ57VAAYR9QENSVEPFIU6QEMU1KEKTZE/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.orca.so/](https://www.orca.so/) |
+| **Twitter** | [@orca_so](https://twitter.com/orca_so) |
+| **Reddit** | [https://www.reddit.com/r/orca_so/](https://www.reddit.com/r/orca_so/) |
+| **Discord** | [https://discord.com/invite/nSwGWn5KSG](https://discord.com/invite/nSwGWn5KSG) |
+| **GitHub** | [https://github.com/orca-so](https://github.com/orca-so) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $11.98M |
+| **Market Cap Rank** | #328 |
+| **24h Range** | $1.20 — $1.23 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

@@ -2,14 +2,14 @@
 title: "Immutable"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["IMX", "Immutable X"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://imx.community/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[layer-1]]", "[[gaming-tokens]]", "[[proof-of-stake]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]"]
 ---
 
 # Immutable
@@ -161,3 +161,118 @@ The narrative ties IMX to the GameFi cycle: if Web3 gaming achieves mainstream a
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | IMX |
+| **Market Cap Rank** | #249 |
+| **Market Cap** | $108.20M |
+| **Current Price** | $0.1284 |
+| **Categories** | Smart Contract Platform, Gaming (GameFi), NFT, Play To Earn, Layer 2 (L2), Zero Knowledge (ZK), Rollup, Gaming Blockchains (+2 more) |
+| **Website** | [https://imx.community/](https://imx.community/) |
+
+---
+
+## Overview
+
+IMX is the native token for the Immutable X network, the first zk-rollup for NFT on Ethereum.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 842.44M IMX |
+| **Total Supply** | 2.00B IMX |
+| **Max Supply** | 2.00B IMX |
+| **Fully Diluted Valuation** | $256.88M |
+| **Market Cap / FDV Ratio** | 0.42 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $9.52 (2021-11-26) |
+| **Current vs ATH** | -98.65% |
+| **All-Time Low** | $0.1125 (2026-07-01) |
+| **Current vs ATL** | +14.19% |
+| **24h Change** | -1.76% |
+| **7d Change** | -6.91% |
+| **30d Change** | -13.93% |
+| **1y Change** | -76.31% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xf57e7e7c23978c3caec3c3548e3d615c346e79ff` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | IMX/USDT | N/A |
+| Kraken | IMX/USD | N/A |
+| Upbit | IMX/KRW | N/A |
+| Bitget | IMX/USDT | N/A |
+| KuCoin | IMX/USDT | N/A |
+| Crypto.com Exchange | IMX/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XF57E7E7C23978C3CAEC3C3548E3D615C346E79FF/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0XF57E7E7C23978C3CAEC3C3548E3D615C346E79FF/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://imx.community/](https://imx.community/) |
+| **Twitter** | [@Immutable](https://twitter.com/Immutable) |
+| **Reddit** | [https://www.reddit.com/r/ImmutableX/](https://www.reddit.com/r/ImmutableX/) |
+| **Telegram** | [immutablex](https://t.me/immutablex) (10,384 members) |
+| **Discord** | [https://discord.com/channels/765480457256042496/765871633990287390](https://discord.com/channels/765480457256042496/765871633990287390) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.66M |
+| **Market Cap Rank** | #249 |
+| **24h Range** | $0.1278 — $0.1327 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

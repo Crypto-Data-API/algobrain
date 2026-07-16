@@ -2,14 +2,14 @@
 title: "Fidelity Digital Interest Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, tokenized-treasuries, stocks]
+tags: [crypto, real-world-assets, stocks, tokenized-treasuries]
 aliases: ["FDIT", "Fidelity Digital Interest Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.fidelity.com/"
-related: ["[[real-world-assets]]", "[[ousg]]", "[[hashnote-usyc]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hashnote-usyc]]", "[[ousg]]", "[[real-world-assets]]"]
 ---
 
 # Fidelity Digital Interest Token
@@ -145,3 +145,93 @@ With the Crypto [[fear-and-greed-index|Fear & Greed Index]] at **21 ("Extreme Fe
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - cryptodataapi.com / CoinGecko market snapshot, 2026-06-21
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FDIT |
+| **Market Cap Rank** | #310 |
+| **Market Cap** | $76.69M |
+| **Current Price** | $1.00 |
+| **Categories** | Real World Assets (RWA) |
+| **Website** | [https://www.fidelity.com/](https://www.fidelity.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 76.69M FDIT |
+| **Total Supply** | 76.69M FDIT |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $76.69M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.00 (2025-09-17) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $1.00 (2025-09-17) |
+| **Current vs ATL** | +0.00% |
+| **24h Change** | +0.00% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x48ab4e39ac59f4e88974804b04a991b3a402717f` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.fidelity.com/](https://www.fidelity.com/) |
+| **Twitter** | [@Fidelity](https://twitter.com/Fidelity) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #310 |
+| **24h Range** | $1.00 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

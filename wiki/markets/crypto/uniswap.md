@@ -2,15 +2,15 @@
 title: "Uniswap"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
-aliases: ["UNI", "Uniswap Protocol", "UNIfication"]
+aliases: ["UNI", "UNIfication", "Uniswap Protocol"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized protocol; Uniswap Labs: New York, USA"
 website: "https://uniswap.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[automated-market-maker]]", "[[aave]]", "[[hyperliquid]]", "[[sky]]", "[[narrative-trading]]"]
+related: ["[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sky]]"]
 ---
 
 # Uniswap
@@ -321,3 +321,46 @@ Uniswap's moat: **brand, liquidity depth, and developer mindshare**, now reinfor
 - Uniswap Agora governance, UNIfication proposal — https://vote.uniswapfoundation.org/proposals/93
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 625.57M UNI |
+| **Total Supply** | 892.71M UNI |
+| **Max Supply** | 1.00B UNI |
+| **Fully Diluted Valuation** | $3.32B |
+| **Market Cap / FDV Ratio** | 0.70 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $183.71M |
+| **Market Cap Rank** | #39 |
+| **24h Range** | $3.58 — $3.74 |
+| **CoinGecko Sentiment** | 67% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "Auki Labs"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, machine-learning]
+tags: [altcoins, crypto, defi, machine-learning]
 aliases: ["AUKI", "Auki", "Posemesh"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.auki.com/"
-related: ["[[crypto-markets]]", "[[base]]", "[[depin]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[depin]]"]
 ---
 
 # Auki Labs

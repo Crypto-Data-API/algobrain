@@ -2,15 +2,15 @@
 title: "Artificial Superintelligence Alliance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, altcoins]
-aliases: ["FET", "Fetch.ai", "ASI Alliance", "ASI"]
+tags: [ai-trading, altcoins, crypto, nft]
+aliases: ["ASI", "ASI Alliance", "FET", "Fetch.ai"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized (Fetch.ai: Cambridge, UK; SingularityNET)"
 website: "https://www.superintelligence.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ocean-protocol]]", "[[narrative-trading]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[ocean-protocol]]"]
 ---
 
 # Artificial Superintelligence Alliance
@@ -299,3 +299,22 @@ The April→June 2026 path (rank #97 → #114, volume halved) tracks the broader
 - CoinLaw: "Ocean Protocol Accused of Dumping $100M in FET After ASI Exit" — https://coinlaw.io/ocean-protocol-accused-dumping-fet-after-asi-exit/
 - ASI Alliance vision paper — https://docs.superintelligence.io/artificial-superintelligence-alliance/vision-paper
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.24B FET |
+| **Total Supply** | 2.71B FET |
+| **Max Supply** | 2.71B FET |
+| **Fully Diluted Valuation** | $428.61M |
+| **Market Cap / FDV Ratio** | 0.83 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

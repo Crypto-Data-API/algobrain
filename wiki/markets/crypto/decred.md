@@ -2,15 +2,15 @@
 title: "Decred"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, regulation]
+tags: [altcoins, crypto, regulation]
 aliases: ["DCR", "Decred (DCR)"]
 entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://decred.org/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[crypto-narratives-overview]]", "[[binance]]", "[[kraken]]"]
+related: ["[[binance]]", "[[bitcoin]]", "[[crypto-markets]]", "[[crypto-narratives-overview]]", "[[kraken]]"]
 ---
 
 # Decred
@@ -187,3 +187,98 @@ DCR is best framed as a **governance + sound-money asset**, not a cash-flow prot
 - Decred treasury data — https://dcrdata.decred.org/treasury
 - Decred docs — https://docs.decred.org/
 - Verified via Perplexity (sonar) + web search, 2026-06-10: DCP-0013 4% treasury cap approved Jan 2026 (~99.98% support), treasury >867k DCR, Bison Wallet 1.0 Jan 2026
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DCR |
+| **Market Cap Rank** | #145 |
+| **Market Cap** | $239.02M |
+| **Current Price** | $13.65 |
+| **Genesis Date** | 2016-02-08 |
+| **Hashing Algorithm** | Blake-256 |
+| **Categories** | Smart Contract Platform, Privacy Coins, Layer 1 (L1), Proof of Stake (PoS), Proof of Work (PoW), Made in USA, Privacy |
+| **Website** | [https://decred.org/](https://decred.org/) |
+
+---
+
+## Overview
+
+Decred aims to build a community-directed digital currency whose security, adaptability, and sustainability make it a superior long-term store of value. It is achieving this aim by building the world's first truly decentralized autonomous organization.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 17.51M DCR |
+| **Total Supply** | 17.51M DCR |
+| **Max Supply** | 21.00M DCR |
+| **Fully Diluted Valuation** | $239.04M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $247.35 (2021-04-17) |
+| **Current vs ATH** | -94.51% |
+| **All-Time Low** | $0.4315 (2016-12-26) |
+| **Current vs ATL** | +3047.68% |
+| **24h Change** | +0.39% |
+| **7d Change** | +24.53% |
+| **30d Change** | +6.60% |
+| **1y Change** | -17.37% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | DCR/USDT | N/A |
+| Kraken | DCR/USD | N/A |
+| KuCoin | DCR/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.69M |
+| **Market Cap Rank** | #145 |
+| **24h Range** | $13.15 — $14.15 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

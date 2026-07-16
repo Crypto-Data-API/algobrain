@@ -2,14 +2,14 @@
 title: "BOLD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, stablecoin]
-aliases: ["BOLD", "Liquity BOLD", "BOLD stablecoin"]
+aliases: ["BOLD", "BOLD stablecoin", "Liquity BOLD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[liquity]]", "[[liquity-usd]]", "[[stablecoin]]", "[[collateralization]]", "[[cdp]]", "[[depeg]]", "[[liquid-staking]]", "[[maker]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquid-staking]]", "[[liquity-usd]]", "[[liquity]]", "[[maker]]", "[[stablecoin]]"]
 ---
 
 # BOLD

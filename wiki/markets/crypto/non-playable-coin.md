@@ -2,14 +2,14 @@
 title: "Non-Playable Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, meme]
+tags: [crypto, meme, nft]
 aliases: ["NPC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.npc.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[base]]", "[[solana]]", "[[meme-coin]]", "[[meme-coin-cycle]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[solana]]"]
 ---
 
 # Non-Playable Coin
@@ -157,3 +157,115 @@ Speculative asset; apply strict [[risk-management]] and treat capital as fully a
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | NPC |
+| **Market Cap Rank** | #403 |
+| **Market Cap** | $55.04M |
+| **Current Price** | $0.00683681 |
+| **Categories** | NFT, Meme, Hybrid Token Standards, Wojak-Themed, 4chan-Themed, Base Native |
+| **Website** | [https://www.npc.com/](https://www.npc.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 8.05B NPC |
+| **Total Supply** | 8.05B NPC |
+| **Max Supply** | 8.05B NPC |
+| **Fully Diluted Valuation** | $55.04M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0662 (2024-11-18) |
+| **Current vs ATH** | -89.58% |
+| **All-Time Low** | $0.00004561 (2023-08-13) |
+| **Current vs ATL** | +15012.29% |
+| **24h Change** | -1.45% |
+| **7d Change** | +13.79% |
+| **30d Change** | +29.33% |
+| **1y Change** | -70.18% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x8ed97a637a790be1feff5e888d43629dc05408f6` |
+| Solana | `BeGY8KqKxboEwRbJd1q9H2K829jS4Rc5dEyNMYXCbV5p` |
+| Binance Smart Chain | `0xfebfa339e44c28e2aa9e62ea1027c9cb4e378605` |
+| Base | `0xb166e8b140d35d9d8226e40c09f757bac5a4d87d` |
+| Robinhood | `0x241f3caad03db31137f641bef005a32176530024` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | NPC/USD | N/A |
+| Bitget | NPC/USDT | N/A |
+| KuCoin | NPC/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X8ED97A637A790BE1FEFF5E888D43629DC05408F6/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0X8ED97A637A790BE1FEFF5E888D43629DC05408F6/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.npc.com/](https://www.npc.com/) |
+| **Twitter** | [@NonPlayableCoin](https://twitter.com/NonPlayableCoin) |
+| **Telegram** | [nonplayablecoin](https://t.me/nonplayablecoin) (5,454 members) |
+| **GitHub** | [https://github.com/non-playablecoin](https://github.com/non-playablecoin) |
+| **Whitepaper** | [https://docs.npc.com/](https://docs.npc.com/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.65M |
+| **Market Cap Rank** | #403 |
+| **24h Range** | $0.00681839 — $0.00718374 |
+| **CoinGecko Sentiment** | 25% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

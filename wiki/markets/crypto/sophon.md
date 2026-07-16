@@ -2,14 +2,14 @@
 title: "Sophon"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["SOPH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sophon.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zksync]]", "[[zk-rollup]]", "[[gamefi]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[zk-rollup]]", "[[zksync]]"]
 ---
 
 # Sophon

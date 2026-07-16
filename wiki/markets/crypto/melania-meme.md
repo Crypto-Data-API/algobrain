@@ -2,14 +2,14 @@
 title: "Melania Meme"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, solana, meme]
+tags: [crypto, meme, solana]
 aliases: ["MELANIA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://melaniameme.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[meme-coin]]", "[[meme-coin-cycle]]", "[[memecoin-mania]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[memecoin-mania]]", "[[perpetual-futures]]", "[[solana]]"]
 ---
 
 # Melania Meme
@@ -158,3 +158,110 @@ Speculative asset; apply strict [[risk-management]] and treat capital as fully a
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MELANIA |
+| **Market Cap Rank** | #313 |
+| **Market Cap** | $75.95M |
+| **Current Price** | $0.0798 |
+| **Categories** | Meme, Solana Meme, PolitiFi, Made in USA, Trump-Affiliated |
+| **Website** | [https://melaniameme.com/](https://melaniameme.com/) |
+
+---
+
+## Overview
+
+Melania memes are digital collectibles intended to function as an expression of support for and engagement with the values embodied by the symbol MELANIA
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 952.50M MELANIA |
+| **Total Supply** | 1,000.00M MELANIA |
+| **Max Supply** | 1.00B MELANIA |
+| **Fully Diluted Valuation** | $79.74M |
+| **Market Cap / FDV Ratio** | 0.95 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $13.05 (2025-01-20) |
+| **Current vs ATH** | -99.39% |
+| **All-Time Low** | $0.0662 (2026-06-06) |
+| **Current vs ATL** | +20.48% |
+| **24h Change** | -0.15% |
+| **7d Change** | -2.09% |
+| **30d Change** | -5.48% |
+| **1y Change** | -66.61% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | MELANIA/USD | N/A |
+| KuCoin | MELANIA/USDT | N/A |
+| Crypto.com Exchange | MELANIA/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | FUAFBO2JGKS6GB4Z4LFZKQSZGZNUCISEHQNNEBARXM1P/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $11.11M |
+| **Market Cap Rank** | #313 |
+| **24h Range** | $0.0793 — $0.0816 |
+| **CoinGecko Sentiment** | 25% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

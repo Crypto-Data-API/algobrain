@@ -2,7 +2,7 @@
 title: "Spark"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["SPK"]
@@ -160,3 +160,102 @@ Spark's distinction is that it is **not primarily a deposit-taking money market*
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko, `raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SPK |
+| **Market Cap Rank** | #414 |
+| **Market Cap** | $53.18M |
+| **Current Price** | $0.0177 |
+| **Categories** | Decentralized Finance (DeFi), Lending/Borrowing Protocols, Stablecoin Issuer, Binance HODLer Airdrops, Governance |
+| **Website** | [https://spark.fi/](https://spark.fi/) |
+
+---
+
+## Overview
+
+Spark is an onchain capital allocator, with $3.86B deployed across DeFi, CeFi, and RWA. It unlocks capital efficiency at scale, auto-balancing allocations based on market conditions while maintaining a conservative risk profile. Spark was created to solve DeFi’s core inefficiencies: fragmented liquidity, unstable yields, and idle stablecoin capital. It acts as a two-sided capital allocator—borrowing from Sky’s $6.5B+ reserves and deploying across DeFi, CeFi, and RWAs to provide deep, consistent liquidity. This yield is packaged into products like sUSDS and sUSDC, offering users programmable, fee-free income. Rather than competing with protocols, Spark powers them as the liquidity and yield infrastructure for onchain finance.
+
+Access to Deep, Scalable Liquidity: Spark taps into Sky’s $6.5B+ stablecoin reserves, enabling large-scale capital deployment across DeFi, CeFi, and RWAs. User-Friendly Yield Products: Yield is delivered through stablecoins like sUSDS and sUSDC—fully composable, fee-free, and available across chains.
+
+SparkLend: A stablecoin lending market. Unlike other lending protocols where rates fluctuate based on utilization or loan size, SparkLend offers governance-defined rates that do not vary based on those factors. This is made possible by Spark’s Liquidity Layer (SLL), which supplies consistent stablecoin liquidity to the protocol.
+
+Spark Savings: A product for earning yield on stablecoins like USDC, and USDS (and soon, USDT) by converting them into yield-bearing sUSDS or sUSDC. These yield tokens are composable with other DeFi protocols, making it easy to put capital to work while maintaining exposure to onchain yield at a competitive risk-adjusted rate.
+
+Spark Liquidity Layer (SLL): A backend capital allocator that routes liquidity to other protocols like Aave, Morpho, and even RWAs (e.g., BlackRock’s BUIDL). One of the most important SLL deployments on Base is the Spark USDC Morpho Vault, which currently supplies $95M USDC, making it the largest l...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.99B SPK |
+| **Total Supply** | 10.00B SPK |
+| **Max Supply** | 10.00B SPK |
+| **Fully Diluted Valuation** | $177.58M |
+| **Market Cap / FDV Ratio** | 0.30 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1845 (2025-07-23) |
+| **Current vs ATH** | -90.36% |
+| **All-Time Low** | $0.0161 (2026-06-24) |
+| **Current vs ATL** | +10.72% |
+| **24h Change** | +3.06% |
+| **7d Change** | +2.24% |
+| **30d Change** | -13.59% |
+| **1y Change** | -46.23% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SPK/USDT | N/A |
+| Kraken | SPK/USD | N/A |
+| Upbit | SPK/KRW | N/A |
+| Bitget | SPK/USDT | N/A |
+| KuCoin | SPK/USDT | N/A |
+| Crypto.com Exchange | SPK/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XC20059E0317DE91738D13AF027DFC4A50781B066/0X6B175474E89094C44DA98B954EEDEAC495271D0F | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $15.40M |
+| **Market Cap Rank** | #414 |
+| **24h Range** | $0.0172 — $0.0184 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

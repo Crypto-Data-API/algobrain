@@ -2,14 +2,15 @@
 title: "Autonomi"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, decentralized-storage, depin]
-aliases: ["ANT", "Safe Network", "MaidSafe", "SafeCoin"]
+tags: [altcoins, crypto, decentralized-storage, depin]
+aliases: ["ANT", "MaidSafe", "Safe Network", "SafeCoin"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://autonomi.com"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[decentralized-storage]]", "[[depin]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[decentralized-storage]]", "[[depin]]", "[[ethereum]]"]
+founded: 2017
 ---
 
 # Autonomi

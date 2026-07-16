@@ -2,7 +2,7 @@
 title: "FART COIN"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["FRTC"]
@@ -128,4 +128,4 @@ The daily lucky draws are a unique feature that sets FART COIN apart from its ri
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

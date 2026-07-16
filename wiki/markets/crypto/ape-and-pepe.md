@@ -2,7 +2,7 @@
 title: "Ape and Pepe"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["APEPE"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://apepe.lol/"
-related: ["[[crypto-markets]]", "[[polygon]]", "[[pepe]]", "[[narrative-trading]]", "[[market-manipulation]]", "[[wash-trading]]"]
+related: ["[[crypto-markets]]", "[[market-manipulation]]", "[[narrative-trading]]", "[[pepe]]", "[[polygon]]", "[[wash-trading]]"]
 ---
 
 # Ape and Pepe
@@ -136,3 +136,102 @@ The main value of this entry is as a **screening example**. The pattern to recog
 - CoinPaprika — Ape and Pepe: https://coinpaprika.com/coin/apepe-ape-and-pepe/ (wash-trading / liquidity-ratio warning, retrieved 2026-06-10)
 - Bitget — What is Ape and Pepe: https://www.bitget.com/price/ape-and-pepe/what-is
 - Perplexity verification attempted 2026-06-10 (no independent sources found for APEPE activity — itself a data point on the token's obscurity)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | APEPE |
+| **Market Cap Rank** | #168 |
+| **Market Cap** | $200.11M |
+| **Current Price** | $0.00000095 |
+| **Categories** | Meme, Frog-Themed, The Boy’s Club |
+| **Website** | [https://apepe.lol/](https://apepe.lol/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 210.00T APEPE |
+| **Total Supply** | 210.00T APEPE |
+| **Max Supply** | 210.00T APEPE |
+| **Fully Diluted Valuation** | $200.11M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00000689 (2024-11-22) |
+| **Current vs ATH** | -86.17% |
+| **All-Time Low** | $0.00000065 (2025-09-17) |
+| **Current vs ATL** | +45.49% |
+| **24h Change** | -0.01% |
+| **7d Change** | +4.89% |
+| **30d Change** | -10.41% |
+| **1y Change** | -51.80% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Polygon Pos
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Polygon Pos | `0xa3f751662e282e83ec3cbc387d225ca56dd63d3a` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://apepe.lol/](https://apepe.lol/) |
+| **Twitter** | [@APEPE_MEME](https://twitter.com/APEPE_MEME) |
+| **Telegram** | [apeandpepe](https://t.me/apeandpepe) (138,800 members) |
+| **Whitepaper** | [https://apepe.lol/](https://apepe.lol/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $17.87M |
+| **Market Cap Rank** | #168 |
+| **24h Range** | $0.00000095 — $0.00000096 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[polygon]]
+
+---

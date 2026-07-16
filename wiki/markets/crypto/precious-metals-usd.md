@@ -2,14 +2,14 @@
 title: "Precious Metals USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, real-world-assets]
+tags: [crypto, real-world-assets, stablecoins]
 aliases: ["PMUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://raac.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[stablecoins]]", "[[real-world-assets]]", "[[gold]]", "[[commodities]]", "[[depeg]]"]
+related: ["[[commodities]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[gold]]", "[[real-world-assets]]", "[[stablecoin]]", "[[stablecoins]]"]
 ---
 
 # Precious Metals USD
@@ -216,3 +216,31 @@ PMUSD sits at the intersection of **RWA tokenization** and **commodity-backed st
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PMUSD |
+| **Market Cap Rank** | #347 |
+| **Market Cap** | $69.05M |
+| **Current Price** | $0.7346 |
+| **Categories** | Stablecoins, Real World Assets (RWA) |
+| **Website** | [https://raac.io/](https://raac.io/) |
+
+---
+
+## Overview
+
+Real Asset Acquisition Corp (RAAC) is a decentralized finance (DeFi) protocol powered by real-world assets (RWAs). 
+
+The ecosystem empowers token holders through a set of custom-built products to tokenize real-world assets; deploying traditional finance assets into DeFi, with a goal to unlock liquidity and on-chain yield opportunities. This model allows RAAC to expand DeFi liquidity collateralized by RWAs.
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

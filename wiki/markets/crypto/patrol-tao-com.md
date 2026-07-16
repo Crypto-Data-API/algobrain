@@ -2,7 +2,7 @@
 title: "grail"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN81"]
@@ -20,10 +20,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** reinforcement-learning fine-tuning and post-training with cryptographic verification of rollouts (the GRAIL protocol). The third pillar of the "Covenant AI" cluster alongside [[templar]] (SN3, pretraining) and [[w-ai-parked|Basilica]] (SN39, compute).
-- **Team:** Templar Foundation / Covenant AI cluster; repo at github.com/tplr-ai/grail.
-- **Trading relevance:** part of the coordinated Covenant AI narrative bet. Alpha-81 correlates closely with alpha-3 (Templar) during Covenant cluster re-ratings.
-- **Alpha token:** alpha-81.
+Grail operates as subnet 81 on the Bittensor network, serving as the reinforcement learning fine-tuning and post-training layer of the Covenant AI ecosystem. The project implements the GRAIL protocol (Guaranteed Rollout Authenticity via Inference Ledger) to provide cryptographically verifiable model outputs during reinforcement learning rollouts. Grail transforms foundation models from pre-training subnets into deployable, aligned AI systems through permissionless, incentivized RL fine-tuning infrastructure. The platform generates thousands of rollouts per second using custom algorithms designed for post-training optimization. The subnet supports models ranging from 8B to 70B+ parameters and integrates with multiple RL environments for diverse training scenarios.
 
 ---
 
@@ -37,12 +34,6 @@ related: ["[[crypto-markets]]"]
 | **Current Price** | $8.51 |
 | **Categories** | Artificial Intelligence (AI), Bittensor Subnets |
 | **Website** | [https://github.com/tplr-ai/grail](https://github.com/tplr-ai/grail) |
-
----
-
-## Overview
-
-Grail operates as subnet 81 on the Bittensor network, serving as the reinforcement learning fine-tuning and post-training layer of the Covenant AI ecosystem. The project implements the GRAIL protocol (Guaranteed Rollout Authenticity via Inference Ledger) to provide cryptographically verifiable model outputs during reinforcement learning rollouts. Grail transforms foundation models from pre-training subnets into deployable, aligned AI systems through permissionless, incentivized RL fine-tuning infrastructure. The platform generates thousands of rollouts per second using custom algorithms designed for post-training optimization. The subnet supports models ranging from 8B to 70B+ parameters and integrates with multiple RL environments for diverse training scenarios.
 
 ---
 
@@ -133,4 +124,4 @@ Grail operates as subnet 81 on the Bittensor network, serving as the reinforceme
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

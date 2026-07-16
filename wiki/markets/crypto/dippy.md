@@ -2,7 +2,7 @@
 title: "Dippy"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN11"]
@@ -20,10 +20,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** roleplay and character LLMs for consumer AI applications. Miners serve persona-driven completions (companion-AI, interactive-fiction style); validators score engagement-quality metrics.
-- **Team:** Impel.
-- **Trading relevance:** consumer-AI narrative exposure. Dippy's performance tracks sentiment on "companion AI" as a subcategory of the broader AI app thesis. Low direct trading utility.
-- **Alpha token:** alpha-11.
+AI friends that care about you
 
 ---
 
@@ -37,12 +34,6 @@ related: ["[[crypto-markets]]"]
 | **Current Price** | $4.67 |
 | **Categories** | Artificial Intelligence (AI), Bittensor Ecosystem, Bittensor Subnets |
 | **Website** | [https://www.dippy.ai/](https://www.dippy.ai/) |
-
----
-
-## Overview
-
-AI friends that care about you
 
 ---
 
@@ -132,4 +123,4 @@ AI friends that care about you
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

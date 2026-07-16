@@ -2,7 +2,7 @@
 title: "Ontology"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ONT"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://ont.io/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[staking]]", "[[proof-of-stake]]", "[[fear-and-greed-index]]"]
+related: ["[[crypto-markets]]", "[[fear-and-greed-index]]", "[[layer-1]]", "[[proof-of-stake]]", "[[staking]]"]
 ---
 
 # Ontology
@@ -139,3 +139,129 @@ ONT is effectively a **fully-diluted legacy L1** (MC = FDV, no unlock overhang),
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ONT |
+| **Market Cap Rank** | #475 |
+| **Market Cap** | $44.20M |
+| **Current Price** | $0.0442 |
+| **Genesis Date** | 2018-02-26 |
+| **Categories** | Smart Contract Platform, Masternodes, Proof of Stake (PoS), Made in China |
+| **Website** | [https://ont.io/](https://ont.io/) |
+
+---
+
+## Overview
+
+Ontology is a new high-performance public blockchain project &amp; a distributed trust collaboration platform.It provides new high-performance public blockchains that include a series of complete distributed ledgers and smart contract systems. Ontology is a blockchain framework supports public blockchain systems and is able to customize different public blockchains for different applications. It also supports collaboration amongst chain networks with its various protocol groups.They will constantly provide common modules on the underlying infrastructure for different kinds of distributed scenarios, such as those for the distributed digital identity framework, distributed data exchange protocol, and so on. 
+
+Ontology was created in 2017 by a Chinese company called OnChain, which is led by founders Erik Zhang and Da HongFei. OnChain has had huge success in the cryptocurrency industry, as they were also the founders behind the NEO blockchain, which is now a multi-billion dollar project. Essentially, Ontology was created as a way for businesses of all sizes to install blockchain technology within their company, without having to completely change all of their current systems.
+
+The purpose of the Ontology framework is that it is not intended to operate as a single blockchain. Instead, the technology will allow businesses to make full use of both a private and public blockchain. Each and every data transaction is confirmed in a decentralized environment, meaning that no single person or authority can take control of the network.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.00B ONT |
+| **Total Supply** | 1.00B ONT |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $44.20M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $10.92 (2018-05-03) |
+| **Current vs ATH** | -99.59% |
+| **All-Time Low** | $0.0391 (2026-03-08) |
+| **Current vs ATL** | +13.29% |
+| **24h Change** | -1.83% |
+| **7d Change** | -1.94% |
+| **30d Change** | -11.32% |
+| **1y Change** | -70.28% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ONT/USDT | N/A |
+| Upbit | ONT/KRW | N/A |
+| Bitget | ONT/USDT | N/A |
+| KuCoin | ONT/USDT | N/A |
+| Crypto.com Exchange | ONT/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://ont.io/](https://ont.io/) |
+| **Twitter** | [@OntologyNetwork](https://twitter.com/OntologyNetwork) |
+| **Reddit** | [https://www.reddit.com/r/OntologyNetwork/](https://www.reddit.com/r/OntologyNetwork/) |
+| **Telegram** | [OntologyNetwork](https://t.me/OntologyNetwork) (13,961 members) |
+| **Discord** | [https://discord.gg/4TQujHj](https://discord.gg/4TQujHj) |
+| **GitHub** | [https://github.com/ontio/ontology](https://github.com/ontio/ontology) |
+| **Whitepaper** | [https://ont.io/documents](https://ont.io/documents) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 876 |
+| **GitHub Forks** | 300 |
+| **Commits (4 weeks)** | 1 |
+| **Pull Requests Merged** | 990 |
+| **Contributors** | 50 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.41M |
+| **Market Cap Rank** | #475 |
+| **24h Range** | $0.0442 — $0.0455 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

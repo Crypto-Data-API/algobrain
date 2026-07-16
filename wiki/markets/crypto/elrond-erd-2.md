@@ -2,14 +2,14 @@
 title: "MultiversX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["EGLD", "Elrond"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://multiversx.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[layer-1]]", "[[proof-of-stake]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]"]
 ---
 
 # MultiversX
@@ -150,3 +150,114 @@ EGLD is a mid-small-cap sharded L1 whose cleanest differentiator versus the coho
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | EGLD |
+| **Market Cap Rank** | #275 |
+| **Market Cap** | $93.83M |
+| **Current Price** | $3.09 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Layer 1 (L1), Binance Launchpad, Proof of Stake (PoS), AI Framework |
+| **Website** | [https://multiversx.com/](https://multiversx.com/) |
+
+---
+
+## Overview
+
+What is MultiversX 
+
+MultiversX is a blockchain protocol that offers true horizontal scalability by using all aspects of sharding (Network, Transaction &amp; State). The project describes itself as a technology ecosystem for the new internet, which includes decentralized finance, real world assets and the Metaverse. Its smart contracts execution platform is reportedly capable of up to 100,000 transactions per second, 6-second latency and a $0.002 transaction cost. MultiversX is governed and secured through the EGLD token. EGLD, or Electronic Gold, is MultiversX's native token. It acts as a store of value currency to pay for network usage. The coin also serves as a medium of exchange between platform users and validators. Users pay transaction fees in EGLD and validators participate in the consensus process. EGLD allows developers to deploy smart contracts, protocols, and dApps on the platform. It empowers participants to perform any network action. Through staking and validation rewards, as well as transaction fees, EGLD manages the MultiversX network. Plus, EGLD is endowed with the functionality of a governance token, so its holders can vote on network decisions. 
+
+How does MultiversX Work 
+
+According to the MultiversX crypto team, the project implements three types of parallelization: state, transactions, and network, using the parallel processing method to speed up the time and increase the number of transactions. MultiversX uses Adaptive State Sharding to scale while sharing infrastructure to support a growing number of applications/transactions on the ledger. A variation of the traditional PoS operational protocol guarantees the connection to the platform of all sections of the network, separated during sharding. Hence, the integrated environment is involved in the development of dApps, which are imitations of products and services. MultiversX combines three sharding methods to create its own unique adaptive one. It divides the network into four shards: three b...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 30.36M EGLD |
+| **Total Supply** | 30.36M EGLD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $93.83M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $545.64 (2021-11-23) |
+| **Current vs ATH** | -99.43% |
+| **All-Time Low** | $2.43 (2026-06-26) |
+| **Current vs ATL** | +27.16% |
+| **24h Change** | -7.43% |
+| **7d Change** | +0.13% |
+| **30d Change** | +1.41% |
+| **1y Change** | -80.70% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | EGLD/USDT | N/A |
+| Kraken | EGLD/USD | N/A |
+| Upbit | EGLD/KRW | N/A |
+| Bitget | EGLD/USDT | N/A |
+| KuCoin | EGLD/USDT | N/A |
+| Crypto.com Exchange | EGLD/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://multiversx.com/](https://multiversx.com/) |
+| **Twitter** | [@MultiversX](https://twitter.com/MultiversX) |
+| **Reddit** | [https://www.reddit.com/r/elrondnetwork/](https://www.reddit.com/r/elrondnetwork/) |
+| **Telegram** | [MultiversX](https://t.me/MultiversX) (32,810 members) |
+| **Discord** | [https://discord.com/invite/multiversxbuilders](https://discord.com/invite/multiversxbuilders) |
+| **GitHub** | [https://github.com/multiversx/mx-chain-go](https://github.com/multiversx/mx-chain-go) |
+| **Whitepaper** | [https://assets-global.website-files.com/6597cc7be68d63ec0c8ce338/65b22e7c42f65345c285ccb8_multiversx-whitepaper.pdf](https://assets-global.website-files.com/6597cc7be68d63ec0c8ce338/65b22e7c42f65345c285ccb8_multiversx-whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.32M |
+| **Market Cap Rank** | #275 |
+| **24h Range** | $3.06 — $3.34 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

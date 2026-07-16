@@ -2,7 +2,7 @@
 title: "Targon"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN4"]
@@ -18,10 +18,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** enterprise-grade LLM inference with a confidential-computing / TEE focus. Targon markets itself as the "verifiable, enterprise-ready" inference subnet, competing with SN1 Apex, SN18 Cortex, SN19 Nineteen, and SN64 Chutes for inference demand.
-- **Team:** Targon / Sybil.
-- **Trading relevance:** plays on the inference-layer revenue thesis — inference subnets that attract real off-chain API customers capture larger shares of dTAO emissions.
-- **Alpha token:** alpha-4. See [[dtao]].
+Targon is a decentalized, frontier AI lab
 
 ---
 
@@ -36,12 +33,6 @@ related: ["[[crypto-markets]]"]
 | **Categories** | Artificial Intelligence (AI), Bittensor Ecosystem, Bittensor Subnets |
 | **Website** | [https://targon.com/](https://targon.com/) |
 > *Market data refreshed 2026-06-12 (CoinGecko top-1000 snapshot).*
-
----
-
-## Overview
-
-Targon is a decentalized, frontier AI lab
 
 ---
 
@@ -133,4 +124,4 @@ Targon is a decentalized, frontier AI lab
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

@@ -2,7 +2,7 @@
 title: "Basic Attention Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["BAT", "Basic Attention Token"]
@@ -138,3 +138,98 @@ As a [[utility-token]], BAT's value should in theory track demand for its in-pro
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21: cryptodataapi.com / CoinGecko markets data.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BAT |
+| **Market Cap Rank** | #1911 |
+| **Market Cap** | $2.99M |
+| **Current Price** | $0.2521 |
+| **Categories** | Sei Network Ecosystem |
+| **Website** | [https://bitbat.io](https://bitbat.io) |
+
+---
+
+## Overview
+
+BitBat is a next-generation AI-powered Web3.0 event aggregation platform built on Sei Network, integrating global esports and sports data to usher in a new era of on-chain competition. The native token BAT serves as the driving force of the entire ecosystem: ⚡ Used for event prediction markets and competitive interactions 💎 Powers asset circulation, NFT exchanges, and reward distribution 🏆 Incentivizes players, creators, and community growth 🗳️ Enables governance, shaping the platform’s future Holding BAT not only means participating in global competitive entertainment but also sharing in the growth dividends of the BitBat ecosystem. BAT = The value gateway to on-chain competition + The new engine of Web3 entertainment finance.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 11.86M BAT |
+| **Total Supply** | 13.44M BAT |
+| **Max Supply** | 10.00B BAT |
+| **Fully Diluted Valuation** | $3.39M |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.4701 (2025-09-24) |
+| **Current vs ATH** | -46.36% |
+| **All-Time Low** | $0.1088 (2025-10-10) |
+| **Current vs ATL** | +131.69% |
+| **24h Change** | N/A |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Sei V2
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Sei V2 | `0x443ac9f358226f5f48f2cd10bc0121e7a6176323` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://bitbat.io](https://bitbat.io) |
+| **Twitter** | [@BitBat_TAP](https://twitter.com/BitBat_TAP) |
+| **Telegram** | [BitBat_DAO](https://t.me/BitBat_DAO) (13 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $13,586.96 |
+| **Market Cap Rank** | #1911 |
+| **Last Updated** | 2026-07-10 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

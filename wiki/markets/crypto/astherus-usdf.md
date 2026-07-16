@@ -2,14 +2,14 @@
 title: "Aster USDF"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
-aliases: ["USDF", "Astherus USDF", "asUSDF"]
+aliases: ["Astherus USDF", "USDF", "asUSDF"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.asterdex.com/en/usdf"
-related: ["[[stablecoins]]", "[[ethena-usde]]", "[[usde]]", "[[delta-neutral]]", "[[asterdex]]", "[[usdt]]", "[[bnb]]", "[[crypto-markets]]"]
+related: ["[[asterdex]]", "[[bnb]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[ethena-usde]]", "[[stablecoins]]", "[[usde]]", "[[usdt]]"]
 ---
 
 # Aster USDF
@@ -141,3 +141,111 @@ Contract address:
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - Protocol description and USDF whitepaper from Aster ([https://docs.asterdex.com/product/usdf-stablecoin](https://docs.asterdex.com/product/usdf-stablecoin)). General market knowledge; no specific wiki source ingested yet beyond the CoinGecko snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDF |
+| **Market Cap Rank** | #244 |
+| **Market Cap** | $110.91M |
+| **Current Price** | $0.9975 |
+| **Categories** | Stablecoins |
+| **Website** | [https://www.asterdex.com/en/usdf](https://www.asterdex.com/en/usdf) |
+
+---
+
+## Overview
+
+Aster is a decentralized perpetual exchange built for everyone. It offers MEV-free, one-click trading with up to 1001x leverage in Simple Mode, and full-featured, pro-grade tools in Pro Mode. Backed by YZi Labs, Aster is building the future of DeFi: fast, flexible, and community-first.
+
+USDF is a yield-bearing stablecoin issued by Aster, convertible with USDT at a 1:1 ratio. Underlying USDT funds are used to create and maintain delta neutral positions that back USDF and generate asUSDF yields.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 111.19M USDF |
+| **Total Supply** | 111.19M USDF |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $110.91M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.05 (2025-10-10) |
+| **Current vs ATH** | -4.66% |
+| **All-Time Low** | $0.7985 (2025-10-10) |
+| **Current vs ATL** | +24.92% |
+| **24h Change** | -0.02% |
+| **7d Change** | -0.07% |
+| **30d Change** | -0.02% |
+| **1y Change** | -0.16% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x5a110fc00474038f6c02e89c707d638602ea44b5` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.asterdex.com/en/usdf](https://www.asterdex.com/en/usdf) |
+| **Twitter** | [@Aster_DEX](https://twitter.com/Aster_DEX) |
+| **Telegram** | [AsterDEX](https://t.me/AsterDEX) (33,017 members) |
+| **Discord** | [http://discord.gg/invite/HzrgVv7n64](http://discord.gg/invite/HzrgVv7n64) |
+| **Whitepaper** | [https://docs.asterdex.com/product/usdf-stablecoin](https://docs.asterdex.com/product/usdf-stablecoin) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $57,851.00 |
+| **Market Cap Rank** | #244 |
+| **24h Range** | $0.9971 — $0.9980 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

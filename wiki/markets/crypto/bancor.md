@@ -2,7 +2,7 @@
 title: "Bancor Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum, liquidity]
 aliases: ["BNT", "Bancor", "Carbon DeFi"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://www.bancor.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[automated-market-maker]]", "[[decentralized-exchange]]", "[[impermanent-loss]]", "[[uniswap]]", "[[liquidity-pool]]", "[[governance-token]]", "[[defi]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[liquidity-pool]]", "[[uniswap]]"]
 ---
 
 # Bancor Network

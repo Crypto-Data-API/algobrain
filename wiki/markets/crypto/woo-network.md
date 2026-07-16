@@ -2,14 +2,14 @@
 title: "WOO Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
-aliases: ["WOO", "WOOFi", "WOO X"]
+aliases: ["WOO", "WOO X", "WOOFi"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://woo.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[perpetual-futures]]", "[[liquidity]]", "[[slippage]]", "[[market-maker]]", "[[centralized-exchange]]"]
+related: ["[[automated-market-maker]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[liquidity]]", "[[market-maker]]", "[[perpetual-futures]]", "[[slippage]]"]
 ---
 
 # WOO Network

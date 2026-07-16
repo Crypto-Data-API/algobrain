@@ -2,14 +2,14 @@
 title: "BORA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["BORA", "BORA Ecosystem"]
 entity_type: protocol
 headquarters: "South Korea"
 website: "https://www.boraecosystem.com/"
-related: ["[[crypto-markets]]", "[[gamefi]]", "[[play-to-earn]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
 ---
 
 # BORA

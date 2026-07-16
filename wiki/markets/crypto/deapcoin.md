@@ -2,14 +2,14 @@
 title: "DEAPcoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi, altcoins]
-aliases: ["DEP", "DEAPcoin", "DEAPCOIN"]
+tags: [altcoins, crypto, gamefi, nft]
+aliases: ["DEAPCOIN", "DEAPcoin", "DEP"]
 entity_type: protocol
 headquarters: "Singapore / Japan"
 website: "https://dea.sg/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[play-to-earn]]", "[[gamefi]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
 ---
 
 # DEAPcoin

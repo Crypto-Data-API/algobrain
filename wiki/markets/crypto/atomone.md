@@ -2,14 +2,14 @@
 title: "AtomOne"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ATONE", "AtomOne Hub"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://atom.one/"
-related: ["[[crypto-markets]]", "[[cosmos]]", "[[layer-1]]", "[[proof-of-stake]]", "[[interoperability]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[interoperability]]", "[[layer-1]]", "[[proof-of-stake]]"]
 ---
 
 # AtomOne

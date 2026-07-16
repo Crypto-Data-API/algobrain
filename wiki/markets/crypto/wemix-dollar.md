@@ -2,14 +2,14 @@
 title: "WEMIX Dollar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
-aliases: ["WEMIX$", "WEMIX Dollar", "WEMIX USD"]
+tags: [crypto, defi, stablecoin]
+aliases: ["WEMIX Dollar", "WEMIX USD", "WEMIX$"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.wemix.com/en"
-related: ["[[crypto-markets]]", "[[stablecoin]]", "[[gamefi]]", "[[collateralization]]", "[[depeg]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[gamefi]]", "[[stablecoin]]"]
 ---
 
 # WEMIX Dollar

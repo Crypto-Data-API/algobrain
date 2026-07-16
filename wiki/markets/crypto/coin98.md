@@ -2,14 +2,14 @@
 title: "Coin98"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
-aliases: ["C98", "Coin98 Wallet", "Coin98 Super App"]
+tags: [altcoins, crypto, defi]
+aliases: ["C98", "Coin98 Super App", "Coin98 Wallet"]
 entity_type: protocol
 headquarters: "Vietnam (Coin98 Labs)"
 website: "https://coin98.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[defi]]", "[[ethereum]]", "[[solana]]", "[[smart-contracts]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[smart-contracts]]", "[[solana]]"]
 ---
 
 # Coin98

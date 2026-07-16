@@ -2,13 +2,13 @@
 title: "Peanut the Squirrel"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, solana, meme]
+tags: [crypto, meme, solana]
 aliases: ["PNUT"]
 entity_type: protocol
 headquarters: "Decentralized"
-related: ["[[crypto-markets]]", "[[solana]]", "[[meme-coin]]", "[[meme-coin-cycle]]", "[[perpetual-futures]]", "[[dogecoin]]"]
+related: ["[[crypto-markets]]", "[[dogecoin]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[solana]]"]
 ---
 
 # Peanut the Squirrel
@@ -149,3 +149,107 @@ Treat as a high-risk speculative position; apply strict [[risk-management]] and 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PNUT |
+| **Market Cap Rank** | #491 |
+| **Market Cap** | $42.60M |
+| **Current Price** | $0.0426 |
+| **Categories** | Meme, Solana Meme, Zoo-Themed, Memorial Themed |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 999.84M PNUT |
+| **Total Supply** | 999.84M PNUT |
+| **Max Supply** | 1.00B PNUT |
+| **Fully Diluted Valuation** | $42.60M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.44 (2024-11-14) |
+| **Current vs ATH** | -98.25% |
+| **All-Time Low** | $0.0319 (2024-11-04) |
+| **Current vs ATL** | +33.73% |
+| **24h Change** | -1.15% |
+| **7d Change** | -1.01% |
+| **30d Change** | -6.89% |
+| **1y Change** | -84.83% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | PNUT/USDT | N/A |
+| Kraken | PNUT/USD | N/A |
+| Bitget | PNUT/USDT | N/A |
+| KuCoin | PNUT/USDT | N/A |
+| Crypto.com Exchange | PNUT/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Twitter** | [@pnutsolana](https://twitter.com/pnutsolana) |
+| **Telegram** | [pnutportal](https://t.me/pnutportal) (11,738 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.49M |
+| **Market Cap Rank** | #491 |
+| **24h Range** | $0.0426 — $0.0439 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

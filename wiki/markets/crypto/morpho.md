@@ -2,7 +2,7 @@
 title: "Morpho"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["MORPHO", "Morpho Blue", "Morpho Labs"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2021
 headquarters: "Paris, France (Morpho Association)"
 website: "https://morpho.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[aave]]", "[[compound-governance-token]]", "[[coinbase]]", "[[base]]", "[[defi]]", "[[defi-narratives]]", "[[token-unlocks]]", "[[ml-defi-risk-models]]", "[[defai]]", "[[ai-finance]]", "[[artificial-intelligence]]"]
+related: ["[[aave]]", "[[ai-finance]]", "[[artificial-intelligence]]", "[[base]]", "[[coinbase]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[defai]]", "[[defi-narratives]]", "[[defi]]", "[[ethereum]]", "[[ml-defi-risk-models]]", "[[token-unlocks]]"]
 ---
 
 # Morpho
@@ -305,3 +305,34 @@ Morpho's moat is the **immutable core + curated-vault model** plus **institution
 - The Crypto Times, "Why Paradigm and a16z Just Poured $175M Into Morpho" (2026-06-09) — https://www.cryptotimes.io/2026/06/09/why-paradigm-and-a16z-just-poured-175m-into-morpho/
 - AInvest, "Morpho Vaults V2" coverage; Eco, "Morpho Protocol Explained 2026"
 - Web verification (WebSearch + Perplexity), 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 654.68M MORPHO |
+| **Total Supply** | 1.00B MORPHO |
+| **Max Supply** | 1.00B MORPHO |
+| **Fully Diluted Valuation** | $2.10B |
+| **Market Cap / FDV Ratio** | 0.65 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

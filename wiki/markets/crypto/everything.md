@@ -2,14 +2,14 @@
 title: "Everything"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["EV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://everything.inc/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # Everything
@@ -119,9 +119,10 @@ Everything unifies multiple decentralized finance protocols into one cohesive, i
 ## See Also
 
 - [[crypto-markets]]
+- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

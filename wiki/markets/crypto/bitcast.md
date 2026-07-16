@@ -2,7 +2,7 @@
 title: "Bitcast"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN93"]
@@ -20,10 +20,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** creator monetization AI — analytics, optimization, and programmatic tooling for content creators (YouTube, TikTok, Instagram). Miners produce creator-performance analytics and recommendations; validators score predictive accuracy.
-- **Team:** Bitcast (bitcast.network).
-- **Trading relevance:** consumer-AI / creator-economy category. Low direct trading utility.
-- **Alpha token:** alpha-93.
+The Decentralized Creators Economy
 
 ---
 
@@ -37,12 +34,6 @@ related: ["[[crypto-markets]]"]
 | **Current Price** | $5.86 |
 | **Categories** | Artificial Intelligence (AI), Bittensor Ecosystem, Bittensor Subnets |
 | **Website** | [https://www.bitcast.network/](https://www.bitcast.network/) |
-
----
-
-## Overview
-
-The Decentralized Creators Economy
 
 ---
 
@@ -134,4 +125,4 @@ The Decentralized Creators Economy
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

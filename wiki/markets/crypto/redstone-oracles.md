@@ -2,14 +2,14 @@
 title: "RedStone"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, oracle]
 aliases: ["RED", "RedStone Oracles"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.redstone.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[pyth-network]]", "[[oracle-manipulation]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[pyth-network]]"]
 ---
 
 # RedStone
@@ -143,3 +143,113 @@ RED trades at ~$47M cap but a ~$112M FDV (MC/FDV ~0.42): only ~42% of the 1B cap
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | RED |
+| **Market Cap Rank** | #449 |
+| **Market Cap** | $47.45M |
+| **Current Price** | $0.1054 |
+| **Categories** | Infrastructure, Oracle, Binance Launchpool, Real World Assets (RWA), Base Native |
+| **Website** | [https://www.redstone.finance/](https://www.redstone.finance/) |
+
+---
+
+## Overview
+
+RedStone Is The Fastest Growing oracle, specialising in yield-bearing collateral for lending markets and securing $10bn+ . Blue chip DeFi protocols are our clients including Spark, Morpho, Compound, Pendle, Venus, Lido, EtherFi, Ethena, Puffer, Balancer, Lombard, Enzyme, Frax, Agora, M^0 and 80+ other Clients. RedStone provides a wide variety of in-demand assets such as LSTs, LRTs, Bitcoin LSTs and many others.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 449.98M RED |
+| **Total Supply** | 1.00B RED |
+| **Max Supply** | 1.00B RED |
+| **Fully Diluted Valuation** | $105.44M |
+| **Market Cap / FDV Ratio** | 0.45 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.9325 (2025-03-06) |
+| **Current vs ATH** | -88.70% |
+| **All-Time Low** | $0.0869 (2026-06-25) |
+| **Current vs ATL** | +21.25% |
+| **24h Change** | -2.88% |
+| **7d Change** | +3.16% |
+| **30d Change** | +9.81% |
+| **1y Change** | -69.72% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xc43c6bfeda065fe2c4c11765bf838789bd0bb5de` |
+| Base | `0x4eb92702ba4cfbf80561bad64d89c706ac824960` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | RED/USDT | N/A |
+| Kraken | RED/USD | N/A |
+| Upbit | RED/KRW | N/A |
+| Bitget | RED/USDT | N/A |
+| KuCoin | REDSTONE/USDT | N/A |
+| Crypto.com Exchange | RED/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.redstone.finance/](https://www.redstone.finance/) |
+| **Twitter** | [@redstone_defi](https://twitter.com/redstone_defi) |
+| **Telegram** | [redstonefinance](https://t.me/redstonefinance) (4,157 members) |
+| **Discord** | [https://discord.gg/redstonedefi](https://discord.gg/redstonedefi) |
+| **GitHub** | [https://github.com/redstone-finance](https://github.com/redstone-finance) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.44M |
+| **Market Cap Rank** | #449 |
+| **24h Range** | $0.1050 — $0.1103 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

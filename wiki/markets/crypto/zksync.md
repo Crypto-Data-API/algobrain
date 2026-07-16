@@ -2,14 +2,14 @@
 title: "ZKsync"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ZK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zksync.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zk-rollup]]", "[[zero-knowledge-proofs]]", "[[rollups]]", "[[hyperliquid]]", "[[arbitrum]]", "[[starknet]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[rollups]]", "[[starknet]]", "[[zero-knowledge-proofs]]", "[[zk-rollup]]"]
 ---
 
 # ZKsync
@@ -140,3 +140,118 @@ ZK is best framed as a high-beta bet on (1) zkEVM adoption within the Ethereum s
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ZK |
+| **Market Cap Rank** | #261 |
+| **Market Cap** | $100.26M |
+| **Current Price** | $0.0100 |
+| **Categories** | Smart Contract Platform, Layer 2 (L2), Zero Knowledge (ZK), Privacy Blockchain, Privacy Infrastructure, Privacy |
+| **Website** | [https://zksync.io/](https://zksync.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 9.98B ZK |
+| **Total Supply** | 21.00B ZK |
+| **Max Supply** | 21.00B ZK |
+| **Fully Diluted Valuation** | $210.88M |
+| **Market Cap / FDV Ratio** | 0.48 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.3210 (2024-06-17) |
+| **Current vs ATH** | -96.86% |
+| **All-Time Low** | $0.00957797 (2026-06-06) |
+| **Current vs ATL** | +5.17% |
+| **24h Change** | -2.55% |
+| **7d Change** | -4.57% |
+| **30d Change** | -14.68% |
+| **1y Change** | -83.22% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Zksync
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Zksync | `0x5a7d6b2f92c77fad6ccabd7ee0624e64907eaf3e` |
+| Ethereum | `0x66a5cfb2e9c529f14fe6364ad1075df3a649c0a5` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ZK/USDT | N/A |
+| Kraken | ZK/USD | N/A |
+| Upbit | ZK/KRW | N/A |
+| Bitget | ZK/USDT | N/A |
+| KuCoin | ZK/USDT | N/A |
+| Crypto.com Exchange | ZK/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X66A5CFB2E9C529F14FE6364AD1075DF3A649C0A5/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://zksync.io/](https://zksync.io/) |
+| **Twitter** | [@zksync](https://twitter.com/zksync) |
+| **GitHub** | [https://github.com/matter-labs/zksync-era](https://github.com/matter-labs/zksync-era) |
+| **Whitepaper** | [https://docs.zksync.io/](https://docs.zksync.io/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $9.37M |
+| **Market Cap Rank** | #261 |
+| **24h Range** | $0.0100 — $0.0105 |
+| **CoinGecko Sentiment** | 43% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

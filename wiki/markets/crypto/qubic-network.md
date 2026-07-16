@@ -2,14 +2,14 @@
 title: "Qubic"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, machine-learning]
 aliases: ["QUBIC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://qubic.org/"
-related: ["[[crypto-markets]]", "[[artificial-intelligence]]", "[[proof-of-work]]", "[[depin]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[depin]]", "[[proof-of-work]]"]
 ---
 
 # Qubic
@@ -153,3 +153,102 @@ The honest read: a **lottery-ticket-style AI/PoW speculation** — deep drawdown
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko markets data.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | QUBIC |
+| **Market Cap Rank** | #369 |
+| **Market Cap** | $62.69M |
+| **Current Price** | $0.00000045 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Layer 1 (L1), Proof of Work (PoW), Quantum-Resistant |
+| **Website** | [https://qubic.org/](https://qubic.org/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 140.07T QUBIC |
+| **Total Supply** | 173.96T QUBIC |
+| **Max Supply** | 200.00T QUBIC |
+| **Fully Diluted Valuation** | $77.85M |
+| **Market Cap / FDV Ratio** | 0.81 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00001256 (2024-03-02) |
+| **Current vs ATH** | -96.44% |
+| **All-Time Low** | $0.00000036 (2026-06-26) |
+| **Current vs ATL** | +22.81% |
+| **24h Change** | -6.23% |
+| **7d Change** | -4.28% |
+| **30d Change** | -7.96% |
+| **1y Change** | -72.27% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | QUBIC/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://qubic.org/](https://qubic.org/) |
+| **Twitter** | [@_Qubic_](https://twitter.com/_Qubic_) |
+| **Telegram** | [qubic_network](https://t.me/qubic_network) (18,984 members) |
+| **Discord** | [https://discord.com/invite/2vDMR8m](https://discord.com/invite/2vDMR8m) |
+| **GitHub** | [https://github.com/qubic](https://github.com/qubic) |
+| **Whitepaper** | [https://whitepaper.qubic.org/](https://whitepaper.qubic.org/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.63M |
+| **Market Cap Rank** | #369 |
+| **24h Range** | $0.00000044 — $0.00000048 |
+| **CoinGecko Sentiment** | 57% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

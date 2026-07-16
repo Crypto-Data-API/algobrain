@@ -2,14 +2,14 @@
 title: "GMX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["GMX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gmx.io/"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[perpetual-futures]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[perpetual-futures]]"]
 ---
 
 # GMX
@@ -172,3 +172,120 @@ GMX is a flagship **perp-DEX / DeFi derivatives** token.
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GMX |
+| **Market Cap Rank** | #372 |
+| **Market Cap** | $62.22M |
+| **Current Price** | $5.96 |
+| **Categories** | Decentralized Finance (DeFi), Derivatives, Perpetuals |
+| **Website** | [https://gmx.io/](https://gmx.io/) |
+
+---
+
+## Overview
+
+GMX is a leading permissionless onchain exchange, enabling you to trade 70+ assets with up to 100x leverage from your self-custody wallet. The DEX is live on Arbitrum, Avalanche, and Solana, and in the process of enabling multichain access from all popular EVM blockchains. Trading on GMX is facilitated by isolated GM pools and capital-efficient GLV vaults, enabling anyone to provide liquidity and earn fees.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 10.44M GMX |
+| **Total Supply** | 10.44M GMX |
+| **Max Supply** | 13.25M GMX |
+| **Fully Diluted Valuation** | $62.22M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $91.07 (2023-04-18) |
+| **Current vs ATH** | -93.44% |
+| **All-Time Low** | $5.07 (2026-06-05) |
+| **Current vs ATL** | +17.80% |
+| **24h Change** | +0.22% |
+| **7d Change** | +1.65% |
+| **30d Change** | +0.82% |
+| **1y Change** | -54.60% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Arbitrum One
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Arbitrum One | `0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a` |
+| Avalanche | `0x62edc0692bd897d2295872a9ffcac5425011c661` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | GMX/USDT | N/A |
+| Kraken | GMX/USD | N/A |
+| Bitget | GMX/USDT | N/A |
+| KuCoin | GMX/USDT | N/A |
+| Crypto.com Exchange | GMX/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://gmx.io/](https://gmx.io/) |
+| **Twitter** | [@GMX_IO](https://twitter.com/GMX_IO) |
+| **Telegram** | [GMX_IO](https://t.me/GMX_IO) (8,395 members) |
+| **Discord** | [https://discord.com/invite/H5PeQru3Aa](https://discord.com/invite/H5PeQru3Aa) |
+| **GitHub** | [https://github.com/xvi10/gambit-contracts](https://github.com/xvi10/gambit-contracts) |
+| **Whitepaper** | [https://docs.gmx.io/](https://docs.gmx.io/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.15M |
+| **Market Cap Rank** | #372 |
+| **24h Range** | $5.93 — $6.09 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[arbitrum]]
+
+---

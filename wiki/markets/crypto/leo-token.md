@@ -2,7 +2,7 @@
 title: "LEO Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, exchange]
 aliases: ["LEO", "UNUS SED LEO"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Decentralized"
 website: "https://www.bitfinex.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitfinex]]", "[[tether]]", "[[centralized-exchange]]", "[[whitebit]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[bitfinex]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[tether]]", "[[whitebit]]"]
 ---
 
 # LEO Token
@@ -233,3 +233,70 @@ LEO is *sui generis* among [[centralized-exchange]] tokens: where BNB/OKB/WBT/BG
 - UNUS SED LEO whitepaper (iFinex, May 2019) — https://www.bitfinex.com/wp-2019-05.pdf
 - CryptoTicker: "What is UNUS SED LEO? The Deflationary Giant Entering the Top 10" — https://cryptoticker.io/en/what-is-unus-sed-leo-leo-token-explained/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 920.19M LEO |
+| **Total Supply** | 985.24M LEO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $9.66B |
+| **Market Cap / FDV Ratio** | 0.93 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $10.57 (2026-05-04) |
+| **Current vs ATH** | -7.19% |
+| **All-Time Low** | $0.7999 (2019-12-24) |
+| **Current vs ATL** | +1126.42% |
+| **24h Change** | -0.01% |
+| **7d Change** | +3.24% |
+| **30d Change** | +0.94% |
+| **1y Change** | +11.26% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3` |
+| Sora | `0x009e199267a6a2c8ae075bb8d4c40ee8d05c1b769085ee59ce98e50c2b2d8756` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X2AF5D2AD76741191D15DFE7BF6AC92D4BD912CA3/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $451,278.00 |
+| **Market Cap Rank** | #15 |
+| **24h Range** | $9.77 — $9.87 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

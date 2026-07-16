@@ -2,14 +2,14 @@
 title: "Orderly Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, market-microstructure, exchange]
+tags: [crypto, defi, exchange, market-microstructure]
 aliases: ["ORDER", "Orderly", "Orderly Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://orderly.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[hypercore]]", "[[clob]]", "[[perp-dex-aggregation]]", "[[hyperliquid-vs-dydx-vs-gmx]]", "[[market-microstructure]]", "[[hyperliquid-order-book-microstructure]]"]
+related: ["[[clob]]", "[[crypto-markets]]", "[[ethereum]]", "[[hypercore]]", "[[hyperliquid-order-book-microstructure]]", "[[hyperliquid-vs-dydx-vs-gmx]]", "[[hyperliquid]]", "[[market-microstructure]]", "[[perp-dex-aggregation]]"]
 ---
 
 # Orderly Network
@@ -239,3 +239,39 @@ Orderly is the smallest by token cap in this set and the only one whose explicit
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original market-data snapshot (tokenomics, listings, contract addresses)
 - Market snapshot 2026-06-20: cryptodataapi.com / CoinGecko top-1000 markets data (price, market cap, rank, volume, supply, ATH/ATL refresh)
 - (Source: [[2026-04-22-gap-finder-hyperliquid-order-books]]) — shared-CLOB-layer role, "Orderly-based markets" framing, contrast with Hyperliquid, perp-DEX aggregation context
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ORDER |
+| **Market Cap Rank** | #1014 |
+| **Market Cap** | $13.24M |
+| **Current Price** | $0.0333 |
+| **Categories** | Smart Contract Platform, Decentralized Finance (DeFi), Perpetuals, Layer 2 (L2), Binance Alpha Spotlight, Base Native |
+| **Website** | [https://orderly.network/](https://orderly.network/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 397.15M ORDER |
+| **Total Supply** | 1.00B ORDER |
+| **Max Supply** | 1.00B ORDER |
+| **Fully Diluted Valuation** | $33.33M |
+| **Market Cap / FDV Ratio** | 0.40 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.20M |
+| **Market Cap Rank** | #1014 |
+| **24h Range** | $0.0328 — $0.0350 |
+| **Last Updated** | 2026-07-16 |
+
+---

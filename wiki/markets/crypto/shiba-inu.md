@@ -2,15 +2,15 @@
 title: "Shiba Inu"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
+tags: [altcoins, crypto, ethereum]
 aliases: ["SHIB", "SHIB Army", "Shibarium"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized (anonymous founder 'Ryoshi')"
 website: "https://shibatoken.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[dogecoin]]", "[[official-trump]]"]
+related: ["[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[official-trump]]"]
 ---
 
 # Shiba Inu
@@ -296,3 +296,55 @@ Relative to DOGE, SHIB carries **more ecosystem ambition** (its own L2/L3) but *
 - [TradingKey — Shiba Inu 2026: L3 Evolution, burn rate, Shibarium](https://www.tradingkey.com/analysis/cryptocurrencies/more/261631516-shiba-inu-coin-swap-burn-rate-shibarium-tradingkey)
 - [KuCoin — Complete Guide to the SHIB Burn](https://www.kucoin.com/blog/shiba-inu-burn)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 589.24T SHIB |
+| **Total Supply** | 589.50T SHIB |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.45B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00008616 (2021-10-28) |
+| **Current vs ATH** | -95.17% |
+| **All-Time Low** | $0.00000000 (2020-11-28) |
+| **Current vs ATL** | +7384050.12% |
+| **24h Change** | -1.87% |
+| **7d Change** | -2.95% |
+| **30d Change** | -17.82% |
+| **1y Change** | -69.78% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $54.46M |
+| **Market Cap Rank** | #38 |
+| **24h Range** | $0.00000415 — $0.00000433 |
+| **CoinGecko Sentiment** | 61% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "DeGate"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["DG", "DeGate DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://degate.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[zk-rollup]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[zk-rollup]]"]
 ---
 
 # DeGate

@@ -2,14 +2,14 @@
 title: "Resupply USD"
 type: market
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
+tags: [crypto, defi, stablecoin]
 aliases: ["REUSD", "Resupply USD", "reUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://resupply.fi/"
-related: ["[[stablecoin]]", "[[defi]]", "[[collateralization]]", "[[curve]]", "[[usdc]]", "[[dola-usd]]", "[[dai]]", "[[ethereum]]", "[[crypto-markets]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[dola-usd]]", "[[ethereum]]", "[[stablecoin]]", "[[usdc]]"]
 ---
 
 # Resupply USD
@@ -155,3 +155,105 @@ See [[stablecoin]], [[depeg]], and [[collateralization]] for the general framewo
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge (Resupply CDP-on-lending-markets mechanism, Curve Lend / Fraxlend collateral); no specific wiki source ingested yet.
+
+## Overview
+
+A decentralized stablecoin backed by Collateralized Debt Positions (CDP), leveraging the liquidity and stability of lending markets.
+
+The Resupply stablecoin is backed by other stablecoins that are earning interest on other lending markets.
+
+Designed to maximize yield returns by having the borrow rate always be half the lending rate being earned, half the risk-free rate, or two percent, whichever is greater.
+
+Emissions are designed for long-term sustainability by directing at three groups: the insurance pool, voting incentives, and directly at borrowers.
+
+The revenue that borrowers generate will directly correlate with the emissions directed towards them. The more revenue a borrower generates for Resupply, the greater the share of emissions it will receive.
+
+Targeted platforms for launch are Curve Lend and Fraxlend.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 32.00M REUSD |
+| **Total Supply** | 32.00M REUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $31.87M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.18 (2025-09-15) |
+| **Current vs ATH** | -15.80% |
+| **All-Time Low** | $0.9595 (2026-02-06) |
+| **Current vs ATL** | +3.99% |
+| **24h Change** | -0.44% |
+| **7d Change** | -0.29% |
+| **30d Change** | -0.32% |
+| **1y Change** | +0.53% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x57ab1e0003f623289cd798b1824be09a793e4bec` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://resupply.fi/](https://resupply.fi/) |
+| **Twitter** | [@ResupplyFi](https://twitter.com/ResupplyFi) |
+| **Discord** | [https://discord.gg/resupplyfi](https://discord.gg/resupplyfi) |
+| **Whitepaper** | [https://docs.resupply.fi/](https://docs.resupply.fi/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1,284.25 |
+| **Market Cap Rank** | #613 |
+| **24h Range** | $0.9861 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

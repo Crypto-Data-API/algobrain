@@ -2,14 +2,14 @@
 title: "f(x) USD Saving"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, defi]
+tags: [crypto, defi, stablecoins]
 aliases: ["FXSAVE", "fxSAVE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://fx.aladdin.club/"
-related: ["[[crypto-markets]]", "[[stablecoins]]", "[[f-x-protocol-fxusd]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[f-x-protocol-fxusd]]", "[[stablecoins]]"]
 ---
 
 # f(x) USD Saving
@@ -158,3 +158,67 @@ The ATH/ATL extremes pre-date a stable operating regime and reflect illiquid ear
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FXSAVE |
+| **Market Cap Rank** | #430 |
+| **Market Cap** | $50.80M |
+| **Current Price** | $1.11 |
+| **Categories** | Yield-Bearing Stablecoin |
+| **Website** | [https://fx.aladdin.club/](https://fx.aladdin.club/) |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.68 (2026-02-21) |
+| **Current vs ATH** | -76.29% |
+| **All-Time Low** | $0.9722 (2026-03-19) |
+| **Current vs ATL** | +14.14% |
+| **24h Change** | +0.11% |
+| **7d Change** | +0.12% |
+| **30d Change** | -0.03% |
+| **1y Change** | +8.02% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1,613.94 |
+| **Market Cap Rank** | #430 |
+| **24h Range** | $1.11 — $1.11 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,7 +2,7 @@
 title: "USDKG"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["USDKG"]
@@ -130,4 +130,4 @@ USDKG is a 1:1 USD-pegged, gold-backed stablecoin. Transact 24/7 and settle cros
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

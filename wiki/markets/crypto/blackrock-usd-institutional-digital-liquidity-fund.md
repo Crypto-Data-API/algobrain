@@ -2,7 +2,7 @@
 title: "BlackRock USD Institutional Digital Liquidity Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum, regulation]
 aliases: ["BUIDL", "BlackRock BUIDL"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "New York, USA (BlackRock); tokenized via Securitize"
 website: "https://securitize.io/blackrock/buidl"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[blackrock]]", "[[securitize]]", "[[hashnote-usyc]]", "[[tokenized-treasuries]]", "[[real-world-assets]]", "[[ousg]]", "[[treasury-bills]]"]
+related: ["[[blackrock]]", "[[crypto-markets]]", "[[ethereum]]", "[[hashnote-usyc]]", "[[ousg]]", "[[real-world-assets]]", "[[securitize]]", "[[tokenized-treasuries]]", "[[treasury-bills]]"]
 ---
 
 # BlackRock USD Institutional Digital Liquidity Fund
@@ -180,3 +180,60 @@ None — BUIDL is a permissioned security token; transfers restricted to whiteli
 - Arkham Research, "Total value of tokenized U.S. Treasuries now more than $10B" — https://info.arkm.com/research/the-total-value-of-tokenized-u-s-treasuries-is-now-more-than-10b
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via Perplexity sonar, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.61B BUIDL |
+| **Total Supply** | 2.61B BUIDL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.61B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.00 (2025-02-12) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $1.00 (2025-02-12) |
+| **Current vs ATL** | +0.00% |
+| **24h Change** | +0.00% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #35 |
+| **24h Range** | $1.00 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

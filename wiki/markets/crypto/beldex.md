@@ -2,7 +2,7 @@
 title: "Beldex"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, regulation]
 aliases: ["BDX"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://beldex.io/"
-related: ["[[crypto-markets]]", "[[monero]]", "[[ethereum]]", "[[narrative-trading]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[monero]]", "[[narrative-trading]]"]
 ---
 
 # Beldex
@@ -218,3 +218,58 @@ Beldex has **no hard max supply** (issuance funds masternode/[[proof-of-stake|Po
 - CoinStats — Beldex investment analysis (May 2026 price/rank): https://coinstats.app/ai/a/investment-analysis-beldex
 - Beldex official site: https://beldex.io/
 - Web verification, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 7.87B BDX |
+| **Total Supply** | 9.94B BDX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $895.03M |
+| **Market Cap / FDV Ratio** | 0.79 |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 38 |
+| **GitHub Forks** | 26 |
+| **Commits (4 weeks)** | 2 |
+| **Pull Requests Merged** | 155 |
+| **Contributors** | 17 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $19.40M |
+| **Market Cap Rank** | #87 |
+| **24h Range** | $0.0800 — $0.0913 |
+| **CoinGecko Sentiment** | 71% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

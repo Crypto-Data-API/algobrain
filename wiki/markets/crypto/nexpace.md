@@ -2,14 +2,14 @@
 title: "Nexpace"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi]
-aliases: ["NXPC", "MapleStory N"]
+tags: [crypto, gamefi, nft]
+aliases: ["MapleStory N", "NXPC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://msu.io/"
-related: ["[[crypto-markets]]", "[[gamefi]]", "[[gaming-tokens]]", "[[non-fungible-token]]", "[[hyperliquid]]", "[[avalanche]]", "[[bnb]]"]
+related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[non-fungible-token]]"]
 ---
 
 # Nexpace
@@ -147,3 +147,86 @@ Among gaming/IP small-caps here, NXPC stands out for its genuine AAA-publisher b
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | NXPC |
+| **Market Cap Rank** | #323 |
+| **Market Cap** | $74.62M |
+| **Current Price** | $0.2582 |
+| **Categories** | Smart Contract Platform, Gaming (GameFi), NFT, Layer 1 (L1), Avalanche L1, Binance HODLer Airdrops |
+| **Website** | [https://msu.io/](https://msu.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 288.97M NXPC |
+| **Total Supply** | 994.55M NXPC |
+| **Max Supply** | 1.00B NXPC |
+| **Fully Diluted Valuation** | $256.84M |
+| **Market Cap / FDV Ratio** | 0.29 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $3.77 (2025-05-15) |
+| **Current vs ATH** | -93.16% |
+| **All-Time Low** | $0.2469 (2026-02-11) |
+| **Current vs ATL** | +4.61% |
+| **24h Change** | -0.19% |
+| **7d Change** | -0.66% |
+| **30d Change** | -23.18% |
+| **1y Change** | -75.05% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | NXPC/USDT | N/A |
+| Upbit | NXPC/KRW | N/A |
+| Bitget | NXPC/USDT | N/A |
+| KuCoin | NXPC/USDT | N/A |
+| Crypto.com Exchange | NXPC/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.70M |
+| **Market Cap Rank** | #323 |
+| **24h Range** | $0.2550 — $0.2617 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

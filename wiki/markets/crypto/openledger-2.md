@@ -2,14 +2,14 @@
 title: "OpenLedger"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, decentralized-ai, data-provider]
+tags: [crypto, data-provider, decentralized-ai]
 aliases: ["OPEN", "OpenLedger AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.openledger.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[artificial-intelligence]]", "[[decentralized-ai]]", "[[ai-agent-tokens]]", "[[data-provider]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-provider]]", "[[decentralized-ai]]", "[[ethereum]]"]
 ---
 
 # OpenLedger
@@ -159,3 +159,113 @@ Not financial advice; low-float AI tokens carry severe drawdown and dilution ris
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-20.
 - Macro context: 2026-06-22 snapshot (cryptodataapi.com / CoinGecko) — F&G 21 (Extreme Fear), bottoming/accumulation regime.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | OPEN |
+| **Market Cap Rank** | #620 |
+| **Market Cap** | $31.34M |
+| **Current Price** | $0.1454 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Layer 2 (L2), Rollup, Binance HODLer Airdrops, Binance Alpha Spotlight |
+| **Website** | [https://www.openledger.xyz/](https://www.openledger.xyz/) |
+
+---
+
+## Overview
+
+OpenLedger is the AI blockchain, unlocking liquidity to monetize data, models, apps and agents. It enables the training, deployment and on-chain tracking of specialized AI models and data, solving critical challenges around transparency, attribution and verifiability in AI.
+
+At the core, we’re addressing the $500B data problem, where high-value datasets remain siloed and uncompensated. OpenLedger changes this by embedding native attribution, verifiable provenance, and programmable incentives directly. Built on this foundation, we provide the infrastructure to scale intelligent systems with traceable data influence and provable outcomes and advancing AI from opaque and centralized to open, auditable and decentralized.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 215.50M OPEN |
+| **Total Supply** | 1.00B OPEN |
+| **Max Supply** | 1.00B OPEN |
+| **Fully Diluted Valuation** | $145.45M |
+| **Market Cap / FDV Ratio** | 0.22 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.82 (2025-09-08) |
+| **Current vs ATH** | -91.97% |
+| **All-Time Low** | $0.1394 (2026-03-07) |
+| **Current vs ATL** | +4.70% |
+| **24h Change** | -1.25% |
+| **7d Change** | -1.57% |
+| **30d Change** | -41.32% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xa227cc36938f0c9e09ce0e64dfab226cad739447` |
+| Ethereum | `0xa227cc36938f0c9e09ce0e64dfab226cad739447` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | OPEN/USDT | N/A |
+| Kraken | OPEN/USD | N/A |
+| Upbit | OPEN/KRW | N/A |
+| Bitget | OPEN/USDT | N/A |
+| KuCoin | OPEN/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.openledger.xyz/](https://www.openledger.xyz/) |
+| **Twitter** | [@OpenledgerFdn](https://twitter.com/OpenledgerFdn) |
+| **Telegram** | [openledgerofficial](https://t.me/openledgerofficial) (22,793 members) |
+| **Whitepaper** | [https://www.openledgerfoundation.com/white-paper](https://www.openledgerfoundation.com/white-paper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.54M |
+| **Market Cap Rank** | #620 |
+| **24h Range** | $0.1445 — $0.1516 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

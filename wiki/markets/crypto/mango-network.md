@@ -2,14 +2,14 @@
 title: "Mango Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, cross-chain]
-aliases: ["MGO", "MangoOS Network", "MangoNet"]
+tags: [altcoins, cross-chain, crypto]
+aliases: ["MGO", "MangoNet", "MangoOS Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://mangonet.io/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[cross-chain]]", "[[smart-contracts]]", "[[bnb]]"]
+related: ["[[bnb]]", "[[cross-chain]]", "[[crypto-markets]]", "[[layer-1]]", "[[smart-contracts]]"]
 ---
 
 # Mango Network

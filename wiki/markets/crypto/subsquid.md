@@ -2,14 +2,14 @@
 title: "SQD (Subsquid)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["SQD", "Subsquid"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sqd.dev"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[ethereum]]", "[[the-graph]]", "[[base]]", "[[depin]]", "[[artificial-intelligence]]"]
+related: ["[[arbitrum]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[the-graph]]"]
 ---
 
 # SQD (Subsquid)
@@ -139,3 +139,118 @@ The thesis: every dApp, wallet, explorer, and analytics product needs fast acces
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SQD |
+| **Market Cap Rank** | #568 |
+| **Market Cap** | $34.64M |
+| **Current Price** | $0.0299 |
+| **Categories** | Artificial Intelligence (AI), Big Data, Analytics, CoinList Launchpad, Base Native |
+| **Website** | [https://sqd.dev](https://sqd.dev) |
+
+---
+
+## Overview
+
+Subsquid Network is an innovative decentralized data lake and query engine designed to offer developers performant and permissionless access to data, aiming to build a neutral and open internet rooted in Web3 principles. Secured by ZK proofs, the Subsquid network boasts a modular architecture that enables exceptional scalability and developer convenience optimized for blockchain indexing, dApp development, and analytics.
+
+Subsquid is a response to unscalable and rigid monolithic indexing frameworks that had previously gained popularity and market traction among Web3 developers. Today, these frameworks are struggling to adapt in a rapidly evolving blockchain environment. Additionally, the network serves as a highly efficient and decentralized alternative to centralized infrastructure firms, including large RPC and API providers.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.16B SQD |
+| **Total Supply** | 1.34B SQD |
+| **Max Supply** | 1.34B SQD |
+| **Fully Diluted Valuation** | $40.06M |
+| **Market Cap / FDV Ratio** | 0.86 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2848 (2025-06-11) |
+| **Current vs ATH** | -89.50% |
+| **All-Time Low** | $0.0229 (2024-11-16) |
+| **Current vs ATL** | +30.90% |
+| **24h Change** | -0.93% |
+| **7d Change** | -0.87% |
+| **30d Change** | -25.32% |
+| **1y Change** | -78.23% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Arbitrum One
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Arbitrum One | `0x1337420ded5adb9980cfc35f8f2b054ea86f8ab1` |
+| Base | `0xd4554bea546efa83c1e6b389ecac40ea999b3e78` |
+| Binance Smart Chain | `0xe50e3d1a46070444f44df911359033f2937fcc13` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| KuCoin | SQD/USDT | N/A |
+| Crypto.com Exchange | SQD/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://sqd.dev](https://sqd.dev) |
+| **Twitter** | [@hellosqd](https://twitter.com/hellosqd) |
+| **Telegram** | [subsquid](https://t.me/subsquid) (37,458 members) |
+| **GitHub** | [https://github.com/subsquid](https://github.com/subsquid) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.35M |
+| **Market Cap Rank** | #568 |
+| **24h Range** | $0.0297 — $0.0310 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[arbitrum]]
+
+---

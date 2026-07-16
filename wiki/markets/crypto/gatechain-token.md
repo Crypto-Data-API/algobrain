@@ -2,15 +2,15 @@
 title: "GateToken"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, exchange]
-aliases: ["GT", "Gate", "GateChain Token", "Gate Token"]
+aliases: ["GT", "Gate", "Gate Token", "GateChain Token"]
 entity_type: protocol
 founded: 2019
 headquarters: "Gate (formerly Gate.io); GateLayer ecosystem"
 website: "https://www.gate.com/gt"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitget-token]]", "[[binance-coin]]"]
+related: ["[[binance-coin]]", "[[bitget-token]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # GateToken
@@ -163,3 +163,46 @@ GT is the rare exchange token where the **headline scarcity story is genuine**: 
 - Gate — GT token page: https://www.gate.com/gt
 - Web verification, 2026-06-10: Gate Layer OP-Stack launch, burn statistics, market cap confirmed.
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GT |
+| **Market Cap Rank** | #86 |
+| **Market Cap** | $713.73M |
+| **Current Price** | $6.70 |
+| **Categories** | Smart Contract Platform, Exchange-based Tokens, Centralized Exchange (CEX) Token, Proof of Stake (PoS), Made in China |
+| **Website** | [https://gatechain.io/gatelayer](https://gatechain.io/gatelayer) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $950,234.00 |
+| **Market Cap Rank** | #86 |
+| **24h Range** | $6.68 — $6.79 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "JOE (Trader Joe / LFJ)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["JOE", "Trader Joe", "LFJ"]
+aliases: ["JOE", "LFJ", "Trader Joe"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lfj.gg/avalanche"
-related: ["[[crypto-markets]]", "[[avalanche]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[concentrated-liquidity]]", "[[impermanent-loss]]", "[[governance-token]]", "[[liquidity-pool]]"]
+related: ["[[automated-market-maker]]", "[[avalanche]]", "[[concentrated-liquidity]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[liquidity-pool]]"]
 ---
 
 # JOE (Trader Joe / LFJ)

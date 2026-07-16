@@ -2,14 +2,14 @@
 title: "Osmosis"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["OSMO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://osmosis.zone/"
-related: ["[[crypto-markets]]", "[[cosmos]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[automated-market-maker]]"]
+related: ["[[automated-market-maker]]", "[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]"]
 ---
 
 # Osmosis
@@ -131,3 +131,123 @@ OSMO's direct competitors are other DEXs — both EVM ([[automated-market-maker|
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko bulk top-1000 snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | OSMO |
+| **Market Cap Rank** | #698 |
+| **Market Cap** | $26.10M |
+| **Current Price** | $0.0334 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), Automated Market Maker (AMM), Proof of Stake (PoS), Made in USA |
+| **Website** | [https://osmosis.zone/](https://osmosis.zone/) |
+
+---
+
+## Overview
+
+Osmosis (OSMO) is the premier DEX and cross-chain DeFi hub within the Cosmos ecosystem, a network of over 50 sovereign, interoperable blockchains seamlessly connected through the Inter-Blockchain Communication Protocol (IBC). Pioneering in its approach, Osmosis offers a dynamic trading and liquidity provision experience, integrating non-IBC assets from other ecosystems, including Ethereum, Solana, Avalanche, and Polkadot. Initially adopting Balancer-style pools, Osmosis now also features a concentrated liquidity model that is orders of magnitude more capital efficient, meaning that significantly less liquidity is required to handle the same amount of trading volume with minimal slippage.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 781.14M OSMO |
+| **Total Supply** | 976.10M OSMO |
+| **Max Supply** | 1.00B OSMO |
+| **Fully Diluted Valuation** | $32.61M |
+| **Market Cap / FDV Ratio** | 0.80 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $11.25 (2022-03-04) |
+| **Current vs ATH** | -99.70% |
+| **All-Time Low** | $0.0292 (2026-03-29) |
+| **Current vs ATL** | +14.56% |
+| **24h Change** | -1.40% |
+| **7d Change** | -6.09% |
+| **30d Change** | -28.50% |
+| **1y Change** | -81.67% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Osmosis
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Osmosis | `uosmo` |
+| Evmos | `0xfa3c22c069b9556a4b2f7ece1ee3b467909f4864` |
+| Cosmos | `ibc/14F9BC3E44B8A9C1BE1FB08980FAB87034C9905EF17CF2F5008FC085218811CC` |
+| Secret | `secret150jec8mc2hzyyqak4umv6cfevelr0x9p0mjxgg` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | OSMO/USDT | N/A |
+| Kraken | OSMO/USD | N/A |
+| KuCoin | OSMO/USDT | N/A |
+| Crypto.com Exchange | OSMO/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://osmosis.zone/](https://osmosis.zone/) |
+| **Twitter** | [@osmosis ](https://twitter.com/osmosis ) |
+| **Telegram** | [osmosis_chat](https://t.me/osmosis_chat) (9,287 members) |
+| **GitHub** | [https://github.com/osmosis-labs/osmosis](https://github.com/osmosis-labs/osmosis) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 963 |
+| **GitHub Forks** | 694 |
+| **Pull Requests Merged** | 5,286 |
+| **Contributors** | 181 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.00M |
+| **Market Cap Rank** | #698 |
+| **24h Range** | $0.0333 — $0.0343 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

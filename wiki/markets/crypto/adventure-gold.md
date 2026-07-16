@@ -2,14 +2,14 @@
 title: "Adventure Gold"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["AGLD", "Adventure Gold"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lootproject.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[nft]]", "[[gamefi]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]"]
 ---
 
 # Adventure Gold

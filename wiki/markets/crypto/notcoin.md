@@ -2,14 +2,14 @@
 title: "Notcoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, meme]
 aliases: ["NOT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://t.me/notcoin_bot"
-related: ["[[crypto-markets]]", "[[ton]]", "[[the-open-network]]", "[[meme-coin]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[the-open-network]]", "[[ton]]"]
 ---
 
 # Notcoin
@@ -138,3 +138,103 @@ Notcoin is **community- and narrative-driven** rather than utility-driven. Its o
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | NOT |
+| **Market Cap Rank** | #542 |
+| **Market Cap** | $37.34M |
+| **Current Price** | $0.00037553 |
+| **Categories** | Gaming (GameFi), Binance Launchpool, Meme, Play To Earn, TON Meme, Tap to Earn |
+| **Website** | [https://t.me/notcoin_bot](https://t.me/notcoin_bot) |
+
+---
+
+## Overview
+
+Notcoin ($NOT) is as a community-driven token aimed at onboarding users into the Web3 ecosystem through a tap-to-earn game.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 99.43B NOT |
+| **Total Supply** | 102.45B NOT |
+| **Max Supply** | 102.46B NOT |
+| **Fully Diluted Valuation** | $38.47M |
+| **Market Cap / FDV Ratio** | 0.97 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0284 (2024-06-02) |
+| **Current vs ATH** | -98.68% |
+| **All-Time Low** | $0.00032676 (2026-02-28) |
+| **Current vs ATL** | +14.76% |
+| **24h Change** | -0.51% |
+| **7d Change** | -3.20% |
+| **30d Change** | -15.11% |
+| **1y Change** | -83.10% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** The Open Network
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| The Open Network | `EQAvlWFDxGF2lXm67y4yzC17wYKD9A0guwPkMs1gOsM__NOT` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | NOT/USDT | N/A |
+| Kraken | NOT/USD | N/A |
+| Bitget | NOT/USDT | N/A |
+| KuCoin | NOT/USDT | N/A |
+| Crypto.com Exchange | NOT/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://t.me/notcoin_bot](https://t.me/notcoin_bot) |
+| **Twitter** | [@thenotcoin](https://twitter.com/thenotcoin) |
+| **Telegram** | [notcoin](https://t.me/notcoin) (9.44M members) |
+| **Whitepaper** | [https://cdn.joincommunity.xyz/notcoin/Notcoin_Whitepaper.pdf](https://cdn.joincommunity.xyz/notcoin/Notcoin_Whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.95M |
+| **Market Cap Rank** | #542 |
+| **24h Range** | $0.00037193 — $0.00038372 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

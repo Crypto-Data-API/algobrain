@@ -2,14 +2,14 @@
 title: "Backpack"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["BP", "Backpack"]
 entity_type: protocol
 headquarters: "Decentralized / global"
 website: "https://backpack.exchange"
-related: ["[[crypto-markets]]", "[[centralized-exchange]]", "[[solana]]", "[[binance]]", "[[hyperliquid]]"]
+related: ["[[binance]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[solana]]"]
 ---
 
 # Backpack
@@ -147,3 +147,97 @@ Within this run's set, BP is the lone large positive mover while gaming/RWA peer
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko markets snapshot.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BP |
+| **Market Cap Rank** | #2083 |
+| **Market Cap** | $2.41M |
+| **Current Price** | $0.00246974 |
+| **Categories** | Meme, Dog-Themed, Solana Meme |
+| **Website** | [https://barkingpuppysol.com/](https://barkingpuppysol.com/) |
+
+---
+
+## Overview
+
+A fan-made meme coin celebrating the @BPuppy80020 / Barking Puppy persona associated with the Gillions, but is completely community operated. Any direct connection to them is a pure coincidence. The Barking Puppy community celebrates and plots the overturning of institutions that have held the underdogs down for so long. The same energy that shook Wall Street, just with more barking. Launched by a fan of the Barking Puppy persona on 18 January 2026 via PumpFun. It has now gathered an X-community of over 1.5k members, and 6.6k holders on the coin. It continues to experience over $1m a day in daily volume, and has a community of admins and community managers managing the project (over a dozen volunteers at last count).
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 973.96M BP |
+| **Total Supply** | 973.96M BP |
+| **Max Supply** | 1.00B BP |
+| **Fully Diluted Valuation** | $2.41M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0142 (2026-02-14) |
+| **Current vs ATH** | -82.58% |
+| **All-Time Low** | $0.00125896 (2026-02-10) |
+| **Current vs ATL** | +96.88% |
+| **24h Change** | +1.63% |
+| **7d Change** | +29.00% |
+| **30d Change** | -7.73% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.83M |
+| **Market Cap Rank** | #2083 |
+| **24h Range** | $0.00225243 — $0.00253424 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

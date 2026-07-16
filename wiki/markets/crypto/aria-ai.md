@@ -2,7 +2,7 @@
 title: "Aria.AI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["ARIA"]
@@ -134,4 +134,4 @@ AriaAI is a next-generation game development and publishing experiment inspired 
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

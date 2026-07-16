@@ -2,14 +2,14 @@
 title: "Incrypt"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
-tags: [crypto]
+tags: [crypto, defi]
 aliases: ["INC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://incrypt.com.au"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]"]
 ---
 
 # Incrypt
@@ -122,10 +122,10 @@ INC is the main currency of the Incrypt ecosystem, used to buy NFT card packs, a
 ## See Also
 
 - [[crypto-markets]]
-- [[solana]]
+- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

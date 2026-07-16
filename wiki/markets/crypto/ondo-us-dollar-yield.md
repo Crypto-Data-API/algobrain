@@ -2,15 +2,15 @@
 title: "Ondo US Dollar Yield"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, treasuries]
-aliases: ["USDY", "US Dollar Yield Token"]
+aliases: ["US Dollar Yield Token", "USDY"]
 entity_type: protocol
 founded: 2023
 headquarters: "Ondo Finance (USA; USDY offered to non-US persons)"
 website: "https://ondo.finance/usdy"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[janus-henderson-anemoy-treasury-fund]]", "[[stablecoins]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[janus-henderson-anemoy-treasury-fund]]", "[[ondo-finance]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # Ondo US Dollar Yield
@@ -194,3 +194,48 @@ See the **Market Data** block above for the authoritative supply/price/market-ca
 - Ondo docs — USDY basics: https://docs.ondo.finance/general-access-products/usdy/basics
 - Web verification, 2026-06-10: market cap ~$2.1B, accumulating-note structure, multi-chain deployments confirmed.
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.26 (2024-03-27) |
+| **Current vs ATH** | -10.18% |
+| **All-Time Low** | $0.9342 (2024-01-14) |
+| **Current vs ATL** | +21.44% |
+| **24h Change** | +0.27% |
+| **7d Change** | +0.11% |
+| **30d Change** | +1.03% |
+| **1y Change** | +4.85% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.27M |
+| **Market Cap Rank** | #40 |
+| **24h Range** | $1.13 — $1.14 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

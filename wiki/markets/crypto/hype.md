@@ -2,13 +2,13 @@
 title: "HYPE (Hyperliquid Token)"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, leverage, exchange]
+tags: [crypto, defi, derivatives, exchange, leverage]
 entity_type: protocol
 aliases: ["HYPE", "HYPE-token", "hype-token"]
 website: "https://hyperliquid.xyz"
-related: ["[[crypto-markets]]", "[[decentralized-exchanges]]", "[[hyperliquid]]", "[[hypercore]]", "[[hyperbft]]", "[[hlp]]", "[[hip-3-builder-deployed-perps]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchanges]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperbft]]", "[[hypercore]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 headquarters: "Decentralized"
 ---
 
@@ -245,3 +245,55 @@ The ETFs mark HYPE's entry into regulated US wrappers and a meaningful expansion
 - [AMBCrypto — Bitwise joins 21Shares in race for Spot HYPE ETF](https://ambcrypto.com/hyperliquid-bitwise-joins-21shares-in-race-for-spot-hype-etf-dominance/)
 - [crypto.news — The real Hyperliquid story isn't the ETF (USDH/buybacks)](https://crypto.news/the-real-hyperliquid-story-isnt-the-etf/)
 - Verified via web search, 2026-06-11
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | HYPE |
+| **Market Cap Rank** | #10 |
+| **Market Cap** | $14.62B |
+| **Current Price** | $65.74 |
+| **Categories** | Decentralized Exchange (DEX), Smart Contract Platform, Exchange-based Tokens, Decentralized Finance (DeFi), Derivatives, Perpetuals, Layer 1 (L1), Proof of Stake (PoS) (+1 more) |
+| **Website** | [https://app.hyperliquid.xyz/trade](https://app.hyperliquid.xyz/trade) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 222.45M HYPE |
+| **Total Supply** | 955.31M HYPE |
+| **Max Supply** | 1.00B HYPE |
+| **Fully Diluted Valuation** | $62.81B |
+| **Market Cap / FDV Ratio** | 0.23 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $76.70 (2026-06-16) |
+| **Current vs ATH** | -14.29% |
+| **All-Time Low** | $3.81 (2024-11-29) |
+| **Current vs ATL** | +1626.13% |
+| **24h Change** | -3.17% |
+| **7d Change** | -3.30% |
+| **30d Change** | -10.34% |
+| **1y Change** | +36.66% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $431.36M |
+| **Market Cap Rank** | #10 |
+| **24h Range** | $65.66 — $68.82 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

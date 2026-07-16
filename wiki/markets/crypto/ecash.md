@@ -2,14 +2,14 @@
 title: "eCash"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["XEC", "BCHA"]
+aliases: ["BCHA", "XEC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://e.cash/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[bitcoin-cash]]"]
+related: ["[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]"]
 ---
 
 # eCash
@@ -157,3 +157,111 @@ eCash is the **smallest, most experimental** of the Bitcoin-derived payment chai
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko snapshot.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XEC |
+| **Market Cap Rank** | #221 |
+| **Market Cap** | $128.17M |
+| **Current Price** | $0.00000639 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Bitcoin Fork, Proof of Work (PoW) |
+| **Website** | [https://e.cash/](https://e.cash/) |
+
+---
+
+## Overview
+
+eCash (XEC) is a Layer-1 digital cash network, developed by Bitcoin ABC. It was created on Nov 15th, 2020, and has since distinguished itself from its predecessors and other Bitcoin clients by integrating the breakthrough Avalanche consensus with its core proof-of-work (PoW) layer, extending its security and fundamental capabilities.
+
+This Nakamoto/Avalanche hybrid consensus integration gives it unique properties for a Bitcoin-like chain, such as instant transaction finality, staking rewards, extensibility through subnets, and flexible protocol governance.
+
+The development roadmap is set with three main goals:
+Scaling transaction throughput from ~100 tps to more than 5.000.000 tps
+Improving the payment experience with a less than 3 second transaction finality time
+Extending the protocol and establishing fork-free upgrades, allowing for more rapid, iterative development
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 20.06T XEC |
+| **Total Supply** | 20.06T XEC |
+| **Max Supply** | 21.00T XEC |
+| **Fully Diluted Valuation** | $128.17M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00038001 (2021-09-04) |
+| **Current vs ATH** | -98.32% |
+| **All-Time Low** | $0.00000481 (2026-07-01) |
+| **Current vs ATL** | +32.78% |
+| **24h Change** | -6.61% |
+| **7d Change** | +24.63% |
+| **30d Change** | +11.67% |
+| **1y Change** | -71.22% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | XEC/USDT | N/A |
+| Upbit | XEC/KRW | N/A |
+| KuCoin | XEC/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://e.cash/](https://e.cash/) |
+| **Twitter** | [@ecash](https://twitter.com/ecash) |
+| **Reddit** | [https://www.reddit.com/r/ecash/](https://www.reddit.com/r/ecash/) |
+| **Discord** | [https://discord.com/invite/HaVRXcST7n](https://discord.com/invite/HaVRXcST7n) |
+| **GitHub** | [https://github.com/bitcoin-abc](https://github.com/bitcoin-abc) |
+| **Whitepaper** | [https://e.cash/bitcoin.pdf](https://e.cash/bitcoin.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $16.23M |
+| **Market Cap Rank** | #221 |
+| **24h Range** | $0.00000640 — $0.00000707 |
+| **CoinGecko Sentiment** | 80% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

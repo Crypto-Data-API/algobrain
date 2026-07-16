@@ -2,14 +2,14 @@
 title: "AIOZ Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, machine-learning]
+tags: [ai-trading, crypto, machine-learning]
 aliases: ["AIOZ"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aioz.network"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[akash-network]]", "[[render-token]]", "[[aethir]]", "[[artificial-intelligence]]", "[[depin]]"]
+related: ["[[aethir]]", "[[akash-network]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[render-token]]"]
 ---
 
 # AIOZ Network
@@ -270,3 +270,40 @@ This is a qualitative framing, not a price target.
 - [CoinGecko: AIOZ Network](https://www.coingecko.com/en/coins/aioz-network)
 - [CoinPaprika: AIOZ Network](https://coinpaprika.com/coin/aioz-aioz-network/)
 - Verified via Perplexity (sonar), 2026-06-11
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AIOZ |
+| **Market Cap Rank** | #365 |
+| **Market Cap** | $63.14M |
+| **Current Price** | $0.0499 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Storage, Layer 1 (L1), DePIN |
+| **Website** | [https://aioz.network](https://aioz.network) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.26B AIOZ |
+| **Total Supply** | 1.27B AIOZ |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $63.30M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.23M |
+| **Market Cap Rank** | #365 |
+| **24h Range** | $0.0499 — $0.0513 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

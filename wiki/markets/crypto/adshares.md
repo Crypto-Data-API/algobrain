@@ -2,15 +2,15 @@
 title: "Adshares"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["ADS"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://adshares.net/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[depin]]", "[[staking]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[staking]]"]
 ---
 
 # Adshares
@@ -257,3 +257,10 @@ Only well-established, dated milestones are listed.
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

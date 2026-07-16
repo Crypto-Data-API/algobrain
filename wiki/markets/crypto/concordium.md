@@ -2,7 +2,7 @@
 title: "Concordium"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["CCD"]
@@ -154,3 +154,109 @@ The honest read: CCD is a **deep-drawdown, low-liquidity, narrative-dependent mi
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | CCD |
+| **Market Cap Rank** | #490 |
+| **Market Cap** | $42.42M |
+| **Current Price** | $0.00335471 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Layer 1 (L1), Decentralized Identifier (DID), Zero Knowledge (ZK), Payment Solutions, AI Agents, AI Applications (+3 more) |
+| **Website** | [https://www.concordium.com/](https://www.concordium.com/) |
+
+---
+
+## Overview
+
+Concordium is an AI infrastructure for the agentic economy powered by a purpose-built, regulatory-grade blockchain with identity and trust built into the protocol. When an AI agent acts autonomously, the counterparty needs assurance that a verified human authorised it. Concordium delivers that assurance at the infrastructure level. It is the only platform where verified humans and verified AI agents operate on the same identity layer. Every account on Concordium, whether a human wallet or an autonomous AI agent, is linked to a verified real-world identity through regulated identity providers. Privacy is preserved through zero-knowledge proofs, allowing users and agents to prove attributes without exposing personal data.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 12.65B CCD |
+| **Total Supply** | 14.56B CCD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $48.85M |
+| **Market Cap / FDV Ratio** | 0.87 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1494 (2022-02-10) |
+| **Current vs ATH** | -97.74% |
+| **All-Time Low** | $0.00262306 (2024-07-16) |
+| **Current vs ATL** | +28.61% |
+| **24h Change** | -10.65% |
+| **7d Change** | +8.89% |
+| **30d Change** | -29.03% |
+| **1y Change** | -24.49% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | CCD/USD | N/A |
+| KuCoin | CCD/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.concordium.com/](https://www.concordium.com/) |
+| **Twitter** | [@Concordium](https://twitter.com/Concordium) |
+| **Reddit** | [https://www.reddit.com/r/Concordium_Official/](https://www.reddit.com/r/Concordium_Official/) |
+| **Discord** | [https://discord.com/invite/xWmQ5tp](https://discord.com/invite/xWmQ5tp) |
+| **GitHub** | [https://github.com/Concordium](https://github.com/Concordium) |
+| **Whitepaper** | [https://docs.concordium.com/governance/whitepaper/Concordium%20White%20Paper.pdf](https://docs.concordium.com/governance/whitepaper/Concordium%20White%20Paper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $304,953.00 |
+| **Market Cap Rank** | #490 |
+| **24h Range** | $0.00334645 — $0.00376846 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

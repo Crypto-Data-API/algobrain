@@ -2,14 +2,14 @@
 title: "Geodnet"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["GEOD", "GEODNET"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://geodnet.com/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[polygon]]", "[[solana]]", "[[helium]]", "[[xyo-network]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[helium]]", "[[polygon]]", "[[solana]]", "[[xyo-network]]"]
 ---
 
 # Geodnet
@@ -137,3 +137,116 @@ The investment thesis rests on **hardware-network economics**: rather than the c
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GEOD |
+| **Market Cap Rank** | #279 |
+| **Market Cap** | $91.26M |
+| **Current Price** | $0.2018 |
+| **Categories** | Gaming (GameFi), Play To Earn, DePIN, Robotics |
+| **Website** | [https://geodnet.com/](https://geodnet.com/) |
+
+---
+
+## Overview
+
+The Global Earth Observation Decentralized Network (GEODNET) is a decentralized network of Space Weather mining stations that report the real-time influence of the Sun’s solar winds on the Global Navigation Satellite System (GNSS) signals.  This data is commonly used to accurately correct GNSS (GPS and other navigation satellite) signals to provide centimeter level positioning accuracy and improve absolute time accuracy to nano-second level.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 451.80M GEOD |
+| **Total Supply** | 963.82M GEOD |
+| **Max Supply** | 1.00B GEOD |
+| **Fully Diluted Valuation** | $194.69M |
+| **Market Cap / FDV Ratio** | 0.47 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.3743 (2025-01-25) |
+| **Current vs ATH** | -46.03% |
+| **All-Time Low** | $0.0342 (2023-09-13) |
+| **Current vs ATL** | +491.21% |
+| **24h Change** | +0.58% |
+| **7d Change** | -1.03% |
+| **30d Change** | -3.00% |
+| **1y Change** | +7.93% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Polygon Pos
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Polygon Pos | `0xac0f66379a6d7801d7726d5a943356a172549adb` |
+| Solana | `7JA5eZdCzztSfQbJvS8aVVxMFfd81Rs9VvwnocV1mKHu` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | 7JA5EZDCZZTSFQBJVS8AVVXMFFD81RS9VVWNOCV1MKHU/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://geodnet.com/](https://geodnet.com/) |
+| **Twitter** | [@GEODNET](https://twitter.com/GEODNET) |
+| **Telegram** | [geodnet](https://t.me/geodnet) (3,985 members) |
+| **Discord** | [https://discord.gg/geodnet](https://discord.gg/geodnet) |
+| **GitHub** | [https://github.com/geodnet](https://github.com/geodnet) |
+| **Whitepaper** | [https://geodnet.com/file/Geodnet%20whitepaper.pdf](https://geodnet.com/file/Geodnet%20whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $173,214.00 |
+| **Market Cap Rank** | #279 |
+| **24h Range** | $0.2003 — $0.2039 |
+| **CoinGecko Sentiment** | 67% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[polygon]]
+
+---

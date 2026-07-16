@@ -2,14 +2,14 @@
 title: "Vaulta"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["A", "EOS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.vaulta.com"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[bitcoin]]", "[[proof-of-stake]]", "[[real-world-assets]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]"]
 ---
 
 # Vaulta
@@ -145,3 +145,100 @@ A is the **most liquid** name in the group by some distance (~$8.7M/day) but als
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoints), `raw/data/crypto-loop/coingecko-markets.json`.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | A |
+| **Market Cap Rank** | #225 |
+| **Market Cap** | $124.19M |
+| **Current Price** | $0.0751 |
+| **Categories** | Layer 1 (L1) |
+| **Website** | [https://www.vaulta.com](https://www.vaulta.com) |
+
+---
+
+## Overview
+
+Vaulta is a Web3 banking network designed to power the next generation of decentralized financial services. Built on one of the most reliable Layer 1 infrastructures in the industry, Vaulta combines real-time performance with institutional-grade features to deliver secure, scalable, and composable applications—from consumer payments to Bitcoin-native yield and tokenized assets.
+With one-second finality, advanced on-chain memory via RAM, and integrated Bitcoin infrastructure through exSat, Vaulta serves as a financial operating system for users, developers, and institutions looking to bridge traditional finance and Web3.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.65B A |
+| **Total Supply** | 2.10B A |
+| **Max Supply** | 2.10B A |
+| **Fully Diluted Valuation** | $157.64M |
+| **Market Cap / FDV Ratio** | 0.79 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.7787 (2025-05-28) |
+| **Current vs ATH** | -90.39% |
+| **All-Time Low** | $0.0578 (2026-06-06) |
+| **Current vs ATL** | +29.47% |
+| **24h Change** | -1.03% |
+| **7d Change** | -0.62% |
+| **30d Change** | +1.98% |
+| **1y Change** | -86.54% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | A/USDT | N/A |
+| Kraken | A/USD | N/A |
+| Upbit | A/KRW | N/A |
+| Bitget | A/USDT | N/A |
+| KuCoin | A/USDT | N/A |
+| Crypto.com Exchange | A/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.vaulta.com](https://www.vaulta.com) |
+| **Twitter** | [@Vaulta_](https://twitter.com/Vaulta_) |
+| **Telegram** | [vaulta](https://t.me/vaulta) (10,758 members) |
+| **GitHub** | [https://github.com/VaultaFoundation/](https://github.com/VaultaFoundation/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.53M |
+| **Market Cap Rank** | #225 |
+| **24h Range** | $0.0743 — $0.0768 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

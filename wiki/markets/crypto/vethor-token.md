@@ -2,14 +2,14 @@
 title: "VeThor"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["VTHO", "VeThor Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.vechain.org/"
-related: ["[[crypto-markets]]", "[[vechain]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[vechain]]"]
 ---
 
 # VeThor
@@ -120,3 +120,120 @@ VTHO's narrative is inseparable from [[vechain]]'s **enterprise blockchain / sup
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-markets dataset).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | VTHO |
+| **Market Cap Rank** | #537 |
+| **Market Cap** | $37.64M |
+| **Current Price** | $0.00037074 |
+| **Categories** | Layer 1 (L1) |
+| **Website** | [https://www.vechain.org/](https://www.vechain.org/) |
+
+---
+
+## Overview
+
+VeChain is also a dual token system consisting of VeChain Token (VET) and VeThor Token (THOR). Network users are rewarded with the latter when they hold the former, which is also the case with NEO &amp; GAS. The VeChain Token can be used to deploy applications on the platform where as VeThor can be used to pay for applications and other transactions over the network. VeChain claims that this economic model is better suited for enterprises than the one in other blockchains, such as Ethereum and Bitcoin, where higher usage drives the cost of the utility token and subsequently the cost of deploying and operations in the protocol.
+
+In an official blog post earlier this year, the foundation announced it’s “grand aspirations to make financial services sector one of the main focuses on our development plan”. They also announced their partnership with a property mortgage loan provider Fanghuwang.com, a subsidiary of Beijing Baisheng Technology Co., Ltd. They also reported partnerships with BMW, Groupe Renault, and DNV GL.
+Until now, VeChain has existed in the form of an ERC-20 token on the Ethereum blockchain. In an announcement detailing the roadmap moving forward, the foundation stated that they would engage in negotiations with exchanges to perform the token swap to become an independent network. The roadmap also detailed plans to launch a mobile wallet and ledger integration.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 101.51B VTHO |
+| **Total Supply** | 101.51B VTHO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $37.64M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0467 (2018-08-29) |
+| **Current vs ATH** | -99.21% |
+| **All-Time Low** | $0.00015238 (2020-03-16) |
+| **Current vs ATL** | +143.67% |
+| **24h Change** | -0.57% |
+| **7d Change** | +2.54% |
+| **30d Change** | -10.48% |
+| **1y Change** | -82.67% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Vechain
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | VTHO/USDT | N/A |
+| Kraken | VTHO/USD | N/A |
+| Upbit | VTHO/KRW | N/A |
+| Bitget | VTHO/USDT | N/A |
+| KuCoin | VTHO/USDT | N/A |
+| Crypto.com Exchange | VTHO/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.vechain.org/](https://www.vechain.org/) |
+| **Twitter** | [@vechainofficial](https://twitter.com/vechainofficial) |
+| **Reddit** | [https://www.reddit.com/r/Vechain/](https://www.reddit.com/r/Vechain/) |
+| **Telegram** | [vechain_official_english](https://t.me/vechain_official_english) (11,465 members) |
+| **GitHub** | [https://github.com/vechain/thor](https://github.com/vechain/thor) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 812 |
+| **GitHub Forks** | 274 |
+| **Commits (4 weeks)** | 14 |
+| **Pull Requests Merged** | 1,162 |
+| **Contributors** | 39 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $608,366.00 |
+| **Market Cap Rank** | #537 |
+| **24h Range** | $0.00037095 — $0.00037792 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

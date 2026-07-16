@@ -2,15 +2,15 @@
 title: "iExec RLC"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading]
+tags: [ai-trading, altcoins, crypto]
 aliases: ["RLC", "iExec"]
 entity_type: protocol
 founded: 2017
 headquarters: "Lyon, France / Decentralized"
 website: "http://iex.ec/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[depin]]", "[[decentralized-compute]]", "[[trusted-execution-environment]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-compute]]", "[[depin]]", "[[ethereum]]", "[[trusted-execution-environment]]"]
 ---
 
 # iExec RLC

@@ -2,15 +2,15 @@
 title: "Midnight"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["NIGHT", "Midnight Network"]
+aliases: ["Midnight Network", "NIGHT"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized"
 website: "https://midnight.network/"
-related: ["[[crypto-markets]]", "[[cardano]]", "[[bitcoin]]", "[[binance]]", "[[kraken]]"]
+related: ["[[binance]]", "[[bitcoin]]", "[[cardano]]", "[[crypto-markets]]", "[[kraken]]"]
 ---
 
 # Midnight
@@ -235,3 +235,60 @@ Note the ATH and ATL printed on the same day (2025-12-09) — listing-day volati
 - Rare Evo — Midnight mainnet launch coverage: https://www.rareevo.io/news/midnight-blockchain-mainnet-launch-privacy-tokenization
 - CoinStats — Midnight fundamental analysis (market cap/rank, 2026-06-01): https://coinstats.app/ai/a/fundamental-analysis-midnight-3
 - Verified via Perplexity (sonar), 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 16.61B NIGHT |
+| **Total Supply** | 24.00B NIGHT |
+| **Max Supply** | 24.00B NIGHT |
+| **Fully Diluted Valuation** | $707.16M |
+| **Market Cap / FDV Ratio** | 0.69 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1185 (2025-12-09) |
+| **Current vs ATH** | -75.31% |
+| **All-Time Low** | $0.0238 (2025-12-09) |
+| **Current vs ATL** | +23.04% |
+| **24h Change** | +1.81% |
+| **7d Change** | -7.21% |
+| **30d Change** | -13.87% |
+| **1y Change** | +0.00% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $12.02M |
+| **Market Cap Rank** | #104 |
+| **24h Range** | $0.0290 — $0.0298 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,15 @@
 title: "edgeX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["EDGE", "edgeX Exchange"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.edgex.exchange/en"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[arbitrum]]", "[[circle]]", "[[lighter]]", "[[asterdex]]", "[[avantis]]", "[[perpetual-futures]]"]
+related: ["[[arbitrum]]", "[[asterdex]]", "[[avantis]]", "[[circle]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[lighter]]", "[[perpetual-futures]]"]
+founded: 2018
 ---
 
 # edgeX
@@ -184,3 +185,57 @@ This is framing, not a price target; the wiki holds no fair-value model for EDGE
 - crypto.news, "edgeX set to launch $EDGE token amid transparency concerns" — https://crypto.news/edgex-set-to-launch-edge-token-amid-transparency-concerns/
 - CoinGecko exchange stats — https://www.coingecko.com/en/exchanges/edgex
 - Verified via web search, 2026-06-10: TGE 2026-03-31, Nov 2025 $167.2B monthly volume / ~14% share, Arbitrum L2 transition
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | EDGE |
+| **Market Cap Rank** | #2052 |
+| **Market Cap** | $2.52M |
+| **Current Price** | $0.0617 |
+| **Genesis Date** | 2018-02-16 |
+| **Categories** | Artificial Intelligence (AI), Business Services, DePIN, Robotics |
+| **Website** | [https://edge.network](https://edge.network) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 7 |
+| **Pull Requests Merged** | 345 |
+| **Contributors** | 9 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1,283.29 |
+| **Market Cap Rank** | #2052 |
+| **24h Range** | $0.0617 — $0.0645 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "Tokenlon"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, decentralized-exchange]
+tags: [crypto, decentralized-exchange, defi]
 aliases: ["LON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://tokenlon.im/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[defi]]", "[[governance-token]]", "[[automated-market-maker]]", "[[uniswap]]", "[[arbitrum]]", "[[slippage]]"]
+related: ["[[arbitrum]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[slippage]]", "[[uniswap]]"]
 ---
 
 # Tokenlon
@@ -179,3 +179,49 @@ Tokenlon's RFQ niche overlaps most with CowSwap's solver model (both source firm
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LON |
+| **Market Cap Rank** | #787 |
+| **Market Cap** | $21.64M |
+| **Current Price** | $0.1753 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi) |
+| **Website** | [https://tokenlon.im/](https://tokenlon.im/) |
+
+---
+
+## Overview
+
+LON is a utility token issued by the Tokenlon DEX, used to align all ecosystem stakeholders and incentivize participation and expansion of the ecosystem.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $9.81 (2021-01-30) |
+| **Current vs ATH** | -98.21% |
+| **All-Time Low** | $0.0669 (2026-01-24) |
+| **Current vs ATL** | +161.93% |
+| **24h Change** | +0.50% |
+| **7d Change** | +1.85% |
+| **30d Change** | -9.52% |
+| **1y Change** | -76.64% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $13,404.97 |
+| **Market Cap Rank** | #787 |
+| **24h Range** | $0.1731 — $0.1832 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

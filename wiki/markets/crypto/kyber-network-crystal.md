@@ -2,14 +2,14 @@
 title: "Kyber Network Crystal"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["KNC", "Kyber Network", "KyberSwap"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kyber.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[liquidity]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[liquidity]]"]
 ---
 
 # Kyber Network Crystal

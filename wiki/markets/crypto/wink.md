@@ -2,14 +2,14 @@
 title: "WINkLink"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["WIN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://winklink.org/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # WINkLink
@@ -128,9 +128,10 @@ The first TRON ecosystem comprehensive oracle WINkLink fully integrates the real
 ## See Also
 
 - [[crypto-markets]]
+- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

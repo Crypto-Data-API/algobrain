@@ -2,15 +2,15 @@
 title: "Provenance Blockchain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["HASH", "Provenance", "HASH token"]
+tags: [altcoins, crypto]
+aliases: ["HASH", "HASH token", "Provenance"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (Provenance Blockchain Foundation, USA)"
 website: "https://provenance.io/"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[xdce-crowd-sale]]", "[[narrative-trading]]", "[[cosmos]]", "[[staking]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[narrative-trading]]", "[[real-world-assets]]", "[[staking]]", "[[xdce-crowd-sale]]"]
 ---
 
 # Provenance Blockchain
@@ -177,3 +177,21 @@ In the 2026-06-24 backdrop (Fear & Greed 22, established bear market, BTC ~$62.6
 - Provenance docs: "The HASH Token" — https://docs.provenance.io/learn/the-hash-token
 - CoinMarketCap HASH page (price check June 2026) — https://coinmarketcap.com/currencies/provenance-blockchain/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6,463.95 |
+| **Market Cap Rank** | #107 |
+| **24h Range** | $0.00791109 — $0.00909292 |
+| **CoinGecko Sentiment** | 33% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

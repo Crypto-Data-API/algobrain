@@ -2,15 +2,15 @@
 title: "Arbitrum"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, defi]
+tags: [crypto, defi, ethereum]
 aliases: ["ARB", "Arbitrum One", "Offchain Labs"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized (developer: Offchain Labs, New York)"
 website: "https://arbitrum.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[robinhood]]", "[[gmx]]", "[[base]]", "[[polygon]]", "[[aave]]", "[[uniswap]]", "[[token-unlocks]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[optimism]]", "[[mantle]]", "[[decentralized-exchange]]", "[[real-world-assets]]"]
+related: ["[[aave]]", "[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[gmx]]", "[[hyperliquid]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[mantle]]", "[[optimism]]", "[[polygon]]", "[[real-world-assets]]", "[[robinhood]]", "[[token-unlocks]]", "[[uniswap]]"]
 ---
 
 # Arbitrum
@@ -306,3 +306,58 @@ ARB's edge is incumbency: the deepest general-purpose L2 ecosystem and the marqu
 - Arbitrum Foundation, "Arbitrum in 2025: The Year of Everywhere" — https://blog.arbitrum.foundation/arbitrum-in-2025-the-year-of-everywhere/
 - crypto.news, "Arbitrum ecosystem enters institutional phase as transactions top 2.1B and TVL hits $20B" — https://crypto.news/arbitrum-ecosystem-enters-institutional-phase-as-transactions-top-2-1b-and-tvl-hits-20b/
 - Web verification, 2026-06-10 (2026-06-16 unlock of 92.65M ARB; FY2027 budget proposal).
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 6.36B ARB |
+| **Total Supply** | 10.00B ARB |
+| **Max Supply** | 10.00B ARB |
+| **Fully Diluted Valuation** | $867.00M |
+| **Market Cap / FDV Ratio** | 0.64 |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 101 |
+| **GitHub Forks** | 129 |
+| **Commits (4 weeks)** | 3 |
+| **Pull Requests Merged** | 250 |
+| **Contributors** | 24 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $56.86M |
+| **Market Cap Rank** | #96 |
+| **24h Range** | $0.0860 — $0.0909 |
+| **CoinGecko Sentiment** | 73% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[arbitrum]]
+
+---

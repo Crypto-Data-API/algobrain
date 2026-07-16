@@ -2,15 +2,15 @@
 title: "Space and Time"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, ai-trading]
+tags: [ai-trading, altcoins, crypto, defi]
 aliases: ["SXT", "Space and Time", "SxT"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://www.spaceandtime.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[chainlink]]", "[[depin]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[zero-knowledge-proof]]"]
 ---
 
 # Space and Time

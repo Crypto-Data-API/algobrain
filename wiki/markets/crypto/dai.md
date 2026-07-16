@@ -2,7 +2,7 @@
 title: "DAI"
 type: entity
 created: 2026-04-07
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, decentralized, defi, ethereum, stablecoin]
 aliases: ["DAI", "MakerDAO DAI"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralised (MakerDAO)"
 website: "https://makerdao.com"
-related: ["[[makerdao]]", "[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[defi-lending]]", "[[defi]]", "[[ethereum]]", "[[stablecoin-depegs]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[uniswap]]", "[[usdc]]"]
+related: ["[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[defi-lending]]", "[[defi]]", "[[ethereum]]", "[[makerdao]]", "[[stablecoin-depegs]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[uniswap]]", "[[usdc]]"]
 ---
 
 DAI (ticker **DAI**) is the largest [[defi|decentralised]] [[stablecoins|stablecoin]], issued by the [[makerdao|MakerDAO]] / [[sky|Sky]] protocol on [[ethereum|Ethereum]]. Unlike centralised stablecoins such as [[usdc|USDC]] and [[usdt|USDT]], DAI is created through over-collateralised lending -- users deposit crypto assets into smart contract "Vaults" and mint DAI against their collateral. No single entity can freeze, blacklist, or censor DAI transactions, making it the standard censorship-resistant stablecoin for [[defi|DeFi]].
@@ -225,5 +225,71 @@ For the governance token's valuation (MKR/SKY), see [[makerdao]] and [[sky]] —
 - [[crypto-markets]]
 - [[stablecoins]]
 - [[makerdao]]
+
+---
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DAI |
+| **Market Cap Rank** | #322 |
+| **Market Cap** | $74.77M |
+| **Current Price** | $0.00167881 |
+| **Categories** | Stablecoins, Made in USA |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 44.36B DAI |
+| **Total Supply** | 44.36B DAI |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $74.77M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0337 (2024-11-29) |
+| **Current vs ATH** | -95.01% |
+| **All-Time Low** | $0.00000000 (2024-06-11) |
+| **Current vs ATL** | +1645288801400.99% |
+| **24h Change** | +8.80% |
+| **7d Change** | +9.60% |
+| **30d Change** | -20.76% |
+| **1y Change** | -62.72% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Twitter** | [@PulseChainDAI](https://twitter.com/PulseChainDAI) |
+| **Telegram** | [PulseChainDAI](https://t.me/PulseChainDAI) (6,845 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $212,838.00 |
+| **Market Cap Rank** | #322 |
+| **24h Range** | $0.00154254 — $0.00179270 |
+| **CoinGecko Sentiment** | 70% positive |
+| **Last Updated** | 2026-07-16 |
 
 ---

@@ -2,7 +2,7 @@
 title: "Islamic Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["ISLM"]
@@ -132,4 +132,4 @@ We are on a mission to onboard over 1.8+ billion Muslims into digital finance wi
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

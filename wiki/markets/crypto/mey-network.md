@@ -2,7 +2,7 @@
 title: "Mey Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["MEY"]
@@ -131,4 +131,4 @@ Our goal is to transform the traditional real estate industry by leveraging the 
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

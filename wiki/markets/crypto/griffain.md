@@ -2,14 +2,14 @@
 title: "GRIFFAIN"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, machine-learning, solana]
+tags: [ai-trading, crypto, machine-learning, solana]
 aliases: ["GRIFFAIN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://griffain.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[ai-agent-tokens]]", "[[ai-trading-agents]]", "[[defai]]", "[[aixbt]]", "[[virtual-protocol]]", "[[artificial-intelligence]]", "[[ai-agents]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[ai-trading-agents]]", "[[aixbt]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[defai]]", "[[solana]]", "[[virtual-protocol]]"]
 ---
 
 # GRIFFAIN

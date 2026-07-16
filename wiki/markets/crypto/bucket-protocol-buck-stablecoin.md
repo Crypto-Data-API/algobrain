@@ -2,14 +2,14 @@
 title: "Bucket Protocol BUCK Stablecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, stablecoin]
 aliases: ["BUCK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bucketprotocol.io/"
-related: ["[[crypto-markets]]", "[[sui]]", "[[stablecoin]]", "[[collateralization]]", "[[cdp]]", "[[depeg]]", "[[liquidation]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[liquidation]]", "[[stablecoin]]", "[[sui]]"]
 ---
 
 # Bucket Protocol BUCK Stablecoin
@@ -229,3 +229,15 @@ BUCK is a play on **Sui-ecosystem DeFi** and the **decentralized stablecoin** ca
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 25.97M BUCK |
+| **Total Supply** | 25.97M BUCK |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $25.98M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

@@ -2,7 +2,7 @@
 title: "Canton Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, regulation]
 aliases: ["CC", "Canton", "Canton Coin"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2023
 headquarters: "Decentralized (developed by Digital Asset, New York)"
 website: "https://www.canton.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[chainlink]]", "[[narrative-trading]]", "[[treasuries]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[treasuries]]"]
 ---
 
 # Canton Network
@@ -211,3 +211,21 @@ CC's defining feature versus every RWA peer is its **extreme volume-to-cap misma
 - Bitget Academy — "Canton Network (CC) Listing: $CC Launch Date and Privacy Network Details": https://web3.bitget.com/en/academy/canton-network-cc-listing-details-cc-launch-date-inside-cantons-privacy-enabled-network-of-networks
 - Canton Network official site: https://www.canton.network/
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 39.08B CC |
+| **Total Supply** | 39.08B CC |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $5.18B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

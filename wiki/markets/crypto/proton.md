@@ -2,14 +2,14 @@
 title: "XPR Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["XPR", "Proton"]
+aliases: ["Proton", "XPR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://xprnetwork.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[layer-1]]", "[[proof-of-stake]]", "[[metal-blockchain]]", "[[perpetual-futures]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[metal-blockchain]]", "[[perpetual-futures]]", "[[proof-of-stake]]"]
 ---
 
 # XPR Network
@@ -161,3 +161,123 @@ XPR is an L1 infrastructure token with a distinct risk set:
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XPR |
+| **Market Cap Rank** | #342 |
+| **Market Cap** | $69.93M |
+| **Current Price** | $0.00244260 |
+| **Hashing Algorithm** | Delegated Proof-of-Stake |
+| **Categories** | Smart Contract Platform, Made in USA, Governance |
+| **Website** | [https://xprnetwork.org](https://xprnetwork.org) |
+
+---
+
+## Overview
+
+Launched in San Francisco, Proton (XPR) is a new public blockchain and smart contract platform designed for both consumer applications and peer-peer payments. It is built around a secure identity and financial settlements layer that allows users to directly link real identity and fiat accounts, pull funds and buy crypto, and use that crypto seamlessly in apps.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 28.65B XPR |
+| **Total Supply** | 32.28B XPR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $78.79M |
+| **Market Cap / FDV Ratio** | 0.89 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1001 (2020-04-27) |
+| **Current vs ATH** | -97.57% |
+| **All-Time Low** | $0.00054716 (2023-10-19) |
+| **Current vs ATL** | +345.32% |
+| **24h Change** | -1.93% |
+| **7d Change** | +16.62% |
+| **30d Change** | +2.39% |
+| **1y Change** | -48.94% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xd7efb00d12c2c13131fd319336fdf952525da2af` |
+| Binance Smart Chain | `0x5de3939b2f811a61d830e6f52d13b066881412ab` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| KuCoin | XPR/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XD7EFB00D12C2C13131FD319336FDF952525DA2AF/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://xprnetwork.org](https://xprnetwork.org) |
+| **Twitter** | [@XPRNetwork](https://twitter.com/XPRNetwork) |
+| **Reddit** | [https://www.reddit.com/r/ProtonChain/](https://www.reddit.com/r/ProtonChain/) |
+| **Telegram** | [XPRNetwork](https://t.me/XPRNetwork) (7,791 members) |
+| **Discord** | [https://discord.gg/a4rhgtc9wH](https://discord.gg/a4rhgtc9wH) |
+| **GitHub** | [https://github.com/XPRNetwork](https://github.com/XPRNetwork) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.50M |
+| **Market Cap Rank** | #342 |
+| **24h Range** | $0.00243024 — $0.00249879 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

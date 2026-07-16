@@ -2,14 +2,14 @@
 title: "Euler"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum, lending]
 aliases: ["EUL", "Euler Finance", "Euler v2"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.euler.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[lending]]", "[[defi]]", "[[aave]]", "[[compound]]", "[[flash-loan]]", "[[governance-token]]", "[[smart-contract-risk]]"]
+related: ["[[aave]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[flash-loan]]", "[[governance-token]]", "[[lending]]", "[[smart-contract-risk]]"]
 ---
 
 # Euler

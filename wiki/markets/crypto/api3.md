@@ -2,14 +2,14 @@
 title: "Api3"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, oracle]
 aliases: ["API3"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://api3.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[oracle-manipulation]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]"]
 ---
 
 # Api3
@@ -140,3 +140,137 @@ API3 sits in the **oracle / DeFi-infrastructure** category. Its narrative rests 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | API3 |
+| **Market Cap Rank** | #612 |
+| **Market Cap** | $31.96M |
+| **Current Price** | $0.2223 |
+| **Categories** | Decentralized Finance (DeFi), Oracle, Governance |
+| **Website** | [https://api3.org/](https://api3.org/) |
+
+---
+
+## Overview
+
+Api3 delivers first-party oracles that pay you — connecting real-world data directly to smart contracts while reclaiming lost value through Oracle Extractable Value (OEV). Explore the Api3 Market and start earning.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 143.72M API3 |
+| **Total Supply** | 175.93M API3 |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $39.12M |
+| **Market Cap / FDV Ratio** | 0.82 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $10.30 (2021-04-07) |
+| **Current vs ATH** | -97.85% |
+| **All-Time Low** | $0.2099 (2026-07-01) |
+| **Current vs ATL** | +5.58% |
+| **24h Change** | +0.68% |
+| **7d Change** | +1.06% |
+| **30d Change** | -18.79% |
+| **1y Change** | -69.69% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x0b38210ea11411557c13457d4da7dc6ea731b88a` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | API3/USDT | N/A |
+| Kraken | API3/USD | N/A |
+| Upbit | API3/KRW | N/A |
+| Bitget | API3/USDT | N/A |
+| KuCoin | API3/USDT | N/A |
+| Crypto.com Exchange | API3/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X0B38210EA11411557C13457D4DA7DC6EA731B88A/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0X0B38210EA11411557C13457D4DA7DC6EA731B88A/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://api3.org/](https://api3.org/) |
+| **Twitter** | [@API3DAO](https://twitter.com/API3DAO) |
+| **Reddit** | [https://www.reddit.com/r/API3/](https://www.reddit.com/r/API3/) |
+| **Telegram** | [API3DAO](https://t.me/API3DAO) (5,470 members) |
+| **Discord** | [https://discord.com/invite/qnRrcfnm5W](https://discord.com/invite/qnRrcfnm5W) |
+| **GitHub** | [https://github.com/api3dao/airnode](https://github.com/api3dao/airnode) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 171 |
+| **GitHub Forks** | 68 |
+| **Pull Requests Merged** | 1,287 |
+| **Contributors** | 33 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.40M |
+| **Market Cap Rank** | #612 |
+| **24h Range** | $0.2201 — $0.2270 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

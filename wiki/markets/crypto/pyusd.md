@@ -2,7 +2,7 @@
 title: "PayPal USD (PYUSD)"
 type: entity
 created: 2026-04-07
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum, mainstream, solana, stablecoin]
 aliases: ["PYUSD", "PayPal USD"]

@@ -2,15 +2,15 @@
 title: "Toncoin (Gram)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["TON", "Gram", "GRAM", "Toncoin", "The Open Network"]
+tags: [altcoins, crypto]
+aliases: ["GRAM", "Gram", "TON", "The Open Network", "Toncoin"]
 entity_type: protocol
 founded: 2018
 headquarters: "TON Foundation (Telegram-aligned); Zug, Switzerland"
 website: "https://ton.org/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[ethereum]]", "[[solana]]", "[[layer-1]]", "[[hyperliquid]]", "[[blum]]", "[[narrative-trading]]"]
+related: ["[[bitcoin]]", "[[blum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[narrative-trading]]", "[[solana]]"]
 ---
 
 # Toncoin (Gram)
@@ -327,3 +327,28 @@ GRAM's moat is **distribution, not technology**: the only chain natively inside 
 - [Cryptonews — TON Revives 'Gram' Token Name in Bid to Own Telegram's 900M Users](https://cryptonews.com/news/ton-revives-gram-token-name-telegram-users/)
 - [CoinGecko — Toncoin](https://www.coingecko.com/en/coins/toncoin) (market cap ~$4.46B, June 2026)
 - Verified via Perplexity (sonar, 2026-06-10) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 268.12M TON |
+| **Total Supply** | 400.00M TON |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.93M |
+| **Market Cap / FDV Ratio** | 0.67 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

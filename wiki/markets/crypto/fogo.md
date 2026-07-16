@@ -2,14 +2,14 @@
 title: "Fogo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["FOGO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.fogo.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[layer-1]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1]]", "[[solana]]"]
 ---
 
 # Fogo
@@ -139,3 +139,97 @@ FOGO's ~$49M market cap against a ~$128M FDV (MC/FDV ~0.38) prices in heavy forw
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoints, `raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FOGO |
+| **Market Cap Rank** | #549 |
+| **Market Cap** | $36.29M |
+| **Current Price** | $0.00941013 |
+| **Categories** | Smart Contract Platform, Decentralized Finance (DeFi), Layer 1 (L1), Binance Alpha Spotlight |
+| **Website** | [https://www.fogo.io/](https://www.fogo.io/) |
+
+---
+
+## Overview
+
+Fogo is a next-generation Layer 1 blockchain designed to deliver the best on-chain trading experience ever. With its unique architecture and Firedancer implementation, the chain offers low latency, near-instant finality, and unparalleled scalability. As a purpose-built blockchain, Fogo will incorporate a carefully constructed, vertically integrated tech stack. This includes a curated validator set, native price feeds, an enshrined DEX, and colocated liquidity providers to create a truly differentiated trading environment. Backed by a team of trading and engineering experts and driven by a vision to redefine what’s possible, Fogo is setting the standard for high-performance blockchain infrastructure.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 3.86B FOGO |
+| **Total Supply** | 10.03B FOGO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $94.39M |
+| **Market Cap / FDV Ratio** | 0.38 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0625 (2026-01-15) |
+| **Current vs ATH** | -84.93% |
+| **All-Time Low** | $0.00875348 (2026-06-30) |
+| **Current vs ATL** | +7.66% |
+| **24h Change** | -2.74% |
+| **7d Change** | +1.36% |
+| **30d Change** | -28.79% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | FOGO/USDT | N/A |
+| Bitget | FOGO/USDT | N/A |
+| KuCoin | FOGO/USDT | N/A |
+| Crypto.com Exchange | FOGO/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.fogo.io/](https://www.fogo.io/) |
+| **Twitter** | [@Fogo](https://twitter.com/Fogo) |
+| **Discord** | [https://discord.com/invite/FogoChain](https://discord.com/invite/FogoChain) |
+| **GitHub** | [https://github.com/fogo-foundation](https://github.com/fogo-foundation) |
+| **Whitepaper** | [https://www.fogo.io/#whitepaper](https://www.fogo.io/#whitepaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.85M |
+| **Market Cap Rank** | #549 |
+| **24h Range** | $0.00936007 — $0.00975000 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

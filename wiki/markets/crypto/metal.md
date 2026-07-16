@@ -2,14 +2,14 @@
 title: "Metal DAO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, payments]
+tags: [altcoins, crypto, payments]
 aliases: ["MTL", "Metal Pay", "Metallicus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.metalpay.com/"
-related: ["[[crypto-markets]]", "[[payments]]", "[[stablecoin]]", "[[governance-token]]"]
+related: ["[[crypto-markets]]", "[[governance-token]]", "[[payments]]", "[[stablecoin]]"]
 ---
 
 # Metal DAO
@@ -247,3 +247,15 @@ The MTL token launched in 2017 and peaked near **$17** in mid-2018 during the or
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 92.07M MTL |
+| **Total Supply** | 92.07M MTL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $20.60M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

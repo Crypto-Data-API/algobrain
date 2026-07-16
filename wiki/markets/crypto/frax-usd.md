@@ -2,14 +2,14 @@
 title: "Frax USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
-aliases: ["FRXUSD", "frxUSD", "Frax USD"]
+aliases: ["FRXUSD", "Frax USD", "frxUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://frax.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[dai]]", "[[frax]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[frax]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Frax USD
@@ -126,3 +126,140 @@ frxUSD sits in the **fully-collateralized DeFi-native dollar** category, with a 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FRXUSD |
+| **Market Cap Rank** | #246 |
+| **Market Cap** | $109.94M |
+| **Current Price** | $0.9998 |
+| **Categories** | Stablecoins, USD Stablecoin, Fiat-backed Stablecoin |
+| **Website** | [https://frax.com](https://frax.com) |
+
+---
+
+## Overview
+
+Frax USD (frxUSD) is a fiat-redeemable, fully-collateralized stablecoin issued by the Frax Finance Protocol. It operates using a hybrid model where governance-approved enshrined custodians mint and redeem frxUSD backed by cash-equivalent reserves, while advanced onchain mechanisms developed by the Frax Finance Protocol ensure stability, security, and seamless usability across DeFi and traditional financial systems.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 109.96M FRXUSD |
+| **Total Supply** | 109.96M FRXUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $109.94M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.01 (2025-05-30) |
+| **Current vs ATH** | -0.70% |
+| **All-Time Low** | $0.9762 (2025-02-17) |
+| **Current vs ATL** | +2.38% |
+| **24h Change** | +0.03% |
+| **7d Change** | +0.04% |
+| **30d Change** | +0.02% |
+| **1y Change** | -0.09% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xcacd6fd266af91b8aed52accc382b4e165586e29` |
+| Arbitrum One | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Plume Network | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Unichain | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Sonic | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Linea | `0xc7346783f5e645aa998b106ef9e7f499528673d8` |
+| Fraxtal | `0xfc00000000000000000000000000000000000001` |
+| Polygon Pos | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Sei V2 | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Binance Smart Chain | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Aurora | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Berachain | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Polygon Zkevm | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Ink | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Scroll | `0x397f939c3b91a74c321ea7129396492ba9cdce82` |
+| Abstract | `0xea77c590bb36c43ef7139ce649cfbcfd6163170d` |
+| Movement | `0xe067037681385b86d8344e6b7746023604c6ac90ddc997ba3c58396c258ad17b` |
+| Mode | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| X Layer | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Solana | `GzX1ireZDU865FiMaKrdVB1H6AE8LAqWYCg6chrMrfBw` |
+| Base | `0xe5020a6d073a794b6e7f05678707de47986fb0b6` |
+| Blast | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Stable | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Optimistic Ethereum | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Aptos | `0xe067037681385b86d8344e6b7746023604c6ac90ddc997ba3c58396c258ad17b` |
+| Zksync | `0xea77c590bb36c43ef7139ce649cfbcfd6163170d` |
+| Avalanche | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+| Katana | `0x80eede496655fb9047dd39d9f418d5483ed600df` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | GZX1IREZDU865FIMAKRDVB1H6AE8LAQWYCG6CHRMRFBW/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://frax.com](https://frax.com) |
+| **Twitter** | [@fraxfinance](https://twitter.com/fraxfinance) |
+| **Telegram** | [fraxfinance](https://t.me/fraxfinance) (13,555 members) |
+| **Discord** | [https://discord.com/invite/fraxfinance](https://discord.com/invite/fraxfinance) |
+| **GitHub** | [https://github.com/FraxFinance](https://github.com/FraxFinance) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.12M |
+| **Market Cap Rank** | #246 |
+| **24h Range** | $0.9994 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

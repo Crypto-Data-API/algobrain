@@ -2,14 +2,14 @@
 title: "Cap USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["CUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cap.app/"
-related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[usda-2]]", "[[depeg]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[stablecoins]]", "[[usda-2]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # Cap USD
@@ -119,3 +119,113 @@ Native chain: [[ethereum|Ethereum]] (usable cross-network per the issuer).
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | CUSD |
+| **Market Cap Rank** | #377 |
+| **Market Cap** | $60.86M |
+| **Current Price** | $0.9998 |
+| **Categories** | Stablecoins, USD Stablecoin |
+| **Website** | [https://cap.app/](https://cap.app/) |
+
+---
+
+## Overview
+
+Cap is a stablecoin protocol that provides credible financial guarantees via two products: the dollar-denominated cUSD and the yield-bearing stcUSD. 
+
+cUSD is a digital dollar issued on the Ethereum blockchain that can be used on any network. cUSD's reserve is backed by blue chip stablecoins such as USDC, USDT, pyUSD, BUIDL, and BENJI, i.e. issued by regulated institutions with transparent attestations. It is 1:1 redeemable for any of the available reserve assets. 
+
+stcUSD is a savings product issued by staking cUSD. Any cUSD holder has open access to stcUSD.  Yield is generated via an autonomous layer of operators, who self-select in and out based on the current hurdle rate of the protocol. The risk of yield generation is covered, meaning users have full downside protection that is verifiable by code.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 60.88M CUSD |
+| **Total Supply** | 60.88M CUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $60.86M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.17 (2025-10-10) |
+| **Current vs ATH** | -14.57% |
+| **All-Time Low** | $0.9071 (2026-04-01) |
+| **Current vs ATL** | +10.22% |
+| **24h Change** | -0.01% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xcccc62962d17b8914c62d74ffb843d73b2a3cccc` |
+| Megaeth | `0xcccc62962d17b8914c62d74ffb843d73b2a3cccc` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://cap.app/](https://cap.app/) |
+| **Twitter** | [@capmoney_](https://twitter.com/capmoney_) |
+| **Telegram** | [stablecoinmafia](https://t.me/stablecoinmafia) (77 members) |
+| **Whitepaper** | [https://review.stanfordblockchain.xyz/p/19b4c175-c883-4531-81c5-346000cfb694?postPreview=paid&updated=2025-03-28T17%3A06%3A15.353Z&audience=everyone&free_preview=false&freemail=true](https://review.stanfordblockchain.xyz/p/19b4c175-c883-4531-81c5-346000cfb694?postPreview=paid&updated=2025-03-28T17%3A06%3A15.353Z&audience=everyone&free_preview=false&freemail=true) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4,578.99 |
+| **Market Cap Rank** | #377 |
+| **24h Range** | $0.9998 — $0.9999 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

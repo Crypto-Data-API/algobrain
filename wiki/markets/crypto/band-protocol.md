@@ -2,14 +2,14 @@
 title: "Band Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, indicators, data-provider]
+tags: [crypto, data-provider, defi, indicators]
 aliases: ["BAND", "Band", "Band Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bandprotocol.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[defi]]", "[[data-provider]]", "[[cosmos]]"]
+related: ["[[chainlink]]", "[[cosmos]]", "[[crypto-markets]]", "[[data-provider]]", "[[defi]]", "[[ethereum]]"]
 ---
 
 # Band Protocol
@@ -252,3 +252,15 @@ The broad industry shift toward **pull / first-party** oracles (Pyth, API3) is a
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific narrative wiki source ingested yet.
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.64M |
+| **Market Cap Rank** | #652 |
+| **24h Range** | $0.1658 — $0.1704 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

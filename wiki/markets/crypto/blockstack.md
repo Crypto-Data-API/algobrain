@@ -2,15 +2,15 @@
 title: "Stacks"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bitcoin]
-aliases: ["STX", "Blockstack"]
+tags: [bitcoin, crypto]
+aliases: ["Blockstack", "STX"]
 entity_type: protocol
 founded: 2013
 headquarters: "Decentralized (origin: Blockstack PBC, New York, USA)"
 website: "https://www.stacks.co/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[hyperliquid]]", "[[l1-l2-rotation]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[l1-l2-rotation]]"]
 ---
 
 # Stacks
@@ -240,3 +240,60 @@ STX's differentiation: real BTC yield via PoX, Bitcoin-aware Clarity contracts, 
 - [Messari — State of Stacks H1 2025](https://messari.io/report/state-of-stacks-h1-2025)
 - [Chainwire — WalletConnect and Stacks expand STX support (Nov 5, 2025)](https://chainwire.org/2025/11/05/walletconnect-and-stacks-announce-expanded-support-for-stx-with-new-stacking-access/)
 - WebSearch verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.85B STX |
+| **Total Supply** | 1.85B STX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $308.78M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | STX/USDT | N/A |
+| Kraken | STX/USD | N/A |
+| Upbit | STX/KRW | N/A |
+| Bitget | STX/USDT | N/A |
+| KuCoin | STX/USDT | N/A |
+| Crypto.com Exchange | STX/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.07M |
+| **Market Cap Rank** | #130 |
+| **24h Range** | $0.1664 — $0.1720 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

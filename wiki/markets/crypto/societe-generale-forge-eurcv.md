@@ -2,14 +2,14 @@
 title: "EUR CoinVertible"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, real-world-assets]
-aliases: ["EURCV", "EUR CoinVertible", "Societe Generale FORGE EURCV", "SG-FORGE EURCV"]
+tags: [crypto, real-world-assets, stablecoins]
+aliases: ["EUR CoinVertible", "EURCV", "SG-FORGE EURCV", "Societe Generale FORGE EURCV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.sgforge.com/product/coinvertible/"
-related: ["[[stablecoins]]", "[[real-world-assets]]", "[[crypto-markets]]", "[[euro-coin]]", "[[eurite]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[eurite]]", "[[euro-coin]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # EUR CoinVertible
@@ -141,3 +141,99 @@ EURCV sits at the intersection of **regulated euro stablecoins** and **bank-issu
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - cryptodataapi.com / CoinGecko market snapshot, 2026-06-21
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | EURCV |
+| **Market Cap Rank** | #201 |
+| **Market Cap** | $149.59M |
+| **Current Price** | $1.15 |
+| **Categories** | Stablecoins, EUR Stablecoin, Fiat-backed Stablecoin, MiCA-Compliant Stablecoin, Bank-Issued Stablecoin |
+| **Website** | [https://www.sgforge.com/product/coinvertible/](https://www.sgforge.com/product/coinvertible/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 130.55M EURCV |
+| **Total Supply** | 130.55M EURCV |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $149.59M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.22 (2026-01-27) |
+| **Current vs ATH** | -5.95% |
+| **All-Time Low** | $0.9885 (2025-02-04) |
+| **Current vs ATL** | +15.91% |
+| **24h Change** | +0.44% |
+| **7d Change** | +0.30% |
+| **30d Change** | -1.18% |
+| **1y Change** | -1.44% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x5f7827fdeb7c20b443265fc2f40845b715385ff2` |
+| Xrp | `4555524356000000000000000000000000000000.rUNaS5sqRuxZz6V7rBGhoSaZiVYA3ut4UL` |
+| Solana | `DghpMkatCiUsofbTmid3M3kAbDTPqDwKiYHnudXeGG52` |
+| Stellar | `CANKBYNNAYKEZXLB655F2UPNTAZFK5HILZUXL7ZTFR3NF6LKDSVY7KFH` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X1ABAEA1F7C830BD89ACC67EC4AF516284B1BC33C/0X5F7827FDEB7C20B443265FC2F40845B715385FF2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.sgforge.com/product/coinvertible/](https://www.sgforge.com/product/coinvertible/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.37M |
+| **Market Cap Rank** | #201 |
+| **24h Range** | $1.14 — $1.15 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

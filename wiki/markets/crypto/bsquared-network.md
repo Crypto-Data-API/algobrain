@@ -2,14 +2,14 @@
 title: "BSquared Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bitcoin, layer-2]
-aliases: ["B2", "B² Network", "B2 Network"]
+tags: [bitcoin, crypto, layer-2]
+aliases: ["B2", "B2 Network", "B² Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.bsquared.network/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[layer-2]]", "[[bnb]]"]
+related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[layer-2]]"]
 ---
 
 # BSquared Network
@@ -226,3 +226,15 @@ Context as of 2026-06-23: market-wide **Extreme Fear** (F&G 21), transitional **
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | B2/USD | N/A |
+| Bitget | B2/USDT | N/A |
+| KuCoin | B2/USDT | N/A |
+
+---

@@ -2,15 +2,15 @@
 title: "Chiliz"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins, event-driven]
+tags: [altcoins, crypto, event-driven, nft]
 aliases: ["CHZ", "Chiliz Chain", "Socios"]
 entity_type: protocol
 founded: 2018
 headquarters: "Malta (Chiliz/Socios.com operations)"
 website: "https://www.chiliz.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[narrative-signals]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-signals]]"]
 ---
 
 # Chiliz
@@ -189,3 +189,59 @@ CHZ is a **consumer-crypto, event-driven beta** rather than a cash-flow asset. I
 - Crypto Economy — "Chiliz Drops Fan Token Roadmap as 2026 FIFA World Cup Approaches" — https://crypto-economy.com/chiliz-drops-fan-token-roadmap-as-2026-fifa-world-cup-approaches/
 - Chiliz whitepaper — https://www.chiliz.com/docs/CHZ_whitepaper.pdf
 - Web search verification via Perplexity/WebSearch, 2026-06-10.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | CHZ |
+| **Market Cap Rank** | #180 |
+| **Market Cap** | $174.76M |
+| **Current Price** | $0.0166 |
+| **Categories** | Smart Contract Platform, Sports, NFT, Layer 1 (L1), Alleged SEC Securities |
+| **Website** | [https://www.chiliz.com/](https://www.chiliz.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 10.55B CHZ |
+| **Total Supply** | 10.55B CHZ |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $174.76M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $31.33M |
+| **Market Cap Rank** | #180 |
+| **24h Range** | $0.0166 — $0.0170 |
+| **CoinGecko Sentiment** | 25% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

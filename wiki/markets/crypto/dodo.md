@@ -2,14 +2,14 @@
 title: "DODO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["DODO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dodoex.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[slippage]]", "[[impermanent-loss]]", "[[chainlink]]", "[[governance-token]]"]
+related: ["[[automated-market-maker]]", "[[chainlink]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[slippage]]"]
 ---
 
 # DODO

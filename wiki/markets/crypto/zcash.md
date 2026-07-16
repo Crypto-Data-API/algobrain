@@ -2,14 +2,14 @@
 title: "Zcash (ZEC)"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, privacy, zcash, zk-snarks]
 entity_type: protocol
 founded: 2016
 website: "https://z.cash"
 aliases: ["ZEC", "zcash-protocol"]
-related: ["[[bitcoin]]", "[[blockchain]]", "[[crypto-markets]]", "[[proof-of-work]]", "[[2026-06-05-zcash-orchard-counterfeiting-bug]]", "[[mythos-release-window-exploit-short]]", "[[ai-vulnerability-discovery]]", "[[hyperliquid]]", "[[monero]]", "[[privacy-coins]]", "[[zero-knowledge-proofs]]", "[[dash]]"]
+related: ["[[2026-06-05-zcash-orchard-counterfeiting-bug]]", "[[ai-vulnerability-discovery]]", "[[bitcoin]]", "[[blockchain]]", "[[crypto-markets]]", "[[dash]]", "[[hyperliquid]]", "[[monero]]", "[[mythos-release-window-exploit-short]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[zero-knowledge-proofs]]"]
 headquarters: "Decentralized"
 ---
 
@@ -300,3 +300,33 @@ This is the **first market-moving case of a frontier AI model finding a critical
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - cryptodataapi.com / CoinGecko markets snapshot, 2026-06-20 (current Market Data and Price History blocks)
 - (Source: [[2026-06-05-zcash-orchard-counterfeiting-bug]]) — Orchard counterfeiting vulnerability write-up
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 16.79M ZEC |
+| **Total Supply** | 16.79M ZEC |
+| **Max Supply** | 21.00M ZEC |
+| **Fully Diluted Valuation** | $9.17B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $549.50M |
+| **Market Cap Rank** | #14 |
+| **24h Range** | $544.80 — $584.38 |
+| **CoinGecko Sentiment** | 64% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

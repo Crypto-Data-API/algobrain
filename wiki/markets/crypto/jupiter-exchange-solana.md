@@ -2,14 +2,14 @@
 title: "Jupiter"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, altcoins, exchange]
-aliases: ["JUP", "Jupiter Exchange", "Jupiter Aggregator"]
+tags: [altcoins, crypto, defi, derivatives, exchange]
+aliases: ["JUP", "Jupiter Aggregator", "Jupiter Exchange"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://jup.ag/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[raydium]]", "[[orca]]", "[[uniswap]]", "[[hyperliquid]]", "[[gmx]]", "[[kamino]]", "[[jupiter-lend]]"]
+related: ["[[crypto-markets]]", "[[gmx]]", "[[hyperliquid]]", "[[jupiter-lend]]", "[[kamino]]", "[[orca]]", "[[raydium]]", "[[solana]]", "[[uniswap]]"]
 ---
 
 # Jupiter
@@ -354,3 +354,15 @@ JLP is effectively a bet that **most leveraged traders lose money over time** --
 - [CoinGecko — Jupiter](https://www.coingecko.com/en/coins/jupiter)
 - [CoinMarketCap — Jupiter](https://coinmarketcap.com/currencies/jupiter-ag/)
 - Verified via Perplexity (sonar), 2026-06-11
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 3.32B JUP |
+| **Total Supply** | 6.86B JUP |
+| **Max Supply** | 10.00B JUP |
+| **Fully Diluted Valuation** | $1.38B |
+| **Market Cap / FDV Ratio** | 0.48 |
+
+---

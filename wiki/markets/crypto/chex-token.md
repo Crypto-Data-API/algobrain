@@ -2,9 +2,9 @@
 title: "Chintai"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, real-world-assets, altcoins]
+tags: [altcoins, crypto, defi, real-world-assets]
 aliases: ["CHEX", "Chintai", "Chintai Nexus"]
 entity_type: protocol
 headquarters: "Singapore"

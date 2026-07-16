@@ -2,14 +2,14 @@
 title: "MetaMask USD"
 type: market
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoin]
-aliases: ["MUSD", "mUSD", "MetaMask USD"]
+aliases: ["MUSD", "MetaMask USD", "mUSD"]
 entity_type: protocol
 headquarters: "Decentralized (Consensys / MetaMask)"
 website: "https://metamask.io/"
-related: ["[[stablecoin]]", "[[metamask]]", "[[usdc]]", "[[tether]]", "[[pyusd]]", "[[ethereum]]", "[[linea]]", "[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[linea]]", "[[metamask]]", "[[pyusd]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # MetaMask USD
@@ -149,3 +149,95 @@ See [[stablecoin]] and [[depeg]] for the general framework.
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge (MetaMask/Bridge/M0 issuance model); no specific wiki source ingested yet.
+
+## Overview
+
+MetaMask USD (mUSD) is a stablecoin issued by MetaMask, designed to maintain a 1:1 peg with the US dollar. It is built for use within the MetaMask ecosystem, enabling seamless on- and off-ramping between crypto and fiat, as well as spending through MetaMask products, including the MetaMask Card. mUSD aims to provide low-friction transfers, instant settlement, and interoperability across supported blockchain networks.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 30.77M MUSD |
+| **Total Supply** | 30.77M MUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $30.76M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.26 (2026-05-17) |
+| **Current vs ATH** | -20.67% |
+| **All-Time Low** | $0.9798 (2025-09-03) |
+| **Current vs ATL** | +2.04% |
+| **24h Change** | -0.01% |
+| **7d Change** | -0.01% |
+| **30d Change** | -0.01% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xaca92e438df0b2401ff60da7e4337b687a2435da` |
+| Monad | `0xaca92e438df0b2401ff60da7e4337b687a2435da` |
+| Linea | `0xaca92e438df0b2401ff60da7e4337b687a2435da` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://metamask.io/](https://metamask.io/) |
+| **Twitter** | [@MetaMask](https://twitter.com/MetaMask) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.97M |
+| **Market Cap Rank** | #628 |
+| **24h Range** | $0.9985 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

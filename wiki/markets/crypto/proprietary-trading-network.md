@@ -2,7 +2,7 @@
 title: "Proprietary Trading Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN8"]
@@ -126,4 +126,16 @@ related: ["[[crypto-markets]]"]
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 75 |
+| **GitHub Forks** | 34 |
+| **Commits (4 weeks)** | 28 |
+| **Pull Requests Merged** | 715 |
+| **Contributors** | 15 |
+
+---

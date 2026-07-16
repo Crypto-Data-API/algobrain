@@ -2,9 +2,9 @@
 title: "Abey"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ABEY", "ABEYCHAIN"]
 entity_type: protocol
 headquarters: "Decentralized"

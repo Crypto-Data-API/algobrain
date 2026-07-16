@@ -2,14 +2,14 @@
 title: "SEDA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, oracle, data-provider, defi]
-aliases: ["SEDA", "Flux Protocol", "SEDA Protocol"]
+tags: [altcoins, crypto, data-provider, defi, oracle]
+aliases: ["Flux Protocol", "SEDA", "SEDA Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.seda.xyz/"
-related: ["[[crypto-markets]]", "[[cross-chain]]", "[[smart-contracts]]"]
+related: ["[[cross-chain]]", "[[crypto-markets]]", "[[smart-contracts]]"]
 ---
 
 # SEDA

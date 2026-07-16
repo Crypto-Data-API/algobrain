@@ -2,7 +2,7 @@
 title: "Lava Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["LAVA"]
@@ -141,4 +141,4 @@ Lava aggregates data providers and directs RPC traffic based on the speed and re
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

@@ -2,14 +2,14 @@
 title: "Spiko US T-Bills Money Market Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bonds, defi, treasuries]
-aliases: ["USTBL", "Spiko US", "Spiko USTBL", "ustbl-tokenized-u-s-treasury-bill"]
+tags: [bonds, crypto, defi, treasuries]
+aliases: ["Spiko US", "Spiko USTBL", "USTBL", "ustbl-tokenized-u-s-treasury-bill"]
 entity_type: protocol
 headquarters: "Paris, France (Spiko)"
 website: "https://www.spiko.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[spiko-eu-t-bills-money-market-fund]]", "[[eutbl]]", "[[treasuries]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[eutbl]]", "[[real-world-assets]]", "[[spiko-eu-t-bills-money-market-fund]]", "[[treasuries]]"]
 ---
 
 # Spiko US T-Bills Money Market Fund
@@ -205,3 +205,25 @@ See the **Market Data** block above for the authoritative snapshot (2026-06-20: 
 - CoinGecko / cryptodataapi.com market snapshot, 2026-06-20 ($170.19M mcap, rank #191, $1.087 NAV); earlier baseline (Source: [[coingecko-top-1000-2026-04-09]])
 - Spiko docs — https://docs.spiko.io/documentation/intro/welcome
 - Web verification, 2026-06-11 (NexBridge USTBL distinguished from Spiko USTBL; NexBridge RID — https://www.ustbl.io/RID/rid.pdf)
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.09 (2026-07-15) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $1.01 (2024-08-20) |
+| **Current vs ATL** | +7.61% |
+| **24h Change** | +0.02% |
+| **7d Change** | +0.06% |
+| **30d Change** | +0.28% |
+| **1y Change** | +3.68% |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

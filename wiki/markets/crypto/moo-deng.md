@@ -2,13 +2,14 @@
 title: "Moo Deng"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, meme]
 aliases: ["MOODENG"]
 entity_type: protocol
 headquarters: "Decentralized"
-related: ["[[crypto-markets]]", "[[solana]]", "[[meme-coin]]", "[[hyperliquid]]", "[[pump-fun]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[meme-coin]]", "[[pump-fun]]", "[[solana]]"]
+website: "https://moodeng.vip/"
 ---
 
 # Moo Deng
@@ -136,3 +137,99 @@ Moo Deng is a pure **attention/narrative asset**. The "Moo Deng" pygmy hippo at 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MOODENG |
+| **Market Cap Rank** | #2031 |
+| **Market Cap** | $2.59M |
+| **Current Price** | $0.00000616 |
+| **Categories** | Meme, Zoo-Themed, TikTok Meme |
+| **Website** | [https://moodeng.vip/](https://moodeng.vip/) |
+
+---
+
+## Overview
+
+MOODENG（ETH） is a meme coin on the Ethereum blockchain inspired by a real-life pygmy hippopotamus named Moodeng from Thailand, which became an internet sensation. MOODENG（ETH）is a completely community take over project. Vitalik adopted MOODENG and became its 'foster father', affectionately known as the 'Father of MOODENG'. Vitalik holds 7.13% of the tokens and has interacted with and built the token project. The community's goal is to become the new king of MEME, linking Web2 and Web3.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 420.69B MOODENG |
+| **Total Supply** | 420.69B MOODENG |
+| **Max Supply** | 420.69B MOODENG |
+| **Fully Diluted Valuation** | $2.59M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00042076 (2024-11-20) |
+| **Current vs ATH** | -98.54% |
+| **All-Time Low** | $0.00000387 (2026-03-27) |
+| **Current vs ATL** | +59.01% |
+| **24h Change** | +2.88% |
+| **7d Change** | +41.45% |
+| **30d Change** | +27.78% |
+| **1y Change** | -78.57% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x28561b8a2360f463011c16b6cc0b0cbef8dbbcad` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X28561B8A2360F463011C16B6CC0B0CBEF8DBBCAD/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://moodeng.vip/](https://moodeng.vip/) |
+| **Twitter** | [@ethmoodengfan](https://twitter.com/ethmoodengfan) |
+| **Telegram** | [moodengethcto](https://t.me/moodengethcto) (6,292 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $125,348.00 |
+| **Market Cap Rank** | #2031 |
+| **24h Range** | $0.00000598 — $0.00000623 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

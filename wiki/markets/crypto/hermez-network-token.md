@@ -2,14 +2,14 @@
 title: "Hermez Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum, layer-2]
 aliases: ["HEZ"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://hermez.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polygon]]", "[[layer-2]]", "[[zk-rollup]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[polygon]]", "[[zk-rollup]]"]
 ---
 
 # Hermez Network
@@ -146,3 +146,114 @@ The honest read: HEZ is a **deprecated, dormant legacy token** whose price is a 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | HEZ |
+| **Market Cap Rank** | #574 |
+| **Market Cap** | $34.40M |
+| **Current Price** | $3.12 |
+| **Categories** | Smart Contract Platform, Layer 2 (L2), Zero Knowledge (ZK), Rollup |
+| **Website** | [https://hermez.io/](https://hermez.io/) |
+
+---
+
+## Overview
+
+Hermez is a decentralized zk-rollup focused on scaling payments and token transfers on top of Ethereum.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 11.07M HEZ |
+| **Total Supply** | 11.07M HEZ |
+| **Max Supply** | 11.08M HEZ |
+| **Fully Diluted Valuation** | $34.40M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $10.30 (2021-12-26) |
+| **Current vs ATH** | -69.85% |
+| **All-Time Low** | $0.8836 (2025-09-02) |
+| **Current vs ATL** | +251.55% |
+| **24h Change** | -0.04% |
+| **7d Change** | +1.84% |
+| **30d Change** | +0.85% |
+| **1y Change** | -13.71% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xeef9f339514298c6a857efcfc1a762af84438dee` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XEEF9F339514298C6A857EFCFC1A762AF84438DEE/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://hermez.io/](https://hermez.io/) |
+| **Twitter** | [@PolygonHermez](https://twitter.com/PolygonHermez) |
+| **Telegram** | [polygonhermez](https://t.me/polygonhermez) (219 members) |
+| **Discord** | [https://discord.com/invite/AczuUXDA2N](https://discord.com/invite/AczuUXDA2N) |
+| **GitHub** | [https://github.com/hermeznetwork](https://github.com/hermeznetwork) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $24,091.00 |
+| **Market Cap Rank** | #574 |
+| **24h Range** | $3.10 — $3.15 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

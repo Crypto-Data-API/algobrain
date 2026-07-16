@@ -2,14 +2,14 @@
 title: "IoTeX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["IOTX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://iotex.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[depin]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[consensus-mechanism]]", "[[harmony]]"]
+related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[harmony]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # IoTeX

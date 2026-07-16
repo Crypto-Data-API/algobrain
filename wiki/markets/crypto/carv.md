@@ -2,14 +2,14 @@
 title: "CARV"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi, machine-learning]
-aliases: ["CARV", "$CARV"]
+tags: [crypto, gamefi, machine-learning, nft]
+aliases: ["$CARV", "CARV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://carv.io"
-related: ["[[crypto-markets]]", "[[base]]", "[[gamefi]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[gamefi]]"]
 ---
 
 # CARV

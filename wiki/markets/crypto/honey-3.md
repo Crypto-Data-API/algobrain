@@ -2,14 +2,14 @@
 title: "Honey"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["HONEY"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.berachain.com/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[solana]]"]
 ---
 
 # Honey
@@ -112,9 +112,17 @@ related: ["[[crypto-markets]]"]
 ## See Also
 
 - [[crypto-markets]]
+- [[solana]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])
+
+## Overview
+
+HONEY is the cryptocurrency of the Hivemapper Network.
+Built on top of Solana, HONEY rewards contributions to the mapping network. Building a map of the world is hard work, and HONEY rewards you for helping to create this valuable resource.
+
+---

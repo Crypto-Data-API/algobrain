@@ -2,7 +2,7 @@
 title: "Decentraland"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["MANA"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://decentraland.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[the-sandbox]]", "[[metaverse]]", "[[nft]]", "[[gaming-tokens]]", "[[polygon]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[metaverse]]", "[[nft]]", "[[polygon]]", "[[the-sandbox]]"]
 ---
 
 # Decentraland

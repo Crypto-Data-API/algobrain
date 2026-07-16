@@ -2,14 +2,14 @@
 title: "Casper Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["CSPR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://casper.network/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[consensus-mechanism]]", "[[ethereum]]", "[[radix]]", "[[icon]]"]
+related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[ethereum]]", "[[icon]]", "[[layer-1]]", "[[proof-of-stake]]", "[[radix]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # Casper Network

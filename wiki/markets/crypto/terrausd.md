@@ -2,14 +2,14 @@
 title: "TerraClassicUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-04-14
+updated: 2026-07-16
 status: good
-tags: [crypto, stablecoin, defi, terra, algorithmic-stablecoin, collapse]
-aliases: ["USTC", "UST", "TerraUSD"]
+tags: [algorithmic-stablecoin, collapse, crypto, defi, stablecoin, terra]
+aliases: ["TerraUSD", "UST", "USTC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.terra-classic.io"
-related: ["[[crypto-markets]]", "[[terra-luna-collapse]]", "[[terra-luna]]", "[[terra-luna-2]]", "[[2022-05-terra-luna-depeg-arb]]", "[[stablecoins]]", "[[stablecoin-depegs]]", "[[algorithmic-stablecoin]]"]
+related: ["[[2022-05-terra-luna-depeg-arb]]", "[[algorithmic-stablecoin]]", "[[crypto-markets]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[terra-luna-2]]", "[[terra-luna-collapse]]", "[[terra-luna]]"]
 ---
 
 # TerraClassicUSD
@@ -116,3 +116,99 @@ USTC has no fundamental value driver. Any trading thesis is purely speculative o
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - SEC v. Terraform Labs (civil case), S.D.N.Y.
+
+## Overview
+
+TerraClassicUSD (USTC) was originally launched as an algorithmic stablecoin within the Terra ecosystem, designed to maintain a peg to the US dollar through an automated market-Module mechanism with LUNA (now LUNC). However, following the collapse of the Terra ecosystem in May 2022, the core stabilizing mechanism was disabled, and USTC lost its peg to the US dollar.
+
+Since then, USTC has been a freely traded digital asset, with its price determined purely by market supply and demand. It no longer functions as a stablecoin, nor does it have an active peg-maintenance mechanism.
+
+USTC remains an integral part of the Terra Classic ecosystem, where it continues to be used for various purposes, including DeFi applications , gas fees and trading. Unlike traditional fiat-backed assets, USTC’s value fluctuates based on market conditions and community participation.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.58B USTC |
+| **Total Supply** | 6.08B USTC |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $33.50M |
+| **Market Cap / FDV Ratio** | 0.92 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.09 (2021-01-11) |
+| **Current vs ATH** | -99.50% |
+| **All-Time Low** | $0.00406362 (2026-02-06) |
+| **Current vs ATL** | +35.58% |
+| **24h Change** | -0.67% |
+| **7d Change** | -4.11% |
+| **30d Change** | -8.82% |
+| **1y Change** | -60.78% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Terra
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Terra | `uusd` |
+| Osmosis | `ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | USTC/USDT | N/A |
+| Bitget | USTC/USDT | N/A |
+| KuCoin | USTC/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48/0XA47C8BF37F92ABED4A126BDA807A7B7498661ACD | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.terra-classic.io](https://www.terra-classic.io) |
+| **Twitter** | [@terra_money](https://twitter.com/terra_money) |
+| **Discord** | [https://terra.sc/classicdiscord](https://terra.sc/classicdiscord) |
+| **GitHub** | [https://github.com/classic-terra/core](https://github.com/classic-terra/core) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 78 |
+| **GitHub Forks** | 60 |
+| **Pull Requests Merged** | 65 |
+| **Contributors** | 8 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---

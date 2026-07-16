@@ -2,9 +2,9 @@
 title: "WAX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["WAXP", "Worldwide Asset eXchange"]
 entity_type: protocol
 founded: 2017
@@ -245,3 +245,9 @@ WAX's relative strengths are a mature low-cost NFT stack and seamless onboarding
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

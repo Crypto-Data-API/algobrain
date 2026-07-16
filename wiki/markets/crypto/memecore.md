@@ -2,15 +2,15 @@
 title: "MemeCore"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["M", "M token"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized"
 website: "https://memecore.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[narrative-trading]]", "[[market-manipulation]]", "[[wash-trading]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[market-manipulation]]", "[[narrative-trading]]", "[[wash-trading]]"]
 ---
 
 # MemeCore
@@ -304,3 +304,9 @@ The contrast with [[pepe|PEPE]] is the clearest lens: same "meme" tag, opposite 
 - BYDFi — "Memecore Drops 15.9% as $830M Wipeout Hits Rank": https://www.bydfi.com/blog/cryptonews/memecore-drops-15-9-to-3-43-as-830m-wipeout-pushes-it-out-of-top-20/
 - CoinMarketCap Top Stories — "MemeCore Sell-Off: 8% Drop Amid Binance FUD": https://coinmarketcap.com/top-stories/69ec1351dd609b58e211d6e5/
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## See Also
+
+- [[crypto-markets]]
+
+---

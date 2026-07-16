@@ -2,14 +2,14 @@
 title: "Blast"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, altcoins, defi]
+tags: [altcoins, crypto, defi, ethereum]
 aliases: ["BLAST"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://blast.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]", "[[data-availability]]", "[[airdrop]]"]
+related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]"]
 ---
 
 # Blast

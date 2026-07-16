@@ -2,14 +2,14 @@
 title: "ApeCoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["APE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://apechain.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bored-ape-yacht-club]]", "[[otherside]]", "[[nft]]", "[[the-sandbox]]"]
+related: ["[[bored-ape-yacht-club]]", "[[crypto-markets]]", "[[ethereum]]", "[[nft]]", "[[otherside]]", "[[the-sandbox]]"]
 ---
 
 # ApeCoin
@@ -159,3 +159,131 @@ APE has **no protocol cash flows** accruing to holders; its value rests on (1) b
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-20: `raw/data/crypto-loop/coingecko-markets.json` (cryptodataapi.com / CoinGecko snapshot); market backdrop from `raw/data/crypto-loop/_digest.md`.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | APE |
+| **Market Cap Rank** | #197 |
+| **Market Cap** | $151.43M |
+| **Current Price** | $0.1514 |
+| **Categories** | Gaming (GameFi), NFT, Gaming Blockchains, Gaming Governance Token, Gaming Utility Token, Airdropped Tokens by NFT Projects, Governance, IP Meme |
+| **Website** | [https://apechain.com/](https://apechain.com/) |
+
+---
+
+## Overview
+
+APE fuels culture. Backed by the best club in the world and hundreds of thousands of holders worldwide, it’s the token for digital and IRL communities, builders, creators, collectors, gamers, and beyond.
+
+APE is the native gas token of ApeChain and is available across multiple ecosystems including Ethereum, Arbitrum, Solana and HyperLiquid.z
+
+ApeCoin's mission is is to supercharge its ecosystem by supporting high-quality builders &amp; reinforcing 3 core pillars: ApeChain, Bored Ape Yacht Club, and Otherside.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.00B APE |
+| **Total Supply** | 1.00B APE |
+| **Max Supply** | 1.00B APE |
+| **Fully Diluted Valuation** | $151.43M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $26.70 (2022-04-28) |
+| **Current vs ATH** | -99.43% |
+| **All-Time Low** | $0.0817 (2026-04-02) |
+| **Current vs ATL** | +86.16% |
+| **24h Change** | +3.63% |
+| **7d Change** | -7.00% |
+| **30d Change** | +16.54% |
+| **1y Change** | -77.04% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x4d224452801aced8b2f0aebe155379bb5d594381` |
+| Hyperevm | `0xab11329560fa9c9c860bb21a9342215a1265bbb0` |
+| Binance Smart Chain | `0x8f86a15ec17cb3369d8b3e666dadbc11daa82b79` |
+| Monad | `0x6a7e3f839382fbb6a6131d4aae864aaeb362292d` |
+| Solana | `C1MHyoTJpRTeS9AQCyspNVu2EWAYCZwmJ1jNkEArFP1f` |
+| Polygon Pos | `0xb7b31a6bc18e48888545ce79e83e06003be70930` |
+| Arbitrum One | `0x7f9fbf9bdd3f4105c478b996b648fe6e828a1e98` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | APE/USDT | N/A |
+| Kraken | APE/USD | N/A |
+| Bitget | APE/USDT | N/A |
+| KuCoin | APE/USDT | N/A |
+| Crypto.com Exchange | APE/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X4D224452801ACED8B2F0AEBE155379BB5D594381/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0X4D224452801ACED8B2F0AEBE155379BB5D594381/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://apechain.com/](https://apechain.com/) |
+| **Twitter** | [@apecoin](https://twitter.com/apecoin) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $27.98M |
+| **Market Cap Rank** | #197 |
+| **24h Range** | $0.1460 — $0.1571 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,14 @@
 title: "Cygnus Finance Global USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["CGUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.cygnus.finance/"
-related: ["[[stablecoins]]", "[[real-world-assets]]", "[[base]]", "[[crypto-markets]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # Cygnus Finance Global USD
@@ -145,3 +145,109 @@ CGUSD sits in the **tokenized-Treasury / RWA-yield** narrative — one of the mo
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - Protocol description and whitepaper from Cygnus Finance ([https://wiki.cygnus.finance/whitepaper/](https://wiki.cygnus.finance/whitepaper/)). General market knowledge; no specific wiki source ingested yet beyond the CoinGecko snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | CGUSD |
+| **Market Cap Rank** | #315 |
+| **Market Cap** | $75.66M |
+| **Current Price** | $0.9968 |
+| **Categories** | Stablecoins, Fiat-backed Stablecoin, Base Native |
+| **Website** | [https://www.cygnus.finance/](https://www.cygnus.finance/) |
+
+---
+
+## Overview
+
+Cygnus Finance is a RWA stablecoin protocol built on pure, short-term U.S. debt assets. It is also the first native interest-bearing stablecoin protocol and the first native RWA protocol on Base.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 75.90M CGUSD |
+| **Total Supply** | 75.90M CGUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $75.66M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.09 (2025-06-06) |
+| **Current vs ATH** | -8.43% |
+| **All-Time Low** | $0.7243 (2025-09-29) |
+| **Current vs ATL** | +37.63% |
+| **24h Change** | -0.04% |
+| **7d Change** | -0.03% |
+| **30d Change** | -0.07% |
+| **1y Change** | -0.07% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0xca72827a3d211cfd8f6b00ac98824872b72cab49` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.cygnus.finance/](https://www.cygnus.finance/) |
+| **Twitter** | [@CygnusFi](https://twitter.com/CygnusFi) |
+| **Telegram** | [CygnusFinanceOfficial](https://t.me/CygnusFinanceOfficial) (2,826 members) |
+| **GitHub** | [https://github.com/arks-labs](https://github.com/arks-labs) |
+| **Whitepaper** | [https://wiki.cygnus.finance/whitepaper/](https://wiki.cygnus.finance/whitepaper/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $656.02 |
+| **Market Cap Rank** | #315 |
+| **24h Range** | $0.9967 — $0.9973 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[base]]
+
+---

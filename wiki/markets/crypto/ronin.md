@@ -2,14 +2,14 @@
 title: "Ronin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["RON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://roninchain.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[axie-infinity]]", "[[gamefi]]", "[[cross-chain-bridge]]"]
+related: ["[[axie-infinity]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]"]
 ---
 
 # Ronin
@@ -216,3 +216,27 @@ At ~$48M market cap RON is priced ~98.6% below its 2024 peak — a distressed Ga
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data 2026-06-20 from `raw/data/crypto-loop/category-groups.json` (cryptodataapi.com / CoinGecko).
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 772.40M RON |
+| **Total Supply** | 1.00B RON |
+| **Max Supply** | 1.00B RON |
+| **Fully Diluted Valuation** | $54.22M |
+| **Market Cap / FDV Ratio** | 0.77 |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | RONIN/USDT | N/A |
+| KuCoin | RONIN/USDT | N/A |
+| Crypto.com Exchange | RONIN/USD | N/A |
+
+---

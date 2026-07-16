@@ -2,15 +2,15 @@
 title: "Janus Henderson Anemoy Treasury Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, treasuries, defi]
-aliases: ["JTRSY", "Anemoy Liquid Treasury Fund", "Anemoy LTF"]
+tags: [crypto, defi, treasuries]
+aliases: ["Anemoy LTF", "Anemoy Liquid Treasury Fund", "JTRSY"]
 entity_type: protocol
 founded: 2024
 headquarters: "British Virgin Islands (fund); Centrifuge protocol"
 website: "https://www.anemoy.io/funds/jtrsy"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[centrifuge]]", "[[ondo-finance]]", "[[ondo-us-dollar-yield]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[treasury-bills]]", "[[blackrock-usd-institutional-digital-liquidity-fund]]"]
+related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[centrifuge]]", "[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[ondo-us-dollar-yield]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[treasury-bills]]"]
 ---
 
 # Janus Henderson Anemoy Treasury Fund
@@ -176,3 +176,66 @@ JTRSY's niche is being a **professional-investor**, multi-chain, Centrifuge-issu
 - Etherscan — JTRSY token contract: https://etherscan.io/token/0x8c213ee79581ff4984583c6a801e5263418c4b86
 - Web verification, 2026-06-10: AUM, structure, renaming history confirmed.
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 782.79M JTRSY |
+| **Total Supply** | 782.79M JTRSY |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $868.61M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.11 (2026-07-15) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $1.08 (2025-11-13) |
+| **Current vs ATL** | +2.29% |
+| **24h Change** | +0.01% |
+| **7d Change** | +0.07% |
+| **30d Change** | +0.28% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #73 |
+| **24h Range** | $1.11 — $1.11 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

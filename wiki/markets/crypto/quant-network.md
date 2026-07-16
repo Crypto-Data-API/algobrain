@@ -2,15 +2,15 @@
 title: "Quant"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, company]
-aliases: ["QNT", "Quant Network", "Overledger"]
+tags: [company, crypto]
+aliases: ["Overledger", "QNT", "Quant Network"]
 entity_type: protocol
 founded: 2018
 headquarters: "London, UK"
 website: "https://www.quant.network"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[ecb]]", "[[cosmos]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ecb]]", "[[ethereum]]", "[[real-world-assets]]"]
 ---
 
 # Quant
@@ -278,3 +278,34 @@ Quant's differentiator is that it does **not** ask institutions to migrate to a 
 - AInvest, "Quant Network Launches Overledger Fusion" (2025-07)
 - Quant Network official site — https://www.quant.network
 - Perplexity verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 14.54M QNT |
+| **Total Supply** | 14.61M QNT |
+| **Max Supply** | 14.61M QNT |
+| **Fully Diluted Valuation** | $947.83M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

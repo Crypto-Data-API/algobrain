@@ -2,14 +2,14 @@
 title: "Sushi"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, dex]
 aliases: ["SUSHI", "SushiSwap"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sushi.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[uniswap]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[dex]]", "[[defi]]", "[[curve-dao-token]]", "[[hyperliquid]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-dao-token]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex]]", "[[ethereum]]", "[[hyperliquid]]", "[[uniswap]]"]
 ---
 
 # Sushi
@@ -230,3 +230,28 @@ The SUSHI token's value thesis rests on governance rights and protocol fee-shari
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SUSHI |
+| **Market Cap Rank** | #455 |
+| **Market Cap** | $45.79M |
+| **Current Price** | $0.1677 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), Yield Farming, Automated Market Maker (AMM), Governance, Base Native |
+| **Website** | [https://sushi.com/](https://sushi.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 273.01M SUSHI |
+| **Total Supply** | 291.51M SUSHI |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $48.90M |
+| **Market Cap / FDV Ratio** | 0.94 |
+
+---

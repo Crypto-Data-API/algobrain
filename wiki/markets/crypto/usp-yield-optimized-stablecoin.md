@@ -2,10 +2,10 @@
 title: "USP Yield Optimized Stablecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
-aliases: ["USP", "Piku USP"]
+tags: [crypto, defi, stablecoin]
+aliases: ["Piku USP", "USP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.piku.co/"

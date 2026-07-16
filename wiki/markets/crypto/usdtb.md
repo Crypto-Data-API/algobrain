@@ -2,14 +2,14 @@
 title: "USDtb"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["USDTB", "Ethena USDtb"]
+aliases: ["Ethena USDtb", "USDTB"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usdtb.money/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ethena]]", "[[ethena-usde]]", "[[stablecoins]]", "[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[tokenized-treasuries]]", "[[genius-act]]"]
+related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[ethena]]", "[[ethereum]]", "[[genius-act]]", "[[stablecoins]]", "[[tokenized-treasuries]]"]
 ---
 
 # USDtb
@@ -176,3 +176,42 @@ USDtb is a **fully-reserved, fiat/treasury-backed** stablecoin — structurally 
 - CoinDesk (2025-11-25): Anchorage to pay rewards on Ethena tokens — https://www.coindesk.com/business/2025/11/25/anchorage-digital-aims-to-pay-rewards-on-ethena-s-tokens-under-genius-act
 - Supply data: RWA.xyz (https://app.rwa.xyz/assets/USDtb), DefiLlama (https://defillama.com/stablecoin/ethena-usdtb), CoinMarketCap — checked 2026-06-10
 - Verified via Perplexity sonar + web search, 2026-06-10.
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://usdtb.money/](https://usdtb.money/) |
+| **Whitepaper** | [https://docs.usdtb.money/](https://docs.usdtb.money/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.93M |
+| **Market Cap Rank** | #108 |
+| **24h Range** | $0.9937 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

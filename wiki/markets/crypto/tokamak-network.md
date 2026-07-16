@@ -2,10 +2,10 @@
 title: "Tokamak Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
-aliases: ["TON (Tokamak)", "Tokamak Network", "Tokamak"]
+tags: [altcoins, crypto, ethereum]
+aliases: ["TON", "TON (Tokamak)", "Tokamak", "Tokamak Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://tokamak.network/"

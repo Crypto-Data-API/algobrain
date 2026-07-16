@@ -2,14 +2,14 @@
 title: "MANTRA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["MANTRA", "OM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://mantrachain.io/"
-related: ["[[crypto-markets]]", "[[cosmos]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]"]
 ---
 
 # MANTRA
@@ -133,3 +133,107 @@ MANTRA's direct narrative peers are other [[real-world-assets|RWA]]-focused chai
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko bulk top-1000 snapshot.
 - General market knowledge; the April 2025 OM crash is widely documented in industry reporting.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MANTRA |
+| **Market Cap Rank** | #558 |
+| **Market Cap** | $35.76M |
+| **Current Price** | $0.00661415 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Real World Assets (RWA) |
+| **Website** | [https://mantrachain.io/](https://mantrachain.io/) |
+
+---
+
+## Overview
+
+MANTRA Chain is The World's First RWA Layer 1 Blockchain with MultiVM support, fully compatible with the Ethereum Virtual Machine (EVM). By enabling developers and institutions to embed compliance at either the chain level or the smart contract level, MANTRA offers a Permissionless Blockchain for Permissioned Applications. By securing the world's first DeFi exchange license from Dubai's Virtual Assets Regulatory Authority (VARA) for retail market participants, MANTRA is positioned to be a cornerstone to the evolution of onchain asset management in the Middle East for years to come.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.41B MANTRA |
+| **Total Supply** | 7.35B MANTRA |
+| **Max Supply** | 10.00B MANTRA |
+| **Fully Diluted Valuation** | $48.58M |
+| **Market Cap / FDV Ratio** | 0.74 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0263 (2026-03-04) |
+| **Current vs ATH** | -74.84% |
+| **All-Time Low** | $0.00604187 (2026-07-13) |
+| **Current vs ATL** | +9.43% |
+| **24h Change** | +5.63% |
+| **7d Change** | +1.46% |
+| **30d Change** | -18.86% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | MANTRA/USDT | N/A |
+| Kraken | MANTRA/USD | N/A |
+| Upbit | MANTRA/KRW | N/A |
+| Bitget | MANTRA/USDT | N/A |
+| KuCoin | MANTRA/USDT | N/A |
+| Crypto.com Exchange | MANTRA/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://mantrachain.io/](https://mantrachain.io/) |
+| **Twitter** | [@MANTRA_Chain](https://twitter.com/MANTRA_Chain) |
+| **Telegram** | [MANTRA_Chain](https://t.me/MANTRA_Chain) (77,289 members) |
+| **Discord** | [https://discord.com/invite/mantrachain](https://discord.com/invite/mantrachain) |
+| **GitHub** | [https://github.com/mantra-chain](https://github.com/mantra-chain) |
+| **Whitepaper** | [https://docs.mantrachain.io/](https://docs.mantrachain.io/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.89M |
+| **Market Cap Rank** | #558 |
+| **24h Range** | $0.00625941 — $0.00663148 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

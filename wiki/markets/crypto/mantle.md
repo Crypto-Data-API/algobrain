@@ -2,15 +2,15 @@
 title: "Mantle"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
-aliases: ["MNT", "Mantle Network", "BitDAO"]
+aliases: ["BitDAO", "MNT", "Mantle Network"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized (DAO; ex-BitDAO, Bybit-affiliated origins)"
 website: "https://group.mantle.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[restaking]]", "[[hyperliquid]]", "[[bybit]]", "[[narrative-trading]]"]
+related: ["[[bybit]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[narrative-trading]]", "[[restaking]]"]
 ---
 
 # Mantle
@@ -294,3 +294,45 @@ Mantle's differentiation is **not** being the biggest or fastest L2 — it is th
 - Mantle official site / docs — https://group.mantle.xyz/ , https://docs.mantle.xyz/
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 3.30B MNT |
+| **Total Supply** | 6.22B MNT |
+| **Max Supply** | 6.22B MNT |
+| **Fully Diluted Valuation** | $2.70B |
+| **Market Cap / FDV Ratio** | 0.53 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $33.88M |
+| **Market Cap Rank** | #54 |
+| **24h Range** | $0.4222 — $0.4336 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

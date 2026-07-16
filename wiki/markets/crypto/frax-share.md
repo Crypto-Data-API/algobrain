@@ -2,14 +2,14 @@
 title: "Frax (prev. FXS)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin, ethereum]
-aliases: ["FRAX", "FXS", "Frax Share", "Frax Finance", "frxUSD", "frxETH"]
+tags: [crypto, defi, ethereum, stablecoin]
+aliases: ["FRAX", "FXS", "Frax Finance", "Frax Share", "frxETH", "frxUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://frax.finance"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[defi]]", "[[liquid-staking]]", "[[curve-finance]]", "[[automated-market-maker]]", "[[dai]]", "[[governance-token]]", "[[lido]]", "[[rocket-pool]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-finance]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[rocket-pool]]", "[[stablecoin]]"]
 ---
 
 # Frax (prev. FXS)
@@ -243,3 +243,9 @@ Frax competes across several DeFi verticals simultaneously: against [[stablecoin
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko)
 - General market knowledge; protocol mechanics (AMO, TWAMM, Fraxtal) and the 2025 North Star rebrand from public Frax documentation. No additional specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Ondo U.S. Dollar Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, real-world-assets]
+tags: [crypto, real-world-assets, stablecoins]
 aliases: ["USDON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.ondo.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb-chain]]", "[[stablecoin]]", "[[stablecoins]]", "[[real-world-assets]]", "[[ondo-finance]]", "[[treasuries]]", "[[tokenized-treasuries]]", "[[usdu]]"]
+related: ["[[bnb-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[real-world-assets]]", "[[stablecoin]]", "[[stablecoins]]", "[[tokenized-treasuries]]", "[[treasuries]]", "[[usdu]]"]
 ---
 
 # Ondo U.S. Dollar Token
@@ -217,3 +217,35 @@ USDON is a play on **tokenized-Treasury / yield-bearing dollars** and Ondo's bro
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDON |
+| **Market Cap Rank** | #311 |
+| **Market Cap** | $76.42M |
+| **Current Price** | $1.00 |
+| **Categories** | Stablecoins, USD Stablecoin, Real World Assets (RWA) |
+| **Website** | [https://app.ondo.finance/](https://app.ondo.finance/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 76.42M USDON |
+| **Total Supply** | 76.42M USDON |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $76.42M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

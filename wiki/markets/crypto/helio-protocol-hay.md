@@ -2,14 +2,14 @@
 title: "Lista USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, defi]
-aliases: ["LISUSD", "lisUSD", "Lista USD", "HAY", "Helio Protocol"]
+tags: [crypto, defi, stablecoins]
+aliases: ["HAY", "Helio Protocol", "LISUSD", "Lista USD", "lisUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://helio.money/"
-related: ["[[crypto-markets]]", "[[lista]]", "[[bnb]]", "[[stablecoin]]", "[[stablecoins]]", "[[dai]]", "[[usdc]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dai]]", "[[lista]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Lista USD
@@ -136,3 +136,113 @@ In the current Extreme-Fear environment (Fear & Greed 21), BNB-collateralized st
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; protocol mechanics (lisUSD CDP, slisBNB collateral, Helio→Lista rebrand) from public Lista DAO documentation. No specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LISUSD |
+| **Market Cap Rank** | #321 |
+| **Market Cap** | $74.89M |
+| **Current Price** | $0.9974 |
+| **Categories** | Stablecoins, Decentralized Finance (DeFi), Crypto-backed Stablecoin |
+| **Website** | [https://helio.money/](https://helio.money/) |
+
+---
+
+## Overview
+
+Developed on the BNB Chain, Helio Protocol is an open-source liquidity protocol for borrowing and earning yield on HAY, which is a “destablecoin”
+
+Destablecoin a new asset class that is over-collateralized with liquid staked assets. In other words, HAY is an over-collateralized destablecoin, where 1 HAY is always redeemable at $1 of cryptocurrency, and over-collateralized by BNB. Users can mint and borrow HAY by providing BNB as collateral, which can then be used to stake for yield, liquidity mining and as a means to transfer value.
+
+Following the launch of our governance token, HELIO, Helio Protocol will operate as a DAO, where the community will govern the protocol’s treasury, revenue pool and future direction.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 75.09M LISUSD |
+| **Total Supply** | 75.09M LISUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $74.89M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.00 (2022-08-25) |
+| **Current vs ATH** | -50.17% |
+| **All-Time Low** | $0.2086 (2022-12-02) |
+| **Current vs ATL** | +378.08% |
+| **24h Change** | -0.01% |
+| **7d Change** | -0.01% |
+| **30d Change** | -0.01% |
+| **1y Change** | -0.09% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://helio.money/](https://helio.money/) |
+| **Telegram** | [helio_money](https://t.me/helio_money) (31 members) |
+| **Discord** | [https://discord.com/invite/k5JZVQYpUn](https://discord.com/invite/k5JZVQYpUn) |
+| **GitHub** | [https://github.com/helio-money/helio-smart-contracts](https://github.com/helio-money/helio-smart-contracts) |
+| **Whitepaper** | [https://helio.money/static/whitepaper.pdf](https://helio.money/static/whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $84,791.00 |
+| **Market Cap Rank** | #321 |
+| **24h Range** | $0.9971 — $0.9984 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

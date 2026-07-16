@@ -2,14 +2,14 @@
 title: "VVS Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["VVS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://vvs.finance/"
-related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[cronos]]", "[[ethereum]]", "[[defi]]", "[[pancakeswap]]"]
+related: ["[[automated-market-maker]]", "[[cronos]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[pancakeswap]]"]
 ---
 
 # VVS Finance
@@ -169,3 +169,89 @@ This is framing, not a price target — no valuation model in the wiki produces 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-20 (cryptodataapi.com / CoinGecko top-1000 markets snapshot).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | VVS |
+| **Market Cap Rank** | #493 |
+| **Market Cap** | $42.35M |
+| **Current Price** | $0.00000097 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), Automated Market Maker (AMM) |
+| **Website** | [https://vvs.finance/](https://vvs.finance/) |
+
+---
+
+## Overview
+
+VVS Finance is a decentralized finance and automated market making platform on the Cronos network by Crypto.com
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 43.55T VVS |
+| **Total Supply** | 95.11T VVS |
+| **Max Supply** | 100.00T VVS |
+| **Fully Diluted Valuation** | $92.50M |
+| **Market Cap / FDV Ratio** | 0.46 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00033093 (2021-11-15) |
+| **Current vs ATH** | -99.71% |
+| **All-Time Low** | $0.00000093 (2026-06-30) |
+| **Current vs ATL** | +4.95% |
+| **24h Change** | +0.33% |
+| **7d Change** | -0.77% |
+| **30d Change** | -10.75% |
+| **1y Change** | -60.56% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Crypto.com Exchange | VVS/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X839E71613F9AA06E5701CF6DE63E303616B0DDE3/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $29,137.00 |
+| **Market Cap Rank** | #493 |
+| **24h Range** | $0.00000096 — $0.00000098 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

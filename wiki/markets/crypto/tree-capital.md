@@ -2,9 +2,9 @@
 title: "Tree"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
-tags: [crypto]
+tags: [crypto, defi]
 aliases: ["TREE"]
 entity_type: protocol
 headquarters: "Decentralized"
@@ -125,10 +125,9 @@ Utility token for Tree News. The token can be used for a new subscription tier t
 ## See Also
 
 - [[crypto-markets]]
-- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

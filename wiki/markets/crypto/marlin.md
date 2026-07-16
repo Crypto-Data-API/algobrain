@@ -2,7 +2,7 @@
 title: "Marlin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["POND"]
@@ -154,4 +154,4 @@ High-performance network infrastructure for modern decentralized networks
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

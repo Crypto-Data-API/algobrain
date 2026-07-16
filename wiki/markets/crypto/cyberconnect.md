@@ -2,14 +2,14 @@
 title: "CyberConnect (CYBER)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
-aliases: ["CYBER", "CyberConnect", "Cyber"]
+tags: [altcoins, crypto, nft]
+aliases: ["CYBER", "Cyber", "CyberConnect"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cyber.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[socialfi]]", "[[layer-2]]", "[[dao]]"]
+related: ["[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[layer-2]]", "[[socialfi]]"]
 ---
 
 # CyberConnect (CYBER)

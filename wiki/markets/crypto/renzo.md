@@ -2,14 +2,14 @@
 title: "Renzo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
-aliases: ["REZ", "ezETH", "Renzo Protocol"]
+aliases: ["REZ", "Renzo Protocol", "ezETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.renzoprotocol.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[eigenlayer]]", "[[restaking]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[depeg]]", "[[smart-contract-risk]]", "[[slashing]]", "[[governance-token]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]"]
 ---
 
 # Renzo
@@ -221,3 +221,9 @@ REZ is Renzo's [[governance-token]]. It is used to vote on protocol parameters, 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical market-data snapshot
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko)
 - General market knowledge (publicly documented Renzo/ezETH mechanism, the April 2024 Binance Launchpool launch and ezETH depeg event); no specific narrative wiki source ingested yet for protocol mechanism.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

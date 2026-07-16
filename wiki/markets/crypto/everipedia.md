@@ -2,14 +2,14 @@
 title: "IQ (IQ.wiki / Everipedia)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading]
-aliases: ["IQ", "Everipedia", "IQ.wiki", "BrainDAO"]
+tags: [ai-trading, altcoins, crypto]
+aliases: ["BrainDAO", "Everipedia", "IQ", "IQ.wiki"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://iq.wiki/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[frax-share]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[frax-share]]"]
 ---
 
 # IQ (IQ.wiki / Everipedia)
@@ -261,3 +261,10 @@ IQ trades on a **two-narrative split**, and recognizing which is driving price m
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

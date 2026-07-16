@@ -2,14 +2,14 @@
 title: "Optimism"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["OP", "Optimism Collective"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.optimism.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[arbitrum]]", "[[starknet]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimistic-rollup]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimism]]", "[[optimistic-rollup]]", "[[starknet]]"]
 ---
 
 # Optimism

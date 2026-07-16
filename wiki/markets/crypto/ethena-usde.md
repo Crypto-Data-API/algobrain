@@ -2,15 +2,15 @@
 title: "Ethena USDe"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["USDE", "USDe", "Ethena", "sUSDe"]
+aliases: ["Ethena", "USDE", "USDe", "sUSDe"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://app.ethena.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[hyperliquid]]", "[[aave]]", "[[funding-rates]]", "[[stablecoin]]", "[[ethena]]", "[[carry-trade]]"]
+related: ["[[aave]]", "[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[stablecoin]]"]
 ---
 
 # Ethena USDe
@@ -263,3 +263,22 @@ A pegged asset is not "valued" by price — the analytical questions are about *
 - Messari — Ethena USDe project page (yield data): https://messari.io/project/ethena-usde
 - CoinMarketCap stablecoin rankings (USDe ~$4.49B, June 2026): https://coinmarketcap.com/view/stablecoin/
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 4.02B USDE |
+| **Total Supply** | 4.02B USDE |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $4.02B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

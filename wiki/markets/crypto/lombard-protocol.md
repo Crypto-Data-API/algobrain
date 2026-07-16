@@ -2,14 +2,14 @@
 title: "Lombard"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, bitcoin, restaking]
+tags: [bitcoin, crypto, defi, restaking]
 aliases: ["BARD", "LBTC", "Lombard Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lombard.finance/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[ethereum]]", "[[restaking]]", "[[liquid-staking]]", "[[decentralized-finance]]", "[[defi]]", "[[babylon]]"]
+related: ["[[babylon]]", "[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[defi]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]"]
 ---
 
 # Lombard
@@ -141,3 +141,117 @@ BARD is a **token on the BTCfi platform**, not BTC itself — investors must sep
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BARD |
+| **Market Cap Rank** | #508 |
+| **Market Cap** | $40.83M |
+| **Current Price** | $0.1227 |
+| **Categories** | Decentralized Finance (DeFi), Binance HODLer Airdrops, BTCfi Protocol, Binance Alpha Spotlight, Buidlpad Launchpad |
+| **Website** | [https://www.lombard.finance/](https://www.lombard.finance/) |
+
+---
+
+## Overview
+
+Lombard is building onchain Bitcoin capital markets to unlock the full potential of the defining asset of this generation. Founded in 2024, the company pioneered Bitcoin’s integration into DeFi with LBTC — the leading yield-bearing Bitcoin, secured by a decentralized consortium of 14 digital asset institutions — which today stands as the largest Bitcoin LST. Lombard is developing full-stack infrastructure to accelerate onchain BTC adoption for holders, protocols, and platforms, spanning BTC assets, a Staking SDK, and supporting services. The company is built and backed by digital asset leaders, including top DeFi protocols, institutions, and exchanges.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 332.81M BARD |
+| **Total Supply** | 1.00B BARD |
+| **Max Supply** | 1.00B BARD |
+| **Fully Diluted Valuation** | $122.67M |
+| **Market Cap / FDV Ratio** | 0.33 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.70 (2026-03-05) |
+| **Current vs ATH** | -92.78% |
+| **All-Time Low** | $0.1203 (2026-07-15) |
+| **Current vs ATL** | +2.07% |
+| **24h Change** | +1.04% |
+| **7d Change** | -3.51% |
+| **30d Change** | -26.69% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xf0db65d17e30a966c2ae6a21f6bba71cea6e9754` |
+| Binance Smart Chain | `0xd23a186a78c0b3b805505e5f8ea4083295ef9f3a` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | BARD/USDT | N/A |
+| Upbit | BARD/KRW | N/A |
+| Bitget | BARD/USDT | N/A |
+| KuCoin | BARD/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.lombard.finance/](https://www.lombard.finance/) |
+| **Twitter** | [@lombard_finance](https://twitter.com/lombard_finance) |
+| **Telegram** | [+FbE6IuGOrak1ZTVh](https://t.me/+FbE6IuGOrak1ZTVh) (5,437 members) |
+| **Whitepaper** | [https://docs.lombard.finance/](https://docs.lombard.finance/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.38M |
+| **Market Cap Rank** | #508 |
+| **24h Range** | $0.1213 — $0.1253 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

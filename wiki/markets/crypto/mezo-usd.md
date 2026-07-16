@@ -2,14 +2,14 @@
 title: "Mezo USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin, bitcoin]
+tags: [bitcoin, crypto, defi, stablecoin]
 aliases: ["MUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mezo.org"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[stablecoin]]", "[[collateralization]]", "[[cdp]]", "[[depeg]]", "[[liquity-usd]]"]
+related: ["[[bitcoin]]", "[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[liquity-usd]]", "[[stablecoin]]"]
 ---
 
 # Mezo USD

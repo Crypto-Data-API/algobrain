@@ -2,15 +2,15 @@
 title: "Ethereum Classic"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, history]
+tags: [altcoins, crypto, history]
 aliases: ["ETC"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized"
 website: "https://ethereumclassic.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[the-dao-hack]]", "[[hyperliquid]]", "[[proof-of-work]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-work]]", "[[the-dao-hack]]"]
 ---
 
 # Ethereum Classic
@@ -258,3 +258,66 @@ The takeaway: ETC offers Ethereum-like *technology lineage* with Bitcoin-like *m
 - CoinMarketCap AI — ETC latest updates (hashrate >300 TH/s; fifthening Aug–Oct 2026, 2.048 → 1.6384 ETC): https://coinmarketcap.com/cmc-ai/ethereum-classic/latest-updates/
 - Web verification, 2026-06-10: Olympia testnet status (mainnet target end-2026), hashrate, fifthening window confirmed.
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 157.52M ETC |
+| **Total Supply** | 157.52M ETC |
+| **Max Supply** | 210.70M ETC |
+| **Fully Diluted Valuation** | $1.10B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $167.09 (2021-05-06) |
+| **Current vs ATH** | -95.82% |
+| **All-Time Low** | $0.6150 (2016-07-25) |
+| **Current vs ATL** | +1034.59% |
+| **24h Change** | -1.08% |
+| **7d Change** | -0.25% |
+| **30d Change** | -5.84% |
+| **1y Change** | -64.35% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $27.87M |
+| **Market Cap Rank** | #63 |
+| **24h Range** | $6.96 — $7.18 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,7 +2,7 @@
 title: "OMEGA Labs"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN24"]
@@ -20,10 +20,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** "any-to-any" multimodal AI — text, image, audio, and video generation and understanding within a single subnet. OMEGA's consumer-facing product "OMEGA Focus" packages one-click miner participation for non-technical users.
-- **Team:** OMEGA Labs.
-- **Trading relevance:** broad multimodal-AI bet. The one-click miner angle is unusual for Bittensor and aims at onboarding retail participants, which can increase alpha liquidity over time.
-- **Alpha token:** alpha-24.
+OMEGA Focus is a 1-click miner that anyone can install and start earning TAO for doing productive work, powered by Subnet 24
 
 ---
 
@@ -37,12 +34,6 @@ related: ["[[crypto-markets]]"]
 | **Current Price** | $4.13 |
 | **Categories** | Artificial Intelligence (AI), Bittensor Ecosystem, Bittensor Subnets |
 | **Website** | [https://focus.inc/](https://focus.inc/) |
-
----
-
-## Overview
-
-OMEGA Focus is a 1-click miner that anyone can install and start earning TAO for doing productive work, powered by Subnet 24
 
 ---
 
@@ -133,4 +124,4 @@ OMEGA Focus is a 1-click miner that anyone can install and start earning TAO for
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

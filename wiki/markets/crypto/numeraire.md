@@ -2,7 +2,7 @@
 title: "Numeraire"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, machine-learning]
 aliases: ["NMR"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://numer.ai/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ai-trading]]", "[[machine-learning]]", "[[defi]]", "[[uniswap]]"]
+related: ["[[ai-trading]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[machine-learning]]", "[[uniswap]]"]
 ---
 
 # Numeraire
@@ -144,3 +144,133 @@ NMR is the **narrowest and oldest** of the AI/data tokens: a single fund's predi
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | NMR |
+| **Market Cap Rank** | #338 |
+| **Market Cap** | $71.50M |
+| **Current Price** | $10.16 |
+| **Genesis Date** | 2017-06-20 |
+| **Categories** | Decentralized Finance (DeFi), Analytics |
+| **Website** | [https://numer.ai/](https://numer.ai/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 7.04M NMR |
+| **Total Supply** | 10.63M NMR |
+| **Max Supply** | 11.00M NMR |
+| **Fully Diluted Valuation** | $108.05M |
+| **Market Cap / FDV Ratio** | 0.66 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $93.15 (2021-05-16) |
+| **Current vs ATH** | -89.09% |
+| **All-Time Low** | $2.06 (2018-11-27) |
+| **Current vs ATL** | +392.10% |
+| **24h Change** | +0.74% |
+| **7d Change** | +1.00% |
+| **30d Change** | +17.18% |
+| **1y Change** | +23.85% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x1776e1f26f98b1a5df9cd347953a26dd3cb46671` |
+| Energi | `0xd72922e849477a042a7e6dc84309f4bc1c1227a2` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | NMR/USDT | N/A |
+| Kraken | NMR/USD | N/A |
+| Upbit | NMR/BTC | N/A |
+| Bitget | NMR/USDT | N/A |
+| KuCoin | NMR/USDT | N/A |
+| Crypto.com Exchange | NMR/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X1776E1F26F98B1A5DF9CD347953A26DD3CB46671/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0X1776E1F26F98B1A5DF9CD347953A26DD3CB46671/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://numer.ai/](https://numer.ai/) |
+| **Twitter** | [@numerai](https://twitter.com/numerai) |
+| **Reddit** | [https://www.reddit.com/r/numerai](https://www.reddit.com/r/numerai) |
+| **GitHub** | [https://github.com/erasureprotocol/erasure-protocol](https://github.com/erasureprotocol/erasure-protocol) |
+| **Whitepaper** | [https://numer.ai/whitepaper.pdf](https://numer.ai/whitepaper.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 168 |
+| **GitHub Forks** | 33 |
+| **Pull Requests Merged** | 115 |
+| **Contributors** | 11 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.39M |
+| **Market Cap Rank** | #338 |
+| **24h Range** | $10.01 — $10.46 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

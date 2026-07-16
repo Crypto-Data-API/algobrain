@@ -2,14 +2,14 @@
 title: "Yield Guild Games"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["YGG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://yieldguild.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[play-to-earn]]", "[[gamefi]]", "[[dao]]", "[[nft]]", "[[governance-token]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[nft]]", "[[play-to-earn]]", "[[staking]]"]
 ---
 
 # Yield Guild Games

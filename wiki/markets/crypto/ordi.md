@@ -2,13 +2,13 @@
 title: "ORDI Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, bitcoin, nft]
+tags: [bitcoin, crypto, nft]
 aliases: ["ORDI", "ORDI token"]
 entity_type: protocol
 headquarters: "Decentralized"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[bitcoin-ordinals]]", "[[brc-20]]", "[[runes]]", "[[hyperliquid]]"]
+related: ["[[bitcoin-ordinals]]", "[[bitcoin]]", "[[brc-20]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[runes]]"]
 ---
 
 # ORDI Token
@@ -130,3 +130,111 @@ Like other inscription-era assets, ORDI has no cash flow and is best framed refl
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ORDI |
+| **Market Cap Rank** | #300 |
+| **Market Cap** | $78.56M |
+| **Current Price** | $3.74 |
+| **Categories** | Meme, BRC-20, Inscriptions |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 21.00M ORDI |
+| **Total Supply** | 21.00M ORDI |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $78.56M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $95.52 (2024-03-05) |
+| **Current vs ATH** | -96.08% |
+| **All-Time Low** | $2.12 (2026-03-29) |
+| **Current vs ATL** | +76.63% |
+| **24h Change** | +9.23% |
+| **7d Change** | +6.24% |
+| **30d Change** | +4.33% |
+| **1y Change** | -61.13% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ordinals
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ordinals | `b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0` |
+| Solana | `u9nmK5sQovm6ACVCQbbq8xUMpFqdPSYxdxVwXUX4sjY` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ORDI/USDT | N/A |
+| Bitget | ORDI/USDT | N/A |
+| KuCoin | ORDI/USDT | N/A |
+| Crypto.com Exchange | ORDI/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | U9NMK5SQOVM6ACVCQBBQ8XUMPFQDPSYXDXVWXUX4SJY/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $28.29M |
+| **Market Cap Rank** | #300 |
+| **24h Range** | $3.41 — $3.75 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

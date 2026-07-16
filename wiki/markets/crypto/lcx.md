@@ -2,14 +2,14 @@
 title: "LCX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, exchange, regulation]
+tags: [crypto, defi, exchange, regulation]
 aliases: ["LCX", "Liechtenstein Cryptoassets Exchange"]
 entity_type: exchange
 headquarters: "Vaduz, Liechtenstein"
 website: "https://lcx.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[exchange]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[exchange]]"]
 ---
 
 # LCX
@@ -203,3 +203,51 @@ Real dated events only:
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LCX |
+| **Market Cap Rank** | #789 |
+| **Market Cap** | $21.47M |
+| **Current Price** | $0.0228 |
+| **Categories** | Exchange-based Tokens, Decentralized Finance (DeFi), Centralized Exchange (CEX) Token, Real World Assets (RWA), Alleged SEC Securities |
+| **Website** | [https://lcx.com/](https://lcx.com/) |
+
+---
+
+## Overview
+
+LCX.com is a platform that innovates capital markets by providing solutions for compliant digital
+assets and security tokens. It is a secure and compliant platform for buying, selling, transferring,
+and storing digital currency.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.5640 (2021-11-03) |
+| **Current vs ATH** | -95.92% |
+| **All-Time Low** | $0.00007085 (2019-11-26) |
+| **Current vs ATL** | +32337.30% |
+| **24h Change** | -1.23% |
+| **7d Change** | +9.00% |
+| **30d Change** | -15.14% |
+| **1y Change** | -81.84% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $42,712.00 |
+| **Market Cap Rank** | #789 |
+| **24h Range** | $0.0226 — $0.0237 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

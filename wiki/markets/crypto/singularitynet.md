@@ -2,15 +2,15 @@
 title: "SingularityNET"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, machine-learning, ai-agent-tokens]
-aliases: ["AGIX", "SingularityNET", "SNET"]
+tags: [ai-agent-tokens, ai-trading, crypto, machine-learning]
+aliases: ["AGIX", "SNET", "SingularityNET"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://singularitynet.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[artificial-intelligence]]", "[[decentralized-ai]]", "[[ai-agent-tokens]]", "[[ocean-protocol]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]", "[[ocean-protocol]]"]
 ---
 
 # SingularityNET
@@ -218,3 +218,14 @@ The merger's logic is vertical integration of decentralized AI: **data (Ocean) +
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).
 - General market knowledge (incl. publicly announced ASI Alliance token merger); no specific narrative wiki source ingested yet.
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2,395.55 |
+| **Market Cap Rank** | #908 |
+| **24h Range** | $0.0686 — $0.0711 |
+| **Last Updated** | 2026-07-16 |
+
+---

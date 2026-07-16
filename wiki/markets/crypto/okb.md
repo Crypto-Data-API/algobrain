@@ -2,7 +2,7 @@
 title: "OKB"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, exchange]
 aliases: ["OKB", "OKX Token"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "OKX: Seychelles / San Jose (US entity)"
 website: "https://www.okx.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[okx]]", "[[binance]]", "[[bitget-token]]", "[[kucoin-shares]]", "[[binance-coin]]"]
+related: ["[[binance-coin]]", "[[binance]]", "[[bitget-token]]", "[[crypto-markets]]", "[[ethereum]]", "[[kucoin-shares]]", "[[okx]]"]
 ---
 
 # OKB
@@ -220,3 +220,102 @@ OKB competes within the [[centralized-exchange|CEX]]-token basket. Peer comparis
 - [X Layer PP Upgrade and OKB Gas-Token Economic Model — OKX announcement](https://www.okx.com/en-us/help/announcement-on-the-pp-upgrade-of-x-layer-and-optimisation-of-the-okb-gas)
 - [CoinGecko — OKB](https://www.coingecko.com/en/coins/okb) (June 2026 market data)
 - Web search verification, 2026-06-10
+
+## Overview
+
+OKEx, the 2nd most popular cryptocurrency exchange by trading volume, launched its platform token ‘OKB‘ today with 10 trading pairs. On its official support page, OKEx describes OKB is a global utility token issued by the OK Blockchain Foundation. The total available supply of OKB will be one billion tokens (1,000,000,000), with a distribution model that allocates 60% of the supply will be given out to OKEx customers for community building and during marketing campaigns. According to OKEx, the company had officially issued OKB on ERC20 protocol earlier this month. 
+
+The company denied ICO (initial coin offering) and public fundraising. Reportedly the company had stated that it would be soon shifting the token to its official OK chain and subsequently it will be applied not only on OKEx’s platform but also on other related projects. There will be in total 1 billion tokens supplied globally out of which 600 million coins will be distributed to OKEx customers for community building and marketing campaigns. Rest will be locked up for a period of 1 year to 3 years.
+
+According to OKEx, the company had officially issued OKB on ERC20 protocol earlier this month. The company denied ICO (initial coin offering) and public fundraising. Reportedly the company had stated that it would be soon shifting the token to its official OK chain and subsequently it will be applied not only on OKEx’s platform but also on other related projects. There will be in total 1 billion tokens supplied globally out of which 600 million coins will be distributed to OKEx customers for community building and marketing campaigns. Rest will be locked up for a period of 1 year to 3 years.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 21.00M OKB |
+| **Total Supply** | 21.00M OKB |
+| **Max Supply** | 21.00M OKB |
+| **Fully Diluted Valuation** | $1.71B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $228.74 (2025-10-05) |
+| **Current vs ATH** | -64.45% |
+| **All-Time Low** | $0.5806 (2019-01-14) |
+| **Current vs ATL** | +13905.12% |
+| **24h Change** | -0.29% |
+| **7d Change** | +2.36% |
+| **30d Change** | +7.20% |
+| **1y Change** | +71.18% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x75231f58b43240c9718dd58b4967c5114342a86c` |
+| Okex Chain | `0xdf54b6c6195ea4d948d03bfd818d365cf175cfc2` |
+| Sora | `0x0080edc40a944d29562b2dea2de42ed27b9047d16eeea27c5bc1b2e02786abe9` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | OKB/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X75231F58B43240C9718DD58B4967C5114342A86C/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+| Uniswap V2 (Ethereum) | 0X75231F58B43240C9718DD58B4967C5114342A86C/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $15.08M |
+| **Market Cap Rank** | #45 |
+| **24h Range** | $81.08 — $82.63 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

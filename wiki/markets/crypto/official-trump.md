@@ -2,7 +2,7 @@
 title: "Official Trump"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, news]
 aliases: ["TRUMP", "TRUMP coin", "Trump memecoin"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2025
 headquarters: "Decentralized"
 website: "https://gettrumpmemes.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[narrative-trading]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[solana]]"]
 ---
 
 # Official Trump
@@ -259,3 +259,40 @@ TRUMP's distinguishing feature is *political headline beta* and event-driven per
 - CoinMarketCap — OFFICIAL TRUMP: https://coinmarketcap.com/currencies/official-trump/
 - Coinbase price page (vesting/allocation detail): https://www.coinbase.com/price/official-trump
 - Web verification (price ~$1.65, mcap ~$391M, May-2026 unlock cadence), 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 237.41M TRUMP |
+| **Total Supply** | 1.00B TRUMP |
+| **Max Supply** | 1.00B TRUMP |
+| **Fully Diluted Valuation** | $1.56B |
+| **Market Cap / FDV Ratio** | 0.24 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $76.41M |
+| **Market Cap Rank** | #120 |
+| **24h Range** | $1.55 — $1.59 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

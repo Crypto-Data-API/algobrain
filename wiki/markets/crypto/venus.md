@@ -2,14 +2,14 @@
 title: "Venus"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["XVS", "Venus Protocol"]
+aliases: ["Venus Protocol", "XVS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://venus.io/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[defi]]", "[[lending-and-borrowing]]", "[[aave]]", "[[compound]]"]
+related: ["[[aave]]", "[[bnb]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[lending-and-borrowing]]"]
 ---
 
 # Venus
@@ -133,3 +133,128 @@ Venus is essentially the **BNB-Chain analogue of Aave/Compound**: a smaller mark
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko top-1000 snapshot (rank #484, $46.14M mcap, $2.77, 7d +12.03%).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XVS |
+| **Market Cap Rank** | #457 |
+| **Market Cap** | $45.41M |
+| **Current Price** | $2.69 |
+| **Categories** | Decentralized Finance (DeFi), Yield Farming, Binance Launchpool, Lending/Borrowing Protocols |
+| **Website** | [https://venus.io/](https://venus.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 16.86M XVS |
+| **Total Supply** | 29.75M XVS |
+| **Max Supply** | 30.00M XVS |
+| **Fully Diluted Valuation** | $80.12M |
+| **Market Cap / FDV Ratio** | 0.57 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $146.82 (2021-05-10) |
+| **Current vs ATH** | -98.16% |
+| **All-Time Low** | $1.65 (2020-10-06) |
+| **Current vs ATL** | +63.30% |
+| **24h Change** | -1.94% |
+| **7d Change** | +5.97% |
+| **30d Change** | +2.32% |
+| **1y Change** | -58.70% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xcf6bb5389c92bdda8a3747ddb454cb7a64626c63` |
+| Opbnb | `0x3e2e61f1c075881f3fb8dd568043d8c221fd5c61` |
+| Zksync | `0xd78abd81a3d57712a3af080dc4185b698fe9ac5a` |
+| Unichain | `0x81908bbaad3f6fc74093540ab2e9b749bb62aa0d` |
+| Base | `0xebb7873213c8d1d9913d8ea39aa12d74cb107995` |
+| Ethereum | `0xd3cc9d8f3689b83c91b7b59cab4946b063eb894a` |
+| Arbitrum One | `0xc1eb7689147c81ac840d4ff0d298489fc7986d52` |
+| Optimistic Ethereum | `0x4a971e87ad1f61f7f3081645f52a99277ae917cf` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | XVS/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XD3CC9D8F3689B83C91B7B59CAB4946B063EB894A/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://venus.io/](https://venus.io/) |
+| **Twitter** | [@VenusProtocol](https://twitter.com/VenusProtocol) |
+| **Reddit** | [https://www.reddit.com/r/venusprotocol](https://www.reddit.com/r/venusprotocol) |
+| **Telegram** | [VenusProtocol](https://t.me/VenusProtocol) (19,487 members) |
+| **Discord** | [https://discord.com/invite/venus-protocol-912811548651708448](https://discord.com/invite/venus-protocol-912811548651708448) |
+| **GitHub** | [https://github.com/VenusProtocol/Venus-Protocol](https://github.com/VenusProtocol/Venus-Protocol) |
+| **Whitepaper** | [https://github.com/VenusProtocol/venus-protocol-documentation/tree/main/whitepapers](https://github.com/VenusProtocol/venus-protocol-documentation/tree/main/whitepapers) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 280 |
+| **GitHub Forks** | 201 |
+| **Commits (4 weeks)** | 41 |
+| **Pull Requests Merged** | 523 |
+| **Contributors** | 30 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.58M |
+| **Market Cap Rank** | #457 |
+| **24h Range** | $2.68 — $2.83 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

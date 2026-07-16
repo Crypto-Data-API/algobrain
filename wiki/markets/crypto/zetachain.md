@@ -2,14 +2,14 @@
 title: "ZetaChain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ZETA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.zetachain.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[bitcoin]]", "[[cross-chain-bridges]]"]
+related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]"]
 ---
 
 # ZetaChain
@@ -132,3 +132,117 @@ ZetaChain is a ~$54M-cap omnichain settlement [[layer-1]] with a moderate diluti
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoint), `raw/data/crypto-loop/coingecko-markets.json`.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ZETA |
+| **Market Cap Rank** | #420 |
+| **Market Cap** | $51.84M |
+| **Current Price** | $0.0343 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Cross-chain Communication, Binance Alpha Spotlight, Made in USA, Chain Abstraction |
+| **Website** | [https://www.zetachain.com/](https://www.zetachain.com/) |
+
+---
+
+## Overview
+
+What Is ZetaChain (ZETA)?
+ZetaChain is a universal Layer 1 blockchain designed to help developers build applications that operate across both blockchains and AI models. Originally created to solve fragmentation in Web3 through universal apps, ZetaChain now extends that same interoperability thesis to AI with an AI interoperability stack that enables cross-model experiences with private, user-controlled context. ZetaChain provides native connectivity across major blockchain ecosystems and supports global execution, permissions, and settlement for applications and agents.
+
+What Makes ZetaChain Unique?
+ZetaChain combines universal blockchain interoperability with an AI interoperability layer, allowing developers to build once and reach users across chains and models. ZetaChain introduces an AI Portal for routing and execution across multiple AI model providers without lock-in, and a Private Memory Layer designed to keep user context encrypted and permissioned while remaining portable across models and applications. Together, these components let developers ship privacy-first apps and agents with persistent memory, cross-chain execution, and global monetization without assembling complex backend infrastructure.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.51B ZETA |
+| **Total Supply** | 2.10B ZETA |
+| **Max Supply** | 2.10B ZETA |
+| **Fully Diluted Valuation** | $72.10M |
+| **Market Cap / FDV Ratio** | 0.72 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.85 (2024-02-15) |
+| **Current vs ATH** | -98.80% |
+| **All-Time Low** | $0.0319 (2026-06-26) |
+| **Current vs ATL** | +7.69% |
+| **24h Change** | +0.29% |
+| **7d Change** | -0.76% |
+| **30d Change** | -12.38% |
+| **1y Change** | -84.33% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xf091867ec603a6628ed83d274e835539d82e9cc8` |
+| Binance Smart Chain | `0x0000028a2eb8346cd5c0267856ab7594b7a55308` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | ZETA/USD | N/A |
+| Upbit | ZETA/KRW | N/A |
+| Bitget | ZETA/USDT | N/A |
+| KuCoin | ZETA/USDT | N/A |
+| Crypto.com Exchange | ZETA/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.zetachain.com/](https://www.zetachain.com/) |
+| **Twitter** | [@zetablockchain](https://twitter.com/zetablockchain) |
+| **Telegram** | [zetachainofficial](https://t.me/zetachainofficial) (71,981 members) |
+| **Discord** | [https://discord.com/invite/zetachain](https://discord.com/invite/zetachain) |
+| **GitHub** | [https://github.com/zeta-chain](https://github.com/zeta-chain) |
+| **Whitepaper** | [https://www.zetachain.com/whitepaper.pdf](https://www.zetachain.com/whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.88M |
+| **Market Cap Rank** | #420 |
+| **24h Range** | $0.0338 — $0.0348 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

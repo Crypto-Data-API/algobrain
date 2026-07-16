@@ -2,14 +2,14 @@
 title: "BTSE Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, exchange]
 aliases: ["BTSE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.btse.com/en/ref"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[centralized-exchange]]", "[[exchange-tokens]]"]
+related: ["[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]"]
 ---
 
 # BTSE Token
@@ -154,3 +154,113 @@ BTSE shares the **fee-discount + buyback-and-burn** model with BNB and OKB, but 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BTSE |
+| **Market Cap Rank** | #190 |
+| **Market Cap** | $160.70M |
+| **Current Price** | $0.9916 |
+| **Categories** | Exchange-based Tokens, Centralized Exchange (CEX) Token |
+| **Website** | [https://www.btse.com/en/ref](https://www.btse.com/en/ref) |
+
+---
+
+## Overview
+
+The BTSE token powers the BTSE ecosystem and enhances your trading experience.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 162.06M BTSE |
+| **Total Supply** | 200.00M BTSE |
+| **Max Supply** | 200.00M BTSE |
+| **Fully Diluted Valuation** | $198.32M |
+| **Market Cap / FDV Ratio** | 0.81 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $9.21 (2022-03-23) |
+| **Current vs ATH** | -89.18% |
+| **All-Time Low** | $0.0619 (2025-10-10) |
+| **Current vs ATL** | +1509.92% |
+| **24h Change** | +0.09% |
+| **7d Change** | +0.80% |
+| **30d Change** | -12.35% |
+| **1y Change** | -39.09% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x666d875c600aa06ac1cf15641361dec3b00432ef` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X666D875C600AA06AC1CF15641361DEC3B00432EF/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.btse.com/en/ref](https://www.btse.com/en/ref) |
+| **Twitter** | [@BTSE_Official](https://twitter.com/BTSE_Official) |
+| **Reddit** | [https://www.reddit.com/r/btsecom/](https://www.reddit.com/r/btsecom/) |
+| **Telegram** | [btsecom](https://t.me/btsecom) (100,258 members) |
+| **Whitepaper** | [https://www.allcryptowhitepapers.com/wp-content/uploads/2022/10/BTSE-Token.pdf](https://www.allcryptowhitepapers.com/wp-content/uploads/2022/10/BTSE-Token.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $745,284.00 |
+| **Market Cap Rank** | #190 |
+| **24h Range** | $0.9889 — $1.02 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

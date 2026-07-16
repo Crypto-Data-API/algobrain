@@ -2,14 +2,14 @@
 title: "Fluid"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["FLUID", "Instadapp"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://fluid.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[aave]]", "[[uniswap]]"]
+related: ["[[aave]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[uniswap]]"]
 ---
 
 # Fluid
@@ -129,3 +129,116 @@ Fluid sits in the **DeFi capital-efficiency** narrative. The pitch: rather than 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 from CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FLUID |
+| **Market Cap Rank** | #297 |
+| **Market Cap** | $79.95M |
+| **Current Price** | $1.02 |
+| **Categories** | Decentralized Finance (DeFi), Binance Alpha Spotlight, Base Native |
+| **Website** | [https://fluid.io/](https://fluid.io/) |
+
+---
+
+## Overview
+
+On Instadapp, users and developers manage and build their DeFi portfolio - the world's most advanced platform to start leveraging the full potential of Decentralized Finance.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 78.70M FLUID |
+| **Total Supply** | 100.00M FLUID |
+| **Max Supply** | 100.00M FLUID |
+| **Fully Diluted Valuation** | $101.59M |
+| **Market Cap / FDV Ratio** | 0.79 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $24.40 (2021-06-16) |
+| **Current vs ATH** | -95.84% |
+| **All-Time Low** | $0.3665 (2022-12-28) |
+| **Current vs ATL** | +177.11% |
+| **24h Change** | -0.51% |
+| **7d Change** | -1.47% |
+| **30d Change** | -10.03% |
+| **1y Change** | -80.73% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x6f40d4a6237c257fff2db00fa0510deeecd303eb` |
+| Plasma | `0x61e030a56d33e8260fdd81f03b162a79fe3449cd` |
+| Solana | `DuEy8wWrzCUun5ZbbG9hkVqXqqicpTQw8gB7nEAzpCHQ` |
+| Base | `0x61e030a56d33e8260fdd81f03b162a79fe3449cd` |
+| Polygon Pos | `0xf50d05a1402d0adafa880d36050736f9f6ee7dee` |
+| Arbitrum One | `0x61e030a56d33e8260fdd81f03b162a79fe3449cd` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Upbit | FLUID/KRW | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X6F40D4A6237C257FFF2DB00FA0510DEEECD303EB/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://fluid.io/](https://fluid.io/) |
+| **Twitter** | [@0xfluid](https://twitter.com/0xfluid) |
+| **Discord** | [https://discord.com/invite/C76CeZc](https://discord.com/invite/C76CeZc) |
+| **GitHub** | [https://github.com/instadapp/dsa-connect](https://github.com/instadapp/dsa-connect) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.16M |
+| **Market Cap Rank** | #297 |
+| **24h Range** | $1.01 — $1.05 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Audiera"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, bnb]
+tags: [bnb, crypto, nft]
 aliases: ["BEAT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://audiera.fi/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[gamefi]]", "[[non-fungible-token]]", "[[play-to-earn]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[non-fungible-token]]", "[[play-to-earn]]"]
 ---
 
 # Audiera
@@ -154,3 +154,103 @@ Audiera rides the **GameFi + NFT + Telegram mini-app + AI** narrative stack — 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Project site & docs: audiera.fi, docs.audiera.fi (project self-description).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BEAT |
+| **Market Cap Rank** | #77 |
+| **Market Cap** | $798.85M |
+| **Current Price** | $2.58 |
+| **Categories** | Gaming (GameFi), NFT, Telegram Apps, Binance Alpha Spotlight, Arcade Games |
+| **Website** | [https://audiera.fi/](https://audiera.fi/) |
+
+---
+
+## Overview
+
+Audiera (BEAT) pioneers the agent-native participation economy, where humans and autonomous AI agents act as equal economic participants. For the first time, Audiera introduces structured agent roles and participation rules — enabling agents to perform tasks, interact with users, create music, compete in rhythm battles, and engage directly in on-chain economic activity. No more treating agents as tools: they hold wallets, earn, spend, and settle value natively. Powered by $BEAT on BNB Chain — fueling incentives, coordination, governance, and shared prosperity in the machine-native future.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 309.27M BEAT |
+| **Total Supply** | 1.00B BEAT |
+| **Max Supply** | 1.00B BEAT |
+| **Fully Diluted Valuation** | $2.58B |
+| **Market Cap / FDV Ratio** | 0.31 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $10.99 (2026-06-12) |
+| **Current vs ATH** | -76.49% |
+| **All-Time Low** | $0.0679 (2025-11-02) |
+| **Current vs ATL** | +3703.47% |
+| **24h Change** | -1.59% |
+| **7d Change** | +18.71% |
+| **30d Change** | -21.94% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xcf3232b85b43bca90e51d38cc06cc8bb8c8a3e36` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://audiera.fi/](https://audiera.fi/) |
+| **Twitter** | [@Audiera_web3](https://twitter.com/Audiera_web3) |
+| **Telegram** | [Audiera_web3](https://t.me/Audiera_web3) (65,619 members) |
+| **GitHub** | [https://github.com/Audition2049](https://github.com/Audition2049) |
+| **Whitepaper** | [https://docs.audiera.fi/](https://docs.audiera.fi/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $10.52M |
+| **Market Cap Rank** | #77 |
+| **24h Range** | $2.41 — $2.70 |
+| **CoinGecko Sentiment** | 25% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

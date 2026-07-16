@@ -2,15 +2,15 @@
 title: "Tezos"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["XTZ", "Tezos X", "tez"]
+tags: [altcoins, crypto]
+aliases: ["Tezos X", "XTZ", "tez"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (Tezos Foundation: Zug, Switzerland)"
 website: "https://www.tezos.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]"]
 ---
 
 # Tezos
@@ -194,3 +194,51 @@ XTZ perps are listed on major derivatives venues (Binance Futures et al.); staki
 - Etherlink documentation — https://docs.etherlink.com/
 - Messari Q1 2025 Tezos report (via @tezos: Quebec activation, Etherlink TVL +6,200% QoQ) — https://x.com/tezos/status/1922336093296591214
 - Web search verification via Perplexity/WebSearch, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.09B XTZ |
+| **Total Supply** | 1.11B XTZ |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $255.88M |
+| **Market Cap / FDV Ratio** | 0.98 |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $10.30M |
+| **Market Cap Rank** | #143 |
+| **24h Range** | $0.2254 — $0.2319 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,15 +2,15 @@
 title: "Ondo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, treasuries]
-aliases: ["ONDO", "Ondo Finance", "Ondo DAO"]
+aliases: ["ONDO", "Ondo DAO", "Ondo Finance"]
 entity_type: protocol
 founded: 2021
 headquarters: "New York, USA (Ondo Finance); Ondo Foundation: Cayman Islands"
 website: "https://ondo.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ondo-us-dollar-yield]]", "[[real-world-assets]]", "[[hyperliquid]]", "[[tokenized-stocks]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[ondo-us-dollar-yield]]", "[[real-world-assets]]", "[[tokenized-stocks]]"]
 ---
 
 # Ondo
@@ -282,3 +282,57 @@ ONDO's edge is **liquidity + product breadth + market share** (especially in tok
 - Web verification, 2026-06-10: OGM $1B TVL, 260+ tokenized equities, >70% market share, $18B cumulative volume confirmed.
 - CoinGecko / cryptodataapi.com — ONDO market snapshot, 2026-06-20 (price $0.350499, mcap $1.71B, rank #49, FDV $3.51B, vol $64.3M).
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 4.87B ONDO |
+| **Total Supply** | 10.00B ONDO |
+| **Max Supply** | 10.00B ONDO |
+| **Fully Diluted Valuation** | $3.74B |
+| **Market Cap / FDV Ratio** | 0.49 |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 37 |
+| **GitHub Forks** | 29 |
+| **Pull Requests Merged** | 1 |
+| **Contributors** | 1 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $283.02M |
+| **Market Cap Rank** | #43 |
+| **24h Range** | $0.3211 — $0.3749 |
+| **CoinGecko Sentiment** | 93% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

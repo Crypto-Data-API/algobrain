@@ -2,14 +2,14 @@
 title: "Unitas"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["UP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://unitas.so/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # Unitas
@@ -129,10 +129,10 @@ Unitas is Unipay’s on-chain “dollar + yield” stack, built first and foremo
 ## See Also
 
 - [[crypto-markets]]
-- [[bnb]]
+- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

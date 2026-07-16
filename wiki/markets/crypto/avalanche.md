@@ -2,15 +2,15 @@
 title: "Avalanche"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["AVAX", "Avalanche C-Chain", "Avalanche 2", "avalanche-2"]
+tags: [altcoins, crypto]
+aliases: ["AVAX", "Avalanche 2", "Avalanche C-Chain", "avalanche-2"]
 entity_type: protocol
 founded: 2020
 headquarters: "Ava Labs — New York, USA"
 website: "https://www.avax.network"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[ethereum]]", "[[hyperliquid]]", "[[cme-group]]", "[[bitcoin-etfs]]"]
+related: ["[[bitcoin-etfs]]", "[[bitcoin]]", "[[cme-group]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]"]
 ---
 
 # Avalanche
@@ -205,3 +205,39 @@ AVAX has a **hard-capped 720M max supply** and burns transaction fees, giving it
 - [DisruptionBanking — How Strong Will Avalanche Be in 2026? (Feb 2026)](https://www.disruptionbanking.com/2026/02/14/how-strong-will-avalanche-avax-be-in-2026/)
 - [OKX Learn — How Institutional Adoption and ETFs Are Transforming Avalanche](https://www.okx.com/learn/avax-investment-institutional-adoption-etfs)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 431.77M AVAX |
+| **Total Supply** | 463.44M AVAX |
+| **Max Supply** | 720.00M AVAX |
+| **Fully Diluted Valuation** | $3.05B |
+| **Market Cap / FDV Ratio** | 0.93 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $139.40M |
+| **Market Cap Rank** | #33 |
+| **24h Range** | $6.56 — $6.75 |
+| **CoinGecko Sentiment** | 93% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

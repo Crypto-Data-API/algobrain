@@ -2,9 +2,9 @@
 title: "HUNDRED (hundredcoin.io memecoin)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: draft
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["HUNDRED"]
 entity_type: protocol
 headquarters: "Decentralized"
@@ -151,4 +151,4 @@ JEET into another project and lose out.  Don't be that guy. Joinz us!
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

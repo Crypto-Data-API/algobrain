@@ -2,14 +2,14 @@
 title: "Apollo Diversified Credit Securitize Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, tokenized-treasuries, stocks]
+tags: [crypto, real-world-assets, stocks, tokenized-treasuries]
 aliases: ["ACRED", "Apollo Diversified Credit Securitize Fund"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://securitize.io/primary-market/apollo-diversified-credit-securitize-fund"
-related: ["[[real-world-assets]]", "[[securitize]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[securitize]]"]
 ---
 
 # Apollo Diversified Credit Securitize Fund
@@ -139,3 +139,129 @@ ACRED is a flagship example of **tokenized private credit** within the RWA narra
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - cryptodataapi.com / CoinGecko market snapshot, 2026-06-21
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ACRED |
+| **Market Cap Rank** | #235 |
+| **Market Cap** | $115.19M |
+| **Current Price** | $1,103.66 |
+| **Categories** | Real World Assets (RWA) |
+| **Website** | [https://securitize.io/primary-market/apollo-diversified-credit-securitize-fund](https://securitize.io/primary-market/apollo-diversified-credit-securitize-fund) |
+
+---
+
+## Overview
+
+This feeder fund invests in the Apollo Diversified Credit Fund ("Underlying Fund") which seeks to generate a return comprised of both current income and capital appreciation, emphasizing current income with low volatility and low correlation to the broader markets.
+
+✓ Seasoned Asset Manager: Apollo draws on 30+ years of experience, aiming to achieve attractive returns across the risk spectrum through proprietary origination, credit strategies, and a flexible approach to borrower needs.(1)
+
+✓ Historical Track Record of Outperformance: A diversified, global credit strategy with potential for enhanced income and attractive risk-adjusted returns across various market cycles.
+
+✓ 0% Performance Fee
+
+✓ $0 Redemptions
+
+✓ Pricing Transparency: Daily pricing transparency and daily liquidity.(2)
+
+The Underlying Fund takes a multi-asset private and public credit approach centered around five key pillars:
+
+✓ Corporate Direct Lending: Targets large scale corporate originations and sponsor-backed issuers of first lien, senior secured and unitranche loans, utilizing Apollo’s proprietary sourcing channel.
+
+✓ Asset-Backed Lending: Focuses on agile deployment of capital into origination and proprietary sourcing channels across a broad mandate of asset-backed investments, with a focus on investments collateralized by tangible investments.
+
+✓ Performing Credit: Primarily pursues liquid, performing senior secured corporate credits to generate total return.
+
+✓ Dislocated Credit: Seeks to use contingent capital to tactically pursue “dislocated” credit opportunities such as stressed, performing assets that sell-off due to technical and/or non-fundamental reasons.
+
+✓ Structured Credit: Focuses on structured credit opportunities across diverse asset types, vintages, maturities, jurisdictions, and capital structure priorities (for example, CLOs, residential, and commercial mortgage backed securities among others).9
+
+(1) Diversification does not ensure profit or protect against loss.
+(2) Invest...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 104,368 ACRED |
+| **Total Supply** | 104,368 ACRED |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $115.19M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1,108.47 (2026-01-18) |
+| **Current vs ATH** | -0.43% |
+| **All-Time Low** | $1,004.33 (2025-04-09) |
+| **Current vs ATL** | +9.89% |
+| **24h Change** | +0.03% |
+| **7d Change** | +0.01% |
+| **30d Change** | +0.38% |
+| **1y Change** | +6.45% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x17418038ecf73ba4026c4f428547bf099706f27b` |
+| Ink | `0x53ad50d3b6fcacb8965d3a49cb722917c7dae1f3` |
+| Solana | `FubtUcvhSCr3VPXEcxouoQjKQ7NWTCzXyECe76B7L3f8` |
+| Polygon Pos | `0xfce60bbc52a5705cec5b445501fbaf3274dc43d0` |
+| Aptos | `0xe528f4df568eb9fff6398adc514bc9585fab397f478972bcbebf1e75dee40a88` |
+| Avalanche | `0x7c64925002bfa705834b118a923e9911bee32875` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://securitize.io/primary-market/apollo-diversified-credit-securitize-fund](https://securitize.io/primary-market/apollo-diversified-credit-securitize-fund) |
+| **Twitter** | [@Securitize](https://twitter.com/Securitize) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #235 |
+| **24h Range** | $1,102.72 — $1,104.40 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

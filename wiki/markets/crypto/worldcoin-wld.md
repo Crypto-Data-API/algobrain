@@ -2,14 +2,15 @@
 title: "Worldcoin (World Network)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["WLD", "World Network", "World", "Worldcoin"]
+aliases: ["WLD", "World", "World Network", "Worldcoin"]
 entity_type: protocol
 founded: 2019
 website: "https://world.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[proof-of-humanity]]", "[[decentralized-ai]]", "[[artificial-intelligence]]", "[[openai]]", "[[token-unlocks]]", "[[hyperliquid]]", "[[narrative-trading]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[narrative-trading]]", "[[openai]]", "[[proof-of-humanity]]", "[[token-unlocks]]"]
+headquarters: "Decentralized"
 ---
 
 # Worldcoin (World Network)
@@ -299,3 +300,40 @@ World's moat is **scale + hardware + the Altman/OpenAI association**: tens of mi
 - Blockchainreporter (2026): Worldcoin network activity at 2026 highs, WLD above $0.408 — https://blockchainreporter.net/worldcoin-network-activity-explodes-to-2026-highs-as-wld-tops-0-408/
 - World.org blog: What is Worldcoin (WLD) — https://world.org/blog/how-to/what-is-worldcoin-wld-and-how-to-use-it
 - Verified via Perplexity sonar + web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 3.54B WLD |
+| **Total Supply** | 10.00B WLD |
+| **Max Supply** | 10.00B WLD |
+| **Fully Diluted Valuation** | $3.97B |
+| **Market Cap / FDV Ratio** | 0.35 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $164.11M |
+| **Market Cap Rank** | #57 |
+| **24h Range** | $0.3945 — $0.4195 |
+| **CoinGecko Sentiment** | 82% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

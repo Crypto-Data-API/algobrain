@@ -2,14 +2,14 @@
 title: "XPIN Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["XPIN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.xpin.network/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[depin]]", "[[helium]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[depin]]", "[[helium]]"]
 ---
 
 # XPIN Network

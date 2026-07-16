@@ -2,14 +2,14 @@
 title: "Tokenize Xchange"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["TKX"]
 entity_type: protocol
 headquarters: "Singapore"
 website: "https://tokenize.exchange/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[centralized-exchange]]"]
+related: ["[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # Tokenize Xchange
@@ -149,3 +149,109 @@ The honest read: a **deep-drawdown, essentially-illiquid exchange token** whose 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | TKX |
+| **Market Cap Rank** | #256 |
+| **Market Cap** | $102.73M |
+| **Current Price** | $1.28 |
+| **Hashing Algorithm** | Proof of Stake |
+| **Categories** | Exchange-based Tokens, Centralized Exchange (CEX) Token |
+| **Website** | [https://tokenize.exchange/](https://tokenize.exchange/) |
+
+---
+
+## Overview
+
+Tokenize Xchange is a fully integrated cryptocurrency exchange that offers both individuals and institutional investors a frictionless and un-sophisticated user experience. The platform will serve as not only a financial tool but also as an educational and communal instrument in proliferating the values and ideas that the blockchain has to offer. The TKX token can be used to pay transaction fees for any trades on the platform, doing so will allow for significant reductions in the fees.
+
+The TKX token is an ERC20 token based on the Ethereum blockchain.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 80.00M TKX |
+| **Total Supply** | 100.00M TKX |
+| **Max Supply** | 100.00M TKX |
+| **Fully Diluted Valuation** | $128.42M |
+| **Market Cap / FDV Ratio** | 0.80 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $50.43 (2025-01-03) |
+| **Current vs ATH** | -97.45% |
+| **All-Time Low** | $0.1113 (2019-04-28) |
+| **Current vs ATL** | +1054.32% |
+| **24h Change** | +0.20% |
+| **7d Change** | +4.37% |
+| **30d Change** | +1.18% |
+| **1y Change** | -86.18% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x667102bd3413bfeaa3dffb48fa8288819e480a88` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X667102BD3413BFEAA3DFFB48FA8288819E480A88/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://tokenize.exchange/](https://tokenize.exchange/) |
+| **Twitter** | [@TokenizeXchange](https://twitter.com/TokenizeXchange) |
+| **Telegram** | [tkxannoucement ](https://t.me/tkxannoucement ) (13,421 members) |
+| **Whitepaper** | [https://ico.tokenize.exchange/Tokenize_Xchange_Whitepaper.pdf](https://ico.tokenize.exchange/Tokenize_Xchange_Whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2,855.74 |
+| **Market Cap Rank** | #256 |
+| **24h Range** | $1.28 — $1.30 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

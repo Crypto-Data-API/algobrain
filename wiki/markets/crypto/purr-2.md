@@ -2,7 +2,7 @@
 title: "Purr"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, meme]
 aliases: ["PURR"]
@@ -138,3 +138,95 @@ Like all [[meme-coin|meme coins]], PURR has **no cash flows and no intrinsic val
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PURR |
+| **Market Cap Rank** | #451 |
+| **Market Cap** | $46.76M |
+| **Current Price** | $0.0786 |
+| **Categories** | Meme, Cat-Themed |
+| **Website** | [https://app.hyperliquid.xyz/trade/PURR/USDC](https://app.hyperliquid.xyz/trade/PURR/USDC) |
+
+---
+
+## Overview
+
+$PURR is the first spot launch on the Hyperliquid L1. There is no sale and no planned utility for $PURR. The max supply of $PURR was 1 billion. 500 million $PURR were distributed proportionally to points holders. 400 million $PURR initially deployed as Hyperliquidity (HIP-2) were burned. $PURR is deflationary, as trading fees paid in $PURR are burned.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 595.19M PURR |
+| **Total Supply** | 595.19M PURR |
+| **Max Supply** | 1.00B PURR |
+| **Fully Diluted Valuation** | $46.76M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.6900 (2024-12-16) |
+| **Current vs ATH** | -88.61% |
+| **All-Time Low** | $0.0424 (2025-12-18) |
+| **Current vs ATL** | +85.54% |
+| **24h Change** | -6.26% |
+| **7d Change** | -11.91% |
+| **30d Change** | -35.99% |
+| **1y Change** | -60.08% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Hyperliquid
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Hyperliquid | `0xc1fb593aeffbeb02f85e0308e9956a90` |
+| Hyperevm | `0x9b498c3c8a0b8cd8ba1d9851d40d186f1872b44e` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://app.hyperliquid.xyz/trade/PURR/USDC](https://app.hyperliquid.xyz/trade/PURR/USDC) |
+| **Twitter** | [@Hyperintern](https://twitter.com/Hyperintern) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $624,094.00 |
+| **Market Cap Rank** | #451 |
+| **24h Range** | $0.0786 — $0.0855 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

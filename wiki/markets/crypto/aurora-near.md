@@ -2,14 +2,14 @@
 title: "Aurora"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, altcoins]
+tags: [altcoins, crypto, ethereum]
 aliases: ["AURORA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aurora.dev/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[near-protocol]]", "[[layer-2]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[near-protocol]]"]
 ---
 
 # Aurora

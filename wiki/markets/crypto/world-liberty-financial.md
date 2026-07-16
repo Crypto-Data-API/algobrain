@@ -2,15 +2,15 @@
 title: "World Liberty Financial"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, regulation]
-aliases: ["WLFI", "World Liberty", "WLF"]
+aliases: ["WLF", "WLFI", "World Liberty"]
 entity_type: protocol
 founded: 2024
 headquarters: "USA (Trump family-affiliated)"
 website: "https://www.worldlibertyfinancial.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[usd1-wlfi]]", "[[official-trump]]", "[[crypto-com-chain]]", "[[tron]]", "[[stablecoins]]", "[[defi]]"]
+related: ["[[crypto-com-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[official-trump]]", "[[stablecoins]]", "[[tron]]", "[[usd1-wlfi]]"]
 ---
 
 # World Liberty Financial
@@ -235,3 +235,90 @@ WLFI is **not valuable on protocol cash flows** — it is valued on political/af
 - [The Crypto Times — WLF Launches USD1 Natively on Stripe-Backed Tempo L1 (8 May 2026)](https://www.cryptotimes.io/2026/05/08/world-liberty-financial-launches-usd1-stablecoin-natively-on-stripe-backed-tempo-l1-blockchain/)
 - [CoinMarketCap — USD1 Stablecoin Gets $120M Treasury Unlock Vote (Dec 2025)](https://coinmarketcap.com/academy/article/usd1-stablecoin-gets-dollar120m-treasury-unlock-vote)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 31.77B WLFI |
+| **Total Supply** | 100.00B WLFI |
+| **Max Supply** | 100.00B WLFI |
+| **Fully Diluted Valuation** | $5.81B |
+| **Market Cap / FDV Ratio** | 0.32 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.3313 (2025-09-01) |
+| **Current vs ATH** | -82.47% |
+| **All-Time Low** | $0.0516 (2026-05-02) |
+| **Current vs ATL** | +12.51% |
+| **24h Change** | +2.30% |
+| **7d Change** | -0.42% |
+| **30d Change** | -3.19% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xda5e1988097297dcdc1f90d4dfe7909e847cbef6` |
+| Solana | `WLFinEv6ypjkczcS83FZqFpgFZYwQXutRbxGe7oC16g` |
+| Binance Smart Chain | `0x47474747477b199288bf72a1d702f7fe0fb1deea` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | WLFI/USDT | N/A |
+| Kraken | WLFI/USD | N/A |
+| Upbit | WLFI/KRW | N/A |
+| Bitget | WLFI/USDT | N/A |
+| KuCoin | WLFI/USDT | N/A |
+| Crypto.com Exchange | WLFI/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XDA5E1988097297DCDC1F90D4DFE7909E847CBEF6/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $31.08M |
+| **Market Cap Rank** | #42 |
+| **24h Range** | $0.0563 — $0.0583 |
+| **CoinGecko Sentiment** | 25% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "Usual"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, stablecoin]
 aliases: ["USUAL", "Usual", "Usual Money"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usual.money/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[real-world-assets]]", "[[defi]]", "[[collateralization]]", "[[depeg]]", "[[governance-token]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[real-world-assets]]", "[[stablecoin]]"]
 ---
 
 # Usual
@@ -212,3 +212,14 @@ Markets reacted immediately: **USD0++ [[depeg|depegged]]**, trading down to roug
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko); Fear & Greed Index 21 (Extreme Fear).
 - General market knowledge (incl. the publicly reported January 2025 USD0++ depeg/redemption episode); no specific narrative wiki source ingested yet.
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.90M |
+| **Market Cap Rank** | #935 |
+| **24h Range** | $0.00865832 — $0.00902818 |
+| **Last Updated** | 2026-07-16 |
+
+---

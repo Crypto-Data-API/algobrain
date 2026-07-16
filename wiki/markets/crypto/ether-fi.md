@@ -2,15 +2,15 @@
 title: "Ether.fi"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, staking, restaking, lst, lrt]
-aliases: ["ETHFI", "EtherFi", "ether.fi", "Ether.fi", "etherfi"]
+tags: [crypto, defi, ethereum, lrt, lst, restaking, staking]
+aliases: ["ETHFI", "Ether.fi", "EtherFi", "ether.fi", "etherfi"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://www.ether.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[eigenlayer]]", "[[hyperliquid]]", "[[defi]]", "[[real-world-assets]]", "[[liquid-staking]]", "[[restaking]]", "[[staking]]", "[[renzo]]", "[[puffer-finance]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[puffer-finance]]", "[[real-world-assets]]", "[[renzo]]", "[[restaking]]", "[[staking]]"]
 ---
 
 # Ether.fi
@@ -306,3 +306,45 @@ A rough framework: anchor a floor on revenue-funded buyback support, scale upsid
 - ether.fi Cash — https://www.ether.fi/cash
 - Artemis analytics (TVL/revenue/card volume) — https://classic.artemis.ai/asset/etherfi
 - Verified via Perplexity (sonar) + web search, 2026-06-10: OP Mainnet migration May 7 2026, $50M buyback authorization, $100M Plume RWA vault June 4 2026
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 927.37M ETHFI |
+| **Total Supply** | 998.54M ETHFI |
+| **Max Supply** | 1.00B ETHFI |
+| **Fully Diluted Valuation** | $430.12M |
+| **Market Cap / FDV Ratio** | 0.93 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $60.68M |
+| **Market Cap Rank** | #116 |
+| **24h Range** | $0.4124 — $0.4490 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

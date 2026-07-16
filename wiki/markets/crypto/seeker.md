@@ -2,7 +2,7 @@
 title: "Seeker"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, solana]
 aliases: ["SKR"]
@@ -145,3 +145,91 @@ SKR is a **device-adoption call option** on Solana Mobile's consumer-hardware pu
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko top-1000 snapshot, 2026-06-21.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SKR |
+| **Market Cap Rank** | #387 |
+| **Market Cap** | $58.46M |
+| **Current Price** | $0.00878928 |
+| **Categories** | Infrastructure |
+| **Website** | [https://solanamobile.com/](https://solanamobile.com/) |
+
+---
+
+## Overview
+
+Seeker is building a decentralized mobile ecosystem designed to challenge entrenched mobile incumbents through its TEEPin network architecture and community governance. It aims to solve the pain points of centralized app store gatekeeping, lack of developer freedom, and restricted user access to crypto applications. The vision is to create a community-owned platform with decentralized governance, no gatekeepers, direct developer-user access, and TEEPin security architecture.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 6.65B SKR |
+| **Total Supply** | 10.45B SKR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $91.86M |
+| **Market Cap / FDV Ratio** | 0.64 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0558 (2026-01-22) |
+| **Current vs ATH** | -84.24% |
+| **All-Time Low** | $0.00542271 (2026-01-21) |
+| **Current vs ATL** | +62.25% |
+| **24h Change** | -6.53% |
+| **7d Change** | -5.38% |
+| **30d Change** | -3.54% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | SKR/USD | N/A |
+| Upbit | SKR/KRW | N/A |
+| KuCoin | SKR/USDT | N/A |
+| Crypto.com Exchange | SKR/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | SKRBVO6GF7GONDIT3BBTFURDPQLWEI4J2QY2NPGZHW3/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.63M |
+| **Market Cap Rank** | #387 |
+| **24h Range** | $0.00870414 — $0.00940288 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

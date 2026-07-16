@@ -2,14 +2,14 @@
 title: "Popcat"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, meme-coins]
 aliases: ["POPCAT", "Popcat (SOL)"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://popcatsolana.xyz/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[meme-coins]]", "[[dogwifhat]]", "[[bonk]]", "[[hyperliquid]]"]
+related: ["[[bonk]]", "[[crypto-markets]]", "[[dogwifhat]]", "[[hyperliquid]]", "[[meme-coins]]", "[[solana]]"]
 ---
 
 # Popcat
@@ -121,3 +121,113 @@ Meme coins cannot be valued on cash flows or fundamentals — there are none. Th
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko (Meme Coins category snapshot).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | POPCAT |
+| **Market Cap Rank** | #482 |
+| **Market Cap** | $43.41M |
+| **Current Price** | $0.0443 |
+| **Categories** | Meme, Solana Meme, Cat-Themed, Murad Picks, Binance Alpha Spotlight |
+| **Website** | [https://popcatsolana.xyz/](https://popcatsolana.xyz/) |
+
+---
+
+## Overview
+
+Pop Cat refers to a series of videos in which using an image of a cat named Oatmeal, the cat is photoshopped as if it's opening its mouth wide in an O shape.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 979.98M POPCAT |
+| **Total Supply** | 979.98M POPCAT |
+| **Max Supply** | 979.98M POPCAT |
+| **Fully Diluted Valuation** | $43.41M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.05 (2024-11-17) |
+| **Current vs ATH** | -97.84% |
+| **All-Time Low** | $0.00379728 (2024-01-05) |
+| **Current vs ATL** | +1067.59% |
+| **24h Change** | -1.41% |
+| **7d Change** | -3.06% |
+| **30d Change** | -1.32% |
+| **1y Change** | -88.65% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | POPCAT/USD | N/A |
+| KuCoin | POPCAT/USDT | N/A |
+| Crypto.com Exchange | POPCAT/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | 7GCIHGDB8FE6KNJN2MYTKZZCRJQY3T9GHDC8UHYMW2HR/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://popcatsolana.xyz/](https://popcatsolana.xyz/) |
+| **Twitter** | [@Popcatsolana](https://twitter.com/Popcatsolana) |
+| **Telegram** | [popcatsolana](https://t.me/popcatsolana) (14,935 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $11.50M |
+| **Market Cap Rank** | #482 |
+| **24h Range** | $0.0442 — $0.0461 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

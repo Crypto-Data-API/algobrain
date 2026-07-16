@@ -2,12 +2,12 @@
 title: "FARTCOIN"
 type: entity
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, meme-coin, solana, speculation]
 entity_type: protocol
 aliases: ["FARTCOIN", "fartcoin-token"]
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[pepe]]", "[[perpetual-futures]]", "[[solana]]", "[[meme-coin]]", "[[meme-coins]]", "[[meme-coin-cycle]]", "[[funding-rate]]"]
+related: ["[[crypto-markets]]", "[[funding-rate]]", "[[hyperliquid]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[meme-coins]]", "[[pepe]]", "[[perpetual-futures]]", "[[solana]]"]
 headquarters: "Decentralized"
 website: "https://www.infinitebackrooms.com/dreams/conversation-1721540624-scenario-terminal-of-truths-txt"
 ---
@@ -141,3 +141,119 @@ FARTCOIN is a pure **community/narrative-driven [[meme-coin]]** with no protocol
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko top-1000 snapshot, 2026-06-21.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FARTCOIN |
+| **Market Cap Rank** | #206 |
+| **Market Cap** | $144.80M |
+| **Current Price** | $0.1448 |
+| **Categories** | Meme, Solana Meme, AI Meme, Terminal of Truths, Binance Alpha Spotlight |
+| **Website** | [https://www.infinitebackrooms.com/dreams/conversation-1721540624-scenario-terminal-of-truths-txt](https://www.infinitebackrooms.com/dreams/conversation-1721540624-scenario-terminal-of-truths-txt) |
+
+---
+
+## Overview
+
+Fartcoin is a meme-driven cryptocurrency where users can submit their best fart jokes or memes to earn initial tokens. Each transaction triggers a hilarious 'Gas Fee' effect, complete with a digital fart sound for maximum comedic impact.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 999.98M FARTCOIN |
+| **Total Supply** | 999.98M FARTCOIN |
+| **Max Supply** | 1.00B FARTCOIN |
+| **Fully Diluted Valuation** | $144.80M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.48 (2025-01-19) |
+| **Current vs ATH** | -94.15% |
+| **All-Time Low** | $0.0200 (2024-10-30) |
+| **Current vs ATL** | +623.68% |
+| **24h Change** | -2.95% |
+| **7d Change** | +0.79% |
+| **30d Change** | +4.27% |
+| **1y Change** | -88.25% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | FARTCOIN/USD | N/A |
+| Bitget | FARTCOIN/USDT | N/A |
+| KuCoin | FARTCOIN/USDT | N/A |
+| Crypto.com Exchange | FARTCOIN/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | 9BB6NFECJBCTNNLFKO2FQVQBQ8HHM13KCYYCDQBGPUMP/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.infinitebackrooms.com/dreams/conversation-1721540624-scenario-terminal-of-truths-txt](https://www.infinitebackrooms.com/dreams/conversation-1721540624-scenario-terminal-of-truths-txt) |
+| **Twitter** | [@FartCoinOfSOL](https://twitter.com/FartCoinOfSOL) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $17.59M |
+| **Market Cap Rank** | #206 |
+| **24h Range** | $0.1431 — $0.1559 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

@@ -2,14 +2,14 @@
 title: "Sun Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, dex]
 aliases: ["SUN", "SUN.io"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sun.io/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[sunpump]]", "[[pump-fun]]", "[[curve-dao-token]]", "[[dex]]", "[[defi]]", "[[automated-market-maker]]", "[[decentralized-exchange]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-dao-token]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex]]", "[[pump-fun]]", "[[sunpump]]", "[[tron]]"]
 ---
 
 # Sun Token
@@ -201,3 +201,57 @@ SUN trades as a **levered proxy on TRON DeFi throughput and the Justin Sun compl
 - BanklessTimes, "Why are Justin Sun's TRX, JST, and SUN Rising Together?" (2026-04-30) — https://www.banklesstimes.com/articles/2026/04/30/why-are-justin-suns-trx-jst-and-sun-rising-together/
 - CoinDesk Research, "Tron Network — Q4 2025" — https://www.coindesk.com/research/tron-network-q4-2025
 - Verified via Perplexity (sonar) + web search, 2026-06-10: burn phase 50 totals, SunSwap V4 launch 2026-03-02, SunX rebrand 2025-11-25, ~$330M cap June 2026
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SUN |
+| **Market Cap Rank** | #123 |
+| **Market Cap** | $346.71M |
+| **Current Price** | $0.0180 |
+| **Categories** | Decentralized Finance (DeFi), Made in China |
+| **Website** | [https://sun.io/](https://sun.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 19.23B SUN |
+| **Total Supply** | 19.90B SUN |
+| **Max Supply** | 19.90B SUN |
+| **Fully Diluted Valuation** | $358.78M |
+| **Market Cap / FDV Ratio** | 0.97 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $64.56M |
+| **Market Cap Rank** | #123 |
+| **24h Range** | $0.0180 — $0.0182 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

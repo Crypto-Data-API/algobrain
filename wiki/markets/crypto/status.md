@@ -2,9 +2,9 @@
 title: "Status"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
+tags: [altcoins, crypto, ethereum]
 aliases: ["SNT", "Status Network"]
 entity_type: protocol
 founded: 2017

@@ -2,15 +2,15 @@
 title: "Propy"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, real-world-assets]
+tags: [altcoins, crypto, real-world-assets]
 aliases: ["PRO", "Propy Inc"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://propy.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[base-(blockchain)]]"]
+related: ["[[base-(blockchain)]]", "[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]"]
 ---
 
 # Propy

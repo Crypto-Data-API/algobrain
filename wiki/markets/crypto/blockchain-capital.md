@@ -2,15 +2,15 @@
 title: "Blockchain Capital (BCAP)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, company]
-aliases: ["BCAP", "Blockchain Capital token", "BCAP III Digital Liquid Venture Fund"]
+tags: [company, crypto]
+aliases: ["BCAP", "BCAP III Digital Liquid Venture Fund", "Blockchain Capital token"]
 entity_type: fund
 founded: 2013
 headquarters: "San Francisco, USA"
 website: "https://www.blockchaincapital.com/"
-related: ["[[crypto-markets]]", "[[worldcoin-wld]]", "[[filecoin]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[filecoin]]", "[[usdc]]", "[[worldcoin-wld]]"]
 ---
 
 # Blockchain Capital (BCAP)
@@ -150,3 +150,47 @@ BCAP is distinctive among tokenized-fund peers because its NAV reflects **illiqu
 - CoinGecko BCAP — https://www.coingecko.com/en/coins/blockchain-capital
 - Verified via Perplexity sonar + web search, 2026-06-10.
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000): NAV mark $107.07, implied cap ~$975.6M, rank #68, $0 volume, ATH $107.16 (2026-05-26).
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $107.16 (2026-05-26) |
+| **Current vs ATH** | -0.91% |
+| **All-Time Low** | $17.76 (2025-06-02) |
+| **Current vs ATL** | +497.92% |
+| **24h Change** | +0.00% |
+| **7d Change** | -0.41% |
+| **30d Change** | -0.82% |
+| **1y Change** | +350.34% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #67 |
+| **24h Range** | $106.19 — $106.19 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

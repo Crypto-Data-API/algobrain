@@ -2,14 +2,14 @@
 title: "Secret"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["SCRT", "Secret Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://scrt.network"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[privacy-coins]]", "[[trusted-execution-environment]]", "[[cosmos]]", "[[smart-contracts]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[layer-1]]", "[[privacy-coins]]", "[[smart-contracts]]", "[[trusted-execution-environment]]"]
 ---
 
 # Secret

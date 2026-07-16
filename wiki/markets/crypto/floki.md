@@ -2,7 +2,7 @@
 title: "FLOKI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["FLOKI", "Floki Inu"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2021
 headquarters: "Decentralized"
 website: "https://www.floki.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[dogecoin]]", "[[shiba-inu]]", "[[meme-coins]]", "[[mog-coin]]", "[[narrative-trading]]", "[[fear-and-greed-index]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[meme-coins]]", "[[mog-coin]]", "[[narrative-trading]]", "[[shiba-inu]]"]
 ---
 
 # FLOKI
@@ -195,3 +195,59 @@ FLOKI runs at **near-full float** (~9.65T of a fixed 10T max in circulation, ~0.
 - BeInCrypto — "Floki ETP Receives Liquidity Approval from its DAO": https://beincrypto.com/floki-dao-approves-liquidity-funding-for-its-etp-in-the-european-market/
 - CoinGecko — FLOKI: https://www.coingecko.com/en/coins/floki (June 2026 market data; April 2026 snapshot from CoinGecko top-1000 export 2026-04-09)
 - Perplexity verification attempted 2026-06-10 (sonar; events cross-checked via web search)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FLOKI |
+| **Market Cap Rank** | #158 |
+| **Market Cap** | $210.67M |
+| **Current Price** | $0.00002184 |
+| **Categories** | Gaming (GameFi), NFT, Metaverse, Meme, Play To Earn, Telegram Apps, Dog-Themed, RPG (+2 more) |
+| **Website** | [https://www.floki.com/](https://www.floki.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 9.65T FLOKI |
+| **Total Supply** | 9.65T FLOKI |
+| **Max Supply** | 20.00T FLOKI |
+| **Fully Diluted Valuation** | $210.67M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $14.26M |
+| **Market Cap Rank** | #158 |
+| **24h Range** | $0.00002183 — $0.00002265 |
+| **CoinGecko Sentiment** | 67% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

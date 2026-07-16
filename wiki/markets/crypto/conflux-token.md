@@ -2,7 +2,7 @@
 title: "Conflux"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, regulation]
 aliases: ["CFX", "Conflux Network"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Shanghai, China / decentralized network"
 website: "https://confluxnetwork.org/"
-related: ["[[crypto-markets]]", "[[stablecoins]]", "[[hyperliquid]]", "[[binance]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]"]
 ---
 
 # Conflux
@@ -196,3 +196,56 @@ CFX's price action is **event-clustered**: long flat/down stretches punctuated b
 - CoinGecko — Conflux: https://www.coingecko.com/en/coins/conflux-token
 - Market snapshot 2026-06-20 — cryptodataapi.com / CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`; price/cap/rank/supply baseline)
 - Perplexity verification attempted 2026-06-10 (sonar; events cross-checked via web search)
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.21B CFX |
+| **Total Supply** | 5.22B CFX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $234.45M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 49 |
+| **GitHub Forks** | 10 |
+| **Pull Requests Merged** | 224 |
+| **Contributors** | 4 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.10M |
+| **Market Cap Rank** | #149 |
+| **24h Range** | $0.0442 — $0.0458 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

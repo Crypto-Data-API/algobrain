@@ -2,7 +2,7 @@
 title: "ViciCoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["VCNT"]
@@ -145,4 +145,4 @@ VCNT operates on Vici Network's Modular On-Chain Security &amp; Compliance Frame
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

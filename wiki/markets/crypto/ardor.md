@@ -2,9 +2,9 @@
 title: "Ardor"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ARDR", "Ardor Platform"]
 entity_type: protocol
 founded: 2018
@@ -229,3 +229,15 @@ Ardor's genuinely differentiated features are its **parent-child chain separatio
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 998.47M ARDR |
+| **Total Supply** | 998.47M ARDR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $20.34M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

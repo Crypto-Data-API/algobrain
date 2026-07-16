@@ -2,7 +2,7 @@
 title: "peaq"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["PEAQ"]
@@ -148,3 +148,115 @@ PEAQ's ~$51M market cap against an ~$99M FDV (and ~$128M on max supply) prices a
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PEAQ |
+| **Market Cap Rank** | #504 |
+| **Market Cap** | $41.56M |
+| **Current Price** | $0.0181 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), DePIN, Binance Alpha Spotlight, Robotics, CoinList Launchpad |
+| **Website** | [https://www.peaq.xyz/](https://www.peaq.xyz/) |
+
+---
+
+## Overview
+
+peaq is the economic system enabling robots and machines to do business on every chain. It provides a neutral, omnichain coordination layer that gives machines, including robots, vehicles, devices, sensors, and AI agents, everything they need to become autonomous economic actors. This includes verifiable identities, wallets, portable reputation, tokenization, and cross-chain settlement guarantees. 
+
+peaq is structured in three layers. The Machine Layer (peaqOS) onboards any machine as a composable economic actor. The Trust Layer provides coordination, validation, and economically secured reputation scores backed by staked capital. The Service Layer connects machines to external service markets through a permissionless adapter framework for discovery, scoring, and orchestration. 
+
+peaq is chain-neutral by design, operating as the shared trust and coordination layer for machines across existing blockchains. A machine onboarded through peaq exists across all supported chains simultaneously, and any application on any chain can discover, verify, and transact with it. peaq enables Robot Money, any medium of exchange, measure of value, or means of payment that robots and machines use across any chain.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.30B PEAQ |
+| **Total Supply** | 4.42B PEAQ |
+| **Max Supply** | 5.67B PEAQ |
+| **Fully Diluted Valuation** | $79.94M |
+| **Market Cap / FDV Ratio** | 0.52 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.7505 (2024-12-10) |
+| **Current vs ATH** | -97.59% |
+| **All-Time Low** | $0.0122 (2026-03-15) |
+| **Current vs ATL** | +48.11% |
+| **24h Change** | -1.56% |
+| **7d Change** | -8.18% |
+| **30d Change** | -19.39% |
+| **1y Change** | -75.71% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | PEAQ/USD | N/A |
+| Upbit | PEAQ/BTC | N/A |
+| Bitget | PEAQ/USDT | N/A |
+| KuCoin | PEAQ/USDT | N/A |
+| Crypto.com Exchange | PEAQ/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.peaq.xyz/](https://www.peaq.xyz/) |
+| **Twitter** | [@peaq](https://twitter.com/peaq) |
+| **Telegram** | [peaqcommunity](https://t.me/peaqcommunity) (27,608 members) |
+| **GitHub** | [https://github.com/peaqnetwork](https://github.com/peaqnetwork) |
+| **Whitepaper** | [https://www.peaq.xyz/purple-paper](https://www.peaq.xyz/purple-paper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $971,224.00 |
+| **Market Cap Rank** | #504 |
+| **24h Range** | $0.0180 — $0.0188 |
+| **CoinGecko Sentiment** | 80% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,15 +2,15 @@
 title: "ICON"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ICX"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://icon.community/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[interoperability]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[cross-chain-bridge]]", "[[consensus-mechanism]]", "[[harmony]]", "[[casper-network]]"]
+related: ["[[casper-network]]", "[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[harmony]]", "[[interoperability]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # ICON

@@ -2,14 +2,14 @@
 title: "Liquity"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, stablecoin]
-aliases: ["LQTY", "Liquity", "LUSD", "BOLD"]
+aliases: ["BOLD", "LQTY", "LUSD", "Liquity"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[defi]]", "[[collateralization]]", "[[depeg]]", "[[governance-token]]", "[[dai]]", "[[frax-share]]", "[[liquid-staking]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoin]]"]
 ---
 
 # Liquity
@@ -233,3 +233,14 @@ In 2025, Liquity launched **v2**, introducing the **BOLD** stablecoin. Unlike v1
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).
 - General market knowledge (incl. publicly documented Liquity v1 mechanism — Troves, Stability Pool, redemption peg — and the v2/BOLD launch with user-set interest rates); no specific narrative wiki source ingested yet.
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.26M |
+| **Market Cap Rank** | #913 |
+| **24h Range** | $0.1653 — $0.1714 |
+| **Last Updated** | 2026-07-16 |
+
+---

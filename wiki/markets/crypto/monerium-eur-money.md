@@ -2,14 +2,14 @@
 title: "Monerium EURe"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, forex, defi, euro]
+tags: [crypto, defi, euro, forex, stablecoin]
 aliases: ["EURE", "EURe", "Monerium EUR emoney"]
 entity_type: protocol
 headquarters: "Reykjavik, Iceland / EEA"
 website: "https://monerium.com/tokens/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[euro]]", "[[forex]]", "[[mica]]", "[[gnosis-chain]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[gnosis-chain]]", "[[mica]]", "[[stablecoin]]"]
 ---
 
 # Monerium EURe

@@ -2,14 +2,14 @@
 title: "Brevis"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
+tags: [altcoins, crypto, ethereum]
 aliases: ["BREV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://brevis.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[verifiable-compute]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]"]
 ---
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*

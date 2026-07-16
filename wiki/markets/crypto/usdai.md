@@ -2,15 +2,15 @@
 title: "USDai"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ai-trading]
-aliases: ["USDAI", "USD.AI", "Permian Labs"]
+tags: [ai-trading, crypto, defi]
+aliases: ["Permian Labs", "USD.AI", "USDAI"]
 entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://usd.ai"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[stablecoins]]", "[[ethena]]", "[[nvidia]]", "[[real-world-assets]]", "[[synthetic-dollar]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethena]]", "[[nvidia]]", "[[real-world-assets]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # USDai
@@ -175,3 +175,54 @@ USDai is a **credit-backed synthetic dollar** — its backing is a loan book, no
 - M0 Research — "USDai uses M0's stablecoin platform": https://research.m0.org/research/usdai-uses-m0s-stablecoin-platform-to-launch-composable-synthetic-dollar
 - CoinGecko — USDai: https://www.coingecko.com/en/coins/usdai (June 2026 market data; April 2026 snapshot from CoinGecko top-1000 export 2026-04-09)
 - Perplexity verification attempted 2026-06-10 (sonar; details cross-checked via web search)
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.19 (2025-09-04) |
+| **Current vs ATH** | -15.83% |
+| **All-Time Low** | $0.7698 (2025-09-26) |
+| **Current vs ATL** | +29.88% |
+| **24h Change** | +0.01% |
+| **7d Change** | -0.06% |
+| **30d Change** | -0.17% |
+| **1y Change** | -1.01% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.79M |
+| **Market Cap Rank** | #163 |
+| **24h Range** | $0.9982 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[arbitrum]]
+
+---

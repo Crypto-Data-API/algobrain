@@ -2,14 +2,14 @@
 title: "InfiniFi USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["IUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://docs.infinifi.xyz/"
-related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[ethena-usde]]", "[[usdc]]", "[[usdt]]", "[[depeg]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # InfiniFi USD
@@ -116,3 +116,99 @@ Native chain: [[ethereum|Ethereum]].
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | IUSD |
+| **Market Cap Rank** | #374 |
+| **Market Cap** | $61.77M |
+| **Current Price** | $0.9995 |
+| **Categories** | Yield-Bearing Stablecoin |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 61.80M IUSD |
+| **Total Supply** | 61.80M IUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $61.77M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.38 (2026-01-11) |
+| **Current vs ATH** | -27.48% |
+| **All-Time Low** | $0.2431 (2026-01-04) |
+| **Current vs ATL** | +311.13% |
+| **24h Change** | +0.08% |
+| **7d Change** | +0.04% |
+| **30d Change** | +0.04% |
+| **1y Change** | -0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x48f9e38f3070ad8945dfeae3fa70987722e3d89c` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Twitter** | [@infinifilabs](https://twitter.com/infinifilabs) |
+| **Whitepaper** | [https://docs.infinifi.xyz/](https://docs.infinifi.xyz/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1,386.42 |
+| **Market Cap Rank** | #374 |
+| **24h Range** | $0.9986 — $0.9996 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

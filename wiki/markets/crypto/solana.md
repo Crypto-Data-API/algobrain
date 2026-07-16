@@ -2,7 +2,7 @@
 title: "Solana"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, markets, solana]
 aliases: ["SOL"]
@@ -238,3 +238,115 @@ SOL [[funding-rate|funding rates]] can be **extreme** during trending markets (m
 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original auto-generated entity data
 - Market snapshot 2026-06-20 — cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`); macro backdrop from `raw/data/crypto-loop/_digest.md` (Fear & Greed = 22; Established Bear Market)
+
+## Overview
+
+Solana is a high-performance Layer 1 blockchain designed for mass adoption by providing a fast, secure, and low-cost environment for decentralized applications. It distinguishes itself by scaling globally without the use of complex sharding or multiple layers, instead maintaining a single, unified ledger to avoid liquidity fragmentation. This architecture allows it to process thousands of transactions per second with sub-second finality, often at a cost of less than a penny per transaction.
+
+The network operates on a unique hybrid model that combines Proof of Stake with an innovation called Proof of History, which functions as a decentralized clock to timestamp transactions. This system reduces the need for constant node communication, allowing the Sealevel engine to run non-conflicting smart contracts in parallel across multiple CPU cores. Further efficiency is gained through the Gulf Stream protocol, which reduces confirmation times by forwarding transactions to validators before the current block is finished.
+
+Founded in 2017 by Anatoly Yakovenko, Solana is now supported by the Switzerland-based Solana Foundation and significant institutional investors like Andreessen Horowitz and Polychain Capital. The platform’s native token, SOL, serves as the primary currency for paying transaction fees, participating in network governance, and securing the system through staking. 
+
+Solana has also seen significant institutional adoption ranging from spot Solana ETFs to major partnerships including Visa's 2025 launch of USDC settlement on the network and the tokenization of public equity by firms like Galaxy Digital.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 582.41M SOL |
+| **Total Supply** | 630.36M SOL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $47.97B |
+| **Market Cap / FDV Ratio** | 0.92 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $293.31 (2025-01-19) |
+| **Current vs ATH** | -74.05% |
+| **All-Time Low** | $0.5008 (2020-05-11) |
+| **Current vs ATL** | +15096.99% |
+| **24h Change** | -1.57% |
+| **7d Change** | -2.47% |
+| **30d Change** | +1.62% |
+| **1y Change** | -53.95% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SOL/USDT | N/A |
+| Kraken | SOL/USD | N/A |
+| Bitget | SOL/USDT | N/A |
+| KuCoin | SOL/USDT | N/A |
+| Crypto.com Exchange | SOL/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://solana.com/](https://solana.com/) |
+| **Reddit** | [https://www.reddit.com/r/solana](https://www.reddit.com/r/solana) |
+| **GitHub** | [https://github.com/solana-labs/solana](https://github.com/solana-labs/solana) |
+| **Whitepaper** | [https://solana.com/solana-whitepaper.pdf](https://solana.com/solana-whitepaper.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 11,071 |
+| **GitHub Forks** | 3,516 |
+| **Commits (4 weeks)** | 171 |
+| **Pull Requests Merged** | 23,614 |
+| **Contributors** | 411 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.00B |
+| **Market Cap Rank** | #7 |
+| **24h Range** | $75.75 — $78.80 |
+| **CoinGecko Sentiment** | 82% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

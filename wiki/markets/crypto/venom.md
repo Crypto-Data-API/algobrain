@@ -2,14 +2,14 @@
 title: "Venom"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["VENOM", "Venom Foundation"]
 entity_type: protocol
 headquarters: "Abu Dhabi, UAE (foundation origin)"
 website: "https://venom.foundation/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[sharding]]", "[[smart-contracts]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[sharding]]", "[[smart-contracts]]"]
 ---
 
 # Venom

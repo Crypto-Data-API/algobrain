@@ -2,14 +2,14 @@
 title: "DOVU"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, real-world-assets, defi]
-aliases: ["DOVU", "DOV"]
+tags: [altcoins, crypto, defi, real-world-assets]
+aliases: ["DOV", "DOVU"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dovu.earth"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[carbon-credits]]", "[[regenerative-finance]]", "[[hedera]]", "[[tokenization]]"]
+related: ["[[carbon-credits]]", "[[crypto-markets]]", "[[hedera]]", "[[real-world-assets]]", "[[regenerative-finance]]", "[[tokenization]]"]
 ---
 
 # DOVU

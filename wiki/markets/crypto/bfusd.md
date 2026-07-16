@@ -2,15 +2,15 @@
 title: "BFUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, margin, derivatives]
+tags: [crypto, derivatives, margin]
 aliases: ["BFUSD", "Binance BFUSD"]
 entity_type: protocol
 founded: 2024
 headquarters: "Binance (centralized product)"
 website: "https://www.binance.com/en/bfusd"
-related: ["[[crypto-markets]]", "[[binance]]", "[[ethena]]", "[[ethena-usde]]", "[[funding-rates]]", "[[stablecoins]]", "[[stablecoin-yields]]", "[[other-stablecoins]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[ethena]]", "[[funding-rates]]", "[[other-stablecoins]]", "[[stablecoin-yields]]", "[[stablecoins]]"]
 ---
 
 # BFUSD
@@ -143,3 +143,63 @@ Net: BFUSD is **not riskless interest**. It is a basis-trade-backed margin asset
 - Binance — APR boost announcements: https://www.binance.com/en/support/announcement/detail/9a41039716264e45a65317479ab00d21
 - Web verification, 2026-06-10: yield mechanics (ETH staking + delta hedging), reserve fund, Terra/Anchor comparison controversy confirmed.
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.01 (2025-10-10) |
+| **Current vs ATH** | -0.85% |
+| **All-Time Low** | $0.9970 (2026-01-24) |
+| **Current vs ATL** | +0.14% |
+| **24h Change** | -0.02% |
+| **7d Change** | +0.02% |
+| **30d Change** | -0.05% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.binance.com/en/bfusd](https://www.binance.com/en/bfusd) |
+| **Twitter** | [@binance](https://twitter.com/binance) |
+| **Telegram** | [BinanceExchange](https://t.me/BinanceExchange) (367,756 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $374,398.00 |
+| **Market Cap Rank** | #59 |
+| **24h Range** | $0.9982 — $0.9988 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,14 @@
 title: "Echelon Prime"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, gamefi, nft, altcoins]
-aliases: ["PRIME", "Echelon Prime", "$PRIME"]
+tags: [altcoins, crypto, gamefi, nft]
+aliases: ["$PRIME", "Echelon Prime", "PRIME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://echelon.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[base]]", "[[gamefi]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]"]
 ---
 
 # Echelon Prime

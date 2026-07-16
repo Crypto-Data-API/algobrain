@@ -2,15 +2,15 @@
 title: "JUST"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["JST", "JUST Network", "JustLend"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized (Tron ecosystem / Justin Sun)"
 website: "https://www.just.network/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[justin-sun]]", "[[stablecoins]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[justin-sun]]", "[[stablecoins]]", "[[tron]]"]
 ---
 
 # JUST
@@ -221,3 +221,80 @@ Investment framing: *JST = a deflating governance claim on JustLend/USDD protoco
 - KuCoin News: "JustLend DAO Destroys 525M JST Tokens in Major Burn Event" — https://www.kucoin.com/news/flash/justlend-dao-destroys-525m-jst-tokens-in-major-burn-event
 - JUST whitepaper — https://www.just.network/docs/white_paper_en.pdf
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 8.54B JST |
+| **Total Supply** | 8.54B JST |
+| **Max Supply** | 9.90B JST |
+| **Fully Diluted Valuation** | $843.87M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1933 (2021-04-05) |
+| **Current vs ATH** | -48.98% |
+| **All-Time Low** | $0.00476275 (2020-05-09) |
+| **Current vs ATL** | +1970.25% |
+| **24h Change** | +1.94% |
+| **7d Change** | +2.51% |
+| **30d Change** | +22.46% |
+| **1y Change** | +167.93% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Tron
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Tron | `TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | JST/USDT | N/A |
+| Kraken | JST/USD | N/A |
+| Upbit | JST/KRW | N/A |
+| Bitget | JST/USDT | N/A |
+| KuCoin | JST/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $39.76M |
+| **Market Cap Rank** | #75 |
+| **24h Range** | $0.0957 — $0.1009 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

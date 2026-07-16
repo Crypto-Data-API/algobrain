@@ -2,14 +2,14 @@
 title: "SoSoValue"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["SOSO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sosovalue.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[centralized-exchange]]"]
+related: ["[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # SoSoValue
@@ -152,3 +152,125 @@ The honest read: the **highest-quality fundamental story in this run** (real pro
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SOSO |
+| **Market Cap Rank** | #266 |
+| **Market Cap** | $97.63M |
+| **Current Price** | $0.2854 |
+| **Categories** | Decentralized Finance (DeFi), Analytics, Base Native |
+| **Website** | [https://sosovalue.com/](https://sosovalue.com/) |
+
+---
+
+## Overview
+
+SoSoValue is an AI-powered investment and research platform that combines the efficiency of CeFi with the transparency of DeFi, addressing challenges like information overload and cross-chain asset management in the cryptocurrency market.
+The platform consists of two key components:
+AI Crypto Market Research Tool: Aggregates and analyzes vast amounts of data to deliver clear, actionable market insights.
+Decentralized SSI Protocol: Built on the EVM, it offers a low-barrier, high-efficiency portfolio management solution, overcoming traditional obstacles like high fees, slow settlements, and restricted market access.
+By integrating the strengths of CeFi and DeFi, SoSoValue enhances investment decision-making, streamlines wealth management, and helps investors capitalize on market growth opportunities.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 342.00M SOSO |
+| **Total Supply** | 1.00B SOSO |
+| **Max Supply** | 1.00B SOSO |
+| **Fully Diluted Valuation** | $285.46M |
+| **Market Cap / FDV Ratio** | 0.34 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.42 (2025-01-25) |
+| **Current vs ATH** | -79.91% |
+| **All-Time Low** | $0.2690 (2026-06-14) |
+| **Current vs ATL** | +6.09% |
+| **24h Change** | -1.35% |
+| **7d Change** | -7.61% |
+| **30d Change** | -3.15% |
+| **1y Change** | -51.42% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x76a0e27618462bdac7a29104bdcfff4e6bfcea2d` |
+| Base | `0x624e2e7fdc8903165f64891672267ab0fcb98831` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | SOSO/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://sosovalue.com/](https://sosovalue.com/) |
+| **Twitter** | [@SoSoValueCrypto](https://twitter.com/SoSoValueCrypto) |
+| **Telegram** | [SoSoValueCommunity](https://t.me/SoSoValueCommunity) (131,143 members) |
+| **GitHub** | [https://github.com/SoSoValueLabs/ssi-protocol](https://github.com/SoSoValueLabs/ssi-protocol) |
+| **Whitepaper** | [https://sosovalue-white-paper.gitbook.io/sosovalue-whitepaper](https://sosovalue-white-paper.gitbook.io/sosovalue-whitepaper) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 13 |
+| **GitHub Forks** | 8 |
+| **Commits (4 weeks)** | 4 |
+| **Pull Requests Merged** | 25 |
+| **Contributors** | 3 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.05M |
+| **Market Cap Rank** | #266 |
+| **24h Range** | $0.2753 — $0.3202 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

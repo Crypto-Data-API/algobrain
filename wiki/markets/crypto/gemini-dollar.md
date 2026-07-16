@@ -2,14 +2,14 @@
 title: "Gemini Dollar"
 type: market
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoin]
 aliases: ["GUSD", "Gemini USD"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://gemini.com/dollar/"
-related: ["[[stablecoin]]", "[[gemini]]", "[[usdc]]", "[[tether]]", "[[paxos-standard]]", "[[paypal-usd]]", "[[ethereum]]", "[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gemini]]", "[[paxos-standard]]", "[[paypal-usd]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # Gemini Dollar
@@ -145,3 +145,136 @@ See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet for issuer/mechanism details.
+
+## Overview
+
+The Gemini dollar — the world’s first regulated stablecoin — combines the creditworthiness and price stability of the U.S. dollar with blockchain technology and the oversight of U.S. regulators.
+
+Get Gemini dollars 1-to-1 for U.S. dollars on Gemini.
+Gemini dollars can be used on the Ethereum network.
+
+ISSUER
+The Gemini dollar is issued by Gemini Trust Company, LLC, a New York trust company.
+
+BANK
+U.S. dollars that correspond to the Gemini dollars issued and in circulation are held at a U.S. bank and eligible for FDIC “pass-through” deposit insurance, subject to applicable limitations.
+
+EXAMINATION
+The U.S. dollar deposit balance is examined monthly by an independent registered public accounting firm to verify the 1:1 peg. All Independent Accountants’ Reports are published and available here.
+
+SECURITY AUDIT
+The Gemini dollar is a cryptographic token built on the Ethereum Network according to the ERC20 standard for tokens. The code of the Gemini dollar smart contracts has been audited by Trail of Bits, Inc., an information security research &amp; development firm, whose report is publicly available here.
+
+Gemini was founded four years ago with a mission: build a bridge to the future of money. Gemini dollar aims to combine creditworthiness and price stability of the U.S. dollar with blockchain and the oversight of U.S. regulators, the New York State Department of Financial Service.
+
+Gemini dollar is a stable value coin that is:
+
+1. issued by Gemini, a New York trust company
+2. strictly pegged 1:1 to the U.S. dollar
+3. built on Ethereum network according to ERC20 token standards
+
+Starting 10th September 2018, you will be able to convert U.S. dollars in your Gemini account into Gemini dollars and withdraw them to an Ethereum address. You will also be able to automatically convert GUSD back as USD into your Gemini account. GUSD is expected to be listed on Bibox soon.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 38.59M GUSD |
+| **Total Supply** | 38.59M GUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $38.55M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $3.30 (2018-10-11) |
+| **Current vs ATH** | -69.76% |
+| **All-Time Low** | $0.7826 (2018-09-29) |
+| **Current vs ATL** | +27.65% |
+| **24h Change** | -0.04% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.01% |
+| **1y Change** | -0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x056fd409e1d7a124bd7017459dfea2f387b6d5cd` |
+| Near Protocol | `056fd409e1d7a124bd7017459dfea2f387b6d5cd.factory.bridge.near` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X056FD409E1D7A124BD7017459DFEA2F387B6D5CD/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://gemini.com/dollar/](https://gemini.com/dollar/) |
+| **Twitter** | [@Gemini](https://twitter.com/Gemini) |
+| **Reddit** | [https://www.reddit.com/r/Gemini](https://www.reddit.com/r/Gemini) |
+| **Telegram** | [geminiofficial_APAC](https://t.me/geminiofficial_APAC) (6,247 members) |
+| **GitHub** | [https://github.com/gemini/dollar](https://github.com/gemini/dollar) |
+| **Whitepaper** | [https://www.gemini.com/static/dollar/gemini-dollar-whitepaper.pdf](https://www.gemini.com/static/dollar/gemini-dollar-whitepaper.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 107 |
+| **GitHub Forks** | 37 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $310,430.00 |
+| **Market Cap Rank** | #528 |
+| **24h Range** | $0.9985 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

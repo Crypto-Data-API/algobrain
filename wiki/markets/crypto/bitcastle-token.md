@@ -2,7 +2,7 @@
 title: "bitcastle Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["BCE"]
@@ -124,4 +124,4 @@ bitcastle Token (BCE) is the native utility token of bitcastle.io, a centralized
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

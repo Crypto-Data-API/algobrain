@@ -2,14 +2,14 @@
 title: "THORChain Yield"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["TCY", "THORChain Yield"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://thorchain.org"
-related: ["[[crypto-markets]]", "[[thorchain]]", "[[decentralized-finance]]", "[[yield-farming]]"]
+related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[thorchain]]", "[[yield-farming]]"]
 ---
 
 # THORChain Yield

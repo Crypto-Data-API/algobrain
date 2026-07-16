@@ -2,14 +2,14 @@
 title: "Overnight.fi USD+"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["USD+"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://overnight.fi/"
-related: ["[[crypto-markets]]", "[[polygon]]"]
+related: ["[[crypto-markets]]", "[[polygon]]", "[[solana]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -128,10 +128,10 @@ USD+ is currently on Polygon and expanding to other chains. We are going to mark
 ## See Also
 
 - [[crypto-markets]]
-- [[polygon]]
+- [[solana]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

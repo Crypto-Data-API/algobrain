@@ -2,15 +2,15 @@
 title: "Bonk"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, momentum]
+tags: [altcoins, crypto, momentum]
 aliases: ["BONK", "Bonk Inu"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized (BonkDAO, Solana ecosystem)"
 website: "https://www.bonkcoin.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[letsbonk]]", "[[bonkbot]]", "[[narrative-trading]]"]
+related: ["[[bonkbot]]", "[[crypto-markets]]", "[[letsbonk]]", "[[narrative-trading]]", "[[solana]]"]
 ---
 
 # Bonk
@@ -303,3 +303,22 @@ Volume more than halved and rank dropped ~18 places April→June 2026 — the me
 - SEC EDGAR, ETF Opportunities Trust Form 485BXT (REX-Osprey BONK ETF) — https://www.sec.gov/Archives/edgar/data/0001771146/000199937125019487/rex-485bxt_120425.htm
 - Coinpedia: "Tuttle Capital Files Bonk Income Blast ETF" — https://coinpedia.org/news/tuttle-capital-files-bonk-income-blast-etf-bonk-price-up-4-today/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 87.99T BONK |
+| **Total Supply** | 87.99T BONK |
+| **Max Supply** | 88.00T BONK |
+| **Fully Diluted Valuation** | $312.27M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

@@ -2,14 +2,14 @@
 title: "Rocket Pool"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum, indicators]
-aliases: ["RPL", "rETH", "Rocket Pool ETH"]
+aliases: ["RPL", "Rocket Pool ETH", "rETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.rocketpool.net"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[liquid-staking]]", "[[lido]]", "[[slashing]]", "[[depeg]]", "[[smart-contract-risk]]", "[[governance-token]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[slashing]]", "[[smart-contract-risk]]"]
 ---
 
 # Rocket Pool
@@ -249,3 +249,9 @@ RPL inflation (historically ~5%/yr) is split among node operators (rewarding RPL
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical market-data snapshot
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko)
 - General market knowledge (publicly documented Rocket Pool mechanism, Atlas/LEB8 and Saturn roadmap); no specific narrative wiki source ingested yet for protocol mechanism.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

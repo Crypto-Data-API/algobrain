@@ -2,15 +2,15 @@
 title: "Steem"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["STEEM", "Steemit"]
 entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://steem.com/"
-related: ["[[crypto-markets]]", "[[hive]]", "[[layer-1]]", "[[delegated-proof-of-stake]]", "[[proof-of-stake]]", "[[justin-sun]]", "[[tron]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[hive]]", "[[justin-sun]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[tron]]"]
 ---
 
 # Steem

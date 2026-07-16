@@ -2,14 +2,14 @@
 title: "SynFutures"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, ethereum]
+tags: [crypto, defi, derivatives, ethereum, nft]
 aliases: ["F", "SynFutures DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.synfutures.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[perpetual-futures]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[defi]]", "[[hyperliquid]]", "[[funding-rate]]", "[[base]]", "[[bnb-chain]]"]
+related: ["[[automated-market-maker]]", "[[base]]", "[[bnb-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 ---
 
 # SynFutures
@@ -250,3 +250,16 @@ The **product** (perps) trades on SynFutures' own venue across [[ethereum|Ethere
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; Oyster AMM design and funding history from public SynFutures documentation. No additional specific wiki source ingested yet.
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | F/TRY | N/A |
+| Upbit | F/KRW | N/A |
+| Bitget | F/USDT | N/A |
+| KuCoin | F/USDT | N/A |
+
+---

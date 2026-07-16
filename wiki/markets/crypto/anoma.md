@@ -2,14 +2,14 @@
 title: "Anoma"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
-aliases: ["XAN", "Anoma Network"]
+tags: [altcoins, crypto, ethereum]
+aliases: ["Anoma Network", "XAN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://anoma.net/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[interoperability]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[layer-1]]", "[[smart-contracts]]"]
 ---
 
 # Anoma
@@ -262,3 +262,9 @@ Anoma rides the **intent-centric** narrative — arguably one of the more credib
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

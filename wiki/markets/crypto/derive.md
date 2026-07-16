@@ -2,14 +2,14 @@
 title: "Derive"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, options, derivatives]
+tags: [crypto, defi, derivatives, options]
 aliases: ["DRV", "Lyra"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://derive.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[options]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[options]]", "[[perpetual-futures]]"]
 ---
 
 # Derive
@@ -147,3 +147,124 @@ DRV is one of the few tokens in this loop with a **genuine fee-accrual mechanism
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DRV |
+| **Market Cap Rank** | #214 |
+| **Market Cap** | $135.36M |
+| **Current Price** | $0.1354 |
+| **Categories** | Smart Contract Platform, Decentralized Finance (DeFi), Derivatives, Options, Perpetuals, Layer 2 (L2), DeFAI, Base Native |
+| **Website** | [https://derive.xyz/](https://derive.xyz/) |
+
+---
+
+## Overview
+
+Derive is a decentralized protocol that creates programmable onchain options, perpetuals, and structured products. 
+
+Derive is deployed and operates on Derive Chain, an Ethereum rollup built using the OP stack and is the home of the Derive Protocol. It is a permission-less smart contract platform.
+
+The Derive DAO earns trading fees from the Derive Protocol and gas fees from the Derive Chain, governed by DRV token holders. Trading fees accrue to an insurance fund to foster robustness of the protocol and rollup.
+
+Derive has built an AI-powered trading app built for pro traders. In collaboration with Messari, Derive Pro translates market views into trades. The agent then prepares transactions for users and leverages smart contract wallets to make trades one-click, gasless and chainless. The app will support spot, perps and options trading on Derive, and will also plug in to spot AMMs on L2s like Optimism, Arbitrum and Base.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 999.75M DRV |
+| **Total Supply** | 1.50B DRV |
+| **Max Supply** | 1.50B DRV |
+| **Fully Diluted Valuation** | $203.10M |
+| **Market Cap / FDV Ratio** | 0.67 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2283 (2025-01-15) |
+| **Current vs ATH** | -40.90% |
+| **All-Time Low** | $0.0124 (2025-04-07) |
+| **Current vs ATL** | +984.77% |
+| **24h Change** | -7.18% |
+| **7d Change** | +21.34% |
+| **30d Change** | +33.71% |
+| **1y Change** | +149.06% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xb1d1eae60eea9525032a6dcb4c1ce336a1de71be` |
+| Base | `0x9d0e8f5b25384c7310cb8c6ae32c8fbeb645d083` |
+| Arbitrum One | `0x77b7787a09818502305c95d68a2571f090abb135` |
+| Optimistic Ethereum | `0x33800de7e817a70a694f31476313a7c572bba100` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | DRV/USD | N/A |
+| Upbit | DRV/KRW | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://derive.xyz/](https://derive.xyz/) |
+| **Twitter** | [@derivexyz](https://twitter.com/derivexyz) |
+| **Telegram** | [+yytV8ZEI8-piNjI1](https://t.me/+yytV8ZEI8-piNjI1) (2,198 members) |
+| **GitHub** | [https://github.com/derivexyz](https://github.com/derivexyz) |
+| **Whitepaper** | [https://www.derive.xyz/files/v2-whitepaper.pdf](https://www.derive.xyz/files/v2-whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.79M |
+| **Market Cap Rank** | #214 |
+| **24h Range** | $0.1344 — $0.1473 |
+| **CoinGecko Sentiment** | 71% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

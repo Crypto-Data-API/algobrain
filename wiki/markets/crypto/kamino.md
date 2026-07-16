@@ -2,14 +2,14 @@
 title: "Kamino"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins, liquidity, leverage]
+tags: [altcoins, crypto, defi, leverage, liquidity]
 aliases: ["KMNO", "Kamino Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kamino.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[raydium]]", "[[orca]]", "[[jupiter-exchange-solana]]", "[[defi-lending]]", "[[liquid-staking]]", "[[defi]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[defi-lending]]", "[[defi]]", "[[jupiter-exchange-solana]]", "[[liquid-staking]]", "[[orca]]", "[[raydium]]", "[[solana]]", "[[stablecoins]]"]
 ---
 
 # Kamino
@@ -290,3 +290,40 @@ Within Solana DeFi, Kamino's edge is **product breadth** (it bundles vaults, len
 - [Kamino Finance docs](https://docs.kamino.finance/)
 - [MEXC — Kamino Finance Season 4 guide (2026)](https://blog.mexc.com/token-reviews/kamino-finance-season-4-airdrop-guide-2026-how-to-earn-kmno-on-solanas-largest-lending-protocol/)
 - Verified via Perplexity (sonar), 2026-06-11
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | KMNO |
+| **Market Cap Rank** | #277 |
+| **Market Cap** | $92.48M |
+| **Current Price** | $0.0182 |
+| **Categories** | Decentralized Finance (DeFi), Lending/Borrowing Protocols, Binance Alpha Spotlight |
+| **Website** | [https://kamino.com/](https://kamino.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.07B KMNO |
+| **Total Supply** | 10.00B KMNO |
+| **Max Supply** | 10.00B KMNO |
+| **Fully Diluted Valuation** | $182.32M |
+| **Market Cap / FDV Ratio** | 0.51 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.43M |
+| **Market Cap Rank** | #277 |
+| **24h Range** | $0.0179 — $0.0185 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

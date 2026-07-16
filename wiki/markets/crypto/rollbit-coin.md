@@ -2,14 +2,14 @@
 title: "Rollbit Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, gambling, exchange]
+tags: [crypto, exchange, gambling]
 aliases: ["RLB"]
 entity_type: protocol
 headquarters: "Curaçao"
 website: "https://rollbit.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[meme-coins]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hyperliquid]]", "[[meme-coins]]"]
 ---
 
 # Rollbit Coin
@@ -160,3 +160,106 @@ RLB shares the **buyback-and-burn / platform-revenue** mechanic with [[exchange-
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | RLB |
+| **Market Cap Rank** | #243 |
+| **Market Cap** | $111.19M |
+| **Current Price** | $0.0687 |
+| **Categories** | Gambling (GambleFi), Gaming (GameFi) |
+| **Website** | [https://rollbit.com/](https://rollbit.com/) |
+
+---
+
+## Overview
+
+The Rollbit token (RLB) will be launched as an integral part of the upcoming Rollbit lottery. There will be no ICO for this token. Instead, Rollbit will airdrop RLB for free. Airdrops have been used throughout the history of cryptocurrencies to bootstrap growth, incentivise community development, and reward early adopters.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.62B RLB |
+| **Total Supply** | 1.62B RLB |
+| **Max Supply** | 5.00B RLB |
+| **Fully Diluted Valuation** | $111.19M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2644 (2023-11-11) |
+| **Current vs ATH** | -74.02% |
+| **All-Time Low** | $0.00093506 (2022-07-02) |
+| **Current vs ATL** | +7243.91% |
+| **24h Change** | +0.80% |
+| **7d Change** | +0.76% |
+| **30d Change** | +12.48% |
+| **1y Change** | +47.11% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x046eee2cc3188071c02bfc1745a6b17c656e3f3d` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X046EEE2CC3188071C02BFC1745A6B17C656E3F3D/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://rollbit.com/](https://rollbit.com/) |
+| **Twitter** | [@rollbit](https://twitter.com/rollbit) |
+| **Discord** | [https://discord.com/invite/Mwx3zqH](https://discord.com/invite/Mwx3zqH) |
+| **Whitepaper** | [https://whitepaper.rollbot.com/rlb-whitepaper](https://whitepaper.rollbot.com/rlb-whitepaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $25.30 |
+| **Market Cap Rank** | #243 |
+| **24h Range** | $0.0672 — $0.0698 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "Pendle"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, yield-farming, derivatives]
+tags: [crypto, defi, derivatives, yield-farming]
 aliases: ["PENDLE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://pendle.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[arbitrum]]", "[[defi]]", "[[aave]]", "[[lido]]", "[[curve-finance]]", "[[yearn]]", "[[hyperliquid]]"]
+related: ["[[aave]]", "[[arbitrum]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[lido]]", "[[yearn]]"]
 ---
 
 # Pendle
@@ -329,3 +329,28 @@ For leveraged exposure, **PENDLE-PERP** trades on [[hyperliquid]] and other perp
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PENDLE |
+| **Market Cap Rank** | #138 |
+| **Market Cap** | $272.46M |
+| **Current Price** | $1.59 |
+| **Categories** | Decentralized Exchange (DEX), Exchange-based Tokens, Decentralized Finance (DeFi), Yield Farming, Automated Market Maker (AMM), Derivatives, Fixed Interest, LSDFi (+7 more) |
+| **Website** | [https://pendle.finance/](https://pendle.finance/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 171.15M PENDLE |
+| **Total Supply** | 281.53M PENDLE |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $448.18M |
+| **Market Cap / FDV Ratio** | 0.61 |
+
+---

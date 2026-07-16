@@ -2,15 +2,15 @@
 title: "AINFT (formerly APENFT)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, ai-trading]
-aliases: ["NFT", "APENFT", "AINFT"]
+tags: [ai-trading, crypto, nft]
+aliases: ["AINFT", "APENFT", "NFT"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized (Tron ecosystem)"
 website: "https://ainft.com/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[justin-sun]]", "[[bittorrent]]", "[[narrative-trading]]"]
+related: ["[[bittorrent]]", "[[crypto-markets]]", "[[justin-sun]]", "[[narrative-trading]]", "[[tron]]"]
 ---
 
 # AINFT (formerly APENFT)
@@ -171,3 +171,45 @@ The broad market sits in **Extreme Fear** (Fear & Greed 21; market-health 29/100
 - ChainCatcher, "APENFT has upgraded to AINFT, focusing on building the next generation of crypto AI infrastructure": https://www.chaincatcher.com/en/article/2211342
 - CoinMarketCap AINFT listing: https://coinmarketcap.com/currencies/apenft/
 - Web search verification, 2026-06-10
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | APENFT/USD | N/A |
+| Bitget | NFT/USDT | N/A |
+| KuCoin | NFT/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.04M |
+| **Market Cap Rank** | #140 |
+| **24h Range** | $0.00000027 — $0.00000027 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

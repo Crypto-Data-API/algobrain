@@ -2,14 +2,14 @@
 title: "OpenEden OpenDollar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, real-world-assets, treasuries, defi]
-aliases: ["USDO", "OpenDollar", "Open Dollar"]
+tags: [crypto, defi, real-world-assets, stablecoin, treasuries]
+aliases: ["Open Dollar", "OpenDollar", "USDO"]
 entity_type: protocol
 headquarters: "Bermuda (OpenEden Digital, BMA-licensed)"
 website: "https://openeden.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[real-world-assets]]", "[[treasuries]]", "[[tokenization]]", "[[tokenized-treasuries]]", "[[ondo-u-s-dollar-token]]", "[[midas-mtbill]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[midas-mtbill]]", "[[ondo-u-s-dollar-token]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[tokenized-treasuries]]", "[[treasuries]]"]
 ---
 
 # OpenEden OpenDollar
@@ -217,3 +217,30 @@ USDO sits squarely in the **tokenized-Treasury / yield-bearing-stablecoin** narr
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 30.04M USDO |
+| **Total Supply** | 30.04M USDO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $30.00M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.97 (2025-04-21) |
+| **Current vs ATH** | -66.37% |
+| **All-Time Low** | $0.9693 (2025-07-17) |
+| **Current vs ATL** | +3.01% |
+| **24h Change** | +0.10% |
+| **7d Change** | +0.01% |
+| **30d Change** | +0.09% |
+| **1y Change** | -0.08% |
+
+---

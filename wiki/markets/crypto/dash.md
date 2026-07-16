@@ -2,15 +2,15 @@
 title: "Dash"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["DASH", "Digital Cash", "Darkcoin"]
+tags: [altcoins, crypto]
+aliases: ["DASH", "Darkcoin", "Digital Cash"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "https://www.dash.org"
-related: ["[[crypto-markets]]", "[[monero]]", "[[zcash]]", "[[privacy-coins]]", "[[bitcoin]]", "[[hyperliquid]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[monero]]", "[[privacy-coins]]", "[[zcash]]"]
 ---
 
 # Dash
@@ -260,3 +260,72 @@ Within the privacy basket, Dash occupies the "payments + optional privacy" niche
 - ainvest — "Why DASH's Recent Surge Signals a Strategic Entry Point for Privacy-Focused Crypto Exposure" (2026-01) — https://www.ainvest.com/news/dash-surge-signals-strategic-entry-point-privacy-focused-crypto-exposure-2601/
 - Phemex Academy — "What Is Dash (DASH) and Why It Just Rallied 22%" (2026) — https://phemex.com/academy/what-is-dash-and-why-dash-price-rallied
 - Web search verification via Perplexity/WebSearch, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 12.76M DASH |
+| **Total Supply** | 12.77M DASH |
+| **Max Supply** | 18.92M DASH |
+| **Fully Diluted Valuation** | $432.84M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1,493.59 (2017-12-20) |
+| **Current vs ATH** | -97.73% |
+| **All-Time Low** | $0.2139 (2014-02-14) |
+| **Current vs ATL** | +15739.87% |
+| **24h Change** | -0.83% |
+| **7d Change** | -0.36% |
+| **30d Change** | -11.66% |
+| **1y Change** | +51.28% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | DASH/USDT | N/A |
+| Kraken | DASH/USD | N/A |
+| KuCoin | DASH/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $51.25M |
+| **Market Cap Rank** | #110 |
+| **24h Range** | $33.66 — $35.39 |
+| **CoinGecko Sentiment** | 78% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

@@ -2,14 +2,14 @@
 title: "Electronic USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, real-world-assets, tokenization]
-aliases: ["EUSD", "eUSD", "Electronic Dollar"]
+tags: [crypto, real-world-assets, stablecoin, tokenization]
+aliases: ["EUSD", "Electronic Dollar", "eUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://register.app/"
-related: ["[[stablecoin]]", "[[real-world-assets]]", "[[tokenization]]", "[[treasuries]]", "[[dai]]", "[[usdc]]", "[[depeg]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[depeg]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[treasuries]]", "[[usdc]]"]
 ---
 
 # Electronic USD
@@ -161,3 +161,89 @@ Secondary liquidity is **moderate** and concentrated on-chain across Base, Ether
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko). General market knowledge on Reserve Protocol and eUSD; no additional specific wiki source ingested yet.
+
+## Overview
+
+eUSD Digital Cash is the first bank-issued U.S. dollar stablecoin, issued by Telcoin Digital Asset Bank, a Digital Asset Depository Institution regulated by the Nebraska Department of Banking and Finance.  eUSD is a fully reserved U.S. dollar stablecoin, backed 1-to-1 by highly liquid US dollar cash or cash equivalents, consistent with the Nebraska Financial Innovation Act and subject to regulatory oversight. Learn more at https://bank.telco.in/eUSD.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 10.03M EUSD |
+| **Total Supply** | 10.03M EUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $10.03M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.05 (2026-05-26) |
+| **Current vs ATH** | -4.90% |
+| **All-Time Low** | $0.9661 (2026-04-21) |
+| **Current vs ATL** | +3.49% |
+| **24h Change** | +0.01% |
+| **7d Change** | +0.02% |
+| **30d Change** | +0.01% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x14913815bcfde78baead2111f463d038ac9c2949` |
+| Polygon Pos | `0x14913815bcfde78baead2111f463d038ac9c2949` |
+| Base | `0x14913815bcfde78baead2111f463d038ac9c2949` |
+| Solana | `HQMYCZTDq9g3oZejDRUeQsFtLKgyfvBpD3yHaTnain3L` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://bank.telco.in/eUSD](https://bank.telco.in/eUSD) |
+| **Twitter** | [@TelcoinDAB](https://twitter.com/TelcoinDAB) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $15,135.71 |
+| **Market Cap Rank** | #1159 |
+| **24h Range** | $0.9997 — $1.0000 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

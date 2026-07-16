@@ -2,14 +2,14 @@
 title: "Open Campus"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["EDU", "Open Campus", "EDU Chain"]
+tags: [altcoins, crypto]
+aliases: ["EDU", "EDU Chain", "Open Campus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.opencampus.xyz/"
-related: ["[[crypto-markets]]", "[[bnb-chain]]", "[[tokenization]]"]
+related: ["[[bnb-chain]]", "[[bnb]]", "[[crypto-markets]]", "[[tokenization]]"]
 ---
 
 # Open Campus

@@ -2,14 +2,14 @@
 title: "Arweave"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["AR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://arweave.org/"
-related: ["[[crypto-markets]]", "[[filecoin]]", "[[siacoin]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[filecoin]]", "[[siacoin]]"]
 ---
 
 # Arweave

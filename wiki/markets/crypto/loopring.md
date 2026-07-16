@@ -2,7 +2,7 @@
 title: "Loopring"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["LRC"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://loopring.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zk-rollup]]", "[[layer-2]]", "[[decentralized-exchange]]", "[[order-book]]", "[[automated-market-maker]]", "[[governance-token]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[governance-token]]", "[[layer-2]]", "[[order-book]]", "[[zk-rollup]]"]
 ---
 
 # Loopring

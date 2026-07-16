@@ -2,14 +2,14 @@
 title: "AsterDEX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, dex, derivatives, perpetuals, algorithmic, api-trading]
-aliases: ["ASTER", "Aster DEX", "AsterDEX", "Aster"]
+tags: [algorithmic, api-trading, crypto, defi, derivatives, dex, perpetuals]
+aliases: ["ASTER", "Aster", "Aster DEX", "AsterDEX"]
 entity_type: exchange
 headquarters: "Decentralized"
 website: "https://www.asterdex.com/en"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[decentralized-exchanges]]", "[[decentralized-exchange]]", "[[dex]]", "[[defi]]", "[[funding-rate]]", "[[hyperliquid-vs-asterdex-vs-tiger-brokers]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[defi]]", "[[dex]]", "[[funding-rate]]", "[[hyperliquid-vs-asterdex-vs-tiger-brokers]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 ---
 
 # AsterDEX
@@ -251,3 +251,94 @@ ASTER is best framed as a **revenue-share / market-share play on the perp-DEX ca
 - [[funding-rate]] — Funding rate mechanics
 - [[bnb]] — BNB Chain ecosystem
 - [[crypto-markets]]
+
+## Overview
+
+Aster is a next-generation decentralized perpetual exchange that combines non-custodial trading with advanced features like hidden orders and multi-chain support. The platform emerged from the merger of Astherus and APX Finance in late 2024, with APX token holders able to migrate their holdings to ASTER.
+
+Aster addresses the gap between centralized and decentralized exchanges by enabling traders to maintain full control of their assets while accessing deep liquidity and CEX-grade trading tools. The platform supports trading of both cryptocurrency perpetuals and U.S. stocks with up to 100x leverage, all settled on-chain in crypto without requiring traditional financial infrastructure.
+
+The platform offers two distinct trading modes to accommodate different user needs. Simple Mode provides one-click, MEV-resistant trading with up to 1001x leverage for beginners, while Pro Mode delivers a full order book with advanced features like automated grid trading and hidden orders that remain invisible until execution. 
+
+Aster operates across BNB Chain, Ethereum, Solana, and Arbitrum without requiring bridging, with liquidity pooled across markets to support large trades with minimal slippage. A distinctive feature allows users to deposit yield-generating assets like asBNB or USDF as collateral, earning passive returns while trading, maximizing capital efficiency compared to platforms where collateral sits idle.
+
+Aster received backing from YZi Labs (formerly Binance Labs), which holds a minority stake through a private fund managing over $10 billion on behalf of early Binance executives. Changpeng Zhao, founder of Binance, serves in an advisory role and has personally invested over $2.5 million worth of ASTER tokens. 
+
+The ASTER token serves multiple functions including governance rights, staking rewards through liquidity provision, and earning incentives through the platform's points program for traders and liquidity providers.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.69B ASTER |
+| **Total Supply** | 7.82B ASTER |
+| **Max Supply** | 8.00B ASTER |
+| **Fully Diluted Valuation** | $4.89B |
+| **Market Cap / FDV Ratio** | 0.34 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.41 (2025-09-24) |
+| **Current vs ATH** | -74.03% |
+| **All-Time Low** | $0.0997 (2025-09-17) |
+| **Current vs ATL** | +527.44% |
+| **24h Change** | -1.48% |
+| **7d Change** | +0.17% |
+| **30d Change** | -5.57% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x000ae314e2a2172a039b26378814c252734f556a` |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 92 |
+| **GitHub Forks** | 36 |
+| **Commits (4 weeks)** | 24 |
+| **Pull Requests Merged** | 109 |
+| **Contributors** | 8 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $68.47M |
+| **Market Cap Rank** | #46 |
+| **24h Range** | $0.6251 — $0.6372 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

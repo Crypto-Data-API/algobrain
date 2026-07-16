@@ -2,10 +2,10 @@
 title: "USDH"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, defi]
-aliases: ["USDH", "Native USDH"]
+tags: [crypto, defi, stablecoin]
+aliases: ["Native USDH", "USDH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nativemarkets.com"
@@ -217,3 +217,15 @@ USDH rides two converging narratives: the **fiat-backed RWA-dollar** theme (rese
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge and Native Markets / Bridge Building public documentation; market data as of 2026-06-22 (cryptodataapi.com / CoinGecko). No additional specific wiki source ingested yet.
+
+## Overview
+
+USDh is the first Bitcoin-backed, yield-bearing stablecoin on Bitcoin L1 and L2s.
+
+USDh consists of BTC coupled with a short perpetual futures position to create a synthetic dollar that is completely outside the fiat banking system. 
+
+The short perpetual futures position generates up to 25% APY from funding rate payments which are passed on to users that stake USDh. 
+
+Hermetica’s mission is to enable global financial freedom.
+
+---

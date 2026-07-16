@@ -2,10 +2,10 @@
 title: "Onyxcoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["XCN", "Chain"]
+aliases: ["CHAIN", "Chain", "XCN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://www.onyx.org"
@@ -174,3 +174,88 @@ The narrative is **financial-grade ledger infrastructure + a liquid governance t
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-20 (cryptodataapi.com / CoinGecko bulk endpoints).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | CHAIN |
+| **Market Cap Rank** | #2516 |
+| **Market Cap** | $1.41M |
+| **Current Price** | $0.00372460 |
+| **Categories** | Entertainment, Gambling (GambleFi), Gaming (GameFi), Play To Earn |
+| **Website** | [https://chaingames.io/](https://chaingames.io/) |
+
+---
+
+## Overview
+
+The CHAIN token is the primary medium of exchange used for all entry fees and contest payouts on the Chain Games network.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 379.87M CHAIN |
+| **Total Supply** | 493.50M CHAIN |
+| **Max Supply** | 500.00M CHAIN |
+| **Fully Diluted Valuation** | $1.84M |
+| **Market Cap / FDV Ratio** | 0.77 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.03 (2021-03-23) |
+| **Current vs ATH** | -99.64% |
+| **All-Time Low** | $0.00326006 (2026-03-20) |
+| **Current vs ATL** | +14.20% |
+| **24h Change** | -12.83% |
+| **7d Change** | +5.06% |
+| **30d Change** | +5.82% |
+| **1y Change** | -82.99% |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XC4C2614E694CF534D407EE49F8E44D125E4681C4/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://chaingames.io/](https://chaingames.io/) |
+| **Twitter** | [@realchaingames](https://twitter.com/realchaingames) |
+| **Telegram** | [chaingames](https://t.me/chaingames) (3,670 members) |
+| **Discord** | [https://discord.gg/wAyMde8](https://discord.gg/wAyMde8) |
+| **GitHub** | [https://github.com/Chain-Games](https://github.com/Chain-Games) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $21,592.00 |
+| **Market Cap Rank** | #2516 |
+| **24h Range** | $0.00371981 — $0.00438211 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

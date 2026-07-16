@@ -2,14 +2,14 @@
 title: "GALA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["GALA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gala.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[gamefi]]", "[[nft]]", "[[hyperliquid]]", "[[gaming-tokens]]", "[[play-to-earn]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[nft]]", "[[play-to-earn]]", "[[solana]]"]
 ---
 
 # GALA
@@ -138,3 +138,139 @@ GALA differs from most peers by running its **own L1 (GalaChain)** and spanning 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GALA |
+| **Market Cap Rank** | #265 |
+| **Market Cap** | $97.85M |
+| **Current Price** | $0.00200418 |
+| **Categories** | Smart Contract Platform, Gaming (GameFi), NFT, Layer 1 (L1), Play To Earn, Gaming Platform, Made in USA |
+| **Website** | [https://gala.com/](https://gala.com/) |
+
+---
+
+## Overview
+
+GALA is designed to power the Gala Games ecosystem to support gaming re-imagined to benefit creators and players, alike.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 48.82B GALA |
+| **Total Supply** | 48.82B GALA |
+| **Max Supply** | 50.00B GALA |
+| **Fully Diluted Valuation** | $97.85M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.8248 (2021-11-26) |
+| **Current vs ATH** | -99.76% |
+| **All-Time Low** | $0.00013475 (2020-12-28) |
+| **Current vs ATL** | +1387.57% |
+| **24h Change** | -0.71% |
+| **7d Change** | -5.87% |
+| **30d Change** | -27.00% |
+| **1y Change** | -88.68% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xd1d2eb1b1e90b638588728b4130137d262c87cae` |
+| Solana | `eEUiUs4JWYZrp72djAGF1A8PhpR6rHphGeGN7GbVLp6` |
+| Galachain | `E3bVbsc7viP1A8tn3ayChk3BAt` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | GALA/USDT | N/A |
+| Kraken | GALA/USD | N/A |
+| Bitget | GALA/USDT | N/A |
+| KuCoin | GALAX/USDT | N/A |
+| Crypto.com Exchange | GALA/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XD1D2EB1B1E90B638588728B4130137D262C87CAE/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://gala.com/](https://gala.com/) |
+| **Twitter** | [@GoGalaGames](https://twitter.com/GoGalaGames) |
+| **Reddit** | [https://www.reddit.com/r/GoGalaGames/](https://www.reddit.com/r/GoGalaGames/) |
+| **Telegram** | [PoweredByGala](https://t.me/PoweredByGala) (25,467 members) |
+| **GitHub** | [https://github.com/GalaChain/sdk](https://github.com/GalaChain/sdk) |
+| **Whitepaper** | [https://news.gala.com/wp-content/uploads/2024/10/GalaChain-Decentralization-White-Paper-DRAFT.pdf](https://news.gala.com/wp-content/uploads/2024/10/GalaChain-Decentralization-White-Paper-DRAFT.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 137 |
+| **GitHub Forks** | 44 |
+| **Commits (4 weeks)** | 4 |
+| **Pull Requests Merged** | 573 |
+| **Contributors** | 26 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $20.47M |
+| **Market Cap Rank** | #265 |
+| **24h Range** | $0.00197515 — $0.00204948 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,14 +2,14 @@
 title: "Stronghold"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stocks, regulation]
+tags: [crypto, regulation, stocks]
 aliases: ["SHX"]
 entity_type: protocol
 headquarters: "USA"
 website: "https://stronghold.co/stronghold-shx"
-related: ["[[crypto-markets]]", "[[stellar]]", "[[ethereum]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[stellar]]"]
 ---
 
 # Stronghold
@@ -157,3 +157,108 @@ SHX sits in the **payments / stablecoin-infrastructure / RWA-adjacent fintech** 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Project site: stronghold.co (company self-description).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SHX |
+| **Market Cap Rank** | #357 |
+| **Market Cap** | $65.34M |
+| **Current Price** | $0.00361366 |
+| **Categories** | Made in USA |
+| **Website** | [https://stronghold.co/stronghold-shx](https://stronghold.co/stronghold-shx) |
+
+---
+
+## Overview
+
+Stronghold is a financial services platform that enables payments, trading, and USD reserves using our technology products like Stronghold USD and our platform APIs.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 18.08B SHX |
+| **Total Supply** | 99.75B SHX |
+| **Max Supply** | 100.00B SHX |
+| **Fully Diluted Valuation** | $360.46M |
+| **Market Cap / FDV Ratio** | 0.18 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0557 (2021-05-17) |
+| **Current vs ATH** | -93.51% |
+| **All-Time Low** | $0.00000013 (2021-04-07) |
+| **Current vs ATL** | +2777120.24% |
+| **24h Change** | -3.77% |
+| **7d Change** | -3.04% |
+| **30d Change** | -23.87% |
+| **1y Change** | -73.20% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Stellar
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Stellar | `SHX-GDSTRSHXHGJ7ZIVRBXEYE5Q74XUVCUSEKEBR7UCHEUUEK72N7I7KJ6JH` |
+| Ethereum | `0x516d31321928700c6b4fb0db0c8c6bc5d6799787` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | SHX/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://stronghold.co/stronghold-shx](https://stronghold.co/stronghold-shx) |
+| **Twitter** | [@strongholdpay](https://twitter.com/strongholdpay) |
+| **Reddit** | [https://www.reddit.com/r/strongholdxchg/](https://www.reddit.com/r/strongholdxchg/) |
+| **Telegram** | [strongholdxchg](https://t.me/strongholdxchg) (2,204 members) |
+| **Discord** | [https://discord.com/invite/QKqu8RZR29](https://discord.com/invite/QKqu8RZR29) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $514,442.00 |
+| **Market Cap Rank** | #357 |
+| **24h Range** | $0.00361374 — $0.00390962 |
+| **CoinGecko Sentiment** | 60% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

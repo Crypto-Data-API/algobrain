@@ -2,14 +2,14 @@
 title: "AltLayer"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, restaking, layer-2]
+tags: [crypto, layer-2, restaking]
 aliases: ["ALT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://altlayer.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[restaking]]", "[[eigenlayer]]", "[[layer-2]]", "[[modular-blockchains]]", "[[hyperliquid]]", "[[fear-and-greed-index]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-2]]", "[[modular-blockchains]]", "[[restaking]]"]
 ---
 
 # AltLayer
@@ -136,3 +136,109 @@ ALT is the only **infrastructure / [[layer-2|L2]]-service** token in this cohort
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 — cryptodataapi.com / CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`)
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ALT |
+| **Market Cap Rank** | #1616 |
+| **Market Cap** | $4.67M |
+| **Current Price** | $0.00898321 |
+| **Categories** | Mobile Mining |
+| **Website** | [https://altdeer.com/](https://altdeer.com/) |
+
+---
+
+## Overview
+
+ALTDeer is a blockchain-based digital ecosystem built around the ALT token on BNB Smart Chain. The project focuses on user engagement, token utility, and Web3 accessibility through a mobile-first platform where users can participate in ecosystem activities and token distribution mechanisms. ALT is used within the ALTDeer ecosystem for access, rewards, community participation, and future platform utilities including staking and additional ecosystem services. The project operates with a structured token distribution and vesting model designed to support long-term ecosystem development. ALT is currently actively traded on external exchanges and supported by its official web platform, community channels, and ongoing ecosystem expansion initiatives.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 520.19M ALT |
+| **Total Supply** | 521.00M ALT |
+| **Max Supply** | 521.00M ALT |
+| **Fully Diluted Valuation** | $4.68M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2199 (2026-06-13) |
+| **Current vs ATH** | -95.91% |
+| **All-Time Low** | $0.00385346 (2026-06-27) |
+| **Current vs ATL** | +133.12% |
+| **24h Change** | -0.51% |
+| **7d Change** | +2.52% |
+| **30d Change** | -18.06% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x2eb0d0586454f6d4b1bc00e9e79bf8aa2233c258` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://altdeer.com/](https://altdeer.com/) |
+| **Twitter** | [@altdeerCloud](https://twitter.com/altdeerCloud) |
+| **Telegram** | [altdeerGlobal](https://t.me/altdeerGlobal) (8,411 members) |
+| **GitHub** | [https://github.com/Altdeer](https://github.com/Altdeer) |
+| **Whitepaper** | [https://altdeer.com/whitePaper](https://altdeer.com/whitePaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.93 |
+| **Market Cap Rank** | #1616 |
+| **24h Range** | $0.00895615 — $0.00909897 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

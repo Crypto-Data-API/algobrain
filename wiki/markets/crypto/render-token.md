@@ -2,14 +2,14 @@
 title: "Render"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, ai-trading, defi]
-aliases: ["RENDER", "Render Network", "RNDR"]
+tags: [ai-trading, crypto, defi, nft]
+aliases: ["RENDER", "RNDR", "Render Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://renderfoundation.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[artificial-intelligence]]", "[[nvidia]]", "[[bittensor]]", "[[artificial-superintelligence-alliance]]", "[[ai-narrative-arc]]", "[[depin]]"]
+related: ["[[ai-narrative-arc]]", "[[artificial-intelligence]]", "[[artificial-superintelligence-alliance]]", "[[bittensor]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[nvidia]]", "[[solana]]"]
 ---
 
 # Render
@@ -376,3 +376,30 @@ DePIN tokens trade as a sector — when one rallies on news, others tend to foll
 - Market data 2026-06-20 — cryptodataapi.com / CoinGecko markets snapshot (`raw/data/crypto-loop/coingecko-markets.json`)
 - Render Network Foundation whitepaper — http://renderfoundation.com/whitepaper
 - Render Network Proposals (RNP-001/002, Burn-and-Mint Equilibrium) — Render Network governance
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 518.77M RENDER |
+| **Total Supply** | 533.53M RENDER |
+| **Max Supply** | 644.25M RENDER |
+| **Fully Diluted Valuation** | $801.07M |
+| **Market Cap / FDV Ratio** | 0.97 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $13.53 (2024-03-17) |
+| **Current vs ATH** | -88.88% |
+| **All-Time Low** | $0.0367 (2020-06-16) |
+| **Current vs ATL** | +4004.08% |
+| **24h Change** | -1.50% |
+| **7d Change** | -3.47% |
+| **30d Change** | -16.64% |
+| **1y Change** | -61.91% |
+
+---

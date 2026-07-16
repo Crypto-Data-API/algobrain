@@ -2,14 +2,14 @@
 title: "Illuvium"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["ILV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://illuvium.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[immutable]]", "[[gamefi]]", "[[play-to-earn]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[immutable]]", "[[nft]]", "[[play-to-earn]]"]
 ---
 
 # Illuvium

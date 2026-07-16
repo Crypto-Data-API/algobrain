@@ -2,9 +2,9 @@
 title: "Ontology Gas"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ONG", "Ontology Gas"]
 entity_type: protocol
 founded: 2018

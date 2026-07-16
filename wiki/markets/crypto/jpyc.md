@@ -2,14 +2,14 @@
 title: "JPYC"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, forex]
-aliases: ["JPYC", "JPY Coin", "JPY Coin v1"]
+tags: [crypto, forex, stablecoin]
+aliases: ["JPY Coin", "JPY Coin v1", "JPYC"]
 entity_type: protocol
 headquarters: "Tokyo, Japan"
 website: "https://jpyc.jp/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[japanese-yen]]", "[[forex]]", "[[mica]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[forex]]", "[[japanese-yen]]", "[[mica]]", "[[stablecoin]]"]
 ---
 
 # JPYC

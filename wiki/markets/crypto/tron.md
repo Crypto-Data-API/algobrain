@@ -2,15 +2,15 @@
 title: "TRON"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["TRX", "Tron Network"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://tron.network"
-related: ["[[crypto-markets]]", "[[tether]]", "[[ethereum]]", "[[hyperliquid]]", "[[stablecoins]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[stablecoins]]", "[[tether]]"]
 ---
 
 # TRON
@@ -275,3 +275,33 @@ TRON competes primarily with [[ethereum|Ethereum]] (and, increasingly, [[solana|
 - The Coin Republic: "$1B USDT Minted on Tron as Stablecoin Supply Grows" (2026-03-13)
 - DefiLlama TRON stablecoin dashboard — https://defillama.com/stablecoins/tron
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 94.87B TRX |
+| **Total Supply** | 94.87B TRX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $30.66B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $403.50M |
+| **Market Cap Rank** | #8 |
+| **24h Range** | $0.3231 — $0.3283 |
+| **CoinGecko Sentiment** | 33% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

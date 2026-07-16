@@ -2,14 +2,14 @@
 title: "Berachain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["BERA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://berachain.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[hyperliquid]]", "[[fear-and-greed-index]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]"]
 ---
 
 # Berachain
@@ -152,3 +152,110 @@ BERA's ~$64M market cap against a ~$124M FDV embeds a ~0.51 MC/FDV ratio — i.e
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BERA |
+| **Market Cap Rank** | #400 |
+| **Market Cap** | $55.71M |
+| **Current Price** | $0.1863 |
+| **Categories** | Smart Contract Platform, Decentralized Finance (DeFi), Layer 1 (L1), Binance HODLer Airdrops |
+| **Website** | [https://berachain.com/](https://berachain.com/) |
+
+---
+
+## Overview
+
+The gas token of Berachain
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 299.02M BERA |
+| **Total Supply** | 551.37M BERA |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $102.72M |
+| **Market Cap / FDV Ratio** | 0.54 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $14.83 (2025-02-06) |
+| **Current vs ATH** | -98.74% |
+| **All-Time Low** | $0.1823 (2026-07-13) |
+| **Current vs ATL** | +2.13% |
+| **24h Change** | -0.76% |
+| **7d Change** | -6.08% |
+| **30d Change** | -28.61% |
+| **1y Change** | -92.29% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | BERA/TRY | N/A |
+| Kraken | BERA/USD | N/A |
+| Upbit | BERA/KRW | N/A |
+| Bitget | BERA/USDT | N/A |
+| KuCoin | BERA/USDT | N/A |
+| Crypto.com Exchange | BERA/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://berachain.com/](https://berachain.com/) |
+| **Twitter** | [@berachain](https://twitter.com/berachain) |
+| **Discord** | [https://discord.gg/berachain](https://discord.gg/berachain) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $11.18M |
+| **Market Cap Rank** | #400 |
+| **24h Range** | $0.1845 — $0.1942 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

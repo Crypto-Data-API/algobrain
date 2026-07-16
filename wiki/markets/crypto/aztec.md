@@ -2,14 +2,14 @@
 title: "Aztec"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum]
 aliases: ["AZTEC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aztec.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proofs]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[perpetual-futures]]", "[[zero-knowledge-proofs]]"]
 ---
 
 # Aztec
@@ -187,3 +187,131 @@ Context as of 2026-06-23: market-wide **Extreme Fear** (F&G 21), a transitional 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-20 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AZTEC |
+| **Market Cap Rank** | #512 |
+| **Market Cap** | $40.62M |
+| **Current Price** | $0.0139 |
+| **Categories** | Smart Contract Platform, Layer 2 (L2), Privacy Blockchain, CoinList Launchpad |
+| **Website** | [https://aztec.network/](https://aztec.network/) |
+
+---
+
+## Overview
+
+Aztec is the leading privacy-first Layer 2 on Ethereum, empowering developers to build applications that protect user privacy. Backed by a $100M Series B led by a16z, Aztec is led by a team of world-class cryptographers who invented the standard for trustless client-side proving—making privacy-preserving apps possible.
+
+In a landscape where speed and novelty rarely translate into durable moats, Aztec’s sustained traction, deep institutional adoption, and growing ecosystem around privacy-preserving cryptography validate that its work has broken through the “flock,” proving privacy isn’t a feature race but a foundational technology trusted to underpin real, long-term financial infrastructure. 
+
+1. Pioneers of Privacy in Web3
+Aztec's team developed PLONK in 2019, a SNARK-based proving system that is computationally inexpensive and only requires one universal trusted setup. PLONK was a big breakthrough, not just for Aztec, but for the wider blockchain community. Today, PLONK has been implemented and extended by teams like zkSync, Polygon, Mina, and more. There is even an entire category of proving systems called PLONKish that all derive from the original 2019 paper. The foundational cryptography behind modern privacy infrastructure was built by the Aztec team.
+
+2. Noir: The Universal ZK Programming Language
+The Aztec Labs team developed Noir, a Rust-like programming language for writing zero-knowledge circuits that make privacy technology accessible to mainstream developers. With 500+ GitHub projects and recognition as Electric Capital’s top 5 fastest-growing developer ecosystems, Noir is becoming the standard for zk development and is used today by projects across Solana, Stellar, Starkware, and World.
+ 
+3. Drawing Institutional Attention Across Tradfi, Stablecoins, and Real-World Assets 
+JP Morgan was an early institutional tester of Aztec’s technology, with its Quorum blockchain team actively evaluating and experimenting with Aztec as part of its effort to industrial...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.93B AZTEC |
+| **Total Supply** | 10.35B AZTEC |
+| **Max Supply** | 10.35B AZTEC |
+| **Fully Diluted Valuation** | $143.71M |
+| **Market Cap / FDV Ratio** | 0.28 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0399 (2026-02-21) |
+| **Current vs ATH** | -65.20% |
+| **All-Time Low** | $0.0124 (2026-06-30) |
+| **Current vs ATL** | +12.19% |
+| **24h Change** | -0.50% |
+| **7d Change** | +1.73% |
+| **30d Change** | -17.47% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xa27ec0006e59f245217ff08cd52a7e8b169e62d2` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | AZTEC/USD | N/A |
+| Upbit | AZTEC/KRW | N/A |
+| KuCoin | AZTEC/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XA27EC0006E59F245217FF08CD52A7E8B169E62D2/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://aztec.network/](https://aztec.network/) |
+| **Twitter** | [@aztecnetwork](https://twitter.com/aztecnetwork) |
+| **Whitepaper** | [https://docs.aztec.network/](https://docs.aztec.network/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.20M |
+| **Market Cap Rank** | #512 |
+| **24h Range** | $0.0138 — $0.0146 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

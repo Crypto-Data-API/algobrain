@@ -2,14 +2,14 @@
 title: "Zentry"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, gamefi, altcoins]
-aliases: ["ZENT", "GuildFi"]
+tags: [altcoins, crypto, gamefi]
+aliases: ["GuildFi", "ZENT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zentry.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[play-to-earn]]", "[[governance-token]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[play-to-earn]]"]
 ---
 
 # Zentry

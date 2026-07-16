@@ -2,14 +2,14 @@
 title: "Amp"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["AMP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.amp.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-finance]]", "[[collateral]]", "[[stablecoins]]", "[[flexa]]"]
+related: ["[[collateral]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[flexa]]", "[[stablecoins]]"]
 ---
 
 # Amp
@@ -136,3 +136,126 @@ AMP is the odd one out: a *collateral primitive* rather than a price-stable inst
 - (Source: [[coingecko-top-1000-2026-04-09]]) — April 2026 market snapshot
 - CoinGecko / cryptodataapi.com top-1000 snapshot, 2026-06-21 — live market data (price, market cap, supply, ATH/ATL)
 - CoinGecko — Amp (AMP) category tags and project metadata (Pantera Capital portfolio, Alleged SEC Securities, Flexa network)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AMP |
+| **Market Cap Rank** | #525 |
+| **Market Cap** | $38.62M |
+| **Current Price** | $0.00043026 |
+| **Categories** | Decentralized Finance (DeFi), Payment Solutions, Alleged SEC Securities, Made in USA |
+| **Website** | [https://www.amp.xyz](https://www.amp.xyz) |
+
+---
+
+## Overview
+
+What is Amp?
+
+Amp is described as the new digital collateral token offering instant, verifiable assurances for any kind of value transfer. Using Amp, networks like Flexa can quickly and irreversibly secure transactions for a wide variety of asset-related use cases.
+
+How does Amp work?
+
+Amp claims to offer a straightforward but versatile interface for verifiable collateralization through a system of collateral partitions and collateral managers. Where collateral partitions can be designated to collateralize any account, application, or even transaction, and carry balances which are directly verifiable on the Ethereum blockchain, collateral managers are smart contracts that can lock, release, and redirect collateral in these partitions as needed in order to support value transfer activities. Amp supports a wide variety of use cases for collateralization, and also introduces the concept of predefined partition strategies, which can enable special capabilities such as collateral models through which tokens can be staked without ever leaving their original address.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 89.78B AMP |
+| **Total Supply** | 99.72B AMP |
+| **Max Supply** | 100.00B AMP |
+| **Fully Diluted Valuation** | $42.90M |
+| **Market Cap / FDV Ratio** | 0.90 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1208 (2021-06-16) |
+| **Current vs ATH** | -99.64% |
+| **All-Time Low** | $0.00042608 (2026-07-13) |
+| **Current vs ATL** | +1.18% |
+| **24h Change** | -0.04% |
+| **7d Change** | -3.00% |
+| **30d Change** | -20.94% |
+| **1y Change** | -88.79% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xff20817765cb7f73d4bde2e66e067e58d11095c2` |
+| Near Protocol | `ff20817765cb7f73d4bde2e66e067e58d11095c2.factory.bridge.near` |
+| Energi | `0xad7abe6f12f1059bdf48ae67bff92b00438ced95` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | AMP/USDT | N/A |
+| KuCoin | AMP/USDT | N/A |
+| Crypto.com Exchange | AMP/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XFF20817765CB7F73D4BDE2E66E067E58D11095C2/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Sushiswap | 0XFF20817765CB7F73D4BDE2E66E067E58D11095C2/0X6B175474E89094C44DA98B954EEDEAC495271D0F | Spot |
+| Uniswap V3 (Ethereum) | 0XFF20817765CB7F73D4BDE2E66E067E58D11095C2/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.amp.xyz](https://www.amp.xyz) |
+| **Twitter** | [@ampdotxyz](https://twitter.com/ampdotxyz) |
+| **Reddit** | [https://www.reddit.com/r/amptoken/](https://www.reddit.com/r/amptoken/) |
+| **Telegram** | [ampchat](https://t.me/ampchat) (2,810 members) |
+| **Discord** | [https://discord.gg/T4EY6yx](https://discord.gg/T4EY6yx) |
+| **GitHub** | [https://github.com/amptoken](https://github.com/amptoken) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.36M |
+| **Market Cap Rank** | #525 |
+| **24h Range** | $0.00042713 — $0.00043363 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

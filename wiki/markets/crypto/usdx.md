@@ -2,14 +2,14 @@
 title: "USDX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
-aliases: ["USDX", "Kava USDX"]
+aliases: ["Kava USDX", "USDX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.kava.io/overview"
-related: ["[[crypto-markets]]", "[[stablecoin]]", "[[stablecoins]]", "[[dai]]", "[[usdc]]", "[[kava]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dai]]", "[[kava]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # USDX
@@ -112,3 +112,111 @@ USDX sits in the **legacy crypto-collateralized stablecoin** category — the fi
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDX |
+| **Market Cap Rank** | #1542 |
+| **Market Cap** | $5.17M |
+| **Current Price** | $0.00754900 |
+| **Categories** | Stablecoins, USD Stablecoin, Fiat-backed Stablecoin |
+| **Website** | [http://stableslabs.com](http://stableslabs.com) |
+
+---
+
+## Overview
+
+USDX (Website: usdx.money | Twitter: @StablesLabs) is a synthetic USD stablecoin designed to provide stability without relying on traditional banking infrastructure. Backed by delta-neutral positions across multiple exchanges, USDX seamlessly bridges the gap between DeFi, CeFi, and TradFi. It enables DeFi users to access traditional delta-neutral strategies executed in CeFi platforms. As a crypto-native stablecoin, USDX offers a scalable, censorship-resistant, and highly stable solution for users looking to navigate the world of decentralized finance with confidence.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 684.56M USDX |
+| **Total Supply** | 684.56M USDX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $5.17M |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.06 (2024-12-06) |
+| **Current vs ATH** | -99.29% |
+| **All-Time Low** | $0.00726237 (2026-07-08) |
+| **Current vs ATL** | +3.95% |
+| **24h Change** | +0.00% |
+| **7d Change** | +2.04% |
+| **30d Change** | -10.90% |
+| **1y Change** | -99.24% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0xf3527ef8de265eaa3716fb312c12847bfba66cef` |
+| Base | `0xf3527ef8de265eaa3716fb312c12847bfba66cef` |
+| Arbitrum One | `0xf3527ef8de265eaa3716fb312c12847bfba66cef` |
+| Ethereum | `0xf3527ef8de265eaa3716fb312c12847bfba66cef` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [http://stableslabs.com](http://stableslabs.com) |
+| **Twitter** | [@StablesLabs](https://twitter.com/StablesLabs) |
+| **Telegram** | [StablesLabsTG](https://t.me/StablesLabsTG) (16,762 members) |
+| **Discord** | [https://discord.gg/stableslabs](https://discord.gg/stableslabs) |
+| **Whitepaper** | [https://docs.usdx.money/](https://docs.usdx.money/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.14 |
+| **Market Cap Rank** | #1542 |
+| **24h Range** | $0.00754900 — $0.00754900 |
+| **Last Updated** | 2026-07-15 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

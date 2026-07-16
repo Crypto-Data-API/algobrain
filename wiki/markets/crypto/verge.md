@@ -2,7 +2,7 @@
 title: "Verge"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["XVG"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "http://vergecurrency.com/"
-related: ["[[crypto-markets]]", "[[privacy-coins]]", "[[monero]]", "[[verus-coin]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[monero]]", "[[privacy-coins]]", "[[verus-coin]]"]
 ---
 
 # Verge
@@ -160,3 +160,92 @@ Verge's category is **privacy**: it is a [[privacy-coins|privacy coin]] competin
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XVG |
+| **Market Cap Rank** | #563 |
+| **Market Cap** | $34.78M |
+| **Current Price** | $0.00210545 |
+| **Genesis Date** | 2014-10-09 |
+| **Hashing Algorithm** | Scrypt |
+| **Categories** | Smart Contract Platform, Privacy Coins, Proof of Work (PoW), Made in USA, Privacy |
+| **Website** | [http://vergecurrency.com/](http://vergecurrency.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 16.52B XVG |
+| **Total Supply** | 16.55B XVG |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $34.85M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2619 (2017-12-24) |
+| **Current vs ATH** | -99.20% |
+| **All-Time Low** | $0.00000223 (2015-02-06) |
+| **Current vs ATL** | +94185.23% |
+| **24h Change** | -0.48% |
+| **7d Change** | -1.02% |
+| **30d Change** | -23.29% |
+| **1y Change** | -67.73% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | XVG/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [http://vergecurrency.com/](http://vergecurrency.com/) |
+| **Twitter** | [@vergecurrency](https://twitter.com/vergecurrency) |
+| **Reddit** | [https://www.reddit.com/r/vergecurrency](https://www.reddit.com/r/vergecurrency) |
+| **Telegram** | [officialxvg](https://t.me/officialxvg) (2,634 members) |
+| **Discord** | [https://discord.com/invite/vergecurrency](https://discord.com/invite/vergecurrency) |
+| **GitHub** | [https://github.com/vergecurrency/verge](https://github.com/vergecurrency/verge) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.46M |
+| **Market Cap Rank** | #563 |
+| **24h Range** | $0.00210452 — $0.00216691 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

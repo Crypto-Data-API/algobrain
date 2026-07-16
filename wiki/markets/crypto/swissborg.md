@@ -2,7 +2,7 @@
 title: "SwissBorg"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["BORG", "SwissBorg"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Lausanne, Switzerland"
 website: "https://swissborg.com/en/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[cefi]]", "[[staking]]"]
+related: ["[[cefi]]", "[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[staking]]"]
 ---
 
 # SwissBorg
@@ -133,3 +133,129 @@ Relative to exchange-coin peers, BORG's distinguishing features are its **Swiss-
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000): rank #209, $154.25M mcap, $0.157068, 24h -0.12% / 7d -0.68%.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BORG |
+| **Market Cap Rank** | #193 |
+| **Market Cap** | $155.37M |
+| **Current Price** | $0.1583 |
+| **Genesis Date** | 2017-11-01 |
+| **Categories** | CeFi |
+| **Website** | [https://swissborg.com/en/](https://swissborg.com/en/) |
+
+---
+
+## Overview
+
+What is SwissBorg?
+SwissBorg’s flagship product is an all-encompassing crypto management app for retail users. It enables them to on &amp; off ramp, exchange crypto and fiat, earn yield, buy bundles of crypto and access its launchpad investment opportunities. SwissBorg started in the ICO era of 2017 and has over 1 million registered users as of 2024. 
+
+The app’s products range from on/off ramp, CEX &amp; DEX aggregator (MEX), staking and other passive income opportunities (Earn), cryptocurrency bundles (Thematics), and a launchpad &amp; one-time opportunities (Alpha Early Deals) and more. SwissBorg users are also entitled to airdrops if they happen as it’s one the few centralised entities redistributing them directly to their users.
+
+What is BORG?
+BORG is essential to the SwissBorg experience as it unlocks additional utilities in the app. The more BORG users hold in the app, the more benefits they can unlock either through Premium Tiers or ad-hoc campaigns. Benefits include lower exchange fees, higher allocation in launchpads, higher yield on Earn strategies and increased voting power in referendums proposed by SwissBorg. 
+
+When was SwissBorg Founded?
+The project was launched in Switzerland in 2017 and the ICO lasted from Dec 7th, 2017 to January 10th, 2018 where $50 million was raised to kickstart the project. In Q1 2023 SwissBorg performed a Series A, where 16,660 big and small individual investors raised a total of over 21 million Swiss Francs (CHF).
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 981.35M BORG |
+| **Total Supply** | 981.35M BORG |
+| **Max Supply** | 1.00B BORG |
+| **Fully Diluted Valuation** | $155.37M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.64 (2021-05-04) |
+| **Current vs ATH** | -90.35% |
+| **All-Time Low** | $0.00502687 (2019-07-28) |
+| **Current vs ATL** | +3049.27% |
+| **24h Change** | +0.63% |
+| **7d Change** | -2.75% |
+| **30d Change** | -5.79% |
+| **1y Change** | -22.56% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x64d0f55cd8c7133a9d7102b13987235f486f2224` |
+| Solana | `3dQTr7ror2QPKQ3GbBCokJUmjErGg8kTJzdnYjNfvi3Z` |
+| Energi | `0x5666444647f4fd66decf411d69f994b8244ebee3` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | 3DQTR7ROR2QPKQ3GBBCOKJUMJERGG8KTJZDNYJNFVI3Z/SO11111111111111111111111111111111111111112 | Spot |
+| Uniswap V2 (Ethereum) | 0X64D0F55CD8C7133A9D7102B13987235F486F2224/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://swissborg.com/en/](https://swissborg.com/en/) |
+| **Twitter** | [@swissborg](https://twitter.com/swissborg) |
+| **Reddit** | [https://www.reddit.com/r/swissborg/](https://www.reddit.com/r/swissborg/) |
+| **Telegram** | [swissborg](https://t.me/swissborg) (1,026 members) |
+| **GitHub** | [https://github.com/SwissBorg/sbci-token](https://github.com/SwissBorg/sbci-token) |
+| **Whitepaper** | [https://docs.swissborg.com/whitepaper/whitepaper](https://docs.swissborg.com/whitepaper/whitepaper) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 119 |
+| **GitHub Forks** | 26 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $204,182.00 |
+| **Market Cap Rank** | #193 |
+| **24h Range** | $0.1516 — $0.1608 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

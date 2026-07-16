@@ -2,14 +2,14 @@
 title: "Liquity USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, stablecoin]
 aliases: ["LUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[liquity]]", "[[liquity-bold-2]]", "[[stablecoin]]", "[[collateralization]]", "[[cdp]]", "[[depeg]]", "[[defi]]", "[[maker]]"]
+related: ["[[cdp]]", "[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[liquity-bold-2]]", "[[liquity]]", "[[maker]]", "[[stablecoin]]"]
 ---
 
 # Liquity USD

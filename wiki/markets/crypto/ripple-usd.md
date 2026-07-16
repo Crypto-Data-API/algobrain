@@ -2,7 +2,7 @@
 title: "Ripple USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, regulation]
 aliases: ["RLUSD"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Standard Custody & Trust Company (Ripple subsidiary), New York, USA"
 website: "https://ripple.com/solutions/stablecoin/"
-related: ["[[crypto-markets]]", "[[xrp]]", "[[ripple]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[genius-act]]", "[[tokenized-treasuries]]"]
+related: ["[[crypto-markets]]", "[[genius-act]]", "[[ripple]]", "[[stablecoins]]", "[[tokenized-treasuries]]", "[[usdc]]", "[[usdt]]", "[[xrp]]"]
 ---
 
 # Ripple USD
@@ -170,3 +170,79 @@ RLUSD is a **fiat-reserve payment stablecoin** — the most conservative backing
 - [OCC proposes regulatory framework to implement GENIUS Act — Davis Polk](https://www.davispolk.com/insights/client-update/occ-proposes-regulatory-framework-implement-genius-act)
 - [CoinGecko — Ripple USD](https://www.coingecko.com/en/coins/ripple-usd)
 - Web search verification, 2026-06-10
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.07 (2024-12-26) |
+| **Current vs ATH** | -6.78% |
+| **All-Time Low** | $0.9623 (2024-12-18) |
+| **Current vs ATL** | +3.92% |
+| **24h Change** | +0.01% |
+| **7d Change** | +0.02% |
+| **30d Change** | -0.00% |
+| **1y Change** | +0.02% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Xrp
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Xrp | `524C555344000000000000000000000000000000.rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De` |
+| Ethereum | `0x8292bb45bf1ee4d140127049757c2e0ff06317ed` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | RLUSD/USDT | N/A |
+| Kraken | XRP/RLUSD | N/A |
+| Bitget | RLUSD/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X8292BB45BF1EE4D140127049757C2E0FF06317ED/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $78.39M |
+| **Market Cap Rank** | #50 |
+| **24h Range** | $0.9994 — $1.00 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

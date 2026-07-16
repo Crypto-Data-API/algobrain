@@ -2,7 +2,7 @@
 title: "Xphere"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["XP"]
@@ -154,3 +154,89 @@ Context as of 2026-06-23: market-wide **Extreme Fear** (F&G 21), transitional **
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-20 (cryptodataapi.com / CoinGecko bulk endpoints).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XP |
+| **Market Cap Rank** | #435 |
+| **Market Cap** | $49.99M |
+| **Current Price** | $0.0176 |
+| **Categories** | Layer 1 (L1), Proof of Work (PoW) |
+| **Website** | [https://www.x-phere.com/](https://www.x-phere.com/) |
+
+---
+
+## Overview
+
+Xphere revolutionizes blockchain technology by addressing the trilemma of scalability, security, and decentralization through an innovative dual-chain architecture. By combining a PBFT-based Main Chain for efficient and rapid transaction processing with a PoW-based Proof Chain for secure validator selection, Xphere achieves an optimized balance of trust, performance, and decentralization. This ecosystem fosters innovation, accessibility, and sustainability for individuals, developers, and enterprises worldwide.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.85B XP |
+| **Total Supply** | 2.85B XP |
+| **Max Supply** | 5.50B XP |
+| **Fully Diluted Valuation** | $49.99M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0795 (2026-05-16) |
+| **Current vs ATH** | -77.90% |
+| **All-Time Low** | $0.00298093 (2025-12-26) |
+| **Current vs ATL** | +489.51% |
+| **24h Change** | -1.90% |
+| **7d Change** | +29.38% |
+| **30d Change** | -23.84% |
+| **1y Change** | +20.36% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.x-phere.com/](https://www.x-phere.com/) |
+| **Twitter** | [@Xphere_official](https://twitter.com/Xphere_official) |
+| **Telegram** | [Xphere_official](https://t.me/Xphere_official) (43,141 members) |
+| **Whitepaper** | [https://docs.x-phere.com/whitepaper/](https://docs.x-phere.com/whitepaper/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $499,963.00 |
+| **Market Cap Rank** | #435 |
+| **24h Range** | $0.0175 — $0.0179 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

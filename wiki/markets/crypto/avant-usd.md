@@ -2,14 +2,14 @@
 title: "Avant USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["AVUSD", "avUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.avantprotocol.com/"
-related: ["[[stablecoins]]", "[[ethena-usde]]", "[[usde]]", "[[avalanche]]", "[[crypto-markets]]"]
+related: ["[[avalanche]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[stablecoins]]", "[[usde]]"]
 ---
 
 # Avant USD
@@ -128,3 +128,110 @@ avUSD rides the **2024–2026 "yield-bearing dollar" narrative** — the migrati
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - Protocol description from Avant ([https://www.avantprotocol.com/](https://www.avantprotocol.com/)). General market knowledge; no specific wiki source ingested yet for the avUSD/savUSD yield mechanism.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AVUSD |
+| **Market Cap Rank** | #231 |
+| **Market Cap** | $116.14M |
+| **Current Price** | $1.00 |
+| **Categories** | Stablecoins |
+| **Website** | [https://www.avantprotocol.com/](https://www.avantprotocol.com/) |
+
+---
+
+## Overview
+
+Avant is a DeFi platform established in June 2024 with the mission to create a more inclusive financial system through a DeFi-powered stable-value token. The platform introduces avUSD, a stable-value token, and savUSD, its staked, yield-bearing counterpart. 
+
+Mission and Vision
+Avant's mission is to provide a DeFi-backed stable-value token that aligns with the core principles of decentralization: being accessible 24/7, open to everyone, and offering equal financial opportunities regardless of investment size. Avant seeks to bridge the gap between DeFi and traditional finance (TradFi), becoming a global financial powerhouse that innovates how yield is generated and value is stored across financial markets.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 116.01M AVUSD |
+| **Total Supply** | 116.01M AVUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $116.14M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.06 (2026-05-19) |
+| **Current vs ATH** | -5.67% |
+| **All-Time Low** | $0.9517 (2026-04-20) |
+| **Current vs ATL** | +5.18% |
+| **24h Change** | +0.15% |
+| **7d Change** | +0.21% |
+| **30d Change** | +0.08% |
+| **1y Change** | +0.12% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Avalanche
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Avalanche | `0x24de8771bc5ddb3362db529fc3358f2df3a0e346` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.avantprotocol.com/](https://www.avantprotocol.com/) |
+| **Twitter** | [@avantprotocol](https://twitter.com/avantprotocol) |
+| **GitHub** | [https://github.com/Avant-Protocol](https://github.com/Avant-Protocol) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $888.76 |
+| **Market Cap Rank** | #231 |
+| **24h Range** | $0.9976 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[avalanche]]
+
+---

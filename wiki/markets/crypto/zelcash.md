@@ -2,14 +2,14 @@
 title: "Flux"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: good
-tags: [crypto, altcoins, depin]
+tags: [altcoins, crypto, depin]
 aliases: ["FLUX", "ZelCash"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://runonflux.com"
-related: ["[[crypto-markets]]", "[[depin]]", "[[decentralized-storage]]", "[[proof-of-work]]", "[[layer-1]]"]
+related: ["[[crypto-markets]]", "[[decentralized-storage]]", "[[depin]]", "[[layer-1]]", "[[proof-of-work]]"]
 ---
 
 # Flux

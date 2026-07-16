@@ -2,14 +2,14 @@
 title: "Kava"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["KAVA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.kava.io/"
-related: ["[[crypto-markets]]", "[[cosmos]]", "[[ethereum]]", "[[stablecoins]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]"]
 ---
 
 # Kava
@@ -203,3 +203,34 @@ At a ~$51M market cap KAVA is priced as a deeply out-of-favour micro-cap L1, ~99
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | KAVA |
+| **Market Cap Rank** | #441 |
+| **Market Cap** | $48.94M |
+| **Current Price** | $0.0452 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Binance Launchpad, Made in USA |
+| **Website** | [https://www.kava.io/](https://www.kava.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.08B KAVA |
+| **Total Supply** | 1.08B KAVA |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $48.94M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

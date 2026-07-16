@@ -2,7 +2,7 @@
 title: "Verified Emeralds"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["VEREM"]
@@ -131,4 +131,4 @@ Through its decentralized ecosystem, VEREM enables token holders to participate 
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

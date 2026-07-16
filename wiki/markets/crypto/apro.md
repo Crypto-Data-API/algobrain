@@ -2,10 +2,10 @@
 title: "Apro"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, indicators]
-aliases: ["AT", "APRO", "APRO Oracle"]
+tags: [altcoins, crypto, defi, indicators]
+aliases: ["APRO", "APRO Oracle", "AT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.apro.com/"
@@ -237,3 +237,11 @@ Headwinds: entrenched competitors, oracle-specific exploit risk (a single high-p
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Overview
+
+APRO is building a secure platform by combining off-chain processing with on-chain verification, extending both data access and computational capabilities. This forms the foundation of APRO Data Service, improving data accuracy and efficiency while offering the flexibility to create custom solutions tailored to the specific needs of DApp businesses.
+
+APRO Data Service supports two data models—Data Push and Data Pull—that deliver real-time Price Feeds and other essential data services, ensuring comprehensive support for all DApp business scenarios. Currently, we support 161 Price Feed services across 15 major blockchain networks
+
+---

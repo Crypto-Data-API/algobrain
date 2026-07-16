@@ -2,14 +2,14 @@
 title: "Bounce"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["AUCTION", "Bounce Finance", "BounceBit"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bounce.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[launchpad]]", "[[decentralized-finance]]", "[[governance-token]]"]
+related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[governance-token]]", "[[launchpad]]"]
 ---
 
 # Bounce
@@ -247,3 +247,9 @@ This is not investment advice; figures above are point-in-time market data, not 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

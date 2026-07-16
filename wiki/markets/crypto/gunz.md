@@ -2,14 +2,14 @@
 title: "Gunz"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, nft]
+tags: [altcoins, crypto, nft]
 aliases: ["GUN", "GUNZ"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gunbygunz.com/"
-related: ["[[crypto-markets]]", "[[avalanche]]", "[[gamefi]]"]
+related: ["[[avalanche]]", "[[crypto-markets]]", "[[gamefi]]"]
 ---
 
 # Gunz

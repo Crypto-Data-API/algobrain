@@ -2,15 +2,15 @@
 title: "Hedera"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["HBAR", "Hedera Hashgraph"]
 entity_type: protocol
 founded: 2018
 headquarters: "Hedera Council (global); Hashgraph/Swirlds — Texas, USA"
 website: "https://www.hedera.com/"
-related: ["[[crypto-markets]]", "[[avalanche]]", "[[bitcoin-etfs]]", "[[hyperliquid]]", "[[chainlink]]", "[[proof-of-stake]]", "[[layer-1-blockchains]]"]
+related: ["[[avalanche]]", "[[bitcoin-etfs]]", "[[chainlink]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[proof-of-stake]]"]
 ---
 
 # Hedera
@@ -237,3 +237,54 @@ Hedera's edge is **enterprise distribution** (a council of blue-chip corporation
 - [Bitcoin Foundation — Hedera Price Prediction 2026: Institutional Adoption](https://bitcoinfoundation.org/news/altcoins/hedera-hbar-price-prediction-2026/)
 - [Hedera whitepaper](https://hedera.com/wp-content/uploads/2025/12/hh_whitepaper.pdf)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 43.79B HBAR |
+| **Total Supply** | 50.00B HBAR |
+| **Max Supply** | 50.00B HBAR |
+| **Fully Diluted Valuation** | $3.36B |
+| **Market Cap / FDV Ratio** | 0.88 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.5692 (2021-09-15) |
+| **Current vs ATH** | -88.20% |
+| **All-Time Low** | $0.00986111 (2020-01-02) |
+| **Current vs ATL** | +581.07% |
+| **24h Change** | -0.20% |
+| **7d Change** | -5.21% |
+| **30d Change** | -19.75% |
+| **1y Change** | -71.96% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $47.53M |
+| **Market Cap Rank** | #31 |
+| **24h Range** | $0.0669 — $0.0683 |
+| **CoinGecko Sentiment** | 81% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

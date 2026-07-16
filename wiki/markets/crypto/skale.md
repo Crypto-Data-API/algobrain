@@ -2,14 +2,14 @@
 title: "SKALE"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
+tags: [altcoins, crypto, ethereum]
 aliases: ["SKL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://skale.space/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[proof-of-stake]]", "[[sequencer]]", "[[data-availability]]", "[[smart-contracts]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[proof-of-stake]]", "[[sequencer]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # SKALE
@@ -232,3 +232,9 @@ SKALE's positioning is heavily weighted toward **gaming and consumer application
 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — market data snapshot
 - General market knowledge; no other specific wiki source ingested yet. Market figures dated 2026-06-22 are from cryptodataapi.com / CoinGecko (Crypto Fear & Greed Index: 21, Extreme Fear).
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

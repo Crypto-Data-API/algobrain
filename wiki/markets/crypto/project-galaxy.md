@@ -2,14 +2,14 @@
 title: "Galxe (GAL)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, web3]
-aliases: ["GAL", "Galxe", "Project Galaxy", "Gravity", "G"]
+tags: [altcoins, crypto, nft, web3]
+aliases: ["G", "GAL", "Galxe", "Gravity", "Project Galaxy"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://galxe.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-identity]]", "[[web3]]", "[[layer-1]]"]
+related: ["[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[layer-1]]", "[[web3]]"]
 ---
 
 # Galxe (GAL)

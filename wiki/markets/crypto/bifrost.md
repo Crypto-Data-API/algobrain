@@ -2,14 +2,14 @@
 title: "Bifrost Network (BFC)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["BFC", "Bifrost", "Bifrost Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.bifrostnetwork.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]"]
 ---
 
 # Bifrost Network (BFC)

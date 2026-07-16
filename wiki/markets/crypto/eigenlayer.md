@@ -2,14 +2,14 @@
 title: "EigenCloud (prev. EigenLayer)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, restaking, ai-trading]
-aliases: ["EIGEN", "EigenLayer", "EigenCloud"]
+tags: [ai-trading, crypto, restaking]
+aliases: ["EIGEN", "EigenCloud", "EigenLayer"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.eigencloud.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[restaking]]", "[[depin]]", "[[proof-of-stake]]", "[[decentralized-ai]]", "[[hyperliquid]]", "[[lagrange]]", "[[ritual-network]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[hyperliquid]]", "[[lagrange]]", "[[proof-of-stake]]", "[[restaking]]", "[[ritual-network]]"]
 ---
 
 # EigenCloud (prev. EigenLayer)
@@ -128,3 +128,123 @@ EigenLayer's core innovation is **[[restaking]]**: ETH stakers opt into addition
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk top-1000).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | EIGEN |
+| **Market Cap Rank** | #179 |
+| **Market Cap** | $177.29M |
+| **Current Price** | $0.2392 |
+| **Categories** | Artificial Intelligence (AI), Infrastructure, Data Availability, Restaking, AI Framework, Made in USA |
+| **Website** | [https://www.eigencloud.xyz/](https://www.eigencloud.xyz/) |
+
+---
+
+## Overview
+
+EigenCloud is a developer platform that makes any app onchain or offchain provably verifiable. A platform for verifiable apps, services, and AI powered by the EIGEN token.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 741.23M EIGEN |
+| **Total Supply** | 1.82B EIGEN |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $436.17M |
+| **Market Cap / FDV Ratio** | 0.41 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $5.65 (2024-12-17) |
+| **Current vs ATH** | -95.77% |
+| **All-Time Low** | $0.1484 (2026-04-05) |
+| **Current vs ATL** | +61.08% |
+| **24h Change** | +2.40% |
+| **7d Change** | -5.13% |
+| **30d Change** | +8.38% |
+| **1y Change** | -83.50% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xec53bf9167f50cdeb3ae105f56099aaab9061f83` |
+| Base | `0x2081ab0d9ec9e4303234ab26d86b20b3367946ee` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | EIGEN/USDT | N/A |
+| Kraken | EIGEN/USD | N/A |
+| Bitget | EIGEN/USDT | N/A |
+| KuCoin | EIGEN/USDT | N/A |
+| Crypto.com Exchange | EIGEN/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48/0XEC53BF9167F50CDEB3AE105F56099AAAB9061F83 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.eigencloud.xyz/](https://www.eigencloud.xyz/) |
+| **Twitter** | [@eigenlayer](https://twitter.com/eigenlayer) |
+| **Discord** | [https://discord.gg/eigenlayer](https://discord.gg/eigenlayer) |
+| **Whitepaper** | [https://docs.eigenlayer.xyz/eigenlayer/overview/whitepaper](https://docs.eigenlayer.xyz/eigenlayer/overview/whitepaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $30.21M |
+| **Market Cap Rank** | #179 |
+| **24h Range** | $0.2330 — $0.2480 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

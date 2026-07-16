@@ -2,14 +2,14 @@
 title: "Centrifuge"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["CFG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://centrifuge.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[defi]]", "[[plume]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[plume]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # Centrifuge
@@ -144,3 +144,115 @@ Centrifuge differentiates on **originated private credit** (invoices, structured
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | CFG |
+| **Market Cap Rank** | #350 |
+| **Market Cap** | $68.76M |
+| **Current Price** | $0.1808 |
+| **Categories** | Real World Assets (RWA), RWA Protocol, CoinList Launchpad |
+| **Website** | [https://centrifuge.io/](https://centrifuge.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 380.38M CFG |
+| **Total Supply** | 680.00M CFG |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $122.91M |
+| **Market Cap / FDV Ratio** | 0.56 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.4004 (2025-08-24) |
+| **Current vs ATH** | -54.83% |
+| **All-Time Low** | $0.0672 (2026-02-06) |
+| **Current vs ATL** | +169.16% |
+| **24h Change** | +4.48% |
+| **7d Change** | -6.98% |
+| **30d Change** | -18.87% |
+| **1y Change** | -11.22% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xcccccccccc33d538dbc2ee4feab0a7a1ff4e8a94` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | CFG/USDT | N/A |
+| Upbit | CFG/KRW | N/A |
+| KuCoin | CFG/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XCCCCCCCCCC33D538DBC2EE4FEAB0A7A1FF4E8A94/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://centrifuge.io/](https://centrifuge.io/) |
+| **Twitter** | [@centrifuge](https://twitter.com/centrifuge) |
+| **Telegram** | [centrifuge_chat](https://t.me/centrifuge_chat) (9,801 members) |
+| **GitHub** | [https://github.com/centrifuge/](https://github.com/centrifuge/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.64M |
+| **Market Cap Rank** | #350 |
+| **24h Range** | $0.1723 — $0.1877 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

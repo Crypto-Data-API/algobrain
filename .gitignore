@@ -24,6 +24,9 @@ venv/
 .mcp-http.log
 .mcp-http.err.log
 
+# Raw coin-data cache (fetch_crypto_coins.py) — regenerable, not source
+raw/data/crypto-coins/
+
 # OS files
 .DS_Store
 Thumbs.db

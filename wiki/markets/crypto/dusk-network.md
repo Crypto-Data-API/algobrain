@@ -2,14 +2,14 @@
 title: "DUSK"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["DUSK", "Dusk Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dusk.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[real-world-assets]]", "[[staking]]", "[[proof-of-stake]]", "[[zero-knowledge-proofs]]", "[[privacy-coins]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[privacy-coins]]", "[[proof-of-stake]]", "[[real-world-assets]]", "[[staking]]", "[[zero-knowledge-proofs]]"]
 ---
 
 # DUSK
@@ -147,3 +147,129 @@ Among the ~$50M-cap peers, DUSK and [[oasis-network|ROSE]] are the two privacy-o
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko), `raw/data/crypto-loop/coingecko-markets.json`.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DUSK |
+| **Market Cap Rank** | #483 |
+| **Market Cap** | $43.43M |
+| **Current Price** | $0.0732 |
+| **Hashing Algorithm** | Proof of Stake |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Zero Knowledge (ZK), Real World Assets (RWA), Privacy Blockchain |
+| **Website** | [https://dusk.network/](https://dusk.network/) |
+
+---
+
+## Overview
+
+Dusk is a public, permissionless Layer 1 blockchain purpose-built for regulated financial markets. It enables the native issuance, trading, and settlement of real-world assets (RWAs) in full compliance with EU regulations such as MiFID II, MiCA, and the DLT Pilot Regime. Through strategic partnerships - including with NPEX, a Dutch MTF-regulated exchange, and Quantoz, a MiCA-compliant EMI issuing EURQ—Dusk facilitates the creation of secondary markets for digital securities. With privacy-preserving smart contracts, zero-knowledge compliance infrastructure, and institutional custody solutions like Dusk Vault, Dusk provides the complete stack for compliant on-chain finance in Europe.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 593.64M DUSK |
+| **Total Supply** | 593.64M DUSK |
+| **Max Supply** | 1.00B DUSK |
+| **Fully Diluted Valuation** | $43.43M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.09 (2021-12-29) |
+| **Current vs ATH** | -93.28% |
+| **All-Time Low** | $0.0111 (2020-03-13) |
+| **Current vs ATL** | +557.55% |
+| **24h Change** | -2.12% |
+| **7d Change** | -4.40% |
+| **30d Change** | -24.29% |
+| **1y Change** | +7.02% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x940a2db1b7008b6c776d4faaca729d6d4a4aa551` |
+| Binance Smart Chain | `0xb2bd0749dbe21f623d9baba856d3b0f0e1bfec9c` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | DUSK/USDT | N/A |
+| KuCoin | DUSK/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X940A2DB1B7008B6C776D4FAACA729D6D4A4AA551/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://dusk.network/](https://dusk.network/) |
+| **Twitter** | [@DuskFoundation](https://twitter.com/DuskFoundation) |
+| **Reddit** | [https://www.reddit.com/r/DuskNetwork/](https://www.reddit.com/r/DuskNetwork/) |
+| **Telegram** | [DuskNetwork](https://t.me/DuskNetwork) (7,535 members) |
+| **Discord** | [https://discord.gg/dusk-official](https://discord.gg/dusk-official) |
+| **GitHub** | [https://github.com/dusk-network/dusk-blockchain](https://github.com/dusk-network/dusk-blockchain) |
+| **Whitepaper** | [https://dusk-cms.ams3.digitaloceanspaces.com/Dusk_Whitepaper_2024_4db72f92a1.pdf](https://dusk-cms.ams3.digitaloceanspaces.com/Dusk_Whitepaper_2024_4db72f92a1.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 101 |
+| **GitHub Forks** | 48 |
+| **Pull Requests Merged** | 503 |
+| **Contributors** | 14 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.39M |
+| **Market Cap Rank** | #483 |
+| **24h Range** | $0.0731 — $0.0762 |
+| **CoinGecko Sentiment** | 33% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

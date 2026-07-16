@@ -2,7 +2,7 @@
 title: "币安人生 (BinanceLife)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["币安人生"]
@@ -83,6 +83,8 @@ related: ["[[crypto-markets]]", "[[bnb]]"]
 
 | Platform | Link / Metric |
 |---|---|
+| **Twitter** | [@BinanceLife_](https://twitter.com/BinanceLife_) |
+| **Telegram** | [BinanceLife_token](https://t.me/BinanceLife_token) (10,761 members) |
 
 ---
 
@@ -119,4 +121,4 @@ related: ["[[crypto-markets]]", "[[bnb]]"]
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

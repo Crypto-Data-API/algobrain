@@ -2,7 +2,7 @@
 title: "Telcoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["TEL", "Telcoin"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "http://www.telco.in"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polygon]]", "[[stablecoins]]", "[[defi]]", "[[remittances]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[polygon]]", "[[remittances]]", "[[stablecoins]]"]
 ---
 
 # Telcoin
@@ -148,3 +148,141 @@ The narrative ties TEL value to remittance volume and regulated stablecoin adopt
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | TEL |
+| **Market Cap Rank** | #169 |
+| **Market Cap** | $193.09M |
+| **Current Price** | $0.00203033 |
+| **Genesis Date** | 2017-12-11 |
+| **Categories** | Decentralized Finance (DeFi), Layer 1 (L1), Wallets, Payment Solutions, Proof of Stake (PoS), Stablecoin Issuer, Made in USA, Neobank |
+| **Website** | [http://www.telco.in](http://www.telco.in) |
+
+---
+
+## Overview
+
+Telcoin is a multi-national fintech company  integrating blockchain technology, telecommunications, and digital banking to revolutionize global finance. It aims to provide borderless, instant, and affordable financial services to mobile phone users worldwide. Telcoin offers the Telcoin Wallet, a multi-signature DeFi wallet supporting more than 100 digital assets and remittances to eWallets and bank accounts globally. Telcoin is regulated as a Virtual Asset Service Provider in the EU (Lithuania) and Argentina, a Major Payment Institution in Singapore, and a Money Services Business in the US, Canada, and Australia. 
+
+Telcoin is designed to complement telecom, mobile money, and e-wallet partners globally with both traditional fiat and blockchain transaction rails that underpin our fast and affordable digital financial service offerings. Telcoin combines the best parts of the burgeoning DeFi ecosystem with our compliance-focused approach to each market, ensuring that the company takes on a fraction of traditional financial counterparty, execution, and custody risks.
+
+The Telcoin Association is a Swiss non-profit organization domiciled in Lugano, Switzerland and is governed by a decentralized group of Miner Councils that run the various aspects of the Telcoin Platform, including the management of the Telcoin (TEL) token. Read more about the Telcoin Association [here](https://www.telcoin.org).
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 95.08B TEL |
+| **Total Supply** | 100.00B TEL |
+| **Max Supply** | 100.00B TEL |
+| **Fully Diluted Valuation** | $203.08M |
+| **Market Cap / FDV Ratio** | 0.95 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0645 (2021-05-11) |
+| **Current vs ATH** | -96.85% |
+| **All-Time Low** | $0.00006474 (2020-03-13) |
+| **Current vs ATL** | +3037.09% |
+| **24h Change** | -1.56% |
+| **7d Change** | -12.43% |
+| **30d Change** | -20.84% |
+| **1y Change** | -68.84% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x467bccd9d29f223bce8043b84e8c8b282827790f` |
+| Base | `0x09be1692ca16e06f536f0038ff11d1da8524adb1` |
+| Polygon Pos | `0xdf7837de1f2fa4631d716cf2502f8b230f1dcc32` |
+| Arbitrum One | `0x0419e8bfbbb2623728c3a6129090da4ff4e48113` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | TEL/USD | N/A |
+| KuCoin | TEL/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X467BCCD9D29F223BCE8043B84E8C8B282827790F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0X467BCCD9D29F223BCE8043B84E8C8B282827790F/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [http://www.telco.in](http://www.telco.in) |
+| **Twitter** | [@telcoin](https://twitter.com/telcoin) |
+| **Reddit** | [https://www.reddit.com/r/Telcoin/](https://www.reddit.com/r/Telcoin/) |
+| **Telegram** | [Telcoin_Announcements](https://t.me/Telcoin_Announcements) (6,205 members) |
+| **Discord** | [https://discord.com/invite/PMcuZRntNa](https://discord.com/invite/PMcuZRntNa) |
+| **GitHub** | [https://github.com/telcoin/ico](https://github.com/telcoin/ico) |
+| **Whitepaper** | [https://forum.telcoin.org/t/tgip1-establishing-the-telcoin-platform-and-association/135](https://forum.telcoin.org/t/tgip1-establishing-the-telcoin-platform-and-association/135) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 11 |
+| **GitHub Forks** | 3 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $941,912.00 |
+| **Market Cap Rank** | #169 |
+| **24h Range** | $0.00202171 — $0.00209438 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,13 +2,16 @@
 title: "Liquidity Mining"
 type: concept
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, liquidity, yield]
-aliases: ["Liquidity Mining", "LM"]
-related: ["[[yield-farming]]", "[[liquidity-providers]]", "[[liquidity-pools]]", "[[defi]]", "[[airdrop]]"]
+aliases: ["LM", "Liquidity Mining"]
+related: ["[[airdrop]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[liquidity-pools]]", "[[liquidity-providers]]", "[[yield-farming]]"]
 domain: [defi]
 difficulty: intermediate
+entity_type: protocol
+headquarters: "Decentralized"
+website: "https://leisuremeta.io/"
 ---
 
 Liquidity mining is the practice by which a [[defi|DeFi]] protocol distributes its own (usually newly minted) **governance tokens** to users who supply liquidity, in order to bootstrap usage and deposits. An LP not only earns ordinary [[liquidity-pools|pool]] trading fees but also receives a stream of incentive tokens on top, often pushing advertised yields well above what fee income alone would justify. Liquidity mining was the spark of "DeFi Summer" in 2020 and remains the dominant go-to-market tactic for new protocols -- and a textbook case of how token emissions can manufacture impressive-looking yields that mask a transfer of value rather than its creation.
@@ -87,3 +90,104 @@ The industry's response has been mechanisms to make liquidity **sticky** and ali
 ## Sources
 
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LM |
+| **Market Cap Rank** | #2228 |
+| **Market Cap** | $1.99M |
+| **Current Price** | $0.00055695 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1) |
+| **Website** | [https://leisuremeta.io/](https://leisuremeta.io/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 3.57B LM |
+| **Total Supply** | 4.67B LM |
+| **Max Supply** | 5.00B LM |
+| **Fully Diluted Valuation** | $2.60M |
+| **Market Cap / FDV Ratio** | 0.76 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.39 (2023-02-23) |
+| **Current vs ATH** | -99.96% |
+| **All-Time Low** | $0.00055354 (2026-07-16) |
+| **Current vs ATL** | +0.73% |
+| **24h Change** | -1.82% |
+| **7d Change** | -4.05% |
+| **30d Change** | -25.05% |
+| **1y Change** | -79.30% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xc064f4f215b6a1e4e7f39bd8530c4de0fc43ee9d` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://leisuremeta.io/](https://leisuremeta.io/) |
+| **Twitter** | [@LeisureMeta_LM](https://twitter.com/LeisureMeta_LM) |
+| **Telegram** | [LeisureMeta_Official](https://t.me/LeisureMeta_Official) (10,569 members) |
+| **Discord** | [https://discord.gg/leisuremetaofficial](https://discord.gg/leisuremetaofficial) |
+| **GitHub** | [https://github.com/leisuremeta](https://github.com/leisuremeta) |
+| **Whitepaper** | [https://github.com/leisuremeta/whitepaper/blob/main/LM_WP_v3.1_Eng.pdf](https://github.com/leisuremeta/whitepaper/blob/main/LM_WP_v3.1_Eng.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $43,649.00 |
+| **Market Cap Rank** | #2228 |
+| **24h Range** | $0.00055354 — $0.00057710 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

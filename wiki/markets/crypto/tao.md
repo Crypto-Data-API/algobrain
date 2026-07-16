@@ -2,13 +2,13 @@
 title: "TAO (Bittensor)"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: good
 tags: [ai, bittensor, crypto, decentralized-ai, machine-learning]
 entity_type: protocol
 aliases: ["Bittensor", "TAO", "bittensor-tao"]
 website: "https://bittensor.com"
-related: ["[[blockchain]]", "[[crypto-markets]]", "[[proof-of-stake]]", "[[bittensor-subnets]]", "[[ai-agent-tokens]]", "[[defai]]", "[[artificial-intelligence]]", "[[bitcoin]]", "[[ethereum]]", "[[solana]]", "[[hyperliquid]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[bitcoin]]", "[[bittensor-subnets]]", "[[blockchain]]", "[[crypto-markets]]", "[[defai]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[solana]]"]
 headquarters: "Decentralized"
 ---
 

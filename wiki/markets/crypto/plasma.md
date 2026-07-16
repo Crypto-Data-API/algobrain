@@ -2,15 +2,15 @@
 title: "Plasma"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["XPL", "Plasma chain"]
+aliases: ["Plasma chain", "XPL"]
 entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://www.plasma.to/"
-related: ["[[crypto-markets]]", "[[stablecoins]]", "[[tether-limited]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[tether-limited]]"]
 ---
 
 # Plasma
@@ -206,3 +206,54 @@ Within the stablecoin-infrastructure basket, XPL is the highest-liquidity, highe
 - AInvest — "Plasma's XPL Soars on Stablecoin Momentum — But 2026 Unlocks Loom": https://www.ainvest.com/news/plasma-xpl-soars-stablecoin-momentum-2026-unlocks-loom-2509/
 - CoinMarketCap AI updates (May 2026 USDT0 flows, funding data): https://coinmarketcap.com/cmc-ai/plasma-xpl/latest-updates/
 - Verified via web search, 2026-06-10
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | XPL/USDT | N/A |
+| Kraken | XPL/USD | N/A |
+| Upbit | XPL/KRW | N/A |
+| Bitget | XPL/USDT | N/A |
+| KuCoin | XPL/USDT | N/A |
+| Crypto.com Exchange | XPL/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $52.26M |
+| **Market Cap Rank** | #153 |
+| **24h Range** | $0.0849 — $0.0944 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

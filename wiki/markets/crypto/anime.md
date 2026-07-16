@@ -2,14 +2,14 @@
 title: "Animecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["ANIME", "Animecoin"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.anime.xyz/"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[nft]]", "[[azuki]]"]
+related: ["[[arbitrum]]", "[[azuki]]", "[[crypto-markets]]", "[[nft]]"]
 ---
 
 # Animecoin

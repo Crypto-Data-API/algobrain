@@ -2,14 +2,14 @@
 title: "Velodrome Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["VELO", "Velodrome"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://velodrome.finance/"
-related: ["[[crypto-markets]]", "[[optimism]]", "[[decentralized-exchange]]", "[[automated-market-maker]]", "[[ve-tokenomics]]", "[[concentrated-liquidity]]"]
+related: ["[[automated-market-maker]]", "[[concentrated-liquidity]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[optimism]]", "[[ve-tokenomics]]"]
 ---
 
 # Velodrome Finance

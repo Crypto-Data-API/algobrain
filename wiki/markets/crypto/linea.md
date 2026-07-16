@@ -2,14 +2,14 @@
 title: "Linea"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["LINEA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://linea.build/association"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zero-knowledge-proofs]]", "[[consensys]]"]
+related: ["[[consensys]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zero-knowledge-proofs]]"]
 ---
 
 # Linea
@@ -131,3 +131,117 @@ Linea is a ~$62M-cap zkEVM L2 token with a distinctive value-accrual design: it 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoint), `raw/data/crypto-loop/coingecko-markets.json`.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LINEA |
+| **Market Cap Rank** | #384 |
+| **Market Cap** | $59.21M |
+| **Current Price** | $0.00244928 |
+| **Categories** | Smart Contract Platform, Layer 2 (L2), Zero Knowledge (ZK), Binance Alpha Spotlight |
+| **Website** | [https://linea.build/association](https://linea.build/association) |
+
+---
+
+## Overview
+
+Linea is the Layer 2 built from first principles to strengthen Ethereum and the entire ETH economy. Every aspect of its design—from its productive ETH burn mechanics, and capital efficient native yield, to its underlying Ethereum-equivalent zk tech—amplifies the value and utility of Ethereum Mainnet. All of this is backed by the largest ecosystem fund in the space, managed by the most trusted Ethereum builders. With institutional-grade infrastructure, and deep integration across DeFi, Linea is the best chain for ETH capital, where every transaction and every block strengthens Ethereum.
+Linea is where Ethereum wins.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 24.17B LINEA |
+| **Total Supply** | 71.59B LINEA |
+| **Max Supply** | 72.01B LINEA |
+| **Fully Diluted Valuation** | $175.35M |
+| **Market Cap / FDV Ratio** | 0.34 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0467 (2025-09-10) |
+| **Current vs ATH** | -94.75% |
+| **All-Time Low** | $0.00221220 (2026-06-26) |
+| **Current vs ATL** | +10.72% |
+| **24h Change** | -0.90% |
+| **7d Change** | +1.24% |
+| **30d Change** | -5.92% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Linea
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Linea | `0x1789e0043623282d5dcc7f213d703c6d8bafbb04` |
+| Ethereum | `0x1789e0043623282d5dcc7f213d703c6d8bafbb04` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | LINEA/USDT | N/A |
+| Kraken | LINEA/USD | N/A |
+| Upbit | LINEA/KRW | N/A |
+| Bitget | LINEA/USDT | N/A |
+| KuCoin | LINEA/USDT | N/A |
+| Crypto.com Exchange | LINEA/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X1789E0043623282D5DCC7F213D703C6D8BAFBB04/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://linea.build/association](https://linea.build/association) |
+| **Twitter** | [@LineaBuild](https://twitter.com/LineaBuild) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.75M |
+| **Market Cap Rank** | #384 |
+| **24h Range** | $0.00243871 — $0.00251654 |
+| **CoinGecko Sentiment** | 83% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

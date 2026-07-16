@@ -2,15 +2,15 @@
 title: "Energy Web Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
+tags: [altcoins, crypto, defi]
 aliases: ["EWT", "Energy Web"]
 entity_type: protocol
 founded: 2017
 headquarters: "Zug, Switzerland / Decentralized"
 website: "https://www.energyweb.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polkadot]]", "[[depin]]", "[[power-ledger]]", "[[real-world-assets]]", "[[regenerative-finance]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[polkadot]]", "[[power-ledger]]", "[[real-world-assets]]", "[[regenerative-finance]]"]
 ---
 
 # Energy Web Token

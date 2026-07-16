@@ -2,14 +2,14 @@
 title: "Mog Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["MOG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mogcoin.xyz"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[base]]", "[[meme-coins]]", "[[shiba-inu]]", "[[fear-and-greed-index]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[meme-coins]]", "[[shiba-inu]]"]
 ---
 
 # Mog Coin
@@ -206,3 +206,28 @@ MOG trades both **on-chain (DEX)** and on **centralized exchanges**. Because it 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data 2026-06-20 from `raw/data/crypto-loop/category-groups.json` (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MOG |
+| **Market Cap Rank** | #509 |
+| **Market Cap** | $40.75M |
+| **Current Price** | $0.00000010 |
+| **Categories** | Meme, Cat-Themed, Murad Picks, Binance Alpha Spotlight, 4chan-Themed, Base Native |
+| **Website** | [https://www.mogcoin.xyz](https://www.mogcoin.xyz) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 390.56T MOG |
+| **Total Supply** | 390.56T MOG |
+| **Max Supply** | 420.69T MOG |
+| **Fully Diluted Valuation** | $40.75M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

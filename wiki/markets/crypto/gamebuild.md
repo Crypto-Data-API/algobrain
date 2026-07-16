@@ -2,14 +2,14 @@
 title: "GameBuild"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, gamefi, nft]
+tags: [altcoins, crypto, gamefi, nft]
 aliases: ["GAME", "GameBuild"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gamebuild.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]"]
 ---
 
 # GameBuild

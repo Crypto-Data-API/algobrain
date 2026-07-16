@@ -2,14 +2,14 @@
 title: "Loaded Lions"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi]
+tags: [crypto, gamefi, nft]
 aliases: ["LION"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://loadedlions.com/"
-related: ["[[crypto-markets]]", "[[cronos]]", "[[non-fungible-token]]", "[[gamefi]]", "[[solana]]", "[[arbitrum]]", "[[ethereum]]"]
+related: ["[[arbitrum]]", "[[cronos]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]", "[[solana]]"]
 ---
 
 # Loaded Lions
@@ -173,3 +173,86 @@ This is not investment advice; LION is a speculative, illiquid community/GameFi 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-20 (cryptodataapi.com / CoinGecko top-1000).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LION |
+| **Market Cap Rank** | #465 |
+| **Market Cap** | $44.99M |
+| **Current Price** | $0.00147017 |
+| **Categories** | Gaming (GameFi), Meme, Airdropped Tokens by NFT Projects |
+| **Website** | [https://loadedlions.com/](https://loadedlions.com/) |
+
+---
+
+## Overview
+
+Loaded Lions, the flagship NFT collection of Crypto.com has launched their native token, $LION. $LION serves as the financial backbone of the project and the core utility token within the ecosystem. $LION will be available on the Cronos EVM chain at launch, with plans to expand LION to Ethereum, Solana and other ecosystems!
+
+Token holders will be able to stake LION in on-chain vaults and other programmes in the Crypto.com App to receive generous token rewards, special App perks and Loaded Lions: Mane City benefits. In the long run, the token will grant holders governance rights and the ability to participate in decision-making to shape the Loaded Lions ecosystem.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 30.64B LION |
+| **Total Supply** | 100.00B LION |
+| **Max Supply** | 100.00B LION |
+| **Fully Diluted Valuation** | $146.81M |
+| **Market Cap / FDV Ratio** | 0.31 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0316 (2025-08-28) |
+| **Current vs ATH** | -95.35% |
+| **All-Time Low** | $0.00138965 (2026-06-30) |
+| **Current vs ATL** | +5.71% |
+| **24h Change** | -0.17% |
+| **7d Change** | -2.17% |
+| **30d Change** | -11.69% |
+| **1y Change** | -91.35% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | LION/USD | N/A |
+| Crypto.com Exchange | LION/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $20,409.00 |
+| **Market Cap Rank** | #465 |
+| **24h Range** | $0.00146396 — $0.00148867 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

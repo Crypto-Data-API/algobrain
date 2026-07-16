@@ -2,15 +2,15 @@
 title: "Powerledger"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
+tags: [altcoins, crypto, defi]
 aliases: ["POWR", "Power Ledger", "PowerLedger"]
 entity_type: protocol
 founded: 2016
 headquarters: "Perth, Australia / Zug, Switzerland"
 website: "https://powerledger.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[depin]]", "[[energy-web-token]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[energy-web-token]]", "[[ethereum]]", "[[solana]]"]
 ---
 
 # Powerledger

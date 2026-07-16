@@ -2,14 +2,14 @@
 title: "Huma Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, payment-solutions]
 aliases: ["HUMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://huma.finance/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[stablecoins]]", "[[defi]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoins]]"]
 ---
 
 # Huma Finance
@@ -160,3 +160,120 @@ Huma's distinguishing feature is the **payment-receivable** angle: very short du
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21: cryptodataapi.com / CoinGecko top-1000 markets data (`raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | HUMA |
+| **Market Cap Rank** | #534 |
+| **Market Cap** | $37.99M |
+| **Current Price** | $0.0219 |
+| **Categories** | Decentralized Finance (DeFi), Payment Solutions, Binance Alpha Spotlight |
+| **Website** | [https://huma.finance/](https://huma.finance/) |
+
+---
+
+## Overview
+
+Huma Finance is the first PayFi network, powering the financing of global payments with instant access to liquidity - anywhere, anytime. 
+
+Huma Finance enables global payment institutions to settle their payments 24/7 using stablecoins and liquidity on-chain. It powers settlements for a range of PayFi use cases such as cross-border payments, credit cards, trade finance, and enables novel solutions like DePiN financing.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.73B HUMA |
+| **Total Supply** | 10.00B HUMA |
+| **Max Supply** | 10.00B HUMA |
+| **Fully Diluted Valuation** | $219.18M |
+| **Market Cap / FDV Ratio** | 0.17 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1156 (2025-05-26) |
+| **Current vs ATH** | -80.97% |
+| **All-Time Low** | $0.0111 (2026-02-26) |
+| **Current vs ATL** | +98.65% |
+| **24h Change** | -0.29% |
+| **7d Change** | -1.11% |
+| **30d Change** | -11.20% |
+| **1y Change** | -40.59% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `HUMA1821qVDKta3u2ovmfDQeW2fSQouSKE8fkF44wvGw` |
+| Binance Smart Chain | `0x92516e0ddf1ddbf7fab1b79cac26689fdc5ba8e6` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | HUMA/USDT | N/A |
+| Upbit | HUMA/BTC | N/A |
+| Bitget | HUMA/USDT | N/A |
+| KuCoin | HUMA/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://huma.finance/](https://huma.finance/) |
+| **Twitter** | [@humafinance](https://twitter.com/humafinance) |
+| **Discord** | [https://discord.com/invite/aCDxmJqvE2](https://discord.com/invite/aCDxmJqvE2) |
+| **GitHub** | [https://github.com/00labs](https://github.com/00labs) |
+| **Whitepaper** | [https://docs.huma.finance/](https://docs.huma.finance/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.58M |
+| **Market Cap Rank** | #534 |
+| **24h Range** | $0.0216 — $0.0223 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

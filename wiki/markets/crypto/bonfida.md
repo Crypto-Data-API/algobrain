@@ -2,14 +2,14 @@
 title: "Bonfida"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, decentralized-exchange]
-aliases: ["FIDA", "Solana Name Service", "SNS"]
+tags: [crypto, decentralized-exchange, defi]
+aliases: ["FIDA", "SNS", "Solana Name Service"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.bonfida.org/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[decentralized-exchange]]", "[[defi]]", "[[governance-token]]", "[[order-book]]", "[[ftx]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ftx]]", "[[governance-token]]", "[[order-book]]", "[[solana]]"]
 ---
 
 # Bonfida

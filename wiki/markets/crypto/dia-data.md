@@ -2,14 +2,14 @@
 title: "DIA"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, indicators, data-provider]
-aliases: ["DIA", "DIAdata", "DIA Data"]
+tags: [crypto, data-provider, defi, indicators]
+aliases: ["DIA", "DIA Data", "DIAdata"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://diadata.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[chainlink]]", "[[band-protocol]]", "[[defi]]", "[[data-provider]]", "[[real-world-assets]]"]
+related: ["[[band-protocol]]", "[[chainlink]]", "[[crypto-markets]]", "[[data-provider]]", "[[defi]]", "[[ethereum]]", "[[real-world-assets]]"]
 ---
 
 # DIA
@@ -206,3 +206,15 @@ DIA's clearest wedge is **assets the majors under-serve** — newly launched tok
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko); Fear & Greed Index 21 (Extreme Fear).
 - General market knowledge; no specific narrative wiki source ingested yet.
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.03M |
+| **Market Cap Rank** | #1050 |
+| **24h Range** | $0.1024 — $0.1054 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

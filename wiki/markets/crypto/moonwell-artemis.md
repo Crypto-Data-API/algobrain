@@ -2,14 +2,14 @@
 title: "Moonwell"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, lending]
-aliases: ["WELL", "Moonwell Artemis", "Moonwell Apollo"]
+aliases: ["Moonwell Apollo", "Moonwell Artemis", "WELL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://moonwell.fi"
-related: ["[[crypto-markets]]", "[[lending]]", "[[base]]", "[[defi]]", "[[governance-token]]", "[[compound]]", "[[aave]]", "[[liquidity]]"]
+related: ["[[aave]]", "[[base]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[governance-token]]", "[[lending]]", "[[liquidity]]"]
 ---
 
 # Moonwell
@@ -188,3 +188,60 @@ Moonwell's strategy is to win share on a specific high-growth chain (Base) with 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | WELL |
+| **Market Cap Rank** | #920 |
+| **Market Cap** | $16.24M |
+| **Current Price** | $0.00358565 |
+| **Categories** | Decentralized Finance (DeFi), Lending/Borrowing Protocols, Made in USA, Base Native |
+| **Website** | [https://moonwell.fi](https://moonwell.fi) |
+
+---
+
+## Overview
+
+Moonwell Artemis uses battle tested code from the Moonwell Apollo protocol to provide an open, non-custodial lending and borrowing DeFi protocol. While Apollo is a community driven protocol with innovative features, Artemis users will enjoy polished features with faster transaction times, while still preserving the same level of security.
+
+Moonwell’s goal is to be the most user-friendly, fast, and secure DeFi protocol in the ecosystem. With this in mind, an emphasis was placed on having a high standard of security. Multi-signature systems are implemented for all smart contracts used by the protocol, with the expert cyber-security team at Halborn Security auditing all contracts before deployment. Additionally, there is a generous bounty program through a partnership with the trusted team at ImmuneFi, which allows security researchers to submit their findings for review and earn a bounty for discovering security vulnerabilities.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2988 (2022-06-23) |
+| **Current vs ATH** | -98.80% |
+| **All-Time Low** | $0.00298508 (2022-12-21) |
+| **Current vs ATL** | +19.99% |
+| **24h Change** | -0.99% |
+| **7d Change** | -0.39% |
+| **30d Change** | -3.89% |
+| **1y Change** | -89.84% |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 11 |
+| **GitHub Forks** | 11 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $128,181.00 |
+| **Market Cap Rank** | #920 |
+| **24h Range** | $0.00334109 — $0.00366746 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

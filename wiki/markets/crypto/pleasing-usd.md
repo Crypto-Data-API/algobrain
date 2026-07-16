@@ -2,14 +2,14 @@
 title: "Pleasing USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["PUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.pleasinggold.com/"
-related: ["[[crypto-markets]]", "[[arbitrum]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -128,10 +128,10 @@ The model connects:
 ## See Also
 
 - [[crypto-markets]]
-- [[arbitrum]]
+- [[ethereum]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

@@ -2,14 +2,14 @@
 title: "VanEck Treasury Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, real-world-assets, tokenized-treasuries]
 aliases: ["VBILL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://securitize.io/primary-market/vaneck-vbill"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[ethereum]]", "[[ousg]]", "[[buidl]]"]
+related: ["[[buidl]]", "[[crypto-markets]]", "[[ethereum]]", "[[ousg]]", "[[real-world-assets]]", "[[tokenized-treasuries]]"]
 ---
 
 # VanEck Treasury Fund
@@ -144,3 +144,95 @@ VBILL sits in the fast-growing **tokenized Treasuries / tokenized cash** segment
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | VBILL |
+| **Market Cap Rank** | #170 |
+| **Market Cap** | $191.81M |
+| **Current Price** | $1.00 |
+| **Categories** | Real World Assets (RWA) |
+| **Website** | [https://securitize.io/primary-market/vaneck-vbill](https://securitize.io/primary-market/vaneck-vbill) |
+
+---
+
+## Overview
+
+This Fund seeks to offer a stable value of $1 per token and pays daily accrued dividends directly to investors' wallets as new tokens each day. The Fund primarily invests its total assets in cash, U.S. Treasury bills, and repurchase agreements, allowing investors to earn yield while holding the token on the blockchain. 
+ 
+The Fund pursues its investment objective by investing only in cash, U.S. Treasury obligations, which include securities issued or guaranteed by the U.S. Treasury where the payment of principal and interest is backed by the full faith and credit of the U.S. government (“U.S. Treasury Obligations”), and repurchase agreements collateralized by U.S. Treasury Obligations and cash. The Fund will invest in securities with maturities of (or deemed maturities of) 397 days or less and will maintain a dollar-weighted average portfolio maturity of 60 days or less and a dollar-weighted average portfolio life of 120 days or less. 
+
+The Fund may also invest in one or more other pooled investment vehicles managed by third-party investment managers or the Investment Manager or an affiliate thereof that invest in the same types of securities in which the Fund may invest directly (“Underlying Funds”). Underlying Funds may include investment companies registered under the U.S. Investment Company Act of 1940, as amended (the “Investment Company Act”).
+
+The Fund may also invest in or otherwise hold one or more stablecoins and similar yield-bearing digital asset instruments, including in connection with investors that subscribe for Shares (as defined below) in-kind with stablecoins and such instruments instead of U.S. dollars, including subscriptions executed through Atomic Swaps (as defined below), and in connection with processing redemption transactions.
+
+For the purposes of satisfying the Fund’s investment strategy of investing only in cash, U.S. Treasury Obligations and repurchase agreements collateralized by U.S. Treasury Obligations and cash, investments in Under...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 191.81M VBILL |
+| **Total Supply** | 191.81M VBILL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $191.81M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.00 (2025-05-29) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $1.00 (2025-05-29) |
+| **Current vs ATL** | +0.00% |
+| **24h Change** | +0.00% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://securitize.io/primary-market/vaneck-vbill](https://securitize.io/primary-market/vaneck-vbill) |
+| **Twitter** | [@vaneck_us](https://twitter.com/vaneck_us) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #170 |
+| **24h Range** | $1.00 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Infinex"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins]
+tags: [altcoins, crypto, defi]
 aliases: ["INX", "Infinex Patron"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://infinex.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[synthetix]]", "[[cross-chain]]"]
+related: ["[[cross-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[synthetix]]"]
 ---
 
 # Infinex

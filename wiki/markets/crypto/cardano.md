@@ -2,15 +2,15 @@
 title: "Cardano"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ADA"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://cardano.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bitcoin]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[staking]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[staking]]"]
 ---
 
 # Cardano
@@ -289,3 +289,33 @@ ADA competes with other smart-contract L1s but, in practice, trades as a member 
 - The Block: Grayscale Cardano Trust ETF (GADA) live status — https://www.theblock.co/other-etf-live-chart/370988/grayscale-cardano-trust-etf-gada
 - CoinEdition: "Grayscale Cardano ETF (GADA) Approval Delayed by Shutdown" (Oct 2025) — https://coinedition.com/cardano-etf-delay-grayscale-fast-track-gada/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 37.28B ADA |
+| **Total Supply** | 45.00B ADA |
+| **Max Supply** | 45.00B ADA |
+| **Fully Diluted Valuation** | $7.30B |
+| **Market Cap / FDV Ratio** | 0.83 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $298.58M |
+| **Market Cap Rank** | #20 |
+| **24h Range** | $0.1613 — $0.1683 |
+| **CoinGecko Sentiment** | 81% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Lista DAO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin, liquidity]
-aliases: ["LISTA", "Lista", "Helio Protocol"]
+tags: [crypto, defi, liquidity, stablecoin]
+aliases: ["Helio Protocol", "LISTA", "Lista"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lista.org/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[bnb-chain]]", "[[liquid-staking]]", "[[stablecoin]]", "[[defi]]", "[[maker]]", "[[cdp]]", "[[hyperliquid]]"]
+related: ["[[bnb-chain]]", "[[bnb]]", "[[cdp]]", "[[crypto-markets]]", "[[defi]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[maker]]", "[[stablecoin]]"]
 ---
 
 # Lista DAO
@@ -255,3 +255,15 @@ LISTA has solid centralized liquidity for its cap (Binance, Bitget, KuCoin) plus
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; protocol mechanics (slisBNB, lisUSD CDP, Helio rebrand) from public Lista DAO documentation. No additional specific wiki source ingested yet.
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | LISTA/USDT | N/A |
+| Bitget | LISTA/USDT | N/A |
+| KuCoin | LISTA/USDT | N/A |
+
+---

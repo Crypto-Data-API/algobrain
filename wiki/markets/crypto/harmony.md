@@ -2,14 +2,14 @@
 title: "Harmony"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["ONE", "Harmony ONE", "Harmony Protocol"]
+tags: [altcoins, crypto]
+aliases: ["Harmony ONE", "Harmony Protocol", "ONE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://harmony.one/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[staking]]", "[[smart-contracts]]", "[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[ethereum]]", "[[icon]]", "[[iotex]]"]
+related: ["[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[icon]]", "[[iotex]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # Harmony
@@ -222,3 +222,9 @@ At its 2021 peak, Harmony hosted a sizable EVM DeFi ecosystem — DEXes, lending
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko; BTC bear regime, Fear & Greed Index 21 / Extreme Fear).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

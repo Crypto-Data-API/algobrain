@@ -2,7 +2,7 @@
 title: "APEX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["AP3X"]
@@ -83,7 +83,13 @@ and available to users on all blockchain networks within the system.
 
 ## Platform & Chain Information
 
-**Native Chain:** Own blockchain (Layer 1)
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0x9208d82f121806a34a39bb90733b4c5c54f3993e` |
 
 ---
 
@@ -137,4 +143,4 @@ and available to users on all blockchain networks within the system.
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

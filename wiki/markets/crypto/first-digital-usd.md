@@ -2,7 +2,7 @@
 title: "First Digital USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["FDUSD", "First Digital Dollar"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2023
 headquarters: "Hong Kong (issuer: First Digital Trust / FD121 Limited)"
 website: "https://firstdigitallabs.com/"
-related: ["[[crypto-markets]]", "[[stablecoins]]", "[[stablecoin-depegs]]", "[[binance]]", "[[usdc]]", "[[tron]]", "[[ethereum]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[tron]]", "[[usdc]]"]
 ---
 
 # First Digital USD
@@ -171,3 +171,48 @@ See the **Market Data** block above for the single authoritative price/supply/vo
 - CryptoSlate — "FDUSD issuer refutes Justin Sun's insolvency allegations, calls it a smear campaign" — https://cryptoslate.com/fdusd-issuer-refutes-justin-suns-insolvency-allegations-calls-it-a-smear-campaign/
 - First Digital whitepaper — https://firstdigitallabs.com/
 - Perplexity sonar verification (FDUSD depeg timeline, Feb 2025 reserve figures), 2026-06-10.
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.15 (2025-02-03) |
+| **Current vs ATH** | -13.40% |
+| **All-Time Low** | $0.9404 (2024-12-05) |
+| **Current vs ATL** | +6.02% |
+| **24h Change** | -0.02% |
+| **7d Change** | -0.00% |
+| **30d Change** | -0.13% |
+| **1y Change** | -0.10% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $87.19M |
+| **Market Cap Rank** | #122 |
+| **24h Range** | $0.9956 — $0.9983 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

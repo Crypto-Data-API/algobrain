@@ -2,14 +2,14 @@
 title: "ChainGPT"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading, machine-learning, nft]
+tags: [ai-trading, altcoins, crypto, machine-learning, nft]
 aliases: ["CGPT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.chaingpt.org/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[artificial-intelligence]]", "[[ai-trading]]", "[[machine-learning]]"]
+related: ["[[ai-trading]]", "[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]", "[[machine-learning]]"]
 ---
 
 # ChainGPT

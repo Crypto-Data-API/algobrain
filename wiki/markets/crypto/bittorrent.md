@@ -2,7 +2,7 @@
 title: "BitTorrent (BTT)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, regulation]
 aliases: ["BTT", "BTTC", "BitTorrent Chain"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Decentralized (Tron ecosystem; BitTorrent Inc. acquired by Tron 2018)"
 website: "https://www.bittorrent.com/btt/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[justin-sun]]", "[[apenft]]", "[[binance]]", "[[depin]]", "[[layer-1]]"]
+related: ["[[apenft]]", "[[binance]]", "[[crypto-markets]]", "[[depin]]", "[[justin-sun]]", "[[layer-1]]", "[[tron]]"]
 ---
 
 # BitTorrent (BTT)
@@ -176,3 +176,64 @@ Unlike most tokens in this batch, BTT has **no dilution overhang** — circulati
 - Kraken BTT price page: https://www.kraken.com/prices/bittorrent
 - SEC v. Sun background: SEC complaint, March 2023; stay order, February 2025 (widely reported)
 - Perplexity verification (market cap ~$180-270M, rank ~#140), 2026-06-10
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | BTTC/TRY | N/A |
+| Kraken | BTT/USD | N/A |
+| Upbit | BTT/KRW | N/A |
+| Bitget | BTT/USDT | N/A |
+| KuCoin | BTT/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XC669928185DBCE49D2230CC9B0979BE6DC797957/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 439 |
+| **GitHub Forks** | 108 |
+| **Pull Requests Merged** | 47 |
+| **Contributors** | 21 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.39M |
+| **Market Cap Rank** | #139 |
+| **24h Range** | $0.00000027 — $0.00000027 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

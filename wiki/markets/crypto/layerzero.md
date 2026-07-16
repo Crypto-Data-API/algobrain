@@ -2,15 +2,15 @@
 title: "LayerZero"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["ZRO", "LayerZero Labs"]
+aliases: ["LayerZero Labs", "ZRO"]
 entity_type: protocol
 founded: 2021
 headquarters: "Vancouver, Canada (LayerZero Labs)"
 website: "https://layerzero.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stargate-finance]]", "[[wormhole]]", "[[hyperliquid]]", "[[base]]", "[[arbitrum]]"]
+related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[stargate-finance]]", "[[wormhole]]"]
 ---
 
 # LayerZero
@@ -173,3 +173,75 @@ LayerZero is unusual among small/mid-caps in having an explicit fee-to-token lin
 - [DL News — LayerZero pips rivals to $110M Stargate acquisition](https://www.dlnews.com/articles/defi/layerzero-pips-rivals-110m-stargate-deal-dao-dissolves/)
 - [LayerZero blog — Understanding ZRO buybacks](https://layerzero.network/blog/understanding-zro-buybacks)
 - Perplexity sonar verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 353.31M ZRO |
+| **Total Supply** | 1.00B ZRO |
+| **Max Supply** | 1.00B ZRO |
+| **Fully Diluted Valuation** | $809.59M |
+| **Market Cap / FDV Ratio** | 0.35 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $7.47 (2024-12-06) |
+| **Current vs ATH** | -89.18% |
+| **All-Time Low** | $0.7356 (2026-06-28) |
+| **Current vs ATL** | +9.96% |
+| **24h Change** | -5.75% |
+| **7d Change** | -12.86% |
+| **30d Change** | -28.75% |
+| **1y Change** | -63.56% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ZRO/USDT | N/A |
+| Kraken | ZRO/USD | N/A |
+| Upbit | ZRO/KRW | N/A |
+| Bitget | ZRO/USDT | N/A |
+| KuCoin | ZRO/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X6985884C4392D348587B19CB9EAAF157F13271CD/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $27.21M |
+| **Market Cap Rank** | #136 |
+| **24h Range** | $0.8059 — $0.8777 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

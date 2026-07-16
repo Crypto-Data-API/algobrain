@@ -2,7 +2,7 @@
 title: "Aave"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["AAVE", "Aave Protocol", "ETHLend"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (Aave Labs: London, UK)"
 website: "https://aave.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gho]]", "[[defi]]", "[[stablecoins]]", "[[hyperliquid]]", "[[ml-defi-risk-models]]", "[[defai]]", "[[ai-finance]]", "[[artificial-intelligence]]", "[[compound-governance-token]]", "[[morpho]]", "[[decentralized-exchange]]", "[[layer-2]]", "[[arbitrum]]", "[[sky]]", "[[ethena]]"]
+related: ["[[ai-finance]]", "[[arbitrum]]", "[[artificial-intelligence]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defai]]", "[[defi]]", "[[ethena]]", "[[ethereum]]", "[[gho]]", "[[hyperliquid]]", "[[layer-2]]", "[[ml-defi-risk-models]]", "[[morpho]]", "[[sky]]", "[[stablecoins]]"]
 ---
 
 # Aave
@@ -271,3 +271,105 @@ Aave's moat is liquidity depth and the network effect of being the default DeFi 
 - [CoinGecko — Aave](https://www.coingecko.com/en/coins/aave)
 - [CoinMarketCap — Aave](https://coinmarketcap.com/currencies/aave/)
 - Perplexity sonar verification, 2026-06-10 (market cap ~$938–960M, TVL ~$12.43B, UK FCA approval)
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 15.18M AAVE |
+| **Total Supply** | 16.00M AAVE |
+| **Max Supply** | 16.00M AAVE |
+| **Fully Diluted Valuation** | $1.51B |
+| **Market Cap / FDV Ratio** | 0.95 |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9` |
+| Solana | `AavE1kKKnesPw4MuRJmJ9jZs9QzEE8CPxQ3ViczUDfc1` |
+| Base | `0x63706e401c06ac8513145b7687a14804d17f814b` |
+| Hydration | `asset_registry%2F1000624` |
+| Harmony Shard 0 | `0xcf323aad9e522b93f11c352caa519ad0e14eb40f` |
+| Huobi Token | `0x202b4936fe1a82a4965220860ae46d7d3939bb25` |
+| Fantom | `0x6a07a792ab2965c72a5b8088d3a069a7ac3a993b` |
+| Near Protocol | `7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9.factory.bridge.near` |
+| Energi | `0xa7f2f790355e0c32cab03f92f6eb7f488e6f049a` |
+| Sora | `0x0091bd8d8295b25cab5a7b8b0e44498e678cfc15d872ede3215f7d4c7635ba36` |
+| Polygon Pos | `0xd6df932a45c0f255f85145f286ea0b292b21c90b` |
+| Binance Smart Chain | `0xfb6115445bff7b52feb98650c87f44907e58f802` |
+| Arbitrum One | `0xba5ddd1f9d7f570dc94a51479a000e3bce967196` |
+| Optimistic Ethereum | `0x76fb31fb4af56892a25e32cfc43de717950c9278` |
+| Avalanche | `0x63a72806098bd3d9520cc43356dd78afe5d386d9` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | AAVE/USDT | N/A |
+| Kraken | AAVE/USD | N/A |
+| Upbit | AAVE/KRW | N/A |
+| Bitget | AAVE/USDT | N/A |
+| KuCoin | AAVE/USDT | N/A |
+| Crypto.com Exchange | AAVE/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Balancer V2 | 0X7F39C581F595B53C5CB19BD0B3F8DA6C935E2CA0/0X7FC66500C84A76AD7E9C93437BFC5AC33E2DDAE9 | Spot |
+| Uniswap V3 (Ethereum) | 0X7FC66500C84A76AD7E9C93437BFC5AC33E2DDAE9/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 1,439 |
+| **GitHub Forks** | 592 |
+| **Pull Requests Merged** | 4 |
+| **Contributors** | 2 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $195.08M |
+| **Market Cap Rank** | #53 |
+| **24h Range** | $93.75 — $99.64 |
+| **CoinGecko Sentiment** | 86% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

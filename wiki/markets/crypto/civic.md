@@ -2,15 +2,15 @@
 title: "Civic"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["CVC"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://www.civic.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[decentralized-identity]]", "[[worldcoin]]", "[[kyc]]"]
+related: ["[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[kyc]]", "[[solana]]", "[[worldcoin]]"]
 ---
 
 # Civic

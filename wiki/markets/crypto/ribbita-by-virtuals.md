@@ -2,14 +2,14 @@
 title: "Ribbita by Virtuals"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-agents, artificial-intelligence]
+tags: [ai-agents, artificial-intelligence, crypto]
 aliases: ["TIBBIR", "Tibbir"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.virtuals.io/virtuals/18820"
-related: ["[[crypto-markets]]", "[[base]]", "[[ai-agents]]", "[[virtuals-protocol]]", "[[ai-agent-tokens]]", "[[defai]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[base]]", "[[crypto-markets]]", "[[defai]]", "[[virtuals-protocol]]"]
 ---
 
 # Ribbita by Virtuals
@@ -125,3 +125,106 @@ This is not investment advice; TIBBIR is a speculative AI-meme token.
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | TIBBIR |
+| **Market Cap Rank** | #241 |
+| **Market Cap** | $113.01M |
+| **Current Price** | $0.1130 |
+| **Categories** | Meme, AI Meme, DeFAI, Base Native |
+| **Website** | [https://app.virtuals.io/virtuals/18820](https://app.virtuals.io/virtuals/18820) |
+
+---
+
+## Overview
+
+Tibbir is a stealth-launched cryptocurrency project that aims to enhance efficiency and security within the crypto and artificial intelligence (AI) sectors. The project is closely associated with Ribbit Capital, a venture capital firm known for its investments in innovative financial technologies.
+
+As a key partner in the Agentic Finance Hackathon, Tibbir contributed to the development of new initiatives in the crypto and AI domains. 
+
+While specific details about Tibbir's technology and roadmap remain limited due to its stealth status, the project has generated interest within the crypto community, with discussions focusing on its potential to shape the future of decentralized finance and AI integration. 
+
+As Tibbir progresses, stakeholders and enthusiasts are encouraged to monitor official channels for updates and further information about the project's developments and objectives.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 999.90M TIBBIR |
+| **Total Supply** | 999.90M TIBBIR |
+| **Max Supply** | 1.00B TIBBIR |
+| **Fully Diluted Valuation** | $113.01M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.4400 (2025-10-28) |
+| **Current vs ATH** | -74.41% |
+| **All-Time Low** | $0.0103 (2025-04-07) |
+| **Current vs ATL** | +990.95% |
+| **24h Change** | -1.69% |
+| **7d Change** | +7.91% |
+| **30d Change** | -11.24% |
+| **1y Change** | +42.44% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0xa4a2e2ca3fbfe21aed83471d28b6f65a233c6e00` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://app.virtuals.io/virtuals/18820](https://app.virtuals.io/virtuals/18820) |
+| **Twitter** | [@ribbita2012](https://twitter.com/ribbita2012) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.13M |
+| **Market Cap Rank** | #241 |
+| **24h Range** | $0.1064 — $0.1190 |
+| **CoinGecko Sentiment** | 67% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

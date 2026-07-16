@@ -2,14 +2,14 @@
 title: "aixbt"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, machine-learning]
+tags: [ai-trading, crypto, machine-learning]
 aliases: ["AIXBT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aixbt.tech"
-related: ["[[crypto-markets]]", "[[base]]", "[[ai-agents]]", "[[ai-agent-tokens]]", "[[ai-trading-agents]]", "[[defai]]", "[[artificial-intelligence]]", "[[virtuals-protocol]]", "[[griffain]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[ai-trading-agents]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[defai]]", "[[griffain]]", "[[virtuals-protocol]]"]
 ---
 
 # aixbt

@@ -2,7 +2,7 @@
 title: "Algorand"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ALGO"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Boston, USA (Algorand Foundation: Singapore)"
 website: "https://algorand.co/"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[ethereum]]", "[[solana]]", "[[l1-l2-rotation]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[real-world-assets]]", "[[solana]]"]
 ---
 
 # Algorand
@@ -307,3 +307,33 @@ Algorand's edge: **instant finality, no slashing, native RWA primitives (ASAs), 
 - Algorand, "2025 on Algorand: Roadmap progress" — https://algorand.co/blog/2025-on-algorand-roadmap-progress
 - Messari, "Algorand Q3 2025 Brief" — https://messari.io/report/algorand-q3-2025-brief
 - Web verification (WebSearch + Perplexity), 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 8.97B ALGO |
+| **Total Supply** | 8.97B ALGO |
+| **Max Supply** | 10.00B ALGO |
+| **Fully Diluted Valuation** | $746.26M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

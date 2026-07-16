@@ -2,15 +2,15 @@
 title: "Stellar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
-aliases: ["XLM", "Stellar Lumens"]
+tags: [altcoins, crypto, defi]
+aliases: ["Stellar Lumens", "XLM"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized (Stellar Development Foundation, San Francisco)"
 website: "https://www.stellar.org/"
-related: ["[[crypto-markets]]", "[[ripple]]", "[[bitcoin]]", "[[hyperliquid]]", "[[stablecoins]]", "[[treasuries]]", "[[narrative-trading]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[ripple]]", "[[stablecoins]]", "[[treasuries]]"]
 ---
 
 # Stellar
@@ -314,3 +314,27 @@ Against the broader **payments-stablecoin L1** field, Stellar competes with fast
 - Blockchain.News — "Stellar (XLM) Surges Amid Protocol 23 Upgrade and Major Partnerships" (2025-07-18): https://blockchain.news/news/20250718-stellar-xlm-surges-amid-protocol-23-upgrade-and-major-partnerships-whats-next
 - CCN — "Meet Stellar: How XLM Is Quietly Driving Global Payments": https://www.ccn.com/education/crypto/meet-stellar-xlm-global-payments/
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 34.19B XLM |
+| **Total Supply** | 50.00B XLM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $9.44B |
+| **Market Cap / FDV Ratio** | 0.68 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

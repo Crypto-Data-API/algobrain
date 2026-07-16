@@ -2,14 +2,14 @@
 title: "Radix"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
+tags: [altcoins, crypto, defi]
 aliases: ["XRD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.radixdlt.com/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[consensus-mechanism]]", "[[ethereum]]", "[[casper-network]]", "[[icon]]"]
+related: ["[[casper-network]]", "[[consensus-mechanism]]", "[[crypto-markets]]", "[[ethereum]]", "[[icon]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # Radix

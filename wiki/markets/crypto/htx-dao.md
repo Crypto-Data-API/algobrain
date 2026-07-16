@@ -2,7 +2,7 @@
 title: "HTX DAO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, exchange]
 aliases: ["HTX", "HTX Token"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2023
 headquarters: "Decentralized (HTX exchange: Seychelles)"
 website: "https://www.htxdao.com/en-us/"
-related: ["[[crypto-markets]]", "[[tron]]", "[[huobi-token]]", "[[okb]]", "[[exchange-tokens]]", "[[bnb]]", "[[binance]]"]
+related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[exchange-tokens]]", "[[huobi-token]]", "[[okb]]", "[[tron]]"]
 ---
 
 # HTX DAO
@@ -172,3 +172,103 @@ HTX is the dominant token of this batch by an order of magnitude on market cap, 
 - [HTX DAO's Spring Governance and Token Burn Strategy — Intellectia](https://intellectia.ai/news/crypto/htx-daos-spring-governance-and-token-burn-strategy)
 - [HTX Ventures and HTX DAO at Consensus 2026 Hong Kong — PR Newswire, 2026-02-14](http://www.prnewswire.com/news-releases/shining-in-hong-kong-htx-ventures-and-htx-dao-attend-consensus-2026-advancing-a-sustainable-web3-ecosystem-302688250.html)
 - Web search verification, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | HTX |
+| **Market Cap Rank** | #48 |
+| **Market Cap** | $1.62B |
+| **Current Price** | $0.00000180 |
+| **Categories** | Exchange-based Tokens, Centralized Exchange (CEX) Token |
+| **Website** | [http://www.htxdao.com/en-us/](http://www.htxdao.com/en-us/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 898.23T HTX |
+| **Total Supply** | 898.23T HTX |
+| **Max Supply** | 999.99T HTX |
+| **Fully Diluted Valuation** | $1.62B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.00000375 (2024-12-04) |
+| **Current vs ATH** | -51.93% |
+| **All-Time Low** | $0.00000080 (2024-08-05) |
+| **Current vs ATL** | +125.17% |
+| **24h Change** | -1.05% |
+| **7d Change** | -2.92% |
+| **30d Change** | +6.01% |
+| **1y Change** | -3.53% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Tron
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Tron | `TUPM7K8REVzD2UdV4R5fe5M8XbnR2DdoJ6` |
+| Ethereum | `0x61ec85ab89377db65762e234c946b5c25a56e99e` |
+| Binance Smart Chain | `0x61ec85ab89377db65762e234c946b5c25a56e99e` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| KuCoin | HTX/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X61EC85AB89377DB65762E234C946B5C25A56E99E/0X50327C6C5A14DCADE707ABAD2E27EB517DF87AB5 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $70.91M |
+| **Market Cap Rank** | #48 |
+| **24h Range** | $0.00000180 — $0.00000182 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

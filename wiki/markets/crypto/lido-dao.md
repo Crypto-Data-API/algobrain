@@ -2,7 +2,7 @@
 title: "Lido DAO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["LDO", "Lido", "stETH issuer"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://lido.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]", "[[eigenlayer]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[restaking]]"]
 ---
 
 # Lido DAO
@@ -190,3 +190,58 @@ At ~$234M LDO is priced ~96% below its 2021 peak and trades as a **levered, weak
 - Lido V3 whitepaper: https://docs.lido.fi/lido-v3-whitepaper/
 - CoinGecko — Lido DAO: https://www.coingecko.com/en/coins/lido-dao (June 2026 market data; April 2026 snapshot from CoinGecko top-1000 export 2026-04-09)
 - Perplexity verification 2026-06-10 (sonar; stETH share ~23–28% of staked ETH)
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 836.36M LDO |
+| **Total Supply** | 1.00B LDO |
+| **Max Supply** | 1.00B LDO |
+| **Fully Diluted Valuation** | $364.64M |
+| **Market Cap / FDV Ratio** | 0.84 |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 486 |
+| **GitHub Forks** | 282 |
+| **Commits (4 weeks)** | 29 |
+| **Pull Requests Merged** | 1,210 |
+| **Contributors** | 59 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $57.95M |
+| **Market Cap Rank** | #132 |
+| **24h Range** | $0.3265 — $0.3720 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

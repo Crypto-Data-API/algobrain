@@ -2,10 +2,10 @@
 title: "Constellation"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["DAG", "Constellation Network", "Constellation Labs"]
+tags: [altcoins, crypto]
+aliases: ["Constellation Labs", "Constellation Network", "DAG"]
 entity_type: protocol
 headquarters: "United States"
 website: "https://constellationnetwork.io/"

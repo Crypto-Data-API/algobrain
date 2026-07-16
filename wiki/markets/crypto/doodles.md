@@ -1,8 +1,8 @@
 ---
 title: "Doodles"
 type: entity
-created: 2026-04-09
-updated: 2026-06-12
+created: 2026-07-16
+updated: 2026-07-16
 status: draft
 tags: [crypto, nft]
 aliases: ["DOOD"]
@@ -12,13 +12,11 @@ website: "https://www.doodles.app/"
 related: ["[[crypto-markets]]", "[[solana]]"]
 ---
 
-> *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
-
 # Doodles
 
 **Doodles** (DOOD) is a next-generation entertainment company focused on immersive storytelling through the creation and distribution of live and digital experiences, original content, and lifestyle products.
 
-Doodles mission is to define the standard for immersive storytelling and color the world with joy. It ranks **#760** by market capitalization.
+Doodles mission is to define the standard for immersive storytelling and color the world with joy. It ranks **#1107** by market capitalization.
 
 ---
 
@@ -27,9 +25,9 @@ Doodles mission is to define the standard for immersive storytelling and color t
 | Field | Detail |
 |---|---|
 | **Ticker** | DOOD |
-| **Market Cap Rank** | #760 |
-| **Market Cap** | $23.19M |
-| **Current Price** | $0.00297577 |
+| **Market Cap Rank** | #1107 |
+| **Market Cap** | $11.12M |
+| **Current Price** | $0.00142599 |
 | **Categories** | Entertainment, NFT, Doodles LLC, Airdropped Tokens by NFT Projects, Binance Alpha Spotlight, Made in USA |
 | **Website** | [https://www.doodles.app/](https://www.doodles.app/) |
 
@@ -50,7 +48,7 @@ Doodles mission is to define the standard for immersive storytelling and color t
 | **Circulating Supply** | 7.80B DOOD |
 | **Total Supply** | 10.00B DOOD |
 | **Max Supply** | 10.00B DOOD |
-| **Fully Diluted Valuation** | $29.73M |
+| **Fully Diluted Valuation** | $14.26M |
 | **Market Cap / FDV Ratio** | 0.78 |
 
 ---
@@ -60,13 +58,13 @@ Doodles mission is to define the standard for immersive storytelling and color t
 | Metric | Value |
 |---|---|
 | **All-Time High** | $0.0175 (2025-10-07) |
-| **Current vs ATH** | -83.03% |
-| **All-Time Low** | $0.00204546 (2025-06-22) |
-| **Current vs ATL** | +45.44% |
-| **24h Change** | -1.55% |
-| **7d Change** | +1.42% |
-| **30d Change** | +4.25% |
-| **1y Change** | +0.00% |
+| **Current vs ATH** | -91.86% |
+| **All-Time Low** | $0.00131321 (2026-06-25) |
+| **Current vs ATL** | +8.74% |
+| **24h Change** | -2.70% |
+| **7d Change** | -2.76% |
+| **30d Change** | -7.35% |
+| **1y Change** | -66.12% |
 
 ---
 
@@ -98,8 +96,7 @@ Doodles mission is to define the standard for immersive storytelling and color t
 
 | Exchange | Pair | Type |
 |---|---|---|
-| [[hyperliquid|Hyperliquid]] | DOOD-PERP | Perpetual |
-| Orca | DVJBESDCA43OQCW2H3HW1CT7N3X5VRCR3QRVTUHNXVGV/SO11111111111111111111111111111111111111112 | Spot |
+| Orca | DVJBESDCA43OQCW2H3HW1CT7N3X5VRCR3QRVTUHNXVGV/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
 
 ---
 
@@ -116,11 +113,11 @@ Doodles mission is to define the standard for immersive storytelling and color t
 
 | Characteristic | Detail |
 |---|---|
-| **24h Volume** | $9.20M |
-| **Market Cap Rank** | #760 |
-| **24h Range** | $0.00296755 — $0.00308386 |
-| **CoinGecko Sentiment** | 100% positive |
-| **Last Updated** | 2026-04-09 |
+| **24h Volume** | $6.87M |
+| **Market Cap Rank** | #1107 |
+| **24h Range** | $0.00142092 — $0.00149094 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
 
 ---
 
@@ -145,4 +142,4 @@ Doodles mission is to define the standard for immersive storytelling and color t
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

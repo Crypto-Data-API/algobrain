@@ -2,14 +2,14 @@
 title: "Zora"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, defi]
+tags: [crypto, defi, nft]
 aliases: ["ZORA", "Zora Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zora.co/"
-related: ["[[crypto-markets]]", "[[base]]", "[[blur]]", "[[opensea]]", "[[ethereum]]"]
+related: ["[[base]]", "[[blur]]", "[[crypto-markets]]", "[[ethereum]]", "[[opensea]]"]
 ---
 
 # Zora

@@ -2,7 +2,7 @@
 title: "WhiteBIT Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, exchange]
 aliases: ["WBT", "WhiteBIT Token"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Europe (founded in Ukraine)"
 website: "https://whitebit.com/wbt"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[tron]]", "[[binance]]", "[[leo-token]]", "[[exchange-tokens]]", "[[binance-coin]]", "[[mx-token]]", "[[hype]]"]
+related: ["[[binance-coin]]", "[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hype]]", "[[leo-token]]", "[[mx-token]]", "[[tron]]"]
 ---
 
 # WhiteBIT Coin
@@ -207,3 +207,34 @@ Trading competitions, airdrops, bounties, beneficial holding programs, and acces
 - crypto.news: "WhiteBIT Coin rallies 8% after FC Barcelona partnership" — https://crypto.news/whitebit-coin-rallies-8-after-fc-barcelona-partnership-more-gains-incoming/
 - 99Bitcoins: "Juventus WhiteBIT Deal Details, WBT Surges 30%" — https://99bitcoins.com/news/altcoins/everything-to-know-about-the-new-juventus-crypto-deal/
 - Verified via Perplexity (sonar) + web search, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | WBT |
+| **Market Cap Rank** | #16 |
+| **Market Cap** | $6.63B |
+| **Current Price** | $56.16 |
+| **Categories** | Exchange-based Tokens, Centralized Exchange (CEX) Token |
+| **Website** | [https://whitebit.com/wbt](https://whitebit.com/wbt) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 117.96M WBT |
+| **Total Supply** | 293.86M WBT |
+| **Max Supply** | 400.00M WBT |
+| **Fully Diluted Valuation** | $16.50B |
+| **Market Cap / FDV Ratio** | 0.40 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

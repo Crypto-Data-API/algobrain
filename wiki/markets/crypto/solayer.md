@@ -2,14 +2,14 @@
 title: "Solayer"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, nft]
 aliases: ["LAYER", "sSOL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://solayer.org/network"
-related: ["[[crypto-markets]]", "[[solana]]", "[[restaking]]", "[[liquid-staking]]", "[[liquid-restaking]]", "[[eigenlayer]]", "[[depeg]]", "[[slashing]]", "[[smart-contract-risk]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[solana]]"]
 ---
 
 # Solayer

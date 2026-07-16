@@ -2,14 +2,14 @@
 title: "Chia"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["XCH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.chia.net/"
-related: ["[[crypto-markets]]", "[[bitcoin]]", "[[layer-1]]", "[[proof-of-work]]", "[[proof-of-space]]", "[[depin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[depin]]", "[[layer-1]]", "[[proof-of-space]]", "[[proof-of-work]]"]
 ---
 
 # Chia
@@ -131,3 +131,107 @@ Chia is best understood as a **once-hyped L1 now trading near liquidation value*
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko bulk snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | XCH |
+| **Market Cap Rank** | #673 |
+| **Market Cap** | $27.53M |
+| **Current Price** | $1.47 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), DePIN, Made in USA |
+| **Website** | [https://www.chia.net/](https://www.chia.net/) |
+
+---
+
+## Overview
+
+Founded by Bram Cohen, the inventor of the BitTorrent network, Chia Network is building a better blockchain and smart transaction platform which is more decentralized, more efficient, and more secure.
+
+Chialisp is Chia’s new smart transaction programming language that is powerful, easy to audit, and secure. The blockchain is powered by the first new Nakamoto style consensus algorithm since Bitcoin launched in 2008. Proofs of Space and Time replace energy intensive “proofs of work” by utilizing unused disk space.
+
+Chia Network supports the development and deployment of the Chia blockchain globally. Chia Network supports chia developers and supports the enterprise use of chia with software support and chia lending.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 18.68M XCH |
+| **Total Supply** | 35.06M XCH |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $51.66M |
+| **Market Cap / FDV Ratio** | 0.53 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1,645.12 (2021-05-15) |
+| **Current vs ATH** | -99.91% |
+| **All-Time Low** | $1.31 (2026-07-14) |
+| **Current vs ATL** | +12.46% |
+| **24h Change** | +3.75% |
+| **7d Change** | -2.75% |
+| **30d Change** | -29.04% |
+| **1y Change** | -85.91% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| KuCoin | XCH/USDT | N/A |
+| Crypto.com Exchange | XCH/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.chia.net/](https://www.chia.net/) |
+| **Twitter** | [@chia_project](https://twitter.com/chia_project) |
+| **Reddit** | [https://www.reddit.com/r/chia/](https://www.reddit.com/r/chia/) |
+| **Discord** | [https://discord.com/invite/chia](https://discord.com/invite/chia) |
+| **GitHub** | [https://github.com/Chia-Network](https://github.com/Chia-Network) |
+| **Whitepaper** | [https://www.chia.net/assets/ChiaGreenPaper.pdf](https://www.chia.net/assets/ChiaGreenPaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.60M |
+| **Market Cap Rank** | #673 |
+| **24h Range** | $1.41 — $1.49 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

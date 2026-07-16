@@ -2,14 +2,14 @@
 title: "Metis"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
+tags: [altcoins, crypto, ethereum]
 aliases: ["METIS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.metis.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]", "[[data-availability]]", "[[smart-contracts]]", "[[staking]]", "[[airdrop]]"]
+related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]", "[[smart-contracts]]", "[[staking]]"]
 ---
 
 # Metis
@@ -232,3 +232,9 @@ Metis hosts a DeFi-centric ecosystem (DEXes, lending, yield) alongside gaming an
 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — market data snapshot
 - General market knowledge; no other specific wiki source ingested yet. Market figures dated 2026-06-22 are from cryptodataapi.com / CoinGecko (Crypto Fear & Greed Index: 21, Extreme Fear).
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

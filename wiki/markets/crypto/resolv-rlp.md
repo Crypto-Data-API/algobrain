@@ -2,7 +2,7 @@
 title: "Resolv Liquidity Provider Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["RLP"]
@@ -142,4 +142,4 @@ RLP price can vary. Collateral required for minting or redemption is based on th
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

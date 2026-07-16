@@ -2,15 +2,15 @@
 title: "DeXe"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["DEXE", "DeXe Protocol", "DeXe DAO"]
+aliases: ["DEXE", "DeXe DAO", "DeXe Protocol"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://dexe.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[token-unlocks]]", "[[binance]]", "[[dao]]", "[[defi-narratives]]"]
+related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[dao]]", "[[defi-narratives]]", "[[ethereum]]", "[[token-unlocks]]"]
 ---
 
 # DeXe
@@ -190,3 +190,47 @@ This is framing, not a price target; the wiki holds no fair-value model for DEXE
 - Phemex Academy — "What Is DeXe (DEXE)? DAO Governance Token Explained" (2026) — https://phemex.com/academy/what-is-dexe-dao-governance-token
 - Crypto News Navigator — "DeXe Built a DAO Platform That Actually Ships Products" — https://www.cryptonewsnavigator.com/academy/article/dexe-built-a-dao-platform-that-actually-ships-products
 - Perplexity sonar verification (+363% YTD claim), 2026-06-10.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DEXE |
+| **Market Cap Rank** | #47 |
+| **Market Cap** | $1.63B |
+| **Current Price** | $34.96 |
+| **Categories** | Decentralized Finance (DeFi) |
+| **Website** | [https://dexe.network/](https://dexe.network/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $92.80M |
+| **Market Cap Rank** | #47 |
+| **24h Range** | $32.72 — $38.17 |
+| **CoinGecko Sentiment** | 29% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

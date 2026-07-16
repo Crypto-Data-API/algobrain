@@ -2,14 +2,14 @@
 title: "Ergo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["ERG", "Ergo Platform"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ergoplatform.org/en/"
-related: ["[[crypto-markets]]", "[[utxo]]", "[[proof-of-work]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[proof-of-work]]", "[[smart-contracts]]", "[[utxo]]"]
 ---
 
 # Ergo
@@ -260,3 +260,9 @@ Supply is capped at ~97.74M ERG via a smoothly declining emission schedule that 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

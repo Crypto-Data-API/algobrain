@@ -2,14 +2,14 @@
 title: "apyUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["APYUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://apyx.fi"
-related: ["[[stablecoins]]", "[[crypto-markets]]", "[[ethereum]]", "[[ethena-usde]]", "[[pendle]]", "[[morpho]]", "[[depeg]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[morpho]]", "[[pendle]]", "[[stablecoins]]"]
 ---
 
 # apyUSD
@@ -123,3 +123,112 @@ Native chain: [[ethereum|Ethereum]]. Also on Base.
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | APYUSD |
+| **Market Cap Rank** | #194 |
+| **Market Cap** | $153.23M |
+| **Current Price** | $1.21 |
+| **Categories** | Yield-Bearing Stablecoin, Yield-Bearing Tokens |
+| **Website** | [https://apyx.fi](https://apyx.fi) |
+
+---
+
+## Overview
+
+apyUSD is a yield-bearing vault token issued by the Apyx protocol on Ethereum. It follows the ERC-4626 standard and wraps apxUSD, a USD-denominated stablecoin backed by preferred equity shares from Digital Asset Treasury companies and separately listed on CoinGecko. Users deposit apxUSD into the Apyx yield vault and receive apyUSD in return. The vault accumulates cash dividends paid by DAT preferred shares and distributes that income by increasing the apyUSD-to-apxUSD exchange rate over time. Holders earn yield passively without staking or manual claiming — the exchange rate appreciation mechanism works the same way as Maker's sDAI and Ethena's sUSDe. Both apxUSD and apyUSD are ERC-20 tokens on Ethereum. The protocol integrates with Pendle for yield tokenization and trading, and with Morpho for lending collateral. Custody for the underlying DAT preferred share collateral is provided by Anchorage Digital and BitGo.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 126.59M APYUSD |
+| **Total Supply** | 126.59M APYUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $153.23M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.52 (2026-03-23) |
+| **Current vs ATH** | -20.15% |
+| **All-Time Low** | $0.9518 (2026-06-26) |
+| **Current vs ATL** | +27.13% |
+| **24h Change** | -0.77% |
+| **7d Change** | +1.52% |
+| **30d Change** | -5.90% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x38eeb52f0771140d10c4e9a9a72349a329fe8a6a` |
+| Base | `0x2c271ddf484ac0386d216eb7eb9ff02d4dc0f6aa` |
+| Binance Smart Chain | `0xa14556f13516c53ff035858ffd21e1625e7eadfd` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://apyx.fi](https://apyx.fi) |
+| **Twitter** | [@apyx_fi](https://twitter.com/apyx_fi) |
+| **Telegram** | [apyx_announcements](https://t.me/apyx_announcements) (341 members) |
+| **Discord** | [https://discord.com/invite/apyx-fi](https://discord.com/invite/apyx-fi) |
+| **GitHub** | [https://github.com/apyx-labs](https://github.com/apyx-labs) |
+| **Whitepaper** | [https://docs.apyx.fi](https://docs.apyx.fi) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $2.24M |
+| **Market Cap Rank** | #194 |
+| **24h Range** | $1.19 — $1.23 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

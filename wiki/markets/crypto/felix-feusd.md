@@ -2,14 +2,14 @@
 title: "Felix feUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["FEUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usefelix.xyz/"
-related: ["[[crypto-markets]]", "[[stablecoin]]", "[[stablecoins]]", "[[hyperliquid]]", "[[collateralized-debt-position]]", "[[dai]]"]
+related: ["[[collateralized-debt-position]]", "[[crypto-markets]]", "[[dai]]", "[[hyperliquid]]", "[[stablecoin]]", "[[stablecoins]]"]
 ---
 
 # Felix feUSD
@@ -216,3 +216,22 @@ feUSD's thesis is a **bet on Hyperliquid**: as HyperEVM accrues TVL and DeFi act
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | FEUSD |
+| **Market Cap Rank** | #320 |
+| **Market Cap** | $74.96M |
+| **Current Price** | $0.9989 |
+| **Categories** | Stablecoins, Synthetic Asset, Crypto-backed Stablecoin |
+| **Website** | [https://usefelix.xyz/](https://usefelix.xyz/) |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

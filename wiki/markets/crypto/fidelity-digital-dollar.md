@@ -2,14 +2,14 @@
 title: "Fidelity Digital Dollar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, money-market-fund]
+tags: [crypto, money-market-fund, real-world-assets]
 aliases: ["FIDD", "Fidelity Digital Dollar"]
 entity_type: protocol
 headquarters: "United States (Fidelity Digital Assets)"
 website: "https://www.fidelitydigitalassets.com/stablecoin"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[tokenization]]", "[[money-market-fund]]", "[[treasuries]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[money-market-fund]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[treasuries]]"]
 ---
 
 # Fidelity Digital Dollar
@@ -239,3 +239,15 @@ As a $1-pegged digital dollar, FIDD shows only minor deviations around its peg; 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original listing snapshot
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific Fidelity source document ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 48.08M FIDD |
+| **Total Supply** | 48.08M FIDD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $48.07M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

@@ -2,14 +2,14 @@
 title: "Memecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, meme]
+tags: [crypto, meme, nft]
 aliases: ["MEME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.memecoin.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[meme-coin]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[meme-coin]]"]
 ---
 
 # Memecoin
@@ -136,3 +136,101 @@ Like all [[meme-coin|meme coins]], MEME has **no cash flows and no intrinsic val
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MEME |
+| **Market Cap Rank** | #573 |
+| **Market Cap** | $34.42M |
+| **Current Price** | $0.00053857 |
+| **Categories** | NFT, Binance Launchpool, Meme |
+| **Website** | [https://www.memecoin.org/](https://www.memecoin.org/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 63.90B MEME |
+| **Total Supply** | 69.00B MEME |
+| **Max Supply** | 69.00B MEME |
+| **Fully Diluted Valuation** | $37.17M |
+| **Market Cap / FDV Ratio** | 0.93 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0563 (2024-03-04) |
+| **Current vs ATH** | -99.04% |
+| **All-Time Low** | $0.00046386 (2026-05-28) |
+| **Current vs ATL** | +16.20% |
+| **24h Change** | -0.46% |
+| **7d Change** | -5.12% |
+| **30d Change** | -18.78% |
+| **1y Change** | -71.39% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xb131f4a55907b10d1f0a50d8ab8fa09ec342cd74` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | MEME/USDT | N/A |
+| Kraken | MEME/USD | N/A |
+| Bitget | MEME/USDT | N/A |
+| KuCoin | MEME/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XB131F4A55907B10D1F0A50D8AB8FA09EC342CD74/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.memecoin.org/](https://www.memecoin.org/) |
+| **Twitter** | [@memecoin](https://twitter.com/memecoin) |
+| **Discord** | [https://discord.gg/memeland](https://discord.gg/memeland) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.76M |
+| **Market Cap Rank** | #573 |
+| **24h Range** | $0.00053574 — $0.00055259 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Astar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["ASTR", "Astar Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://astar.network/"
-related: ["[[crypto-markets]]", "[[polkadot]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[polkadot]]"]
 ---
 
 # Astar
@@ -131,3 +131,129 @@ ASTR is the smallest cap in this peer group (~$47M, rank #475) and trades within
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoint), `raw/data/crypto-loop/coingecko-markets.json`.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ASTR |
+| **Market Cap Rank** | #459 |
+| **Market Cap** | $45.49M |
+| **Current Price** | $0.00521218 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Layer 2 (L2) |
+| **Website** | [https://astar.network/](https://astar.network/) |
+
+---
+
+## Overview
+
+Astar is a web3 collective building products that bring users onchain and generate long term value for ASTR. It operates as a multi chain ecosystem that coordinates products and contributors through a shared economic and governance framework. 
+
+At the center is Astar Network, which provides the foundation for governance, security, and economic alignment across the ecosystem. Astar supports a growing set of products and integrations designed to drive real onchain usage and sustainable economic activity. Product development is guided by the Astar Stack, a unified product stack that turns blockchain infrastructure and finance into secure and user friendly applications aligned with Astar’s economic goals. 
+
+ASTR acts as the ecosystem’s economic and governance token, aligning network activity, product growth, and long term value creation.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 8.73B ASTR |
+| **Total Supply** | 8.73B ASTR |
+| **Max Supply** | 10.00B ASTR |
+| **Fully Diluted Valuation** | $45.50M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.4216 (2022-01-17) |
+| **Current vs ATH** | -98.77% |
+| **All-Time Low** | $0.00472940 (2026-07-01) |
+| **Current vs ATL** | +9.90% |
+| **24h Change** | +1.85% |
+| **7d Change** | +3.98% |
+| **30d Change** | -13.11% |
+| **1y Change** | -79.62% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xf27441230eadeac85b764610325cc9a0d7859689` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ASTR/USDT | N/A |
+| Kraken | ASTR/USD | N/A |
+| Upbit | ASTR/KRW | N/A |
+| Bitget | ASTR/USDT | N/A |
+| KuCoin | ASTR/USDT | N/A |
+| Crypto.com Exchange | ASTR/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://astar.network/](https://astar.network/) |
+| **Twitter** | [@AstarNetwork](https://twitter.com/AstarNetwork) |
+| **Telegram** | [PlasmOfficial](https://t.me/PlasmOfficial) (13,895 members) |
+| **Discord** | [https://discord.gg/astarnetwork](https://discord.gg/astarnetwork) |
+| **GitHub** | [https://github.com/AstarNetwork/Astar](https://github.com/AstarNetwork/Astar) |
+| **Whitepaper** | [https://github.com/AstarNetwork/plasmdocs/blob/master/wp/en.pdf](https://github.com/AstarNetwork/plasmdocs/blob/master/wp/en.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 774 |
+| **GitHub Forks** | 528 |
+| **Commits (4 weeks)** | 4 |
+| **Pull Requests Merged** | 1,017 |
+| **Contributors** | 45 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.18M |
+| **Market Cap Rank** | #459 |
+| **24h Range** | $0.00509308 — $0.00525583 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,7 +2,7 @@
 title: "DoubleZero"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["2Z"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized (DoubleZero Foundation)"
 website: "https://doublezero.xyz/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[depin]]", "[[jump-trading]]", "[[galaxy-digital]]", "[[hyperliquid]]", "[[market-microstructure]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[galaxy-digital]]", "[[hyperliquid]]", "[[jump-trading]]", "[[market-microstructure]]", "[[solana]]"]
 ---
 
 # DoubleZero
@@ -151,3 +151,109 @@ The MC/FDV ratio of ~0.35 is the single most important tokenomics number here: o
 - CoinMarketCap AI updates (Grayscale watchlist 23 Jan 2026): https://coinmarketcap.com/cmc-ai/doublezero/latest-updates/
 - Kiln — "DoubleZero on Solana: a dive into the internet layer for validators": https://www.kiln.fi/post/doublezero-on-solana-a-dive-into-the-internet-layer-for-validators
 - Verified via web search, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | 2Z |
+| **Market Cap Rank** | #147 |
+| **Market Cap** | $237.19M |
+| **Current Price** | $0.0684 |
+| **Categories** | Infrastructure, Binance Alpha Spotlight, CoinList Launchpad |
+| **Website** | [https://doublezero.xyz/](https://doublezero.xyz/) |
+
+---
+
+## Overview
+
+DoubleZero is a high-performance global network of independently contributed links, purpose-built for blockchain and other distributed systems. It provides direct, low-latency routing that strengthens validator
+performance and supports faster, fairer participation worldwide.
+
+2Z Tokens are used to access the network’s connectivity service, and, on the other side, reward network contributors and resource providers based on performance and reliability. Staking mechanisms are planned for future phases of the protocol to further enhance network security.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 3.47B 2Z |
+| **Total Supply** | 10.00B 2Z |
+| **Max Supply** | 10.00B 2Z |
+| **Fully Diluted Valuation** | $683.48M |
+| **Market Cap / FDV Ratio** | 0.35 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.8937 (2025-10-02) |
+| **Current vs ATH** | -92.35% |
+| **All-Time Low** | $0.0596 (2026-06-30) |
+| **Current vs ATL** | +14.61% |
+| **24h Change** | -5.74% |
+| **7d Change** | -4.58% |
+| **30d Change** | -2.92% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `J6pQQ3FAcJQeWPPGppWRb4nM8jU3wLyYbRrLh7feMfvd` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | 2Z/USDT | N/A |
+| Kraken | 2Z/USD | N/A |
+| Upbit | 2Z/BTC | N/A |
+| Bitget | 2Z/USDT | N/A |
+| KuCoin | 2Z/USDT | N/A |
+| Crypto.com Exchange | 2Z/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.88M |
+| **Market Cap Rank** | #147 |
+| **24h Range** | $0.0677 — $0.0744 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

@@ -2,14 +2,14 @@
 title: "Avantis"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives, perpetuals]
 aliases: ["AVNT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.avantisfi.com/"
-related: ["[[crypto-markets]]", "[[base]]", "[[perpetual-futures]]", "[[decentralized-exchange]]", "[[real-world-assets]]", "[[hyperliquid]]", "[[edgex]]", "[[coinbase]]"]
+related: ["[[base]]", "[[coinbase]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[edgex]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[real-world-assets]]"]
 ---
 
 # Avantis
@@ -172,3 +172,118 @@ This is framing, not a price target; the wiki holds no fair-value model for AVNT
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-20: cryptodataapi.com / CoinGecko top-1000 markets data.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AVNT |
+| **Market Cap Rank** | #625 |
+| **Market Cap** | $30.93M |
+| **Current Price** | $0.0933 |
+| **Categories** | Decentralized Finance (DeFi), Derivatives, Perpetuals, Binance HODLer Airdrops, Binance Alpha Spotlight, Made in USA, Base Native |
+| **Website** | [https://www.avantisfi.com/](https://www.avantisfi.com/) |
+
+---
+
+## Overview
+
+Avantis is the largest RWA perps DEX in DeFi, built on and backed by Base. Avantis allows users to trade crypto and real-world assets (RWAs), including FX, commodities, indices, and equities. Backed by Pantera and Coinbase, Avantis is the largest DEX on Base by volumes, and brings institutional-grade products to DeFi, letting users trade with up to 500x leverage in a transparent, permissionless environment.
+
+Avantis is best known for launching zero-fee perpetuals (ZFP) — a first-of-its-kind primitive where traders only pay fees if they profit. They've also brought leveraged RWAs onchain. This has driven explosive growth: over $20B+ in cumulative volume and 15M+ run-rate revenues since Febrruary 2024.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 331.57M AVNT |
+| **Total Supply** | 1.00B AVNT |
+| **Max Supply** | 1.00B AVNT |
+| **Fully Diluted Valuation** | $93.28M |
+| **Market Cap / FDV Ratio** | 0.33 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.64 (2025-09-22) |
+| **Current vs ATH** | -96.46% |
+| **All-Time Low** | $0.0875 (2026-07-01) |
+| **Current vs ATL** | +6.67% |
+| **24h Change** | -0.31% |
+| **7d Change** | -1.83% |
+| **30d Change** | -17.69% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0x696f9436b67233384889472cd7cd58a6fb5df4f1` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | AVNT/USDT | N/A |
+| Kraken | AVNT/USD | N/A |
+| Upbit | AVNT/KRW | N/A |
+| Bitget | AVNT/USDT | N/A |
+| KuCoin | AVNT/USDT | N/A |
+| Crypto.com Exchange | AVNT/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.avantisfi.com/](https://www.avantisfi.com/) |
+| **Twitter** | [@avantisfi](https://twitter.com/avantisfi) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.97M |
+| **Market Cap Rank** | #625 |
+| **24h Range** | $0.0932 — $0.0970 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[base]]
+
+---

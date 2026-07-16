@@ -2,7 +2,7 @@
 title: "VeChain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["VET", "VeChainThor"]
@@ -257,3 +257,72 @@ VeChain's edge is a long-running enterprise/supply-chain focus plus a fully-dilu
 - StarGate docs: https://docs.stargate.vechain.org/
 - Coinbase — VeChain price page (June 2026 mcap): https://www.coinbase.com/price/vechain
 - Web verification, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 85.99B VET |
+| **Total Supply** | 85.99B VET |
+| **Max Supply** | 86.71B VET |
+| **Fully Diluted Valuation** | $411.61M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | VET/USDT | N/A |
+| Kraken | VET/USD | N/A |
+| Upbit | VET/KRW | N/A |
+| Bitget | VET/USDT | N/A |
+| KuCoin | VET/USDT | N/A |
+| Crypto.com Exchange | VET/USD | N/A |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 811 |
+| **GitHub Forks** | 274 |
+| **Commits (4 weeks)** | 5 |
+| **Pull Requests Merged** | 1,144 |
+| **Contributors** | 39 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.94M |
+| **Market Cap Rank** | #113 |
+| **24h Range** | $0.00477145 — $0.00489260 |
+| **CoinGecko Sentiment** | 88% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

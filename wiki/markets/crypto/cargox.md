@@ -2,15 +2,15 @@
 title: "CargoX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["CXO", "CargoX"]
 entity_type: protocol
 founded: 2018
 headquarters: "Slovenia"
 website: "https://cargox.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polygon]]", "[[smart-contracts]]", "[[web3]]", "[[real-world-assets]]", "[[tokenization]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[polygon]]", "[[real-world-assets]]", "[[smart-contracts]]", "[[tokenization]]", "[[web3]]"]
 ---
 
 # CargoX
@@ -240,3 +240,14 @@ Only well-established, dated milestones are listed; granular product dates are o
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko). General market knowledge; no additional specific wiki source ingested yet.
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XB6EE9668771A79BE7967EE29A63D4184F8097143/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0XB6EE9668771A79BE7967EE29A63D4184F8097143/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---

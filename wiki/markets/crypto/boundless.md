@@ -2,14 +2,14 @@
 title: "Boundless"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["ZKC", "Boundless Network"]
+tags: [altcoins, crypto]
+aliases: ["Boundless Network", "ZKC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://beboundless.xyz/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[zero-knowledge-proof]]", "[[verifiable-compute]]", "[[risc-zero]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[risc-zero]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]"]
 ---
 
 # Boundless
@@ -232,3 +232,10 @@ Boundless trades on the **ZK / verifiable-compute** narrative and the **RISC Zer
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

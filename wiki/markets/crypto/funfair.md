@@ -2,15 +2,15 @@
 title: "FunFair"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, gamefi]
+tags: [altcoins, crypto, gamefi]
 aliases: ["FUN", "FUNToken", "FunFair"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://funtoken.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[play-to-earn]]", "[[slippage]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[play-to-earn]]", "[[slippage]]"]
 ---
 
 # FunFair (FUN)

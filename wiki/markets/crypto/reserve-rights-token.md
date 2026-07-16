@@ -2,14 +2,14 @@
 title: "Reserve Rights"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["RSR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://reserve.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[stablecoin]]", "[[defi]]", "[[funding-rate]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[stablecoin]]"]
 ---
 
 # Reserve Rights
@@ -140,3 +140,160 @@ RSR is a **leveraged call option on RToken adoption**. Its value should, in theo
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical snapshot context
 - Market data as of 2026-06-21 from the crypto-loop CoinGecko markets snapshot (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet for protocol mechanics.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | RSR |
+| **Market Cap Rank** | #308 |
+| **Market Cap** | $76.86M |
+| **Current Price** | $0.00122872 |
+| **Categories** | Decentralized Finance (DeFi), Real World Assets (RWA), Made in USA, Base Native |
+| **Website** | [https://reserve.org/](https://reserve.org/) |
+
+---
+
+## Overview
+
+What Is Reserve Rights (RSR)?
+
+Reserve Rights (RSR) is an ERC-20 token that serves two main purposes for the Reserve protocol: overcollateralization of Reserve stablecoins (RTokens) through staking and governing them through proposing &amp; voting on changes to their configuration.
+
+The Reserve Rights (RSR) token was launched in May 2019 following a successful initial exchange offering IEO on the Huobi Prime platform.
+
+What is Reserve Rights (RSR) used for?
+
+Besides being the governance token for Reserve stablecoins (RTokens), by which changes to RTokens can be proposed &amp; voted for with RSR, Reserve Rights exists as a backstop to make Reserve stablecoin (RToken) holders whole in the unlikely event of a collateral token default. In order for RSR holders to provide this overcollateralization, they can decide to stake on any one RToken, or divide their RSR tokens by staking on multiple RTokens. RSR holders can also decide not to stake their RSR at all.
+
+In return for providing this first-loss capital, RSR stakers can expect to receive a portion of the revenue the RToken they stake on makes. As a general rule, RSR stakers can expect higher returns (APYs) the bigger the market cap of the RToken they stake on becomes.
+
+In contrast with the “staking” you see in a lot of other projects these days, RSR staking is built to last. In Reserve’s model, late participants do not pay for early participants, nor is a trust in staking of other parties required.
+
+For more detailed information on RSR staking, please refer to the RSR staking section in the protocol documentation: https://reserve.org/protocol/reserve_rights_rsr/#reserve-rights-staking.
+
+Who are the founders of Reserve?
+
+Reserve was co-founded by Nevin Freeman and Matt Elder. Freeman is a seasoned entrepreneur. He describes his life goal as "solving the coordination problems that are stopping humanity from achieving its potential."
+
+Matt Elder, on the other hand, is an experienced engineer who previously worked for Goo...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 62.55B RSR |
+| **Total Supply** | 100.00B RSR |
+| **Max Supply** | 100.00B RSR |
+| **Fully Diluted Valuation** | $122.87M |
+| **Market Cap / FDV Ratio** | 0.63 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.1174 (2021-04-16) |
+| **Current vs ATH** | -98.95% |
+| **All-Time Low** | $0.00104688 (2026-07-01) |
+| **Current vs ATL** | +17.23% |
+| **24h Change** | +0.35% |
+| **7d Change** | -4.14% |
+| **30d Change** | -15.30% |
+| **1y Change** | -85.38% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x320623b8e4ff03373931769a31fc52a4e78b5d70` |
+| Base | `0xab36452dbac151be02b16ca17d8919826072f64a` |
+| Energi | `0xfce13bb63b60f6e20ed846ae73ed242d29129800` |
+| Arbitrum One | `0xca5ca9083702c56b481d1eec86f1776fdbd2e594` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | RSR/USDT | N/A |
+| Kraken | RSR/USD | N/A |
+| Upbit | RSR/BTC | N/A |
+| Bitget | RSR/USDT | N/A |
+| KuCoin | RSR/USDT | N/A |
+| Crypto.com Exchange | RSR/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X320623B8E4FF03373931769A31FC52A4E78B5D70/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0X320623B8E4FF03373931769A31FC52A4E78B5D70/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://reserve.org/](https://reserve.org/) |
+| **Twitter** | [@reserveprotocol](https://twitter.com/reserveprotocol) |
+| **Telegram** | [reservecurrency](https://t.me/reservecurrency) (7,192 members) |
+| **GitHub** | [https://github.com/reserve-protocol/rsr](https://github.com/reserve-protocol/rsr) |
+| **Whitepaper** | [https://reserve.org/protocol/introduction/](https://reserve.org/protocol/introduction/) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 19 |
+| **GitHub Forks** | 4 |
+| **Pull Requests Merged** | 1 |
+| **Contributors** | 1 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $5.60M |
+| **Market Cap Rank** | #308 |
+| **24h Range** | $0.00122348 — $0.00126143 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

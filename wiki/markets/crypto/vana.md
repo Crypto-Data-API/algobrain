@@ -2,14 +2,14 @@
 title: "Vana"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, machine-learning, ai-trading, data-provider]
+tags: [ai-trading, crypto, data-provider, machine-learning]
 aliases: ["VANA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.vana.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-ai]]", "[[ocean-protocol]]", "[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[data-daos]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[decentralized-ai]]", "[[ethereum]]", "[[ocean-protocol]]"]
 ---
 
 # Vana
@@ -157,3 +157,133 @@ VANA is a **decentralized-AI / data-ownership** narrative token. CoinGecko categ
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 — cryptodataapi.com / CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | VANA |
+| **Market Cap Rank** | #526 |
+| **Market Cap** | $38.44M |
+| **Current Price** | $1.25 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Layer 1 (L1), Base Native |
+| **Website** | [https://www.vana.org/](https://www.vana.org/) |
+
+---
+
+## Overview
+
+Vana is an EVM-compatible Layer 1 blockchain network that enables users to transform personal data into financial assets by aggregating private datasets for AI model training. This approach allows individuals to tokenize and monetize their data through Data Decentralized Autonomous Organizations (Data DAOs), granting them ownership and control over their digital footprints. 
+VANA DOCS
+
+Key Features of Vana:
+
+Data Liquidity Pools (DLPs): Vana introduces Data Liquidity Pools, where users can contribute data, which is then validated and tokenized. These pools facilitate the creation of data tokens, representing ownership and value of the contributed data. 
+VANA DOCS
+
+Proof of Contribution: To ensure data quality and integrity, Vana employs a Proof-of-Contribution system. This mechanism validates data submissions, ensuring they meet the standards required by the network. 
+VANA DOCS
+
+Incentive Structures: Participants in the Vana ecosystem, including data contributors, validators, and DLP creators, are rewarded with $VANA tokens. This incentivizes active participation and the provision of high-quality data. 
+VANA DOCS
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 30.80M VANA |
+| **Total Supply** | 120.00M VANA |
+| **Max Supply** | 120.00M VANA |
+| **Fully Diluted Valuation** | $149.78M |
+| **Market Cap / FDV Ratio** | 0.26 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $35.23 (2024-12-17) |
+| **Current vs ATH** | -96.46% |
+| **All-Time Low** | $1.00 (2026-06-25) |
+| **Current vs ATL** | +24.55% |
+| **24h Change** | -3.36% |
+| **7d Change** | +8.09% |
+| **30d Change** | +5.31% |
+| **1y Change** | -75.35% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0` |
+| Base | `0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0` |
+| Binance Smart Chain | `0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0` |
+| Polygon Pos | `0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0` |
+| Arbitrum One | `0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0` |
+| Optimistic Ethereum | `0x7ff7fa94b8b66ef313f7970d4eebd2cb3103a2c0` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | VANA/USDT | N/A |
+| Upbit | VANA/KRW | N/A |
+| Bitget | VANA/USDT | N/A |
+| KuCoin | VANA/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X7FF7FA94B8B66EF313F7970D4EEBD2CB3103A2C0/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.vana.org/](https://www.vana.org/) |
+| **Twitter** | [@vana](https://twitter.com/vana) |
+| **Discord** | [http://discord.gg/withvana](http://discord.gg/withvana) |
+| **GitHub** | [https://github.com/vana-com](https://github.com/vana-com) |
+| **Whitepaper** | [https://docs.vana.org/docs/home](https://docs.vana.org/docs/home) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $16.65M |
+| **Market Cap Rank** | #526 |
+| **24h Range** | $1.23 — $1.31 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

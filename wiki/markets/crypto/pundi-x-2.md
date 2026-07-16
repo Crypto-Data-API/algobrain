@@ -2,14 +2,14 @@
 title: "Pundi X"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins, payments]
-aliases: ["PUNDIX", "NPXS", "XPOS"]
+tags: [altcoins, crypto, defi, payments]
+aliases: ["NPXS", "PUNDIX", "XPOS"]
 entity_type: protocol
 headquarters: "Singapore / Decentralized"
 website: "https://pundix.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[payments]]", "[[point-of-sale]]", "[[function-x]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[function-x]]", "[[payments]]", "[[point-of-sale]]"]
 ---
 
 # Pundi X

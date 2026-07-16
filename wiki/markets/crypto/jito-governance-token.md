@@ -2,14 +2,14 @@
 title: "Jito"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, altcoins, market-microstructure]
+tags: [altcoins, crypto, defi, market-microstructure]
 aliases: ["JTO", "Jito Network", "JitoSOL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.jito.network/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[liquid-staking]]", "[[mev]]", "[[kamino]]", "[[jupiter-exchange-solana]]", "[[raydium]]"]
+related: ["[[crypto-markets]]", "[[jupiter-exchange-solana]]", "[[kamino]]", "[[liquid-staking]]", "[[mev]]", "[[raydium]]", "[[solana]]"]
 ---
 
 # Jito
@@ -261,3 +261,80 @@ Jito's moat is the combination of the **largest Solana LST** with **ownership of
 - [Datawallet — Jito Explained: JitoSOL, Bundles, Restaking & BAM](https://www.datawallet.com/crypto/jito-and-jitosol-explained)
 - [Solana Compass — Jito project review](https://solanacompass.com/projects/jito)
 - Verified via web search, 2026-06-11
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 498.99M JTO |
+| **Total Supply** | 1.00B JTO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $599.25M |
+| **Market Cap / FDV Ratio** | 0.50 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $6.01 (2023-12-07) |
+| **Current vs ATH** | -90.03% |
+| **All-Time Low** | $0.2181 (2026-02-06) |
+| **Current vs ATL** | +174.88% |
+| **24h Change** | -2.96% |
+| **7d Change** | -5.82% |
+| **30d Change** | -20.16% |
+| **1y Change** | -68.85% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | JTO/USDT | N/A |
+| Kraken | JTO/USD | N/A |
+| Upbit | JTO/KRW | N/A |
+| Bitget | JTO/USDT | N/A |
+| KuCoin | JTO/USDT | N/A |
+| Crypto.com Exchange | JTO/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | JTOJTOMEPA8BEP8AUQC6EXT5FRIJWFFMWQX2V2F9MCL/J1TOSO1UCK3RLMJORHTTRVWY9HJ7X8V9YYAC6Y7KGCPN | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $33.76M |
+| **Market Cap Rank** | #134 |
+| **24h Range** | $0.5991 — $0.6353 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

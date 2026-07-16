@@ -9,6 +9,16 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+
+## 2026-07-16 12:47 — Batch Import: Top 2376 Cryptocurrencies (CoinGecko)
+
+- Source: [[coingecko-top-1000-2026-07-16]]
+- Type: data (API batch import)
+- Pages created (1339): [[united-stables]], [[spiko-amundi-overnight-swap-fund-eur]], [[pudgy-penguins]], [[peanut-2-2]], [[coco-2]], [[spark-usdc]], [[tradable-apac-diversified-finance-provider-sstn]], [[lido-earn-eth]], [[safo]], [[tradable-latam-fintech-sstn]], [[alpha-bulgaria-warrants]], [[genius-3]], [[tradable-na-third-party-online-merchant-sstn]], [[manadia]], [[tradable-latam-middle-market-lender-sstl]], [[tradable-latam-middle-market-lender-sstl]], [[nexus-4]], [[saturn-dollar]], [[tradable-singapore-fintech-ssl]], [[cash-cat]] ... and 1319 more
+- Pages merged (1037): [[bitcoin]], [[ethereum]], [[usdt]], [[bnb]], [[usdc]], [[xrp]], [[solana]], [[tron]], [[figure-heloc]], [[hype]] ... and 1027 more
+- Data points per coin: 20 (metadata, market data, tokenomics, social, developer, exchange listings)
+- Confidence: HIGH (official CoinGecko API data)
+
 ## 2026-07-14 — Second-tier options/quant/charting crypto re-scope (Wave 4)
 
 Re-scoped ~56 more crypto-relevant pages from equity framing to crypto (9 parallel Opus agents), finishing the technique/structure upgrade the user requested. Options spreads & structures (bull/bear verticals, credit/calendar/ratio spreads, straddles/strangles, 0DTE, cash-secured puts, long-call/put, put-call parity) → crypto structure theory on Deribit. Vol strategies (premium-selling, long/short-vol, tail hedges, and the VIX pages reframed to DVOL — honestly flagging crypto has no tradeable VIX-future/ETP analog). Crypto-applicable quant (mean-reversion, pairs, stat-arb, Ornstein-Uhlenbeck, Kalman, Bollinger-reversion, regime-detection) rebuilt to the buildable schema (all `untested`, Sharpes revised down for crypto). Price-action methods (gap/pullback/London-breakout = strategies; ICT/SMC/triple-screen = concept frameworks). Duplicate stubs redirected (vertical-spreads, iron-condors, calendar-spread root, cash-secured-put, delta-hedging/gamma-scalping strategy copies). Created [[dvol]] (Deribit Volatility Index) for 16 inbound links; stripped stray equity tags from ~60 already-crypto pages; redirected iron-fly→iron-butterfly.

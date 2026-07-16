@@ -2,14 +2,14 @@
 title: "Mass Vehicle Ledger (MVL)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
-aliases: ["MVL", "Mass Vehicle Ledger", "MVL Chain"]
+tags: [altcoins, crypto, defi]
+aliases: ["MVL", "MVL Chain", "Mass Vehicle Ledger"]
 entity_type: protocol
 headquarters: "Singapore"
 website: "https://mvlchain.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[depin]]", "[[layer-1]]", "[[staking]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[layer-1]]", "[[staking]]"]
 ---
 
 # Mass Vehicle Ledger (MVL)

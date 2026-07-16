@@ -2,14 +2,14 @@
 title: "Metal Blockchain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["METAL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://metalblockchain.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[avalanche]]", "[[layer-1]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[proton]]"]
+related: ["[[avalanche]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[proton]]"]
 ---
 
 # Metal Blockchain
@@ -152,3 +152,86 @@ The narrative is **compliant, bank-grade financial infrastructure on an [[avalan
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoints).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | METAL |
+| **Market Cap Rank** | #389 |
+| **Market Cap** | $57.92M |
+| **Current Price** | $0.1141 |
+| **Categories** | Layer 0 (L0), Made in USA |
+| **Website** | [https://metalblockchain.org/](https://metalblockchain.org/) |
+
+---
+
+## Overview
+
+Metal blockchain ($METAL) is a layer zero blockchain that allows any chain to deploy and find consensus through the Snow protocols (introduced by Avalanche) allowing it to run on a highly efficient model of Proof-of-Stake (PoS), eliminating the need for Proof-of-Work (PoW). Metal Blockchain improves upon the initial work of Avalanche by adding a fourth subchain (A Chain) to offer a more resource efficient layer for payments and decentralized finance: Proton (based on EOSIO protocol, adding WASM).
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 507.64M METAL |
+| **Total Supply** | 666.67M METAL |
+| **Max Supply** | 666.67M METAL |
+| **Fully Diluted Valuation** | $76.06M |
+| **Market Cap / FDV Ratio** | 0.76 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.65 (2022-09-12) |
+| **Current vs ATH** | -93.05% |
+| **All-Time Low** | $0.0351 (2024-08-05) |
+| **Current vs ATL** | +226.37% |
+| **24h Change** | -1.83% |
+| **7d Change** | +10.74% |
+| **30d Change** | -17.27% |
+| **1y Change** | -55.51% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://metalblockchain.org/](https://metalblockchain.org/) |
+| **Twitter** | [@MetalBlockchain](https://twitter.com/MetalBlockchain) |
+| **Telegram** | [MetalBlockchain](https://t.me/MetalBlockchain) (1,629 members) |
+| **Discord** | [https://discord.com/invite/G7E8qggYEQ](https://discord.com/invite/G7E8qggYEQ) |
+| **GitHub** | [https://github.com/metalblockchain](https://github.com/metalblockchain) |
+| **Whitepaper** | [https://metalblockchain.org/whitepaper.pdf](https://metalblockchain.org/whitepaper.pdf) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $589,684.00 |
+| **Market Cap Rank** | #389 |
+| **24h Range** | $0.1112 — $0.1172 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

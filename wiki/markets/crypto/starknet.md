@@ -2,14 +2,14 @@
 title: "Starknet"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["STRK", "StarkNet"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://starknet.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zk-rollup]]", "[[arbitrum]]", "[[optimism]]", "[[hyperliquid]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimism]]", "[[zk-rollup]]"]
 ---
 
 # Starknet

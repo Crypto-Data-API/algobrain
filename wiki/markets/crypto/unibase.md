@@ -2,14 +2,14 @@
 title: "Unibase"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, depin, bnb]
+tags: [ai-trading, bnb, crypto, depin]
 aliases: ["UB", "Unibase AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.unibase.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[ethereum]]", "[[artificial-intelligence]]", "[[depin]]"]
+related: ["[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]"]
 ---
 
 # Unibase
@@ -134,3 +134,110 @@ Unibase is a core **decentralized-AI / DePIN agent-infrastructure** play, adjace
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - Macro framing as of 2026-06-23 (cryptodataapi.com / CoinGecko): Fear & Greed 21 (Extreme Fear), Bottoming / Accumulation regime; AI basket high-beta (TAO ~$233, RENDER ~$1.69, VIRTUAL ~$0.61).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | UB |
+| **Market Cap Rank** | #165 |
+| **Market Cap** | $201.81M |
+| **Current Price** | $0.0807 |
+| **Categories** | Artificial Intelligence (AI), Infrastructure, Data Availability, Binance Alpha Spotlight, AI Framework |
+| **Website** | [https://www.unibase.com/](https://www.unibase.com/) |
+
+---
+
+## Overview
+
+Unibase is the first high-performance decentralized AI memory layer. It equips AI agents with long-term memory and cross-platform interoperability, enabling them to learn, evolve, and collaborate autonomously.
+
+Unibase is building the foundation for the Open Agent Internet — a modular, verifiable, and composable AI agent ecosystem onchain.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.50B UB |
+| **Total Supply** | 10.00B UB |
+| **Max Supply** | 10.00B UB |
+| **Fully Diluted Valuation** | $807.24M |
+| **Market Cap / FDV Ratio** | 0.25 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2425 (2026-05-15) |
+| **Current vs ATH** | -66.68% |
+| **All-Time Low** | $0.0103 (2025-09-12) |
+| **Current vs ATL** | +684.43% |
+| **24h Change** | -4.44% |
+| **7d Change** | +14.58% |
+| **30d Change** | -30.36% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x40b8129b786d766267a7a118cf8c07e31cdb6fde` |
+| Ethereum | `0x6944e1df6bf5972305f9ab25df47ef10de01bcc8` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| KuCoin | UB/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.unibase.com/](https://www.unibase.com/) |
+| **Twitter** | [@Unibase_AI](https://twitter.com/Unibase_AI) |
+| **Telegram** | [+qq8MR8FnFggyM2Y1](https://t.me/+qq8MR8FnFggyM2Y1) |
+| **GitHub** | [https://github.com/unibaseio](https://github.com/unibaseio) |
+| **Whitepaper** | [https://openos-labs.gitbook.io/unibase-docs/](https://openos-labs.gitbook.io/unibase-docs/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $15.98M |
+| **Market Cap Rank** | #165 |
+| **24h Range** | $0.0749 — $0.0872 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

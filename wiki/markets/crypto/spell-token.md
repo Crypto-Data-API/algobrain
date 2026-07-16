@@ -2,14 +2,14 @@
 title: "Spell (Abracadabra.money)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, stablecoin, lending]
-aliases: ["SPELL", "Spell Token", "Abracadabra.money", "MIM"]
+tags: [crypto, defi, ethereum, lending, stablecoin]
+aliases: ["Abracadabra.money", "MIM", "SPELL", "Spell Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://abracadabra.money/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[defi]]", "[[collateralized-debt-position]]", "[[lending]]", "[[makerdao]]", "[[liquity]]", "[[arbitrum]]", "[[avalanche]]"]
+related: ["[[arbitrum]]", "[[avalanche]]", "[[collateralized-debt-position]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[lending]]", "[[liquity]]", "[[makerdao]]", "[[stablecoin]]"]
 ---
 
 # Spell (Abracadabra.money)

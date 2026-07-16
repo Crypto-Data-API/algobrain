@@ -2,15 +2,15 @@
 title: "GXChain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
-aliases: ["GXC", "Gongxinbao", "GXB"]
+tags: [altcoins, crypto]
+aliases: ["GXB", "GXC", "Gongxinbao"]
 entity_type: protocol
 founded: 2017
 headquarters: "Hangzhou, China (origin)"
 website: "https://www.gxb.io/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[delegated-proof-of-stake]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]"]
 ---
 
 # GXChain

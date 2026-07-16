@@ -2,14 +2,15 @@
 title: "Beam"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi]
+tags: [crypto, gamefi, nft]
 aliases: ["BEAM", "BEAMX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://onbeam.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]", "[[avalanche]]", "[[bnb]]"]
+related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]"]
+founded: 2019
 ---
 
 # Beam
@@ -158,3 +159,123 @@ The investment narrative is leveraged to two cyclical themes: (1) the broad **[[
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BEAM |
+| **Market Cap Rank** | #2362 |
+| **Market Cap** | $1.73M |
+| **Current Price** | $0.00858199 |
+| **Genesis Date** | 2019-01-03 |
+| **Hashing Algorithm** | Beam Hash |
+| **Categories** | Smart Contract Platform, Proof of Work (PoW), Privacy Blockchain, Privacy Infrastructure, Privacy |
+| **Website** | [https://www.beam.mw/](https://www.beam.mw/) |
+
+---
+
+## Overview
+
+Beam Mimblewimble is a scalable, fungible, and confidential cryptocurrency based on the Mimblewimble implementation.
+
+WHY BEAM?
+Core features include complete control over your privacy, All transactions are private by default, No addresses or other private information are stored on the blockchain, Superior scalability due to compact blockchain size, Opt-in Auditability, Support online and offline transactions, atomic swap, hardware wallets integration.
+
+Governance model
+No premine, No ICO. Backed by Treasury 
+Establishing a non-profit foundation to govern the protocol after Mainnet launch
+
+How does it work?
+Wallets’ owners create new transaction using secure channel either online or offline
+Both wallets participate in signing the transaction using Schnorr protocol
+
+Wallet sends transaction to node
+Each transaction contains a list of Inputs and Outputs represented by Pedersen Commitments, as well as explicit fees and kernels. Each transaction also contains non-interactive zero knowledge range proof to verify that the output transaction value is positive
+
+Transaction is verified by the node
+Each transaction is verified with respect to the recent blockchain state which is stored as a Merkle Tree. The root hash of the tree is recorded in block header along with a proof of work. In addition, each node periodically creates compacted history to allow ‘fast sync’ of new and existing nodes.
+
+Transaction is added to the mining pool
+A block is mined every minute and is sent back to the node for verification and distribution.
+
+Mined blocks containing the new transactions are sent to the known peers
+A valid block that is extending the longest chain is accepted as a new Tip and propagated further until full consensus is reached.
+
+Fast sync
+When a new node connects to the network for the first time it can request compacted history containing only system state and blockchain headers. There is no need to retrieve the entire transaction history.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 201.54M BEAM |
+| **Total Supply** | 262.80M BEAM |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.26M |
+| **Market Cap / FDV Ratio** | 0.77 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.28 (2019-01-05) |
+| **Current vs ATH** | -99.80% |
+| **All-Time Low** | $0.00622271 (2026-07-03) |
+| **Current vs ATL** | +38.46% |
+| **24h Change** | -2.77% |
+| **7d Change** | +20.89% |
+| **30d Change** | -44.31% |
+| **1y Change** | -73.98% |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XE5ACBB03D73267C03349C76EAD672EE4D941F499/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 691 |
+| **GitHub Forks** | 212 |
+| **Commits (4 weeks)** | 22 |
+| **Pull Requests Merged** | 36 |
+| **Contributors** | 20 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6,489.41 |
+| **Market Cap Rank** | #2362 |
+| **24h Range** | $0.00845649 — $0.00882681 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

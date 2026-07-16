@@ -2,15 +2,15 @@
 title: "Tether Gold"
 type: entity
 created: 2026-04-09
-updated: 2026-06-10
+updated: 2026-07-16
 status: good
-tags: [crypto, gold, ethereum]
+tags: [crypto, ethereum, gold]
 aliases: ["XAUT", "XAU₮"]
 entity_type: protocol
 founded: 2020
 headquarters: "El Salvador (TG Commodities); gold vaulted in Switzerland"
 website: "https://gold.tether.to/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[tether]]", "[[gold]]", "[[hashnote-usyc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gold]]", "[[hashnote-usyc]]", "[[tether]]"]
 ---
 
 # Tether Gold
@@ -144,3 +144,34 @@ Each XAU₮ token represents ownership of one troy fine ounce of physical gold o
 - Tether Gold official site — https://gold.tether.to/
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $156.70M |
+| **Market Cap Rank** | #37 |
+| **24h Range** | $4,020.76 — $4,066.20 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

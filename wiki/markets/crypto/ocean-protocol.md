@@ -2,14 +2,14 @@
 title: "Ocean Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ai-trading, machine-learning, data-provider]
+tags: [ai-trading, crypto, data-provider, defi, machine-learning]
 aliases: ["OCEAN", "Ocean"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://oceanprotocol.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[data-daos]]", "[[decentralized-ai]]", "[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[singularitynet]]", "[[defi]]", "[[data-provider]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[data-provider]]", "[[decentralized-ai]]", "[[defi]]", "[[ethereum]]", "[[singularitynet]]"]
 ---
 
 # Ocean Protocol
@@ -233,3 +233,14 @@ The thesis of the merger is vertical integration of decentralized AI: **data (Oc
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).
 - General market knowledge (incl. publicly announced ASI Alliance token merger); no specific narrative wiki source ingested yet.
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $44,504.00 |
+| **Market Cap Rank** | #691 |
+| **24h Range** | $0.1084 — $0.1112 |
+| **Last Updated** | 2026-07-16 |
+
+---

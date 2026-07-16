@@ -2,15 +2,15 @@
 title: "Kinesis Silver"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, commodities]
+tags: [commodities, crypto]
 aliases: ["KAG"]
 entity_type: protocol
 founded: 2018
 headquarters: "Kinesis (global; vaulting via ABX vault network)"
 website: "https://kinesis.money/"
-related: ["[[crypto-markets]]", "[[kinesis-gold]]", "[[tether-gold]]", "[[gold]]", "[[commodities]]", "[[real-world-assets]]"]
+related: ["[[commodities]]", "[[crypto-markets]]", "[[gold]]", "[[kinesis-gold]]", "[[real-world-assets]]", "[[tether-gold]]"]
 ---
 
 # Kinesis Silver
@@ -170,3 +170,77 @@ The fee-share yield is KAG's distinctive feature: it pays holders to hold metal,
 - CoinCodex — KAG price history (ATH $122.35, 29 Jan 2026): https://coincodex.com/crypto/kinesis-silver/price-prediction/
 - Kraken / Bybit / The Block KAG price pages (June 2026 ~$70–75 range): https://www.kraken.com/prices/kinesis-silver
 - Verified via web search, 2026-06-10
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $130.00 (2026-02-02) |
+| **Current vs ATH** | -57.16% |
+| **All-Time Low** | $4.36 (2024-02-11) |
+| **Current vs ATL** | +1176.58% |
+| **24h Change** | -2.14% |
+| **7d Change** | -6.07% |
+| **30d Change** | -21.28% |
+| **1y Change** | +46.06% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x56ba8b58b7d1f6d384a1c4dd553f39ebc8741b8e` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 4 |
+| **GitHub Forks** | 1 |
+| **Pull Requests Merged** | 3 |
+| **Contributors** | 3 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $158,828.00 |
+| **Market Cap Rank** | #159 |
+| **24h Range** | $55.53 — $56.99 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

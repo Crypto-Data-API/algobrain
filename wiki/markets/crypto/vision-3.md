@@ -2,7 +2,7 @@
 title: "Vision"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["VSN"]
@@ -141,4 +141,4 @@ VSN token is a core component for the Bitpanda Web3 ecosystem; it aligns the inc
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

@@ -2,14 +2,14 @@
 title: "Clearpool"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, lending, ethereum]
+tags: [crypto, defi, ethereum, lending]
 aliases: ["CPOOL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://clearpool.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[lending]]", "[[real-world-assets]]", "[[defi]]", "[[aave]]", "[[usdc]]", "[[governance-token]]", "[[solana]]"]
+related: ["[[aave]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[lending]]", "[[real-world-assets]]", "[[solana]]", "[[usdc]]"]
 ---
 
 # Clearpool

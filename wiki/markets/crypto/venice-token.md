@@ -2,15 +2,15 @@
 title: "Venice Token (VVV)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading]
+tags: [ai-trading, crypto]
 aliases: ["VVV", "Venice AI"]
 entity_type: protocol
 founded: 2024
 headquarters: "USA (Venice.ai; founded by Erik Voorhees)"
 website: "https://venice.ai/"
-related: ["[[crypto-markets]]", "[[base]]", "[[narrative-trading]]", "[[hyperliquid]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]"]
 ---
 
 # Venice Token (VVV)
@@ -268,3 +268,59 @@ Venice's edge: a **real consumer product + a usage-linked token mechanic** that 
 - CCN, "Venice Token Price Prediction 2026: AI Growth, Deflationary Model": https://www.ccn.com/venice-token-vvv-price-prediction-2026/
 - Datawallet, "Venice AI Explained: VVV Tokenomics, Private AI & Risks": https://www.datawallet.com/crypto/venice-ai-explained
 - Web search verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 47.32M VVV |
+| **Total Supply** | 80.59M VVV |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $859.47M |
+| **Market Cap / FDV Ratio** | 0.59 |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | VVV/USD | N/A |
+| Upbit | VVV/KRW | N/A |
+| KuCoin | VVV/USDT | N/A |
+| Crypto.com Exchange | VVV/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $24.21M |
+| **Market Cap Rank** | #102 |
+| **24h Range** | $10.60 — $11.21 |
+| **CoinGecko Sentiment** | 45% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[base]]
+
+---

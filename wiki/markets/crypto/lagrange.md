@@ -2,14 +2,14 @@
 title: "Lagrange"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading, machine-learning]
+tags: [ai-trading, altcoins, crypto, machine-learning]
 aliases: ["LA", "Lagrange Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lagrangefoundation.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[zk-rollup]]", "[[restaking-and-ai]]", "[[eigenlayer]]", "[[zkml]]", "[[on-chain-inference]]", "[[decentralized-ai]]"]
+related: ["[[crypto-markets]]", "[[decentralized-ai]]", "[[eigenlayer]]", "[[ethereum]]", "[[on-chain-inference]]", "[[restaking-and-ai]]", "[[zero-knowledge-proof]]", "[[zk-rollup]]", "[[zkml]]"]
 ---
 
 # Lagrange

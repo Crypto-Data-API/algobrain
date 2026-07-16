@@ -2,14 +2,14 @@
 title: "MX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["MX", "MX Token", "MXC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mexc.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance-coin]]", "[[exchange-tokens]]", "[[mexc]]", "[[whitebit]]", "[[hype]]"]
+related: ["[[binance-coin]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hype]]", "[[mexc]]", "[[whitebit]]"]
 ---
 
 # MX
@@ -205,3 +205,28 @@ As an exchange-native token, the overwhelming majority of MX's liquidity and tra
 
 - (Source: [[coingecko-top-1000-2026-04-09]]) -- April 2026 baseline snapshot
 - Market data 2026-06-20 from `raw/data/crypto-loop/coingecko-markets.json` (cryptodataapi.com / CoinGecko)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MX |
+| **Market Cap Rank** | #195 |
+| **Market Cap** | $152.67M |
+| **Current Price** | $1.66 |
+| **Categories** | Exchange-based Tokens, Centralized Exchange (CEX) Token, Made in China |
+| **Website** | [https://www.mexc.com/](https://www.mexc.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 91.84M MX |
+| **Total Supply** | 409.02M MX |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $679.96M |
+| **Market Cap / FDV Ratio** | 0.22 |
+
+---

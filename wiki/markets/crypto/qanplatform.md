@@ -2,10 +2,10 @@
 title: "QANplatform"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, smart-contracts]
-aliases: ["QANX", "QAN"]
+tags: [altcoins, crypto, smart-contracts]
+aliases: ["QAN", "QANX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.qanplatform.com/"

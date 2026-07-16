@@ -2,14 +2,14 @@
 title: "Wormhole"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["W", "Wormhole"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://wormhole.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[ethereum]]", "[[cross-chain-bridges]]", "[[cross-chain-bridge-risk]]", "[[axelar]]", "[[cross-chain]]", "[[bridge]]", "[[interoperability]]", "[[hyperliquid]]"]
+related: ["[[axelar]]", "[[bridge]]", "[[cross-chain-bridge-risk]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[interoperability]]", "[[solana]]"]
 ---
 
 # Wormhole
@@ -237,3 +237,28 @@ The W token is positioned as a governance and staking asset for the protocol's t
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | W |
+| **Market Cap Rank** | #390 |
+| **Market Cap** | $58.11M |
+| **Current Price** | $0.00941856 |
+| **Categories** | Interoperability, Cross-chain Communication, Made in USA, Governance, Base Native |
+| **Website** | [https://wormhole.com/](https://wormhole.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 6.17B W |
+| **Total Supply** | 10.00B W |
+| **Max Supply** | 10.00B W |
+| **Fully Diluted Valuation** | $94.19M |
+| **Market Cap / FDV Ratio** | 0.62 |
+
+---

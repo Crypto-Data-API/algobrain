@@ -2,7 +2,7 @@
 title: "Injective"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["INJ", "Injective Protocol"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (Injective Labs: New York, USA)"
 website: "https://injective.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cosmos]]", "[[solana]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[solana]]"]
 ---
 
 # Injective
@@ -237,3 +237,110 @@ Injective's edge is being a *finance-native* L1 with deflationary tokenomics; it
 - CoinMarketCap AI updates (June 2026 buyback ~$315k; IIP-632 28 Apr 2026; Merkle Capital Thailand fund 5 June 2026): https://coinmarketcap.com/cmc-ai/injective/latest-updates/
 - CoinGecko / CoinMarketCap live pages, June 2026 (mcap ~$547–562M, rank #74–95): https://www.coingecko.com/en/coins/injective
 - Verified via web search, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 100.00M INJ |
+| **Total Supply** | 100.00M INJ |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $505.34M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $52.62 (2024-03-14) |
+| **Current vs ATH** | -90.39% |
+| **All-Time Low** | $0.6574 (2020-11-03) |
+| **Current vs ATL** | +669.26% |
+| **24h Change** | +1.17% |
+| **7d Change** | +4.99% |
+| **30d Change** | -14.95% |
+| **1y Change** | -61.56% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xe28b3b32b6c345a34ff64674606124dd5aceca30` |
+| Cosmos | `ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273` |
+| Terra 2 | `ibc/25BC59386BB65725F735EFC0C369BB717AA8B5DAD846EAF9CBF5D0F18F207211` |
+| Osmosis | `ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273` |
+| Secret | `secret14706vxakdzkz9a36872cs62vpl5qd84kpwvpew` |
+| Binance Smart Chain | `0xa2b726b1145a4773f68593cf171187d8ebe4d495` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | INJ/USDT | N/A |
+| Kraken | INJ/USD | N/A |
+| Upbit | INJ/KRW | N/A |
+| Bitget | INJ/USDT | N/A |
+| KuCoin | INJ/USDT | N/A |
+| Crypto.com Exchange | INJ/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XE28B3B32B6C345A34FF64674606124DD5ACECA30/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 118 |
+| **GitHub Forks** | 80 |
+| **Pull Requests Merged** | 519 |
+| **Contributors** | 16 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $101.63M |
+| **Market Cap Rank** | #101 |
+| **24h Range** | $5.00 — $5.20 |
+| **CoinGecko Sentiment** | 70% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

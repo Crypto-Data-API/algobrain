@@ -2,14 +2,14 @@
 title: "Catizen"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, gamefi]
+tags: [altcoins, crypto, gamefi]
 aliases: ["CATI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://linktr.ee/catizen"
-related: ["[[crypto-markets]]", "[[ton]]", "[[gamefi]]", "[[play-to-earn]]"]
+related: ["[[crypto-markets]]", "[[gamefi]]", "[[play-to-earn]]", "[[ton]]"]
 ---
 
 # Catizen

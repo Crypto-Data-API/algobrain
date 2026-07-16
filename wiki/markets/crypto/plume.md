@@ -2,14 +2,14 @@
 title: "Plume"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["PLUME", "Plume Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://plume.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[real-world-assets]]", "[[centrifuge-2]]", "[[hyperliquid]]"]
+related: ["[[centrifuge-2]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[real-world-assets]]"]
 ---
 
 # Plume
@@ -154,3 +154,123 @@ The thesis: tokenized [[real-world-assets|real-world assets]] (treasuries, credi
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | PLUME |
+| **Market Cap Rank** | #371 |
+| **Market Cap** | $62.56M |
+| **Current Price** | $0.0105 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Real World Assets (RWA), RWA Protocol, Binance HODLer Airdrops, Made in USA |
+| **Website** | [https://plume.org/](https://plume.org/) |
+
+---
+
+## Overview
+
+Plume is the first RWAfi L1 network focused on crypto natives. We build infrastructure to make it easy to connect the real world and the crypto markets. We go against the traditional view of RWAs by changing its definition – it’s not just TradFi onchain but instead building net new crypto-first RWA use cases to the market including things like RWA derivatives/speculation, borrow/lend, yield farming, and more.
+
+We are a permissionless EVM chain and ecosystem that is redefining and driving the RWA market forward. We do this through novel technologies that vertically integrate all the elements of RWAs into a single stack and ecosystem. Our tokenization engine, an EVM chain, compliance &amp; regulatory tooling, RWA data normalization, etc are all first class objects so that they work seamlessly together to make it easy to bring anything in the real world (assets, data, etc.) onchain.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 5.97B PLUME |
+| **Total Supply** | 10.00B PLUME |
+| **Max Supply** | 10.00B PLUME |
+| **Fully Diluted Valuation** | $104.79M |
+| **Market Cap / FDV Ratio** | 0.60 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2475 (2025-03-19) |
+| **Current vs ATH** | -95.77% |
+| **All-Time Low** | $0.00854877 (2026-02-28) |
+| **Current vs ATL** | +22.58% |
+| **24h Change** | +5.84% |
+| **7d Change** | +3.80% |
+| **30d Change** | -6.87% |
+| **1y Change** | -90.18% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x4c1746a800d224393fe2470c70a35717ed4ea5f1` |
+| Binance Smart Chain | `0x5afadcd1e8e3ca78ee2d37100102f2aec8bc0aa8` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | PLUME/USDT | N/A |
+| Kraken | PLUME/USD | N/A |
+| Upbit | PLUME/KRW | N/A |
+| Bitget | PLUME/USDT | N/A |
+| KuCoin | PLUME/USDT | N/A |
+| Crypto.com Exchange | PLUME/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X4C1746A800D224393FE2470C70A35717ED4EA5F1/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0X4C1746A800D224393FE2470C70A35717ED4EA5F1/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://plume.org/](https://plume.org/) |
+| **Twitter** | [@plumenetwork](https://twitter.com/plumenetwork) |
+| **Telegram** | [plumenetwork_community](https://t.me/plumenetwork_community) (93,439 members) |
+| **Discord** | [https://discord.com/invite/plume-network](https://discord.com/invite/plume-network) |
+| **GitHub** | [https://github.com/plumenetwork](https://github.com/plumenetwork) |
+| **Whitepaper** | [https://docs.plume.org/](https://docs.plume.org/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $14.12M |
+| **Market Cap Rank** | #371 |
+| **24h Range** | $0.00992961 — $0.0106 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,15 +2,15 @@
 title: "Hyperlane"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
+tags: [altcoins, crypto, defi]
 aliases: ["HYPER", "Hyperlane"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://hyperlane.xyz/"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[ethereum]]", "[[cross-chain]]", "[[interoperability]]"]
+related: ["[[arbitrum]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]"]
 ---
 
 # Hyperlane

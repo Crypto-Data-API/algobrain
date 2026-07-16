@@ -2,14 +2,14 @@
 title: "Maverick Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["MAV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mav.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[ai-liquidity-management]]", "[[uniswap]]", "[[defai]]", "[[artificial-intelligence]]"]
+related: ["[[ai-liquidity-management]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[defai]]", "[[ethereum]]", "[[uniswap]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -175,4 +175,4 @@ Maverick governance will take place through a Voting Escrow (ve) contract, where
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

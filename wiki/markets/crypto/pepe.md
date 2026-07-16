@@ -2,12 +2,12 @@
 title: "PEPE"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum, meme-coin, speculation]
 entity_type: protocol
 aliases: ["PEPE", "PEPE-token", "pepe-coin"]
-related: ["[[crypto-markets]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[fartcoin]]", "[[bitcoin]]", "[[solana]]", "[[hyperliquid]]", "[[uniswap]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[fartcoin]]", "[[hyperliquid]]", "[[solana]]", "[[uniswap]]"]
 headquarters: "Decentralized"
 website: "https://www.pepe.vip/"
 ---
@@ -339,3 +339,15 @@ PEPE's early price discovery happened on [[uniswap|Uniswap]] before CEX listings
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 420.69T PEPE |
+| **Total Supply** | 420.69T PEPE |
+| **Max Supply** | 420.69T PEPE |
+| **Fully Diluted Valuation** | $1.15B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---

@@ -2,14 +2,14 @@
 title: "ResearchCoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["RSC", "ResearchHub"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.researchhub.com/"
-related: ["[[crypto-markets]]", "[[base]]", "[[decentralized-science]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[decentralized-science]]"]
 ---
 
 # ResearchCoin

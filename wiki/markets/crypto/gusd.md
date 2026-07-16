@@ -2,14 +2,14 @@
 title: "GUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: good
 tags: [crypto, stablecoins]
 aliases: ["GUSD", "Gate USD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.gate.com/"
-related: ["[[crypto-markets]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[dai]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # GUSD
@@ -77,3 +77,99 @@ In a macro backdrop of Fear & Greed 23 ("Established Bear Market"), demand for e
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | GUSD |
+| **Market Cap Rank** | #200 |
+| **Market Cap** | $149.60M |
+| **Current Price** | $0.9987 |
+| **Categories** | Stablecoins, USD Stablecoin |
+| **Website** | [https://www.gate.com/](https://www.gate.com/) |
+
+---
+
+## Overview
+
+GUSD is a flexible, principal-protected investment product that distributes rewards daily. Its returns are sourced from the Gate ecosystem's revenue, tokenized treasuries or other RWA, and stablecoin-backed yield assets—designed to provide relatively stable yields in both bullish and bearish market conditions. Additionally, GUSD is fully tradable and can be used as collateral. You can stake USDT/USDC to mint GUSD as a yield-bearing certificate. It represents the value of your investment but does not confer ownership of the underlying assets. Upon redemption, GUSD will be converted to USDT/USDC at a 1:1 ratio (redemption fees apply). The APR is dynamically adjusted based on the revenues of the Gate ecosystem, tokenized RWA and stablecoins, mirroring returns from real-world instruments such as tokenized US treasury bills.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 149.79M GUSD |
+| **Total Supply** | 320.00M GUSD |
+| **Max Supply** | 320.00M GUSD |
+| **Fully Diluted Valuation** | $319.59M |
+| **Market Cap / FDV Ratio** | 0.47 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.02 (2026-05-23) |
+| **Current vs ATH** | -2.28% |
+| **All-Time Low** | $0.9792 (2026-03-02) |
+| **Current vs ATL** | +2.03% |
+| **24h Change** | -0.05% |
+| **7d Change** | +0.10% |
+| **30d Change** | +0.07% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.gate.com/](https://www.gate.com/) |
+| **Twitter** | [@Gate](https://twitter.com/Gate) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.11M |
+| **Market Cap Rank** | #200 |
+| **24h Range** | $0.9983 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

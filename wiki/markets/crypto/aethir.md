@@ -2,14 +2,14 @@
 title: "Aethir"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, machine-learning, altcoins]
+tags: [ai-trading, altcoins, crypto, machine-learning]
 aliases: ["ATH", "Aethir Cloud"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.aethir.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[akash-network]]", "[[render-token]]", "[[aioz-network]]", "[[artificial-intelligence]]", "[[depin]]", "[[solana]]", "[[arbitrum]]"]
+related: ["[[aioz-network]]", "[[akash-network]]", "[[arbitrum]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[render-token]]", "[[solana]]"]
 ---
 
 # Aethir
@@ -269,3 +269,40 @@ This is a qualitative framing, not a price target.
 - [DEXTools — What Is Aethir (ATH)? Decentralized GPU Cloud DePIN Guide 2026](https://www.dextools.io/tutorials/what-is-aethir-ath-decentralized-gpu-cloud-depin-guide-2026)
 - [Aethir docs](https://aethir.gitbook.io/aethir/)
 - Verified via web search, 2026-06-11
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ATH |
+| **Market Cap Rank** | #281 |
+| **Market Cap** | $88.33M |
+| **Current Price** | $0.00438319 |
+| **Categories** | Artificial Intelligence (AI), Infrastructure, Impossible Finance Launchpad, DePIN, Binance Alpha Spotlight |
+| **Website** | [https://www.aethir.com/](https://www.aethir.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 20.13B ATH |
+| **Total Supply** | 42.00B ATH |
+| **Max Supply** | 42.00B ATH |
+| **Fully Diluted Valuation** | $184.31M |
+| **Market Cap / FDV Ratio** | 0.48 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $9.52M |
+| **Market Cap Rank** | #281 |
+| **24h Range** | $0.00430830 — $0.00452103 |
+| **CoinGecko Sentiment** | 43% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

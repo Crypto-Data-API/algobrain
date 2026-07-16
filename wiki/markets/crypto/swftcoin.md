@@ -2,15 +2,15 @@
 title: "SWFTCOIN"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, cross-chain, defi]
-aliases: ["SWFTC", "SWFT Blockchain", "SwftCoin"]
+tags: [altcoins, cross-chain, crypto, defi, nft]
+aliases: ["SWFT Blockchain", "SWFTC", "SwftCoin"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://www.swftblockchain.ai"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cross-chain-bridge]]", "[[decentralized-exchange]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]"]
 ---
 
 # SWFTCOIN
@@ -236,3 +236,28 @@ SWFTC is a fixed-supply ERC-20 (`0x0bb2...fc1e`) with a mirrored BEP-20 on BNB C
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Overview
+
+English version
+Introducing SWFTCoin (SWFTC)
+$SWFTC: Powering SWFT Blockchain and AI Services (SWFTGPT) 
+SwftCoin ($SWFTC) is the native utility token driving SWFT Blockchain's AI-powered ecosystem, SWFTGPT, and the first ever AI token featured on Coinbase. SWFTGPT is also the first domain-specific LLM for crypto. 
+SwftCoin key features include:
+50% Reduced Transaction Fees: Lower costs on all transactions.
+AI Service Payments: Use $SWFTC to access SWFTGPT. Tools include expert market analysis,  predictions, and intelligent trading solutions. 
+Membership Benefits: Unlock premium features and AI agent services within SWFTGPT.
+AI-Powered Swaps: Enable precise, fast cross-chain transactions and analytics.
+SWFT Blockchain combines AI innovation with blockchain infrastructure, simplifying crypto trading while enhancing functionality through $SWFTC.
+
+Chinese version
+$SWFTC：驱动 SWFT Blockchain 和 AI 服务（SWFTGPT）
+SwftCoin ($SWFTC) 是 SWFT Blockchain 的原生实用代币，为其 AI 驱动的生态系统 SWFTGPT 提供支持，同时也是 Coinbase 上首个 AI 代币。SWFTGPT 也是首个专注于加密领域的特定领域大型语言模型 (LLM)。
+SwftCoin 的主要功能包括：
+1、50% 交易费减免：降低所有交易成本。
+2、AI 服务支付：使用 $SWFTC 访问 SWFTGPT 工具，包括专家市场分析、预测以及智能交易解决方案。
+3、会员权益：解锁 SWFTGPT 的高级功能和 AI 代理服务。
+4、AI 驱动的闪兑：实现精准快速的跨链交易和数据分析。
+SWFT Blockchain 将 AI 创新与区块链基础设施结合，通过 $SWFTC 简化加密交易，并提升其功能性。
+
+---

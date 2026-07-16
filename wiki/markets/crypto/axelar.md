@@ -2,14 +2,14 @@
 title: "Axelar"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["AXL", "Axelar Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://axelar.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cosmos]]", "[[cross-chain-bridges]]", "[[cross-chain-bridge-risk]]", "[[wormhole]]", "[[cross-chain]]", "[[bridge]]", "[[interoperability]]"]
+related: ["[[bridge]]", "[[cosmos]]", "[[cross-chain-bridge-risk]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[wormhole]]"]
 ---
 
 # Axelar
@@ -235,3 +235,28 @@ AXL has an **uncapped (inflationary) max supply** — staking rewards mint new A
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | AXL |
+| **Market Cap Rank** | #432 |
+| **Market Cap** | $50.35M |
+| **Current Price** | $0.0418 |
+| **Categories** | Infrastructure, Interoperability, Bridge Governance Tokens, Cross-chain Communication, Made in USA, CoinList Launchpad |
+| **Website** | [https://axelar.network/](https://axelar.network/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.20B AXL |
+| **Total Supply** | 1.25B AXL |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $52.16M |
+| **Market Cap / FDV Ratio** | 0.97 |
+
+---

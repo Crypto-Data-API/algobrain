@@ -2,14 +2,14 @@
 title: "USAT"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
-aliases: ["USAT"]
+aliases: ["USA", "USAT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usat.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]"]
 ---
 
 # USAT
@@ -124,10 +124,10 @@ USA₮ is Tether's U.S.-regulated, dollar-backed stablecoin developed specifical
 ## See Also
 
 - [[crypto-markets]]
-- [[ethereum]]
+- [[solana]]
 
 ---
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

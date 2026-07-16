@@ -2,14 +2,14 @@
 title: "dYdX"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["DYDX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dydx.trade"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[decentralized-exchange]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[perp-dex-aggregation]]", "[[lighter]]", "[[cosmos]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[lighter]]", "[[perp-dex-aggregation]]", "[[perpetual-futures]]"]
 ---
 
 # dYdX
@@ -136,3 +136,114 @@ DYDX is unusual among governance tokens in having a **real, USDC-denominated fee
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical snapshot context
 - Market data as of 2026-06-21 from the crypto-loop CoinGecko markets snapshot (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet for protocol mechanics.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | DYDX |
+| **Market Cap Rank** | #255 |
+| **Market Cap** | $103.16M |
+| **Current Price** | $0.1217 |
+| **Categories** | Decentralized Exchange (DEX), Smart Contract Platform, Exchange-based Tokens, Decentralized Finance (DeFi), Perpetuals, Layer 1 (L1), Appchains, Made in USA (+1 more) |
+| **Website** | [https://dydx.trade](https://dydx.trade) |
+
+---
+
+## Overview
+
+dYdX is DeFi’s pro trading platform and a pioneer in decentralized finance, known for being the first to offer decentralized margin trading and derivatives, as well as inventing flash loans and DEX aggregators in 2018. Built on a custom Layer-1 blockchain using the Cosmos SDK, dYdX provides a professional-grade, decentralized trading experience with high leverage, deep liquidity, and low fees. Governed by the community through the DYDX token, dYdX is focused on delivering a transparent and user-driven financial system. This November, dYdX Unlimited launches, bringing instant market listings, the MegaVault liquidity engine, revamped trading rewards, and lifetime affiliate commissions, setting a new standard for decentralized trading
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 848.61M DYDX |
+| **Total Supply** | 958.34M DYDX |
+| **Max Supply** | 1.00B DYDX |
+| **Fully Diluted Valuation** | $116.50M |
+| **Market Cap / FDV Ratio** | 0.89 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.52 (2024-03-07) |
+| **Current vs ATH** | -97.30% |
+| **All-Time Low** | $0.0788 (2026-03-08) |
+| **Current vs ATL** | +54.56% |
+| **24h Change** | +0.96% |
+| **7d Change** | -9.50% |
+| **30d Change** | -0.72% |
+| **1y Change** | -80.95% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Cosmos
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Cosmos | `ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C` |
+| Osmosis | `ibc/831F0B1BBB1D08A2B75311892876D71565478C532967545476DF4C2D7492E48C` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | DYDX/USDT | N/A |
+| KuCoin | DYDX/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://dydx.trade](https://dydx.trade) |
+| **Twitter** | [@dydxfoundation](https://twitter.com/dydxfoundation) |
+| **Discord** | [https://discord.com/invite/dydx](https://discord.com/invite/dydx) |
+| **GitHub** | [https://github.com/dydxprotocol](https://github.com/dydxprotocol) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.71M |
+| **Market Cap Rank** | #255 |
+| **24h Range** | $0.1191 — $0.1231 |
+| **CoinGecko Sentiment** | 80% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

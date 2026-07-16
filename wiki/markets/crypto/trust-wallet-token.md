@@ -2,14 +2,14 @@
 title: "Trust Wallet Token"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["TWT", "Trust Wallet Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://trustwallet.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[ethereum]]", "[[self-custody]]", "[[account-abstraction]]"]
+related: ["[[account-abstraction]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[self-custody]]"]
 ---
 
 # Trust Wallet Token
@@ -141,3 +141,131 @@ TWT's category is a **wallet-ecosystem / self-custody token** (utility + governa
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | TWT |
+| **Market Cap Rank** | #202 |
+| **Market Cap** | $148.81M |
+| **Current Price** | $0.3571 |
+| **Categories** | Wallets, Account Abstraction |
+| **Website** | [https://trustwallet.com/](https://trustwallet.com/) |
+
+---
+
+## Overview
+
+Trust Wallet Token (TWT) 511 is a utility token that can only be used within the app. This will be used to incentivize all Trust Wallet users.
+
+What are the Incentives of (TWT)?
+Governance token that will be used by anyone who wants to take part in making decisions for adding new blockchain support, tokens and product features. Will also be collected as fees for submissions to the Trust Wallet repository 59.
+
+Discounts on DEX services and purchasing crypto within the app.
+
+Collectible Marketplace, anyone interested in trading, selling or buying digital collectibles can utilize the token in a user-friendly environment.
+
+DApp reviews and promotions to incentivize developers to work on DApps that contribute to further adoption of Web 3.0 on mobile devices.
+
+Affiliate and bounty rewards, the token can be converted to BNB or ETH, that can be used for Network Fees.
+
+Vouching and User reputation, users will be able to vouch for developers of products they enjoy to show the quality of the product to the rest of the Trust Ecosystem.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 416.65M TWT |
+| **Total Supply** | 1.00B TWT |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $357.15M |
+| **Market Cap / FDV Ratio** | 0.42 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.72 (2022-12-11) |
+| **Current vs ATH** | -86.87% |
+| **All-Time Low** | $0.00277641 (2020-06-09) |
+| **Current vs ATL** | +12763.91% |
+| **24h Change** | +1.37% |
+| **7d Change** | +5.52% |
+| **30d Change** | -14.73% |
+| **1y Change** | -54.99% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x4b0f1812e5df2a09796481ff14017e6005508003` |
+| Energi | `0xfaa02b262130431b44c929fdd960e202ffeabfe3` |
+| Binancecoin | `TWT-8C2` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | TWT/USDT | N/A |
+| Bitget | TWT/USDT | N/A |
+| KuCoin | TWT/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://trustwallet.com/](https://trustwallet.com/) |
+| **Twitter** | [@trustwallet](https://twitter.com/trustwallet) |
+| **Reddit** | [https://www.reddit.com/r/trustapp/](https://www.reddit.com/r/trustapp/) |
+| **Telegram** | [trust_announcements](https://t.me/trust_announcements) (749,536 members) |
+| **GitHub** | [https://github.com/trustwallet/wallet-core](https://github.com/trustwallet/wallet-core) |
+| **Whitepaper** | [https://trustwallet.com/blog/community/trust-wallet-token-twt-litepaper](https://trustwallet.com/blog/community/trust-wallet-token-twt-litepaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.61M |
+| **Market Cap Rank** | #202 |
+| **24h Range** | $0.3520 — $0.3654 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

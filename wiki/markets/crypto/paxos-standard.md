@@ -2,14 +2,14 @@
 title: "Pax Dollar"
 type: market
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoin]
-aliases: ["USDP", "Pax Dollar", "Paxos Standard", "PAX"]
+aliases: ["PAX", "Pax Dollar", "Paxos Standard", "USDP"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://www.paxos.com/standard/"
-related: ["[[stablecoin]]", "[[paxos]]", "[[binance-usd]]", "[[usdc]]", "[[tether]]", "[[gemini-dollar]]", "[[paypal-usd]]", "[[ethereum]]", "[[crypto-markets]]"]
+related: ["[[base]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # Pax Dollar
@@ -146,3 +146,92 @@ See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet for issuer/mechanism details.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.00M USDP |
+| **Total Supply** | 2.00M USDP |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $2.00M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.25 (2025-11-04) |
+| **Current vs ATH** | -55.62% |
+| **All-Time Low** | $0.9837 (2025-10-02) |
+| **Current vs ATL** | +1.63% |
+| **24h Change** | -0.01% |
+| **7d Change** | -0.01% |
+| **30d Change** | -0.00% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0x76a9a0062ec6712b99b4f63bd2b4270185759dd5` |
+| Sonic | `0x08417cdb7f52a5021bb4eb6e0deaf3f295c3f182` |
+| Ethereum | `0x9b3a8f7cec208e247d97dee13313690977e24459` |
+| Hyperevm | `0xbe65f0f410a72bec163dc65d46c83699e957d588` |
+| Tac | `0x4def531c3060686948f00ecc7504f2e0b71eda14` |
+| Avalanche | `0x9ee1963f05553ef838604dd39403be21cef26aa4` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://app.parallel.best/](https://app.parallel.best/) |
+| **Twitter** | [@ParallelMoney](https://twitter.com/ParallelMoney) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $187.61 |
+| **Market Cap Rank** | #2222 |
+| **24h Range** | $0.9996 — $1.00 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[base]]
+
+---

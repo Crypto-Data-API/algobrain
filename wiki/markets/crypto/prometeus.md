@@ -2,14 +2,14 @@
 title: "Prom"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, cross-chain, defi]
+tags: [altcoins, cross-chain, crypto, defi]
 aliases: ["PROM", "Prom", "Prometeus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://prom.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[cross-chain-bridge]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]"]
 ---
 
 # Prom
@@ -238,3 +238,9 @@ PROM's narrative blends **zkEVM scaling**, **cross-chain interoperability**, and
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Overview
+
+Prom is a modular ZkEVM Layer 2 that enables interoperability across various chains, including both EVM and non-EVM compatible networks. Prom submits its proof of transaction to the additional chains on top of the chosen Settlement chain, building the bridge between ecosystems.
+
+---

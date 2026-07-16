@@ -2,14 +2,14 @@
 title: "Neutrl USD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, stablecoins]
 aliases: ["NUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://neutrl.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoin]]", "[[stablecoins]]", "[[ethena-usde]]", "[[synthetic-dollar]]"]
+related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoin]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # Neutrl USD
@@ -210,3 +210,44 @@ NUSD sits in the **delta-neutral synthetic-dollar / "internet bond"** narrative 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | NUSD |
+| **Market Cap Rank** | #359 |
+| **Market Cap** | $64.35M |
+| **Current Price** | $0.9993 |
+| **Categories** | Stablecoins, Synthetic Asset |
+| **Website** | [https://neutrl.finance/](https://neutrl.finance/) |
+
+---
+
+## Overview
+
+Neutrl is a market-neutral synthetic dollar designed to unlock untapped yield opportunities across OTC and altcoin markets. By combining OTC arbitrage, funding rate capture, and other market-neutral DeFi strategies, Neutrl provides a transparent, fully collateralized access point for generating sustainable onchain yield without directional market risk, accessible to both institutions and individual users.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.03 (2026-06-28) |
+| **Current vs ATH** | -3.12% |
+| **All-Time Low** | $0.9754 (2025-11-20) |
+| **Current vs ATL** | +2.44% |
+| **24h Change** | +0.04% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.17% |
+| **1y Change** | +0.00% |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

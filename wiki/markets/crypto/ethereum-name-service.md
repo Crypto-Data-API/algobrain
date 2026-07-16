@@ -2,14 +2,14 @@
 title: "Ethereum Name Service"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["ENS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ens.domains/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[base]]", "[[governance-token]]", "[[decentralized-identity]]", "[[the-graph]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[governance-token]]", "[[hyperliquid]]", "[[the-graph]]"]
 ---
 
 # Ethereum Name Service
@@ -140,3 +140,134 @@ ENS is hard to value on cash flows because the token does not directly receive r
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ENS |
+| **Market Cap Rank** | #181 |
+| **Market Cap** | $174.53M |
+| **Current Price** | $4.26 |
+| **Categories** | NFT, Decentralized Identifier (DID), Name Service, Governance |
+| **Website** | [https://ens.domains/](https://ens.domains/) |
+
+---
+
+## Overview
+
+The Ethereum Name Service (ENS) is a distributed, open, and extensible naming system based on the Ethereum blockchain.
+
+ENS’s job is to map human-readable names like ‘alice.eth’ to machine-readable identifiers such as Ethereum addresses, other cryptocurrency addresses, content hashes, and metadata. ENS also supports ‘reverse resolution’, making it possible to associate metadata such as canonical names or interface descriptions with Ethereum addresses.
+
+ENS has similar goals to DNS, the Internet’s Domain Name Service, but has significantly different architecture due to the capabilities and constraints provided by the Ethereum blockchain. Like DNS, ENS operates on a system of dot-separated hierarchical names called domains, with the owner of a domain having full control over subdomains.
+
+Top-level domains, like ‘.eth’ and ‘.test’, are owned by smart contracts called registrars, which specify rules governing the allocation of their subdomains. Anyone may, by following the rules imposed by these registrar contracts, obtain ownership of a domain for their own use. ENS also supports importing in DNS names already owned by the user for use on ENS.
+
+Because of the hierarchal nature of ENS, anyone who owns a domain at any level may configure subdomains - for themselves or others - as desired. For instance, if Alice owns 'alice.eth', she can create 'pay.alice.eth' and configure it as she wishes.
+
+ENS is deployed on the Ethereum main network and on several test networks. If you use a library such as the ensjs Javascript library, or an end-user application, it will automatically detect the network you are interacting with and use the ENS deployment on that network.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 40.99M ENS |
+| **Total Supply** | 100.00M ENS |
+| **Max Supply** | 100.00M ENS |
+| **Fully Diluted Valuation** | $425.83M |
+| **Market Cap / FDV Ratio** | 0.41 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $83.40 (2021-11-11) |
+| **Current vs ATH** | -94.89% |
+| **All-Time Low** | $3.97 (2026-06-26) |
+| **Current vs ATL** | +7.21% |
+| **24h Change** | +0.70% |
+| **7d Change** | +2.82% |
+| **30d Change** | -20.74% |
+| **1y Change** | -83.81% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xc18360217d8f7ab5e7c516566761ea12ce7f9d72` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ENS/USDT | N/A |
+| Kraken | ENS/USD | N/A |
+| Upbit | ENS/KRW | N/A |
+| Bitget | ENS/USDT | N/A |
+| KuCoin | ENS/USDT | N/A |
+| Crypto.com Exchange | ENS/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XC18360217D8F7AB5E7C516566761EA12CE7F9D72/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V2 (Ethereum) | 0XC18360217D8F7AB5E7C516566761EA12CE7F9D72/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://ens.domains/](https://ens.domains/) |
+| **Twitter** | [@ensdomains](https://twitter.com/ensdomains) |
+| **Whitepaper** | [https://docs.ens.domains/learn/protocol/](https://docs.ens.domains/learn/protocol/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $16.61M |
+| **Market Cap Rank** | #181 |
+| **24h Range** | $4.23 — $4.43 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

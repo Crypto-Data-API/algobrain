@@ -2,7 +2,7 @@
 title: "USD Coin (USDC)"
 type: entity
 created: 2026-04-07
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum, regulation, stablecoin]
 aliases: ["Circle USDC", "USD Coin", "USDC"]
@@ -336,5 +336,42 @@ USDC is one of the deepest-liquidity assets in all of crypto. It functions as a 
 
 - [[crypto-markets]]
 - [[ethereum]]
+
+---
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USDC |
+| **Market Cap Rank** | #5 |
+| **Market Cap** | $73.09B |
+| **Current Price** | $0.9999 |
+| **Categories** | Stablecoins, USD Stablecoin, Fiat-backed Stablecoin, Made in USA, Base Native, MiCA-Compliant Stablecoin, GENIUS Act Compliant Stablecoin |
+| **Website** | [https://www.circle.com/en/usdc](https://www.circle.com/en/usdc) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 73.09B USDC |
+| **Total Supply** | 73.10B USDC |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $73.09B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $11.97B |
+| **Market Cap Rank** | #5 |
+| **24h Range** | $0.9997 — $1.00 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
 
 ---

@@ -2,14 +2,15 @@
 title: "Superstate Short Duration U.S. Government Securities Fund (USTB)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, treasuries]
-aliases: ["USTB", "Superstate USTB", "Invesco Short Duration US Government Securities Fund"]
+aliases: ["Invesco Short Duration US Government Securities Fund", "Superstate USTB", "USTB"]
 entity_type: fund
 founded: 2024
 website: "https://superstate.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[treasuries]]", "[[tokenized-treasuries]]", "[[real-world-assets]]", "[[usdc]]", "[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[ondo-finance]]"]
+related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[crypto-markets]]", "[[ethereum]]", "[[ondo-finance]]", "[[real-world-assets]]", "[[tokenized-treasuries]]", "[[treasuries]]", "[[usdc]]"]
+headquarters: "Decentralized"
 ---
 
 # Superstate Short Duration U.S. Government Securities Fund (USTB)
@@ -172,3 +173,48 @@ USTB is a low-risk cash-equivalent by crypto standards, but it is not risk-free:
 - Superstate docs, tokenized equities (Opening Bell) — https://docs.superstate.com/tokenized-equities
 - The Block: Coinbase CUSHY tokenized share class via Superstate — https://www.theblock.co/post/399652/coinbase-cushy-stablecoin-fund-launch-tokenized-share-class-superstate-q2
 - Verified via Perplexity sonar + web search, 2026-06-10.
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $11.15 (2026-07-15) |
+| **Current vs ATH** | +0.00% |
+| **All-Time Low** | $10.29 (2025-02-26) |
+| **Current vs ATL** | +8.31% |
+| **24h Change** | +0.01% |
+| **7d Change** | +0.07% |
+| **30d Change** | +0.30% |
+| **1y Change** | +3.69% |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $0.00000000 |
+| **Market Cap Rank** | #82 |
+| **24h Range** | $11.14 — $11.15 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

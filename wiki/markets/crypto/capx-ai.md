@@ -2,14 +2,14 @@
 title: "Capx AI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, machine-learning]
+tags: [altcoins, crypto, defi, machine-learning]
 aliases: ["CAPX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://capx.ai"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[artificial-intelligence]]", "[[ai-trading]]"]
+related: ["[[ai-trading]]", "[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]"]
 ---
 
 # Capx AI

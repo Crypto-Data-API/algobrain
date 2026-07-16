@@ -2,14 +2,14 @@
 title: "Kelp Gain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
-aliases: ["AGETH", "Kelp Gain", "agETH", "KelpDAO Gain"]
+aliases: ["AGETH", "Kelp Gain", "KelpDAO Gain", "agETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kelpdao.xyz/gain/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[rseth]]", "[[eigenlayer]]", "[[restaking]]", "[[slashing]]", "[[lido]]", "[[uniswap]]", "[[2026-04-18-kelp-layerzero-exploit]]", "[[2026-04-kelp-stable-sympathy-depeg]]", "[[rpc-poisoning]]", "[[dvn-compromise-patterns]]", "[[2026-exploit-target-watchlist]]"]
+related: ["[[2026-04-18-kelp-layerzero-exploit]]", "[[2026-04-kelp-stable-sympathy-depeg]]", "[[2026-exploit-target-watchlist]]", "[[crypto-markets]]", "[[dvn-compromise-patterns]]", "[[eigenlayer]]", "[[ethereum]]", "[[lido]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[rpc-poisoning]]", "[[rseth]]", "[[slashing]]", "[[uniswap]]"]
 ---
 
 # Kelp Gain
@@ -204,3 +204,46 @@ Context: 2026-06-23 — **Extreme Fear** (F&G 21), long-horizon **Bottoming / Ac
 - (Source: [[2026-04-18-kelp-layerzero-exploit]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge of KelpDAO's liquid-restaking gain model; see linked incident post-mortems for the April 2026 exploit.
+
+## Overview
+
+KelpDAO's new project, Gain, is designed to help users stake ETH and its variants (rsETH, ETHx, stETH) to earn rewards from multiple Layer 2 networks and DeFi protocols. When users deposit these assets, they receive agETH, a token that enables them to participate in airdrop farming and other reward strategies. The platform automates asset management, making it easy for users to maximize their earnings with minimal effort.
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $6,715.15 (2026-04-19) |
+| **Current vs ATH** | -70.22% |
+| **All-Time Low** | $495.15 (2026-04-19) |
+| **Current vs ATL** | +303.89% |
+| **24h Change** | N/A |
+| **7d Change** | +6.14% |
+| **30d Change** | -38.27% |
+| **1y Change** | -38.83% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1,265.51 |
+| **Market Cap Rank** | #875 |
+| **Last Updated** | 2026-07-15 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

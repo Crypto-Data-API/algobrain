@@ -2,14 +2,14 @@
 title: "Acurast"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi, machine-learning]
+tags: [altcoins, crypto, defi, machine-learning]
 aliases: ["ACU"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://acurast.com/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[decentralized-compute]]", "[[trusted-execution-environment]]"]
+related: ["[[crypto-markets]]", "[[decentralized-compute]]", "[[depin]]", "[[trusted-execution-environment]]"]
 ---
 
 # Acurast

@@ -2,7 +2,7 @@
 title: "basilica"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["SN39"]
@@ -20,10 +20,7 @@ related: ["[[crypto-markets]]"]
 
 ## Overview
 
-- **What it does:** decentralized GPU compute rental. Miners rent out GPU capacity; validators score performance and availability. Part of the "Covenant AI" stack with [[templar]] (SN3) and [[patrol-tao-com|Grail]] (SN81).
-- **Team:** Basilica (basilica.ai). The subnet was previously known by other names (EdgeMaxxing was an earlier related effort) before the current Basilica focus.
-- **Trading relevance:** competes with SN51 [[celium|Celium]] and SN64 [[chutes|Chutes]] for the decentralized-GPU-marketplace thesis. Off-chain revenue is the key valuation signal.
-- **Alpha token:** alpha-39.
+Basilica is a decentralized compute marketplace operating as subnet 39 on the Bittensor network. The project provides high-performance GPU compute resources for AI workloads, serving as the infrastructure layer of the Covenant AI ecosystem alongside Templar (SN3) and Grail (SN81). Basilica implements a performance-first approach that prioritizes compute quality and reliability over simple price arbitrage. The platform uses smart contract-based collateral systems to ensure service delivery and incentivize miners to provide high-quality compute resources. The marketplace serves AI researchers, developers, and organizations requiring reliable GPU access for training, fine-tuning, and deploying machine learning models.
 
 ---
 
@@ -37,12 +34,6 @@ related: ["[[crypto-markets]]"]
 | **Current Price** | $6.31 |
 | **Categories** | Artificial Intelligence (AI), Bittensor Ecosystem, Bittensor Subnets |
 | **Website** | [https://basilica.ai/](https://basilica.ai/) |
-
----
-
-## Overview
-
-Basilica is a decentralized compute marketplace operating as subnet 39 on the Bittensor network. The project provides high-performance GPU compute resources for AI workloads, serving as the infrastructure layer of the Covenant AI ecosystem alongside Templar (SN3) and Grail (SN81). Basilica implements a performance-first approach that prioritizes compute quality and reliability over simple price arbitrage. The platform uses smart contract-based collateral systems to ensure service delivery and incentivize miners to provide high-quality compute resources. The marketplace serves AI researchers, developers, and organizations requiring reliable GPU access for training, fine-tuning, and deploying machine learning models.
 
 ---
 
@@ -144,4 +135,4 @@ Basilica is a decentralized compute marketplace operating as subnet 39 on the Bi
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

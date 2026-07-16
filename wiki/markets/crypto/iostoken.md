@@ -2,9 +2,9 @@
 title: "IOST"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["IOST", "IOStoken", "Internet of Services Token"]
 entity_type: protocol
 founded: 2018

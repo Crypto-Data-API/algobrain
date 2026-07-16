@@ -2,14 +2,14 @@
 title: "Lorenzo Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, bitcoin]
+tags: [bitcoin, crypto, defi]
 aliases: ["BANK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lorenzo-protocol.xyz/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[bitcoin]]", "[[liquid-staking]]", "[[liquid-restaking]]", "[[restaking]]", "[[stablecoin]]", "[[real-world-assets]]", "[[defi]]", "[[governance-token]]"]
+related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[real-world-assets]]", "[[restaking]]", "[[stablecoin]]"]
 ---
 
 # Lorenzo Protocol
@@ -162,3 +162,43 @@ Lorenzo's positioning is less "just an LST" and more an **on-chain asset manager
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko snapshot); Fear & Greed Index 21 (Extreme Fear).
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BANK |
+| **Market Cap Rank** | #707 |
+| **Market Cap** | $26.08M |
+| **Current Price** | $0.0613 |
+| **Categories** | Liquid Staking, BTCfi Protocol |
+| **Website** | [https://lorenzo-protocol.xyz/](https://lorenzo-protocol.xyz/) |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.2307 (2025-10-18) |
+| **Current vs ATH** | -73.74% |
+| **All-Time Low** | $0.0224 (2026-06-05) |
+| **Current vs ATL** | +169.98% |
+| **24h Change** | +39.76% |
+| **7d Change** | +74.21% |
+| **30d Change** | +46.53% |
+| **1y Change** | +0.12% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $30.33M |
+| **Market Cap Rank** | #707 |
+| **24h Range** | $0.0438 — $0.0607 |
+| **CoinGecko Sentiment** | 75% positive |
+| **Last Updated** | 2026-07-16 |
+
+---

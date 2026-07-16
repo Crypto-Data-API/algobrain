@@ -2,14 +2,14 @@
 title: "Treasure"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, altcoins]
+tags: [altcoins, crypto, nft]
 aliases: ["MAGIC", "Treasure DAO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://treasure.lol/"
-related: ["[[crypto-markets]]", "[[arbitrum]]", "[[gamefi]]", "[[nft]]", "[[dao]]", "[[ethereum]]", "[[governance-token]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[nft]]"]
 ---
 
 # Treasure (MAGIC)

@@ -2,14 +2,14 @@
 title: "Verus"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["VRSC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://verus.io"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-work]]", "[[proof-of-stake]]", "[[privacy-coins]]", "[[verge]]", "[[monero]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[monero]]", "[[privacy-coins]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[verge]]"]
 ---
 
 # Verus
@@ -156,3 +156,94 @@ Verus stands out for combining privacy with a self-sovereign identity system and
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko; `raw/data/crypto-loop/coingecko-markets.json`).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | VRSC |
+| **Market Cap Rank** | #444 |
+| **Market Cap** | $48.39M |
+| **Current Price** | $0.6006 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), MEV Protection, Proof of Work (PoW), Privacy Blockchain, Mobile Mining |
+| **Website** | [https://verus.io](https://verus.io) |
+
+---
+
+## Overview
+
+Verus Coin aims to be the world's most advanced technology, zero knowledge privacy-enabling blockchain, Verus Coin brings Sapling performance and zero knowledge features to an intelligent system with a completely unique, combined proof of stake/proof of work consensus algorithm that solves the nothing at stake problem. With this and its approach towards CPU mining and ASICs, Verus Coin may also be the most naturally decentralizing and attack resistant blockchain to exist.
+Over and above its leading privacy, interchain contracts, and security features, Verus Coin's next steps include automated provisioning of public blockchains as a service, using the same technology that Verus developers created and used to solve the ""nothing at stake"" problem. At that point, the first applications that will allow provisioning of chains on their behalf will be polls and elections.
+
+Verus introduces a new consensus algorithm called Proof of Power, a 50% PoW / 50% PoS algorithm, which solves theoretical weaknesses in other PoS systems, and is provably immune to 51% hash attacks, making Verus one of, if not the most, double-spend resistant public blockchain(s) running. With its groundbreaking consensus protocol, Verus also uses a unique hash algorithm, VerusHash, a quantum secure hash algorithm that is near-equally mineable on both CPUs and GPUs.  The Verus Coin’s project vision includes automatically provisioned public blockchains as a service.  Verus was a no-ICO, no-premine, 100% fairly launched community project.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 80.57M VRSC |
+| **Total Supply** | 80.57M VRSC |
+| **Max Supply** | 83.54M VRSC |
+| **Fully Diluted Valuation** | $48.39M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $6.74 (2024-12-05) |
+| **Current vs ATH** | -91.10% |
+| **All-Time Low** | $0.00177843 (2020-11-29) |
+| **Current vs ATL** | +33647.39% |
+| **24h Change** | +1.25% |
+| **7d Change** | +47.65% |
+| **30d Change** | +37.10% |
+| **1y Change** | -71.89% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://verus.io](https://verus.io) |
+| **Twitter** | [@veruscoin](https://twitter.com/veruscoin) |
+| **Reddit** | [https://www.reddit.com/r/VerusCoin/](https://www.reddit.com/r/VerusCoin/) |
+| **Discord** | [https://verus.io/discord](https://verus.io/discord) |
+| **GitHub** | [https://github.com/VerusCoin/VerusCoin](https://github.com/VerusCoin/VerusCoin) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $494.38 |
+| **Market Cap Rank** | #444 |
+| **24h Range** | $0.5906 — $0.6006 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

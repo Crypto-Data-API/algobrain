@@ -2,14 +2,14 @@
 title: "Sentient"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ai-trading, ethereum]
+tags: [ai-trading, crypto, ethereum]
 aliases: ["SENT", "Sentient AGI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.sentient.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[artificial-intelligence]]", "[[depin]]", "[[decentralized-ai]]", "[[ai-agent-tokens]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]"]
 ---
 
 # Sentient
@@ -146,3 +146,116 @@ Not financial advice; open-AGI tokens carry severe drawdown, dilution, and execu
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - Macro context: 2026-06-22 snapshot (cryptodataapi.com / CoinGecko) — F&G 21 (Extreme Fear), bottoming/accumulation regime.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SENT |
+| **Market Cap Rank** | #274 |
+| **Market Cap** | $94.84M |
+| **Current Price** | $0.0131 |
+| **Categories** | Artificial Intelligence (AI), Smart Contract Platform, Binance Alpha Spotlight, Binance Wallet IDO |
+| **Website** | [https://www.sentient.xyz/](https://www.sentient.xyz/) |
+
+---
+
+## Overview
+
+Sentient is building the world’s first open and community-built AGI platform, an open-source intelligence network designed to rival and complement the closed systems from OpenAI, Anthropic, Google, and others. Through the Sentient GRID, 100+ partners collaborate across agents, models, data, and compute to create a decentralized alternative to closed AGI labs. 
+
+Sentient addresses the most urgent risk of our time: closed-source AGI.
+Today, a handful of corporations are building AGI in secret, deciding what it knows, how it thinks, and who it serves. AGI is the most powerful technology humanity has ever created. If controlled by a few, it could lock the future into their hands, creating a fundamental threat to society.
+
+Sentient’s mission is to ensure AGI is open, community-built, and not controlled by a single entity. We are achieving this through THE GRID: the world’s largest open network of intelligence. The GRID is the first real step toward open-source AGI: a decentralized fabric of specialized agents, models, datasets, tools, and compute—contributed by the world’s best builders—working together as one to deliver high-quality results.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 7.24B SENT |
+| **Total Supply** | 34.36B SENT |
+| **Max Supply** | 34.36B SENT |
+| **Fully Diluted Valuation** | $450.22M |
+| **Market Cap / FDV Ratio** | 0.21 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0481 (2026-02-01) |
+| **Current vs ATH** | -72.69% |
+| **All-Time Low** | $0.0118 (2026-06-06) |
+| **Current vs ATL** | +10.98% |
+| **24h Change** | -3.21% |
+| **7d Change** | -8.41% |
+| **30d Change** | -22.54% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x56a3ba04e95d34268a19b2a4474dc979babdaf76` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SENT/USDT | N/A |
+| Kraken | SENT/USD | N/A |
+| Upbit | SENT/KRW | N/A |
+| Bitget | SENT/USDT | N/A |
+| KuCoin | SENT/USDT | N/A |
+| Crypto.com Exchange | SENT/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.sentient.xyz/](https://www.sentient.xyz/) |
+| **Twitter** | [@SentientAGI](https://twitter.com/SentientAGI) |
+| **GitHub** | [https://github.com/sentient-agi](https://github.com/sentient-agi) |
+| **Whitepaper** | [https://sentient.foundation/whitepaper](https://sentient.foundation/whitepaper) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $10.37M |
+| **Market Cap Rank** | #274 |
+| **24h Range** | $0.0131 — $0.0136 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

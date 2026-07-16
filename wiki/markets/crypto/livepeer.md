@@ -2,15 +2,15 @@
 title: "Livepeer"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, depin, ai-trading]
+tags: [ai-trading, crypto, depin]
 aliases: ["LPT"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://livepeer.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[depin]]", "[[arbitrum]]", "[[proof-of-stake]]", "[[decentralized-ai]]", "[[golem]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[golem]]", "[[proof-of-stake]]"]
 ---
 
 # Livepeer
@@ -127,3 +127,149 @@ LPT is not a cash-flow asset in the equity sense; it is a **work-access and stak
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LPT |
+| **Market Cap Rank** | #318 |
+| **Market Cap** | $75.34M |
+| **Current Price** | $1.52 |
+| **Genesis Date** | 2018-10-01 |
+| **Hashing Algorithm** | Ethash |
+| **Categories** | Artificial Intelligence (AI), DePIN |
+| **Website** | [https://livepeer.org/](https://livepeer.org/) |
+
+---
+
+## Overview
+
+The Livepeer project aims to deliver a live video streaming network protocol that is fully decentralized, highly scalable, crypto token incentivized, and results in a solution which can serve as the live media layer in the decentralized development (web3) stack. In addition, Livepeer is meant to provide an economically efficient alternative to centralized broadcasting solutions for any existing broadcaster. In this document we describe the Livepeer Protocol - a delegated stake based protocol for incentivizing participants in a live video broadcast network in a game-theoretically secure way. We present solutions for the scalable verification of decentralized work, as well as the prevention of useless work in an attempt to game the token allocations in an inflationary system.
+
+The Livepeer Token (LPT) is the protocol token of the Livepeer network. But it is not the medium of exchange token. Broadcasters use Ethereum's Ether (ETH) to broadcast video on the network. Nodes who contribute processing and bandwidth earn ETH in the form of fees from broadcasters. LPT is a staking token that participants who want to perform work on the network stake in order to coordinate how work gets distributed on the network, and to provide security that the work will get done honestly and correctly. LPT has the following purposes:
+
+It serves as a bonding mechanism in a delegated proof of stake system, in which stake is delegated towards transcoders (or validators) who participate in the protocol to transcode video and validate work. The token, and potential slashing that occurs due to protocol violation, is necessary in order to secure the network against a number of attacks. More below.
+It routes work through the network in proportion to the amount of staked and delegated token, essentially serving as a coordination mechanism.
+
+It is a unit of account that is specific to the Livepeer ecosystem, which forms the basis of a SectorCoin concept, applicable to additional functionality to be i...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 49.69M LPT |
+| **Total Supply** | 49.69M LPT |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $75.34M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $99.03 (2021-11-09) |
+| **Current vs ATH** | -98.47% |
+| **All-Time Low** | $0.3541 (2019-10-26) |
+| **Current vs ATL** | +328.34% |
+| **24h Change** | -1.22% |
+| **7d Change** | -2.36% |
+| **30d Change** | -17.15% |
+| **1y Change** | -77.77% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x58b6a8a3302369daec383334672404ee733ab239` |
+| Harmony Shard 0 | `0xbd3e698b51d340cc53b0cc549b598c13e0172b7c` |
+| Arbitrum One | `0x289ba1701c2f088cf0faf8b3705246331cb8a839` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | LPT/USDT | N/A |
+| Kraken | LPT/USD | N/A |
+| Upbit | LPT/KRW | N/A |
+| Bitget | LPT/USDT | N/A |
+| KuCoin | LPT/USDT | N/A |
+| Crypto.com Exchange | LPT/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X58B6A8A3302369DAEC383334672404EE733AB239/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0X58B6A8A3302369DAEC383334672404EE733AB239/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://livepeer.org/](https://livepeer.org/) |
+| **Twitter** | [@Livepeer](https://twitter.com/Livepeer) |
+| **Reddit** | [https://www.reddit.com/r/livepeer](https://www.reddit.com/r/livepeer) |
+| **Telegram** | [livepeerorg](https://t.me/livepeerorg) (3,524 members) |
+| **Discord** | [https://discord.gg/RR4kFAh](https://discord.gg/RR4kFAh) |
+| **GitHub** | [https://github.com/livepeer/livepeerjs](https://github.com/livepeer/livepeerjs) |
+| **Whitepaper** | [https://github.com/livepeer/wiki/blob/master/WHITEPAPER.md](https://github.com/livepeer/wiki/blob/master/WHITEPAPER.md) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 72 |
+| **GitHub Forks** | 34 |
+| **Pull Requests Merged** | 578 |
+| **Contributors** | 40 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $7.08M |
+| **Market Cap Rank** | #318 |
+| **24h Range** | $1.51 — $1.56 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

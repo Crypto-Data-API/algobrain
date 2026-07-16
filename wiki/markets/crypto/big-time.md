@@ -2,14 +2,14 @@
 title: "Big Time"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi, altcoins]
+tags: [altcoins, crypto, gamefi, nft]
 aliases: ["BIGTIME", "Big Time"]
 entity_type: protocol
 headquarters: "United States"
 website: "https://bigtime.gg/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[play-to-earn]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
 ---
 
 # Big Time

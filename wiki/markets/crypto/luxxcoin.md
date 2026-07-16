@@ -2,7 +2,7 @@
 title: "Luxxcoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto]
 aliases: ["LUX"]
@@ -129,4 +129,4 @@ Luxxcoin is a Solana-based “MemeFi” project that blends meme culture with ga
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

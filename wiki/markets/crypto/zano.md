@@ -2,14 +2,14 @@
 title: "Zano"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, privacy]
 aliases: ["ZANO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zano.org"
-related: ["[[crypto-markets]]", "[[privacy-coins]]", "[[monero]]", "[[zcash]]"]
+related: ["[[crypto-markets]]", "[[monero]]", "[[privacy-coins]]", "[[zcash]]"]
 ---
 
 # Zano
@@ -146,3 +146,144 @@ Zano is a **small-cap privacy L1** that differentiates on the programmable **Con
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21: cryptodataapi.com / CoinGecko markets data.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ZANO |
+| **Market Cap Rank** | #199 |
+| **Market Cap** | $150.71M |
+| **Current Price** | $9.80 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Proof of Stake (PoS), Proof of Work (PoW), Privacy Blockchain, Privacy Infrastructure, Privacy |
+| **Website** | [https://zano.org](https://zano.org) |
+
+---
+
+## Overview
+
+What is Zano?
+Zano is an open-source cryptocurrency (layer-1) and ecosystem with enterprise-grade
+privacy, security, and scalability that operates as a robust platform for confidential
+assets and decentralized applications (dApps). 
+
+Confidential Assets
+Anyone can easily issue user-creatable privacy tokens on the Zano chain; assets
+secured by the same mechanisms that make Zano so much more secure than
+first-generation cryptocurrencies, namely because of hidden addresses and hidden
+amounts. This unique technology can be used to create private stablecoins, shielded
+versions of existing assets, and much more, without the overhead of having to create,
+manage, and secure your own blockchain. 
+
+Untraceable Transactions with hidden amounts
+The transactions between Zano network members are made untraceable with the help of several technologies, most importantly d/v-CLSAG Ring Signatures and Stealth Addresses. Also, the way transaction data is stored on the blockchain allows access by parties who authorized the transactions only, and none of the private data is ever publicly published. A secure scheme with a set of proofs allows for the concealment of the amount of coins
+transferred. The Bulletproofs+ technology is used for these proofs, enabling the
+creation of both performance-eective and size-eective proofs. 
+
+Burning of all fees
+On Zano, all network fees are being burned. With enough network usage, the daily fee
+burning could surpass the emission from block rewards, resulting in supply becoming
+deflationary over time. This combination of small, minimalistic daily emissions, together with daily burns, results in little to no sell pressure on the exchanges.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 15.37M ZANO |
+| **Total Supply** | 15.37M ZANO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $150.72M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $17.81 (2025-01-07) |
+| **Current vs ATH** | -44.95% |
+| **All-Time Low** | $0.1465 (2019-12-16) |
+| **Current vs ATL** | +6593.96% |
+| **24h Change** | +0.50% |
+| **7d Change** | +13.26% |
+| **30d Change** | -6.00% |
+| **1y Change** | -0.34% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Multiple chains (see contract addresses below)
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Zano | `d6329b5b1f7c0805b5c345f4957554002a2f557845f64d7645dae0e051a6498a` |
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://zano.org](https://zano.org) |
+| **Twitter** | [@zano_project](https://twitter.com/zano_project) |
+| **Reddit** | [https://www.reddit.com/r/Zano](https://www.reddit.com/r/Zano) |
+| **Telegram** | [zanocoin](https://t.me/zanocoin) (11,762 members) |
+| **Discord** | [https://discord.gg/YfXMqkXrm](https://discord.gg/YfXMqkXrm) |
+| **GitHub** | [https://github.com/hyle-team/zano](https://github.com/hyle-team/zano) |
+| **Whitepaper** | [https://github.com/hyle-team/docs/blob/master/zano/Zano_WP_1.1.pdf](https://github.com/hyle-team/docs/blob/master/zano/Zano_WP_1.1.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 165 |
+| **GitHub Forks** | 96 |
+| **Commits (4 weeks)** | 26 |
+| **Pull Requests Merged** | 269 |
+| **Contributors** | 26 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1.36M |
+| **Market Cap Rank** | #199 |
+| **24h Range** | $9.58 — $9.81 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

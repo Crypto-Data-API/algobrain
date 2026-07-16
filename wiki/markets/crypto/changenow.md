@@ -2,14 +2,14 @@
 title: "ChangeNOW"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
-aliases: ["NOW", "ChangeNOW", "ChangeNOW Token"]
+tags: [altcoins, crypto, defi]
+aliases: ["ChangeNOW", "ChangeNOW Token", "NOW"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://changenow.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[staking]]"]
 ---
 
 # ChangeNOW

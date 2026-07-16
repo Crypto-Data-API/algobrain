@@ -2,14 +2,14 @@
 title: "dKargo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ai-trading]
+tags: [ai-trading, altcoins, crypto]
 aliases: ["DKA"]
 entity_type: protocol
 headquarters: "South Korea"
 website: "https://dkargo.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[depin]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[real-world-assets]]"]
 ---
 
 # dKargo
@@ -225,3 +225,10 @@ DKA is tagged across several narratives, which is both reach and volatility:
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

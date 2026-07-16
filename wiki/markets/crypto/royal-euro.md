@@ -2,14 +2,14 @@
 title: "Royal Euro"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, forex]
+tags: [crypto, forex, stablecoin]
 aliases: ["REUR", "Royal Euro Token"]
 entity_type: protocol
 headquarters: "Hong Kong (RIB Digital Holdings)"
 website: "https://www.rcoins.digital/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[forex]]", "[[euro]]", "[[royal-dollar]]", "[[depeg]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[royal-dollar]]", "[[stablecoins]]"]
 ---
 
 # Royal Euro
@@ -188,3 +188,14 @@ REUR is a **regional / FX-denominated (euro) stablecoin** in the **bank-issuer /
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge and Royal Euro / RIB Digital Holdings (rcoins.digital) public documentation; market data as of 2026-06-22 (cryptodataapi.com / CoinGecko). No additional specific wiki source ingested yet.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 15.00M REUR |
+| **Total Supply** | 5.00B REUR |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $5.70B |
+
+---

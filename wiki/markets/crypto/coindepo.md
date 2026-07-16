@@ -2,14 +2,14 @@
 title: "COINDEPO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: good
-tags: [crypto, altcoins, lending, cefi]
-aliases: ["COINDEPO", "CoinDepo", "CDP"]
+tags: [altcoins, cefi, crypto, lending]
+aliases: ["CDP", "COINDEPO", "CoinDepo"]
 entity_type: company
 headquarters: "Centralized operator (CeFi)"
 website: "https://coindepo.com/token"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cefi]]", "[[lending]]"]
+related: ["[[cefi]]", "[[crypto-markets]]", "[[ethereum]]", "[[lending]]"]
 ---
 
 # COINDEPO

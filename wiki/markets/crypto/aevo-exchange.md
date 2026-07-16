@@ -2,14 +2,14 @@
 title: "Aevo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["AEVO", "Aevo Exchange", "Ribbon Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.aevo.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[decentralized-exchange]]", "[[perpetual-futures]]", "[[options]]", "[[derivatives]]", "[[layer-2]]", "[[order-book]]", "[[governance-token]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[derivatives]]", "[[ethereum]]", "[[governance-token]]", "[[hyperliquid]]", "[[layer-2]]", "[[options]]", "[[order-book]]", "[[perpetual-futures]]"]
 ---
 
 # Aevo

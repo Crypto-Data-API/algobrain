@@ -2,15 +2,15 @@
 title: "EURC"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation, forex]
-aliases: ["EURC", "Euro Coin", "EUROC"]
+tags: [crypto, forex, regulation]
+aliases: ["EURC", "EUROC", "Euro Coin"]
 entity_type: protocol
 founded: 2022
 headquarters: "Issuer: Circle (New York, USA)"
 website: "https://www.circle.com/eurc"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[circle]]", "[[usdc]]", "[[stablecoin]]", "[[stablecoins]]", "[[mica]]", "[[base]]", "[[solana]]"]
+related: ["[[base]]", "[[circle]]", "[[crypto-markets]]", "[[ethereum]]", "[[mica]]", "[[solana]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # EURC
@@ -172,3 +172,73 @@ EURC is not valued for upside — its USD "return" is purely the EUR/USD exchang
 - [Stablecoin Insider — Circle's EURC Q1 2026 stablecoin report](https://stablecoininsider.org/eurc-q1-2026-stablecoin-report/) (41% euro-stablecoin share, $424M cap, Feb 2026)
 - [Utila — Euro stablecoin landscape 2026: what MiCA means for fintechs](https://utila.io/blog/euro-stablecoin-report-what-mica-means-for-fintechs)
 - WebSearch verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 373.22M EURC |
+| **Total Supply** | 373.22M EURC |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $427.65M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.35 (2023-03-14) |
+| **Current vs ATH** | -15.24% |
+| **All-Time Low** | $0.0528 (2022-12-09) |
+| **Current vs ATL** | +2068.45% |
+| **24h Change** | +0.42% |
+| **7d Change** | +0.30% |
+| **30d Change** | -1.22% |
+| **1y Change** | -1.40% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | EURC/USDC | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X1ABAEA1F7C830BD89ACC67EC4AF516284B1BC33C/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+| Orca | HZWQBKZW8HXMN6BF2YFZNRHT3C2IXXZPKCFU7UBEDKTR/EPJFWDD5AUFQSSQEM2QN1XZYBAPC8G4WEGGKZWYTDT1V | Spot |
+| Uniswap V2 (Ethereum) | 0X1ABAEA1F7C830BD89ACC67EC4AF516284B1BC33C/0X9D39A5DE30E57443BFF2A8307A4256C8797A3497 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $38.29M |
+| **Market Cap Rank** | #111 |
+| **24h Range** | $1.14 — $1.15 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

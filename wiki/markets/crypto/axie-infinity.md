@@ -2,14 +2,14 @@
 title: "Axie Infinity"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["AXS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://axieinfinity.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[gaming-tokens]]", "[[metaverse]]", "[[nft]]", "[[the-sandbox]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[metaverse]]", "[[nft]]", "[[the-sandbox]]"]
 ---
 
 # Axie Infinity

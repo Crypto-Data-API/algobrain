@@ -2,15 +2,15 @@
 title: "Maple Finance"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
-aliases: ["SYRUP", "Maple", "syrupUSDC"]
+aliases: ["Maple", "SYRUP", "syrupUSDC"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized"
 website: "https://maple.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[aave]]", "[[base]]", "[[pendle]]"]
+related: ["[[aave]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[pendle]]"]
 ---
 
 # Maple Finance
@@ -150,3 +150,108 @@ SYRUP's edge in this set is that its yield is sourced from **overcollateralized 
 - VaasBlock — "Maple Finance Review: SYRUP Performance, On-Chain Credit, and Risks (2026)": https://www.vaasblock.com/research/maple-finance-syrup-token-risks-onchain-credit-2026/
 - Messari project page: https://messari.io/project/syrup
 - Verified via web search, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SYRUP |
+| **Market Cap Rank** | #155 |
+| **Market Cap** | $218.41M |
+| **Current Price** | $0.1877 |
+| **Categories** | Decentralized Finance (DeFi), Yield Farming, Lending/Borrowing Protocols, Real World Assets (RWA), RWA Protocol, Binance Alpha Spotlight, Base Native |
+| **Website** | [https://maple.finance/](https://maple.finance/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.16B SYRUP |
+| **Total Supply** | 1.24B SYRUP |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $233.55M |
+| **Market Cap / FDV Ratio** | 0.94 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.6532 (2025-06-25) |
+| **Current vs ATH** | -71.38% |
+| **All-Time Low** | $0.0852 (2025-04-07) |
+| **Current vs ATL** | +119.38% |
+| **24h Change** | +0.99% |
+| **7d Change** | +19.19% |
+| **30d Change** | +33.16% |
+| **1y Change** | -60.42% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66` |
+| Base | `0x688aee022aa544f150678b8e5720b6b96a9e9a2f` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SYRUP/USDT | N/A |
+| Kraken | SYRUP/USD | N/A |
+| Upbit | SYRUP/KRW | N/A |
+| Bitget | SYRUP/USDT | N/A |
+| KuCoin | SYRUP/USDT | N/A |
+| Crypto.com Exchange | SYRUP/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X643C4E15D7D62AD0ABEC4A9BD4B001AA3EF52D66/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $21.37M |
+| **Market Cap Rank** | #155 |
+| **24h Range** | $0.1829 — $0.2029 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

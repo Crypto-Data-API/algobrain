@@ -2,14 +2,14 @@
 title: "Velo"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["VELO", "Velo Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://velo.org/"
-related: ["[[crypto-markets]]", "[[stellar]]", "[[ethereum]]", "[[real-world-assets]]", "[[bnb]]", "[[dwf-labs]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dwf-labs]]", "[[ethereum]]", "[[real-world-assets]]", "[[stellar]]"]
 ---
 
 # Velo
@@ -169,3 +169,86 @@ This is framing, not a price target; the wiki holds no fair-value model for VELO
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-20 (cryptodataapi.com / CoinGecko top-1000 markets snapshot).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | VELO |
+| **Market Cap Rank** | #399 |
+| **Market Cap** | $56.13M |
+| **Current Price** | $0.00319854 |
+| **Categories** | Decentralized Finance (DeFi), Real World Assets (RWA), Binance Alpha Spotlight |
+| **Website** | [https://velo.org/](https://velo.org/) |
+
+---
+
+## Overview
+
+Velo Labs is building a unique federated credit exchange network. This network is powered by the Velo Protocol, which is a blockchain financial protocol enabling digital credit issuance and borderless asset transfers for businesses using a smart contract system. The project's core mission is to enable partners to safely and securely transfer value between each other in a timely and transparent way. To do this, the Velo Protocol enables its partners to issue digital credits via a smart contract layer, using the Stellar Consensus Protocol to process and settle transactions. Within its ecosystem, the Velo Protocol enables multiple business use cases that are all based on its core function: issuing collateral-backed digital credits, which correspond to any fiat currency that can be used for frictionless value transfer.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 17.56B VELO |
+| **Total Supply** | 24.00B VELO |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $76.70M |
+| **Market Cap / FDV Ratio** | 0.73 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.29 (2021-03-08) |
+| **Current vs ATH** | -99.86% |
+| **All-Time Low** | $0.00103046 (2022-12-20) |
+| **Current vs ATL** | +208.78% |
+| **24h Change** | -0.97% |
+| **7d Change** | -1.63% |
+| **30d Change** | -9.72% |
+| **1y Change** | -81.47% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | VELO/USD | N/A |
+| Bitget | VELO/USDT | N/A |
+| KuCoin | VELO/USDT | N/A |
+| Crypto.com Exchange | VELO/USD | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.19M |
+| **Market Cap Rank** | #399 |
+| **24h Range** | $0.00312968 — $0.00332319 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Hive"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["HIVE", "Hive blockchain"]
 entity_type: protocol
 headquarters: "Decentralized (community-run)"
 website: "https://hive.io/"
-related: ["[[crypto-markets]]", "[[steem]]", "[[layer-1]]", "[[delegated-proof-of-stake]]", "[[proof-of-stake]]", "[[justin-sun]]", "[[tron]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[justin-sun]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[steem]]", "[[tron]]"]
 ---
 
 # Hive

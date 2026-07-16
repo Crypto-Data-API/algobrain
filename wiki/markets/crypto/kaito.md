@@ -2,14 +2,14 @@
 title: "KAITO"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
-tags: [crypto, analytics, ai-trading]
+tags: [ai-trading, analytics, crypto]
 aliases: ["KAITO", "Kaito AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://yaps.kaito.ai/"
-related: ["[[crypto-markets]]", "[[base]]", "[[ethereum]]", "[[hyperliquid]]", "[[artificial-intelligence]]", "[[ai-agents]]", "[[airdrop]]"]
+related: ["[[ai-agents]]", "[[airdrop]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]"]
 ---
 
 # KAITO
@@ -138,3 +138,118 @@ KAITO is best framed as an **attention/marketing-network token** rather than a c
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | KAITO |
+| **Market Cap Rank** | #183 |
+| **Market Cap** | $171.49M |
+| **Current Price** | $0.7106 |
+| **Categories** | Artificial Intelligence (AI), Analytics, Launchpad, Binance HODLer Airdrops, InfoFi, Governance, Base Native |
+| **Website** | [https://yaps.kaito.ai/](https://yaps.kaito.ai/) |
+
+---
+
+## Overview
+
+$KAITO is the native token and the fundamental building block of the AI-powered InfoFi network.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 241.39M KAITO |
+| **Total Supply** | 1.00B KAITO |
+| **Max Supply** | 1.00B KAITO |
+| **Fully Diluted Valuation** | $710.43M |
+| **Market Cap / FDV Ratio** | 0.24 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $2.88 (2025-02-27) |
+| **Current vs ATH** | -75.33% |
+| **All-Time Low** | $0.2759 (2026-02-06) |
+| **Current vs ATL** | +157.91% |
+| **24h Change** | -10.46% |
+| **7d Change** | +4.23% |
+| **30d Change** | +45.02% |
+| **1y Change** | -55.56% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0x98d0baa52b2d063e780de12f615f963fe8537553` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | KAITO/USDT | N/A |
+| Kraken | KAITO/USD | N/A |
+| Upbit | KAITO/KRW | N/A |
+| Bitget | KAITO/USDT | N/A |
+| KuCoin | KAITO/USDT | N/A |
+| Crypto.com Exchange | KAITO/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://yaps.kaito.ai/](https://yaps.kaito.ai/) |
+| **Twitter** | [@kaitoai](https://twitter.com/kaitoai) |
+| **Telegram** | [overheardonct](https://t.me/overheardonct) (9,976 members) |
+| **Discord** | [https://discord.com/invite/kaitoai](https://discord.com/invite/kaitoai) |
+| **Whitepaper** | [https://docs.kaito.ai/](https://docs.kaito.ai/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $36.51M |
+| **Market Cap Rank** | #183 |
+| **24h Range** | $0.7095 — $0.8084 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[base]]
+
+---

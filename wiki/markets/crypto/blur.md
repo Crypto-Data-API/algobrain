@@ -2,14 +2,14 @@
 title: "Blur"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["BLUR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://blur.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[nft]]", "[[nft-lending]]", "[[hyperliquid]]", "[[paradigm]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[nft-lending]]", "[[nft]]", "[[paradigm]]"]
 ---
 
 # Blur
@@ -164,3 +164,123 @@ BLUR has no protocol cash flows accruing to the token (no fee switch live), so i
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data 2026-06-20 from `raw/data/crypto-loop/coingecko-markets.json` (cryptodataapi.com / CoinGecko); macro backdrop from `raw/data/crypto-loop/_digest.md`.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | BLUR |
+| **Market Cap Rank** | #445 |
+| **Market Cap** | $48.21M |
+| **Current Price** | $0.0169 |
+| **Categories** | NFT, NFT Marketplace, FTX Holdings, NFTFi, Made in USA |
+| **Website** | [https://blur.io/](https://blur.io/) |
+
+---
+
+## Overview
+
+Blur is an NFT marketplace that  lets nft buyers and sellers to utilise a suite features to facilitate more open and liquid NFT marketplace.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 2.84B BLUR |
+| **Total Supply** | 3.00B BLUR |
+| **Max Supply** | 3.00B BLUR |
+| **Fully Diluted Valuation** | $50.85M |
+| **Market Cap / FDV Ratio** | 0.95 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $5.02 (2023-02-14) |
+| **Current vs ATH** | -99.66% |
+| **All-Time Low** | $0.0136 (2026-06-26) |
+| **Current vs ATL** | +24.46% |
+| **24h Change** | +4.56% |
+| **7d Change** | -9.73% |
+| **30d Change** | -8.79% |
+| **1y Change** | -81.30% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0x5283d291dbcf85356a21ba090e6db59121208b44` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | BLUR/USDT | N/A |
+| Kraken | BLUR/USD | N/A |
+| Upbit | BLUR/KRW | N/A |
+| Bitget | BLUR/USDT | N/A |
+| KuCoin | BLUR/USDT | N/A |
+| Crypto.com Exchange | BLUR/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X5283D291DBCF85356A21BA090E6DB59121208B44/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://blur.io/](https://blur.io/) |
+| **Twitter** | [@blur_io](https://twitter.com/blur_io) |
+| **Discord** | [https://discord.gg/blurdao](https://discord.gg/blurdao) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $12.95M |
+| **Market Cap Rank** | #445 |
+| **24h Range** | $0.0160 — $0.0171 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

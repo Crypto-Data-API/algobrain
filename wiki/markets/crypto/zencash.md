@@ -2,14 +2,14 @@
 title: "Horizen"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, privacy]
-aliases: ["ZEN", "ZenCash", "Horizen"]
+aliases: ["Horizen", "ZEN", "ZenCash"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.horizen.io"
-related: ["[[crypto-markets]]", "[[base]]", "[[privacy-coins]]", "[[zcash]]", "[[ethereum]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[privacy-coins]]", "[[zcash]]"]
 ---
 
 # Horizen
@@ -138,3 +138,149 @@ Horizen's narrative is mid-transition from **privacy coin** to **modular privacy
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21: cryptodataapi.com / CoinGecko markets data.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ZEN |
+| **Market Cap Rank** | #306 |
+| **Market Cap** | $77.29M |
+| **Current Price** | $4.25 |
+| **Hashing Algorithm** | Equihash |
+| **Categories** | Zero Knowledge (ZK), Made in USA, Privacy Infrastructure, Base Native, Privacy |
+| **Website** | [https://www.horizen.io](https://www.horizen.io) |
+
+---
+
+## Overview
+
+What is the project about?&nbsp;
+
+Horizen is a modular privacy-first platform designed to make privacy technology, such as zero-knowledge proofs and TEEs accessible and usable across the web. Originally launched in 2017 as a fair launch, non-ICO project, Horizen is now undergoing a major evolution with the launch of Horizen 2.0, a next-generation Layer 3 (L3) appchain deployed on Base, the Ethereum Layer 2 developed by Coinbase.
+
+Horizen 2.0 is built as an Ethereum-aligned Layer 3 appchain on Base, inheriting Ethereum's security while implementing its own application-level integrity guarantees.
+
+Key components of Horizen’s security model include:
+
+Ethereum-Aligned Security:&nbsp;As an appchain deployed on Base, Horizen 2.0 benefits from Base’s rollup security and settlement on Ethereum, ensuring robust finality and composability with other L2 and L3 applications.
+
+Simplified and Secure Architecture:&nbsp;Unlike Horizen’s previous iterations (which used a hybrid PoW/PoS model), Horizen 2.0 focuses on application-level security, decentralization of its privacy layers, and composability with existing infrastructure — reducing complexity and increasing user safety.
+
+Decentralized Privacy Stack:&nbsp;Horizen’s focus on decentralizing privacy infrastructure (e.g., decentralized proof generation) allows for modular, secure applications that uphold data confidentiality without compromising performance.
+
+What makes your project unique?
+
+Privacy-first Approach:&nbsp;Horizen integrates a diverse stack of privacy-enhancing technologies (PETs) — including zero-knowledge proofs (ZKPs), trusted execution environments (TEEs), attribute-based encryption (ABE), multi-party computation (MPC), and fully homomorphic encryption (FHE) — to deliver scalable, flexible, and future-ready privacy solutions across its platform.
+
+First Privacy Appchain on Base:&nbsp;As an L3 on Base, Horizen benefits from Ethereum’s security and Base’s scalability, while enabling a privacy layer for any app on t...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 18.18M ZEN |
+| **Total Supply** | 21.00M ZEN |
+| **Max Supply** | 21.00M ZEN |
+| **Fully Diluted Valuation** | $89.29M |
+| **Market Cap / FDV Ratio** | 0.87 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $165.92 (2021-05-08) |
+| **Current vs ATH** | -97.43% |
+| **All-Time Low** | $3.26 (2019-10-17) |
+| **Current vs ATL** | +30.40% |
+| **24h Change** | -0.14% |
+| **7d Change** | +2.84% |
+| **30d Change** | -10.38% |
+| **1y Change** | -49.77% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Base
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Base | `0xf43eb8de897fbc7f2502483b2bef7bb9ea179229` |
+| Horizen | `0x57da2d504bf8b83ef304759d9f2648522d7a9280` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ZEN/USDT | N/A |
+| Bitget | ZEN/USDT | N/A |
+| KuCoin | ZEN/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.horizen.io](https://www.horizen.io) |
+| **Twitter** | [@horizenglobal](https://twitter.com/horizenglobal) |
+| **Reddit** | [https://www.reddit.com/r/Horizen](https://www.reddit.com/r/Horizen) |
+| **Telegram** | [horizencommunity](https://t.me/horizencommunity) (5,704 members) |
+| **GitHub** | [https://github.com/HorizenOfficial](https://github.com/HorizenOfficial) |
+| **Whitepaper** | [https://downloads.horizen.io/file/web-assets/Horizen+Whitepaper+v1.0.0.pdf](https://downloads.horizen.io/file/web-assets/Horizen+Whitepaper+v1.0.0.pdf) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 99 |
+| **GitHub Forks** | 59 |
+| **Commits (4 weeks)** | 3 |
+| **Pull Requests Merged** | 243 |
+| **Contributors** | 28 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $12.24M |
+| **Market Cap Rank** | #306 |
+| **24h Range** | $4.24 — $4.48 |
+| **CoinGecko Sentiment** | 50% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[base]]
+
+---

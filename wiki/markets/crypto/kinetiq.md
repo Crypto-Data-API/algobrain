@@ -2,14 +2,14 @@
 title: "Kinetiq"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["KNTQ", "Kinetiq", "kHYPE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kinetiq.xyz/"
-related: ["[[crypto-markets]]", "[[liquid-staking]]", "[[hyperliquid]]", "[[hype]]", "[[hyperevm]]", "[[slashing]]"]
+related: ["[[crypto-markets]]", "[[hype]]", "[[hyperevm]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[slashing]]"]
 ---
 
 # Kinetiq
@@ -182,3 +182,74 @@ Context: 2026-06-23 — **Extreme Fear** (Fear & Greed = 21), long-horizon **Bot
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko snapshot).
 - General market knowledge of Kinetiq's liquid-staking model; no dedicated wiki source ingested yet.
+
+## Overview
+
+Kinetiq is a liquid staking protocol built natively on Hyperliquid, enabling users to stake the native token of the Hyperliquid blockchain (HYPE) and receive Kinetiq Staked HYPE (kHYPE) in return.
+
+kHYPE enables staking participation while retaining full liquidity and capital efficiency — earning staking rewards while staying active across DeFi.
+
+Behind the scenes, all staked HYPE is automatically delegated to the top-performing Hyperliquid validators, selected by StakeHub— Kinetiq’s autonomous validator scoring and delegation system.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 280.48M KNTQ |
+| **Total Supply** | 1.00B KNTQ |
+| **Max Supply** | 1.00B KNTQ |
+| **Fully Diluted Valuation** | $121.50M |
+| **Market Cap / FDV Ratio** | 0.28 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.3768 (2026-06-02) |
+| **Current vs ATH** | -67.73% |
+| **All-Time Low** | $0.0358 (2025-12-18) |
+| **Current vs ATL** | +239.75% |
+| **24h Change** | -2.07% |
+| **7d Change** | -17.93% |
+| **30d Change** | -51.77% |
+| **1y Change** | +0.00% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | KNTQ/EUR | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $158,175.00 |
+| **Market Cap Rank** | #580 |
+| **24h Range** | $0.1213 — $0.1241 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

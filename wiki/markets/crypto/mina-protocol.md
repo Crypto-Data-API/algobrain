@@ -2,14 +2,14 @@
 title: "Mina Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
 aliases: ["MINA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://minaprotocol.com/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[zero-knowledge-proofs]]", "[[proof-of-stake]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zero-knowledge-proofs]]"]
 ---
 
 # Mina Protocol
@@ -128,3 +128,118 @@ At a ~$54M market cap, MINA is a deep small-cap whose price is ~99.5% below its 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 (cryptodataapi.com / CoinGecko bulk endpoint), `raw/data/crypto-loop/coingecko-markets.json`.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MINA |
+| **Market Cap Rank** | #388 |
+| **Market Cap** | $58.44M |
+| **Current Price** | $0.0452 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Zero Knowledge (ZK), FTX Holdings, Proof of Stake (PoS), Privacy Blockchain, Made in USA, CoinList Launchpad |
+| **Website** | [https://minaprotocol.com/](https://minaprotocol.com/) |
+
+---
+
+## Overview
+
+The world's lightest blockchain, powered by participants. Mina is building a privacy-preserving gateway between the real world and crypto — and the infrastructure for the secure, democratic future we all deserve.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.29B MINA |
+| **Total Supply** | 1.29B MINA |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $58.44M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $9.09 (2021-06-01) |
+| **Current vs ATH** | -99.50% |
+| **All-Time Low** | $0.0367 (2026-06-30) |
+| **Current vs ATL** | +22.96% |
+| **24h Change** | +1.35% |
+| **7d Change** | -0.64% |
+| **30d Change** | +3.22% |
+| **1y Change** | -78.19% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | MINA/USDT | N/A |
+| Kraken | MINA/USD | N/A |
+| Upbit | MINA/KRW | N/A |
+| Bitget | MINA/USDT | N/A |
+| KuCoin | MINA/USDT | N/A |
+| Crypto.com Exchange | MINA/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://minaprotocol.com/](https://minaprotocol.com/) |
+| **Twitter** | [@minaprotocol](https://twitter.com/minaprotocol) |
+| **Reddit** | [https://www.reddit.com/r/MinaProtocol/](https://www.reddit.com/r/MinaProtocol/) |
+| **Telegram** | [minaprotocol](https://t.me/minaprotocol) (16,301 members) |
+| **Discord** | [https://discord.com/invite/Vexf4ED](https://discord.com/invite/Vexf4ED) |
+| **GitHub** | [https://github.com/MinaProtocol/mina](https://github.com/MinaProtocol/mina) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 1,883 |
+| **GitHub Forks** | 525 |
+| **Commits (4 weeks)** | 92 |
+| **Pull Requests Merged** | 6,822 |
+| **Contributors** | 87 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.76M |
+| **Market Cap Rank** | #388 |
+| **24h Range** | $0.0438 — $0.0454 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

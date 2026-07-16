@@ -2,14 +2,14 @@
 title: "Across Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum]
 aliases: ["ACX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://across.to/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[cross-chain-bridge]]", "[[uma]]", "[[smart-contract-risk]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[smart-contract-risk]]", "[[uma]]"]
 ---
 
 # Across Protocol

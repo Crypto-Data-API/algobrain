@@ -2,7 +2,7 @@
 title: "SuperVerse"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["SUPER", "SuperFarm"]
@@ -157,3 +157,95 @@ SUPER is a **speculative GameFi/NFT beta** whose price is driven by sector senti
 
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original market-data snapshot (tokenomics, contract addresses, listings)
 - Market snapshot 2026-06-20: cryptodataapi.com / CoinGecko top-1000 markets data (price, market cap, rank, volume, FDV, ATH/ATL refresh)
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SUPER |
+| **Market Cap Rank** | #404 |
+| **Market Cap** | $54.65M |
+| **Current Price** | $0.0854 |
+| **Categories** | Gaming (GameFi), NFT, Collectibles, Gaming Blockchains, Made in USA |
+| **Website** | [https://superverse.co/](https://superverse.co/) |
+
+---
+
+## Overview
+
+SuperVerse is a unified Web3 ecosystem connecting gaming, DeFi, and AI under a single interoperable protocol. Its native token, $SUPER, powers transactions, governance, and access to immersive games, AI-powered tools, and liquidity infrastructure such as Blackhole DEX. Designed for real utility across multiple chains, $SUPER enables staking, protocol buybacks, and sustainable yield while supporting a growing suite of decentralized applications.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 640.16M SUPER |
+| **Total Supply** | 1.00B SUPER |
+| **Max Supply** | 1.00B SUPER |
+| **Fully Diluted Valuation** | $85.38M |
+| **Market Cap / FDV Ratio** | 0.64 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.74 (2021-03-31) |
+| **Current vs ATH** | -98.20% |
+| **All-Time Low** | $0.0704 (2023-10-19) |
+| **Current vs ATL** | +21.33% |
+| **24h Change** | -0.69% |
+| **7d Change** | -1.82% |
+| **30d Change** | -13.94% |
+| **1y Change** | -90.32% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | SUPER/USDT | N/A |
+| Kraken | SUPER/USD | N/A |
+| Upbit | SUPER/KRW | N/A |
+| Bitget | SUPER/USDT | N/A |
+| KuCoin | SUPER/USDT | N/A |
+| Crypto.com Exchange | SUPER/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XE53EC727DBDEB9E2D5456C3BE40CFF031AB40A55/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Uniswap V3 (Ethereum) | 0XE53EC727DBDEB9E2D5456C3BE40CFF031AB40A55/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+| Sushiswap | 0XE53EC727DBDEB9E2D5456C3BE40CFF031AB40A55/0X557B933A7C2C45672B610F8954A3DEB39A51A8CA | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.53M |
+| **Market Cap Rank** | #404 |
+| **24h Range** | $0.0847 — $0.0876 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

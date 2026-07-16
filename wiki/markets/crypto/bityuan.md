@@ -2,9 +2,9 @@
 title: "Bityuan"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["BTY", "BitYuan"]
 entity_type: protocol
 headquarters: "China"

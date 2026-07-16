@@ -2,14 +2,14 @@
 title: "Taiko"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, altcoins]
+tags: [altcoins, crypto, ethereum]
 aliases: ["TAIKO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://taiko.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zk-rollup]]", "[[zkevm]]", "[[sequencer]]", "[[data-availability]]", "[[airdrop]]"]
+related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[sequencer]]", "[[zk-rollup]]", "[[zkevm]]"]
 ---
 
 # Taiko

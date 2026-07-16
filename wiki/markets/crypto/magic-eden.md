@@ -2,14 +2,14 @@
 title: "Magic Eden"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["ME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://magiceden.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[non-fungible-token]]", "[[ethereum]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]", "[[solana]]"]
 ---
 
 # Magic Eden
@@ -150,3 +150,103 @@ ME has no mechanical cash-flow link (no revenue burn or fee-share that is automa
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko top-1000.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | ME |
+| **Market Cap Rank** | #515 |
+| **Market Cap** | $40.19M |
+| **Current Price** | $0.0662 |
+| **Categories** | NFT, NFT Marketplace |
+| **Website** | [https://magiceden.io/](https://magiceden.io/) |
+
+---
+
+## Overview
+
+Magic Eden is the largest NFT marketplace and Runes platform. Buy, sell and discover Ordinals and NFTs across Solana, Bitcoin, Ethereum, Base, Apechain, Polygon, Arbitrum, Sei, Monad, and Berachain.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 607.16M ME |
+| **Total Supply** | 999.99M ME |
+| **Max Supply** | 1.00B ME |
+| **Fully Diluted Valuation** | $66.19M |
+| **Market Cap / FDV Ratio** | 0.61 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $17.00 (2024-12-10) |
+| **Current vs ATH** | -99.61% |
+| **All-Time Low** | $0.0555 (2026-06-30) |
+| **Current vs ATL** | +19.36% |
+| **24h Change** | -0.23% |
+| **7d Change** | +8.68% |
+| **30d Change** | +3.50% |
+| **1y Change** | -92.18% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Solana
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Solana | `MEFNBXixkEbait3xn9bkm8WsJzXtVsaJEn4c8Sam21u` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ME/USDT | N/A |
+| Kraken | ME/USD | N/A |
+| Upbit | ME/KRW | N/A |
+| Bitget | ME/USDT | N/A |
+| KuCoin | ME/USDT | N/A |
+| Crypto.com Exchange | ME/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://magiceden.io/](https://magiceden.io/) |
+| **Twitter** | [@MeFndn](https://twitter.com/MeFndn) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.88M |
+| **Market Cap Rank** | #515 |
+| **24h Range** | $0.0656 — $0.0687 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

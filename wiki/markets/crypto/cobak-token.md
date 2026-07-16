@@ -2,14 +2,14 @@
 title: "Cobak"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
+tags: [altcoins, crypto, ethereum]
 aliases: ["CBK", "Cobak Token"]
 entity_type: protocol
 headquarters: "South Korea (origin)"
 website: "https://cobak.co/ko"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]"]
 ---
 
 # Cobak

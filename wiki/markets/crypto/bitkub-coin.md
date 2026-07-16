@@ -2,14 +2,14 @@
 title: "KUB Coin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto]
-aliases: ["KUB", "Bitkub Coin"]
+aliases: ["Bitkub Coin", "KUB"]
 entity_type: protocol
 headquarters: "Bangkok, Thailand"
 website: "https://kubchain.com/"
-related: ["[[crypto-markets]]", "[[centralized-exchange]]", "[[ethereum]]"]
+related: ["[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]"]
 ---
 
 # KUB Coin
@@ -150,3 +150,89 @@ KUB is best understood as a **leveraged play on Thai retail crypto activity and 
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 via cryptodataapi.com / CoinGecko top-1000 markets snapshot.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | KUB |
+| **Market Cap Rank** | #439 |
+| **Market Cap** | $48.99M |
+| **Current Price** | $0.7102 |
+| **Hashing Algorithm** | Keccak |
+| **Categories** | Smart Contract Platform |
+| **Website** | [https://kubchain.com/](https://kubchain.com/) |
+
+---
+
+## Overview
+
+The KUB Coin (KUB) is the native utility coin powering the KUB Chain, serving as a cornerstone of its growing ecosystem. It facilitates on-chain gas fee payments, can be converted into fee credits on the Bitkub Exchange, and enables staking for Validators and Delegators to actively secure and govern the network. KUB also supports seamless exchanges with various digital assets and unlocks exclusive services and benefits from KUB Chain's partners, driving innovation and collaboration within the blockchain ecosystem. Additionally, KUB is listed on Thailand’s leading Bitkub Exchange and other international cryptocurrency exchanges, ensuring accessibility and global reach.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 68.97M KUB |
+| **Total Supply** | 110.00M KUB |
+| **Max Supply** | 110.00M KUB |
+| **Fully Diluted Valuation** | $78.13M |
+| **Market Cap / FDV Ratio** | 0.63 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $17.24 (2021-12-28) |
+| **Current vs ATH** | -95.88% |
+| **All-Time Low** | $0.3820 (2021-07-20) |
+| **Current vs ATL** | +86.12% |
+| **24h Change** | -0.65% |
+| **7d Change** | -0.97% |
+| **30d Change** | -7.93% |
+| **1y Change** | -53.89% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | KUB/USDT | N/A |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $105,650.00 |
+| **Market Cap Rank** | #439 |
+| **24h Range** | $0.7076 — $0.7237 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

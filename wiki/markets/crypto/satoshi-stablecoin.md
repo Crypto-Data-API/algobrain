@@ -2,14 +2,14 @@
 title: "Satoshi Stablecoin"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins, bitcoin]
-aliases: ["SATUSD", "satUSD", "Satoshi Stablecoin", "River satUSD"]
+tags: [bitcoin, crypto, stablecoins]
+aliases: ["River satUSD", "SATUSD", "Satoshi Stablecoin", "satUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://river.inc"
-related: ["[[crypto-markets]]", "[[stablecoin]]", "[[stablecoins]]", "[[dai]]", "[[usdc]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dai]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Satoshi Stablecoin
@@ -121,3 +121,126 @@ satUSD sits at the intersection of two narratives: the **crypto-collateralized s
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SATUSD |
+| **Market Cap Rank** | #192 |
+| **Market Cap** | $158.64M |
+| **Current Price** | $0.9940 |
+| **Categories** | Stablecoins, USD Stablecoin, Crypto-backed Stablecoin, Base Native |
+| **Website** | [https://river.inc](https://river.inc) |
+
+---
+
+## Overview
+
+River is building a chain-abstraction stablecoin system that enables cross-chain collateral, yield, and liquidity—all without bridging. 
+
+Powered by the omni-CDP stablecoin satUSD, users can earn, leverage, and scale across different ecosystems natively. 
+
+River features the first omni-CDP module that allows users to collateralize assets on Chain A and mint stablecoin satUSD on Chain B—without bridging the assets.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 159.20M SATUSD |
+| **Total Supply** | 159.20M SATUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $158.64M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.68 (2025-02-22) |
+| **Current vs ATH** | -40.63% |
+| **All-Time Low** | $0.6356 (2024-07-21) |
+| **Current vs ATL** | +56.77% |
+| **24h Change** | -0.01% |
+| **7d Change** | +0.00% |
+| **30d Change** | +0.07% |
+| **1y Change** | -0.43% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Bob Network
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Bob Network | `0xecf21b335b41f9d5a89f6186a99c19a3c467871f` |
+| Sonic | `0xb4818bb69478730ef4e33cc068dd94278e2766cb` |
+| Bsquared Network | `0x8dd8b12d55c73c08294664a5915475ed1c8b1f6f` |
+| Bitlayer | `0xba50ddac6b2f5482ca064efac621e0c7c0f6a783` |
+| Bevm | `0x2031c8848775a5efb7cff2a4edbe3f04c50a1478` |
+| Base | `0x70654aad8b7734dc319d0c3608ec7b32e03fa162` |
+| Binance Smart Chain | `0xb4818bb69478730ef4e33cc068dd94278e2766cb` |
+| Ethereum | `0x1958853a8be062dc4f401750eb233f5850f0d0d2` |
+| Arbitrum One | `0xb4818bb69478730ef4e33cc068dd94278e2766cb` |
+| Hemi | `0xb4818bb69478730ef4e33cc068dd94278e2766cb` |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X1958853A8BE062DC4F401750EB233F5850F0D0D2/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://river.inc](https://river.inc) |
+| **Twitter** | [@RiverdotInc](https://twitter.com/RiverdotInc) |
+| **Telegram** | [river_inc](https://t.me/river_inc) (40,568 members) |
+| **Discord** | [https://discord.com/invite/river-inc](https://discord.com/invite/river-inc) |
+| **GitHub** | [https://github.com/Satoshi-Protocol](https://github.com/Satoshi-Protocol) |
+| **Whitepaper** | [https://docs.river.inc/](https://docs.river.inc/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $1,844.35 |
+| **Market Cap Rank** | #192 |
+| **24h Range** | $0.9924 — $0.9964 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

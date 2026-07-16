@@ -2,7 +2,7 @@
 title: "Katana"
 type: entity
 created: 2026-04-09
-updated: 2026-06-12
+updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
 aliases: ["KAT"]
@@ -138,4 +138,4 @@ It is designed to function as a lever for directing capital: users that lock KAT
 
 ## Sources
 
-- (Source: [[coingecko-top-1000-2026-04-09]])
+- (Source: [[coingecko-top-1000-2026-07-16]])

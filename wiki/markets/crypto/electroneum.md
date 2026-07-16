@@ -2,15 +2,15 @@
 title: "Electroneum"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, payments]
+tags: [altcoins, crypto, payments]
 aliases: ["ETN"]
 entity_type: protocol
 founded: 2017
 headquarters: "United Kingdom (origin)"
 website: "http://electroneum.com/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[payments]]", "[[proof-of-work]]", "[[smart-contracts]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[payments]]", "[[proof-of-work]]", "[[smart-contracts]]"]
 ---
 
 # Electroneum

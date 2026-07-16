@@ -2,14 +2,14 @@
 title: "Nym"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, defi]
+tags: [altcoins, crypto, defi]
 aliases: ["NYM", "Nym Technologies"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nym.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[privacy-coins]]", "[[depin]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[privacy-coins]]"]
 ---
 
 # Nym

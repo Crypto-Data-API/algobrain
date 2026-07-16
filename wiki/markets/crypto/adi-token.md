@@ -2,7 +2,7 @@
 title: "ADI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-24
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum, regulation]
 aliases: ["ADI", "ADI Chain", "ADI Foundation"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Abu Dhabi, UAE"
 website: "https://token.adi.foundation/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[zksync]]", "[[chainlink]]", "[[stablecoins]]", "[[real-world-assets]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[zksync]]"]
 ---
 
 # ADI
@@ -212,3 +212,52 @@ ADI competes for the "institutional / RWA / regulated-stablecoin rail" narrative
 - Crypto.com, "Sirius International Holding and Crypto.com Partner to Integrate ADI Chain" — https://crypto.com/en/company-news/sirius-international-holding-and-cryptocom-partner-to-integrate-adi-chain
 - PR Newswire, "ADI Foundation and Chainlink Announce Official Partnership..." — https://www.prnewswire.com/news-releases/adi-foundation-and-chainlink-announce-official-partnership-to-accelerate-stablecoin-and-tokenization-strategy-across-the-middle-east-africa-and-asia-302701809.html
 - Verified via web search, 2026-06-10: DDSC live Feb 2026, Chainlink partnership Mar 2026, Sirius/IHC origin, Crypto.com partnership Dec 2025
+
+## Overview
+
+ADI Chain is an Ethereum Layer 2 developed by the ADI Foundation to support government, enterprise, and institutional digital infrastructure. It is built on zkSync’s zkStack and powered by the Airbender prover, which delivers GPU accelerated zero knowledge proofs for fast, low cost, and secure transactions. The chain includes modular Layer 3 capabilities that let nations and enterprises deploy compliant, region specific systems for payments, e invoicing, land registries, and stablecoins. ADI Chain aims to bridge traditional systems with modern blockchain architecture and onboard one billion people by 2030.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 125.33M ADI |
+| **Total Supply** | 1,000.00M ADI |
+| **Max Supply** | 1,000.00M ADI |
+| **Fully Diluted Valuation** | $6.98B |
+| **Market Cap / FDV Ratio** | 0.13 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $4.56M |
+| **Market Cap Rank** | #72 |
+| **24h Range** | $6.96 — $7.10 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

@@ -2,15 +2,15 @@
 title: "USD1 (World Liberty Financial)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation, news]
+tags: [crypto, news, regulation]
 aliases: ["USD1", "WLFI USD1", "World Liberty Financial USD"]
 entity_type: protocol
 founded: 2025
 headquarters: "United States (World Liberty Financial)"
 website: "https://www.worldlibertyfinancial.com/"
-related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[stablecoins]]", "[[tether]]", "[[narrative-trading]]"]
+related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[narrative-trading]]", "[[stablecoins]]", "[[tether]]"]
 ---
 
 # USD1 (World Liberty Financial)
@@ -184,3 +184,111 @@ As a pegged asset USD1 is not "valued"; the economics accrue to **WLFI** (reserv
 - DL News — "USD1 stablecoin breaks peg as World Liberty Financial suffers 'coordinated attack'": https://www.dlnews.com/articles/defi/usd1-stablecoin-breaks-peg-as-world-liberty-financial-suffers-coordinated-attack/
 - Stablecoin Insider — "WLFI's USD1 Q1 2026 Stablecoin Report": https://stablecoininsider.org/usd1-q1-2026-stablecoin-report/
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | USD1 |
+| **Market Cap Rank** | #24 |
+| **Market Cap** | $4.32B |
+| **Current Price** | $0.9987 |
+| **Categories** | Stablecoins, USD Stablecoin, Trump-Affiliated |
+| **Website** | [https://www.worldlibertyfinancial.com/](https://www.worldlibertyfinancial.com/) |
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 4.33B USD1 |
+| **Total Supply** | 4.33B USD1 |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $4.32B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.02 (2025-05-12) |
+| **Current vs ATH** | -2.54% |
+| **All-Time Low** | $0.9896 (2025-10-01) |
+| **Current vs ATL** | +0.92% |
+| **24h Change** | +0.00% |
+| **7d Change** | -0.00% |
+| **30d Change** | -0.15% |
+| **1y Change** | -0.10% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Binance Smart Chain
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Binance Smart Chain | `0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d` |
+| Plume Network | `0x111111d2bf19e43c34263401e0cad979ed1cdb61` |
+| Ethereum | `0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d` |
+| Solana | `USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB` |
+| Tron | `TPFqcBAaaUMCSVRCqPaQ9QnzKhmuoLR6Rc` |
+| Monad | `0x111111d2bf19e43c34263401e0cad979ed1cdb61` |
+| Mantle | `0x111111d2bf19e43c34263401e0cad979ed1cdb61` |
+| Aptos | `0x05fabd1b12e39967a3c24e91b7b8f67719a6dacee74f3c8b9fb7d93e855437d2` |
+| Morph L2 | `0x111111d2bf19e43c34263401e0cad979ed1cdb61` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | USD1/USDT | N/A |
+| Kraken | ETH/USD1 | N/A |
+| Bitget | BTC/USD1 | N/A |
+| KuCoin | USD1/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X8D0D000EE44948FC98C9B98A4FA4921476F08B0D/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.worldlibertyfinancial.com/](https://www.worldlibertyfinancial.com/) |
+| **Twitter** | [@worldlibertyfi](https://twitter.com/worldlibertyfi) |
+| **Telegram** | [defiant1s](https://t.me/defiant1s) (85,380 members) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $959.05M |
+| **Market Cap Rank** | #24 |
+| **24h Range** | $0.9980 — $0.9992 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[bnb]]
+
+---

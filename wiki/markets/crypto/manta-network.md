@@ -2,14 +2,14 @@
 title: "Manta Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, derivatives]
 aliases: ["MANTA", "Manta"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://manta.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zero-knowledge-proofs]]", "[[modular-blockchains]]", "[[celestia]]"]
+related: ["[[celestia]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[modular-blockchains]]", "[[zero-knowledge-proofs]]"]
 ---
 
 # Manta Network
@@ -142,3 +142,106 @@ MANTA's ~$38M market cap against an ~$81M FDV prices in a small-cap, dilution-bu
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data as of 2026-06-21 from cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`, Layer 2 & Scaling category snapshot).
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | MANTA |
+| **Market Cap Rank** | #649 |
+| **Market Cap** | $29.77M |
+| **Current Price** | $0.0625 |
+| **Categories** | Smart Contract Platform, Binance Launchpool, Layer 2 (L2) |
+| **Website** | [https://manta.network/](https://manta.network/) |
+
+---
+
+## Overview
+
+Manta Pacific is the first EVM-equivalent ZK-application platform that is scalable and secure through Celestia DA and Polygon zkEVM.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 476.40M MANTA |
+| **Total Supply** | 1.00B MANTA |
+| **Max Supply** | 1.00B MANTA |
+| **Fully Diluted Valuation** | $62.49M |
+| **Market Cap / FDV Ratio** | 0.48 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4.05 (2024-03-12) |
+| **Current vs ATH** | -98.46% |
+| **All-Time Low** | $0.0547 (2026-07-08) |
+| **Current vs ATL** | +14.15% |
+| **24h Change** | +3.53% |
+| **7d Change** | +8.17% |
+| **30d Change** | -23.35% |
+| **1y Change** | -73.67% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Manta Pacific
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Manta Pacific | `0x95cef13441be50d20ca4558cc0a27b601ac544e5` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | MANTA/USDT | N/A |
+| Bitget | MANTA/USDT | N/A |
+| KuCoin | MANTA/USDT | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://manta.network/](https://manta.network/) |
+| **Twitter** | [@MantaNetwork](https://twitter.com/MantaNetwork) |
+| **GitHub** | [https://github.com/manta-network](https://github.com/manta-network) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $6.77M |
+| **Market Cap Rank** | #649 |
+| **24h Range** | $0.0598 — $0.0633 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

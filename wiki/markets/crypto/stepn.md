@@ -2,14 +2,14 @@
 title: "STEPN (GMT)"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, nft, gamefi, altcoins]
-aliases: ["GMT", "STEPN", "Green Metaverse Token"]
+tags: [altcoins, crypto, gamefi, nft]
+aliases: ["GMT", "Green Metaverse Token", "STEPN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.stepn.com/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[move-to-earn]]", "[[play-to-earn]]", "[[gamefi]]", "[[governance-token]]"]
+related: ["[[crypto-markets]]", "[[gamefi]]", "[[governance-token]]", "[[move-to-earn]]", "[[play-to-earn]]", "[[solana]]"]
 ---
 
 # STEPN (GMT)

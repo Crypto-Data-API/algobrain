@@ -2,14 +2,14 @@
 title: "Sygnum FIUSD Liquidity Fund"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, real-world-assets, money-market-fund]
+tags: [crypto, money-market-fund, real-world-assets]
 aliases: ["FIUSD", "Sygnum FIUSD"]
 entity_type: protocol
 headquarters: "Zurich, Switzerland (Sygnum Bank)"
 website: "https://www.sygnum.com/"
-related: ["[[crypto-markets]]", "[[real-world-assets]]", "[[tokenization]]", "[[money-market-fund]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[money-market-fund]]", "[[real-world-assets]]", "[[tokenization]]"]
 ---
 
 # Sygnum FIUSD Liquidity Fund

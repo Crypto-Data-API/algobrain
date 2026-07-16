@@ -2,15 +2,15 @@
 title: "Sui"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["SUI", "Sui Network"]
 entity_type: protocol
 founded: 2023
 headquarters: "Mysten Labs — Palo Alto, USA"
 website: "https://sui.io/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[aptos]]", "[[cetus-protocol]]", "[[hyperliquid]]", "[[bitcoin-etfs]]", "[[move-language]]", "[[proof-of-stake]]", "[[layer-1-blockchains]]", "[[near]]"]
+related: ["[[aptos]]", "[[bitcoin-etfs]]", "[[cetus-protocol]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[move-language]]", "[[near]]", "[[proof-of-stake]]", "[[solana]]"]
 ---
 
 # Sui
@@ -258,3 +258,54 @@ Sui's clearest peer is **[[aptos|Aptos]]** (the other major Move chain) — the 
 - [The Block — 21Shares rolls out spot SUI ETF (TSUI) on Nasdaq (Feb 2026)](https://www.theblock.co/post/391084/21shares-spot-sui-etf-marking-latest-fund-to-launch)
 - [Sui Blog — Canary Capital Launches First Spot SUI ETF (Nasdaq: SUIS)](https://blog.sui.io/canary-capital-staking-spot-sui-etf-nasdaq-suis/)
 - Verified via Perplexity (sonar) and web search, 2026-06-10.
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 4.05B SUI |
+| **Total Supply** | 10.00B SUI |
+| **Max Supply** | 10.00B SUI |
+| **Fully Diluted Valuation** | $7.42B |
+| **Market Cap / FDV Ratio** | 0.41 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $5.35 (2025-01-04) |
+| **Current vs ATH** | -86.13% |
+| **All-Time Low** | $0.3648 (2023-10-19) |
+| **Current vs ATL** | +103.31% |
+| **24h Change** | -1.27% |
+| **7d Change** | +2.43% |
+| **30d Change** | -7.04% |
+| **1y Change** | -81.60% |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $256.58M |
+| **Market Cap Rank** | #29 |
+| **24h Range** | $0.7343 — $0.7661 |
+| **CoinGecko Sentiment** | 85% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

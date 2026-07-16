@@ -2,14 +2,14 @@
 title: "Lighter"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives]
 aliases: ["LIT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lighter.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[decentralized-exchange]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[perp-dex-aggregation]]", "[[dydx-chain]]", "[[zk-rollup]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[dydx-chain]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perp-dex-aggregation]]", "[[perpetual-futures]]", "[[zk-rollup]]"]
 ---
 
 # Lighter
@@ -137,3 +137,120 @@ LIT's ~$382M market cap masks a **~$1.53B fully-diluted valuation** — the sing
 - (Source: [[coingecko-top-1000-2026-04-09]]) — historical snapshot context
 - Market data as of 2026-06-21 from the crypto-loop CoinGecko markets snapshot (cryptodataapi.com / CoinGecko).
 - General market knowledge; no specific wiki source ingested yet for protocol mechanics.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | LIT |
+| **Market Cap Rank** | #1600 |
+| **Market Cap** | $4.83M |
+| **Current Price** | $0.1069 |
+| **Categories** | Binance Launchpool |
+| **Website** | [https://www.litentry.com/](https://www.litentry.com/) |
+
+---
+
+## Overview
+
+Litentry is a privacy-preserving decentralized identity aggregation oracle, built on the Substrate framework and tailored for Polkadot, EVM-based platforms, and other multi-chain ecosystems. It leverages Trusted Execution Environments (TEE), verifiable credentials, and customizable score computation to usher in a new era of digital identity. Its flagship product, the IdentityHub, is transforming how identities are managed and authenticated across blockchains. Its self-sovereign user-centric approach to identity, bridging both Web2 and Web3, offers a robust suite for user activity and identity data management. With tools like the IdentityHub and unique staking mechanisms, Litentry is committed to establishing a unified, privacy-centric decentralized identity infrastructure, redefining interoperability and utility for users and projects in the decentralized space.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 45.17M LIT |
+| **Total Supply** | 100.00M LIT |
+| **Max Supply** | 100.00M LIT |
+| **Fully Diluted Valuation** | $10.69M |
+| **Market Cap / FDV Ratio** | 0.45 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $13.31 (2021-02-16) |
+| **Current vs ATH** | -99.20% |
+| **All-Time Low** | $0.0556 (2026-05-28) |
+| **Current vs ATL** | +92.23% |
+| **24h Change** | +3.01% |
+| **7d Change** | -0.71% |
+| **30d Change** | +44.43% |
+| **1y Change** | -66.63% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xb59490ab09a0f526cc7305822ac65f2ab12f9723` |
+| Binance Smart Chain | `0xb59490ab09a0f526cc7305822ac65f2ab12f9723` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | LIT/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0XB59490AB09A0F526CC7305822AC65F2AB12F9723/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.litentry.com/](https://www.litentry.com/) |
+| **Twitter** | [@litentry](https://twitter.com/litentry) |
+| **Telegram** | [litentry](https://t.me/litentry) (18 members) |
+| **Discord** | [https://discord.gg/litentry](https://discord.gg/litentry) |
+| **GitHub** | [https://github.com/litentry](https://github.com/litentry) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $16,603.61 |
+| **Market Cap Rank** | #1600 |
+| **24h Range** | $0.1008 — $0.1163 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

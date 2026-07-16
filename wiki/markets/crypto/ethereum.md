@@ -2,7 +2,7 @@
 title: "Ethereum"
 type: entity
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, ethereum, markets]
 aliases: ["ETH", "Ether"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2015
 headquarters: "Decentralized"
 website: "https://ethereum.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[smart-contracts]]", "[[solana]]", "[[proof-of-stake]]", "[[staking]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[solana]]", "[[staking]]"]
 ---
 
 # Ethereum
@@ -270,3 +270,120 @@ ETH competes with other smart-contract platforms ("ETH killers") and, via the ET
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original auto-generated entity data
 - Market snapshot 2026-06-20 — cryptodataapi.com / CoinGecko (`raw/data/crypto-loop/coingecko-markets.json`); macro backdrop from `raw/data/crypto-loop/_digest.md` (Fear & Greed = 22; Established Bear Market)
 - Merge fork-arbitrage case study — [[2022-09-ethereum-merge-fork-arbitrage]] / [[fork-airdrop-triangulation]]
+
+## Overview
+
+Ethereum is a global, open-source platform for decentralized applications. In other words, it is a decentralized blockchain platform that enables developers to build and deploy smart contracts and applications without central authority control. Unlike Bitcoin, which primarily functions as digital currency, Ethereum operates as a programmable global computer where developers can create any type of decentralized service. 
+
+The platform hosts over $14 billion in DeFi applications with hundreds of thousands of active users across financial protocols, NFT marketplaces, and gaming platforms. Its transition to Proof of Stake in September 2022 reduced energy consumption by over 99%, addressing environmental concerns while strengthening network security.
+
+The network operates through thousands of independent validator nodes that process transactions and execute smart contracts on the Ethereum Virtual Machine. Smart contracts are self-executing programs written in Solidity that automatically carry out agreements when conditions are met, eliminating intermediaries like banks or brokers. 
+
+Validators stake ETH as collateral to propose and validate blocks, earning rewards for honest participation while facing penalties for malicious behavior. The EIP-1559 upgrade introduced a dynamic base fee mechanism that burns ETH with each transaction, creating deflationary pressure during high network activity when more ETH is burned than issued to validators.
+
+Vitalik Buterin proposed Ethereum in 2013, but seven co-founders helped build it, including Gavin Wood who created Solidity and the EVM technical specification, and Joseph Lubin who founded ConsenSys. The project launched in July 2015 after raising over $18 million through crowdfunding, quickly becoming the largest blockchain developer community. Major milestones include the 2020 Beacon Chain launch, the 2021 London hard fork implementing fee burning, and the 2022 Merge to Proof of Stake. 
+
+Ether (ETH) serves multiple functions: payi...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 120.68M ETH |
+| **Total Supply** | 120.68M ETH |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $227.53B |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $4,946.05 (2025-08-24) |
+| **Current vs ATH** | -61.88% |
+| **All-Time Low** | $0.4330 (2015-10-20) |
+| **Current vs ATL** | +435365.02% |
+| **24h Change** | +0.47% |
+| **7d Change** | +7.51% |
+| **30d Change** | +4.66% |
+| **1y Change** | -40.41% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | ETH/USDT | N/A |
+| Kraken | ETH/USD | N/A |
+| Bitget | ETH/USDT | N/A |
+| KuCoin | ETH/USDT | N/A |
+| Crypto.com Exchange | ETH/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.ethereum.org/](https://www.ethereum.org/) |
+| **Twitter** | [@ethereum](https://twitter.com/ethereum) |
+| **Reddit** | [https://www.reddit.com/r/ethereum](https://www.reddit.com/r/ethereum) |
+| **GitHub** | [https://github.com/ethereum/go-ethereum](https://github.com/ethereum/go-ethereum) |
+| **Whitepaper** | [https://ethereum.org/whitepaper/](https://ethereum.org/whitepaper/) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 44,422 |
+| **GitHub Forks** | 19,618 |
+| **Commits (4 weeks)** | 41 |
+| **Pull Requests Merged** | 5,779 |
+| **Contributors** | 906 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $12.14B |
+| **Market Cap Rank** | #2 |
+| **24h Range** | $1,876.57 — $1,938.65 |
+| **CoinGecko Sentiment** | 89% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+
+---

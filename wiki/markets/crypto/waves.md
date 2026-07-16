@@ -2,15 +2,15 @@
 title: "Waves"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["WAVES", "Waves Platform"]
 entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://waves.tech/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[staking]]", "[[smart-contracts]]", "[[consensus-mechanism]]", "[[stablecoin]]", "[[depeg]]", "[[harmony]]"]
+related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[harmony]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[stablecoin]]", "[[staking]]"]
 ---
 
 # Waves

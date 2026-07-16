@@ -2,7 +2,7 @@
 title: "ECOMI"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, nft]
 aliases: ["OMI"]
@@ -133,3 +133,112 @@ OMI's differentiator is exclusive **licensed-IP partnerships** (Marvel, DC) and 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market snapshot 2026-06-21 via cryptodataapi.com / CoinGecko top-1000: rank #419, $55.27M mcap, $0.00020377, 7d -14.77%.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | OMI |
+| **Market Cap Rank** | #479 |
+| **Market Cap** | $43.75M |
+| **Current Price** | $0.00016151 |
+| **Categories** | Gaming (GameFi), NFT, Metaverse, Collectibles, Play To Earn, Base Native |
+| **Website** | [https://ecomi.notion.site/](https://ecomi.notion.site/) |
+
+---
+
+## Overview
+
+ECOMI is the issuer of the OMI token. The OMI token is intended for use in the VeVe digital collectibles ecosystem. With over 8 million digital collectible NFTs sold since the beginning of 2021 and a range of international brands, artists, and IP partners releasing content through the platform,&nbsp;VeVe is the world’s leading mobile-first digital collectible platform.
+
+Through an innovative loyalty program- the VeVe Master Collector Program- the OMI token is intended to amplify the collecting experience and, when available, will provide VeVe collectors with a range of unique ways to build and expand their digital collections.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 270.95B OMI |
+| **Total Supply** | 310.88B OMI |
+| **Max Supply** | 750.00B OMI |
+| **Fully Diluted Valuation** | $50.20M |
+| **Market Cap / FDV Ratio** | 0.87 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.0134 (2021-03-19) |
+| **Current vs ATH** | -98.80% |
+| **All-Time Low** | $0.00000337 (2019-11-04) |
+| **Current vs ATL** | +4683.86% |
+| **24h Change** | -3.68% |
+| **7d Change** | -2.64% |
+| **30d Change** | -28.62% |
+| **1y Change** | -20.93% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xed35af169af46a02ee13b9d79eb57d6d68c1749e` |
+| Base | `0x3792dbdd07e87413247df995e692806aa13d3299` |
+| Energi | `0x003d765f3793de38ad5ea9d5fd0021cf12c3ba68` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | OMI/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XED35AF169AF46A02EE13B9D79EB57D6D68C1749E/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://ecomi.notion.site/](https://ecomi.notion.site/) |
+| **Twitter** | [@ecomi_](https://twitter.com/ecomi_) |
+| **Telegram** | [ecomi](https://t.me/ecomi) (13,599 members) |
+| **Discord** | [https://discord.gg/veve](https://discord.gg/veve) |
+| **GitHub** | [https://github.com/Ecomi-Ecosystem/tge-contract](https://github.com/Ecomi-Ecosystem/tge-contract) |
+| **Whitepaper** | [https://drive.google.com/file/d/1UNE-EvjuMIaWJUfvF3qQiTe0OKLFAJXV/view](https://drive.google.com/file/d/1UNE-EvjuMIaWJUfvF3qQiTe0OKLFAJXV/view) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $899,526.00 |
+| **Market Cap Rank** | #479 |
+| **24h Range** | $0.00016069 — $0.00017732 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

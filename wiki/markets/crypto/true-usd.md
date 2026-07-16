@@ -2,7 +2,7 @@
 title: "TrueUSD"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, regulation, stablecoin]
 aliases: ["TUSD", "TrueCoin"]
@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Issuer: Techteryx Ltd. (BVI); originally TrustToken/TrueCoin, San Francisco"
 website: "https://tusd.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[stablecoin]]", "[[usdc]]", "[[usdt]]", "[[first-digital-usd]]", "[[stablecoin-depegs]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[first-digital-usd]]", "[[real-world-assets]]", "[[stablecoin-depegs]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
 ---
 
 # TrueUSD
@@ -174,3 +174,85 @@ Versus yield-bearing alternatives ([[ylds|YLDS]], [[ousg|OUSG]], BUIDL, [[usx|US
 - [CoinDesk — Dubai court freezes $456M linked to Techteryx bailout (Nov 12, 2025)](https://www.coindesk.com/policy/2025/11/12/dubai-court-freezes-usd456m-linked-to-justin-sun-s-bailout-of-trueusd-issuer-techteryx)
 - [The Block — FDUSD depegs 9% after Sun raises First Digital solvency concerns](https://www.theblock.co/post/349289/tron-justin-sun-trueusd-fiduciary-insolvent-techteryx-tusd-first-digital-aria)
 - Perplexity sonar verification attempt + WebSearch verification, 2026-06-10
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 494.52M TUSD |
+| **Total Supply** | 494.52M TUSD |
+| **Max Supply** | Unlimited |
+| **Fully Diluted Valuation** | $493.16M |
+| **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $1.62 (2018-08-26) |
+| **Current vs ATH** | -38.38% |
+| **All-Time Low** | $0.8835 (2020-03-12) |
+| **Current vs ATL** | +12.89% |
+| **24h Change** | -0.06% |
+| **7d Change** | -0.10% |
+| **30d Change** | -0.15% |
+| **1y Change** | -0.15% |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | TUSD/USDT | N/A |
+| Upbit | TUSD/BTC | N/A |
+| Bitget | TUSD/USDT | N/A |
+| KuCoin | TUSD/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V2 (Ethereum) | 0X6E0DADE58D2D89EBBE7AFC384E3E4F15B70B14D8/0X0000000000085D4780B73119B644AE5ECD22B376 | Spot |
+| Uniswap V3 (Ethereum) | 0X0000000000085D4780B73119B644AE5ECD22B376/0XC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 | Spot |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 319 |
+| **GitHub Forks** | 132 |
+| **Pull Requests Merged** | 1,039 |
+| **Contributors** | 28 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $29.26M |
+| **Market Cap Rank** | #103 |
+| **24h Range** | $0.9970 — $0.9982 |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[ethereum]]
+
+---

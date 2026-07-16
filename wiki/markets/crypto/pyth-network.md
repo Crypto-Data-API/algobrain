@@ -2,14 +2,14 @@
 title: "Pyth Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-20
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi]
 aliases: ["PYTH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://pyth.network/"
-related: ["[[crypto-markets]]", "[[solana]]", "[[defi]]", "[[ethereum]]", "[[bitcoin]]", "[[hyperliquid]]", "[[chainlink]]"]
+related: ["[[bitcoin]]", "[[chainlink]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]"]
 ---
 
 # Pyth Network
@@ -295,3 +295,55 @@ Pyth's clearest structural advantage is latency + first-party data for high-freq
 - Market data snapshot, 2026-06-20 (cryptodataapi.com / CoinGecko)
 - Pyth Network whitepaper v2 — https://pyth.network/whitepaper_v2.pdf
 - Pyth Network docs — https://docs.pyth.network/
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 7.87B PYTH |
+| **Total Supply** | 10.00B PYTH |
+| **Max Supply** | 10.00B PYTH |
+| **Fully Diluted Valuation** | $503.61M |
+| **Market Cap / FDV Ratio** | 0.79 |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Binance | PYTH/USDT | N/A |
+| Kraken | PYTH/USD | N/A |
+| Upbit | PYTH/KRW | N/A |
+| Bitget | PYTH/USDT | N/A |
+| KuCoin | PYTH/USDT | N/A |
+| Crypto.com Exchange | PYTH/USD | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Orca | HZ1JOVNIVVGRGNIIYVEOZEVGZ58XAU3RKWX8EACQBCT3/SO11111111111111111111111111111111111111112 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $32.43M |
+| **Market Cap Rank** | #117 |
+| **24h Range** | $0.0468 — $0.0510 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## See Also
+
+- [[crypto-markets]]
+- [[solana]]
+
+---

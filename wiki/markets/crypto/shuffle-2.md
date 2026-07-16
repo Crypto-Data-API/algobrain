@@ -2,7 +2,7 @@
 title: "Shuffle"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, ethereum]
 aliases: ["SHFL"]
@@ -167,3 +167,88 @@ Real dated events only:
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko top-1000 snapshot, 2026-06-20.
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | SHFL |
+| **Market Cap Rank** | #240 |
+| **Market Cap** | $113.52M |
+| **Current Price** | $0.2670 |
+| **Categories** | Gambling (GambleFi) |
+| **Website** | [https://shuffle.com](https://shuffle.com) |
+
+---
+
+## Overview
+
+The SHFL token is the native utility token of Shuffle.com, a comprehensive crypto casino platform. Designed to enhance user engagement and platform growth, SHFL serves multiple functions within the Shuffle ecosystem. Key utilities include:
+
+Wager Asset: From day one, SHFL allows users to participate in a wide range of games on Shuffle.com, including original games, slots, and sports betting, providing a direct utility as a betting medium.
+Buyback and Burn: To support token value and reduce supply, Shuffle allocates 15% of revenue to regularly buy back SHFL tokens from the open market and burn them, promoting economic stability and potential value appreciation.
+VIP Perks: SHFL holders enjoy early access to new platform features, enhanced VIP experiences, and bonuses, ensuring a premium user experience and incentivizing platform engagement and token retention.
+Airdrop Incentives: Through strategic airdrop campaigns, SHFL rewards early adopters and active users, facilitating a dynamic and engaging community around Shuffle's offerings.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 425.23M SHFL |
+| **Total Supply** | 923.28M SHFL |
+| **Max Supply** | 1.00B SHFL |
+| **Fully Diluted Valuation** | $246.47M |
+| **Market Cap / FDV Ratio** | 0.46 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.7875 (2024-03-18) |
+| **Current vs ATH** | -66.01% |
+| **All-Time Low** | $0.1412 (2024-12-17) |
+| **Current vs ATL** | +89.54% |
+| **24h Change** | +0.82% |
+| **7d Change** | -4.86% |
+| **30d Change** | -11.00% |
+| **1y Change** | +10.78% |
+
+---
+
+## Exchange Listings
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0X8881562783028F5C1BCB985D2283D5E170D88888/0XA0B86991C6218B36C1D19D4A2E9EB0CE3606EB48 | Spot |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $491,579.00 |
+| **Market Cap Rank** | #240 |
+| **24h Range** | $0.2642 — $0.2747 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Gains Network"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
 tags: [crypto, defi, derivatives, futures]
-aliases: ["GNS", "gTrade", "Gains Network"]
+aliases: ["GNS", "Gains Network", "gTrade"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gains.trade/"
-related: ["[[crypto-markets]]", "[[polygon]]", "[[arbitrum]]", "[[perpetual-futures]]", "[[derivatives]]", "[[leverage]]", "[[forex]]", "[[chainlink]]", "[[gmx]]", "[[dydx]]", "[[hyperliquid]]", "[[fulcrom]]", "[[governance-token]]"]
+related: ["[[arbitrum]]", "[[chainlink]]", "[[crypto-markets]]", "[[derivatives]]", "[[dydx]]", "[[forex]]", "[[fulcrom]]", "[[gmx]]", "[[governance-token]]", "[[hyperliquid]]", "[[leverage]]", "[[perpetual-futures]]", "[[polygon]]"]
 ---
 
 # Gains Network

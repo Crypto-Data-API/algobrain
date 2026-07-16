@@ -2,15 +2,15 @@
 title: "Stratis"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins]
+tags: [altcoins, crypto]
 aliases: ["STRAX", "Stratis Platform"]
 entity_type: protocol
 founded: 2016
 headquarters: "United Kingdom"
 website: "https://www.stratisplatform.com/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[smart-contracts]]", "[[bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[smart-contracts]]"]
 ---
 
 # Stratis

@@ -2,14 +2,14 @@
 title: "River"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: good
-tags: [crypto, ethereum, defi]
+tags: [crypto, defi, ethereum]
 aliases: ["RIVER", "River Inc", "Satoshi Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://river.inc/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[bnb]]", "[[stablecoins]]", "[[defi]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[stablecoins]]"]
 ---
 
 # River
@@ -88,3 +88,120 @@ River sits in the **DeFi stablecoin / chain-abstraction** narrative — overlapp
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | RIVER |
+| **Market Cap Rank** | #360 |
+| **Market Cap** | $64.11M |
+| **Current Price** | $3.27 |
+| **Categories** | Binance Alpha Spotlight, Chain Abstraction, Binance Wallet IDO, Binance Buildkey TGE, Base Native |
+| **Website** | [https://river.inc/](https://river.inc/) |
+
+---
+
+## Overview
+
+River is building a chain-abstraction stablecoin system that enables cross-chain collateral, yield, and liquidity—all without bridging. 
+
+Powered by the omni-CDP stablecoin satUSD, users can earn, leverage, and scale across different ecosystems natively. 
+
+River features the first omni-CDP module that allows users to collateralize assets on Chain A and mint stablecoin satUSD on Chain B—without bridging the assets.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 19.60M RIVER |
+| **Total Supply** | 100.00M RIVER |
+| **Max Supply** | 100.00M RIVER |
+| **Fully Diluted Valuation** | $327.09M |
+| **Market Cap / FDV Ratio** | 0.20 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $87.73 (2026-01-26) |
+| **Current vs ATH** | -96.27% |
+| **All-Time Low** | $1.58 (2025-09-23) |
+| **Current vs ATL** | +107.15% |
+| **24h Change** | -0.04% |
+| **7d Change** | -10.62% |
+| **30d Change** | -32.87% |
+| **1y Change** | +0.00% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xda7ad9dea9397cffddae2f8a052b82f1484252b3` |
+| Base | `0xda7ad9dea9397cffddae2f8a052b82f1484252b3` |
+| Binance Smart Chain | `0xda7ad9dea9397cffddae2f8a052b82f1484252b3` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Kraken | RIVER/USD | N/A |
+| Bitget | RIVER/USDT | N/A |
+
+### Decentralized Exchanges
+
+| Exchange | Pair | Type |
+|---|---|---|
+| Uniswap V3 (Ethereum) | 0XDA7AD9DEA9397CFFDDAE2F8A052B82F1484252B3/0XDAC17F958D2EE523A2206206994597C13D831EC7 | Spot |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://river.inc/](https://river.inc/) |
+| **Twitter** | [@RiverdotInc](https://twitter.com/RiverdotInc) |
+| **Telegram** | [river_inc](https://t.me/river_inc) (40,569 members) |
+| **GitHub** | [https://github.com/Satoshi-Protocol](https://github.com/Satoshi-Protocol) |
+| **Whitepaper** | [https://docs.river.inc/](https://docs.river.inc/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $3.16M |
+| **Market Cap Rank** | #360 |
+| **24h Range** | $3.24 — $3.35 |
+| **CoinGecko Sentiment** | 0% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

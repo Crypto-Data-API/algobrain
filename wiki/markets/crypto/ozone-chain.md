@@ -2,14 +2,14 @@
 title: "Ozone Chain"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
 tags: [crypto, smart-contract-platform]
 aliases: ["OZO", "Ozone"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ozonechain.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[quantum-resistant-cryptography]]", "[[layer-1]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[quantum-resistant-cryptography]]"]
 ---
 
 # Ozone Chain
@@ -138,3 +138,128 @@ Ozone Chain sits in the **quantum-resistant blockchain** and **Layer-1 smart-con
 - Market data snapshot 2026-06-21 (cryptodataapi.com / CoinGecko top-1000).
 - Macro framing: market snapshot 2026-06-23 (Fear & Greed 21, Extreme Fear; bottoming/accumulation regime).
 - General market knowledge; no specific wiki source ingested yet.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | OZO |
+| **Market Cap Rank** | #223 |
+| **Market Cap** | $125.06M |
+| **Current Price** | $0.1301 |
+| **Categories** | Smart Contract Platform, Layer 1 (L1), Zero Knowledge (ZK) |
+| **Website** | [https://ozonechain.io/](https://ozonechain.io/) |
+
+---
+
+## Overview
+
+What is Ozone Chain
+
+Ozone Chain is the world’s first Quantum Resistant Blockchain that has integrated bleeding edge quantum security technologies in its design. Ozone Chain believes in Quantum Secured Blockchain for solving the real-world concerns faced by Quantum Computers. Ozone Chain is a decentralized platform that enables developers to build scalable user-friendly dApps with low transactions fees without ever sacrificing on security.
+
+The most secured Blockchain which is EVM compatible and runs on proof of authority and IBFT protocols.
+
+Quantum Random Numbers from a laser source
+Lattice-based Post Quantum Cryptography
+Quantum tech tested and certified by TUV
+EVM Compatible
+Proof of Authority &amp; QBFT
+Block time – 5 seconds
+Deploy Smart Contracts and Create Dapps
+Governance by voting	
+
+Uniqueness of Ozone Chain
+
+Ozone chain uses quantum random numbers (QRN) and post-quantum cryptography (PQC) to make the blockchain quantum secure and quantum resistant.
+
+Quantum key distribution (QKD), in its current implementations has geographical limitations that constrain its usage within a few hundred kilometres. This is a huge drawback for a blockchain, where nodes need to be distributed globally and inter-node communications must span thousands of kilometres.
+
+Thus, an architectural decision has been made to use PQC for inter-node communications, while being quantum-resistant at the same time.
+
+Tests and Results
+
+The quantum security technologies used in ozone chain have undergone various standardized tests and have passed all of them. The tests have been conducted by TÜV Rheinland which is an agency that provides testing and certification services to ensure the safety, quality, and performance of cybersecurity products and services, including quantum security solutions.
+
+Entropy test
+Diehard tests
+NIST tests
+
+Ozone's QRNG has also passed the NIST SP 800-22 tests, which is a test suite standards by National Institute of Standards and Technology. NIST SP 800-22 is a stat...
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 960.93M OZO |
+| **Total Supply** | 1.00B OZO |
+| **Max Supply** | 1.00B OZO |
+| **Fully Diluted Valuation** | $130.14M |
+| **Market Cap / FDV Ratio** | 0.96 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.4851 (2024-04-29) |
+| **Current vs ATH** | -73.14% |
+| **All-Time Low** | $0.0600 (2023-10-07) |
+| **Current vs ATL** | +116.97% |
+| **24h Change** | -0.16% |
+| **7d Change** | -0.26% |
+| **30d Change** | +0.46% |
+| **1y Change** | -8.05% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Own blockchain (Layer 1)
+
+---
+
+## Exchange Listings
+
+> *No major exchange listings found in CoinGecko data.*
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://ozonechain.io/](https://ozonechain.io/) |
+| **Twitter** | [@Ozone_chain](https://twitter.com/Ozone_chain) |
+| **Telegram** | [ozonechainlabs](https://t.me/ozonechainlabs) (50,162 members) |
+| **Discord** | [https://discord.gg/xfG5rgQps3](https://discord.gg/xfG5rgQps3) |
+| **Whitepaper** | [https://whitepaper.ozonechain.io/](https://whitepaper.ozonechain.io/) |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $202,909.00 |
+| **Market Cap Rank** | #223 |
+| **24h Range** | $0.1301 — $0.1305 |
+| **CoinGecko Sentiment** | 100% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

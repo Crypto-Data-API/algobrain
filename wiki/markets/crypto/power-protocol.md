@@ -2,9 +2,9 @@
 title: "Power Protocol"
 type: entity
 created: 2026-04-09
-updated: 2026-06-23
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, gamefi, nft]
+tags: [altcoins, crypto, gamefi, nft]
 aliases: ["POWER", "Power Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"

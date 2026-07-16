@@ -2,14 +2,14 @@
 title: "Caldera"
 type: entity
 created: 2026-04-09
-updated: 2026-06-22
+updated: 2026-07-16
 status: excellent
-tags: [crypto, altcoins, ethereum]
-aliases: ["ERA", "Caldera Network", "Metalayer"]
+tags: [altcoins, crypto, ethereum]
+aliases: ["Caldera Network", "ERA", "Metalayer"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.caldera.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[rollup]]", "[[interoperability]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[layer-2]]", "[[rollup]]"]
 ---
 
 # Caldera
@@ -269,3 +269,9 @@ Caldera sits in the **modular / rollup-as-a-service / interoperability** narrati
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - General market knowledge; no specific wiki source ingested yet.
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---

@@ -2,14 +2,14 @@
 title: "Humanity"
 type: entity
 created: 2026-04-09
-updated: 2026-06-21
+updated: 2026-07-16
 status: excellent
 tags: [crypto, decentralized-ai]
 aliases: ["H", "Humanity Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.humanity.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[proof-of-humanity]]", "[[worldcoin-wld]]", "[[decentralized-ai]]", "[[artificial-intelligence]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]", "[[proof-of-humanity]]", "[[worldcoin-wld]]"]
 ---
 
 # Humanity
@@ -127,3 +127,118 @@ Humanity Protocol targets the **proof-of-personhood** problem: distinguishing re
 
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - Market data: cryptodataapi.com / CoinGecko snapshot, 2026-06-21.
+
+## Key Facts
+
+| Field | Detail |
+|---|---|
+| **Ticker** | H |
+| **Market Cap Rank** | #229 |
+| **Market Cap** | $118.58M |
+| **Current Price** | $0.0594 |
+| **Categories** | Infrastructure, Smart Contract Platform, Zero Knowledge (ZK), Privacy Blockchain, Binance Alpha Spotlight, Privacy |
+| **Website** | [https://www.humanity.org/](https://www.humanity.org/) |
+
+---
+
+## Overview
+
+Humanity Protocol is a blockchain featuring a native Proof of Humanity (PoH) consensus mechanism that verifies users' uniqueness as humans through decentralized identifiers (DID) and verifiable credentials (VC), combining privacy-preserving human recognition, decentralized storage, and zero-knowledge proofs to enable sybil resistance, self-sovereign identity, and user-owned data for innovative and inclusive applications.
+
+---
+
+## Tokenomics
+
+| Metric | Value |
+|---|---|
+| **Circulating Supply** | 1.99B H |
+| **Total Supply** | 10.00B H |
+| **Max Supply** | 10.00B H |
+| **Fully Diluted Valuation** | $595.33M |
+| **Market Cap / FDV Ratio** | 0.20 |
+
+---
+
+## Price History
+
+| Metric | Value |
+|---|---|
+| **All-Time High** | $0.8439 (2026-06-02) |
+| **Current vs ATH** | -92.95% |
+| **All-Time Low** | $0.0181 (2025-06-27) |
+| **Current vs ATL** | +228.67% |
+| **24h Change** | -11.87% |
+| **7d Change** | -12.04% |
+| **30d Change** | -71.22% |
+| **1y Change** | +16.90% |
+
+---
+
+## Platform & Chain Information
+
+**Native Chain:** Ethereum
+
+### Contract Addresses
+
+| Chain | Address |
+|---|---|
+| Ethereum | `0xe76c5b78f93909d34404e9eb4c1f19e7582a5de1` |
+
+---
+
+## Exchange Listings
+
+### Centralized Exchanges
+
+| Exchange | Pair | Trust Score |
+|---|---|---|
+| Bitget | H/USDT | N/A |
+| KuCoin | H/USDT | N/A |
+| Crypto.com Exchange | H/USD | N/A |
+
+---
+
+## Social & Community
+
+| Platform | Link / Metric |
+|---|---|
+| **Website** | [https://www.humanity.org/](https://www.humanity.org/) |
+| **Twitter** | [@Humanityprot](https://twitter.com/Humanityprot) |
+| **Discord** | [https://Discord.gg/HumanityProt](https://Discord.gg/HumanityProt) |
+| **GitHub** | [https://github.com/humanity-org/hp-basic-token/tree/master](https://github.com/humanity-org/hp-basic-token/tree/master) |
+| **Whitepaper** | [https://humanity-protocol.gitbook.io/humanity-protocol](https://humanity-protocol.gitbook.io/humanity-protocol) |
+
+---
+
+## Developer Activity
+
+| Metric | Value |
+|---|---|
+| **GitHub Stars** | 9 |
+| **GitHub Forks** | 2 |
+
+---
+
+## Trading Characteristics
+
+| Characteristic | Detail |
+|---|---|
+| **24h Volume** | $8.37M |
+| **Market Cap Rank** | #229 |
+| **24h Range** | $0.0564 — $0.0675 |
+| **CoinGecko Sentiment** | 83% positive |
+| **Last Updated** | 2026-07-16 |
+
+---
+
+## Whale & Holder Information
+
+> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Major News & Events
+
+> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
