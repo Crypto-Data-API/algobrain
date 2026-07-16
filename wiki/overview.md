@@ -1,5 +1,5 @@
 ---
-title: "AI Trading Strategy Brain — Overview"
+title: "AlgoBrain — Overview"
 type: overview
 created: 2026-04-06
 updated: 2026-07-13
@@ -7,7 +7,7 @@ status: good
 tags: [overview, meta]
 ---
 
-# AI Trading Strategy Brain — Overview
+# AlgoBrain — Overview
 
 This page provides a high-level synthesis of the wiki's current state: mission, major themes, knowledge density, gaps, and emerging insights.
 

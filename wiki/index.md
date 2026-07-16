@@ -1,5 +1,5 @@
 ---
-title: "AI Trading Strategy Brain — Index"
+title: "AlgoBrain — Index"
 type: index
 created: 2026-04-06
 updated: 2026-07-14
@@ -7,7 +7,7 @@ status: good
 tags: [index, meta]
 ---
 
-# AI Trading Strategy Brain — Index
+# AlgoBrain — Index
 
 A comprehensive, LLM-maintained knowledge base for crypto trading strategy: crypto, blockchain, DeFi, trading, algorithms, and markets — with macro and AI context.
 

@@ -1,6 +1,6 @@
-# AI Trading Strategy Brain — LLM Schema
+# AlgoBrain — LLM Schema
 
-> This file governs how coding agents (Codex, etc.) maintain the AI Trading Strategy Brain wiki.
+> This file governs how coding agents (Codex, etc.) maintain the AlgoBrain wiki.
 > Read this file in full before any wiki operation.
 
 ## Scope

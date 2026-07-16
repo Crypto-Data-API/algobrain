@@ -1,8 +1,8 @@
-# AI Crypto Trading Strategy Brain
+# AlgoBrain
 
 An LLM-maintained Obsidian knowledge base for **crypto trading strategy** — crypto, blockchain, DeFi, trading, algorithms, and markets, with macro and AI context. ~3,500 interlinked markdown pages.
 
-![Obsidian graph view of the AI Trading Strategy Brain vault](attachments/alphaforge-obsidian-graph-view.gif)
+![Obsidian graph view of the AlgoBrain vault](attachments/algobrain-obsidian-graph-view.gif)
 
 Scoped to crypto: stock-market entities, equity fundamentals, and personal content are excluded; macro context (FX, rates, commodities, market history), the AI knowledge base, and asset-agnostic trading knowledge are included.
 
