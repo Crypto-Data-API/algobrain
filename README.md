@@ -2,7 +2,10 @@
 
 An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~3,500 interlinked markdown nodes.
 
-![Obsidian graph view of the AlgoBrain vault](attachments/algobrain-obsidian-graph-view.gif)
+<video src="https://github.com/Crypto-Data-API/algobrain/raw/main/attachments/algobrain-obsidian-graph-view.mp4" controls muted loop width="100%">
+  Obsidian graph view of the AlgoBrain vault —
+  <a href="attachments/algobrain-obsidian-graph-view.mp4">download the clip</a>.
+</video>
 
 Scoped to crypto: stock-market entities, equity fundamentals, and personal content are excluded; macro context (FX, rates, commodities, market history), the AI knowledge base, and asset-agnostic trading knowledge are included.
 
