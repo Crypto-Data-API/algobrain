@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, altcoins]
 aliases: ["VELO", "Velodrome"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://velodrome.finance/"
-related: ["[[automated-market-maker]]", "[[concentrated-liquidity]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[optimism]]", "[[ve-tokenomics]]"]
+related: ["[[automated-market-maker]]", "[[concentrated-liquidity]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[optimism]]", "[[ve-tokenomics]]", "[[binance]]", "[[dca-strategy]]", "[[momentum-rotation]]"]
 ---
 
 # Velodrome Finance
@@ -193,6 +193,53 @@ Governance flows through **veVELO**. Locking VELO mints a non-fungible veVELO po
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+VELO is tradable on **Binance SPOT only** — there is no liquid perpetual venue for the token, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do NOT apply. With only a single deep centralized-spot venue and a small (~$25M) market cap, order-book depth is thin: execution should lean on **limit orders and scaled entries** rather than aggressive market fills, and position sizing must respect the reality that a few large flows can move price sharply (as the +45% weekly swing illustrates). The absence of a borrow/perp market means bearish or hedged exposure is effectively unavailable, so the tradeable playbook is long-only spot accumulation, rotation, and range work.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, thin-liquidity, sub-$0.02 microcap: scaling in over time smooths the violent single-flow moves and avoids slippage from lumpy entries.
+- [[momentum-rotation]] — VELO's tendency to lead or lag the Optimism/DeFi-token cohort makes it a candidate for rotating capital into it when the OP-ecosystem liquidity theme is bid.
+- [[breakout-and-retest]] — with sharp, low-liquidity impulse moves (e.g. the +45% week), waiting for a breakout to hold on retest filters the frequent fakeouts a thin book produces.
+- [[range-trading]] — outside of narrative bursts VELO spends long stretches chopping in tight bands, suiting patient buy-low/sell-high spot range work.
+- [[atr-trailing-stop]] — high per-candle volatility on a spot-only asset makes a volatility-scaled trailing stop the practical way to lock gains from momentum spikes without premature exits.
+- [[narrative-trading]] — moves are heavily driven by Optimism-ecosystem, bribe/incentive-cycle, and ve(3,3) DeFi narratives rather than fundamentals, rewarding positioning around theme rotation.
+
+### Volatility & regime character
+
+Small-cap (~#725, ~$25M) DeFi/DEX infrastructure token with **high beta to BTC/ETH risk sentiment** and even higher idiosyncratic volatility from its thin float. It behaves as an **Optimism-ecosystem liquidity proxy** and a ve(3,3) governance token, so it is reflexive to bribe/emission cycles and DeFi-rotation flows. It is not a memecoin, but its low liquidity gives it memecoin-like reflexivity: outsized percentage swings on modest volume, capable of decoupling from the broad tape (e.g. rallying +45% into an "Extreme Fear" regime).
+
+### Risk flags
+
+- **Liquidity/venue concentration:** spot-only on a single deep CEX plus DEX liquidity; no perp venue means no hedge and thin depth amplifies slippage.
+- **Emissions/supply overhang:** unlimited emissions-based supply — token value depends on locking demand and fee/bribe revenue outpacing continuous emission sell pressure.
+- **Narrative dependence:** price is driven by Optimism-ecosystem and incentive-cycle narratives; when the theme cools, liquidity and volume can drain fast.
+- **Protocol/L2 risk:** complex ve(3,3) + concentrated-liquidity contracts and Optimism sequencer/upgrade-key trust assumptions carry tail risk that can gap the token.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=VELOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=VELOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=VELOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=VELOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

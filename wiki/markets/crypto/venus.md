@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["Venus Protocol", "XVS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://venus.io/"
-related: ["[[aave]]", "[[bnb]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[lending-and-borrowing]]"]
+related: ["[[aave]]", "[[bnb]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[lending-and-borrowing]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Venus
@@ -113,6 +113,56 @@ Venus is essentially the **BNB-Chain analogue of Aave/Compound**: a smaller mark
 - **Macro/regime:** as of 2026-06-21 the market is in **extreme fear (Fear & Greed = 23)** and an **Established Bear Market** — small-cap DeFi tokens are high-beta and can underperform sharply in risk-off phases.
 
 > Cryptocurrency is highly volatile and speculative. Nothing here is financial advice. Always verify live on-chain and exchange data before trading.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XVS is tradable on [[binance|Binance]] — **spot** (XVS/USDT) plus a **USD-margined perpetual** that carries [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **NOT listed on Hyperliquid**, so Binance is effectively the *primary — and essentially the only Tier-1 — leveraged venue* for XVS. This concentration matters for execution: as a ~#457-ranked money-market token with thin 24h volume, perp depth and OI are shallow relative to majors, so leverage should be sized conservatively, entries/exits worked with limit orders rather than aggressive market fills, and funding checked before holding. Because there is no cross-venue perp to hedge against, most basis/carry structures reduce to Binance spot-vs-Binance-perp; genuine cross-exchange arbitrage on the perp leg is not available.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin-float DeFi tokens like XVS periodically show persistent funding skew on the Binance perp that a delta-neutral spot-long/perp-short can harvest.
+- [[cash-and-carry]] — pair Binance spot XVS against the USD-M perp to capture basis when the perp trades at a premium, the cleanest neutral trade on the only leveraged venue.
+- [[crypto-spot-perp-futures-triangle]] — exploit dislocations between Binance spot and the XVS perp, the natural structure given both legs live on one exchange.
+- [[liquidation-cascade-fade]] — shallow XVS perp liquidity makes stop-runs and forced-liquidation wicks common; fading exhausted cascades back toward VWAP is a recurring setup.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether an XVS move (e.g. its money-market-driven relative-strength rallies) is backed by real positioning or is a low-conviction squeeze.
+- [[rsi-mean-reversion]] — XVS oscillates in wide ranges near its all-time-low band; RSI-based reversion suits its choppy, range-bound low-cap behavior.
+
+### Volatility & regime character
+
+XVS is a **small-cap DeFi / money-market governance token** with high beta to BTC/ETH risk appetite and, more specifically, to BNB Chain DeFi activity and TVL. It is not a memecoin — moves are fundamentals-adjacent (rate spreads, TVL, protocol revenue) rather than pure reflexivity — but the small float amplifies swings. Expect elevated correlation to the broad crypto tape in risk-off phases, with occasional idiosyncratic relative strength when money-market fee revenue holds up during drawdowns.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading is effectively single-venue (Binance); no Hyperliquid or deep cross-exchange perp market to hedge, so venue outages or delisting risk is undiversified.
+- **Thin liquidity:** low 24h volume and shallow perp OI make XVS prone to liquidation cascades and slippage; size accordingly.
+- **Dilution / emissions overhang:** MC/FDV ~0.57 means locked supply and governance emissions remain a structural supply headwind.
+- **Narrative dependence:** price is tethered to BNB Chain DeFi/lending demand and to [[binance|Binance]]'s ecosystem; a rotation out of DeFi lending hits XVS harder than majors.
+- **Protocol/regulatory:** money-market smart-contract, oracle, and DeFi-lending regulatory risk (including the VAI stablecoin) can drive gap moves independent of technicals.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XVSUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=XVSUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=XVS` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=XVS` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XVSUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=XVSUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=XVS"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

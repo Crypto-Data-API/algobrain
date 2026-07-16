@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, data-provider, defi, machine-learning]
+tags: [ai-trading, crypto, data-provider, defi, machine-learning, altcoins]
 aliases: ["OCEAN", "Ocean"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://oceanprotocol.com/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[data-provider]]", "[[decentralized-ai]]", "[[defi]]", "[[ethereum]]", "[[singularitynet]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[data-provider]]", "[[decentralized-ai]]", "[[defi]]", "[[ethereum]]", "[[singularitynet]]", "[[binance]]", "[[dca-strategy]]", "[[narrative-trading]]"]
 ---
 
 # Ocean Protocol
@@ -208,6 +208,54 @@ The thesis of the merger is vertical integration of decentralized AI: **data (Oc
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+OCEAN is tradable on **Binance SPOT only** — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation strategies do **not** apply. With single-venue concentration and thin reported turnover for a sub-$25M-cap token, order books are shallow: large market orders slip meaningfully, so execution should favor **limit orders, patient VWAP-style fills, and small clip sizes**. Absence of a borrow/perp market means downside expression is effectively long-only spot (sell/flat), which shapes risk toward position-exit discipline rather than hedging. Venue concentration also creates delisting/withdrawal-halt exposure, another reason to size conservatively.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, small-cap AI/data token with no shorting; systematic dollar-cost averaging smooths entries across OCEAN's high-variance, narrative-driven price swings.
+- [[breakout-and-retest]] — thin liquidity makes clean, confirmed breakouts of OCEAN range highs (then a retest hold) higher-quality entries than chasing impulsive spikes.
+- [[narrative-trading]] — OCEAN trades heavily on the "decentralized AI / data" theme and ASI-merger headlines; positioning around narrative rotation captures its main return driver.
+- [[atr-trailing-stop]] — given OCEAN's whippy, low-cap volatility, an ATR-based trailing stop locks in trend gains while adapting stop distance to its wide swings.
+- [[rsi-mean-reversion]] — in its frequent choppy ranges, fading RSI extremes on the spot pair exploits OCEAN's tendency to snap back after sentiment-driven overshoots.
+- [[crypto-beta-rotation]] — as a high-beta AI-basket altcoin, OCEAN fits rotations that add small-cap beta in risk-on regimes and de-risk to majors when BTC leads.
+
+### Volatility & regime character
+
+Small-cap (rank ~#695, sub-$25M) high-beta **altcoin** with strong correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] risk cycles and amplified drawdowns in risk-off regimes. As an **infra/data + [[decentralized-ai|decentralized-AI]] token**, OCEAN exhibits pronounced narrative reflexivity: it rallies hard on AI-theme momentum and ASI-merger catalysts, then bleeds during theme rotation. Not a memecoin, but its low float and thin liquidity give it memecoin-like reflexive spikes on catalysts. Realized volatility runs well above large-cap crypto; expect sharp, sentiment-driven moves rather than steady trends.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — Binance SPOT is effectively the only liquid venue; shallow books and single-exchange dependence raise slippage and delisting/withdrawal-halt risk.
+- **Token-migration risk** — the ASI Alliance merger means the OCEAN ticker is transitioning to a unified token; legacy and merged tokens can coexist and be priced separately, complicating position management (verify official conversion mechanics).
+- **Narrative dependence** — valuation rides the decentralized-AI theme; AI-token sentiment swings sharply and is correlated across the AI basket, so idiosyncratic drivers are weak.
+- **Emissions / supply** — max supply (~1.41B) far exceeds circulating (~200M), leaving structural dilution overhang independent of the merger.
+- **Small-cap / regulatory** — low market cap magnifies volatility and manipulation risk; broad crypto regulatory uncertainty applies.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=OCEANUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=OCEANUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=OCEANUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=OCEANUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

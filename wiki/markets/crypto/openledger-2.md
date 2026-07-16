@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, data-provider, decentralized-ai]
+tags: [crypto, data-provider, decentralized-ai, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["OPEN", "OpenLedger AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.openledger.xyz/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-provider]]", "[[decentralized-ai]]", "[[ethereum]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-provider]]", "[[decentralized-ai]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # OpenLedger
@@ -137,6 +137,55 @@ High-beta DeAI / AI-data token with **broad CEX liquidity** but a **heavy unlock
 - **Macro overlay:** in continued Extreme Fear, even relative leaders can be dragged down — scale exposure to the AI-meta sentiment turn.
 
 Not financial advice; low-float AI tokens carry severe drawdown and dilution risk.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+OPEN is tradable on [[binance|Binance]] as both **spot** and a **USD-margined perpetual**, so the standard derivatives telemetry — [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] — is available for it. It is **not** listed on [[hyperliquid|Hyperliquid]], making Binance the **primary leveraged venue**. Because leveraged flow concentrates on a single tier-1 CEX, funding and OI on Binance USD-M are the cleanest read on positioning; the absence of a Hyperliquid market means there is no on-chain perp liquidity to arbitrage against, so cross-venue funding spreads are limited to CEX-vs-CEX. Spot liquidity across Binance/Kraken/Upbit/Bitget/KuCoin is solid for a small-cap, but the ~#616 rank means order books thin quickly on size — scale entries and exits and expect meaningful slippage on large market orders, especially on the perp during liquidation events.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a low-float narrative token like OPEN periodically runs hot funding on the Binance perp; harvesting the funding via a delta-neutral spot-long/perp-short capture is a clean edge when the perp trades at a premium.
+- [[crowded-long-funding-fade]] — DeAI momentum spikes on OPEN can crowd longs into persistently positive funding; fading over-extended, over-funded longs targets the mean-reversion after such squeezes.
+- [[liquidation-cascade-fade]] — with leverage concentrated on one venue and thin books, cascade wicks on the Binance perp overshoot; fading the flush after a liquidation cluster targets the snap-back.
+- [[cash-and-carry]] — Binance spot plus USD-M perp lets you lock the spot-perp basis as a carry trade when the perp holds a persistent premium, monetizing OPEN's elevated funding without directional exposure.
+- [[breakout-and-retest]] — OPEN is catalyst-driven (unlock clarity, datanet adoption, DeAI rotations); trading confirmed breakouts on a retest filters the frequent false moves in a thin small-cap.
+- [[oi-confirmed-trend]] — using rising Binance open interest to confirm a directional move helps separate genuine trend from low-conviction chop in a reflexive AI-data name.
+
+### Volatility & regime character
+
+Small-cap (rank ~616), high-beta **infra / DeFi + DeAI (AI-data)** token with pronounced **narrative reflexivity**: it swings hard on AI-meta sentiment and rotates with the broader DeAI cohort (TAO/FET/RENDER) rather than trading on its own fundamentals. Correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] is directionally positive but its amplitude far exceeds majors — risk-on lifts it more and risk-off drops it harder. Expect large, unlock- and headline-driven volatility clusters and shallow liquidity relative to the majors.
+
+### Risk flags
+
+- **Venue / liquidity concentration:** leveraged trading is effectively single-venue (Binance USD-M); a Binance-specific outage, listing change, or funding dislocation has outsized impact, and no Hyperliquid market means no on-chain fallback.
+- **Unlock / emissions overhang:** MC/FDV ~0.22 with ~78% of max supply still to be released — scheduled vesting is a persistent overhead-supply headwind that can cap rallies and amplify downside.
+- **Narrative dependence:** price is driven by the DeAI / AI-data narrative and sentiment, not verified fee revenue; adoption of datanets/attribution remains unproven, so the thesis is reflexive and fragile.
+- **Drawdown risk:** ~-90% from ATH illustrates the severity of trend reversals; thin books make stops and liquidation cascades unusually sharp.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=OPENUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=OPENUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=OPEN` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=OPEN` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=OPENUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=OPENUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=OPEN"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

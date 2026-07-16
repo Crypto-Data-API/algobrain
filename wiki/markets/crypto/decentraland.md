@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["MANA"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://decentraland.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[metaverse]]", "[[nft]]", "[[polygon]]", "[[the-sandbox]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[metaverse]]", "[[nft]]", "[[polygon]]", "[[the-sandbox]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Decentraland
@@ -208,6 +208,55 @@ MANA defies cash-flow valuation; it is best framed qualitatively:
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MANA is tradable on [[binance|Binance]] as both **spot** (MANA/USDT) and a **USD-margined perpetual** — giving it a full [[funding-rate|funding]], [[open-interest]], and [[liquidations|liquidation]] data surface. It is **NOT on [[hyperliquid|Hyperliquid]]**, so Binance is the primary leveraged venue and the reference for perp price discovery. Deep, long-standing spot listings (Binance, Kraken, Upbit, Bitget, KuCoin) plus the Binance perp mean tight quotes intraday, but the ~$15M-range 24h turnover and low mid/small-cap depth make large clips slippage-prone. Concentration of leveraged flow on a single perp venue means sizing must respect thin order books on narrative flares — funding and OI on the Binance contract are the cleanest read on positioning, and execution is best worked in tranches around liquid US/Asia sessions rather than dumped at market.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture Binance MANA perp funding, which drifts near-zero/slightly negative in the bear regime and can be farmed delta-neutral against spot.
+- [[cash-and-carry]] — long MANA spot vs short the Binance perp to lock basis when narrative flares push the perp to a premium.
+- [[liquidation-cascade-fade]] — thin books plus concentrated leverage make MANA prone to sharp long liquidations that overshoot, offering mean-reverting fade entries.
+- [[oi-confirmed-trend]] — pair Binance open-interest expansion with price to separate real metaverse-narrative moves from empty low-volume drifts.
+- [[breakout-and-retest]] — MANA's flat-then-spike behavior on catalysts suits trading range breakouts with a retest confirmation.
+- [[narrative-trading]] — MANA is a pure metaverse/GameFi narrative beta; position around metaverse and Animoca-cluster hype rotations.
+
+### Volatility & regime character
+
+MANA is a **mid/small-cap, high-beta metaverse/[[gamefi|GameFi]] token** (~rank #213) that behaves as a leveraged call option on the metaverse narrative. It is highly correlated to [[bitcoin]]/[[ethereum]] risk-on/risk-off swings but overlays sharp, reflexive narrative flares (e.g., the +7% snapshot move) that decouple it from majors briefly before reverting. Long stretches of low realized volatility and drifting price punctuate by fast, catalyst-driven spikes — a "coiled spring" character shared with peer [[the-sandbox|SAND]] and [[axie-infinity|AXS]].
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading centralizes on the single Binance perp; thin depth amplifies slippage and liquidation gaps.
+- **Narrative dependence** — price is dominated by the metaverse/NFT hype cycle with weak organic usage between cycles.
+- **Uncapped supply / DAO discretion** — no hard max supply; the DAO can issue wearables/names and deploy a large treasury, adding governance-driven dilution.
+- **Regulatory overhang** — carries an "Alleged SEC Securities" tag, a US regulatory risk for MANA.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MANAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MANAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MANA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MANA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MANAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MANAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MANA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

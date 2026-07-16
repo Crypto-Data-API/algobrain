@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, decentralized-exchange, defi]
+tags: [crypto, decentralized-exchange, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["FIDA", "SNS", "Solana Name Service"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.bonfida.org/"
-related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ftx]]", "[[governance-token]]", "[[order-book]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ftx]]", "[[governance-token]]", "[[order-book]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Bonfida
@@ -196,6 +196,57 @@ SNS's edge is being native to Solana's fast, low-fee environment; its risk is de
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FIDA is tradable on [[binance]] — both **spot** (FIDA/USDT) and a **USD-margined perpetual** with funding, open interest, and liquidation data. It is **not** listed on [[hyperliquid]], so Binance is the primary leveraged venue and effectively the reference point for price discovery on the derivatives side. As a ~#805 micro-cap, order-book depth is thin: perp liquidity is concentrated on a single venue, so leveraged sizing must stay small to avoid slippage and self-inflicted liquidations. Venue concentration also means funding, OI, and liquidation prints are dominated by Binance flow, making cross-venue arbitrage limited and execution highly sensitive to order size.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — FIDA perp funding on Binance can run persistently one-sided in trending or squeezed conditions, letting a delta-neutral position collect the funding drift.
+- [[crowded-long-funding-fade]] — thin micro-cap with a single leveraged venue makes speculative long crowding (positive funding + rising OI) prone to sharp reversion, a fadeable setup.
+- [[liquidation-cascade-fade]] — low depth means clustered liquidations overshoot; fading the spike after a cascade can capture the snap-back rebound.
+- [[rsi-mean-reversion]] — FIDA's range-bound, low-cap drift produces frequent oversold/overbought extremes that revert intraday.
+- [[cash-and-carry]] — when the perp trades at a funding/basis premium to spot, a long-spot / short-perp carry captures the spread while staying delta-neutral.
+- [[narrative-trading]] — as a Solana-ecosystem/SNS naming token, FIDA reprices on Solana-activity and on-chain-identity narratives rather than its own fundamentals.
+
+### Volatility & regime character
+
+FIDA is a small-cap ([[altcoins|altcoin]]) infra/DeFi token with high beta to both [[bitcoin|BTC]]/[[ethereum|ETH]] risk cycles and, more acutely, to [[solana|Solana]]-ecosystem sentiment. Realized volatility is elevated and reflexive: thin liquidity amplifies moves in both directions, and the token behaves like a leveraged proxy on Solana on-chain activity. Absent a live narrative it tends toward low-volume, range-bound drift, punctuated by sharp funding- and liquidation-driven spikes.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — micro-cap depth with leveraged exposure concentrated on Binance; slippage and gap risk are material, and there is no [[hyperliquid]] fallback.
+- **Narrative dependence** — price is tightly coupled to Solana activity and SNS/on-chain-identity demand rather than independent cash flows.
+- **Legacy / pivot overhang** — the original Serum DEX-tooling business was undermined by the FTX collapse; value now rests almost entirely on SNS adoption.
+- **Severe drawdown / low base** — FIDA trades ~99.9% below its 2021 ATH, so moves are volatile in percentage terms off a low price base.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FIDAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=FIDAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=FIDA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=FIDA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FIDAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=FIDAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=FIDA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

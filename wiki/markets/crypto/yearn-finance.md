@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins, derivatives, perpetual-futures, funding-rate, open-interest, liquidations]
 aliases: ["YFI", "Yearn Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://yearn.fi/"
-related: ["[[aave]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[uniswap]]", "[[yield-farming]]"]
+related: ["[[aave]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[uniswap]]", "[[yield-farming]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # yearn.finance
@@ -291,6 +291,56 @@ Vaults benefit users by socializing gas costs, automating the yield generation a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+YFI is tradable on [[binance]] — **spot (YFI/USDT)** plus a **USD-margined perpetual** exposing [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid]], so Binance is effectively the **primary leveraged venue** for the token. Because deep, reliable leverage is concentrated on a single CEX, derivatives-based strategies (carry, funding, cascade fades) live or die on Binance depth. With modest spot turnover and the four-figure per-unit price, order books are thin relative to majors — size positions conservatively, prefer limit/VWAP execution over market fills, and expect slippage and funding to swing sharply during volatility. The absence of a second major perp venue (no Hyperliquid) also limits cross-venue arbitrage to CEX-vs-CEX pairs.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — buy Binance YFI spot vs. short the USD-M perp to harvest basis/funding on a scarce, fixed-supply token where funding can run rich in rallies.
+- [[funding-rate-harvest]] — collect persistent perp funding on the single dominant venue; YFI's high-beta DeFi swings frequently push funding to one-sided extremes.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when a DeFi-yield narrative spikes YFI and funding turns sharply positive on Binance.
+- [[liquidation-cascade-fade]] — thin books plus concentrated leverage make YFI prone to violent liquidation flushes that overshoot and mean-revert.
+- [[oi-confirmed-trend]] — use Binance open-interest build to confirm whether a YFI breakout is real leverage-backed demand or a spot-only drift.
+- [[rsi-mean-reversion]] — the low-float, low-liquidity tape produces frequent overextended spikes and washouts that snap back toward range.
+
+### Volatility & regime character
+
+YFI is a **small-cap DeFi governance token** (~#305) and a high-beta proxy on **on-chain yield / DeFi TVL**. It trades with strong correlation to BTC/ETH risk-on/risk-off swings but amplifies the move — infra/DeFi tokens lead on the way up and bleed hard in risk-off. Its **fixed ~36,666 supply and four-figure unit price** make it reflexive and headline-sensitive: scarcity narrative and yield-cycle sentiment drive outsized, thin-liquidity moves rather than steady trends. Not a memecoin, but reflexivity is elevated by the tiny float.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading is essentially Binance-only (no Hyperliquid); a single-venue funding or outage shock has no natural hedge, and thin spot depth amplifies slippage.
+- **Narrative dependence** — price keys off DeFi yield cycles and TVL; permanent yield compression or aggregator commoditization removes the core bid.
+- **Bear-market beta** — high-beta DeFi token that de-rates hard in risk-off regimes.
+- **Smart-contract/protocol risk** — Vault exploits or losses in underlying legs (Aave/Curve/Compound) can trigger sudden repricing.
+- **Supply is not a risk** — ~98% circulating with a hard cap means negligible unlock/emission overhang, but the same scarcity makes the book easy to move.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=YFIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=YFIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=YFI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=YFI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=YFIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=YFIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=YFI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

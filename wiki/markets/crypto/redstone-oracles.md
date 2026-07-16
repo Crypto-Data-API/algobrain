@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, oracle]
+tags: [crypto, defi, oracle, altcoins, derivatives, perpetual-futures, funding-rate, open-interest, liquidations]
 aliases: ["RED", "RedStone Oracles"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.redstone.finance/"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[pyth-network]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[pyth-network]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # RedStone
@@ -118,6 +118,55 @@ RED trades at ~$47M cap but a ~$112M FDV (MC/FDV ~0.42): only ~42% of the 1B cap
 - **Dilution / unlock risk** — With only ~42% of the 1B cap circulating (MC/FDV ~0.42), future unlocks represent significant sell-pressure potential.
 - **Concentration risk** — Revenue and relevance are concentrated in the LST/LRT/restaking vertical; a contraction in [[restaking]] or LST demand would hit RedStone disproportionately.
 - **Competitive & macro risk** — Faces the much larger [[chainlink]] and high-frequency [[pyth-network]]; in an extreme-fear, established-bear regime ([[crypto-fear-and-greed-index|Fear & Greed]] 23) low-cap infra tokens with high FDV overhangs are especially vulnerable, and momentum-driven bounces like the recent week can reverse quickly.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RED is tradable on [[binance]] — **spot** (RED/USDT) plus a **USD-margined [[perpetual-futures|perpetual]]** with the full derivatives stack ([[funding-rate|funding]], [[open-interest]], [[liquidations]]). It is **not listed on [[hyperliquid]]**, so Binance is the primary leveraged venue and the reference point for perp funding, OI, and liquidation flow. With a single dominant leveraged venue, there is no on-chain perp order book to cross-hedge against and execution/basis is anchored to Binance depth. As a sub-$50M-cap, low-rank (~448) altcoin, spot and perp order books thin out quickly beyond modest clip sizes; slippage and impact scale fast, so leverage should be conservative, entries laddered, and position sizing kept small relative to the visible 24h turnover. Venue concentration also means Binance funding, listing, or margin-tier changes move RED disproportionately.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Momentum bounces off the ATL base drive leveraged chasing, so RED perp funding can spike positive; harvest the funding while delta-hedging spot vs. perp on Binance.
+- [[crowded-long-funding-fade]] — After a sharp weekly re-rating, over-leveraged longs stacking into a low-liquidity book set up a persistent-positive-funding fade back toward mean.
+- [[liquidation-cascade-fade]] — Thin depth plus concentrated Binance OI makes RED prone to stop/liquidation cascades that overshoot; fade the flush and cover into the snap-back.
+- [[oi-confirmed-trend]] — Use Binance open-interest rising alongside price to confirm the momentum leg is real leveraged demand rather than a hollow spot bounce.
+- [[breakout-and-retest]] — RED trades in wide ranges off depressed lows; trade the break of range/ATL structure and re-enter on the retest to control the low-cap whipsaw risk.
+- [[atr-trailing-stop]] — High realized volatility and sudden reversals in this name argue for volatility-scaled trailing stops rather than fixed levels to lock momentum gains.
+
+### Volatility & regime character
+
+RED is a **small-cap DeFi/oracle infrastructure token** (~#448) with **high-beta** behavior: it amplifies BTC/ETH moves in both directions and is dominated by liquidity/risk regime rather than idiosyncratic fundamentals day-to-day. Reflexivity is pronounced given the low float (~42% of a 1B cap) and thin books — bounces off the ATL base are sharp but low-conviction. It is not a memecoin, but its narrative dependence on the [[restaking]]/LST-LRT collateral thesis means it rallies with the DeFi-infra risk-on rotation and bleeds in extreme-fear, bear regimes. Correlation to broad crypto beta is high; independent strength (like the recent relative-strength week) tends to be momentum-driven and mean-reverting.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — Binance is effectively the only meaningful leveraged venue (no Hyperliquid); thin spot/perp depth makes RED gap-prone and vulnerable to single-venue funding/margin/listing changes.
+- **Unlocks / emissions** — Low MC/FDV (~0.42) with only ~42% of the 1B cap circulating; substantial team/investor/ecosystem supply still to vest is a structural sell-pressure overhang on any rally.
+- **Narrative dependence** — Value is tied to the restaking/LST-LRT collateral narrative; a contraction in restaking demand or a DeFi-infra rotation out would hit RED disproportionately.
+- **Momentum reflexivity** — Recent gains are a bounce off a deeply depressed ATL, not a fundamentals re-rating; low-float reflexivity means moves overshoot and reverse fast, punishing late leveraged entries.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=REDUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=REDUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=RED` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=RED` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=REDUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=REDUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=RED"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

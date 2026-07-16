@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ONT"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://ont.io/"
-related: ["[[crypto-markets]]", "[[fear-and-greed-index]]", "[[layer-1]]", "[[proof-of-stake]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[fear-and-greed-index]]", "[[layer-1]]", "[[proof-of-stake]]", "[[staking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Ontology
@@ -257,6 +257,56 @@ The purpose of the Ontology framework is that it is not intended to operate as a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ONT is tradable on [[binance|Binance]] — both **spot** (ONT/USDT) and a **USD-margined perpetual** carrying [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue for ONT. This concentration means execution, leverage, and liquidity discovery for perp-based strategies flow almost entirely through Binance; there is no on-chain perp fallback. With modest daily turnover for a coin this size, spot is adequate for retail-sized clips but thin for institutional size, and leveraged sizing should be conservative — wide slippage and gappy fills are likely on larger orders, and the single-venue perp means funding/OI signals come from one order book rather than a cross-venue composite.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on ONT when the rate is persistently positive/negative, sized to its thin liquidity.
+- [[cash-and-carry]] — hedge long Binance spot ONT against the short USD-M perp to capture basis with no directional exposure.
+- [[liquidation-cascade-fade]] — ONT's low float and single-venue perp make forced-liquidation flushes sharp; fade the overshoot after cascades clear.
+- [[oi-confirmed-trend]] — use Binance open-interest confirmation to validate ONT breakouts and avoid low-conviction squeezes on a low-liquidity name.
+- [[rsi-mean-reversion]] — ONT's sentiment-driven, range-bound legacy-L1 behavior suits mean-reversion off oversold/overbought extremes.
+- [[range-trading]] — extended bear-market ranging around depressed levels favors buying support / selling resistance rather than trend chasing.
+
+### Volatility & regime character
+
+ONT is a **small-cap legacy Layer-1 / infrastructure token** (DID-focused) that behaves as a **high-beta follower of BTC/ETH** rather than a driver. It lacks memecoin-style reflexivity but exhibits sharp, sentiment-driven moves typical of thin-liquidity small caps. Its fully-distributed supply (MC ≈ FDV) means price is dominated by CEX flows and macro sentiment rather than unlock dynamics, and it tends to underperform in risk-off regimes and lag in risk-on rallies given its legacy status.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure is essentially Binance-only (no Hyperliquid, no on-chain perp fallback), a single point of liquidity and counterparty risk.
+- **Thin liquidity** — low daily volume makes larger orders slippage-prone and amplifies liquidation-driven wicks.
+- **Narrative dependence** — price hinges on a still-unrealized decentralized-identity thesis in a crowded field.
+- **Emissions** — the dual-token model means ongoing ONG gas emissions, an inflationary drag on the system.
+- **Regulatory/perception** — "Made in China" NEO/OnChain lineage can add regulatory and sentiment risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ONTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ONTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ONT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ONT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ONTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ONTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ONT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

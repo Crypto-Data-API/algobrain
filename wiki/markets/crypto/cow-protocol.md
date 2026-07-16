@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["COW"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cow.fi"
-related: ["[[ai-mev]]", "[[ai-solvers]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[intent-based-trading]]", "[[mev-strategies]]"]
+related: ["[[ai-mev]]", "[[ai-solvers]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[intent-based-trading]]", "[[mev-strategies]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # CoW Protocol
@@ -270,6 +270,56 @@ COW token allows its holders the right to govern and curate the infrastructure o
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+COW is tradable on [[binance|Binance]] — **spot** plus a **USD-margined perpetual** carrying [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] mechanics. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue and the reference source for derivatives data. With a single dominant perp venue, leveraged liquidity is concentrated: perp order-book depth and funding are effectively set by Binance, and spot flow is fragmented across several CEXs (Kraken, Upbit, Bitget, KuCoin) plus on-chain DEXs. For execution this means large clips should be worked against Binance spot/perp depth and scaled to that book — venue concentration raises slippage and gap risk on size, and there is no secondary perp venue to hedge or arbitrage funding against, so cross-venue basis and funding trades depend on the Binance leg being paired with spot rather than another perp.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — long Binance COW spot vs. short the USD-M perp to harvest positive funding/basis while the token trades range-bound, the cleanest carry given a single perp venue.
+- [[funding-rate-harvest]] — collect perp funding on COW when small-cap DeFi sentiment pushes crowded directional positioning into persistently one-sided funding.
+- [[crowded-long-funding-fade]] — fade over-levered longs when a COW narrative pop drives funding sharply positive against thin spot support.
+- [[liquidation-cascade-fade]] — small-cap perp with concentrated OI on one venue is prone to stop-runs; fade forced-liquidation wicks back toward spot fair value.
+- [[range-mean-reversion]] — COW spends long stretches in bear-regime ranges; mean-revert the extremes with defined risk while volume stays moderate.
+- [[breakout-and-retest]] — trade confirmed breakouts of established ranges on rising OI, using the retest to size entries given thin depth.
+
+### Volatility & regime character
+
+COW is a **small-cap [[defi|DeFi]] / DEX-infrastructure token** (rank ~290, sub-$100M cap) with high-beta behavior to BTC/ETH risk appetite and to broader DeFi/DEX-aggregator narrative rotation. It is not a memecoin — moves are driven more by protocol/narrative flow (intent-based trading, MEV protection) than pure reflexivity — but low float and moderate turnover make it sharp on both up and down legs. Expect amplified drawdowns in risk-off regimes (the page's Established Bear Market / extreme-fear backdrop) and outsized relief rallies when DeFi beta turns. As a spot-dominated small-cap with a single perp venue, realized volatility clusters around narrative catalysts and BTC/ETH regime shifts rather than continuous leverage-driven churn.
+
+### Risk flags
+
+- **Venue concentration:** one dominant perp venue (Binance) and fragmented spot liquidity — thin depth for large blocks and no perp-to-perp hedge.
+- **Dilution / emissions:** ~42% of max supply not yet circulating (MC/FDV ~0.58); unvested team/DAO/ecosystem allocations are a structural supply overhang.
+- **Narrative dependence:** value is governance + fee-discount utility, not direct cash flow — price leans on the intent/MEV-protection narrative and settled-volume growth.
+- **Liquidity/volatility:** small-cap status amplifies slippage and gap risk, especially in extreme-fear regimes.
+- **Competition/regulatory:** competitive pressure from UniswapX/1inch, and general DeFi-token regulatory ambiguity around governance-token classification.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=COWUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=COWUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=COW` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=COW` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=COWUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=COWUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=COW"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

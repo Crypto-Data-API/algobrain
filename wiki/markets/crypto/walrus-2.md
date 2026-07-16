@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["WAL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.walrus.xyz/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[sui]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[sui]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Walrus
@@ -271,6 +271,57 @@ As a result, data becomes more than just information, but the basis of new marke
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+WAL is tradable on [[binance|Binance]] — both spot (WAL/USDT) and a USD-margined [[perpetual-futures|perpetual]] contract with observable [[funding-rate|funding]], open interest, and liquidation flow. It is **NOT** listed on [[hyperliquid|Hyperliquid]]; Binance is the primary leveraged venue. Because leverage and perp liquidity concentrate almost entirely on Binance, execution, borrow, and liquidation dynamics are driven by that single order book — a venue-concentration effect that widens slippage in size and makes Binance funding/OI the definitive read. Size perp positions against Binance depth specifically, and treat spot legs (Kraken, Bitget, KuCoin, Sui DEX) as the venues for cash-and-carry offsets since they lack native leverage.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — WAL's Binance perp funding on a small-cap infra alt tends to swing hard in Extreme-Fear regimes, offering harvestable carry when funding stays persistently one-sided.
+- [[crowded-short-funding-fade]] — trading near ATL with deeply negative momentum, WAL is prone to crowded-short positioning; persistently negative funding flags squeeze-prone setups to fade.
+- [[cash-and-carry]] — long Binance/Sui-DEX spot vs. short the Binance USD-M perp captures basis when WAL funding runs positive, with spot legs available across its broad tier-1 listings.
+- [[liquidation-cascade-fade]] — thin single-venue perp liquidity means leveraged flushes overshoot; fading Binance liquidation cascades on a near-ATL token targets mean-reverting rebounds.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price on a Sui-beta token distinguishes genuine breakouts from low-conviction moves in a chop regime.
+- [[narrative-trading]] — WAL is the flagship Sui-ecosystem storage/AI-data play, so Sui adoption and AI-data headlines drive reflexive repricing tradable around the narrative.
+
+### Volatility & regime character
+
+Small-cap (rank ~#317, ~$75M cap) infra/DePIN storage token with high beta to BTC/ETH and especially tight coupling to [[sui|Sui]] ecosystem momentum. Not a memecoin, but exhibits reflexive AI-data/narrative sensitivity layered on base storage-demand fundamentals. Trades ~95% below ATH near recent all-time lows, so realized volatility is elevated and directional risk skews with broad-alt and Sui-specific flows rather than idiosyncratic catalysts.
+
+### Risk flags
+
+- **Venue concentration:** leveraged liquidity is effectively Binance-only (no Hyperliquid), so perp funding, OI, and liquidation risk hinge on a single venue.
+- **Unlocks/emissions:** ~52% of max supply still to emit (storage-node rewards, team, investor unlocks) creates persistent structural sell pressure.
+- **Narrative dependence:** valuation is tightly tied to Sui adoption and the speculative AI-data thesis; unproven paid-storage demand leaves price narrative-driven.
+- **Liquidity/drawdown:** near-ATL price with modest daily volume amplifies slippage and gap risk in size, particularly during Extreme-Fear regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=WALUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=WALUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=WAL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=WAL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=WALUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=WALUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=WAL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

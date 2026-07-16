@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: good
-tags: [crypto, cybersecurity, defi]
+tags: [crypto, cybersecurity, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["CTK", "CertiK", "CertiK Chain", "Shentu"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.shentu.technology/"
-related: ["[[binance]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[risk-management]]", "[[smart-contract-auditing]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[risk-management]]", "[[smart-contract-auditing]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Shentu (CertiK Chain)
@@ -236,6 +236,56 @@ Given CertiK's mixed track record, here is how to calibrate its scores in your [
 - **2023**: Multiple CertiK-audited projects were hacked or rug-pulled, raising questions about audit quality
 - **2024**: CertiK-Kraken controversy damaged the company's reputation in the security community
 - **Ongoing**: CTK token has declined ~96% from its ATH, reflecting both the bear market and skepticism about the Shentu chain's adoption
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CTK is tradable on [[binance]] — spot (CTK/USDT) plus a USD-margined [[perpetual-futures|perpetual]] contract that surfaces [[funding-rate|funding]], open interest, and liquidation data. It is NOT listed on Hyperliquid, so Binance is effectively the primary — and near-sole — leveraged venue for the token. This concentration means the Binance perp order book and funding regime dictate almost all price discovery for leveraged flow. With a small-cap market position (~rank 896) and thin 24h volume, book depth is shallow: perp leverage amplifies moves, spreads widen quickly, and even modest size can slip. Traders should size conservatively, favor limit/maker execution, scale into positions, and treat the single-venue setup as a concentration risk where an exchange outage or a delisting removes the only viable leveraged market.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Small-cap CTK perp funding can persist at stretched levels on Binance; a delta-neutral spot-long/perp-short harvest collects it while netting out price risk.
+- [[crowded-long-funding-fade]] — Thin liquidity lets narrative-driven CTK longs pile into the perp and push funding sharply positive, setting up fades of over-crowded positioning.
+- [[liquidation-cascade-fade]] — Low depth on the single Binance venue makes CTK prone to sharp liquidation wicks; fading the flush after a cascade exhausts targets these mechanical overshoots.
+- [[rsi-mean-reversion]] — A range-bound, low-cap token like CTK repeatedly overshoots to oversold/overbought extremes intraday, favoring reversion entries.
+- [[range-trading]] — CTK spends long stretches chopping between support and resistance without a dominant trend, rewarding defined-range fade tactics.
+- [[cash-and-carry]] — When the CTK perp trades at a premium to spot, a long-spot/short-perp carry captures the basis on Binance with hedged directional exposure.
+
+### Volatility & regime character
+
+CTK is a small-cap infrastructure/[[defi|DeFi]]-adjacent security token with high beta to broader crypto risk and a strong directional correlation to BTC/ETH, especially during risk-off flushes where low-cap alts are sold indiscriminately. It lacks memecoin-style reflexivity but is highly reflexive to CertiK-brand and audit-industry narrative flow. Volatility is elevated relative to majors: thin liquidity produces frequent gap moves and liquidation-driven wicks, while trending regimes are short-lived and interspersed with extended low-volume ranges.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — Binance is the sole meaningful spot and leveraged venue; a delisting, outage, or listing-status change would sever price discovery and liquidity.
+- **Thin depth** — Low 24h volume means high slippage and outsized impact from single large orders or liquidation cascades.
+- **Emissions/supply** — Max supply is uncoded/unlimited under the chain's inflation model; ongoing staking emissions add structural sell pressure.
+- **Narrative dependence** — Price is tightly coupled to CertiK-brand sentiment and audit-industry headlines (e.g., audited-project hacks, the Kraken dispute), which can drive sudden repricing detached from chain fundamentals.
+- **Regulatory** — As a security/audit-associated token, adverse regulatory or reputational developments affecting the CertiK company can spill over to CTK.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CTKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CTKUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CTK` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CTK` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CTKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CTKUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CTK"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

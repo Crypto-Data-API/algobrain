@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["QTUM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://qtum.org/en/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zilliqa]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zilliqa]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Qtum
@@ -130,6 +130,56 @@ Qtum's narrative is the **"Bitcoin-Ethereum hybrid"** — combining Bitcoin's ba
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+QTUM is tradable on [[binance]] as both **spot** (QTUM/USDT) and a **USD-margined perpetual**, so it carries the full perp data stack — funding, open interest, and liquidations. It is **not** listed on [[hyperliquid]], which makes Binance the primary (effectively sole liquid) leveraged venue. This venue concentration matters for execution: with only one deep perp market and thin spot volume (~$4–5M/24h, turnover only a few percent of a ~$77M cap), leverage should be sized conservatively — order books are shallow, funding can swing sharply on small directional flow, and there is no alternative perp venue to hedge or arbitrage against. Large tickets should be worked with [[vwap-trading]]-style slicing rather than crossed at market, and stops must account for wide intraday ranges and slippage.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp with modest OI means funding can dislocate; delta-neutral spot-vs-perp harvesting captures the premium when longs crowd in.
+- [[cash-and-carry]] — pair Binance spot QTUM against the USD-M perp to lock basis when the perp trades rich to spot, a clean carry on a fully-circulating legacy L1 with no unlock cliff.
+- [[liquidation-cascade-fade]] — shallow single-venue liquidity makes QTUM prone to sharp forced-liquidation wicks; fading exhausted cascades back toward VWAP is a repeatable edge in a thin book.
+- [[range-mean-reversion]] — a low-growth small-cap that spends long stretches chopping around its ATL zone reverts well to range midpoints absent a fresh catalyst.
+- [[oi-confirmed-trend]] — using Binance open-interest changes to confirm (or reject) breakouts filters false moves in an illiquid name where price alone is noisy.
+- [[crypto-beta-rotation]] — as a high-beta legacy alt, QTUM is a rotation candidate that outperforms on risk-on legs and should be underweighted in the prevailing extreme-fear regime.
+
+### Volatility & regime character
+
+QTUM is a **legacy small-cap [[layer-1]]** (rank ~#337, ~$77M cap) with high downside beta to [[bitcoin]] and broad-market risk sentiment. It is an infrastructure/smart-contract token rather than a memecoin, so its moves are driven by liquidity conditions and BTC/ETH correlation more than by reflexive social cycles. Having lost ~99% from its 2018 peak and trading near all-time lows, it behaves as a low-momentum, mean-reverting small-cap that amplifies market-wide drawdowns and offers sporadic sharp squeezes on thin liquidity rather than sustained independent trends.
+
+### Risk flags
+
+- **Venue concentration:** perp liquidity and derivatives data concentrate on Binance alone (no Hyperliquid, thin CEX perp depth), so a single-venue outage, delisting, or funding spike has outsized impact and no hedge alternative.
+- **Liquidity:** ~$4–5M of 24h spot volume makes large-size execution and hedging difficult; expect slippage and gapping.
+- **Inflationary emissions:** uncapped [[proof-of-stake]] block rewards dilute non-staking holders indefinitely (gradual, not cliff-shaped).
+- **Narrative decay:** the UTXO+EVM "hybrid" thesis has largely commoditized, leaving weak independent catalysts and heavy dependence on broad-market beta.
+- **Regulatory:** the "Made in China" association carries Chinese crypto-policy risk that can trigger listing or sentiment shocks.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=QTUMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=QTUMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=QTUM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=QTUM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=QTUMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=QTUMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=QTUM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

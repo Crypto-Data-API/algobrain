@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["CHR", "Chroma", "ChromaWay"]
 entity_type: protocol
 headquarters: "Sweden"
 website: "https://chromia.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[real-world-assets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Chromia
@@ -250,6 +250,55 @@ Catalysts to watch (speculative): a flagship app reaching durable, high-volume u
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Trading Profile
+
+### Venues & liquidity
+
+CHR is tradable on [[binance]] — both **spot** and a **USD-margined perpetual** with the usual derivatives instrumentation ([[funding-rate|funding]], [[open-interest]], and [[liquidations]] data). It is **NOT** listed on Hyperliquid, so Binance is effectively the **primary leveraged venue** for CHR. Spot coverage is broader (Kraken, KuCoin, Bitget, Upbit, Crypto.com) plus on-chain Uniswap V2/BSC pools, but leverage, funding, and OI all concentrate on Binance. At a sub-$20M micro-cap, perp order books are thin and funding is jumpy, so realistic size is small: large market orders slip badly, and leveraged positions must be sized against Binance depth rather than aggregate spot volume. The single-venue perp footprint means CHR-specific funding/OI signals are dominated by Binance flow, and liquidation cascades there can whip spot well beyond fundamentals.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin, sentiment-driven CHR perp funding on Binance can run persistently positive during narrative pumps, letting a short-perp/long-spot harvest collect the premium.
+- [[crowded-long-funding-fade]] — spikes like the +10% day draw crowded longs into the Binance perp; overheated positive funding flags fade setups back toward the mean.
+- [[liquidation-cascade-fade]] — with leverage concentrated on one venue and thin books, CHR is prone to sharp liquidation flushes that overshoot, offering mean-reversion entries into the wick.
+- [[rsi-mean-reversion]] — a low-cap that whips on modest flow snaps back from stretched RSI readings, favoring reversion around Binance spot levels.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price gives a cleaner read on whether a CHR narrative move is real leverage-backed trend or a hollow spot squeeze.
+- [[narrative-trading]] — CHR rides RWA, AI-data, and gaming narratives; rotating in as a theme catches bid, out as it fades, is the dominant driver of its sharp moves.
+
+### Volatility & regime character
+
+CHR is a **micro-cap altcoin** (~$16M) with **high beta to BTC/ETH** — it amplifies broad-market direction and rallies/drawdowns are magnified by thin liquidity. It behaves as a **multi-narrative infra/DeFi/RWA token** rather than a pure memecoin, but exhibits memecoin-like **reflexivity**: modest flow produces outsized single-day moves (e.g., +10% on light volume). In risk-off regimes it tends to bleed with the alt cohort; in risk-on rotations it can outperform sharply when RWA/AI/gaming narratives catch bid. Moves are frequently sentiment- or catalyst-driven rather than fundamentals-driven.
+
+### Risk flags
+
+- **Venue/liquidity concentration.** Leverage, funding, and OI concentrate on Binance; thin perp books make liquidations and slippage severe, and de-listing or venue disruption would hit price discovery hard.
+- **Low free-float liquidity.** Sub-$20M cap means small flows move price disproportionately; deep leveraged positioning is impractical.
+- **Emissions/supply.** Circulating supply is near max (MC/FDV ~1.00), so dilution risk is low, but any provider/staking-reward emissions still add background sell pressure.
+- **Narrative dependence.** Price leans on RWA/AI/gaming theme rotation and a few flagship apps; when narratives cool, beta and reflexivity cut both ways.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CHRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CHRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CHR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CHR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CHRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CHRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CHR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
+
+---
 
 ## See Also
 

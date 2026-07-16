@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto]
+tags: [ai-trading, altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["RLC", "iExec"]
 entity_type: protocol
 founded: 2017
 headquarters: "Lyon, France / Decentralized"
 website: "http://iex.ec/"
-related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-compute]]", "[[depin]]", "[[ethereum]]", "[[trusted-execution-environment]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-compute]]", "[[depin]]", "[[ethereum]]", "[[trusted-execution-environment]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # iExec RLC
@@ -221,6 +221,56 @@ RLC sits in the **DeAI / confidential-compute** intersection of the broader AI-c
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RLC is tradable on [[binance]] — both spot (RLC/USDT) and a USD-margined [[perpetual-futures|perpetual]] that exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] data. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue for RLC. Because leveraged flow is concentrated on a single perp, funding, OI, and liquidation prints from Binance are the definitive derivatives signal for the token — there is no cross-perp venue to diffuse or arbitrage against. With a ~$24M cap and modest daily spot volume, order-book depth is thin: leverage should be sized conservatively, entries and exits routed through limit orders, and larger positions scaled in to avoid slippage. Venue concentration also means a Binance-specific funding spike or liquidation cascade can move price sharply without a corresponding cross-exchange offset, which both raises execution risk and creates mean-reversion opportunities around forced-liquidation extremes.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance USD-M perp is the only place to collect RLC funding; harvest when the perp trades at a persistent premium/discount to spot.
+- [[crowded-long-funding-fade]] — AI-basket beta makes RLC prone to crowded longs on narrative pumps; fade when Binance funding spikes sharply positive against thin liquidity.
+- [[liquidation-cascade-fade]] — concentrated leverage on one venue makes forced-liquidation flushes overshoot; fade the wick once Binance liquidation prints exhaust.
+- [[oi-confirmed-trend]] — pair rising Binance open interest with directional price to confirm real leveraged participation rather than a low-conviction spot drift.
+- [[cash-and-carry]] — with spot on multiple CEX/DEX venues and a Binance perp, harvest any positive basis by holding spot RLC against a short perp.
+- [[narrative-trading]] — RLC is a high-beta DeAI/DePIN name; position around confidential-AI and AI-basket narrative cycles that historically drive its moves.
+
+### Volatility & regime character
+
+RLC is a small-cap (~#803) infrastructure/DePIN token with high beta to the AI narrative basket ([[bittensor|TAO]], [[render|RENDER]], [[fetch-ai|FET]]) and to [[bitcoin|BTC]]/[[ethereum|ETH]] risk regimes. It typically runs 2-3x the volatility of majors, amplifying both rallies and drawdowns. It is not a memecoin — moves are driven by DeAI/DePIN narrative rotation and compute-demand headlines rather than pure reflexivity — but its low float and thin book give it memecoin-like impulsiveness during basket-wide capitulations or squeezes. Correlation to BTC/ETH tightens sharply in risk-off tapes.
+
+### Risk flags
+
+- **Venue concentration** — Binance is the sole meaningful leveraged venue; a Binance-specific funding or liquidation event has no cross-perp offset and can dominate price action.
+- **Liquidity / slippage** — ~$24M cap and modest volume mean market orders of size move price; leverage magnifies slippage and liquidation risk.
+- **Narrative dependence** — valuation hinges on the AI/DeAI and DePIN narrative cycle; high-beta AI names underperform hard in Extreme-Fear regimes.
+- **Fixed supply, demand-driven** — the 87M fixed cap removes emission overhang but ties the thesis entirely to realized marketplace/compute demand, which is unproven at scale.
+- **TEE / sector headline risk** — an SGX/TDX side-channel disclosure is a sector-wide negative catalyst that can trigger correlated leveraged de-risking.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RLCUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RLCUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=RLC` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=RLC` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RLCUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=RLCUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=RLC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "Moonbeam"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins, defi]
 aliases: ["GLMR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://moonbeam.network/"
-related: ["[[crypto-markets]]", "[[base]]"]
+related: ["[[crypto-markets]]", "[[base]]", "[[binance]]", "[[dca-strategy]]", "[[narrative-trading]]"]
 ---
 
 # Moonbeam
@@ -128,6 +128,56 @@ Dive into the tools, integrations, and comprehensive tutorials to start using an
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+GLMR is tradable on **Binance SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary** asset. Perp funding/basis/liquidation strategies do NOT apply. With no perp market, directional shorting requires spot margin (thin) or is effectively unavailable, so most flow is long-only spot. Venue concentration on a single primary book means execution should assume shallow depth: size positions modestly, prefer limit orders and VWAP-style entries over market sweeps, and expect slippage to rise quickly with order size given the low ~$4M daily volume. Availability on a top-tier exchange keeps custody and settlement reliable, but the single-venue reality caps carrying capacity and makes the asset sensitive to Binance-specific liquidity shifts.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-primary, long-only profile with no perp hedge makes staged accumulation the natural way to build exposure while smoothing the low-liquidity fill risk.
+- [[breakout-and-retest]] — a deeply drawn-down small-cap that spends long stretches in tight ranges rewards waiting for a confirmed breakout and retest before committing spot capital.
+- [[rsi-mean-reversion]] — thin-book, low-cap GLMR frequently overshoots on both extremes, so oversold/overbought RSI reversion offers defined spot entries near range edges.
+- [[vwap-trading]] — with shallow single-venue depth, VWAP-anchored entries and exits materially reduce slippage versus market orders on this ~$4M/day book.
+- [[narrative-trading]] — as a Polkadot-ecosystem EVM/interoperability infra token, GLMR moves on cross-chain and DeFi narrative cycles rather than steady fundamentals.
+- [[atr-trailing-stop]] — high realized volatility and reflexive small-cap swings make an ATR-based trailing stop essential for protecting spot gains without premature exits.
+
+### Volatility & regime character
+
+GLMR is a **small-cap infrastructure/DeFi token** (market-cap rank ~1136) with high realized volatility and pronounced reflexivity typical of low-float alts. As a Polkadot-ecosystem EVM/interoperability Layer 1, it trades with **high beta to BTC/ETH** in risk-on and risk-off regimes and tends to underperform majors in downtrends and overshoot in relief rallies. Deeply drawn down from its all-time high, price action alternates between long low-volatility consolidation and sharp, narrative-driven expansions. Correlation to the broader altcoin complex is strong, so regime is largely dictated by top-of-market (BTC/ETH) direction rather than idiosyncratic catalysts.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — spot-primary with a single primary venue (Binance) and low daily volume; large orders move price and exit liquidity can evaporate in stress.
+- **No liquid perpetual venue** — limited shorting/hedging; risk management relies on spot sizing and stops, not derivatives.
+- **Emissions/supply** — max supply is uncapped (unlimited), so ongoing issuance/inflation can create persistent structural sell pressure.
+- **Narrative dependence** — valuation leans on Polkadot-ecosystem and cross-chain interoperability narratives; fading attention can drive prolonged underperformance.
+- **Small-cap fragility** — deep drawdown from ATH and low market cap raise sensitivity to sentiment shifts and relisting/delisting or regulatory headlines affecting minor altcoins.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GLMRUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GLMRUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GLMRUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=GLMRUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

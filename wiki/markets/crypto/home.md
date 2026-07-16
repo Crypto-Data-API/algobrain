@@ -3,13 +3,13 @@ title: "HOME"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["HOME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://defi.app"
-related: ["[[crypto-markets]]", "[[base]]"]
+related: ["[[crypto-markets]]", "[[base]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # HOME
@@ -140,6 +140,55 @@ Defi App directly addresses these issues to make DeFi simple, safe, and accessib
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HOME is tradable on **Binance** — both spot (HOME/USDT) and a **USD-margined perpetual**, which exposes funding rates, open interest, and liquidation flow. It is **not listed on Hyperliquid**, so Binance is the primary — and effectively sole — venue for leveraged HOME exposure. With a small market cap (rank ~432) and thin 24h spot volume, order books are shallow: leveraged size and liquidation events move price disproportionately, so position sizing must stay small relative to depth and use limit/scaled entries to avoid slippage. Venue concentration on Binance means the perp funding/basis and Binance spot are the reference prices for any HOME strategy; there is no deep second leveraged venue to cross-hedge against.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the isolated Binance perp lets you collect funding when HOME perp trades at a persistent premium/discount to spot while delta-hedging on Binance spot.
+- [[cash-and-carry]] — long Binance spot HOME against short the USD-M perp to capture basis on a small-cap where perp demand can push a rich carry.
+- [[liquidation-cascade-fade]] — thin books mean leveraged flushes overshoot; fade forced-liquidation spikes back toward spot value.
+- [[crowded-long-funding-fade]] — narrative-driven long crowding in a small DeFi token often shows in elevated funding and OI; fade the crowded side into exhaustion.
+- [[oi-price-exhaustion]] — rising open interest without follow-through in price flags trapped positioning ripe for a reversal on this low-float name.
+- [[range-mean-reversion]] — outside catalysts, HOME oscillates in a low-liquidity range, favoring reversion at band extremes.
+
+### Volatility & regime character
+
+Small-cap DeFi "everything app" token (Base-native, multi-chain) with a modest float and low FDV. Price action is reflexive and high-beta to broader crypto risk sentiment, with amplified moves versus BTC/ETH due to thin liquidity. Directionality is largely driven by DeFi/narrative flows and Binance-listing liquidity rather than deep organic order flow; expect elevated realized volatility and sharp regime shifts around catalysts.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — leveraged exposure lives almost entirely on Binance; a single-venue outage, delisting, or margin change is a concentrated risk with no deep fallback perp venue.
+- **Emissions/unlocks** — circulating supply (~3.44B) is well below max supply (10.00B), so ongoing emissions and future unlocks create structural sell pressure and dilution.
+- **Narrative dependence** — as a DeFi UX/aggregator play, valuation hinges on adoption narrative; sentiment reversals can drain liquidity fast.
+- **Thin books** — low 24h volume makes slippage, stop-hunts, and liquidation cascades likely; size conservatively and expect wide effective spreads.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HOMEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HOMEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HOME` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HOME` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HOMEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HOMEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HOME"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

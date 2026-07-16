@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SFP", "SafePal"]
 entity_type: protocol
 headquarters: "Decentralized / global"
 website: "https://www.safepal.com/"
-related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[wallets]]"]
+related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[wallets]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # SafePal
@@ -249,6 +249,56 @@ SafePal is a cryptocurrency wallet that aims to provide a secure and user-friend
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SFP is tradable on [[binance|Binance]] — both **spot** and a **USD-margined perpetual** with the usual [[perpetual-futures|perp]] plumbing ([[funding-rate|funding]], [[open-interest]], [[liquidations]]). It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is effectively the **primary leveraged venue**. This concentration matters: with a thin ~$1.3-1.5M daily spot turnover against a ~$110M cap, the Binance perp is where most price discovery and leverage sit. Practically, that means leveraged execution and sizing should assume a single dominant liquidity pool — order books are shallow enough that large market orders slip, funding/OI signals come almost entirely from one exchange, and any Binance regional-access or listing change would sharply degrade tradability. Prefer limit/VWAP execution, scale into positions, and treat perp funding as a Binance-specific (not market-wide) read.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single-venue Binance perp makes funding the cleanest recurring edge on SFP; harvest persistent funding while delta-hedging spot.
+- [[cash-and-carry]] — with SFP fully circulating and no dilution overhang, a spot-long / perp-short carry captures basis + funding without emission drift.
+- [[liquidation-cascade-fade]] — thin books and concentrated leverage on Binance make SFP prone to sharp liquidation wicks that overshoot and revert, a fadeable pattern near its ATL.
+- [[oi-confirmed-trend]] — using Binance open-interest to confirm directional moves filters out low-conviction chop in a low-turnover mid-cap like SFP.
+- [[rsi-mean-reversion]] — pinned just above its all-time low in extreme-fear conditions, SFP oscillates in a range where oversold-bounce reversion works better than trend chasing.
+- [[breakout-and-retest]] — a wallet-token stuck near multi-year lows sets up clean horizontal levels; trading confirmed breaks-and-retests avoids false starts in illiquid tape.
+
+### Volatility & regime character
+
+Small/mid-cap ([[altcoins|altcoin]], rank ~247) [[wallets|wallet]]-utility token with **high beta to BTC/ETH** and to the broader BNB Chain / Binance ecosystem. Not a memecoin — no reflexive meme dynamics — but as a low-liquidity infra/utility token it amplifies market drawdowns and delivers jumpy, wick-prone intraday action rather than smooth trends. Currently trading in an "extreme fear" bear regime just above its all-time low, so realized volatility is elevated to the downside with weak demand-side support.
+
+### Risk flags
+
+- **Venue concentration:** leveraged liquidity is almost entirely on Binance; no Hyperliquid presence and thin CEX spot elsewhere mean single-venue dependence for both execution and funding/OI signals.
+- **Liquidity/slippage:** ~$1.3-1.5M daily turnover is thin for the cap — large orders move price and stops can be run in liquidation sweeps.
+- **Narrative dependence:** value hinges on SafePal wallet adoption and in-app swap volume; a crowded self-custody wallet market and its Binance/YZi Labs proximity are double-edged.
+- **Regime/momentum:** trading near a fresh all-time low in an established bear market signals persistent downside pressure and low buy-side conviction.
+- **Regulatory:** wallet tokens with fee-discount/governance utility can attract securities scrutiny that varies by jurisdiction.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SFPUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SFPUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SFP` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SFP` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SFPUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SFPUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SFP"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

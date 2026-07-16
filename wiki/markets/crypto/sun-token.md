@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, dex]
+tags: [crypto, defi, dex, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SUN", "SUN.io"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sun.io/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-dao-token]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex]]", "[[pump-fun]]", "[[sunpump]]", "[[tron]]"]
+related: ["[[automated-market-maker]]", "[[binance]]", "[[crypto-markets]]", "[[curve-dao-token]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]", "[[perpetual-futures]]", "[[pump-fun]]", "[[sunpump]]", "[[tron]]"]
 ---
 
 # Sun Token
@@ -247,6 +247,57 @@ SUN trades as a **levered proxy on TRON DeFi throughput and the Justin Sun compl
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SUN is tradable on [[binance|Binance]] — **spot (SUN/USDT)** plus a **USD-margined perpetual** with the full derivatives surface (funding, open interest, liquidations). It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue and the reference for perp analytics. Practically this means leverage, funding-rate signals, OI and liquidation data all concentrate on one exchange: execution and hedging should be routed there, and position sizing must respect a single-venue liquidity footprint. As a rank-~123 mid-cap DEX-ecosystem token, spot turnover is healthy relative to cap but perp book depth is thinner than large-caps — size for wider slippage, expect funding to swing hard when TRON/Justin-Sun narratives run, and avoid crowding into leverage that the single venue's order book cannot absorb on a fast unwind.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — SUN's single-venue Binance perp makes funding directional and often extreme during TRON-ecosystem pumps; harvest the premium by shorting perp against spot when funding turns persistently positive.
+- [[cash-and-carry]] — with deep spot on Binance/SunSwap and a Binance USD-M perp, long spot / short perp captures the basis when the perp trades at a premium, a clean carry on a deflationary token.
+- [[crowded-long-funding-fade]] — Justin-Sun headline pumps (TRX/JST/SUN moving together) crowd longs into leverage; fade over-positive funding once OI and price diverge.
+- [[liquidation-cascade-fade]] — thin single-venue perp depth means leveraged flushes overshoot; fade forced-liquidation spikes back toward spot/burn-supported value.
+- [[oi-confirmed-trend]] — use Binance OI to separate genuine SunPump-driven trends from unbacked spot squeezes, only riding moves confirmed by rising open interest.
+- [[narrative-trading]] — SUN is a levered proxy on the TRON/Justin-Sun complex and SunPump launch cycles; trade around ecosystem catalysts and burn-phase announcements.
+
+### Volatility & regime character
+
+Mid-cap altcoin (~rank 123) with high beta to BTC/ETH risk-on regimes and a tight correlation to the TRON complex (TRX, JST). SUN carries **memecoin-launchpad reflexivity** — its buyback-and-burn flow is driven by SunPump activity, so realized volatility spikes with memecoin cycles and can compress sharply in bear tape. It behaves as a DeFi/infra fee-capture token with a structurally deflationary supply, which has lent relative resilience in extreme-fear regimes, but reflexive drawdowns are sharp when launchpad volume and leverage unwind together.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading and perp analytics concentrate on Binance; no Hyperliquid fallback, so a single-venue outage, delisting, or thin book amplifies execution and gap risk.
+- **Narrative dependence** — value and volatility are tied to SunPump/SunSwap/SunX throughput and the Justin-Sun complex; a fee-flow slowdown or negative headline hits both fundamentals and price.
+- **Founder/regulatory risk** — inseparable from Justin Sun, a recurring SEC/regulatory and headline risk in both directions.
+- **Emissions/unlocks (low)** — ~97% of max supply already circulates and net supply is contracting via burns; unlock overhang is minimal, but burn cadence depends on cyclical fee volume.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SUNUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SUNUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SUN` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SUN` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SUNUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SUNUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SUN"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

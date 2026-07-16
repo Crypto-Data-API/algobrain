@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins]
 aliases: ["SC", "Sia"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized"
 website: "https://sia.tech/"
-related: ["[[arweave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-storage]]", "[[depin]]", "[[filecoin]]", "[[proof-of-work]]"]
+related: ["[[arweave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-storage]]", "[[depin]]", "[[filecoin]]", "[[proof-of-work]]", "[[binance]]", "[[dca-strategy]]", "[[crypto-beta-rotation]]"]
 ---
 
 # Siacoin
@@ -108,6 +108,50 @@ Siacoin is a **fundamentals-anchored utility token** in theory — its long-run 
 - **Liquidity & macro:** thin liquidity for a sub-penny token, plus high beta to the broader market — and as of 2026-06-21 the regime is **extreme fear / Established Bear Market** (F&G 23), which weighs on small-cap infrastructure tokens.
 
 > Cryptocurrency is highly volatile and speculative. Nothing here is financial advice. Always verify live data before trading.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — SC is tradable on Binance SPOT only among top venues with reliable depth — there is no liquid perpetual venue, so leverage and clean short access are limited and this is a **spot-primary** asset. Perp funding/basis/liquidation strategies do NOT apply. With a sub-penny price (~$0.0006), a ~$30–36M cap and only a few million dollars of daily volume, the SC/USDT book is thin: expect wide relative spreads, meaningful slippage on size, and price-discovery concentration on that single book (plus a Korean-retail pocket on Upbit KRW). Practical implication — size small, prefer limit/VWAP execution over market orders, and treat the Binance spot book as the reference price; shorting is effectively unavailable outside spot inventory, so bearish views are hard to express directly.
+
+**Applicable strategies**
+- [[dca-strategy]] — spot-only, fundamentals-anchored storage/DePIN token where cost-averaging suits accumulation without needing leverage or perps.
+- [[buy-and-hold]] — a decade-old survivor thesis tied to real storage utilization; a long-horizon spot hold is the natural expression given no perp venue.
+- [[breakout-and-retest]] — after long sub-penny basing, spot breakouts from multi-month ranges can be traded on retest to control the wide-spread entry risk.
+- [[volatility-targeting]] — high small-cap beta and episodic vol argue for scaling position size to realized volatility rather than fixed notional.
+- [[atr-trailing-stop]] — thin-book gaps make a volatility-scaled trailing stop more robust than a fixed percentage stop for managing spot exits.
+- [[crypto-beta-rotation]] — SC trades largely on broad crypto beta in bear regimes, fitting a rotation framework that shifts exposure by regime rather than SC-specific catalysts.
+
+**Volatility & regime character** — Small-cap (~$30–36M), high-beta infrastructure token in the decentralized-storage / [[depin|DePIN]] category — not a memecoin and with limited reflexive supply mechanics, but its sub-penny price amplifies percentage swings. In risk-on tapes it can rally sharply as retail rotates into long-tail infra names; in bear regimes (e.g. the 2026-06 extreme-fear tape) it bleeds with broad crypto beta and tracks BTC/ETH direction more than protocol-specific news. Long-run behavior leans toward real network usage (storage contracts) but short/medium-term price is dominated by macro crypto beta and liquidity conditions.
+
+**Risk flags**
+- **Liquidity / venue concentration:** effectively single-venue spot depth (Binance) plus an Upbit KRW pocket; thin book means high slippage and fragile execution on size.
+- **No liquid perps:** no clean leverage or short access — bearish/hedged expression is limited to spot inventory.
+- **Emissions / dilution:** uncapped, inflationary [[proof-of-work|PoW]] emissions continuously add supply, structurally capping per-unit price appreciation.
+- **Narrative dependence:** value thesis hinges on decentralized-storage adoption converting committed capacity into paid utilization; demand has stayed niche versus hyperscaler clouds.
+- **Regulatory / regional:** notable Korean-retail (Upbit KRW) exposure means regional exchange or regulatory shifts can move liquidity disproportionately.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SCUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=SCUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

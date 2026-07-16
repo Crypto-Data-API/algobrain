@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, gaming, nft]
+tags: [crypto, gaming, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ENJ"]
 entity_type: protocol
 founded: 2017
 headquarters: "Singapore"
 website: "https://enjin.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[gaming-tokens]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[gaming-tokens]]", "[[nft]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Enjin Coin
@@ -274,6 +274,56 @@ Enjin Beam: A QR code-based distribution system that allows for the effortless d
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ENJ is tradable on [[binance]] — **spot (ENJ/USDT)** plus a **USD-margined perpetual** with the full derivatives stack (funding, open interest, liquidations). It is **NOT listed on [[hyperliquid]]**, so Binance is the primary leveraged venue and effectively sets the reference funding/OI print for the token. Because leveraged flow is concentrated on a single venue, perp liquidity and order-book depth thin out quickly relative to majors; ENJ's high volume-to-cap turnover keeps spot execution workable but perp positions should be sized conservatively, with awareness that a single venue's funding and liquidation dynamics dominate. Execution favors limit/[[vwap-trading|VWAP]]-style entries over aggressive market orders to avoid slippage in the shallow book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect the perp funding carry on Binance when ENJ funding skews persistently positive during GameFi risk-on rotations.
+- [[crowded-long-funding-fade]] — fade over-extended long funding after ENJ's high-beta pops, when late longs crowd the single-venue perp.
+- [[liquidation-cascade-fade]] — ENJ's thin single-venue perp book makes forced-liquidation flushes prone to sharp overshoots that mean-revert.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm that a breakout in this high-beta name is backed by real leveraged participation.
+- [[breakout-and-retest]] — trade momentum breakouts from ENJ's depressed post-ATL ranges, entering on the retest to control risk.
+- [[rsi-mean-reversion]] — mean-revert oversold/overbought extremes on a sentiment-driven token that whipsaws hard around GameFi narrative shifts.
+
+### Volatility & regime character
+
+ENJ is a small-cap (rank ~397) **gaming/NFT infrastructure** token with strongly **high-beta** behavior: it leads on the way up and bleeds hardest in risk-off regimes. Price is dominated by GameFi/NFT sector sentiment and broad crypto risk appetite, giving it high correlation to BTC/ETH on down-legs but sharper amplitude on rotations. It is not a memecoin, but it exhibits reflexive, narrative-driven swings; the recent +14% weekly move against a flat cohort and the fresh 2026 all-time low both illustrate its outsized dispersion around the sector.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading is effectively Binance-only (no Hyperliquid), so funding, OI, and liquidation risk hinge on a single venue's dynamics.
+- **Liquidity:** thin perp depth and bear-market spot spreads amplify slippage and gap risk on size.
+- **Narrative dependence:** the thesis rides GameFi/NFT adoption; sector sentiment drives price more than fundamentals.
+- **Standard-vs-token accrual:** ERC-1155 is an open standard benefiting the whole ecosystem, so mindshare does not automatically convert into ENJ demand.
+- **Uncapped supply:** max supply is effectively uncapped (though MC/FDV ~0.99 means minimal near-term dilution overhang).
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ENJUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ENJUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ENJ` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ENJ` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ENJUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ENJUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ENJ"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

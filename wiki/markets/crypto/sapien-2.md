@@ -3,13 +3,13 @@ title: "Sapien"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["SAPIEN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.sapien.io/"
-related: ["[[crypto-markets]]", "[[base]]"]
+related: ["[[crypto-markets]]", "[[base]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Sapien
@@ -124,6 +124,55 @@ Sapien is an open protocol for sourcing verified human knowledge at scale. Its n
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SAPIEN is tradable on **Binance** — both spot (SAPIEN/USDT) and a USD-margined perpetual, which exposes funding rates, open interest, and liquidation data. It is **not listed on Hyperliquid**, so Binance is the primary leveraged venue. With a small ~$20M market cap and modest 24h volume, order books are thin: perp leverage concentrates flow on a single exchange, so funding and liquidation signals are meaningful but liquidity is easily exhausted. Size positions conservatively, favor limit/maker execution to reduce slippage, and expect wider spreads and greater impact than large-caps. Venue concentration means Binance perp availability effectively defines where directional and carry trades can be structured.
+
+### Applicable strategies
+
+- [[oi-confirmed-trend]] — pair Binance perp open-interest changes with price to confirm genuine trend continuation versus low-conviction chop in a thin book.
+- [[funding-rate-harvest]] — collect funding on the SAPIEN perp when the rate skews persistently positive or negative, sized for the low-cap liquidity.
+- [[liquidation-cascade-fade]] — fade forced-liquidation flushes on the leveraged perp, where a small cap amplifies cascade magnitude and mean-reversion snapbacks.
+- [[breakout-and-retest]] — trade breakouts from consolidation with a retest filter, appropriate for a low-liquidity AI/data token prone to false starts.
+- [[narrative-trading]] — position around the AI-training-data / verified-human-knowledge narrative that drives SAPIEN's episodic attention and volume.
+- [[volatility-breakout]] — capture expansion moves after quiet ranges, common in small-cap tokens that whipsaw on catalysts.
+
+### Volatility & regime character
+
+Small-cap (rank ~835), high-beta altcoin with pronounced reflexivity typical of low-float, low-liquidity assets. As an AI/infrastructure token on Base (0.25 MC/FDV ratio), SAPIEN tends to amplify BTC/ETH directional moves during risk-on phases and sell off sharply in risk-off regimes, while adding idiosyncratic swings driven by AI-data narrative flows and thin order books. Expect elevated realized volatility and sensitivity to broad altcoin sentiment.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin books and a single dominant leveraged venue (Binance) mean slippage, gap risk, and cascade risk on de-risking events.
+- **Unlocks / emissions** — circulating supply (250M) is a fraction of the 1B total/max supply (0.25 MC/FDV), so scheduled emissions and future unlocks are a persistent supply overhang.
+- **Narrative dependence** — valuation leans on the AI-training-data thesis; attention rotation away from the AI narrative can drain volume and liquidity quickly.
+- **Small-cap fragility** — low market cap makes the token vulnerable to outsized swings from relatively small order flow and to broad altcoin regime shifts.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SAPIENUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SAPIENUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SAPIEN` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SAPIEN` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SAPIENUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SAPIENUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SAPIEN"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

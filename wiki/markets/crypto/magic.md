@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["MAGIC", "Treasure DAO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://treasure.lol/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[nft]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[nft]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Treasure (MAGIC)
@@ -189,6 +189,55 @@ Key risks:
 - **2024–2025** — Strategic repositioning toward a gaming-focused chain/infrastructure direction (ZK-stack effort) and multi-chain expansion to [[ethereum|Ethereum]] and Base.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MAGIC is tradable on [[binance|Binance]] as both **spot** (MAGIC/USDT) and a **USD-margined perpetual**, giving traders access to [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data on a single primary venue. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue and the reference point for derivatives positioning. With a sub-$20M market cap and a single dominant perp venue, order books are thin and leverage-driven moves can be violent — concentration on one venue means funding and OI signals are high-signal but also means execution should assume shallow depth, wider slippage on size, and meaningful risk of cascading liquidations. Size positions small relative to spot volume, favor limit/maker entries, and treat Binance funding/OI as the authoritative crowding gauge given the absence of a second deep perp market.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — MAGIC's GameFi-sentiment squeezes can push perp funding sharply positive during narrative spikes; fading over-leveraged longs when funding stretches is well-suited to a single-venue, low-float token.
+- [[liquidation-cascade-fade]] — thin books and one dominant perp venue make MAGIC prone to sharp liquidation flushes; fading exhaustion after a cascade targets the mechanical overshoot in a small-cap.
+- [[oi-price-exhaustion]] — with all leverage concentrated on Binance, rising OI into a stalling price is a clean divergence signal for exhausted trends in MAGIC.
+- [[breakout-and-retest]] — MAGIC ranges for long stretches then moves impulsively on GameFi/NFT sentiment; trading confirmed breakouts with a retest filters the frequent false starts in a low-liquidity name.
+- [[rsi-mean-reversion]] — as a small-cap that whips within wide ranges, MAGIC often reverts after momentum extremes, making oscillator-based reversion viable between narrative catalysts.
+- [[narrative-trading]] — MAGIC is a leveraged bet on GameFi/NFT and Treasure's shifting positioning (marketplace to metaverse to consumer/AI framings), so trading the dominant narrative and its rotation drives most of its beta.
+
+### Volatility & regime character
+
+MAGIC is a **small-cap (~#978), high-beta GameFi/NFT ecosystem token** with strong reflexivity to gaming-and-NFT sentiment rather than pure memecoin dynamics. It carries broad correlation to BTC/ETH risk-on/risk-off regimes but amplifies moves on the downside given depressed GameFi appetite, and its price is driven as much by sector narrative and emissions dynamics as by broad market direction. As an Arbitrum-native, multi-chain infra/gaming token trading ~99% below its 2022 ATH, it behaves as a deep-beta, sentiment-led altcoin — quiet ranges punctuated by sharp catalyst-driven or liquidation-driven moves.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — sub-$20M cap with Binance as the sole primary leveraged venue; thin depth means large slippage and fast liquidation cascades.
+- **Emissions / supply** — MAGIC's historically emissions-driven design adds inflation and sell pressure; the "shared currency" value depends on game demand outpacing new issuance.
+- **Narrative dependence** — value is a leveraged bet on GameFi/NFT sentiment and repeated Treasure repositioning, creating high headline sensitivity and uncertain durable product-market fit.
+- **Ecosystem concentration** — demand depends on a small set of games and NFT collections retaining users; loss of a flagship title can sharply impair the token's economic role.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MAGICUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MAGICUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MAGIC` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MAGIC` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MAGICUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MAGICUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MAGIC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

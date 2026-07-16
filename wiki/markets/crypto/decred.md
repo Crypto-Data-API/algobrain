@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, regulation]
+tags: [altcoins, crypto, regulation, defi]
 aliases: ["DCR", "Decred (DCR)"]
 entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://decred.org/"
-related: ["[[binance]]", "[[bitcoin]]", "[[crypto-markets]]", "[[crypto-narratives-overview]]", "[[kraken]]"]
+related: ["[[binance]]", "[[bitcoin]]", "[[crypto-markets]]", "[[crypto-narratives-overview]]", "[[kraken]]", "[[event-driven-trading]]", "[[dca-strategy]]"]
 ---
 
 # Decred
@@ -274,6 +274,53 @@ Decred aims to build a community-directed digital currency whose security, adapt
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DCR is tradable on **Binance SPOT only** — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. Execution must run through spot order books, so directional exposure is effectively long-only (or requires borrowing, which is scarce for a #145-rank name). With ~$0.5M–$5M daily volume against a ~$200M cap, book depth is thin: market orders slip and large clips must be worked patiently (TWAP/VWAP-style scaling, limit ladders). Size positions small relative to typical liquidity, budget for wide spreads around governance catalysts, and prefer spot accumulation over any margin construction.
+
+### Applicable strategies
+
+- [[event-driven-trading]] — DCR's biggest moves are endogenous Politeia/DCP governance and treasury events (DCP-0013 drove a ~75% weekly move), the definitive catalyst-trade setup.
+- [[dca-strategy]] — spot-only, hard-capped (21M) sound-money asset with deep drawdowns; averaging in suits accumulation without needing leverage or shorting.
+- [[buy-and-hold]] — fixed-supply, self-funded-treasury governance coin fits a long-horizon store-of-value thesis for conviction holders.
+- [[breakout-and-retest]] — thin liquidity produces sharp governance-driven range breaks; entering on the retest filters the frequent fade after the pump.
+- [[volatility-targeting]] — event-clustered volatility (calm drift punctuated by 50–75% governance spikes) argues for scaling exposure to realized vol rather than a fixed notional.
+- [[atr-trailing-stop]] — low-float pump-and-fade behavior makes a volatility-scaled trailing stop useful for locking gains as governance rallies exhaust.
+
+### Volatility & regime character
+
+Small-cap (~#145), low-float L1 with **high idiosyncratic, event-driven volatility** rather than steady beta. Between catalysts DCR drifts with the broad crypto tape and carries meaningful **BTC correlation** (shared 21M-cap / sound-money framing), but around Politeia votes it decouples with reflexive, low-liquidity spikes and fades. It trades in the OG PoW/privacy/governance cohort — not with [[defi]] or AI baskets — and behaves like a thin long-tail alt in risk-off regimes (amplified downside when Fear & Greed is low).
+
+### Risk flags
+
+- **Venue/liquidity concentration** — Binance-spot primary, thin (~$0.5M–$5M) daily volume; high slippage, hard to exit size, no perp hedge.
+- **Narrative dependence** — price is hostage to endogenous governance/treasury events; between catalysts it bleeds with the bear tape, and "on-chain governance" is no longer a differentiated narrative.
+- **Emission/treasury supply** — slow block emission (~17% un-emitted) plus a treasury that can sell DCR are mild ongoing supply sources (no unlock cliff, but persistent).
+- **Regulatory** — privacy tooling (StakeShuffle) can attract exchange-delisting/regulatory scrutiny for privacy-adjacent assets.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DCRUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DCRUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DCRUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=DCRUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-agent-tokens, ai-trading, crypto]
+tags: [ai-agent-tokens, ai-trading, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["KITE", "Kite AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gokite.ai/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Kite
@@ -109,6 +109,55 @@ Kite's pitch is infrastructure for the **agentic economy**: AI agents that can a
 - **Unproven adoption:** The agent-payments thesis is largely forward-looking; real, sustained on-chain agent transaction volume is unverified. Valuation currently prices a narrative, not demonstrated usage.
 - **Liquidity / volatility:** Free-float liquidity is thinner than headline cap implies; sharp drawdowns (~-48% from ATH) underline the volatility.
 - **Competition:** Multiple chains and middleware projects are chasing the same agent-economy / x402 niche.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KITE is tradable on **Binance** — both **spot** (KITE/USDT) and a **USD-margined perpetual**, which brings verifiable **funding**, **open interest**, and **liquidation** data into play. It is **NOT** listed on [[hyperliquid]]. Binance is therefore the **primary leveraged venue** for KITE: the USD-M perp is where directional leverage, funding carry, and liquidation flow concentrate, while the deep spot book underpins the cash leg of basis and carry trades. Because leverage and liquidity are concentrated on a single tier-1 venue rather than fragmented across many perp venues, execution and price discovery hinge on Binance depth. With ~23% float and thinner free-float liquidity than the headline cap implies, size should be scaled to Binance order-book depth and funding/OI conditions; larger orders should expect slippage and should lean on the spot book plus perp for hedged execution rather than one-sided market orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the Binance USD-M perp lets you collect funding on a high-beta AI-agent token that frequently runs hot on one side; harvest when funding is persistently positive (crowded longs paying).
+- [[cash-and-carry]] — pair long Binance spot KITE against a short USD-M perp to lock the basis and earn funding without directional exposure, useful given the reflexive, unlock-pressured price path.
+- [[crowded-long-funding-fade]] — narrative-driven AI tokens like KITE draw crowded longs into rallies; fade over-extended positive funding when OI and price diverge from spot demand.
+- [[liquidation-cascade-fade]] — with ~48% ATH drawdown and high beta, KITE is prone to leveraged liquidation cascades on Binance; fade the flush and cover into the wick.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether KITE moves are leverage-driven or spot-backed before committing to a trend.
+- [[volatility-breakout]] — KITE's sharp, sentiment-driven swings and ~9% daily turnover make volatility-expansion breakouts tradable around narrative catalysts and unlock events.
+
+### Volatility & regime character
+
+KITE is a **mid-cap** (rank ~135), **high-beta AI-agent / Layer-1 infrastructure token**. It behaves reflexively — rallying hard on the [[ai-agent-tokens]] / [[decentralized-ai]] narrative and bleeding harder than majors in risk-off tapes (down ~14% on the week versus an extreme-fear backdrop). Correlation to BTC/ETH is elevated in drawdowns (it moves with the broad crypto-beta risk cycle) but decouples upward on AI-narrative catalysts. Expect large realized-vol swings, low-float amplification, and narrative-driven repricing rather than fundamentals-driven mean reversion.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading is concentrated on Binance (spot + USD-M perp); no [[hyperliquid]] market, so perp liquidity and funding/OI signals depend on a single venue.
+- **Unlock / emissions overhang:** only ~23% of the 10B max supply circulates (MC/FDV ~0.23); scheduled team/investor/ecosystem vesting is a persistent structural sell-pressure and a key event risk for shorts and carry trades.
+- **Narrative dependence:** valuation prices the AI-agent thesis, not demonstrated on-chain usage — sentiment reversals hit this name disproportionately.
+- **Free-float liquidity:** headline cap overstates tradable depth; large orders face slippage despite tier-1 listings.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KITEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=KITEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=KITE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=KITE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KITEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=KITEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=KITE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

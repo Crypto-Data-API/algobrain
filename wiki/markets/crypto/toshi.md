@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme]
+tags: [crypto, meme, memecoins, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["TOSHI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.toshithecat.com/"
-related: ["[[base]]", "[[based-brett]]", "[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]"]
+related: ["[[base]]", "[[based-brett]]", "[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Toshi
@@ -243,6 +243,56 @@ Speculative asset; apply strict [[risk-management]] and treat capital as fully a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TOSHI is tradable on [[binance]] — **spot plus a USD-margined perpetual** ([[funding-rate|funding]], [[open-interest|open interest]], [[liquidations]]) — which makes Binance the **primary leveraged venue** for the token. It is **not** listed on [[hyperliquid]]. Because leveraged flow concentrates on a single major venue, Binance funding/OI/liquidation prints are the cleanest read on positioning; venue concentration also means depth thins quickly in stress, so sizing and stops should assume slippage widens fast on a low-cap (~rank #450) meme. Spot legs for hedging or basis are also available on Kraken, KuCoin, Crypto.com, and Upbit (KRW), but the Binance USD-M perp is where hedgeability and short exposure are most efficient. Keep position size well within perp depth to avoid self-impact on entries and liquidations.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp lets you collect funding on TOSHI when the meme runs hot and longs pay to hold.
+- [[crowded-long-funding-fade]] — meme rallies routinely stack crowded longs; persistently positive funding plus rising OI flags fade setups into exhaustion.
+- [[liquidation-cascade-fade]] — thin low-cap depth makes TOSHI prone to violent liquidation flushes on the Binance perp, offering rebound fades after forced selling clears.
+- [[volatility-breakout]] — high-beta meme reflexivity produces sharp range expansions; breakout entries on Binance spot/perp capture attention-driven impulse moves.
+- [[oi-confirmed-trend]] — pairing Binance OI changes with price filters real trend legs from hollow squeezes on a token this reflexive.
+- [[cash-and-carry]] — long Base/CEX spot against the Binance USD-M perp harvests basis when funding stays rich during meme heat.
+
+### Volatility & regime character
+
+Small-cap ([[altcoins|altcoin]]) [[memecoins|memecoin]] with **high beta** to the risk/meme cycle and strong **reflexivity** — attention drives price drives attention in both directions. As a [[base]]-native cat meme it is highly correlated to broad BTC/ETH risk-on/risk-off regimes and to Base-ecosystem flows, while adding idiosyncratic spikes from Korean (Upbit/KRW) retail. Expect wide intraday ranges, fat tails, and regime shifts that favor trend/breakout tactics in expansions and mean-reversion/fades in exhaustion.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged liquidity centers on Binance; depth deteriorates fast during de-risking, amplifying slippage and liquidation impact.
+- **Narrative dependence** — value rests entirely on continued Base-brand and meme attention with no cash flows to support it.
+- **Reflexivity / drawdown** — already deep off ATH; the attention loop accelerates declines as readily as rallies.
+- **Concentration risk** — despite full circulation, large early wallets can dominate price action and trigger cascades.
+- **Regulatory** — memecoins face evolving CEX-listing and derivatives scrutiny; a delisting or perp-removal event would sharply reduce hedgeability.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TOSHIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TOSHIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=TOSHI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=TOSHI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TOSHIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=TOSHIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=TOSHI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

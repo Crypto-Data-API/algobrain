@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, payments]
+tags: [altcoins, crypto, payments, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["MTL", "Metal Pay", "Metallicus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.metalpay.com/"
-related: ["[[crypto-markets]]", "[[governance-token]]", "[[payments]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[governance-token]]", "[[payments]]", "[[stablecoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Metal DAO
@@ -230,6 +230,56 @@ This is not investment advice; figures above are point-in-time market data, not 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
 The MTL token launched in 2017 and peaked near **$17** in mid-2018 during the original ICO-era altcoin cycle. It has since fallen more than 98% from that all-time high, mirroring the fate of most first-cycle payments tokens. The project's later pivots — the Metal Blockchain and the XMD stablecoin — are attempts to find durable utility beyond the original rewards mechanic.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MTL is tradable on **[[binance]]** — both **spot** (MTL/USDT) and a **USD-margined perpetual** that exposes [[funding-rate|funding]], **open interest**, and **liquidations** data. It is **NOT listed on Hyperliquid**, so Binance is the primary — effectively the only major — leveraged venue for MTL. This concentration means perp liquidity, order-book depth, and leverage availability all hinge on a single exchange: crowded positioning, funding dislocations, and liquidation cascades tend to originate and resolve on Binance. As a sub-$25M-cap microcap, MTL perp depth is thin, so position sizing should assume meaningful slippage on market orders and treat Binance funding/OI as the definitive read on leveraged flow. Spot liquidity is further fragmented across Upbit (KRW), Bitget, and KuCoin, but derivative exposure is Binance-centric.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding when MTL's thin, retail-driven perp skews persistently positive or negative against a hedged spot leg.
+- [[crowded-long-funding-fade]] — MTL's small-cap reflexivity produces episodic crowded longs on payments/stablecoin headlines; fade over-extended funding into mean reversion.
+- [[liquidation-cascade-fade]] — single-venue Binance concentration and thin depth make MTL prone to sharp liquidation wicks; fade the flush once the cascade exhausts.
+- [[cash-and-carry]] — capture spot-perp basis by pairing long Binance spot MTL against the short perp when the term structure pays.
+- [[range-mean-reversion]] — outside catalyst windows MTL grinds in defined ranges within its long downtrend, favoring reversion at range extremes.
+- [[news-trading]] — MTL reacts more to U.S. stablecoin-regulation and Metal Blockchain/XMD headlines than to broad crypto beta, rewarding fast catalyst-driven entries.
+
+### Volatility & regime character
+
+MTL is a **small-cap altcoin** (rank ~#808, sub-$25M cap) with elevated idiosyncratic volatility and modest daily volume. It behaves as a **payments/stablecoin-infrastructure narrative token** rather than a pure BTC-beta proxy — it can decouple sharply on regulation or Metallicus/XMD news, while still absorbing broad risk-off drawdowns amplified by its microcap size. Its multi-cycle downtrend (~-98% from the 2018 ATH) and low float mean moves are reflexive and mean-reverting rather than trend-persistent, with a strong Korean-retail (Upbit) footprint that can drive volume spikes disconnected from Western sessions.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure lives entirely on Binance; a listing change, funding regime shift, or depth withdrawal there dominates MTL's derivative risk.
+- **Microcap liquidity** — sub-$25M cap and ~$1M daily volume mean wide spreads, slippage, and outsized wick risk on both spot and perp.
+- **Narrative dependence** — value thesis rests on Metal Pay adoption, XMD governance demand, and U.S. stablecoin regulation; catalysts cut both ways and drive gap risk.
+- **Regulatory exposure** — the XMD/stablecoin angle ties MTL to an evolving and uncertain U.S. regulatory regime.
+- **Structural downtrend** — down ~98% from ATH with no sustained multi-cycle recovery; leveraged longs fight a persistent bearish backdrop.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MTLUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MTLUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MTL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MTL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MTLUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MTLUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MTL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

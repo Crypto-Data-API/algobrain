@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["1INCH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://1inch.com/"
-related: ["[[ai-solvers]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex-aggregator]]", "[[ethereum]]", "[[intent-based-trading]]", "[[mev-strategies]]", "[[solana]]", "[[uniswap]]"]
+related: ["[[ai-solvers]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex-aggregator]]", "[[ethereum]]", "[[intent-based-trading]]", "[[mev-strategies]]", "[[solana]]", "[[uniswap]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # 1INCH
@@ -279,6 +279,58 @@ Builders and enterprise partners can access the core technologies powering 1inch
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+1INCH is tradable on [[binance|Binance]] — both **spot** (1INCH/USDT) and a **USD-margined perpetual** with [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is effectively the **primary leveraged venue** for the token. This single-venue concentration on the derivatives side means leverage, borrow, and liquidity depth all route through one book: perp liquidity is thinner than for large caps, so max sustainable size is modest, slippage rises quickly on larger clips, and stops/liquidations can gap during low-depth windows. Execution is best worked into Binance spot/perp order flow with limit orders rather than aggressive market sweeps, and position sizing should assume a single point of venue failure with no Hyperliquid fallback for hedging or basis capture.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect the Binance perp funding on a small-cap DeFi token where perp funding can drift persistently off spot in trending sector moves.
+- [[cash-and-carry]] — long Binance spot 1INCH versus short the USD-M perp to lock basis when funding runs positive on the single venue.
+- [[crowded-long-funding-fade]] — fade over-eager longs when Binance funding and OI spike together on a DeFi-narrative pump in an otherwise thin book.
+- [[liquidation-cascade-fade]] — 1INCH's thin perp depth makes forced-liquidation flushes overshoot; fade the wick back toward multi-year support near the ATL.
+- [[rsi-mean-reversion]] — a mature, range-bound governance token near support reverts well from oversold extremes on the daily.
+- [[bollinger-band-reversion]] — low-volatility, sideways price action suits band-edge mean reversion on Binance spot.
+
+### Volatility & regime character
+
+1INCH is a **small-cap DeFi infrastructure / governance token** (rank ~254) with a mature, comparatively low-beta profile relative to memecoins and higher-flyer alts. It has **no memecoin reflexivity**; price is driven by broad DeFi-sector rotation and general risk appetite. Correlation to **BTC/ETH** is high on down moves (bear-market beta) but upside participation lags majors. With MC/FDV ~0.94 there is little unlock-driven supply overhang, so regime character is dominated by sector sentiment rather than token-specific supply shocks. The token has spent recent periods pinned near multi-year support in an extreme-fear regime, favoring range and mean-reversion behavior over sustained trend.
+
+### Risk flags
+
+- **Venue concentration** — Binance is the sole meaningful leveraged venue; no Hyperliquid backstop for hedging, and thin perp depth amplifies liquidation gaps.
+- **Liquidity** — small-cap float and modest perp OI mean size is constrained and slippage grows fast on larger orders.
+- **Narrative dependence** — value is a bet on the DAO directing routing economics to the token; no automatic fee accrual, so price hinges on DeFi-sector and aggregator-narrative shifts.
+- **Bear-market beta** — trades near its all-time low; downside correlation to majors is high while upside lags.
+- **Regulatory exposure** — DeFi front-ends, DAOs, and governance tokens face evolving regulatory scrutiny.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=1INCHUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=1INCHUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=1INCH` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=1INCH` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=1INCHUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=1INCHUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=1INCH"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

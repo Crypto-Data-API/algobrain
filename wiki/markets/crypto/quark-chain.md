@@ -9,7 +9,7 @@ aliases: ["QKC", "Quark Chain"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://quarkchain.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[sharding]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[sharding]]", "[[binance]]", "[[crypto-beta-rotation]]", "[[range-mean-reversion]]"]
 ---
 
 # QuarkChain
@@ -232,6 +232,57 @@ Only dated, verifiable milestones are listed.
 - **Liquidity is better than peers but still thin.** Despite Tier-1 CEX listings, size carefully; the cap (~$16M) means real impact on larger orders. Use limit orders.
 - **Invalidation / risk control.** There is no robust derivatives market to hedge; risk is controlled by position size. Structural support to watch is the 2020 ATL ($0.00138), far below current price.
 - **What would change the thesis** — a genuine resurgence in execution-sharding/parallel-L1 narratives during a risk-on phase, or a concrete usage/partnership catalyst. Absent that, QKC trades as a beta-to-altcoin-risk-appetite vehicle, not a fundamentals story.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. Any historical perp listings carry thin, unreliable open interest and should not be treated as a hedging or signal source. Practically this means QKC exposure is long-biased and cash-settled: there is no clean way to short or lever the token, so downside must be managed by position sizing and exits rather than derivatives hedges. With a low-single-digit-million daily volume and a thin order book, execution should lean on limit orders and scaled entries/exits; market orders on size will slip. Venue concentration on a single CEX also means listing/status changes at that one venue dominate accessible liquidity, which argues for smaller position sizing than the token's Tier-1 listing might otherwise suggest.
+
+### Applicable strategies
+
+- [[breakout-and-retest]] — thin micro-cap liquidity makes clean breakouts rare; waiting for the retest filters the frequent false breaks QKC produces on modest flow.
+- [[range-mean-reversion]] — QKC spends long stretches drifting sideways as a dormant infra token, favoring fading extremes within an established range over trend-chasing.
+- [[rsi-mean-reversion]] — sudden Korean-retail-driven volume bursts push QKC to short-term oversold/overbought extremes that tend to revert rather than trend.
+- [[dca-strategy]] — for spot-only, long-biased accumulation of a legacy micro-cap, dollar-cost averaging smooths the high single-name volatility without needing leverage.
+- [[atr-trailing-stop]] — with no derivatives hedge available, an ATR-based trailing stop is the primary risk-control mechanism for spot QKC positions.
+- [[crypto-beta-rotation]] — QKC behaves as a high-beta altcoin-risk vehicle, so rotating in only during risk-on regimes and out in bear/extreme-fear phases fits its character.
+
+### Volatility & regime character
+
+Small-cap, high-beta altcoin. QKC is a legacy 2018 ICO-era Layer-1 / scaling-infrastructure token, not a memecoin or an actively-used DeFi protocol, so its price is driven more by broad altcoin risk appetite and idiosyncratic exchange flow than by protocol fundamentals. It carries strong positive correlation (high beta) to BTC/ETH risk-on/risk-off cycles and can move double digits on modest volume given its thin cap. Idiosyncratic spikes tied to Korean-won retail flow appear as sharp, market-independent moves that more often mean-revert than start durable trends. Regime matters: in bear/extreme-fear conditions dormant infra tokens with scarce catalysts tend to bleed, so a regime-aware, risk-on-only posture suits the asset.
+
+### Risk flags
+
+- **Venue concentration** — spot-primary with liquidity concentrated on a single CEX; a listing or trading-status change there can sharply impair accessible liquidity.
+- **No liquid perp / no hedge** — leverage and short access are limited; downside cannot be hedged with derivatives and must be managed by sizing and stops.
+- **Liquidity / slippage** — thin micro-cap order book means real market impact on size; use limit orders and scaled fills.
+- **Narrative dependence** — value hinges on a scaling-infrastructure narrative that has largely shifted to rollup/modular designs; catalysts are scarce and development cadence is low.
+- **Emissions / supply** — unlimited max supply and ongoing issuance mean no hard scarcity cap; monitor circulating-supply growth.
+- **Bridge / contract exposure** — most QKC liquidity is a wrapped ERC-20 representation, inheriting smart-contract and bridge risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=QKCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=QKCUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=QKCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=QKCUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

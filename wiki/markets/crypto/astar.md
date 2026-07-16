@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ASTR", "Astar Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://astar.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[polkadot]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[polkadot]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Astar
@@ -114,6 +114,55 @@ ASTR is the smallest cap in this peer group (~$47M, rank #475) and trades within
 - **Strategic straddle.** Splitting effort across Polkadot (Substrate) and Ethereum ([[layer-2]] zkEVM) risks diluting focus and liquidity.
 - **Competition.** Crowded smart-contract-platform field on both sides of its straddle.
 - **Severe drawdown / liquidity.** Down ~99% from ATH, near all-time lows, with thin (~$3.6M/day) volume and an extreme-fear macro backdrop.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ASTR is tradable on [[binance]] — both spot (ASTR/USDT) and a USD-margined [[perpetual-futures|perpetual]] contract, which is where [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data live. It is **NOT** listed on [[hyperliquid]], so Binance is the primary (effectively sole major) leveraged venue. With market cap around rank #459 and thin daily volume, the perp order book is shallow: leverage is available but liquidity concentration on a single venue means slippage on size, wider effective spreads, and funding/OI that can whip on modest flow. Venue concentration argues for small clip sizes, limit-order execution over market fills, and treating Binance funding/OI as the definitive read since there is no deep secondary perp market to cross-check or hedge against.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding when the single-venue ASTR perp trades at a persistent premium/discount to spot; the only major venue makes the funding print clean but one-sided.
+- [[crowded-long-funding-fade]] — small-cap ASTR pumps on Polkadot/Japan narrative headlines often over-lever longs; fade when funding spikes richly positive into a stalled price.
+- [[cash-and-carry]] — long Binance spot ASTR versus short the USD-M perp to lock the basis when funding is durably positive, avoiding directional exposure on a deeply drawn-down token.
+- [[liquidation-cascade-fade]] — thin ASTR order books make leveraged flushes overshoot; fade forced-liquidation wicks back toward the mean once the cascade exhausts.
+- [[rsi-mean-reversion]] — ASTR trades within ~5-10% of its all-time low in a bear regime, where oversold bounces off compressed ranges are frequent and tradable.
+- [[oi-price-exhaustion]] — rising Binance open interest against a failing price on a low-float, single-venue perp flags exhausted positioning ripe for a reversal.
+
+### Volatility & regime character
+
+ASTR is a **small-cap infra/L1-L2 token** (rank ~#459) exhibiting high beta to broad crypto risk sentiment and strong correlation to BTC/ETH drawdowns, amplified by its Polkadot-ecosystem and Japan/Asia narrative dependence. It is not a memecoin, but its low float and thin liquidity produce memecoin-like reflexivity on headlines and liquidation events. In the current Established Bear Market it prints low-momentum, mean-reverting behavior near its all-time low, with sharp but short-lived narrative-driven spikes rather than sustained trends.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — leveraged trading effectively lives on one venue (Binance); no Hyperliquid perp and thin spot depth mean fills, exits, and hedges are all constrained.
+- **Emissions / inflation** — ASTR is inflationary via dApp Staking; ongoing emission (a flow) dilutes holders even without discrete unlock cliffs.
+- **Narrative dependence** — price is tethered to Polkadot parachain economics and Astar zkEVM sentiment, both of which have faded; moves are headline-driven and reflexive.
+- **Deep drawdown** — down ~99% from its 2022 ATH and near all-time lows, so ranges are compressed and momentum is weak, punishing trend-following while favoring mean reversion.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ASTRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ASTRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ASTR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ASTR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ASTRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ASTRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ASTR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

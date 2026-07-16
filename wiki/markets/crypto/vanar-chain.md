@@ -3,13 +3,13 @@ title: "Vanar Chain"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["VANRY"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://vanarchain.com"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]"]
 ---
 
 # Vanar Chain
@@ -130,6 +130,57 @@ Vanar, a L1 designed from the ground up, builds upon our technological expertise
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+VANRY trades on **Binance** as both **spot (VANRY/USDT)** and a **USD-margined perpetual**, exposing funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary — effectively sole — leveraged venue for this name. With a sub-$15M market cap and thin ~$10M daily volume, the perp order book is shallow: leverage and liquidity are concentrated on one exchange, so large or aggressive orders will move price and incur slippage. Position sizing must account for this single-venue concentration — there is no deep secondary perp market to hedge across, and execution should lean on limit/passive fills and smaller clips to avoid signalling into a thin book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on a delta-neutral spot-vs-perp position while VANRY funding swings on Binance, the only funding venue.
+- [[liquidation-cascade-fade]] — a thin single-venue perp book makes VANRY prone to sharp forced-liquidation wicks that mean-revert; fade the flush.
+- [[breakout-and-retest]] — low-float, low-cap tokens like VANRY trend hard on catalysts; enter breakouts only after a confirmed retest to filter fakeouts in a thin book.
+- [[oi-confirmed-trend]] — pair Binance open-interest expansion with price to confirm genuine trend legs versus low-liquidity noise in VANRY.
+- [[rsi-mean-reversion]] — after -30% weekly swings VANRY reaches oversold/overbought extremes that revert; RSI bands time entries in its range chop.
+- [[atr-trailing-stop]] — high intraday range (~10% 24h band) demands volatility-scaled trailing stops rather than fixed levels to survive VANRY's whippy moves.
+
+### Volatility & regime character
+
+VANRY is a small-cap L1/infra token (rank ~1089) with high-beta, reflexive behaviour: it amplifies broad crypto moves and swings on AI/gaming narrative flows rather than trading independently. Expect strong positive correlation to BTC/ETH risk-on/risk-off regimes, with sharp idiosyncratic spikes on chain-specific catalysts. Realized volatility is elevated (30d +46%, 7d -30% in recent windows), typical of a low-float altcoin far below its all-time high.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure lives almost entirely on Binance; a delisting, funding spike, or outage removes the main hedging/trading rail.
+- **Liquidity** — ~$10M daily volume and an $11M cap mean wide spreads, slippage, and vulnerability to liquidation cascades and stop hunts.
+- **Supply/emissions** — circulating supply is ~90% of max (MC/FDV 0.90), so dilution risk is modest but ongoing unlocks/emissions toward the 2.40B cap still add sell pressure.
+- **Narrative dependence** — price is tightly tied to AI/gaming/consumer-web3 narrative cycles; sentiment reversals can drive rapid drawdowns disconnected from fundamentals.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=VANRYUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=VANRYUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=VANRY` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=VANRY` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=VANRYUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=VANRYUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=VANRY"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

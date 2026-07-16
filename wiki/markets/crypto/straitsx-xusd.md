@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation, stablecoin]
+tags: [crypto, regulation, stablecoin, stablecoins, defi]
 aliases: ["XUSD"]
 entity_type: protocol
 headquarters: "Singapore (StraitsX)"
 website: "https://www.straitsx.com/xusd"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin]]", "[[usdc]]", "[[xsgd]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin]]", "[[usdc]]", "[[xsgd]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # StraitsX XUSD
@@ -107,6 +107,47 @@ XUSD is a **regulated, single-jurisdiction USD stablecoin** built for **ASEAN pa
 - **As a dollar instrument:** XUSD is a USD-peg token (no FX exposure) with a **strong regulatory/custody profile** for its size — suited to ASEAN-facing dollar settlement rather than maximal global liquidity.
 - **On/off-ramp use:** use StraitsX's MAS-regulated KYC ramp (and XSGD for the SGD leg) for round-trip cross-border settlement.
 - **Peg monitoring:** watch for any sustained deviation from $1.00 and the status of the redemption channel; size to venue depth (Binance XUSD/USDT and on-chain pools), not headline cap.
+
+## Trading Profile
+
+### Venues & liquidity
+XUSD is a USD-pegged stablecoin traded on [[binance]] (XUSD/USDT), plus on-chain across its Ethereum, BNB Chain, and Solana deployments. It is a **peg / cash-management instrument, not a directional asset** — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage rather than momentum. Because it is a full-reserve fiat-backed dollar coin, there is no directional thesis to lever; the only "trade" is capturing small deviations around $1.00. With a market cap around the mid-hundreds by rank and moderate CEX depth, venue availability is the binding constraint: execution and sizing should track the actual XUSD/USDT book on Binance and on-chain pool depth, not headline cap, since large orders can move a thin book and complicate round-trip arbitrage.
+
+### Applicable strategies
+- [[stablecoin-depeg-profit-capture]] — buy XUSD below par when a transient dislocation appears, redeeming or waiting for reversion to $1.00 via StraitsX's par redemption right.
+- [[stablecoin-pair-arbitrage]] — trade XUSD against deeper dollar pegs (USDC/USDT) when the XUSD/USDT cross drifts off 1:1 on Binance or on-chain.
+- [[mint-parity-arbitrage]] — exploit gaps between secondary-market price and StraitsX's 1:1 mint/redeem for KYC-verified users to pull XUSD back to peg.
+- [[stablecoin-yield]] — deploy XUSD in DEX/lending venues across its chains for yield, since the token itself pays no native yield to holders.
+- [[synthetic-stablecoin-depeg-arbitrage]] — hedge or construct offsetting positions across XUSD and sibling/peer pegs during broader stablecoin stress events.
+- [[carry-trade]] — hold XUSD as the dollar leg against yield-bearing legs, harvesting rate spreads while the peg stays tight.
+
+### Volatility & regime character
+XUSD is a fiat-collateralised dollar peg with reserves intended at ≥100% of circulation, DBS custody, and external audit, so day-to-day it trades in a razor-thin band around $1.00 (recent 24h range roughly $0.9999–$1.00). Peg tightness is maintained by par mint/redemption plus secondary-market arbitrage. Its price history shows the peg has not been perfectly static — it has recorded both an all-time low below par and a brief spike above par — indicating that thin liquidity, not the backing model, drives its rare deviations. Regime sensitivity is therefore about overall stablecoin demand and venue liquidity rather than crypto directionality; the coin carries no FX exposure.
+
+### Risk flags
+- **Depeg risk** — a fiat-backed dollar coin can [[depeg]] if a reserve bank fails or during liquidity stress (cf. past industry episodes); thin depth amplifies short-term dislocations.
+- **Reserve / backing transparency** — holders rely on StraitsX maintaining full reserves and on the quality/frequency of external attestations and DBS custody.
+- **Redemption gating** — par redemption is KYC-gated through StraitsX's regulated ramp; access frictions or a freeze impair peg arbitrage for non-onboarded holders.
+- **Regulatory** — Singapore's MAS stablecoin regime is still maturing; changes could affect issuance, redemption, or eligibility.
+- **Liquidity / concentration** — moderate CEX depth means large redemptions or a venue outage can cause short-term price dislocation.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XUSDUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=XUSDUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XUSDUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=XUSDUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ## See Also
 

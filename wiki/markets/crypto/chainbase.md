@@ -3,13 +3,13 @@ title: "Chainbase"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["C"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://chainbase.com/"
-related: ["[[crypto-markets]]", "[[base]]"]
+related: ["[[crypto-markets]]", "[[base]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Chainbase
@@ -115,6 +115,55 @@ related: ["[[crypto-markets]]", "[[base]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Chainbase (C) is tradable on **Binance** across both **spot** (C/USDT) and a **USD-margined perpetual**, which exposes funding, open interest, and liquidation dynamics for leveraged traders. It is **NOT** listed on Hyperliquid, so Binance is the primary — effectively sole — deep leveraged venue, with secondary spot listings on Bitget and KuCoin. Given the very thin liquidity (roughly single-digit-million-dollar daily turnover on a sub-$15M-market-cap asset), leverage sizing must stay small: order books are shallow, slippage on market orders is high, and perp funding/basis can dislocate sharply. Venue concentration on Binance means execution, price discovery, and any funding/liquidation strategy hinge on that single order book — a delisting or liquidity withdrawal would leave few fallbacks.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance USD-M perp lets traders collect funding when the perp trades persistently rich or cheap versus spot on this low-cap name.
+- [[crowded-long-funding-fade]] — HODLer-airdrop origin and AI-narrative pumps invite crowded longs; fading extreme positive funding can capture the mean-reversion after such moves.
+- [[liquidation-cascade-fade]] — thin books plus perp leverage make C prone to sharp liquidation wicks, giving fade entries against overshoots.
+- [[breakout-and-retest]] — a heavily beaten-down small-cap (>85% off ATH) can offer clean breakout-and-retest setups when volume returns on narrative flow.
+- [[token-unlock-supply-event]] — with only ~16% of supply circulating and unlimited max supply, scheduled unlocks and emissions are tradeable supply catalysts.
+- [[narrative-trading]] — an AI/data-infra token on Base with Binance Alpha spotlight exposure trades heavily on AI and BNB/Base ecosystem narrative cycles.
+
+### Volatility & regime character
+
+Small-cap (rank ~#1145, ~$10M market cap) infrastructure/data token with high beta to Binance-ecosystem and AI-narrative flows. Reflexive, low-float behavior: with ~16% circulating and unlimited max supply, price is sensitive to thin liquidity and emissions. Strongly correlated to BTC/ETH risk-on/risk-off regimes, but amplified — it tends to sell off harder in drawdowns (down ~68% year-over-year, ~33% over 30 days) and spike violently on narrative catalysts. Expect high realized volatility and gappy, event-driven price action rather than smooth trends.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — very low daily volume and Binance-dominant leveraged access; slippage and single-venue dependence are material.
+- **Unlocks / emissions** — MCap/FDV ratio ~0.16 with unlimited max supply signals heavy future dilution; unlock schedules can pressure price.
+- **Narrative dependence** — valuation leans on AI/data-infra and Binance Alpha/BNB-Base ecosystem narratives that can fade quickly.
+- **Drawdown / trend** — deep, sustained decline from ATH; catching a falling small-cap carries reflexive downside risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=C` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=C` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=C"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

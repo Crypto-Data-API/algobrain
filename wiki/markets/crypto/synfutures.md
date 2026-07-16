@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, ethereum, nft]
+tags: [crypto, defi, derivatives, ethereum, nft, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["F", "SynFutures DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.synfutures.com/"
-related: ["[[automated-market-maker]]", "[[base]]", "[[bnb-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
+related: ["[[automated-market-maker]]", "[[base]]", "[[binance]]", "[[bnb-chain]]", "[[cash-and-carry]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 ---
 
 # SynFutures
@@ -230,6 +230,55 @@ The **product** (perps) trades on SynFutures' own venue across [[ethereum|Ethere
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+F is tradable on [[binance|Binance]] as both spot and a USD-margined [[perpetual-futures|perpetual]], exposing full derivatives telemetry: [[funding-rate|funding]], open interest, and liquidations. It is NOT listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue for F. This concentration means execution, depth, and borrow/leverage availability hinge on a single CEX order book; the FUSDT perp is where funding, OI, and liquidation data are actionable. Given F's small-cap size (~#951) and thin book, size positions conservatively — leverage amplifies slippage on a shallow perp, and venue concentration adds tail risk if Binance de-lists or throttles the pair. Spot-plus-perp availability on one venue does enable clean same-venue basis and funding capture without cross-exchange transfer friction.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance FUSDT perp exposes funding; a small-cap DeFi token often carries persistent funding skew that can be harvested delta-neutral against spot.
+- [[cash-and-carry]] — F trades spot + perp on the same venue (Binance), enabling a long-spot / short-perp carry that collects funding with minimal transfer risk.
+- [[crowded-long-funding-fade]] — narrative-driven perp-DEX rotations can crowd longs into F; richly positive funding flags a fade back toward spot.
+- [[liquidation-cascade-fade]] — a thin, high-beta perp is prone to liquidation wicks; fading forced-sell cascades on FUSDT targets the mean-reversion snapback.
+- [[oi-confirmed-trend]] — pairing Binance OI with price confirms whether an F move is real leverage-backed conviction or a squeeze to fade.
+- [[rsi-mean-reversion]] — F is range-bound and volatility-sensitive; oscillator extremes on the FUSDT chart mark reversion entries in quiet tape.
+
+### Volatility & regime character
+
+F is a small-cap, high-beta DeFi/derivatives-infrastructure token with strong directional correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] risk appetite but far larger amplitude. It underperforms majors in sustained risk-off tape and can spike sharply on perp-DEX or long-tail-listing narrative bursts. A heavy FDV overhang (MC/FDV ~0.39) and ongoing emissions cap sustained token upside, so rallies tend to be volatility-driven and mean-reverting rather than durable trends. Expect low-volume drift punctuated by sentiment-led spikes.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading depends on Binance alone; no Hyperliquid fallback, so a listing/liquidity change is a concentrated tail risk.
+- **Thin liquidity** — low market cap and modest volume mean wide slippage and liquidation sensitivity, especially at leverage.
+- **Emissions / dilution** — circulating supply is ~39% of max; ongoing unlocks and emissions are a structural token headwind.
+- **Narrative dependence** — price is tied to perp-DEX / long-tail-listing narratives; when that flow fades, volume and funding activity dry up.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=FUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=F` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=F` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=FUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=F"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

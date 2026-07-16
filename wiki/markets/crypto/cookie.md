@@ -3,13 +3,13 @@ title: "Cookie DAO"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["COOKIE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.cookie.fun/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]"]
 ---
 
 # Cookie DAO
@@ -127,6 +127,57 @@ Cookie DAO is powered by the COOKIE token, which guarantees that Cookie DAO keep
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+COOKIE is tradable on **Binance** — both **spot** (COOKIE/USDT) and a **USD-margined perpetual** future, which exposes funding rates, open interest, and liquidation flow. It is **not** listed on Hyperliquid, so Binance is effectively the **primary leveraged venue**. With a small-cap profile (~$1.9M daily volume) and thin order books, the perp enables leveraged and shorting expression that spot cannot, but leverage on such low liquidity means concentrated positioning; even modest size can move price and trigger cascade liquidations. Execution should assume wide spreads and shallow depth: size conservatively, favor limit/passive fills over market orders, and treat Binance funding/OI as the main real-time positioning signal. Venue concentration on a single leveraged exchange also means funding and liquidation dynamics are dominated by Binance flow.
+
+### Applicable strategies
+
+- [[narrative-trading]] — COOKIE is an AI-agents / InfoFi narrative token; price is driven far more by AI-agent hype cycles than fundamentals, making narrative rotation the dominant driver.
+- [[funding-rate-harvest]] — low-cap perps like COOKIE frequently print stretched funding; harvesting the funding spread while delta-hedging spot vs perp on Binance can be attractive when carry is rich.
+- [[crowded-long-funding-fade]] — bursts of speculative longs on an illiquid AI-agent token often push funding sharply positive, setting up fades of over-leveraged crowded longs.
+- [[liquidation-cascade-fade]] — thin depth plus leverage means down-moves cascade into forced liquidations; fading the overshoot targets the post-cascade mean-reversion bounce.
+- [[rsi-mean-reversion]] — COOKIE's low-liquidity chop produces frequent oversold/overbought extremes on Binance spot that mean-revert intraday.
+- [[breakout-and-retest]] — narrative-driven AI-agent tokens tend to break ranges on catalysts; entering on the retest filters false breakouts common in illiquid names.
+
+### Volatility & regime character
+
+Micro-cap (rank ~1365, single-digit-million cap) with extreme reflexivity typical of narrative memecoin-adjacent AI tokens. It trades as a **high-beta** proxy for the AI-agents / InfoFi narrative rather than as a broad-market asset: it can outperform violently during AI-agent hype phases and bleed persistently in risk-off regimes (note its steep drawdown from ATH). Correlation to BTC/ETH is loose and mostly directional in risk-off; idiosyncratic narrative moves dominate. Expect large intraday swings, low liquidity-driven gap risk, and regime shifts tied to the AI-agent sector cycle.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — very low daily volume and a single dominant leveraged venue (Binance); slippage and thin-book gap risk are material, and any Binance listing/delisting change is an outsized risk.
+- **Emissions / supply** — circulating supply (~782M) is below max supply (~1B); remaining ~22% dilution and any unlock/emission schedule can pressure price.
+- **Narrative dependence** — valuation hinges on the AI-agents / InfoFi narrative staying in favor; sentiment reversals can be swift and severe.
+- **Reflexivity & leverage** — leveraged perp positioning on an illiquid token amplifies liquidation cascades in both directions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=COOKIEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=COOKIEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=COOKIE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=COOKIE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=COOKIEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=COOKIEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=COOKIE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

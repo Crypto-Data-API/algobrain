@@ -3,13 +3,13 @@ title: "AVA (Travala)"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["AVA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.travala.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]"]
 ---
 
 # AVA (Travala)
@@ -131,6 +131,57 @@ What is the project about? AVA plans to tokenise the concept of loyalty reward p
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AVA is tradable on **Binance** — both spot (AVA/USDT) and a **USD-margined perpetual** with funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue and effectively the single source of truth for derivatives positioning. With a ~#1070 market-cap rank and thin 24h volume, order books are shallow relative to large caps: leverage amplifies slippage on entry/exit, funding can swing sharply when directional crowds build against limited liquidity, and position sizing should stay conservative. Because leveraged flow is concentrated on one venue, liquidation clusters and funding extremes there disproportionately drive short-term price, and execution favors limit/scaled orders over market fills to avoid moving the book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance perp funding on a low-liquidity alt can print persistently skewed rates, harvestable delta-neutral via a short perp vs spot long.
+- [[crowded-long-funding-fade]] — thin AVA order books let retail longs overextend into positive funding spikes; fade the crowded side when funding runs hot.
+- [[liquidation-cascade-fade]] — concentrated Binance leverage means stop-runs and forced-selling cascades overshoot; fade the exhaustion wick back toward the mean.
+- [[oi-confirmed-trend]] — rising Binance open interest alongside price confirms genuine leveraged participation versus a low-conviction spot drift on this small cap.
+- [[breakout-and-retest]] — AVA's low FDV/max-supply headroom produces sharp narrative-driven breakouts; the retest filters false moves in a shallow book.
+- [[rsi-mean-reversion]] — small-cap volatility drives frequent overbought/oversold RSI extremes that revert within the coin's broad intraday range.
+
+### Volatility & regime character
+
+AVA is a small-cap ($10M-range) altcoin with high beta to BTC/ETH: it tends to lag on the way up and overshoot on the way down, with liquidity-driven reflexivity that magnifies moves in both directions. It trades ~97% below its 2021 ATH, so price action is dominated by short-term narrative and travel/loyalty utility catalysts rather than sustained trend. Correlation to majors is elevated during risk-off flushes but decouples on idiosyncratic Travala/AVA news. Expect regime shifts between quiet, range-bound drift and sudden volatility bursts.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — leveraged trading centralizes on Binance; a delisting, funding-parameter change, or spot-volume drought would sharply degrade execution and derivatives reliability.
+- **Thin books & slippage** — small 24h volume makes large or leveraged orders costly to fill and easy to get liquidated on volatility spikes.
+- **Supply overhang** — circulating supply (72.16M) is well below the 100M max supply; remaining emissions/unlocks are a latent sell-pressure risk to monitor.
+- **Narrative dependence** — price leans on travel-booking and loyalty-utility adoption; fading interest or broad small-cap risk-off can drain liquidity quickly.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AVAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AVAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AVA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AVA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AVAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AVAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AVA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

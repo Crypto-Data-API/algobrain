@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["KSM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kusama.network/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[polkadot]]", "[[proof-of-stake]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[polkadot]]", "[[proof-of-stake]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crypto-beta-rotation]]", "[[momentum-rotation]]"]
 ---
 
 # Kusama
@@ -258,6 +258,57 @@ Kusama is an early, highly experimental version of Polkadot presenting real econ
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KSM is tradable on [[binance]] — **spot (KSM/USDT)** plus a **USD-margined perpetual**, which is the source of KSM's [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid]], so Binance is effectively the primary leveraged venue for the name. With derivatives concentrated on a single major CEX and a modest ~$5-6M/24h spot cap against a ~$60M market cap, perp open interest is thin and books are shallow. Practically this means: available leverage and depth are dictated by Binance alone, so execution should lean on limit orders and staged fills, position sizing must respect that a single-venue liquidation can move price disproportionately, and any perp-based carry or basis structure carries venue-concentration (counterparty/funding-availability) risk that a multi-venue alt would not.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance USD-M perp funding on a delta-neutral KSM spot-vs-perp book when the small OI produces persistent funding skews.
+- [[cash-and-carry]] — lock the spot/perp spread on KSM while spot is available on Binance and Kraken and the perp trades rich, a clean carry given full circulating supply (no unlock overhang).
+- [[crowded-long-funding-fade]] — thin OI means a burst of leveraged longs into a bounce can spike funding; fade the crowded side when funding overextends.
+- [[liquidation-cascade-fade]] — shallow single-venue books make KSM prone to sharp liquidation wicks; fade the flush and cover into mean reversion.
+- [[crypto-beta-rotation]] — trade KSM as the highest-beta expression of the [[polkadot]] interoperability thesis, rotating in when the L1/DOT complex leads.
+- [[range-mean-reversion]] — deep-drawdown, low-volume KSM often chops in wide ranges; mean-revert the extremes rather than chasing breakouts.
+
+### Volatility & regime character
+
+Small-cap altcoin (rank ~#382, ~$60M cap) and a **high-beta proxy for [[polkadot]]** — an infrastructure/L1 token rather than a memecoin, but with reflexive, low-liquidity price action. KSM is tightly correlated to BTC/ETH direction (it sells off hard in risk-off regimes like the current extreme-fear backdrop) and additionally carries idiosyncratic beta to the Polkadot/DOT ecosystem narrative. Inflationary uncapped supply adds a structural downward drift absent from supply-capped assets.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — perps live essentially only on Binance; thin OI and shallow spot books mean material slippage and outsized liquidation-driven moves.
+- **Inflation/emissions** — uncapped ~10%/yr issuance dilutes un-staked holders, a persistent carry-negative for spot longs (though no discrete unlock cliffs to fade).
+- **Narrative dependence** — value is downstream of Polkadot relevance; KSM re-rates with the DOT/interoperability narrative, not on standalone catalysts.
+- **Regime sensitivity** — as a deep-drawdown small-cap, KSM is acutely exposed to broad risk-off and extreme-fear regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KSMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=KSMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=KSM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=KSM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KSMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=KSMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=KSM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

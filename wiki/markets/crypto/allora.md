@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, machine-learning]
+tags: [ai-trading, crypto, machine-learning, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["ALLO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.allora.network/"
-related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[base]]", "[[bittensor]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[base]]", "[[bittensor]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Allora
@@ -113,6 +113,49 @@ ALLO is an **early-stage infrastructure bet** priced largely on narrative beta. 
 - **Narrative beta.** Price is dominated by the broad [[ai-narrative-arc|AI-narrative cycle]] and overall crypto risk appetite — in an established [[bear-market|bear market]] (F&G 23) these names sell off hard regardless of fundamentals.
 - **Liquidity & venue concentration.** Most depth sits on a few CEX pairs; large orders move the book and exit liquidity can vanish in a risk-off flush.
 - **Competition.** [[bittensor|Bittensor]] and other decentralized-AI networks compete for the same developer and capital mindshare.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** ALLO is tradable on [[binance|Binance]] — both **spot** (ALLO/USDT) and a **USD-margined perpetual**, which surfaces the derivatives toolkit: [[funding-rate|funding]], [[open-interest]], and [[liquidations]]. It is **NOT on [[hyperliquid|Hyperliquid]]**, so Binance is the primary leveraged venue and the single reference point for perp funding/OI. This concentration means leverage, basis, and liquidation flow are all keyed to one book — there is no cross-venue perp to arb against or fall back on for depth. Practically, size perp positions to Binance's ALLO order-book depth (thin for a ~#272-cap name), expect wider slippage on large clips, and treat Binance funding as *the* signal rather than a blended cross-exchange read. Spot depth is spread across Binance, Kraken, Bitget and KuCoin, so cross-exchange execution matters more on the spot leg than on the perp.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — a single Binance USD-M perp lets you collect funding on the crowded side of this high-beta AI-narrative name when the rate runs persistently positive or negative.
+- [[cash-and-carry]] — long Binance spot ALLO vs. short the USD-M perp to lock basis when funding is richly positive, a clean carry given both legs live on one venue.
+- [[crowded-long-funding-fade]] — after ALLO rips on an AI-inference relief bounce, over-extended positive funding and rising OI flag a crowded long to fade.
+- [[liquidation-cascade-fade]] — thin single-venue perp depth makes ALLO prone to sharp liquidation flushes; fading forced-seller exhaustion on capitulation candles is a repeatable setup.
+- [[oi-confirmed-trend]] — pairing Binance OI expansion with price direction helps separate real trend legs from low-conviction chop in a reflexive small-cap.
+- [[narrative-trading]] — ALLO trades as a call option on the decentralized-AI / [[bittensor|Bittensor]]-adjacent inference narrative; rotating with AI-token risk appetite drives most of its moves.
+
+**Volatility & regime character.** Small-cap (~#272), high-beta AI-infrastructure / DePIN-adjacent token. It swings hard in both directions — roughly 8x off its Feb-2026 ATL yet ~75% below its Nov-2025 ATH — with price dominated by the broad AI-narrative cycle and overall crypto risk appetite. Correlation to BTC/ETH is high in risk-off flushes (these names sell off regardless of fundamentals in a bear tape) but can decouple upward on AI-cohort rotation. Expect memecoin-like reflexivity layered on an early-stage infra thesis rather than a fundamentally-anchored large cap.
+
+**Risk flags.**
+- **Venue concentration.** The only verified leveraged venue is Binance; a single-book perp means funding/OI/liquidation signals have no cross-venue confirmation and a Binance outage or delisting removes leverage entirely.
+- **Heavy unlock / emission overhang.** MC/FDV ~0.30 — roughly 765M ALLO (float can ~triple to max supply) unlocks over time, a persistent structural sell-pressure headwind. See [[token-unlocks]] and [[token-unlock-supply-event]].
+- **Narrative dependence.** Price is a leveraged bet on the decentralized-AI narrative; sentiment reversals in the AI cohort hit ALLO disproportionately.
+- **Thin exit liquidity.** Depth sits on a few CEX pairs; large orders move the book and exit liquidity can vanish in a risk-off flush, amplifying perp liquidation cascades.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ALLOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ALLOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ALLO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ALLO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ALLOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ALLOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ALLO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

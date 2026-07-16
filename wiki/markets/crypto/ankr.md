@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, depin]
+tags: [crypto, depin, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins]
 aliases: ["ANKR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.ankr.com/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]"]
 ---
 
 # Ankr Network
@@ -131,6 +131,55 @@ Versus centralized RPC giants (Alchemy, Infura), Ankr's pitch is **decentralized
 - **Hype-cycle exposure** — ANKR is repeatedly retagged under whatever narrative is hot (DePIN, liquid staking, RaaS), which can drive speculative spikes that reverse hard, especially in an extreme-fear regime.
 - **Bear-market beta** — as a low-cap altcoin it carries high beta to overall crypto risk-off moves; the current "Established Bear Market" backdrop is a headwind.
 - **No unlock overhang** is a positive, but the flip side is no emissions-driven incentive flywheel to bootstrap new demand.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ANKR is tradable on **Binance** as both a **spot** market (ANKR/USDT) and a **USD-margined perpetual**, giving it funding, open interest and liquidation data — Binance is the **primary leveraged venue** for the name. It is **not** listed on [[hyperliquid|Hyperliquid]]. Because the perp is USD-M on a single dominant venue, execution and sizing are constrained: leveraged flow, funding and liquidation cascades all concentrate on Binance, so there is no cross-venue perp depth to disperse impact. Combined with a thin spot float (a low-cap token where daily turnover is small relative to cap), this means leverage should be modest, orders worked with limit/VWAP-style execution, and position sizes kept well inside available book depth to avoid slippage and liquidation-driven gaps.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single-venue Binance USD-M perp lets a delta-neutral book collect funding on ANKR when the perp trades at a persistent premium/discount to spot.
+- [[cash-and-carry]] — hold Binance spot ANKR against a short perp to capture basis/funding cleanly, exploiting the fact that spot and perp sit on the same venue.
+- [[liquidation-cascade-fade]] — thin liquidity plus concentrated Binance leverage makes ANKR prone to sharp liquidation wicks that overshoot and mean-revert, offering fade entries.
+- [[oi-confirmed-trend]] — Binance open-interest changes confirm whether an ANKR move is leverage-driven and sustainable versus a squeeze likely to reverse.
+- [[narrative-trading]] — ANKR re-rates on DePIN / liquid-staking / RaaS narrative rotation rather than fundamentals, rewarding positioning around theme cycles.
+- [[rsi-mean-reversion]] — as a range-bound, deep-below-ATH low-cap, ANKR frequently reverts from oscillator extremes within its trading band.
+
+### Volatility & regime character
+
+ANKR is a **small-cap DePIN / Web3-infrastructure altcoin** with high beta to broad crypto risk-on/risk-off moves and strong directional correlation to BTC/ETH. It is not a memecoin but exhibits reflexive, narrative-driven spikes (DePIN, liquid staking, RaaS retagging) that tend to mean-revert. With a fully circulating supply and no emission flywheel, price action is demand- and sentiment-led; in the current risk-off regime it behaves as a mean-reverting, range-bound low-cap punctuated by beta-driven trend legs.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin spot turnover and leveraged flow concentrated on Binance; large orders move price and stressed exits are costly with no alternative perp venue for depth.
+- **Narrative dependence** — re-rates on hot-theme retagging rather than usage; speculative spikes reverse hard, especially in extreme-fear conditions.
+- **Commoditization / demand risk** — RPC/node access is a low-margin, heavily competed product, capping fundamental fee-capture that would anchor valuation.
+- **High altcoin beta** — outsized drawdowns in broad crypto risk-off; leverage amplifies liquidation risk given single-venue concentration.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ANKRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ANKRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ANKR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ANKR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ANKRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ANKRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ANKR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

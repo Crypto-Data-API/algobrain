@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["ACX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://across.to/"
-related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[smart-contract-risk]]", "[[uma]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[smart-contract-risk]]", "[[uma]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Across Protocol
@@ -217,6 +217,57 @@ Cross-chain bridges are one of the single largest sources of loss in crypto — 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ACX is tradable on [[binance]] as both **spot** (ACX/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, which brings [[funding-rate|funding]], [[open-interest]], and [[liquidations|liquidation]] data into play. It is **not** listed on Hyperliquid, so Binance is effectively the primary — and largely only — deep leveraged venue. This concentration means the Binance perp order book and funding define price discovery for leveraged flow; there is no meaningful cross-venue perp to arbitrage against, so execution and position sizing should assume thin depth. As a sub-$30M-cap, low-volume small-cap (24h volume in the low single-digit millions), leverage amplifies slippage and gap risk: large orders move the book, and stops/liquidations can chain quickly. Size positions to a fraction of visible depth, favor limit fills over market orders, and treat available max leverage as far higher than what liquidity actually supports.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance is the sole liquid perp venue for ACX, so persistent long-biased funding on this thin small-cap can be harvested by holding spot and shorting the perp to collect the rate.
+- [[cash-and-carry]] — with both Binance spot and USD-M perp available, a delta-neutral spot-long / perp-short carry captures basis when the perp trades at a premium during momentum bursts.
+- [[liquidation-cascade-fade]] — the low-liquidity ACX perp produces sharp, over-extended liquidation wicks; fading forced-liquidation flushes back toward VWAP is a repeatable edge on this venue-concentrated book.
+- [[rsi-mean-reversion]] — as a low-cap infra/DeFi token that chops in wide ranges absent a catalyst, oversold/overbought RSI extremes on ACX tend to revert.
+- [[breakout-and-retest]] — narrative or bridge-volume catalysts can break ACX out of long bases; entering on the retest filters the many false breaks typical of an illiquid small-cap.
+- [[oi-confirmed-trend]] — because Binance is the only real OI source, rising open interest alongside price is a cleaner-than-usual confirmation that a directional ACX move has genuine leveraged participation behind it.
+
+### Volatility & regime character
+
+ACX is a **small-cap infrastructure/DeFi governance token** (cross-chain bridge sector) with high beta to BTC/ETH and to broad risk-on/risk-off regime shifts. It trades ~97% below its 2024 ATH and behaves like a discretionary-liquidity altcoin: quiet, range-bound drift punctuated by sharp reflexive moves on bridge-sector narrative, DeFi rotation, or broad-market volatility. Correlation to majors is high on the downside (it sells off with the market) but decorrelates to the upside only on bridge/intents-specific catalysts. Realized volatility is elevated relative to large-caps, and thin liquidity makes moves gap-prone.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — leveraged trading is concentrated on Binance with no Hyperliquid alternative; low 24h volume means slippage, wide spreads, and liquidation-driven gaps are material execution risks.
+- **Emissions / supply overhang** — circulating supply (~704M) is well below the 1.00B max, so future unlocks/emissions to LPs, relayers, and treasury are a persistent supply-side headwind for price.
+- **Narrative dependence** — ACX is largely a claim on governance and future fee-direction rather than hard cash flow; price leans heavily on bridge/intents-sector narrative and DeFi rotation, which can evaporate quickly.
+- **Protocol / bridge risk** — as a cross-chain bridge token, adverse events (optimistic-oracle failure, HubPool exploit, governance compromise; see Risks) can trigger abrupt, hard-to-hedge repricing on the thin perp.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ACXUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ACXUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ACX` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ACX` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ACXUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ACXUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ACX"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

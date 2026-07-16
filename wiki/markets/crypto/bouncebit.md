@@ -3,13 +3,13 @@ title: "BounceBit"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["BB"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bouncebit.io/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # BounceBit
@@ -122,6 +122,55 @@ BounceBit is a CeDeFi infrastructure project and EVM-compatible Layer 1 blockcha
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BB is tradable on **Binance** — both **spot** and a **USD-margined perpetual** (BBUSDT), which exposes funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue**. Because leveraged flow is concentrated on a single perp venue with a low market cap (~#1311) and thin 24h volume, order books are shallow and the perp funding/OI signal is dominated by Binance positioning. Practically, this means execution should assume meaningful slippage on larger clips, position sizing must be conservative, and there is no cross-venue perp to hedge or arb the leveraged leg against — any spot/perp basis play must route through Binance itself. Liquidation cascades can be sharp given the concentrated leverage and shallow depth.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect BB perp funding on Binance when the single-venue perp runs persistently one-sided against spot.
+- [[crowded-long-funding-fade]] — low-cap restaking token prone to speculative long crowding; fade extended positive funding into mean reversion.
+- [[cash-and-carry]] — hold Binance spot BB against a short BBUSDT perp to capture positive basis when funding is elevated.
+- [[liquidation-cascade-fade]] — thin depth plus concentrated leverage produces overshoot liquidations; fade the flush and reclaim.
+- [[oi-price-exhaustion]] — use Binance open-interest divergence versus price to flag exhausted moves in a low-liquidity name.
+- [[token-unlock-supply-event]] — large locked supply (MC/FDV ~0.19) means scheduled unlocks are tradable supply overhangs.
+
+### Volatility & regime character
+
+BB is a small-cap CeDeFi / restaking infrastructure token with high realized volatility and strong reflexivity typical of low-float, low-liquidity alts. It trades as a high-beta play on BTC/ETH risk-on regimes but is heavily narrative-driven (RWA / CeDeFi / restaking, BounceBit Prime), so idiosyncratic catalysts can decouple it from majors. Directional moves tend to be exaggerated by thin books, and correlation to BTC/ETH tightens during broad market stress.
+
+### Risk flags
+
+- **Liquidity & venue concentration:** thin 24h volume and leverage concentrated on Binance's single perp — slippage and cascade risk are elevated.
+- **Unlocks & emissions:** MC/FDV ratio ~0.19 implies substantial locked supply; unlock schedules are a persistent dilution/overhang risk.
+- **Narrative dependence:** valuation hinges on the RWA/CeDeFi/restaking narrative and institutional integrations; sentiment shifts can drive outsized drawdowns.
+- **Regulatory:** RWA and tokenized-securities exposure (via custody/Securitize partners) carries regulatory sensitivity that can affect the token.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BBUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BBUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BB` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BB` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BBUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BBUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BB"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

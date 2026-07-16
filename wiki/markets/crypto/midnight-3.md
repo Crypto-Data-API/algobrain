@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["Midnight Network", "NIGHT"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized"
 website: "https://midnight.network/"
-related: ["[[binance]]", "[[bitcoin]]", "[[cardano]]", "[[crypto-markets]]", "[[kraken]]"]
+related: ["[[binance]]", "[[bitcoin]]", "[[cardano]]", "[[crypto-markets]]", "[[kraken]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[cash-and-carry]]"]
 ---
 
 # Midnight
@@ -284,6 +284,55 @@ Note the ATH and ATL printed on the same day (2025-12-09) — listing-day volati
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NIGHT is tradable on [[binance|Binance]] — both spot (NIGHT/USDT) and a USD-margined perpetual (with [[funding-rate|funding]], [[open-interest|open interest]] and [[liquidations]]). It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue and the reference point for perp funding, OI and liquidation data. This single-venue concentration for leverage means execution and sizing hinge on Binance depth: with only mid-cap spot liquidity behind the perp (volume is thin versus top-50 names and reflexive in drawdowns), leverage should be modest and orders scaled to avoid slippage. Cross-exchange spot depth (Kraken, OKX, KuCoin, Bitpanda) supports the cash-and-carry/basis leg, but the perp-vs-spot basis and funding will be dominated by Binance flow. Wide funding swings and cascade-driven liquidations are likely given the thin, narrative-driven float, so account for gap risk when sizing.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding when NIGHT's crowded, narrative-driven positioning pushes funding persistently positive or negative.
+- [[cash-and-carry]] — hedge long spot against the Binance USD-M perp to monetise basis/funding on a supply-overhang token where directional risk is unattractive.
+- [[liquidation-cascade-fade]] — fade forced-liquidation flushes on a thin, reflexive float where cascades overshoot before mean-reverting.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm whether a NIGHT move is real positioning or a low-conviction wick.
+- [[narrative-trading]] — trade the ZK-privacy / Cardano-ecosystem narrative and regulator-crackdown relative tailwinds that drive NIGHT's largest moves.
+- [[token-unlock-supply-event]] — position around Glacier Drop thaw/redemption milestones that inject sellable supply through 2026-12-04.
+
+### Volatility & regime character
+
+Small/mid-cap (rank ~#104) high-beta L1 with strong narrative reflexivity — moves sharply on ZK-privacy and [[cardano|Cardano]]-ecosystem headlines and correlates broadly to BTC/ETH risk appetite while amplifying it on the downside. As an infra/privacy token with a massive airdrop float (8M+ wallets, zero cost basis) and an active thaw schedule, realised volatility is elevated and depth thins fast in risk-off tape, giving it memecoin-like reflexivity despite an infrastructure thesis.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — Binance is the sole significant leveraged venue and spot depth is thin; slippage and gap risk are material.
+- **Unlocks/emissions** — Glacier Drop thaw runs to 2026-12-04 (plus 90-day grace); latent airdrop supply is a persistent overhang and the dominant trader-facing risk.
+- **Narrative dependence** — price is driven by privacy/ZK and Cardano-ecosystem narrative rather than cash flows; sentiment reversals are abrupt.
+- **Regulatory** — categorised with [[privacy-coins|privacy coins]]; EU AMLR privacy-asset restrictions (due July 2027) and shifting exchange policy pose listing/jurisdiction risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=NIGHTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=NIGHTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=NIGHT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=NIGHT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=NIGHTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=NIGHTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=NIGHT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

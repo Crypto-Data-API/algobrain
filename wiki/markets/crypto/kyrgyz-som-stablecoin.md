@@ -3,13 +3,13 @@ title: "Kyrgyz Som Stablecoin"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, stablecoins]
 aliases: ["KGST"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.kgstoken.kg/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # Kyrgyz Som Stablecoin
@@ -116,6 +116,52 @@ By combining the stability of the national currency with the benefits of blockch
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KGST is a peg-tracking stablecoin traded on [[binance]] (KGST/USDT). As a cash-management / peg instrument, it is **not a directional asset** — the trading thesis centers on peg stability, backing/reserves, depeg risk, and yield/arbitrage rather than momentum. Liquidity is concentrated on a single centralized venue, so execution and sizing are constrained by that venue's order-book depth: large orders can move the quoted price away from parity, and thin books amplify slippage during redemption or reserve stress. Leverage is inappropriate here — the expected return distribution is asymmetric (tight upside near parity, sharp downside on a depeg), so position sizing should assume single-venue availability and limited exit liquidity.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — accumulate below parity when KGST trades under its peg on Binance, targeting mean reversion if backing holds.
+- [[stablecoin-pair-arbitrage]] — exploit price gaps between KGST/USDT and other stablecoin pairs when the quote drifts from 1:1.
+- [[mint-parity-arbitrage]] — arbitrage the spread between secondary-market price and issuer mint/redeem parity where the redemption channel is accessible.
+- [[stablecoin-yield]] — deploy idle KGST into yield venues to earn carry while the peg is stable, treating it as a cash-equivalent position.
+- [[synthetic-stablecoin-depeg-arbitrage]] — hedge or replicate KGST exposure synthetically to capture depeg dislocations without direct redemption access.
+
+### Volatility & regime character
+
+Under normal conditions KGST trades in a very tight band around its peg, with intraday range compressed near parity and minimal directional drift. Regime character is defined by peg tightness rather than trend: the relevant "volatility" is the frequency and depth of deviations from parity. The backing model (fiat-backed, 1:1 reserves) and redemption mechanics determine how quickly the price snaps back after stress. The key regime shift to watch for is a **depeg episode** — a discontinuous move away from parity driven by reserve doubts, redemption gating, or liquidity withdrawal — which behaves very differently from the calm baseline.
+
+### Risk flags
+
+- **Depeg risk** — the primary trading risk; a break from parity can be sharp and asymmetric, with limited recovery if backing is impaired.
+- **Reserve/backing transparency** — returns depend on the credibility and auditability of reserves; opaque or unverified backing raises tail risk.
+- **Redemption gating** — issuer may pause, delay, or restrict mint/redeem, breaking the arbitrage mechanism that anchors the peg.
+- **Single-venue / liquidity risk** — concentration on one exchange means execution and exit depend on that venue's continued availability and depth.
+- **Regulatory** — stablecoins face evolving regulatory scrutiny that can affect listing, redemption, and convertibility.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KGSTUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=KGSTUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KGSTUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=KGSTUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

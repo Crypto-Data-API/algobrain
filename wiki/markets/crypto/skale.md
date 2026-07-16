@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["SKL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://skale.space/"
-related: ["[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[proof-of-stake]]", "[[sequencer]]", "[[smart-contracts]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[proof-of-stake]]", "[[sequencer]]", "[[smart-contracts]]", "[[staking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # SKALE
@@ -209,6 +209,56 @@ SKALE's positioning is heavily weighted toward **gaming and consumer application
 - **2026** — SKL set an all-time low of $0.00563803 (2026-03-29) amid the broad bear regime; trading $0.00410887 as of 2026-06-22.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SKL is tradable on [[binance]] — spot (SKL/USDT) plus a **USD-margined perpetual** with the full derivatives stack: [[funding-rate|funding]], [[open-interest]], and [[liquidations]]. It is **not** listed on Hyperliquid, so Binance is the primary — effectively the sole major — leveraged venue for SKL. That concentration means the Binance perp order book and funding basis define price discovery for leveraged flow; there is little cross-venue perp arbitrage to smooth mispricings. With a ~$25M market cap and thin spot depth (~$5.63M 24h volume), the perp is where most directional and carry activity clusters. Practically: available leverage is capped and tiered by Binance, and thin spot books mean large orders should be worked via VWAP/TWAP rather than sent as market orders. Position sizing must respect low resting liquidity — slippage and funding both scale up fast in a small-cap like this, and a single venue failure or delisting is a concentrated execution risk.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the Binance SKL-PERP when the basis is persistently positive, the main structural carry available given single-venue listing.
+- [[crowded-long-funding-fade]] — SKL's low float and narrative-driven pumps produce crowded longs and stretched positive funding that fade well into mean reversion.
+- [[liquidation-cascade-fade]] — thin books plus leverage make SKL prone to sharp liquidation flushes that overshoot; fading the cascade into support can capture the snapback.
+- [[oi-confirmed-trend]] — pairing Binance open-interest builds with price moves filters real trend from illiquid noise in a small-cap like SKL.
+- [[rsi-mean-reversion]] — in the low-momentum, range-bound regime SKL trades in (~99% below ATH), oscillator-based reversion around extremes fits better than trend chasing.
+- [[breakout-and-retest]] — narrative/gaming catalysts can trigger clean breakouts; requiring a retest filters the frequent false breaks in a thin book.
+
+### Volatility & regime character
+
+SKL is a small-cap (rank ~#700s, ~$25M mcap) infrastructure/gaming-utility token with **high beta to BTC/ETH** and amplified downside in risk-off regimes. It carries partial memecoin-like reflexivity via its gaming/consumer narrative — low float and thin liquidity mean sentiment-driven pumps and dumps are exaggerated relative to majors. Realized volatility is high but momentum is structurally weak (deep, persistent drawdown from ATH), so moves are often mean-reverting rather than trending. In broad bear regimes it tends to underperform and de-rate faster than large-caps.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — Binance is the primary/only major leveraged venue; thin spot depth means real slippage and outsized exposure to a single exchange's uptime, funding, and listing decisions.
+- **Emissions/supply overhang** — max supply 7.0B vs ~6.09B circulating with staking-driven issuance; ongoing emissions add sell pressure that weighs on price.
+- **Narrative dependence** — value accrual relies on developer subscriptions and the gaming/consumer-app narrative; without adoption catalysts, demand and price decay.
+- **Weak value accrual** — the gasless model provides no per-transaction fee sink, structurally weakening token demand versus fee-burning peers.
+- **Small-cap fragility** — deep ATH drawdown and low momentum leave SKL vulnerable to further de-rating and liquidity air-pockets.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SKLUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SKLUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SKL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SKL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SKLUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SKLUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SKL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

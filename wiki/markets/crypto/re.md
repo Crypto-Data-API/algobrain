@@ -3,13 +3,13 @@ title: "RE"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, stablecoins, defi]
 aliases: ["RE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://re.xyz/home"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # RE
@@ -129,6 +129,54 @@ Re is an internet-native marketplace for insurance capital. It connects eligible
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RE trades as a USD-pegged stablecoin, with primary centralized liquidity on [[binance]] (RE/USDT). It is a PEG / cash-management instrument, NOT a directional asset — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage rather than momentum or trend. Because a stablecoin's fair value is anchored near 1.00, position sizing is governed by peg tightness and redemption confidence rather than volatility targeting; leverage is generally inappropriate except for tight, mean-reverting peg-arbitrage legs. Venue availability shapes execution: consolidated flow on Binance concentrates spot depth and keeps quoted spreads narrow during calm regimes, so large redemptions or arbitrage sizing should account for single-venue depth and the risk of thinning liquidity during depeg stress.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy RE below par during a depeg episode and capture the reversion as the peg is restored.
+- [[stablecoin-pair-arbitrage]] — arbitrage RE against other USD stablecoins when its price diverges from 1.00 on Binance.
+- [[stablecoin-yield]] — deploy RE into on-chain or venue yield venues as a cash-management leg while holding near par.
+- [[mint-parity-arbitrage]] — exploit gaps between the secondary-market RE price and its mint/redeem parity through the issuer's collateral mechanism.
+- [[delta-neutral-yield-farming]] — pair RE liquidity provision or lending with an offsetting hedge to harvest yield with minimal directional exposure.
+- [[carry-trade]] — fund positions with RE's peg-stable value to capture rate/yield differentials across venues.
+
+### Volatility & regime character
+
+As a USD-pegged instrument, RE's regime character is defined by peg tightness rather than trend. In normal conditions price should oscillate in a narrow band around 1.00, with volatility clustering only around depeg events driven by redemption pressure, backing/collateral concerns, or venue-specific liquidity gaps. Regime shifts are discrete (pegged vs. depegged) rather than continuous, and the key qualitative inputs are the backing model, the transparency of reserves, and the reliability of redemption/mint mechanics that enforce parity.
+
+### Risk flags
+
+- **Depeg risk** — a break from 1.00 can be sharp and, depending on backing, may not fully revert; peg-reversion trades carry tail risk.
+- **Reserve/backing transparency** — the strength of the peg depends on collateral quality and how verifiably reserves are disclosed; opacity raises depeg probability.
+- **Redemption gating** — restrictions, delays, or eligibility limits on mint/redeem can trap arbitrage capital and widen secondary-market dislocations.
+- **Regulatory** — stablecoin issuance and redemption are subject to evolving regulation that can affect availability, redeemability, and venue access.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=REUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=REUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=REUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=REUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

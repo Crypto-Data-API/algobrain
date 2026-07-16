@@ -3,13 +3,13 @@ title: "My Neighbor Alice"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, nft]
+status: review
+tags: [crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["ALICE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.myneighboralice.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]", "[[narrative-trading]]"]
 ---
 
 # My Neighbor Alice
@@ -133,6 +133,53 @@ The game appeals to all ages and genders, promotes cooperation over competition.
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ALICE is tradable on **Binance** — both **spot** (ALICE/USDT) and a **USD-margined perpetual** contract that exposes funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** and the reference source for derivatives signals. As a small-cap (~rank #1073) GameFi token with modest 24h volume, the perp is the deepest place to size leveraged exposure, but order books are thin relative to majors: large market orders slip, funding can swing sharply, and clustered liquidations move price quickly. Because leveraged flow concentrates on a single venue, execution should lean on limit orders, scaled entries, and conservative position sizing; spot liquidity across Binance/Kraken/KuCoin/Bitget/Crypto.com supports the unlevered leg of any basis or carry structure.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single-venue Binance perp lets you collect funding when ALICE longs crowd in during GameFi/NFT narrative pushes.
+- [[crowded-long-funding-fade]] — small-cap rallies on thin books often over-extend long positioning, giving a funding-extreme fade setup on the ALICE perp.
+- [[liquidation-cascade-fade]] — thin liquidity means stop and liquidation clusters can cascade far past fair value, offering mean-revert entries after forced selling.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price direction helps separate genuine breakouts from low-conviction chop in a low-cap name.
+- [[narrative-trading]] — ALICE trades on GameFi/metaverse/NFT narrative cycles, so exposure is best timed to sector momentum rather than held passively.
+- [[breakout-and-retest]] — after long basing periods near lows, confirmed breakout-and-retest structures reduce false-signal risk on this volatile small-cap.
+
+### Volatility & regime character
+
+ALICE is a **small-cap GameFi/NFT/metaverse governance token** with high realized volatility and pronounced reflexivity to sector narrative rather than fundamentals. It carries high beta to BTC/ETH risk cycles and tends to amplify moves during broad crypto risk-on/risk-off swings, while under-performing in prolonged bear phases (it sits roughly 99% below its 2021 ATH). Regime behavior is bursty: long, quiet drift near lows punctuated by sharp narrative- or liquidity-driven spikes, so trend and breakout signals only work when confirmed by volume and open interest.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — thin order books and a single dominant leveraged venue (Binance) mean slippage, gap risk, and funding whipsaws; avoid outsized leverage.
+- **Narrative dependence** — price is driven by GameFi/metaverse/NFT sentiment cycles; exposure decays fast when the narrative cools.
+- **Small-cap fragility** — low market cap and volume make ALICE vulnerable to sharp drawdowns and liquidation cascades on relatively small flow.
+- **Supply/circulation** — near-fully-circulating supply limits unlock overhang, but any emissions or treasury movements should be monitored for supply-side pressure.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ALICEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ALICEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ALICE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ALICE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ALICEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ALICEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ALICE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ## See Also
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, derivatives, margin]
+tags: [crypto, derivatives, margin, stablecoins, defi]
 aliases: ["BFUSD", "Binance BFUSD"]
 entity_type: protocol
 founded: 2024
 headquarters: "Binance (centralized product)"
 website: "https://www.binance.com/en/bfusd"
-related: ["[[binance]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[ethena]]", "[[funding-rates]]", "[[other-stablecoins]]", "[[stablecoin-yields]]", "[[stablecoins]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[ethena]]", "[[funding-rates]]", "[[other-stablecoins]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[stablecoin-yield]]", "[[carry-trade]]", "[[delta-neutral-yield-farming]]"]
 ---
 
 # BFUSD
@@ -195,6 +195,51 @@ Net: BFUSD is **not riskless interest**. It is a basis-trade-backed margin asset
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BFUSD is a USD-pegged instrument traded on [[binance|Binance]]. It is a **PEG / cash-management instrument, NOT a directional asset** — the relevant questions are peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Practically, BFUSD is a closed-loop Binance product: conversion happens within the platform (BFUSD/USDT) and there is no meaningful external CEX or DEX market, so it cannot be shorted or arbitraged off-venue. Because leverage on the asset itself makes no sense (there is no directional upside), sizing is a function of counterparty/venue exposure and redemption capacity rather than price volatility. Thin on-venue volume means large positions clear only through mint/redeem against deposits, not open-market trades — venue availability, being single-exchange, therefore dictates both execution and the maximum size you can unwind without waiting on redemption.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — BFUSD has traded a real, non-zero band (~$0.997-$1.007); buying below par into a redeemability peg captures the mean-reversion to $1.00.
+- [[stablecoin-yield]] — BFUSD's core purpose is yield on idle futures margin (ETH staking + funding capture), so holding it is itself a native carry position on Binance perp funding.
+- [[delta-neutral-yield-farming]] — BFUSD is backed by a long-spot/short-perp delta-neutral book; the same construction can be replicated or offset to isolate the funding component.
+- [[carry-trade]] — the APR is a funding-rate carry; BFUSD supply and APR act as a readable proxy for aggregate Binance funding conditions.
+- [[synthetic-stablecoin-depeg-arbitrage]] — as a synthetic (basis-trade-backed) dollar rather than a fiat-reserve stablecoin, BFUSD depeg risk is tied to funding inversion and can be arbitraged against its redemption value.
+
+### Volatility & regime character
+
+Peg is tight but managed, not reserve-attested: BFUSD's all-time range is roughly $0.997-$1.007 (under ~1% peak-to-trough across its history), consistent with a tightly-managed redeemability peg rather than a directional token. Backing is a delta-neutral portfolio (long staked/spot crypto vs. short perpetual futures) plus a Binance-funded reserve fund; redemption is mint/redeem against deposits within Binance. The regime that stresses the peg is a **funding-inversion / bear-market** environment, where sustained negative funding turns the carry negative and drains the reserve buffer — precisely when APR falls and supply contracts.
+
+### Risk flags
+
+- **Depeg risk** — redeemability peg only; observed sub-par prints (as low as ~$0.997) confirm the band is narrow but non-zero.
+- **Reserve/backing transparency** — closed-loop Binance liability with no external custody attestation comparable to a regulated fiat stablecoin; backing quality depends on funding staying net-positive and the reserve fund holding.
+- **Redemption gating** — redemption depends entirely on Binance solvency and operations; there is no external market to exit into if on-platform redemption is paused or restricted.
+- **Regulatory** — a high-yield synthetic-dollar margin product (explicitly branded "not a stablecoin") sits in an evolving regulatory perimeter for yield-bearing dollar instruments.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BFUSDUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=BFUSDUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BFUSDUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=BFUSDUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

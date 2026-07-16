@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, defi, restaking]
+tags: [bitcoin, crypto, defi, restaking, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BARD", "LBTC", "Lombard Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lombard.finance/"
-related: ["[[babylon]]", "[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[defi]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]"]
+related: ["[[babylon]]", "[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[defi]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Lombard
@@ -246,6 +246,56 @@ Lombard is building onchain Bitcoin capital markets to unlock the full potential
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BARD is tradable on [[binance|Binance]] as both **spot** (BARD/USDT) and a **USD-margined perpetual**, so leveraged flow (funding, open interest, liquidations) is concentrated on a single primary venue. BARD is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the only meaningful leveraged venue — there is no deep second perp book to arbitrate against or to absorb size. With a sub-$100M cap and modest spot volume, the perp is the main source of intraday leverage; funding and OI can swing sharply on relatively small notional. Practically, this means: execution and sizing should assume thin depth and wide slippage on aggressive orders, size positions to the Binance book specifically, and treat funding/OI as venue-concentrated signals rather than market-wide ones. Cross-venue spot arbitrage exists (Upbit, Bitget, KuCoin, Uniswap V3) but the derivatives picture is Binance-centric.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on BARD's Binance USD-M contract when funding runs persistently positive/negative in a low-cap that lacks an offsetting perp venue.
+- [[crowded-long-funding-fade]] — after a BARD bounce fuels crowded longs and rich positive funding, fade the over-leveraged side into the single Binance book.
+- [[liquidation-cascade-fade]] — BARD's thin depth and one-venue perp make forced-liquidation flushes overshoot; fade capitulation wicks near the all-time-low zone.
+- [[oi-price-exhaustion]] — rising Binance open interest against a stalling BARD price flags exhausted leverage and a squeeze setup in a supply-overhang token.
+- [[token-unlock-supply-event]] — with only ~33% of supply circulating, scheduled BARD unlocks create predictable dilution/supply events to position around.
+- [[range-mean-reversion]] — BARD chops in a tight low-cap range just above its ATL; fade extremes back toward the range mid.
+
+### Volatility & regime character
+
+BARD is a **small-cap DeFi / BTCfi governance token** (rank ~508, sub-$100M cap) with high beta and reflexive, low-liquidity price action — sharp drawdowns (~90%+ from ATH) and thin bounces. As a governance/incentive claim it is **narrative-driven** (BTCfi / Bitcoin liquid-staking adoption) rather than a direct BTC proxy: it broadly correlates with [[bitcoin|BTC]]/[[ethereum|ETH]] risk sentiment but its idiosyncratic swings track LBTC TVL, unlock schedules, and BTCfi-narrative flow. Expect large-cap-driven regime shifts to amplify in BARD due to its small float and single leveraged venue.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leverage lives almost entirely on Binance; no Hyperliquid perp means limited redundancy and higher slippage/liquidation-gap risk.
+- **Unlocks / emissions** — ~two-thirds of max supply still to unlock is a persistent dilution headwind for the BARD token.
+- **Narrative dependence** — value is tied to BTCfi adoption and LBTC growth; if the "productive BTC" narrative cools, BARD can stay bid-less.
+- **Depeg / protocol linkage** — BARD sentiment is sensitive to any LBTC depeg, consortium-custody, or slashing event even though BARD itself is not BTC-backed.
+- **Thin sentiment / drawdown regime** — trading near ATL in an established bear market with 0% CoinGecko positive sentiment; low-liquidity reversals can be violent in both directions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BARDUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BARDUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BARD` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BARD` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BARDUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BARDUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BARD"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

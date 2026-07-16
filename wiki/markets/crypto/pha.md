@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["PHA", "PHALA", "Phala"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://phala.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polkadot]]", "[[smart-contracts]]", "[[trusted-execution-environment]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[polkadot]]", "[[smart-contracts]]", "[[trusted-execution-environment]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Phala Network
@@ -207,6 +207,56 @@ PHA holders govern the protocol. With Phala's Polkadot/Substrate heritage, gover
 - **Small-cap volatility & drawdown:** at ~$33M market cap (rank #607) and down ~97% from ATH, PHA is volatile and thinly traded; large orders can move price materially.
 
 > Not investment advice. Figures are point-in-time; verify project, on-chain, and TEE-security claims independently.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PHA is tradable on [[binance|Binance]] — both **spot** (PHA/USDT) and a **USD-margined perpetual** (PHAUSDT) that exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **not** listed on Hyperliquid, so Binance is the primary — effectively sole major — leveraged venue for PHA. This concentration means the Binance perp order book and funding print set the reference for leveraged positioning; there is no deep secondary perp venue to arbitrage against or to absorb flow during stress. With a ~#834 market-cap rank and thin spot depth (24h volume in the single-digit millions), leverage should be sized conservatively: even modest perp OI can dominate real spot liquidity, so cascades and funding swings are amplified and slippage on larger clips is material. Execution favors patient, liquidity-aware entries (limit/VWAP) over aggressive market orders, and position sizing should assume the Binance venue is a single point of failure for both price discovery and exit.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest the Binance PHAUSDT perp funding stream (delta-hedged spot vs perp) when the small-cap tends to run persistently positive on narrative-driven rallies.
+- [[crowded-long-funding-fade]] — fade over-crowded longs when AI/DePIN-narrative pumps push PHA perp funding richly positive against thin spot support.
+- [[cash-and-carry]] — capture spot-perp basis by holding Binance spot PHA against a short perp when the term structure and funding pay to carry.
+- [[liquidation-cascade-fade]] — the thin, single-venue leverage profile makes forced-liquidation flushes overshoot; fade the wick once the cascade exhausts.
+- [[oi-confirmed-trend]] — use Binance perp open-interest changes to confirm whether a PHA move is real leveraged conviction or an unbacked spot squeeze.
+- [[narrative-trading]] — PHA is highly reflexive to the confidential-compute / AI-agent / DePIN narrative; trade the narrative cycle around catalysts.
+
+### Volatility & regime character
+
+Small-cap infrastructure/DePIN token (~#834, ~$33M cap) with high beta to BTC/ETH risk regimes and pronounced drawdown behavior (down ~97% from its 2021 ATH). Not a memecoin, but strongly **narrative-reflexive** — price is disproportionately sensitive to the AI-agent / confidential-compute story and to broad small-cap risk-on/risk-off rotation. Expect low baseline liquidity, sharp sentiment-driven spikes, and correlation to majors that tightens during risk-off flushes and loosens during idiosyncratic narrative pumps.
+
+### Risk flags
+
+- **Venue concentration:** Binance is the only major leveraged venue (no Hyperliquid); a single-venue outage, delisting, or liquidity gap has outsized impact on price discovery and exits.
+- **Thin liquidity:** low spot depth relative to perp OI means slippage, wick risk, and liquidation cascades are amplified; large orders move price materially.
+- **Narrative dependence:** valuation hinges on the AI/DePIN compute story; sentiment reversals can drive sharp, fundamentals-independent selloffs.
+- **Emissions vs. real demand:** the staking-and-emissions loop only accrues value if paid compute demand materializes; absent it, rewards are recycled inflation (dilution pressure on price).
+- **Hardware-trust / ecosystem risk:** TEE hardware-vendor dependency and Polkadot-ecosystem/bridge exposure add tail risks that can trigger abrupt repricing.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PHAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PHAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=PHA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=PHA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PHAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=PHAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=PHA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

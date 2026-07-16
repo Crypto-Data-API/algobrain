@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["ORCA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.orca.so/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[impermanent-loss]]", "[[meteora]]", "[[solana]]", "[[yield-farming]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[impermanent-loss]]", "[[meteora]]", "[[solana]]", "[[yield-farming]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Orca
@@ -256,6 +256,55 @@ Orca strives to provide easy and effective financial tools for everyone, bringin
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ORCA is tradable on [[binance|Binance]] — **spot (ORCA/USDT)** plus a **USD-margined perpetual**, which brings live [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data to what is otherwise a spot-led, on-chain-native name. It is **NOT listed on Hyperliquid**, so Binance is effectively the primary leveraged venue for ORCA. With market-cap rank ~326 and modest daily turnover, order-book depth on the perp is thin relative to majors: leverage is available but slippage and funding whipsaw scale up fast on size. Practically, this means position sizing should stay small relative to visible book depth, entries/exits benefit from limit orders and VWAP-style execution rather than market sweeps, and any basis/carry trade depends on the single Binance perp for the short leg (concentration risk if that listing's liquidity dries up).
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the lone Binance perp on a mid-cap DeFi token can run persistently one-sided funding; collect the carry while delta-hedging spot.
+- [[cash-and-carry]] — long ORCA spot (Binance or on-chain) versus short the Binance USD-M perp captures any positive basis on a real-revenue Solana DEX token.
+- [[liquidation-cascade-fade]] — thin perp depth means forced-liquidation wicks overshoot; fade the flush back toward spot-anchored fair value.
+- [[oi-confirmed-trend]] — use Binance open-interest build to confirm that a Solana-DeFi-driven ORCA move is leverage-backed rather than a spot-only blip.
+- [[breakout-and-retest]] — ORCA holds well-defined low-single-digit-dollar ranges; trade confirmed breakouts with a retest entry to filter false moves in low liquidity.
+- [[rsi-mean-reversion]] — as a range-bound mid-cap, ORCA reverts sharply from stretched RSI extremes when it detaches from its BTC/ETH-correlated drift.
+
+### Volatility & regime character
+
+ORCA is a **small/mid-cap Solana DeFi / DEX governance token** (rank ~326), so it carries high-beta behavior into crypto risk-on/risk-off swings and correlates strongly to BTC/ETH regime plus Solana-ecosystem flows. It is not a memecoin — volatility is driven by durable on-chain DEX activity and Solana DeFi narrative rotation rather than pure reflexive hype, giving it periods of idiosyncratic relative strength (e.g., outperforming a weak tape). Expect trend/mean-reversion behavior within multi-week ranges, punctuated by faster moves when Solana DeFi share or tokenomics narratives shift.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — a single Binance leveraged venue (no Hyperliquid); thin perp depth amplifies slippage and liquidation-driven volatility, and basis trades depend on that one listing.
+- **Dilution overhang** — ~39% of supply not yet circulating (MC/FDV well below 1); scheduled team/treasury/incentive emissions can pressure price.
+- **Narrative dependence** — value tracks Solana DEX market share and fee-capture-to-token narrative; aggregator disintermediation (Jupiter) and rivals (Meteora, Raydium) can erode the thesis.
+- **Correlated drawdowns** — high-beta DeFi token; broad risk-off (Solana network stress, DeFi sector selloffs) hits liquidity and funding simultaneously.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ORCAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ORCAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ORCA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ORCA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ORCAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ORCAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ORCA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

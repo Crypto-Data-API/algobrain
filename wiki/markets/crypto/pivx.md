@@ -3,13 +3,13 @@ title: "PIVX"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins, defi]
 aliases: ["PIVX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.pivx.org/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[dca-strategy]]", "[[range-mean-reversion]]"]
 ---
 
 # PIVX
@@ -133,6 +133,55 @@ PIVX’s coin-supply occurs as a direct result of a static/fixed block emission 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PIVX is tradable on **Binance SPOT only** (PIVX/USDT) — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation-cascade strategies do NOT apply. With a single primary venue and thin depth for a sub-$5M market cap coin, execution must respect the order book: use limit orders, scale entries/exits, and size small to avoid slippage. Venue concentration on one exchange means listing/delisting risk and downtime directly gate all liquidity, reinforcing conservative position sizing.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, illiquid microcap where averaging in over time reduces single-fill slippage and smooths a deeply drawn-down (-99% from ATH) entry.
+- [[range-mean-reversion]] — PIVX has spent long stretches oscillating in tight low-price bands, favoring fades of range extremes over trend-chasing.
+- [[rsi-mean-reversion]] — sharp, reflexive spikes on thin volume (e.g. large single-day moves) mean overbought/oversold oscillator reversions are frequent.
+- [[breakout-and-retest]] — low-float spot moves that clear a range often need a retest confirmation before committing size, given the venue's thin depth.
+- [[buy-and-hold]] — a long-lived PoS/privacy protocol suited to a small conviction spot allocation rather than active leverage.
+- [[volatility-targeting]] — scaling exposure inversely to realized volatility caps risk on this low-liquidity, high-beta name.
+
+### Volatility & regime character
+
+Micro-cap (rank ~1722, ~$4M cap) privacy/PoS Layer 1 with high idiosyncratic volatility and strong reflexivity: thin liquidity amplifies both rallies and drawdowns. Broadly BTC/ETH-correlated in risk-on/risk-off regimes but prone to outsized, narrative-driven divergences (privacy-coin sentiment, exchange listing status). Behaves as a high-beta, low-cap altcoin rather than a stable infra token.
+
+### Risk flags
+
+- **Venue concentration** — Binance SPOT is effectively the only liquid market; delisting or downtime removes exit liquidity.
+- **Liquidity/depth** — sub-$5M cap with modest 24h volume means wide effective spreads and slippage on size.
+- **Emissions** — unlimited max supply with static block emission plus DAO budget payouts is a persistent dilution/supply overhang.
+- **Narrative dependence** — performance is heavily tied to privacy-coin sentiment, which carries regulatory/delisting risk in some jurisdictions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PIVXUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PIVXUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PIVXUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=PIVXUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

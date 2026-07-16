@@ -3,13 +3,13 @@ title: "Biconomy"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["BICO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.biconomy.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Biconomy
@@ -149,6 +149,55 @@ The future of the internet is decentralized, and Biconomy is a critical infrastr
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BICO is tradable on Binance — spot (BICO/USDT) plus a USD-margined perpetual that exposes funding, open interest, and liquidation flow. It is NOT listed on Hyperliquid, so Binance is the primary leveraged venue and the reference for funding/OI signals. With a sub-$15M market cap and thin 24h volume, the perp order book is shallow: available leverage is capped tighter than for majors, spreads widen quickly, and even modest size can move price. This concentration means execution should lean on limit orders, staged entries, and small position sizing; cross-venue funding/basis arbitrage is constrained because Binance is effectively the only deep leveraged market, with the remaining CEX/DEX liquidity spot-only.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin BICO perp funding can spike to extremes, letting a delta-neutral spot-vs-perp position collect the carry.
+- [[crowded-long-funding-fade]] — narrative-driven pops in a micro-cap infra token often leave longs over-crowded and funding stretched, setting up a fade.
+- [[liquidation-cascade-fade]] — a shallow book makes BICO prone to sharp liquidation wicks that overshoot and mean-revert, favoring fades of the cascade.
+- [[rsi-mean-reversion]] — low-liquidity churn around a depressed price produces frequent oversold/overbought extremes suited to mean-reversion entries.
+- [[breakout-and-retest]] — with price pinned near all-time lows, a volume-backed break of range highs and clean retest offers defined-risk momentum trades.
+- [[token-unlock-supply-event]] — with a large gap between circulating and total supply, scheduled emissions/unlocks create tradable supply-driven pressure.
+
+### Volatility & regime character
+
+BICO is a small-cap infrastructure/account-abstraction token trading at a deep discount to its cycle high, so it behaves as a high-beta altcoin: it tends to lag on BTC/ETH strength and drop harder on risk-off moves. Price action is reflexive and thin-book driven, with outsized moves on low volume and strong dependence on the broader alt and account-abstraction/infra narrative rather than idiosyncratic fundamentals. Correlation to BTC/ETH is directional but amplified in drawdowns.
+
+### Risk flags
+
+- Liquidity and venue concentration: Binance dominates leveraged trading; a listing/parameter change there would sharply degrade tradability.
+- Supply overhang: circulating supply is well below total/max supply, so emissions and unlocks can pressure price.
+- Narrative dependence: performance hinges on infra/account-abstraction sentiment and general altcoin risk appetite, not standalone catalysts.
+- Micro-cap fragility: low market cap and volume amplify slippage, gap risk, and susceptibility to liquidation-driven wicks.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BICOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BICOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BICO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BICO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BICOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BICOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BICO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

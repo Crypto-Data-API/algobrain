@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-07
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, regulation, stablecoin]
+tags: [crypto, defi, ethereum, regulation, stablecoin, stablecoins]
 aliases: ["Circle USDC", "USD Coin", "USDC"]
 entity_type: protocol
 founded: 2018
 headquarters: "Boston, USA (Circle)"
 website: "https://www.circle.com"
-related: ["[[aave]]", "[[base]]", "[[blackrock]]", "[[cctp]]", "[[centre-consortium]]", "[[circle]]", "[[coinbase]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin-attestations]]", "[[stablecoin-competition]]", "[[stablecoin-depegs]]", "[[stablecoin-regulation]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[usdt]]"]
+related: ["[[aave]]", "[[base]]", "[[binance]]", "[[blackrock]]", "[[cctp]]", "[[centre-consortium]]", "[[circle]]", "[[coinbase]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-attestations]]", "[[stablecoin-competition]]", "[[stablecoin-depegs]]", "[[stablecoin-regulation]]", "[[stablecoin-yield]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[usdt]]"]
 ---
 
 USD Coin (USDC) is the **second-largest [[stablecoins|stablecoin]]** by market capitalisation and one of the largest crypto assets overall (rank #5), issued by [[circle|Circle Internet Financial]]. It is a US-dollar-pegged, fiat-collateralised stablecoin deployed natively across [[ethereum|Ethereum]], [[solana|Solana]], [[base|Base]] and 25+ other chains. USDC is widely regarded as the most transparent and regulatory-compliant major stablecoin, with 100% reserves backed by short-dated US Treasuries and cash deposits at regulated financial institutions.
@@ -329,6 +329,52 @@ USDC is one of the deepest-liquidity assets in all of crypto. It functions as a 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USDC is a USD-pegged stablecoin traded on [[binance|Binance]] (and every other major CEX/DEX). It is a **peg / cash-management instrument, NOT a directional asset** — the trade is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. On Binance USDC is a quote and settlement asset (USDC/USDT and fiat pairs) rather than a leveraged directional market, so "leverage" applies to the *strategies built on top of it* (carry, delta-neutral yield) rather than to USDC itself. Because it is one of the deepest-liquidity assets in crypto and available natively across 25+ chains via CCTP, execution slippage is minimal and sizing is rarely liquidity-constrained; the practical constraint is redemption/mint access (1:1 with Circle) and cross-venue price dislocation during stress, which is where arbitrage capacity — not book depth — sets the effective size.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy USDC below $1.00 during banking/stress events (e.g. the 2023 SVB dislocation to ~$0.87) and hold to par as reserves are backstopped.
+- [[stablecoin-pair-arbitrage]] — exploit USDC/USDT and USDC/DAI spreads across CEX and Curve stable pools when one leg drifts off peg.
+- [[mint-parity-arbitrage]] — arb the secondary-market price against Circle's 1:1 mint/redeem, the mechanism that ultimately re-anchors the USDC peg.
+- [[stablecoin-yield]] — deploy idle USDC into lending (Aave/Compound/Morpho) or tokenised-T-bill wrappers to earn the yield USDC itself does not pass through to holders.
+- [[delta-neutral-yield-farming]] — use USDC as the stable base leg in market-neutral LP/farming structures where directional exposure is hedged out.
+- [[carry-trade]] — fund positions in USDC to harvest rate differentials while treating the peg as (near-)fixed collateral.
+
+### Volatility & regime character
+
+Peg is normally extremely tight (24h range roughly $0.9997–$1.00), so realised volatility is near-zero by design and the meaningful history is the **depeg record**, not price trend. Backing model: 100% fiat-collateralised (short-dated US Treasuries via the BlackRock-managed Circle Reserve Fund plus cash at regulated banks), with elastic mint/burn keeping supply ≈ reserves. Redemption mechanics (1:1 with Circle) are the anchoring force: in calm regimes the peg is boringly stable; in banking/liquidity stress the DEX price (e.g. Curve 3pool) leads and can gap down before mint/redeem arbitrage restores par. The notable historical episode is the March 2023 SVB event, when USDC traded as low as ~$0.87 before recovering within hours after the FDIC backstop.
+
+### Risk flags
+
+- **Depeg / banking counterparty risk** — even a "fully backed" stablecoin can break peg if a reserve bank fails; cash deposits are not FDIC-insured beyond standard limits.
+- **Reserve / backing transparency** — dependent on monthly attestations rather than a continuous audit; reserve concentration at any single custodian is a tail risk.
+- **Redemption gating** — 1:1 redemption runs through Circle and its banking rails, which can slow or gate during stress, widening the arb needed to hold the peg.
+- **Regulatory / freezing** — USDC is centrally controlled and Circle can freeze addresses for OFAC/law-enforcement compliance; regulatory shifts (GENIUS/MiCA) can reshape access and eligibility.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USDCUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=USDCUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USDCUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=USDCUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

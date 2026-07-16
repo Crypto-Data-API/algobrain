@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["IOTX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://iotex.io"
-related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[harmony]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
+related: ["[[consensus-mechanism]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[harmony]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[range-mean-reversion]]"]
 ---
 
 # IoTeX
@@ -218,6 +218,55 @@ IoTeX's ecosystem is concentrated in DePIN and IoT-flavored applications (mobili
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+IOTX is tradable on **[[binance]]** as both **spot (IOTX/USDT)** and a **USD-margined perpetual** — the only leveraged venue that matters for the token — exposing [[funding-rate|funding]], [[open-interest]], and [[liquidations]] as tradable signals. IOTX is **NOT listed on [[hyperliquid]]**, so Binance is the primary (effectively sole) deep leveraged venue; other listings (Upbit, Bitget, KuCoin, Crypto.com) are mostly spot. With a sub-$30M market cap and thin ~$2M daily volume, the Binance perp order book is shallow: available leverage is real but position sizing must stay small, slippage on market orders is material, and a handful of leveraged accounts can dominate OI. This venue concentration means Binance funding and liquidation prints are the cleanest read on positioning, but it also creates single-venue execution and de-listing risk — execution should favor limit orders, staggered fills, and conservative notional relative to visible depth.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance is the one venue with a liquid IOTX perp, so periodic funding on the USD-M contract can be collected against a delta-neutral spot hedge when funding runs persistently positive.
+- [[liquidation-cascade-fade]] — thin depth and concentrated leverage make IOTX prone to sharp wick-downs on forced [[liquidations]]; fading exhausted cascades back toward the pre-flush range is a recurring setup.
+- [[range-mean-reversion]] — as a low-momentum, deeply drawn-down small cap (~98% off ATH), IOTX spends long stretches chopping in a range, favoring reversion from band extremes over trend entries.
+- [[oi-price-exhaustion]] — because a few accounts can swing Binance [[open-interest]], rising OI into stalling price often flags an over-leveraged move ripe for reversal.
+- [[crowded-long-funding-fade]] — DePIN/AI narrative pops can crowd longs and spike funding on the single perp venue; fading the crowded side into stretched funding is a targeted play.
+- [[cross-exchange-arbitrage]] — IOTX lists across Binance, Upbit, Bitget, KuCoin, and DEX venues, so transient price gaps between the thin books can be arbitraged.
+
+### Volatility & regime character
+
+IOTX is a small-cap, high-beta [[altcoins|altcoin]] and infrastructure/[[depin|DePIN]] token that trades as a high-beta proxy on BTC/ETH: it typically underperforms in risk-off phases and can spike sharply on DePIN, IoT, or "real-world AI" narrative rotations. Realized volatility is elevated and reflexive — driven more by narrative flows and thin-book liquidity than by fundamentals — with strong downside correlation to the broad crypto beta and limited independent support in bear regimes.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — sub-$30M cap and ~$2M daily volume with leveraged flow concentrated on Binance; thin depth amplifies slippage and single-venue de-listing risk.
+- **Narrative dependence** — valuation leans heavily on the still-early DePIN / real-world-AI thesis; sentiment can evaporate quickly and drag price with it.
+- **Supply / emissions** — circulating supply is already near the 10B cap (MC/FDV ≈ 1.00), so dilution overhang is low, but any large staked-bucket unlocks or delegate-held supply moving to market can pressure a thin book.
+- **Beta drawdown** — deep 98% drawdown from ATH and weak momentum mean trend-following entries carry high whipsaw risk versus mean-reversion.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=IOTXUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=IOTXUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=IOTX` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=IOTX` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=IOTXUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=IOTXUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=IOTX"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

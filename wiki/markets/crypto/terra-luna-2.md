@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, fork, luna, terra]
+tags: [crypto, defi, fork, luna, terra, altcoins]
 aliases: ["LUNA", "LUNA 2.0", "Terra 2.0", "Terra v2"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.phoenix.money/"
-related: ["[[base]]", "[[cosmos]]", "[[crypto-markets]]", "[[stablecoins]]", "[[terra-luna-collapse]]", "[[terra-luna]]", "[[terrausd]]"]
+related: ["[[base]]", "[[cosmos]]", "[[crypto-markets]]", "[[stablecoins]]", "[[terra-luna-collapse]]", "[[terra-luna]]", "[[terrausd]]", "[[binance]]", "[[news-trading]]", "[[atr-trailing-stop]]"]
 ---
 
 # Terra (LUNA 2.0)
@@ -131,6 +131,52 @@ LUNA cannot be valued on adoption metrics that barely exist; with negligible TVL
 - **Liquidity:** thin ~$4M daily volume; high slippage and news-driven volatility.
 - **Legal/entity overhang:** Terraform Labs bankruptcy and regulatory actions can resurface as price catalysts in either direction.
 - **Bear-market beta:** high-beta micro-cap in an extreme-fear regime (Fear & Greed = 23).
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LUNA is **tradable on Binance SPOT only** among the deep-liquidity venues (LUNAUSDT) — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation-cascade strategies do **not** apply. With thin daily volume, execution should assume material slippage on size: favor limit/maker orders, scale entries and exits, and keep position sizing small relative to typical daily turnover. The single-venue concentration means Binance-specific outages, delistings, or maintenance windows directly gate all liquid access, so avoid time-sensitive market orders and size for the possibility of a fast liquidity vacuum.
+
+### Applicable strategies
+
+- [[breakout-and-retest]] — LUNA sits in a multi-year structural downtrend near all-time lows; waiting for a confirmed breakout and retest filters out the frequent news-driven fakeouts before committing spot capital.
+- [[atr-trailing-stop]] — high single-name volatility on a spot-only micro-cap makes a volatility-scaled trailing stop the cleanest way to ride news spikes while capping downside without perp hedges.
+- [[news-trading]] — price is dominated by Do Kwon legal developments, Terraform Labs bankruptcy news, and governance proposals, making discrete headlines the primary tradable catalyst.
+- [[dca-strategy]] — for a distressed residual call-option thesis, spreading spot entries over time smooths the thin-liquidity slippage and avoids timing a single illiquid fill.
+- [[range-trading]] — between catalysts LUNA chops in low-liquidity ranges, so fading the extremes of the near-ATL band suits a spot-only book that cannot short.
+
+### Volatility & regime character
+
+Small/micro-cap, high-beta altcoin: a post-collapse DeFi/infra token that trades as a distressed, headline-driven micro-cap rather than on adoption metrics. Behavior is reflexive and stigma-laden — sharp news-driven spikes and fades on thin volume, with elevated correlation to broad crypto (BTC/ETH) risk-on/risk-off swings amplified by its high beta. In extreme-fear regimes it behaves as a downside-amplified beta play; idiosyncratic legal/governance catalysts can decouple it from the majors in either direction.
+
+### Risk flags
+
+- **Liquidity & venue concentration:** thin turnover and Binance-spot-only deep liquidity mean high slippage and single-venue dependency; no liquid perp for hedging or shorting.
+- **Emissions/dilution:** ~7% annual inflation with an uncapped max supply is a persistent structural supply overhang, plus residual contributor/community-pool vesting (MC/FDV ~0.60).
+- **Narrative dependence:** value rests almost entirely on legal-news and governance catalysts rather than demonstrated adoption (minimal TVL/developer activity).
+- **Regulatory/entity overhang:** Terraform Labs bankruptcy and ongoing Do Kwon litigation can resurface as sharp price catalysts in either direction.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LUNAUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LUNAUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LUNAUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=LUNAUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, depin]
+tags: [ai-trading, crypto, depin, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["GLM", "Golem Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://golem.network/"
-related: ["[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[livepeer]]"]
+related: ["[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[livepeer]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Golem
@@ -268,6 +268,55 @@ On Discord you can also find support to become a Provider or a Requestor in the 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+GLM is tradable on [[binance]] — **spot plus a USD-margined perpetual**, which exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data for the coin. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue and the reference for derivatives-based signals. Because GLM is a quieter mid-cap with modest turnover, the perp order book is comparatively thin: available leverage is capped lower than for majors, effective spreads widen on size, and stops can slip during fast moves. This venue concentration means execution should assume Binance is the dominant price-discovery and liquidation engine — size positions to the perp's real depth rather than headline volume, scale into and out of clips, and prefer limit/VWAP-style fills over aggressive market orders. On-chain spot (Uniswap/Sushiswap) exists but is not a substitute for perp liquidity when hedging.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest recurring funding on the GLM USD-M perp when the rate is persistently one-sided, delta-hedging against Binance spot.
+- [[cash-and-carry]] — with GLM fully circulating (MC = FDV, no unlock overhang), spot-vs-perp carry is cleaner to run without dilution risk skewing the basis.
+- [[crowded-long-funding-fade]] — thin books make GLM prone to euphoric long crowding on DePIN/AI narrative spikes; fade over-positioned longs when funding runs hot.
+- [[liquidation-cascade-fade]] — low perp depth amplifies forced-liquidation wicks, giving mean-reversion entries after cascades overshoot on Binance.
+- [[breakout-and-retest]] — GLM ranges for long stretches then breaks on narrative flow; trade confirmed breakouts with a retest to filter the many false moves on wide spreads.
+- [[oi-confirmed-trend]] — use Binance open-interest build to confirm that a GLM move is backed by new positioning rather than a low-liquidity squeeze.
+
+### Volatility & regime character
+
+GLM is a **small/mid-cap altcoin (~rank 260)** and an **infra / DePIN + decentralized-AI token**, so it behaves as a high-beta expression of the AI-compute and DePIN narratives rather than a broad-market bellwether. It is strongly correlated to BTC/ETH direction — leading down in risk-off, lagging in relief rallies — but with amplified drawdowns and sharp narrative-driven pops. It is not a memecoin, yet exhibits reflexive, sentiment-heavy swings around AI/GPU-compute news. Long dead-money ranges punctuated by volatility bursts are the typical regime.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — modest turnover and reliance on Binance as the primary leveraged venue; thin perp depth raises slippage and squeeze/liquidation risk on size.
+- **No unlock overhang** — GLM is fully circulating (MC ≈ FDV), so there is no emissions/vesting dilution to fade — a structural positive versus newer compute peers.
+- **Narrative dependence** — price is largely a call option on the DePIN / decentralized-AI thesis converting to paid demand; sentiment reversals hit harder than fundamentals.
+- **Competitive / demand-gap risk** — rivals (Render, Akash, io.net, [[livepeer]]) capturing AI-compute mindshare can suppress GLM relative strength and stretch range-bound "dead money" regimes.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GLMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GLMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=GLM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=GLM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GLMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=GLMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=GLM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

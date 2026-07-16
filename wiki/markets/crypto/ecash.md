@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, altcoins]
 aliases: ["BCHA", "XEC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://e.cash/"
-related: ["[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]"]
+related: ["[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]", "[[binance]]", "[[dca-strategy]]", "[[breakout-and-retest]]"]
 ---
 
 # eCash
@@ -138,6 +138,59 @@ eCash is the **smallest, most experimental** of the Bitcoin-derived payment chai
 - **Roadmap-execution risk** — the multi-million-tps targets are aspirational; delivery and real-world adoption are unproven at that scale.
 - **Concentration of development** — heavily reliant on the Bitcoin ABC team for protocol direction.
 - **Exchange/regional flow risk** — meaningful Korean (Upbit) exposure can amplify volatility on regional sentiment shifts.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XEC is tradable on **Binance SPOT only** among the major venues for algorithmic access — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary** asset. Perp funding/basis/liquidation strategies do **not** apply. Practically, this means:
+
+- **No leverage / limited shorts** — position sizing must assume unlevered spot capital; directional downside expression is hard to implement cleanly, biasing playable setups toward long-only or cash-out-to-stables.
+- **Concentrated execution venue** — with Binance-USDT as the primary programmatic pair, order flow, depth and slippage all hinge on a single book; large orders should be sliced (e.g. [[vwap-trading|VWAP]]) to avoid moving a thin micro-priced tape.
+- **Micro-unit pricing** — the ~$0.000000x quote and trillion-unit supply mean tick/precision handling matters for order placement and backtest fidelity; size in notional, not unit count.
+- **Regional flow** — meaningful Korean (Upbit XEC/KRW) presence can drive volatility, but that flow is not on the primary algo venue, so it shows up as gap/volatility risk rather than executable liquidity for Binance-spot strategies.
+
+### Applicable strategies
+
+- [[dca-strategy|DCA]] — for a spot-only, no-leverage small-cap trading near/around its all-time low, mechanical accumulation smooths entry timing risk without directional bets.
+- [[breakout-and-retest|Breakout & retest]] — a beaten-down payments small-cap tends to trade rangebound then break; entering on confirmed breakout-retest filters false starts on a thin book.
+- [[donchian-channel-breakout|Donchian channel breakout]] — channel breaks capture the episodic trending bursts typical of a low-liquidity micro-cap while defining objective long entries.
+- [[atr-trailing-stop|ATR trailing stop]] — volatility-scaled trailing exits fit XEC's spiky, gap-prone moves and manage risk when shorting/hedging is unavailable.
+- [[rsi-mean-reversion|RSI mean reversion]] — near a fresh ATL, oversold reversion snaps on the spot book can be harvested long-only within the established range.
+- [[range-trading|Range trading]] — in the current low-momentum regime XEC oscillates in a band; fading range extremes suits a spot-primary asset that lacks trend follow-through.
+
+### Volatility & regime character
+
+XEC is a **small-cap Layer-1 payments token** (rank ~220, ~$110-130M cap) — high idiosyncratic volatility on low absolute liquidity, but structurally a **low-beta-of-a-low-beta**: it is not a memecoin or a hot DeFi/infra narrative, so it lacks reflexive momentum and generally lags rather than leads BTC/ETH. Directionally it tracks broad-market risk appetite (currently an established bear regime with a fresh ATL), with regional (Korean) sentiment adding sporadic volatility spikes. Correlation to BTC is moderate and mostly one-directional (drawdowns), while upside is narrative-gated on the Avalanche-scaling roadmap. MC/FDV ~1.00 means moves are price/flow-driven, not emission-driven.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — programmatic exposure hinges on a single Binance-spot book; ~$3-16M daily volume is thin, so slippage and gap risk are elevated and exits can be poor in stress.
+- **No perp / no clean shorts** — hedging and leveraged/directional-short expression are effectively unavailable, constraining strategy design to long-only or cash.
+- **Narrative dependence** — upside rests on the "scalable Bitcoin cash" and Avalanche-scaling thesis delivering; adoption stagnation in a crowded niche (BCH/LTC/stablecoins) is the core bear case.
+- **Bear-regime beta** — a fresh all-time low and extreme-fear tape mean downtrend momentum can persist; low-beta does not mean low drawdown.
+- **Development concentration** — heavy reliance on the Bitcoin ABC team for protocol direction is a single-point governance risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XECUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=XECUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XECUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=XECUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

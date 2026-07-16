@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, stablecoin]
+tags: [crypto, defi, ethereum, stablecoin, stablecoins]
 aliases: ["FRAX", "FXS", "Frax Finance", "Frax Share", "frxETH", "frxUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://frax.finance"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-finance]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[rocket-pool]]", "[[stablecoin]]"]
+related: ["[[automated-market-maker]]", "[[binance]]", "[[crypto-markets]]", "[[curve-finance]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[mint-parity-arbitrage]]", "[[rocket-pool]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]"]
 ---
 
 # Frax (prev. FXS)
@@ -218,6 +218,53 @@ Frax competes across several DeFi verticals simultaneously: against [[stablecoin
 - **2025–2026** — FRAX trades deep in the post-bull drawdown (~99% off ATH), with the investment thesis hinging on frxUSD adoption, Fraxtal traction, and fee routing to the token.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+> *Scope note: this page's asset is FRAX, the **governance / value-accrual token** (ex-FXS), which is a directional, volatile asset — not itself $1-pegged. The peg-oriented framing below applies to the Frax **stablecoin (frxUSD)** whose stability, backing and arbitrage the FRAX token governs and derives revenue from. Read the strategies as peg/cash-management plays on the Frax stablecoin leg of the ecosystem, monitored via the `FRAXUSDT` market on Binance.*
+
+### Venues & liquidity
+
+The Frax stablecoin leg is treated as a **USD-pegged, cash-management instrument** rather than a directional bet — the relevant questions are peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. On centralized venues the pair is available on [[binance|Binance]] (FRAX/USDT), with additional listings on Kraken, Bitget and Crypto.com; on-chain, deep [[curve-finance|Curve]] and [[uniswap|Uniswap]] stable pools (partly seeded by protocol AMOs) provide the primary arbitrage surface. Because peg instruments trade in a razor-thin band around 1.00, edge comes from size and low fees rather than leverage: applying leverage to a near-par asset is inefficient and mostly amplifies funding/borrow cost, so sizing is driven by available depth and redemption/mint capacity. Venue availability shapes execution — CEX legs give fast entry/exit for depeg capture, while on-chain pools and the protocol's mint/redeem path define where parity arbitrage actually closes.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy the Frax stablecoin below 1.00 during a stress/depeg episode and hold for reversion to par, exiting on peg recovery.
+- [[stablecoin-pair-arbitrage]] — arbitrage the Frax stable unit against USDT/USDC/[[dai|DAI]] across Binance and on-chain [[curve-finance|Curve]]/[[uniswap|Uniswap]] pools when relative pricing dislocates.
+- [[mint-parity-arbitrage]] — exploit the Frax protocol's collateralized mint/redeem path: mint or redeem against reserves whenever the market price diverges from the 1.00 collateral parity.
+- [[stablecoin-yield]] — deploy the Frax stable unit into AMO-fed liquidity and lending (Fraxlend, Curve) to earn reserve/incentive yield on an otherwise flat, cash-like position.
+- [[synthetic-stablecoin-depeg-arbitrage]] — trade dislocations rooted in Frax's fractional-algorithmic heritage and now-collateralized backing model, where synthetic/backing mechanics can lag market price during stress.
+
+### Volatility & regime character
+
+The stablecoin leg is characterized by peg tightness rather than trend: in normal regimes it holds within a very narrow band around 1.00, punctuated by rare depeg episodes tied to collateral stress, contagion (e.g., the 2022 Terra/UST-driven repricing of all algo-stablecoins), or reserve concerns. The backing model has shifted materially — from a fractional-algorithmic design toward a fully-collateralized, RWA/T-bill-backed model — which alters redemption mechanics and the plausibility of arbitrage closing at par. The FRAX governance token itself, by contrast, is high-volatility and directional (deep post-2022 drawdown), so the two legs must not be conflated when sizing peg trades.
+
+### Risk flags
+
+- **Depeg risk** — historical algorithmic heritage and contagion sensitivity mean the stable unit can trade away from 1.00 faster than redemption can restore it.
+- **Reserve / backing transparency** — value depends on the reported collateral ratio and RWA/T-bill backing; opacity or off-chain custody failure directly undermines any parity trade.
+- **Redemption gating** — mint/redeem parity arbitrage assumes the collateralized redemption path stays open; governance or contract-level gating can strand an arbitrage.
+- **Regulatory** — stablecoin and RWA-backing regimes are an evolving regulatory surface that can affect redemption, listing, and custody.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FRAXUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=FRAXUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FRAXUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=FRAXUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

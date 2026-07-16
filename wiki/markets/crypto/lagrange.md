@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto, machine-learning]
+tags: [ai-trading, altcoins, crypto, machine-learning, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["LA", "Lagrange Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lagrangefoundation.org"
-related: ["[[crypto-markets]]", "[[decentralized-ai]]", "[[eigenlayer]]", "[[ethereum]]", "[[on-chain-inference]]", "[[restaking-and-ai]]", "[[zero-knowledge-proof]]", "[[zk-rollup]]", "[[zkml]]"]
+related: ["[[crypto-markets]]", "[[decentralized-ai]]", "[[eigenlayer]]", "[[ethereum]]", "[[on-chain-inference]]", "[[restaking-and-ai]]", "[[zero-knowledge-proof]]", "[[zk-rollup]]", "[[zkml]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Lagrange
@@ -201,6 +201,56 @@ Lagrange sits at the intersection of the two most reflexive infrastructure narra
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LA is tradable on **[[binance]]** — both **spot** (LA/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** carrying [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **NOT listed on Hyperliquid**, so Binance is the primary — and effectively sole institutional-grade — leveraged venue. This concentration means the Binance perp order book and funding print drive price discovery for leveraged flow; there is no deep alternate perp venue to arbitrage against or to absorb size. With a ~$14M cap and thin depth, available leverage is real but liquidity-constrained: crowded positioning shows up quickly in funding and OI, cascades can be violent, and execution should favour limit orders and reduced clip sizes. Sizing must respect that a single venue's depth defines slippage and that stop runs can gap through thin books.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance perp funding on a low-float ZK/AI microcap swings hard; harvest positive/negative funding while delta-hedging against spot.
+- [[crowded-long-funding-fade]] — narrative-driven (ZK + AI) rallies pull in crowded longs; fade extended positive funding + rising OI into exhaustion.
+- [[liquidation-cascade-fade]] — thin Binance depth on a high-beta microcap produces sharp liquidation flushes; fade the overshoot once the cascade exhausts.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm trend legs and filter low-conviction moves in a name where positioning drives price.
+- [[volatility-breakout]] — dual-narrative catalysts (DeepProve/zkML adoption, unlock windows) drive volatility expansion from compressed ranges; trade the breakout with tight invalidation.
+- [[token-unlock-supply-event]] — with MC/FDV ≈ 0.19, ~81% of supply is unrealized; position defensively around emission/unlock windows that pressure price.
+
+### Volatility & regime character
+
+LA is a **low-float, small-cap infrastructure token** (ZK coprocessor + zkML) with one of the highest-beta profiles in its cohort. It behaves as a leveraged expression of the reflexive **ZK** and **AI** narratives, overshooting BTC/ETH on both up and down moves, and tends to round-trip its entire range in bear regimes. Correlation to BTC/ETH is high in risk-off tape (it sells off with the majors) but decouples upward on idiosyncratic ZK/AI narrative catalysts. Dilution structurally caps sustained rallies — the supply schedule, not the chart, is the dominant medium-term force.
+
+### Risk flags
+
+- **Venue concentration** — Binance is the only major leveraged venue (no Hyperliquid); single-venue liquidity and funding risk with no arbitrage backstop.
+- **Low liquidity** — ~$14M cap and thin depth magnify slippage, gap risk, and liquidation-cascade severity.
+- **Unlocks / emissions** — MC/FDV ≈ 0.19; ~81% of fully diluted value is future supply, a persistent overhang around unlock windows.
+- **Narrative dependence** — valuation rides two hype-prone narratives (ZK + AI); can de-rate sharply when the story fades or in risk-off regimes.
+- **Adoption risk** — value accrues only with real, paid proof demand; absent it, moves are narrative-driven and mean-reverting.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=LA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=LA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=LAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=LA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

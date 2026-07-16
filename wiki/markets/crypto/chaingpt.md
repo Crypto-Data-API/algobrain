@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto, machine-learning, nft]
+tags: [ai-trading, altcoins, crypto, machine-learning, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["CGPT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.chaingpt.org/"
-related: ["[[ai-trading]]", "[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]", "[[machine-learning]]"]
+related: ["[[ai-trading]]", "[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]", "[[machine-learning]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # ChainGPT
@@ -210,6 +210,55 @@ CGPT trades within the **AI-tooling / AI-agent** slice of the AI-coin basket. In
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CGPT is tradable on **Binance** as both **spot** (CGPT/USDT) and a **USD-margined perpetual**, exposing funding rate, open interest, and liquidation data — Binance is the primary leveraged venue. It is **not** listed on Hyperliquid. Because leverage, funding, and OI signals concentrate on Binance's USD-M perp while additional spot depth sits on Bitget and KuCoin, execution and sizing should treat Binance as the reference book: the perp enables both long and short leveraged expression and cash-and-carry against spot, but the small-cap depth means large clips slip and thin perp liquidity can amplify funding swings and cascade risk. Size against Binance order-book depth and use limit orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on CGPT's Binance USD-M contract when persistently positive during AI-narrative long crowding, hedged with spot.
+- [[cash-and-carry]] — long Binance spot CGPT versus short the USD-M perp to capture basis/funding while neutralizing directional small-cap risk.
+- [[liquidation-cascade-fade]] — fade forced-liquidation flushes on the thin CGPT perp, where cascades overshoot given concentrated Binance leverage.
+- [[narrative-trading]] — position around the "AI x crypto" cycle that drives CGPT beta, entering as the AI-tooling basket rotates back into favor.
+- [[oi-confirmed-trend]] — require rising Binance open interest to confirm CGPT breakouts, filtering out low-conviction spot-only spikes.
+- [[breakout-and-retest]] — trade launchpad/listing-catalyst breakouts on Binance and re-enter on the retest, using perp OI to gauge follow-through.
+
+### Volatility & regime character
+
+Small-cap [[altcoins|altcoin]] with high, reflexive beta to the AI-tooling/AI-agent basket and to [[bitcoin|BTC]]/ETH risk-on/off swings. As an infra/DeFi-adjacent AI token, CGPT amplifies broad-market moves in both directions, with idiosyncratic spikes around launchpad deal flow and Binance ecosystem signals. Expect multiples of BTC's realized volatility and sharp mean-reversion after announcement-driven pumps.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading is concentrated on Binance's USD-M perp; thin depth means slippage on size and outsized liquidation cascades.
+- **Narrative dependence** — price is tightly coupled to the AI-token cycle; sentiment reversals hit small-caps hardest.
+- **Launchpad cyclicality** — a core CGPT demand driver rises and falls with the IDO/altcoin issuance calendar.
+- **Emissions/supply** — near-fully-circulating (MC/FDV ≈ 0.88) limits dilution overhang, but remaining unlock/emission of the ~1B max supply is still a monitoring item.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CGPTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CGPTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CGPT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CGPT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CGPTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CGPTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CGPT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

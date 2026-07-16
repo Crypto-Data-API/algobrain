@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto]
+tags: [ai-trading, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["HOLO", "Holoworld AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.holoworld.com/"
-related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]", "[[solana]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[bnb]]", "[[crypto-markets]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Holoworld
@@ -239,6 +239,55 @@ From creators and brands to gaming communities, thousands have already launched 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HOLO is tradable on [[binance|Binance]] — both **spot** (HOLO/USDT) and a **USD-margined perpetual** with [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidations]] data. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is the **primary leveraged venue**. This single-venue concentration for leverage means funding, OI, and liquidation signals should be read off Binance directly, and it removes the cross-venue perp arbitrage leg that larger caps offer. With a thin ~$50M cap and modest turnover, available perp depth is shallow relative to majors: leverage sizing should be conservative, entries/exits worked in slices, and stops set wide enough to survive thin-book wicks yet tight enough to respect liquidation risk. Because leveraged flow funnels through one book, crowded positioning and liquidation cascades are amplified.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — a low-float, narrative-driven AI-agent token is prone to euphoric long crowding on Binance perps; fading persistently positive funding captures the reversion when longs get over-extended.
+- [[liquidation-cascade-fade]] — with leverage concentrated on one venue and a thin book, forced liquidations overshoot; fading the wick after a cascade exhausts targets HOLO's reflexive dumps.
+- [[narrative-trading]] — HOLO trades almost entirely on the AI-agent / agentic-IP meta, so positioning around narrative rotation rather than fundamentals is the dominant edge.
+- [[token-unlock-supply-event]] — only ~35% of max supply circulates with ~65% still to vest; trading around scheduled unlock/emission events front-runs predictable supply-driven pressure.
+- [[breakout-and-retest]] — deep in an ~-90% drawdown from ATH, HOLO ranges then breaks on narrative catalysts; entering on the retest of a broken level filters false starts in a thin market.
+- [[volatility-breakout]] — high beta and reflexive squeezes produce sharp expansion moves from compression; volatility-triggered entries capture the impulsive legs typical of a micro-cap AI token.
+
+### Volatility & regime character
+
+Small/micro-cap (~$50M, rank ~415) with **high beta to risk sentiment** and strong correlation to BTC/ETH risk-on/risk-off swings. As an [[ai-agent-tokens|AI-agent token]] it carries **memecoin-adjacent reflexivity** — moves are amplified by narrative rotation and low float, so realized volatility is elevated relative to majors. Down ~90% from ATH, it behaves as a narrative-driven infra/AI beta play: it can outperform sharply during AI-agent-meta upswings and bleed hard when the narrative rotates or the broader tape turns to fear.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** thin ~$3-5M daily turnover on a ~$50M cap; leverage funnels through a single venue (Binance), so slippage on size and gap risk around liquidation clusters are elevated.
+- **Unlocks / emissions:** ~65% of max supply still to vest (MC/FDV ~0.35); recurring team/investor/ecosystem unlocks are a persistent structural dilution and sell-pressure risk.
+- **Narrative dependence:** valuation is almost entirely tied to the durability of the AI-agent narrative; a rotation out of the meta can compress price sharply irrespective of product usage.
+- **Regulatory / classification:** as a low-cap, multi-chain ([[solana|Solana]] + [[bnb|BNB Chain]]) token distributed partly via a Binance HODLer Airdrop, listing/delisting and regional-access changes on the primary venue are a tail risk to liquidity.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HOLOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HOLOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HOLO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HOLO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HOLOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HOLOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HOLO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "Alchemix"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins]
 aliases: ["ALCX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://alchemix.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[mean-reversion]]", "[[dca-strategy]]"]
 ---
 
 # Alchemix
@@ -125,6 +125,54 @@ Alchemix token is the governance token for the Alchemix protocol.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ALCX is tradable on **Binance SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation strategies do **not** apply. With a single primary CEX venue and thin 24h turnover, order flow concentrates on the Binance ALCXUSDT book (plus a Kraken USD pair and a Balancer V2 DEX pool for spot swaps). Execution should assume shallow depth: size positions small relative to daily volume, prefer limit/passive fills over market sweeps, and avoid stops clustered at obvious levels that thin books can wick through. Absence of a perp means no built-in short/hedge — directional risk is one-sided unless offset via correlated liquid assets.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, low-cap token deep in a multi-year drawdown; averaging in over time smooths entry risk without needing leverage or short access.
+- [[mean-reversion]] — thin-book microcap prone to sharp overshoots and snapbacks around a compressed range, favoring fade entries at extremes.
+- [[rsi-mean-reversion]] — momentum-oscillator extremes on the daily are frequent on a low-liquidity name like ALCX, giving reversion signals when the book overreacts.
+- [[range-trading]] — recent price action hugs a tight band (24h range roughly $2.00–$2.13), suiting bounded buy-support / sell-resistance rotation on spot.
+- [[buy-and-hold]] — a governance token for an established DeFi protocol trading near all-time lows; a small spot allocation is a straightforward long-only expression for conviction holders.
+- [[atr-trailing-stop]] — volatility-scaled trailing exits help manage the wide intraday swings and gap risk typical of a low-cap spot asset with no hedge venue.
+
+### Volatility & regime character
+
+Small-cap DeFi/infra governance token (rank ~1524) with high idiosyncratic volatility and strong reflexivity typical of thin microcaps. Broadly high-beta to BTC/ETH risk regimes — it tends to amplify altcoin risk-on/risk-off moves — but price is also heavily driven by protocol-specific narrative and yield/DeFi rotation rather than pure market beta. Liquidity is low enough that single large orders can move the tape, producing outsized wicks in both directions.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — effectively one primary CEX venue (Binance spot) plus a Kraken pair and a DEX pool; a listing/delisting or venue outage is a material single point of failure.
+- **No perp / one-sided exposure** — no liquid perpetual means no native short or hedge; risk is directional and must be managed with position sizing and stops.
+- **Small-cap slippage** — thin depth and modest 24h turnover mean market orders and stop cascades can cause significant slippage.
+- **Emissions / unlimited max supply** — ALCX has an unlimited max supply with ongoing emissions; monitor circulating-supply growth and governance changes to inflation.
+- **Narrative dependence** — value is tied to the Alchemix protocol's DeFi/yield thesis; protocol, TVL, or DeFi-sentiment shocks can dominate price independent of the broader market.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ALCXUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ALCXUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ALCXUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ALCXUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

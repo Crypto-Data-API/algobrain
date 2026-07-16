@@ -3,13 +3,13 @@ title: "Useless Coin"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["USELESS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://letsbonk.fun/token/Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[meme-coin-cycle]]"]
 ---
 
 # Useless Coin
@@ -119,6 +119,55 @@ related: ["[[crypto-markets]]", "[[solana]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USELESS is tradable on **Binance** — both spot and a **USD-margined perpetual** contract, which exposes funding, open interest, and liquidation data. It is **NOT** listed on Hyperliquid, so Binance is the primary leveraged venue. The USD-M perp is the main route to leverage and short exposure; without a second deep perp venue, funding, basis, and liquidation dynamics are effectively Binance-concentrated. As a memecoin sitting around rank ~343 with modest spot depth, order books thin out quickly beyond small size, so slippage and impact scale fast — position sizing should stay conservative and execution should lean on limit/VWAP-style fills rather than aggressive market orders. Venue concentration means a Binance outage, listing change, or funding shift directly drives execution quality.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest persistently skewed funding on the Binance USD-M perp when memecoin longs crowd in.
+- [[crowded-long-funding-fade]] — USELESS pumps attract leveraged longs, pushing funding rich; fade the crowd when funding spikes.
+- [[long-liquidation-cascade]] — thin memecoin books make leveraged long stops cascade fast; trade the downside flush.
+- [[liquidation-cascade-fade]] — after a forced-liquidation flush overshoots, fade the extreme back toward fair value.
+- [[meme-coin-cycle]] — USELESS is a BONK.fun-ecosystem memecoin, driven by reflexive hype-and-fade cycles.
+- [[volatility-breakout]] — low-float memecoin ranges resolve in sharp expansion moves suited to breakout entries.
+
+### Volatility & regime character
+
+Small-cap memecoin (rank ~343, ~$60M cap) with high reflexivity and outsized realized volatility versus large caps. Price action is narrative- and momentum-driven rather than fundamentals-driven, with sharp ATH-to-drawdown swings (currently ~-92% from ATH). Beta to BTC/ETH is high on risk-off moves but decouples upward during idiosyncratic meme hype; correlation is unstable and regime-dependent.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — leveraged exposure is Binance-only (no Hyperliquid); thin spot depth amplifies slippage and gap risk.
+- **Narrative dependence** — as a BONK.fun/Solana memecoin, value is almost entirely sentiment- and hype-driven, with rapid decay when attention rotates away.
+- **Reflexive volatility** — crowded leverage plus thin books make liquidation cascades and funding whipsaws frequent.
+- **Supply/emissions** — near-fully-circulating supply (MC/FDV ~1.00) limits unlock overhang but leaves little future dilution buffer for demand shocks.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USELESSUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=USELESSUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=USELESS` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=USELESS` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USELESSUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=USELESSUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=USELESS"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

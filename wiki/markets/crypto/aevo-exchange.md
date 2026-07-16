@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives]
+tags: [crypto, defi, derivatives, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["AEVO", "Aevo Exchange", "Ribbon Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.aevo.xyz/"
-related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[derivatives]]", "[[ethereum]]", "[[governance-token]]", "[[hyperliquid]]", "[[layer-2]]", "[[options]]", "[[order-book]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[derivatives]]", "[[ethereum]]", "[[governance-token]]", "[[hyperliquid]]", "[[layer-2]]", "[[options]]", "[[order-book]]", "[[perpetual-futures]]", "[[binance]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Aevo
@@ -209,6 +209,55 @@ Aevo's distinctiveness is being one of very few decentralized venues with **liqu
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AEVO is tradable on **[[binance]]** — both **spot** (AEVO/USDT) and a **USD-margined perpetual**, which exposes standard derivatives telemetry: **[[funding-rate|funding]]**, **[[open-interest|open interest]]**, and **[[liquidations]]**. Note that despite Aevo being a derivatives *venue* itself, the AEVO *token* is **NOT listed on [[hyperliquid]]** — so Binance is the primary leveraged venue for trading AEVO. With a sub-$20M cap and rank ~#879, book depth is thin and USD-M perp liquidity is concentrated on a single CEX; leverage should be sized down, since even modest orders move price and the shallow order book makes stop-outs and slippage material. Cross-venue funding/basis plays are effectively single-exchange for AEVO, so execution and position sizing must lean on Binance depth and funding rather than dispersed liquidity.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the Binance USD-M perp lets a market-neutral book collect funding when AEVO perp funding trends persistently one-sided, common in thin low-cap derivatives-DEX tokens.
+- [[crowded-long-funding-fade]] — narrative-driven AEVO rallies (rebrand/vault news, launch echoes) often over-crowd the long side; fading extended positive funding captures the unwind.
+- [[cash-and-carry]] — long Binance spot AEVO vs short the USD-M perp harvests basis/funding while staying delta-neutral, workable given both legs live on the same venue.
+- [[liquidation-cascade-fade]] — low float plus concentrated single-venue leverage makes AEVO prone to sharp liquidation flushes; fading capitulation wicks targets the mechanical over-shoot.
+- [[oi-price-exhaustion]] — rising open interest into a stalling AEVO price flags exhausted, over-leveraged moves ripe for reversal on the Binance perp.
+- [[breakout-and-retest]] — from deep, compressed post-ATH ranges, confirmed breakouts with a retest give structured entries on an otherwise directionless low-cap.
+
+### Volatility & regime character
+
+Small-cap (rank ~#879, ~$18M cap) DeFi/derivatives infrastructure token with high idiosyncratic volatility layered on strong **BTC/ETH beta** — it sells off hard in risk-off regimes (e.g., Extreme-Fear tape) and lacks the liquidity to hold rallies. Price action is reflexive to derivatives-DEX narrative (perp-DEX competition, Ribbon-rebrand baggage) and to broad altcoin risk appetite. Trades ~99% below its March-2024 launch ATH, so regime is best characterized as a beaten-down, narrative-and-beta-driven low-cap rather than a trending asset.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin sub-$20M cap; leveraged access concentrated on Binance USD-M, so a single-venue liquidity or listing change is an outsized risk.
+- **Emissions / distribution overhang** — inherited RBN→AEVO migration distribution plus launch-era float shape ongoing sell pressure; high MC/FDV (~0.92) limits *new* unlock dilution but legacy holders remain an overhang.
+- **Narrative dependence** — value accrual is volume/OI-reflexive and hostage to derivatives-DEX competition (notably Hyperliquid's share); soft narrative directly thins books and fees.
+- **Custom-L2 / protocol risk** — the underlying Aevo venue relies on its own rollup and complex margin/oracle logic; protocol-level events can gap the token independent of market beta.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AEVOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AEVOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AEVO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AEVO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AEVOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AEVOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AEVO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

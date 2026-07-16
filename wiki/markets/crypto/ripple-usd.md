@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation]
+tags: [crypto, regulation, stablecoins, defi]
 aliases: ["RLUSD"]
 entity_type: protocol
 founded: 2024
 headquarters: "Standard Custody & Trust Company (Ripple subsidiary), New York, USA"
 website: "https://ripple.com/solutions/stablecoin/"
-related: ["[[crypto-markets]]", "[[genius-act]]", "[[ripple]]", "[[stablecoins]]", "[[tokenized-treasuries]]", "[[usdc]]", "[[usdt]]", "[[xrp]]"]
+related: ["[[crypto-markets]]", "[[genius-act]]", "[[ripple]]", "[[stablecoins]]", "[[tokenized-treasuries]]", "[[usdc]]", "[[usdt]]", "[[xrp]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[mint-parity-arbitrage]]"]
 ---
 
 # Ripple USD
@@ -238,6 +238,53 @@ RLUSD is a **fiat-reserve payment stablecoin** — the most conservative backing
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RLUSD is a USD-pegged stablecoin traded on [[binance|Binance]] (RLUSD/USDT), and is a PEG / cash-management instrument, NOT a directional asset — the profile here is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. It carries the deepest secondary book of the regulated-stablecoin newcomers, but liquidity is fragmented across CEX pairs (Binance, Kraken, Bitget, Gemini), Uniswap v3 (RLUSD/USDC), and the native XRP Ledger DEX. There is no meaningful directional leverage market: perp/margin depth is thin, so execution and sizing are governed by orderbook depth around 1.00 and by mint/redeem access rather than by trend. Size for arbitrage against the tightest venue, and treat 1:1 institutional redemption via Standard Custody as the ultimate liquidity backstop.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy RLUSD below 1.00 during transient CEX/DEX dislocations, unwinding as the NYDFS-backed peg reasserts.
+- [[stablecoin-pair-arbitrage]] — arb RLUSD against [[usdc|USDC]]/[[usdt|USDT]] across Binance, the XRP Ledger DEX, and Uniswap v3 where cross-venue spreads open.
+- [[mint-parity-arbitrage]] — exploit secondary-market price vs the 1:1 institutional mint/redeem line against USD when RLUSD trades away from par.
+- [[stablecoin-yield]] — deploy RLUSD into money-market wrappers or DeFi venues (e.g. Aave Horizon RWA market) since it pays no native issuer yield under the GENIUS Act.
+- [[delta-neutral-yield-farming]] — hold RLUSD as the stable leg of a market-neutral position, harvesting external yield without peg-direction exposure.
+
+### Volatility & regime character
+
+Peg is tight: RLUSD trades essentially flat at 1.00 with intraday ranges measured in fractions of a basis point (24h range near $0.9994–1.00). The only meaningful "regime" is depeg risk. Historical depeg episodes are confined to launch-week thinness — ATH $1.073 (2024-12-26) and ATL $0.9623 (2024-12-18) — with the peg holding precisely since. The backing model is the most conservative in its cluster: ≥1:1 USD deposits, short-term US Treasuries, and cash equivalents held bankruptcy-remote under a NYDFS trust charter, with monthly attestations. Redemption is institutional 1:1 mint/redeem against USD, which anchors secondary pricing to par.
+
+### Risk flags
+
+- **Depeg risk** — low but non-zero; thin off-peg liquidity can amplify transient dislocations before mint/redeem arbitrage closes them.
+- **Reserve / backing transparency** — reserves rely on monthly attestations, which are not full GAAP audits; custodial concentration with Standard Custody & Trust.
+- **Redemption gating** — 1:1 redemption is an institutional/KYC-gated channel, not retail-open, so par enforcement depends on authorized participants staying active.
+- **Regulatory** — evolving GENIUS Act implementation and Ripple's pending OCC national-bank-charter application could reshape permissible features, yield, and redemption mechanics.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RLUSDUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=RLUSDUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RLUSDUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=RLUSDUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

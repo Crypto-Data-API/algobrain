@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, data-provider, defi, indicators]
+tags: [crypto, data-provider, defi, indicators, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BAND", "Band", "Band Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bandprotocol.com/"
-related: ["[[chainlink]]", "[[cosmos]]", "[[crypto-markets]]", "[[data-provider]]", "[[defi]]", "[[ethereum]]"]
+related: ["[[chainlink]]", "[[cosmos]]", "[[crypto-markets]]", "[[data-provider]]", "[[defi]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Band Protocol
@@ -228,6 +228,55 @@ The broad industry shift toward **pull / first-party** oracles (Pyth, API3) is a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BAND is tradable on [[binance|Binance]] as both **spot** (BAND/USDT) and a **USD-margined perpetual** contract, so it carries a live [[funding-rate|funding rate]], [[open-interest|open interest]] and [[liquidations|liquidation]] flow. It is **not** listed on [[hyperliquid|Hyperliquid]], leaving Binance as the primary leveraged venue. With a sub-$30M market cap and thin (~$2–3M) daily spot turnover, the perp order book is shallow: available leverage exists but effective size is limited by slippage, so positions must be scaled to the perp's depth rather than headline leverage. Because leveraged discovery concentrates on a single exchange, Binance funding and OI are the dominant read on positioning, and cross-venue basis/arbitrage plays are constrained to Binance spot-vs-perp rather than a broad multi-exchange set.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture the perp funding stream on a delta-neutral Binance spot-vs-perp book when BAND funding runs persistently positive during oracle-narrative bounces.
+- [[cash-and-carry]] — pair long Binance spot with short USD-M perp to lock the basis when the perp trades rich to spot on this thin, easily-squeezed mid-cap.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when funding spikes and OI builds into a rally, a recurring pattern on low-float infra tokens like BAND.
+- [[liquidation-cascade-fade]] — the shallow book makes BAND prone to sharp liquidation flushes; fade the wick after a forced-selling cascade exhausts.
+- [[rsi-mean-reversion]] — the low-liquidity, range-bound bear regime produces frequent oversold/overbought extremes that revert rather than trend.
+- [[oi-confirmed-trend]] — require rising open interest to confirm a BAND breakout, filtering the many low-conviction moves driven by thin liquidity alone.
+
+### Volatility & regime character
+
+BAND is a small-cap DeFi/infrastructure (oracle) token with high beta to [[bitcoin|BTC]] and [[ethereum|ETH]] risk sentiment and negligible independent price leadership. Its low float and thin liquidity make it reflexive: moves overshoot in both directions on modest flow, and it tends to lag majors on the way up while amplifying drawdowns on the way down. Absent a fresh oracle-sector or AI-data narrative catalyst, it spends most time in choppy, mean-reverting ranges punctuated by liquidation-driven spikes.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading is effectively single-venue (Binance); a Binance-specific funding, delisting, or liquidity event has outsized impact with no Hyperliquid fallback.
+- **Liquidity / small-cap** — sub-$30M cap and thin turnover mean wide spreads, high slippage on size, and vulnerability to squeezes.
+- **Emissions / supply** — unlimited max supply with inflationary staking rewards is a persistent structural sell-pressure headwind versus organic fee demand.
+- **Narrative dependence** — price is heavily tied to oracle-sector and AI-data narratives; conviction fades quickly when the theme rotates elsewhere.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BANDUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BANDUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BAND` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BAND` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BANDUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BANDUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BAND"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

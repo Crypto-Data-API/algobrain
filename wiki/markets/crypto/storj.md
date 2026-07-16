@@ -3,14 +3,14 @@ title: "Storj"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["STORJ"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://storj.io"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -156,6 +156,57 @@ Chec...
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+STORJ is tradable on **Binance** as both spot (STORJ/USDT) and a **USD-margined perpetual**, which exposes funding rates, open interest and liquidation data for the token. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue and the reference market for derivatives-based signals. With a small market cap (~#1126) and thin 24h volume, order books are shallow: available leverage on the Binance perp lets traders size positions that spot liquidity alone could not support, but slippage on larger clips is material. Because leveraged flow concentrates on a single venue, funding, OI and liquidation prints on Binance are the dominant read on positioning, and execution should lean on limit orders, VWAP-style slicing and conservative position sizing to avoid moving a thin book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — STORJ's Binance perp funding oscillates with retail sentiment on a low-float infra token, letting a delta-neutral spot-long/perp-short book collect funding when longs pay.
+- [[crowded-long-funding-fade]] — narrative-driven DePIN/storage pumps on a thin book tend to overcrowd the long side; persistently positive funding flags exhaustion to fade.
+- [[oi-confirmed-trend]] — with leverage concentrated on Binance, rising open interest alongside price confirms genuine directional conviction versus a hollow spot-only move.
+- [[liquidation-cascade-fade]] — a shallow order book and clustered perp leverage make STORJ prone to sharp liquidation wicks that overshoot and mean-revert, offering fade entries.
+- [[rsi-mean-reversion]] — as a low-cap, range-bound altcoin far below its ATH, STORJ frequently prints oversold/overbought extremes that snap back within its range.
+- [[cash-and-carry]] — when the Binance perp trades at a premium to spot, a long-spot/short-perp carry captures basis plus funding on a token with a functioning derivatives market.
+
+### Volatility & regime character
+
+STORJ is a small-cap infrastructure/DePIN token (decentralized cloud storage) with high beta to the broader altcoin complex and strong correlation to BTC/ETH risk-on regimes. It lacks memecoin-style reflexivity but is narrative-sensitive to DePIN and decentralized-storage cycles. Realized volatility is elevated relative to majors, and moves are amplified by thin liquidity — small flows produce outsized swings. It tends to underperform in risk-off phases and can lag majors during broad rallies unless a storage/DePIN narrative is active.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — thin 24h volume and reliance on Binance as the sole meaningful leveraged venue create slippage and single-venue dependency risk; a Binance listing/parameter change would materially affect tradability.
+- **Emissions & supply** — max supply is uncapped and circulating supply is well below total supply, so ongoing token flow to node operators and treasury movements can pressure price.
+- **Narrative dependence** — performance is tethered to DePIN/decentralized-storage sentiment; interest can evaporate quickly, leaving the token illiquid and directionless.
+- **Small-cap fragility** — deep below its ATH with a micro market cap, STORJ is vulnerable to sharp drawdowns and low-conviction, low-volume trading regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=STORJUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=STORJUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=STORJ` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=STORJ` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=STORJUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=STORJUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=STORJ"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

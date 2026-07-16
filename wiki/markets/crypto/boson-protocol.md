@@ -3,13 +3,13 @@ title: "Boson"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, nft]
+status: review
+tags: [crypto, nft, altcoins]
 aliases: ["BOSON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://bosonprotocol.io"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[dca-strategy]]", "[[narrative-trading]]"]
 ---
 
 # Boson
@@ -140,6 +140,55 @@ Boson Protocol is the agentic commerce protocol for everything — secure commer
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BOSON is tradable on **Binance SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. With thin 24h volume and market cap outside the top 1,800, the order book is shallow: execution should assume meaningful slippage, favor limit orders over market orders, and keep position sizing small relative to typical daily turnover. Venue concentration on a single spot exchange means liquidity can evaporate quickly during volatility, so entries/exits should be scaled and clip sizes kept modest. Without a perp market, there is no cheap way to hedge or express directional shorts — risk is managed primarily through spot sizing and stops.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, illiquid microcap where accumulating in fixed tranches over time reduces the impact of thin-book slippage and single-venue timing risk.
+- [[range-trading]] — BOSON has spent long stretches oscillating in tight low-price ranges, letting range boundaries define spot entries and exits.
+- [[rsi-mean-reversion]] — sharp low-liquidity spikes and flushes often overshoot, giving oscillator-based fades a spot-executable edge on reversion.
+- [[breakout-and-retest]] — with a deep drawdown from ATH, a confirmed breakout above range highs followed by a successful retest offers a cleaner spot entry than chasing.
+- [[narrative-trading]] — as an agentic-commerce/RWA/e-commerce token, BOSON price is heavily driven by AI-agent and RWA narrative cycles rather than fundamentals.
+- [[volatility-targeting]] — because realized volatility is high and erratic on a microcap, sizing to a volatility budget keeps spot risk consistent across regimes.
+
+### Volatility & regime character
+
+Small-cap altcoin (rank ~1818) with high, reflexive volatility typical of low-float, low-liquidity tokens. As an infrastructure/RWA and NFT-lineage protocol token, price action is narrative-sensitive (AI agents, RWA, e-commerce) and shows high beta to broad crypto risk sentiment, tending to amplify BTC/ETH moves on the downside during risk-off. Long-term trend has been a deep multi-year drawdown from its 2021 ATH; regimes alternate between extended low-volatility drift and sharp liquidity-driven spikes.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — spot-only on Binance with thin 24h volume; wide spreads and slippage risk, and no perp venue to hedge.
+- **Emissions/unlock overhang** — circulating supply is below max supply, leaving room for further token release that can add sell pressure.
+- **Narrative dependence** — valuation leans on AI-agent/RWA/e-commerce narratives; sentiment reversals can sharply de-rate the token.
+- **Deep drawdown / weak momentum** — price sits far below ATH with negative multi-timeframe returns, so trend-following longs face persistent downside risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BOSONUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BOSONUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BOSONUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BOSONUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["Finschia", "KAIA", "Klaytn"]
 entity_type: protocol
 founded: 2024
 headquarters: "Kaia DLT Foundation, Abu Dhabi (chain is decentralized)"
 website: "https://kaia.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[stablecoins]]", "[[tether-limited]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[stablecoins]]", "[[tether-limited]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Kaia
@@ -199,6 +199,56 @@ KAIA is the largest-cap name in this basket and the cleanest listed proxy for th
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KAIA is tradable on **Binance** — both spot (KAIAUSDT) and a **USD-margined perpetual** carrying funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue and the reference book for derivatives-based signals. This concentrates perp liquidity and price discovery on a single CEX: funding, OI, and liquidation prints for KAIA are effectively Binance-only, and there is no on-chain perp cross-check. Because a large share of underlying spot flow lives on Korean KRW venues (Upbit/Bithumb) that lie outside the perp complex, the Binance perp can lead or lag the KRW spot mark, opening basis and cross-venue dislocations. With thin daily dollar volume (~$5M, ~2% of cap), leveraged positions should be sized down: order books are shallow, slippage on aggressive fills is high, and crowded perp positioning can trigger outsized liquidation moves. Prefer limit/VWAP execution and modest leverage; venue concentration means a single Binance outage or funding spike dominates the tradable microstructure.
+
+### Applicable strategies
+
+- [[narrative-trading]] — KAIA is the cleanest listed proxy for the Korean/Asian stablecoin regulatory theme; positioning around won-stablecoin legislation and Project Unify headlines is the dominant edge.
+- [[event-driven-trading]] — discrete catalysts (KB Kookmin pilot graduation, USDT-on-Kaia supply prints, Mini Dapp monetization data) create sharp, tradable repricing windows.
+- [[crowded-long-funding-fade]] — after retail-driven rallies (like the +59% week off the June low), the Binance perp can flip to persistently positive funding, setting up a funding-fade against over-leveraged longs.
+- [[liquidation-cascade-fade]] — thin liquidity plus concentrated Binance leverage makes KAIA prone to sharp liquidation flushes that overshoot, offering mean-reverting entries into forced selling.
+- [[breakout-and-retest]] — post-merger downtrend and a fresh ATL make reclaim/retest levels off the base structurally significant for momentum entries.
+- [[oi-confirmed-trend]] — using Binance open-interest changes to confirm whether a KAIA move is real conviction or a thin-liquidity squeeze filters false breakouts on this low-float name.
+
+### Volatility & regime character
+
+Small/mid-cap (rank ~167) Asia-focused Layer 1 / stablecoin-settlement infra token with high beta to BTC/ETH risk sentiment and an added, idiosyncratic sensitivity to **Korean retail flow** and stablecoin-regulation headlines. Near-full float (MC/FDV ≈ 1.0) removes unlock-driven supply shocks, so volatility is demand-driven and reflexive: thin liquidity amplifies both rallies and flushes (e.g., a +59% week immediately after a fresh ATL). Behaves like an infra/DeFi altcoin that trends hard in risk-on regimes and bleeds in "established bear" conditions, but decouples from the broad crypto tape around Korea/Asia-specific catalysts.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading is effectively Binance-only (no Hyperliquid); much of the real spot depth sits on Korean KRW venues outside the perp complex, so perp signals can misprice the true book.
+- **Thin liquidity** — ~$5M daily volume (~2% of cap) means high slippage, fragile bounces, and outsized liquidation risk on modest size.
+- **Uncapped issuance** — no max supply; ongoing governance-controlled emissions require network-fee demand to offset inflation, and user growth has so far badly lagged token demand (~91% below ATH).
+- **Narrative dependence** — the bull case rests on Korean won-stablecoin legislation; regulatory outcomes cut both ways and value could accrue to banks rather than KAIA.
+- **Regulatory** — direct exposure to shifting Korean/Asian stablecoin and crypto policy.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KAIAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=KAIAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=KAIA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=KAIA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KAIAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=KAIAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=KAIA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

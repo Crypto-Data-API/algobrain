@@ -3,13 +3,13 @@ title: "Banana For Scale"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["BANANAS31"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bananabsc.com/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[meme-coin-cycle]]"]
 ---
 
 # Banana For Scale
@@ -124,6 +124,56 @@ Launched on the BNB Chain, $BANANAS31 has achieved remarkable traction, attracti
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BANANAS31 is tradable on **Binance** — both spot (BANANAS31/USDT) and a USD-margined perpetual, so funding, open interest, and liquidation data are available on the primary leveraged venue. It is **NOT listed on Hyperliquid**, so on-chain perp order flow and Hyperliquid-specific funding are unavailable; Binance is the single primary leveraged venue. This venue concentration means leverage, depth, and liquidation reference pricing all key off Binance. As a small-cap memecoin (~rank #331), perp order books are thin relative to majors, so sizing should stay modest, execution should favor limit/passive fills over market sweeps, and traders should expect wider slippage and sharper liquidation cascades during volatility. Spot secondary listings (Kraken, Bitget) add cash-leg liquidity for hedged structures, but the leveraged/derivatives picture is effectively a single-venue Binance dependency.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a reflexive memecoin perp tends to run persistently positive funding during hype phases, letting a delta-neutral spot-long/perp-short harvest the premium on Binance.
+- [[crowded-long-funding-fade]] — crowded, over-leveraged longs in a small memecoin frequently push funding to extremes, offering a mean-reversion fade when positioning gets one-sided.
+- [[liquidation-cascade-fade]] — thin Binance perp depth makes BANANAS31 prone to sharp long-liquidation flushes that overshoot, creating fade opportunities into the wick.
+- [[meme-coin-cycle]] — as a pure meme (Reddit "banana for scale" / SpaceX narrative), it trades on the recognizable meme-cycle rhythm of parabolic pumps and steep decay.
+- [[narrative-trading]] — price is driven by the Musk/Starship and BNB-Chain-meme narrative rather than fundamentals, rewarding trades timed to attention spikes.
+- [[oi-confirmed-trend]] — rising Binance open interest alongside price confirms genuine leveraged momentum versus low-conviction moves, useful for filtering breakouts on a low-float memecoin.
+
+### Volatility & regime character
+
+Small-cap memecoin (~rank #331) with high memecoin reflexivity: sharp, attention-driven pumps followed by steep decay, and a large ATH drawdown history. Beta to BTC/ETH is high in risk-off regimes (memes sell off hardest in broad de-risking) but decouples upward on idiosyncratic narrative catalysts. As a BNB-Chain token it also carries some correlation to BNB ecosystem sentiment. Expect elevated realized volatility, low float relative to majors, and funding/OI that swing quickly with retail positioning.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading and liquidation reference pricing depend almost entirely on Binance; no Hyperliquid fallback and thin secondary depth.
+- **Liquidity/slippage** — small-cap perp order books are shallow; large orders move price and liquidation cascades can gap.
+- **Narrative dependence** — value is tied to meme attention (SpaceX/Musk, Reddit meme); fading interest can drive rapid, durable drawdowns.
+- **Memecoin reflexivity & drawdown** — history of large peak-to-trough declines; leveraged exposure amplifies downside sharply.
+- **Emissions/supply** — verify circulating vs. total supply and any unlock schedule before sizing; concentrated holder bases can amplify volatility.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BANANAS31USDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BANANAS31USDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BANANAS31` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BANANAS31` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BANANAS31USDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BANANAS31USDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BANANAS31"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

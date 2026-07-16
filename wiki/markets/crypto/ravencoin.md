@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, technical-analysis]
+tags: [crypto, technical-analysis, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["RVN"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://ravencoin.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[proof-of-work]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[proof-of-work]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Ravencoin
@@ -264,6 +264,55 @@ The release of the Ravencoin mainnet and increase in activity on the platform sh
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RVN is tradable on [[binance]] — spot plus a USD-margined [[perpetual-futures|perpetual]] (with [[funding-rate|funding]], [[open-interest]], and [[liquidations]]). It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue for the name. Because leverage and derivatives liquidity are concentrated on a single venue, funding, OI, and liquidation data should be sourced from Binance rather than aggregated across many perp books. The thin spot float (a small fraction of the ~$62-69M cap turns over daily) means the perp adds usable short/leverage capacity, but combined spot+perp depth is still shallow: size positions to Binance order-book depth, expect meaningful slippage on larger clips, and treat single-venue concentration as an execution and liquidation-risk constraint.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with leverage concentrated on the lone Binance perp, funding can swing hard on this low-float small cap, letting a delta-neutral spot-long/perp-short capture rich funding.
+- [[crowded-long-funding-fade]] — RVN pumps on thin liquidity draw leveraged longs; persistently positive Binance funding flags crowded positioning to fade.
+- [[liquidation-cascade-fade]] — the shallow single-venue perp book makes RVN prone to violent liquidation flushes that overshoot, offering mean-reversion entries after the cascade.
+- [[oi-confirmed-trend]] — pairing Binance open-interest builds with price moves helps separate real leveraged trend from thin-liquidity noise on this micro-cap.
+- [[breakout-and-retest]] — RVN sits just above its 2026 all-time low, so breaks from multi-week bases can be traded with retest confirmation to control small-cap whipsaw.
+- [[cash-and-carry]] — spot on Binance versus the USD-M perp allows a basis/carry capture when the perp trades at a persistent premium.
+
+### Volatility & regime character
+
+Small-cap, low-beta legacy PoW asset-issuance token with thin liquidity and high idiosyncratic volatility. It broadly tracks the risk-on/risk-off crypto tape and BTC direction but with amplified, illiquid moves and sharp reflexive spikes on the way up and flushes on the way down. It is an infrastructure/RWA-narrative name rather than a DeFi or memecoin, so it lacks a persistent momentum flywheel and tends to drift with the older PoW-alt cohort. Correlation to BTC/ETH is positive but noisy given its micro-cap size.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** leveraged trading is concentrated on Binance; thin spot+perp depth means high slippage and outsized liquidation-cascade risk.
+- **Narrative dependence:** the thesis rests entirely on RWA/tokenization adoption, a category dominated by larger players — faded-narrative drift is the base case.
+- **Emissions & security budget:** ongoing PoW block-reward issuance (halving on a ~4-year schedule) and a modest GPU hashrate expose a smaller-cap chain to security-budget concerns.
+- **Regime sensitivity:** in risk-off/established-bear conditions, low-conviction small caps like RVN are prone to sharp, illiquid drawdowns; trading near all-time lows adds downside gap risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RVNUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RVNUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=RVN` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=RVN` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RVNUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=RVNUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=RVN"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

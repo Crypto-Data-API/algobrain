@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, oracle]
+tags: [crypto, defi, oracle, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["API3"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://api3.org/"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Api3
@@ -265,6 +265,49 @@ Api3 delivers first-party oracles that pay you — connecting real-world data di
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** API3 is tradable on [[binance|Binance]] — both spot (API3/USDT) and a USD-margined [[perpetual-futures|perpetual]], which exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid|Hyperliquid]]; Binance is the primary leveraged venue. With derivatives concentrated on a single major CEX, leverage and short-side exposure funnel through Binance's order book and funding mechanism, so the perp funding rate and OI there are the cleanest read on positioning. Absolute depth is modest for a ~#614 mid/small-cap, meaning size must be worked carefully — large market orders slip, and stops/liquidations can chain in thin books. Sizing should assume Binance-centric liquidity and account for gap risk when spot CEX/DEX flow (Kraken, Upbit, Uniswap) diverges from the perp.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — Binance is the sole major perp venue, so a persistent funding sign can be collected against a spot hedge on the same exchange.
+- [[crowded-long-funding-fade]] — deep-value oracle token near its ATL invites reflexive long-chasing on OEV-narrative pops; extended positive funding flags a fade.
+- [[cash-and-carry]] — long spot API3/USDT vs short the USD-M perp captures basis when the narrative drives perp premium above spot.
+- [[liquidation-cascade-fade]] — thin single-venue derivatives depth makes forced-liquidation flushes overshoot, offering rebound entries after the cascade.
+- [[oi-confirmed-trend]] — because leverage is concentrated on Binance, rising OI alongside price gives a clean confirmation/exhaustion signal for trend entries.
+- [[rsi-mean-reversion]] — high turnover on a small float around oracle catalysts produces sharp overbought/oversold swings that revert toward range.
+
+**Volatility & regime character.** API3 is a small/mid-cap DeFi-infrastructure (oracle) token with high beta to BTC/ETH risk sentiment and amplified moves in extreme-fear regimes. It is not a memecoin, but its low float and OEV-narrative sensitivity give it reflexive, catalyst-driven bursts of volatility on modest volume. Price action tends to track the broad altcoin risk cycle, decoupling only around oracle-specific news (OEV adoption, feed integrations).
+
+**Risk flags.**
+- **Venue concentration** — leveraged liquidity is effectively single-venue (Binance); a listing/delisting or depth shift there dominates tradable derivatives risk.
+- **Emission / dilution** — uncapped inflationary staking rewards mint new supply indefinitely, a structural headwind that funding and carry trades must weigh.
+- **Narrative dependence** — valuation leans heavily on OEV adoption; stalled traction can drain the speculative bid that drives volume.
+- **Liquidity drought** — modest absolute depth on a low-cap infra token makes it prone to slippage and cascade risk in bear/extreme-fear conditions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=API3USDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=API3USDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=API3` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=API3` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=API3USDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=API3USDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=API3"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, altcoins]
 aliases: ["GNO", "Gnosis Chain", "GnosisDAO"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized (origins: Gibraltar / Berlin)"
 website: "https://www.gnosis.io/"
-related: ["[[cow-protocol]]", "[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[safe]]", "[[stablecoins]]"]
+related: ["[[cow-protocol]]", "[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[safe]]", "[[stablecoins]]", "[[binance]]", "[[buy-and-hold]]", "[[event-driven-trading]]"]
 ---
 
 # Gnosis
@@ -322,6 +322,50 @@ GNO's distinctive edge among "DAO treasury" plays is an **explicit redemption me
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+GNO is tradable on **Binance SPOT only** among deep centralized venues — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. With 24h volume extremely thin against a mid-cap valuation and turnover well under 1%, the book is shallow: size moves price and slippage on meaningful clips is material. Venue concentration on a single spot exchange means execution should favor patient limit orders, small child-order sizing, and long holding horizons; treat GNO as an accumulation/valuation position, not a tactical-flow instrument. Directional views are expressed long-spot; there is no clean way to short or lever the discount-to-NAV thesis.
+
+### Applicable strategies
+- [[buy-and-hold]] — GNO's core setup is a discount-to-NAV treasury play with an explicit redemption floor (GIP-140 ~$170/GNO), rewarding patient holding until the discount closes.
+- [[dca-strategy]] — thin, gapping liquidity makes scaling in gradually (rather than a single clip) the natural way to build a spot position without moving the book.
+- [[value-averaging]] — with a legible per-token NAV anchor, adding more when price sits further below the treasury estimate fits the closed-end-fund-style discount mechanics.
+- [[event-driven-trading]] — GNO's re-rates are governance-catalyst-driven (GIP-140 execution, 6.8M GNO burn, EEZ L2 migration), so positioning around DAO votes and redemption windows is central.
+- [[mean-reversion]] — a persistent discount to a hard NAV floor is a structural mean-reversion setup: buy the widened discount, expect convergence toward redemption value.
+- [[contrarian-extremes]] — accumulating during extreme-fear/bear regimes when the discount is widest suits a spot-only asset with a NAV ceiling and floor.
+
+### Volatility & regime character
+Mid-cap infra/DeFi + DAO-treasury token. GNO behaves less like a beta-driven altcoin and more like a **closed-end fund**: an explicit treasury-NAV anchor dampens open-ended appreciation (NAV as ceiling magnet) while thin liquidity causes it to **gap on governance headlines rather than trade on flow**. Broad BTC/ETH beta exists but is muted relative to typical alts because the price is tethered to treasury value and redemption mechanics; idiosyncratic, catalyst-driven moves dominate. Low float (~2.64M / 3.0M cap) amplifies per-token NAV sensitivity to treasury marks.
+
+### Risk flags
+- **Liquidity & venue concentration** — single deep spot venue (Binance) with very thin turnover; entering/exiting size moves price and the discount can widen sharply in stress. No perp venue means no leverage/short expression.
+- **Governance dependence** — the entire thesis hinges on DAO votes (GIP-140 terms, burn execution); outcomes can be amended, delayed, or rejected.
+- **Treasury / mark risk** — the NAV floor depends on treasury asset marks; a drawdown in holdings lowers redemption value.
+- **Redemption caps upside** — full arbitrage of the discount pins price near NAV, limiting appreciation above the floor.
+- **Value-accrual ambiguity** — Safe/CoW economics do not cleanly flow to GNO today; SOTP upside is optional, not contractual.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GNOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GNOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GNOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=GNOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

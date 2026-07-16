@@ -3,13 +3,13 @@ title: "Gigachad"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins, memecoins]
 aliases: ["GIGA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.gigachad.fitness/"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[binance]]", "[[momentum-investing]]", "[[breakout-trading]]"]
 ---
 
 # Gigachad
@@ -127,6 +127,55 @@ GIGA is a community run project.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With no perp market, position sizing must rely on cash spot exposure rather than margin, and directional shorting is impractical for most participants. Thin single-venue depth means large orders can move the tape; favor limit orders, VWAP/TWAP slicing, and smaller clip sizes to control slippage. Venue concentration also makes execution sensitive to Binance-specific outages, listing changes, or maintenance windows.
+
+### Applicable strategies
+
+- [[momentum-investing]] — GIGA is a reflexive Solana memecoin that trends hard in narrative-driven bursts; riding confirmed upside momentum captures those runs.
+- [[breakout-trading]] — long consolidation ranges punctuated by sharp expansions make range-boundary breakouts a natural entry framework.
+- [[breakout-and-retest]] — waiting for a breakout to retest the broken level filters the many false starts common in low-cap meme tape.
+- [[volatility-breakout]] — high, clustered volatility means expansion off compressed ranges is a repeatable spot signal.
+- [[atr-trailing-stop]] — wide, gap-prone swings make an ATR-based trailing stop essential for locking gains while surviving noise.
+- [[dca-strategy]] — spot-only access and deep drawdowns from ATH suit averaging in over time rather than levered timing.
+
+### Volatility & regime character
+
+Small-cap memecoin (rank ~752) with high reflexivity and beta to broader crypto risk appetite. As a Solana-ecosystem meme token, GIGA typically shows strong correlation to SOL and to overall memecoin/altcoin sentiment cycles, amplifying both up and down moves. Price action is narrative- and attention-driven rather than fundamentals-driven, producing sharp, sentiment-led swings and elevated realized volatility versus large-cap assets.
+
+### Risk flags
+
+- Liquidity/venue concentration: single-venue (Binance SPOT) tradability with thin depth raises slippage and execution risk; no perp venue limits hedging and shorting.
+- Narrative dependence: value is driven by meme/attention cycles, so momentum can reverse abruptly when the narrative fades.
+- Small-cap fragility: low market-cap rank means outsized drawdowns and vulnerability to broad risk-off moves.
+- Emissions/supply: monitor supply dynamics and any distribution events; community-run meme tokens can see reflexive sell pressure.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GIGAUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GIGAUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GIGAUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=GIGAUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

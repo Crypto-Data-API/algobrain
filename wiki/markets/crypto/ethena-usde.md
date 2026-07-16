@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, stablecoins]
 aliases: ["Ethena", "USDE", "USDe", "sUSDe"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://app.ethena.fi/"
-related: ["[[aave]]", "[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[stablecoin]]"]
+related: ["[[aave]]", "[[binance]]", "[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # Ethena USDe
@@ -273,6 +273,52 @@ A pegged asset is not "valued" by price — the analytical questions are about *
 | **Max Supply** | Unlimited |
 | **Fully Diluted Valuation** | $4.02B |
 | **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USDe is a USD-pegged synthetic dollar traded primarily on Binance (USDE/USDT), with additional spot venues (Kraken USDE/EUR, Bitget, KuCoin) and deep on-chain liquidity via Curve and Uniswap. It is a **peg / cash-management instrument, not a directional asset** — the trade is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, never momentum. Practical implications: leverage is rarely used on the stablecoin leg itself (there is no directional edge in a $1 asset); position sizing is driven by mint/redeem parity, redemption capacity, and available exit liquidity rather than a price target. Binance-centric spot depth plus Curve/Uniswap pools means execution and sizing hinge on which venue offers the tightest deviation from $1.00 at the moment; because economically important flow is mint/redeem rather than exchange turnover, large size is best worked through primary redemption or the deepest stable pools to avoid moving the peg.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — USDe has printed genuine depeg stress ($0.9295 in Oct 2024, a wobble in Oct 2025); buying below par and holding to re-peg is the canonical trade when backing is intact.
+- [[synthetic-stablecoin-depeg-arbitrage]] — as a delta-neutral synthetic dollar (not fiat-backed), USDe's depegs are driven by funding/collateral stress, so its dislocations require this synthetic-specific arb rather than a naive reserve-backed model.
+- [[stablecoin-yield]] — staking into sUSDe captures funding-plus-staking yield; the trade is sizing yield vs T-bills and rotating out mechanically when the spread turns negative.
+- [[stablecoin-pair-arbitrage]] — spreads between USDE/USDT on Binance, USDE/EUR on Kraken, and Curve/Uniswap USDe pools open small, capturable dislocations.
+- [[mint-parity-arbitrage]] — the 1:1 mint/redeem against collateral anchors USDe to $1.00; deviations between secondary-market price and mint/redeem parity are directly arbitrageable by whitelisted flow.
+- [[carry-trade]] — USDe *is* the tokenized crypto carry (staked collateral long + perp short); holding sUSDe expresses the basis/funding carry directly.
+
+### Volatility & regime character
+
+As a pegged synthetic dollar, USDe should show near-zero price volatility — it holds tightly around $1.00 (recently ~$0.999, within a few basis points), and *deviations from $1 are the signal, not the price level*. Historical depeg episodes bracket the peg: an all-time low of $0.9295 (Oct 2024) and a repeat wobble in Oct 2025, versus a transient $1.034 high (Dec 2025) reflecting redemption-premium / pool imbalance. The backing model is delta-neutral (staked ETH/BTC/SOL collateral hedged by an equal-notional perp short) rather than fiat reserves, so peg tightness is a function of funding regimes and reserve-fund coverage. Redemption mechanics are elastic 1:1 mint/redeem against collateral, which is the mechanism that pulls price back to par — but prolonged negative funding erodes the reserve and incentivizes the supply contraction seen through 2026.
+
+### Risk flags
+
+- **Depeg risk** — real, not theoretical: negative-funding regimes force the protocol to pay rather than earn, stressing the peg (see the Oct 2024 / Oct 2025 wobbles).
+- **Reserve / backing transparency** — solvency depends on reserve-fund size relative to supply and on off-exchange custody of collateral; opacity here is the core credit risk.
+- **Redemption gating** — mint/redeem is whitelisted market-maker flow; a stressed unwind can back up the redemption queue, widening secondary-market discounts before parity restores.
+- **Regulatory** — USDe's yield model is offshore/unregulated (advantaged by, but outside, the GENIUS Act perimeter); a regulatory clampdown on yield-bearing stablecoins is a tail risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USDEUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=USDEUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USDEUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=USDEUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

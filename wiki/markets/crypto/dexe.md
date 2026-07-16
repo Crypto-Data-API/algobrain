@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["DEXE", "DeXe DAO", "DeXe Protocol"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://dexe.network/"
-related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[dao]]", "[[defi-narratives]]", "[[ethereum]]", "[[token-unlocks]]"]
+related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[dao]]", "[[defi-narratives]]", "[[ethereum]]", "[[token-unlocks]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[oi-confirmed-trend]]"]
 ---
 
 # DeXe
@@ -225,6 +225,59 @@ This is framing, not a price target; the wiki holds no fair-value model for DEXE
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DEXE is tradable on [[binance|Binance]] — **spot** (DEXE/USDT) plus a **USD-margined perpetual** that carries the full derivatives toolkit: [[funding-rate|funding]], [[open-interest|open interest]] and [[liquidations]]. It is **NOT listed on Hyperliquid**, so Binance is the primary — effectively sole major — leveraged venue for the token. Practical implications:
+
+- **Leverage & liquidity are concentrated on one book.** With the perp confined to Binance, funding, OI and liquidation flow all originate from a single venue; there is no Hyperliquid order book to arb against or fall back to. This raises single-venue dependency and makes execution sensitive to Binance-specific depth, funding resets and liquidation cascades.
+- **Size against spot depth, not headline mcap.** Spot turnover has run in the low tens of millions per day (moderate for a rank ~#47/#81 name), so aggressive size moves the tape. Combine spot + perp depth and lean on limit/VWAP execution; reserve leverage for the liquid Binance hours.
+- **Perp enables the short/hedge side** that spot-only KuCoin cannot — necessary for basis, funding and liquidation-fade expressions below.
+
+### Applicable strategies
+
+- [[momentum-investing]] — DEXE was the standout momentum name of 2026 (+363% YTD by May); it trends hard when the DAO-governance narrative catches a bid.
+- [[oi-confirmed-trend]] — Binance perp OI lets you confirm whether a DEXE breakout is fuelled by real leverage inflow rather than thin spot chasing.
+- [[funding-rate-harvest]] — parabolic runs push DEXE perp funding richly positive; harvesting funding (short perp vs spot) monetises crowded longs on the single Binance book.
+- [[liquidation-cascade-fade]] — a high-beta, single-venue perp mean-reverts hard (-17% in one snapshot week); fading forced-liquidation flushes on Binance targets the overshoot.
+- [[breakout-and-retest]] — DEXE's 2026 leg was a stair-step of narrative-driven breakouts ($5.11 → $9.88 → $12.10); breakout-then-retest structures the momentum entries.
+- [[token-unlock-supply-event]] — with MC/FDV ~0.48 (roughly half of supply non-circulating), treasury/team distribution and unlock events are recurring, tradable supply catalysts.
+
+### Volatility & regime character
+
+Mid-cap **DeFi / DAO-infrastructure** governance token with **high-beta, single-narrative momentum** behaviour. DEXE amplifies risk-on/risk-off swings (parabolic on the way up, sharp mean-reversion on the way down) and its price is tightly coupled to the DAO-governance narrative cycle rather than to fundamentals. Directionally correlated to BTC/ETH beta but with far wider amplitude, and a reflexive buyback-and-burn mechanic that adds a supply-narrative kicker in both directions. Not a memecoin, but reflexive enough to behave like one during blow-off phases.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading lives entirely on Binance (no Hyperliquid); a single-venue outage, funding spike or listing change hits all leverage at once.
+- **Dilution / supply overhang** — MC/FDV ~0.48; ~half of total supply is non-circulating, so [[token-unlocks|treasury/team distribution]] and burn-schedule governance changes can swamp price into strength.
+- **Narrative dependence** — the entire re-rating rode the 2026 DAO-governance revival; if the narrative fades, the high-beta proxy retraces hardest.
+- **Liquidity thinness in fast tape** — moderate daily turnover means slippage and cascade risk spike during volatility; size and stops must account for gappy fills.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DEXEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DEXEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=DEXE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=DEXE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DEXEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=DEXEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=DEXE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

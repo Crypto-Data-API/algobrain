@@ -3,13 +3,13 @@ title: "Solv Protocol"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["SOLV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://Solv.finance/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Solv Protocol
@@ -123,6 +123,57 @@ Backed by prominent investors such as Binance Labs, Blockchain Capital, Laser Di
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SOLV is tradable on **Binance** — both **spot** (SOLV/USDT) and a **USD-margined perpetual** with funding, open interest, and liquidation data. It is **not listed on Hyperliquid**, so Binance is the primary leveraged venue and the reference source for perp-based signals. With a small-cap profile and modest 24h volume, order-book depth is thin: leveraged positioning is concentrated on a single venue, so funding and OI shifts on Binance drive most of the derivatives-based tape. Practically, this means execution should favor smaller clip sizes, limit orders, and slippage-aware entries, and position sizing must account for the concentration risk of a lone leveraged venue where a funding flip or forced deleveraging can move price sharply.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture recurring funding on the Binance SOLV perp when the single-venue crowd skews persistently long or short, collecting carry against a hedged spot leg.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when Binance funding runs hot and OI climbs on a low-liquidity small-cap prone to squeezes.
+- [[liquidation-cascade-fade]] — thin depth and one-venue leverage make SOLV vulnerable to liquidation cascades; fade the wick and reload once forced selling exhausts.
+- [[cash-and-carry]] — lock the spot-vs-perp basis on Binance when the perp trades at a persistent premium, harvesting the spread with a delta-neutral book.
+- [[rsi-mean-reversion]] — a deeply drawn-down, range-bound small-cap far below ATH offers oversold bounces suited to disciplined mean-reversion entries.
+- [[breakout-and-retest]] — narrative-driven BTCfi flows can trigger sharp expansions from compression; trade confirmed breakouts on retest to avoid low-liquidity fakeouts.
+
+### Volatility & regime character
+
+SOLV is a **small-cap DeFi / BTCfi infrastructure token** with high beta to broad crypto risk sentiment and strong directional correlation to BTC and ETH. As a BTCfi (Bitcoin staking / SolvBTC) protocol token, its narrative is tightly coupled to Bitcoin-yield and staking themes, so it tends to rally hardest in Bitcoin-led risk-on regimes and bleed disproportionately in risk-off. Realized volatility is elevated and reflexive: thin liquidity amplifies both breakouts and flush-downs, and the token trades far below its all-time high, giving a persistent downtrend bias punctuated by sharp relief rallies.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — small market cap, modest 24h volume, and a single primary leveraged venue (Binance) mean wide spreads, slippage, and cascade risk.
+- **Unlocks / emissions** — large gap between circulating (~1.48B) and max (~9.66B) supply implies ongoing emissions and future unlock overhang that can pressure price; low MC/FDV ratio flags dilution risk.
+- **Narrative dependence** — valuation hinges on the BTCfi / Bitcoin-staking narrative; fading interest in that theme or a stumble in SolvBTC adoption can drive sustained underperformance.
+- **Drawdown / trend** — trading ~99% below ATH with a persistent multi-timeframe downtrend; countertrend longs carry elevated risk absent a regime shift.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SOLVUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SOLVUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SOLV` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SOLV` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SOLVUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SOLVUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SOLV"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

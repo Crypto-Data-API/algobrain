@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["JOE", "LFJ", "Trader Joe"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lfj.gg/avalanche"
-related: ["[[automated-market-maker]]", "[[avalanche]]", "[[concentrated-liquidity]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[liquidity-pool]]"]
+related: ["[[automated-market-maker]]", "[[avalanche]]", "[[binance]]", "[[concentrated-liquidity]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[governance-token]]", "[[impermanent-loss]]", "[[liquidity-pool]]", "[[perpetual-futures]]"]
 ---
 
 # JOE (Trader Joe / LFJ)
@@ -206,6 +206,57 @@ Trader Joe/LFJ is the leading DEX on Avalanche by liquidity and volume, and a me
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+JOE is tradable on **[[binance|Binance]]** as both **spot** (JOE/USDT) and a **USD-margined perpetual**, exposing [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue and the effective reference for funding and OI. Because leveraged flow is concentrated on a single exchange, perp liquidity is shallow relative to majors: for a sub-$20M-cap DeFi token, the order book thins quickly, funding can swing hard, and stop clusters are easy to run. Practical implication — size positions to Binance depth, prefer limit/maker entries, stagger fills, and treat the venue-concentration as a structural liquidity risk that widens realized slippage on aggressive market orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on JOE when the single-venue Binance perp runs persistently one-sided against thin spot depth.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when Binance funding spikes positive on a low-float DeFi name prone to reflexive squeezes.
+- [[liquidation-cascade-fade]] — a ~$15M-cap perp liquidates violently; fade forced-selling wicks once the cascade exhausts.
+- [[cash-and-carry]] — harvest spot-vs-perp basis using Binance spot + USD-M perp when the perp trades rich to spot.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm directional moves in JOE tied to Avalanche DeFi narrative shifts.
+- [[range-mean-reversion]] — JOE's grinding, range-bound tape between narrative catalysts suits reversion around established levels.
+
+### Volatility & regime character
+
+Small-cap ([[altcoins|altcoin]]), infra/[[defi|DeFi]] token — the governance/fee-share token of Avalanche's flagship DEX. High beta to BTC/ETH risk-on/risk-off and even higher beta to the Avalanche DeFi narrative; correlation to majors rises sharply in liquidations and drawdowns. Not a memecoin, but low float and thin perp depth produce memecoin-like reflexivity on catalysts — sharp squeezes and equally sharp air-pockets. Between catalysts it tends to grind and mean-revert.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — leveraged trading is concentrated on Binance; no Hyperliquid market means one-venue funding, OI, and liquidation dynamics with thin depth and elevated slippage.
+- **Narrative dependence** — value accrual and volume are tightly coupled to Avalanche DeFi activity; JOE fades when that narrative cools.
+- **Emissions / supply** — ~80% of the capped 500M supply circulates (MC/FDV ≈ 0.81), so dilution is limited, but remaining emissions and staking-reward flows can still pressure price.
+- **Small-cap fragility** — a sub-$20M-cap token gaps on low volume; funding and liquidation cascades amplify moves in both directions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=JOEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=JOEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=JOE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=JOE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=JOEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=JOEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=JOE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

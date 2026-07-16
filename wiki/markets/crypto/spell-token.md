@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, lending, stablecoin]
+tags: [crypto, defi, ethereum, lending, stablecoin, stablecoins]
 aliases: ["Abracadabra.money", "MIM", "SPELL", "Spell Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://abracadabra.money/"
-related: ["[[arbitrum]]", "[[avalanche]]", "[[collateralized-debt-position]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[lending]]", "[[liquity]]", "[[makerdao]]", "[[stablecoin]]"]
+related: ["[[arbitrum]]", "[[avalanche]]", "[[binance]]", "[[collateralized-debt-position]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[lending]]", "[[liquity]]", "[[makerdao]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # Spell (Abracadabra.money)
@@ -218,6 +218,55 @@ Abracadabra is the most aggressive of the group on collateral acceptance, which 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SPELL trades on [[binance]] (SPELL/USDT) and other centralized venues, with the SushiSwap SPELL/WETH pool as the main on-chain market. Note that SPELL is the **governance/incentive token**, not the stablecoin — the USD-pegged asset in this system is **MIM**, and SPELL's price is *reflexively* driven by MIM peg health, borrowing demand, and sSPELL fee flows. Practically, the peg / cash-management angle applies to the underlying MIM instrument (peg stability, backing/reserves, depeg risk, and yield/arbitrage), while SPELL itself is a thinly-liquid, deeply de-rated directional proxy on that peg's fortunes. Very low unit price (fractions of a cent) and modest 24h volume mean wide relative spreads and high slippage on size; spot venue availability, not on-chain leverage, is what caps realistic position sizing here. Because SPELL is small-cap and lightly supported, execution should assume liquidity can thin out fast during MIM stress events.
+
+### Applicable strategies
+
+The following peg/stablecoin strategies apply primarily to the **MIM** stablecoin that Abracadabra issues (and thus indirectly to SPELL as a reflexive governance claim on that peg):
+
+- [[stablecoin-depeg-profit-capture]] — MIM has depegged under stress (2022, and post-2024 exploit pressure); accumulating MIM below $1 into a credible re-peg is the classic play, with SPELL as a higher-beta directional expression.
+- [[synthetic-stablecoin-depeg-arbitrage]] — MIM is an over-collateralized *synthetic* stablecoin with no fiat 1:1 redemption, so depeg arbitrage keys off collateral quality and Curve liquidity rather than a bank redemption.
+- [[mint-parity-arbitrage]] — the cauldron mint/repay mechanics let arbitrageurs mint or repay MIM to nudge it back toward $1, the core mechanism holding the peg.
+- [[stablecoin-pair-arbitrage]] — MIM-vs-USDC/USDT/DAI spreads (historically via the MIM-3CRV Curve pool) offer basis capture when MIM drifts off peg against fiat-backed stables.
+- [[stablecoin-yield]] — MIM/sSPELL yields track MIM borrowing demand; SPELL's value accrual is tied to that fee stream, making yield a driver of the token itself.
+- [[carry-trade]] — borrowing MIM against yield-bearing cauldron collateral is a levered carry on productive assets, the protocol's original edge and its dominant failure mode.
+
+### Volatility & regime character
+
+Two distinct regimes: the **MIM peg** is normally tight around $1 but has broken under system stress (2022 deleveraging, and pressure around the ~$6.5M 2024 cauldron exploit), because backing is over-collateralized CDP debt on exotic/yield-bearing collateral with no centralized redemption. **SPELL** itself is highly volatile and directional — down more than 99% from its 2021 ATH — with price reflexively amplifying any MIM peg wobble, fee-income change, or governance/reputational shock. Redemption mechanics for MIM are indirect (repay debt in cauldrons, arbitrage on Curve) rather than an on-demand fiat window, so peg recovery depends on market liquidity and confidence, not a hard backstop.
+
+### Risk flags
+
+- **Depeg risk:** MIM's peg rests on collateral quality and Curve liquidity, not a redemption guarantee — it has broken before and can break again quickly.
+- **Reserve / backing transparency:** backing is a shifting mix of CDP collateral across cauldrons (including exotic yield-bearing assets), so effective reserve quality is harder to assess than a fiat-backed stablecoin.
+- **Redemption gating:** no direct 1:1 redemption; exiting depends on cauldron repayment and secondary-market liquidity, which can gate under stress.
+- **Smart-contract & reputational risk:** the 2024 cauldron exploit and the Wonderland governance scandal both pressured the peg and sentiment — recurring tail risks for anyone holding MIM or SPELL.
+- **Regulatory:** decentralized stablecoin issuance faces evolving regulatory scrutiny that could affect MIM demand and SPELL fee accrual.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SPELLUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=SPELLUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SPELLUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=SPELLUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

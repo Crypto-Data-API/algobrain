@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme, nft]
+tags: [crypto, meme, nft, altcoins, memecoins]
 aliases: ["NPC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.npc.com/"
-related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[solana]]"]
+related: ["[[base]]", "[[binance]]", "[[breakout-trading]]", "[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[narrative-trading]]", "[[solana]]"]
 ---
 
 # Non-Playable Coin
@@ -260,6 +260,56 @@ Speculative asset; apply strict [[risk-management]] and treat capital as fully a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. Practically, positions must be built and exited with spot inventory (or on-chain DEX liquidity), so there is no cheap synthetic short and no funding carry to harvest. The thin, venue-concentrated liquidity for a rank ~403 memecoin means execution should favor limit/VWAP-style fills and smaller clip sizes to avoid slippage; position sizing should assume that a single venue outage or a liquidity-fragmentation event (ERC-20/ERC-1155 dual standard across multiple chains) can widen spreads sharply. Spot-only structure also caps downside strategies to reduce-only exits and cash-raising, not shorting.
+
+### Applicable strategies
+
+- [[breakout-trading]] — memecoin moves cluster around attention spikes; buying confirmed breaks of prior spot range highs captures NPC's reflexive impulses.
+- [[donchian-channel-breakout]] — a rules-based channel break suits NPC's long quiet phases punctuated by sharp expansion, with a clean exit on the opposite channel.
+- [[atr-trailing-stop]] — volatility-scaled trailing stops let winners run through NPC's fat-tailed rallies while capping the frequent violent reversals.
+- [[momentum-rotation]] — NPC is best held only when it leads the memecoin cohort; rotating in/out versus peers avoids paying carry in dead tapes.
+- [[narrative-trading]] — value is purely attention-driven (Wojak/NPC meme, "current coin" gag), so trading the narrative cycle rather than fundamentals is the core edge.
+- [[dca-strategy]] — for conviction-based spot accumulation, averaging in spreads entry risk across NPC's high-variance, sentiment-driven price path.
+
+### Volatility & regime character
+
+Small-cap (rank ~403) memecoin with high reflexivity: price is a self-referential function of attention and liquidity, with fat-tailed rallies and deep drawdowns (currently well below its 2024 ATH). Beta to BTC/ETH is elevated in risk-off regimes (memes sell off hard in bear tapes) but NPC can decouple sharply on idiosyncratic attention flows, so realized correlation is unstable. Regime matters more than for large caps — meme cohorts are strongest in risk-on, high-liquidity phases and bleed in Extreme Fear.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-only access with modest turnover; single-venue dependence and DEX fragmentation across ERC-20/ERC-1155 and multiple chains can widen spreads and amplify slippage.
+- **Narrative dependence** — no cash-flow utility; the entire thesis rests on the durability of the NPC/Wojak meme, and narrative decay can be terminal.
+- **Reflexivity / drawdown** — attention-driven feedback loops accelerate declines as readily as rallies; further moves toward zero are possible.
+- **Holder concentration** — early/insider wallets may dominate float (on-chain distribution not yet ingested here), raising dump risk.
+- **Supply** — supply is fixed and fully circulating (MC/FDV ~1.00), so there is no unlock/emissions overhang, but also no structural buy-side support.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=NPCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=NPCUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=NPCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=NPCUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

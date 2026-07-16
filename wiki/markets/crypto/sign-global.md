@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["EthSign", "SIGN", "Sign Global", "Sign Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sign.global/"
-related: ["[[attestation]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[attestation]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Sign
@@ -212,6 +212,55 @@ SIGN sits across **on-chain identity/attestation** and **airdrop/distribution in
 - **Liquidity is a genuine edge here.** Binance + Upbit depth means SIGN is more exitable than typical micro-caps — useful for defined-risk trades, but it also makes SIGN a momentum/perp playground prone to sharp squeezes.
 - **Catalyst-gated longs.** Upside needs a real trigger — a marquee TokenTable airdrop, a major Sign-Protocol adoption, or an identity/ZK-narrative turn — confirmed by volume. Don't pre-empt the regime.
 - **Respect the downtrend.** ~76% below ATH and -40% over 30 days signal an entrenched downtrend; favor small size, hard invalidation below recent range lows, and avoid leverage into unlock events.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SIGN is tradable on **[[binance]]** — both **spot (SIGN/USDT)** and a **USD-margined [[perpetual-futures|perpetual]]**, which exposes [[funding-rate|funding]], **[[open-interest]]**, and **[[liquidations]]** data. It is **not listed on Hyperliquid**, so **Binance is the primary leveraged venue**. Deep Korean flow via Upbit (SIGN/KRW) adds spot depth but no perp. Because leverage and derivatives data concentrate on a single venue, funding/OI/liquidation signals should be read as Binance-specific rather than aggregate; the single-venue perp means squeezes and liquidation cascades are more reflexive, so position sizing must respect that a low-float (~$22M cap, MC/FDV ~0.16) token can move violently on modest perp flow. Spot depth on Binance + Upbit makes SIGN more exitable than typical micro-caps, which favors defined-risk execution and staged entries/exits.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance perp can run persistently skewed funding on a low-float token, making periodic funding collection viable when spot-hedged.
+- [[crowded-long-funding-fade]] — catalyst-driven retail crowding (airdrop/narrative pumps) into a thin float often overheats perp longs; fade extreme positive funding.
+- [[liquidation-cascade-fade]] — single-venue leverage on a small-cap makes forced-liquidation flushes overshoot; fade the cascade once liquidation velocity peaks.
+- [[cash-and-carry]] — with tradable spot and USD-M perp on the same venue, spot-long/perp-short captures basis and funding without directional risk.
+- [[token-unlock-supply-event]] — MC/FDV ~0.16 means large scheduled unlocks are the dominant structural driver; trade the supply-event overhang around vesting cliffs.
+- [[breakout-and-retest]] — SIGN trades in extended ranges below its ATH; volume-confirmed breakouts with retest entries suit its high-beta, catalyst-gated moves.
+
+### Volatility & regime character
+
+Small-cap (~$22M), 2025-vintage, high-beta altcoin trading ~76% below its Sept-2025 ATH. It behaves as a reflexive, low-float infra/DeFi token (on-chain identity/attestation + airdrop-distribution tooling) with strong directional beta to BTC/ETH and to broad risk sentiment. Moves are amplified by Korean (Upbit) sentiment spikes and by narrative rotations (ZK/identity, airdrop-season activity). Realized volatility is elevated and event-driven rather than steady.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** perp leverage is Binance-only; a single leveraged venue concentrates funding/OI/liquidation risk and cross-venue basis vs Upbit spot.
+- **Unlocks / emissions:** low MC/FDV (~0.16) means substantial future supply; unlock cliffs are the dominant order-book overhang, especially in a bear tape.
+- **Narrative dependence:** upside is catalyst-gated (TokenTable airdrops, Sign-Protocol adoption, ZK/identity revival); airdrop-season lulls remove the bid.
+- **Token-vs-product value capture:** product usage does not clearly force SIGN demand, a structural risk to durable valuation.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SIGNUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SIGNUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SIGN` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SIGN` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SIGNUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SIGNUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SIGN"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

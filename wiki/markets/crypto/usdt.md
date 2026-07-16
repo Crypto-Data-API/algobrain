@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-07
 updated: 2026-07-16
 status: good
-tags: [controversy, crypto, ethereum, stablecoin, tron]
+tags: [controversy, crypto, ethereum, stablecoin, tron, stablecoins, defi]
 aliases: ["Tether", "Tether USD", "USDT"]
 entity_type: protocol
 founded: 2014
 headquarters: "British Virgin Islands (Tether Limited)"
 website: "https://tether.to"
-related: ["[[binance]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin-attestations]]", "[[stablecoin-competition]]", "[[stablecoin-depegs]]", "[[stablecoin-regulation]]", "[[stablecoins]]", "[[tether-limited]]", "[[usdc]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin-attestations]]", "[[stablecoin-competition]]", "[[stablecoin-depegs]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-regulation]]", "[[stablecoin-yield]]", "[[stablecoins]]", "[[tether-limited]]", "[[usdc]]"]
 ---
 
 Tether (USDT) is the largest [[stablecoins|stablecoin]] by market capitalisation at ~$110-120B+ (2024-2025), and the most traded [[crypto|cryptocurrency]] by daily volume. Issued by [[tether-limited|Tether Limited]], USDT is the backbone of global crypto liquidity -- particularly dominant in Asian and emerging markets -- despite persistent controversies around reserve transparency and corporate governance.
@@ -257,6 +257,50 @@ In both cases, Tether processed billions in redemptions without issue, which par
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USDT is a USD-pegged stablecoin traded on [[binance|Binance]] and effectively every major venue as the default quote asset. It is a PEG / cash-management instrument, NOT a directional asset -- the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because USDT is itself the base unit of quote liquidity, its "market" is best read through cross-stablecoin pairs (USDT/USDC, USDT/USD) rather than a standalone chart. Leverage is not the point here: directional perps on USDT do not exist in any meaningful way, and sizing is governed by redemption/arbitrage capacity and venue withdrawal limits rather than by price volatility. Venue availability shapes execution because deep, redeemable liquidity (large exchanges, primary redemption via Tether Limited) is what lets an arbitrageur close a peg deviation; thin or gated venues can trap capital during exactly the stress windows when a depeg opens.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] -- USDT has printed brief sub-peg prints (Oct 2018, May 2022); buying the dislocation and holding for peg reversion is the core play.
+- [[stablecoin-pair-arbitrage]] -- USDT/USDC and USDT/other-stable spreads are the cleanest way to trade relative peg quality between the two dominant fiat-backed coins.
+- [[stablecoin-yield]] -- USDT holders earn nothing natively, so deploying idle USDT into lending/DeFi yield is the standard cash-management overlay.
+- [[mint-parity-arbitrage]] -- Primary mint/redeem with Tether Limited at $1.00 anchors secondary-market deviations back to parity for authorized participants.
+- [[delta-neutral-yield-farming]] -- USDT is a natural stable leg for delta-neutral farming, harvesting funding/yield without directional exposure.
+- [[carry-trade]] -- USDT funds carry into higher-yielding stable venues or perps while the peg is treated as the stable base.
+
+### Volatility & regime character
+
+Peg tightness is normally extreme (24h range typically hugs $0.9997-$1.00). The backing model is centralized fiat/Treasury reserves held by Tether Limited with quarterly attestations rather than a full audit, and redemption occurs off-chain through the issuer. Historical depeg episodes have been shallow and brief -- panic-driven sub-peg prints during the October 2018 banking-fear episode and the May 2022 Terra/Luna contagion -- each resolving within hours to days as redemptions were honored. The regime is "flat until it isn't": long stretches of near-zero deviation punctuated by sharp, event-driven stress that mean-reverts once redemption confidence returns.
+
+### Risk flags
+
+- **Depeg risk** -- event-driven, tail-shaped; deviations are rare but can gap during systemic contagion.
+- **Reserve/backing transparency** -- attestations, not a full Big Four audit; reserve composition is self-reported by the issuer.
+- **Redemption gating** -- primary redemption runs through Tether Limited and can be subject to minimums, eligibility, and timing frictions, which matters most during stress.
+- **Regulatory** -- stablecoin regulation and issuer-specific enforcement history are live overhangs that can affect availability and convertibility.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USDTUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=USDTUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USDTUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=USDTUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ## See Also
 

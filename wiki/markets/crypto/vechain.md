@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["VET", "VeChainThor"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized (VeChain Foundation: San Marino)"
 website: "https://www.vechain.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # VeChain
@@ -318,6 +318,59 @@ VeChain's edge is a long-running enterprise/supply-chain focus plus a fully-dilu
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+VET is tradable on **Binance** — both **spot (VET/USDT)** and a **USD-margined perpetual** carrying funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue for VET. Practical implications:
+
+- Leverage, funding, and OI-based signals all route through Binance USD-M; there is no deep on-chain perp order book (Hyperliquid) to cross-check or arbitrage against, so cross-venue perp basis plays are limited.
+- With modest spot depth (24h volume in the single-digit-millions range) and venue concentration on Binance plus Korean flow (Upbit VET/KRW), sizing should stay retail/swing-scale — larger clips will move price and widen slippage ([[slippage]]).
+- Funding and liquidation clusters are best read from the Binance perp; thin liquidity means liquidation cascades can overshoot, and funding can swing hard when retail crowds one side.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on the Binance USD-M perp when a retail-favored alt like VET pushes funding persistently positive; delta-hedge with spot.
+- [[crowded-long-funding-fade]] — VET's loyal retail base crowds longs on sentiment rallies; extended positive funding + rising OI flags fade setups on the perp.
+- [[liquidation-cascade-fade]] — thin depth means forced liquidations overshoot; fade the wick and cover into the mean reversion.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm breakouts on VET's high-beta moves rather than trading price alone.
+- [[narrative-trading]] — trade the enterprise/RWA (Franklin Templeton BENJI), Hayabusa deflation, and Interstellar EVM narratives that drive VET's episodic beta.
+- [[breakout-and-retest]] — VET spends long stretches range-bound ~98% below ATH; breakout-retest structures capture the periodic regime shifts.
+
+### Volatility & regime character
+
+Small/mid-cap (rank ~113) high-beta altcoin with a retail-heavy, loyal holder base, giving it outsized beta to broad altcoin-sentiment swings and strong correlation to BTC/ETH risk-on/risk-off. It is an enterprise/supply-chain and increasingly [[real-world-assets|RWA]]-adjacent infra L1 rather than a memecoin, so moves are more narrative/catalyst-driven (upgrades, institutional partnerships) than pure reflexive memecoin churn — but thin liquidity still produces sharp, reflexive spikes in both directions.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged exposure is effectively single-venue (Binance USD-M); no Hyperliquid depth to hedge against, and thin spot depth amplifies slippage and liquidation overshoot.
+- **Narrative dependence** — value-capture has historically lagged enterprise partnerships; price leans heavily on Renaissance/Hayabusa/Interstellar and BENJI narratives delivering.
+- **Emissions/tokenomics tuning** — VTHO emission policy is a live governance lever (Hayabusa cuts), and StarGate lockups shift liquid float; changes can reprice staking demand.
+- **Bear-market beta** — high-beta alt in an Established Bear Market; drawdowns are amplified and recoveries depend on broad altcoin risk appetite.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=VETUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=VETUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=VET` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=VET` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=VETUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=VETUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=VET"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

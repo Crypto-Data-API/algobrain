@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["CVC"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://www.civic.com/"
-related: ["[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[kyc]]", "[[solana]]", "[[worldcoin]]"]
+related: ["[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[kyc]]", "[[solana]]", "[[worldcoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[rsi-mean-reversion]]"]
 ---
 
 # Civic
@@ -191,6 +191,57 @@ Key risks:
 - **2024–2025** — Civic Auth (universal SSO, wallet-optional) and AI-agent verification expand Civic toward mainstream identity use cases.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CVC is tradable on [[binance]] — spot (CVC/USDT) plus a USD-margined [[perpetual-futures|perpetual]] contract carrying [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **NOT** listed on Hyperliquid, so Binance is the primary — effectively the sole deep — leveraged venue for CVC. This venue concentration means perp liquidity, funding, and the visible liquidation ladder all originate from one order book: leverage exists, but with a small-cap coin like CVC the perp book is thin, so size must be scaled to Binance depth. Aggressive market orders and forced liquidations can move price sharply, and there is no second perp venue to arbitrage against for redundancy — plan execution (limit orders, TWAP/VWAP slicing) and position sizing around single-venue depth and wider spreads.
+
+### Applicable strategies
+
+- [[liquidation-cascade-fade]] — CVC's thin single-venue perp book makes over-leveraged flushes overshoot, offering fade entries once the Binance liquidation ladder clears.
+- [[funding-rate-harvest]] — periodic funding swings on the lone Binance perp let a spot-long / perp-short setup collect carry when longs crowd the small-cap.
+- [[crowded-long-funding-fade]] — persistently positive funding on a low-float identity token flags crowded longs ripe for a contrarian fade.
+- [[rsi-mean-reversion]] — low-liquidity price whips push CVC to oscillator extremes that mean-revert inside its range absent a fresh identity/AI-agent narrative.
+- [[oi-price-exhaustion]] — rising Binance open interest without follow-through price signals exhausted leverage, a reliable reversal cue on a thin book.
+- [[narrative-trading]] — CVC re-rates on decentralized-identity, proof-of-personhood, and AI-agent-verification headlines, making it a candidate for narrative-driven positioning.
+
+### Volatility & regime character
+
+CVC is a small-cap (rank ~900s) infrastructure/DeFi-adjacent identity token with high beta to BTC/ETH: it tends to underperform in risk-off regimes and spike on identity/AI narrative rotations. With low float and thin volume it exhibits reflexive, sharp moves on modest flow — closer to a small-cap altcoin profile than a stable large-cap. Directionality is largely dictated by broad crypto beta, punctuated by episodic narrative-driven decouplings.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — small-cap with one primary leveraged venue (Binance); thin depth amplifies slippage and cascade risk.
+- **Narrative dependence** — value is tied to demand for on-chain identity/verification and AI-agent proof-of-personhood, a category with perennial but still-unproven mass adoption.
+- **Token-utility decoupling** — Civic's products (Civic Auth, enterprise verification) can operate without users touching CVC, weakening the link between business traction and token demand.
+- **Emissions / unlimited max supply** — max supply is uncapped, so watch for dilution/emission dynamics that pressure spot and skew funding.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CVCUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CVCUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CVC` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CVC` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CVCUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CVCUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CVC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

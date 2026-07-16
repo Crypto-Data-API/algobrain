@@ -3,13 +3,13 @@ title: "Marlin"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins]
 aliases: ["POND"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.marlin.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[dca-strategy]]", "[[donchian-channel-breakout]]"]
 ---
 
 # Marlin
@@ -142,6 +142,53 @@ High-performance network infrastructure for modern decentralized networks
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+POND is tradable on **Binance SPOT only** — no liquid perpetual venue, so leverage/short access is limited and this is a **spot-primary** asset. Perp funding/basis/liquidation strategies do **not** apply. With no cross-venue perp market to arbitrage or hedge against, execution is confined to spot order books; the thin 24h volume and small market cap mean directional exposure must be built and unwound patiently. Position sizing should account for wider effective spreads and higher slippage on larger orders, favoring limit-order entries, scaled fills, and smaller clip sizes than a large-cap would tolerate. Shorting is effectively unavailable, so tactics are long-only or flat.
+
+### Applicable strategies
+
+- [[dca-strategy]] — Spot-only, low-liquidity microcap suits gradual accumulation over time rather than single large fills that would move the book.
+- [[breakout-and-retest]] — Long-only spot momentum plays can wait for a confirmed breakout of consolidation ranges and re-entry on the retest to avoid chasing thin moves.
+- [[donchian-channel-breakout]] — Channel breakouts capture the infrequent trend impulses in a low-volume infra token while keeping rules objective.
+- [[rsi-mean-reversion]] — POND's deep drawdown and range-bound spot action lend themselves to buying oversold extremes for reversion within the range.
+- [[range-trading]] — Extended sideways periods between narrative catalysts make range fades between support and resistance viable on spot.
+- [[atr-trailing-stop]] — Volatility-scaled trailing stops manage the outsized swings of a small-cap once a long position is established.
+
+### Volatility & regime character
+
+POND is a **small-cap infrastructure/DeFi token** (relay/networking infra with AI and ZK category exposure) trading far below its 2020 ATH. As a low-liquidity microcap it exhibits high idiosyncratic volatility and strong reflexivity to thin order flow, with beta to BTC/ETH amplifying broad-market moves on the downside. Directional regimes tend to be long, quiet range-bound stretches punctuated by sharp catalyst-driven spikes; correlation to majors is meaningful in risk-off conditions but returns diverge on token-specific news.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — spot-only availability with a single primary CEX venue (Binance) concentrates execution risk; thin 24h volume magnifies slippage and gap risk.
+- **No perp/hedge market** — no liquid perpetual means no easy shorting or hedging; exposure is long-or-flat.
+- **Emissions/supply** — circulating supply is a large share of max supply, but remaining unlocks/emissions can still pressure price; monitor supply schedule.
+- **Narrative dependence** — as an infra/DeFi/AI/ZK-tagged microcap, price action leans heavily on rotation into those narratives; fading interest can leave it illiquid and drifting.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PONDUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PONDUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PONDUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=PONDUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

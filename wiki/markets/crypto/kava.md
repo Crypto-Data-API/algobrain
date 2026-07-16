@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["KAVA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.kava.io/"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]", "[[crypto-beta-rotation]]"]
 ---
 
 # Kava
@@ -226,6 +226,55 @@ At a ~$51M market cap KAVA is priced as a deeply out-of-favour micro-cap L1, ~99
 | **Max Supply** | Unlimited |
 | **Fully Diluted Valuation** | $48.94M |
 | **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KAVA is tradable on [[binance|Binance]] — both spot (KAVA/USDT) and a USD-margined [[perpetual-futures|perpetual]] with observable [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]]. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue and the single most important price-discovery/liquidation surface for the token. With only ~$9.12M in 24h spot volume against a ~$51M cap, the perp book is thin: available leverage exists but effective liquidity is shallow, so large size will move price and slip. Concentrating derivatives flow on one venue also means Binance funding, OI, and its liquidation engine dominate short-term dynamics — position sizing should stay small, use limit/scaled entries rather than market orders, and account for wider spreads and gappy fills during volatility.
+
+### Applicable strategies
+
+- [[oi-confirmed-trend]] — pairing Binance OI changes with KAVA's directional moves filters real trend from thin-book noise on a low-liquidity micro-cap.
+- [[crypto-beta-rotation]] — KAVA behaves as a high-beta Cosmos/DeFi L1 option, so it fits rotation baskets that lever into altcoin risk when the regime turns up.
+- [[funding-rate-harvest]] — when the single-venue Binance perp funding swings persistently positive/negative, a delta-neutral spot-vs-perp position on KAVA can harvest the carry.
+- [[liquidation-cascade-fade]] — a thin perp book plus concentrated Binance liquidations produces sharp overshoots at a ~$51M cap, giving fade setups after forced-sell flushes.
+- [[range-mean-reversion]] — deeply out-of-favour and range-bound near its all-time low, KAVA reverts to range extremes absent a fresh Cosmos/DeFi narrative catalyst.
+- [[breakout-and-retest]] — a fixed-supply micro-cap can trend hard on a catalyst; entering on the retest of a broken level manages the false-breakout risk that thin liquidity amplifies.
+
+### Volatility & regime character
+
+KAVA is a small/micro-cap (rank ~#448, ~$51M) Cosmos + EVM DeFi/infra L1 that trades as a high-beta expression of altcoin and Cosmos-sector risk. It is tightly correlated to BTC/ETH direction on the downside and dependent on broad risk-on regimes to rally; realized volatility is high and reflexive on catalysts given its thin float and single dominant leveraged venue. Its differentiator is a fixed supply (emissions ended under Tokenomics 2.0, MC ≈ FDV), which removes the dilution drag common to peer L1s but does not reduce its beta or venue-concentration fragility.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** Binance is effectively the only deep spot + leveraged venue (no Hyperliquid); its funding, OI, and liquidation engine drive short-term price, and a listing/liquidity change there is an outsized single-point risk.
+- **Thin order book:** ~$9.12M daily spot volume means real slippage and gappy fills; leverage magnifies liquidation risk on small moves.
+- **Narrative dependence:** Much historical EVM activity was incentive-bought; sustained rallies need a fresh, organic Cosmos/DeFi catalyst rather than paid usage.
+- **Regime sensitivity:** As a sub-$100M-cap altcoin in an Established Bear Market, it is highly exposed to broad risk-off flushes and correlated altcoin drawdowns.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KAVAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=KAVAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=KAVA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=KAVA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KAVAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=KAVAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=KAVA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

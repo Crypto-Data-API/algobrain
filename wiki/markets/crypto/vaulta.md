@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["A", "EOS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.vaulta.com"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Vaulta
@@ -125,6 +125,57 @@ A is the **most liquid** name in the group by some distance (~$8.7M/day) but als
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+A (ex-EOS) is tradable on **Binance** as both **spot** (A/USDT) and a **USD-margined perpetual**, so funding, open interest, and liquidation data are available for the perp. It is **NOT listed on Hyperliquid**, which makes **Binance the primary leveraged venue** for A. With a small ~$100–125M cap and thin turnover, most of the perp liquidity and screen-visible OI concentrate on Binance, so leveraged execution should assume shallow order books: size positions for slippage, use limit/passive fills near the top of book, and expect funding and liquidation prints to be dominated by that single venue. Venue concentration means a Binance ticker remap or delisting (a real tail risk given the EOS→A migration) would fragment or remove leveraged access, so treat the Binance perp as the reference book and verify live OI/funding before sizing.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the Binance USD-M contract when it runs persistently one-sided on this low-float, retail-driven name.
+- [[cash-and-carry]] — pair Binance spot A/USDT against the perp to capture basis while hedging directional risk on an illiquid mid-cap.
+- [[liquidation-cascade-fade]] — thin books and single-venue OI make A prone to sharp forced-liquidation wicks that mean-revert, offering fade entries.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether a move in a low-conviction rebrand token is real positioning or a squeeze.
+- [[rsi-mean-reversion]] — range-bound, near-ATL price action around a legacy-L1 makes oscillator reversion viable in quiet regimes.
+- [[narrative-trading]] — A's price is heavily "Web3-banking / exSat BTC-yield" story-driven, so position around rebrand and integration catalysts.
+
+### Volatility & regime character
+
+Small/mid-cap [[layer-1]] with high **beta to BTC/ETH** risk appetite and outsized drawdown behavior (~-92% from post-rebrand high, trading near its all-time low). It behaves as legacy-L1 beta with a finance/RWA narrative overlay rather than a memecoin, but low float and thin liquidity produce reflexive, sentiment-driven swings. Expect wide reactions to funding flips and liquidation events, and elevated correlation to broad crypto risk-off in bear regimes (current backdrop: extreme fear).
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged access effectively lives on Binance alone (not on Hyperliquid); thin depth amplifies slippage and liquidation impact.
+- **Ticker/listing fragmentation:** the EOS→A migration can split or remap perp listings — confirm the live symbol before trading.
+- **Narrative dependence:** valuation hinges on unverified exSat BTC-yield / tokenization traction rather than confirmable on-chain metrics.
+- **Legacy overhang & macro beta:** deep EOS brand skepticism plus mid-cap L1 beta into a bear tape make rallies fragile.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=A` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=A` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=A"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

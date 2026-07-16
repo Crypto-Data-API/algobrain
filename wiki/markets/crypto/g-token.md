@@ -3,13 +3,13 @@ title: "Gravity (by Galxe)"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["G"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gravity.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Gravity (by Galxe)
@@ -145,6 +145,55 @@ https://www.galxe.com/
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+G is tradable on **Binance** — both spot (G/USDT) and a **USD-margined perpetual** contract exposing funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue. As a small-cap token (rank ~716), on-venue depth is thin relative to majors: available leverage plus concentrated liquidity on a single perp venue means slippage and liquidation risk scale quickly with size, and funding/OI signals derive almost entirely from Binance flow. Size positions conservatively, work orders rather than crossing the book, and treat Binance funding/OI as the dominant read on positioning.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the Binance USD-M contract when the rate is persistently one-sided, a common pattern for low-cap alts with skewed retail positioning.
+- [[crowded-long-funding-fade]] — fade over-extended longs when Binance funding spikes positive on a thin-liquidity token like G that lacks fresh fundamental catalysts.
+- [[liquidation-cascade-fade]] — a small-cap perp with limited depth is prone to sharp liquidation flushes; fade the wick once the cascade exhausts.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether directional moves in G are backed by real positioning versus spot-only drift.
+- [[breakout-and-retest]] — trade range breaks off G's compressed, low-cap price structure, entering on the retest to control slippage on a thin book.
+- [[volatility-targeting]] — scale exposure inversely to G's realized volatility, essential given the outsized swings typical of a sub-$100M-cap token.
+
+### Volatility & regime character
+
+Small-cap (rank ~716) infra/L1 token tied to the Galxe/Gravity ecosystem. High beta to BTC/ETH risk sentiment with amplified drawdowns — the token sits ~96% below its all-time high and shows strong reflexivity to broad altcoin risk-on/risk-off swings. Price action is narrative- and liquidity-driven rather than deeply fundamentals-anchored, so regimes can flip abruptly between illiquid chop and momentum bursts.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — leveraged exposure is concentrated on Binance; a single-venue outage, delisting, or depth shock materially affects execution.
+- **Unlocks/emissions** — circulating supply (~7.2B) is well below max (12B), leaving meaningful future emission/unlock overhang that can pressure price.
+- **Narrative dependence** — value is tethered to Galxe/Gravity adoption and broader L1/DID/ZK narratives; sentiment shifts drive disproportionate moves.
+- **Small-cap fragility** — thin depth makes G vulnerable to slippage, stop-hunts, and liquidation cascades on modest flow.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=G` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=G` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=GUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=G"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

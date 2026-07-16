@@ -3,13 +3,13 @@ title: "Fabric Protocol"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ROBO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://fabric.foundation/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Fabric Protocol
@@ -130,6 +130,55 @@ Fabric Protocol is a global open network supported by the non-profit Fabric Foun
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ROBO trades on **Binance as both spot and a USD-margined (USDT) perpetual**, so funding, open interest, and liquidation data are available for the leveraged book. It is **not listed on Hyperliquid**, which makes **Binance the primary leveraged venue** and concentrates perp price discovery there. With a small-cap profile (rank ~659) and modest 24h volume, the order book is thin relative to majors: perp leverage amplifies moves, funding can swing hard when positioning crowds one side, and large orders should be sized to spot depth and worked (VWAP/TWAP-style) rather than sent at market. Venue concentration means execution, slippage, and stop placement all hinge on Binance liquidity; cross-exchange spot legs (Kraken, Bitget, KuCoin, Crypto.com) exist for hedging but carry wider spreads.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp with volatile small-cap positioning tends to produce persistent funding skews that can be collected delta-neutral against spot.
+- [[cash-and-carry]] — Binance spot plus USD-M perp lets a long-spot/short-perp basis capture premium when the perp trades rich during AI/robotics narrative pumps.
+- [[liquidation-cascade-fade]] — thin small-cap depth and perp leverage make ROBO prone to stop-driven liquidation flushes that overshoot and mean-revert.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with price helps separate genuine narrative-led trends from short-lived, leverage-only squeezes.
+- [[momentum-investing]] — as an AI/robotics theme token, ROBO exhibits reflexive momentum bursts on narrative flow that trend entries can ride.
+- [[rsi-mean-reversion]] — inside choppy ranges the low-liquidity book stretches to oscillator extremes that revert, suiting bounded contrarian entries.
+
+### Volatility & regime character
+
+Small-cap AI/robotics infrastructure token (~$50M cap, low MC/FDV around 0.22) with high beta to BTC/ETH risk cycles and strong reflexivity to the broader AI-agent narrative. Price is well off its ATH and range-bound near ATL, so realized volatility clusters around narrative catalysts and Binance Alpha/listing attention. Expect sharp, sentiment-driven expansions and quiet, illiquid contractions rather than a steady trend.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — leveraged flow is concentrated on Binance perp; a delisting or liquidity withdrawal would sharply degrade execution.
+- **Emissions/unlock overhang** — only ~22% of the 10B max supply circulates (MC/FDV ~0.22), so future unlocks and emissions are a structural sell-pressure risk.
+- **Narrative dependence** — valuation leans on the AI/robotics narrative; sentiment reversals can compress price and liquidity quickly.
+- **Small-cap fragility** — thin depth means slippage, gap risk, and outsized reaction to single large orders or liquidation clusters.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ROBOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ROBOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ROBO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ROBO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ROBOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ROBOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ROBO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

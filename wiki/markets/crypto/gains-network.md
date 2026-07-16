@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, futures]
+tags: [crypto, defi, derivatives, futures, altcoins]
 aliases: ["GNS", "Gains Network", "gTrade"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gains.trade/"
-related: ["[[arbitrum]]", "[[chainlink]]", "[[crypto-markets]]", "[[derivatives]]", "[[dydx]]", "[[forex]]", "[[fulcrom]]", "[[gmx]]", "[[governance-token]]", "[[hyperliquid]]", "[[leverage]]", "[[perpetual-futures]]", "[[polygon]]"]
+related: ["[[arbitrum]]", "[[binance]]", "[[chainlink]]", "[[crypto-markets]]", "[[derivatives]]", "[[dca-strategy]]", "[[dydx]]", "[[forex]]", "[[fulcrom]]", "[[gmx]]", "[[governance-token]]", "[[hyperliquid]]", "[[leverage]]", "[[narrative-trading]]", "[[perpetual-futures]]", "[[polygon]]"]
 ---
 
 # Gains Network
@@ -212,6 +212,54 @@ This is not investment advice; figures are point-in-time and crypto assets are h
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. Practical implications: directional exposure must be built long-only through spot accumulation (no cheap synthetic shorts or funding-carry income), and position sizing has to respect thin microcap liquidity. Because depth is concentrated on a single [[binance]] spot book, large orders can move price and slippage rises quickly on illiquid days — favor patient limit orders, staged entries/exits, and volume-aware execution (e.g. VWAP-style slicing) over market fills. Note the irony that GNS itself powers a leveraged-trading protocol (gTrade) while the token's own CEX access offers no liquid leverage.
+
+### Applicable strategies
+
+- [[breakout-and-retest]] — GNS trades in extended base ranges near microcap lows; entering on a confirmed break of range highs and a successful retest filters false breakouts on a thin single-venue book.
+- [[rsi-mean-reversion]] — spot-only microcaps overshoot on both sides; fading extreme oversold/overbought RSI readings suits GNS's choppy, range-bound behavior far below its ATH.
+- [[dca-strategy]] — with no shorting and elevated volatility, staged dollar-cost accumulation is a practical way to build long GNS exposure while smoothing single-venue liquidity risk.
+- [[narrative-trading]] — GNS is a DeFi/perp-DEX ("gTrade") narrative token whose spot moves are driven by derivatives-sector rotation and protocol news rather than fundamentals alone.
+- [[atr-trailing-stop]] — given sharp microcap swings and gap risk on a single book, an ATR-based trailing stop lets long positions ride trends while capping drawdown without a fixed target.
+- [[vwap-trading]] — thin liquidity makes execution quality decisive; anchoring entries/exits to VWAP reduces market impact when sizing into or out of GNS.
+
+### Volatility & regime character
+
+Small-cap / microcap (rank ~955, ~$14M cap) DeFi infrastructure token with high beta to BTC/ETH risk appetite. As a perp-DEX / derivatives-sector governance asset, GNS tends to move with the broader DeFi and "on-chain derivatives" narrative and amplifies both up- and down-legs of the crypto cycle. Its supply is elastic (mint/burn tied to vault P&L) rather than fixed, adding a reflexive supply dimension atop normal microcap volatility. Expect low absolute liquidity, wide intraday ranges, and correlation spikes toward BTC during broad risk-off moves.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-primary with meaningful depth concentrated on [[binance]]; a listing change or liquidity withdrawal would sharply degrade tradability.
+- **Elastic supply / emissions** — GNS is minted or burned as a vault backstop, so dilution depends on trader-vs-vault P&L rather than a fixed schedule (see Tokenomics).
+- **Narrative dependence** — price leans on the DeFi/perp-DEX narrative and protocol-specific catalysts; sector rotation away from derivatives tokens can compress it independent of usage.
+- **Microcap fragility** — at a ~$14M cap, GNS is highly sensitive to volume shocks and single large flows, with severe gap risk in thin conditions.
+- **No liquid leverage/short** — absence of a liquid perp venue means no efficient hedging or short expression; risk is managed via sizing and stops only.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GNSUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GNSUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GNSUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=GNSUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

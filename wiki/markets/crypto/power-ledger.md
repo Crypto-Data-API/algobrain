@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["POWR", "Power Ledger", "PowerLedger"]
 entity_type: protocol
 founded: 2016
 headquarters: "Perth, Australia / Zug, Switzerland"
 website: "https://powerledger.io/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[energy-web-token]]", "[[ethereum]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[energy-web-token]]", "[[ethereum]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Powerledger
@@ -234,6 +234,58 @@ POWR remains ~97% below its January 2018 ATH of $1.89, a typical profile for fir
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+POWR is tradable on [[binance|Binance]] — both **spot** (POWR/USDT) and a **USD-margined perpetual**, which exposes [[funding-rate|funding]], **open interest**, and **liquidation** data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** for POWR. With a ~$24M cap and modest spot volume, the perp is the deepest source of continuous, leverage-driven flow; however that leverage sits on a thin underlying, so order books are shallow and slippage rises quickly on size. Practical implication: keep clip sizes small, favor limit/VWAP-style entries, and treat the single dominant perp venue as a concentration risk — an outsized funding swing or liquidation cascade on Binance can move price with little offsetting depth elsewhere. Spot on Kraken/Upbit/Bitget/Crypto.com and Uniswap adds fragmented depth but no leverage.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the Binance USD-M perp lets holders collect funding when perp funding runs persistently positive on this low-float small-cap.
+- [[crowded-long-funding-fade]] — DePIN-narrative pumps can crowd longs and spike funding on a thin book; fade the stretched positioning.
+- [[cash-and-carry]] — pair long spot POWR against the short perp to capture basis/funding while neutralizing directional risk on a single-venue setup.
+- [[liquidation-cascade-fade]] — shallow perp depth means forced-liquidation wicks overshoot; fade the flush back toward spot.
+- [[oi-confirmed-trend]] — use Binance open-interest builds to confirm that a DePIN-rotation move has real leverage behind it before trend-following.
+- [[breakout-and-retest]] — narrow-range small-caps like POWR give cleaner breakout-retest setups on daily ranges when narrative flows arrive.
+
+### Volatility & regime character
+
+Small-cap (rank ~753) energy/DePIN infrastructure token with high idiosyncratic volatility. POWR trades more on **DePIN-narrative rotations and grid-adoption headlines** than on broad crypto beta, but in risk-off regimes it correlates down with BTC/ETH like most alts while lacking the depth to bounce independently. Low float and ~47% supply overhang amplify reflexive moves in both directions; expect sharp, thin-liquidity swings rather than steady trends.
+
+### Risk flags
+
+- **Venue concentration** — Binance is effectively the only leveraged venue; funding/liquidation dynamics there dominate price discovery.
+- **Liquidity/slippage** — thin spot and perp books make large orders costly and stops prone to wicking.
+- **Supply overhang** — roughly half of the 1B max supply still to circulate (MC/FDV ≈ 0.53) is a standing dilution risk.
+- **Narrative dependence** — price hinges on DePIN/energy-theme flows; fades quickly when the narrative cools.
+- **Regulatory overhang** — the "Alleged SEC Securities" tag on this ICO-era token is a latent regulatory risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=POWRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=POWRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=POWR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=POWR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=POWRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=POWRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=POWR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

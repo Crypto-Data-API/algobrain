@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-17 — Phase 2 enrichment: Binance-only (wave 2)
+
+Enriched the **271 Binance-only** coin pages with a `## Trading Profile` + verified
+`## Getting the Data (CryptoDataAPI)` section via parallel Opus agents across three
+venue-aware branches:
+- **perp (191)** — Binance USD-M funding/OI/liquidation strategies + Binance derivatives endpoints;
+- **spot (61)** — momentum/mean-reversion/DCA strategies + spot market-data endpoints (no funding);
+- **stablecoin (19)** — depeg / peg-arb / yield strategies + peg-monitoring endpoints.
+
+256 landed on the first pass; the 15 that hit a monthly spend limit were re-run to completion
+(271/271). ~6 verified strategy links each; existing content preserved; `good`/`excellent`
+pages kept their status. Broken links rose only +8 across the 271 pages (verified strategy menu).
+
+This completes the tradable-set enrichment: **481 pages** (4 pilot + 206 Hyperliquid-perp +
+271 Binance-only) now carry trading profiles and live-data recipes, covering the
+Binance ∪ Hyperliquid universe.
+
 ## 2026-07-16 — Phase 2 enrichment: Hyperliquid perps (wave 1)
 
 Enriched the **206 Hyperliquid-perp** coin pages (+4 pilot: SOL, LINK, XMR, QNT) with a

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["Boundless Network", "ZKC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://beboundless.xyz/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[risc-zero]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[risc-zero]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Boundless
@@ -232,6 +232,58 @@ Boundless trades on the **ZK / verifiable-compute** narrative and the **RISC Zer
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZKC is tradable on [[binance]] — both **spot** (ZKC/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** with the full derivatives stack: [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]]. It is **NOT** listed on [[hyperliquid]], so Binance is the **primary leveraged venue** and effectively the price-discovery hub for both cash and futures. This concentration means execution, funding signals, and liquidation data all key off a single exchange: there is little cross-venue perp redundancy, so slippage, funding spikes, and cascade risk are amplified by Binance-specific flow. With a sub-$15M cap and thin depth, leverage should be sized conservatively — use limit orders, expect slippage on market fills, and treat Binance funding/OI as the authoritative positioning read. Cross-exchange spot venues (Upbit, Bitget, KuCoin) add spot liquidity but no additional perp market for the funding/basis trades below.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance USD-M perp concentrates directional crowding, so persistent funding on ZKC can be harvested delta-neutral against spot.
+- [[crowded-short-funding-fade]] — in a deep bear microcap, aggressive perp shorts often push funding negative; fading over-crowded shorts targets the resulting squeeze.
+- [[liquidation-cascade-fade]] — thin depth plus single-venue leverage makes ZKC prone to sharp Binance liquidation flushes that overshoot and mean-revert.
+- [[cash-and-carry]] — spot plus the USD-M perp on the same venue lets a positive-basis carry be captured with minimal cross-exchange leg risk.
+- [[oi-confirmed-trend]] — rising Binance open interest alongside price confirms real leveraged participation versus low-conviction microcap noise.
+- [[narrative-trading]] — ZKC price is tightly coupled to the ZK / verifiable-compute and RISC Zero narrative, so rotations into/out of "infra" drive tradable moves.
+
+### Volatility & regime character
+
+ZKC is a **small-cap infra token** (ZK proving / verifiable compute) with high beta to the broad altcoin and ZK/infra cohort and a strong correlation to BTC/ETH risk-on/risk-off swings. At a sub-$15M cap it is well down the size curve, so realized volatility is elevated and moves are reflexive — thin liquidity amplifies both narrative-driven rallies and infra-rotation drawdowns (e.g. the -7.21% weekly move noted above). It is not a memecoin, but its microcap status gives it memecoin-like reflexivity: sentiment and liquidity, not fundamentals, dominate short-term price action. Behavior is regime-dependent — it bleeds in Extreme-Fear/bear tape and can spike hard on any ZK-narrative catalyst.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading lives almost entirely on Binance; a single-venue funding spike, delisting, or outage transmits directly with no perp fallback.
+- **Liquidity** — sub-$15M cap and thin books mean high slippage and fragility to large orders on both spot and perp.
+- **Emissions / unlocks** — uncapped max supply plus continuous PoVW prover rewards and future unlocks create structural supply overhang ([[token-unlock-supply-event]] risk).
+- **Narrative dependence** — pricing is tightly tied to the ZK / verifiable-compute narrative; infra rotations hit it disproportionately.
+- **Demand risk** — the marketplace thesis only accrues value with organic paid proof volume; until visible, moves are liquidity/narrative-driven.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ZKCUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ZKCUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ZKC` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ZKC` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ZKCUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ZKCUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ZKC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
+
+---
 
 ## See Also
 

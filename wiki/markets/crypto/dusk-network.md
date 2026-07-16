@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["DUSK", "Dusk Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dusk.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[privacy-coins]]", "[[proof-of-stake]]", "[[real-world-assets]]", "[[staking]]", "[[zero-knowledge-proofs]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[privacy-coins]]", "[[proof-of-stake]]", "[[real-world-assets]]", "[[staking]]", "[[zero-knowledge-proofs]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[mean-reversion]]"]
 ---
 
 # DUSK
@@ -124,6 +124,57 @@ Among the ~$50M-cap peers, DUSK and [[oasis-network|ROSE]] are the two privacy-o
 - **Liquidity**: ~$3.41M daily volume is moderate but still thin versus large caps, raising slippage risk on big orders.
 - **Macro / regime risk**: Extreme Fear (index 23) and an Established Bear Market weigh on small-cap, narrative-driven tokens.
 - **Competition**: Competes with other RWA chains (e.g. [[vaulta|Vaulta]]) and with incumbent regulated-market infrastructure for issuer mandates.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DUSK is tradable on **[[binance]]** — both **spot** (DUSK/USDT) and a **USD-margined perpetual** that exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **not listed on Hyperliquid**, so there is no deep on-chain perp venue; **Binance is the primary leveraged venue** for DUSK. With a ~$50M market cap and only ~$3-3.6M daily turnover, order books are thin: leveraged size concentrates on one CEX, so execution and sizing must respect that single-venue liquidity. Large market orders will move price and widen slippage, and open interest is small enough that funding can swing sharply on modest positioning. Practical implication — scale in with limit orders, keep leverage modest, and treat Binance funding/OI as the main real-time gauge of crowding rather than assuming cross-venue depth.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the Binance DUSK-PERP when the rate is persistently positive, hedged against spot to isolate the carry.
+- [[cash-and-carry]] — long Binance spot DUSK against short perp to lock the basis when the perp trades at a premium, a clean way to monetize a small-cap's funding skew.
+- [[crowded-long-funding-fade]] — thin OI means retail crowding shows up fast in funding; fade over-extended longs when funding spikes into RWA/privacy-narrative pumps.
+- [[liquidation-cascade-fade]] — low liquidity makes DUSK prone to stop-run flushes; fade forced-liquidation wicks back toward the prior range.
+- [[mean-reversion]] — range-bound, low-float behavior between catalysts favors reversion to a rolling mean rather than sustained trend.
+- [[breakout-and-retest]] — narrative catalysts (EU regulatory/RWA news) can drive genuine breakouts; enter on the retest to filter the frequent false moves in a thin book.
+
+### Volatility & regime character
+
+DUSK is a **small-cap (~#480) infra / RWA-privacy Layer 1 token** with high idiosyncratic volatility and pronounced beta to BTC/ETH risk-on/risk-off swings — it tends to fall harder in drawdowns and chop sideways in fear regimes (current backdrop is Extreme Fear / Established Bear Market). It is **narrative-reflexive**: moves are driven more by EU RWA/regulatory headlines than by broad memecoin flows, so realized volatility clusters around catalysts and is otherwise low-turnover and range-bound. Low float and thin OI amplify both breakouts and liquidation-driven wicks.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — leveraged exposure lives almost entirely on Binance; a single-venue outage, delisting, or funding dislocation has outsized impact, and thin books raise slippage on size.
+- **Emissions** — no investor-unlock cliff (MC ≈ FDV), but ~411M DUSK remains to be emitted via [[proof-of-stake]] staking rewards, a slow structural sell-pressure drag.
+- **Narrative dependence** — the thesis hinges on EU digital-securities adoption (MiCA, DLT Pilot Regime); price is highly sensitive to regulatory headlines and can gap on news.
+- **Regulatory** — as a regulated-RWA chain, DUSK's valuation is directly exposed to shifts in European regulatory posture; adverse or delayed frameworks undercut the core catalyst.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DUSKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DUSKUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=DUSK` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=DUSK` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DUSKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=DUSKUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=DUSK"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, stablecoins]
 aliases: ["Sky Dollar", "Sky USDS", "USDS"]
 entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://sky.money/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[makerdao]]", "[[stablecoins]]", "[[tether]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[makerdao]]", "[[stablecoins]]", "[[tether]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # USDS
@@ -290,6 +290,52 @@ USDS is the stablecoin of the decentralized Sky ecosystem, designed to maintain 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USDS is a USD-pegged stablecoin traded on [[binance]] (USDS/USDT), alongside Kraken, Upbit, Bitget, and Crypto.com on the CEX side and Uniswap, Orca, and Curve on-chain. It is a **peg / cash-management instrument, not a directional asset** — the trade is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Deep stable-pair liquidity (USDS/USDT, USDS/DAI, USDS/USDC) makes it an efficient cash leg, so execution risk is dominated by peg deviation rather than slippage in normal conditions. There is little reason to use leverage on a ~$1 instrument; sizing is driven by how much dry powder to park and by counterparty/venue concentration, since fragmented CEX/DEX availability across Ethereum, Base, Arbitrum, and Solana shapes where arbitrage and redemption legs can actually clear.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy USDS below $1 (as in the Oct 2024 dip to $0.9483) and hold to reconvergence, relying on Sky's mechanism-driven repeg.
+- [[stablecoin-pair-arbitrage]] — exploit spreads between USDS and USDT/DAI/USDC across Binance and Curve/Uniswap stable pools.
+- [[stablecoin-yield]] — convert USDS to sUSDS to earn the Sky Savings Rate (~3.75–4.5%), the protocol-funded on-chain savings yield.
+- [[mint-parity-arbitrage]] — use the 1:1 DAI↔USDS converter and overcollateralized mint/redeem path to arbitrage the token back toward $1.
+- [[carry-trade]] — fund into the SSR when it sits above competing stablecoin and Treasury yields, capturing the rate spread on parked capital.
+
+### Volatility & regime character
+
+USDS holds a **soft peg** tightly at ~$0.9997 and behaves as a low-volatility cash instrument. Historical deviations are mild and mean-reverting: an ATL of $0.9483 (Oct 2024) marks the observed downside wobble, while the "$1.15 ATH" is a thin-market data artifact, not a sustained depeg. The peg is defended by **overcollateralization plus RWA/treasury backing** through Sky allocators, arbitrage against the DAI converter and on-chain pools, and the SSR (raising sUSDS yield pulls demand back when USDS is weak). Redemption is mechanism-driven — there is no centralized issuer window — so repeg speed depends on collateral health and arbitrageur capital rather than an issuer guarantee.
+
+### Risk flags
+
+- **Depeg risk** — soft peg can wobble in stress (ATL $0.9483); repeg relies on arbitrage and collateral health, not an issuer redemption backstop.
+- **Reserve / backing transparency** — RWA/tokenized-Treasury and real-world-credit exposure adds counterparty and custody risk beyond pure crypto collateral, and concentration there is a live concern.
+- **Redemption gating** — no centralized redemption window; exit runs through the DAI converter and on-chain pools, which can thin out precisely during stress.
+- **Smart-contract risk** — newer modules (srUSDS, Generator System, Spark) expand the attack surface.
+- **Regulatory** — US stablecoin legislation's treatment of decentralized issuers is unsettled and could affect access or mechanics.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USDSUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=USDSUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USDSUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=USDSUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

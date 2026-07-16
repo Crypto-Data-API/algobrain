@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, altcoins]
 aliases: ["DGB"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "https://DigiByte.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[litecoin]]", "[[proof-of-work]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[litecoin]]", "[[proof-of-work]]", "[[binance]]", "[[dca-strategy]]", "[[crypto-beta-rotation]]"]
 ---
 
 # DigiByte
@@ -231,6 +231,53 @@ DGB's distinctive feature versus peers is its **MultiAlgo + DigiShield** securit
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With a single deep-book venue and thin turnover (~$3M/day against a ~$48M cap), execution is spot-cash only: there is no futures leg to hedge or lever with, shorting is effectively unavailable, and position sizing must be conservative because larger orders walk the book and produce meaningful slippage. Prefer patient, limit-based execution (scaling in/out, TWAP/VWAP-style splitting) rather than aggressive market orders, and treat single-venue concentration as a fill/withdrawal risk.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spreading entries over time is the cleanest way to accumulate a thin, single-venue micro-cap without slipping the book on any one order.
+- [[buy-and-hold]] — fits DGB's core "12+ years uptime, no premine, fixed 21B supply" durability thesis for spot holders with no funding cost to bleed.
+- [[crypto-beta-rotation]] — DGB is a high-beta PoW micro-cap that amplifies BTC/altcoin relief rallies, so it works as a rotation leg when broad risk appetite turns up.
+- [[breakout-and-retest]] — low float plus thin liquidity make breakouts sharp; waiting for the retest filters the frequent false starts typical of a $3M-volume name.
+- [[rsi-mean-reversion]] — in extreme-fear regimes DGB overshoots to the downside, giving oversold bounces that spot buyers can fade back toward range.
+- [[volatility-targeting]] — sizing inversely to realized volatility is essential for a low-liquidity, high-beta coin prone to abrupt gaps in both directions.
+
+### Volatility & regime character
+
+DGB is a low-liquidity, high-beta small-cap [[proof-of-work]] payments coin, not a DeFi or memecoin token. It is tightly correlated to broad crypto risk appetite and to [[bitcoin]]: it amplifies relief rallies (e.g. a +9.7% week) and drawdowns alike, and is acutely sensitive to the prevailing regime (extreme-fear / "Established Bear Market" backdrop). It carries a small persistent monetary/longevity premium but no growth engine, so trends are largely beta-driven rather than idiosyncratic.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — thin ~$3M daily volume and reliance on Binance spot for depth mean wide effective spreads, slippage on size, and single-venue fill/withdrawal risk.
+- **No hedge/short access** — absence of a liquid perp venue leaves spot holders directionally exposed with no clean way to hedge.
+- **Narrative dependence** — "fast, cheap PoW payments" is a crowded, commoditized thesis (stablecoins, Lightning, faster L1s); without a catalyst demand is structurally weak.
+- **Structural/funding fragility** — volunteer model with no treasury or VC backing limits development, BD and marketing; small hash rate raises theoretical 51%-style attack surface.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DGBUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DGBUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DGBUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=DGBUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

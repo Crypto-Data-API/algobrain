@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, altcoins, defi]
 aliases: ["OriginTrail", "TRAC"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://origintrail.io/"
-related: ["[[ai-agents]]", "[[ai-trading]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[polkadot]]", "[[real-world-assets]]"]
+related: ["[[ai-agents]]", "[[ai-trading]]", "[[base]]", "[[binance]]", "[[crypto-markets]]", "[[dca-strategy]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[narrative-trading]]", "[[polkadot]]", "[[real-world-assets]]"]
 ---
 
 # OriginTrail
@@ -121,6 +121,56 @@ TRAC is best understood as a **usage-fee token**: its long-term value is a funct
 - **Narrative crowding** — AI + RWA + DePIN are crowded themes; many competitors chase verifiable-data and oracle use cases.
 - **Liquidity** — moderate volume (~$1.9M/24h); thin order books outside major CEX pairs mean slippage on size.
 - **Macro / regime** — Established Bear Market with [[fear-and-greed-index|Fear & Greed]] at 23 (extreme fear); speculative AI/RWA mid-caps are highly sensitive to risk-off rotations.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TRAC is a **spot-primary** asset: it is tradable on **Binance SPOT only** among the major venues here, with **no liquid perpetual venue** — so leverage and short access are limited and perp funding/basis/liquidation strategies do **not** apply. Practically, positions are built and exited with real inventory (no synthetic shorts), so directional exposure must be expressed long-only or via rotation into/out of stablecoins. With moderate 24h volume (~$1.9M), execution should favor limit orders, staged/scaled entries and exits, and modest position sizing; larger market orders carry meaningful slippage. The absence of a perp bid also means no funding-rate carry and no easy hedge, reinforcing spot-DCA and swing-style approaches over high-frequency leveraged tactics.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, low-dilution infrastructure token ~90% below ATH; dollar-cost averaging suits accumulating a long base without timing the AI/RWA narrative turn.
+- [[buy-and-hold]] — fixed 500M cap and usage-fee (TRAC-burn) demand model make TRAC a candidate long-horizon spot hold on the "verifiable data for AI" thesis.
+- [[breakout-and-retest]] — thin, range-bound liquidity means clean breaks above multi-month bases can be entered on the confirming retest rather than chasing on spot.
+- [[narrative-trading]] — TRAC re-rates with AI, RWA, DePIN and DeSci narrative cycles; positioning ahead of/into theme rotations captures its beta.
+- [[range-trading]] — with no perp leverage and a bear-market chop regime, fading the edges of established price ranges fits a spot-only mid-cap.
+- [[atr-trailing-stop]] — volatility-scaled trailing stops manage the wide swings of a low-liquidity mid-cap while keeping the position long-only.
+
+### Volatility & regime character
+
+TRAC is a **small-to-mid-cap infrastructure token** (rank ~#207–234, ~$150M cap) that behaves as a high-beta AI/RWA/DePIN theme play rather than a memecoin — no reflexive supply-driven meme dynamics, but strong sensitivity to broad crypto risk-on/risk-off rotations. It is **highly correlated to BTC/ETH** direction and amplifies moves in the crypto-AI cohort (e.g. [[bittensor|TAO]]); in risk-off regimes like the current Established Bear Market it tends to underperform. Its low dilution (MC/FDV ~0.89) removes emissions overhang but does not shield it from narrative-driven drawdowns.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-only, ~$1.9M/24h volume; thin books mean slippage on size and no leveraged hedge.
+- **Narrative dependence** — valuation rests on AI/RWA/DePIN adoption translating into real DKG publishing (TRAC-burn) demand; a stalled narrative leaves it a mid-cap priced on a promise.
+- **Two-token complexity** — the TRAC/NEURO split and Polkadot-parachain dependency add execution and ecosystem risk.
+- **Supply overhang** — modest remaining unlock (~52.7M TRAC, ~12% of float) is small but still a periodic supply consideration.
+- **Macro / regime** — speculative AI/RWA mid-caps are acutely sensitive to risk-off rotations and extreme-fear regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TRACUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TRACUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TRACUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=TRACUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

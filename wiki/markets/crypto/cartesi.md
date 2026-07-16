@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["CTSI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cartesi.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[optimistic-rollup]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[optimistic-rollup]]", "[[smart-contracts]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Cartesi
@@ -273,6 +273,53 @@ Cartesi sits at the intersection of three live narratives: **modular blockchains
 - **Relative value:** versus low-float peers ([[caldera]], [[somnia]]), CTSI's high circulating ratio (~0.91) means little unlock dilution — a point in its favor for longer holds, offset by weaker recent momentum and adoption.
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CTSI is tradable on [[binance]] as both **spot** (CTSI/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** contract that exposes [[funding-rate|funding]], open interest and liquidation data — Binance is the primary leveraged venue for the token. It is **not listed on [[hyperliquid]]**, so on-chain perp liquidity that some larger caps enjoy is unavailable here. In practice this concentrates leveraged flow, funding and OI signal in a single venue: derivatives-based strategies must source data from Binance, and any Binance-specific listing, delisting or margin-tier change can abruptly reshape available leverage. Given the small underlying cap and thin book, perp open interest is modest relative to majors; leverage is best kept low and position sizing conservative, since spot depth — not the derivatives market — sets the real slippage floor for larger orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on CTSI when the crowd leans one way, sized small given the thin single-venue book.
+- [[cash-and-carry]] — pair long Binance spot against the short USD-M perp to lock basis when funding runs persistently positive on this low-cap.
+- [[crowded-long-funding-fade]] — fade over-extended longs during narrative-driven CTSI pops when funding and OI spike together on Binance.
+- [[liquidation-cascade-fade]] — thin depth makes CTSI prone to sharp liquidation flushes; fade the wick once forced selling exhausts.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm that a CTSI breakout is backed by real leveraged participation rather than a low-liquidity spike.
+- [[rsi-mean-reversion]] — small-cap CTSI overshoots in both directions, so oscillator-based reversion around range extremes fits its spot-driven behavior.
+
+### Volatility & regime character
+
+CTSI is a **small-cap infrastructure / rollup token** (rank ~792) with high beta to BTC and to the broader modular/appchain and "beyond-the-EVM" narratives. Moves are reflexive and gap-prone in thin books; it tends to underperform in risk-off regimes (small caps bleed first) and can spike hard on narrative rotations (verifiable compute, on-chain AI, appchains). Correlation to BTC/ETH is high on the downside and looser on the upside, where idiosyncratic catalysts dominate. It is not a memecoin, but its low cap gives it memecoin-like reflexivity during liquidity events.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading is effectively Binance-only (no [[hyperliquid]]); a single-venue funding/OI feed and exposure to Binance listing or margin-policy changes.
+- **Liquidity:** thin absolute spot depth relative to cap — large orders move price; perp OI is small, so hedging capacity is limited.
+- **Narrative dependence:** demand hinges on the appchain/modular and verifiable-compute theses and on real dApp adoption, which has lagged the framework's technical readiness.
+- **Supply:** minimal unlock overhang (~0.91 circulating/FDV) is a structural positive, so emissions are not a major near-term risk flag.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CTSIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CTSIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CTSI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CTSI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CTSIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CTSIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CTSI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ## See Also
 

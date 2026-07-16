@@ -4,12 +4,12 @@ type: market
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin]
+tags: [crypto, stablecoin, stablecoins, defi]
 aliases: ["PAX", "Pax Dollar", "Paxos Standard", "USDP"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://www.paxos.com/standard/"
-related: ["[[base]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
+related: ["[[base]]", "[[binance]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # Pax Dollar
@@ -226,6 +226,51 @@ See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USDP is a USD-pegged [[stablecoin]] traded on [[binance]] and other centralized venues, and it is a **PEG / cash-management instrument, NOT a directional asset** — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because it is fully fiat-reserved and pegged 1:1, there is no directional thesis and no meaningful use for leverage; it functions as quote-side or parking liquidity rather than a position to be long or short. With a small float, secondary-market depth is thin relative to [[usdc|USDC]] and [[tether|USDT]], so venue availability directly shapes execution: on Binance and deep CEX order books, tight spreads permit larger arbitrage clips at par, while on-chain pools and minor venues force smaller sizing to avoid slippage. Primary-market mint/redeem is gated to onboarded institutions, so retail execution and sizing are constrained to whatever secondary liquidity a given venue offers.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — Buy USDP below par during a depeg episode when the trust-charter backing and institutional redemption support a snap-back to $1.
+- [[stablecoin-pair-arbitrage]] — Arb USDP against [[usdc|USDC]]/[[tether|USDT]] across CEX pairs and DEX pools, capturing spreads between regulated dollar tokens.
+- [[mint-parity-arbitrage]] — For onboarded institutions, mint/redeem USDP at par with Paxos to close any secondary-market deviation against $1.
+- [[stablecoin-yield]] — Deploy idle USDP into lending markets and stable pools to earn yield on a fully-reserved, NYDFS-regulated dollar.
+- [[carry-trade]] — Hold USDP as the funding/parking leg while harvesting yield differentials, given its conservative fiat-reserve backing.
+
+### Volatility & regime character
+
+USDP is a fiat-reserve (custodial) stablecoin with monthly independent attestations and 1:1 par mint/redeem, so under normal conditions the peg is tight and volatility is near-zero — treat micro-deviations around $0.997–$1.001 as ordinary noise. Redemption mechanics are par-based but gated to onboarded institutions, so retail peg-recovery relies on secondary-market arbitrage. Its thin float means episodic wicks can appear on low-liquidity venues without reflecting genuine reserve stress; a real regime shift would be a sustained, widening discount accompanied by redemption friction rather than a transient tick.
+
+### Risk flags
+
+- **Depeg risk** — Thin liquidity and small supply can produce transient secondary-market deviations; only a sustained, widening discount signals a genuine [[depeg]].
+- **Reserve / backing transparency** — Backing is cash plus short-dated Treasuries with monthly attestations; reserve-asset quality, custody, and banking-partner health remain the key trust assumptions.
+- **Redemption gating** — Direct par redemption is restricted to onboarded institutions, so retail holders depend on venue liquidity to exit at $1.
+- **Regulatory** — As the February 2023 [[binance-usd|BUSD]] halt showed, NYDFS can compel material changes to a Paxos-issued program; U.S. federal stablecoin policy is the dominant headline risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USDPUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=USDPUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USDPUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=USDPUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "ARPA"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ARPA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.arpanetwork.io/en-US"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # ARPA
@@ -137,6 +137,55 @@ Randcast, a verifiable Random Number Generator (RNG), is the first application t
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ARPA is tradable on **Binance** — both **spot** (ARPA/USDT) and a **USD-margined perpetual**, which surfaces funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue for ARPA. As a very small-cap token (~#1247, thin 24h volume), leverage on ARPA carries elevated slippage and liquidation-wick risk: order books are shallow and a single perp venue concentrates price discovery on Binance. Practically, this means execution should lean on limit/VWAP fills, position sizing must stay small relative to depth, and any carry/basis structure depends on Binance funding and spot liquidity rather than a diversified venue set.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance USD-M perp funding on ARPA when the rate runs persistently positive or negative, sized small given thin liquidity.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when ARPA funding spikes positive on a low-float, retail-driven small-cap.
+- [[liquidation-cascade-fade]] — thin books make ARPA prone to over-extended liquidation wicks on the single Binance perp; fade the flush and mean-revert.
+- [[cash-and-carry]] — capture spot-vs-perp basis using Binance spot ARPA/USDT against the USD-M perpetual when the basis is favorable.
+- [[oi-confirmed-trend]] — use Binance open-interest confirmation to validate ARPA breakouts and avoid low-conviction, liquidity-driven fakeouts.
+- [[rsi-mean-reversion]] — ARPA's range-bound, deeply-drawn-down price action suits mean-reversion off oversold/overbought extremes.
+
+### Volatility & regime character
+
+ARPA is a small-cap infrastructure/privacy token (secure MPC/threshold-BLS RNG) with high beta to BTC/ETH risk sentiment and pronounced reflexivity typical of low-float alts. Price is deep in drawdown from its 2021 cycle high and trades in a low-volatility grind punctuated by sharp, liquidity-driven spikes. Correlation to broad crypto risk-on/risk-off dominates idiosyncratic protocol news; expect thin-book amplification of moves during BTC-led volatility.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — very low market cap and 24h volume, with Binance as the sole meaningful leveraged venue; slippage and gap risk are elevated.
+- **Emissions/supply** — circulating supply is roughly half of a 2.0B max supply, leaving unlock/dilution overhang that can pressure price.
+- **Narrative dependence** — value is tied to privacy/RNG infrastructure adoption (Randcast); demand is sensitive to shifts in narrative and broad alt sentiment.
+- **Small-cap fragility** — reflexive liquidation dynamics on a single perp make leveraged positions vulnerable to cascade wicks.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ARPAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ARPAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ARPA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ARPA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ARPAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ARPAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ARPA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

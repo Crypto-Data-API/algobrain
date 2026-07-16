@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["Harmony ONE", "Harmony Protocol", "ONE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://harmony.one/"
-related: ["[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[icon]]", "[[iotex]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
+related: ["[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[icon]]", "[[iotex]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Harmony
@@ -198,6 +198,55 @@ At its 2021 peak, Harmony hosted a sizable EVM DeFi ecosystem — DEXes, lending
 - **Ecosystem and developer attrition:** post-hack, TVL and developer activity contracted sharply; the chain competes with many other EVM [[layer-1]]s and [[ethereum]] [[layer-2]] rollups for scarce liquidity and builders.
 - **Governance paralysis risk:** the inability to agree on a hack-recovery path showed how a crisis can deadlock governance, leaving affected users without remedy.
 - **Small-cap liquidity & drawdown:** at ~$21M market cap (rank #797) and down >99% from ATH amid an Extreme Fear regime, ONE is highly volatile and thinly traded.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ONE is tradable on [[binance]] as both **spot** (ONE/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, so it carries live [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT listed on Hyperliquid**, so Binance is effectively the **primary leveraged venue** for ONE. This concentration means perp depth, funding, and liquidation flow all originate from a single exchange: there is little cross-venue redundancy, so a Binance outage, listing change, or margin-parameter tweak has outsized impact. Given the ~$21M cap and thin spot volume, the perp order book is shallow relative to large caps — leverage is available but **position sizing must be conservative**: large market orders will move price, slippage on entries/exits is material, and stops can be run in low-liquidity windows. Execution favors limit/passive orders, [[vwap-trading|VWAP]]-style scaling, and small clip sizes over aggressive taker fills.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on the Binance USD-M perp when the single-venue funding print is persistently one-sided, a common pattern in low-float small caps.
+- [[cash-and-carry]] — long Binance spot ONE vs. short the perp to capture basis/funding while staying delta-neutral, sidestepping ONE's directional drawdown risk.
+- [[liquidation-cascade-fade]] — thin perp depth on one venue means forced liquidations overshoot; fade the wick and target reversion once the cascade exhausts.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether a move is real positioning or a low-liquidity fake-out before committing size.
+- [[rsi-mean-reversion]] — range-bound, thinly traded small caps often snap back from oscillator extremes; suits ONE's directionless post-hack chop.
+- [[breakout-and-retest]] — narrative-driven pops (e.g., ecosystem or listing catalysts) can break range; requiring a retest filters the false breakouts common in illiquid names.
+
+### Volatility & regime character
+
+ONE is a **small-cap, EVM [[layer-1]] infrastructure token** (rank ~#797, ~$21M cap) trading >99% below its 2021 ATH. It behaves as a **high-beta altcoin**: it tends to amplify BTC/ETH moves on the way up but bleeds harder and recovers weaker in risk-off regimes, and it is currently in a directionless, low-liquidity chop punctuated by sharp narrative-driven spikes. It is not a memecoin but shares memecoin-like reflexivity in thin conditions — moves are exaggerated by shallow books. Correlation to BTC/ETH is high on broad-market risk swings, but idiosyncratic (hack overhang, ecosystem attrition) risk dominates the token's longer-term drift.
+
+### Risk flags
+
+- **Venue concentration:** Binance is the primary spot and the only major leveraged venue; a delisting, margin change, or outage removes the main source of liquidity and derivatives data.
+- **Liquidity / slippage:** thin spot and perp books make large orders costly and stops vulnerable to being run in low-liquidity windows.
+- **Uncapped supply / emissions:** ONE has an **unlimited max supply** with ongoing staking emissions, and past minting-based hack-reimbursement proposals highlight persistent dilution risk.
+- **Reputational / narrative dependence:** the 2022 Horizon [[cross-chain-bridge]] hack (~$100M, Lazarus-linked) is a durable overhang; upside is largely narrative/catalyst-dependent rather than fundamentals-driven, so positioning can invert quickly on sentiment.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ONEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ONEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ONE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ONE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ONEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ONEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ONE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

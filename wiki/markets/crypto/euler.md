@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, lending]
+tags: [crypto, defi, ethereum, lending, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["EUL", "Euler Finance", "Euler v2"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.euler.finance/"
-related: ["[[aave]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[flash-loan]]", "[[governance-token]]", "[[lending]]", "[[smart-contract-risk]]"]
+related: ["[[aave]]", "[[compound]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[flash-loan]]", "[[governance-token]]", "[[lending]]", "[[smart-contract-risk]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Euler
@@ -228,6 +228,58 @@ This is not investment advice; figures are point-in-time and crypto assets are h
 
 - **March 2023** — ~$197M flash-loan exploit; subsequently the attacker returned essentially all recoverable funds (see History above).
 - **2024** — Euler v2 relaunch with the Euler Vault Kit and Ethereum Vault Connector.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+EUL is tradable on [[binance]] — **spot** (EUL/USDT) plus a **USD-margined perpetual** with the usual derivatives surface: [[funding-rate|funding]], [[open-interest]], and [[liquidations]]. It is **not** listed on Hyperliquid, so Binance is the **primary leveraged venue** for EUL. Additional spot liquidity exists on Kraken, Upbit, and KuCoin, but leveraged flow, funding, and OI concentrate almost entirely on Binance. As a ~#734-ranked, ~$25M-cap microcap, EUL's order books are thin: the single dominant perp venue means funding and liquidation signals are clean but easily distorted, spreads widen quickly, and slippage on size is material. Sizing should be conservative — small clip sizes, wide-but-respected stops, and awareness that a modest notional can move price and trigger cascades. Perp availability enables shorting and carry structures otherwise impossible for a thinly held governance token, but leverage on such an illiquid market amplifies liquidation risk in both directions.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance USD-M perp lets a trader collect funding when EUL's crowded, one-sided positioning pushes rates persistently positive or negative.
+- [[crowded-long-funding-fade]] — narrative-driven pops on a microcap this thin frequently over-extend perp longs; fading elevated positive funding into exhaustion is a recurring setup.
+- [[liquidation-cascade-fade]] — with all leverage on one venue and shallow books, forced-liquidation flushes overshoot; fading the wick after a cascade targets the snap-back.
+- [[cash-and-carry]] — long Binance spot versus short the USD-M perp captures basis/funding when the perp trades rich, a clean carry given EUL's single perp venue.
+- [[rsi-mean-reversion]] — low-liquidity microcaps whipsaw around fair value, so oscillator-based mean reversion on stretched intraday moves fits EUL's range-bound regimes.
+- [[breakout-and-retest]] — EUL's sharp, narrative-led expansions off compressed ranges reward trading confirmed breakouts and their retests rather than chasing.
+
+### Volatility & regime character
+
+EUL is a **small-cap DeFi/infra governance token** (lending protocol), not a memecoin — its moves are driven more by protocol adoption, TVL, unlock/emission news, and DeFi-sector rotation than pure reflexive hype. It carries **high beta to BTC/ETH**: in risk-off tape it bleeds with the broad altcoin complex, and in DeFi-sector risk-on it can outperform sharply. Realized volatility is large relative to majors given the microcap float; price gaps and reflexive squeezes are common on thin liquidity. Correlation to ETH (its native chain and sector anchor) tends to run higher than to BTC during DeFi-specific narratives.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — leveraged trading, funding, and OI sit almost entirely on Binance; a single-venue outage, delisting, or fee change disproportionately affects EUL execution.
+- **Microcap thinness** — ~$25M cap and modest depth mean large slippage, wide spreads, and susceptibility to manipulation and stop-runs.
+- **Unlocks / emissions** — market-cap/FDV near 0.9 leaves some remaining emission and incentive-program overhang that can pressure price on supply events; see [[token-unlock-supply-event]] dynamics.
+- **Narrative / adoption dependence** — value accrual to EUL hinges on DAO fee decisions and Euler v2 adoption; sentiment can shift abruptly on protocol news.
+- **Reputational / smart-contract shadow** — the 2023 exploit history (fully recovered) still colors sentiment and can amplify downside on any security-related headline.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=EULUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=EULUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=EUL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=EUL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=EULUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=EULUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=EUL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

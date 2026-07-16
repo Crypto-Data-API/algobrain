@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["C98", "Coin98 Super App", "Coin98 Wallet"]
 entity_type: protocol
 headquarters: "Vietnam (Coin98 Labs)"
 website: "https://coin98.com/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[smart-contracts]]", "[[solana]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[smart-contracts]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Coin98
@@ -243,6 +243,55 @@ C98 trades roughly **-99.8%** below its August 2021 all-time high of ~$6.42, a d
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+C98 is tradable on [[binance]] — **spot** (C98/USDT) plus a **USD-margined perpetual** with the associated derivatives plumbing: [[funding-rate|funding]], [[open-interest]], and [[liquidations]]. It is **not listed on Hyperliquid**, so Binance is the primary (effectively sole major) leveraged venue for C98. Because leveraged flow is concentrated on a single exchange, funding, OI, and liquidation prints on Binance are the cleanest read on positioning — but they also mean venue-concentration risk: there is no deep secondary perp book to absorb a squeeze or outage. Combined with a ~$14M-cap, chain-fragmented spot base, this makes execution slippage and liquidation-wick severity high; size positions small, favor limit fills on the Binance C98/USDT book, and treat any large size as market-moving.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance perp means C98 funding can run persistently one-sided; harvest it delta-neutral (long spot / short perp) when funding is rich.
+- [[crowded-long-funding-fade]] — sentiment-driven Southeast-Asia retail chases DeFi-recovery spikes; overheated positive funding flags crowded longs ripe to fade.
+- [[liquidation-cascade-fade]] — thin, single-venue depth produces exaggerated liquidation wicks; fade the overshoot after a forced-liquidation flush.
+- [[oi-confirmed-trend]] — with all leveraged flow on one book, rising Binance OI alongside price confirms genuine trend participation versus a hollow move.
+- [[cash-and-carry]] — capture spot-vs-perp basis on C98/USDT when the perpetual trades at a premium, holding spot against the short.
+- [[rsi-mean-reversion]] — a high-beta small-cap that overshoots both ways; RSI extremes on the Binance chart offer mean-reversion entries within its range.
+
+### Volatility & regime character
+
+C98 is a **small-cap DeFi / multi-chain-wallet infrastructure token** (rank ~#1015) with high realized volatility and strong high-beta behavior — it amplifies moves in BTC/ETH and the broader DeFi/altcoin complex rather than trading on idiosyncratic fundamentals. Its weak token value-capture and Southeast-Asian retail base make it reflexive to sentiment: it rallies hard on risk-on DeFi rotations and bleeds in risk-off tape. Correlation to BTC/ETH is high on the downside; upside is narrative- and flow-driven and can decouple briefly during retail-led spikes.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged trading lives almost entirely on Binance; no Hyperliquid or deep secondary perp market, so a single-venue outage, funding regime shift, or delisting is a concentrated risk. Spot liquidity is thin and fragmented across chains.
+- **Narrative dependence:** demand leans on DeFi-recovery and Southeast-Asia retail sentiment plus incubated-product traction rather than a hard token sink; momentum can evaporate quickly.
+- **Emissions/supply:** fixed 1B max supply is fully circulating (MC/FDV ≈ 1.0), so there is no unlock/dilution overhang — a relative positive versus inflationary peers.
+- **Small-cap fragility:** ~$14M cap and modest volume mean high slippage and severe liquidation cascades under leverage; treat any sizable position as market-moving.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=C98USDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=C98USDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=C98` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=C98` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=C98USDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=C98USDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=C98"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

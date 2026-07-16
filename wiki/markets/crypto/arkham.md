@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [analytics, crypto, exchange]
+tags: [analytics, crypto, exchange, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ARKM", "Arkham Intelligence"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://arkm.com/"
-related: ["[[binance]]", "[[cex]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[on-chain-analysis]]", "[[on-chain-analytics]]"]
+related: ["[[binance]]", "[[cex]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[on-chain-analysis]]", "[[on-chain-analytics]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Arkham
@@ -256,6 +256,56 @@ Arkham was founded by Miguel Morel who serves as CEO. Miguel is a veteran entrep
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ARKM is tradable on **[[binance]]** — both **spot (ARKMUSDT)** and a **USD-margined perpetual**, which exposes a full derivatives surface: [[funding-rate|funding]], **open interest**, and **liquidation** data. ARKM is **not on [[hyperliquid]]**, so Binance is the **primary leveraged venue** and the reference market for perp-driven signals. This concentration means execution and sizing should key off Binance depth: with a small-cap (~#335) float and moderate spot volume, the order book is thin relative to majors, so slippage rises quickly on size. Keep clip sizes small, prefer limit/passive fills, and treat Binance funding/OI as the single best gauge of leverage and crowding — there is no deep second perp venue to arbitrage against, which caps cross-venue strategies and raises single-venue concentration risk.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the single Binance ARKM market when the rate is persistently one-sided.
+- [[crowded-long-funding-fade]] — fade euphoric spikes in ARKM after AI/intel-narrative pumps drive funding richly positive and OI extended.
+- [[cash-and-carry]] — pair long Binance spot ARKM against short the USD-M perp to lock the basis when funding runs positive.
+- [[liquidation-cascade-fade]] — thin small-cap depth makes ARKM prone to overshooting liquidation flushes; fade the wick back toward value.
+- [[oi-confirmed-trend]] — require rising Binance open interest to confirm ARKM breakouts, filtering low-conviction moves in a thin book.
+- [[narrative-trading]] — trade ARKM around on-chain-intel / exchange-token catalysts where price is highly narrative-sensitive.
+
+### Volatility & regime character
+
+Small-cap (~#335) altcoin with high beta to BTC/ETH risk-on/off swings and reflexive, narrative-driven bursts around AI/on-chain-intelligence and exchange-token themes. As an infra/analytics token with its own CEX, ARKM carries idiosyncratic exchange-token dynamics (volume/fee/buyback flows) layered on broad market beta. Expect elevated realized volatility, sharp drawdowns, and low-conviction chop between catalysts — deep in a bear-market regime (~97% below ATH), it behaves as a leveraged play on both market recovery and Arkham-specific volume growth.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure is effectively single-venue (Binance perp); no deep alternate perp market to hedge or arbitrage.
+- **Thin liquidity** — modest spot volume on a small cap amplifies slippage and liquidation-cascade overshoot.
+- **Unlock/emissions overhang** — ~34% of the 1B fixed supply not yet circulating; vesting supply can pressure price.
+- **Narrative dependence** — price leans heavily on AI/intel and exchange-token narratives, which fade fast between catalysts.
+- **Regulatory / privacy** — de-anonymization business and CEX operations carry surveillance-backlash and regulatory tail risk that can gap the token.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ARKMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ARKMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ARKM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ARKM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ARKMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ARKMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ARKM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

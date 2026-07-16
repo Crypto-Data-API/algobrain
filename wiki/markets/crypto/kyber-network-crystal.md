@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["KNC", "Kyber Network", "KyberSwap"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kyber.network/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[liquidity]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[liquidity]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Kyber Network Crystal
@@ -231,6 +231,56 @@ KNC is governed through the **KyberDAO**. Holders **stake KNC** to receive votin
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KNC is tradable on **Binance** as both **spot** (KNC/USDT) and a **USD-margined perpetual**, exposing funding, open interest, and liquidation data. Binance is the **primary leveraged venue** for KNC. It is **not listed on Hyperliquid**, so on-chain perp liquidity is unavailable and the tradable derivatives surface is effectively Binance-centric. Given KNC's small ~$20M cap and thin CEX volume, order books are shallow relative to majors: leverage is available but sizing must respect that a modest USD-M perp position can move price and get liquidated fast in low-depth conditions. Execution favors patient limit orders, smaller clip sizes, and awareness that most reliable funding/OI/liquidation signal comes from the single Binance perp rather than a broad multi-venue picture.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the Binance KNC USD-M contract when it runs persistently positive or negative, hedging spot against perp.
+- [[crowded-long-funding-fade]] — fade over-extended longs when KNC funding spikes positive on relief bounces into a weak DeFi tape.
+- [[liquidation-cascade-fade]] — small-cap KNC is prone to leverage flushes; fade forced-selling wicks once the Binance liquidation cluster clears.
+- [[range-mean-reversion]] — KNC spends long stretches ranging near depressed post-exploit levels, favoring mean-reversion between local support/resistance.
+- [[rsi-mean-reversion]] — buy oversold / sell overbought RSI extremes on a thin, mean-reverting altcoin that overshoots on low volume.
+- [[cash-and-carry]] — capture positive basis by holding KNC spot against a short Binance USD-M perp when funding/basis is favorable.
+
+### Volatility & regime character
+
+KNC is a **small-cap DeFi/infrastructure token** (rank ~#851, ~$20M cap) with **high-beta**, reflexive behavior: it amplifies BTC/ETH risk-on and risk-off moves and can gap on thin volume. It trades ~98% below its 2022 ATH and carries a lasting post-2023-exploit discount. Correlation to BTC/ETH is strong in direction but noisy in magnitude — idiosyncratic liquidity and DeFi-sector rotation drive outsized swings. It is a utility/governance DeFi token, not a memecoin, so reflexivity is fundamentals-and-liquidity driven rather than pure narrative hype.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** leveraged trading is concentrated on Binance; no Hyperliquid or deep alternative perp venue, so a single venue's outages, delistings, or funding regime dominates.
+- **Small-cap thinness:** ~$20M cap and low 24h volume mean wide spreads, slippage, and liquidation-driven wicks.
+- **Protocol/reputational overhang:** the November 2023 KyberSwap exploit still weighs on liquidity, TVL, and sentiment — event-driven downside risk if new incidents surface.
+- **Value-accrual dependence:** KNC demand hinges on protocol fees and staking; compressed volumes pressure the narrative and can prolong downtrends.
+- **Supply / emissions:** circulating supply below total/max supply means ongoing dilution potential to monitor.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KNCUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=KNCUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=KNC` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=KNC` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KNCUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=KNCUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=KNC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

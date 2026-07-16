@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation]
+tags: [crypto, regulation, altcoins, defi]
 aliases: ["BTT", "BTTC", "BitTorrent Chain"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized (Tron ecosystem; BitTorrent Inc. acquired by Tron 2018)"
 website: "https://www.bittorrent.com/btt/"
-related: ["[[apenft]]", "[[binance]]", "[[crypto-markets]]", "[[depin]]", "[[justin-sun]]", "[[layer-1]]", "[[tron]]"]
+related: ["[[apenft]]", "[[binance]]", "[[crypto-markets]]", "[[depin]]", "[[justin-sun]]", "[[layer-1]]", "[[tron]]", "[[narrative-trading]]", "[[crypto-beta-rotation]]"]
 ---
 
 # BitTorrent (BTT)
@@ -229,6 +229,53 @@ Unlike most tokens in this batch, BTT has **no dilution overhang** — circulati
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. Practically, expressing a bearish view means selling spot (or not holding) rather than shorting, and there is no funding carry or basis to trade. With a thin ~sub-$5M/day turnover and an enormous ~987T unit supply, execution should assume shallow order-book depth: size positions to that liquidity, work larger orders with limits/[[vwap-trading|VWAP]] rather than crossing the spread, and expect slippage to dominate sizing decisions. Spot-only access also means position risk is capped at capital deployed (no liquidation cascades), which shifts risk management toward entry discipline and stops rather than margin management.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, fully-circulating (MC/FDV ~1.0) satellite token suits accumulation-over-time rather than levered timing, smoothing entries against the sub-microcent noise.
+- [[breakout-and-retest]] — BTT trades in long low-vol drifts near its all-time low punctuated by Sun/Tron-headline pops; entering on a confirmed breakout that holds a retest filters the many false spikes.
+- [[range-trading]] — for extended periods BTT chops in tight sub-microcent bands, letting range fades between support/resistance work when no catalyst is active.
+- [[narrative-trading]] — price is dominated by [[justin-sun|Justin Sun]] ecosystem headlines (SEC-case, listings, TRX strength) and DePIN rotations, so trading the narrative cycle drives most of the edge.
+- [[crypto-beta-rotation]] — a high-beta [[tron|Tron]]/Sun satellite that amplifies moves in TRX and the broader altcoin risk cycle, suiting rotation into it when beta is bid.
+- [[atr-trailing-stop]] — given headline-driven reflexive spikes and reversals, an ATR-based trailing exit locks gains on pop-and-fade moves without a fixed target.
+
+### Volatility & regime character
+
+Small/mid-cap altcoin (rank ~#139-140) with high beta to [[bitcoin]]/[[ethereum|ETH]] risk appetite and especially to the [[tron|Tron]]/[[justin-sun|Justin Sun]] cluster (TRX, JST, SUN, WIN, [[apenft|NFT]]), which co-moves on Sun headlines. Positioned as a [[depin|DePIN]]/storage infra token but with thin verifiable usage, so price behaves more like a reflexive "cheap coin" retail-speculation vehicle than a fundamentals-driven asset — memecoin-like reflexivity around its sub-microcent unit price. Long quiet drifts near the all-time low interrupted by sharp catalyst-driven pops and mean reversions define the regime.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — spot-only, no liquid perp; modest ~sub-$5M/day turnover means shallow depth and meaningful slippage on size.
+- **Narrative dependence** — value accrual is near-zero and independent of fundamentals; price is driven by [[justin-sun|Justin Sun]]/Tron headlines that cut both ways.
+- **Supply psychology** — enormous ~987T unit supply at a sub-microcent price recurrently attracts "cheap coin" retail cycles and detaches price from value; no unlock overhang (MC/FDV ~1.0) but high reflexivity.
+- **Regulatory/key-person** — although the SEC case was reportedly dismissed (March 2026), the asset remains exposed to Justin Sun key-person and regulatory headline risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTTUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTTUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTTUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTTUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

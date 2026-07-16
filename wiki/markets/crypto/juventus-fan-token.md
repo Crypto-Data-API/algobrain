@@ -3,13 +3,13 @@ title: "Juventus Fan Token"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins]
 aliases: ["JUV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.socios.com/juventus/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[momentum-investing]]", "[[breakout-trading]]", "[[event-driven-trading]]"]
 ---
 
 # Juventus Fan Token
@@ -113,6 +113,53 @@ related: ["[[crypto-markets]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With a single deep venue (JUV/USDT on Binance) plus thinner secondary CEX pairs, execution risk is concentrated: position sizing should account for shallow order books, wider slippage on market orders, and the absence of borrow/short inventory. Prefer limit orders, scale entries/exits, and size to what spot depth can absorb rather than leveraged notional. Directional exposure is effectively long-only; risk is managed by cash-vs-token allocation and stops, not by shorting.
+
+### Applicable strategies
+
+- [[breakout-trading]] — thin fan-token order books mean price gaps hard on real demand; clean breaks above range highs can run before liquidity refills.
+- [[breakout-and-retest]] — waiting for a retest of a broken level filters false breaks common in low-cap, low-float JUV moves.
+- [[event-driven-trading]] — Juventus match results, trophies, transfers, and Socios/Chiliz product news are discrete catalysts that repeatedly move fan tokens.
+- [[news-trading]] — sports and club headlines drive short, sharp JUV spikes tradable on the initial reaction window.
+- [[dca-strategy]] — for a spot-only, illiquid low-cap, averaging in over time reduces single-entry slippage and timing risk.
+- [[atr-trailing-stop]] — volatility-scaled trailing stops adapt to JUV's erratic ranges and lock gains from event-driven pops without fixed levels.
+
+### Volatility & regime character
+
+Small-cap fan token with high, reflexive volatility driven more by club-specific sports events than by broad crypto beta. Correlation to BTC/ETH is loose and episodic — JUV can decouple entirely around match days or club announcements, then revert to low-liquidity drift. Behaves closer to a sentiment/event-reflexive memecoin-style asset than an infra or DeFi token, with sharp illiquidity-amplified spikes and deep, prolonged drawdowns (currently ~99% below its 2020 ATH).
+
+### Risk flags
+
+- **Liquidity/venue concentration** — depth is dominated by Binance spot; a listing change or volume dry-up sharply raises slippage and exit risk.
+- **Narrative dependence** — value hinges on club performance and Socios/Chiliz fan-engagement demand rather than protocol fundamentals or cash flows.
+- **Structural drawdown** — deeply below ATH with a small circulating base; low-cap fan tokens can bleed for extended periods between catalysts.
+- **Regulatory** — fan tokens face evolving scrutiny over consumer-protection and promotion rules in some jurisdictions, which can affect access or listings.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=JUVUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=JUVUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=JUVUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=JUVUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

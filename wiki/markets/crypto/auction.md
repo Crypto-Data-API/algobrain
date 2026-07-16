@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["AUCTION", "Bounce Finance", "BounceBit"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bounce.finance/"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[governance-token]]", "[[launchpad]]"]
+related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[governance-token]]", "[[launchpad]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Bounce
@@ -227,6 +227,55 @@ This is not investment advice; figures above are point-in-time market data, not 
 - **Risk control:** size for microcap volatility, avoid leverage on a ~$28M-cap name, and pre-define invalidation given how violently launchpad tokens reprice.
 
 > *Not investment advice.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AUCTION is tradable on [[binance]] — both spot (AUCTION/USDT) and a USD-margined [[perpetual-futures|perpetual]], which exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on Hyperliquid, so Binance is the primary leveraged venue for the name. Because leverage, borrow, and perp liquidity are concentrated on a single dominant venue, execution and sizing must account for shallow order-book depth relative to majors: at a sub-$30M cap, even modest perp size can move price and skew funding, so scale in, prefer limit orders, and keep leverage low. The Binance spot/perp pairing does, however, make cash-and-carry and funding capture structurally feasible here, unlike pure-DEX microcaps.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a Binance USD-M perp means funding can run persistently rich or negative on a thin-cap launchpad token; harvest the recurring payment while hedging spot.
+- [[cash-and-carry]] — with both Binance spot and perp available, long spot / short perp captures basis and funding on an otherwise low-yield DeFi microcap.
+- [[crowded-long-funding-fade]] — issuance-narrative spikes draw retail perp longs; fade over-crowded positioning when funding turns extreme.
+- [[liquidation-cascade-fade]] — a small-cap perp with concentrated OI is prone to violent liquidation flushes; fade the over-extension after forced selling exhausts.
+- [[breakout-and-retest]] — AUCTION reprices sharply on IDO-cycle revival; trade confirmed breakouts of range boundaries with a retest entry to avoid launchpad-token fakeouts.
+- [[volatility-targeting]] — microcap beta means realized vol swings wildly; size positions to a vol target rather than fixed notional.
+
+### Volatility & regime character
+
+Small-cap DeFi / [[launchpad]] governance token with high beta to broad crypto risk appetite and strong correlation to BTC/ETH direction. Its demand is a leveraged bet on primary-issuance activity, so it behaves reflexively — leading on the upside when the new-launch cycle reawakens and de-rating hard in risk-off regimes. Expect sharp, low-liquidity repricings rather than smooth trends; realized volatility clusters around narrative catalysts.
+
+### Risk flags
+
+- **Venue concentration** — leverage and perp liquidity are concentrated on Binance; no Hyperliquid fallback, so a venue outage or delisting materially impairs the derivatives thesis.
+- **Liquidity / microcap risk** — ~$28M cap means thin depth, wide effective spreads under stress, and slippage on size despite CEX listing.
+- **Narrative dependence** — value is tied to the cyclical launchpad/IDO issuance cycle, which collapses in bear regimes.
+- **Supply** — near-fully-diluted (MC/FDV ~0.96) limits unlock overhang, but capped 10M supply concentrates float and amplifies volatility.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AUCTIONUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AUCTIONUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AUCTION` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AUCTION` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AUCTIONUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AUCTIONUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AUCTION"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

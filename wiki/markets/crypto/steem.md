@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["STEEM", "Steemit"]
 entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://steem.com/"
-related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[hive]]", "[[justin-sun]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[tron]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[hive]]", "[[justin-sun]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[tron]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[range-mean-reversion]]"]
 ---
 
 # Steem
@@ -213,6 +213,58 @@ Steem and Hive are technically near-identical, having shared a codebase until th
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+STEEM is tradable on **[[binance]]** as both **spot** (STEEM/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, which exposes a full [[funding-rate|funding-rate]], [[open-interest|open-interest]], and [[liquidations|liquidation]] surface for a coin this small. It is **NOT** listed on Hyperliquid, so Binance is effectively the **primary leveraged venue** and the reference price for the perp. With only a ~$23M market cap and thin order books (see Trading Characteristics), leverage should be treated cautiously: sizeable perp positions can move the underlying spot, and stops or liquidations can gap. Venue concentration means execution and hedging both route through a single dominant exchange, so cross-venue arbitrage or basis capture is constrained to Binance spot-vs-perp rather than a broad multi-venue book. Size positions to available depth and expect meaningful slippage on market orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a small, sentiment-driven perp can run persistent one-sided funding, letting a delta-neutral book harvest the carry between STEEM spot and the Binance perp.
+- [[cash-and-carry]] — hold spot STEEM against a short perp to bank basis/funding when the perp trades at a premium, a clean structure given both legs live on Binance.
+- [[crowded-long-funding-fade]] — thin retail-driven rallies in a down-99%-from-ATH social token frequently over-extend perp longs; fade the crowd when funding spikes positive.
+- [[liquidation-cascade-fade]] — low liquidity makes STEEM prone to sharp liquidation wicks; fading forced-selling flushes on the Binance perp can capture the mean-reverting snapback.
+- [[range-mean-reversion]] — a beaten-down micro-cap grinding near ATL often chops in a range, favoring reversion around support/resistance rather than trend entries.
+- [[breakout-trading]] — narrative or [[justin-sun|Sun]]/[[tron|Tron]]-driven catalysts can trigger violent expansions from the range, where a confirmed breakout captures the impulsive move.
+
+### Volatility & regime character
+
+STEEM is a **micro-cap SocialFi/[[layer-1|L1]]** token with high idiosyncratic volatility and strong reflexivity typical of low-float, retail-driven coins. It carries **high beta to BTC/ETH** in risk-off regimes (small-caps bleed hardest, as the -5.34% weekly move on 2026-06-22 shows) while also reacting to Steem/Hive/Tron-specific narrative and [[justin-sun]] headlines. Liquidity is shallow, so realized volatility clusters around catalysts and liquidation events rather than being evenly distributed.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** ~$23M cap with thin books; Binance is the dominant venue, so a listing/delisting or depth shift there materially changes tradability.
+- **Inflationary emissions:** no hard supply cap; ongoing issuance to reward pools and witnesses can dilute holders and pressure price.
+- **Narrative dependence:** price is sensitive to [[justin-sun]]/[[tron]] governance news and the ongoing Steem-vs-[[hive]] narrative; headline-driven gaps are common.
+- **Governance/centralization overhang:** the 2020 Tron takeover episode is a standing reminder that concentrated stake plus exchange cooperation can move this chain — a latent event risk for holders.
+- **Leverage fragility:** low depth means perp liquidations and stops can cascade and gap; conservative sizing and wide-but-defined risk are warranted.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=STEEMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=STEEMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=STEEM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=STEEM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=STEEMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=STEEMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=STEEM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

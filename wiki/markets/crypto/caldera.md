@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["Caldera Network", "ERA", "Metalayer"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.caldera.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[layer-2]]", "[[rollup]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[layer-2]]", "[[rollup]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[funding-rate-harvest]]"]
 ---
 
 # Caldera
@@ -252,6 +252,59 @@ Caldera sits in the **modular / rollup-as-a-service / interoperability** narrati
 - **What to watch (bullish):** a credible inflection in **Metalayer adoption / cross-rollup volume** (the only real value driver), a modular-narrative revival, and unlock schedules easing.
 - **What to watch (bearish):** the **vesting/unlock calendar** (track it closely — ~83% of supply is still locked), RaaS commoditization headlines, any Metalayer/bridge security incident, and new BTC lows.
 - **Mechanics:** Binance listing gives better liquidity than peers and makes a perp short feasible, but small-cap gap risk is high. For longs, the structural unlock overhang argues for patience and small size until float matures or demand clearly outpaces supply.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ERA is tradable on [[binance]] — both **spot** (ERA/USDT) and a **USD-margined perpetual** exposing [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid]], so Binance is the **primary leveraged venue** for the token. Practical implications:
+
+- Leverage, borrow, and shorting run almost entirely through the Binance USD-M perp; there is no deep on-chain perp alternative. This concentrates price discovery and funding signals on a single venue.
+- OI is small for a ~$16M-cap, rank-#928 name, so the perp book is thin — leveraged size must be kept modest to avoid slippage and self-inflicted [[liquidations]]. Basis/carry trades are viable but capacity-constrained.
+- Spot liquidity is spread across Binance, Upbit, Bitget and KuCoin, but venue concentration on Binance means execution and sizing should assume single-venue depth. Treat any perp short as carrying small-cap gap risk during unlock-driven supply shocks.
+
+### Applicable strategies
+
+- [[token-unlock-supply-event]] — ~83% of ERA supply is still locked (0.17 cap/FDV); scheduled unlocks are the dominant, tradable supply catalyst.
+- [[funding-rate-harvest]] — a thin, mostly-shorted small-cap perp can print persistently negative funding, offering carry to spot-long / perp-short delta-neutral positioning.
+- [[crowded-short-funding-fade]] — after unlock-driven capitulation, an overcrowded short book on the Binance perp can set up squeeze fades when funding turns deeply negative.
+- [[liquidation-cascade-fade]] — a thin perp book means [[liquidations]] cascade to overshoot; fading the flush at/near all-time lows is a repeatable small-cap pattern.
+- [[narrative-trading]] — ERA trades on the modular / RaaS / interoperability (Metalayer) narrative; adoption or modular-revival headlines drive reflexive moves.
+- [[cash-and-carry]] — Binance spot + USD-M perp allows a delta-neutral basis capture when the perp trades rich to spot, subject to the thin OI capacity cap.
+
+### Volatility & regime character
+
+Small-cap (rank ~#928) [[altcoins|altcoin]] infra/L2 token with **high-beta to BTC/ETH** on the downside and reflexive, unlock-dominated tape. It behaves like a low-float post-launch name: sharp drawdowns, illiquid pumps, and supply overhang that overwhelms fundamentals. Correlation to BTC is high in risk-off regimes; idiosyncratic moves cluster around unlocks and modular-narrative rotations rather than sustained trends.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading is Binance-only; single-venue depth and small OI amplify gap and slippage risk.
+- **Unlock/emissions overhang** — ~83% of max supply still to vest is the single biggest structural risk; unlocks into a weak tape drive persistent sell pressure.
+- **Narrative dependence** — value accrual to ERA from RaaS/Metalayer usage is unproven; price leans on the modular narrative staying alive.
+- **Small-cap gap risk** — micro-cap liquidity means thin books, wide ranges, and violent reactions to news or bridge/interop security incidents.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ERAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ERAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ERA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ERA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ERAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ERAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ERA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

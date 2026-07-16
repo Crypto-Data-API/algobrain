@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, depin]
+tags: [ai-trading, crypto, depin, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["LPT"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://livepeer.org/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[golem]]", "[[proof-of-stake]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[golem]]", "[[proof-of-stake]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Livepeer
@@ -264,6 +264,55 @@ It is a unit of account that is specific to the Livepeer ecosystem, which forms 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LPT is tradable on **[[binance]]** — both spot (LPT/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** contract carrying [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue and the anchor for perp-based price discovery. With a small (~$75-88M) cap and thin order books versus large-caps, leverage should be used conservatively: available perp leverage does not overcome the reality that book depth is shallow, so large market orders will move price and stops can slip in stressed tapes. Venue concentration on a single dominant perp (Binance) means funding, OI, and liquidation signals are concentrated there; size positions to the thinner book, prefer limit execution, and expect wider effective spreads than headline quotes suggest. The lack of a Hyperliquid perp removes a common cross-venue funding/basis arbitrage leg for LPT.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on LPT when it runs persistently positive/negative, sizing to the thin book and single-venue funding regime.
+- [[cash-and-carry]] — pair Binance spot LPT against the USD-M perp to lock basis when the perp trades at a premium to spot.
+- [[liquidation-cascade-fade]] — small-cap thin liquidity makes LPT prone to over-extended liquidation wicks; fade the flush back toward the mean once cascades exhaust.
+- [[oi-confirmed-trend]] — use Binance open-interest build alongside price to confirm genuine DePIN/AI narrative trends rather than low-conviction moves.
+- [[narrative-trading]] — LPT is a DePIN + AI-compute narrative token; position around AI-inference and DePIN theme rotations that drive its beta.
+- [[breakout-and-retest]] — trade confirmed breakouts of range boundaries with a retest entry to manage the higher slippage risk of a thin small-cap.
+
+### Volatility & regime character
+
+LPT is a **small/mid-cap [[depin]] compute token** (video transcoding + AI inference) that behaves as a high-beta altcoin: it tends to amplify BTC/ETH direction and rallies hardest during DePIN and AI-narrative rotations, then bleeds during risk-off tapes (it sits ~98% below its 2021 ATH). It is not a memecoin, so reflexivity is narrative-driven (AI-compute thesis) rather than pure meme momentum. Correlation to ETH is structurally relevant given its Ethereum/Arbitrum host chains. Thin liquidity magnifies both up-moves and drawdowns relative to large-caps.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin order books and a single dominant leveraged venue (Binance; no Hyperliquid) concentrate funding/OI/liquidation flow and amplify slippage.
+- **Inflation / emissions** — uncapped, algorithmic LPT issuance dilutes non-stakers even though supply is fully circulating (MC = FDV, no discrete unlock cliffs).
+- **Narrative dependence** — price leans heavily on the DePIN + AI-compute thesis converting to real fee demand; narrative fade removes a key catalyst.
+- **Competition** — centralized cloud video and rival DePIN/AI-compute networks (Render, Akash, [[golem]]) compete for the same workloads, a persistent overhang on the thesis.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LPTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LPTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=LPT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=LPT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LPTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=LPTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=LPT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

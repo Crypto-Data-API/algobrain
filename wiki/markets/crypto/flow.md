@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, nft]
+tags: [crypto, defi, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["FLOW"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://flow.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[non-fungible-token]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[non-fungible-token]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Flow
@@ -192,6 +192,57 @@ At a ~$47M market cap FLOW has compressed to roughly **0.1%** of its 2021 peak v
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FLOW is tradable on [[binance]] — both **spot** (FLOW/USDT) and a **USD-margined perpetual**, which exposes [[funding-rate|funding]], [[open-interest|open interest]] and [[liquidations]] data for the name. It is **not** listed on [[hyperliquid]], so Binance is effectively the primary leveraged venue: leverage, borrow and short access for FLOW route through Binance's perp order book rather than a perp DEX. Because Binance concentrates the derivatives liquidity, its perp book sets the reference funding/OI picture, but the underlying spot is thin (~$4M/day against a ~$47M cap), so leveraged size and hedges must be sized against Binance depth — large clips slip on both the spot and perp legs, and the lack of a second deep perp venue (no Hyperliquid) limits cross-venue routing and makes execution sensitive to single-book outages or funding spikes.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with a single dominant perp venue and a low-cap NFT/L1 name, FLOW funding can drift persistently one way, letting a delta-neutral spot-vs-perp position harvest the carry.
+- [[cash-and-carry]] — long Binance spot FLOW hedged short the USD-M perp captures any positive basis without directional beta, appropriate given FLOW's distressed, range-bound price.
+- [[crowded-short-funding-fade]] — in an extreme-fear, near-all-time-low regime, shorts often crowd FLOW and push funding negative; fading that crowding around capitulation is a natural setup.
+- [[liquidation-cascade-fade]] — thin FLOW liquidity means leveraged flushes overshoot; fading forced [[liquidations]] into support has an edge on a low-cap perp.
+- [[rsi-mean-reversion]] — trading near multi-year lows in a bounded range, FLOW mean-reverts off oversold extremes better than it trends.
+- [[breakout-and-retest]] — any genuine NFT/sports-narrative re-rating would break FLOW out of its compressed range; trading the breakout-retest keeps risk defined given the high beta.
+
+### Volatility & regime character
+
+FLOW is a **small-cap** ($47M) consumer-NFT/gaming Layer-1 that trades as a **high-beta sector option** rather than on fundamentals. It carries strong correlation to BTC/ETH risk-on/risk-off swings, amplified by NFT/GameFi narrative reflexivity: it rallies hardest in consumer-NFT cycles and bleeds hardest when that cohort contracts. With price near all-time lows in an "Established Bear Market" / extreme-fear regime, realized volatility is elevated on thin volume, so moves are sharp and sentiment-driven rather than trend-persistent.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — ~$4M/day spot volume and no deep second perp venue (Binance-only leverage, no Hyperliquid) mean slippage dominates execution and a single-book disruption is a real risk.
+- **Structural emission dilution** — uncapped supply with continuous staking emissions is a persistent headwind; no unlock cliff, but a slow drift against holders.
+- **Narrative dependence** — demand is concentrated in Dapper's own NFT/sports products; the token trades almost purely on the NFT/GameFi narrative re-rating.
+- **Regulatory overhang** — FLOW is tagged under "Alleged SEC Securities," a reminder of unresolved US securities-classification risk that can gate listings/liquidity.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FLOWUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=FLOWUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=FLOW` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=FLOW` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FLOWUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=FLOWUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=FLOW"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "Alien Worlds"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, nft]
+status: review
+tags: [crypto, nft, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["TLM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://alienworlds.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Alien Worlds
@@ -127,6 +127,57 @@ It is the 19th project on Binance Launchpad, for more information, please refer 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TLM is tradable on **Binance** as both a spot pair (TLM/USDT) and a **USD-margined perpetual**, exposing funding rates, open interest, and liquidation flow. It is **not** listed on Hyperliquid, so Binance is the primary — effectively sole — venue for leveraged exposure. This concentration means the Binance USD-M perp order book and funding schedule dictate execution quality for any levered position; there is no deep alternative perp venue to arbitrage against or fall back on. As a low-market-cap token, spot and perp liquidity is thin relative to majors, so slippage widens quickly on size. Position sizing should be scaled down accordingly, orders worked patiently (limit/VWAP rather than aggressive market fills), and traders should assume that crowded funding or a liquidation sweep can move price disproportionately given the shallow book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture recurring funding on the Binance TLM perp when the rate is persistently one-sided, a common pattern in speculative small-cap GameFi tokens.
+- [[crowded-long-funding-fade]] — TLM's reflexive rallies attract crowded longs; fading richly positive funding into exhaustion is a repeatable edge.
+- [[liquidation-cascade-fade]] — thin liquidity makes TLM prone to sharp liquidation sweeps that overshoot, offering mean-reversion entries after forced flushes.
+- [[oi-confirmed-trend]] — pairing rising open interest with directional moves helps separate genuine trend from thin-book noise on this low-cap perp.
+- [[volatility-breakout]] — TLM's high realized volatility and frequent range compressions make ATR/volatility-triggered breakouts well suited to its regime.
+- [[narrative-trading]] — as a GameFi/NFT metaverse token, TLM trades heavily on gaming and metaverse narrative cycles rather than fundamentals.
+
+### Volatility & regime character
+
+TLM is a small-cap (rank ~1117) GameFi/NFT token with high realized volatility and strong reflexive, memecoin-like behaviour on gaming and metaverse narratives. It carries high beta to BTC/ETH risk-on/risk-off swings but can decouple violently on token-specific catalysts. Deeply off its all-time high, price action tends to be range-bound with periodic sharp squeezes rather than sustained trends, so regime tends to alternate between low-liquidity chop and narrative-driven volatility spikes.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading is effectively Binance-only; a delisting, funding regime shift, or outage removes the primary market.
+- **Thin liquidity** — low market cap and modest volume mean wide spreads, high slippage, and outsized impact from liquidation cascades.
+- **Supply/emissions** — circulating supply is a large share of a 10B max supply; ongoing emissions and unlocks can pressure price.
+- **Narrative dependence** — valuation hinges on GameFi/metaverse sentiment cycles; fading narratives can drain liquidity and volume rapidly.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TLMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TLMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=TLM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=TLM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TLMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=TLMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=TLM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

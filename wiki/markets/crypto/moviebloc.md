@@ -3,13 +3,13 @@ title: "MovieBloc"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins]
 aliases: ["MBL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.moviebloc.com/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[dca-strategy]]", "[[range-mean-reversion]]"]
 ---
 
 # MovieBloc
@@ -123,6 +123,55 @@ MovieBloc's mission is to solve problems caused by the domination of the theatre
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MBL is tradable on **Binance SPOT only** among major venues — there is **no liquid perpetual futures market**. As a result, leverage and short access are effectively limited to spot margin where available, and this is a **spot-primary asset**. Perp-specific strategies (funding-rate capture, basis trades, liquidation-cascade plays) **do NOT apply**. With a sub-$1,000 market-cap rank and thin daily turnover, order books are shallow: execution should favor limit orders, patient scaling, and small position sizes to avoid slippage. Venue concentration (heavy reliance on Binance spot plus Korean-won liquidity on Upbit) means available depth and KRW-premium dynamics shape realistic entry/exit sizing.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, low-cap asset far below its ATH; systematic accumulation smooths entry across illiquid, volatile prints without needing leverage.
+- [[range-mean-reversion]] — MBL spends long stretches oscillating in tight sub-cent bands; fading extremes of an established range suits a spot mean-reversion approach.
+- [[rsi-mean-reversion]] — thin liquidity produces sharp, short-lived spikes and flushes that revert; RSI extremes flag overshoots for spot re-entry.
+- [[narrative-trading]] — as a film/entertainment blockchain and DWF Labs portfolio token, MBL rallies episodically on ecosystem or media-industry narratives rather than steady flows.
+- [[breakout-and-retest]] — low-cap spot names trend in bursts; waiting for a confirmed breakout and retest filters false moves in the shallow book.
+- [[vwap-trading]] — given shallow depth, benchmarking fills to VWAP helps minimize market impact when building or unwinding a spot position.
+
+### Volatility & regime character
+
+Small-cap altcoin with high idiosyncratic volatility and strong high-beta behavior versus BTC/ETH — it tends to lag in risk-off phases and overshoot in risk-on rallies. As an infrastructure/entertainment utility token (Ontology-native, DWF Labs portfolio), price action is reflexive and narrative-sensitive rather than fundamentals-anchored, with frequent low-liquidity gaps. Directionality is largely dictated by broader crypto-beta regime, punctuated by exchange- or narrative-driven spikes.
+
+### Risk flags
+
+- **Liquidity/venue concentration:** spot-only, no liquid perp; depth concentrated on Binance and Upbit (KRW), so slippage and single-venue outages are material risks.
+- **Supply overhang:** circulating supply is roughly two-thirds of max supply, leaving emission/unlock headroom that can pressure price.
+- **Narrative dependence:** rallies hinge on entertainment-sector or backer (DWF Labs) narratives; momentum can evaporate quickly when attention shifts.
+- **Regulatory/regional:** heavy Korean-market exposure makes it sensitive to KRW-market regulatory shifts and delisting risk on smaller venues.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MBLUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MBLUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MBLUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=MBLUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

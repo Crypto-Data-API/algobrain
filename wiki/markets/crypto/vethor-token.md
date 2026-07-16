@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["VTHO", "VeThor Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.vechain.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[vechain]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[vechain]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # VeThor
@@ -105,6 +105,55 @@ VTHO's narrative is inseparable from [[vechain]]'s **enterprise blockchain / sup
 - **Dependence on VeChain adoption:** demand for VTHO is a derivative of [[vechain]] network usage; enterprise adoption has been slower and more uneven than early partnerships implied.
 - **Liquidity:** the lowest turnover in this group raises execution/slippage risk.
 - **Macro/beta:** high sensitivity to a bear market currently at extreme fear ([[crypto-fear-and-greed-index|Fear & Greed]] = 23).
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+VTHO is tradable on [[binance]] — **spot** (VTHO/USDT) plus a **USD-margined perpetual** with funding, open interest, and liquidations. It is **NOT listed on Hyperliquid**, so Binance is effectively the **primary leveraged venue** for VTHO. This makes Binance's perp the single reference point for funding, OI, and liquidation flow — there is no deep alternative order book to arbitrate against or to fall back on. Combined with VTHO's very thin spot turnover (~1-2% of cap per day), this venue concentration means leverage should be sized small: perp liquidity is shallow, funding can whip on modest positioning, and a single venue outage or thin book can amplify slippage. Execution favors patient limit orders, staged entries, and modest notional rather than aggressive market sizing.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on VTHO's Binance USD-M contract when the rate is persistently one-sided; low market cap tokens often carry richer, stickier funding.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when VTHO funding spikes positive into a low-liquidity rally that lacks spot support.
+- [[cash-and-carry]] — hedge long VTHO spot against the Binance perp to capture basis/funding while neutralizing directional exposure to a structurally inflationary gas token.
+- [[liquidation-cascade-fade]] — thin perp depth makes VTHO prone to sharp liquidation wicks; fade the overshoot once forced selling exhausts.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether a VTHO move is real positioning or a hollow, liquidity-driven spike.
+- [[range-mean-reversion]] — VTHO's inflation-capped price tends to drift and range; mean-revert extremes within its low-volatility band.
+
+### Volatility & regime character
+
+VTHO is a **small-cap infrastructure/gas token** (rank ~530s) with high beta to BTC/ETH and to the broader [[vechain]] ecosystem. Its price is **structurally suppressed by perpetual emission** (VET holders continuously mint VTHO, no max supply), so it lacks the reflexive upside of a memecoin and instead tends to grind and range in quiet markets, with occasional liquidity-driven wicks. It is a derivative bet on VeChain network usage rather than a standalone narrative asset, and it typically underperforms its value-asset counterpart VET on the way up.
+
+### Risk flags
+
+- **Liquidity/venue concentration:** thinnest turnover in its peer group and a single leveraged venue (Binance); no Hyperliquid fallback raises slippage and gap risk.
+- **Structural inflation/emissions:** uncapped, continuously minted supply exerts persistent downward pressure — a "unlock-like" dilution that is ongoing rather than scheduled.
+- **Narrative dependence:** demand is derivative of [[vechain]] enterprise adoption, which has been slow and uneven; VTHO has no independent catalyst.
+- **Macro/beta:** high sensitivity to broad crypto risk sentiment amplifies drawdowns in fear regimes.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=VTHOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=VTHOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=VTHO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=VTHO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=VTHOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=VTHOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=VTHO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ZIL"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized"
 website: "https://www.zilliqa.com/"
-related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]"]
+related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Zilliqa
@@ -131,6 +131,55 @@ Zilliqa's narrative is **scalability via sharding** — a third-generation [[lay
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZIL is tradable on [[binance]] as both **spot** (ZIL/USDT) and a **USD-margined perpetual**, exposing standard derivatives telemetry — [[funding-rate|funding]], [[open-interest]], and [[liquidations]]. It is **not** listed on [[hyperliquid]], so Binance is effectively the primary leveraged venue and the dominant price-discovery hub for ZIL futures. This single-venue concentration for leverage means funding, OI, and liquidation dynamics are best read directly off Binance rather than aggregated across DEX perps. With a sub-$0.01 nominal price and ~$5.8M spot 24h volume, the order book is thin: leveraged positions and larger clips should be sized conservatively, executed with limit/passive fills or [[vwap-trading|VWAP]] slicing, and stress-tested for slippage, since even moderate flow can move price and cascade liquidations.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on ZIL when the perpetual trades at a persistent premium/discount, hedged against spot to isolate the carry.
+- [[cash-and-carry]] — pair long ZIL/USDT spot against a short Binance perp to lock the basis when funding/basis is favorable on this near-fully-diluted small-cap.
+- [[liquidation-cascade-fade]] — thin liquidity and clustered leverage on the sole Binance venue make ZIL prone to sharp liquidation flushes that overshoot and mean-revert.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to validate directional moves and filter low-conviction chop in a micro-cap that whipsaws easily.
+- [[rsi-mean-reversion]] — extreme-fear regime and range-bound micro-cap behavior favor fading stretched RSI readings back toward the mean.
+- [[breakout-and-retest]] — trade confirmed breaks of the tight consolidation range with a retest entry to reduce false-breakout risk on a low-float, headline-sensitive name.
+
+### Volatility & regime character
+
+ZIL is a **legacy small-cap [[layer-1]]** (rank ~#392) with high beta to broad crypto risk and strong correlation to [[bitcoin]]/[[ethereum]] direction. As a sub-$0.01 micro-priced infra token it exhibits sharp, reflexive moves on thin books, amplified in the current *Established Bear Market / extreme-fear* regime. It is not a memecoin but trades with small-cap reflexivity: sensitive to BTC dominance shifts, altseason rotation, and Zilliqa-specific catalysts (e.g., the Zilliqa 2.0 / EVM roadmap).
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged exposure hinges on a single venue (Binance); no Hyperliquid fallback, and thin spot depth magnifies slippage and cascade risk.
+- **Small-cap beta:** highly sensitive to macro downturns and BTC-dominance regimes; deep ~98.8% ATH drawdown reflects structurally weak demand.
+- **Narrative dependence:** valuation leans on the sharding / Zilliqa 2.0 relaunch narrative competing against far larger L1/L2 ecosystems.
+- **Emissions:** near-fully-diluted (MC/FDV ≈ 0.93) limits dilution overhang, but residual staking issuance toward the 21B cap remains a mild supply drift.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ZILUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ZILUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ZIL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ZIL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ZILUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ZILUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ZIL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

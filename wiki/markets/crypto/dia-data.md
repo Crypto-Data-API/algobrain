@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, data-provider, defi, indicators]
+tags: [crypto, data-provider, defi, indicators, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["DIA", "DIA Data", "DIAdata"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://diadata.org/"
-related: ["[[band-protocol]]", "[[chainlink]]", "[[crypto-markets]]", "[[data-provider]]", "[[defi]]", "[[ethereum]]", "[[real-world-assets]]"]
+related: ["[[band-protocol]]", "[[chainlink]]", "[[crypto-markets]]", "[[data-provider]]", "[[defi]]", "[[ethereum]]", "[[real-world-assets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # DIA
@@ -186,6 +186,55 @@ DIA's clearest wedge is **assets the majors under-serve** — newly launched tok
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DIA is tradable on **[[binance|Binance]]** — both **spot** (DIA/USDT) and a **USD-margined perpetual**, which brings [[funding-rate|funding]], **open interest**, and **liquidation** data into play. It is **not listed on Hyperliquid**, so Binance is effectively the **primary leveraged venue** for DIA. As a small-cap (~$14M market cap, rank ~#1043), order-book depth is thin: the perp enables leverage but with a shallow book, so large leveraged positions can move price and are prone to slippage and liquidation wicks. Practically, this concentrates price discovery and derivatives signal (funding, OI, liquidations) on Binance — execution should lean on limit orders and modest sizing, since a single venue's book governs realistic fill quality and the perp's funding/OI is the cleanest read on positioning.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — DIA's Binance perp funding can swing on a small book; harvesting persistent funding while delta-hedged monetizes crowded positioning in a low-liquidity name.
+- [[crowded-long-funding-fade]] — small-cap oracle tokens see reflexive leveraged long bursts; fading extreme positive funding targets the mean-reversion that typically follows.
+- [[cash-and-carry]] — spot on Binance plus the short perp lets you capture basis/funding on DIA with a delta-neutral book when the perp trades rich to spot.
+- [[liquidation-cascade-fade]] — thin depth makes DIA prone to liquidation wicks; fading over-extended cascade lows on the Binance perp exploits the exaggerated moves a shallow book produces.
+- [[rsi-mean-reversion]] — a low-cap, range-bound infra token frequently over-shoots intraday, so oversold/overbought reversion on the DIA/USDT book has a natural edge.
+- [[narrative-trading]] — as a DeFi/oracle + RWA-tagged token, DIA re-rates on oracle/RWA narrative cycles rather than fundamentals, making narrative rotation a repeatable driver.
+
+### Volatility & regime character
+
+DIA is a **small-cap infrastructure/DeFi (oracle) token** with high beta to broad crypto risk. It is highly sensitive to **[[bitcoin|BTC]]/[[ethereum|ETH]]**-led sentiment: in risk-off regimes it tends to underperform and drift down (as in the "Extreme Fear" snapshots), while narrative-driven RWA/oracle rallies can produce sharp, low-liquidity spikes. It is not a memecoin, but its thin float and low market cap give it memecoin-like reflexivity on the perp — outsized percentage moves on modest flow. Correlation to majors is high in aggregate, but idiosyncratic oracle/RWA narrative moves can decouple it short-term.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — very thin depth and reliance on Binance as the primary leveraged venue means slippage, wick risk, and single-venue outage/delisting exposure.
+- **Emissions / supply overhang** — circulating supply (~119.7M) is well below total (~168.8M) and max (200M) supply; ongoing unlocks/emissions can pressure price and are a structural headwind for a fee-dependent token.
+- **Narrative dependence** — price action leans on oracle/RWA/DeFi narrative flow more than usage revenue; when the narrative cools, liquidity and interest can evaporate quickly.
+- **Small-cap fragility** — low market cap makes DIA vulnerable to manipulation, cascades, and severe drawdowns; leveraged positioning amplifies these.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DIAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DIAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=DIA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=DIA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DIAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=DIAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=DIA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

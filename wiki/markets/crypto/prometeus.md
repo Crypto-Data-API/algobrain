@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, cross-chain, crypto, defi]
+tags: [altcoins, cross-chain, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["PROM", "Prom", "Prometeus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://prom.io/"
-related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Prom
@@ -222,6 +222,56 @@ PROM's narrative blends **zkEVM scaling**, **cross-chain interoperability**, and
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PROM is tradable on **[[binance]]** — both **spot** (PROM/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, which carries the standard derivatives telemetry: [[funding-rate|funding]], **open interest**, and **liquidations**. It is **NOT listed on Hyperliquid**, so Binance is the **primary (effectively sole) leveraged venue**. This concentration matters for execution: leveraged flow, funding, and liquidation dynamics all route through one order book, so basis and funding signals are Binance-defined rather than blended across venues. Given the thin spot float (~$1M/day turnover against a ~$21M cap), perp liquidity and open interest are shallow — size positions small, expect wider slippage on market orders, and prefer limit/scaled entries. A single-venue perp also means venue outages or delisting risk is undiversified, and crowded positioning can trigger outsized liquidation cascades on modest moves.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a low-float, sentiment-driven micro-cap perp tends to swing between funding extremes; harvest the rate when it decouples from spot drift.
+- [[crowded-long-funding-fade]] — Binance-concentrated leverage on a thin float makes over-extended long funding a reliable fade signal into pullbacks.
+- [[liquidation-cascade-fade]] — with shallow perp depth and one venue, forced liquidations overshoot; fading the flush targets the mean-reversion snapback.
+- [[oi-confirmed-trend]] — pair Binance open-interest changes with price to separate real trend from thin-float noise before committing directionally.
+- [[breakout-and-retest]] — scarce-supply, low-float PROM can gap on catalysts (gaming/data deployments, L2 rotation); trade the confirmed breakout retest rather than chasing.
+- [[volatility-targeting]] — exaggerated swings on low liquidity demand size scaling to realized volatility to keep risk constant.
+
+### Volatility & regime character
+
+PROM is a **micro-cap zkEVM/[[layer-2]] infra token** (~$21M cap, rank ~#735-830 band) with a **near-fully-circulating scarce supply** (MC/FDV ≈ 0.95). It behaves as a **high-beta altcoin**: broadly correlated to BTC/ETH risk appetite, but with thin-float reflexivity that amplifies both up and down moves on modest flow (see the +8.60% 7d / -2.51% 24h split). It is a **DeFi/infrastructure token rather than a memecoin**, so narrative catalysts (interoperability, gaming/data verticals, L2-sector rotation) drive it more than pure meme reflexivity — but low liquidity gives it memecoin-like tail volatility. In risk-off regimes it can either lead early accumulation or squeeze on thin liquidity, both of which reverse quickly.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading depends on Binance alone (no Hyperliquid); an outage, margin change, or delisting is undiversified single-point risk.
+- **Liquidity / thin float** — ~$1M/day spot turnover and shallow perp depth mean wide slippage, gap risk, and exaggerated liquidation-driven moves.
+- **Narrative dependence** — value accrual hinges on real gaming/data/L2 usage that has not yet matched the story (-82.94% 1y); without fee/traction data the thesis is fragile.
+- **Rebrand / track-record risk** — successive pivots (Prometeus to Prom) can dilute brand trust and signal product-market-fit uncertainty.
+- **Bridge / interoperability surface** — cross-chain proof submission and bridging are among crypto's most exploited attack surfaces, an event risk that can gap the token.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PROMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PROMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=PROM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=PROM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PROMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=PROMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=PROM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

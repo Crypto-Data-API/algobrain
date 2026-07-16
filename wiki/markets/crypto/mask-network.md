@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["MASK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://mask.io/"
-related: ["[[crypto-fear-and-greed-index]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[uniswap]]"]
+related: ["[[crypto-fear-and-greed-index]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[uniswap]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Mask Network
@@ -260,6 +260,56 @@ Mask Network integrates decentralized social messaging, borderless payment netwo
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MASK is tradable on [[binance|Binance]] — both **spot** (MASK/USDT) and a **USD-margined perpetual** (MASKUSDT) that exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]]. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is effectively the primary leveraged venue and the single point of price discovery for derivatives. Spot flow is also fragmented across Kraken, Upbit (KRW) and Bitget, but leveraged positioning concentrates on Binance's perp. With a ~$39M cap and thin-to-moderate turnover, the perp's order book is shallow relative to majors: available leverage is real but liquidity is not, so large clips move price and stops cluster. Practical implication — size positions to the Binance perp's depth, use limit/passive execution, and expect wider slippage and sharper funding swings than a top-50 asset.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on the Binance MASK perp when leverage crowds one-sided during episodic SocialFi narrative pumps, hedged with spot.
+- [[crowded-long-funding-fade]] — MASK's reflexive rallies off a 2026 all-time low frequently overheat perp longs; fade persistently positive funding into the reversal.
+- [[liquidation-cascade-fade]] — a low-float, high-beta token on a single leveraged venue produces sharp liquidation flushes; fade the wick and buy forced-seller capitulation.
+- [[cash-and-carry]] — when the Binance perp trades at a persistent premium to spot, go long spot / short perp to capture basis + funding on a fully-circulating token.
+- [[breakout-and-retest]] — after long basing near the ATL, confirmed breakouts on rising OI offer defined-risk entries; the retest filters the frequent fakeouts.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to validate that a MASK move is fueled by new leveraged conviction rather than thin spot noise.
+
+### Volatility & regime character
+
+Small-cap (rank ~520), low-float **infra/SocialFi/DeFi-adjacent** token with **high beta** to broad crypto risk and pronounced **narrative reflexivity** — MASK rallies in bursts alongside SocialFi/decentralized-social rotations and reverses just as fast. It behaves less like a memecoin and more like a thematic option on an episodic narrative, but with memecoin-like sharpness of moves given the thin float. Directional bias tracks BTC/ETH in risk-off, while relative outperformance is narrative-gated and short-lived.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading and derivatives price discovery sit almost entirely on Binance; no Hyperliquid market, so venue or listing changes are a single point of failure.
+- **Thin float / slippage** — ~$39M cap and modest volume mean perp depth is shallow; large orders and cascades cause outsized moves.
+- **Narrative dependence** — price is a pure read on the Web2-to-Web3 overlay/SocialFi thesis; absent a fresh catalyst, drift and demand erosion dominate (token printed a 2026 ATL ~99% below its 2021 peak).
+- **Emissions/unlocks** — none: supply is fully circulating (100M, MC = FDV), so there is no dilution overhang — the risk is demand-side, not supply-side.
+- **Legacy counterparty association** — historical Alameda/FTX-era portfolio tag carries reputational tail risk despite being non-operative.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MASKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MASKUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MASK` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MASK` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MASKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MASKUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MASK"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

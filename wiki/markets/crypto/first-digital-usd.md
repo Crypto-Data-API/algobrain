@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins]
+tags: [crypto, stablecoins, defi]
 aliases: ["FDUSD", "First Digital Dollar"]
 entity_type: protocol
 founded: 2023
 headquarters: "Hong Kong (issuer: First Digital Trust / FD121 Limited)"
 website: "https://firstdigitallabs.com/"
-related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[tron]]", "[[usdc]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[tron]]", "[[usdc]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[mint-parity-arbitrage]]"]
 ---
 
 # First Digital USD
@@ -207,6 +207,53 @@ See the **Market Data** block above for the single authoritative price/supply/vo
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FDUSD is a USD-pegged stablecoin traded almost exclusively on [[binance|Binance]]. It is a PEG / cash-management instrument, NOT a directional asset — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Liquidity is heavily concentrated in Binance FDUSD-quote pairs (notably BTC/FDUSD), a legacy of zero-fee spot promotions, with only thin secondary DEX depth (e.g. Orca FDUSD/USDC on Solana). Because depth is single-venue, execution and sizing hinge on Binance order-book conditions: away from Binance, spreads widen sharply and large redemptions must route through the issuer's mint/burn at par. Leverage is inappropriate for a par-pegged instrument — the only meaningful moves are small basis deviations and depeg events, so sizing is governed by redemption-cost basis and counterparty exposure rather than volatility targeting.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — FDUSD's April 2025 allegation-driven drop to ~$0.87 is the canonical buy-the-depeg setup where reserves cleared at par and the peg snapped back within days.
+- [[stablecoin-pair-arbitrage]] — FDUSD carries a small persistent basis versus USDT/USDC on Binance pairs that arb flow harvests, especially across BTC/FDUSD versus BTC/USDT.
+- [[mint-parity-arbitrage]] — authorized-participant mint (deposit USD) and burn (redeem USD) enforce par, so secondary-market discount/premium is a redemption-cost arbitrage against the issuer.
+- [[synthetic-stablecoin-depeg-arbitrage]] — a credibility shock like the Sun insolvency claim lets traders express depeg-vs-par views synthetically while redemptions remain clearing at par.
+- [[stablecoin-yield]] — FDUSD passes no native yield, so any carry must be sourced externally via lending/LP venues, making yield capture strategy-dependent rather than embedded.
+
+### Volatility & regime character
+
+Qualitatively, FDUSD trades flat at ~$1.00 in normal regimes with very tight peg deviation, insensitive to broad crypto risk sentiment. Its defining historical stress is the April 2025 depeg to ~$0.87 intraday, driven by issuer-credibility allegations (a TUSD-reserve dispute) rather than a reserve-asset failure — the reason price recovered quickly while float did not. The backing model is pure fiat-collateralized (100% cash and cash equivalents including short-term T-bills, in a bankruptcy-remote trust), with no algorithmic or crypto-collateral component. Redemption mechanics are 1:1 mint/burn against USD for authorized participants, which is what caps sustained premium/discount to redemption cost.
+
+### Risk flags
+
+- **Depeg risk** — thin single-venue liquidity means a credibility or reserve shock can produce sharp intraday deviations (as in April 2025) before par arbitrage restores the peg.
+- **Reserve/backing transparency** — reliance on periodic third-party attestations of First Digital Trust reserves; attestation timing and disclosure quality are ongoing watch items.
+- **Redemption gating** — par redemption is available only to authorized participants and depends on issuer operational continuity; retail exit runs through Binance market depth.
+- **Regulatory** — Hong Kong trust-jurisdiction exposure and the Stablecoins Ordinance (effective August 2025) regime, plus ongoing Sun-First Digital litigation, are structural watch items.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FDUSDUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=FDUSDUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FDUSDUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=FDUSDUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

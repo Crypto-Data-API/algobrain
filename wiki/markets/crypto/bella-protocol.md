@@ -3,13 +3,13 @@ title: "Bella Protocol"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BEL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bella.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Bella Protocol
@@ -127,6 +127,58 @@ With Bella, users can save gas fees and time and enjoy high yields from sophisti
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BEL is tradable on **Binance** — both **spot** and a **USD-margined perpetual** contract (with funding, open interest, and liquidation data). It is **not** listed on Hyperliquid, so Binance is the **primary leveraged venue** for the token. Because leveraged exposure is concentrated on a single exchange, all funding, OI, and liquidation signals derive from Binance flow, and there is no cross-venue perp to arbitrage or hedge against. Given BEL's small market cap (~#1217) and modest spot/derivatives depth, the order book is thin: position sizing should be conservative, slippage on market orders can be material, and stacking high leverage into a single-venue perp raises liquidation-cascade risk. Execution favors limit/maker orders, staggered entries, and tight monitoring of Binance funding and OI before scaling.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture recurring Binance perp funding on BEL; small-cap altcoin funding often swings hard, rewarding disciplined collection when the sign is stable.
+- [[crowded-long-funding-fade]] — when Binance funding spikes positive on a BEL rally, fade the crowded long into the elevated carry cost.
+- [[liquidation-cascade-fade]] — thin single-venue liquidity makes BEL prone to sharp forced-liquidation flushes; fade the overshoot once the cascade exhausts.
+- [[post-liquidation-rebound]] — buy the mean-reversion snap-back after a leveraged washout on the Binance perp.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm that a BEL breakout is backed by real leveraged positioning rather than thin spot drift.
+- [[rsi-mean-reversion]] — low-float DeFi altcoins like BEL frequently overextend intraday, giving oscillator-based reversion clean setups within the 24h range.
+
+### Volatility & regime character
+
+BEL is a **small-cap DeFi/infra token** with high idiosyncratic volatility and strong reflexivity relative to its tiny float and market cap. It trades with a **high beta to BTC/ETH** risk-on/risk-off cycles, but its low liquidity amplifies moves in both directions — outsized rallies and deep drawdowns are common (note the ~-99% drawdown from ATH). Trends are punctuated by sharp leverage-driven spikes and flushes rather than smooth drift, and regime shifts can be abrupt when narrative or broad-market sentiment turns.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — leveraged trading is centralized on Binance; a single-venue outage, delisting, or depth withdrawal would sharply impair exit liquidity.
+- **Small market cap / thin depth** — low float and modest volume mean large orders move price and slippage is elevated.
+- **Emissions / supply** — circulating supply is ~80% of max (100M cap); remaining issuance can add sell pressure.
+- **Narrative dependence** — as a DeFi/yield token, price is sensitive to shifts in DeFi and Binance-ecosystem narrative and broad altcoin sentiment.
+- **Regulatory** — DeFi tokens face evolving regulatory scrutiny that can affect listings and access.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BELUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BELUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BEL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BEL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BELUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BELUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BEL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

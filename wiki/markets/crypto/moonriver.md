@@ -3,13 +3,13 @@ title: "Moonriver"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["MOVR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://moonbeam.network/networks/moonriver/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Moonriver
@@ -138,6 +138,57 @@ It is intended to be a companion network to Moonbeam (on Polkadot), where it wil
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MOVR is tradable on [[binance]] — both spot (MOVR/USDT) and a USD-margined [[perpetual-futures|perpetual]] contract carrying funding, open interest, and liquidation data. It is NOT listed on Hyperliquid, so Binance is the primary leveraged venue and the reference point for derivatives-based signals. With a small-cap profile (rank ~#912) and thin spot depth (~$2.78M 24h volume), the single dominant perp venue means order books are shallow: leverage amplifies slippage, funding can swing sharply, and liquidation clusters concentrate on one exchange. Size positions modestly, favor limit/maker execution, and treat Binance funding/OI as the effective market-wide gauge since there is no cross-venue perp to arbitrage against.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp with sparse depth tends to produce persistent funding skews harvestable against a spot hedge.
+- [[crowded-long-funding-fade]] — low-float, low-liquidity MOVR is prone to crowded leveraged longs that push funding rich; fade the extreme.
+- [[cash-and-carry]] — hold spot MOVR versus short the USD-M perp to capture basis/funding when the perp trades at a premium.
+- [[liquidation-cascade-fade]] — thin single-venue books make MOVR susceptible to sharp liquidation flushes that overshoot and snap back.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with price filters low-conviction moves in an illiquid name.
+- [[breakout-and-retest]] — wide, jumpy ranges reward waiting for a confirmed breakout retest rather than chasing the initial spike.
+
+### Volatility & regime character
+
+MOVR is a small-cap infrastructure/L1 token (Kusama parachain, EVM-compatible canary network for Moonbeam) that sits far below its 2021 ATH. It behaves as a high-beta altcoin: it is broadly correlated to BTC/ETH risk-on/risk-off swings but with amplified drawdowns and low idiosyncratic liquidity, so moves are reflexive and can gap on thin volume. Expect elevated realized volatility relative to majors and regime shifts driven more by broad-market flows than by protocol-specific catalysts.
+
+### Risk flags
+
+- Liquidity/venue concentration: Binance is the sole meaningful leveraged venue; a delisting, listing change, or exchange-specific disruption would sharply impair execution and hedging.
+- Thin depth: low 24h volume and small circulating float make MOVR vulnerable to slippage and short-lived price manipulation.
+- Emissions/supply: max supply is uncensored/unlimited, so ongoing inflation is a structural headwind to hold.
+- Narrative dependence: as a Kusama/Moonbeam canary network, sustained interest hinges on the Polkadot/Kusama ecosystem narrative remaining relevant.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MOVRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MOVRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MOVR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MOVR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MOVRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MOVRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MOVR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

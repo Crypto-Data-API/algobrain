@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["ONG", "Ontology Gas"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://ont.io/"
-related: ["[[crypto-markets]]", "[[ontology]]"]
+related: ["[[crypto-markets]]", "[[ontology]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Ontology Gas
@@ -232,6 +232,58 @@ As the gas token of a mid-tier Layer-1, ONG's fortunes are inseparable from [[on
 - **Microcap volatility** — At ~$22.2M market cap, ONG is a small-cap altcoin prone to sharp drawdowns.
 
 This is not investment advice; figures above are point-in-time market data, not a valuation.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ONG is tradable on **[[binance]]** — both **spot** (ONG/USDT) and a **USD-margined perpetual** that exposes **funding, open interest, and liquidations**. It is **NOT listed on [[hyperliquid]]**, so Binance is the **primary leveraged venue** for the token; there is no deep on-chain perp alternative to cross-check pricing or hedge. Because leveraged flow is concentrated on a single exchange, the perp's funding and OI are effectively the whole derivatives picture — a squeeze or delisting risk on one venue would remove most of ONG's leverage capacity. Combined with a low spot cap (~$22M) and thin ~$6–7M daily volume, this means **position sizing must stay small**: order books are shallow, larger clips incur real slippage, and stops can gap during liquidation events. Execution favors passive/limit fills, splitting orders, and avoiding market orders into low-liquidity hours (though Upbit's Korean-retail spot flow can add episodic depth).
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with leverage concentrated on the single Binance perp, funding on a thin micro-cap can run persistently one-sided, letting a spot-hedged position collect the carry.
+- [[crowded-long-funding-fade]] — episodic ONG pumps on DID-narrative or Korean-retail flow can crowd longs and spike funding, setting up a fade back toward spot.
+- [[liquidation-cascade-fade]] — shallow books mean forced perp liquidations overshoot violently, offering mean-reversion entries once the cascade exhausts.
+- [[oi-confirmed-trend]] — rising open interest alongside price on the Binance perp helps separate real ONG breakouts from thin-book noise.
+- [[momentum-investing]] — as a high-beta micro-cap, ONG tends to trend hard when alt risk-appetite turns on, rewarding momentum entries confirmed by BTC regime.
+- [[range-mean-reversion]] — in the prevailing low-usage, sideways tape ONG oscillates in a range, favoring reversion trades against band extremes.
+
+### Volatility & regime character
+
+ONG is a **small-cap alt-L1 gas token** with **high beta to BTC/ETH risk appetite** — it typically amplifies broad crypto moves rather than leading them. It is not a memecoin, but its micro-cap size and thin liquidity produce **memecoin-like reflexivity** on news: sharp, low-float spikes and equally sharp fades. As an **infrastructure / gas token**, its idiosyncratic driver is Ontology on-chain usage and the DID narrative, layered on top of a strong correlation to the general alt cycle. Continuous ONG emission bonded to ONT holders imparts a structural downward drift that shows up as underperformance in sideways regimes.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading lives almost entirely on Binance; no Hyperliquid perp and thin cross-venue derivatives, so exchange-specific risk (delisting, outage, margin changes) is elevated.
+- **Liquidity** — ~$22M cap and ~$6–7M daily volume make ONG easy to move; slippage and stop-gaps are material and crowded positioning unwinds violently.
+- **Emissions / supply drip** — ONG is continuously emitted and claimable by ONT holders; large unbinding/claim events can add persistent sell pressure independent of price.
+- **Narrative dependence** — demand hinges on the periodically-out-of-favor decentralized-identity thesis and Ontology usage, which has struggled to grow across cycles.
+- **Deep drawdown / regime** — down ~98% from its 2018 ATH with no sustained recovery, so trend-following against the primary downtrend carries added risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ONGUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ONGUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ONG` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ONG` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ONGUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ONGUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ONG"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "BENQI"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins]
 aliases: ["QI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.benqi.fi/"
-related: ["[[crypto-markets]]", "[[avalanche]]"]
+related: ["[[crypto-markets]]", "[[avalanche]]", "[[binance]]", "[[dca-strategy]]", "[[narrative-trading]]"]
 ---
 
 # BENQI
@@ -120,6 +120,55 @@ BENQI is a decentralized non-custodial liquidity market protocol, built on Avala
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+QI is tradable on **Binance SPOT only** (QIUSDT) among liquid venues — there is **no liquid perpetual venue**, so leverage/short access is limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do NOT apply. With a sub-$10M market cap and roughly seven-figure daily volume concentrated on a single primary book, order books are thin: position sizing must stay small relative to volume, and execution should favor patient limit orders and time-slicing (VWAP-style) to avoid moving the market. Short exposure is effectively unavailable, so the tradable strategy set is long/flat only.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, deeply drawn-down microcap where scheduled accumulation smooths the thin, volatile fills better than a single market order.
+- [[vwap-trading]] — slicing entries/exits against volume is essential given a single thin book where large clips would slip badly.
+- [[breakout-and-retest]] — long/flat microcap that trades in extended ranges; waiting for a confirmed break and retest filters false moves on low liquidity.
+- [[rsi-mean-reversion]] — sharp low-cap swings around the range create oversold/overbought extremes suited to spot mean-reversion.
+- [[narrative-trading]] — as an Avalanche DeFi lending/liquid-staking token, price is highly sensitive to Avalanche ecosystem and DeFi narrative flows.
+- [[atr-trailing-stop]] — volatility-scaled trailing exits protect gains on a low-liquidity name prone to fast reversals.
+
+### Volatility & regime character
+
+Small/micro-cap (rank ~1292) infrastructure/DeFi token on Avalanche with high beta to BTC/ETH and to the broader altcoin risk cycle. Price is reflexive and narrative-driven, amplified by thin liquidity, and trades far below its all-time high with pronounced multi-week drawdown regimes. Expect elevated realized volatility and correlation that spikes during broad crypto risk-off moves.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — primary liquidity sits on a single Binance spot pair; venue delisting or volume decay would sharply impair exit ability.
+- **No perp/short access** — long/flat only; no efficient hedge or short expression.
+- **Narrative dependence** — returns hinge on Avalanche and DeFi-lending narrative rather than idiosyncratic fundamentals.
+- **Emissions/supply** — monitor protocol emissions and governance-token distribution that can pressure spot supply.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=QIUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=QIUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=QIUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=QIUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "Mubarak"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, memecoins, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["MUBARAK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mubarak-cto.com/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[meme-coin-cycle]]"]
 ---
 
 # Mubarak
@@ -119,6 +119,55 @@ CZ just subtly acknowledged that he’s Mubarak – a typical cryptic move from 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MUBARAK is tradable on **Binance** — both **spot** (MUBARAK/USDT) and a **USD-margined perpetual**, which surfaces funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue and the reference for perp-based signals. Because leveraged liquidity is concentrated on a single exchange, order books thin out quickly on this ~$12M-cap, ~$5-6M daily-volume memecoin: size positions small, use limit orders to avoid slippage, and expect funding/OI/liquidation prints to be Binance-driven. Venue concentration means execution quality and basis are dominated by Binance conditions rather than a broad cross-exchange market.
+
+### Applicable strategies
+
+- [[meme-coin-cycle]] — MUBARAK is a Binance-narrative memecoin (CZ/community-CTO driven), so it trades in reflexive hype-and-fade cycles rather than on fundamentals.
+- [[narrative-trading]] — price is tightly coupled to Binance-listing and CZ-acknowledgement narratives; trade the shift in story, not intrinsic value.
+- [[liquidation-cascade-fade]] — thin single-venue perp liquidity makes MUBARAK prone to sharp liquidation flushes that mean-revert; fade the over-extension.
+- [[crowded-long-funding-fade]] — hype spikes drive crowded leveraged longs and elevated Binance funding; fade richly-positive-funding extremes.
+- [[volatility-breakout]] — a sub-$0.02 low-cap memecoin makes explosive expansion moves off compression that momentum traders can capture.
+- [[rsi-mean-reversion]] — outside impulse phases the token chops within its 24h range, where oversold/overbought reversion on spot can be harvested.
+
+### Volatility & regime character
+
+Small-cap (~#1063) memecoin with high beta and strong reflexivity — moves are amplified by leverage, social sentiment, and Binance-ecosystem narrative rather than by DeFi or infrastructure fundamentals. It trades far below its ATH with large historical drawdowns, so realized volatility is elevated and regime-dependent (long quiet ranges punctuated by violent narrative-driven impulses). Directional beta to BTC/ETH is loose; idiosyncratic memecoin and CZ/Binance news flow tends to dominate correlation.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — leveraged trading is centered on Binance; a single-venue disruption, delisting, or thinning book can gap price and impair exits.
+- **Narrative dependence** — valuation rests on Binance/CZ hype and community-CTO momentum; when the narrative fades, support can evaporate.
+- **Memecoin reflexivity** — leverage-fueled squeezes and cascades cut both ways, producing outsized liquidation risk for over-sized positions.
+- **Regulatory / listing risk** — memecoins tied to exchange narratives are exposed to listing-status changes and shifting regulatory treatment of speculative tokens.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MUBARAKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MUBARAKUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MUBARAK` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MUBARAK` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MUBARAKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MUBARAKUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MUBARAK"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

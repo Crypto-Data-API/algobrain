@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["LSK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lisk.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[optimism]]", "[[optimistic-rollup]]", "[[superchain]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[optimism]]", "[[optimistic-rollup]]", "[[superchain]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Lisk
@@ -216,6 +216,57 @@ LSK is the governance asset of the **Lisk DAO**: holders (often via staking) vot
 - **2026 small-cap drawdown:** amid the broad altcoin washout, LSK weakened; as of 2026-06-22 it is **-7.02% over 7 days** and **-1.14% on the day** in an Extreme-Fear market (BTC ~$64,166).
 
 > *Notable events and news will continue to be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LSK is tradable on **[[binance]]** — both **spot** (LSK/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, which exposes [[funding-rate|funding]], **[[open-interest|open interest]]**, and **[[liquidations|liquidation]]** data. It is **NOT listed on [[hyperliquid|Hyperliquid]]**, so Binance is the **primary leveraged venue** and the reference market for any derivatives-based strategy. With a very small **~$20M cap (rank #814)** and thin spot volume, the perp order book is shallow and leverage is effectively capped; large or fast orders will move price and slippage dominates execution. Practically this means **small position sizing**, patient limit-order entry, and reliance on Binance funding/OI as the main crowding signal — there is no second deep leveraged venue to arbitrage against or fall back on if Binance liquidity thins out.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on the thin LSK-USDT perp when the rate persists in one direction, sizing small to survive the volatile microcap.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when Binance funding on LSK spikes positive into a rally, a common setup in illiquid small-caps that overshoot.
+- [[liquidation-cascade-fade]] — LSK's shallow book makes forced-liquidation flushes overshoot; fade the wick and target mean reversion after a cascade prints on Binance.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm that an LSK breakout is backed by real perp positioning rather than a thin-book fake-out.
+- [[rsi-mean-reversion]] — the microcap chops and reverts hard from extremes between narrative catalysts; fade stretched RSI on the LSK/USDT spot pair.
+- [[cash-and-carry]] — capture the Binance spot-vs-perp basis on LSK by pairing long spot against short perp when the annualized carry is worth the microcap liquidity risk.
+
+### Volatility & regime character
+
+LSK is a **high-beta microcap** ([[layer-2|L2]] infrastructure / ex-L1 token, not a memecoin). It carries **elevated idiosyncratic volatility** driven by its thin float and narrative dependence (Superchain/emerging-markets adoption), with high downside beta to **BTC/ETH** in risk-off regimes — as of the last snapshot it sits ~99% below its 2018 ATH and was bleeding in an Extreme-Fear tape. Expect sharp reflexive moves on low volume, weak trend persistence, and outsized drawdowns when the broad altcoin bid disappears.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — a single primary leveraged venue (Binance); thin spot/perp depth means slippage, gap risk, and vulnerability to a single-venue liquidity shock.
+- **Supply overhang / emissions** — MC/FDV ~0.57 with ~227M of 400M max circulating; future unlocks/emissions are a dilution headwind (see [[#Tokenomics]]).
+- **Narrative dependence** — value accrual is governance-centric (gas paid in ETH), so price hinges on Superchain/emerging-markets narrative and incentive flows rather than fee revenue.
+- **Weak trend / whipsaw risk** — low liquidity produces false breakouts and violent reversals; leverage and stops must account for slippage-driven liquidation clusters.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LSKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LSKUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=LSK` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=LSK` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LSKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=LSKUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=LSK"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

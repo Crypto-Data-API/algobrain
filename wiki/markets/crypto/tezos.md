@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["Tezos X", "XTZ", "tez"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (Tezos Foundation: Zug, Switzerland)"
 website: "https://www.tezos.com/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[event-driven-trading]]"]
 ---
 
 # Tezos
@@ -234,6 +234,55 @@ XTZ perps are listed on major derivatives venues (Binance Futures et al.); staki
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XTZ is tradable on [[binance|Binance]] — spot (XTZ/USDT) plus a **USD-margined perpetual** with full [[funding-rate|funding]], [[open-interest|open interest]] and [[liquidations|liquidation]] telemetry. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue for XTZ. With a ~$250M cap and thin ($10-11M) 24h spot turnover, perp depth is the practical constraint: order books are shallow relative to majors, so leverage should be sized conservatively, funding/OI can swing sharply on small flows, and larger positions must scale in/out to avoid slippage and self-inflicted liquidation wicks. Venue concentration on a single dominant perp venue also means funding and basis signals are driven almost entirely by Binance positioning rather than a diversified cross-venue book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin, single-venue XTZ perp funding can spike positive on event-driven long crowding, letting a delta-neutral spot-long/perp-short harvest the carry.
+- [[crowded-long-funding-fade]] — bounces on upgrade headlines (e.g. the June 2026 Tezos X vote) draw crowded longs into a decayed L1; fade over-extended positive funding.
+- [[cash-and-carry]] — with ~98% of supply circulating and no unlock overhang, spot XTZ vs the USD-M perp is a clean basis/carry leg when the perp trades at premium.
+- [[liquidation-cascade-fade]] — shallow perp depth makes XTZ prone to liquidation wicks near its all-time low; fade forced-seller flushes into support.
+- [[event-driven-trading]] — Tezos' dated on-chain governance pipeline (proposal → promotion → activation) provides scheduled binary catalysts to trade around.
+- [[range-mean-reversion]] — pinned just above ATL with flat weekly action, XTZ oscillates in tight ranges that suit reversion between defined bounds.
+
+### Volatility & regime character
+
+Small-cap legacy L1 (rank ~143, ~$250M cap) trading -97% from its 2021 ATH and within a few percent of its all-time low. High-beta to BTC/ETH on the downside with weak upside participation — a chronic underperformer in [[l1-l2-rotation]] frames. Not a memecoin; volatility is infra/DeFi-token in character, dominated by upgrade-event catalysts (Etherlink, Tezos X) against a persistent structural downtrend rather than reflexive hype cycles. Extreme-fear sentiment amplifies drawdowns.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure is effectively Binance-only (no Hyperliquid); a single perp book drives funding, basis and liquidation dynamics.
+- **Liquidity** — thin spot turnover and shallow perp depth raise slippage and liquidation-wick risk; size and leverage must stay small.
+- **Narrative dependence** — the thesis hinges on a single binary catalyst (June 2026 Tezos X / Etherlink governance vote); rejection or delay reinforces the legacy-decay path.
+- **Emissions** — adaptive-issuance staking rewards create ongoing baker/delegator sell pressure (no unlock cliff, but a structural bid-side headwind).
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XTZUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=XTZUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=XTZ` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=XTZ` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XTZUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=XTZUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=XTZ"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

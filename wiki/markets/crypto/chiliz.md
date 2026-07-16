@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, event-driven, nft]
+tags: [altcoins, crypto, event-driven, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["CHZ", "Chiliz Chain", "Socios"]
 entity_type: protocol
 founded: 2018
 headquarters: "Malta (Chiliz/Socios.com operations)"
 website: "https://www.chiliz.com/"
-related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-signals]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-signals]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]"]
 ---
 
 # Chiliz
@@ -236,6 +236,55 @@ CHZ is a **consumer-crypto, event-driven beta** rather than a cash-flow asset. I
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CHZ is tradable on [[binance|Binance]] — **spot** (CHZ/USDT) plus a **USD-margined perpetual** with funding, open interest and liquidation data. CHZ is **NOT listed on Hyperliquid**, so Binance is the **primary leveraged venue** for the coin; Bybit and other CEXs add depth but Binance USD-M sets the reference funding/OI print. Because leveraged flow concentrates on Binance rather than an on-chain perp DEX, execution and sizing should key off Binance perp depth and funding: this is a mid/small-cap (rank ~180) name where the perp book thins outside event windows, so size positions to Binance top-of-book, use limit/TWAP entries around news, and expect wider slippage and sharper liquidation wicks than in large caps. Spot depth across Binance, Kraken, Upbit and others (daily turnover heavy relative to cap) supports cash-and-carry against the Binance perp, while single-venue perp concentration means funding can dislocate hard into and out of sports-event windows.
+
+### Applicable strategies
+
+- [[narrative-trading]] — CHZ is the purest listed expression of the sports-event narrative (fan tokens, World Cup, US re-entry); position around the story arc rather than fundamentals.
+- [[event-driven-trading]] — price is dominated by a discrete calendar (tournaments, national-team listings, regulatory rulings), making scheduled catalysts the core edge.
+- [[macro-event-pump]] — the World Cup / major-tournament run-up is a textbook buy-the-rumor pump that the wiki documents fading on the sell-the-news leg.
+- [[crowded-long-funding-fade]] — into event windows CHZ perp longs crowd and funding turns richly positive on Binance; fading the crowded long captures the classic post-event unwind.
+- [[funding-rate-harvest]] — persistent event-driven long bias makes Binance CHZ perp funding a harvestable carry (short perp vs spot) when funding runs positive.
+- [[breakout-and-retest]] — CHZ trades long ranges punctuated by catalyst-driven breaks (e.g. the 44-day resistance break on the 2026 SEC/CFTC clearance), suiting breakout-and-retest entries on confirmed news.
+
+### Volatility & regime character
+
+CHZ is a **mid/small-cap, high-beta consumer-crypto** token with pronounced **event reflexivity** — it behaves like a memecoin-adjacent narrative asset around sports catalysts, ripping into tournaments and fading once play begins. It is **not an infra/DeFi cash-flow token**; its beta is to broad crypto risk appetite (BTC/ETH direction) *plus* an idiosyncratic sports-event overlay that can decouple it sharply from the majors during World Cup / national-team news. Realized volatility clusters around the sports calendar and compresses in the quiet stretches between events, so regime shifts here are calendar-driven as much as market-driven.
+
+### Risk flags
+
+- **Venue/leverage concentration**: Binance is the dominant leveraged venue (no Hyperliquid), so a Binance funding/liquidity shock or listing change has outsized impact; perp funding can dislocate around events.
+- **Narrative dependence**: value is tethered to sports-event flow and fan-token engagement — outside the event calendar, attention and liquidity drain, and the durable thesis rests on unproven post-tournament structural demand.
+- **Regulatory variability**: fan-token classification differs by jurisdiction; the 2026 US digital-collectible clearance and EU MiCA help but are not global cover, and a tightening elsewhere would hit sentiment.
+- **Supply/emissions**: max supply is unlimited; the buyback-and-burn is small versus the ~10.5B float, so the deflation narrative currently outruns on-chain reality rather than tightening supply.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CHZUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CHZUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CHZ` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CHZ` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CHZUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CHZUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CHZ"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

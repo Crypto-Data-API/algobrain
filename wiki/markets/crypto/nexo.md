@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [company, crypto]
+tags: [company, crypto, altcoins, defi]
 aliases: ["NEXO", "Nexo Token", "Nexo platform"]
 entity_type: company
 founded: 2018
 website: "https://nexo.com/"
-related: ["[[binance]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-yields]]", "[[stablecoins]]"]
+related: ["[[binance]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[buy-and-hold]]", "[[range-trading]]"]
 headquarters: "Decentralized"
 ---
 
@@ -309,6 +309,53 @@ Nexo's standout trait among CeFi lenders is **survival**: where Celsius and Bloc
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NEXO is tradable on **[[binance|Binance]] SPOT only** among major liquid venues — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. Practically this means: no cheap leverage, no funding carry, and shorting is confined to spot-margin borrow (thin and expensive) — directional trades are effectively long-only or unlevered. Venue concentration on a single CEX book, combined with modest daily turnover for its cap, means execution must lean on **limit orders and scaled entries**; market orders of any size will move price and gap risk rises on platform-specific news. Size positions to the realistic depth of one spot book, not the headline market cap.
+
+### Applicable strategies
+
+- [[buy-and-hold]] — fixed 1B fully-circulating supply, buyback support, and a yield-locked loyalty holder base make NEXO a low-beta CeFi-token hold with no dilution overhang to discount.
+- [[dca-strategy]] — thin spot liquidity rewards accumulating in small, time-spread tranches rather than sizing in at once, minimizing slippage on the single Binance book.
+- [[range-trading]] — NEXO's characteristically quiet, low-beta price action produces extended sideways ranges well-suited to fading the edges with spot limit orders.
+- [[event-driven-trading]] — price is driven by platform-specific catalysts (US relaunch traction, buyback/dividend announcements, loyalty-program changes, regulatory news) rather than leverage flow.
+- [[breakout-and-retest]] — because moves are infrequent, waiting for a confirmed break of a well-defined range and a retest filters the many false starts on a thin book.
+- [[atr-trailing-stop]] — a volatility-scaled trailing stop suits a spot-only asset that can gap on news, letting winners run while capping single-venue gap risk.
+
+### Volatility & regime character
+
+Mid-cap CeFi/platform token (rank ~83) with distinctly **low realized volatility and low beta** to the broad alt market. It is not a memecoin and shows little reflexive momentum; instead it behaves as a **relative-strength, defensive** name that holds up in drawdowns and **lags in alt-season breadth rallies**. Correlation to BTC/ETH is present but muted — idiosyncratic, platform-driven flow (loyalty demand, buybacks, business catalysts) often dominates broad-market beta. Regime character is more "quiet range with occasional news gaps" than "trending momentum."
+
+### Risk flags
+
+- **Liquidity / venue concentration:** spot-primary with liquidity concentrated on a single major CEX book; slippage and gap risk rise quickly with size, and there is no perp venue to hedge.
+- **Single-business concentration:** the token is a proxy for one private CeFi company — idiosyncratic operational or solvency problems hit it directly (Celsius/BlockFi are cautionary peers).
+- **Regulatory dependence:** carries an "Alleged SEC Securities" tag and a 2023 settlement history; renewed US/EU action is a tail risk despite the 2025 US re-entry.
+- **Narrative / catalyst dependence:** returns hinge on platform-specific catalysts and buyback discretion rather than emissions or a broad thematic bid; low beta means it can be dead money through momentum-led rallies.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=NEXOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=NEXOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=NEXOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=NEXOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["COTI", "Currency Of The Internet"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://coti.io/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[layer-1]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[layer-1]]", "[[smart-contracts]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # COTI
@@ -213,6 +213,55 @@ COTI holders participate in protocol governance, which over the project's life h
 - **2026 small-cap drawdown:** amid the broad altcoin washout, COTI traded in the sub-$0.01 range; as of 2026-06-22 it is **-7.94% over 7 days** and **-0.87% on the day** in an Extreme-Fear market (BTC ~$64,166).
 
 > *Notable events and news will continue to be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+COTI is tradable on [[binance]] as both **spot** (COTI/USDT) and a **USD-margined perpetual**, which exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data for the leveraged book. It is **not** listed on Hyperliquid, so Binance is the **primary leveraged venue** and the reference market for perp-based signals. As a small-cap (rank ~770, ~$27M cap) with thin order books, leverage should be conservative: perp liquidity is shallow relative to majors, so large orders slip and stops can be run. Concentrated venue availability means execution and sizing hinge almost entirely on Binance depth — funding and OI on that single venue drive the derivative signal, and cross-exchange hedging options are limited. Size positions to Binance spot+perp depth, not headline market cap.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance perp funding on a thin small-cap can swing to extremes; harvesting the spot-vs-perp spread while delta-hedged monetizes those dislocations.
+- [[crowded-long-funding-fade]] — after narrative-driven pops (privacy/confidentiality hype), COTI perps can build crowded longs with rich funding, setting up a fade into mean reversion.
+- [[liquidation-cascade-fade]] — low-liquidity perp books make COTI prone to sharp liquidation wicks; fading the flush targets the post-cascade snapback.
+- [[oi-confirmed-trend]] — pairing rising open interest with price on Binance filters real breakouts from thin-liquidity noise on this small-cap.
+- [[rsi-mean-reversion]] — COTI's choppy, range-bound sub-$0.01 action rewards fading stretched RSI extremes back toward the range mid.
+- [[breakout-and-retest]] — narrative catalysts can trigger clean breakouts; waiting for the retest reduces false-break risk in a low-liquidity name.
+
+### Volatility & regime character
+
+COTI is a **small-cap altcoin** (rank ~770) with high beta to BTC/ETH risk appetite — it tends to overshoot both directions relative to majors and bleeds hard in risk-off regimes (down ~98% from its 2021 ATH). It behaves as an **infra/privacy narrative token**: price is reflexive to confidentiality/on-chain-AI hype cycles rather than steady fundamentals, so realized volatility clusters around news and quiets into low-volume drift. Correlation to BTC is high on down moves; idiosyncratic upside depends on COTI-specific catalysts (V2 adoption, listings, partnerships).
+
+### Risk flags
+
+- **Liquidity / venue concentration:** thin spot and perp depth with Binance as effectively the only meaningful leveraged venue — slippage and single-venue funding/OI dependence.
+- **Emissions / supply:** max supply (~4.91B) sits well above circulating (~2.76B), and the V1→V2 migration altered supply mechanics — confirm the current vesting/emission schedule before assuming fixed float.
+- **Narrative dependence:** valuation leans on the privacy/confidential-compute narrative and V2 adoption; if the story fades, thin liquidity amplifies the downside.
+- **Regulatory:** privacy-focused chains face heightened scrutiny in some jurisdictions, and COTI has appeared on unverified "alleged securities" category tags — a latent listing/delisting risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=COTIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=COTIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=COTI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=COTI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=COTIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=COTIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=COTI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

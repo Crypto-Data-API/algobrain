@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, ethereum]
+tags: [altcoins, crypto, defi, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["ZBT", "ZeroBase"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zerobase.pro/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
@@ -229,6 +229,57 @@ ZEROBASE delivers programmable, compliance-aligned staking and transparent crypt
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZBT is tradable on **[[binance]]** — both **spot** (ZBT/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** with published **[[funding-rate|funding]]**, **[[open-interest]]**, and **[[liquidations]]** telemetry. It is **not listed on Hyperliquid**, so Binance is effectively the primary leveraged venue for the name. That single-venue concentration means the Binance perp order book and funding print set the reference for basis and carry trades; there is no deep on-chain perp mirror to arbitrage against. Practically, leverage is available but liquidity is thin for a sub-$30M microcap — sizing must assume shallow depth, wide slippage on market orders, and outsized impact from perp liquidations. Execution should lean on limit orders and be scaled down; cross-exchange spot legs (Kraken, Upbit, Bitget, KuCoin) exist but fragment liquidity rather than deepen it.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on a delta-hedged ZBT position; the low-float microcap regularly prints extreme funding worth harvesting.
+- [[crowded-long-funding-fade]] — fade squeezed longs when ZBT funding spikes positive on a thin, reflexive book that overextends fast.
+- [[cash-and-carry]] — hedge Binance spot ZBT against the USD-M perp to lock the basis when the perp trades rich to spot.
+- [[liquidation-cascade-fade]] — thin depth makes ZBT prone to sharp liquidation flushes; fade the overshoot after forced selling exhausts.
+- [[volatility-breakout]] — ZBT was flagged in a Bollinger-band volatility squeeze; trade the expansion break once compression resolves.
+- [[token-unlock-supply-event]] — with only ~24% of supply circulating, position around known unlock/emission windows that dominate the medium-term overhang.
+
+### Volatility & regime character
+
+Small-cap / microcap ZK-infrastructure token (rank ~#646, sub-$30M cap) with high beta to [[bitcoin|BTC]]/[[ethereum|ETH]] risk-on/risk-off swings. As a low-float infra/DeFi name it is reflexive — thin volume amplifies both squeezes and flushes — and its price is narrative-driven (ZK / verifiable-compute plus Binance-ecosystem distribution). It behaves more like a high-beta altcoin than a stable infra blue chip: quiet drift punctuated by sharp expansion moves, as the volatility-squeeze flag suggests.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading depends almost entirely on Binance; delisting or listing-status changes would sharply degrade liquidity and the ability to hedge.
+- **Supply overhang / emissions** — ~75% of max supply not yet circulating (MC/FDV ≈ 0.24); unlocks can swamp token-side catalysts and pressure the perp basis.
+- **Thin liquidity** — microcap depth means slippage, gap risk, and liquidation-driven wicks; funding and OI can dislocate on small flows.
+- **Narrative dependence** — valuation hinges on unproven real-time-proving claims and continued Binance-ecosystem attention; sentiment reversals hit hard.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ZBTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ZBTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ZBT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ZBT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ZBTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ZBTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ZBT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

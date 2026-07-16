@@ -3,13 +3,13 @@ title: "Mitosis"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["MITO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://mitosis.org/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Mitosis
@@ -117,6 +117,57 @@ Mitosis introduces a protocol that transforms DeFi liquidity positions into prog
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MITO is tradable on **Binance** — both spot (MITO/USDT) and a USD-margined perpetual future carrying funding, open interest, and liquidation data. It is **NOT** listed on Hyperliquid, so Binance is the primary leveraged venue. With a small market cap (rank ~1278) and thin 24h turnover, the perp order book is shallow: leveraged positions can move price meaningfully, funding can swing sharply, and liquidation clusters cascade quickly. Because a single venue dominates both spot and perp flow, execution should favor limit/passive orders, position sizing must stay conservative relative to visible depth, and traders should avoid market orders at low-liquidity hours. Venue concentration also means basis and funding are driven almost entirely by Binance flow rather than cross-exchange arbitrage.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance perp funding on a low-cap alt like MITO frequently runs rich/volatile, letting a delta-neutral spot-vs-perp position collect the premium.
+- [[crowded-long-funding-fade]] — narrative-driven MITO rallies attract crowded longs; persistently positive funding flags an over-leveraged book to fade.
+- [[liquidation-cascade-fade]] — thin depth means stop runs and forced liquidations overshoot; fading the flush targets the mean-revert bounce.
+- [[cash-and-carry]] — with spot and USD-M perp both on Binance, a long-spot/short-perp carry captures basis while staying market-neutral.
+- [[breakout-and-retest]] — low float and reflexive moves produce clean range breaks; entering on the retest filters false breakouts in a choppy micro-cap.
+- [[volatility-targeting]] — MITO's outsized realized-volatility swings warrant scaling exposure to a vol budget rather than fixed notional sizing.
+
+### Volatility & regime character
+
+MITO is a small-cap DeFi/liquidity-infrastructure token (BSC-native, Layer 1 aspirations) trading ~95% below its ATH. As a low-liquidity altcoin it exhibits high beta to BTC/ETH risk-on/risk-off swings while adding idiosyncratic reflexivity around DeFi and airdrop/IDO narratives. Expect sharp, mean-reverting spikes on low volume, amplified drawdowns during broad crypto de-risking, and periods of low correlation when protocol-specific news dominates.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — Binance is effectively the sole meaningful venue for spot and leveraged trading; a delisting or outage would sever price discovery and trap positions.
+- **Unlocks/emissions** — circulating supply is only ~36% of max supply (Mkt Cap/FDV ~0.36), so future token unlocks/emissions are a persistent overhang and dilution risk.
+- **Narrative dependence** — price action leans heavily on DeFi-liquidity and Binance airdrop/IDO narratives; momentum can evaporate when attention rotates.
+- **Micro-cap fragility** — small market cap and thin depth make MITO susceptible to manipulation, slippage, and violent funding/liquidation swings.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MITOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MITOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MITO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MITO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MITOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MITOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MITO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

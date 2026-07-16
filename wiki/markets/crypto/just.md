@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["JST", "JUST Network", "JustLend"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized (Tron ecosystem / Justin Sun)"
 website: "https://www.just.network/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[justin-sun]]", "[[stablecoins]]", "[[tron]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[justin-sun]]", "[[stablecoins]]", "[[tron]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # JUST
@@ -290,6 +290,56 @@ Investment framing: *JST = a deflating governance claim on JustLend/USDD protoco
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+JST is tradable on [[binance|Binance]] — both **spot** (JST/USDT) and a **USD-margined perpetual** with the full derivatives stack: [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidations]]. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** for JST; the Binance USD-M perp is effectively the price-discovery and funding reference for any levered position. Spot depth is genuinely multi-venue (Binance, Kraken, Upbit KRW, Bitget, KuCoin), so cash sizing is easier than the perp side — leveraged size, by contrast, concentrates on a single perp order book. Practically: size perp trades to Binance perp depth/OI rather than aggregate spot volume, expect wider effective slippage on large levered clips, and account for the Upbit KRW spot pair as an off-venue flow source that the perp can gap to during Korean-session squeezes.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest Binance perp funding on JST; burn-narrative rallies periodically push funding positive, paying delta-neutral shorts against spot.
+- [[cash-and-carry]] — pair long JST spot (multi-venue, deep) vs short the Binance USD-M perp to capture positive basis during buyback-driven upswings, with all leverage on one clean venue.
+- [[crowded-long-funding-fade]] — after burn-headline or Korean-retail spikes drive crowded longs and rich funding, fade the perp as positioning unwinds.
+- [[liquidation-cascade-fade]] — JST's isolated Upbit squeezes and single leveraged venue produce sharp perp liquidation flushes; fade the cascade into extreme OI/liquidation prints for post-flush reversion.
+- [[oi-confirmed-trend]] — use Binance JST open-interest expansion to confirm burn-driven trend legs and distinguish real accumulation from thin, mean-reverting pops.
+- [[event-driven-trading]] — trade discrete catalysts (quarterly burn announcements, JustLend revenue reports, USDD/Justin Sun headlines) that reprice JST faster than fundamentals.
+
+### Volatility & regime character
+
+JST is a **mid-cap** (rank ~75) DeFi/infra governance token, not a memecoin — its reflexivity comes from a policy-driven **buyback-and-burn** deflation narrative rather than pure sentiment. It carries meaningful **BTC/ETH beta** in risk-on/risk-off regimes but can decouple on burn-narrative and Tron-activity flow (it outperformed the broad bear at the 2026-06-20 snapshot). It also has an idiosyncratic **Korean-retail (Upbit KRW)** volatility source capable of sharp, isolated squeezes, and it trades within a "real-yield / fee-switch" Tron-DeFi cohort alongside SUN/TRX.
+
+### Risk flags
+
+- **Single leveraged venue** — all perp funding/OI/liquidation risk concentrates on Binance USD-M; no Hyperliquid fallback means venue outages or margin changes have outsized impact.
+- **Governance-policy dependence** — the deflation thesis rests on a DAO buyback-and-burn that can be slowed or amended; a policy reversal deflates the core narrative.
+- **Centralization / headline risk** — Justin Sun / Tron-entity influence over governance and treasury; Sun headlines drive two-sided volatility that can overwhelm fundamentals.
+- **Ecosystem concentration** — fortunes are tied to Tron activity, USDD health, and Tron's regulatory standing; a shock to any transmits directly to JST.
+- **Isolated squeeze / liquidity gap risk** — Upbit KRW-driven moves can gap the Binance perp and trigger liquidation cascades on thin books.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=JSTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=JSTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=JST` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=JST` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=JSTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=JSTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=JST"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

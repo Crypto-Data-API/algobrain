@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, stablecoins]
 aliases: ["SPK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://spark.fi/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[makerdao]]", "[[sky-protocol]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[makerdao]]", "[[sky-protocol]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # Spark
@@ -138,6 +138,54 @@ Spark's distinction is that it is **not primarily a deposit-taking money market*
 | **Website** | [https://spark.fi/](https://spark.fi/) |
 | **Twitter** | [@sparkdotfi](https://twitter.com/sparkdotfi) |
 | **Discord** | [https://discord.com/invite/sparkdotfi](https://discord.com/invite/sparkdotfi) |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+A USD-pegged stablecoin traded on [[binance|Binance]]. It is a PEG / cash-management instrument, NOT a directional asset — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because the target price is a fixed 1.00, position sizing and leverage are governed by depeg tail-risk rather than trend, so any leverage should be sized for gap moves around the peg rather than percentage swings. Venue availability shapes execution and sizing: concentration on a single primary CEX means redemption/mint access and on-venue depth set the practical clip size, and thinner books amplify slippage precisely during the depeg stress windows when exit matters most.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy SPK below 1.00 during a depeg and hold for reversion to par, the core play for a peg instrument.
+- [[stablecoin-pair-arbitrage]] — trade SPK against other stablecoins (e.g. USDT/USDC) when their relative pegs diverge on-venue.
+- [[stablecoin-yield]] — deploy idle SPK into yield venues as a cash-management overlay rather than holding it flat.
+- [[mint-parity-arbitrage]] — arbitrage the gap between the secondary-market SPK price and its mint/redemption parity value.
+- [[synthetic-stablecoin-depeg-arbitrage]] — hedge or arbitrage SPK depegs against synthetic-dollar exposure when backing model diverges from market price.
+- [[carry-trade]] — capture the yield/funding differential of holding SPK versus the cost of the offsetting leg while the peg holds.
+
+### Volatility & regime character
+
+Qualitatively, the instrument's character is defined by peg tightness rather than directional volatility: in normal regimes it trades in a narrow band around 1.00 with low realized volatility, and its "regimes" are peg-hold versus depeg episodes. Backing model and redemption mechanics determine how quickly deviations mean-revert — transparent, redeemable reserves support fast reversion to par, while opaque or gated backing lengthens and deepens depeg episodes.
+
+### Risk flags
+
+- **Depeg risk** — the dominant risk; a break below 1.00 can be abrupt and, in a loss-of-confidence scenario, may not revert.
+- **Reserve / backing transparency** — limited visibility into reserve composition and quality raises the odds and severity of a depeg.
+- **Redemption gating** — if direct mint/redemption is paused or gated, the arbitrage that anchors the peg breaks down and deviations persist.
+- **Regulatory** — stablecoins face evolving regulatory treatment that can affect issuance, venue listing, and redemption access.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SPKUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=SPKUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SPKUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=SPKUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

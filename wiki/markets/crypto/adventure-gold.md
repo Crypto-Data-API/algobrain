@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["AGLD", "Adventure Gold"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.lootproject.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Adventure Gold
@@ -215,6 +215,55 @@ Potential catalysts (no dated forecasts): tangible Adventure Layer product launc
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AGLD is tradable on **Binance** — both **spot (AGLDUSDT)** and a **USD-margined perpetual**, which exposes funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** for AGLD. Because leveraged flow, funding, and OI are concentrated on a single venue, execution and sizing should assume Binance's book and perp mechanics dominate price discovery; there is no deep secondary perp market to absorb size or arbitrage stale funding. Combined with a ~$14M cap and DWF Labs market-making involvement, true depth is modest — expect meaningful [[slippage]] on size, position sizing should stay small relative to Binance depth, and cross-venue hedges are effectively limited to Binance spot vs. its own perp.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — AGLD is a narrative/NFT-beta token that re-rates sharply on Loot/GameFi headlines; crowded longs into a rotation spike push Binance funding rich, setting up funding-fade shorts when the news bid fades.
+- [[funding-rate-harvest]] — with leveraged flow concentrated on the single Binance perp, funding on a thin-float token can persist one-sided; harvesting funding while delta-hedged against Binance spot captures the carry.
+- [[liquidation-cascade-fade]] — a ~$14M-cap perp with concentrated OI is prone to violent liquidation cascades; fading the overshoot after a forced-liquidation flush is a repeatable low-cap pattern.
+- [[breakout-and-retest]] — AGLD trends in bursts on Loot/Adventure-Layer catalysts; trading confirmed breakouts on the retest filters the frequent narrative-driven false starts.
+- [[oi-confirmed-trend]] — using Binance open-interest changes to confirm whether a catalyst move is backed by fresh positioning (real trend) or just squeeze-driven (fade candidate).
+- [[news-trading]] — baseline demand is thin and price moves more on Loot/Adventure-Layer headlines than fundamentals, making discrete news events the dominant tradable driver.
+
+### Volatility & regime character
+
+AGLD is a **small-cap (~#992), high-beta NFT/GameFi cultural token** with pronounced narrative reflexivity — it behaves closer to a memecoin in reflexivity than to an infra/DeFi token with cash flows. It re-rates hard on Loot/Adventure-Layer news and broad [[nft]]/[[gamefi]] rotations and drifts lower in risk-off tapes. Correlation to BTC/ETH is moderate as a general risk proxy but is frequently overwhelmed by idiosyncratic, sentiment-driven moves; the ~98% drawdown from its 2021 ATH illustrates the left-tail character.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading, funding, OI, and liquidations are concentrated on Binance's single perp; no Hyperliquid or deep secondary perp for hedging or price-discovery redundancy.
+- **Liquidity / market-maker concentration** — modest true depth at a ~$14M cap plus DWF Labs market-making involvement can amplify volatility and produce fast, sharp moves.
+- **Narrative dependence** — demand is largely latent; value hinges on Loot/Adventure-Layer sentiment and builder activity rather than protocol revenue, so trends reverse quickly.
+- **Supply / unlocks** — float is largely fixed from the 2021 airdrop with small residual dilution toward the ~96M max supply (MC/FDV ≈ 0.94), so unlock overhang is limited but not zero.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AGLDUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AGLDUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AGLD` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AGLD` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AGLDUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AGLDUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AGLD"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

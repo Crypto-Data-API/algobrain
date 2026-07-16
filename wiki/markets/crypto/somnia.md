@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, gamefi]
+tags: [altcoins, crypto, gamefi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["SOMI", "Somnia Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://somnia.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[smart-contracts]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Somnia
@@ -233,6 +233,56 @@ Somnia rides the **gaming / metaverse / consumer L1** narrative with a **raw-per
 - **What to watch (bullish):** a genuine **hit game / breakout consumer app** with retained users (the only catalyst that really matters), independent verification of throughput claims, and a GameFi/metaverse narrative revival.
 - **What to watch (bearish):** the **unlock calendar** (~84% locked — track it), continued lack of flagship apps, fading Korea/Binance flow, and new BTC lows dragging small caps.
 - **Mechanics:** Binance + Upbit listings give decent liquidity and make a perp short feasible, but gap risk is high and sentiment is one-sided. For longs, the unlock overhang plus unproven adoption argue for small size and patience; the asymmetric upside is entirely contingent on a real consumer app landing.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SOMI is tradable on **Binance** — both **spot** (SOMI/USDT) and a **USD-margined perpetual** with funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so **Binance is the primary leveraged venue** and effectively the reference market for both spot price discovery and derivatives. This single-venue concentration for perps means funding, OI, and liquidation signals should be read from Binance rather than aggregated across DEX perps. With a micro-cap footprint and thin depth, leverage availability does not imply deep leveraged liquidity: order-book slippage and gap risk are high, so size positions small, favor limit execution over market fills, and treat any perp short as carrying meaningful small-cap gap/squeeze risk. Additional Korea-led flow via the Upbit KRW spot pair can front-run Binance moves.
+
+### Applicable strategies
+
+- [[token-unlock-supply-event]] — ~84% of the 1B supply is still locked; scheduled unlocks are the dominant structural driver, making the unlock calendar the key edge for positioning around supply cliffs.
+- [[liquidation-cascade-fade]] — thin depth plus Binance perp leverage makes SOMI prone to violent liquidation wicks at/near all-time lows, offering fade opportunities into forced-seller exhaustion.
+- [[crowded-long-funding-fade]] — one-sided retail positioning (100% positive sentiment on a token down ~94%) can push funding positive, setting up fades of crowded longs when funding overheats.
+- [[narrative-trading]] — SOMI trades on the GameFi/metaverse "1M+ TPS" narrative and hit-game catalysts; positioning around narrative revivals or milestone news is a primary discretionary edge.
+- [[breakout-and-retest]] — sitting below its prior ATL, SOMI is range-compressed; breakouts from established ranges with a retest confirmation help filter the many failed moves typical of a thin small-cap.
+- [[volatility-targeting]] — extreme, unlock-driven volatility argues for sizing inversely to realized vol so position risk stays bounded across regime shifts.
+
+### Volatility & regime character
+
+SOMI is a **micro-cap, high-beta [[gamefi]] / consumer L1 token** (~rank #918, ~$17M cap) with extreme reflexive volatility driven far more by **unlock supply and speculative flow** than by fundamentals. It behaves as a high-beta risk asset: it amplifies BTC/ETH risk-on/risk-off swings on the way up but is dominated by idiosyncratic supply overhang on the way down. Correlation to majors is real but secondary to unlock mechanics and narrative cycles; expect memecoin-like reflexivity and one-sided sentiment despite the infra/gaming framing.
+
+### Risk flags
+
+- **Venue concentration:** Binance is the primary (effectively sole major) leveraged venue; no Hyperliquid presence means limited cross-venue perp liquidity and single-exchange dependence for derivatives signals.
+- **Unlock / emissions overhang:** only ~16% of the 1B max supply circulates — a sustained, structural sell-pressure headwind that dominates near-term price.
+- **Micro-cap liquidity:** thin depth (~$5M 24h volume vs ~$17M cap) means high slippage, gap risk, and squeeze potential on both long and short perps.
+- **Narrative dependence:** value hinges on an unproven "build-it-and-they-will-come" GameFi thesis; without a retained hit game, the story can fade fast.
+- **Airdrop sell pressure:** HODLer-airdrop recipients realizing allocations add persistent, ongoing supply.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SOMIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SOMIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SOMI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SOMI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SOMIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SOMIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SOMI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

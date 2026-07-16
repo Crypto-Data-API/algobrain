@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, restaking]
+tags: [crypto, defi, restaking, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SSV", "ssv.network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ssv.network/"
-related: ["[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[lido]]", "[[liquid-staking]]", "[[restaking]]"]
+related: ["[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[lido]]", "[[liquid-staking]]", "[[restaking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # SSV Network
@@ -121,6 +121,56 @@ SSV trades at ~$35M with no dilution overhang (MC/FDV = 1.00), so the entire sto
 - **Dependency / concentration risk** — Much of SSV's relevance hinges on adoption by a few large players (e.g., [[lido|Lido]]); a shift in their DVT choices would materially affect demand.
 - **Restaking-narrative risk** — SSV 2.0's restaking pivot ties part of the thesis to the broader [[restaking]] / [[eigenlayer]] ecosystem, which carries its own systemic and slashing-cascade risks.
 - **Macro risk** — In an extreme-fear, established-bear regime ([[crypto-fear-and-greed-index|Fear & Greed]] 23), low-cap infra tokens are prone to liquidity drought despite SSV's recent weekly strength.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SSV is tradable on **[[binance]]** — both **spot** (SSV/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** carrying [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **not** listed on [[hyperliquid]], so Binance is effectively the **primary leveraged venue** and the reference point for funding/OI signals. With a small ~$30-35M cap and only ~$5M daily spot volume, the perp order book is thin: leverage is available, but realized slippage on size is high and stop clusters can be swept. Practical implications — **size positions off Binance depth**, treat the Binance perp funding/OI as the single derivatives feed (there is no cross-venue perp to arbitrage), and prefer limit/scaled entries over market orders. Because leveraged exposure is concentrated on one exchange, liquidation cascades and funding dislocations are exchange-specific and can be violent relative to the token's cap.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance is the sole SSV perp, so the single funding stream can be collected against a spot hedge without cross-venue basis complications.
+- [[cash-and-carry]] — SSV has both Binance spot and USD-M perp (MC/FDV = 1.00, no unlock overhang), enabling a delta-neutral long-spot / short-perp carry when the perp trades at a premium.
+- [[oi-confirmed-trend]] — with one venue setting all leveraged positioning, rising Binance OI into a breakout is a clean confirmation of directional conviction on a low-float infra token.
+- [[liquidation-cascade-fade]] — thin single-venue depth means leverage flushes overshoot; fading forced-liquidation wicks back toward VWAP is well-suited to SSV's microstructure.
+- [[breakout-and-retest]] — narrative-driven infra names like SSV trade in long compressions punctuated by DVT/restaking catalysts; buying the retest of a broken range filters false breaks in a thin book.
+- [[range-mean-reversion]] — outside catalysts SSV oscillates in tight ranges (e.g. recent $2.00–$2.06 days), rewarding reversion trades off well-defined support/resistance.
+
+### Volatility & regime character
+
+Small-cap (rank ~#645, ~$30-35M) **DeFi / ETH-staking-infrastructure** token — high beta to BTC/ETH with amplified drawdowns typical of low-float infra names. It is **not** a memecoin; moves are narrative-linked (DVT adoption, Lido/EtherFi integrations, restaking / SSV 2.0) rather than pure reflexive hype. Correlation to ETH is strong given its ETH-staking dependency, but idiosyncratic catalysts can decouple it briefly. Full-float supply (MC/FDV = 1.00) means volatility is demand-driven, not unlock-driven.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leverage and much of spot liquidity sit on Binance; a single-venue outage, delisting, or depth withdrawal directly hits tradability and execution.
+- **Thin book / gap risk** — ~$5M daily volume on a ~$30M cap makes the perp prone to slippage, stop-runs, and outsized liquidation cascades.
+- **Narrative dependence** — the thesis rests on DVT adoption by a few large staking pools (Lido, EtherFi) and the SSV 2.0 restaking pivot; a shift in those partners' choices or waning restaking interest can drain demand.
+- **Beta / macro** — in extreme-fear, bear regimes, low-cap infra tokens face liquidity droughts and sharp beta drawdowns despite full-float structure.
+- **Slashing/operator tail risk** — a DVT cluster failure or slashing event would damage trust and can produce abrupt, headline-driven price shocks distinct from market beta.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SSVUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SSVUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SSV` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SSV` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SSVUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SSVUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SSV"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

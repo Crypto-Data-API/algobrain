@@ -3,13 +3,13 @@ title: "Hashflow"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins, derivatives, perpetual-futures, funding-rate, open-interest, liquidations]
 aliases: ["HFT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://hashflow.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Hashflow
@@ -130,6 +130,57 @@ Hashflow is a multichain decentralized exchange (DEX) that enables users to trad
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HFT is tradable on **Binance** as both **spot** (HFT/USDT) and a **USD-margined perpetual**, which surfaces funding, open interest, and liquidation data for the token. It is **not listed on Hyperliquid**, so **Binance is the primary leveraged venue** and the reference market for both price discovery and derivatives flow. With a small ~$7M market cap and thin ($2M-class) 24h volume, order books are shallow: leverage should be conservative, position sizing kept small relative to depth, and entries/exits worked with limit orders to avoid slippage. Venue concentration on Binance means funding and liquidation dynamics on that single perp dominate execution — a spot fill on Kraken, Bitget, KuCoin, or Crypto.com will not carry the same depth, so most leveraged and carry strategies must route through Binance.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Collect the Binance perp funding stream on HFT when the rate is persistently skewed, sizing small given thin liquidity.
+- [[crowded-long-funding-fade]] — Fade over-leveraged longs on this low-cap DEX token when funding turns sharply positive and OI builds into a stalled price.
+- [[liquidation-cascade-fade]] — Shallow books make HFT prone to violent liquidation wicks on the Binance perp; fade the flush after forced selling exhausts.
+- [[cash-and-carry]] — Harvest spot-vs-perp basis by pairing Binance HFT spot against the USD-M perp when the term structure pays enough to cover fees.
+- [[rsi-mean-reversion]] — A range-bound, low-momentum micro-cap; mean-revert oversold/overbought extremes on the Binance chart.
+- [[oi-price-exhaustion]] — Watch Binance open interest diverging from price to flag exhausted moves before a reversal in this thin market.
+
+### Volatility & regime character
+
+HFT is a **small-cap DeFi / DEX infrastructure token** with high idiosyncratic volatility and pronounced reflexivity typical of low-liquidity altcoins. It trades with strong high-beta correlation to BTC/ETH risk-on/risk-off swings while amplifying moves on the downside — reflected in its deep drawdown from the 2022 all-time high. Absent a fresh DeFi or DEX-sector narrative, price action tends to be range-bound and drift-lower, punctuated by sharp liquidity-driven spikes.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — Very thin volume with leveraged flow concentrated on the single Binance perp; slippage and gap risk are elevated.
+- **Emissions / supply** — Circulating supply (~849M) is a large share of the 1B max supply; remaining unlocks and reward emissions can pressure price.
+- **Narrative dependence** — As a DEX/DeFi infra token, performance hinges on the DeFi narrative and Hashflow protocol traction rather than broad demand.
+- **Micro-cap fragility** — At a ~$7M market cap, the token is exposed to delisting risk, wash-trading distortions, and single-actor manipulation.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HFTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HFTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HFT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HFT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HFTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HFTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HFT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

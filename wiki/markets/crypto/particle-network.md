@@ -3,13 +3,13 @@ title: "Particle Network"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["PARTI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://particle.network/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]"]
 ---
 
 # Particle Network
@@ -126,6 +126,57 @@ By unifying all chains, Particle will enable billions of users to seamlessly onb
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PARTI is tradable on **Binance** — both spot (PARTI/USDT) and a **USD-margined perpetual** contract, which surfaces funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue and the anchor for perp-driven price discovery. As a low-cap token (rank ~1327), on-book depth is thin and slippage rises quickly with size; the derivatives market concentrated on a single venue means funding and liquidation dynamics on Binance drive most leverage-related moves. Position sizing should be conservative — assume outsized market impact, use limit orders and staggered entries, and treat the Binance perp as the sole reliable source of funding/OI signals rather than a cross-venue consensus.
+
+### Applicable strategies
+
+- [[narrative-trading]] — PARTI's chain-abstraction / Universal Accounts narrative and its Binance HODLer Airdrop / IDO lineage make it prone to narrative-driven repricing that can be traded around catalysts.
+- [[token-unlock-supply-event]] — with only ~23% of the 1B max supply circulating (MC/FDV ~0.23), scheduled unlocks are a recurring supply overhang worth positioning around.
+- [[funding-rate-harvest]] — the single-venue Binance perp lets a delta-neutral spot-vs-perp position collect funding when the perp trades at a persistent premium or discount.
+- [[liquidation-cascade-fade]] — thin low-cap depth plus leveraged perp positioning produces sharp liquidation wicks that often overshoot, offering fades back toward value.
+- [[breakout-and-retest]] — well-defined ranges on a low-float token give clean breakout levels; requiring a retest filters the frequent false breaks in illiquid conditions.
+- [[volatility-targeting]] — high and uneven realized volatility for a small-cap makes volatility-scaled sizing important to keep risk stable across regimes.
+
+### Volatility & regime character
+
+PARTI is a small-cap (rank ~1327), high-beta infra/DeFi token with a low circulating float, which amplifies reflexive moves in both directions. It behaves as a high-beta expression of the broader alt risk cycle: it tends to be correlated to BTC/ETH direction but with a much larger amplitude, and its BNB Chain / Base ecosystem ties and Binance-listing lineage add idiosyncratic, narrative-sensitive swings. Expect long drawdowns punctuated by sharp catalyst-driven rallies rather than steady trends.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — thin order books and leveraged activity concentrated on Binance; a single-venue outage, delisting, or funding spike can dominate price.
+- **Unlocks / emissions** — low circulating share of max supply (MC/FDV ~0.23) implies material future dilution from token unlocks.
+- **Narrative dependence** — valuation leans heavily on the chain-abstraction narrative and ecosystem momentum; narrative fatigue can drive prolonged underperformance.
+- **Small-cap fragility** — low market cap and float make the token vulnerable to whale-driven moves, wash-like volume, and rapid gap risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PARTIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PARTIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=PARTI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=PARTI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PARTIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=PARTIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=PARTI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

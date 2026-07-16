@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin]
+tags: [crypto, defi, stablecoin, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BOLD", "LQTY", "LUSD", "Liquity"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoin]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Liquity
@@ -209,6 +209,58 @@ In 2025, Liquity launched **v2**, introducing the **BOLD** stablecoin. Unlike v1
 - **2025** — Liquity v2 launched, introducing the **BOLD** stablecoin with user-set interest rates and expanded collateral, strengthening LQTY fee accrual.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LQTY is tradable on **Binance** — both **spot** (LQTY/USDT) and a **USD-margined perpetual** that exposes funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue**. With a small-cap footprint (~$20M market cap, rank ~#916) and thin 24h volume, order books are shallow: leverage is available but liquidations can gap and slippage rises quickly on size. Because leveraged flow is concentrated on a single venue, funding and liquidation signals are effectively read from Binance alone, and position sizing should stay small relative to visible depth — large market orders will move price and can self-trigger the very liquidation cascades traders try to exploit. Spot elsewhere (Kraken, Bitget, KuCoin) helps hedge but does not add perp depth.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a small-cap fee token like LQTY often runs persistent funding skew on Binance perps that can be harvested delta-neutral against spot.
+- [[crowded-long-funding-fade]] — narrative-driven spikes (v2/BOLD, DeFi rotations) crowd longs on the single perp venue, setting up funding-fade entries when funding turns sharply positive.
+- [[liquidation-cascade-fade]] — thin books plus concentrated Binance leverage make LQTY prone to sharp liquidation wicks that mean-revert, favoring fades of over-extended cascades.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with price filters out low-conviction moves on an illiquid name where price alone is noisy.
+- [[cash-and-carry]] — when the LQTY perp trades at a premium with positive funding, longing spot against a short perp captures carry with defined risk.
+- [[rsi-mean-reversion]] — depressed, range-bound small-cap price action (LQTY is ~99.8% below ATH) makes oscillator-based mean reversion viable within its bear-regime range.
+
+### Volatility & regime character
+
+LQTY is a **small-cap DeFi/infrastructure fee token** (secondary token of the Liquity borrowing protocol, distinct from the LUSD/BOLD stablecoins). It exhibits high idiosyncratic volatility layered on strong **beta to BTC/ETH** — it sells off in risk-off regimes and rallies on broad DeFi narrative rotations. It is not a memecoin, so reflexivity is driven by protocol usage (v1/v2 borrowing and redemption activity) and DeFi sentiment rather than pure meme momentum. Deeply drawn down from its 2021 ATH, it tends to trade in extended ranges punctuated by narrative-driven impulses.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading lives almost entirely on Binance; a single-venue outage, delisting, or funding dislocation has outsized impact, and thin depth amplifies slippage and cascade risk.
+- **Small-cap fragility** — ~$20M market cap and low volume mean price is easily moved and stops are easily hunted.
+- **Narrative dependence** — value accrual hinges on Liquity protocol activity and broader DeFi/stablecoin sentiment; quiet borrowing demand can leave the token drifting.
+- **Token distinction risk** — LQTY (volatile fee token) is frequently confused with LUSD/BOLD (stablecoins); trade the correct ticker and instrument.
+- **Regulatory** — stablecoin-adjacent DeFi assets carry evolving regulatory uncertainty that can affect sentiment.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LQTYUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LQTYUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=LQTY` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=LQTY` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LQTYUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=LQTYUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=LQTY"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

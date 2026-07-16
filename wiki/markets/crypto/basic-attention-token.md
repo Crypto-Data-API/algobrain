@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BAT", "Basic Attention Token"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://basicattentiontoken.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[utility-token]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[utility-token]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Basic Attention Token
@@ -123,6 +123,47 @@ As a [[utility-token]], BAT's value should in theory track demand for its in-pro
 - **Concentration** — sizable team/foundation holdings historically influenced supply dynamics.
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** BAT trades on [[binance]] as both spot (BAT/USDT) and a USD-margined [[perpetual-futures|perpetual]], so it carries a real leveraged market with observable [[funding-rate|funding]], [[open-interest]], and [[liquidations|liquidation]] data. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary — effectively the only major — leveraged venue for BAT. Practically this means: (1) perp liquidity and open interest are far thinner than the deep CEX spot books, so leveraged sizing must respect the shallower perp order book and wider slippage on large clips; (2) with a single dominant perp venue there is no on-chain/Hyperliquid leg for cross-venue perp basis, so most derivatives-based edges route through Binance spot-vs-perp; (3) execution favors working orders against the deep spot turnover (~$25M/24h, the strongest in this cohort) while treating the perp as the funding/hedging leg rather than the primary fill book.
+
+**Applicable strategies.**
+- [[cash-and-carry]] — long deep Binance spot BAT against the short USD-M perp to harvest basis when the perp trades at a premium.
+- [[funding-rate-harvest]] — collect recurring funding on the single Binance perp while the underlying spot inventory is delta-hedged.
+- [[crypto-spot-perp-futures-triangle]] — exploit spot-vs-perp dislocations within Binance, the natural structure given no second major perp venue exists for BAT.
+- [[liquidation-cascade-fade]] — the thin BAT perp book means clustered stops can over-extend; fade forced-liquidation spikes back toward the deeper spot mid.
+- [[range-mean-reversion]] — BAT is a mature, range-bound legacy utility mid-cap ~95% below ATH, well suited to mean-reversion inside its established bands.
+- [[oi-confirmed-trend]] — use Binance open-interest shifts to confirm or discount BAT breakouts, since thin OI makes unbacked moves prone to reversal.
+
+**Volatility & regime character.** BAT is a legacy 2017-era **mid-cap utility token** (attention/ads infra) with high beta to BTC/ETH and the broad alt regime rather than an independent driver. It is fixed-supply and non-inflationary, so it lacks memecoin-style reflexive supply dynamics; volatility is regime-driven, amplified in risk-off phases and muted versus fresher narrative coins. Correlation to BTC/ETH is strong on the downside, and its narrative (Brave-ads flywheel) has matured, so idiosyncratic upside catalysts are rare.
+
+**Risk flags.**
+- **Venue concentration** — leveraged exposure funnels through a single Binance perp; no Hyperliquid or deep secondary perp market, so funding/OI signals rest on one venue and thin perp liquidity magnifies liquidation impact.
+- **Narrative dependence** — value hinges on Brave browser adoption and ad-marketplace depth; drift toward non-BAT/stablecoin payouts erodes must-hold demand.
+- **Mature/declining theme** — 2017-era token ~95% below ATH; attention has rotated to newer narratives, limiting momentum durability.
+- **Supply/concentration** — supply is essentially fully circulating (MC ≈ FDV) so dilution risk is low, but historically sizable team/foundation holdings can still influence supply dynamics.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BATUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BATUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BAT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BAT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BATUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BATUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BAT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ## See Also
 

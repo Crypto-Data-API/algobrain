@@ -3,13 +3,13 @@ title: "RHEA"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins]
 aliases: ["RHEA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://rhea.finance/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[breakout-trading]]", "[[dca-strategy]]"]
 ---
 
 # RHEA
@@ -123,6 +123,53 @@ RHEA addresses these issues by offering a unified, cross-chain platform that int
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RHEA is tradable on **Binance SPOT only** — no liquid perpetual venue exists, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation strategies do **not** apply. With a micro-cap footprint and thin 24h volume, order books are shallow: large market orders will incur meaningful slippage. Execution should favor limit orders, staged entries/exits, and small clip sizes relative to visible depth. The absence of margin/perp venues means position sizing must be cash-funded and directional exposure cannot be hedged or amplified via derivatives, so risk is best managed through spot position size and stop discipline rather than leverage.
+
+### Applicable strategies
+
+- [[breakout-trading]] — thin-book micro-cap that can gap sharply on volume expansion; range breaks offer defined entries.
+- [[breakout-and-retest]] — waiting for a breakout to retest confirms follow-through and reduces false-signal risk in low-liquidity conditions.
+- [[atr-trailing-stop]] — volatility-scaled trailing exits protect gains and cap downside on a spot-only, no-hedge asset.
+- [[dca-strategy]] — accumulating in small tranches smooths entry cost given shallow depth and sharp intraday swings.
+- [[narrative-trading]] — as a NEAR-ecosystem DeFi/BTCfi token, price is sensitive to ecosystem and BTCfi narrative flow.
+- [[range-trading]] — extended sideways drift between support/resistance suits fading extremes within a defined band.
+
+### Volatility & regime character
+
+Small-cap DeFi/BTCfi infrastructure token in the NEAR ecosystem with high idiosyncratic volatility. As a low-liquidity altcoin it exhibits strong high-beta behavior versus BTC/ETH in risk-on and risk-off swings, amplified by shallow books. Trades far below its all-time high, so regime is narrative- and liquidity-driven rather than trend-persistent, with reflexive moves on volume spikes.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — spot-only, low 24h volume; slippage and exit risk are elevated, and venue availability could change.
+- **Emissions/supply** — circulating supply is well below max supply (MC/FDV ~0.40), so future unlocks and emissions are a persistent dilution overhang.
+- **Narrative dependence** — value is tied to NEAR-ecosystem and BTCfi DeFi narratives; sentiment shifts can drive outsized moves.
+- **Regulatory** — as a DeFi/DEX-related token, evolving regulatory treatment of decentralized exchanges and yield products is a background risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RHEAUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RHEAUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RHEAUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=RHEAUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

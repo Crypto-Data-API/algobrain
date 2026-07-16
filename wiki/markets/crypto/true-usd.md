@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation, stablecoin]
+tags: [crypto, regulation, stablecoin, stablecoins, defi]
 aliases: ["TUSD", "TrueCoin"]
 entity_type: protocol
 founded: 2018
 headquarters: "Issuer: Techteryx Ltd. (BVI); originally TrustToken/TrueCoin, San Francisco"
 website: "https://tusd.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[first-digital-usd]]", "[[real-world-assets]]", "[[stablecoin-depegs]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[first-digital-usd]]", "[[real-world-assets]]", "[[stablecoin-depegs]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # TrueUSD
@@ -247,6 +247,48 @@ Versus yield-bearing alternatives ([[ylds|YLDS]], [[ousg|OUSG]], BUIDL, [[usx|US
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** TUSD is a USD-pegged [[stablecoin]] traded primarily on [[binance]] (TUSD/USDT spot), with secondary depth on Bitget, KuCoin and Upbit, plus Uniswap V2/V3 pools on-chain. It is a **peg / cash-management instrument, NOT a directional asset** — the trade is about peg stability, backing/reserves, depeg risk and yield/arbitrage, not momentum. Practically nobody trades TUSD for price appreciation; a fiat-backed stablecoin has no directional thesis and leveraged directional exposure makes little sense. What matters for execution is that secondary depth sits far below its 2023 peak (24h volume in the tens of millions), so venue availability and pool liquidity directly cap how much size can be arbitraged into or out of a depeg before slippage eats the basis. Sizing should assume slow, thin exits during stress — the same conditions under which a depeg is most likely.
+
+**Applicable strategies.**
+- [[stablecoin-depeg-profit-capture]] — TUSD trades at a persistent small discount and carries elevated, headline-driven depeg risk (Sun backstop, court rulings), making it a prime candidate for buying the discount and capturing mean-reversion to par if backing holds.
+- [[stablecoin-pair-arbitrage]] — spread trading TUSD against USDT/USDC on Binance and DEX pools harvests peg dislocations without taking a directional dollar view.
+- [[synthetic-stablecoin-depeg-arbitrage]] — TUSD's peg is a leading indicator for contagion into [[first-digital-usd|FDUSD]] and Tron-ecosystem assets, enabling cross-stablecoin depeg arbitrage when one leg dislocates.
+- [[stablecoin-yield]] — where TUSD can be deployed into lending or LP pools, yield partially compensates for holding a compromised-reserve stablecoin, though it does not offset depeg tail risk.
+- [[mint-parity-arbitrage]] — par mint/redeem against whitelisted partners lets authorized participants close secondary-market discounts toward $1.00, though redemption is gated to whitelisted users and dependent on reserve liquidity.
+
+**Volatility & regime character.** As a fiat-backed stablecoin TUSD is designed to sit at $1.00, so its "regime" is peg-tightness rather than trend. Peg tightness has degraded relative to top-tier stablecoins: it trades at a persistent small discount (roughly 20-25bp below par at recent snapshots) rather than pinned to 1.00. Historical stress shows real tail behavior — an all-time low near $0.88 during the March 2020 COVID crash and early-illiquidity spikes above $1.00 in 2018. The backing model is claimed 1:1 fiat with Chainlink Proof-of-Reserve attestations, but litigation revealed reserves were routed into an illiquid Dubai trade-finance vehicle, and the peg has held since 2024 primarily on a ~$500M Justin Sun loan. Redemption is par-based but limited to whitelisted users and contingent on reserve liquidity. Net: tighter than a failed algo-stable, materially looser and more fragile than USDC/USDT.
+
+**Risk flags.**
+- **Depeg risk (elevated).** Persistent discount plus a solvency floor that rests on a single billionaire's loan; any withdrawal or adverse court ruling could break par.
+- **Reserve / backing transparency (severe).** Attested "1:1" did not equal redeemable 1:1 — reserves were found illiquid; PoR/attestation lagged custody-layer misappropriation.
+- **Redemption gating.** Par redemption is restricted to whitelisted partners and depends on reserve liquidity, so retail cannot reliably arbitrage the peg directly.
+- **Regulatory / legal.** 2024 SEC fraud settlement, active Hong Kong and Dubai litigation, offshore BVI issuer with limited recourse.
+- **Counterparty concentration.** Sun is simultaneously lender of last resort and the loudest public accuser of the trustee — a conflicted, fragile arrangement.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TUSDUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=TUSDUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TUSDUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=TUSDUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

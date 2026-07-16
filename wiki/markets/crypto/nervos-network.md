@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["CKB", "Nervos"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized"
 website: "http://nervos.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[proof-of-work]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Nervos Network
@@ -122,6 +122,53 @@ CKB is the only [[proof-of-work]] chain in this group; all peers are [[proof-of-
 - **Severe drawdown / liquidity.** Down ~98% from ATH, only ~6% above a fresh all-time low, with thin (~$3.5M/day) volume under an extreme-fear macro backdrop.
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CKB is tradable on [[binance]] — **spot** (CKB/USDT) and a **USD-margined perpetual** with the associated derivatives telemetry (funding, open interest, liquidations). It is **not** listed on [[hyperliquid]], so Binance is the **primary leveraged venue** and the reference point for any funding/OI/liquidation signal. With a small-cap footprint (~$44M market cap, ~$2–3M daily spot volume), the CKB perp book is thin: leverage amplifies slippage on size, funding can whip sharply on modest positioning shifts, and liquidation clusters resolve fast. Practical implication — size down, use limit entries and staged fills rather than market sweeps, and treat the single-venue concentration as an execution risk (no cross-venue depth to absorb a cascade). Verify live funding/OI on Binance before opening any leveraged exposure.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin, retail-driven CKB perp funding on Binance can run persistently one-sided, letting a delta-neutral spot-vs-perp position collect the carry.
+- [[crowded-long-funding-fade]] — CKB rallies on RGB++/BTC-L2 narrative pops tend to over-extend perp longs; fade elevated positive funding into mean reversion.
+- [[liquidation-cascade-fade]] — low float plus concentrated Binance liquidity makes CKB prone to sharp forced-liquidation flushes that overshoot, offering rebound entries.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price direction filters genuine CKB breakouts from thin-liquidity fakeouts.
+- [[cash-and-carry]] — when the CKB perp trades at a funding/basis premium to spot, a long-spot / short-perp carry captures the spread with hedged directional risk.
+- [[rsi-mean-reversion]] — trading ~6% above a fresh all-time low in a bounded low-volatility range, CKB spot often reverts from oscillator extremes.
+
+### Volatility & regime character
+
+Small-cap (rank ~472) [[proof-of-work]] infrastructure/L1 token with high beta to BTC and broad-altcoin risk appetite. Price action is narrative-reflexive — swings hinge on the Bitcoin-L2 / RGB++ interoperability story rather than fundamentals — but without memecoin-style pure-reflexivity; the state-rent tokenomics give it a (largely theoretical) demand anchor. As the only PoW chain in its peer cohort, it carries added security-budget reflexivity in deep drawdowns. Realized volatility is elevated on thin liquidity, and directional moves are strongly conditioned on the overall crypto regime (currently an established bear market with extreme-fear sentiment).
+
+### Risk flags
+
+- **Liquidity / venue concentration:** Binance is effectively the sole deep leveraged venue; thin books mean high slippage and fast, disorderly liquidations. No [[hyperliquid]] fallback.
+- **Emissions / dilution:** uncapped design — perpetual secondary issuance (~1.344B CKB/year) is a slow structural dilution distinct from discrete unlocks; MC/FDV ~0.98 means little near-term unlock overhang on issued supply.
+- **Narrative dependence:** upside is tightly coupled to the competitive, unproven Bitcoin-L2/RGB++ interoperability thesis; a fading narrative removes the main bid.
+- **Drawdown / floor risk:** down ~98% from ATH and only marginally above a fresh all-time low, with PoW security-budget reflexivity compounding downside in sustained weakness.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CKBUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CKBUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CKB` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CKB` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CKBUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CKBUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CKB"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ## See Also
 

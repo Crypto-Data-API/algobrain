@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, news, regulation]
+tags: [crypto, news, regulation, stablecoins, defi]
 aliases: ["USD1", "WLFI USD1", "World Liberty Financial USD"]
 entity_type: protocol
 founded: 2025
 headquarters: "United States (World Liberty Financial)"
 website: "https://www.worldlibertyfinancial.com/"
-related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[narrative-trading]]", "[[stablecoins]]", "[[tether]]"]
+related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[narrative-trading]]", "[[stablecoins]]", "[[tether]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # USD1 (World Liberty Financial)
@@ -283,6 +283,52 @@ As a pegged asset USD1 is not "valued"; the economics accrue to **WLFI** (reserv
 | **24h Range** | $0.9980 — $0.9992 |
 | **CoinGecko Sentiment** | 0% positive |
 | **Last Updated** | 2026-07-16 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USD1 is a USD-pegged, fiat-backed [[stablecoin]] whose float is overwhelmingly concentrated on [[binance|Binance]] (reportedly ~87% of supply), with the core **USD1/USDT** book there plus thinner listings on Kraken, Bitget, KuCoin and a Uniswap V3 (Ethereum) pool. It is a **peg / cash-management instrument, not a directional asset** — trading is about peg tightness, backing/reserves, depeg risk, and yield/arbitrage rather than momentum. Because liquidity is single-venue-dominant, peg defense leans on Binance market-making rather than broad on-chain redemption arbitrage: execution and sizing should assume that a Binance-specific shock (halt, delisting, or thin book) is the binding constraint, and cross-venue/on-chain quotes (Curve/Uniswap discounts) are the earliest depeg tell. Leverage on a pegged asset is low-utility and best reserved for tight arbitrage spreads, not speculation.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — USD1's depeg catalysts are headline-driven (probes, litigation, "coordinated attack" episodes), so accumulating below $1 for reversion to par is the core edge here.
+- [[stablecoin-pair-arbitrage]] — trade USD1/USDT deviations across Binance and the Uniswap/Curve pools, capturing the venue-concentration dislocations unique to a single-exchange stablecoin.
+- [[mint-parity-arbitrage]] — authorized mint/redeem at $1 via the WLFI issuance pipeline lets qualifying participants close secondary-market gaps back to fiat parity.
+- [[stablecoin-yield]] — reserve-yield and DeFi lending routes on USD1 pools offer carry on an otherwise flat instrument (WLFI captures the T-bill yield; holders seek on-chain yield).
+- [[synthetic-stablecoin-depeg-arbitrage]] — hedge USD1 exposure against USDT/USDC baskets to isolate and monetize a headline-driven peg break without naked directional risk.
+- [[carry-trade]] — hold USD1 as a stable funding/settlement leg to harvest rate differentials while peg risk stays quiescent.
+
+### Volatility & regime character
+
+USD1 trades in a tight band around **$1.00** with a fiat-backed, 1:1 reserve model (short-term US Treasuries, USD deposits and cash equivalents custodied via BitGo) and elastic mint/redeem. Realized volatility is near-zero in normal regimes; the distribution is fat-tailed toward **discrete depeg events** rather than continuous drift. Historically the peg has held firm at par, with only minor excursions (recorded ATH ~$1.025, ATL ~$0.9896) and a brief depeg during an April 2026 "coordinated attack." The relevant regime signal is **peg tightness and supply trend**, not price momentum — supply expansion at a firm peg reflects political/Gulf-capital inflows, not organic volatility.
+
+### Risk flags
+
+- **Depeg risk** — primarily headline/political rather than reserve-quality: congressional probes, litigation, and adverse political cycles are the catalysts; a brief depeg already occurred (April 2026).
+- **Reserve/backing transparency** — centralized issuer (WLFI) with attestation-based, not fully independent, disclosure; monitor reserve reporting closely.
+- **Venue concentration / redemption gating** — ~87% on Binance means peg defense and retail exits route through one venue; authorized redemption at $1 is issuer-gated and not available to all holders.
+- **Regulatory** — a sitting-administration-affiliated issuer draws unprecedented scrutiny; GENIUS Act compliance helps but political/legal overhang persists.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=USD1USDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=USD1USDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=USD1USDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=USD1USDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["GUN", "GUNZ"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gunbygunz.com/"
-related: ["[[avalanche]]", "[[crypto-markets]]", "[[gamefi]]"]
+related: ["[[avalanche]]", "[[crypto-markets]]", "[[gamefi]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Gunz
@@ -206,6 +206,57 @@ Real dated events only (from market data on this page):
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+GUN is tradable on [[binance]] — both **spot** (GUN/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, which surfaces [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on Hyperliquid, so Binance is the **primary leveraged venue** for GUN. Concentration of derivatives flow on a single CEX means funding, OI, and liquidation prints are dominated by Binance positioning — there is little cross-venue perp arbitrage to diffuse it. For a sub-$15M-cap gaming token, the perp order book is thin, so effective leverage is constrained: large size drags spot and perp prices and can trigger self-reinforcing liquidations. Execution should favor limit/passive fills and modest position sizing; the spot leg on Binance (plus Kraken, Bitget, KuCoin) provides the cash side for any carry or basis construction.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance perp funding on a small-cap GameFi token can run persistently one-sided; harvest it delta-hedged against Binance spot.
+- [[cash-and-carry]] — pair Binance spot GUN with the USD-M perp to capture basis when the perp trades rich versus spot during sentiment spikes.
+- [[liquidation-cascade-fade]] — a thin sub-$15M book means leveraged flushes overshoot; fade forced-liquidation wicks once OI resets and cascades exhaust.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to separate genuine directional moves from thin-book squeezes on low-volume days.
+- [[narrative-trading]] — GUN is a high-beta proxy for the GameFi narrative and *Off The Grid* engagement; trade the sector-sentiment and catalyst cycle rather than standalone thesis.
+- [[range-mean-reversion]] — in Extreme-Fear chop the token bleeds and ranges; fade extremes toward the mean absent a catalyst or volume confirmation.
+
+### Volatility & regime character
+
+Small-cap (rank ~#1144), high-beta **GameFi / gaming-L1** token with pronounced reflexivity: price is game-driven and sentiment-driven, amplifying both up-cycles and de-ratings (GUN sits ~95% below its 2025 high). It behaves as a leveraged proxy for GameFi risk appetite and correlates strongly to [[bitcoin|BTC]]/[[ethereum|ETH]] beta in risk-on/risk-off swings, with idiosyncratic spikes on *Off The Grid* content and engagement catalysts. Thin liquidity makes realized volatility jumpy and gap-prone.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — sub-$15M cap with Binance as the sole meaningful leveraged venue; thin books move on modest size and are prone to squeezes.
+- **Emissions / unlock overhang** — 10B max supply with ~0.17 MC/FDV ratio implies substantial future dilution; check unlock/emission schedules before holding through them.
+- **Narrative dependence** — demand hinges on the GameFi narrative and single-product (*Off The Grid*) engagement; churn or a sector de-rate directly pressures the token.
+- **Reflexive liquidations** — concentrated Binance perp positioning can turn ordinary moves into liquidation cascades in a shallow book.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GUNUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GUNUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=GUN` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=GUN` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GUNUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=GUNUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=GUN"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, defi]
 aliases: ["XDC", "XinFin", "XinFin Network"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (XDC Foundation)"
 website: "https://xdc.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]", "[[real-world-assets]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]", "[[real-world-assets]]", "[[binance]]", "[[event-driven-trading]]", "[[dca-strategy]]"]
 ---
 
 # XDC Network
@@ -301,6 +301,53 @@ XDC's edge is the concrete **trade-finance** focus (TradeFinex, Contour) and nam
 | **24h Range** | $0.0273 — $0.0276 |
 | **CoinGecko Sentiment** | 60% positive |
 | **Last Updated** | 2026-07-16 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XDC is **tradable on Binance SPOT only among liquid tier-1 venues — there is no liquid perpetual venue**, so leverage and short access are structurally limited and this is a **spot-primary** asset. Perp funding, basis, and liquidation-cascade strategies do **not** apply. With thin turnover (Vol/MC ~1.2%) and a single deep spot book, execution must assume **wide effective spreads and slippage-prone fills**: size in fractions of visible book depth, prefer limit/VWAP-style entries over market orders, and treat the inability to hedge with perps as a hard constraint — position sizing, not stop-loss shorting, is the primary risk control. Venue concentration also means listing/delisting or liquidity-migration events on Binance would materially reshape execution.
+
+### Applicable strategies
+
+- [[narrative-trading]] — XDC reprices almost entirely on the RWA / institutional-tokenization narrative (Archax, SBI, Animoca, Contour), making narrative rotation the dominant driver.
+- [[event-driven-trading]] — impulsive moves cluster around discrete institutional headlines (validator additions, tokenized-fund listings, trade-finance partnerships), a classic catalyst-trade profile.
+- [[news-trading]] — thin float means partnership news produces sharp, tradable impulses that continuous-flow analysis misses.
+- [[dca-strategy]] — for adoption-thesis longs, DCA smooths entry into a spot-only, low-liquidity name where lump-sum fills move the book and timing catalysts is unreliable.
+- [[breakout-and-retest]] — headline-driven breakouts from long low-volume drift ranges offer defined-risk entries once the move retests the breakout level on the single spot book.
+- [[atr-trailing-stop]] — with no perp hedge available, an ATR-based trailing stop on the spot leg is the practical way to lock gains through XDC's overshoot-and-round-trip behaviour.
+
+### Volatility & regime character
+
+Small/mid-cap (~#98, sub-$1B) **infra / RWA token**, not a memecoin — low continuous beta with **episodic, catalyst-driven volatility spikes** rather than reflexive momentum. Behaves as a low-beta, announcement-momentum name that **drifts in quiet tape and gaps on institutional headlines**; correlation to BTC/ETH is loose day-to-day, with idiosyncratic RWA-narrative moves dominating and broad risk-off regimes suppressing narrative payoff.
+
+### Risk flags
+
+- **Venue / liquidity concentration** — Binance-spot-primary with no liquid perp; thin ~$7M/day turnover means slippage, limited exit liquidity, and no hedging venue.
+- **Emission / supply overhang** — uncapped supply and MC/FDV ≈ 0.52 (~half of total supply outside the float) is a persistent structural dilution headwind.
+- **Narrative dependence** — price rests on the RWA / institutional-adoption story; announcement-vs-adoption gap is the core risk if logos do not convert to recurring on-chain volume.
+- **Deep drawdown / bear regime** — -84.7% from ATH in a multi-year bear; RWA narratives are slow to be rewarded in risk-off tapes.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XDCUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=XDCUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XDCUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=XDCUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

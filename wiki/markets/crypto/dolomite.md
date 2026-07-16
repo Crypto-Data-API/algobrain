@@ -3,13 +3,13 @@ title: "Dolomite"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["DOLO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dolomite.io/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -123,6 +123,55 @@ related: ["[[crypto-markets]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DOLO is tradable on **Binance** — both spot (DOLO/USDT) and a **USD-margined perpetual** contract, which exposes funding, open interest, and liquidation data. It is **NOT** listed on Hyperliquid, so Binance is the primary leveraged venue for this token. With a sub-$5M 24h volume and a small-cap market position (rank ~1099), the perpetual order book is thin: leverage amplifies slippage, funding can swing sharply on modest flow, and stacked liquidations can gap price. Practical implication — size conservatively, favor limit/maker entries, split large orders, and lean on Binance's spot+perp pairing (rather than fragmented DEX/CEX venues) to keep execution tight.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest recurring funding on the Binance DOLO perp when the rate is persistently one-sided, hedged against spot.
+- [[cash-and-carry]] — pair long Binance spot DOLO against a short perp to capture positive basis with market-neutral exposure.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when funding spikes positive during small-cap DeFi pumps.
+- [[liquidation-cascade-fade]] — thin DOLO perp liquidity makes forced-liquidation flushes prone to overshoot and snap-back reversion.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm genuine directional moves versus low-conviction chop.
+- [[breakout-and-retest]] — trade breakouts from DOLO's tight consolidation ranges, waiting for a retest to filter thin-book false moves.
+
+### Volatility & regime character
+
+DOLO is a **small-cap DeFi / DEX infrastructure token** (Berachain-native, Ethereum-deployed) with high beta to broader crypto risk sentiment. It trades far below its ATH and clusters near historic lows, giving it reflexive, headline-sensitive swings typical of low-float DeFi names. Directionally it tends to correlate with BTC/ETH risk-on/risk-off cycles but with exaggerated amplitude and shallower liquidity, so idiosyncratic protocol news and DeFi-sector rotation can dominate short-term price action.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — leveraged trading is effectively Binance-only; a listing or venue change materially alters execution and funding dynamics.
+- **Emissions / unlocks** — circulating supply (~463M) is well below max supply (1B), so ongoing emissions and future unlocks are a persistent supply-overhang risk.
+- **Narrative dependence** — price is sensitive to DeFi/DEX-sector sentiment and Berachain ecosystem momentum rather than standalone fundamentals.
+- **Thin small-cap tape** — low volume and small market cap raise slippage, gap, and manipulation risk, especially into leveraged liquidation zones.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DOLOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DOLOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=DOLO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=DOLO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DOLOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=DOLOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=DOLO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

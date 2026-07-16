@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["EGLD", "Elrond"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://multiversx.com/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # MultiversX
@@ -253,6 +253,55 @@ According to the MultiversX crypto team, the project implements three types of p
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+EGLD is tradable on [[binance]] as both **spot** (EGLD/USDT) and a **USD-margined perpetual** ([[perpetual-futures]]), which exposes [[funding-rate]], open interest, and liquidation data on the primary leveraged venue. It is **not** listed on [[hyperliquid]], so Binance is effectively the only deep leveraged venue — leveraged flow, funding signals, and cascade dynamics all concentrate there. This single-venue concentration means execution and sizing should account for thinner cross-venue perp depth than top-cap alts: modest 24h spot turnover (~4% of cap) plus one dominant perp book implies wider effective spreads and slippage on larger clips, and funding/OI reads are only as reliable as Binance's own book. Size positions to the Binance order book, and confirm live perp depth on-venue before committing size, since venue availability — not just spot liquidity — governs how much leverage can be deployed cleanly.
+
+### Applicable strategies
+
+- [[oi-confirmed-trend]] — with all EGLD perp leverage concentrated on Binance, rising open interest alongside directional price gives a cleaner single-venue confirmation of trend participation.
+- [[liquidation-cascade-fade]] — thin, single-venue perp depth makes EGLD prone to over-extended liquidation wicks near its all-time low, offering fade entries once forced flow exhausts.
+- [[funding-rate-harvest]] — a supply-capped, low-turnover alt can see funding drift persistently one-sided on Binance, letting a delta-neutral spot-vs-perp position collect the carry.
+- [[cash-and-carry]] — Binance spot plus USD-M perp lets a trader lock the spot/perp basis on EGLD when the perp trades rich to spot, a clean market-neutral carry.
+- [[range-mean-reversion]] — trading fractionally above its ATL with soft demand, EGLD tends to chop in a compressed range, favoring reversion entries at band extremes over trend chasing.
+- [[breakout-and-retest]] — a low-float, capped-supply name basing near all-time lows can produce sharp breakouts on any adoption/narrative inflection; entering on the retest filters false starts.
+
+### Volatility & regime character
+
+EGLD is a **mid-small-cap sharded L1 / infra token** (rank ~276) with high beta to the broad crypto risk cycle and strong correlation to BTC/ETH direction — it sells off hard in bear regimes and offers little idiosyncratic support when trading near its all-time low. It is not a memecoin and lacks reflexive social-driven pumps; instead its moves are dominated by market beta and occasional narrative repricing (DeFi → metaverse → AI-agent). Realized volatility is elevated in absolute terms but its low turnover means moves can be gappy and liquidity-driven rather than smoothly trending.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged trading concentrates on Binance with no Hyperliquid perp; light spot turnover (~4% of cap) amplifies slippage and gap risk.
+- **Narrative dependence:** repeated repositioning (DeFi → metaverse → AI) means re-rating hinges on an unproven adoption/narrative catalyst rather than durable usage.
+- **Trend-support absence:** trading essentially at its all-time low with no demonstrated price-trend floor increases downside-continuation risk.
+- **Emissions:** supply is near-fully-circulating under a hard cap (~31.4M), so unlock overhang is minimal — but declining staking issuance is a mild structural sell source.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=EGLDUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=EGLDUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=EGLD` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=EGLD` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=EGLDUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=EGLDUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=EGLD"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

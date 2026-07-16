@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["WAXP", "Worldwide Asset eXchange"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://wax.io/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # WAX
@@ -229,6 +229,55 @@ WAX's relative strengths are a mature low-cost NFT stack and seamless onboarding
 - **Sector dependence:** WAX's fortunes are tied to NFT/GameFi cycles, which are highly cyclical; the prolonged downturn has pressured on-chain activity and price.
 - **EOSIO-family ecosystem risk:** the broader EOS/Antelope ecosystem has seen declining mindshare, which can affect tooling, developer interest, and liquidity.
 - **Small-cap volatility & drawdown:** at ~$20M market cap (rank #823) and down >99% from ATH, WAXP is volatile and thinly traded.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+WAXP is tradable on **[[binance]]** — both **spot** (WAXP/USDT) and a **USD-margined perpetual** future carrying [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid]]. Binance is therefore the **primary leveraged venue**, and the perp's funding/OI/liquidation feeds are the main signal set for any derivatives-based approach. Because WAXP is a ~#856-cap micro-cap with thin spot depth (~$1-2M reported 24h volume against a ~$20M cap), leverage compounds slippage risk: order books are shallow, so even modest perp size can move price and trigger liquidation cascades. Venue concentration on Binance (plus Korean-retail-driven Upbit spot flow) means execution should favor small clip sizes, patient limit orders, and passive fills; sizing must assume that exiting on size is costly and that funding/liquidation dynamics on the single Binance perp dominate leveraged price discovery.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the Binance WAXP perp is the only liquid funding venue, so collecting persistent funding on the crowd's directional bias is the cleanest structural edge on a thin micro-cap.
+- [[cash-and-carry]] — hold WAXP spot on Binance against a short perp to monetize any positive basis while neutralizing WAXP's high directional beta.
+- [[crowded-long-funding-fade]] — sector-recovery hope in GameFi tokens periodically crowds longs; fading stretched positive funding captures the mean-reversion of over-leveraged retail.
+- [[liquidation-cascade-fade]] — shallow spot depth makes WAXP prone to violent liquidation flushes on the Binance perp; fading capitulation wicks back toward VWAP is a high-reward, defined-risk setup.
+- [[oi-price-exhaustion]] — divergence between rising open interest and stalling price on the single Binance perp flags exhausted, leverage-driven moves in this low-float name.
+- [[range-mean-reversion]] — outside catalyst windows WAXP grinds in low-liquidity ranges near ATL zones, favoring reversion trades against extremes rather than trend-chasing CEX spikes.
+
+### Volatility & regime character
+
+WAXP is a **small-cap, high-beta GameFi/NFT infrastructure L1 token**. It behaves as a lottery-ticket, sector-dependent micro-cap: it amplifies BTC/ETH moves on the downside, rallies hard only when a broad NFT/gaming narrative revives, and exhibits reflexive, Korean-retail-driven spikes (Upbit KRW pairs) that fade fast. Correlation to BTC/ETH is high in risk-off regimes (it sells off with the complex) but decouples episodically on idiosyncratic GameFi narrative or exchange-flow catalysts. Inflationary, unlimited-supply tokenomics add a structural downward drift. Expect wide intraday ranges, thin depth, and gap-prone price action typical of the lowest-liquidity corner of the market.
+
+### Risk flags
+
+- **Liquidity & venue concentration:** thin spot books; leveraged flow concentrated on the single Binance USD-M perp, with Korean-retail (Upbit) spot flow dominating price discovery — exits on size are costly and slippage-heavy.
+- **Emissions/inflation:** unlimited max supply with ongoing inflation funding guilds and staking is a persistent supply headwind; no fixed unlock schedule but continuous dilution.
+- **Narrative dependence:** price is tethered to the cyclical, multi-year-drawdown GameFi/NFT sector and to EOSIO/Antelope ecosystem health; longs require both a sector revival and WAX-specific traction.
+- **Liquidation risk:** shallow depth plus leverage makes WAXP prone to violent liquidation cascades; treat KRW-driven pumps as exit liquidity, not trend confirmation.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=WAXPUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=WAXPUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=WAXP` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=WAXP` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=WAXPUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=WAXPUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=WAXP"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

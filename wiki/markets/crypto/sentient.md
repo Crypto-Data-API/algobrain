@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, ethereum]
+tags: [ai-trading, crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SENT", "Sentient AGI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.sentient.xyz/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Sentient
@@ -125,6 +125,56 @@ High-beta **open-AGI / DeAI** token with broad CEX liquidity but a heavy unlock 
 - **Macro overlay:** scale exposure to the AI-meta sentiment turn — in continued Extreme Fear, even broadly-listed open-AGI names get sold and the unlock overhang compounds downside.
 
 Not financial advice; open-AGI tokens carry severe drawdown, dilution, and execution/vaporware risk.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SENT is tradable on [[binance|Binance]] — **spot plus a USD-margined perpetual** (funding, open interest, and liquidations available). It is **not listed on Hyperliquid**, so Binance is the primary leveraged venue and effectively the reference market for derivatives price discovery, funding, and OI/liquidation flow. Concentrating leveraged activity on a single CEX perp means funding and liquidation dynamics are Binance-driven: crowded positioning shows up as funding skew and cascades on that one book, and there is no cross-venue perp to arb it against. Combined with SENT's mid-cap size and moderate turnover (spot liquidity is adequate on tier-1 books but thin on smaller pairs), this argues for conservative sizing on leverage, wider stops around unlock/news windows, and scaling entries/exits into deeper spot liquidity rather than the perp alone. Broad tier-1 spot coverage (Binance/Kraken/Upbit/Bitget/KuCoin/Crypto.com) supports the cash leg of spot-perp structures.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance USD-M perp lets you collect funding when the open-AGI narrative drives crowded directional positioning in SENT.
+- [[crowded-long-funding-fade]] — high-beta AI/DeAI names like SENT are prone to euphoric long crowding on sentiment pops; fade when Binance funding turns persistently positive.
+- [[cash-and-carry]] — pair long Binance SENT spot against the short USD-M perp to harvest positive basis without directional exposure to the volatile token.
+- [[liquidation-cascade-fade]] — thin mid-cap depth plus leverage means SENT liquidations overshoot; fade forced-selling flushes on the Binance book toward mean.
+- [[oi-confirmed-trend]] — use Binance open-interest confirmation to validate SENT breakouts driven by AI-sector rotation and avoid low-conviction squeezes.
+- [[token-unlock-supply-event]] — with only ~21% float and a large unlock overhang, position around scheduled SENT emissions as a recurring supply-driven catalyst.
+
+### Volatility & regime character
+
+SENT is a **high-beta mid/small-cap infra token** in the decentralized-AI / open-AGI narrative on [[ethereum|Ethereum]]. It trades with strong reflexivity to AI-sector mindshare and Binance Alpha rotation flows, and is tightly correlated to broad crypto risk appetite (BTC/ETH beta) — amplified moves both up and down. Realized volatility is elevated versus large caps, and price action is narrative-driven rather than cash-flow-driven, so regime shifts in AI sentiment (risk-on rotations vs. Extreme-Fear drawdowns) dominate direction.
+
+### Risk flags
+
+- **Venue/leverage concentration:** derivatives liquidity centers on Binance's single USD-M perp; no Hyperliquid or cross-venue perp to diversify execution or hedge funding.
+- **Dilution / emissions overhang:** MC/FDV ≈ 0.21 with ~27B of 34.36B SENT still to unlock — a persistent supply-driven risk that can cap rallies and trigger unlock-timed sell pressure.
+- **Narrative dependence / reflexivity:** value rests on the speculative "open AGI" thesis; delivery of an adopted GRID is unproven, making momentum sharp and reversible.
+- **Liquidity thinning:** turnover is moderate; smaller pairs and the perp can gap during stress, worsening slippage and liquidation overshoot.
+- **Regulatory/sentiment:** AI-token cohort is sensitive to macro risk regime and Binance listing/rotation dynamics that can shift liquidity quickly.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SENTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SENTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SENT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SENT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SENTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SENTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SENT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

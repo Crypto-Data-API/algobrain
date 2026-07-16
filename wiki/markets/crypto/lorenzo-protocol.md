@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, defi]
+tags: [bitcoin, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BANK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lorenzo-protocol.xyz/"
-related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[real-world-assets]]", "[[restaking]]", "[[stablecoin]]"]
+related: ["[[bitcoin]]", "[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[real-world-assets]]", "[[restaking]]", "[[stablecoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Lorenzo Protocol
@@ -144,6 +144,55 @@ Lorenzo's positioning is less "just an LST" and more an **on-chain asset manager
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BANK is tradable on [[binance]] — both **spot** (BANK/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** contract, which exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations|liquidation]] data. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue and the dominant source of price discovery for both cash and derivatives. Because leverage, funding, and OI flow are concentrated on a single exchange, execution and hedging depend heavily on Binance depth: as a micro-cap (~rank #709) the perp order book is thin relative to majors, so sizing should account for wider spreads, slippage on market orders, and elevated liquidation risk during volatility spikes. The lack of a second deep perp venue also limits cross-exchange arbitrage and makes any funding/basis dislocations harder to hedge away.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single-venue Binance perp on a low-cap governance token tends to swing between funding extremes; collect funding by holding the side paid to carry, hedged against spot.
+- [[crowded-long-funding-fade]] — after sharp rallies (BANK has shown large multi-day pumps), retail crowding into longs drives funding positive; fade the crowded long as funding overheats.
+- [[cash-and-carry]] — pair long Binance spot BANK against short USD-M perp to monetize positive perp basis without directional exposure, the cleanest carry structure given the single leveraged venue.
+- [[liquidation-cascade-fade]] — thin perp depth plus high leverage on a micro-cap makes liquidation wicks common; fade the over-extended cascade once forced selling/buying exhausts.
+- [[volatility-breakout]] — BANK exhibits high realized volatility and unlock/emission-driven regime shifts; trade confirmed breakouts from compression with defined invalidation.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether a BANK move is backed by fresh positioning rather than a squeeze, filtering false trends.
+
+### Volatility & regime character
+
+BANK is a **micro-cap DeFi/BTCfi governance token** with high beta and pronounced reflexivity — it has whipsawed from a ~$0.23 ATH down to the low single-cent range and back with large multi-day swings, so realized volatility runs far above BTC/ETH. Direction is highly correlated to broad crypto risk-on/risk-off and to the BTCfi/liquid-staking narrative; in fear regimes it tends to sell off harder than majors, and in narrative-driven rallies it can spike violently on thin liquidity. Treat it as a small-cap altcoin whose moves are amplified versions of the broader BTC/ETH tape rather than an independent driver.
+
+### Risk flags
+
+- **Venue concentration** — leveraged liquidity is concentrated on Binance; a listing change, outage, or funding dislocation there has outsized impact with no deep secondary perp venue to hedge.
+- **Unlocks / emissions dilution** — large max supply (2.10B) with only a portion circulating means scheduled unlocks and veBANK emissions are a recurring supply overhang that can pressure price.
+- **Narrative dependence** — valuation leans on the durability of the BTCfi / Bitcoin-staking narrative and real fee capture; narrative fatigue or emissions-over-fees dynamics can compress the token.
+- **Liquidity / micro-cap risk** — thin order books amplify slippage and make liquidation cascades and stop-runs more violent; size conservatively.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BANKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BANKUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BANK` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BANK` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BANKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BANKUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BANK"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

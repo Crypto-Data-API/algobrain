@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, layer-2]
+tags: [crypto, layer-2, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ESP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.espresso.foundation/"
-related: ["[[arbitrum]]", "[[celestia]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[modular-blockchains]]", "[[sequencer]]"]
+related: ["[[arbitrum]]", "[[binance]]", "[[celestia]]", "[[crypto-markets]]", "[[ethereum]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[layer-2]]", "[[modular-blockchains]]", "[[perpetual-futures]]", "[[sequencer]]"]
 ---
 
 # Espresso
@@ -255,6 +255,55 @@ Espresso confirmations can improve cross-chain composability, as they provide ch
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ESP is tradable on [[binance|Binance]] — both **spot** (ESP/USDT) and a **USD-margined perpetual**, which exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] as tradable/observable data. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary leveraged venue. With derivatives concentrated on a single CEX, leverage, funding reads, and liquidation flow all route through Binance; there is no on-chain perp to cross-check or arbitrage against. For a small-cap (~#471) with a thin spot book, this venue concentration means execution should assume shallow depth: size into limit orders, expect meaningful slippage on market fills, and treat Binance funding/OI as the single sentiment gauge rather than a cross-venue consensus.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest Binance perp funding when ESP's crowded, low-float positioning drives persistent funding skew.
+- [[crowded-long-funding-fade]] — fade richly positive funding spikes on a downtrend-prone token where late longs are prone to being flushed.
+- [[cash-and-carry]] — hedge spot ESP against the USD-M perp to capture basis/funding while neutralizing the heavy unlock-driven price risk.
+- [[liquidation-cascade-fade]] — thin single-venue liquidity makes ESP prone to over-extended liquidation wicks that snap back.
+- [[breakout-and-retest]] — a recent launch trading between ATL and ATH offers clean range boundaries for breakout-retest entries.
+- [[volatility-targeting]] — scale position size to ESP's elevated newly-listed volatility to keep risk constant across regimes.
+
+### Volatility & regime character
+
+ESP is a small-cap (~#471), very recently launched (2026) modular/infrastructure token with an extremely low float (~17% circulating, ~5.8x locked supply) — a profile that produces high, reflexive volatility on relatively modest flow. It trades as a high-beta risk asset, amplifying BTC/ETH moves to the downside in bear regimes, and its price action is dominated by the unlock calendar and shared-sequencing adoption narrative rather than fundamentals. Expect wide swings, low absolute liquidity, and sentiment-driven repricing.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged exposure funnels through Binance only; thin spot depth makes forced flows outsized and slippage material.
+- **Severe unlock/emission overhang** — ~83% of supply (~2.98B ESP) remains to vest into an uncapped schedule, a persistent structural sell-pressure risk.
+- **Narrative dependence** — valuation rests on unproven shared-sequencing/RaaS adoption; thesis reversals can reprice sharply.
+- **Early-stage/regime** — short price history, no established floor, and bear-market sentiment amplify drawdowns and gap risk around news.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ESPUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ESPUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ESP` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ESP` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ESPUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ESPUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ESP"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

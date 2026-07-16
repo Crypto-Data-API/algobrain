@@ -3,13 +3,13 @@ title: "Celer Network"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["CELR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.celer.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -140,6 +140,57 @@ related: ["[[crypto-markets]]", "[[ethereum]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CELR is tradable on **Binance** as both **spot** (CELR/USDT) and a **USD-margined perpetual** contract, giving access to funding, open interest, and liquidation data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** and effectively the reference market for any derivatives-based approach. With a sub-$15M cap and thin (~$2M) 24h spot volume, order books are shallow: available leverage is capped and tightens further in stress, so realistic position sizing must assume meaningful slippage and reduced max leverage. Concentration on a single perp venue means funding, OI, and liquidation signals all originate from Binance — execution should lean on limit/VWAP-style entries and scaled sizing rather than large market orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance USD-M perp lets a delta-neutral spot-vs-perp position collect funding when the small-cap perp trades at a persistent premium/discount.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with price filters out low-conviction moves on a thin, easily-spoofed CELR book.
+- [[liquidation-cascade-fade]] — low liquidity and leverage clustering make CELR prone to sharp liquidation flushes that overshoot and mean-revert, offering fade entries.
+- [[rsi-mean-reversion]] — the deeply drawn-down, range-bound micro-cap frequently prints oversold/overbought extremes that snap back, suiting oscillator reversion.
+- [[breakout-and-retest]] — narrative or Binance-listing-driven volume spikes produce clean breakouts from long bases; retest entries manage the false-breakout risk of a low-float token.
+- [[narrative-trading]] — as a cross-chain / bridge (interoperability) infrastructure token, CELR re-rates in bursts on interop and L2 narratives rather than steady trends.
+
+### Volatility & regime character
+
+CELR is a **small/micro-cap infrastructure token** (cross-chain messaging / bridging) with high beta to BTC and ETH and to broader alt risk-on/risk-off swings. Sitting ~99% below its 2021 ATH, it behaves reflexively: long stretches of illiquid drift punctuated by sharp, sentiment-driven spikes. It is not a memecoin, but its low float and thin liquidity give it memecoin-like reflexivity on the upside. Absent an idiosyncratic catalyst, it largely tracks ETH-ecosystem and interoperability-sector beta.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — thin spot volume and Binance as the sole meaningful leveraged venue amplify slippage and single-venue outage/delisting risk.
+- **Emissions/supply overhang** — circulating supply is ~57% of a 10B max; the remaining unissued supply is a structural sell-pressure risk.
+- **Narrative dependence** — price is driven by episodic interop/bridge narratives; outside catalysts, liquidity and interest fade.
+- **Stale-data / relevance risk** — the asset drifts in and out of the CoinGecko top 1000, so cached figures can be stale and listing status can change.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CELRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CELRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CELR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CELR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CELRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CELRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CELR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, gamefi, nft]
+tags: [crypto, gamefi, nft, altcoins]
 aliases: ["BEAM", "BEAMX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://onbeam.com"
-related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]"]
+related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]", "[[binance]]", "[[breakout-and-retest]]", "[[narrative-trading]]"]
 founded: 2019
 ---
 
@@ -139,6 +139,54 @@ The investment narrative is leveraged to two cyclical themes: (1) the broad **[[
 | **Discord** | [https://discord.gg/beamgamers](https://discord.gg/beamgamers) |
 | **GitHub** | [Merit-Circle](https://github.com/Merit-Circle/) |
 | **Docs** | [https://docs.onbeam.com](https://docs.onbeam.com) |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BEAM is tradable on **Binance SPOT only** among the venues relevant to systematic trading — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation-driven strategies do **not** apply. With execution concentrated on a single spot book and thin daily turnover relative to the float, position sizing must stay small: large market orders will move the price, so scale in and out with limit orders, favor liquid hours, and treat any DEX legs as secondary given meaningful slippage beyond modest size. The absence of a deep perp market also means directional exposure is effectively long-only (or flat) — there is no cheap way to short or hedge BEAM.
+
+### Applicable strategies
+
+- [[breakout-and-retest]] — after ~97% drawdown near all-time lows, base-and-breakout setups off a confirmed retest give an objective long trigger without needing leverage.
+- [[donchian-channel-breakout]] — channel breakouts capture the sharp, gap-prone expansions typical of thin small-cap gaming tokens while keeping entries rule-based.
+- [[dca-strategy]] — for a spot-only, long-only high-beta call option on Web3 gaming, staggered accumulation smooths entry across a volatile, illiquid tape.
+- [[narrative-trading]] — BEAM is leveraged to the GameFi / Avalanche-L1 cycle, so positioning around gaming-narrative rotation is a primary driver.
+- [[atr-trailing-stop]] — volatility-scaled trailing stops manage the wide swings and downside gap risk of a spot-primary micro-cap.
+- [[range-trading]] — during bear-phase consolidation near the all-time low, fading a defined range suits an asset with no clear trend and no shorting venue.
+
+### Volatility & regime character
+
+BEAM is a **small-cap, high-beta GameFi / gaming-L1 infrastructure token** (not a memecoin, though it shares memecoin-like reflexivity in thin conditions). It is strongly correlated to broad crypto risk appetite (BTC/ETH beta) and doubly cyclical via the GameFi and Avalanche-subnet/L1 narratives — among the first sold in risk-off and last to recover. Expect large percentage swings on light volume, sharp gap moves, and long trend-less stretches punctuated by narrative-driven spikes.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin daily volume and a single primary spot venue mean exits in size are costly and gap risk is high.
+- **No perp / long-only** — no liquid perpetual market, so there is no efficient way to short or hedge; downside is managed only by trimming spot.
+- **Unlocks / emissions** — high MC/FDV limits dilution, but remaining team/treasury/ecosystem allocations can still add sell pressure into thin demand.
+- **Narrative dependence** — value rests on the GameFi cycle and third-party studios shipping playable games; if traction stalls, fee demand for BEAM evaporates.
+- **Regulatory** — gaming/NFT tokens face evolving regulatory treatment of in-game assets and token distributions across jurisdictions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BEAMUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BEAMUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BEAMUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BEAMUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

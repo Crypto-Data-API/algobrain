@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["PLUME", "Plume Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://plume.org/"
-related: ["[[centrifuge-2]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[real-world-assets]]"]
+related: ["[[centrifuge-2]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[real-world-assets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Plume
@@ -137,6 +137,57 @@ The thesis: tokenized [[real-world-assets|real-world assets]] (treasuries, credi
 - **Adoption risk:** RWAfi is early; durable tokenized-asset volume and institutional integrations are still being proven, and incumbents/competitors are well funded.
 - **Bear-market beta:** with Fear & Greed at ~23 (extreme fear) and an established bear-market regime, micro-cap L1s like PLUME carry elevated downside and liquidity risk.
 - **Volatility / liquidity:** ~$64M market cap and ~$5.9M daily volume make PLUME a small-cap, high-volatility asset prone to sharp moves and slippage.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PLUME is tradable on [[binance|Binance]] — both **spot** (PLUME/USDT) and a **USD-margined perpetual**, which surfaces [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **NOT listed on [[hyperliquid|Hyperliquid]]**, so Binance is the primary leveraged venue and the canonical source of derivatives signals for this token. With a ~$64M cap and small daily turnover, order books are thin: perp availability concentrated on a single major venue means funding and OI can be dominated by a handful of positions, liquidation wicks are sharp, and slippage scales quickly with size. Size conservatively, prefer limit/VWAP-style entries, and treat Binance funding/OI as the single reference series rather than an aggregate cross-venue read.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp lets a delta-neutral spot-long/perp-short harvest PLUME funding when the RWAfi narrative pushes perp bids into persistent positive carry.
+- [[cash-and-carry]] — pair Binance PLUME/USDT spot against the USD-M perp to lock basis, the cleanest neutral trade given liquidity sits on one exchange.
+- [[crowded-long-funding-fade]] — RWA-narrative chasing can crowd longs into stretched positive funding on a thin book; fade the overheated side into mean reversion.
+- [[liquidation-cascade-fade]] — concentrated Binance OI on a micro-cap makes forced-liquidation wicks common; fade capitulation flushes back toward prior value.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm that a PLUME breakout is backed by real leveraged participation rather than a low-liquidity spot pop.
+- [[token-unlock-supply-event]] — ~42% of supply still locked means scheduled vesting/unlocks are recurring, tradable supply catalysts to position around.
+
+### Volatility & regime character
+
+Small-cap (rank ~372) infra/[[real-world-assets|RWA]] L1 with high realized volatility and elevated BTC/ETH beta — in risk-off tapes it sells off harder than large caps, while the RWAfi narrative can drive sharp idiosyncratic outperformance (recently a relative-strength leader in an extreme-fear regime). Reflexivity is narrative-driven rather than pure-memecoin, but thin liquidity amplifies moves in both directions. Expect regime-dependent behavior: trend/breakout tools in narrative-on phases, mean-reversion/fade tools in choppy low-liquidity phases.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged trading and derivatives signals concentrate on Binance; a single-venue book means thin depth, gap risk, and funding/OI that a few actors can skew.
+- **Unlocks/emissions:** ~42% of supply not yet circulating — vesting cliffs are a durable overhang despite the fixed 10B cap.
+- **Narrative dependence:** valuation rests on the RWAfi thesis; narrative rotation can drain flow and liquidity quickly.
+- **Regulatory:** RWA tokenization is acutely exposed to securities-law and jurisdictional risk, which can impair the core use case and, by extension, tradable liquidity.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PLUMEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PLUMEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=PLUME` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=PLUME` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PLUMEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=PLUMEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=PLUME"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

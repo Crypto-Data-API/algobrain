@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["IOST", "IOStoken", "Internet of Services Token"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "http://iost.io/"
-related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # IOST
@@ -235,6 +235,57 @@ Potential catalysts (each speculative): a credible mainnet/protocol upgrade or r
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+IOST is tradable on **Binance** — both **spot** (IOST/USDT) and a **USD-margined perpetual**, which exposes funding rates, open interest, and liquidation data. It is **NOT** listed on Hyperliquid, so **Binance is the primary leveraged venue** for the token. Because leveraged price discovery is concentrated on a single major venue (with secondary perp/spot listings on Bitget, KuCoin, and Korean spot via Upbit), execution and sizing should treat Binance funding/OI as the reference signal. With a sub-$30M cap and roughly $5M daily volume, the perp is thin relative to large-cap contracts: available leverage tiers are lower and liquidation-driven wicks are exaggerated, so position sizing must assume material slippage on larger orders and gap risk on modest flow. The venue concentration also means a change in Binance derivatives status (leverage caps, delistings) would meaningfully alter tradability.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the small, single-venue IOST perp lets a spot-long/perp-short setup collect funding when the crowded-retail long bias pushes funding positive.
+- [[crowded-long-funding-fade]] — high-beta micro-cap retail longs (notably Korean flow) periodically over-crowd the Binance perp; fading persistently positive funding is a repeatable edge.
+- [[liquidation-cascade-fade]] — thin OI and low liquidity mean forced liquidations produce outsized wicks; fading exhaustion after a cascade targets the mean-reversion rebound.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price direction filters low-conviction chop from genuine leveraged trend legs in a usage-light token.
+- [[rsi-mean-reversion]] — in the current range-bound Established Bear regime, oscillator extremes on IOST tend to snap back given the absence of fundamental trend drivers.
+- [[breakout-and-retest]] — volume spikes (often Upbit/KRW-led) precede sharp moves, so trading confirmed breakouts with a retest entry captures the reflexive small-cap thrust.
+
+### Volatility & regime character
+
+IOST is a **micro-cap, legacy high-throughput L1** that trades as a **high-beta proxy on overall crypto risk appetite** rather than on its own fundamentals. It has strong positive correlation to [[btc-bitcoin|BTC]]/[[ethereum|ETH]] direction and amplifies broad-market moves in both directions because of thin order books. It carries a notable Korean-retail (Upbit/KRW) flow component that can decouple it briefly from global tape. Realized volatility is elevated relative to large caps, and rallies are typically sharp, liquidity-driven, and non-durable absent a fundamental catalyst.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — sub-$30M cap, ~$5M daily volume, and leveraged discovery concentrated on Binance; exits can be slippage-heavy and price can gap on modest flow.
+- **Emissions / dilution** — max supply (90B IOST) exceeds circulating supply, leaving residual future dilution.
+- **Narrative dependence** — no large, sticky fee-generating dApp base; price rests on speculative/beta demand and periodic alt-L1 rotation rather than on-chain usage.
+- **Beta / regime risk** — in an Established Bear with Extreme Fear, a usage-light micro-cap can lose most of its value with little warning; bounces are frequently unsustainable.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=IOSTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=IOSTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=IOST` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=IOST` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=IOSTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=IOSTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=IOST"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, machine-learning]
+tags: [crypto, defi, machine-learning, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["NMR"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://numer.ai/"
-related: ["[[ai-trading]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[machine-learning]]", "[[uniswap]]"]
+related: ["[[ai-trading]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[machine-learning]]", "[[uniswap]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Numeraire
@@ -265,6 +265,56 @@ NMR is the **narrowest and oldest** of the AI/data tokens: a single fund's predi
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NMR is tradable on [[binance|Binance]] as **spot (NMR/USDT)** and as a **USD-margined perpetual**, so it carries the full derivatives toolkit: [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]]. It is **NOT listed on [[hyperliquid|Hyperliquid]]** — Binance is the primary (effectively sole major) leveraged venue. This concentration matters: perp depth and OI are thin relative to majors, so leverage is available but crowded positioning shows up quickly in funding and liquidation prints. With a small free float and moderate turnover, size perp entries conservatively — a single Binance venue means limited routing options, wider slippage on large clips, and elevated cascade risk when leveraged flow unwinds. Spot execution can lean on Binance plus [[uniswap|Uniswap]] on-chain routes, but leveraged/basis structures depend on Binance perp liquidity.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin single-venue NMR perp can push funding to extremes; harvest the premium by holding the paid side (spot-hedged) while it persists.
+- [[cash-and-carry]] — Binance spot vs USD-M perp lets you lock basis: long spot NMR, short the perp when the perp trades rich into AI-narrative pops.
+- [[crowded-long-funding-fade]] — narrative-driven AI/quant rallies crowd longs on the lone perp venue; fade over-positive funding as an exhaustion tell.
+- [[liquidation-cascade-fade]] — small float plus concentrated Binance leverage makes NMR prone to sharp forced-selling flushes; fade capitulation wicks toward mean.
+- [[oi-confirmed-trend]] — use Binance OI alongside price to separate genuine narrative breakouts from thin, unbacked squeezes.
+- [[breakout-and-retest]] — low free float means clean momentum breaks on AI-theme catalysts; trade the retest to filter false starts.
+
+### Volatility & regime character
+
+Small-cap (rank ~339) DeFi/AI-quant infra token with high idiosyncratic volatility. A ~7M-token free float makes price reflexive to concentrated flow, and its bid carries a large **AI/quant narrative premium** that compresses fast when the theme rotates. NMR is broadly BTC/ETH-correlated in risk-on/risk-off swings but decouples on Numerai-specific tournament and AI-narrative catalysts, giving it periodic relative strength (and sharp mean-reversion) versus the generic small-cap cohort.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading is effectively Binance-only (no Hyperliquid) — single-venue funding/liquidation risk and limited execution redundancy.
+- **Liquidity / small float:** ~7M circulating supply and moderate turnover mean thin perp depth, slippage on size, and cascade-prone forced flows.
+- **Emissions/burn overhang:** MC/FDV ~0.66 with staking emissions offset by burns — supply drift is modest but two-sided and tournament-dependent.
+- **Narrative dependence:** demand is niche (tournament staking + AI premium); rallies can unwind quickly when AI/quant sentiment rotates.
+- **Single-protocol dependency:** token value is tied to the health of one hedge fund/tournament — idiosyncratic fundamental risk on top of market beta.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=NMRUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=NMRUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=NMR` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=NMR` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=NMRUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=NMRUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=NMR"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, leverage, liquidity]
+tags: [altcoins, crypto, defi, leverage, liquidity, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["KMNO", "Kamino Finance"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kamino.com/"
-related: ["[[crypto-markets]]", "[[defi-lending]]", "[[defi]]", "[[jupiter-exchange-solana]]", "[[liquid-staking]]", "[[orca]]", "[[raydium]]", "[[solana]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[defi-lending]]", "[[defi]]", "[[jupiter-exchange-solana]]", "[[liquid-staking]]", "[[orca]]", "[[raydium]]", "[[solana]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Kamino
@@ -269,6 +269,55 @@ Within Solana DeFi, Kamino's edge is **product breadth** (it bundles vaults, len
 - **No exploit reported** for Kamino through mid-2026 in available sources. KMNO's token price remains far below its 2024 ATH despite protocol TVL growth, reflecting the broader gap between Solana DeFi usage and governance-token valuations.
 
 > *Earlier notable events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+KMNO is tradable on [[binance|Binance]] — both **spot** (KMNO/USDT) and a **USD-margined perpetual**, which exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] data. It is **NOT listed on [[hyperliquid|Hyperliquid]]**. Binance is the primary leveraged venue, so directional leverage, funding-based carry, and liquidation-driven setups all route through a single perp order book. This venue concentration means perp depth and funding signals are Binance-centric; with a sub-$100M cap and thin daily turnover, leveraged size must be scaled down to avoid slippage and self-inflicted liquidation cascades. Size positions conservatively and treat the Binance perp as the reference for OI/funding reads.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect KMNO perp funding when the Binance rate is persistently positive/negative, sized small given thin depth.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when funding spikes positive during Solana-DeFi risk-on bursts.
+- [[cash-and-carry]] — long spot KMNO / short the Binance perp to capture basis when funding pays, hedging directional risk on a high-dilution token.
+- [[liquidation-cascade-fade]] — fade forced-liquidation flushes on the single Binance perp, where cascades in a thin book overshoot fair value.
+- [[oi-confirmed-trend]] — require rising open interest to confirm KMNO breakouts, filtering low-conviction moves in a low-cap name.
+- [[breakout-and-retest]] — trade breakouts from KMNO's compressed near-ATL range, entering on the retest to manage the high slippage risk.
+
+### Volatility & regime character
+
+KMNO is a **small-cap Solana [[defi|DeFi]] governance/infra token** with **high beta to Solana ecosystem sentiment** — it leads on SOL risk-on and lags on risk-off, amplified by its low market cap. It is not a memecoin but exhibits reflexive drawdowns typical of DeFi governance tokens (~-92% from ATH, trading near all-time lows). Correlation to BTC/ETH is real but secondary to its SOL-DeFi beta; expect sharp moves on modest volume and elevated realized volatility around emission/reward-season events.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** Binance is effectively the only leveraged venue; a sub-$100M cap with thin daily turnover means large orders slip and perp liquidations overshoot.
+- **Dilution/emissions:** ~51% of max supply is still locked, with multi-season KMNO reward emissions adding persistent sell-side pressure — a structural headwind for leveraged longs.
+- **Narrative dependence:** Price is tied to Solana-DeFi TVL and sentiment; the usage-vs-token-valuation gap can persist regardless of protocol growth.
+- **Smart-contract/oracle risk:** Protocol-level exploit or oracle failure would hit the token directly, independent of market structure.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=KMNOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=KMNOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=KMNO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=KMNO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=KMNOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=KMNOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=KMNO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

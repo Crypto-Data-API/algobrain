@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, dex, solana, yield-farming]
+tags: [crypto, defi, dex, solana, yield-farming, altcoins]
 aliases: ["RAY", "Raydium DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://raydium.io/"
-related: ["[[crypto-markets]]", "[[jupiter-exchange-solana]]", "[[kamino]]", "[[orca]]", "[[solana]]", "[[uniswap]]"]
+related: ["[[crypto-markets]]", "[[jupiter-exchange-solana]]", "[[kamino]]", "[[orca]]", "[[solana]]", "[[uniswap]]", "[[binance]]", "[[crypto-beta-rotation]]", "[[narrative-trading]]"]
 ---
 
 # Raydium
@@ -257,6 +257,53 @@ Jupiter sits *above* Raydium in the stack (it aggregates Raydium's liquidity), s
 - **2025** — **LaunchLab** rolls out; 12,000+ tokens launched, driving 2025-2026 growth and positioning Raydium in the Solana launch stack alongside Pump.fun.
 - **Q4 2025 / early 2026** — ~$1.0-1.1B TVL, ~$89.5B quarterly volume, 50%+ (some sources ~65%) of Solana DEX volume; CLMM ~94.8% vs OpenBook ~2.76% of volume.
 - **June 2026** — RAY ~$0.62 (rank #192), modestly green on 24h/7d despite an "Established Bear Market" (Fear & Greed 23).
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. Practically, this means RAY exposure is expressed by holding spot inventory rather than levered longs/shorts: there is no cheap way to short RAY or to lever into it, so directional conviction has to be sized in cash terms and position sizing should account for that one-sided access. With a single primary spot venue (plus a handful of secondary CEX/DEX listings) and modest daily turnover (~9.5% of market cap in the snapshot), order books are thin relative to majors — large orders should be worked with limit/[[vwap-trading|VWAP]]-style execution to limit slippage, and stops should assume gappy fills during Solana-driven volume spikes.
+
+### Applicable strategies
+
+- [[crypto-beta-rotation]] — RAY trades as high-beta [[solana|SOL]] proxy (roughly 1.5-2x SOL beta), so rotate into it when Solana/DEX-volume momentum leads and out when SOL weakens.
+- [[narrative-trading]] — price is levered to Solana memecoin/launch narratives (LaunchLab, Pump.fun routing, DEX-volume share); trade the narrative cycle, not just the chart.
+- [[momentum-investing]] — RAY tends to trend hard on Solana catalysts; ride confirmed up-legs while volume expands and exit as momentum fades.
+- [[breakout-and-retest]] — thin-book spot moves often break prior ranges on volume surges; entering on a breakout that holds a retest filters false starts.
+- [[dca-strategy]] — for spot-primary accumulation of a deeply drawn-down (-96% from ATH) but dilution-heavy token, staged cost-averaging beats trying to time a single entry.
+- [[atr-trailing-stop]] — with no shorting available and violent Solana-driven swings, an ATR-based trailing stop protects spot gains without forcing a fixed target.
+
+### Volatility & regime character
+
+Small/mid-cap DeFi infrastructure token (rank ~#176-192 range) with high realized volatility. RAY behaves as a leveraged claim on Solana on-chain activity: strongly correlated to [[solana|SOL]] (approx 1.5-2x beta) and, through it, to broad BTC/ETH crypto-beta, but with an extra reflexive kicker tied to Solana memecoin/launch manias (Bonk, WIF, POPCAT-style seasons). It is a real cash-flow-bearing DEX token rather than a pure memecoin, but its upside torque and drawdowns resemble a high-beta altcoin. Regime tends to flip between quiet range-bound drift in bear tape and sharp trending expansions when Solana volume/launch activity surges.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — spot-primary with Binance as the main deep book and thin secondary liquidity; no liquid perp means limited hedging/shorting and higher slippage on size.
+- **Dilution/emissions** — only ~48.5% of the 555M max supply circulates (MC/FDV ~0.48); ongoing emissions are a structural price headwind unless volume/revenue outpaces them.
+- **Narrative dependence** — much of the bull case rests on Solana memecoin/launch cycles and DEX-volume share; narrative reversal or share loss to Orca/Meteora/Lifinity or a Jupiter routing shift can compress the token quickly.
+- **Single-chain concentration** — Raydium operates exclusively on Solana, so any Solana outage, exploit, or regulatory action on Solana DeFi is an outsized, potentially existential risk to RAY.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RAYUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RAYUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RAYUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=RAYUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

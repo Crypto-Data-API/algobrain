@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["MANTRA", "OM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://mantrachain.io/"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[real-world-assets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[momentum-investing]]"]
 ---
 
 # MANTRA
@@ -115,6 +115,58 @@ MANTRA's direct narrative peers are other [[real-world-assets|RWA]]-focused chai
 - **Bear-market regime** — extreme fear (F&G = 23) and an "Established Bear Market" weigh on high-beta alts.
 - **Regulatory/execution risk** — the compliant-RWA thesis depends on actual institutional adoption and continued licensing.
 - **Reputational risk** — lingering distrust following the 2025 crash.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+OM is tradable on [[binance]] as both spot (OM/USDT) and a USD-margined [[perpetual-futures|perpetual]], which exposes [[funding-rate|funding]], [[open-interest|open interest]] and [[liquidations|liquidation]] data. It is **NOT** listed on Hyperliquid, so Binance is the primary leveraged venue and the reference tape for perp-based signals. Because leveraged flow, funding and liquidation depth are concentrated on a single exchange, execution and hedging depend on Binance-specific liquidity — there is no meaningful cross-venue perp to spread against or fall back on if Binance depth thins. Combined with a small ~$36M market cap and modest ~$5M daily volume, the order book is thin and gap-prone: size positions small, expect slippage and wide funding swings, and treat perp OI as capable of unwinding violently (as the April 2025 crash demonstrated).
+
+### Applicable strategies
+
+- [[liquidation-cascade-fade]] — OM's defining event was a liquidation cascade; the token's thin off-hours book makes forced-liquidation flushes on Binance perps recurring fade opportunities into washed-out levels.
+- [[post-liquidation-rebound]] — sharp liquidation-driven wicks on a low-liquidity name frequently overshoot, offering mean-reverting rebound entries once forced selling exhausts.
+- [[funding-rate-harvest]] — volatile funding on a small-cap RWA perp lets a spot-long / perp-short book collect funding when leveraged positioning skews one way.
+- [[crowded-long-funding-fade]] — narrative-driven RWA rallies can crowd longs and push funding rich; fading persistently positive funding captures the reversion on a reflexive token.
+- [[oi-price-exhaustion]] — rising open interest into a stalling price on OM's thin tape flags exhausted leverage prone to a cascade, a high-signal setup here.
+- [[news-trading]] — OM is heavily narrative/event-driven (VARA licensing, RWA milestones, crash-anniversary headlines), making scheduled and breaking catalysts tradable.
+
+### Volatility & regime character
+
+Small-cap (rank ~560), high-beta [[layer-1]] / [[real-world-assets|RWA]] infrastructure token with pronounced reflexivity — its history includes a ~90% single-day collapse, so realized volatility and tail risk run well above large-caps. Directionally correlated to BTC/ETH risk-on/risk-off regimes but with a much larger amplitude, and its price is unusually sensitive to idiosyncratic RWA-narrative and credibility news. Behaves like a distressed, sentiment-driven small-cap rather than a stable infra token.
+
+### Risk flags
+
+- **Venue concentration** — leveraged liquidity is centralized on Binance; no Hyperliquid or deep alternative perp venue to diversify execution.
+- **Liquidity/gap risk** — thin book and low absolute depth make it prone to slippage and violent liquidation cascades, especially in low-liquidity hours.
+- **Supply overhang** — only ~53% of a 10B max supply circulates; future emissions/unlocks are a persistent dilution and supply-event risk.
+- **Narrative dependence** — valuation hinges on the unproven regulated-RWA thesis and on rebuilding post-crash credibility; sentiment can reverse abruptly.
+- **Reputational/regulatory** — lingering distrust from the 2025 crash plus dependence on continued licensing (Dubai VARA) add event risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=MANTRAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=MANTRAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=MANTRA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=MANTRA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=MANTRAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=MANTRAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=MANTRA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

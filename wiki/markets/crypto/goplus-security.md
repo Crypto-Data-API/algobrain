@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, infrastructure]
+tags: [crypto, defi, infrastructure, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["GPS", "GoPlus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gopluslabs.io/"
-related: ["[[base]]", "[[crypto-markets]]", "[[oracle-manipulation]]", "[[smart-contracts]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[oracle-manipulation]]", "[[smart-contracts]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]"]
 ---
 
 # GoPlus Security
@@ -261,6 +261,55 @@ GoPlus is revolutionizing Web3 user security through its permissionless and user
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+GPS is tradable on [[binance|Binance]] — **spot (GPS/USDT)** plus a **USD-margined perpetual** (GPS-USDT perp) that carries funding, open interest, and liquidation data. There is **no [[hyperliquid|Hyperliquid]] GPS-PERP listing**, so Binance is the primary leveraged venue and the reference point for funding and OI. With liquidity concentrated on a single dominant derivatives venue against a small-cap (~$40M) spot market, order books and perp depth are thin relative to majors: slippage rises quickly on size, funding can dislocate around exchange-program and unlock events, and cascades on Binance drive most of GPS's forced-liquidation flow. Practically, this means smaller position sizing, wider stops, and staged entries/exits; leverage should be modest because a single-venue liquidity profile makes gap and funding risk outsized. Verify live funding/OI before taking leverage.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the single Binance GPS perp when the rate is persistently one-sided during narrative-driven runs, sized small for thin OI.
+- [[crowded-long-funding-fade]] — after event-driven pumps (Binance Alpha/HODLer catalysts), heavily positive funding with crowded longs sets up a fade back toward spot.
+- [[liquidation-cascade-fade]] — thin single-venue depth makes GPS prone to over-extended liquidation wicks; fade the flush and cover into mean reversion.
+- [[oi-confirmed-trend]] — use rising Binance open interest alongside price to confirm that a GPS move is real leverage-driven trend rather than a low-conviction drift.
+- [[token-unlock-supply-event]] — with ~56% of supply still to unlock (MC/FDV ~0.44), scheduled emissions/unlocks are tradable supply catalysts that pressure price and swing funding.
+- [[narrative-trading]] — GPS trades on the on-chain-security/"safety layer" narrative, so position around adoption headlines and Web3-security news flow.
+
+### Volatility & regime character
+
+GPS is a **small-cap DeFi/security-infrastructure token** with high beta to broad crypto risk sentiment and elevated idiosyncratic volatility (double-digit weekly swings are common, as the recent +27% week shows). It is loosely correlated to BTC/ETH beta on risk-on/risk-off tape but driven more by its own adoption narrative and Binance-ecosystem catalysts. Reflexivity is meaningful: micro-cap relative strength builds and reverses fast, and moves are amplified by thin single-venue liquidity rather than dampened by deep order books.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged trading depends almost entirely on Binance; no Hyperliquid alternative means single-venue funding, OI, and cascade risk.
+- **Unlocks/emissions:** ~56% of max supply (~5.6B GPS) is still to enter via team, investor, ecosystem, and emission unlocks — persistent sell-side overhang and event risk.
+- **Narrative dependence:** value is tied to adoption of GoPlus security services; the "safety layer" narrative can fade and security data can be offered free, pressuring monetization.
+- **Small-cap fragility:** thin depth and event-sensitive derivatives make GPS prone to abrupt drawdowns and funding dislocations, especially in an extreme-fear/bear regime.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GPSUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GPSUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=GPS` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=GPS` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GPSUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=GPSUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=GPS"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

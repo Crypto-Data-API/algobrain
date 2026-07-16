@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["EDU", "EDU Chain", "Open Campus"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.opencampus.xyz/"
-related: ["[[bnb-chain]]", "[[bnb]]", "[[crypto-markets]]", "[[tokenization]]"]
+related: ["[[bnb-chain]]", "[[bnb]]", "[[crypto-markets]]", "[[tokenization]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Open Campus
@@ -231,6 +231,56 @@ It will power all educational activities within the EDU Foundation, that include
 - **Use the better-than-peers liquidity.** Tier-1 listings (Binance/Kraken/KuCoin) mean tighter execution than most micro-caps — but size still matters; use limit orders and watch for Binance/Korean retail-driven spikes.
 - **Invalidation / risk control.** The 2026-04 ATL ($0.0430) is the structural floor; a decisive break on volume signals continuation. No reliable hedge via thin perps — manage by size.
 - **What would change the thesis** — demonstrable EDU Chain usage (real dApps, credentials, gas demand), a marquee partnership, and a market-wide risk-on rotation back into narrative tokens. None present as of 2026-06-22.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+EDU is tradable on [[binance]] — **spot (EDU/USDT)** plus a **USD-margined perpetual** with the full derivatives stack (funding, open interest, liquidations). It is **NOT listed on Hyperliquid**, so Binance is the primary — effectively the only tier-1 — leveraged venue for EDU. This concentration matters: with a ~$23M cap and modest perp OI, the funding print, liquidation map, and order book on Binance's USD-M perp *are* the leverage picture, and there is no deep second venue to arbitrage against or fall back on when Binance liquidity thins. Spot rails are better than most micro-caps (Binance/Kraken/KuCoin), but leveraged execution and sizing should assume Binance-only depth: use limit orders, keep clip sizes small relative to book, and expect leverage-amplified wicks on Binance/Korean retail flow rather than smooth fills.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect the Binance USD-M perp funding on a delta-neutral (spot-long / perp-short) book when narrative-driven long crowding pushes funding positive; the single-venue perp keeps the carry legible.
+- [[cash-and-carry]] — spot on Binance/Kraken/KuCoin hedged against the Binance perp captures any positive basis without directional EDU exposure, appropriate for a thin sentiment token.
+- [[liquidation-cascade-fade]] — a low-OI, high-beta micro-cap over-shoots on forced Binance liquidations; fading capitulation wicks back toward the mean is a repeatable edge when leverage flushes.
+- [[crowded-long-funding-fade]] — EDU rips on Animoca/Binance narrative catalysts that pull in leveraged longs; elevated positive funding plus stretched price flags a crowded-long fade in the prevailing bear.
+- [[range-mean-reversion]] — absent a fresh catalyst EDU chops between the April-2026 ATL floor and prior resistance; mean-reverting the range fits its sentiment-proxy, non-trending character.
+- [[narrative-trading]] — EDU trades on the education/EdTech narrative and sponsor headlines far more than on-chain metrics, so positioning around narrative rotation and Binance/Animoca catalysts is the core discretionary play.
+
+### Volatility & regime character
+
+Micro-cap (rank ~736, ~$23M), high-beta **narrative/EdTech token** with an education-L3 (EDU Chain) overlay. It behaves as a sentiment proxy rather than a fundamentals-driven asset: directionally correlated to BTC/ETH risk appetite but with amplified downside in an Established Bear (F&G 21), evidenced by the ~-55% month into its April-2026 ATL. Reflexive to Binance/Animoca ecosystem catalysts and Korean retail flow; rallies into the bear tend to be mean-reversion to fade rather than durable trends. Perp OI is modest, so leverage-driven wicks and liquidation flushes dominate short-term volatility.
+
+### Risk flags
+
+- **Venue concentration** — Binance is the sole tier-1 leveraged venue (no Hyperliquid); a Binance listing/liquidity change or funding shock has outsized impact with no perp fallback.
+- **Supply overhang / emissions** — MC/FDV ≈ 0.74 with unlimited max supply means ongoing unlock/emission dilution against a thin float.
+- **Narrative dependence** — value hinges on the unproven thesis that education activity migrates on-chain; usage-light, so price is driven by sentiment and sponsor headlines.
+- **Liquidity fragmentation** — multichain issuance (BSC/Ethereum/Arbitrum) splits on-chain liquidity; combined with a small cap, execution slips fast on size.
+- **Sponsor concentration** — heavy reliance on Animoca/Binance ecosystem support; a shift in sponsor priority is a material downside catalyst.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=EDUUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=EDUUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=EDU` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=EDU` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=EDUUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=EDUUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=EDU"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

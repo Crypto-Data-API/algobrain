@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto]
+tags: [ai-trading, altcoins, crypto, defi]
 aliases: ["BrainDAO", "Everipedia", "IQ", "IQ.wiki"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://iq.wiki/"
-related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[frax-share]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[frax-share]]", "[[binance]]", "[[narrative-trading]]", "[[dca-strategy]]"]
 ---
 
 # IQ (IQ.wiki / Everipedia)
@@ -261,6 +261,53 @@ IQ trades on a **two-narrative split**, and recognizing which is driving price m
 - (Source: [[coingecko-top-1000-2026-04-09]]) — original snapshot data
 - Market data 2026-06-21 via cryptodataapi.com / CoinGecko
 - General market knowledge; no additional specific wiki source ingested yet.
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With no deep perp market, there is no funding/OI signal and no easy way to express short conviction; positioning is entirely cash/spot and inventory-based. Practically this means: enter and exit with limit orders on the deepest book (Binance IQ/USDT), size to be exitable given a sub-cent unit price and low dollar depth, and expect slippage to scale sharply with order size. Because leverage is effectively unavailable, risk is controlled through position sizing and stops rather than margin, and any short thesis must be expressed by simply holding less or nothing.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, low-cap dual-narrative token; averaging in over time smooths the sub-cent volatility without needing a perp or leverage.
+- [[narrative-trading]] — IQ price is dominated by the AI-agent (ATP) narrative, so trading the mindshare cycle rather than wiki fundamentals is the core edge.
+- [[momentum-investing]] — as a high-beta small-cap, IQ tends to extend hard once an AI-agent rally begins; riding confirmed spot momentum captures those re-rates.
+- [[breakout-and-retest]] — thin-book behavior produces sharp range breaks; waiting for a breakout to hold on retest filters the many false starts in a low-liquidity name.
+- [[atr-trailing-stop]] — with no leverage and slippage-prone exits, an ATR-based trailing stop lets winners run during narrative pumps while defining downside on the bleed.
+- [[event-driven-trading]] — discrete catalysts (ATP agent launches, Frax integrations, exchange/liquidity expansion) are the tradable triggers for a catalyst-gated spot name.
+
+### Volatility & regime character
+
+Small-cap altcoin (~$21M cap, rank ~#788) with high beta to BTC/ETH risk-on/risk-off and even higher sensitivity to the AI-agent narrative cycle. Behaves as a reflexive narrative/AI-agent token: it can be dormant and drift during Extreme Fear, then spike violently when AI-agent mindshare returns. It is an infra/knowledge-base plus AI-agent token (not a pure memecoin), but its low float and sub-cent price give it memecoin-like reflexivity on the upside. Correlation to majors is directional but IQ's dispersion around them is driven by its own narrative rotation.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-primary with meaningful depth concentrated on a few CEX books; a sub-cent, low-dollar-depth token is slippage-prone and hard to exit at size.
+- **Narrative dependence** — price is heavily tethered to the AI-agent (ATP) narrative; when that narrative fades, base-case is drift/bleed regardless of wiki fundamentals.
+- **Monetization / execution risk** — the knowledge-base leg is structurally hard to monetize and the ATP pivot competes in a crowded field; the thesis depends on real agent-platform usage.
+- **Multi-chain / bridge exposure** — bridged deployments on Polygon and BNB Smart Chain add smart-contract and bridge surface beyond the Ethereum ERC-20.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=IQUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=IQUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=IQUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=IQUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
+
+---
 
 ## See Also
 

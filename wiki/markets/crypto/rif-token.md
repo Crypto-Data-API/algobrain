@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, defi]
+tags: [bitcoin, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["RIF"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://rif.technology/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[rootstock]]", "[[stablecoins]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[rootstock]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Rootstock Infrastructure Framework
@@ -93,6 +93,52 @@ RIF sits in the **Bitcoin DeFi / infrastructure** category. Its narrative is bei
 - **Stablecoin/peg risk** — USDRIF, as a smaller censorship-resistant stablecoin, carries de-peg and reserve risks.
 - **Long-term underperformance** — ~80% below ATH after multiple cycles.
 - **Bear-market backdrop** — broad extreme-fear, established-bear-market conditions cap upside for infrastructure alts.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** RIF is tradable on [[binance]] as both spot (RIF/USDT) and a USD-margined perpetual, so leveraged traders get [[funding-rate]] prints, [[open-interest]] readings, and [[liquidations]] data on the primary venue. RIF is NOT listed on [[hyperliquid]], making Binance the primary — effectively the sole major — leveraged venue. This concentration means execution and sizing should assume single-venue depth: perp liquidity, funding, and OI all reflect Binance flow, so slippage on larger clips is a real constraint and there is no on-chain perp DEX to cross-check or route around. With a ~#212 rank and thin durable demand, size positions to the Binance order book rather than to notional cap, and treat funding/OI extremes as venue-specific rather than market-wide signals.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — a single-venue Binance perp lets a delta-neutral book collect funding when RIF perp trades persistently rich or cheap to spot.
+- [[crowded-long-funding-fade]] — after counter-trend spikes (like the +26% one-day move that fully retraced), crowded longs paying elevated funding on Binance set up mean-reversion fades.
+- [[liquidation-cascade-fade]] — concentrated Binance leverage on a thin small-cap makes forced-liquidation flushes overshoot, offering fades once the cascade exhausts.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price confirms whether a RIF move is real positioning versus a hollow spot squeeze.
+- [[breakout-and-retest]] — RIF's wide intraday ranges and sharp spikes favor waiting for a breakout to retest before committing, filtering the frequent failed counter-trend pops.
+- [[volatility-targeting]] — RIF's reflexive spike-and-retrace behavior argues for scaling exposure inversely to realized volatility rather than fixed sizing.
+
+**Volatility & regime character.** RIF is a small/mid-cap infrastructure/DeFi token (BTCfi / Rootstock ecosystem) with high beta to Bitcoin and broad-market risk sentiment. It exhibits reflexive, memecoin-like spike-and-retrace dynamics on thin durable demand — sharp counter-trend rallies that give back most gains — rather than durable trends. As a Bitcoin-DeFi infrastructure token its narrative rises and falls with the BTCfi thesis and Rootstock adoption, and it tends to underperform in extreme-fear, established-bear regimes.
+
+**Risk flags.**
+- **Venue concentration** — leveraged exposure lives almost entirely on Binance; no Hyperliquid or on-chain perp fallback, so funding/OI/liquidation signals are single-source and venue outages or delistings hit hard.
+- **Liquidity** — mid/small-cap depth means larger orders move price; treat funding and OI extremes as thin-book artifacts, not broad conviction.
+- **Narrative dependence** — value hinges on Rootstock/BTCfi adoption; a niche with modest TVL, vulnerable to narrative rotation.
+- **Reflexivity** — counter-trend spikes in extreme-fear regimes routinely retrace, punishing momentum-chasing longs.
+- **Peg-adjacent risk** — RIF underpins USDRIF; a de-peg or reserve event would spill into RIF sentiment.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RIFUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RIFUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=RIF` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=RIF` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RIFUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=RIFUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=RIF"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

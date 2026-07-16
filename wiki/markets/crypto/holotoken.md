@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, depin]
+tags: [crypto, depin, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["HOT", "Holo Token", "Holochain"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://holo.host/"
-related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Holo
@@ -104,6 +104,58 @@ Holochain pitches an **agent-centric**, scalable alternative to global-consensus
 - **Architectural trade-offs:** the agent-centric/DHT model is technically distinctive but unproven at large scale relative to mainstream smart-contract platforms.
 - **Macro/beta:** high sensitivity to risk sentiment in a bear market currently at extreme fear ([[crypto-fear-and-greed-index|Fear & Greed]] = 23).
 - **Note (mitigant):** unlike the newer tokens here, HOT has ~1.0 MC/FDV, so dilution from unlocks is not a meaningful incremental risk.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HOT is tradable on **[[binance]]** — both spot (HOT/USDT) and a **USD-margined perpetual** contract, exposing live [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **not** listed on [[hyperliquid]], so Binance is the primary leveraged venue and the single most reliable source of derivatives microstructure for HOT. Because leveraged flow is concentrated on one CEX perp, funding and OI readings on Binance effectively define the crowd positioning signal; there is no on-chain-perp cross-check. HOT is a low-unit-price, high-supply name (~178B tokens at sub-cent pricing), so orderbook depth is thin in absolute-dollar terms even when volume looks healthy. That venue concentration argues for sizing to Binance depth, using limit/VWAP-style entries rather than aggressive market fills, and treating funding/OI extremes as a primary rather than confirmatory input for execution.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp with periodic funding lets a delta-neutral spot-vs-perp position collect funding when the HOT perp trades at a persistent premium.
+- [[oi-confirmed-trend]] — with all leverage flow on one Binance perp, rising open interest alongside price is a clean confirmation filter for trend continuation in this low-cap alt.
+- [[liquidation-cascade-fade]] — thin depth plus concentrated leverage makes HOT prone to sharp liquidation flushes that overshoot, offering mean-revert fade setups after cascades.
+- [[crowded-long-funding-fade]] — as a legacy retail-heavy DePIN name, HOT is susceptible to over-crowded longs; sharply positive funding flags an exhausted long side to fade.
+- [[breakout-and-retest]] — HOT spends long stretches in tight low-volatility ranges, so validated range breakouts with a retest give defined-risk momentum entries.
+- [[rsi-mean-reversion]] — the coin's beta-driven, range-bound sub-cent chop suits oscillator-based mean reversion at stretched extremes.
+
+### Volatility & regime character
+
+HOT is a **small-cap DePIN/infrastructure altcoin** (rank ~362) with high beta to BTC/ETH risk sentiment and negligible independent price drivers. It behaves like a legacy long-tail alt: ~99% below its 2021 ATH, prone to sharp beta-driven swings up and dead-money drift down. It is not a memecoin but exhibits similar reflexivity in low-liquidity conditions — moves are amplified by thin depth and concentrated leverage. Direction is dominated by the broad crypto regime rather than Holo-specific catalysts, so correlation to majors is the primary regime variable.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading depends almost entirely on the single Binance USD-M perp; no [[hyperliquid]] or on-chain-perp fallback for hedging or price discovery.
+- **Liquidity/depth:** low absolute-dollar orderbook depth despite reasonable turnover; large orders move price and slippage is material.
+- **Narrative dependence:** valuation rests on the long-unrealized Holo hosting/HoloFuel marketplace; without delivery the token trades on beta and brand tenure, not usage.
+- **Deep-drawdown/dead-money:** ~99% below ATH with weak momentum; trends can stall for extended periods.
+- **Supply mitigant:** MC/FDV ≈ 1.0 means no meaningful unlock/emission overhang — dilution is not an incremental risk here.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HOTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HOTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HOT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HOT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HOTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HOTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HOT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

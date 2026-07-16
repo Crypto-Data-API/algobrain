@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["SCRT", "Secret Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://scrt.network"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[layer-1]]", "[[privacy-coins]]", "[[smart-contracts]]", "[[trusted-execution-environment]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[layer-1]]", "[[privacy-coins]]", "[[smart-contracts]]", "[[trusted-execution-environment]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Secret
@@ -211,6 +211,56 @@ SCRT holders govern Secret Network on-chain via the standard Cosmos governance m
 - **Bear-regime drawdown:** down >99% from its 2021 ATH; survival depends on continued developer activity and ecosystem demand.
 
 > Not investment advice. Figures are point-in-time; verify project, on-chain, and TEE-security claims independently.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SCRT is tradable on [[binance]] — both **spot** (SCRT/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** with [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **not** listed on Hyperliquid, so Binance is the primary — effectively sole — leveraged venue. This concentration means the Binance perp order book and funding print set the reference for all leveraged flow: there is no on-chain perp DEX to arbitrage against or fall back on, and a single-venue outage or delisting would remove leveraged access entirely. Given the ~$20M market cap and thin spot depth, available leverage is modest and liquidity is shallow — position sizing must account for wide effective spreads and slippage on market orders, and execution favors patient limit orders and scaled entries over aggressive size.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on SCRT when the single-venue rate runs persistently positive or negative, delta-hedged against spot.
+- [[cash-and-carry]] — hold SCRT spot against a short perp to capture basis/funding when the curve is in contango, exploiting the one-venue funding skew.
+- [[liquidation-cascade-fade]] — thin books make SCRT prone to sharp, self-reinforcing liquidation wicks on the Binance perp; fade the overshoot after cascades clear.
+- [[range-mean-reversion]] — low-cap SCRT often chops in a range between catalysts; mean-revert the extremes when momentum is absent.
+- [[breakout-and-retest]] — trade confirmed breakouts of consolidation on volume expansion, using the retest for defined risk given whippy low-liquidity price action.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to distinguish real trend continuation from thin-book fake-outs before committing size.
+
+### Volatility & regime character
+
+SCRT is a **small-cap** ($20M-range), high-beta infrastructure/privacy [[layer-1|L1]] token with sharp, reflexive moves driven by low float and thin liquidity rather than memecoin-style hype. It is **highly correlated to BTC/ETH risk regime** — it sells off hard in risk-off/Extreme-Fear conditions and rallies with broad altcoin beta — but layers on idiosyncratic swings tied to privacy-sector narrative and Cosmos-ecosystem flows. Expect large percentage drawdowns and rallies on modest notional volume; realized volatility is elevated and clusters around catalysts.
+
+### Risk flags
+
+- **Venue concentration:** Binance is the only meaningful leveraged venue and a major spot venue; a delisting or outage is an outsized single point of failure — acute for [[privacy-coins]], which face recurring exchange-delisting and regulatory pressure.
+- **Liquidity:** ~$20M cap and thin depth mean large orders move price materially and stops can slip badly during cascades.
+- **Inflationary emissions:** SCRT has no max supply; ongoing issuance dilutes holders and can pressure price absent usage growth.
+- **Narrative dependence:** valuation hinges on the privacy/confidential-compute narrative and TEE-security perception; SGX side-channel disclosures can trigger sentiment-driven repricing.
+- **Regulatory:** as privacy infrastructure, SCRT carries elevated delisting/regulatory risk in jurisdictions hostile to on-chain privacy.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SCRTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SCRTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SCRT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SCRT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SCRTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SCRTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SCRT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "OG Fan Token"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["OG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ogs.gg/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]"]
 ---
 
 # OG Fan Token
@@ -120,6 +120,55 @@ We may be skilled, but the true strength of OG is its people.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+OG is tradable on **Binance** — both spot (OG/USDT) and a **USD-margined perpetual** with funding, open interest, and liquidation data. It is **not listed on Hyperliquid**, so Binance is the primary (effectively sole) leveraged venue. This single-venue concentration means all leveraged flow, funding signals, and liquidation cascades originate from one order book: execution and sizing should account for thin depth relative to majors (sub-$4M 24h volume, ~$13M market cap), where large market orders can move price meaningfully and slippage rises quickly. Cross-exchange arbitrage is limited by the absence of a second deep perp venue, and position sizing should be scaled down versus large-caps to avoid becoming a dominant share of the book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a small-cap fan token perp on Binance can carry persistent funding skews that can be harvested delta-neutral (spot vs perp).
+- [[crowded-long-funding-fade]] — narrative-driven spikes in OG often crowd longs, pushing funding positive and setting up fade entries.
+- [[liquidation-cascade-fade]] — thin single-venue liquidity makes OG prone to sharp liquidation wicks that mean-revert, favoring cascade fades.
+- [[cash-and-carry]] — spot + short perp on Binance captures basis/funding carry when the perp trades rich to spot.
+- [[narrative-trading]] — as a sports/esports fan token, OG price is driven by team results, events, and fan-engagement narratives.
+- [[volatility-breakout]] — low float and event-driven demand produce episodic volatility expansions tradable as breakouts.
+
+### Volatility & regime character
+
+OG is a **small-cap fan token** (rank ~1035, ~$13M market cap) built on Chiliz with a fixed 5M max supply and ~95% circulating. It behaves as a high-beta, reflexive small-cap: illiquidity amplifies moves in both directions, and price is strongly driven by sports/esports narrative and fan-engagement cycles rather than broad DeFi or infra flows. Correlation to BTC/ETH exists during risk-on/risk-off regimes but is loose; idiosyncratic team-event catalysts frequently dominate. Expect wide intraday ranges and low baseline liquidity between catalysts.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — Binance is effectively the only meaningful venue for spot and the sole leveraged venue; a delisting or venue disruption would be severe.
+- **Narrative dependence** — value hinges on esports team performance, fan engagement, and Chiliz/Socios ecosystem health rather than protocol fundamentals.
+- **Thin float & reflexivity** — small market cap and low volume make OG vulnerable to sharp squeezes, liquidation cascades, and slippage on size.
+- **Regulatory** — fan tokens face evolving regulatory scrutiny in some jurisdictions, which can affect listing access and demand.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=OGUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=OGUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=OG` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=OG` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=OGUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=OGUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=OG"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "TROLL"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins, memecoins]
 aliases: ["TROLL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://trololol.io"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[binance]]", "[[momentum-investing]]", "[[meme-coin-cycle]]"]
 ---
 
 # TROLL
@@ -124,6 +124,53 @@ The TROLL token on the Solana network is a meme coin inspired by internet trolli
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With execution concentrated on a single spot venue (plus thin DEX/Orca and secondary CEX pairs), depth is shallow and slippage-prone: size positions to available order-book depth, prefer limit/VWAP-style entries, and expect wide effective spreads during volatility. The absence of a deep perp market means directional exposure is long-biased (no cheap shorting), so risk is managed primarily through position sizing and stops rather than hedges.
+
+### Applicable strategies
+
+- [[momentum-investing]] — TROLL's memecoin reflexivity produces sharp trending impulses (e.g. +245% 1y) that momentum can ride while narrative and volume persist.
+- [[breakout-trading]] — thin liquidity and a wide historical range (ATL $0.0039 to ATH $0.2826) create clean breakout/breakdown levels off consolidation.
+- [[atr-trailing-stop]] — high intraday volatility (24h range spanning ~15%) makes ATR-based trailing exits essential for locking gains and capping drawdown on a spot-only asset.
+- [[dca-strategy]] — for conviction accumulation, staggered buys smooth the extreme volatility and single-venue slippage of a small-cap memecoin.
+- [[volatility-targeting]] — scaling exposure inversely to realized volatility keeps risk bounded given TROLL's erratic swings and shallow depth.
+- [[meme-coin-cycle]] — TROLL is a parody/4chan-themed meme token whose price is driven by attention cycles, aligning with meme-cycle timing frameworks.
+
+### Volatility & regime character
+
+Small-cap (rank ~477) Solana memecoin with high beta and pronounced reflexivity: moves are attention- and flow-driven rather than fundamental, with no intrinsic cash flows. Correlation to BTC/ETH is loose in trends but tends to spike during broad risk-off deleveraging, when small-cap memes typically underperform. Expect fat-tailed returns, sharp mean-reverting spikes, and regime shifts tied to social/narrative momentum rather than macro data.
+
+### Risk flags
+
+- Liquidity/venue concentration: spot-only with thin depth; single-venue execution risk and elevated slippage on size.
+- Narrative dependence: value is purely meme/attention-driven ("no intrinsic value"), so sentiment reversals can be abrupt and severe.
+- Supply/emissions: near-fully-circulating (MC/FDV ~1.00) limits unlock overhang, but concentrated holders on-chain remain a distribution risk.
+- Drawdown risk: currently ~84% below ATH, illustrating the deep, durable drawdowns characteristic of the category.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TROLLUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TROLLUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TROLLUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=TROLLUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

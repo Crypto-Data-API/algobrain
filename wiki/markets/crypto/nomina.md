@@ -3,13 +3,13 @@ title: "Nomina"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["NOM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.nomina.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -122,6 +122,57 @@ $NOM is the primary network token of the Nomina, a unified trading platform buil
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NOM is tradable on **Binance** — both **spot** (NOM/USDT) and a **USD-margined perpetual** with the full derivatives stack (funding, open interest, liquidations). It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue. As a small-cap (rank ~1641), the perp order book is thin relative to majors: leverage amplifies slippage on entries/exits, funding can swing hard when positioning gets one-sided, and forced liquidations move price disproportionately. Because leveraged flow concentrates on a single venue, execution should lean on Binance spot and perp liquidity, size positions to the realistic depth (not headline volume), and avoid market orders during low-liquidity windows. Cross-venue basis is available against Bitget/Crypto.com spot but only Binance offers a deep perp for hedging.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on the Binance NOM perp when a persistent long or short bias skews the rate; the single-venue perp makes the carry clean to isolate.
+- [[crowded-long-funding-fade]] — after a +72% 30d run, over-leveraged longs paying rich funding set up fade entries when the perp gets stretched.
+- [[liquidation-cascade-fade]] — thin small-cap depth means liquidation clusters overshoot; fade the wick once the cascade exhausts on Binance liquidations.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm genuine trend legs versus low-conviction spot-only moves in a low-cap DeFi token.
+- [[volatility-breakout]] — NOM's high realized volatility and wide daily ranges favor breakout entries out of consolidation with volatility-scaled sizing.
+- [[cash-and-carry]] — hedge Binance spot against the USD-M perp to harvest basis when the perp trades at a premium, sidestepping directional small-cap risk.
+
+### Volatility & regime character
+
+NOM is a **small-cap DeFi/perp-DEX infrastructure token** with high reflexive volatility — an ATH drawdown near -87% alongside a +72% 30d bounce shows sharp, sentiment-driven swings. It carries high beta to BTC/ETH risk-on/risk-off cycles and, being an Ethereum-ecosystem DeFi asset, tends to amplify broader altcoin and DeFi-narrative rotations. Liquidity is venue-concentrated, so regime shifts (funding flips, OI unwinds) can be abrupt.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — leveraged trading depends on Binance; a delisting or depth reduction would sharply raise slippage and gap risk.
+- **Unlocks/emissions** — circulating supply (~2.90B) is well below max (~7.50B) with MC/FDV ~0.40, so future emissions/unlocks are a persistent supply overhang.
+- **Narrative dependence** — value is tied to DeFi/perp-DEX narrative momentum; sentiment reversals hit small-caps first and hardest.
+- **Small-cap manipulation risk** — thin books make the perp susceptible to stop-hunts, funding spikes, and liquidation-driven wicks.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=NOMUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=NOMUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=NOM` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=NOM` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=NOMUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=NOMUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=NOM"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, payments]
+tags: [altcoins, crypto, defi, payments, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["NPXS", "PUNDIX", "XPOS"]
 entity_type: protocol
 headquarters: "Singapore / Decentralized"
 website: "https://pundix.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[function-x]]", "[[payments]]", "[[point-of-sale]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[function-x]]", "[[payments]]", "[[point-of-sale]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Pundi X
@@ -203,6 +203,56 @@ This is not investment advice; figures above are point-in-time market data, not 
 - **Risk control:** pre-define invalidation; with an unlimited max supply and a long downtrend, there is no structural floor. See [[risk-management]].
 
 > *Not investment advice.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PUNDIX is tradable on **[[binance]]** as both **spot** and a **USD-margined [[perpetual-futures|perpetual]]** (PUNDIXUSDT), which exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT** listed on [[hyperliquid]], so Binance is the **primary leveraged venue**. The rest of PUNDIX volume sits on centralized spot books (Upbit KRW, Bitget, KuCoin). Because leverage and derivatives discovery are concentrated on a single venue at a ~$25M microcap, the perp order book is thin: available leverage tiers cap out quickly, funding can swing hard on modest flow, and forced-liquidation clusters can move price disproportionately. Execution should assume shallow depth — use limit/passive fills, size positions to the perp's real book (not headline market cap), and expect [[slippage]] on any size that would be trivial in a large-cap.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance perp means funding on PUNDIXUSDT can persist at extremes, letting a spot-long / perp-short structure collect carry.
+- [[crowded-long-funding-fade]] — thin retail-driven perp flow makes one-sided positioning and stretched positive funding common on Korean/retail demand pumps; fade the crowded side.
+- [[liquidation-cascade-fade]] — concentrated leverage on one venue makes microcap liquidation wicks sharp and self-reversing; fade the flush after cascades exhaust.
+- [[oi-confirmed-trend]] — pairing Binance [[open-interest]] with price helps separate genuine PUNDIX breakouts from low-conviction, liquidation-driven spikes.
+- [[range-mean-reversion]] — absent a catalyst, PUNDIX chops in a bear/Extreme-Fear regime, favoring reversion between the range's edges on the spot book.
+- [[cash-and-carry]] — when perp trades at a premium to spot, a spot-long vs. perp-short basis capture is feasible given the ERC-20 spot plus Binance perp.
+
+### Volatility & regime character
+
+Small-cap ($25M) payments/infra altcoin with high [[beta]] to BTC/ETH: it tends to fall harder in risk-off tapes and rally sharply on broad alt bids, with little independent price leadership. Volatility is amplified by microcap liquidity and a retail/narrative-driven holder base (Korean-won demand pocket via Upbit). It is a real utility/infra token (payments hardware + Function X L1), not a memecoin, so reflexivity is more news/adoption-driven than pure meme momentum. Long structural downtrend (~98% off ATH) biases the regime toward mean-reversion and range behavior rather than durable trend.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading lives almost entirely on Binance; a listing or margin-tier change there materially alters tradability, and thin depth magnifies [[slippage]] and liquidation impact.
+- **Unlimited max supply** — no hard cap means no protocol-level scarcity; emissions/issuance policy is a structural overhang even at current MC/FDV ~1.00.
+- **Narrative dependence** — price hinges on payments-adoption and Function X usage headlines rather than durable throughput; catalyst-light stretches bleed.
+- **Redenomination confusion** — always trade/analyze **PUNDIX** (post-2021 swap), never legacy **NPXS**; historical price/supply are not comparable.
+- **Regulatory** — a crypto-payments/POS rail carries payments and cross-border regulatory exposure that can affect merchant deployment and listings.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PUNDIXUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PUNDIXUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=PUNDIX` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=PUNDIX` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PUNDIXUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=PUNDIXUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=PUNDIX"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "Lazio Fan Token"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins]
 aliases: ["LAZIO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.sslazio.it/en"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[narrative-trading]]", "[[dca-strategy]]"]
 ---
 
 # Lazio Fan Token
@@ -124,6 +124,53 @@ The club is also able to incorporate the utility token into its ecosystem, enabl
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LAZIO is tradable on **Binance SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding, basis, and liquidation strategies do **not** apply. With liquidity concentrated on a single exchange and thin fan-token order books, execution should assume wider spreads and shallow depth: size positions to the visible book, use limit orders rather than aggressive market sweeps, and expect that even modest order flow can move price. Directional exposure is effectively long-only spot, and any hedging must be done synthetically rather than through a native short.
+
+### Applicable strategies
+
+- [[narrative-trading]] — LAZIO trades on the S.S. Lazio club/fan-engagement narrative, so match/season milestones and platform announcements drive most sustained moves.
+- [[event-driven-trading]] — discrete catalysts (fixtures, voting campaigns, NFT/collectible drops, exchange promos) produce clean, tradable event windows around a normally quiet chart.
+- [[dca-strategy]] — for spot-primary, long-only accumulation of a small-cap fan token, averaging in smooths the thin-liquidity entry and reduces single-print slippage.
+- [[range-trading]] — outside catalysts LAZIO tends to chop in a band, making defined support/resistance range fades appropriate on the spot book.
+- [[breakout-and-retest]] — post-catalyst expansions above the range are best entered on the retest to avoid chasing low-liquidity spikes.
+- [[atr-trailing-stop]] — volatility-scaled trailing exits protect gains through the sharp reversals typical of a low-float fan token.
+
+### Volatility & regime character
+
+Small-cap (rank ~1575) fan token with low float and reflexive, memecoin-like behavior: sentiment- and event-driven with sharp, illiquid spikes and equally fast fade. It is not an infra/DeFi token — utility is club engagement, voting, and collectibles rather than protocol cash flows. Baseline correlation to BTC/ETH is loose; broad risk-off drawdowns still drag it, but idiosyncratic club/fan-platform narratives dominate direction. Expect long stretches of thin range-bound drift punctuated by outsized, mean-reverting moves.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — single-venue Binance SPOT listing means exit liquidity and price discovery hinge on one exchange; a listing change would be severe.
+- **No perp/hedge venue** — no native short or leverage; downside can only be managed by trimming spot.
+- **Emissions/supply** — max supply is uncapped and circulating is well below total supply, so future issuance can dilute holders.
+- **Narrative dependence** — value is tied to S.S. Lazio club performance and fan-platform engagement; fading interest or club events can drain demand independent of crypto market conditions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LAZIOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LAZIOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LAZIOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=LAZIOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

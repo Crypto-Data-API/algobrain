@@ -3,13 +3,13 @@ title: "Heima"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["HEI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.heima.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Heima
@@ -117,6 +117,58 @@ related: ["[[crypto-markets]]", "[[ethereum]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HEI is tradable on **Binance** — both **spot** and a **USD-margined perpetual** contract, which exposes funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue. With a sub-$15M market cap and thin order books, leverage on the Binance perp can amplify both slippage and liquidation cascades; funding and OI on that single venue effectively define the derivatives picture. Because leveraged liquidity is concentrated on one exchange, execution should favor limit orders, staggered entries, and conservative position sizing — large market orders will move price disproportionately, and there is no secondary perp venue to hedge or arbitrage against directly.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on the Binance HEI perp when the low-float token trades at a persistent premium/discount, sizing small given thin liquidity.
+- [[liquidation-cascade-fade]] — a low-cap, leverage-heavy perp is prone to sharp forced-liquidation wicks; fading the overshoot back toward spot can be productive.
+- [[post-liquidation-rebound]] — after a cascade flushes leveraged longs on the single Binance venue, HEI often snaps back, offering a mean-reverting entry.
+- [[volatility-breakout]] — HEI's high realized volatility and +47% 30d range make ATR-scaled breakouts from consolidation viable on the spot pair.
+- [[token-unlock-supply-event]] — with circulating supply already ~98% of max, residual emissions/unlock schedules can trigger tradeable supply shocks.
+- [[narrative-trading]] — as a BNB Chain / Binance Launchpool / YZi Labs (ex-Binance Labs) name, HEI reacts sharply to ecosystem and identity-DID narrative flow.
+
+### Volatility & regime character
+
+Small-cap (rank ~1147) altcoin with high reflexivity: sub-$15M market cap means low float and outsized percentage swings on modest flow. As a BNB Chain ecosystem / DID-infrastructure token, it carries beta to BTC/ETH broad-market risk but is dominated by idiosyncratic Binance-ecosystem and narrative catalysts. Expect wide intraday ranges, gap-prone behavior, and correlation that tightens in market-wide risk-off episodes while decoupling on token-specific news.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading lives almost entirely on Binance; a single-venue outage, listing change, or funding spike has no offsetting perp market.
+- **Low float / thin books** — small market cap and sub-$15M size make the book easy to move and vulnerable to liquidation cascades and manipulation.
+- **Supply/unlock dynamics** — circulating supply near max supply limits future dilution but any residual emissions or team unlocks can pressure price.
+- **Narrative dependence** — value is heavily tied to the Binance/BNB Chain ecosystem and DID narrative; sentiment reversals can be abrupt.
+- **Regulatory** — as a DID/identity-adjacent token, evolving data/identity regulation could affect the underlying protocol thesis.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HEIUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HEIUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HEI` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HEI` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HEIUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HEIUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HEI"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

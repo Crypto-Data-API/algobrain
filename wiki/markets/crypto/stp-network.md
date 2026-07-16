@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, base, crypto, defi]
+tags: [ai-trading, base, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["AWE", "AWE Network", "STP Network", "STPT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.awenetwork.ai/"
-related: ["[[ai-trading]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]"]
+related: ["[[ai-trading]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # AWE Network (formerly STP Network / STPT)
@@ -129,6 +129,56 @@ AWE sits in the **AI agents / autonomous-worlds + Base ecosystem** narrative —
 - **Catalyst + volume confirmation.** In a bottoming regime, AI-agent rotations can lift AWE quickly; require a real catalyst (World.Fun usage, listing, narrative rotation) plus rising turnover before adding.
 - **Hedging caveat.** No verified perp recorded here — check for a Binance/Bitget perp at trade time if you need to hedge; otherwise manage with size and stops.
 - **Bear default:** treat as a narrative-rotation trade, not a fundamental hold, until on-chain usage substantiates the pivot.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AWE is tradable on [[binance|Binance]] as both **spot (AWE/USDT)** and a **USD-margined perpetual**, so the full derivatives stack — [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations]] — is available for this name. It is **NOT listed on [[hyperliquid|Hyperliquid]]**; Binance is the primary (and effectively sole) leveraged venue, supplemented by spot-only depth on Upbit, Bitget, and KuCoin. With ~$3-4M of spot 24h volume on a ~$100-115M cap, AWE is more liquid than most rank-~237 peers, but the single-perp footprint means leveraged execution and hedging depend almost entirely on Binance USD-M order-book depth. Practically: keep clip sizes modest relative to top-of-book, expect wider slippage during volatility, and treat the Binance perp as your only clean venue for shorting or hedging — cross-exchange perp arbitrage is not viable without a second perp listing.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with only the Binance perp available, funding can swing hard on a thin-OI AI-narrative token; harvest persistent positive/negative funding against a spot hedge.
+- [[crowded-long-funding-fade]] — AI-agent rotations pull reflexive retail longs into AWE; fade extended positive funding when OI spikes without spot follow-through.
+- [[liquidation-cascade-fade]] — low-float, high-beta AI names cascade sharply on the single perp; fade forced-liquidation flushes back toward VWAP.
+- [[oi-confirmed-trend]] — require rising Binance open interest to confirm an AWE breakout, filtering the many low-conviction narrative pops.
+- [[breakout-and-retest]] — trade Base/AI-narrative rotations via a clean break of range highs then retest, using the liquid Binance spot/perp for entries.
+- [[narrative-trading]] — AWE is fundamentally a narrative vehicle (AI agents / autonomous worlds on Base); position around World.Fun traction and AI-rotation catalysts.
+
+### Volatility & regime character
+
+Small-cap (rank ~237), high-beta AI-agent / autonomous-worlds infrastructure token on [[base|Base]] with meaningful memecoin-style reflexivity — moves are largely sentiment- and narrative-driven rather than usage-driven. Strongly correlated to BTC/ETH risk-on/risk-off regimes and amplified by the AI-agent sector rotation; it de-rates hard in risk-off and Extreme-Fear tapes. Near-full circulating supply (~97%) removes emissions overhang, so volatility is dominated by demand shocks and thin-perp positioning rather than unlock dynamics.
+
+### Risk flags
+
+- **Venue concentration:** a single leveraged venue (Binance USD-M) — no Hyperliquid, no second perp — so funding, OI, and liquidation dynamics are Binance-specific and hedging options are limited.
+- **Liquidity/thin-OI risk:** small cap with modest perp open interest; leveraged flows can move price disproportionately and trigger cascade liquidations.
+- **Narrative dependence:** value is reflexive and tied to the crowded AI-agent / Base narrative; sharp reversals are common when sentiment rotates out.
+- **Execution-pivot risk:** unproven STPT→AWE rebrand and self-reported World.Fun traction; delivery gaps can drive abrupt de-rating.
+- **Emissions:** minimal — ~97% of max supply already circulating, so unlock/emission overhang is not a material driver (a relative positive).
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AWEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AWEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AWE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AWE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AWEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AWEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AWE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: good
-tags: [altcoins, crypto, depin]
+tags: [altcoins, crypto, depin, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["FLUX", "ZelCash"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://runonflux.com"
-related: ["[[crypto-markets]]", "[[decentralized-storage]]", "[[depin]]", "[[layer-1]]", "[[proof-of-work]]"]
+related: ["[[crypto-markets]]", "[[decentralized-storage]]", "[[depin]]", "[[layer-1]]", "[[proof-of-work]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[range-mean-reversion]]"]
 ---
 
 # Flux
@@ -192,6 +192,55 @@ Currently (2025/5) Flux has a computational network consisting of around 11,500 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FLUX is tradable on [[binance]] — both spot (FLUX/USDT) and a USD-margined [[perpetual-futures|perpetual]] contract that exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **not** listed on Hyperliquid, so Binance is the primary (effectively sole major) leveraged venue. With a small market-cap rank (~#870) and thin order books relative to majors, leverage and liquidity are concentrated on one exchange: this makes the Binance perp funding/OI print the dominant signal, but also means slippage on larger clips is real. Size positions conservatively, prefer limit/maker execution, and treat single-venue concentration as a gap-risk factor when carrying leverage overnight.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — Binance is the only significant perp venue, so periodic funding swings on the FLUX-USDT perp can be harvested against a spot hedge without cross-venue complexity.
+- [[crowded-long-funding-fade]] — thin small-cap flow means retail chasing a FLUX pump can spike positive funding into extremes worth fading.
+- [[liquidation-cascade-fade]] — low liquidity and concentrated leverage on one venue make forced-liquidation wicks sharp and mean-reverting, a setup to fade.
+- [[range-mean-reversion]] — outside of narrative bursts FLUX spends long stretches range-bound near micro-cap valuations, favoring reversion at range edges.
+- [[breakout-and-retest]] — DePIN-narrative catalysts can break FLUX out of extended bases; entering on the retest filters false starts in a low-liquidity name.
+- [[momentum-investing]] — as a high-beta altcoin, FLUX trends hard when the broader alt/DePIN cycle turns, rewarding momentum participation with tight risk.
+
+### Volatility & regime character
+
+FLUX is a small-cap (~#870), high-beta [[depin]]/infrastructure altcoin. It trades with strong correlation to BTC/ETH risk regimes and amplifies moves in both directions — pumping disproportionately in alt-season and DePIN-narrative windows, and bleeding through risk-off periods (it sits ~98% below its 2022 ATH). It is not a memecoin, but its reflexivity to compute/DePIN narratives and low float relative to majors give it memecoin-like volatility spikes on catalysts. Between catalysts it is prone to low-volume drift and range-bound consolidation.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure is essentially Binance-only; a listing change, delisting, or venue outage removes the primary hedge/exit path.
+- **Thin liquidity** — micro-cap depth means wide spreads and slippage; stops can be gapped through during liquidation cascades.
+- **Emissions/supply** — ongoing PoW mining and FluxNode reward emissions add persistent sell pressure; near-max-supply FDV (~1.0 MC/FDV) limits dilution surprise but not miner distribution.
+- **Narrative dependence** — price is heavily tied to the DePIN/decentralized-compute narrative and competitive positioning versus Akash/Render/Filecoin; narrative rotation can drain liquidity quickly.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FLUXUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=FLUXUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=FLUX` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=FLUX` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FLUXUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=FLUXUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=FLUX"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

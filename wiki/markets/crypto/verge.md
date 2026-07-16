@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["XVG"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "http://vergecurrency.com/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[monero]]", "[[privacy-coins]]", "[[verus-coin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[monero]]", "[[privacy-coins]]", "[[verus-coin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Verge
@@ -143,6 +143,58 @@ Verge's category is **privacy**: it is a [[privacy-coins|privacy coin]] competin
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XVG is tradable on **Binance** — both **spot** (XVG/USDT) and a **USD-margined perpetual**, which surfaces funding, open interest and liquidation data. It is **NOT** listed on Hyperliquid, so **Binance is the primary (and effectively sole) leveraged venue**. This concentration matters for execution: with light spot turnover (~$1–3M/day against a ~$35M cap) and privacy-coin delisting pressure elsewhere, both the spot book and the perp order book are thin. Available leverage on the Binance perp is typically lower and its liquidation tiers tighter for a low-cap alt like XVG, so **position sizing should be conservative** — large orders will move the book, funding can swing hard on small OI, and there is no second leveraged venue to hedge against or arbitrate a stuck Binance funding print. Route spot execution to Binance where depth is deepest, and treat perp positions as venue-concentrated risk.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — XVG's single-venue Binance perp with thin OI can hold persistently skewed funding; harvest it by holding the opposite side while delta-hedging with spot.
+- [[crowded-long-funding-fade]] — sentiment-driven privacy-coin squeezes on a shallow perp book leave funding overheated on the long side; fade the crowd when funding runs rich.
+- [[liquidation-cascade-fade]] — a shallow XVG perp liquidates violently on small flow; fade forced-sale wicks back toward pre-cascade spot value.
+- [[oi-confirmed-trend]] — with only Binance OI to watch, rising open interest alongside price gives a cleaner (if noisy) confirmation of directional XVG moves.
+- [[breakout-and-retest]] — XVG's deep-drawdown, low-price chart ranges tightly for long stretches then gaps; trade confirmed breakouts on the retest to avoid thin-book fakeouts.
+- [[atr-trailing-stop]] — high per-tick volatility on a low-liquidity name demands volatility-scaled trailing stops rather than fixed levels.
+
+### Volatility & regime character
+
+XVG is a **small-cap legacy privacy coin** (rank ~563) with high reflexive volatility on very light liquidity — moves are amplified by thin depth rather than by fundamentals. It is **high-beta to BTC/ETH** in broad risk-on/risk-off swings but also carries idiosyncratic, **privacy-sector-sentiment** and delisting-headline risk that can decouple it from majors. Not a DeFi or infra token; behaviour is closer to a low-float, narrative-and-liquidity-driven altcoin than to a fundamentally valued asset.
+
+### Risk flags
+
+- **Venue concentration** — Binance is the only meaningful spot and the only leveraged venue; a Binance delisting or restriction (a live risk for privacy coins) would gut both liquidity and the perp.
+- **Thin liquidity** — low 24h volume vs cap means high slippage, gap risk and violent, low-notional liquidation cascades on the perp.
+- **Regulatory / delisting** — as a privacy coin, XVG faces ongoing AML/KYC and travel-rule delisting pressure across regulated exchanges; this is its dominant structural risk.
+- **Uncapped inflationary emission** — no max supply; continued PoW block rewards dilute holders and cap sustained upside.
+- **Narrative dependence** — price is driven by privacy-sector sentiment and liquidity, not protocol cash flows, so it is vulnerable to headline-driven reversals.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XVGUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=XVGUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=XVG` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=XVG` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XVGUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=XVGUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=XVG"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

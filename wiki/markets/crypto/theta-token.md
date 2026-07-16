@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, depin]
+tags: [ai-trading, crypto, depin, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["THETA"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://www.thetatoken.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[theta-fuel]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[theta-fuel]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crypto-beta-rotation]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Theta Network
@@ -262,6 +262,55 @@ Theta blockchain is an EVM compatible multi-blockchain network which supports Tu
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+THETA is tradable on [[binance]] — both **spot** (THETA/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** contract, which exposes [[funding-rate|funding]], [[open-interest]] and [[liquidations]] data for leveraged flow. THETA is **NOT** listed on [[hyperliquid]]; **Binance is the primary leveraged venue**, so perp-derived signals (funding, OI, liquidation prints) should be read from Binance USD-M rather than a DEX-perp book. As a rank ~203 mid/small-cap with modest daily volume, the perp book is thinner and funding more jerky than large-caps: available leverage is lower, order books are shallower, and large clips move price. Practical implication — size positions to Binance depth, favor limit/VWAP execution over market orders, keep leverage conservative, and treat wide spreads plus concentration on a few CEXs (including Korean spot flow) as a real execution constraint.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on THETA's Binance USD-M contract when the rate is persistently one-sided, a common feature in thin narrative altcoin books.
+- [[crowded-long-funding-fade]] — narrative-driven DePIN/AI hype can push THETA longs to extreme positive funding; fade the crowded side once funding and OI stretch together.
+- [[liquidation-cascade-fade]] — thin liquidity means forced-liquidation flushes overshoot; fade the wick after a Binance long-liquidation cascade for a mean-reversion bounce.
+- [[oi-confirmed-trend]] — use rising Binance open interest alongside price to confirm that a THETA breakout is backed by real positioning rather than a low-volume drift.
+- [[crypto-beta-rotation]] — THETA is a high-beta DePIN/AI proxy; rotate into it when the risk-on regime favors small-cap beta over BTC/ETH, and out when beta compresses.
+- [[breakout-and-retest]] — narrative catalysts (EdgeCloud/AI news) produce sharp range breaks; enter on the retest to avoid chasing thin, gappy moves.
+
+### Volatility & regime character
+
+Mid/small-cap altcoin with **high beta to BTC/ETH** — it typically falls harder than majors in risk-off and rebounds late. As a DePIN + AI-compute **infrastructure/narrative token**, its volatility is reflexive to sector sentiment (AI/DePIN capital rotation) rather than to protocol earnings. Directionally correlated with the broad altcoin complex, amplified by thin liquidity; expect elevated realized volatility, gap risk around news, and regime-dependent funding.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** thin spot and perp depth concentrated on a few CEXs (Binance plus Korean venues like Upbit) — slippage and venue risk on size.
+- **Narrative dependence:** valuation hinges on the AI/DePIN EdgeCloud thesis converting to paying GPU demand; sentiment reversals hit price disproportionately.
+- **Indirect value accrual:** network usage is paid in [[theta-fuel|TFUEL]], so THETA's link to adoption is indirect and depends on staking/governance demand.
+- **Supply note:** THETA is fully circulating (MC = FDV), so there is no unlock/emission overhang on the governance token — a structural positive relative to low-float peers.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=THETAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=THETAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=THETA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=THETA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=THETAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=THETAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=THETA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

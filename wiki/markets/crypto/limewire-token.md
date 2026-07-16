@@ -3,13 +3,13 @@ title: "LimeWire"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, nft]
+status: review
+tags: [crypto, nft, altcoins]
 aliases: ["LMWR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://limewire.com/u/home"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[dca-strategy]]", "[[breakout-and-retest]]"]
 ---
 
 # LimeWire
@@ -137,6 +137,50 @@ The LimeWire Token (LMWR) is the utility token at the heart of the LimeWire file
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LMWR is tradable on **Binance SPOT only** — no liquid perpetual venue exists, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do NOT apply. With no perp to hedge or express directional shorts, positions are effectively long-only unless borrow is available. Concentration on a single primary liquidity venue means the visible order book is thin relative to larger caps: execution should favor limit orders, staggered fills, and small clip sizes to avoid slippage, and position sizing must account for the risk that liquidity can evaporate quickly during volatility. Additional CEX/DEX listings (Kraken, Bitget, KuCoin, Uniswap) exist but fragment liquidity rather than deepen it.
+
+### Applicable strategies
+
+- [[breakout-and-retest]] — thin spot book means clean breaks above consolidation can run, but retest confirmation filters the many false breaks typical of a micro-cap.
+- [[dca-strategy]] — spot-only, long-only profile suits accumulation over time rather than leveraged timing, smoothing entries into a deeply drawn-down token.
+- [[range-mean-reversion]] — LMWR chops within tight ranges near its all-time low, where fading extremes toward the range midpoint can capture the reversion.
+- [[narrative-trading]] — price is highly sensitive to AI/DePIN/file-sharing narrative flows given the brand story; positioning ahead of narrative rotation drives outsized moves.
+- [[atr-trailing-stop]] — micro-cap volatility demands a volatility-scaled trailing exit to lock gains and cap downside without a perp hedge.
+
+### Volatility & regime character
+
+Small-cap altcoin (rank ~1805) with high idiosyncratic volatility and strong reflexivity to retail narrative flows around AI, DePIN, SocialFi, and the legacy LimeWire brand. As a low-liquidity token it exhibits high beta to broad crypto risk-on/off regimes and to BTC/ETH moves, with amplified drawdowns — the asset trades near its all-time low after steep multi-timeframe declines. Behaves more like a narrative/infra token than a stable DeFi bluechip; expect sharp, sentiment-driven swings rather than smooth trends.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — spot-primary with a thin book and no liquid perp; slippage and gap risk are elevated, and there is no on-venue hedge.
+- **Supply/emissions overhang** — circulating supply is well below total and max supply, leaving meaningful future dilution/unlock pressure.
+- **Narrative dependence** — valuation leans on AI/DePIN/brand narrative rather than entrenched fundamentals, so sentiment reversals hit hard.
+- **Deep drawdown / momentum** — trading near all-time low with negative multi-timeframe trend; catching a falling knife is a real risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LMWRUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LMWRUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LMWRUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=LMWRUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ## See Also
 

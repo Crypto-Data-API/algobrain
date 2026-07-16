@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto, defi]
+tags: [ai-trading, altcoins, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["SXT", "Space and Time", "SxT"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://www.spaceandtime.io"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[zero-knowledge-proof]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[zero-knowledge-proof]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Space and Time
@@ -213,6 +213,55 @@ SXT sits in the **ZK / verifiable-compute** and **on-chain-data infrastructure**
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SXT is tradable on [[binance|Binance]] — **spot** (SXT/USDT) plus a **USD-margined perpetual** carrying [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **not** listed on Hyperliquid, so Binance is the primary leveraged venue and the single source of derivatives signal for this token. For a sub-$25M-cap name the Binance listing is unusually strong: it concentrates most of the tradeable liquidity and funding/OI signal in one venue, which supports tighter spreads than most peers but also means execution, sizing, and any perp-vs-spot basis all hinge on Binance depth alone. With no second leveraged venue, cross-exchange perp arbitrage is not available; carry and liquidation strategies must be run against Binance funding/OI, and position sizing should stay conservative because thin small-cap depth lets even modest orders move price.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the Binance USD-M perp is the only funding stream for SXT; harvesting rich funding against a delta-neutral spot leg is the core carry play here.
+- [[cash-and-carry]] — long Binance spot vs short the perp captures basis when the perp trades at a premium, using the one venue where both legs exist.
+- [[liquidation-cascade-fade]] — a thin small-cap on a single leveraged venue is prone to forced-liquidation flushes; fading the overshoot after a cascade is high-probability when liquidity snaps back.
+- [[oi-confirmed-trend]] — Binance open-interest changes are the cleanest confirmation of whether an SXT move is real leverage-driven trend or a spot-only drift.
+- [[narrative-trading]] — SXT is a ZK / verifiable-data-infra token whose moves track narrative rotations; trading the ZK/RWA-attestation narrative captures its dominant beta.
+- [[volatility-breakout]] — low-float small-caps like SXT compress then expand violently; volatility-triggered breakout entries suit its high-beta character.
+
+### Volatility & regime character
+
+SXT is a **small-cap** (rank ~778, sub-$25M) **infra / verifiable-data (ZK, DePIN-adjacent) token** with high realized volatility and high beta to BTC/ETH risk appetite. It behaves as a narrative-driven ZK/RWA play — outperforming in risk-on ZK/data-infra rotations and bleeding hard in risk-off — with reflexive, low-float price action where thin depth amplifies moves in both directions. Correlation to BTC/ETH is strong during broad risk shifts but decouples on token-specific catalysts (product adoption, unlocks).
+
+### Risk flags
+
+- **Venue concentration** — Binance is effectively the only deep spot and the only leveraged venue; a delisting, outage, or funding dislocation there would dominate execution risk, and there is no leveraged fallback.
+- **Unlocks / emissions** — ~52% of max supply circulating (MC/FDV ≈ 0.52) means scheduled unlocks are a recurring dilution overhang; align entries/exits with the emission calendar.
+- **Narrative dependence** — demand rests on *provable* (not merely available) data adoption; without paid Proof-of-SQL query volume the token is a pure narrative/beta vehicle prone to sharp de-rating.
+- **Liquidity / size** — small-cap depth means slippage and gap risk on size, and forced-liquidation cascades can overshoot; keep leverage and position size conservative.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SXTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SXTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SXT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SXT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SXTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SXTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SXT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

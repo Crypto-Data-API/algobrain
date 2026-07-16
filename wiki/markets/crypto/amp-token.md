@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins]
 aliases: ["AMP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.amp.xyz"
-related: ["[[collateral]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[flexa]]", "[[stablecoins]]"]
+related: ["[[collateral]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[flexa]]", "[[stablecoins]]", "[[binance]]", "[[dca-strategy]]", "[[range-mean-reversion]]"]
 ---
 
 # Amp
@@ -115,6 +115,54 @@ AMP is the odd one out: a *collateral primitive* rather than a price-stable inst
 - **Deep drawdown / bear market** — down ~99.6% from ATH and trading in an extreme-fear, established-bear-market environment.
 - **Micro-cap liquidity** — sub-$50M market cap; thin books outside major exchanges amplify slippage.
 - **Smart-contract risk** — collateral-manager contracts that lock/redirect staked AMP are an attack surface.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AMP is tradable on **Binance SPOT only** among tier-1 CEXs (with secondary spot listings on KuCoin and Crypto.com, plus on-chain Uniswap/SushiSwap pools) — **there is no liquid perpetual venue**, so leverage and short access are limited and AMP is a **spot-primary asset**. Perp funding/basis/liquidation strategies do NOT apply. As a sub-$50M micro-cap with a very low unit price (~$0.0005) and thin books outside Binance, execution should lean on limit orders, staggered entries, and small clip sizes; large market orders will move price and incur meaningful slippage. Position sizing must assume no easy hedge — exposure is directional long unless routed through borrow/margin where available, and exit liquidity concentrates on Binance AMP/USDT.
+
+### Applicable strategies
+
+- [[dca-strategy]] — for a spot-only micro-cap trading near its all-time low, mechanical dollar-cost averaging removes timing risk and fits the no-leverage, accumulation-oriented profile.
+- [[range-mean-reversion]] — AMP has spent long stretches pinned in tight bands near ATL; fading extremes within an established range suits its low-volatility, sub-$50M chop.
+- [[rsi-mean-reversion]] — deeply oversold RSI readings during established-bear drift offer bounce entries on a token with no perp overhang to force liquidations.
+- [[breakout-and-retest]] — with thin books, clean breakouts from multi-week bases are tradable long-only, using a retest to confirm before sizing up on spot.
+- [[volatility-targeting]] — scaling spot size to realized volatility caps drawdown on an illiquid micro-cap where slippage, not funding, is the main cost.
+- [[grid-trading]] — a range-bound, spot-only token near ATL is a natural fit for grid orders that harvest AMP/USDT oscillation without leverage.
+
+### Volatility & regime character
+
+Small-cap infrastructure / DeFi collateral token (rank ~#524), high-beta to BTC/ETH with amplified downside in risk-off regimes. Not a memecoin — value is tied to Flexa collateral-network demand rather than reflexive hype — but it behaves like a deep-drawdown micro-cap: illiquid, prone to long sideways bases punctuated by sharp beta-driven moves. Correlation to majors is high on the downside; independent upside requires a Flexa/payments narrative catalyst. Currently trading within a hair of its all-time low, so realized volatility can compress for extended periods then spike.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — spot-only, with real depth concentrated on Binance; delisting from that venue would sharply impair tradability, and thin secondary books amplify slippage.
+- **Regulatory overhang** — AMP is tagged among "Alleged SEC Securities," creating US delisting/legal risk that can trigger sudden liquidity withdrawal.
+- **Narrative dependence** — demand hinges almost entirely on Flexa collateral usage; weak payments adoption caps upside and invites structural downtrend.
+- **No hedge / no perp** — absence of a liquid perpetual venue means exposure cannot be cheaply shorted or hedged; risk must be managed via sizing and spot exits.
+- **Micro-cap drawdown risk** — down ~99.6% from ATH and near all-time lows; further capitulation is possible in continued bear regimes.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AMPUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AMPUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AMPUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=AMPUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

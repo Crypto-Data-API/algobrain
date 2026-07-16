@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum]
+tags: [crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["JASMY", "Jasmy"]
 entity_type: protocol
 founded: 2016
 headquarters: "Tokyo, Japan"
 website: "https://www.jasmy.co.jp/"
-related: ["[[arbitrum]]", "[[binance]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[arbitrum]]", "[[binance]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # JasmyCoin
@@ -229,6 +229,58 @@ JASMY's ~-99.9% drawdown from ATH and deep psychological anchoring to old highs 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+JASMY is tradable on [[binance|Binance]] as **spot** (JASMY/USDT) and via a **USD-margined perpetual** future — so it carries a full derivatives surface: funding rates, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue. Practical implications:
+
+- **Leverage/liquidity**: Binance perps concentrate the leveraged flow, but JASMY is a rank-~154 mid/small-cap with thin turnover (~$7–14M/day spot in recent snapshots), so perp order books are shallow relative to majors. Large market orders and stops slip; funding can spike when one-sided retail leverage crowds in.
+- **Venue availability shapes execution/sizing**: with Binance as the dominant USD-M perp venue and heavy spot share on Upbit (KRW), cross-venue basis and KRW-premium dislocations matter. Size positions to the Binance perp's depth, prefer limit/TWAP entries, and treat single-venue concentration as a gap-risk source (funding/liquidation cascades originate on Binance).
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on the Binance USD-M perp when Japan-retail crowding pushes JASMY funding persistently positive; the single-venue perp makes the signal clean.
+- [[crowded-long-funding-fade]] — JASMY's high-beta retail base periodically over-leverages long on Japan-narrative headlines; fade extreme positive funding into mean reversion.
+- [[liquidation-cascade-fade]] — thin perp depth and a -99.9% drawdown anchor produce sharp, self-reinforcing liquidation flushes that overshoot and snap back.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to separate durable Japan/DePIN-narrative trends from low-conviction spot noise.
+- [[rsi-mean-reversion]] — extreme, fast-decaying retail-driven spikes revert; oversold/overbought RSI extremes are tradable on a fixed-float, no-unlock token.
+- [[narrative-trading]] — JASMY is priced on Japan-retail/DePIN/AI-adjacent (Janction) narrative more than usage; position around Panasonic, JasmyChain, and Japan crypto-policy catalysts.
+
+### Volatility & regime character
+
+Small/mid-cap, **high-beta retail favourite** with strong correlation to BTC/ETH risk-on/off but amplified moves. It behaves with **memecoin-like reflexivity** on Japan-narrative headlines (yen-carry, FSA/tax policy, Panasonic) despite being an infra/[[depin|DePIN]] token. The extreme ~-99.9% drawdown from its 2021 ATH creates deep psychological anchoring and prone-to-overshoot, fast-decaying spikes. Heavy Upbit (KRW) share adds Korean-premium reflexivity on top of the Binance-led derivatives flow.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — Binance is the primary leveraged venue and spot volume is thin and split with Upbit (KRW); single-venue perp concentration raises gap/cascade risk and KRW-premium dislocation risk.
+- **Narrative dependence** — valuation tracks Japan-retail sentiment and IoT/DePIN narrative far more than PDL/Janction usage; sentiment reversals hit hard.
+- **Emissions/unlocks** — fixed 50B max supply, ~99% circulating, so **no meaningful unlock overhang**; the JasmyChain gas-fee/burn dynamic is an unproven, activity-dependent value lever.
+- **Regulatory** — Japan-narrative pricing ties JASMY to FSA policy/tax-reform headlines and Korean listing/regulatory shifts, both of which can move price sharply.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=JASMYUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=JASMYUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=JASMY` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=JASMY` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=JASMYUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=JASMYUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=JASMY"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

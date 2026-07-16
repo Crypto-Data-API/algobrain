@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, defi]
+tags: [bitcoin, crypto, defi, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["T", "Threshold"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://threshold.network/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[wrapped-bitcoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[wrapped-bitcoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Threshold Network
@@ -251,6 +251,55 @@ Threshold is a project merged from the NuCypher and Keep networks, which strives
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+T is tradable on [[binance|Binance]] — **spot (T/USDT)** plus a **USD-margined perpetual**, exposing [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the **primary leveraged venue**. With a small-cap (~#474) profile, thin spot turnover, and an ~11.16B token supply, order-book depth is shallow; leverage amplifies moves and makes stops/liquidation clusters influential. Venue concentration on Binance means execution and sizing should assume slippage on larger orders — split entries, favor limit orders, and size positions to the perp's realistic liquidity rather than headline volume.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture recurring Binance perp funding on T when it trends persistently positive or negative on a small-cap perp.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when T funding spikes positive into a bounce, a common small-cap perp setup.
+- [[liquidation-cascade-fade]] — thin depth and leverage make T prone to liquidation flushes that overshoot and mean-revert.
+- [[cash-and-carry]] — hold spot T against the short perp to harvest basis/funding while staying delta-neutral.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether a T breakout is backed by real positioning or is a fakeout.
+- [[breakout-and-retest]] — deep-value token near all-time lows; range breaks with retests offer defined-risk entries on this volatile small cap.
+
+### Volatility & regime character
+
+T is a **small-cap DeFi / BTCfi infrastructure token** with high beta to [[bitcoin|BTC]] and broad altcoin risk sentiment. Price action reflects **tBTC / BTCfi demand** and staking flows rather than memecoin reflexivity. Volatility is elevated on a low absolute price and thin book; the token has been printing new all-time lows in the prevailing bear regime, so trends can be sharp and one-directional, with leverage-driven squeezes in both directions.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin spot volume and leverage centered on Binance; large orders slip and a single-venue outage or delisting is a concentration risk.
+- **Emissions / dilution** — supply is fully circulating (MC/FDV ~1.00) but **governance-mintable with no hard cap**, so DAO-driven emissions are the main forward dilution risk.
+- **Narrative dependence** — value hinges on non-custodial BTC (tBTC) adoption versus WBTC/cbBTC/LBTC; fading BTCfi interest pressures demand.
+- **Protocol / bridge risk** — tBTC custody, de-peg, and operator-slashing events can trigger abrupt repricing that overwhelms leveraged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=T` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=T` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=TUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=T"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

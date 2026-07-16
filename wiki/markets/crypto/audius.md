@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, defi]
 aliases: ["AUDIO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://audius.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[governance-token]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[governance-token]]", "[[solana]]", "[[binance]]", "[[dca-strategy]]", "[[rsi-mean-reversion]]"]
 ---
 
 # Audius
@@ -214,6 +214,53 @@ Key risks:
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AUDIO is **tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply.** With no deep perp market, positions must be built and sized in spot inventory: shorting requires borrow (thin and expensive at this cap) or is effectively unavailable, so the tradable edge is long-only or flat. At a small-cap footprint on thin volume, the single-venue concentration means the Binance AUDIOUSDT order book *is* the liquidity — execution should favor limit orders, patient scaling, and modest clip sizes to avoid slippage, and stop placement must account for wick risk in a thin book. Venue concentration also implies delisting/listing headline sensitivity (see Risk flags).
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-primary, long-only asset ~99% below its ATH; accumulating in fixed increments smooths entry without needing leverage or short access.
+- [[rsi-mean-reversion]] — thin small-cap book produces sharp oversold/overbought wicks on the daily/4h that snap back, favoring fade-the-extreme entries.
+- [[bollinger-band-reversion]] — low-liquidity spikes routinely pierce band extremes and revert, a clean spot fade setup with no perp dependency.
+- [[range-trading]] — outside narrative catalysts AUDIO chops in bounded ranges at micro-cap prices, letting range boundaries define spot entries/exits.
+- [[breakout-and-retest]] — narrative or listing-driven expansions off a long base can be entered on the retest, reducing false-breakout risk in a whippy book.
+- [[buy-and-hold]] — for conviction on the decentralized-streaming thesis, a spot hold sidesteps the absent leverage/funding mechanics entirely.
+
+### Volatility & regime character
+
+Small-cap altcoin (rank ~837, ~$21M cap) with high beta to BTC/ETH risk-on/risk-off and amplified downside in bear regimes on thin volume. As an infra/DeFi-adjacent music-streaming and [[governance-token|governance]] token, it carries **narrative reflexivity** — moves are catalyst- and sentiment-driven (Web3-music, DePIN/streaming narratives) rather than fundamentally anchored, given token-utility decoupling. Expect wide intraday ranges relative to large caps, low autocorrelation outside trends, and correlation that spikes toward 1.0 in broad crypto drawdowns.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-only, single primary venue (Binance); no liquid perp, so no hedge/short venue and heightened slippage and delisting-headline risk.
+- **Emissions** — ongoing staking/reward emissions add supply over time (dilution), though MC/FDV ≈ 1.00 limits near-term unlock overhang.
+- **Narrative dependence** — value accrual is weak (token-utility decoupling); price leans on Web3-music/DePIN narrative flow and sentiment.
+- **Smart-contract / governance risk** — history of a governance-contract exploit (July 2022); treasury-governance surface remains a tail risk.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AUDIOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AUDIOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AUDIOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=AUDIOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

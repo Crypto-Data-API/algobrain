@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["ZAMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.zama.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[fully-homomorphic-encryption]]", "[[hyperliquid]]", "[[solana]]", "[[zero-knowledge-proofs]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[fully-homomorphic-encryption]]", "[[hyperliquid]]", "[[solana]]", "[[zero-knowledge-proofs]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Zama
@@ -253,6 +253,55 @@ Zama is an open source cryptography company that builds state-of-the-art Fully H
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZAMA is tradable on [[binance|Binance]] — **spot plus a USD-margined perpetual** (funding, open interest, and liquidations available). It is **NOT listed on [[hyperliquid|Hyperliquid]]**, so Binance is effectively the primary leveraged venue for the token. This concentrates leveraged flow, funding, and liquidation dynamics on a single perp book: funding-rate and OI signals are read almost entirely from Binance, and there is no Hyperliquid cross-venue perp to arbitrage against. With a small-cap float (~$76M cap, single-digit-millions daily volume) and a single dominant perp venue, order books are thin relative to majors — meaning slippage on larger clips, wider execution costs, and sharper wicks on cascades. Size positions conservatively, favor limit/passive execution, and treat Binance funding/OI as the canonical read for perp-based signals.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single dominant Binance perp with a low-float, momentum-prone token can push funding to sustained extremes, harvestable delta-neutral (short perp vs. long spot) while positive.
+- [[cash-and-carry]] — spot on Binance/Kraken plus the Binance USD-M perp lets a long-spot / short-perp carry capture basis when the perp trades rich during narrative rallies.
+- [[crowded-long-funding-fade]] — ZAMA's +7% weekly momentum near ATH into Extreme Fear is exactly the setup where crowded longs and rich funding mean-revert; fade elevated funding.
+- [[liquidation-cascade-fade]] — thin single-venue perp liquidity makes ZAMA prone to outsized liquidation wicks; fading over-extended forced-selling flushes targets those dislocations.
+- [[token-unlock-supply-event]] — with ~20% float, no fixed max supply, and heavy forward dilution, scheduled unlocks are tradable supply catalysts.
+- [[narrative-trading]] — ZAMA is a pure FHE / confidential-compute narrative token; price is driven by privacy-infra rotation rather than cash flows, making it a candidate for narrative-driven entries/exits.
+
+### Volatility & regime character
+
+Small-cap infrastructure token (rank ~304) with **high beta** and reflexive, narrative-driven price action. It behaves like an FHE/privacy-infra beta name rather than a memecoin, but its very low float (~20%) amplifies both squeezes and unwinds. Broadly correlated to BTC/ETH risk-on/risk-off regimes, with idiosyncratic spikes tied to the confidential-compute narrative and to venue-specific liquidation events. Expect ATR to expand sharply on narrative catalysts and to compress during risk-off drift.
+
+### Risk flags
+
+- **Venue concentration:** leveraged trading centers on a single Binance perp (no Hyperliquid); funding, OI, and liquidation risk are all concentrated there, and a single venue outage or listing change materially affects tradability.
+- **Liquidity:** small cap and single-digit-millions daily volume mean thin books, slippage, and gap risk on size.
+- **Dilution / unlocks:** lowest float in its cohort with no fixed max supply — emissions and unlocks are the dominant supply risk and can overwhelm demand.
+- **Narrative dependence:** value is largely narrative- and roadmap-driven (FHE adoption unproven); a narrative cooldown near ATH implies outsized downside.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ZAMAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ZAMAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ZAMA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ZAMA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ZAMAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ZAMAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ZAMA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

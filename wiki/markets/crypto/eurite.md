@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoins]
+tags: [crypto, stablecoins, defi]
 aliases: ["EURI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.eurite.com/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[euro-coin]]", "[[societe-generale-forge-eurcv]]", "[[stablecoins]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[euro-coin]]", "[[societe-generale-forge-eurcv]]", "[[stablecoins]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # Eurite
@@ -208,6 +208,53 @@ EURI sits in the **regulated/marketed-compliant euro stablecoin** category, with
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+EURI is a fiat-pegged stablecoin (euro-referenced, with its USD quote tracking EUR/USD) whose primary liquid venue is [[binance]] via the EURI/USDT pair; on-chain it lives on the BNB Chain and Ethereum. It is a **peg / cash-management instrument, not a directional asset** — the trading edge is peg stability, backing/reserves quality, depeg risk, and yield/arbitrage rather than momentum. Liquidity is thin versus flagship USD stablecoins, so venue concentration on Binance shapes execution: retail par exit depends on that secondary book, DEX pools are shallower, and large tickets should be sized to available depth to avoid self-inflicted slippage. There is little to no leverage market for EURI, reinforcing spot cash-management use over directional positioning.
+
+### Applicable strategies
+
+- [[stablecoin-depeg-profit-capture]] — buy EURI below its euro-implied fair value during reserve-scare or Binance-liquidity dislocations, targeting reversion to €1.00 once redemption/arbitrage restores parity.
+- [[stablecoin-pair-arbitrage]] — arbitrage EURI against other euro stablecoins ([[euro-coin|EURC]], EURCV, EURS) when their relative quotes diverge, since all target the same €1.00 anchor.
+- [[mint-parity-arbitrage]] — authorized participants can mint/redeem EURI 1:1 against euro reserves through the issuer and capture the spread when the secondary Binance price strays from par.
+- [[stablecoin-yield]] — deploy EURI as a euro-denominated cash leg to earn yield in BNB-Chain venues while holding a par-stable unit of account.
+- [[carry-trade]] — hold EURI as the funding/settlement leg of a euro-vs-USD carry, capturing rate/FX differentials while treating the token itself as par-stable.
+
+### Volatility & regime character
+
+The peg target is the euro, so USD-chart swings ($1.01–$1.21 historically) primarily reflect EUR/USD FX rather than peg instability; against the euro the token holds close to €1.00. Backing is fiat-collateralized (segregated euro cash and cash-equivalents), with no algorithmic or crypto-collateral component, and the peg is maintained by primary mint/redeem plus secondary arbitrage. Regime character is therefore low intrinsic volatility punctuated by tail-risk depeg episodes; day-to-day it behaves as a euro cash-equivalent, most attractive as a risk-off parking instrument.
+
+### Risk flags
+
+- **Depeg risk** — reserve shortfalls, redemption friction, or loss of confidence could push EURI off €1.00, independent of EUR/USD.
+- **Reserve / backing transparency** — attestation quality and frequency are thinner here than for bank-issued euro peers, a core diligence point.
+- **Redemption gating** — direct 1:1 redemption runs through the issuer's onboarded participants; retail par exit depends on secondary (mostly Binance) liquidity.
+- **Custodial / banking risk** — euro reserves sit with banks/custodians, exposing the peg to banking-sector stress.
+- **Regulatory** — euro stablecoins are directly in scope of MiCA; rule changes or non-compliance could restrict issuance or distribution.
+- **Liquidity** — thin depth versus major stablecoins means large trades can move the price.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for peg monitoring (auth via `X-API-Key`). Watch for depeg events.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=EURIUSDT` — current price (peg deviation vs 1.00)
+- `GET /api/v1/market-data/ticker/24hr?symbol=EURIUSDT` — 24h range (intraday peg stress)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=EURIUSDT&interval=1h&limit=1000` — peg history / past depegs
+- `GET /api/v1/backtesting/klines` — deep archive for depeg backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=EURIUSDT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

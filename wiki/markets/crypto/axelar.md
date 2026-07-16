@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["AXL", "Axelar Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://axelar.network/"
-related: ["[[bridge]]", "[[cosmos]]", "[[cross-chain-bridge-risk]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[wormhole]]"]
+related: ["[[bridge]]", "[[cosmos]]", "[[cross-chain-bridge-risk]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[wormhole]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Axelar
@@ -219,6 +219,55 @@ AXL has an **uncapped (inflationary) max supply** — staking rewards mint new A
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AXL is tradable on [[binance|Binance]] — both **spot** (AXL/USDT) and a **USD-margined perpetual**, which exposes [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data. AXL is **NOT listed on Hyperliquid**, so Binance is the **primary (effectively sole major) leveraged venue**. This concentration means the Binance perp's funding and OI are the definitive positioning read; there is no deep second perp venue to arbitrage against or fall back on. With a sub-$100M cap and thin ~$6M/24h spot turnover, perp order-book depth is shallow — realistic leverage should stay conservative, size in small clips, and use limit/VWAP-style entries to avoid slippage and self-inflicted liquidations. Venue concentration on one CEX also makes AXL sensitive to listing/margin-parameter changes and single-venue outages.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with a single dominant perp venue, persistent funding skew on the Binance AXL perp can be harvested by holding the offsetting spot leg.
+- [[crowded-long-funding-fade]] — thin-cap infra token prone to sharp funding spikes when narrative chasers crowd the long side; fade richly positive funding.
+- [[liquidation-cascade-fade]] — shallow perp depth near the cycle floor makes AXL prone to stop-run wicks; fade forced-liquidation flushes back toward mean.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm that a directional AXL move is driven by real leverage rather than thin spot noise.
+- [[range-mean-reversion]] — AXL trades in a compressed range near its all-time low; mean-revert extremes inside the band.
+- [[cash-and-carry]] — capture spot-vs-perp basis using Binance spot AXL/USDT against the USD-M perp when the term structure pays.
+
+### Volatility & regime character
+
+AXL is a **small-cap infrastructure / interoperability (cross-chain bridge) token** with high beta to broad crypto risk and strong directional correlation to BTC/ETH — it tends to sell off harder in risk-off and lag in relief rallies. It is **not a memecoin**, so reflexivity is fundamentals/narrative-driven (interoperability adoption, cross-chain volume) rather than social-momentum-driven. Trading ~98% below its 2024 ATH and near its all-time low in an Established Bear Market, realized volatility clusters around narrative catalysts and broad-market moves; thin liquidity amplifies both up- and down-moves.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** leveraged exposure lives almost entirely on Binance; a delisting, margin-parameter change, or outage has outsized impact, and thin depth magnifies slippage and liquidation risk.
+- **Uncapped emissions:** AXL has no max supply — staking rewards continuously mint new tokens, a persistent dilution headwind unless fee-burn offsets issuance in the current low-volume regime.
+- **Narrative dependence:** value tracks the crowded interoperability/bridge thesis ([[wormhole|Wormhole]], LayerZero, CCIP, native IBC); fee/adoption disappointment or a rotation out of the narrative hits the token directly.
+- **Bridge / security-budget risk:** a low token price shrinks the economic cost of attacking the validator set (see [[cross-chain-bridge-risk]]); a consensus or signing failure could impair bridged value and the token.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=AXLUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=AXLUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AXL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AXL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=AXLUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=AXLUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AXL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

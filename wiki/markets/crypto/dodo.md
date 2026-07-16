@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, altcoins]
 aliases: ["DODO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dodoex.io/"
-related: ["[[automated-market-maker]]", "[[chainlink]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[slippage]]"]
+related: ["[[automated-market-maker]]", "[[binance]]", "[[chainlink]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[range-mean-reversion]]", "[[slippage]]", "[[volatility-breakout]]"]
 ---
 
 # DODO
@@ -231,6 +231,54 @@ This is not investment advice; figures are point-in-time and crypto assets are h
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DODO is tradable on **Binance SPOT only** — there is no liquid perpetual venue for the token, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. Because depth is concentrated on a single centralized-exchange spot book (with thin secondary DEX/CEX liquidity), execution should favor limit orders and patient fills; market orders in size will walk the book and incur meaningful slippage. Venue concentration means position sizing must respect real DODOUSDT spot depth rather than notional headline volume, and gap/halt risk on one venue can dominate. Directional exposure is effectively long-biased (no cheap borrow/short), so shorting the name is impractical for most participants.
+
+### Applicable strategies
+
+- [[breakout-trading]] — a >99%-below-ATH microcap that trades in long compression phases, so range breaks from these bases are the cleaner directional signal on the DODOUSDT spot book.
+- [[volatility-breakout]] — DODO's low-cap, sentiment-driven tape produces sharp volatility expansions from quiet periods; entering on a volatility surge (rather than fixed levels) fits its reflexive character.
+- [[range-mean-reversion]] — between catalysts DODO chops within a band; fading extremes back toward the range mid suits a spot-only asset where you cannot lean on leverage.
+- [[rsi-mean-reversion]] — Extreme-Fear, low-liquidity spikes routinely push a microcap like DODO to oversold/overbought RSI readings that revert, a natural spot mean-reversion trigger.
+- [[dca-strategy]] — for accumulators who want DODO exposure without timing a thin single-venue book, spreading spot buys smooths entry across its high volatility.
+- [[narrative-trading]] — as a DEX/PMM DeFi governance token, DODO tends to move on DeFi/DEX-rotation narratives; aligning entries with an active narrative improves the odds on an otherwise range-bound microcap.
+
+### Volatility & regime character
+
+Small-cap (rank ~729), high-beta **DeFi/DEX infrastructure** token with a fully-circulating ~1B supply. It behaves as a reflexive microcap: quiet, range-bound drift punctuated by sharp sentiment-driven expansions, and it is strongly correlated to BTC/ETH risk appetite (it tends to under-perform in risk-off, Extreme-Fear tapes and over-shoot in DeFi-rotation risk-on phases). Not a memecoin, but its low float and thin liquidity give it memecoin-like reflexivity. Regime is dominated by broad crypto beta plus DeFi-sector narrative rotation.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — depth is concentrated on Binance spot; no liquid perp venue means limited shorting/hedging and elevated slippage/gap risk in size.
+- **Microcap volatility** — ~small-cap valuation and >99% below ATH; sentiment-driven swings and low liquidity amplify drawdowns.
+- **Narrative dependence** — price action leans on DeFi/DEX-sector rotation and broad-market risk appetite rather than idiosyncratic demand.
+- **Protocol/smart-contract history** — DODO has a prior exploit in its history and novel oracle-anchored PMM logic; protocol events can drive token risk.
+- **Emissions/incentives** — supply is fully circulating (limited unlock overhang), but ongoing liquidity-incentive emissions can add sell pressure.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=DODOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=DODOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=DODOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=DODOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

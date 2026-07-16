@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, data-provider, machine-learning]
+tags: [ai-trading, crypto, data-provider, machine-learning, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["VANA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.vana.org/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[decentralized-ai]]", "[[ethereum]]", "[[ocean-protocol]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[decentralized-ai]]", "[[ethereum]]", "[[ocean-protocol]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[narrative-trading]]"]
 ---
 
 # Vana
@@ -137,6 +137,58 @@ VANA is a **decentralized-AI / data-ownership** narrative token. CoinGecko categ
 - **Competition** — Ocean Protocol, Grass, and other data/AI-infrastructure projects compete for the same thesis and capital.
 - **Early-stage execution** — L1 maturity, validator decentralization, and data-quality enforcement (PoC) are still being proven.
 - **Macro/regime** — extreme-fear sentiment (F&G ~23) and an established bear market weigh on all early-stage AI tokens.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+VANA is tradable on **Binance** — both **spot** (VANA/USDT) and a **USD-margined perpetual** that carries funding, open interest, and liquidation data. Binance is the **primary leveraged venue**; VANA is **not** listed on Hyperliquid, so cross-venue perp hedging is limited to the Binance perp plus other CEX contracts. With a sub-$600 rank, a ~$35M circulating cap, and thin daily spot turnover, the leveraged book is shallow relative to majors — a small number of large positions can dominate funding and OI. Practically this means execution should assume wide slippage on size, sizing should be conservative and scaled down versus large-caps, and the concentration of leverage on a single venue makes VANA vulnerable to sharp liquidation-driven wicks. Spot depth is best on Binance/Upbit; the Binance perp is where funding/OI/liquidation signals concentrate.
+
+### Applicable strategies
+
+- [[token-unlock-supply-event]] — ~74% of supply is still locked (MC/FDV ~0.26), so scheduled team/investor/foundation unlocks are recurring, high-impact supply events to trade around.
+- [[narrative-trading]] — price is dominated by the decentralized-AI / data-ownership narrative cycle far more than by DLP revenue, making narrative rotation the main directional driver.
+- [[crowded-long-funding-fade]] — thin single-venue perp liquidity lets funding spike quickly on narrative-driven long crowding; fading over-extended positive funding captures the reset.
+- [[liquidation-cascade-fade]] — concentrated Binance leverage and low float make VANA prone to cascading liquidations that overshoot, offering fade entries into forced-selling wicks.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with price helps separate genuine trend legs from thin, liquidation-fueled spikes on this low-cap perp.
+- [[breakout-and-retest]] — trading near its all-time-low base, VANA's range breaks are cleaner to trade with a retest confirmation given how noisy standalone breakouts are on illiquid small-caps.
+
+### Volatility & regime character
+
+Small-cap (rank ~528), high-beta AI/data-infrastructure L1 token with a low-float / high-FDV structure that amplifies both up and down moves. It behaves as a **decentralized-AI narrative token** — reflexive to the AI cycle and to BTC/ETH risk-on/risk-off regimes, with returns dominated by narrative and unlock cadence rather than fundamentals. Correlation to majors is high during broad risk moves but idiosyncratic volatility spikes around unlocks and AI-narrative catalysts. Trading near its all-time low in an established bear/extreme-fear regime, realized volatility is elevated and directional trends are frequently interrupted by liquidation-driven whipsaws.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leverage and derivatives signals are concentrated on Binance (no Hyperliquid perp); thin depth magnifies slippage and liquidation risk.
+- **Severe unlock/emissions overhang** — only ~26% of supply circulates; ~74% remains to unlock, a persistent structural sell-pressure source that can dwarf the float.
+- **Narrative dependence** — price is driven by the AI-token cycle, not DLP revenue, so sentiment reversals can be abrupt and unforgiving.
+- **Small-cap fragility** — low market cap and turnover mean large positions move the market; funding/OI can distort on relatively small flows.
+- **Demand-side / execution risk** — DLP data-sale revenue is unproven, and early-stage L1 execution (validator decentralization, PoC enforcement) adds fundamental tail risk beyond price action.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=VANAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=VANAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=VANA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=VANA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=VANAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=VANAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=VANA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

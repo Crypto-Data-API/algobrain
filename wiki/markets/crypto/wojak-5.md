@@ -3,13 +3,13 @@ title: "wojak"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins, memecoins]
 aliases: ["WOJAK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://wojakcto.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[meme-coin-cycle]]", "[[narrative-trading]]"]
 ---
 
 # wojak
@@ -140,6 +140,53 @@ Etherscan: https://etherscan.io/token/0x8de39b057cc6522230ab19c0205080a8663331ef
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+WOJAK is tradable on Binance SPOT only — no liquid perpetual venue exists, so leverage and short access are limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With a single centralized spot venue anchoring price discovery (alongside its Ethereum DEX pools), execution is constrained to long-biased cash positions; sizing must account for thin depth on a low-cap meme token, so orders should be scaled against real book liquidity to avoid slippage, and rebalancing is done by adjusting spot exposure rather than levered notionals.
+
+### Applicable strategies
+
+- [[meme-coin-cycle]] — WOJAK is a pure Wojak-meme community token with no utility claim, so its price is driven by the classic reflexive meme cycle of hype, rotation, and mean decay.
+- [[narrative-trading]] — moves track meme/community narrative strength and social attention rather than fundamentals, making narrative positioning central.
+- [[sentiment-trading]] — high CoinGecko positive sentiment and active Telegram/X community make social sentiment a tradable signal for this token.
+- [[breakout-trading]] — thin spot depth produces sharp expansion moves off ranges, so breakout entries on volume can capture the impulsive legs.
+- [[dca-strategy]] — for spot-only long exposure to a highly volatile micro-cap, dollar-cost averaging smooths entry timing without needing leverage.
+- [[atr-trailing-stop]] — given extreme volatility and one-sided spot risk, an ATR-based trailing stop is a practical way to manage downside on long positions.
+
+### Volatility & regime character
+
+Small-cap (~#790) memecoin with pronounced reflexivity: price swings are large and momentum-driven, with limited fundamental anchoring. As an Ethereum meme token it exhibits high beta to broad crypto risk sentiment and elevated correlation to BTC/ETH risk-on/risk-off regimes, amplified by low liquidity. Expect regime shifts between quiet drift and violent meme-driven expansion, typical of the memecoin cohort.
+
+### Risk flags
+
+- Venue/liquidity concentration: spot-only availability on Binance plus Ethereum DEX pools means thin depth and slippage risk; no perp market to hedge or short.
+- Narrative dependence: value rests entirely on meme/community narrative with no stated utility, so attention decay can drive rapid drawdowns.
+- Supply overhang: large max supply (420.69T) above circulating supply implies potential future dilution.
+- Micro-cap volatility: low market cap makes the token susceptible to sharp, sentiment-driven price gaps in both directions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=WOJAKUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=WOJAKUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=WOJAKUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=WOJAKUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [agents, ai-trading, crypto, machine-learning]
+tags: [agents, ai-trading, crypto, machine-learning, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SAHARA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://saharaai.com"
-related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[defai]]", "[[depin]]", "[[ethereum]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[defai]]", "[[depin]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Sahara AI
@@ -248,6 +248,56 @@ Sahara AI is a full-stack, AI-native blockchain platform where anyone can create
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SAHARA is tradable on [[binance|Binance]] — both **spot** (SAHARA/USDT, launched via the Binance HODLer Airdrop) and a **USD-margined perpetual**, which brings the full derivatives toolkit: funding, open interest, and liquidations. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is the primary — effectively the only deep — leveraged venue for this name. Practically, that means leverage, borrow, and liquidation dynamics are concentrated on one exchange: the Binance USD-M funding rate and OI series are the reference signals, and there is no cross-venue perp to arb funding against. Sizing should respect that single-venue concentration — a Binance-specific outage, delisting, or margin-parameter change is an un-hedgeable event risk, and slippage in size is governed by Binance depth rather than an aggregate of venues. Spot lives across Binance, [[kraken|Kraken]], Upbit, Bitget and KuCoin, but leveraged execution and the derivatives data that inform it are a Binance monoculture.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — harvest the Binance USD-M perp funding on a post-airdrop name where recurring short-side demand and narrative swings can pin funding rich or cheap for extended stretches.
+- [[crowded-long-funding-fade]] — fade euphoric AI-narrative long crowding: persistently positive funding plus rising OI on a -92%-from-ATH token flags over-eager longs to lean against.
+- [[cash-and-carry]] — hold spot SAHARA on Binance versus a short USD-M perp to capture basis/funding while neutralizing directional exposure in a token with no cash flow.
+- [[liquidation-cascade-fade]] — the small ~$45M cap plus single-venue leverage makes SAHARA prone to sharp liquidation flushes; fade the over-extended wick once the cascade exhausts.
+- [[token-unlock-supply-event]] — with only ~34% circulating and ~6.6B tokens still to vest, scheduled unlock/emission tranches are tradable supply events on the calendar.
+- [[oi-confirmed-trend]] — use Binance open-interest expansion to confirm (or discount) directional moves, filtering low-conviction narrative pops from OI-backed trends.
+
+### Volatility & regime character
+
+Small-cap (rank ~602, ~$45M cap) AI/DePIN infrastructure token with high narrative beta. Price is dominated by the [[ai-narrative-arc|AI-narrative cycle]], Binance HODLer-airdrop selling pressure, and forward-emission overhang rather than fundamentals — behavior closer to a reflexive narrative token than a cash-flow asset. Expect elevated realized volatility, deep drawdowns (~92% off ATH), and high beta to the broad crypto tape (BTC/ETH risk-on/risk-off) and to the AI-token cohort. Turnover is high relative to size, so moves tend to be liquid rather than illiquid gaps.
+
+### Risk flags
+
+- **Venue concentration** — leveraged trading and derivatives data are Binance-only; no Hyperliquid perp means single-exchange event risk (outage, margin change, delisting) is un-hedgeable.
+- **Unlocks / emissions** — only ~34% of the 10B max supply circulates; ~6.6B tokens of scheduled forward dilution is persistent structural sell pressure. See [[token-unlocks]].
+- **Post-airdrop supply** — HODLer-airdrop recipients monetizing free allocations add ongoing spot supply.
+- **Narrative dependence** — with no fee accrual, price is set by AI-narrative mindshare and listing flow; the cohort underperforms sharply in risk-off / bear-market regimes.
+- **Small-cap fragility** — a ~$45M cap on single-venue leverage is vulnerable to liquidation cascades and to a fresh-ATL, no-technical-floor tape.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SAHARAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SAHARAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SAHARA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SAHARA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SAHARAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SAHARAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SAHARA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

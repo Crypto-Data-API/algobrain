@@ -3,13 +3,13 @@ title: "Epic Chain"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["EPIC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.epicchain.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Epic Chain
@@ -133,6 +133,55 @@ Epic was founded as Ethernity, having advised the United States Space Force, Lio
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+EPIC is tradable on **Binance** — both **spot** (EPIC/USDT) and a **USD-margined perpetual** carrying funding, open interest, and liquidation data. It is **NOT listed on Hyperliquid**, so Binance is the primary (effectively sole major) leveraged venue. This concentration means perp funding, OI, and liquidation flows all originate from one book, so the derivatives signal is clean but fragile — a single venue outage, delisting, or margin-tier change can dislocate the entire leveraged market. With a small-cap ~$15M market cap and thin depth, size positions conservatively: available leverage may be attractive but slippage on entry/exit and forced-liquidation air-pockets are the dominant execution risks. Cross-venue arbitrage is limited because spot lives across a handful of CEXs (Binance, KuCoin, Crypto.com) while the perp is Binance-only.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — single-venue Binance perp funding on a low-float name can run persistently rich or negative; harvest the carry while delta-hedging against Binance spot.
+- [[liquidation-cascade-fade]] — thin EPIC order books make stop-runs and forced-liquidation wicks violent and mean-reverting; fade the flush once the cascade exhausts.
+- [[narrative-trading]] — EPIC is an RWA/travel-payments narrative token (XRP cashback, Ripple/Algorand backing); position around narrative rotation rather than fundamentals.
+- [[oi-price-exhaustion]] — with all OI concentrated on Binance, rising open interest into a stalling price flags an exhausted, crowded position ripe for reversal.
+- [[breakout-and-retest]] — post-ATH downtrend leaves clear range boundaries; trade confirmed breaks with a retest to avoid low-liquidity fakeouts.
+- [[volatility-targeting]] — high, uneven realized volatility on a micro-cap demands size scaled inversely to ATR to keep risk-per-trade stable.
+
+### Volatility & regime character
+
+Small-cap altcoin (rank ~966, ~$15M cap) with high reflexive volatility and low float (33.6M supply, MC/FDV = 1.00, so no dilution overhang). Price is roughly 86% below its 2025 ATH and driven more by RWA/travel narrative flows and thin-book reflexivity than by BTC/ETH beta, though it still tends to amplify broad-market risk-on/risk-off moves. Expect sharp, sentiment-led swings and elevated funding-rate variance rather than steady trend.
+
+### Risk flags
+
+- **Venue concentration:** leveraged exposure is Binance-only; a delisting or margin-tier change could dislocate the perp with no alternative venue.
+- **Liquidity:** micro-cap with thin depth — wide spreads, high slippage, and liquidation air-pockets on size.
+- **Narrative dependence:** valuation hinges on RWA/travel adoption and XRP-cashback narrative; momentum can evaporate quickly if the story stalls.
+- **Supply/utility risk:** full float already circulating removes unlock overhang but also means no future demand catalyst from vesting cliffs; RWA/payments tokens carry latent regulatory sensitivity.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=EPICUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=EPICUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=EPIC` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=EPIC` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=EPICUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=EPICUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=EPIC"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

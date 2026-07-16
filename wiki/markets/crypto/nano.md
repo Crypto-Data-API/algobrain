@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, altcoins]
 aliases: ["RaiBlocks", "XNO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nano.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[fear-and-greed-index]]", "[[layer-1]]", "[[proof-of-stake]]", "[[stablecoins]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[fear-and-greed-index]]", "[[layer-1]]", "[[proof-of-stake]]", "[[stablecoins]]", "[[binance]]", "[[dca-strategy]]", "[[range-trading]]"]
 ---
 
 # Nano
@@ -271,6 +271,54 @@ Check out CoinBureau...
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XNO is **tradable on Binance SPOT only** among liquid venues — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. With no perp to hedge or express directional shorts, exposure is effectively long-only spot, and any bearish view must be expressed by exiting or reducing spot rather than shorting. Because observed turnover is extremely thin, venue concentration on a single spot book means order-book depth is shallow: sizing must be small, execution should be patient (limit orders, VWAP-style scaling), and market orders risk meaningful slippage. Position sizing should assume you may be the marginal buyer/seller and that liquidity can vanish in a risk-off tape.
+
+### Applicable strategies
+
+- [[dca-strategy]] — for a fixed-supply, no-dilution legacy name, averaging in over time smooths the thin-liquidity entry problem and avoids paying up on shallow books.
+- [[buy-and-hold]] — XNO's zero-emission, fully-distributed supply makes it a clean long-only bearer thesis with no unlock/dilution overhang to erode a hold.
+- [[range-trading]] — with a low-attention, mean-reverting price and no perp leverage to force trends, XNO often oscillates in a band that spot range trades can harvest.
+- [[rsi-mean-reversion]] — thin-volume spot names spike and fade around single-actor flows, so oscillator extremes tend to revert, favoring fade entries on stretched RSI.
+- [[breakout-and-retest]] — because liquidity is fragile, waiting for a breakout to retest confirms real demand before committing size, reducing false-breakout risk on a shallow book.
+- [[vwap-trading]] — execution-focused: scaling entries/exits toward VWAP is essential on a single thin spot book to minimize slippage and market impact.
+
+### Volatility & regime character
+
+XNO is a **micro-cap, single-purpose Layer-1 payments coin** (DAG/block-lattice), not a DeFi or memecoin. It behaves as a **low-attention legacy altcoin** with **high idiosyncratic, low-turnover volatility**: with no perpetual market and paper-thin spot volume, price is driven more by sporadic single-actor flows than by leveraged positioning. Its beta to [[bitcoin|BTC]]/ETH is real in broad risk-on/risk-off swings but noisy, and it lacks the reflexive leverage cascades of perp-heavy names. Regime character is best described as **illiquid mean-reversion punctuated by low-liquidity gaps** rather than sustained, trending momentum.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-only on essentially one liquid book with very thin daily turnover; shallow depth means high slippage and elevated single-actor manipulation risk (see Risks section).
+- **No perp / long-only** — no liquid perpetual venue means limited short/hedge access; bearish views can only be expressed by selling spot.
+- **Narrative dependence** — the feeless-payments thesis is contested by [[stablecoins]] and [[layer-2|L2]] rails; mindshare and speculative interest have faded since 2018.
+- **Security-funding model** — no block reward or fees; network security relies on voluntary representative operation, a structural risk versus incentivized chains.
+- **No unlock/emission overhang** — a *positive* flag: fully distributed, fixed supply means no token-unlock or emission dilution to trade around.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=XNOUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=XNOUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=XNOUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=XNOUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

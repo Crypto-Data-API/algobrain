@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, altcoins, defi]
 aliases: ["RON"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://roninchain.com"
-related: ["[[axie-infinity]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]"]
+related: ["[[axie-infinity]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[binance]]", "[[momentum-investing]]", "[[dca-strategy]]"]
 ---
 
 # Ronin
@@ -199,6 +199,55 @@ At ~$48M market cap RON is priced ~98.6% below its 2024 peak — a distressed Ga
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RON is tradable on **[[binance]] SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. With no borrow/short leg and a single dominant venue, execution and sizing must respect a thin order book: at ~$6M daily volume against a ~$48M cap (~13% volume/cap), size trades small, prefer limit orders, and expect meaningful slippage on market fills. Venue concentration also means Binance-specific liquidity events (listing/delisting, maintenance) dominate the tape, and directional exposure is effectively long-or-flat rather than long/short.
+
+### Applicable strategies
+
+- [[momentum-investing]] — beaten-down micro-cap that produces outsized bounces (e.g. the +7.5% snapshot day); ride confirmed upside momentum rather than fading it.
+- [[breakout-trading]] — thin float makes RON prone to sharp expansion out of multi-week bases; trade clean breaks of prior range highs.
+- [[atr-trailing-stop]] — high per-name volatility demands volatility-scaled exits; an ATR trail locks gains on squeezes without premature stop-outs.
+- [[dca-strategy]] — spot-only, distressed-valuation GameFi name (~98.6% below ATH) suits scaled accumulation rather than lump-entry timing.
+- [[narrative-trading]] — RON is a high-beta option on the web3-gaming / play-to-earn narrative; position around GameFi-cycle sentiment shifts.
+- [[crypto-beta-rotation]] — as a small-cap high-beta altcoin, rotate exposure with broad risk-on/risk-off and BTC/ETH regime turns.
+
+### Volatility & regime character
+
+Small-cap (rank ~#472), high-beta **GameFi / gaming-sidechain infra token** whose demand is tightly coupled to [[axie-infinity|Axie Infinity]]. Thin float and book produce reflexive, memecoin-like swings in both directions despite fundamentals-driven framing. Correlated to BTC/ETH risk appetite but with amplified beta, and heavily sensitive to the play-to-earn narrative regime — it can decouple sharply intraday (up or down) on low volume. Behaves as a distressed sector option: quiet in risk-off, explosive on narrative or liquidity impulses.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-only on Binance, ~$6M/day volume; slippage and single-venue dependence are primary execution risks.
+- **Dilution / emissions** — MC/FDV ~0.77 leaves ~23% of the 1.00B hard cap still to unlock (ecosystem/staking/team), adding structural sell-side weight.
+- **Narrative dependence** — value hinges on a still-out-of-favour play-to-earn / web3-gaming thesis and single-ecosystem reliance on Axie.
+- **Reputational / security legacy** — the 2022 ~$625M bridge hack (see [[cross-chain-bridge]]) leaves a lasting risk premium and headline sensitivity.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RONUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RONUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RONUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=RONUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

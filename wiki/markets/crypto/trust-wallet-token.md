@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["TWT", "Trust Wallet Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://trustwallet.com/"
-related: ["[[account-abstraction]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[self-custody]]"]
+related: ["[[account-abstraction]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[self-custody]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Trust Wallet Token
@@ -260,6 +260,55 @@ Vouching and User reputation, users will be able to vouch for developers of prod
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TWT is tradable on **Binance** with both a **spot** market (TWT/USDT) and a **USD-margined perpetual**, giving access to funding, open interest, and liquidation data on the primary leveraged venue. It is **not** listed on [[hyperliquid|Hyperliquid]], so there is no on-chain perp order book to arbitrage against. With leveraged flow concentrated on a single major venue and only moderate spot turnover (~4% daily), depth is adequate but thinner than large-caps — favor limit orders, scale into positions, and size conservatively to avoid slippage. The single-venue perp profile means [[funding-rate|funding]] and liquidation dynamics on Binance dominate execution timing and stop placement.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect [[funding-rate|funding]] on the Binance USD-M perp when it runs persistently positive/negative, delta-hedged against spot.
+- [[cash-and-carry]] — long TWT spot vs. short the perp to capture basis while the token's supply overhang keeps directional conviction low.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when funding spikes into rally chases on a mid-cap with concentrated Binance flow.
+- [[liquidation-cascade-fade]] — thin single-venue depth makes forced-liquidation flushes overshoot; fade the wick and reclaim.
+- [[breakout-and-retest]] — Binance-anchored price discovery gives clean levels; trade confirmed breaks of range boundaries with a retest entry.
+- [[range-mean-reversion]] — TWT spends long stretches range-bound near value; mean-revert between defined support/resistance when no catalyst is active.
+
+### Volatility & regime character
+
+TWT is a **mid/small-cap infrastructure (wallet-ecosystem) token** with **high beta to BTC/ETH** and the broad risk-on/risk-off tape — it lacks memecoin reflexivity but reflexively tracks the [[bnb|BNB Chain]] / Binance narrative and self-custody demand cycles. Realized volatility is elevated versus large-caps and amplifies in risk-off rotations; the token tends to hold up better than pure memecoins but underperforms majors in drawdowns.
+
+### Risk flags
+
+- **Venue concentration** — leveraged liquidity is concentrated on Binance; a listing/policy change or outage removes the primary perp and price-discovery venue.
+- **Supply overhang / emissions** — low MC/FDV (~0.42) and uncapped max supply mean persistent dilution risk that can cap upside.
+- **Narrative dependence** — value is tied to Trust Wallet adoption and the [[self-custody]] / [[account-abstraction]] narrative rather than cash flows; thin must-hold utility.
+- **Centralization / regulatory** — Trust Wallet is Binance-owned, so TWT carries direct exposure to Binance's strategic and regulatory situation.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TWTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TWTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=TWT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=TWT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TWTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=TWTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=TWT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

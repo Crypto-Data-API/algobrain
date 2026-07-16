@@ -3,13 +3,13 @@ title: "Quickswap"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, altcoins]
 aliases: ["QUICK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://quickswap.exchange/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[dca-strategy]]", "[[range-mean-reversion]]"]
 ---
 
 # Quickswap
@@ -138,6 +138,54 @@ $QUICK (New) is QuickSwap's native token &amp; redenominated in 2022 at a 1:1000
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+QUICK is tradable on **Binance SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do NOT apply. With a single deep CEX venue and thin 24h turnover relative to a micro-cap float, execution must lean on limit orders, patient scaling, and modest position sizing; large market orders will move price and incur meaningful slippage. Absence of a perp market means directional exposure is long-biased (no cheap synthetic shorts), so risk is managed through position size and hard stops rather than hedging.
+
+### Applicable strategies
+
+- [[dca-strategy]] — Spot-only, no-leverage profile suits systematic accumulation of a deeply drawn-down micro-cap (currently ~97% below ATH) without timing risk.
+- [[range-mean-reversion]] — QUICK has traded in a low, compressed range near its ATL; fading extremes within that band fits a spot-primary asset with no funding cost to carry.
+- [[rsi-mean-reversion]] — Reflexive micro-cap swings on thin volume produce oversold/overbought spikes that revert, well-suited to a single-venue spot book.
+- [[breakout-and-retest]] — A confirmed break above the tight recent range with a retest gives a cleaner long entry than chasing, important given limited exit liquidity.
+- [[value-averaging]] — Disciplined value-averaging targets accumulation into weakness while capping exposure to a speculative DeFi micro-cap.
+- [[buy-and-hold]] — For conviction on the buyback-and-burn tokenomics and long-run DEX thesis, a spot hold avoids the venue constraints that block active leveraged play.
+
+### Volatility & regime character
+
+Small/micro-cap DeFi (DEX) governance token with high idiosyncratic volatility and strong reflexivity typical of low-float alts. QUICK generally exhibits high-beta behavior to BTC/ETH risk sentiment — it tends to bleed harder in risk-off regimes and rally sharply in altcoin risk-on phases — but its price is also heavily driven by protocol-specific narrative (TVL trends, multi-chain expansion, buyback/burn flow) rather than pure market beta. Liquidity is thin, so realized volatility can spike on relatively small order flow.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — Single liquid CEX (Binance spot); no perp venue means no hedging and elevated slippage risk on exit.
+- **Micro-cap fragility** — Small market cap and thin turnover make the token vulnerable to sharp, low-liquidity moves and reflexive drawdowns.
+- **Emissions/supply** — Circulating supply is below max supply (buyback-and-burn offsets, but future emissions/unlocks can add sell pressure); monitor supply schedule.
+- **Narrative dependence** — Price hinges on DeFi/DEX narrative strength, multi-chain traction, and protocol revenue; loss of narrative or TVL can compress valuation quickly.
+- **Regulatory** — DeFi governance/exchange tokens carry evolving regulatory scrutiny that can affect listings and liquidity.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=QUICKUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=QUICKUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=QUICKUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=QUICKUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

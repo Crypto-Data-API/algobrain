@@ -3,13 +3,13 @@ title: "AC Milan Fan Token"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins]
 aliases: ["ACM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.socios.com/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[range-trading]]", "[[dca-strategy]]"]
 ---
 
 # AC Milan Fan Token
@@ -112,6 +112,53 @@ related: ["[[crypto-markets]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ACM is tradable on **Binance SPOT only** — there is no liquid perpetual venue, so leverage and short access are limited and this is a **spot-primary** asset. Perp funding, basis, and liquidation strategies do **not** apply. With liquidity concentrated on a single primary venue and a thin market cap, execution must lean on limit orders rather than market sweeps; the shallow book and single-venue dependence argue for small clip sizes, patience around fills, and awareness that Binance availability effectively defines tradability. Sizing should be conservative relative to 24h volume to avoid moving the book against yourself.
+
+### Applicable strategies
+
+- [[range-trading]] — ACM has spent extended stretches chopping in a tight band near its ATL; fading defined support/resistance suits a spot-only, low-momentum fan token.
+- [[range-mean-reversion]] — with no perp leverage and a mean-reverting price near lows, buying weakness toward support and trimming into strength fits the market structure.
+- [[rsi-mean-reversion]] — oversold/overbought RSI extremes on a thin, headline-driven fan token often snap back, making momentum-oscillator reversion practical for spot entries.
+- [[breakout-trading]] — fan tokens react sharply to club news and campaigns; capturing breakouts out of the ACM base can catch event-driven expansion.
+- [[dca-strategy]] — for spot accumulation of a small-cap with no leverage, averaging in dampens single-fill timing risk in an illiquid book.
+- [[news-trading]] — ACM price is tied to AC Milan sporting results, sponsorships, and Socios/fan-engagement announcements, which are discrete tradable catalysts.
+
+### Volatility & regime character
+
+ACM is a **small-cap fan token** (rank ~1702) with low, sporadic liquidity and high idiosyncratic risk. Its price is driven more by club-specific narrative and fan-engagement cycles than by broad crypto beta, though it still tends to bleed with BTC/ETH risk-off regimes while under-participating in market rallies. Expect reflexive, event-clustered volatility — quiet drift punctuated by sharp moves around football-season and announcement catalysts — rather than steady trend.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — Binance-spot primary; single-venue dependence and a thin order book create slippage and delisting exposure.
+- **Narrative dependence** — value is tethered to AC Milan performance, sponsorships, and Socios platform relevance; utility can fade if fan-engagement demand wanes.
+- **Small-cap fragility** — low market cap and FDV make the token vulnerable to outsized swings on modest flow.
+- **Sector/regulatory** — fan tokens face evolving regulatory scrutiny and platform-dependency risk (Socios/Chiliz ecosystem).
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ACMUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ACMUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ACMUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ACMUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

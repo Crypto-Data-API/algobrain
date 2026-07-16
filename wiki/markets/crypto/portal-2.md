@@ -3,13 +3,13 @@ title: "Portal"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["PORTAL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.portalgaming.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Portal
@@ -127,6 +127,55 @@ Onboarding the first billion gamers into Web3.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PORTAL is tradable on **Binance** as both spot (PORTAL/USDT) and a **USD-margined perpetual**, giving access to funding, open interest, and liquidation data on a single deep venue. It is **NOT on Hyperliquid**, so Binance is the primary — effectively sole tier-1 — leveraged venue. With a sub-$10M market cap and thin 24h volume, the perpetual is the main source of leverage and price discovery, but order books are shallow: even modest size can move price, funding can swing sharply, and stops/liquidations can chain. Venue concentration means execution should assume wide spreads, conservative position sizing, and reliance on Binance depth for entries/exits; cross-venue arbitrage is limited by fragmented, low-liquidity listings (Kraken, Bitget, KuCoin).
+
+### Applicable strategies
+
+- [[liquidation-cascade-fade]] — thin book plus leveraged Binance perp makes PORTAL prone to over-extended liquidation wicks that snap back, offering fade entries.
+- [[funding-rate-harvest]] — a low-cap gaming token can sustain persistently skewed perp funding, letting a delta-neutral spot/perp position collect the carry.
+- [[crowded-long-funding-fade]] — narrative-driven long crowding into a micro-cap often prints extreme positive funding, flagging exhausted longs to fade.
+- [[breakout-and-retest]] — with price pinned near all-time lows in a tight range, clean breakouts followed by a retest give structured, defined-risk entries.
+- [[rsi-mean-reversion]] — low liquidity produces sharp, mean-reverting swings well-suited to oscillator-based reversion around range extremes.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with price helps distinguish real, OI-backed moves from thin-liquidity noise.
+
+### Volatility & regime character
+
+PORTAL is a **small/micro-cap GameFi (Gaming) infrastructure token** on Ethereum with high beta to broad crypto risk sentiment and to BTC/ETH direction. Down more than 99% from its all-time high, it trades with reflexive, narrative-driven bursts typical of low-cap gaming/altcoin plays: illiquid ranges punctuated by violent expansion on catalysts. Realized volatility is elevated relative to majors, and moves are amplified by leverage on the Binance perp. Correlation to BTC/ETH is meaningful in risk-off regimes (it sells off with beta) but decoupling occurs on token-specific gaming or ecosystem news.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — sub-$10M cap and thin volume, with leveraged trading concentrated on Binance; slippage and gap risk are high.
+- **Emissions/unlocks** — circulating supply is ~80% of max (MC/FDV 0.80); remaining supply and any vesting can pressure price on new unlocks.
+- **Narrative dependence** — value is tied to GameFi/Web3-gaming adoption momentum; fading interest can drain liquidity quickly.
+- **Multi-chain fragmentation** — tokens across Ethereum, Base, and Solana can split liquidity and complicate on-chain positioning.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=PORTALUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=PORTALUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=PORTAL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=PORTAL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=PORTALUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=PORTALUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=PORTAL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

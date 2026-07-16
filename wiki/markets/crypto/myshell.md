@@ -3,13 +3,13 @@ title: "MyShell"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SHELL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://myshell.ai/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # MyShell
@@ -126,6 +126,57 @@ Currently, 200K+ AI Agents are deployed on MyShell, with 170K active AI creators
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity**
+
+SHELL is tradable on Binance — spot (SHELL/USDT) plus a USD-margined perpetual, which exposes funding, open interest, and liquidation flow. It is NOT listed on Hyperliquid, so Binance is the primary leveraged venue for the token. With a small market cap (~#1508) and thin 24h volume, the Binance perp is where price discovery and leveraged positioning concentrate; the order book is shallow, so realistic execution requires modest position sizing, limit orders, and awareness that funding and cascading liquidations can dominate short-term price action. Venue concentration on Binance means most cross-exchange arbitrage or basis structures must route through Binance spot and perp legs.
+
+**Applicable strategies**
+
+- [[funding-rate-harvest]] — harvest persistent perp funding on SHELL when the crowd leans directional and funding stays extended.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs in a low-cap AI token where positive funding spikes often precede unwinds.
+- [[liquidation-cascade-fade]] — thin SHELL order book makes forced-liquidation wicks overshoot, offering mean-reversion entries after cascades.
+- [[cash-and-carry]] — capture spot-perp basis by holding Binance SHELL spot against a short perp when the curve is rich.
+- [[volatility-breakout]] — narrative-driven AI-agent catalysts produce sharp expansions that suit breakout entries with defined risk.
+- [[narrative-trading]] — SHELL trades heavily on the AI-agent/AI-framework narrative, so rotation into the theme drives outsized moves.
+
+**Volatility & regime character**
+
+Small-cap AI-infrastructure/agent token with high reflexivity: price is far below its ATH and highly sensitive to AI-narrative rotation. Beta to BTC/ETH is elevated during risk-off moves (it sells off harder than large caps), but idiosyncratic AI-sector and Binance-ecosystem catalysts frequently dominate broad-market direction. Expect low-liquidity chop punctuated by violent, narrative- or liquidation-driven expansions.
+
+**Risk flags**
+
+- Liquidity/venue concentration: thin volume and heavy reliance on Binance for both spot and leveraged trading amplify slippage and gap risk.
+- Emissions/unlocks: circulating supply is a fraction of max supply (MC/FDV ~0.27), so future unlocks are a persistent overhang.
+- Narrative dependence: valuation hinges on the AI-agent narrative remaining in favor; sentiment shifts can drive rapid repricing.
+- Derivatives risk: shallow perp depth means funding swings and liquidation cascades can move price disproportionately versus fundamentals.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SHELLUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SHELLUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SHELL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SHELL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SHELLUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SHELLUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SHELL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

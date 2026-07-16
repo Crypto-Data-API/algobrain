@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["CFG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://centrifuge.io/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[plume]]", "[[real-world-assets]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[plume]]", "[[real-world-assets]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[narrative-trading]]"]
 ---
 
 # Centrifuge
@@ -247,6 +247,57 @@ Centrifuge differentiates on **originated private credit** (invoices, structured
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CFG is tradable on **[[binance|Binance]]** — both **spot** (CFG/USDT) and a **USD-margined [[perpetual-futures|perpetual]]** with [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT listed on [[hyperliquid|Hyperliquid]]**, so Binance is the primary leveraged venue. With a ~#350 market-cap rank and concentrated liquidity, perp depth is thin relative to majors: leverage is available but crowded positioning can move funding and price sharply. Practically, this concentrates price discovery and liquidation flow on one venue, so size should be scaled to Binance order-book depth, entries/exits laddered to limit slippage, and funding monitored as a real carry cost. Additional Korean-won spot flow via Upbit can create episodic basis/premium dislocations.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin altcoin perp funding on CFG can spike positive during RWA-narrative chases, letting a delta-neutral short-perp/long-spot book collect carry.
+- [[cash-and-carry]] — long Binance spot vs. short the USD-M perp captures basis when the perp trades at a persistent premium to spot.
+- [[liquidation-cascade-fade]] — low float and one dominant leveraged venue make CFG prone to over-extended liquidation wicks that mean-revert, offering fade entries.
+- [[oi-confirmed-trend]] — pairing rising open interest with directional RWA-flow moves helps distinguish real trends from thin-liquidity noise.
+- [[narrative-trading]] — CFG is a high-beta expression of the RWA/tokenization theme, so rotations into that narrative drive outsized directional moves.
+- [[token-unlock-supply-event]] — uncapped supply with ~44% not yet circulating means emission/unlock milestones are tradable supply-pressure events.
+
+### Volatility & regime character
+
+CFG is a **small-cap infrastructure/[[defi|DeFi]] token** (an RWA-tokenization protocol), so it exhibits high beta to broad crypto risk appetite and elevated idiosyncratic volatility versus [[bitcoin|BTC]]/[[ethereum|ETH]]. It broadly tracks BTC/ETH direction but with amplified swings, and can decouple on RWA-specific catalysts — showing narrative reflexivity where momentum feeds on itself in both directions. Regime is best characterized as risk-on-sensitive with a persistent dilution overhang capping durable uptrends.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** Binance is effectively the only deep leveraged venue; thin depth means slippage and gap risk on size, and single-venue outage or delisting risk.
+- **Unlocks/emissions:** uncapped supply with ~44% not yet circulating creates ongoing dilution and event-driven supply shocks.
+- **Narrative dependence:** much of the price action is RWA-theme driven; a rotation out of the narrative can reverse moves quickly.
+- **Regulatory exposure:** real-world-credit and securities tokenization is highly sensitive to securities law and jurisdictional compliance.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CFGUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CFGUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CFG` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CFG` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CFGUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CFGUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CFG"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

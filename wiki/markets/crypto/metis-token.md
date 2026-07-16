@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["METIS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.metis.io/"
-related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]", "[[smart-contracts]]", "[[staking]]"]
+related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]", "[[smart-contracts]]", "[[staking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Metis
@@ -208,6 +208,57 @@ Metis hosts a DeFi-centric ecosystem (DEXes, lending, yield) alongside gaming an
 - **2026** — METIS set an all-time low of $2.73 (2026-04-05) amid the broad bear regime, then recovered modestly; trading $3.19 as of 2026-06-22.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+METIS is tradable on [[binance]] as **spot (METIS/USDT)** and as a **USD-margined [[perpetual-futures|perpetual]]** (with [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data). It is **not listed on Hyperliquid**, so Binance is the **primary leveraged venue** and the reference market for derivatives-based signals. Because leveraged exposure is concentrated on a single major venue and the spot market cap sits sub-$25M in the #700s, order books are thin: perp funding, OI, and liquidation prints on Binance are effectively the whole leveraged picture, and there is no deep secondary perp venue to diffuse crowding. Practically this means execution should assume shallow depth and meaningful slippage on size — scale into positions, favor limit orders, keep clip sizes small relative to visible depth, and treat Binance funding/OI as the dominant regime signal since a large share of leveraged flow routes through one book.
+
+### Applicable strategies
+
+- [[liquidation-cascade-fade]] — thin sub-$25M float on a single perp venue makes METIS prone to sharp forced-liquidation wicks; fading exhausted cascades into support can capture the mean-revert.
+- [[funding-rate-harvest]] — small-cap L2 tokens frequently run persistently one-sided Binance funding; harvesting the spread (short perp / hold spot when positive) monetizes crowded positioning.
+- [[oi-price-exhaustion]] — with leverage concentrated on Binance, rising OI into a stalling price flags exhausted longs/shorts and a reversal-prone setup.
+- [[breakout-and-retest]] — METIS's fixed 10M supply and periodic narrative-driven weekly swings produce clean range breaks; trading the retest filters low-liquidity fakeouts.
+- [[rsi-mean-reversion]] — the token's tendency to overshoot on thin books makes momentum-oscillator extremes reliable fade zones inside its ranges.
+- [[volatility-targeting]] — sizing inversely to METIS's elevated realized volatility keeps single-venue, low-liquidity risk bounded across regimes.
+
+### Volatility & regime character
+
+METIS is a **small-cap L2 infrastructure / gas token** (rank ~#700-800, sub-$25M cap) with a distinctive fixed 10M max supply that gives it a high unit price but does not reduce percentage volatility. It behaves as a **high-beta altcoin**: broadly correlated to [[bitcoin]] and [[ethereum]] direction but with amplified swings and episodic token-specific moves (its outsized weekly gain into a falling broad market illustrates narrative/rotation-driven reflexivity). As an L2/DeFi-infrastructure token it tracks the ETH-L2 sector, so it carries both crypto-beta and sector-rotation exposure, and its low liquidity means moves can be exaggerated relative to larger caps.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — thin sub-$25M order books with leveraged trading concentrated on Binance; no Hyperliquid or deep secondary perp venue, so a single venue's funding/liquidations dominate and slippage on size is material.
+- **Supply / emissions** — fixed 10M max with circulating still below total; sequencer-staking and ecosystem-incentive distributions can add sell pressure, and the small float amplifies the price impact of any large holder movement.
+- **Narrative dependence** — price is sensitive to L2, decentralized-sequencer, and AI/DePIN (Hyperion) narratives; rallies driven by mindshare rotation can reverse quickly when the narrative cools.
+- **Competitive / structural** — heavy competition from far larger L2s and the broad de-rating of L2 gas/governance tokens leave METIS structurally vulnerable to sector outflows.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=METISUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=METISUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=METIS` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=METIS` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=METISUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=METISUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=METIS"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

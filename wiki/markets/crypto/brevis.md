@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, defi, derivatives, perpetual-futures, funding-rate, open-interest, liquidations]
 aliases: ["BREV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://brevis.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[verifiable-compute]]", "[[zero-knowledge-proof]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
@@ -221,6 +221,57 @@ Brevis trades on the **ZK coprocessor / verifiable-compute** narrative, with a *
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BREV is tradable on **[[binance|Binance]]** as both **spot** (BREV/USDT) and a **USD-margined [[perpetual-futures|perpetual]]**, so the standard derivatives telemetry — [[funding-rate|funding]], [[open-interest]], and [[liquidations]] — is available for it. It is **NOT** listed on [[hyperliquid|Hyperliquid]], so Binance is effectively the **primary (and dominant) leveraged venue**; there is no deep alternative perp market to arbitrage against or fall back on. Practically, that venue concentration means the Binance perp order book and its funding print are the reference for the whole float — leverage is available but on a thin ~$20M-cap microcap, so book depth is shallow and a single large liquidation can move price hard. Size in via limit orders, expect meaningful slippage on size, and treat the Binance funding/OI series as the single source of positioning signal rather than a blend across venues.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a single-venue Binance perp with a full funding series lets a delta-neutral harvester collect funding on a microcap that frequently swings to funding extremes.
+- [[crowded-long-funding-fade]] — narrative-driven pops in a thin ZK-coprocessor microcap crowd the long side; persistently positive funding flags an over-owned book to fade.
+- [[cash-and-carry]] — hold spot BREV versus a short Binance perp to lock the basis/funding carry without directional exposure, viable because both legs exist on one venue.
+- [[liquidation-cascade-fade]] — shallow depth plus concentrated Binance leverage makes forced-liquidation flushes overshoot, giving a mean-revert fade after cascades clear.
+- [[oi-price-exhaustion]] — rising [[open-interest]] into a stalling price on this low-float name signals leveraged exhaustion and an unwind setup.
+- [[token-unlock-supply-event]] — only ~25% of supply circulates, so scheduled unlocks/emissions are a recurring, tradable supply overhang to position around.
+
+### Volatility & regime character
+
+Small-cap / microcap (~$20M, rank ~#822) infrastructure/DeFi token in the ZK-coprocessor "verifiable-compute" cohort. High realized volatility and reflexive, narrative-driven moves (Binance HODLer-airdrop and Celer-lineage angles) dominate; it trades with high beta to BTC/ETH risk appetite and tends to fall harder than large caps in risk-off tapes while spiking on infra-narrative rotations. With ~79% drawdown from its January-2026 ATH and a heavy emission overhang, price action is liquidity- and unlock-sensitive rather than fundamentals-anchored.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure lives almost entirely on Binance; a delisting, funding-regime shift, or Binance-specific outage would disproportionately hit BREV liquidity.
+- **Liquidity / depth** — microcap float means thin books, wide slippage on size, and outsized impact from single liquidations.
+- **Unlocks / emissions** — ~75% of max supply is not yet circulating (MC/FDV ≈ 0.25); unlock windows are a structural sell overhang.
+- **Narrative dependence** — value is tied to the still-unproven ZK-coprocessor/data-driven-DeFi thesis; without live integrations, moves are sentiment- and flow-driven and can reverse sharply.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BREVUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BREVUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BREV` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BREV` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BREVUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BREVUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BREV"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

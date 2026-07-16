@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, data-provider]
+tags: [ai-trading, crypto, data-provider, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["GRT", "Graph Protocol"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (developed by Edge & Node, San Francisco)"
 website: "https://thegraph.com/"
-related: ["[[arbitrum]]", "[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]"]
+related: ["[[arbitrum]]", "[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # The Graph
@@ -289,6 +289,55 @@ The Graph's structural edge is that it is **decentralized and protocol-owned** r
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+GRT is tradable on [[binance]] as both **spot** (GRT/USDT) and a **USD-margined perpetual** ([[perpetual-futures]]) carrying [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is **NOT listed on Hyperliquid**, so Binance is the primary — and effectively the only deep — leveraged venue. With market-cap rank ~174 and modest 24h volume, order books thin out quickly beyond small clip sizes; leverage concentration on a single perp venue means funding, OI, and liquidation flows on Binance dominate price discovery. Practically, size positions to Binance depth, expect slippage on large market orders, and treat cross-venue basis/arb as constrained by the absence of a second major perp venue.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect Binance perp funding on GRT when the single-venue perp sits in persistent positive-carry regimes, hedged against spot.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when GRT funding spikes during AI/data-narrative pumps, a recurring pattern for a high-beta laggard.
+- [[liquidation-cascade-fade]] — GRT's thin single-venue book makes it prone to sharp forced-liquidation wicks near all-time lows that mean-revert.
+- [[narrative-trading]] — GRT is a late, high-beta mover in AI-agent and [[depin|DePIN]] baskets; trade rotation into "data infrastructure" plays.
+- [[rsi-mean-reversion]] — persistent downtrend near ATL produces oversold-bounce setups suited to bounded mean-reversion entries.
+- [[oi-confirmed-trend]] — use Binance open-interest confirmation to validate breakouts/breakdowns given how much of GRT's leverage sits on one venue.
+
+### Volatility & regime character
+
+Small/mid-cap altcoin with high beta to BTC/ETH risk sentiment and elevated reflexivity inside AI-data/DePIN narrative baskets. As an infrastructure/DeFi-adjacent token (indexing layer for major DeFi front-ends) it lacks memecoin-style froth but rallies late and hard when "picks and shovels" narratives rotate. Fully diluted supply (cap ≈ FDV) means moves reflect demand and fee-capture sentiment rather than unlock mechanics; character is a grinding-downtrend-with-sharp-relief-bounce profile.
+
+### Risk flags
+
+- **Venue concentration**: leveraged exposure is concentrated on Binance (no Hyperliquid, no second major perp venue), so liquidity and funding are single-venue dependent.
+- **Thin liquidity / delisting risk**: rank ~174 with price at all-time lows raises index-removal/delisting risk for a former top-50 asset.
+- **Emissions drag**: ongoing ~3% indexer-reward issuance is a structural sell-pressure headwind unless query-fee burn scales.
+- **Narrative dependence**: upside is heavily contingent on the AI-agent/data-infrastructure narrative re-rating fee capture.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=GRTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=GRTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=GRT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=GRT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=GRTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=GRTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=GRT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

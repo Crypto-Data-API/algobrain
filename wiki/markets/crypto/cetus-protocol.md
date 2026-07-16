@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, liquidity]
+tags: [crypto, defi, liquidity, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["CETUS", "Cetus CLMM", "Cetus DEX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.cetus.zone/"
-related: ["[[2026-exploit-target-watchlist]]", "[[ai-amplified-exploit-arbitrage]]", "[[crypto-markets]]", "[[governance-restitution-arbitrage]]", "[[move-clmm-vulnerability-class]]", "[[orca]]", "[[raydium]]", "[[uniswap]]"]
+related: ["[[2026-exploit-target-watchlist]]", "[[ai-amplified-exploit-arbitrage]]", "[[binance]]", "[[crypto-markets]]", "[[funding-rate]]", "[[governance-restitution-arbitrage]]", "[[liquidation-cascade-fade]]", "[[move-clmm-vulnerability-class]]", "[[orca]]", "[[perpetual-futures]]", "[[raydium]]", "[[uniswap]]"]
 ---
 
 # Cetus Protocol
@@ -256,6 +256,55 @@ Cetus occupies the same *structural niche* as Raydium/Orca but on a smaller, ear
 - **2025-05-28:** A community governance vote (and the Sui Foundation) committed to **fully compensating affected users**. The Sui Foundation extended a **~$30M loan** to Cetus to bridge the gap between recovered funds and total losses. (Verified via WebSearch, 2026-06-11)
 - **2025-06-08:** **Cetus relaunched** its protocol just ~17 days after the exploit, restoring affected liquidity pools to between **85% and 99%** of their pre-hack value. Remaining shortfalls are being repaid to LPs in **CETUS tokens over a 12-month linear unlock**, contingent on any further recoveries from the attacker. The CETUS token had fallen ~44% from its pre-attack price by early June 2025. (Verified via WebSearch, 2026-06-11)
 - **As of June 2026:** Cetus is **operating normally** and remains the primary DEX/liquidity protocol on Sui. The exploit, frozen-funds intervention, and full restitution remain a defining episode in DeFi security and chain-governance debates. See [[governance-restitution-arbitrage]] and [[ai-amplified-exploit-arbitrage]] for the strategy angle.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CETUS is tradable on [[binance]] — both spot (CETUS/USDT) and a USD-margined [[perpetual-futures|perpetual]], which brings [[funding-rate|funding]], [[open-interest|open interest]] and [[liquidations|liquidation]] data to what the rest of this page describes as an otherwise spot-dominated token. CETUS is **NOT** on [[hyperliquid]]; Binance is effectively the sole primary leveraged venue. That concentration matters: with a thin ~$17M cap and shallow spot depth, the Binance perp is where most price discovery and leveraged flow occur, and there is no deep secondary perp venue to arbitrage against or to absorb liquidations. Practically, execution and sizing should assume shallow order books, wider effective spreads on size, and outsized slippage/liquidation risk — keep clip sizes small, use limit/passive execution, and treat leverage conservatively because a single venue's funding and liquidation dynamics dominate.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the Binance USD-M perp is the only funding-bearing venue for CETUS, so harvesting persistent funding (delta-hedged spot vs perp) is the cleanest carry expression on this thin micro-cap.
+- [[crowded-long-funding-fade]] — CETUS is a high-beta SUI derivative prone to reflexive rallies; when perp funding spikes richly positive on a chase, fading crowded longs into elevated funding is a defined edge.
+- [[liquidation-cascade-fade]] — shallow single-venue liquidity means Binance liquidation cascades overshoot violently; fading the flush after forced selling exhausts can capture sharp mean-reversion bounces.
+- [[oi-confirmed-trend]] — because Binance is the sole OI source, rising open interest alongside price is a relatively clean confirmation signal for trend continuation vs a hollow, liquidation-driven move.
+- [[cash-and-carry]] — with spot on Binance and a co-located USD-M perp, positive-basis windows on this exploit-discounted token can be locked as a market-neutral carry trade.
+- [[breakout-and-retest]] — as a levered claim on SUI DeFi with a deep ATH drawdown, CETUS trends impulsively; breakout-and-retest structures respect the thin liquidity by demanding confirmation before sizing.
+
+### Volatility & regime character
+
+CETUS is a thin **micro-cap DeFi/infrastructure token** (Sui's flagship CLMM DEX) and a **high-beta derivative of [[sui|SUI]]**, historically amplifying SUI moves ~2-3x. It is not a memecoin but shares memecoin-like reflexivity through low float liquidity and ~9% daily turnover: small capital produces large percentage swings in both directions. Correlation to BTC/ETH is real but secondary — CETUS tracks SUI and the broader Sui-DeFi narrative first, then the majors. In risk-off/bear regimes it carries amplified downside and genuine liquidity risk on size; in risk-on it can decouple upward violently on Sui-ecosystem momentum.
+
+### Risk flags
+
+- **Liquidity & venue concentration:** shallow spot books and a single primary leveraged venue (Binance) mean thin depth, high slippage on size, and no cross-venue perp to hedge or arbitrage — liquidation and funding dynamics are dominated by one exchange.
+- **Emissions / restitution overhang:** post-exploit shortfalls are repaid to LPs in CETUS over a 12-month linear unlock, a modest but persistent incremental sell-pressure layer on top of normal emissions (float is already ~94.8%, limiting broader dilution).
+- **Narrative dependence:** the token is a levered bet on Sui-DeFi adoption and SUI price; idiosyncratic value is limited, so it lives and dies by ecosystem sentiment and the residual security-event discount from the ~$223M 2025 exploit.
+- **Security / event risk:** the demonstrated Move-CLMM exploit leaves a lasting risk premium; renewed security or chain-governance headlines can trigger fast, gap-like repricing that thin liquidity cannot absorb smoothly.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=CETUSUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=CETUSUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=CETUS` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=CETUS` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CETUSUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=CETUSUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=CETUS"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["HIVE", "Hive blockchain"]
 entity_type: protocol
 headquarters: "Decentralized (community-run)"
 website: "https://hive.io/"
-related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[justin-sun]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[steem]]", "[[tron]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[justin-sun]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[steem]]", "[[tron]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[range-mean-reversion]]"]
 ---
 
 # Hive
@@ -210,6 +210,57 @@ The key takeaway: Hive and Steem are technically near-identical forks, but they 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HIVE is tradable on **Binance** — both **spot** (HIVE/USDT) and a **USD-margined perpetual** future, which exposes **funding**, **open interest**, and **liquidation** data for the token. It is **NOT** listed on Hyperliquid, so **Binance is the primary leveraged venue** and the effective price-discovery hub for derivatives. Because leveraged flow is concentrated on a single exchange, perp funding and OI on Binance dominate the derivatives picture, and there is no on-chain perp DEX to cross-check or arbitrage against. With a sub-$30M market cap and thin spot books (also on Upbit and Bitget), leveraged positions can move price disproportionately: traders should size conservatively, favor limit/maker execution to avoid slippage, and treat available perp depth — not headline market cap — as the true liquidity constraint. Venue concentration also means funding spikes and liquidation cascades tend to originate and resolve on Binance, so execution and sizing should be calibrated to Binance order-book depth and funding cadence.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a low-cap, single-venue perp like HIVE frequently sustains skewed Binance funding; harvesting it against a spot hedge can capture carry when directional conviction is low.
+- [[crowded-long-funding-fade]] — sentiment-driven pumps on a thin SocialFi token often over-crowd the long side; fading persistently positive funding targets the mean-reversion after leverage builds up.
+- [[liquidation-cascade-fade]] — concentrated leverage on one venue makes HIVE prone to sharp forced-liquidation flushes; fading over-extended cascades on Binance can capture the snap-back.
+- [[range-mean-reversion]] — outside of narrative bursts HIVE spends long stretches ranging in a deep drawdown, making band/range reversion viable on the thin spot pair.
+- [[oi-confirmed-trend]] — using Binance open-interest changes to confirm that a HIVE move is backed by real positioning (not spoofed spot) filters false breakouts on an illiquid book.
+- [[breakout-and-retest]] — narrative or Splinterlands-driven catalysts can trigger clean breakouts; waiting for a retest reduces the whipsaw risk inherent to a low-liquidity small-cap.
+
+### Volatility & regime character
+
+HIVE is a **small-cap** SocialFi / gaming [[layer-1]] token (rank ~#682, sub-$30M cap) with **high beta** to broad crypto risk sentiment and strong directional correlation to **BTC/ETH** during risk-on/risk-off swings. Its price is **narrative- and engagement-reflexive**: activity in flagship apps (Splinterlands, PeakD) and periodic SocialFi/gaming rotations can drive sharp, low-liquidity moves that decouple briefly from majors before mean-reverting. In quiet regimes it trends sideways in a deep post-2021 drawdown with low realized volatility; in active regimes thin books amplify moves in both directions. Treat it as a reflexive small-cap altcoin rather than a stable infra/DeFi holding.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** leveraged trading is concentrated on Binance with no Hyperliquid or perp-DEX alternative; thin spot books make slippage and gap risk significant.
+- **Inflationary supply / no hard cap:** ongoing HIVE issuance funds rewards and can dilute holders if app demand lags; powering-down (13-week vesting) shapes sell-pressure timing.
+- **Narrative dependence:** value is tied to SocialFi/gaming engagement (Splinterlands, PeakD); fading activity or rotation out of the narrative removes demand support.
+- **Governance & peg risk:** DPoS witness concentration and the algorithmic HBD peg introduce protocol-level tail risks that can hit HIVE during stress and trigger cascade liquidations on the single leveraged venue.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HIVEUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HIVEUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HIVE` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HIVE` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HIVEUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HIVEUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HIVE"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

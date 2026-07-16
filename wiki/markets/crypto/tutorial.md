@@ -3,13 +3,13 @@ title: "Tutorial"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["TUT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://tutorialtoken.com"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[meme-coin-cycle]]"]
 ---
 
 # Tutorial
@@ -122,6 +122,57 @@ The project was originally created on four.meme and liquidity was transferred to
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TUT is tradable on **Binance** — both **spot** (TUT/USDT) and a **USD-margined perpetual** with the associated derivatives plumbing (funding, open interest, liquidations). It is **NOT** listed on Hyperliquid, so Binance is the **primary leveraged venue** and the reference market for price discovery on the perp. Secondary spot liquidity exists on Bitget and KuCoin, plus on-chain via PancakeSwap on BNB Chain. With a ~#1137 market-cap rank and only a few million dollars in daily volume, order books are thin: leverage is available but effective size is small, funding can swing hard, and liquidation clusters on the single dominant perp venue can move price disproportionately. Because Binance is the sole deep leveraged venue, execution and position sizing should assume elevated slippage on market orders, wider stops, and that most cross-venue basis/arbitrage must be spot-vs-Binance-perp rather than perp-vs-perp.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with a single dominant Binance perp and a reflexive memecoin, funding often runs persistently one-sided, letting a spot-vs-perp hedge harvest the carry.
+- [[crowded-long-funding-fade]] — retail-driven meme rallies in TUT tend to crowd longs and push funding to extremes, setting up a fade of overheated positioning.
+- [[liquidation-cascade-fade]] — thin books on the lone Binance perp make forced-liquidation wicks sharp and mean-reverting, favoring fading the flush.
+- [[cash-and-carry]] — when the perp trades at a rich premium, long Binance spot / short the perp captures basis without directional exposure.
+- [[meme-coin-cycle]] — TUT is an AI-meme launched from a tutorial gag, so its price action follows narrative-driven meme rotation more than fundamentals.
+- [[volatility-breakout]] — low-float memecoins like TUT spend long stretches ranging then break violently on attention spikes, rewarding volatility-triggered entries.
+
+### Volatility & regime character
+
+TUT is a **small-cap memecoin** (AI-meme / AI-agent category) with high reflexivity: price is driven by attention, social momentum, and narrative rotation rather than cash flows. Realized volatility is high, with a low free float relative to a 1B max supply. As a low-cap alt it carries **high beta to BTC/ETH** in risk-off moves (it sells off hard when majors drop) but decouples to the upside during meme/narrative pumps. Expect regime alternation between quiet, illiquid ranges and violent expansion moves around catalysts.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — leveraged trading concentrated on a single Binance perp; thin spot books mean slippage and gap risk, and a Binance delisting or halt would remove the primary venue.
+- **Supply / emissions** — circulating supply (~834M) is below the 1B max supply, so future minting/unlocks toward max could add sell pressure; MC/FDV is currently ~1.0.
+- **Narrative dependence** — value rests on meme/AI-agent narrative and BNB-chain building sentiment; attention fade can drain liquidity quickly.
+- **Reflexivity & drawdown** — trades ~90%+ below its ATH with a history of extreme swings; leveraged positions face rapid liquidation risk in cascades.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TUTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TUTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=TUT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=TUT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TUTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=TUTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=TUT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

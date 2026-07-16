@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives]
+tags: [crypto, defi, derivatives, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["WOO", "WOO X", "WOOFi"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://woo.org"
-related: ["[[automated-market-maker]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[liquidity]]", "[[market-maker]]", "[[perpetual-futures]]", "[[slippage]]"]
+related: ["[[automated-market-maker]]", "[[binance]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidity]]", "[[liquidation-cascade-fade]]", "[[market-maker]]", "[[perpetual-futures]]", "[[slippage]]"]
 ---
 
 # WOO Network
@@ -222,6 +222,55 @@ WOOFi competes with other on-chain perp/spot DEXs ([[gmx|GMX]], [[dydx|dYdX]], [
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+WOO is tradable on **Binance** — both **spot** (WOO/USDT) and a **USD-margined perpetual**, which exposes live **funding**, **open interest**, and **liquidation** data. It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** for WOO; secondary CEX spot books (Kraken, Bitget, KuCoin, Crypto.com) plus WOOFi's own on-chain sPMM add spot depth but no comparable perp analytics. With a sub-$25M market cap and modest 24h volume, WOO is a thin small-cap: order books are shallow, leveraged positions can move price quickly, and funding/OI can swing sharply. Practically, this concentrates all funding-, basis-, and liquidation-based strategies on the Binance USD-M contract, and argues for conservative position sizing, wider slippage assumptions, and staged entries/exits rather than single large market orders.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect the Binance USD-M perp funding on WOO when it runs persistently positive/negative, sizing for the thin book.
+- [[cash-and-carry]] — pair long Binance spot WOO against a short USD-M perp to capture basis/funding while staying delta-neutral.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs on WOO when funding spikes positive into extended OI, a common pattern in low-cap perps.
+- [[liquidation-cascade-fade]] — small-cap WOO liquidations cluster; fade the forced-selling wick back toward the sPMM/oracle mid.
+- [[oi-confirmed-trend]] — use Binance open-interest changes to confirm whether a WOO move is fresh positioning or short-covering before trend entries.
+- [[volatility-breakout]] — WOO's low-liquidity tape produces sharp range expansions; trade confirmed breakouts with ATR-scaled stops.
+
+### Volatility & regime character
+
+WOO is a **small-cap DeFi/exchange-infrastructure token** (rank ~#769, ~$24M cap) trading ~99% below its 2021 high. It behaves as a **high-beta risk asset** with strong positive correlation to BTC/ETH: it tends to lag on rallies and overshoot on drawdowns, amplified by its shallow liquidity. Value accrual is **reflexive** — buyback/staking demand strengthens in high-volume regimes and weakens in risk-off tapes (as in the current Extreme-Fear backdrop). It is not a memecoin, but its low float and thin books give it memecoin-like reflexivity on volume spikes.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — thin spot books and a single dominant perp venue (Binance) mean slippage, gap risk, and cascade risk are elevated; no Hyperliquid fallback.
+- **Emissions / remaining float** — MC/FDV ≈ 0.64 leaves meaningful supply to unlock, a structural overhang on price.
+- **Narrative & revenue dependence** — buyback/staking value accrual is tied to platform volume; falling activity weakens the bid.
+- **Protocol / oracle history** — WOOFi's sPMM depends on off-chain quotes and suffered a past oracle-manipulation exploit; headline protocol risk can spill into WOO token pricing.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=WOOUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=WOOUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=WOO` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=WOO` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=WOOUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=WOOUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=WOO"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

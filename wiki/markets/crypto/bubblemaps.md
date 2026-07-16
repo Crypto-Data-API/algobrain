@@ -3,13 +3,13 @@ title: "Bubblemaps"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BMT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bubblemaps.io"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Bubblemaps
@@ -128,6 +128,55 @@ Bubblemaps transforms this complexity into a visual experience, making analysis 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BMT is tradable on **Binance** — both spot (BMT/USDT) and a **USD-margined perpetual** with the associated derivatives surface (funding, open interest, liquidations). It is **NOT listed on Hyperliquid**, so Binance is the primary leveraged venue. With a small market cap (~#1902) and thin spot depth, leverage and directional exposure are concentrated on a single perp venue. This means execution should favor limit orders and staged fills to avoid slippage, position sizing must account for shallow order books, and traders should watch Binance funding/OI as the dominant signal — there is no cross-venue perp to hedge or arbitrage against, raising single-venue liquidation and squeeze risk.
+
+### Applicable strategies
+
+- [[liquidation-cascade-fade]] — thin BMT perp depth on Binance makes forced-liquidation wicks overshoot, offering mean-reversion entries once the cascade exhausts.
+- [[funding-rate-harvest]] — a single-venue perp with periodic funding lets traders collect payments by holding the side opposite crowded positioning when funding skews.
+- [[oi-confirmed-trend]] — pairing Binance open-interest changes with BMT price filters real breakouts from low-conviction moves in an illiquid microcap.
+- [[range-mean-reversion]] — with BMT pinned near its all-time low in a tight band, fading extremes of the range suits the current low-momentum regime.
+- [[breakout-and-retest]] — narrative-driven analytics/InfoFi microcaps can gap violently, so waiting for a breakout to retest confirms follow-through before committing size.
+- [[token-unlock-supply-event]] — with circulating supply only ~26% of max, scheduled unlocks create tradable supply-overhang events to position around.
+
+### Volatility & regime character
+
+BMT is a small-cap (~#1902) analytics/InfoFi infra token on Solana with high beta to broader crypto risk sentiment. Price sits deep below its all-time high and near its all-time low, indicating a prolonged downtrend and low-momentum, chop-prone regime. As a low-liquidity microcap it exhibits reflexive, narrative-sensitive moves and tends to amplify BTC/ETH directional swings while underperforming on the way up. Realized volatility can spike sharply on thin volume despite muted recent daily ranges.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure is confined to Binance; no Hyperliquid or secondary perp venue to hedge, so single-venue outages, funding spikes, or liquidation cascades hit hard.
+- **Low liquidity** — small market cap and thin spot/perp depth mean slippage and squeeze risk on any meaningful size.
+- **Supply overhang / unlocks** — circulating supply is a fraction of max supply, leaving future emissions and unlocks as a persistent dilution and sell-pressure risk.
+- **Narrative dependence** — as an analytics/InfoFi token, valuation leans on sector attention; fading narrative can drain liquidity quickly.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BMTUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=BMTUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=BMT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=BMT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BMTUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=BMTUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=BMT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

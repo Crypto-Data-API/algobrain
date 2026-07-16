@@ -3,13 +3,13 @@ title: "LOFI"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, altcoins, memecoins]
 aliases: ["LOFI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lofitheyeti.com/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[binance]]", "[[dca-strategy]]", "[[narrative-trading]]"]
 ---
 
 # LOFI
@@ -130,6 +130,53 @@ Optimistic by Nature: Lofi sees the brighter side of the future and is determine
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+Tradable on Binance SPOT only — no liquid perpetual venue, so leverage/short access is limited and this is a spot-primary asset. Perp funding/basis/liquidation strategies do NOT apply. With no listed perp, positions must be built and unwound in spot, so directional exposure is constrained to what free-float liquidity supports and shorting is effectively unavailable. Thin depth relative to a small-cap market cap means execution should lean on limit/passive orders, staged entries, and modest position sizing to avoid moving the book; slippage — not fees — is the dominant cost, and size should be scaled to observed 24h volume rather than notional conviction.
+
+### Applicable strategies
+
+- [[dca-strategy]] — spot-only, small-cap microcap with no shorting; averaging in over time smooths entry across a highly volatile, illiquid tape.
+- [[breakout-and-retest]] — low-float memecoins trade in long compressions punctuated by sharp expansions; waiting for a retest filters false breaks in thin liquidity.
+- [[atr-trailing-stop]] — wide, reflexive swings demand a volatility-scaled trailing exit rather than fixed stops to survive noise while locking gains.
+- [[rsi-mean-reversion]] — deep drawdown from ATH and choppy ranges produce frequent oversold spikes that snap back in spot.
+- [[narrative-trading]] — as a Sui-ecosystem meme token, price is driven by chain/meme narrative cycles more than fundamentals.
+- [[volatility-targeting]] — sizing to a volatility budget keeps risk bounded given the coin's outsized daily swings and shallow depth.
+
+### Volatility & regime character
+
+Small-cap (sub-$5M) Sui-ecosystem memecoin with high reflexivity: sentiment- and narrative-driven, prone to sharp, low-liquidity swings and mean-reverting chop between events. Down heavily from its 2024 all-time high, it behaves as a high-beta risk asset that amplifies broader crypto moves and is loosely correlated to BTC/ETH risk-on/risk-off regimes while dominated by Sui-meme narrative flows.
+
+### Risk flags
+
+- Liquidity/venue concentration: thin 24h volume and few spot venues make entries/exits slippage-prone and vulnerable to venue-specific outages or delistings.
+- No perp market: no shorting or hedging via perps; downside must be managed by sizing and spot exits.
+- Narrative dependence: value hinges on meme/Sui-ecosystem sentiment with limited fundamental support, so momentum can reverse abruptly.
+- Supply/holder concentration: microcap float can be dominated by a few holders, raising the risk of outsized moves on large transfers.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LOFIUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LOFIUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LOFIUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=LOFIUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, real-world-assets]
+tags: [crypto, defi, real-world-assets, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["FF", "USDf"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.falcon.finance/swap/mint"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Falcon Finance
@@ -263,6 +263,56 @@ Falcon is building infrastructure designed for trillions in assets. $FF is the w
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FF is tradable on [[binance|Binance]] — both **spot** (FFUSDT) and a **USD-margined perpetual** with the full derivatives stack ([[funding-rate|funding]], [[open-interest|open interest]], [[liquidations]]). It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** and effectively the price-discovery anchor for FF derivatives. Practical implications: leverage, funding-based signals, and OI/liquidation flow all concentrate at a single perp venue, which raises single-venue concentration risk and means cross-exchange arbitrage opportunities are limited. Combined with a mid-of-list market-cap rank (~173) and modest spot depth, this argues for **conservative position sizing**, working larger orders patiently (spot depth thins quickly), and treating funding/OI on Binance as the definitive derivatives read for FF.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the single Binance USD-M perp lets you collect funding on FF when it skews persistently positive/negative, sizing to depth.
+- [[crowded-long-funding-fade]] — as a leveraged synthetic-dollar governance token in a deep drawdown, FF is prone to over-eager long crowding; fading rich funding into OI extremes fits.
+- [[cash-and-carry]] — long Binance spot FFUSDT vs. short the perp captures the basis when funding runs rich, a natural fit given both legs live on one venue.
+- [[liquidation-cascade-fade]] — thin liquidity plus concentrated Binance leverage makes FF susceptible to sharp liquidation wicks that mean-revert, offering fade entries.
+- [[oi-confirmed-trend]] — Binance open-interest changes confirm or invalidate FF directional moves, filtering low-conviction breaks in a low-liquidity name.
+- [[token-unlock-supply-event]] — only ~29% of supply circulates, so vesting/unlock events are a recurring, tradable supply catalyst for FF.
+
+### Volatility & regime character
+
+FF is a **small/mid-cap DeFi / synthetic-dollar (RWA-collateral) governance token** with high realized volatility — it sits ~90% below its 2025 ATH and trades near its all-time low, so moves are reflexive and drawdown-driven rather than trend-stable. It carries **high beta to BTC/ETH** risk-on/risk-off swings and additional idiosyncratic sensitivity to the synthetic-dollar yield regime: because sUSDf yield is pro-cyclical (funding/basis rich in bull markets, thin or negative in bear markets), the FF growth narrative de-rates precisely when funding softens. Expect wide intraday ranges, low-liquidity gap risk, and correlation that tightens with the broader alt complex during stress.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — leveraged trading is effectively Binance-only (not on Hyperliquid); modest spot depth amplifies slippage and gap risk.
+- **Unlock/emission overhang** — ~71% of max supply still to vest is a structural, recurring dilution headwind for the FF token specifically.
+- **Narrative dependence** — value is tied to USDf adoption and the synthetic-dollar yield regime; funding compression in bear markets undercuts the thesis.
+- **Underlying protocol/peg risk** — FF is an equity-like proxy for a peg-dependent protocol; any USDf de-peg or strategy loss would hit FF disproportionately.
+- **Regulatory** — synthetic-dollar / stablecoin issuers face evolving regulatory scrutiny that can affect listings and demand.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=FFUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=FFUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=FF` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=FF` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=FFUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=FFUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=FF"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, indicators]
+tags: [crypto, defi, ethereum, indicators, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["RPL", "Rocket Pool ETH", "rETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.rocketpool.net"
-related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[slashing]]", "[[smart-contract-risk]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[lido]]", "[[liquid-staking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Rocket Pool
@@ -226,6 +226,56 @@ RPL inflation (historically ~5%/yr) is split among node operators (rewarding RPL
 - **2024–2026 — Saturn roadmap.** Multi-phase upgrade work (megapools, smaller bonds, RPL value-accrual reform) becomes the central governance theme, aiming to revitalize both node-operator economics and the RPL token thesis.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RPL is tradable on [[binance]] — both **spot** (RPL/USDT) and a **USD-margined perpetual** with the full derivatives toolkit ([[funding-rate|funding]], [[open-interest]], [[liquidations]]). It is **not** listed on Hyperliquid, so Binance is the **primary leveraged venue** — there is no deep on-chain perp order book to diversify execution across. With RPL a small-cap (~#504–639 by market cap) and thin 24h spot volume, the perp is where most price discovery and leverage concentrate. Practical implications: leveraged flow, funding, and liquidation data all key off the single Binance perp, so slippage on larger clips is meaningful, order-book depth thins fast in stress, and position **sizing should assume shallow liquidity** and wide effective spreads. Cross-venue arbitrage is limited to routing spot fills across Binance/Kraken/Bitget/KuCoin against the one Binance perp, which shapes how basis and funding trades must be executed.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on the single Binance RPL-USDT contract when the funding sign is persistent; the sole-venue structure keeps the carry clean but caps size.
+- [[cash-and-carry]] — pair long RPL spot against a short Binance perp to lock the basis, harvesting positive funding on a small-cap where perp demand periodically outruns spot.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when Binance funding spikes sharply positive after a rally in a thin, reflexive small-cap like RPL.
+- [[liquidation-cascade-fade]] — RPL's shallow perp book makes cascade wicks violent; fade the overshoot after a forced-liquidation flush once [[open-interest]] resets.
+- [[oi-confirmed-trend]] — use Binance open-interest confirmation to separate genuine trend legs from thin, low-conviction moves in a low-liquidity name.
+- [[range-mean-reversion]] — RPL spends long stretches range-bound ~98% below its ATH; mean-revert the extremes when there is no active catalyst.
+
+### Volatility & regime character
+
+RPL is a **small-cap DeFi / liquid-staking infrastructure governance token** with high beta to ETH and BTC, amplified by thin liquidity — moves are reflexive and can overshoot in both directions. Because RPL is used as **operator collateral** in the Rocket Pool protocol, its price carries an extra reflexive loop (falling RPL stresses the insurance model, which can feed sentiment). It trades as a high-beta altcoin: it tends to underperform in risk-off ETH regimes and can spike on staking-narrative or Saturn-roadmap catalysts. Correlation to ETH is structurally elevated given the protocol's ETH-staking dependence.
+
+### Risk flags
+
+- **Venue concentration** — Binance is effectively the only meaningful leveraged venue (not on Hyperliquid); a single-exchange outage, delisting, or funding dislocation dominates risk with no on-chain perp fallback.
+- **Liquidity** — thin spot and perp depth make slippage, gap risk, and liquidation-driven wicks severe relative to large-caps; size conservatively.
+- **Emissions / tokenomics** — ongoing RPL inflation and the Saturn value-accrual reform are live governance debates that can re-rate the token; unlimited max supply and inflation split are structural overhangs.
+- **Narrative dependence** — price is tied to the liquid-staking / decentralization narrative and Ethereum-staking economics; loss of narrative or shift toward rivals (Lido, exchange LSTs) weighs on RPL independently of protocol health.
+- **Reflexive collateral loop** — sharp RPL drawdowns can push node operators below minimum collateral, a protocol-specific stress vector that can compound selling.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=RPLUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=RPLUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=RPL` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=RPL` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=RPLUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=RPLUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=RPL"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

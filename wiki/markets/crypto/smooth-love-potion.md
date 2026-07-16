@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, gamefi, nft]
+tags: [altcoins, crypto, gamefi, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["SLP", "Smooth Love Potion"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://axieinfinity.com/"
-related: ["[[axie-infinity]]", "[[crypto-markets]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
+related: ["[[axie-infinity]]", "[[crypto-markets]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Smooth Love Potion
@@ -218,6 +218,56 @@ Catalysts (positive): a revival in Axie player counts or a new flagship Sky Mavi
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SLP is tradable on **Binance** — both **spot** (SLP/USDT) and a **USD-margined perpetual** with the usual leveraged-derivative telemetry (funding, open interest, liquidations). It is **not** listed on Hyperliquid, so **Binance is the primary leveraged venue** for the token. This concentration matters for execution: perp depth, funding, and liquidation flow are effectively a single-venue signal, and spot liquidity is spread thin across Binance, Bitget, KuCoin, and Crypto.com plus bridged Ronin/Ethereum DEX pools. With a sub-$20M cap and tens of billions of tokens outstanding, the perp order book is shallow relative to majors — size positions for [[slippage]], keep leverage modest, and expect that large market orders (or clustered liquidations) can move price sharply. Absence of a second major perp venue also removes an easy cross-venue funding/basis arbitrage leg, so most derivative strategies here are single-venue by necessity.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on Binance USD-M when SLP funding runs persistently positive or negative during GameFi sentiment swings.
+- [[crowded-long-funding-fade]] — fade over-leveraged longs when a low-quality GameFi bounce drives funding and OI to crowded extremes on the sole leveraged venue.
+- [[liquidation-cascade-fade]] — the shallow single-venue perp book makes SLP prone to liquidation cascades; fade the wick after forced selling exhausts.
+- [[oi-price-exhaustion]] — rising open interest into a stalling price on a thin micro-cap flags exhaustion of a speculative move.
+- [[rsi-mean-reversion]] — a high-supply, deeply deflated token trading near its all-time low mean-reverts off oversold/overbought extremes on spot.
+- [[range-trading]] — outside catalysts, SLP grinds in ranges near its lows; trade defined support/resistance rather than trend.
+
+### Volatility & regime character
+
+Small-cap (rank ~829, sub-$20M) GameFi/[[play-to-earn]] reward token with **beta-on-beta** behaviour: it moves with broad altcoin risk appetite multiplied by GameFi-theme sentiment (correlated with AXS, SAND, GALA, IMX, RON). Directionally it tracks BTC/ETH regime for risk-on/risk-off, but amplifies both moves. Its uncapped-supply overhang and single-game dependence give it reflexive, low-quality bounces in bear tape and no fundamental floor — high realized volatility with sharp, mean-reverting spikes rather than durable trends.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — Binance is the only major leveraged venue; no Hyperliquid listing means thin, single-venue perp depth and cascade-prone liquidations.
+- **Uncapped supply / emissions** — no max supply; renewed gameplay issuance can swamp price if sinks stay weak (see [[emissions]]).
+- **Narrative dependence** — value is entirely derivative of Axie Infinity's player economy and the broadly discredited [[play-to-earn]] thesis.
+- **Ecosystem security history** — the 2022 Ronin Bridge hack (~$625M) is a reminder of side-chain/bridge risk in the underlying stack.
+- **Micro-cap fragility** — sub-$20M cap with tens of billions of tokens outstanding; size for [[slippage]] and treat as high-variance speculation.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=SLPUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=SLPUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=SLP` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=SLP` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=SLPUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SLPUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SLP"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

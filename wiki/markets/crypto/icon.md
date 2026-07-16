@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["ICX"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://icon.community/"
-related: ["[[casper-network]]", "[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[harmony]]", "[[interoperability]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]"]
+related: ["[[casper-network]]", "[[consensus-mechanism]]", "[[cross-chain-bridge]]", "[[crypto-markets]]", "[[harmony]]", "[[interoperability]]", "[[layer-1]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[staking]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # ICON
@@ -205,6 +205,55 @@ ICON's on-chain ecosystem includes DeFi (DEXes and lending such as Balanced and 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ICX is tradable on [[binance]] as both a spot pair (ICX/USDT) and a USD-margined [[perpetual-futures|perpetual]], which is the primary leveraged venue and exposes [[funding-rate|funding]], [[open-interest]], and [[liquidations]] data. It is NOT listed on Hyperliquid, so on-chain perp liquidity is absent and leverage access is concentrated on Binance (alongside Korean spot depth on Upbit). With a ~$31M market cap near rank #636 and thin dollar volume, order books are shallow: large orders slip meaningfully, so execution should lean on limit/TWAP entries rather than market sweeps, and position sizing must respect that a single venue's perp book can be dominated by a few participants. Venue concentration also means funding and liquidation dynamics on Binance drive most of the tradable derivatives signal.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — thin, retail-driven small-cap perps like ICX periodically run persistent funding that can be collected via spot-vs-perp delta-neutral positioning on Binance.
+- [[crowded-long-funding-fade]] — low-float Korea-linked names are prone to speculative long crowding; fading elevated positive funding into extended rallies is a recurring edge.
+- [[liquidation-cascade-fade]] — shallow ICX perp books produce sharp forced-liquidation wicks that frequently overshoot and mean-revert, offering fade entries.
+- [[cash-and-carry]] — when the perp trades at a premium to spot, a long-spot/short-perp carry captures basis plus funding on Binance.
+- [[rsi-mean-reversion]] — the low-momentum, range-bound decay regime in ICX rewards buying oversold and selling overbought extremes rather than trend-chasing.
+- [[breakout-and-retest]] — Korea-driven news or narrative pops can trigger clean breakouts from long bases; entering the retest limits chasing thin liquidity.
+
+### Volatility & regime character
+
+ICX is a small-cap infrastructure/interoperability [[layer-1]] token with high beta to BTC/ETH: it typically underperforms in bear regimes and can spike violently on Korea-specific liquidity events. Its low float and heavy Upbit/Korean-exchange concentration give it episodic reflexivity — quiet, decaying drift punctuated by sharp, exchange-driven volatility bursts. Correlation to the broader alt complex is high during risk-off, but idiosyncratic Korean flow can decouple it intraday.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin volume and reliance on Binance perps plus Korean spot (Upbit) mean execution risk and gap risk are elevated; slippage is material for size.
+- **Geographic / regulatory concentration** — heavy Korean market dependence exposes ICX to Korea-specific listing and regulatory shocks.
+- **Emissions / dilution** — unlimited max supply and ongoing staking issuance create a structural sell-side drift on the token.
+- **Narrative dependence** — value is tied to the crowded cross-chain messaging narrative; loss of interoperability mindshare removes the primary demand driver.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ICXUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ICXUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=ICX` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=ICX` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ICXUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ICXUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=ICX"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

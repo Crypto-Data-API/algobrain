@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, indicators]
+tags: [altcoins, crypto, defi, indicators, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["APRO", "APRO Oracle", "AT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.apro.com/"
-related: ["[[crypto-markets]]", "[[bnb]]"]
+related: ["[[crypto-markets]]", "[[bnb]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Apro
@@ -223,6 +223,54 @@ Headwinds: entrenched competitors, oracle-specific exploit risk (a single high-p
 - **Bottoming-regime stance:** the accumulation case rests on *verifiable* integration and fee growth against incumbents, not narrative. Treat AT as a speculative infrastructure bet; size small and apply [[risk-management]] / [[position-sizing]].
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AT is tradable on **Binance** across **spot (AT/USDT)** and a **USD-margined perpetual**, giving it funding, open interest, and liquidation data on the primary leveraged venue. It is **NOT listed on Hyperliquid**, so Binance is the sole major leveraged market for AT. This single-venue concentration means the perp's funding rate, OI, and liquidation prints are the definitive read on positioning — there is no deep secondary derivatives venue to arbitrage against or to cushion a cascade. Practically, leverage is available but liquidity is thin for a rank ~581 microcap: books are shallow, slippage rises fast on size, and a burst of leveraged flow can move both perp and spot. Size positions to the perp's realistic depth, prefer limit entries, and treat wide funding swings as a crowding signal rather than a free carry.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect the perp funding when AT trades at a persistent premium, hedged against Binance spot; viable only at contained size given thin depth.
+- [[crowded-long-funding-fade]] — a narrative-driven microcap oracle/AI token is prone to euphoric long crowding; fade extreme positive funding when OI and price stretch together.
+- [[liquidation-cascade-fade]] — shallow single-venue books make AT prone to over-extended liquidation wicks; fade the flush and cover into the snap-back.
+- [[oi-confirmed-trend]] — use Binance open interest to separate genuine trend expansion from thin, unbacked spot drift on integration/listing news.
+- [[cash-and-carry]] — capture spot-perp basis when the perpetual trades rich to Binance spot, sized to available liquidity.
+- [[breakout-and-retest]] — low-float microcaps trade in compressed ranges then break on catalysts; trade the retest to filter false breaks in a gappy book.
+
+### Volatility & regime character
+
+AT is a **small-cap / microcap infrastructure (DeFi oracle) token** with high beta to the broader alt tape and to the oracle/AI-data narrative complex (LINK, PYTH on theme). It is directionally correlated to BTC/ETH risk-on/risk-off flow but its sharpest moves are idiosyncratic and narrative-driven (integration news, Binance-ecosystem flow, AI-data hype). Low circulating float (~23% of max supply) amplifies reflexivity: thin real liquidity means both spikes and flushes overshoot. Expect microcap-grade volatility with episodic decorrelation from majors.
+
+### Risk flags
+
+- **Venue concentration** — leveraged exposure lives entirely on Binance; a listing/parameter change or venue outage removes the only deep derivatives market.
+- **Liquidity / float** — thin books and ~77% uncirculated supply make execution fragile and price easily pushed.
+- **Unlocks / emissions** — MC/FDV ≈ 0.23; scheduled unlocks are the dominant idiosyncratic drawdown catalyst — map the schedule before sizing.
+- **Narrative dependence** — much of the bid rests on the early, promotional "oracle for AI" story; adoption/fee reality must be weighed over messaging.
+- **Oracle-specific tail risk** — a single high-profile feed manipulation or exploit is catastrophic for an oracle's trust and price.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=ATUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=ATUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=AT` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=AT` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ATUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=ATUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=AT"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ## See Also
 

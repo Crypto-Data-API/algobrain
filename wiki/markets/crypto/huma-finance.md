@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, payment-solutions]
+tags: [crypto, defi, payment-solutions, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["HUMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://huma.finance/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Huma Finance
@@ -268,6 +268,56 @@ Huma Finance enables global payment institutions to settle their payments 24/7 u
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HUMA is tradable on [[binance|Binance]] — spot (HUMA/USDT) plus a USD-margined [[perpetual-futures|perpetual]], which brings [[funding-rate|funding]], [[open-interest|open interest]], and [[liquidations|liquidation]] data into play. It is **not** listed on [[hyperliquid|Hyperliquid]], so Binance is effectively the primary leveraged venue for HUMA. This concentrates derivatives price discovery and funding on a single exchange: order-book depth and perp liquidity are thinner than for large caps, so leveraged sizing should stay modest, and stops/limit orders are preferable to market fills to avoid slippage. With spot liquidity spread across Binance, Upbit, Bitget, and KuCoin but the perp anchored on Binance, execution for basis/funding trades routes through the Binance spot+perp pair.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — HUMA's Binance perp funding can run persistently one-sided on a small-cap RWA token; harvesting the funding while delta-hedged monetizes that skew.
+- [[crowded-long-funding-fade]] — narrative-driven pops (PayFi/RWA, Binance Alpha) can crowd longs and push funding sharply positive, setting up a funding-financed fade.
+- [[cash-and-carry]] — long Binance spot HUMA/USDT versus short the USD-M perp captures the basis when the perp trades rich to spot.
+- [[liquidation-cascade-fade]] — thin single-venue perp depth means forced liquidations overshoot; fading the cascade after exhaustion targets the mean-revert bounce.
+- [[oi-confirmed-trend]] — pairing Binance open-interest expansion with price direction filters out low-conviction, liquidation-driven moves on this low-float token.
+- [[token-unlock-supply-event]] — with ~83% of max supply still locked (MC/FDV ~0.17), scheduled unlocks are recurring supply events tradable around the vesting calendar.
+
+### Volatility & regime character
+
+HUMA is a small-cap ([[altcoins|altcoin]], rank ~533) [[defi|DeFi]]/[[real-world-assets|RWA]] infrastructure token with high-beta behavior: it amplifies moves in [[bitcoin|BTC]]/[[ethereum|ETH]] on the downside and is reflexive to the PayFi/RWA-credit narrative. The very low float (MC/FDV ~0.17) makes price sensitive to marginal flow and to unlock-driven supply, so realized volatility is elevated relative to large caps. Correlation to majors is strong in risk-off phases (as in the current bear/extreme-fear tape) and looser during narrative-specific catalysts.
+
+### Risk flags
+
+- **Venue concentration:** Binance is the sole meaningful leveraged venue — no [[hyperliquid|Hyperliquid]] listing — so funding, OI, and liquidation dynamics are single-exchange dependent, raising basis and execution risk if Binance conditions shift.
+- **Unlocks / emissions:** ~83% of max supply not yet circulating; vesting is a persistent dilution overhang and a recurring supply catalyst.
+- **Narrative dependence:** valuation rides the PayFi/RWA-credit and institutional-stablecoin themes; re-rates and de-rates track narrative and demonstrable receivable volume more than fundamentals.
+- **Liquidity / small-cap risk:** thin perp depth means slippage and gap risk on size; liquidation cascades can overshoot violently.
+- **Regulatory:** financing real-world payments with [[stablecoins]] intersects with money-transmission and securities regimes across jurisdictions.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for Binance spot + USD-M perp (auth via `X-API-Key`).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=HUMAUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=HUMAUSDT` — 24h ticker stats
+- `GET /api/v1/derivatives/summary?coin=HUMA` — Binance funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=HUMA` — cross-exchange funding
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=HUMAUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=HUMAUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=HUMA"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, altcoins, defi]
 aliases: ["TFUEL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.thetatoken.org/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[layer-1]]", "[[theta-network]]", "[[theta-token]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[layer-1]]", "[[theta-network]]", "[[theta-token]]", "[[binance]]", "[[breakout-trading]]", "[[dca-strategy]]"]
 ---
 
 # Theta Fuel
@@ -139,6 +139,54 @@ TFUEL's closest analog is GAS in the NEO/GAS dual-token model: a consumable fuel
 | **Twitter** | [@Theta_Network](https://twitter.com/Theta_Network) |
 | **Reddit** | [https://www.reddit.com/r/theta_network/](https://www.reddit.com/r/theta_network/) |
 | **GitHub** | [https://github.com/thetatoken/theta-protocol-ledger](https://github.com/thetatoken/theta-protocol-ledger) |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TFUEL is **tradable on Binance SPOT only** among liquid venues — there is **no liquid perpetual venue**, so leverage and short access are limited and this is a **spot-primary asset**. Perp funding/basis/liquidation strategies do **not** apply. Additional CEX spot markets exist (Upbit KRW, KuCoin, Crypto.com), but USD/USDT depth is concentrated on Binance, so execution should assume a single primary pool of liquidity. With thin daily turnover (~$1.6M vs ~$60M cap), venue concentration means slippage and market-impact risk are material: size positions small, prefer limit orders and TWAP/[[vwap-trading|VWAP]]-style scaling over market sweeps, and treat any exit as spot-only (no cheap short hedge available). Directional bearish exposure is effectively unavailable except by not holding.
+
+### Applicable strategies
+
+- [[breakout-trading]] — a low-liquidity spot-only microcap tends to move in sharp bursts on narrative/volume spikes; entering on confirmed breaks of prior range captures those impulse moves.
+- [[donchian-channel-breakout]] — mechanical N-day high/low channel entries suit TFUEL's long basing periods punctuated by trend legs, without needing to time reversals.
+- [[dca-strategy]] — for spot-primary accumulation of a fully-circulating gas token, cost-averaging smooths thin-liquidity entry slippage and removes single-print timing risk.
+- [[atr-trailing-stop]] — with no perp hedge available, a volatility-scaled trailing stop is the practical risk exit for spot longs on a high-beta, gap-prone microcap.
+- [[momentum-rotation]] — as a small-cap DePIN/AI beta name, TFUEL is a candidate leg in a cross-sectional altcoin rotation that holds only when its relative strength is positive.
+- [[crypto-beta-rotation]] — TFUEL behaves as amplified beta to BTC/ETH risk-on regimes, fitting a rotate-into-high-beta-when-risk-on framework.
+
+### Volatility & regime character
+
+TFUEL is a **small-cap** (rank ~386) DePIN / AI / smart-contract-platform utility token and trades as **high-beta** to broad crypto risk sentiment — it tends to amplify BTC/ETH moves, rallying hard in risk-on phases and drawing down sharply in risk-off. It is **not** a memecoin; reflexivity comes from thin liquidity and narrative (streaming/EdgeCloud/AI-compute) rather than pure meme dynamics. As a fully-circulating gas token its supply is driven by emission-vs-burn rather than unlock cliffs. Correlation to BTC/ETH is high on the downside; upside is narrative- and usage-dependent and can decouple during Theta-specific catalysts.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — spot-only with USD/USDT depth anchored on Binance; ~$1.6M daily volume means large orders move price and exits are one-sided (no liquid short/hedge).
+- **No leverage/short access** — absence of a liquid perpetual venue limits hedging and directional bearish expression; risk is managed via sizing and stops, not derivatives.
+- **Emissions / supply** — uncapped block-reward emission can dilute holders when network usage (and burns) is subdued; net supply hinges on the emission-vs-burn balance.
+- **Narrative dependence** — value is downstream of Theta Network / EdgeCloud streaming and AI-compute adoption; demand fades quickly if the DePIN/AI narrative cools.
+- **Macro / regime risk** — as high-beta small-cap infra, TFUEL is exposed to broad drawdowns during bear/risk-off regimes.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] Binance-spot endpoints (auth via `X-API-Key`). No perp/funding endpoints apply — no liquid perp venue.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TFUELUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=TFUELUSDT` — 24h ticker stats (volume, range, change)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=TFUELUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=TFUELUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ---
 
