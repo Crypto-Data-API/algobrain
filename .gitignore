@@ -19,6 +19,11 @@ __pycache__/
 .venv/
 venv/
 
+# AlgoBrain MCP server runtime (see tools/start_servers.ps1)
+.mcp-http.pid
+.mcp-http.log
+.mcp-http.err.log
+
 # OS files
 .DS_Store
 Thumbs.db
