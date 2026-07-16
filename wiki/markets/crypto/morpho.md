@@ -306,30 +306,6 @@ Morpho's moat is the **immutable core + curated-vault model** plus **institution
 - AInvest, "Morpho Vaults V2" coverage; Eco, "Morpho Protocol Explained 2026"
 - Web verification (WebSearch + Perplexity), 2026-06-10
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 654.68M MORPHO |
-| **Total Supply** | 1.00B MORPHO |
-| **Max Supply** | 1.00B MORPHO |
-| **Fully Diluted Valuation** | $2.10B |
-| **Market Cap / FDV Ratio** | 0.65 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-17 — Post-Phase-2 cleanup (4 follow-ups)
+
+- **Merge-dedup (367 pages):** removed the duplicate template block (`Overview` →
+  `Major News & Events`) that the Phase-1 merge had re-appended below already-complete
+  hand-written pages (bitcoin, ethereum, solana, …); hand content and enrichment preserved.
+- **Scope prune (20 pages):** deleted pre-existing tokenized single-name equity / ETF pages
+  (Tesla / NVIDIA / Alphabet xStocks, iShares / SPDR tokenized ETFs) per the no-equity rule.
+- **Coverage:** enriched `sleepless-ai` (the one genuine tradable straggler dropped by the
+  symbol-collision dedup); the rest of the gap was tokenized equities (out of scope) and a
+  false-positive collision (`saakuru-labs`).
+- **Broken links (720 → 525):** added 18 concept stubs (`layer-1`, `depin`, `gamefi`,
+  `liquidations`, `governance-token`, `mev`, `zk-rollup`, `cross-chain`, …) + 3 redirects,
+  resolving ~195 unresolved wikilinks across 4,852 pages.
+
 ## 2026-07-17 — Phase 2 enrichment: Binance-only (wave 2)
 
 Enriched the **271 Binance-only** coin pages with a `## Trading Profile` + verified

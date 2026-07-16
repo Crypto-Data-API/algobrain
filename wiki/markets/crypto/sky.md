@@ -297,42 +297,6 @@ The cleanest peers are **Sky vs [[aave|Aave]]** (overcollateralized DeFi issuers
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via web search, 2026-06-10
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 23.34B SKY |
-| **Total Supply** | 23.46B SKY |
-| **Max Supply** | 23.46B SKY |
-| **Fully Diluted Valuation** | $1.48B |
-| **Market Cap / FDV Ratio** | 0.99 |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $8.94M |
-| **Market Cap Rank** | #51 |
-| **24h Range** | $0.0609 — $0.0643 |
-| **CoinGecko Sentiment** | 100% positive |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

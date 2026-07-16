@@ -215,30 +215,6 @@ Liquidity is concentrated on the native Kinesis Exchange; no major CEX spot list
 - MEXC News, "Kinesis Gold (KAU) Jumps 15.8% as Gold-Backed Crypto Outpaces Spot Market" — https://www.mexc.com/news/990195
 - Verified via web search, 2026-06-10: >$11M cumulative yield payouts (Nov 2025), March 2026 premium unwind ($206.98 → ~$145 vs sideways spot), thin daily volume vs market cap
 
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $148,757.00 |
-| **Market Cap Rank** | #129 |
-| **24h Range** | $129.07 — $131.25 |
-| **CoinGecko Sentiment** | 100% positive |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## See Also
 
 - [[crypto-markets]]

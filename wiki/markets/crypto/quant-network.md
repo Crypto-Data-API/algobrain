@@ -279,30 +279,6 @@ Quant's differentiator is that it does **not** ask institutions to migrate to a 
 - Quant Network official site — https://www.quant.network
 - Perplexity verification, 2026-06-10
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 14.54M QNT |
-| **Total Supply** | 14.61M QNT |
-| **Max Supply** | 14.61M QNT |
-| **Fully Diluted Valuation** | $947.83M |
-| **Market Cap / FDV Ratio** | 1.00 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 QNT is best treated as a **spot-primarily mid-cap** enterprise/interoperability token: liquid CEX spot exists, but there is **no deep native perpetual venue**, so leverage and short access are structurally limited. This shapes everything below — it trades as a directional spot/narrative vehicle, not a leverage or basis instrument.

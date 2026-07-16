@@ -191,43 +191,6 @@ This is framing, not a price target; the wiki holds no fair-value model for DEXE
 - Crypto News Navigator — "DeXe Built a DAO Platform That Actually Ships Products" — https://www.cryptonewsnavigator.com/academy/article/dexe-built-a-dao-platform-that-actually-ships-products
 - Perplexity sonar verification (+363% YTD claim), 2026-06-10.
 
-## Key Facts
-
-| Field | Detail |
-|---|---|
-| **Ticker** | DEXE |
-| **Market Cap Rank** | #47 |
-| **Market Cap** | $1.63B |
-| **Current Price** | $34.96 |
-| **Categories** | Decentralized Finance (DeFi) |
-| **Website** | [https://dexe.network/](https://dexe.network/) |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $92.80M |
-| **Market Cap Rank** | #47 |
-| **24h Range** | $32.72 — $38.17 |
-| **CoinGecko Sentiment** | 29% positive |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

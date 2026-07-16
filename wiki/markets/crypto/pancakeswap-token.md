@@ -262,42 +262,6 @@ PancakeSwap's edge is **BNB-ecosystem dominance + volume**; its differentiator v
 - [crypto.news — PancakeSwap implements Tokenomics 3.0](https://crypto.news/pancakeswap-implements-tokenomics-3-0-upgrade-as-cake-rsi-flips-bullish/)
 - WebSearch verification, 2026-06-10
 
-## Exchange Listings
-
-### Centralized Exchanges
-
-| Exchange | Pair | Trust Score |
-|---|---|---|
-| Binance | CAKE/USDT | N/A |
-| Kraken | CAKE/USD | N/A |
-| Bitget | CAKE/USDT | N/A |
-| KuCoin | CAKE/USDT | N/A |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $27.25M |
-| **Market Cap Rank** | #109 |
-| **24h Range** | $1.39 — $1.44 |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

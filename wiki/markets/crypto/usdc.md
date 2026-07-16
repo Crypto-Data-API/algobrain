@@ -320,18 +320,6 @@ USDC is one of the deepest-liquidity assets in all of crypto. It functions as a 
 
 ---
 
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

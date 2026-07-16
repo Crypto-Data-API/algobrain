@@ -278,41 +278,6 @@ Polkadot competes with other **interop/shared-security** platforms (Cosmos, [[et
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via web search, 2026-06-10
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 831.62M DOT |
-| **Total Supply** | 881.62M DOT |
-| **Max Supply** | 1.00B DOT |
-| **Fully Diluted Valuation** | $1.76M |
-| **Market Cap / FDV Ratio** | 0.94 |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $181,073.00 |
-| **Market Cap Rank** | #2405 |
-| **24h Range** | $0.00164636 — $0.00222764 |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

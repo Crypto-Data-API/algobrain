@@ -304,30 +304,6 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 - CoinGecko PUMP page — https://www.coingecko.com/en/coins/pump-fun
 - Web verification (WebSearch + Perplexity), 2026-06-10
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 400.88B PUMP |
-| **Total Supply** | 849.14B PUMP |
-| **Max Supply** | 1.00T PUMP |
-| **Fully Diluted Valuation** | $1.36B |
-| **Market Cap / FDV Ratio** | 0.47 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

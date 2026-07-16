@@ -196,42 +196,6 @@ JASMY's ~-99.9% drawdown from ATH and deep psychological anchoring to old highs 
 - Market snapshot 2026-06-20 — cryptodataapi.com / CoinGecko markets feed (`raw/data/crypto-loop/coingecko-markets.json`; price/cap/rank/supply baseline)
 - Perplexity verification attempted 2026-06-10 (sonar; details cross-checked via web search)
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 49.44B JASMY |
-| **Total Supply** | 50.00B JASMY |
-| **Max Supply** | 50.00B JASMY |
-| **Fully Diluted Valuation** | $222.05M |
-| **Market Cap / FDV Ratio** | 0.99 |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $14.00M |
-| **Market Cap Rank** | #154 |
-| **24h Range** | $0.00433573 — $0.00456760 |
-| **CoinGecko Sentiment** | 60% positive |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

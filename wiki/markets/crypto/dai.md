@@ -189,37 +189,6 @@ For the governance token's valuation (MKR/SKY), see [[makerdao]] and [[sky]] —
 - MakerDAO / Sky documentation (vault mechanics, PSM, DSR/sDAI, governance)
 - General crypto market knowledge for protocol history and de-peg events
 
-## Platform & Chain Information
-
-**Native Chain:** [[ethereum|Ethereum]] (deployed cross-chain to multiple [[layer-2]] networks and alternative L1s).
-
-### Canonical Contract Address
-
-| Chain | Address |
-|---|---|
-| Ethereum | `0x6b175474e89094c44da98b954eedeac495271d0f` |
-
-> *Note: a separate, unrelated token also using the "DAI" ticker exists on PulseChain; it is not the MakerDAO/Sky DAI documented here.*
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-- **December 2017** — Single-Collateral DAI (SCD) launches, backed only by ETH.
-- **November 2019** — Multi-Collateral DAI (MCD) launch enables WBTC, USDC, RWA and other collateral types.
-- **March 2020 ("Black Thursday")** — liquidation-auction failure; emergency MKR dilution; DAI traded above $1.05 (snapshot ATH $1.22).
-- **March 2023** — DAI de-pegged to ~$0.882 during the USDC/SVB crisis (snapshot ATL), recovering with USDC.
-- **September 2024** — MakerDAO announces the [[sky|Sky]] rebrand: DAI ↔ USDS and MKR ↔ SKY migration.
-- **June 2026** — DAI holds its peg at ~$1.00 with a ~$4.18B market cap (rank #25) amid an "Established Bear Market" (Fear & Greed 23).
-
----
-
 ## See Also
 
 - [[crypto-markets]]

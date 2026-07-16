@@ -181,45 +181,6 @@ Delisted from [[binance|Binance]], [[kraken|Kraken]], ShapeShift (April 2019).
 - COPA v Wright ruling, UK High Court, March 2024 (widely reported)
 - Perplexity + web verification, 2026-06-10
 
-## Platform & Chain Information
-
-**Native Chain:** Own blockchain (Layer 1)
-
----
-
-## Developer Activity
-
-| Metric | Value |
-|---|---|
-| **GitHub Stars** | 605 |
-| **GitHub Forks** | 299 |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $2.92M |
-| **Market Cap Rank** | #141 |
-| **24h Range** | $13.09 — $13.78 |
-| **CoinGecko Sentiment** | 50% positive |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

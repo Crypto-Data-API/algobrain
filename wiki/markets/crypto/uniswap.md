@@ -322,42 +322,6 @@ Uniswap's moat: **brand, liquidity depth, and developer mindshare**, now reinfor
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via Perplexity sonar + web search, 2026-06-10
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 625.57M UNI |
-| **Total Supply** | 892.71M UNI |
-| **Max Supply** | 1.00B UNI |
-| **Fully Diluted Valuation** | $3.32B |
-| **Market Cap / FDV Ratio** | 0.70 |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $183.71M |
-| **Market Cap Rank** | #39 |
-| **24h Range** | $3.58 — $3.74 |
-| **CoinGecko Sentiment** | 67% positive |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 ### Venues & liquidity

@@ -307,41 +307,6 @@ A rough framework: anchor a floor on revenue-funded buyback support, scale upsid
 - Artemis analytics (TVL/revenue/card volume) — https://classic.artemis.ai/asset/etherfi
 - Verified via Perplexity (sonar) + web search, 2026-06-10: OP Mainnet migration May 7 2026, $50M buyback authorization, $100M Plume RWA vault June 4 2026
 
-## Tokenomics
-
-| Metric | Value |
-|---|---|
-| **Circulating Supply** | 927.37M ETHFI |
-| **Total Supply** | 998.54M ETHFI |
-| **Max Supply** | 1.00B ETHFI |
-| **Fully Diluted Valuation** | $430.12M |
-| **Market Cap / FDV Ratio** | 0.93 |
-
----
-
-## Trading Characteristics
-
-| Characteristic | Detail |
-|---|---|
-| **24h Volume** | $60.68M |
-| **Market Cap Rank** | #116 |
-| **24h Range** | $0.4124 — $0.4490 |
-| **Last Updated** | 2026-07-16 |
-
----
-
-## Whale & Holder Information
-
-> *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
-
----
-
-## Major News & Events
-
-> *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
-
----
-
 ## Trading Profile
 
 **Venues & liquidity** — ETHFI is a genuinely two-venue market: it trades on [[binance|Binance]] as **spot (ETHFI/USDT)** and a **USD-margined perpetual**, and on [[hyperliquid|Hyperliquid]] as **ETHFI-PERP** (up to ~40-50x leverage). This gives it deeper, more liquid derivatives access than most mid-cap alts of its rank (~#116) — the CEX perp anchors the funding/OI backbone while Hyperliquid provides transparent on-chain order-book depth and cross-venue funding for basis and arbitrage plays. Practically, execution can be split across Binance spot/perp and HL perp, and the two-venue structure lets traders route around depth pockets; still, as a sub-$400M-cap token the aggregate book is moderate, so sized entries should be worked to limit slippage rather than taken at market.
