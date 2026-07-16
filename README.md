@@ -44,6 +44,47 @@ Start at `wiki/index.md` (master table of contents) or `wiki/overview.md` (state
 - Hub: `wiki/data-sources/cryptodataapi.md`, with per-category pages `cryptodataapi-*.md`
 - Wiki pages that map to an endpoint include a **"Getting the Data (CryptoDataAPI)"** section with live + historical access and a curl example
 
+### Live data: connect to the CryptoDataAPI MCP server
+
+To run strategies against live markets, connect your agent to the hosted **[CryptoDataAPI MCP server](https://cryptodataapi.com/ai-agents/mcp-server)**. It streams live prices, funding rates, open interest, liquidations, and order-book depth for **Hyperliquid** and **Binance**, market/volatility regimes and whale activity, plus the historical **backtesting archive** (klines / funding / liquidations, Parquet back to 2020).
+
+Add it to Claude Code — browser login, no API key needed (an OAuth flow opens on the first tool call):
+
+```bash
+claude mcp add --transport http cryptodataapi https://cryptodataapi.com/mcp
+```
+
+Or authenticate with an API key via the `X-API-Key` header:
+
+```bash
+export CRYPTODATA_API_KEY="cdk_live_YOUR_KEY"
+claude mcp add --transport http cryptodataapi https://cryptodataapi.com/mcp \
+  --header 'X-API-Key: ${CRYPTODATA_API_KEY}'
+```
+
+For any MCP client, add it to your config JSON:
+
+```json
+{
+  "mcpServers": {
+    "cryptodataapi": {
+      "url": "https://cryptodataapi.com/mcp",
+      "headers": { "X-API-Key": "cdk_live_YOUR_KEY" }
+    }
+  }
+}
+```
+
+Tools include `get_price`, `get_hyperliquid_prices`, `get_funding_rates`, `get_open_interest`, `get_liquidations`, `get_order_book`, `get_market_regime`, `get_etf_flows`, and `get_whale_activity` (Pro). Get a free key at [cryptodataapi.com/login](https://cryptodataapi.com/login) (no card), or by email:
+
+```bash
+curl -X POST https://cryptodataapi.com/api/v1/auth/keys \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com"}'
+```
+
+Rate limits: Free 5 req/min · Pro 30 · Pro Plus 60.
+
 ## The LLM Wiki pattern
 
 The wiki is designed to be maintained by an LLM agent (Claude Code or similar):
@@ -55,7 +96,7 @@ The wiki is designed to be maintained by an LLM agent (Claude Code or similar):
 
 ## Opening in Obsidian
 
-Open this repository folder as a vault. On first launch Obsidian will prompt to enable the community plugins listed in `.obsidian/community-plugins.json`:
+Download **[Obsidian](https://obsidian.md/download)** (free — macOS, Windows, Linux, iOS, Android) and open this repository folder as a vault. On first launch Obsidian will prompt to enable the community plugins listed in `.obsidian/community-plugins.json`:
 
 - **Dataview** (required — index pages use it), **Templater**, **Obsidian Git**, **Graph Analysis**, **Marp Slides**, **Webpage HTML Export**
 
