@@ -6,6 +6,24 @@ An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Exp
 
 Scoped to crypto: stock-market entities, equity fundamentals, and personal content are excluded; macro context (FX, rates, commodities, market history), the AI knowledge base, and asset-agnostic trading knowledge are included.
 
+## Quickstart
+
+Serve the vault to Claude Code (or any MCP client) as a local wiki API:
+
+```powershell
+# One-time setup
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r tools/requirements.txt
+```
+
+Then start the server with the **`/start-servers`** slash command in Claude Code — or run it directly:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/start_servers.ps1
+```
+
+This launches the wiki MCP server over Streamable HTTP at **http://127.0.0.1:8010/mcp**, exposing `wiki_search`, `wiki_read`, `wiki_stats`, `wiki_lint`, and `wiki_ingest` over the ~3,500-node vault. It's already registered for this repo via `.mcp.json` — approve it when Claude Code prompts. Stop it again with `tools/stop_servers.ps1`.
+
 ## What's inside
 
 | Area | Content |
