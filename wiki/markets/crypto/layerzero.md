@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["LayerZero Labs", "ZRO"]
 entity_type: protocol
 founded: 2021
 headquarters: "Vancouver, Canada (LayerZero Labs)"
 website: "https://layerzero.network/"
-related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[stargate-finance]]", "[[wormhole]]"]
+related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[stargate-finance]]", "[[wormhole]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[token-unlock-supply-event]]"]
 ---
 
 # LayerZero
@@ -236,6 +236,50 @@ LayerZero is unusual among small/mid-caps in having an explicit fee-to-token lin
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** ZRO is tradable across a deep, two-venue market. On **Binance** it has both a spot pair (ZRO/USDT) and a **USD-margined perpetual**; on **[[hyperliquid|Hyperliquid]]** it trades as **ZRO-PERP** with leverage up to ~40-50x. Having a large CEX spot+perp market alongside an on-chain perp venue means execution is rarely a bottleneck for typical retail-to-mid size: the Binance book anchors price discovery and the Hyperliquid book adds a transparent on-chain perp with its own funding and open-interest reads. The two-venue setup is what makes the CEX-vs-DEX plays below viable — you can size a spot/perp leg on Binance against a perp leg on Hyperliquid and lift funding or basis dislocations between them. Depth is good for a ~#136-rank name but thinner than large-caps, so scale into leverage and check the L2 book before sizing size-relevant clips, especially around unlock dates and monthly buyback announcements where both venues can gap.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — with a liquid Binance USD-margined perp and Hyperliquid ZRO-PERP both funding, a delta-neutral spot-vs-perp position can farm persistent funding on this high-beta infra token.
+- [[hl-vs-cex-funding-divergence]] — ZRO funding on Hyperliquid and Binance can diverge around buyback/unlock catalysts; long the cheaper-funded venue, short the richer to capture the spread.
+- [[cash-and-carry]] — hold ZRO spot and short the perp to lock the basis, a natural carry given the deep two-venue perp market.
+- [[token-unlock-supply-event]] — ~75% of the 1.00B supply still vests (MC/FDV ≈ 0.25); the recurring unlock calendar is a scheduled supply shock to position around.
+- [[narrative-trading]] — ZRO is the purest liquid proxy for the interoperability/bridging narrative, so it leads the infra basket on multichain-activity headlines.
+- [[liquidation-cascade-fade]] — as a high-beta alt, ZRO overshoots on forced deleveraging; fading exhausted cascades into support (near the ~$0.80 ATL zone) is a repeatable setup when OI resets.
+
+**Volatility & regime character.** ZRO is a **high-beta interoperability / infrastructure altcoin** — it behaves as a leveraged proxy for "is multichain activity expanding?" and tends to lead the [[interoperability]]/[[cross-chain]] basket both up and down. Beta to BTC/ETH is high: it amplifies broad risk-on and risk-off moves (single-day prints of ~8% are routine in stress), and it rotates with the wider [[l1-l2-rotation]] infra trade rather than trading on idiosyncratic flow. In risk-off regimes ([[market-regime]] bear tapes), high-beta infra names like ZRO typically underperform BTC.
+
+**Risk flags.**
+- **Dilution / unlock overhang** — only ~25% of max supply circulates; scheduled unlocks can dominate price and overwhelm buyback demand in a weak tape.
+- **Narrative dependence** — value tracks the interoperability/bridging story and buyback flywheel; a contraction in cross-chain volume undercuts both.
+- **Bridge tail risk** — cross-chain infra is the highest-value exploit target in crypto; a compromised verifier set on a major app is an ever-present tail that can gap the token.
+- **Funding / OI dislocations** — funding and open interest swing sharply around unlock dates and buyback announcements on both venues; verify live before sizing leverage.
+- **Liquidity concentration** — depth is good but venue-concentrated (Binance + Hyperliquid dominate perp flow); large clips can move a ~#136-rank book.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZRO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZRO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZRO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZRO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZRO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

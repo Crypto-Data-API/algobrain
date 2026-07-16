@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, bitcoin]
 aliases: ["LTC"]
 entity_type: protocol
 founded: 2011
 headquarters: "Decentralized (Litecoin Foundation, Singapore)"
 website: "https://litecoin.org"
-related: ["[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]", "[[dogecoin]]", "[[etf]]", "[[hyperliquid]]", "[[monero]]", "[[narrative-trading]]", "[[proof-of-work]]"]
+related: ["[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]", "[[dogecoin]]", "[[etf]]", "[[hyperliquid]]", "[[monero]]", "[[narrative-trading]]", "[[proof-of-work]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[cross-exchange-arbitrage]]"]
 ---
 
 # Litecoin
@@ -340,6 +340,50 @@ LTC and [[bitcoin-cash]] are the two canonical **[[bitcoin]] forks / "cheap BTC"
 | **Max Supply** | 84.00M LTC |
 | **Fully Diluted Valuation** | $3.46B |
 | **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** LTC is a genuine **two-venue** perp market: **[[hyperliquid]]** lists **LTC-PERP** (up to ~40–50x leverage) alongside a **USD-margined LTC perpetual on Binance**, on top of deep spot books across Binance, Kraken, Bitget, KuCoin and Crypto.com. As a top-~30 legacy major, both venue's order books are deep and tight, so slippage on standard clip sizes is low and large positions can be built without moving the mark. Dual-venue availability is the structural edge here: the same asset prints two independent funding curves and two mark prices, which lets traders route execution to the cheaper venue, size into whichever book is deeper at the moment, and run cross-venue basis/funding relative-value rather than being captive to a single order book.
+
+**Applicable strategies.**
+- [[cash-and-carry]] — mature ~92%-mined float with MC/FDV ≈ 1.00 and no unlock overhang makes LTC a clean long-spot / short-perp carry with no dilution tail risk.
+- [[funding-rate-harvest]] — deep two-venue perp liquidity supports systematically collecting funding on LTC-PERP while delta-hedged against Binance spot.
+- [[hl-vs-cex-funding-divergence]] — independent Hyperliquid and Binance funding curves on the same coin let you harvest the spread when the two venues dislocate.
+- [[cross-exchange-arbitrage]] — mark-price and funding differences between Hyperliquid LTC-PERP and Binance perp/spot are directly arbitrageable across the two liquid books.
+- [[liquidation-cascade-fade]] — LTC's >1 downside beta means it over-shoots on BTC-driven risk-off flushes, giving repeatable fade setups once cascades exhaust.
+- [[narrative-trading]] — LTC rotates as the "legacy PoW majors" / ETF-wrapped-altcoin basket play (with BCH, DOGE), a recurring positioning theme rather than a fundamentals move.
+
+**Volatility & regime character.** LTC is a **high-beta large-cap [[proof-of-work]] payments alt**, not a memecoin or DeFi/infra token. It trades as a **liquid [[bitcoin]] follower** with **beta > 1 in drawdowns** — it lags BTC on the way up and over-shoots to the downside in risk-off tape — and it moves within the legacy-PoW basket alongside [[bitcoin-cash]] and [[dogecoin]] (merge-mined, so Scrypt hashrate links LTC and DOGE). Correlation to BTC/ETH is high; idiosyncratic moves cluster around halving-cycle and ETF-flow narratives.
+
+**Risk flags.**
+- **BTC-beta drawdown risk** — in risk-off regimes LTC underperforms [[bitcoin]] to the downside; perp longs face amplified liquidation risk on BTC flushes.
+- **Narrative/flow dependence** — price is driven by ETF flow and BTC beta, not organic demand; the ETF launched without moving price ("access without demand"), so basket-rotation trades can stall.
+- **Funding dislocations** — because there is **no CME LTC futures**, perp funding is the primary derivatives read; the two independent venue funding curves can spike or diverge sharply during squeezes.
+- **MWEB regulatory tail** — optional privacy has drawn delistings (Korean exchanges, 2022); a low-probability but venue-concentrating headline risk.
+- **Merge-mining / security-budget linkage** — LTC hashrate is intertwined with [[dogecoin]]; a collapse in Scrypt mining economics would weaken both chains.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=LTC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=LTC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=LTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=LTC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=LTC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

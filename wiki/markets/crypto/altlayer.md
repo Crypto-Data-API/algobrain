@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, layer-2, restaking]
+tags: [crypto, layer-2, restaking, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum]
 aliases: ["ALT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://altlayer.io/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-2]]", "[[modular-blockchains]]", "[[restaking]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-2]]", "[[modular-blockchains]]", "[[restaking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # AltLayer
@@ -233,6 +233,49 @@ ALTDeer is a blockchain-based digital ecosystem built around the ALT token on BN
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ALT (AltLayer) trades as a deep, liquid two-venue market. It has both a spot listing and a USD-margined perpetual on **Binance**, and a **Hyperliquid** perp (ALT-PERP) offering up to ~40-50x leverage. The dual-venue footprint means directional and market-neutral traders can source depth on the largest CEX order books while also accessing an on-chain perp with transparent funding and an order book. This availability supports tighter execution and larger clip sizes than a single-venue small-cap, but ALT is still a sub-$100M-cap alt, so slippage and funding can spike in stress — scale entries and check live L2 depth before sizing.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — collect perp funding on ALT when the Binance/Hyperliquid perp trades at a persistent premium or discount to spot, sizing to the thinner venue's depth.
+- [[hl-vs-cex-funding-divergence]] — with liquid perps on both Hyperliquid and Binance, funding can diverge between venues; long the cheaper-funded leg and short the richer to capture the spread.
+- [[cash-and-carry]] — hold Binance spot ALT against a short USD-margined perp to lock the basis, a clean market-neutral carry given ALT's spot-plus-perp availability.
+- [[liquidation-cascade-fade]] — as a low-cap high-beta alt, ALT sees sharp forced-liquidation flushes; fade the overshoot after cascades clear on visible OI reset.
+- [[breakout-and-retest]] — narrative-driven pops (restaking/RaaS headlines, unlock catalysts) produce clean range breaks; enter on the retest of the broken level with a defined stop.
+- [[oi-confirmed-trend]] — use Hyperliquid open-interest and funding to confirm whether a directional move is backed by real positioning rather than a short-lived squeeze.
+
+**Volatility & regime character** — ALT is a **high-beta infrastructure/Layer-2 (restaking / RaaS) altcoin**, deep in the long tail of the alt complex. It exhibits strong positive beta to BTC and especially ETH (as an Ethereum L2-service token), amplifying broad risk-on/risk-off swings, with additional reflexive moves around restaking and modular-rollup narrative flows. Expect wider realized-vol and larger drawdowns than large caps; the token trades ~99% below its 2024 all-time high and prints fresh lows in bear regimes.
+
+**Risk flags**
+- **Unlock/dilution overhang** — ~3.6B ALT (about 36% of max supply) remains to vest; scheduled unlocks add structural sell pressure and can trigger funding/basis dislocations around unlock dates.
+- **Small-cap liquidity & venue concentration** — despite two venues, aggregate depth is thin relative to majors; order books can gap and funding can spike in stress, concentrating execution risk on Binance and Hyperliquid.
+- **Narrative dependence** — valuation is tightly coupled to the restaking and modular-rollup theses; if rollup growth stalls, both spot demand and perp interest can fade quickly.
+- **Perp funding dislocations** — as a low-cap perp, ALT can carry volatile, one-sided funding; crowded positioning invites squeezes, so monitor OI and funding before and during trades.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ALT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ALT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ALT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ALT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ALT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

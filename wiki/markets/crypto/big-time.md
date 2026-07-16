@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, gamefi, nft]
+tags: [altcoins, crypto, gamefi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, ethereum]
 aliases: ["BIGTIME", "Big Time"]
 entity_type: protocol
 headquarters: "United States"
 website: "https://bigtime.gg/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[play-to-earn]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Big Time
@@ -229,6 +229,52 @@ Catalysts (positive): a renewed Web3-gaming/"real game" narrative; a major conte
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — BIGTIME trades on **both** [[hyperliquid|Hyperliquid]] (BIGTIME-PERP, up to ~40-50x leverage) and Binance (spot plus USD-margined perpetual), on top of broad CEX spot coverage (Kraken, Bitget, KuCoin, Crypto.com, Upbit). This makes it a genuinely two-venue, reasonably liquid market despite its sub-$20M cap: the CEX/DEX split gives redundant order-book depth and lets traders route around single-venue thinning. Depth is still shallow in absolute terms versus large caps, so size positions to the visible L2 book and expect meaningful slippage on aggressive market orders; the two-venue structure also opens the door to cross-venue execution and funding/basis capture rather than forcing everything through one book.
+
+**Applicable strategies**
+
+- [[funding-rate-arbitrage]] — dual perp venues (Hyperliquid + Binance) mean funding can diverge, letting a long-one/short-the-other position harvest the spread on the same underlying.
+- [[hl-vs-cex-funding-divergence]] — directly exploits BIGTIME funding gaps between Hyperliquid's BIGTIME-PERP and Binance's USD-margined perp.
+- [[cash-and-carry]] — hold BIGTIME spot (Binance/Kraken) against a short BIGTIME perp to lock in carry when funding/basis is positive.
+- [[liquidation-cascade-fade]] — a thin, high-beta GameFi small cap with leveraged perps is prone to sharp liquidation flushes that overshoot and snap back.
+- [[breakout-and-retest]] — at ~99% below ATH, BIGTIME spends long periods ranging; clean breaks from those ranges on GameFi-narrative shifts are tradable with a retest confirmation.
+- [[oi-confirmed-trend]] — open-interest data across both perp venues helps separate genuine leveraged trend participation from thin, unsustained moves.
+
+**Volatility & regime character** — BIGTIME is **high-beta GameFi/altcoin beta stacked on GameFi-theme beta**: a small-cap gaming (P2E) token whose moves are dominated by the metaverse/gaming sentiment cycle and broad-altcoin risk appetite rather than fundamentals. It is strongly positively correlated to BTC/ETH direction (risk-off in BTC drags it hard) but with amplified magnitude and reflexive, narrative-driven up-spikes. Expect it to bleed with the GameFi cohort (AXS, SAND, GALA, IMX, RON) in fear regimes and to bounce sharply but unreliably.
+
+**Risk flags**
+
+- **Liquidity / small-cap depth** — sub-$20M cap; order books are thin in absolute terms, so leverage and large orders move price disproportionately.
+- **Emissions / unlock dilution** — low MC/FDV (~0.38) means a large share of the 5B max supply is still to unlock; ongoing [[emissions]] can cap rallies and add persistent sell pressure.
+- **Narrative dependence** — valuation tracks the GameFi/[[play-to-earn]] cycle and player-retention headlines, not cash flows; theme deterioration hits hard.
+- **Perp funding dislocations** — active dual-venue perps mean funding swings and liquidation cascades amplify both directions; watch for crowded-positioning flushes.
+- **Legacy overhang** — historical FTX/Alameda-era investor ties remain a supply/reputational tail risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BIGTIME` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BIGTIME` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BIGTIME&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BIGTIME&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BIGTIME"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

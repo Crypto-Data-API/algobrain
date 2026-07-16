@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, ethereum]
 aliases: ["IMX", "Immutable X"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://imx.community/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[layer-1]]", "[[layer-2]]", "[[proof-of-stake]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Immutable
@@ -144,6 +144,52 @@ The narrative ties IMX to the GameFi cycle: if Web3 gaming achieves mainstream a
 - **Volatility / liquidity:** ~$119.5M market cap and ~$6.9M daily volume make IMX a small-cap, volatile asset prone to sharp moves and slippage.
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+IMX is a **two-venue derivatives market**: it trades on **[[hyperliquid|Hyperliquid]]** as **IMX-PERP** (up to ~40-50x leverage) and on **Binance** as both spot (IMX/USDT) and a **USD-margined perpetual**, alongside broad CEX spot listings (Kraken, Upbit KRW, Bitget, KuCoin) and Ethereum DEXs (Uniswap V3, SushiSwap). This dual-perp availability gives a **deep, liquid two-venue market** with genuine on-chain funding/OI on Hyperliquid and centralized depth on Binance. For execution, the CEX + on-chain split lets traders route the passive leg where depth is best and the aggressive leg where slippage is lowest, and enables cross-venue funding/basis plays; still, as a rank-~249 small-cap, book depth thins fast on both venues, so size positions to the shallower side and expect wider slippage on large clips or in stressed conditions.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — collect the spread when IMX-PERP funding on Hyperliquid diverges from the Binance USD-margined perp, hedging the two legs.
+- [[hl-vs-cex-funding-divergence]] — small-cap alt perps like IMX-PERP frequently show HL-vs-Binance funding gaps that mean-revert, a clean two-venue harvest.
+- [[cash-and-carry]] — hold spot IMX (Binance/DEX) versus a short perp to capture positive carry when the perp trades at a persistent premium.
+- [[liquidation-cascade-fade]] — thin small-cap depth makes IMX prone to over-extended liquidation flushes that snap back, offering fade entries.
+- [[oi-confirmed-trend]] — use Hyperliquid open-interest to confirm whether an IMX move is real positioning or a low-conviction squeeze before trend entries.
+- [[narrative-trading]] — IMX is a high-beta GameFi/NFT-narrative token; rotate exposure with the Web3-gaming cycle and catalyst flow.
+
+### Volatility & regime character
+
+IMX is a **high-beta gaming/NFT [[layer-2]] infra token** — a mid-tail altcoin whose price is driven by the GameFi/NFT narrative cycle and broad risk appetite rather than idiosyncratic cash flows. It carries strong beta to [[bitcoin|BTC]]/[[ethereum|ETH]] (amplified drawdowns in risk-off, sharp squeezes in risk-on) and, as an Ethereum-ecosystem L2, tends to track ETH sentiment closely. In extreme-fear regimes speculative GameFi demand compresses hard, so IMX behaves as a leveraged bet on the next risk-on/gaming upcycle.
+
+### Risk flags
+
+- **Dilution / unlock overhang:** ~58% of supply not yet circulating (MC/FDV ~0.42); scheduled team, investor, and ecosystem unlocks are recurring sell-side supply events — see [[token-unlock-supply-event]].
+- **Narrative dependence:** valuation hinges on the GameFi/NFT cycle; a marquee hit game has been elusive and thin narrative demand suppresses price.
+- **Liquidity / small-cap depth:** rank-~249 cap with modest daily volume means shallow books, slippage on size, and gap risk on both perp venues.
+- **Perp funding dislocations:** thin two-venue liquidity can produce sharp funding swings and squeeze-driven wicks; confirm crowding via funding and OI before leveraged entries.
+- **Bear-market beta:** high correlation to BTC/ETH means broad risk-off drawdowns hit IMX disproportionately.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=IMX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=IMX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=IMX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=IMX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=IMX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

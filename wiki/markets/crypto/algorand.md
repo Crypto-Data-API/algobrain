@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["ALGO"]
 entity_type: protocol
 founded: 2017
 headquarters: "Boston, USA (Algorand Foundation: Singapore)"
 website: "https://algorand.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[real-world-assets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[real-world-assets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[range-mean-reversion]]", "[[crypto-beta-rotation]]"]
 ---
 
 # Algorand
@@ -329,6 +329,60 @@ Algorand's edge: **instant finality, no slashing, native RWA primitives (ASAs), 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ALGO trades on **both** major venue types, which makes it easier to work than a single-listing alt:
+- **Binance** — spot (ALGO/USDT) plus a **USD-margined perpetual**, giving deep centralized order-book depth and a reference funding curve. Kraken (USD) and Upbit (KRW) add further spot liquidity — Korean flow via Upbit is a recurring idiosyncratic driver for ALGO.
+- **Hyperliquid** — **ALGO-PERP**, on-chain perp with leverage up to **~40-50x** and transparent on-chain funding/OI/L2 depth.
+
+Practically, this two-venue structure means you can express spot, perp, or spot-vs-perp views, and run **cross-venue** setups (Binance perp vs Hyperliquid perp, or spot vs perp). Book depth is respectable for a top-80 alt but thinner than the megacaps — size positions to on-book depth (24h volume runs in the low tens of millions), scale into larger clips, and lean on limit/VWAP execution rather than sweeping the book. Native on-chain staking yield (post-2025 v4.0) is an alternative to derivatives carry when funding is flat.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — mature two-venue derivatives with generally muted bear-market funding make ALGO a candidate for collecting funding on a delta-neutral spot-vs-perp position.
+- [[hl-vs-cex-funding-divergence]] — because ALGO is liquid on both Binance (USD-M perp) and Hyperliquid, funding can diverge between the two venues, creating a capturable spread.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp lets you run a spot-long / perp-short carry to lock in funding + basis with negligible unlock/dilution risk (MC/FDV ≈ 1.0).
+- [[range-mean-reversion]] — ALGO's deep, freshly-based price just above its 2026 ATL and native staking yield suit accumulate-and-fade range trades with stops below the $0.0801 ATL.
+- [[crypto-beta-rotation]] — as a high-beta legacy L1 laggard, ALGO is a classic vehicle for rotating into deep-value alts late in the quality-curve cycle.
+- [[narrative-trading]] — ALGO reprices sharply on RWA/payments and roadmap (AlgoKit 4.0, Rocca) headlines, making it a tradable narrative-basket name alongside other RWA tokens.
+
+### Volatility & regime character
+
+ALGO is a **high-beta legacy Layer-1 / RWA-narrative alt**. It behaves as a laggard within the alt complex: broadly directionally correlated to BTC/ETH beta but with amplified moves — it under-participates in early risk-on legs and can rally hard late-cycle when capital rotates down the L1 quality curve. Its own idiosyncratic drivers (Korean Upbit flow, RWA/payments headlines, roadmap milestones) can decouple it from the majors on any given day. With a -97% ATH drawdown and price only recently basing above a fresh 2026 ATL, the regime is late-cycle/deep-value: long stretches of low realized volatility punctuated by sharp, sentiment-led expansions.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thinner book than megacaps and heavy reliance on Binance + Upbit; Korean KRW flow can drive idiosyncratic, sentiment-led swings that leak into perp funding.
+- **Narrative dependence** — the bull thesis rests on the RWA/payments pivot actually delivering tokenization volume; a stalled narrative leaves valuation on pure legacy beta ("ghost-chain" discount).
+- **Perp funding dislocations** — the two-venue perp structure can produce funding spikes or venue divergence during momentum runs or liquidation events; size leverage accordingly.
+- **Structural downtrend** — price has only recently based after a -97% ATH drawdown; a break below the $0.0801 ATL would invalidate range/deep-value setups.
+- **Emissions** — largely a non-issue: max supply is fixed and emissions are essentially complete (MC/FDV ≈ 1.0), so there is no meaningful unlock/dilution overhang.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ALGO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ALGO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ALGO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ALGO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ALGO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

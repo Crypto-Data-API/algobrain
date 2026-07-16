@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, ethereum]
 aliases: ["SOPH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sophon.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[zk-rollup]]", "[[zksync]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[zk-rollup]]", "[[zksync]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Sophon
@@ -233,6 +233,53 @@ Headwinds: the consumer-L2 field is crowded, the token's float is small and emis
 - **Liquidity discipline:** with ~$18M cap and thin books, size into limits, expect [[slippage]], and avoid market orders. The Hyperliquid perp's funding rate is a useful crowd-positioning gauge.
 - **Risk events:** token unlocks / continued airdrop distribution are the main idiosyncratic drawdown catalysts given MC/FDV ≈ 0.31. Map the unlock schedule before sizing.
 - **Bottoming-regime stance:** accumulation theses here hinge on *real* app traction, not price alone — a chain token with no sticky flagship app can stay cheap indefinitely. Treat SOPH as a speculative call option on Sophon's consumer-app thesis, sized accordingly. See [[risk-management]] and [[position-sizing]].
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SOPH is a **two-venue** derivatives market: it trades on **Binance** (spot **SOPH/USDT** plus a **USD-margined perpetual**) and on **[[hyperliquid|Hyperliquid]]** (**SOPH-PERP**, up to ~40-50x leverage). Having a top-tier CEX (Binance) alongside the leading on-chain perp DEX gives SOPH a deeper, more liquid book than most rank-~890 alts, with genuine two-sided flow and a real funding market on each venue. In practice this means: (1) execution can be split across venues, with Binance carrying the bulk of size and Hyperliquid offering transparent on-chain depth and permissionless access; (2) the two venues create a persistent cross-venue basis/funding spread to monitor and trade; and (3) despite the two-venue depth, this is still a low-float (~$18M cap), high-beta L2 token, so book depth is thin in absolute terms — size into limits, expect [[slippage]], and avoid dumping market orders into either venue's book.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — SOPH runs a perp on *both* Binance (USD-M) and Hyperliquid, so funding on the two venues drifts apart; harvest the divergence by going long the cheaper-funding leg and short the richer one.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp lets you hold spot SOPH against a short perp to capture positive funding/basis on a low-float alt where carry is often elevated.
+- [[funding-rate-harvest]] — thin, high-beta L2 perps like SOPH-PERP frequently sustain skewed funding after directional pushes; systematically collect funding on the crowded side with a delta-hedge.
+- [[liquidation-cascade-fade]] — with shallow books and ~40-50x leverage available on SOPH-PERP, forced-liquidation flushes overshoot; fade the wick back toward the pre-cascade mid.
+- [[oi-confirmed-trend]] — rising open interest into a directional move signals real leveraged conviction; use OI-confirmed breakouts to filter genuine trends from thin-book fakeouts in SOPH.
+- [[breakout-and-retest]] — as a narrative-driven micro-cap L2, SOPH tends to trade in coiled ranges then break on catalyst; enter on the retest of the broken level to avoid low-liquidity false breaks.
+
+### Volatility & regime character
+
+SOPH is a **high-beta, low-float L2/infra token** (ZK Stack "Elastic Chain" rollup + consumer/entertainment theme). It behaves as an amplified proxy for the ZK-rollup and consumer-crypto narratives, with a strong positive correlation (high beta) to [[bitcoin]] and especially [[ethereum]] — it tends to underperform on risk-off days and overshoot on relief rallies. Realized volatility is elevated versus large caps, and moves are reflexive: the small float and emission-heavy supply mean price is dominated by flow and narrative rather than fundamentals.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — despite two venues, absolute depth is thin at an ~$18M cap; a single large order or the loss of Binance/HL access can dislocate price.
+- **Token unlocks / emissions** — only ~3.15B of a 10B max supply circulates (MC/FDV ≈ 0.31), so ongoing unlocks and airdrop distribution are a structural sell-pressure overhang.
+- **Narrative dependence** — value hinges on the ZK/L2 and consumer-crypto themes and on real flagship-app traction; either narrative can cool quickly and leave the token bid-less.
+- **Perp funding dislocations** — on a low-float perp, crowded positioning can push funding to extremes and trigger cascading liquidations; watch funding and OI on both venues before sizing.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SOPH` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SOPH` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SOPH&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SOPH&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SOPH"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

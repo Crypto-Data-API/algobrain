@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://magiceden.io/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]", "[[solana]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
 ---
 
 # Magic Eden
@@ -130,6 +130,55 @@ ME has no mechanical cash-flow link (no revenue burn or fee-share that is automa
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ME trades on **both** [[binance|Binance]] (spot ME/USDT plus a USD-margined ME perpetual) and [[hyperliquid|Hyperliquid]] (ME-PERP, leverage up to ~40–50x), giving it a genuinely two-venue derivatives market rather than the single-venue concentration typical of similarly ranked small-caps. That dual availability means a trader can run the [[hyperliquid|Hyperliquid]] on-chain perp against Binance spot/perp for basis and funding plays, and can lean on Binance's deeper CEX book for larger clips while using [[hyperliquid|Hyperliquid]] for precise leveraged sizing. Depth is still that of a ~#515-rank NFT-marketplace token: liquid enough for the two perp venues to be arb-able against each other, but thin relative to majors, so size should be scaled to the visible L2 book (`l2-book?coin=ME`) and executed in slices to limit slippage and gap risk.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — ME quotes a perp on both [[hyperliquid|Hyperliquid]] and [[binance|Binance]], so funding can drift apart between the two venues; harvest the spread when it dislocates.
+- [[cash-and-carry]] — long Binance spot ME against a short ME perp to capture positive funding/basis while staying delta-neutral on a high-beta token.
+- [[funding-rate-harvest]] — NFT-narrative reflexivity drives crowded directional positioning, letting a neutral book collect funding when the perp trades rich to spot.
+- [[crowded-long-funding-fade]] — bursts of NFT/Ordinals hype pull in crowded longs on ME; fade extended funding once positioning gets one-sided.
+- [[liquidation-cascade-fade]] — thin depth and up-to-~50x leverage make ME prone to sharp liquidation flushes; fade the overshoot back toward the mean.
+- [[narrative-trading]] — ME is a near-pure call option on an NFT/Runes revival, so trade it around collectible-speculation narrative inflections.
+
+### Volatility & regime character
+
+ME is a **high-beta altcoin** — specifically an NFT-marketplace/collectibles token whose price is levered to one of the most boom-bust corners of crypto (NFT, Ordinals and Runes trading volume). It behaves less like an infra or DeFi cash-flow token and more like a reflexive narrative asset: quiet drift in bear regimes punctuated by violent, sentiment-driven expansions when collectible speculation returns. Correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] is real on the downside (it sells off with broad risk-off) but its *upside* beta is dominated by the NFT/Runes narrative rather than major-coin trend, so it can decouple sharply during collectibles manias.
+
+### Risk flags
+
+- **Venue/liquidity concentration:** despite two perp venues, absolute depth is thin for a small-cap; large orders gap and slippage is material.
+- **Supply overhang:** ~40% of max supply not yet circulating (MC/FDV ~0.60), so future unlocks/emissions are a standing dilution and funding-dislocation risk.
+- **Narrative dependence:** value is almost entirely a bet on an NFT/Ordinals/Runes revival with no mechanical revenue burn; demand can evaporate in NFT bear phases.
+- **Perp funding dislocations:** hype-driven crowded positioning plus up-to-~50x leverage can push funding to extremes and trigger cascading liquidations on both venues.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ME` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ME` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ME&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ME&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ME"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

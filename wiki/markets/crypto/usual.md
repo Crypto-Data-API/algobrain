@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin]
+tags: [crypto, defi, stablecoin, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["USUAL", "Usual", "Usual Money"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://usual.money/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[real-world-assets]]", "[[stablecoin]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[governance-token]]", "[[real-world-assets]]", "[[stablecoin]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Usual
@@ -191,6 +191,54 @@ Markets reacted immediately: **USD0++ [[depeg|depegged]]**, trading down to roug
 - **2025-01** — USD0++ redemption-term change triggered a [[depeg]] (USD0++ to ~$0.89–$0.90) and a sharp unwind of leveraged positions; USUAL token sold off heavily and TVL drained. (See controversy section above.)
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USUAL trades as a **deep, liquid two-venue market**. On **Binance** it is available as **spot (USUAL/USDT)** and as a **USD-margined perpetual**, giving it centralized order-book depth, tight spreads, and a large retail/quant taker base. On **[[hyperliquid|Hyperliquid]]** it trades as **USUAL-PERP** with leverage up to roughly **40–50x** on a fully on-chain order book. The presence of both a CEX spot leg and two independent perp venues is what makes USUAL cleanly tradable for basis and funding structures: a spot inventory can be sourced on Binance while the short leg is placed on either perp. For a small-cap (~#935) token, sizing should still respect that Binance carries the majority of true depth — large clips on Hyperliquid can move USUAL-PERP mark meaningfully, so execution is best worked passively or split across venues rather than swept at market.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — USUAL runs a USD-margined Binance perp and a Hyperliquid USUAL-PERP simultaneously, so their funding rates routinely diverge; long the cheaper-funded venue, short the richer one.
+- [[funding-rate-harvest]] — a reflexive incentive-token that periodically over-heats to the long side lets a delta-neutral short-perp/long-spot book collect elevated positive funding on USUAL.
+- [[cash-and-carry]] — buy USUAL spot on Binance and short the perp when the basis is positive, capturing carry on a token whose emissions-driven demand spikes can push perps to a premium.
+- [[crowded-long-funding-fade]] — narrative-driven USUAL rallies (yield/RWA hype) tend to crowd longs; fade persistently rich positive funding once open interest and price diverge.
+- [[liquidation-cascade-fade]] — thin off-Binance depth and up-to-50x leverage make USUAL prone to sharp liquidation flushes; fade the overshoot after a cascade exhausts.
+- [[event-driven-trading]] — USUAL price is highly sensitive to protocol governance and redemption-rule events (as in the January 2025 USD0++ episode); position around scheduled/known catalysts rather than passively holding.
+
+### Volatility & regime character
+
+USUAL is a **high-beta DeFi / RWA-stablecoin governance token**, not a large-cap. It carries strong **reflexivity** — its own emissions flywheel amplifies moves in both directions — and has demonstrated extreme drawdowns (~99% below its December 2024 ATH). Realized volatility is high and event-driven: quiet drift punctuated by governance/redemption shocks. Directionally it behaves as a **risk-on alt**, with elevated downside beta to [[bitcoin|BTC]]/[[ethereum|ETH]]-led sentiment (it sells off hard in "Extreme Fear" regimes) but only weak upside correlation, since its rallies depend on protocol-specific narrative rather than broad market beta. Note the governance token (USUAL) is volatile and distinct from **USD0**, the protocol's peg-targeting stablecoin.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — real depth is concentrated on Binance; Hyperliquid USUAL-PERP is thinner and easier to push, raising slippage and mark-manipulation risk on size.
+- **Narrative & reflexivity dependence** — price is driven by the USUAL emissions flywheel and RWA-yield narrative; when the incentive value falls, demand can unwind reflexively and fast.
+- **Governance / redemption-rule risk** — the protocol has changed redemption terms under stress (USD0++, January 2025), a discrete event risk that can gap the token.
+- **Perp funding dislocations** — small-cap perps on up-to-50x leverage can see funding spike and whipsaw; crowded positioning resolves violently via liquidation cascades.
+- **Depeg / regulatory adjacency** — while USUAL itself is not a stablecoin, its value is tied to the health and peg integrity of USD0/USD0++ and to evolving stablecoin/RWA regulation.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=USUAL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=USUAL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=USUAL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=USUAL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=USUAL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

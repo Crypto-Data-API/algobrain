@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme, nft]
+tags: [crypto, meme, nft, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest]
 aliases: ["MEME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.memecoin.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[meme-coin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[meme-coin-cycle]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Memecoin
@@ -114,6 +114,56 @@ Like all [[meme-coin|meme coins]], MEME has **no cash flows and no intrinsic val
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MEME is a genuine two-venue perp market. It trades on **Binance** (MEME/USDT spot plus a **USD-margined perpetual**) and on **[[hyperliquid|Hyperliquid]]** as **MEME-PERP** (leverage up to ~40-50x). This gives it deeper, more liquid coverage than most sub-$40M-cap memes — a legacy of its Binance Launchpool / tier-1 listing footprint. The dual-venue structure means [[funding-rate|funding]], mark price and depth can be compared and arbitraged across CEX and on-chain venues, and traders can route or split size between them for better execution. That said, headline turnover overstates true book depth for a token this small: high available leverage relative to thin absolute liquidity means position sizing should be conservative, since even modest flow can move price and trigger cascades on either venue.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — MEME's funding can diverge between the Binance USD-margined perp and Hyperliquid MEME-PERP, creating a cross-venue funding spread to capture.
+- [[funding-rate-harvest]] — crowded leveraged positioning in a small-cap meme drives persistent funding that can be systematically collected against a delta-neutral hedge.
+- [[liquidation-cascade-fade]] — thin absolute depth plus high leverage makes MEME prone to sharp liquidation wicks that overshoot and mean-revert, offering fade entries.
+- [[meme-coin-cycle]] — MEME trades on meme-sector reflexivity and attention cycles rather than fundamentals, the core driver to position around.
+- [[momentum-rotation]] — as a GMCI Meme Index constituent, MEME participates in meme-sector risk-on rotations and can be traded on relative strength versus peers.
+- [[oi-confirmed-trend]] — pairing [[open-interest]] with price on MEME-PERP helps separate genuine, OI-backed trends from thin, unsustained moves.
+
+### Volatility & regime character
+
+MEME is a **high-beta memecoin** whose returns are dominated by memecoin reflexivity — attention, narrative and meme-sector risk appetite — rather than fundamentals. It carries strong positive beta to broad crypto risk (BTC/ETH direction sets the regime) but amplifies it: it tends to rally hard in risk-on meme phases and de-rate sharply in risk-off ones, as its ~99% drawdown from the 2024 ATH illustrates. Correlation to BTC/ETH is meaningful for direction but MEME's idiosyncratic, brand- and narrative-driven swings widen the dispersion, and moves are further exaggerated in Extreme-Fear regimes.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — real depth is thin despite two venues; a Binance delisting or Hyperliquid liquidity shift would materially impair execution.
+- **Perp funding dislocations** — crowded leverage in a small-cap meme can push [[funding-rate|funding]] to extremes and trigger [[liquidations|liquidation]] cascades.
+- **Narrative dependence** — value rests on the continued relevance of the Memeland/9GAG brand and broad meme-sector sentiment; attention decay is the primary drawdown risk.
+- **Supply overhang** — with MC/FDV ≈ 0.92, ~8% of max supply is still to enter circulation, a modest emissions/unlock headwind.
+- **Concentration** — early stakers, team and backers may hold sizable positions, adding single-holder flow risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MEME` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MEME` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MEME&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MEME&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MEME"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

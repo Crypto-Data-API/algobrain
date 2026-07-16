@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, dex]
+tags: [crypto, defi, dex, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["SUSHI", "SushiSwap"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://sushi.com/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-dao-token]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex]]", "[[ethereum]]", "[[hyperliquid]]", "[[uniswap]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[curve-dao-token]]", "[[decentralized-exchange]]", "[[defi]]", "[[dex]]", "[[ethereum]]", "[[hyperliquid]]", "[[uniswap]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Sushi
@@ -214,6 +214,48 @@ The SUSHI token's value thesis rests on governance rights and protocol fee-shari
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — SUSHI trades on both major venue types: [[binance|Binance]] offers deep spot (SUSHI/USDT) plus a USD-margined perpetual, while [[hyperliquid|Hyperliquid]] lists **SUSHI-PERP** with leverage up to ~40-50x. This gives a genuine two-venue derivatives market on top of centralized and on-chain spot (SushiSwap, Uniswap V2/V3, and 40+ chain deployments). Book depth is respectable for a sub-$100M name but thin in absolute terms (~$7M 24h token volume), so size positions to the shallower book: aggressive market orders slip, and cross-venue availability is best exploited for basis/funding spreads rather than large directional prints. The presence of both a CEX perp and an HL perp makes CEX-vs-HL funding and basis comparisons directly tradable.
+
+**Applicable strategies**
+- [[hl-vs-cex-funding-divergence]] — with a Binance USD-margined perp and a Hyperliquid SUSHI-PERP both live, funding can diverge between venues on a thin alt, creating a delta-neutral harvest.
+- [[funding-rate-harvest]] — collect perp funding against a spot hedge; SUSHI's low-cap reflexivity produces episodic funding spikes worth farming.
+- [[cash-and-carry]] — long liquid spot (Binance/DEX) versus short SUSHI-PERP to lock the perp premium when funding runs persistently positive.
+- [[crowded-long-funding-fade]] — in DeFi-relief bounces SUSHI attracts crowded perp longs; a stretched positive funding print flags a fade back toward the mean.
+- [[liquidation-cascade-fade]] — the thin book means leveraged flushes overshoot; fading a completed long-liquidation cascade near the all-time-low area targets the snap-back.
+- [[oi-confirmed-trend]] — pairing open-interest expansion with price direction filters real SUSHI-PERP trends from low-liquidity noise.
+
+**Volatility & regime character** — SUSHI is a **low-cap DeFi-1.0 governance/DEX token** and trades as a high-beta altcoin: it amplifies BTC/ETH direction on the way up and down, with added idiosyncratic reflexivity from its uncapped-emissions tokenomics and governance history. It is not a large-cap anchor — realized volatility is high, and moves are frequently driven by broad DeFi-sector rotation rather than protocol-specific catalysts. Correlation to BTC/ETH beta is strong in risk-off tapes (it sells off with the sector) and can decouple briefly on DeFi-narrative flare-ups. As of the latest snapshot it sits near its all-time low in an Established Bear Market, so regime sensitivity is elevated.
+
+**Risk flags**
+- **Liquidity / venue concentration** — small absolute depth; two perp venues help but the underlying is easily moved, and a single venue outage concentrates execution risk.
+- **Emissions / dilution** — uncapped supply governed by the Sushi DAO; renewed liquidity-mining or governance-driven issuance is a structural overhang despite ~94% of supply already circulating.
+- **Narrative dependence** — price leans on DeFi-sector sentiment and DEX-volume recovery more than on standalone fundamentals; drifts with the group.
+- **Perp funding dislocations** — on a thin alt, funding can whip sharply and diverge across Binance vs. Hyperliquid, punishing carry that is not actively managed.
+- **Governance / competition risk** — turbulent leadership history and intense fee competition (Uniswap, Curve, aggregators) can trigger sudden repricings that hit leveraged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SUSHI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SUSHI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SUSHI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SUSHI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SUSHI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

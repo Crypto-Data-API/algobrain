@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, interoperability]
+tags: [altcoins, crypto, interoperability, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["ARK", "Ark Ecosystem"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://ark.io/"
-related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[interoperability]]", "[[layer-1]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[delegated-proof-of-stake]]", "[[interoperability]]", "[[layer-1]]", "[[smart-contracts]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # ARK
@@ -243,6 +243,50 @@ ARK's narrative is **legacy interoperability / app-chain infrastructure**. It pr
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** ARK is tradable on **both** [[hyperliquid|Hyperliquid]] (ARK-PERP, up to ~40–50x leverage) and Binance (spot ARK/USDT plus a USD-margined perpetual), making it a rare micro-cap with a genuine two-venue derivatives market. Having a listed CEX perp alongside the on-chain HL perp means shorts, hedges, and basis structures are actually executable — unusual for a token this size. In practice, however, depth is qualitatively thin on both books: spot turnover is a small fraction of the cap and Korean-Won flow (Upbit) can swing volume unpredictably. Traders should size for shallow order books, expect meaningful slippage on market orders, favour limit/passive execution, and treat the high available leverage as a liquidation hazard rather than an invitation to size up. Two venues do, however, open room for [[cross-exchange-arbitrage]] and funding/basis capture between HL and the Binance perp.
+
+**Applicable strategies:**
+- [[cash-and-carry]] — long Binance spot ARK against a short HL or Binance USD-margined perp harvests any positive basis; viable precisely because ARK has both a spot market and a perp.
+- [[hl-vs-cex-funding-divergence]] — thin, erratic funding on ARK-PERP frequently diverges from the Binance perp, letting a delta-neutral pair collect the spread.
+- [[liquidation-cascade-fade]] — high leverage on a shallow book means stop runs and forced liquidations routinely overshoot, offering mean-reversion entries after washouts.
+- [[cross-exchange-arbitrage]] — dual HL/Binance listings on a low-liquidity name can leave transient price gaps between venues to arbitrage.
+- [[narrative-trading]] — as a 2017-cycle legacy infra token, ARK moves on idiosyncratic catalysts (Core/SmartBridge releases, bridgechain launches, old-coin rotations) rather than fundamentals.
+- [[range-mean-reversion]] — absent a catalyst ARK drifts and chops within ranges, suiting fade-the-edges reversion with tight risk.
+
+**Volatility & regime character.** ARK is a low-liquidity **infrastructure / interoperability micro-cap** (rank ~800) with high-beta behaviour: it acts largely as a proxy for small-cap altcoin sentiment and is strongly correlated to [[btc-bitcoin|BTC]]/[[ethereum|ETH]] beta, tending to amplify moves on the downside and lag on recoveries. With MC/FDV ≈ 1.0 there is no unlock-driven supply reflexivity, so price action is dominated by flow, thin-book gaps, and broad-market risk regime rather than tokenomics events.
+
+**Risk flags.**
+- **Liquidity / venue concentration** — shallow order books on both venues; a small number of large orders (or a Korean-market volume spike) can move price sharply.
+- **Perp funding dislocations** — ARK-PERP funding is noisy and can be erratic, punishing carry positions held through spikes and complicating delta-neutral sizing.
+- **High leverage on a thin book** — up to ~40–50x on HL against low depth makes cascade liquidations and stop-runs a recurring, self-reinforcing hazard.
+- **Narrative dependence** — with limited fresh developer traction, ARK relies on idiosyncratic catalysts or old-coin rotations; between them it drifts and can bleed against BTC.
+- **Emissions drip** — uncapped inflationary supply paid to delegates is a mild continuous structural headwind (no cliff, but a persistent leak).
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ARK` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ARK` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ARK&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ARK&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ARK"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

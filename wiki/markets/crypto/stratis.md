@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["STRAX", "Stratis Platform"]
 entity_type: protocol
 founded: 2016
 headquarters: "United Kingdom"
 website: "https://www.stratisplatform.com/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[smart-contracts]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[layer-1]]", "[[proof-of-stake]]", "[[proof-of-work]]", "[[smart-contracts]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Stratis
@@ -214,6 +214,56 @@ Stratis's defining wedge is the **Microsoft .NET developer ecosystem** — a pos
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+STRAX is a genuine two-venue derivatives market rather than a spot-only micro-cap. It trades on **[[binance|Binance]]** (STRAX/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** as **STRAX-PERP**, where leverage runs up to roughly **40–50x**. Having a deep centralized book (Binance) sitting alongside an on-chain perp (Hyperliquid) gives the pair meaningfully better depth and tighter spreads than most rank-#800 tokens, and it makes STRAX one of the few micro-caps where a *cross-venue* book actually exists. That said, depth is still shallow in absolute terms: this is a ~$24M-cap asset, so large clips move the book on either venue. The practical implications: high leverage on Hyperliquid means position sizing must be conservative relative to notional (liquidation prices sit close in percentage terms), while the presence of two independent order books lets a trader split execution, source liquidity on whichever side is deeper, and — critically — run **spot-vs-perp** and **CEX-vs-DEX** structures that single-venue micro-caps cannot support. Funding, mark, and OI on the Hyperliquid leg are all directly observable (see the data section below), so the perp side is transparent enough to trade systematically.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — Binance spot (or the USDT perp) can be held long against a short STRAX-PERP on Hyperliquid to harvest positive funding/basis while staying delta-neutral on a genuinely two-venue pair.
+- [[basis-trading]] — the spot–perp spread between Binance and Hyperliquid is directly capturable given STRAX quotes on both sides with observable mark and funding.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid's STRAX-PERP can dislocate from the Binance USD-margined perp, and that divergence is tradable precisely because both venues list the pair.
+- [[funding-rate-harvest]] — the high-leverage Hyperliquid perp on a thin micro-cap tends to run persistent one-sided funding after the kind of idiosyncratic spikes STRAX has shown, which can be farmed delta-neutral.
+- [[liquidation-cascade-fade]] — at 40–50x on a shallow book, crowded STRAX-PERP positioning liquidates violently; fading the overshoot into observable OI flush is a repeatable micro-cap setup.
+- [[crowded-long-funding-fade]] — after sharp idiosyncratic rallies (STRAX has printed +15%/24h moves), long-side funding spikes and OI crowds long, setting up a mean-reversion fade financed by the funding it pays.
+
+### Volatility & regime character
+
+STRAX is a **high-beta, low-float micro-cap infrastructure/enterprise-L1 token** (a Bitcoin-derived, C#/.NET Proof-of-Stake platform chain) with a ~$24M cap and a >99% drawdown from its 2018 ATH. Its price behavior is dominated by **idiosyncratic, reflexive spikes** — sharp single-catalyst rallies that can run counter to the broad tape (it rallied double digits during an Extreme-Fear market) and then mean-revert. It broadly carries positive but **noisy beta to [[bitcoin|BTC]]/[[ethereum|ETH]]** risk regimes: in risk-on phases it can amplify moves, but its thin float means token-specific flow (listings, low-liquidity squeezes, concentrated positioning) frequently overwhelms any clean market beta. Treat it as a reflexive small-cap alt, not a large-cap beta proxy.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — despite two venues, absolute depth is thin at a ~$24M cap; a withdrawal of the Binance or Hyperliquid book would leave execution materially worse, and large orders slip.
+- **Perp funding dislocations** — high leverage (40–50x) on a shallow perp means funding can swing hard and stay one-sided, punishing carry positioned the wrong way.
+- **Liquidation reflexivity** — the same leverage drives violent liquidation cascades in both directions; stops and sizing must account for gap risk.
+- **Spike-reversion / narrative dependence** — moves are catalyst-driven and idiosyncratic (see Price History); micro-cap spikes without a verified catalyst frequently reverse, so trend-following signals are low-quality here.
+- **Fundamental / adoption overhang** — enterprise-blockchain demand has broadly underdelivered, so any rally rests on flow and narrative rather than durable on-chain usage.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=STRAX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=STRAX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=STRAX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=STRAX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=STRAX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

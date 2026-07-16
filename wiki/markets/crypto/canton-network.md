@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, regulation]
+tags: [crypto, defi, regulation, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["CC", "Canton", "Canton Coin"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized (developed by Digital Asset, New York)"
 website: "https://www.canton.network/"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[treasuries]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[treasuries]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]"]
 ---
 
 # Canton Network
@@ -221,6 +221,54 @@ CC's defining feature versus every RWA peer is its **extreme volume-to-cap misma
 | **Max Supply** | Unlimited |
 | **Fully Diluted Valuation** | $5.18B |
 | **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CC is a **perp-first asset**: it trades as **CC-PERP on [[hyperliquid]]** (leverage up to ~40-50x), but is **not listed on Binance**, and its spot access is limited/offshore (Kraken, KuCoin, Crypto.com). With no deep, tier-1 spot venue, price discovery and directional flow concentrate almost entirely on the Hyperliquid perp. Book depth is thin relative to the printed top-20 market cap (the ~0.12% volume/cap ratio noted above), so spreads widen quickly and market orders slip; size positions to HL book depth, not to headline market cap, and prefer limit/passive entries. High available leverage against a thin book makes CC prone to fast liquidation-driven moves — a feature to exploit or defend against, not to lean into blindly.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — as a PERP-FIRST, narrative-driven new listing, CC-PERP funding can run persistently rich or negative; harvesting the funding leg (delta-hedged where possible) is a core carry play.
+- [[crowded-long-funding-fade]] — RWA-headline chases into a thin book crowd the long side and push funding to extremes; fade the crowd when funding spikes with no fresh catalyst.
+- [[liquidation-cascade-fade]] — up to ~40-50x leverage on a thin CC book produces sharp liquidation flushes that overshoot; fade the wick once the cascade exhausts.
+- [[oi-confirmed-trend]] — because nearly all flow is on the HL perp, open interest is a clean tape; rising OI confirming a directional move is a high-quality trend signal for CC.
+- [[narrative-trading]] — CC is the flagship institutional-RWA/TradFi-settlement token, so trades are best framed around DTCC/bank-pilot and tokenization headlines.
+- [[event-driven-trading]] — discrete catalysts (DTCC go-live, treasury-vehicle/DAT announcements, super-validator news) drive step changes; position around scheduled and headline events.
+
+### Volatility & regime character
+
+CC is a **thin-float infra / institutional-RWA token**, not a large-cap beta name. Its price is driven far more by RWA/TradFi-settlement headlines and thin-float reflexivity than by general crypto beta, so BTC/ETH correlation is loose and episodic — it can decouple hard on narrative catalysts. Realized volatility is high (a 3.3x range in its first trading quarter) and regime-sensitive to institutional-adoption newsflow rather than to broad market risk-on/risk-off.
+
+### Risk flags
+
+- **Venue concentration**: directional liquidity is effectively single-venue (Hyperliquid perp); no Binance listing and thin offshore spot mean limited hedging/exit routes.
+- **Thin float / soft cap**: freely tradeable supply is concentrated among super-validators and DRW/Cumberland-linked entities, so the top-20 headline cap is not deployable liquidity — slippage risk on size is severe.
+- **Narrative dependence**: valuation is an option on institutional adoption; RWA-headline reversals or delayed go-lives can gap the price.
+- **Perp funding dislocations**: with flow crowded onto one perp, funding can dislocate sharply and liquidation cascades can overshoot in both directions.
+- **Regulatory**: as a regulated-finance / RWA-settlement play, policy and tokenization-rule changes are a direct catalyst and risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

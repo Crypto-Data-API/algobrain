@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, memecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, bitcoin, ethereum]
 aliases: ["DOGE", "Doge"]
 entity_type: protocol
 founded: 2013
 headquarters: "Decentralized"
 website: "http://dogecoin.com/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[litecoin]]", "[[narrative-trading]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[litecoin]]", "[[narrative-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Dogecoin
@@ -322,6 +322,54 @@ DOGE's durable advantages over the basket: the deepest and most liquid spot/perp
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DOGE is one of the most liquid altcoins in crypto and trades on **both** major venue types: [[binance|Binance]] (deep spot books plus a USD-margined DOGE perpetual) and [[hyperliquid|Hyperliquid]] (**DOGE-PERP**, leverage up to ~40–50x). Two-venue availability means CEX and on-chain-perp order flow can be worked side by side — spot on Binance for cash-and-carry legs, perps on either venue for directional or funding trades. Depth is among the best in the meme basket, so large-cap-style sizing is feasible in normal regimes, but note that in extreme-fear/bear conditions (see [[#Trading Characteristics]]) book depth thins and slippage widens. The split between a CEX perp and an on-chain perp also opens venue-relative funding and basis plays, since funding can diverge between Binance and Hyperliquid.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — DOGE perp funding swings hard positive in meme-rally phases (crowded longs), letting a delta-neutral book harvest the premium.
+- [[crowded-long-funding-fade]] — parabolic DOGE rallies routinely stack extreme positive funding + rising OI, a classic crowded-long exhaustion fade.
+- [[hl-vs-cex-funding-divergence]] — with a live Binance perp and Hyperliquid DOGE-PERP, funding can dislocate between venues and be arbitraged.
+- [[cash-and-carry]] — deep Binance spot plus a USD-margined perp make the long-spot / short-perp carry clean to run on DOGE.
+- [[liquidation-cascade-fade]] — DOGE's high beta and crowded positioning produce violent liquidation flushes that snap back, a repeatable fade.
+- [[narrative-trading]] — DOGE is the benchmark retail-sentiment / meme-basket beta; the DOGE/BTC ratio is a clean meme-season rotation signal.
+
+### Volatility & regime character
+
+DOGE is the archetypal **high-beta memecoin** and the cleanest retail-sentiment proxy in crypto. Realized volatility is structurally higher than the majors, intraday ranges widen sharply on Musk/X headlines, and the asset exhibits strong **memecoin reflexivity** — price and attention feed each other. It trades as high-beta [[bitcoin]]/[[ethereum]] risk: heavily correlated to the majors in direction but with amplified amplitude, tending to lag early in a bull, explode in late "alt/meme season," and bleed hardest in bear regimes. The DOGE/BTC ratio is a barometer of risk appetite.
+
+### Risk flags
+
+- **Narrative dependence:** value is almost entirely sentiment/retail-driven with no utility or DeFi anchor — drawdowns can be brutal and prolonged.
+- **Key-person (Elon) event risk:** unusually sensitive to a single individual's social posts and corporate decisions; sharp gaps in both directions.
+- **Perp funding dislocations:** funding swings hard in both directions and can diverge across Binance vs Hyperliquid, punishing crowded positioning and creating squeeze risk.
+- **Liquidity concentration in stress:** in extreme-fear regimes depth and volume thin out, amplifying slippage and liquidation-cascade risk.
+- **Tail inflation:** perpetual ~3% emission is mild structural sell pressure and removes any hard-scarcity narrative versus capped peers.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=DOGE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=DOGE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=DOGE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=DOGE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=DOGE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

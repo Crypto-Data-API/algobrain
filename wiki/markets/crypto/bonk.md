@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, momentum]
+tags: [altcoins, crypto, momentum, memecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["BONK", "Bonk Inu"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized (BonkDAO, Solana ecosystem)"
 website: "https://www.bonkcoin.com/"
-related: ["[[bonkbot]]", "[[crypto-markets]]", "[[letsbonk]]", "[[narrative-trading]]", "[[solana]]"]
+related: ["[[bonkbot]]", "[[crypto-markets]]", "[[letsbonk]]", "[[narrative-trading]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]"]
 ---
 
 # Bonk
@@ -313,6 +313,55 @@ Volume more than halved and rank dropped ~18 places April→June 2026 — the me
 | **Max Supply** | 88.00T BONK |
 | **Fully Diluted Valuation** | $312.27M |
 | **Market Cap / FDV Ratio** | 1.00 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BONK is a genuine two-venue derivatives market: tradable on **Binance** (BONK/USDT spot plus a USD-margined BONK perpetual) and on **[[hyperliquid|Hyperliquid]]** (BONK-PERP, up to ~40–50x, cleared against the HLP vault). Depth is deep and liquid on both venues — among the most liquid memecoin perps anywhere — so BONK is one of the few meme assets that supports institutional-style delta-neutral and basis structures rather than only thin, one-venue punts. The dual-venue footprint means the on-chain Hyperliquid book and the Binance CEX book can be run against each other (cross-venue funding and basis divergence), and it lets traders size larger with tighter slippage than typical rank-~128 alts. Practically: use Binance for the deepest USD-margined execution and cheapest spot leg, and Hyperliquid for higher leverage, transparent on-chain funding/OI, and the vault-cleared perp — routing the two sides of a carry or arb across both.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — BONK-PERP funding swings hard with meme sentiment; positive funding during FOMO pays a delta-neutral long-spot/short-perp carry.
+- [[hl-vs-cex-funding-divergence]] — with BONK live on both Hyperliquid and Binance, funding can dislocate between the on-chain and CEX book, giving a cross-venue funding spread to capture.
+- [[cash-and-carry]] — MC/FDV ≈ 1.0 (no unlock overhang) makes the long-spot / short-perp basis cleaner to hold than on diluting meme peers.
+- [[crowded-long-funding-fade]] — meme-FOMO leaves BONK longs crowded and funding richly positive; fading extended positive-funding pops is a recurring setup.
+- [[liquidation-cascade-fade]] — high-beta memecoin leverage produces sharp liquidation flushes; deep two-venue liquidity supports fading capitulation wicks.
+- [[narrative-trading]] — BONK is the liquid proxy leg for the Solana-meme basket (with WIF, POPCAT), so it trades on sector narrative rotation.
+
+### Volatility & regime character
+
+BONK is a **high-beta memecoin** with pronounced reflexivity — its price is driven by attention, social volume, and Solana-meme sentiment rather than cash flows. It behaves as amplified Solana-ecosystem beta: strongly correlated to SOL and to broad crypto risk appetite (BTC/ETH beta), but with a larger amplitude in both directions. In risk-on meme-FOMO it can run multiples of the majors; in risk-off it bleeds harder and faster. The revenue-funded burn engine adds a mild deflationary/quasi-fundamental overlay (launchpad share, burn rate) but does not offset a sentiment exodus. Expect regime-dependent behaviour: trend/momentum-friendly in meme bull phases, choppy mean-reverting range in fear regimes.
+
+### Risk flags
+
+- **Narrative dependence** — a pure sentiment/attention asset; value hinges on Solana-meme mindshare and the LetsBonk vs Pump.fun launchpad cycle, which round-tripped violently (84% → ~12% share) in 2025.
+- **Perp funding dislocations** — funding is expensive relative to majors and can dominate carry; it flips sharply between richly positive (FOMO) and negative (capitulation).
+- **Liquidation reflexivity** — high-beta leverage makes BONK prone to cascade flushes; size for gap risk despite the deep books.
+- **Concentration / large-seller risk** — a corporate-treasury supply block (>2.5%) is a single forced-distribution risk.
+- **Venue/liquidity contraction** — meme-sector deleveraging thins books and widens slippage, amplifying moves in both directions.
+- **Regulatory/ETF binary** — pending US ETF wrappers are a two-way catalyst; a denial removes an institutional bid.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=kBONK` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=kBONK` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=kBONK&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=kBONK&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=kBONK"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

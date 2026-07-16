@@ -4,11 +4,11 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme]
+tags: [crypto, meme, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins]
 aliases: ["MOODENG"]
 entity_type: protocol
 headquarters: "Decentralized"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[meme-coin]]", "[[pump-fun]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[meme-coin]]", "[[pump-fun]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[liquidation-cascade-fade]]"]
 website: "https://moodeng.vip/"
 ---
 
@@ -114,6 +114,48 @@ Moo Deng is a pure **attention/narrative asset**. The "Moo Deng" pygmy hippo at 
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** MOODENG is a **perp-first** asset: it trades as **MOODENG-PERP on [[hyperliquid]]** (leverage up to ~40-50x) but is **not listed on Binance**, and spot access elsewhere is limited/offshore (Kraken, Upbit, Bitget, KuCoin plus Solana DEXs). With no dominant global spot venue and no Binance flow, leveraged directional and funding activity concentrates on the HL perp, which tends to be the primary price-discovery book. Depth is thin for the size of typical size that leverage invites, so slippage on market orders is meaningful — scale in with limit/passive orders, keep clip sizes small relative to top-of-book, and treat the HL L2 book as the real liquidity constraint rather than headline 24h volume. The lack of a deep spot leg also complicates true cash-and-carry: hedging usually means CEX spot (Kraken/Upbit) or Solana DEX rather than a same-venue spot-perp pair.
+
+**Applicable strategies.**
+- [[crowded-long-funding-fade]] — memecoin perps like MOODENG regularly build one-sided long crowding into rallies; fading richly positive funding is a natural HL-perp play.
+- [[crowded-short-funding-fade]] — after washouts, persistently negative funding on a small meme signals crowded shorts vulnerable to a squeeze.
+- [[liquidation-cascade-fade]] — thin depth plus high leverage makes MOODENG prone to over-extended liquidation flushes that mean-revert once forced sellers clear.
+- [[oi-confirmed-trend]] — rising open interest confirming a directional move (vs. a pure funding-driven spike) helps separate durable meme trends from leverage-only noise.
+- [[meme-coin-cycle]] — MOODENG is a textbook attention-meme; positioning to its viral-launch-peak-retrace cycle frames the regime backdrop for any trade.
+- [[volatility-breakout]] — reflexive meme ranges resolve into sharp expansions; breakout entries with ATR-scaled stops fit its low-conviction-then-impulse character.
+
+**Volatility & regime character.** High-beta **memecoin reflexivity** — no cash flows, value driven entirely by attention and community flow. Realized volatility is high and clustered, with quiet ranges punctuated by leverage-fed impulses. Directionally it carries positive but noisy **BTC/ETH beta** (risk-on/risk-off tone gates meme appetite), yet idiosyncratic meme-narrative moves and Korean-retail (Upbit) flow can decouple it from majors intraday.
+
+**Risk flags.**
+- **Venue concentration** — no Binance listing; perp flow concentrates on Hyperliquid and spot on a handful of CEX/DEX venues, so a single-venue disruption or Upbit-flow reversal can swing price hard.
+- **Liquidity/depth** — real book depth is thinner than the ~$39M cap and headline volume imply; large orders and stops slip badly.
+- **Perp funding dislocations** — extreme funding swings are common and are a classic precursor to liquidation cascades on a thin, high-leverage book.
+- **Narrative dependence** — value hinges on residual cultural relevance of the Moo Deng meme; attention decay is a structural drawdown risk.
+- **Emissions/unlocks** — near-zero: the full ~1B supply already circulates (MC/FDV ≈ 1.00), so there is little unlock overhang but also no team/VC to defend price.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MOODENG` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MOODENG` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MOODENG&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MOODENG&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MOODENG"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

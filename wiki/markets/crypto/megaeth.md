@@ -3,10 +3,10 @@ title: "MegaETH"
 type: market
 created: 2026-04-28
 updated: 2026-07-16
-status: stub
-tags: [crypto, defi, ethereum, smart-contracts]
+status: review
+tags: [crypto, defi, ethereum, smart-contracts, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["MEGA", "Mega ETH", "MegaETH"]
-related: ["[[2026-exploit-target-watchlist]]", "[[berachain-bera]]", "[[crypto-markets]]", "[[ethereum]]", "[[monad]]", "[[smart-contract-vulnerability-taxonomy]]"]
+related: ["[[2026-exploit-target-watchlist]]", "[[berachain-bera]]", "[[crypto-markets]]", "[[ethereum]]", "[[monad]]", "[[smart-contract-vulnerability-taxonomy]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[hl-vs-cex-funding-divergence]]"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://megaeth.com/"
@@ -167,6 +167,52 @@ MegaETH is the first real-time blockchain, where crypto applications leverage ex
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MEGA trades on **both Binance** (MEGA/USDT spot plus a USD-margined perpetual) **and Hyperliquid** (MEGA-PERP, leverage up to ~40-50x). This two-venue structure gives the pair genuine depth relative to its rank-~416 market cap: a centralized-venue order book for spot inventory and passive fills, alongside an on-chain perp with continuous funding for directional and carry exposure. The dual listing means execution can be routed to the tighter book at any moment, and cross-venue price/funding differences are observable and tradable rather than purely theoretical. Practical sizing note: while depth is good for the cap band, MEGA is still a low-priced small-cap with a low MC/FDV ratio, so large clips can move the book — scale in, use limit/passive orders, and avoid crossing thin levels during low-liquidity hours.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — MEGA runs on both a Binance USD-margined perp and Hyperliquid MEGA-PERP, so divergent funding between the two venues can be captured delta-neutral.
+- [[hl-vs-cex-funding-divergence]] — direct HL-vs-Binance funding spread on the same asset; the two-venue listing is exactly the setup this strategy targets.
+- [[cash-and-carry]] — hold Binance spot MEGA against a short perp to harvest positive funding/basis on a token with a persistently low MC/FDV ratio.
+- [[liquidation-cascade-fade]] — a low-priced small-cap with up to ~50x leverage available is prone to sharp liquidation flushes that overshoot and mean-revert.
+- [[breakout-and-retest]] — new-L1 listing with a wide post-launch range (ATH well above current price) offers clean breakout-and-retest structure around prior levels.
+- [[oi-confirmed-trend]] — Hyperliquid open-interest data lets you confirm whether MEGA moves are backed by real positioning versus thin, fade-able pushes.
+
+### Volatility & regime character
+
+MEGA is a **high-beta, early-stage new-L1 / infra token**. Price sits roughly -79% from its April 2026 ATH with large 30-day drawdowns, characteristic of a recently launched small-cap still in price discovery. It behaves as a high-beta risk asset: it tends to amplify broad crypto risk-on/risk-off swings and is correlated to **ETH** (Ethereum-secured L1 narrative) and **BTC** beta, typically moving more than either in both directions. Reflexive, narrative-driven repricing (launch hype, TVL ramp, listing flows) can dominate over fundamentals in the near term.
+
+### Risk flags
+
+- **Small-cap depth / venue concentration** — despite the dual listing, real liquidity is concentrated on Binance and Hyperliquid; a disruption on either venue materially thins the tradable book.
+- **Low MC/FDV ratio (0.11)** — the large gap between circulating and total supply implies future **token unlocks/emissions** that can pressure price; size and time entries around scheduled unlocks.
+- **Narrative dependence** — as a just-launched new-EVM L1, price is heavily driven by launch/TVL narrative and post-launch operational outcomes rather than established cash flows.
+- **Perp funding dislocations** — high available leverage (~40-50x) on a thin small-cap can drive funding to extremes and trigger liquidation cascades; funding-based and fade strategies must budget for gap risk.
+- **Early-protocol / audit risk** — per [[2026-exploit-target-watchlist]], a security incident on MegaETH or its early DeFi deployments could trigger abrupt repricing independent of market beta.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MEGA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MEGA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MEGA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MEGA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MEGA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

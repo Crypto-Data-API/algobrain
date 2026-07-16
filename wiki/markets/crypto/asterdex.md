@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [algorithmic, api-trading, crypto, defi, derivatives, dex, perpetuals]
+tags: [algorithmic, api-trading, crypto, defi, derivatives, dex, perpetuals, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["ASTER", "Aster", "Aster DEX", "AsterDEX"]
 entity_type: exchange
 headquarters: "Decentralized"
 website: "https://www.asterdex.com/en"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[defi]]", "[[dex]]", "[[funding-rate]]", "[[hyperliquid-vs-asterdex-vs-tiger-brokers]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[defi]]", "[[dex]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[hl-vs-cex-funding-divergence]]", "[[hyperliquid-vs-asterdex-vs-tiger-brokers]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
 ---
 
 # AsterDEX
@@ -239,6 +239,48 @@ ASTER is best framed as a **revenue-share / market-share play on the perp-DEX ca
 - (Source: [[coingecko-top-1000-2026-04-09]])
 - AsterDEX documentation and API docs
 - DeFiLlama / DeFi Perp DEX volume rankings
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ASTER trades on **both [[binance|Binance]] (spot + USD-margined perpetual)** and **[[hyperliquid|Hyperliquid]] (ASTER-PERP, up to ~40-50x)**, giving it a genuinely deep, liquid two-venue derivatives market rare for a #46-ranked alt. Binance provides the primary spot reference price and the deepest USDT-margined perp book; Hyperliquid offers a fully on-chain perp with transparent order flow and its own funding clock. This dual-venue availability means large positions can be built and unwound with less slippage than single-venue peers, and the split lets traders route execution to whichever venue shows the better book at a given moment. The two independent funding streams and mark prices create recurring [[hyperliquid|HL]]-vs-CEX dislocations that can be captured without directional risk. Size positioning to the thinner of the two books at any moment, since ASTER depth is still well below BTC/ETH majors.
+
+**Applicable strategies**
+- [[funding-rate-arbitrage]] — Two independent perp venues (Binance + Hyperliquid) with separately-set funding on ASTER-PERP make delta-neutral funding capture and cross-venue funding spreads directly tradable.
+- [[hl-vs-cex-funding-divergence]] — Binance USD-margined funding and Hyperliquid ASTER-PERP funding are set on different clocks/mechanisms, so their divergences are a clean, ASTER-specific spread to harvest.
+- [[cash-and-carry]] — With liquid ASTER spot on Binance and perps on both venues, long-spot/short-perp carry can be run whenever the perp trades at a persistent premium.
+- [[liquidation-cascade-fade]] — Extreme leverage on both AsterDEX-native (up to 1001x) and cross-venue perps makes ASTER prone to sharp liquidation wicks that mean-revert, offering fade entries.
+- [[oi-confirmed-trend]] — Open interest is published for ASTER-PERP on Hyperliquid, so trend entries can be filtered by whether OI is rising with price (real conviction) versus falling (short-covering).
+- [[breakout-and-retest]] — As a high-beta, narrative-driven top-50 token with clear post-launch range structure, ASTER produces tradable range breakouts that can be entered on the retest.
+
+**Volatility & regime character** — ASTER is a **high-beta alt / DeFi (perp-DEX) infrastructure token** whose value is a market-share claim on a leveraged-trading venue, so it amplifies broad crypto risk appetite. It is strongly correlated to BTC/ETH beta and tends to move harder than the majors in both directions — during the Established Bear Market backdrop (Fear & Greed 23 as of 2026-06-20) drawdowns can be severe. Volatility is further reflexive because the token, the platform's fee capture, and derivatives volume all feed each other, and CZ/Binance-association headlines can drive outsized single-name moves.
+
+**Risk flags**
+- **Unlock overhang / emissions** — only ~33% of the 8.0B max supply circulates (MC/FDV ~0.34); ~5.3B tokens weighted toward airdrop/community and team/investor allocations represent material vesting supply that can pressure price.
+- **Narrative & association dependence** — value is tied to the perp-DEX narrative and CZ/Binance backing; a negative headline or loss of the #2 share position can re-rate the token sharply.
+- **Perp funding dislocations** — running two venues means funding can diverge or spike abruptly; crowded positioning on either book can force adverse funding on carry trades.
+- **Leverage-driven liquidation risk** — native leverage up to 1001x plus cross-venue perps make ASTER prone to violent liquidation cascades that gap through stops.
+- **Venue/parameter concentration** — the platform's team can adjust leverage, funding, and margin parameters in real time, and multi-chain bridge/router surfaces add operational risk to the underlying venue.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ASTER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ASTER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ASTER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ASTER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ASTER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

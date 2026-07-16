@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme]
+tags: [crypto, meme, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["BRETT", "Based Brett"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.basedbrett.com/"
-related: ["[[base]]", "[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[toshi]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[toshi]]", "[[hyperliquid]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Brett
@@ -254,6 +254,59 @@ BRETT the dancer, gamer, and cultural icon of BASE chain (some like to call me t
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BRETT is one of the more liquid memecoins for its cap, tradable on **both centralized and on-chain perp venues**:
+
+- **Binance** — spot **and** USD-margined perpetual futures, giving BRETT deep centralized order-book depth and a canonical funding reference.
+- **[[hyperliquid|Hyperliquid]]** — **BRETT-PERP**, an on-chain [[perpetual-futures|perpetual]] with leverage up to **~40-50x**.
+
+This is a **deep, liquid two-venue market**: the presence of a major CEX (Binance) alongside a leading on-chain perp DEX means BRETT supports tighter spreads and larger size than a typical rank-~423 meme. Two-venue availability enables **cross-venue execution** (route/scale into whichever book is deeper), true **spot-vs-perp** and **CEX-vs-DEX** relative-value setups, and more forgiving sizing — but during meme-driven volatility depth can still thin quickly, so ladder entries/exits and check both books before committing size.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — with an active Binance USD-M perp and a Hyperliquid BRETT-PERP, funding can dislocate between the two venues, letting you harvest the spread delta-neutrally.
+- [[crowded-long-funding-fade]] — memecoin rallies attract euphoric leveraged longs; extreme positive funding on BRETT-PERP flags crowded longs ripe to fade.
+- [[liquidation-cascade-fade]] — thin-book meme perps produce sharp liquidation flushes; fading the overshoot of a BRETT cascade targets the mechanical over-extension.
+- [[post-liquidation-rebound]] — after a forced-liquidation washout, BRETT frequently snaps back once the cascade exhausts, offering a defined-risk rebound entry.
+- [[volatility-breakout]] — BRETT's high-beta, reflexive character means attention spikes resolve as clean volatility expansions from compressed ranges.
+- [[cash-and-carry]] — long Base/CEX spot BRETT against a short BRETT-PERP captures funding/basis carry when perp funding runs persistently positive.
+
+### Volatility & regime character
+
+BRETT is a **high-beta, reflexive memecoin** (frog-themed, Base-native) with **no cash flows** — price is a self-referential function of attention and Base ecosystem flows. It exhibits **amplified beta to BTC/ETH**: it tends to rally harder in risk-on regimes and sell off faster in risk-off/de-risking phases, with double-digit daily swings routine. Correlation to majors is high in direction but larger in magnitude, and it additionally carries **idiosyncratic meme-narrative and Base-liquidity beta** that can decouple it from majors during frog-meme rotations or Korean-retail (Upbit) flow bursts.
+
+### Risk flags
+
+- **Narrative dependence** — value rests entirely on continued attention; fading frog-meme/Base interest can drain demand with no fundamental floor.
+- **Perp funding dislocations** — meme-perp funding and OI go extreme and flip sign rapidly during squeezes; overnight leveraged carry can be whipsawed. Check live funding on both venues before holding.
+- **Liquidation / thin-book risk** — during de-risking, order books thin and liquidations cascade, amplifying moves in both directions.
+- **Venue / flow concentration** — a large share of activity concentrates on a few venues (Binance, Hyperliquid, Upbit); venue-specific outages or flow spikes can move price independent of global markets.
+- **Whale concentration & reflexivity** — early buyers and large wallets can dominate float; the attention-price loop runs just as hard on the way down.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BRETT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BRETT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BRETT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BRETT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BRETT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

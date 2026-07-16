@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto]
+tags: [bitcoin, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["Blockstack", "STX"]
 entity_type: protocol
 founded: 2013
 headquarters: "Decentralized (origin: Blockstack PBC, New York, USA)"
 website: "https://www.stacks.co/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[l1-l2-rotation]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[l1-l2-rotation]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[pairs-trading]]", "[[basis-trading]]"]
 ---
 
 # Stacks
@@ -289,6 +289,54 @@ STX's differentiation: real BTC yield via PoX, Bitcoin-aware Clarity contracts, 
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+STX trades a genuine two-venue derivatives market: **Binance** (spot STX/USDT plus a USD-margined STX perp) and **[[hyperliquid|Hyperliquid]]** (STX-PERP, leverage up to ~40–50x). Binance anchors the deepest, most liquid book — CEX spot is deep and Upbit STX/KRW adds large Korean flow — while Hyperliquid supplies transparent on-chain funding, mark, and order-book depth for the same asset. Having the identical instrument on both a CEX and an on-chain venue is what makes cross-venue basis, funding, and hedged carry executable rather than theoretical. Depth is solid for a #130-rank alt but not large-cap; size positions to the thinner of the two books and stagger fills, since a single aggressive order can walk the Hyperliquid L2 well past the Binance mid.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — the same STX perp on Hyperliquid and Binance lets you harvest the spread when the two venues' funding rates diverge.
+- [[funding-rate-harvest]] — collect funding on the STX perp during BTCFi-narrative long crowding, delta-hedged against Binance spot.
+- [[cash-and-carry]] — long deep Binance STX spot against a short STX perp to lock the basis; clean because STX is effectively fully circulating (MC/FDV ≈ 1.0), so there is no unlock overhang to distort carry.
+- [[basis-trading]] — trade the perp-vs-spot basis around sBTC milestones and Bitcoin-season rotations, when STX's high BTC beta widens dislocations.
+- [[pairs-trading]] — STX/BTC is the core relative-value pair; long STX / short BTC when the "Bitcoin season → BTCFi rotation" thesis fires, and reverse otherwise.
+- [[liquidation-cascade-fade]] — thin alt depth plus 40–50x leverage means STX overshoots on forced perp liquidations, giving mean-reversion entries into flushed levels.
+
+### Volatility & regime character
+
+STX is a **high-beta Bitcoin-L2 / BTCFi infrastructure token**, not a memecoin — its moves are dominated by Bitcoin beta (miners commit BTC, stackers earn BTC, sBTC is 1:1 BTC), so the STX/BTC ratio is the cleanest read on idiosyncratic performance. It is high-beta to [[bitcoin|BTC]] and secondarily tracks the broader alt/ETH risk tape, amplifying up-moves in Bitcoin-season rotations and down-moves in weak-BTC tapes. Realized volatility is elevated in the current [[crypto-market-regimes|Established Bear Market]], but flow is narrative-gated: STX chops range-bound until an sBTC-adoption or Bitcoin-season catalyst forces a directional break.
+
+### Risk flags
+
+- **Venue concentration** — liquidity leans on Binance and Korean (Upbit) flow; a listing/policy change or Korean-session gap can dislocate price and funding faster than the thinner Hyperliquid book can absorb.
+- **Narrative dependence** — the bid is tied to BTCFi/sBTC traction; "sell-the-news" behavior around Nakamoto and sBTC shows the market demands usage, not roadmaps, and stalled adoption caps rallies.
+- **Bitcoin-beta drag** — a weak Bitcoin tape drags STX disproportionately; STX-specific longs carry embedded BTC directional risk.
+- **Funding dislocations** — with 40–50x available on Hyperliquid, crowded BTCFi longs can spike funding and set up violent liquidation cascades in a thin alt book.
+- **Emission drift** — no investor cliff (fully circulating), but PoX block rewards add mechanical, gradually declining inflation to the float.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=STX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=STX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=STX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=STX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=STX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

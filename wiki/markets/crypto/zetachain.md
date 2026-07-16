@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["ZETA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.zetachain.com/"
-related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]"]
+related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # ZetaChain
@@ -112,6 +112,48 @@ ZetaChain is a ~$54M-cap omnichain settlement [[layer-1]] with a moderate diluti
 - **Competition.** Interoperability is a crowded, fast-moving sector with well-funded incumbents.
 - **Severe drawdown / sentiment.** Down ~99% from ATH and trading under extreme-fear conditions; small-cap volatility is high.
 - **Liquidity.** ~$5.5M daily volume means meaningful slippage and gap risk on size.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** ZETA is a **perp-first** asset: its primary leveraged venue is [[hyperliquid]] (ZETA-PERP, up to roughly 40-50x leverage), while it is **not listed on Binance**. Spot access is limited and offshore (Kraken, Upbit, Bitget, KuCoin, Crypto.com), so trading flow — and price discovery for active traders — concentrates on the Hyperliquid perp rather than a deep spot book. With a sub-$60M market cap and single-digit-millions daily volume, perp order-book depth is thin: the L2 book is easily moved, funding and open interest can swing sharply, and a modest ticket can create outsized slippage. Practically this means smaller position sizing, wider stops, patient limit-order execution, and live verification of depth/funding/OI before adding leverage; the absence of a deep CEX venue also makes cross-venue arbitrage costly and keeps the HL perp the reference market.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — a low-cap perp-first alt like ZETA frequently prints persistent funding on the HL perp; collect it while delta-hedging where a spot leg is available.
+- [[crowded-long-funding-fade]] — thin OI and a small, offshore holder base make ZETA prone to crowded-long build-ups on relief bounces that mean-revert when funding turns sharply positive.
+- [[liquidation-cascade-fade]] — shallow perp depth means leverage flushes overshoot; fading forced-liquidation spikes back toward the prior range is a natural setup on the HL book.
+- [[oi-confirmed-trend]] — because ZETA price discovery lives on the perp, pairing directional moves with rising open interest filters real trend from low-liquidity noise.
+- [[range-mean-reversion]] — trading ~99% below ATH and pinned near its all-time low, ZETA spends long stretches in tight ranges well-suited to reversion around band extremes.
+- [[narrative-trading]] — as a small-cap omnichain/interoperability (and newer "AI interoperability") token, ZETA is highly narrative-sensitive, so catalyst and sector-rotation flows drive its sharper moves.
+
+**Volatility & regime character.** ZETA is a low-cap, high-beta infrastructure/interoperability altcoin (omnichain L1) with pronounced idiosyncratic and narrative-driven volatility. It behaves as a high-beta risk asset: it tends to amplify BTC/ETH beta on the downside during risk-off phases and to spike on interoperability/AI-narrative catalysts, but its thin liquidity means moves are choppy and reflexive rather than smooth. Directionally correlated with broad alt risk sentiment while carrying large single-asset dispersion around that beta.
+
+**Risk flags.**
+- **Venue concentration / liquidity.** Leverage and flow are concentrated on the Hyperliquid perp with no Binance listing and thin offshore spot — depth is shallow and slippage/gap risk is high on size.
+- **Emissions / dilution.** MC/FDV ≈ 0.70-0.72 with an inflationary staking-emission schedule; unlocked allocations and ongoing emissions add structural sell pressure.
+- **Narrative dependence.** Price leans heavily on interoperability and unproven "AI interoperability" narratives; sentiment reversals can be abrupt.
+- **Perp funding dislocations.** Low OI and shallow depth let funding and basis dislocate quickly, punishing crowded, over-leveraged positioning.
+- **Interoperability attack surface.** As a cross-chain settlement L1, any TSS/observer-set security incident could trigger sharp, headline-driven repricing.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZETA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZETA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZETA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZETA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZETA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

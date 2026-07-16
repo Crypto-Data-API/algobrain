@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BERA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://berachain.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Berachain
@@ -251,6 +251,53 @@ The gas token of Berachain
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BERA trades on **both** major venue types, making it a genuinely two-sided market despite its small cap. On centralized venues, [[binance|Binance]] offers **spot** (BERA/USDT and BERA/TRY) plus a **USD-margined perpetual**, with additional CEX perp liquidity on Bybit/OKX and Korean-won spot depth via Upbit. On-chain, [[hyperliquid|Hyperliquid]] lists **BERA-PERP** with leverage up to roughly **40-50x** and transparent on-chain [[funding-rate|funding]] and [[open-interest|open interest]]. This two-venue structure is what makes BERA tradable at all for systematic strategies: the same instrument prices on a CEX and on a decentralized order book, so basis and funding can be observed and arbitraged across both. Practically, depth is thinner than a top-100 name, so size positions to the shallower book (typically Hyperliquid's L2) rather than headline CEX volume, and expect wider slippage during extreme-fear liquidity droughts.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — BERA prices on both Binance's USD-margined perp and Hyperliquid BERA-PERP, so the same coin's funding can diverge between the two order books, creating a delta-neutral capture.
+- [[cash-and-carry]] — Binance spot plus a short on either perp lets you lock funding/basis as carry while holding underlying BERA, useful when the small-cap perp funding runs rich or deeply negative.
+- [[funding-rate-harvest]] — small-cap alt perps like BERA frequently print persistent funding skews; a delta-neutral spot-vs-perp position harvests the recurring payment.
+- [[liquidation-cascade-fade]] — with a low float, thin books and elevated leverage on Hyperliquid, BERA is prone to stop-run cascades that overshoot, offering fade entries into forced flow.
+- [[oi-confirmed-trend]] — Hyperliquid open-interest data lets you confirm whether a BERA move is backed by new positioning or is a thin liquidation-driven wick before committing to a directional trade.
+- [[breakout-and-retest]] — BERA sits near fresh all-time lows in a tight range, so breakdown/breakout levels are well-defined for a retest-based entry with a clean invalidation.
+
+### Volatility & regime character
+
+BERA is a **small-cap, high-beta DeFi-native [[layer-1]] token** — effectively a leveraged proxy on alt risk appetite. It carries high beta to [[bitcoin|BTC]]/[[ethereum|ETH]] on the downside (it amplified the broad de-rating, sitting ~98% below its February 2025 ATH and near all-time lows), while its idiosyncratic driver is the reflexive Proof-of-Liquidity emissions flywheel. Expect memecoin-like reflexivity in both directions: thin float plus leverage means realized volatility spikes hard around liquidity events, and the token tends to lead the broad market lower in risk-off regimes rather than decoupling.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — real depth is modest; a handful of CEX pairs plus one on-chain perp carry most flow, so slippage and gap risk rise fast when any venue thins out.
+- **Emissions/dilution** — uncapped supply and a MC/FDV around 0.5 mean structural, ongoing supply growth (PoL BGT emissions convertible to BERA) rather than discrete unlock cliffs, a persistent headwind to price.
+- **Narrative dependence** — the thesis hinges on Proof-of-Liquidity retaining sticky TVL; if incentives taper and mercenary liquidity exits, price and the security flywheel can unwind together (reflexive downside).
+- **Perp funding dislocations** — small-cap perp funding on both Hyperliquid and CEX venues can swing violently in extreme-fear regimes, punishing naive one-sided carry and rewarding cross-venue neutrality.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BERA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BERA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BERA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BERA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BERA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

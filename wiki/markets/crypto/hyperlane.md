@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["HYPER", "Hyperlane"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://hyperlane.xyz/"
-related: ["[[arbitrum]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]"]
+related: ["[[arbitrum]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[interoperability]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Hyperlane
@@ -209,6 +209,56 @@ Hyperlane rides the **interoperability / modular-blockchain** narrative — the 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HYPER is a **two-venue derivatives market**, tradable on both **Binance** (HYPER/USDT spot plus a **USD-margined perpetual**) and **Hyperliquid** (**HYPER-PERP**, offering up to roughly **40-50x** leverage). This dual listing gives the token unusually deep, liquid order books for a ~$27M small-cap, with Binance supplying centralized spot/perp depth and Hyperliquid providing an on-chain perp with its own funding and order flow. The parallel venues mean execution can be split or routed to the tighter book, and — critically — the **spot leg on Binance plus perps on both venues** make cash-and-carry and cross-venue funding trades mechanically feasible rather than theoretical. Still, this is a low-float infra token: even with two liquid venues, absolute depth is thin versus large-caps, so scale in with limit orders and size for slippage on larger clips.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — Binance spot HYPER can be held against a short on either the Binance or Hyperliquid perp to lock the basis/funding when the low-float token trades at a premium.
+- [[funding-rate-harvest]] — collect perp funding on HYPER-PERP; low-float infra alts with airdrop-driven positioning often carry persistent, harvestable funding.
+- [[hl-vs-cex-funding-divergence]] — HYPER runs perps on **both** Hyperliquid and Binance, so funding can diverge between the on-chain and CEX books, creating a delta-neutral spread to capture.
+- [[crowded-long-funding-fade]] — post-airdrop/narrative pops in a thin infra name frequently over-extend longs; fade the crowd when perp funding spikes richly positive.
+- [[liquidation-cascade-fade]] — 40-50x leverage on a ~$27M-cap token makes stop-run cascades violent and often over-shoot, offering mean-reversion entries into forced flow.
+- [[breakout-and-retest]] — trading just above its all-time low, HYPER offers a defined support/ATL level for breakout-retest structure with a clean invalidation.
+
+### Volatility & regime character
+
+HYPER is a **high-beta interoperability / infra altcoin** — a recent, low-float token (MC/FDV ≈ 0.30) with elevated realized volatility and reflexive, narrative-driven moves tied to the modular-blockchain/interop theme and its Binance-ecosystem distribution. It trades with **high positive beta to BTC/ETH**: it amplifies broad-market risk-on/risk-off swings, though its thin float lets it decouple sharply on token-specific catalysts (as seen in its +9.8% weekly relative strength against an Extreme-Fear tape). Expect large-alt drawdowns in risk-off regimes and outsized rallies in risk-on.
+
+### Risk flags
+
+- **Dilution / unlocks** — only ~30% of max supply circulates (MC/FDV ≈ 0.30); scheduled unlocks are the dominant medium-term supply overhang and can cap or reverse rallies.
+- **Liquidity / small-cap depth** — a ~$27M cap means real slippage on size despite two liquid venues; venue-concentration in Binance + Hyperliquid is a single-point dependency.
+- **Narrative dependence** — price leans heavily on the interoperability/modular narrative and Binance-ecosystem flows; sentiment shifts hit hard.
+- **Security-event tail risk** — as an interop/bridge token, an ISM or Warp Route exploit anywhere in the ecosystem can reprice it violently regardless of macro or funding.
+- **Perp funding dislocations** — 40-50x leverage and low float make funding swings and liquidation cascades frequent; funding can flip and gap around unlocks and narrative events.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=HYPER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=HYPER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=HYPER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=HYPER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=HYPER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

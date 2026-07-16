@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto]
+tags: [ai-trading, altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["DFINITY", "ICP", "Internet Computer Protocol"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized (DFINITY Foundation: Zurich, Switzerland)"
 website: "https://internetcomputer.org/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[narrative-trading]]", "[[near]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[narrative-trading]]", "[[near]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[pairs-trading]]", "[[funding-rate-harvest]]"]
 ---
 
 # Internet Computer
@@ -300,6 +300,58 @@ ICP's unique claims are **fully on-chain web hosting** and **native chain-key BT
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ICP trades on **both** [[binance|Binance]] (spot ICP/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (ICP-PERP, leverage up to ~40–50x), making it a genuinely two-venue derivatives market rather than a single-venue thin listing. This dual availability gives traders redundant order books, cross-venue price discovery, and a cleaner path for spot-vs-perp and CEX-vs-DEX structures. Practical implications:
+
+- **Execution & sizing**: two deep venues let size be split across Binance and Hyperliquid to limit slippage; the Binance USD-margined perp anchors a liquid CEX funding/basis reference against Hyperliquid's on-chain perp.
+- **Depth caveat**: despite the two-venue footprint, ICP's overall dollar liquidity is materially thinner than mega-cap L1s, so large market orders still move price — scale in/out and prefer limit/VWAP execution.
+- **Cross-venue plays**: having a USD-margined CEX perp *and* an on-chain HL perp is exactly the setup needed for funding-divergence and cross-exchange structures below.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — ICP runs a USD-margined Binance perp and a Hyperliquid ICP-PERP simultaneously, so funding can diverge between the two venues and be harvested delta-neutral.
+- [[funding-rate-harvest]] — persistently negative funding in trend-down regimes (shorts pay/collect) lets a spot-long / perp-short book collect carry on this perennial short-candidate.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp supports a classic spot-long / perp-short basis capture when the perp trades rich.
+- [[liquidation-cascade-fade]] — thin depth and high beta mean AI-narrative squeezes and cascades overshoot; fading forced flushes near the ATL offers asymmetric bounces.
+- [[pairs-trading]] — ICP is the classic **short leg** against [[near|NEAR]] and the AI/compute cohort, a well-established relative-value structure.
+- [[narrative-trading]] — price is dominated by rotations into/out of the AI/decentralized-compute basket (caffeine.ai, chain-key), making narrative timing a primary edge.
+
+### Volatility & regime character
+
+ICP is a **high-beta, narrative-driven large-cap alt** (an infra / AI-decentralized-cloud L1) trading ~99.7% below its 2021 ATH and near its all-time low. It is not a large-cap ballast asset: it moves with **positive but amplified beta to BTC/ETH** in risk-on/risk-off swings and adds an idiosyncratic AI-basket beta on top. Behaviour is reflexive around headlines — sharp short-squeezes on AI bids, distribution-prone rallies — so realized volatility clusters around narrative and macro catalysts rather than steady trend.
+
+### Risk flags
+
+- **Liquidity thinness** — low dollar volume relative to market cap exaggerates moves in both directions despite the two-venue listing.
+- **Uncapped, inflationary supply / emissions** — continuous NNS neuron-reward issuance plus maturing 2021 Genesis-neuron overhang create persistent distribution into rallies.
+- **Narrative dependence** — the AI/decentralized-compute thesis (caffeine.ai) drives price; a fading narrative removes the primary bid.
+- **Perp funding dislocations** — funding often sits negative in downtrends and can whip violently on squeeze bids; monitor before running carry/short structures.
+- **Value-trap dynamics** — trading near ATL with a structurally weak supply story; treat rallies as distribution-prone, not trend confirmation.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ICP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ICP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ICP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ICP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ICP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

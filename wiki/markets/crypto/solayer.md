@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, nft]
+tags: [crypto, defi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["LAYER", "sSOL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://solayer.org/network"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Solayer
@@ -199,6 +199,50 @@ Solayer's edge versus other Solana restakers (e.g., Jito's restaking, Picasso) i
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** LAYER trades on **both** [[hyperliquid|Hyperliquid]] (LAYER-PERP, up to ~40-50x leverage) and [[binance|Binance]] (spot LAYER/USDT plus a USD-margined perpetual). This is a genuine two-venue market rather than a single-DEX listing, so there is centralized spot for basis/carry construction and derivatives depth on both a major CEX and the leading on-chain perp DEX. Practically, that dual availability tightens quotes and supports cross-venue and spot-vs-perp structures — but note LAYER is a very small-cap name (rank ~998), so aggregate depth is still thin: size positions to the order-book depth, expect slippage on larger clips, and treat headline max leverage as a hard ceiling, not a target.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — collect perp funding on LAYER across two liquid venues; a small-cap alt perp often carries persistent funding to harvest while delta-hedged.
+- [[hl-vs-cex-funding-divergence]] — LAYER runs on both Hyperliquid and Binance, so funding can diverge between the two perps and be captured with an offsetting position.
+- [[cash-and-carry]] — buy Binance spot LAYER and short the perp to lock the basis, using centralized spot that pure-DEX listings lack.
+- [[crypto-spot-perp-futures-triangle]] — combine Binance spot, the Binance perp, and the Hyperliquid perp into a three-legged relative-value structure across venues.
+- [[token-unlock-supply-event]] — LAYER has a large locked-supply overhang (Mcap/FDV ~0.2), so scheduled unlocks are tradable, recurring supply catalysts.
+- [[liquidation-cascade-fade]] — thin small-cap depth plus high perp leverage makes LAYER prone to sharp liquidation wicks that mean-revert, offering fade setups.
+
+**Volatility & regime character.** LAYER is a small-cap, high-beta [[defi]]/infrastructure (Solana [[restaking]]) altcoin: it behaves reflexively, amplifying broad-market moves on the way up and down, and is highly sensitive to Solana-ecosystem risk appetite and its own emissions/unlock narrative. Correlation to BTC/ETH beta is high in direction but with a much larger amplitude — it tends to overshoot majors in both directions, and its dominant idiosyncratic driver is the restaking/InfiniSVM narrative rather than macro alone.
+
+**Risk flags.**
+- **Liquidity / venue concentration** — despite two venues, absolute depth is small (rank ~998); large orders move price and can gap through stops.
+- **Token unlocks / emissions** — circulating LAYER is a small fraction of the 1B max supply; unlock schedules and incentive emissions are a persistent supply headwind and a funding/price catalyst.
+- **Narrative dependence** — valuation leans on unproven InfiniSVM performance claims and Solana-restaking demand; narrative reversals hit price hard.
+- **Perp funding dislocations** — a low-float, high-leverage small-cap can see funding spike and flip abruptly, punishing crowded carry positions.
+- **Depeg-adjacent risk** — sSOL redemption stress or Solana-ecosystem shocks can feed back into LAYER sentiment and liquidity.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=LAYER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=LAYER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=LAYER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=LAYER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=LAYER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

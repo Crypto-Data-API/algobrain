@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins, stablecoins]
 aliases: ["Plasma chain", "XPL"]
 entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://www.plasma.to/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[tether-limited]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[tether-limited]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Plasma
@@ -249,6 +249,49 @@ Within the stablecoin-infrastructure basket, XPL is the highest-liquidity, highe
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — XPL trades on both [[binance|Binance]] (spot XPL/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (XPL-PERP, up to ~40–50x). This is a genuinely deep, liquid two-venue market: ~$52M–$115M of 24h volume against a sub-$300M cap is by far the deepest turnover in its cohort, driven mostly by perp flow. The dual-venue structure means you can size meaningfully without walking the book on either leg, and — critically — you can hold offsetting legs across the CEX perp, HL perp, and Binance spot to run funding/basis structures. It also creates a persistent HL-vs-CEX funding spread to exploit, and gives a spot leg for cash-and-carry that many thinner alts lack. Route the aggressive leg where depth is best at the moment and keep unlock-window sizing conservative given how quickly the thin bid can widen.
+
+**Applicable strategies**
+
+- [[funding-rate-harvest]] — XPL runs persistent positive funding during rallies (Binance top-trader long/short ratio ~1.37 with longs paying in late-May 2026); a delta-neutral short-perp / long-spot harvest captures that carry.
+- [[hl-vs-cex-funding-divergence]] — the two independent perp venues (Hyperliquid XPL-PERP vs Binance USD-margined) routinely price funding differently; long the cheaper venue, short the richer, collect the spread.
+- [[cash-and-carry]] — the deep Binance spot leg plus liquid perps make a spot-long / perp-short carry cleanly executable to monetize positive basis, especially into catalyst-driven funding spikes.
+- [[token-unlock-supply-event]] — the July 2026 ~2.5B XPL (25%) team/investor cliff is the dominant known supply event; the classic pre-unlock fade / post-unlock reload structure is the signature XPL trade.
+- [[liquidation-cascade-fade]] — crowded, heavily-leveraged perp positioning around catalysts produces sharp liquidation flushes into a thin bid; fading the over-extension after a cascade exhausts is high-reward on a high-beta name like XPL.
+- [[narrative-trading]] — XPL is the purest listed proxy for the stablecoin-infrastructure thesis (USDT0 flows, Binance Earn fills, neobank rollout); trading the narrative catalyst calendar drives most directional moves.
+
+**Volatility & regime character** — High-beta, catalyst-driven infrastructure/DeFi-adjacent L1 token with heavy dilution. It behaves as a reflexive small/mid-cap alt: amplified up- and down-moves versus BTC/ETH, elevated realized vol, and strong sensitivity to the broad risk regime (Extreme Fear / Established Bear backdrop weighs on it). Directional beta to BTC/ETH is high, but idiosyncratic drivers (stablecoin-narrative flows, unlock schedule, TVL incentives) frequently dominate, so relative-value and event structures can decouple from beta.
+
+**Risk flags**
+
+- **Venue/liquidity concentration** — much of the real depth is perp-driven; spot depth is thinner, and the bid can widen fast around catalysts, so treat quoted turnover cautiously when sizing the spot leg.
+- **Token unlocks / emissions** — ~0.25 MC/FDV with the July 2026 25% cliff is the heaviest dilution overhang in its cohort; unlock supply into a thin bid is the dominant known risk.
+- **Narrative dependence** — the thesis is tightly coupled to Tether/USDT0 and incentive-driven TVL that "can leave as fast as it arrived"; any ecosystem or regulatory shift is a concentrated risk.
+- **Perp funding dislocations** — crowded long positioning and swinging funding/OI can amplify drawdowns and squeezes in both directions; confirm live funding/OI on-venue before sizing, especially into the unlock window.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=XPL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=XPL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=XPL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=XPL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=XPL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

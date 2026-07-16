@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, machine-learning]
+tags: [crypto, defi, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["0G", "0G Labs", "0g-labs", "Zero Gravity"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.0gfoundation.ai/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[bnb]]", "[[celestia]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[modular-blockchains]]", "[[ocean-protocol]]", "[[on-chain-inference]]", "[[tokenized-compute]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[bnb]]", "[[celestia]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[modular-blockchains]]", "[[ocean-protocol]]", "[[on-chain-inference]]", "[[tokenized-compute]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[funding-rate-harvest]]"]
 ---
 
 # 0G (Zero Gravity)
@@ -136,6 +136,48 @@ The novelty is combining all three in a single [[modular-blockchains|modular]] s
 - **Active downtrend** — making fresh all-time lows; no technical floor established yet.
 - **Narrative dependence** — tightly coupled to the decentralized-AI cycle.
 - **Macro/regime** — extreme-fear sentiment ([[fear-and-greed-index|F&G]] 23) and an established bear market amplify drawdowns in early-stage AI tokens.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** 0G trades on **both** [[hyperliquid|Hyperliquid]] (0G-PERP, up to ~40-50x leverage) and Binance (spot plus a USD-margined perpetual), giving it a genuine **two-venue derivatives market** on top of broad tier-1 spot coverage (Kraken, Upbit, Bitget, KuCoin). The dual-venue perp footprint means depth is deeper and funding is more contested than a single-venue alt: an on-chain Hyperliquid book and a CEX book quote the same risk, so mispricings compress quickly but also open recurring cross-venue funding/basis windows. Practically, this supports larger size and tighter execution than a rank ~518 token would otherwise allow — but the token is in active price discovery near all-time lows, so use limit orders, scale into size, and check live L2 depth and funding before committing; thin patches and gap risk still appear around unlocks and capitulation.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — 0G runs on both a Hyperliquid perp and a Binance USD-margined perp, so the two funding streams diverge and can be captured directly.
+- [[funding-rate-harvest]] — deep two-venue perp interest on a small-cap AI token produces sharp, harvestable funding swings, especially around unlocks and capitulation.
+- [[cash-and-carry]] — Binance spot plus perps on both venues let you hold spot 0G against a short perp to farm basis/funding when it dislocates.
+- [[liquidation-cascade-fade]] — a high-beta token near ATLs with up to ~50x leverage produces frequent long-liquidation flushes that overshoot and mean-revert.
+- [[oi-price-exhaustion]] — rising open interest into a price grind toward fresh lows flags crowded positioning ripe for a squeeze either direction.
+- [[narrative-trading]] — 0G is tightly bound to the decentralized-AI/modular-infra narrative; catalyst and sentiment shifts drive most of its directional moves.
+
+**Volatility & regime character.** 0G is a **high-beta, early-stage AI-infrastructure / modular-L1 token** — small circulating cap (~21% of supply), uncapped issuance, and ~96% drawdown from its ATH make it far more volatile than large-cap crypto. It trades with high positive beta to BTC/ETH risk-on/risk-off regimes and amplifies moves in the broader AI/DeAI narrative basket ([[celestia]], compute/DA peers). In extreme-fear regimes it tends to underperform majors; in AI-narrative pumps it can outperform sharply given the low float.
+
+**Risk flags.**
+- **Unlock/dilution overhang** — only ~21% of supply circulates, no fixed max supply, and ongoing inflation; scheduled unlocks are a recurring downside catalyst and can whipsaw perp funding.
+- **Narrative dependence** — price is tightly coupled to the decentralized-AI cycle; a narrative rotation removes the primary bid.
+- **Price-discovery / no floor** — actively making fresh all-time lows with no established technical support; gap and cascade risk are elevated.
+- **Perp funding dislocations** — dual-venue perps mean funding can swing hard and diverge across Hyperliquid vs CEX around unlocks and liquidations; monitor before sizing.
+- **Liquidity fragility at the tails** — headline depth is solid across two venues, but a rank ~518 token can thin out fast in stress, so cross-venue arbs carry execution/slippage risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=0G` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=0G` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=0G&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=0G&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=0G"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

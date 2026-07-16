@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, bitcoin, ethereum]
 aliases: ["ADA"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://cardano.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[staking]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[staking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crypto-beta-rotation]]", "[[cash-and-carry]]"]
 ---
 
 # Cardano
@@ -265,6 +265,60 @@ ADA competes with other smart-contract L1s but, in practice, trades as a member 
 - **Key-person/governance** — heavy association with Charles Hoskinson; on-chain governance is new and untested at scale.
 
 > **Risk warning:** Crypto assets are highly volatile and speculative. Nothing here is investment advice. ADA is ~95% below its ATH and remains in a deep drawdown in the current Extreme-Fear / bear regime.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ADA is one of the deepest, most liquid two-venue alt perp markets. It trades on **both [[binance]]** (ADA/USDT spot plus a USD-margined ADA perpetual) **and [[hyperliquid]]** (ADA-PERP, listed with leverage up to ~40–50x), alongside every other major CEX derivatives venue. Spot depth is top-tier across Binance, Coinbase, Kraken, Bitget, KuCoin and Crypto.com, so slippage on standard clip sizes is low and the market absorbs size well.
+
+- **Leverage:** ~40–50x on Hyperliquid ADA-PERP; USD-margined perp on Binance for CEX-side exposure.
+- **Execution:** The dual-venue structure (a deep on-chain CLOB on Hyperliquid + the deepest CEX book on Binance) gives redundant liquidity — you can split fills, work larger orders, and route to whichever venue shows tighter spreads. It also enables the whole family of cross-venue and spot-vs-perp trades (funding capture, basis, HL-vs-CEX divergence) with genuine size.
+- **Sizing:** Because both books are deep, ADA supports meaningfully larger positions than thin single-venue alts; funding and liquidation dynamics are visible on both venues, so risk can be sized against real depth rather than a single fragile book.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — deep two-venue spot (Binance) + perp (HL/Binance) markets make long-spot / short-perp carry clean to construct and unwind on ADA.
+- [[funding-rate-harvest]] — ADA funding spikes hard around ETF headlines and rotation flushes, offering recurring premium to farm while delta-hedged.
+- [[hl-vs-cex-funding-divergence]] — ADA runs live perps on both Hyperliquid and Binance, so funding can dislocate between venues and be arbitraged.
+- [[crypto-beta-rotation]] — ADA is the archetypal "old L1" rotation name; it moves as a high-beta basket member versus BTC/ETH dominance shifts.
+- [[narrative-trading]] — ETF (GADA), governance/treasury votes and Hoskinson headlines drive discrete ADA moves more than ecosystem usage.
+- [[liquidation-cascade-fade]] — as a heavily-levered, deep-liquidity perp, ADA sees flushes that overshoot and mean-revert, faded against visible book depth.
+
+### Volatility & regime character
+
+ADA is a **high-beta large-cap altcoin / "old L1" infra token** — not a memecoin and not a stablecoin. It carries a high positive beta to [[bitcoin|BTC]] and [[ethereum|ETH]]: it tends to underperform on the way up (a chronic alt-season laggard) yet still sells off hard in risk-off, giving it downside-skewed beta in bear regimes. Idiosyncratic moves cluster around discrete catalysts (ETF headlines, governance/treasury votes, roadmap items) rather than steady on-chain usage, so realized volatility is bursty — long quiet drifts punctuated by sharp headline-driven repricings. It trades in tandem with the DOT/XRP/LTC "dino coin" rotation cluster.
+
+### Risk flags
+
+- **Venue/narrative concentration:** Price action is dominated by a single discrete catalyst (the GADA spot-ETF decision) and Hoskinson/IOG headlines; catalyst dependence makes gaps and headline whipsaws common.
+- **Perp funding dislocations:** Funding can spike and flip sharply around ETF news and rotation flushes, and can diverge between Hyperliquid and Binance — a risk to naive one-venue carry and a source of stop-outs.
+- **Liquidation cascades:** High available leverage on a deep perp book means crowded positioning unwinds violently; cascades overshoot both directions.
+- **Emission/supply drag:** Ongoing staking-reward issuance (MC/FDV ≈ 0.83) and on-chain treasury disbursements are slow but real supply-side headwinds.
+- **Regulatory overhang:** ADA's past securities framing has eased under the newer regime but remains a tail risk tied to ETF and enforcement developments.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ADA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ADA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ADA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ADA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ADA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

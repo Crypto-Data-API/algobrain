@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest]
 aliases: ["Stellar Lumens", "XLM"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized (Stellar Development Foundation, San Francisco)"
 website: "https://www.stellar.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[ripple]]", "[[stablecoins]]", "[[treasuries]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[ripple]]", "[[stablecoins]]", "[[treasuries]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[pairs-trading]]"]
 ---
 
 # Stellar
@@ -330,6 +330,50 @@ Against the broader **payments-stablecoin L1** field, Stellar competes with fast
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — XLM trades on **both** major venue types: [[binance|Binance]] (deep spot **plus** a USD-margined perpetual) and [[hyperliquid]] (**XLM-PERP**, leverage up to ~40–50x). As a rank ~#16–17 name it carries genuine two-venue depth — order books are liquid enough to size meaningfully without thin-book slippage, and the presence of both a CEX perp and an on-chain perp means funding and basis can be compared and, when dislocated, arbitraged across venues. Practically: execute size on Binance spot/perp where the book is deepest, use Hyperliquid for on-chain leverage and funding-divergence plays, and split larger clips across both to limit market impact.
+
+**Applicable strategies**
+
+- [[funding-rate-harvest]] — a liquid two-venue perp with persistent funding lets you collect the funding carry (long spot / short perp when funding is positive) with clean entry/exit.
+- [[hl-vs-cex-funding-divergence]] — Binance USD-margined perp vs Hyperliquid XLM-PERP gives two independent funding prints on the same asset; divergences are directly tradable.
+- [[cash-and-carry]] — deep Binance spot alongside a USD-margined perp supports a spot-long / perp-short basis capture on XLM.
+- [[narrative-trading]] — XLM is a payments/RWA-narrative name (PYUSD, Franklin Templeton tokenized [[treasuries]]); catalysts drive idiosyncratic moves ahead of the broad tape.
+- [[pairs-trading]] — XLM and [[ripple|XRP]] share a co-founder and cross-border-payments use case with high correlation; the XLM/XRP spread is a natural mean-reverting pair.
+- [[oi-confirmed-trend]] — with clean perp open-interest on both venues, OI-confirmed breakouts help separate real trend from short-lived squeezes on this high-beta alt.
+
+**Volatility & regime character** — Mid-cap **high-beta altcoin** (payments + RWA-tokenization L1), not a memecoin or large-cap anchor. It carries strong beta to [[bitcoin]] and, more idiosyncratically, tends to track [[ripple|XRP]] with a lag and higher amplitude given the shared payments use case. In risk-on rotations toward payments/RWA narratives it can show relative strength versus majors; in broad de-risking it sells off with alt beta. Expect episodic narrative-driven vol spikes (stablecoin/RWA catalysts) on top of a market-beta baseline.
+
+**Risk flags**
+
+- **Narrative dependence** — much of XLM's idiosyncratic move rides payments/RWA headlines (PYUSD go-live, new RWA issuers); catalyst reversals cut both ways.
+- **SDF supply overhang** — the large non-circulating Stellar Development Foundation holding (~16B XLM) is a structural sell-side variable; disbursement cadence can pressure price.
+- **Value-accrual gap** — negligible by-design fees mean network usage does not mechanically accrue to the token, so fundamentals and price can diverge.
+- **Perp funding dislocations** — as a leveraged two-venue alt, crowded positioning can drive funding extremes and liquidation cascades; watch OI and funding on both Binance and Hyperliquid.
+- **High correlation risk** — the XLM/XRP and XLM/BTC correlations mean apparent idiosyncratic edges can be swamped by beta during broad moves.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=XLM` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=XLM` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=XLM&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=XLM&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=XLM"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

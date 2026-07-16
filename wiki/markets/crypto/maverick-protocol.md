@@ -3,13 +3,13 @@ title: "Maverick Protocol"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins]
 aliases: ["MAV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.mav.xyz/"
-related: ["[[ai-liquidity-management]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[defai]]", "[[ethereum]]", "[[uniswap]]"]
+related: ["[[ai-liquidity-management]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[defai]]", "[[ethereum]]", "[[uniswap]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -163,6 +163,53 @@ Maverick governance will take place through a Voting Escrow (ve) contract, where
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MAV trades across two deep, complementary venues: **Binance** (MAV/USDT spot plus a USD-margined perpetual) and **[[hyperliquid|Hyperliquid]]** (MAV-PERP, leverage up to ~40-50x). The presence of both a large centralized order book and an on-chain perp gives MAV a genuinely liquid two-venue market despite its small market cap, so execution can be split across venues and order-book depth is materially better than for single-venue small caps. The dual listing also means positions can be built or hedged on whichever venue offers tighter spreads at the moment, and the CEX/DEX pairing is what enables funding- and basis-oriented setups. Because MAV is still a low-cap name, size discipline matters: sweeping either book aggressively will move price, so scale entries and lean on limit orders and depth checks before committing size.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — MAV's simultaneous Binance and Hyperliquid perps let you capture funding-rate spreads between the CEX and DEX venues.
+- [[funding-rate-harvest]] — collect funding on the richer of the two MAV perps while delta-hedging with spot or the opposite venue.
+- [[cash-and-carry]] — pair Binance MAV/USDT spot against a MAV perp short to lock in basis and funding on a market-neutral book.
+- [[liquidation-cascade-fade]] — thin low-cap depth makes MAV prone to over-extended liquidation wicks that mean-revert, offering fade entries.
+- [[breakout-and-retest]] — MAV's beaten-down, range-bound price action produces clean breakout-retest structures around prior support/resistance.
+- [[rsi-mean-reversion]] — high-beta swings from a low base push RSI to extremes that snap back within the trading range.
+
+### Volatility & regime character
+
+MAV is a small-cap DeFi/infrastructure token (a concentrated-liquidity AMM protocol) trading far below its all-time high, so it behaves as a **high-beta altcoin** with pronounced reflexive swings on low float. It is strongly correlated to broad crypto beta — it tends to amplify BTC and ETH moves on the upside and downside — and layers in idiosyncratic DeFi-narrative sensitivity (AMM/DeFi and its DeFAI framing). Expect sharp, sentiment-driven volatility with limited independent price discovery outside of protocol-specific catalysts.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — despite two venues, absolute depth is small; large orders slip and both books can thin quickly during stress.
+- **Emissions / supply overhang** — circulating supply is roughly 46% of a 2.0B max supply, leaving a meaningful unlock/emission overhang that can pressure price.
+- **Narrative dependence** — as a DeFi/DeFAI infra token well off its highs, price is heavily driven by sector sentiment rather than protocol fundamentals.
+- **Perp funding dislocations** — low-cap perps can see funding spike or flip abruptly, punishing crowded directional positioning and complicating carry books.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MAV` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MAV` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MAV&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MAV&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MAV"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,10 +4,10 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coin, solana, speculation]
+tags: [crypto, meme-coin, solana, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 entity_type: protocol
 aliases: ["FARTCOIN", "fartcoin-token"]
-related: ["[[crypto-markets]]", "[[funding-rate]]", "[[hyperliquid]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[meme-coins]]", "[[pepe]]", "[[perpetual-futures]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[funding-rate]]", "[[hyperliquid]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[meme-coins]]", "[[pepe]]", "[[perpetual-futures]]", "[[solana]]", "[[funding-rate-harvest]]", "[[crowded-long-funding-fade]]", "[[cash-and-carry]]"]
 headquarters: "Decentralized"
 website: "https://www.infinitebackrooms.com/dreams/conversation-1721540624-scenario-terminal-of-truths-txt"
 ---
@@ -248,6 +248,48 @@ Fartcoin is a meme-driven cryptocurrency where users can submit their best fart 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — FARTCOIN is one of the few flagship memes with a genuine two-venue derivatives market: it trades on **Binance** (spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** as **FARTCOIN-PERP** (leverage up to ~40-50x). This gives it deeper, more continuous liquidity than most Solana memes, with a Binance CEX book and an on-chain HL book quoting in parallel. Depth is still thin relative to the speculative open interest it attracts, so large orders should be worked/scaled rather than sent as market fills. The dual-venue structure is itself the edge: mark, funding, and basis frequently diverge between Binance and Hyperliquid, which supports cross-venue execution routing, better price discovery, and the funding/basis strategies below. Size to the shallower of the two books when a position depends on being able to exit on one venue.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — FARTCOIN runs persistently positive funding from crowded retail longs; systematically shorting the perp against spot to collect funding is a textbook harvest here.
+- [[hl-vs-cex-funding-divergence]] — with active perps on both Hyperliquid and Binance, the two venues' funding rates routinely dislocate, letting you long the cheaper-funded venue and short the richer one.
+- [[crowded-long-funding-fade]] — its defining structure is long-heavy positioning at elevated funding, the classic setup to fade the crowd when funding spikes to extremes.
+- [[cash-and-carry]] — deliverable Binance spot plus liquid perps make a delta-neutral long-spot/short-perp carry clean to run and unwind on FARTCOIN.
+- [[liquidation-cascade-fade]] — crowded leverage and thin books produce sharp forced-selling flushes that overshoot, offering high-reward fades of the wick.
+- [[narrative-trading]] — as a pure attention/reflexive meme (its price is an "attention price"), moves are driven by social narrative rather than fundamentals, so narrative-timing frameworks apply directly.
+
+**Volatility & regime character** — FARTCOIN is an extreme **high-beta memecoin** exhibiting reflexive price action: rising price drives social mentions and perp volume, which drives more buying, and the loop unwinds violently in reverse. Daily moves of 20-50% have been common. It behaves as a **risk-appetite barometer** for the meme complex — strongly positive beta to BTC/ETH direction but with amplified magnitude, outperforming hard in risk-on melt-ups and underperforming badly in extreme-fear/bear regimes. Correlation to the majors is directional but its idiosyncratic memecoin reflexivity dominates on any given day.
+
+**Risk flags**
+- **Venue/liquidity concentration** — despite two venues, books remain thin versus speculative interest; large flows cause heavy slippage and price impact.
+- **Perp funding dislocations** — persistently high funding and open interest make crowded longs prone to violent liquidation cascades; funding can also flip sign abruptly on reversals.
+- **Narrative dependence** — no protocol, cash flows, or treasury; price is a pure reflexive attention price with no fundamental floor and can trend toward zero.
+- **Holder concentration** — pump.fun-style launch with concentrated early holders creates coordinated-dump risk.
+- **Drawdown / survivorship** — already ~95% below ATH; survival to date is not predictive of a floor, and a draw back toward the ATL is a live tail risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=FARTCOIN` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=FARTCOIN` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=FARTCOIN&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=FARTCOIN&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=FARTCOIN"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

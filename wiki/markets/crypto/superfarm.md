@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins, ethereum]
 aliases: ["SUPER", "SuperFarm"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://superverse.co/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # SuperVerse
@@ -140,6 +140,54 @@ SUPER is a **speculative GameFi/NFT beta** whose price is driven by sector senti
 | **Twitter** | [@SuperVerse](https://twitter.com/SuperVerse) |
 | **Telegram** | [SuperVerseChat](https://t.me/SuperVerseChat) |
 | **Docs** | [https://docs.superverse.co/](https://docs.superverse.co/) |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SUPER trades as a deep, liquid two-venue market. On **Binance** it is available both as **spot** (SUPER/USDT) and as a **USD-margined perpetual**, and on **[[hyperliquid|Hyperliquid]]** it lists as **SUPER-PERP** with leverage up to roughly **40-50x**. This dual-venue availability is unusually deep for a ~#404 rank alt: the Binance perp anchors size and price discovery for CEX flow, while the Hyperliquid book provides an on-chain venue for leveraged exposure and transparent [[funding-rate|funding]]/[[open-interest|OI]] data. Because liquidity is split across two liquid venues, execution benefits from routing across both and cross-venue quoting; sizing should still respect that a ~$60M-cap token thins out fast on large clips, so scale into positions and lean on limit orders during the CEX/DEX overlap in liquidity.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — the parallel Binance USD-margined perp and Hyperliquid SUPER-PERP let you trade dislocations between the two venues' funding rates.
+- [[funding-rate-harvest]] — a small, sentiment-driven alt like SUPER periodically runs persistently one-sided funding on the perps, harvestable delta-neutral against spot.
+- [[cash-and-carry]] — Binance spot plus the USD-margined perp make a clean long-spot / short-perp carry structure when the basis is positive.
+- [[liquidation-cascade-fade]] — thin depth relative to leverage available (~40-50x on HL) produces sharp liquidation flushes that mean-revert, offering fade entries.
+- [[breakout-and-retest]] — SUPER's low-float, sentiment-driven ranges break decisively on GameFi/NFT narrative shifts; retests of the broken level frame lower-risk entries.
+- [[token-unlock-supply-event]] — with ~360M SUPER (~56% of float) still to vest under a hard cap, scheduled emissions/unlocks are tradeable supply events.
+
+### Volatility & regime character
+
+SUPER is a **high-beta, small-cap GameFi/NFT-ecosystem alt** — a speculative sector-beta whose price is driven by GameFi/NFT sentiment and broad crypto risk appetite rather than cash flows. It exhibits strong positive beta to BTC/ETH: it tends to amplify BTC/ETH up-moves and fall harder in risk-off phases, with additional reflexivity tied to the GameFi/NFT narrative cycle and the Animoca-Brands distribution story. Expect large percentage swings on relatively modest turnover, regime-dependent behavior (trend during narrative pushes, choppy range-bound drift in bear phases), and correlation that spikes toward 1 with majors during market-wide de-risking.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — depth is real but concentrated on Binance and Hyperliquid; a delisting, listing change, or venue outage would sharply degrade tradability.
+- **Token unlocks/emissions** — ~360M SUPER (~56% of current float) still to enter circulation under the 1B hard cap; scheduled supply increases are a recurring price headwind.
+- **Narrative dependence** — as GameFi/NFT beta, price is hostage to sector sentiment, which has been among the weakest crypto verticals through the bear market.
+- **Perp funding dislocations** — leverage up to ~40-50x on a thin book invites crowded positioning, funding spikes, and liquidation-driven wicks; monitor funding and OI before sizing.
+- **Multi-chain/bridge surface** — bridged deployments across Base, Polygon, Avalanche, and Soneium add contract/bridge risk that can spill into token confidence.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SUPER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SUPER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SUPER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SUPER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SUPER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

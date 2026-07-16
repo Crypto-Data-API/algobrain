@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, bitcoin, ethereum]
 aliases: ["NEO"]
 entity_type: protocol
 founded: 2016
 headquarters: "Decentralized"
 website: "https://neo.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[oi-confirmed-trend]]"]
 ---
 
 # NEO
@@ -144,6 +144,52 @@ NEO's narrative is the **"smart economy"**: combining tokenized assets, on-chain
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NEO trades as a genuine two-venue derivatives market: **Binance** offers deep NEO/USDT spot plus a USD-margined NEO perpetual, while **[[hyperliquid]]** lists **NEO-PERP** with leverage up to ~40-50x. The Binance spot book and Korean CEX coverage (Upbit KRW) anchor price discovery, and the Hyperliquid perp provides an on-chain, transparent-orderbook venue for directional and basis exposure. This dual availability means funding and basis can be arbitraged CEX-vs-DEX, and it lets traders route size across venues rather than concentrating in a single thin book. Depth is solid for a rank-~211 legacy L1 but thinner than mega-caps, so size should scale to visible L2 depth; large market orders on either perp can move mark price and clip against the funding/liquidation machinery.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — long Binance/Upbit spot NEO against a short NEO perp (Binance or Hyperliquid) to harvest basis while staying delta-neutral; the mature, near-fully-circulating supply makes carry cleaner than on high-emission alts.
+- [[funding-rate-harvest]] — collect funding on the NEO-PERP when the perp trades persistently rich to spot, sizing to the modest but real two-venue depth.
+- [[hl-vs-cex-funding-divergence]] — trade the gap when Hyperliquid NEO-PERP funding decouples from the Binance USD-margined perp, a recurring edge on dual-listed mid-cap alts.
+- [[oi-confirmed-trend]] — use rising open interest to confirm NEO breakouts/breakdowns, filtering the low-liquidity fakeouts common to legacy-brand alts with sparse fresh flow.
+- [[liquidation-cascade-fade]] — fade over-extended NEO wicks driven by leveraged liquidations on the perps, which in a thin book can overshoot fundamental value.
+- [[range-mean-reversion]] — NEO frequently chops in a defined range absent a catalyst, so mean-reverting the extremes suits its low-narrative, deep-value character.
+
+### Volatility & regime character
+
+NEO is a **prior-cycle, high-beta L1 altcoin** (~99% below its 2018 ATH) that trades primarily on broad crypto beta rather than idiosyncratic flow. It is strongly correlated to BTC/ETH risk-on/risk-off regimes and tends to underperform in bear regimes (extreme-fear backdrop at the last snapshot) while participating with elevated beta in alt-season rallies. Volatility clusters around macro moves and thin-book liquidation events; between catalysts it is range-bound and low-conviction, reflecting eroded developer mindshare and a legacy-brand valuation.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — real depth concentrates on Binance spot and the two perps; the Hyperliquid book is thinner, so slippage and gap risk rise on large or fast orders.
+- **Narrative dependence** — the bear case is structural irrelevance, not dilution; without a fresh "smart-economy"/Asia catalyst, moves are largely beta with little independent bid.
+- **Regulatory exposure** — strong "Made in China" association exposes NEO to Chinese crypto-policy headlines that can trigger abrupt repricing.
+- **Perp funding dislocations** — dual-listed funding can swing hard in thin conditions; crowded positioning plus modest depth makes funding spikes and liquidation cascades more violent than in mega-caps.
+- **GAS/dual-token quirk** — the indivisible NEO + GAS model means spot holders accrue GAS yield that perp shorts do not, a subtle carry consideration for spot-perp basis trades.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=NEO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=NEO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=NEO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=NEO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=NEO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

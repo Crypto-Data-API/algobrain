@@ -3,13 +3,13 @@ title: "Banana Gun"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, ethereum]
 aliases: ["BANANA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://bananagun.io"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -143,6 +143,53 @@ Fueling the Banana ecosystem
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BANANA trades on **both Binance** (spot BANANA/USDT plus a USD-margined perpetual) **and Hyperliquid** (BANANA-PERP, leverage up to roughly 40-50x). This is a genuine two-venue derivatives market: Binance anchors centralized spot/perp price discovery and provides the deepest fiat-stablecoin liquidity, while Hyperliquid supplies an on-chain perp with transparent order-book depth and funding. Because the token is small-cap (rank ~1013, low float against a 10M max supply), aggregate depth is thin relative to majors, so order books can be shallow away from the mid — size positions conservatively, use limit orders, and expect slippage on market fills. The two-venue split is an asset in itself: it creates a clean spot-vs-perp and CEX-vs-DEX surface for basis and funding-divergence trades, but it also means liquidity is fragmented and can drain quickly during volatility.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — small-cap perp on both Binance and Hyperliquid tends to carry persistent funding skews that can be farmed delta-neutral against spot.
+- [[hl-vs-cex-funding-divergence]] — BANANA-PERP on Hyperliquid vs the Binance USD-margined perp gives two independent funding feeds that frequently diverge, a directly tradable spread.
+- [[cash-and-carry]] — Binance spot plus either perp lets you lock the basis on a low-float token where carry can be rich.
+- [[liquidation-cascade-fade]] — thin books and high leverage (up to ~40-50x) make BANANA prone to sharp liquidation flushes that overshoot and mean-revert.
+- [[crowded-long-funding-fade]] — narrative-driven pops in a low-float sniper-bot token often leave funding and longs overextended, setting up a fade.
+- [[breakout-and-retest]] — low liquidity makes range breaks explosive; confirming a retest filters the frequent false breaks in a small-cap perp.
+
+### Volatility & regime character
+
+BANANA is a **high-beta, low-float altcoin** tied to the Ethereum on-chain trading / Telegram sniper-bot narrative, so its volatility is reflexive: revenue and speculation around bot activity drive sharp moves that dwarf large-cap ranges. It broadly trades as a high-beta expression of ETH and BTC risk appetite — it tends to amplify up-moves and down-moves in the majors — but idiosyncratic, narrative-specific swings routinely override that beta. Expect regime shifts between quiet, illiquid drift and violent momentum bursts.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — small-cap with fragmented depth across two venues; slippage and gap risk are material, and a stall on either venue concentrates flow.
+- **Supply / emissions** — circulating supply is well below max supply (10M), so future unlocks/emissions are an overhang on price.
+- **Narrative dependence** — valuation hinges on the sniper-bot / on-chain-trading narrative and bot revenue; sentiment reversals hit hard.
+- **Perp funding dislocations** — high leverage on a thin book produces extreme funding spikes and cascade risk; monitor funding and open interest before sizing.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BANANA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BANANA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BANANA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BANANA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BANANA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

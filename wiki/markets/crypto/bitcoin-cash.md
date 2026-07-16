@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, bitcoin, crypto]
+tags: [altcoins, bitcoin, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["BCH", "BCash"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://bch.info/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dogecoin]]", "[[hyperliquid]]", "[[litecoin]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dogecoin]]", "[[hyperliquid]]", "[[litecoin]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]"]
 ---
 
 # Bitcoin Cash
@@ -293,6 +293,50 @@ The two legacy [[bitcoin]] forks/proxies traders most often pair are **[[litecoi
 - **Contentious-fork history:** the 2018 BSV hash war showed BCH governance can fracture; future CHIP disagreements carry split risk.
 - **High beta in drawdowns:** as a BTC proxy, BCH falls harder than BTC in risk-off markets (currently ~94.7% below ATH, F&G = 22).
 - **Narrative competition:** newer payments/L1s and stablecoins compete for the "cheap on-chain money" use case BCH targets.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** BCH is a deep, liquid **two-venue** market: it trades on **[[binance|Binance]]** (BCH/USDT spot plus a **USD-margined BCH perpetual**) and on **[[hyperliquid|Hyperliquid]]** as **BCH-PERP** (up to ~40–50x leverage). The combination of a mature CEX spot book, a USD-M perp on the largest venue, and an on-chain perp gives BCH genuine cross-venue depth for a ~#23-cap alt — tight top-of-book spreads and enough size to run carry, basis, and arbitrage legs without heavy slippage. Practically, the two-venue split means execution can be routed to whichever book is deeper at the moment, and CEX-vs-DEX price/funding gaps are directly tradable; still, size prudently in bear-regime thin liquidity where BCH's modest exchange float amplifies impact.
+
+**Applicable strategies.**
+- [[cash-and-carry]] — a liquid Binance USD-M perp plus deep spot lets you hold spot BCH against a short perp to harvest positive basis when BTC-led rallies push BCH funding rich.
+- [[funding-rate-harvest]] — BCH funding flips sharply positive in squeeze phases and negative in capitulation, giving a clean delta-neutral funding-capture stream across its two perp books.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid's BCH-PERP and Binance's USD-M perp routinely diverge; the two-venue setup makes the spread directly harvestable.
+- [[liquidation-cascade-fade]] — BCH's high-beta, squeeze-prone float produces sharp forced-liquidation flushes that overshoot and mean-revert, a recurring fade setup.
+- [[breakout-and-retest]] — as a late-cycle "cheap-BTC catch-up" rotation, BCH tends to break its BCH/BTC and USD ranges impulsively, then retest, on BTC-dominance shifts.
+- [[pairs-trading]] — BCH pairs naturally against fellow legacy-PoW proxies [[litecoin]] and [[dogecoin]], trading relative-value dislocations in the payments/PoW-legacy basket.
+
+**Volatility & regime character.** BCH is a **high-beta [[bitcoin]] proxy / large-cap-adjacent PoW payments L1** — same SHA-256 mining economics, halving cadence, and 21M cap as BTC, at a fraction of the price. Its beta to BTC is materially **>1 in both directions**: it overshoots in late-cycle alt rotations and gives back outperformance fastest in risk-off. Correlation to BTC is high (BCH/BTC ratio is the key relative-value gauge) and secondarily to broad alt beta; it is not a DeFi, memecoin, or stablecoin asset, so its regime is driven by BTC dominance and PoW-legacy narrative rotation rather than idiosyncratic protocol flows.
+
+**Risk flags.**
+- **Venue/liquidity concentration** — depth leans on Binance and Hyperliquid; in bear regimes BCH's modest exchange float thins fast, amplifying slippage and squeeze risk.
+- **Perp funding dislocations** — funding swings hard between crowded-long squeeze fuel and capitulation-negative, and HL-vs-CEX funding can gap; carry legs must be actively managed.
+- **Narrative dependence** — value is tied to the "cheap BTC" / PoW-legacy rotation and BTC dominance; when capital concentrates into BTC, BCH bleeds relative value.
+- **Violent reversals** — sudden Upbit-driven KRW pumps spike then collapse, trapping momentum chasers; high-beta drawdowns are severe.
+- **Governance/fork risk** — the 2018 BSV hash war shows CHIP disagreements can fracture the chain; security budget also depends on SHA-256 miners toggling from BTC.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BCH` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BCH` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BCH&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BCH&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BCH"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

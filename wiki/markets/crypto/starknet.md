@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins, ethereum]
 aliases: ["STRK", "StarkNet"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://starknet.io/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimism]]", "[[zk-rollup]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimism]]", "[[zk-rollup]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Starknet
@@ -226,6 +226,47 @@ Starknet's differentiator is **STARK proofs + Cairo**; its disadvantage versus A
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** STRK trades on **both** [[hyperliquid|Hyperliquid]] (**STRK-PERP**, leverage up to ~40-50x) and **Binance** (spot **STRK/USDT** plus a USD-margined perpetual), making it a genuine two-venue derivatives market rather than a single-venue microcap. Binance provides deep centralized spot/perp depth and broad retail flow; Hyperliquid provides transparent on-chain [[perpetual-futures|perp]] order-book depth and [[funding-rate|funding]]. The dual-venue setup means execution can be split across CEX and DEX books, size can be worked without moving one book excessively, and the same instrument prices on two independent funding/mark engines — the structural precondition for cross-venue and cash-and-carry trades. Even so, STRK is a mid/low-cap alt (rank ~171), so [[open-interest|OI]] and depth are modest versus majors; large clips still need to be worked and slippage rises quickly around unlock or liquidation events.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — STRK funding prices independently on Hyperliquid and Binance's USD-margined perp, so divergences between the two venues' funding are directly harvestable.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp lets you hold spot STRK and short the perp to capture basis/funding without single-venue risk.
+- [[funding-rate-harvest]] — a large-float L2 token working through unlocks tends to carry a persistent short-side funding bias, giving a repeatable carry to collect.
+- [[liquidation-cascade-fade]] — thin depth relative to majors means unlock-driven flushes overshoot, and post-cascade snapbacks in STRK are tradeable on both books.
+- [[breakout-and-retest]] — STRK spends long stretches range-bound near cycle lows, so confirmed breaks from those bases offer clean retest entries.
+- [[oi-confirmed-trend]] — pairing STRK price moves with Hyperliquid open-interest confirmation filters out low-conviction squeezes in a high-beta name.
+
+**Volatility & regime character.** STRK is a **high-beta [[ethereum|Ethereum]] Layer-2 infrastructure/governance token**, not a large-cap or a memecoin. It trades with elevated volatility driven by ZK-rollup narrative flow, L2 sector rotation, and a heavy remaining-unlock schedule (MC/FDV ~0.65). Beta is strongly to [[ethereum]] and the broader L2 cohort (ARB/OP/zkSync) and to overall [[bitcoin]] risk appetite — it tends to underperform on risk-off and overshoot on ZK/L2 narrative pushes. Reflexivity is amplified by the dilution overhang: emissions and unlocks structurally cap rallies and add downside gap risk.
+
+**Risk flags.**
+- **Token unlocks / emissions** — only ~65% of the 10B max supply circulates; ongoing team/investor and ecosystem vesting is a standing supply overhang that biases funding and price to the downside.
+- **Narrative dependence** — value rests heavily on the ZK-rollup / L2 market-share thesis; sentiment shifts in that narrative drive outsized moves.
+- **Liquidity / venue concentration** — despite two venues, absolute depth is modest for a rank-~171 alt; slippage and liquidation cascades intensify around unlock dates and macro risk-off.
+- **Perp funding dislocations** — thin OI plus a persistent short bias can produce sharp funding swings and squeeze risk during crowded positioning, especially around unlock events.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=STRK` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=STRK` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=STRK&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=STRK&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=STRK"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

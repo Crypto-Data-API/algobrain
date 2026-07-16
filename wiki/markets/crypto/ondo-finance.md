@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, treasuries]
+tags: [crypto, defi, treasuries, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["ONDO", "Ondo DAO", "Ondo Finance"]
 entity_type: protocol
 founded: 2021
 headquarters: "New York, USA (Ondo Finance); Ondo Foundation: Cayman Islands"
 website: "https://ondo.finance/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[ondo-us-dollar-yield]]", "[[real-world-assets]]", "[[tokenized-stocks]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[ondo-us-dollar-yield]]", "[[real-world-assets]]", "[[tokenized-stocks]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[funding-rate-harvest]]"]
 ---
 
 # Ondo
@@ -327,6 +327,52 @@ ONDO's edge is **liquidity + product breadth + market share** (especially in tok
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ONDO is a deep, liquid two-venue perp market. It trades on **[[binance|Binance]]** (ONDO/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** (ONDO-PERP, up to ~40-50x leverage). Binance provides the primary CEX depth and price discovery for both spot and perp, while Hyperliquid offers transparent on-chain order-book depth and funding. Because ONDO is a top-~50 name (#43-#49 by cap) with meaningful open interest and multiple deep spot venues (Coinbase, Kraken, Upbit, Bitget, KuCoin, Uniswap V3), execution slippage is modest for typical sizes and the two-venue structure supports both cross-venue basis/funding work and confident sizing. The dual Binance + Hyperliquid footprint means spot legs can be hedged against either perp, and CEX-vs-DEX funding gaps are directly tradable.
+
+**Applicable strategies**
+
+- [[funding-rate-harvest]] — ONDO funding flips positive during RWA-narrative rallies and negative into unlock-driven selloffs, so harvesting the persistent funding side (long/short spot vs. perp) is a repeatable carry play on a liquid name.
+- [[hl-vs-cex-funding-divergence]] — with active perps on both Binance and Hyperliquid, funding can diverge between the CEX and the on-chain venue, giving a clean two-venue funding-arbitrage leg.
+- [[cash-and-carry]] — deep Binance/Coinbase spot plus USD-margined perps let you run a delta-neutral long-spot / short-perp carry to capture positive funding without directional risk.
+- [[narrative-trading]] — ONDO is the most liquid pure-play proxy for the RWA/tokenization thesis; OGM TVL milestones and tokenized-securities headlines drive tradable narrative moves.
+- [[token-unlock-supply-event]] — with MC/FDV ~0.49 and team/investor tranches vesting through ~2029, scheduled unlock cliffs are predictable, calendarable supply-pressure events to trade around.
+- [[event-driven-trading]] — OGM TVL milestones, Ondo Chain progress, new exchange/chain distribution deals and regulatory rulings on tokenized securities are discrete catalysts to position into and fade on sell-the-news.
+
+**Volatility & regime character** — ONDO is a high-beta DeFi / RWA-infrastructure altcoin. It carries strong beta to broad crypto risk appetite (BTC/ETH), but its distinguishing feature is a fundamental-driven overlay: it can decouple on RWA-narrative flows and OGM milestones even when majors are flat. Volatility is elevated and reflexive around unlock cliffs and narrative catalysts; in the current extreme-fear / Established Bear Market regime it has been relatively resilient for a high-beta alt, but it remains -80%+ off its ATH and moves hard in risk-off conditions.
+
+**Risk flags**
+
+- **Unlock / dilution overhang** — MC/FDV ~0.49; roughly half the supply is still locked, with vesting through ~2029. The Jan 2025 unlock cliff coincided with the ATH and the subsequent -88% drawdown. Dominant structural risk for longs and for any carry/basis position held into a cliff.
+- **Narrative dependence** — much of the token's premium is RWA/tokenization narrative and milestone optionality rather than fee accrual (governance token captures no direct product revenue); narrative reversals hit price disproportionately.
+- **Regulatory dependence** — OGM and tokenized securities exist because the US regulatory climate warmed in 2025-2026; an adverse tokenized-securities ruling is an existential product risk and a tail for the token.
+- **Perp funding dislocations** — narrative rallies and unlock selloffs push funding to extremes and can crowd one side; monitor Binance and Hyperliquid funding/OI for squeeze and cascade risk before sizing leverage.
+- **Political-headline sensitivity** — ONDO sits in the World Liberty Financial (Trump-affiliated) portfolio, adding headline and reputational two-way risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ONDO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ONDO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ONDO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ONDO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ONDO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

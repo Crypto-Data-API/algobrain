@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, lending]
+tags: [crypto, defi, lending, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, ethereum]
 aliases: ["COMP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://compound.finance/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[lending]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[lending]]", "[[perpetual-futures]]", "[[funding-rate-arbitrage]]", "[[cash-and-carry]]"]
 ---
 
 # Compound
@@ -276,6 +276,54 @@ Anybody with 1% of COMP delegated to their address can propose a governance acti
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+COMP is a **two-venue perp market**, tradable on **both Binance** (spot COMP/USDT plus a USD-margined perpetual) and **[[hyperliquid|Hyperliquid]]** (COMP-PERP, leverage up to ~40-50x). Deep spot liquidity on Binance, Kraken, Upbit and others underpins a reasonably tight, liquid book for an established DeFi blue chip. The dual-venue setup means a trader can hedge or arbitrage a Binance leg against the Hyperliquid on-chain leg, and CEX depth generally supports larger clip sizes than a single-venue micro-cap. Practically, size and stops should still respect COMP's mid-cap depth — resting orders far from mid can thin out quickly around governance headlines — but the CEX/DEX pairing gives redundancy for execution and reduces single-venue slippage risk.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — capture perp/spot funding differences on COMP between Binance's USD-margined perp and Hyperliquid's COMP-PERP.
+- [[hl-vs-cex-funding-divergence]] — exploit funding-rate gaps for COMP between Hyperliquid and Binance, a natural two-venue play here.
+- [[cash-and-carry]] — long Binance/DEX spot COMP versus short the perp to harvest positive basis on an established, liquid token.
+- [[basis-trading]] — trade the perp-vs-spot basis on COMP, which tends to be less erratic than micro-cap perps given deeper liquidity.
+- [[mean-reversion]] — COMP's range-bound, low-dilution profile in a bear regime suits fading stretched moves back toward its established band.
+- [[liquidation-cascade-fade]] — fade over-extended perp liquidations on COMP-PERP, where forced deleveraging can overshoot given mid-cap depth.
+
+### Volatility & regime character
+
+COMP is a **DeFi lending / governance token** and trades as a **high-beta DeFi-sector alt** rather than a large-cap. It is strongly correlated to [[ethereum|ETH]] and the broader DeFi-governance complex, with an elevated beta to [[bitcoin|BTC]] risk-on/risk-off swings. Volatility clusters around governance events (fee-switch proposals, parameter changes) and DeFi-sector rotations; in the current extreme-fear / Established Bear Market backdrop it exhibits range-bound behavior with sharp beta-driven moves, but its near-fully-circulating hard cap (~97%) removes the dilution-driven decay seen in higher-emission alts.
+
+### Risk flags
+
+- **Venue concentration:** perp liquidity concentrates on Binance and Hyperliquid; a venue outage or delisting can widen spreads and disrupt hedges.
+- **Value-capture / narrative dependence:** COMP is a pure governance token with no direct cash-flow claim, so price leans on governance optionality (e.g., a future fee switch) and DeFi-sector narrative rather than yield.
+- **Perp funding dislocations:** funding can spike around governance headlines and sector momentum, elevating carry cost and cascade risk on leveraged positions.
+- **Sector/beta drawdowns:** as a DeFi high-beta alt it draws down hard in risk-off regimes and can gap on BTC/ETH moves.
+- **Liquidity depth:** mid-cap depth means large orders and far-from-mid stops face slippage, especially into thin off-hours books.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=COMP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=COMP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=COMP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=COMP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=COMP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

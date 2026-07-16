@@ -4,6 +4,17 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-16 — Phase 2 enrichment: Hyperliquid perps (wave 1)
+
+Enriched the **206 Hyperliquid-perp** coin pages (+4 pilot: SOL, LINK, XMR, QNT) with a
+`## Trading Profile` (venues & liquidity, applicable strategies, volatility/regime, risk
+flags) and a verified `## Getting the Data (CryptoDataAPI)` section, via 206 parallel Opus
+agents. Each page links ~6 real strategy pages from a curated, verified menu (no broken
+strategy links) and preserves all existing content; `good`/`excellent` pages kept their
+status. Added `tools/compute_tradable.py` (computes the Binance ∪ Hyperliquid tradable set
+from exchange ticker data + the Hyperliquid `info` API). Binance-only enrichment (271 coins,
+perp/spot/stablecoin-aware) queued as wave 2.
+
 ## 2026-07-16
 
 ### Added

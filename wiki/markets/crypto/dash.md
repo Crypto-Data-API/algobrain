@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["DASH", "Darkcoin", "Digital Cash"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "https://www.dash.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[monero]]", "[[privacy-coins]]", "[[zcash]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[monero]]", "[[privacy-coins]]", "[[zcash]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
 ---
 
 # Dash
@@ -321,6 +321,60 @@ Within the privacy basket, Dash occupies the "payments + optional privacy" niche
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DASH is tradable on **both** major venue types: [[binance|Binance]] (DASH/USDT spot plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (DASH-PERP, leverage up to ~40-50x). This gives it a **deep, liquid two-venue market** relative to most rank-~110 alts — a real edge for execution and for constructing spot/perp and CEX/DEX relative-value trades. Practically:
+
+- **Leverage:** Hyperliquid offers up to ~40-50x on DASH-PERP; Binance USD-margined perp adds a second, independently-priced funding/OI surface.
+- **Depth:** spot depth is concentrated on Binance/Kraken/KuCoin and is genuinely liquid during privacy-rotation episodes (elevated volume/cap turnover), but thins materially between narrative waves — size accordingly.
+- **Execution & sizing:** the dual-venue structure means the same exposure can be routed to whichever book is deeper; but because DASH is a mid-cap, size for slippage and avoid market-taking large clips into a single thin side. Two funding surfaces (Binance perp vs Hyperliquid perp) enable cross-venue funding and basis expression.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — DASH prices on both a Binance USD-margined perp and Hyperliquid DASH-PERP, so the two funding curves can diverge during rotation spikes; harvest the spread.
+- [[cash-and-carry]] — liquid Binance spot plus a USD-margined perp lets you hold spot and short the perp to capture positive funding/basis when privacy-rally crowding pushes funding rich.
+- [[crowded-long-funding-fade]] — every prior DASH vertical rally has retraced; persistently positive funding into a parabolic move is a classic crowded-long fade setup here.
+- [[liquidation-cascade-fade]] — high-beta, venue-concentrated DASH produces sharp leverage flushes; fading exhausted downside cascades on the perp can capture the rebound.
+- [[oi-confirmed-trend]] — during genuine privacy-basket rotations, rising open interest confirming an up-move helps separate real trend legs from thin-liquidity head-fakes.
+- [[narrative-trading]] — DASH price is driven almost entirely by the privacy-coin narrative (led by [[monero|XMR]]/[[zcash|ZEC]]) and regulatory catalysts; trading the narrative cycle is the dominant edge.
+
+### Volatility & regime character
+
+DASH is a **high-beta privacy/payments alt** — the late, higher-beta third leg of the [[privacy-coins]] rotation behind [[monero|Monero]] and [[zcash|Zcash]]. Volatility is regime-dependent and reflexive: quiet drift between narrative waves, then explosive, rotation-driven moves (the late-2025 episode ran ~7x off the ~$22 low to ~$149 before fully retracing). It is broadly correlated to BTC/ETH risk appetite (it sells off hard in risk-off tapes) but its dominant driver is **intra-basket privacy-coin beta** rather than pure BTC beta — it can decouple upward when the privacy narrative is live even against a weak broad market.
+
+### Risk flags
+
+- **Liquidity/venue concentration:** spot depth is concentrated on a few CEXs and thins sharply outside rotation episodes; perp liquidity is modest versus majors.
+- **Narrative dependence:** price tracks the privacy-basket rotation, not adoption; every historical rally has fully retraced (~97-98% below 2017 ATH).
+- **Regulatory/delisting overhang:** despite *opt-in* privacy (lower delisting risk than Monero), DASH still carries privacy-coin regulatory tail risk (travel-rule/DAC8 enforcement).
+- **Perp funding dislocations:** thin two-venue perp books make funding spike at extremes; persistently rich funding into vertical moves signals crowding and exhaustion.
+- **Emissions/supply:** hard cap and slowing emission mean no unlock cliff, but masternode collateral bonding (1,000 DASH each) tightens float and amplifies moves in both directions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=DASH` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=DASH` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=DASH&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=DASH&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=DASH"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

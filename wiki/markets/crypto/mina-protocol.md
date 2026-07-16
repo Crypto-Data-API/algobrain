@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["MINA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://minaprotocol.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zero-knowledge-proofs]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[proof-of-stake]]", "[[zero-knowledge-proofs]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Mina Protocol
@@ -111,6 +111,50 @@ At a ~$54M market cap, MINA is a deep small-cap whose price is ~99.5% below its 
 - **Prover performance / centralization.** Generating recursive SNARKs is computationally heavy, which can concentrate block production among well-resourced operators.
 - **Legacy distribution overhang.** FTX/Alameda-era holdings and VC allocations add historical supply-disposition risk.
 - **Severe drawdown / liquidity.** Down ~99.5% from ATH, ~$3.7M daily volume, and an extreme-fear macro regime amplify volatility and slippage.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** MINA is a genuine two-venue market: it trades on [[binance]] (spot MINA/USDT plus a USD-margined MINA perpetual) and on [[hyperliquid]] (MINA-PERP, up to ~40-50x). Having both a deep CEX order book and an on-chain perp means a trader can quote, hedge, and roll positions across venues, and the two funding curves and mark prices can diverge enough to matter for carry and arbitrage. That said, MINA is a deep small-cap (rank ~393, thin daily volume): book depth is modest, so large clips move price and slippage grows fast beyond small size. Availability across two venues improves execution optionality (route to whichever side is deeper, split fills), but it does not remove the underlying thinness — size conservatively, ladder entries/exits, and confirm live depth and funding before leveraging.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — a two-venue small-cap perp whose funding on Binance and Hyperliquid can run persistently rich or negative; harvest the carry delta-neutral against spot.
+- [[hl-vs-cex-funding-divergence]] — with the same asset perped on both Hyperliquid and Binance, the two funding rates frequently dislocate on a thin book, a clean cross-venue funding trade.
+- [[cash-and-carry]] — hold Binance spot MINA against a short perp to capture positive funding/basis while staying market-neutral on a low-notional name.
+- [[liquidation-cascade-fade]] — thin depth means leverage flushes overshoot violently; fade the wick after a cascade once open interest resets.
+- [[range-mean-reversion]] — MINA spends long stretches pinned near its all-time-low zone in tight ranges, favoring mean-reversion between support and resistance bands.
+- [[oi-price-exhaustion]] — on a low-float perp, rising open interest into a stalling price flags crowded positioning ripe for a reversal.
+
+**Volatility & regime character.** MINA is a low-cap, high-beta infrastructure/privacy [[layer-1]] token (succinct zk-SNARK base layer, ZK/privacy narrative). It behaves as a high-beta alt: it amplifies BTC/ETH directional moves on the way up and down, with sharp idiosyncratic spikes tied to ZK-narrative rotations and its heavy multi-year drawdown. Correlation to BTC/ETH is meaningful in risk-on/risk-off swings, but on a thin book single-venue flow and narrative shifts can decouple it intraday. Emissions-driven inflation adds a persistent structural drag distinct from beta.
+
+**Risk flags.**
+- **Liquidity / venue concentration** — thin daily volume and modest book depth; execution and funding are sensitive to flow on either venue, and slippage is material beyond small size.
+- **Perpetual inflation / emissions** — uncapped supply with continuous PoS block rewards is a persistent dilution flow (rather than a discrete unlock cliff) that weighs on price.
+- **Narrative dependence** — the ZK/privacy/succinct-chain thesis drives sentiment; if zkApp adoption keeps lagging, the token can drift on "interesting tech, no flow."
+- **Perp funding dislocations** — low float plus two perp venues make funding and basis swing quickly; a crowded side can force violent funding resets and liquidation cascades.
+- **Legacy overhang** — FTX/Alameda-era holdings and VC allocations carry historical supply-disposition risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MINA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MINA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MINA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MINA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MINA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

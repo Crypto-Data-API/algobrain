@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, market-microstructure]
+tags: [altcoins, crypto, defi, market-microstructure, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["JTO", "Jito Network", "JitoSOL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.jito.network/"
-related: ["[[crypto-markets]]", "[[jupiter-exchange-solana]]", "[[kamino]]", "[[liquid-staking]]", "[[mev]]", "[[raydium]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[jupiter-exchange-solana]]", "[[kamino]]", "[[liquid-staking]]", "[[mev]]", "[[raydium]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[pairs-trading]]"]
 ---
 
 # Jito
@@ -238,6 +238,54 @@ Jito's moat is the combination of the **largest Solana LST** with **ownership of
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. With ~half of supply unvested, locked allocations (team/investors/ecosystem) dominate the cap table. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+JTO trades on a deep, two-venue derivatives market. **Binance** lists JTO spot (JTO/USDT) plus a **USD-margined perpetual**, giving it the tightest books and the deepest funding/OI liquidity, while **[[hyperliquid|Hyperliquid]]** runs **JTO-PERP** at up to **~40-50x** leverage for on-chain leveraged and short expression. Broad additional CEX coverage (Kraken, Upbit/KRW, Bitget, KuCoin) adds episodic Korean-retail beta. Because the same contract is quoted on both a CEX and Hyperliquid, cross-venue funding and basis dislocations are directly tradable, and the redundant venues let size be split for lower impact — but as a rank ~134 alt, depth still thins fast versus majors, so ladder entries and size against L2 book depth rather than headline notional.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — same JTO perp on Binance (USD-margined) and Hyperliquid lets you harvest funding-rate gaps between the two venues.
+- [[cash-and-carry]] — pair Binance JTO spot long against a short perp to capture basis/funding on an asset that trades spot + perp on the same exchange.
+- [[crowded-long-funding-fade]] — after a vertical move like the +32.7% weekly rally, fade crowded longs when JTO-PERP funding turns richly positive.
+- [[liquidation-cascade-fade]] — high-beta, ~88%-off-ATH JTO produces sharp forced-liquidation flushes; fade the overshoot as the cascade exhausts.
+- [[oi-confirmed-trend]] — use rising Hyperliquid open interest to confirm (or veto) JTO's Solana-beta directional trends.
+- [[pairs-trading]] — trade JTO against SOL to isolate the staking/MEV beta from broad market direction.
+
+### Volatility & regime character
+
+JTO is a **high-beta DeFi / liquid-staking infrastructure token** and a leveraged proxy on [[solana]] — more SOL staked and more on-chain MEV → more value under JitoSOL/DAO control, so JTO amplifies SOL's directional swings. It carries strong positive correlation to SOL and, through it, to broad crypto (BTC/ETH) risk-on/risk-off regimes, with realized volatility well above large-cap majors. Moves are reflexive and narrative-driven (LST/MEV cycle, Solana activity), as the recent >3x rally off the February 2026 low into an extreme-fear macro illustrates.
+
+### Risk flags
+
+- **Dilution / unlocks:** ~0.49 MC/FDV means roughly half of supply is still unvested; scheduled unlock cliffs impose structural sell pressure, and the uncapped max supply allows governance-driven inflation.
+- **Narrative & SOL dependence:** value is tightly coupled to Solana activity and the LST/MEV narrative; a Solana risk-off drags JTO harder than the market.
+- **Liquidity depth:** healthy volume for its cap, but rank ~134 books thin quickly — venue concentration on Binance/Hyperliquid means outages or delistings would sharply cut executable size.
+- **Perp funding dislocations:** thin two-venue perp liquidity can push funding and basis to extremes during crowded moves, raising squeeze risk on both crowded-long fades and shorts.
+- **No direct fee accrual:** JTO is a governance claim, not a dividend — a valuation risk independent of price action.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=JTO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=JTO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=JTO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=JTO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=JTO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,11 +4,11 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, exchange, leverage]
+tags: [crypto, defi, derivatives, exchange, leverage, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 entity_type: protocol
 aliases: ["HYPE", "HYPE-token", "hype-token"]
 website: "https://hyperliquid.xyz"
-related: ["[[crypto-markets]]", "[[decentralized-exchanges]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperbft]]", "[[hypercore]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchanges]]", "[[hip-3-builder-deployed-perps]]", "[[hlp]]", "[[hyperbft]]", "[[hypercore]]", "[[hyperliquid-fee-tiers-and-maker-rebates]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 headquarters: "Decentralized"
 ---
 
@@ -119,6 +119,46 @@ HYPE is best framed as **equity in a fast-growing exchange** rather than a utili
 *HYPE is the only decentralized-exchange token in this peer set with both top-10 liquidity and a mechanical fee→buyback bid; CEX peers rely on discretionary burn/buyback programs.*
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** HYPE is a deep, liquid two-venue market: it trades on **Binance** (spot plus a USD-margined perpetual) and on **Hyperliquid** itself (**HYPE-PERP**, up to ~40-50x leverage), alongside other tier-1 CEXs and Hyperliquid's own spot book. The presence of a top-tier CEX perp *and* the native on-chain perp means order-book depth is split across a centralized venue and the protocol's own HyperCore book, so large size can be worked across both without exhausting a single book. This dual availability tightens spreads and reduces slippage for size, but it also opens a structural CEX-vs-Hyperliquid basis and funding channel that traders can arbitrage. Practical implication: size and route execution with an eye to which venue holds depth at a given moment, and use the on-chain book's transparent [[funding-rate|funding]] and [[open-interest|OI]] as a real-time read on positioning.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — HYPE prints deep perps on *both* Binance and its native Hyperliquid book, so funding can dislocate meaningfully between the two venues, a clean divergence trade.
+- [[cash-and-carry]] — with liquid spot (Binance/CEX) and a USD-margined perp, long spot / short perp captures HYPE's often-positive funding as carry.
+- [[funding-rate-harvest]] — persistent positive funding around bullish HYPE narratives (buybacks, ETF flows) lets a delta-hedged book harvest the funding stream.
+- [[token-unlock-supply-event]] — HYPE's ~$700M monthly cliff unlocks with only ~22% of max supply circulating make scheduled unlock dates tradable supply events.
+- [[oi-confirmed-trend]] — Hyperliquid's transparent HYPE-PERP open interest lets traders confirm whether trend legs are backed by fresh positioning or short-covering.
+- [[liquidation-cascade-fade]] — leverage up to ~40-50x plus crowded positioning around unlocks makes HYPE prone to sharp liquidation flushes that mean-revert, offering fade setups.
+
+**Volatility & regime character.** HYPE is a **high-beta large-cap alt** and an **infra / DeFi exchange token** — effectively equity-like exposure to a fast-growing perp DEX rather than pure memecoin reflexivity. It carries elevated realized volatility but has shown *relative* strength versus the broad alt complex thanks to its mechanical fee→buyback bid, so it can decouple from BTC/ETH beta during buyback-driven or narrative-driven moves while still selling off with the market in broad risk-off regimes. Treat it as high-beta to BTC/ETH with an idiosyncratic buyback/unlock overlay that can dominate short-term direction.
+
+**Risk flags.**
+- **Venue & governance concentration** — Hyperliquid's small, team-influenced validator set (see the JELLY incident) means the native venue carries counterparty/governance risk atypical of a CEX perp; force-settlement precedent is a tail risk for on-chain positions.
+- **Token unlocks / emissions** — only ~22% of max supply circulates; recurring large monthly unlocks are a persistent supply overhang that must be traded around.
+- **Narrative dependence** — much of HYPE's premium rests on the buyback flywheel and ETF-access story; if fee revenue or buyback intensity fades, the fundamental bid weakens.
+- **Perp funding dislocations** — the two-venue structure can produce sharp funding gaps and basis moves, especially into unlock dates and ETF-flow events, that can whipsaw leveraged carry books.
+- **Regulatory** — as a KYC-light leveraged perp venue, Hyperliquid faces jurisdictional regulatory risk that could affect access and liquidity.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=HYPE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=HYPE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=HYPE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=HYPE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=HYPE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, markets]
+tags: [bitcoin, crypto, markets, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["BITCOIN", "BTC", "XBT"]
 entity_type: protocol
 founded: 2009
 headquarters: "Decentralized"
 website: "https://bitcoin.org"
-related: ["[[bitcoin-etfs]]", "[[crypto-markets]]", "[[ethereum]]", "[[halving]]", "[[perpetual-futures]]", "[[proof-of-work]]"]
+related: ["[[bitcoin-etfs]]", "[[crypto-markets]]", "[[ethereum]]", "[[halving]]", "[[perpetual-futures]]", "[[proof-of-work]]", "[[hyperliquid]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Bitcoin
@@ -351,6 +351,56 @@ HarryPotterObamaSonic10Inu (Ticker: BITCOIN) is a endgame of crypto-assets (0 Ta
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BTC is the deepest, most liquid market in crypto and trades as a **two-venue** book across both [[binance]] (spot BTC/USDT plus USD-margined BTC perpetual) and [[hyperliquid]] (BTC-PERP, leverage up to ~40-50x). Order-book depth and tight spreads on both venues let traders execute size with minimal slippage and split flow between a centralized and an on-chain venue. This dual availability underpins cross-venue basis, funding, and arbitrage plays: the same exposure can be built spot on Binance and hedged on Hyperliquid (or vice versa), and deep liquidity supports large clip sizing without disturbing the mark. Because BTC-PERP is Hyperliquid's single highest-volume market, its L2 book and funding are among the most reliable references in the asset class.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — buy spot BTC on [[binance]] and short the perp/future to harvest the basis; BTC's deep two-venue liquidity makes the carry cheap to build and unwind.
+- [[funding-rate-harvest]] — BTC perp funding is large and persistent enough (crowded-long episodes) that a delta-neutral spot-vs-perp position collects funding at scale.
+- [[hl-vs-cex-funding-divergence]] — funding on [[hyperliquid]] BTC-PERP and Binance's USD-margined perp can diverge; the pair trades the spread with tight execution on both books.
+- [[crowded-long-funding-fade]] — in euphoric BTC regimes, persistently positive funding flags over-levered longs vulnerable to a flush; fade the crowded side.
+- [[liquidation-cascade-fade]] — BTC leverage clusters produce sharp [[liquidation]] wicks that mean-revert; deep books allow scaling into the flush and out on the rebound.
+- [[oi-confirmed-trend]] — rising [[open-interest]] alongside BTC price confirms trend conviction, while OI expansion into stalling price warns of exhaustion.
+
+### Volatility & regime character
+
+BTC is the **large-cap benchmark** of crypto — the lowest-beta major asset and the reference against which every altcoin's beta is measured. Volatility is high by TradFi standards (~50-80% annualized) but moderate relative to smaller-cap crypto. It has essentially zero "correlation to BTC beta" because it *is* BTC beta; it leads [[ethereum|ETH]] and the alt complex, and in extreme-fear regimes BTC dominance rises as capital rotates out of alts into BTC. Increasingly correlated with macro risk assets (notably the Nasdaq) while retaining idiosyncratic behavior around crypto-specific events (halvings, ETF flows, on-chain shocks).
+
+### Risk flags
+
+- **Perp funding dislocations** — crowded-long funding on BTC perps precedes squeeze/liquidation flushes; extreme funding is a positioning warning, not a directional guarantee.
+- **Liquidation cascades** — leveraged [[perpetual-futures]] positioning amplifies moves in both directions around OI/liquidation clusters.
+- **Macro/liquidity sensitivity** — BTC drawdowns track global liquidity and risk sentiment (current Established Bear Market); tightening cycles drive deep declines.
+- **Concentration** — ETF/custodian concentration ([[coinbase]]) and large-holder ("whale") distribution can move an otherwise deep market.
+- **Regulatory** — adverse custody, ETF, or mining rulings can compress flows and shift the tape.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BTC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

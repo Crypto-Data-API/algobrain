@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, analytics, crypto]
+tags: [ai-trading, analytics, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, ethereum]
 aliases: ["KAITO", "Kaito AI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://yaps.kaito.ai/"
-related: ["[[ai-agents]]", "[[airdrop]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]"]
+related: ["[[ai-agents]]", "[[airdrop]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # KAITO
@@ -244,6 +244,49 @@ $KAITO is the native token and the fundamental building block of the AI-powered 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — KAITO trades on a **deep, liquid two-venue market**. **[[binance]]** lists both spot (KAITO/USDT) and a USD-margined perpetual, while **[[hyperliquid]]** runs **KAITO-PERP** with leverage up to ~40-50x. The dual CEX+DEX perp market plus additional spot venues (Kraken, Upbit KRW, Bitget, KuCoin) gives meaningful depth for a rank ~183 alt, so mid-size positions can execute with modest slippage. The Binance/Hyperliquid split also opens genuine two-venue execution: funding and basis can diverge between the CEX perp and the on-chain perp, and traders can route/size across both venues. Still, treat KAITO as a mid-cap alt — depth thins in the tails, so scale into large clips rather than sweeping the book, and mind Upbit KRW hours for intraday liquidity swings.
+
+**Applicable strategies**
+- [[hl-vs-cex-funding-divergence]] — with Binance USD-margined perp and Hyperliquid KAITO-PERP both liquid, funding can diverge across the two venues, offering a delta-neutral spread to harvest.
+- [[funding-rate-harvest]] — a momentum-driven InfoFi name that swings between crowded longs and shorts; collecting funding on the crowded side while hedged is repeatable here.
+- [[cash-and-carry]] — Binance spot plus USD-margined perp lets you go long spot / short perp to lock the basis when perp trades rich to spot.
+- [[liquidation-cascade-fade]] — high-beta InfoFi token prone to sharp squeezes both ways; fading overextended liquidation flushes into obvious support/resistance is well-suited.
+- [[oi-confirmed-trend]] — KAITO trends hard on narrative; rising open interest confirming a directional break (e.g. the +45% 30d move) filters real momentum from noise.
+- [[breakout-and-retest]] — reflexive attention-economy moves respect breakout levels; entering on the retest after a range break manages the high volatility.
+
+**Volatility & regime character** — KAITO is a **high-beta AI / InfoFi ("attention economy") altcoin** with pronounced reflexivity: it rallies and dumps on narrative and mindshare cycles rather than steady fundamentals. It carries high positive beta to BTC/ETH risk-on/risk-off regimes, but frequently decouples on InfoFi-specific catalysts (Yapper campaigns, AI-sector rotation, category meta shifts). Realized volatility is elevated — recent one-week swings and a +45% 30d move against a fearful market illustrate momentum-driven, regime-sensitive behavior.
+
+**Risk flags**
+- **Severe unlock overhang** — MC/FDV ~0.24 with only ~24% of the 1B supply circulating; large scheduled unlocks to team/investors/ecosystem are the dominant structural risk and can pressure price on flat demand.
+- **Narrative dependence** — demand is tied to the young, reflexive InfoFi/attention-mining meta; if the category cools, campaign spend and token demand can fall sharply.
+- **Perp funding dislocations** — momentum crowding can drive funding to extremes on either venue; watch for one-sided positioning and cross-venue funding gaps before sizing carry trades.
+- **Liquidity/venue concentration** — depth relies on Binance and Hyperliquid perps plus Upbit KRW spot; venue-specific outages, listing changes, or Korean-hours volatility can amplify moves and thin the tails.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=KAITO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=KAITO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=KAITO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=KAITO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=KAITO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

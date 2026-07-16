@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, bitcoin, ethereum]
 aliases: ["HBAR", "Hedera Hashgraph"]
 entity_type: protocol
 founded: 2018
 headquarters: "Hedera Council (global); Hashgraph/Swirlds — Texas, USA"
 website: "https://www.hedera.com/"
-related: ["[[avalanche]]", "[[bitcoin-etfs]]", "[[chainlink]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[proof-of-stake]]"]
+related: ["[[avalanche]]", "[[bitcoin-etfs]]", "[[chainlink]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[proof-of-stake]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Hedera
@@ -280,6 +280,54 @@ Hedera's edge is **enterprise distribution** (a council of blue-chip corporation
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HBAR trades on a **deep, liquid two-venue market**. On [[binance|Binance]] it has both spot (HBAR/USDT) and a **USD-margined perpetual**, giving the primary price-discovery and depth for USD-quoted flow; Upbit adds large KRW spot volume. On [[hyperliquid|Hyperliquid]] the **HBAR-PERP** offers up to ~40-50x leverage with a transparent on-chain order book. Having both a top-CEX perp and a mature Hyperliquid perp means funding, basis and liquidation signals can be cross-checked across venues, and execution can be routed to whichever book is deepest at a given size. Practically, USD-denominated size is best worked on Binance spot/perp, while Hyperliquid is the venue for on-chain funding capture and CEX-vs-DEX relative-value trades. Because HBAR's 24h volume is modest relative to its ~$3.5B cap, size incrementally and lean on limit orders around headlines to avoid slippage.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect perp funding on HBAR-PERP; two liquid venues give a steady carry stream while a delta hedge neutralizes the choppy, headline-driven spot.
+- [[hl-vs-cex-funding-divergence]] — Binance USD-margined perp funding vs Hyperliquid HBAR-PERP funding frequently dislocates on ETF/regulatory prints; harvest the spread between the two order books.
+- [[cash-and-carry]] — with deep spot on Binance/Upbit and a perp on both venues, long spot / short perp captures basis, especially when ETF-flow squeezes push perps to a premium.
+- [[event-driven-trading]] — HBAR is a headline instrument (HBR ETF flow prints, additional spot-ETF approvals, CLARITY Act, council announcements); position around scheduled catalysts.
+- [[narrative-trading]] — trade HBAR as the enterprise/RWA-adoption basket leader alongside [[avalanche|Avalanche]], [[chainlink|Chainlink]] and XRP-style institutional-alt flows.
+- [[liquidation-cascade-fade]] — thin spot vs large OI makes HBAR prone to violent perp squeezes; fade over-extended long/short liquidation cascades once forced flow clears.
+
+### Volatility & regime character
+
+HBAR is a **high-beta enterprise/RWA infra altcoin** (a governed hashgraph L1), not a memecoin or a stablecoin. It carries strong positive beta to [[bitcoin]] and [[ethereum]] — it sells off hard in risk-off regimes (currently ~86-88% off its 2021 ATH in an Established Bear Market) and rallies with broad-alt risk appetite. Its distinguishing feature is an **adoption-price disconnect**: strong enterprise/RWA metrics have repeatedly failed to lift price, so HBAR trades more on ETF-flow and macro-narrative catalysts than on fundamentals. Idiosyncratic volatility clusters around ETF and regulatory headlines, where thin spot depth amplifies moves.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — modest 24h volume vs a ~$3.5B cap means slippage and gap risk; USD depth is concentrated on Binance and KRW flow on Upbit.
+- **Treasury supply releases** — the council/Foundation treasury releases HBAR on a multi-year schedule (MC/FDV ~0.87-0.88), an ongoing, known supply input to watch.
+- **Narrative dependence** — price hinges on ETF flows and the RWA/enterprise narrative rather than usage; a fading narrative or ETF-outflow can override strong fundamentals.
+- **Perp funding dislocations** — headline-driven squeezes push Binance and Hyperliquid funding out of line; crowded positioning around ETF prints can trigger fast liquidation cascades.
+- **Regulatory / decentralization optics** — permissioned council-run consensus nodes invite securities-classification and centralization scrutiny that can move price on policy news.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=HBAR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=HBAR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=HBAR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=HBAR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=HBAR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

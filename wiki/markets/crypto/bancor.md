@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, liquidity]
+tags: [crypto, defi, ethereum, liquidity, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["BNT", "Bancor", "Carbon DeFi"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://www.bancor.network/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[liquidity-pool]]", "[[uniswap]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[governance-token]]", "[[impermanent-loss]]", "[[liquidity-pool]]", "[[uniswap]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[cross-exchange-arbitrage]]"]
 ---
 
 # Bancor Network
@@ -230,6 +230,56 @@ This is not investment advice; figures are point-in-time and crypto assets are h
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BNT is one of the less common alts to enjoy a genuinely **two-venue derivatives market**: it trades on **Binance** (BNT/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid]]** (BNT-PERP, leverage up to roughly 40-50x). The combination of a deep centralized spot/perp venue and an on-chain perp gives BNT better depth and tighter effective spreads than most sub-$100M-cap tokens, and it means a trader can source liquidity from whichever book is deepest at execution time. Practically, the Binance spot leg supports a clean funded/carry structure against either perp, while the Hyperliquid book is the venue to watch for funding and order-flow signals. Still, this is a **microcap** (rank ~646, ~$29M cap): total dollar depth is thin in absolute terms, so size positions to the shallower of the two books, expect slippage on large market orders, and prefer limit/passive execution split across venues rather than sweeping a single book.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — with BNT spot on Binance and perps on both Binance and Hyperliquid, long spot vs short perp captures any positive basis on a token with effectively fully-circulating supply and no big unlock overhang.
+- [[funding-rate-arbitrage]] — a small, sentiment-driven alt perp tends to swing between rich and cheap funding, letting a delta-neutral book harvest the funding leg.
+- [[hl-vs-cex-funding-divergence]] — the same asset trading as a perp on both Hyperliquid and Binance frequently shows funding gaps between the two, a directly tradable divergence.
+- [[basis-trading]] — the persistent spread between BNT spot and its perp marks can be traded as basis given the two-venue structure.
+- [[liquidation-cascade-fade]] — thin microcap depth plus up-to-40-50x leverage makes BNT-PERP prone to sharp liquidation flushes that mean-revert, favorable for fading overshoots.
+- [[rsi-mean-reversion]] — as a low-beta, range-prone microcap outside active narrative cycles, BNT often oscillates within a band, suiting oscillator-based reversion entries.
+
+### Volatility & regime character
+
+BNT is a legacy **DeFi / DEX-infrastructure token** (an AMM pioneer, now the Carbon DeFi ecosystem), not a large-cap or a memecoin. It behaves as a **high-beta altcoin** with amplified drawdowns: it tends to track BTC/ETH directionally but with larger swings, and it lacks a fresh narrative catalyst, so it more often bleeds or ranges in risk-off regimes rather than leading rallies. Correlation to BTC/ETH beta is high on the downside; independent upside typically requires a DeFi-sector or Bancor-specific catalyst.
+
+### Risk flags
+
+- **Microcap liquidity / venue concentration** — ~$29M cap with modest volume; derivatives depth concentrates on Binance and Hyperliquid, so an outage, delisting, or a single large actor on either venue can dislocate price and funding.
+- **Narrative dependence** — value accrual now hinges on Carbon DeFi / Fast Lane adoption; without a DeFi-sector catalyst BNT tends to underperform, making momentum entries unreliable.
+- **Perp funding dislocations** — thin OI and high available leverage let funding spike or flip sharply, which cuts both ways for carry/funding trades and can trigger liquidation cascades.
+- **Reputational overhang** — the 2022 impermanent-loss-protection pause still weighs on demand and can cap rallies relative to peers.
+- **Low unlock risk (favorable)** — supply is effectively fully circulating (market-cap/FDV approximately 1.0), so unlike many alts there is little emissions/unlock dilution overhang to trade around.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BNT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BNT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BNT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BNT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BNT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -5,11 +5,11 @@ created: 2026-04-09
 updated: 2026-07-16
 status: good
 aliases: ["VIRTUAL", "Virtuals", "virtual-protocol"]
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, derivatives, altcoins]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.virtuals.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 See [[virtuals-protocol]].
@@ -136,6 +136,45 @@ Users can stake VIRTUAL tokens for veVIRTUAL to participate in DAO governance an
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — VIRTUAL trades on BOTH Binance (VIRTUAL/USDT spot plus a USD-margined perpetual) and Hyperliquid (VIRTUAL-PERP, up to ~40-50x leverage). This is a deep, liquid two-venue market: the reported CEX spot depth and $100M+ daily volume support meaningful size, while dual perp venues give traders redundant execution paths. The Binance spot + perp pairing enables clean spot-versus-perp structures, and the Binance-vs-Hyperliquid split lets funding and basis be arbitraged across venues. Practically, execution and sizing should account for which venue leads price discovery at a given time, with larger clips split across both perp books to limit slippage during volatile AI-narrative moves.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — a liquid dual-venue perp with an active retail long base regularly sustains positive funding on VIRTUAL that a delta-neutral position can collect.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid VIRTUAL-PERP and the Binance perp can diverge, letting you go long the cheaper-funding venue and short the richer one.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp on the same asset makes a textbook spot-long/perp-short carry structure available when basis is positive.
+- [[crowded-long-funding-fade]] — VIRTUAL's reflexive AI-agent narrative produces euphoric crowded longs; persistently elevated funding with stretched price flags fade setups.
+- [[liquidation-cascade-fade]] — high leverage (~40-50x) on a high-beta alt makes VIRTUAL prone to liquidation cascades, and fading over-extended flushes into support can capture the rebound.
+- [[breakout-and-retest]] — narrative-driven, high-beta price action gives clean impulsive breakouts on VIRTUAL that can be entered on the retest with defined risk.
+
+**Volatility & regime character** — VIRTUAL is a high-beta AI-agent / AI-launchpad alt with strong reflexive, narrative-driven price action tied to the AI-agent sector. It behaves like a risk-on altcoin: amplified moves in both directions, high realized volatility, and elevated positive correlation to BTC/ETH beta during broad market swings, with idiosyncratic sector rotations (AI narrative flows) layered on top. Regime shifts between trending narrative phases and choppy mean-reverting ranges are pronounced.
+
+**Risk flags** — Narrative dependence: price is heavily tied to the AI-agent thesis, so sector sentiment reversals can drive sharp drawdowns. Supply overhang: circulating supply is roughly two-thirds of max supply, so emissions/unlock flow and buyback-and-burn dynamics affect float. Perp funding dislocations: crowded positioning can produce extreme funding and liquidation cascades given available leverage. Venue concentration: while dual-venue, a shift in which venue leads can widen spreads and basis during stress. High beta: deep drawdowns are common when broad crypto risk appetite falls.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=VIRTUAL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=VIRTUAL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=VIRTUAL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=VIRTUAL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=VIRTUAL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

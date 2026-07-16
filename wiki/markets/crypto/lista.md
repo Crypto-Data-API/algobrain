@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, liquidity, stablecoin]
+tags: [crypto, defi, liquidity, stablecoin, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["Helio Protocol", "LISTA", "Lista"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lista.org/"
-related: ["[[bnb-chain]]", "[[bnb]]", "[[cdp]]", "[[crypto-markets]]", "[[defi]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[maker]]", "[[stablecoin]]"]
+related: ["[[bnb-chain]]", "[[bnb]]", "[[cdp]]", "[[crypto-markets]]", "[[defi]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[maker]]", "[[stablecoin]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Lista DAO
@@ -235,6 +235,50 @@ LISTA has solid centralized liquidity for its cap (Binance, Bitget, KuCoin) plus
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** LISTA is tradable on **both** major venue types: [[bnb|Binance]] (spot **LISTA/USDT** plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**LISTA-PERP**, leverage up to ~40-50x). Binance spot anchors price discovery and provides the deepest CEX book, while Hyperliquid supplies an on-chain perp with transparent funding and order-book depth. This two-venue setup means LISTA has genuinely tradeable liquidity for a coin ranked ~#826 — deeper and cleaner than most peers in its cap cohort. In practice, the dual-venue structure supports cross-venue execution (route spot on Binance, hedge or express directional views on either perp) and enables funding/basis trades between the CEX perp and the Hyperliquid perp. Depth is still thin in absolute terms, so size positions to the book: large market orders will move price and widen slippage, favouring limit/passive fills and staged entries.
+
+**Applicable strategies:**
+- [[cash-and-carry]] — with LISTA spot on Binance and perps on two venues, buy spot and short the USD-margined perp to lock positive funding when the perp trades at a premium.
+- [[funding-rate-harvest]] — collect recurring funding on a delta-neutral LISTA book; a small-cap DeFi alt often runs persistently non-zero funding worth harvesting.
+- [[hl-vs-cex-funding-divergence]] — arb funding spreads between LISTA-PERP on Hyperliquid and the Binance USD-margined perp, which can diverge in a thin two-venue market.
+- [[liquidation-cascade-fade]] — LISTA's leverage plus BNB-correlated liquidation tail risk produces sharp forced-selling flushes on Hyperliquid; fade the overshoot once OI and funding reset.
+- [[oi-confirmed-trend]] — use Hyperliquid open-interest to confirm whether a LISTA move is fresh-money-driven (trend) or an unwind, filtering false breakouts in a low-float name.
+- [[breakout-and-retest]] — LISTA's thin book makes for clean, well-defined breakout levels; trade the break and the retest with tight invalidation to control slippage risk.
+
+**Volatility & regime character.** LISTA is a **high-beta BNB-chain DeFi small cap** — a leveraged proxy for BNB Chain activity and the Binance ecosystem. It correlates strongly with [[bnb|BNB]] and, more broadly, with [[bitcoin|BTC]]/[[ethereum|ETH]] risk beta: it tends to amplify market moves in both directions and sells off hard in risk-off tape. The embedded lisUSD CDP/liquid-staking mechanics add a distinct **liquidation-cascade reflexivity** — a fast BNB drawdown can cascade into protocol liquidations and feed back into LISTA price. Expect wide realized-volatility swings and low-float sensitivity to flows and emissions.
+
+**Risk flags:**
+- **Venue/liquidity concentration** — absolute depth is modest; Binance spot dominates price discovery, so any Binance-specific disruption or delisting risk is outsized.
+- **Emission dilution** — circulating supply is only ~32% of max (MC/FDV ~0.40); ongoing emissions/unlocks are a structural supply headwind.
+- **Narrative dependence** — tightly coupled to BNB Chain and Binance-ecosystem sentiment; loss of that narrative removes the main demand driver.
+- **Protocol/depeg linkage** — lisUSD peg stress or a liquidation wave in the CDP engine can transmit directly to LISTA price, unlike a pure governance token.
+- **Perp funding dislocations** — thin two-venue perp market can produce volatile, occasionally extreme funding, punishing carelessly sized carry/basis positions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=LISTA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=LISTA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=LISTA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=LISTA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=LISTA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, solana]
+tags: [crypto, solana, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins, derivatives]
 aliases: ["SKR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://solanamobile.com/"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Seeker
@@ -128,6 +128,57 @@ SKR is a **device-adoption call option** on Solana Mobile's consumer-hardware pu
 | **Twitter** | [@solanamobile](https://twitter.com/solanamobile) |
 | **Discord** | [https://discord.gg/solanamobile](https://discord.gg/solanamobile) |
 | **Whitepaper** | [https://solanamobile.com/whitepaper](https://solanamobile.com/whitepaper) |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SKR is a **PERP-FIRST** asset. The deepest and most continuous market is the **SKR-PERP** [[perpetual-futures|perpetual]] on **[[hyperliquid|Hyperliquid]]** (leverage up to ~40-50x); SKR is **not listed on Binance**, and spot access is limited/offshore (Kraken, Upbit, KuCoin, Crypto.com plus Solana DEXs). Because there is no deep, unified spot venue and no Binance flow, price discovery and most leveraged flow concentrate on the HL perp. Practically this means:
+
+- **Depth is thin relative to large caps.** With only moderate turnover on a ~$55M cap, the L2 book on HL can be shallow away from the mid; large orders should be sized to book depth and worked (limit/TWAP) rather than sent as market sweeps.
+- **Venue concentration shapes execution.** With flow funnelled into one perp, marks can gap on news/unlocks and funding can dislocate; size positions assuming slippage and the possibility of a fast liquidation cascade.
+- **Cross-venue arbitrage is constrained.** Fragmented offshore spot and no Binance leg make classic spot/CEX hedges harder to execute cleanly than for major-listed coins.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — as a PERP-first small cap, SKR funding on HL can run persistently rich or negative around unlocks/news; harvesting the funding side (delta-hedged where possible) monetises that carry.
+- [[crowded-long-funding-fade]] — device-launch or narrative pumps can push crowded long positioning and sharply positive funding on the HL perp; fading over-extended longs into elevated funding is a repeatable edge.
+- [[liquidation-cascade-fade]] — thin book plus up-to-50x leverage makes SKR-PERP prone to liquidation cascades; fading the flush after forced selling exhausts is a classic small-cap perp play.
+- [[post-liquidation-rebound]] — after a cascade wipes leveraged positions, the snap-back rebound on the HL perp is often tradable given how concentrated the flow is.
+- [[oi-price-exhaustion]] — with OI observable via the HL feed, rising open interest against a stalling price flags an exhausted move ripe for reversal on this venue-concentrated name.
+- [[token-unlock-supply-event]] — with MC/FDV ~0.62 and ~3.9B SKR not yet circulating (uncapped max supply), scheduled unlocks/emissions are recurring, tradable supply-shock catalysts.
+
+### Volatility & regime character
+
+SKR is a **small-cap Solana-ecosystem infrastructure token** (Web3-mobile / consumer-hardware narrative), not a large-cap or a stablecoin. It behaves as a **high-beta altcoin**: it amplifies BTC/ETH risk-on/risk-off moves, and its idiosyncratic drivers (Seeker device sell-through, TEEPin adoption, unlock schedule) add narrative-dependent volatility on top of that beta. Expect wide swings — the compressed ATH/ATL window and ~85% drawdown from the January-2026 high are characteristic — with correlation to majors rising sharply during broad de-risking and decoupling on device/ecosystem news.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** No Binance listing and fragmented offshore spot mean flow concentrates on the single HL perp; thin depth raises slippage and cascade risk.
+- **Token unlocks / emissions:** MC/FDV ~0.62 with **uncapped** max supply — a persistent dilution overhang and recurring unlock catalysts to track.
+- **Narrative dependence:** Value rests on real-world Seeker device adoption and developer uptake; slow execution undermines demand independent of market beta.
+- **Perp funding dislocations:** Small float plus high leverage can drive extreme funding swings and liquidation cascades around news/unlocks — verify live funding/OI before sizing leveraged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SKR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SKR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SKR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SKR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SKR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

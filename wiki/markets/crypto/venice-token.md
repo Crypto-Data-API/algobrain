@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto]
+tags: [ai-trading, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["VVV", "Venice AI"]
 entity_type: protocol
 founded: 2024
 headquarters: "USA (Venice.ai; founded by Erik Voorhees)"
 website: "https://venice.ai/"
-related: ["[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]"]
+related: ["[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Venice Token (VVV)
@@ -315,6 +315,50 @@ Venice's edge: a **real consumer product + a usage-linked token mechanic** that 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** VVV is a **PERP-FIRST asset**: it trades as **VVV-PERP on [[hyperliquid|Hyperliquid]]** (up to ~40-50x leverage) but is **NOT listed on Binance spot** — spot access is limited/offshore (Kraken, KuCoin, Upbit, Crypto.com, plus [[base|Base]] DEXs like Aerodrome/Uniswap). Because there is no deep tier-1 spot venue, **directional flow, price discovery, and hedging concentrate on the HL perp**, where mark, funding, and OI are the primary read on positioning. Depth on VVV-PERP is thin relative to majors, so large orders move price and slip; size positions to the visible L2 book rather than notional, use limit/scaled entries, and treat the high available leverage as a liquidation-risk amplifier rather than a sizing invitation. The fragmented spot picture also means basis/cash-and-carry legs must be sourced from offshore/DEX venues, adding execution and inventory friction.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — with flow concentrated on the HL perp and no easy spot short, funding can run persistently rich after AI-narrative rallies; harvest the premium while hedged.
+- [[crowded-long-funding-fade]] — VVV's outlier +1,500%-from-ATL rally makes it a magnet for crowded, over-leveraged longs; fade extended funding spikes into pullbacks (the -11.9%/7d whipsaw is the template).
+- [[liquidation-cascade-fade]] — thin perp depth plus high leverage produces sharp liquidation flushes; fade forced-liquidation overshoots on the HL book.
+- [[oi-confirmed-trend]] — rising OI alongside price confirms real perp-driven trend legs vs hollow squeezes on this perp-first name.
+- [[volatility-breakout]] — high-beta AI token with staked-float scarcity; range compressions resolve into fast expansion moves well-suited to volatility-triggered breakouts.
+- [[narrative-trading]] — VVV is a pure decentralized-AI/inference-basket vehicle; trade it on AI-agent-integration catalysts (e.g. OpenClaw) and rotation into/out of the AI narrative.
+
+**Volatility & regime character.** VVV is a **high-beta AI-infrastructure / decentralized-AI (DeFi-adjacent) altcoin** with memecoin-like reflexivity around narrative catalysts — an extreme outlier that rallied ~1,500% off its ATL while peers lagged. It carries strong positive beta to broad crypto risk (BTC/ETH), but its dominant driver is **AI-narrative sentiment and the decentralized-AI basket** (TAO, RENDER, AKT), so it can decouple hard from majors in both directions. Staking locks float, structurally amplifying both rallies and squeezes; expect elevated realized volatility and sharp mean-reversion after momentum extensions.
+
+**Risk flags.**
+- **Venue/liquidity concentration** — perp-first with no Binance spot; execution and price discovery hinge on a single thin HL perp book, and depth is limited.
+- **Perp funding dislocations** — with shorting concentrated on the perp, funding can spike/invert violently around rallies and squeezes; watch for crowded-long funding blowoffs and post-flush snapbacks.
+- **Token unlocks / emissions** — uncapped nominal supply (6M VVV/yr emission post-Feb-2026 cut); the deflation thesis depends on burns/buybacks continuing to outrun issuance, and MC/FDV ~0.58 signals a dilution overhang.
+- **Narrative dependence** — demand is tightly coupled to the AI-agent/inference narrative; AI-token fatigue or centralized-inference price cuts can compress the thesis quickly.
+- **Key-man / regulatory** — founder concentration (Erik Voorhees) and the uncensored-AI positioning add idiosyncratic and regulatory tail risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=VVV` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=VVV` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=VVV&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=VVV&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=VVV"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

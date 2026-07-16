@@ -3,14 +3,14 @@ title: "Quant"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: excellent
-tags: [company, crypto]
+status: review
+tags: [company, crypto, altcoins]
 aliases: ["Overledger", "QNT", "Quant Network"]
 entity_type: protocol
 founded: 2018
 headquarters: "London, UK"
 website: "https://www.quant.network"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[ecb]]", "[[ethereum]]", "[[real-world-assets]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ecb]]", "[[ethereum]]", "[[real-world-assets]]", "[[narrative-trading]]", "[[momentum-investing]]", "[[event-driven]]", "[[cryptodataapi]]"]
 ---
 
 # Quant
@@ -300,6 +300,65 @@ Quant's differentiator is that it does **not** ask institutions to migrate to a 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+QNT is best treated as a **spot-primarily mid-cap** enterprise/interoperability token: liquid CEX spot exists, but there is **no deep native perpetual venue**, so leverage and short access are structurally limited. This shapes everything below — it trades as a directional spot/narrative vehicle, not a leverage or basis instrument.
+
+### Venues & Liquidity
+
+- **Spot (primary).** Binance (QNT/USDT) is the deepest venue, with additional CEX spot on Kraken (QNT/USD), Bitget, KuCoin and Crypto.com, plus on-chain QNT/WETH on Uniswap V2/V3 ([[ethereum]]). Regional KRW/EUR pairs add periodic flow.
+- **No deep native perp / leverage venue.** QNT is a **spot-primarily** asset — there is **no Hyperliquid perp**, and any CEX perp is thin/low-OI rather than a liquid, high-funding market. Shorting and leverage are therefore constrained to spot-margin borrow (limited, expensive) rather than a deep perp book.
+- **Liquidity implications for sizing.** With ~$9.8M of 24h volume against a ~$1.03B cap (**Vol/MC ~1%**, 2026-06-20) on a tiny ~14.6M float, QNT is among the least-liquid top-65 names. Size for a market doing **~$10M/day, not a $1B asset**: use limit orders, expect slippage and gappy fills on size, and express risk in **dollars, not tokens** (the ~$70 unit price flatters per-token volatility).
+
+### Applicable Strategies
+
+Spot-appropriate approaches only — QNT's thin float and lack of a liquid perp make it a directional/narrative name, not a carry vehicle:
+
+- [[narrative-trading]] — QNT is the purest liquid **ISO 20022 / CBDC / bank-chain** narrative proxy; rotate in on ECB digital-euro, Fusion-adoption and tokenized-deposit (GBTD) headlines, out as the story fades.
+- [[momentum-investing]] — catalyst-driven trend/momentum: the tiny float means QNT can trend hard on adoption news; ride confirmed momentum with pre-defined exits.
+- [[mean-reversion]] — thin liquidity produces sharp spikes and air-pockets; fade over-extended narrative pops back toward range with tight risk.
+- [[swing-trading]] — multi-day positioning around dated catalysts (Fusion metrics, ECB decisions, GBTD completion) suits QNT's episodic, headline-driven tape.
+- [[dca-strategy]] — for accumulation-thesis holders, dollar-cost averaging smooths entry into an illiquid, gappy book better than trying to size in at once.
+- [[event-driven]] — treat Fusion/CBDC/tokenized-deposit announcements as discrete, tradeable events with pre-set entries and exits.
+
+**Not readily available:** perp **funding / basis / carry** strategies (e.g. cash-and-carry, funding harvest) are **not applicable** — there is no liquid QNT perp to short against spot, so no reliable funding or basis to capture, and short/leverage exposure is limited to shallow spot-margin borrow.
+
+### Volatility & Regime Character
+
+- **Mid-cap, lower-beta than memecoins.** As an enterprise/interoperability token, QNT is **narrative-driven** (enterprise / RWA / interoperability / CBDC) rather than pure attention-driven; it typically shows lower beta and less reflexive blow-off behaviour than memecoins, but is more volatile than majors.
+- **Narrative-clustered volatility.** Between catalysts the tape drifts on thin turnover; realized volatility clusters around CBDC / tokenized-deposit / Fusion news, where the tiny float amplifies both spikes and reversals.
+- **Regime context (2026-06-20).** Established Bear Market with extreme fear (Fear & Greed = 23); QNT sits -83% from its 2021 ATH — a low-liquidity, risk-off backdrop that magnifies gap risk in both directions. See [[crypto-markets]].
+
+### Risk Flags
+
+- **Thinner liquidity than majors.** Vol/MC ~1% and a ~14.6M float mean material slippage on size and sharp air-pockets; not a name to size aggressively or exit in a hurry.
+- **Spot-only shorting constraint.** No liquid perp → hard to hedge or short efficiently; downside expression is limited and expensive.
+- **Narrative / execution risk.** Value accrual is opaque (fiat enterprise licensing, no on-chain fee tape); the CBDC/bank-chain thesis depends on multi-year political and institutional timelines that can stall or re-rate down.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+Use Binance-spot market-data and the backtesting archive (no perp/funding endpoints apply — QNT has no liquid perp venue).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=QNTUSDT` — current price
+- `GET /api/v1/market-data/ticker/24hr?symbol=QNTUSDT` — 24h ticker stats (volume, range, change)
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=QNTUSDT&interval=1d&limit=1000` — OHLCV klines
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+- `GET /api/v1/backtesting/klines` — deep kline archive for backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=QNTUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
 ---
 

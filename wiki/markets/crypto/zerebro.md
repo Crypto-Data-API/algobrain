@@ -3,13 +3,13 @@ title: "Zerebro"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, memecoins, altcoins]
 aliases: ["ZEREBRO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zerebro.org"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]"]
 ---
 
 # Zerebro
@@ -127,6 +127,56 @@ Driven by Retrieval-Augmented Generation (RAG) and high-entropy human data, Zere
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZEREBRO is a **PERP-FIRST** asset: it trades on **Hyperliquid** as **ZEREBRO-PERP** (leverage up to ~40-50x) but is **not listed on Binance**. Spot access is limited and offshore (Kraken, KuCoin, and the Orca DEX pool on Solana), so most tradable flow — price discovery, funding, and open interest — concentrates on the Hyperliquid perp rather than on fragmented spot books. Depth is thin relative to majors given the sub-$40M cap and ~$8M daily volume, so the L2 book can be shallow and slippage-prone at size. Practical implications: size positions to the HL book (not to headline spot volume), lean on limit/maker execution to avoid crossing wide spreads, and treat the single-venue concentration as a structural constraint on how large a position can be entered or exited cleanly.
+
+### Applicable strategies
+
+- [[narrative-trading]] — ZEREBRO is an AI-agent memecoin whose price is driven by the AI/agent narrative cycle rather than fundamentals; positioning around narrative rotation is a primary edge.
+- [[funding-rate-harvest]] — as a perp-first, retail-favored memecoin, ZEREBRO-PERP funding can run persistently rich; collecting funding on the crowded side is a recurring opportunity.
+- [[crowded-long-funding-fade]] — narrative-driven long crowding on the HL perp shows up as extended positive funding, setting up fades when leverage gets one-sided.
+- [[liquidation-cascade-fade]] — thin depth plus high leverage makes ZEREBRO prone to sharp liquidation flushes; fading the overshoot after a cascade can capture the rebound.
+- [[oi-confirmed-trend]] — HL open-interest data helps distinguish real trend participation from spot-less noise, confirming breakouts before committing size.
+- [[volatility-breakout]] — memecoin reflexivity produces episodic volatility expansions; breakouts from compression on the HL perp are tradable with defined risk.
+
+### Volatility & regime character
+
+ZEREBRO is a **high-beta AI memecoin** with strong reflexive behavior: it rallies hard on AI-agent narrative waves and bleeds just as fast when attention rotates away (down ~96% from its 2025 ATH). Beta to BTC/ETH is high on the downside — broad risk-off drags it disproportionately — but upside moves are largely narrative-idiosyncratic and decoupled from majors, tracking the AI/memecoin sub-sector more than BTC direction. Expect memecoin-grade realized volatility and low mean-reversion half-life during momentum phases.
+
+### Risk flags
+
+- **Venue concentration:** liquidity is centralized on the Hyperliquid perp with no Binance listing and thin offshore spot — single-venue outages, delistings, or depth shocks materially affect exitability.
+- **Liquidity/depth:** small market cap and modest daily volume mean shallow books and high slippage at size.
+- **Narrative dependence:** price is heavily contingent on the AI-agent memecoin narrative; attention rotation can drive rapid, sustained drawdowns.
+- **Perp funding dislocations:** crowded, leverage-driven positioning can push funding to extremes and trigger liquidation cascades on thin depth.
+- **Memecoin reflexivity:** sentiment-driven feedback loops amplify both rallies and collapses, making risk hard to size on fundamentals.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZEREBRO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZEREBRO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZEREBRO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZEREBRO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZEREBRO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

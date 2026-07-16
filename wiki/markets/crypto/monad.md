@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins, ethereum]
 aliases: ["MON", "Monad Labs"]
 entity_type: protocol
 founded: 2022
 headquarters: "New York, USA (Monad Labs / Monad Foundation)"
 website: "https://www.monad.xyz/"
-related: ["[[coinbase]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[solana]]"]
+related: ["[[coinbase]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Monad
@@ -213,6 +213,55 @@ Monad is the highest-quality-funded new-L1 launch of the cycle (~$244M raised, P
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MON is a **perp-first asset**: it is tradable on [[hyperliquid|Hyperliquid]] (**MON-PERP**, up to ~40-50x leverage) but is **not listed on Binance**, and spot access is limited to offshore/regional venues (Upbit KRW, Bitget, KuCoin, Crypto.com) plus the Coinbase public-sale venue. As a result, price discovery and speculative flow concentrate on the HL perp rather than deep centralized spot books. Book depth is moderate for a small-cap tier — adequate for retail-to-mid clip sizes but thin enough that larger orders move the mark, so execution should lean on limit/passive fills and position sizing must assume slippage and gappy liquidity around catalysts. The absence of a Binance venue removes the usual dominant CEX price anchor, making the HL mark the reference and amplifying funding/basis dislocations.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — as a low-float launch name, MON-PERP funding can run persistently positive when perp longs crowd a thin spot base; harvesting the carry is a core perp-first play.
+- [[crowded-long-funding-fade]] — narrative-driven long crowding around unlock/benchmark catalysts pushes funding to extremes on the single dominant HL venue, setting up fade entries.
+- [[liquidation-cascade-fade]] — thin depth and high leverage make MON prone to sharp liquidation flushes that overshoot, offering post-cascade rebound fades on the HL perp.
+- [[oi-confirmed-trend]] — with flow concentrated on one perp, open-interest build alongside price is a clean confirmation signal for directional MON moves.
+- [[narrative-trading]] — MON trades as the parallel-EVM / new-L1 launch bellwether, so positioning around the sector narrative and Paradigm-portfolio beta is central.
+- [[token-unlock-supply-event]] — 27% team + 19.7% investor vesting with first major cliffs ~late 2026 makes scheduled unlocks a recurring, tradable supply-overhang event.
+
+### Volatility & regime character
+
+MON is a **high-beta, low-float infrastructure (L1) altcoin** with pronounced launch-cycle reflexivity: a low circulating float against a large FDV amplifies both upside squeezes and post-hype decay. It behaves as a high-beta risk-appetite proxy — strongly correlated to BTC/ETH direction but with a larger amplitude — and additionally carries idiosyncratic "new-chain narrative" beta tied to the parallel-EVM basket (Sei, Sui/Aptos adjacents). Expect elevated realized volatility and outsized drawdowns during risk-off regimes.
+
+### Risk flags
+
+- **Venue concentration** — no Binance listing and thin offshore spot mean the HL perp is the de facto price venue; a venue outage or listing change is an acute liquidity risk.
+- **Unlock / emissions overhang** — MC/FDV ~0.12 with multi-year team + investor vesting cliffs (first ~late 2026) creates structural sell pressure.
+- **Narrative dependence** — priced as a sector bellwether; "ghost chain" risk if app/TVL traction stalls versus MegaETH, Sei, and Ethereum L2 scaling.
+- **Perp funding dislocations** — with a single dominant perp venue and a limited spot anchor, funding can dislocate sharply and squeeze crowded positioning in either direction.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MON` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MON` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MON&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MON&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MON"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

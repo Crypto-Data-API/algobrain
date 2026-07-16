@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [arbitrage, crypto, defi]
+tags: [arbitrage, crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["CRV", "Curve", "Curve DAO Token", "Curve Finance", "Curve-Finance"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://curve.finance"
-related: ["[[2023-07-curve-finance-exploit]]", "[[crypto-markets]]", "[[curve-finance]]", "[[curve-gauge-wars-arbitrage]]", "[[ethereum]]", "[[hyperliquid]]", "[[stablecoins]]"]
+related: ["[[2023-07-curve-finance-exploit]]", "[[crypto-markets]]", "[[curve-finance]]", "[[curve-gauge-wars-arbitrage]]", "[[ethereum]]", "[[hyperliquid]]", "[[stablecoins]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[pairs-trading]]", "[[funding-rate-harvest]]"]
 ---
 
 # Curve DAO (CRV)
@@ -328,6 +328,54 @@ CRV's edge vs Uniswap is purpose-built stable/pegged depth and a richer fee/emis
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CRV trades on **both** major perp venues, making it a genuine two-venue market. On **Binance** it has deep **spot** (CRV/USDT) plus a **USD-margined perpetual**; on **[[hyperliquid|Hyperliquid]]** it lists as **CRV-PERP** with leverage up to ~40-50x. Order-book depth is solid for a mid-cap DeFi token, and the dual-venue setup means large tickets can be split across Binance and Hyperliquid to limit slippage, while the redundancy keeps execution reliable even when one venue's book thins during volatility. The two-venue structure also creates a standing **CEX-vs-DEX funding and basis** relationship to monitor, since funding and mark can diverge between Binance and Hyperliquid around headline-driven flow.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — CRV's leveraged-liquidation history produces persistent funding extremes; collecting funding on the crowded side is a recurring, higher-signal edge here than on quieter mid-caps.
+- [[hl-vs-cex-funding-divergence]] — with both a Binance perp and CRV-PERP on Hyperliquid, funding can dislocate between venues around founder-leverage and governance headlines, opening a delta-neutral capture.
+- [[crowded-short-funding-fade]] — CRV frequently carries crowded shorts (emissions grind, ATL prints); persistently negative funding flags squeeze-prone positioning to fade.
+- [[liquidation-cascade-fade]] — CRV's signature move is the leverage-driven cascade (Egorov loan episodes); fading over-extended forced selling into support is a defining setup.
+- [[pairs-trading]] — CRV is the high-beta laggard of the DeFi blue-chip basket (AAVE, UNI, MKR/SKY), suiting long/short mean-reversion against a stronger peer.
+- [[oi-confirmed-trend]] — because CRV history is dominated by leverage, open-interest confirmation separates real trend from short-lived headline spikes.
+
+### Volatility & regime character
+
+CRV is a **high-beta mid-cap DeFi (infra) token** — a stablecoin-liquidity and lending protocol token rather than a memecoin. It behaves as a DeFi blue-chip beta that amplifies broad [[crypto-markets|crypto-market]] moves, typically the laggard of the AAVE/UNI/MKR group: it under-rallies in risk-on and over-sells in risk-off. Correlation to BTC/ETH beta is high, with idiosyncratic spikes layered on top from founder-leverage and governance events. Realized volatility is elevated versus large-caps, and reflexive liquidation dynamics (soft-liquidation collateral overhangs, veCRV lock/unlock, crvUSD peg headlines) make funding and OI extremes unusually informative.
+
+### Risk flags
+
+- **Emissions / supply overhang** — MC/FDV ~0.64; ongoing gauge emissions create structural sell pressure that can grind perp longs down over time.
+- **Founder key-man & leverage risk** — Michael Egorov's large CRV-collateralized borrowing has repeatedly threatened cascade liquidations; headline gaps can whipsaw leveraged positions.
+- **Funding dislocations** — dual-venue funding can flip sharply around headlines; crowded-side funding and CEX-vs-DEX divergence require active monitoring.
+- **Narrative / governance dependence** — value-accrual thesis hinges on revenue-share and dev-grant votes actually executing; unresolved votes leave directional exposure fragile.
+- **Smart-contract / peg tail risk** — the 2023 Vyper exploit precedent plus crvUSD/Llamalend surface area can trigger sudden repricings not reflected in perp positioning.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CRV` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CRV` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CRV&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CRV&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CRV"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

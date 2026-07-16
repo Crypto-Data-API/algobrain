@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["FLOKI", "Floki Inu"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized"
 website: "https://www.floki.com/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[meme-coins]]", "[[mog-coin]]", "[[narrative-trading]]", "[[shiba-inu]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[fear-and-greed-index]]", "[[meme-coins]]", "[[mog-coin]]", "[[narrative-trading]]", "[[shiba-inu]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # FLOKI
@@ -242,6 +242,54 @@ FLOKI runs at **near-full float** (~9.65T of a fixed 10T max in circulation, ~0.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FLOKI trades as a deep, liquid two-venue market. On **Binance** it is available both **spot** (FLOKI/USDT) and as a **USD-margined perpetual**, making it one of the more institutionally accessible dog-coins. On **Hyperliquid** it lists as **FLOKI-PERP** (ticker `kFLOKI`, price-scaled by 1,000) with leverage up to roughly **40-50x**. Because both a large CEX and the leading on-chain perp DEX carry the name, resting depth is meaningfully better than for most sub-#150 memecoins — spot on Binance anchors price discovery while the two perp order books allow directional traders to size up without single-venue slippage. The dual-venue setup also means execution can be split across books and that any [[funding-rate|funding]] or basis dislocation between Binance and Hyperliquid is directly tradable rather than academic.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — FLOKI runs perps on both Binance and Hyperliquid, so funding frequently diverges between the two books; capture the spread by going long the cheaper-funding venue and short the richer one.
+- [[crowded-long-funding-fade]] — dog-coin rallies pull retail into leveraged longs, pushing FLOKI funding sharply positive; fade the crowded long once funding runs hot.
+- [[liquidation-cascade-fade]] — high-beta memecoin leverage makes FLOKI prone to sharp liquidation flushes; fading the over-extended cascade wick is a recurring setup on the two-venue perp market.
+- [[narrative-trading]] — FLOKI is dog-coin/GameFi beta and moves on Valhalla, ETP and DOGE/SHIB rotation headlines; trade the narrative rotation rather than isolated fundamentals.
+- [[breakout-and-retest]] — memecoin regimes trend hard once they leave a range; deep Binance+Hyperliquid depth makes breakout-and-retest entries executable at size.
+- [[oi-confirmed-trend]] — cross-referencing Hyperliquid open interest against price separates FLOKI moves backed by real positioning from thin squeezes.
+
+### Volatility & regime character
+
+FLOKI is a **high-beta memecoin** with pronounced reflexivity: it amplifies broad crypto risk-on/risk-off swings and rallies (and sells off) harder than large caps. Beta is strongest to the **dog-coin basket** ([[dogecoin|DOGE]], [[shiba-inu|SHIB]]) and to overall memecoin risk appetite, with high directional correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] beta during regime shifts but far larger amplitude. Secondary regime exposure comes through GameFi/BNB-ecosystem narratives via Valhalla. Expect attention-driven, momentum-then-mean-reversion behavior rather than steady trend.
+
+### Risk flags
+
+- **Narrative dependence** — value is heavily attention-driven; FLOKI can gap on DOGE/SHIB rotation, Valhalla, or ETP headlines and give it all back once flow fades.
+- **Perp funding dislocations** — leveraged dog-coin runs push funding to extremes on both venues; carry can flip violently and squeeze crowded positioning.
+- **Liquidity/venue concentration** — despite two-venue depth, the bulk of spot price discovery sits on Binance; a listing/venue change there would sharply reduce accessible depth.
+- **Market-maker dependence** — DWF Labs backing is both support and overhang; large MM-held inventory can pressure price independent of retail flow.
+- **Brand-confusion / scam surface** — impersonator tokens (e.g. the June 2026 USDC-branded confusion) create event risk and headline noise around the FLOKI ticker.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=kFLOKI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=kFLOKI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=kFLOKI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=kFLOKI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=kFLOKI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

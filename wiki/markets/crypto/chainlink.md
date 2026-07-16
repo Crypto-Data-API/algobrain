@@ -3,14 +3,14 @@ title: "Chainlink"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: excellent
-tags: [altcoins, crypto, defi]
+status: review
+tags: [altcoins, crypto, defi, perpetual-futures, funding-rate, hyperliquid, derivatives]
 aliases: ["Chainlink Labs", "LINK"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://chain.link/"
-related: ["[[aave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[gmx]]", "[[hyperliquid]]", "[[lido]]", "[[narrative-trading]]", "[[pyth-network]]", "[[restaking]]", "[[uniswap]]"]
+related: ["[[aave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[funding-rate-arbitrage]]", "[[gmx]]", "[[hyperliquid]]", "[[hl-vs-cex-funding-divergence]]", "[[lido]]", "[[narrative-trading]]", "[[pyth-network]]", "[[restaking]]", "[[crypto-beta-rotation]]", "[[uniswap]]"]
 ---
 
 # Chainlink
@@ -431,6 +431,61 @@ Chainlink is deployed across 20+ blockchains. LINK token is available on virtual
 - 2026-01 — 24/5 US Equities Data Streams launch; Confidential Compute early access slated for 2026
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LINK is one of the most broadly listed large-cap alts, and both of its primary trading venues for active/leveraged flow are:
+
+- **[[binance|Binance]] — spot + USDⓈ-M perp.** LINK/USDT is the global price-leading spot pair; the LINKUSDT USDⓈ-M perpetual is a top-tier alt contract with deep books and large open interest. Binance perp leverage is available up to the exchange's altcoin maximum (tiered down as position size grows), so effective usable leverage for size is well below the headline cap.
+- **[[hyperliquid|Hyperliquid]] — LINK-PERP.** The reference on-chain perp for LINK, with hourly funding and a distinct retail base that produces funding dislocations vs the CEX venues. Deep enough that LINK OI/funding on Hyperliquid is watched alongside Binance as an alt-risk-appetite gauge.
+- **Liquidity depth (qualitative).** For a ~$5.9B-cap alt, LINK is high-liquidity: reference spot pairs (Binance LINK/USDT, Coinbase LINK/USD, Upbit LINK/KRW) plus [[uniswap|Uniswap]] v3 LINK/WETH on-chain. But volume/MCAP turnover sits around ~3% (~$190M on ~$5.9B, 2026-06-20) — middling for a large alt, so block-sized entries can move price; scale entries and prefer limit execution. See [[chainlink#Market Structure & Derivatives|Market Structure & Derivatives]] for the fuller venue map.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — LINK-PERP carries deep OI on both Binance and Hyperliquid; long spot / short perp harvests funding when perp trades rich to spot, a clean market-neutral carry on a liquid alt.
+- [[hl-vs-cex-funding-divergence]] — LINK is listed as a perp on both Binance and Hyperliquid, so the venues' funding schedules diverge; long the venue paying you, short the venue charging you, until convergence.
+- [[cash-and-carry]] — dated-futures contango on a top-tier alt lets carry desks buy spot and short the future at the basis, collecting the premium into convergence.
+- [[crowded-long-funding-fade]] — when LINK perp funding and account long/short ratio go one-sided (common on "partnership news" spikes), fade the crowded side to collect carry and position for mean-reversion.
+- [[crypto-beta-rotation]] — LINK's ~1.2–1.5x BTC beta (higher to DeFi-specific rallies) makes it a natural candidate to cut or hedge in risk-off / high-correlation macro windows.
+- [[narrative-trading]] — LINK is highly narrative-sensitive (oracle / RWA / DeFi cycles, institutional-partnership flow); trade the prevailing story early, but note the well-known "sell the partnership news" fade (see [[chainlink#Trading Playbook|Trading Playbook]]).
+
+### Volatility & regime character
+
+LINK is a large-cap oracle/interoperability **infrastructure** token, not a memecoin — it trades as levered [[defi|DeFi]]/RWA beta rather than an idiosyncratic attention asset. Realized volatility is moderate for the sector: correlated to BTC/ETH beta (~1.2–1.5x BTC, higher into DeFi-specific rallies), with additional narrative sensitivity to oracle-demand, RWA-tokenization and DeFi-TVL cycles. Its defining microstructure quirk is that institutional/partnership headlines (Swift, CRE adopters, banks) routinely spike-then-fade, so LINK often decouples from news flow — strong adoption news, lagging price. In the current extreme-fear / established-bear tape (Fear & Greed 22, 2026-06-20), LINK has held up better than most large alts but remains ~85% below its cycle high, and alt liquidity is thin enough that downside gaps are common.
+
+### Risk flags (trading-relevant)
+
+- **Treasury/emission overhang** — ~25% of the fixed 1B supply (~252M LINK) sits with Chainlink Labs / ecosystem and is released *discretionarily* (node subsidies, BUILD, grants, team comp) rather than on a fixed cliff; monitor known-affiliated wallets for release-driven sell pressure. Staking (45M in v0.2) and the Chainlink Reserve pull the other way. See [[chainlink#Token Supply Overhang|Token Supply Overhang]].
+- **Narrative dependence** — the bull thesis leans heavily on oracle-demand and institutional-adoption narratives that have repeatedly failed to translate into token price ("sell the partnership news"); positioning is exposed to narrative reversal even when fundamentals improve.
+- **Venue / funding concentration** — active leveraged flow concentrates on Binance and Hyperliquid perps, so funding/OI can crowd one-sided and gap on liquidations; size for [[liquidation-risk|liquidation]] cascades and check funding before leveraged entries.
+- **Beta / correlation risk** — as a high-beta DeFi proxy, LINK amplifies BTC/ETH drawdowns in risk-off regimes; a directional LINK long is implicitly a levered market-beta bet.
+
+## Getting the Data (CryptoDataAPI)
+
+Verified [[cryptodataapi|CryptoDataAPI]] endpoints for trading LINK across Binance spot, Binance perp, and Hyperliquid perp (auth via `X-API-Key` header).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=LINKUSDT` — current Binance spot price
+- `GET /api/v1/market-data/ticker/24hr?symbol=LINKUSDT` — 24hr spot ticker stats
+- `GET /api/v1/derivatives/summary?coin=LINK` — combined Binance + Hyperliquid funding/OI snapshot
+- `GET /api/v1/derivatives/funding-rates?coin=LINK` — cross-exchange funding (Binance + Hyperliquid) in one response
+- `GET /api/v1/hyperliquid/summary?coin=LINK` — all-in-one Hyperliquid perp data (price, funding, OI)
+- `GET /api/v1/hyperliquid/l2-book?coin=LINK` — Hyperliquid L2 order-book depth snapshot
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=LINKUSDT&interval=1d&limit=200` — Binance spot OHLCV
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=LINKUSDT` — Binance perp funding history
+- `GET /api/v1/hyperliquid/funding-rates?coin=LINK&limit=100` — Hyperliquid current + historical funding
+- `GET /api/v1/hyperliquid/candles?coin=LINK&interval=1h&limit=1000` — Hyperliquid perp OHLCV
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/derivatives/summary?coin=LINK"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-hyperliquid]], [[cryptodataapi-market-data]].
 
 ## See Also
 

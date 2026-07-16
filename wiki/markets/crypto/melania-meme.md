@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme, solana]
+tags: [crypto, meme, solana, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["MELANIA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://melaniameme.com/"
-related: ["[[crypto-markets]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[memecoin-mania]]", "[[perpetual-futures]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[memecoin-mania]]", "[[perpetual-futures]]", "[[solana]]", "[[hyperliquid]]", "[[funding-rate]]", "[[narrative-trading]]", "[[funding-rate-harvest]]"]
 ---
 
 # Melania Meme
@@ -256,6 +256,54 @@ Melania memes are digital collectibles intended to function as an expression of 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MELANIA is a **perp-first asset**: it trades as **MELANIA-PERP on [[hyperliquid]]** with leverage up to **~40-50x**, but is **not listed on Binance**. Centralized spot access is limited and largely offshore (Kraken, KuCoin, Crypto.com), with the rest of on-chain flow on [[solana]] DEXs. Because there is no deep, unified spot venue, price discovery and speculative flow concentrate on the HL perp, and its order book is where most tradable depth sits. That depth is thin relative to majors, so book liquidity/depth is shallow and slippage rises quickly on size — execution should assume wide effective spreads, use limit/passive fills, and size positions conservatively given how fast the HL book can gap on news.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — perp-first, event-driven memecoin with frequent one-sided positioning makes MELANIA-PERP funding rich and harvestable when the crowd piles in.
+- [[crowded-long-funding-fade]] — political-brand attention spikes drive crowded longs and richly positive funding; fading the overcrowded side is a recurring setup.
+- [[liquidation-cascade-fade]] — thin HL depth plus high leverage produces sharp liquidation cascades that overshoot, offering mean-reverting fade entries.
+- [[meme-coin-cycle]] — MELANIA is a canonical PolitiFi meme whose launch-spike-then-decay arc fits the memecoin-cycle playbook directly.
+- [[narrative-trading]] — with no fundamentals, price tracks the Melania political-brand narrative, so trades are expressions of attention/narrative momentum.
+- [[news-trading]] — PolitiFi tokens react violently to political headlines and brand actions, making discrete news events the primary tradable catalyst.
+
+### Volatility & regime character
+
+MELANIA is a **high-beta memecoin** exhibiting strong **reflexivity** (attention drives price drives attention) and event-driven, personality-brand-linked volatility. It behaves as a risk-on speculative satellite: broadly correlated to BTC/ETH beta in aggregate risk-on/risk-off regimes, but with far larger amplitude and idiosyncratic, news-driven decoupling around political catalysts. In risk-off tape it de-rates faster than majors; in euphoric rotations it can spike far harder.
+
+### Risk flags
+
+- **Venue concentration** — leveraged flow is concentrated on a single HL perp with no Binance backstop; a HL outage, funding dislocation, or depth withdrawal has outsized impact.
+- **Liquidity fragility** — shallow spot and thin perp depth mean large orders move price and stops can slip badly during cascades.
+- **Narrative dependence** — value rests entirely on political-brand attention; waning interest or controversy can crater demand with no fundamental floor.
+- **Perp funding dislocations** — crowded one-sided positioning around news can drive extreme funding and liquidation cascades in either direction.
+- **Regulatory / reputational overhang** — politically affiliated tokens carry elevated headline and regulatory risk versus ordinary memes.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MELANIA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MELANIA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MELANIA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MELANIA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MELANIA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

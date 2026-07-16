@@ -4,11 +4,11 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme, solana]
+tags: [crypto, meme, solana, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["PNUT"]
 entity_type: protocol
 headquarters: "Decentralized"
-related: ["[[crypto-markets]]", "[[dogecoin]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[dogecoin]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[solana]]", "[[hyperliquid]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Peanut the Squirrel
@@ -244,6 +244,56 @@ Treat as a high-risk speculative position; apply strict [[risk-management]] and 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PNUT trades as a **deep, two-venue derivatives market**. It is available on **Binance** (PNUT/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** (PNUT-PERP, leverage up to ~40-50x). The overlap of a top-tier CEX perp and Hyperliquid's on-chain order book gives PNUT unusually solid depth for a ~#490-cap memorial meme, keeping spreads tight during normal conditions and supporting reasonable size. In practice this means execution can be spread across both books and cross-venue basis/funding can be arbitraged — but during volatile squeezes spot depth is still thin relative to perp OI, so size against the shallower spot leg, not the perp, and stagger entries rather than sweeping one book.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — PNUT's simultaneous Binance and Hyperliquid perps make it a natural pair to trade when HL funding diverges from the Binance perp.
+- [[crowded-long-funding-fade]] — memorial-meme momentum bursts routinely pack longs and drive funding richly positive; fade the crowded long once funding pins extreme.
+- [[liquidation-cascade-fade]] — thin spot depth against heavy perp OI produces sharp liquidation flushes on PNUT that overshoot and mean-revert.
+- [[cash-and-carry]] — long Binance spot vs short a perp captures the carry when PNUT funding runs persistently positive during attention spikes.
+- [[oi-price-exhaustion]] — rising open interest into a stalling price is a reliable exhaustion tell on a reflexive attention token like PNUT.
+- [[meme-coin-cycle]] — PNUT is a textbook memorial meme; position sizing and timing should follow the attention-perishable meme-cycle template.
+
+### Volatility & regime character
+
+PNUT is a **high-beta, reflexive memorial [[meme-coin]]** with no cash flows or utility — price tracks the half-life of its news story plus residual community attention. Realized volatility is extreme relative to large caps, with multi-hundred-percent expansions and equally sharp collapses. Beta to [[bitcoin]]/[[ethereum]] is high and asymmetric: it tends to amplify risk-on rallies and lead risk-off drawdowns, and in "extreme fear" / bear regimes it typically underperforms majors. Correlation to the broader Solana-meme complex is elevated, so it moves as much with meme-sector sentiment as with BTC.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — derivatives depth is concentrated on Binance and Hyperliquid; spot depth is thin, amplifying liquidation cascades.
+- **Pure narrative dependence** — demand is tied to the memorial story's fading attention; sustained bids can evaporate.
+- **Early-buyer concentration** — Pump.fun fair-launch supply is often held by a handful of early wallets, enabling coordinated dumps (MC/FDV ~1.0 means no lock overhang but also no vesting brake).
+- **Perp funding dislocations** — meme funding and OI can spike and flip rapidly during squeezes; confirm live funding before holding leveraged exposure.
+- **Reflexivity & regime risk** — the same attention loop that lifts PNUT amplifies declines; high-beta memes underperform badly in bear/extreme-fear regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PNUT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PNUT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PNUT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PNUT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PNUT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

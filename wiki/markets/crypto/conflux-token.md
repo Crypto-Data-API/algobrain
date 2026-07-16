@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation]
+tags: [crypto, regulation, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, stablecoins]
 aliases: ["CFX", "Conflux Network"]
 entity_type: protocol
 founded: 2018
 headquarters: "Shanghai, China / decentralized network"
 website: "https://confluxnetwork.org/"
-related: ["[[binance]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]"]
+related: ["[[binance]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[event-driven-trading]]"]
 ---
 
 # Conflux
@@ -241,6 +241,56 @@ CFX's price action is **event-clustered**: long flat/down stretches punctuated b
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CFX is a genuine two-venue derivatives market: [[binance|Binance]] carries both deep CFX/USDT spot and a USD-margined CFX perpetual, while [[hyperliquid|Hyperliquid]] lists **CFX-PERP** with leverage up to roughly 40-50x. The Binance perp anchors price discovery and provides the deepest USD-margined book; Hyperliquid supplies an on-chain, transparent order book with visible L2 depth and its own funding stream. Because size can be split across both venues, execution and sizing are more forgiving than for single-venue small-caps — but CFX is still a rank ~149 alt, so its calm-tape depth is thin relative to majors and thins further on the fast China-headline spikes described above. Size entries to the visible book, not to headline notional, and expect slippage to widen sharply during the +50% event pops.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — two live perps (Binance USD-margined vs Hyperliquid CFX-PERP) let you harvest funding-rate spreads that open when one venue's positioning diverges from the other, common during China-headline pumps.
+- [[funding-rate-harvest]] — headline-driven crowding pushes CFX funding to extremes; collecting funding while delta-hedged spot-vs-perp is a repeatable edge on this event-clustered token.
+- [[cash-and-carry]] — with deep Binance spot plus a USD-margined perp, long-spot / short-perp carry captures the basis and positive funding that spikes after China/stablecoin news.
+- [[crowded-long-funding-fade]] — the sharp, fast-decaying +50%+ pops (AxCNH/Conflux 3.0) leave over-leveraged longs and richly positive funding; fading that crowding into the post-spike mean-reversion is a natural CFX trade.
+- [[event-driven-trading]] — CFX is the purest listed China-policy proxy, moving violently on PBoC/HK/stablecoin headlines; structured pre/post-catalyst entries fit its distinct event structure.
+- [[liquidation-cascade-fade]] — the leveraged two-venue perp market produces liquidation cascades on both the euphoric spike and the retrace; fading exhausted cascades back toward the low baseline is a recurring setup.
+
+### Volatility & regime character
+
+CFX is a high-beta, small-cap infrastructure / Layer-1 token whose returns are dominated by an idiosyncratic **China-policy narrative** rather than pure BTC/ETH beta. In quiet tape it drifts with the broad alt complex (positive but middling correlation to BTC/ETH beta and to the [[fear-and-greed-index|Fear & Greed]] regime), but on China/stablecoin headlines it decouples sharply and prints large, fast-decaying spikes — an event-clustered, reflexive vol profile closer to a policy call option than to a steady large-cap. Baseline realized volatility is high and clusters around catalysts.
+
+### Risk flags
+
+- **Narrative concentration** — the bull case rests almost entirely on Chinese / Hong Kong crypto and stablecoin policy; a reversal or an AxCNH stall removes the core catalyst and collapses the premium.
+- **Liquidity thinness** — as a rank ~149 alt, calm-tape depth is modest; two-venue availability helps but does not eliminate slippage during the violent headline moves.
+- **Perp funding dislocations** — post-spike funding can swing to extremes and diverge between Binance and Hyperliquid, punishing late crowded longs and rewarding disciplined carry/fade traders.
+- **Ongoing emissions** — unlimited max supply means slow structural dilution from block issuance even though CFX is effectively fully diluted with no near-term unlock cliff.
+- **Geopolitical / regulatory** — China-linked, Belt-and-Road-adjacent positioning carries cross-border sanctions and listing sensitivity for Western venues.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CFX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CFX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CFX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CFX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CFX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

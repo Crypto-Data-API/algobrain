@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, derivatives]
+tags: [crypto, derivatives, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, defi, altcoins]
 aliases: ["POLYX", "Polymesh Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://polymesh.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[polkadot]]", "[[real-world-assets]]", "[[security-tokens]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[polkadot]]", "[[real-world-assets]]", "[[security-tokens]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Polymesh
@@ -103,6 +103,54 @@ Polymesh's bet is that regulated issuers ultimately prefer **base-layer-enforced
 - **Competition & regulation:** competes with RWA on larger ecosystems; outcome depends heavily on how securities regulation treats tokenized assets in major jurisdictions.
 
 > Cryptocurrency is highly volatile and speculative. Nothing here is financial advice. Always verify live data before trading.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+POLYX is tradable on **both** major venue types: [[binance|Binance]] (spot POLYX/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (POLYX-PERP, offering up to roughly ~40-50x leverage). Having a two-venue perp footprint (one large CEX, one on-chain) means there is a continuous mark and a genuine cross-venue funding/basis linkage to trade around, rather than a single isolated market. In practice, however, POLYX is a small-cap RWA L1 with modest turnover, so realized depth on both books is limited relative to majors — the two-venue availability improves *price discovery and hedgeability* more than it removes slippage. Execution implication: size into the order book gradually, prefer limit/passive fills, split large clips across Binance and Hyperliquid, and treat the CEX-vs-HL spread as both a hedging channel and a risk when one venue's book thins out.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — POLYX runs a perp on both Hyperliquid and Binance, so funding can diverge between the two venues; long the cheaper-funding leg, short the richer one.
+- [[cash-and-carry]] — Binance spot POLYX plus a short USD-margined perp lets you lock the basis/funding carry while staying market-neutral on a low-cap RWA name.
+- [[funding-rate-harvest]] — collect perp funding on POLYX during stretches where crowded positioning pushes funding persistently to one side.
+- [[liquidation-cascade-fade]] — thin books make POLYX prone to sharp wick-driven liquidation flushes; fade the overshoot back toward fair value once the cascade exhausts.
+- [[narrative-trading]] — POLYX is a pure RWA / security-token thesis play, so it re-rates on tokenization headlines and RWA-narrative rotations rather than on its own fundamentals.
+- [[cross-exchange-arbitrage]] — the same POLYX trading across Binance and Hyperliquid opens transient price/spread dislocations to arb between the two venues.
+
+### Volatility & regime character
+
+POLYX is a **small-cap RWA / security-token infrastructure token** (a purpose-built compliance L1), not a large-cap or memecoin. It behaves as a **high-beta altcoin**: it tends to fall harder than BTC/ETH in risk-off regimes and rally on RWA-narrative upcycles, with directional bias broadly correlated to BTC/ETH beta but amplified by its low float and thin liquidity. Its idiosyncratic driver is the multi-year, slow-burning institutional-tokenization narrative, so it can also decouple from majors for extended, low-volatility drift periods punctuated by narrative-driven spikes.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** low daily turnover means high slippage and gap risk; a large share of flow sits on a few venues, so a single venue thinning out (or a Korean-market Upbit swing) can move price disproportionately.
+- **Perp funding dislocations:** shallow perp books make funding and open interest unstable — verify live funding/OI before sizing, as crowded funding can flip violently.
+- **Inflation / emissions:** uncapped, inflationary supply dilutes non-stakers over time (staking-reward emissions), a structural headwind rather than discrete unlock cliffs.
+- **Narrative dependence:** price is heavily tied to the RWA / security-token narrative; the thesis has been slow to monetize and can stall for long periods.
+- **Regulatory sensitivity:** as regulated-securities infrastructure, POLYX is directly exposed to how securities regulation treats tokenized assets across major jurisdictions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=POLYX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=POLYX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=POLYX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=POLYX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=POLYX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

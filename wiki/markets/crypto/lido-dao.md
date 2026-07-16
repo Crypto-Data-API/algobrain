@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["LDO", "Lido", "stETH issuer"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://lido.fi/"
-related: ["[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[restaking]]"]
+related: ["[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[restaking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[basis-trading]]"]
 ---
 
 # Lido DAO
@@ -236,6 +236,54 @@ At ~$234M LDO is priced ~96% below its 2021 peak and trades as a **levered, weak
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+LDO is a genuinely two-venue derivatives market. On [[hyperliquid|Hyperliquid]] it trades as **LDO-PERP** with leverage up to roughly 40-50x, while [[binance|Binance]] offers both **spot (LDO/USDT)** and a **USD-margined perpetual**. That dual availability means the on-chain (Hyperliquid) and CEX (Binance) order books can be arbitraged directly, and the deep, liquid book across both venues supports meaningful size without the slippage typical of thinner mid-cap alts. For execution, route large clips against the venue showing the tighter L2 depth at the moment, and lean on Binance spot for the cash leg of any carry/basis structure while using either perp for the short leg. Because two independent funding regimes coexist, cross-venue funding and basis dislocations are a recurring, tradable feature rather than an edge case.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — LDO's simultaneous Hyperliquid LDO-PERP and Binance USD-margined perp make on-chain-vs-CEX funding spreads directly harvestable.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp let you buy stETH-issuer spot and short the perp to capture positive funding/basis on an ETH-staking proxy.
+- [[basis-trading]] — the two-venue perp market frequently prints exploitable spot-vs-perp basis on LDO, especially around staking-yield and stVaults catalysts.
+- [[funding-rate-harvest]] — narrative-driven LDO crowding (bear-thesis shorts or catalyst-chasing longs) produces persistent funding tilts worth farming.
+- [[pairs-trading]] — the clean **LDO/ETH** ratio (and LDO vs the DeFi-governance basket, AAVE/UNI) is a well-defined relative-value pair.
+- [[event-driven-trading]] — dual-governance activations, stVaults phase rollouts, ETH staking-ETF news and large-holder distributions are discrete, tradable LDO events.
+
+### Volatility & regime character
+
+LDO is a **high-beta DeFi / liquid-staking infrastructure token**, not a large-cap or memecoin. It behaves as a levered, weak-value-accrual proxy on Ethereum staking economics, so its price is tightly correlated to **ETH beta** (and to broad BTC risk-on/risk-off) while amplifying moves on the downside — it has printed fresh all-time lows in 2026 even as ETH held up better. Expect DeFi-governance-basket correlation (with AAVE, UNI) and outsized reactions to staking-yield and stETH-peg headlines. The separate **stETH/ETH discount** is a distinct stress gauge whose widening has historically front-run leveraged-staking deleveraging.
+
+### Risk flags
+
+- **Narrative dependence** — LDO has no direct fee accrual to the token; it rides the V3/stVaults institutional re-rating story, so sentiment shifts move it hard.
+- **Supply overhang / large-holder distributions** — DAO treasury and vested allocations plus recurring big-holder moves (e.g. the disputed Cobie 20M-LDO transfer) are supply risks worth monitoring on CEX inflows.
+- **Share erosion** — Rocket Pool, cbETH, ether.fi and the restaking ([[eigenlayer]]) wave threaten Lido's LST dominance, a structural bear input.
+- **Depeg contagion** — a stETH/ETH discount blowout can trigger forced deleveraging that spills into LDO; treat widening discounts as a risk-off signal.
+- **Perp funding dislocations** — two independent funding regimes (Hyperliquid vs Binance) can dislocate sharply during stress, cutting both ways for leveraged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=LDO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=LDO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=LDO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=LDO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=LDO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

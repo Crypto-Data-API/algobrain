@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["UNI", "UNIfication", "Uniswap Protocol"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized protocol; Uniswap Labs: New York, USA"
 website: "https://uniswap.org/"
-related: ["[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sky]]"]
+related: ["[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sky]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Uniswap
@@ -355,6 +355,56 @@ Uniswap's moat: **brand, liquidity depth, and developer mindshare**, now reinfor
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+UNI trades as a deep, liquid two-venue market. On **Binance** it has both a spot pair (UNI/USDT) and a **USD-margined perpetual**; on **[[hyperliquid|Hyperliquid]]** it lists as **UNI-PERP** with leverage up to ~40–50x. This dual-venue availability means a trader can run **spot on Binance against perp on either venue**, or cross the two perp books directly. Order-book depth is solid for a ~$1.9B-cap, rank-#39 token — ~$180–200M in 24h volume supports meaningful clip sizes with modest slippage, though it is thinner than BTC/ETH, so large market orders should be worked (VWAP/scaling) rather than swept. The two-venue structure also creates a clean **CEX-vs-DEX funding and basis surface**: Binance and Hyperliquid funding/mark can diverge, which shapes both where to source liquidity and how to size directional vs. carry positions.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — UNI carries a persistent perp on both Binance and Hyperliquid, so a delta-neutral short-perp/long-spot harvest captures funding whenever the fee-burn narrative crowds longs positive.
+- [[hl-vs-cex-funding-divergence]] — dual listing (Hyperliquid UNI-PERP vs Binance USD-M perp) lets you arb funding-rate gaps between the DEX and CEX books on the same underlying.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp makes UNI a clean carry candidate; fade rich positive funding by holding spot and shorting the perp.
+- [[crowded-long-funding-fade]] — after sharp burn-narrative rallies (e.g. the +19.5% week) funding turns hot and longs crowd; fade the crowded long when funding spikes and momentum stalls.
+- [[oi-confirmed-trend]] — rising open interest confirming a UNI trend (bullish on advances, bearish on declines) filters genuine burn/volume-driven moves from thin squeezes.
+- [[narrative-trading]] — UNI is the anchor of the DeFi fee-switch / real-yield basket (with AAVE, SKY, LDO); trade it on burn-rate and fee-switch catalysts.
+
+### Volatility & regime character
+
+UNI is a **high-beta DeFi / DEX infrastructure token** — a blue-chip alt rather than a memecoin, but far more volatile than BTC or ETH. It carries strong **positive beta to ETH** (Ethereum-native, ERC-20, tightly tied to on-chain DeFi risk appetite) and to the broad alt tape, so it typically amplifies ETH moves in both directions. Post-UNIfication it has an added **idiosyncratic, reflexive driver**: DEX volume mechanically drives the burn, so UNI can decouple from beta on fee-switch/burn news (as it did with the +19.5% week into an extreme-fear market). Regime tends to swing between **beta-driven drift** (tracking ETH/alts) and **narrative-driven spikes** around governance and burn-rate catalysts.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — depth is real but concentrated in Binance and Hyperliquid; thinner than majors, so outsized orders move price and stops can slip in fast tapes.
+- **Perp funding dislocations** — sharp narrative rallies push funding hot and crowd longs, creating squeeze/liquidation risk; CEX-vs-DEX funding can also gap, cutting both ways for carry books.
+- **Narrative dependence** — the current bid leans on the fee-switch / burn story; UNI's value now scales mechanically with DEX volume, so a volume drought shrinks burns and the thesis at once.
+- **Tail inflation & LP attrition** — the 2%/yr emission resumes long-term and the protocol fee split can push LPs to rival venues, eroding volume (and thus burns) in a reflexive loop.
+- **Regulatory** — DeFi front-ends and the fee switch keep DEX tokens inside an unsettled securities/MTL perimeter despite the dropped SEC probe.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=UNI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=UNI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=UNI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=UNI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=UNI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

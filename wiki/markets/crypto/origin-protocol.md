@@ -3,13 +3,13 @@ title: "Origin Token"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi, nft]
+status: review
+tags: [crypto, defi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum]
 aliases: ["OGN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://www.originprotocol.com"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -156,6 +156,54 @@ Governance: OGN stakers comprise the Origin DAO, which votes on proposals and tr
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+OGN trades on a genuine two-venue market: **Binance** offers deep OGN/USDT spot plus a USD-margined perpetual, and **Hyperliquid** lists OGN-PERP with leverage up to roughly 40-50x. Additional CEX spot depth exists on Kraken, KuCoin, Bitget and Upbit, and on-chain via Uniswap V2/V3. The combination of Binance spot + perp and Hyperliquid perp gives OGN both hedgeable spot inventory and two independent funding/basis curves, which supports cross-venue arbitrage and clean spot-vs-perp carry construction. That said, OGN is a small-cap (rank ~1095, thin dollar volume relative to majors), so order-book depth degrades quickly on size: execution should assume wider effective spreads and slippage, and position sizing must respect the shallower side of each book rather than headline volume. Splitting fills across Binance and Hyperliquid, and working limit orders rather than sweeping, materially reduces impact on this name.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — hold Binance/DEX spot OGN against a short Binance or Hyperliquid perp to capture funding while remaining delta-neutral.
+- [[hl-vs-cex-funding-divergence]] — OGN funds independently on Hyperliquid and Binance; a small-cap with two perp curves frequently shows exploitable funding gaps.
+- [[crowded-long-funding-fade]] — low-float, high-beta alts like OGN periodically see funding spike positive on retail longs, setting up a funding-fade with a mean-reversion bias.
+- [[liquidation-cascade-fade]] — thin books plus up to ~50x leverage make OGN prone to sharp liquidation wicks that overshoot and snap back.
+- [[range-mean-reversion]] — outside of narrative bursts OGN oscillates in a range near its ATL, favoring reversion from band extremes.
+- [[breakout-and-retest]] — DeFi/narrative catalysts can trigger clean breakouts from long consolidation; trading the retest filters the low-liquidity fakeouts.
+
+### Volatility & regime character
+
+OGN is a low-cap, high-beta DeFi/NFT infrastructure token trading near its all-time low with a deeply depressed valuation. Its price action is reflexive and thin: quiet mean-reverting drift punctuated by outsized moves on DeFi-sector rotations, product/yield narratives, or general alt risk-on phases. Beta to BTC/ETH is high on the downside (it sells off with broad risk-off) but idiosyncratic on the upside, where Origin-specific or narrative catalysts dominate. Expect amplified realized volatility versus large caps and low correlation persistence.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — small-cap with modest dollar volume; depth is concentrated on Binance and Hyperliquid, so a single-venue outage or delisting materially impairs exit.
+- **Emissions / supply** — Market Cap / FDV ~0.47 means roughly half of max supply is not yet circulating; ongoing unlocks/emissions are a structural overhang for longs.
+- **Narrative dependence** — with a micro market cap, sustained moves require DeFi/yield or Origin-specific catalysts; absent those, trends fade quickly.
+- **Perp funding dislocations** — low float plus high leverage produces volatile, sometimes extreme funding on both venues, which can whipsaw carry and directional positions.
+- **Stale-data / regulatory** — the asset sits outside the CoinGecko top 1000 with a cached snapshot; verify live figures before sizing, and account for the usual small-cap listing/regulatory risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=OGN` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=OGN` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=OGN&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=OGN&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=OGN"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["ATOM", "Cosmos"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized (Interchain Foundation: Zug, Switzerland)"
 website: "https://cosmos.network/"
-related: ["[[atomone]]", "[[celestia]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[dydx-chain]]", "[[ethereum]]", "[[injective-protocol]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[osmosis]]", "[[polkadot]]"]
+related: ["[[atomone]]", "[[celestia]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[dydx-chain]]", "[[ethereum]]", "[[injective-protocol]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[osmosis]]", "[[polkadot]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[basis-trading]]"]
 ---
 
 # Cosmos Hub
@@ -327,6 +327,59 @@ The cleanest peer comparison is **Cosmos vs [[polkadot|Polkadot]]**: both are in
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ATOM trades on **both** major venue types, making it a genuinely two-venue derivatives market:
+
+- **Binance** — deep ATOM/USDT spot plus a USD-margined ATOM perpetual (Binance Futures). Binance is the primary price-discovery and liquidity anchor; alongside Upbit (heavy Korean KRW flow) it concentrates most CEX depth.
+- **[[hyperliquid|Hyperliquid]]** — ATOM-PERP with leverage up to ~40–50x, the deepest on-chain perp venue for the pair and the reference for transparent funding/OI data.
+
+The result is a **deep, liquid two-venue market**: cross-venue redundancy tightens spreads and enables funding/basis comparison between Binance and Hyperliquid. Practically, execution can be split across CEX spot, CEX perp, and HL perp, which supports carry and arbitrage structures. However, ATOM's underlying spot turnover is thin (~$22M/day) and Upbit-dependent, so large clips still move price — size against real order-book depth (use the L2 book below) rather than headline volume, and be aware that KRW-session flow can dislocate the mark faster than derivatives depth alone would suggest.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — ATOM's high staking yield (~15%+ nominal historically) plus a liquid perp lets you compare perp funding to staking carry; when ATOM-PERP funding runs rich vs staking yield, long spot / short perp locks a spread.
+- [[basis-trading]] — the Binance-vs-Hyperliquid two-venue structure gives a clean spot-perp basis to trade as funding and mark diverge across venues.
+- [[hl-vs-cex-funding-divergence]] — with ATOM-PERP live on both Hyperliquid and Binance, funding-rate gaps between the two venues are directly harvestable.
+- [[funding-rate-harvest]] — a thin, sentiment-driven alt-L1 that swings between crowded longs (catalyst hope) and capitulation produces recurring funding extremes to farm.
+- [[range-mean-reversion]] — ATOM sits near its floor in a persistent value-accrual downtrend, chopping in ranges; fading band extremes suits the low-turnover, catalyst-gated regime.
+- [[cross-sectional-relative-value]] — ATOM's chronic underperformance vs its own ecosystem ([[celestia|TIA]], [[injective-protocol|INJ]], [[osmosis|OSMO]]) and vs [[polkadot|DOT]] makes it a natural short/long leg in relative-value baskets.
+
+### Volatility & regime character
+
+ATOM is a **high-beta legacy alt-L1 (Layer 0 / interoperability infra token)** with the defining "great tech, weak value accrual" profile — it persistently underperforms both its own ecosystem and the broad market. It carries strong positive beta to BTC/ETH in risk-on/risk-off swings but with an added structural drag: rallies fade as unbonding waves add sell pressure and as narrative rotates to sovereign appchains. In practice it behaves like a beta-amplifier on the downside and a laggard on the upside, with realized volatility gated by governance/tokenomics catalysts rather than by its own fundamentals.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin spot turnover (~$22M/day) and heavy Upbit/KRW dependence amplify slippage and enable sharp session-driven moves despite deep derivatives venues.
+- **Open-ended emissions** — no max supply; ~7–10% historical staking inflation dilutes non-stakers, and the ~21-day unbonding lag means unbonding waves after rallies are a recurring sell-pressure pattern.
+- **Narrative dependence** — price hinges on the unresolved tokenomics overhaul (2–6% fee-linked inflation, lock multipliers) and IBC Eureka fee capture; governance stalls (as with ATOM 2.0) can strand the re-rating thesis indefinitely.
+- **Ecosystem fragmentation** — sovereign appchains and the [[atomone]] fork keep value flowing away from ATOM.
+- **Perp funding dislocations** — sentiment-driven positioning in a thin market can drive funding to extremes that whipsaw leveraged carry.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ATOM` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ATOM` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ATOM&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ATOM&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ATOM"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

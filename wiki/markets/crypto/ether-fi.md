@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, lrt, lst, restaking, staking]
+tags: [crypto, defi, ethereum, lrt, lst, restaking, staking, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ETHFI", "Ether.fi", "EtherFi", "ether.fi", "etherfi"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized"
 website: "https://www.ether.fi/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[puffer-finance]]", "[[real-world-assets]]", "[[renzo]]", "[[restaking]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquid-staking]]", "[[puffer-finance]]", "[[real-world-assets]]", "[[renzo]]", "[[restaking]]", "[[staking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Ether.fi
@@ -339,6 +339,50 @@ A rough framework: anchor a floor on revenue-funded buyback support, scale upsid
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ETHFI is a genuinely two-venue market: it trades on [[binance|Binance]] as **spot (ETHFI/USDT)** and a **USD-margined perpetual**, and on [[hyperliquid|Hyperliquid]] as **ETHFI-PERP** (up to ~40-50x leverage). This gives it deeper, more liquid derivatives access than most mid-cap alts of its rank (~#116) — the CEX perp anchors the funding/OI backbone while Hyperliquid provides transparent on-chain order-book depth and cross-venue funding for basis and arbitrage plays. Practically, execution can be split across Binance spot/perp and HL perp, and the two-venue structure lets traders route around depth pockets; still, as a sub-$400M-cap token the aggregate book is moderate, so sized entries should be worked to limit slippage rather than taken at market.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — dual liquid perp venues (Binance USD-margined + HL ETHFI-PERP) make delta-neutral collection of persistent funding practical on a high-beta name that regularly runs one-sided funding.
+- [[hl-vs-cex-funding-divergence]] — with ETHFI live on both Binance and Hyperliquid, funding can diverge between the two books, giving a clean cross-venue funding-spread trade.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp lets you lock spot-vs-perp basis on ETHFI without leaving the CEX venue, harvesting carry when the perp trades rich.
+- [[liquidation-cascade-fade]] — as a high-beta ETH-ecosystem token with moderate perp depth, ETHFI is prone to leverage-driven flushes; fading overshoots after cascades (cf. the sharp bounce off its fresh 2026 ATL) is a recurring setup.
+- [[oi-confirmed-trend]] — pairing Hyperliquid open-interest trend with price filters real conviction moves from leveraged noise on a token whose OI/market-cap crowding shifts quickly.
+- [[narrative-trading]] — ETHFI trades on discrete LRT / "DeFi neobank" catalysts (buyback disclosures, Cash card metrics, RWA vault news), rewarding positioning around narrative catalysts rather than pure price.
+
+**Volatility & regime character** — ETHFI is a **high-beta ETH-ecosystem / liquid-restaking (LRT) governance token** with pronounced ETH beta: it amplifies [[ethereum|ETH]] moves in both directions and typically draws down harder than ETH in risk-off tape while delivering sharper relief bounces. Correlation to ETH is high (it is effectively a levered ETH-DeFi proxy) and to BTC via the broad crypto beta; idiosyncratic dispersion comes from protocol-specific catalysts (buybacks, TVL flows, neobank/RWA expansion). Realized volatility is elevated for a sub-$400M-cap alt, and funding/OI skews can turn extreme in fear-driven regimes.
+
+**Risk flags**
+- **Venue/liquidity concentration** — despite two venues, aggregate mid-cap depth is moderate; perp funding dislocations and thin books can amplify slippage and squeeze risk on size.
+- **Narrative dependence** — price leans heavily on LRT / neobank narrative and on revenue-funded buyback execution; a stalled narrative or revenue contraction removes the key demand sink.
+- **Perp funding dislocations** — high-beta positioning drives crowded-long/short funding extremes; watch funding sign/magnitude and OI before leveraged entries.
+- **Restaking / peg / regulatory surface** — [[eigenlayer|EigenLayer]] AVS slashing, eETH/weETH peg stress, and the Cash-card/RWA push into regulated payments and tokenized-securities territory are structural tail risks (see [[#Risks]]).
+- **Residual dilution** — ~93% circulating leaves a small (~7%) remaining supply gap to the 1.00B cap.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ETHFI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ETHFI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ETHFI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ETHFI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ETHFI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

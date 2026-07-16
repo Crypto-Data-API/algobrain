@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, history, regulation]
+tags: [bitcoin, crypto, history, regulation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["BSV", "Bitcoin Satoshi Vision"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://bitcoinsv.com/"
-related: ["[[binance]]", "[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[kraken]]", "[[proof-of-work]]"]
+related: ["[[binance]]", "[[bitcoin-cash]]", "[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[kraken]]", "[[proof-of-work]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[pairs-trading]]", "[[event-driven-trading]]"]
 ---
 
 # Bitcoin SV
@@ -217,6 +217,53 @@ Delisted from [[binance|Binance]], [[kraken|Kraken]], ShapeShift (April 2019).
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BSV is a **PERP-FIRST asset**: it trades as a perpetual on [[hyperliquid|Hyperliquid]] (**BSV-PERP**, leverage up to **~40-50x**) but is **NOT listed on Binance** — spot access is limited and largely offshore (Upbit KRW, Bitget, KuCoin), so directional and derivatives flow concentrates on the HL perp rather than any deep spot book. Because there is no large-cap CEX spot venue anchoring price, the HL perp is effectively the reference market for two-sided liquidity, and its order book is **thin relative to major alts**. Practically this means: keep clip sizes small, use limit/passive execution to avoid walking the book, expect wider slippage on market orders, and treat the high available leverage as a liquidation-risk amplifier rather than a sizing invitation. Spot-scattered, offshore liquidity also makes any spot-perp arbitrage operationally harder to run cleanly.
+
+### Applicable strategies
+
+- [[pairs-trading]] — BSV is the natural mean-reverting leg against [[bitcoin-cash|BCH]] (its parent chain); it often catches delayed beta when BCH squeezes, so a BCH/BSV spread trade captures the lag.
+- [[cross-sectional-relative-value]] — rank BSV within the legacy-PoW / Bitcoin-fork basket (BTC, BCH, BSV) and trade its rich/cheap divergence versus the cohort rather than outright.
+- [[event-driven-trading]] — BSV's largest moves are court-ruling driven (COPA, Craig Wright litigation, delisting-lawsuit rulings); position around scheduled legal catalysts on the HL perp.
+- [[liquidation-cascade-fade]] — a thin perp book plus high available leverage makes BSV prone to sharp forced-liquidation wicks that overshoot and snap back, offering fade entries into extremes.
+- [[crowded-long-funding-fade]] — small-cap fork with periodic pump episodes; when funding spikes positive on a crowded HL long, fading the stretched positioning is a repeatable setup.
+- [[range-mean-reversion]] — with no independent bid and no revival catalyst, BSV spends long stretches range-bound, favouring reversion off the range edges over trend-chasing.
+
+### Volatility & regime character
+
+BSV is a **low-mindshare, litigation-scarred legacy-PoW / Bitcoin-fork alt** — high-beta to BTC on downside moves but with little independent upside bid. It behaves as a **high-beta, low-liquidity small cap**: it broadly tracks BTC/ETH risk regimes (rallying and selling with the majors) yet shows idiosyncratic pump-and-fade behaviour driven by Korean-exchange flow and legal-headline reflexivity. Correlation to BTC is meaningful in risk-off but decays around Wright/BSV-specific news, when the asset trades on its own narrative.
+
+### Risk flags
+
+- **Venue concentration**: no Binance/Coinbase listing; derivatives flow is concentrated on the single HL perp, and spot is thin/offshore (Upbit KRW share is large) — dislocations and kimchi-premium-style gaps are common.
+- **Narrative dependence**: price is dominated by Craig Wright litigation and delisting-lawsuit headlines; there is minimal organic developer/adoption catalyst, so headline risk dominates fundamentals.
+- **Perp funding dislocations**: thin OI plus offshore spot make funding on BSV-PERP volatile and prone to sharp swings during pump/liquidation episodes.
+- **Liquidity/execution risk**: shallow books amplify slippage and make high leverage a fast route to liquidation; further delistings remain a tail risk given its history.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BSV` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BSV` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BSV&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BSV&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BSV"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["CAKE", "PancakeSwap Token"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized (anonymous team, BNB Chain origin)"
 website: "https://pancakeswap.finance/"
-related: ["[[aerodrome-finance]]", "[[automated-market-maker]]", "[[base]]", "[[bnb]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[uniswap]]"]
+related: ["[[aerodrome-finance]]", "[[automated-market-maker]]", "[[base]]", "[[bnb]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[uniswap]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[oi-confirmed-trend]]"]
 ---
 
 # PancakeSwap
@@ -295,6 +295,56 @@ PancakeSwap's edge is **BNB-ecosystem dominance + volume**; its differentiator v
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CAKE is a **deep, liquid two-venue market**: it trades on **Binance** (CAKE/USDT spot plus a **USD-margined perpetual**) and on **[[hyperliquid|Hyperliquid]]** as **CAKE-PERP** (up to ~40-50x leverage). Binance provides the primary spot depth and the highest-liquidity perp; Hyperliquid supplies a transparent on-chain order book, on-chain funding, and the L2 depth used for programmatic execution. Having a spot leg on Binance *and* two perp venues means the CEX perp and the HL perp can be traded against Binance spot — enabling clean cash-and-carry, basis, and cross-venue funding trades without synthetic legs. Practically: size on Binance for large notional and best top-of-book depth; use Hyperliquid for on-chain funding capture, leverage, and hedged/basis structures. As a rank ~109 alt the book thins on both venues past the front size, so scale entries and respect slippage on aggressive sweeps.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — long Binance spot CAKE vs short the Binance or HL perp to harvest basis when the perp trades at a premium; the genuine spot leg makes the carry fully deliverable.
+- [[funding-rate-harvest]] — CAKE perp funding swings with BNB-ecosystem sentiment and memecoin-season leverage; collect funding on the delta-neutral side while it stays rich.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid CAKE-PERP and the Binance USD-margined perp can dislocate; short the richer, long the cheaper for market-neutral spread.
+- [[oi-confirmed-trend]] — pair rising open interest with CAKE's relative-strength moves (burn-driven bid, Binance Alpha flow) to filter real trends from thin squeezes.
+- [[liquidation-cascade-fade]] — as a high-beta alt, CAKE overshoots on liquidation flushes; fade the cascade extreme back toward VWAP once OI resets.
+- [[breakout-and-retest]] — CAKE's multi-year $1.5-$4 band gives clean horizontal levels; trade confirmed breakouts with a retest entry to avoid fakeouts.
+
+### Volatility & regime character
+
+CAKE is a **high-beta DeFi / DEX (exchange) token** — an infra-token proxy for **BNB Chain** activity rather than a large-cap store-of-value. It carries strong positive **beta to BTC/ETH** in risk-on/risk-off regimes, but its idiosyncratic driver is **BNB-ecosystem and memecoin-season flow** (Binance Alpha, Springboard launches), so it can decouple and show relative strength (as in the 2026-06-20 bear-tape snapshot) when BNB Chain volume runs hot. The post-3.0 deflationary burn adds a structural bid but does not damp short-term volatility; expect alt-like drawdowns amplified in extreme-fear regimes.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — depth is thin beyond front size at rank ~109; spot depth concentrates on Binance, so a Binance policy or listing change is an outsized single-venue risk.
+- **BNB-ecosystem / narrative dependence** — value tracks BNB Chain volume and Binance-driven retail waves; fading ecosystem activity or Binance distancing directly deflates the thesis.
+- **Perp funding dislocations** — funding can spike/flip during memecoin seasons and squeezes; crowded-leverage unwinds drive sharp liquidation cascades.
+- **Value-accrual without yield** — post-Tokenomics-3.0 there is no staking yield; the burn-over-emission thesis breaks if volume slows (not a depeg/unlock risk — MC/FDV ~0.96 means minimal unlock overhang).
+- **Smart-contract / multichain surface** — bridge, pool, and router risk across 10+ chain deployments.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CAKE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CAKE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CAKE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CAKE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CAKE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

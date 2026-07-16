@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, stablecoins, ethereum]
 aliases: ["ENA", "Ethena Labs"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://www.ethena.fi/"
-related: ["[[aave]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[restaking]]", "[[sky]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[usdtb]]"]
+related: ["[[aave]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[restaking]]", "[[sky]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[usdtb]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Ethena
@@ -339,6 +339,50 @@ Ethena's edge is **yield and scale**: USDe offers the highest sustainable on-cha
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** ENA trades on BOTH [[binance|Binance]] (spot ENA/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (ENA-PERP, up to ~40-50x leverage) — a deep, liquid two-venue market with additional perp depth on Bybit and OKX. High turnover relative to cap (24h volume routinely running near/above the market cap) makes ENA one of the more liquid mid-cap perps here, so mid-size positions can be worked without heavy slippage and stops can rest tighter than on thin alts. The genuine two-venue structure (CEX + on-chain HL order book) is what makes ENA workable for HL-vs-CEX funding and basis plays: you can hold spot on Binance while shorting either venue's perp, and price/funding dislocations between Binance Futures and Hyperliquid are arbitrable rather than one-sided. Size to the shallower book (usually HL's L2 depth) when running cross-venue, and mind that available leverage rewards discipline more than aggression given ENA's beta.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — ENA is itself levered funding-rate beta, so harvesting the ENA-PERP funding stream (long spot / short perp when funding is rich) is directly on-thesis and mirrors Ethena's own carry engine.
+- [[hl-vs-cex-funding-divergence]] — genuine two-venue availability (Binance perp vs Hyperliquid ENA-PERP) makes funding-rate gaps between the venues capturable with matched offsetting legs.
+- [[cash-and-carry]] — long Binance spot ENA against a short USD-margined perp locks the basis, the exact delta-neutral trade Ethena productizes as USDe.
+- [[oi-confirmed-trend]] — ENA's high-beta directional moves (DeFi-basket rallies, deleveraging flushes) are cleaner to ride when open interest confirms the trend rather than fading it.
+- [[liquidation-cascade-fade]] — as a high-beta perp, ENA overshoots in forced-deleveraging cascades, giving mean-reverting entries once the liquidation wave exhausts.
+- [[narrative-trading]] — ENA is a governance proxy driven by discrete catalysts (fee-switch activation, Converge mainnet, StablecoinX listing, USDe re-expansion) that move price ahead of fundamentals.
+
+**Volatility & regime character.** ENA is a high-beta DeFi / stablecoin-infrastructure token — a levered proxy on the perp funding-rate regime rather than a low-vol stablecoin itself. It trades with strong positive correlation to the DeFi blue-chip basket (e.g. [[aave|AAVE]]) and broad crypto beta, so it amplifies [[ethereum|ETH]]/BTC moves on both sides: sharp bounces when funding firms and the risk tape recovers, sharp drawdowns in deleveraging events. Its distinctive feature is a fundamental link to funding — rich, positive market-wide funding expands USDe supply and sUSDe yield (bullish ENA), while compressing/negative funding deflates the whole complex — making ENA behave like a reflexive, funding-sensitive high-beta alt.
+
+**Risk flags.**
+- **Funding-rate dependence** — sustained negative or compressing perp funding directly deflates Ethena's carry revenue and the ENA thesis; perp funding dislocations cut both ways for cross-venue trades.
+- **Token unlocks / emissions** — MC/FDV ~0.62 with ~38% (~5.7B ENA) still locked; multi-year vesting is a persistent supply headwind any long must net against.
+- **Depeg / redemption risk** — USDe is synthetic (not fiat-redeemable); the October 2025 episode showed venue-specific depegs under stress can force loss-making hedge unwinds and shock ENA.
+- **Narrative dependence** — value accrual hinges on the binary fee-switch and other catalysts; delays or non-activation can strand the token relative to protocol economics.
+- **Venue / counterparty concentration** — Ethena's short legs and traders' hedges sit on centralized perp venues; exchange failure or forced closure impairs both. Watch liquidity split between Binance and Hyperliquid when sizing cross-venue.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ENA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ENA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ENA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ENA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ENA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

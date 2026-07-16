@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum]
 aliases: ["BLUR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://blur.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[nft-lending]]", "[[nft]]", "[[paradigm]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[nft-lending]]", "[[nft]]", "[[paradigm]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Blur
@@ -275,6 +275,47 @@ Blur is an NFT marketplace that  lets nft buyers and sellers to utilise a suite 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** BLUR is tradable on **both** [[binance]] (BLUR/USDT spot **and** a USD-margined perpetual) and [[hyperliquid]] (**BLUR-PERP**, leverage up to ~40-50x). This is a genuinely two-venue derivatives market rather than a single-venue microcap: the Binance perp anchors CEX flow and price discovery, while the Hyperliquid perp offers on-chain, transparent [[funding-rate|funding]] and [[open-interest|OI]]. Depth is decent for the ~$45M cohort but the **float is thin**, so book depth thins quickly beyond the top of book. Practically, the two-venue structure supports size splitting, cross-venue [[funding-rate|funding]] comparison, and cash-and-carry construction, but it also means execution should be staged and size scaled to on-screen liquidity rather than headline turnover.
+
+**Applicable strategies.**
+- [[crowded-short-funding-fade]] — BLUR [[funding-rate|funding]] flips firmly negative during NFT-sector selloffs as shorts crowd in, setting up squeeze-prone fades against extreme negative funding.
+- [[funding-rate-harvest]] — incentive-season hype can push funding sharply positive on a low-float name, letting a delta-neutral book collect elevated carry.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid BLUR-PERP and the Binance perp can diverge, since the two order books clear independent flow around catalysts.
+- [[cash-and-carry]] — spot on Binance/Uniswap against a short perp captures basis/funding when BLUR trades in positive-funding, hype-driven regimes.
+- [[liquidation-cascade-fade]] — thin float plus active perps make BLUR prone to two-sided liquidation cascades that overshoot and mean-revert, offering fade entries after wicks.
+- [[oi-confirmed-trend]] — rising [[open-interest]] alongside directional moves helps separate real incentive-driven trends from noise on this reflexive small-cap.
+
+**Volatility & regime character.** BLUR is a **high-beta NFT/NFTFi altcoin** on [[ethereum]] — effectively a leveraged call option on NFT trading activity, one of the weakest crypto verticals since 2022. It carries high [[ethereum|ETH]]/BTC beta on the downside, sells off hard in risk-off tape, and shows sharp, reflexive rallies around incentive seasons and NFT-narrative catalysts. Realized volatility is elevated versus large caps, and price action is strongly regime-dependent (see [[market-regime]]).
+
+**Risk flags.**
+- **Liquidity / thin float** — small cap and thin book depth mean sizing must respect on-screen liquidity; slippage rises fast in stress.
+- **Narrative dependence** — value tracks the NFT/NFTFi narrative and Blur incentive programs rather than protocol cash flow (no live fee switch).
+- **Emissions / supply overhang** — ongoing incentive-pool emissions plus residual vesting create sell-pressure even with ~94% of max supply circulating.
+- **Perp funding dislocations** — low float plus swingy [[funding-rate|funding]] make BLUR prone to funding spikes and two-sided liquidation cascades on [[hyperliquid]] and Binance.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BLUR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BLUR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BLUR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BLUR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BLUR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

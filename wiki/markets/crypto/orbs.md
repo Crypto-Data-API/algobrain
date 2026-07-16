@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, ethereum]
+tags: [altcoins, crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, derivatives]
 aliases: ["ORBS", "Orbs Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.orbs.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[smart-contracts]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Orbs
@@ -256,6 +256,51 @@ Orbs' narrative is **decentralized execution infrastructure / "Layer-3"** for [[
 - **What to watch (bullish):** new high-volume DEX integrations of dTWAP/dLIMIT/Liquidity Hub (the real demand driver), rising on-chain DEX/perp volume broadly, and a market rotation back toward [[defi]] infrastructure.
 - **What to watch (bearish):** native L2/DEX order tooling displacing Orbs, fading Upbit/Korean interest, or BTC breaking lower and dragging small caps.
 - **Mechanics:** moderate but thin liquidity — limit orders, watch the Upbit KRW pair for Korea-driven spikes, and note that a *liquid perp exists* (Hyperliquid / KuCoin / Binance) so ORBS is one of the few tokens in this batch where a hedge or short is practical. Funding can be used as a positioning/sentiment gauge.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity**
+ORBS is one of the more tradable micro-caps in this batch: it trades on **Binance** (spot plus a USD-margined perpetual) and on **[[hyperliquid]]** as **ORBS-PERP** (leverage up to ~40-50x), giving it a genuine two-venue derivatives market rather than a single thin listing. The combined book is reasonably deep and liquid for a ~$30M-cap name, so limit orders fill without excessive slippage and a short or hedge is actually practical here. The dual-venue structure (CEX perp + on-chain perp) is what enables cross-venue and funding-based strategies; nonetheless, absolute depth is still modest, so size positions to the L2 book rather than to headline volume, and expect wider spreads and thinner top-of-book during off-peak (non-Asia) hours.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — ORBS perps often print persistently signed funding (e.g. negative/short-skewed in bearish tapes), letting a delta-neutral book collect carry against spot.
+- [[hl-vs-cex-funding-divergence]] — with live perps on both Hyperliquid and Binance/KuCoin, funding can dislocate between venues, creating a market-neutral rate spread to harvest.
+- [[cash-and-carry]] — deep-enough Binance spot plus a USD-margined perp make a spot-long / perp-short basis capture feasible when the perp trades rich.
+- [[crowded-short-funding-fade]] — small-cap ORBS frequently runs short-skewed funding in Extreme-Fear regimes; a fade of over-crowded shorts targets the squeeze/mean-reversion.
+- [[liquidation-cascade-fade]] — thin absolute depth means leverage flushes overshoot, offering post-cascade rebound entries on the two-venue perp.
+- [[range-mean-reversion]] — outside of Korea-premium spikes, ORBS spends long stretches ranging, suiting bounded reversion around a mid.
+
+**Volatility & regime character**
+ORBS is a **low-cap DeFi / execution-infrastructure altcoin** with high-beta, reflexive behavior typical of the sub-$50M tier: it amplifies BTC/ETH directional moves on the way up and down (high beta to majors) while adding idiosyncratic, news-independent swings driven by its prominent Upbit KRW (Korea-premium) flow. Correlation to BTC/ETH is high during risk-off cascades but breaks down during Korean retail surges, when ORBS can decouple sharply from global pairs. Expect wide realized-volatility regimes punctuated by illiquidity gaps.
+
+**Risk flags**
+- **Liquidity / venue concentration** — despite two perp venues, absolute depth is thin; a dominant Upbit KRW pair can drive outsized, decoupled moves.
+- **Emissions/dilution** — ~0.49 cap/FDV with the remaining ~5B supply entering via staking-reward inflation rather than cliff unlocks (gradual, ongoing supply pressure).
+- **Narrative dependence** — value accrual hinges on continued third-party DEX integration of dTWAP/dLIMIT/Liquidity Hub; the contested "Layer-3" framing adds thesis fragility.
+- **Perp funding dislocations** — signed funding can swing hard in low-liquidity conditions, so carry/basis legs carry mark-to-market and rate-flip risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ORBS` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ORBS` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ORBS&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ORBS&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ORBS"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

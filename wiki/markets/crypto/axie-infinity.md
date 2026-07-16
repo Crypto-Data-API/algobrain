@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum]
 aliases: ["AXS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://axieinfinity.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[metaverse]]", "[[nft]]", "[[the-sandbox]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[metaverse]]", "[[nft]]", "[[the-sandbox]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Axie Infinity
@@ -213,6 +213,50 @@ For leverage, **AXS-PERP** trades on [[hyperliquid]] and other perp venues. As a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — AXS is a genuinely two-venue derivatives market: it trades as **spot + a USD-margined perpetual on Binance** and as **AXS-PERP on [[hyperliquid]]** (up to ~40-50x). Binance provides the deepest USDT book and the reference funding rate, while Hyperliquid adds an on-chain venue with transparent order-book depth and its own funding. This dual availability means AXS is liquid enough to size meaningful positions and to run cross-venue relative-value or funding trades, but as a ~#182 mid-cap the depth is still thinner than large-caps — large market orders will walk the book, so scale entries/exits and lean on limit orders during the sharp momentum flares this token is prone to.
+
+**Applicable strategies**
+- [[hl-vs-cex-funding-divergence]] — AXS funding is quoted independently on Binance and Hyperliquid, and thin GameFi float lets the two venues drift apart during rallies, creating a harvestable spread.
+- [[crowded-long-funding-fade]] — momentum-driven +20% spikes pack the perp with crowded longs and richly positive funding, setting up a funding-fade against over-extended positioning.
+- [[cash-and-carry]] — long spot AXS on Binance against a short AXS-PERP captures the basis/funding when perps trade at a persistent premium during narrative flares.
+- [[liquidation-cascade-fade]] — low float and high leverage make AXS prone to violent long-squeeze liquidation cascades that overshoot, offering mean-reversion entries into the flush.
+- [[oi-confirmed-trend]] — pairing the sharp GameFi momentum moves with rising open interest (via the HL OI feed) helps separate real trend continuation from thin, unconfirmed pops.
+- [[narrative-trading]] — AXS repricings are catalyst/GameFi-narrative driven (the isolated +20% flare against broad extreme-fear is textbook), rewarding trades keyed to narrative rotation rather than macro beta.
+
+**Volatility & regime character** — AXS is a **high-beta GameFi / play-to-earn altcoin** with a relatively low circulating float, producing violent, momentum-driven swings in both directions. It is broadly correlated to BTC/ETH beta in risk-on/risk-off regimes, but its idiosyncratic, catalyst-driven flares (like the 2026-06-20 rally that ran counter to a broad extreme-fear backdrop) mean it frequently decouples from majors on the upside during GameFi-narrative rotations, then reverts hard.
+
+**Risk flags**
+- **Venue/liquidity concentration** — mid-cap depth means large orders move the book; positioning is concentrated on Binance and Hyperliquid.
+- **Perp funding dislocations** — funding and OI can spike rapidly during rallies, and crowded longs make the perp vulnerable to long-squeeze reversals.
+- **Narrative dependence** — price is dominated by GameFi sentiment and catalysts rather than tokenomics; flares reverse quickly when narrative inflows stall.
+- **Emissions / supply** — ongoing staking-reward emissions add modest float (hard-capped at 270M); the *separate* uncapped SLP token is a reminder of GameFi economy fragility.
+- **Security / regulatory** — legacy Ronin bridge-hack and "Alleged SEC Securities" listing are structural overhangs relevant to holding risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AXS` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AXS` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AXS&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AXS&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AXS"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

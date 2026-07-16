@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coins]
+tags: [crypto, meme-coins, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["POPCAT", "Popcat (SOL)"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://popcatsolana.xyz/"
-related: ["[[bonk]]", "[[crypto-markets]]", "[[dogwifhat]]", "[[hyperliquid]]", "[[meme-coins]]", "[[solana]]"]
+related: ["[[bonk]]", "[[crypto-markets]]", "[[dogwifhat]]", "[[hyperliquid]]", "[[meme-coins]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Popcat
@@ -102,6 +102,50 @@ Meme coins cannot be valued on cash flows or fundamentals — there are none. Th
 - **Solana-ecosystem dependency:** outages, congestion, or a loss of Solana retail interest directly impair meme-sector liquidity. See [[solana]].
 
 > Cryptocurrency is highly volatile and speculative; meme coins are among the riskiest assets in the market. Nothing here is financial advice. Always verify live data before trading.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** POPCAT is a genuine two-venue perp market: it trades on **Binance** (spot plus a USD-margined perpetual) and on **Hyperliquid** as **POPCAT-PERP** with leverage up to roughly **40-50x**. Binance provides the deepest centralized order book and the largest funding/OI pool, while Hyperliquid contributes fully on-chain, transparent perp depth. Compared with the thin, DEX-only liquidity typical of most Solana memes, this dual-venue availability gives POPCAT relatively deep, liquid books, tighter spreads, and enough depth to size positions that would be impractical on a single meme-focused venue. The split across a CEX and a DeFi perp also creates a live basis/funding channel between the two — the same order should be split across venues on larger clips, and cross-venue quotes should be checked before execution to avoid slippage in the thinner book.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — dual-venue perp with frequently elevated meme funding makes systematic collection of positive funding (delta-hedged) attractive when longs crowd.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid POPCAT-PERP and the Binance USD-margined perp often diverge, letting a trader be long the cheaper-funded leg and short the richer one.
+- [[crowded-long-funding-fade]] — meme rallies routinely push POPCAT funding sharply positive as retail chases; fading the crowded long into the flush is a recurring setup.
+- [[liquidation-cascade-fade]] — thin, reflexive meme OI produces violent liquidation flushes; fading the overshoot after a cascade exhausts is a classic POPCAT trade.
+- [[oi-confirmed-trend]] — using open-interest confirmation filters out low-conviction meme squeezes and keeps trend entries aligned with real positioning.
+- [[breakout-and-retest]] — POPCAT trends in sharp, momentum-driven bursts; trading confirmed breakouts on the retest suits its impulsive meme price action.
+
+**Volatility & regime character.** POPCAT is a **high-beta Solana memecoin** defined by reflexivity: value is pure attention, so it amplifies risk-on/risk-off swings with far larger drawdowns and rallies than majors. It carries strong positive **beta to BTC/ETH** (it sells off hard in risk-off regimes) but its idiosyncratic driver is the **Solana meme-sector rotation** between cat and dog narratives; realized volatility is high and clusters violently around narrative shifts and liquidation events. It is ~98% below its 2024 ATH, underscoring the brutal mean-reversion memes exhibit once a hype cycle ends.
+
+**Risk flags.**
+- **Narrative dependence / no floor:** value rests entirely on meme attention; when the narrative fades, liquidity and price collapse together and there is no fundamental support.
+- **Perp funding dislocations:** meme funding flips sharply positive on crowded longs (then flushes) and negative on capitulation — funding cost and squeeze risk can dominate P&L.
+- **Liquidation-cascade risk:** open interest is thin and unstable relative to majors, so cascades are frequent and violent; always check live funding/OI before sizing.
+- **Venue/liquidity concentration:** while two-venue, depth is still shallow versus large caps, and a shift in Solana retail interest or venue delisting would sharply impair liquidity.
+- **Ecosystem dependency:** Solana congestion or outages directly degrade meme-sector liquidity and spot/DEX pricing that anchors the perps.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=POPCAT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=POPCAT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=POPCAT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=POPCAT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=POPCAT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

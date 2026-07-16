@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["FOGO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.fogo.io/"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Fogo
@@ -124,6 +124,45 @@ FOGO's ~$49M market cap against a ~$128M FDV (MC/FDV ~0.38) prices in heavy forw
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** FOGO trades on a genuinely two-venue derivatives market: [[hyperliquid|Hyperliquid]] carries FOGO-PERP with leverage up to roughly 40-50x, and [[binance|Binance]] lists both a FOGO spot pair (FOGO/USDT) and a USD-margined perpetual. Having a CEX perp plus an on-chain perp plus spot on the same name is unusual for a sub-#550 token and materially improves execution: takers can route to whichever book is deeper, and the parallel funding markets create a genuine spot-vs-perp and CEX-vs-DEX relationship to trade. Still, this is a small-cap ($30-50M range); order-book depth is thin relative to majors, so size into limit orders, expect slippage on market sweeps, and confirm live L2 depth before committing size on either venue. Venue availability shapes sizing more than it removes the small-cap slippage risk.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — FOGO runs perps on both Hyperliquid and Binance simultaneously, so the two funding curves can diverge and be harvested against each other.
+- [[funding-rate-arbitrage]] — long spot (or Binance perp) against short Hyperliquid perp (or vice versa) to collect the funding differential on a name with parallel perp markets.
+- [[cash-and-carry]] — Binance spot plus a short perp lets you lock the basis/funding carry on a thin small-cap where funding can run rich.
+- [[liquidation-cascade-fade]] — thin FOGO books mean small flows trigger outsized liquidation gaps on the perp, offering mean-reversion entries after forced-seller exhaustion.
+- [[oi-price-exhaustion]] — sparse open interest makes OI-vs-price divergence a cleaner exhaustion signal on FOGO than on deep large-caps.
+- [[volatility-breakout]] — a low-cap stabilising near its lows tends to trade in coiled ranges that resolve in sharp expansion moves suited to breakout entries.
+
+**Volatility & regime character.** FOGO is a high-beta small-cap infra/DeFi token (an SVM trading-optimised [[layer-1]]), not a large-cap or stablecoin. It carries strong reflexive beta to the broad risk-on/risk-off crypto tape and to [[solana|Solana]]/SVM narrative flows in particular, with amplified drawdowns and rallies versus BTC/ETH. Expect it to underperform in risk-off and overshoot in risk-on; its price is narrative- and volume-driven rather than anchored to durable cash flows.
+
+**Risk flags.**
+- **Dilution / emissions:** MC/FDV ~0.38 with an inflationary PoS reward model — locked supply and staking issuance are a persistent overhang.
+- **Liquidity concentration:** small cap and thin perp depth; both books can gap on modest flow, and funding can dislocate sharply between venues.
+- **Narrative dependence:** value hinges on sustained on-chain DEX volume it has not yet proven; a fading SVM/trading-L1 narrative hits it disproportionately.
+- **Perp funding dislocations:** parallel HL and Binance funding markets on a thin name can spike or invert quickly — an opportunity for arbs but a tail risk for one-sided carry.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=FOGO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=FOGO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=FOGO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=FOGO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=FOGO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

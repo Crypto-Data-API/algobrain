@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, history]
+tags: [altcoins, crypto, history, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["ETC"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized"
 website: "https://ethereumclassic.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-work]]", "[[the-dao-hack]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-work]]", "[[the-dao-hack]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-short-funding-fade]]", "[[short-liquidation-squeeze]]"]
 ---
 
 # Ethereum Classic
@@ -313,6 +313,60 @@ The takeaway: ETC offers Ethereum-like *technology lineage* with Bitcoin-like *m
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ETC is a genuinely **two-venue derivatives name**, tradable on **both Binance and [[hyperliquid|Hyperliquid]]**:
+
+- **Binance** — spot (ETC/USDT) plus a **USD-margined perpetual**, backed by top-tier CEX order-book depth. This is the price-discovery and deepest-liquidity venue.
+- **Hyperliquid** — **ETC-PERP**, an on-chain perp offering up to **~40–50x** leverage with transparent on-chain funding, mark, and open interest.
+
+The result is a **deep, liquid two-venue market**: tight enough spreads and sufficient book depth to run size uncommon for a #63 legacy L1. Practically, the dual-venue structure means execution can be split across CEX and DEX to reduce slippage, and the **Binance-vs-Hyperliquid basis and funding differential is itself tradeable** — a persistent divergence between the two perps is a clean cross-venue signal. Sizing should still respect that ETC's book, while healthy, is an order of magnitude thinner than BTC/ETH, so large clips can move it during catalyst windows.
+
+### Applicable strategies
+
+- [[crowded-short-funding-fade]] — ETC habitually attracts crowded shorts during quiet drift, pushing perp funding deeply negative; fading that crowded short is the setup for its trademark squeeze pops.
+- [[short-liquidation-squeeze]] — high short interest plus dated catalysts (fifthening, Olympia) make ETC a prime candidate for cascading short-liquidation squeezes on catalyst headlines.
+- [[hl-vs-cex-funding-divergence]] — with active perps on both Hyperliquid and Binance, funding can diverge between venues, giving a directly harvestable spread.
+- [[oi-confirmed-trend]] — rising open interest alongside a breakout distinguishes genuine catalyst-driven trend from a hollow short-cover bounce in ETC's low-conviction float.
+- [[event-driven-trading]] — the fifthening (Aug–Oct 2026) supply cut and Olympia mainnet (target end-2026) are rare *dated* events that reliably drive run-up-then-reverse behaviour.
+- [[pairs-trading]] — the ETH/ETC ratio is a cleaner expression of the PoW-vs-PoS / immutability thesis than an outright ETC long and strips out broad market beta.
+
+### Volatility & regime character
+
+ETC is a **high-beta legacy L1 / catalyst-reactive squeeze vehicle**. Its baseline behaviour is **low-conviction drift punctuated by violent narrative squeezes** — historically a favourite rotation/squeeze name (2021 retail mania to $167, Merge-era PoW-narrative pops). It carries **high beta to [[bitcoin]] and [[ethereum]]**: absent idiosyncratic news it largely follows the majors, amplified in both directions, and in risk-off tape it tends to bleed against them. The ETH relationship is definitional — much of ETC's identity trades *relative* to Ethereum's PoS/immutability contrast.
+
+### Risk flags
+
+- **Narrative dependence** — largely "newsless" between catalysts; price is driven by BTC/ETH beta and episodic squeeze flows, not fundamentals or cash flows.
+- **Perp funding dislocations** — funding oscillates sharply and can flip deeply negative as shorts crowd in; crowded positioning around the dated 2026 catalysts can unwind violently in either direction.
+- **Catalyst sell-the-news** — the fifthening and Olympia mainnet are well-telegraphed; run-ups can fully price the event and reverse on activation.
+- **Miner sell pressure** — the only structural sell flow is miners liquidating coinbase rewards; falling price compresses miner margins and can force reflexive capitulation selling.
+- **51%-attack precedent** — three reorg attacks in August 2020; post-Merge hashrate and MESS raised the cost by orders of magnitude, but any sustained hashrate decline reopens the vulnerability.
+- **Liquidity/venue concentration** — depth, while good for the cohort, is far thinner than BTC/ETH; large size can move the book and slippage rises in catalyst windows.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ETC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ETC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ETC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ETC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ETC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

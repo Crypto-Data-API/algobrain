@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, gamefi, nft]
+tags: [altcoins, crypto, gamefi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["GMT", "Green Metaverse Token", "STEPN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.stepn.com/"
-related: ["[[crypto-markets]]", "[[gamefi]]", "[[governance-token]]", "[[move-to-earn]]", "[[play-to-earn]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[gamefi]]", "[[governance-token]]", "[[move-to-earn]]", "[[play-to-earn]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # STEPN (GMT)
@@ -235,6 +235,50 @@ Potential catalysts (positive): renewed move-to-earn or "consumer dApp" narrativ
 - **Microcap volatility** — At ~$25.8M market cap, GMT is a small-cap altcoin subject to sharp drawdowns.
 
 This is not investment advice; figures above are point-in-time market data, not a valuation.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** GMT is unusually well-supported for a sub-$30M micro-cap: it trades on **Binance** (GMT/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** (GMT-PERP, up to ~40-50x leverage), giving it a genuinely two-venue derivatives market rather than a single thin book. That dual availability tightens spreads, deepens aggregate order-book depth, and lets traders route and split size across CEX and on-chain venues, run cross-venue [[funding-rate]] plays, and manage inventory more precisely than most GameFi micro-caps allow. The high available leverage means most directional flow and price discovery happens in perps; spot depth is comparatively shallow, so sizing should still respect [[slippage]] on the spot leg and avoid market orders into the thin on-chain books.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — a liquid two-venue GMT perp market with recurring funding lets a delta-neutral book collect funding while hedging spot exposure.
+- [[hl-vs-cex-funding-divergence]] — Binance and Hyperliquid GMT-PERP funding can dislocate, and both venues being deep enough to trade makes the spread capturable.
+- [[cash-and-carry]] — Binance spot plus the USD-margined perp supports a long-spot/short-perp carry when the perp trades at a persistent premium.
+- [[crowded-long-funding-fade]] — as a reflexive GameFi micro-cap, GMT is prone to sentiment-driven long crowding that shows up as stretched positive funding, offering a fade signal.
+- [[liquidation-cascade-fade]] — high perp leverage and thin spot depth make GMT prone to sharp liquidation flushes that overshoot and mean-revert.
+- [[narrative-trading]] — GMT trades on move-to-earn / consumer-crypto narrative flow (product cycles, GameFi rotations) far more than on fundamentals.
+
+**Volatility & regime character.** GMT is a **high-beta GameFi / consumer-crypto micro-cap** with pronounced [[play-to-earn]] reflexivity in its underlying tokenomics. It carries beta-on-beta behavior — broad altcoin beta multiplied by GameFi-theme beta — and is highly correlated to BTC/ETH risk direction while amplifying it: it bleeds and chops in risk-off/Extreme-Fear tapes and produces sharp, often low-quality bounces on any risk-on or narrative impulse. It tracks the wider GameFi/metaverse cohort (AXS, SAND, GALA, IMX, RON) and the [[solana|Solana]] ecosystem more than idiosyncratic fundamentals.
+
+**Risk flags.**
+- **Liquidity / venue concentration** — despite two venues, aggregate depth is thin at a ~$25M cap; large orders move price and perp liquidity can evaporate in stress.
+- **Emissions / supply** — uncapped GST inflation and ongoing GMT unlocks toward the 6B max supply (circulating ~3.11B of ~5.07B total) are a structural overhang; MC/FDV ~0.61 signals meaningful dilution ahead.
+- **Narrative dependence** — needs both a category catalyst (GameFi/consumer-crypto rotation) and coin-specific product news to sustain moves; absent both, bounces fade.
+- **Perp funding dislocations** — leverage-driven crowding can push funding to extremes and trigger liquidation cascades; funding cost erodes leveraged holds.
+- **Regulatory / geographic** — the 2022 mainland-China block showed how policy shifts can rapidly shrink the user base and demand.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GMT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GMT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GMT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GMT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GMT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

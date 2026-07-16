@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, perpetuals]
+tags: [crypto, defi, derivatives, perpetuals, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins, bitcoin, ethereum]
 aliases: ["AVNT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.avantisfi.com/"
-related: ["[[base]]", "[[coinbase]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[edgex]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[real-world-assets]]"]
+related: ["[[base]]", "[[coinbase]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[edgex]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[real-world-assets]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Avantis
@@ -278,6 +278,54 @@ Avantis is best known for launching zero-fee perpetuals (ZFP) — a first-of-its
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AVNT is a genuine two-venue market: it trades **spot on [[binance|Binance]]** (AVNT/USDT) alongside a **USD-margined [[perpetual-futures|perp]] on Binance**, and it has an **AVNT-PERP on [[hyperliquid|Hyperliquid]]** offering up to roughly **40–50x** [[leverage]]. Having both a top-tier CEX and the largest on-chain perp venue quoting the pair gives AVNT deeper, more continuous two-sided depth than a typical rank-~625 alt, and it opens a clean CEX-vs-DEX axis for [[funding-rate|funding]] and price comparison. Practically, that dual listing lets traders route to whichever book is deeper at execution time and split larger clips across venues to limit slippage. Still, at a small market cap the aggregate book is thin in absolute terms — size positions to the visible L2 depth, expect wider spreads and faster funding swings than large-caps, and watch that Binance-perp and Hyperliquid marks can diverge during fast moves.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with the AVNT perp live on both Binance and Hyperliquid, elevated funding on a crowded small-cap can be systematically collected against a spot or opposite-venue hedge.
+- [[hl-vs-cex-funding-divergence]] — the Binance-perp vs Hyperliquid-perp pairing is the exact setup for trading funding-rate gaps between a CEX and Hyperliquid on the same AVNT contract.
+- [[cash-and-carry]] — deep Binance spot plus a USD-margined perp lets you hold spot AVNT against a short perp to capture positive basis/funding with limited directional risk.
+- [[liquidation-cascade-fade]] — high leverage (~40–50x on HL) on a thin-cap token makes AVNT prone to over-extended liquidation flushes that mean-revert, a fadeable extreme.
+- [[oi-confirmed-trend]] — reading [[open-interest|OI]] alongside price on both venues helps separate genuine AVNT trends from squeeze-driven spikes.
+- [[token-unlock-supply-event]] — with only ~one-third of max supply circulating (MC/FDV ~0.32), scheduled cliff unlocks are recurring, tradable supply events.
+
+### Volatility & regime character
+
+AVNT is a **high-beta DeFi / perp-DEX infrastructure token** — a Base-native leveraged-RWA perp venue — so it behaves like a small-cap alt with amplified moves versus [[bitcoin|BTC]] and [[ethereum|ETH]]: it tends to rally harder than beta in risk-on tapes and retrace fully when the perp-DEX and Base-DeFi narratives fade. It carries reflexive narrative beta to two themes (real-revenue perp DEXes and Base ecosystem growth) layered on top of broad-market direction, and trades near its all-time low, which keeps realized volatility and squeeze sensitivity elevated.
+
+### Risk flags
+
+- **Small-cap / liquidity concentration:** rank ~625 with a modest cap; despite two venues, absolute depth is limited and the market can gap on flow.
+- **Token unlocks / emissions:** ~68% of max supply (~676M AVNT) still to unlock (MC/FDV ~0.32) is a structural overhang and a source of supply-driven downside.
+- **Narrative dependence:** price is highly sensitive to perp-DEX and Base-DeFi sentiment; a fading narrative removes the primary bid.
+- **Perp funding dislocations:** thin small-cap perps can see funding spike and Binance vs Hyperliquid marks diverge, whipsawing leveraged positions.
+- **Leverage / cascade risk:** high available leverage makes AVNT prone to fast [[liquidation]] cascades in either direction.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AVNT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AVNT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AVNT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AVNT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AVNT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

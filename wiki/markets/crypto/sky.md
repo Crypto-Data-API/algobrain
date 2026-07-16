@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, stablecoins]
 aliases: ["MakerDAO", "SKY", "Sky Ecosystem", "Sky Protocol"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized (DAO; founded as MakerDAO by Rune Christensen)"
 website: "https://sky.money/"
-related: ["[[aave]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethena]]", "[[ethereum]]", "[[hyperliquid]]", "[[real-world-assets]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[uniswap]]"]
+related: ["[[aave]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethena]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]", "[[real-world-assets]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[uniswap]]"]
 ---
 
 # Sky
@@ -330,6 +330,54 @@ The cleanest peers are **Sky vs [[aave|Aave]]** (overcollateralized DeFi issuers
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SKY trades on **both major derivatives venues**: **Binance** (spot SKY/USDT plus a USD-margined SKY perpetual) and **Hyperliquid** (SKY-PERP, up to ~40-50x leverage). This is a genuinely two-venue market, so funding, mark price, and order-book depth can be compared and arbitraged across a CEX and an on-chain perp DEX. Practically, dual availability improves execution and lets traders route or split size, but note the well-documented **thin underlying spot turnover** (~$8-10M/day against a ~$1.36B cap): perp depth on SKY-PERP is lighter than large-cap alts, so size for slippage, use limit orders, and treat available leverage as an amplifier of that liquidity risk rather than a reason to press size. Cross-venue funding/basis dislocations are the natural edge here given the CEX-vs-DEX split.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on SKY-PERP when the buyback-driven "real-yield" bid keeps perp longs crowded and funding persistently positive.
+- [[hl-vs-cex-funding-divergence]] — exploit funding gaps between Hyperliquid's SKY-PERP and Binance's USD-margined perp, a clean edge in this two-venue market.
+- [[cash-and-carry]] — hedge spot (Binance/Uniswap) against a short perp to bank basis/funding while SKY's thin float keeps perps periodically rich.
+- [[event-driven-trading]] — trade around Sky's discrete catalysts (emissions-cut votes, buyback-pace changes, USDS supply highs, Star/SPK actions), which have produced sharp same-day moves.
+- [[liquidation-cascade-fade]] — fade forced-liquidation gaps in an illiquid perp where governance headlines can trigger outsized wicks that mean-revert.
+- [[narrative-trading]] — position SKY within the "real-yield / buyback" DeFi basket alongside [[uniswap|UNI]] and [[aave|AAVE]] as USDS-supply and buyback narratives rotate.
+
+### Volatility & regime character
+
+SKY is a **large-cap DeFi / stablecoin-issuer governance token**, not a memecoin — its price is anchored to a cash-flow story (USDS supply, protocol revenue, buyback intensity) and it carries the **shallowest drawdown of its peer basket**, giving it a relatively defensive, lower-beta character versus high-beta alts. It still trades as a crypto-beta asset correlated to BTC/ETH risk appetite, but with an idiosyncratic overlay: rate sensitivity (T-bill income) and governance-driven supply changes can decouple it from broad alt beta on catalyst days.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — very thin spot turnover; perp depth is limited, so leverage magnifies slippage and exit risk, and price can gap on governance headlines.
+- **Governance-driven supply** — emissions schedules and buyback pace are DAO levers (the 2026-03-14 pace cut from 300K to 37.6K USDS/day shows the bid is conditional), so token supply/deflation is not constant.
+- **Narrative / rate dependence** — the thesis leans on USDS growth and RWA/T-bill revenue; Fed rate cuts compress earnings and buyback capacity, a macro risk peers on funding-based yield do not share.
+- **Perp funding dislocations** — the CEX-vs-DEX split can produce funding/basis gaps that cut both ways for carry positions; monitor both venues before sizing.
+- **Regulatory** — decentralized stablecoin issuers face GENIUS-Act-era competition and regulatory pressure that can weigh on the USDS/SKY narrative.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SKY` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SKY` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SKY&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SKY&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SKY"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

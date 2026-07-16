@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins, ethereum]
 aliases: ["MOVE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.movementnetwork.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[staking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Movement
@@ -260,6 +260,48 @@ $MOVE is the native token of Movement Network, for transaction fees and staking 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** MOVE is a rare small-cap with a genuine two-venue derivatives market: it trades on **Binance** (spot MOVE/USDT and a USD-margined perpetual) and on **[[hyperliquid]]** (MOVE-PERP, with leverage up to roughly ~40-50x). Having both a deep CEX venue and an on-chain perp gives MOVE meaningfully better depth and tighter spreads than perp-only or spot-only micro-caps, and it opens genuine cross-venue execution: traders can route spot on Binance, hedge or express directional views on either perp, and arbitrage price/funding differences between Binance and Hyperliquid. That said, absolute depth is still that of a ~$45-50M-cap alt — order books thin out quickly, so size positions to the shallower of the two venues and expect slippage on larger clips. The dual listing also makes leverage-driven, reflexive moves more likely than in the spot-only names in its cohort.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — MOVE's presence on both Binance perp and Hyperliquid MOVE-PERP lets you harvest funding-rate gaps between the two venues.
+- [[cash-and-carry]] — long Binance spot MOVE against a short perp captures positive basis/funding without directional exposure to the heavily-diluted token.
+- [[crowded-short-funding-fade]] — in the extreme-fear regime shorts often dominate; persistently negative funding flags crowded shorts that can be faded into squeezes.
+- [[liquidation-cascade-fade]] — thin two-sided depth means leverage flushes overshoot; fading forced-liquidation wicks near the all-time-low zone is a recurring setup.
+- [[token-unlock-supply-event]] — with only ~40% of the 10B supply circulating, scheduled unlocks/emissions are tradable supply catalysts.
+- [[range-mean-reversion]] — pinned near its ATL in a bear regime, MOVE oscillates in a compressed band that suits reversion around support/resistance.
+
+**Volatility & regime character.** MOVE is a **high-beta, deeply-drawn-down infra/L1 alt** (Move-language modular L2 on Ethereum), currently ~99% below its ATH and hovering near record lows. It behaves with high directional beta to BTC/ETH — it sells off hard in risk-off, extreme-fear conditions and can rip on any broad-alt or Move-narrative relief — but with amplified amplitude and reflexivity because of its small cap, active perps, and heavy dilution overhang. Expect wide intraday ranges relative to majors and outsized reactions to leverage flushes and funding swings rather than to organic spot demand.
+
+**Risk flags.**
+- **Liquidity/venue concentration** — real depth lives on just Binance and Hyperliquid; a listing change, outage, or funding dislocation on either venue can whipsaw price and strand hedges.
+- **Dilution / token unlocks** — ~60% of the 10B max supply is still to enter circulation; unlocks and staking emissions are standing sell-pressure catalysts.
+- **Narrative dependence** — the bid depends on Move-language adoption holding up against Aptos and Sui; adoption stalls disproportionately hurt a post-hype launch like MOVE.
+- **Perp funding dislocations** — with an active perp on both venues, crowded positioning and funding spikes can force cascades in either direction; confirm live funding/OI before sizing.
+- **Regulatory/regime risk** — Extreme Fear and an Established Bear Market backdrop weigh on all small-cap, high-beta alts.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MOVE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MOVE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MOVE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MOVE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MOVE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

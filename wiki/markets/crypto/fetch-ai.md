@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, altcoins, crypto, nft]
+tags: [ai-trading, altcoins, crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["ASI", "ASI Alliance", "FET", "Fetch.ai"]
 entity_type: protocol
 founded: 2019
 headquarters: "Decentralized (Fetch.ai: Cambridge, UK; SingularityNET)"
 website: "https://www.superintelligence.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[ocean-protocol]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[ocean-protocol]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]"]
 ---
 
 # Artificial Superintelligence Alliance
@@ -309,6 +309,54 @@ The April→June 2026 path (rank #97 → #114, volume halved) tracks the broader
 | **Max Supply** | 2.71B FET |
 | **Fully Diluted Valuation** | $428.61M |
 | **Market Cap / FDV Ratio** | 0.83 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+FET is a genuine two-venue perp market. It trades on **Binance** (FET/USDT spot plus a USD-margined FET perpetual) and on **[[hyperliquid|Hyperliquid]]** (FET-PERP, leverage up to ~40-50x). Spot depth is top-tier for an AI alt across Binance, Kraken, Bitget, KuCoin and Crypto.com, with additional Uniswap V3 depth on Ethereum. Because both a large CEX (Binance) and the dominant on-chain perp DEX (Hyperliquid) quote FET, order-book depth is deep enough on either side for institutional-size directional entries, and the parallel venues create a clean rail for cross-venue basis and funding-divergence trades. The two-venue structure also means execution can be routed to whichever book is tighter, and sizing can lean on aggregate depth rather than a single order book — though thinning liquidity in risk-off tape (24h volume more than halved April→June 2026) argues for scaling in on wide moves rather than sweeping the book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — FET funding mean-reverts around neutral but turns positive on AI-narrative FOMO spikes, letting a delta-neutral long-spot/short-perp book harvest carry without punitive drag.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp makes long-spot / short-perp basis capture straightforward when narrative pops push perp premium positive.
+- [[hl-vs-cex-funding-divergence]] — with FET quoted on both Hyperliquid and Binance perps, funding can dislocate between venues, offering a market-neutral spread to arbitrage.
+- [[pairs-trading]] — long/short FET against another AI-basket name ([[bittensor|TAO]], [[render|RENDER]]) isolates idiosyncratic alpha and strips out shared sector beta.
+- [[narrative-trading]] — FET is the deepest, most liquid pure play on the AI-crypto narrative, making it the natural expression vehicle for AI-sector rotation views.
+- [[range-mean-reversion]] — in the current Extreme-Fear / bear regime FET oscillates in compressed ranges, favoring fading extremes over chasing breakouts.
+
+### Volatility & regime character
+
+FET is a **high-beta AI-infrastructure alt** — the anchor of the AI-crypto basket alongside TAO, RENDER, NEAR and WLD. It reprices sharply on macro-AI headlines (frontier-model launches, GPU/AI-capex news, NVIDIA earnings) more than on its own product metrics, so realized volatility clusters around narrative catalysts. It carries elevated beta to BTC/ETH risk-on/risk-off tape (it bleeds hard in risk-off, rips in AI-FOMO regimes) plus an idiosyncratic layer tied to alliance-governance events. Funding and open interest on FET-PERP are notably calmer than the memecoins in its comparison set, making it a cleaner directional and carry vehicle.
+
+### Risk flags
+
+- **Alliance-governance fragility** — the multi-foundation ASI structure is a demonstrated supply-shock hazard (Ocean's ~263M FET / >10%-of-float dump in late 2025); member treasuries can fracture or sell into the bid.
+- **Treasury supply overhang** — the ~286M FET returned in the Ocean settlement and other foundation holdings are potential future sell pressure to watch on-chain.
+- **Narrative dependence** — FET lives and dies on the AI-crypto story; -94.5% from ATH shows how fast premium drains when the theme cools.
+- **Liquidity contraction** — 24h volume more than halved April→June 2026; thinner books amplify slippage and drawdowns.
+- **Perp funding dislocations** — narrative FOMO can spike funding positive on FET-PERP; sizing carry against transient funding requires monitoring both venues.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=FET` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=FET` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=FET&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=FET&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=FET"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

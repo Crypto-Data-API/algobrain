@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, bitcoin]
 aliases: ["BABY", "Babylon Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://babylon.foundation/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[restaking]]", "[[staking]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[restaking]]", "[[staking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Babylon
@@ -231,6 +231,49 @@ BABY's defining feature for valuation is its **dilution profile**: with only ~34
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — BABY trades as a deep, liquid two-venue perp market: [[binance|Binance]] hosts spot (BABY/USDT) plus a USD-margined BABY perpetual, while [[hyperliquid|Hyperliquid]] lists a native BABY-PERP with leverage up to ~40-50x. Having both a large CEX and the leading on-chain perp venue means order-book depth and continuous two-sided flow are better than the ~$50M market cap alone would suggest, tightening spreads and easing execution. Still, at this cap size the book thins out on larger clips, so scale into and out of positions and lean on the deeper Binance book (or split fills across venues) for size; the dual-venue setup also creates a clean rail for cross-venue basis and funding trades.
+
+**Applicable strategies**
+
+- [[hl-vs-cex-funding-divergence]] — with a Binance USD-margined perp and a Hyperliquid BABY-PERP both live, funding on the two venues can diverge, letting you collect the spread while staying delta-neutral.
+- [[funding-rate-harvest]] — in the Extreme-Fear regime, BABY funding can sit persistently negative as shorts press, paying patient longs (or short-perp/long-spot carriers) to hold the position.
+- [[cash-and-carry]] — spot BABY on Binance hedged against a short BABY-PERP captures any positive perp basis/funding with market-neutral exposure.
+- [[liquidation-cascade-fade]] — a thin low-cap book plus perp leverage makes BABY prone to liquidation wicks; fading the overshoot after a forced-selling cascade targets the mean-reversion bounce.
+- [[oi-confirmed-trend]] — pairing BABY price moves with Hyperliquid open-interest confirms whether a breakout is backed by fresh positioning or is just short-covering noise.
+- [[breakout-and-retest]] — after ~91% drawdown and long basing near the ATL, range breakouts on the Bitcoin-staking narrative can be entered on the retest to control risk.
+
+**Volatility & regime character** — BABY is a **high-beta DeFi / BTCfi infrastructure alt**: small cap, heavy dilution overhang, and a narrative (Bitcoin yield / shared security) that amplifies both up- and down-moves. It is directionally correlated to [[bitcoin|BTC]] and broad alt beta but with a much higher amplitude — it tends to underperform sharply in risk-off tape (currently ~91% below ATH in an Established Bear Market) and can spike hard on BTCfi or Bitcoin-staking catalysts. Expect wide intraday ranges and reflexive moves around funding and liquidation events.
+
+**Risk flags**
+
+- **Dilution / unlock overhang** — only ~34-37% of supply circulates (MC/FDV ~0.34-0.37); ongoing emissions and future unlocks can add persistent sell pressure that overwhelms directional trades.
+- **Liquidity concentration** — depth is concentrated on Binance and Hyperliquid; a venue outage, delisting, or leverage-cap change can gap the book and strand size.
+- **Narrative dependence** — value hinges on BTCfi adoption and BTC actually staked (TVL); if the shared-security narrative stalls, downside is one-directional.
+- **Perp funding / liquidation dislocations** — leverage plus a thin book makes funding swings and liquidation cascades frequent; crowded positioning can trigger sharp squeezes in either direction.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BABY` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BABY` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BABY&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BABY&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BABY"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

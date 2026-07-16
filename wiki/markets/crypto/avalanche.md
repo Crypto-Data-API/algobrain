@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, bitcoin, ethereum]
 aliases: ["AVAX", "Avalanche 2", "Avalanche C-Chain", "avalanche-2"]
 entity_type: protocol
 founded: 2020
 headquarters: "Ava Labs — New York, USA"
 website: "https://www.avax.network"
-related: ["[[bitcoin-etfs]]", "[[bitcoin]]", "[[cme-group]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]"]
+related: ["[[bitcoin-etfs]]", "[[bitcoin]]", "[[cme-group]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Avalanche
@@ -233,6 +233,47 @@ AVAX has a **hard-capped 720M max supply** and burns transaction fees, giving it
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — AVAX is a genuine two-venue market: it trades on [[binance|Binance]] (deep spot books plus USD-margined perpetual futures) and on [[hyperliquid|Hyperliquid]] as AVAX-PERP, where leverage runs up to ~40-50x. Both venues carry meaningful depth and tight spreads, and AVAX retains the deepest derivatives liquidity of any asset in this cohort, so size can be built and unwound without dominating the tape. The dual-venue structure enables cross-venue execution (route into the tighter book, split large orders) and, critically, [[hl-vs-cex-funding-divergence|funding/basis arbitrage]] between the CEX perp and the on-chain HL perp. Regulated [[cme-group|CME]] futures and spot ETF wrappers sit on top, giving institutions additional hedging rails.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — deep, persistent OI on both Binance and Hyperliquid makes AVAX perp funding a repeatable carry source through directional regimes.
+- [[hl-vs-cex-funding-divergence]] — AVAX quotes on both a large CEX perp (Binance) and the HL on-chain perp, so funding can dislocate between the two venues and be arbitraged.
+- [[cash-and-carry]] — with a liquid spot leg (Binance/ETF float) and a USD-margined perp, positive-funding regimes support a delta-neutral spot-long / perp-short carry.
+- [[liquidation-cascade-fade]] — as a high-beta L1 laggard trading ~96% off its ATH, AVAX sees sharp leverage-driven flushes that mean-revert once forced selling clears.
+- [[oi-confirmed-trend]] — AVAX moves on ETF-flow and RWA catalysts; pairing price with rising open interest filters genuine trends from thin squeezes.
+- [[breakout-and-retest]] — episodic ETF/news-driven rallies produce clean range breaks that can be entered on the retest of the reclaimed level.
+
+**Volatility & regime character** — AVAX is a large-cap, high-beta [[layer-1]] infrastructure token with a strong RWA/institutional-adoption overlay. It carries high beta to [[bitcoin]] and tracks the large-cap L1 basket alongside [[ethereum]] and [[solana]], amplifying broad-market moves in both directions. Since late 2025 it has increasingly traded on ETF-flow and tokenization narratives rather than raw DeFi TVL, so realized volatility clusters around catalyst events (ETF approvals/inflows, upgrades, RWA milestones) and de-risking flushes rather than mean-reverting cleanly around a stable range.
+
+**Risk flags**
+- **Narrative dependence** — pricing now leans on ETF-flow and RWA-adoption optionality; stalled inflows or a fading tokenization narrative can compress the bid quickly.
+- **Supply overhang** — only ~60% of the 720M hard cap is in circulation; staking rewards and scheduled emissions are a slow structural dilution, and staking-enabled ETFs shift the effective tradeable float.
+- **Perp funding dislocations** — dual-venue perps (Binance + Hyperliquid) can decouple on funding during squeezes; crowded [[open-interest|OI]] and stretched [[funding-rate|funding]] flag reversal risk.
+- **High-beta drawdowns** — as a laggard trading far below its ATH, AVAX underperforms in risk-off tape and is prone to leverage-driven liquidation cascades.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AVAX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AVAX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AVAX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AVAX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AVAX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

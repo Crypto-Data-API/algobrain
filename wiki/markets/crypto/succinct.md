@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, infrastructure, zero-knowledge]
+tags: [crypto, infrastructure, zero-knowledge, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["PROVE", "Succinct Labs"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.succinct.xyz/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[smart-contracts]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[smart-contracts]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Succinct
@@ -263,6 +263,53 @@ PROVE is an early-stage infrastructure token where price is driven by **narrativ
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PROVE trades on **two deep venues simultaneously**: [[binance|Binance]] (spot PROVE/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (PROVE-PERP, leverage up to ~40-50x). Binance provides the primary spot price discovery and CEX derivatives depth, while Hyperliquid's on-chain [[perpetual-futures|perp]] offers transparent [[funding-rate|funding]], [[open-interest|OI]], and L2 book data. Having a liquid perp on both a top CEX and an on-chain venue means execution can be split across order books, [[funding-rate|funding]] can be compared side-by-side, and inventory can be hedged spot-vs-perp — but as a ~#523-ranked small-cap the book still thins on sharp moves, so size relative to visible depth and expect wider slippage during volatility. The dual-venue structure is what makes cross-venue and carry trades practical here.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — long Binance spot PROVE against a short PROVE-PERP captures the funding/basis when the perp trades rich, a natural setup for a two-venue token with a real spot leg.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid PROVE-PERP funding and Binance perp funding rarely move in lockstep; harvest the spread between the two venues.
+- [[funding-rate-harvest]] — a small-cap infra token with retail perp interest tends to run persistent funding skews that a delta-neutral perp position can farm.
+- [[crowded-long-funding-fade]] — narrative-driven ZK rallies pull crowded longs into PROVE-PERP; fade extreme positive funding when [[open-interest|OI]] confirms one-sided positioning.
+- [[liquidation-cascade-fade]] — thin small-cap depth plus up-to-50x leverage makes PROVE prone to liquidation cascades that overshoot; fade the flush toward mean.
+- [[token-unlock-supply-event]] — with only ~19.5% of max supply circulating (MC/FDV ~0.19), scheduled unlocks are tradable supply events that pressure price around vesting dates.
+
+### Volatility & regime character
+
+PROVE is a **high-beta, early-stage ZK-infrastructure altcoin** — narrative-sensitive (Ethereum scaling / zero-knowledge cycle) rather than a large-cap store-of-value. It behaves as a leveraged expression of alt-market risk appetite: strongly positively correlated to [[bitcoin|BTC]]/[[ethereum|ETH]] beta on the downside, with idiosyncratic upside driven by ZK-narrative flows and SP1 adoption headlines. Expect amplified drawdowns in risk-off regimes (it printed a fresh all-time low in the current bear tape) and reflexive, low-float squeezes when the infra narrative reheats.
+
+### Risk flags
+
+- **Supply overhang:** ~805M PROVE (over 4x the current float) remains to be unlocked — a persistent structural headwind and a recurring source of supply-driven selloffs.
+- **Small-cap liquidity / venue concentration:** two liquid venues help, but total depth is modest; a Binance or Hyperliquid outage or delisting would concentrate all flow on the survivor.
+- **Narrative dependence:** value hinges on realized ZK proof demand and SP1 adoption; if rollups self-prove or rival zkVMs win share, the demand sink and price both weaken.
+- **Perp funding dislocations:** low float plus high leverage can drive sharp funding swings and liquidation cascades that whipsaw carry and directional positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PROVE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PROVE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PROVE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PROVE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PROVE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

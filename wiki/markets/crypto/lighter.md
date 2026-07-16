@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives]
+tags: [crypto, defi, derivatives, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["LIT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://lighter.xyz/"
-related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[dydx-chain]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perp-dex-aggregation]]", "[[perpetual-futures]]", "[[zk-rollup]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[dydx-chain]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perp-dex-aggregation]]", "[[perpetual-futures]]", "[[zk-rollup]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Lighter
@@ -245,6 +245,47 @@ Litentry is a privacy-preserving decentralized identity aggregation oracle, buil
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — LIT is tradable as a perpetual on [[hyperliquid|Hyperliquid]] (LIT-PERP, leverage up to ~40-50x) but is **not listed on Binance**; spot access is limited to smaller/offshore CEXs and on-chain DEXs. This makes LIT a **PERP-FIRST asset**: directional and speculative flow concentrates on the HL perp, so that book is the reference venue for price discovery. Depth is thinner than for Binance-listed majors, so large orders move the mark and should be worked in slices rather than taken at market. The absence of a deep, Binance-anchored spot book means there is no easy CEX hedge leg — cash-and-carry/basis structures must be built against on-chain or offshore spot, and position sizing should assume slippage and gap risk are higher than for large caps.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — low-float, high-FDV LIT perp can run persistently skewed funding around unlock/listing hype; harvesting the crowded side collects carry.
+- [[crowded-long-funding-fade]] — momentum longs into perp-DEX narrative pumps push funding richly positive; fading the crowd captures the mean-reversion when hype cools.
+- [[hl-vs-cex-funding-divergence]] — because HL is the dominant perp venue and offshore CEX listings are thin, funding can diverge sharply across books, creating a relative-value edge.
+- [[liquidation-cascade-fade]] — thin circulating float makes the HL perp prone to liquidation cascades on sharp moves; fading capitulation wicks targets the overshoot.
+- [[oi-price-exhaustion]] — open-interest spikes around unlock events and listing momentum flag late, crowded positioning that often precedes exhaustion reversals.
+- [[token-unlock-supply-event]] — only ~25% of max supply circulates, so scheduled vesting cliffs are a recurring, tradable supply-side catalyst for LIT.
+
+**Volatility & regime character** — LIT is a **high-beta DeFi / perp-DEX infrastructure token** with elevated realized volatility driven by low float, high FDV, and narrative sensitivity. It behaves as a risk-on altcoin: it amplifies BTC/ETH beta in both directions, tending to underperform in risk-off/bear regimes (as in the current extreme-fear backdrop) and to overshoot on the upside when perp-DEX narrative flows return. Correlation to majors is high in stress but decouples on idiosyncratic catalysts (protocol news, unlocks, listing momentum).
+
+**Risk flags**
+- **Venue concentration** — no Binance listing; perp flow concentrated on Hyperliquid, so an HL outage, parameter change, or liquidity shift disproportionately affects execution.
+- **Unlock / emission overhang** — ~25% float with FDV ~4x market cap; vesting cliffs and emissions can pressure price regardless of protocol traction.
+- **Narrative dependence** — value thesis rests on the perp-DEX story and fee capture; sentiment shifts (competition from Hyperliquid, dYdX, GMX) can compress the multiple quickly.
+- **Perp funding dislocations** — thin float and speculative positioning produce pronounced funding swings and cascade risk; crowded funding can flip violently around catalysts.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=LIT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=LIT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=LIT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=LIT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=LIT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

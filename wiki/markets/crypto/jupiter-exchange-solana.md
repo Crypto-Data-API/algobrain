@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, derivatives, exchange]
+tags: [altcoins, crypto, defi, derivatives, exchange, hyperliquid, perpetual-futures, funding-rate, open-interest]
 aliases: ["JUP", "Jupiter Aggregator", "Jupiter Exchange"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://jup.ag/"
-related: ["[[crypto-markets]]", "[[gmx]]", "[[hyperliquid]]", "[[jupiter-lend]]", "[[kamino]]", "[[orca]]", "[[raydium]]", "[[solana]]", "[[uniswap]]"]
+related: ["[[crypto-markets]]", "[[gmx]]", "[[hyperliquid]]", "[[jupiter-lend]]", "[[kamino]]", "[[orca]]", "[[raydium]]", "[[solana]]", "[[uniswap]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Jupiter
@@ -332,6 +332,59 @@ JLP is effectively a bet that **most leveraged traders lose money over time** --
 - No exploit, shutdown, or token migration has been reported through mid-2026. JUP outperformed (+14.4%/7d) into the 2026-06-20 snapshot despite the broader extreme-fear backdrop.
 
 > *Earlier notable events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+JUP trades on **both** major derivatives venues, giving it a deep, liquid two-venue structure:
+
+- **Binance** — spot (JUP/USDT) plus a **USD-margined perpetual**, the primary source of centralized depth and the reference price most funding/basis arbitrage keys off.
+- **[[hyperliquid|Hyperliquid]]** — **JUP-PERP** with leverage up to ~40–50x, the deepest on-chain order-book venue for the token.
+
+Because JUP is a mid-cap (rank ~89), depth is good near the top of book but thins out on large clips; the two-venue split means execution and sizing should be spread across Binance and Hyperliquid to avoid moving either book. Dual venue availability also makes cross-venue funding and basis spreads directly tradable rather than theoretical. Note that JUP is *also* the reference token for Solana's dominant swap router, so on-chain spot liquidity via Jupiter/Orca supplements the perp venues for spot legs.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — capture funding on the JUP perp against a delta-neutral spot leg (Binance spot or on-chain Solana spot) when funding runs persistently positive or negative.
+- [[hl-vs-cex-funding-divergence]] — arb the funding gap between Hyperliquid JUP-PERP and Binance's USD-margined JUP perp; a genuine two-venue token where this spread actually exists.
+- [[cash-and-carry]] — long spot JUP versus short the perp to harvest basis when the JUP perp trades at a premium during Solana-DeFi risk-on phases.
+- [[crowded-long-funding-fade]] — fade over-extended long positioning during Solana meme-season pumps, where JUP's high beta drives crowded, expensive longs.
+- [[liquidation-cascade-fade]] — JUP's ~1.5–2.5x beta to SOL produces sharp leveraged flushes; fade the over-shoot after forced liquidation cascades on either venue.
+- [[oi-confirmed-trend]] — use open-interest confirmation on the perp to separate real Solana-DeFi-driven trends from thin, low-conviction moves.
+
+### Volatility & regime character
+
+JUP is a **high-beta Solana DeFi / DEX-aggregator token** — effectively a levered proxy on total Solana on-chain throughput (swap volume, perp volume, meme-coin activity). It historically moves ~1.5–2.5x the magnitude of SOL, so its dominant correlation is to **SOL beta** rather than directly to BTC/ETH, though it still inherits broad-market BTC/ETH risk-on/risk-off regime shifts. Expect whipsaw amplification in both directions: it outperforms hard in Solana DeFi risk-on phases and drawdowns are severe (~90% off its 2024 ATH). Regime character is reflexive and narrative-sensitive, tied to Solana ecosystem sentiment.
+
+### Risk flags
+
+- **Dilution / emissions overhang** — only ~33% of the 10B max supply circulates (MC/FDV ~0.48); team, ecosystem, and airdrop unlocks are ongoing structural sell pressure and can compress rallies.
+- **Narrative dependence** — price is a proxy on Solana DeFi/meme-coin activity; a rotation out of the Solana narrative removes the primary bid.
+- **Solana infrastructure risk** — network outages or Solana market-share loss hit Jupiter volume and JUP directly.
+- **Perp funding dislocations** — high-beta pumps produce crowded, expensive funding that can flip violently; funding-carry positions must budget for gap risk.
+- **Liquidity concentration** — depth is concentrated on Binance and Hyperliquid; large size can dislocate the book, and venue-specific outages concentrate risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=JUP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=JUP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=JUP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=JUP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=JUP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

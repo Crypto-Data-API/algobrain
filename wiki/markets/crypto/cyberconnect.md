@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, ethereum]
 aliases: ["CYBER", "Cyber", "CyberConnect"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://cyber.co/"
-related: ["[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[layer-2]]", "[[socialfi]]"]
+related: ["[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[layer-2]]", "[[socialfi]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # CyberConnect (CYBER)
@@ -249,6 +249,53 @@ Cyber competes in **SocialFi / decentralized-social infrastructure**, a segment 
 ## Major News & Events
 
 > *See [[#History & Timeline]] for dated milestones. Further notable events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+CYBER is tradable on **both** [[binance|Binance]] (spot **and** a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**CYBER-PERP**, leverage up to ~40–50x). This gives it a **deep, liquid two-venue derivatives market** unusually rich for a ~#757-ranked micro-cap: a centralized book with tight spreads and a large USD-margined perp, plus an on-chain perp with a transparent order book and on-chain funding/OI. The dual-venue structure means execution can be split — spot and CEX perp for size and tight fills, Hyperliquid for on-chain hedging and funding capture — and it enables **cross-venue basis/funding trades** (Binance perp vs. Hyperliquid perp, or either perp vs. Binance spot). Practically, size positions to Hyperliquid's thinner on-chain depth (it fills faster on the CEX book), and use the two venues to net exposure rather than crossing the full spread twice.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — CYBER quotes a perp on both Binance and Hyperliquid, so persistent funding gaps between the two venues can be harvested delta-neutral.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid on-chain funding often dislocates from Binance's USD-margined perp funding on a micro-cap this crowded; long the cheaper-funding leg, short the richer.
+- [[cash-and-carry]] — pair long Binance spot CYBER against a short on either perp to lock the basis when funding/premium runs rich after a narrative pop.
+- [[crowded-long-funding-fade]] — CYBER is a favorite leveraged-momentum vehicle; euphoric positive funding into resistance flags an overcrowded long to fade.
+- [[liquidation-cascade-fade]] — a low-float, high-beta name with active perps produces sharp two-sided liquidation flushes; fade the wick after forced selling exhausts.
+- [[oi-confirmed-trend]] — combine Hyperliquid open-interest and price to separate genuine breakouts (OI rising with price) from squeeze noise on this thin-float token.
+
+### Volatility & regime character
+
+CYBER is a **high-beta SocialFi / Layer-2 infrastructure alt** with pronounced small-cap, low-float reflexivity — its low-float September-2023 launch and ~98%-from-ATH drawdown underline how violently it moves. It behaves as a **risk-on narrative token**: strongly positive beta to BTC/ETH direction, amplified on the downside in risk-off tape and prone to outsized rips when SocialFi/L2/DID narratives re-rate. Expect wider realized volatility than large-cap alts, with moves driven as much by leverage/funding and narrative rotation as by fundamentals.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — despite two-venue coverage, real depth is concentrated on Binance; Hyperliquid on-chain depth is thinner, so large orders can slip and funding can spike.
+- **Token unlocks / emissions** — a hard-capped 100M supply but a meaningful remaining unlock overhang (MC/FDV ~0.61); scheduled unlocks are a recurring supply/dilution risk (see [[emissions]]).
+- **Narrative dependence** — price is tightly coupled to SocialFi/L2/DID sentiment; the category is unproven at scale, so re-rates and de-rates are abrupt.
+- **Perp funding dislocations** — as a crowded leveraged vehicle, CYBER is prone to funding spikes and cascading liquidations in both directions; funding can flip sign fast around catalysts.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CYBER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CYBER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CYBER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CYBER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CYBER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

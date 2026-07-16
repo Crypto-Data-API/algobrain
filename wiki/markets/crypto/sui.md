@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi]
 aliases: ["SUI", "Sui Network"]
 entity_type: protocol
 founded: 2023
 headquarters: "Mysten Labs — Palo Alto, USA"
 website: "https://sui.io/"
-related: ["[[aptos]]", "[[bitcoin-etfs]]", "[[cetus-protocol]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[move-language]]", "[[near]]", "[[proof-of-stake]]", "[[solana]]"]
+related: ["[[aptos]]", "[[bitcoin-etfs]]", "[[cetus-protocol]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[layer-1-blockchains]]", "[[move-language]]", "[[near]]", "[[proof-of-stake]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Sui
@@ -301,6 +301,54 @@ Sui's clearest peer is **[[aptos|Aptos]]** (the other major Move chain) — the 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SUI trades on **both major venue types**, giving it a deep, liquid two-venue market. On [[binance|Binance]] it has deep spot (SUI/USDT) plus a USD-margined perpetual, and on [[hyperliquid|Hyperliquid]] the SUI-PERP offers up to ~40-50x leverage. Order-book depth is solid across both venues, with SUI consistently ranking among the more actively traded large-cap alt-L1 perps. The dual-venue setup means execution can be split between CEX and on-chain liquidity: Binance depth supports larger clips and cash-and-carry against spot, while Hyperliquid provides transparent on-chain funding/OI and a clean second funding leg. This availability supports meaningful position sizing without single-venue slippage concentration, though sizing should still respect SUI's high-beta, unlock-driven air pockets.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — deep Binance spot plus a USD-margined perp lets traders lock the basis on a high-carry alt-L1; funding often runs positive outside unlock windows.
+- [[hl-vs-cex-funding-divergence]] — SUI-PERP funding on Hyperliquid vs. Binance perp funding frequently diverges around unlock dates and ETF-flow prints, a clean two-venue funding spread.
+- [[crowded-short-funding-fade]] — funding tends to flip negative as shorts crowd in ahead of monthly unlocks; fading over-crowded shorts targets the post-absorption relief rally.
+- [[token-unlock-supply-event]] — SUI's MC/FDV ~0.40 makes scheduled monthly unlocks the single most tradable recurring supply catalyst.
+- [[pairs-trading]] — the [[move-language|Move]]-language pair vs. [[aptos|Aptos]] is a well-established relative-value leg for SUI.
+- [[liquidation-cascade-fade]] — high-beta SUI produces sharp liquidation flushes into extreme-fear regimes, offering mean-reversion setups against forced selling.
+
+### Volatility & regime character
+
+SUI is a **high-beta large-cap alt-L1** (infra / DeFi token), trading with elevated volatility and strong positive correlation to BTC/ETH beta — it amplifies broad-market moves and tends to underperform cleaner-supply L1s in risk-off tapes. Its idiosyncratic driver is the structural unlock overhang, which layers supply-event reflexivity on top of ordinary alt-L1 beta. Regime behaviour is momentum-heavy in trends and prone to unlock-driven air pockets in bear phases.
+
+### Risk flags
+
+- **Unlock overhang** — MC/FDV ~0.40; monthly unlocks are a persistent, tradable sell-pressure catalyst and can drive perp funding dislocations.
+- **Narrative dependence** — sensitive to the alt-L1 / "Solana-killer" and ETF-flow narratives; discrete ETF or filing news can reverse positioning quickly.
+- **Smart-contract / ecosystem risk** — the Cetus exploit precedent shows flagship-app failures can drag SUI sentiment even when the L1 is sound.
+- **Perp funding dislocations** — funding can swing negative into unlocks and diverge across venues, a risk for one-sided carry positioning.
+- **High beta / macro** — large-cap alt beta means outsized drawdowns in broad risk-off moves.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SUI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SUI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SUI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SUI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SUI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["APE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://apechain.com/"
-related: ["[[bored-ape-yacht-club]]", "[[crypto-markets]]", "[[ethereum]]", "[[nft]]", "[[otherside]]", "[[the-sandbox]]"]
+related: ["[[bored-ape-yacht-club]]", "[[crypto-markets]]", "[[ethereum]]", "[[nft]]", "[[otherside]]", "[[the-sandbox]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # ApeCoin
@@ -279,6 +279,51 @@ ApeCoin's mission is is to supercharge its ecosystem by supporting high-quality 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — APE trades on a **deep, liquid two-venue market**. It is available on **[[binance]]** (APE/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid]]** as **APE-PERP** with leverage up to roughly **40-50x**. Having both a large CEX and a top on-chain perp DEX means order-book depth is spread across venues, so execution is generally smooth for typical size while very large orders should be split across Binance and Hyperliquid to limit slippage. The two-venue structure also creates a persistent CEX-vs-DEX price/funding surface that supports basis and funding trades, and it lets traders size positions against the deeper aggregate book rather than a single venue.
+
+**Applicable strategies** — chosen for APE's high-beta, sentiment-driven, two-venue derivatives profile:
+
+- [[funding-rate-arbitrage]] — APE funding swings sharply positive on NFT-narrative pumps and negative in capitulation, opening spot-vs-perp funding capture.
+- [[hl-vs-cex-funding-divergence]] — dual listing on Binance and Hyperliquid lets traders harvest funding gaps between the CEX perp and APE-PERP.
+- [[crowded-long-funding-fade]] — brand/NFT-hype rallies routinely crowd longs into richly positive funding, a fade setup on APE.
+- [[liquidation-cascade-fade]] — high leverage (~40-50x) and thin conviction make APE prone to liquidation cascades that overshoot and mean-revert.
+- [[cash-and-carry]] — with spot on Binance and perps on both venues, positive-basis carry can be locked in during euphoric funding regimes.
+- [[breakout-and-retest]] — APE's event-driven pumps (BAYC / Otherside / ApeChain catalysts) produce clean breakouts from long consolidation for trend entries.
+
+**Volatility & regime character** — APE is a **high-beta NFT-culture / metaverse / GameFi governance token**, among the highest-beta expressions of NFT and metaverse sentiment. It shows strong reflexivity: brutal drawdowns in risk-off regimes and outsized rips on narrative catalysts. Its beta to [[bitcoin|BTC]] and [[ethereum|ETH]] is high (it amplifies broad crypto moves), but its dominant driver is the idiosyncratic NFT/BAYC/Yuga sentiment cycle, so it can decouple from majors around ecosystem events. It trades with the NFT/metaverse basket ([[the-sandbox]], [[decentraland]]) rather than DeFi or AI baskets.
+
+**Risk flags**
+- **Narrative dependence** — value rests on brand/IP and NFT-sector sentiment with weak fundamental cash flows; stalled Yuga/ApeChain execution deflates the thesis fast.
+- **Perp funding dislocations** — funding can spike hard in both directions around BAYC/Otherside/unlock events, punishing carry that is on the wrong side.
+- **Liquidity / venue concentration** — despite two venues, mid-cap depth means large orders move price; venue-specific outages or thin books can widen spreads.
+- **Liquidation reflexivity** — high available leverage plus sentiment-driven positioning makes cascade risk elevated in both directions.
+- **Regulatory** — airdropped governance token tied to a for-profit ecosystem carries US securities-classification uncertainty that can affect listings/liquidity.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=APE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=APE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=APE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=APE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=APE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

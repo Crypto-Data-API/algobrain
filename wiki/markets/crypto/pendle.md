@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, yield-farming]
+tags: [crypto, defi, derivatives, yield-farming, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["PENDLE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://pendle.finance/"
-related: ["[[aave]]", "[[arbitrum]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[lido]]", "[[yearn]]"]
+related: ["[[aave]]", "[[arbitrum]]", "[[crypto-markets]]", "[[curve-finance]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[lido]]", "[[yearn]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[cash-and-carry]]"]
 ---
 
 # Pendle
@@ -310,6 +310,56 @@ For leveraged exposure, **PENDLE-PERP** trades on [[hyperliquid]] and other perp
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PENDLE is one of the deeper mid-cap DeFi markets and trades across **two liquid derivatives venues**. On [[hyperliquid]] it is available as **PENDLE-PERP** (USDC-margined, leverage up to ~40-50x), and on **Binance** it lists as both **spot** (PENDLE/USDT) and a **USD-margined perpetual**. This dual-venue depth matters for execution: size can be split across CEX and on-chain order books to reduce slippage, and the two funding regimes can diverge, opening cross-venue funding and basis trades. Spot liquidity (Binance, Kraken, Upbit, Bitget, KuCoin, Crypto.com plus Uniswap V3 / SushiSwap) leads price discovery, so the perp basis tends to track spot closely rather than gapping in isolation. A meaningful share of supply is locked as vePENDLE, tightening free float and amplifying moves on TVL/points headlines — size positions accordingly and avoid over-leveraging into thin-book weekend sessions.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the two-venue perp market lets you collect funding when restaking/points narratives crowd PENDLE longs and funding turns persistently positive.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid PENDLE-PERP and Binance's USD-margined perp price funding independently, so divergences between the two can be arbitraged.
+- [[cash-and-carry]] — deep spot (Binance/Uniswap) plus a liquid perp allows a delta-neutral long-spot / short-perp carry to capture positive basis during hot yield-narrative phases.
+- [[crowded-long-funding-fade]] — PENDLE's reflexive TVL/airdrop cycles frequently over-crowd longs; fading extended positive-funding extremes is a recurring setup.
+- [[liquidation-cascade-fade]] — as a high-beta DeFi alt with up to ~40-50x leverage available, PENDLE is prone to liquidation cascades that overshoot and mean-revert.
+- [[oi-confirmed-trend]] — pairing open-interest expansion with price on TVL-headline breakouts helps separate durable trends from thin-liquidity fakeouts.
+
+### Volatility & regime character
+
+PENDLE is a **high-beta DeFi / yield-infrastructure token**. Its price is tightly coupled to the DeFi TVL and restaking/points-farming cycle rather than moving purely as generic alt beta: it can diverge from BTC/ETH when a yield narrative is hot (as in the +8.36% 7d outperformance during a broad extreme-fear tape). Directionally it still carries elevated positive beta to ETH (its dominant collateral ecosystem) and to BTC in risk-on/risk-off swings, but with a fundamentals overlay — TVL momentum, fee revenue, and the health of the LRT/RWA/BTCfi yield pipeline all drive regime shifts. Expect large drawdowns in bear regimes (retraced ~82% from ATH) and sharp reflexive rallies when new structural yield sources emerge.
+
+### Risk flags
+
+- **Narrative dependence** — much of PENDLE's demand is reflexive on restaking/points/airdrop cycles; a cooling of that meta compresses both TVL and token price.
+- **Emissions / dilution** — uncapped supply with ~40% of total still to be emitted as vePENDLE/LP incentives; free float is reduced by vote-escrow locks, which can amplify volatility.
+- **Perp funding dislocations** — crowded longs during hot yield narratives push funding persistently positive, raising carry cost and cascade risk on unwinds.
+- **Venue / liquidity concentration** — while two-venue, derivatives depth still concentrates on Binance and Hyperliquid; thin books in off-peak sessions widen slippage.
+- **Underlying-protocol / smart-contract risk** — as a DeFi token, spot demand is exposed to exploit or depeg events in the underlying yield-bearing assets Pendle wraps.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PENDLE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PENDLE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PENDLE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PENDLE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PENDLE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

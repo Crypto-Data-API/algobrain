@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins, ethereum]
 aliases: ["OP", "Optimism Collective"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.optimism.io"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimism]]", "[[optimistic-rollup]]", "[[starknet]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[optimism]]", "[[optimistic-rollup]]", "[[starknet]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Optimism
@@ -212,6 +212,49 @@ For leveraged exposure, **OP-PERP** is widely traded on [[hyperliquid]] and othe
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — OP trades on **both** major venue types, making it a deep, liquid two-venue market. On **Binance** it is available as **spot (OP/USDT)** and a **USD-margined perpetual**, giving it the largest 24h spot volume of the L2 peers in this loop. On **[[hyperliquid|Hyperliquid]]** it trades as **OP-PERP** with leverage up to ~40-50x. The dual-venue footprint (CEX spot + CEX perp + on-chain perp) supports tight spreads, reliable borrow for spot-perp structures, and enough depth to size mid-cap positions without excessive slippage — though as a rank ~151 mid-cap, order-book depth thins well below that of majors, so large clips should be worked and staged rather than dumped. The CEX/DEX split also opens cross-venue funding and basis edges (Binance perp vs. Hyperliquid OP-PERP).
+
+**Applicable strategies**
+
+- [[funding-rate-harvest]] — deep OP-PERP liquidity on two venues makes systematic collection of perp funding (vs. hedged spot/opposite perp) practical for a mid-cap.
+- [[hl-vs-cex-funding-divergence]] — OP funding can diverge between Binance USD-M perp and Hyperliquid OP-PERP; the two-venue market lets you long the cheap-funding leg and short the rich one.
+- [[cash-and-carry]] — long Binance spot OP against a short USD-margined perp captures positive basis/funding with a fully hedged delta.
+- [[oi-confirmed-trend]] — as a high-beta L2 governance token, OP trends cleanly on Superchain/L2 catalysts when rising open interest confirms directional flow.
+- [[token-unlock-supply-event]] — OP's large multi-year emission/unlock schedule (~50% of max supply still to vest) creates recurring, calendar-driven supply events to position around.
+- [[liquidation-cascade-fade]] — thinner mid-cap depth means OP over-extends on liquidation cascades, offering mean-reversion fades once forced flow exhausts.
+
+**Volatility & regime character** — OP is a **high-beta Ethereum L2 / infra-governance altcoin**, closely correlated to ETH beta and the broad L2 risk cycle, and amplified further by its large emission overhang. It typically moves with ETH but with a higher amplitude in both directions, and it underperforms structurally in risk-off regimes because unlock-driven sell pressure compounds macro weakness. Expect elevated realized volatility around governance decisions, Superchain/Base adoption headlines, and unlock dates.
+
+**Risk flags**
+
+- **Supply / unlock overhang** — only ~50% of the 4.29B max supply circulates; scheduled emissions are persistent sell pressure and drive negative-funding episodes around unlock dates.
+- **Narrative dependence** — value accrual is governance-mediated and debated (much Superchain usage benefits individual OP Chains like Base, not the OP token), so price is sensitive to shifting L2/Superchain narrative rather than direct cash flows.
+- **Mid-cap liquidity / venue concentration** — depth is solid for the tier but far below majors; wide moves and funding dislocations can occur when one venue leads, and slippage rises for large size.
+- **High-beta macro risk** — as a high-beta L2, OP amplifies broad-market drawdowns; perp funding can swing sharply negative in risk-off, established-bear conditions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=OP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=OP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=OP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=OP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=OP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

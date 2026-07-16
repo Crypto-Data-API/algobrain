@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins, ethereum]
 aliases: ["MATIC", "POL", "Polygon Ecosystem Token"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (Polygon Foundation)"
 website: "https://polygon.technology/"
-related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[polygon]]", "[[real-world-assets]]", "[[stablecoins]]"]
+related: ["[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[pairs-trading]]", "[[perpetual-futures]]", "[[polygon]]", "[[real-world-assets]]", "[[stablecoins]]"]
 ---
 
 # POL (ex-MATIC)
@@ -310,6 +310,54 @@ Polygon's differentiation is the **payments + stablecoin + RWA** wedge and the *
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+POL is tradable on **both** [[binance|Binance]] (spot POL/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (POL-PERP, leverage up to ~40-50x). This is a deep, liquid two-venue market: Binance provides the CEX spot/perp anchor with heavy order-book depth and tight spreads, while Hyperliquid contributes a transparent on-chain perp with visible funding and OI. The two-venue setup means cross-venue basis and funding are directly observable and executable, so sizing can lean on aggregated depth rather than a single book — but Hyperliquid depth is thinner than Binance, so large clips should be worked across both and staged to avoid slippage on the smaller book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — POL near ATL sees funding swing sharply after bounces; collecting funding while delta-hedged is a repeatable edge on a liquid two-venue perp.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid POL-PERP vs Binance's USD-margined perp can diverge; the dual listing makes the spread directly harvestable.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp lets you run spot-long / perp-short carry when the POL perp trades at a persistent premium.
+- [[liquidation-cascade-fade]] — a sub-$1B, high-beta name near all-time lows produces violent liquidation flushes; fading the over-extension into support is a recurring setup.
+- [[pairs-trading]] — POL vs [[arbitrum|ARB]] and POL vs Base-ecosystem proxies express L2/scaling relative value with mean-reverting spreads.
+- [[oi-confirmed-trend]] — rising open interest alongside a break of the ATL-bounce range confirms directional continuation vs a short-covering fake-out.
+
+### Volatility & regime character
+
+POL is a **high-beta Layer-2 / infrastructure altcoin** trading as a deep-value turnaround story near all-time lows. It carries elevated realized volatility typical of a sub-$1B-cap alt, with strong positive beta to ETH (as an Ethereum-scaling asset) and to BTC broad-market risk appetite. In risk-on rotations it can outrun the majors (recently the top mover of its peer set); in extreme-fear / bear regimes it bleeds harder than large caps but is prone to violent short-covering mean-reversion bounces off ATL levels.
+
+### Risk flags
+
+- **Perpetual emission / dilution** — ~2% annual inflation with no hard cap has structurally outpaced value capture; unpassed emission-cut/deflation proposals keep this a persistent overhang.
+- **Narrative dependence** — the bid rests on Nailwal's payments/stablecoin/RWA + AggLayer execution; stalled adoption removes the turnaround thesis.
+- **Funding dislocations** — near ATL with negative funding, POL is squeeze-prone; bounces can flip funding sharply positive and trap late longs.
+- **Venue depth asymmetry** — Hyperliquid book is thinner than Binance, so cross-venue and cascade trades must account for slippage on the smaller venue.
+- **L2 fee compression & competition** — cheaper Ethereum blobs and [[base|Base]]/[[arbitrum|Arbitrum]] competition pressure the token's economics.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=POL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=POL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=POL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=POL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=POL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

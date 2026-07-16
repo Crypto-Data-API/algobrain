@@ -3,14 +3,14 @@ title: "Monero"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: excellent
-tags: [altcoins, crypto]
+status: review
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, liquidations, open-interest, derivatives]
 aliases: ["XMR"]
 entity_type: protocol
 founded: 2014
 headquarters: "Decentralized"
 website: "https://www.getmonero.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dash]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[zcash]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[dash]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[zcash]]", "[[funding-rate-arbitrage]]", "[[liquidation-cascade-fade]]", "[[hl-vs-cex-funding-divergence]]", "[[cryptodataapi]]"]
 ---
 
 # Monero
@@ -319,6 +319,62 @@ Monero is the textbook case of a **liquidity-constrained, delisting-exposed** as
 | **24h Range** | $324.74 — $333.98 |
 | **CoinGecko Sentiment** | 84% positive |
 | **Last Updated** | 2026-07-16 |
+
+---
+
+## Trading Profile
+
+### Venues & Liquidity
+
+- **Main leveraged venue — [[hyperliquid|Hyperliquid]] XMR-PERP.** With [[binance|Binance]] (2024), OKX and most regulated EEA venues having delisted XMR, the deepest, most reliable way to express directional or leveraged XMR views is the [[perpetual-futures|perp]] on [[hyperliquid|Hyperliquid]] (hourly funding, on-chain CLOB, up to 50x). This makes XMR a **perp-first** asset for active traders.
+- **Fragmented spot access.** Spot survives on [[kraken|Kraken]] (XMR/USD, with post-Qubic deposit frictions), KuCoin and offshore/DEX venues; BTC↔XMR **atomic swaps** provide a delisting-resistant but lower-liquidity on/off ramp. There is no clean, deep, regulated spot book — which weakens the spot leg of any cash-and-carry structure.
+- **Trading implications of reduced CEX liquidity.** Thin, fragmented books mean **material slippage on size, wider spreads, and gap risk** around regulatory/delisting headlines. Because flow concentrates into the perp, **funding and open interest can swing violently** and squeezes (both directions) are common. Prefer limit orders, size down, and treat liquidity itself as a first-class risk (see [[slippage]], [[liquidity]]).
+
+### Applicable Strategies
+
+- [[funding-rate-arbitrage]] — funding-rate carry: when perp funding is persistently positive, collect it delta-neutral; but the delisting-thinned spot leg makes the hedge harder and the carry more dislocation-prone than on majors.
+- [[hl-vs-cex-funding-divergence]] — cross-venue funding spread: XMR funding on [[hyperliquid|Hyperliquid]] vs offshore CEX perps can diverge sharply given fragmented flow; trade the spread rather than outright.
+- [[basis-trading]] — perp basis: track perp-minus-spot (where a usable spot reference exists) as a convergence signal; basis on a delisting-fragmented name is wider and noisier, so demand a larger entry threshold.
+- [[liquidation-cascade-fade]] — liquidation plays: thin books + concentrated perp leverage make liquidation cascades frequent and violent; fade the exhaustion after forced-seller flush (watch [[open-interest]] drop + [[funding-rate]] spike).
+- [[narrative-trading]] — event/delisting-driven: XMR trades the privacy/surveillance narrative; delisting/relisting announcements, EU AMLR implementation and US surveillance proposals are discrete, tradeable catalysts.
+- [[momentum-rotation]] — cross-sectional momentum within the [[privacy-coins|privacy basket]]: XMR is the sector lead; rotate between XMR and laggards ([[zcash|ZEC]], [[dash|DASH]]) on relative-strength, watching the XMR/ZEC ratio for basket rotation.
+
+### Volatility & Regime Character
+
+- **Idiosyncratic, narrative-driven.** XMR's returns are dominated by privacy-coin-specific catalysts (regulatory headlines, delistings, hashrate scares) rather than broad-beta crypto flow. At times it **decouples from majors** — e.g. the late-2025/January-2026 privacy rally where XMR outperformed BTC/ETH, and the 2026-06-20 snapshot where XMR was red while peer [[zcash|ZEC]] was green.
+- **Regulatory-headline sensitive.** Surveillance/AML proposals and exchange-delisting news are the dominant vol drivers; the theme can de-rate quickly when it cools (as into mid-2026).
+- **Thin-book amplification.** Delisting-driven scarcity means order books amplify moves in both directions — realized vol per unit of flow runs high relative to more liquid majors.
+
+### Risk Flags
+
+- **Venue / delisting risk** — the defining structural risk: further CEX removals shrink fiat ramps and concentrate exposure into the [[hyperliquid|Hyperliquid]] perp; a venue outage or an XMR delisting from the remaining venues is a discrete negative catalyst.
+- **Regulatory pressure** — EU AMLR and US surveillance regimes create tail risk of an outright ban in a major jurisdiction; no ETF/regulated-product pathway means no institutional bid backstop.
+- **Thin spot liquidity** — slippage, gaps and squeezes are structural; the weak spot leg makes true delta-neutral hedging harder than on majors.
+- **Perp funding dislocations** — with flow concentrated on the perp, funding and OI can spike or invert abruptly; a funding regime flip can turn a carry trade against you fast (define kill criteria on trailing funding).
+- **Hashrate-concentration risk** — CPU-mineable [[proof-of-work|RandomX]] makes 51%-style episodes (Qubic, Aug 2025) cheaper to attempt; exchange responses (deposit halts, confirmation hikes) can hit price faster than the attack itself.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+XMR is a perp-first name, so the relevant feeds are Hyperliquid perp data, funding, open interest, liquidations and klines. Use only the verified endpoints below.
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=XMR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=XMR` — L2 order book snapshot (gauge thin-book depth)
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=XMR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=XMR&limit=100` — current + historical funding
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=XMR"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, regulation]
+tags: [crypto, defi, regulation, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, bitcoin, ethereum, stablecoins]
 aliases: ["WLF", "WLFI", "World Liberty"]
 entity_type: protocol
 founded: 2024
 headquarters: "USA (Trump family-affiliated)"
 website: "https://www.worldlibertyfinancial.com/"
-related: ["[[crypto-com-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[official-trump]]", "[[stablecoins]]", "[[tron]]", "[[usd1-wlfi]]"]
+related: ["[[crypto-com-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[official-trump]]", "[[stablecoins]]", "[[tron]]", "[[usd1-wlfi]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[event-driven-trading]]"]
 ---
 
 # World Liberty Financial
@@ -313,6 +313,55 @@ WLFI is **not valuable on protocol cash flows** — it is valued on political/af
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+WLFI is a genuinely two-venue market. It trades **spot and USD-margined perpetuals on [[binance|Binance]]** and as **WLFI-PERP on [[hyperliquid|Hyperliquid]] (leverage up to ~40-50x)**, alongside other CEX spot listings (Kraken, Upbit, Bitget, KuCoin, Crypto.com) and on-chain venues (Uniswap V3, Orca). The parallel Binance and Hyperliquid perp order books create deep, liquid two-sided depth for a rank-~42 alt, so directional and hedge positions can be sized more aggressively than on venue-concentrated tokens. Because the same exposure clears on both a large CEX (Binance) and a decentralized perp DEX (Hyperliquid), execution should route to whichever book is deeper at trade time and split large clips across both to limit impact — and the CEX/DEX split itself is a tradeable structure (funding and basis can diverge between Binance and Hyperliquid around political catalysts). Note that WLFI perps are still thinner than BTC/ETH majors, so slippage widens fast in fast markets and around unlock/headline events.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — WLFI clears on both Hyperliquid and Binance USD-margined perps, so funding can dislocate between the two venues around political headlines; harvest the spread with offsetting perp legs.
+- [[cash-and-carry]] — deep two-venue liquidity lets you pair long Binance spot against a short WLFI-PERP to capture positive funding/basis without directional exposure to the volatile Trump-narrative price.
+- [[funding-rate-harvest]] — sentiment-driven crowding (long into catalysts, short into unlocks) makes WLFI funding swing hard; systematically collect the funding side while hedged.
+- [[event-driven-trading]] — WLFI is a pure political/regulatory event asset (OCC trust charter, unlock votes, Sun litigation, election-cycle headlines); position and manage risk around scheduled and headline catalysts.
+- [[token-unlock-supply-event]] — with ~68% of supply locked (MC/FDV 0.32), each treasury/vesting unlock is a recurring supply event; fade rallies into unlocks or short the overhang absent an override catalyst.
+- [[liquidation-cascade-fade]] — thin-relative-to-majors perp depth plus high political reflexivity produces sharp liquidation flushes; fade over-extended cascades using the WLFI-PERP order book for defined-risk entries.
+
+### Volatility & regime character
+
+WLFI is a **high-beta, politically driven altcoin** — effectively a leveraged expression of the "Trump-affiliated crypto" narrative rather than a conventional DeFi or infrastructure token. Its price is dominated by idiosyncratic political/regulatory news and its own governance (unlocks, wallet blacklists, the Justin Sun dispute), so realized volatility is high and often event-clustered. It carries a general risk-on beta to BTC/ETH (it sells off in broad crypto drawdowns and rallies in risk-on regimes), but its dominant driver is narrative and supply overhang rather than macro-crypto beta, which weakens and destabilizes its BTC/ETH correlation versus a typical large-cap alt. It co-moves with the Trump basket ([[official-trump|TRUMP]], [[crypto-com-chain|CRO]]).
+
+### Risk flags
+
+- **Token-unlock / emissions overhang** — ~68% of supply locked (MC/FDV 0.32), no burn mechanism; treasury/vesting unlocks are recurring, insider-influenced supply events.
+- **Narrative dependence** — value rests on Trump political affiliation, not protocol cash flow; a shift in political posture or pro-crypto policy directly impairs the price.
+- **Counterparty / custody risk (unique)** — the team has blacklisted and frozen wallets before; large holders face a freeze/seizure risk uncommon in major tokens.
+- **Perp funding dislocations** — dual Binance/Hyperliquid perp venues plus reflexive positioning can produce sharp funding swings and CEX/DEX funding divergence around catalysts.
+- **Regulatory / litigation tail** — OCC trust-charter outcome, conflict-of-interest scrutiny, and the Justin Sun lawsuit are live regulatory/legal tail risks.
+- **Depth vs majors** — liquid for a rank-~42 alt but still thinner than BTC/ETH; slippage and liquidation risk widen fast in fast markets.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=WLFI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=WLFI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=WLFI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=WLFI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=WLFI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

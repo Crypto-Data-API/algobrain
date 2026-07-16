@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, nft]
+tags: [crypto, defi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["ZORA", "Zora Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zora.co/"
-related: ["[[base]]", "[[blur]]", "[[crypto-markets]]", "[[ethereum]]", "[[opensea]]"]
+related: ["[[base]]", "[[blur]]", "[[crypto-markets]]", "[[ethereum]]", "[[opensea]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Zora
@@ -248,6 +248,54 @@ Net: a high-beta bet on an NFT/creator-economy revival on [[base|Base]], with no
 - **2026-04** — snapshot price ~$0.0145 (rank #369); subsequently slid through Q2 2026.
 - **2026-06-19** — ZORA sets a **fresh all-time low of $0.00758** amid an "Established Bear Market" (Fear & Greed 23).
 - **2026-06-20** — trading ~$0.0079 (rank #573), ~4% above the new floor; protocol remains live and active.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZORA is a **perp-first asset**: it trades on [[hyperliquid|Hyperliquid]] as **ZORA-PERP** (leverage up to ~40-50x) but is **not listed on Binance**, and spot access is limited/offshore (Kraken, Upbit, Bitget, KuCoin, Crypto.com plus native [[base|Base]] DEX liquidity). Because there is no deep, unified Binance spot book anchoring price, leveraged flow concentrates on the Hyperliquid perp, which tends to lead price discovery and set the reference funding. Depth is thin on both sides — at a ~$35M cap, the perp order book and on-chain pools are shallow, so large orders move price and slippage is real even with high daily turnover (~37% of cap). Practical implications: size conservatively, favor limit/passive execution, scale into positions, and treat the HL mark and its L2 book (not a Binance feed) as the primary execution reference. High advertised leverage amplifies liquidation risk in thin conditions, so keep effective leverage well below the maximum.
+
+### Applicable strategies
+
+- [[crowded-short-funding-fade]] — near a fresh ATL with capitulation flow, persistent negative funding on ZORA-PERP flags crowded shorts that can violently squeeze; fade the crowd when funding stays deeply negative.
+- [[liquidation-cascade-fade]] — thin perp depth on a micro-cap means forced liquidations overshoot; fade the flush and cover into the vacuum wick.
+- [[short-liquidation-squeeze]] — a heavily-shorted, illiquid perp near lows is prime for a short squeeze on any narrative or NFT-market bounce.
+- [[oi-confirmed-trend]] — pair open-interest changes with price on the HL perp to separate genuine trend legs from thin-liquidity noise before committing to a directional move.
+- [[funding-rate-harvest]] — when funding is persistently one-sided on the concentrated HL perp, collect carry via a delta-neutral perp-vs-spot position (mindful of shallow spot depth).
+- [[narrative-trading]] — ZORA is a narrative-dependent NFT/creator-economy micro-cap; trade around NFT-revival, Base-ecosystem, and Coinbase-related catalysts rather than fundamentals.
+
+### Volatility & regime character
+
+ZORA is a **high-beta, narrative-driven NFT/creator-economy micro-cap** on [[base|Base]] with no governance and weak value accrual ("for fun only"). It exhibits extreme volatility (~94.6% off ATH, trading near a fresh ATL) and behaves as **NFT/SocialFi beta** — it tracks NFT-market sentiment and the Base/Coinbase narrative more than pure DeFi or L1 flows. Directionally it carries elevated beta to BTC/ETH risk-on/risk-off regimes (it sells off hard when broad crypto is in a bear regime and can rip on relief rallies), but its idiosyncratic driver is NFT/minting activity, so correlation to majors is loose and reflexive rather than tight.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — no Binance listing; leveraged flow funnels into the single HL perp, so depth is thin and any HL disruption or funding dislocation has outsized price impact.
+- **Token unlocks/emissions** — only ~44.7% of the 10B max supply circulates (MC/FDV ~0.45); ~55% remains to unlock, a persistent structural sell-pressure headwind.
+- **Narrative dependence** — value hinges on an NFT/creator-economy revival and Base mindshare; suppressed NFT activity directly starves demand.
+- **Perp funding dislocations** — with price discovery on the concentrated HL perp and shallow spot to arbitrage against, funding can stay dislocated and generate sharp squeezes in either direction near the lows.
+- **Micro-cap fragility** — at ~$35M cap, high leverage plus thin books make liquidation cascades and slippage material risks.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZORA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZORA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZORA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZORA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZORA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

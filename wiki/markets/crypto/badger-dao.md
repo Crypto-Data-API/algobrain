@@ -3,13 +3,13 @@ title: "Badger"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, defi]
+status: review
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["BADGER"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://badger.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Badger
@@ -132,6 +132,60 @@ Badger aims to create an ecosystem of DeFi products with the ultimate goal of br
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BADGER is a **PERP-FIRST** asset: it trades as **BADGER-PERP on Hyperliquid** (up to ~40-50x leverage) but is **not listed on Binance**, and spot access is limited to a handful of offshore/DeFi venues (Kraken spot, plus Uniswap/Balancer/Sushiswap DEX pools). As a result, price discovery and directional flow concentrate on the Hyperliquid perp rather than on fragmented, thin spot books. Practical implications:
+
+- **Depth is shallow.** With a small market cap and ~$1M daily spot turnover, the HL order book is thin; large orders move price, so size positions modestly and favor limit/passive fills over market orders.
+- **Execution is venue-concentrated.** Because there is no deep CEX spot leg, cross-venue hedging is awkward and true cash-and-carry requires the offshore/DEX spot leg — factor borrow/withdrawal frictions into any carry structure.
+- **High leverage amplifies risk.** 40-50x on a thin book means small moves can trigger liquidations; keep effective leverage well below the cap.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — on a low-liquidity perp-first alt, funding can run persistently positive/negative; collect the carry while delta-hedging where a spot leg is feasible.
+- [[crowded-long-funding-fade]] — thin OI and retail chasing on the HL perp can push funding to extremes; fade over-crowded longs when funding spikes.
+- [[liquidation-cascade-fade]] — high leverage on a shallow book produces sharp liquidation wicks; fade the overshoot after forced-selling exhausts.
+- [[post-liquidation-rebound]] — after a cascade flushes leveraged positions on BADGER-PERP, the snap-back is often outsized given how few resting bids exist.
+- [[oi-price-exhaustion]] — with concentrated flow on one venue, rising OI into a stalling price is a clean exhaustion signal on this perp.
+- [[range-mean-reversion]] — outside of narrative spikes BADGER tends to grind in ranges near cycle lows; fade the band edges with tight risk.
+
+### Volatility & regime character
+
+BADGER is a **small-cap DeFi / infrastructure token** (a BTC-in-DeFi / yield-aggregator governance token) trading at a deep drawdown from its ATH. It behaves as a **high-beta altcoin**: it is largely correlated to BTC/ETH risk-on/risk-off swings but with amplified moves, and it can decouple sharply on DeFi-sector narratives or protocol-specific news. Realized volatility is elevated and reflexive because thin liquidity magnifies both rallies and flushes.
+
+### Risk flags
+
+- **Liquidity & venue concentration** — flow is concentrated on a single perp venue (Hyperliquid); a listing/delisting or an HL outage would strand positions.
+- **Thin spot / limited CEX access** — no Binance listing means weaker price discovery and harder hedging; slippage risk is high.
+- **Narrative dependence** — as a DeFi-sector token far below ATH, price is sensitive to broad DeFi sentiment and protocol news.
+- **Perp funding dislocations** — low OI can produce erratic, spiky funding on the HL perp; monitor before holding carry.
+- **Emissions/governance** — capped near 21M supply with a high MC/FDV ratio limits dilution, but treasury/governance actions can still shift supply dynamics.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BADGER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BADGER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BADGER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BADGER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BADGER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

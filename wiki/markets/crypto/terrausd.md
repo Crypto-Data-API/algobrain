@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: good
-tags: [algorithmic-stablecoin, collapse, crypto, defi, stablecoin, terra]
+tags: [algorithmic-stablecoin, collapse, crypto, defi, stablecoin, terra, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, stablecoins]
 aliases: ["TerraUSD", "UST", "USTC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.terra-classic.io"
-related: ["[[2022-05-terra-luna-depeg-arb]]", "[[algorithmic-stablecoin]]", "[[crypto-markets]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[terra-luna-2]]", "[[terra-luna-collapse]]", "[[terra-luna]]"]
+related: ["[[2022-05-terra-luna-depeg-arb]]", "[[algorithmic-stablecoin]]", "[[crypto-markets]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[terra-luna-2]]", "[[terra-luna-collapse]]", "[[terra-luna]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
 ---
 
 # TerraClassicUSD
@@ -97,6 +97,60 @@ USTC has no fundamental value driver. Any trading thesis is purely speculative o
 | May 28, 2022 | Terra 2.0 fork; UST renamed USTC, stabilization mechanism disabled |
 | Apr 2024 | SEC civil trial: jury finds UST was a security |
 | Jun 2024 | Terraform Labs settles with SEC for $4.47 billion |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+USTC trades on **both** major venue types, which is unusual for a sub-$50M former stablecoin:
+
+- **Binance** — spot (USTC/USDT) plus a **USD-margined perpetual**, giving USTC deep CEX order-book depth and a reference funding market.
+- **Hyperliquid** — **USTC-PERP** with leverage up to ~40-50x, providing an on-chain perp with transparent funding, mark price, and L2 depth.
+
+The result is a **deep, liquid two-venue market** relative to USTC's tiny market cap. Two independent perp venues (CEX + on-chain) plus Binance spot mean traders can route across books, but the underlying float is thin — large size still moves price, and depth on either side of the book can evaporate during re-peg-narrative spikes. Size positions to the shallower of the two books, and prefer resting/limit execution over market sweeps. The dual-venue structure is the enabling condition for cross-venue funding and basis plays below.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — Binance USD-M perp and Hyperliquid USTC-PERP quote independent funding; a low-float, narrative-driven token like USTC frequently prices funding differently across the two venues.
+- [[funding-rate-arbitrage]] — collect the funding spread between the Binance perp and Hyperliquid USTC-PERP while holding offsetting perp legs, hedging directional risk on a token with no fundamental anchor.
+- [[crowded-long-funding-fade]] — re-peg-hope spikes crowd longs and push funding sharply positive; fade the crowded, over-levered side once funding runs rich.
+- [[narrative-trading]] — USTC has zero fundamental value driver; price is almost entirely a function of community "re-peg" proposals and speculative narrative flows.
+- [[liquidation-cascade-fade]] — up to ~50x leverage on a micro-float perp makes both long and short liquidation cascades sharp; fade the overshoot after forced deleveraging exhausts.
+- [[mean-reversion]] — with no organic demand, speculative pumps on thin liquidity tend to round-trip, favoring reversion back toward the pre-spike range.
+
+### Volatility & regime character
+
+USTC is a **defunct algorithmic-stablecoin token now trading as a speculative micro-cap** — effectively a memecoin-style reflexive asset with no peg, no collateral, and no cash-flow driver. Realized volatility is very high and episodic: long dormant drift interrupted by violent, community-narrative-driven spikes ("re-peg" proposals) that fade quickly. Its correlation to BTC/ETH beta is weak and unstable; USTC moves far more on Terra-Classic-specific narrative and leverage flows than on broad market direction, so its beta to majors is low and inconsistent rather than a reliable high-beta alt.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — despite two perp venues, the underlying float is thin; depth can vanish and slippage spikes during narrative-driven moves.
+- **No peg / no fundamental value** — the stabilization mechanism is permanently disabled; there is no collateral or anchor, so nothing structurally caps downside.
+- **Narrative dependence** — price action is dominated by community "re-peg" speculation, which is unpredictable and reflexive.
+- **Perp funding dislocations** — independent funding on Binance vs Hyperliquid can swing hard and diverge during spikes; funding is both an opportunity and a carrying-cost risk.
+- **Leverage-driven cascades** — up to ~50x on a micro-float perp makes liquidation cascades and squeezes frequent and severe.
+- **Regulatory overhang** — UST was ruled a security in SEC v. Terraform Labs, an idiosyncratic legal/headline risk for the token.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=USTC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=USTC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=USTC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=USTC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=USTC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

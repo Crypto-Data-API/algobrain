@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum]
 aliases: ["WLD", "World", "World Network", "Worldcoin"]
 entity_type: protocol
 founded: 2019
 website: "https://world.org/"
-related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[narrative-trading]]", "[[openai]]", "[[proof-of-humanity]]", "[[token-unlocks]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[narrative-trading]]", "[[openai]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[proof-of-humanity]]", "[[token-unlock-supply-event]]", "[[token-unlocks]]"]
 headquarters: "Decentralized"
 ---
 
@@ -328,6 +328,50 @@ World's moat is **scale + hardware + the Altman/OpenAI association**: tens of mi
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** WLD is a deep, liquid **two-venue** name, tradable on **both Binance** (spot + USD-margined perp) **and [[hyperliquid|Hyperliquid]]** (WLD-PERP, up to ~40-50x leverage), on top of broad spot listings (Kraken, Upbit KRW, Bitget, KuCoin, Crypto.com). The dual centralized/on-chain perp footprint means execution can be sized meaningfully — Binance is the price leader with the deepest book, while Hyperliquid's on-chain order book supports high-leverage directional and funding trades. This availability across venues enables cross-market execution (spot-vs-perp, CEX-vs-DEX) and lets larger positions be worked without single-venue slippage, though WLD's news-reflexive spikes can thin depth abruptly during headline events.
+
+**Applicable strategies.**
+- [[narrative-trading]] — WLD is the market's purest listed proxy for the AI-identity narrative; it moves hardest on Sam Altman/OpenAI headlines and US Orb-rollout milestones.
+- [[token-unlock-supply-event]] — a 10B max supply with only ~⅓ circulating (MC/FDV ~0.34) makes scheduled unlocks and grant emissions a recurring, tradable supply catalyst.
+- [[crowded-long-funding-fade]] — after sharp AI-narrative rallies (e.g. the +26% week), positive funding and high perp OI set up crowded-long fades and squeeze risk.
+- [[hl-vs-cex-funding-divergence]] — with liquid perps on both Hyperliquid and Binance, funding can diverge between venues, allowing rate-capture across the two books.
+- [[liquidation-cascade-fade]] — WLD's high beta and reflexive whipsaws (a -7.3% day inside a +26% week) produce liquidation-driven overshoots to fade.
+- [[event-driven-trading]] — binary biometric-privacy regulatory bans/reinstatements and exchange listing/delisting actions are discrete, repriceable catalysts.
+
+**Volatility & regime character.** WLD is a **high-beta AI-narrative / digital-identity alt** — one of the most news-reflexive large caps, with extreme turnover (~21% on 2026-06-20) and a violent drawdown history (-98% ATH-to-ATL). It broadly carries high beta to BTC/ETH in risk-on/risk-off swings but decouples upward on idiosyncratic AI/Altman/OpenAI flow, making it a headline-driven vehicle rather than a clean market-beta trade. Regime is reflexive and momentum-prone on the way up, supply-capped and mean-reverting into unlock windows.
+
+**Risk flags.**
+- **Dilution / supply overhang** — FDV ~3x market cap; continuous insider unlocks + grant emissions are a structural headwind (analyze on FDV). See [[token-unlocks]].
+- **Narrative dependence** — price tracks Altman/OpenAI headlines more than fundamentals; sentiment can reverse abruptly.
+- **Regulatory tail risk** — biometric-privacy bans/suspensions (Spain, Portugal, Brazil, Indonesia, Kenya, EU scrutiny) are binary two-way events.
+- **Perp funding dislocations** — high-OI reflexive perp; funding can swing sharply positive after rallies, elevating crowded-long squeeze risk.
+- **Venue/flow concentration** — Upbit KRW (Korean retail) can drive kimchi-premium dislocations and cross-venue divergence.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=WLD` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=WLD` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=WLD&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=WLD&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=WLD"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

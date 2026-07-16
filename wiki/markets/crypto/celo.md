@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, ethereum]
 aliases: ["CELO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://celo.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[optimism]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-1]]", "[[layer-2]]", "[[optimism]]", "[[proof-of-stake]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[cash-and-carry]]"]
 ---
 
 # Celo
@@ -114,6 +114,50 @@ Celo's closest strategic peers are other OP-Stack / [[optimism|Optimism Supercha
 - **Competition** — crowded field of payments-focused chains and Ethereum L2s.
 - **Stablecoin/reserve risk** — its native-stablecoin model depends on reserve collateralization and peg stability.
 - **Emissions overhang** — ~40% of supply not yet circulating.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — CELO trades on **both** major venues: [[binance]] (CELO/USDT spot plus a USD-margined CELO perpetual) and [[hyperliquid|Hyperliquid]] (CELO-PERP, up to ~40-50x leverage). This is a deep, liquid **two-venue market** by small-cap standards, and the dual listing is the single most important structural fact for trading CELO. Cross-venue availability enables spot-vs-perp and CEX-vs-DEX strategies that thin single-venue alts cannot support, and gives redundant liquidity for entering/exiting. That said, absolute depth is still modest given the ~$40M cap and low single-digit-million daily volume, so size positions to the shallower book, expect meaningful slippage on large clips, and lean on limit/passive execution rather than sweeping the book.
+
+**Applicable strategies:**
+- [[funding-rate-arbitrage]] — with a Binance USD-margined perp and a Hyperliquid CELO-PERP quoting the same asset, funding can diverge between the two venues; capture the spread while staying delta-neutral.
+- [[hl-vs-cex-funding-divergence]] — directly exploits funding gaps between Hyperliquid CELO-PERP and Binance's perp, a clean two-venue setup for this deep dual listing.
+- [[cash-and-carry]] — hold CELO spot on Binance against a short perp to harvest positive funding/basis on a token that trades near cycle lows with a modest carry.
+- [[liquidation-cascade-fade]] — thin absolute depth on a ~$40M-cap alt means leveraged flushes overshoot; fade forced-liquidation spikes back toward fair value once the cascade exhausts.
+- [[range-mean-reversion]] — CELO has traded in a tight band near its all-time low, making it a candidate for mean-reversion between range extremes rather than trend-chasing.
+- [[oi-confirmed-trend]] — use Hyperliquid open-interest and funding to confirm whether a CELO breakout is backed by real positioning or is a low-conviction, easily-reversed move.
+
+**Volatility & regime character** — CELO is a **high-beta small-cap infrastructure/L2 token** (mobile-payments and OP-Stack scaling narrative) with a reflexive, low-liquidity price profile. It behaves as a high-beta expression of broad crypto risk appetite: strongly correlated to BTC/ETH direction but with amplified drawdowns and squeezes in risk-off and risk-on swings respectively. Trading near cycle lows in an "Established Bear Market" regime, it is more of a deep-value/mean-reversion vehicle than a momentum leader, and it is sensitive to the Ethereum L2 and stablecoin-rail narratives.
+
+**Risk flags:**
+- **Liquidity/venue concentration** — despite the two-venue listing, absolute depth is thin; perp OI and funding can swing sharply on small flows.
+- **Emissions/unlock overhang** — ~40% of the 1B hard-capped supply is not yet circulating (community/ecosystem programs), a persistent supply drip.
+- **Narrative dependence** — value capture hinges on the L1-to-L2 migration and mobile-payments thesis converting into real fee/security demand.
+- **Stablecoin/reserve linkage** — its native-stablecoin (cUSD/cEUR/cREAL) model carries reserve-collateralization and peg risk that can spill into CELO sentiment.
+- **Perp funding dislocations** — low OI makes funding on the CELO perps prone to sharp, mean-reverting spikes; watch for crowded positioning before sizing carry trades.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CELO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CELO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CELO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CELO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CELO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

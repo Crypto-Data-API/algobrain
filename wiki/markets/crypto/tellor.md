@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, oracle]
+tags: [crypto, defi, oracle, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["TRB", "Tellor"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://www.tellor.io/"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[pyth-network]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-manipulation]]", "[[pyth-network]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[short-liquidation-squeeze]]"]
 ---
 
 # Tellor Tributes
@@ -121,6 +121,46 @@ TRB trades at ~$38.5M with MC/FDV near 0.97 (almost fully circulating), so dilut
 - **Macro risk** — In an extreme-fear, established-bear regime ([[crypto-fear-and-greed-index|Fear & Greed]] 23), thin low-cap oracle tokens are prone to liquidity drought despite Tellor's recent weekly strength.
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** TRB is tradable on **both Binance and [[hyperliquid]]**. Binance offers a **TRB/USDT spot** market plus a **USD-margined TRB perpetual**, while Hyperliquid runs the on-chain **TRB-PERP** at up to **~40-50x** leverage. This is a genuinely **two-venue derivatives market**, which is unusual for a sub-$50M-cap token and gives it deeper aggregate perp liquidity than most rank-~500 alts. In practice the dual-venue structure means orders can be split across books, but TRB's **~2.8M-token float** keeps spot depth thin — so large size still moves price, and the perps (not the shallow spot) carry most of the executable liquidity. Traders should size to the thinner of the two books at any given moment and expect wider effective spreads during volatility.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — TRB trades as a perp on both Hyperliquid and Binance, so funding can diverge sharply between the two venues, creating a market-neutral capture opportunity.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp lets a long-spot / short-perp carry harvest positive funding when the low-float perp trades rich to spot.
+- [[crowded-short-funding-fade]] — TRB is a chronic short target given its "overvalued oracle" reputation; deeply negative funding flags crowded shorts vulnerable to a squeeze, the setup behind its historic spikes.
+- [[short-liquidation-squeeze]] — With a tiny float and history of violent squeezes (the 2023 run to $593), stacked short liquidations can cascade upward fast on either venue.
+- [[volatility-breakout]] — TRB's low float produces frequent explosive range expansions, favouring breakout entries over passive mean-reversion in trending phases.
+- [[liquidation-cascade-fade]] — Leveraged perp positioning on a thin token makes forced-liquidation flushes overshoot, offering fade entries once the cascade exhausts.
+
+**Volatility & regime character.** TRB is a **high-beta, low-float DeFi-infrastructure (oracle) token** whose price is driven far more by reflexive squeeze/liquidation dynamics than by protocol fundamentals — behaviour closer to a reflexive small-cap than a typical infra token. It broadly tracks **BTC/ETH risk-on/risk-off beta** at the regime level, but its idiosyncratic low-float mechanics regularly decouple it from the majors during squeeze episodes, producing amplitude well beyond large-cap alts.
+
+**Risk flags.**
+- **Low-float squeeze/manipulation risk** — ~2.8M-token float makes TRB exceptionally prone to engineered squeezes and sharp reversals; position sizing must assume gap risk.
+- **Venue-concentration & liquidity risk** — Despite two venues, real spot depth is thin; a liquidity drought (extreme-fear regimes) can widen spreads and amplify slippage.
+- **Perp funding dislocations** — The low float lets the perp decouple from spot, driving extreme funding swings and rapid liquidations; check live funding/OI before entry.
+- **Narrative/fundamental disconnect** — Value accrual is thin relative to trading float, so price is largely narrative- and flow-driven rather than usage-driven.
+- **Inflationary emissions** — TRB has uncapped reporter-reward inflation, a slow structural supply headwind independent of trading dynamics.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=TRB` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=TRB` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=TRB&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=TRB&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=TRB"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

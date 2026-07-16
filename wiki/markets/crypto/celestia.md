@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum]
+tags: [crypto, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["Celestia Network", "TIA"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://celestia.org/"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[eigenlayer]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Celestia
@@ -307,6 +307,54 @@ The DA market is a three-way alt-DA fight (Celestia vs EigenDA vs Avail) with Et
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TIA is a genuine two-venue derivatives market. On [[hyperliquid|Hyperliquid]] it trades as **TIA-PERP** with leverage up to ~40-50x; on **Binance** it trades as both **spot (TIA/USDT)** and a **USD-margined perpetual**, alongside futures on Bybit and OKX. This gives TIA deep, liquid order books on both a top-tier CEX and the leading on-chain perp DEX — a meaningfully better microstructure than most rank-~100+ alts, which typically live on a single venue. Two-venue availability means order-book depth is aggregated across CEX and DEX, tightening effective spreads and allowing larger clip sizes with less slippage; it also enables cross-venue execution (route/split between Binance and Hyperliquid) and hedged structures (spot on Binance vs perp on either venue). Practically: mid-cap depth is respectable but still thin relative to majors, so scale in and avoid resting large market orders during low-liquidity hours; the dual listing is what makes funding/basis relative-value trades executable at all.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — TIA-PERP funding oscillates with narrative-driven positioning; harvest positive funding by holding spot on Binance and shorting the perp when funding is persistently rich.
+- [[hl-vs-cex-funding-divergence]] — with a live Binance perp and Hyperliquid TIA-PERP, funding can diverge between venues; capture the spread by going long the cheaper-funded leg and short the richer-funded one.
+- [[cash-and-carry]] — hold Binance spot TIA against a short perp to lock the basis; the dual-venue spot+perp availability makes this cleanly executable for a mid-cap.
+- [[narrative-trading]] — TIA is a pure modular-blockchain / data-availability narrative vehicle; trade around Proof-of-Governance votes, tokenomics-upgrade catalysts, and DA-customer wins/losses.
+- [[token-unlock-supply-event]] — ~20% of supply is uncirculated with residual insider/VC tranches; position around scheduled unlocks and issuance-schedule changes that historically dumped on a falling price.
+- [[oi-confirmed-trend]] — combine Hyperliquid open-interest and funding to confirm whether a TIA move is backed by genuine positioning or is a thin, liquidation-prone squeeze.
+
+### Volatility & regime character
+
+TIA is a **high-beta infrastructure altcoin** — a rank-~119 modular-blockchain/DA token that behaves as a leveraged expression of alt-L1 and "modular narrative" risk appetite. It carries elevated realized volatility, strong positive beta to BTC and especially ETH (it is Ethereum-aligned DA infrastructure and rotates with the broader alt-L1 complex), and it amplifies both up- and down-moves relative to majors. Idiosyncratic drivers (tokenomics cuts, PoG debate, DA-competition headlines) can temporarily decouple it from beta, but in aggregate it trades as a high-beta alt that leads on the way up in risk-on phases and bleeds hard in risk-off/bear regimes.
+
+### Risk flags
+
+- **Narrative dependence** — value is tied to the modular-DA thesis; DA fee revenue is tiny vs market cap, so sentiment/narrative shifts (EigenDA/Avail competition, Ethereum blob-pricing pressure) drive price more than fundamentals.
+- **Residual unlocks / emissions** — ~20% of supply uncirculated; insider/VC tranches and the (declining but still positive) issuance schedule remain overhang risks.
+- **High-beta bear-market exposure** — trades ~98% below ATH in an Established Bear Market; drawdowns are severe and fast.
+- **Perp funding dislocations** — narrative-driven crowding can push TIA-PERP funding to extremes and trigger liquidation cascades on 40-50x leverage; monitor OI and funding across both venues.
+- **Venue/liquidity concentration** — despite two-venue depth, mid-cap liquidity thins quickly off Binance/Hyperliquid; Korean (Upbit) flow can drive kimchi-premium-style dislocations.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=TIA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=TIA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=TIA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=TIA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=TIA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["PYTH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://pyth.network/"
-related: ["[[bitcoin]]", "[[chainlink]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]"]
+related: ["[[bitcoin]]", "[[chainlink]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[basis-trading]]"]
 ---
 
 # Pyth Network
@@ -338,6 +338,58 @@ Pyth's clearest structural advantage is latency + first-party data for high-freq
 | **24h Range** | $0.0468 — $0.0510 |
 | **CoinGecko Sentiment** | 100% positive |
 | **Last Updated** | 2026-07-16 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PYTH is tradable on **both** major venue types, making it a genuinely liquid two-venue market:
+
+- **Binance** — spot (PYTH/USDT) plus a **USD-margined perpetual**, giving PYTH the deepest centralized order book and the tightest spot book for clean fills and low-slippage entries/exits.
+- **[[hyperliquid|Hyperliquid]]** — **PYTH-PERP**, the principal on-chain perpetual venue, with leverage available up to roughly **~40-50x**.
+
+The two-venue setup means directional traders can source leveraged exposure on either desk, while the parallel Binance-perp / Hyperliquid-perp / CEX-spot structure opens clean **CEX-vs-DEX** basis, funding, and carry plays. Practical implication: split large orders across venues to limit footprint, lean on Binance spot for base liquidity, and use the on-chain Hyperliquid book for funding/basis divergence rather than for outsized single-clip size — even a two-venue mid-cap like PYTH still shows thinner depth than majors, so scale in and expect slippage in risk-off tape.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with a live perp on both Binance and Hyperliquid, PYTH funding can be harvested by holding spot and shorting the richer perp when funding runs persistently positive.
+- [[hl-vs-cex-funding-divergence]] — PYTH quotes a Binance USD-margined perp and a Hyperliquid PYTH-PERP simultaneously, so funding can dislocate between the two venues and be arbitraged.
+- [[cash-and-carry]] — long Binance spot vs short a PYTH perp captures basis/funding carry while staying delta-neutral on a mid-cap that carries meaningful funding.
+- [[basis-trading]] — the parallel spot and perp books let traders trade the perp-vs-spot basis directly as it widens and compresses around Solana-DeFi narrative swings.
+- [[liquidation-cascade-fade]] — as a thin, high-beta DeFi/oracle token, PYTH is prone to leverage-driven flushes on Hyperliquid; fading over-extended cascades back toward prior value can work when OI resets.
+- [[oi-confirmed-trend]] — pairing Hyperliquid open-interest against price helps separate genuine trend continuation from crowded, unsustainable positioning on PYTH's reflexive moves.
+
+### Volatility & regime character
+
+PYTH is a **high-beta DeFi / oracle-infrastructure altcoin** layered on **[[solana]] ecosystem beta**. It amplifies BTC/ETH direction (high positive correlation on the downside in risk-off regimes) while adding idiosyncratic swings driven by Solana-DeFi, perp-DEX volume, and oracle-narrative flows. Expect wide intraday ranges and reflexive spikes typical of a lower-liquidity mid-cap; it rips on Solana/DeFi-infra narratives and bleeds hard in altcoin risk-off tape, with sharper drawdowns than large-cap majors.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — despite two venues, PYTH is a mid-cap with thinner books than majors; large clips slip, and depth can vanish in risk-off conditions.
+- **Token unlocks / emissions** — MC/FDV ~0.79 leaves a large locked share (~2.1B PYTH); scheduled unlocks are ongoing structural sell pressure that can cap rallies.
+- **Narrative dependence** — value tracks Solana-DeFi and oracle-adoption narratives (Pyth Pro, TVS vs [[chainlink|Chainlink]]); sentiment reversals hit price quickly.
+- **Perp funding dislocations** — with two independent perp venues, funding can swing sharply and diverge between Binance and Hyperliquid, punishing crowded leveraged positioning and forcing liquidation cascades.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PYTH` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PYTH` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PYTH&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PYTH&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PYTH"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

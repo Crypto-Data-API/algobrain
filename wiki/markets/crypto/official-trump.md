@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, news]
+tags: [crypto, news, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["TRUMP", "TRUMP coin", "Trump memecoin"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized"
 website: "https://gettrumpmemes.com/"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-short-funding-fade]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Official Trump
@@ -287,6 +287,50 @@ TRUMP's distinguishing feature is *political headline beta* and event-driven per
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** TRUMP is a genuine two-venue derivatives market: it trades on **Binance** (TRUMP/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** as **TRUMP-PERP** (leverage up to ~40–50x). Depth is deep for a sub-$1B token — among the very few PolitiFi/meme names that can absorb sizeable short positions without slippage — thanks to broad CEX access (Kraken, Upbit, Bitget, KuCoin) and on-chain SOL liquidity on Solana. Dual-venue availability (Binance CEX perp + Hyperliquid on-chain perp) supports basis and funding-divergence execution, lets traders spread size across books to limit market impact, and gives a clean CEX-vs-HL price for arbitrage; the same spot+perp coexistence enables cash-and-carry-style construction, though the unlock overhang on the spot leg tempers its attractiveness.
+
+**Applicable strategies.**
+- [[crowded-short-funding-fade]] — the unlock/dilution thesis keeps TRUMP-PERP funding persistently negative; when shorts crowd, a Trump-administration crypto headline can force a violent short squeeze worth fading the crowd into.
+- [[hl-vs-cex-funding-divergence]] — with liquid perps on both Hyperliquid and Binance, funding can dislocate between the on-chain and CEX venue, giving a market-neutral spread on the same underlying.
+- [[token-unlock-supply-event]] — ~76% of supply (~763M TRUMP) vests through ~2028 at roughly ~900k tokens/day; dated tranches are tradeable, predictable structural sell events.
+- [[event-driven-trading]] — perk announcements (gala dinners, Mar-a-Lago access, the Billionaires Club game) are dated catalysts that historically produce buyable spikes that then exhaust.
+- [[narrative-trading]] — TRUMP is the PolitiFi bellwether and the liquid proxy for "Trump trade" risk appetite; it leads politics-themed and WLFI-adjacent tokens.
+- [[liquidation-cascade-fade]] — thin-float reflexivity plus high leverage produces sharp liquidation flushes on headline shocks that mean-revert once forced flow clears.
+
+**Volatility & regime character.** High-beta **PolitiFi memecoin** with heavy narrative/attention reflexivity — political headline beta rather than fundamentals drives price. Volatility is extreme and event-clustered (perk announcements, unlock dates, administration news). It broadly tracks BTC/ETH risk-on/risk-off as a high-beta alt (amplified drawdowns in risk-off tapes) but decouples on idiosyncratic political catalysts. Behavior is asymmetric: violent up-squeezes into positive headlines versus a grinding, unlock-driven downtrend (-97.5% from ATH to a $1.50 ATL).
+
+**Risk flags.**
+- **Insider concentration** — 80% of supply held by Trump-affiliated entities (CIC Digital, Fight Fight Fight); a distribution decision would overwhelm the bid.
+- **Multi-year unlock/emission overhang** — ~76% locked, ~900k tokens/day vesting to ~2028; the dominant structural sell pressure.
+- **Narrative dependence** — value rests entirely on the Trump brand and attention; sentiment collapse (0% positive at the 2026-07-16 snapshot) removes the bid.
+- **Two-sided political/regulatory headline risk** — pardons, crypto policy, and conflict-of-interest scrutiny are binary, unpredictable catalysts.
+- **Perp funding dislocations** — persistently negative funding around the short thesis creates squeeze fuel; extreme funding on either venue is a crowding warning.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=TRUMP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=TRUMP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=TRUMP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=TRUMP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=TRUMP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

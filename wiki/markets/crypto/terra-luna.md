@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [collapse, crypto, defi, luna, stablecoin, terra]
+tags: [collapse, crypto, defi, luna, stablecoin, terra, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, memecoins]
 aliases: ["LUNA Classic", "LUNC", "Terra Classic"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.terra-classic.io"
-related: ["[[2022-05-terra-luna-depeg-arb]]", "[[crypto-markets]]", "[[defi]]", "[[stablecoins]]", "[[terra-luna-2]]", "[[terra-luna-collapse]]", "[[terrausd]]", "[[three-arrows-capital]]"]
+related: ["[[2022-05-terra-luna-depeg-arb]]", "[[crypto-markets]]", "[[defi]]", "[[stablecoins]]", "[[terra-luna-2]]", "[[terra-luna-collapse]]", "[[terrausd]]", "[[three-arrows-capital]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[meme-coin-cycle]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Terra Luna Classic
@@ -200,6 +200,50 @@ LUNC is best understood not as a competitor to live projects but as the **post-m
 - **Idiosyncratic / manipulation risk:** thin, community-driven price action is prone to pump-and-dump dynamics.
 - **Regulatory/legal overhang:** ongoing fallout from the Terraform Labs litigation and Do Kwon proceedings.
 - **Regime beta:** highly sensitive to risk-off conditions like the current Established Bear Market.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** LUNC is one of the more actively traded low-cap survivors and runs a genuine two-venue derivatives market. On **Binance** it lists as **LUNC/USDT spot** plus a **USD-margined perpetual**, and on **Hyperliquid** it trades as **LUNC-PERP** (referenced on the Hyperliquid API as `kLUNC`, i.e. price scaled by 1,000) with leverage up to roughly **40-50x**. Because both a deep CEX (Binance) and a growing on-chain perp DEX (Hyperliquid) carry the name, order-book depth is respectable for its market-cap rank (~126) and two-sided quoting is reliable in normal conditions. That said, LUNC is a fractions-of-a-cent, multi-trillion-supply token: nominal depth can look thin per notional tick, so size positions in venue-appropriate clips, split large orders across Binance and Hyperliquid to limit slippage, and treat the two venues as a natural pair for spread/basis and funding-divergence execution rather than trying to fill everything on one book.
+
+**Applicable strategies:**
+- [[funding-rate-harvest]] — a liquid two-venue perp market with periodic burn-narrative long crowding lets you collect funding by holding the short/delta-neutral side when the perp trades rich.
+- [[hl-vs-cex-funding-divergence]] — Binance USD-margined perp and Hyperliquid LUNC-PERP frequently diverge in funding during hype spikes, giving a clean cross-venue funding spread to arb.
+- [[crowded-long-funding-fade]] — burn-campaign and re-peg hype pull in retail longs that push funding deeply positive; fade the crowded long once funding is extended.
+- [[liquidation-cascade-fade]] — LUNC's high leverage and reflexive, meme-like moves produce sharp long-liquidation flushes that overshoot, offering fade entries into forced selling.
+- [[token-unlock-supply-event]] — burn-tax mechanics and community supply campaigns make supply-side catalysts a recurring, tradeable event on LUNC specifically.
+- [[meme-coin-cycle]] — post-collapse LUNC trades on community/burn narratives and reflexive speculation, fitting the boom-fade cadence of a meme-style token.
+
+**Volatility & regime character.** LUNC behaves as a **high-beta, memecoin-style speculative token** with strong reflexivity: idiosyncratic, community-driven narratives (burn campaigns, re-peg proposals, exchange burn support) dominate over fundamentals. It carries positive but noisy correlation to BTC/ETH beta — it sells off hard in risk-off regimes (amplifying broad-market downside) yet can decouple sharply upward on token-specific hype, making its beta unstable and regime-dependent.
+
+**Risk flags.**
+- **Liquidity/venue concentration** — real depth is concentrated in Binance spot/perp and Hyperliquid; away from these, pairs are thin and prone to slippage and manipulation.
+- **Supply/emissions overhang** — a ~5.5T circulating supply and the 1.2% burn-tax dynamics mean supply narratives (and their disappointment) drive violent repricings.
+- **Narrative dependence** — with no working stablecoin and minimal development, price is pure speculation; narrative reversals gap the token quickly.
+- **Perp funding dislocations** — hype phases push funding to extremes and can trigger long-liquidation cascades; funding can flip abruptly and diverge between Binance and Hyperliquid.
+- **Regulatory/legal overhang** — ongoing fallout from Terraform Labs litigation and Do Kwon proceedings remains a headline risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=kLUNC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=kLUNC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=kLUNC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=kLUNC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=kLUNC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

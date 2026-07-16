@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["INJ", "Injective Protocol"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (Injective Labs: New York, USA)"
 website: "https://injective.com"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[solana]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[ethereum]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[narrative-trading]]"]
 ---
 
 # Injective
@@ -335,6 +335,61 @@ Injective's edge is being a *finance-native* L1 with deflationary tokenomics; it
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+INJ trades on **both** major venue types, making it a deep, liquid two-venue market:
+
+- **Binance** — INJ/USDT spot plus a **USD-margined perpetual (INJUSDT)**, the primary CEX price-discovery and liquidity center. Korean flow via Upbit INJ/KRW adds meaningful spot turnover.
+- **[[hyperliquid|Hyperliquid]]** — **INJ-PERP** with leverage up to **~40–50x**, the dominant on-chain perp venue and the reference for on-chain funding/OI.
+
+The two-venue structure matters for execution and sizing: on-chain (Hyperliquid) and CEX (Binance) order books can be worked in parallel, and the **CEX-vs-DEX funding spread** is itself tradable. Depth is solid for a rank ~100 top-100 asset but thinner than large-caps, so large clips should be sliced across venues; the modest 24h spot turnover means market orders can move price and slippage/impact should be budgeted. Availability on both venues supports true cross-venue basis and funding plays that single-venue alts cannot offer.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — capture funding while delta-hedging INJ between Binance perp and Hyperliquid INJ-PERP / spot; the dual-venue depth makes the hedge clean.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid INJ-PERP funding routinely diverges from Binance USD-margined funding; go long the cheap-to-carry leg, short the rich one.
+- [[cash-and-carry]] — INJ's MC/FDV ≈ 1.0 (no unlock overhang) makes a long-spot / short-perp carry cleaner than most L1s, since there is no mechanical new supply to absorb.
+- [[basis-trading]] — trade the spot-vs-perp basis around the scheduled monthly buyback/burn catalysts, when spot demand and perp positioning can decouple.
+- [[liquidation-cascade-fade]] — INJ's fixed ~100M supply produces distinct squeeze dynamics; fade over-extended liquidation wicks on the leveraged perp once OI flushes.
+- [[narrative-trading]] — INJ is highly narrative-reflexive (RWA/iAsset, MultiVM/EVM, deflationary tokenomics); rotate exposure with the active DeFi-L1 narrative basket.
+
+### Volatility & regime character
+
+INJ is a **high-beta DeFi / finance-infrastructure L1 token** (rank ~100), not a large-cap or a memecoin. It carries strong beta to broad alt sentiment and to BTC/ETH risk-on/risk-off swings, amplified by narrative reflexivity around RWA, MultiVM/EVM, and its deflationary burn story. History shows violent narrative-driven moves (e.g. -58% in the year to April 2026 before a Q2 recovery). In risk-off regimes it typically underperforms BTC/ETH (down-beta > 1); in narrative-on phases it can sharply outperform. It currently trades in an [[crypto-market-regimes|Established Bear Market]] ~90% below its ATH — size accordingly.
+
+### Risk flags
+
+- **Venue / liquidity concentration** — depth is meaningful but concentrated in Binance and Hyperliquid plus Korean (Upbit) flow; thinner books than large-caps mean higher slippage on size.
+- **Narrative dependence** — price leans heavily on RWA/iAsset, MultiVM, and buyback-yield narratives; narrative fade can compress the token independent of fundamentals.
+- **Fee-revenue / burn dependency** — the deflationary thesis only holds if on-chain activity funds burns; bear-market activity lets PoS inflation dominate.
+- **Perp funding dislocations** — leverage on the perp plus a fixed float can drive squeeze/funding spikes and liquidation cascades; monitor funding and OI around buyback events.
+- **Regulatory** — on-chain derivatives and synthetic RWA/iAsset markets sit in contested regulatory territory across jurisdictions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=INJ` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=INJ` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=INJ&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=INJ&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=INJ"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

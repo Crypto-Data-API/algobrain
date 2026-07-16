@@ -3,14 +3,14 @@ title: "Bluzelle"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["BLZ"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://bluzelle.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Bluzelle
@@ -131,6 +131,48 @@ At Bluzelle, we see technology as a powerful tool to solve humanity's most press
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — BLZ is a **PERP-FIRST** asset: it trades on **Hyperliquid** (BLZ-PERP, leverage up to ~40-50x) but is **NOT listed on Binance**, and spot access is limited/offshore (a handful of CEX pairs like Kraken and KuCoin plus thin Uniswap V2 liquidity). Consequently, price discovery and directional flow concentrate on the HL perp rather than spot. Order-book depth is shallow given the sub-$5M market cap and tiny reported 24h volume, so slippage rises quickly with size — position sizing must stay small, use limit/passive fills, and avoid market orders that can walk the book. The absence of a deep spot venue also makes true cash-and-carry hard to run cleanly; most edge is captured on-perp.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — thin, retail-driven perp funding on an illiquid micro-cap can run persistently rich or cheap, letting a delta-hedged holder collect the carry.
+- [[crowded-long-funding-fade]] — sharp bursts of leveraged longs on a low-float name push funding to extremes that mean-revert, offering a fade against overheated positioning.
+- [[liquidation-cascade-fade]] — with high leverage on a shallow book, forced liquidations overshoot violently; fading the flush targets the snap-back once stops clear.
+- [[post-liquidation-rebound]] — after a cascade exhausts sell/buy pressure on the HL perp, the vacuum bounce is tradable given how few resting orders remain.
+- [[oi-price-exhaustion]] — rising open interest into a stalling price on a micro-cap flags an exhausted, over-positioned move ripe for reversal.
+- [[volatility-breakout]] — long dormant ranges punctuated by sudden expansion make ATR/volatility-triggered breakouts a fit for BLZ's reflexive, low-liquidity moves.
+
+**Volatility & regime character** — BLZ is a deep-drawdown, low-float **infra/DeSci small-cap** (>99% below its 2018 ATH). It behaves as a **high-beta, low-liquidity altcoin**: quiet drift punctuated by reflexive spikes, amplified by thin depth and high perp leverage. Directionally it is a beta follower of BTC/ETH risk appetite — it tends to lag on the way up and overshoot on the way down — with little idiosyncratic catalyst flow, so realized volatility is driven more by leverage/liquidity mechanics than by fundamentals.
+
+**Risk flags**
+- **Venue concentration** — liquidity and leverage are centered on a single perp venue (Hyperliquid); an HL delist, funding dislocation, or downtime would strand exposure with no deep spot fallback.
+- **Liquidity/slippage** — micro-cap depth means large fills move price and stops can gap; illiquidity is the dominant execution risk.
+- **Supply/emissions** — max supply is uncapped ("Unlimited"), so ongoing emissions/dilution can pressure price independent of trading flow.
+- **Narrative dependence** — value hinges on the DeSci/DePIN narrative; interest can evaporate quickly, leaving no bid.
+- **Perp funding dislocations** — extreme or sign-flipping funding on a thin book can invert carry assumptions and squeeze hedged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BLZ` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BLZ` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BLZ&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BLZ&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BLZ"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

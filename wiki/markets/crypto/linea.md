@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins, ethereum]
 aliases: ["LINEA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://linea.build/association"
-related: ["[[consensys]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zero-knowledge-proofs]]"]
+related: ["[[consensys]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[zero-knowledge-proofs]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[cash-and-carry]]"]
 ---
 
 # Linea
@@ -113,6 +113,47 @@ Linea is a ~$62M-cap zkEVM L2 token with a distinctive value-accrual design: it 
 - **Intense L2 competition.** zkEVM is a crowded field; fee compression (post-EIP-4844 blob pricing) squeezes the revenue that funds the burn mechanism.
 - **Value-accrual uncertainty.** Since gas is paid in ETH, LINEA's value depends entirely on the burn/buyback mechanism scaling with usage — an unproven flywheel for a young chain.
 - **Liquidity / volatility.** Small-cap microstructure: thin order books, ~$9.7M daily volume, and an extreme-fear macro backdrop amplify drawdowns.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** LINEA trades on **both** [[binance]] (LINEA/USDT spot plus a USD-margined perpetual) and [[hyperliquid]] (LINEA-PERP, leverage up to ~40-50x). This dual-venue footprint makes it a deeper, more liquid two-venue market than most sub-$100M-cap alts, but it remains a small-cap name — order books thin out quickly beyond modest clip sizes and 24h volume is modest relative to a low-priced, high-supply token. The presence of a centralized (Binance) and a decentralized-perp (Hyperliquid) venue side by side enables cross-venue execution: you can leg spot on Binance against a Hyperliquid perp, but sizing must respect the thinner of the two books at any moment. Because the token is very low-priced (sub-cent) with a huge circulating count, quote-precision and minimum tick effects matter for scalping and grid work. Check live funding, OI, and L2 depth before sizing any leveraged position.
+
+**Applicable strategies.**
+- [[funding-rate-arbitrage]] — a Binance USD-margined perp and a Hyperliquid LINEA-PERP quoting the same underlying let you capture funding differentials between the two venues.
+- [[hl-vs-cex-funding-divergence]] — thin small-cap perps like LINEA frequently see Hyperliquid and Binance funding diverge, a directly tradable dislocation across the two available venues.
+- [[cash-and-carry]] — Binance spot LINEA hedged against a short perp harvests basis/funding carry while staying delta-neutral on a volatile post-airdrop token.
+- [[liquidation-cascade-fade]] — low float and leverage up to ~50x make LINEA prone to stop-run cascades that overshoot, offering mean-reversion entries once the flush exhausts.
+- [[breakout-and-retest]] — narrative- and unlock-driven moves in a low-cap L2 token produce clean range breaks; trading the retest filters false breakouts in a thin book.
+- [[oi-price-exhaustion]] — with live Hyperliquid OI available, rising open interest into a stalling price flags crowded positioning ripe for a reversal in this reflexive small-cap.
+
+**Volatility & regime character.** LINEA is a **high-beta, small-cap infrastructure/DeFi (zkEVM L2) altcoin** with a pronounced post-airdrop drawdown profile — down ~95% from its September-2025 ATH and trading near all-time lows. It carries strong **ETH beta** (it is an Ethereum-scaling L2 with explicit ETH alignment) layered on top of broad BTC-driven risk-on/risk-off cycles, so it tends to amplify moves in ETH and the wider alt complex. Expect high realized volatility, sharp reflexive swings on thin liquidity, and regime sensitivity to L2-narrative flows and Ethereum sentiment.
+
+**Risk flags.**
+- **Liquidity / venue concentration.** Small-cap microstructure means thin books; despite two venues, depth is limited and larger orders slip. Perp OI and funding can swing sharply.
+- **Token unlocks / emissions.** Circulating supply is only ~34% of total; ongoing ecosystem and contributor unlocks are a structural supply overhang that can drive sustained selling and gap risk.
+- **Narrative dependence.** Value accrual rests on an unproven ETH/LINEA dual-burn flywheel and zkEVM narrative; fee compression and L2 competition can drain the story quickly.
+- **Perp funding dislocations.** Thin two-venue perp market is prone to funding spikes and cross-venue divergences — a source of edge but also of squeeze risk for leveraged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=LINEA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=LINEA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=LINEA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=LINEA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=LINEA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

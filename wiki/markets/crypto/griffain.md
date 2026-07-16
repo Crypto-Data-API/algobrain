@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, machine-learning, solana]
+tags: [ai-trading, crypto, machine-learning, solana, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, memecoins]
 aliases: ["GRIFFAIN"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://griffain.com/"
-related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[ai-trading-agents]]", "[[aixbt]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[defai]]", "[[solana]]", "[[virtual-protocol]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[ai-trading-agents]]", "[[aixbt]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[defai]]", "[[solana]]", "[[virtual-protocol]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # GRIFFAIN
@@ -242,6 +242,46 @@ GRIFFAIN cannot be valued on cash flows — it has no protocol fee accrual to th
 - **As of June 2026:** GRIFFAIN is **alive and active** but has continued to bleed value: it traded around **~$0.0082 with a market cap near ~$8.3M** — roughly half the ~$16M cap in the April 2026 snapshot above. It trades as a small-cap, high-volatility Solana AI-agent token; liquidity remains fragile. No exploit, migration, or shutdown reported. (Verified via WebSearch, 2026-06-11)
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** GRIFFAIN is a **perp-first asset**: it trades as **GRIFFAIN-PERP on [[hyperliquid]]** (leverage up to ~40-50x) but is **not listed on Binance**, and spot access is limited/offshore (Kraken, KuCoin, and Solana DEX venues like [[orca]]). As a result, the deepest and most continuous liquidity — and the reference price for short-term flow — concentrates on the HL perp, while thin spot books fragment across venues. Practically, this means the HL order book drives price discovery, funding and open interest are the cleanest read on positioning, and because it is a micro-cap perp with shallow depth, size must be scaled to the L2 book (slippage and liquidation risk rise fast for modest notional). Use limit/passive execution and small clips; avoid market orders that walk a thin book.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — a low-float perp-first micro-cap on HL often runs persistently skewed funding; harvesting the paid side is viable when directional risk is hedged.
+- [[crowded-long-funding-fade]] — after narrative-driven +40-90% momentum bursts, crowded longs and rich funding on GRIFFAIN-PERP set up funding-fade shorts into exhaustion.
+- [[liquidation-cascade-fade]] — micro-cap perp depth is thin, so leverage-driven liquidation cascades overshoot; fading the flush targets the mean-reversion snapback.
+- [[oi-price-exhaustion]] — rising open interest into a parabolic move that stalls flags exhaustion; a favored signal on a reflexive HL-concentrated token like GRIFFAIN.
+- [[breakout-and-retest]] — narrative rotation into Solana AI agents produces clean range breakouts; entering on the retest filters the frequent false breaks in a thin book.
+- [[narrative-trading]] — GRIFFAIN is a pure attention/[[defai|DeFAI]] beta play, so trading the AI-agent narrative cycle (on/off) is the dominant edge.
+
+**Volatility & regime character.** GRIFFAIN is a **high-beta, memecoin-reflexive AI-agent (DeFAI) micro-cap** on [[solana]]. It exhibits full memecoin volatility (multi-x rips in weeks when the narrative is "on," 80-90%+ bleeds when it rotates out) and is best understood as an attention asset with no cash-flow anchor. Beta to BTC/ETH is high on the downside (it sells off hard in risk-off / bear regimes) but decoupled on the upside, where idiosyncratic AI-agent and Solana-ecosystem narrative flows dominate. See [[market-regime]].
+
+**Risk flags.**
+- **Venue concentration:** liquidity and price discovery hinge on the single HL perp; if HL delists or depth thins, execution degrades sharply.
+- **Thin liquidity / micro-cap:** modest notional moves price; flash crashes and manipulation risk are elevated.
+- **Perp funding dislocations:** persistent funding skew and crowded positioning can force sudden squeezes in either direction.
+- **Narrative dependence:** value is entirely demand/attention-driven; when the DeFAI/AI-agent meta rotates out, drawdowns are severe.
+- **Supply note:** ~100% of max supply already circulates, so there is little unlock/emission overhang — the risk is demand-side, not dilution.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GRIFFAIN` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GRIFFAIN` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GRIFFAIN&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GRIFFAIN&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GRIFFAIN"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

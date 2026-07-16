@@ -4,10 +4,10 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, meme-coin, speculation]
+tags: [crypto, ethereum, meme-coin, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 entity_type: protocol
 aliases: ["PEPE", "PEPE-token", "pepe-coin"]
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[fartcoin]]", "[[hyperliquid]]", "[[solana]]", "[[uniswap]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[fartcoin]]", "[[hyperliquid]]", "[[solana]]", "[[uniswap]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[long-liquidation-cascade]]"]
 headquarters: "Decentralized"
 website: "https://www.pepe.vip/"
 ---
@@ -191,6 +191,52 @@ The takeaway: among large memes, PEPE's tokenomics are unusually trustworthy (no
 - **No deflationary support** — PEPE has no protocol burn; do not expect supply mechanics to backstop price (see Tokenomics & Supply).
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PEPE trades on a **deep, liquid two-venue derivatives market**. On [[binance]] it is available as **spot plus a USD-margined perpetual**, and on [[hyperliquid]] as **PEPE-PERP with leverage up to ~40–50x**. Both books are deep and continuously two-sided — consistent with PEPE's ~10% daily turnover on a ~$1.19B cap — so slippage on standard clip sizes is low and execution is straightforward on either venue. The dual-venue setup is what makes PEPE tradable at scale: an on-chain-native memecoin gains CEX-grade depth on Binance while Hyperliquid supplies a transparent, on-chain perp with its own funding and order book. That parallel availability enables **cross-venue execution** (route the aggressive leg to whichever book is deeper), supports **larger position sizing** than a single-venue meme could bear, and — critically — creates a clean CEX-vs-DEX pair for basis and funding-divergence trades. Note that Hyperliquid quotes the perp as `kPEPE` (price scaled ×1000) for tick precision; size and PnL are unaffected but the mark must be de-scaled when comparing to Binance spot.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — during meme manias PEPE funding goes strongly positive as retail piles into longs; fade the crowd back toward neutral funding.
+- [[crowded-short-funding-fade]] — on washouts funding flips negative as shorts crowd in; fade extreme negative funding for the snapback.
+- [[long-liquidation-cascade]] — high retail leverage (10x–50x) makes reflexive long-liquidation downdrafts routine; trade the forced-selling leg.
+- [[post-liquidation-rebound]] — PEPE's sharp cascades routinely overshoot, setting up mean-reverting bounces once the liquidation flush exhausts.
+- [[hl-vs-cex-funding-divergence]] — with an active Binance perp and Hyperliquid PEPE-PERP, funding can diverge between the two venues; harvest the spread.
+- [[cash-and-carry]] — Binance spot plus a short perp lets you harvest PEPE's chronically elevated positive funding as carry.
+
+### Volatility & regime character
+
+PEPE is a **high-beta, reflexive memecoin** — the archetype of an attention-driven bearer asset with zero cash-flow floor. It exhibits classic memecoin reflexivity: rising price attracts attention that attracts buyers, amplifying moves in both directions, with 100%+ rallies and 50%+ crashes within days. It is **high-beta to [[bitcoin]] and to [[solana]]/altcoin risk-on/risk-off swings**, and (being ERC-20) somewhat to [[ethereum]] — it typically leads on the way up and on the way down, making its tape and funding a real-time barometer of speculative excess across the meme cohort. Meme coins are usually the first cohort dumped in risk-off regimes, so PEPE de-risks early in fear-driven drawdowns.
+
+### Risk flags
+
+- **Narrative / attention dependence** — PEPE's only "moat" is mindshare; a rotation of speculative attention to newer memes or another chain's cycle drains bids with no fundamental floor to catch the fall.
+- **Perp funding dislocations** — funding swings hard positive in manias and negative in washouts; basis can gap violently when spot moves, so carry/basis trades carry real tail risk.
+- **Liquidation reflexivity** — heavy retail leverage means downside is self-reinforcing; long-liquidation cascades amplify dips just as short squeezes amplify rallies.
+- **Venue / execution nuance** — while the two-venue market is liquid, the Hyperliquid `kPEPE` ×1000 price scaling must be handled correctly in any cross-venue basis or funding-divergence calc to avoid mispriced legs.
+- **No supply overhang, but no supply support** — supply is fixed and fully circulating (no unlocks or emissions), which removes dilution risk but also means there is no burn/deflation mechanic to backstop price.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=kPEPE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=kPEPE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=kPEPE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=kPEPE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=kPEPE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## Related
 

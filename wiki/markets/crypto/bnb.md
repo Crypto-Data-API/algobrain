@@ -4,11 +4,11 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [binance, bnb, crypto, exchange-token, layer1]
+tags: [binance, bnb, crypto, exchange-token, layer1, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins]
 entity_type: protocol
 aliases: ["BNB", "BNB-Chain", "BSC", "Binance-Coin"]
 website: "https://www.bnbchain.org"
-related: ["[[binance]]", "[[bitcoin]]", "[[bnb-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[solana]]"]
+related: ["[[binance]]", "[[bitcoin]]", "[[bnb-chain]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 founded: 2017
 headquarters: "Decentralized"
 ---
@@ -123,6 +123,46 @@ BNB's distinctive position is the combination of a **large, profitable parent ex
 - **Macro / regime risk** — as a top-5 large cap, BNB is exposed to the prevailing **Established Bear Market** and extreme-fear sentiment (Fear & Greed 23) as of 2026-06-20.
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** BNB is a genuine two-venue perp market. On [[binance|Binance]] it trades as deep spot (BNB/USDT, BNB/FDUSD, BNB/BTC) plus a USD-margined perpetual with very high leverage and the deepest [[open-interest]] and book depth for the asset. On [[hyperliquid]] it lists as BNB-PERP with leverage up to ~40-50x and a transparent on-chain order book. Having both a CEX and a decentralized perp venue means execution can be split across books: large clips clear on Binance with modest impact given its dominant depth, while Hyperliquid offers on-chain settlement and an independent [[funding-rate|funding]] print. The dual venue is what makes CEX-vs-DEX [[funding-rate]] and basis comparisons tradable rather than theoretical, and it lets sizing lean on Binance depth while hedging or arbing on Hyperliquid.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — BNB funding is quoted on both Binance and Hyperliquid, so gaps between the two venue prints are directly harvestable on a top-5 name with reliable depth on each side.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp lets you hold spot BNB and short the perp to capture positive carry with tight execution slippage.
+- [[basis-trading]] — the large-cap two-venue structure keeps perp-vs-spot basis measurable and mean-reverting, suitable for systematic basis capture on BNB.
+- [[funding-rate-harvest]] — as a top-5 asset, BNB funding leans positive in risk-on phases and flips negative in fear, giving a repeatable delta-neutral carry to collect.
+- [[oi-confirmed-trend]] — BNB's deep, two-sided [[open-interest]] makes OI-confirmed breakouts and trend continuation reads more trustworthy than on thin alts.
+- [[liquidation-cascade-fade]] — Binance-driven leverage flushes on BNB produce sharp overshoots into deep books, offering fade setups back toward fair value.
+
+**Volatility & regime character.** BNB is a **large-cap, lower-beta major** rather than a high-beta alt or memecoin. It carries a quasi-equity backing (Binance's exchange cash flows plus a deflationary burn) that dampens drawdowns, so it typically holds its rank better than mid/small caps in fear regimes. Correlation to BTC/ETH is high directionally but its beta is muted versus speculative alts; idiosyncratic moves cluster around Binance news, regulatory headlines, and quarterly burn events. In risk-off regimes it behaves like a defensive large cap within the crypto complex.
+
+**Risk flags.**
+- **Venue/liquidity concentration** — the bulk of organic BNB flow is Binance-native, so any Binance disruption, outage, or regulatory action hits both the token and its primary book at once.
+- **Regulatory / exchange-token overhang** — BNB carries an "Alleged SEC Securities" tag and inherits Binance's regulatory risk; adverse Binance news transmits directly into price regardless of on-chain metrics.
+- **Narrative dependence** — price is driven heavily by Binance's health and market share; on-chain BNB Chain metrics matter less than exchange sentiment.
+- **Perp funding dislocations** — leverage flushes and one-sided positioning can spike funding and trigger liquidation cascades; the two-venue structure means Binance and Hyperliquid funding can diverge sharply during stress.
+- **Supply is deflationary (not a dilution flag)** — no unlock overhang (MC/FDV ~1.0), so unlike emission-heavy tokens the trading risk is concentration and narrative, not supply dumps.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BNB` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BNB` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BNB&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BNB&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BNB"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

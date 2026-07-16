@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, payment-solutions]
+tags: [crypto, defi, payment-solutions, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["REQ", "Request Network"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://request.network"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[stablecoins]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Request
@@ -307,6 +307,61 @@ The Request Network leverages ...
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+REQ trades on **both** major venue types: [[binance|Binance]] offers spot (REQ/USDT) and a USD-margined [[perpetual-futures|perpetual]], while [[hyperliquid|Hyperliquid]] lists **REQ-PERP** with leverage up to ~40-50x. This two-venue footprint is unusual for a ~#513-ranked small-cap and gives REQ a genuinely tradeable derivatives market rather than a spot-only microcap profile.
+
+- **Depth is thin in absolute terms.** With roughly single-digit-million daily volume against a ~$40M cap, both order books are shallow; large market orders walk the book and incur meaningful [[slippage]]. Size positions to the visible L2 depth, not the headline cap.
+- **Two-venue availability aids execution.** Because the perp lives on both a deep CEX (Binance) and an on-chain venue (Hyperliquid), spreads between them can be worked, funding can diverge, and traders can route where depth is best. This is the structural precondition for the cross-venue and funding strategies below.
+- **Leverage cuts both ways.** 40-50x on a thin book means liquidation clusters can move price sharply; keep effective leverage well below the venue max and expect gap risk around low-liquidity hours.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — REQ perps run on both Binance (USD-margined) and Hyperliquid, so the same asset can carry different [[funding-rate|funding]] on each venue; harvest the spread when they dislocate.
+- [[funding-rate-arbitrage]] — thin small-cap perps like REQ frequently print stretched funding; go long spot / short the richer perp (or vice versa) to collect the rate.
+- [[cash-and-carry]] — hold REQ spot on Binance against a short REQ-PERP to lock the basis, a natural fit given the deep spot + perp pairing.
+- [[liquidation-cascade-fade]] — with 40-50x leverage on a shallow book, forced-liquidation wicks overshoot; fade the flush back toward the pre-cascade level.
+- [[oi-confirmed-trend]] — pair REQ price moves with Hyperliquid [[open-interest]] to separate real, position-backed trends from thin-liquidity noise.
+- [[range-mean-reversion]] — as a low-momentum, decayed payments small-cap, REQ often chops in a range; fade the extremes rather than chasing breakouts.
+
+### Volatility & regime character
+
+REQ is a **low-momentum infra/DeFi payments small-cap** — a 2017-era survivor trading ~95% below its ATH. It behaves as a **high-beta alt**: it amplifies broad-market risk-on/risk-off swings while lacking an independent narrative to drive idiosyncratic runs. Correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] beta is high on the downside (it drifts and drops with the risk-off tape) but it participates only weakly in alt rallies. Expect range-bound drift punctuated by liquidity-driven wicks rather than sustained trends.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** thin books on both venues mean wide effective spreads and gap risk; a single large order can dominate the tape.
+- **Perp funding dislocations:** low-OI small-cap perps produce erratic funding that can flip sharply — a risk for carry positions but also the source of the funding trades above.
+- **Leverage-driven cascades:** 40-50x on a shallow book makes liquidation cascades violent relative to spot depth.
+- **Narrative dependence / decay:** REQ trades on durability and a modest fee sink, not growth; absent fresh payments-narrative catalysts it tends to bleed beta.
+- **Emission overhang:** ~256M REQ (MC/FDV ~0.74) remains to enter circulation — modest versus new launches, but a slow supply headwind.
+- **Regulatory:** on-chain invoicing/payments intersect money-transmission and tax rules across jurisdictions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=REQ` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=REQ` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=REQ&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=REQ&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=REQ"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

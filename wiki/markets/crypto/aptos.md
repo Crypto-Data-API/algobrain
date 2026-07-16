@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, altcoins, bitcoin, ethereum]
 aliases: ["APT", "Aptos Network"]
 entity_type: protocol
 founded: 2021
 headquarters: "Palo Alto, USA (Aptos Labs); network decentralized"
 website: "https://aptosfoundation.org"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[sui]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[sui]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[pairs-trading]]"]
 ---
 
 # Aptos
@@ -298,6 +298,54 @@ The bull case is that Move's safety + Block-STM parallelism win exchange-style a
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+APT trades on a deep, liquid two-venue market. It is available on **[[binance|Binance]]** (APT/USDT spot plus a USD-margined APT perpetual) and on **[[hyperliquid|Hyperliquid]]** (APT-PERP, up to roughly 40-50x leverage), alongside Bybit and OKX perps. As a top-100 asset with continuous CEX spot depth and a mature on-chain perp, APT supports reasonable size without single-venue fragility: the CEX leg anchors spot execution and the Hyperliquid leg gives transparent on-chain funding and order-book depth. This dual availability makes APT a genuine candidate for cross-venue basis and funding trades — spot on Binance versus perp on Hyperliquid — while keeping slippage manageable for mid-sized positions. In the thin 2026 bear market, size down and lean on limit execution: 24h spot volume has compressed toward the low tens of millions, so aggressive market orders around unlock dates or ATL retests can move the book.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a liquid APT-PERP on both Hyperliquid and CEX venues makes systematic funding collection viable when perp funding runs persistently rich or negative near ATL positioning.
+- [[hl-vs-cex-funding-divergence]] — with APT-PERP live on both Hyperliquid and Binance/Bybit/OKX, funding can dislocate between venues, offering a market-neutral divergence capture.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp lets you lock the spot-vs-perp basis on APT while sidestepping directional risk on a token grinding at its all-time low.
+- [[pairs-trading]] — the SUI/APT "Move L1" ratio is a well-established relative-value pair; APT historically underperforms [[sui]] in risk-on phases, giving a mean-reverting spread.
+- [[token-unlock-supply-event]] — scheduled investor/foundation unlocks and staking emissions are recurring, calendarable supply events that reprice APT mechanically.
+- [[range-mean-reversion]] — in the 2026 Established Bear Market APT chops near ATL, so fading rips back toward the range mid with tight risk fits the regime.
+
+### Volatility & regime character
+
+APT is a high-beta Layer 1 / infra-and-DeFi token, not a memecoin or stablecoin. It carries meaningful directional beta to [[bitcoin]] and [[ethereum]] and tends to amplify broad-market moves — outperforming in risk-on rallies and drawing down harder in risk-off. Its idiosyncratic overlay is the "Move L1" narrative (tight correlation and relative-value dynamics with [[sui]]) plus an RWA/stablecoin-chain angle. As of mid-2026 it trades within a few percent of its all-time low inside an Established Bear Market (extreme-fear regime), so realized volatility clusters around ATL retests, unlock dates, and macro-driven BTC/ETH swings.
+
+### Risk flags
+
+- **Dilution / unlock overhang** — roughly 60% of max supply is uncirculated; monthly investor/foundation unlocks plus staking emissions create persistent, calendarable sell pressure that every rally must absorb.
+- **Narrative dependence** — the bull case leans on the "global trading engine" repositioning and RWA/stablecoin footprint; sentiment swings on Move-L1 and CFTC-classification headlines rather than steady flows.
+- **Bear-market beta & thin books** — high-beta alt in a thinning market; 24h spot volume has compressed, so liquidity can evaporate around ATL breaks and cascade risk rises.
+- **Perp funding dislocations** — funding on APT-PERP can run rich or negative around unlocks and the CFTC/institutional narrative; funding divergences between Hyperliquid and CEX venues are tradable but can whipsaw crowded positioning.
+- **Venue / regulatory context** — Korean flow (Upbit APT/KRW) can drive premium/discount dislocations; the 2026-03-17 CFTC commodity classification is a structural positive but future US derivatives structure remains to be built out.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=APT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=APT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=APT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=APT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=APT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

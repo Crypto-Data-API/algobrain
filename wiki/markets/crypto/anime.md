@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, memecoins, hyperliquid, perpetual-futures, funding-rate, liquidations, derivatives]
 aliases: ["ANIME", "Animecoin"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.anime.xyz/"
-related: ["[[arbitrum]]", "[[azuki]]", "[[crypto-markets]]", "[[nft]]"]
+related: ["[[arbitrum]]", "[[azuki]]", "[[crypto-markets]]", "[[nft]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[meme-coin-cycle]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Animecoin
@@ -234,6 +234,60 @@ ANIME's competitive moat is the strength of the Azuki brand and its NFT communit
 - **Utility ambiguity** — beyond community participation and governance signaling, concrete must-have utility is limited, which is common for fandom tokens.
 
 > Culture/meme tokens are highly speculative. Nothing here is investment advice.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ANIME is tradable across a genuinely deep two-venue derivatives-and-spot footprint that is unusual for a ~#949 market-cap name:
+
+- **Binance** — spot (ANIME/USDT) plus a **USD-margined perpetual**, giving both a cash leg and a levered/hedgeable perp on the deepest CEX orderbook. This is the primary price-discovery venue and the anchor for any cross-venue basis or funding work.
+- **[[hyperliquid|Hyperliquid]]** — **ANIME-PERP**, offering up to **~40-50x** leverage with fully on-chain funding, mark, and open-interest data.
+
+The result is a **deep, liquid two-venue market** with tight top-of-book on both perps and a real spot leg on Binance. Practically, dual venue availability means execution can be split across Binance and Hyperliquid to reduce impact, and it opens genuine cross-venue plays (funding divergence, spot-vs-perp basis) that single-venue small caps cannot support. Still, effective depth thins out for larger clips — the displayed cap is small — so size to L2 depth, work orders with limits, and avoid market orders that walk the book during volatility.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — ANIME runs a Binance USD-margined perp AND a Hyperliquid perp simultaneously, so funding can diverge between the two venues; harvest the spread by going long the cheaper-funding leg and short the richer.
+- [[cash-and-carry]] — with a Binance spot leg plus perps on both venues, positive perp funding lets you hold spot ANIME and short the perp to capture carry with delta neutralized.
+- [[funding-rate-harvest]] — a high-beta memecoin perp like ANIME frequently prints extreme funding during narrative spikes; collect funding by taking the counter-positioned perp leg.
+- [[liquidation-cascade-fade]] — thin effective depth plus 40-50x Hyperliquid leverage makes ANIME prone to violent stop-runs; fade the wick after a liquidation flush once open interest resets.
+- [[crowded-long-funding-fade]] — Azuki brand catalysts pull in leveraged retail longs on ANIME; when funding turns sharply positive with rising OI, fade the crowded long into exhaustion.
+- [[meme-coin-cycle]] — ANIME is a reflexive anime/NFT culture token; position around the sentiment-driven pump-and-fade rhythm typical of the memecoin cohort rather than fundamentals.
+
+### Volatility & regime character
+
+ANIME is a **high-beta, memecoin-style culture/NFT token** with pronounced reflexivity: price is driven by Azuki brand momentum, anime/NFT narrative cycles, and retail sentiment (including Korean retail via the Upbit KRW pair) rather than cash flows. It carries **high positive beta to BTC/ETH** — it sells off first and recovers last in risk-off tapes — but adds idiosyncratic, catalyst-driven spikes on top of that broad-market correlation. Expect large realized-volatility swings, sharp drawdowns (already ~97% from ATH), and liquidation-amplified moves on the perps.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — despite two-venue coverage, effective depth is thin for size; a large share of turnover sits on a handful of CEX pairs, so impact and [[slippage]] rise quickly.
+- **Token emissions/dilution** — roughly ~45% of max supply was still to unlock at the earlier snapshot, implying periodic sell pressure that can cap rallies.
+- **Narrative dependence** — value hinges on the Azuki brand and the anime/NFT cycle; loss of cultural relevance or a reputational hit to the single underlying brand directly impairs the token.
+- **Perp funding dislocations** — 40-50x Hyperliquid leverage plus dual-venue perps make funding prone to spikes and cross-venue divergence, and crowded leverage sets up cascade risk in both directions.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ANIME` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ANIME` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ANIME&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ANIME&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ANIME"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

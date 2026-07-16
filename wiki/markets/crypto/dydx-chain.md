@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives]
+tags: [crypto, defi, derivatives, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["DYDX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dydx.trade"
-related: ["[[cosmos]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[lighter]]", "[[perp-dex-aggregation]]", "[[perpetual-futures]]"]
+related: ["[[cosmos]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[lighter]]", "[[perp-dex-aggregation]]", "[[perpetual-futures]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # dYdX
@@ -239,6 +239,54 @@ dYdX is DeFi’s pro trading platform and a pioneer in decentralized finance, kn
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DYDX trades across two liquid venues: **Binance** (spot plus a USD-margined perpetual) and **[[hyperliquid|Hyperliquid]]** (DYDX-PERP, up to ~40-50x leverage). This two-venue depth is unusually good for a rank-~255 alt — a genuine CEX spot/perp market alongside a deep on-chain perp gives more than one place to source liquidity, tighten fills, and hedge. Because size can be split across Binance and Hyperliquid, execution and position sizing benefit from cross-venue routing, but the combined book is still thin in absolute terms relative to large caps, so large clips should be worked and staggered rather than dumped into a single venue. The dual availability also enables funding and basis comparisons between the CEX perp and the Hyperliquid perp.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — DYDX is live on both a Binance USD-margined perp and Hyperliquid DYDX-PERP, so funding can diverge between the two venues and be harvested.
+- [[funding-rate-arbitrage]] — thin float and concentrated speculative flow make DYDX funding swing sharply, opening long-spot/short-perp (or cross-venue) funding-capture windows.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp lets a trader hold spot DYDX against a short perp to collect basis/funding while staying delta-neutral.
+- [[liquidation-cascade-fade]] — a small spot float under a leveraged perp makes DYDX prone to liquidation cascades that overshoot, offering mean-reversion fades after forced selling.
+- [[oi-confirmed-trend]] — watching Hyperliquid open interest confirm or diverge from price helps separate real trend from thin-liquidity noise on this low-cap perp.
+- [[range-mean-reversion]] — deep in a bear regime with low turnover, DYDX often chops within ranges, favouring reversion entries at range extremes over breakout chasing.
+
+### Volatility & regime character
+
+DYDX is a **high-beta DeFi / perp-DEX governance token** — an infrastructure/DeFi asset whose price is driven by decentralized-derivatives narrative and by its own protocol-volume trajectory rather than by a memecoin reflexivity loop. It carries meaningful positive beta to BTC/ETH: it tends to fall harder than majors in risk-off phases (currently an Established Bear Market with extreme fear) and rally sharply on DeFi/perp-DEX narrative rotations. Idiosyncratic drivers (competitive share vs [[hyperliquid|Hyperliquid]], dYdX Unlimited / MegaVault traction) can decouple it from broad beta on protocol-specific news.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — despite two venues, absolute spot turnover is thin (~$4-5M/day, under ~5% of cap), so slippage and gap risk are elevated and books can vanish fast in stress.
+- **Perp funding dislocations** — low float under a leveraged perp makes funding and OI volatile; crowded positioning can force sharp squeezes in either direction.
+- **Narrative dependence** — the token is a bet on decentralized-derivatives volume migrating on-chain; loss of perp-DEX share to competitors directly compresses the fee stream that justifies value.
+- **Emissions / value capture** — ~84% of max supply already circulates (modest unlock overhang), but governance/staking tokens historically struggle to accrue value even when the protocol earns fees.
+- **Regulatory risk** — high-leverage decentralized perps are a standing target for derivatives regulators, a tail risk for the protocol and token.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=DYDX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=DYDX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=DYDX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=DYDX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=DYDX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

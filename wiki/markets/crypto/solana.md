@@ -3,14 +3,14 @@ title: "Solana"
 type: entity
 created: 2026-04-06
 updated: 2026-07-16
-status: excellent
-tags: [crypto, defi, markets, solana]
+status: review
+tags: [crypto, defi, markets, solana, hyperliquid, perpetual-futures, funding-rate, derivatives, open-interest, liquidations]
 aliases: ["SOL"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://solana.com"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[proof-of-stake]]", "[[staking]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[proof-of-stake]]", "[[staking]]", "[[hyperliquid]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cryptodataapi]]"]
 ---
 
 # Solana
@@ -342,6 +342,70 @@ Solana has also seen significant institutional adoption ranging from spot Solana
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & Liquidity
+
+SOL is one of the most liquid altcoins and is tradable across the two venues this wiki focuses on:
+
+| Venue | Product | Notes |
+|---|---|---|
+| **[[binance]]** | Spot (SOL/USDT) | Deepest CEX spot book for SOL; primary price discovery for the pair |
+| **[[binance]]** | USDⓈ-M Perp (SOLUSDT) | Deep [[perpetual-futures\|perp]] liquidity; high leverage available; 8-hour [[funding-rate\|funding]] intervals |
+| **[[hyperliquid]]** | SOL-PERP | Consistently a **top-5 market** on Hyperliquid by volume (~$215M/24h in the Apr 2026 snapshot); ~10-20x leverage tier; **1-hour** funding intervals |
+
+The Binance-spot + Binance-perp + Hyperliquid-perp triangle makes SOL a clean candidate for cross-venue funding and basis work, and its depth lets directional traders size meaningfully without dominating the book.
+
+### Applicable Strategies
+
+- **[[crypto-beta-rotation]]** — SOL is the archetypal high-beta L1 (~1.5-2.5x BTC); a natural leg to lever up in risk-on regimes and de-beta / hedge when the macro correlation turns risk-off.
+- **[[oi-confirmed-trend]]** — momentum/trend on the SOL perp, filtered by rising [[open-interest]] to separate conviction moves from mean-reverting retail chases (ideal for a high-beta name that trends hard in both directions).
+- **[[cash-and-carry]]** — buy SOL spot, short the dated/perp future to harvest the [[basis-trade|basis]] when leveraged longs bid SOL futures into contango during meme/euphoria cycles.
+- **[[hl-vs-cex-funding-divergence]]** — SOL-PERP trades on both Hyperliquid (1h funding) and Binance (8h funding); the differing funding cadences and retail bases open persistent cross-venue funding spreads to arbitrage.
+- **[[crowded-long-funding-fade]]** — SOL [[funding-rate|funding]] blows out positive in euphoric runs; fading crowded longs collects the carry and positions for the mean-reversion / long-squeeze.
+- **[[liquidation-cascade-fade]]** — SOL's outsized [[volatility]] produces sharp [[liquidation]] cascades that overshoot fair value; a fade/reversal setup provides liquidity into the flush.
+
+### Volatility & Regime Character
+
+- **High-beta L1** — daily moves of 10-20% are possible; empirically amplifies BTC/ETH moves ~1.5-2.5x, so SOL leads both legs of a broad move (it printed the strongest 24h/7d bounce of the six flagships even while sitting at the deepest drawdown, ~-76% from its Jan-2025 ATH).
+- **BTC/ETH-correlated** — trades as crypto-beta; the SOL/ETH ratio is a monolithic-vs-modular relative-value expression rather than an idiosyncratic bet.
+- **Narrative-driven** — ecosystem/meme cycles (pump.fun launches, Jupiter DEX volume), the SOL-ETF catalyst, and REV/fee demand drive regime shifts more than for the majors, making sentiment/regime gating especially valuable.
+
+### Risk Flags
+
+- **Network outage history** — multiple full outages in 2022; reliability has improved markedly (Firedancer client), but tail-risk of a halt remains a live consideration for leveraged perp positions.
+- **Unlock / inflation overhang** — uncapped supply with disinflationary issuance; FDV ($44.96B) > market cap ($41.50B), so residual emission/unlock supply pressure persists.
+- **Ecosystem concentration** — a large share of fees/activity ties to speculative meme cycles (pump.fun); collapsing meme volume can rapidly deflate usage metrics and sentiment.
+- **Funding / liquidation risk** — extreme perp funding and crowded [[open-interest]] into meme cycles precede violent [[liquidation]] cascades on both Binance and Hyperliquid perps.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=SOL` — cross-exchange funding (Binance + Hyperliquid)
+- `GET /api/v1/derivatives/open-interest?coin=SOL` — cross-exchange [[open-interest]]
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=SOLUSDT` — Binance top-trader account long/short ratio
+- `GET /api/v1/derivatives/summary?coin=SOL` — all-in-one derivatives overview (markdown format available)
+- `GET /api/v1/hyperliquid/summary?coin=SOL` — all-in-one Hyperliquid perp data
+- `GET /api/v1/hyperliquid/l2-book?coin=SOL` — L2 order-book snapshot
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange [[liquidation|liquidations]]
+
+**Historical / backtesting data:**
+- `GET /api/v1/hyperliquid/candles?coin=SOL&interval=1h&limit=1000` — Hyperliquid OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SOL&limit=100` — current + historical HL funding
+- `GET /api/v1/derivatives/binance/funding-rates?symbol=SOLUSDT` — Binance perp funding history
+- `GET /api/v1/backtesting/klines` — OHLCV archive for forward-return labels
+- `GET /api/v1/backtesting/funding` — funding archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/summary?coin=SOL"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-hyperliquid]].
 
 ---
 

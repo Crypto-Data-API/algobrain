@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, bitcoin, crypto, defi]
+tags: [altcoins, bitcoin, crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["MERL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://merlinchain.io/"
-related: ["[[airdrop]]", "[[bitcoin]]", "[[crypto-markets]]", "[[data-availability]]", "[[layer-2]]", "[[sequencer]]", "[[zk-rollup]]"]
+related: ["[[airdrop]]", "[[bitcoin]]", "[[crypto-markets]]", "[[data-availability]]", "[[layer-2]]", "[[sequencer]]", "[[zk-rollup]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Merlin Chain
@@ -210,6 +210,55 @@ MERL is the network's governance and ecosystem-incentive token, used for governa
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MERL is a **perp-first** trading asset: it is tradable on **[[hyperliquid|Hyperliquid]]** as **MERL-PERP** (leverage up to ~40-50x), but it is **not listed on Binance**. Spot access is limited and concentrated on offshore/mid-tier CEXs (Kraken, Bitget, KuCoin) plus on-chain DEXs, so the deepest, most continuous price discovery and directional flow concentrate on the **Hyperliquid perp** rather than any single spot book. As a sub-$30M-cap, ~#654-ranked microcap, order-book depth is thin and slippage-prone: even modest market orders move price, funding can swing sharply, and the on-chain L2 order book can gap on liquidation waves. Practical implications — size positions to the visible HL depth (not to notional intent), prefer limit/passive execution, expect wide effective spreads, and treat the perp funding rate as the primary carry/positioning signal since there is no deep, arbitragable Binance spot leg to lean on.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a thin, perp-first microcap on Hyperliquid frequently shows persistent funding skew; harvesting the funding on the crowded side (delta-hedged where possible) is a core carry play.
+- [[crowded-long-funding-fade]] — MERL's low float and reflexive rallies (e.g. its +8.83% day inside a bear regime) can leave longs over-extended with richly positive funding, setting up funding-fade shorts.
+- [[liquidation-cascade-fade]] — high leverage (~40-50x) on a shallow book makes MERL prone to stop-run liquidation cascades that overshoot; fading the flush into rebound is repeatable.
+- [[oi-confirmed-trend]] — with flow concentrated on one HL perp, open-interest changes are a clean confirmation/exhaustion tell for MERL trends and squeezes.
+- [[breakout-and-retest]] — thin depth makes MERL trend in impulsive legs; trading confirmed breakouts of range extremes with a retest entry filters the frequent false wicks.
+- [[token-unlock-supply-event]] — with MC/FDV ~0.57 and ~0.9B MERL still to unlock, scheduled emissions/unlocks are recurring, tradable supply-overhang catalysts.
+
+### Volatility & regime character
+
+MERL is a **high-beta BTCFi / Bitcoin-L2 infrastructure altcoin** with microcap reflexivity: low circulating float and thin liquidity produce outsized, narrative-driven swings (Bitcoin-L2 / BTCFi hype, airdrop/points cycles) and steep drawdowns (~98% below its 2024 ATH). Directionally it carries **high positive beta to BTC** given its Bitcoin-L2 thesis, but its idiosyncratic microcap moves (both up and down) routinely dominate broad-market direction, so realized volatility runs well above large-cap majors. Expect regime behavior closer to a speculative small-cap alt than to an ETH-beta DeFi bluechip.
+
+### Risk flags
+
+- **Venue concentration** — no Binance listing; directional liquidity is concentrated on the single [[hyperliquid|Hyperliquid]] perp, so an HL outage, parameter change, or delisting is a concentrated execution risk.
+- **Thin liquidity / slippage** — sub-$30M cap and low depth mean large orders and liquidations move price disproportionately.
+- **Token unlocks / emissions** — MC/FDV ~0.57 with ~0.9B MERL yet to enter circulation; unlock/emission events are persistent overhang.
+- **Narrative dependence** — price is tightly coupled to the BTCFi / Bitcoin-L2 narrative and airdrop/incentive cycles; narrative fade removes the bid.
+- **Bridge / trust-model risk** — the federated/multisig-bridged sidechain design (despite ZK-rollup branding) adds a tail catalyst: a bridge exploit or peg break would gap the token and spike perp funding/liquidations.
+- **Perp funding dislocations** — with no deep spot arb leg, funding can dislocate hard and stay one-sided, punishing crowded positioning.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MERL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MERL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MERL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MERL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MERL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

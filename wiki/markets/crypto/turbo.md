@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, momentum]
+tags: [crypto, momentum, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins, ethereum]
 aliases: ["TURBO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://turbotoken.io"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[meme-coins]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[meme-coins]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Turbo
@@ -256,6 +256,54 @@ This first memecoin ever created completely by AI.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TURBO is a genuine two-venue derivatives market. It trades on **Binance** as both spot (TURBO/USDT) and a **USD-margined perpetual**, and on **[[hyperliquid|Hyperliquid]]** as **TURBO-PERP** with leverage up to roughly **40-50x**. The combination of a top-tier CEX perp and the deepest on-chain perp gives it deeper, more continuous liquidity than most rank-~390 memecoins, which typically live on a single venue. Practically, this means orders can be worked across two order books, funding and basis can be compared and arbitraged between CEX and DEX, and mid-sized positions can be entered/exited with less slippage than the ~$61M cap alone would suggest. Still, this is a small-cap meme: depth thins fast beyond the top of book, so size should be scaled to real-time L2 depth rather than headline volume, and large clips are best split across Binance and Hyperliquid.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — TURBO runs live perps on both Binance and Hyperliquid, so funding frequently diverges between the two venues, creating a delta-neutral harvest by going long the cheaper-funded leg and short the richer one.
+- [[funding-rate-harvest]] — as a high-beta meme, TURBO perp funding spikes strongly positive when retail crowds longs during hype, letting a short-perp / long-spot carry collect elevated funding.
+- [[crowded-long-funding-fade]] — euphoric meme rallies push funding and long OI to extremes; fading crowded longs when funding is stretched captures the mean-revert as late longs get squeezed.
+- [[liquidation-cascade-fade]] — thin meme depth plus leveraged OI produces violent liquidation flushes; fading the wick after a cascade exhausts forced sellers is a repeatable setup here.
+- [[cash-and-carry]] — with liquid spot (Binance/Uniswap) alongside two perps, positive funding/basis can be locked as a market-neutral long-spot / short-perp carry.
+- [[breakout-and-retest]] — TURBO trends hard in momentum bursts tied to meme rotation and AI-narrative flare-ups; trading confirmed breakouts with a retest entry aligns with its reflexive, momentum-driven tape.
+
+### Volatility & regime character
+
+TURBO is a **high-beta, reflexive memecoin** with no fundamentals — price is a pure attention/sentiment function driven by virality, listings, and meme-cycle rotation. It exhibits sharp momentum overshoots and abrupt, unforgiving reversals, and its realized volatility sits well above large-cap crypto. Directionally it carries **high positive beta to BTC/ETH risk-on regimes** but tends to amplify moves (up more in risk-on, down harder in risk-off), and it de-correlates violently on idiosyncratic meme-specific catalysts. In extreme-fear / established-bear tapes, meme coins like TURBO are typically among the first assets sold.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** despite two perps, real depth is thin beyond top-of-book; two-venue reliance means a listing/delisting or venue outage can sharply degrade execution.
+- **Narrative dependence:** value rests entirely on the "AI memecoin" and frog-meme narratives; novelty fatigue and constant competition for speculative capital can drain attention.
+- **Perp funding dislocations & liquidation risk:** funding can swing hard in both directions, and leveraged OI on thin depth makes cascading liquidations on small spot moves a recurring hazard.
+- **Holder concentration:** meme tokens often have concentrated wallets; large holders exiting can crater a thin book (on-chain distribution is not ingested here).
+- **No intrinsic floor / drawdown tail:** already deep below ATH with no cash-flow anchor, so a draw toward the ATL is a realistic tail.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=TURBO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=TURBO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=TURBO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=TURBO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=TURBO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

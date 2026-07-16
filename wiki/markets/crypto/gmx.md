@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives]
+tags: [crypto, defi, derivatives, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["GMX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gmx.io/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[perpetual-futures]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[perpetual-futures]]", "[[hyperliquid]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
 ---
 
 # GMX
@@ -280,6 +280,48 @@ GMX is a leading permissionless onchain exchange, enabling you to trade 70+ asse
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — The GMX *token* trades on both [[binance|Binance]] (spot GMX/USDT plus a USD-margined GMX perpetual) and [[hyperliquid|Hyperliquid]] (GMX-PERP, roughly 40–50x max leverage), making it a genuine two-venue derivatives market rather than a single-venue thin-book alt. That said, spot turnover is modest for a small-cap DeFi governance token, so realized depth is thinner than the venue count implies — the two-venue setup mainly helps by giving arbitrageurs a canonical CEX reference against the on-chain HL perp, keeping the mark honest and enabling clean cross-venue funding/basis comparisons. For execution, size in and out patiently: split larger orders, lean on the deeper Binance book for the spot leg, and treat the HL perp as the leverage/short-side venue. Venue redundancy reduces single-venue gap risk but does not remove the small-cap slippage penalty on aggressive market orders.
+
+**Applicable strategies**
+- [[hl-vs-cex-funding-divergence]] — GMX runs on both a Binance USD-margined perp and the HL GMX-PERP, so funding can diverge between the CEX desk and the on-chain venue; capture the spread by going long the cheap-funding side and short the rich-funding side.
+- [[funding-rate-harvest]] — as a high-beta DeFi token that pushes to crowded directional extremes on sentiment swings, GMX perp funding can run persistently one-sided, letting a delta-hedged position collect carry.
+- [[cash-and-carry]] — with liquid spot on Binance and a perp on both venues, long spot / short perp locks the basis when the GMX perp trades at a premium during DeFi-narrative pumps.
+- [[liquidation-cascade-fade]] — thin small-cap depth plus up-to-50x HL leverage makes GMX prone to over-extended liquidation flushes; fading the wick after forced selling exhausts targets the mechanical rebound.
+- [[oi-price-exhaustion]] — pairing [[open-interest]] with price on a low-float token flags exhausted crowded positioning where a leveraged move is running out of fuel and vulnerable to reversal.
+- [[narrative-trading]] — GMX price is tightly coupled to the on-chain perp-DEX / real-yield narrative and DeFi-sector rotations, so trading the narrative cycle (aggregation flow, fee recovery, Hyperliquid share shifts) is a core alpha driver.
+
+**Volatility & regime character** — GMX behaves as a high-beta DeFi / perp-DEX infrastructure token: a small-cap ($60–65M) governance asset with near-full float, so price is driven by demand and on-chain trading-volume trends rather than emission decay. It is strongly correlated to broad DeFi-sector risk appetite and carries elevated beta to BTC/ETH — amplifying both up- and down-moves versus large caps — and reacts sharply to shifts in on-chain leverage demand and perp-DEX market-share narratives. Expect reflexive, sentiment-driven swings (e.g. the +12% bounce off a fresh ATL under extreme-fear conditions) rather than orderly large-cap ranges.
+
+**Risk flags**
+- **Small-cap liquidity / venue concentration** — thin spot turnover (~single-digit $M/24h) means aggressive orders move price; a stress event on Binance or Hyperliquid concentrates flow onto the remaining venue and widens spreads.
+- **Narrative dependence** — value tracks the perp-DEX / real-yield story and on-chain fee revenue; a loss of DeFi-derivatives share (notably to Hyperliquid) can de-rate the token regardless of BTC.
+- **Perp funding dislocations** — with up-to-50x HL leverage and crowded directional positioning on a low-float token, funding can spike and swing hard, punishing one-sided carry and forcing liquidations.
+- **Smart-contract / protocol overhang** — GMX has direct exploit history on a V1 contract; protocol-level bad news can hit the token independently of market beta.
+- **Regime sensitivity** — in an established-bear, extreme-fear regime, compressed on-chain volumes suppress fees and keep the token in a structural downtrend prone to sharp counter-trend bounces.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GMX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GMX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GMX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GMX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GMX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

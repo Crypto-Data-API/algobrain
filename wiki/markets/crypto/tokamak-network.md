@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["TON", "TON (Tokamak)", "Tokamak", "Tokamak Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://tokamak.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[rollup]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[rollup]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[narrative-trading]]"]
 ---
 
 # Tokamak Network
@@ -234,6 +234,54 @@ Catalysts to watch (speculative): a production-grade **Tokamak ZK** launch with 
 - **Crowded L2 / RaaS market**: Tokamak competes with much larger rollup stacks and rollup-as-a-service providers (OP Stack, Arbitrum Orbit, zkSync, [[caldera|Caldera]], etc.), making developer mindshare hard to win.
 - **Plasma legacy**: Plasma has largely been superseded by [[rollup|rollups]] industry-wide; execution risk attaches to the transition and to ZK-stack delivery.
 - **Micro-cap liquidity**: at ~$22M and rank #767, the token is thinly traded and volatile.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TON (Tokamak) is a **perp-first** trading asset. It is tradable on [[hyperliquid|Hyperliquid]] as **TON-PERP** with leverage up to roughly **40-50x**, but it is **not listed on [[binance]]**, and centralized spot access is limited/offshore (its main spot venue is Korea's Upbit as **TOKAMAK/KRW** to avoid the ticker collision). Because there is no deep, globally accessible spot book, price discovery and speculative flow concentrate on the **Hyperliquid perp** — the cleanest place to read positioning. Order-book depth is thin: reported 24h volume runs under ~$1M and HL open interest is small, so even modest orders move price and slippage is material. Practically this means **small clip sizes, patient limit execution, and tight risk on leverage** — the high max leverage is a liquidation trap in a book this thin, not an invitation to size up. Always confirm you are trading Tokamak's TON (not [[toncoin|Toncoin]]) before entering.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with flow concentrated on one thin perp, funding can swing hard; harvesting the paid side (delta-hedged where possible) can be profitable when the book gets one-sided.
+- [[crowded-long-funding-fade]] — micro-cap L2 pops on TON draw crowded longs into a thin book; fading persistently positive funding into exhaustion is a recurring setup.
+- [[liquidation-cascade-fade]] — thin HL depth means stop-runs and liquidation cascades overshoot; fading the flush after forced selling exhausts is well-suited to this asset.
+- [[oi-price-exhaustion]] — because OI is small and single-venue, rising OI into a stalling price is a clean exhaustion signal on TON's perp.
+- [[range-mean-reversion]] — in the bear/chop regime TON grinds within thin ranges punctuated by gaps; mean-reverting the extremes fits when there is no trend catalyst.
+- [[narrative-trading]] — TON is a high-beta proxy on the Ethereum-L2/RaaS narrative; trading around Tokamak ZK delivery, app-chain deployments, and L2-sentiment shifts is the primary discretionary edge.
+
+### Volatility & regime character
+
+TON (Tokamak) is a **micro-cap Ethereum-L2 / rollup-as-a-service infrastructure token** — a high-beta altcoin whose price is driven far more by risk appetite and L2-narrative sentiment than by usage-linked cash flows. It behaves as a **high-beta proxy on [[ethereum]] and the broader alt/L2 complex**: it tends to underperform in bear/Extreme-Fear regimes (as of the latest snapshots BTC sat well below its 200-day MA and TON was bleeding) and to rip disproportionately when BTC/ETH reverse and L2 rotation resumes. Volatility is amplified by thin liquidity — moves are gappy and reflexive rather than smooth. Directional beta correlation to BTC/ETH is high; idiosyncratic upside is gated on Tokamak-specific delivery.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin spot (offshore/Korea-only) and small single-venue perp OI mean price gaps on modest flow; no Binance depth backstop.
+- **Ticker collision** — TON is widely confused with [[toncoin|Toncoin]]; wrong-asset entries and mismatched data feeds are a real and recurring error. Confirm the Tokamak contract before trading.
+- **Emissions / dilution** — max supply is **unlimited**, so long-run emission policy is a structural dilution consideration; watch for staking/operator unlocks adding float.
+- **Narrative dependence** — value accrual is entirely downstream of RaaS adoption; absent Tokamak ZK traction the token trades on narrative beta alone and fades with L2 sentiment.
+- **Perp funding dislocations** — with flow concentrated on one thin HL perp, funding can dislocate sharply from any external reference, whipsawing leveraged positions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=TON` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=TON` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=TON&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=TON&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=TON"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

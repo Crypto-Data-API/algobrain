@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["GALA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gala.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[nft]]", "[[play-to-earn]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[nft]]", "[[play-to-earn]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crypto-beta-rotation]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # GALA
@@ -265,6 +265,54 @@ GALA is designed to power the Gala Games ecosystem to support gaming re-imagined
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+GALA is a genuinely **two-venue market**, tradable on both **Binance** (GALA/USDT spot plus a USD-margined GALA perpetual) and **Hyperliquid** (GALA-PERP, up to ~40-50x leverage). Binance historically carries the deepest spot and perp books, while Hyperliquid provides an on-chain, transparent-orderbook perp with visible L2 depth and funding. The combination gives reasonable aggregate depth for a small-cap (~#265 by rank), but books thin out quickly beyond top-of-book, so **large orders should be sliced and executed with limit/TWAP-style entries** rather than crossing the spread. Dual-venue availability enables cross-venue relative-value work (spot-vs-perp, CEX-vs-HL funding) and lets sizing be split across venues to reduce impact, but it also means liquidity can fragment during stress — always check aggregate depth before sizing up.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — GALA-PERP funding on Hyperliquid swings with high-beta gaming sentiment, so a delta-neutral perp-vs-spot position can harvest persistent funding skew.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid GALA-PERP and Binance's USD-margined perp can diverge on catalyst-driven flow, opening a two-venue funding spread to capture.
+- [[cash-and-carry]] — with deep Binance spot and a liquid USD-margined perp, long-spot / short-perp carry is executable to lock basis when the curve steepens on game-launch hype.
+- [[liquidation-cascade-fade]] — thin OI relative to majors means GALA cascades hard on liquidations; fading over-extended flushes back toward VWAP is a recurring setup.
+- [[crypto-beta-rotation]] — GALA is a liquid GameFi proxy that leads and lags sector rotations, making it a natural leg in high-beta alt rotation baskets.
+- [[narrative-trading]] — price is driven far more by game-launch, node, and partnership narratives than fundamentals, rewarding positioning around catalyst cycles.
+
+### Volatility & regime character
+
+GALA is a **high-beta GameFi / play-to-earn alt** with strong directional beta to BTC/ETH risk appetite — it typically amplifies majors on the way up and down, and underperforms in risk-off regimes given its discretionary-spend demand base. It exhibits **reflexive, catalyst-driven volatility**: relatively quiet drift punctuated by sharp OI-fueled spikes around game launches, node offerings, or partnership news. In bear regimes it tends to bleed with the broader alt complex; in risk-on rotations it can outrun majors as speculative capital chases the gaming narrative.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — depth is concentrated in Binance and Hyperliquid; a disruption at either venue can widen spreads and gap prices sharply for a small-cap this size.
+- **Emission / supply overhang** — ongoing GalaChain node-reward emissions add steady, demand-dependent sell pressure; supply mechanics are tied to network participation rather than a fixed schedule.
+- **Narrative dependence** — valuation is almost entirely demand/sentiment-driven, so price is fragile to fading GameFi narrative and can round-trip catalyst spikes quickly.
+- **Perp funding dislocations** — thin OI makes funding prone to violent swings during crowded positioning, raising the cost/risk of leveraged directional carry.
+- **Security history** — a past minting exploit (pre-v2 migration) weighs on confidence and can amplify sentiment shocks.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GALA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GALA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GALA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GALA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GALA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

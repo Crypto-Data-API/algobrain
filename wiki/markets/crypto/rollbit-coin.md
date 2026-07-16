@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, exchange, gambling]
+tags: [crypto, exchange, gambling, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["RLB"]
 entity_type: protocol
 headquarters: "Curaçao"
 website: "https://rollbit.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hyperliquid]]", "[[meme-coins]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hyperliquid]]", "[[meme-coins]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Rollbit Coin
@@ -254,6 +254,60 @@ The Rollbit token (RLB) will be launched as an integral part of the upcoming Rol
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RLB is a **PERP-FIRST asset**: it trades on [[hyperliquid|Hyperliquid]] as **RLB-PERP** (leverage up to ~40-50x) but is **not listed on Binance**, and spot access is limited to a Uniswap V3 pool plus offshore venues. As a result, tradable flow, price discovery, and shortability concentrate on the **HL perp**, while onshore spot is thin and fragmented.
+
+- **Leverage & shortability:** the HL perp is the only venue offering deep leverage and clean shorting; up to ~40-50x is available, so RLB positions can be built or unwound faster than the shallow spot pool allows.
+- **Qualitative depth:** order-book depth is modest — RLB is a small-cap (~#243) with thin spot volume, so the perp book can be swept by moderate size. Slippage and impact are material away from mid.
+- **Execution & sizing:** because liquidity is venue-concentrated on one perp, size positions to perp depth (not headline market cap), stage entries/exits, and treat the L2 book and [[funding-rate|funding]] as the primary read on where flow sits. The absence of a Binance listing means no CEX spot fallback for exits in stress.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — as a reflexive GambleFi small-cap, RLB perp funding can spike hard positive on hype into buyback/burn news; fading crowded longs when funding runs rich is a natural setup.
+- [[liquidation-cascade-fade]] — thin perp depth plus deep leverage means stop-runs and forced deleveraging overshoot; fading capitulation wicks on the HL book can capture the snap-back.
+- [[funding-rate-harvest]] — persistent funding skew on a niche perp with no Binance arb pressure lets a delta-hedged position (perp vs. spot/DEX) collect carry when the sign is stable.
+- [[hl-vs-cex-funding-divergence]] — with RLB absent from Binance, HL funding can diverge from any offshore/DEX-implied rate; the dislocation itself is tradable given no tight CEX tether.
+- [[oi-confirmed-trend]] — rising open interest confirming a directional move (often around Rollbit revenue/burn narrative) gives a cleaner trend signal than price alone on a low-float token.
+- [[range-mean-reversion]] — outside catalysts, RLB chops in a range on the perp; mean-reverting the extremes suits its low-liquidity, sentiment-driven tape.
+
+### Volatility & regime character
+
+RLB is a **high-beta, reflexive GambleFi / revenue-share small-cap** — closer to a narrative-driven exchange/gambling token than a large-cap. It carries elevated idiosyncratic volatility tied to Rollbit platform revenue and buyback-and-burn credibility, layered on top of broad **high beta to BTC/ETH**: in risk-on it outruns majors, and in risk-off (extreme-fear regimes) it sells off harder than [[bitcoin|BTC]]/[[ethereum|ETH]]. Regime detection matters — its behavior flips between range-bound drift and violent, catalyst-driven expansion.
+
+### Risk flags
+
+- **Liquidity / venue concentration:** derivatives flow lives almost entirely on the single HL perp with no Binance spot fallback; thin depth raises slippage, manipulation, and gap risk.
+- **Dilution / emissions overhang:** only ~33% of the 5B max supply circulates; net deflation depends on burn pace outrunning any future issuance.
+- **Narrative & operator dependence:** value accrual hinges on Rollbit's (private, unaudited) revenue and a discretionary buyback-and-burn policy that can be cut.
+- **Regulatory / venue risk:** online gambling and unlicensed leveraged trading face jurisdictional scrutiny that can hit demand, plus offshore-only spot access.
+- **Perp funding dislocations:** low-float reflexivity can drive funding to extremes and trigger liquidation cascades on the leveraged perp.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=RLB` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=RLB` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=RLB&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=RLB&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=RLB"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

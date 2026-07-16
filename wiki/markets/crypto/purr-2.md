@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme]
+tags: [crypto, meme, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins]
 aliases: ["PURR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.hyperliquid.xyz/trade/PURR/USDC"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Purr
@@ -117,6 +117,50 @@ Like all [[meme-coin|meme coins]], PURR has **no cash flows and no intrinsic val
 ## Whale & Holder Information
 
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — PURR trades across a genuine two-venue market: **[[binance|Binance]]** carries both spot and a USD-margined perpetual, while **[[hyperliquid|Hyperliquid]]** runs the native **PURR/USDC spot** order book plus **PURR-PERP** (leverage up to ~40-50x). The Binance listing adds meaningful CEX depth on top of Hyperliquid's on-chain order book, giving PURR deeper, more resilient two-sided liquidity than most top-450 memes. The split between a centralized venue and an on-chain L1 means the two order books can diverge on price and funding, so execution benefits from checking depth on both before sizing; larger clips should be worked across venues rather than lifting a single book to avoid slippage in the thinner windows.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — dual perps (Binance USD-M + PURR-PERP) let a delta-neutral trader collect funding when leveraged meme longs pay to hold, which is common in ecosystem-hype phases.
+- [[hl-vs-cex-funding-divergence]] — the Hyperliquid perp and the Binance perp often quote different funding, so the spread between the two is directly tradable on PURR.
+- [[cash-and-carry]] — with both spot and perp on the same coin, long spot / short perp captures any positive basis on this reflexive, funding-prone meme.
+- [[liquidation-cascade-fade]] — thin free-float and high perp leverage make PURR prone to overshoot liquidation flushes that mean-revert, a classic fade setup.
+- [[crowded-long-funding-fade]] — when PURR rides a Hyperliquid-narrative pump, funding spikes and one-sided long crowding flag exhaustion to fade.
+- [[breakout-and-retest]] — as a low-float ecosystem beta, PURR trends hard on regime shifts, so breakout-and-retest offers defined-risk momentum entries.
+
+**Volatility & regime character** — PURR is a **high-beta, cat-themed [[meme-coin|memecoin]]** and a de facto **sentiment proxy / "ecosystem beta" for Hyperliquid**. It carries memecoin reflexivity (large, fast drawdowns and squeezes) amplified by a low free float and a deflationary fee-burn tied to venue volume. It is directionally correlated to broad [[bitcoin|BTC]]/[[ethereum|ETH]] risk-on/risk-off beta but with a much higher amplitude, and it can decouple from the majors on Hyperliquid-specific narrative flows (e.g. outperforming a weak tape when platform confidence rises).
+
+**Risk flags**
+- **Venue/narrative concentration** — value is unusually tied to a single platform's health; a Hyperliquid setback hits PURR disproportionately even with the Binance listing.
+- **Perp funding dislocations** — leveraged meme positioning can push funding to extremes and diverge between Binance and Hyperliquid, feeding liquidation cascades.
+- **Reflexive, no-utility valuation** — no cash flows; price is belief-driven and can gap hard in either direction.
+- **Liquidity air-pockets** — despite two venues, depth is modest relative to caps of similarly ranked assets, so large orders can slip and gap.
+- **Supply/burn dynamics** — the deflationary fee-burn is a mild structural tailwind but depends entirely on Hyperliquid trading activity.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PURR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PURR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PURR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PURR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PURR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

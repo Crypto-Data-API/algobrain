@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins, defi]
 aliases: ["AR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://arweave.org/"
-related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[filecoin]]", "[[siacoin]]"]
+related: ["[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[filecoin]]", "[[siacoin]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[narrative-trading]]"]
 ---
 
 # Arweave
@@ -205,6 +205,48 @@ The bull case is real, growing usage (bytes stored is a measurable on-chain dema
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — AR trades on **both** major venue types: [[binance|Binance]] (spot AR/USDT **and** a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**AR-PERP**, leverage up to ~40-50x). This is a genuine two-venue derivatives market rather than a single-venue perp, which gives it deeper aggregate depth and a real CEX-vs-DEX spread to trade. That said, spot turnover is thin for a listed mid-cap (~$10.6M/24h in the 2026-06-20 snapshot — the lowest in its storage peer group), so order-book depth is shallow relative to the leverage on offer: size positions to the thinner book, expect slippage on market orders, and treat the Binance/Hyperliquid split as the main lever for execution (route to whichever side shows better depth, and use the two prints to detect basis/funding dislocation before it closes).
+
+**Applicable strategies**
+- [[hl-vs-cex-funding-divergence]] — AR runs a perp on both Hyperliquid and Binance, so funding can diverge between the two venues and be harvested delta-neutral.
+- [[funding-rate-harvest]] — during AI/AO-narrative rallies AR funding turns persistently positive, letting a short-perp/long-spot book collect carry.
+- [[cash-and-carry]] — long Binance spot vs. short the perp captures basis when the AR term structure dislocates on thin liquidity.
+- [[narrative-trading]] — AR is heavily driven by the AI/AO and data-availability story; positioning around AO milestones is the dominant discretionary edge.
+- [[liquidation-cascade-fade]] — a shallow book plus up-to-50x leverage makes AR prone to sharp liquidation wicks that mean-revert, offering fade entries.
+- [[breakout-and-retest]] — AR ranges for long stretches then breaks on narrative catalysts; trading the breakout and its retest suits its regime shifts.
+
+**Volatility & regime character** — AR is a **high-beta infrastructure/DePIN alt** (decentralized-storage / data-availability), not a large-cap or a memecoin. It carries strong positive beta to [[bitcoin]] and [[ethereum]] risk-on/risk-off swings but layers a large **idiosyncratic, narrative-driven** component on top: moves are amplified by the AI/AO story and can decouple from majors around AO/airdrop catalysts. Near-zero forward dilution (supply ~99.5% emitted, MC/FDV ~1.00) removes emission-driven drift, so price is dominated by demand and narrative. In risk-off regimes it tends to underperform majors and gap on thin books.
+
+**Risk flags**
+- **Liquidity / venue concentration** — thin spot turnover (~$10.6M/24h) against high available leverage; depth can vanish fast and basis can dislocate.
+- **Narrative dependence** — much of the valuation leans on the AI/AO re-rating; adoption or milestone disappointment is a sharp downside catalyst.
+- **Perp funding dislocations** — narrative rallies push funding persistently positive (crowded-long risk); the two-venue setup means funding can also split between Binance and Hyperliquid.
+- **Endowment-model tail risk** — permanence economics assume storage costs keep falling; a long-horizon fundamental overhang unique to AR (not a near-term trade trigger, but a regime risk).
+- **Liquidation reflexivity** — up-to-50x leverage on a shallow book makes AR prone to cascade wicks in both directions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

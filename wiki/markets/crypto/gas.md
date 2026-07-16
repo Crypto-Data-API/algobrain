@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["GAS", "NEO GAS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://neo.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[neo]]", "[[perpetual-futures]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[neo]]", "[[perpetual-futures]]", "[[proof-of-stake]]", "[[funding-rate]]", "[[open-interest]]", "[[cash-and-carry]]", "[[pairs-trading]]"]
 ---
 
 # Gas
@@ -148,6 +148,50 @@ This is framing, not a price target; the wiki holds no fair-value model for GAS.
 | **Twitter** | [@neo_blockchain](https://twitter.com/neo_blockchain) |
 | **Reddit** | [https://www.reddit.com/r/NEO](https://www.reddit.com/r/NEO) |
 | **GitHub** | [https://github.com/neo-project/neo](https://github.com/neo-project/neo) |
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** GAS trades on **both** major venues: Binance (GAS/USDT spot plus a USD-margined GAS perpetual) and [[hyperliquid|Hyperliquid]] (GAS-PERP, up to ~40–50x leverage). This is a **deep, liquid two-venue market** for a ~#347-ranked asset — the dual-venue setup means a genuine cross-venue price/funding signal exists rather than a single thin book. Practically, execution can be split between the Binance CEX order book and the Hyperliquid on-chain perp, and the presence of a spot leg on Binance plus perps on both venues enables carry/basis structures. Still, GAS is a legacy mid-cap with modest turnover, so size positions to book depth rather than headline leverage: high available leverage is a risk multiplier, not a sign of depth, and large market orders on either venue will move price.
+
+**Applicable strategies.**
+- [[cash-and-carry]] — Binance spot (GAS/USDT) versus a GAS perp lets you lock the spot-perp basis; NEO/GAS's uncapped emission and NEO-holder distribution can produce persistent funding regimes worth harvesting.
+- [[funding-rate-harvest]] — with perps on both Binance and Hyperliquid, a delta-neutral spot-long / perp-short GAS position can collect funding when the perp trades at a premium.
+- [[hl-vs-cex-funding-divergence]] — GAS funding can diverge between the Hyperliquid GAS-PERP and the Binance USD-margined perp; the two-venue market makes that spread directly tradable.
+- [[pairs-trading]] — GAS is economically inseparable from [[neo|NEO]] (holding NEO mints GAS), so a GAS/NEO pair trade expresses dislocations in that structural link.
+- [[range-mean-reversion]] — absent a catalyst, GAS has spent long stretches ranging; mean-reversion around established bands fits its low-momentum, resilient-but-flat character.
+- [[liquidation-cascade-fade]] — thin legacy-alt books make GAS prone to sharp leverage-driven flushes on the perps; fading over-extended liquidation moves can capture the rebound.
+
+**Volatility & regime character.** GAS is a **legacy infrastructure / smart-contract-platform (L1 fee) token** — high-beta relative to BTC/ETH in risk-off phases but with a demand driver entirely downstream of NEO-chain activity, which has structurally declined since 2018. It carries no memecoin reflexivity and no governance premium; it behaves as a low-momentum alt that tends to follow broad market beta while lacking an independent catalyst. Correlation to BTC/ETH beta is high on the downside (broad drawdowns hit legacy-L1 utility tokens hard) and muted on the upside without a NEO-ecosystem narrative to lift it.
+
+**Risk flags.**
+- **Ecosystem / narrative dependence** — GAS demand is 100% downstream of NEO-chain usage; a stagnant NEO ecosystem caps any fundamental bid.
+- **Perpetual emission** — GAS has no max supply and is emitted continuously to NEO holders, creating persistent structural sell pressure (a slow inflation drag rather than cliff unlocks).
+- **Liquidity / venue concentration** — modest daily turnover for the size; despite two venues, depth is thin enough that large orders move price and stops can slip.
+- **Perp funding dislocations** — leveraged GAS-PERP positioning on both venues can drive funding to extremes and trigger liquidation cascades in a thin book.
+- **Macro / regime risk** — in extreme-fear / bear regimes, catalyst-less legacy-L1 tokens are exposed to correlated drawdowns.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GAS` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GAS` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GAS&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GAS&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GAS"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

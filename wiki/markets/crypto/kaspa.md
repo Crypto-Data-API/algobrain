@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["KAS", "Kaspa BlockDAG"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized"
 website: "https://kaspa.org/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[litecoin]]", "[[monero]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[litecoin]]", "[[monero]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Kaspa
@@ -342,6 +342,50 @@ Kaspa's edge: **PoW security + the highest throughput of any PoW network + a gen
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** KAS is a **PERP-FIRST asset**: it trades as **KAS-PERP on [[hyperliquid|Hyperliquid]]** (leverage up to ~40-50x) but is **NOT listed on Binance**, and spot access elsewhere is limited/offshore (Kraken, KuCoin, Bitget, Gate, MEXC — no Binance or Coinbase spot). With thin spot volume (~$10M/day) and no tier-1 spot venue, price discovery and directional flow concentrate on the HL perp, so derivatives are disproportionately price-setting. Order-book depth is thinner than top-50 majors: large orders and liquidation sweeps move the mark, funding can swing hard, and the lack of a deep cross-venue spot book means true cross-exchange arbitrage/basis trades are constrained. Practical implication — size for slippage, prefer resting/limit execution over market fills, and treat the HL L2 book and funding as the primary microstructure signal.
+
+**Applicable strategies:**
+- [[crowded-long-funding-fade]] — narrative-driven KAS rallies (Toccata hype, PoW rotations) on a shallow perp book routinely push funding positive and crowded long; fade the extreme.
+- [[liquidation-cascade-fade]] — thin depth means stop runs and cascades overshoot on the HL perp; fade the flush and reclaim.
+- [[funding-rate-harvest]] — persistent funding dislocation on a perp-first, spot-constrained asset lets a hedged position harvest carry when funding stays stretched.
+- [[oi-confirmed-trend]] — because flow concentrates on one perp, rising OI into a KAS breakout is a cleaner trend-confirmation signal than on multi-venue majors.
+- [[event-driven-trading]] — Toccata hard-fork activation and any tier-1 listing are binary catalysts best traded around scheduled windows (buy-the-rumor / manage sell-the-news).
+- [[mean-reversion]] — at extreme fear and ~85% below ATH, washed-out KAS on the perp snaps back toward range mid; scale into oversold extremes with stops.
+
+**Volatility & regime character.** KAS is a **high-beta PoW L1 alt** — a "Bitcoin-but-faster" monetary/narrative token with reflexive, retail-concentrated moves rather than a large-cap anchor or a memecoin. It trades as a high-beta [[bitcoin|BTC]] proxy (rallies harder in risk-on, drops harder in risk-off) and rotates with the fair-launch PoW basket ([[litecoin|LTC]], [[monero|XMR]]). Realized volatility is elevated and clusters around protocol-upgrade catalysts (Crescendo, Toccata), amplified by thin liquidity.
+
+**Risk flags.**
+- **Venue concentration** — perp flow concentrated on a single Hyperliquid market; no Binance/Coinbase spot to backstop depth or arbitrage.
+- **Liquidity** — ~$10M/day spot makes the token sensitive to derivatives-driven flow, large orders, and liquidation sweeps.
+- **Narrative dependence** — price is dominated by the Toccata smart-contract catalyst and PoW-rotation sentiment; slippage/delay or narrative fade is a direct drawdown risk.
+- **Perp funding dislocations** — a shallow, one-sided perp book lets funding spike and crowd positioning, raising liquidation-cascade risk in both directions.
+- **Supply/miner flow** — minimal unlock dilution (MC/FDV ~1.00), but persistent miner sell flow is a bid-side drag in low-price regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=KAS` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=KAS` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=KAS&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=KAS&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=KAS"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

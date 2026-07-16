@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum]
+tags: [crypto, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins]
 aliases: ["BIO"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.bio.xyz/"
-related: ["[[base]]", "[[crypto-markets]]", "[[desci]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[solana]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[desci]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[solana]]", "[[funding-rate]]", "[[narrative-trading]]", "[[momentum-rotation]]"]
 ---
 
 # Bio Protocol
@@ -115,6 +115,55 @@ BIO defies cash-flow valuation: the protocol's worth is a leveraged bet on (1) t
 - **Dilution overhang.** ~1.17B BIO still to unlock toward max supply. See [[token-unlocks]].
 - **Execution risk in the underlying science.** The thesis ultimately rests on tokenized biotech actually producing fundable, value-accruing IP — a long, uncertain, regulation-heavy process.
 - **Hype-cycle beta.** In an established [[bear-market|bear market]] (F&G 23), DeSci tokens sell off with the rest of the risk curve.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+BIO is a genuine two-venue derivatives market. It trades **spot** on [[binance|Binance]] (a former Launchpool asset), [[kraken|Kraken]], Upbit (KRW), Bitget and KuCoin, and has a **USD-margined perpetual on Binance** alongside a **BIO-PERP on [[hyperliquid|Hyperliquid]]** (leverage up to ~40-50x). Having both a deep CEX book and an on-chain perp makes BIO one of the more liquid DeSci names: two independent price/funding sources support tighter execution, but as a ~#383-rank alt the book is still thin relative to majors. Practically, this means Hyperliquid vs Binance quotes can diverge during speculative bursts — a spread that both aids CEX/DEX arbitrage and punishes oversized market orders. Size positions to the *thinner* of the two books, not the headline aggregate volume, since 24h turnover here is dominated by churn.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — BIO runs a perp on both Binance and Hyperliquid, so funding and mark can diverge between the two venues, creating a directly harvestable spread.
+- [[funding-rate-harvest]] — the two-venue perp market with volatile speculative flow lets a delta-neutral position collect funding when the crowd stampedes into leveraged longs on DeSci hype.
+- [[crowded-long-funding-fade]] — narrative-driven DeSci pumps routinely stack leveraged longs into positive funding, setting up a fade when crowding peaks.
+- [[cash-and-carry]] — with liquid spot on Binance/DEX and a perp on both venues, long-spot / short-perp carry is executable to monetise elevated funding without directional risk.
+- [[narrative-trading]] — BIO is the liquid bellwether of the DeSci theme; price is driven by aggregate narrative sentiment more than any single research outcome.
+- [[liquidation-cascade-fade]] — a thin, high-beta alt with perp leverage produces sharp liquidation flushes that overshoot and mean-revert, offering fade entries.
+
+### Volatility & regime character
+
+BIO is a **high-beta, narrative-driven infra/DeFi token** — specifically the index-like proxy for the [[desci|DeSci]] sub-sector — with memecoin-like reflexivity in its price action. It carries strong positive beta to broad crypto risk (BTC/ETH) on the downside: in an established [[bear-market|bear market]] it sells off with the rest of the risk curve, and its ~96%-off-ATH chart shows how punishing that beta is. On the upside it decouples to trade on DeSci-specific sentiment rather than BTC/ETH trend, giving it episodic, narrative-gated rallies rather than steady trend.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — real depth sits on Binance and Hyperliquid; a delisting, funding-cap change, or on-chain liquidity pull would sharply widen spreads for a #383-rank alt.
+- **Dilution / emissions overhang** — ~1.17B BIO (gap to the 3.32B max supply) remains to unlock; watch [[token-unlocks]] events for supply-driven pressure.
+- **Narrative dependence** — with no cash-flow anchor, price hinges on DeSci sentiment staying alive; attention and liquidity evaporate quickly when the theme fades.
+- **Perp funding dislocations** — thin two-venue perp liquidity means funding can swing violently and diverge between Binance and Hyperliquid during speculative churn; size and monitor funding on both venues before carrying leverage.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BIO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BIO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BIO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BIO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BIO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

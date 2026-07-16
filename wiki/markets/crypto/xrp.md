@@ -4,11 +4,11 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [cross-border, crypto, etf, payments, regulation, ripple, xrp]
+tags: [cross-border, crypto, etf, payments, regulation, ripple, xrp, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, bitcoin, ethereum]
 entity_type: protocol
 aliases: ["Ripple", "XRP", "XRP-Ledger", "XRPL"]
 website: "https://xrpl.org"
-related: ["[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethereum]]", "[[ripple-usd]]", "[[sec]]", "[[stablecoin]]", "[[xrp-ledger]]"]
+related: ["[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethereum]]", "[[ripple-usd]]", "[[sec]]", "[[stablecoin]]", "[[xrp-ledger]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[oi-confirmed-trend]]"]
 headquarters: "Decentralized"
 ---
 
@@ -260,6 +260,51 @@ XRP's price history is characterized by long periods of consolidation punctuated
 | **Community sentiment** | 89% positive (CoinGecko, April 2026) |
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XRP is a deep, liquid two-venue market that trades on **both** [[binance|Binance]] (spot plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (XRP-PERP, leverage up to ~40-50x). As a #6 large-cap it carries among the highest altcoin open interest and tight, two-sided books on top-tier venues, so it avoids the thin-book gapping that plagues small-caps. The dual-venue footprint matters for execution: the Binance USDT book anchors global price discovery and absorbs large size with minimal slippage, while Hyperliquid gives on-chain, self-custodial perp access and a transparent funding/OI feed. Traders can size meaningfully on either venue, and the spread between them is a live basis/funding signal rather than a liquidity artifact. Deep depth also means high leverage is usable without immediately moving the market, though the same OI concentration makes crowded books vulnerable to cascade unwinds around catalysts.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — XRP perps run positive-to-neutral funding most of the time, so a delta-neutral long-spot/short-perp harvest collects a steady carry on a large-cap with reliable borrow.
+- [[hl-vs-cex-funding-divergence]] — running XRP-PERP on Hyperliquid against the Binance USD-margined perp lets you arbitrage funding gaps that open between the on-chain and CEX venues.
+- [[basis-trading]] — the CME/ETF regulated layer plus offshore perps regularly open a spot-perp/futures basis on XRP that can be captured with a hedged carry structure.
+- [[crowded-long-funding-fade]] — XRP's loyal retail base piles into directional longs on regulatory or ETF-flow catalysts, driving funding to extremes that fade profitably.
+- [[liquidation-cascade-fade]] — high OI concentration means legal/regulatory shocks trigger sharp liquidation cascades in XRP, giving mean-reversion entries once the forced flow exhausts.
+- [[oi-confirmed-trend]] — XRP's explosive, momentum-driven breakouts are more durable when rising open interest confirms the move, filtering headline-only spikes.
+
+### Volatility & regime character
+
+XRP is a genuine **large-cap altcoin** with a payments-L1 identity rather than a memecoin or DeFi token. Its correlation to [[bitcoin]] is moderate (roughly 0.5-0.7), and it behaves as a moderate-beta alt in trend regimes — but it decouples hard on idiosyncratic legal/regulatory catalysts, where it can move far more than [[bitcoin]] or [[ethereum]] in either direction. Typical daily ranges sit in the low single digits, punctuated by long consolidations and explosive, retail-amplified breakouts. Regime character is best summarized as "calm carry most of the time, event-driven reflexivity at the tails."
+
+### Risk flags
+
+- **OI/venue concentration** — among the highest altcoin open interest; crowded directional positioning can unwind violently in liquidation cascades around news.
+- **Escrow supply overhang** — up to ~1B XRP is released from Ripple escrow monthly (mostly returned), a scheduled but watched float dynamic that can amplify moves if releases are sold.
+- **Regulatory/narrative dependence** — price is disproportionately sensitive to SEC/legal and ETF-flow headlines; the thesis leans on regulatory clarity and payments adoption.
+- **Funding dislocations** — funding spikes hard around catalysts, squeezing crowded longs; cross-venue funding gaps can persist and then snap.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=XRP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=XRP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=XRP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=XRP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=XRP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

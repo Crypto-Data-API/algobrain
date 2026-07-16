@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme]
+tags: [crypto, meme, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["NOT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://t.me/notcoin_bot"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[the-open-network]]", "[[ton]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[the-open-network]]", "[[ton]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Notcoin
@@ -117,6 +117,52 @@ Notcoin is **community- and narrative-driven** rather than utility-driven. Its o
 > *On-chain holder distribution data requires blockchain analytics integration. This section will be populated from on-chain sources as they are ingested.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NOT trades on **both** major venues: [[binance|Binance]] (spot **NOT/USDT** plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**NOT-PERP**, leverage up to ~40-50x). This makes it a genuine two-venue derivatives market — deeper and more continuously priced than a single-venue microcap. Practically, the dual listing supports [[perpetual-futures|perp]]-vs-spot and cross-venue basis/funding strategies, and gives a second liquidity pool for entries and exits. That said, headline market cap overstates true depth: real book depth on either venue is far thinner than the ~$40M cap, so size execution carefully — split larger orders, lean on limit/VWAP fills, and expect slippage to widen sharply in risk-off tape.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — NOT-PERP funding on Hyperliquid can run persistently one-sided as crowded meme leverage builds; harvesting it delta-neutral (long spot / short perp) monetises that drift.
+- [[hl-vs-cex-funding-divergence]] — with the perp live on both Hyperliquid and Binance, funding can diverge between venues, giving a low-directional carry spread to capture.
+- [[cash-and-carry]] — pairing Binance/DEX spot NOT against a short USD-margined or NOT-PERP short captures basis when meme demand pushes perps to a premium.
+- [[liquidation-cascade-fade]] — thin depth plus crowded leverage means NOT prints sharp liquidation flushes; fading the overshoot after forced selling exhausts is a recurring setup.
+- [[crowded-long-funding-fade]] — euphoric meme rallies leave funding richly positive and longs crowded; fading that extreme targets the subsequent mean-reversion.
+- [[meme-coin-cycle]] — as a distribution-driven [[meme-coin]], NOT's reflexive euphoria-to-retrace arc is tradable as a regime rather than a fundamental value play.
+
+### Volatility & regime character
+
+NOT is a **high-beta memecoin** with strong reflexivity: price is driven by social attention and [[the-open-network|TON]]/Telegram-ecosystem sentiment rather than fundamentals. It behaves as a high-beta proxy to broad-crypto risk appetite — amplifying [[bitcoin|BTC]]/[[ethereum|ETH]] moves on both the upside and the downside — with an additional idiosyncratic tie to TON-ecosystem narrative. Expect large intraday swings, fat-tailed drawdowns, and elevated correlation to the memecoin/altcoin cohort during risk-on and -off swings.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — despite two venues, true depth is thin; large orders move price and slippage spikes in stressed conditions.
+- **Narrative dependence** — value rests entirely on TON/Telegram-ecosystem attention and community engagement; narrative decay post-airdrop is a standing risk with no utility backstop.
+- **Perp funding dislocations** — meme perps frequently print extreme funding (both directions) as crowded leverage builds and unwinds, amplifying [[liquidations|liquidation]] cascades.
+- **Ecosystem/regulatory concentration** — tightly coupled to TON and Telegram; a platform-level or regulatory shock there transmits directly to NOT.
+- **Supply/holder overhang** — ~97% of supply already circulates (limited unlock overhang), but early/insider holder concentration can still dominate float and thin books.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=NOT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=NOT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=NOT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=NOT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=NOT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

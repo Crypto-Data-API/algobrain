@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi]
+tags: [altcoins, crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["Giga", "SEI", "Sei Network", "Sei V2"]
 entity_type: protocol
 founded: 2022
 headquarters: "Decentralized (Sei Labs: San Francisco, USA)"
 website: "https://www.sei.io"
-related: ["[[aptos]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[stablecoins]]"]
+related: ["[[aptos]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[solana]]", "[[stablecoins]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
 ---
 
 # Sei
@@ -303,6 +303,54 @@ SEI's edge is end-to-end trading optimization plus the regulated-rails (WYST) na
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SEI is a deep, liquid two-venue market. It trades on **[[binance|Binance]]** (SEI/USDT spot plus a USD-margined SEI-PERP) and on **[[hyperliquid|Hyperliquid]]** (SEI-PERP, leverage up to ~40-50x), backed by significant Korean spot flow on Upbit (SEI/KRW). The presence of both a large CEX perp and an on-chain HL perp means basis, funding, and short expression can be built on either venue, and the same directional view can be sized across two independent order books rather than concentrated in one. For a rank ~127 alt, depth is respectable but thinner than large-caps, so size execution to on-book depth — the [[hyperliquid|Hyperliquid]] L2 book and Binance depth are the practical guides, and stacking notional beyond visible liquidity around unlock cliffs or dated catalysts invites slippage. Dual-venue availability also enables [[cross-exchange-arbitrage|cross-venue]] and HL-vs-CEX funding comparisons.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — SEI perps live on both Hyperliquid and Binance, so funding can diverge between the on-chain HL book and CEX futures; harvest the spread while staying delta-neutral.
+- [[funding-rate-harvest]] — event-driven, narrative-heavy SEI often runs stretched perp funding around Giga/WYST catalysts; collect funding on the crowded side while hedged.
+- [[cash-and-carry]] — pair long Binance spot SEI against a short SEI-PERP to lock the basis when perps trade at a premium into catalyst hype.
+- [[narrative-trading]] — SEI's price is dominated by the "trading chain" and Wyoming WYST institutional-rails narratives; trade the announcement, not the drift.
+- [[token-unlock-supply-event]] — ~33% of supply uncirculated (MC/FDV 0.67) on a multi-year unlock schedule; position around mechanical supply hitting the book at vesting cliffs.
+- [[pairs-trading]] — SEI vs [[aptos|APT]] is a natural relative-value pair given the head-to-head WYST competition and shared parallelized-execution thesis.
+
+### Volatility & regime character
+
+SEI is a **high-beta, event-driven infrastructure/DeFi-token L1 alt**. It is reflexive around catalysts (an ~85% weekly move on the WYST finalist news) and otherwise drifts with broad alt risk appetite. As a mid-cap alt it carries high positive beta to [[bitcoin|BTC]] and [[ethereum|ETH]] — it amplifies risk-on rallies and sells off harder in de-risking — with additional idiosyncratic variance from its own unlock and narrative flow. In the 2026 [[crypto-market-regimes|Established Bear Market]] (Fear & Greed 23) it trades ~95% below ATH and near its all-time low, so realized vol clusters around headlines rather than trending cleanly.
+
+### Risk flags
+
+- **Venue concentration** — liquidity leans on Binance, Upbit (Korean flow), and Hyperliquid; depth thins fast beyond top-of-book for a rank ~127 name.
+- **Unlock / emissions overhang** — MC/FDV ≈ 0.67 with ~33% of supply still to vest; rallies mechanically meet new supply ([[token-unlocks]]).
+- **Narrative dependence** — much of the premium rests on the WYST/institutional-rails and Giga throughput stories; an adverse WYST outcome or Giga slippage past H1 2026 removes a core thesis.
+- **Perp funding dislocations** — funding can spike and flip hard around dated catalysts on both HL and CEX perps; crowded positioning unwinds violently.
+- **Political-flow sensitivity** — World Liberty Financial association makes SEI headline-sensitive in both directions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SEI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SEI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SEI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SEI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SEI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

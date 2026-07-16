@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["MORPHO", "Morpho Blue", "Morpho Labs"]
 entity_type: protocol
 founded: 2021
 headquarters: "Paris, France (Morpho Association)"
 website: "https://morpho.org/"
-related: ["[[aave]]", "[[ai-finance]]", "[[artificial-intelligence]]", "[[base]]", "[[coinbase]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[defai]]", "[[defi-narratives]]", "[[defi]]", "[[ethereum]]", "[[ml-defi-risk-models]]", "[[token-unlocks]]"]
+related: ["[[aave]]", "[[ai-finance]]", "[[artificial-intelligence]]", "[[base]]", "[[coinbase]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[defai]]", "[[defi-narratives]]", "[[defi]]", "[[ethereum]]", "[[ml-defi-risk-models]]", "[[token-unlocks]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[pairs-trading]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Morpho
@@ -327,6 +327,50 @@ Morpho's moat is the **immutable core + curated-vault model** plus **institution
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+MORPHO trades on **both** major derivatives venues: [[hyperliquid|Hyperliquid]] lists **MORPHO-PERP** (on-chain USD-margined perp, leverage up to ~40–50x), and Binance offers **MORPHO/USDT spot plus a USD-margined perpetual**. This gives a genuine two-venue market rather than a single-venue long-tail listing — CEX depth (Binance) and on-chain depth (Hyperliquid HLP book) coexist, so the two funding/mark prices can be arbitraged against each other. That said, MORPHO is a mid-cap governance token with modest turnover for its rank, so effective liquidity is thinner than a major: size positions to the book, prefer limit/scaled entries over market orders, and expect real slippage on large clips. The dual-venue structure improves execution optionality (route to whichever venue is deeper/cheaper at the moment) and enables cross-venue basis and funding trades.
+
+### Applicable strategies
+- [[hl-vs-cex-funding-divergence]] — MORPHO runs on both Hyperliquid and Binance perps, so the on-chain vs CEX funding spread is directly tradeable when the two venues diverge.
+- [[funding-rate-arbitrage]] — long spot (Binance) / short perp (or vice versa) to harvest funding when the MORPHO perp trades persistently rich or cheap to spot.
+- [[cash-and-carry]] — Binance MORPHO/USDT spot plus a perp short lets you lock the basis and collect carry on a genuine two-venue token.
+- [[pairs-trading]] — MORPHO vs [[aave|AAVE]] is the natural DeFi-lending relative-value pair (faster-growing challenger vs larger incumbent), both liquid enough to trade the spread.
+- [[liquidation-cascade-fade]] — thin float plus up-to-~50x leverage on MORPHO-PERP makes stop-runs and liquidation flushes sharp and often overshoot, giving mean-reversion entries.
+- [[token-unlock-supply-event]] — with ~35% of supply still to enter circulation and ongoing emissions, unlock/emission windows are recurring, position-able supply events.
+
+### Volatility & regime character
+MORPHO is a **DeFi / lending-infrastructure altcoin** — a high-beta, mid-cap governance token rather than a large-cap major or memecoin. It trades with the broad DeFi-narrative basket (alongside [[aave|AAVE]] and other lending names) and carries elevated beta to BTC/ETH: it tends to amplify moves in the majors on both sides, with idiosyncratic re-rating driven by fundamental catalysts (deposits/TVL growth, Coinbase loan-book, institutional integrations and raises) more than by the price tape alone. Expect high-beta drawdowns in risk-off regimes and narrative-led rallies when institutional-DeFi is in favor.
+
+### Risk flags
+- **Liquidity / venue concentration** — modest turnover for a top-60 token; slippage and gap risk in stress, and much of the depth concentrates on Binance + Hyperliquid.
+- **Token unlocks / emissions** — ~35% of supply still to unlock plus ongoing emissions ([[token-unlocks]]) are a persistent supply headwind that can cap rallies.
+- **Narrative dependence** — price re-rates on integration/raise catalysts and DeFi-sentiment; heavy reliance on the Coinbase integration for headline growth.
+- **Perp funding dislocations** — with up-to-~50x leverage and two venues, funding can spike and the Hyperliquid vs CEX marks can dislocate during volatility, forcing crowded positioning to unwind.
+- **Protocol / curator risk** — smart-contract and curated-vault risk in the underlying protocol can feed back into token sentiment.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MORPHO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MORPHO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MORPHO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MORPHO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MORPHO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

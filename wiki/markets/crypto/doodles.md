@@ -3,13 +3,13 @@ title: "Doodles"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto, nft]
+status: review
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins]
 aliases: ["DOOD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.doodles.app/"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[narrative-trading]]"]
 ---
 
 # Doodles
@@ -130,6 +130,56 @@ Doodles mission is to define the standard for immersive storytelling and color t
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DOOD trades as a two-venue derivatives market: **Binance** (spot plus a USD-margined perpetual) and **Hyperliquid** (DOOD-PERP, with leverage up to roughly 40-50x). The parallel listings give a deep, liquid book by low-cap standards, but liquidity is still thin relative to majors — the ~$11M market cap and modest spot volume mean order-book depth is shallow away from mid, so large orders will move price and incur slippage. The presence of both a large CEX perp and an on-chain perp supports cross-venue execution: fills can be split across Binance and Hyperliquid, and the two funding regimes can be traded against each other. Position sizing should stay conservative given depth constraints, and the high available leverage on Hyperliquid magnifies liquidation risk during volatility spikes.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — dual Binance/Hyperliquid perp listings let you capture funding-rate gaps between the CEX and on-chain venue on the same asset.
+- [[cash-and-carry]] — Binance spot plus USD-margined perp enables a delta-neutral long-spot / short-perp carry when DOOD funding runs positive.
+- [[liquidation-cascade-fade]] — a thin, high-beta memecoin-adjacent token on up-to-50x Hyperliquid leverage is prone to over-extended liquidation flushes that mean-revert.
+- [[narrative-trading]] — DOOD is an entertainment/NFT-brand token whose price is driven by content, IP, and community narrative rather than fundamentals.
+- [[volatility-breakout]] — low float and shallow depth produce sharp, tradable expansion moves out of quiet ranges.
+- [[cross-exchange-arbitrage]] — simultaneous Binance and Hyperliquid markets create transient price dislocations to arbitrage between spot and perp venues.
+
+### Volatility & regime character
+
+DOOD is a small-cap, high-beta NFT/entertainment-brand token with memecoin-style reflexivity: price is largely narrative- and community-driven, with a low ~$11M cap and shallow depth that amplify both up and down moves. It is currently deep in drawdown (over 90% below its 2025 ATH), and behaves as a high-beta risk asset — it tends to rally hard in broad crypto risk-on phases and bleed faster than majors when BTC/ETH roll over. Correlation to BTC/ETH is loosely positive on direction but with a much higher beta and a large idiosyncratic component tied to Doodles-specific catalysts.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin depth for a ~#1100-ranked asset; a small number of venues means exits can gap in stressed conditions.
+- **Token unlocks / emissions** — circulating supply (~7.8B) is below max supply (10B), so remaining ~2.2B tokens represent future dilution/emission overhang.
+- **Narrative dependence** — value hinges on Doodles IP, content releases, and community sentiment; a fading narrative can drain liquidity quickly.
+- **Perp funding dislocations** — high Hyperliquid leverage and low float can drive extreme funding and liquidation cascades; funding can flip sign abruptly.
+- **Multi-chain / bridge exposure** — token exists on Solana and BSC, adding contract and bridge-related surface area.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=DOOD` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=DOOD` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=DOOD&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=DOOD&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=DOOD"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

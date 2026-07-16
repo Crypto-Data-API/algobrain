@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, bitcoin, ethereum]
 aliases: ["IOTA", "IOTA Rebased", "MIOTA"]
 entity_type: protocol
 founded: 2015
 headquarters: "IOTA Foundation, Berlin, Germany"
 website: "https://iota.org/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sui]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sui]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # IOTA
@@ -275,6 +275,56 @@ IOTA is best framed as an **L1 security/utility token that the market has not re
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+IOTA is a genuine two-venue derivatives market. It trades on **Binance** (IOTA/USDT spot plus a USD-margined perpetual on Binance Futures) and on **Hyperliquid** as **IOTA-PERP** (leverage up to ~40–50x). The dual listing means execution can be routed to whichever book is deeper at a given moment, and it opens a clean CEX-vs-DEX pair for funding and price-basis comparisons. That said, IOTA is a small-cap (~#188, thin ~$5–7M/24h spot turnover), so absolute depth is modest and order books widen quickly in stress on both venues — size positions to the thinner of the two books, work larger clips passively, and expect slippage on market orders. Korea-driven volume spikes (Upbit IOTA/KRW spot) can transiently deepen or dislocate the market, another reason to lean on limit execution and to watch cross-venue spreads before sizing up.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — IOTA quotes a perp on both Hyperliquid and Binance, so funding can diverge between the two venues; harvest the gap by holding offsetting perps.
+- [[funding-rate-harvest]] — a liquid two-venue perp on a bearish, out-of-favor alt often carries persistent funding skew that can be collected against a spot or opposite-venue hedge.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp lets you lock perp premium against held IOTA spot, a low-directional carry on a name with no fundamental floor.
+- [[liquidation-cascade-fade]] — thin books and up-to-50x leverage make IOTA prone to sharp liquidation flushes; fading capitulation wicks back toward the mean is a recurring setup.
+- [[range-mean-reversion]] — grinding at fresh all-time lows with no re-rate, IOTA spends long stretches ranging, favoring reversion between defined bounds over trend chasing.
+- [[narrative-trading]] — IOTA is a pure narrative/beta vehicle (Move-ecosystem sympathy, RWA/trade-finance, "2017 revival"); trade catalyst rotations rather than fundamentals.
+
+### Volatility & regime character
+
+IOTA is a **high-beta legacy altcoin / rebooted MoveVM L1** with no independent fundamental anchor. It behaves as a downside-amplified proxy for broad altcoin risk: it sells off harder than BTC/ETH in risk-off and only partially recaptures beta in rallies, as its fresh all-time lows (~99% off the 2017 peak) attest. Directionally it correlates strongly with BTC/ETH and with the broader alt complex, and it can pick up sympathy beta from Move peers (Sui, Aptos). Reflexivity is elevated because thin liquidity plus leveraged perps amplify moves in both directions, but the dominant regime has been an "Established Bear Market" with persistent extreme fear.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — thin spot turnover and shallow perp depth mean real slippage and gap risk on size; two venues help but neither book is deep.
+- **Persistent dilution** — ~6–7%/yr uncapped inflation funds staking rewards, a structural supply headwind into a falling price with no hard cap.
+- **Narrative dependence** — price is driven by Move-ecosystem beta, RWA/trade-finance framing, and rotation flows; obsolete pre-2025 "feeless IoT / quantum-proof" claims should not be traded.
+- **Perp funding dislocations** — with modest open interest and a two-venue split, funding can spike or diverge sharply on Korea-driven or catalyst-driven volume, cutting both ways for carry positions.
+- **No re-rate / floor risk** — the market has refused to reward the technical reboot; with negligible TVL and no cash-flow accrual, there is no fundamental price floor.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=IOTA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=IOTA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=IOTA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=IOTA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=IOTA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

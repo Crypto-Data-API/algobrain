@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["AERO", "Aerodrome"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://aerodrome.finance/"
-related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[velodrome-finance]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[velodrome-finance]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Aerodrome Finance
@@ -318,6 +318,55 @@ A common framing is **fee + bribe yield to veAERO** vs a comparable ve(3,3) peer
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AERO is a **PERP-FIRST** asset for leveraged traders: **AERO-PERP on [[hyperliquid|Hyperliquid]]** (up to ~40-50x) is the primary liquid derivatives venue, while it is **NOT listed on Binance** and CEX spot access is limited/offshore (Kraken, Upbit, Bitget, KuCoin, Crypto.com). The deepest *spot* depth is actually on-chain on Aerodrome itself on [[base|Base]], so directional flow and price discovery for size concentrate on the HL perp. Practical consequence: sizing should key off HL order-book depth (`l2-book`) rather than headline CEX volumes — CEX books can be thin relative to size, on-chain spot has slippage/gas friction for fast execution, and the perp is where funding, OI and liquidations form. Use limit/scaled entries; assume shallower depth than a Binance-listed alt of comparable market cap.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a PERP-FIRST alt with no Binance venue tends to carry a persistent funding premium on HL; collect it while delta-hedging against on-chain spot.
+- [[hl-vs-cex-funding-divergence]] — because AERO trades on HL and offshore CEX perps but not Binance, funding can dislocate meaningfully between venues, creating a spread to harvest.
+- [[crowded-long-funding-fade]] — event-driven anticipation of the July 2026 Aero merger crowds longs; fade richly positive funding into resistance on the HL perp.
+- [[liquidation-cascade-fade]] — thin cross-venue depth plus ~40-50x leverage makes AERO prone to sharp liquidation flushes; fade forced-seller wicks back toward the mean.
+- [[oi-confirmed-trend]] — rising OI confirming a merger-driven breakout signals fresh positioning worth following; rising OI into resistance warns of leverage build-up.
+- [[event-driven-trading]] — the token-conversion / cross-chain launch and recurring unlocks are discrete, scheduled catalysts that drive AERO more than beta does.
+
+### Volatility & regime character
+
+AERO is a **high-beta DeFi / DEX governance token** (ve(3,3) infra token, "Base ecosystem beta" and Coinbase-on-chain proxy). It generally carries high correlation to broad alt risk and BTC/ETH beta, but its defining trait in 2026 is **event-driven reflexivity** — it can decouple hard from the tape around the Velodrome merger and cross-chain launch (e.g. bucking a bear tape on merger anticipation). Expect elevated realized volatility, uncapped-emissions dilution as a structural drag, and sharp two-way moves around discrete catalysts rather than a steady beta profile.
+
+### Risk flags
+
+- **Venue concentration** — leveraged flow depends on the single HL perp; no Binance backstop and thin/offshore CEX spot means gappy liquidity and outsized slippage on size.
+- **Uncapped emissions + scheduled unlocks** — ongoing weekly emissions (MC/FDV ~0.50, ~half of supply unissued) and recurring unlocks create persistent structural sell pressure.
+- **Narrative / event dependence** — price leans heavily on the merger/cross-chain launch thesis; botched ve(3,3) migrations have historically punished tokens, and a "buy the rumor" unwind can be violent.
+- **Perp funding dislocations** — PERP-FIRST status means funding can run rich (crowded longs) or dislocate vs offshore CEX perps; funding shocks and cascade risk are amplified by high leverage.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AERO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AERO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AERO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AERO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AERO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

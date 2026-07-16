@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, data-provider, machine-learning]
+tags: [ai-trading, crypto, data-provider, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["GRASS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://grass.io/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[decentralized-ai]]", "[[depin]]", "[[hyperliquid]]", "[[solana]]", "[[tokenized-compute]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[data-daos]]", "[[decentralized-ai]]", "[[depin]]", "[[hyperliquid]]", "[[solana]]", "[[tokenized-compute]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Grass
@@ -238,6 +238,51 @@ Grass belongs to the **DePIN / decentralized-AI data** category. The product (Gr
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — GRASS is a **PERP-FIRST** asset. It trades as **GRASS-PERP on [[hyperliquid|Hyperliquid]]** (leverage up to ~40-50x) but is **NOT listed on Binance** — centralized spot is limited to offshore/second-tier venues (Kraken, Bitget, KuCoin, Crypto.com) plus Orca on [[solana|Solana]]. Because there is no deep Binance spot book to anchor price, **perp flow on the HL order book dominates price discovery**, and directional/OI flow concentrates in one venue. Off-Binance mid-caps carry **thinner order-book depth**, so market orders and larger clips slip more; size positions to the visible L2 depth, prefer limit/passive entries, and expect wider effective spreads and larger impact than for a Binance-listed peer. The single-venue concentration also means an HL outage or depth vacuum leaves few hedging alternatives.
+
+**Applicable strategies** (from the verified menu):
+- [[crowded-long-funding-fade]] — AI-narrative rallies push GRASS funding strongly positive as longs chase; fading crowded, expensive longs is a repeatable setup here.
+- [[funding-rate-harvest]] — persistently positive funding during hype phases lets a delta-hedged short-perp/long-spot book collect carry on the HL perp.
+- [[oi-confirmed-trend]] — with price discovery in the HL perp, rising OI alongside a breakout confirms genuine trend versus a hollow squeeze.
+- [[oi-price-exhaustion]] — fast OI builds into an AI-sector pop flag exhaustion and set up the long-squeeze reversals GRASS is prone to.
+- [[long-liquidation-cascade]] — crowded leveraged longs make GRASS vulnerable to downside liquidation cascades on the single dominant perp venue.
+- [[narrative-trading]] — GRASS returns track the AI-data / DePIN narrative cycle, so positioning around narrative rotation drives short-horizon edge.
+
+**Volatility & regime character** — GRASS is a **high-beta AI-data / DePIN infra altcoin** (~#144 mcap). It trades with elevated realized volatility, amplified up and down by the AI-narrative cycle and by leverage on the perp. Beta to BTC/ETH is high on risk-off moves (it sells off with the complex in extreme-fear regimes) but idiosyncratic on AI/DePIN catalysts, where it can decouple upward on sector-specific hype. Reflexivity runs through perp funding and OI rather than pure spot flow.
+
+**Risk flags**
+- **Venue concentration** — no Binance listing; HL perp is the primary liquidity and price-discovery locus, so an outage or depth gap has no ready fallback.
+- **Thin off-Binance depth** — limited spot liquidity magnifies slippage and impact; size to visible depth.
+- **Unlock / emissions overhang** — ~0.61 MC/FDV with continuing rewards to node operators is a structural, ongoing supply source demand must absorb.
+- **Narrative dependence** — price is driven by AI-hype beta more than realized revenue; sentiment reversals hit hard.
+- **Perp funding dislocations** — funding flips strongly positive in rallies (longs paying to chase), setting up sharp long-squeeze reversals and cascade risk.
+- **Regulatory** — residential scraping / proxy resale sits in a contested legal area; a crackdown would impair the core model.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GRASS` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GRASS` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GRASS&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GRASS&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GRASS"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

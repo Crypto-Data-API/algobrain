@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, gamefi]
+tags: [altcoins, crypto, gamefi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["CATI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://linktr.ee/catizen"
-related: ["[[crypto-markets]]", "[[gamefi]]", "[[play-to-earn]]", "[[ton]]"]
+related: ["[[crypto-markets]]", "[[gamefi]]", "[[play-to-earn]]", "[[ton]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[narrative-trading]]"]
 ---
 
 # Catizen
@@ -207,6 +207,48 @@ Only dated, verifiable milestones are listed.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — CATI is a genuine two-venue market. It trades **spot on Binance (CATI/USDT)** plus Bitget, KuCoin and Crypto.com, and has a **USD-margined perpetual on Binance** alongside the **CATI-PERP on [[hyperliquid|Hyperliquid]]** (leverage up to ~40-50x). Having a deep, liquid CEX venue *and* an on-chain perp means the token carries a real funding-rate and open-interest signal that most sub-$50M-cap peers lack, and it lets traders arbitrage or hedge across venues. That said, absolute depth is still modest for the market-cap tier, so execution should be scaled to book depth — lean on limit/VWAP-style entries, size positions to Binance and Hyperliquid L2 depth, and expect [[slippage]] on large clips despite the two-venue access.
+
+**Applicable strategies**
+- [[hl-vs-cex-funding-divergence]] — with CATI listed on both a Binance perp and the Hyperliquid CATI-PERP, funding can drift apart between venues, creating a delta-neutral divergence capture.
+- [[funding-rate-harvest]] — a small-cap narrative token like CATI frequently prints stretched funding when tap-to-earn sentiment flips; harvesting the funding while hedging spot monetizes crowded positioning.
+- [[liquidation-cascade-fade]] — thin depth plus 40-50x leverage on the perps makes CATI prone to sharp liquidation flushes that overshoot, a setup for fading exhaustion back toward fair value.
+- [[narrative-trading]] — CATI trades on Telegram-game / TON-ecosystem narrative rotations and airdrop/game-update news, making it a natural narrative vehicle.
+- [[oi-price-exhaustion]] — the Hyperliquid open-interest read helps flag crowded longs into a weak tape, signalling reversal risk when OI spikes without price follow-through.
+- [[breakout-and-retest]] — narrative-driven small caps like CATI tend to make discrete, catalyst-led breakouts from range, tradable on the confirmed retest.
+
+**Volatility & regime character** — CATI is a **high-beta, narrative-driven small-cap GameFi / tap-to-earn altcoin** (rank ~878) with pronounced reflexivity: it rallies hard on risk-on / GameFi-narrative rotations and bleeds in risk-off tapes, amplified by a ~96% drawdown from its 2024 ATH and ongoing unlock overhang. It is strongly correlated to broad BTC/ETH risk beta but with a much larger amplitude, and adds idiosyncratic dependence on TON-ecosystem and Telegram-game sentiment. Expect long, grinding drawdowns punctuated by sharp, catalyst-led spikes.
+
+**Risk flags**
+- **Liquidity / low float** — a small-cap with modest absolute depth; large orders move the book and the leveraged perps can amplify moves via liquidations.
+- **Unlock / emission overhang** — only ~41% of the 1B max supply circulates (MC/FDV ≈ 0.41), so scheduled unlocks and reward emissions are a persistent supply headwind.
+- **Narrative dependence** — value is tied to the tap-to-earn / TON narrative and the retention cliff; sentiment can reverse quickly and reflexively.
+- **Platform dependence** — economics hinge on Telegram/[[ton|TON]] policy and health, an external tail risk.
+- **Perp funding dislocations** — crowded longs or shorts into a weak tape can drive funding to extremes and trigger cascade risk on both the Binance and Hyperliquid perps.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=CATI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=CATI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=CATI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=CATI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=CATI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

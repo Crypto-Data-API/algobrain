@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, ethereum]
+tags: [altcoins, crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["BLAST"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://blast.io/"
-related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]"]
+related: ["[[airdrop]]", "[[crypto-markets]]", "[[data-availability]]", "[[ethereum]]", "[[layer-2]]", "[[optimistic-rollup]]", "[[sequencer]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Blast
@@ -199,6 +199,48 @@ BLAST is primarily a **governance** token for the Blast network and ecosystem; i
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — BLAST is a **perp-first** asset: it trades as **BLAST-PERP on [[hyperliquid]]** (leverage up to ~40-50x) but is **not listed on Binance**, and spot access is limited to a handful of offshore CEXs (Upbit, Bitget, KuCoin) plus DEX liquidity. Practically all leveraged and speculative flow therefore concentrates on the single HL perp, which becomes the primary price-discovery venue. With a sub-$20M market cap and thin ~$1-2M daily volume, order-book depth on the HL book is shallow — funding, mark price, and liquidations are dominated by a small number of participants. Execution implication: size positions small relative to visible L2 depth, use limit/passive orders, and expect meaningful slippage and funding whipsaw on any size; the absence of a deep spot venue also makes clean spot-hedged carry harder to construct than on Binance-listed majors.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — a lone HL perp with no Binance spot tends to run persistent one-sided funding; harvesting the paid side is a core edge on this microcap.
+- [[crowded-long-funding-fade]] — post-airdrop decay and reflexive dip-buying produce crowded longs; fading extreme positive funding captures the mean-revert.
+- [[crowded-short-funding-fade]] — a heavily shorted, down-98% token is prone to violent short-covering squeezes when funding goes deeply negative.
+- [[liquidation-cascade-fade]] — with thin HL depth, forced liquidations overshoot; fading the flush after a cascade exhausts is repeatable here.
+- [[oi-price-exhaustion]] — rising open interest into a stalling price on the single dominant perp flags exhaustion and unwind risk.
+- [[range-mean-reversion]] — outside of unlock/news catalysts BLAST grinds in a low-vol range near its ATL, favoring reversion over trend.
+
+**Volatility & regime character** — High-beta, low-float **DeFi / L2 infrastructure altcoin** trading deep in post-airdrop decay (~98% below ATH). Behaves as a high-beta risk proxy: it amplifies moves in [[ethereum]] and the broader L2/DeFi complex on the upside and bleeds faster than majors in risk-off, with correlation to BTC/ETH beta that spikes during market-wide de-risking and liquidation events. Idiosyncratic supply overhang (large unvested allocations) and airdrop-farmer selling keep the drift structurally negative between catalysts.
+
+**Risk flags**
+- **Venue concentration** — single dominant perp on Hyperliquid with no Binance listing; a HL outage, parameter change, or delisting removes the primary market.
+- **Liquidity/depth** — microcap float and thin books mean large orders move price and trigger cascades; funding can dislocate hard.
+- **Token unlocks / emissions** — only ~59% of the 100B max supply circulates; scheduled unlocks and ecosystem/team vesting are a persistent supply-side headwind.
+- **Narrative dependence** — price is tied to the L2/native-yield narrative and airdrop cohort behavior; loss of narrative accelerates decay.
+- **Perp funding dislocations** — sparse participation makes funding swing sharply, risking adverse carry and forced-liquidation spirals.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=BLAST` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=BLAST` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=BLAST&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=BLAST&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=BLAST"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

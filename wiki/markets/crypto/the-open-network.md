@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi]
 aliases: ["GRAM", "Gram", "TON", "The Open Network", "Toncoin"]
 entity_type: protocol
 founded: 2018
 headquarters: "TON Foundation (Telegram-aligned); Zug, Switzerland"
 website: "https://ton.org/"
-related: ["[[bitcoin]]", "[[blum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[narrative-trading]]", "[[solana]]"]
+related: ["[[bitcoin]]", "[[blum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-1]]", "[[narrative-trading]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Toncoin (Gram)
@@ -343,6 +343,50 @@ GRAM's moat is **distribution, not technology**: the only chain natively inside 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+GRAM is a **deep, liquid two-venue market**: it trades on **[[binance|Binance]]** (spot **and** a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** (**GRAM-PERP**, leverage up to ~40-50x). This dual-venue availability matters for execution: the Binance spot + perp pair supports true [[cash-and-carry|cash-and-carry]] and spot-hedged basis structures, while the two independent perp order books (Binance CEX vs. Hyperliquid on-chain) create a persistent funding/basis surface to arbitrate. Depth is genuine but has thinned post-rebrand (24h volume cooled from the ~$207M GRAM-news peak), so size perps into HL L2 depth and lean on the deeper Binance spot book for larger clips rather than pushing a single venue.
+
+### Applicable strategies
+- [[hl-vs-cex-funding-divergence]] — GRAM's two independent perp books (Binance USD-M vs. Hyperliquid GRAM-PERP) routinely diverge on funding, especially around Durov-roadmap/rebrand events when one venue's longs crowd faster.
+- [[cash-and-carry]] — Binance spot + USD-margined perp let you hold GRAM spot and short the perp to harvest basis without directional exposure, ideal when event-driven longs push funding rich.
+- [[funding-rate-harvest]] — persistent positive funding after narrative spikes (buy-rumor phases) makes the delta-neutral short-perp/long-spot carry a repeatable GRAM income trade.
+- [[crowded-long-funding-fade]] — the rebrand and roadmap catalysts produce textbook crowded-long setups (spiked 2 June, faded through the vote); fade extreme positive funding into the sell-the-news leg.
+- [[event-driven-trading]] — GRAM is catalyst-driven (roadmap steps 5-7, Telegram validator news, ticker migration); trade the discrete events with defined risk around the reflexive pump/dump.
+- [[liquidation-cascade-fade]] — post-peak thin books mean headline-driven liquidation flushes overshoot; fade cascades on HL where open-interest wipes are observable via the API.
+
+### Volatility & regime character
+GRAM is a **high-beta consumer-distribution / payments Layer 1** (#24 cap) — not a memecoin, but far more reflexive than mega-cap L1s because price is gated on a single narrative (Telegram distribution) and discrete Durov catalysts. It carries **high positive BTC/ETH beta** in risk-on/risk-off regimes and amplifies moves during Telegram-ecosystem cycles, while decoupling upward on idiosyncratic roadmap events. Expect elevated realized vol around catalysts and sharp mean-reverting flushes in extreme-fear regimes.
+
+### Risk flags
+- **Venue concentration / thin post-peak liquidity** — volume cooled ~75% from its May peak; lighter books mean sharper slippage and cascade overshoot.
+- **Uncapped inflation + supply overhang** — perpetual PoS emissions plus ~48% non-circulating supply (MC/FDV ~0.52) create standing dilution and unlock pressure.
+- **Single-channel narrative dependence** — GRAM is effectively a leveraged bet on Telegram; any legal/regulatory headline on Durov is binary, direct downside.
+- **Securities-history / regulatory tail** — the 2020 Gram SEC episode and "Alleged SEC Securities" category, reopened by the rename; no Coinbase listing constrains US access.
+- **Perp funding dislocations** — reflexive buy-rumor/sell-news cycles swing funding hard between the two perp venues, punishing late crowded positioning.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=GRAM` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=GRAM` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=GRAM&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=GRAM&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=GRAM"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

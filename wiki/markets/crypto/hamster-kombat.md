@@ -3,13 +3,13 @@ title: "Hamster Kombat"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
 aliases: ["HMSTR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://hamsterkombat.io/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Hamster Kombat
@@ -121,6 +121,60 @@ Hamster Kombat is a crypto exchange CEO simulator game built on Telegram with 30
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+HMSTR trades on **both** major venue types, giving it a deep, liquid two-venue market:
+
+- **Binance** — spot (HMSTR/USDT) plus a USD-margined perpetual, providing the primary price-discovery and reference-funding venue with the deepest CEX order-book depth.
+- **Hyperliquid** — the **HMSTR-PERP** contract with leverage up to roughly **40-50x**, offering on-chain perp exposure and a transparent funding/OI feed.
+
+The parallel CEX + DEX availability means the same directional or funding view can be expressed on either venue, and the two order books can be cross-referenced. Because HMSTR is a low-priced (sub-cent), small-cap memecoin, book depth is thinner than large-caps, so size execution should be staged and slippage-aware even though top-of-book liquidity is generally serviceable. Two-venue availability supports basis and funding-divergence structures (spot/perp and CEX-vs-DEX), while sizing should stay modest relative to visible depth to avoid moving a shallow book.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — memecoin rallies in HMSTR routinely produce crowded, over-leveraged long positioning; fading richly positive funding captures the mean-reversion when late longs get squeezed.
+- [[liquidation-cascade-fade]] — thin depth on a sub-cent memecoin makes HMSTR prone to sharp liquidation-driven wicks; fading the flush after forced selling exhausts is a repeatable setup.
+- [[funding-rate-arbitrage]] — with a Binance USD-margined perp and Hyperliquid HMSTR-PERP quoting independent funding, funding differentials between the two venues can be harvested market-neutral.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid funding on HMSTR-PERP frequently diverges from Binance's, so trading the spread between the two perps is a direct expression of that dislocation.
+- [[cash-and-carry]] — Binance spot plus perp lets a long-spot / short-perp carry structure monetize persistently positive funding on this high-beta memecoin.
+- [[narrative-trading]] — HMSTR price action is highly reflexive to GameFi/Tap-to-Earn and Telegram-ecosystem narrative flow, making narrative-driven entries and exits well suited to the token.
+
+### Volatility & regime character
+
+HMSTR is a **high-beta GameFi memecoin** with strong reflexivity: moves are amplified by leverage, social/narrative sentiment, and thin depth rather than fundamentals. It trades as a high-beta altcoin, tending to over-react to broad BTC/ETH risk swings — rallying harder in risk-on regimes and selling off faster in risk-off drawdowns — so realized volatility clusters and regime shifts are pronounced. Its low absolute price and large token supply add to the memecoin reflexivity profile.
+
+### Risk flags
+
+- **Liquidity / small-cap concentration** — a ~#1053 market-cap memecoin with thin book depth; large orders can slip badly and gaps are common.
+- **Emissions / supply overhang** — circulating supply is a fraction of a 100B max supply, so ongoing unlocks/emissions are a persistent dilution and supply-pressure risk.
+- **Narrative dependence** — valuation is tied to GameFi/Tap-to-Earn and Telegram-ecosystem attention; fading interest can drive sustained decline independent of the broad market.
+- **Perp funding dislocations** — leverage-driven crowding can push funding to extremes and trigger liquidation cascades, which is both an opportunity and a tail risk for directional exposure.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=HMSTR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=HMSTR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=HMSTR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=HMSTR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=HMSTR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

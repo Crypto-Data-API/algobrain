@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["RUNE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://thorchain.org/"
-related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]"]
+related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # THORChain
@@ -223,6 +223,48 @@ THORChain's distinctive position is **native-asset, no-wrap cross-chain swaps**;
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** RUNE trades as a deep, liquid two-venue market. On [[binance|Binance]] it is available both **spot** (RUNE/USDT) and as a **USD-margined perpetual**, and on [[hyperliquid|Hyperliquid]] as **RUNE-PERP** with leverage up to ~40-50x. Having both a major CEX and the dominant on-chain perp venue quoting RUNE gives it genuine two-sided depth relative to its mid-cap size, and creates a clean cross-venue surface: the Binance/Hyperliquid pair supports funding and basis comparison, while the spot leg on Binance anchors [[cash-and-carry]] and delta-neutral structures. Practically, size should still be scaled to book depth — RUNE's spot turnover is thin for its category, so aggressive market orders can slip, and execution is best worked across both venues rather than lifting a single book.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — dual-venue perps let you sit on the paying side of RUNE funding and collect carry while hedging directional risk.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid RUNE-PERP frequently diverges from Binance's USD-margined perp, giving a clean two-venue funding spread to arb.
+- [[cash-and-carry]] — Binance spot plus perp on either venue lets you lock the RUNE basis delta-neutral when funding runs rich.
+- [[liquidation-cascade-fade]] — thin spot depth means RUNE perp liquidations overshoot, and faded reversions off cascade lows are frequently sharp.
+- [[oi-confirmed-trend]] — pairing RUNE [[open-interest]] with price filters real protocol-news moves from thin-book noise before committing to a trend.
+- [[range-mean-reversion]] — outside of exploit/news catalysts RUNE spends long stretches ranging, rewarding fades of the band edges.
+
+**Volatility & regime character.** RUNE is a **mid-cap [[defi|DeFi]] / cross-chain infrastructure token** — a high-beta alt whose value is (by design) tied to swap volume and TVL rather than pure narrative. It carries strong positive beta to [[bitcoin|BTC]] and [[ethereum|ETH]] in risk-on/risk-off swings, but layers on **idiosyncratic, event-driven volatility** around protocol news (exploits, halts, restarts, chain additions) that can decouple it from broad crypto beta for days. Thin spot depth amplifies both the beta and the idiosyncratic moves.
+
+**Risk flags.**
+- **Liquidity / venue concentration** — thin spot turnover for its rank; real depth is concentrated in Binance and Hyperliquid, so a venue outage or delisting would sharply degrade execution.
+- **Custody / protocol-security risk** — THORChain holds real native assets in node-managed vaults and has a documented exploit history; security incidents are the dominant tail-risk catalyst for RUNE price and funding.
+- **Perp funding dislocations** — thin books mean RUNE funding and basis can swing violently around news, punishing crowded positioning and delta-neutral carry that is not actively managed.
+- **Narrative / activity dependence** — RUNE's design ties value to swap volume; falling cross-chain activity deflates the token even absent an exploit.
+- **Regulatory** — non-custodial cross-chain native-asset swaps sit in an unsettled regulatory area (money-transmission / sanctions-screening scrutiny).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=RUNE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=RUNE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=RUNE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=RUNE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=RUNE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

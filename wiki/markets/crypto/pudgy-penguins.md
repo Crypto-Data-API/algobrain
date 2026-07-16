@@ -3,13 +3,13 @@ title: "Pudgy Penguins"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, memecoins, altcoins]
 aliases: ["PENGU"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://pengu.pudgypenguins.com/"
-related: ["[[crypto-markets]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[meme-coin-cycle]]"]
 ---
 
 # Pudgy Penguins
@@ -141,6 +141,61 @@ Believe in Pengu. Believe in the Prophecy.
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PENGU trades on **both** major venue types, giving it an unusually deep two-venue market for a rank-~118 memecoin:
+
+- **Binance** — spot (PENGU/USDT) plus a **USD-margined perpetual**, providing the primary reference price and the deepest CEX order-book depth.
+- **Hyperliquid** — **PENGU-PERP** with leverage up to roughly **40-50x**, the deepest on-chain perp venue for the name.
+
+The parallel Binance/Hyperliquid listing supports genuine cross-venue price discovery: funding, mark price, and depth can be compared across a centralized and a decentralized book. For execution, the CEX spot + perp gives clean entries and hedgeable inventory, while Hyperliquid supplies transparent on-chain funding and OI. Sizing is still constrained by PENGU's low unit price and memecoin depth — large clips will move a thinner book than the majors, so scale into liquidity and watch the L2 book on both venues before committing size.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a liquid dual-venue perp with periodic funding lets you collect carry by holding the low-funding side against a spot or opposing-venue hedge.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid PENGU-PERP and the Binance USD-margined perp can drift apart, creating a market-neutral spread to capture.
+- [[cash-and-carry]] — Binance spot plus the USD-margined perp allow a delta-neutral long-spot / short-perp carry when the perp trades at a premium.
+- [[crowded-long-funding-fade]] — memecoin rallies routinely push PENGU perp funding sharply positive as longs pile in; fade the crowd when funding runs rich.
+- [[liquidation-cascade-fade]] — high leverage (40-50x) makes PENGU prone to sharp liquidation flushes; fading over-extended cascades targets the mean-reversion snap-back.
+- [[meme-coin-cycle]] — PENGU is an IP/meme token whose price is driven by community narrative and hype cycles, the core pattern this playbook trades.
+
+### Volatility & regime character
+
+PENGU is a **high-beta memecoin** with strong reflexivity: price is narrative- and community-driven (IP-meme, Solana-meme categories) rather than tied to fundamentals or cash flows. It typically exhibits amplified beta to broad crypto risk sentiment — rallying harder in BTC/ETH risk-on legs and selling off faster in risk-off — with idiosyncratic, hype-driven moves layered on top. Expect elevated realized volatility, fat tails, and regime shifts between low-liquidity chop and violent trend bursts.
+
+### Risk flags
+
+- **Memecoin narrative dependence** — value rests on community/IP hype; sentiment reversals can be abrupt and unforgiving.
+- **Supply overhang** — circulating supply is well below max supply (Market Cap / FDV ~0.79), so ongoing emissions/unlocks are a structural dilution risk.
+- **Liquidity/depth** — despite two-venue listing, memecoin depth is thinner than majors; slippage and gap risk rise in stressed conditions.
+- **Perp funding dislocations** — crowded positioning can drive funding to extremes and force cascades, especially at 40-50x leverage on Hyperliquid.
+- **High-beta drawdowns** — deep drawdown history (currently far below ATH) underscores the severity of memecoin cycles.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PENGU` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PENGU` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PENGU&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PENGU&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PENGU"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coin, solana, speculation]
+tags: [crypto, meme-coin, solana, speculation, memecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["WIF", "dogwifcoin"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://dogwifcoin.org"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[meme-coins]]", "[[perpetual-futures]]", "[[solana]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[meme-coin]]", "[[meme-coins]]", "[[perpetual-futures]]", "[[solana]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[meme-coin-cycle]]"]
 ---
 
 # dogwifhat
@@ -117,6 +117,51 @@ WIF has **no fundamentals to value** — no cash flows, no treasury, no protocol
 - **Crowded perps:** Extreme [[funding-rate|funding rates]] and high open interest make WIF prone to violent long/short liquidation cascades.
 - **Regime sensitivity:** As a high-beta risk asset, WIF underperforms badly in extreme-fear / bear regimes (current backdrop: [[fear-and-greed-index|Fear & Greed]] = 23).
 - **Survivorship bias:** WIF is one of the few memes that survived; most peers from its cohort went to zero. Past survival is not predictive.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** WIF trades a deep, liquid two-venue derivatives market. It is available on **Binance** (WIF/USDT spot plus USDⓈ-margined perp) and on **[[hyperliquid|Hyperliquid]]** as **WIF-PERP** (up to ~40-50x leverage). As one of the most actively traded meme perps, it carries substantial open interest and order-book depth on both venues, so entries and exits in normal size execute with limited slippage. The dual-venue setup enables genuine [[cross-exchange-arbitrage|CEX-vs-DEX]] execution — quoting the tighter book, splitting size across both venues to reduce impact, and exploiting funding/basis dislocations between Binance and Hyperliquid. Note that on-chain Solana spot depth (Jupiter/Raydium/Orca) adds a third leg for spot-perp structures, but during attention-driven surges liquidity can thin abruptly and impact costs rise, so size perp positions to the venue that is deepest in the moment rather than to headline volume.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — WIF perps frequently print extreme positive funding when retail crowds longs; long spot (or the cheaper-funding venue) versus short the rich perp harvests that carry.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid WIF-PERP and Binance's USDT perp routinely diverge during meme attention spikes; go short the richer leg, long the cheaper, and collect the spread.
+- [[crowded-long-funding-fade]] — when euphoric retail inflows push WIF funding sharply positive with rising OI, fade the crowded long ahead of the typical liquidation flush.
+- [[liquidation-cascade-fade]] — WIF's thin-relative-to-interest books produce violent forced-selling wicks; fading the capitulation extreme for the mechanical rebound is a recurring meme-perp edge.
+- [[meme-coin-cycle]] — WIF is a blue-chip Solana meme whose price is pure reflexive attention; trading the boom/bust attention cycle rather than fundamentals fits its behavior.
+- [[volatility-breakout]] — WIF spends long stretches range-bound then expands violently on narrative ignition; volatility-expansion breakout entries capture the reflexive impulse legs.
+
+**Volatility & regime character.** WIF is a high-beta **memecoin** exhibiting textbook reflexivity — value is driven entirely by community attention and perp positioning, with an expected long-run drift toward zero punctuated by sharp attention spikes. It behaves as a high-beta risk asset with strong positive correlation to BTC/ETH beta, and it also tracks the broader **Solana meme complex** (alongside BONK) more tightly than it tracks large-cap crypto. It amplifies moves in both directions: it bleeds hardest in extreme-fear / bear regimes and rips fastest in risk-on meme seasons.
+
+**Risk flags.**
+- **Reflexivity / no floor:** price is self-referential with zero utility or treasury backstop; expected long-run outcome for the asset class is decay toward zero.
+- **Liquidity fragility:** books and pools are thin relative to speculative interest, so [[whale-trade|whale]] flows and stampedes cause heavy slippage despite healthy headline volume.
+- **Crowded perp / funding dislocations:** extreme [[funding-rate|funding]] and rapidly expanding [[open-interest|OI]] make WIF prone to violent long/short [[liquidations|liquidation]] cascades.
+- **Narrative dependence:** value hinges on continued community attention and influencer amplification; fading narratives evaporate the bid with no fundamental catch.
+- **Regime sensitivity:** as a high-beta meme, WIF underperforms badly when risk sentiment sours.
+- **Holder concentration:** anonymous launch and concentrated early-holder distribution create coordinated-dump risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=WIF` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=WIF` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=WIF&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=WIF&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=WIF"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["MET"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.meteora.ag/"
-related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquidity-pool]]", "[[orca]]", "[[solana]]"]
+related: ["[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[hyperliquid]]", "[[liquidity-pool]]", "[[orca]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Meteora
@@ -254,6 +254,54 @@ Metronome released in December 2017. By Q1 2018, Metronome aims to become the wo
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MET (Meteora) is tradable on **BOTH** [[binance|Binance]] (spot MET/USDT plus a USD-margined perpetual) and **[[hyperliquid|Hyperliquid]]** (MET-PERP, leverage up to ~40-50x). This is a deep, liquid two-venue market, with additional tier-1 CEX coverage (Kraken, Bitget, KuCoin, Crypto.com) and Upbit for Korean retail. The dual Binance/Hyperliquid perp footprint means execution can be split across venues, funding can be compared and arbitraged between CEX and the on-chain [[hyperliquid|Hyperliquid]] book, and position sizing benefits from aggregated depth rather than a single thin venue. For a ~#293-rank alt, this two-venue liquidity is unusually good and supports both delta-one basis structures and directional perp trades; still, size relative to on-book depth since order-book liquidity thins fast on sharp Solana-launch-driven moves.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — MET trades on both Binance's perp and Hyperliquid MET-PERP, so funding can diverge between the CEX and on-chain book and be harvested directly.
+- [[cash-and-carry]] — Binance spot MET plus a short USD-margined/HL perp captures basis and positive funding on a token whose ~91%-of-cap daily turnover keeps funding lively.
+- [[funding-rate-harvest]] — elevated positive funding during MET's speculative launchpad-driven runs pays shorts a carry that can be systematically collected.
+- [[crowded-long-funding-fade]] — sharp weekly rips into extreme-fear tape (F&G 23) crowd longs; fade overheated funding/OI once momentum stalls.
+- [[liquidation-cascade-fade]] — high leverage (~40-50x) plus thin off-peak depth makes MET prone to liquidation cascades that overshoot and mean-revert.
+- [[breakout-and-retest]] — MET's Solana-launch narrative produces clean volatility breakouts; entering on the retest filters false starts on this high-beta name.
+
+### Volatility & regime character
+
+MET is a **high-beta Solana DeFi / launchpad-infrastructure token** with strong memecoin-cycle reflexivity — much of its volume and volatility is driven by the high-velocity Solana token-launch ecosystem it provides liquidity for. It behaves as a risk-on, high-beta alt: it tends to amplify BTC/ETH beta on the upside and downside, while also carrying idiosyncratic, Solana-ecosystem-specific swings (it can decouple and outperform, as in its ~+34% weekly move against a bearish tape). Expect wide realized-volatility ranges and momentum-driven turnover far exceeding a typical large-cap.
+
+### Risk flags
+
+- **Dilution / emissions** — only ~53% of supply circulates (MC/FDV ~0.53); ~47% unlock overhang can pressure price and distort perp funding around vesting events.
+- **Narrative dependence** — much of the volume is tied to cyclical Solana memecoin/launch activity; that flow is fickle and can evaporate.
+- **Perp funding dislocations** — crowded longs during launch-driven rips can spike funding and set up squeeze/cascade risk, especially at high leverage.
+- **Liquidity/venue concentration** — despite two-venue perps, on-book depth thins quickly on volatile moves; large orders move price and stops can slip.
+- **Solana network risk** — Solana congestion or outages directly impair the underlying protocol and can gap the token.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MET` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MET` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MET&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MET&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MET"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

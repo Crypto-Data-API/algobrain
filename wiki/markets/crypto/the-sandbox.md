@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["SAND"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.sandbox.game/en/"
-related: ["[[animoca-brands]]", "[[apecoin]]", "[[crypto-markets]]", "[[decentraland]]", "[[ethereum]]", "[[gaming-tokens]]", "[[metaverse]]", "[[nft]]", "[[polygon]]"]
+related: ["[[animoca-brands]]", "[[apecoin]]", "[[crypto-markets]]", "[[decentraland]]", "[[ethereum]]", "[[gaming-tokens]]", "[[metaverse]]", "[[nft]]", "[[polygon]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # The Sandbox
@@ -225,6 +225,48 @@ SAND and [[decentraland|MANA]] remain the two reference "metaverse" tokens; both
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** SAND is a deep, liquid two-venue derivatives name. It trades on **[[binance|Binance]]** (SAND/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid]]** (SAND-PERP, with leverage up to roughly 40-50x). Binance carries the bulk of centralized spot and perp depth and sets the reference price, while Hyperliquid provides transparent on-chain [[funding-rate|funding]], [[open-interest]], and L2 book data. Having a mid-cap alt live on both a top CEX and the leading on-chain perp venue means tight spreads for normal size and a clean cross-venue basis to trade, but book depth still thins beyond modest clip sizes — position sizing should respect that liquidity concentrates on Binance and Upbit (KRW), and that on-chain depth is shallower on the tail.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — SAND perps tend to carry persistently slightly-negative-to-flat funding in a bear regime, letting a delta-neutral book collect the spread between spot and the SAND-PERP.
+- [[hl-vs-cex-funding-divergence]] — with SAND live on both Binance and Hyperliquid, funding can diverge between the CEX perp and SAND-PERP, creating a two-venue relative-funding trade.
+- [[cash-and-carry]] — clean ~89%-circulating supply and deep spot on Binance make it straightforward to hold spot SAND against a short perp to capture basis/funding carry.
+- [[oi-confirmed-trend]] — SAND [[open-interest]] spikes around metaverse-narrative or [[animoca-brands|Animoca]] catalysts; OI expansion confirming a directional move filters real trends from thin relief bounces.
+- [[liquidation-cascade-fade]] — as a high-beta small-cap, SAND overshoots on forced deleveraging, so fading liquidation-driven wicks back toward VWAP is a recurring edge.
+- [[narrative-trading]] — SAND is a pure metaverse/GameFi narrative proxy; positioning around revival hype, brand/IP announcements, and MANA-correlated flows is central to trading it.
+
+**Volatility & regime character.** SAND is a **high-beta metaverse/GameFi altcoin** with pronounced narrative reflexivity — it rallies hard on metaverse/NFT hype and deflates faster than majors in risk-off tape (currently ~99% below its 2021 ATH). It carries strong positive beta to [[bitcoin]]/[[ethereum]] and trades as a correlated narrative proxy alongside [[decentraland|MANA]] and other Web3-gaming tokens, amplifying broad-market moves in both directions.
+
+**Risk flags.**
+- **Liquidity/venue concentration** — depth clusters on Binance and Upbit (KRW); Hyperliquid and DEX books thin quickly, so large exits move price and slippage rises fast in stress.
+- **Narrative dependence** — without a sustained metaverse/GameFi revival, organic demand is weak and price is largely an option on the next hype cycle.
+- **Emissions/supply** — most dilution is behind it (~89% circulating, fixed 3B cap), but ecosystem-fund and play-to-earn/staking issuance still adds gradual sell pressure.
+- **Perp funding dislocations** — thin OI means funding can swing sharply during squeezes, whipsawing crowded [[funding-rate|funding]] and carry positions.
+- **Regulatory** — SAND appears on CoinGecko's "Alleged SEC Securities" tag, a standing US regulatory overhang for launchpad-distributed tokens.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SAND` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SAND` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SAND&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SAND&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SAND"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

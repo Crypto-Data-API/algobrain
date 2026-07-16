@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, defi, nft]
+tags: [ai-trading, crypto, defi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["RENDER", "RNDR", "Render Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://renderfoundation.com"
-related: ["[[ai-narrative-arc]]", "[[artificial-intelligence]]", "[[artificial-superintelligence-alliance]]", "[[bittensor]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[nvidia]]", "[[solana]]"]
+related: ["[[ai-narrative-arc]]", "[[artificial-intelligence]]", "[[artificial-superintelligence-alliance]]", "[[bittensor]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[nvidia]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[cash-and-carry]]"]
 ---
 
 # Render
@@ -351,6 +351,54 @@ DePIN tokens trade as a sector — when one rallies on news, others tend to foll
 - **Solana dependency** — network outages or congestion on [[solana]] impair operations and payments.
 - **Liquidity thinning** — ~$45M/day volume widens slippage and amplifies moves in stressed markets.
 - **Emission/BME mechanics** — in low-usage regimes net minting can add mild supply pressure.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RENDER is a deep, liquid two-venue derivatives market. It trades on **[[binance|Binance]]** (RENDER/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** (RENDER-PERP, leverage up to ~40-50x). Binance anchors spot price discovery and the deepest USDT-denominated order book, while Hyperliquid provides transparent on-chain perp depth, mark price and funding. The two-venue structure supports meaningful position sizing without the slippage seen in thin single-venue alts, but book depth still thins beyond mid-size clips during low-volume, bear-market sessions — scale entries and lean on limit orders rather than large market fills. Availability of both a CEX perp and an on-chain perp is what makes cross-venue funding and basis expressions practical here.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — RENDER perp funding swings hard with the AI narrative (longs paying in rallies, negative in washouts), so systematically collecting the dominant funding side is a repeatable carry on this high-beta name.
+- [[hl-vs-cex-funding-divergence]] — with an active perp on both Hyperliquid and Binance, funding often diverges between venues; long the cheaper-funding leg / short the richer one to capture the spread.
+- [[cash-and-carry]] — deep Binance spot plus a USD-margined perp lets you hold spot RENDER against a short perp to harvest positive basis when the AI-narrative crowd pays up for leverage.
+- [[crowded-long-funding-fade]] — ahead of [[nvidia|NVIDIA]] earnings and major model launches, RENDER longs crowd and funding turns sharply positive; fading over-extended longs into rich funding is a recurring edge.
+- [[liquidation-cascade-fade]] — as a ~1.5-2x BTC-beta AI proxy, RENDER produces violent liquidation flushes on broad crypto drawdowns; fading capitulation wicks after forced selling is a defined setup.
+- [[momentum-investing]] — RENDER leads the [[depin|DePIN]]/AI-compute basket and trends cleanly on narrative rotations, making trend/momentum entries effective when the AI theme is in favor.
+
+### Volatility & regime character
+
+RENDER is a **high-beta AI / [[depin|DePIN]] infrastructure alt**. It carries a genuine (not purely narrative) link to GPU-compute demand, so it trades with elevated but not memecoin-grade reflexivity — lower than pure AI-agent tokens, higher than large-cap majors. Beta to BTC/ETH runs roughly 1.5-2x on broad drawdowns, and it is unusually correlated with tradfi AI proxies ([[nvidia|NVIDIA]]) versus most crypto. Regime is narrative-driven: expansive during AI risk-on rotations, sharply de-risking when the AI theme cools or macro turns risk-off.
+
+### Risk flags
+
+- **Narrative dependence** — price is tightly coupled to the AI/DePIN narrative and to [[nvidia|NVIDIA]]/model-release headlines; theme fatigue drives outsized drawdowns (already ~87% off ATH).
+- **Liquidity concentration & thinning** — spot volume has compressed in the bear market, widening slippage on large orders; depth is concentrated in Binance and Hyperliquid.
+- **Perp funding dislocations** — funding can whip sharply positive into hyped events then flip negative on washouts; crowded-side funding is a live risk for leveraged carry.
+- **Emissions / BME supply** — in low-usage regimes the Burn-and-Mint Equilibrium net-mints, adding mild supply pressure; monitor the ~519M circulating vs ~644M max gap.
+- **Venue / chain dependency** — Solana-native settlement means Solana congestion or outages can impair operations, and cross-venue basis assumes both perp venues stay liquid.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=RENDER` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=RENDER` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=RENDER&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=RENDER&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=RENDER"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

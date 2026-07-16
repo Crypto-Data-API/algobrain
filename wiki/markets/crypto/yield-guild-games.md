@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, hyperliquid, perpetual-futures, funding-rate, derivatives, liquidations]
 aliases: ["YGG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://yieldguild.io/"
-related: ["[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[nft]]", "[[play-to-earn]]", "[[staking]]"]
+related: ["[[crypto-markets]]", "[[dao]]", "[[ethereum]]", "[[gamefi]]", "[[governance-token]]", "[[nft]]", "[[play-to-earn]]", "[[staking]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[narrative-trading]]"]
 ---
 
 # Yield Guild Games
@@ -215,6 +215,61 @@ Key risks:
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+YGG trades on **both** [[hyperliquid|Hyperliquid]] and Binance, making it a genuine two-venue market despite its small ~$21M market cap:
+
+- **Binance** — spot (YGG/USDT) plus a USD-margined perpetual, giving deep centralized order-book liquidity and the tightest reference price.
+- **[[hyperliquid|Hyperliquid]]** — the **YGG-PERP** perpetual with leverage up to ~40-50x, offering on-chain depth and an independent funding stream.
+
+Dual venue availability means a clean spot leg (Binance) can be paired against a perp leg (either venue), and the same underlying trades against two separate funding markets — the structural precondition for cash-and-carry and cross-venue funding trades. Practically, however, YGG is still a low-float small-cap: order-book depth thins quickly beyond modest size, so slippage and market impact govern position sizing more than nominal leverage. Size to the shallower of the two books, not to the max leverage on offer.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — capture perp funding on a token whose GameFi-narrative flushes routinely tip funding to one extreme.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid YGG-PERP and Binance perp funding can drift apart; take the richer side, pay the cheaper.
+- [[cash-and-carry]] — hold Binance spot YGG against a short perp to harvest positive basis while staying delta-neutral.
+- [[liquidation-cascade-fade]] — thin float plus up-to-50x leverage produces sharp liquidation wicks that overshoot and revert, offering fade entries.
+- [[crowded-long-funding-fade]] — GameFi rallies attract crowded leveraged longs; extreme positive funding flags fade/short setups.
+- [[narrative-trading]] — YGG is a high-beta proxy for GameFi/play-to-earn sentiment, so trades key off narrative rotation rather than fundamentals.
+
+### Volatility & regime character
+
+YGG is a **high-beta small-cap altcoin** and a concentrated **GameFi / [[play-to-earn]] narrative** proxy. It carries positive but noisy beta to BTC/ETH — it participates in broad risk-on rallies but amplifies drawdowns, and it moves far more on GameFi-sector sentiment than on macro crypto beta. With a low float and a small market cap, realized volatility is elevated and reflexive: modest flows drive outsized percentage moves in both directions, and rallies/dumps tend to cluster around narrative catalysts rather than trending steadily.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — a ~$21M-cap small-cap; depth is thin and slippage-prone, so real capacity is well below headline leverage.
+- **Token unlocks / emissions** — circulating supply (~731M) sits below the 1B max; residual unlocks and emissions are a standing sell-pressure overhang.
+- **Narrative dependence** — price is dominated by GameFi/play-to-earn sentiment, which remains depressed; catalysts are sector-driven and can reverse sharply.
+- **Treasury / NFT asset risk** — the guild balance sheet holds game NFTs whose mark-to-market value can fall with the underlying games, feeding token weakness.
+- **Perp funding dislocations** — on a thin two-venue market, funding can spike and whipsaw during liquidation events, punishing carry/basis positions that are not sized for gaps.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=YGG` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=YGG` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=YGG&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=YGG&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=YGG"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, nft]
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins, ethereum]
 aliases: ["ENS"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://ens.domains/"
-related: ["[[base]]", "[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[governance-token]]", "[[hyperliquid]]", "[[the-graph]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[decentralized-identity]]", "[[ethereum]]", "[[governance-token]]", "[[hyperliquid]]", "[[the-graph]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Ethereum Name Service
@@ -262,6 +262,52 @@ ENS is deployed on the Ethereum main network and on several test networks. If yo
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ENS is tradable on **both [[hyperliquid|Hyperliquid]] and Binance**: Binance lists it for spot (ENS/USDT) plus a USD-margined perpetual, and Hyperliquid runs **ENS-PERP** with leverage up to roughly **40-50x**. This makes ENS a genuine two-venue derivatives market rather than a single-exchange thin listing — order-book depth is respectable relative to its mid-cap size, and the presence of a large CEX (Binance) alongside an on-chain perp DEX (Hyperliquid) means execution can be split across venues and funding/mark can be arbitraged between them. Practically, the dual-venue setup supports moderate position sizing with tighter slippage than a Hyperliquid-only alt, but ENS is still a ~#181 mid-cap: size into the visible [[hyperliquid]] L2 book and stagger entries rather than sweeping, since depth thins quickly beyond the top few levels during volatility.
+
+**Applicable strategies**
+
+- [[hl-vs-cex-funding-divergence]] — ENS trades on both Binance perps and Hyperliquid ENS-PERP, so funding can diverge between the two venues and be harvested delta-neutral.
+- [[funding-rate-harvest]] — a liquid two-venue perp with recurring funding lets you collect carry by holding the perp against spot when funding is persistently one-sided.
+- [[cash-and-carry]] — Binance spot plus the USD-margined perp allows a classic long-spot / short-perp basis capture on ENS.
+- [[liquidation-cascade-fade]] — a deep-bear governance token pinned just above its ATL is prone to stop-driven flushes that overshoot and snap back, favoring fading forced-selling extremes.
+- [[oi-confirmed-trend]] — cross-checking ENS-PERP open interest against price helps separate genuine trend moves from thin, unsupported squeezes.
+- [[range-mean-reversion]] — with ENS compressed near multi-year lows in a low-conviction regime, mean-reversion around the established $4-5 range trades well until a regime break.
+
+**Volatility & regime character** — ENS is a **high-beta DeFi / decentralized-identity infrastructure token** (governance-only, NFT-adjacent). It behaves as a risk-on alt with strong beta to [[ethereum|ETH]] and, more broadly, [[bitcoin|BTC]] risk sentiment — it sells off hard in fear regimes and rallies with Web3/identity-narrative revivals. Realized volatility is elevated versus large caps, and Korean retail flow (Upbit KRW) can amplify intraday swings. Currently it trades in a compressed, deeply drawn-down range near its all-time low, so vol is regime-dependent: quiet in the range, sharp on breaks.
+
+**Risk flags**
+
+- **Venue/liquidity concentration** — while two-venue, most derivatives depth still concentrates in a handful of exchanges; Hyperliquid ENS-PERP depth thins fast beyond top levels.
+- **Supply overhang** — ~60% of the 100M max supply is not yet circulating (DAO treasury, contributors, foundation vesting), a standing forward-dilution risk.
+- **Narrative dependence** — value is a governance claim on the DAO treasury/registration fees, not direct cash flow; price leans heavily on Web3-identity narrative and bull-market name demand.
+- **Perp funding dislocations** — thin mid-cap perps can see funding spikes and squeezes; monitor [[funding-rate|funding]] and open interest for crowded positioning near the ATL.
+- **Demand cyclicality** — `.eth` registration demand is highly correlated to speculative bull phases, so revenue and sentiment fade sharply in bear regimes.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ENS` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ENS` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ENS&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ENS&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ENS"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

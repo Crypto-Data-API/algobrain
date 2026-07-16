@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto]
+tags: [ai-trading, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins]
 aliases: ["IO", "io.net"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://io.net"
-related: ["[[ai-trading]]", "[[crypto-markets]]", "[[depin]]", "[[hyperliquid]]", "[[solana]]"]
+related: ["[[ai-trading]]", "[[crypto-markets]]", "[[depin]]", "[[hyperliquid]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[oi-confirmed-trend]]"]
 ---
 
 # io.net
@@ -254,6 +254,47 @@ io.net the world’s largest decentralized computing network that allows machine
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — IO is a genuine two-venue derivatives name, tradable on **both** Binance (spot IO/USDT plus a USD-margined perpetual) and **Hyperliquid** (IO-PERP, leverage up to ~40-50x). That combination gives it a deep, liquid market relative to its ~#396 cap: a Binance Launchpool origin seeded CEX order books from day one, while the on-chain HL perp adds transparent, readable funding/OI and L2 depth. Practically, the dual venue means you can execute size on Binance for spot/carry legs and lean on Hyperliquid for high-leverage directional or funding trades, but depth still thins quickly for a sub-$100M-cap alt — size positions to the shallower book and expect meaningful slippage on aggressive market orders. Cross-venue availability also opens spot-perp and CEX-vs-DEX relative-value legs that spot-only peers cannot support.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — IO perps frequently print persistent (often negative) funding, so systematically collecting the funding leg while hedging spot is a recurring edge on this name.
+- [[hl-vs-cex-funding-divergence]] — with active perps on both Hyperliquid and Binance, funding can dislocate between the two venues, creating a market-neutral harvest of the spread.
+- [[cash-and-carry]] — deep Binance spot plus a USD-margined perp lets you lock the basis (long spot / short perp) on a token whose leverage-driven perp trades rich or cheap to spot.
+- [[crypto-spot-perp-futures-triangle]] — spot on Binance/Orca alongside two perp venues supports a spot-perp triangle to capture pricing gaps across the three legs.
+- [[oi-confirmed-trend]] — OI spikes around unlocks and AI/DePIN catalysts; requiring open-interest confirmation filters real trends from thin squeezes in this high-beta tape.
+- [[liquidation-cascade-fade]] — high leverage on a low-float alt makes IO prone to liquidation-driven flushes, and fading exhausted cascades back toward the base is a repeatable setup.
+
+**Volatility & regime character** — IO is a **high-beta AI/DePIN infrastructure alt** with pronounced reflexivity: low circulating float (~44% of max supply), a durable narrative, and leverage produce outsized swings relative to its cap. It trades largely as a risk-on beta to BTC/ETH — amplifying up-moves in AI-token rallies and drawing down hard in risk-off, extreme-fear regimes — with additional idiosyncratic sensitivity to unlock schedules and AI-compute headlines rather than moving purely with majors.
+
+**Risk flags**
+- **Liquidity/venue concentration** — despite two venues, absolute depth is modest for a sub-$100M-cap token; large orders move the book and cross-venue liquidity can fragment in stress.
+- **Token unlocks/emissions** — ~56% of max supply still to release; scheduled unlocks are a structural supply overhang and a recurring catalyst for OI/funding shifts.
+- **Narrative dependence** — price leans heavily on the AI/DePIN-compute story and token-demand-capture question; narrative fatigue or weak compute-revenue accrual can compress it independent of BTC.
+- **Perp funding dislocations & liquidation risk** — persistent negative funding signals crowded positioning, and high leverage on a thin float makes IO prone to sharp, liquidation-driven cascades, especially in extreme-fear/established-bear regimes.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=IO` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=IO` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=IO&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=IO&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=IO"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

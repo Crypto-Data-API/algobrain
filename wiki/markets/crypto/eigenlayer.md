@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, restaking]
+tags: [ai-trading, crypto, restaking, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins, ethereum]
 aliases: ["EIGEN", "EigenCloud", "EigenLayer"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.eigencloud.xyz/"
-related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[hyperliquid]]", "[[lagrange]]", "[[proof-of-stake]]", "[[restaking]]", "[[ritual-network]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[hyperliquid]]", "[[lagrange]]", "[[proof-of-stake]]", "[[restaking]]", "[[ritual-network]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # EigenCloud (prev. EigenLayer)
@@ -239,6 +239,48 @@ EigenCloud is a developer platform that makes any app onchain or offchain provab
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — EIGEN is a genuine two-venue market: it trades on **[[hyperliquid]]** as EIGEN-PERP (up to ~40-50x leverage) and on **Binance** as both spot (EIGEN/USDT) and a USD-margined perpetual, alongside secondary CEX spot listings (Kraken, Bitget, KuCoin, Crypto.com) and on-chain Uniswap V3 depth. This gives EIGEN deep, liquid order books on both the CEX and the on-chain-perp side — deeper and tighter than most rank ~179 alts. The dual-venue structure supports cross-venue execution and arbitrage: large size can be worked across Binance and Hyperliquid to minimize impact, and the presence of Binance spot + perp enables clean cash-and-carry and spot-perp basis construction rather than perp-only exposure. Practically, position sizing should still respect that EIGEN is a mid-cap alt where a fast directional squeeze can thin depth and widen spreads on the smaller venue.
+
+**Applicable strategies**
+- [[cash-and-carry]] — Binance spot + USD-margined perp plus Hyperliquid EIGEN-PERP let you hold spot EIGEN and short the perp to harvest basis/funding on a token whose funding swings hard during squeezes.
+- [[funding-rate-harvest]] — sharply positive funding into a +34% week (as in the June relief rally) is a recurring pattern in EIGEN; collecting funding while delta-hedged monetizes crowded-long episodes.
+- [[hl-vs-cex-funding-divergence]] — with liquid perps on both Hyperliquid and Binance, funding can dislocate between the two venues, offering a market-neutral spread to capture.
+- [[crowded-long-funding-fade]] — EIGEN's high-turnover momentum squeezes (~65% of cap traded in a day) frequently over-extend long positioning, making funding-confirmed long crowding a fade setup.
+- [[liquidation-cascade-fade]] — a thin mid-cap with high leverage available produces sharp liquidation flushes; fading capitulation wicks near the April-2026-style lows is a defined-risk mean-reversion.
+- [[breakout-and-retest]] — EIGEN moves in violent directional bursts off compressed bases (relief rally off ATL), so breakout-and-retest captures the impulse leg while defining invalidation on the retest.
+
+**Volatility & regime character** — EIGEN is a **high-beta infrastructure/restaking alt** with a strong [[decentralized-ai]]/verifiable-compute narrative overlay. As an Ethereum-security-extension token it carries elevated **ETH beta** (and broad BTC beta), amplifying market moves rather than dampening them: it printed a ~65% single-day turnover, +34% week idiosyncratic squeeze off its all-time low while the broad market sat in "extreme fear." Expect wide realized volatility, reflexive momentum, and sharp mean-reversion after crowded moves rather than steady trending behavior.
+
+**Risk flags**
+- **Unlock / emissions overhang** — ~60% of supply still locked (team, investor, ecosystem) with no hard max supply; scheduled vesting is a persistent structural sell-side headwind for shorts to note and longs to fear.
+- **Narrative dependence** — valuation leans on the restaking + verifiable-AI thesis actually generating AVS fee revenue, which remains modest relative to TVL; sentiment shifts drive outsized moves.
+- **Perp funding dislocations** — fast squeezes push funding and OI to extremes quickly; funding is best read as a crowding/confirmation signal, not a directional driver.
+- **Venue/liquidity concentration** — despite two-venue depth, most perp liquidity concentrates on Binance and Hyperliquid; a squeeze can thin the smaller book and widen slippage on large size.
+- **Drawdown regime** — still deep below ATH within an established bear market, so counter-trend rallies can reverse violently.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=EIGEN` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=EIGEN` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=EIGEN&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=EIGEN&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=EIGEN"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

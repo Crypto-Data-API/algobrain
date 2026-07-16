@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["STG"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://stargate.finance/"
-related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[layerzero]]", "[[smart-contract-risk]]"]
+related: ["[[cross-chain-bridge]]", "[[crypto-markets]]", "[[ethereum]]", "[[layerzero]]", "[[smart-contract-risk]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Stargate Finance
@@ -227,6 +227,46 @@ Bridges are a top exploit vector in crypto (Ronin, Wormhole, Nomad and others lo
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed. The token's sharp -17.07% weekly drawdown as of 2026-06-22 is noted under market data.*
 
 ---
+
+## Trading Profile
+
+**Venues & liquidity.** STG is a genuine two-venue market: it trades on **Binance** (STG/USDT spot plus a **USD-margined perpetual**) and on **Hyperliquid** as **STG-PERP** (leverage up to roughly **40-50x**). Having both a deep CEX order book and an on-chain perp gives the asset real, liquid depth for a sub-$30M-cap token and makes two-legged execution (spot-vs-perp, or CEX-perp-vs-HL-perp) practical rather than theoretical. Because STG is still a small-cap, the Hyperliquid book thins out quickly on size and funding can swing hard when directional flow crowds in — so position sizing should respect L2 depth on both venues, and large clips are best worked across both books rather than swept on one. The dual availability is the main structural advantage: it lets funding and basis dislocations between Binance and Hyperliquid be arbitraged, and lets you route/net exposure to the venue with better depth at any moment.
+
+**Applicable strategies:**
+- [[funding-rate-harvest]] — a liquid two-venue STG-PERP lets you collect funding when the perp trades at a persistent premium/discount to spot, delta-hedged against the Binance spot leg.
+- [[hl-vs-cex-funding-divergence]] — STG runs perps on both Hyperliquid and Binance, so funding rates on the two venues can diverge and be captured directly (long the cheaper-funded leg, short the richer one).
+- [[cash-and-carry]] — with Binance spot plus a USD-margined perp, STG supports a clean carry trade: hold spot, short the perp, and harvest the basis/funding on a small-cap where the spread can run wide.
+- [[crowded-long-funding-fade]] — STG's low float and narrative-driven pumps produce crowded longs and richly positive funding; fading that crowding is a repeatable setup on this token.
+- [[token-unlock-supply-event]] — circulating supply sits far below the 1B max, so emissions/unlock events are a recurring, tradable supply-shock catalyst for STG.
+- [[liquidation-cascade-fade]] — thin small-cap depth plus up-to-50x leverage on STG-PERP makes liquidation cascades sharp and self-reversing, a classic fade opportunity.
+
+**Volatility & regime character.** STG is a **small-cap DeFi / cross-chain-bridge infrastructure token** with high-beta-alt behavior: it amplifies BTC/ETH moves on the downside (note the -17% weekly drawdown during the bear regime) and is additionally driven by its own idiosyncratic factors — bridge-sector sentiment, LayerZero-ecosystem news, and real bridging volume. Directional beta to BTC/ETH is high in risk-off tape, but the low float and DeFi-narrative sensitivity give it a large idiosyncratic, reflexive component that can decouple from majors on protocol-specific catalysts.
+
+**Risk flags:**
+- **Liquidity / venue concentration** — most tradable depth sits on Binance and Hyperliquid; on a sub-$30M-cap token, thin books mean slippage and gap risk on size, and a single-venue outage or delisting would materially impair exits.
+- **Token unlocks / emissions** — circulating supply is far below max supply; scheduled emissions and unlocks are a structural, recurring source of sell pressure independent of protocol performance.
+- **Narrative dependence** — price is tightly coupled to bridge-sector sentiment and the LayerZero ecosystem; a hack elsewhere in bridges or negative LayerZero news can hit STG regardless of fundamentals.
+- **Perp funding dislocations** — low float plus high leverage on STG-PERP make funding volatile; crowded positioning can drive extreme funding and force liquidation cascades that whipsaw both venues.
+- **Protocol / bridge tail risk** — as a bridge governance token, STG carries the sector's smart-contract and verifier-trust exploit risk, which can produce sudden, gap-down repricing that no funding or basis hedge fully protects.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=STG` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=STG` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=STG&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=STG&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=STG"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

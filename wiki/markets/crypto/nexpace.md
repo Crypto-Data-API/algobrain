@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, gamefi, nft]
+tags: [crypto, gamefi, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["MapleStory N", "NXPC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://msu.io/"
-related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[non-fungible-token]]"]
+related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[non-fungible-token]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[cash-and-carry]]"]
 ---
 
 # Nexpace
@@ -222,6 +222,53 @@ Among gaming/IP small-caps here, NXPC stands out for its genuine AAA-publisher b
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NXPC is tradable across **both** major venue types: [[binance|Binance]] (NXPC/USDT spot plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**NXPC-PERP**, up to ~40-50x leverage), with additional CEX perps on Bitget. This is a deep, genuinely two-venue derivatives market — on-chain Hyperliquid depth sits alongside centralized order books, so a trader can source liquidity on either side and route around venue-specific outages or funding dislocations. In practice the two-venue setup lets you short the structural unlock overhang without borrowing spot, and it opens cross-venue basis/funding plays between the HL perp and Binance's perp. That said, absolute depth is still tier-appropriate (small-cap gaming L1, ~322 rank) and a meaningful share of spot flow originates from Korean retail (Upbit), so size positions to the thinner book and expect slippage to widen in stressed tape. High leverage availability makes tight liquidation clusters a real execution consideration.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — the dual-venue perp market (Binance + Hyperliquid) makes it practical to collect funding when speculative bursts push NXPC funding persistently positive or negative.
+- [[hl-vs-cex-funding-divergence]] — with an NXPC-PERP on Hyperliquid quoted against Binance's USD-margined perp, funding can diverge between venues, creating a market-neutral harvest.
+- [[cash-and-carry]] — long Binance spot against a short perp captures basis while sidestepping the ~71% locked-supply overhang that pressures outright longs.
+- [[token-unlock-supply-event]] — with only ~29% of max supply circulating, scheduled team/investor/ecosystem unlocks are a recurring, tradable supply catalyst.
+- [[liquidation-cascade-fade]] — high leverage (~40-50x) on a thin, high-beta gaming token produces sharp liquidation flushes that mean-revert, offering fade entries after forced selling.
+- [[oi-confirmed-trend]] — pairing open-interest changes with price helps separate real directional moves from thin-book squeezes on this low-float name.
+
+### Volatility & regime character
+
+NXPC is a **high-beta GameFi / NFT gaming L1** (own Avalanche L1) with pronounced reflexivity: it behaves like a leveraged bet on both the broad risk-on/risk-off crypto cycle *and* MapleStory N's live-retention narrative. Realized volatility runs well above large-caps, and drawdowns are severe (the token is down heavily from its 2025 high). Directionally it carries positive but noisy correlation to [[bitcoin|BTC]]/[[ethereum|ETH]] beta — it tends to fall harder than the majors in fear regimes and rally sharply on narrative/liquidity upswings. Korean-retail (Upbit) flow adds an idiosyncratic, time-zone-driven volatility overlay on top of the underlying crypto beta.
+
+### Risk flags
+
+- **Structural unlock overhang** — only ~29% of max supply circulating means years of team/investor/ecosystem emissions; unlocks are the dominant supply risk and a persistent source of sell pressure.
+- **Narrative dependence** — value hinges on MapleStory N retention converting legacy players into on-chain users; a GameFi-style fade post-launch is the key bear case.
+- **Liquidity / venue concentration** — tier-appropriate absolute depth plus heavy Upbit-driven spot flow makes NXPC sensitive to Korean retail sentiment and hard to exit cleanly in size.
+- **Perp funding dislocations & high leverage** — ~40-50x availability and speculative funding swings raise liquidation-cascade risk; funding can flip sharply between venues.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=NXPC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=NXPC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=NXPC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=NXPC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=NXPC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

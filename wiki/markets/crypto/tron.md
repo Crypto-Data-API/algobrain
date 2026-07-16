@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, stablecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["TRX", "Tron Network"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://tron.network"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[stablecoins]]", "[[tether]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[proof-of-stake]]", "[[stablecoins]]", "[[tether]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # TRON
@@ -252,6 +252,54 @@ TRON competes primarily with [[ethereum|Ethereum]] (and, increasingly, [[solana|
 - **Regulatory** — stablecoin and securities rulings.
 
 > **Risk warning:** Crypto assets are highly volatile and speculative. Nothing here is investment advice. TRX's stability is contingent on continued Tether/USDT settlement demand.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+TRX is a **deep, liquid two-venue market**. It trades on **[[binance]]** as both a spot pair (TRX/USDT) and a **USD-margined perpetual**, and on **[[hyperliquid]]** as **TRX-PERP** (leverage up to ~40-50x). The dual-venue footprint — a large-cap CEX with the deepest book alongside an on-chain perp DEX — means tight spreads, ample depth for institutional-size clips, and a clean cross-venue basis to arbitrage. For execution, the practical implication is that funding, mark, and depth can be sourced from either venue: sizing can be scaled up on Binance for the largest orders while Hyperliquid offers transparent on-chain OI/funding and a directly observable [[funding-rate|funding]] print for cross-venue plays. Because TRX is a top-10 name rather than a thin alt, slippage on the perp is modest and stop placement is reliable even during fast moves.
+
+### Applicable strategies
+
+- **[[cash-and-carry]]** — With TRX quoted as both Binance spot and USD-margined perp, a long-spot / short-perp carry captures the perp basis cleanly on a top-10 name with low borrow friction.
+- **[[funding-rate-harvest]]** — TRX perps typically show **calmer, more mean-reverting [[funding-rate|funding]]** than high-beta alts, making steady funding-collection viable with lower blow-up risk from funding spikes.
+- **[[hl-vs-cex-funding-divergence]]** — The Binance-vs-Hyperliquid funding spread on TRX-PERP is directly observable and harvestable, given the same underlying trades on both venues.
+- **[[range-mean-reversion]]** — TRX's low-beta, stablecoin-demand-anchored behavior produces extended range-bound regimes ideal for fading extremes rather than chasing trend.
+- **[[oi-confirmed-trend]]** — Rising [[open-interest]] alongside price on Hyperliquid confirms genuine participation in TRX's occasional narrative-driven breakouts (USDT-share milestones, Tron Inc. news).
+- **[[token-unlock-supply-event]]** — TRX has **no unlock cliffs** (MC/FDV ≈ 1.0), so its net supply is driven by fee-burn vs issuance; the strategy applies inversely — the *absence* of overhang is a durable structural tailwind to lean on.
+
+### Volatility & regime character
+
+TRX is a **large-cap infra / stablecoin-settlement token**, not a memecoin or high-beta reflexive alt. Its defining trait is **low beta** to the broader alt complex: because its fundamental demand is tied to (relatively sticky) USDT payment throughput rather than speculative risk appetite, it decorrelates from BTC/ETH beta in drawdowns and tends to be a **relative-strength / risk-off outperformer**. Realized volatility is structurally lower than SOL-style alts; regimes tend to be range-bound with occasional narrative-driven repricings around USDT-chain-share milestones.
+
+### Risk flags
+
+- **USDT / single-narrative concentration** — TRX is effectively a levered claim on Tether settlement volume; a USDT depeg, regulatory shock, or migration to [[ethereum]]/[[solana]] rails hits the token directly.
+- **Founder / headline risk** — Justin Sun's ventures and past SEC actions inject idiosyncratic, non-technical volatility that can override chart structure.
+- **Regulatory** — US stablecoin legislation and securities rulings are double-edged catalysts for the settlement-rail thesis.
+- **Perp funding dislocations** — while usually calm, TRX funding can spike around headline events; cross-venue funding gaps and OI crowding should be monitored before carry/harvest sizing.
+- **Centralization** — a 27-SR validator set concentrates governance risk relative to larger PoS sets.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=TRX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=TRX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=TRX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=TRX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=TRX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

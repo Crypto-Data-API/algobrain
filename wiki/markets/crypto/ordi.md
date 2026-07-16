@@ -4,11 +4,11 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, nft]
+tags: [bitcoin, crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins]
 aliases: ["ORDI", "ORDI token"]
 entity_type: protocol
 headquarters: "Decentralized"
-related: ["[[bitcoin-ordinals]]", "[[bitcoin]]", "[[brc-20]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[runes]]"]
+related: ["[[bitcoin-ordinals]]", "[[bitcoin]]", "[[brc-20]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[runes]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[narrative-trading]]"]
 ---
 
 # ORDI Token
@@ -230,6 +230,56 @@ Like other inscription-era assets, ORDI has no cash flow and is best framed refl
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ORDI trades as a deep, liquid two-venue market. On **Binance** it has both a spot pair (ORDI/USDT) and a USD-margined perpetual, making Binance the primary price-discovery and depth anchor. On **[[hyperliquid|Hyperliquid]]** the ORDI-PERP offers up to ~40-50x leverage with fully on-chain execution and a transparent order book. The dual-venue structure lets traders route large tickets across CEX and DEX books, run spot-vs-perp and cross-venue strategies, and lean on Binance depth for size while using Hyperliquid for leverage and on-chain settlement. Practically, deep two-sided books keep slippage manageable for moderate size, but ORDI's high turnover (~49% of cap traded daily) means aggressive orders can still move the tape during volatility spikes, so scaling in/out and venue-splitting improve fills.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — ORDI's leverage-driven flow and sentiment-sensitive funding on both Binance and Hyperliquid perps create harvestable funding when longs crowd Bitcoin-ecosystem hype.
+- [[hl-vs-cex-funding-divergence]] — with active perps on both Hyperliquid and Binance, funding can diverge between venues, letting traders capture the spread on a delta-neutral book.
+- [[cash-and-carry]] — a fully circulating, no-unlock float plus a liquid spot pair (Binance) and perps make ORDI clean for spot-long / perp-short carry when basis is positive.
+- [[liquidation-cascade-fade]] — high perp turnover and fast OI spikes on Bitcoin-ecosystem catalysts produce violent two-sided squeezes; fading over-extended cascade wicks targets the reflexive rebound.
+- [[narrative-trading]] — ORDI is the flagship BRC-20 bellwether, so its moves are driven by Ordinals/inscriptions mindshare, making narrative rotation the core directional edge.
+- [[breakout-and-retest]] — reflexive, thin-during-mania price action means ORDI trends hard once it clears range highs on rising OI, favoring breakout-and-retest entries.
+
+### Volatility & regime character
+
+ORDI is a **high-beta, memecoin-reflexive small-cap** (rank ~301) whose "utility" is narrative rather than cash flow. It behaves as a high-beta expression of the **Bitcoin ecosystem**: it tends to lead/exaggerate BTC ecosystem risk cycles, rallying hard on inscription/Ordinals hype and drawing down far more than large caps in risk-off. Correlation to BTC is meaningful (it is a Bitcoin-native asset and moves with Bitcoin block-space/fee narratives) but its beta is much greater than 1, with idiosyncratic spikes tied to BRC-20 vs [[runes|Runes]] mindshare rotation rather than ETH beta.
+
+### Risk flags
+
+- **Narrative dependence** — value rests almost entirely on Ordinals/BRC-20 hype with no cash-flow backstop; attention fragmentation to [[runes|Runes]] is a structural drag.
+- **Perp funding dislocations** — heavy leverage means funding can swing sharply and OI can spike fast on Bitcoin-ecosystem catalysts, producing brutal squeezes in both directions.
+- **Liquidity/venue concentration** — although two-venue, most depth concentrates on Binance; a listing/policy change or venue outage can thin the book quickly.
+- **Bitcoin-block-space sensitivity** — BRC-20 mint/transfer activity competes for block space and rises/falls with fee markets, adding an exogenous driver.
+- **Small-cap beta** — a ~#301 speculative token amplifies broad crypto risk-off, with drawdowns that dwarf large-cap moves.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ORDI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ORDI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ORDI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ORDI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ORDI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins, bitcoin, ethereum]
 aliases: ["FIL", "Filecoin Network"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized"
 website: "https://filecoin.io/"
-related: ["[[artificial-intelligence]]", "[[arweave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]"]
+related: ["[[artificial-intelligence]]", "[[arweave]]", "[[bitcoin]]", "[[crypto-markets]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
 ---
 
 # Filecoin
@@ -310,6 +310,47 @@ Filecoin's edge: scale, FVM programmability, and proof-secured persistence. Its 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** FIL trades on **both** [[binance|Binance]] (FIL/USDT spot plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**FIL-PERP**, leverage up to ~40-50x). This is a deep, liquid two-venue market: long-listed CEX spot depth on Binance, Kraken, Bitget, KuCoin and Crypto.com sits alongside on-chain perp depth on Hyperliquid. Dual venue availability means tight spreads and reliable fills for size, and it opens direct CEX-vs-DEX execution — funding and mark can be compared across Binance and Hyperliquid, letting traders route the leg with the better price and size positions against the deeper book rather than being captive to a single venue.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — FIL-PERP on Hyperliquid and the Binance USD-margined perp both quote continuous funding, so funding can dislocate between the two venues on the same asset; harvest the spread.
+- [[cash-and-carry]] — deep Binance spot plus a liquid perp lets you hold FIL spot against a short perp to capture basis/positive funding with low execution slippage.
+- [[funding-rate-harvest]] — mature two-venue funding market on a mid-cap alt; collect funding while delta-hedged when the perp trades rich or cheap to spot.
+- [[liquidation-cascade-fade]] — FIL's -99%+ ATH drawdown and thin conviction make it prone to leverage-driven capitulation wicks; fade forced-liquidation spikes back toward the range.
+- [[mean-reversion]] — clean long listed-history technicals and a fresh ATL base make FIL a mean-reversion candidate off extreme-fear washouts.
+- [[narrative-trading]] — FIL is the large-cap [[depin|DePIN]]/decentralized-storage proxy; trade the storage/AI-data narrative rotation and its BTC/ETH beta.
+
+**Volatility & regime character.** FIL is a **high-beta mid-cap infrastructure altcoin** (DePIN / decentralized-storage L1), not a large-cap store-of-value or a memecoin. It carries strong positive beta to [[bitcoin]] and [[ethereum]] — it tends to amplify broad-market moves on the downside in bear regimes and lags on relief rallies — while also catching idiosyncratic beta from the DePIN and AI-infrastructure narrative baskets (trades alongside [[arweave|Arweave]], Render, Akash). Realized volatility is elevated and reflexive around narrative catalysts and index rebalances.
+
+**Risk flags.**
+- **Emission / dilution overhang** — MC/FDV ~0.40; ongoing baseline block-reward emission tied to storage power keeps supply elastic even though the heaviest 2017-ICO vesting is behind it.
+- **Narrative dependence** — price hinges on the DePIN / AI-data storage thesis; weak paid-demand metrics or a basket rotation out of DePIN can drag FIL regardless of network health.
+- **Structurally weak price psychology** — one of the worst ATH drawdowns among majors (-99%+) with a fresh ATL, which can extend downside momentum and trap mean-reversion entries.
+- **Perp funding dislocations** — the two-venue perp market can see funding spikes and CEX-vs-DEX divergence during capitulation, a risk to naked longs/shorts but the raw material for the funding strategies above.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=FIL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=FIL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=FIL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=FIL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=FIL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

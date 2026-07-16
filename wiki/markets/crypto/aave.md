@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum, stablecoins]
 aliases: ["AAVE", "Aave Protocol", "ETHLend"]
 entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (Aave Labs: London, UK)"
 website: "https://aave.com/"
-related: ["[[ai-finance]]", "[[arbitrum]]", "[[artificial-intelligence]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defai]]", "[[defi]]", "[[ethena]]", "[[ethereum]]", "[[gho]]", "[[hyperliquid]]", "[[layer-2]]", "[[ml-defi-risk-models]]", "[[morpho]]", "[[sky]]", "[[stablecoins]]"]
+related: ["[[ai-finance]]", "[[arbitrum]]", "[[artificial-intelligence]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defai]]", "[[defi]]", "[[ethena]]", "[[ethereum]]", "[[funding-rate]]", "[[gho]]", "[[hyperliquid]]", "[[layer-2]]", "[[ml-defi-risk-models]]", "[[morpho]]", "[[perpetual-futures]]", "[[cross-sectional-relative-value]]", "[[funding-rate-harvest]]", "[[sky]]", "[[stablecoins]]"]
 ---
 
 # Aave
@@ -364,6 +364,57 @@ Aave's moat is liquidity depth and the network effect of being the default DeFi 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AAVE trades on **both** [[binance|Binance]] (deep AAVE/USDT spot plus a USD-margined AAVE perpetual) and [[hyperliquid|Hyperliquid]] (AAVE-PERP, up to ~40–50x leverage). This is a genuine two-venue, two-sided market: a top-tier CEX order book for spot/hedging and an on-chain perp with transparent funding and OI. Depth is solid for a mid-cap DeFi blue chip — the ~$100–200M daily volume supports mid-size positions with modest slippage, though it is thinner than BTC/ETH, so large clips should be worked (limit/VWAP) rather than swept. The dual-venue structure enables clean CEX-vs-DEX execution: hedge or leg into positions on Binance while capturing Hyperliquid funding, and it makes spot-vs-perp and cross-venue basis structures practical. Size to the *shallower* book (usually Hyperliquid), and watch single-venue OI concentration, which can amplify squeezes in either direction.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — AAVE perp funding flips positive on DeFi-narrative rallies; harvest the carry by holding spot and shorting the richly-funded perp.
+- [[hl-vs-cex-funding-divergence]] — funding on Hyperliquid AAVE-PERP and Binance's USD-margined perp can diverge; trade the spread between the two venues.
+- [[cash-and-carry]] — AAVE's deep spot on Binance plus a liquid perp makes a clean long-spot / short-perp carry when basis is positive.
+- [[crowded-long-funding-fade]] — persistently rich funding with a flat AAVE spot price is the classic over-crowded-long tell to fade.
+- [[oi-confirmed-trend]] — AAVE trends (buyback-driven bids, DeFi rotations) are more reliable when rising open interest confirms the move.
+- [[cross-sectional-relative-value]] — trade AAVE against the DeFi-lending basket ([[compound-governance-token|COMP]], [[morpho|MORPHO]], [[sky|SKY]]) to isolate relative strength.
+
+### Volatility & regime character
+
+AAVE is a **high-beta DeFi infrastructure / lending token**, not a memecoin — it moves with the DeFi-fundamentals basket and carries strong beta to [[ethereum|ETH]] (and BTC risk-on/off). It tends to lead on relief bounces (real cash flows, buyback bid) but still gets dragged in broad risk-off legs. Its own borrow rates and utilization are a live gauge of on-chain leverage, so AAVE volatility often coincides with system-wide DeFi deleveraging. Expect elevated realized vol versus large caps and regime-dependent correlation that tightens toward ETH in stress.
+
+### Risk flags
+
+- **Venue/OI concentration** — a liquid but mid-cap perp; single-venue open-interest build-ups can drive squeezes and funding dislocations in both directions.
+- **Narrative dependence** — price is tied to the DeFi-fundamentals rotation; when flow favors memecoins or majors, AAVE can lag despite strong fundamentals.
+- **Perp funding dislocations** — funding can turn sharply rich (or negative) around narrative swings, punishing late crowded positioning.
+- **Fundamental / protocol tail risk** — smart-contract, oracle, bad-debt/Safety-Module slashing and [[gho|GHO]] depeg events can gap the token independent of the broad tape.
+- **Revenue cyclicality** — a deep DeFi downturn compresses fees and can force the DAO to slow the structural buyback bid.
+- **Regulatory** — evolving US/EU/UK rules on yield-bearing DeFi and stablecoins remain a headline-driven overhang.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AAVE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AAVE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AAVE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AAVE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AAVE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

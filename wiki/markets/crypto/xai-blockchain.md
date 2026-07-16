@@ -3,13 +3,13 @@ title: "Xai"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto, nft]
+status: review
+tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins, derivatives]
 aliases: ["XAI"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://xai.games/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[breakout-trading]]"]
 ---
 
 # Xai
@@ -129,6 +129,55 @@ Xai was developed to enable real economies and open trade in the next generation
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+XAI trades on **both Binance** (XAI/USDT spot plus a USD-margined perpetual) and **Hyperliquid** (XAI-PERP, leverage up to roughly 40-50x). This makes it a genuine two-venue market rather than a single-DEX listing, giving reasonable order-book depth for a rank ~974 gaming altcoin. The dual listing supports cross-venue execution: traders can route spot on Binance, hold perp exposure on either venue, and compare funding/basis across the two books. Depth is still thin in absolute terms versus large caps, so size positions to the visible top-of-book, use limit/maker orders where possible, and expect slippage on market fills during volatile sessions. High Hyperliquid leverage amplifies both liquidation risk and the value of tight execution.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — capture funding differentials on XAI-PERP by holding an offsetting spot/perp leg across Binance and Hyperliquid.
+- [[hl-vs-cex-funding-divergence]] — exploit funding gaps between Hyperliquid XAI-PERP and the Binance USD-margined perp on the same underlying.
+- [[cash-and-carry]] — pair long Binance XAI spot against a short perp to harvest positive basis on a thin, funding-sensitive alt.
+- [[liquidation-cascade-fade]] — fade over-extended liquidation wicks in a low-float gaming token where high-leverage perp flushes overshoot.
+- [[breakout-trading]] — trade range breaks driven by GameFi narrative or Xai-network catalysts, common in beta-heavy small caps.
+- [[token-unlock-supply-event]] — position around scheduled XAI emissions/unlocks (max supply above circulating) that can pressure price.
+
+### Volatility & regime character
+
+XAI is a **high-beta gaming/GameFi (Layer-3 on Arbitrum) altcoin** with a small market cap and low float, so it exhibits sharp, reflexive moves. It is strongly correlated to broad BTC/ETH risk appetite (elevated beta to majors on both up- and down-legs) and additionally sensitive to the GameFi/NFT narrative cycle. Expect amplified drawdowns in risk-off regimes and outsized rallies when small-cap alt beta and gaming sentiment turn positive.
+
+### Risk flags
+
+- **Liquidity/venue concentration** — depth is modest; the tradable perp market is concentrated on Binance and Hyperliquid, so a venue outage or delisting materially affects execution.
+- **Token unlocks/emissions** — circulating supply sits below total and max supply, leaving future unlock/emission overhang that can dilute holders.
+- **Narrative dependence** — price leans heavily on the GameFi/NFT and Arbitrum-L3 narratives; sentiment reversals hit fast.
+- **Perp funding dislocations** — thin liquidity plus high leverage can produce funding spikes and liquidation cascades that overshoot fair value.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=XAI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=XAI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=XAI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=XAI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=XAI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

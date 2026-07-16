@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, derivatives]
+tags: [crypto, derivatives, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins, ethereum]
 aliases: ["MANTA", "Manta"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://manta.network/"
-related: ["[[celestia]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[modular-blockchains]]", "[[zero-knowledge-proofs]]"]
+related: ["[[celestia]]", "[[crypto-markets]]", "[[ethereum]]", "[[layer-2]]", "[[modular-blockchains]]", "[[zero-knowledge-proofs]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Manta Network
@@ -123,6 +123,54 @@ MANTA's ~$38M market cap against an ~$81M FDV prices in a small-cap, dilution-bu
 - **Macro/regime:** high-beta L2 token in an **extreme fear / Established Bear Market** environment ([[fear-and-greed-index|F&G]] 23, 2026-06-21) — prone to sharp drawdowns and perp liquidation cascades.
 
 > Cryptocurrency is highly volatile and speculative. Nothing here is financial advice. Always verify live data before trading.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MANTA is a **two-venue derivatives market**: it trades on [[binance|Binance]] (spot MANTA/USDT plus a USD-margined perpetual) and on [[hyperliquid|Hyperliquid]] as **MANTA-PERP** with leverage up to ~40-50x. Having both a deep CEX book and an on-chain perp gives reasonably reliable two-sided depth for a ~$30-38M-cap token, so entries and exits are cleaner than for single-venue microcaps. That said, MANTA is still a small-cap L2 — order-book depth thins quickly beyond modest size, so scale into positions and use limit orders. The dual-venue structure is the enabler for **CEX-vs-DEX** plays: funding, basis, and mark price can diverge between Binance and Hyperliquid, and traders can route the spot/hedge leg to whichever venue offers better depth at the moment.
+
+### Applicable strategies
+
+- [[funding-rate-arbitrage]] — with the same perp listed on both Binance and Hyperliquid, funding differentials between the two venues can be harvested delta-neutral.
+- [[hl-vs-cex-funding-divergence]] — MANTA's Hyperliquid MANTA-PERP funding often dislocates from the Binance perp, especially around thin-liquidity moves and unlock positioning.
+- [[cash-and-carry]] — long spot MANTA on Binance against a short perp captures basis/positive funding when longs crowd in ahead of narrative catalysts.
+- [[token-unlock-supply-event]] — with ~53% of supply still to unlock, scheduled MANTA emissions are a recurring, calendar-driven event to position around.
+- [[liquidation-cascade-fade]] — thin perp OI means MANTA is prone to sharp liquidation flushes; fading capitulation wicks back toward the mean is a repeatable setup.
+- [[oi-confirmed-trend]] — pairing rising open interest with directional moves helps separate genuine MANTA trends from thin-book squeezes.
+
+### Volatility & regime character
+
+MANTA is a **high-beta modular ZK / Ethereum [[layer-2|L2]] token** — a small-cap infra/rollup name that amplifies broad crypto risk-on/risk-off swings. It carries strong positive beta to [[bitcoin|BTC]] and especially [[ethereum|ETH]] (as an ETH-scaling L2, it tends to trade with the L2/ZK sector) and shows sharp, reflexive moves in both directions during narrative rotations. In an extreme-fear / bear regime it drifts and flushes with the alt complex; in risk-on rotations into L2/modular narratives it can rally faster than large caps.
+
+### Risk flags
+
+- **Dilution / unlock overhang** — MC/FDV ~0.47-0.48; scheduled unlocks add structural sell pressure and can drive persistently negative funding as traders pre-hedge.
+- **Small-cap liquidity** — depth thins fast beyond modest size on both venues; slippage and gap risk are real, and thin OI makes liquidation cascades common.
+- **Narrative dependence** — value is levered to L2/ZK/modular sentiment and Manta Pacific adoption; sector de-rating hits MANTA hard.
+- **Perp funding dislocations** — Binance-vs-Hyperliquid funding and basis can diverge quickly around unlocks and thin-liquidity moves; verify live funding/OI before sizing.
+- **Systemic dependencies** — reliance on [[celestia|Celestia]] DA and external proving stacks adds tail risk beyond MANTA itself.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MANTA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MANTA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MANTA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MANTA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MANTA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

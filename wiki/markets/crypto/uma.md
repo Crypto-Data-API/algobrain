@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, oracle]
+tags: [crypto, defi, oracle, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins, derivatives]
 aliases: ["UMA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://uma.xyz/"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-disputes]]", "[[pyth-network]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[oracle-disputes]]", "[[pyth-network]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # UMA
@@ -126,6 +126,50 @@ UMA trades at a ~$38M market cap and a low MC/FDV (~0.70) with no aggressive emi
 - **Concentration / dependency risk** — A large share of UMA's relevance is tied to [[polymarket]] and prediction-market volume; a downturn in that vertical would weigh on demand.
 - **Liquidity risk** — ~$5.6M daily volume is thin; the [[hyperliquid]] perp can see outsized funding/price swings.
 - **Macro / regime risk** — In an extreme-fear, established-bear backdrop ([[crypto-fear-and-greed-index|Fear & Greed]] 23), low-cap infrastructure tokens tend to underperform and suffer liquidity drought.
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** UMA is tradable on **both** [[binance]] and [[hyperliquid]], a comparatively rare two-venue setup for a ~#584-rank token. Binance offers **spot** (UMA/USDT) and a **USD-margined perpetual**, while Hyperliquid lists **UMA-PERP** with leverage up to ~40-50x. This gives genuine cross-venue price discovery and a deeper, more contestable book than a single-venue microcap — but the underlying spot tape is still thin (~$2.5-5M/day on a ~$34-38M cap). The practical upshot: two liquid perp venues make funding/basis and cross-exchange plays feasible, yet absolute depth remains shallow, so size fills in slices, expect slippage beyond a few tens of thousands of dollars, and use limit orders rather than market sweeps.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — UMA-PERP on Hyperliquid vs the Binance USD-margined perp routinely price funding differently on a low-cap this size; harvest the spread between the two venues.
+- [[funding-rate-harvest]] — thin OI makes UMA funding swing to persistent extremes, letting a delta-hedged position collect carry when the perp trades rich or cheap to spot.
+- [[cash-and-carry]] — with Binance spot plus a Binance/Hyperliquid perp, long spot against short perp captures basis when the perp runs at a premium.
+- [[cross-exchange-arbitrage]] — dual perp venues plus multiple spot listings (Binance, Kraken, KuCoin) create exploitable price gaps during the illiquid, fast-moving hours typical of a microcap.
+- [[liquidation-cascade-fade]] — shallow depth means clustered stops and leverage flushes overshoot hard; fading the wick after a forced-liquidation spike is a recurring setup here.
+- [[range-mean-reversion]] — outside of narrative catalysts UMA chops in wide, low-volume ranges, favoring reversion to a mean over directional trend-holding.
+
+**Volatility & regime character.** UMA is a **low-cap DeFi / oracle-infrastructure token** (~#584) with high-beta-alt behavior: it is thin, reflexive, and prone to sharp squeezes on light volume, yet it is not a memecoin — moves are increasingly tied to a specific fundamental narrative (prediction-market resolution / [[polymarket]]). Broadly it carries positive [[bitcoin|BTC]]/[[ethereum|ETH]] beta and tends to underperform in risk-off regimes ([[crypto-fear-and-greed-index|Fear & Greed]] extremes), but idiosyncratic catalysts (a major OO integration, a high-profile Polymarket dispute) can fully decouple it from broad-market beta for days.
+
+**Risk flags.**
+- **Liquidity / depth concentration** — despite two perp venues, the real spot float is small; OI and funding are tiny and can swing violently, and perp price can dislocate from spot in volatility.
+- **Narrative dependence** — a large share of UMA's demand thesis is tied to [[polymarket]] and prediction-market volume; a downturn in that vertical, or a contentious dispute outcome, moves the token sharply.
+- **Perp funding dislocations** — low OI on both venues means funding can spike and stay pinned, and the Hyperliquid-vs-Binance funding gap can invert quickly; verify live before carrying.
+- **Uncapped/governance-mintable supply** — the DVM can mint UMA; issuance is slow and governed, but it is a structural overhang rather than a fixed-cap token.
+- **Microcap tail risk** — venue delisting, thin-book gap moves, and stop-cascade wicks are outsized relative to a large-cap; size accordingly.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=UMA` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=UMA` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=UMA&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=UMA&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=UMA"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

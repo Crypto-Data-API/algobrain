@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["ARB", "Arbitrum One", "Offchain Labs"]
 entity_type: protocol
 founded: 2021
 headquarters: "Decentralized (developer: Offchain Labs, New York)"
 website: "https://arbitrum.io/"
-related: ["[[aave]]", "[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[gmx]]", "[[hyperliquid]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[mantle]]", "[[optimism]]", "[[polygon]]", "[[real-world-assets]]", "[[robinhood]]", "[[token-unlocks]]", "[[uniswap]]"]
+related: ["[[aave]]", "[[arbitrum]]", "[[base]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[gmx]]", "[[hyperliquid]]", "[[l1-l2-rotation]]", "[[layer-2]]", "[[mantle]]", "[[optimism]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[pairs-trading]]", "[[polygon]]", "[[real-world-assets]]", "[[robinhood]]", "[[token-unlocks]]", "[[uniswap]]"]
 ---
 
 # Arbitrum
@@ -352,6 +352,54 @@ ARB's edge is incumbency: the deepest general-purpose L2 ecosystem and the marqu
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ARB is a deep, liquid two-venue derivatives market. It trades on **both [[binance|Binance]]** (ARB/USDT spot plus a USD-margined perpetual) and **[[hyperliquid|Hyperliquid]]** (ARB-PERP, up to ~40-50x leverage). This dual-venue availability means execution can be split across a large centralized book (Binance) and the on-chain HL book, tightening effective spreads and letting size scale into the market without single-venue slippage. Order-book depth is solid for a rank-~96 alt — thinner than the majors, so tactical sizing and limit-based entries beat aggressive market orders in the risk-off tape. The presence of the same asset on a CEX perp and an on-chain perp opens venue-relative funding and basis expressions (see below); it also makes the L2-sector short thesis easy to express with leverage on either venue.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — ARB perps live on both Binance and Hyperliquid, so funding-rate gaps between the CEX and HL books are directly harvestable.
+- [[funding-rate-harvest]] — ARB perp funding has skewed neutral-to-negative through the bear; systematically collecting funding on the paid side is a repeatable carry on a liquid alt perp.
+- [[crowded-short-funding-fade]] — persistent negative funding (shorts pay) on ARB flags crowded shorts, setting up squeeze fades into buyback/Robinhood catalysts.
+- [[token-unlock-supply-event]] — ARB's calendar-known monthly cliff unlocks (~92.65M ARB) are tradable, pre-scheduled supply events tailor-made for unlock positioning.
+- [[cash-and-carry]] — with liquid ARB spot (Binance/Uniswap) and USD-margined perps, long-spot / short-perp carry captures basis when funding runs positive.
+- [[pairs-trading]] — ARB/OP and ARB/ETH are the canonical L2 relative-value pairs; ARB's TVS leadership vs weak value capture drives the spread.
+
+### Volatility & regime character
+
+ARB is a **high-beta Ethereum L2 / DeFi-infrastructure governance token**. It trades as the liquid proxy for the L2 sector and moves with ETH and broad alt risk sentiment, amplified to the downside because it is a pure-governance token with a heavy dilution overhang. Correlation to [[ethereum|ETH]] is high (it is an Ethereum-ecosystem asset), and it is a high-beta expression of BTC/ETH direction: it lags on bounces (governance-only tokens underperform cash-flow tokens like [[aave|AAVE]]) and leads on drawdowns. In the current Established Bear Market / extreme-fear regime, ARB's beta to risk-off is elevated, and it can grind lower on supply pressure even when network metrics are strong.
+
+### Risk flags
+
+- **Dilution / token unlocks** — MC/FDV ~0.64 means ~36% of supply is still locked; monthly cliff unlocks impose calendar-known sell pressure ([[token-unlocks]]).
+- **Weak value capture** — sequencer/Timeboost revenue accrues to the DAO, not holders, so the token can persistently lag the network; narrative-dependent re-rating (buyback/fee-switch/Robinhood Chain).
+- **Narrative dependence** — price hinges on L2-sector sentiment and Robinhood/tokenized-equities headlines rather than fundamentals.
+- **Perp funding dislocations** — persistent negative funding can flip violently into positive catalysts, causing squeezes; leveraged shorts are exposed on either venue.
+- **Liquidity / venue concentration** — deep but not major-tier; spot volume thins in risk-off tape, so slippage rises for aggressive sizing despite the two-venue book.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ARB` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ARB` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ARB&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ARB&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ARB"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

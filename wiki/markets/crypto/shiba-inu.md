@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, ethereum]
+tags: [altcoins, crypto, ethereum, memecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["SHIB", "SHIB Army", "Shibarium"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized (anonymous founder 'Ryoshi')"
 website: "https://shibatoken.com/"
-related: ["[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[official-trump]]"]
+related: ["[[crypto-markets]]", "[[dogecoin]]", "[[ethereum]]", "[[official-trump]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Shiba Inu
@@ -339,6 +339,50 @@ Relative to DOGE, SHIB carries **more ecosystem ambition** (its own L2/L3) but *
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** SHIB trades on **both** [[binance|Binance]] (deep spot books plus a USD-margined [[perpetual-futures|perp]]) and **[[hyperliquid|Hyperliquid]]** (SHIB-PERP, listed as `kSHIB`, up to ~40-50x leverage). This is a deep, liquid two-venue market: CEX spot/perp depth on Binance anchors price discovery, while Hyperliquid adds a fully on-chain perp with its own [[funding-rate|funding]] and [[open-interest|OI]] print. The two-venue structure means execution can be split across CEX and DEX-perp books, sizing is comfortable for retail-scale positions, and cross-venue funding/basis dislocations are directly tradable rather than theoretical. Because SHIB is priced in tiny fractions of a cent, perps quote in the `kSHIB` (1,000-SHIB) unit — account for that when sizing and reading depth.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — SHIB's dual Binance/Hyperliquid perp listing lets you harvest funding spreads when the two venues' rates diverge during meme-rotation spikes.
+- [[funding-rate-harvest]] — high-beta meme perps run persistently skewed funding in mania phases; collect the carry while delta-hedging spot vs perp.
+- [[cash-and-carry]] — deep Binance spot plus a USD-margined perp make a long-spot / short-perp basis capture clean to execute on SHIB.
+- [[liquidation-cascade-fade]] — SHIB's high-beta retail float produces sharp long/short liquidation flushes; fading the overshoot into deep two-venue liquidity is a repeatable setup.
+- [[crowded-long-funding-fade]] — when burn-spike or ETF-headline euphoria stacks crowded longs and funding rips positive, fading the exhaustion is a classic meme play.
+- [[narrative-trading]] — SHIB is a pure retail-sentiment proxy; burn-rate spikes, Shibarium/L3 milestones and "SHIB ETF" headlines drive tradable rotation.
+
+**Volatility & regime character.** SHIB is a **large-cap [[meme-coin|memecoin]]** and one of the two benchmark meme assets (with [[dogecoin]]) — a high-beta, reflexive retail-sentiment instrument with implied/realized volatility well above the majors. It carries elevated beta to BTC/ETH risk-on/risk-off but amplifies it: it outperforms late in risk-on phases and bleeds first and hardest in chop and bear regimes. Intra-meme, it tends to lag DOGE up and lead DOGE down, and rotates with the broader meme basket (PEPE, BONK, [[official-trump|TRUMP]]).
+
+**Risk flags.**
+- **Narrative/sentiment dependence** — no cash flows; price is set by retail attention and [[meme-coin]] rotation, so trends reverse abruptly when the meme bid fades.
+- **Perp funding dislocations** — funding can flip sharply in meme-rotation phases and diverge between Binance and Hyperliquid, cutting both ways on carry trades.
+- **Liquidity concentration in drawdowns** — high-beta retail float means two-sided depth thins in fear regimes exactly when you want to exit, raising slippage and gap risk.
+- **Infinite supply / burn narrative** — uncapped supply; burns are a sentiment signal, not a supply squeeze, so there is no [[bitcoin]]-style scarcity backstop.
+- **Ecosystem-infrastructure risk** — the September 2025 Shibarium bridge hack shows L2/bridge exploits can crater BONE and bleed into SHIB.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=kSHIB` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=kSHIB` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=kSHIB&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=kSHIB&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=kSHIB"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

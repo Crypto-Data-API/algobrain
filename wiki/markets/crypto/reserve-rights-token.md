@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, stablecoins, ethereum]
 aliases: ["RSR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://reserve.org/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[stablecoin]]", "[[perpetual-futures]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Reserve Rights
@@ -288,6 +288,56 @@ Matt Elder, on the other hand, is an experienced engineer who previously worked 
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+RSR is a genuine two-venue market. It trades as **spot** on [[binance|Binance]] (plus Kraken, Upbit, Bitget, KuCoin, Crypto.com) and as a **USD-margined perpetual** on Binance, while [[hyperliquid|Hyperliquid]] lists **RSR-PERP** with leverage up to ~40-50x. Having both a deep CEX spot/perp book and an on-chain perp gives RSR relatively **liquid, cross-venue depth** for a rank-~308 token — enough to support both directional and market-neutral positioning. Execution note: the token is **sub-cent** (~$0.0012), so quotes move in tiny tick increments and effective spread/[[slippage]] matters more than headline price; size against the thinner of the two books and split large orders across Binance and Hyperliquid to limit impact. The dual-venue structure is what makes CEX-vs-DEX funding and basis trades practical here rather than purely theoretical.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — RSR runs on both Binance perp and Hyperliquid RSR-PERP, so funding can diverge between the two venues; harvest the spread by going long the cheaper-funding leg and short the richer one.
+- [[cash-and-carry]] — deep Binance spot lets you hold spot RSR against a short perp to capture positive funding/basis on a small-cap that periodically funds rich on narrative spikes.
+- [[funding-rate-harvest]] — a low-priced, retail-driven alt like RSR can sustain skewed funding around RWA/stablecoin momentum, rewarding a delta-neutral funding-collection posture.
+- [[liquidation-cascade-fade]] — thin sub-cent depth plus up-to-50x leverage on Hyperliquid makes RSR prone to sharp liquidation flushes that overshoot and mean-revert, fadeable back toward pre-cascade levels.
+- [[oi-confirmed-trend]] — pairing [[open-interest]] expansion with price on RSR helps distinguish real, fresh-money trends from thin-liquidity noise before committing directional risk.
+- [[range-mean-reversion]] — trading near its all-time low with no dominant trend, RSR frequently chops in wide sub-cent ranges that suit disciplined mean-reversion entries.
+
+### Volatility & regime character
+
+RSR is a **high-beta small-cap DeFi/RWA-infrastructure token** (stablecoin-factory + Real World Assets narrative), not a large-cap or memecoin. It carries strong **positive beta to BTC/ETH** — it sells off hard in risk-off regimes (currently near its all-time low in an Established Bear Market) and rallies disproportionately when broad alt risk appetite returns. On top of market beta it has **idiosyncratic narrative volatility** tied to stablecoin-sector and RWA-tokenization headlines and to RToken adoption. The sub-cent price amplifies percentage swings on small dollar moves.
+
+### Risk flags
+
+- **Venue/liquidity concentration** — real depth is concentrated on Binance and Hyperliquid; away from those, spot books thin quickly, raising slippage and gap risk for larger size.
+- **Supply overhang** — ~37% of the 100B max supply is not yet circulating (much in a slow wallet); ongoing entry into float is a structural dilution/emission headwind.
+- **Narrative dependence** — the thesis is a leveraged call on RToken/RWA/stablecoin adoption; if that narrative stalls, RSR can derate independent of the broader tape.
+- **Perp funding dislocations** — low price, high available leverage, and thin depth make RSR-PERP funding and [[open-interest]] spiky and prone to sharp [[liquidations|liquidation]] cascades.
+- **Depeg / regulatory** — RSR is backstop capital for RTokens; a collateral depeg impairs RSR demand, and stablecoins/RWAs face intense, evolving regulatory scrutiny.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=RSR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=RSR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=RSR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=RSR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=RSR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

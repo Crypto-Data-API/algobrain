@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 aliases: ["DOT", "Polkadot Network"]
 entity_type: protocol
 founded: 2020
 headquarters: "Decentralized (Web3 Foundation: Zug, Switzerland; Parity Technologies)"
 website: "https://polkadot.com/"
-related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[gavin-wood]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[staking]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[gavin-wood]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[staking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[pairs-trading]]"]
 ---
 
 # Polkadot
@@ -310,6 +310,56 @@ Polkadot competes with other **interop/shared-security** platforms (Cosmos, [[et
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+DOT is a **two-venue liquid market**: tradable on **[[binance]]** (deep DOT/USDT spot plus a **USD-margined perpetual**) and on **[[hyperliquid]]** (**DOT-PERP**, up to ~40-50x leverage). Binance provides the primary spot and stablecoin-margined perp depth used for hedging and cash-and-carry; Hyperliquid supplies transparent on-chain funding, mark, and L2 depth. Because two liquid derivatives venues quote the same asset, **execution and sizing benefit from split routing** (spread limit orders across both books rather than sweeping one), and the pair enables **CEX-vs-DEX funding and basis** trades. That said, DOT is a sub-$2B, rank-~55 alt: order-book depth is **thin relative to the majors**, so large clips move price and funding can swing sharply — size positions to the shallower of the two books and expect wider slippage than BTC/ETH.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — long Binance spot DOT versus short the USD-margined perp to harvest positive basis; two liquid venues make the hedge clean.
+- [[funding-rate-harvest]] — collect perp funding on DOT-PERP; small-cap alt funding is more volatile than majors, offering richer (if noisier) carry.
+- [[hl-vs-cex-funding-divergence]] — arbitrage funding gaps between Hyperliquid DOT-PERP and Binance's perp, which diverge more on thinly-traded alts.
+- [[liquidation-cascade-fade]] — DOT's thin derivatives depth means forced liquidations overshoot; fade the flush and cover into the [[post-liquidation-rebound]].
+- [[pairs-trading]] — trade DOT against same-basket old-L1 peers (ADA, ATOM, SOL) via the DOT/BTC and DOT/SOL ratios traders already track for old-gen vs new-gen rotation.
+- [[oi-price-exhaustion]] — pair [[open-interest]] with price to time exhaustion in a chronically de-rated, low-float derivatives market prone to crowded positioning.
+
+### Volatility & regime character
+
+DOT is a **high-beta, large-cap "old-L1" altcoin** — an infra/interop (layer-0 shared-security) token, not a memecoin or stablecoin. It carries strong **positive beta to BTC and ETH** and typically **amplifies moves on the downside**: it is the most de-rated of the six flagships (~-98% off ATH, at fresh all-time lows) and a chronic **alt-season laggard**. Its idiosyncratic drivers — JAM upgrade progress, hard-cap issuance milestones, TDOT ETF flows — sit on top of, not instead of, broad crypto-beta. In risk-off / Extreme-Fear regimes it tends to underperform; in alt rallies it can snap higher from a compressed base.
+
+### Risk flags
+
+- **Venue / liquidity concentration** — sub-$2B cap with **thin funding/OI and shallow books**; slippage and gap risk are elevated versus majors, and depth is split across just two derivatives venues.
+- **Supply / issuance** — legacy slot-auction supply overhang plus future issuance toward the **2.1B hard cap**; staking-yield and issuance changes shift real float and sell-pressure.
+- **Narrative dependence** — the interop thesis has lost mindshare; price is heavily tied to **JAM delivery** and rotation sentiment, so headline/referendum risk is high.
+- **Perp funding dislocations** — on a low-liquidity alt, funding can spike and flip fast; crowded positioning and liquidation cascades overshoot both directions.
+- **ETF-without-demand** — TDOT access may add exit liquidity rather than organic bid if inflows stay modest.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=DOT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=DOT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=DOT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=DOT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=DOT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

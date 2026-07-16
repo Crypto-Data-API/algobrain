@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto]
+tags: [ai-trading, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["NEAR"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (NEAR Foundation: Switzerland)"
 website: "https://near.org/"
-related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[internet-computer]]", "[[layer-1-blockchains]]", "[[narrative-trading]]", "[[proof-of-stake]]", "[[sharding]]", "[[solana]]"]
+related: ["[[ai-agent-tokens]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[internet-computer]]", "[[layer-1-blockchains]]", "[[narrative-trading]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[proof-of-stake]]", "[[sharding]]", "[[solana]]", "[[momentum-rotation]]", "[[cash-and-carry]]"]
 ---
 
 # NEAR Protocol
@@ -292,6 +292,48 @@ NEAR's edge vs. its AI-narrative peer [[internet-computer|ICP]] is a cleaner, fu
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** NEAR trades on **both** major venue types: [[binance|Binance]] offers deep NEAR/USDT spot plus a USD-margined NEAR perpetual, while [[hyperliquid|Hyperliquid]] lists **NEAR-PERP** with leverage up to ~40–50x. This is a deep, liquid two-venue market — a top-40 large-cap alt with tight books on both centralized spot and on-chain perps. The dual availability supports genuine cross-venue execution: spot-plus-perp legs can be built on Binance for [[cash-and-carry]] structures, while the Binance-vs-Hyperliquid split enables funding and basis arbitrage. Liquidity is ample for normal retail-to-mid size, but sizing should still respect that NEAR is a mid-cap by absolute depth — large orders can move the tape during thin AI-narrative risk-off legs, so scale into positions and prefer limit execution around news windows.
+
+**Applicable strategies.**
+- [[funding-rate-harvest]] — NEAR perp funding swings meaningfully positive during AI-narrative bids and negative in risk-off legs, giving a delta-hedged funding-collection edge across the cycle.
+- [[hl-vs-cex-funding-divergence]] — with a liquid perp on both Hyperliquid and Binance, funding can dislocate between the on-chain and CEX venue, a clean long-one/short-other spread.
+- [[cash-and-carry]] — fully-unlocked supply and deep Binance spot let you hold spot NEAR against a short perp to capture positive basis when the AI trade is bid.
+- [[liquidation-cascade-fade]] — as a high-beta alt ~89% off its ATH, NEAR produces sharp leverage-driven flushes that overshoot and mean-revert, offering fade entries after cascades.
+- [[momentum-rotation]] — NEAR is one of the most liquid expressions of the AI L1 basket; rotate into it on relative strength versus ICP/TAO/RENDER and out on rotation.
+- [[narrative-trading]] — price is heavily driven by the AI-crypto theme and discrete ETF/roadmap catalysts, making narrative-timed entries and exits central.
+
+**Volatility & regime character.** NEAR is a **high-beta large-cap altcoin** — an AI-infrastructure / L1 token that behaves as a levered expression of broad crypto risk. It carries strong positive beta to BTC/ETH in risk-on and risk-off, but periodically **decouples** to trade on the AI-crypto narrative (with ICP, TAO, FET/ASI, RENDER) rather than pure market beta. Realized volatility is elevated versus majors; the token amplifies both AI-theme rallies and bear-market drawdowns, as its ~89% decline from the 2022 ATH illustrates.
+
+**Risk flags.**
+- **Narrative dependence** — heavy reliance on the AI-crypto theme; a cooling narrative can derate NEAR faster than fundamentals-driven peers, whipsawing momentum and funding.
+- **Perp funding dislocations** — with two liquid perp venues, funding can spike or invert sharply around ETF-decision and roadmap dates, punishing crowded one-sided positioning.
+- **Venue concentration in perps** — on-chain perp depth is concentrated on Hyperliquid; a venue-specific outage or liquidity air-pocket can distort the HL-vs-CEX basis.
+- **Catalyst/event risk** — discrete, schedulable events (SEC ETF decisions ~Sept 2026, resharding launches, AI product announcements) create gap risk around known dates.
+- **Emissions** — uncapped supply still inflates at ~2.5% annually post-halving; in low-usage regimes fee burn does not fully offset emissions, a mild structural drag.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=NEAR` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=NEAR` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=NEAR&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=NEAR&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=NEAR"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

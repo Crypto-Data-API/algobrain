@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum]
+tags: [crypto, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, defi]
 aliases: ["AZTEC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aztec.network/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[perpetual-futures]]", "[[zero-knowledge-proofs]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[perpetual-futures]]", "[[zero-knowledge-proofs]]", "[[hyperliquid]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Aztec
@@ -306,6 +306,60 @@ JP Morgan was an early institutional tester of Aztec’s technology, with its Qu
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AZTEC is a **perp-first** asset. It has a listed [[perpetual-futures|perp]] on [[hyperliquid|Hyperliquid]] (**AZTEC-PERP**, leverage up to ~40–50x), but it is **not** listed on Binance — spot access is limited to a handful of secondary/offshore venues (Kraken, Upbit, KuCoin, plus a Uniswap V3 pool), so directional flow and price discovery concentrate on the HL perp rather than on deep spot books. Practically this means:
+
+- **Execution/sizing:** book depth is thin (spot turnover has run in the low single-digit millions per day), so market orders of size will slip. Prefer limit orders, scale entries, and check [[hyperliquid|Hyperliquid]] L2 depth before sizing — the perp is the most liquid single venue but is still shallow relative to a majors book.
+- **Leverage:** the ~40–50x max is generous for a rank ~511 token; in thin books that magnifies liquidation risk, so size for the FDV overhang and volatility, not the headline leverage.
+- **Cross-venue:** because there is no Binance leg, the usual HL-vs-Binance funding/basis arbitrage is unavailable; comparisons are HL-vs-secondary-CEX/DEX spot only.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — perp-first + thin spot means positioning crowds onto the single HL book; persistently positive funding flags a crowded long to fade.
+- [[crowded-short-funding-fade]] — the symmetric case; a privacy/ZK narrative catalyst into a crowded short can force a squeeze off deeply negative funding.
+- [[funding-rate-harvest]] — with flow concentrated on one perp, funding can run rich in either direction, offering carry to a delta-hedged harvester (hedge leg via secondary spot/DEX).
+- [[liquidation-cascade-fade]] — high max leverage in a shallow book makes AZTEC cascade-prone; fading forced-liquidation flushes back toward mean is a recurring setup.
+- [[oi-price-exhaustion]] — watch HL open interest: OI spiking while price stalls flags exhausted positioning ahead of a reversal, useful given the single-venue concentration.
+- [[token-unlock-supply-event]] — MC/FDV ≈ 0.28–0.29 means large scheduled unlocks; trade the supply event (pre-positioning short / post-event mean-reversion) as a calendar catalyst.
+
+### Volatility & regime character
+
+AZTEC is a **small-cap privacy / ZK Layer-2 infrastructure token** (rank ~511), not a large-cap or a memecoin. It trades as a **high-beta alt**: it amplifies BTC/ETH direction in risk-on/risk-off swings and is especially sensitive to broad-market regime given its small cap and large FDV overhang. Idiosyncratic drivers layer on top of that beta — privacy/ZK narrative rotations, decentralization/adoption milestones, and unlock-driven supply pressure — so realized volatility can spike independent of majors. Correlation to BTC/ETH is high on the downside (sells off in risk-off) but decoupling to the upside requires a narrative or protocol catalyst.
+
+### Risk flags
+
+- **Venue concentration:** no Binance listing; liquidity and price discovery hinge on the HL perp plus thin secondary spot — a single-venue outage or delisting is an outsized risk.
+- **Dilution / unlocks:** MC/FDV ≈ 0.28–0.29 implies a large future emission/unlock schedule; unlocks landing into thin liquidity are a structural overhang.
+- **Narrative dependence:** the bull case rests on the privacy/ZK narrative and real fee/adoption traction; both are early and reflexive.
+- **Regulatory:** privacy-preserving protocols face heightened regulatory scrutiny and delisting risk in some jurisdictions — a category-specific tail.
+- **Perp funding dislocations:** thin single-venue flow lets funding and OI swing sharply; extreme funding can flag crowded positioning and precede violent unwinds. Always check live funding before leveraged exposure.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AZTEC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AZTEC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AZTEC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AZTEC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AZTEC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

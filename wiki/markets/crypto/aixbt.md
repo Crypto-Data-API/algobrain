@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, machine-learning]
+tags: [ai-trading, crypto, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins, memecoins]
 aliases: ["AIXBT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://aixbt.tech"
-related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[ai-trading-agents]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[defai]]", "[[griffain]]", "[[virtuals-protocol]]"]
+related: ["[[ai-agent-tokens]]", "[[ai-agents]]", "[[ai-trading-agents]]", "[[artificial-intelligence]]", "[[base]]", "[[crypto-markets]]", "[[defai]]", "[[griffain]]", "[[virtuals-protocol]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[narrative-trading]]"]
 ---
 
 # aixbt
@@ -259,6 +259,54 @@ AIXBT competes for a finite pool of "AI-agent" attention and capital. Relative-v
 - **2025-2026:** Steady decline as the AI-agent meta cooled. By mid-June 2026 the token traded around ~$0.022 with a market cap near ~$22.1M (rank #770, down ~97.6% from ATH), confirming the page's characterization of AIXBT as a high-beta, narrative-driven asset. The agent and project remain active. (Market data 2026-06-20; status verified via WebSearch, 2026-06-11)
 
 > As of June 2026, AIXBT is **alive but highly volatile**, trading deep below its January 2025 peak. No exploit, migration, or shutdown reported; the primary risk remains narrative decay rather than a discrete event.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AIXBT trades as a genuine two-venue derivatives market. It is listed on [[binance]] for both spot (AIXBT/USDT) and a USD-margined perpetual, and on [[hyperliquid]] as AIXBT-PERP with leverage up to roughly 40-50x. This dual availability — a deep CEX book plus an on-chain perp — makes it one of the more liquid AI-agent micro-caps to trade with leverage. Practically, the Binance spot and perp books absorb most flow and set the reference price, while the Hyperliquid perp provides a transparent, on-chain funding and open-interest signal. Because the token is still a sub-$25M cap with split cross-chain spot liquidity, depth thins out quickly beyond the top of book; size entries and exits against the perp books rather than the DEX pools, and expect real slippage on large clips. The two-venue structure enables cross-venue execution (route the same directional view to whichever book is deeper at the moment) and, importantly, HL-vs-CEX funding and basis comparisons.
+
+### Applicable strategies
+
+- [[crowded-long-funding-fade]] — AI-narrative pumps routinely stack crowded AIXBT-PERP longs; richly positive funding into a vertical move is a high-probability fade setup here.
+- [[hl-vs-cex-funding-divergence]] — with both a Binance perp and Hyperliquid AIXBT-PERP live, funding can dislocate between venues, letting you harvest the spread while staying delta-neutral.
+- [[liquidation-cascade-fade]] — thin depth plus high leverage means AIXBT sees violent liquidation flushes; fading the overshoot after a cascade exhausts is a recurring edge.
+- [[narrative-trading]] — AIXBT is a pure play on the DeFAI / AI-agent meta, so trading the narrative cycle (VIRTUAL/AI-agent sector rotation) is the primary directional thesis.
+- [[oi-price-exhaustion]] — rising open interest into a stalling price on the perp flags exhausted momentum, a useful top/bottom-fishing tell on this reflexive micro-cap.
+- [[breakout-and-retest]] — narrative ignitions produce clean range breakouts; entering on the retest filters the many false starts typical of a low-cap alt.
+
+### Volatility & regime character
+
+AIXBT is a high-beta, narrative-reflexive AI-agent / DeFAI micro-cap that trades with a strong memecoin character despite its AI wrapper (CoinGecko categorizes it as both "AI Agents" and "Meme"). Realized volatility is extreme — down ~97% from its 2025 ATH, yet capable of multi-hundred-percent rallies in days. It carries very high beta to the broader alt-risk cycle and to BTC/ETH direction (it bleeds first in risk-off and rips first in risk-on), but its dominant driver is idiosyncratic: the AI-agent meta and its structural correlation to [[virtuals-protocol|VIRTUAL]]. Regime shifts in the AI-agent narrative matter more than BTC beta on a day-to-day basis.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — sub-$25M cap with split cross-chain spot; depth is thin and large orders move price. Perp liquidity is concentrated on Binance and Hyperliquid.
+- **Narrative dependence** — price is almost entirely attention rent on the AI-agent / DeFAI meta; if the narrative decays there is minimal fundamental floor.
+- **Perp funding dislocations** — crowded leveraged positioning into narrative pumps produces funding extremes and sharp unwinds; funding is a sentiment gauge, not a free carry.
+- **Reflexive liquidation risk** — high available leverage on a thin book amplifies cascade risk in both directions.
+- **Supply note** — ~99.5% of the 1B max supply already circulates, so there is no meaningful unlock/emission overhang (a relative positive), but that also means no supply-driven floor.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AIXBT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AIXBT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AIXBT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AIXBT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AIXBT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

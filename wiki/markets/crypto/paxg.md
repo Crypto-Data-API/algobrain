@@ -3,12 +3,12 @@ title: "PAX Gold (PAXG)"
 type: entity
 created: 2026-04-06
 updated: 2026-07-16
-status: draft
-tags: [crypto, gold, paxos, stablecoin, tokenized-asset]
+status: review
+tags: [crypto, gold, paxos, stablecoin, tokenized-asset, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 entity_type: protocol
 aliases: ["PAXG", "Pax-Gold", "pax-gold"]
 website: "https://paxos.com/paxgold"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]"]
 headquarters: "Decentralized"
 ---
 
@@ -45,6 +45,54 @@ Paxos purchases physical gold and stores it in LBMA-accredited vaults. For each 
 - Price tracks physical gold spot price closely, with minor premiums/discounts driven by on-chain demand
 - PAXG-PERP on [[hyperliquid]] allows leveraged gold exposure via crypto infrastructure
 - Useful as a safe-haven allocation during [[crypto-winter|crypto bear markets]] while remaining on-chain
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PAXG is a genuine two-venue derivatives market. It trades **spot and a USD-margined perpetual on [[binance]]**, and as **PAXG-PERP on [[hyperliquid]]** with leverage up to roughly 40-50x. Binance provides deep spot/perp order books and the primary funding-rate reference, while Hyperliquid offers on-chain leverage and an independent funding curve. The dual-venue structure means execution can be split or routed to the tighter book, and cross-venue basis/funding differences are observable rather than theoretical. Because PAXG price simply tracks physical gold (XAU/USD), depth is respectable for its rank but thinner than major-cap crypto perps, so size positions with care and expect wider slippage on large clips, especially on Hyperliquid.
+
+### Applicable strategies
+
+- [[cash-and-carry]] -- long spot PAXG on Binance against a short perp captures any positive basis while the token remains 1:1 gold-backed, keeping the hedge nearly delta-neutral.
+- [[basis-trading]] -- the Binance perp and Hyperliquid PAXG-PERP each carry their own basis to gold spot, giving clean converging legs to trade.
+- [[hl-vs-cex-funding-divergence]] -- Hyperliquid and Binance funding on a low-crypto-beta gold token often diverge, letting you be long the cheaper-funding venue and short the richer one.
+- [[funding-rate-harvest]] -- gold's muted directional drift makes a delta-hedged PAXG perp position suitable for collecting funding with limited trend risk.
+- [[mean-reversion]] -- PAXG's on-chain premium/discount to physical gold tends to revert, so deviations from XAU/USD fair value are fadeable.
+- [[pairs-trading]] -- PAXG versus XAU/USD (or versus another tokenized-gold proxy) is a tight, fundamentally anchored pair for relative-value trades.
+
+### Volatility & regime character
+
+PAXG is not a crypto-beta asset -- it is a **tokenized real-world commodity** whose price is pinned to physical gold. Realized volatility is far lower than typical altcoins and it carries **low, often near-zero or negative correlation to BTC/ETH beta**, frequently behaving as a safe-haven that firms during crypto risk-off. Its regime is driven by gold macro (real yields, USD, geopolitical risk) rather than the crypto narrative cycle, making it a diversifier and hedge within a crypto book.
+
+### Risk flags
+
+- **Venue/liquidity concentration** -- meaningful perp liquidity sits on just two venues; depth is thinner than major-cap crypto, so large orders move price and Hyperliquid clips can slip.
+- **Peg/backing dependence** -- value relies on Paxos's 1:1 physical gold custody and monthly attestations; any custody, audit, or issuer/regulatory event (NYDFS-regulated) could dislocate the on-chain price from gold.
+- **Basis vs. underlying** -- the on-chain price can trade at a premium/discount to XAU/USD; hedges assuming perfect tracking bear residual basis risk.
+- **Funding dislocations** -- low crypto beta plus modest depth can produce sharp, idiosyncratic funding swings across Binance and Hyperliquid that whipsaw carry positions.
+- **Macro-driven gaps** -- price is exposed to gold macro shocks (real-rate and USD moves) that are unrelated to crypto flows.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PAXG` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PAXG` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PAXG&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PAXG&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PAXG"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

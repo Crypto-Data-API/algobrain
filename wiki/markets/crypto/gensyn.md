@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-11
 updated: 2026-07-16
 status: excellent
-tags: [ai-trading, crypto, machine-learning]
+tags: [ai-trading, crypto, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["AI", "AI (Gensyn)", "Gensyn Protocol"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.gensyn.ai/"
-related: ["[[ai-agent-tokens]]", "[[akash-network]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[io-net]]", "[[machine-learning]]", "[[model-inference-vs-training]]", "[[prime-intellect]]", "[[tokenized-compute]]"]
+related: ["[[ai-agent-tokens]]", "[[akash-network]]", "[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[io-net]]", "[[machine-learning]]", "[[model-inference-vs-training]]", "[[prime-intellect]]", "[[tokenized-compute]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[token-unlock-supply-event]]"]
 ---
 
 # Gensyn
@@ -121,6 +121,54 @@ If decentralized training works at scale, it weakens one of the structural moats
 - **Ticker/identity risk** — symbol "AI" and prior fake "GENSYN" listings make misidentification a real hazard; verify by contract.
 - **Hype-cycle + bear-market beta** — decentralized-AI/DePIN-compute is a high-beta narrative subsector; the Established Bear Market and extreme-fear (F&G ≈ 23) regime amplify downside.
 - **Thin liquidity & no hedge** — ~$6.4M daily volume moves price on size, and the absence of a deep perp market leaves holders unable to hedge directional risk.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+AI is a genuine **two-venue** perp name: it trades on **Binance** (spot plus a USD-margined perpetual) and on **Hyperliquid** as the **AI-PERP** contract with leverage up to roughly **40-50x**. Spot and perp availability on a top-tier CEX alongside an on-chain perp gives the market meaningful two-sided depth and a proper borrow/short path, so directional risk can be hedged and faded efficiently — a sharp contrast to a spot-only microcap. Practically, the Binance/Hyperliquid split lets execution be routed to whichever book is deeper at a given moment and lets size be worked across venues rather than punching through one thin order book. Even so, AI is a low-cap, low-float token: depth still thins away from mid on real size, so sizing should respect that book depth, not just headline leverage, and cross-venue basis/funding gaps are worth monitoring before large fills.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — With a Binance perp and Hyperliquid AI-PERP both live on a high-beta AI microcap, funding can run persistently rich or negative during narrative swings; collect it delta-neutral against spot.
+- [[cash-and-carry]] — Long Binance spot AI versus a short perp captures the basis on a low-float token whose perp often prices richer than deliverable spot during momentum bursts.
+- [[hl-vs-cex-funding-divergence]] — Two independent funding regimes (Hyperliquid AI-PERP vs. Binance USD-margined perp) on the same thin token routinely diverge; arb the spread.
+- [[liquidation-cascade-fade]] — Up to ~40-50x leverage on a low-cap name makes crowded books cascade violently; fading forced-liquidation flushes offers sharp mean-reversion snapbacks.
+- [[token-unlock-supply-event]] — Only ~13% of the 10B supply circulates with ~8x FDV/MC overhang; scheduled AI unlock cliffs are tradable supply shocks to position around.
+- [[oi-price-exhaustion]] — Rising open interest into a stalling price on this reflexive AI token flags exhausted late leverage and reversal risk worth trading.
+
+### Volatility & regime character
+
+AI is a **high-beta decentralized-AI / DePIN-compute infrastructure token** — a low-float, recently launched microcap whose ~79% ATH-to-ATL drawdown in six weeks illustrates its reflexivity. It trades as a leveraged expression of the broader AI-narrative subsector: strongly correlated to BTC/ETH beta on risk-on/risk-off days but amplified on the upside and downside by thin float, unlock overhang, and narrative rotation into and out of decentralized-AI names. Expect regime behavior closer to a high-beta alt than a large-cap, with sentiment toward the AI-compute theme often dominating token-specific fundamentals.
+
+### Risk flags
+
+- **Low float / unlock overhang** — ~13% circulating against a 10B max supply and ~8x FDV/MC; VC/team emissions are the dominant structural sell-side risk.
+- **Liquidity concentration** — depth is real but concentrated across two venues; large orders still slip, and a shock on either Binance or Hyperliquid propagates fast.
+- **Narrative dependence** — price tracks the decentralized-AI/DePIN-compute story; rotation out of the theme can drain bids regardless of protocol progress.
+- **Perp funding dislocations** — high leverage (~40-50x) on a thin token makes funding swing hard and liquidation cascades sharp; crowded positioning can flip funding violently.
+- **Identity/ticker risk** — the reused "AI" symbol and prior fake "GENSYN" listings mean the exact contract/perp ticker must be verified before trading.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=AI` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=AI` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=AI&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=AI&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=AI"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

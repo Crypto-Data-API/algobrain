@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, nft]
+tags: [altcoins, crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, ethereum]
 aliases: ["ILV"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://illuvium.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[immutable]]", "[[nft]]", "[[play-to-earn]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[immutable]]", "[[nft]]", "[[play-to-earn]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Illuvium
@@ -218,6 +218,50 @@ ILV governance runs through the **Illuvium DAO**, steered by the elected **Illuv
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ILV is tradable on **both** [[binance|Binance]] (spot ILV/USDT plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (ILV-PERP, up to ~40–50x leverage). This is a deep, liquid two-venue market by small-cap standards, but relative to majors the book is still moderate: at a sub-$30M market cap, notional depth thins out quickly beyond the top of book, so large clips walk the tape. The dual-venue setup is the key structural feature — a centralized spot/perp venue (Binance) alongside an on-chain perp (Hyperliquid) creates a natural axis for cross-venue basis and funding work, and lets traders route or split size to whichever side has better depth/funding at the moment. Size positions to the thinner of the two books, not the headline volume, and expect wider effective spreads and slippage during risk-off regimes.
+
+**Applicable strategies**
+
+- [[hl-vs-cex-funding-divergence]] — the Binance-perp-vs-Hyperliquid ILV-PERP pairing is a clean two-venue setup where funding can diverge; capture the spread while staying delta-neutral.
+- [[funding-rate-harvest]] — a small-cap GameFi alt like ILV frequently prints stretched funding during narrative-driven pushes; harvest it by holding the opposite side hedged with spot.
+- [[cash-and-carry]] — long Binance spot ILV against a short perp to lock the basis/funding carry, feasible because both spot and perp exist on the same venue.
+- [[liquidation-cascade-fade]] — thin books plus up-to-50x leverage make ILV prone to sharp liquidation flushes; fade the overshoot once forced selling exhausts.
+- [[oi-price-exhaustion]] — watch open interest against price on the perp: OI spiking into a stalling price on this low-float token often flags a crowded, reversal-prone move.
+- [[breakout-and-retest]] — narrative/GameFi rotations drive clean directional breaks on ILV; trade the breakout and use the retest for a defined-risk entry given the low float.
+
+**Volatility & regime character** — ILV is a **high-beta, low-float GameFi/[[nft|NFT]] infra-adjacent alt**. Its ~9.5M circulating supply makes the token unusually reflexive: modest flow moves price sharply in both directions. It carries strong positive beta to BTC/ETH (it sells off hard in broad risk-off and rallies in risk-on), but its idiosyncratic driver is the **GameFi/[[play-to-earn]] narrative** — during GameFi rotations it can decouple upward from majors, and during narrative droughts it bleeds regardless of BTC. Treat it as a high-beta alt whose amplitude exceeds its beta would suggest, thanks to the small float.
+
+**Risk flags**
+
+- **Liquidity / venue concentration** — small-cap book; two venues help but depth is still modest, so slippage and gap risk are real on size.
+- **Emissions / unlocks** — ILV supply is uncapped in design (emissions fund staking rewards); ongoing emission and vesting flows add latent sell pressure despite the tight current float.
+- **Narrative dependence** — price is tightly bound to GameFi/[[play-to-earn]] sentiment, which can evaporate for long stretches and leave the token trending down with no catalyst.
+- **Perp funding dislocations** — thin, sentiment-driven perps can push funding to extremes and trigger liquidation cascades; crowded positioning unwinds violently at high leverage.
+- **High-beta drawdown risk** — the low float that amplifies rallies equally amplifies drawdowns; position sizing and stops must account for outsized single-candle moves.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ILV` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ILV` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ILV&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ILV&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ILV"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

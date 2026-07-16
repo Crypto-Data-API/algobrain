@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["FTM", "Fantom", "S"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://soniclabs.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[fantom]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[fantom]]", "[[fear-and-greed-index]]", "[[hyperliquid]]", "[[layer-1]]", "[[proof-of-stake]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Sonic
@@ -258,6 +258,54 @@ Furthermore, the Sonic Gateway provides developers and users with seamless acces
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+S trades on **both** major venue types, which is unusual for a sub-$110M-cap alt: [[binance|Binance]] offers **spot (S/USDT)** and a **USD-margined perpetual**, while [[hyperliquid|Hyperliquid]] lists **S-PERP** with leverage up to roughly **40–50x**. This gives S a genuinely two-venue derivatives market — deep, liquid centralized order books alongside on-chain perps — rather than the single-venue thin-book profile typical of small caps. In practice: Binance depth anchors execution for larger clips and tighter spot spreads, while Hyperliquid provides transparent on-chain [[funding-rate|funding]] and [[open-interest|OI]] plus a second, independently-priced perp. The dual venue set enables true cross-venue plays (funding/basis divergence, hedged carry) and lets traders route or split size to limit slippage — but a ~$108M cap still means large market orders move price, so size relative to visible book depth on each venue.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — S is priced on both Hyperliquid S-PERP and Binance's USD-margined perp, so funding can diverge between the two venues, creating a direct market-neutral spread to harvest.
+- [[funding-rate-harvest]] — a liquid two-venue perp market with on-chain funding visibility makes systematic collection of funding on S-PERP (delta-hedged against spot) practical.
+- [[cash-and-carry]] — Binance spot plus a USD-margined perp let a trader hold spot S and short the perp to capture basis/funding as carry.
+- [[liquidation-cascade-fade]] — as a high-beta small-cap L1 at fresh lows, S is prone to leverage-driven flushes; visible Hyperliquid OI/liquidations help time fades of over-extended cascades.
+- [[breakout-and-retest]] — S's sharp trending drawdowns and reflexive relief bounces suit breakout entries confirmed on retest, with clear invalidation.
+- [[oi-confirmed-trend]] — Hyperliquid open-interest data lets traders confirm whether S moves are backed by real positioning versus thin, fade-prone squeezes.
+
+### Volatility & regime character
+
+S is a **high-beta small-cap L1 / DeFi-infrastructure token** (ex-[[fantom|Fantom]] rebrand). It exhibits strong positive correlation to broad crypto beta and amplified sensitivity to [[bitcoin|BTC]]/[[ethereum|ETH]] risk-on/risk-off swings — it tends to over-perform in alt rallies and over-shed in de-risking. At ~97% off its ATH, on fresh cycle lows, and in an "Established Bear Market" regime with the [[fear-and-greed-index|Fear & Greed Index]] in extreme fear, S trades with elevated realized volatility and pronounced downside reflexivity relative to majors.
+
+### Risk flags
+
+- **Small-cap liquidity:** ~$108M cap means large orders slip despite active turnover; depth is decent for retail-to-mid size but thin for size.
+- **Inflation/emissions:** uncapped supply with ongoing staking and incentive emissions is a structural dilution vector (no large cliff unlocks, but persistent sell pressure).
+- **Narrative dependence:** valuation hinges on FeeM-driven TVL/fee traction and Fantom-legacy retention; failure to sustain organic demand keeps S de-rated.
+- **Perp funding dislocations:** two independently-priced perps (Hyperliquid vs Binance) can dislocate during volatility — an opportunity for spread trades but a risk for one-sided leveraged positions.
+- **High beta / bear regime:** elevated downside and gap risk in risk-off conditions; leveraged longs are especially exposed during liquidation cascades.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=S` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=S` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=S&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=S&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=S"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

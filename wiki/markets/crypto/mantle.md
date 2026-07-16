@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["BitDAO", "MNT", "Mantle Network"]
 entity_type: protocol
 founded: 2023
 headquarters: "Decentralized (DAO; ex-BitDAO, Bybit-affiliated origins)"
 website: "https://group.mantle.xyz/"
-related: ["[[bybit]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[narrative-trading]]", "[[restaking]]"]
+related: ["[[bybit]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[narrative-trading]]", "[[restaking]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[pairs-trading]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Mantle
@@ -327,6 +327,56 @@ Mantle's differentiation is **not** being the biggest or fastest L2 — it is th
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+MNT is effectively a **perp-first asset for leveraged traders**: it trades as **MNT-PERP on [[hyperliquid|Hyperliquid]] (up to ~40–50x)**, which is where directional leverage and funding-driven flow concentrate, but it is **not listed on Binance** — the deepest global perp/spot venue. Spot access outside Bybit and a handful of offshore/regional venues (Kraken, Upbit KRW, KuCoin, on-chain Uniswap) is limited, so the HL perp carries an outsized share of price discovery for tactical flow. Order-book depth on the HL perp is **moderate-to-thin** relative to top-20 majors, consistent with MNT's small freely-floating supply (much of the ~6.22B is treasury-held). Practically this means: **wider slippage on size, sensitivity to single large orders, and a tendency for the perp mark to lead offshore spot**. Size positions to the thinner real float rather than headline circulating supply, use limit/scaled entries into the L2 book, and expect funding and basis to be the cleaner expression of crowding than raw spot volume. The absence of Binance also keeps a chunk of retail leverage off the table, so HL funding and OI are the primary read on positioning.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — a perp-first, thin-float alt like MNT can sustain stretched funding on the HL perp; systematically harvesting the funding carry (perp short vs offsetting exposure) monetizes crowded positioning.
+- [[hl-vs-cex-funding-divergence]] — with no Binance listing and liquidity split between Hyperliquid and Bybit-led CEX perps, MNT is a natural candidate for funding-divergence trades between the HL perp and CEX venues.
+- [[crowded-long-funding-fade]] — buyback/treasury-floor and neobank narratives periodically crowd longs into the HL perp; fading persistently positive funding captures the mean-reversion when the narrative bid fades.
+- [[oi-confirmed-trend]] — since the HL perp leads price discovery, using rising open interest to confirm MNT breakouts (and filter fake moves in the thin book) is a robust directional filter.
+- [[pairs-trading]] — MNT's tight comovement with the L2 basket (ARB/OP/STRK) makes it a clean long/short pair leg to isolate Mantle-specific catalysts (UR metrics, treasury buybacks) from beta.
+- [[liquidation-cascade-fade]] — thin float plus up-to-50x leverage on the HL perp make MNT prone to liquidation-driven overshoots; fading forced-selling flushes into support is a recurring setup in extreme-fear tape.
+
+### Volatility & regime character
+
+MNT is a **mid-cap infrastructure / L2 + DeFi-neobank token** with a **high-beta alt profile** — it broadly tracks BTC/ETH direction but amplifies drawdowns and rallies given its thin freely-floating supply (currently ~81% below its 2025 ATH in an established bear market). Its beta is anchored to the **L2 basket** (ARB, OP, STRK) and, post-UR, to **neobank/payments and RWA-adjacent narratives**, so realized correlation to ETH is high while idiosyncratic moves cluster around treasury/product catalysts. The recurring "treasury value > market cap" floor argument dampens the downside relative to pure-beta alts but is reflexive — it weakens precisely when ETH beta drags MNT down.
+
+### Risk flags
+
+- **Venue / liquidity concentration** — no Binance listing plus Bybit-heavy spot and a thin HL perp book means execution risk, slippage on size, and exchange-specific (Bybit) exposure.
+- **Discretionary supply overhang** — ~47% of the 6.22B supply is treasury/DAO-held; DAO sales or incentive emissions are a latent dilution vector even without a hard vesting cliff.
+- **Narrative dependence** — the bull case leans on the banking pivot (UR/MI4) shipping real revenue; if it stalls, the token de-rates toward "a treasury with an L2 attached."
+- **Perp funding dislocations** — thin float and high leverage make funding and basis on the HL perp prone to sharp swings and liquidation cascades; crowded positioning can unwind violently.
+- **Reflexive treasury / modular-DA risk** — the treasury-floor thesis marks down with MNT in a crash, and the EigenDA data-availability choice carries [[restaking]]/AVS tail risk.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=MNT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=MNT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=MNT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=MNT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=MNT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

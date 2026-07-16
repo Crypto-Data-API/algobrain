@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto]
+tags: [altcoins, crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi]
 aliases: ["STABLE", "Stable Chain", "StableChain"]
 entity_type: protocol
 founded: 2025
 headquarters: "Decentralized (Stable Foundation; Bitfinex/Tether-backed)"
 website: "https://www.stable.xyz/"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[tether]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[tether]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Stable
@@ -251,6 +251,58 @@ The incumbent to beat is **[[tron|Tron]]**, which already settles an enormous sh
 | **24h Range** | $0.0367 — $0.0377 |
 | **CoinGecko Sentiment** | 0% positive |
 | **Last Updated** | 2026-07-16 |
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+STABLE is a **perp-first asset**. It trades as **STABLE-PERP on [[hyperliquid|Hyperliquid]]** (leverage up to ~40–50x) but is **not listed on Binance**; spot access is limited to a handful of offshore/CEX venues (Kraken, Bitget, KuCoin, Crypto.com). Because there is no deep, unified spot book and no Binance flow, price discovery and directional flow concentrate on the **HL perp**, which is the primary instrument for both longs and — given the unlock overhang — shorts. Practically this means:
+
+- **Depth is thin and venue-concentrated.** Spot volume is modest (~$14M/24h at snapshot), so the HL order book is where size gets done. Large orders can move the mark; use limit orders and expect slippage on market fills.
+- **Sizing/execution.** The high available leverage is a liquidity trap on a thin book — position sizing should be conservative relative to visible L2 depth, and stops should account for wick risk during liquidation events. Fragmented spot means cross-venue arbitrage is imperfect and the perp mark can dislocate from spot.
+- **Funding is the tell.** With flow crowding onto one perp, funding is an unusually clean read on positioning (crowded-short pressure is likely around the December 2026 cliff).
+
+### Applicable strategies
+
+- [[crowded-short-funding-fade]] — the structural short-the-unlock thesis (December 2026 team/investor cliff) tends to crowd the short side into the event; deeply negative funding flags an overcrowded short ripe for a squeeze-fade.
+- [[crowded-long-funding-fade]] — on narrative-momentum rips (stablecoin-infra theme), perp longs pile in with high leverage on a thin book; persistently positive funding marks exhaustion to fade.
+- [[funding-rate-harvest]] — because flow concentrates on the single HL perp, funding swings large and sticky; harvesting the funding stream (with a delta hedge) is viable when the rate is extreme in either direction.
+- [[token-unlock-supply-event]] — ~50% of supply is team/investor-allocated with the cliff ending December 2026; the scheduled forward-supply event is a first-order, tradeable structural driver.
+- [[liquidation-cascade-fade]] — high leverage on a low-float, thin-depth perp makes STABLE cascade-prone; forced-liquidation flushes overshoot and mean-revert, offering fade entries.
+- [[oi-confirmed-trend]] — with directional flow concentrated on the HL perp, rising open interest alongside price is a cleaner trend-confirmation signal here than on a fragmented multi-venue asset.
+
+### Volatility & regime character
+
+STABLE is a **high-beta, low-float L1 governance token** (stablecoin-infrastructure narrative), explicitly **not a stablecoin/peg asset** — it trades like a speculative altcoin, not a ~$1 instrument. Realized volatility is very high: ~4x from ATL ($0.0092) to ATH ($0.0389) in roughly nine weeks, then a retrace to the mid-$0.02s. As a speculative alt it is **high-beta to BTC/ETH risk-on/risk-off**, bleeding hardest in fear regimes and ripping hardest on relief. Its idiosyncratic driver is the **stablecoin-infrastructure / payments-chain narrative** (peers: Plasma/XPL, Tempo) and any [[tether|Tether]]/USDT news.
+
+### Risk flags
+
+- **Venue concentration.** No Binance listing and fragmented, thin spot; liquidity depends heavily on the single HL perp. Depth risk amplifies slippage and cascade severity.
+- **Token unlocks / emissions.** Only ~22% circulating; ~50% team+investor allocation with the **December 2026 cliff** — persistent forward-supply overhang.
+- **Narrative dependence.** No live cash-flow claim; value hinges on the stablecoin-infra narrative and competitor milestones (Plasma, Tempo, incumbent [[tron|Tron]]).
+- **Tether/counterparty dependence.** Thesis is tied to USDT growth and reputation; adverse Tether regulatory or reserve news would hit STABLE directly.
+- **Perp funding dislocations.** Concentrated one-venue flow makes funding volatile; crowded positioning around the unlock can produce sharp squeeze/dislocation moves.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=STABLE` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=STABLE` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=STABLE&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=STABLE&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=STABLE"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

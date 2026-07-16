@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi]
+tags: [crypto, defi, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, memecoins]
 aliases: ["PUMP", "pumpdotfun"]
 entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://pump.fun"
-related: ["[[bonk]]", "[[crypto-markets]]", "[[cryptodataapi]]", "[[hyperliquid]]", "[[letsbonk]]", "[[memecoin-mania]]", "[[pump-fun-bonding-curve-sniping]]", "[[pumpswap]]", "[[solana]]"]
+related: ["[[bonk]]", "[[crypto-markets]]", "[[cryptodataapi]]", "[[hyperliquid]]", "[[letsbonk]]", "[[memecoin-mania]]", "[[pump-fun-bonding-curve-sniping]]", "[[pumpswap]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[hl-vs-cex-funding-divergence]]"]
 ---
 
 # Pump.fun
@@ -327,6 +327,52 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
 
 ---
+
+## Trading Profile
+
+### Venues & liquidity
+
+PUMP trades on **both** major two-venue rails: **Binance** (PUMP/USDT spot plus a USD-margined perpetual) and **[[hyperliquid|Hyperliquid]]** (**PUMP-PERP**, up to ~40–50x leverage). This is a deep, liquid two-venue market — CEX spot depth anchors price discovery while Hyperliquid provides an on-chain, high-leverage perp with transparent funding and order-book depth. Because size can be worked across both a CEX and an on-chain perp, execution and sizing benefit from split routing: use CEX spot/perp for large clips and Hyperliquid for funding capture and delta hedging. The dual-venue structure also means CEX-vs-DEX funding can diverge, creating cross-venue basis and funding-divergence opportunities. As a memecoin-adjacent fee token, depth is thinner and more reflexive than large-cap alts, so ladder entries and respect the wide intraday range.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — trade PUMP like an exchange token: long spot / short perp to harvest positive funding that spikes around buyback/burn announcements.
+- [[hl-vs-cex-funding-divergence]] — two-venue availability (Binance perp vs Hyperliquid PUMP-PERP) lets you capture funding-rate gaps between CEX and DEX perps.
+- [[cash-and-carry]] — the ~60% emission overhang and buyback bid create periods of steep basis; carry the spread with deep two-venue depth.
+- [[liquidation-cascade-fade]] — high memecoin beta and leveraged PUMP-PERP positioning produce sharp liquidation flushes near the ATL that mean-revert.
+- [[token-unlock-supply-event]] — the large unvested supply (MC/FDV ≈ 0.40) means emission/unlock dates are dated, tradable supply catalysts.
+- [[narrative-trading]] — PUMP is the cleanest liquid proxy for Solana launchpad-share and memecoin-cycle narrative; trade rotation on revenue/market-share headlines.
+
+### Volatility & regime character
+
+PUMP is a **memecoin-adjacent Solana fee/exchange token** with high reflexivity: it behaves like a high-beta alt with memecoin-cycle sensitivity layered on top of an exchange-token cash-flow tape (fees → buyback/burn). Realized volatility is elevated and regime-dependent — it expands sharply around buyback/burn and launchpad-share catalysts. Correlation is strongest to **SOL** (its host chain and revenue base) with amplified beta, and it carries broad **BTC/ETH** risk-on/risk-off beta through general alt correlation; in risk-off regimes it decays faster than large caps as issuance and fee revenue contract.
+
+### Risk flags
+
+- **Emission/dilution overhang** — MC/FDV ≈ 0.40; ~60% of max supply still to emit. Unlocks and emissions are a persistent supply headwind that can overwhelm the buyback bid.
+- **Narrative/cycle dependence** — revenue is a derivative of memecoin speculation; in a bear market the fundamental (fees → buyback) shrinks, pressuring price.
+- **Perp funding dislocations** — buyback/burn announcements can spike funding positive while emission/cycle-decay fears drive it negative; crowded leveraged positioning fuels liquidation cascades.
+- **Venue/liquidity concentration** — while two-venue, depth is thinner and more reflexive than large-cap alts; large clips can move the book, and CEX-vs-DEX funding can dislocate.
+- **Regulatory/reputational** — memecoin-issuance infrastructure is a plausible regulatory target, and platform controversies add headline risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=PUMP` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=PUMP` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=PUMP&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=PUMP&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=PUMP"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ## See Also
 

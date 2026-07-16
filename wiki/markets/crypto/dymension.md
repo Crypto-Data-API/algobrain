@@ -3,13 +3,13 @@ title: "Dymension"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["DYM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://portal.dymension.xyz/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]"]
 ---
 
 # Dymension
@@ -117,6 +117,47 @@ related: ["[[crypto-markets]]"]
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — DYM trades on BOTH Binance (spot DYM/USDT plus a USD-margined perpetual) and Hyperliquid (DYM-PERP, offering roughly 40-50x leverage). This is a genuine two-venue derivatives market rather than a single-listing microcap, so on-chain HL flow can be triangulated against Binance's centralized order book. Depth is reasonable for an alt of this size but not deep enough to ignore slippage: large market orders will walk the book on either venue, so size should be scaled to visible L2 depth and split across both venues where possible. The dual listing keeps mark prices tightly arbitraged and makes CEX-vs-DEX funding and basis comparisons tradeable.
+
+**Applicable strategies**
+- [[funding-rate-arbitrage]] — With a Binance USD-margined perp and a Hyperliquid DYM-PERP side by side, funding differentials between the two venues can be captured delta-neutral.
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid HLP-driven funding on DYM-PERP frequently diverges from Binance's funding, giving a clean two-venue divergence trade.
+- [[cash-and-carry]] — Binance spot DYM plus a short perp lets you lock the perp premium as carry on a low-cap, high-funding alt.
+- [[liquidation-cascade-fade]] — DYM's thin depth and high leverage make sharp liquidation wicks common; fading the flush after cascades exhausts is a repeatable setup.
+- [[oi-confirmed-trend]] — Cross-referencing Hyperliquid open interest with price helps confirm whether a DYM move is real positioning or a low-liquidity squeeze.
+- [[range-mean-reversion]] — Deeply depressed near its ATL, DYM often chops in tight ranges, favouring reversion inside established bounds until a narrative catalyst breaks it.
+
+**Volatility & regime character** — DYM is a low-cap, high-beta infrastructure/modular-blockchain (Cosmos RaaS) altcoin sitting more than 99% below its ATH. It carries strong high-beta behaviour: it tends to amplify BTC/ETH directional moves on the downside and reacts violently to modular-blockchain and Cosmos-ecosystem narrative shifts. Realized volatility is elevated relative to majors, and reflexive squeezes are common given the small float and leveraged perp interest. Correlation to BTC/ETH is meaningful in risk-off moves but idiosyncratic during narrative-driven pumps.
+
+**Risk flags**
+- Venue concentration and liquidity: two-venue but still a low-cap; depth thins fast and slippage/gap risk is real on size.
+- Emissions/supply: unlimited max supply with FDV well above market cap means ongoing dilution pressure from unlocks and emissions.
+- Narrative dependence: price is highly sensitive to the modular-blockchain / RaaS / Cosmos narrative cycle rather than fundamentals.
+- Perp funding dislocations: high leverage on a thin book can drive extreme funding and liquidation cascades in either direction.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=DYM` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=DYM` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=DYM&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=DYM&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=DYM"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

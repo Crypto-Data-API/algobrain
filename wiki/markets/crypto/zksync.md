@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins, ethereum]
 aliases: ["ZK"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://zksync.io/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[rollups]]", "[[starknet]]", "[[zero-knowledge-proofs]]", "[[zk-rollup]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[layer-2]]", "[[rollups]]", "[[starknet]]", "[[zero-knowledge-proofs]]", "[[zk-rollup]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[token-unlock-supply-event]]"]
 ---
 
 # ZKsync
@@ -247,6 +247,56 @@ ZK is best framed as a high-beta bet on (1) zkEVM adoption within the Ethereum s
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ZK is a **deep, liquid two-venue market**, tradable on BOTH [[binance|Binance]] (ZK/USDT spot plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (ZK-PERP, up to ~40-50x leverage). The dual-venue footprint — CEX spot + CEX perp on Binance, plus an on-chain perp on Hyperliquid — means execution can be routed for best depth: Binance carries the bulk of spot and centralized-perp liquidity, while Hyperliquid provides a transparent on-chain order book and funding stream. This split supports both larger clip sizing (aggregate depth across venues) and CEX-vs-DEX relative-value setups, though as a sub-$150M-cap L2 token, book depth is thinner than large-caps, so oversized market orders will move price and passive/limit execution is preferred for meaningful size.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — ZK's simultaneous listing on Binance perp and Hyperliquid ZK-PERP creates two independent funding streams that can diverge, especially around unlock-driven directional flow.
+- [[funding-rate-harvest]] — around scheduled token unlocks perp funding has historically skewed negative as traders position short, letting a delta-neutral book collect the funding premium.
+- [[cash-and-carry]] — long ZK spot on Binance against a short USD-margined/ZK-PERP perp captures basis and funding while staying delta-neutral, exploiting the unlock-driven short skew.
+- [[token-unlock-supply-event]] — with MC/FDV ~0.48, recurring insider/ecosystem vesting cliffs are a scheduled, tradable supply catalyst for ZK.
+- [[liquidation-cascade-fade]] — as a high-beta L2 token with leverage-driven turnover, ZK is prone to sharp liquidation flushes that overshoot and mean-revert, as seen off the June-2026 all-time low.
+- [[breakout-and-retest]] — after prolonged bear-market compression near all-time lows, clean range breaks on ZK offer defined-risk momentum entries with a retest for confirmation.
+
+### Volatility & regime character
+
+ZK is a **high-beta Ethereum Layer-2 / zk-rollup infrastructure token**. It trades with strong positive correlation to [[ethereum|ETH]] and the broader [[bitcoin|BTC]] risk cycle, but amplifies moves in both directions — it has fallen ~96% from its June-2024 debut high while the majors held up far better, and rebounds off capitulation lows are equally sharp. Its regime is dominated by L2-sector sentiment, unlock overhang, and the zk-rollup scaling narrative rather than idiosyncratic fundamentals, making it behave as a leveraged proxy on Ethereum-scaling risk appetite.
+
+### Risk flags
+
+- **Unlock / emissions overhang** — low MC/FDV (~0.48) means substantial insider and ecosystem supply remains under multi-year vesting; unlock cliffs are a recurring price drag and skew perp funding negative.
+- **Narrative dependence** — price is tied to the L2 / zk-rollup thesis and Elastic Chain adoption; sentiment shifts in the crowded rollup sector move ZK hard.
+- **Liquidity depth** — as a sub-$150M-cap token, aggregate depth is healthy for its size but thin in absolute terms; large orders slip and volume is heavily leverage-driven.
+- **Perp funding dislocations** — the two-venue perp market (Binance + Hyperliquid) can see funding spike or diverge around unlocks and cascade events, a risk to naive carry books and an opportunity for relative-value trades.
+- **Value-accrual ambiguity** — governance-only utility does not capture sequencer/MEV revenue, a structural headwind that can keep the token de-rated even on network success.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZK` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZK` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZK&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZK&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZK"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

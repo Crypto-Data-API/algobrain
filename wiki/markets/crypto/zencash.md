@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, privacy]
+tags: [crypto, privacy, hyperliquid, perpetual-futures, funding-rate, open-interest, altcoins]
 aliases: ["Horizen", "ZEN", "ZenCash"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.horizen.io"
-related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[privacy-coins]]", "[[zcash]]"]
+related: ["[[base]]", "[[crypto-markets]]", "[[ethereum]]", "[[privacy-coins]]", "[[zcash]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Horizen
@@ -275,6 +275,48 @@ First Privacy Appchain on Base:&nbsp;As an L3 on Base, Horizen benefits from Eth
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — ZEN is one of the better-provisioned small-caps in the privacy segment: it trades on **both Binance (ZEN/USDT spot plus a USD-margined perpetual)** and **Hyperliquid (ZEN-PERP, up to ~40-50x leverage)**. This two-venue structure — a deep centralized book alongside an on-chain perp — gives a genuinely liquid market by small-cap standards, with visible [[open-interest]] and [[funding-rate|funding]] on both sides. Practically, the Binance/Hyperliquid split lets traders route the leg with better depth for a given size, cross-check marks, and run cross-venue basis/funding trades; ZEN's ~$11-12M daily volume still argues for scaling into positions rather than firing large market orders, and for keeping perp size modest relative to spot depth to avoid moving the book.
+
+**Applicable strategies**
+- [[funding-rate-harvest]] — with two funded venues (Binance perp + ZEN-PERP), collect funding on the crowded side while hedging the opposite leg to strip out price risk.
+- [[hl-vs-cex-funding-divergence]] — ZEN's dual listing on Binance and Hyperliquid frequently opens funding gaps between the CEX perp and ZEN-PERP that can be arbitraged directly.
+- [[cash-and-carry]] — hold Binance spot ZEN against a short perp to capture positive basis/funding on a hard-capped, deliverable-supply asset.
+- [[liquidation-cascade-fade]] — a thin small-cap with leveraged perps sees sharp forced-selling flushes on Horizen 2.0 newsflow; fade capitulation wicks back toward the mean.
+- [[news-trading]] — ZEN price is heavily driven by Horizen 2.0 migration and listing headlines, making event-timed entries around confirmed catalysts a repeatable edge.
+- [[breakout-and-retest]] — after long basing near multi-year lows, migration re-rating attempts produce clean breakouts; enter on the retest to control risk.
+
+**Volatility & regime character** — ZEN is a **high-beta small-cap privacy/infra token** (~#307 rank, sub-$100M cap) mid-pivot from a legacy privacy coin toward a Base-aligned L3 privacy-infrastructure play. It carries the reflexive, headline-sensitive volatility typical of low-float names: it can decouple sharply from BTC/ETH on migration newsflow (as with its Extreme-Fear-period outperformance) but is still broadly correlated to overall [[bitcoin|BTC]]/[[ethereum|ETH]] risk appetite, and a durable risk-off move tends to reassert that beta. Expect large percentage swings on modest dollar flow.
+
+**Risk flags**
+- **Liquidity/venue concentration** — despite two venues, absolute depth is small; the perp market can gap and cascade on relatively little size, so leverage should be conservative.
+- **Narrative dependence** — price is unusually tethered to the binary success/failure of the Horizen 2.0 migration; a stalled transition leaves it a shrinking legacy coin near its 2019 lows.
+- **Privacy-coin regulatory/delisting risk** — as a Zcash-derived shielded asset, ZEN can still be swept up in exchange privacy-coin delisting waves, an event risk that can vaporize CEX liquidity abruptly.
+- **Migration/bridge mechanics** — the ERC-20-on-Base migration alongside the legacy chain introduces operational/bridging considerations that can distort supply perception and spot/perp basis.
+- **Perp funding dislocations** — thin two-venue funding can spike or invert on crowded positioning, punishing carry trades that are sized to normal-liquidity assumptions.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZEN` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZEN` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZEN&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZEN&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZEN"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

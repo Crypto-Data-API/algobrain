@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum]
+tags: [crypto, defi, ethereum, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["REZ", "Renzo Protocol", "ezETH"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.renzoprotocol.com/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[depeg]]", "[[eigenlayer]]", "[[ethereum]]", "[[governance-token]]", "[[liquid-restaking]]", "[[liquid-staking]]", "[[restaking]]", "[[slashing]]", "[[smart-contract-risk]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
 ---
 
 # Renzo
@@ -197,6 +197,50 @@ REZ is Renzo's [[governance-token]]. It is used to vote on protocol parameters, 
 - **2025–2026** — REZ trades ~99% below its listing-era high amid the wider altcoin/restaking drawdown; the protocol's relevance now hinges on sustained restaking demand and real AVS fee capture rather than points-driven TVL.
 
 > *Additional events will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity** — REZ is tradable on **both** [[binance|Binance]] (REZ/USDT spot plus a USD-margined perpetual) and [[hyperliquid|Hyperliquid]] (**REZ-PERP**, up to roughly 40-50x leverage). This is a deep, liquid two-venue market by small-cap standards: the Binance listing supplies centralized spot and perp depth while Hyperliquid provides transparent on-chain perp order-book depth and funding. Having both a CEX and a DEX perp venue on the same name means spot-vs-perp and CEX-vs-DEX relationships can be traded directly, and it tightens execution — but at a ~#796 market-cap rank, book depth is still thin relative to majors, so size positions modestly and expect slippage on large market orders. Cross-venue availability lets traders split fills, arbitrage funding, and hedge one leg against the other rather than relying on a single book.
+
+**Applicable strategies**
+
+- [[funding-rate-harvest]] — With REZ perps live on both Binance and Hyperliquid, persistent funding on a beaten-down, high-drawdown alt can be systematically collected by holding the short-funding side and hedging delta.
+- [[hl-vs-cex-funding-divergence]] — Funding on Hyperliquid's REZ-PERP and Binance's USD-margined perp can diverge; the two-venue setup makes this a directly tradable spread.
+- [[cash-and-carry]] — Long REZ spot on Binance against a short perp captures basis/funding on a name where spot and perp coexist across venues.
+- [[liquidation-cascade-fade]] — A thin, low-cap token with high leverage (up to ~40-50x) is prone to sharp liquidation flushes; fading over-extended cascades into support is a repeatable edge here.
+- [[oi-price-exhaustion]] — Open-interest data from both venues helps flag crowded, leverage-driven moves in a low-float token where positioning drives price more than fundamentals.
+- [[rsi-mean-reversion]] — As a range-bound, deeply drawn-down small-cap, REZ frequently over-extends intraday, making oscillator-based reversion viable within its trading range.
+
+**Volatility & regime character** — REZ is a **high-beta DeFi / liquid-restaking governance token** (an [[ethereum]]-ecosystem infra token, not a memecoin, major, or stablecoin). It trades ~99% below its 2024 listing-era high and behaves as a low-float, sentiment-driven small cap: it carries strong positive beta to ETH and BTC, tends to amplify broad-market moves on the way up and down, and its idiosyncratic catalysts are tied to the restaking/EigenLayer and LRT narrative rather than to REZ-specific cash flows. In risk-off regimes it typically underperforms majors; in restaking-narrative rallies it can outperform sharply.
+
+**Risk flags**
+
+- **Venue/liquidity concentration** — Despite two venues, real depth is limited at a ~#796 rank; large orders move price and spreads widen fast in stress.
+- **Token unlock / emissions overhang** — Max supply is 10B REZ with circulating well below total (market-cap/FDV ≈ 0.83), leaving vesting/unlock supply overhang that can pressure price.
+- **Narrative dependence** — Value hinges on the restaking/LRT thesis and real AVS fee capture; if the narrative cools, REZ can bleed independent of BTC/ETH.
+- **ezETH depeg contagion** — A recurrence of the April 2024 ezETH [[depeg]] dynamic (protocol-level, not the REZ token itself) can trigger sharp, headline-driven REZ selloffs and volatility spikes.
+- **Perp funding dislocations** — Low float plus high leverage make funding prone to violent swings around catalysts; crowded positioning can flip funding hard and force liquidation cascades.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=REZ` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=REZ` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=REZ&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=REZ&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=REZ"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

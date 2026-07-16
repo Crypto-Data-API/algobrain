@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, markets]
+tags: [crypto, defi, ethereum, markets, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, bitcoin]
 aliases: ["ETH", "Ether"]
 entity_type: protocol
 founded: 2015
 headquarters: "Decentralized"
 website: "https://ethereum.org"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[solana]]", "[[staking]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[proof-of-stake]]", "[[smart-contracts]]", "[[solana]]", "[[staking]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[basis-trade]]"]
 ---
 
 # Ethereum
@@ -379,6 +379,54 @@ Ether (ETH) serves multiple functions: payi...
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+ETH is a deep, liquid two-venue market. It is tradable on **both** [[binance]] (spot ETH/USDT plus a USD-margined ETH perpetual) and [[hyperliquid]] (ETH-PERP, up to ~40-50x leverage). ETH is the second-deepest book in all of crypto behind [[bitcoin|BTC]] — order books are thick on both sides, slippage on institutional-size clips is low, and the perp is the #2 market on Hyperliquid by [[open-interest]] and volume. Because the same underlying trades on a top-tier CEX and a top-tier on-chain [[perpetual-futures|perp DEX]] simultaneously, execution can be split across venues to minimize impact, and the two-venue structure directly enables [[hl-vs-cex-funding-divergence|cross-venue funding]] and [[cross-exchange-arbitrage|cross-exchange]] setups. High available leverage means position sizing should be dominated by volatility and liquidation-distance rather than notional caps; depth is rarely the binding constraint for retail-to-mid size.
+
+### Applicable strategies
+
+- [[cash-and-carry]] — ETH's staking yield anchors a "risk-free" crypto rate, and elevated perp funding vs spot makes long-spot / short-perp carry economics attractive during high-funding regimes.
+- [[funding-rate-harvest]] — ETH [[funding-rate|funding]] runs more volatile than BTC's, so systematically collecting funding on the crowded side of the perp is a recurring edge.
+- [[hl-vs-cex-funding-divergence]] — with ETH perps live on both Hyperliquid and Binance, funding-rate gaps between the two venues are directly harvestable.
+- [[basis-trade]] — the second-highest perp OI in crypto produces frequent, mean-reverting basis dislocations between spot and the perpetual.
+- [[liquidation-cascade-fade]] — ETH's higher beta produces sharper, cleaner liquidation cascades than BTC, giving well-defined fade entries after forced-selling flushes.
+- [[oi-confirmed-trend]] — deep, well-populated ETH open-interest data makes OI-confirmed trend continuation and exhaustion signals reliable on this asset.
+
+### Volatility & regime character
+
+ETH is the archetypal **large-cap, high-beta counterpart to BTC** — a programmable-settlement / DeFi-infrastructure token rather than a memecoin or narrow-utility alt. Realized volatility runs roughly 1.2-1.5x BTC's, and correlation to BTC sits around 0.8+, with additional idiosyncratic alpha from DeFi/L2 narratives and the closely watched [[ethereum#ETH/BTC Ratio|ETH/BTC ratio]]. In risk-on "alt-season" regimes ETH tends to outperform BTC; in risk-off regimes it draws down harder (currently ~65% below ATH vs BTC's ~50%), so ETH effectively acts as a leveraged expression of broad crypto beta with a DeFi/L2 tilt.
+
+### Risk flags
+
+- **Higher beta / cascade risk** — larger drawdowns and sharper [[liquidation]] cascades than BTC; leverage and stops must account for ETH's wider swings.
+- **Perp funding dislocations** — ETH funding is more volatile than BTC's and can flip sign abruptly, punishing static carry positions on the wrong side.
+- **Narrative dependence** — ETH's relative-value performance hinges on the L2-scaling, restaking, RWA, and ETF-staking narratives; regime shifts (e.g. rotation to [[solana|SOL]]) compress ETH/BTC.
+- **Supply/staking reflexivity** — LST leverage (stETH) and shifting net issuance (burn vs staking rewards) can amplify moves; Lido's dominant staking share is a systemic concern.
+- **Regulatory** — staking-as-a-service classification and pass-through-staking-ETF outcomes remain open catalysts that can gap price.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ETH` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ETH` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ETH&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ETH&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ETH"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

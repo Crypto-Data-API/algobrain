@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, privacy, zcash, zk-snarks]
+tags: [crypto, privacy, zcash, zk-snarks, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 entity_type: protocol
 founded: 2016
 website: "https://z.cash"
 aliases: ["ZEC", "zcash-protocol"]
-related: ["[[2026-06-05-zcash-orchard-counterfeiting-bug]]", "[[ai-vulnerability-discovery]]", "[[bitcoin]]", "[[blockchain]]", "[[crypto-markets]]", "[[dash]]", "[[hyperliquid]]", "[[monero]]", "[[mythos-release-window-exploit-short]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[zero-knowledge-proofs]]"]
+related: ["[[2026-06-05-zcash-orchard-counterfeiting-bug]]", "[[ai-vulnerability-discovery]]", "[[bitcoin]]", "[[blockchain]]", "[[crypto-markets]]", "[[dash]]", "[[hyperliquid]]", "[[monero]]", "[[mythos-release-window-exploit-short]]", "[[privacy-coins]]", "[[proof-of-work]]", "[[zero-knowledge-proofs]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[pairs-trading]]"]
 headquarters: "Decentralized"
 ---
 
@@ -322,6 +322,50 @@ This is the **first market-moving case of a frontier AI model finding a critical
 | **24h Range** | $544.80 — $584.38 |
 | **CoinGecko Sentiment** | 64% positive |
 | **Last Updated** | 2026-07-16 |
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** ZEC is a genuine two-venue market. It trades on **[[binance|Binance]]** (ZEC/USDT spot plus a USD-margined perpetual) and on **[[hyperliquid|Hyperliquid]]** (**ZEC-PERP**, up to ~40–50x leverage). This dual-venue availability gives ZEC deeper, less fragmented order-book depth than default-privacy peers like [[monero|Monero]], and it means the same exposure can be built either on a regulated CEX or on-chain. In practice the two venues create a live CEX-vs-DEX spread: funding and mark can diverge between the Binance perp and ZEC-PERP, and taker execution can be routed to whichever book is deeper at the moment. For sizing, the liquid dual-book market absorbs moderate flow well during calm regimes, but around privacy-regulation and disclosure events (see the June 2026 Orchard episode) depth thins quickly and slippage widens — size down and prefer limit execution into stressed tape.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — ZEC lists on both Binance's USD-margined perp and Hyperliquid's ZEC-PERP, so the funding spread between the two venues is directly tradable.
+- [[cash-and-carry]] — Binance spot ZEC/USDT plus a short USD-margined perp lets the carry/basis be locked when funding runs rich after privacy-narrative rallies.
+- [[basis-trading]] — the perp-vs-spot basis on ZEC widens sharply around disclosure and regulation catalysts, giving a repeatable convergence trade.
+- [[liquidation-cascade-fade]] — ZEC's low-float sensitivity produces violent forced-selling flushes (e.g. the ~38% Orchard crash) that overshoot and mean-revert, a classic fade setup on ZEC-PERP.
+- [[event-driven-trading]] — ZEC price action is dominated by privacy-regulation headlines, exchange delisting/relisting, and zk-disclosure events, making it a natural event-driven name.
+- [[pairs-trading]] — the canonical privacy-basket relative-value trade is ZEC vs [[monero|Monero]]; rotation within the basket (ZEC green / XMR red) is a recurring pairs signal.
+
+**Volatility & regime character.** ZEC is a **high-beta privacy-sector alt** (~rank #14), not a broad-market large-cap. Its distinctive feature is that it frequently **decouples from BTC/ETH beta**, trading instead on the [[privacy-coins|privacy-coin narrative]] and regulatory sentiment — it rallied against an extreme-fear tape on 2026-06-20 while broad crypto was red. Correlation to BTC/ETH is therefore regime-dependent and often low during privacy-specific news, but ZEC still participates in broad risk-off flushes and carries elevated realized volatility versus large caps because of its modest market cap versus historical highs.
+
+**Risk flags.**
+- **Narrative dependence** — price is driven by the privacy-coin narrative and privacy-regulation headlines more than by broad-market beta; the thesis can invert quickly on sentiment shifts.
+- **Regulatory / delisting risk** — privacy coins face elevated AML/CFT pressure and several venues have historically delisted ZEC; a delisting can trigger a sharp liquidity event even with the current dual-venue footprint.
+- **Disclosure / novel-cryptography risk** — as a frontier zk protocol, ZEC carries latent implementation-bug risk (the June 2026 Orchard counterfeiting flaw), and its shielded design makes exploitation unprovable — an inherent overhang.
+- **Liquidity / low-float sensitivity** — small flows move price hard; depth thins fast around events, so venue concentration and slippage risk rise exactly when volatility spikes.
+- **Perp funding dislocations** — funding can run rich or flip hard around catalysts, and the Binance-vs-Hyperliquid funding spread can dislocate, punishing one-sided crowded positioning.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=ZEC` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=ZEC` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=ZEC&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=ZEC&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ZEC"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

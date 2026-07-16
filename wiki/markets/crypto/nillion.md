@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [artificial-intelligence, crypto, machine-learning]
+tags: [artificial-intelligence, crypto, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["$NIL", "NIL", "Nillion Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nillion.com/"
-related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[multi-party-computation]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[ethereum]]", "[[multi-party-computation]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Nillion
@@ -225,6 +225,56 @@ With well under half the total supply circulating, **future emissions and unlock
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+NIL is a **two-venue perp market**, unusually deep for a sub-$20M-cap token. It trades on **Binance** (spot NIL/USDT plus a **USD-margined perpetual**) and on **[[hyperliquid|Hyperliquid]]** (**NIL-PERP**, leverage up to ~40-50x). Having both a large CEX and the leading on-chain perp DEX quoting the same asset gives NIL genuinely liquid two-sided depth and a continuous cross-venue reference price. Practically, this means:
+
+- **Execution** — Binance carries the deeper spot and perp order books; Hyperliquid's on-chain book is transparent (queryable L2 depth) and often sets the marginal funding print. Split large orders across venues and prefer limit fills, since a thin *underlying* float (~429M circulating) can slip on aggressive market orders despite healthy top-of-book.
+- **Sizing** — the CEX + DEX combination enables delta-neutral structures (spot on Binance vs. perp on either venue) and cross-venue funding plays, but leverage should stay modest: a small underlying float amplifies liquidation and squeeze risk far beyond what headline depth suggests.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — with a liquid perp on two venues against Binance spot, NIL's frequently non-zero funding can be collected delta-neutral (long spot / short perp).
+- [[hl-vs-cex-funding-divergence]] — Hyperliquid NIL-PERP and Binance's USD-margined perp can print divergent funding; trade the spread between the two venues.
+- [[cash-and-carry]] — hold Binance spot NIL and short the perp to capture basis/funding while staying market-neutral on a high-beta token.
+- [[liquidation-cascade-fade]] — NIL's thin float and levered perps produce outsized liquidation wicks; fading capitulation flushes is a recurring setup.
+- [[oi-confirmed-trend]] — pair open-interest expansion with price on the two perp venues to separate real trend from thin-book noise.
+- [[token-unlock-supply-event]] — with ~57% of supply uncirculated, scheduled team/investor/ecosystem unlocks are tradeable, recurring supply catalysts.
+
+### Volatility & regime character
+
+NIL is a **high-beta AI / privacy-infrastructure altcoin** — a small-cap DeAI token whose swings run at a multiple of [[bitcoin|BTC]]/[[ethereum|ETH]]. It is strongly correlated to the broad AI-coin basket (moves in [[bittensor|TAO]]/[[render|RENDER]] and privacy/DeAI sentiment spill directly into NIL) and shows amplified downside beta in risk-off tape. Direction is driven by narrative rotation and emissions far more than by fundamentals, and the levered perps add reflexive squeeze/cascade behavior on top of the underlying alt beta.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — depth is real but concentrated in Binance spot/perp and Hyperliquid; a thin underlying float means aggressive size still slips and cascades hit hard.
+- **Token unlocks / emissions** — ~57% of the 1B supply is not yet circulating; scheduled unlocks are a persistent supply overhang and a recurring downside catalyst.
+- **Narrative dependence** — value tracks the AI x crypto / privacy narrative and AI-basket beta rather than proven fee revenue; sentiment reversals are sharp.
+- **Perp funding dislocations** — levered NIL-PERP positioning can drive funding squeezes and liquidation cascades disproportionate to the token's cap; watch funding and OI on both venues.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=NIL` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=NIL` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=NIL&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=NIL&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=NIL"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

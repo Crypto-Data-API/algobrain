@@ -4,12 +4,12 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["W", "Wormhole"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://wormhole.com/"
-related: ["[[axelar]]", "[[bridge]]", "[[cross-chain-bridge-risk]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[interoperability]]", "[[solana]]"]
+related: ["[[axelar]]", "[[bridge]]", "[[cross-chain-bridge-risk]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[interoperability]]", "[[solana]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[funding-rate-arbitrage]]"]
 ---
 
 # Wormhole
@@ -220,6 +220,48 @@ The W token is positioned as a governance and staking asset for the protocol's t
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+**Venues & liquidity.** W trades on **both** major venue types: [[binance|Binance]] hosts spot (W/USDT) and a **USD-margined perpetual**, while [[hyperliquid|Hyperliquid]] runs a **W-PERP** with leverage up to ~40–50x. This is a **deep, liquid two-venue market** for a sub-$100M name, with W turning over ~$8.73M/24h (volume/cap ~0.15). The dual-venue setup means execution can be split across CEX and on-chain perp order books to reduce slippage, and the parallel Binance/Hyperliquid perps create a persistent cross-venue funding/basis surface. Practically, size positions to the thinner of the two books during risk-off drawdowns — depth compresses fast on a low-cap altcoin — and use the two venues for [[cross-exchange-arbitrage|cross-venue]] execution rather than assuming either book absorbs large clips alone.
+
+**Applicable strategies.**
+- [[hl-vs-cex-funding-divergence]] — W runs perps on **both** Hyperliquid and Binance, so funding can diverge between the two venues, offering a market-neutral long-one/short-the-other harvest.
+- [[funding-rate-arbitrage]] — persistently negative funding in the Established Bear Market lets a spot-long/perp-short (or reverse) capture the funding spread on a token where both spot and perp are liquid.
+- [[cash-and-carry]] — deep two-venue spot plus perp availability supports a delta-neutral long-spot/short-perp carry to harvest basis on W.
+- [[crowded-short-funding-fade]] — a sub-$100M token near its all-time low in a bear regime is prone to crowded shorts; sustained negative funding + OI build flags squeeze-fade setups.
+- [[token-unlock-supply-event]] — with only ~60% of max supply circulating and multi-year vesting from the April 2024 launch, unlock cliffs are tradable supply-shock events for W.
+- [[liquidation-cascade-fade]] — thin low-cap depth and up to ~50x leverage make W susceptible to liquidation cascades that overshoot, setting up mean-reverting fades.
+
+**Volatility & regime character.** W is a **high-beta, low-cap infrastructure/interoperability altcoin** (cross-chain bridge/messaging category) that trades ~99% below its 2024 launch high near cycle floors. It carries strong positive beta to [[bitcoin|BTC]]/[[ethereum|ETH]] risk appetite and to the broader Solana/interop-narrative complex — amplifying moves on the way up and down. In an Established Bear Market with Fear & Greed in extreme-fear territory, expect elevated realized volatility, reflexive drawdowns, and sharp narrative-driven relief rallies.
+
+**Risk flags.**
+- **Unlock overhang / emissions:** only ~60% of the 10B max supply circulates; ongoing vesting is structural sell pressure and event risk around unlock dates.
+- **Narrative dependence:** value tracks the crowded, commoditizing interoperability narrative (Axelar, LayerZero, CCIP, IBC) and NTT adoption — sentiment-sensitive.
+- **Liquidity/venue concentration:** as a sub-$100M-cap alt, depth thins fast in drawdowns despite two perp venues; funding can dislocate between Binance and Hyperliquid.
+- **Protocol tail risk:** federated Guardian trust model plus the 2022 $325M bridge exploit precedent make protocol-security headlines a discrete gap-risk for the token.
+- **Perp funding dislocations:** parallel Binance/Hyperliquid perps can decouple in funding and mark, a source of both opportunity and basis risk.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=W` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=W` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=W&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=W&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=W"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

@@ -3,13 +3,13 @@ title: "Initia"
 type: entity
 created: 2026-04-09
 updated: 2026-07-16
-status: draft
-tags: [crypto]
+status: review
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, defi, altcoins]
 aliases: ["INIT"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://initia.xyz/"
-related: ["[[crypto-markets]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 > *As of 2026-06-12 this asset is outside the CoinGecko top 1000; figures below are the last cached snapshot and should be treated as stale.*
@@ -131,6 +131,53 @@ Initia is a network for interwoven optimistic rollups; we are holistically rebui
 ## Major News & Events
 
 > *Notable events and news will be added through the wiki's source ingestion workflow as relevant articles are processed.*
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+INIT trades on a genuinely two-venue market: **Binance** (spot INIT/USDT plus a USD-margined perpetual) and **Hyperliquid** (INIT-PERP, leverage up to roughly 40-50x). The overlap of a major CEX and the leading on-chain perp DEX gives INIT deeper, more continuous liquidity than most sub-$100M-cap alts, with two independent order books and funding-rate references. Practically, this means tighter effective spreads, the ability to route or split orders across venues, and a cleaner spot-vs-perp basis to arbitrage. Still, as a small-cap name (24h volume in the single-digit millions), book depth thins quickly beyond modest size — size positions to the shallower book and expect meaningful slippage and funding impact on larger clips or during volatility.
+
+### Applicable strategies
+
+- [[hl-vs-cex-funding-divergence]] — INIT funding on Hyperliquid INIT-PERP and the Binance USD-margined perp can diverge; collect the spread by going long the cheaper-funding venue and short the richer.
+- [[cash-and-carry]] — hold spot INIT on Binance against a short perp to harvest positive funding/basis while staying delta-neutral.
+- [[funding-rate-harvest]] — a small-cap alt with active perps often sustains skewed funding; systematically farm the funding side that is being overpaid.
+- [[liquidation-cascade-fade]] — thin books plus 40-50x leverage make INIT prone to sharp liquidation wicks; fade the overshoot after forced-selling exhausts.
+- [[oi-confirmed-trend]] — pair INIT's Hyperliquid open-interest changes with price to confirm genuine trend continuation versus positioning noise.
+- [[breakout-and-retest]] — deeply discounted from ATH and range-bound near cycle lows, INIT offers defined breakout levels; enter on the retest to control risk on a low-liquidity name.
+
+### Volatility & regime character
+
+INIT is a high-beta infrastructure / L1 (interwoven rollups) altcoin trading far below its all-time high near its cycle lows. As a small-cap with a low circulating-to-total-supply ratio, it exhibits reflexive, momentum-driven swings and elevated realized volatility relative to majors. Directionally it carries strong positive beta to BTC and ETH — it tends to amplify broad-market moves on the way up and down — while idiosyncratic drivers (Initia ecosystem news, emissions, liquidity events) can decouple it sharply from majors on any given day.
+
+### Risk flags
+
+- **Liquidity / venue concentration** — depth is concentrated in Binance and Hyperliquid; a listing change, outage, or reduced market-making on either venue would materially degrade execution.
+- **Token unlocks / emissions** — only ~19% of the 1.0B total supply circulates (MC/FDV ~0.19), so future unlocks and emissions are a persistent supply-overhang and sell-pressure risk.
+- **Narrative dependence** — as an early-stage L1/rollup token, price is highly sensitive to ecosystem-adoption narratives and rotation into/out of the infra theme.
+- **Perp funding dislocations** — high leverage on a thin book can produce extreme funding swings and liquidation cascades; funding-based positions can gap against you fast.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=INIT` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=INIT` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=INIT&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=INIT&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=INIT"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 

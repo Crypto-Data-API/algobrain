@@ -4,13 +4,13 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: good
-tags: [crypto, defi, derivatives]
+tags: [crypto, defi, derivatives, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["Havven", "SNX"]
 entity_type: protocol
 founded: 2018
 headquarters: "Decentralized"
 website: "https://www.synthetix.io/"
-related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perpetual-futures]]"]
+related: ["[[crypto-markets]]", "[[decentralized-exchange]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[open-interest]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
 ---
 
 # Synthetix
@@ -85,6 +85,56 @@ Synthetix pioneered **on-chain synthetic assets** and pivoted toward being the *
 - **Competition:** Perp-DEX rivals (Hyperliquid, dYdX, GMX, Lighter) compete for the same derivatives volume.
 - **Bear-market beta:** As a small-cap DeFi token in an extreme-fear / Established Bear Market regime, SNX carries high volatility and drawdown risk.
 - **Token value capture:** Persistent question of whether fees and tokenomics adequately reward SNX holders relative to risk taken.
+
+---
+
+## Trading Profile
+
+### Venues & liquidity
+
+SNX trades a **deep, liquid two-venue market**. On **Binance** it has both **spot** (SNX/USDT and others) and a **USD-margined perpetual**; on **Hyperliquid** it lists as **SNX-PERP** with leverage up to roughly **40-50x**. The CEX spot book underpins price discovery while the two perp venues concentrate directional and funding flow. Having both a Binance perp and a Hyperliquid perp means the same exposure can be built on either rail, so execution and sizing benefit from splitting orders across venues to limit slippage on this modest-cap token, and any cross-venue mark or funding gap is directly tradable rather than a data artifact. Depth is respectable for a rank-~216 name but thinner than large caps, so aggressive size still moves the book and can seed liquidation cascades.
+
+### Applicable strategies
+
+- [[funding-rate-harvest]] — collect funding on SNX-PERP when DeFi-sector sentiment pushes crowded directional positioning; sized against thinner spot depth.
+- [[hl-vs-cex-funding-divergence]] — arb the funding spread between Hyperliquid SNX-PERP and Binance's USD-margined SNX perp, a clean two-venue setup.
+- [[cash-and-carry]] — SNX is fully circulating (MC/FDV ~1.0) with no unlock overhang, so long spot / short perp carry is not distorted by emissions.
+- [[liquidation-cascade-fade]] — thin spot liquidity makes SNX prone to sharp perp liquidation flushes that overshoot and mean-revert.
+- [[oi-confirmed-trend]] — use SNX-PERP open interest to confirm whether a DeFi-narrative move is backed by real positioning or just noise.
+- [[mean-reversion]] — a range-bound, deeply-derated small cap that oscillates within regimes absent a fresh catalyst.
+
+### Volatility & regime character
+
+SNX is a **high-beta DeFi / derivatives infrastructure token** — a small/mid-cap altcoin that amplifies broad crypto risk-on/risk-off swings. It is highly correlated to **ETH** (its native ecosystem) and to BTC beta, and additionally sensitive to **DeFi-sector rotation** and perp-DEX competitive narratives. Down ~99% from its cycle ATH, it behaves as a deep-value / mean-reverting name that trends only on decisive sector catalysts, otherwise ranging with elevated intraday volatility.
+
+### Risk flags
+
+- **Liquidity/venue concentration:** modest cap and thin spot depth mean perp-driven moves can outrun spot, amplifying liquidation cascades.
+- **Narrative dependence:** price hinges on DeFi-derivatives sentiment and perp-DEX competition (Hyperliquid, dYdX, GMX, Lighter) rather than idiosyncratic flow.
+- **Perp funding dislocations:** two active perp venues can diverge in funding/mark during stress, a risk to one-sided carry and a source of cross-venue arb.
+- **Protocol/collateral risk:** SNX staking, debt-pool, and synth-issuance mechanics add smart-contract and first-loss exposure that can transmit to token price.
+- **Emissions:** although effectively fully circulating today, historical inflationary staking rewards mean supply policy changes remain worth monitoring.
+
+---
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/hyperliquid/summary?coin=SNX` — all-in-one perp data (mark, funding, OI)
+- `GET /api/v1/hyperliquid/prices` — all mid prices
+- `GET /api/v1/hyperliquid/l2-book?coin=SNX` — L2 order-book depth
+- `GET /api/v1/hyperliquid/open-interest` — all-asset open interest
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=SNX&interval=1h&limit=1000` — OHLCV candles
+- `GET /api/v1/hyperliquid/funding-rates?coin=SNX&limit=100` — funding history
+- `GET /api/v1/daily/hyperliquid` — daily bulk snapshot of ~230 HL perps
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=SNX"
+```
+
+Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See also [[cryptodataapi]].
 
 ---
 
