@@ -101,3 +101,9 @@ Download **[Obsidian](https://obsidian.md/download)** (free — macOS, Windows, 
 - **Dataview** (required — index pages use it), **Templater**, **Obsidian Git**, **Graph Analysis**, **Marp Slides**, **Webpage HTML Export**
 
 The graph view is pre-configured with per-folder color groups (`.obsidian/graph.json`). Attachments save to `attachments/`.
+
+## Disclaimer
+
+AlgoBrain is a research and educational knowledge base. **Nothing in this repository is financial, investment, legal, or tax advice.** All content — strategy pages, data recipes, figures, and any linked tools or APIs — is provided **"as is"**, for informational purposes only, and may be inaccurate, incomplete, or out of date.
+
+Trading cryptocurrencies and derivatives carries a **substantial risk of loss**, and past performance does not indicate future results. **Do your own research (DYOR)** and consult a licensed financial professional before making any decision. You use this material **entirely at your own risk**: the authors, contributors, and maintainers accept **no liability** for any loss or damage of any kind arising from its use. Nothing here is a solicitation or recommendation to buy, sell, or hold any asset.

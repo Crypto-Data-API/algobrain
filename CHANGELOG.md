@@ -4,6 +4,12 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-17 — README disclaimer + docs tidy
+
+- Added a **Disclaimer** to the README (not financial / investment advice, DYOR,
+  use at your own risk, no liability) to cover public use.
+- Tidied changelog wording to generic data-source phrasing.
+
 ## 2026-07-17 — Post-Phase-2 cleanup (4 follow-ups)
 
 - **Merge-dedup (367 pages):** removed the duplicate template block (`Overview` →
@@ -79,4 +85,4 @@ perp/spot/stablecoin-aware) queued as wave 2.
 - **Phase 2 (planned):** enrich the Binance-listed ∪ Hyperliquid-perp subset with
   parallel agents (trading narrative + live CryptoDataAPI context).
 - Follow-ups: 20 pre-existing tokenized-equity pages remain (optional cleanup);
-  the batch source-summary slug is still a stale batch name (cosmetic).
+  the batch source-summary slug is cosmetically off (stale name).
