@@ -1,6 +1,6 @@
 # AlgoBrain
 
-An LLM-maintained Obsidian knowledge base for **crypto trading strategy** — crypto, blockchain, DeFi, trading, algorithms, and markets, with macro and AI context. ~3,500 interlinked markdown pages.
+An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~3,500 interlinked markdown nodes.
 
 ![Obsidian graph view of the AlgoBrain vault](attachments/algobrain-obsidian-graph-view.gif)
 
