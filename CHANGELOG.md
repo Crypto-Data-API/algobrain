@@ -9,6 +9,7 @@ individual wiki page operations.
 - Added a **Disclaimer** to the README (not financial / investment advice, DYOR,
   use at your own risk, no liability) to cover public use.
 - Tidied changelog wording to generic data-source phrasing.
+- Refreshed README counts (crypto pages 1,000+ → 2,400+; total ~3,500 → ~4,850 nodes).
 
 ## 2026-07-17 — Post-Phase-2 cleanup (4 follow-ups)
 
