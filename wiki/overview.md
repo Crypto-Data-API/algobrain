@@ -2,7 +2,7 @@
 title: "AlgoBrain — Overview"
 type: overview
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [overview, meta]
 ---
@@ -17,12 +17,12 @@ A crypto-trading-strategy knowledge base for AI-assisted strategy research and g
 
 ## Current State
 
-Forked from a broader trading wiki on 2026-07-13 and pruned to crypto scope (~3,500 pages). The knowledge base spans:
+Forked from a broader trading wiki on 2026-07-13, pruned to crypto scope, and since expanded to **4,850+ pages** (top-2,500 coin coverage, Trading Profiles across the tradable set, and a growing combination-strategy program). The knowledge base spans:
 
-- **Strategies** (~370 pages): funding-rate harvesting, basis/carry, liquidation-cascade plays, MEV, memecoin sniping, market making, grid/mean-reversion/momentum systems, the 27-basket Hyperliquid signal library, and a 100+ page arbitrage encyclopedia from medieval bills of exchange to cross-L2 MEV
-- **Concepts** (~1,000 pages): market microstructure, indicators, portfolio theory, risk management, backtesting methodology, behavioral finance, anomalies, options mechanics, on-chain metrics (MVRV, SOPR, NUPL, HODL waves), macro
-- **Markets** (~1,150 pages): 1,000+ crypto asset pages plus commodities, forex, and bonds for macro context
-- **Entities** (~300 pages): crypto exchanges, DeFi protocols, quant/crypto funds, trading legends, miners and treasury companies, regulators
+- **Strategies** (~390 pages): funding-rate harvesting, basis/carry, liquidation-cascade plays, MEV, memecoin sniping, market making, grid/mean-reversion/momentum systems, the 27-basket Hyperliquid signal library, a 100+ page arbitrage encyclopedia from medieval bills of exchange to cross-L2 MEV, and the [[combination-matrix|combination-strategy matrix]]
+- **Concepts** (~1,030 pages): market microstructure, indicators, portfolio theory, risk management, backtesting methodology, behavioral finance, anomalies, options mechanics, on-chain metrics (MVRV, SOPR, NUPL, HODL waves), macro
+- **Markets** (~2,470 pages): 2,400+ crypto asset pages — every Binance- or Hyperliquid-tradable name carries a Trading Profile with venue, strategy, and live-data guidance — plus commodities, forex, and bonds for macro context
+- **Entities** (~265 pages): crypto exchanges, DeFi protocols, quant/crypto funds, trading legends, miners and treasury companies, regulators
 - **Crypto narratives** (backtester-ready catalog): 19 categories, 69 archetypes, 290 quantified historical instances
 - **AI & AI-trading** (~300 pages): ML models, trading bots, backtesting frameworks, LLM finance applications, and the general AI knowledge base
 - **History & news**: crypto market history (Mt. Gox → FTX → ETF era) plus macro/trading history (1987, LTCM, GFC, Volmageddon)

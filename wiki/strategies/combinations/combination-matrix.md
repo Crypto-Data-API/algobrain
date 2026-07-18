@@ -2,7 +2,7 @@
 title: "Combination Strategy Matrix"
 type: index
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [index, meta, methodology]
 aliases: ["Combo Matrix", "Strategy Combination Matrix", "Primitive × Overlay Matrix"]
@@ -31,14 +31,14 @@ A single cell can hold multiple page references if more than one page exists for
 |---|---|---|---|---|---|---|---|---|---|---|
 | **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | planned |
 | **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | planned | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
-| **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | planned | planned | [[contrarian-extremes]] ⁴ | planned |
-| **Mean-reversion** | [[regime-adaptive-strategy]] | planned | planned | planned | planned | planned | planned | planned | [[contrarian-extremes]] | planned |
+| **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | planned | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | planned |
+| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | planned | planned | planned | planned | planned | [[contrarian-extremes]] | planned |
 | **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | planned | planned | planned | planned | planned | planned |
 | **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | planned | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
 | **Vol selling** | [[regime-adaptive-strategy]] | planned | planned | planned | — ⁵ | [[volatility-targeting]] | planned | planned | planned | planned |
 | **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | planned | planned | — ⁶ | planned | planned | planned | planned | planned |
-| **Grid / market-making** | [[regime-gated-grid]] | planned | planned | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
-| **Stat-arb / pairs** | [[regime-adaptive-strategy]] | planned | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
+| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | planned | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
+| **Stat-arb / pairs** | [[regime-adaptive-strategy]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
 | **On-chain flow** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | planned | planned |
 | **Sentiment** | [[regime-adaptive-strategy]] | planned | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
 
@@ -68,13 +68,25 @@ A single cell can hold multiple page references if more than one page exists for
 
 ---
 
-## Matrix Cell Counts (as of 2026-07-18)
+## Matrix Cell Counts (as of 2026-07-19)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 22 |
-| Planned (gap to fill) | 69 |
+| Linked to existing page | 27 |
+| Planned (gap to fill) | 64 |
 | Non-viable (`—`) | 9 |
+
+---
+
+## Batch B2 New Pages (2026-07-19)
+
+Five new combination pages created in this batch — matrix cells updated above:
+
+- [[pairs-with-funding-differential]] — stat-arb/pairs × funding filter
+- [[funding-flush-reversal]] — mean-reversion × funding filter
+- [[unlock-aware-momentum]] — momentum × unlock/event calendar
+- [[funding-skewed-grid]] — grid/market-making × funding filter
+- [[oi-flush-reversion]] — mean-reversion × OI filter
 
 ---
 

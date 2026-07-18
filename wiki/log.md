@@ -2,12 +2,27 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+
+## 2026-07-19 — Batch B2: 5 New Combination Strategy Pages
+
+- Pages created (5):
+  - [[pairs-with-funding-differential]] — stat-arb/pairs × funding filter: perp-expressed pairs where the funding differential between legs agrees with the spread z-score direction; earns both mean-reversion of the spread and structural carry for being on the non-crowded leg
+  - [[funding-flush-reversal]] — mean-reversion × funding filter: dip-buy only after funding has sustained below −0.02%/8h for 24h+, confirming leveraged-long deleveraging is complete and shorts are now the crowded, carry-paying party
+  - [[unlock-aware-momentum]] — momentum × unlock/event calendar: momentum book that freezes new longs 5 days before and closes all longs 2 days before cliff unlock events, re-entering after supply digestion with post-unlock momentum re-confirmation
+  - [[funding-skewed-grid]] — grid/market-making × funding filter: perp grid whose inventory allocation is biased toward the funding-receiver side (earn both spread and carry simultaneously); skew rebalances when funding direction flips
+  - [[oi-flush-reversion]] — mean-reversion × OI filter: dip-buy only after OI has declined ≥ 15% from its 5-day peak, confirming leveraged deleveraging is substantially complete before entering the mean-reversion long
+- Pages updated (2):
+  - [[combination-matrix]] — 5 new cells linked (mean-reversion × funding filter, mean-reversion × OI filter, momentum × unlock/event calendar, grid × funding filter, stat-arb × funding filter); cell counts updated (existing: 22→27, planned: 69→64); Batch B2 section added
+  - [[log]] (this file) — Batch B2 entry prepended
+- Candidates skipped (0 of 5 primaries): all five primary candidates were confirmed additive (no existing page covered the same combination × primitive pair)
+- All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead + Edge source + Why this edge + Null hypothesis + Rules + Pseudocode + Indicators + Example trade + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data + Related), CryptoDataAPI endpoints verified against B1 exemplars, kill criteria with numeric triggers, differentiation sentences in lead paragraphs, approved tags only.
 
 
 ## 2026-07-18 — Batch B1: Combination Matrix + 5 New Combination Strategy Pages

@@ -22,8 +22,9 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - [ ] A1. Un-orphan ~1,300 crypto coin pages: write `tools/build_coin_index.py` generating
       A–Z index pages (e.g. `wiki/markets/crypto/coin-index-a-z.md` + per-letter sections)
       wikilinking EVERY coin page; link the index from `crypto-overview.md` and `wiki/index.md`.
-- [ ] A2. Refresh stale counts: `wiki/overview.md` (~3,500 → 4,852 pages; markets ~1,150 →
-      2,467) and `wiki/data-sources/data-sources-overview.md` (same stale fork claim + date).
+- [x] A2. (2026-07-19, iter 2) Refresh stale counts in `wiki/overview.md`. Note: the audit's
+      claim of a stale count in `data-sources-overview.md` was wrong — no such claim exists
+      there; left untouched.
 - [ ] A3. Broken-link round 2 (~1,200 refs): stubs/redirects for top targets —
       stablecoin(→stablecoins), depeg, tether(→tether-limited), tokenization,
       optimistic-rollup, decentralized-finance(→defi), binance-coin(→bnb),
@@ -61,7 +62,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8. Combination batches 2–8: ~5 new combination pages each, chosen from the matrix's
+- [ ] B2–B8 (B2 ✓ 2026-07-19 iter 2; 64 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
       highest-value unfilled cells; update matrix each time. Continue until every viable cell
       is filled or explicitly marked non-viable ("all possible combinations").
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
@@ -82,3 +83,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   Skipped as overlapping: onchain-confirmed-breakout, sentiment-regime-rotation; deferred:
   pairs-with-funding-differential. Zero new broken links. Next combo batches pull from the
   matrix's 69 planned cells.
+- 2026-07-19 iter 2 (B2 + A2): 5 combo pages — pairs-with-funding-differential,
+  funding-flush-reversal, unlock-aware-momentum, funding-skewed-grid, oi-flush-reversion.
+  Matrix now 27 existing / 64 planned / 9 non-viable. overview.md counts refreshed (A2).
+  Zero new broken links.

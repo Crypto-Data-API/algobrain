@@ -4,6 +4,17 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 2: combination batch 2 + overview refresh
+
+- 5 more combination strategies on the full buildable schema, each explicitly differentiated
+  from its nearest neighbors: pairs-with-funding-differential, funding-flush-reversal,
+  unlock-aware-momentum, funding-skewed-grid, oi-flush-reversion. Combination matrix now
+  **27 covered / 64 planned / 9 non-viable** cells.
+- `wiki/overview.md` refreshed to current reality (4,850+ pages, ~2,470 market pages,
+  Trading-Profile coverage, combination program); corrected a false audit finding about
+  `data-sources-overview.md`.
+- Zero new broken links (lint-verified).
+
 ## 2026-07-18 — Improvement loop, iteration 1: combination-strategy program
 
 Launched the hourly wiki-improvement loop (backlog: `.claude/wiki-improvement-backlog.md`,
