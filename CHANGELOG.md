@@ -4,6 +4,18 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 5: combination batch 5 + equity scope-out
+
+- 5 more combination strategies (full buildable schema): trend-aware-carry (carry-book
+  throttle), post-panic-vol-selling, cascade-monetization-rotation (tail-hedge → cascade-fade
+  capital rotation), unlock-pair-hedge (beta-hedged unlock expression),
+  trend-aligned-premium-selling. Matrix now **42 covered / 49 planned / 9 non-viable**.
+- **Equity scope-out:** the 10 remaining equities-only strategy pages (factor investing,
+  sector rotation, equity event-driven, LETF rebalancing, etc.) converted to scope-note
+  redirects pointing at crypto counterparts — no equity strategy content remains, no links
+  broken (content recoverable in git history).
+- Lint link issues 513 → 511.
+
 ## 2026-07-19 — Improvement loop, iteration 4: combination batch 4 + citation/frontmatter repair
 
 - 5 more combination strategies (full buildable schema): correlation-regime-pairs,

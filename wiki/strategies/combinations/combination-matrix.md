@@ -29,16 +29,16 @@ A single cell can hold multiple page references if more than one page exists for
 
 | Primitive \ Overlay | Regime gate | Funding filter | OI filter | Trend gate | Tail-hedge overlay | Vol targeting | Cross-venue | Unlock/event calendar | Sentiment-extreme filter | Session/time filter |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | planned |
+| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | planned |
 | **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
 | **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | [[spot-led-momentum-filter]] | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | [[session-aware-mean-reversion]] ¹² |
 | **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | planned | planned | planned | planned | planned | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
-| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | planned | planned | planned | planned | planned | [[off-hours-liquidation-playbook]] |
+| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | [[cascade-monetization-rotation]] ¹³ | planned | planned | planned | planned | [[off-hours-liquidation-playbook]] |
 | **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
-| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | planned | planned | — ⁵ | [[volatility-targeting]] | planned | planned | planned | planned |
+| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | planned | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | planned | planned | [[post-panic-vol-selling]] | planned |
 | **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | [[leverage-stress-tail-hedge]] | planned | — ⁶ | planned | planned | [[event-vol-buying]] | planned | planned |
 | **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | planned | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
-| **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
+| **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | planned | planned |
 | **On-chain flow** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | planned |
 | **Sentiment** | [[regime-adaptive-strategy]] | planned | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
 
@@ -70,15 +70,33 @@ A single cell can hold multiple page references if more than one page exists for
 
 **¹² [[session-aware-mean-reversion]]** appears in both momentum × session/time filter and mean-reversion × session/time filter cells because the strategy covers session-conditional parameter adjustment for both RSI/VWAP-based mean-reversion and the fading of off-hours momentum overshoots at major-session opens. The primary primitive is mean-reversion (session conditioning amplifies the reversion); the momentum row cell reflects the "fade the off-hours drift at session open" use case.
 
+**¹³ [[cascade-monetization-rotation]]** is placed in the liquidation plays × tail-hedge cell rather than vol buying × tail-hedge because the defining P&L mechanism is the capital rotation from the tail-hedge payoff into a cascade-fade entry — the liquidation-plays (cascade fade) leg is the completion of the lifecycle. The tail hedge is the entry leg (referenced to [[leverage-stress-tail-hedge]]); the liquidation-fade redeployment is the exit and redeployment logic. This page would be redundant with [[leverage-stress-tail-hedge]] in the vol buying row.
+
 ---
 
 ## Matrix Cell Counts (as of 2026-07-19)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 37 |
-| Planned (gap to fill) | 54 |
+| Linked to existing page | 42 |
+| Planned (gap to fill) | 49 |
 | Non-viable (`—`) | 9 |
+
+---
+
+## Batch B5 New Pages (2026-07-19)
+
+Five new combination pages created in this batch — matrix cells updated above:
+
+- [[trend-aware-carry]] — funding carry × trend gate (carry book that scales down or exits the short-perp leg when a strong directional trend is running against the structure; uptrends at SMA20+15% + RSI ≥ 70 + funding ≥ 0.05%/8h trigger 60% → 30% deployment reduction; different from carry-with-tail-hedge which maintains full deployment with a permanent hedge overlay)
+- [[post-panic-vol-selling]] — vol selling × sentiment-extreme filter (sell BTC/ETH options after a panic spike once five stabilisation gates are simultaneously confirmed: Fear & Greed ≤ 20 for 2 days, DVOL ≥ 85th percentile AND +20 vol-pt spike, 24h RV rolling over from ≥ 80 vol-pt peak, no fresh cascade in 12h, no new 7-day low in 4h; explicitly differentiated from funding-conditioned-vol-selling which fires on bullish crowding, not post-crash fear)
+- [[cascade-monetization-rotation]] — liquidation plays × tail-hedge overlay (lifecycle strategy: accumulate OTM puts during stress buildup per leverage-stress-tail-hedge entry rules, monetise when cascade fires ≥12% drop or DVOL +25pts+$500M liq, rotate 60% of gross payoff into cascade-fade perp long within 4 hours; the combination is the capital rotation, not a novel approach to either leg)
+- [[unlock-pair-hedge]] — stat-arb/pairs × unlock/event calendar (express cliff unlock shorts as a long-short pair: short the unlocking token perp, long a beta-matched sector peer in a 1/beta ratio; strips BTC/sector beta to isolate idiosyncratic supply shock; explicitly differentiated from unlock-short-with-crowding-gate which is an outright short filtered for crowding, not a beta-hedged pairs structure)
+- [[trend-aligned-premium-selling]] — vol selling × trend gate (sell puts in confirmed uptrends, calls in confirmed downtrends; trend selects which wing to sell rather than whether to sell; DVOL ≥ 50th percentile + trend confirmation = sell the under-bid wing; explicitly differentiated from funding-conditioned-vol-selling which fires on funding crowding in any regime, and from post-panic-vol-selling which fires on post-crash fear)
+
+Skips (0 of 5 primaries): all five primary candidates confirmed additive. No backups used.
+
+Note: [[post-panic-vol-selling]] fills the vol selling × sentiment-extreme filter cell; [[trend-aligned-premium-selling]] fills the vol selling × trend gate cell. The two vol-selling combos are in different cells and their leads explicitly differentiate them from each other and from funding-conditioned-vol-selling.
 
 ---
 

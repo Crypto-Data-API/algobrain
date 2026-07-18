@@ -41,12 +41,10 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       useful new tags (macro, security, solana, real-world-assets, execution, exploits,
       trading-bots, strategy-development, hedging, anomalies, narrative-impact) into the
       approved list in BOTH CLAUDE.md and AGENTS.md.
-- [ ] A7. Remove 10 pure-equity strategy pages: value-averaging, fundamental-analysis/
-      sector-rotation, fundamental-analysis/event-driven-trading, combinations/
-      momentum-value-combination, combinations/fundamental-technical-fusion,
-      algorithmic/factor-investing (or crypto-rewrite), quantitative/calendar-effects,
-      arbitrage/prime-broker-cascade-trading, arbitrage/block-trade-flipping-arbitrage,
-      leveraged-etf-rebalancing. Fix inbound links to them.
+- [x] A7. (2026-07-19, iter 5) All 10 pure-equity strategy pages converted to scope-note
+      REDIRECTS pointing at crypto counterparts (not deleted — the 3 heavily-linked ones had
+      ~140 inbound refs; redirects keep the graph intact). Zero `markets: [stocks]` strategy
+      pages remain; equity content recoverable from git history.
 - [ ] A8. Duplicates: basis-trade → redirect to basis-trading (keep a Treasury-basis note);
       resolve delta-hedging vs delta-hedged-options; review duplicate titles (Algorithmic
       Trading ×4, DCA ×3, Convex Finance ×3, dYdX ×3, Backtesting ×3, Beefy ×2) — merge or
@@ -63,7 +61,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8 (B2 ✓ iter 2; B3 ✓ iter 3; B4 ✓ iter 4; 54 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
+- [ ] B2–B8 (B2 ✓ iter 2; B3 ✓ iter 3; B4 ✓ iter 4; B5 ✓ iter 5; 49 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
       highest-value unfilled cells; update matrix each time. Continue until every viable cell
       is filled or explicitly marked non-viable ("all possible combinations").
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
@@ -96,3 +94,6 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   event-vol-buying, session-aware-mean-reversion, leverage-stress-tail-hedge,
   spot-led-momentum-filter. Matrix 37/54/9. A4: 7 gap-finder source stubs, refs 228→0.
   A5: frontmatter completeness now clean. Lint link issues 525→513.
+- 2026-07-19 iter 5 (B5 + A7): 5 combo pages — trend-aware-carry, post-panic-vol-selling,
+  cascade-monetization-rotation, unlock-pair-hedge, trend-aligned-premium-selling. Matrix
+  42/49/9. A7: 10 equity pages → scope-note redirects. Lint 513→511.
