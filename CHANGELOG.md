@@ -4,6 +4,19 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 9: ★ combination program complete ★
+
+The combination-strategy program launched in iteration 1 is **complete**: every cell of the
+12-primitive × 10-overlay matrix is now either covered by a dedicated buildable strategy
+page or marked non-viable with a reasoned footnote (¹–⁶⁵). Final state: **66 covered /
+0 planned / 54 non-viable** of 120 cells; **39 new combination pages** were authored across
+the program (B1–B8b), each on the full buildable schema with explicit differentiation from
+its nearest neighbors. Final four: vol-scaled-carry-sizing (multi-cell carry/basis sizing),
+oi-gated-pairs (short-leg squeeze gate), atr-scaled-grid (vol-adaptive grid geometry),
+vol-gated-mean-reversion (resolves the vol-targeting/reversion tension). Users can now
+navigate from any strategy primitive to every viable overlay combination via
+`combination-matrix.md`.
+
 ## 2026-07-19 — Improvement loop, iteration 8: combination batch 8 + link-stub round
 
 - 5 more combination strategies: vol-balanced-pairs, complacency-vol-buying (symmetric

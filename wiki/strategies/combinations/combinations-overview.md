@@ -2,7 +2,7 @@
 title: "Combination Strategies"
 type: overview
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [combinations, meta-strategy, methodology, portfolio-theory]
 aliases: ["Combinations Overview", "Strategy Combinations", "Combo Strategies"]
@@ -43,13 +43,13 @@ SORT status DESC, updated DESC
 
 ## Primitive × Overlay Coverage
 
-The [[combination-matrix]] maps the full space of crypto strategy primitives against overlays/filters. As of 2026-07-18:
+The [[combination-matrix]] maps the full space of crypto strategy primitives against overlays/filters. **Program complete as of 2026-07-19: all 120 matrix cells are either linked to a dedicated page or marked non-viable with a reasoned footnote (0 planned cells remain). The wiki now contains 66 combination strategy pages.**
 
 | Status | Count |
 |---|---|
-| Existing pages | 22 matrix cells covered |
-| Planned | 69 cells (highest-priority gaps) |
-| Non-viable (`—`) | 9 cells (explained in the matrix) |
+| Existing pages | 66 matrix cells covered |
+| Planned | 0 |
+| Non-viable (`—`) | 54 cells (explained in the matrix with footnotes ¹–⁶⁵) |
 
 ---
 

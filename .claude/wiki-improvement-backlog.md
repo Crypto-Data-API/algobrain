@@ -50,13 +50,23 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       microstructure/algorithmic-trading.md generic dupe DELETED (same-stem ambiguity);
       convex-finance.md cleaned to true redirect; dYdX/Convex entity pages retitled
       "(Protocol)".
-- [ ] A9. Same-stem filename collisions (NEW, found iter 7): 54 stems exist in 2+ folders
-      (uniswap, aave, arbitrum, funding-rate, liquidity, gamma-scalping ×3,
-      dollar-cost-averaging ×3, backtesting-overview, data-sources-overview,
-      technical-analysis-overview, …) making [[wikilinks]] ambiguous in Obsidian. Needs a
-      policy first (proposal: coin/market page owns the bare stem; entity page gets
-      -protocol/-exchange suffix; category overviews get folder-prefixed stems), then a
-      scripted rename + link-rewrite pass. Sub-agent-sized; handle as a dedicated batch.
+- [ ] A9. Same-stem collisions — CLASSIFIED (iter 9), dispositions per bucket:
+      (a) redirect-vs-real (21 stems, incl. gamma-scalping ×3): delete the redirect twin
+          after merging its aliases into the real page (check each redirect's target first —
+          circular ones are broken anyway; sector-rotation's scope-note needs care since
+          indicators/sector-rotation may itself be equity-scoped);
+      (b) coin-vs-entity (12: aave, uniswap, gmx, blur, eigenlayer, magic-eden, tensor,
+          thorchain, augur, beefy-finance, rarible, superrare): MERGE unique entity content
+          into the enriched markets/crypto page, then delete the entity file;
+      (c) overview stems (3): rename ai-trading twins (ai-backtesting-overview,
+          ai-data-providers-overview) + merge/delete indicators/technical-analysis-overview;
+          rewrite inbound links to renamed stems;
+      (d) other real pairs (19): merge true concept dupes (impermanent-loss, interest-rate-
+          risk, volatility-risk-premium, stablecoin-depegs, bitcoin-halving, DCA trio);
+          rename token-vs-other collisions (liquidity→liquidity-token, uranium crypto→
+          uranium-token, terra-luna crash page → check vs terra-luna-collapse);
+          source-vs-entity data-provider pairs (coinglass/glassnode/nansen/dune) → merge or
+          rename entity twin. Sub-agent batch; verify link resolution after.
 
 ## Phase B — strategy depth (PRIORITY)
 
@@ -72,9 +82,11 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - [x] B2–B8. (iters 2–8) DONE: 35 new combination pages across 7 batches; B8 added an
       honest convergence pass (29 thin cells → non-viable with per-cell footnote reasons).
       Matrix: 61 covered / 9 planned / 50 non-viable of 120 cells.
-- [ ] B8b. FINAL combination mini-batch: resolve the last 9 planned cells (write pages for
-      the viable ones — incl. held-over backups vol-scaled-carry-sizing, oi-gated-pairs —
-      or mark non-viable with reasons). Completes "all possible combinations".
+- [x] B8b. (2026-07-19, iter 9) ★ COMBINATION PROGRAM COMPLETE ★ — 4 final pages
+      (vol-scaled-carry-sizing multi-cell, oi-gated-pairs, atr-scaled-grid,
+      vol-gated-mean-reversion) + 5 reasoned non-viable reclassifications. Final matrix:
+      66 covered / 0 planned / 54 non-viable of 120 cells; footnotes ¹–⁶⁵ document every
+      non-viable call. Planner patched 2 missing Null-hypothesis sections post-verify.
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
       section to buildable strategy pages missing them (~80–120 pages, batches of ~25).
 - [ ] B10. Example-trade completion: add "## Example trade" with concrete round-trip numbers
@@ -119,3 +131,6 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   narrative-crowding-exit, unlock-cascade-watch, event-calendar-risk-gating (multi-cell);
   + convergence pass (29 cells → non-viable, reasoned). Matrix 61/9/50 of 120. A3: 30 stub
   pages, alias-aware broken refs 4,360→3,600, lint 511→450.
+- 2026-07-19 iter 9 (B8b): COMBINATION PROGRAM COMPLETE — matrix 66/0/54 of 120, 39 new
+  combination pages total across the program, every non-viable cell reasoned. A9 collision
+  inventory classified into 4 dispositions (ready for a dedicated batch).
