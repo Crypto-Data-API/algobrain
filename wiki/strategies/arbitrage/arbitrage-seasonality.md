@@ -1,6 +1,6 @@
 ---
 title: "Arbitrage Strategy Seasonality"
-type: strategy
+type: reference
 created: 2026-04-20
 updated: 2026-06-21
 status: excellent

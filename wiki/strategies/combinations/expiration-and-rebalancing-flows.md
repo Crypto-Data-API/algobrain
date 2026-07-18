@@ -2,17 +2,53 @@
 title: Expiration & Rebalancing Flows
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
-status: good
-tags: [combinations, alpha-edge, calendar-effects, options-expiration, rebalancing, passive-flows, structural]
+updated: 2026-07-19
+status: review
+tags: [combinations, alpha-edge, calendar-effects, options-expiration, rebalancing, passive-flows, structural, crypto, derivatives]
 strategy_type: hybrid
-markets: [stocks, futures]
+markets: [stocks, futures, crypto]
 complexity: intermediate
 backtest_status: untested
-related: [gamma-exposure-trading, structural-forced-selling, cross-asset-signals, expiration-and-rebalancing-flows]
+related: ["[[gamma-exposure-trading]]", "[[structural-forced-selling]]", "[[cross-asset-signals]]", "[[dvol]]", "[[deribit]]", "[[max-pain]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural, behavioral]
+edge_mechanism: "Calendar-mandated flows (quarterly futures rolls, crypto Deribit monthly OpEx, passive-fund rebalancing) are non-discretionary and publicly known; the counterparty is the mandate-constrained fund that must execute regardless of price, and the silo-focused trader unaware of the calendar effect."
+
+# Data and infrastructure requirements
+data_required: [options-chain, open-interest, max-pain, funding-rates, ohlcv-intraday]
+min_capital_usd: 5000
+capacity_usd: 100000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.7
+expected_max_drawdown: 0.15
+breakeven_cost_bps: 20
+
+# Kill criteria
+kill_criteria: |
+  - quarterly Deribit OpEx pinning effect absent for 4 consecutive expirations
+  - index-rebalancing front-run edge compresses to < 1% average (crowded out)
+  - rolling 6-month calendar-flow trades produce Sharpe < 0.3
+
 ---
 
 # Expiration & Rebalancing Flows
+
+## Edge source
+
+**Structural** (primary) and **behavioral** (secondary). See [[edge-taxonomy]].
+
+Mandate-constrained funds must execute at specific calendar dates regardless of price. The edge is knowing in advance that forced flow will hit and positioning with or against it. The behavioral component: many traders fail to rotate strategy playbooks around the calendar — they trade the same setup on OpEx Friday as any other day, ignoring the pinning effect.
+
+**Crypto OpEx (Deribit) version:** Deribit options settle every Friday (daily, weekly, monthly, quarterly). The largest notional expirations are the last Friday of each month and the quarterly expiries (last Friday of March/June/September/December). BTC price is repeatedly observed to gravitate toward the [[max-pain]] strike in the days before a large expiry as market-makers delta-hedge to neutrality. Post-expiry, the pinning force releases and vol expands.
+
+**Quarterly futures roll:** CME BTC futures roll quarterly (March/June/September/December). Basis and rolling costs create predictable spread patterns. The crypto equivalent of the VIX roll-yield dynamic operates in BTC quarterly perpetual-to-futures basis.
+
+## Null hypothesis
+
+If calendar flows are fully priced in by anticipatory positioning, no edge above transaction costs remains. The futures basis on roll date would be purely mechanical, pinning effects would be absorbed by pre-positioning, and index reconstitution would show zero excess return above announcement-day close. All of these have been partially but not fully arbitraged away.
 
 ## The Edge
 
@@ -98,3 +134,28 @@ The edge: calendar-driven flows are knowable in advance, large in magnitude, and
 - **VIX futures roll** -- VIX short-term futures ETFs (UVXY, VXX) must roll contracts monthly, creating predictable selling pressure on near-month VIX futures. This "roll yield" bleeds value from VIX ETFs and provides a structural short-vol edge for traders who sell VIX futures ahead of the roll
 
 Calendar flows are the closest thing to free money in markets. They are not free -- they are small, require precise timing, and demand discipline. But they are structural, repeatable, and will exist as long as passive investing and derivatives markets exist.
+
+## Capacity limits
+
+Calendar-flow trades have modest capacity: the edge is typically 0.3–1% per event, and the flows are concentrated in brief windows (final 30 minutes of a trading session, a single expiry date). For the crypto OpEx play, max-pain positioning is meaningful only for BTC/ETH (where Deribit OI is large enough to matter — $5B+ notional) and not for altcoins. Practical capacity for a crypto OpEx strategy: $1M–$50M notional.
+
+## What kills this strategy
+
+1. **Crowded front-running** — index reconstitution and OpEx pinning effects have both compressed as they became widely known.
+2. **Calendar changes** — changes to Deribit's settlement schedule or index rebalancing rules invalidate the playbook.
+3. **Macro override** — a FOMC meeting or major crypto news on OpEx day overwhelms the structural pin.
+4. **Low OI expiry** — in a bear market with thin crypto options activity, insufficient open interest at any strike to create a pinning force.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Quarterly Deribit OpEx pinning absent for 4 consecutive expirations
+- Index-rebalancing front-run edge compresses to < 1%
+- Rolling 6-month calendar-flow Sharpe < 0.3
+
+## Getting the Data (CryptoDataAPI)
+
+- `GET /api/v1/market-intelligence/options` — BTC/ETH options OI, [[max-pain]] strike
+- `GET /api/v1/derivatives/open-interest` — cross-venue OI aggregation
+
+Full catalog: [[cryptodataapi-market-intelligence]].

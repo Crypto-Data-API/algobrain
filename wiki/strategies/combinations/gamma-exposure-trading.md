@@ -2,17 +2,51 @@
 title: Gamma Exposure (GEX) Trading
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
-status: good
-tags: [combinations, alpha-edge, options, gamma, dealer-hedging, market-microstructure, volatility]
+updated: 2026-07-19
+status: review
+tags: [combinations, alpha-edge, options, gamma, dealer-hedging, market-microstructure, volatility, crypto, derivatives]
 strategy_type: hybrid
 markets: [crypto]
 complexity: advanced
 backtest_status: untested
-related: [expiration-and-rebalancing-flows, cross-asset-signals, volatility-targeting, options-equity-overlay]
+related: ["[[expiration-and-rebalancing-flows]]", "[[cross-asset-signals]]", "[[dvol]]", "[[deribit]]", "[[max-pain]]", "[[gamma-scalping]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural, analytical]
+edge_mechanism: "Deribit market-makers must delta-hedge their net option positions mechanically; above the gamma-flip level their hedging stabilises price (buy dips, sell rallies), below it they amplify moves (sell dips, buy rallies); knowing the aggregate net gamma position predicts whether the next daily move will be mean-reverting or trending."
+
+# Data and infrastructure requirements
+data_required: [options-chain, open-interest, max-pain, dvol-index, funding-rates]
+min_capital_usd: 10000
+capacity_usd: 200000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.8
+expected_max_drawdown: 0.20
+breakeven_cost_bps: 25
+
+# Kill criteria
+kill_criteria: |
+  - GEX regime prediction success rate (positive-GEX = range, negative-GEX = trend) drops below 55% over 3 months
+  - crypto options market structure changes materially (e.g., Deribit loses dominant OI share)
+  - drawdown > 15% while GEX signal is active
+
 ---
 
 # Gamma Exposure (GEX) Trading
+
+## Edge source
+
+**Structural** and **analytical**. See [[edge-taxonomy]].
+
+Deribit market-makers hedge their net delta position continuously. That hedging is mechanical and non-discretionary — they have no choice. When net dealer gamma is positive (they are net long gamma), they sell into rallies and buy into dips to stay delta-neutral, creating a stabilising force. When net dealer gamma is negative, they must do the opposite — amplifying moves. Knowing which regime the market is in (via [[max-pain]] and OI-weighted gamma sums) is free public information; few retail traders have the tools to act on it.
+
+**Crypto specifics:** The equity GEX infrastructure (SpotGamma, Squeezemetrics) does not cover Deribit. Crypto GEX must be computed manually from Deribit's public API (per-strike delta, gamma, OI) or sourced from [[greeks-live]]. The crypto effect is measurably weaker than equities because (1) crypto options volume is still a fraction of perp/spot volume and (2) hedging happens via perp rather than spot, which adds funding-rate noise. The OpEx pinning effect near the last-Friday settlement and the quarterly expiry is the most robust crypto GEX signal.
+
+## Null hypothesis
+
+If dealer hedging flows are negligible relative to directional perp flow (which they often are in crypto), GEX regime prediction is noise. Positive and negative GEX periods would show the same distribution of daily returns, and the strategy would earn ≈ 0 above costs. The counter-evidence: the empirical max-pain drift in the final 48 hours of monthly/quarterly Deribit expiries is observable in public data.
 
 ## The Edge
 
@@ -96,3 +130,28 @@ Near options expiration (especially monthly OpEx on the third Friday), open inte
 - **Quad witching** (simultaneous expiry of stock options, index options, index futures, stock futures) creates the highest GEX concentration of the year -- and the most predictable pinning and post-expiry moves
 
 The core insight: in a market dominated by options hedging, understanding dealer positioning is not optional. It is the hidden hand moving price.
+
+## Capacity limits
+
+GEX-based strategies are regime signals applied to directional or premium-selling positions — their capacity is determined by the underlying instrument. For BTC/ETH perp positions sized on GEX signals, $100M–$200M is feasible. The OpEx-pinning play (sell premium near expiry) has lower capacity due to the thinness of near-expiry crypto options outside BTC/ETH.
+
+## What kills this strategy
+
+1. **Perp volume dominates option hedging** — if futures/perp flow is 50× options flow (common in crypto altcoin markets), GEX is irrelevant to price discovery.
+2. **Deribit concentration risk** — if the BTC/ETH options market fragments to multiple venues, aggregate GEX from any single venue becomes less representative.
+3. **0DTE expansion** — very short-dated options reset gamma daily, making regime signals less persistent (the same dynamic that changed equity GEX after 2022).
+4. **Market-maker behaviour change** — if dominant Deribit market-makers shift hedging venues or cadences, the predictable hedging pattern breaks.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- GEX regime prediction success rate < 55% over 3 months
+- Deribit loses dominant BTC/ETH OI share
+- Drawdown > 15% while GEX signal is active
+
+## Getting the Data (CryptoDataAPI)
+
+- `GET /api/v1/market-intelligence/options` — BTC/ETH options OI, max-pain, GEX-adjacent metrics
+- For per-strike delta and gamma: use Deribit API directly or [[greeks-live]]
+
+Full catalog: [[cryptodataapi-market-intelligence]].

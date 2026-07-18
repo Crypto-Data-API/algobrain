@@ -1,6 +1,6 @@
 ---
 title: "Options Strategies (Crypto)"
-type: strategy
+type: reference
 created: 2026-04-13
 updated: 2026-07-14
 status: good

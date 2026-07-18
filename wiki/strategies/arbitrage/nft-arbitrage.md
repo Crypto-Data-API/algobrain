@@ -2,8 +2,8 @@
 title: "NFT Arbitrage"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-13
-status: good
+updated: 2026-07-19
+status: review
 tags: [arbitrage, nft, opensea, blur, marketplace, floor-price, traits, fractionalization, crypto]
 aliases: ["NFT Arb", "NFT Marketplace Arbitrage", "NFT Floor Arbitrage"]
 strategy_type: algorithmic
@@ -12,13 +12,46 @@ markets: [crypto]
 complexity: advanced
 backtest_status: untested
 related: ["[[nft-trading]]", "[[nft]]", "[[decentralized-exchanges]]", "[[cross-exchange-arbitrage]]", "[[wash-trading]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural, informational]
+edge_mechanism: "NFT marketplace fragmentation (no shared order book) creates persistent price dislocations; the counterparty is uninformed sellers who list below the clearing price on a low-traffic venue, and slow/manual buyers who do not monitor all venues simultaneously."
+
+# Data and infrastructure requirements
+data_required: [nft-floor-data, marketplace-listings, on-chain-gas, rarity-scores]
+min_capital_usd: 2000
+capacity_usd: 10000000
+crowding_risk: high
+
+# Performance expectations
+expected_sharpe: 0.8
+expected_max_drawdown: 0.50
+breakeven_cost_bps: 500
+
+# Kill criteria
+kill_criteria: |
+  - collection floor drops > 30% while holding inventory
+  - NFT held > 7 days without a bid within 10% of ask (trait arb)
+  - combined fees + royalties > 80% of gross spread on any cross-marketplace trade
 ---
 
 # NFT Arbitrage
 
-## Overview
+## Edge source
 
-NFT arbitrage exploits price discrepancies for the same non-fungible tokens across different marketplaces. Unlike fungible tokens (where 1 ETH = 1 ETH regardless of venue), each NFT is unique, creating a fragmented and inefficient market where the same collection -- or even the same individual token -- can be listed at significantly different prices on OpenSea, Blur, X2Y2, Magic Eden, and other platforms. The arbitrageur identifies these discrepancies, buys on the cheaper marketplace, and lists or sells on the more expensive one.
+**Structural** and **informational**. See [[edge-taxonomy]].
+
+NFT markets have no unified order book — each marketplace (OpenSea, Blur, X2Y2, Magic Eden, Sudoswap) holds its own listings independently. No automatic arbitrage mechanism forces prices to converge; only human or automated searchers do. The structural source is marketplace fragmentation itself. The informational source is collection knowledge: recognising that a rare-trait NFT is mispriced requires domain expertise that most market participants lack.
+
+## Why this edge exists
+
+The counterparty is a seller who listed at below-clearing-price on a low-traffic marketplace, or a buyer who does not monitor all venues. Unlike fungible arb (CEX–CEX), no smart-contract mechanism auto-converges the prices. The edge decays as more bots scan all venues, but trait knowledge remains a slower-decaying informational edge. Wash trading artificially inflates reported volume, and the buyer of a wash-traded NFT at "floor" pays the real floor — below the manipulated nominal price.
+
+## Null hypothesis
+
+Under efficient markets, cross-marketplace price differences would reflect only gas and royalty costs. Any observed surplus above those costs would be transient noise, and no systematic edge would persist across collection cycles. If true, the distribution of cross-marketplace spreads would be centered on (fees + gas), with no fat tail of exploitable gaps.
+
+## How It Works for the same non-fungible tokens across different marketplaces. Unlike fungible tokens (where 1 ETH = 1 ETH regardless of venue), each NFT is unique, creating a fragmented and inefficient market where the same collection -- or even the same individual token -- can be listed at significantly different prices on OpenSea, Blur, X2Y2, Magic Eden, and other platforms. The arbitrageur identifies these discrepancies, buys on the cheaper marketplace, and lists or sells on the more expensive one.
 
 Beyond simple cross-marketplace arb, more sophisticated variants include trait-based arbitrage (buying NFTs with rare traits that are priced at or near the collection floor), wrapped/fractionalized NFT arbitrage (exploiting the gap between NFTX or Sudoswap vault token prices and whole NFT prices), and collection-level statistical arb (identifying collections that are underpriced relative to comparable projects). However, NFT arbitrage is significantly riskier than fungible token arbitrage due to illiquidity, high marketplace fees, wash trading that distorts reported prices, and the risk of rug pulls or abandoned projects.
 
@@ -68,6 +101,25 @@ Beyond simple cross-marketplace arb, more sophisticated variants include trait-b
 3. **Buy at 32 ETH.** List at 52 ETH (conservative estimate, below recent comparables).
 4. **Sells after 5 days** at 48 ETH (buyer negotiated down).
 5. **Net profit after fees:** 48 - 32 - fees (~2.5 ETH) = **~13.5 ETH**.
+
+## Capacity limits
+
+Cross-marketplace NFT arb is self-limiting: the universe of active, liquid collections with meaningful floor-price volume is small (typically 10–30 collections at any given time). Bot-driven arbs are already saturated for the top collections. Practical capacity for a human-and-bot operation is $1M–$10M deployed capital. Beyond that, holding large inventory concentrates illiquidity risk and the trader becomes the market.
+
+## What kills this strategy
+
+1. **Collection collapse** — NFT collections can lose 80–95% of floor value in weeks; held inventory becomes worthless.
+2. **Marketplace consolidation** — if one marketplace (Blur) dominates flow, price gaps narrow across the board.
+3. **Royalty enforcement changes** — platforms toggling royalty enforcement change the cost structure of round-trips overnight.
+4. **Gas spikes** — Ethereum congestion during a mint or cascade can make small arbs unprofitable ($50+ gas on a $100 spread).
+5. **Wash trading convergence** — if the apparent "floor" is a wash-traded ceiling, buying at that price leaves no real buyer above.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Collection floor drops > 30% while holding inventory
+- NFT held > 7 days without a bid within 10% of ask (trait arb)
+- Combined fees + royalties > 80% of gross spread on any cross-marketplace trade
 
 ## Risk Management
 

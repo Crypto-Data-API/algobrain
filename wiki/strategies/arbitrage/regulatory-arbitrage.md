@@ -1,6 +1,6 @@
 ---
 title: "Regulatory Arbitrage"
-type: strategy
+type: reference
 created: 2026-04-07
 updated: 2026-04-07
 status: good

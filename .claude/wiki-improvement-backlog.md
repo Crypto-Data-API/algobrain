@@ -93,13 +93,16 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - [x] B10. (2026-07-19, iter 10) DONE — all 10 remaining pages got worked examples
       (mev-execution-guide correctly got a guide-framed "Worked example"). Every buildable
       strategy page now has edge_source + kill criteria + worked example.
-- [ ] B11. Essay→buildable upgrades — RE-SCOPED (iter 10): 99 type:strategy pages lack
-      edge_source, BUT many are intentional companion guides (arbitrage-* meta pages) and
-      options STRUCTURE pages that the 2026-07-14 waves deliberately kept on a structure
-      template (see wiki/log.md Wave 3: "No buildable-alpha schema was bolted onto
-      theory/structure pages"). Plan: TRIAGE batch first — classify all 99 into
-      {companion-guide OK | structure-page OK | genuine strategy needing upgrade}, record
-      the classification here, then upgrade only the genuine ones in batches of ~10.
+- [ ] B11. Essay→buildable upgrades — TRIAGED iter 11 (full table in
+      .claude/b11-classification.md): 25 GUIDE pages retyped to `type: reference`;
+      40 STRUCTURE pages left on the Wave-3 structure template by design; 34 STRATEGY-class.
+      10 upgraded in iter 11 (5-percent-otm-put-overlay, trend-following-cta, nft-arbitrage,
+      alternative-data-alpha, asymmetric-barbell, cross-asset-signals,
+      expiration-and-rebalancing-flows, gamma-exposure-trading, multi-timeframe-confluence,
+      regime-adaptive-strategy). REMAINING: 24 strategy-class pages (list in classification
+      file) — 2 more batches of ~12. Residual equity framing flagged in 4 pages' old prose
+      (structural-forced-selling, trend-plus-tail-hedge, news-trading,
+      expiration-and-rebalancing-flows) — fold into the next batch.
 - [x] B12. (2026-07-19, iter 10) 12 highest-inbound stub concepts expanded to full draft
       pages with Trading-relevance sections (layer-1, depin, crypto-fear-and-greed-index,
       gamefi, liquidations, governance-token, privacy-coins, mev, play-to-earn,
@@ -147,3 +150,5 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - 2026-07-19 iter 10 (B9 verified done + B10 + B12): B9 needed no work (0 pages missing
   kill criteria — audit overestimate). 10 worked examples added; 12 stubs expanded.
   Remaining: B11 triage (99 essays), A9 collisions.
+- 2026-07-19 iter 11 (B11 triage + batch 1): 25 guides→reference, 40 structures preserved,
+  10/34 strategies upgraded. 24 strategy-class upgrades remain (+4 equity-prose cleanups).

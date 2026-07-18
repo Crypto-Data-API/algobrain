@@ -4,6 +4,18 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 11: strategy-catalog triage + upgrades
+
+- **Full triage of the 99 non-schema strategy pages** (classification in
+  `.claude/b11-classification.md`): 25 companion/meta guides retyped to `type: reference`
+  (no longer pollute strategy queries); 40 options-structure pages confirmed intentionally
+  on the structure template; 34 genuine strategies identified.
+- **10 strategies upgraded to the buildable schema** (edge source, null hypothesis, numeric
+  kill criteria, capacity, failure modes — existing prose preserved): trend-following-cta,
+  regime-adaptive-strategy, gamma-exposure-trading, cross-asset-signals,
+  multi-timeframe-confluence, asymmetric-barbell, alternative-data-alpha, nft-arbitrage,
+  expiration-and-rebalancing-flows, 5-percent-otm-put-overlay. 24 remain (queued).
+
 ## 2026-07-19 — Improvement loop, iteration 10: schema completion + stub expansion
 
 - **Every buildable strategy page now carries the full schema** — a planner audit found

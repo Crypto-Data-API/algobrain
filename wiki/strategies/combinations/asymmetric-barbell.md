@@ -2,17 +2,51 @@
 title: Asymmetric Barbell Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-04-14
-status: good
-tags: [combinations, alpha-edge, portfolio-construction, tail-risk, convexity, antifragile, risk-management]
+updated: 2026-07-19
+status: review
+tags: [combinations, alpha-edge, portfolio-construction, tail-risk, convexity, antifragile, risk-management, crypto]
 strategy_type: hybrid
 markets: [crypto, bonds]
 complexity: intermediate
 backtest_status: untested
-related: ["[[contrarian-extremes]]", "[[structural-forced-selling]]", "[[gamma-exposure-trading]]", "[[trend-plus-tail-hedge]]", "[[crisis-alpha]]", "[[convexity]]", "[[dragon-portfolio]]", "[[mark-spitznagel]]", "[[universa-investments]]"]
+related: ["[[contrarian-extremes]]", "[[structural-forced-selling]]", "[[gamma-exposure-trading]]", "[[trend-plus-tail-hedge]]", "[[crisis-alpha]]", "[[convexity]]", "[[dragon-portfolio]]", "[[mark-spitznagel]]", "[[universa-investments]]", "[[tail-hedging]]", "[[deribit]]"]
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral]
+edge_mechanism: "The safe bucket earns risk-free carry while the convex bucket is an out-of-the-money bet; the counterparty is the market participant who sells convexity cheaply (options writers, early-stage token issuers) and the concentrated investor who has no safe bucket to survive a tail event."
+
+# Data and infrastructure requirements
+data_required: [options-chain, dvol-index, stablecoin-yield, funding-rates]
+min_capital_usd: 10000
+capacity_usd: 100000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: 0.7
+expected_max_drawdown: 0.15
+breakeven_cost_bps: 50
+
+# Kill criteria
+kill_criteria: |
+  - safe bucket yield drops below inflation rate for > 12 months (carrying cost too high)
+  - convex bucket has zero payoffs across 3+ full market cycles
+  - crypto convex bets repeatedly zero out with no tail event monetisation after 24+ months
+
 ---
 
 # Asymmetric Barbell Strategy
+
+## Edge source
+
+**Risk-bearing** (primary) and **behavioral** (secondary). See [[edge-taxonomy]].
+
+The safe bucket earns the risk-free rate; the convex bucket exploits the fact that most participants are structurally unable to hold through repeated small losses. The behavioral edge: loss aversion and career risk prevent institutional investors from maintaining a small, perpetually-losing "lottery" allocation through multiple cycles. This supply-demand imbalance keeps OTM convex instruments (options, early-stage token allocations, DeFi protocol bets) underpriced relative to their expected payoff.
+
+**Crypto application:** The crypto risk-bucket equivalent is deep OTM BTC/ETH puts on [[deribit]] (see [[tail-hedging]]) combined with early-stage token positions. The safe bucket is stablecoin yield on battle-tested DeFi protocols (Aave, Maker) or off-chain T-bills. Note: SPY puts in the original formulation have no crypto equivalent — use BTC/ETH Deribit puts or perpetual-futures shorts as the bearish convex instrument.
+
+## Null hypothesis
+
+If tail events are correctly priced and early-stage assets have zero expected value, the barbell earns only the risk-free rate minus the drag from the convex bucket losses. If the convex bucket is a random collection of OTM options and early tokens with collectively zero expected return, Sharpe would be ≈ 0. The positive thesis is that (a) options sellers underprice extreme tails in crypto (real, given the LUNA/FTX/2025-10-10 record) and (b) the best early-stage tokens are positive-EV bets, not lotteries.
 
 ## The Edge
 
@@ -95,3 +129,21 @@ The goal: maximum convexity. Every dollar here must have the potential to return
 - **Long-Term Capital Management (1998)** -- the anti-barbell. They had no safe bucket. Leveraged 25:1 on "medium risk" convergence trades. One Black Swan destroyed the entire fund. The barbell is specifically designed to survive what killed LTCM
 
 The barbell is not a strategy for maximizing returns. It is a strategy for surviving long enough to capture the rare, massive payoff that most investors are structurally incapable of waiting for.
+
+## Capacity limits
+
+The barbell scales well for the safe bucket (stablecoin yield and T-bills have enormous capacity), but the convex bucket has tight capacity — deep OTM crypto option markets, early-stage token deals, and speculative allocations cannot absorb large capital without becoming the market. A $100M+ book should limit the convex bucket to listed Deribit BTC/ETH puts (good liquidity) and avoid early-stage token concentration.
+
+## What kills this strategy
+
+1. **Zero-rate environment** — the safe bucket earns nothing; the strategy depends on the risk-free rate covering the drag of the convex bucket losses.
+2. **Convex bucket selection failure** — if every convex bet consistently goes to zero with no single 10× event across 5+ years, re-evaluate the bet-quality, not the framework.
+3. **Correlation in the convex bucket** — if all convex bets (crypto puts + early tokens + biotech) zero out simultaneously (e.g., a risk-on regime lasts 5 years), the portfolio underperforms cash.
+4. **Premature capitulation** — the most common failure: closing the convex bucket after 2 years of small losses, right before the tail event.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Safe bucket yield below inflation for > 12 months
+- Convex bucket zero payoffs across 3+ full cycles
+- Crypto convex bets zero out with no monetisation after 24+ months

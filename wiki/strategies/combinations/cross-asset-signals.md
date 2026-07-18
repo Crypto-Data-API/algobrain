@@ -2,17 +2,54 @@
 title: Cross-Asset Signals
 type: strategy
 created: 2026-04-06
-updated: 2026-04-14
-status: good
-tags: [combinations, alpha-edge, intermarket-analysis, cross-asset, macro, correlation, regime-detection]
+updated: 2026-07-19
+status: review
+tags: [combinations, alpha-edge, intermarket-analysis, cross-asset, macro, correlation, regime-detection, crypto]
 strategy_type: hybrid
 markets: [crypto, forex, bonds, commodities]
 complexity: advanced
 backtest_status: untested
-related: [risk-on-risk-off-framework, regime-adaptive-strategy, gamma-exposure-trading, contrarian-extremes, intermarket-analysis, john-murphy, sector-rotation, dxy-commodity-correlation, commodity-inflation-link]
+related: ["[[regime-adaptive-strategy]]", "[[gamma-exposure-trading]]", "[[contrarian-extremes]]", "[[funding-rate-arbitrage]]", "[[cryptodataapi]]", "[[dvol]]"]
+
+# Edge characterization
+edge_source: [informational, analytical]
+edge_mechanism: "Cross-asset traders see the full chain of capital flows (bonds → credit → equities → crypto) before silo-focused traders; the counterparty is the crypto-only participant who is blindsided by a DXY break or credit-spread widening that the multi-asset view telegraphed days earlier."
+
+# Data and infrastructure requirements
+data_required: [ohlcv-daily, funding-rates, open-interest, fear-greed-index, volatility-regime, on-chain-flows]
+min_capital_usd: 10000
+capacity_usd: 500000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.8
+expected_max_drawdown: 0.20
+breakeven_cost_bps: 30
+
+# Kill criteria
+kill_criteria: |
+  - rolling 6-month win rate on DXY-crypto divergence setups drops below 45%
+  - macro-crypto correlation regime breaks (DXY-BTC correlation near 0 for > 90 days)
+  - drawdown > 15% in cross-asset book
+
 ---
 
 # Cross-Asset Signals
+
+## Edge source
+
+**Informational** and **analytical**. See [[edge-taxonomy]].
+
+The edge is panoramic information: by monitoring bonds, credit, DXY, VIX, and crypto funding simultaneously, the cross-asset trader sees the transmission mechanism between markets before single-silo participants do. Bonds and credit typically lead equities by 3–7 days; forex (DXY, JPY carry) leads crypto in risk-off regimes by 1–3 days. The counterparty is the crypto-native participant running stops at technical levels who is unaware of the DXY break or credit-spread widening already in progress.
+
+**Crypto-specific relationships with documented relevance:**
+- **DXY vs BTC**: −0.5 to −0.8 correlation in risk-off regimes; DXY breaks above resistance → BTC weakness follows within 1–5 days
+- **BTC perp funding rate**: >+0.05%/8h is the crypto equivalent of crowded equity longs; combine with DXY strength for a high-conviction short
+- **VIX term structure backwardation**: precedes risk-off crypto drawdowns; the signal is often visible in crypto DVOL structure before the spot price moves
+
+## Null hypothesis
+
+If cross-asset correlations are noise and not causally linked, any observed divergence-to-convergence pattern is coincidence. The strategy's Sharpe would be ≈ 0 net of costs, and out-of-sample win rates would be near 50%. The strength of the case: DXY-BTC correlation during the 2022 bear market was −0.75, and the DXY breakouts at 104 and 107 predicted BTC legs lower with <48h lag, consistently.
 
 ## The Edge
 
@@ -95,3 +132,30 @@ Not all cross-asset signals work all the time. Weight them by regime:
 - **Funding rate extremes in crypto** -- BTC funding rates hit +0.15%/8hr in November 2024 (extreme long crowding). Spot price corrected 15% within 4 days as overleveraged longs were liquidated
 
 The unifying principle: no market moves in isolation. Capital flows between asset classes create a chain of cause and effect. Reading that chain is the meta-skill that separates strategists from speculators.
+
+## Capacity limits
+
+The strategy itself is signal generation, not a stand-alone position book — it is applied on top of directional or swing-trading instruments. Capacity is determined by the underlying instrument. For BTC perp trades sized on cross-asset signals, $500M+ is feasible before market impact. For altcoin applications of the same framework, capacity is $1M–$20M.
+
+## What kills this strategy
+
+1. **Correlation regime breaks** — the DXY-BTC relationship is not permanent; in idiosyncratic crypto regimes (ETF approval, regulatory shock), macro signals are overridden by crypto-specific flows.
+2. **Being early** — leading indicators can be 2–3 weeks early; a DXY rally that eventually causes BTC weakness may first see BTC rally on crypto-specific news.
+3. **Crowded cross-asset trades** — when DXY-crypto inverse is consensus, its predictive power diminishes as everyone pre-positions.
+4. **Data staleness** — using weekly correlation estimates that have regime-shifted is a silent killer.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Rolling 6-month win rate on DXY-crypto divergence setups < 45%
+- DXY-BTC correlation near 0 for > 90 days (regime break)
+- Drawdown > 15% in cross-asset book
+
+## Getting the Data (CryptoDataAPI)
+
+- `GET /api/v1/regimes/current` — macro regime (risk-on / risk-off classification)
+- `GET /api/v1/sentiment/macro` — macro sentiment composite
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — perp funding (crowding signal)
+- `GET /api/v1/volatility/regime/score` — vol-stress composite
+
+Full catalog: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]].

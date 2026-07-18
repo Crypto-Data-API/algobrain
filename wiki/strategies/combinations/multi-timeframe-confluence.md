@@ -2,18 +2,52 @@
 title: "Multi-Timeframe Confluence"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
-status: good
-tags: [combinations, meta-strategy, multi-timeframe, confluence, trend-alignment, technical-analysis]
+updated: 2026-07-19
+status: review
+tags: [combinations, meta-strategy, multi-timeframe, confluence, trend-alignment, technical-analysis, crypto]
 strategy_type: hybrid
 timeframe: multi (weekly/daily/1H/15m)
 markets: [crypto, forex]
 complexity: intermediate
 backtest_status: untested
-related: ["[[moving-averages]]", "[[support-and-resistance]]", "[[fibonacci-retracement]]", "[[rsi]]", "[[macd]]", "[[volume-analysis]]", "[[triple-screen-system]]"]
+related: ["[[moving-averages]]", "[[support-and-resistance]]", "[[fibonacci-retracement]]", "[[rsi]]", "[[macd]]", "[[volume-analysis]]", "[[triple-screen-system]]", "[[funding-rate]]", "[[open-interest]]"]
+
+# Edge characterization
+edge_source: [behavioral, analytical]
+edge_mechanism: "Retail participants trade single-timeframe signals; multi-timeframe filtering concentrates entries where the daily zone, weekly trend, and hourly momentum all agree, reducing the probability of entering against a higher-timeframe participant — institutional or large-holder — already positioned in the opposite direction."
+
+# Data and infrastructure requirements
+data_required: [ohlcv-intraday, ohlcv-daily, funding-rates, open-interest]
+min_capital_usd: 1000
+capacity_usd: 1000000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: 0.7
+expected_max_drawdown: 0.20
+breakeven_cost_bps: 20
+
+# Kill criteria
+kill_criteria: |
+  - win rate on triple-confluence entries drops below 50% for 6 consecutive months
+  - drawdown > 20% from equity peak in the framework-guided book
+  - confluence zones are repeatedly violated by macro shocks on 3+ consecutive trades
+
 ---
 
 # Multi-Timeframe Confluence
+
+## Edge source
+
+**Behavioral** and **analytical**. See [[edge-taxonomy]].
+
+Most retail participants trade on a single timeframe — a 15-minute chart or a daily chart — and get whipsawed by moves that would have been obvious noise or contra-trend on the higher timeframe. Multi-timeframe confluence filters out those low-probability setups by requiring alignment across at least two timeframes. The analytical edge comes from synthesising independent signals (price structure, volume, momentum oscillators, moving averages) at the same price level — each additional confirming signal reduces the probability that the zone is random.
+
+**Crypto-specific application:** In crypto, on-chain and derivatives data add a third axis beyond price charts. A weekly chart bullish zone confirmed on the daily AND corroborated by declining exchange outflows (accumulation) and flat/negative perp funding (no leveraged-long crowding) is a multi-factor confluence that standard TA frameworks do not capture.
+
+## Null hypothesis
+
+If price levels identified by multi-timeframe confluence are no more significant than randomly selected levels, the strategy has no edge. Confluence zones would be breached and reversed as often as random entries; the higher R:R of well-chosen stops and targets would be the only statistical artifact. The framework's defence: academic literature on support/resistance levels and moving average significance is mixed, but confluence zones benefit from the self-fulfilling nature of widely watched levels.
 
 ## Overview
 
@@ -86,3 +120,21 @@ Most professional technical traders — from prop desks to independent full-time
 Institutional traders often combine this framework with [[order-flow-analysis]] and [[market-profile]] for even greater precision at the entry level.
 
 **See also:** [[trend-following]], [[swing-trading]], [[technical-analysis]], [[alexander-elder]], [[top-down-analysis]]
+
+## Capacity limits
+
+Multi-timeframe confluence is a regime-neutral signal framework. Capacity scales with the instrument and timeframe: daily-weekly confluence on BTC/ETH perps can support $100M+ deployments; hourly-15m entries on altcoin perps are limited by altcoin liquidity ($1M–$20M).
+
+## What kills this strategy
+
+1. **Persistent newsflow regimes** — during sustained macro uncertainty (FOMC uncertainty, regulatory crackdowns), daily technical levels are repeatedly violated by headline-driven gap moves.
+2. **Over-confirmation paralysis** — requiring too many confluences means missing valid setups while waiting for the "perfect" alignment.
+3. **Correlation collapse** — in a liquidity event, all technical levels fail simultaneously as forced sellers ignore price structure.
+4. **Single timeframe dominance** — if 90% of activity happens on a 5-minute chart (e.g., a meme-coin cycle), higher timeframe structure provides no filtering benefit.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Win rate on triple-confluence entries < 50% for 6 consecutive months
+- Drawdown > 20% from equity peak
+- Confluence zones breached by macro shocks on 3+ consecutive trades

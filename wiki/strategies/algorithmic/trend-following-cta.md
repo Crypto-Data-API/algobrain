@@ -2,23 +2,60 @@
 title: "Trend Following CTA"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [trend-following, CTA, managed-futures, systematic, time-series-momentum, breakout, commodities]
 aliases: ["Managed Futures", "CTA", "CTA Strategy", "CTA Strategies", "Commodity Trading Advisor", "Systematic Trend Following", "Time-Series Momentum"]
 strategy_type: quantitative
 timeframe: position
-markets: [futures, commodities, forex]
+markets: [futures, commodities, forex, crypto]
 complexity: advanced
 backtest_status: untested
 related: ["[[factor-investing]]", "[[moving-average-crossover]]", "[[turtle-trading]]", "[[momentum]]", "[[breakout-trading]]", "[[commodity-momentum]]", "[[commodity-carry-strategy]]", "[[cot-report-analysis]]", "[[commodities]]", "[[crisis-alpha]]", "[[convexity]]", "[[dragon-portfolio]]", "[[trend-plus-tail-hedge]]"]
+
+# Edge characterization
+edge_source: [behavioral, structural]
+edge_mechanism: "Trend followers profit from the systematic under-reaction and delayed adjustment of price-insensitive participants (fundamental investors, passive rebalancers, hedgers) who are slow to exit losing positions; the crowded side of a persistent trend keeps paying as late arrivals chase and early holders average down."
+
+# Data and infrastructure requirements
+data_required: [ohlcv-daily, funding-rates, open-interest, volatility-regime]
+min_capital_usd: 100000
+capacity_usd: 2000000000
+crowding_risk: high
+
+# Performance expectations (crypto-adapted)
+expected_sharpe: 0.6
+expected_max_drawdown: 0.25
+breakeven_cost_bps: 15
+
+# Kill criteria
+kill_criteria: |
+  - rolling 24-month Sharpe < 0.2 after costs
+  - drawdown > 30% from equity peak
+  - signal frequency / number of regime transitions doubles vs historical norm (over-whipsawing regime)
 ---
 
 # Trend Following CTA
 
-## Overview
+## Edge source
 
-Trend Following CTA (Commodity Trading Advisor) is a systematic strategy that trades the direction of persistent price trends across a broad universe of **50-100+ futures markets** spanning commodities, currencies, government bonds, and equity indices. The strategy uses quantitative signals -- typically [[moving-average]] crossovers, channel breakouts, or time-series momentum -- to identify and ride trends until they reverse. It is the dominant strategy in the **managed futures** industry, employed by firms like **Man AHL**, **Winton Group**, **AQR**, **Graham Capital**, and **Millburn Ridgefield**.
+**Behavioral** (primary) and **structural** (secondary). See [[edge-taxonomy]].
+
+The core behavioral source is the systematic under-reaction of price-insensitive participants — fundamental investors who average down, passive hedgers who must roll at scheduled dates, leveraged longs who exit only after forced margin calls. Their slow, predictable behaviour creates momentum that trend signals exploit. The structural component is the mandate-and-regulation architecture: pension rebalancing, futures-roll necessity, and index reconstitution force predictable flows that trend systems can front-run.
+
+**Crypto application:** In crypto perp markets, the same mechanism operates via the liquidation cascade — leveraged positions cleared by exchange auto-liquidators are the crypto equivalent of the margin-call forced exit. BTC/ETH trend following applied to perps captures this plus funding-rate regime signals. See [[vol-targeted-trend-following]] for the crypto-native buildable implementation.
+
+## Why this edge exists
+
+Trend followers are paid for tolerating drawdowns that fundamental investors cannot stomach. The counterparty is the manager or investor forced to de-risk (sell) after a loss, or to double-down on a contrarian view that the trend will reverse. In commodity and forex markets, hedgers pay a risk premium to transfer price risk — trend followers are the natural risk-absorbers. In crypto, over-leveraged retail longs and shorts are the structural counterparty.
+
+## Null hypothesis
+
+Under random-walk prices, trend signals generate no edge above transaction costs. Sharpe would be ≈ 0 net of fees. If the time-series momentum premium has fully decayed (as the crowding literature argues for some equity markets), a naive CTA system should produce Sharpe < 0.3 after costs — barely above noise.
+
+## Rules
+
+### Entry is a systematic strategy that trades the direction of persistent price trends across a broad universe of **50-100+ futures markets** spanning commodities, currencies, government bonds, and equity indices. The strategy uses quantitative signals -- typically [[moving-average]] crossovers, channel breakouts, or time-series momentum -- to identify and ride trends until they reverse. It is the dominant strategy in the **managed futures** industry, employed by firms like **Man AHL**, **Winton Group**, **AQR**, **Graham Capital**, and **Millburn Ridgefield**.
 
 The core principle is **time-series momentum**: assets that have been rising tend to continue rising, and assets that have been falling tend to continue falling, over horizons of 1-12 months. This persistence has been documented in academic literature across all major asset classes and over 100+ years of data. The CTA approach distinguishes itself from equity-only [[momentum]] by trading **both long and short** across **dozens of uncorrelated markets**, providing genuine diversification and the ability to profit in any market environment, including equity bear markets.
 
@@ -68,6 +105,27 @@ This is critical and often the most important component of a CTA system:
 - **Annual Returns:** 8-15% annualized at 10-12% volatility. Sharpe ratio: 0.5-0.8 over full cycles.
 - **Crisis Alpha:** The strategy's greatest value is its negative correlation to equities during crashes. In 2008, trend-following CTAs returned +15-25% while equities fell 40%+.
 - **Drawdowns:** Expect 15-25% peak-to-trough drawdowns lasting 1-3 years during trendless environments.
+
+## Capacity limits
+
+Traditional CTA programs are among the most scalable strategies in existence — Man AHL and Winton have run $10B+ with measurable but modest impact. Capacity is limited by liquidity of the futures markets traded, not by signal crowding (the signal is public, but most capital cannot hold through the drawdowns).
+
+**Crypto-specific note:** A crypto perp trend system has meaningfully lower capacity: BTC/ETH perp markets are large ($5B+ OI each) but other altcoin perp markets have low capacity ($20M–$200M notional before impact dominates). A crypto-only trend system should limit deployment to ~$100M before scaling concerns become acute.
+
+## What kills this strategy
+
+1. **Sustained choppy, range-bound regime** — 2011–2013 and 2015–2016 saw Managed Futures SMA-based CTAs draw down 20-30% in assets and fire many whipsaws.
+2. **Crowding and simultaneous exit** — when hundreds of CTAs hold the same positions, a regime-break causes all of them to reverse at once, amplifying the trend reversal and widening slippage.
+3. **Rising transaction costs** — slippage, borrowing costs, and bid-ask spreads eat into the thin per-trade edge.
+4. **Beta convergence** — in a liquidity event, trend positions in "uncorrelated" markets suddenly correlate (all trend followers are long the same things and short the same things).
+5. **Crypto-specific:** Extreme funding costs on the losing side of a perp position, exchange auto-liquidation at a loss before the signal can exit cleanly, and weekend gap risk.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Rolling 24-month Sharpe < 0.2 after all costs
+- Drawdown > 30% from equity peak
+- Signal whipsaw rate doubles vs historical norm over 6 months
 
 ## Advantages
 - Genuine portfolio diversifier: low to negative correlation with stocks and bonds, especially during crises

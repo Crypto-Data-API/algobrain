@@ -1,6 +1,6 @@
 ---
 title: "Seasonal Spread Trading"
-type: strategy
+type: reference
 created: 2026-04-06
 updated: 2026-04-06
 status: good

@@ -2,17 +2,57 @@
 title: Alternative Data Alpha
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
-status: good
-tags: [combinations, alpha-edge, alternative-data, quantitative, informational-edge, data-science, satellite-data]
+updated: 2026-07-19
+status: review
+tags: [combinations, alpha-edge, alternative-data, quantitative, informational-edge, data-science, satellite-data, crypto]
 strategy_type: hybrid
 markets: [stocks, crypto]
 complexity: advanced
 backtest_status: untested
-related: [cross-asset-signals, fundamental-technical-fusion, sector-momentum-screen, contrarian-extremes, "[[social-arbitrage]]", "[[sentiment-trading]]", "[[informational-edge]]", "[[chris-camillo]]", "[[information-arbitrage]]", "[[fastest-profitable-trades]]"]
+related: [cross-asset-signals, contrarian-extremes, "[[social-arbitrage]]", "[[sentiment-trading]]", "[[informational-edge]]", "[[on-chain-analysis]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [informational, behavioral]
+edge_mechanism: "Traders using faster or broader data sources know a material signal (exchange flows, social-engagement surge, on-chain accumulation) before the consensus has processed it; the counterparty is momentum investors and algorithmic traders who react only after the price move is already visible on-chain or in exchange data."
+
+# Data and infrastructure requirements
+data_required: [social-sentiment, on-chain-flows, exchange-flows, whale-score, fear-greed-index]
+min_capital_usd: 5000
+capacity_usd: 50000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.9
+expected_max_drawdown: 0.30
+breakeven_cost_bps: 100
+
+# Kill criteria
+kill_criteria: |
+  - signal dataset becomes widely distributed / sold to institutional desks (monitor publication mentions)
+  - rolling 6-month win rate on composite-signal setups drops below 50%
+  - drawdown > 20% in signal-based portfolio sleeve
+
 ---
 
 # Alternative Data Alpha
+
+## Edge source
+
+**Informational** and **behavioral**. See [[edge-taxonomy]].
+
+In crypto, the most actionable alt-data sources are on-chain (whale accumulation, exchange net-outflows, MVRV-Z, SOPR) and social (LunarCrush engagement scores, Santiment dev-activity, Reddit/X volume spikes). Unlike equities, on-chain data is public and free — the edge comes from *speed and synthesis*, not data exclusivity. The counterparty is price-reactive traders who read candlestick charts but have not synthesised the on-chain narrative that explains why the candles are forming.
+
+**Crypto-specific signals with documented predictive power (illustrative, not exhaustive):**
+- Exchange net-outflow spike (accumulation by long-term holders) → bullish 7–30 day
+- Whale score rising (CryptoDataAPI `/api/v1/on-chain/whale-score`) → large accounts accumulating
+- Social engagement surge before price move (LunarCrush, Santiment) → momentum window
+- Dev-activity spike on a protocol → fundamental catalyst building
+
+See [[cryptodataapi]] for on-chain and social data endpoints.
+
+## Null hypothesis
+
+If crypto markets are informationally efficient, on-chain and social signals are immediately priced into the perp-funding rate and spot market. No systematic alpha exists above the cost of data collection. Strategy Sharpe would be ≈ 0 net of slippage, and out-of-sample win rates would be indistinguishable from 50%.
 
 ## The Edge
 
@@ -99,3 +139,34 @@ For the quantitatively inclined, build a composite factor model:
 - **Job listings and Tesla** -- tracking Tesla's Autopilot team hiring on LinkedIn predicted R&D investment acceleration a full quarter before the capex numbers showed up in financials
 
 The democratization of alt-data is accelerating. What was once the exclusive domain of $10B+ quant funds is now partially accessible to sophisticated retail traders. The window of opportunity is narrowing but far from closed.
+
+## Capacity limits
+
+Crypto alt-data alpha is limited by the liquidity of the tokens being traded, not the signal size. On-chain signals for BTC/ETH can support $10M+ trades; for altcoins the capacity is $100K–$2M before market impact dominates. Social-signal altcoin plays have the lowest capacity — the very act of trading on the signal can move the market enough to eliminate the edge.
+
+## What kills this strategy
+
+1. **Signal commoditisation** — when the same on-chain metric is published in every crypto newsletter, the lead-time collapses.
+2. **On-chain obfuscation** — sophisticated actors mix wallets, use L2s, or route through DEX aggregators to obscure accumulation signals.
+3. **Wash-volume inflation** — social volume and reported exchange volume can be manipulated; a coordinated pump creates a false signal.
+4. **Market structure change** — a new exchange or bridge changes where flows appear, breaking the on-chain model.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Signal dataset becomes widely distributed to institutional desks
+- Rolling 6-month win rate on composite-signal setups drops below 50%
+- Drawdown > 20% in signal-based portfolio sleeve
+
+## Getting the Data (CryptoDataAPI)
+
+**On-chain signals:**
+- `GET /api/v1/on-chain/whale-score` — whale accumulation scoring
+- `GET /api/v1/on-chain/exchange-flows` — net exchange inflow/outflow
+- `GET /api/v1/on-chain/mvrv` — MVRV ratio (valuation signal)
+
+**Sentiment:**
+- `GET /api/v1/sentiment/fear-greed` — Fear & Greed index
+- `GET /api/v1/sentiment/macro` — macro sentiment composite
+
+Full catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-sentiment]].

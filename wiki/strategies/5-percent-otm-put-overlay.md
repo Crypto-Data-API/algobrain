@@ -2,8 +2,8 @@
 title: "5% OTM Put Overlay (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, risk-management, crypto, indicators, derivatives, volatility, hedging]
 aliases: ["5% OTM Put Overlay", "BTC Put Overlay", "Deribit Put Overlay", "Shallow OTM Put Hedge", "Crypto Put Protection Program"]
 related: ["[[protective-puts]]", "[[long-volatility-strategies]]", "[[tail-hedging]]", "[[tail-risk-hedging]]", "[[vix-calls]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[funding-rate]]", "[[variance-risk-premium]]", "[[volatility-regime]]", "[[liquidation-cascade-fade]]", "[[risk-management]]"]
@@ -12,6 +12,27 @@ timeframe: position
 markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral]
+edge_mechanism: "Counterparty is the crypto put seller (vol-selling community) collecting the variance-risk-premium; overlay buyer pays above fair actuarial value for crash insurance because cash released in a cascade has higher utility than calm-regime premium cost."
+
+# Data and infrastructure requirements
+data_required: [options-chain, dvol-index, funding-rates, volatility-regime]
+min_capital_usd: 25000
+capacity_usd: 500000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: -0.3
+expected_max_drawdown: 0.04
+breakeven_cost_bps: 300
+
+# Kill criteria
+kill_criteria: |
+  - annual hedging cost exceeds pre-set NAV % budget for 2 consecutive years with no monetisation
+  - combined book + overlay risk-adjusted return materially worse than unhedged over 12+ months
+  - DVOL structurally elevated (> 85th pct) for > 60 days — float strike or pause
 ---
 
 # 5% OTM Put Overlay (Crypto)

@@ -1,6 +1,6 @@
 ---
 title: "Arbitrage Backtesting Guide"
-type: strategy
+type: reference
 created: 2026-04-21
 updated: 2026-07-13
 status: excellent

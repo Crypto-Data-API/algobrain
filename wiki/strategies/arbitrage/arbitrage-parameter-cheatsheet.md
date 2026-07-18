@@ -1,6 +1,6 @@
 ---
 title: "Arbitrage Parameter Cheatsheet"
-type: strategy
+type: reference
 created: 2026-04-20
 updated: 2026-06-20
 status: excellent

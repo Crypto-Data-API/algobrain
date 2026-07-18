@@ -1,6 +1,6 @@
 ---
 title: "Arbitrage Monitoring Setup"
-type: strategy
+type: reference
 created: 2026-04-21
 updated: 2026-06-20
 status: excellent

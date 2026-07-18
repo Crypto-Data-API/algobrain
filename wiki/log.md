@@ -9,6 +9,49 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Batch B11: Triage + First Schema Upgrades (99 pages missing edge_source)
+
+### Triage counts (all 99 `type: strategy` pages lacking `edge_source:`)
+
+| Class | Count | Action |
+|-------|-------|--------|
+| GUIDE | 25 | `type: strategy` → `type: reference` |
+| STRUCTURE | 40 | Left as-is (Wave 3 deliberate design, content untouched) |
+| STRATEGY | 34 | 10 upgraded; 24 remain for future batches |
+
+Full per-page classification with rationale: `.claude/b11-classification.md`
+
+### Task 2 — GUIDE pages retyped (25 pages: `type: strategy` → `type: reference`)
+
+`algorithmic/black-litterman`, `algorithmic/cppi`, `algorithmic/portable-alpha`, `algorithmic/risk-budgeting`, `arbitrage/arbitrage-backtesting-guide`, `arbitrage/arbitrage-correlation-matrix`, `arbitrage/arbitrage-live-performance`, `arbitrage/arbitrage-monitoring-setup`, `arbitrage/arbitrage-parameter-cheatsheet`, `arbitrage/arbitrage-seasonality`, `arbitrage/arbitrage-worked-examples`, `arbitrage/etf-arbitrage`, `arbitrage/multi-venue-capital-management`, `arbitrage/regulatory-arbitrage`, `combinations/core-satellite-portfolio`, `combinations/multi-strategy-portfolio`, `combinations/risk-on-risk-off-framework`, `combinations/volatility-targeting`, `fundamental-analysis/crack-spread`, `fundamental-analysis/crush-spread`, `fundamental-analysis/seasonal-spread-trading`, `fundamental-analysis/spark-spread`, `position-trading/carry-trade`, `position-trading/dollar-cost-averaging`, `technical-analysis/options-strategies`
+
+Only the `type:` field was changed; all content preserved.
+
+### Task 3 — 10 STRATEGY pages upgraded to buildable schema
+
+Each page received: extended frontmatter (`edge_source`, `edge_mechanism`, `data_required`, `min_capital_usd`, `capacity_usd`, `crowding_risk`, `expected_sharpe`, `expected_max_drawdown`, `breakeven_cost_bps`, `kill_criteria`); missing schema sections (`## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`); `updated: 2026-07-19`; `status: review` where previously `good`.
+
+- [[5-percent-otm-put-overlay]] — added full frontmatter edge fields; page already had all 16 schema sections
+- [[trend-following-cta]] — added frontmatter + `## Edge source`, `## Why this edge exists`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`; added `crypto` to markets; new sections crypto-scoped (perp liquidation cascade as structural counterparty); existing CTA/commodities prose preserved
+- [[nft-arbitrage]] — added frontmatter + `## Edge source`, `## Why this edge exists`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[alternative-data-alpha]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`, `## Getting the Data (CryptoDataAPI)`; crypto on-chain/social framing added to new sections only; existing equity examples preserved
+- [[asymmetric-barbell]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`; crypto barbell adaptation (Deribit puts + stablecoin yield) added to new sections only
+- [[cross-asset-signals]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`, `## Getting the Data (CryptoDataAPI)`; DXY-BTC relationship and funding-rate as cross-asset signal documented in new sections
+- [[expiration-and-rebalancing-flows]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`, `## Getting the Data (CryptoDataAPI)`; Deribit OpEx pinning and quarterly BTC futures roll added in new sections; existing equity flow calendar preserved
+- [[gamma-exposure-trading]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`, `## Getting the Data (CryptoDataAPI)`; crypto GEX via Deribit OI and greeks.live documented in new sections
+- [[multi-timeframe-confluence]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`; on-chain/funding as third confluence axis noted in new sections
+- [[regime-adaptive-strategy]] — added frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`; CryptoDataAPI regime taxonomy mapped (10-state) in new sections; VIX → DVOL translation noted
+
+**Residual equity framing note:** `combinations/structural-forced-selling`, `combinations/trend-plus-tail-hedge`, and `fundamental-analysis/news-trading` are STRATEGY-class but remain equity/futures-framed in their existing content. New sections will need crypto reframing when they are upgraded in a future batch.
+
+### Remaining 24 STRATEGY pages still needing upgrade (next batches)
+
+`combinations/stop-hunting-and-liquidity-sweeps`, `combinations/structural-forced-selling`, `combinations/trend-plus-tail-hedge`, `conversion-reversal-arbitrage`, `delta-hedged-options`, `fundamental-analysis/news-trading`, `options-income`, `options-premium-selling`, `premium-selling-systematic`, `quantitative/tail-risk-hedging`, `quantitative/vix-trading`, `tail-hedging`, `technical-analysis/0dte-trading`, `technical-analysis/channel-breakout`, `technical-analysis/macd-crossover`, `technical-analysis/opening-range-breakout`, `technical-analysis/options-selling`, `technical-analysis/rate-of-change`, `technical-analysis/rsi-divergence`, `technical-analysis/support-resistance-breakout`, `technical-analysis/turtle-trading`, `technical-analysis/volatility-breakout`, `vix-calls`, `zero-dte-options`
+
+### Files touched (37 total)
+
+25 GUIDE pages retyped + 10 STRATEGY pages upgraded + `wiki/log.md` + `.claude/b11-classification.md`
+
 ## 2026-07-19 — Batch B10+B12: Example Trades + Concept Stub Expansions
 
 ### Task 1 — Added `## Example trade` sections to 10 strategy pages

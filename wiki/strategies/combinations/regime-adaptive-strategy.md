@@ -2,18 +2,52 @@
 title: "Regime-Adaptive Strategy"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
-status: good
-tags: [combinations, meta-strategy, regime-detection, adaptive, volatility, market-conditions]
+updated: 2026-07-19
+status: review
+tags: [combinations, meta-strategy, regime-detection, adaptive, volatility, market-conditions, crypto]
 strategy_type: hybrid
 timeframe: varies by regime
 markets: [crypto, futures]
 complexity: advanced
 backtest_status: untested
-related: ["[[trend-following]]", "[[mean-reversion]]", "[[volatility]]", "[[vix]]", "[[adx]]", "[[bollinger-bands]]", "[[options-hedging]]", "[[cryptodataapi]]"]
+related: ["[[trend-following]]", "[[mean-reversion]]", "[[volatility]]", "[[dvol]]", "[[bollinger-bands]]", "[[cryptodataapi]]", "[[vol-targeted-trend-following]]", "[[funding-flush-reversal]]"]
+
+# Edge characterization
+edge_source: [analytical, structural]
+edge_mechanism: "Regime persistence means that correctly detecting a trending vs ranging vs crisis regime and deploying the right sub-strategy generates above-average returns across each regime window; the counterparty is the static-allocation participant who runs a trending strategy during choppy regimes and a premium-selling strategy into a crash."
+
+# Data and infrastructure requirements
+data_required: [ohlcv-daily, volatility-regime, funding-rates, open-interest, fear-greed-index]
+min_capital_usd: 20000
+capacity_usd: 500000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: 1.0
+expected_max_drawdown: 0.20
+breakeven_cost_bps: 25
+
+# Kill criteria
+kill_criteria: |
+  - regime mis-classification rate > 40% for 3 consecutive months (validate against CryptoDataAPI /regimes/current)
+  - rolling 12-month Sharpe < 0.4 after all costs and strategy switches
+  - drawdown > 20% from equity peak while correctly classified in a "range" or "low-vol" regime
+
 ---
 
 # Regime-Adaptive Strategy
+
+## Edge source
+
+**Analytical** and **structural**. See [[edge-taxonomy]].
+
+Market regimes are persistent — a trending regime lasts weeks to months, not days; volatility clusters; ranging markets persist until a catalyst breaks them. This persistence means correctly identifying the current regime lets you deploy the right strategy for most of its remaining duration. The structural component: most funds have static mandates (always trend-following, always market-neutral) and cannot switch. Regime-adaptive capital captures the premium paid by static strategies in unfavourable conditions.
+
+**Crypto-specific regime stack:** CryptoDataAPI provides a 10-state regime taxonomy (via `/api/v1/regimes/current`) and HMM probability scores (`/api/v1/quant/market`). In crypto the relevant regimes are: (1) high-funding-carry bull (deploy short-vol and carry), (2) confirmed trend with rising OI (deploy trend-following), (3) capitulation/low-vol range (deploy mean-reversion), (4) leverage-stressed cascade (deploy protection, reduce exposure). The VIX-based framework in the equities section translates to DVOL percentile + funding rate + OI change rate in crypto.
+
+## Null hypothesis
+
+If regimes are not identifiable in real-time (only in hindsight), regime switching does not beat a static diversified allocation. The strategy would pay switching costs — wider spreads, funding flips, re-entry friction — without recouping them in improved timing. Evidence for the regime-persistence thesis: BTC entered the 2022 bear market on 2022-01-04 and stayed in it for 11+ months; the correct detection at any point in that window would have saved capital. The risk: regime transitions are faster in crypto than in equities.
 
 ## Overview
 
@@ -98,7 +132,25 @@ The key insight: market regimes are persistent. A trending market tends to keep 
 
 **Bridgewater Associates** uses a form of regime thinking in their All-Weather portfolio — constructing a portfolio that is designed to perform acceptably across all economic regimes (growth/inflation rising or falling) rather than switching between strategies.
 
-**See also:** [[trend-following]], [[mean-reversion]], [[volatility]], [[vix]], [[adx]], [[hidden-markov-model]], [[position-sizing]], [[risk-management]]
+**See also:** [[trend-following]], [[mean-reversion]], [[volatility]], [[dvol]], [[hidden-markov-model]], [[position-sizing]], [[risk-management]]
+
+## Capacity limits
+
+Regime-adaptive strategies scale well because they are meta-frameworks applied to liquid instruments — BTC/ETH perps have $5B+ OI and can absorb $500M+ in directional strategies. The limit is operational: regime detection lag (12–24h for daily signals) means large books need to pre-position before the switch is confirmed, introducing lookahead risk.
+
+## What kills this strategy
+
+1. **Regime transitions faster than detection** — in a sudden cascade, the model may still classify "low-vol range" while the market is already in a crash.
+2. **Over-fitted regime thresholds** — regime boundary calibration on historical data may not hold in future market structures.
+3. **Execution friction** — switching between strategies (close short-vol, open trend-following) incurs spreads and funding; too-frequent switching destroys the edge.
+4. **Multiple concurrent conflicting signals** — DVOL in the 40th pct (low-vol) but funding at +0.08%/8h (crowded-bull) and OI declining simultaneously — no clean regime classification.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Regime mis-classification rate > 40% for 3 consecutive months
+- Rolling 12-month Sharpe < 0.4 after all costs
+- Drawdown > 20% while correctly in a "range" or "low-vol" regime
 
 ## Getting the Data (CryptoDataAPI)
 
