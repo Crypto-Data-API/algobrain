@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, quantitative, momentum, market-regime, regime-detection, technical-analysis, risk-management]
+tags: [crypto, perpetual-futures, hyperliquid, quantitative, momentum, market-regime, regime-detection, technical-analysis, risk-management]
 aliases: ["Breadth Divergence Basket", "Altcoin Breadth Signal", "Market Breadth Momentum Divergence", "Crypto Breadth Filter"]
 related: ["[[hyperliquid-baskets-overview]]", "[[macro-trend-regime]]", "[[bitcoin-cycle-regime]]", "[[on-chain-regime]]", "[[divergence]]", "[[relative-strength]]", "[[bitcoin-dominance-rotation]]", "[[200-day-moving-average]]", "[[moving-average]]", "[[momentum-rotation]]", "[[regime-strategy-playbook]]", "[[regime-adaptive-strategy]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[etf-and-institutional-flow]]", "[[macro-event-pump]]", "[[oi-confirmed-trend]]", "[[defensive-majors]]", "[[full-bear-short-book]]", "[[distribution-post-peak-short-book]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [comparisons, dex, perps, defi, derivatives]
+tags: [comparisons, dex, perpetual-futures, defi, derivatives]
 subjects: ["[[hyperliquid]]", "[[dydx]]", "[[gmx]]"]
 comparison_dimensions: [chain, volume, fees, leverage, markets, mechanism, token]
 related: ["[[perpetual-futures]]", "[[decentralized-exchanges]]", "[[cex-vs-dex]]", "[[funding-rates]]"]

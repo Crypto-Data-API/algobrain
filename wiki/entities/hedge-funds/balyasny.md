@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-06-10
 status: good
-tags: [quantitative, company, stocks, futures, risk-management]
+tags: [quantitative, company, futures, risk-management]
 aliases: ["Balyasny", "BAM", "Balyasny Asset Management"]
 entity_type: fund
 founded: 2001

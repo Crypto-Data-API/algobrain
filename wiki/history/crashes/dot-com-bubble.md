@@ -4,7 +4,7 @@ type: news
 created: 2026-04-06
 updated: 2026-06-22
 status: excellent
-tags: [history, crashes, stocks, nasdaq, behavioral-finance]
+tags: [history, crashes, nasdaq, behavioral-finance]
 event_date: 2000-03-10
 markets_affected: [stocks]
 impact: high

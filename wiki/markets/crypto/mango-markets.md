@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, dex, perpetuals]
+tags: [crypto, defi, derivatives, dex, perpetual-futures]
 aliases: ["MNGO", "Mango Markets"]
 entity_type: protocol
 headquarters: "Decentralized"

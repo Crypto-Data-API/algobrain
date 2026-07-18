@@ -4,7 +4,7 @@ type: market
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin, stablecoins, defi]
+tags: [crypto, stablecoins, defi]
 aliases: ["PAX", "Pax Dollar", "Paxos Standard", "USDP"]
 entity_type: protocol
 headquarters: "New York, USA"

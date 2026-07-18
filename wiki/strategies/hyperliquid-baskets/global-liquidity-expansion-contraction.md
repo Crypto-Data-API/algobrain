@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, quantitative, market-regime, regime-detection, risk-management, macro-events]
+tags: [crypto, perpetual-futures, hyperliquid, quantitative, market-regime, regime-detection, risk-management, macro-events]
 aliases: ["Global Liquidity Basket", "M2 Expansion Basket", "Macro Liquidity Signal", "DXY Liquidity Regime Basket"]
 related: ["[[hyperliquid-baskets-overview]]", "[[crypto-macro-correlation-regime]]", "[[institutional-flow-regime]]", "[[macro-trend-regime]]", "[[policy-shock-regime]]", "[[dxy]]", "[[macro-relative-value]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[etf-and-institutional-flow]]", "[[macro-event-pump]]", "[[breadth-and-momentum-divergence]]", "[[defensive-majors]]", "[[full-bear-short-book]]", "[[trend-following]]", "[[trend-following-cta]]", "[[multi-strategy-portfolio]]", "[[when-to-retire-a-strategy]]"]
 strategy_type: quantitative

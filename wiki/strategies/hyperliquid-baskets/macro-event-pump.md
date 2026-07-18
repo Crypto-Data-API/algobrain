@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, quantitative, event-driven, market-regime, momentum, risk-management]
+tags: [crypto, perpetual-futures, hyperliquid, quantitative, event-driven, market-regime, momentum, risk-management]
 aliases: ["Event Pump Basket", "FOMC Crypto Trade", "Macro Catalyst Basket", "Event-Driven Crypto Perp"]
 related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[crypto-macro-correlation-regime]]", "[[macro-events]]", "[[spot-etf-flows]]", "[[token-unlocks]]", "[[macro-relative-value]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[etf-and-institutional-flow]]", "[[breadth-and-momentum-divergence]]", "[[volatility-compression-breakout]]", "[[oi-confirmed-trend]]", "[[funding-rate-harvest]]", "[[support]]", "[[resistance]]", "[[atr-position-sizing]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
 strategy_type: hybrid

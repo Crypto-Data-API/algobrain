@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, trend-following, risk-management, quantitative, derivatives, on-chain]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, trend-following, risk-management, quantitative, derivatives, on-chain]
 aliases: ["Full Bear Short Basket", "Confirmed Bear Short Book", "Crypto Bear Market Shorts", "Macro Downtrend Short Sleeve"]
 related: ["[[hyperliquid-baskets-overview]]", "[[macro-trend-regime]]", "[[on-chain-regime]]", "[[derivatives-native-regime]]", "[[defensive-majors]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[long-liquidation-cascade]]", "[[crowded-long-funding-fade]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[when-to-retire-a-strategy]]"]
 strategy_type: algorithmic

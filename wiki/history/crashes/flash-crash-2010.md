@@ -4,7 +4,7 @@ type: news
 created: 2026-04-10
 updated: 2026-06-12
 status: good
-tags: [history, crashes, market-microstructure, stocks]
+tags: [history, crashes, market-microstructure]
 event_date: 2010-05-06
 markets_affected: [stocks, futures]
 impact: high

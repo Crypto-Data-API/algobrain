@@ -4,7 +4,7 @@ type: overview
 created: 2026-04-09
 updated: 2026-06-12
 status: good
-tags: [ai-trading, education, stocks]
+tags: [ai-trading, education]
 aliases: ["AI Applications"]
 related: ["[[ai-healthcare]]", "[[ai-finance]]", "[[ai-gaming]]", "[[ai-science]]", "[[ai-creative]]", "[[ai-cybersecurity]]", "[[ai-education]]", "[[artificial-intelligence]]"]
 ---

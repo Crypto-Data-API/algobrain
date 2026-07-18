@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [anomalies, volatility, stocks]
+tags: [anomalies, volatility]
 aliases: ["IVOL Anomaly", "Ang-Hodrick-Xing-Zhang Puzzle", "Idiosyncratic Risk Puzzle", "Idiosyncratic Volatility Anomaly"]
 domain: [anomalies]
 prerequisites: ["[[volatility]]", "[[low-volatility-anomaly]]"]

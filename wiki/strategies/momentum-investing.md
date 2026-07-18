@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-15
 updated: 2026-06-20
 status: excellent
-tags: [quantitative, momentum, trend-following, stocks, backtesting]
+tags: [quantitative, momentum, trend-following, backtesting]
 aliases: ["Momentum Investing", "Momentum Strategy", "Cross-Sectional Momentum", "Momentum Stocks", "Stock Momentum", "Momentum Trading", "momo trading"]
 related: ["[[trend-following]]", "[[momentum]]", "[[behavioral-finance]]", "[[factor-investing]]", "[[mean-reversion]]", "[[edge-taxonomy]]", "[[failure-modes]]"]
 strategy_type: quantitative

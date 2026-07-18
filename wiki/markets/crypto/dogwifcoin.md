@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coin, solana, speculation, memecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
+tags: [crypto, memecoins, solana, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["WIF", "dogwifcoin"]
 entity_type: protocol
 headquarters: "Decentralized"

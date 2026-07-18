@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, regulation, stablecoin, stablecoins, defi]
+tags: [crypto, regulation, stablecoins, defi]
 aliases: ["TUSD", "TrueCoin"]
 entity_type: protocol
 founded: 2018

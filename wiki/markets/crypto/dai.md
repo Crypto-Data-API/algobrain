@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-07-16
 status: excellent
-tags: [crypto, decentralized, defi, ethereum, stablecoin]
+tags: [crypto, decentralized, defi, ethereum, stablecoins]
 aliases: ["DAI", "MakerDAO DAI"]
 entity_type: protocol
 founded: 2017

@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, technical-analysis, breakout, trend-following, swing-trading]
+tags: [crypto, perpetual-futures, hyperliquid, technical-analysis, breakout, trend-following, swing-trading]
 aliases: ["Breakout Retest", "Break and Retest", "Confirmed Breakout Entry", "Retest Confirmation Breakout"]
 related: ["[[hyperliquid-baskets-overview]]", "[[technical-structural-regime]]", "[[volatility-regime-classification]]", "[[breakout-trading]]", "[[support]]", "[[resistance]]", "[[consolidation]]", "[[atr]]", "[[range-breakout-breakdown]]", "[[failed-breakout-failed-breakdown]]", "[[range-mean-reversion]]", "[[volatility-compression-breakout]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[open-interest]]", "[[funding-rate]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
 strategy_type: technical

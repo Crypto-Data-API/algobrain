@@ -4,7 +4,7 @@ type: concept
 created: 2026-06-30
 updated: 2026-07-01
 status: review
-tags: [market-microstructure, stocks, valuation]
+tags: [market-microstructure, valuation]
 aliases: ["Primary vs Secondary Market", "Primary Market", "Secondary Market", "Primary vs Secondary", "Capital Markets (Primary and Secondary)"]
 domain: [market-microstructure]
 prerequisites: []

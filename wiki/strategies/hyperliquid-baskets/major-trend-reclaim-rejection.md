@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, trend-following, technical-analysis, quantitative, swing-trading, momentum, breakout]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, trend-following, technical-analysis, quantitative, swing-trading, momentum, breakout]
 aliases: ["MA Reclaim Rejection Basket", "200 MA Reclaim Short Strategy", "Critical Level Reclaim Trade", "Structural Level Flip Strategy"]
 related: ["[[hyperliquid-baskets-overview]]", "[[technical-structural-regime]]", "[[macro-trend-regime]]", "[[oi-confirmed-trend]]", "[[trend-pullback-rally-fade]]", "[[defensive-majors]]", "[[breakout-and-retest]]", "[[failed-breakout-failed-breakdown]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[when-to-retire-a-strategy]]", "[[200-day-moving-average]]", "[[support]]", "[[resistance]]", "[[market-cap-level-trading]]"]
 strategy_type: algorithmic

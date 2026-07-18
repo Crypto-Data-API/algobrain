@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, liquidation, mean-reversion, behavioral-finance, market-microstructure, scalping, derivatives]
+tags: [crypto, perpetual-futures, hyperliquid, liquidation, mean-reversion, behavioral-finance, market-microstructure, scalping, derivatives]
 aliases: ["Flush Bounce", "Post-Cascade Mean Reversion", "Liquidation Exhaustion Entry", "Deleveraging Rebound"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[security-black-swan-regime]]", "[[liquidity-depth-regime]]", "[[liquidation-cascade-fade]]", "[[short-liquidation-squeeze]]", "[[long-liquidation-cascade]]", "[[crowded-short-funding-fade]]", "[[crowded-long-funding-fade]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-10-crypto-liquidation-cascade]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[liquidation]]", "[[long-liquidation]]", "[[open-interest]]", "[[leverage]]", "[[rsi]]", "[[relative-strength-index]]", "[[order-flow]]", "[[mean-reversion]]", "[[funding-rate]]", "[[coinglass]]", "[[atr-trailing-stop]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

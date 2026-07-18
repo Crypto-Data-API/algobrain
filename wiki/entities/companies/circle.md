@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-06-19
 status: excellent
-tags: [company, crypto, stablecoin, fintech]
+tags: [company, crypto, stablecoins, fintech]
 aliases: ["Circle", "Circle Internet Financial", "Circle Internet Group", "CRCL"]
 entity_type: company
 ticker: "CRCL"

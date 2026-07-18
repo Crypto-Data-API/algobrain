@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bitcoin, crypto, meme-coin, nft, speculation]
+tags: [bitcoin, crypto, memecoins, nft, speculation]
 aliases: ["DOG", "Dog Go To The Moon"]
 entity_type: protocol
 headquarters: "Decentralized"

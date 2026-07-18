@@ -4,7 +4,7 @@ type: news
 created: 2026-04-28
 updated: 2026-06-12
 status: good
-tags: [crypto, stablecoin, depeg, history, regulation]
+tags: [crypto, stablecoins, depeg, history, regulation]
 aliases: ["Tether Premium", "USDT Banking Crisis", "Bitfinex Premium", "Tether NYAG"]
 event_date: 2018-10-15
 markets_affected: [crypto]

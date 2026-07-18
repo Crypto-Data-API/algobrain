@@ -5,7 +5,7 @@ entity_type: company
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [company, crypto, sp500, stocks]
+tags: [company, crypto, sp500]
 aliases: ["COIN", "Coinbase Global"]
 related: ["[[bitcoin]]", "[[circle]]", "[[coinbase]]", "[[crypto-markets]]", "[[crypto]]", "[[ethereum]]", "[[solana]]", "[[usdc]]"]
 ticker: COIN

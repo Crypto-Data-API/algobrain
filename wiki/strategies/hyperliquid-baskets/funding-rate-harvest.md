@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, funding-rate, quantitative, derivatives, risk-management]
+tags: [crypto, perpetual-futures, hyperliquid, funding-rate, quantitative, derivatives, risk-management]
 aliases: ["Perp Funding Carry", "Funding Yield Harvest", "Delta-Neutral Funding Collect", "HL Carry Basket"]
 related: ["[[hyperliquid-baskets-overview]]", "[[basis-carry-regime]]", "[[derivatives-native-regime]]", "[[funding-rate-arbitrage]]", "[[crowded-short-funding-fade]]", "[[crowded-long-funding-fade]]", "[[volatility-carry]]", "[[pairs-trading]]", "[[statistical-arbitrage]]", "[[grid-trading]]", "[[funding-rate]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-vault-architecture]]", "[[open-interest]]", "[[perpetual-futures]]", "[[basis]]", "[[funding-by-hour]]", "[[coinglass]]", "[[hypurrscan]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

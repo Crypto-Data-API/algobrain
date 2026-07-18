@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, tariffs, trade-war, trump, china, volatility, stocks, commodities, liberation-day]
+tags: [news, tariffs, trade-war, trump, china, volatility, commodities, liberation-day]
 event_date: 2025-04-02
 markets_affected: [stocks, commodities, forex, crypto]
 impact: high

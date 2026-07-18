@@ -6,7 +6,7 @@ updated: 2026-06-19
 status: excellent
 founded: 2017
 headquarters: "San Antonio, Texas / Vancouver, Canada"
-tags: [company, stocks, ai-trading, crypto, mining, hpc]
+tags: [company, ai-trading, crypto, mining, hpc]
 entity_type: company
 website: "https://www.hivedigitaltech.com"
 aliases: ["HIVE", "HIVE Digital", "HIVE Digital Technologies", "HIVE Blockchain"]

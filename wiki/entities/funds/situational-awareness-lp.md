@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-31
 updated: 2026-06-10
 status: good
-tags: [ai-trading, stocks, company]
+tags: [ai-trading, company]
 entity_type: fund
 aliases: ["Situational Awareness LP", "Situational Awareness Fund", "Aschenbrenner Fund"]
 founded: 2024

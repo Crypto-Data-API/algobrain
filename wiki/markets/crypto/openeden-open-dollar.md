@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, real-world-assets, stablecoin, treasuries]
+tags: [crypto, defi, real-world-assets, stablecoins, treasuries]
 aliases: ["Open Dollar", "OpenDollar", "USDO"]
 entity_type: protocol
 headquarters: "Bermuda (OpenEden Digital, BMA-licensed)"

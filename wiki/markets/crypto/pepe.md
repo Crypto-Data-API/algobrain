@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, meme-coin, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
+tags: [crypto, ethereum, memecoins, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 entity_type: protocol
 aliases: ["PEPE", "PEPE-token", "pepe-coin"]
 related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[fartcoin]]", "[[hyperliquid]]", "[[solana]]", "[[uniswap]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-long-funding-fade]]", "[[long-liquidation-cascade]]"]

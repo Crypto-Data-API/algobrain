@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-06
 updated: 2026-06-11
 status: good
-tags: [market-microstructure, liquidity, stocks]
+tags: [market-microstructure, liquidity]
 aliases: [public float, free float, floating shares, float-adjusted]
 domain: [market-microstructure]
 prerequisites: ["[[liquidity]]"]

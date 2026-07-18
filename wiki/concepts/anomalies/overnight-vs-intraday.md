@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [stocks, market-microstructure, quantitative, liquidity]
+tags: [market-microstructure, quantitative, liquidity]
 aliases: ["Overnight vs Intraday", "Overnight Drift", "Night-Day Anomaly", "Overnight Return Premium"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[market-microstructure]]"]

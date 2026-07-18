@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-07-16
 status: excellent
-tags: [crypto, ethereum, mainstream, solana, stablecoin]
+tags: [crypto, ethereum, mainstream, solana, stablecoins]
 aliases: ["PYUSD", "PayPal USD"]
 entity_type: protocol
 founded: 2023

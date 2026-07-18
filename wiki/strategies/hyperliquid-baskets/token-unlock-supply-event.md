@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, event-driven, quantitative, backtesting]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, event-driven, quantitative, backtesting]
 aliases: ["Token Unlock Short", "Cliff Unlock Basket", "Vesting Event Strategy", "Supply Shock Perp"]
 related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[on-chain-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[token-unlocks]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[open-interest]]", "[[liquidation]]", "[[leverage]]", "[[basis]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[exchange-listing-delisting]]", "[[meme-coin-cycle]]", "[[cross-sectional-relative-value]]", "[[cryptoquant]]", "[[coinglass]]", "[[the-block]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

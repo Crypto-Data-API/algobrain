@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-06-17
 status: excellent
-tags: [bitcoin, company, crypto, etf, regulation, sp500, stocks]
+tags: [bitcoin, company, crypto, etf, regulation, sp500]
 aliases: ["BLK", "BlackRock"]
 entity_type: company
 founded: 1988

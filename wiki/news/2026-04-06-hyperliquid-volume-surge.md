@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [news, hyperliquid, dex, derivatives, perps, volume, liquidations, bitcoin, traditional-assets]
+tags: [news, hyperliquid, dex, derivatives, perpetual-futures, volume, liquidations, bitcoin, traditional-assets]
 event_date: 2026-04-06
 markets_affected: [crypto]
 impact: medium

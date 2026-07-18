@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin]
+tags: [crypto, stablecoins]
 aliases: ["XT Stablecoin", "XT.com USD", "XTUSD"]
 entity_type: protocol
 headquarters: "Centralized (exchange-issued)"

@@ -4,7 +4,7 @@ type: overview
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, quantitative, market-regime, risk-management, methodology]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, quantitative, market-regime, risk-management, methodology]
 aliases: ["Hyperliquid Baskets", "Trading Baskets", "Basket Library", "Signal Baskets"]
 related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "[[regime-matrix]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[live-journal]]", "[[hyperliquid]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 ---

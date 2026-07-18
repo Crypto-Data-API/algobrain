@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-05-07
 status: good
-tags: [data-provider, institutional, stocks, bonds, forex, commodities]
+tags: [data-provider, institutional, bonds, forex, commodities]
 entity_type: company
 website: https://www.bloomberg.com/professional/solution/bloomberg-terminal/
 related:

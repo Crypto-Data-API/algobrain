@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, quantitative, pairs-trading, momentum, algorithmic, backtesting]
+tags: [crypto, perpetual-futures, hyperliquid, quantitative, pairs-trading, momentum, algorithmic, backtesting]
 aliases: ["Sector Relative Value", "Perp Pairs Trading", "Long-Short Momentum Basket", "Intra-Sector RV"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[technical-structural-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[pairs-trading]]", "[[statistical-arbitrage]]", "[[momentum-rotation]]", "[[relative-strength]]", "[[funding-rate]]", "[[funding-rate-arbitrage]]", "[[open-interest]]", "[[perpetual-futures]]", "[[basis]]", "[[liquidity]]", "[[bid-ask-spreads]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-vault-architecture]]", "[[ai-agent-tokens]]", "[[bitcoin-dominance-rotation]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[overfitting-detection]]", "[[crypto-perp-backtesting-pitfalls]]", "[[regime-matrix]]", "[[multi-strategy-portfolio]]", "[[exchange-listing-delisting]]", "[[token-unlock-supply-event]]", "[[meme-coin-cycle]]", "[[coinglass]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
 strategy_type: quantitative

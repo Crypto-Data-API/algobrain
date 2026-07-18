@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: good
-tags: [algorithmic-stablecoin, collapse, crypto, defi, stablecoin, terra, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins, stablecoins]
+tags: [algorithmic-stablecoin, collapse, crypto, defi, stablecoins, terra, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["TerraUSD", "UST", "USTC"]
 entity_type: protocol
 headquarters: "Decentralized"

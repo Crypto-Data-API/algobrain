@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [comparisons, stocks, crypto, traditional-finance, markets]
+tags: [comparisons, crypto, traditional-finance, markets]
 subjects: ["stock-markets", "[[crypto-markets]]"]
 comparison_dimensions: [hours, regulation, volatility, fundamentals, leverage, custody, fees, taxes]
 related: ["[[bitcoin]]", "[[robinhood]]", "[[risk-management]]"]

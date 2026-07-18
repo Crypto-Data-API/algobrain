@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-02
 status: good
-tags: [stocks, commodities, behavioral-finance, market-regime]
+tags: [commodities, behavioral-finance, market-regime]
 aliases: ["Seasonal Patterns", "Seasonal Effects", "Market Seasonality"]
 domain: [behavioral-finance, market-microstructure]
 prerequisites: ["[[market-anomalies]]"]

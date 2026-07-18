@@ -4,7 +4,7 @@ type: market
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, stablecoin]
+tags: [crypto, stablecoins]
 aliases: ["MUSD", "MetaMask USD", "mUSD"]
 entity_type: protocol
 headquarters: "Decentralized (Consensys / MetaMask)"

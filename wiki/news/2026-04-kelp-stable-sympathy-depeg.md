@@ -4,7 +4,7 @@ type: news
 created: 2026-04-28
 updated: 2026-06-12
 status: good
-tags: [crypto, stablecoin, depeg, defi, contagion, kelp, layerzero, ai-trading]
+tags: [crypto, stablecoins, depeg, defi, contagion, kelp, layerzero, ai-trading]
 aliases: ["KelpDAO Sympathy Depeg", "April 2026 Stable Contagion", "GHO Sympathy Depeg", "crvUSD Apr 2026"]
 event_date: 2026-04-18
 markets_affected: [crypto]

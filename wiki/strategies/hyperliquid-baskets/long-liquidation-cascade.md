@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, liquidation, market-microstructure, algorithmic, scalping, derivatives]
+tags: [crypto, perpetual-futures, hyperliquid, liquidation, market-microstructure, algorithmic, scalping, derivatives]
 aliases: ["Long Flush Short", "Liquidation Heatmap Short", "Cascade Rider Short", "Long Liquidation Rider"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[liquidity-depth-regime]]", "[[short-liquidation-squeeze]]", "[[post-liquidation-rebound]]", "[[crowded-long-funding-fade]]", "[[liquidation-cascade-fade]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-10-crypto-liquidation-cascade]]", "[[2024-03-hyperliquid-cascade]]", "[[long-liquidation]]", "[[liquidation]]", "[[open-interest]]", "[[leverage]]", "[[order-flow]]", "[[funding-rate]]", "[[coinglass]]", "[[hypurrscan]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic

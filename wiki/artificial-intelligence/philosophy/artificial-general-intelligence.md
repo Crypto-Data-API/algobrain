@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-09
 updated: 2026-06-12
 status: good
-tags: [ai-trading, education, stocks]
+tags: [ai-trading, education]
 aliases: ["AGI", "Artificial General Intelligence"]
 domain: [ai-trading]
 difficulty: beginner

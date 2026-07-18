@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-09
 updated: 2026-06-21
 status: excellent
-tags: [stablecoin, crypto, regulation, comparison]
+tags: [stablecoins, crypto, regulation, comparison]
 subjects: ["[[usdc]]", "[[usdt]]", "[[dai]]", "[[pyusd]]"]
 comparison_dimensions: [market-share, regulation, transparency, defi-integration, chain-coverage]
 related: ["[[stablecoins]]", "[[stablecoin-regulation]]", "[[stablecoin-attestations]]", "[[stablecoin-depegs]]", "[[stablecoin-yields]]", "[[circle]]", "[[blackrock]]"]

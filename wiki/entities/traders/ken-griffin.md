@@ -5,7 +5,7 @@ entity_type: person
 created: 2026-04-06
 updated: 2026-06-10
 status: good
-tags: [person, market-microstructure, stocks, options]
+tags: [person, market-microstructure, options]
 aliases:
   - ken-griffin
   - Kenneth C. Griffin

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-13
 updated: 2026-06-19
 status: excellent
-tags: [company, stocks, options, derivatives, crypto, bitcoin, ai-trading]
+tags: [company, options, derivatives, crypto, bitcoin, ai-trading]
 entity_type: company
 founded: 2014
 headquarters: "Henderson, Nevada, USA"

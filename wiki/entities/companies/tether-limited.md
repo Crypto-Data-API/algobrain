@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [company, crypto, stablecoin, controversy]
+tags: [company, crypto, stablecoins, controversy]
 aliases: ["Tether", "Tether Limited", "iFinex"]
 entity_type: company
 founded: 2014

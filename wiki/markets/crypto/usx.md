@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [altcoins, crypto, defi, stablecoin]
+tags: [altcoins, crypto, defi, stablecoins]
 aliases: ["Solstice Finance", "Solstice USX", "USX"]
 entity_type: protocol
 headquarters: "Decentralized"

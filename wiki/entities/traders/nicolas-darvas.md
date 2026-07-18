@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-06-22
 status: excellent
-tags: [person, history, momentum, breakout, swing-trading, stocks]
+tags: [person, history, momentum, breakout, swing-trading]
 entity_type: person
 aliases: ["Nicolas Darvas", "Darvas"]
 related: ["[[darvas-box]]", "[[breakout-trading]]", "[[breakout]]", "[[momentum]]", "[[trend-following]]", "[[jesse-livermore]]", "[[position-sizing]]", "[[stop-loss]]", "[[market-regime]]"]

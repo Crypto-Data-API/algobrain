@@ -4,7 +4,7 @@ type: market
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin]
+tags: [crypto, defi, stablecoins]
 aliases: ["DOLA", "DOLA USD", "Inverse Finance DOLA"]
 entity_type: protocol
 headquarters: "Decentralized"

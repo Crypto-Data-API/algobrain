@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, blogs, free, education]
+tags: [education, blogs, free]
 related:
   - "[[youtube-channels-trading]]"
   - "[[trading-communities]]"

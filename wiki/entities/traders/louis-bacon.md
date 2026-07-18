@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-06-21
 status: excellent
-tags: [person, forex, commodities, stocks, risk-management]
+tags: [person, forex, commodities, risk-management]
 entity_type: person
 aliases: ["Louis Bacon", "Louis Moore Bacon"]
 related: ["[[paul-tudor-jones]]", "[[stanley-druckenmiller]]", "[[george-soros]]", "[[bruce-kovner]]", "[[macro-relative-value]]", "[[tudor-investment-corp]]"]

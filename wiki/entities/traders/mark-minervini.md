@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-06-21
 status: excellent
-tags: [traders, person, momentum, growth-investing, technical-analysis, stocks]
+tags: [traders, person, momentum, growth-investing, technical-analysis]
 aliases: ["The Stock Market Wizard"]
 entity_type: person
 founded: 1965

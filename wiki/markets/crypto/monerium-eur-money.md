@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, euro, forex, stablecoin]
+tags: [crypto, defi, euro, forex, stablecoins]
 aliases: ["EURE", "EURe", "Monerium EUR emoney"]
 entity_type: protocol
 headquarters: "Reykjavik, Iceland / EEA"

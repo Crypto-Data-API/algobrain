@@ -4,7 +4,7 @@ type: redirect
 created: 2026-07-01
 updated: 2026-07-13
 status: good
-tags: [stocks, valuation]
+tags: [valuation]
 aliases: ["Market Cap", "market-cap", "Mkt Cap"]
 related: ["[[market-capitalization]]", "[[cryptodataapi]]"]
 ---

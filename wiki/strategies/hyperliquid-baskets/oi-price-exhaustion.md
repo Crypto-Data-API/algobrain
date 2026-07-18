@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, quantitative, swing-trading, mean-reversion, derivatives, market-microstructure, momentum]
+tags: [crypto, perpetual-futures, hyperliquid, quantitative, swing-trading, mean-reversion, derivatives, market-microstructure, momentum]
 aliases: ["OI Exhaustion", "Price-OI Divergence Short", "Open-Interest Trend Exhaustion", "OI Fade"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[technical-structural-regime]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[crowded-long-funding-fade]]", "[[long-liquidation-cascade]]", "[[open-interest]]", "[[divergence]]", "[[mean-reversion]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[liquidation]]", "[[rsi]]", "[[bollinger-bands]]", "[[bollinger-band-reversion]]", "[[atr]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

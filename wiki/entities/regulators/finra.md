@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-07
 updated: 2026-06-10
 status: good
-tags: [regulation, stocks, options]
+tags: [regulation, options]
 aliases: ["Financial Industry Regulatory Authority"]
 entity_type: regulator
 founded: 2007

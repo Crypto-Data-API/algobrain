@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, community, education]
+tags: [education, community]
 related:
   - "[[quant-blogs-newsletters]]"
   - "[[youtube-channels-trading]]"

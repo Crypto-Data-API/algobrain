@@ -4,7 +4,7 @@ type: news
 created: 2026-05-14
 updated: 2026-06-12
 status: good
-tags: [news, stocks, ai-trading, machine-learning, technology, company]
+tags: [news, ai-trading, machine-learning, technology, company]
 aliases: ["Claude Opus 4.7", "Vals AI Finance Agent benchmark 2026", "GDPval-AA Claude"]
 related: ["[[anthropic]]", "[[claude]]", "[[openai]]", "[[llama-fin]]", "[[2026-anthropic-finance-agents-launch]]", "[[2026-anthropic-blackstone-jv]]", "[[2026-06-10-perplexity-claude-fable-5-finance]]", "[[mythos-release-window-exploit-short]]", "[[llm-market-analysis]]"]
 event_date: 2026-01-01

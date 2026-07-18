@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, liquidity, stablecoin, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
+tags: [crypto, defi, liquidity, stablecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 aliases: ["Helio Protocol", "LISTA", "Lista"]
 entity_type: protocol
 headquarters: "Decentralized"

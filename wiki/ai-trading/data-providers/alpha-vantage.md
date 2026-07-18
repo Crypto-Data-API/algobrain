@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [data-provider, stocks, crypto, forex, free]
+tags: [data-provider, crypto, forex, free]
 entity_type: company
 website: https://www.alphavantage.co
 related:

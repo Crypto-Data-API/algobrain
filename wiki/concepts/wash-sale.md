@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [risk-management, regulation, stocks]
+tags: [risk-management, regulation]
 aliases: ["Wash Sale", "Wash Sales", "Wash Sale Rule", "IRC 1091", "Section 1091"]
 domain: [risk-management]
 prerequisites: ["[[capital-gains]]"]

@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [technical-analysis, indicators, education, stocks]
+tags: [technical-analysis, indicators, education]
 domain: [technical-analysis]
 difficulty: beginner
 aliases: ["Reversal Pattern", "Trend Reversal Patterns", "Reversal Signal", "Reversal Patterns"]

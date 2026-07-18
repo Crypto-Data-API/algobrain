@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-14
 updated: 2026-06-17
 status: good
-tags: [regulator, regulation, banking, stocks]
+tags: [regulator, regulation, banking]
 entity_type: regulator
 founded: 1933
 headquarters: "Washington, D.C., USA"

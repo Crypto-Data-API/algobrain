@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-20
 status: excellent
-tags: [regulation, crypto, stablecoin, compliance]
+tags: [regulation, crypto, stablecoins, compliance]
 aliases: ["Stablecoin Regulation", "Stablecoin Laws"]
 related: ["[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[regulation]]", "[[sec]]", "[[asic]]", "[[australian-crypto-regulation]]", "[[vasp-regulation]]", "[[cbdc]]", "[[aml-ctf]]", "[[circle]]", "[[tether-limited]]"]
 domain: [regulation, crypto]

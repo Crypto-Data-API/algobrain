@@ -4,7 +4,7 @@ type: news
 created: 2026-04-06
 updated: 2026-06-21
 status: excellent
-tags: [crypto, crash, stablecoin, defi, history, terra, luna, algorithmic-stablecoin, contagion]
+tags: [crypto, crash, stablecoins, defi, history, terra, luna, algorithmic-stablecoin, contagion]
 aliases: ["terra-luna-collapse", "UST-depeg", "terra-crash", "LUNA crash"]
 event_date: 2022-05-09
 markets_affected: [crypto]

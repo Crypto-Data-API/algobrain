@@ -4,7 +4,7 @@ type: concept
 created: 2026-06-17
 updated: 2026-07-13
 status: excellent
-tags: [stocks, valuation, indices, sp500]
+tags: [valuation, indices, sp500]
 aliases: ["Market Cap", "Market Capitalisation", "Mkt Cap", "Market Capitalization"]
 related: ["[[index-concentration]]", "[[cryptodataapi]]"]
 domain: [stocks, valuation]

@@ -4,7 +4,7 @@ type: overview
 created: 2026-04-28
 updated: 2026-07-13
 status: excellent
-tags: [crypto, stablecoin, depeg, history, defi, banking, regulation, contagion]
+tags: [crypto, stablecoins, depeg, history, defi, banking, regulation, contagion]
 aliases: ["Stable Depeg Timeline", "Historical Stablecoin Depegs", "Depeg Master Timeline"]
 related: ["[[stablecoin-pair-arbitrage]]", "[[synthetic-stablecoin-depeg-arbitrage]]", "[[stablecoin-depeg-profit-capture]]", "[[lst-depeg-arbitrage]]", "[[depeg-risk]]", "[[defi-hacks-and-exploits]]", "[[history-overview]]", "[[cryptodataapi]]"]
 ---

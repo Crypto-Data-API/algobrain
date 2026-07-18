@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [valuation, portfolio-theory, fundamental-analysis, stocks, treasuries]
+tags: [valuation, portfolio-theory, fundamental-analysis, treasuries]
 aliases: ["ERP", "Equity Risk Premium", "Market Risk Premium", "Stock Risk Premium"]
 domain: [portfolio-theory, fundamental-analysis]
 prerequisites: ["[[interest-rates]]", "[[capital-asset-pricing-model]]"]

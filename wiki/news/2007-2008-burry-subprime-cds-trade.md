@@ -4,7 +4,7 @@ type: news
 created: 2026-04-28
 updated: 2026-06-12
 status: good
-tags: [news, stocks, derivatives, options, history, short-selling, fundamental-analysis, risk-management]
+tags: [news, derivatives, options, history, short-selling, fundamental-analysis, risk-management]
 aliases: ["Big Short Trade", "Scion Capital Subprime Trade", "Burry Subprime CDS", "BBB Tranche Short"]
 event_date: 2007-08-01
 markets_affected: [stocks, bonds]

@@ -4,7 +4,7 @@ type: news
 created: 2026-05-14
 updated: 2026-06-12
 status: good
-tags: [news, stocks, ai-trading, behavioral-finance]
+tags: [news, ai-trading, behavioral-finance]
 aliases: ["ChatGPT mainstream adoption", "ChatGPT Q1 2026 adoption", "ChatGPT over-35 growth"]
 related: ["[[openai]]", "[[anthropic]]", "[[claude]]", "[[2026-anthropic-finance-agents-launch]]", "[[narrative-fallacy]]", "[[information-asymmetry]]", "[[retail-trading]]", "[[ai-trading]]"]
 event_date: 2026-03-31

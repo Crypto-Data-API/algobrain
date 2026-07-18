@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, stablecoin, stablecoins]
+tags: [crypto, defi, ethereum, stablecoins]
 aliases: ["FRAX", "FXS", "Frax Finance", "Frax Share", "frxETH", "frxUSD"]
 entity_type: protocol
 headquarters: "Decentralized"

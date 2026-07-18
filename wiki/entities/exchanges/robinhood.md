@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-06-10
 status: good
-tags: [stocks, options, crypto, company]
+tags: [options, crypto, company]
 aliases: ["HOOD", "Robinhood Markets"]
 entity_type: exchange
 founded: 2013

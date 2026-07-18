@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-21
 status: excellent
-tags: [crypto, stablecoin, payments, remittance, education]
+tags: [crypto, stablecoins, payments, remittance, education]
 aliases: ["Stablecoin Use Cases", "Stablecoin Adoption"]
 related: ["[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[defi]]", "[[regulation]]", "[[stablecoin-regulation]]", "[[ethereum]]", "[[stablecoin-yields]]", "[[cbdc]]", "[[tether-limited]]", "[[circle]]", "[[pyusd]]", "[[depeg]]", "[[layer-2]]"]
 domain: [crypto, payments]

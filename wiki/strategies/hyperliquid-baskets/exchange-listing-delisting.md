@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, event-driven, quantitative]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, event-driven, quantitative]
 aliases: ["Listing Pump Basket", "Delisting Short Basket", "Exchange Listing Event", "HL Listing Catalyst"]
 related: ["[[hyperliquid-baskets-overview]]", "[[event-catalyst-regime]]", "[[policy-shock-regime]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[liquidation-cascade-fade]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[liquidity]]", "[[squeeze]]", "[[momentum-rotation]]", "[[when-to-retire-a-strategy]]", "[[token-unlock-supply-event]]", "[[meme-coin-cycle]]", "[[cross-sectional-relative-value]]", "[[macro-event-pump]]", "[[etf-and-institutional-flow]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic

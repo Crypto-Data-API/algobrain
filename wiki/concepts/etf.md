@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-11
 status: good
-tags: [stocks, commodities]
+tags: [commodities]
 aliases: ["ETF", "ETFs", "Etfs", "Exchange-Traded Fund", "Exchange Traded Fund", "Exchange-Traded Funds"]
 related: ["[[index-investing]]", "[[expense-ratio]]", "[[tracking-error]]", "[[etf-arbitrage]]", "[[leveraged-etf-rebalancing]]"]
 domain: [portfolio-theory]

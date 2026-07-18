@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [algorithmic, api-trading, crypto, defi, derivatives, dex, perpetuals, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins]
+tags: [algorithmic, api-trading, crypto, defi, derivatives, dex, perpetual-futures, hyperliquid, funding-rate, open-interest, liquidations, altcoins]
 aliases: ["ASTER", "Aster", "Aster DEX", "AsterDEX"]
 entity_type: exchange
 headquarters: "Decentralized"

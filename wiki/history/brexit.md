@@ -4,7 +4,7 @@ type: news
 created: 2026-04-14
 updated: 2026-04-14
 status: good
-tags: [news, history, forex, stocks, regulation, geopolitics]
+tags: [news, history, forex, regulation, geopolitics]
 event_date: 2016-06-23
 markets_affected: [forex, stocks, bonds]
 impact: high

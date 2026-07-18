@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, trend-following, derivatives, quantitative, momentum]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, trend-following, derivatives, quantitative, momentum]
 aliases: ["Open Interest Trend Confirmation", "OI Trend Filter Basket", "Capital-Committed Trend Following", "OI-Momentum Basket"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[technical-structural-regime]]", "[[macro-trend-regime]]", "[[defensive-majors]]", "[[full-bear-short-book]]", "[[trend-pullback-rally-fade]]", "[[major-trend-reclaim-rejection]]", "[[oi-price-exhaustion]]", "[[crowded-short-funding-fade]]", "[[crowded-long-funding-fade]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic

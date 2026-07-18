@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-06
 updated: 2026-06-10
 status: good
-tags: [data-provider, stocks, options, crypto, forex]
+tags: [data-provider, options, crypto, forex]
 entity_type: company
 founded: 2018
 headquarters: "New York, USA"

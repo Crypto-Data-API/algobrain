@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-04-13
 status: good
-tags: [data-provider, platform, stocks, crypto, forex, technical-analysis, options]
+tags: [data-provider, platform, crypto, forex, technical-analysis, options]
 entity_type: company
 website: https://www.tradingview.com
 founded: 2011

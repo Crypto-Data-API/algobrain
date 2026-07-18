@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-24
 updated: 2026-06-21
 status: excellent
-tags: [arbitrage, mean-reversion, stocks, bonds, behavioral-finance]
+tags: [arbitrage, mean-reversion, bonds, behavioral-finance]
 aliases: ["CEF Arbitrage", "CEF Discount Arb", "Closed-End Fund Discount Trade"]
 strategy_type: hybrid
 timeframe: position

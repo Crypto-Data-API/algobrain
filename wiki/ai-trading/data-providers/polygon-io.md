@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [data-provider, stocks, options, api]
+tags: [data-provider, options, api]
 entity_type: company
 website: https://polygon.io
 related:

@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [anomalies, behavioral-finance, mean-reversion, stocks]
+tags: [anomalies, behavioral-finance, mean-reversion]
 aliases: ["Overreaction Anomaly", "DeBondt-Thaler Reversal", "Long-Term Reversal", "Long-Term Overreaction", "Contrarian Anomaly"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[behavioral-finance]]"]

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, stablecoin, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
+tags: [crypto, defi, stablecoins, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
 aliases: ["USUAL", "Usual", "Usual Money"]
 entity_type: protocol
 headquarters: "Decentralized"

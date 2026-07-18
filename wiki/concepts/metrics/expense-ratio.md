@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [portfolio-theory, stocks, fundamental-analysis]
+tags: [portfolio-theory, fundamental-analysis]
 domain: [portfolio-theory, valuation]
 prerequisites: ["[[etf]]"]
 difficulty: beginner

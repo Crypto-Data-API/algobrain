@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-07-13
 status: excellent
-tags: [crypto, stablecoin, risk-management, history]
+tags: [crypto, stablecoins, risk-management, history]
 aliases: ["De-peg", "Stablecoin De-peg Events", "De-pegging"]
 related: ["[[stablecoins]]", "[[terra-luna-collapse]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[risk-management]]", "[[defi]]", "[[stablecoin-regulation]]", "[[cryptodataapi]]"]
 domain: [risk-management, crypto]

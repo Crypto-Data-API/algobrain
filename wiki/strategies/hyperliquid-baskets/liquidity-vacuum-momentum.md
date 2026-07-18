@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, scalping, market-microstructure, momentum, quantitative, risk-management]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, scalping, market-microstructure, momentum, quantitative, risk-management]
 aliases: ["Liquidity Vacuum", "Book Thinness Momentum", "Order-Book Vacuum Scalp", "Vacuum Momentum Trade"]
 related: ["[[hyperliquid-baskets-overview]]", "[[liquidity-depth-regime]]", "[[technical-structural-regime]]", "[[short-liquidation-squeeze]]", "[[long-liquidation-cascade]]", "[[volatility-compression-breakout]]", "[[breakout-trading]]", "[[liquidity]]", "[[order-flow]]", "[[bid-ask-spreads]]", "[[open-interest]]", "[[funding-rate]]", "[[atr]]", "[[leverage]]", "[[liquidation]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2024-03-hyperliquid-cascade]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic

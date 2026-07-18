@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-06-10
 status: good
-tags: [exchange, options, volatility, stocks]
+tags: [exchange, options, volatility]
 entity_type: exchange
 aliases: ["Cboe", "CBOE", "Chicago Board Options Exchange"]
 founded: 1973

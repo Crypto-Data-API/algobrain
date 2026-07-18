@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-09
 updated: 2026-06-11
 status: good
-tags: [crypto, stablecoin, cross-chain, infrastructure]
+tags: [crypto, stablecoins, cross-chain, infrastructure]
 aliases: ["CCTP", "Cross-Chain Transfer Protocol"]
 domain: [market-microstructure]
 prerequisites: ["[[usdc]]", "[[stablecoins]]"]

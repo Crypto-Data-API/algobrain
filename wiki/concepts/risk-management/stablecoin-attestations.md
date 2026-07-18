@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-09
 updated: 2026-06-11
 status: good
-tags: [stablecoin, regulation, risk-management]
+tags: [stablecoins, regulation, risk-management]
 aliases: ["Stablecoin Attestations", "Reserve Attestation"]
 domain: [risk-management]
 difficulty: intermediate

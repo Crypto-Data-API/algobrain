@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, ethereum, regulation, stablecoin, stablecoins]
+tags: [crypto, defi, ethereum, regulation, stablecoins]
 aliases: ["Circle USDC", "USD Coin", "USDC"]
 entity_type: protocol
 founded: 2018

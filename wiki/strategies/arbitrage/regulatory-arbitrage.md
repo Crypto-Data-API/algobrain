@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [arbitrage, regulatory, jurisdiction, compliance, crypto, defi, eurodollar, stablecoin, legal]
+tags: [arbitrage, regulatory, jurisdiction, compliance, crypto, defi, eurodollar, stablecoins, legal]
 aliases: ["Reg Arb", "Jurisdictional Arbitrage", "Compliance Arbitrage"]
 strategy_type: fundamental
 timeframe: position

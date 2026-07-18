@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-31
 updated: 2026-06-10
 status: good
-tags: [person, ai-trading, stocks, options]
+tags: [person, ai-trading, options]
 entity_type: person
 aliases: ["Leopold Aschenbrenner", "Aschenbrenner"]
 related:

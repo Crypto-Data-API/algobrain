@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [fundamental-analysis, stocks, valuation, volatility]
+tags: [fundamental-analysis, valuation, volatility]
 aliases: ["Inflation and the Stock Market", "Does Inflation Hurt Stocks", "Stocks as an Inflation Hedge"]
 domain: [fundamental-analysis]
 prerequisites: ["[[inflation]]", "[[interest-rates]]"]

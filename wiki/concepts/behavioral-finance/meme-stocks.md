@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-06
 updated: 2026-06-22
 status: excellent
-tags: [behavioral-finance, stocks, volatility]
+tags: [behavioral-finance, volatility]
 aliases: ["Meme Stock", "Reddit Stocks"]
 domain: [behavioral-finance]
 prerequisites: ["[[behavioral-finance]]", "[[herding]]"]

@@ -4,7 +4,7 @@ type: news
 created: 2026-04-26
 updated: 2026-06-12
 status: good
-tags: [news, history, stocks, futures, derivatives, risk-management]
+tags: [news, history, futures, derivatives, risk-management]
 aliases: ["Kerviel Scandal", "SocGen €4.9B Loss", "January 2008 Market Crash"]
 event_date: 2008-01-21
 markets_affected: [equities, futures]

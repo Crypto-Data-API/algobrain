@@ -4,7 +4,7 @@ type: strategy
 created: 2026-04-06
 updated: 2026-06-21
 status: excellent
-tags: [stocks, futures, execution, institutional, slippage, market-impact, algorithmic-execution, benchmark, vwap, twap]
+tags: [futures, execution, institutional, slippage, market-impact, algorithmic-execution, benchmark, vwap, twap]
 aliases: ["Implementation Shortfall Algorithm", "IS Algorithm", "Arrival Price Algorithm", "Execution Cost Minimization"]
 strategy_type: algorithmic
 timeframe: day

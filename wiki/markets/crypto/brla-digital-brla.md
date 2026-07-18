@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, forex, stablecoin]
+tags: [crypto, forex, stablecoins]
 aliases: ["BRLA"]
 entity_type: protocol
 headquarters: "Brazil (BRLA Digital)"

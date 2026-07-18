@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-13
 updated: 2026-06-10
 status: good
-tags: [person, commodities, stocks, gold]
+tags: [person, commodities, gold]
 entity_type: person
 aliases: ["James Rogers", "James Beeland Rogers Jr."]
 related: ["[[mark-faber]]", "[[commodities]]", "[[gold]]", "[[silver]]", "[[george-soros]]", "[[quantum-fund]]", "[[agricultural-commodities]]", "[[china]]"]

@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-22
 updated: 2026-06-22
 status: good
-tags: [behavioral-finance, mean-reversion, stocks, crypto, swing-trading]
+tags: [behavioral-finance, mean-reversion, crypto, swing-trading]
 aliases: ["Contrarian Investing", "Fading the Crowd", "Sentiment Fade", "Contrarianism"]
 strategy_type: hybrid
 timeframe: swing

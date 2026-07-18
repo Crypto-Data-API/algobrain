@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-05-07
 status: good
-tags: [hedge-funds, short-selling, history, stocks, options, risk-management, derivatives]
+tags: [hedge-funds, short-selling, history, options, risk-management, derivatives]
 entity_type: fund
 founded: 2014
 headquarters: "New York, USA"

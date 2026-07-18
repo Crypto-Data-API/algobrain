@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, defi, derivatives, perpetuals, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, altcoins, bitcoin, ethereum]
+tags: [crypto, defi, derivatives, perpetual-futures, hyperliquid, funding-rate, open-interest, liquidations, altcoins, bitcoin, ethereum]
 aliases: ["AVNT"]
 entity_type: protocol
 headquarters: "Decentralized"

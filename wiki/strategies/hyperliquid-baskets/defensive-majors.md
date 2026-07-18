@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, risk-management, trend-following, momentum, quantitative]
+tags: [crypto, perpetual-futures, hyperliquid, risk-management, trend-following, momentum, quantitative]
 aliases: ["Risk-Off Majors Basket", "BTC ETH SOL Defensive Long", "Crypto Capital Preservation Sleeve", "Majors Anchor Basket"]
 related: ["[[hyperliquid-baskets-overview]]", "[[macro-trend-regime]]", "[[bitcoin-cycle-regime]]", "[[volatility-regime-classification]]", "[[full-bear-short-book]]", "[[oi-confirmed-trend]]", "[[trend-pullback-rally-fade]]", "[[major-trend-reclaim-rejection]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[leverage]]", "[[volatility-regime-classification]]", "[[bitcoin-dominance-rotation]]", "[[spot-etf-flows]]"]
 strategy_type: quantitative

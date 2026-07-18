@@ -4,7 +4,7 @@ type: news
 created: 2026-05-05
 updated: 2026-06-17
 status: good
-tags: [news, stocks, bonds, forex, recession, ai-trading]
+tags: [news, bonds, forex, recession, ai-trading]
 aliases: ["BLS 900K revision", "Feb 2026 jobs report revision"]
 related: ["[[nonfarm-payrolls]]", "[[federal-reserve]]", "[[employment]]", "[[recession]]", "[[service-sector-multiplier]]", "[[bls-benchmark-revisions]]", "[[ibkr-forecast-trader]]"]
 event_date: 2026-03-01

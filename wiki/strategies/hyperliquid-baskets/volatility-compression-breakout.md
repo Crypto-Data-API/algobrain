@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, technical-analysis, breakout, volatility, swing-trading, quantitative]
+tags: [crypto, perpetual-futures, hyperliquid, technical-analysis, breakout, volatility, swing-trading, quantitative]
 aliases: ["Vol Compression Breakout", "Squeeze Breakout", "Coiled Spring Breakout", "Low-Vol Expansion Trade"]
 related: ["[[hyperliquid-baskets-overview]]", "[[volatility-regime-classification]]", "[[technical-structural-regime]]", "[[bollinger-bands]]", "[[atr]]", "[[average-true-range]]", "[[garch-volatility]]", "[[volatility-carry]]", "[[breakout-trading]]", "[[breakout-and-retest]]", "[[range-breakout-breakdown]]", "[[failed-breakout-failed-breakdown]]", "[[range-mean-reversion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[open-interest]]", "[[funding-rate]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[overfitting-detection]]", "[[crypto-perp-backtesting-pitfalls]]"]
 strategy_type: quantitative

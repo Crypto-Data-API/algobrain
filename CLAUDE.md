@@ -296,6 +296,9 @@ bitcoin, ethereum, altcoins, stablecoins, memecoins, gold, oil, treasuries
 history, news, education, book, person, company, exchange, regulation,
 ai-trading, machine-learning, backtesting, data-provider, market-regime,
 regime-detection, methodology, event-driven, hyperliquid
+
+# Adopted 2026-07-19 (tag audit)
+anomalies, australia, bittensor, combinations, crashes, execution, exploits, gamefi, hedge-funds, hedging, macro, market-making, meta-strategy, narrative-impact, options-structures, privacy, python, real-world-assets, security, sniping, solana, statistics, strategy-development, tax, trading-bots, volume
 ```
 
 ## Content Guidelines

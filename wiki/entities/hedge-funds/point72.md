@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-06-10
 status: good
-tags: [company, stocks, ai-trading, quantitative]
+tags: [company, ai-trading, quantitative]
 entity_type: fund
 founded: 2014
 headquarters: "Stamford, Connecticut, USA"

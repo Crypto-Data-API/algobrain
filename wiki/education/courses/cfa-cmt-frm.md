@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, certification, education]
+tags: [education, certification]
 related:
   - "[[factor-investing]]"
   - "[[risk-budgeting]]"

@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-19
 updated: 2026-04-19
 status: good
-tags: [comparisons, brokers, crypto, perps, derivatives, api-trading]
+tags: [comparisons, brokers, crypto, perpetual-futures, derivatives, api-trading]
 subjects: ["[[alpaca]]", "[[hyperliquid]]"]
 comparison_dimensions: [product, custody, jurisdiction, leverage, fees, api, liquidity]
 related: ["[[crypto-perpetual-futures]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hyperliquid-vs-dydx-vs-gmx]]", "[[dydx]]", "[[binance]]"]

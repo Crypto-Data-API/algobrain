@@ -4,7 +4,7 @@ type: news
 created: 2026-04-28
 updated: 2026-06-12
 status: good
-tags: [crypto, stablecoin, depeg, history, regulation, busd, paxos, sec]
+tags: [crypto, stablecoins, depeg, history, regulation, busd, paxos, sec]
 aliases: ["BUSD Halt", "Paxos Wells Notice", "BUSD Regulatory Shutdown"]
 event_date: 2023-02-13
 markets_affected: [crypto]

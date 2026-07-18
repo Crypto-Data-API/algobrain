@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-21
 status: excellent
-tags: [crypto, stablecoin, defi, yield, income]
+tags: [crypto, stablecoins, defi, yield, income]
 aliases: ["Stablecoin Yield", "Stablecoin Farming", "DeFi Yields"]
 related: ["[[stablecoins]]", "[[defi-lending]]", "[[aave]]", "[[funding-rates]]", "[[impermanent-loss]]", "[[risk-management]]", "[[cryptocurrency-tax-australia]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[ethena-usde]]", "[[ousg]]", "[[hashnote-usyc]]", "[[pendle]]", "[[automated-market-maker]]"]
 domain: [defi, risk-management]

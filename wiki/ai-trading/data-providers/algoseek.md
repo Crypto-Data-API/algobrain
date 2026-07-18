@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-06
 updated: 2026-06-10
 status: good
-tags: [data-provider, options, stocks, futures, quantitative, backtesting]
+tags: [data-provider, options, futures, quantitative, backtesting]
 entity_type: company
 website: https://www.algoseek.com
 founded: 2015

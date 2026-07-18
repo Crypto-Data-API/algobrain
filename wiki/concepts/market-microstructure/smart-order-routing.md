@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-14
 updated: 2026-07-14
 status: good
-tags: [market-microstructure, algorithmic-trading, order-types, stocks, crypto]
+tags: [market-microstructure, algorithmic-trading, order-types, crypto]
 aliases: ["smart order routing", "SOR", "smart router"]
 domain: [market-microstructure]
 difficulty: intermediate

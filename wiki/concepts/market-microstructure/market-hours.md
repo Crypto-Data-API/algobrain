@@ -4,7 +4,7 @@ type: concept
 created: 2026-06-30
 updated: 2026-07-01
 status: review
-tags: [market-microstructure, stocks, liquidity, slippage]
+tags: [market-microstructure, liquidity, slippage]
 aliases: ["Market Hours", "Trading Hours", "Pre-Market", "Pre-Market Trading", "After-Hours", "After-Hours Trading", "after-hours-trading", "Extended Hours", "Extended-Hours Trading", "Regular Trading Hours"]
 domain: [market-microstructure]
 prerequisites: ["[[liquidity]]", "[[bid-ask-spread]]"]

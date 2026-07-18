@@ -4,7 +4,7 @@ type: news
 created: 2026-04-27
 updated: 2026-06-12
 status: good
-tags: [crypto, history, hard-fork, airdrop, terra, stablecoin, cosmos]
+tags: [crypto, history, hard-fork, airdrop, terra, stablecoins, cosmos]
 aliases: ["Luna 2.0 Fork", "Terra Revival", "LUNC Airdrop", "Terra Classic Split"]
 event_date: 2022-05-28
 markets_affected: [crypto]

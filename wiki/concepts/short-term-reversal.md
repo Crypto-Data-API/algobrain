@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-11
 status: good
-tags: [mean-reversion, quantitative, anomalies, market-microstructure, stocks]
+tags: [mean-reversion, quantitative, anomalies, market-microstructure]
 aliases: ["Short Term Reversal", "Short-Horizon Reversal", "Weekly Reversal", "Lehmann Reversal"]
 related: ["[[mean-reversion]]", "[[momentum]]", "[[statistical-arbitrage]]", "[[liquidity]]", "[[market-microstructure]]", "[[pairs-trading]]", "[[idiosyncratic-volatility-anomaly]]"]
 domain: [market-microstructure, behavioral-finance]

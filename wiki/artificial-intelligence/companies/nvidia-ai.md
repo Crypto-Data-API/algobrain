@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-06-10
 status: good
-tags: [company, ai-trading, machine-learning, stocks]
+tags: [company, ai-trading, machine-learning]
 aliases: ["NVIDIA", "NVDA"]
 entity_type: company
 founded: 1993

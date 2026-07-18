@@ -4,7 +4,7 @@ type: news
 created: 2026-04-28
 updated: 2026-06-12
 status: good
-tags: [crypto, stablecoin, depeg, history, dai, makerdao, defi, liquidation]
+tags: [crypto, stablecoins, depeg, history, dai, makerdao, defi, liquidation]
 aliases: ["MakerDAO Black Thursday", "DAI March 2020", "DAI $1.10 Above Peg", "Zero-Bid Auction"]
 event_date: 2020-03-12
 markets_affected: [crypto]

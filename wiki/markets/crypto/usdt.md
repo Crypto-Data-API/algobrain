@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-07-16
 status: good
-tags: [controversy, crypto, ethereum, stablecoin, tron, stablecoins, defi]
+tags: [controversy, crypto, ethereum, stablecoins, tron, defi]
 aliases: ["Tether", "Tether USD", "USDT"]
 entity_type: protocol
 founded: 2014

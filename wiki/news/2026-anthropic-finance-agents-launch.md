@@ -4,7 +4,7 @@ type: news
 created: 2026-05-14
 updated: 2026-06-17
 status: good
-tags: [news, stocks, ai-trading, machine-learning, technology, company]
+tags: [news, ai-trading, machine-learning, technology, company]
 aliases: ["Claude finance agents", "Anthropic financial agents", "Claude Market Researcher / Credit Analyst / Portfolio Manager / Risk Manager"]
 related: ["[[anthropic]]", "[[claude]]", "[[ai-trading]]", "[[bloomberg-terminal]]", "[[2026-anthropic-blackstone-jv]]", "[[2026-claude-opus-4-7-finance-benchmark]]", "[[ai-trading-agents]]"]
 event_date: 2026-01-01

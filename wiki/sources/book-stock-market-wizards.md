@@ -4,7 +4,7 @@ type: source
 created: 2026-05-07
 updated: 2026-06-12
 status: good
-tags: [book, trading-psychology, risk-management, stocks, behavioral-finance]
+tags: [book, trading-psychology, risk-management, behavioral-finance]
 aliases: ["Stock Market Wizards", "SMW"]
 related: ["[[book-market-wizards]]", "[[book-the-new-market-wizards]]", "[[book-hedge-fund-market-wizards]]", "[[jack-schwager]]", "[[mark-minervini]]", "[[steve-cohen]]", "[[professional-vs-retail-mindset]]", "[[expectancy]]", "[[position-sizing]]", "[[trading-psychology]]", "[[short-selling]]"]
 source_type: book

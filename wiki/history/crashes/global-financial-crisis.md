@@ -4,7 +4,7 @@ type: redirect
 created: 2026-04-13
 updated: 2026-06-12
 status: good
-tags: [history, crashes, stocks, bonds]
+tags: [history, crashes, bonds]
 aliases: ["GFC", "2008 Financial Crisis", "Great Recession", "global-financial-crisis"]
 related: ["[[2008-global-financial-crisis]]"]
 ---

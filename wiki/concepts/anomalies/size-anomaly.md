@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [anomalies, quantitative, stocks, valuation]
+tags: [anomalies, quantitative, valuation]
 aliases: ["Size Anomaly", "Size Premium", "Small-Cap Effect", "SMB", "Small-Firm Effect"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[factor-investing]]"]

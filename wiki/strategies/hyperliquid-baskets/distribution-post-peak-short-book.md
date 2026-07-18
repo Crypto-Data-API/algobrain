@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, technical-analysis, swing-trading, mean-reversion, risk-management, algorithmic, momentum]
+tags: [crypto, perpetual-futures, hyperliquid, technical-analysis, swing-trading, mean-reversion, risk-management, algorithmic, momentum]
 aliases: ["Distribution Short Book", "Post-Peak Shorts", "Wyckoff Distribution Short", "Smart-Money Exit Fade"]
 related: ["[[hyperliquid-baskets-overview]]", "[[technical-structural-regime]]", "[[macro-trend-regime]]", "[[on-chain-regime]]", "[[derivatives-native-regime]]", "[[full-bear-short-book]]", "[[oi-price-exhaustion]]", "[[trend-pullback-rally-fade]]", "[[major-trend-reclaim-rejection]]", "[[wyckoff-method]]", "[[evening-star]]", "[[divergence]]", "[[resistance]]", "[[open-interest]]", "[[funding-rate]]", "[[rsi]]", "[[volume]]", "[[vwap]]", "[[atr]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]"]
 strategy_type: hybrid

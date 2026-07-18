@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-13
 updated: 2026-04-14
 status: good
-tags: [history, risk-management, stocks, crashes]
+tags: [history, risk-management, crashes]
 related: ["[[crash-of-1987]]", "[[global-financial-crisis]]", "[[cash-as-asset]]", "[[crashes-overview]]", "[[deleveraging]]", "[[crowding-risk]]", "[[volatility]]"]
 ---
 

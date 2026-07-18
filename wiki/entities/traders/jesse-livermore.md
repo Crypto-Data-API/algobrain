@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-04-07
 status: good
-tags: [traders, person, history, stocks]
+tags: [traders, person, history]
 aliases: ["The Boy Plunger", "The Great Bear of Wall Street"]
 entity_type: person
 founded: 1877

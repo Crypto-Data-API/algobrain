@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-21
 status: excellent
-tags: [crypto, stablecoin, defi]
+tags: [crypto, stablecoins, defi]
 aliases: ["Other Stablecoins", "Stablecoin List"]
 related: ["[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[usds]]", "[[ethena-usde]]", "[[frax]]", "[[gho]]", "[[bfusd]]", "[[defi]]", "[[binance]]", "[[aave]]", "[[regulation]]", "[[stablecoin-regulation]]", "[[stablecoin-yields]]"]
 domain: [crypto, defi]

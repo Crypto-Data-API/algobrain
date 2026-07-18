@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coin, solana, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins, altcoins]
+tags: [crypto, memecoins, solana, speculation, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
 entity_type: protocol
 aliases: ["FARTCOIN", "fartcoin-token"]
 related: ["[[crypto-markets]]", "[[funding-rate]]", "[[hyperliquid]]", "[[meme-coin-cycle]]", "[[meme-coin]]", "[[meme-coins]]", "[[pepe]]", "[[perpetual-futures]]", "[[solana]]", "[[funding-rate-harvest]]", "[[crowded-long-funding-fade]]", "[[cash-and-carry]]"]

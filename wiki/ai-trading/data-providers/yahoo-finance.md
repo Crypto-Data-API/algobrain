@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [data-provider, stocks, free]
+tags: [data-provider, free]
 entity_type: company
 website: https://finance.yahoo.com
 related:

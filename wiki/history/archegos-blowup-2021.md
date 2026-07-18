@@ -4,7 +4,7 @@ type: news
 created: 2026-04-24
 updated: 2026-06-21
 status: excellent
-tags: [history, stocks, derivatives, leverage, risk-management]
+tags: [history, derivatives, leverage, risk-management]
 aliases: ["Archegos Collapse", "Hwang Blow-Up", "Archegos 2021"]
 event_date: 2021-03-26
 markets_affected: [stocks, derivatives]

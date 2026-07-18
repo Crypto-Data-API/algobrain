@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, liquidation, market-microstructure, algorithmic, scalping, derivatives]
+tags: [crypto, perpetual-futures, hyperliquid, liquidation, market-microstructure, algorithmic, scalping, derivatives]
 aliases: ["Short Squeeze Cascade Rider", "Liquidation Heatmap Long", "Short Flush Long", "Squeeze Hunter Long"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[liquidity-depth-regime]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[liquidation]]", "[[open-interest]]", "[[leverage]]", "[[squeeze]]", "[[order-flow]]", "[[funding-rate]]", "[[coinglass]]", "[[hypurrscan]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 strategy_type: algorithmic

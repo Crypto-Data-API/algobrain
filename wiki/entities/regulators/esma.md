@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-07
 updated: 2026-06-21
 status: excellent
-tags: [regulation, stocks, options, derivatives, behavioral-finance]
+tags: [regulation, options, derivatives, behavioral-finance]
 aliases: ["European Securities and Markets Authority", "European Securities Markets Authority"]
 entity_type: regulator
 founded: 2011

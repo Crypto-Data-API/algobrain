@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-13
 updated: 2026-06-19
 status: excellent
-tags: [company, stocks, options, derivatives, crypto, bitcoin]
+tags: [company, options, derivatives, crypto, bitcoin]
 entity_type: company
 aliases: ["HUT", "Hut 8 Corp."]
 ticker: "HUT"

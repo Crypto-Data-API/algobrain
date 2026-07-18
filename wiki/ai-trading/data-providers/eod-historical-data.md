@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-06
 updated: 2026-06-10
 status: good
-tags: [data-provider, stocks, options]
+tags: [data-provider, options]
 entity_type: company
 website: https://eodhd.com
 aliases: ["EOD HD", "EODHD", "EODHistoricalData", "eodhistoricaldata.com"]

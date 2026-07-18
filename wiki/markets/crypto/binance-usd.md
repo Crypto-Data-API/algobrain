@@ -4,7 +4,7 @@ type: market
 created: 2026-04-09
 updated: 2026-07-16
 status: good
-tags: [crypto, stablecoin]
+tags: [crypto, stablecoins]
 aliases: ["BUSD", "Binance USD"]
 entity_type: protocol
 headquarters: "New York, USA (issuer Paxos)"

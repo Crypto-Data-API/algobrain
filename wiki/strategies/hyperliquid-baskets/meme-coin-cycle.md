@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, momentum, event-driven, quantitative, backtesting, risk-management, behavioral-finance]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, momentum, event-driven, quantitative, backtesting, risk-management, behavioral-finance]
 aliases: ["Meme Rotation Basket", "Meme Speculative Basket", "Degen Cycle Strategy", "Meme Pump Basket"]
 related: ["[[hyperliquid-baskets-overview]]", "[[meme-speculative-regime]]", "[[bitcoin-dominance-rotation]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[funding-rate]]", "[[open-interest]]", "[[perpetual-futures]]", "[[leverage]]", "[[liquidation]]", "[[squeeze]]", "[[momentum-rotation]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[2025-10-crypto-liquidation-cascade]]", "[[liquidation-cascade-fade]]", "[[when-to-retire-a-strategy]]", "[[atr-position-sizing]]", "[[behavioral-finance]]", "[[exchange-listing-delisting]]", "[[token-unlock-supply-event]]", "[[cross-sectional-relative-value]]", "[[dappradar]]", "[[hypurrscan]]", "[[coinglass]]", "[[the-block]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]", "[[cryptodataapi]]"]
 strategy_type: hybrid

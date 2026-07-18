@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-07-01
 status: excellent
-tags: [anomalies, stocks, mean-reversion]
+tags: [anomalies, mean-reversion]
 aliases: ["Turn-of-Year Effect", "January Small-Cap Premium", "January Effect"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[size-anomaly]]"]

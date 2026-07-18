@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-16
 status: review
-tags: [crypto, gold, paxos, stablecoin, tokenized-asset, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
+tags: [crypto, gold, paxos, stablecoins, tokenized-asset, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives]
 entity_type: protocol
 aliases: ["PAXG", "Pax-Gold", "pax-gold"]
 website: "https://paxos.com/paxgold"

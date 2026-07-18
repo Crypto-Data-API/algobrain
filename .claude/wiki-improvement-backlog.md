@@ -36,11 +36,9 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       Broken gap-finder refs 228 → 0.
 - [x] A5. (2026-07-19, iter 4) Tags added to all 18 pages missing them; 3 non-schema
       statuses fixed (proposed→draft ×2, active-catalyst-window→review).
-- [ ] A6. Tags: normalize variants (stablecoin→stablecoins, perpetuals→perpetual-futures, …);
-      review the `stocks` tag on 132 pages (scope smell — retag or rescope); adopt genuinely
-      useful new tags (macro, security, solana, real-world-assets, execution, exploits,
-      trading-bots, strategy-development, hedging, anomalies, narrative-impact) into the
-      approved list in BOTH CLAUDE.md and AGENTS.md.
+- [x] A6. (2026-07-19, iter 6) Tags: variants normalized in 238 pages, 128 stocks/equities
+      tag instances stripped, 26 high-usage tags adopted into CLAUDE.md + AGENTS.md.
+      Non-approved-tag pages 1,471 → 1,102 (remaining = low-priority long tail).
 - [x] A7. (2026-07-19, iter 5) All 10 pure-equity strategy pages converted to scope-note
       REDIRECTS pointing at crypto counterparts (not deleted — the 3 heavily-linked ones had
       ~140 inbound refs; redirects keep the graph intact). Zero `markets: [stocks]` strategy
@@ -61,7 +59,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8 (B2 ✓ iter 2; B3 ✓ iter 3; B4 ✓ iter 4; B5 ✓ iter 5; 49 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
+- [ ] B2–B8 (B2–B6 ✓ iters 2–6; 44 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
       highest-value unfilled cells; update matrix each time. Continue until every viable cell
       is filled or explicitly marked non-viable ("all possible combinations").
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
@@ -97,3 +95,6 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - 2026-07-19 iter 5 (B5 + A7): 5 combo pages — trend-aware-carry, post-panic-vol-selling,
   cascade-monetization-rotation, unlock-pair-hedge, trend-aligned-premium-selling. Matrix
   42/49/9. A7: 10 equity pages → scope-note redirects. Lint 513→511.
+- 2026-07-19 iter 6 (B6 + A6): 5 combo pages — put-protected-dip-buying, oi-aware-grid,
+  narrative-position-vol-targeting, smart-money-vs-crowd-divergence, low-leverage-vol-selling.
+  Matrix 47/44/9. A6: tags normalized (238 pages), 26 tags adopted into schema files.

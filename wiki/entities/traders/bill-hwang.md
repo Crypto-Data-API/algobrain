@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-26
 updated: 2026-06-10
 status: good
-tags: [person, history, leverage, derivatives, stocks, risk-management]
+tags: [person, history, leverage, derivatives, risk-management]
 aliases: ["Sung Kook Hwang", "Hwang Sung-kook"]
 entity_type: person
 founded: 1964

@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, quantitative, market-regime, regime-detection, risk-management, momentum]
+tags: [crypto, perpetual-futures, hyperliquid, quantitative, market-regime, regime-detection, risk-management, momentum]
 aliases: ["ETF Flow Basket", "Institutional Flow Signal", "Spot ETF Demand Basket", "Coinbase Premium Basket"]
 related: ["[[hyperliquid-baskets-overview]]", "[[institutional-flow-regime]]", "[[on-chain-regime]]", "[[spot-etf-flows]]", "[[macro-trend-regime]]", "[[crypto-macro-correlation-regime]]", "[[regime-strategy-playbook]]", "[[crypto-market-regime-taxonomy]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[global-liquidity-expansion-contraction]]", "[[macro-event-pump]]", "[[breadth-and-momentum-divergence]]", "[[defensive-majors]]", "[[oi-confirmed-trend]]", "[[distribution-post-peak-short-book]]", "[[full-bear-short-book]]", "[[trend-following]]", "[[multi-strategy-portfolio]]", "[[when-to-retire-a-strategy]]", "[[cryptoquant]]", "[[coinglass]]", "[[the-block]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

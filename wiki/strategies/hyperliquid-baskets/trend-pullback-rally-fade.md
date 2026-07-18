@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, algorithmic, trend-following, mean-reversion, technical-analysis, quantitative, swing-trading]
+tags: [crypto, perpetual-futures, hyperliquid, algorithmic, trend-following, mean-reversion, technical-analysis, quantitative, swing-trading]
 aliases: ["Pullback Long in Uptrend", "Rally Fade in Downtrend", "Counter-Trend Reentry Basket", "Trend Continuation Pullback"]
 related: ["[[hyperliquid-baskets-overview]]", "[[technical-structural-regime]]", "[[macro-trend-regime]]", "[[oi-confirmed-trend]]", "[[major-trend-reclaim-rejection]]", "[[defensive-majors]]", "[[breakout-and-retest]]", "[[range-mean-reversion]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[when-to-retire-a-strategy]]", "[[fibonacci-retracement]]", "[[vwap]]", "[[exponential-moving-average]]"]
 strategy_type: algorithmic

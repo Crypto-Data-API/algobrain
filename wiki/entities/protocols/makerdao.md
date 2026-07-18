@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-14
 updated: 2026-06-21
 status: excellent
-tags: [crypto, defi, stablecoin, ethereum, governance, lending, decentralized, makerdao]
+tags: [crypto, defi, stablecoins, ethereum, governance, lending, decentralized, makerdao]
 aliases: ["Maker", "MakerDAO", "Sky Protocol", "Sky", "MKR"]
 entity_type: protocol
 founded: 2014

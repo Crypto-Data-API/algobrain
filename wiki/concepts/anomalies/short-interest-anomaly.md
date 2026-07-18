@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [anomalies, market-microstructure, stocks, quantitative]
+tags: [anomalies, market-microstructure, quantitative]
 aliases: ["Short Interest Anomaly", "High Short Interest Underperformance", "Short Ratio Anomaly"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[short-interest]]", "[[short-selling]]"]

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-04-19
 status: good
-tags: [company, broker, api-trading, algorithmic, stocks, options, crypto]
+tags: [company, broker, api-trading, algorithmic, options, crypto]
 entity_type: company
 founded: 2015
 headquarters: "San Mateo, California, USA"

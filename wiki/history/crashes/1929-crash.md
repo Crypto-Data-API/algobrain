@@ -4,7 +4,7 @@ type: news
 created: 2026-04-06
 updated: 2026-06-12
 status: good
-tags: [history, crashes, stocks, leverage]
+tags: [history, crashes, leverage]
 event_date: 1929-10-29
 markets_affected: [stocks]
 impact: high

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-13
 updated: 2026-06-19
 status: excellent
-tags: [company, stocks, options, derivatives, crypto, ethereum]
+tags: [company, options, derivatives, crypto, ethereum]
 entity_type: company
 aliases: ["BTBT", "Bit Digital Inc."]
 ticker: "BTBT"

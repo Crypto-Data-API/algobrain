@@ -4,7 +4,7 @@ type: news
 created: 2026-04-06
 updated: 2026-04-06
 status: good
-tags: [history, notable-trades, stocks, short-squeeze]
+tags: [history, notable-trades, short-squeeze]
 event_date: 2021-01-28
 markets_affected: [stocks]
 impact: high

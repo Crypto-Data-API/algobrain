@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, meme-coins, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
+tags: [crypto, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives]
 aliases: ["POPCAT", "Popcat (SOL)"]
 entity_type: protocol
 headquarters: "Decentralized"

@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, technical-analysis, mean-reversion, swing-trading, intraday]
+tags: [crypto, perpetual-futures, hyperliquid, technical-analysis, mean-reversion, swing-trading, intraday]
 aliases: ["Range Fade", "Range Boundary Fade", "Range Oscillator", "Mean Reversion Range"]
 related: ["[[hyperliquid-baskets-overview]]", "[[technical-structural-regime]]", "[[volatility-regime-classification]]", "[[mean-reversion]]", "[[bollinger-band-reversion]]", "[[rsi-mean-reversion]]", "[[bollinger-bands]]", "[[rsi]]", "[[relative-strength-index]]", "[[grid-trading]]", "[[range-trading]]", "[[support]]", "[[resistance]]", "[[atr]]", "[[average-true-range]]", "[[open-interest]]", "[[funding-rate]]", "[[breakout-and-retest]]", "[[range-breakout-breakdown]]", "[[failed-breakout-failed-breakdown]]", "[[volatility-compression-breakout]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[atr-position-sizing]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
 strategy_type: quantitative

@@ -4,6 +4,19 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 6: combination batch 6 + tag normalization
+
+- 5 more combination strategies (full buildable schema): put-protected-dip-buying (risk
+  structure for dip entries), oi-aware-grid (leading-indicator grid pause),
+  narrative-position-vol-targeting, smart-money-vs-crowd-divergence (on-chain vs positioning
+  divergence), low-leverage-vol-selling (structural inverse of leverage-stress-tail-hedge).
+  Matrix now **47 covered / 44 planned / 9 non-viable** — combination coverage has more than
+  doubled since the program began (22 → 47 cells).
+- **Tag hygiene:** variants normalized across 238 pages (stablecoin→stablecoins,
+  perpetuals→perpetual-futures, …), 128 out-of-scope stocks/equities tag instances stripped,
+  and 26 high-usage tags formally adopted into the approved list in CLAUDE.md/AGENTS.md.
+  Pages with non-approved tags: 1,471 → 1,102.
+
 ## 2026-07-19 — Improvement loop, iteration 5: combination batch 5 + equity scope-out
 
 - 5 more combination strategies (full buildable schema): trend-aware-carry (carry-book

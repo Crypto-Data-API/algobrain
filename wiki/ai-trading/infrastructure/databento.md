@@ -4,7 +4,7 @@ type: source
 created: 2026-04-15
 updated: 2026-06-12
 status: good
-tags: [data-provider, technology, market-microstructure, futures, stocks, options]
+tags: [data-provider, technology, market-microstructure, futures, options]
 aliases: ["Databento", "databento.com"]
 source_type: data
 source_url: "https://databento.com"

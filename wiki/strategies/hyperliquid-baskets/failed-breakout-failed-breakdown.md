@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-06-20
 status: good
-tags: [crypto, perpetuals, hyperliquid, technical-analysis, mean-reversion, breakout, intraday, swing-trading]
+tags: [crypto, perpetual-futures, hyperliquid, technical-analysis, mean-reversion, breakout, intraday, swing-trading]
 aliases: ["Failed Breakout Fade", "Breakout Trap", "Stop Hunt Reversal", "False Break Fade", "FBFB"]
 related: ["[[hyperliquid-baskets-overview]]", "[[technical-structural-regime]]", "[[liquidity-depth-regime]]", "[[mean-reversion]]", "[[smart-money-concepts]]", "[[support]]", "[[resistance]]", "[[atr]]", "[[open-interest]]", "[[funding-rate]]", "[[order-flow]]", "[[breakout-and-retest]]", "[[range-breakout-breakdown]]", "[[range-mean-reversion]]", "[[volatility-compression-breakout]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[hyperliquid]]", "[[hyperliquid-liquidation-engine]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-oracle-mechanics]]", "[[2025-03-jellyjelly-hlp-attack]]", "[[atr-position-sizing]]", "[[atr-trailing-stop]]", "[[liquidation-cascade-fade]]", "[[2026-06-03-cryptodataapi-14-basket-regime-framework]]"]
 strategy_type: technical

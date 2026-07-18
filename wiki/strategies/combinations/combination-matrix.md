@@ -32,14 +32,14 @@ A single cell can hold multiple page references if more than one page exists for
 | **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | planned |
 | **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
 | **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | [[spot-led-momentum-filter]] | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | [[session-aware-mean-reversion]] ¹² |
-| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | planned | planned | planned | planned | planned | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
+| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | planned | [[put-protected-dip-buying]] ¹⁴ | planned | planned | planned | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
 | **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | [[cascade-monetization-rotation]] ¹³ | planned | planned | planned | planned | [[off-hours-liquidation-playbook]] |
-| **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
-| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | planned | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | planned | planned | [[post-panic-vol-selling]] | planned |
+| **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | [[narrative-position-vol-targeting]] | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
+| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | [[low-leverage-vol-selling]] ¹⁵ | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | planned | planned | [[post-panic-vol-selling]] | planned |
 | **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | [[leverage-stress-tail-hedge]] | planned | — ⁶ | planned | planned | [[event-vol-buying]] | planned | planned |
-| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | planned | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
+| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
 | **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | planned | planned |
-| **On-chain flow** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | planned |
+| **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | planned |
 | **Sentiment** | [[regime-adaptive-strategy]] | planned | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
 
 ---
@@ -72,15 +72,37 @@ A single cell can hold multiple page references if more than one page exists for
 
 **¹³ [[cascade-monetization-rotation]]** is placed in the liquidation plays × tail-hedge cell rather than vol buying × tail-hedge because the defining P&L mechanism is the capital rotation from the tail-hedge payoff into a cascade-fade entry — the liquidation-plays (cascade fade) leg is the completion of the lifecycle. The tail hedge is the entry leg (referenced to [[leverage-stress-tail-hedge]]); the liquidation-fade redeployment is the exit and redeployment logic. This page would be redundant with [[leverage-stress-tail-hedge]] in the vol buying row.
 
+**¹⁴ [[put-protected-dip-buying]]** is placed in the mean-reversion × tail-hedge overlay cell because the strategy's defining feature is a post-capitulation mean-reversion entry (the primitive) paired with a simultaneously-purchased OTM put (the tail-hedge overlay that converts the infinite downside into a hard floor). The three capitulation entry triggers ([[funding-flush-reversal]], [[oi-flush-reversion]], [[onchain-capitulation-confluence]]) define WHEN to enter; the put overlay defines the RISK STRUCTURE of the entry. Differentiated from [[leverage-stress-tail-hedge]] (pre-crash put accumulation without a simultaneous long entry) and from [[cascade-monetization-rotation]] (lifecycle rotation structure).
+
+**¹⁵ [[low-leverage-vol-selling]]** is placed in the vol selling × OI filter cell because the primary structural gate is OI/market-cap below a threshold — the same OI metric as [[leverage-stress-tail-hedge]]'s stress gate, but inverted: this page enters short-vol only when OI/MC is LOW (structural cascade fuel absent). It is explicitly differentiated from all three other vol-selling combos: [[funding-conditioned-vol-selling]] (enters when funding is HIGH), [[post-panic-vol-selling]] (enters post-event when fear is extreme), and [[trend-aligned-premium-selling]] (enters based on trend direction to select which wing to sell). This page is the fourth distinct entry regime for vol-selling: the structural-leverage-absence gate.
+
+**¹⁶ [[smart-money-vs-crowd-divergence]]** is placed in the on-chain flow × funding filter cell because the strategy's second leg is a derivative-crowd positioning filter (flat/negative funding, short-biased long/short ratio) applied on top of the on-chain smart-money accumulation signal. The funding filter is the crowd-positioning gate; the on-chain accumulation is the primary informed-flow signal. Explicitly differentiated from [[smart-money-orderflow-combo]] (order-flow-based second leg, intraday) and [[crowded-short-funding-fade]] (funding filter alone without on-chain confirmation).
+
 ---
 
 ## Matrix Cell Counts (as of 2026-07-19)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 42 |
-| Planned (gap to fill) | 49 |
+| Linked to existing page | 47 |
+| Planned (gap to fill) | 44 |
 | Non-viable (`—`) | 9 |
+
+---
+
+## Batch B6 New Pages (2026-07-19)
+
+Five new combination pages created in this batch — matrix cells updated above:
+
+- [[put-protected-dip-buying]] — mean-reversion × tail-hedge overlay (post-capitulation dip-buy with a simultaneously-purchased OTM put as a contractual disaster floor; cannot gap through; entry-trigger-agnostic: uses any of funding-flush-reversal, oi-flush-reversion, or onchain-capitulation-confluence to define WHEN; the put defines the RISK STRUCTURE; differentiated from leverage-stress-tail-hedge which accumulates puts pre-crash without a simultaneous long, and from cascade-monetization-rotation's lifecycle rotation)
+- [[oi-aware-grid]] — grid/market-making × OI filter (pause or de-size the grid when 12h OI change ≥ +5% — rapid OI build signals directional leverage entering the market and creating breakout fuel; resume after OI stabilises below +3%/12h for 6 consecutive hours; explicitly differentiated from regime-gated-grid which uses lagging vol-regime indicators: OI build fires 4–24 hours before the breakout, earlier than ADX/Bollinger-bandwidth)
+- [[narrative-position-vol-targeting]] — narrative/event × vol targeting (vol-scale each narrative/memecoin position to a fixed 1%-of-portfolio daily-risk budget so hot high-vol names cannot dominate portfolio risk; portfolio heat cap limits total concurrent narrative notional to 25% of portfolio; explicitly differentiated from vol-targeted-trend-following which applies vol targeting to the large-cap BTC/ETH trend book — this page targets the high-vol-dispersion narrative sub-book where 20-day RV ranges from 80% to 500%+ annualised)
+- [[smart-money-vs-crowd-divergence]] — on-chain flow × funding filter (long entry when whale accumulation score ≥ 65 AND exchange outflows top-quartile AND 8h funding ≤ 0.00%/8h AND long/short ≤ 0.95 AND at least one higher low on daily — informed on-chain accumulation while the derivative crowd is bearishly positioned; explicitly differentiated from smart-money-orderflow-combo which uses real-time order-flow as the second leg, and from crowded-short-funding-fade which requires no on-chain confirmation)
+- [[low-leverage-vol-selling]] — vol selling × OI filter (sell vol ONLY when structural cascade fuel is absent: OI/MC ≤ 2.0%, funding flat [−0.01%, +0.02%/8h], long/short balanced [0.9–1.2]; the structural inverse of leverage-stress-tail-hedge; differentiated from all three prior vol-selling combos: funding-conditioned-vol-selling [enters when funding is HIGH], post-panic-vol-selling [post-event fear extreme], trend-aligned-premium-selling [trend-selected wing] — this is the fourth vol-selling regime: structural leverage ABSENCE gate)
+
+Skips (0 of 5 primaries): all five primary candidates confirmed additive. No backups used.
+
+Note: [[low-leverage-vol-selling]] fills the vol selling × OI filter cell with an inverted OI gate (OI LOW = safe to sell vol) vs [[leverage-stress-tail-hedge]] which uses the OI HIGH gate (OI HIGH = buy puts). These are structurally complementary pages covering opposite ends of the same OI metric.
 
 ---
 

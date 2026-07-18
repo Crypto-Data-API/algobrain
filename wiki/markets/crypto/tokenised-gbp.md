@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [crypto, forex, real-world-assets, stablecoin, tokenization]
+tags: [crypto, forex, real-world-assets, stablecoins, tokenization]
 aliases: ["TGBP", "tGBP"]
 entity_type: protocol
 headquarters: "United Kingdom"

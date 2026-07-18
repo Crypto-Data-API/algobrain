@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-13
 updated: 2026-06-17
 status: excellent
-tags: [asx200, australia, company, sp500, stocks]
+tags: [asx200, australia, company, sp500]
 entity_type: company
 aliases: ["Block, Inc.", "Square", "SQ", "XYZ"]
 headquarters: "Oakland, California, USA"

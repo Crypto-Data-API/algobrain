@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-13
 updated: 2026-06-10
 status: good
-tags: [person, stocks, commodities, gold]
+tags: [person, commodities, gold]
 entity_type: person
 aliases: ["Mark Faber", "Dr. Doom"]
 related: ["[[jim-rogers]]", "[[commodities]]", "[[gold]]", "[[emerging-markets]]"]

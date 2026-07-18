@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-15
 updated: 2026-06-10
 status: good
-tags: [company, quantitative, risk-management, stocks]
+tags: [company, quantitative, risk-management]
 entity_type: fund
 founded: 1989
 headquarters: "New York, New York, USA"

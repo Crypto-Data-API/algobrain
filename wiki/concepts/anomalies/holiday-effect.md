@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [anomalies, mean-reversion, stocks]
+tags: [anomalies, mean-reversion]
 aliases: ["Pre-Holiday Effect", "Holiday Return Premium", "Holiday Effect"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[calendar-effects-anomalies]]"]

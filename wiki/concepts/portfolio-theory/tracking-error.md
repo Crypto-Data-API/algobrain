@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [portfolio-theory, quantitative, education, stocks]
+tags: [portfolio-theory, quantitative, education]
 domain: [portfolio-theory, quantitative]
 difficulty: intermediate
 aliases: ["Tracking Error", "Active Risk", "Tracking Difference"]

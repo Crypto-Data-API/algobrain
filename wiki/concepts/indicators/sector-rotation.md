@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-14
 updated: 2026-06-11
 status: good
-tags: [technical-analysis, indicators, stocks, portfolio-theory]
+tags: [technical-analysis, indicators, portfolio-theory]
 aliases: ["Sector Rotation", "Business Cycle Rotation", "Sector Rotation Model"]
 domain: [indicators, portfolio-theory]
 prerequisites: ["[[intermarket-analysis]]", "[[technical-analysis-overview]]"]

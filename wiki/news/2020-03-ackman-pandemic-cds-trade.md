@@ -4,7 +4,7 @@ type: news
 created: 2026-04-28
 updated: 2026-06-12
 status: good
-tags: [news, stocks, derivatives, options, risk-management, behavioral-finance]
+tags: [news, derivatives, options, risk-management, behavioral-finance]
 aliases: ["Ackman COVID Hedge", "Pershing Square Pandemic Trade", "$27M to $2.6B CDS Trade", "100x Hedge"]
 event_date: 2020-03-23
 markets_affected: [stocks, bonds]

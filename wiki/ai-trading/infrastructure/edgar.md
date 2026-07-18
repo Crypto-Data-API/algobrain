@@ -4,7 +4,7 @@ type: source
 created: 2026-04-15
 updated: 2026-06-12
 status: good
-tags: [data-provider, fundamental-analysis, stocks, regulation, technology]
+tags: [data-provider, fundamental-analysis, regulation, technology]
 aliases: ["EDGAR", "SEC EDGAR", "data.sec.gov", "EDGAR Full-Text Search"]
 source_type: data
 source_url: "https://www.sec.gov/edgar"

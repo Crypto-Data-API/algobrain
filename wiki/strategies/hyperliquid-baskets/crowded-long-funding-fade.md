@@ -4,7 +4,7 @@ type: strategy
 created: 2026-06-16
 updated: 2026-07-13
 status: good
-tags: [crypto, perpetuals, hyperliquid, funding-rate, mean-reversion, behavioral-finance, market-microstructure, derivatives]
+tags: [crypto, perpetual-futures, hyperliquid, funding-rate, mean-reversion, behavioral-finance, market-microstructure, derivatives]
 aliases: ["Long Squeeze Funding Play", "Positive Funding Short", "Crowded Long Fade", "Funding Rate Short Bias"]
 related: ["[[hyperliquid-baskets-overview]]", "[[derivatives-native-regime]]", "[[basis-carry-regime]]", "[[crowded-short-funding-fade]]", "[[funding-rate-harvest]]", "[[long-liquidation-cascade]]", "[[post-liquidation-rebound]]", "[[liquidation-cascade-fade]]", "[[funding-rate-arbitrage]]", "[[funding-rate]]", "[[hyperliquid-funding-rate-microstructure]]", "[[hyperliquid-liquidation-engine]]", "[[open-interest]]", "[[perpetual-futures]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[coinglass]]", "[[hypurrscan]]", "[[cryptodataapi]]"]
 strategy_type: quantitative

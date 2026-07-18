@@ -4,7 +4,7 @@ type: news
 created: 2026-04-06
 updated: 2026-06-22
 status: excellent
-tags: [history, crashes, stocks, bonds]
+tags: [history, crashes, bonds]
 event_date: 2008-09-15
 markets_affected: [stocks, bonds, commodities, forex]
 impact: high

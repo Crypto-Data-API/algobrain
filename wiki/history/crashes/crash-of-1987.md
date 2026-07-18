@@ -4,7 +4,7 @@ type: redirect
 created: 2026-04-13
 updated: 2026-06-12
 status: good
-tags: [history, stocks]
+tags: [history]
 aliases: ["Crash of 1987", "crash-of-1987", "Black Monday"]
 related: ["[[black-monday]]"]
 ---

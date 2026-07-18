@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-13
 updated: 2026-06-22
 status: excellent
-tags: [history, stocks, behavioral-finance, commodities]
+tags: [history, behavioral-finance, commodities]
 domain: [behavioral-finance]
 difficulty: beginner
 aliases: ["Poseidon Bubble", "Poseidon NL", "Australian nickel boom 1969"]

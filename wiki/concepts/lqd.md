@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-21
 status: excellent
-tags: [bonds, stocks, fixed-income, risk-management]
+tags: [bonds, fixed-income, risk-management]
 aliases: ["LQD", "lqd", "iShares iBoxx $ Investment Grade Corporate Bond ETF"]
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[corporate-bonds]]", "[[etf]]"]

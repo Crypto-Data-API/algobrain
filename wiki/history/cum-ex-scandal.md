@@ -4,7 +4,7 @@ type: news
 created: 2026-04-24
 updated: 2026-06-21
 status: excellent
-tags: [history, stocks, regulation, arbitrage]
+tags: [history, regulation, arbitrage]
 aliases: ["Cum-Ex", "Cum-Cum", "Dividend Stripping Scandal", "Cumex-Files", "Cum-Ex Scandal"]
 event_date: 2018-10-18
 markets_affected: [stocks]

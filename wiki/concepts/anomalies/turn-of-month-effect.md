@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-11
 updated: 2026-06-11
 status: good
-tags: [anomalies, stocks, quantitative, liquidity]
+tags: [anomalies, quantitative, liquidity]
 aliases: ["Turn-of-the-Month Effect", "Turn-of-Month Effect", "TOM Effect", "Month-End Rally"]
 domain: [anomalies]
 prerequisites: ["[[anomalies-overview]]", "[[calendar-effects-anomalies]]"]

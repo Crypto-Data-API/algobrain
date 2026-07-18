@@ -4,7 +4,7 @@ type: concept
 created: 2026-07-01
 updated: 2026-07-01
 status: review
-tags: [valuation, fundamental-analysis, stocks, bonds, treasuries]
+tags: [valuation, fundamental-analysis, bonds, treasuries]
 aliases: ["Bond Yields vs Stocks", "10-Year Yield and Stocks", "Treasury Yields and Equities", "TINA"]
 domain: [fundamental-analysis, macro-trading]
 prerequisites: ["[[interest-rates]]", "[[equity-risk-premium]]"]

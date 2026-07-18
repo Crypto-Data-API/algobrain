@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [collapse, crypto, defi, luna, stablecoin, terra, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, memecoins]
+tags: [collapse, crypto, defi, luna, stablecoins, terra, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, memecoins]
 aliases: ["LUNA Classic", "LUNC", "Terra Classic"]
 entity_type: protocol
 headquarters: "Decentralized"

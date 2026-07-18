@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-06-21
 status: excellent
-tags: [crypto, exchange, coinbase, stocks]
+tags: [crypto, exchange, coinbase]
 aliases: ["COIN"]
 entity_type: exchange
 founded: 2012
