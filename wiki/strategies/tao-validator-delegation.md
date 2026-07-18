@@ -2,7 +2,7 @@
 title: "TAO Validator Delegation"
 type: strategy
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, bittensor, yield, staking]
 aliases: ["Bittensor Validator Staking", "TAO Delegation", "Dividend Farming (Bittensor)"]
@@ -138,6 +138,44 @@ The realized blended yield over a year will depend on alpha-token price apprecia
 - **dtao.gg** -- validator comparisons in the post-dTAO era
 - **Subtensor RPC / bittensor-python** -- raw on-chain reads
 - **Opentensor Discord** -- community due diligence on validators
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest.
+
+**Setup:** A TAO holder allocates **100 TAO** (assumed entry price: $400/TAO = $40,000 notional) across three validators active on strong subnets in a *flat TAO price* scenario (no price appreciation assumed, to isolate delegation yield).
+
+**Validator selection:**
+
+| Validator | Subnet focus | Take rate | vtrust | TAO allocated |
+|-----------|-------------|-----------|--------|---------------|
+| RoundTable21 | SN1, SN8, SN13 | 8% | 0.91 | 40 TAO |
+| Datura | SN18, SN64 | 7% | 0.88 | 35 TAO |
+| YumaGroup | SN3, SN9 | 9% | 0.85 | 25 TAO |
+
+**Year 1 yield (flat TAO price, approximate):**
+
+| Source | Rate (post-take) | Yield on 100 TAO |
+|--------|-----------------|-----------------|
+| TAO dividends (base validator payout) | ~8% APY | 8 TAO |
+| Alpha token yield — SN1, SN8, SN18, SN64 (strong compute subnets) | TAO-equivalent ~14% APY | 14 TAO |
+| **Blended combined yield** | **~22% APY** | **22 TAO** |
+
+**Exit and net P&L (after 365 days):**
+
+| Item | Amount |
+|------|--------|
+| Original stake | 100 TAO |
+| TAO dividends earned | +8 TAO |
+| Alpha tokens earned (redeemed via bonding curve, 5% slippage on redemption) | +13.3 TAO equivalent |
+| Unstaking fee / delay | None (7-day wait, no fee) |
+| **Ending position** | **~121.3 TAO** |
+
+At flat $400/TAO: **$48,520 vs $40,000 entry = +$8,520 net (+21.3%)**.
+
+The key risk variables: (1) TAO price — a 20% TAO drawdown would flip the USD P&L negative despite strong yield; (2) alpha-token liquidity — thin bonding-curve depth can reduce the effective alpha redemption price by 10-30% on large redemptions; (3) validator incidents — a slashing event on any of the three validators would reduce the principal held at that validator.
+
+The informed delegator here outperforms the null (random validator selection at ~12% APY) by approximately 900 bps, consistent with the analytical edge claim on this page.
 
 ## Performance Characteristics
 

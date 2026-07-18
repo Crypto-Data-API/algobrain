@@ -2,7 +2,7 @@
 title: DCA + Technical Analysis Hybrid
 type: strategy
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [combinations, meta-strategy, dca, dollar-cost-averaging, technical-analysis, accumulation, beginner-friendly, mean-reversion]
 strategy_type: hybrid
@@ -153,6 +153,40 @@ for each scheduled_buy_date:
 Total invested: $3,000. Average price: $55,000. Vanilla DCA average: $57,500. **Savings: 4.3% better cost basis.**
 
 Over years, these small edges compound substantially.
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest.
+
+**Setup:** $500/week DCA budget into BTC. Tracking a 10-week window in mid-2024 (BTC ranging $55,000–$65,000). Using the "ANY one of four conditions" rule from this page.
+
+**Week-by-week log:**
+
+| Week | Date | BTC Price | 50d MA | RSI(14) | Signal? | Cash Reserve | Buy Amount | Cumul. BTC |
+|------|------|-----------|--------|---------|---------|-------------|------------|------------|
+| 1 | Jun 3 | $64,500 | $61,000 | 68 | None (above MA, RSI>50) | $500 | $0 | 0 |
+| 2 | Jun 10 | $66,200 | $61,800 | 72 | None | $1,000 | $0 | 0 |
+| 3 | Jun 17 | $61,000 | $62,200 | 49 | **Buy (RSI<50)** | $1,500 → $0 | $1,500 | 0.02459 BTC |
+| 4 | Jun 24 | $57,800 | $62,000 | 38 | **Buy (below MA, RSI<50)** | $500 | $500 | 0.02459 + 0.00865 = 0.03324 |
+| 5 | Jul 1 | $56,200 | $61,500 | 33 | **Buy (below MA, RSI<50)** | $500 | $500 | 0.03324 + 0.00890 = 0.04214 |
+| 6 | Jul 8 | $58,900 | $61,000 | 42 | **Buy (below MA, RSI<50)** | $500 | $500 | 0.04214 + 0.00849 = 0.05063 |
+| 7 | Jul 15 | $62,000 | $60,800 | 54 | None (above MA, RSI>50) | $500 | $0 | 0.05063 |
+| 8 | Jul 22 | $64,500 | $61,000 | 61 | None | $1,000 | $0 | 0.05063 |
+| 9 | Jul 29 | $62,500 | $61,200 | 51 | None | $1,500 | $0 | 0.05063 |
+| 10 | Aug 5 | $59,000 | $61,000 | 44 | **Buy (below MA, RSI<50)** | $2,000 → $0 | $2,000 | 0.05063 + 0.03390 = 0.08453 |
+
+**Total invested:** $5,000 (10 × $500). Total BTC accumulated: **0.08453 BTC**.
+
+**Average cost basis (hybrid):** $5,000 / 0.08453 = **$59,150/BTC**.
+
+**Vanilla DCA comparison (same 10 weeks, buy every week regardless):**
+Average of the 10 weekly prices: ($64,500 + $66,200 + $61,000 + $57,800 + $56,200 + $58,900 + $62,000 + $64,500 + $62,500 + $59,000) / 10 = **$61,260/BTC**. Vanilla DCA would have bought 0.08161 BTC with the same $5,000.
+
+**Cost-basis improvement:** $61,260 vs $59,150 = **−3.4% lower average cost** (bought 0.00292 more BTC per $5,000 deployed).
+
+**Sensitivity:** The 2 weeks of cash stacking at the start (weeks 7–9, ~$1,500 reserve) created the large Week 10 deployment at $59,000 — that single $2,000 purchase at a discount drove the majority of the cost-basis improvement. This is the cash-stacking mechanism working exactly as designed.
+
+**Cash drag check:** $1,500 sat uninvested for weeks 7–9 (~3 weeks). Opportunity cost: roughly $1,500 × 20% (assumed BTC annualised return) × (3/52) ≈ **$17**. Well below the $105 cost-basis improvement ($5,000 × 3.4% × avg BTC price improvement). The cash-drag concern is real in a straight-up melt-up (weeks 7–9 were flat/mild up), but manageable with the "time-based override" override rule (deploy after 4x stacked weeks).
 
 ## When It Excels / When It Fails
 

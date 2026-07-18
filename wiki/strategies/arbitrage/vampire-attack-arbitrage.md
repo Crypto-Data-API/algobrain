@@ -2,7 +2,7 @@
 title: "Vampire Attack Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, defi, crypto, event-driven]
 aliases: ["Vampire Mining", "Liquidity Vampire Arb", "Migration Farming"]
@@ -119,6 +119,54 @@ for fork in monitor_new_dex_forks():
 - LP token balances at known snapshot blocks
 - Real-time DEX liquidity for harvest dumping (avoid being your own [[slippage|slippage]])
 - Funding rates / perp open interest on the new token (signals when the market is fully aware)
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest. Applies the rules from this page to a hypothetical DEX vampire attack.
+
+**Setup:** A new DEX ("ForkSwap") announces it will fork a major AMM and pay 10% of its total FSWAP token supply (100 million FSWAP) as boosted LP rewards over a 4-week boost window. Anyone staking LP tokens on the incumbent DEX before a snapshot block earns double FSWAP during the first week.
+
+**An arber's action (pre-snapshot + migrate + harvest + exit):**
+
+**Phase 1 — Pre-snapshot positioning (Day −3 to Day 0):**
+- Deposit $50,000 USDC + $50,000 ETH into the incumbent DEX ETH/USDC pool.
+- Receive incumbent LP tokens worth ~$100,000.
+- Capital at risk: $100,000 (plus normal AMM impermanent-loss exposure during holding).
+
+**Phase 2 — Migration (Day 1, launch):**
+- ForkSwap launches. Arber stakes incumbent LP tokens on ForkSwap to earn boosted FSWAP.
+- Emission rate during boost week: 5 FSWAP per block (~28,800 blocks/day × 5 = 144,000 FSWAP/day).
+- Arber's share of total staked TVL at launch: ~2% (assuming $5M total TVL at launch, $100k is 2%).
+- Daily FSWAP earned: 144,000 × 2% = **2,880 FSWAP/day**.
+
+**Phase 3 — Harvest and dump (Days 1–7):**
+FSWAP launches at $1.50 on thin trading; arber begins selling each day into whatever liquidity exists.
+
+| Day | FSWAP token price | FSWAP earned | Sold | Revenue | Cumulative sold |
+|-----|-------------------|-------------|------|---------|----------------|
+| 1 | $1.50 | 2,880 | 2,880 | $4,320 | $4,320 |
+| 2 | $1.20 | 2,880 | 2,880 | $3,456 | $7,776 |
+| 3 | $0.90 | 2,880 | 2,880 | $2,592 | $10,368 |
+| 4 | $0.70 | 2,880 | 2,880 | $2,016 | $12,384 |
+| 5 | $0.55 | 2,880 | 2,880 | $1,584 | $13,968 |
+| 6 | $0.40 | 2,880 | 2,880 | $1,152 | $15,120 |
+| 7 | $0.30 | 2,880 | 2,880 | $864 | $15,984 |
+
+**Phase 4 — Exit before boost taper (Day 7):**
+- Arber unstakes from ForkSwap and withdraws $100,000 liquidity (assuming 2% IL from ETH price move = −$2,000).
+
+**Round-trip P&L:**
+
+| Item | Amount |
+|------|--------|
+| FSWAP harvest revenue (7 days) | +$15,984 |
+| Gas (7 claim + dump cycles on Ethereum L1, ~$150/cycle) | −$1,050 |
+| Harvest dump slippage (avg 8% on thin liquidity, estimated) | −$1,279 |
+| Impermanent loss on underlying LP position | −$2,000 |
+| Smart-contract audit premium (cost of time to verify) | N/A (time cost, not cash) |
+| **Net P&L on $100,000 deployed for 7 days** | **+$11,655** |
+
+Annualised: +$11,655 / $100,000 × (365/7) ≈ **607% APY** during the boost period. After the boost ends, APR collapses to equilibrium (~15-30% at steady-state TVL of $50M+), so the arber is already gone. The strategy captures this window systematically, not repeatedly from the same fork.
 
 ## Worked example
 

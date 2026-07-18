@@ -2,7 +2,7 @@
 title: "Perp DEX Aggregation & Cross-Venue Routing"
 type: strategy
 created: 2026-06-20
-updated: 2026-06-20
+updated: 2026-07-19
 status: draft
 tags: [crypto, derivatives, arbitrage, liquidity, slippage, algorithmic]
 aliases: ["Perp DEX Aggregation", "Cross-Venue Perp Routing", "Perpetual DEX Aggregator Strategy"]
@@ -98,9 +98,40 @@ def route_perp_order(pair, side, target_notional, venues, fee_tier, hedge_cex=No
 - **Oracle / mark prices** for liquidation-distance checks
 - CEX hedge prices for the basis/hedged variant
 
-## Example (illustrative, qualitative)
+## Example trade
 
-A desk wants to open a large BTC-perp long without moving any single book. It quotes Hyperliquid, an Orderly-based venue, dYdX, and GMX; Hyperliquid shows the deepest top-of-book and is leading price discovery, so the bulk routes there with smaller child orders elsewhere to cap [[market-impact]]. Funding is least negative for longs on one venue, so the *held* portion is parked there; the desk simultaneously shorts BTC-perp on a CEX to neutralize direction, leaving a funding/basis position. As funding rankings shift intraday, OI is rolled toward the then-favorable venue. (No specific fills/figures — the research supports the *pattern*, not numbers.)
+> Illustrative, round numbers — not a backtest.
+
+A desk wants to open a **$500,000 BTC-perp long** without moving any single venue's book. It queries four venues simultaneously:
+
+| Venue | Top-of-book ask (BTC-USDT perp) | Available depth to $200k | Taker fee (fund's tier) | Funding (8h) |
+|-------|----------------------------------|--------------------------|--------------------------|--------------|
+| Hyperliquid | $67,010 | $320k | 0.035% | −0.005% |
+| Orderly-based | $67,015 | $180k | 0.040% | −0.008% |
+| dYdX | $67,020 | $90k | 0.050% | −0.006% |
+| GMX | $67,025 | $60k | 0.060% | −0.003% |
+
+**Routing decision:** Hyperliquid has the best fee-inclusive price and deepest book, so the waterfall-split allocates there first:
+
+- Leg 1 — Hyperliquid: buy $300,000 at $67,010 (fee: $105); fills within the available depth.
+- Leg 2 — Orderly: buy $150,000 at $67,015 (fee: $60); fits within its $180k depth.
+- Leg 3 — dYdX: buy $50,000 at $67,020 (fee: $25); consumes half its depth.
+- GMX skipped — price too wide after three legs already covered the target.
+
+**Blended entry price:** ($300k × $67,010 + $150k × $67,015 + $50k × $67,020) / $500k = **$67,013**. A single-venue Hyperliquid-only fill of $500k would have walked the book ~$25 further to ~$67,035, so the split saves roughly **$11,000** in realized slippage.
+
+**Funding shift:** The desk holds its resting long on GMX at −0.003% / 8h (cheapest for longs) while setting a hedge short on Binance spot of equivalent notional, making the net position delta-neutral. Over a 24-hour hold (three 8h periods), the funding cost on Hyperliquid would have been −0.005% × 3 × $300k = −$450; on GMX it is −0.003% × 3 × $500k = −$450 total — a wash in this example, but the OI-shifting logic becomes meaningful when spreads widen to 5-10 bps between venues.
+
+**Exit (24h later):** BTC perp at $67,250 across all venues. The long is closed across the same venues in reverse. Net P&L:
+
+| Item | Amount |
+|------|--------|
+| Gross long P&L: $500k × ($67,250 − $67,013) / $67,013 | +$1,769 |
+| Taker fees (open + close, ~0.038% blended × 2) | −$380 |
+| Funding paid (24h, blended −0.004%/8h × 3 periods) | −$60 |
+| **Net P&L** | **+$1,329** |
+
+Without routing, the extra ~$22 slippage on entry and same slippage on exit would have consumed ~$330 more, nearly halving the net. The example is illustrative and round numbers; in practice the funding differential and fill quality vary materially with regime.
 
 ## Aggregator Tooling
 

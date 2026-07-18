@@ -2,7 +2,7 @@
 title: "Triangular Arbitrage"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, forex, crypto, triangular, currency-pairs, algorithmic, market-neutral, cross-rate]
 aliases: ["Tri Arb", "Three-Way Arbitrage", "Cross-Rate Arbitrage"]
@@ -101,6 +101,46 @@ def on_book_update(book):
 ```
 
 Key engineering points: quote prices off the *executable* side of the book (not mid), size to the thinnest leg, use immediate-or-cancel orders, and have a deterministic unwind path for partial fills. In production the loop is co-located and the decision-to-order latency is sub-millisecond.
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest.
+
+**Exchange:** Binance. **Triplet:** USDT → BTC → ETH → USDT. Starting capital: $68,000 USDT.
+
+**Quoted prices at signal:**
+
+| Pair | Best executable price |
+|------|-----------------------|
+| BTC/USDT ask | $68,000 |
+| ETH/BTC ask | 0.04750 |
+| ETH/USDT bid | $3,240 |
+
+**Implied cross-check:**
+$68,000 × 0.04750 = $3,230 implied ETH/USDT, but the market quotes ETH/USDT bid at $3,240 — ETH is overpriced in the USDT leg by $10. Path 1 (USDT → BTC → ETH → USDT) is the profitable direction.
+
+**Execution (three IOC orders sent in ~50ms):**
+
+| Leg | Order | Fill | Running balance |
+|-----|-------|------|----------------|
+| 1. Buy BTC | Buy 1 BTC at $68,000 | Filled | 1.000 BTC |
+| 2. Buy ETH with BTC | Buy 21.053 ETH at 0.04750 BTC/ETH | Filled | 21.053 ETH |
+| 3. Sell ETH for USDT | Sell 21.053 ETH at $3,240 bid | Filled | $68,211.58 USDT |
+
+**P&L breakdown:**
+
+| Item | Amount |
+|------|--------|
+| Gross surplus (ending − starting) | +$211.58 |
+| Taker fee leg 1 (0.04% × $68,000) | −$27.20 |
+| Taker fee leg 2 (0.04% × 1 BTC × $68,000) | −$27.20 |
+| Taker fee leg 3 (0.04% × $68,212) | −$27.28 |
+| **Net P&L** | **+$129.90** |
+| Round-trip time | ~100-300 ms |
+
+Net $129.90 on $68,000 capital = **0.19%** per cycle. At this size, the bot could theoretically recycle the same capital 10-30 times per day across multiple triplets, but in practice the opportunity reappears only when market makers fail to re-quote the third leg promptly — frequency drops sharply as ETH/BTC or BTC/USDT spreads tighten.
+
+**Partial-fill scenario (the main risk):** If Leg 2 only partially fills (say, 10 ETH instead of 21.053), the bot holds 10 ETH with no corresponding USDT obligation. It must immediately close the residual at market price — if ETH/USDT has already repriced back to $3,230, the unwind cost on the 11 ETH residual is ~$11, turning the net P&L negative. This is why the pseudocode above uses IOC orders and an immediate-flatten path for partial fills.
 
 ## Worked Example
 

@@ -9,6 +9,44 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Batch B10+B12: Example Trades + Concept Stub Expansions
+
+### Task 1 — Added `## Example trade` sections to 10 strategy pages
+
+Each section uses concrete round-trip numbers (entry trigger values, position size, fees/funding/slippage, exit, net P&L), labelled "illustrative, round numbers — not a backtest," matching each page's own rules/thresholds.
+
+- [[perp-dex-aggregation]] — $500k BTC-perp long split across Hyperliquid/Orderly/dYdX; waterfall-split routing, funding shift, 24h exit; shows $11k slippage saving vs single-venue fill
+- [[prediction-market-strategies]] — Complement arbitrage on Polymarket; Yes + No at $0.98 total; $490 deployed, $500 guaranteed, ~33% annualised net of gas; resolves capital-lockup cost
+- [[tao-validator-delegation]] — 100 TAO across RoundTable21/Datura/YumaGroup; flat TAO price; ~22% APY blended; 121.3 TAO after 1 year; alpha redemption slippage included
+- [[mev-execution-guide]] *(guide framing → "## Worked example")* — Back-run MEV on Ethereum: $20k position, $360 gross, 90% builder bid, $34 estimated net / $14 actual net after competition; illustrates bid-compression economics end-to-end
+- [[swap-spread-arbitrage]] — Modern negative-spread trade: pay-fixed 10Y IRS at 2.82%, long $100M Treasury at 3.00%, repo-financed; +$274/day carry; 12-month exit with spread normalisation to −5 bps; +$202,900 net on ~$5M equity deployed
+- [[triangular-arbitrage]] — USDT→BTC→ETH→USDT on Binance, $68k capital, $211 gross, $81 fees, $130 net in ~200ms; partial-fill risk scenario included
+- [[vampire-attack-arbitrage]] — Hypothetical ForkSwap launch; $100k LP entry; 7-day boost harvest schedule (day-by-day price/revenue table); +$11,655 net after gas, slippage, IL; 607% annualised during window
+- [[contrarian-extremes]] — BTC Jan 2023 post-FTX; composite score table; 4-tranche entry $16,500–$18,500; exit at composite 45 / BTC $27,800 on Mar 15; +$18,140 net including funding carry; ~7:1 realized R:R
+- [[dca-technical-hybrid]] — 10-week BTC DCA at $500/week; week-by-week log with RSI/MA signals; hybrid avg cost $59,150 vs vanilla DCA $61,260; −3.4% cost-basis improvement on $5,000 deployed
+- [[multi-strategy-crypto-portfolio]] — One weekly rebalance cycle on $500k book; full sleeve drift table, rebalance trades across Hyperliquid/Binance/Bybit/DEX, stressed heat check (0.525× vs 1.25× cap), rebalance friction $246 (0.049% of NAV)
+
+**Judgment call — mev-execution-guide:** Confirmed as a companion guide (not a single-strategy page) based on page content ("This page covers *how to actually execute*"). Added `## Worked example` (guide framing) rather than `## Example trade` (strategy framing), consistent with the page's own structure.
+
+### Task 2 — Expanded 12 stub concept pages to draft status
+
+Each page expanded to 300-500 words: clear definition, how it works, concrete examples with real names/dates, **Trading relevance** subsection linking 2-4 relevant strategy pages, Related section. All set `status: draft`, `updated: 2026-07-19`. Existing frontmatter fields preserved; approved tags only.
+
+- [[layer-1]] — Base blockchain definition; PoW vs PoS; Bitcoin/Ethereum/Solana/Avalanche examples; links [[cross-chain-arbitrage]], [[mev-strategies]], [[on-chain-analysis]], [[jito-solana-mev-arbitrage]]
+- [[depin]] — DePIN mechanics; Helium/Filecoin/Render/Hivemapper examples; emission-schedule arb; links [[vampire-attack-arbitrage]], [[on-chain-analysis]], [[multi-strategy-crypto-portfolio]]
+- [[crypto-fear-and-greed-index]] — 6-component composite; score interpretation; March 2020 (score 8), Jan 2023 (score 6), Nov 2021 (score 84) examples; links [[contrarian-extremes]], [[funding-rate-arbitrage]], [[multi-strategy-crypto-portfolio]], [[prediction-market-strategies]]
+- [[gamefi]] — Three-layer economy; AXS/SLP mechanics and collapse; StepN, Gods Unchained; links [[vampire-attack-arbitrage]], [[governance-token]], [[multi-strategy-crypto-portfolio]]
+- [[liquidations]] — Margin lifecycle; cascade mechanics; Black Thursday, May 2021, FTX 2022; links [[liquidation-cascade-arbitrage]], [[contrarian-extremes]], [[funding-rate-arbitrage]], [[mev-execution-guide]]
+- [[governance-token]] — Voting mechanics; UNI, COMP, AAVE, CRV, MKR examples; links [[curve-gauge-wars-arbitrage]], [[vampire-attack-arbitrage]], [[governance-restitution-arbitrage]], [[liquidity-mining]]
+- [[privacy-coins]] — XMR ring signatures/RingCT; ZEC zk-SNARKs; Dash CoinJoin; ransomware shift to Monero; exchange delistings; links [[on-chain-analysis]], [[contrarian-extremes]], [[multi-strategy-crypto-portfolio]]
+- [[mev]] — MEV supply chain; sandwich/backrun/liquidation/JIT types; Flashbots, MakerDAO $8.3M Black Thursday, Jito on Solana; links [[mev-execution-guide]], [[mev-strategies]], [[liquidation-cascade-arbitrage]], [[flash-loan-arbitrage]]
+- [[play-to-earn]] — Four-component P2E economy; sustainability condition; Axie/StepN/Gods Unchained/Pixels; scholarship model; links [[vampire-attack-arbitrage]], [[governance-token]], [[multi-strategy-crypto-portfolio]]
+- [[tokenized-treasuries]] — BUIDL/OUSG/BENJI/USDM mechanics; yield accrual types; $1.5B BUIDL; links [[funding-rate-arbitrage]], [[multi-strategy-crypto-portfolio]], [[basis-trade]], [[defi-yield-farming]]
+- [[zero-knowledge-proofs]] — ZK-SNARK vs ZK-STARK; ZK-rollups; Zcash/StarkEx/zkSync/Polygon zkEVM; ZKML; links [[cross-l2-arbitrage]], [[privacy-coins]], [[zkml-predictive-mev]], [[airdrop-farming]]
+- [[ai-agents]] — Infrastructure vs narrative tokens; ElizaOS/AIXBT/Fetch.ai/ai16z examples; links [[ai-agent-strategies]], [[prediction-market-strategies]], [[multi-strategy-crypto-portfolio]], [[on-chain-flow-trading]]
+
+### Files touched
+22 files modified (10 strategy pages + 12 concept pages + this log).
 
 ## 2026-07-19 — Batch B8b: Program Completion — 4 New Combination Strategy Pages + Final Matrix Convergence
 

@@ -2,7 +2,7 @@
 title: Contrarian Extremes
 type: strategy
 created: 2026-04-06
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [combinations, alpha-edge, contrarian, sentiment, mean-reversion, behavioral-edge, fear-greed, risk-bearing]
 strategy_type: hybrid
@@ -166,6 +166,54 @@ elif days_in_trade > 60 and unrealized_gain <= 0:
 7. **Average entry: $417.75**
 8. By December 15, composite hits 55 (neutral). SPX at $472. Exit full position
 9. **Return: 13% in 7 weeks.** Risk was 10% below lowest tranche ($412 - 10% = $371), giving a 3:1 realized R:R
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest.
+
+**Asset:** BTC. **Market context:** January 2023, post-FTX collapse hangover.
+
+**Step 1 — Composite score calculation:**
+
+| Indicator | Reading | Normalized score |
+|-----------|---------|-----------------|
+| AAII Bull-Bear Spread | 55% bearish | 8 |
+| VIX level | 21 | 55 |
+| CNN Fear & Greed | 6 | 6 |
+| Put/Call Ratio | 1.25 | 18 |
+| NAAIM Exposure | 18 | 12 |
+| Crypto Fear & Greed | 6 | 6 |
+
+**Composite = 8×0.20 + 55×0.20 + 6×0.15 + 18×0.15 + 12×0.15 + 6×0.15 = 1.6 + 11.0 + 0.9 + 2.7 + 1.8 + 0.9 = 18.9** → below 20. Buy zone entered.
+
+BTC spot price: $16,500. Funding rate: −0.018%/8h (deeply negative — longs are being paid). RSI(14) on daily: 31. Price is near the long-term $16,000 support cluster. Reversal candle: bullish engulfing on Jan 10.
+
+**Step 2 — Tranched entry (30% of portfolio = $30,000 total intended position on a $100k portfolio):**
+
+| Tranche | Date | Composite | BTC Price | Amount |
+|---------|------|-----------|-----------|--------|
+| Tranche 1 (25%) | Jan 10 | 18.9 | $16,500 | $7,500 |
+| Tranche 2 (25%) | Jan 13 | 15.2 | $17,000 | $7,500 |
+| Tranche 3 (25%) | Jan 16 | 17.5 (stabilising) | $17,800 | $7,500 |
+| Tranche 4 (25%) | Jan 21 | 21.0 (improving) | $18,500 | $7,500 |
+
+Average entry price: ($7,500/$16,500 + $7,500/$17,000 + $7,500/$17,800 + $7,500/$18,500) / (30,000) = weighted average **~$17,400/BTC**.
+
+**Step 3 — Exit:** Composite reaches 45 (neutral) on March 15. BTC spot: $27,800. The primary exit rule fires.
+
+**Round-trip P&L:**
+
+| Item | Amount |
+|------|--------|
+| Gross P&L: ($27,800 − $17,400) / $17,400 × $30,000 | +$17,931 |
+| Taker/exchange fees (0.04% × 2 round trips × $30,000) | −$24 |
+| Funding received (negative funding paid to longs; approx +0.005%/8h avg × 65 days × 3 periods/day × $30,000) | +$293 |
+| Slippage (spread + price impact, estimated ~10 bps round trip) | −$60 |
+| **Net P&L** | **+$18,140** |
+
+Return on total portfolio: +18.1% on the deployed $30,000 sleeve, +5.4% on the full $100k book. Realized R:R: entry tranche range $16,500–$18,500, stop at $16,500 − 10% = $14,850; risk ~$2,550 on the first tranche. Approximate realized R:R: ~7:1 — above the 3:1 target, consistent with a deep sentiment extreme. The stop loss at $14,850 was never touched.
+
+**Key mechanic validated:** Negative funding during the fear extreme (+$293) added carry that would not exist in equities — the crypto-specific overlay (funding rate as part of the composite) both signaled the extreme *and* paid the patient holder.
 
 ## Risk Management
 

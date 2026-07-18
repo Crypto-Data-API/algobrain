@@ -4,6 +4,17 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 10: schema completion + stub expansion
+
+- **Every buildable strategy page now carries the full schema** — a planner audit found
+  kill-criteria coverage already complete (0 gaps), and the last 10 missing worked examples
+  were added this iteration (perp-dex-aggregation, triangular-arbitrage, contrarian-extremes,
+  multi-strategy portfolio rebalance cycle, …).
+- **12 highest-traffic stub concepts expanded** into real draft pages with Trading-relevance
+  sections linking into the strategy catalog (layer-1, depin, liquidations, mev,
+  crypto-fear-and-greed-index, governance-token, privacy-coins, gamefi, play-to-earn,
+  tokenized-treasuries, zero-knowledge-proofs, ai-agents).
+
 ## 2026-07-19 — Improvement loop, iteration 9: ★ combination program complete ★
 
 The combination-strategy program launched in iteration 1 is **complete**: every cell of the

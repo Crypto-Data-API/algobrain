@@ -2,7 +2,7 @@
 title: "Multi-Strategy Crypto Portfolio"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [combinations, meta-strategy, crypto, funding-rate, momentum, on-chain, memecoins, market-regime, risk-management, hyperliquid]
 aliases: ["Multi-Strategy Crypto Book", "Crypto Multi-Sleeve Portfolio", "Crypto Pod Book"]
@@ -147,6 +147,64 @@ A **$500k** book targeting a stablecoin-denominated ~12% net return at ~10% vol,
 | Stablecoin reserve | 15% | $75k | Margin buffer + dry powder + yield |
 
 Per-venue: ≤ $175k (35%) on any one of Binance/Bybit/OKX/Hyperliquid. Stressed gross heat computed at ~1.2× NAV — inside the 1.25× cap. On a vol-shock flag, all four sleeves de-gross toward the stablecoin reserve. (Figures illustrative.)
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest. Walks one weekly rebalance cycle on a $500k book across the four sleeves.
+
+**Starting state (Week 1, broadening-bull regime):**
+
+| Sleeve | Target weight | NAV-$500k | Actual balance (week start) | Drift |
+|--------|--------------|-----------|----------------------------|-------|
+| Perp-carry | 30% | $150,000 | $162,000 | +$12,000 (carry ran well) |
+| Momentum | 30% | $150,000 | $143,000 | −$7,000 (momentum lag) |
+| On-chain | 20% | $100,000 | $98,000 | −$2,000 |
+| Memecoin | 5% | $25,000 | $31,000 | +$6,000 (one memecoin 2×) |
+| Stablecoin reserve | 15% | $75,000 | $71,000 | −$4,000 (used as margin buffer) |
+| **Total NAV** | | **$500,000** | **$505,000** | +$5,000 week-on-week |
+
+**Regime check (Sunday rebalance):** Regime = broadening-bull. Vol-shock flag: off. Funding (BTC 8h): +0.018% — positive but not extreme. No de-gross needed.
+
+**Rebalance targets (new NAV = $505,000):**
+
+| Sleeve | New target (%) | New target ($) | Current ($) | Trade needed |
+|--------|---------------|---------------|-------------|-------------|
+| Perp-carry | 30% | $151,500 | $162,000 | Reduce −$10,500 |
+| Momentum | 30% | $151,500 | $143,000 | Add +$8,500 |
+| On-chain | 20% | $101,000 | $98,000 | Add +$3,000 |
+| Memecoin | 5% | $25,250 | $31,000 | Reduce −$5,750 (trim the winner) |
+| Stablecoin reserve | 15% | $75,750 | $71,000 | Add +$4,750 |
+
+**Execution across venues (per-venue cap: 35% = $176,750):**
+
+- **Perp-carry reduction (−$10,500):** Close $10,500 of delta-neutral funding positions on Hyperliquid (long spot leg + short perp leg). Taker fee ~0.035% × 2 legs × $10,500 ≈ **−$7.35**.
+- **Momentum addition (+$8,500):** Add $8,500 to cross-sectional momentum winners (e.g., increase SOL long by $5,000 on Binance, ETH long by $3,500 on Bybit). Taker fee ≈ **−$6.80**.
+- **On-chain addition (+$3,000):** Increase BTC spot on Hyperliquid following fresh whale-accumulation signal. Fee ≈ **−$2.10**.
+- **Memecoin trim (−$5,750):** Sell $5,750 of the 2× memecoin position on DEX (SOL chain). Slippage estimated 4% on a small-cap = **−$230**.
+- **Stablecoin replenishment (+$4,750):** Transfer USDC from settled trades to reserve.
+
+**Venue utilisation post-rebalance:**
+
+| Venue | Capital allocated |
+|-------|-----------------|
+| Hyperliquid (perp+spot) | $168,000 (33.3% — within 35% cap) |
+| Binance (spot) | $130,000 (25.7%) |
+| Bybit (perp) | $112,000 (22.2%) |
+| On-chain / DEX | $20,250 (4.0%) |
+| Stablecoin reserve (off-exchange) | $75,750 (15.0%) |
+
+**Stressed beta-weighted heat check:** Memecoin sleeve at 5% with beta ~2.0 adds ~0.1× heat; perp-carry is delta-neutral (~0 beta); momentum and on-chain are net-long with blended beta ~0.85. Gross stressed heat ≈ (0.30 × 0.85) + (0.20 × 0.85) + (0.05 × 2.0) = 0.255 + 0.170 + 0.100 = **0.525×** — well inside the 1.25× cap. No scale-down needed.
+
+**Net cost of rebalance cycle:**
+
+| Item | Amount |
+|------|--------|
+| Taker fees (perp-carry + momentum + on-chain) | −$16.25 |
+| Memecoin slippage | −$230.00 |
+| **Total rebalance friction** | **−$246.25** |
+| As % of NAV | 0.049% |
+
+On a $5,000 week's gain, the 0.049% rebalance cost is immaterial. The dominant cost variable is the memecoin sleeve's slippage — which is why the hard cap at ≤5% NAV is load-bearing, not cosmetic.
 
 ## Performance Characteristics
 

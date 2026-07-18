@@ -2,7 +2,7 @@
 title: "Swap Spread Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, bonds, treasuries, derivatives, history]
 aliases: ["Swap Spread Trade", "IRS-Treasury Basis", "Negative Swap Spread Trade"]
@@ -121,6 +121,47 @@ def swap_spread_trade(tenor_years, mode="modern"):
 - [[sofr]] fixings and realized vs expected path
 - Bank CDS and credit spreads (relevant for the old LIBOR-based curve)
 - SLR-constrained dealer balance sheet capacity (proxied by primary-dealer Treasury holdings from NY Fed H.4.1)
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest. Applies the modern (post-2008, negative-spread) rules from this page.
+
+**Setup:** The 10Y SOFR swap spread is reading **−18 bps** (swap rate 2.82%, 10Y Treasury yield 3.00%). This is 23 bps below the trailing 5-year median of +5 bps — well past the "deeply negative" entry threshold from the Rules section. A hedge fund with prime-broker repo access enters the trade.
+
+**Position (DV01-neutral, $100M notional):**
+
+| Leg | Action | Rate/Yield | Notional |
+|-----|--------|-----------|---------|
+| Buy 10Y Treasury (off-the-run) | Long | 3.00% yield | $100M |
+| Finance Treasury in term repo (3-month) | Borrow | SOFR + 8 bps ≈ 2.88% | $100M |
+| Pay fixed on 10Y SOFR IRS | Pay fixed | 2.82% | $100M |
+| Receive floating (SOFR) on IRS | Receive | SOFR ≈ 2.80% | $100M |
+
+**Net daily carry (all four legs):**
+
+| Leg | Daily cash flow (approx) |
+|-----|--------------------------|
+| Treasury coupon income | +$8,219/day (3.00% × $100M / 365) |
+| Repo cost | −$7,890/day (2.88% × $100M / 365) |
+| Pay fixed on swap | −$7,726/day (2.82% × $100M / 365) |
+| Receive SOFR on swap | +$7,671/day (2.80% × $100M / 365) |
+| **Net carry** | **+$274/day ≈ +$100k/year** |
+
+This is approximately **+10 bps net per annum** on $100M notional, earned as long as the spread stays negative and repo-SOFR basis remains benign.
+
+**Exit scenario (12 months later):** The spread normalises to −5 bps (swap rate 2.95%, Treasury yield 3.00%). The position is unwound:
+
+| Item | P&L |
+|------|-----|
+| DV01 on 10Y ≈ $9,000 per bp; spread moved +13 bps | +$117,000 |
+| 12 months carry (+$100k) | +$100,000 |
+| Financing spread stress (repo-SOFR briefly widened +5 bps for 30 days) | −$4,100 |
+| Transaction costs (bid-ask on Treasury + swap, ~0.5 bps × 2) | −$10,000 |
+| **Net P&L** | **+$202,900** |
+
+Return on equity: the fund's prime broker required ~$5M haircut to repo $100M of 10Y Treasury, so equity deployed ≈ $5M. Net return ≈ 4.1% on deployed equity — modest, but highly repeatable and uncorrelated to directional markets.
+
+**Risk scenario:** If the spread instead widens a further 30 bps (to −48 bps), the DV01 loss is $9,000 × 30 = −$270,000, exceeding one year of carry. At that point the kill criterion (>30 bps adverse move within 6 months) fires and the position is closed for a loss. This is the LTCM scenario in reverse: the trade is right in fair-value terms but wrong in timing, and financing must survive the drawdown.
 
 ## Worked Example: The 2015 Negative Swap Spread
 

@@ -87,14 +87,24 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       vol-gated-mean-reversion) + 5 reasoned non-viable reclassifications. Final matrix:
       66 covered / 0 planned / 54 non-viable of 120 cells; footnotes ¹–⁶⁵ document every
       non-viable call. Planner patched 2 missing Null-hypothesis sections post-verify.
-- [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
-      section to buildable strategy pages missing them (~80–120 pages, batches of ~25).
-- [ ] B10. Example-trade completion: add "## Example trade" with concrete round-trip numbers
-      (marked illustrative) to buildable pages missing one (~160 pages, batches of ~25).
-- [ ] B11. Essay→buildable upgrades: upgrade ~100 essay-style strategy pages (no edge_source)
-      to the full schema, batches of ~10, worst-first (technical-analysis/, combinations/).
-- [ ] B12. Expand ~15 true stub concepts (ai-agents, depin, gamefi, liquidations, layer-1,
-      mev, zk-rollup, etc.) from stub to real pages (200+ words, examples, links).
+- [x] B9. (2026-07-19, iter 10) ALREADY SATISFIED — planner scan found ZERO buildable pages
+      (type: strategy + edge_source) missing kill criteria (frontmatter or section). The
+      audit's "~75% missing" estimate was sampling error. No work needed.
+- [x] B10. (2026-07-19, iter 10) DONE — all 10 remaining pages got worked examples
+      (mev-execution-guide correctly got a guide-framed "Worked example"). Every buildable
+      strategy page now has edge_source + kill criteria + worked example.
+- [ ] B11. Essay→buildable upgrades — RE-SCOPED (iter 10): 99 type:strategy pages lack
+      edge_source, BUT many are intentional companion guides (arbitrage-* meta pages) and
+      options STRUCTURE pages that the 2026-07-14 waves deliberately kept on a structure
+      template (see wiki/log.md Wave 3: "No buildable-alpha schema was bolted onto
+      theory/structure pages"). Plan: TRIAGE batch first — classify all 99 into
+      {companion-guide OK | structure-page OK | genuine strategy needing upgrade}, record
+      the classification here, then upgrade only the genuine ones in batches of ~10.
+- [x] B12. (2026-07-19, iter 10) 12 highest-inbound stub concepts expanded to full draft
+      pages with Trading-relevance sections (layer-1, depin, crypto-fear-and-greed-index,
+      gamefi, liquidations, governance-token, privacy-coins, mev, play-to-earn,
+      tokenized-treasuries, zero-knowledge-proofs, ai-agents). Remaining minor stubs
+      (iter-8 L2/infra batch) stay as intentional stubs — expand opportunistically.
 
 ## Progress log
 
@@ -134,3 +144,6 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - 2026-07-19 iter 9 (B8b): COMBINATION PROGRAM COMPLETE — matrix 66/0/54 of 120, 39 new
   combination pages total across the program, every non-viable cell reasoned. A9 collision
   inventory classified into 4 dispositions (ready for a dedicated batch).
+- 2026-07-19 iter 10 (B9 verified done + B10 + B12): B9 needed no work (0 pages missing
+  kill criteria — audit overestimate). 10 worked examples added; 12 stubs expanded.
+  Remaining: B11 triage (99 essays), A9 collisions.

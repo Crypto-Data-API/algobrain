@@ -2,7 +2,7 @@
 title: "Prediction Market Trading Strategies"
 type: strategy
 created: 2026-04-14
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [prediction-markets, crypto, defi, arbitrage, behavioral-finance]
 aliases: ["Prediction Market Strategies", "Polymarket Strategies", "Event Market Trading"]
@@ -178,6 +178,44 @@ def fade_longshot(market, fair_p_model):
 ```
 
 The arbitrage scanner must **annualize** the edge: a guaranteed 1.5% gross that locks capital for six months until resolution is ~3% annualized before fees — often worse than the risk-free rate (see [[capital-efficiency]]). The fade routine's binding constraint is position sizing, not signal: a single tail event can erase many wins, so fractional [[kelly-criterion|Kelly]] and the 2-3% cap are non-negotiable.
+
+## Example trade
+
+> Illustrative, round numbers — not a backtest.
+
+**Strategy: Complement arbitrage on Polymarket**
+
+A scanner spots a binary market: "Will the US CPI print above 3.5% in March 2025?" The market has two outcomes — Yes and No — that must sum to $1.00 at resolution.
+
+| Outcome | Current best ask |
+|---------|-----------------|
+| Yes | $0.44 |
+| No | $0.58 |
+| **Total cost to buy both** | **$1.02** |
+
+The combined cost is $1.02, which is *above* $1.00 — no arbitrage here. The scanner runs continuously and 20 minutes later detects a new reading:
+
+| Outcome | Current best ask |
+|---------|-----------------|
+| Yes | $0.41 |
+| No | $0.57 |
+| **Total cost** | **$0.98** |
+
+A $0.02 guaranteed profit per dollar of outcome exists (before capital-lockup cost). The trader buys both outcomes:
+
+- Buy 500 Yes shares at $0.41 = **$205**
+- Buy 500 No shares at $0.57 = **$285**
+- Total outlay: **$490**
+- Guaranteed resolution payout: 500 × $1.00 = **$500**
+- Gross profit: **$10** (2.04% of capital deployed)
+
+**Costs and annualised edge check:**
+- Polymarket fees: ~$0 (near-zero trading fee, small gas/settlement ~$1–2 on Polygon at low congestion)
+- Capital lockup: 18 days until resolution
+- Net profit after fees: ~**$8**
+- Annualised: $8 / $490 × (365 / 18) ≈ **33% annualised**
+
+This clears the risk-free rate, so the position is taken. The key discipline: the trader does not trade *opinion* on CPI — they trade the *mathematical gap*. If the gap narrows immediately after entry (e.g., other arbers fill it), the position is already locked in for guaranteed $8 at resolution. Risk is near-zero: the only tail is Polymarket itself halting resolution, which the 2-3% position-sizing cap addresses at the portfolio level.
 
 ## Worked Example (qualitative)
 

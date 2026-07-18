@@ -2,7 +2,7 @@
 title: "MEV Execution Guide"
 type: strategy
 created: 2026-04-20
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, execution, algorithmic, market-microstructure]
 aliases: ["MEV Guide", "Flashbots Guide", "MEV Protection"]
@@ -212,6 +212,55 @@ Before submitting any MEV bundle:
 | Arbitrum | > $1 | > $0.10 | Much cheaper gas; smaller arbs viable |
 | Base | > $0.50 | > $0.05 | Cheapest EVM L2 |
 | Solana | > $0.10 | > $0.01 | Near-zero gas; micro-arbs viable |
+
+## Worked example
+
+> Illustrative, round numbers — not a backtest. Walks one back-run MEV execution end-to-end on Ethereum mainnet.
+
+**Setup:** A mempool monitor detects a pending Uniswap V3 swap: a user is about to buy 50 ETH worth of TOKEN_X on a pool where 50 ETH of buy pressure will move the price approximately +1.8%. The searcher sees this before it lands and prepares a back-run bundle.
+
+**Step 1 — Opportunity sizing:**
+- Pending user swap: buy 50 ETH of TOKEN_X. Estimated post-swap TOKEN_X price: +1.8% above current.
+- Searcher calculates: if they buy TOKEN_X *immediately after* the user's swap (back-run), they can then sell into the next natural buyer or arb the price back to equilibrium.
+- Gross profit estimate: the 1.8% move × a $20,000 position = **$360 gross**.
+
+**Step 2 — Bundle construction:**
+```
+Bundle = [
+  user_signed_tx,          # user's swap (must land first)
+  searcher_buy_tx,         # searcher buys TOKEN_X immediately after
+]
+Target block: current_block + 1
+```
+The searcher signs their buy transaction and constructs the bundle ensuring the user's tx precedes theirs — this is the "back-run" (not a sandwich; the user is not harmed).
+
+**Step 3 — Profitability check:**
+
+| Item | Amount |
+|------|--------|
+| Gross profit estimate | $360 |
+| Gas units × estimated gas price (200,000 gas × 30 Gwei) | −$18 |
+| Builder bid (90% of gross − gas) | −$308 |
+| **Searcher net retention** | **$34** |
+
+Net $34 on a $20,000 position in under one block (~12 seconds). Annualised this is irrelevant — the metric is throughput: if the bot lands 50 such bundles per day, that is $1,700/day gross retention.
+
+**Step 4 — Submission:**
+```python
+result = w3.flashbots.send_bundle(
+    bundle,
+    target_block_number=w3.eth.block_number + 1,
+)
+```
+The bundle is submitted to the Flashbots relay. The builder includes it because the priority fee ($308 bid) is the highest for this block slot.
+
+**Step 5 — Outcome:**
+- Bundle lands. Searcher's buy executes immediately after the user's swap.
+- Token purchased at +1.8% above pre-swap price; sold 4 blocks later into a rebalancing bot at +0.2% above the post-swap price.
+- Actual gross: **$340** (slightly below estimate due to partial recovery before the sell).
+- Net after gas + bid: **$14** (estimate was $34; the back-run opportunity was also spotted by one competing searcher who bid slightly higher; the searcher won this round but will lose similar races at lower margins as competition intensifies).
+
+**Key takeaway:** MEV economics are dominated by the builder bid, not by gross spread. The $360 gross became $14 net. The competitive moat is latency (detecting and submitting faster) and builder relationships, not the size of any individual trade.
 
 ## Common Failure Modes
 
