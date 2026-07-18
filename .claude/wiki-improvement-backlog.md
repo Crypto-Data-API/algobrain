@@ -19,9 +19,9 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 
 ## Phase A — structural quick wins
 
-- [ ] A1. Un-orphan ~1,300 crypto coin pages: write `tools/build_coin_index.py` generating
-      A–Z index pages (e.g. `wiki/markets/crypto/coin-index-a-z.md` + per-letter sections)
-      wikilinking EVERY coin page; link the index from `crypto-overview.md` and `wiki/index.md`.
+- [x] A1. (2026-07-19, iter 3) Un-orphaned crypto pages: `tools/build_coin_index.py` →
+      `coin-index-a-z.md` (2,407 static links, 37 sections), wired into `crypto-overview.md`
+      and `wiki/index.md`. Orphans wiki-wide: 1,339 → 40. Re-run the script after bulk imports.
 - [x] A2. (2026-07-19, iter 2) Refresh stale counts in `wiki/overview.md`. Note: the audit's
       claim of a stale count in `data-sources-overview.md` was wrong — no such claim exists
       there; left untouched.
@@ -62,7 +62,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8 (B2 ✓ 2026-07-19 iter 2; 64 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
+- [ ] B2–B8 (B2 ✓ iter 2; B3 ✓ iter 3; 59 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
       highest-value unfilled cells; update matrix each time. Continue until every viable cell
       is filled or explicitly marked non-viable ("all possible combinations").
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
@@ -87,3 +87,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   funding-flush-reversal, unlock-aware-momentum, funding-skewed-grid, oi-flush-reversion.
   Matrix now 27 existing / 64 planned / 9 non-viable. overview.md counts refreshed (A2).
   Zero new broken links.
+- 2026-07-19 iter 3 (B3 + A1): 5 combo pages — funding-vs-basis-rotation,
+  funding-conditioned-vol-selling, off-hours-liquidation-playbook,
+  narrative-with-trend-confirmation, onchain-capitulation-confluence. Matrix 32/59/9.
+  A1 coin index shipped: orphans 1,339 → 40. Zero new broken links.

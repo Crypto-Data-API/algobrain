@@ -4,6 +4,19 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 3: combination batch 3 + coin index
+
+- 5 more combination strategies (full buildable schema, honest data-source caveats):
+  funding-vs-basis-rotation (carry allocation layer), funding-conditioned-vol-selling,
+  off-hours-liquidation-playbook (session-conditional cascade parameters),
+  narrative-with-trend-confirmation, onchain-capitulation-confluence. Matrix now
+  **32 covered / 59 planned / 9 non-viable**.
+- **Coin index (A–Z):** new `tools/build_coin_index.py` generates
+  `wiki/markets/crypto/coin-index-a-z.md` — 2,407 statically-linked coin pages, wired into
+  `wiki/index.md` and `crypto-overview.md`. **Orphan pages: 1,339 → 40** wiki-wide; the
+  entire crypto market section is now graph-reachable.
+- Zero new broken links (lint-verified across 4,870 pages).
+
 ## 2026-07-19 — Improvement loop, iteration 2: combination batch 2 + overview refresh
 
 - 5 more combination strategies on the full buildable schema, each explicitly differentiated

@@ -48,6 +48,8 @@ Crypto is not one market but a stack of overlapping sectors, each with its own d
 
 ## Major Assets
 
+For the complete alphabetical listing of all 2,400+ coin pages, see the [[coin-index-a-z|Crypto Coin Index (A–Z)]].
+
 - [[bitcoin]] — Digital gold; the market bellwether and dominance anchor
 - [[ethereum]] — Programmable settlement layer; foundation of DeFi
 - [[solana]] — High-throughput L1; memecoin and consumer-app hub

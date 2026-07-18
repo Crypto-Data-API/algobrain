@@ -15,6 +15,7 @@ A comprehensive, LLM-maintained knowledge base for crypto trading strategy: cryp
 
 ### Markets
 - [[markets-overview|Markets Overview]] — Crypto, Forex, Commodities, Options, Futures, Bonds (macro context for crypto)
+- [[coin-index-a-z|Crypto Coin Index (A–Z)]] — every coin/token page in the vault (2,400+), alphabetically
 
 #### Commodities
 - Hub pages: [[commodities]], [[commodities-overview]], [[commodity-trading]]

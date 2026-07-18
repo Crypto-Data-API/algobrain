@@ -30,16 +30,16 @@ A single cell can hold multiple page references if more than one page exists for
 | Primitive \ Overlay | Regime gate | Funding filter | OI filter | Trend gate | Tail-hedge overlay | Vol targeting | Cross-venue | Unlock/event calendar | Sentiment-extreme filter | Session/time filter |
 |---|---|---|---|---|---|---|---|---|---|---|
 | **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | planned |
-| **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | planned | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
+| **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
 | **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | planned | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | planned |
 | **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | planned | planned | planned | planned | planned | [[contrarian-extremes]] | planned |
-| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | planned | planned | planned | planned | planned | planned |
-| **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | planned | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
-| **Vol selling** | [[regime-adaptive-strategy]] | planned | planned | planned | — ⁵ | [[volatility-targeting]] | planned | planned | planned | planned |
+| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | planned | planned | planned | planned | planned | [[off-hours-liquidation-playbook]] |
+| **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
+| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | planned | planned | — ⁵ | [[volatility-targeting]] | planned | planned | planned | planned |
 | **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | planned | planned | — ⁶ | planned | planned | planned | planned | planned |
 | **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | planned | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
 | **Stat-arb / pairs** | [[regime-adaptive-strategy]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
-| **On-chain flow** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | planned | planned |
+| **On-chain flow** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | planned |
 | **Sentiment** | [[regime-adaptive-strategy]] | planned | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
 
 ---
@@ -66,15 +66,29 @@ A single cell can hold multiple page references if more than one page exists for
 
 **¹⁰ Sentiment × sentiment-extreme filter = self-referential.** The sentiment *primitive* already acts on sentiment signals; gating it on another sentiment extreme is not a separate overlay.
 
+**¹¹ [[funding-vs-basis-rotation]]** is listed under basis/cash-and-carry × funding filter because it is the *allocation-layer* strategy that switches the carry book between perp-funding carry and dated-futures basis carry depending on which pays more — the funding filter is the rotation decision rule that gates which instrument is active.
+
 ---
 
 ## Matrix Cell Counts (as of 2026-07-19)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 27 |
-| Planned (gap to fill) | 64 |
+| Linked to existing page | 32 |
+| Planned (gap to fill) | 59 |
 | Non-viable (`—`) | 9 |
+
+---
+
+## Batch B3 New Pages (2026-07-19)
+
+Five new combination pages created in this batch — matrix cells updated above:
+
+- [[funding-vs-basis-rotation]] — basis/cash-and-carry × funding filter (allocation layer between perp-funding carry and dated-futures basis carry)
+- [[funding-conditioned-vol-selling]] — vol selling × funding filter (enter short-vol only when elevated funding confirms leverage-crowd VRP richness)
+- [[off-hours-liquidation-playbook]] — liquidation plays × session/time filter (session-conditional cascade-fade with adjusted triggers, sizing, and slippage per liquidity window)
+- [[narrative-with-trend-confirmation]] — narrative/event × trend gate (require breakout / higher-low above MA before entering narrative trade)
+- [[onchain-capitulation-confluence]] — on-chain flow × sentiment-extreme filter (bottom entry requires BOTH on-chain capitulation signal AND Fear & Greed extreme simultaneously)
 
 ---
 

@@ -10,6 +10,21 @@ tags: [meta, log]
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
 
+## 2026-07-19 — Batch B3: 5 New Combination Strategy Pages
+
+- Pages created (5):
+  - [[funding-vs-basis-rotation]] — basis/cash-and-carry × funding filter: allocation-layer strategy that switches the carry book between perp-funding carry (long spot, short perp) and dated-futures basis carry (long spot, short quarterly) depending on which annualised yield is higher net of costs; hysteresis prevents churn; always market-neutral and always earning the fatter of the two available carry streams
+  - [[funding-conditioned-vol-selling]] — vol selling × funding filter: sell BTC/ETH options on Deribit only when perp funding is elevated (≥ 0.03%/8h confirming a leveraged-retail crowd driving IV richness) AND DVOL percentile is in the 40th–90th range AND IV−RV > 5 vol points; funding adds information beyond the DVOL-percentile gate by identifying *why* the surface is rich (leverage-crowd demand vs. genuine macro uncertainty); call-wing tilt when funding ≥ 0.05%/8h
+  - [[off-hours-liquidation-playbook]] — liquidation plays × session/time filter: session-conditional extension of the cascade-fade strategy; applies different entry thresholds, minimum cascade sizes, position-size multipliers, target reversion ranges, and slippage budgets depending on session window (US/EU peak, Asia/overnight, weekend); off-hours cascades travel further per dollar of forced flow in thin books — the session layer concentrates risk where the reversion edge is amplified
+  - [[narrative-with-trend-confirmation]] — narrative/event × trend gate: enter narrative/theme trades only after price structure confirms (20-day channel high breakout or higher-low above 50-day SMA), avoiding the pioneer-penalty regime where a correct narrative precedes the capital flow by weeks; dual-exit discipline (narrative decay OR trend break, whichever fires first) prevents sitting through secondary distribution
+  - [[onchain-capitulation-confluence]] — on-chain flow × sentiment-extreme filter: bottom-fishing entry for BTC that requires BOTH an on-chain capitulation signal (exchange-inflow top-decile spike, SOPR ≤ 0.97 for 5+ days, or MVRV-Z ≤ 0) AND Fear & Greed ≤ 20 for 2+ consecutive days; the dual-signal confluence addresses the two failure modes of single-signal bottom fishing — fear without on-chain selling (correction, not bottom) and on-chain selling without sentiment extreme (distribution, not capitulation)
+- Pages updated (2):
+  - [[combination-matrix]] — 5 new cells linked (basis × funding filter, vol selling × funding filter, liquidation plays × session filter, narrative × trend gate, on-chain flow × sentiment filter); counts updated (existing: 27→32, planned: 64→59); footnote ¹¹ added; Batch B3 section prepended
+  - [[log]] (this file) — Batch B3 entry prepended
+- Candidates skipped (0 of 5 primaries): all five primary candidates confirmed additive. The two backup candidates (correlation-regime-pairs, session-aware-mean-reversion) were not needed.
+- All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related), verified CryptoDataAPI endpoints only (no invented paths), honest about DVOL/SOPR gaps requiring external sources, kill criteria with numeric triggers, approved tags only.
+
+
 ## 2026-07-19 — Batch B2: 5 New Combination Strategy Pages
 
 - Pages created (5):
