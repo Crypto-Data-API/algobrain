@@ -1,14 +1,14 @@
 ---
-title: "Basis Trade"
+title: "Treasury Basis Trade"
 type: strategy
 created: 2026-06-22
 updated: 2026-07-13
 status: good
 tags: [arbitrage, quantitative, futures, leverage, market-neutral, crypto, risk-management]
-aliases: ["Cash-and-Carry", "Basis Trading", "Treasury Basis Trade", "Spot-Futures Basis"]
+aliases: ["Treasury Basis", "Bond Basis Trade"]
 strategy_type: quantitative
 timeframe: position
-markets: [bonds, futures, crypto]
+markets: [bonds, futures]
 complexity: advanced
 backtest_status: untested
 edge_source: [structural, risk-bearing]
@@ -24,6 +24,8 @@ related: ["[[cash-and-carry]]", "[[basis]]", "[[arbitrage]]", "[[futures]]", "[[
 ---
 
 # Basis Trade
+
+> **Looking for the crypto version?** See [[basis-trading]] (crypto perp/futures basis) and [[cash-and-carry]]. This page covers the Treasury/macro basis trade as market-history and cross-asset context.
 
 The basis trade is the classic **cash-and-carry [[arbitrage]]**: hold the cash (spot) asset and short the corresponding [[futures]] contract (or vice versa) to capture the **[[basis]]** — the difference between the futures price and the spot price — as it converges to zero at delivery. Because both legs reference the same underlying and settle to the same price, the position is directionally market-neutral; the P&L is the locked-in basis plus or minus financing carry. The trade has two canonical incarnations: the **Treasury basis trade** (cash bond vs. bond future, financed in [[repo]], run at extreme leverage by hedge funds and flagged repeatedly as a systemic-risk concern) and the **crypto cash-and-carry** (spot vs. perpetual/dated future, where the "basis" is largely the [[funding-rate]]).
 

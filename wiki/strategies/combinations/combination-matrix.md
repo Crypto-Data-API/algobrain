@@ -29,18 +29,18 @@ A single cell can hold multiple page references if more than one page exists for
 
 | Primitive \ Overlay | Regime gate | Funding filter | OI filter | Trend gate | Tail-hedge overlay | Vol targeting | Cross-venue | Unlock/event calendar | Sentiment-extreme filter | Session/time filter |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | planned |
+| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | [[funding-window-timing]] ¹⁷ |
 | **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
 | **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | [[spot-led-momentum-filter]] | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | [[session-aware-mean-reversion]] ¹² |
-| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | planned | [[put-protected-dip-buying]] ¹⁴ | planned | planned | planned | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
-| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | [[cascade-monetization-rotation]] ¹³ | planned | planned | planned | planned | [[off-hours-liquidation-playbook]] |
+| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | [[pullback-trading]] ²² | [[put-protected-dip-buying]] ¹⁴ | planned | planned | planned | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
+| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | [[cascade-monetization-rotation]] ¹³ | planned | [[cross-venue-cascade-dislocation]] ¹⁸ | planned | planned | [[off-hours-liquidation-playbook]] |
 | **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | [[narrative-position-vol-targeting]] | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
 | **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | [[low-leverage-vol-selling]] ¹⁵ | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | planned | planned | [[post-panic-vol-selling]] | planned |
-| **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | [[leverage-stress-tail-hedge]] | planned | — ⁶ | planned | planned | [[event-vol-buying]] | planned | planned |
-| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | planned | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
+| **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | [[leverage-stress-tail-hedge]] | [[long-options-trend-expression]] ¹⁹ | — ⁶ | planned | planned | [[event-vol-buying]] | planned | planned |
+| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | [[grid-with-tail-hedge]] ²⁰ | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
 | **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | planned | planned |
 | **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | planned |
-| **Sentiment** | [[regime-adaptive-strategy]] | planned | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
+| **Sentiment** | [[regime-adaptive-strategy]] | [[sentiment-positioning-divergence]] ²¹ | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
 
 ---
 
@@ -78,15 +78,45 @@ A single cell can hold multiple page references if more than one page exists for
 
 **¹⁶ [[smart-money-vs-crowd-divergence]]** is placed in the on-chain flow × funding filter cell because the strategy's second leg is a derivative-crowd positioning filter (flat/negative funding, short-biased long/short ratio) applied on top of the on-chain smart-money accumulation signal. The funding filter is the crowd-positioning gate; the on-chain accumulation is the primary informed-flow signal. Explicitly differentiated from [[smart-money-orderflow-combo]] (order-flow-based second leg, intraday) and [[crowded-short-funding-fade]] (funding filter alone without on-chain confirmation).
 
+**¹⁷ [[funding-window-timing]]** is placed in the funding carry × session/time filter cell because the strategy is a peri-settlement timing overlay on the funding carry primitive: it exploits the 30–60 minute pre-settlement repositioning drift around the 8-hourly CEX (00:00/08:00/16:00 UTC) and hourly Hyperliquid funding settlement timestamps. The session/time filter is the predictable discrete settlement schedule. Differentiated from [[hl-vs-cex-funding-divergence]] (rate spread, not settlement timing), [[funding-skewed-grid]] (continuous intraday centre adjustment), and [[funding-rate-harvest]] (multi-period carry, not peri-settlement scalp).
+
+**¹⁸ [[cross-venue-cascade-dislocation]]** is placed in the liquidation plays × cross-venue cell because the strategy exploits the transient price dislocation between Hyperliquid and Binance perp markets that arises specifically during concentrated liquidation cascades — the liquidation play is the primary P&L mechanism (forced non-economic flow on the dislocated venue); the cross-venue hedge (long dislocated HL, short calm Binance) is the structural risk-neutralisation that converts a directional fade into a near-market-neutral spread trade. Differentiated from [[liquidation-cascade-arbitrage]] (DeFi MEV on-chain liquidation bonus — entirely different mechanism), [[hl-vs-cex-funding-divergence]] (steady-state funding spread, not cascade price gap), and [[cross-exchange-arbitrage]] (continuous price arb in normal conditions, not cascade-triggered).
+
+**¹⁹ [[long-options-trend-expression]]** is placed in the vol buying/tail hedge × trend gate cell because the strategy uses a confirmed trend gate to select direction and an IV/RV filter to select the instrument (long call or call spread instead of futures/perp when IV is cheap relative to realized vol). The vol-buying/options instrument is how the trend is expressed; the trend gate is the direction-selection overlay. Differentiated from [[event-vol-buying]] (calendar-triggered, direction-agnostic straddles) and [[trend-plus-tail-hedge]] (long trend position + tail hedge, not trend expression via long options).
+
+**²⁰ [[grid-with-tail-hedge]]** is placed in the grid/market-making × tail-hedge overlay cell because the strategy overlays a budgeted OTM put position — financed entirely from grid income — on top of a standard grid, capping the maximum loss from gap-through-the-ladder events. The tail-hedge overlay converts the grid from infinite-downside to bounded-maximum-loss per cycle. The income-financing pattern is adapted from [[carry-with-tail-hedge]]. Differentiated from [[regime-gated-grid]], [[oi-aware-grid]], and [[funding-skewed-grid]] (all gate WHEN/HOW the grid runs; this page caps the loss WHEN those gates fail).
+
+**²¹ [[sentiment-positioning-divergence]]** is placed in the sentiment × funding filter cell because the strategy trades the gap between STATED sentiment (Fear & Greed index extreme) and ACTUAL positioning (funding rate and long/short ratio): extreme fear + negative funding = washout complete (long); extreme fear + positive funding = capitulation incomplete (avoid or short modestly). The funding filter is the positioning-reality check that validates or invalidates the stated sentiment signal. Differentiated from [[contrarian-extremes]] (stated sentiment alone, no positioning confirmation), [[crowded-short-funding-fade]] (positioning alone, no sentiment gate), and [[smart-money-vs-crowd-divergence]] (on-chain accumulation vs positioning, not stated sentiment vs positioning).
+
+**²² [[pullback-trading]]** is listed in the mean-reversion × trend gate cell as the existing page that substantively covers higher-timeframe-trend-gated mean-reversion entries. [[pullback-trading]] documents the retracement entry framework (buying weakness in intact uptrends after leveraged weak hands are flushed; entry conditioned on the higher-timeframe trend remaining intact). [[trend-pullback-rally-fade]] (Hyperliquid basket, piloted) covers the same framework in a more systematic basket form. The B7 backup candidate `higher-timeframe-reversion-gate` was assessed and found covered by these two pages; no new page was written.
+
 ---
 
 ## Matrix Cell Counts (as of 2026-07-19)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 47 |
-| Planned (gap to fill) | 44 |
+| Linked to existing page | 53 |
+| Planned (gap to fill) | 38 |
 | Non-viable (`—`) | 9 |
+
+---
+
+## Batch B7 New Pages (2026-07-19)
+
+Five new combination pages created in this batch — matrix cells updated above:
+
+- [[funding-window-timing]] — funding carry × session/time filter (peri-settlement timing overlay: enters 40–50 min before 8h CEX settlement timestamps (00:00/08:00/16:00 UTC) or 10–15 min before Hyperliquid's hourly settlement when |funding| ≥ 0.015%/8h, OI ≥ 60th percentile, and no cascade active; exploits the discrete repositioning drift as large leveraged participants position on the receiving side before the snapshot fires; explicitly differentiated from hl-vs-cex-funding-divergence (rate spread), funding-skewed-grid (continuous centre adjustment), funding-rate-harvest (multi-period carry), and session-overlap-momentum (geographic session overlap, not settlement timestamp))
+- [[grid-with-tail-hedge]] — grid/market-making × tail-hedge overlay (OTM put overlay financed from grid income: budget = 15–25% of trailing 14d net grid P&L, capped at 0.8% of notional; buys 10–15% OTM put at DTE 21–35 only when DVOL ≤ 70th percentile; grid halt fires if ADX > 25 or 12h OI change > +3%; put payoff caps gap-through-the-ladder loss; converts grid from infinite-downside to bounded-maximum-loss per cycle; explicitly differentiated from regime-gated-grid, oi-aware-grid, funding-skewed-grid (all gate WHEN/HOW the grid runs — this caps the loss WHEN those gates fail); income-financing pattern adapted from carry-with-tail-hedge)
+- [[sentiment-positioning-divergence]] — sentiment × funding filter ("talk vs money": two setups: (1) washout long: Fear & Greed ≤ 20 for ≥ 2 days AND funding ≤ −0.005%/8h AND L/S ≤ 0.90 AND higher low on daily → enter long; (2) incomplete-cap: Fear & Greed ≤ 20 AND funding ≥ +0.010%/8h AND L/S ≥ 1.10 → avoid long / short modestly; explicitly differentiated from contrarian-extremes (sentiment alone, no positioning gate), crowded-short-funding-fade (positioning alone, no sentiment gate), and smart-money-vs-crowd-divergence (on-chain vs positioning, not stated sentiment vs positioning))
+- [[long-options-trend-expression]] — vol buying/tail hedge × trend gate (express confirmed trends via long calls or call spreads on Deribit when IV is cheap relative to realized vol: trend gate = daily close ≥ 12% above EMA50, 4h RSI ≥ 58, 7d avg funding ≥ 0.015%/8h; IV-cheap gate = DVOL ≤ 90% of 30d avg OR 20d RV ≥ DVOL + 5 vol pts OR DVOL ≤ 40th pct; strike 10–15% OTM, DTE 35–55 days; eliminates stop-wicking failure mode — option cannot be stopped out, only expired; explicitly differentiated from trend-following-cta (futures + stop), vol-targeted-trend-following (size scaling not instrument switch), event-vol-buying (calendar-driven straddles), and trend-aligned-premium-selling (sells options when IV elevated — structural complement))
+- [[cross-venue-cascade-dislocation]] — liquidation plays × cross-venue (during cascades HL-Binance BTC perp spread ≥ 0.5% [liq volume ≥ 3× 7d avg trigger]: go long HL (dislocated) + short Binance (reference), equal notional, 1:1 hedge; exit when spread reconverges to ≤ 0.1% or 15-minute time limit; stop at spread ≥ 1.5%; explicitly differentiated from liquidation-cascade-arbitrage (DeFi MEV on-chain liquidation bonus — different mechanism entirely), hl-vs-cex-funding-divergence (steady-state funding spread, not cascade price dislocation), and cross-exchange-arbitrage (continuous arb in normal conditions, not cascade-triggered))
+
+Skips (0 of 5 primaries): all five primary candidates confirmed additive. No backups used.
+
+Backup evaluation: `higher-timeframe-reversion-gate` — mean-reversion × trend gate — is already substantively covered by [[pullback-trading]] (retracement entry in uptrend; swing/position) and [[trend-pullback-rally-fade]] (counter-trend entry with the primary trend; HL basket, piloted). Both pages document taking mean-reversion entries WITH the higher-timeframe trend. Matrix cell (mean-reversion × trend gate) marked [[pullback-trading]] ²² as the existing page reference. Backup `vol-balanced-pairs` (stat-arb × vol targeting) remains `planned` — not yet covered.
+
+Note: [[long-options-trend-expression]] (vol buying/tail hedge × trend gate) is placed in the vol buying row rather than momentum/trend row because the defining P&L mechanism is the long options instrument (vol buying/tail hedge family) and the trend gate is the overlay. The momentum/trend row's trend gate cell is a tautology (see footnote ³); the vol-buying row's trend gate cell was vacant and is the correct placement.
 
 ---
 

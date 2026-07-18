@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 7: combination batch 7 + duplicate resolution
+
+- 5 more combination strategies (full buildable schema): funding-window-timing (settlement
+  micro-timing), grid-with-tail-hedge, sentiment-positioning-divergence ("talk vs money"),
+  long-options-trend-expression (convex trend expression), cross-venue-cascade-dislocation.
+  One further matrix cell resolved by existing coverage (pullback-trading). Matrix now
+  **53 covered / 38 planned / 9 non-viable**.
+- **Duplicate resolution (named set):** basis-trade retitled "Treasury Basis Trade" (macro
+  context, crypto pointer to basis-trading/cash-and-carry); dydx.md draft duplicate and a
+  generic same-stem algorithmic-trading concept deleted; convex-finance redirect cleaned of
+  merge debris; dYdX/Convex entity pages retitled "(Protocol)".
+- New backlog item: 54 same-stem filename collisions identified wiki-wide (wikilink
+  ambiguity) — queued for a dedicated policy + rename pass.
+
 ## 2026-07-19 — Improvement loop, iteration 6: combination batch 6 + tag normalization
 
 - 5 more combination strategies (full buildable schema): put-protected-dip-buying (risk

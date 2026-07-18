@@ -43,10 +43,19 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       REDIRECTS pointing at crypto counterparts (not deleted — the 3 heavily-linked ones had
       ~140 inbound refs; redirects keep the graph intact). Zero `markets: [stocks]` strategy
       pages remain; equity content recoverable from git history.
-- [ ] A8. Duplicates: basis-trade → redirect to basis-trading (keep a Treasury-basis note);
-      resolve delta-hedging vs delta-hedged-options; review duplicate titles (Algorithmic
-      Trading ×4, DCA ×3, Convex Finance ×3, dYdX ×3, Backtesting ×3, Beefy ×2) — merge or
-      cross-link coin-page vs entity-page pairs.
+- [x] A8. (2026-07-19, iter 7) First pass on named duplicates: basis-trade → retitled
+      "Treasury Basis Trade" (macro context, pointer to [[basis-trading]]/[[cash-and-carry]]);
+      delta-hedging was already a redirect (stale audit flag); dydx.md draft dupe +
+      microstructure/algorithmic-trading.md generic dupe DELETED (same-stem ambiguity);
+      convex-finance.md cleaned to true redirect; dYdX/Convex entity pages retitled
+      "(Protocol)".
+- [ ] A9. Same-stem filename collisions (NEW, found iter 7): 54 stems exist in 2+ folders
+      (uniswap, aave, arbitrum, funding-rate, liquidity, gamma-scalping ×3,
+      dollar-cost-averaging ×3, backtesting-overview, data-sources-overview,
+      technical-analysis-overview, …) making [[wikilinks]] ambiguous in Obsidian. Needs a
+      policy first (proposal: coin/market page owns the bare stem; entity page gets
+      -protocol/-exchange suffix; category overviews get folder-prefixed stems), then a
+      scripted rename + link-rewrite pass. Sub-agent-sized; handle as a dedicated batch.
 
 ## Phase B — strategy depth (PRIORITY)
 
@@ -59,7 +68,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8 (B2–B6 ✓ iters 2–6; 44 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
+- [ ] B2–B8 (B2–B7 ✓ iters 2–7; 38 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
       highest-value unfilled cells; update matrix each time. Continue until every viable cell
       is filled or explicitly marked non-viable ("all possible combinations").
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
@@ -98,3 +107,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - 2026-07-19 iter 6 (B6 + A6): 5 combo pages — put-protected-dip-buying, oi-aware-grid,
   narrative-position-vol-targeting, smart-money-vs-crowd-divergence, low-leverage-vol-selling.
   Matrix 47/44/9. A6: tags normalized (238 pages), 26 tags adopted into schema files.
+- 2026-07-19 iter 7 (B7 + A8): 5 combo pages — funding-window-timing, grid-with-tail-hedge,
+  sentiment-positioning-divergence, long-options-trend-expression,
+  cross-venue-cascade-dislocation; +1 cell resolved via existing pullback-trading. Matrix
+  53/38/9. A8 named-duplicate fixes done; A9 (54 same-stem collisions) queued as new item.

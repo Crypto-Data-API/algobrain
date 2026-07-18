@@ -1,5 +1,5 @@
 ---
-title: "Convex Finance"
+title: "Convex Finance (Protocol)"
 type: entity
 created: 2026-04-15
 updated: 2026-06-11
