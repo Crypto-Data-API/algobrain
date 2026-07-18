@@ -3,7 +3,8 @@ title: "MSTR Bitcoin-Treasury Premium-NAV Unwind (Short MSTR / Long IBIT Pair)"
 type: narrative
 created: 2026-05-10
 updated: 2026-05-10
-status: proposed
+status: draft
+tags: [crypto, bitcoin, event-driven]
 side: pair
 tickers_primary: [MSTR, IBIT]
 tickers_secondary: [MARA, RIOT, COIN]

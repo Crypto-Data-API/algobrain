@@ -4,6 +4,7 @@ type: redirect
 created: 2026-04-15
 updated: 2026-06-10
 status: good
+tags: [crypto, defi]
 aliases: ["Aster 2", "aster-2", "ASTER"]
 ---
 

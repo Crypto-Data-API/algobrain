@@ -4,6 +4,7 @@ type: redirect
 created: 2026-04-10
 updated: 2026-06-11
 status: good
+tags: [crypto, defi]
 aliases: ["EtherFi", "ether.fi", "ETHFI", "Ether.fi", "etherfi"]
 ---
 

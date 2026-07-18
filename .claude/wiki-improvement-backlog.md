@@ -31,10 +31,11 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       zero-knowledge-proof(→zero-knowledge-proofs), dao, altcoins, gaming-tokens,
       delegated-proof-of-stake, data-availability, crypto-market-regimes, justin-sun (entity
       stub), and next ~10 by frequency. Unlink `nvidia` (out of scope).
-- [ ] A4. Repair 4 truncated `2026-04-22-gap-finder-…` source links (~206 refs): find real
-      filenames in `wiki/sources/`, fix links by script (or add redirect pages).
-- [ ] A5. Frontmatter: add tags to the 18 pages missing them; fix 3 non-schema statuses
-      (`proposed` ×2, `active-catalyst-window` ×1 → nearest schema value, note in body).
+- [x] A4. (2026-07-19, iter 4) Gap-finder citation repair: 7 source stubs created (4 from
+      audit + 3 more variants found in full scan), comma-variant links normalized in 3 files.
+      Broken gap-finder refs 228 → 0.
+- [x] A5. (2026-07-19, iter 4) Tags added to all 18 pages missing them; 3 non-schema
+      statuses fixed (proposed→draft ×2, active-catalyst-window→review).
 - [ ] A6. Tags: normalize variants (stablecoin→stablecoins, perpetuals→perpetual-futures, …);
       review the `stocks` tag on 132 pages (scope smell — retag or rescope); adopt genuinely
       useful new tags (macro, security, solana, real-world-assets, execution, exploits,
@@ -62,7 +63,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8 (B2 ✓ iter 2; B3 ✓ iter 3; 59 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
+- [ ] B2–B8 (B2 ✓ iter 2; B3 ✓ iter 3; B4 ✓ iter 4; 54 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
       highest-value unfilled cells; update matrix each time. Continue until every viable cell
       is filled or explicitly marked non-viable ("all possible combinations").
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
@@ -91,3 +92,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   funding-conditioned-vol-selling, off-hours-liquidation-playbook,
   narrative-with-trend-confirmation, onchain-capitulation-confluence. Matrix 32/59/9.
   A1 coin index shipped: orphans 1,339 → 40. Zero new broken links.
+- 2026-07-19 iter 4 (B4 + A4 + A5): 5 combo pages — correlation-regime-pairs,
+  event-vol-buying, session-aware-mean-reversion, leverage-stress-tail-hedge,
+  spot-led-momentum-filter. Matrix 37/54/9. A4: 7 gap-finder source stubs, refs 228→0.
+  A5: frontmatter completeness now clean. Lint link issues 525→513.

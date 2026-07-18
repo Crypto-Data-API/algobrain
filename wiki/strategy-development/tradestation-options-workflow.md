@@ -315,6 +315,6 @@ The full sequence is rare in practice — most retail traders skip steps 4-6 and
 
 ## Sources
 
-(Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls,-tradesta]]) — gap-analysis report identifying TradeStation tips/tricks and Greeks-based sizing as documentation gaps.
+(Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls-tradesta]]) — gap-analysis report identifying TradeStation tips/tricks and Greeks-based sizing as documentation gaps.
 
 Primary references: TradeStation Help → EasyLanguage Essentials, TradeStation OptionStation Pro user guide, Portfolio Maestro documentation, [[traderspost]] integration documentation, public premium-selling literature (tastytrade research notes).

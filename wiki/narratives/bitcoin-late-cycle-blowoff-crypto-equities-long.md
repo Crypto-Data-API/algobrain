@@ -3,7 +3,8 @@ title: "Bitcoin Late-Cycle Blow-Off → Long Crypto-Beta Equities"
 type: narrative
 created: 2026-05-09
 updated: 2026-05-09
-status: proposed
+status: draft
+tags: [crypto, bitcoin, event-driven]
 side: long
 tickers_primary: [MSTR, COIN]
 tickers_secondary: [MARA, RIOT, IBIT, CLSK]

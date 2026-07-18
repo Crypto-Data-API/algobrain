@@ -4,6 +4,7 @@ type: redirect
 created: 2026-04-15
 updated: 2026-07-14
 status: good
+tags: [options]
 aliases: ["Covered Call Strategy", "Covered Call Writing", "Buy-Write"]
 ---
 

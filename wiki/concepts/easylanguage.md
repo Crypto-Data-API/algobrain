@@ -228,6 +228,6 @@ For options overlay programs, the typical pattern is: research the rule in Pytho
 
 ## Sources
 
-(Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls,-tradesta]]) — gap-analysis report identifying EasyLanguage and TradeStation Greeks integration as wiki gaps.
+(Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls-tradesta]]) — gap-analysis report identifying EasyLanguage and TradeStation Greeks integration as wiki gaps.
 
 Primary references: TradeStation EasyLanguage Essentials manual (current edition), TradeStation Help → Strategy Performance Report documentation, Portfolio Maestro user guide, MultiCharts PowerLanguage compatibility notes, public TradingApp Store catalog.

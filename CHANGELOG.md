@@ -4,6 +4,16 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 4: combination batch 4 + citation/frontmatter repair
+
+- 5 more combination strategies (full buildable schema): correlation-regime-pairs,
+  event-vol-buying, session-aware-mean-reversion, leverage-stress-tail-hedge,
+  spot-led-momentum-filter. Matrix now **37 covered / 54 planned / 9 non-viable**.
+- **Citation repair:** 7 gap-finder source stubs restore citation targets that were never
+  archived; truncated/comma-variant links normalized. Broken gap-finder refs 228 → 0.
+- **Frontmatter completeness:** tags added to the 18 pages missing them; 3 non-schema
+  status values normalized. Lint link issues 525 → 513.
+
 ## 2026-07-19 — Improvement loop, iteration 3: combination batch 3 + coin index
 
 - 5 more combination strategies (full buildable schema, honest data-source caveats):

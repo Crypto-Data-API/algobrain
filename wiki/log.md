@@ -10,6 +10,21 @@ tags: [meta, log]
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
 
+## 2026-07-19 — Batch B4: 5 New Combination Strategy Pages
+
+- Pages created (5):
+  - [[correlation-regime-pairs]] — stat-arb/pairs × regime gate: pairs/stat-arb book operated only while the pair's cointegrating relationship is demonstrably active (rolling 30d correlation ≥ 0.70, ADF cointegration p ≤ 0.10, OU half-life 3–45 days); flatten immediately on correlation breakdown below 0.60 rather than averaging into a structurally broken spread; composable with pairs-with-funding-differential's funding-differential gate as a second layer
+  - [[event-vol-buying]] — vol buying × unlock/event calendar: buy ATM straddles or OTM strangles on Deribit ahead of scheduled binary-outcome catalysts (Bitcoin halvings, SEC ETF decision deadlines, major Ethereum hard forks, significant token unlocks, regulatory votes) when ATM IV on the catalyst expiry is within 10% of its 30-day trailing DVOL average (event not yet priced); exit on +20 vol-point IV expansion or within 48h post-event; the long-side event counterpart to funding-conditioned-vol-selling
+  - [[session-aware-mean-reversion]] — mean-reversion × session/time filter: RSI/VWAP/Bollinger-band mean-reversion with session-conditional parameter table (peak / Asia-overnight / weekend / session-transition); lower RSI threshold and lower VWAP deviation required in thin sessions; session-open transition windows (+0.2× size bonus); explicitly NOT a cascade strategy (that is off-hours-liquidation-playbook); the routine daily drift-and-revert that occurs without liquidation spikes
+  - [[leverage-stress-tail-hedge]] — vol buying/tail hedge × OI filter: standalone OTM put accumulation strategy (no carrier book) triggered when all three leverage-stress gates are simultaneously elevated (BTC OI/market-cap ≥ 3.0%, 7d-average 8h funding ≥ 0.04%, long/short ratio ≥ 1.8); exit on crash payoff (≥12% price drop), DVOL expansion (+25 vol points), or stress deactivation; differentiated from carry-with-tail-hedge (hedge secondary to a carry book) and convex-tail-hedge-arbitrage (vol-cheapness triggered)
+  - [[spot-led-momentum-filter]] — momentum × cross-venue: momentum entries conditioned on three simultaneous cross-venue flow-origin signals (Coinbase premium ≥ 0.05% sustained ≥ 2 of 3 hours; 8h funding ≤ 0.03%; spot volume ≥ 1.2× 7d avg AND OI 3d growth ≤ 15%); spot-led moves reflect real capital inflow; perp-led moves are leverage that mean-reverts; differentiated from funding-filtered-momentum which gates on funding LEVEL, not flow ORIGIN
+- Pages updated (2):
+  - [[combination-matrix]] — 5 new cells linked (stat-arb × regime gate, vol buying × event calendar, mean-reversion × session filter, vol buying × OI filter, momentum × cross-venue); session-aware-mean-reversion also placed in momentum × session filter cell (footnote ¹² added); counts updated (existing: 32→37, planned: 59→54); footnote ¹² added; Batch B4 section prepended
+  - [[log]] (this file) — Batch B4 entry prepended
+- Candidates skipped (0 of 5 primaries): all five primary candidates confirmed additive. spot-led-momentum-filter assessed against funding-filtered-momentum and confirmed distinct (flow origin vs funding level). No backups used.
+- All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure (lead with explicit differentiation from nearest neighbors + Edge source + Why this edge exists + Null hypothesis + Rules + Pseudocode + Indicators + Example trade with concrete illustrative round-trip numbers + Performance + Capacity + What kills it + Kill criteria + Advantages + Disadvantages + Sources + Getting the Data (CryptoDataAPI) + Related), honest about Deribit options API requirement (consistent with funding-conditioned-vol-selling), verified CryptoDataAPI endpoints only (coinbase-premium, funding-rates, open-interest, dvol-history, klines, liquidations, long-short-ratio, regimes/current), approved tags only.
+
+
 ## 2026-07-19 — Batch B3: 5 New Combination Strategy Pages
 
 - Pages created (5):

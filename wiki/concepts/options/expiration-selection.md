@@ -262,4 +262,4 @@ DTE selection is inseparable from [[non-linear-payoff|non-linearity]]. The theta
 
 ## Sources
 
-- (Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls,-tradesta]])
+- (Source: [[2026-04-22-gap-finder-stock-options-trading-pitfalls-tradesta]])
