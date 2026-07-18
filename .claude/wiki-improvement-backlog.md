@@ -25,12 +25,13 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - [x] A2. (2026-07-19, iter 2) Refresh stale counts in `wiki/overview.md`. Note: the audit's
       claim of a stale count in `data-sources-overview.md` was wrong — no such claim exists
       there; left untouched.
-- [ ] A3. Broken-link round 2 (~1,200 refs): stubs/redirects for top targets —
-      stablecoin(→stablecoins), depeg, tether(→tether-limited), tokenization,
-      optimistic-rollup, decentralized-finance(→defi), binance-coin(→bnb),
-      zero-knowledge-proof(→zero-knowledge-proofs), dao, altcoins, gaming-tokens,
-      delegated-proof-of-stake, data-availability, crypto-market-regimes, justin-sun (entity
-      stub), and next ~10 by frequency. Unlink `nvidia` (out of scope).
+- [x] A3. (2026-07-19, iter 8) 30 pages created: 23 concept stubs (optimistic-rollup,
+      data-availability, sequencer, mica, liquid-restaking, synthetic-dollar, altcoins, …),
+      4 entity stubs (justin-sun, paxos, securitize, cronos), 2 source stubs, 1 redirect.
+      NOTE: alias-aware scan showed the audit's original top targets (stablecoin, tether,
+      dao, …) already resolve via page aliases in Obsidian — the real gap was the L2/infra
+      concept layer. Alias-aware broken refs 4,360 → 3,600; remaining tail ≤18 refs/target
+      is by-design forward links. Lint link issues 511 → 450.
 - [x] A4. (2026-07-19, iter 4) Gap-finder citation repair: 7 source stubs created (4 from
       audit + 3 more variants found in full scan), comma-variant links normalized in 3 files.
       Broken gap-finder refs 228 → 0.
@@ -68,9 +69,12 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       unlock/event calendar, sentiment-extreme filter, session/time filter). Mark existing
       combos (link), non-viable cells (one-line why), and planned cells. PLUS first batch of
       ~5 new combination pages on the full buildable schema.
-- [ ] B2–B8 (B2–B7 ✓ iters 2–7; 38 planned cells remain). Combination batches: ~5 new combination pages each, chosen from the matrix's
-      highest-value unfilled cells; update matrix each time. Continue until every viable cell
-      is filled or explicitly marked non-viable ("all possible combinations").
+- [x] B2–B8. (iters 2–8) DONE: 35 new combination pages across 7 batches; B8 added an
+      honest convergence pass (29 thin cells → non-viable with per-cell footnote reasons).
+      Matrix: 61 covered / 9 planned / 50 non-viable of 120 cells.
+- [ ] B8b. FINAL combination mini-batch: resolve the last 9 planned cells (write pages for
+      the viable ones — incl. held-over backups vol-scaled-carry-sizing, oi-gated-pairs —
+      or mark non-viable with reasons). Completes "all possible combinations".
 - [ ] B9. Kill-criteria completion: add `kill_criteria` frontmatter + "## Kill criteria"
       section to buildable strategy pages missing them (~80–120 pages, batches of ~25).
 - [ ] B10. Example-trade completion: add "## Example trade" with concrete round-trip numbers
@@ -111,3 +115,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   sentiment-positioning-divergence, long-options-trend-expression,
   cross-venue-cascade-dislocation; +1 cell resolved via existing pullback-trading. Matrix
   53/38/9. A8 named-duplicate fixes done; A9 (54 same-stem collisions) queued as new item.
+- 2026-07-19 iter 8 (B8 + A3): 5 combo pages — vol-balanced-pairs, complacency-vol-buying,
+  narrative-crowding-exit, unlock-cascade-watch, event-calendar-risk-gating (multi-cell);
+  + convergence pass (29 cells → non-viable, reasoned). Matrix 61/9/50 of 120. A3: 30 stub
+  pages, alias-aware broken refs 4,360→3,600, lint 511→450.

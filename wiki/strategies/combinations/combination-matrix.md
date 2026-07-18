@@ -29,18 +29,18 @@ A single cell can hold multiple page references if more than one page exists for
 
 | Primitive \ Overlay | Regime gate | Funding filter | OI filter | Trend gate | Tail-hedge overlay | Vol targeting | Cross-venue | Unlock/event calendar | Sentiment-extreme filter | Session/time filter |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | [[crowded-long-funding-fade]] | [[funding-window-timing]] ¹⁷ |
-| **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | planned | planned | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | planned | planned | planned |
+| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | [[event-calendar-risk-gating]] ²³ | [[crowded-long-funding-fade]] | [[funding-window-timing]] ¹⁷ |
+| **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | — ²⁴ | — ²⁵ | [[carry-with-tail-hedge]] | planned | [[hl-vs-cex-funding-divergence]] | [[event-calendar-risk-gating]] ²³ | — ²⁶ | — ²⁷ |
 | **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | [[spot-led-momentum-filter]] | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | [[session-aware-mean-reversion]] ¹² |
-| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | [[pullback-trading]] ²² | [[put-protected-dip-buying]] ¹⁴ | planned | planned | planned | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
-| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | planned | [[cascade-monetization-rotation]] ¹³ | planned | [[cross-venue-cascade-dislocation]] ¹⁸ | planned | planned | [[off-hours-liquidation-playbook]] |
-| **Narrative / event** | [[regime-adaptive-strategy]] | planned | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | [[narrative-position-vol-targeting]] | planned | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | planned |
-| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | [[low-leverage-vol-selling]] ¹⁵ | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | planned | planned | [[post-panic-vol-selling]] | planned |
-| **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | planned | [[leverage-stress-tail-hedge]] | [[long-options-trend-expression]] ¹⁹ | — ⁶ | planned | planned | [[event-vol-buying]] | planned | planned |
-| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | [[grid-with-tail-hedge]] ²⁰ | planned | planned | planned | planned | [[session-overlap-momentum]] ⁸ |
-| **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | planned | planned | planned | planned | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | planned | planned |
-| **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | planned | planned | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | planned |
-| **Sentiment** | [[regime-adaptive-strategy]] | [[sentiment-positioning-divergence]] ²¹ | planned | [[crypto-beta-rotation]] | planned | planned | planned | planned | — ¹⁰ | planned |
+| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | [[pullback-trading]] ²² | [[put-protected-dip-buying]] ¹⁴ | planned | planned | — ²⁸ | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
+| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | — ²⁹ | [[cascade-monetization-rotation]] ¹³ | — ³⁰ | [[cross-venue-cascade-dislocation]] ¹⁸ | [[unlock-cascade-watch]] ³¹ | — ³² | [[off-hours-liquidation-playbook]] |
+| **Narrative / event** | [[regime-adaptive-strategy]] | [[narrative-crowding-exit]] ³³ | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | planned | [[narrative-position-vol-targeting]] | — ³⁴ | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | — ³⁵ |
+| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | [[low-leverage-vol-selling]] ¹⁵ | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | — ³⁶ | [[event-calendar-risk-gating]] ²³ | [[post-panic-vol-selling]] | — ³⁷ |
+| **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | — ³⁸ | [[leverage-stress-tail-hedge]] | [[long-options-trend-expression]] ¹⁹ | — ⁶ | — ³⁹ | — ⁴⁰ | [[event-vol-buying]] | [[complacency-vol-buying]] ⁴¹ | — ⁴² |
+| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | [[grid-with-tail-hedge]] ²⁰ | planned | — ⁴³ | [[event-calendar-risk-gating]] ²³ | — ⁴⁴ | [[session-overlap-momentum]] ⁸ |
+| **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | planned | — ⁴⁵ | planned | [[vol-balanced-pairs]] ⁴⁶ | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | — ⁴⁷ | — ⁴⁸ |
+| **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | planned | — ⁴⁹ | — ⁵⁰ | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | — ⁵¹ |
+| **Sentiment** | [[regime-adaptive-strategy]] | [[sentiment-positioning-divergence]] ²¹ | — ⁵² | [[crypto-beta-rotation]] | planned | — ⁵³ | — ⁵⁴ | — ⁵⁵ | — ¹⁰ | — ⁵⁶ |
 
 ---
 
@@ -90,15 +90,103 @@ A single cell can hold multiple page references if more than one page exists for
 
 **²² [[pullback-trading]]** is listed in the mean-reversion × trend gate cell as the existing page that substantively covers higher-timeframe-trend-gated mean-reversion entries. [[pullback-trading]] documents the retracement entry framework (buying weakness in intact uptrends after leveraged weak hands are flushed; entry conditioned on the higher-timeframe trend remaining intact). [[trend-pullback-rally-fade]] (Hyperliquid basket, piloted) covers the same framework in a more systematic basket form. The B7 backup candidate `higher-timeframe-reversion-gate` was assessed and found covered by these two pages; no new page was written.
 
+**²³ [[event-calendar-risk-gating]]** covers three matrix cells: **funding carry × unlock/event calendar**, **grid/market-making × unlock/event calendar**, and **vol selling × unlock/event calendar**. All three involve mechanical/passive strategies that must be paused or de-sized around scheduled binary events (major unlocks, protocol upgrades, macro data releases, regulatory decisions). One unified framework page with per-strategy parameter guidance was created rather than three thin separate pages. The page also covers the basis/cash-and-carry × unlock/event cell (see footnote ²³ applied to that row) because the carry book unwind described for the funding carry row is identical in structure for basis/C&C books. Differentiated from [[event-vol-buying]] (TRADES the event — buys vol; this page AVOIDS the event — pauses passive strategies), [[regime-gated-grid]] (regime-based grid halt, lagging indicator; this page is calendar-based, forward-looking), and [[trend-aware-carry]] (trend-based carry reduction; this page is event-calendar-based halt).
+
+**²⁴ Basis × OI filter = non-viable.** The basis/cash-and-carry trade is market-direction-neutral (long spot, short perp). An OI filter on a market-neutral structure does not produce a distinct overlay: high OI is already handled by the regime gate and the vol-targeting layer. Not additive.
+
+**²⁵ Basis × trend gate = non-viable.** The basis/C&C trade is delta-neutral by construction. A trend gate on a direction-neutral trade introduces ambiguity: in a bull trend, funding is high (already captured by [[trend-aware-carry]]); the combination does not constitute a distinct strategy. [[trend-aware-carry]] substantively covers carry-in-trend.
+
+**²⁶ Basis × sentiment-extreme filter = non-viable.** Basis/C&C is market-neutral carry; a sentiment-extreme filter would gate a neutral trade on a directional signal. The sentiment signal adds no independent information to the carry spread, which is already captured by the funding filter in [[funding-vs-basis-rotation]].
+
+**²⁷ Basis × session/time filter = non-viable.** Basis/C&C convergence is a multi-day to multi-week trade; session-timing overlays do not add meaningful selectivity to a trade whose DTE spans multiple session cycles. Settlement timing for the perp leg is covered by [[funding-window-timing]] (funding carry row).
+
+**²⁸ Mean-reversion × unlock/event = non-viable.** During an unlock event window, the correct action for a mean-reversion book is to pause it — which is a general risk-management instruction, not a named combination. The regime gate ([[regime-adaptive-strategy]]) and OI gate ([[oi-aware-grid]] logic) already handle the structural risk that unlocks create; a separate mean-reversion × unlock page would merely instruct: "check the event calendar before entering a mean-reversion trade."
+
+**²⁹ Liquidation plays × trend gate = non-viable.** Cascade-fade entries are contrarian — they fade the direction of the liquidation move. A trend gate that restricts entries to the trend direction is the opposite of the strategy's logic: the cascade direction IS the trend during a cascade. Not a distinct overlay.
+
+**³⁰ Liquidation plays × vol targeting = non-viable.** Cascade-fade positions are sized based on cascade severity (real-time liquidation volume, spread magnitude) — not by realized vol. The two sizing approaches conflict and vol targeting does not add a meaningful independent dimension to cascade-fade execution.
+
+**³¹ [[unlock-cascade-watch]]** is placed in the liquidation plays × unlock/event calendar cell because the strategy specifically monitors the LIQUIDATION STRUCTURE (OI, funding, stop/liquidation clusters) around large scheduled token unlocks — staging cascade-fade limit orders and de-risking existing longs ahead of the risk window. The defining P&L mechanism is the cascade-fade (liquidation plays family); the unlock/event calendar is the organizing anchor. Differentiated from [[unlock-short-with-crowding-gate]] (directional short into the unlock; different action), [[unlock-pair-hedge]] (beta-neutral pair structure; different instrument), and [[unlock-aware-momentum]] (momentum book pause; different primitive).
+
+**³² Liquidation plays × sentiment-extreme filter = non-viable.** Cascade-fade entries are triggered by real-time liquidation volume and OI/funding data — millisecond-scale signals. Sentiment indicators (Fear & Greed) are daily metrics too slow and too indirect for cascade-fade execution. The sentiment context is already embedded in the OI/funding cascade-confirmation gate.
+
+**³³ [[narrative-crowding-exit]]** is placed in the narrative/event × funding filter cell because the strategy uses the funding rate (and OI) as the PRIMARY EXIT GATE for narrative-driven long positions: elevated funding + elevated OI = the narrative has become the crowded consensus trade, triggering exit or trim. The funding filter is the crowding-detection mechanism; the narrative long is the primitive. Differentiated from [[narrative-with-trend-confirmation]] (entry gate — this is the exit gate), [[crowded-long-funding-fade]] (enters a directional short — this exits a long), and [[contrarian-extremes]] (whole-market sentiment fade — this targets token-specific narrative crowding).
+
+**³⁴ Narrative × cross-venue = non-viable.** Narratives drive directional price moves; cross-venue price arb is about execution, not narrative selection. No meaningful combination: narrative entries are unidirectional (long); cross-venue arb is directionally neutral.
+
+**³⁵ Narrative × session/time filter = non-viable.** Narrative catalysts are event-driven, not session-dependent; they occur at announcement time regardless of session. Session filters add no selectivity to narrative entry timing.
+
+**³⁶ Vol selling × cross-venue = non-viable.** The crypto short-vol instrument set is concentrated on Deribit; cross-venue diversification of short-vol positions is an operational consideration, not a distinct combination strategy generating independent edge.
+
+**³⁷ Vol selling × session/time filter = non-viable.** Short-vol entries are gated by IV level (DVOL percentile, VRP), not session timing. No meaningful session-timing edge exists for options premium selling in a 24/7 market with globally continuous IV pricing.
+
+**³⁸ Vol buying × funding filter = non-viable.** The funding signal is already incorporated as a gate component in [[leverage-stress-tail-hedge]] (Gate 2: 7d avg funding ≥ +0.04%/8h) and [[complacency-vol-buying]] (Gate 3: funding ≥ +0.030%/8h). A standalone vol buying × funding filter page would be redundant with these existing pages; both funding-gated vol-buying setups are already covered.
+
+**³⁹ Vol buying × vol targeting = non-viable.** Vol targeting (scaling position by current realized vol level) applied to a long-vol position is circular: long-vol positions already have built-in vega scaling through the options Greeks. A separate vol-targeting overlay does not add an independent dimension; the IV-cheap gate in [[complacency-vol-buying]] and [[long-options-trend-expression]] already encodes the "buy more when IV is cheap" logic.
+
+**⁴⁰ Vol buying × cross-venue = non-viable.** The crypto long-vol instrument set is concentrated on Deribit; cross-venue diversification of long-vol positions is an operational consideration without a distinct strategy-level combination.
+
+**⁴¹ [[complacency-vol-buying]]** is placed in the vol buying/tail hedge × sentiment-extreme filter cell because the strategy purchases cheap vol (OTM puts or ATM straddles on Deribit) specifically when the three-factor COMPLACENCY gate passes: Fear & Greed ≥ 75 for ≥ 3 days (sentiment extreme — greed) AND DVOL ≤ 35th percentile (IV cheap) AND 7d avg funding ≥ +0.030%/8h or OI ≥ 70th pct (leverage building). The sentiment-extreme filter (greed extreme) is the primary trigger; the DVOL-cheap and leverage-building conditions are confirmation gates. Differentiated from [[leverage-stress-tail-hedge]] (OI-GATED trigger — objective stress metrics, not stated sentiment), [[event-vol-buying]] (calendar-driven, direction-agnostic; not sentiment-driven), and [[long-options-trend-expression]] (buys calls in confirmed uptrends; directionally bullish vs this page's crash-insurance framing).
+
+**⁴² Vol buying × session/time filter = non-viable.** Long-vol positions (options accumulation) are not session-dependent; options are purchased based on IV level, trend/sentiment gates, and event calendars — none of which have meaningful session-timing structure in 24/7 crypto markets.
+
+**⁴³ Grid × cross-venue = non-viable.** Cross-venue grids are a venue-arbitrage execution approach, not a named combination strategy; the structural cross-venue edge in liquidation and funding contexts is already documented in [[cross-venue-cascade-dislocation]] and [[hl-vs-cex-funding-divergence]].
+
+**⁴⁴ Grid × sentiment-extreme filter = non-viable.** Sentiment extremes that would kill a grid are already detected by the regime gate (ADX, Bollinger-bandwidth in [[regime-gated-grid]]) or the OI gate ([[oi-aware-grid]]); a separate sentiment gate adds no independent information given these existing guards.
+
+**⁴⁵ Stat-arb × trend gate = non-viable.** Applying a trend gate to market-neutral pairs trading converts the stat-arb strategy into a directional trade; the combination destroys the market-neutral property that is the primitive's core structural feature.
+
+**⁴⁶ [[vol-balanced-pairs]]** is placed in the stat-arb/pairs × vol targeting cell because the strategy applies per-leg realized-vol scaling to a cointegrated spread so each leg contributes equal daily risk — eliminating the most common implementation flaw in crypto pairs where the high-vol leg (ETH in a BTC/ETH pair) dominates P&L, making the "pairs trade" effectively a directional bet on the high-vol leg. The vol-targeting overlay applies at the INTRA-SPREAD level (sizing the two legs relative to each other) rather than the portfolio level. Differentiated from [[correlation-regime-pairs]] (regime gate — pair eligibility, not leg sizing), [[pairs-with-funding-differential]] (carry-alignment filter — which leg to be on, not how much of each), and [[vol-targeted-trend-following]] (portfolio-level vol targeting on a directional position — different primitive and different application scope).
+
+**⁴⁷ Stat-arb × sentiment-extreme filter = non-viable.** Sentiment as an overlay for stat-arb entries has no clear mechanism; spread mean-reversion is driven by the cointegrating relationship (structural anchor), not by overall market sentiment. Sentiment extremes correlate with high-vol regimes that break cointegration — already handled by [[correlation-regime-pairs]]'s regime gate.
+
+**⁴⁸ Stat-arb × session/time filter = non-viable.** Pairs trading entries are z-score-driven; the half-life of the spread (3–25 days per [[vol-balanced-pairs]] and [[correlation-regime-pairs]]) spans multiple session cycles. Session filters add no meaningful selectivity to spread mean-reversion timing.
+
+**⁴⁹ On-chain × vol targeting = non-viable.** Vol targeting on on-chain flow positions is a sizing rule; it is a parameter of the position, not a distinct combination strategy. The [[vol-targeted-trend-following]] framework already covers vol-scaled sizing for the trend component; applying vol targeting to on-chain positions is handled as part of standard portfolio risk management, not as a named combination.
+
+**⁵⁰ On-chain × cross-venue = non-viable.** On-chain signals inherently observe all-venue flows (exchange inflows/outflows, whale movements across CEXs); there is no additional "cross-venue overlay" to apply on top of on-chain data — the on-chain signal already aggregates cross-venue behavior.
+
+**⁵¹ On-chain × session/time filter = non-viable.** On-chain accumulation and flow signals are not session-dependent; whale activity occurs 24/7 independent of geographic session overlaps. Session filters add no meaningful timing selectivity to on-chain signals.
+
+**⁵² Sentiment × OI filter = non-viable.** An OI filter on sentiment entries would duplicate [[sentiment-positioning-divergence]]'s funding/positioning gate (which already validates/invalidates the sentiment signal with derivative positioning data). A standalone sentiment × OI page would be a weaker, less differentiated version of the existing page.
+
+**⁵³ Sentiment × vol targeting = non-viable.** Vol-targeting applied to a sentiment-contrarian position is a sizing rule, not a distinct combination; [[vol-targeted-trend-following]] and [[narrative-position-vol-targeting]] already cover vol-scaled sizing for the relevant primitives. Applying it to a sentiment strategy adds a sizing parameter, not a strategy-level edge.
+
+**⁵⁴ Sentiment × cross-venue = non-viable.** Sentiment is a market-aggregate signal; cross-venue price differences are not meaningfully driven by sentiment signals; no distinct combination edge exists.
+
+**⁵⁵ Sentiment × unlock/event calendar = non-viable.** Combining an unlock event with a sentiment confirmation (e.g., "only fade the unlock short if sentiment is also at a greed extreme") produces very rare signals and adds marginal selectivity already provided by the funding/OI crowding gate in [[unlock-short-with-crowding-gate]]. The combination is too thin to constitute a named strategy.
+
+**⁵⁶ Sentiment × session/time filter = non-viable.** Sentiment (Fear & Greed) is a daily metric; session-timing filters add no meaningful granularity to sentiment-extreme entries, which are inherently multi-day setups.
+
 ---
 
 ## Matrix Cell Counts (as of 2026-07-19)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 53 |
-| Planned (gap to fill) | 38 |
-| Non-viable (`—`) | 9 |
+| Linked to existing page | 61 |
+| Planned (gap to fill) | 9 |
+| Non-viable (`—`) | 50 |
+
+*B8 changes: +8 linked (7 new page cells + basis/unlock covered by event-calendar-risk-gating); −37 planned (8 to linked, 29 to non-viable via Part 2 reclassification); +41 non-viable (29 new reclassifications + 12 existing from footnotes ¹–¹⁰ + new ones added in B8 footnotes ²³–⁵⁶).*
+
+*Note on non-viable count: footnotes ¹–¹⁰ covered 9 pre-existing non-viable cells. B8 Part 2 adds 29 newly reclassified cells (footnotes ²⁴–²⁷, ²⁸–³², ³⁴–³⁵, ³⁶–³⁷, ³⁸–⁴², ⁴³–⁴⁴, ⁴⁵, ⁴⁷–⁴⁸, ⁴⁹–⁵¹, ⁵²–⁵⁶) plus the pre-existing 9 from B1–B7. No genuinely viable unwritten combinations were force-reclassified as non-viable: remaining 9 planned cells are all honest gaps.*
+
+---
+
+## Batch B8 New Pages (2026-07-19)
+
+Five new combination pages created in this batch — matrix cells updated above:
+
+- [[vol-balanced-pairs]] — stat-arb/pairs × vol targeting (per-leg vol scaling so both legs contribute equal daily risk: notional_low-vol = total × vol_high / (vol_high + vol_low); eliminates the most common crypto pairs flaw where the high-vol leg [ETH in BTC/ETH] dominates P&L and converts the market-neutral spread into an unintended directional bet; eligibility: 60d correlation ≥ 0.70, cointegration p ≤ 0.05, OU half-life 3–25 days; entry at z-score ≥ 2.0; exit at z-score ≤ 0.5 or 3.5 stop or regime break; weekly vol rebalance if either leg's vol changes ≥ 15%; composable with correlation-regime-pairs [regime pre-filter] and pairs-with-funding-differential [carry alignment filter]; explicitly differentiated from correlation-regime-pairs [regime gate, not leg sizing], pairs-with-funding-differential [carry filter, not vol balance], and vol-targeted-trend-following [portfolio-level sizing on a directional position])
+- [[complacency-vol-buying]] — vol buying × sentiment-extreme filter (buy cheap vol/tails when three-factor complacency gate passes: Fear & Greed ≥ 75 for ≥ 3 days [sustained greed] AND DVOL ≤ 35th pct 52w AND ≤ 90% of 30d avg [IV cheap] AND 7d avg funding ≥ +0.030%/8h or OI ≥ 70th pct [leverage building]; primary instrument: OTM put 10–15% OTM DTE 28–45 [if funding ≥ 0.050%/8h] or ATM straddle DTE 21–35 [if funding 0.030–0.050%/8h]; budget 1.0–2.0% of portfolio; exits: 1.5× profit target, DVOL +20 vol pts spike, sentiment normalises to ≤ 50 without ≥ 5% price decline, DTE-7 time exit; the symmetric complement of post-panic-vol-selling; explicitly differentiated from leverage-stress-tail-hedge [OI-stress-gated, not sentiment-gated — fires earlier than OI threshold in sentiment cycle], event-vol-buying [calendar-driven straddles, not sentiment-driven], and long-options-trend-expression [bullish call buying in trend, not crash insurance at greed top])
+- [[narrative-crowding-exit]] — narrative/event × funding filter (exit discipline for any narrative long: ride while positioning is clean, exit/trim when funding + OI confirm the narrative has become the consensus crowded trade; Gate 1: 8h funding ≥ +0.050%/8h AND 7d avg ≥ +0.030%/8h; Gate 2: OI ≥ 75th pct of 30d distribution OR 7d OI change ≥ +20%; Gate 3 optional: L/S ≥ 1.60 → triple-confirmation; actions: both-gates = full exit; Gate 1 only = 65% trim with 6% trailing stop on residual 35%; explicitly differentiated from narrative-with-trend-confirmation [entry gate — this is the exit gate], crowded-long-funding-fade [enters a short — this exits a long], and contrarian-extremes [whole-market sentiment fade — this targets token-specific narrative crowding]; entry-strategy-agnostic: works alongside any narrative entry source)
+- [[unlock-cascade-watch]] — liquidation plays × unlock/event calendar (monitor liquidation structure around large cliff unlocks ≥ 3% of supply; risk classification: HIGH [OI ≥ 75th pct AND 7d funding ≥ +0.030%/8h], MODERATE [OI 50th–75th pct OR funding +0.015–0.030%/8h], LOW; de-risk existing longs to 25% [HIGH] or 50% [MODERATE] by T − 7; cascade-fade orders: GTC limit buys at −8% [30%], −14% [40%], −20% [30%] of T − 1 close when OI ≥ 70th pct AND funding ≥ +0.025%/8h AND price not already −8% pre-unlock; cascade confirmed when 1h liq volume ≥ 2× 7d avg; post-fill target 8–15% recovery, stop at −10% below lowest fill; explicitly differentiated from unlock-short-with-crowding-gate [directional short], unlock-aware-momentum [momentum book pause without cascade-fade component], unlock-pair-hedge [beta-neutral pairs], and liquidation-cascade-fade [event-calendar-agnostic])
+- [[event-calendar-risk-gating]] — MULTI-CELL: grid × unlock/event + funding carry × unlock/event + vol selling × unlock/event (also covers basis × unlock/event); unified framework for pausing/de-sizing mechanical/passive strategies around scheduled binary events; Tier 1 [full halt ±3 days]: halvings, ETF/regulatory decisions, major hard forks, unlocks ≥ 10% supply; Tier 2 [50–75% reduction ±2 days]: 4–9% unlocks, FOMC when macro correlation active, major EIPs; per-strategy parameters: grid [60% reduction T2; resume at DVOL −15 pts from peak AND price in range], carry [50% T2; resume at funding within 30% of pre-event], short-vol [75% T2; CLOSE all short options for T1; resume at DVOL −20 pts from peak]; explicitly differentiated from event-vol-buying [TRADES the event — buys vol; this AVOIDS the event — pauses passive books], regime-gated-grid [lagging vol-regime trigger; this is forward-looking calendar-based], and trend-aware-carry [trend-based carry reduction; this is event-date-based halt])
+
+Skips (0 of 5 primaries): all five primary candidates confirmed additive. Backup `vol-scaled-carry-sizing` (funding carry × vol targeting) and `oi-gated-pairs` (stat-arb × OI filter) remain planned — not written.
+
+Part 2 reclassifications: 29 `planned` cells reclassified as non-viable (`—`) via honest assessment (see footnotes ²⁴–²⁷, ²⁸–³², ³⁴–³⁵, ³⁶–³⁷, ³⁸–⁴², ⁴³–⁴⁴, ⁴⁵, ⁴⁷–⁴⁸, ⁴⁹–⁵¹, ⁵²–⁵⁶). Categories reclassified: basis row (4 cells: OI filter, trend gate, sentiment, session); liquidation plays row (3: trend gate, vol targeting, sentiment); narrative row (2: cross-venue, session); vol selling row (2: cross-venue, session); vol buying row (4: funding filter, vol targeting, cross-venue, session); grid row (2: cross-venue, sentiment); stat-arb row (3: trend gate, sentiment, session); on-chain row (3: vol targeting, cross-venue, session); sentiment row (5: OI filter, vol targeting, cross-venue, unlock/event, session). No viable-but-unwritten combinations were force-reclassified. Remaining 9 planned cells are all genuine gaps awaiting future batches.
 
 ---
 

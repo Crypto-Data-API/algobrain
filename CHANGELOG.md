@@ -4,6 +4,18 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 8: combination batch 8 + link-stub round
+
+- 5 more combination strategies: vol-balanced-pairs, complacency-vol-buying (symmetric
+  complement of post-panic-vol-selling), narrative-crowding-exit (exit-side discipline),
+  unlock-cascade-watch, event-calendar-risk-gating (one framework covering four matrix
+  cells). Plus an honest convergence pass: 29 thin cells reclassified non-viable with
+  per-cell footnote justifications. **Matrix: 61 covered / 9 planned / 50 non-viable of
+  120 cells** — the combination program is one mini-batch from complete.
+- **Link-stub round:** 30 new pages (23 L2/infra concept stubs — optimistic-rollup,
+  data-availability, sequencer, MiCA, liquid-restaking, …; 4 entity stubs; 2 source stubs;
+  1 redirect). Alias-aware broken refs 4,360 → 3,600; lint link issues 511 → 450.
+
 ## 2026-07-19 — Improvement loop, iteration 7: combination batch 7 + duplicate resolution
 
 - 5 more combination strategies (full buildable schema): funding-window-timing (settlement

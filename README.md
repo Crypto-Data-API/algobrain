@@ -1,6 +1,6 @@
 # AlgoBrain
 
-An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,850 interlinked markdown nodes.
+An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,930 interlinked markdown nodes.
 
 [![Obsidian graph view of the AlgoBrain vault](attachments/algobrain-obsidian-graph-view.gif)](attachments/algobrain-obsidian-graph-view.mp4)
 
@@ -26,7 +26,7 @@ This launches the wiki MCP server over Streamable HTTP at **http://127.0.0.1:801
 
 | Area | Content |
 |------|---------|
-| `wiki/strategies/` | ~410 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, the 27-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia, and a growing combination-strategy matrix |
+| `wiki/strategies/` | ~420 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, the 27-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia, and a 120-cell combination-strategy matrix |
 | `wiki/strategy-development/` | Methodology for *producing* strategies: edge taxonomy, hypothesis-to-backtest workflow, overfitting & p-hacking detection, capacity/failure-mode analysis, and per-venue trading maps (Hyperliquid, low-cap, arbitrage) |
 | `wiki/concepts/` | ~1,000 concept pages: microstructure, indicators, risk, portfolio theory, backtesting, behavioral finance, on-chain metrics, options mechanics |
 | `wiki/markets/` | 2,400+ crypto asset pages + commodities/forex/bonds macro context |
