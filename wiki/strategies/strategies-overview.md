@@ -80,7 +80,7 @@ A strategy harvesting a *risk-bearing* edge (selling insurance) and one harvesti
 - [[swing-trading-overview|Swing Trading]] — Multi-day to multi-week holds
 - [[position-trading-overview|Position Trading]] — Long-term directional trades, carry, and accumulation
 - [[arbitrage-overview|Arbitrage]] — Price-discrepancy exploitation across 100+ catalogued variants
-- [[combinations-overview|Combinations]] — Strategy overlays and portfolio-level blends; entry point: [[multi-strategy-portfolio]]
+- [[combinations-overview|Combinations]] — Strategy overlays and portfolio-level blends; entry point: [[multi-strategy-portfolio]] | [[combination-matrix]] — structured primitive × overlay coverage matrix
 
 ## Alt-Data & Information-Edge Strategies
 

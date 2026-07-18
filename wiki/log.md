@@ -2,12 +2,31 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-07-14
+updated: 2026-07-18
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+
+## 2026-07-18 — Batch B1: Combination Matrix + 5 New Combination Strategy Pages
+
+- Pages created (7):
+  - [[combination-matrix]] — primitive × overlay coverage matrix (22 existing, 69 planned, 9 non-viable cells)
+  - [[combinations-overview]] — category overview with Dataview table and combination families
+  - [[funding-filtered-momentum]] — momentum entries gated by non-consensus (flat/negative) funding
+  - [[regime-gated-grid]] — grid trading activated only inside confirmed low-vol range regimes
+  - [[carry-with-tail-hedge]] — funding carry book with budgeted OTM put overlay financed from carry income
+  - [[unlock-short-with-crowding-gate]] — token unlock supply-event short filtered for non-crowded entry conditions
+  - [[vol-targeted-trend-following]] — crypto-native trend following with volatility-targeted position sizing
+- Pages updated (1):
+  - [[strategies-overview]] — added [[combination-matrix]] link alongside [[combinations-overview]] in the Subcategories list
+- Candidates skipped (3 of 8 assessed):
+  - `onchain-confirmed-breakout` — high overlap with [[on-chain-flow-trading]] and [[smart-money-orderflow-combo]]; noted in matrix
+  - `sentiment-regime-rotation` — high overlap with [[contrarian-extremes]], [[crypto-beta-rotation]], [[regime-adaptive-strategy]]; noted in matrix
+  - `pairs-with-funding-differential` — partial overlap with [[pairs-trading]] and [[hl-vs-cex-funding-divergence]]; deferred to next batch
+- All 5 new strategy pages: type=strategy, strategy_type=hybrid, markets=[crypto], backtest_status=untested, full 16-section structure, CryptoDataAPI data section with verified endpoints only, kill criteria, wikilinks to primitives and neighbors.
 
 
 ## 2026-07-16 12:47 — Batch Import: Top 2376 Cryptocurrencies (CoinGecko)

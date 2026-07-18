@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-18 — Improvement loop, iteration 1: combination-strategy program
+
+Launched the hourly wiki-improvement loop (backlog: `.claude/wiki-improvement-backlog.md`,
+built from a full 4,852-page audit). Iteration 1 founded the **combination-strategy program**:
+- `strategies/combinations/combination-matrix.md` — a 12-primitive × 10-overlay coverage
+  matrix (22 combos already existed, 69 viable cells planned, 9 marked non-viable) so all
+  viable strategy combinations become available over coming iterations.
+- 5 new combination strategies on the full buildable schema (edge source, null hypothesis,
+  pseudocode, worked example, capacity, numeric kill criteria, verified data endpoints):
+  funding-filtered-momentum, regime-gated-grid, carry-with-tail-hedge,
+  unlock-short-with-crowding-gate, vol-targeted-trend-following.
+- `combinations-overview.md` category hub; matrix linked from `strategies-overview.md`.
+- Zero new broken links (verified by lint).
+
 ## 2026-07-17 — README disclaimer + docs tidy
 
 - Added a **Disclaimer** to the README (not financial / investment advice, DYOR,
