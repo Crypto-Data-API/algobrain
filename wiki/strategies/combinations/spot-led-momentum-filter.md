@@ -378,6 +378,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this filter end-to-end:
+
+- **Signal** — `GET /api/v1/market-intelligence/coinbase-premium` is sub-condition A: US spot demand leading the move
+- **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (modest funding) and `GET /api/v1/derivatives/open-interest?coin=BTC` (contained OI growth) confirm the rally is spot-led, not leverage-led
+- **Momentum leg** — 4h klines (`GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=120`) run the EMA-cross / Donchian trigger
+- **Backtest** — the Coinbase premium endpoint carries its own history; join it to `GET /api/v1/backtesting/klines` (4h back to 2017-08) and the funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) to test the spot-led vs leverage-led split
+- **Tips** — the premium is a US-hours signal; evaluate it against session clocks, and treat readings during Coinbase maintenance windows as missing data rather than false negatives
+
 ## Related
 
 - [[funding-filtered-momentum]] — the funding-level momentum gate; complementary to this page's flow-origin gate; differentiated in the lead paragraph

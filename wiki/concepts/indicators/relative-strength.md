@@ -2,7 +2,7 @@
 title: Relative Strength
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, momentum, sector-rotation]
 aliases: [RS, comparative relative strength, relative performance, relative-strength]
@@ -87,6 +87,31 @@ Relative strength is central to [[momentum-trading]] strategies. Stocks showing 
 - **Confusion with [[relative-strength-index|RSI]].** As detailed above, they are different tools — using an overbought RSI to "fade" a high-RS leader is a frequent and costly error.
 - **Benchmark sensitivity.** RS depends entirely on the chosen benchmark; the wrong benchmark (e.g., comparing a small cap to the S&P 500) produces misleading reads. Match the comparison to the asset's peer group.
 - **Whipsaw at inflections.** Near market turns, RS rankings reshuffle violently (momentum crashes), so RS-driven books need [[trend]] and [[market-breadth]] overlays for context.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call, the input for a whole-universe cross-sectional RS ranking
+- `GET /api/v1/market-data/ticker/24hr?symbol=ETHUSDT` — rolling 24h stats per leg
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=1000` — pull each leg's closes and divide to build the RS line
+- `GET /api/v1/backtesting/klines` — deep kline archive for long-lookback RS studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=365"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — the RS line is two `GET /api/v1/market-data/klines` pulls divided close-by-close (e.g. ETHUSDT over BTCUSDT); the return-spread variant subtracts benchmark return over the same lookback
+- **Live state** — `GET /api/v1/daily/prices` snapshots the full Binance spot universe once, replacing thousands of per-symbol calls when ranking a whole universe by RS
+- **Backtest** — replay top-decile RS rotation against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), and use `GET /api/v1/backtesting/symbols` plus dated `GET /api/v1/backtesting/daily-snapshots/{date}` to keep delisted coins in the ranked universe — RS screens are especially exposed to survivorship bias
+- **Tip** — in crypto the natural benchmark is BTC rather than an index: a coin/BTC RS line rising while BTC itself trends up is the standard altcoin-leadership read
 
 ## Related
 

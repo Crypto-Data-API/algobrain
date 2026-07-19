@@ -2,7 +2,7 @@
 title: "Oscillators"
 type: concept
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [indicators, technical-analysis, momentum, mean-reversion]
 aliases: ["Oscillators", "Oscillator", "oscillator", "Technical Oscillator", "Momentum Oscillator"]
@@ -55,6 +55,33 @@ Divergence is the one oscillator signal that retains value in trending condition
 | [[macd\|MACD]] | Centered | Unbounded | Trend momentum, crossovers |
 | [[cci\|CCI]] | Centered | Unbounded (±100 typical) | Cyclical turns, divergence |
 | Rate of Change (ROC) | Centered | Unbounded | Raw momentum |
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — universe-wide price-structure state including the RSI component (Pro+), the pre-computed bounded-oscillator read
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLCV for computing any oscillator in the table above (RSI, Stochastic, MACD, ROC, CCI)
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset state with a rolling 60-day history (Pro+)
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for threshold and divergence backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/indicators/technical` (Pro+) screens the whole universe for stretched RSI states in one call; anything beyond RSI derives locally from `GET /api/v1/market-data/klines`
+- **Regime pairing** — the page's core rule is executable: gate oscillator fades with `GET /api/v1/indicators/signum-rgg` (ADX/DMI RED/GREY/GREEN, Pro+) so overbought/oversold signals fire only in GREY chop, never against a GREEN/RED trend
+- **Backtest** — replay thresholds and divergences over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); measure the pinned-oscillator failure mode explicitly by segmenting results by trend state
+- **Tip** — avoid indicator soup: bounded oscillators computed from the same closes are highly correlated, so backtest one bounded plus one centered oscillator rather than stacking three near-duplicates
 
 ## Sources
 

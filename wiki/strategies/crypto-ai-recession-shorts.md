@@ -2,7 +2,7 @@
 title: "Crypto Shorts in an AI-Driven Recession"
 type: strategy
 created: 2026-05-05
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [crypto, bitcoin, risk-management, ai-trading, behavioral-finance]
 aliases: ["AI Recession Crypto Shorts", "Crypto AI Recession Playbook"]
@@ -207,6 +207,39 @@ Numerical conditions for retiring or hedging the position (see [[when-to-retire-
 - **Path-dependent** — losing first 4 months on a Fed-pivot rally would test most operators' discipline before the dispersion thesis matures
 - **Not a hedge for a long crypto book** — this is directional dispersion, not a portfolio insurance product
 - **Depends on AI recession scenario unfolding** — if 2026 ends without meaningful tech labor deterioration, every leg loses
+
+## Getting the Data (CryptoDataAPI)
+
+The equity legs (MSTR/miners/COIN) and the BLS/VC data come from equity and macro sources outside this API. [[cryptodataapi|CryptoDataAPI]] serves the crypto legs — dispersion-pair prices, perp funding for the funding-fade leg, ETF flows for the kill-switch watch, and regime context.
+
+**Live data:**
+- `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call: marks for the BTC-long / alt-basket-short and DeFi-basket legs
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding per coin (leg 6 fires above +20% APR; query per asset)
+- `GET /api/v1/market-intelligence/etf/btc/flows` — BTC ETF net flows: the institutional-bid counter-current that breaks the shorts
+- `GET /api/v1/sentiment/macro` — yields, gold, EUR/USD backdrop for the risk-off read
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d since 2017-08) for BTC-vs-alt dispersion backtests
+- `GET /api/v1/backtesting/funding` — funding history (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) for the funding-fade leg
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]] and [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the crypto legs of this book end-to-end:
+
+- **Dispersion marks** — one `GET /api/v1/daily/prices` call refreshes the BTC/alt pair and DeFi-basket marks; approximate BTC-dominance trend from `GET /api/v1/coins/top?limit=50` market caps for the 5/8-week SMA exit rule.
+- **Funding-fade leg** — poll `GET /api/v1/derivatives/funding-rates` for BTC/ETH/SOL against the +20% APR trigger; stand down as funding normalises.
+- **Kill-switch watch** — `GET /api/v1/market-intelligence/etf/btc/flows` daily: sustained net creations are the BTC-decouples-up scenario that flattens the book before the drawdown limits are hit.
+- **Regime gate** — `GET /api/v1/regimes/current` + `GET /api/v1/policy/regime/score`: the thesis needs risk-off macro; a `Broad Bull` label with low policy-risk score argues the dispersion regime is not active — size down or stay flat.
+- **Backtest** — dispersion legs on `GET /api/v1/backtesting/klines`, the funding fade on `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time ETF-flow and regime states.
+- **Tips** — batch per-coin regime risk via `GET /api/v1/quant/coins/risk` before the monthly rebalance; the equity shorts (MSTR, miners, COIN) and AI-token option legs are outside CDA — source and monitor separately.
 
 ## Sources
 

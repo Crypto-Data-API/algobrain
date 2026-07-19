@@ -2,7 +2,7 @@
 title: "Range Trading"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, mean-reversion, swing-trading, indicators, volatility]
 aliases: ["Range Trading", "Channel Trading", "Range-Bound Trading", "Sideways Market Trading"]
@@ -172,6 +172,38 @@ The dominant failure mode (see [[failure-modes]]) is **regime change**: the rang
 - Critically dependent on correctly classifying the regime — the hardest part is not the entry.
 - Easily over-fit; "support" and "resistance" are subjective without a mechanical rule.
 - Costs eat narrow ranges alive; requires sufficient channel width to be viable.
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto expression, [[cryptodataapi|CryptoDataAPI]] serves the OHLCV that the channel/ADX/RSI/ATR stack is computed from, plus a production regime classifier that replaces the hand-rolled ADX gate.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500` — OHLCV for channel definition, ADX, RSI, and ATR
+- `GET /api/v1/quant/market` — HMM regime probabilities: `range_low_vol` is the strategy's home state, `choppy_high_vol` and the trend states are the stand-aside signal
+- `GET /api/v1/volatility/regime` — per-asset vol state; `compressed`/`mean_reverting` supports fading the edges, `expanding` warns the breakout is coming
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 for out-of-sample channel tests
+- `GET /api/v1/quant/regimes/history` — hourly HMM regime probabilities since 2020 (Parquet, Pro Plus): pre-label the balanced regimes so the range rules are only ever tested where they claim to work
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the fade loop with the regime filter — the strategy's genuinely hard part — outsourced to the HMM:
+
+- **Regime gate** — trade only while `GET /api/v1/quant/market` puts high probability on `range_low_vol`; treat rising `vol_spike` or trend-state probabilities as the mechanical "decisive close outside the range" exit
+- **Signal** — compute the 20-bar channel, touch counts, and RSI confirmation from `GET /api/v1/market-data/klines`; enforce the minimum-width-vs-ATR filter so the round-trip clears costs
+- **Breakout kill** — `GET /api/v1/volatility/regime` flipping to `expanding` plus a channel-boundary close is the flatten-and-flip trigger
+- **Backtest** — pre-register the channel rule and run it on `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08), gating each historical bar with point-in-time labels from `GET /api/v1/quant/regimes/history` (hourly since 2020) — gating with today's labels inflates the hit rate
+- **Tips** — batch multi-symbol regime reads via `GET /api/v1/quant/coins/risk` rather than looping; skip thin alts where the "range" is partly your own footprint
 
 ## Sources
 

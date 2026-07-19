@@ -2,7 +2,7 @@
 title: "Hypothesis to Backtest Workflow"
 type: concept
 created: 2026-04-10
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [strategy-development, backtesting, methodology, research]
 aliases: ["Strategy Research Pipeline", "Idea to Production Workflow"]
@@ -276,6 +276,18 @@ This makes it trivial to see at a glance which strategies are research-quality v
 - [[book-quantitative-trading-ernest-chan]] — Chan's research workflow chapter
 - [[book-advances-in-financial-machine-learning]] — López de Prado on each stage
 - [[book-evidence-based-technical-analysis]] — Aronson on the discipline of falsification
+
+## Getting the Data (CryptoDataAPI)
+
+The pipeline's data legs run on the [[cryptodataapi-backtesting|CryptoDataAPI backtesting archive]]: `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d since 2017-08), `GET /api/v1/backtesting/funding`, `GET /api/v1/backtesting/daily-snapshots` (point-in-time full-market snapshots since 2026-03-02), and `GET /api/v1/quant/regimes/history` (hourly regime probabilities since 2020).
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the front of this pipeline:
+
+- **Idea generation** — the "Strategy Hypothesis Generator" prompt (Pro Plus tier, [prompt library](https://cryptodataapi.com/prompts)) converts historical daily snapshots into falsifiable hypotheses, each forced to state premise/mechanism, entry rule, and exit rule — exactly the Stage 1→2 gate on this page
+- **Point-in-time discipline** — replay `/api/v1/backtesting/daily-snapshots/{date}` rather than today's labels, avoiding [[lookahead-bias]] at the hypothesis stage
+- **Kill cheaply** — cap generated hypotheses (the prompt enforces 2-3 max) so [[data-snooping-and-p-hacking|multiple-testing]] corrections stay honest
 
 ## Related
 

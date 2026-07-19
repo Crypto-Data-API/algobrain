@@ -2,7 +2,7 @@
 title: "Volume Profile Trading Strategy"
 type: strategy
 created: 2026-06-19
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, market-microstructure, indicators, mean-reversion, breakout, volume]
 aliases: ["Volume Profile Strategy", "Value Area Rotation", "POC Reversion", "VPVR Strategy"]
@@ -194,6 +194,37 @@ The most likely [[failure-modes]]:
 - Discretionary and hard to backtest rigorously; prone to hindsight selection of levels.
 - Crowded, obvious levels invite stop-hunting.
 - Useless on illiquid or wash-traded instruments and sensitive to session convention on 24/7 markets.
+
+## Getting the Data (CryptoDataAPI)
+
+True tick, footprint, and CVD data come from the venue tape (Sierra Chart / exchange feeds) — [[cryptodataapi|CryptoDataAPI]] does not serve footprint or per-trade data. For the crypto-perp expression it serves what an agent needs to build **approximate** profiles: minute klines to bin volume-at-price, a coarse taker-delta read, and live depth at the computed levels.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` — 1-minute OHLCV+volume, the raw material for binning session/composite volume-at-price (POC, VAH/VAL, HVN/LVN)
+- `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window): a coarse directional-flow proxy where footprint CVD is unavailable
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — live depth at a computed level before fading it (is the HVN actually defended?)
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — 1m klines for Binance USDT-perps and all Hyperliquid perps **only since 2026-03-30** (grows forward), which caps how far back minute-resolution profiles can be reconstructed; the deeper 1h/4h/1d archive (Binance spot to 2017-08) supports only coarse composite profiles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automate the level map and the regime classification:
+
+- **Profile build** — bin 1m klines into volume-at-price each session (fixed UTC session cut — pick one convention and never change it, per the 24/7 caveat above); extract POC, VAH/VAL, HVN/LVN, and carry naked POCs forward
+- **Regime classification** — `GET /api/v1/quant/market`: `range_low_vol` maps to balance (rotation setups), trend/vol_spike states map to imbalance (LVN-continuation setups) — automating the discretionary judgment this page calls the dominant failure point
+- **Level check** — before fading a level, read `GET /api/v1/hyperliquid/l2-book` for resting depth and `GET /api/v1/market-intelligence/taker-buy-sell` for one-sided aggression
+- **Backtest** — minute-resolution setups replay only from 2026-03-30 (the 1m archive start) — an honest but short sample; use the 1h/4h archive for coarse level-reaction statistics further back, and test the "80% rule" against the null before trusting it
+- **Tips** — screen instruments for wash-trading risk before profiling (a wash-traded histogram is noise); wiki-side context on this lives in [[crypto-data-quality]]
 
 ## Sources
 

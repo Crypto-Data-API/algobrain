@@ -2,7 +2,7 @@
 title: "Protective Put (Crypto)"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, hedging, risk-management, protective-put, tail-risk, derivatives, bitcoin, ethereum]
 aliases: ["Protective Puts", "Portfolio Insurance", "Crypto Protective Put", "protective-puts"]
@@ -123,6 +123,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automate the hedging cycle (put pricing stays on Deribit / [[greeks-live]]):
+
+- **Cheap-insurance timing** — `GET /api/v1/volatility/regime` — initiate or roll only in `compressed`/`normal`; buying after a spike locks in the most expensive protection.
+- **Monetization trigger** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` — a score spike with cascades running is when the ITM put's intrinsic + vega should be harvested, not held through the V-recovery.
+- **Budget check** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` tracks floor/breakeven against the ≤2%-of-NAV annual hedge budget.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to replay roll schedules and deductible choices across the 2018/2020/2022 drawdowns; CDA holds no historical option premiums — cost series come from Deribit.
+- **Tips** — a scheduled ~30-DTE roll check plus a score-threshold alert covers the whole management loop; `?format=markdown` keeps regime payloads compact for reasoning.
 
 ## Related
 

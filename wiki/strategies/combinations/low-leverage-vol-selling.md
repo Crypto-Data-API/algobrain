@@ -359,6 +359,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Leverage gates (1–3)** — `GET /api/v1/derivatives/binance/summary?symbol=BTCUSDT` — one call covers OI, funding, and long/short for the clean-book check
+- **Vol gate (4)** — `GET /api/v1/market-intelligence/dvol-history` + 15m klines for the 20-day realized-vol comparison
+- **Regime context** — `GET /api/v1/regimes/current` — reduce size in `Trending_Momentum`
+- **Backtest** — `GET /api/v1/derivatives/binance/history?days=90` for gate calibration; post-window realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08); funding context from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05; Binance daily since 2026-03-30)
+- **Tips** — clean-book windows are rare: run the four gates as a daily screen off the single `/derivatives/binance/summary` call and alert on all-clear rather than streaming every input
+
 ## Related
 
 - [[crypto-options-volatility-selling]] — the canonical DVOL-percentile short-vol book; this page is the leverage-state-filtered subset

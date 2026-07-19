@@ -306,6 +306,18 @@ curl "https://www.deribit.com/api/v2/public/get_historical_volatility?currency=B
 
 Auth: CryptoDataAPI requires `X-API-Key` header. Deribit public endpoints require no auth. Full endpoint catalog: [[cryptodataapi-volatility]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the context half of this trade end-to-end:
+
+- **Signal context** — `GET /api/v1/volatility/dvol?coin=BTC` vs `GET /api/v1/volatility/realized?coin=BTC&days=30` establishes whether event IV is rich before the calendar spread goes on
+- **Event leg** — `GET /api/v1/event/calendar` (filterable up to 30d out) gives the agent machine-readable macro and unlock event dates to anchor expiry selection
+- **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; elevated funding raises delta-hedge carry costs and shrinks the trade's edge
+- **Backtest** — `GET /api/v1/volatility/dvol?coin=BTC&historical=true&days=730` for two years of event-window vol-premium behaviour, joined to daily klines back to 2017-08 from `GET /api/v1/backtesting/klines`
+- **Tips** — per-expiry IV and the actual spread legs come from Deribit's public API; use CryptoDataAPI for regime and vol context, Deribit for pricing, and keep the two clocks synchronized when logging fills
+
 ## Related
 
 - [[calendar-spread-arbitrage]] — futures term-structure analog; same calendar overlay, different instrument

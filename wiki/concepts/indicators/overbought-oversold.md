@@ -2,7 +2,7 @@
 title: "Overbought and Oversold"
 type: concept
 created: 2026-06-30
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [technical-analysis, indicators, momentum, mean-reversion]
 aliases: ["overbought", "oversold", "OB/OS", "overbought oversold", "overbought/oversold conditions"]
@@ -70,6 +70,33 @@ Now suppose instead the same stock has just broken out of a multi-year base on h
 - **Threshold sensitivity.** Whether a signal "fires" depends on the chosen period and band levels; a 9-period RSI fires far more often than a 21-period one. There is no universal correct setting.
 - **Lagging by construction.** Oscillators are computed from past closes; by the time the extreme prints, part of the move is already done.
 - **Whipsaw in choppy, low-volatility tape.** Readings can flick in and out of the zones repeatedly, generating many low-quality signals.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — pre-computed price-structure state including the RSI component for the whole universe (Pro+): a one-call overbought/oversold screen
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLCV for computing any of the oscillators in the threshold table
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset detail with a rolling 60-day history (Pro+), enough to check how long extreme states persist
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for threshold backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Screen** — `GET /api/v1/indicators/technical` (Pro+) surfaces stretched RSI states across every covered asset in one call; drill into `GET /api/v1/indicators/technical/{symbol}` for the 60-day state history before trusting an extreme
+- **Classify first** — encode the page's core rule: read `GET /api/v1/indicators/signum-rgg` (Pro+) before acting — fade extremes only in GREY (chop), treat pinned extremes in GREEN/RED as trend confirmation
+- **Backtest** — over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08), measure fade performance *segmented by regime*; the blended number hides that range-fades work and trend-fades bleed
+- **Tip** — crypto trends pin RSI harder and longer than equities; shifted bands (40 as the uptrend floor, 60 as the downtrend ceiling) usually backtest better on majors than the textbook 70/30
 
 ## Related
 

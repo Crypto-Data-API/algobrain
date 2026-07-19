@@ -387,6 +387,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — 1h and 15m klines (`GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1h&limit=60`, `interval=15m&limit=96`) drive RSI(14) and session-VWAP deviation per UTC bucket
+- **Filter** — `GET /api/v1/derivatives/funding-rates?coin=ETH` blocks longs into deeply negative funding; `GET /api/v1/market-intelligence/liquidations` defers to the [[off-hours-liquidation-playbook]] when a cascade is live
+- **Execution** — `GET /api/v1/liquidity/depth` enforces the depth-percentile gate before quoting in thin sessions
+- **Backtest** — session-bucket statistics from `GET /api/v1/backtesting/klines` (Binance spot 1h back to 2017-08); minute-level VWAP replay only since 2026-03-30 (1m klines), and cascade exclusion via `GET /api/v1/backtesting/liquidations` also starts 2026-03-30
+- **Tips** — session boundaries are UTC constants but liquidity migrates with DST and venue listings; re-estimate per-bucket depth percentiles from `/liquidity/depth` monthly
+
 ## Related
 
 - [[off-hours-liquidation-playbook]] — the cascade-event counterpart: same session-aware framework, acute liquidation trigger; this page handles the routine drift, not the cascade

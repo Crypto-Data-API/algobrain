@@ -2,7 +2,7 @@
 title: "Narrative Trading"
 type: strategy
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-07-19
 status: good
 tags: [behavioral-finance, momentum, crypto, swing-trading]
 aliases: ["Trade the Narrative", "Story Trading", "Theme Trading", "Narrative Rotation"]
@@ -138,6 +138,39 @@ Capacity is **moderate and narrative-dependent.** In large-cap equity themes (th
 - Psychologically demanding — requires selling into euphoria and abandoning a story you believed
 - Thin liquidity in the highest-conviction expressions limits size and worsens slippage
 - Blurs into pure speculation if the downside-risk sanity check is skipped; can become bag-holding when the story dies
+
+## Getting the Data (CryptoDataAPI)
+
+Attention/flow reads for the crypto expression of narrative trading. Raw social-volume feeds remain external; [[cryptodataapi|CryptoDataAPI]] supplies the thematic universes, retail-flow, hype, and institutional-flow proxies.
+
+**Live data:**
+- `GET /api/v1/trading-strategy-baskets` — 50 thematic meta-baskets in 6 groups (Pro+): ready-made narrative universes and a breadth-of-expression gauge
+- `GET /api/v1/dex/trending` — trending pools per chain (Solana/Ethereum/Base/BSC/Arbitrum): where retail attention is concentrating right now
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype 0-100 + meme_season flag (narrative-froth / saturation gauge)
+- `GET /api/v1/sentiment/fear-greed` — sentiment extremes for exhaustion timing
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flows: the institutional leg of an adoption narrative
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — sentiment timeseries for exhaustion-pattern research
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for narrative-leader momentum tests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-strategy-baskets]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [strategy baskets](https://cryptodataapi.com/trading-strategy-baskets) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can systematize the rotate-early / exit-on-saturation loop:
+
+- **Narrative ranking** — rank the 6 thematic groups from `GET /api/v1/trading-strategy-baskets` by aggregate momentum (klines) and cross-check `GET /api/v1/dex/trending` for the retail-flow leading edge
+- **Saturation gauge** — `GET /api/v1/meme/regime/score` at extremes plus a fear-greed extreme is the machine-readable "taxi-driver moment" — the exit condition, not the entry
+- **Regime gate** — `GET /api/v1/quant/market`: narrative longs only in trend-bull states; in risk-off regimes narratives collapse together into one risk-appetite factor
+- **Backtest** — replay theme-leader entries on `GET /api/v1/backtesting/klines` against random-theme baselines (the null above), with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) as point-in-time context — labeling the winning narrative after the move is the trap
+- **Tips** — the DEX endpoints are live-only, so persist `dex/trending` snapshots yourself to build narrative-lifecycle history; respect `new_listing` flags before buying the "purest expression"
 
 ## Sources
 

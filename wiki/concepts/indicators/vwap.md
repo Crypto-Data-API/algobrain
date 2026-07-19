@@ -2,7 +2,7 @@
 title: VWAP (Volume Weighted Average Price)
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [vwap, indicators, technical-analysis, volume, liquidity]
 aliases: [VWAP, volume-weighted-average-price]
@@ -117,6 +117,33 @@ Volume-Weighted Average Price emerged from institutional trading desks in the 19
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Historical origin, institutional context, VWAP+MACD combination
 - Berkowitz, Logue & Noser (1988), "The Total Cost of Transactions on the NYSE," *Journal of Finance* — early academic formalisation of VWAP as a transaction-cost benchmark
 - Madhavan, A. (2002), "VWAP Strategies," *Transaction Performance: The Changing Face of Trading* (Institutional Investor) — institutional VWAP execution algorithms
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=24` — intraday OHLCV bars: typical price (H+L+C)/3 weighted by each bar's volume gives session VWAP
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — rolling 24h stats for the current session
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for anchored-VWAP and multi-session studies
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — perp-side bars for Hyperliquid VWAP
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=24"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — cumulative Σ(typical price × volume) / Σ(volume) over bars from `GET /api/v1/market-data/klines` since the chosen anchor; crypto has no exchange session, so anchor to 00:00 UTC (the convention) or an event bar for [[anchored-vwap]]
+- **Resolution** — 1h bars give a coarse but workable session VWAP; 1m klines in `GET /api/v1/backtesting/klines` (since 2026-03-30 only) sharpen the estimate for execution-grade comparisons
+- **Backtest** — replay VWAP-reclaim and band-reversion rules against `GET /api/v1/backtesting/klines` (Binance spot 1h back to 2017-08), recomputing the cumulative sums from each day's anchor
+- **Tip** — the early-session instability warning applies doubly at 1h resolution: skip signals until several bars have accumulated, and never fade VWAP on days the HMM state from `GET /api/v1/quant/market` reads `strong_trend_bull`/`strong_trend_bear`
 
 ## Related
 

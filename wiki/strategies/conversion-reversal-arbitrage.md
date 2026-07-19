@@ -197,6 +197,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; funding/OI detail on [[cryptodataapi]]. Live option prices, the forward, and skew come from Deribit / [[greeks-live]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the carry-monitoring half of this strategy end-to-end (the violation race itself is latency-bound):
+
+- **Carry leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: the funding/basis that *is* the locked P&L on a perp-hedged build; poll it before entry and on every funding interval while a package is open — a funding flip is the strategy's main mid-trade drift.
+- **Dislocation triggers** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/market-intelligence/options`: forced-unwind flow and heavy per-strike OI mark where parity gaps are most likely to open next.
+- **Regime gate** — `GET /api/v1/quant/market`: `vol_spike`/`choppy_high_vol` states widen violations but also widen leg risk and spreads — cut per-trade size rather than chase the fatter gaps.
+- **Backtest** — carry/basis studies on `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) joined to spot from `GET /api/v1/backtesting/klines`; the option legs cannot be replayed from CDA (no options-chain archive — use Deribit history).
+- **Tips** — be honest about the edge: an MCP agent is realistic for monitoring funding-regime flips and flagging candidate windows, not for winning the microsecond execution race against co-located market makers.
+
 ## Related
 
 - [[put-call-parity]] — the pricing identity being arbitraged

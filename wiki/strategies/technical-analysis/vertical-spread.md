@@ -2,7 +2,7 @@
 title: "Vertical Spread"
 type: strategy
 created: 2026-04-13
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, vertical-spread, credit-spread, debit-spread, defined-risk, volatility]
 aliases: ["Vertical Spreads", "Bull Call Spread", "Bear Put Spread", "Bull Put Spread", "Bear Call Spread", "Debit Vertical Spread", "Credit Vertical Spread", "Crypto Vertical Spread"]
@@ -149,6 +149,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the vertical-spread selector end-to-end (chains and DVOL stay on Deribit / [[greeks-live]]):
+
+- **Flavour selector** — `GET /api/v1/volatility/regime`: `compressed` → debit verticals (long vega, cheap entry); `expanding`/`normal` with rich DVOL → credit verticals; `vol_shock` → stand down.
+- **Strike placement** — `GET /api/v1/market-intelligence/options` (OI walls, max pain) + `GET /api/v1/quant/gex` for pin-vs-cascade context; `GET /api/v1/derivatives/funding-rates?coin=BTC` says which skew wing is firm (bear call vs bull put credit).
+- **Early warning** — `GET /api/v1/market-intelligence/liquidations` — the move that breaks a credit vertical usually announces itself as forced flow first.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for short-strike breach rates at candidate widths and tenors; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) keeps the DVOL-regime selector point-in-time.
+- **Tips** — codify the management triad (50% profit / ~21-DTE roll / 2× credit stop) as scheduled checks; verticals die from unmanaged short strikes, not from entries.
 
 ## Related
 

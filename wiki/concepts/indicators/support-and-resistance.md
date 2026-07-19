@@ -2,7 +2,7 @@
 title: Support and Resistance
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators]
 aliases: [support, resistance, "S/R", "support-resistance", "Support Level", "Resistance Level", "S/R Levels"]
@@ -74,6 +74,34 @@ Place stops **beyond** the level, not exactly at it, to allow room for wicks and
 - **Treating S/R as exact prices** — they are zones, not precise lines; use a range (e.g., $100–102).
 - **Ignoring timeframe** — a level on a 5-minute chart is trivial next to one on a weekly chart.
 - **Not adapting** — levels go stale if they haven't been tested recently.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — bars for detecting swing pivots and multi-touch horizontal levels
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — resting-order depth showing where liquidity actually clusters right now
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for long-memory levels
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history at 1-min samples (BTC free)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/l2-book?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — extract candidate levels programmatically from `GET /api/v1/market-data/klines`: cluster swing highs/lows within a tolerance band and rank by touch count and recency, mirroring the identification checklist above
+- **Live state** — `GET /api/v1/hyperliquid/l2-book?coin=BTC` shows whether resting orders actually defend a chart-derived level today; a level with no book depth behind it is a line, not a wall
+- **Backtest** — bounce-vs-break rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), re-deriving levels point-in-time per test date to avoid drawing them with hindsight
+- **Tip** — treat levels as zones in code too: match within a percentage band (e.g. ±0.3%) rather than exact prices, and expire levels untested for N bars per the staleness warning above
 
 ## Related
 

@@ -363,6 +363,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Sizing signal** — `GET /api/v1/liquidity/depth` + `GET /api/v1/liquidity/depth/{coin}` (24h rolling 1-min baseline) — post-cascade entry size scales with surviving book depth
+- **Fragility modifier** — `GET /api/v1/liquidity/regime/score` (cut size when ≥ 70) + `GET /api/v1/liquidity/regime` label
+- **Cascade confirm** — `GET /api/v1/market-intelligence/liquidations` (1h spike), `GET /api/v1/derivatives/funding-rates?coin=BTC` (flush), `GET /api/v1/derivatives/open-interest?coin=BTC` (OI drop)
+- **Regime gate** — `GET /api/v1/regimes/current` — exclude Structural Shock / Established Bear
+- **Backtest** — depth history is a rolling 24h window only, so a full historical replay is impossible: approximate with `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) plus 1m `GET /api/v1/backtesting/klines` (since 2026-03-30), and record live depth snapshots forward for future calibration
+- **Tips** — persist your own depth snapshot at every cascade — the 24h rolling window means the API cannot backfill what you did not save
+
 ## Related
 
 - [[cross-venue-cascade-dislocation]] — cascade fade via cross-venue spread; composable with this depth-sizing gate

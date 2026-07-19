@@ -2,7 +2,7 @@
 title: "Exponential Moving Average"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, trend-following]
 aliases: ["EMA"]
@@ -107,6 +107,33 @@ Plotting a series of EMAs (e.g., 8, 13, 21, 34, 55) creates a visual ribbon:
 - More prone to whipsaws than the SMA in ranging markets
 - Sensitivity to recent data means a single large price bar can shift the EMA significantly
 - The exponential weighting, while theoretically elegant, does not have a strong empirical advantage over the SMA in most backtested systems -- the choice is often one of preference and use case
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — pre-computed price-structure state (SMA/BB/RSI) across assets
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price for updating the recursive EMA
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — closes for seeding and backfilling EMAs
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — seed the EMA with an SMA over the first N closes from `GET /api/v1/market-data/klines`, then update recursively with multiplier 2/(N+1); fetch ~3N bars so the seed bias decays to nothing
+- **Live update** — the recursion needs only the latest close: one `GET /api/v1/market-data/ticker/price` call per bar keeps a 12/26/200 EMA stack current
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) covers full cycles for crossover and 20-EMA pullback studies
+- **Tip** — EMA values depend on seed history; when comparing backtest and live signals, warm up from the same anchor date or crossovers near the boundary will disagree
 
 ## Related
 

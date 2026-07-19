@@ -2,7 +2,7 @@
 title: "Babylon Bitcoin Staking Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, bitcoin, defi]
 aliases: ["BTC Staking Arb", "Babylon Restaking", "Bitcoin LST Arbitrage"]
@@ -172,6 +172,36 @@ Per-LBTC capacity bound by individual protocol TVL (currently $100M-$2B per majo
 - **YouTube: "Babylon Bitcoin Staking Explained" by various crypto creators 2024.**
 - **YouTube: "Bankless" Babylon interview with Fisher Yu (Babylon co-founder, 2024).**
 - **YouTube: "What is Babylon Bitcoin Staking?" by Coin Bureau (2024).**
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the BTC NAV anchor, the on-chain LBTC prices that drive cross-LBTC dispersion, and the protocol-risk overlay. Babylon staking quotas, per-LBTC yields, and points multipliers are off-API (protocol dashboards / Pendle).
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — BTC spot, the NAV anchor every LBTC is priced against
+- `GET /api/v1/dex/token/{chain}/{address}` — per-LBTC price + top pools (LBTC, SolvBTC, pumpBTC, uniBTC…) on Ethereum/Solana/Base — the cross-LBTC dispersion signal
+- `GET /api/v1/dex/security/{chain}/{address}` — custody/contract screening per LBTC token
+- `GET /api/v1/security/regime` + `GET /api/v1/security/regime/score` — hack/depeg overlay for the novel Bitcoin-slashing / custody tail
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — BTC OHLCV (1h/4h/1d back to 2017-08) for basis studies
+- DEX is live-only — poll `/dex/token` and store to build LBTC-dispersion history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/token/ethereum/0x8236a87084f8B84306f72007F36F2618A5634494"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can price the dispersion and gate the tail:
+
+- **NAV anchor + dispersion** — `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` anchors BTC; `GET /api/v1/dex/token/{chain}/{address}` reads each LBTC's on-chain price/pool to compute cross-LBTC dispersion. Staking quotas, per-LBTC yields, and points multipliers are off-API.
+- **Safety gate** — `GET /api/v1/dex/security/{chain}/{address}` scores each LBTC's custody/contract before pairing long-cheap / short-rich.
+- **Regime gate** — `GET /api/v1/security/regime/score`: de-risk the stack when Security Stress spikes (Babylon-script / custody tail).
+- **Backtest** — `GET /api/v1/backtesting/klines` for the BTC basis leg; LBTC dispersion has no archive, so poll and store.
+- **Tip** — a -2% LBTC discount may be a fair custody-risk premium, not alpha; haircut convergence by an assumed protocol-failure base rate.
 
 ## Related
 

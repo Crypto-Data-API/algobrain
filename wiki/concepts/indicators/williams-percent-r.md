@@ -2,7 +2,7 @@
 title: "Williams %R"
 type: concept
 created: 2026-04-20
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, momentum, mean-reversion]
 aliases: ["Williams Percent R", "Williams %R", "%R", "Williams R"]
@@ -110,6 +110,33 @@ Larry Williams is a legendary futures trader who won the 1987 Robbins World Cup 
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Comprehensive Guide to Technical Trading Indicators (compiled research, 29 references)
 - Williams, L. — *How I Made One Million Dollars... Last Year... Trading Commodities* (1973), where %R was introduced
 - Murphy, J. — *Technical Analysis of the Financial Markets* (oscillator section covering %R, Stochastics, and RSI as a family)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLC bars carrying the highest-high/lowest-low/close inputs %R needs
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — rolling 24h high/low/close context
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive for %R signal studies
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — perp-side OHLCV for Hyperliquid listings
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — %R = (highest high − close) / (highest high − lowest low) × −100 over the last N bars from `GET /api/v1/market-data/klines`; or derive it for free from a stochastic %K already computed (%R = %K − 100)
+- **Backtest** — replay cross-back-through-threshold rules (not mere touches) against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Regime gate** — only trade %R fades when `GET /api/v1/quant/market` shows `range_low_vol`; in `strong_trend_*` states %R pins at an extreme and every fade is a premature counter-trend entry
+- **Tip** — do not stack %R with [[stochastic]] or [[rsi]] as "confirmation" in an agent's signal ensemble — %R and %K are the same series on a shifted scale, so agreement is by construction
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Trendline"
 type: concept
 created: 2026-06-30
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [technical-analysis, indicators, trend-following, price-action]
 aliases: ["trendline", "trend line", "trend lines", "uptrend line", "downtrend line", "trendlines"]
@@ -67,6 +67,29 @@ A stock bottoms at $20, rallies to $26, pulls back to $22, then rallies to $30 a
 - **False breaks (fakeouts).** Price frequently pierces a trendline intrabar and snaps back. Waiting for a *closing* break, or a retest, filters many false signals.
 - **Redrawing.** As trends accelerate or decelerate, the relevant line changes; clinging to an old line that price has long abandoned leads to bad decisions.
 - **Not predictive on its own.** A trendline describes what price has done; it does not guarantee continuation. It works best combined with [[volume]], momentum, and [[support-and-resistance]] confirmation.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — bars for detecting the swing pivots a trendline connects
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for long-lookback trendline and channel studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — detect swing pivots from `GET /api/v1/market-data/klines` (a bar whose low/high is the extreme of its k neighbours), then fit lines through ascending lows or descending highs; requiring a third touch before treating the line as active removes most curve-fit lines
+- **Backtest** — pullback-to-line and closing-break rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), constructing lines only from pivots available at each point in time — lines drawn on the full history are hindsight
+- **Confirm** — read [[volume]] from the same klines on a break bar: this page's decisive-break condition (close through the line on rising volume) is directly computable
+- **Tip** — encode the wick-vs-close choice as a fixed parameter and test both; agents that switch conventions mid-series generate phantom breaks
 
 ## Related
 

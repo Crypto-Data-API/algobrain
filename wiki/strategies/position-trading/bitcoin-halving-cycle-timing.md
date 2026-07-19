@@ -2,7 +2,7 @@
 title: "Bitcoin Halving Cycle Timing"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [position-trading, fundamental-analysis, crypto, bitcoin, on-chain, valuation, market-regime]
 aliases: ["Halving Cycle Timing", "BTC Cycle Timing", "On-Chain Cycle Timing", "MVRV Cycle Strategy", "Halving Position Trade"]
@@ -277,6 +277,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/dormanc
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-on-chain]]; cycle indicators on [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [BTC cycle](https://cryptodataapi.com/bitcoin-cycle-indicators) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/on-chain/dormancy/btc` returns the MVRV/supply-shock zone classification (capitulation → euphoria) directly — the agent reads the zone rather than recomputing MVRV-Z from raw realized cap
+- **Confluence** — `GET /api/v1/market-intelligence/btc/cycle-indicators` batches all 8 BTC cycle indicators with history (drill into one via `/{indicator}`); `GET /api/v1/on-chain/miners/hash-ribbon` corroborates the accumulation zone, `GET /api/v1/on-chain/score` is the structural-kill input
+- **Regime gate** — `GET /api/v1/regimes/current`: the 10-state cycle label (`Capitulation`/`Bottoming` vs `Speculative Euphoria`/`Distribution`) should agree with the on-chain zone before any tranche is placed
+- **Backtest** — daily BTC from `GET /api/v1/backtesting/klines` (Binance spot to 2017-08) covers only ~2 completed halving cycles — the archive cannot cure the strategy's defining small-sample problem, so treat all backtested zone thresholds as priors
+- **Tips** — run monthly, not intraday: compute the zone, scale the DCA clip by it, and log the action; use percentile-within-cycle for thresholds (they drift lower each cycle) and never let the agent convert a zone read into a single lump-sum order
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Credit Spread"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Credit Spread", "Credit Spreads", "Vertical Credit Spread", "Bull Put Spread", "Bear Call Spread", "Crypto Credit Spread"]
@@ -151,6 +151,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry gate** — `GET /api/v1/volatility/regime`: open spreads in `normal`/`mean_reverting`, never into `vol_shock`; cross-check the VRP by comparing Deribit DVOL to realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90`.
+- **Side selection** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: richly positive funding firms call skew (sell the bear call spread); post-selloff bid put skew pays the bull put spread better.
+- **Strike placement** — `GET /api/v1/market-intelligence/options` + `GET /api/v1/quant/gex`: keep short strikes clear of max-pain pin zones and cascade-prone short-gamma pockets.
+- **Kill switch** — `GET /api/v1/quant/market`: a jump in `vol_spike` probability is the machine-readable form of the "DVOL +50% in a session" flatten rule; pair with `GET /api/v1/market-intelligence/liquidations` while a short strike is being tested.
+- **Backtest** — spot paths from `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08) with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to test the entry gate honestly; option credits must come from Deribit history — CDA has no options-chain archive.
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly between management checks; append `?format=markdown` for cleaner context windows.
 
 ## Related
 

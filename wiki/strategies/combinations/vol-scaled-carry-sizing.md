@@ -431,6 +431,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this sizing engine end-to-end:
+
+- **Signal** — the `GET /api/v1/derivatives/funding-rates?coin=BTC` settlement stream is the carry P&L input; `GET /api/v1/derivatives/binance/summary?coin=BTC` marks the basis leg
+- **Sizing** — the carry-vol estimate from 22-day klines scales notional; `GET /api/v1/quant/coins/risk` supplies an independent per-coin vol-target multiplier as a sanity check
+- **Override** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI/mcap threshold) and `GET /api/v1/regimes/current` (`Structural_Shock`) force HIGH-VOL minimum sizing regardless of the estimate
+- **Backtest** — carry-vol replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 gives per-settlement granularity; Binance daily since 2026-03-30) joined to daily klines back to 2017-08 for the spot-vol cold-start proxy
+- **Tips** — size off carry-P&L vol, not price vol — the two diverge exactly when it matters (funding spikes in flat tape), which is the failure mode this page's sizing rule exists to catch
+
 ## Related
 
 - [[carry-with-tail-hedge]] — tail-hedge overlay on a carry book; composable on top of vol-scaled base notional

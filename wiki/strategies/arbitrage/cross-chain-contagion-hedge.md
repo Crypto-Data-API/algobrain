@@ -2,7 +2,7 @@
 title: "Cross-Chain Contagion Hedge"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading]
 aliases: ["Contagion Cascade Hedge", "DeFi Composability Tail Hedge", "50× Multiplier Hedge"]
@@ -219,6 +219,38 @@ The hedge is itself built from smart-contract-bearing, cross-chain instruments �
 - [[lst-depeg-arbitrage]] — adjacent peg-arb in LRT cluster
 - [[liquidation-cascade-arbitrage]] — adjacent strategy in Aave/Compound liquidation chain
 - [[crisis-alpha]] — broader risk-management framing
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the cascade detector, the basket short-carry, and the affected-leg screening. LRT peg (rsETH/ETH) and DeFiLlama TVL-by-protocol are off-API.
+
+**Live data:**
+- `GET /api/v1/security/regime` + `GET /api/v1/security/regime/score` — the composability-cascade detector (hacks/depegs/abnormal flows); a spike is the re-size trigger
+- `GET /api/v1/derivatives/funding-rates` — funding spike during incidents is the alpha signal; also budgets the ~100 bp/yr basket short carry
+- `GET /api/v1/market-intelligence/liquidations` — Aave/Compound-adjacent forced-flow during the cascade
+- `GET /api/v1/dex/security/{chain}/{address}` — LRT / bridge-token screening for the basket legs
+
+**Historical data:**
+- `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) + `GET /api/v1/backtesting/funding`
+- `GET /api/v1/security/regime/{symbol}` — per-symbol 60d security overlay (Pro+)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime/score"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this tail-hedge basket:
+
+- **Cascade detector** — `GET /api/v1/security/regime` / `/security/regime/score` flag the LRT/bridge exploit that triggers the cross-protocol cascade; a spike is the trigger to up-size the basket.
+- **Basket carry + alpha** — `GET /api/v1/derivatives/funding-rates` budgets the short carry and detects the funding spike that co-occurs with incidents; LRT peg and DeFiLlama TVL are off-API.
+- **Cascade read** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/dex/security/{chain}/{address}` screen the affected / basket legs.
+- **Backtest** — `GET /api/v1/backtesting/liquidations` + `/backtesting/funding`; pair with `/backtesting/daily-snapshots/{date}` for point-in-time regime context.
+- **Tip** — cascade mean-reversion windows are narrow — take partial profit promptly on affected legs after the peak.
 
 ## Related
 

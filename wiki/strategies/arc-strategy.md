@@ -2,7 +2,7 @@
 title: "ARC (Area-Range-Candle) Strategy"
 type: strategy
 created: 2026-06-19
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, day-trading, breakout, mean-reversion, momentum]
 aliases: ["ARC Strategy", "Area Range Candle", "Area-Range-Candle", "ARC day trading"]
@@ -190,6 +190,35 @@ ARC is a **mean-reversion / fade** method and inherits mean-reversion's regime d
 - Discretionary; hard to test rigorously; prone to hindsight bias.
 - **No independent backtest evidence**; promotional performance claims.
 - Fails badly on trend days; cost-sensitive; modest capacity.
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto application, [[cryptodataapi|CryptoDataAPI]] serves the intraday OHLCV that defines the box, the range filter, and the trigger candles. Crypto trades 24/7, so the "prior session" box must be defined by convention (e.g. the prior UTC day), and there is no pre-market to fall back on for gap days.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=48` — intraday bars for the prior-day box and swing levels
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=5m&limit=288` — execution-timeframe candles for the John-Wick trigger
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive for encoding and testing the rules (Binance 1h/4h/1d back to 2017-08; 1m bars only since 2026-03-30, so wick-level tests are limited to that window)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=48"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end (after the discretionary rules are hard-coded):
+
+- **Level construction** — daily at 00:00 UTC: pull `GET /api/v1/market-data/klines?interval=1h` for the prior UTC day, set box high/low, scan back for the nearest swing high/low beyond the box.
+- **Trigger loop** — on each 1-5m bar: check the 20%-of-range move filter, then the long-wick candle at a level; the subjective inputs ("unabated move", "John Wick" candle) must be encoded numerically first — this is where most of the apparent edge tends to evaporate, so test before trusting.
+- **Regime gate** — `GET /api/v1/quant/market`: ARC is a fade — trade only when `range_low_vol`/`mean_reverting`-type probabilities dominate; a `strong_trend` state is the run-over regime from the regime-fit table above.
+- **Backtest** — 1h boxes test back to 2017-08 on `GET /api/v1/backtesting/klines`, but honest wick-level entry/stop simulation needs 1m bars, available only since 2026-03-30 (growing forward).
+- **Tips** — cost sensitivity is acute: model spread plus stop-zone slippage explicitly; `GET /api/v1/liquidity/depth/{coin}` (24h rolling depth, 1-min samples; BTC free) reveals the thin-book windows where swept-stop slippage is worst.
 
 ## Related
 

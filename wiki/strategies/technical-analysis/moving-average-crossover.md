@@ -2,7 +2,7 @@
 title: "Moving Average Crossover"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [trend-following, moving-averages, technical-analysis, crossover, momentum, indicators]
 aliases: ["MA Crossover", "Golden Cross Strategy", "Death Cross Strategy", "Golden/Death Cross", "50/200 SMA System"]
@@ -363,6 +363,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/techn
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [funding rates](https://cryptodataapi.com/funding-rates) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/indicators/technical` gives pre-computed SMA structure across the whole universe in one call; or compute the 50/200 cross yourself from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` (ATR(14) for the trailing stop comes from the same series).
+- **Chop filter** — `GET /api/v1/indicators/signum-rgg` — the ADX(14)+DMI colour state; skip fresh crosses while the asset reads GREY (the "universe ADX < 20" kill criterion maps directly to it).
+- **Regime gate** — `GET /api/v1/quant/market` — the 50/200 cross only pays in `strong_trend_*` states; treat `range_low_vol`/`choppy_high_vol` as the whipsaw regime the kill criteria describe.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 — multiple full crypto cycles) plus `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) for regime-conditioned Sharpe.
+- **Sizing** — `GET /api/v1/quant/coins/risk` batches per-coin vol-target multipliers instead of recomputing inverse-ATR weights per symbol; funding drag for the perp variant comes from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05).
 
 ## Related
 

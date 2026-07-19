@@ -138,3 +138,35 @@ Multi-timeframe confluence is a regime-neutral signal framework. Capacity scales
 - Win rate on triple-confluence entries < 50% for 6 consecutive months
 - Drawdown > 20% from equity peak
 - Confluence zones breached by macro shocks on 3+ consecutive trades
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — daily OHLCV; resample to weekly for the trend screen, compute MAs and Fibonacci swing points
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — middle-timeframe zone structure and RSI/MACD
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=96` — entry-trigger candles and volume confirmation at the confluence zone
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — crypto third-axis confluence: flat/negative funding at a bullish zone means no leveraged-long crowding
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — OI context at the zone (fresh positioning vs short covering)
+- `GET /api/v1/on-chain/exchange-flows/BTC` — accumulation/distribution corroboration for weekly-zone theses
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for backtesting confluence-zone hit rates
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this framework end-to-end:
+
+- **Signal** — one klines endpoint at three intervals (`1d` resampled to weekly, `4h`, `15m`) rebuilds the full triple-screen stack from a single data source with consistent timestamps
+- **Filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `GET /api/v1/derivatives/open-interest?coin=BTC` add the crypto-native third axis: skip confluence longs when funding shows leveraged-long crowding at the zone
+- **Regime gate** — `GET /api/v1/regimes/current`; headline-driven regimes (`Structural Shock`) are exactly when confluence zones fail, so stand down rather than trust the levels
+- **Backtest** — zone hit-rate studies on `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); minute-level entry-precision replay is limited — 1m bars exist only since 2026-03-30
+- **Tips** — fetch the higher timeframes on a slow clock (daily) and only poll 15m data when price is inside a pre-computed zone; this cuts API load by an order of magnitude

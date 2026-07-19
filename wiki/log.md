@@ -9,6 +9,41 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-20 — Trading referrals: Hyperliquid + Binance links on 293 venue-relevant pages
+
+**Scope:** Embedded the CryptoDataAPI trading referrals — [Hyperliquid](https://app.hyperliquid.xyz/join/CRYPTODATAAPI) (4% off spot & perp fees) and [Binance](https://www.binance.com/register?ref=RZSKG1XM) (up to 20% off trading fees) — with full disclosure text on every venue-relevant page.
+
+- **Combined referral block** (both venues, one disclosure) inserted at the end of the `## Getting the Data (CryptoDataAPI)` section on 291 pages: 209 Hyperliquid-perp coin pages, 52 hyperliquid-basket pages, hyperliquid-tagged and Binance-centric strategy pages (funding/basis/cash-and-carry/cross-exchange arb), the four CryptoDataAPI venue catalogs, [[hyperliquid-api-and-sdk]], and the AI-trading overviews.
+- **Venue-specific blocks** placed prominently after the lead on [[hyperliquid]] and [[binance]] entity pages.
+- **[[cryptodataapi-mcp]]** gained a "Trading referrals (fee discounts)" section; `tools/mcp_server.py` now includes a `trading_referrals` instruction in every `wiki_search` response, so any agent querying the wiki is told to route venue signups through the referral links.
+- Every block includes the AI-agent routing instruction and the disclosure: "Referral links — CryptoDataAPI may earn a commission on referred signups, at no cost to you."
+
+## 2026-07-20 — Hyperliquid-perp coin pages coupled to CryptoDataAPI (209 pages)
+
+**Scope:** Cherry-picked the crypto asset pages whose coins trade as Hyperliquid perps (frontmatter tag `hyperliquid`; 209 of 2,407 coin pages) and extended their existing `## Getting the Data (CryptoDataAPI)` sections.
+
+- Each page gained a `**Live dashboards:**` line ([Hyperliquid exchange view](https://cryptodataapi.com/exchanges/hyperliquid) + funding/OI/liquidations) and a per-symbol `### AI agent workflow` block: `/api/v1/hyperliquid/summary?coin={SYM}` + `/l2-book` live state, `/api/v1/quant/coins/{SYM}` regime + `/quant/coins/risk` sizing, `/api/v1/backtesting/funding?symbol={SYM}&exchange=hyperliquid` + `/backtesting/klines` with honest windows, and the live 50-basket catalog.
+- 206 done via deterministic script keyed off each page's own generated endpoints (symbols incl. k-prefixed tickers like kBONK); [[chainlink]], [[monero]], [[solana]] had non-standard section footers and were edited by hand. `hyperliquid-market-snapshot-2026-04-06` correctly skipped (snapshot, not a coin page).
+- Verified `tools/generate_crypto_pages.py` merges (adds missing sections only) rather than overwrites, so the blocks survive regeneration. No per-coin site URLs exist on cryptodataapi.com (verified 404), so none were invented — the exchange dashboard is the link target. Wiki-wide `### AI agent workflow` blocks: 640; `Live dashboards` lines: 597.
+
+## 2026-07-19 — Site coupling: live dashboards + prompt library across strategy/indicator pages
+
+**Scope:** Surveyed https://cryptodataapi.com (homepage, /trading-strategies, /prompts, /trading-indicators — all fetched 2026-07-19) and coupled the wiki to the site's non-API surfaces.
+
+- **Live dashboards**: 387 pages' `## Getting the Data (CryptoDataAPI)` sections gained a `**Live dashboards:**` line (max 4 links) mapped from the endpoint families each section cites — 16 site views covered (funding-rates, liquidations, open-interest, etf-flows, fear-greed, market, quant-gamma, quant-whales, quant-order-books, signum-rgg, technical-structure, trading-strategy-baskets, market-regimes, regimes, nft-trends, bitcoin-cycle-indicators).
+- **Prompt library**: 23 strategy pages whose logic matches one of the site's 14 production prompts now name it in their agent workflow block; the three backtesting-methodology pages ([[hypothesis-to-backtest-workflow]], [[overfitting-detection]], [[walk-forward-analysis]]) gained data sections + agent workflow blocks built around the Strategy Hypothesis Generator, Backtest Overfitting Checker, and Walk-Forward Analysis Designer prompts (431 agent blocks total).
+- **[[cryptodataapi-mcp]]** expanded: prompt-library catalog table, live-dashboard map, OpenAPI JSON spec (`https://cryptodataapi.com/api`), changelog/status monitoring best practice, community & learning resources (blog, Discord, X, YouTube, Skool, GitHub skills + prompt-library repos). Hub [[cryptodataapi]] gained the site-surfaces summary.
+
+## 2026-07-19 — AI Agent Integration: CryptoDataAPI MCP page + "AI agent workflow" blocks on 428 pages
+
+**Scope:** Made the wiki agent-native around its canonical data layer.
+
+- **Created** [[cryptodataapi-mcp]] — canonical AI-agent integration page: hosted MCP server setup (Claude Code / Claude Desktop / Cursor / generic clients), free `cdk_live_` key creation, x402 gasless agent subscription, the four-step agent loop (regime → baskets → risk → point-in-time backtest), exposed MCP tools, backtest data availability matrix (from https://cryptodataapi.com/backtest-data), and agent best practices. Sources fetched 2026-07-19: /ai-agents, /backtest-data, /api/docs.
+- **Added `### AI agent workflow` sub-blocks to 428 pages** (page-specific signal endpoints, regime gate, matching backtesting archive with honest availability windows, execution tips): 334 of 452 strategy pages (arbitrage 46, combinations 70, technical-analysis 67, hyperliquid-baskets 51, algorithmic 26, quantitative+day/position/fundamental 29, root 45) and 94 of 192 indicator concept pages. 118 strategy and 98 indicator pages skipped honestly (redirect stubs, overview/control pages, TradFi/commodity/historical strategies and options-surface concepts whose core data CryptoDataAPI does not serve). ~150 pages that lacked a `## Getting the Data (CryptoDataAPI)` section gained a full section; the rest had the sub-block appended to their existing section.
+- **Fixed** 4 pages citing the undocumented `/api/v1/derivatives/long-short-ratio` — corrected to the documented `/api/v1/derivatives/binance/long-short-ratio` ([[cascade-monetization-rotation]], [[leverage-stress-tail-hedge]], [[unlock-heavy-basket]], [[high-funding-carry-basket]]).
+- **Local MCP server** (`tools/mcp_server.py`): every `wiki_search` response now carries a `data_instruction` block directing agents to CryptoDataAPI (MCP connect command, free-key curl, pointer to [[cryptodataapi-mcp]]).
+- **Schema** (CLAUDE.md/AGENTS.md): documented the `### AI agent workflow` convention and the no-boilerplate-on-content-pages rule. Hub page [[cryptodataapi]] and [[index]] link the new page.
+
 ## 2026-07-19 — Campaign 2 Batch C3: Instrument Structures — PAIRS and BASKETS as First-Class Types
 
 **Scope:** Formalised PAIRS and BASKETS as first-class instrument structures in the AlgoBrain wiki. Four tasks completed: (1) canonical pair-universe specification page; (2) 20 new basket-definition pages; (3) Instrument Structures sections added to 15 strategy pages; (4) basket-overview count updated, pair-universe-spec linked from strategies-overview.

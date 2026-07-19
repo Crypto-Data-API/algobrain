@@ -2,7 +2,7 @@
 title: "Iron Condor"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, mean-reversion, bitcoin, ethereum]
 aliases: ["IC", "Iron Condor Spread", "Crypto Iron Condor"]
@@ -123,6 +123,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — set the short strikes outside the OI walls from `GET /api/v1/market-intelligence/options`; the entry gate is `GET /api/v1/volatility/regime` elevated/`mean_reverting` — premium is rich but no shock is in progress
+- **Regime gate** — `GET /api/v1/quant/market`: enter while `range_low_vol` probability leads; falling range probability with a rising `squeeze` bucket is the early exit *before* a strike is threatened
+- **Backtest** — strike-touch frequency per tenor from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); pair entries with point-in-time regimes from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) so the gate is tested without lookahead
+- **Tips** — automate the tail watch: a `/api/v1/market-intelligence/liquidations` cascade or a `/api/v1/quant/gex` flip to short dealer gamma both say close the tested side early; take profits at 50% mechanically rather than holding to expiry.
 
 ## Related
 

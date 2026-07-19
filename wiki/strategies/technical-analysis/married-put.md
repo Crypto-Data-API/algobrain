@@ -2,7 +2,7 @@
 title: "Married Put (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, hedging, protective-put, married-put, insurance, defined-risk, derivatives, bitcoin, ethereum]
 aliases: ["Crypto Married Put", "Bullet Hedge", "Protected Entry"]
@@ -117,6 +117,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this overlay end-to-end (put pricing itself stays on Deribit / [[greeks-live]]):
+
+- **Entry timing** — `GET /api/v1/volatility/regime` — marry the coin and put while the read is `compressed`/`normal`; a `vol_shock` state means insurance is at its most expensive.
+- **Tail watch** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/derivatives/funding-rates?coin=BTC` — cascade activity and stretched funding flag the left tail building, i.e. the moment to monetize a deep-ITM put rather than ride it back through a recovery.
+- **Monetization trigger** — `GET /api/v1/volatility/regime/score` — a spike off baseline marks the vega payoff window for selling the put.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to replay floor/breakeven outcomes across strike/tenor grids; CDA holds no historical options chains, so premium history must come from Deribit.
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly for vol/funding/liquidation context in one call instead of four separate requests.
 
 ## Related
 

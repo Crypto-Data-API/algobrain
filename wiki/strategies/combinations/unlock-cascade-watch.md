@@ -366,6 +366,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this watchlist end-to-end:
+
+- **Event gate** — `GET /api/v1/event/calendar?type=unlock&days=14` seeds the watchlist (cross-check external trackers for low-caps); per-token risk classification comes from the OI, funding, and long/short reads above
+- **Trigger** — `GET /api/v1/market-intelligence/liquidations` real-time volume confirms an actual cascade before the fade arms; 4h klines measure the decline leg
+- **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` de-risks the entire watchlist immediately
+- **Backtest** — cascade replay only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid); price behaviour around historical unlock dates goes deeper via `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08 for Binance-listed names)
+- **Tips** — most unlocks produce no cascade, so the agent's job is mostly to stand down; log every armed-but-untriggered event to keep the trigger threshold calibrated
+
 ## Related
 
 - [[unlock-short-with-crowding-gate]] — directional short into token unlock, gated on non-consensus crowding; the active-short complement to this page's risk-management and fade framework

@@ -2,7 +2,7 @@
 title: "Compound-Fork Donation-Attack Systematic Short"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading]
 aliases: ["Compound Fork Short", "Donation-Attack Fade", "Empty-Market Short Pattern"]
@@ -207,6 +207,38 @@ This is a *short* of a small-cap, smart-contract-bearing asset — the risk prof
 - [[smart-contract-vulnerability-taxonomy]] — donation-attack class
 - [[oracle-manipulation]] — adjacent vector that often overlaps in fork attacks
 - [[ai-amplified-exploit-arbitrage]] — hub strategy
+
+## Getting the Data (CryptoDataAPI)
+
+The fork universe and donation-attack-mitigation check come from DeFiLlama fork classification + audit archives + explorer `EXECUTOR_ROLE` config — off-API. CryptoDataAPI serves the small-cap perp short and the exploit exit-trigger.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding to budget the fork-token short carry
+- `GET /api/v1/derivatives/open-interest` — thin fork-token perp depth / crowding (drives 0.1-0.3% per-name sizing)
+- `GET /api/v1/security/regime` + `GET /api/v1/security/events` — detect when a donation attack lands on a shorted fork
+- `GET /api/v1/dex/security/{chain}/{address}` — contract screening for the fork's config
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — carry-drag archive
+- `GET /api/v1/security/regime/{symbol}` — per-symbol 60d security overlay (Pro+)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] handles execution and the exit trigger; the fork universe is built off-API:
+
+- **Signal (off-API core)** — the fork classification and donation-attack-mitigation check come from DeFiLlama + audit archives + explorer `EXECUTOR_ROLE`/multisig config; not served here.
+- **Execution + carry** — `GET /api/v1/derivatives/funding-rates` / `/derivatives/open-interest` size the small-cap perp short (0.1-0.3% per name) and budget carry.
+- **Exit trigger** — `GET /api/v1/security/regime` / `/security/events` fire when a donation attack lands so you cover at the post-exploit low.
+- **Backtest** — `GET /api/v1/backtesting/funding` for carry; incident dates come from the off-API post-mortem record.
+- **Tip** — fork perps are thin and squeeze violently; watch OI/funding and never market-order the entry.
 
 ## Related
 

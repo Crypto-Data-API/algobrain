@@ -323,6 +323,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this spread end-to-end:
+
+- **Signal** — `GET /api/v1/derivatives/funding-rates?coin={LEG}` for each leg; one cross-exchange call per coin yields the funding differential that tilts spread entries
+- **Filter** — `GET /api/v1/derivatives/open-interest?coin={LEG}` and the long/short ratio guard against entering a spread whose short leg is squeeze fuel
+- **Spread engine** — 4h klines (`GET /api/v1/market-data/klines?symbol={LEG}USDT&interval=4h&limit=200`) maintain the z-score
+- **Backtest** — `GET /api/v1/backtesting/funding` for differential history (honest windows: Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30) joined to spread replay on `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08)
+- **Tips** — the funding differential accrues only while both legs stay open across settlement timestamps; log per-settlement accruals rather than assuming continuous carry
+
 ## Related
 
 - [[pairs-trading]] — the underlying stat-arb primitive; this page is the funding-differential extension

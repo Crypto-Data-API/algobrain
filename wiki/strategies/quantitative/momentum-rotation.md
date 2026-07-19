@@ -2,7 +2,7 @@
 title: "Momentum Rotation"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [momentum, crypto, quantitative, cross-sectional, portfolio-rotation, factor-investing, altcoins]
 aliases: ["Cross-Sectional Crypto Momentum", "Crypto Momentum Rotation", "Altcoin Rotation", "Relative-Strength Rotation"]
@@ -276,6 +276,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/coins/top?limit=
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-coins]].
+
+**Live dashboards:** [market health](https://cryptodataapi.com/market) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe** — `GET /api/v1/coins/top?limit=50` for the cap ranking, screened by `GET /api/v1/liquidity/depth` (drop any name whose round-trip cost at your clip size exceeds the ~35 bps breakeven — the cost screen *is* the strategy)
+- **Signal** — 4-week skip-3-day formation returns from daily `GET /api/v1/market-data/klines` per name, de-meaned against the universe; crash filter from `GET /api/v1/market-data/btc-price-history?days=365` (200D MA precomputed)
+- **Regime gate** — `GET /api/v1/market-health/altcoin-breadth?period=200` for dispersion/participation context; halve gross when BTC is below its 200D MA
+- **Backtest** — `GET /api/v1/backtesting/klines` (daily to 2017-08 for majors; alt histories are shorter) with universes rebuilt from `GET /api/v1/backtesting/symbols` and dated `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) — top-N *as of each date*, never today's top-N back-applied, or the backtest is pure [[survivorship-bias]]
+- **Tips** — batch inverse-vol sizing via `GET /api/v1/quant/coins/risk`; log realised rebalance cost per week and pause when it exceeds the modelled gross spread (kill criterion #2)
 
 ## Related
 

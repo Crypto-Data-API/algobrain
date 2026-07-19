@@ -327,6 +327,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this exit overlay end-to-end:
+
+- **Signal** — poll `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}` per held narrative token each hour; two crowding gates firing together triggers the scale-out
+- **Filter** — `GET /api/v1/derivatives/binance/long-short-ratio` for the optional Gate 3 triple-confirmation before a full (rather than partial) exit
+- **Regime gate** — `GET /api/v1/regimes/current`; a `Structural Shock` label overrides all gates and exits every narrative position immediately
+- **Backtest** — replay funding gates from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) against exit-day forward returns from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Tips** — batch the whole narrative basket through `GET /api/v1/quant/coins/risk` instead of looping per token; respect `new_listing` flags — young narrative tokens rarely have enough funding history to calibrate the crowding percentile
+
 ## Related
 
 - [[narrative-with-trend-confirmation]] — the entry gate for narrative trades; this page is the exit gate; together they form a complete entry–hold–exit framework

@@ -2,7 +2,7 @@
 title: "Synthetic Stablecoin Depeg Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, mean-reversion, risk-management, event-driven]
 aliases: ["sUSDe Depeg Arb", "GHO Depeg Arb", "crvUSD Depeg Arb", "Synthetic Stable Arb", "Mechanism-Specific Stable Arb"]
@@ -488,6 +488,40 @@ For each variant, build a risk model:
 - [[stablecoin-pair-arbitrage]] — fiat-backed companion strategy
 - [[cross-chain-contagion-hedge]] — sympathy-depeg integration
 - [[ai-amplified-exploit-arbitrage]] — hub strategy
+
+## Getting the Data (CryptoDataAPI)
+
+Mechanism-state feeds (Ethena reserve, PSM utilization, LLAMMA bands) are protocol/subgraph reads; [[cryptodataapi|CryptoDataAPI]] covers the funding signal that drives the sUSDe variant, the sympathy-depeg trigger, per-pool peg prices, and the flow-confirmation layer.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — cross-exchange funding (the sUSDe mechanism-health signal: multi-day negative streaks are the depeg driver)
+- `GET /api/v1/dex/token/{chain}/{address}` — per-pool synthetic-stable price (Curve/Balancer peg deviation reads)
+- `GET /api/v1/security/events` — exploit alerts (the sympathy-depeg trigger; distinguishes direct exposure from sympathy)
+- `GET /api/v1/security/regime/score` — Security Stress composite (depeg + hack weighted)
+- `GET /api/v1/derivatives/open-interest?coin=<COIN>` — confirms a sympathy depeg is real selling, not a thin-pool print
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (negative-streak base rates for the sUSDe variant)
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin mcap timeseries (sector context)
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time state around recent events (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=ETH"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]], [[cryptodataapi-dex]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the variant classifier and two of the five variants end-to-end:
+
+- **Signal (sUSDe variant)** — track `GET /api/v1/derivatives/funding-rates?coin=ETH` for multi-day negative streaks (the mechanism trigger), then confirm the peg deviation via `GET /api/v1/dex/token/{chain}/{address}` on the sUSDe/USDC pool; skip if the streak exceeds ~14 days (mechanism stress too long, per the Rules).
+- **Signal (sympathy variant)** — on a `GET /api/v1/security/events` exploit print >$100M, sweep the synthetic-stable watchlist pools for >30 bp deviations, and use `GET /api/v1/derivatives/open-interest` to verify real flow before buying the basket.
+- **Regime gate** — `GET /api/v1/quant/market`: the sUSDe trigger correlates with `strong_trend_bear`/`vol_spike` states where funding inverts; scale entries to the vol-adjusted sizing the per-coin risk model (`GET /api/v1/quant/coins/risk`) suggests.
+- **Backtest** — `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) measures negative-funding-streak frequency and duration — the base rate behind the sUSDe variant's 3-5x/year estimate; replay sympathy events with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time context.
+- **Tips** — the structural-vs-solvable gate (reserve solvency, PSM utilization, LLAMMA depth) cannot be read from any market-data API; keep those RPC/subgraph checks as hard preconditions before the agent is allowed to size any depeg buy.
 
 ## Related
 

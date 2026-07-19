@@ -339,6 +339,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — the `GET /api/v1/on-chain/whale-score/BTC` accumulation reading plus `GET /api/v1/on-chain/exchange-flows/spike-alerts` outflow confirmation form the whale leg
+- **Funding filter** — the `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average must show the crowd is NOT already long before mirroring the whales
+- **Exit monitor** — `GET /api/v1/derivatives/binance/long-short-ratio` polled through the hold; crowd convergence onto the trade is the partial-exit trigger
+- **Backtest** — the whale-score endpoint's own historical timeseries joined to daily klines back to 2017-08 (`GET /api/v1/backtesting/klines`) and the funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
+- **Tips** — the `/on-chain/whales` endpoints are currently 503; run the pipeline on `whale-score` + `spike-alerts` and treat any whales-endpoint recovery as a new data source to re-validate, not silently merge
+- **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) tracks >$100k Hyperliquid accounts and separates market-maker hedging from the directional conviction this strategy copies
+
 ## Related
 
 - [[smart-money-vs-crowd-divergence]] — whale accumulation + crowd-SHORT divergence; this page is the earlier-in-cycle, crowd-neutral version; both are on-chain × funding-filter combinations

@@ -2,7 +2,7 @@
 title: "Head and Shoulders"
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis]
 aliases: ["H&S", "head and shoulders top", "inverse head and shoulders"]
@@ -105,6 +105,31 @@ Head and shoulders is among the most-studied patterns in [[technical-analysis]],
 - The pattern is valid only on completion; trading the right shoulder before the neckline break is higher risk.
 - Necklines are subjective; different analysts draw them differently, affecting targets and stops.
 - Self-fulfilling reflexivity (many traders watching the same level) cuts both ways — it can also attract stop-hunting around the neckline.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — OHLCV bars from which the swing highs/lows, neckline, and breakout are detected
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=200` — the same detection on Hyperliquid perp listings
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio for the declining-volume divergence into the head and right shoulder
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for pattern-reliability studies across cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Detect** — pull daily bars via `GET /api/v1/market-data/klines`, extract swing pivots (e.g. fractal or zigzag with a fixed % threshold), and test the three-peak geometry: middle peak highest, flanking peaks lower, two troughs defining the neckline
+- **Confirm** — signal only on a *close* through the neckline; check that volume from the same kline payload contracted into the right shoulder and expanded on the break
+- **Backtest** — replay pivot extraction and pattern matching over `GET /api/v1/backtesting/klines` (daily bars to 2017-08) and score break follow-through vs the failed-break rate; daily patterns test far better than intraday, matching the page's caveat
+- **Tip** — fix the pivot-detection threshold *before* scanning history; tuning it per chart until patterns "appear" is the H&S version of overfitting, and the neckline stop-hunt zone means entries on the retest backtest more robustly than entries on first touch
 
 ## Sources
 

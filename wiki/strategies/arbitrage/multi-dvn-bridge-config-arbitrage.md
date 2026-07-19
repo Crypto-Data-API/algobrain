@@ -2,7 +2,7 @@
 title: "Multi-DVN Bridge Configuration Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading]
 aliases: ["DVN Configuration Pair Trade", "Bridge Verifier RV", "1-of-1 vs Multi-DVN Pair"]
@@ -240,6 +240,39 @@ Per-pair capacity bounded by perp depth. Major bridges (Wormhole, LayerZero, Sta
 - [[ai-amplified-exploit-arbitrage]] — hub strategy
 - [[smart-contract-vulnerability-taxonomy]] — bridge vuln class
 - [[2020-2024-bridge-exploits]] — historical bridge incidents
+
+## Getting the Data (CryptoDataAPI)
+
+The core signal — per-app DVN/verifier configs — comes from on-chain contract reads; [[cryptodataapi|CryptoDataAPI]] covers the tradeable layer: which bridge tokens have listed perps, the funding carry on both legs, book depth for thin names, and the exploit-event trigger that pays the short basket.
+
+**Live data:**
+- `GET /api/v1/hyperliquid/meta` — listed Hyperliquid perps (which long/short basket names are actually tradeable)
+- `GET /api/v1/derivatives/funding-rates?coin=<COIN>` — cross-exchange funding (the ~50-80bp/yr carry cost on both legs)
+- `GET /api/v1/security/events` — filterable recent hacks/depegs (the payoff trigger for the short basket)
+- `GET /api/v1/security/regime/score` — Security Stress composite 0-100 (45% hack-weighted)
+- `GET /api/v1/liquidity/depth` — depth/spread at 10/25/50/100 bps (sizing $5-20M-deep bridge-app perp books)
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (carry-cost replay per basket name)
+- `GET /api/v1/backtesting/klines` — OHLCV archive for event studies around past bridge exploits
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]], [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the monitoring and execution layers (the quarterly DVN-config scoring still needs on-chain `getDVN()`-style reads):
+
+- **Universe** — `GET /api/v1/hyperliquid/meta` filters the config-scored universe down to names with listed perps; `GET /api/v1/liquidity/depth` caps per-name size against actual book depth.
+- **Carry management** — batch `GET /api/v1/derivatives/funding-rates?coin=<COIN>` across both baskets each funding cycle; the structure is negative-carry, so a funding drift past the 60 bps breakeven is a rebalance trigger, not noise.
+- **Event trigger** — poll `GET /api/v1/security/events` and `GET /api/v1/security/regime/score`: a hack print on a short-basket name is the payoff moment — pre-plan the exit because exploit freezes make fills partial.
+- **Backtest** — `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) prices historical basket carry; replay exploit events (KelpDAO Apr 2026 and earlier) against `GET /api/v1/backtesting/klines` and point-in-time `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to estimate per-event payoff without [[lookahead-bias]].
+- **Tips** — keep the on-chain config score and the CDA carry/depth reads in one loop so basket membership and sizing never desync; respect `new_listing` flags on freshly listed bridge-app perps where funding and depth are least reliable.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Aroon"
 type: concept
 created: 2026-04-20
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, trend-following, momentum]
 aliases: ["Aroon Indicator", "Aroon Up/Down", "aroon", "Aroon Oscillator"]
@@ -105,6 +105,33 @@ Aroon's distinguishing feature is that it measures *time since the last extreme*
 - Chande, Tushar S. & Kroll, Stanley (1994), *The New Technical Trader* (Wiley) — original publication of the Aroon indicator and Aroon Oscillator.
 - Achelis, Steven B. (2000), *Technical Analysis from A to Z* (McGraw-Hill) — reference entry on Aroon construction and interpretation.
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Comprehensive Guide to Technical Trading Indicators (compiled research, 29 references)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/indicators/signum-rgg` — pre-computed ADX(14)+DMI trend state, the strength-confirmation pairing this page describes
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV highs/lows for the Aroon lookback window
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — Aroon needs only the timing of extremes: from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100`, count bars since the N-period high/low and scale to 0-100
+- **Live state** — no pre-computed Aroon endpoint exists; the nearest served trend read is `GET /api/v1/indicators/signum-rgg` (ADX+DMI RED/GREY/GREEN) — the exact "Aroon for timing, ADX for strength" pairing this page recommends
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports crossover and both-below-50 filter studies across full cycles
+- **Tip** — when both lines print high (volatile two-sided range), cross-check `GET /api/v1/volatility/regime/{symbol}` before standing aside — the two reads agreeing is a strong no-trade signal
 
 ## Related
 

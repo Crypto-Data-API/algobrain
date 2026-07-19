@@ -2,7 +2,7 @@
 title: "Grid Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-04-27
+updated: 2026-07-19
 status: excellent
 tags: [mean-reversion, grid-trading, automation, bots, range-trading, quantitative, market-microstructure, crypto]
 aliases: ["Grid Bot", "Grid Strategy", "Grid Bot Trading", "Range-Bound Grid", "ADX-Filtered Grid"]
@@ -307,6 +307,38 @@ Numerical conditions for retiring or pausing the grid (see [[when-to-retire-a-st
 - Pionex Help Center (Grid Trading Bot, Futures Grid Bot). Industry/practitioner reference; documents the standard parameter set used by the largest consumer grid platform. *(verified via WebSearch — pages exist at support.pionex.com).*
 - Hyperliquid HLP vault risk-return analyses (Geronimo on Medium; KuCoin research desk; DefiLlama protocol page). Useful as a comparison: HLP is a sophisticated continuous-quoting market-making vault on the same venue category as the reference bot, and provides a benchmark for what professional market making looks like when the regime filter is replaced by an inventory-skewed Avellaneda-Stoikov-style policy. See [[hyperliquid-hlp-basis-arbitrage]]. *(verified via WebSearch).*
 - Note on academic coverage: peer-reviewed grid-trading literature is sparse — most rigorous treatments are practitioner blogs, exchange documentation, and a handful of recent arXiv papers. The intellectual scaffolding sits in the broader market-microstructure / market-making literature rather than in a "grid trading" canon.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1h&limit=300` — 1h OHLCV for the ADX(14)/Bollinger-bandwidth regime filter and ATR(14) spacing
+- `GET /api/v1/indicators/signum-rgg` — pre-computed ADX(14)+DMI RED/GREY/GREEN state across the universe (GREY ≈ the ADX < 20 gate)
+- `GET /api/v1/volatility/regime` — per-asset vol regime; `compressed` corroborates the BBW bottom-quintile condition
+- `GET /api/v1/hyperliquid/l2-book?coin=ETH` — book depth for per-level sizing on perp-DEX grids
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — funding drain on accumulated grid inventory
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive for filter + spacing backtests
+- `GET /api/v1/backtesting/funding` — funding history for the inventory-carry overlay
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/signum-rgg"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-indicators]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Regime gate (the entire edge)** — `GET /api/v1/indicators/signum-rgg` (deploy only in GREY — the ADX-based chop state) cross-checked with `GET /api/v1/volatility/regime` (`compressed` ≈ BBW bottom quintile); compute the exact ADX < 20 / BBW percentile thresholds from `GET /api/v1/market-data/klines?interval=1h`
+- **Execution context** — `GET /api/v1/hyperliquid/l2-book` to keep each level below ~25% of resting depth, and `GET /api/v1/derivatives/funding-rates` to detect the funding bleed that kills neutral grids holding one-sided inventory
+- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h back to 2017-08 for the regime-filter study; execution-grade fill simulation needs 1m klines, which exist only since 2026-03-30 (grows forward) — earlier grid backtests on 1h bars overstate cycle counts
+- **Backtest (funding)** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30 — to replay the funding-drain kill criterion
+- **Tips** — simulate the 2.0× ATR break-cancel explicitly (it is the loss cap, not a detail); re-check the regime gate hourly and cancel the grid the moment ADX/BBW invalidate, rather than waiting for the break
+- **Prompt library** — the "Bot Entry Signal Evaluator" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) returns a strict per-candle JSON verdict (confidence + blockers) usable as this grid's arm/disarm gate
 
 ## Related
 

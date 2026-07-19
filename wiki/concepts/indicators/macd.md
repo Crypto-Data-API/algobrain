@@ -2,7 +2,7 @@
 title: MACD (Moving Average Convergence Divergence)
 type: concept
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [macd, indicators, technical-analysis]
 aliases: [MACD, "MACD Histogram", "Macd Histogram"]
@@ -108,6 +108,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/techn
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — MACD is not pre-computed server-side; derive EMA(12) − EMA(26), the 9-period signal line, and the histogram from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` (or `GET /api/v1/hyperliquid/candles` for perps). Seed the EMAs with well over 26 warm-up bars so early values are stable
+- **Trend gate** — `GET /api/v1/indicators/signum-rgg` (ADX/DMI RED/GREY/GREEN, Pro+) filters out the ranging conditions where MACD whipsaws; take crossovers only when the colour agrees with the signal direction
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports multi-cycle crossover, zero-line, and histogram-divergence studies; expect trend-following economics (≈40% win rates carried by payoff ratio)
+- **Tip** — histogram peaks of diminishing height are the earliest momentum-exhaustion tell; encode this as "n-th histogram peak lower than (n−1)-th while MACD > 0" rather than eyeballing divergence
 
 ## Related
 

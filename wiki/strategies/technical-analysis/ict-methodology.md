@@ -2,7 +2,7 @@
 title: "ICT Methodology"
 type: concept
 created: 2026-04-10
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, technical-analysis, market-microstructure, methodology, smart-money, price-action]
 aliases: ["ICT", "Inner Circle Trader", "ICT-methodology", "ICT concepts"]
@@ -136,6 +136,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — mark structure (order blocks, FVGs, sweep levels) on `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m`; the "draw on liquidity" is machine-readable via `GET /api/v1/market-intelligence/liquidations`
+- **Execution** — `GET /api/v1/liquidity/depth/BTC` distinguishes a defended level (real resting size) from a sweepable wick before the retrace limit is placed
+- **Regime gate** — `GET /api/v1/quant/market`: sweep-reversal setups fire best in ranging states; when `strong_trend` probability leads, "sweeps" are usually plain continuation and the reversal entry is the trap
+- **Backtest** — sweep→reversal base rates need minute resolution for kill-zone logic: `GET /api/v1/backtesting/klines` 1m bars exist only since 2026-03-30 (1h reaches 2017-08 for coarser tests); pair with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Tips** — pre-register each setup (sweep level, displacement threshold, invalidation) before the kill zone opens, then let `/api/v1/derivatives/funding-rates` and `/api/v1/derivatives/open-interest` argue with it — untracked discretion is where ICT backtests quietly rot.
 
 ## Related
 

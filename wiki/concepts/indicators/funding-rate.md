@@ -2,7 +2,7 @@
 title: "Funding Rate"
 type: concept
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 confidence: medium
 tags: [derivatives, crypto, funding-rate, perpetual-futures]
@@ -120,3 +120,14 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/derivatives/funding-rates?coin=BTC` puts Binance and Hyperliquid funding for the same coin in one response; `GET /api/v1/derivatives/summary?coin=BTC` adds OI and long/short ratio in a single call
+- **Compute** — annualise and z-score the series from `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` to turn raw prints into crowding percentiles
+- **Backtest** — `GET /api/v1/backtesting/funding` holds Hyperliquid hourly funding since 2023-05 and Binance daily funding (with mark price + OI) since 2026-03-30 — the Hyperliquid side is deep enough for multi-year carry and fade studies
+- **Tip** — funding extremes matter most with confirmation: join a stretched print to `GET /api/v1/derivatives/binance/long-short-ratio` before fading the crowded side

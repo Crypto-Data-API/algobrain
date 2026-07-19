@@ -2,7 +2,7 @@
 title: "Wrapped Asset Triangular Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, defi, crypto, bitcoin, ethereum]
 aliases: ["WBTC Arb", "Synthetic Asset Triangulation", "Cross-Wrapper Arbitrage"]
@@ -215,6 +215,38 @@ Per-event $5-200M depending on wrapper liquidity and the depth of the redemption
 - DefiLlama wrapper TVL dashboards.
 - BlockSec / PeckShield wrapper-risk analyses.
 - Verified via Perplexity (sonar), 2026-06-10: WBTC max discount ~1% post-BitGo/Sun announcement, persisting 1-2 months (protos.com, nydig.com, bitgo.com blog); renBTC discount ~19% during late-2022 wind-down; stETH ~7% discount June 2022.
+
+## Getting the Data (CryptoDataAPI)
+
+Custodian attestations and redemption-rail status are issuer/bridge sources; [[cryptodataapi|CryptoDataAPI]] covers the wrapper-vs-underlying price deviation, the depeg/custodian-event stress overlay, and the hedge carry during redemption delays.
+
+**Live data:**
+- `GET /api/v1/dex/token/{chain}/{address}` — per-wrapper pool price (WBTC, tBTC, USDC-variant deviation reads)
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — underlying reference price for the deviation calc
+- `GET /api/v1/security/regime` — recent hacks/depegs + Security Stress score (custodian/bridge event detection)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — perp funding for hedging underlying exposure through multi-day KYC/redemption delays
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d to 2017-08) for deviation and event studies
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state around recent wrapper events (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-regimes]], [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the watchlist and hedging layers (redemption itself is a custodian/bridge action):
+
+- **Signal** — poll `GET /api/v1/dex/token/{chain}/{address}` per wrapper against `GET /api/v1/market-data/ticker/price` for the underlying; a deviation beyond 30 bp + the modeled custody-risk premium is a candidate, per the Rules.
+- **Gate on the rail, not the discount** — cross-check `GET /api/v1/security/events` for custodian/bridge incidents; a deep discount coinciding with a bridge exploit print is the renBTC trap (frozen rail), not an opportunity. Rail liveness itself must be verified with the custodian/bridge directly.
+- **Hedge management** — during KYC/redemption delay, hold the short-underlying hedge and track its cost via `GET /api/v1/derivatives/funding-rates?coin=BTC`; unhedged delay converts the arb into a directional position.
+- **Backtest** — run the full-event-set test the Null Hypothesis demands: replay every historical breach (survivors *and* impairments) against `GET /api/v1/backtesting/klines`, with point-in-time context from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for recent events — survivor-only backtests are this strategy's signature self-deception.
+- **Tips** — cap aggregate exposure per custodian, not per wrapper, in the agent's risk state (BitGo/Coinbase/Lido each back multiple wrappers); attestation cadence is a manual/document feed with no market-data API.
 
 ## Related
 

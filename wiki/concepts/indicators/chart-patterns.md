@@ -2,7 +2,7 @@
 title: "Chart Patterns"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators]
 aliases: ["Chart Pattern Recognition", "ascending-triangle", "Ascending Triangle"]
@@ -89,6 +89,32 @@ These targets are guidelines, not guarantees. Many traders use them for initial 
 - **Trading patterns in isolation** without considering trend, volume, and support/resistance context
 - **Ignoring failed patterns** -- a failed [[head-and-shoulders]] breakout, for example, often produces a powerful move in the opposite direction
 - **Over-reliance on pattern targets** -- markets are not obligated to reach measured move levels
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+- `GET /api/v1/market-data/short-term-price` — short-term momentum metrics
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` — OHLCV bars for pattern scans
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio for breakout confirmation
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with these patterns directly:
+
+- **Fetch** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` supplies the swing highs/lows that pattern-recognition code (pivot detection, trendline fitting) runs on
+- **Confirm** — validate breakouts against `GET /api/v1/market-data/volume-history`: the volume-contraction-then-surge signature this page requires
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) is deep enough to measure pattern completion rates and measured-move accuracy across full cycles
+- **Tip** — codify each pattern as explicit pivot-geometry rules before backtesting; eyeballed patterns cannot be validated, and loose definitions data-mine themselves into false edges (see the pitfalls above)
 
 ## Related
 

@@ -346,6 +346,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this hedge end-to-end:
+
+- **Signal** — daily klines for the unlocking token and its sector peer maintain the 20-day rolling beta and correlation that size the hedge ratio
+- **Event leg** — `GET /api/v1/event/calendar?type=unlock` surfaces upcoming unlock catalysts (cross-check external unlock trackers for cliff size and vesting detail per the note above)
+- **Gate** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}` on both legs; a crowded short on the unlock leg kills the entry
+- **Regime gate** — `GET /api/v1/regimes/current` blocks entries in `Structural_Shock`, when sector correlations converge to 1 and the hedge stops hedging
+- **Backtest** — beta stability and unlock-event studies on `GET /api/v1/backtesting/klines` (1d back to 2017-08 for Binance-listed pairs); funding-cost overlay from the archive (Hyperliquid hourly since 2023-05)
+- **Tips** — respect `insufficient_history` on the unlock leg: a 60-day-old token has no stable beta, so widen the hedge-ratio band or skip
+
 ## Related
 
 - [[unlock-short-with-crowding-gate]] — the outright short expression of the same unlock-supply edge; this page is the beta-hedged pairs expression — more capital-intensive, lower crowding sensitivity, market-neutral

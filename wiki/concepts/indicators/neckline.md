@@ -2,7 +2,7 @@
 title: "Neckline"
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Neckline", "Neckline Break", "Pattern Neckline"]
@@ -77,6 +77,32 @@ The neckline thus supplies the trigger, the invalidation reference, and the basi
 - **Stop clustering.** Because so many traders watch the same neckline, clustered stops just beyond it invite liquidity hunts / stop-runs before the genuine move.
 - **Break on weak volume.** A neckline break — particularly to the upside — on *falling* [[trading-volume]] is suspect and more likely to fail.
 - **Lower-timeframe noise.** Necklines on intraday charts break and fail constantly; daily/weekly necklines are materially more reliable.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — OHLCV bars from which the reaction pivots, neckline, and break are computed
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=200` — the same on Hyperliquid perp listings
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for break/retest reliability studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — extract swing pivots from `GET /api/v1/market-data/klines`, fit the neckline through the pattern's reaction lows/highs, and evaluate breaks on bar *closes* only — intrabar pokes are the fakeout population
+- **Confirm** — require expanding volume from the same kline payload on the break; in crypto, also check `GET /api/v1/market-intelligence/liquidations` — a neckline break made of forced liquidations often snaps back once the flow exhausts
+- **Backtest** — over `GET /api/v1/backtesting/klines` (daily bars to 2017-08), compare first-touch entries vs retest entries; the stop-clustering dynamics the page describes usually make the retest variant the more robust rule
+- **Tip** — fix the pivot threshold and the close-beyond-buffer (percentage or ATR) before scanning; both parameters silently redraw necklines when tuned per-chart
 
 ## Sources
 

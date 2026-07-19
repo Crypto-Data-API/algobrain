@@ -2,7 +2,7 @@
 title: "Volatility Trading"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, derivatives, volatility, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Volatility Trading", "Vol Trading", "Volatility Strategies", "Crypto Vol Trading"]
@@ -296,6 +296,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog on [[cryptodataapi]]; for the DVOL index/history and full surface use the Deribit API or [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can operate the canonical short-VRP loop in the pseudocode above:
+
+- **IV-RV spread** — RV forecast from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` (close-to-close and Parkinson); DVOL and its percentile come from Deribit — the agent combines the two for the 5-vol-point entry threshold
+- **Regime gate** — `GET /api/v1/volatility/regime` (per-asset state) plus `GET /api/v1/quant/market` (HMM probabilities): no short-premium entries in `vol_shock`/`expanding` or when vol_spike probability is rising
+- **Skew and positioning** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + perp OI reveal the overbid wing; `GET /api/v1/quant/gex` shows dealer-gamma sign (dampened vs cascade-prone spot)
+- **Kill switch** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` polled each cycle automate the DVOL-shock flatten and the "RV > IV for 20+ days → suspend" checks
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) supplies the RV history; `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) enables the regime-conditional P&L table above to be measured rather than assumed
+- **Tips** — pair any vol-strategy replay with point-in-time snapshots from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); using today's regime labels on old trades is lookahead bias
 
 ## Sources
 

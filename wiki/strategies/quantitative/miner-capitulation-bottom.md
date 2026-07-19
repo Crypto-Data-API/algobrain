@@ -2,7 +2,7 @@
 title: "Miner Capitulation Bottom"
 type: strategy
 created: 2026-06-03
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [crypto, bitcoin, market-regime, position-trading, quantitative, regime-detection]
 aliases: ["Miner Capitulation Bottom", "Hash Ribbon Strategy", "Miner Capitulation Trade"]
@@ -271,6 +271,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchang
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
+
+**Live dashboards:** [BTC cycle](https://cryptodataapi.com/bitcoin-cycle-indicators) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this signal end-to-end:
+
+- **Signal** — `GET /api/v1/on-chain/miners/hash-ribbon` returns the capitulation/recovery/normal state pre-computed (the 30d-vs-60d hashrate cross), with `GET /api/v1/on-chain/miners/reserves` for the forced-selling-exhausted check
+- **Confluence** — `GET /api/v1/on-chain/dormancy/btc` (MVRV zone, capitulation→euphoria) and `GET /api/v1/on-chain/score` (On-Chain Health composite) — remember the rule: all four conditions must agree, no single metric fires the trade
+- **Regime gate** — `GET /api/v1/regimes/current`: accumulate only when the 10-state cycle label sits in `Capitulation`/`Bottoming`; the same signature mid-`Established Bear` is the false-positive case
+- **Backtest** — `GET /api/v1/market-intelligence/btc/cycle-indicators` (historical cycle-indicator series) plus daily BTC from `GET /api/v1/backtesting/klines` (Binance spot to 2017-08 — only ~2 completed halving cycles; the small-sample caveat is binding, not decorative)
+- **Tips** — this is a zone signal: poll daily, ladder buys in tranches, and never let an agent convert the Hash Ribbon recovery into a single all-in market order
 
 ## Related
 

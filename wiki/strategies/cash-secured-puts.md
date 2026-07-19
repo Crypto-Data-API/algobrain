@@ -2,7 +2,7 @@
 title: "Cash-Secured Puts"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, premium-selling, volatility]
 strategy_type: technical
@@ -140,6 +140,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry gate** — `GET /api/v1/volatility/regime`: sell puts in `expanding`/`normal`, stand aside on `vol_shock`; confirm premium richness by comparing Deribit DVOL to realized vol computed from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90`.
+- **Strike context** — `GET /api/v1/market-intelligence/options` (max pain / OI) + `GET /api/v1/quant/gex`: avoid parking the short strike inside a short-gamma dealer zone that would amplify the very selloff that tests it.
+- **Regime gate** — `GET /api/v1/quant/market`: elevated `strong_trend_bear`/`vol_spike` probabilities describe the clustered-loss regime where the whole put book goes ITM at once — halt new sales.
+- **Roll trigger** — watch `GET /api/v1/market-intelligence/liquidations` intraday when spot approaches the short strike; a liquidation cluster below it is the early warning to roll down-and-out (for a credit) before gamma dominates.
+- **Backtest** — replay put-write proxies against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d since 2017-08), pairing entries with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead. CDA has no options-chain archive — premium series come from Deribit.
+- **Tips** — append `?format=markdown` for cleaner context; poll the cached `GET /api/v1/daily` bundle hourly instead of per-endpoint loops between management checks.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: Statistical Arbitrage
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: excellent
 tags:
   - quantitative
@@ -266,6 +266,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe / signal** — spreads and BTC-factor residuals from `GET /api/v1/market-data/klines?interval=1h` plus `GET /api/v1/hyperliquid/candles?interval=1h` for broad alt-perp coverage; `GET /api/v1/derivatives/funding-rates` per short leg (the "borrow cost" that can kill a spread outright)
+- **Regime gate** — `GET /api/v1/volatility/regime` + `GET /api/v1/quant/market`: no new spreads into `vol_spike` — correlated deleveraging is this strategy's canonical disaster, and the regime engine sees it forming
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; HL daily to 2023) for out-of-sample cointegration and residual-reversion tests, with `GET /api/v1/quant/history` point-in-time regime probabilities (Pro Plus) for leak-free gating and `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for short-leg carry
+- **Universe hygiene** — `GET /api/v1/backtesting/symbols` + dated `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) reconstruct what was tradeable on each date — mining thousands of pairs on a survivor-only universe manufactures spurious cointegration
+- **Tips** — batch the whole book's risk via `GET /api/v1/quant/coins/risk` rather than per-symbol loops; automate the weekly re-qualification and retire failing spreads mechanically (the 40%-failing kill criterion is portfolio-level)
 
 ## Instrument Structures
 

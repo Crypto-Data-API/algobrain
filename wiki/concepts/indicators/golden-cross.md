@@ -2,7 +2,7 @@
 title: "Golden Cross"
 type: concept
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, trend-following, momentum]
 aliases: ["Golden Cross", "golden crossover"]
@@ -73,6 +73,31 @@ The golden cross pairs naturally with the broader [[moving-average-crossover]] f
 - **Reflexivity cuts both ways.** Because the signal is widely watched, some of the post-cross pop can be the signal trading itself, which fades; the durable component is the underlying [[trend]].
 - **Parameter mining.** Searching for the "best" MA pair on past data is classic [[backtesting|overfitting]] — the 50/200 is conventional precisely because it is not optimised to one history.
 - **Single-name noise.** On illiquid or news-driven individual stocks the averages can cross on a one-off spike that does not reflect a real trend change.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC daily prices with the 200D MA precomputed (the long leg of the canonical 50/200 cross)
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=250` — daily OHLCV to compute both the 50-day and 200-day averages for any Binance spot pair
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=250` — the perp-side equivalent for Hyperliquid listings
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for multi-cycle crossover backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=250"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — pull 250+ daily closes from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=250`, compute SMA(50) and SMA(200), and flag the bar where the short average crosses above the long
+- **Shortcut** — `GET /api/v1/market-data/btc-price-history` ships the 200D MA precomputed for BTC, so only the 50-day needs deriving
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers three full crypto cycles of golden/death crosses — enough to measure the whipsaw rate honestly
+- **Tip** — crypto's 24/7 sessions make the "daily close" convention arbitrary; anchor daily bars to 00:00 UTC consistently in both live checks and backtests, or the cross date can shift by a day
 
 ## Sources
 

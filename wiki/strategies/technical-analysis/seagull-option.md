@@ -2,7 +2,7 @@
 title: "Seagull Option"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, seagull, hedging, directional, three-leg, low-cost, skew]
 aliases: ["Seagull Spread", "Bullish Seagull", "Bearish Seagull", "Crypto Seagull"]
@@ -128,6 +128,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the seagull's decision loop end-to-end (wing pricing and skew stay on Deribit / [[greeks-live]]):
+
+- **Funding-leg selection** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — sell whichever wing funding says is rich: positive funding firms call skew (a bearish seagull's short call funds well), post-crash put skew funds the bullish build.
+- **Naked-leg watch** — `GET /api/v1/quant/gex` + `GET /api/v1/derivatives/open-interest?coin=BTC` — dealer gamma and crowded positioning flag cascade risk into the short funding leg; size it for a Black-Thursday gap, not an average session.
+- **Regime gate** — `GET /api/v1/volatility/regime` — do not initiate the naked wing in `vol_shock`.
+- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for the skew-driver history; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for how often spot breaches the funding-leg strike within tenor.
+- **Tips** — automate a spot-vs-short-wing distance alert; the whole risk of a "zero-cost" seagull lives in that one leg.
 
 ## Related
 

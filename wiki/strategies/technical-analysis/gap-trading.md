@@ -2,7 +2,7 @@
 title: "Gap Trading (Crypto)"
 type: strategy
 created: 2026-06-30
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, day-trading, swing-trading, breakout, crypto]
 aliases: ["gap trading", "CME gap", "CME gap fill", "weekend gap", "gap fill", "gap fade", "gap and go", "bitcoin gap"]
@@ -221,6 +221,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Note: CryptoDataAPI serves Binance spot and crypto derivatives; the CME futures Friday close that *defines* the CME gap comes from CME/TradingView, but the gap's fill plays out on the spot series above. Auth: `X-API-Key` header.
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — mark the gap zone on `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h`; classify it with `GET /api/v1/derivatives/open-interest?coin=BTC` — OI building means fresh positioning (follow candidate), OI falling means a deleveraging artefact (fade candidate)
+- **Execution** — pull `GET /api/v1/liquidity/depth/BTC` before entry: thin weekend books are where gap fades get run over, so size to the depth, not the chart
+- **Regime gate** — `GET /api/v1/volatility/regime`: fading gaps in `vol_shock` is knife-catching; `GET /api/v1/quant/market` `range_low_vol` probability favors the fill statistics
+- **Backtest** — weekend/CME-gap fill rates from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); tag cascade-driven gaps with `/api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30)
+- **Tips** — funding extremes on `/api/v1/derivatives/funding-rates?coin=BTC` veto the fade — a leverage-driven gap tends to run before it fills.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Pin Bar"
 type: concept
 created: 2026-04-15
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, price-action, swing-trading]
 aliases: ["Pin Bar", "pin-bar", "Pinocchio Bar", "Rejection Candle", "Pin Bars"]
@@ -101,6 +101,32 @@ Pin bars work best as [[reversal-patterns|reversal]] signals at the edge of a ra
 - **Ignoring the close.** A long wick with a body in the *middle* of the range is a [[doji]] / indecision bar, not a pin bar — the body must sit at one extreme.
 - **Stop too tight on the tip.** Placing the stop exactly at the wick tip invites [[false-signals|stop-hunting]] / [[whipsaw]]; a small buffer beyond the tip is safer.
 - **Confirmation lag trade-off.** Waiting for the body break gives a later, worse entry but filters fakeouts — a deliberate cost, not a free lunch.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100` — OHLCV bars; wick/body geometry computes directly from open, high, low, close
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=4h&limit=100` — the same detection on Hyperliquid perps
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for rejection-candle hit-rate studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Detect** — from `GET /api/v1/market-data/klines`: wick ≥ 2-3× body, body in the opposite third of the range, plus a minimum bar-range filter (relative to ATR) so noise bars do not qualify
+- **Location filter** — a pin bar only carries information at a level; require proximity to a prior swing high/low extracted from the same kline history before signalling
+- **Backtest** — replay over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08), scoring entry-on-break-of-the-pin-bar with the stop beyond the wick — the pattern's defined-risk structure makes expectancy easy to measure honestly
+- **Tip** — in crypto many long wicks are liquidation cascades, not organic rejection; cross-reference `GET /api/v1/market-intelligence/liquidations` — a wick printed on heavy forced flow into support is the highest-quality version of the signal
 
 ## Sources
 

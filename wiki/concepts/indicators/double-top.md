@@ -2,7 +2,7 @@
 title: "Double Top and Double Bottom"
 type: concept
 created: 2026-06-30
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Double Top", "Double Bottom", "M pattern", "W pattern", "double-bottom", "double top and bottom"]
@@ -92,6 +92,31 @@ A stock tops out after an extended uptrend:
 - Robert D. Edwards & John Magee, *Technical Analysis of Stock Trends* — canonical treatment of double tops and bottoms.
 - John J. Murphy, *Technical Analysis of the Financial Markets* — reversal patterns, volume confirmation, and measured-move targets.
 - General market knowledge; the worked example above is illustrative, not from a specific ingested wiki source.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV for swing-pivot detection
+- `GET /api/v1/market-data/volume-history?days=90` — volume for peak and break confirmation
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this pattern directly:
+
+- **Detect** — find swing pivots in `GET /api/v1/market-data/klines` output and flag two highs within a small tolerance (~2-3%) separated by a trough; confirm only on a close below the trough
+- **Confirm** — compare the second peak's volume against the first via `GET /api/v1/market-data/volume-history`; a lighter second peak is the early divergence warning described above
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) measures completion rates and measured-move accuracy over full cycles
+- **Tip** — crypto's stop-hunting around obvious trough levels is severe; test entering on the retest of the broken level rather than the first break to filter the fakeouts the page warns about
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Donchian Channels"
 type: concept
 created: 2026-04-20
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, volatility, breakout, trend-following]
 aliases: ["Donchian Channel", "Donchian", "Donchian Channels"]
@@ -100,6 +100,31 @@ Note: For trading strategies using Donchian Channels, see [[donchian-channel-bre
 ## Sources
 
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Comprehensive Guide to Technical Trading Indicators (compiled research, 29 references)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=55` — recent bars for the 20/55-period bands
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=200` — perp-side OHLCV
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for channel backfill
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=55"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — the bands are just rolling max/min of highs/lows over `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=55`; test breakouts against the *prior* bar's band, per the construction quirk above
+- **Size** — pair the breakout with ATR from the same klines for Turtle-style N-unit position sizing
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) covers several full crypto cycles of 20/55-day breakouts — including the range years where whipsaw losses dominate
+- **Tip** — stick to the round, robust lookbacks (10/20/55) rather than tuning N per asset; the overfitting warning above bites hardest on crypto's short, regime-heavy history
 
 ## Related
 

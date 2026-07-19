@@ -354,6 +354,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this divergence read end-to-end:
+
+- **Signal** — `GET /api/v1/on-chain/whale-score/BTC` (7-day accumulation score) is the smart-money leg; `GET /api/v1/on-chain/exchange-flows/spike-alerts` confirms outflows in real time
+- **Crowd leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/binance/long-short-ratio` establish that the crowd is positioned opposite the whales
+- **Regime gate** — `GET /api/v1/regimes/current`; skip or halve size in `Structural_Shock` / bear-trend labels
+- **Backtest** — the whale-score endpoint returns its own historical timeseries; join it to daily klines back to 2017-08 (`GET /api/v1/backtesting/klines`) and to point-in-time snapshots (`GET /api/v1/backtesting/daily-snapshots`, since 2026-03-02) for the crowd side
+- **Tips** — `/on-chain/whales` and `/on-chain/whales/{symbol}` currently return 503; keep the pipeline on `whale-score` + `spike-alerts` and re-probe the whales endpoints monthly instead of failing the run
+- **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) gives the smart-money side of this divergence read
+
 ## Related
 
 - [[smart-money-orderflow-combo]] — on-chain smart money + real-time order flow; differentiated as intraday/order-flow vs this page's swing/positioning frame

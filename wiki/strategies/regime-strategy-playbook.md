@@ -2,7 +2,7 @@
 title: "Regime → Strategy Playbook"
 type: index
 created: 2026-06-03
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [strategies, crypto, market-regime, regime-detection, quantitative]
 aliases: ["Regime Strategy Playbook", "Regime to Strategy Mapping", "Crypto Regime Playbook"]
@@ -76,6 +76,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes) · [strategy baskets](https://cryptodataapi.com/trading-strategy-baskets)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can operate this playbook as its core loop — this page is the wiki-side counterpart of the API's recommended four-step agent cycle:
+
+- **Detect** — `GET /api/v1/regimes/current` (10-state cycle label) + `GET /api/v1/quant/market` (6-state HMM probabilities, 15-min refresh); overlay the fragility detectors `GET /api/v1/volatility/regime/score` and `GET /api/v1/liquidity/regime/score` for baskets 13 and 9
+- **Select** — `GET /api/v1/trading-strategy-baskets` (50 pre-mapped baskets in 6 groups) maps the detected state to deployable universes, mirroring the mapping table above
+- **Size** — `GET /api/v1/quant/coins/risk?horizon=24h` returns per-coin regime, probability buckets, and vol-target multipliers across 180+ coins in one batched call
+- **Backtest the gating** — point-in-time only: `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) and `GET /api/v1/backtesting/daily-snapshots` (full payload since 2026-03-02) supply regime labels as they stood at decision time — the requirement flagged in the backtesting note above
+- **Tips** — treat near-threshold probability readings as *transitional* and cut gross rather than flipping strategies; poll the cached `GET /api/v1/daily` bundle hourly between full loop runs
+- **Prompt library** — the "Market Regime Detection" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) is a drop-in interpretation layer between the regime feed and this playbook's strategy switches
 
 ## Related
 

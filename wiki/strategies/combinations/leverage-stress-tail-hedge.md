@@ -92,7 +92,7 @@ Currently not rejected (`backtest_status: untested`). Testable prediction: ident
 
 **Gate 3: Cascade fuel confirmed**
 - Long/short ratio > **1.8** (more than 1.8× as many longs as shorts), indicating directional crowding of the long side.
-- Source: `/api/v1/derivatives/long-short-ratio?coin=BTC`.
+- Source: `/api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT`.
 - *OR:* liquidation heat (7-day cumulative long-liquidation volume / OI > 2.5%) — the market has already seen some cascade activity, with more fuel still loaded.
 - *Rationale:* high OI + high funding alone can persist for extended periods. The long/short ratio confirms the directional skew is concentrated on the long side — the side that generates cascades when liquidated.
 
@@ -254,7 +254,7 @@ The production system adds: Deribit API polling for OTM put pricing and delta ca
 
 - **Open interest / market cap** — OI: `/api/v1/derivatives/open-interest?coin=BTC` (24h rolling); market cap: `/api/v1/on-chain/score` includes market-cap inputs, or supplement from coingecko/coinmarketcap. The ratio OI/MC is computed from these two.
 - **Funding rate (7-day average)** — `/api/v1/derivatives/funding-rates?coin=BTC`; 7-day average of 8h funding readings.
-- **Long/short ratio** — `/api/v1/derivatives/long-short-ratio?coin=BTC`; directional crowding confirmation (Gate 3).
+- **Long/short ratio** — `/api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT`; directional crowding confirmation (Gate 3).
 - **DVOL** — `/api/v1/market-intelligence/dvol-history`; current DVOL vs 30-day trailing average for the "IV not yet spiked" gate.
 - **OTM put pricing (Deribit)** — specific strike and delta options pricing NOT available via CryptoDataAPI; source from [[deribit]] directly (`GET /api/v2/public/get_order_book?instrument_name=BTC-{date}-{strike}-P`).
 - **Regime classification** — `/api/v1/regimes/current`; avoid entries in `Structural_Shock` (crash already occurring) or `Established Bear` (OI/MC tends to be low; gate naturally inactive).
@@ -361,7 +361,7 @@ See [[when-to-retire-a-strategy]] for the broader framework.
 **Live data:**
 - `GET /api/v1/derivatives/open-interest?coin=BTC` — BTC perp OI (24h rolling); primary input for Gate 1 (OI/MC ratio)
 - `GET /api/v1/derivatives/funding-rates?coin=BTC` — 8h funding rates; 7-day average for Gate 2
-- `GET /api/v1/derivatives/long-short-ratio?coin=BTC` — top-coin long/short ratio; Gate 3 (directional crowding)
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — top-coin long/short ratio; Gate 3 (directional crowding)
 - `GET /api/v1/market-intelligence/dvol-history` — current and historical DVOL; the "IV not yet spiked" gate
 - `GET /api/v1/regimes/current` — macro regime classification; context for gate interpretation
 
@@ -377,6 +377,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Stress gates** — `GET /api/v1/derivatives/open-interest?coin=BTC` (OI/MC, Gate 1), `GET /api/v1/derivatives/funding-rates?coin=BTC` (7d average, Gate 2), `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` (crowding, Gate 3)
+- **IV check** — `GET /api/v1/market-intelligence/dvol-history` — hedge only while IV has not yet spiked
+- **Context** — `GET /api/v1/regimes/current` — regime framing for gate interpretation
+- **Backtest** — `GET /api/v1/derivatives/binance/history?days=180` + `GET /api/v1/backtesting/klines` (daily back to 2017-08) to measure drawdowns following stress-composite triggers; cascade outcomes are only verifiable via `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Tips** — the gates move at daily cadence: one hourly `GET /api/v1/daily` poll covers all three stress inputs — reserve per-endpoint calls for threshold-crossing moments
 
 ## Related
 

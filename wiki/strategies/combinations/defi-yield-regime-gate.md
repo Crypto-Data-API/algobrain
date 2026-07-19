@@ -309,6 +309,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-volatility]], [[cryptodataapi-regimes]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Gate signal** — `GET /api/v1/volatility/dvol?coin=BTC` (and `?coin=ETH` for ETH pools) — the DVOL threshold that switches LP capital in and out
+- **Pause triggers** — `GET /api/v1/regimes/current` (Structural Shock / Crash) + `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3` (acute 24h move)
+- **Leading indicator** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding buildup often precedes the vol expansion that hurts LPs
+- **Backtest** — `GET /api/v1/volatility/dvol?coin=BTC&historical=true&days=365` calibrates gate thresholds over a year; `GET /api/v1/backtesting/klines` (daily back to 2017-08) extends the price-path / IL replay across full cycles — LP fee income must be modelled from external pool data
+- **Tips** — make gate flips sticky (hysteresis) by evaluating on daily closes, not intraday DVOL prints, so LP capital is not whipsawed in and out
+
 ## Related
 
 - [[delta-neutral-yield-farming]] — hedged LP strategy; composable with this gate (add regime gate on top)

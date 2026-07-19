@@ -165,6 +165,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-data]] and [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30` → NR7 detection + ATR(14) entry stops; arm only the trend-side stop per the 50-MA filter from the same series.
+- **Regime gate** — `GET /api/v1/volatility/regime` — this strategy *is* the `compressed` → `expanding` transition trade: enter from `compressed`, pause in `vol_shock` where "contraction" is pre-spike suppression.
+- **Bias** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — arm the buy-stop when funding agrees with the trend filter, skip the counter-side.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for NR7 base rates and X-multiplier optimization; `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus) separates true expansion setups from structural low-vol regimes with no catalyst.
+- **Tips** — `GET /api/v1/event/calendar` flags the catalyst that turns a squeeze into an expansion; an NR7 with no dated catalyst and depressed universe vol is the small-loss accumulator to skip.
+
 ## Related
 
 - [[opening-range-breakout]] — intraday breakout after a session contraction

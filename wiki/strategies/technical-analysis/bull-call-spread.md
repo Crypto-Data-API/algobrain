@@ -2,7 +2,7 @@
 title: "Bull Call Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, bull-call-spread, debit-spread, bullish, defined-risk, bitcoin]
 aliases: ["Call Debit Spread", "Call Spread", "Crypto Bull Call Spread", "Deribit Call Spread"]
@@ -128,6 +128,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — buy the spread when `GET /api/v1/volatility/regime` reads `compressed` (the debit is cheap) and trend context from `GET /api/v1/market-data/klines` supports the bullish thesis; place the sold strike against the `GET /api/v1/market-intelligence/options` call wall
+- **Regime gate** — `GET /api/v1/quant/market`: enter on rising `strong_trend_bull` probability; `choppy_high_vol` chews the debit through whipsaw without ever reaching the short strike
+- **Backtest** — how often does the underlying reach the short strike within the tenor? Replay on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), pairing entries with point-in-time regimes from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — the 60-day `/api/v1/volatility/regime/{symbol}` history separates genuinely cheap vol from freshly-crushed vol; positive funding on `/api/v1/derivatives/funding-rates?coin=BTC` richens the sold upper strike and cuts the net debit.
 
 ## Related
 

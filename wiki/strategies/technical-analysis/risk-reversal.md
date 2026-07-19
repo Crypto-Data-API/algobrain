@@ -2,7 +2,7 @@
 title: "Risk Reversal"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, risk-reversal, directional, synthetic, skew, hedging, derivatives]
 aliases: ["Combo", "Synthetic Forward", "25-Delta Risk Reversal", "Crypto Risk Reversal", "Collar Without Coin"]
@@ -127,6 +127,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the risk reversal's decision loop end-to-end (the 25-delta skew quote itself stays on Deribit / [[greeks-live]]):
+
+- **Skew driver** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/open-interest?coin=BTC` — richly positive funding with crowded OI flags call skew rich (favors the bearish RR as a credit); post-crash negative funding flags rich put skew (the bullish RR pays).
+- **Tail watch** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/liquidations` — cascade risk into the naked short wing; trigger the [[seagull-option]] conversion when it builds.
+- **Regime gate** — `GET /api/v1/volatility/regime` — do not initiate the short wing into `vol_shock`.
+- **Backtest** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` and `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) to test funding as a skew-mean-reversion predictor; `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for the spot-path outcomes below the short put.
+- **Tips** — the funding read is the automatable half of the trade: schedule it before every entry rather than assuming equity-style static put skew.
 
 ## Related
 

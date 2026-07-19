@@ -2,7 +2,7 @@
 title: "Volatility Regime Classification"
 type: concept
 created: 2026-05-05
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [options, volatility, indicators, regime]
 aliases: ["Vol Regime", "Volatility Regimes", "Vol Environment Classification"]
@@ -299,6 +299,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/volatility/regime` maps each asset into `compressed` / `expanding` / `vol_shock` / `mean_reverting` / `normal` — a hosted crypto analogue of this page's Calm/Normal/Elevated/Stressed grid; `GET /api/v1/volatility/regime/score` collapses it to one 0-100 stress number
+- **Fetch** — `GET /api/v1/volatility/regime/{symbol}` returns per-asset detail plus a rolling 60d history for checking how long classifications persist before acting on them
+- **Backtest** — condition strategy backtests on `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus) or the daily labels from `GET /api/v1/quant/timeline` (2019-now)
+- **Tip** — mirror this page's classification-cadence advice in the agent loop: poll the score hourly via the `/daily` bundle, but only reclassify the book after a sustained multi-poll breach, not a single print
 
 ## Related
 

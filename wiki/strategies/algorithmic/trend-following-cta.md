@@ -155,6 +155,40 @@ Traditional CTA programs are among the most scalable strategies in existence —
 
 A typical CTA program allocates 40-60% of its risk budget to commodity futures, with the remainder split between currencies, fixed income, and equity index futures. (Source: [[2026-04-14-commodities-research-framework]])
 
+## Getting the Data (CryptoDataAPI)
+
+For the crypto application (BTC/ETH/alt perp trend systems), CryptoDataAPI serves every input the signal stack needs; traditional futures data (CME/ICE contracts) comes from futures data vendors.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — daily OHLCV for MA / breakout / time-series-momentum signals
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC with the 200D MA precomputed (the classic trend filter)
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=365` — perp-side candles for the traded instrument
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding, the carry cost of holding the losing side of a perp trend position
+- `GET /api/v1/volatility/regime` — per-asset vol states for the volatility-targeting layer
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 (BTCUSDT), spanning several full crypto cycles
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 for cost-corrected perp replays
+- `GET /api/v1/quant/regimes/history` — hourly 6-state HMM probabilities since 2020 (Parquet, Pro Plus) for regime-conditional performance analysis
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — daily `GET /api/v1/market-data/klines` per symbol, or bulk `GET /api/v1/daily/prices` (~2,500 pairs in one call) for the whole-universe momentum scan
+- **Sizing** — ATR/vol targeting from the same klines, cross-checked against `GET /api/v1/quant/coins/risk?horizon=24h` (per-coin vol-target multipliers across 180+ coins)
+- **Regime gate** — `GET /api/v1/quant/market` — the strategy's killer is the choppy regime; de-lever when `choppy_high_vol`/`range_low_vol` probabilities dominate, and track the whipsaw-rate kill criterion against the regime transition count
+- **Backtest** — `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08) with funding drag from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); condition results on `GET /api/v1/quant/regimes/history` (since 2020) to verify the edge concentrates in trend states, not chop
+- **Tips** — refresh signals once daily off the cached `/api/v1/daily` bundle — a trend system gains nothing from intraday polling; a crypto perp backtest without funding costs overstates Sharpe materially
+
 ## See Also
 - [[turtle-trading]] -- the most famous trend-following system, which uses channel breakouts
 - [[moving-average-crossover]] -- the core signal used by many CTA systems

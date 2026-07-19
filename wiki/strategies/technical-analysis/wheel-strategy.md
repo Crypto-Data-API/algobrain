@@ -2,7 +2,7 @@
 title: "The Wheel Strategy (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, income, premium-selling, cash-secured-put, covered-call, derivatives, bitcoin, ethereum]
 aliases: ["The Wheel", "Options Wheel", "Crypto Wheel", "Triple Income Strategy"]
@@ -108,6 +108,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the wheel cycle end-to-end (chains and DVOL stay on Deribit / [[greeks-live]]):
+
+- **Phase timing** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score` — sell puts/calls while vol is rich and stable; pause new cycles in `vol_shock` (that is how bag-holding starts).
+- **Strike selection** — `GET /api/v1/market-intelligence/options` (OI walls / max pain near candidate strikes) + `GET /api/v1/derivatives/funding-rates?coin=BTC` (positive funding = richer Phase-2 call premium).
+- **Thesis check** — `GET /api/v1/quant/market` — a flip to `strong_trend_bear` is the "abandon the wheel" trigger; do not keep selling calls into a structural decline.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to replay assignment → recovery cycles across the 2018/2022 drawdowns; CDA has no historical premiums, so yield assumptions come from Deribit data.
+- **Tips** — the wheel is cron-shaped: a weekly strike/roll review plus a daily regime poll covers the whole loop; track effective cost basis in agent state rather than re-deriving it from fills.
 
 ## Related
 

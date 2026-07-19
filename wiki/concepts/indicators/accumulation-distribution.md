@@ -2,7 +2,7 @@
 title: "Accumulation/Distribution Line"
 type: concept
 created: 2026-06-30
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [indicators, technical-analysis, volume]
 aliases: ["A/D Line", "ADL", "Accumulation Distribution Line", "accumulation-distribution-line"]
@@ -67,6 +67,31 @@ The A/D Line and [[obv|OBV]] often disagree, and the disagreement is informative
 ## Sources
 
 - General technical-analysis literature on volume indicators (Marc Chaikin's accumulation/distribution methodology). Formula, interpretation, and the worked example above are standard material; the example uses illustrative numbers, not a specific ingested wiki source.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h high, low, close, and volume
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars (high, low, close, volume — everything the MFM formula needs)
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500`, apply MFM = ((C−L)−(H−C))/(H−L), multiply by volume, and cumulate — a few lines of code over one response
+- **Backtest** — `GET /api/v1/backtesting/klines` serves Binance spot 1h/4h/1d back to 2017-08 for A/D-divergence hit-rate studies; 1m bars exist only since 2026-03-30
+- **Cross-check** — the buy ratio from `GET /api/v1/market-data/volume-history` gives an independent taker-side flow read to confirm what the A/D slope implies
+- **Tip** — crypto trades 24/7, so the A/D Line's biggest equity blind spot — overnight gaps the MFM never sees — largely disappears on continuous crypto bars
 
 ## Related
 

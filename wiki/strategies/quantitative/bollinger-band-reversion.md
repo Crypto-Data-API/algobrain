@@ -2,7 +2,7 @@
 title: "Bollinger Band Reversion"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [mean-reversion, bollinger-bands, volatility, quantitative, john-bollinger, crypto]
 aliases: ["Bollinger Band Mean Reversion", "Bollinger Bounce", "BB Reversion Strategy"]
@@ -195,6 +195,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/techn
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/indicators/technical` classifies the whole universe's SMA/BB/RSI structure in one call: screen for lower-band touches with oversold RSI instead of recomputing bands per coin, then confirm the touch-and-recover on `GET /api/v1/market-data/klines?symbol=...&interval=1h`
+- **Regime gate** — `GET /api/v1/volatility/regime` (trade only `mean_reverting`/`normal`, never `vol_shock`) plus `GET /api/v1/indicators/signum-rgg` — GREY is the tradeable chop; RED/GREEN flags the trending regimes where bands get walked
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) covers the strategy's 1h design timeframe across multiple range/trend cycles; pair entries with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid [[lookahead-bias]]
+- **Tips** — `/indicators/technical/{symbol}` carries a 60-day state history to measure how long oversold readings persist before committing a rule; respect `insufficient_history` flags on newly listed coins before trusting a 20-bar σ
 
 ## Related
 - [[rsi-mean-reversion]] — the ideal companion for dual confirmation

@@ -163,3 +163,15 @@ Calendar-flow trades have modest capacity: the edge is typically 0.3–1% per ev
 - `GET /api/v1/derivatives/open-interest` — cross-venue OI aggregation
 
 Full catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and the [[max-pain]] strike ahead of each Deribit expiry
+- **Size check** — `GET /api/v1/derivatives/open-interest` — cross-venue OI confirming the expiry notional is large enough to exert a pin
+- **Regime gate** — `GET /api/v1/regimes/current` — stand down when a macro catalyst overlaps OpEx day (the documented macro-override failure mode)
+- **Backtest** — expiry-window price paths from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h back to 2017-08; 1m bars only since 2026-03-30 for the final-hour pin) — historical per-strike OI is not archived on CryptoDataAPI, so pin statistics need Deribit history
+- **Tips** — the trade lives in a narrow calendar window: schedule the agent on the Deribit expiry calendar (last Friday of the month, 08:00 UTC) rather than polling continuously

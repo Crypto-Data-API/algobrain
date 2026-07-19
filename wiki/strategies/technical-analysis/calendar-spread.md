@@ -2,7 +2,7 @@
 title: "Calendar Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Calendar Spread", "Time Spread", "Horizontal Spread", "Crypto Calendar Spread"]
@@ -145,6 +145,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — enter when `GET /api/v1/volatility/regime` reads `compressed` (cheap back-month vega) and `GET /api/v1/market-intelligence/options` max pain pins near the chosen strike
+- **Regime gate** — `GET /api/v1/quant/market`: the ideal sequence is `range_low_vol` now with `vol_spike`/`squeeze` probability building later; an in-progress vol shock means the vega is already repriced
+- **Backtest** — replay strike-vs-path outcomes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); the IV term structure itself is not archived by CDA, so validate the regime-timing leg against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — the 60-day `/api/v1/volatility/regime/{symbol}` history reveals the typical compressed→expanding cycle length — match the front expiry to it; funding spikes on `/api/v1/derivatives/funding-rates?coin=BTC` warn of the term-structure inversion that hurts a long calendar.
 
 ## Related
 

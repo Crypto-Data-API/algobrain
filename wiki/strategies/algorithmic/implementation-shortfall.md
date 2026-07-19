@@ -2,7 +2,7 @@
 title: "Implementation Shortfall"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [futures, execution, institutional, slippage, market-impact, algorithmic-execution, benchmark, vwap, twap]
 aliases: ["Implementation Shortfall Algorithm", "IS Algorithm", "Arrival Price Algorithm", "Execution Cost Minimization"]
@@ -140,6 +140,38 @@ See [[when-to-retire-a-strategy]]. For an execution algo, "retire/intervene" cri
 ## Sources
 
 General execution and [[market-microstructure]] knowledge (Perold 1988 implementation-shortfall framework; Almgren-Chriss optimal-execution trade-off between impact and timing risk); no specific wiki source ingested yet. See [[transaction-cost-analysis]] for how shortfall is measured in practice.
+
+## Getting the Data (CryptoDataAPI)
+
+The equity examples above run on broker/venue market data; for the crypto application of IS (working size on Binance spot or Hyperliquid perps), CryptoDataAPI supplies the depth, spread, volume, and volatility inputs of the pre-trade model.
+
+**Live data:**
+- `GET /api/v1/liquidity/depth` — per-coin depth/spread at 10/25/50/100 bps (the impact-model input)
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — L2 order-book snapshot for the venue being worked
+- `GET /api/v1/market-data/ticker/24hr` — rolling volume for the %ADV calculation
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` — short-horizon volatility estimate for the timing-risk leg
+
+**Historical data:**
+- `GET /api/v1/liquidity/depth/{coin}` — 24h rolling depth history at 1-min samples (BTC free; full universe Pro+) for intraday liquidity curves
+- `GET /api/v1/backtesting/klines` — archive for TCA baselines (1m klines only since 2026-03-30; 1h/4h/1d Binance spot to 2017-08)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]] (Liquidity & Market Depth family; also [[cryptodataapi-hyperliquid]], [[cryptodataapi-market-data]]).
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run crypto IS execution end-to-end:
+
+- **Pre-trade model** — `GET /api/v1/liquidity/depth` calibrates expected impact per slice size; `GET /api/v1/hyperliquid/l2-book?coin=BTC` gives the live book the child orders will hit
+- **Urgency setting** — short-horizon σ from 1m `GET /api/v1/market-data/klines` sets the timing-risk penalty; `GET /api/v1/liquidity/oi-divergence` flags when the tape is one-sided against the order
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility score: high fragility → smaller slices, longer horizon, or postpone the parent order entirely
+- **Backtest / TCA** — replay schedules on `GET /api/v1/backtesting/klines` — honest window: 1m bars only since 2026-03-30, so minute-level TCA baselines are shallow; 1h/4h/1d reach 2017-08 for coarser studies
+- **Tips** — sample `GET /api/v1/liquidity/depth/{coin}` (1-min, 24h rolling) through the execution window to time slices into deep-book periods; log realized shortfall vs the pre-trade estimate on every parent order — the feedback loop is the product
 
 ## Related
 

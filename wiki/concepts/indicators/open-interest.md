@@ -2,7 +2,7 @@
 title: "Open Interest"
 type: concept
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 confidence: medium
 tags: [derivatives, indicators, open-interest, futures, commodities]
@@ -135,6 +135,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — `GET /api/v1/derivatives/open-interest?coin=BTC` for the cross-exchange read (exposed as the `get_open_interest` MCP tool); `GET /api/v1/hyperliquid/open-interest` ranks OI across every Hyperliquid perp in one call
+- **Compute** — join OI changes to price changes from `GET /api/v1/market-data/klines` and classify each bar into the four-quadrant table above (new longs / short covering / new shorts / capitulation)
+- **Backtest** — `GET /api/v1/derivatives/binance/history?days=90` for recent daily series; deeper OI context ships inside `GET /api/v1/backtesting/funding` (Binance daily records include mark price + OI, but only since 2026-03-30) — do not claim multi-year OI backtests from this archive
+- **Divergence gate** — `GET /api/v1/liquidity/oi-divergence` pre-computes the OI-vs-price divergence over 1h/4h/24h windows, the squeeze/fragility read without local computation
+- **Tip** — quote OI in native units when comparing across time; USD-notional OI mechanically rises with price and manufactures fake "new positioning" signals in rallies
 
 ## Related
 

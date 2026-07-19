@@ -2,7 +2,7 @@
 title: "Kalman Filter Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [kalman-filter, adaptive, signal-processing, noise-reduction, quantitative, pairs-trading, dynamic-estimation, crypto]
 aliases: ["Kalman Filter Strategy", "Adaptive Filter Trading", "KF Signal Extraction"]
@@ -205,6 +205,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — feed the filter from `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1h` and `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h` (both legs), trading the normalized innovation z-score; `GET /api/v1/derivatives/funding-rates?coin=ETH` prices the short-leg carry
+- **Regime gate** — `GET /api/v1/quant/market`: suspend new spread entries in `vol_spike` and `strong_trend_*` states, where β *breaks* rather than drifts and the filter tracks the break as signal
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; HL daily to 2023) for Q/R maximum-likelihood tuning and walk-forward innovation-whiteness tests; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05, Binance daily since 2026-03-30) for the carry overlay
+- **Universe hygiene** — `GET /api/v1/backtesting/symbols` keeps delisted legs in the historical pair universe (a delisting is exactly the structural break that kills this strategy — do not survivorship-filter it away)
+- **Tips** — schedule the weekly innovation-whiteness re-check as an automated job and halt any spread that fails it; re-verify cointegration before trusting a freshly tuned filter
 
 ## Related
 

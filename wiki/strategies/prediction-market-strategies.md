@@ -292,6 +292,38 @@ Per-strategy numerical retirement conditions (adapt to bankroll and platform):
 
 Under the null hypothesis (no edge), prediction market prices are already perfectly calibrated probabilities. Random buying of "Yes" or "No" shares at market price would yield zero expected profit minus any fees and capital lockup cost. Any observed profits would be attributable to luck rather than skill, particularly given the binary nature of outcomes.
 
+## Getting the Data (CryptoDataAPI)
+
+Prediction-market odds, books, and resolution data come from the venues' own APIs ([[polymarket-api]], Kalshi) — [[cryptodataapi|CryptoDataAPI]] does not serve prediction-market data. What it does serve is the **crypto-side reference data**: fair-value inputs for crypto price-threshold markets (term-structure spreads, "BTC above $X" pricing) and the catalyst calendar behind event markets.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — spot reference for pricing crypto-threshold markets
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — return history for base-rate models of "BTC above $X by date Y"
+- `GET /api/v1/event/calendar` — forward catalysts up to 30 days out (macro prints, unlocks, depeg bias) that event markets resolve on
+- `GET /api/v1/sentiment/fear-greed` — crowd-state context for the favorite-longshot fade on crypto-flavored markets
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08: the sample for calibrating threshold-probability models against realized outcomes
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can supply the fair-value side of these strategies (the venue APIs supply the odds):
+
+- **Fair-value model** — fit threshold-crossing base rates from `GET /api/v1/backtesting/klines` (nine years of daily BTC data) and feed them into the `fade_longshot` routine above; note that AI agents already arbitrage crypto price-threshold markets (see [[ai-prediction-markets]]), so the residual edge is thin there
+- **Term-structure check** — the same klines-derived vol estimates flag inverted "BTC > $X by June vs December" market pairs worth the structural spread trade
+- **Catalyst timing** — `GET /api/v1/event/calendar` dates the crypto/macro catalysts behind Fed/macro-signal and event-market trades
+- **Sizing discipline** — fractional-Kelly with the 2-3% cap is agent-enforceable; the tail on fade strategies is a full $1 loss per share
+- **Tips** — annualize every arbitrage against capital lockup before acting (the scanner note above); prediction-market position data itself must be logged from the venue APIs, not CryptoDataAPI
+
 ## See Also
 
 - [[polymarket]] — Largest decentralized prediction market

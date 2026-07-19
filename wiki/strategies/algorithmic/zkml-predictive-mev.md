@@ -2,7 +2,7 @@
 title: "ZKML Predictive MEV"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-20
+updated: 2026-07-19
 status: good
 tags: [arbitrage, defi, crypto, machine-learning, algorithmic]
 aliases: ["Conditional MEV", "Predictive Arb", "ZK-Proof MEV"]
@@ -148,6 +148,37 @@ Currently capped by ZK proof-generation infrastructure cost ($1-10/proof) and th
 - RISC Zero zkVM docs.
 - Conway, Mahankali, et al., *zkML Production Survey* (2024).
 - Verified via Perplexity (sonar), 2026-06-10: Modulus Labs team joined Tools for Humanity Dec 2024 (world.org/blog announcement; idtechwire.com); no publicly documented production zkML MEV deployments found as of 2025-2026.
+
+## Getting the Data (CryptoDataAPI)
+
+Pool-state, oracle, and mempool training feeds come from nodes and oracle networks — CryptoDataAPI's contribution is the training/validation corpus for the funding-rate-prediction use case (candidate 3 above) and the market-state features around it.
+
+**Live data:**
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — order-book imbalance features for the funding predictor
+- `GET /api/v1/hyperliquid/funding-rates?coin=BTC` — the prediction target, live
+- `GET /api/v1/liquidity/oi-divergence` — OI-vs-price divergence features (1h/4h/24h windows)
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05: the labelled training set for the funding-prediction variant
+- `GET /api/v1/backtesting/klines` — price features (1m only since 2026-03-30; 1h/4h/1d Binance spot to 2017-08)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/funding?symbol=BTC&exchange=hyperliquid&start=2023-06-01"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]] (also [[cryptodataapi-backtesting]]).
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can build and monitor the funding-prediction variant end-to-end:
+
+- **Training corpus** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) provides roughly three years of labelled funding outcomes; price/vol features from `GET /api/v1/backtesting/klines`
+- **Live features** — `GET /api/v1/hyperliquid/l2-book` imbalance plus `GET /api/v1/liquidity/oi-divergence` at inference time
+- **Regime gate** — `GET /api/v1/quant/market` — condition deployment on regime and track hit-rate per regime, since model decay can hide inside a favourable regime mix
+- **Backtest** — score out-of-sample predictions against the archived funding series; the oracle and cross-chain use cases (candidates 1-2) need node-level data no REST archive serves
+- **Tips** — the null here bleeds proof costs rather than taking directional losses — meter hit-rate against the unconditional base rate continuously (the cheap null test this page defines) and retrain on a schedule as leverage cycles shift funding dynamics
 
 ## Related
 

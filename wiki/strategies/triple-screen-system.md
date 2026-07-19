@@ -2,7 +2,7 @@
 title: "Triple Screen Trading System"
 type: concept
 created: 2026-04-15
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, technical-analysis, trend-following, momentum, indicators, methodology, multi-timeframe]
 aliases: ["Triple Screen System", "Triple Screen", "Elder Triple Screen"]
@@ -119,6 +119,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run all three screens plus the crypto confluence layer:
+
+- **Screen 1 (tide)** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1w&limit=200` for the higher-timeframe MACD-Histogram slope; only trade the permitted direction
+- **Screens 2-3 (wave/ripple)** — the same endpoint at `interval=1d` (or `4h`) for the oscillator and the trailing stop-entry bar
+- **Confluence** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/open-interest?coin=BTC` + `GET /api/v1/market-intelligence/liquidations`: negative funding, elevated OI, and a fresh long-liquidation flush upgrade a routine pullback to the highest-conviction discount
+- **Regime gate** — `GET /api/v1/volatility/regime`: stand aside in `vol_shock` (the whipsaw/slippage regime); `GET /api/v1/liquidity/depth/BTC` checks the book at the buy-stop level before sizing
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) validates the filter across the 2021 bull and 2022 bear; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime gating
+- **Tips** — apply the BTC regime overlay before any alt setup: one BTC-trend call from the weekly klines invalidates most alt longs in one check
 
 ## Related
 

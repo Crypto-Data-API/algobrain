@@ -2,7 +2,7 @@
 title: "Whipsaw"
 type: concept
 created: 2026-07-01
-updated: 2026-07-02
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, backtesting, risk-management]
 aliases: ["Whipsaws", "Whipsawed", "Getting Whipsawed"]
@@ -50,6 +50,32 @@ Every indicator that fires on real moves also fires on noise. In a [[trend-follo
 ## Budgeting for It
 
 A robust system treats a baseline whipsaw rate as a fixed cost and sizes positions so a clustered run of whipsaws is survivable. In [[backtesting]], whipsaw frequency and the realistic [[transaction-costs|cost overlay]] per round trip are first-order inputs — a strategy that looks profitable on a naive backtest can be net-negative once whipsaw churn and costs are charged honestly.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/quant/market` — HMM regime probabilities; `range_low_vol` and `choppy_high_vol` are the whipsaw states
+- `GET /api/v1/indicators/signum-rgg` — GREY (chop) classification per asset, a ready-made stand-aside filter
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — kline archive for measuring a system's historical whipsaw rate
+- `GET /api/v1/quant/regimes/history` — hourly regime probabilities since 2020 (Pro Plus) for regime-conditioned whipsaw attribution
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/market"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — the regime-filter mitigation above is one call: suppress breakout/crossover entries while `GET /api/v1/quant/market` reads `range_low_vol`/`choppy_high_vol`, or while `GET /api/v1/indicators/signum-rgg` tags the asset GREY
+- **Backtest** — replay a signal set against `GET /api/v1/backtesting/klines` and count round trips stopped within N bars: that is the system's whipsaw rate, and joining it to `GET /api/v1/quant/regimes/history` shows which regimes generate the churn
+- **Tip** — charge honest round-trip costs in the replay; whipsaw losses are mostly fees and spread, so a costless backtest systematically understates exactly this failure mode
 
 ## Related
 

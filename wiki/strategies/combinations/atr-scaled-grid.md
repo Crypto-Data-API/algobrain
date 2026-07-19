@@ -361,6 +361,17 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=20` — recompute ATR(14, 4h) each recalibration cycle and rescale grid spacing to `k × ATR`
+- **Halt gate** — `GET /api/v1/derivatives/open-interest?coin=BTC` (pause on ≥ +5% 12h OI build) + `GET /api/v1/volatility/regime` — a `vol_shock` label is the regime-stop that ATR scaling alone cannot catch
+- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h back to 2017-08 covers full vol cycles for optimising the spacing multiplier `k`; 1m klines exist only since 2026-03-30 if fill simulation needs intrabar paths
+- **Tips** — recalibrate only on closed 4h candles to avoid intra-bar spacing flapping; append `?format=markdown` to trim kline payloads for LLM context
+
 ## Related
 
 - [[grid-trading]] — the canonical grid primitive; this page adapts its one-time ATR calibration to be continuous

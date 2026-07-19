@@ -2,7 +2,7 @@
 title: "Bull Put Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, bull-put-spread, credit-spread, bullish, defined-risk, volatility, ethereum]
 aliases: ["Put Credit Spread", "Short Put Spread", "Crypto Bull Put Spread", "Deribit Put Credit Spread"]
@@ -128,6 +128,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — sell the put spread when `GET /api/v1/volatility/regime` reads elevated/`expanding` (not `vol_shock`) and `GET /api/v1/market-intelligence/options` shows the put-OI wall below which to park the short strike
+- **Regime gate** — `GET /api/v1/quant/market`: stand down while `strong_trend_bear`/`vol_spike` probabilities climb — the downside tail is the only thing that breaks this structure
+- **Backtest** — short-strike breach frequency per tenor on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); tag cascade days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to study the flush scenario separately
+- **Tips** — while short, poll `/api/v1/market-intelligence/liquidations`: close the spread into the first long-liquidation flush rather than waiting to see whether the wing holds — the credit never justifies riding a cascade.
 
 ## Related
 

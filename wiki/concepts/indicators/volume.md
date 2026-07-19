@@ -2,7 +2,7 @@
 title: Volume
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [volume, indicators]
 aliases: [trading-volume]
@@ -85,6 +85,31 @@ Confirming breakouts with volume is even more critical in commodity markets than
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy: "Volume is the fuel behind price moves" and "Volume confirms price." Comprehensive coverage of volume analysis, open interest interpretation in futures, and the volume-price relationship framework (Source: [[book-technical-analysis-of-the-financial-markets]])
 - Granville, Joseph (1963), *Granville's New Key to Stock Market Profits* — origin of On-Balance Volume (OBV)
 - Steidlmayer, J. Peter & Steidlmayer, Steven (2003), *Steidlmayer on Markets* — Market Profile / volume-at-price (volume profile) framework
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — rolling 24h volume and stats
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio (one-sided-flow detection)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — per-bar volume alongside OHLC
+- `GET /api/v1/backtesting/klines` — deep kline archive (volume column included)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/volume-history?days=90"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — `GET /api/v1/market-data/volume-history?days=90` returns daily volume plus buy ratio, so the four price/volume conviction cases in the table above are computable without tick data
+- **Compute** — a volume moving average from klines' volume column flags "above-average volume" for breakout confirmation; [[obv]] and [[vwap]] derive from the same bars
+- **Backtest** — volume-confirmed breakout rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); minute-level volume exists only since 2026-03-30
+- **Tip** — crypto reported volume is wash-trade-prone off the majors: keep the volume leg on Binance spot (this API's source) rather than mixing venues with unaudited tape
 
 ## Related
 

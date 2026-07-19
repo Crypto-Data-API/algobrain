@@ -2,7 +2,7 @@
 title: "Ratio Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, ratio-spread, directional, volatility, crypto, derivatives, advanced]
 aliases: ["Call Ratio Spread", "Put Ratio Spread", "Ratio Vertical"]
@@ -118,6 +118,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]] and volatility-regime detail on [[cryptodataapi]]. IV/DVOL surface is Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can manage the ratio spread's context end-to-end (strikes and DVOL stay on Deribit / [[greeks-live]]):
+
+- **Entry timing** — `GET /api/v1/volatility/regime` — the short-vega structure wants an `expanding`/`normal` read likely to mean-revert down; never open into `vol_shock`.
+- **Wing selection** — `GET /api/v1/derivatives/funding-rates?coin=ETH` — sell the wing the leveraged crowd has overbid (richly positive funding → the call side).
+- **Naked-leg watch** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/liquidations` — short dealer gamma plus cascade activity is the overshoot scenario that blows through the short strike; use it to trigger the buy-the-further-wing conversion to a [[broken-wing-butterfly]].
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to measure how often BTC/ETH overshoot the short-strike distance within candidate tenors — the tail frequency the naked leg is underwriting.
+- **Tips** — automate a spot-vs-short-strike distance alert and the ~21-DTE management rule as scheduled jobs, not discretionary checks.
 
 ## Related
 

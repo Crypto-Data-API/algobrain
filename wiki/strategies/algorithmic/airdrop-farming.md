@@ -2,7 +2,7 @@
 title: "Airdrop Farming"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [airdrop, farming, crypto, defi, token-distribution, protocol-interaction, sybil, speculative, web3, expected-value]
 aliases: ["Airdrop Strategy", "Airdrop Hunting", "Protocol Farming", "airdrop", "airdrops"]
@@ -271,6 +271,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/new-pools"
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-dex]], [[cryptodataapi-coins]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Screening** — `GET /api/v1/dex/new-pools` catches the claimed token's first liquidity; `GET /api/v1/dex/security/{chain}/{address}` rug-screens it before you sell into (or hold through) launch
+- **Sell-timing** — `GET /api/v1/market-data/ticker/price?symbol=<TOKEN>USDT` plus `GET /api/v1/event/calendar` (filter unlock events) to time the sell-vs-hold branch ahead of the VC unlock cliffs that drive the dilution haircut
+- **Regime gate** — `GET /api/v1/quant/market` — dump claims fast when `strong_trend_bear`/`vol_spike` probabilities dominate; a bull state supports the partial-hold branch
+- **Backtest** — `GET /api/v1/backtesting/klines` for post-airdrop price paths of comparable tokens (Binance spot 1h/4h/1d back to 2017-08); the eligibility/Sybil side of the EV model has no API archive — it lives in your own campaign records
+- **Tips** — respect `new_listing` / `insufficient_history` flags on freshly listed airdrop tokens; append `?format=markdown` when pulling token data into LLM context
 
 ## Related
 

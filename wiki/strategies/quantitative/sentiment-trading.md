@@ -2,7 +2,7 @@
 title: "Sentiment Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [sentiment, crypto, fear-greed, funding-rate, social, contrarian, momentum, quantitative, on-chain, behavioral-finance]
 aliases: ["Crypto Sentiment Strategy", "Fear and Greed Trading", "Social Sentiment Trading", "Sentiment Composite"]
@@ -276,6 +276,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-g
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]], [[cryptodataapi-on-chain]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [market health](https://cryptodataapi.com/market) · [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal (composite inputs)** — `GET /api/v1/sentiment/fear-greed` (30% weight), `GET /api/v1/derivatives/funding-rates` (25%), `GET /api/v1/on-chain/exchange-flows/BTC` (20%), `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` (15%) — four of the five composite inputs in four calls; only bot-filtered social remains external
+- **Regime gate (the bear-market veto)** — `GET /api/v1/market-health/summary` plus `GET /api/v1/regimes/current`: no contrarian longs in `Established Bear` — this single veto is what separates the strategy from the 2022 extreme-fear wipeout
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history`, `GET /api/v1/sentiment/stablecoins/remote-history?days=365`, and `GET /api/v1/market-health/history?days=730` supply the input histories; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) freezes the full sentiment+health payload point-in-time so composite backtests are leak-free
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly instead of hitting each input separately; log every signal's forward 30-day outcome — the < 50% hit-rate kill criterion needs that ledger from day one
 
 ## Related
 

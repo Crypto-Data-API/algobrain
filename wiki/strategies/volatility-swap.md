@@ -2,7 +2,7 @@
 title: "Volatility Swap"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [volatility, derivatives, quantitative, options, risk-management, crypto, bitcoin, ethereum]
 aliases: ["Vol Swap", "Realized Volatility Swap", "Crypto Vol Swap"]
@@ -166,6 +166,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. For the DVOL index/history that anchors the strike, and the full surface, use the Deribit API or [[greeks-live]]. Full catalog on [[cryptodataapi]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can build the realized-vol side of the trade — the swap quotes themselves stay OTC:
+
+- **Payoff leg** — the contract pays on realized vol, and `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` (or finer intervals) is the input for the close-to-close / Parkinson estimators on the 24/7 tape; match the contract's specified estimator and annualization exactly
+- **Sell/buy decision** — compare the dealer strike (≈ DVOL from Deribit, minus convexity adjustment) against the agent's RV forecast; `GET /api/v1/volatility/regime` reading `expanding`/`vol_shock` argues against initiating a short
+- **Tail stop** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/volatility/regime/score` are the early warning for the vol explosion that dominates a short's P&L (a single 2025-10-10-style print can set the whole window's realized vol)
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) replays realized vol vs candidate strikes across 2020-03, LUNA, FTX, and 2025-10-10 — the events a short-vol-swap backtest must include to be honest
+- **Tips** — weekend/holiday bars count in crypto realized vol; an agent that computes RV on business days only will systematically misprice the swap
 
 ## Sources
 - General market knowledge; Deribit / [[greeks-live]] DVOL and surface documentation; no specific wiki source ingested yet.

@@ -159,6 +159,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/overview"
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]].
 
+**Live dashboards:** [NFT trends](https://cryptodataapi.com/nft-trends) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can use this data to scope the trade:
+
+- **Universe** — `GET /api/v1/nfts/collections` + `GET /api/v1/nfts/volume` rank which collections still carry enough volume for a realistic exit; illiquidity is this strategy's main killer, so screen out anything thinly traded before hunting spreads.
+- **Signal context** — `GET /api/v1/nfts/overview` and `GET /api/v1/nfts/correlations` frame market-wide direction and which collections move together (a correlated pair is a hedge candidate for floor-vs-vault trades). Per-listing marketplace spreads themselves come from marketplace APIs, not CryptoDataAPI.
+- **Regime gate** — `GET /api/v1/meme/regime/score` (market-wide speculative-hype 0-100) is the closest proxy for NFT risk appetite; NFT spreads are only worth crossing 5-15% round-trip fees when speculative flow is active. `GET /api/v1/regimes/current` adds the cycle-level check.
+- **Backtest** — no NFT archive exists in `/api/v1/backtesting/*`; to build history, poll `/api/v1/nfts/volume` and store it yourself, and use `GET /api/v1/backtesting/daily-snapshots` (full payload since 2026-03-02) for point-in-time market context around stored NFT observations.
+- **Tips** — append `?format=markdown` for cleaner context; treat reported collection volume as wash-trading-suspect ([[wash-trading]]) and require independent bid depth before sizing.
+
 ## See Also
 - [[nft-trading]] and [[nft]] -- foundational knowledge about NFT technology and trading
 - [[cross-exchange-arbitrage]] -- the fungible token equivalent of marketplace arbitrage

@@ -277,6 +277,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 
 For DVOL levels/history and the full IV surface, use the Deribit API (`/api/v2/public/get_volatility_index_data`) or [[greeks-live]]. Full catalog: [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automate the tranche/monetize cycle in the pseudocode above:
+
+- **Tranche entry** — buy put wings only when `GET /api/v1/volatility/regime` reads `compressed` AND `GET /api/v1/derivatives/funding-rates?coin=BTC` shows richly positive funding (the call-skew regime where downside puts are cheap); otherwise hold the tranche in stablecoin per the entry table
+- **Monetization trigger** — `GET /api/v1/market-intelligence/liquidations` spiking with `GET /api/v1/quant/gex` short-gamma is the cascade signature; the agent should execute the 3×/5×/8× scale-out immediately — crypto vol reverts in hours, and "monetization failure" is the page's number-one killer
+- **Regime suspend** — `GET /api/v1/volatility/regime/score` persistently elevated maps to the "DVOL > 80th percentile for 21+ days → suspend new tranches" kill criterion
+- **Backtest** — bleed-vs-payoff replays use `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08, covering 2020-03/LUNA/FTX) for the RV leg and `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states; option-mark history is Deribit's
+- **Tips** — enforce the annual-budget cap as a hard constraint in the agent's order layer; never let a spike already underway trigger a chase-buy (the entry table's "do not initiate" rows)
+
 ## Sources
 
 - [[deribit]] / [[greeks-live]] documentation — DVOL construction, IV surface, coin-margined vs USDC-margined (linear) settlement.

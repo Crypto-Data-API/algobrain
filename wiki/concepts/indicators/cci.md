@@ -2,7 +2,7 @@
 title: Commodity Channel Index (CCI)
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [cci, indicators, technical-analysis, momentum]
 aliases: [CCI, "Commodity Channel Index"]
@@ -106,6 +106,32 @@ One illustrative backtesting study across US equities reported CCI(20) with a 35
 ## Limitations
 
 Like most [[oscillators]], CCI generates frequent false signals in strongly trending markets. An "overbought" reading in an uptrend does not necessarily mean price will reverse — it may simply indicate strong momentum. The unbounded scale also means there is no fixed "maximum" extreme to anchor against, so context (trend regime, [[volume]], [[support-and-resistance]]) is essential. Always use additional context and confirmation.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h high/low/close for the current typical price
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars (high, low, close feed the typical price)
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100`, form TP = (H+L+C)/3 and apply Lambert's formula with n = 20 and the 0.015 constant
+- **Regime gate** — condition ±100 crosses on trend state from `GET /api/v1/indicators/signum-rgg`: follow crosses in GREEN/RED trends, fade extremes only in GREY chop — the trend-vs-range flip this page stresses
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) covers full cycles; expect the low-win-rate, fat-winner profile documented above
+- **Tip** — CCI is unbounded, so normalise extremes per asset (e.g. a rolling percentile of readings) before comparing signals across the universe
 
 ## Related
 

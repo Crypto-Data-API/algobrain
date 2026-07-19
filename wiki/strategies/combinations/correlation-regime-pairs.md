@@ -346,6 +346,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol={SYMBOL}USDT&interval=1h&limit=720` for both legs — rolling correlation, spread z-score, ADF, and OU half-life are computed locally (no derived-statistic endpoint exists)
+- **Funding confirm** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `?coin=ETH` — the optional funding-differential gate on the pair
+- **Regime gate** — `GET /api/v1/regimes/current` — block entries in `Structural_Shock`
+- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 gives multi-cycle cointegration samples for both legs; join `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) to test correlation-regime conditioning
+- **Tips** — re-estimate the cointegration statistics on a schedule, not per tick; a correlation-regime flip mid-position is the kill signal, so alert on the correlation series rather than on price
+
 ## Instrument Structures
 
 Correlation-regime pairs deploys exclusively on the **pair** structure, adding a live regime gate that validates the pair's statistical relationship before entry.

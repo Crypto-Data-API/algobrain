@@ -2,7 +2,7 @@
 title: "Crypto Policy Shock Trading"
 type: strategy
 created: 2026-06-03
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [crypto, market-regime, regulation, news, event-driven, swing-trading]
 aliases: ["Crypto Policy Shock Trading", "Policy Event Trading", "Regulatory Event Trading"]
@@ -235,6 +235,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/policy/headlines
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/policy/headlines` (live Federal Register/SEC/CFTC feed) is the event trigger; `GET /api/v1/policy/regime` supplies the signed tilt and rate calendar for signature C, and `GET /api/v1/policy/regime/score` quantifies how stressed the policy backdrop already is
+- **Positioning read** — `GET /api/v1/derivatives/funding-rates?coin=BTC` and `GET /api/v1/derivatives/binance/open-interest?symbol=BTCUSDT` before acting: crowded funding/OI into a Signature A euphoria is the stand-down condition, and a funding flush is the Signature D exhaustion tell
+- **Regime gate** — `GET /api/v1/quant/market` to check whether crypto is currently trading as macro beta (Signature B transmits) or decoupled (it does not)
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) freezes the policy/regime/derivatives payload point-in-time for base-rate measurement; the per-signature event ledger this strategy requires only accumulates forward from that date — expect thin samples and gate size accordingly
+- **Tips** — have the agent classify the signature (A/B/C/D) *before* looking at price, and default to flat on UNKNOWN; halve size around any binary event and log every outcome against its signature's measured hit rate
 
 ## Related
 

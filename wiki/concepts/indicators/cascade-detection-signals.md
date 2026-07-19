@@ -2,7 +2,7 @@
 title: "Cascade Detection Signals"
 type: concept
 created: 2026-05-05
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [crypto, indicators, liquidations, market-microstructure, cascade, signals, hyperliquid]
 aliases: ["Liquidation Cascade Indicators", "Cascade Early Warning Signals"]
@@ -499,6 +499,36 @@ The same detector serves all four — only the action handlers differ.
 - **Ignoring the regime overlay.** All signals fire during *both* flash crashes and bear-leg-opening cascades. The detector cannot distinguish these — the operator must add macro/regime context (cross-asset correlation, funding persistence after cascade, basis collapse on stables). See "What Kills This Strategy" in [[liquidation-cascade-fade]].
 - **Forgetting HLP lockup.** The "withdraw HLP on imminent" plan only works if you have time. Pre-cascade is the actionable horizon for HLP; imminent is too late.
 - **Overfitting to historical events.** The 8 cascades listed above are a small sample. Detectors that perfectly fit them will produce many false negatives on novel cascade shapes. Prefer fewer, simpler thresholds calibrated to percentiles rather than absolute values.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins, default HL)
+- `GET /api/v1/market-intelligence/liquidations/by-exchange` — liquidations by venue (BTC, 4h window)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding (pre-cascade fragility read)
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — cross-exchange OI
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — order-book depth snapshot for depth-withdrawal checks
+
+**Historical data:**
+- `GET /api/v1/backtesting/liquidations` — liquidation records archive (Hyperliquid, since 2026-03-30)
+- `GET /api/v1/backtesting/funding` — funding archive (Hyperliquid hourly since 2023-05)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the pre-cascade layers of this hierarchy directly:
+
+- **Pre-cascade watch** — poll `GET /api/v1/derivatives/funding-rates`, `GET /api/v1/derivatives/open-interest`, and `GET /api/v1/derivatives/binance/long-short-ratio` to score book fragility (the funding / OI-percentile / L/S-skew composite above)
+- **Confirmation** — `GET /api/v1/market-intelligence/liquidations` plus `GET /api/v1/hyperliquid/l2-book?coin=BTC` cover the liquidation-spike and depth-withdrawal signals at REST polling cadence
+- **Backtest** — `GET /api/v1/backtesting/liquidations` holds Hyperliquid per-symbol long/short liquidation flow only since 2026-03-30 — enough to tune percentile thresholds forward, not enough to replay the 2020-2025 canonical cascades; `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) covers the pre-cascade funding leg much deeper
+- **Tip** — REST polling suits the pre-cascade and imminent stages only; in-cascade and keeper consumers need native exchange websockets, exactly as the latency table above warns for aggregated feeds
 
 ## Related
 

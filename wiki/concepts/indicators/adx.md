@@ -2,7 +2,7 @@
 title: Average Directional Index (ADX)
 type: concept
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [adx, technical-analysis, indicators, trend-following]
 aliases: [ADX, Average Directional Movement Index]
@@ -104,6 +104,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/techn
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/indicators/signum-rgg` returns the ADX(14)+DMI classification (RED/GREY/GREEN) for the whole asset universe in one call; `GET /api/v1/indicators/signum-rgg/{symbol}` adds per-asset detail plus a rolling 60-day history
+- **Compute** — for custom periods or intraday ADX, pull raw OHLCV from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` and apply Wilder smoothing yourself
+- **Backtest** — `GET /api/v1/backtesting/klines` serves Binance spot 1h/4h/1d back to 2017-08 — enough to test "trend-follow only when ADX > 25" gates across full cycles (1m bars exist only since 2026-03-30)
+- **Tip** — use the RGG colour as the strategy-selection switch this page describes: GREEN favours trend entries, GREY/RED favour mean-reversion or standing aside; check colour persistence in the 60d history before trusting a fresh flip
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Token Unlock Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, derivatives, news, mean-reversion, event-driven]
 aliases: ["Cliff Unlock Short", "Vesting Arb", "Unlock Front-Running"]
@@ -217,6 +217,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/event/calendar?type=unlock` lists unlocks up to 30 days out with a directional bias per event; `GET /api/v1/event/regime/{symbol}` confirms the pending catalyst for a specific short candidate.
+- **Hedge cost** — `GET /api/v1/derivatives/funding-rates?coin=<COIN>` prices the short-perp leg; a crowded pre-unlock short shows up as deeply negative funding that can erase the anticipated drop.
+- **Regime gate** — `GET /api/v1/event/regime/score` sizes overall event-risk exposure; cross-check `GET /api/v1/quant/market` — unlock-shorts underperform in `strong_trend_bull` states where fresh demand absorbs new supply.
+- **Backtest** — replay past unlock windows with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08; Hyperliquid daily to 2023) around known unlock dates, and `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for realistic short-carry costs. Use `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time event/regime state on recent events.
+- **Tips** — the edge decays as unlock dashboards democratise: backtest on recent windows (2024+) rather than the fat 2021-2022 prints, and check crowding via `GET /api/v1/derivatives/open-interest` before entering a widely telegraphed cliff.
 
 ## Related
 

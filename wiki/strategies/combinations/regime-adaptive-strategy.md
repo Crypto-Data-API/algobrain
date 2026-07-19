@@ -170,3 +170,16 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes) · [strategy baskets](https://cryptodataapi.com/trading-strategy-baskets)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this meta-strategy end-to-end:
+
+- **Signal** — `GET /api/v1/regimes/current` (10-state cycle) + `GET /api/v1/quant/market` (6-state HMM, 15-min refresh) drive the strategy-selection switch
+- **Filter** — `GET /api/v1/volatility/regime/score` and `GET /api/v1/liquidity/regime/score` veto deployments the headline regime would otherwise allow (e.g. a trend book into fragile liquidity)
+- **Strategy mapping** — `GET /api/v1/trading-strategy-baskets` returns 50 pre-mapped regime-to-strategy baskets the agent can adopt directly or diff against this wiki's [[regime-strategy-playbook]]
+- **Backtest** — `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus) and `GET /api/v1/quant/timeline` (daily labels 2019-now) are the switching-logic archive; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so the backtest sees regimes as they were published, not as re-labelled
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly for regime check-ins; reserve `POST /api/v1/quant/refresh` for major-event moments rather than routine cycles
+- **Prompt library** — the "Market Regime Detection" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) supplies the regime read this adaptive switch consumes

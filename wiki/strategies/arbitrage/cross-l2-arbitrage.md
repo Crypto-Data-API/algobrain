@@ -2,7 +2,7 @@
 title: "Cross-L2 Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, defi, ethereum, algorithmic]
 aliases: ["L2-to-L2 Arb", "Rollup Arbitrage", "Sequencer Arbitrage"]
@@ -143,6 +143,38 @@ Bound by fast-bridge depth (Across pool depth $50-200M per asset on top L2s; dee
 - Hop Protocol stats.
 - Espresso / Astria shared-sequencer specs.
 - Vitalik Buterin, *Endgame* (2021) and rollup-centric roadmap updates 2024-2026.
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves DEX pool prices/depth on its supported chains (Base, Arbitrum, Ethereum, BSC). Sequencer feeds and the Optimism/zkSync/Linea/Scroll pools it does not cover need own L2 nodes.
+
+**Live data:**
+- `GET /api/v1/dex/token/{chain}/{address}` — per-token price + pools; diff the same asset across Base / Arbitrum / Ethereum / BSC
+- `GET /api/v1/dex/trending` — per-chain flow concentration
+- `GET /api/v1/liquidity/depth` — depth at 10/25/50/100 bps to size against the thinner L2 pool
+- `GET /api/v1/dex/security/{chain}/{address}` — token screening
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive for spread research
+- DEX is live-only — store polls to build per-L2 price history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/token/arbitrum/0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can screen the covered-chain gaps:
+
+- **Signal** — `GET /api/v1/dex/token/{chain}/{address}` on Base vs Arbitrum (and Ethereum/BSC) gives the same-asset gap; sequencer mempools and Optimism/zkSync/Linea/Scroll pools are off-API (own L2 nodes).
+- **Depth gate** — `GET /api/v1/liquidity/depth` sizes against the thinner L2 pool; `GET /api/v1/dex/security/{chain}/{address}` screens the token.
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility warns when an L2 pool cannot absorb the arb.
+- **Backtest** — `GET /api/v1/backtesting/klines` for spread studies; no per-L2 reserve archive, so inventory-mode economics come from stored polls.
+- **Tip** — the edge collapses under shared sequencers; treat pre-positioned inventory (≈0 latency) as the durable path, not bridge-and-arb.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Unlock Short with Crowding Gate"
 type: strategy
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [combinations, meta-strategy, event-driven, funding-rate, perpetual-futures, derivatives, behavioral-finance, quantitative, crypto]
 aliases: ["Gated Unlock Short", "Crowding-Filtered Token Unlock", "Unlock Supply-Event with Entry Discipline"]
@@ -311,6 +311,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar?t
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Event leg** — `GET /api/v1/event/calendar?type=unlock&days=14` finds qualifying unlocks with directional bias attached
+- **Crowding gate** — `GET /api/v1/derivatives/funding-rates?coin={TOKEN}` and `GET /api/v1/derivatives/open-interest?coin={TOKEN}`; already-negative funding or an OI spike means the short is crowded and the trade is skipped
+- **Regime gate** — `GET /api/v1/regimes/current` macro overlay before any short deploys
+- **Backtest** — funding-crowding replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) against unlock-window price paths from `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08)
+- **Tips** — the crowding gate IS the strategy: track skipped-vs-taken unlock outcomes so the agent can prove the gate earns its keep rather than just reducing activity
 
 ## Related
 

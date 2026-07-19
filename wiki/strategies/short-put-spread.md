@@ -2,7 +2,7 @@
 title: "Short Put Spread"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Bull Put Spread", "Put Credit Spread", "Vertical Put Credit Spread", "Short Put Vertical", "Crypto Bull Put Spread"]
@@ -146,6 +146,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew is Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can gate and manage the spread with the endpoints above:
+
+- **Entry gate** — `GET /api/v1/volatility/regime` must not read `vol_shock`; realized vol from `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` supplies the RV side of the DVOL−RV > 5 check (DVOL from Deribit)
+- **Skew signal** — `GET /api/v1/derivatives/funding-rates?coin=ETH`: a funding flip after a selloff flags the put-skew fattening that makes the short put rich to sell — the page's specific edge
+- **Bullish-thesis check** — `GET /api/v1/quant/market`: sustained strong_trend_bear probability contradicts the bullish tilt (the strategy's weakness is a persistent bear, not a single capped shock)
+- **Down-gap warning** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/quant/gex` watch for the cascade that gaps through the long wing and maxes the loss
+- **Backtest** — replay short-strike breach frequency on `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08) with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — automate the one-roll-only rule: log rolls per position and hard-stop the second roll attempt
 
 ## Related
 

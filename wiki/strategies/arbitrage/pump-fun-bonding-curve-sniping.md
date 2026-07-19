@@ -2,7 +2,7 @@
 title: "Pump.fun Bonding Curve Sniping"
 type: strategy
 created: 2026-04-26
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, altcoins, algorithmic, scalping]
 aliases: ["Pump.fun Sniping", "Bonding Curve Arb", "Solana Memecoin Sniping"]
@@ -178,6 +178,16 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the screening and gating layers of this strategy (raw sniping execution still needs a Solana RPC/Jito stack):
+
+- **Signal** — `GET /api/v1/dex/new-pools` surfaces fresh multi-chain launches for candidate selection; `GET /api/v1/dex/trending` shows where Solana retail flow is concentrating post-graduation.
+- **Rug screen** — pipe every candidate through `GET /api/v1/dex/security/{chain}/{address}` before committing; with ~1% graduation rates, automated honeypot/rug rejection is the main survival filter.
+- **Regime gate** — `GET /api/v1/meme/regime/score`: only run the bot when the market-wide meme-hype score is elevated and `meme_season` is true; in `dormant`/`bleeding` lifecycle states graduation odds collapse and every snipe is negative-EV.
+- **Backtest** — no bonding-curve archive exists in `/api/v1/backtesting/*`; the honest loop is to log `/dex/new-pools` + security-report outcomes yourself and validate hit rates against `GET /api/v1/meme/regime/{symbol}` 60d lifecycle history for graduated tokens.
+- **Tips** — batch security checks rather than looping per token; treat the marketing-spend feed (`GET /api/v1/dex/promoted`, Pro) as an early-attention overlay for which graduated tokens get a second leg.
 
 ## Related
 

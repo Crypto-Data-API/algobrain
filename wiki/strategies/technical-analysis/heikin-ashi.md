@@ -2,7 +2,7 @@
 title: "Heikin-Ashi Charts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[candlestick-patterns]]"]
@@ -198,6 +198,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Endpoint catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Compute** — pull raw OHLCV from `GET /api/v1/market-data/klines` (spot) or `GET /api/v1/hyperliquid/candles` (perps) and derive the four HA series locally on closed candles only — HA is a transform, not an endpoint
+- **Signal** — the color flip / flat-edged-candle read on 4h-daily HA; execute entries and stops on the *standard* candle series from the same klines call, never on synthetic HA prices
+- **Regime gate** — HA whipsaws in chop by construction: require `GET /api/v1/quant/market` `strong_trend` probability to lead before honoring flips, or use `GET /api/v1/indicators/signum-rgg` as the per-asset trend gate
+- **Backtest** — rebuild HA across history from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023); split flip-following results by regime via `/api/v1/quant/regimes/history` (since 2020, Pro Plus)
+- **Tips** — never map stops to HA levels — the synthetic open/close are untradeable; place exits on real candles and check book depth before sizing.
 
 ## Key Takeaways
 

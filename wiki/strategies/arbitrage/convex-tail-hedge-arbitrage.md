@@ -2,7 +2,7 @@
 title: "Convex Tail-Hedge Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, derivatives, options, risk-management, behavioral-finance, ai-trading]
 aliases: ["Cheap-Convexity Trade", "Tail Hedge Arbitrage", "Implied-Vol-Cheap Strategy", "Ackman-style Hedge"]
@@ -278,6 +278,38 @@ The strategy works because the structural edge — vol-suppression flow, recency
 - AQR research papers on the volatility risk premium
 - Antti Ilmanen, "Do Financial Markets Reward Buying or Selling Insurance and Lottery Tickets?", *Financial Analysts Journal* 68(5), 2012 — the skeptical counter-case
 - Sebastian Mallaby, *More Money Than God* (2010)
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the **crypto sleeve** only (BTC/ETH IV-cheap puts, stablecoin-depeg structures). The equity/credit legs (VIX, MOVE, CDX, sovereign CDS) and the option-implied DVOL/BVIV indices are off-API — the latter come natively from Deribit.
+
+**Live data:**
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite 0-100, the crypto analogue of the "IV in lowest decile" cheap-vol screen
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset vol regime (`compressed`/`expanding`/`vol_shock`) + 60d history (Pro+)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — compressed funding + building on-chain leverage, a confirming late-cycle signal
+- `GET /api/v1/security/regime/score` + `GET /api/v1/event/regime/score` — the tail catalysts (hacks/depegs; unlocks/macro) the convex leg pays off on
+
+**Historical data:**
+- `GET /api/v1/quant/regimes/history` — hourly HMM regime probabilities since 2020 (Pro Plus) for regime-conditioned entry study
+- `GET /api/v1/backtesting/klines` — OHLCV for realised-vol computation
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the crypto tail-hedge sleeve (the CDX/VIX legs use native feeds):
+
+- **Cheap-vol screen** — `GET /api/v1/volatility/regime/score` + `/volatility/regime/{symbol}` flag the `compressed` state that is the crypto entry condition for BTC/ETH IV-cheap puts and stablecoin-depeg structures; confirm against a native DVOL/BVIV read before buying the put.
+- **Confirming indicator** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (compressed funding + building leverage) is the late-cycle confirmation.
+- **Catalyst / payoff** — `GET /api/v1/security/regime/score` and `GET /api/v1/event/regime/score` mark the hack/depeg and unlock/macro catalysts the convex leg monetises.
+- **Backtest** — `GET /api/v1/quant/regimes/history` (hourly HMM since 2020) + `GET /api/v1/backtesting/klines` to study cheap-vol-regime entries against realised drawdowns.
+- **Tip** — the composite is a vol-stress proxy, not option-implied vol; it screens *when* to look, not the exact strike.
 
 ## Related
 

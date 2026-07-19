@@ -2,7 +2,7 @@
 title: "Price Action"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, trading-psychology]
 aliases: ["Price Action Analysis", "Naked Chart Trading", "price-action-trading", "Price Action Trading"]
@@ -77,6 +77,33 @@ Price action works on all timeframes but the signals carry different weight:
 **Advantages**: Minimal lag, works across all markets and timeframes, develops deep market reading skills, requires no paid indicators or software.
 
 **Limitations**: Highly subjective -- two traders can read the same chart differently. Requires significant screen time to develop competence. Difficult to backtest systematically due to discretionary elements.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — raw OHLCV, the only input price action needs; the `interval` parameter serves every timeframe of a multi-timeframe read
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=4h&limit=200` — the same on Hyperliquid perp listings
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio for breakout confirmation
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for systematizing and testing price-action rules
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — pull each timeframe of the stack as a separate `GET /api/v1/market-data/klines` call; derive market structure (higher highs/lows via swing-pivot extraction), levels (clustered prior swing points), and candle signals (pin bars, engulfing, inside bars) from the raw bars
+- **Codify context** — the page's "context over pattern" principle must be explicit rules for an agent: only accept a rejection candle within X × ATR of a mapped level, and label trend/range from the structure sequence before choosing pullback vs fade logic
+- **Backtest** — the discretionary-subjectivity limitation is exactly what an agent can fix: freeze the pivot threshold, level-clustering distance, and candle-geometry definitions, then replay over `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08) for an honest, reproducible read
+- **Tip** — crypto structure breaks are frequently stop-hunts; requiring a bar *close* beyond a level (not a wick) and checking `GET /api/v1/market-intelligence/liquidations` for forced-flow spikes filters the classic trap entries
 
 ## Related
 

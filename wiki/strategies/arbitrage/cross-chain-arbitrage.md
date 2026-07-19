@@ -2,7 +2,7 @@
 title: "Cross-Chain Arbitrage"
 type: strategy
 created: 2026-04-14
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, cross-chain, bridges, mev, algorithmic, market-neutral, layer-2]
 aliases: ["Cross-Chain Arb", "Inter-Chain Arbitrage", "Bridge Arbitrage", "Multi-Chain Arbitrage"]
@@ -297,6 +297,38 @@ Chain abstraction protocols (Particle Network, NEAR chain signatures, Socket) ai
 - General DeFi and cross-chain infrastructure knowledge; bridge exploit data from publicly reported incidents
 - Cross-chain MEV research referenced in [[ai-mev]] (Source: [[2026-04-11-perplexity-ai-crypto-gaps]])
 - [[layer-2]] — documents L2 scaling and cross-chain arb implications
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the per-chain DEX price/depth that defines the gap; bridge rates, latency, and throughput are off-API (native bridge APIs). Chain coverage is Solana/Ethereum/Base/BSC/Arbitrum.
+
+**Live data:**
+- `GET /api/v1/dex/token/{chain}/{address}` — per-token price + top pools on each chain; diff the same asset across chains for the gap
+- `GET /api/v1/dex/trending` / `GET /api/v1/dex/new-pools` — where cross-chain flow and fresh gaps concentrate
+- `GET /api/v1/dex/security/{chain}/{address}` — screening before touching a wrapped/native pair
+- `GET /api/v1/liquidity/depth` — depth at 10/25/50/100 bps to size against the thinner-chain pool
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive for cross-chain spread research
+- DEX is live-only — store `/dex/token` polls to build per-chain price history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/token/base/0x4200000000000000000000000000000000000006"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-regimes]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can find and size the gap; bridging stays native:
+
+- **Signal** — `GET /api/v1/dex/token/{chain}/{address}` for the same asset on two chains yields the cross-chain gap; `GET /api/v1/dex/trending` shows where imbalances form. Bridge rates/latency are off-API.
+- **Depth + safety** — `GET /api/v1/liquidity/depth` bounds size to the thinner-chain pool; `GET /api/v1/dex/security/{chain}/{address}` gates wrapped-token traps.
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility + `GET /api/v1/security/regime` (bridge-exploit tail — the existential risk of this trade).
+- **Backtest** — `GET /api/v1/backtesting/klines` for spread studies; no per-chain reserve archive, so pre-positioned-inventory economics must be modelled from stored polls.
+- **Tip** — the pre-positioned (fast) path avoids the bridge fee at execution; size for the thinner chain and respect `new_listing` flags on new-L2 pools.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Long Volatility Strategies"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, volatility, risk-management, derivatives, quantitative, crypto, bitcoin, ethereum]
 aliases: ["Long Vol", "Long Volatility", "Net Long Options Strategies", "Crypto Long Vol"]
@@ -337,6 +337,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog on [[cryptodataapi]]; for the DVOL index/history and full surface use the Deribit API or [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Structuring inputs** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score`: the fixed premium budget buys more protection in `compressed` regimes; DVOL percentile itself comes from Deribit.
+- **Monetisation triggers** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/quant/gex`: cascades and short-gamma dealer inventory mark the forced-bid windows to sell appreciated convexity into — the 5x/10x harvesting rule is where the realised edge lives.
+- **Regime gate** — `GET /api/v1/quant/market`: `vol_spike` probability doubling is the machine-readable analogue of the DVOL-double monetisation trigger; `GET /api/v1/derivatives/funding-rates?coin=BTC` extremes flag the pre-cascade leverage crowd.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08 spans all four canonical tail events) plus `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus) for regime-conditional payoff studies; there is no options-chain archive on CDA — premium series come from Deribit.
+- **Tips** — the always-on design suits an agent loop: poll the cached `GET /api/v1/daily` bundle hourly, act only on the mechanical roll/monetisation rules, and never size-adjust on bleed — abandonment-before-payoff is failure mode #1.
 
 ## Sources
 

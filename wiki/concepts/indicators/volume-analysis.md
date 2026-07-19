@@ -2,7 +2,7 @@
 title: "Volume Analysis"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, market-microstructure]
 aliases: ["Volume Studies", "Volume-Based Analysis"]
@@ -92,6 +92,31 @@ Large institutional orders move markets and leave footprints in volume data. Unu
 - **Futures**: Volume and [[open-interest]] together provide a richer picture
 - **[[crypto]]**: Exchange-reported volume can be inflated by wash trading; use regulated exchanges or aggregated data with caution
 - **[[forex]]**: No central exchange; tick volume (number of price changes) is used as a proxy but is less reliable
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio (accumulation vs distribution read)
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — rolling 24h volume snapshot
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — per-bar volume for OBV, MFI, A/D-line construction
+- `GET /api/v1/backtesting/klines` — deep kline archive with the volume column
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/volume-history?days=90"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — every derived study on this page (OBV, A/D line, MFI, Chaikin Money Flow, volume MAs) builds from the OHLCV columns of `GET /api/v1/market-data/klines`; the buy ratio in `GET /api/v1/market-data/volume-history` adds the up-vs-down split without tick data
+- **Screen** — a breakout filter like "volume ≥ 1.5× 50-day average" is one klines pull plus a rolling mean; apply it before accepting any pattern-breakout signal
+- **Backtest** — volume-confirmation rules replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Tip** — this page's crypto caveat is operational: stay on Binance-sourced volume (this API's tape) and treat cross-venue aggregated volume as unverified before feeding it to a signal
 
 ## Related
 

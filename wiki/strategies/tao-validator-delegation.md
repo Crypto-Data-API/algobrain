@@ -215,6 +215,38 @@ The informed delegator here outperforms the null (random validator selection at 
 - Tax complexity: staking rewards may be taxable on receipt in some jurisdictions.
 - Alpha liquidity: realizing alpha rewards requires interacting with bonding curves, which has slippage costs.
 
+## Getting the Data (CryptoDataAPI)
+
+Validator metrics (take rates, vtrust, uptime, subnet exposure) come from taostats.io / dtao.gg / Subtensor RPC — [[cryptodataapi|CryptoDataAPI]] does not serve Bittensor chain data. What it serves is the **TAO market side**: price for the USD-P&L overlay, perp funding for the basis-vs-delegation comparison in the kill criteria, and the per-coin risk read.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TAOUSDT` — TAO spot price (the swing factor that dominates realized USD returns)
+- `GET /api/v1/hyperliquid/funding-rates?coin=TAO` — TAO perp funding: if short-perp carry beats delegation yield, the basis trade dominates (the second kill criterion)
+- `GET /api/v1/quant/coins/TAO` — per-coin regime probability matrix (Pro) for drawdown-risk awareness on the staked principal
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — TAO OHLCV history for stress-testing the "50% TAO drawdown wipes a year of yield" scenario
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05: the historical basis-vs-delegation comparison
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/hyperliquid/funding-rates?coin=TAO&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automate the market-side half of this strategy (validator scoring stays on taostats data):
+
+- **Yield comparison** — each epoch, compare blended delegation APY (from taostats) against annualized TAO short-perp funding from `GET /api/v1/hyperliquid/funding-rates?coin=TAO`; a sustained crossover fires the kill criterion in favour of the basis trade
+- **Drawdown guard** — `GET /api/v1/quant/coins/TAO` regime probabilities flag deteriorating TAO price risk on the staked principal; the 7-day unstaking delay means de-risking decisions must lead the move, not follow it
+- **USD overlay** — mark the TAO+alpha position to USD with `GET /api/v1/market-data/ticker/price?symbol=TAOUSDT` so yield-in-TAO never masks USD losses
+- **Backtest** — replay flat-price vs drawdown scenarios with `GET /api/v1/backtesting/klines` and funding regimes with `GET /api/v1/backtesting/funding` (HL hourly since 2023-05)
+- **Tips** — respect `insufficient_history`/`new_listing` flags on TAO-adjacent reads; alpha-token bonding-curve depth is on-chain data the agent must source from Subtensor, not this API
+
 ## Related
 
 - [[bittensor]] -- protocol overview

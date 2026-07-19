@@ -385,6 +385,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Monitor set** — `GET /api/v1/market-intelligence/dvol-history`, `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/open-interest?coin=BTC` — the resume-condition dashboard during each event window
+- **Cascade check** — `GET /api/v1/market-intelligence/liquidations` — real-time forced-flow detection while the book is gated down
+- **Event feed** — `GET /api/v1/event/calendar?type=unlock&days=30` + `GET /api/v1/event/regime/score` — a native forward catalyst calendar (unlocks, macro prints, depeg risk) to cross-check the external calendar sources noted above
+- **Backtest** — gate-window P&L replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) preserves what the derivatives/vol dashboard actually showed on each historical date
+- **Tips** — this overlay's failure mode is resuming too early: encode resume conditions as explicit data checks (DVOL back under threshold, funding normalised, price range held) and let the agent enforce the full waiting period
+
 ## Related
 
 - [[event-vol-buying]] — the active-trading complement: buy vol when this page pauses passive strategies

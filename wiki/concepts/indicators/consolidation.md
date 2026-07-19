@@ -2,7 +2,7 @@
 title: "Consolidation"
 type: concept
 created: 2026-04-13
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, indicators, volatility]
 aliases: ["Consolidation", "Trading Range", "Sideways Market", "Base"]
@@ -90,6 +90,33 @@ The main risk is whipsaw: choppy ranges generate frequent false signals for tren
 - Murphy, John J. *Technical Analysis of the Financial Markets.* New York Institute of Finance, 1999.
 - Bulkowski, Thomas N. *Encyclopedia of Chart Patterns.* Wiley, 2005.
 - Edwards, Robert D. & Magee, John. *Technical Analysis of Stock Trends.*
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — SMA/BB/RSI price-structure state across the universe (a ready-made squeeze screen)
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h range read
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` — OHLCV for range detection (highs/lows, ATR, band width)
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this state directly:
+
+- **Detect** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500`, measure range height, touch count, and contracting ATR/BandWidth to score a maturing consolidation
+- **Live state** — `GET /api/v1/indicators/technical` reports the SMA/BB/RSI price structure for every covered asset in one call — screen the universe for coiling ranges without computing anything
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports range-resolution studies: how often tight ranges break with volume, and how far measured moves carry
+- **Tip** — gate breakout entries on the volume surge from `GET /api/v1/market-data/volume-history`; thin-volume breaks out of crypto ranges fail disproportionately, exactly as the pitfalls above warn
 
 ## Related
 

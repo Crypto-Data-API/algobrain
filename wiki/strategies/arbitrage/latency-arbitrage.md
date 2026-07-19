@@ -2,7 +2,7 @@
 title: "Latency Arbitrage (Crypto)"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, latency, hft, co-location, market-microstructure, speed, market-neutral]
 aliases: ["Latency Arb", "Speed Arbitrage", "Crypto HFT Arbitrage", "Stale-Quote Picking"]
@@ -260,6 +260,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-hyperliquid]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] cannot execute latency arb (polling latency is orders of magnitude too slow) but can run the research layer that decides whether a colocated stack is worth building:
+
+- **Lead-lag research** — sample `GET /api/v1/market-data/ticker/price?symbol=<SYM>` and `GET /api/v1/hyperliquid/prices` together to map which venue leads on which pairs; the persistent leader defines the signal venue for a real feed.
+- **Venue/pair selection** — `GET /api/v1/liquidity/depth` (depth/spread at 10/25/50/100 bps) plus `GET /api/v1/hyperliquid/l2-book?coin=<COIN>` identify where stale quotes actually carry fillable size.
+- **Regime gate** — `GET /api/v1/quant/market`: stale-quote windows widen in `vol_spike` and `choppy_high_vol` states, which is when latency edges pay most; use regime history to estimate opportunity frequency per state.
+- **Backtest** — `GET /api/v1/backtesting/klines` 1m bars exist only since 2026-03-30 (Binance USDT-perps + Hyperliquid), an upper-bound sanity check at best — sub-second alpha cannot be validated on 1m bars, so treat any kline-level "latency backtest" as directional research, not P&L evidence.
+- **Tips** — respect `Cache-Control`/`X-Cache` headers when sampling for lead-lag studies (cached responses corrupt timing estimates); if the researched edge persists for minutes rather than milliseconds, it belongs to [[cross-exchange-arbitrage]], not here.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Parabolic SAR"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[trailing-stop]]", "[[adx]]"]
@@ -193,6 +193,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Endpoint catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], [[cryptodataapi-indicators]], [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a SAR system end-to-end:
+
+- **Compute** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=4h&limit=1000` (or `GET /api/v1/hyperliquid/candles?coin=ETH&interval=4h&limit=1000` for perps) → run the AF recursion on closed candles only; the live bar's dot is provisional.
+- **Trend filter** — `GET /api/v1/indicators/signum-rgg` — the pre-computed ADX(14)+DMI state is exactly Wilder's own SAR gate: act on flips only in GREEN/RED, never in GREY chop.
+- **Regime gate** — `GET /api/v1/quant/market` — suppress flips in `range_low_vol`/`choppy_high_vol`, where SAR's ping-pong failure mode lives.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily candles to 2023) to test AF settings and the ADX filter across regimes on closed bars.
+- **Tips** — batch the flip scan from one universe-wide klines/indicators pull per cycle instead of per-symbol polling; respect `insufficient_history` flags before trusting ADX(14) on new listings.
 
 ## Key Takeaways
 

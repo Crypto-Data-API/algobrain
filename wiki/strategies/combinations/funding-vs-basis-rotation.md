@@ -317,6 +317,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Perp-carry leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — the funding side of the rotation decision
+- **Cross-venue confirm** — `GET /api/v1/market-intelligence/funding-rates` + `GET /api/v1/market-intelligence/open-interest` — where leveraged-long demand is concentrating
+- **Basis leg** — dated-futures prices come from exchange APIs (Binance, CME, Deribit); the agent computes annualised basis externally and compares it with the funding carry
+- **Regime kill** — `GET /api/v1/regimes/current` — the crash-regime exit
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) for the perp side; spot paths from `GET /api/v1/backtesting/klines` (daily back to 2017-08); dated-futures basis history must be sourced externally
+- **Tips** — rotation is a slow decision (days): poll the cached `GET /api/v1/daily` bundle hourly and switch only when the annualised-carry gap exceeds round-trip switching costs
+
 ## Related
 
 - [[funding-rate-arbitrage]] — the perp carry primitive; one of the two instruments in the rotation

@@ -315,6 +315,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] is the natural executor of this rule set — every entry/exit trigger is mechanical and machine-checkable:
+
+- **Entry gates** — `GET /api/v1/volatility/regime` (must not read `vol_shock`/`expanding`) + realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` for the DVOL−RV > 5 check (DVOL from Deribit)
+- **Catalyst blackout** — `GET /api/v1/event/calendar` (filterable events up to 30 days out: macro prints, unlocks) automates entry rule 6, "no major catalyst within 7 days"
+- **Kill switch** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` polled each cycle as the automated DVOL-shock flatten trigger; `GET /api/v1/quant/gex` flags the dealer-short-gamma states where a spike cascades fastest
+- **Wing tilt** — `GET /api/v1/derivatives/funding-rates?coin=BTC` drives the `skew_tilt` branch in the pseudocode
+- **Backtest** — replay the mechanical loop on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) — validating against today's regime labels is lookahead bias
+- **Tips** — the "discretionary deviation ≥ 3×/quarter → halt" kill criterion is best enforced by logging every agent decision against the written rules; append `?format=markdown` for cleaner context
+
 ## Sources
 
 - [[tastytrade-mechanics]] / [[tom-sosnoff]] — the mechanical-rules philosophy (equity-origin; ports to crypto with tighter stops).

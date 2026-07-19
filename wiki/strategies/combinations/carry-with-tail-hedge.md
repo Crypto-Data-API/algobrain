@@ -2,7 +2,7 @@
 title: "Carry with Tail Hedge"
 type: strategy
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [combinations, meta-strategy, funding-rate, arbitrage, derivatives, risk-management, tail-risk, market-neutral, quantitative, crypto]
 aliases: ["Hedged Carry", "Tail-Hedged Funding Carry", "Carry Book with Convexity", "Funded Tail Protection"]
@@ -265,6 +265,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Carry leg** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — cross-exchange funding drives both carry entries and the rolling hedge budget
+- **Crowding filter** — `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` + `GET /api/v1/derivatives/open-interest?coin=BTC` — skip carry entries into crowded, OI-stretched books
+- **Hedge leg** — `GET /api/v1/market-intelligence/options` — BTC options OI / max-pain context for put-strike selection (strike-level pricing itself comes from Deribit)
+- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05, Binance daily since 2026-03-30; older Binance funding via `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` paging
+- **Tips** — replay the hedge-budget rules against point-in-time states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so "when the hedge was cheap" is judged without lookahead
 
 ## Related
 

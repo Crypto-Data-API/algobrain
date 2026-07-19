@@ -2,7 +2,7 @@
 title: "Harmonic Patterns"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [harmonic-patterns, gartley, bat, butterfly, crab, shark, cypher, fibonacci, prz, geometric-patterns, technical-analysis, crypto]
 aliases: ["Harmonic Trading", "Gartley Pattern", "XABCD Patterns", "Harmonic Price Patterns", "Potential Reversal Zone"]
@@ -206,6 +206,18 @@ Harmonic legs and PRZs are computed from swing pivots on the price series; chart
 curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500"
 ```
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Compute** — X/A/B/C/D pivots from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500`; validate leg ratios programmatically against the standard tolerance bands — no widening bands to force a fit
+- **Signal** — PRZ confirmation before entry: a funding extreme resetting on `GET /api/v1/derivatives/funding-rates?coin=BTC` and a liquidation wick into the zone on `GET /api/v1/market-intelligence/liquidations`
+- **Regime gate** — `GET /api/v1/quant/market`: harmonic completions are counter-move trades — best odds in `range_low_vol` conditions, worst when `strong_trend` probability leads into the PRZ
+- **Backtest** — PRZ reaction rates by pattern type from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), regime-joined via `/api/v1/quant/regimes/history` (hourly since 2020, Pro Plus)
+- **Tips** — log invalidated and skipped patterns alongside traded ones, or the backtest inherits exactly the selection bias the pitfalls above warn about.
 
 ## Related
 - [[fibonacci-trading]] — the ratio foundation for every harmonic leg and the PRZ

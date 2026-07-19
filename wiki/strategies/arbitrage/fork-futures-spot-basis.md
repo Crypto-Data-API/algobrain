@@ -2,7 +2,7 @@
 title: "Fork Futures / Spot IOU Basis Arbitrage"
 type: strategy
 created: 2026-04-27
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, futures, derivatives, event-driven]
 aliases: ["IOU Basis Trade", "Pre-Fork Futures Arb", "Fork IOU Arbitrage"]
@@ -229,6 +229,38 @@ Total annual addressable: $200-500M industry-wide.
 - Hyperliquid pre-launch perp documentation (2023).
 - Wintermute / Cumberland-DRW post-event commentary on 2022 ETHW fork.
 - Historical fork-coin price data via CoinGecko + Messari.
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the Hyperliquid pre-launch/IOU perp and the parent-spot hedge; OKEx/Poloniex/MEXC IOU books and exchange credit policies are off-API.
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` / `GET /api/v1/hyperliquid/summary?coin=...` — HL pre-launch perp mids (the IOU short leg where listed on HL)
+- `GET /api/v1/hyperliquid/funding-rates?coin=...` — IOU-perp funding (the short-crowding tax)
+- `GET /api/v1/market-data/ticker/price?symbol=...` — parent spot (the long hedge leg)
+- `GET /api/v1/derivatives/summary?coin=...` — parent perp basis for hedge sizing
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=...&interval=1h` — pre-launch perp OHLCV
+- `GET /api/v1/backtesting/klines` / `GET /api/v1/backtesting/funding` — parent leg
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/summary?coin=ETH"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-hyperliquid]], [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can price the short and hedge legs:
+
+- **IOU + hedge legs** — `GET /api/v1/hyperliquid/prices` / `/hyperliquid/summary` price the pre-launch/IOU perp where it lists on Hyperliquid; `GET /api/v1/market-data/ticker/price` marks the parent spot hedge. Other-venue IOU books and credit policies are off-API.
+- **Crowding gate** — `GET /api/v1/hyperliquid/funding-rates`: negative IOU-perp funding is the short-crowding tax that erodes the ~80 bp breakeven.
+- **Regime gate** — `GET /api/v1/quant/market` for parent-hedge sizing through a contested-fork window.
+- **Backtest** — `GET /api/v1/hyperliquid/candles` (IOU-perp history) + `GET /api/v1/backtesting/klines` / `/backtesting/funding` (parent).
+- **Tip** — short only at >2x modelled realised value; use the HL feed to track how fast the pre-launch perp converges before committing.
 
 ## Related
 

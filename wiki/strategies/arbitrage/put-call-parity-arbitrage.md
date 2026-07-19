@@ -2,7 +2,7 @@
 title: "Put-Call Parity Arbitrage (Crypto)"
 type: strategy
 created: 2026-04-24
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [arbitrage, options, crypto, derivatives, quantitative, volatility]
 aliases: ["Conversion Arbitrage", "Reversal Arbitrage", "Box Spread", "Crypto Put-Call Parity Arbitrage"]
@@ -137,6 +137,18 @@ The option prices, implied forward, and DVOL are Deribit / Greeks.live, not Cryp
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
 ```
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the rate/positioning half of this strategy (the options chain itself comes from Deribit):
+
+- **Rate input** — `GET /api/v1/derivatives/funding-rates?coin=BTC` supplies the funding rate that replaces `r` in the parity identity; recompute the funding-adjusted forward each cycle and compare it against the Deribit synthetic to flag violations.
+- **Chain positioning** — `GET /api/v1/market-intelligence/options` (BTC OI, volume, max pain) shows where expiry pinning pressure sits — apparent parity violations near heavy-OI strikes into expiry are often real dealer flow, not free money.
+- **Regime gate** — `GET /api/v1/volatility/regime/score`: enter boxes/conversions when vol stress is low; in `vol_shock` conditions the perp-leg liquidation risk dominates the locked spread. Cross-check `GET /api/v1/quant/market`.
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) reconstructs the historical funding-implied forward; options-chain history must come from Deribit. Pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time context.
+- **Tips** — funding is the noisiest term in crypto parity: use a funding TWAP over the option's remaining life, not the instantaneous print, when sizing an apparent violation.
 
 ## Sources
 

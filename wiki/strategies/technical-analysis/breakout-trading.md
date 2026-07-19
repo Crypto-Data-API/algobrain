@@ -2,7 +2,7 @@
 title: "Breakout Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, breakout, trend-following]
 aliases: ["Breakouts", "Range Breakout"]
@@ -203,6 +203,38 @@ The constraint is consistent across markets: breakout entries demand liquidity a
 - Schwager, J. (1989). *Market Wizards* — Donchian-lineage channel breakout context
 
 General market knowledge; no specific wiki source ingested yet.
+
+## Getting the Data (CryptoDataAPI)
+
+The system runs on OHLCV plus volume; [[cryptodataapi|CryptoDataAPI]] serves the candles to build ranges and the crypto derivatives context that separates a real break from a fakeout.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — OHLCV with volume for range detection, the 20-day volume average, and ATR
+- `GET /api/v1/indicators/technical` — pre-computed SMA/BB/RSI price-structure state across the universe, for screening compressed bases in one call
+- `GET /api/v1/derivatives/open-interest?coin=BTC` — rising OI marks new money behind the break
+- `GET /api/v1/market-intelligence/liquidations` — the stop/liquidation clusters that fuel or reverse the move
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — kline archive for backtesting breakout rules and lookback choices
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [technical structure](https://cryptodataapi.com/technical-structure) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines` to find ≥4-week consolidations and fire the close-plus-volume trigger; `GET /api/v1/indicators/technical` (SMA/BB/RSI state) shortlists coiled bases across the universe without recomputing indicators
+- **Regime gate** — `GET /api/v1/quant/market`: take entries as `squeeze`/`strong_trend` probabilities rise; the `choppy_high_vol` state is exactly the false-breakout bleed described under "What kills this strategy"
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023, 1m only since 2026-03-30); join hourly HMM labels from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) so the chop filter is tested without lookahead
+- **Execution** — at the moment of the break, confirm participation with rising `GET /api/v1/derivatives/open-interest` and same-direction `GET /api/v1/market-intelligence/liquidations`; check `/api/v1/liquidity/depth` before sizing — breakout slippage is this strategy's cost center
+- **Tips** — act on closed candles only; prefer the retest entry in thin pairs, where chasing the break candle eats the ~30 bps breakeven budget.
 
 ## Related
 

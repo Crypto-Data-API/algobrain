@@ -2,7 +2,7 @@
 title: "Contrarian Trading"
 type: strategy
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-07-19
 status: good
 tags: [behavioral-finance, mean-reversion, crypto, swing-trading]
 aliases: ["Contrarian Investing", "Fading the Crowd", "Sentiment Fade", "Contrarianism"]
@@ -131,6 +131,40 @@ Contrarian trading has **moderate-to-good capacity** because entries are spread 
 - Severe [[noise-trader-risk]]: right about value, wrong about timing, stopped out before reversion
 - Performs poorly in strong sustained trends where the crowd is correct
 - Tempts undisciplined averaging-down, the classic contrarian blow-up
+
+## Getting the Data (CryptoDataAPI)
+
+For crypto expressions, [[cryptodataapi|CryptoDataAPI]] serves the sentiment extremes, positioning data, and capitulation signals the contrarian fades.
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — the Fear & Greed index; bottom-decile readings are the classic crypto fade setup
+- `GET /api/v1/derivatives/binance/long-short-ratio` — account positioning (crowded one-sided exposure)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding extremes, crypto's positioning gauge
+- `GET /api/v1/market-intelligence/liquidations` — liquidation spikes marking [[capitulation]]
+- `GET /api/v1/on-chain/dormancy/btc` — MVRV zone classification (capitulation → euphoria)
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — Fear & Greed timeseries for percentile thresholds
+- `GET /api/v1/backtesting/klines` — OHLCV archive for conditioning forward returns on sentiment extremes
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/fear-greed-history"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]] and [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Extreme detection** — `GET /api/v1/sentiment/fear-greed` scored against its own percentile from `GET /api/v1/market-intelligence/fear-greed-history`, plus `GET /api/v1/derivatives/binance/long-short-ratio`: pre-specify the objective extreme in advance — never fade a reading that is not in the tail.
+- **Turn confirmation** — `GET /api/v1/market-intelligence/liquidations`: a liquidation-spike washout followed by exhaustion is the "extreme is turning" trigger; enter after it, never into the accelerating move.
+- **Regime gate** — `GET /api/v1/regimes/current`: in `Established Bear`/`Capitulation` states the crowd is often *right* — fade only in range/bull regimes, or at a fraction of normal size.
+- **Value floor** — `GET /api/v1/on-chain/dormancy/btc` (MVRV capitulation zone) as the crypto stand-in for the fundamental margin-of-safety check.
+- **Backtest** — join `GET /api/v1/market-intelligence/fear-greed-history` to `GET /api/v1/backtesting/klines` (Binance daily since 2017-08) to test forward returns conditioned on pre-specified extremes — the null-hypothesis test above; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time sentiment in the recent window to avoid lookahead.
+- **Tips** — exit when the crowd flips (Fear & Greed percentile > 60), not at a new extreme; log every falling-knife loss against the kill criteria — two >2R knife losses is a listed pause trigger.
 
 ## Sources
 

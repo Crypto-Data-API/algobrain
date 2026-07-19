@@ -2,7 +2,7 @@
 title: "Strip and Strap"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, strip, strap, volatility, straddle-variant, directional-vol, long-volatility]
 aliases: ["Strip", "Strap", "Strip Straddle", "Strap Straddle"]
@@ -130,6 +130,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
 ```
 
 Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the strip/strap loop end-to-end (the legs and DVOL stay on Deribit / [[greeks-live]]):
+
+- **Lean selector** — `GET /api/v1/event/regime` + `GET /api/v1/event/calendar` — the directional bias attached to each catalyst (unlock → strip, listing/ETF decision → strap) chooses which side gets the doubled leg.
+- **Cheap-vol gate** — `GET /api/v1/volatility/regime` — three long legs make a `compressed` entry even more important than for a plain straddle.
+- **Skew check** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — richly positive funding firms call skew (straps cost more); deeply negative funding cheapens the strip's puts.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for *signed* post-catalyst move distributions — the strip/strap only beats the straddle if the lean is right more often than the extra leg costs.
+- **Tips** — automate the theta-cliff roll (final 1-2 weeks) and the IV-crush cut; three legs bleed faster than two.
 
 ## Related
 

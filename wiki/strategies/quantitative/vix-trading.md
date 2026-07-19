@@ -190,6 +190,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-regimes]] and [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the spike-vs-regime-break classification and risk layers of this trade (DVOL itself and the option legs stay on Deribit):
+
+- **Signal** — the central problem is classifying a DVOL spike as event-driven (fade) or regime break (stand down): read `GET /api/v1/quant/market` (`vol_spike` vs a transition into `strong_trend_bear`), `GET /api/v1/volatility/regime` per asset, and `GET /api/v1/market-intelligence/liquidations` (cascade subsiding = fade window opening)
+- **Positioning proxy** — `GET /api/v1/derivatives/funding-rates?coin=BTC` substitutes for the missing vol-futures curve: deeply positive funding flags the leveraged-long fragility that precedes downside DVOL spikes; `GET /api/v1/quant/gex` reads whether dealers are short gamma (cascade-prone)
+- **Backtest** — compute realized vol from `GET /api/v1/backtesting/klines` (Binance spot 1h/1d to 2017-08) for DVOL−RV spread studies, and condition spike-fade statistics on `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) — the fade only works on event-driven spikes, so unconditioned stats mix in the regime-break losses
+- **Tips** — encode the new-high-above-spike-peak stop as an automated flatten rule; `/volatility/regime/{symbol}` carries a 60-day state history to check how long past `vol_shock` states persisted before reverting
+
 ## See Also / Related
 
 - [[dvol]] — the crypto vol benchmark this page trades around

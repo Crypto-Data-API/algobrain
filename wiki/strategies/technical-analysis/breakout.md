@@ -2,7 +2,7 @@
 title: "Breakout"
 type: strategy
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, breakout, momentum, trend-following, crypto]
 aliases: ["Breakout Pattern", "Price Breakout", "Range Breakout"]
@@ -145,6 +145,36 @@ For discretionary or small systematic accounts in large-cap stocks, major FX, or
 - Schwager, J. (1989). *Market Wizards* — Donchian-lineage breakout context
 
 General market knowledge; no specific wiki source ingested yet.
+
+## Getting the Data (CryptoDataAPI)
+
+Everything the trade needs is OHLCV with volume, plus derivatives context to grade the break.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV with volume for level detection, the 1.5x volume filter, and ATR stops
+- `GET /api/v1/indicators/technical` — pre-computed SMA/BB/RSI structure state for universe-wide base screening
+- `GET /api/v1/derivatives/open-interest?coin=BTC` and `GET /api/v1/market-intelligence/liquidations` — participation and stop-cluster context behind the break
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — kline archive for testing breakout rules against the random-entry baselines in the null hypothesis above
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — N-day high/low channels and volume ratios computed from `GET /api/v1/market-data/klines`; a close beyond the level on ≥1.5x average volume is the trigger
+- **Regime gate** — `GET /api/v1/quant/market`: suppress entries while `choppy_high_vol` dominates; `GET /api/v1/volatility/regime` reading `compressed` marks the coiled ranges worth watching
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); run the shuffled-series null test the page prescribes, and validate the regime filter with `/api/v1/quant/regimes/history` (hourly since 2020, Pro Plus)
+- **Tips** — respect `insufficient_history`/`new_listing` flags — freshly listed coins print fake "N-day highs" with no real range behind them; the retest entry fills better than chasing the break candle in thin pairs.
 
 ## Related
 

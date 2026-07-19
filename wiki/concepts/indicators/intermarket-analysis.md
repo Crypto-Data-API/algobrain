@@ -2,7 +2,7 @@
 title: "Intermarket Analysis"
 type: concept
 created: 2026-04-14
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, commodities, portfolio-theory]
 aliases: ["Intermarket Analysis", "Intermarket Technical Analysis", "Cross-Asset Analysis"]
@@ -92,6 +92,33 @@ Intermarket analysis is primarily a weekly/monthly-chart discipline. The lead/la
 - The causal chain is an oversimplification of complex, multi-variable economic dynamics
 - Timing the lead/lag between asset classes is extremely difficult in real-time
 - Murphy's original work focused on US markets; global intermarket dynamics add additional layers of complexity
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto leg of the cross-asset picture — the "fifth asset class" noted above — [[cryptodataapi|CryptoDataAPI]] serves the macro backdrop alongside crypto prices:
+
+**Live data:**
+- `GET /api/v1/sentiment/macro` — EUR/USD, gold, and yields in one call: the currency, commodity, and bond legs of the overlay
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — daily crypto closes for correlation work
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots` — full daily payload including the macro snapshot, point-in-time since 2026-03-02
+- `GET /api/v1/backtesting/klines` — crypto price history (Binance spot daily back to 2017-08) to join against externally sourced DXY/SPX/CRB series
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/macro"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — `GET /api/v1/sentiment/macro` each session for gold, EUR/USD, and yields; pair with daily BTC/ETH closes from `GET /api/v1/market-data/klines` to maintain rolling cross-asset correlations
+- **Compute** — 30/90-day rolling correlations of crypto vs gold and yields classify which mode BTC is trading in ("risk asset" vs "digital gold" per the post-2008 section above)
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots` freezes the macro read per date since 2026-03-02; deeper studies need external DXY/SPX/CRB history joined to crypto prices from `GET /api/v1/backtesting/klines`
+- **Tip** — intermarket relationships unfold over weeks to months; resample to weekly bars before computing correlations, or daily noise swamps the lead/lag reads Murphy's chain depends on
 
 ## Related
 

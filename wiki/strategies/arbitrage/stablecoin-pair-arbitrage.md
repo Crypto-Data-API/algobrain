@@ -2,7 +2,7 @@
 title: "Stablecoin Pair Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, mean-reversion, event-driven]
 aliases: ["Stablecoin Depeg Arb", "USDC Arb", "Stable Pair Trade", "Stable Basis Arb"]
@@ -234,6 +234,38 @@ Sub-percent deviations rarely clear these costs after slippage; the durable oppo
 - FDIC press releases (March 12, 2023 SVB resolution)
 - Curve Finance subgraph + on-chain analytics
 - Stablecoin price data: [[crypto-data-sources]] (exchange APIs, Curve TWAP, Coinglass)
+
+## Getting the Data (CryptoDataAPI)
+
+Redemption-channel status and Curve pool composition come from issuer/on-chain sources; [[cryptodataapi|CryptoDataAPI]] covers depeg detection, per-venue stable prices, and the sector-level stablecoin flows.
+
+**Live data:**
+- `GET /api/v1/security/regime` — recent depegs + Security Stress score (the always-on depeg watchlist)
+- `GET /api/v1/security/events` — filterable recent depeg/hack events
+- `GET /api/v1/dex/token/{chain}/{address}` — per-pool stable price (Curve-style peg deviation read)
+- `GET /api/v1/derivatives/funding-rates?coin=<COIN>` — funding on any levered/short pair leg
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries (sector flight context per event)
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state around recent depegs (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the watch-and-classify loop:
+
+- **Signal** — `GET /api/v1/security/regime/score` as the cheap always-on poll; on a depeg component spike, switch to fast polling of `GET /api/v1/dex/token/{chain}/{address}` for the actual deviation, and only act above the ~20 bp round-trip breakeven.
+- **Classification support** — `GET /api/v1/security/events` distinguishes an exploit-coincident depeg from a banking/flow scare; the death-spiral cases (UST, USDR) are the uninsurable trap the classification gate exists to catch.
+- **Regime gate** — `GET /api/v1/quant/market`: deep, tradeable depegs cluster with `vol_spike` states; a depeg print during calm regimes is more likely a data artifact than an opportunity — verify on a second venue.
+- **Backtest** — the historical event table above predates most of the archive; for post-2026-03 events use `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) plus `GET /api/v1/backtesting/klines`, and `GET /api/v1/market-intelligence/stablecoin-history` for sector-flow context across the full sample.
+- **Tips** — the deep tactical menu (seven capture methods, sizing, amplification) lives at [[stablecoin-depeg-profit-capture]] with its own agent workflow; this page's loop is the detector that hands off to it.
 
 ## Related
 

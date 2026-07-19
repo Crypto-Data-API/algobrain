@@ -2,7 +2,7 @@
 title: "Bullish Engulfing"
 type: concept
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators]
 aliases: ["Bullish Engulfing", "Bullish Engulfing Pattern", "bullish-engulfing-candle"]
@@ -21,6 +21,31 @@ Traders typically use the bullish engulfing as a trigger for long entries, placi
 ## Trading Relevance
 
 A bullish engulfing is a confirmation signal, not a forecast. Its practical value is that it marks a point where the order flow has visibly flipped: the second candle's open below the prior close, followed by a close above the prior open, means buyers absorbed all of the prior session's selling and then some. That gives a trader a defined invalidation level (the pattern low) and therefore a clean risk-reward setup. The edge, to the extent one exists, is behavioral -- short sellers covering and sidelined buyers stepping in simultaneously at a level where downside momentum has stalled. Empirical studies (e.g. Bulkowski) find the raw pattern has only a slight directional edge in isolation; the reliability comes almost entirely from location ([[support-and-resistance|support]], trend exhaustion) and [[volume-analysis|volume]] confirmation. Systematic traders rarely trade it alone, but use it as one input in a multi-factor entry filter.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2` — the two most recent candles for a live pattern check
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio for confirmation
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars for pattern scans
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this pattern directly:
+
+- **Compute** — two-bar logic over `GET /api/v1/market-data/klines`: prior candle closes red, current candle closes green with its body spanning the prior body (close ≥ prior open, open ≤ prior close)
+- **Confirm** — check the engulfing bar's volume against the average from `GET /api/v1/market-data/volume-history` — the page's volume-confirmation rule, automated
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports hit-rate and expectancy studies with location filters (support proximity, trend context)
+- **Tip** — crypto trades 24/7, so the "opens below prior close" gap element rarely occurs on continuous bars; most crypto implementations relax the condition to pure body-engulfment
 
 ## Sources
 

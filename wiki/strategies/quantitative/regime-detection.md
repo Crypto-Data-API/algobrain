@@ -2,7 +2,7 @@
 title: "Regime Detection"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [regime-detection, hidden-markov-model, hmm, clustering, market-regimes, quantitative, adaptive-allocation, crypto]
 aliases: ["Regime Switching", "Market Regime Detection", "HMM Trading", "Regime-Based Allocation"]
@@ -208,6 +208,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/market"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this meta-strategy end-to-end — consuming the production 6-state HMM instead of training one:
+
+- **Signal** — `GET /api/v1/quant/market` every 15-minute refresh for the label + posterior probabilities; map states to sub-strategy books per the STATE_TO_BOOK table and only switch after the >70% posterior holds for ≥2 consecutive refreshes (the hysteresis rule is the cost control)
+- **Fast crisis flags** — `GET /api/v1/volatility/regime/score` and `GET /api/v1/liquidity/regime/score` corroborate a `vol_spike` read before the overlay de-risks real positions
+- **Backtest** — `GET /api/v1/quant/regimes/history` — hourly 6-state HMM probabilities since 2020 (Parquet, Pro Plus) — is the core training/validation set; `GET /api/v1/quant/timeline` adds daily labels back to 2019, and `GET /api/v1/quant/history` supplies point-in-time records so switching backtests never see tomorrow's posterior
+- **Model transparency** — `GET /api/v1/quant/model` (version, metrics, sha256) lets the agent detect model updates and re-validate its state-to-book mapping before trusting a new engine version
+- **Tips** — measure the overlay against the equal-weight static blend of its sub-strategies (the null); if switch turnover cost exceeds the drawdown reduction over a rolling window, widen the hysteresis before killing the overlay
+- **Prompt library** — the "Market Regime Detection" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) translates the six-state HMM probabilities into a risk posture; use it as the interpretation layer over /api/v1/quant/market
 
 ## Related
 

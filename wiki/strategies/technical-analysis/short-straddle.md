@@ -2,7 +2,7 @@
 title: "Short Straddle"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, short-straddle, premium-selling, volatility, neutral, derivatives]
 aliases: ["Crypto Short Straddle", "BTC Short Straddle", "Selling the Straddle", "ATM Premium Selling"]
@@ -142,6 +142,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the short-straddle management loop end-to-end (DVOL and the legs stay on Deribit / [[greeks-live]]):
+
+- **Entry screen** — `GET /api/v1/volatility/regime` (`expanding`/`normal` only, never `vol_shock`) plus realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` to confirm implied is rich versus delivered.
+- **Catalyst check** — `GET /api/v1/event/calendar` — no ATM straddles across unlocks/macro prints unless the post-event crush is the explicit trade.
+- **Pin context** — `GET /api/v1/market-intelligence/options` (max pain, OI walls) + `GET /api/v1/quant/gex` — long-gamma dealers dampen the tape the straddle wants pinned.
+- **Kill switch** — poll `GET /api/v1/volatility/regime/score` and `GET /api/v1/market-intelligence/liquidations`; a score spike or live cascade = flatten, never average down — automate it, weekend gaps do not wait.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for realized-move distributions vs credit widths; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime replay. CDA has no options-chain history — premium series come from Deribit.
 
 ## Related
 

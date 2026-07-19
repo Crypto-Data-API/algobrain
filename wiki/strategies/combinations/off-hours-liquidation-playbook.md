@@ -355,6 +355,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this playbook end-to-end:
+
+- **Signal** — poll `GET /api/v1/market-intelligence/liquidations` through the off-hours window (Asia weekend / US overnight UTC buckets); a cascade spike in a thin session arms the fade entry
+- **Filter** — `GET /api/v1/liquidity/depth` confirms the session is genuinely thin, and `GET /api/v1/derivatives/funding-rates?coin=BTC` checks momentum mid-hold
+- **Execution** — venue context from `GET /api/v1/market-intelligence/liquidations/by-exchange` tells the agent which book absorbed the flow before it sizes the fade
+- **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30) joined to `GET /api/v1/backtesting/klines` 1m bars (also since 2026-03-30) for wick-level cascade replay; 1h bars reach back to 2017-08 for coarser session statistics
+- **Tips** — the liquidation archive is only months deep, so session-conditional edge estimates carry wide error bars; treat this as a forward-accumulating dataset and re-fit quarterly
+
 ## Related
 
 - [[liquidation-cascade-fade]] — the underlying cascade-fade primitive; this page adds session conditioning on top

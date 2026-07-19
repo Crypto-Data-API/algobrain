@@ -2,7 +2,7 @@
 title: "GBTC Discount/Premium Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, bitcoin, history]
 aliases: ["GBTC Arb", "Grayscale Premium Trade", "GBTC NAV Arb", "Grayscale Discount Trade"]
@@ -246,6 +246,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [BTC cycle](https://cryptodataapi.com/bitcoin-cycle-indicators)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can monitor the flow context and hedge leg — this trade is **retired** (the discount closed at the Jan-2024 ETF conversion), so the endpoints serve the analogous ETF-flow / hedge monitoring, not a live GBTC gap. The GBTC price and NAV themselves are off-API (OTCQX + Grayscale NAV report).
+
+- **Institutional-flow context** — `GET /api/v1/market-intelligence/etf/btc/aum` and `GET /api/v1/market-intelligence/etf/btc/flows` track the spot-ETF bid whose arrival closed the discount; `GET /api/v1/market-intelligence/coinbase-premium` proxies US institutional demand.
+- **Hedge leg** — the short-BTC hedge's cost is framed by `GET /api/v1/market-intelligence/liquidations` and `GET /api/v1/market-intelligence/options` (OI, max pain).
+- **Regime gate** — `GET /api/v1/quant/market` for BTC-hedge sizing on any analogous NAV-convergence trade.
+- **Backtest** — `GET /api/v1/market-intelligence/etf/{asset}/flows` (historical) + `GET /api/v1/backtesting/liquidations` (Hyperliquid only, since 2026-03-30).
 
 ## Related
 

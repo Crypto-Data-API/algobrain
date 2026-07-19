@@ -2,7 +2,7 @@
 title: "Vol Regime Detection"
 type: concept
 created: 2026-05-07
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [volatility, indicators, regime, machine-learning, risk-management]
 aliases: ["Vol Regime Detection", "Volatility Regime Detection", "Regime Detection"]
@@ -238,6 +238,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/volatility/regime` (per-asset five-state classifier) and `GET /api/v1/quant/market` (filtered HMM probabilities, 15-min refresh) are a ready-made two-method ensemble; `GET /api/v1/volatility/regime/{symbol}` adds a 60d per-asset history for hysteresis tuning
+- **Compute** — roll your own detector (thresholds, RV ratios, MS-GARCH) from `GET /api/v1/market-data/klines` closes and compare it against the hosted classifiers before trusting either
+- **Backtest** — `GET /api/v1/quant/history` serves point-in-time probability records (Pro Plus) — the filtered `P(s_t | data through t)` this page insists on, with no smoothed look-ahead
+- **Tip** — apply the asymmetric-hysteresis rule to API labels too: require multiple consecutive polls before flipping a book out of a stressed classification, not one 15-min refresh
 
 ## Related
 

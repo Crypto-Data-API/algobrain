@@ -2,7 +2,7 @@
 title: "Reversal Patterns"
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [technical-analysis, indicators, education]
 domain: [technical-analysis]
@@ -53,6 +53,31 @@ Suppose a stock has rallied for two months and then prints a **[[double-top]]** 
 - **Subjectivity.** Where a "neckline" or "shoulder" sits is partly in the eye of the chartist; the same chart yields different patterns to different traders.
 - **Base rates favour continuation.** Trends persist more often than they reverse, so reversal signals carry a meaningful false-positive rate — they are best used with confluence, not in isolation.
 - **Timeframe dependence.** A reversal on a 5-minute chart may be noise within an intact daily uptrend. Always read the pattern in the context of the higher timeframe trend.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — OHLC bars for detecting candlestick- and chart-scale reversal formations
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for measuring pattern base rates across full cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — candlestick-scale patterns (engulfing, doji, hammer) are pure OHLC predicates over `GET /api/v1/market-data/klines` bars; chart-scale patterns (double tops, head-and-shoulders) build from fractal swing pivots on the same series, with the volume column supplying the confirmation check
+- **Backtest** — measure each pattern's actual base rate on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) before trusting it — this page's warning that continuation beats reversal is testable per pattern and interval
+- **Regime gate** — reversal signals against a `strong_trend_bull`/`strong_trend_bear` state from `GET /api/v1/quant/market` fight the base rate twice; weight them down or require chart-scale confirmation there
+- **Tip** — enforce the confirmation rule in code: no signal until the neckline/trigger closes, since intrabar "patterns" evaporate by the close on crypto's wick-heavy tape
 
 ## Related
 

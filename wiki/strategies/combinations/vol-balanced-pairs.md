@@ -401,6 +401,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this pairs book end-to-end:
+
+- **Signal** — daily klines for both legs feed correlation, cointegration, z-score, and OU half-life; leg weights are inverse-vol balanced
+- **Sizing** — `GET /api/v1/quant/coins/risk` returns per-coin vol-target multipliers in one batch call — a direct cross-check on locally computed leg weights
+- **Filter** — the funding differential (`GET /api/v1/derivatives/funding-rates?coin={LEG}`) and short-leg OI growth (`GET /api/v1/derivatives/open-interest?coin={LEG}`) guard the carry and squeeze dimensions
+- **Regime gate** — `GET /api/v1/regimes/current`; flatten all spreads in `Structural_Shock`
+- **Backtest** — spread and vol-weighting replay on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states at rebalance dates
+- **Tips** — re-estimate vol weights on a fixed weekly schedule, not on every poll — intraday vol-chasing turns a pairs book into a churn machine
+
 ## Related
 
 - [[pairs-trading]] — the canonical stat-arb/pairs primitive; this page is the vol-balanced sizing variant

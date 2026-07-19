@@ -2,7 +2,7 @@
 title: "Flash Loan Arbitrage"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, defi, flash-loan, aave, dex, mev, atomic, ethereum]
 aliases: ["Flash Loan Arb", "Atomic Arbitrage", "DeFi Flash Arb"]
@@ -272,6 +272,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/security/eth
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can feed the routing engine's discovery and screening layer (execution stays on a native RPC + revm/Tenderly + builder relay):
+
+- **Pool discovery** — `GET /api/v1/dex/new-pools` and `GET /api/v1/dex/trending` surface fresh gaps; `GET /api/v1/dex/token/{chain}/{address}` builds the pool graph for a token across Solana/Ethereum/Base/BSC/Arbitrum.
+- **Token safety** — `GET /api/v1/dex/security/{chain}/{address}` is the honeypot / transfer-tax / pausable gate before routing borrowed funds — the one place this zero-principal-risk trade can lose principal.
+- **Route sizing** — `GET /api/v1/liquidity/depth` bounds the optimal borrow before AMM slippage erodes the gap.
+- **Not served** — mempool/simulation and the block-building auction are off-API; CryptoDataAPI is discovery/screening only, so use it to pre-filter candidate routes, not to price inclusion.
+- **Backtest** — `GET /api/v1/backtesting/klines` for correlated-pool spread research (no per-block on-chain reserve archive here).
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "JIT Liquidity"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: draft
 tags: [crypto, defi, liquidity, uniswap, mev, concentrated-liquidity, amm, just-in-time, ethereum, algorithmic]
 aliases: ["Just-In-Time Liquidity", "JIT LP", "JIT Liquidity Provision", "Sandwich-Free LP"]
@@ -219,6 +219,16 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending?cha
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Pool selection** — `GET /api/v1/dex/trending?chain=ethereum` ranks pools by the large-swap flow JIT targets; `GET /api/v1/dex/token/{chain}/{address}` adds per-pair depth context
+- **Risk pricing** — `GET /api/v1/volatility/regime` sets the single-swap LVR risk on the residual inventory; stand down in `vol_shock` states
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility score — fragile books raise the odds a large pending swap is informed, the adverse-selection tail that decides JIT P&L
+- **Backtest** — model single-swap LVR from 1m `GET /api/v1/backtesting/klines` (only since 2026-03-30, so minute-level history is shallow); the mempool trigger itself is not replayable from any REST archive
+- **Tips** — the trigger is a node/Flashbots mempool stream; keep CryptoDataAPI in the screening and risk-state loop, cached and outside the block-race latency path
 
 ## Related
 

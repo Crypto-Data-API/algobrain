@@ -2,7 +2,7 @@
 title: "RSI Mean Reversion"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [mean-reversion, rsi, oversold, overbought, quantitative, larry-connors, crypto, behavioral-finance, indicators]
 aliases: ["RSI Reversion", "RSI Oversold Bounce", "Connors RSI Strategy", "Connors RSI(2)", "Oversold Bounce"]
@@ -359,6 +359,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/techn
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure) · [fear & greed](https://cryptodataapi.com/fear-greed) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — compute RSI(2) on daily closes from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d` (the pre-computed `GET /api/v1/indicators/technical` state uses standard RSI — the 2-period trigger needs raw klines); evaluate once per UTC day after the 00:00 close, exactly as the bot does
+- **Sentiment filter** — `GET /api/v1/sentiment/fear-greed` for the F&G < 30 gate (`?format=markdown` available), replacing the alternative.me dependency with the same index via one authenticated call
+- **Trend filter** — `GET /api/v1/market-data/btc-price-history?days=730` ships the 200D MA precomputed for BTC; for ETH/SOL compute the 200D SMA from daily klines
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08) joined with `GET /api/v1/market-intelligence/fear-greed-history` to test the F&G filter's marginal value over the naked Connors rule across full cycles
+- **Tips** — the strategy fires rarely (8-15 trades/yr); run it as a daily scheduled check, not a polling loop, and log each signal's conditional forward return for the deflated-Sharpe kill criterion
 
 ## Related
 

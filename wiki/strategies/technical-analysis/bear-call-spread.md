@@ -2,7 +2,7 @@
 title: "Bear Call Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, bear-call-spread, credit-spread, bearish, defined-risk, volatility, bitcoin]
 aliases: ["Call Credit Spread", "Short Call Spread", "Crypto Bear Call Spread", "Deribit Call Credit Spread"]
@@ -128,6 +128,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — sell the spread when `GET /api/v1/volatility/regime` reads elevated/`expanding` (not `vol_shock`) and `GET /api/v1/market-intelligence/options` places max pain at or below spot; park the short call above the call-OI wall
+- **Regime gate** — `GET /api/v1/quant/market`: a leading `strong_trend_bull` probability is the veto — call-credit spreads die in squeezes; `/api/v1/quant/gex` short-dealer-gamma above spot is the squeeze-fuel confirmation
+- **Backtest** — short-strike breach frequency per tenor from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); no options-chain history is served, so proxy outcomes with underlying paths and pin entries to point-in-time regimes via `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — while short, poll `/api/v1/market-intelligence/liquidations`: a short-liquidation cascade is the early exit; funding flipping strongly positive on `/api/v1/derivatives/funding-rates?coin=BTC` fattens the upside tail against the position.
 
 ## Related
 

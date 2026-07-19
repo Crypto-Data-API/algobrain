@@ -2,7 +2,7 @@
 title: "Evening Star"
 type: concept
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis]
 aliases: ["Evening Star", "Evening Star Pattern", "Evening Doji Star"]
@@ -76,6 +76,31 @@ Traders use the evening star as a signal to exit longs or initiate short positio
 - **Ignoring penetration depth.** If candle 3 barely dips into candle 1's body, the reversal is weak; demand a close below the midpoint.
 - **Skipping confirmation in choppy tape.** Without volume or a structural level, the pattern produces frequent false positives.
 - **Forcing the gap requirement in 24-hour markets.** In [[crypto]] and [[forex]], gaps are rare; insisting on them filters out valid signals — focus on the small middle body and bearish close instead.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3` — the three most recent candles for a live pattern check
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for pattern scans
+- `GET /api/v1/market-data/volume-history?days=90` — volume confirmation on candle 3
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=3"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this pattern directly:
+
+- **Compute** — three-bar logic on `GET /api/v1/market-data/klines`: a large up body, then a small star body, then a large down body closing below candle 1's midpoint
+- **Confirm** — weight the signal by candle 3's volume from `GET /api/v1/market-data/volume-history` and by trend context (only score stars after an extended run)
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports hit-rate studies by penetration depth and confirmation rule
+- **Tip** — drop the gap requirement on 24/7 crypto bars, exactly as the page advises — require only the small middle body and the deep bearish close
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Cross-Chain Yield Farming"
 type: strategy
 created: 2026-04-22
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [defi, crypto, arbitrage, liquidity, risk-management]
 strategy_type: algorithmic
@@ -228,6 +228,39 @@ Retire (or mothball) the strategy if any of the following hold:
 - General knowledge -- cross-chain farming mechanics and bridge risk history
 - Bridge exploit figures (Ronin ~$625M Mar 2022, Wormhole ~$320M Feb 2022, Nomad ~$190M Aug 2022) are widely documented public events; see rekt.news leaderboard and contemporaneous coverage (Chainalysis 2022 crypto crime reporting on bridge hacks)
 - DefiLlama (defillama.com) -- canonical public dataset for cross-chain TVL and pool yields
+
+## Getting the Data (CryptoDataAPI)
+
+Pool-level APYs and TVL come from DefiLlama and protocol dashboards — CryptoDataAPI supplies the security/exploit monitoring, multi-chain DEX discovery, and depeg context around each rotation.
+
+**Live data:**
+- `GET /api/v1/dex/trending` — trending pools across Solana/Ethereum/Base/BSC/Arbitrum (where activity concentrates per chain)
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report before deploying into an unfamiliar pool token
+- `GET /api/v1/security/regime` — recent hacks/depegs + Security Stress score (the bridge-exploit and depeg tail monitor)
+- `GET /api/v1/security/events` — filterable recent security events (10d lookback)
+- `GET /api/v1/on-chain/stablecoin-reserves` — stablecoin reserve context for wrapped-asset/depeg monitoring
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=<TOKEN>USDT&interval=1d&limit=365` — incentive-token price paths (the sell-slippage haircut input)
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive for reward-token behaviour across past incentive cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]] (also [[cryptodataapi-regimes]], [[cryptodataapi-on-chain]]).
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Screening** — score DefiLlama pool candidates, then gate each through `GET /api/v1/dex/security/{chain}/{address}` and drop any chain with active incidents on `GET /api/v1/security/events`
+- **Exit trigger** — poll `GET /api/v1/security/regime/score` (45% hack-weighted) every cycle; a spike is the automated version of this page's "bridge anomaly → exit" rule
+- **Regime gate** — rotate aggressively only in risk-on states from `GET /api/v1/quant/market`; in `vol_spike` regimes bridge latency and depeg risk both worsen exactly when you need the exit
+- **Backtest** — reward-token dump curves from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08); pool APY/TVL history must come from archived DefiLlama data — no CryptoDataAPI archive covers pool yields
+- **Tips** — re-estimate the EV model's incentive-token haircut from live klines, not the quoted APY; keep the security poll on a tighter schedule than the yield scan
 
 ## Related
 

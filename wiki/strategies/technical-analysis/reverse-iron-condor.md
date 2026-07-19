@@ -2,7 +2,7 @@
 title: "Reverse Iron Condor"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, breakout, bitcoin, ethereum]
 aliases: ["RIC", "Reverse Iron Condor Spread", "Long Iron Condor"]
@@ -122,6 +122,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the RIC timing loop end-to-end (legs and DVOL stay on Deribit / [[greeks-live]]):
+
+- **Setup screen** — `GET /api/v1/volatility/regime` (want `compressed`) + `GET /api/v1/volatility/regime/score` (a low reading = cheap vol to buy).
+- **Catalyst trigger** — `GET /api/v1/event/calendar` — filter unlock/macro/depeg events landing inside the tenor; compressed vol plus a dated catalyst is the entry condition.
+- **Cascade context** — `GET /api/v1/quant/gex` — short-dealer-gamma regimes are cascade-prone, the favorable backdrop for long gamma; `GET /api/v1/market-intelligence/options` warns of OI walls that could pin price and stall the breakout.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) to measure breakout frequency and magnitude after compression windows vs the debit paid; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays regime + event context point-in-time.
+- **Tips** — automate the time-stop: if the calendar's catalyst passes with no expansion, salvage the residual debit instead of bleeding theta into a dead structure.
 
 ## Related
 

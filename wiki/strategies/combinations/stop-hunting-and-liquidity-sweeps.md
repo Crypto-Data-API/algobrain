@@ -175,6 +175,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this playbook end-to-end:
+
+- **Signal** — `GET /api/v1/market-intelligence/liquidations` clustering around a wick is the sweep confirmation; `GET /api/v1/market-data/short-term-price` reads whether the post-wick tape is reverting or continuing
+- **Filter** — `GET /api/v1/liquidity/depth` identifies the thin zones where sweeps are cheapest to manufacture; `GET /api/v1/derivatives/funding-rates?coin=BTC` flags the crowded side whose stops are the target
+- **Backtest** — wick-level replay needs 1m bars, available from `GET /api/v1/backtesting/klines` only since 2026-03-30; 1h bars reach 2017-08 for coarse sweep-zone statistics, and `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) supplies the cascade-cluster join
+- **Tips** — the fine-grained archive accumulates forward from March 2026 — treat sweep statistics as provisional and refresh the study monthly as the 1m/liquidation record grows
+
 ## Related
 
 - [[structural-forced-selling]] — a broader class of forced-exit dynamics

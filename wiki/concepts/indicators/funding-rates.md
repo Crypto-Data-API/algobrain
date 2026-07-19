@@ -2,7 +2,7 @@
 title: "Funding Rates"
 type: concept
 created: 2026-04-07
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [crypto, perpetual-futures, market-microstructure]
 aliases: ["Funding Rate", "Perp Funding"]
@@ -73,6 +73,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — `GET /api/v1/derivatives/funding-rates?coin=BTC` for the live cross-exchange read (exposed as the `get_funding_rates` MCP tool); `GET /api/v1/derivatives/summary?coin=BTC` bundles funding, OI, and long/short in one call
+- **Signal** — annualize the 8-hour prints (rate × 3 × 365) and z-score against a trailing window rather than using raw absolute thresholds; extremes are regime-dependent
+- **Backtest** — `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05; Binance daily funding (with mark price + OI) only since 2026-03-30
+- **Tip** — before fading extreme funding, confirm crowding with `GET /api/v1/derivatives/binance/long-short-ratio`; funding alone flips sign quickly, but funding plus a stretched account L/S ratio is the persistent one-sided-positioning read
 
 ## Related
 

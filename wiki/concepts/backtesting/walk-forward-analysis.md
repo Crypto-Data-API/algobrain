@@ -2,7 +2,7 @@
 title: "Walk-Forward Analysis"
 type: concept
 created: 2026-04-10
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [backtesting, validation, methodology, walk-forward]
 aliases: ["Walk-Forward Optimization", "WFA", "WFO", "Rolling Out-of-Sample"]
@@ -241,6 +241,14 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symb
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automate walk-forward design:
+
+- **Fold design** — the "Walk-Forward Analysis Designer" prompt (Pro Plus tier, [prompt library](https://cryptodataapi.com/prompts)) maps test folds against regime diversity via `GET /api/v1/quant/timeline` and flags monotone windows where every fold sits in the same regime
+- **Regime-aware windows** — pull `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet) so each out-of-sample fold spans more than one regime
+- **Data** — replay `GET /api/v1/backtesting/klines` per fold (Binance spot 1h/4h/1d since 2017-08); pair with point-in-time snapshots from `/api/v1/backtesting/daily-snapshots` to avoid [[lookahead-bias]]
 
 ## Related
 

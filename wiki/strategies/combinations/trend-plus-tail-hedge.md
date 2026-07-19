@@ -209,6 +209,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 Auth: `X-API-Key` header. DVOL and the Deribit IV surface come from Deribit / [[greeks-live]], not CryptoDataAPI. Full catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run both legs end-to-end:
+
+- **Signal** — daily klines run the MA-crossover trend engine and ATR sizing
+- **Hedge timing** — `GET /api/v1/volatility/regime` (`compressed` = cheap wings) and `GET /api/v1/market-intelligence/liquidations` (cascade early-warning) time tail-hedge entry and monetization
+- **Regime gate** — `GET /api/v1/quant/market` HMM probabilities separate sustained trend from chop before the trend leg deploys
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for the trend leg, `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for carry drag, and `GET /api/v1/backtesting/liquidations` (since 2026-03-30) for hedge-monetization triggers
+- **Tips** — the hedge leg is priced on Deribit, not CDA; run the monetization decision off CDA cascade data but verify option marks before selling wings into a spike
+
 ## Related
 
 - [[trend-following]] — the core trend discipline

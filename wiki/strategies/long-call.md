@@ -2,7 +2,7 @@
 title: "Long Call (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
 aliases: ["Long Call", "Buy Call", "Crypto Long Call"]
@@ -106,6 +106,19 @@ The IV surface and **DVOL** are Deribit / Greeks.live, not CryptoDataAPI.
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime"
 ```
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry timing** — `GET /api/v1/volatility/regime`: a `compressed` state flags cheap convexity ahead of a catalyst; avoid buying straight into `vol_shock`, where post-event DVOL crush is the "right thesis, wrong vehicle" loss.
+- **Catalyst check** — `GET /api/v1/event/calendar` (unlocks/macro events up to 30 days out, with directional bias): confirm a credible up-move catalyst falls inside the option's life before paying theta for it.
+- **Pin awareness** — `GET /api/v1/market-intelligence/options`: max-pain and OI concentration near the 08:00 UTC expiry can pin spot away from the strike in the final days.
+- **Perp comparison** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: when funding is low or negative, the perp long may be the cheaper bullish vehicle; the call earns its premium when funding is punishing longs.
+- **Backtest** — realized-move distributions from `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08) test whether the implied move was beatable in past regimes; premium histories come from Deribit — CDA holds no options-chain archive.
+- **Tips** — enforce the time stop mechanically: if the catalyst passes without the move, exit rather than feed theta; append `?format=markdown` for cleaner context.
 
 ## Related
 

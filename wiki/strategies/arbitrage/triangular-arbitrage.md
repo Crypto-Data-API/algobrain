@@ -310,6 +310,37 @@ The math of "(BTC/USDT) × (ETH/BTC) ≠ (ETH/USDT)" is the textbook framing. Th
 
 The crisis case studies above are documented on their own linked event pages (e.g. [[1992-black-wednesday-erm-crisis]], [[2015-01-snb-swiss-franc-unpeg]], [[2024-08-yen-carry-unwind]]); reported single-trade P&L figures are widely cited but trader-attributed and should be treated as approximate. The mechanical/no-arbitrage portion of this page is general market knowledge; no specific wiki source ingested yet.
 
+## Getting the Data (CryptoDataAPI)
+
+Execution is a sub-millisecond latency race that needs native exchange WebSocket feeds; [[cryptodataapi|CryptoDataAPI]] serves the research layer — triplet discovery, cross-rate deviation screening, and dislocation-frequency studies.
+
+**Live data:**
+- `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call (screen every candidate triplet for cross-rate inconsistency at snapshot cadence)
+- `GET /api/v1/market-data/ticker/price?symbol=<SYM>` — per-pair spot price spot-checks
+- `GET /api/v1/market-data/exchange-info?symbol=<SYM>` — pair specs (tick size, filters) that set the executable-size and rounding constraints per leg
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=<SYM>&interval=1m&limit=1000` — recent bars for deviation-frequency studies per triplet
+- `GET /api/v1/backtesting/klines` — deep OHLCV archive (Binance spot 1h/4h/1d to 2017-08; 1m only since 2026-03-30)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/daily/prices"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] cannot win the execution race (REST polling is orders of magnitude too slow) but can run the research loop that decides where a low-latency bot should point:
+
+- **Universe** — sweep `GET /api/v1/daily/prices` for triplets whose implied cross deviates from the quoted third leg; rank triplets by deviation frequency and magnitude to pick where a real-time bot earns its infrastructure cost.
+- **Constraint check** — `GET /api/v1/market-data/exchange-info` per candidate pair for tick sizes and lot filters; a triplet whose thinnest leg cannot absorb the minimum viable size is dead regardless of deviation stats.
+- **Regime gate** — `GET /api/v1/quant/market`: stale-quote windows widen in `vol_spike`/`choppy_high_vol` states and around listings; deviation frequency measured per regime state estimates how often the bot will actually fire.
+- **Backtest** — 1m bars from `GET /api/v1/backtesting/klines` exist only since 2026-03-30 (Binance USDT-perps + HL); bar-level cross-rate studies are an upper bound on opportunity frequency, not P&L evidence — sub-second fills and fees decide the real economics.
+- **Tips** — respect `Cache-Control`/`X-Cache` headers when sampling for deviation studies (cached prices fake dislocations); benchmark every apparent gross edge against the `3 × fee + spreads` hurdle before counting it as an opportunity.
+
 ## See Also
 - [[arbitrage]] -- the umbrella concept
 - [[latency-arbitrage]] -- the speed-race edge that dominates tri-arb economics

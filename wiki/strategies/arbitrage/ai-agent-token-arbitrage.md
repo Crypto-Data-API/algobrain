@@ -2,7 +2,7 @@
 title: "AI Agent Token Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, ai-trading, altcoins, event-driven]
 aliases: ["AI Agent Coin Arb", "Virtuals Bonding Curve Arb", "AIXBT Arbitrage"]
@@ -163,6 +163,37 @@ Per-trade $500-50K; strategy-level capacity ~$50M for top operators. The categor
 - **YouTube: "Bankless" AI agent ecosystem coverage (Dec 2024).**
 - **YouTube: "Murad Mahmudov" AI agent token thesis videos (2024).**
 - **YouTube: "What is Virtuals Protocol" by various Base creators (2024).**
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the on-chain and regime side of this trade; the Virtuals/ai16z bonding-curve launchpad events and Twitter/Farcaster velocity are off-API (subgraph + social scraper).
+
+**Live data:**
+- `GET /api/v1/dex/new-pools` — newest multi-chain launches (Solana/Ethereum/Base/BSC/Arbitrum), the launch-snipe feed
+- `GET /api/v1/dex/trending` — trending pools per chain (where retail flow is rotating)
+- `GET /api/v1/dex/token/{chain}/{address}` — per-token price + top pools once an agent token graduates to an LP
+- `GET /api/v1/dex/security/{chain}/{address}` — rug/honeypot report before sizing a snipe
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype 0-100 + `meme_season` flag (the backdrop gate)
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history (Pro+)
+- DEX is live-only — poll `/dex/new-pools` forward and store to build a launch history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/new-pools"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-regimes]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can screen and gate this launch-sniping sleeve:
+
+- **Universe** — `GET /api/v1/dex/new-pools` for fresh AI-agent-token launches; `GET /api/v1/dex/trending` for where flow rotates. Launchpad graduation events and Twitter velocity are off-API.
+- **Safety gate** — `GET /api/v1/dex/security/{chain}/{address}` before any snipe — most agent tokens are scam-adjacent.
+- **Regime gate** — `GET /api/v1/meme/regime/score` (meme-hype + `meme_season`): only size up in a favourable meme backdrop, since the category trades as high-beta memecoins.
+- **Backtest** — no launch archive; poll `/dex/new-pools` forward and use `GET /api/v1/meme/regime/{symbol}` 60d history for the regime context of past windows.
+- **Tip** — the median launch goes to ~zero; size for the power-law and respect `new_listing` flags.
 
 ## Related
 

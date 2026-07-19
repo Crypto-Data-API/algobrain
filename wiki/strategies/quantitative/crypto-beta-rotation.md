@@ -2,7 +2,7 @@
 title: "Crypto Beta Rotation"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [quantitative, crypto, bitcoin, market-regime, regime-detection, correlation, risk-management, macro]
 aliases: ["Crypto Risk-On/Off Rotation", "Crypto Macro Regime Rotation", "Crypto Beta Hedging Overlay", "DXY Nasdaq Crypto Rotation", "Risk-Regime De-Beta"]
@@ -285,6 +285,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/macro"
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-sentiment]]; regime and vol-stress detail on [[cryptodataapi]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [funding rates](https://cryptodataapi.com/funding-rates) · [fear & greed](https://cryptodataapi.com/fear-greed) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this overlay end-to-end:
+
+- **Signal** — `GET /api/v1/sentiment/macro` for the EUR/USD (DXY proxy), gold, and yields backdrop; `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d` supplies the BTC leg of the 30-day BTC-Nasdaq correlation (the Nasdaq series stays external)
+- **Regime gate** — combine `GET /api/v1/quant/market`, `GET /api/v1/volatility/regime/score`, and `GET /api/v1/policy/regime` into the risk-regime score; `GET /api/v1/liquidity/regime` confirms risk-off is transmitting into crypto books
+- **Backtest** — `GET /api/v1/backtesting/klines` (BTC daily to 2017-08) plus `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) for regime-conditioned overlay tests; full point-in-time `/daily` payloads via `GET /api/v1/backtesting/daily-snapshots` only since 2026-03-02
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly (it packages macro, health, and derivatives in one call — the overlay's whole input set); enforce the hysteresis band agent-side by acting only when the regime score persists across ≥2 consecutive readings
 
 ## Related
 

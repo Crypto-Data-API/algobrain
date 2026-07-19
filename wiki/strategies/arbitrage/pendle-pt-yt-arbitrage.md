@@ -2,7 +2,7 @@
 title: "Pendle PT/YT Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, defi, quantitative, derivatives, ethereum]
 aliases: ["Pendle Principal Token Arb", "Yield Token Arbitrage", "Pendle Fixed-Yield Arb"]
@@ -199,6 +199,38 @@ Per-pool capacity bound by Pendle pool depth ($5-200M TVL typical). Strategy-lev
 - **YouTube: "Pendle Explained" series by DeFi Dad (2024).**
 - **YouTube: "Bankless" Pendle interview with TN Lee (founder, 2024).**
 - **YouTube: "Wave Financial" / "Galaxy Digital" Pendle market commentary 2024.**
+
+## Getting the Data (CryptoDataAPI)
+
+PT/YT prices and pool state come from the Pendle API/SDK; [[cryptodataapi|CryptoDataAPI]] supplies the yield-model inputs for funding-derived underlyings (sUSDe — Ethena's yield *is* the funding harvest) and the depeg/tail overlay on LST/LRT underlyings.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — cross-exchange funding (the driver of USDe/sUSDe yield; feeds the expected-yield model for sUSDe PT/YT pools)
+- `GET /api/v1/market-intelligence/funding-rates` — cross-exchange funding for top coins in one call
+- `GET /api/v1/security/regime/score` — depeg/hack stress composite (the ezETH-Apr-2024-style tail on the underlying leg)
+- `GET /api/v1/event/calendar` — forward catalysts incl. depeg-risk events on screened underlyings
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (realized funding-yield series over past PT maturity windows)
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state for maturity-window studies (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=ETH"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the yield-model half of this strategy (PT/YT quotes still come from Pendle):
+
+- **Yield model (sUSDe pools)** — average `GET /api/v1/derivatives/funding-rates` across venues to project USDe's funding-harvest yield over the PT maturity, then compare to the Pendle-implied yield; a 200bp+ gap is the entry per the Rules.
+- **Tail watch** — `GET /api/v1/security/regime/score` and `GET /api/v1/event/calendar` flag depeg/exploit stress on the underlying LST/LRT before it hits a held PT position.
+- **Regime gate** — `GET /api/v1/quant/market`: sustained `strong_trend_bear` compresses funding toward negative, undermining sUSDe realized yield vs the fixed rate locked at PT entry — favour the long-PT (fixed-receiver) side in that state.
+- **Backtest** — run the null-hypothesis regression (realized vs implied yield) using `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) as the realized funding-yield series over each completed maturity; pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid grading old entries with today's knowledge.
+- **Tips** — points/airdrop optionality (the dominant model risk) has no API anywhere; keep it as an explicit uncertainty band rather than a point estimate, and size YT shorts to survive the band's top end.
 
 ## Related
 

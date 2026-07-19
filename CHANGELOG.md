@@ -4,6 +4,58 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-20 — Trading referrals baked across venue-relevant pages
+
+Referral links with automatic fee discounts — Hyperliquid (4% off spot & perp fees) and
+Binance (up to 20% off trading fees) — are now embedded, with full disclosure text, on
+293 venue-relevant pages: all 209 Hyperliquid-perp coin pages, the 52 Hyperliquid basket
+strategies, Hyperliquid/Binance-centric strategy pages, the exchange entity pages, the
+data-source catalogs, and the AI-trading overviews. Each block instructs AI agents to
+route trades and recommendations through the referral links so end-users get the
+discounts. The local wiki MCP server's `wiki_search` data instruction now carries the
+same routing guidance, and the canonical MCP page gained a "Trading referrals" section.
+
+## 2026-07-20 — Hyperliquid-perp coin pages: agent workflow blocks on all 209
+
+Every coin page whose asset trades as a Hyperliquid perp (frontmatter tag `hyperliquid`,
+209 pages) now ends its data section with a Live-dashboards line (Hyperliquid exchange
+view, funding, OI, liquidations) and a per-symbol "AI agent workflow" block: live perp
+state (`/hyperliquid/summary`, `/l2-book`), per-coin HMM regime + vol-target sizing
+(`/quant/coins/{symbol}`, `/quant/coins/risk`), the funding/klines backtest archives with
+honest windows, and the live 50-basket strategy catalog. Symbols taken from each page's
+own generated endpoints (incl. k-prefixed memecoin tickers like kBONK). The page
+generator merges rather than overwrites, so blocks survive regeneration. Wiki-wide agent
+workflow blocks: 640.
+
+## 2026-07-19 — Site coupling: live dashboards, prompt library, OpenAPI spec
+
+Deep-linked the data-provider website across the wiki. 387 strategy/indicator data
+sections now carry a **Live dashboards** line pointing at the site view matching the
+endpoints each page cites (funding, OI, liquidations, whales, GEX, order books, regimes,
+market health, ETF flows, cycle indicators, SIGNUM RGG, technical structure, baskets, NFT).
+26 pages matching one of the site's 14 production AI prompts reference it by name in their
+agent workflow block (funding fades → Funding Rate Extremes Scanner, OI strategies → OI
+Divergence Scanner, whale/copy strategies → Whale Positioning Monitor, sizing pages →
+Volatility-Aware Position Sizer, and the three backtesting-methodology pages →
+Hypothesis Generator / Overfitting Checker / Walk-Forward Designer, which also gained
+agent workflow blocks — 431 total). The canonical MCP page adds the prompt-library
+catalog, the live-dashboard map, the machine-readable OpenAPI spec (/api), changelog +
+status monitoring guidance, and community/learning resources.
+
+## 2026-07-19 — AI-agent integration: MCP data instruction + agent workflow blocks on 428 pages
+
+The wiki is now agent-native around its canonical data layer. New canonical page
+`wiki/data-sources/cryptodataapi-mcp.md` documents the hosted CryptoDataAPI MCP server
+(connect commands, free API key, x402 agent payments, the four-step agent loop, and the
+backtest data availability matrix). The local wiki MCP server (`tools/mcp_server.py`) now
+attaches a `data_instruction` block to every `wiki_search` response, so any agent querying
+the wiki is always told where and how to get market data. 428 pages (334 strategy + 94
+indicator) gained a page-specific `### AI agent workflow` sub-block — signal endpoints,
+regime gate, matching backtesting archive with honest availability windows, execution
+tips — with 216 pages honestly skipped where the API doesn't serve the core data. Four
+pages citing an undocumented long/short-ratio path were corrected to the documented
+Binance-scoped endpoint. Schema (CLAUDE.md/AGENTS.md) documents the new convention.
+
 ## 2026-07-19 — Campaign 2 complete: ★ 1,555,356 distinct strategy configurations ★
 
 Goal (1,000,000+) reached in 3 loop iterations. Final lever: instrument structures —

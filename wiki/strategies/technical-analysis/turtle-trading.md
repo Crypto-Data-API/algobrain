@@ -176,6 +176,19 @@ curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
 ```
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the Turtle system end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100` → 20/55-day Donchian extremes and N = ATR(20); recompute N daily so unit sizes de-risk automatically as volatility expands.
+- **Funding overlay** — `GET /api/v1/derivatives/funding-rates?coin=BTC` on every day a pyramid is held; exit regardless of signal when annualized funding cost exceeds 20% (the kill criterion the commodity Turtles never needed).
+- **Stop-collision check** — `GET /api/v1/market-intelligence/liquidations` — verify the 2N stop sits well inside the exchange liquidation price before each pyramid add.
+- **Regime gate** — `GET /api/v1/quant/market` — the ~35-40% win rate collapses in `choppy_high_vol`; run System 2 only (or stand down) outside the trend states.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08 — several full trend/chop cycles) + `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) to net funding drag into expectancy honestly.
+- **Tips** — enforce the correlation caps with one `GET /api/v1/quant/coins/risk` batch call; correlated alts count as near-duplicate units, not diversification.
+
 ## Related
 - [[donchian-channel-breakout]] — the channel system at the core of Turtle entries
 - [[donchian-channels]] — the N-period high/low channel concept

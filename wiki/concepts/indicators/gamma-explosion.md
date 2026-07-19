@@ -2,7 +2,7 @@
 title: "Gamma Explosion"
 type: concept
 created: 2026-05-07
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [options, indicators, market-microstructure, volatility, derivatives]
 aliases: ["Gamma Spike", "Terminal Gamma", "End-of-Life Gamma"]
@@ -141,6 +141,34 @@ A book that mechanically rotates 0DTE positions into existence each morning is s
 - **Holding short premium through the close on expiry day.** Even when the position is comfortably OTM at lunch, late-session moves can sweep through the strike. Dealer hedging into the close can amplify moves rather than dampen them when net dealer gamma is short.
 - **Assuming pin behaviour is reliable.** Pin behaviour is a tendency, not a guarantee. It depends on dealer net positioning being long-gamma at the strike; when dealers are short-gamma, the *opposite* dynamic — anti-pin, accelerating moves — is observed. See [[dealer-positioning]] for sign analysis.
 - **Confusing gamma explosion with [[gamma-squeeze]].** Gamma explosion is the structural growth of gamma as t → 0 in any options market. Gamma squeeze is the specific feedback dynamic where dealer hedging amplifies a move, possible at any DTE if dealer net gamma is short and concentrated. The 2021 GME and meme-stock episodes were gamma squeezes, not gamma explosions.
+
+## Getting the Data (CryptoDataAPI)
+
+Crypto perp and options markets run their own version of the dealer-hedging feedback loop this page describes; [[cryptodataapi|CryptoDataAPI]] serves the market-level reads:
+
+**Live data:**
+- `GET /api/v1/quant/gex` — Gamma Exposure: market-maker inventory plus liquidation profile, per-coin optional (Pro+) — the crypto read on whether hedging flow will pin or amplify spot
+- `GET /api/v1/market-intelligence/options` — BTC options open interest, volume, and max pain; strike-level OI concentration is the raw material of pin behaviour into expiry
+
+**Historical data:**
+- No dedicated GEX archive — study price behaviour through past gamma regimes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/quant/gex` before any short-dated premium or breakout entry: long MM gamma → expect a dampened, pin-prone tape; short MM gamma → hedging amplifies moves
+- **Strike map** — `GET /api/v1/market-intelligence/options` for BTC strike-level OI concentration and the max-pain strike, the magnet zone in the final hours before expiry
+- **Backtest** — no gamma history is archived; validate pin/anti-pin hypotheses by replaying `GET /api/v1/backtesting/klines` (1h bars back to 2017-08) around known Deribit weekly/monthly expiry timestamps
+- **Tip** — treat the liquidation profile in the GEX payload as the crypto analogue of dealer short gamma: clustered liquidation levels act like a short-gamma strike band that accelerates any move passing through it
 
 ## Related
 

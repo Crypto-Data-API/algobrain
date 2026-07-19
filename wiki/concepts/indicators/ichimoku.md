@@ -2,7 +2,7 @@
 title: "Ichimoku Kinko Hyo"
 type: concept
 created: 2026-04-20
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [indicators, technical-analysis, trend-following]
 aliases: ["Ichimoku", "Ichimoku Cloud", "Ichimoku Kinko Hyo", "Kumo"]
@@ -56,6 +56,30 @@ Long dominant in Japanese equities and FX; spread globally only in the 1990s due
 One illustrative backtesting study reported a 42.3% win rate for Ichimoku signals. While the win rate appears low, Ichimoku is a trend-following system designed to capture large moves — its value lies in favourable risk/reward ratios rather than high win rates (Source: [[2026-04-20-comprehensive-guide-technical-trading-indicators]]).
 
 Note: For trading strategies using Ichimoku, see [[ichimoku-cloud]].
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — OHLCV highs/lows from which all five lines are computed
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=200` — the same construction on Hyperliquid perp listings
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for TK-cross and cloud-breakout backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — all five lines are midpoint functions of highs/lows from `GET /api/v1/market-data/klines`; fetch at least ~130 bars so Senkou Span B (52-period midpoint displaced 26 ahead) and the Chikou span are fully populated
+- **Signal** — grade TK crosses by cloud position (above the Kumo = strong bull signal, inside = weak/neutral) exactly as described above; the cloud projects 26 bars forward from data already in hand, so no future bars are needed
+- **Backtest** — replay over `GET /api/v1/backtesting/klines` (1h/4h/1d Binance spot back to 2017-08); expect trend-following economics — a sub-50% hit rate carried by large winners, so judge by expectancy, not win rate
+- **Tip** — the Chikou span compares the current close to price 26 bars ago; in a backtest evaluate it only with data available at signal time — charting displacement conventions are a common source of accidental lookahead
 
 ## Sources
 

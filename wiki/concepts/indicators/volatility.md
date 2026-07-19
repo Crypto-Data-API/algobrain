@@ -2,7 +2,7 @@
 title: Volatility
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [volatility, indicators, risk-management, derivatives]
 aliases: [vol, volatility-trading]
@@ -68,6 +68,32 @@ Professional portfolio managers apply a systematic approach to calculating and u
 - **Realized vs implied volatility comparison**: When implied volatility is higher than realized, options are "expensive" (favors selling); when lower, options are "cheap" (favors buying)
 - **Volatility as a timing signal**: The [[eighty-twenty-analysis|80/20 volatility rule]] suggests only ~20% of the time offers enough volatility for active directional trading; the other 80% is for portfolio management
 - **VIX trading**: some professionals trade volatility directly through VIX-linked products as part of long-short-equity portfolio construction
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/volatility/regime` — per-asset volatility state (compressed / expanding / vol_shock / mean_reverting / normal)
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` — OHLC bars for computing any vol estimator
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for multi-year volatility series
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset detail with rolling 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — annualized stdev of log returns (or Parkinson/Garman-Klass/Yang-Zhang from full OHLC) over `GET /api/v1/market-data/klines`; use √365 for crypto's continuous calendar rather than √252
+- **Live state** — `GET /api/v1/volatility/regime` gives a server-side classification when the agent needs a state label for position sizing; the `/score` variant collapses the market to one 0-100 number
+- **Backtest** — vol-targeted sizing rules (weight ∝ target vol / trailing vol) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+- **Tip** — volatility clustering means the current estimate decays slowly: when the regime flips to `vol_shock`, shrink size immediately rather than waiting for the trailing window to catch up
 
 ## Related
 

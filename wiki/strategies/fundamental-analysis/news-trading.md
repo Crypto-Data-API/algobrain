@@ -179,6 +179,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the confirmation and fade layers of this strategy (the first-seconds momentum window belongs to the exchange WS):
+
+- **Calendar** — `GET /api/v1/event/calendar` lists scheduled catalysts up to 30 days out (macro prints, unlocks, depeg risk) with a directional bias per event — the agent's pre-positioning map
+- **Confirmation** — `GET /api/v1/derivatives/funding-rates?coin=BTC` for the post-release funding repricing (momentum live vs exhausted) and `GET /api/v1/market-intelligence/liquidations` for the forced-flow exhaustion that arms the fade entry
+- **Regime gate** — `GET /api/v1/volatility/regime`: a `compressed` pre-event state implies larger moves on surprise (the highest-EV events); already-`vol_shock` tape means the move is underway and only the fade applies
+- **Backtest** — event studies on 1m bars from `GET /api/v1/backtesting/klines` are possible only since 2026-03-30 (1m grows forward); 1h bars back to 2017-08 cover coarser reaction windows. `GET /api/v1/backtesting/liquidations` (HL, since 2026-03-30) replays post-event cascades
+- **Tips** — accept that the first 30-second momentum leg is not winnable via REST polling; the agent's realistic edge is the 5-15-minute fade decision, where funding + liquidation reads beat headline speed
+
 ## Related
 
 - [[event-driven-trading]] — broader catalyst-trading framework

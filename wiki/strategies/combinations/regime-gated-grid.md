@@ -2,7 +2,7 @@
 title: "Regime-Gated Grid"
 type: strategy
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [combinations, meta-strategy, mean-reversion, grid-trading, regime-detection, market-microstructure, quantitative, crypto]
 aliases: ["Regime-Filtered Grid", "Volatility-Gated Grid Bot", "Range-Regime Grid"]
@@ -299,6 +299,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this grid end-to-end:
+
+- **Gate** — `GET /api/v1/volatility/regime` (`compressed`/`mean_reverting` = grid on) and `GET /api/v1/quant/market` (`range_low_vol` probability) are the two activation reads
+- **Kill switch** — `GET /api/v1/event/regime/score` (catalyst inside the grid horizon) and `GET /api/v1/derivatives/funding-rates?coin=ETH` (funding spike) tear the grid down early
+- **Execution** — `GET /api/v1/liquidity/depth` confirms the book can absorb maker quotes at each grid level before deployment
+- **Backtest** — grid-fill simulation on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h back to 2017-08) gated by point-in-time HMM probabilities from `GET /api/v1/quant/history` / `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus) — never gate on today's regime labels
+- **Tips** — respect `insufficient_history` flags when extending the grid to newer alts; a vol-regime label built on three weeks of data is not a gate
 
 ## Related
 

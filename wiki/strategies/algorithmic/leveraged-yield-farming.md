@@ -2,7 +2,7 @@
 title: "Leveraged Yield Farming"
 type: strategy
 created: 2026-04-22
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, leverage, algorithmic]
 aliases: ["Leveraged LP Farming", "Levered Yield Farming"]
@@ -168,6 +168,38 @@ Across 2-3 mid-cap farms, roughly **$2M total** can be deployed before the strat
 
 - General knowledge -- leveraged farming mechanics (Alpha Homora, Alpaca Finance documentation) and protocol comparison
 - Alpha Homora v2 exploit, February 2021 (~$37M drained via Iron Bank integration) -- widely documented incident, e.g., rekt.news post-mortem
+
+## Getting the Data (CryptoDataAPI)
+
+Farm APRs, borrow rates, and utilization come from the lending/farm protocols and DefiLlama — CryptoDataAPI covers the reward-token monitoring, security triggers, and pair-volatility inputs that drive this page's exit rules.
+
+**Live data:**
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report on farm and reward tokens
+- `GET /api/v1/security/regime` — recent hacks/depegs + Security Stress score (the exploit exit trigger)
+- `GET /api/v1/volatility/regime` — per-asset vol states driving expected [[impermanent-loss]] on the pair
+- `GET /api/v1/market-data/ticker/price?symbol=CAKEUSDT` — reward-token price for the 30d-return exit rule
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=CAKEUSDT&interval=1d&limit=90` — reward-token 30d return and drawdown
+- `GET /api/v1/backtesting/klines` — deep archive for reward-token collapse studies across cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]] (also [[cryptodataapi-dex]], [[cryptodataapi-market-data]]).
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Exit triggers** — automate the kill rules: reward-token 30d return from `GET /api/v1/market-data/klines`, exploit/depeg alerts from `GET /api/v1/security/regime/score` — both are hard exits in this page's rules
+- **IL model** — `GET /api/v1/volatility/regime/{symbol}` (60d history) estimates pair-divergence risk; leverage multiplies whatever σ implies
+- **Regime gate** — `GET /api/v1/quant/market` — running 3x leverage into rising `vol_spike`/`strong_trend_bear` probabilities is how liquidation cascades find you
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) for reward-token and pair paths; borrow-rate history must be archived from the protocols — no API archive covers it
+- **Tips** — the debt-ratio monitor belongs on-chain against the protocol contract in a fast loop; poll CryptoDataAPI security/vol state hourly as the slower outer loop
 
 ## Related
 

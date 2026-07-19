@@ -2,7 +2,7 @@
 title: "Swing Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [swing-trading, technical-analysis, momentum, risk-management]
 aliases: ["Swing Trader", "Swing Trade"]
@@ -218,6 +218,39 @@ Across all variants the [[risk-management]] discipline — pre-placed stop, 1-2%
 - Long-biased pullback playbooks bleed in choppy and bear regimes, and losing streaks cluster (8-12R drawdown sequences are normal, psychologically brutal at part-time engagement levels).
 - Setups are universally taught and heavily scanned — crowding erodes the cleanest textbook triggers in liquid names.
 - Style-level performance claims are unbacktestable as such; every specific rule set requires its own validation ([[backtesting]], [[overfitting-detection]]).
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto expression of the pullback playbook, [[cryptodataapi|CryptoDataAPI]] serves the daily/weekly OHLCV the setups scan on, the regime classifier behind the regime-fit table, and the catalyst calendar that replaces the earnings-blackout rule.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=300` — daily OHLCV for the 50/200-MA trend definition, pullback detection, and ATR stops (use `interval=1w` for the higher-timeframe check)
+- `GET /api/v1/quant/market` — HMM regime probabilities: run the long-side pullback book in trend-bull states, switch variants or stand down elsewhere (the regime-fit table above)
+- `GET /api/v1/event/calendar` — scheduled unlocks/macro prints up to 30 days out: crypto's version of the "no entries within 5 days of earnings" rule
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 for expectancy measurement across full bull/bear cycles
+- `GET /api/v1/quant/timeline` — daily market regime labels (2019-now) to condition expectancy by regime
+- `GET /api/v1/backtesting/daily-snapshots` — point-in-time market state per day since 2026-03-02
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=300"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the daily scan-and-manage cycle:
+
+- **Setup scan** — screen the liquid universe from daily klines for the price > rising 50-MA > 200-MA structure, a 3-10 bar pullback, and a reversal bar; place the buy-stop and swing-low stop mechanically
+- **Regime gate** — `GET /api/v1/quant/market`: the single most expensive swing mistake (running the long pullback book through a regime change) becomes a mechanical check instead of a discretionary one
+- **Catalyst blackout** — skip entries when `GET /api/v1/event/calendar` shows a major scheduled catalyst inside the setup's expected hold window
+- **Backtest** — measure expectancy per trade over 100+ trades on `GET /api/v1/backtesting/klines` against a random-entry baseline with identical stop/target geometry (the null above), conditioning by regime via `GET /api/v1/quant/timeline`
+- **Tips** — crypto has no overnight gap but has weekend liquidity holes: have the agent recheck `GET /api/v1/quant/coins/risk` before weekends and downsize where vol-target multipliers have fallen
 
 ## Sources
 

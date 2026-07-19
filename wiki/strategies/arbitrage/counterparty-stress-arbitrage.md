@@ -2,7 +2,7 @@
 title: "Counterparty Stress Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading, derivatives]
 aliases: ["Forced Liquidation Arbitrage", "Stressed Counterparty Trade", "Capital Structure Arbitrage", "Forced Seller Arbitrage"]
@@ -262,6 +262,39 @@ Last review: 2026-04-28. Next review: 2026-07-28.
 - Hilary Till, "EDHEC Comments on the Amaranth Case: Early Lessons from the Debacle", EDHEC-Risk Institute (2006)
 - Greg Zuckerman reporting on multiple blowups (WSJ archives)
 - Sebastian Mallaby, *More Money Than God* (2010)
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI covers the **crypto** forced-seller side well (leaderboards, whale positioning, funding/OI divergence, liquidations, fragility). Equity/commodity feeds (13F, NYMEX large-trader, Form ADV) are off-API.
+
+**Live data:**
+- `GET /api/v1/daily/hl-traders` + `GET /api/v1/quant/whales` — top-trader / ≥$100k whale positioning, the on-chain "who is fragile" leaderboard
+- `GET /api/v1/derivatives/funding-rates` + `GET /api/v1/derivatives/binance/long-short-ratio` + `GET /api/v1/derivatives/open-interest` — funding/basis/OI divergence flagging one-sided crowding
+- `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/market-intelligence/liquidations/by-exchange` — real-time forced-flow during the unwind
+- `GET /api/v1/liquidity/regime` — fragility score: how far the book will gap when the unwind hits
+- `GET /api/v1/security/regime` — exploit/depeg-driven forced-seller trigger
+
+**Historical data:**
+- `GET /api/v1/quant/whales/history` — 7-540d whale positioning timeseries (Pro Plus)
+- `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) + `GET /api/v1/backtesting/funding`
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/daily/hl-traders"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-hyperliquid]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [whale activity](https://cryptodataapi.com/quant-whales) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can build the crypto-side stress watchlist and time the unwind:
+
+- **Watchlist** — `GET /api/v1/daily/hl-traders` and `GET /api/v1/quant/whales` surface large on-chain positions; combine with funding/OI/long-short from `/derivatives/*` to flag names carrying size + one-sided crowding. Equity 13F / NYMEX feeds are off-API.
+- **Confirmation** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/liquidity/regime` read cascade velocity and how far the book gaps once the unwind starts.
+- **Trigger gate** — `GET /api/v1/security/regime` catches exploit/depeg-driven forced sellers; `GET /api/v1/quant/market` for whole-book risk-off sizing.
+- **Backtest** — `GET /api/v1/quant/whales/history` (7-540d) + `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) + `/backtesting/funding`.
+- **Tip** — if the marginal unwind price is already near fair value when you arrive, stand down — copycats got there first.
 
 ## Related
 

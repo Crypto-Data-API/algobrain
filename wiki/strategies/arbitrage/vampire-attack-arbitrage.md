@@ -254,6 +254,37 @@ See [[failure-modes]] for the broader catalogue.
 - Dune dashboards on Blur points and BLUR distribution.
 - DefiLlama emissions tracker.
 
+## Getting the Data (CryptoDataAPI)
+
+Emission schedules, snapshot blocks, and TVL come from contracts/DefiLlama; [[cryptodataapi|CryptoDataAPI]] covers the fork-token market layer — launch detection, dump-venue liquidity, contract safety, and the funding/OI "market is aware" signal.
+
+**Live data:**
+- `GET /api/v1/dex/new-pools` — new fork-token pools across chains as they launch
+- `GET /api/v1/dex/token/{chain}/{address}` — fork token price + top pools (harvest-dump venue depth; you are selling into liquidity you helped create)
+- `GET /api/v1/dex/security/{chain}/{address}` — token security report (the rule-3 contract screen before staking)
+- `GET /api/v1/derivatives/funding-rates?coin=<COIN>` and `GET /api/v1/derivatives/open-interest?coin=<COIN>` — perp funding/OI on the new token once listed (the "market fully aware" signal that ends the window)
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — post-launch token price paths for boost-window decay studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/new-pools"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the monitoring and harvest-timing layers (staking/claiming still executes on-chain):
+
+- **Detection** — watch `GET /api/v1/dex/new-pools` for the fork token's pool going live, then screen it through `GET /api/v1/dex/security/{chain}/{address}` before committing LP capital (mintable-at-will tokens fail the entry rules).
+- **Harvest sizing** — poll `GET /api/v1/dex/token/{chain}/{address}` before each dump cycle: the 5-15% harvest slippage estimate must be recomputed against live pool depth, since your own selling drains it daily.
+- **Exit signal** — a perp listing plus normalising funding on `GET /api/v1/derivatives/funding-rates` means the market has fully priced the emissions — historically the point where realised APR collapses to equilibrium; combine with the boost-taper calendar as the exit trigger.
+- **Regime gate** — `GET /api/v1/quant/market` and `GET /api/v1/meme/regime/score`: migration farming only pays when speculative appetite absorbs the token sell-pressure; in risk-off states the Day-1-to-Day-7 price decay steepens beyond what harvesting can outrun.
+- **Backtest** — replay past fork-token decay curves (SUSHI-class events) with `GET /api/v1/backtesting/klines`; the key statistic is days-until-50%-drawdown per token, which calibrates the EXIT_BUFFER_DAYS parameter.
+
 ## Related
 
 - [[sushiswap]]

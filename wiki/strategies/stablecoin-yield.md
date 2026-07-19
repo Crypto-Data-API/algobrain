@@ -2,7 +2,7 @@
 title: "Stablecoin Yield"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [crypto, defi, derivatives, risk-management, arbitrage]
 aliases: ["Stablecoin Yield", "Stablecoin Farming", "Stablecoin Income", "Cash-and-Carry Stablecoin Yield"]
@@ -160,6 +160,39 @@ Note the reflexive correlation: in a stress event the peg breaks, the yield coll
 - Quoted APYs are often inflated by depreciating emission tokens.
 - Yields compress hard in low-leverage regimes; active strategies need constant monitoring.
 - Gas/transaction costs and tax treatment erode returns on small balances.
+
+## Getting the Data (CryptoDataAPI)
+
+Per-protocol lending rates and TVL come from the protocols/DeFiLlama; [[cryptodataapi|CryptoDataAPI]] serves the stablecoin supply/flow layer, the funding rates behind the Tier-3 basis sleeve, and the depeg/security monitor behind the kill criteria.
+
+**Live data:**
+- `GET /api/v1/sentiment/stablecoins` — stablecoin market cap with 14d/90d flows precomputed (the dry-powder and sector-health gauge)
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — cross-exchange funding: the viability check for the delta-neutral basis sleeve
+- `GET /api/v1/security/regime` — recent hacks/depegs + Security Stress score: the automated watch behind the "exit on meaningful depeg / protocol red flag" rule
+- `GET /api/v1/event/regime` — forward catalyst calendar including depeg-risk bias
+
+**Historical data:**
+- `GET /api/v1/sentiment/stablecoins/remote-history?days=365` — daily stablecoin history (z-score the flows)
+- `GET /api/v1/market-intelligence/stablecoin-history` — long-run stablecoin mcap timeseries
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (Binance daily since 2026-03-30): the basis-carry replay
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/stablecoins"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the monitoring loop this strategy lives or dies on:
+
+- **Basis-sleeve switch** — poll `GET /api/v1/derivatives/funding-rates` each funding interval; several consecutive zero/negative readings fire the "unwind the basis leg, park in Tier 1" rule automatically
+- **Depeg monitor** — `GET /api/v1/security/regime` and `GET /api/v1/security/events` as the always-on tripwire; act on the score, don't wait to observe the peg break (by then the exit is crowded, per the reflexivity note above)
+- **Dry-powder trend** — falling supply with negative 14d/90d flows in `GET /api/v1/sentiment/stablecoins` warns that leverage demand — the source of Tier-3 yield — is draining
+- **Backtest** — replay the funding-carry sleeve on `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) to estimate realistic carry net of flat/negative regimes; stablecoin-flow features backfill from the 365-day remote history
+- **Tips** — the hurdle is always the T-bill rate: have the agent recompute net-of-expected-loss yield vs risk-free before every rebalance, per the null hypothesis above
 
 ## Sources
 

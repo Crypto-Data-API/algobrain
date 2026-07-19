@@ -2,7 +2,7 @@
 title: "Volatility Spike"
 type: concept
 created: 2026-05-07
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [volatility, indicators, options, risk-management, vix]
 aliases: ["Vol Spike", "Volatility Spike", "VIX Spike", "Vol Shock"]
@@ -147,6 +147,35 @@ A simple operational checklist for *during* a spike:
 - Realised 5-day vol catching up to implied → not yet, but watch.
 
 If any 3 of the above hit simultaneously, treat the move as potentially regime-shifting and de-risk before waiting for confirmation. The asymmetry (cheap to de-risk and be wrong; expensive to ride it through and be wrong) favours acting on incomplete signals. See [[vol-regime-detection]] for the structured detection framework.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/volatility/regime` — per-asset vol states; the `vol_shock` label is the crypto spike flag
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+- `GET /api/v1/quant/market` — HMM probabilities including the `vol_spike` state (15-min refresh)
+- `GET /api/v1/liquidity/regime/score` — liquidity fragility, the amplifier in the mechanism above
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — kline archive for measuring historical realized-vol jumps
+- `GET /api/v1/backtesting/liquidations` — liquidation records (Hyperliquid, since 2026-03-30), the crypto counterpart of forced-flow unwinds
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/market"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — poll `GET /api/v1/quant/market` for the `vol_spike` probability and `GET /api/v1/volatility/regime/score` for the market-wide stress read; in crypto the forced-flow leg of the checklist is liquidations, visible via `GET /api/v1/quant/gex` liquidation profiles (Pro+)
+- **Detect** — an agent's crypto version of this page's checklist: `vol_spike` probability jumping + liquidity fragility score rising + realized 24h vol from klines outrunning its 30d mean — treat any 2-of-3 as de-risk-now
+- **Backtest** — spike-vs-regime-shift classification replays against `GET /api/v1/quant/regimes/history` (hourly HMM since 2020, Pro Plus) joined to `GET /api/v1/backtesting/klines`; liquidation-driven spikes are only replayable since 2026-03-30
+- **Tip** — mirror the asymmetry rule mechanically: cheap to de-gross on a false spike signal, ruinous to ride a true one — so wire the detector to sizing before the spike, not to an alert a human reads after it
 
 ## Related
 

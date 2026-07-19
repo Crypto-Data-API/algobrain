@@ -341,6 +341,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run every gate of this strategy end-to-end:
+
+- **Gate** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (Gate 1), `GET /api/v1/derivatives/open-interest?coin=BTC` (Gate 3 percentile), and `GET /api/v1/derivatives/binance/long-short-ratio` run before any vol-surface read
+- **Event filter** — `GET /api/v1/event/regime/score`; skip entries when the event-risk composite exceeds 40
+- **Signal** — the RR25 skew signal itself comes from Deribit's public API; CryptoDataAPI supplies every positioning gate around it
+- **Backtest** — funding-gate replay from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) — deeper than the 365-day REST window — with point-in-time regime state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly for the gate inputs instead of hitting four endpoints per cycle
+
 ## Related
 
 - [[skew-trading]] — pure statistical skew-deviation trading; this page adds the funding gate as a conviction filter

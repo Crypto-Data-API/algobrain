@@ -2,7 +2,7 @@
 title: "Buy and Hold"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [fundamental-analysis, position-trading, portfolio-theory, sp500]
 aliases: ["Buy and Hold", "Buy-and-Hold", "Long-Term Investing", "Passive Long-Only"]
@@ -110,6 +110,35 @@ Effectively unlimited for broad indices — buy-and-hold of the market portfolio
 - Requires strong behavioral discipline through long, painful declines.
 - No guaranteed premium over any finite horizon — "lost decades" happen.
 - Dangerous if applied to concentrated or undiversified positions.
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto expression (long-horizon BTC/ETH holding), [[cryptodataapi|CryptoDataAPI]] serves the price history, the classic long-cycle context, and the rebalancing inputs.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — spot price for rebalance-band checks
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC price with the 200D MA precomputed (long-cycle context only — the strategy deliberately does not trade it)
+- `GET /api/v1/market-intelligence/btc/cycle-indicators` — the 8 BTC cycle indicators for long-horizon reporting
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08 — BTC's full Binance history) for drawdown-endurance studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=730"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [BTC cycle](https://cryptodataapi.com/bitcoin-cycle-indicators) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Do-almost-nothing loop** — the only systematic trades are rebalances: on a monthly/annual schedule, check portfolio drift against target weights with a single `GET /api/v1/daily/prices` call (~2,500 spot pairs); never trade on price moves, news, or forecasts.
+- **Context, not signals** — `GET /api/v1/market-intelligence/btc/cycle-indicators` and `GET /api/v1/regimes/current` are for reporting and holding conviction through drawdowns; acting on them converts buy-and-hold into market timing and forfeits the strategy's whole edge.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily since 2017-08) replays BTC buy-and-hold through the 2018, 2020, and 2022 drawdowns — the behavioral endurance test that matters more than the return arithmetic.
+- **Tips** — the agent's main value is refusing to trade: alert only on rebalance-band breaches, concentration-limit breaches, or the horizon-based kill criteria above.
 
 ## Sources
 

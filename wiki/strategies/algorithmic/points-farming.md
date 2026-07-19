@@ -2,7 +2,7 @@
 title: "Points Farming"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, points, airdrops, loyalty, sybil, protocols, farming, token-generation-event, expected-value]
 aliases: ["Points Meta", "Loyalty Points Farming", "Points Season", "Pre-TGE Farming"]
@@ -260,6 +260,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/coins/search?q=e
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-coins]], [[cryptodataapi-dex]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **TGE watch** — `GET /api/v1/coins/search?q=<protocol>` + `GET /api/v1/dex/new-pools` catch the token and its first liquidity the moment a TGE lands
+- **Sell-timing** — hourly `GET /api/v1/market-data/klines?symbol=<TOKEN>USDT&interval=1h` drives the dump-vs-hold branch; `GET /api/v1/event/calendar` (unlock filter) flags the cliff dates that routinely halve realised value
+- **Regime gate** — `GET /api/v1/quant/market` — points convert into far less USD when the TGE lands in a bear state; feed the regime into the conversion-value haircut of the EV model
+- **Backtest** — comparable post-TGE price paths from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) calibrate the base-rate conversion haircut; points balances themselves have no API history — archive the protocol dashboards yourself
+- **Tips** — respect `new_listing` flags on TGE tokens (thin history distorts signals); pull supply/dilution from `GET /api/v1/coins/{symbol}` at decision time, not from the announcement thread
 
 ## Related
 

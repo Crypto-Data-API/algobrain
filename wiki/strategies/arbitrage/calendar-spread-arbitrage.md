@@ -2,7 +2,7 @@
 title: "Calendar Spread Arbitrage (Crypto)"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, futures, contango, backwardation, term-structure, roll-yield, basis, derivatives]
 aliases: ["Calendar Arb", "Term Structure Arbitrage", "Crypto Futures Spread", "Inter-Expiry Basis"]
@@ -273,6 +273,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/open
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the funding-anchored side of this trade (the dated-quarterly curve itself is native Deribit/CME/Binance, not CryptoDataAPI):
+
+- **Fair-carry anchor** — `GET /api/v1/derivatives/funding-rates?coin=BTC` sets the funding-implied fair carry the annualised inter-expiry basis is measured against; `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` is the spot/index convergence target.
+- **Crowding proxy** — `GET /api/v1/derivatives/open-interest?coin=BTC` for per-expiry OI/crowding; thin far-leg OI = wider slippage and longer-lived dislocations.
+- **Regime gate** — `GET /api/v1/quant/market`: size down entries in `vol_spike`/`choppy_high_vol`, the states where a contango blowout steepens the curve against you.
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30) for the carry leg; `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) for basis/term-structure studies.
+- **Tip** — the perp-leg funding you pay/collect usually dominates calendar P&L; model it from the funding archive, never as a constant.
 
 ## Related
 

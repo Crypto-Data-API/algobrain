@@ -2,7 +2,7 @@
 title: "Chandelier Exit"
 type: concept
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, volatility, trend-following]
 aliases: ["Chandelier Exit", "Chandelier Stop"]
@@ -85,6 +85,33 @@ The Chandelier Exit is primarily a **[[trend-following]]** exit, designed to kee
 - Elder, Alexander. *Come Into My Trading Room: A Complete Guide to Trading.* Wiley, 2002.
 - Le Beau, Charles & Lucas, David W. *Technical Traders Guide to Computer Analysis of the Futures Markets.* McGraw-Hill, 1992.
 - StockCharts.com, "Chandelier Exit" (ChartSchool indicator reference).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30` — recent bars for the highest-high window and ATR(22)
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=200` — perp-side OHLCV for intraday trails
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for backfilling the stop path
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=30`, take the highest high since entry minus 3 × ATR(22), ratcheting the stop upward only
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) lets you sweep multiplier/period settings across full cycles — recompute the stop bar-by-bar to avoid the repainting/look-ahead trap flagged above
+- **Tune** — widen the multiplier when `GET /api/v1/volatility/regime/{symbol}` reads a high-volatility regime; crypto's vol clustering makes a static 3× either too tight in storms or too loose in calm
+- **Tip** — crypto has no overnight gaps but does have liquidation-cascade wicks; on leveraged perps, pair the chandelier trail with a hard stop to cap wick-through risk
 
 ## Related
 

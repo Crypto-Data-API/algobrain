@@ -355,6 +355,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]], [[cryptodataapi-sentiment]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes) · [fear & greed](https://cryptodataapi.com/fear-greed) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this sizing overlay end-to-end:
+
+- **Sizing** — `GET /api/v1/market-data/klines?symbol={TOKEN}USDT&interval=1d&limit=30` per token feeds the 20-day realised-vol input; position weight = target vol / realised vol, capped by the book heat limit
+- **Regime gate** — `GET /api/v1/regimes/current` plus the Fear & Greed read cut the heat cap in risk-off states before any per-token sizing runs
+- **Batch sizing** — `GET /api/v1/quant/coins/risk?horizon=24h` returns per-coin vol-target multipliers for 180+ coins in one call — a ready-made cross-check on locally computed vol weights
+- **Backtest** — replay sizing decisions on `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) and pair them with point-in-time regime state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead in the heat-cap rules
+- **Tips** — respect `insufficient_history` flags: a narrative token with fewer than 30 daily bars gets the sector-average vol floor, not its own noisy estimate
+- **Prompt library** — the "Volatility-Aware Position Sizer" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) handles the vol-targeting leg; layer the narrative filter on top
+
 ## Related
 
 - [[vol-targeted-trend-following]] — the trend-book analog of this page's narrative-book vol targeting; same sizing mechanic, different universe

@@ -271,6 +271,30 @@ Effectively unlimited. This strategy operates on scheduled retail-sized purchase
 - Michael Edleson, *Value Averaging* (1991) — foundational academic work on variable-rate DCA
 - Systematic accumulation principles from [[dollar-cost-averaging]] and [[value-averaging]]
 
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` — daily OHLCV for the 50-day MA and RSI(14) buy filters; aggregate the last 7 daily bars locally for the weekly red-candle check
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=60` — the same filters for the ETH accumulation leg
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — Binance spot daily candles back to 2017-08 (BTCUSDT), enough for multi-cycle cost-basis comparison of the hybrid vs vanilla DCA
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` once per scheduled buy date: compute the 50d MA, RSI(14), support proximity, and weekly candle locally; any single triggered condition deploys the stacked cash reserve
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08) — replay hybrid vs vanilla DCA cost basis across the 2018 and 2022 bears *and* the 2020–21 melt-up, which is the strategy's known failure regime (cash drag)
+- **Tips** — this is a weekly-cadence strategy: one kline call per buy date is all it needs — no polling loop; measure the cost-basis edge on your own asset and period before trusting the 5–18% figures quoted above
+
 ## Related
 
 - [[dollar-cost-averaging]] -- the disciplined base strategy this extends

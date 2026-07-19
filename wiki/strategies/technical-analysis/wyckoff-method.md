@@ -2,7 +2,7 @@
 title: "Wyckoff Method"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [wyckoff, accumulation, distribution, markup, markdown, volume-analysis, institutional-trading, composite-man, spring, upthrust, technical-analysis]
 aliases: ["Wyckoff Trading", "Wyckoff Accumulation", "Wyckoff Distribution", "Richard Wyckoff Method"]
@@ -168,6 +168,37 @@ As a discretionary *lens* the method has no inherent capital capacity -- it is a
 - Springs can fail (become genuine breakdowns) and Upthrusts can fail (become genuine breakouts) -- the method is not infallible.
 - Accumulation and distribution ranges can last for months, requiring patience that most retail traders lack.
 - Volume analysis is unreliable in thin, wash-traded, or fragmented markets.
+
+## Getting the Data (CryptoDataAPI)
+
+Wyckoff analysis is built on price *and* volume — the effort-vs-result reading needs a trustworthy volume series alongside OHLC.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV for range structure, Springs/UTADs, and bar-by-bar volume reading
+- `GET /api/v1/market-data/volume-history` — daily volume with buy ratio (up to 90 days) to gauge one-sided participation inside a range
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=500` — perp OHLCV where the campaign is unfolding on derivatives venues
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — archived OHLCV (Binance spot 1h/4h/1d back to 2017-08) for testing pre-specified Spring/SOS/LPS rules out-of-sample
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" \
+  "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [whale activity](https://cryptodataapi.com/quant-whales) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a Wyckoff playbook end-to-end:
+
+- **Structure & volume** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` → detect the SC/AR/ST sequence and candidate Springs with *pre-specified* level + volume conditions — coding the rules in advance is the only defense against the hindsight-labeling failure mode.
+- **Effort vs result** — `GET /api/v1/market-data/volume-history` — buy-ratio divergence from price progress is the absorption tell inside a suspected accumulation range.
+- **Whale confirmation** — `GET /api/v1/quant/whales` — the composite man is partly observable in crypto: whale positioning shifts during the range corroborate (or contradict) the volume read.
+- **Regime gate** — `GET /api/v1/quant/market` — accumulation entries (Spring → SOS → LPS) belong to `range_low_vol` transitioning toward `strong_trend_bull`; a `strong_trend_bear` read voids the accumulation thesis.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) — log every rule-defined Spring/UTAD *including the failures*; the null-hypothesis section above demands the full out-of-sample count.
 
 ## See Also
 - [[smart-money-concepts]] -- modern evolution of Wyckoff's institutional flow analysis.

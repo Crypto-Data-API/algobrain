@@ -2,7 +2,7 @@
 title: "ATR Trailing Stop"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, risk-management, trend-following, volatility, order-types]
 aliases: ["ATR Trailing Stop", "Chandelier Exit", "Volatility Stop", "ATR Stop"]
@@ -111,6 +111,36 @@ Capacity is set by the host strategy and the liquidity of the traded instrument,
 - Whipsaws badly in rangebound markets.
 - Always exits below the peak — guarantees some giveback.
 - Vulnerable to gaps that jump the stop level.
+
+## Getting the Data (CryptoDataAPI)
+
+For crypto positions, [[cryptodataapi|CryptoDataAPI]] serves the OHLCV bars that drive the ATR and the chandelier anchor, plus regime and liquidity context for choosing the multiple.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100` — OHLCV on the trading timeframe for ATR and the highest-high/lowest-low anchor
+- `GET /api/v1/volatility/regime` — per-asset vol regime; a fresh `vol_shock` state warns the stop was computed on stale, lower ATR
+- `GET /api/v1/liquidity/depth` — per-coin book depth/spread: thin books mean worse slippage when the stop triggers
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for testing multiples, whipsaw rates, and giveback across regimes
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Stop maintenance** — on each bar close, pull `GET /api/v1/market-data/klines` for the traded symbol, update ATR and the high/low water mark, ratchet the stop; the rule is pure arithmetic an agent can run 24/7 — crypto never closes, so the stop must be watched through weekends too.
+- **Multiple selection** — `GET /api/v1/volatility/regime` per asset: widen the multiple in `expanding` conditions, tighten in `mean_reverting`; check `GET /api/v1/liquidity/depth` for the thin-book windows where exit slippage on the trigger is worst.
+- **Regime gate** — `GET /api/v1/quant/market`: `range_low_vol`/`choppy_high_vol` states are the whipsaw regimes where ATR trailing exits underperform a simple fixed stop — widen the band or stand aside.
+- **Backtest** — whipsaw-rate and giveback studies on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08); 1m bars exist only since 2026-03-30, so intrabar trigger simulation is limited to that window — use bar closes for fills elsewhere.
+- **Tips** — snapshot all open positions' stop-breach checks from one `GET /api/v1/daily/prices` call (~2,500 pairs) instead of per-symbol polling between bar closes.
 
 ## Sources
 

@@ -2,7 +2,7 @@
 title: Momentum
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [momentum, indicators, technical-analysis, behavioral-finance]
 aliases: ["momentum-investing", "price momentum"]
@@ -62,6 +62,33 @@ The dominant explanation is **behavioral** (see [[behavioral-finance]]): investo
 ## Trading Relevance
 
 Momentum strategies range from simple trend-following (buy above the 200-day [[moving-averages|MA]], sell below) to sophisticated quantitative factor models like the MTUM ETF. The single defining risk is the **momentum crash** — sudden, violent reversals where crowded momentum trades unwind, typically when a beaten-down market rebounds sharply (1932, August 2009, the November 2020 vaccine rotation, the August 2024 mega-cap unwind). Practitioners mitigate this by scaling exposure inversely to realized volatility (Barroso-Santa-Clara 2015) and de-risking in bear-market-plus-high-vol regimes (Daniel-Moskowitz 2016). Combining momentum signals with [[volume]] confirmation and risk controls like [[stop-loss]] orders helps manage the tail.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=400` — daily OHLCV for ROC, 12-1 lookback returns, and MA-based trend momentum
+- `GET /api/v1/market-data/short-term-price` — pre-computed short-term momentum metrics
+- `GET /api/v1/daily/prices` — ~2,500-pair universe snapshot for cross-sectional winner/loser ranking
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for momentum-factor backtests across cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=400"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — time-series momentum: trailing N-day return per asset from `GET /api/v1/market-data/klines`; cross-sectional momentum: rank the whole universe from one `GET /api/v1/daily/prices` snapshot using the 12-1 convention (skip the most recent month to dodge short-term reversal)
+- **Backtest** — `GET /api/v1/backtesting/klines` (daily bars back to 2017-08) spans several boom-bust cycles; build the historical universe from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) where survivorship matters
+- **Crash guard** — the momentum-crash risk described above is acute in crypto; scale exposure inversely to realized vol computed from the same klines, and de-risk when `GET /api/v1/quant/market` (Pro+) regime probabilities flip away from trend states
+- **Tip** — altcoin momentum ranks are polluted by low-liquidity pairs that gap on no volume; require a minimum quote-volume from `GET /api/v1/market-data/volume-history` before admitting an asset to the ranking
 
 ## Sources
 

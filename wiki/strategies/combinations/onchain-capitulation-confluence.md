@@ -349,6 +349,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/dormanc
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-sentiment]], [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this confluence stack end-to-end:
+
+- **Signal** — `GET /api/v1/on-chain/exchange-flows/BTC` (inflow spike), `GET /api/v1/on-chain/dormancy/btc` (MVRV capitulation zone), and `GET /api/v1/on-chain/score` at or below 20 form the on-chain confluence
+- **Sentiment filter** — `GET /api/v1/sentiment/fear-greed` supplies Signal 2; `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` upgrades conviction when dry powder is accumulating
+- **Regime gate** — `GET /api/v1/regimes/current` blocks entries during `Structural_Shock` even with full confluence
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` plus `GET /api/v1/backtesting/klines` (1d back to 2017-08) replay the sentiment and price legs; the on-chain composite has no deep API archive — `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) is the only point-in-time record of `/on-chain/score`, so treat older on-chain confluence backtests as reconstruction, not replay
+- **Tips** — SOPR (sub-signal B) stays external; log which sub-signals were actually available at decision time to keep live and backtest feature sets aligned
+
 ## Related
 
 - [[on-chain-flow-trading]] — the broader on-chain directional overlay; this page is the capitulation-specialised entry subset

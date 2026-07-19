@@ -2,7 +2,7 @@
 title: "Christmas Tree Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
 aliases: ["Ladder Spread", "Christmas Tree", "Call Ladder", "Put Ladder", "Crypto Christmas Tree"]
@@ -138,6 +138,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — place K1/K2 against the OI walls from `GET /api/v1/market-intelligence/options`; sell the ladder only when `GET /api/v1/volatility/regime` is elevated but *not* `expanding` — the naked leg cannot afford an in-progress expansion
+- **Regime gate** — `GET /api/v1/quant/market`: any rise in `strong_trend`/`vol_spike` probability toward the naked side is a no-trade regardless of premium — this structure does not survive the runaway move
+- **Backtest** — study the move distribution beyond K2/K3 with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); tag cascade days via `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) — those are the days that define the tail
+- **Tips** — automate a hard exit on `/api/v1/market-intelligence/liquidations` cascades toward the naked leg; check `/api/v1/quant/gex` daily — dealer short gamma near the naked strike is squeeze fuel pointed at your worst-case band.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Concentrated Liquidity"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: draft
 tags: [crypto, defi, uniswap, liquidity, concentrated-liquidity, impermanent-loss, amm, lp-management, rebalancing, algorithmic]
 aliases: ["Concentrated Liquidity Management", "Active LP Management", "Uniswap V3 LP Strategy", "CL LP"]
@@ -255,6 +255,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending?cha
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Screening** — `GET /api/v1/dex/trending?chain=ethereum` + `GET /api/v1/dex/token/{chain}/{address}` rank pools by the volume/TVL that drives fee APR
+- **Signal** — realized σ from `GET /api/v1/volatility/regime/{symbol}` (60d history) feeds the LVR ≈ σ²/8 estimate that decides whether fee income clears the true cost
+- **Regime gate** — enter/widen ranges in `compressed` vol states, cut or hedge in `expanding`/`vol_shock` per `GET /api/v1/volatility/regime`
+- **Hedge leg** — `GET /api/v1/derivatives/funding-rates?coin=ETH` prices the perp-overlay carry before committing to the hedged variant
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) replays range width, rebalance cadence, and hedge P&L across vol regimes; pool-level fee income has no archive — reconstruct it from your own sampling
+- **Tips** — respect `insufficient_history` flags on newer pair tokens; hourly polling suffices — LVR accrues with σ², not with your polling frequency
 
 ## Related
 

@@ -177,6 +177,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=50` at 08:30 UTC to fix the 08:00-08:30 Deribit-settle reference range (or the 14:30-15:00 window on US macro days); require window volume above the 24h hourly average before the range counts.
+- **Bias** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — positive funding arms the long-side ORB, negative the short side.
+- **Regime gate** — `GET /api/v1/volatility/regime` + `GET /api/v1/market-intelligence/liquidations` — no entries in `vol_shock` or while a cascade is running through the reference window (the range it prints is untradeable).
+- **Backtest** — `GET /api/v1/backtesting/klines`: 1m klines exist only since 2026-03-30, which is exactly what window-level ORB replays need — treat the deeper 1h archive (back to 2017-08) as coarse hour-of-day evidence, not ORB validation.
+- **Tips** — `GET /api/v1/event/calendar` tells you in advance which days carry the macro prints that make the US-open variant fire; skip weekends, where the 08:00 UTC window rarely passes the volume filter.
+
 ## Related
 
 - [[volatility-breakout]] — ATR-based breakout from contraction setups

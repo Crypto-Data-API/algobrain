@@ -2,7 +2,7 @@
 title: "Audit-Recency × TVL-Growth Systematic Short"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, ai-trading, quantitative]
 aliases: ["Audit Gap Short", "Stale-Audit Systematic Short", "TVL Growth × Audit Decay"]
@@ -208,6 +208,38 @@ The strategy is a basket of *shorts* on smart-contract-bearing tokens; the risk 
 - Stanford / NYU AI-code-vulnerability research (2025)
 - Anthropic 2025 red-team study (cost-curve baseline)
 - DeFiLlama, Token Terminal, audit-firm public archives
+
+## Getting the Data (CryptoDataAPI)
+
+The core signal — TVL-growth × code-novelty × audit-staleness — is built from DeFiLlama + audit-firm archives and is **not** served by CryptoDataAPI. CryptoDataAPI serves the perp-short execution/carry legs and the exploit exit-trigger.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding to budget the -25 to -50 bp/month short-carry that dominates returns between events
+- `GET /api/v1/derivatives/open-interest` — crowding / thin-perp liquidity on the shorted protocol token
+- `GET /api/v1/security/regime` + `GET /api/v1/security/events` — the exit trigger: detect when an exploit lands on a top-decile name
+- `GET /api/v1/quant/coins/risk?horizon=24h` — bulk per-coin risk model for basket sizing (Pro)
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — funding archive to model the realised carry drag
+- `GET /api/v1/security/regime/{symbol}` — per-symbol 60d security overlay (Pro+)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] handles execution and the exit trigger; the score is built off-API:
+
+- **Signal (off-API core)** — the risk score comes from DeFiLlama TVL series + audit-firm archives + explorer deployment/config; CryptoDataAPI does not serve audit or TVL data.
+- **Execution + carry** — `GET /api/v1/derivatives/funding-rates` and `/derivatives/open-interest` size the perp short and budget carry; `GET /api/v1/quant/coins/risk` batches the basket instead of looping per name.
+- **Exit trigger** — `GET /api/v1/security/regime` / `/security/events` detect when an exploit lands on a shorted name so you cover into the post-exploit low.
+- **Backtest** — `GET /api/v1/backtesting/funding` for the carry drag; the sparse exploit-event history and audit data must come from off-API sources.
+- **Tip** — top-decile names are the hottest narratives; watch OI/funding for short-squeeze risk before an exploit ever lands.
 
 ## Related
 

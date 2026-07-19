@@ -2,7 +2,7 @@
 title: "Arbitrage Strategy Performance Tracker"
 type: reference
 created: 2026-04-20
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, risk-management, backtesting, strategy-development, meta]
 aliases: ["Arb Performance", "Live Arb Tracker", "Arbitrage Returns"]
@@ -223,6 +223,39 @@ This page should be refreshed **monthly** or after significant market regime cha
 - DefiLlama (DeFi TVL, bridge volume)
 - AQR Factor Returns (equity factor performance)
 - General market knowledge; no proprietary trading results — all figures are observable-market-derived and indicative.
+
+## Getting the Data (CryptoDataAPI)
+
+The crypto viability rows on this snapshot page can be refreshed directly from CryptoDataAPI instead of the external Coinglass/CME/Tardis sources in [How to Update This Page](#how-to-update-this-page); the merger-arb and equity vol-arb rows stay off-API.
+
+**Live data:**
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — current cross-venue funding (funding-arb viability row)
+- `GET /api/v1/derivatives/summary?coin=BTC` — combined funding/OI/basis snapshot (cash-and-carry row)
+- `GET /api/v1/liquidity/depth` — cross-exchange depth/spread (cross-exchange-arb viability)
+- `GET /api/v1/market-intelligence/liquidations` — forced-flow / MEV-adjacent context
+- `GET /api/v1/quant/market` — HMM regime the "Current Market Regime" table can be refreshed from
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — funding history for the decay tables
+- `GET /api/v1/backtesting/klines` — spread history
+- `GET /api/v1/quant/regimes/history` — hourly HMM regime probabilities since 2020 for the Sharpe-by-regime analysis
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can regenerate this tracker's crypto rows on demand:
+
+- **Refresh viability** — `GET /api/v1/derivatives/funding-rates`, `/derivatives/summary`, and `GET /api/v1/liquidity/depth` rebuild the funding-arb, cash-and-carry, and cross-exchange rows; merger-arb / equity vol-arb stay off-API.
+- **Regime label** — `GET /api/v1/quant/market` refreshes the "Current Market Regime" table (6-state HMM).
+- **Decay analysis** — `GET /api/v1/backtesting/funding` and `GET /api/v1/quant/regimes/history` (hourly HMM since 2020) drive the Sharpe-by-regime decay tables with point-in-time labels.
+- **Tip** — poll cached `GET /api/v1/daily` hourly for a one-call refresh; this page is a snapshot, so re-pull before trusting any number.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Gann Theory"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [gann, gann-angles, square-of-nine, time-cycles, geometric-trading, price-time, technical-analysis, crypto]
 aliases: ["Gann Trading", "W.D. Gann Method", "Gann Angles", "Gann Fan", "Square of Nine", "Gann Square"]
@@ -213,6 +213,18 @@ Gann angles, Square-of-Nine projections and cycle counts are derived from price 
 curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1w&limit=1000"
 ```
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Compute** — pivots with UTC timestamps from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1w&limit=1000` for angles, eighths/thirds retracements, and time-cycle counts — consistent timestamps keep calendar arithmetic honest in a 24/7 market
+- **Signal** — reversal confirmation at a projected price/time confluence: a `GET /api/v1/derivatives/funding-rates?coin=BTC` extreme plus a `GET /api/v1/market-intelligence/liquidations` flush into the level
+- **Regime gate** — `GET /api/v1/regimes/current` (10-state cycle label): the defensible Gann core is calendar cycles anchored to the halving, so read the cycle regime before trusting an anniversary date
+- **Backtest** — anniversary/cycle hit-rates on `GET /api/v1/backtesting/klines` (Binance spot back to 2017-08, spanning two halving cycles); an honest test includes the base rate of *any* random date landing near a swing
+- **Tips** — automate only the falsifiable subset (angles-as-S/R, eighths, time cycles) and keep the numerological layer out of the loop.
 
 ## Related
 - [[fibonacci-trading]] — a parallel ratio framework; Gann's 5/8 ≈ the golden pocket

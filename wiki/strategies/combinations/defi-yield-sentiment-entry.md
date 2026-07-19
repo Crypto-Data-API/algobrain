@@ -321,6 +321,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [market health](https://cryptodataapi.com/market)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry gate** — `GET /api/v1/sentiment/fear-greed` — ≤ 20 for 2 consecutive days is the trigger (Gate 1)
+- **Confirmation** — `GET /api/v1/volatility/regime/{symbol}` (enter only in `mean_reverting` / `normal`) + `GET /api/v1/sentiment/stablecoins` (dry powder building)
+- **Recovery check** — `GET /api/v1/market-health/summary` — health scores as the recovery-trend confirmation
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` reconstructs every extreme-fear episode; forward outcomes proxied with `GET /api/v1/backtesting/klines` (daily back to 2017-08); pool APR history from DeFiLlama
+- **Tips** — extreme fear clusters, so enforce the 2-consecutive-day persistence rule verbatim rather than acting on a single print
+
 ## Related
 
 - [[defi-yield-regime-gate]] — continuous vol-regime gate for LP deployment; composable baseline layer

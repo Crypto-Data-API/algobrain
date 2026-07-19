@@ -2,7 +2,7 @@
 title: "Synthetic Asset Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, synthetic-assets, synthetix, perpetual-futures, oracle, funding-rate, derivatives, algorithmic]
 aliases: ["Synthetic Assets", "DeFi Synthetics", "On-Chain Synthetic Trading", "Synthetix Perps Trading"]
@@ -281,6 +281,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]] (also [[cryptodataapi-hyperliquid]], [[cryptodataapi-sentiment]]). The synth-venue skew-funding and oracle reads come from the protocol contracts/SDK directly; CryptoDataAPI supplies the CEX/Hyperliquid benchmark leg and peg monitoring.
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — the funding differential: `GET /api/v1/derivatives/funding-rates?coin=ETH` (Binance + Hyperliquid benchmark leg in one call) against the synth venue's skew-funding read from its contracts
+- **Guards** — `GET /api/v1/market-data/ticker/price` for the oracle-divergence check; `GET /api/v1/sentiment/stablecoins` for settlement-collateral peg before and during every hold
+- **Regime gate** — `GET /api/v1/quant/market` — skew-funding richness clusters in trending states, while `vol_spike` regimes raise oracle-lag and depeg tails simultaneously
+- **Backtest** — funding-differential history from `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05 — deep enough for full-cycle carry studies; Binance daily only since 2026-03-30) with price legs from `GET /api/v1/backtesting/klines`
+- **Tips** — re-hedge on funding timestamps, not price ticks; the synth venue's dynamic-fee state must be read on-chain — no REST mirror exists
 
 ## Related
 

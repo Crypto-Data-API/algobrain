@@ -2,7 +2,7 @@
 title: "Speculative Positioning"
 type: concept
 created: 2026-04-14
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [commodities, futures, indicators]
 aliases: ["Managed Money Positioning", "Non-Commercial Positioning", "Speculative Sentiment"]
@@ -174,6 +174,36 @@ Because the COT snapshot lags its release by three days and the report is weekly
 4. **Category leakage**: Some managed money positions may actually be hedging (a hedge fund that owns physical copper and hedges with futures would be classified as managed money, not commercial).
 5. **Aggregation masks detail**: The net position for "managed money" aggregates hundreds of different funds with different strategies. Some may be long, others short, for very different reasons.
 6. **Declining CTA influence**: If systematic trend-following AUM shrinks, the predictive power of speculative positioning signals may diminish.
+
+## Getting the Data (CryptoDataAPI)
+
+In crypto the analogue of managed-money positioning is perp positioning: account long/short ratio, funding, and open interest.
+
+**Live data:**
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — account long/short ratio, the closest crypto analogue of net speculative positioning
+- `GET /api/v1/derivatives/summary?coin=BTC` — funding, OI, and long/short in one call
+- `GET /api/v1/quant/positioning` — trader-type split (market maker / whale / other) on Hyperliquid (Pro)
+
+**Historical data:**
+- `GET /api/v1/derivatives/binance/history?days=90` — daily derivatives series (funding, OI, long/short)
+- `GET /api/v1/backtesting/funding` — deep funding archive (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/derivatives/summary?coin=BTC` reads long/short ratio, funding, and OI together: extreme ratio + extreme positive funding + rising OI is the crypto version of this page's "crowded long" percentile read
+- **Compute** — apply the percentile-of-range crowding metric to the long/short and funding series from `GET /api/v1/derivatives/binance/history?days=90` rather than eyeballing raw levels
+- **Backtest** — funding-extreme fade rules replay against `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05); pair with `GET /api/v1/backtesting/klines` for the price leg
+- **Tip** — unlike COT's Tuesday-snapshot/Friday-release lag, these positioning reads are near-real-time — but the core caveat transfers unchanged: crowding is a condition, not a timing signal, so require a price or liquidation trigger before fading
 
 ## Related
 

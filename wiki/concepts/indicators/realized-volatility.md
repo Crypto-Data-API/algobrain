@@ -2,7 +2,7 @@
 title: "Realized Volatility"
 type: concept
 created: 2026-04-07
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [volatility, quantitative, risk-management]
 aliases: ["Historical Volatility", "Realized Vol", "RV", "Realized Variance"]
@@ -110,6 +110,32 @@ The table below maps the IV-vs-RV relationship to the typical positioning. The c
 - **Stale / illiquid prices bias RV down.** Thinly traded assets with stale marks show artificially low RV — the price simply isn't updating, not that risk is low.
 - **Microstructure noise** inflates high-frequency RV (bid-ask bounce); 5-minute sampling is the practical compromise.
 - **Overlapping windows are autocorrelated**, so a series of rolling RVs is not a set of independent samples — relevant when building percentile bands for a cone.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` — OHLC bars for close-to-close or range-based RV estimators
+- `GET /api/v1/volatility/regime` — per-asset volatility state (compressed / expanding / vol_shock / mean_reverting / normal) built server-side
+- `GET /api/v1/volatility/regime/score` — market-wide vol-stress composite (0-100)
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for multi-year RV series
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset detail with rolling 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=252"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — klines carry full OHLC, so any estimator in the table above is available: close-to-close from closes, Parkinson from high/low, Yang-Zhang from all four columns plus the prior close; annualize with √365 for crypto's continuous calendar, not √252
+- **Live state** — `GET /api/v1/volatility/regime/{symbol}` gives a pre-classified vol state with 60d history when the agent needs a label rather than a number
+- **Backtest** — RV-conditioned rules (vol targeting, RV-spike de-risking) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); high-frequency RV from 1m klines is only possible since 2026-03-30, when the minute archive starts
+- **Tip** — clean the series first per the pitfalls list: one stale or missing bar enters the sum squared, and crypto's 24/7 tape means no overnight gap — Parkinson/Garman-Klass lose their usual blind spot but still assume continuous trading through low-liquidity weekend hours
 
 ## Related
 

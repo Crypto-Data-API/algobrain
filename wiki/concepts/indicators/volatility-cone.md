@@ -2,7 +2,7 @@
 title: "Volatility Cone"
 type: concept
 created: 2026-04-15
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [options, derivatives, volatility, indicators]
 aliases: ["Volatility Cone", "Vol Cone", "Volatility Cones"]
@@ -66,6 +66,32 @@ The volatility cone is fundamentally a richer, horizon-aware version of [[iv-ran
 - **Regime dependence.** A cone built on a calm-dominated history understates the realized-vol distribution available in a [[volatility-regime|stressed regime]]. A cone fit through 2017 would not contain the [[covid-crash|March 2020]] tail. Always note the sample period.
 - **Estimator choice matters.** Close-to-close realized vol ignores intraday range; Parkinson, Garman-Klass, and Yang-Zhang estimators use highs/lows/opens and give tighter, often more accurate cones for the same sample.
 - **IV vs RV are not the same object.** The cone compares implied vol (a forward expectation) to realized vol (a backward measurement) — a useful relative-value frame, but not a strict apples-to-apples comparison, since IV legitimately embeds the [[variance-risk-premium]].
+
+## Getting the Data (CryptoDataAPI)
+
+The realized-volatility half of the cone builds entirely from klines; the API does not serve options IV, so the IV overlay must come from an options venue.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — daily closes (and OHLC for range estimators) for rolling realized-vol windows
+- `GET /api/v1/volatility/regime/{symbol}` — current per-asset vol state to note which regime the live reading sits in
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — multi-year kline archive so the cone's sample spans full calm-and-crisis cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — pull daily klines, compute every overlapping n-day annualized realized vol for n ∈ {10, 30, 60, 90, 180} (√365 annualization for crypto), and take the 5th/25th/50th/75th/95th percentiles per window — that is the whole cone
+- **Sample depth** — `GET /api/v1/backtesting/klines` reaches back to 2017-08 on Binance spot, so a BTC cone can include the 2018, 2020, and 2022 vol tails rather than a calm-only sample — the regime-dependence pitfall above
+- **Backtest** — replay "current 30d RV vs its own cone percentile" signals (e.g. vol-expansion entries from below the 25th percentile) against the same archive
+- **Tip** — overlapping windows are serially correlated: treat cone percentile bands as descriptive context in agent decisions, never as independent confidence intervals for statistical tests
 
 ## Related
 

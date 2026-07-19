@@ -155,3 +155,15 @@ GEX-based strategies are regime signals applied to directional or premium-sellin
 - For per-strike delta and gamma: use Deribit API directly or [[greeks-live]]
 
 Full catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [gamma exposure](https://cryptodataapi.com/quant-gamma) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/quant/gex` — native Gamma Exposure with MM inventory and liquidation profile (Pro+); the positive/negative gamma regime read
+- **Strike context** — `GET /api/v1/market-intelligence/options` — BTC/ETH options OI, volume, and max pain for expiry and pin mapping; per-strike gamma still requires Deribit or [[greeks-live]]
+- **Cross-check** — `GET /api/v1/volatility/regime` — verify the realized-vol state (mean_reverting vs expanding) agrees with what the GEX regime implies
+- **Backtest** — no GEX history archive exists on CryptoDataAPI: validate GEX-conditional behaviour forward, or replay price action around expiries with `GET /api/v1/backtesting/klines` (1h/4h back to 2017-08) plus point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — GEX flips sign fast around large expiries: re-poll `/api/v1/quant/gex` after each Deribit expiry rather than on a fixed clock

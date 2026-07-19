@@ -182,6 +182,35 @@ For a **broad-index** DCA program:
 - "Lower average cost" framing creates a false sense of edge and is often misused to justify averaging down into deteriorating single assets
 - Behavioral benefit evaporates if the investor overrides the automation under stress
 
+## Getting the Data (CryptoDataAPI)
+
+For a crypto DCA program (BTC/ETH recurring buys), [[cryptodataapi|CryptoDataAPI]] serves the execution price, the record-keeping history, and the inputs to the (distinct, timing-risk-bearing) "enhanced DCA" variants.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — spot price at each scheduled buy (consumed only to compute quantity, never as a signal)
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC with the 200D MA precomputed: the input for valuation-tilted variants only, not DCA proper
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot daily back to 2017-08, spanning two full crypto cycles) for DCA-vs-lump-sum studies on BTC/ETH
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/ticker/price?symbol=BTCUSDT"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Execution** — on the fixed schedule, one `GET /api/v1/market-data/ticker/price` call per asset → compute quantity → place the buy. The decision function must ignore every other data point: any "skip this month, market looks high" logic converts DCA into discretionary market timing and forfeits the behavioral edge.
+- **Record-keeping** — append each fill to a cost-basis ledger; `GET /api/v1/market-data/klines` daily closes cover reporting and the annual rebalance-band check.
+- **No regime gate — by design** — endpoints like `GET /api/v1/regimes/current` are context for reporting only; gating contributions on regimes is the "enhanced DCA" variant with its own timing risk, not DCA proper.
+- **Backtest** — DCA vs lump-sum path studies on `GET /api/v1/backtesting/klines` (Binance spot daily since 2017-08).
+- **Tips** — automation *is* the strategy: schedule the agent, cap crypto at the policy weight (5-10% of flow), and alert only on the kill criteria (>80% drawdown plus a broken thesis on a single-asset program, or fee creep above the 0.75%/yr ceiling).
+
 ## Sources
 
 - Vanguard Research (2012), *Dollar-cost averaging just means taking risk later* — lump sum beat 12-month DCA in ~67% of rolling 10-year periods across US/UK/Australia.

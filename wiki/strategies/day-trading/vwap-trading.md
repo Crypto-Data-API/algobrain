@@ -2,7 +2,7 @@
 title: "VWAP Trading (Crypto Intraday)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [vwap, day-trading, crypto, intraday, market-microstructure, mean-reversion, perpetual-futures]
 aliases: ["Crypto VWAP", "Anchored VWAP", "VWAP Execution", "VWAP Mean Reversion", "VWAP Reclaim"]
@@ -256,6 +256,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-hyperliquid]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Compute** — anchored VWAP and σ bands from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` (typical price × volume, cumulated from the chosen anchor); `GET /api/v1/hyperliquid/candles?interval=1m` for perp-side VWAP
+- **Anchor selection** — anchor to events, not just the UTC open: a liquidation-cascade low from `GET /api/v1/market-intelligence/liquidations` or a funding flip from `GET /api/v1/derivatives/funding-rates?coin=BTC` makes a far stronger cost-basis anchor than an arbitrary session start
+- **Regime gate** — `GET /api/v1/quant/market`: first-touch reversion works in `strong_trend_*` regimes; `choppy_high_vol` is the >10-crosses-per-session whipsaw regime where the strategy stands down (its dominant loss source)
+- **Backtest** — `GET /api/v1/backtesting/klines`: full-resolution intraday VWAP backtests are constrained to the 1m window (since 2026-03-30, grows forward); 1h bars back to 2017-08 support only coarse anchored-VWAP level studies
+- **Tips** — funding check before holding across a stamp; the wide 40-120 bps targets make this far more fee-tolerant than scalping, so maker entry is preferred but not existential
 
 ## Related
 

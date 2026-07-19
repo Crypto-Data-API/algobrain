@@ -2,7 +2,7 @@
 title: "ATR Position Sizing"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [risk-management, technical-analysis, position-trading, volatility]
 aliases: ["ATR Position Sizing", "Volatility-Based Position Sizing", "Volatility Normalization", "ATR-Based Sizing"]
@@ -111,6 +111,37 @@ Capacity is governed by the underlying signal and the instrument universe, not b
 - Backward-looking — lags sudden volatility expansions.
 - Ignores correlation unless explicitly extended with cluster caps.
 - Can over-size in unusually quiet regimes, creating hidden short-volatility exposure.
+
+## Getting the Data (CryptoDataAPI)
+
+For crypto books, [[cryptodataapi|CryptoDataAPI]] supplies the OHLCV bars the ATR is computed from, plus a pre-built per-coin volatility/risk model that can replace or sanity-check hand-rolled sizing.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100` — daily OHLCV per instrument for the 14/20-period Wilder ATR
+- `GET /api/v1/quant/coins/risk` — bulk per-coin risk model with vol-target multipliers across 180+ coins (Pro): an API-side volatility-normalised sizing input
+- `GET /api/v1/volatility/regime` — per-asset vol regime (`compressed` / `expanding` / `vol_shock`): flags the quiet-regime over-sizing trap before ATR reacts
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023) for ATR-sizing vs fixed-notional comparison backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Sizing input** — `GET /api/v1/market-data/klines` per instrument (daily bars → Wilder ATR → the size formula above), or skip the hand-rolled math and batch `GET /api/v1/quant/coins/risk` for vol-target multipliers across the whole universe in one call.
+- **Regime gate** — `GET /api/v1/volatility/regime`: a `compressed` reading warns that ATR is understating true risk (the classic short-vol trap) — widen the stop multiple or cap size before the expansion arrives.
+- **Correlation guard** — `GET /api/v1/coins/category-groups`: cluster the universe by theme so multiple "1% risk" positions in the same narrative do not stack into one correlated bet.
+- **Backtest** — replay ATR sizing vs fixed-notional on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d since 2017-08); pair entries with point-in-time regime states from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid lookahead in any regime-conditional sizing rule.
+- **Tips** — respect `insufficient_history`/`new_listing` flags before sizing a newly listed coin; recompute size at entries only, not every tick, to avoid churning the book as ATR drifts.
+- **Prompt library** — the "Volatility-Aware Position Sizer" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) implements `risk_dollars / (1.5 × volatility) × vol_target_multiplier` off /api/v1/quant/coins/risk — the API-native sibling of ATR sizing
 
 ## Sources
 

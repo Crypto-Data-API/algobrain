@@ -2,7 +2,7 @@
 title: "DEX Pool Triangular Arbitrage"
 type: strategy
 created: 2026-04-25
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [arbitrage, defi, crypto, ethereum, algorithmic, market-microstructure]
 aliases: ["Cyclic AMM Arbitrage", "On-Chain Triangle Arb", "Atomic Triangle Arbitrage"]
@@ -132,6 +132,37 @@ Per-trade limited by pool depth (typical sweet spot $50K-2M per trade). Strategy
 - Eigenphi MEV Inspect data.
 - Flashbots Transparency Dashboard.
 - jaredfromsubway.eth and other searcher post-mortems.
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves pool discovery, token screening, and depth for building the cycle graph; per-block reserves, mempool, and the priority-gas auction are off-API (native RPC + Bellman-Ford solver + Flashbots).
+
+**Live data:**
+- `GET /api/v1/dex/trending` / `GET /api/v1/dex/new-pools` — candidate pools/venues for cycle construction across supported chains
+- `GET /api/v1/dex/token/{chain}/{address}` — token + top pools to build the pool graph
+- `GET /api/v1/liquidity/depth` — depth at 10/25/50/100 bps to bound optimal cycle size before slippage kills the edge
+- `GET /api/v1/dex/security/{chain}/{address}` — token-trap screening for any leg of the triangle
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV for cross-pool dislocation research
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can pre-filter routes; execution stays on-chain:
+
+- **Pool graph** — `GET /api/v1/dex/trending`, `/dex/new-pools`, and `/dex/token/{chain}/{address}` seed the pool graph and candidate 3-5-leg cycles; per-block reserves and mempool are off-API.
+- **Safety + sizing** — `GET /api/v1/dex/security/{chain}/{address}` screens each leg's token; `GET /api/v1/liquidity/depth` bounds the optimal input before slippage kills the cycle.
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility flags when concentrated liquidity has collapsed cross-pool dislocations.
+- **Backtest** — `GET /api/v1/backtesting/klines` for cross-pool spread research; validator-capture economics must be modelled off-API.
+- **Tip** — atomic execution means no leg risk, but most gross goes to validators via priority fee — pre-filter routes here, price inclusion on-chain.
 
 ## Related
 

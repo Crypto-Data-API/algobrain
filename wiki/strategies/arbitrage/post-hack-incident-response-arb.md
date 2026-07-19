@@ -2,7 +2,7 @@
 title: "Post-Hack Incident Response Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, event-driven, ai-trading]
 aliases: ["Incident-Response Arb", "Post-Disclosure Arb", "0-72h Hack Arb"]
@@ -256,6 +256,42 @@ Strategy-level capacity: ~$50M deployed across the strategy at current event fre
 - [[2023-03-usdc-svb-depeg]] — parallel structural pattern (bank run → stablecoin depeg).
 - DeFiLlama LST peg dashboards.
 - PeckShield, BlockSec, Cyvers exploit-tracking feeds.
+
+## Getting the Data (CryptoDataAPI)
+
+First-second detection still needs the Twitter/Telegram anomaly feeds above; [[cryptodataapi|CryptoDataAPI]] supplies the structured incident overlay, the panic-funding and liquidation signals, and the depth data for sizing the perp legs.
+
+**Live data:**
+- `GET /api/v1/security/events` — filterable recent hacks/depegs (10d lookback; the structured incident feed)
+- `GET /api/v1/security/regime` — incident list + Security Stress composite (45% hack, 30% flow, 25% depeg)
+- `GET /api/v1/security/regime/{symbol}` — per-symbol security overlay for watchlist names
+- `GET /api/v1/derivatives/funding-rates?coin=<COIN>` — panic-short signal (funding deeply negative during cascades)
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange forced-flow confirmation
+- `GET /api/v1/liquidity/depth` — perp book depth for sizing the short ladder
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — price paths around past exploit events (Binance spot 1h/4h/1d to 2017-08)
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (panic-funding replay)
+- `GET /api/v1/backtesting/liquidations` — Hyperliquid liquidation flow since 2026-03-30
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state per event date (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can automate the triage-to-execution pipeline:
+
+- **Detection cross-check** — on any anomaly-feed alert, hit `GET /api/v1/security/events` and `GET /api/v1/security/regime/score`; a confirmed print in the structured feed is the multi-source confirmation gate before scaling past 50% of limit.
+- **Signal (funding/liquidation legs)** — `GET /api/v1/derivatives/funding-rates?coin=<COIN>` flags the panic-funding condition (< -100bp annualized = forced-long cascade underway) and `GET /api/v1/market-intelligence/liquidations` confirms the cascade the perp-discount leg trades against.
+- **Sizing** — `GET /api/v1/liquidity/depth` caps the short ladder at the depth available inside 0.5% slippage (the per-event capacity constraint).
+- **Backtest** — replay the ~25-event 2023-2025 sample with `GET /api/v1/backtesting/klines` for T+15min drift measurement, `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for the funding leg, and `/api/v1/backtesting/liquidations` for post-2026-03 events; grade entries against point-in-time `/api/v1/backtesting/daily-snapshots` state to avoid [[lookahead-bias]].
+- **Tips** — the structured security feed lags raw Twitter feeds by minutes; use CDA for confirmation and sizing, not first detection, and log T+15min drift per event — its compression to zero is the kill criterion.
 
 ## Related
 

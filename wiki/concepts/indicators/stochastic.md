@@ -2,7 +2,7 @@
 title: Stochastic Oscillator
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [stochastic, indicators, technical-analysis]
 aliases: [stochastic-oscillator, stochastics]
@@ -81,6 +81,33 @@ One illustrative backtesting study across US equities reported a 44.9% win rate 
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Williams %R connection, win-rate data, George Lane attribution
 - Lane, George C. (1984), "Lane's Stochastics," *Technical Analysis of Stocks & Commodities*, Vol. 2 — Lane's own account of the oscillator and the %D/price divergence "setup"
 - Williams, Larry (1973) — introduction of the %R oscillator (Williams %R)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLC bars carrying the high/low/close columns %K is built from
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — current price context for the latest bar
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive for long-lookback stochastic studies
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=1000` — perp-side OHLCV if trading Hyperliquid listings
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — %K = (close − lowest low over N) / (highest high − lowest low over N) × 100 from `GET /api/v1/market-data/klines`; %D is a 3-period SMA of %K, and the slow variant smooths %K once more before %D
+- **Backtest** — replay %K/%D crossovers in overbought/oversold territory against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023)
+- **Regime gate** — the stochastic's range-bound sweet spot maps to the HMM `range_low_vol` state from `GET /api/v1/quant/market`; suppress crossover signals when `strong_trend_bull`/`strong_trend_bear` dominates, where the oscillator pins at an extreme
+- **Tip** — the %K window needs `limit` ≥ N + smoothing periods of warm-up bars; request extra history and discard the seed window before emitting the first signal
 
 ## Related
 

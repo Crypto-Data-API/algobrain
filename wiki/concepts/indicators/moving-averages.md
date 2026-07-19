@@ -2,7 +2,7 @@
 title: Moving Averages
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [moving-averages, technical-analysis, indicators]
 aliases: [MA, moving-average, "50-day-ma", "50 day MA", "50 DMA"]
@@ -66,6 +66,34 @@ Modern variations of moving averages address the classic lag problem inherent in
 - **Kaufman Adaptive Moving Average (KAMA)**: Adjusts its smoothing based on market noise -- fast in trending markets, slow in choppy ones. This self-adjusting behavior makes it well-suited to commodities that alternate between strong trends and range-bound consolidation.
 
 While these advanced MAs offer reduced lag, they also produce more false signals during choppy conditions. The classic SMA and EMA remain dominant in systematic commodity trading because their behavior is well-understood, easily backtested, and robust across different market regimes.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — universe-wide price-structure state built from SMA (plus BB/RSI), Pro+ — the pre-computed MA-position read
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC daily prices with the 200D MA precomputed
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — raw OHLCV for computing any SMA/EMA/WMA/HMA/KAMA variant
+
+**Historical data:**
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset technical state with a rolling 60-day history (Pro+)
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for crossover-system backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=730"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — one `GET /api/v1/indicators/technical` call (Pro+) classifies every covered asset's position relative to its moving-average structure, replacing per-symbol computation in scanners
+- **Compute** — for custom periods or EMA/HMA/KAMA variants, derive from `GET /api/v1/market-data/klines` closes; fetch at least 2× the longest period as warm-up so the average is stable
+- **Backtest** — `GET /api/v1/backtesting/klines` (daily bars back to 2017-08) spans several full crypto cycles — the minimum honest sample for judging 50/200-style systems, whose signals arrive only a few times per cycle
+- **Tip** — in crypto the 200D MA regime filter (price above/below) has historically mattered more than the exact MA type; test the simple filter first before reaching for adaptive variants, which add parameters and overfitting surface
 
 ## Sources
 

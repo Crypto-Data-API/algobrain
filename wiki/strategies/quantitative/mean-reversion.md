@@ -2,7 +2,7 @@
 title: Mean Reversion
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: excellent
 tags:
   - quantitative
@@ -279,6 +279,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — z-scores from `GET /api/v1/market-data/klines?interval=1h` per coin, with `GET /api/v1/derivatives/funding-rates` as the crowded-book filter and `GET /api/v1/market-intelligence/liquidations` as the do-not-catch-the-knife guard
+- **Regime gate** — `GET /api/v1/quant/market` + `GET /api/v1/volatility/regime`: trade only outside `strong_trend_*`/`vol_shock` states — the Hurst/regime gate is doing most of this strategy's work
+- **Catalyst filter** — `GET /api/v1/event/calendar` to exclude coins with an unlock, listing, or macro print inside the holding window (catalyst moves revert far less reliably)
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/1d back to 2017-08) with `GET /api/v1/quant/history` point-in-time regime probabilities (Pro Plus) so the regime gate is applied leak-free; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) for the carry term
+- **Tips** — batch per-coin sizing via `GET /api/v1/quant/coins/risk` instead of looping symbols; respect `insufficient_history` flags before computing 20-bar σ on new listings
 
 ## Related
 

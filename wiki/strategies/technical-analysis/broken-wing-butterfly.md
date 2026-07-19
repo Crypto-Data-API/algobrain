@@ -2,7 +2,7 @@
 title: "Broken Wing Butterfly"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
 aliases: ["BWB", "Skip-Strike Butterfly", "Unbalanced Butterfly", "Crypto Broken Wing Butterfly"]
@@ -140,6 +140,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — build the BWB when `GET /api/v1/volatility/regime` is elevated (credit available) and `GET /api/v1/market-intelligence/options` max pain marks the body placement; `GET /api/v1/derivatives/funding-rates?coin=BTC` decides which side's skew funds the skipped wing
+- **Regime gate** — `GET /api/v1/quant/market`: favour leading `range_low_vol` probability; a rising `vol_spike` bucket threatens the risk-bearing side of the asymmetric structure
+- **Backtest** — options-chain history is not served, so proxy the structure against underlying paths from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), pinning each entry to point-in-time vol state via `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — re-check `/api/v1/quant/gex` after entry: a dealer flip to short gamma on the unprotected side is the adjust/exit trigger before price gets there.
 
 ## Related
 

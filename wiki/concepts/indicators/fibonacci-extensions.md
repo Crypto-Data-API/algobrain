@@ -2,7 +2,7 @@
 title: "Fibonacci Extensions"
 type: concept
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [indicators, technical-analysis]
 aliases: ["Fibonacci Extensions", "Fib Extensions", "Fibonacci Projections", "Fibonacci Targets"]
@@ -63,6 +63,30 @@ As with retracements, an extension level carries far more weight when it lines u
 - **Subjectivity** — like retracements, extensions depend on which swing points (A, B, C) the trader selects; different choices yield different targets.
 - **Targets, not guarantees** — price frequently stalls *near* but not *at* an extension level, or blows through it entirely in a strong trend. Extensions define zones to watch, not precise reversal prices.
 - **Best as an exit tool** — extensions help plan where to take profit; they are weak as standalone entry signals and should be combined with [[price-action]] confirmation and other [[technical-analysis]] tools.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price versus projected targets
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV for detecting the A-B-C swing structure
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this tool directly:
+
+- **Compute** — detect swing points A/B/C in `GET /api/v1/market-data/klines` output (pivot logic with a fixed lookback), then project C + (B−A) × {1.0, 1.272, 1.618, 2.0, 2.618}
+- **Confluence** — score targets higher when they land near prior highs/lows from the same kline series — the confluence requirement this page stresses, made mechanical
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) lets you measure how often price stalls within a tolerance band of each ratio versus random levels — the honest test of whether extensions beat chance
+- **Tip** — fix the pivot definition (e.g. fractal depth) in code; subjective swing selection is the tool's main weakness, and a consistent agent removes it
 
 ## Related
 

@@ -317,6 +317,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **VRP confirmation** — compute 30-day realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` and check the DVOL−RV > 5-point rule (DVOL side from Deribit); no premium is sold without the spread
+- **Regime gate** — `GET /api/v1/volatility/regime` (skip `vol_shock`/`expanding` states) plus `GET /api/v1/quant/gex` for dealer-gamma context: short-gamma dealer positioning means cascade-prone spot, argue for condor wings over naked strangles
+- **Vol-shock kill** — monitor `GET /api/v1/volatility/regime/score` and `GET /api/v1/market-intelligence/liquidations` as the automated trigger for the flatten-short-vega rule
+- **Wing tilt** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; funding > ~0.03%/8h → tilt the short toward the call wing per the skew-aware rule
+- **Backtest** — replay the VRP with `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08, covering 2020-03, LUNA, FTX) paired with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so regime labels are point-in-time, not today's
+- **Tips** — batch BTC+ETH state via the cached `GET /api/v1/daily` bundle hourly instead of per-endpoint polling
+
 ## Sources
 
 - [[crypto-options-volatility-selling]] — the wiki's canonical treatment of the crypto VRP and its kill-switch risk framework.

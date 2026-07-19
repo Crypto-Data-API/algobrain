@@ -2,7 +2,7 @@
 title: "Breadth Thrust"
 type: concept
 created: 2026-07-02
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, market-regime, momentum]
 aliases: ["Breadth Thrust", "breadth-thrust", "Zweig Breadth Thrust", "Breadth Thrust Indicator"]
@@ -103,6 +103,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/al
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
+
+**Live dashboards:** [market health](https://cryptodataapi.com/market)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — approximate a crypto advancers ratio from consecutive `GET /api/v1/daily/prices` snapshots (~2,500 Binance spot pairs): advancers ÷ (advancers + decliners), then smooth with a 10-day EMA for the Zweig-style read
+- **Live state** — `GET /api/v1/market-health/altcoin-breadth` (% of coins above a 5-365d MA) is the served participation gauge; a fast surge off a washed-out reading is the thrust-like regime shift
+- **Backtest** — `GET /api/v1/market-health/history?days=730` covers two years of scores; point-in-time snapshots via `GET /api/v1/backtesting/daily-snapshots/{date}` reach back only to 2026-03-02, so reconstructed thrust signals have a short verifiable history — treat threshold choices as unvalidated
+- **Tip** — Zweig's 0.40/0.615 thresholds were calibrated on NYSE issues; re-derive percentile-based thresholds on the crypto universe rather than reusing them verbatim
 
 ## Related
 

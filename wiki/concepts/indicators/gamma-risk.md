@@ -2,7 +2,7 @@
 title: "Gamma Risk"
 type: concept
 created: 2026-04-15
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [options, derivatives, risk-management, indicators]
 aliases: ["Gamma Risk", "Gamma Trap", "Gamma Exposure Risk"]
@@ -120,6 +120,34 @@ Both gamma and [[vega]] create risk for short-premium sellers, but they operate 
 | **Hedge** | Close/roll near 21 DTE | Manage vega exposure across expirations |
 
 A short-premium portfolio is typically most exposed to vega risk early in the trade (when IV spikes cause mark-to-market losses) and most exposed to gamma risk late in the trade (when underlying moves cause rapid delta shifts).
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto-market version of this risk — market-maker gamma positioning and the liquidation levels that behave like a short-gamma strike band — [[cryptodataapi|CryptoDataAPI]] serves:
+
+**Live data:**
+- `GET /api/v1/quant/gex` — Gamma Exposure: market-maker inventory plus liquidation profile, per-coin optional (Pro+) — whether the tape is likely dampened (long MM gamma) or move-amplifying (short MM gamma)
+- `GET /api/v1/market-intelligence/options` — BTC options OI, volume, and max pain for strike-concentration context
+
+**Historical data:**
+- No dedicated GEX archive — replay price behaviour through past gamma regimes with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — poll `GET /api/v1/quant/gex` before holding short-premium or leveraged positions through an expiry window; short MM gamma plus a dense liquidation profile is the environment where adverse delta swings compound fastest
+- **Risk gate** — pair with `GET /api/v1/liquidity/regime` (fragility score, Pro+): thin books amplify exactly the gamma-driven moves this page warns about
+- **Backtest** — no gamma history is archived; test gamma-trap exit rules (e.g. the 21-DTE analogue) against `GET /api/v1/backtesting/klines` price paths around expiry dates
+- **Tip** — the liquidation profile in the GEX payload marks where forced flow would accelerate a move — treat clustered levels near spot the way an options seller treats a tested short strike near expiry
 
 ## Related
 

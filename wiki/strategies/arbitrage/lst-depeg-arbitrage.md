@@ -2,7 +2,7 @@
 title: "LST Depeg Arbitrage (stETH / rETH / cbETH)"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, ethereum, mean-reversion]
 aliases: ["stETH Arb", "Liquid Staking Depeg", "LST Peg Trade", "stETH/ETH Arb"]
@@ -206,6 +206,39 @@ The net P&L is essentially **peg-restoration capture + funding harvest − slipp
 - Three Arrows Capital bankruptcy filings (BVI, July 2022)
 - Celsius Network Chapter 11 disclosures (July 2022)
 - Ethereum Foundation Shapella upgrade documentation (April 2023)
+
+## Getting the Data (CryptoDataAPI)
+
+Curve pool composition and the Lido/validator withdrawal queues are on-chain reads; [[cryptodataapi|CryptoDataAPI]] covers the LST/ETH price spread, the perp-funding tailwind on the short leg, and the depeg-stress overlay.
+
+**Live data:**
+- `GET /api/v1/dex/token/{chain}/{address}` — LST pool price on a DEX (e.g. stETH/ETH on Curve) → the depeg spread itself
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — cross-exchange ETH perp funding (the short-leg carry; deeply negative funding during depegs is the tailwind)
+- `GET /api/v1/security/regime` — recent hacks/depegs + Security Stress score (depeg-event detection)
+- `GET /api/v1/liquidity/depth` — depth/spread at 10/25/50/100 bps (exit-slippage sizing)
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (short-leg carry replay)
+- `GET /api/v1/backtesting/klines` — OHLCV archive for ETH and LST-proxy basis studies
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state around past depeg windows (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=ETH"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-derivatives]], [[cryptodataapi-dex]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can monitor and manage this trade end-to-end:
+
+- **Signal** — poll `GET /api/v1/dex/token/{chain}/{address}` on the stETH/ETH (or rETH, cbETH) pool for the LST/ETH ratio; trigger below 0.97, and cross-check `GET /api/v1/security/regime/score` — a genuine forced-selling depeg spikes the depeg component of Security Stress.
+- **Carry check** — `GET /api/v1/derivatives/funding-rates?coin=ETH` before hedging: the trade wants negative funding (short receives); if funding flips materially positive for 3+ intervals that is a listed kill criterion.
+- **Regime gate** — `GET /api/v1/quant/market`: depegs deep enough to pay appear in `vol_spike`/`strong_trend_bear` deleveraging states; in `range_low_vol` post-Shapella conditions the <1% dips rarely clear round-trip costs.
+- **Backtest** — `GET /api/v1/backtesting/funding` (HL hourly since 2023-05) replays the short-leg funding harvest post-Shapella; the canonical June 2022 event predates the archive, so use the on-chain record for that. Pair recent tests with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime state.
+- **Tips** — size against `/api/v1/liquidity/depth` so the position stays under ~5% of exit depth (kill criterion); withdrawal-queue length still needs an on-chain read — keep it in the same decision loop as the spread check.
 
 ## Related
 

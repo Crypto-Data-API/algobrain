@@ -2,7 +2,7 @@
 title: "Governance & Restitution Arbitrage"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, risk-management, event-driven, ai-trading]
 aliases: ["Governance-Vote Arb", "Restitution-Claim Arb", "Bridge-Token Discount Arb", "Hack Restitution Arb"]
@@ -305,6 +305,38 @@ Strategy-level capacity: ~$100M deployed across the strategy at current event fr
 - Cetus governance forum, Sui Foundation public statements (May 2025).
 - Balancer Snapshot vote records (Nov 2025).
 - Verified via Perplexity (sonar), 2026-06-10: KelpDAO/LayerZero April 2026 exploit confirmed (~$290-292M rsETH via compromised 1-of-1 DVN; Aave froze rsETH/wrsETH/WETH markets; ~$15B DeFi TVL drain). Balancer v2 exploit Nov 3 2025 (~$128M) confirmed. Citations: sigintzero.com/blog/kelp-dao-292m-layerzero-dvn-exploit, hypernative.io (KelpDAO observation-layer post-mortem), chainalysis.com/blog/kelpdao-bridge-exploit-april-2026, galaxy.com/insights/research/kelpdao-layerzero-exploit-defi. BIP-908 passage details per Balancer Snapshot records (not independently re-verified in this pass).
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the exploit catalyst detector and the tradeable legs (protocol-token perp short, bridge-token discount, sympathy-depeg pairs); governance-forum / Snapshot vote tallies and OTC claim quotes are off-API.
+
+**Live data:**
+- `GET /api/v1/security/regime` + `GET /api/v1/security/events` — the exploit/restitution catalyst detector (10d lookback)
+- `GET /api/v1/derivatives/funding-rates` + `GET /api/v1/derivatives/summary` — protocol-token perp shorts (incident-response leg) and the funding overshoot
+- `GET /api/v1/dex/token/{chain}/{address}` — bridge/wrapped-token vs canonical price (the bridge-discount leg) and LRT sympathy-depeg legs
+- `GET /api/v1/market-intelligence/liquidations` — forced-flow during the freeze window
+
+**Historical data:**
+- `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) + `GET /api/v1/backtesting/funding`
+- `GET /api/v1/security/regime/{symbol}` — per-symbol 60d security overlay (Pro+)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/events"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]], [[cryptodataapi-dex]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can detect the event and trade the recovery legs:
+
+- **Catalyst** — `GET /api/v1/security/regime` / `/security/events` detect the exploit and its recovery-path window; governance-forum / Snapshot vote tallies and OTC claim quotes are off-API.
+- **Trade legs** — `GET /api/v1/derivatives/funding-rates` / `/derivatives/summary` price the incident-response protocol-token short; `GET /api/v1/dex/token/{chain}/{address}` reads the bridge-token-vs-canonical discount and LRT sympathy-depeg pairs.
+- **Cascade read** — `GET /api/v1/market-intelligence/liquidations` for the freeze-window forced-flow.
+- **Backtest** — `GET /api/v1/backtesting/liquidations` + `/backtesting/funding`; ~15% of events are total-loss (no recovery) — size off that tail, not the headline overshoot.
+- **Tip** — pair the security-regime state with point-in-time `/backtesting/daily-snapshots/{date}` to avoid lookahead when studying past restitution windows.
 
 ## Related
 

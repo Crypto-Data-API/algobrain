@@ -2,7 +2,7 @@
 title: "Volatility Clustering"
 type: concept
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-07-19
 status: good
 tags: [volatility, quantitative, market-regime, indicators, risk-management]
 aliases: ["Volatility Clustering", "volatility-clustering", "Vol Clustering"]
@@ -86,6 +86,31 @@ Volatility clustering is the empirical foundation for treating volatility as a *
 3. **Reacting only after the spike.** Because vol spikes fast and decays slowly, buying protection or de-risking only after volatility has already jumped pays the worst prices; the value of clustering-aware sizing is realized before and during the transition, not after.
 4. **Treating fat tails and clustering as separate problems.** Much of the observed fat-tailedness of returns is *produced by* clustering (a mixture of variance states); a model that fixes one often addresses the other.
 5. **Over-trusting GARCH point forecasts in a regime change.** Persistence estimates are calibrated on history; genuine regime shifts (new triggers, structural breaks) can move faster than a single-regime GARCH expects.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/volatility/regime` — per-asset volatility state (compressed / expanding / vol_shock / mean_reverting / normal) — a hosted regime read of the clusters this page describes
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — return series for measuring the autocorrelation of squared returns
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for fitting GARCH/EWMA on multi-year series
+- `GET /api/v1/volatility/regime/{symbol}` — per-asset detail with rolling 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — the clustering fingerprint is one klines pull away: autocorrelation of $r_t^2$ over lags from `GET /api/v1/market-data/klines` closes; fit GARCH(1,1) or EWMA on the same series for a clustering-aware vol forecast
+- **Live state** — `GET /api/v1/volatility/regime` reports which cluster each asset currently sits in without any model fitting; the `vol_shock` and `compressed` labels bracket this page's turbulent and calm states
+- **Backtest** — vol-scaled sizing rules that monetize clustering replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 — long enough to span several full calm-to-crisis cycles)
+- **Tip** — act on the transition, not the level: de-risk when the regime label flips out of `compressed`, because by the time a trailing GARCH forecast has caught up the spike has already paid the worst prices
 
 ## Related
 

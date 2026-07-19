@@ -2,7 +2,7 @@
 title: "Flat Base"
 type: concept
 created: 2026-04-13
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, indicators, breakout]
 domain: [indicators]
@@ -70,6 +70,33 @@ Traders using flat bases as entry signals look for stocks with strong [[relative
 - **Failed breakouts (the "undercut")**: where the stock breaks down through the bottom of the range on heavy volume -- a bearish signal indicating that institutions have begun distributing. Traders should exit immediately to preserve capital.
 - **Whipsaws in choppy markets**: flat bases break out and fail repeatedly when the broad market is rangebound; the [[volatility-contraction-pattern]] (VCP) framework and a market-health filter help screen these out.
 - **Earnings landmines**: a base resolving right into an earnings date is a binary bet -- the breakout can be reversed by a post-report gap.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h ticker stats
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — daily OHLCV for base depth/duration measurement
+- `GET /api/v1/market-data/volume-history?days=90` — volume dry-up and breakout confirmation
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this pattern directly:
+
+- **Detect** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500`, test the checklist mechanically: prior advance of 20-30%+, range depth ≤ ~15%, at least five weeks sideways, pivot = intra-base high
+- **Confirm** — require breakout volume well above average via `GET /api/v1/market-data/volume-history`, and compute relative strength as the coin/BTC ratio from two kline series
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers several cycles of base breakouts and failures
+- **Tip** — O'Neil's "confirmed market uptrend" filter maps cleanly to the regime read from `GET /api/v1/regimes/current`; flat-base breakouts against a risk-off regime fail disproportionately
 
 ## Related
 

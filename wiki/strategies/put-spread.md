@@ -2,7 +2,7 @@
 title: "Put Spread"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, put-spread, debit-spread, bearish, defined-risk, ethereum]
 aliases: ["Vertical Put Spread", "Bear Put Spread", "Long Put Spread", "Put Debit Spread", "Crypto Put Spread", "Deribit Put Spread"]
@@ -126,6 +126,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can time and manage the spread with the endpoints this section already cites:
+
+- **Entry timing** — `GET /api/v1/volatility/regime` reading `compressed` is the buy-cheap-vol gate for a debit spread; `GET /api/v1/volatility/regime/{symbol}` (60-day history) finds how rare the current low-vol window is
+- **Downside map** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/liquidations` locate the liquidation fuel below spot that would carry price toward strike B
+- **Regime gate** — `GET /api/v1/quant/market`: rising strong_trend_bear / vol_spike probabilities support the bearish thesis; a strong_trend_bull print argues to stand down
+- **Backtest** — test the bounded-down-move thesis on `GET /api/v1/backtesting/klines` (ETHUSDT/BTCUSDT 1h/4h/1d back to 2017-08); strike-level IV and skew history are Deribit's, so P&L replays of the option legs need Deribit data
+- **Tips** — poll the funding endpoint after a selloff: fattened put skew makes *new* spreads better financed, but marks existing long legs richer — a natural profit-take check
 
 ## Related
 

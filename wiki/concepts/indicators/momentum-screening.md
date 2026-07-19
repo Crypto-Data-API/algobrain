@@ -2,7 +2,7 @@
 title: "Momentum Screening"
 type: concept
 created: 2026-04-10
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [momentum, technical-analysis, quantitative]
 aliases: ["momentum screening", "momentum screen", "momentum stock screen", "Momentum Screening"]
@@ -80,6 +80,36 @@ Jegadeesh and Titman (1993) documented that momentum strategies perform better w
 - **Crowding and factor decay.** Momentum is a well-known, heavily-traded factor; crowded positioning can sharpen reversals and compress forward returns.
 - **Liquidity and cost drag.** High turnover plus illiquid small caps can quietly erase the paper edge. Constraining the universe (e.g., minimum $500M market cap, minimum 500K average daily volume) and modeling realistic [[transaction-costs]] is essential.
 - **Survivorship and look-ahead bias in backtests.** Earnings-revision and fundamental data must be point-in-time; using restated or as-reported figures inflates historical results.
+
+## Getting the Data (CryptoDataAPI)
+
+The same screen structure ports directly to the crypto universe (relative strength vs BTC replaces relative strength vs the S&P; there are no earnings revisions):
+
+**Live data:**
+- `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call, the universe snapshot for trailing-return ranking
+- `GET /api/v1/market-data/short-term-price` — pre-computed short-term momentum metrics
+- `GET /api/v1/market-data/volume-history?days=90` — volume trend with buy ratio for the confirmation dimension
+- `GET /api/v1/indicators/technical` — universe-wide SMA/BB/RSI structure state (Pro+) as the trend filter
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — kline archive (Binance spot 1h/4h/1d back to 2017-08) for computing 6/12-month lookback returns and backtesting the composite score
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/short-term-price"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Screen** — one `GET /api/v1/daily/prices` call replaces thousands of per-symbol requests; rank the universe by trailing return, compute relative strength vs BTC, and apply a volume floor from the same payload
+- **Trend filter** — `GET /api/v1/indicators/technical` (Pro+) supplies the price-vs-MA structure state for every asset in one call, the crypto equivalent of the 200-day-MA gate
+- **Backtest** — rebuild historical ranks from `GET /api/v1/backtesting/klines` and, for a survivorship-free universe, take the tradeable roster per date from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) rather than today's listing set
+- **Tip** — the skip-month effect matters in crypto too: short-term reversal is violent in altcoins, so ranking on months 2–12 while excluding the most recent 1–4 weeks usually screens better than raw trailing return
 
 ## Related
 

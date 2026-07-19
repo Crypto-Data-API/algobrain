@@ -2,7 +2,7 @@
 title: "Curve Gauge Wars Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, defi, crypto, ethereum]
 aliases: ["Curve Wars", "veCRV Bribe Arb", "vlCVX Bribe Trade", "Bribe Yield Arb"]
@@ -252,6 +252,38 @@ See [[failure-modes]] for the general taxonomy. The dominant risks for this trad
 - DefiLlama Convex/Curve dashboards
 - llama.airforce analytics
 - General market knowledge; no specific wiki source ingested yet.
+
+## Getting the Data (CryptoDataAPI)
+
+The core signal — bribe APR, gauge weights, vlCVX supply — is off-API (Votium / Hidden Hand / Curve `GaugeController`). CryptoDataAPI serves the CVX/CRV principal marks, the perp-hedge sleeve, and the stacked-contract tail overlay.
+
+**Live data:**
+- `GET /api/v1/dex/token/ethereum/{address}` — CVX / CRV price + top pools (mark the locked principal and the LP legs)
+- `GET /api/v1/derivatives/funding-rates` + `GET /api/v1/derivatives/open-interest` — funding to run and cost the short-CVX-perp hedge that isolates bribe yield
+- `GET /api/v1/security/regime` + `GET /api/v1/security/regime/score` — the stacked Curve+Convex+Votium+pool contract tail
+- `GET /api/v1/dex/security/{chain}/{address}` — screening for the bribed pool / wrapper
+
+**Historical data:**
+- `GET /api/v1/backtesting/funding` — CVX-perp hedge carry
+- `GET /api/v1/backtesting/klines` — CVX/CRV OHLCV for principal-drawdown studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/token/ethereum/0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] manages the hedge and tail; the bribe economics stay off-API:
+
+- **Principal marks (off-API core)** — bribe APR, gauge weights, and vlCVX supply come from Votium / Hidden Hand / Curve `GaugeController`; CryptoDataAPI does not serve them.
+- **Hedge sleeve** — `GET /api/v1/derivatives/funding-rates` + `/derivatives/open-interest` run and cost the short-CVX-perp hedge that isolates bribe yield from CVX drawdown (the 2022 lesson); `GET /api/v1/dex/token/ethereum/{address}` marks the CVX/CRV principal.
+- **Tail gate** — `GET /api/v1/security/regime/score`: de-risk when Security Stress spikes, since a single bug anywhere in the Curve+Convex+bribe-market+pool stack zeros the position.
+- **Backtest** — `GET /api/v1/backtesting/funding` (hedge carry) + `GET /api/v1/backtesting/klines` (CVX/CRV drawdown).
+- **Tip** — the yield leg can beat the benchmark while the principal leg destroys it; always mark total return including the CVX drawdown.
 
 ## Related
 

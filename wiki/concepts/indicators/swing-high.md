@@ -2,7 +2,7 @@
 title: "Swing High"
 type: concept
 created: 2026-04-15
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, price-action]
 aliases: ["Swing High", "Pivot High", "Local High"]
@@ -84,6 +84,28 @@ Because confirmation lags by `n` bars, traders distinguish a *provisional* swing
 - **Equal/cluster highs.** When several bars share near-identical highs (a "liquidity pool"), price often sweeps just above before reversing — placing a stop *exactly* at the swing high invites [[false-signals|stop-hunting]] / [[whipsaw]]. A small buffer helps.
 - **Subjectivity creep.** Eyeballing swings without a fixed rule leads to inconsistent levels; a defined `n` (or ZigZag) keeps it objective.
 - **Wick vs close ambiguity.** A long upper wick can register a high-based swing that a close-based definition ignores; decide which you use and stay consistent.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500` — OHLC bars for fractal pivot detection
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for structure studies across full cycles
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — the fractal rule above translates directly to code over `GET /api/v1/market-data/klines` highs: `high[i] > high[i±k] for k in 1..n`; emit the pivot only after `n` bars have closed past it
+- **Backtest** — break-of-structure entries (close above the last confirmed swing high) replay against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); confirm pivots point-in-time, never on the full series
+- **Tip** — respect the confirmation lag in live loops: a provisional pivot detected mid-window must be re-checked on each new bar, and stop orders belong a buffer beyond clustered equal highs, which crypto sweeps aggressively
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Gut Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, guts, gut-spread, ITM, volatility, straddle-variant, advanced]
 aliases: ["Long Guts", "Short Guts", "Guts", "Gut Strangle"]
@@ -121,6 +121,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — direction of the guts follows `GET /api/v1/volatility/regime`: `compressed` favors buying the ITM pair, elevated/`vol_shock` favors the short guts; close the loop with realized vol computed from `GET /api/v1/market-data/klines`
+- **Regime gate** — `GET /api/v1/quant/market`: `squeeze`/`vol_spike` probabilities support long guts, `range_low_vol` supports the short side — same gate as the equivalent strangle
+- **Backtest** — band-vs-close outcomes on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), with entry vol states pinned via `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — a guts parks far more capital than the payoff-equivalent strangle: have the agent price both and decide on liquidity via `/api/v1/market-intelligence/options` OI, since deep-ITM crypto strikes are often near-quoteless.
 
 ## Related
 

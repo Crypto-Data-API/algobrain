@@ -2,7 +2,7 @@
 title: "Short Strangle"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, short-strangle, premium-selling, volatility, neutral, derivatives]
 aliases: ["Crypto Short Strangle", "BTC Short Strangle", "Selling the Strangle", "OTM Premium Selling"]
@@ -141,6 +141,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the short-strangle loop end-to-end (DVOL and the legs stay on Deribit / [[greeks-live]]):
+
+- **Entry screen** — `GET /api/v1/volatility/regime` — sell only in `expanding`/`normal`; compare realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` against DVOL for the richness check.
+- **Wing placement** — `GET /api/v1/market-intelligence/options` (OI walls pin monthlies — useful strike anchors) + `GET /api/v1/derivatives/funding-rates?coin=BTC` to weight the short toward the overbid wing.
+- **Catalyst gate** — `GET /api/v1/event/calendar` — never carry both wings across a dated catalyst; `GET /api/v1/quant/gex` says whether dealers will dampen or amplify the tape.
+- **Kill switch** — `GET /api/v1/volatility/regime/score` > 75 or a `GET /api/v1/market-intelligence/liquidations` cascade = flatten or convert to the [[iron-condor]]; automate the poll.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for strike-breach frequency at 15-25-delta-equivalent distances; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) keeps the regime filter point-in-time.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: On-Balance Volume (OBV)
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [obv, indicators, volume]
 aliases: [OBV, on-balance-volume, "On Balance Volume"]
@@ -98,6 +98,31 @@ OBV is a key component of the professional **Trend + Momentum + Volatility + Vol
 ## About the Creator
 
 [[joseph-granville|Joseph Granville]] created OBV in 1963, making it one of the earliest indicators to formally incorporate volume into technical analysis. His core insight — that volume precedes price — has been validated across decades of market data (Source: [[2026-04-20-comprehensive-guide-technical-trading-indicators]]).
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — close and volume per bar, the only two inputs OBV needs
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=500` — the same computation on Hyperliquid perps
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume with buy ratio as an independent read on flow direction
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for OBV divergence and confirmation backtests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — running sum over `GET /api/v1/market-data/klines` bars: add volume when close > prior close, subtract when lower; only OBV's *slope* and its divergence from price matter, never the absolute level
+- **Signal** — flag price highs unconfirmed by OBV highs (distribution) and OBV breakouts that precede price breakouts — Granville's "volume precedes price" premise, testable directly
+- **Backtest** — replay over `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); because OBV is cumulative, always recompute from the start of the test window rather than splicing partial series with different origins
+- **Tip** — OBV counts every printed unit of volume equally, so wash-traded pairs corrupt it silently; restrict it to major pairs and sanity-check against the buy ratio in `GET /api/v1/market-data/volume-history` — OBV rising while the buy ratio falls is a data-quality red flag, not a signal
 
 ## Sources
 

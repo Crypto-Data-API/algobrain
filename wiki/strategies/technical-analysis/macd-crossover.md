@@ -158,6 +158,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-data]] and [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100` → compute MACD(12,26,9) on closed daily candles; the 200-EMA trend filter comes from the same series (or `GET /api/v1/market-data/btc-price-history`, which ships the 200D MA pre-computed for BTC).
+- **Funding filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` before every entry; skip shorts when funding > 0.1%/8h per the kill criteria.
+- **Regime gate** — `GET /api/v1/quant/market` — take crossovers only in `strong_trend_bull`/`strong_trend_bear`; stand down in `choppy_high_vol`, where whipsaws dominate.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for parameter sweeps; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states to avoid [[lookahead-bias]].
+- **Tips** — batch the universe via `GET /api/v1/quant/coins/risk` rather than looping per symbol; respect `insufficient_history` flags on recently listed perps before trusting a 26-period EMA.
+
 ## Related
 
 - [[rsi-divergence]] — oscillator-based momentum signal with divergence detection

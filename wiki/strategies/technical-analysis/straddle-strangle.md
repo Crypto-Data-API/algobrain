@@ -2,7 +2,7 @@
 title: "Straddle & Strangle"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, volatility, straddle, strangle, event-driven, long-volatility, derivatives]
 aliases: ["Long Straddle", "Long Strangle", "Buying Volatility", "Crypto Straddle", "BTC Straddle"]
@@ -151,6 +151,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the long-vol loop end-to-end (DVOL and the legs stay on Deribit / [[greeks-live]]):
+
+- **Setup screen** — `GET /api/v1/volatility/regime` — buy only from a `compressed` read; a low `GET /api/v1/volatility/regime/score` flags cheap convexity market-wide.
+- **Catalyst timing** — `GET /api/v1/event/calendar` — enter *before* the vol bid arrives for dated unlocks/macro/listings; the post-event IV crush is the modal loss path.
+- **Amplifier check** — `GET /api/v1/quant/gex` — short-gamma dealers amplify exactly the move a straddle wants; `GET /api/v1/derivatives/funding-rates?coin=BTC` leans strangle strike selection toward the cheap wing.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for realized-move distributions after compression windows versus breakeven widths; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) replays the compressed-regime flag point-in-time.
+- **Tips** — automate the IV-crush exit: catalyst passed + muted move = cut immediately rather than nursing theta and falling vega.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Darvas Box Theory"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[support-and-resistance]]", "[[volume]]"]
@@ -201,6 +201,17 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Endpoint catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Compute** — box detection is rolling-high/low logic on `GET /api/v1/market-data/klines` (spot) or `GET /api/v1/hyperliquid/candles` (perps); confirm box-top breaks on closed candles with above-average volume from the same bars
+- **Regime gate** — `GET /api/v1/quant/market`: stack boxes only while `strong_trend_bull` probability leads; per-asset, `GET /api/v1/indicators/signum-rgg` GREEN is the machine-readable version of Darvas's "buy strength" rule
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023) to test box thresholds and trail rules across cycles; hourly regimes from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) validate the bull-gate point-in-time
+- **Tips** — screen for fresh new-high candidates across the universe in one `/api/v1/indicators/technical` call; respect `new_listing` flags — a coin with 30 days of history cannot form a valid box sequence.
 
 ## Key Takeaways
 

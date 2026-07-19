@@ -170,3 +170,15 @@ Crypto alt-data alpha is limited by the liquidity of the tokens being traded, no
 - `GET /api/v1/sentiment/macro` — macro sentiment composite
 
 Full catalog: [[cryptodataapi-on-chain]], [[cryptodataapi-sentiment]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/on-chain/whale-score/{symbol}` (accumulation score with historical timeseries) + `GET /api/v1/on-chain/exchange-flows/{symbol}` (1h–7d net-flow windows) — the two on-chain legs of the composite
+- **Confluence filter** — `GET /api/v1/sentiment/fear-greed` + `GET /api/v1/on-chain/exchange-flows/spike-alerts` (≥ $1M whale deposits to CEXs) — require 3+ confirming signals before sizing, per the rules above
+- **Regime gate** — `GET /api/v1/regimes/current` — down-weight bullish on-chain composites in Established Bear / Capitulation states
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots/{date}` replays the full daily payload (health, sentiment, flows) point-in-time since 2026-03-02; forward returns from `GET /api/v1/backtesting/klines` (Binance spot daily back to 2017-08); `GET /api/v1/market-intelligence/fear-greed-history` extends the sentiment leg further back
+- **Tips** — the `/on-chain/whales` top-holder endpoints currently return 503; use whale-score + spike-alerts instead. Poll the cached `GET /api/v1/daily` bundle hourly rather than hitting each signal endpoint per tick

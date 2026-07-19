@@ -359,6 +359,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [fear & greed](https://cryptodataapi.com/fear-greed) · [long-term regimes](https://cryptodataapi.com/regimes) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/sentiment/fear-greed` (extreme fear) diverging against `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/binance/long-short-ratio` (positioning already washed out) is the core two-leg read
+- **Structure filter** — trailing daily closes (`GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=12`) must print the higher-low before entry
+- **Regime gate** — `GET /api/v1/regimes/current`; halve size in bear-trend or shock labels
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` joined to `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) and daily klines back to 2017-08; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time sentiment/positioning alignment
+- **Tips** — this is a slow signal; polling the cached `GET /api/v1/daily` bundle hourly is sufficient and avoids burning rate limit on 8h-cadence data
+
 ## Related
 
 - [[contrarian-extremes]] — sentiment-extreme contrarian entry without positioning confirmation; this page's sentiment leg comes from that framework, with a derivative-positioning filter added

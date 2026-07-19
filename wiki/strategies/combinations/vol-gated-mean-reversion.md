@@ -371,6 +371,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — daily klines classify the vol regime (20-day realised vol) and 1h klines run the RSI oversold trigger
+- **Gate** — `GET /api/v1/derivatives/funding-rates?coin=BTC`, `GET /api/v1/derivatives/open-interest?coin=BTC` (flush vs build), and the long/short ratio separate HIGH-VOL-GOOD (flush — fade it) from HIGH-VOL-BAD (build — stand aside)
+- **Regime gate** — `GET /api/v1/regimes/current`; no reversion entries in `Structural_Shock`
+- **Backtest** — vol-regime replay on `GET /api/v1/backtesting/klines` (1d/1h back to 2017-08); the GOOD/BAD classification replays via `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) — before 2023 only the price leg is testable
+- **Tips** — the GOOD/BAD split is the edge; log the classification at every entry so live hit-rates per class can be compared against the backtest split
+
 ## Related
 
 - [[mean-reversion]] — the canonical mean-reversion primitive

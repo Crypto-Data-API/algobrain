@@ -2,7 +2,7 @@
 title: "Iron Butterfly"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, mean-reversion, bitcoin, ethereum]
 aliases: ["Iron Fly", "Ironfly", "Crypto Iron Butterfly", "ATM Iron Condor"]
@@ -135,6 +135,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — body on the `GET /api/v1/market-intelligence/options` max-pain strike; sell only when `GET /api/v1/volatility/regime` is elevated but not `vol_shock`, so the ATM straddle credit is rich without an expansion underway
+- **Regime gate** — `GET /api/v1/quant/market` `range_low_vol` probability plus long dealer gamma from `/api/v1/quant/gex` is the pin regime the fly monetises; either flipping is the exit cue
+- **Backtest** — expiry-week pin behavior from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); entry vol states from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) keep the timing test point-in-time
+- **Tips** — enforce the profit-take mechanically (25% of max): the ATM body means gamma losses arrive faster than for a condor, and a `/api/v1/market-intelligence/liquidations` cascade is the flatten-now trigger.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Point and Figure Charts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[support-and-resistance]]"]
@@ -199,6 +199,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Endpoint catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a P&F system end-to-end:
+
+- **Compute** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` (high/low or close construction) → build the X/O grid with percentage boxes; signal only on completed columns, never the forming one.
+- **Screen** — the same klines pulls feed P&F relative-strength charts (asset ÷ BTC) for the leadership screen; `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1d&limit=1000` covers the perp universe.
+- **Volume cross-check** — `GET /api/v1/market-data/volume-history` — P&F is volume-blind, so verify a Double/Triple Top broke on real participation before acting.
+- **Regime gate** — `GET /api/v1/quant/market` — demand Triple (not Double) breakouts in `range_low_vol`/`choppy_high_vol`; take Doubles with the 45-degree trend line in trend states.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for multi-cycle testing of box/reversal settings and count-target hit rates.
 
 ## Key Takeaways
 

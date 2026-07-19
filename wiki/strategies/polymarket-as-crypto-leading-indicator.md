@@ -2,7 +2,7 @@
 title: "Polymarket as a Crypto Leading Indicator"
 type: strategy
 created: 2026-05-14
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [crypto, behavioral-finance, arbitrage, event-driven, news]
 aliases: ["Polymarket Leading Indicator", "Prediction Market Crypto Signal", "Polymarket Crypto Alpha"]
@@ -223,6 +223,40 @@ These numbers are NOT backtest output. They are starting assumptions that must b
 - **Oracle risk** — PM "truth" depends on UMA resolution, which has historically had disputed outcomes.
 - **US geographic restrictions** — US-based traders cannot directly trade Polymarket and must obtain odds via API-only read access, complicating the operational workflow.
 - **No backtest exists** — every claim in the "Performance" section above is a prior, not a measurement.
+
+## Getting the Data (CryptoDataAPI)
+
+The Polymarket signal itself comes from [[polymarket-api]] (Gamma REST, CLOB WebSocket, subgraph) — [[cryptodataapi|CryptoDataAPI]] does not serve prediction-market odds. CryptoDataAPI serves the **crypto leg**: the catalyst calendar, the ETF-flow confirmation, and the market state for positioning and backtesting.
+
+**Live data:**
+- `GET /api/v1/event/calendar` — filterable forward catalysts up to 30 days out (macro prints, unlocks, depeg risk, with directional bias): the event windows this strategy trades into
+- `GET /api/v1/event/regime/score` — Event Risk composite 0-100 (baseline 0)
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flows: confirmation for the ETF-approval trade family
+- `GET /api/v1/quant/market` — HMM regime probabilities for sizing the crypto leg
+- `GET /api/v1/hyperliquid/prices` — execution context for the perp leg
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for measuring post-catalyst crypto returns
+- `GET /api/v1/backtesting/daily-snapshots` — full point-in-time market state per day since 2026-03-02
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the crypto side of the divergence trade:
+
+- **Signal (external)** — pull event-resolution odds via [[polymarket-api]] and the consensus proxy ([[cme-fedwatch]], polls); the divergence computation happens outside CryptoDataAPI
+- **Event window** — anchor entries and hard time-stops to `GET /api/v1/event/calendar` dates; `GET /api/v1/event/regime/score` spiking off its 0 baseline confirms the market has started pricing the catalyst
+- **Confirmation** — for ETF-approval trades, `GET /api/v1/market-intelligence/etf/{asset}/flows` shows whether the institutional bid the PM odds predict is actually arriving
+- **Regime gate** — `GET /api/v1/quant/market`: a vol_spike state widens the implied move used for stop placement (the 1× ATM-straddle rule)
+- **Backtest** — measure PM-odds-at-T-24h vs realized crypto returns over [T, T+resolution] using `GET /api/v1/backtesting/klines`; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so the crypto-side state is point-in-time — PM odds history must be reconstructed from [[polymarket-subgraph]]
+- **Tips** — this is a lumpy, catalyst-anchored book: schedule agent runs around the event calendar rather than polling continuously
 
 ## Sources
 

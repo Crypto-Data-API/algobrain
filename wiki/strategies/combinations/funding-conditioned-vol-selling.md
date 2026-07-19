@@ -292,6 +292,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Conditioning gate** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — the funding read that permits or blocks premium selling
+- **Vol kill-monitor** — `GET /api/v1/volatility/regime` + `GET /api/v1/volatility/regime/score` — a `vol_shock` label or spiking stress composite is the exit
+- **Dealer context** — `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/options` — GEX and max-pain at entry; `GET /api/v1/market-intelligence/liquidations` as the vol-shock early warning
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) reconstructs the conditioning gate; realized-vol outcomes from `GET /api/v1/backtesting/klines` (back to 2017-08); DVOL / options-surface history stays on Deribit
+- **Tips** — the gate exists to keep you out: treat any missing or stale funding print as "no entry", never as a default-pass
+
 ## Related
 
 - [[crypto-options-volatility-selling]] — the underlying vol-selling primitive; this page adds the funding conditioning layer on top

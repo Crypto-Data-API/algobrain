@@ -2,7 +2,7 @@
 title: "Smart Money Concepts"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, smart-money, market-microstructure, order-blocks, fair-value-gap, liquidity-sweep, methodology, technical-analysis]
 aliases: ["SMC", "Smart Money Concepts", "Institutional Order Flow", "SMC Trading"]
@@ -85,6 +85,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run an SMC playbook end-to-end:
+
+- **Structure** — `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=15m&limit=500` → mark BOS/MSS, order blocks, and FVGs on closed candles; higher-timeframe bias from a 4h/1d pull of the same endpoint.
+- **Liquidity map** — `GET /api/v1/market-intelligence/liquidations` — the literal liquidity pools SMC trades toward; `GET /api/v1/liquidity/depth/ETH` distinguishes a real order block from a thin, sweepable wick.
+- **Sweep grade** — `GET /api/v1/derivatives/funding-rates?coin=ETH` + `GET /api/v1/derivatives/open-interest?coin=ETH` — negative funding with elevated OI into the sweep = squeeze reversal; a funding blow-off with OI still building = continuation trap, skip.
+- **Regime gate** — `GET /api/v1/quant/market` — sweep-reversal entries get run over in `strong_trend_*` states; the framework wants structured range-to-trend conditions.
+- **Backtest** — `GET /api/v1/backtesting/klines` (1m klines only since 2026-03-30 — the honest window for 15m sweep mechanics; 1h back to 2017-08 for coarser structure) plus `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to base-rate the sweep→reversal claim rather than trusting back-marked examples.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Strangle"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, volatility, derivatives, swing-trading]
 aliases: ["Crypto Strangle", "Long Strangle", "BTC Strangle", "ETH Strangle"]
@@ -149,6 +149,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run either strangle variant end-to-end (DVOL and the legs stay on Deribit / [[greeks-live]]):
+
+- **Variant selector** — `GET /api/v1/volatility/regime`: `compressed` → buy the strangle; `expanding`/`normal` with rich DVOL → sell it (or the defined-risk [[iron-condor]]); `vol_shock` → long side only.
+- **Strike inputs** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (which wing the leveraged crowd overbid) + `GET /api/v1/market-intelligence/options` (OI walls near candidate strikes).
+- **Catalyst calendar** — `GET /api/v1/event/calendar` — buy before dated events, never sell across them.
+- **Kill switch (short side)** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` — automate the flatten trigger; the wing breach arrives on weekends.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) for band-escape frequency at candidate strike gaps; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime states.
 
 ## Related
 

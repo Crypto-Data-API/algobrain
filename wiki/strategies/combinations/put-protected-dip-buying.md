@@ -383,6 +383,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-on-chain]], [[cryptodataapi-market-intelligence]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — capitulation detection across `GET /api/v1/derivatives/funding-rates?coin=BTC` (sustained negative), `GET /api/v1/derivatives/open-interest?coin=BTC` (decline from 5d peak), and `GET /api/v1/on-chain/exchange-flows/spike-alerts` (whale deposits)
+- **Filter** — `GET /api/v1/market-intelligence/liquidations?coin=BTC` must show the cascade has cleared; `GET /api/v1/market-intelligence/dvol-history` sets the put-premium budget gate
+- **Regime gate** — `GET /api/v1/regimes/current`; defer while `Structural_Shock` persists
+- **Backtest** — post-capitulation recovery paths from `GET /api/v1/backtesting/klines` (1d back to 2017-08); the cascade-clear condition replays only since 2026-03-30 (`GET /api/v1/backtesting/liquidations`, Hyperliquid), so older backtests must proxy it from funding and OI alone
+- **Tips** — the protective put is priced on Deribit; re-check the DVOL percentile at fill time — premium budgets set at signal time go stale fast in post-panic tape
+
 ## Related
 
 - [[funding-flush-reversal]] — Method A entry trigger; defines the funding-flush confirmation gate used for the long leg

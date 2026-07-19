@@ -2,7 +2,7 @@
 title: "Ratio Calendar Spread"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Ratio Calendar Spread", "Asymmetric Calendar", "Unbalanced Calendar", "Ratio Time Spread", "Crypto Ratio Calendar"]
@@ -150,6 +150,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface, DVOL, and term structure come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can pick the ratio and manage the two phases:
+
+- **Tilt selection** — `GET /api/v1/volatility/regime`: `compressed` with expected expansion favours the long-heavy 1:2 build; `mean_reverting`/range states favour the short-heavy income build (small, per the crypto tail warning)
+- **Catalyst placement** — `GET /api/v1/event/calendar` (events up to 30 days out) finds the catalyst that must land *after* the near expiry and *before* the far one — the defining condition of the long-heavy trade
+- **Gap watch** — `GET /api/v1/market-intelligence/liquidations` + `GET /api/v1/quant/gex` are the early warning for the fast gap that breaks a short-heavy ratio before its slow far wing responds
+- **Backtest** — replay spot paths across near/far windows with `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08); the DVOL *term structure* that sets entry economics is Deribit data, so full P&L replays need the Deribit surface
+- **Tips** — re-check the vol regime at near-leg expiry before deciding the residual position's fate — the Greeks phase-flip documented above is where mis-hedges happen
 
 ## Related
 

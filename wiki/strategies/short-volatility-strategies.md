@@ -2,7 +2,7 @@
 title: "Short Volatility Strategies"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, volatility, derivatives, quantitative, risk-management, crypto, bitcoin, ethereum]
 aliases: ["Short Vol", "Short Volatility", "Net Short Options Strategies", "Crypto Short Vol"]
@@ -342,6 +342,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog on [[cryptodataapi]]; for the DVOL index/history and full surface use the Deribit API or [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can enforce the family's defining discipline — regime-conditional sizing — mechanically:
+
+- **Regime gate** — `GET /api/v1/volatility/regime` maps directly onto the Calm/Normal/Elevated/Stressed posture table above: full size in `normal`/`mean_reverting`, reduce in `expanding`, flatten in `vol_shock`
+- **Kill vector monitoring** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` as the automated DVOL-shock trigger; `GET /api/v1/quant/gex` shows whether dealers are short gamma (cascade-prone tape — the worst state to be short vega in)
+- **Skew-aware wing selection** — `GET /api/v1/derivatives/funding-rates?coin=BTC` reveals which wing the leveraged crowd overbid
+- **Regime-conditional backtest** — `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) lets an agent measure short-vol P&L *per regime state* — the discriminating test the Null Hypothesis section demands — with `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08) supplying the realized-vol leg
+- **Tips** — a full-cycle sample must include at least one shock (2020-03, LUNA, FTX, 2025-10-10 all sit inside the klines archive); a calm-regime-only backtest is exactly what the null predicts and proves nothing
 
 ## Sources
 

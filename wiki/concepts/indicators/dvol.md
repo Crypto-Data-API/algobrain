@@ -2,7 +2,7 @@
 title: "DVOL — Deribit Volatility Index"
 type: concept
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, options, volatility, indicators, derivatives, deribit, sentiment]
 aliases: ["DVOL", "Deribit Volatility Index", "Crypto VIX", "BTC DVOL", "ETH DVOL"]
@@ -54,6 +54,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 For the DVOL index/history and full IV surface, use the Deribit API (`/api/v2/public/get_volatility_index_data`) or Greeks.live. See [[cryptodataapi-regimes]] and [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work around this indicator directly (the DVOL print itself still comes from Deribit):
+
+- **Fetch** — pair the Deribit DVOL print with CDA context in two calls: `GET /api/v1/volatility/regime/score` (market-wide vol-stress composite) and `GET /api/v1/market-intelligence/options` (BTC options OI, volume, max pain)
+- **Compute** — derive the variance risk premium by subtracting realized vol (computed from `GET /api/v1/market-data/klines` closes) from DVOL
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supplies the realized-vol leg historically; the DVOL leg must be sourced from Deribit's own history endpoint
+- **Tip** — gate on DVOL percentile, not level, and cross-check `GET /api/v1/volatility/regime/{symbol}` before selling premium — agreement between the two regime reads cuts false "vol is rich" signals
 
 ## Trading applications
 

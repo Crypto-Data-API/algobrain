@@ -2,7 +2,7 @@
 title: "On-Chain Smart Money Tracking"
 type: strategy
 created: 2026-05-04
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [crypto, algorithmic, scalping]
 aliases: ["Smart Wallet Tracking", "On-Chain Copy Trading", "Wallet Alpha"]
@@ -268,6 +268,20 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchang
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Wallet discovery** — `GET /api/v1/hyperliquid/wallets/search` (performance-gated search of the top-trader pool) + `GET /api/v1/hyperliquid/top-traders` — the API-side answer to "which wallets are worth following" on Hyperliquid, where every position is public (catalog: [[cryptodataapi-hyperliquid-traders]])
+- **Signal** — `GET /api/v1/hyperliquid/wallet-signals` (entry/exit/size changes on tracked wallets) and `GET /api/v1/on-chain/exchange-flows/spike-alerts` (>= $1M CEX transfers) turn smart-money moves into actionable events
+- **Vetting** — `GET /api/v1/hyperliquid/trader-profile/{address}` + `GET /api/v1/hyperliquid/wallet-trades/{address}` audit win rate and trade history before a wallet joins the follow set — the survivorship-bias defence
+- **Regime gate** — `GET /api/v1/quant/market` — smart-money follows degrade in `choppy_high_vol` states where lag costs dominate the copied edge
+- **Backtest** — replay followed wallets via `wallet-trades/{address}` against `GET /api/v1/backtesting/klines`, and sample `GET /api/v1/daily/hl-traders` to build leaderboard-persistence history; Solana memecoin wallet tracking (GMGN/Nansen territory) has no CryptoDataAPI archive
+- **Tips** — auto-maintain the follow set with `POST /api/v1/hyperliquid/watchlist/auto`; re-vet on a schedule — copied wallets can start leaking signal deliberately to farm their followers
+- **Prompt library** — the "Whale Positioning Monitor" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) is a ready-made perp-side complement to on-chain smart-money tracking
 
 ## Related
 

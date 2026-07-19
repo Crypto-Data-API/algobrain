@@ -290,6 +290,17 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Vol override** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=2` — a large 15m BTC move forces HIGH density regardless of session
+- **Regime trigger** — `GET /api/v1/regimes/current` — `Structural_Shock` arms liquidation-MEV density
+- **Calibration** — hourly OHLCV by UTC session from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=8760`, extended by `GET /api/v1/backtesting/klines` (1h back to 2017-08)
+- **Tips** — CryptoDataAPI covers only the market-volatility half of this strategy: join session-density calibration to your own bundle-log timestamps (Flashbots relay data) for the payoff half
+
 ## Related
 
 - [[mev-strategies]] — the full MEV strategy taxonomy; this page is a scheduling overlay on those strategies

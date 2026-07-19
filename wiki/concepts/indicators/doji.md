@@ -2,7 +2,7 @@
 title: "Doji"
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Doji", "Doji Candle", "Doji Candlestick", "Gravestone Doji", "Dragonfly Doji", "Long-Legged Doji"]
@@ -91,6 +91,30 @@ The key distinction from a hammer or spinning top is the **absence of a real bod
 - Steve Nison, *Japanese Candlestick Charting Techniques* (1991) — the foundational Western reference on the doji and its variants.
 - Thomas Bulkowski, *Encyclopedia of Candlestick Charts* — statistical study of candlestick pattern reliability.
 - General market knowledge; the worked example above is illustrative, not from a specific ingested source.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2` — latest candles for a live doji check
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for pattern scans
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=2"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this pattern directly:
+
+- **Compute** — flag bars where |close − open| / (high − low) < ~0.1 in `GET /api/v1/market-data/klines` output, then classify the variant from wick geometry (dragonfly, gravestone, long-legged)
+- **Context gate** — only score dojis after an extended run or at a tested level; quantify "extended" as N consecutive closes in one direction before the doji
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) measures confirmation-candle follow-through rates by variant and context
+- **Tip** — 24/7 crypto daily bars are arbitrary UTC slices with no true session close, so weigh a daily doji more lightly than its equity equivalent and always require the next-candle confirmation, as the page insists
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Funding-Filtered Momentum"
 type: strategy
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-19
 status: good
 tags: [combinations, meta-strategy, momentum, funding-rate, perpetual-futures, behavioral-finance, quantitative, crypto]
 aliases: ["Funding-Gated Momentum", "Funding-Conscious Breakout", "Non-Consensus Trend Entry"]
@@ -301,6 +301,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Momentum leg** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — the breakout/momentum signal computation
+- **Funding filter** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — enter only while the crowd is not yet positioned (funding below the cap); `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` as the secondary crowding check
+- **Regime gate** — `GET /api/v1/regimes/current` — the regime kill from the rules above
+- **Backtest** — `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30) × `GET /api/v1/backtesting/klines` (4h back to 2017-08); older Binance funding via `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT&limit=500` paging
+- **Tips** — pair replays with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so the funding filter sees point-in-time values; batch multi-coin screens through `GET /api/v1/quant/coins/risk` instead of per-symbol loops
 
 ## Related
 

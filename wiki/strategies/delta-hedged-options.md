@@ -138,6 +138,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 ```
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Hedge carry** — `GET /api/v1/derivatives/funding-rates?coin=BTC` on every funding interval: the perp hedge's live P&L line; a funding flip on a net-long hedge can dwarf the vol premium being captured.
+- **Configuration choice** — `GET /api/v1/volatility/regime` (`compressed` favours long-gamma ahead of expansion; `normal`/`mean_reverting` with rich DVOL favours short-gamma) plus `GET /api/v1/quant/gex` for the dealer-flow environment the re-hedges will trade into (short-gamma dealers amplify realized vol — friendly to long gamma).
+- **Regime gate** — `GET /api/v1/quant/market`: flatten short-gamma when `vol_spike` probability jumps — the machine-readable DVOL-shock kill from the frontmatter criteria.
+- **Backtest** — realized-vol and hedge-path replay on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08; 1m bars only since 2026-03-30, so fine-grained hedge-band studies are limited to that window) plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05) for hedge carry. Option marks come from Deribit — no options archive on CDA.
+- **Tips** — batch per-coin risk via `GET /api/v1/quant/coins/risk` for multi-asset books; respect `insufficient_history` flags on newer perps before extending the book beyond BTC/ETH.
+
 ## Related
 
 - [[delta-hedging]] — the shared hedging mechanism and its math

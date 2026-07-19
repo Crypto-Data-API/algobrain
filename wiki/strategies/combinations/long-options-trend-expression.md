@@ -383,6 +383,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Trend gate** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=60` (50d EMA, new-20d-low check) + 4h bars for RSI
+- **Crowd confirm** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — 7-day average funding as trend-crowd confirmation
+- **IV-cheap filter** — `GET /api/v1/market-intelligence/dvol-history` — DVOL 52-week percentile; call pricing at specific strikes stays on Deribit
+- **Backtest** — trend-gate replay from `GET /api/v1/backtesting/klines` (1h/4h/1d back to 2017-08); IV-side history from the DVOL series; realized vol from 15m klines for the IV/RV comparison
+- **Tips** — the position pays theta while waiting: check the trend-failure exit (new 20d low) daily, and only roll strikes when both the trend and IV gates re-confirm
+
 ## Related
 
 - [[trend-following-cta]] — the futures-based trend primitive; this page replaces futures with long options under IV-cheap conditions

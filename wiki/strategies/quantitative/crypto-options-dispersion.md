@@ -2,7 +2,7 @@
 title: "Crypto Options Dispersion"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [quantitative, options, volatility, correlation, derivatives, crypto, bitcoin, ethereum]
 aliases: ["Crypto Dispersion Trade", "Implied Correlation Trade", "Crypto Correlation Dispersion", "BTC-ETH Dispersion", "Index vs Single-Name Vol"]
@@ -273,6 +273,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; per-asset vol regime on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the CDA-side half of this strategy end-to-end (implied vols stay on Deribit):
+
+- **Compute** — pull `GET /api/v1/market-data/klines?symbol=...&interval=1d` per name (BTC/ETH/SOL) and compute 5/30-day realized correlation — the RC leg of the IC−RC entry gate; `GET /api/v1/coins/top?limit=20` sets basket weights
+- **Regime gate** — `GET /api/v1/volatility/regime/score` plus `GET /api/v1/market-intelligence/liquidations` as the correlation-spike early warning; automate the flatten trigger on 5-day realized correlation ≥ 0.95
+- **Hedge legs** — `GET /api/v1/derivatives/funding-rates?coin=SOL` per name to budget the perp delta-hedge carry on each leg separately
+- **Backtest** — `GET /api/v1/backtesting/klines` gives multi-asset Binance spot 1h/4h/1d back to 2017-08 for realized-correlation regime studies (which regimes deliver dispersion vs correlation-pinning); implied-correlation history must come from Deribit
+- **Tips** — `GET /api/v1/volatility/regime` classifies every leg's vol state in one batched call; `?format=markdown` keeps the multi-leg context compact in the agent's window
 
 ## Related
 

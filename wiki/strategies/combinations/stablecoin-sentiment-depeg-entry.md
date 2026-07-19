@@ -315,6 +315,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can arm this trade end-to-end (execution needs external venue feeds):
+
+- **Gate** — `GET /api/v1/sentiment/fear-greed` at or below 15 for 48h plus `GET /api/v1/regimes/current` in a shock label are the panic pre-conditions
+- **Filter** — `GET /api/v1/volatility/dvol?coin=BTC` above 80 corroborates systemic panic; `GET /api/v1/on-chain/exchange-flows/USDC` flags redemption pressure building
+- **Signal** — the depeg price itself comes from venue tickers (Binance/Coinbase REST, no CDA endpoint); the agent arms on CDA panic gates and executes on external price feeds
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` aligned with known depeg events (see [[stablecoin-depeg-history]]) calibrates the threshold; `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) preserves point-in-time sentiment for future events
+- **Tips** — depegs resolve in hours; pre-authorize order routes before the event, because a depeg hitting during rate-limit exhaustion is an unrecoverable miss
+
 ## Related
 
 - [[stablecoin-depeg-profit-capture]] — the full multi-method depeg execution toolkit; composable with this sentiment-entry gate

@@ -337,6 +337,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **IV gate** — `GET /api/v1/market-intelligence/dvol-history` — current IV vs the 30-day DVOL average: the "IV not yet moved" entry condition
+- **Catalyst feed** — `GET /api/v1/event/calendar?days=30` + `GET /api/v1/event/regime/score` — candidate catalysts with directional bias to buy vol into
+- **Regime gate** — `GET /api/v1/regimes/current` — no entries in `Structural_Shock` (vol has already repriced)
+- **Backtest** — replay the IV gate across past catalysts with the same DVOL series; realized-vol outcomes from `GET /api/v1/backtesting/klines` (daily back to 2017-08); straddle-level pricing history stays on Deribit
+- **Tips** — cheapness is relative: score IV against both the 30d DVOL average and realized vol computed from klines before paying for the straddle
+
 ## Related
 
 - [[funding-conditioned-vol-selling]] — the structural counterpart: sells vol when leverage-crowd demand inflates IV; this page buys vol when event-calendar under-pricing deflates it

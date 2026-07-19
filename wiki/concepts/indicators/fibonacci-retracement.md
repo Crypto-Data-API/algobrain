@@ -2,7 +2,7 @@
 title: "Fibonacci Retracement"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators]
 aliases: ["Fibonacci Levels", "Fib Retracement", "Fibonacci", "Fibonacci Retracements", "Fib Retracements", "Fib Levels"]
@@ -98,6 +98,30 @@ When multiple Fibonacci retracements from different swings converge at the same 
 - **No predictive power in isolation** -- Fibonacci levels are best used as a framework for identifying zones, not as precise predictive levels
 - **Self-fulfilling prophecy** -- some of the tool's effectiveness comes from widespread use rather than mathematical inevitability
 - **Cherry-picking** -- with five retracement levels, price will often react at one of them by chance, creating an illusion of reliability. Always require confluence.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=BTCUSDT` — current price versus retracement levels
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500` — OHLCV for swing detection and level placement
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=500"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this tool directly:
+
+- **Compute** — detect the impulse swing (low to high) in `GET /api/v1/market-data/klines` output and lay the 23.6/38.2/50/61.8/78.6% levels across it
+- **Confluence** — cross-reference each level against moving averages computed from the same series and prior S/R pivots; only confluence-backed levels earn entries, per this page's guidance
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports bounce-rate studies per level — control against random levels, since five lines will catch *something* by chance
+- **Tip** — codify swing selection (pivot lookback, minimum swing %) so backtest and live agree; subjective swing choice is the tool's greatest weakness
 
 ## Related
 

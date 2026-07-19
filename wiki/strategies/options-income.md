@@ -331,6 +331,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry gate** — `GET /api/v1/volatility/regime` must read `normal` or `mean_reverting` (never `vol_shock` or `expanding`) before opening condors/strangles; `GET /api/v1/market-intelligence/options` supplies the OI walls and [[max-pain]] strike for wing placement
+- **Kill switch** — poll `GET /api/v1/volatility/regime/score` plus `GET /api/v1/market-intelligence/liquidations` every cycle; a score surge with a liquidation burst is the machine-readable proxy for the "DVOL +50% in a session → flatten" rule
+- **Skew read** — `GET /api/v1/derivatives/funding-rates?coin=BTC`; richly positive funding flags the overbid call wing to lean the short toward
+- **Backtest** — compute realized vol from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) and replay entries against point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (full payload since 2026-03-02) to avoid lookahead bias; DVOL history itself must come from Deribit
+- **Tips** — append `?format=markdown` for cleaner context windows; respect `insufficient_history` flags on per-asset vol-regime reads before trusting a gate signal
+
 ## Sources
 
 - [[crypto-options-volatility-selling]] — the wiki's canonical treatment of the crypto variance risk premium and its kill-switch risk framework.

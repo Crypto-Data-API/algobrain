@@ -2,7 +2,7 @@
 title: "Volume Profile"
 type: concept
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, market-microstructure]
 aliases: ["Volume at Price", "Market Profile Volume"]
@@ -82,6 +82,32 @@ Volume Profile is most powerful when combined with:
 - [[order-flow]] -- granular trade-by-trade data within the profile structure
 - [[support-and-resistance]] -- traditional S/R levels that coincide with HVNs are particularly strong
 - [[candlestick-patterns]] -- price action at HVN levels provides entry timing
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=1000` — fine-grained OHLCV bars to bin volume into price buckets
+- `GET /api/v1/hyperliquid/l2-book?coin=BTC` — current resting-order depth by price (complements the traded-volume profile with live order-book structure)
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for composite profiles over long ranges
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1h&limit=1000"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — approximate volume-at-price by bucketing each kline's volume across its high-low range (or assigning it to the bar midpoint): fine intervals from `GET /api/v1/market-data/klines` yield POC, VAH/VAL, and HVN/LVN estimates without tick data
+- **Resolution** — 1m klines exist in `GET /api/v1/backtesting/klines` only since 2026-03-30; profiles for earlier periods must build from 1h bars, which coarsens node boundaries
+- **Backtest** — replay Value-Area rotation and LVN-breakout rules against the same archive (Binance spot 1h/4h/1d back to 2017-08), rebuilding the prior session's profile per test day
+- **Tip** — cross-check a klines-built HVN against `GET /api/v1/hyperliquid/l2-book` depth: a historical high-volume node reinforced by current resting liquidity is a materially stronger level than either signal alone
 
 ## Related
 

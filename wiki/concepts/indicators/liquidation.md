@@ -2,7 +2,7 @@
 title: "Liquidation"
 type: concept
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 confidence: medium
 tags: [derivatives, risk-management, liquidation, leverage]
@@ -133,6 +133,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [BTC cycle](https://cryptodataapi.com/bitcoin-cycle-indicators)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — `GET /api/v1/market-intelligence/liquidations` for cross-exchange forced-flow totals (exposed as the `get_liquidations` MCP tool); `GET /api/v1/market-intelligence/liquidations/by-exchange` splits BTC liquidations by venue over a 4h window
+- **Signal** — long/short liquidation imbalance spikes mark cascade events; pair with `GET /api/v1/derivatives/binance/open-interest` to confirm the OI flush that typically ends a cascade
+- **Backtest** — `GET /api/v1/backtesting/liquidations` — Hyperliquid perps only, per-symbol long/short flow, and only since 2026-03-30; no exchange serves older liquidation history, so the archive grows forward from that date
+- **Tip** — liquidations are a *reactive* series (they print after the move); for anticipatory work, map crowding beforehand with OI plus funding, then use the liquidation prints to time post-cascade mean-reversion entries
 
 ## Related
 

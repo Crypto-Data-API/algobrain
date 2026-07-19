@@ -2,7 +2,7 @@
 title: "CryptoDataAPI"
 type: source
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [data-provider, crypto, api, derivatives, on-chain, market-regime, hyperliquid, backtesting, sentiment]
 aliases: ["CryptoDataApi", "Crypto Data API", "cryptodataapi.com", "CDA"]
@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://cryptodataapi.com"
 source_author: "CryptoDataAPI"
 confidence: high
-related: ["[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
+related: ["[[cryptodataapi-mcp]]", "[[cryptodataapi-market-data]]", "[[cryptodataapi-derivatives]]", "[[cryptodataapi-hyperliquid]]", "[[cryptodataapi-hyperliquid-traders]]", "[[cryptodataapi-regimes]]", "[[cryptodataapi-market-intelligence]]", "[[cryptodataapi-on-chain]]", "[[cryptodataapi-sentiment]]", "[[cryptodataapi-market-health]]", "[[cryptodataapi-indicators]]", "[[cryptodataapi-dex]]", "[[cryptodataapi-coins]]", "[[cryptodataapi-strategy-baskets]]", "[[cryptodataapi-backtesting]]", "[[cryptodataapi-nft]]", "[[coinglass]]", "[[glassnode]]", "[[hyperliquid-api-and-sdk]]", "[[data-sources-overview]]"]
 ---
 
 CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the **canonical data layer for this wiki**: a single REST API with 190+ endpoints spanning live crypto market data, derivatives positioning, Hyperliquid perp and trader intelligence, multi-family market-regime classification, on-chain flows, sentiment, DEX/memecoin screening, NFTs, and a point-in-time backtesting archive going back to 2020. Where a wiki page describes data an endpoint serves, the page carries a **"Getting the Data (CryptoDataAPI)"** section with the live and historical access patterns.
@@ -19,7 +19,9 @@ CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the
 
 - **Base URL**: `https://cryptodataapi.com`
 - **Auth**: `X-API-Key` header on every request (create a key via `POST /api/v1/auth/keys`; rotate via `POST /api/v1/auth/keys/rotate`)
-- **Docs**: https://cryptodataapi.com/api/docs
+- **Docs**: https://cryptodataapi.com/api/docs · OpenAPI JSON: https://cryptodataapi.com/api · changelog: https://cryptodataapi.com/changelog · status: https://cryptodataapi.com/status
+- **MCP server**: hosted at `https://cryptodataapi.com/mcp` — AI agents connect via [[cryptodataapi-mcp]] (setup, free keys, agent loop, prompt library, live dashboards, backtest data availability)
+- **Site surfaces**: live dashboards for every major data family (funding, OI, liquidations, whales, GEX, order books, regimes, market health, ETF flows, cycle indicators), a [50 meta-strategy catalog](https://cryptodataapi.com/trading-strategies), and a [14-prompt AI library](https://cryptodataapi.com/prompts) — wiki data sections deep-link the relevant views per page
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=BTC"
@@ -52,6 +54,7 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 | Strategy Baskets | [[cryptodataapi-strategy-baskets]] | 50 meta-baskets across 6 thematic groups |
 | Backtesting | [[cryptodataapi-backtesting]] | Historical klines/funding/liquidations, point-in-time daily snapshots, Parquet archives since 2020 |
 | NFTs | [[cryptodataapi-nft]] | Market overview, collections, volume, correlations |
+| MCP / AI Agents | [[cryptodataapi-mcp]] | Hosted MCP server, agent workflow loop, x402 payments, backtest data availability |
 
 ## Why it is the wiki's canonical layer
 

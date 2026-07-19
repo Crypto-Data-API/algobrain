@@ -2,7 +2,7 @@
 title: "Session Overlap Momentum"
 type: strategy
 created: 2026-05-16
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [crypto, quantitative, day-trading, derivatives, market-microstructure, mean-reversion]
 aliases: ["LNY Overlap Fade", "Asia-Range-Break Fade", "Session Breakout Fade"]
@@ -295,6 +295,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — build the 00:00-07:00 UTC Asia range and ATR from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1m&limit=1000` (~16h of 1m bars per call — enough for the full session cycle), then watch the 08:00-10:00 UTC window for the failed-breakout trigger
+- **Funding filter** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT`: skip the short if funding is negative at entry (the carry flips from earner to payer — a frontmatter kill condition)
+- **Depth check** — `GET /api/v1/liquidity/depth` to confirm the late-Asia book is actually thin (the depth gradient *is* the edge; abort if late-Asia depth is anomalously deep)
+- **Backtest** — the strategy needs minute bars: `GET /api/v1/backtesting/klines` serves 1m only since 2026-03-30 (grows forward), so full-resolution session backtests are confined to that window; 1h bars back to 2017-08 support only coarse range statistics. `GET /api/v1/backtesting/funding` (Binance daily since 2026-03-30, HL hourly since 2023-05) replays the funding-stamp carry
+- **Tips** — keep every timestamp in UTC end-to-end; log the 16:00 UTC funding stamp separately per trade, since strategies that ignore the funding term overstate P&L by exactly that amount every stamp
 
 ## Related
 

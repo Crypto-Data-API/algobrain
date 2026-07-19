@@ -2,7 +2,7 @@
 title: "London Breakout Strategy (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, session-trading, volatility-breakout, breakout, intraday, technical-analysis, asia-session, london-open]
 aliases: ["London Breakout", "Crypto London Breakout", "Asia Range Breakout", "Session Breakout", "Crypto Session Breakout"]
@@ -223,6 +223,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Full market-data catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [order-book depth](https://cryptodataapi.com/quant-order-books)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=15m&limit=500` to mark the 00:00-07:00 UTC Asia range and detect the London/US-open break on closed 15m candles.
+- **Break quality** — `GET /api/v1/derivatives/open-interest?coin=BTC` + `GET /api/v1/derivatives/funding-rates?coin=BTC` at the trigger: rising OI with calm funding = fresh directional break; flat OI plus a funding spike = sweep, cut conviction or skip.
+- **Regime gate** — `GET /api/v1/volatility/regime` — trade only breaks out of a `compressed` state; skip `vol_shock` days where the expansion has already fired.
+- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h back to 2017-08 for hour-of-day seasonality (London vs US window drift); true 15m-range replays only since 2026-03-30 (1m klines). `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) scores sweep frequency at range edges.
+- **Tips** — the windows are UTC-fixed, so a once-per-day range-capture job at ~06:55 UTC suffices; append `?format=markdown` for cleaner context when reasoning over the range-size filter.
 
 ## Related
 

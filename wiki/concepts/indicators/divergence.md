@@ -2,7 +2,7 @@
 title: Divergence
 type: concept
 created: 2026-04-06
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [technical-analysis, indicators, momentum]
 aliases: ["bullish divergence", "bearish divergence", "hidden divergence", "regular divergence"]
@@ -91,6 +91,33 @@ The same two-pivot logic applies to many non-price series. Traders watch for div
 - Murphy, John J. *Technical Analysis of the Financial Markets.* New York Institute of Finance, 1999.
 - Pring, Martin J. *Technical Analysis Explained.* McGraw-Hill, 2014.
 - Elder, Alexander. *Trading for a Living.* Wiley, 1993.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/technical` — SMA/BB/RSI price-structure state across assets (the RSI leg of oscillator divergence)
+- `GET /api/v1/indicators/technical/{symbol}` — per-asset detail + 60d history
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` — OHLCV for computing price pivots and oscillators
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/technical/BTC"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [technical structure](https://cryptodataapi.com/technical-structure)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this signal directly:
+
+- **Compute** — pull `GET /api/v1/market-data/klines`, compute the oscillator (RSI/MACD/CCI), detect price and indicator swing pivots, and compare the two slopes programmatically
+- **Live state** — the RSI leg comes served in `GET /api/v1/indicators/technical/{symbol}` with a 60-day history — enough to check recent pivot pairs without recomputing
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports failure-rate studies: measure how often divergences resolve by the oscillator catching up rather than price reversing
+- **Tip** — encode the pivot definition (lookback, minimum swing size) explicitly; divergence is notoriously subjective, and an agent that fixes the definition can measure the true hit rate humans hand-wave
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Stablecoin Depeg Profit Capture Playbook"
 type: strategy
 created: 2026-04-28
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, mean-reversion, leverage, risk-management]
 aliases: ["Depeg Profit Tactics", "Stable Depeg Money-Making", "Maximizing Depeg P&L"]
@@ -592,6 +592,40 @@ Depegs have recurred 2-5x per year since 2018 across fiat-backed, crypto-collate
 - Curve Finance 3pool composition history
 - Galaxy Research, "USDC's Fall Below $1 Sends Ripples Across DeFi" (oracle behavior, Compound v2 hardcoded price, ~$0.88 low)
 - Verified via Perplexity (sonar), 2026-06-10: Chainlink USDC/USD feed tracked the depeg (did not pin at $1.00); Compound v2 hardcoded $1.00; USDC low ~$0.88 over the Mar 11-13 weekend; no evidence of direct Deribit USDC options in 2023. Citation: https://www.galaxy.com/insights/research/usdcs-fall-below-usd1-sends-ripples-across-defi
+
+## Getting the Data (CryptoDataAPI)
+
+Redemption-channel status, PSM capacity, and Curve pool composition are issuer/on-chain reads; [[cryptodataapi|CryptoDataAPI]] covers the depeg detection trigger, per-venue peg prices, the funding/OI context for the short legs, and the stablecoin-sector history.
+
+**Live data:**
+- `GET /api/v1/security/regime` — recent depegs + Security Stress score (25% depeg-weighted; the always-on detection layer)
+- `GET /api/v1/security/events` — filterable recent depeg/hack events (10d lookback)
+- `GET /api/v1/dex/token/{chain}/{address}` — per-pool stable price (Curve 3pool-style peg deviation reads)
+- `GET /api/v1/derivatives/funding-rates?coin=<COIN>` — short-leg funding for the overshoot short (Method 6) and sUSDe mechanism context
+- `GET /api/v1/derivatives/open-interest?coin=<COIN>` — confirms overshoot flow is real, not a print artifact
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/stablecoin-history` — stablecoin market-cap timeseries (sector-level flight-to/from-stables context)
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state around past depeg events (since 2026-03-02)
+- `GET /api/v1/backtesting/klines` — OHLCV archive for depeg event studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/security/regime"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-regimes]], [[cryptodataapi-derivatives]], [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the monitoring loop and several capture legs (redemption arb still needs pre-built issuer/KYB access):
+
+- **Trigger** — poll `GET /api/v1/security/regime/score` hourly in quiet markets, then per-minute `GET /api/v1/dex/token/{chain}/{address}` on the watched stables once stress rises; the >30 bp deviation on deep venues is the playbook trigger.
+- **Mechanism gate support** — `GET /api/v1/security/events` classifies whether the depeg coincides with a hack (contagion-sympathy vs direct exposure); for synthetics like sUSDe, `GET /api/v1/derivatives/funding-rates` shows whether the funding-harvest backing is inverting (mechanism break = do not trade).
+- **Short legs (Method 6)** — `GET /api/v1/derivatives/funding-rates` and `GET /api/v1/derivatives/open-interest` on the rich stable's venue check that the 10-30 bp overshoot capture clears carry costs before entry.
+- **Backtest** — replay the calibration set (USDC/SVB 2023 through Kelp sympathy 2026) against `GET /api/v1/backtesting/klines` and, for post-2026-03 events, point-in-time `/api/v1/backtesting/daily-snapshots`; use `GET /api/v1/market-intelligence/stablecoin-history` for sector-flow context per event.
+- **Tips** — mechanism classification is the whole game: no API feed replaces reading the issuer attestation, so wire the agent to require a human confirmation gate before deploying leveraged legs (Methods 4+), exactly as the Rules require.
 
 ## Related
 

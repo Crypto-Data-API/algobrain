@@ -2,7 +2,7 @@
 title: "Crypto Options Volatility Selling"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [quantitative, options, volatility, derivatives, crypto, bitcoin, ethereum, mean-reversion]
 aliases: ["Crypto Short Vol", "Deribit Vol Selling", "BTC/ETH Premium Selling", "Crypto VRP Harvesting", "DVOL Volatility Selling"]
@@ -295,6 +295,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the gating, hedging, and kill-switch layers of this book (DVOL and the surface stay on Deribit):
+
+- **Signal context** — `GET /api/v1/market-intelligence/options` for BTC options OI/volume/max-pain; compute the RV side of the IV−RV gate from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90`
+- **Skew read** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (richly positive funding → call wing overbid) plus `GET /api/v1/quant/gex` for dealer-gamma/liquidation-profile context before choosing which wing to sell
+- **Regime gate** — `GET /api/v1/volatility/regime`: open new short vega only in `normal`/`mean_reverting`; treat `vol_shock`/`expanding` as an automatic stand-down, and wire `GET /api/v1/market-intelligence/liquidations` as the cascade early warning ahead of the DVOL +50% kill
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/1d to 2017-08) rebuilds the realized-vol series for multi-cycle IV−RV studies; pair with point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) to avoid [[lookahead-bias]] in regime-conditioned entries
+- **Tips** — run the vol-shock kill as an agent-side circuit breaker checked every refresh, not a daily job; `/volatility/regime/{symbol}` keeps a 60-day state history for validating the 40th-90th percentile DVOL gate against regime persistence
 
 ## Related
 

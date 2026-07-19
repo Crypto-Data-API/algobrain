@@ -2,7 +2,7 @@
 title: "Volatility Regime Switching"
 type: concept
 created: 2026-05-07
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [volatility, indicators, quantitative, regime, backtesting]
 aliases: ["Regime-Switching Models", "Markov-Switching Volatility", "Vol Regime Switching"]
@@ -156,6 +156,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/quant/market` exposes filtered probabilities from a production 6-state HMM (15-min refresh) — the online `P(s_t | data through t)` this page requires for live trading; `GET /api/v1/quant/model` publishes model version and metrics for auditability
+- **Compute** — fit your own MS-GARCH or K-state HMM on return series from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) and compare recovered states against the hosted engine's taxonomy from `GET /api/v1/quant/regimes`
+- **Backtest** — `GET /api/v1/quant/history` gives point-in-time probability records and `GET /api/v1/quant/regimes/history` the full hourly Parquet archive since 2020 (Pro Plus) — enough transitions to test boundary-dependence of a strategy's P&L
+- **Tip** — replay the mistake list here: strip regime-transition days out of a backtest built on these archives and confirm the edge survives before attributing it to regime-switching skill
 
 ## Related
 

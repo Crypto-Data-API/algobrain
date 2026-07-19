@@ -2,7 +2,7 @@
 title: "Ornstein-Uhlenbeck Process"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [ornstein-uhlenbeck, mean-reversion, stochastic-process, half-life, statistical-arbitrage, quantitative, pairs-trading, crypto]
 aliases: ["OU Process Trading", "Mean-Reverting Stochastic Process", "OU Model"]
@@ -225,6 +225,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — build the spread from `GET /api/v1/market-data/klines?interval=4h` (leg A) and `GET /api/v1/hyperliquid/candles?interval=4h` (leg B), run the AR(1) fit, and trade the stationary z-score; `GET /api/v1/derivatives/funding-rates` prices the carry that the 1-20-day half-life filter exists to control
+- **Catalyst filter** — `GET /api/v1/event/calendar` for unlocks/listings/upgrades that shift μ structurally (the OU model's blind spot)
+- **Regime gate** — `GET /api/v1/quant/market`: suspend entries in `strong_trend_*` states, where realized half-lives stretch far past the modeled value and the trade becomes a funding bleed
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; HL daily to 2023) for OU-fit and half-life-stability studies across regimes; `GET /api/v1/backtesting/funding` (HL hourly since 2023-05, Binance daily since 2026-03-30) for the carry overlay
+- **Tips** — automate the weekly re-fit and auto-retire any spread with b ≥ 1 or realized half-life > 2× modeled over the trailing sample; `GET /api/v1/backtesting/symbols` keeps delisted names in the historical spread universe
 
 ## Related
 

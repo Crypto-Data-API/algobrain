@@ -2,7 +2,7 @@
 title: "Double Diagonal"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, double-diagonal, diagonal-spread, income, theta, crypto, derivatives]
 aliases: ["Double Diagonal Spread", "Calendarized Iron Condor"]
@@ -124,6 +124,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]] and volatility-regime detail on [[cryptodataapi]]. IV/DVOL surface and term structure are Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — sell the front strangle when `GET /api/v1/volatility/regime` reads `mean_reverting`/`normal` and `GET /api/v1/market-intelligence/options` max pain sits inside the intended range
+- **Regime gate** — `GET /api/v1/quant/market`: leading `range_low_vol` probability is the range thesis; rising `squeeze`/`vol_spike` reads mean widen the strikes or stand down
+- **Backtest** — realized range vs the profit tent from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); vol-state timing validated point-in-time against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — `/api/v1/quant/gex` decides front-leg management: long dealer gamma favors letting the shorts decay, short gamma favors rolling early; treat a `/api/v1/market-intelligence/liquidations` cascade as the breakout early-warning for the wings.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Advance/Decline Line"
 type: concept
 created: 2026-07-01
-updated: 2026-07-13
+updated: 2026-07-19
 status: review
 tags: [indicators, technical-analysis, market-internals, market-breadth]
 aliases: ["Advance-Decline Line", "A/D Line", "AD Line", "Advance/Decline Line", "Breadth Line"]
@@ -67,6 +67,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-health/al
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
+
+**Live dashboards:** [market health](https://cryptodataapi.com/market)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — build a crypto A/D line by snapshotting `GET /api/v1/daily/prices` (~2,500 Binance spot pairs) once a day, counting advancers minus decliners versus the prior snapshot, and cumulating the net
+- **Live state** — `GET /api/v1/market-health/altcoin-breadth?period=200` is the served participation gauge (% of coins above the MA), the closest ready-made analog to A/D-line direction
+- **Backtest** — `GET /api/v1/market-health/history?days=730` covers two years of health scores; point-in-time universe snapshots via `GET /api/v1/backtesting/daily-snapshots/{date}` reach back only to 2026-03-02, so a reconstructed daily A/D line is limited to that window
+- **Tip** — cross the breadth read against BTC highs from `GET /api/v1/market-data/btc-price-history`: index-up / breadth-down is exactly the divergence warning this page describes
 
 ## Related
 

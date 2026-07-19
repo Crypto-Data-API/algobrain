@@ -2,7 +2,7 @@
 title: "Sentiment Analysis"
 type: concept
 created: 2026-04-07
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [behavioral-finance, machine-learning, trading-psychology]
 aliases: ["Market Sentiment"]
@@ -103,6 +103,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-g
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/sentiment/fear-greed` (add `?format=markdown` for direct LLM consumption) plus `GET /api/v1/sentiment/stablecoins` for the dry-powder read in the same polling cycle
+- **Fetch** — `GET /api/v1/market-intelligence/fear-greed-history` for the index timeseries; `GET /api/v1/sentiment/stablecoins/remote-history?days=365` to z-score stablecoin flows as a sentiment feature
+- **Backtest** — `GET /api/v1/backtesting/daily-snapshots/{date}` freezes the full `/daily` payload (sentiment included) per day since 2026-03-02, so contrarian rules replay against point-in-time readings
+- **Tip** — extreme sentiment persists in strong trends; condition fades on the regime label from `GET /api/v1/regimes/current` rather than acting on the raw 0-100 reading alone
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: Trend Following
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [trend-following, momentum, technical-analysis, algorithmic, position-trading]
 aliases: ["Trend Trading", "Riding the Trend", "trend-following"]
@@ -60,6 +60,34 @@ Trend following has one of the longest documented track records of any systemati
 - **Late entry and exit** — by construction the strategy misses the start and the end of every move, capturing only the middle.
 - **Low win rate** — typically below 50%, with profitability resting on a few large winners; this demands strict adherence to the let-winners-run rule.
 - **Psychological difficulty** — long, shallow drawdowns between trending episodes test discipline, making [[trading-psychology]] and mechanical execution essential.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN trend classifier across the asset universe
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC with the 200D MA precomputed, the classic trend filter
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV for Donchian channels, MA crosses, and ATR sizing
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for multi-year trend-system backtests
+- `GET /api/v1/indicators/signum-rgg/{symbol}` — per-asset detail + 60d RGG history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/indicators/signum-rgg"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/indicators/signum-rgg` is a ready-made trend gate: take longs only in GREEN, shorts or flat in RED, stand aside in GREY chop
+- **Compute** — the illustrative Donchian/ATR logic on this page runs directly on `GET /api/v1/market-data/klines` bars (highest-high channels, ATR from true ranges)
+- **Backtest** — replay breakout and MA-cross systems against `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08 — spanning full trending and ranging cycles)
+- **Tip** — layer the HMM state from `GET /api/v1/quant/market` over RGG: whipsaw losses concentrate where the regime reads `range_low_vol`/`choppy_high_vol`, exactly the chop a trend book should sit out
 
 ## Related
 

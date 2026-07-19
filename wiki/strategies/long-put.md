@@ -2,7 +2,7 @@
 title: "Long Put (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, risk-management, bitcoin, ethereum]
 aliases: ["Long Put", "Buy Put", "Protective Put", "Crypto Long Put"]
@@ -104,6 +104,19 @@ The IV surface, skew, and **DVOL** are Deribit / Greeks.live, not CryptoDataAPI.
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/options"
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regime/score"
 ```
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry timing** — `GET /api/v1/volatility/regime/score` low + `GET /api/v1/volatility/regime` `compressed`: protection is cheapest before the stress bid arrives; a put bought during `vol_shock` pays peak premium for a move already priced.
+- **Skew driver** — `GET /api/v1/derivatives/funding-rates?coin=BTC`: richly positive funding marks the call-skew regime where downside puts are relatively cheap — the best hedging windows.
+- **Regime gate** — `GET /api/v1/quant/market`: rising `strong_trend_bear`/`vol_spike` probabilities argue for rolling protection up on schedule and monetising fast into spikes rather than holding through the V-recovery.
+- **Expiry context** — `GET /api/v1/market-intelligence/options`: max-pain and OI concentration before making expiry-week hold/roll decisions.
+- **Backtest** — hedge-payoff studies on `GET /api/v1/backtesting/klines` (Binance 1h/4h/1d since 2017-08 covers 2020-03, LUNA, and FTX); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time trigger states. Put premiums come from Deribit — CDA has no options archive.
+- **Tips** — for continuous protection, have the agent roll monthly regardless of the tape; discretionary de-hedging in calm markets is the classic failure this page warns against.
 
 ## Related
 

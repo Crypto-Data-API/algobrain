@@ -2,7 +2,7 @@
 title: "Crypto Spot-Perp-Futures Triangular Arbitrage"
 type: strategy
 created: 2026-04-25
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, derivatives, futures]
 aliases: ["Three-Wrapper Triangle", "Spot-Perp-Future Box"]
@@ -155,6 +155,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can compute two of the triangle's three implied rates and monitor the dislocation:
+
+- **Implied rates** — `GET /api/v1/derivatives/funding-rates?coin=BTC` (annualised perp yield) and `GET /api/v1/derivatives/open-interest?coin=BTC` (one-sided OI signals the incoming dislocation); the dated-future yield comes from native Deribit/CME and the spot-borrow APR from Aave/Compound/CEX margin.
+- **Regime gate** — `GET /api/v1/quant/market`: avoid opening the triangle into a `vol_spike` where one leg can become unfundable and mark-to-market hedges fail.
+- **Backtest** — `GET /api/v1/backtesting/funding` (funding leg; Hyperliquid hourly since 2023-05, Binance daily since 2026-03-30) + `GET /api/v1/backtesting/klines` for the spot/basis leg.
+- **Tip** — cap per-venue collateral (counterparty risk); poll `GET /api/v1/derivatives/summary?coin=BTC` for the single-call positioning snapshot before each 8h funding reset.
 
 ## Related
 

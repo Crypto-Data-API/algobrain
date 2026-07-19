@@ -2,7 +2,7 @@
 title: "Beta"
 type: concept
 created: 2026-04-13
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [portfolio-theory, risk-management, indicators, correlation]
 aliases: ["Beta", "Beta Coefficient", "market beta", "β"]
@@ -59,6 +59,33 @@ Beta is load-bearing in several practical contexts:
 - **Benchmark-dependent** — a stock's beta to the S&P 500 differs from its beta to a sector index or to a global index; "the" beta does not exist without specifying the benchmark.
 - **Linear and single-factor** — beta assumes a linear relationship to one factor. Multi-factor models (Fama-French) and downside-beta measures address cases where a single market beta is too coarse.
 - **Unstable in tails** — the diversification beta promises breaks down precisely when it matters most, as cross-asset correlations converge in crises.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90` — asset return series
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` — benchmark (BTC) return series
+- `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call for universe-wide beta tables
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for long-window beta estimation
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=90"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this measure directly:
+
+- **Compute** — fetch daily closes for the asset and BTC via `GET /api/v1/market-data/klines`, convert to returns, and take Cov(asset, BTC) / Var(BTC) — in crypto, beta is conventionally measured against BTC rather than an equity index
+- **Batch** — `GET /api/v1/daily/prices` snapshots ~2,500 pairs in one call, enough to rebuild a whole-universe beta table daily without per-symbol loops
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) supports rolling-beta stability studies across full market regimes
+- **Tip** — alt betas to BTC rise sharply in selloffs (the crypto version of "correlation goes to one"); re-estimate on rolling windows and check the regime from `GET /api/v1/regimes/current` before hedging off a static beta
 
 ## Related
 

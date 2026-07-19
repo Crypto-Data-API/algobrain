@@ -2,7 +2,7 @@
 title: "Fork & Airdrop Triangulation"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-10
+updated: 2026-07-19
 status: good
 tags: [arbitrage, crypto, defi, event-driven]
 aliases: ["Fork Arb", "Airdrop Arbitrage", "Hard Fork Triangulation"]
@@ -174,6 +174,38 @@ Per-event capacity bound by parent-asset accumulation cost. Strategy-level capac
 - Arbitrum Foundation, ARB token launch documentation.
 - *DeFiLlama Airdrop Tracker*.
 - Cumberland-DRW market commentary on major launches.
+
+## Getting the Data (CryptoDataAPI)
+
+CryptoDataAPI serves the pricing legs (Hyperliquid pre-launch perps, parent spot, parent basis); airdrop-eligibility criteria and per-exchange fork-credit policies are off-API (DeFiLlama tracker + exchange announcements).
+
+**Live data:**
+- `GET /api/v1/hyperliquid/prices` and `GET /api/v1/hyperliquid/summary?coin=...` — HL mids incl. pre-launch perps (the airdrop-futures leg)
+- `GET /api/v1/hyperliquid/funding-rates?coin=...` — pre-launch perp funding (negative = short crowding, reduce size)
+- `GET /api/v1/market-data/ticker/price?symbol=...` — parent-asset spot (the accumulation leg)
+- `GET /api/v1/derivatives/summary?coin=...` — parent perp basis for hedge sizing
+
+**Historical data:**
+- `GET /api/v1/hyperliquid/candles?coin=...&interval=1h` — up to 1000 OHLCV bars per pre-launch perp
+- `GET /api/v1/backtesting/klines` (parent) + `GET /api/v1/backtesting/funding`
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/prices"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-hyperliquid]], [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can price both legs and gate the hedge:
+
+- **Pricing legs** — `GET /api/v1/hyperliquid/prices` / `/hyperliquid/summary` read pre-launch perps and `GET /api/v1/market-data/ticker/price` reads the parent asset; eligibility criteria and fork-credit policies are off-API.
+- **Crowding gate** — `GET /api/v1/hyperliquid/funding-rates` on the pre-launch perp: negative funding = short crowding, trim the short.
+- **Regime gate** — `GET /api/v1/quant/market` for parent-asset hedge sizing through the snapshot window.
+- **Backtest** — `GET /api/v1/hyperliquid/candles` for pre-launch perp history + `GET /api/v1/backtesting/klines` / `/backtesting/funding` for the parent leg.
+- **Tip** — pre-launch perps have systematically over-priced launches; use the HL feed to measure the implied FDV before shorting.
 
 ## Related
 

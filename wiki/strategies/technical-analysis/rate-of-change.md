@@ -161,6 +161,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-data]] and [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [technical structure](https://cryptodataapi.com/technical-structure) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=50` → ROC(12) zero-line / ±2% crossings on closed candles; `GET /api/v1/indicators/technical` supplies the 50-MA trend state pre-computed.
+- **Alignment** — `GET /api/v1/derivatives/funding-rates?coin=BTC` — take crossovers only when the funding sign agrees with the signal direction.
+- **Regime gate** — `GET /api/v1/quant/market` — in `range_low_vol`/`choppy_high_vol` raise the threshold to ±3% or stand down (the ADX < 20 kill criterion).
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) for N-optimization, segmented by regime via `GET /api/v1/quant/regimes/history` (hourly since 2020, Pro Plus).
+- **Tips** — ROC doubles as the cross-sectional ranking stat: one `GET /api/v1/daily/prices` snapshot ranks ~2,500 spot pairs for [[momentum-rotation]] without per-symbol calls.
+
 ## Related
 
 - [[macd-crossover]] — the smoothed-EMA version of the same momentum signal

@@ -2,7 +2,7 @@
 title: "Bittensor Subnet Rotation"
 type: strategy
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, bittensor, ai-trading, momentum, algorithmic]
 aliases: ["dTAO Subnet Rotation", "Alpha Rotation"]
@@ -173,6 +173,37 @@ No published audited track record for systematic dTAO rotation strategies exists
 - Operational complexity (validator key management, chain interaction, subnet monitoring).
 - Execution slippage on bonding curves.
 - Single-protocol dependency on Bittensor not going to zero.
+
+## Getting the Data (CryptoDataAPI)
+
+The core rotation signals — subnet emission shares, alpha bonding-curve prices, validator activity — come from **taostats.io / dtao.gg / Subtensor RPC**, not CryptoDataAPI. [[cryptodataapi|CryptoDataAPI]] supplies the TAO market layer around the strategy: TAO price and klines for the denominating asset, TAO perp funding for hedging the strategy's unavoidable TAO beta, and regime context for the "a 50% TAO drawdown drags all alpha down" kill risk.
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/price?symbol=TAOUSDT` — TAO spot price (the unit every alpha position is denominated in)
+- `GET /api/v1/derivatives/funding-rates?coin=TAO` — cross-exchange TAO perp funding: the carry on a TAO-beta hedge
+- `GET /api/v1/coins/search?q=TAO` — TAO profile and market-cap context
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — TAO OHLCV archive (Binance spot 1h/4h/1d and Hyperliquid daily, from listing) for TAO-beta and drawdown-correlation studies
+- `GET /api/v1/backtesting/funding` — TAO funding history (Hyperliquid hourly, from listing) for hedge-cost modelling
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/funding-rates?coin=TAO"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the market-layer half of this strategy end-to-end (the emission-share signal itself still needs a taostats/Subtensor feed):
+
+- **TAO-beta hedge** — `GET /api/v1/derivatives/funding-rates?coin=TAO` + `GET /api/v1/market-data/ticker/price?symbol=TAOUSDT`: size and carry-cost a TAO perp short against the alpha book's TAO exposure during rebalances and leg gaps.
+- **Regime gate** — `GET /api/v1/quant/market`: cut gross rotation exposure when `strong_trend_bear`/`vol_spike` probabilities rise — alpha tokens are TAO-denominated, so rotation alpha does not survive a TAO cascade unhedged.
+- **Kill-risk monitor** — `GET /api/v1/quant/coins/TAO` (per-coin probability matrix, Pro): the machine-readable version of the TAO-drawdown kill criterion.
+- **Backtest** — the TAO legs replay from `GET /api/v1/backtesting/klines` and `GET /api/v1/backtesting/funding` (Hyperliquid hourly funding, from TAO's listing — not the 2023-05 archive start); emission-share history must come from taostats — CDA holds no Subtensor data.
+- **Tips** — respect `insufficient_history` flags on TAO derivatives data; the rotation signal updates block-by-block (12s), so pair CDA's cached hourly `GET /api/v1/daily` context with a direct Subtensor subscription for the alpha side.
 
 ## Related
 

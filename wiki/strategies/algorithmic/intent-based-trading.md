@@ -2,7 +2,7 @@
 title: "Intent-Based Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, intents, solvers, uniswapx, cow-protocol, mev, batch-auction, account-abstraction, algorithmic]
 aliases: ["Intent-Based Execution", "Solver-Based Trading", "Solving", "UniswapX Filling", "CoW Solver", "1inch Fusion Resolver"]
@@ -268,6 +268,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/hyperliquid/l2-b
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]] (also [[cryptodataapi-market-data]], [[cryptodataapi-hyperliquid]]).
+
+**Live dashboards:** [order-book depth](https://cryptodataapi.com/quant-order-books) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Routing universe** — refresh `GET /api/v1/dex/trending` and per-token `GET /api/v1/dex/token/{chain}/{address}` to keep the solver's venue map current
+- **Inventory pricing** — `GET /api/v1/market-data/ticker/price` (CEX reference) plus `GET /api/v1/hyperliquid/l2-book?coin=ETH` (hedge-leg depth) price internalised fills before bidding an auction
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility score — widen solver margins when books are fragile; `GET /api/v1/quant/market` for vol-state awareness on the unwind leg
+- **Backtest** — route/margin models against `GET /api/v1/backtesting/klines` — honest window: 1m bars only since 2026-03-30 (the resolution auction-latency studies need); 1h/4h/1d reach 2017-08 for coarser work
+- **Tips** — the intent/auction orderflow itself stays on the CoW/UniswapX/Fusion APIs; check `GET /api/v1/liquidity/depth` before quoting size on thin pairs
 
 ## Related
 

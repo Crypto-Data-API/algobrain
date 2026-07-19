@@ -192,6 +192,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — at session open, `GET /api/v1/quant/gex` + `GET /api/v1/market-intelligence/options` classify the day (pin vs cascade) and locate the max-pain magnet; `GET /api/v1/market-data/short-term-price` supplies the intraday directional read
+- **Regime gate** — `GET /api/v1/volatility/regime`: a `vol_shock` reading vetoes short-gamma 0DTE outright; `GET /api/v1/quant/market` (15-min refresh) separates squeeze days from range days before structure selection
+- **Backtest** — intraday replay needs `GET /api/v1/backtesting/klines` 1m bars, available only since 2026-03-30 (the 1h/4h/1d archive back to 2017-08 is too coarse for same-day expiry); tag cascade days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30)
+- **Tips** — poll `/api/v1/market-intelligence/liquidations` throughout the session: a cascade against a short-gamma book is the flatten-now trigger, consistent with the DVOL-spike kill rule above. Append `?format=markdown` to keep high-frequency polling light on context.
+
 ## Related
 
 - [[zero-dte-options]] — the instrument and market-structure overview (read alongside this playbook)

@@ -2,7 +2,7 @@
 title: "Volatility Regime"
 type: concept
 created: 2026-05-07
-updated: 2026-07-13
+updated: 2026-07-19
 status: good
 tags: [volatility, indicators, options, risk-management, regime]
 aliases: ["Volatility Regimes", "Vol Regime"]
@@ -127,6 +127,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/volatility/regime` labels every asset `compressed` / `expanding` / `vol_shock` / `mean_reverting` / `normal`; `GET /api/v1/volatility/regime/{symbol}` adds per-asset detail with a rolling 60d history
+- **Compute** — for custom regime schemes (GARCH, HMM), fit on realized-vol series built from `GET /api/v1/market-data/klines` closes
+- **Backtest** — `GET /api/v1/quant/regimes/history` downloads hourly 6-state HMM probabilities since 2020 as Parquet (Pro Plus) — labelled regime data for conditioning any strategy backtest
+- **Tip** — validate against point-in-time states from `GET /api/v1/backtesting/daily-snapshots/{date}`, never today's regime labels back-applied — that is [[lookahead-bias]] in regime-conditional backtests
 
 ## Related
 

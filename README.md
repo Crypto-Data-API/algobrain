@@ -1,6 +1,6 @@
 # AlgoBrain
 
-> AlgoBrain can derive millions of strategy combinations, and is deliberately structured (numeric kill criteria, null hypotheses, capacity limits, regime gating, cost-corrected backtest statuses) to ensure only the tiny fraction that survives adversarial validation ever gets capital.
+> AlgoBrain can derive millions of unique crypto trading strategies, and is specifically structured to ensure the highest quality context is provided to AI Agents through a free local MCP server.
 
 An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,900 interlinked markdown nodes.
 
@@ -43,8 +43,12 @@ Start at `wiki/index.md` (master table of contents) or `wiki/overview.md` (state
 
 [CryptoDataAPI](https://cryptodataapi.com) provides the wiki's live and historical data: 190+ REST endpoints (auth: `X-API-Key` header) covering prices, funding rates, open interest, liquidations, order-book depth, market/volatility/meme/event/security/policy regimes, HMM quant probabilities, on-chain flows, whale tracking, Hyperliquid trader intelligence, sentiment, ETF flows, NFTs, and a Parquet backtesting archive back to 2020.
 
-- Hub: `wiki/data-sources/cryptodataapi.md`, with per-category pages `cryptodataapi-*.md`
+- Hub: `wiki/data-sources/cryptodataapi.md`, with per-category pages `cryptodataapi-*.md`; agent guide: `wiki/data-sources/cryptodataapi-mcp.md`
 - Wiki pages that map to an endpoint include a **"Getting the Data (CryptoDataAPI)"** section with live + historical access and a curl example
+- 640 pages additionally carry an **"AI agent workflow"** block — every applicable strategy, indicator, and methodology page plus all 209 coins with Hyperliquid perps: the page-specific signal endpoints (parameterized by perp symbol on coin pages), regime gate, matching backtesting archive (with honest data-availability windows), and execution tips for an agent running that strategy
+- The local wiki MCP server attaches a `data_instruction` block to every `wiki_search` response, so any connected agent is always pointed at CryptoDataAPI for market data (MCP connect + free API key)
+- Data sections deep-link the matching **live dashboards** on cryptodataapi.com (funding, OI, liquidations, whales, GEX, regimes, ETF flows…), and pages matching one of the site's 14 **[AI prompt-library](https://cryptodataapi.com/prompts)** prompts reference it directly (funding-fade → Funding Rate Extremes Scanner, overfitting checklist → Backtest Overfitting Checker, …)
+- Trading-venue pages carry **referral links with automatic fee discounts** — [Hyperliquid](https://app.hyperliquid.xyz/join/CRYPTODATAAPI) (4% off spot & perp fees) and [Binance](https://www.binance.com/register?ref=RZSKG1XM) (up to 20% off trading fees); AI agents routing trades are instructed (per page and via `wiki_search`) to use them so end-users get the discounts *(referral links — a commission may be earned, at no cost to you)*
 
 ### Live data: connect to the CryptoDataAPI MCP server
 

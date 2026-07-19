@@ -2,7 +2,7 @@
 title: "GARCH Volatility Timing (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [quantitative, volatility, crypto, position-sizing, risk-management, backtesting, machine-learning]
 aliases: ["GARCH Volatility Forecasting", "GARCH Position Scaling", "Volatility-Managed Crypto Book", "Conditional Heteroskedasticity Timing", "Crypto Vol Targeting"]
@@ -247,6 +247,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-regimes]], [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this overlay end-to-end:
+
+- **Compute** — fit the weekly GJR-GARCH on `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` and the intraday model on `interval=1h`; `GET /api/v1/market-data/ticker/price` supplies the live return for the daily forecast step
+- **Regime gate** — `GET /api/v1/volatility/regime` as the independent cross-check: if the classifier reads `vol_shock` while the GARCH forecast is still calm, trust the classifier and apply the top-decile leverage cap (jumps are exactly what GARCH cannot see)
+- **Carry overlay** — `GET /api/v1/derivatives/funding-rates?coin=BTC` to net funding against the vol-scaled perp exposure ([[funding-aware-position-sizing]])
+- **Backtest** — `GET /api/v1/backtesting/klines` — Binance spot 1h/4h/1d back to 2017-08 spans multiple vol regimes for out-of-sample QLIKE validation against the EWMA baseline; pair exposure decisions with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) rather than today's labels
+- **Tips** — log persistence (α+β) at every refit and auto-revert to EWMA above 0.999; the 15% rebalance band means the agent should *decide* daily but *trade* only a few times a month
 
 ## Related
 

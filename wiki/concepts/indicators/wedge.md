@@ -2,7 +2,7 @@
 title: "Wedge Patterns (Rising and Falling)"
 type: concept
 created: 2026-06-30
-updated: 2026-07-01
+updated: 2026-07-19
 status: review
 tags: [indicators, technical-analysis]
 aliases: ["Rising Wedge", "Falling Wedge", "Wedge Pattern", "wedge-pattern"]
@@ -76,6 +76,29 @@ A stock in a downtrend carves a falling wedge: the upper line drops from $30 to 
 ## Sources
 
 - General technical-analysis literature on classical chart patterns (rising and falling wedges as reversal/continuation formations). Structure, interpretation, and the worked example are standard material; the example uses illustrative numbers, not a specific ingested wiki source.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200` — OHLCV bars for detecting converging-trendline structure and the volume contraction into the apex
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep kline archive for measuring wedge resolution rates
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — detect wedges from `GET /api/v1/market-data/klines`: fit lines through recent swing highs and swing lows, require both slopes in the same direction with converging gap, and check the volume column for the decline-into-apex signature
+- **Confirm** — the confirmation rule is fully mechanical on the same bars: a close beyond the boundary line with volume above its rolling average
+- **Backtest** — measure actual break-direction and measured-move hit rates on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) before trusting the rising-bearish/falling-bullish convention on any given interval
+- **Tip** — codify the trendline-subjectivity pitfall away: fix the pivot window and minimum-touch parameters up front, or two runs of the same agent will find different wedges on the same chart
 
 ## Related
 

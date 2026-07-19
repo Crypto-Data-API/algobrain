@@ -2,7 +2,7 @@
 title: "200-Day Moving Average"
 type: concept
 created: 2026-04-10
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, indicators, moving-averages, trend]
 aliases: ["200-day MA", "200-day SMA", "200-day moving average", "200-day-MA", "200 DMA", "200 Day Moving Average", "200-day-moving-average"]
@@ -57,6 +57,34 @@ In [[momentum-screening]], the 200 DMA functions as a binary pass/fail filter ra
 ## SMA vs. EMA
 
 The standard 200 DMA uses a [[simple-moving-average|simple moving average]] (SMA), weighting all 200 days equally. Some traders prefer the 200-day [[exponential-moving-average|exponential moving average]] (EMA), which weights recent prices more heavily, making it slightly more responsive to current conditions. In practice, the difference between the 200-day SMA and 200-day EMA is usually small (a few percentage points at most), and both serve the same trend-identification purpose. The SMA remains the institutional standard.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC daily price history with the 200D MA precomputed
+- `GET /api/v1/market-health/altcoin-breadth?period=200` — % of coins above their 200-day MA (the breadth version of this filter)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — daily OHLCV to compute the 200D MA for any pair
+- `GET /api/v1/backtesting/klines` — deep kline archive for long-horizon tests
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=730"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [market health](https://cryptodataapi.com/market) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Fetch** — `GET /api/v1/market-data/btc-price-history?days=730` returns BTC with the 200D MA already computed — no rolling-window math needed for the majors' trend read
+- **Compute** — for any other pair, average the last 200 daily closes from `GET /api/v1/market-data/klines?symbol=ETHUSDT&interval=1d&limit=200`
+- **Live state** — `GET /api/v1/market-health/altcoin-breadth?period=200` turns the filter into a market-wide gauge: the % of coins above their own 200D MA
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot daily bars back to 2017-08) covers multiple full crypto cycles for above/below-200DMA filter tests
+- **Tip** — BTC's 200D MA is the classic crypto bull/bear line; cross-check the binary filter against regime probabilities from `GET /api/v1/regimes/current` before scaling exposure
 
 ## Related
 

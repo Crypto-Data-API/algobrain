@@ -2,7 +2,7 @@
 title: "Restaking Strategies"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, defi, restaking, eigenlayer, staking, liquid-staking, avs, ethereum, yield, lrt, slashing]
 aliases: ["Restaking", "EigenLayer Strategies", "Liquid Restaking", "LRT Strategies"]
@@ -273,6 +273,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/tick
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-data]], [[cryptodataapi-on-chain]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Position monitor** — `GET /api/v1/market-data/ticker/price?symbol=ETHUSDT` for the NAV denominator; `GET /api/v1/coins/{symbol}` tracks the tradable LRT/AVS tokens (EIGEN, ETHFI) that carry the yield's option component
+- **Stress watch** — `GET /api/v1/on-chain/exchange-flows/ETH` (de-risking flows) plus `GET /api/v1/security/regime` (recent hacks/depegs + Security Stress score) — an LRT depeg like ezETH 2024 shows up here before the leveraged loop unwinds you
+- **Regime gate** — `GET /api/v1/quant/market` — the un-hedged variant is a full ETH long; cut loop leverage as bear/`vol_spike` probabilities rise
+- **Backtest** — ETH and listed LRT/AVS token paths from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08); AVS APRs and LRT peg history come from protocol dashboards/DeFiLlama — archive them yourself
+- **Tips** — poll the cached `/api/v1/daily` bundle hourly for the composite backdrop; treat withdrawal-queue latency as a manual input the API cannot see
 
 ## Related
 

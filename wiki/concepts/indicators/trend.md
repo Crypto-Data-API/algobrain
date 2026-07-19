@@ -2,7 +2,7 @@
 title: Trend
 type: concept
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [trend-following, technical-analysis, momentum, indicators]
 aliases: ["Uptrend", "Downtrend", "Sideways Trend", "Market Trend", "trend"]
@@ -71,6 +71,34 @@ How traders actually use trend in practice:
 - **Trends end abruptly.** Reversals are often faster and sharper than the trend that preceded them; a trailing stop, not a forecast, should take you out.
 - **Timeframe conflict.** A daily uptrend inside a weekly downtrend can trap traders who fixate on one chart — always note which timeframe a trend claim refers to.
 - **Confirmation lag vs. early signal trade-off.** More confirmation (price above a rising 200-day, [[dow-theory]]-style cross-index agreement) reduces false signals but gives back more of the move at the turn.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/indicators/signum-rgg` — ADX(14)+DMI RED/GREY/GREEN trend state per asset
+- `GET /api/v1/market-data/btc-price-history?days=730` — BTC price with 200D MA, the bull/bear line
+- `GET /api/v1/regimes/current` — long-horizon market cycle label (10-state taxonomy)
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — bars for swing-structure and MA-based trend reads
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/btc-price-history?days=365"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Live state** — `GET /api/v1/indicators/signum-rgg` answers "is this asset trending?" per symbol (GREEN/RED trend, GREY range), while `GET /api/v1/quant/market` separates `strong_trend_bull`/`strong_trend_bear` from `range_low_vol` at the market level
+- **Compute** — swing structure (higher highs / higher lows) and MA slope derive from `GET /api/v1/market-data/klines`; the 200D MA arrives precomputed in `GET /api/v1/market-data/btc-price-history`
+- **Backtest** — trend-vs-range conditional rules replay against `GET /api/v1/backtesting/klines` joined to regime labels from `GET /api/v1/quant/timeline` (daily, 2019-now, Pro Plus)
+- **Tip** — encode the timeframe-conflict warning explicitly: tag every trend claim with its interval (1d vs 1h klines can disagree), and require the higher timeframe's agreement before sizing up
 
 ## Related
 

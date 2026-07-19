@@ -2,7 +2,7 @@
 title: "Options Strategies (Crypto)"
 type: reference
 created: 2026-04-13
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, swing-trading, bitcoin, ethereum]
 aliases: ["Option Strategies", "Options Structures", "Option Spreads", "Crypto Options Strategies", "options-strategies-overview"]
@@ -258,6 +258,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can drive structure selection end-to-end (chains and DVOL stay on Deribit / [[greeks-live]]):
+
+- **Family selector** — `GET /api/v1/volatility/regime`: `compressed` → debit/long-vol structures ([[straddle-strangle]]); `expanding`/`normal` with rich DVOL → credit structures ([[iron-condor]], verticals); `vol_shock` → hedging / long convexity only.
+- **Strike context** — `GET /api/v1/market-intelligence/options` (OI, max pain) + `GET /api/v1/quant/gex` for pin-vs-breakout reads; `GET /api/v1/derivatives/funding-rates?coin=BTC` for which wing skew has overbid.
+- **Regime gate** — `GET /api/v1/quant/market` maps onto the Regime Fit table above: range states favor income, trend states favor directional spreads.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1d back to 2017-08) supplies the realized-vol leg for VRP validation; pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime labels.
+- **Tips** — `GET /api/v1/event/calendar` (catalysts up to 30d out) is the calendar every entry rule here references — automate the "no short premium across binary events" check.
 
 ## Sources
 

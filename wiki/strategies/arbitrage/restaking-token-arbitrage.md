@@ -2,7 +2,7 @@
 title: "Restaking Token Arbitrage"
 type: strategy
 created: 2026-04-26
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, defi, ethereum, crypto]
 aliases: ["LRT Arbitrage", "Restaking Triangle", "EigenLayer LRT-LST Arb"]
@@ -212,6 +212,39 @@ Per-trade capacity bound by LRT pool depth ($50-500M typical). Strategy-level ca
 - Pendle Finance PT/YT documentation.
 - Various LRT-arb practitioner blogs (Wave Financial, MEV-research).
 - Verified via Perplexity (sonar), 2026-06-10: REZ listed on Binance 2024-04-30 at ~$0.2638 and fell to ~$0.16 post-listing (corrected an earlier erroneous "$2.00 launch price" figure on this page). Citations: fxstreet.com/cryptocurrencies/news/renzos-rez-dips-after-airdrop-and-binance-listing-202404302338, coingecko.com/en/coins/renzo.
+
+## Getting the Data (CryptoDataAPI)
+
+NAV computation (exit queues, AVS rewards, points multipliers) needs on-chain and protocol sources; [[cryptodataapi|CryptoDataAPI]] covers the market side of the deviation signal, the unlock catalysts that reset trades, the ETH-beta hedge, and the slashing/depeg stress overlay.
+
+**Live data:**
+- `GET /api/v1/dex/token/{chain}/{address}` — per-LRT market price and top pools (the observed-price leg of the deviation calc for eETH/ezETH/rsETH/pufETH)
+- `GET /api/v1/event/calendar?type=unlock` — native LRT-token unlock catalysts up to 30d out (rule 5: unlocks reset the trade)
+- `GET /api/v1/derivatives/funding-rates?coin=ETH` — perp funding for the ETH-beta hedge leg
+- `GET /api/v1/security/regime/score` — depeg/hack stress composite (ezETH-Apr-2024-class governance shocks)
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — OHLCV archive for dispersion and convergence studies
+- `GET /api/v1/backtesting/funding` — Hyperliquid hourly funding since 2023-05 (hedge-cost replay over the strategy's whole 2024+ life)
+- `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time market state (since 2026-03-02)
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/event/calendar?type=unlock"
+```
+
+Auth: `X-API-Key` header. Full catalogs: [[cryptodataapi-dex]], [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the pair-trade loop (NAV inputs still come from protocol/on-chain reads):
+
+- **Signal** — poll `GET /api/v1/dex/token/{chain}/{address}` across the LRT universe each cycle, compute observed-vs-NAV deviations, and fire when pair dispersion exceeds 25 bp per the Rules.
+- **Catalyst check** — `GET /api/v1/event/calendar?type=unlock` before entry: an LRT-protocol token unlock inside the expected convergence window invalidates the trade setup.
+- **Regime gate** — `GET /api/v1/security/regime/score` and `GET /api/v1/quant/market`: depeg buys are knife-catches during elevated security stress; the mechanical-convergence thesis only holds when the shock is flow-driven, not protocol-failure-driven.
+- **Backtest** — replay dispersion entries against `GET /api/v1/backtesting/klines` with hedge costs from `GET /api/v1/backtesting/funding` (HL hourly since 2023-05 spans the full 2024 boom-and-compression arc — the decay curve is the key output); pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time state.
+- **Tips** — track the rolling dispersion median explicitly: the kill criterion (below 10 bp for 90 days) is measurable from the same polling loop; points-multiplier changes remain a manual/protocol-blog input with no API anywhere.
 
 ## Related
 

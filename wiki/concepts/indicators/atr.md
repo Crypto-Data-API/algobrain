@@ -2,7 +2,7 @@
 title: Average True Range (ATR)
 type: concept
 created: 2026-04-06
-updated: 2026-06-11
+updated: 2026-07-19
 status: good
 tags: [atr, indicators, volatility]
 aliases: [ATR, average-true-range]
@@ -59,6 +59,31 @@ ATR's most famous application beyond basic stop-loss placement is as the "N" uni
 - John J. Murphy, *Technical Analysis of the Financial Markets* (NYIF, 1999) — covers True Range/ATR for stop placement and volatility measurement.
 - [[book-technical-analysis-of-the-financial-markets]] -- Murphy covers Wilder's True Range and ATR concepts, including their application to stop-loss placement and volatility measurement
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Turtle "N" unit, Wilder's position sizing philosophy, cross-venue leverage context
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h high/low/close for a quick range read
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=1h&limit=200` — perp-side OHLCV
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars for True Range / ATR computation
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=200`, take TR = max(H−L, |H−prevC|, |L−prevC|) and Wilder-smooth over 14 bars
+- **Size** — divide the per-trade risk budget by ATR to normalise position size across assets — the Turtle "N" unit this page describes, computed from live data
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) validates ATR-multiple stops and N-unit sizing across full cycles; 1m bars exist only since 2026-03-30
+- **Tip** — crypto trades 24/7 with no session gaps, so TR usually equals plain high−low; the gap-correction clauses matter mainly around venue outages and thin weekend liquidity
 
 ## Related
 

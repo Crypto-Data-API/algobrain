@@ -2,7 +2,7 @@
 title: "Chaikin Money Flow"
 type: concept
 created: 2026-04-20
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, volume]
 aliases: ["CMF", "Chaikin Money Flow"]
@@ -96,6 +96,31 @@ CMF works well alongside [[obv|OBV]] and price-based indicators. The professiona
 ## Sources
 
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Comprehensive Guide to Technical Trading Indicators (compiled research, 29 references)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/ticker/24hr?symbol=BTCUSDT` — 24h high/low/close/volume
+- `GET /api/v1/market-data/volume-history?days=90` — daily volume + buy ratio
+
+**Historical data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=1000` — OHLCV bars (the MFM needs high/low/close; the weighting needs volume)
+- `GET /api/v1/backtesting/klines` — deep kline archive
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — over `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=100`, compute MFM × volume per bar and take Σ(MFV) / Σ(volume) over the trailing 20-21 bars
+- **Cross-check** — the taker buy ratio from `GET /api/v1/market-data/volume-history` is an independent read on one-sided flow; CMF and buy ratio agreeing strengthens the accumulation/distribution call
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08) supports zero-line-cross and divergence studies across full cycles
+- **Tip** — CMF's main failure mode is gap distortion; 24/7 crypto bars rarely gap, so the multiplier reads cleaner than on equity data — but watch wash-traded volume on thin alts before trusting the weighting
 
 ## Related
 

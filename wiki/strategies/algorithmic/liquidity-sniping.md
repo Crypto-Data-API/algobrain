@@ -2,7 +2,7 @@
 title: "Liquidity Sniping"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [liquidity-sniping, dex, token-launch, bot-trading, mempool, frontrunning, crypto, algorithmic, memecoins]
 aliases: ["Liquidity Snipe", "Token Launch Sniping", "DEX Sniping Bot", "New-Pool Sniping"]
@@ -283,6 +283,16 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/security/sol
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]]. Note: the *latency-critical* mempool/Geyser stream is not a CryptoDataAPI product — use it for universe discovery, safety second-opinions, and regime gating, not for the same-block race itself.
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe** — `GET /api/v1/dex/new-pools` as the launch discovery layer (not the same-block race); `GET /api/v1/dex/promoted` as the early paid-attention signal that a crowd may arrive
+- **Safety gate** — every candidate through `GET /api/v1/dex/security/{chain}/{address}` before the buy path arms
+- **Regime gate** — trade only when `GET /api/v1/meme/regime/score` shows `meme_season`; per-symbol lifecycle from `GET /api/v1/meme/regime/{symbol}` stages exits as tokens roll from `ignition` to `distribution`
+- **Backtest** — honest limits: launch-second fills are not replayable from any REST archive; use `GET /api/v1/backtesting/klines` (1m only since 2026-03-30) for post-launch decay curves and forward paper-trade the entry race itself
+- **Tips** — size tickets against depth from `GET /api/v1/dex/token/{chain}/{address}` before slippage eats the edge; keep security + regime calls cached and out of the latency path
 
 ## Related
 

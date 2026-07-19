@@ -2,7 +2,7 @@
 title: "Telegram Bot Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [crypto, telegram, trading-bots, banana-gun, maestro, bonkbot, trojan, solana, base, ethereum, retail, sniping, dca, algorithmic]
 aliases: ["Telegram Trading Bots", "TG Bot Trading", "Banana Gun Trading", "Maestro Bot"]
@@ -240,6 +240,36 @@ On top of the base fee sit **priority fees** and **[[jito-bundle-sniping|Jito]] 
 ## Sources
 
 - [[2026-04-22-gap-finder-low-cap-crypto-trading-microcaps-memecoi]]
+
+## Getting the Data (CryptoDataAPI)
+
+The bots themselves are the execution layer; CryptoDataAPI supplies independent screening and regime data a user (or agent) should consult outside the bot's own interface.
+
+**Live data:**
+- `GET /api/v1/dex/new-pools` — the same launch feed bot snipe modules race on
+- `GET /api/v1/dex/trending` — where retail flow is concentrating per chain
+- `GET /api/v1/dex/security/{chain}/{address}` — independent rug/honeypot second opinion beyond the bot's built-in rug score
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + `meme_season` flag
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/security/solana/<TOKEN_ADDRESS>"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can wrap discipline around bot execution:
+
+- **Screening** — cross-check every pasted contract with `GET /api/v1/dex/security/{chain}/{address}` before clicking buy — an independent gate the bot operator does not control
+- **Universe** — `GET /api/v1/dex/trending` / `GET /api/v1/dex/new-pools` replace channel-call doomscrolling; `GET /api/v1/dex/promoted` reveals which tokens are paying for visibility
+- **Regime gate** — `GET /api/v1/meme/regime/score` — with 0.5-1% fees per trade, trading outside `meme_season` compounds the deterministic fee drag with a hostile base rate
+- **Backtest** — audit the personal 90-day bot PnL (a kill criterion above) against `GET /api/v1/backtesting/klines` (1m only since 2026-03-30) to separate execution quality from token selection
+- **Tips** — keep the bot wallet minimal and sweep profits per the custodial-risk section; model the fee-drag table above before automating any high-frequency flow
+- **Prompt library** — the "Telegram Alert Agent" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) ships the five-trigger alert loop (flows, liquidation risk, volume pumps, regime flips, sentiment extremes) with mobile-ready formatting
 
 ## Related
 

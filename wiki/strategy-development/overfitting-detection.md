@@ -2,7 +2,7 @@
 title: "Overfitting Detection"
 type: concept
 created: 2026-04-10
-updated: 2026-06-14
+updated: 2026-07-19
 status: excellent
 tags: [strategy-development, backtesting, overfitting, validation, methodology]
 aliases: ["Backtest Overfitting", "Curve Fitting Detection"]
@@ -216,6 +216,18 @@ No single threshold guarantees robustness, but a reasonable composite of quantit
 - "Deflated Sharpe Ratio (DSR)" — Balaena Quant Insights, Medium (practical interpretation thresholds). https://medium.com/balaena-quant-insights/deflated-sharpe-ratio-dsr-33412c7dd464
 - "Probability of Backtest Overfitting" — CRAN `pbo` R package vignette (CSCV implementation). https://cran.r-project.org/web/packages/pbo/vignettes/pbo.html
 - Robert E. Pardo, *Design, Testing and Optimization of Trading Systems* (1992; 2nd ed. 2008) — origin of walk-forward analysis. https://en.wikipedia.org/wiki/Walk_forward_optimization
+
+## Getting the Data (CryptoDataAPI)
+
+Overfitting checks need the raw replay data: `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d since 2017-08) for re-running the strategy on perturbed windows, and `GET /api/v1/quant/regimes/history` (hourly regime probabilities since 2020) for [[regime-conditional-validation|regime-conditional]] splits. Catalog: [[cryptodataapi-backtesting]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this page's checks adversarially:
+
+- **Adversarial review** — the "Backtest Overfitting Checker" prompt (Pro tier, [prompt library](https://cryptodataapi.com/prompts)) audits a proposed strategy for seven curve-fitting red flags (parameter count, equity-curve smoothness, trade frequency, and more) against `GET /api/v1/backtesting/klines`
+- **Out-of-sample regimes** — verify the strategy's test folds span multiple regimes via `/api/v1/quant/regimes/history`; a strategy validated in one regime is a regime bet, not an edge
+- **Tip** — run the checker *before* falling in love with the equity curve; it is deliberately prompted to refute, mirroring this page's null-hypothesis stance
 
 ## Related
 

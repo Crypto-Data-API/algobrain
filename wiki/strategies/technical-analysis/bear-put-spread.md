@@ -2,7 +2,7 @@
 title: "Bear Put Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, bear-put-spread, debit-spread, bearish, defined-risk, ethereum]
 aliases: ["Put Debit Spread", "Long Put Spread", "Crypto Bear Put Spread", "Deribit Put Debit Spread"]
@@ -129,6 +129,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. IV/DVOL/skew are Deribit / [[greeks-live]] products, not CDA.
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — buy the debit spread when `GET /api/v1/volatility/regime` reads `compressed` (vol is cheap) while `GET /api/v1/derivatives/funding-rates?coin=ETH` stays positive — crowded longs are the fuel for the down-move the spread needs
+- **Regime gate** — `GET /api/v1/quant/market`: rising `strong_trend_bear` or `vol_spike` probability supports entry; a stable `range_low_vol` state means the debit decays unspent
+- **Backtest** — measure how often N%-down moves complete within the tenor using `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); pair each simulated entry with point-in-time regime state from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — `/api/v1/market-intelligence/liquidations` shows the deleveraging flush the spread profits from — take profits into the cascade rather than holding for max value; use the 60-day `/api/v1/volatility/regime/{symbol}` history to confirm the vol window is genuinely cheap, not just recently crushed.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Momentum Investing"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-20
+updated: 2026-07-19
 status: excellent
 tags: [quantitative, momentum, trend-following, backtesting]
 aliases: ["Momentum Investing", "Momentum Strategy", "Cross-Sectional Momentum", "Momentum Stocks", "Stock Momentum", "Momentum Trading", "momo trading"]
@@ -255,6 +255,37 @@ A consolidated process for deploying and running a momentum book:
 - **Difficult to short**: The short side contributes significantly to paper returns but is hard and expensive to implement live
 - **Behavioral challenge**: Buying stocks at all-time highs feels psychologically uncomfortable, leading many investors to abandon the strategy at the wrong time
 - **Premium is cyclical**: multi-year periods of underperformance are normal and indistinguishable in real time from permanent decay
+
+## Getting the Data (CryptoDataAPI)
+
+For the crypto expression (cross-sectional momentum across coins), [[cryptodataapi|CryptoDataAPI]] serves the universe, the return histories, and the point-in-time snapshots that keep the backtest survivorship-free.
+
+**Live data:**
+- `GET /api/v1/coins/top?limit=100` — the liquid universe ranked by market cap (the crypto stand-in for the index-constituent filter)
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=365` — daily OHLCV per symbol for the 12-1 momentum signal
+- `GET /api/v1/quant/coins/risk` — bulk per-coin risk model with vol-target multipliers (Pro), for volatility-scaled weighting
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full OHLCV archive (Binance spot 1h/4h/1d back to 2017-08) for signal research
+- `GET /api/v1/backtesting/symbols` + `GET /api/v1/backtesting/daily-snapshots/{date}` — what was actually tradeable on each date (snapshots since 2026-03-02): the survivorship-bias defence
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/coins/top?limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]] and [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe & signal** — monthly: `GET /api/v1/coins/top?limit=100` → filter by liquidity → pull `GET /api/v1/market-data/klines` per symbol → rank on t-12..t-2 cumulative return → hold the top decile/quintile with a hold-band to cut turnover.
+- **Crash guard** — `GET /api/v1/quant/market` + `GET /api/v1/regimes/current`: the documented bear-market + high-vol crash precondition maps directly onto elevated `strong_trend_bear`/`vol_spike` probabilities — halve gross and drop any short leg while they dominate.
+- **Sizing** — one batch `GET /api/v1/quant/coins/risk` call for vol-scaled weights instead of per-symbol vol estimation.
+- **Backtest** — signal research on `GET /api/v1/backtesting/klines` (since 2017-08); reconstruct each rebalance date's tradeable universe from `GET /api/v1/backtesting/symbols` + `GET /api/v1/backtesting/daily-snapshots/{date}` (since 2026-03-02) — "top-N as of each date", never today's list back-applied.
+- **Tips** — respect `new_listing`/`insufficient_history` flags (a three-month-old coin has no 12-1 signal); haircut the forward premium and measure realised round-trip cost against the ~50 bps breakeven — crypto momentum is crowded and turnover bites at 100-300%/yr.
 
 ## Sources
 

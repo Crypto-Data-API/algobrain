@@ -346,6 +346,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]].
 
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [fear & greed](https://cryptodataapi.com/fear-greed) · [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run all five gates end-to-end:
+
+- **Gate stack** — `GET /api/v1/sentiment/fear-greed` (consecutive extreme-fear), `GET /api/v1/market-intelligence/dvol-history` (spike percentile), and `GET /api/v1/market-intelligence/liquidations?coin=BTC` (no fresh cascade) are polled together each hour post-panic
+- **Signal** — 15m klines compute realised vol rolling over (Gate 3) — the actual entry trigger
+- **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` defers entry no matter how stretched DVOL is
+- **Backtest** — `GET /api/v1/market-intelligence/fear-greed-history` + DVOL history + `GET /api/v1/backtesting/klines` (1d back to 2017-08) replay the gates across past panics; the cascade-clear condition (Gate 4) replays only since 2026-03-30 via `GET /api/v1/backtesting/liquidations`
+- **Tips** — the short-put execution itself lives on Deribit; CryptoDataAPI covers all five gates, so let the agent hold the full gate state and only call Deribit when armed
+
 ## Related
 
 - [[crypto-options-volatility-selling]] — the canonical short-vol book with DVOL-percentile gate; this page is the panic-event-targeted subset

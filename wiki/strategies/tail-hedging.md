@@ -189,6 +189,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 For DVOL levels/history and the full IV surface, use the Deribit API (`/api/v2/public/get_volatility_index_data`) or [[greeks-live]]. See [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the buy-cheap / monetize-fast cycle this page prescribes:
+
+- **Cheap-protection window** — `GET /api/v1/volatility/regime` reading `compressed` plus positive funding from `GET /api/v1/derivatives/funding-rates?coin=BTC` is the machine-readable "low DVOL percentile + call-skew regime" entry condition (the crowd is bidding calls; puts are unloved)
+- **Black-swan overlay** — `GET /api/v1/security/regime/score` (hack/depeg stress) covers the crypto-native tails an index-style price hedge misses
+- **Monetization trigger** — a spike in `GET /api/v1/market-intelligence/liquidations` with `GET /api/v1/quant/gex` showing dealers short gamma marks the cascade window; crypto vol reverts in days-to-hours, so the agent should scale out of the hedge into the spike, not after it
+- **Backtest** — compute the DVOL−RV spread's RV leg from `GET /api/v1/backtesting/klines` (1h/4h/1d to 2017-08; covers 2020-03, LUNA, FTX) and replay hedge-budget bleed vs cascade payoffs with point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — the kill criterion "payoff not monetized within the spike window" is a process rule an agent can enforce with a hard timer once the liquidation trigger fires
+
 ## Related
 - [[tail-risk]] — the risk being hedged
 - [[long-volatility-strategies]] — the broader long-vol family

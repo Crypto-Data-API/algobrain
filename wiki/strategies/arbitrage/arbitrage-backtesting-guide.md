@@ -2,7 +2,7 @@
 title: "Arbitrage Backtesting Guide"
 type: reference
 created: 2026-04-21
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, backtesting, quantitative, strategy-development]
 aliases: ["Arb Backtesting", "Multi-Leg Backtesting", "Arbitrage Simulation"]
@@ -356,6 +356,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/backtesting/symb
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-backtesting]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run an honest multi-leg arb backtest end-to-end:
+
+- **Leg series** — `GET /api/v1/backtesting/klines`, `GET /api/v1/backtesting/funding`, and `GET /api/v1/backtesting/liquidations` supply the per-leg price / carry / forced-flow series the Seven Deadly Sins framework needs.
+- **Survivorship-free universe** — reconstruct the tradeable roster on each date from `GET /api/v1/backtesting/daily-snapshots/{date}` (full `/daily` payload since 2026-03-02) so Sin 7 (venue survivorship) uses point-in-time membership, not today's list.
+- **Point-in-time regime label** — tag each backtest bar with its as-of state from `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Pro Plus) rather than today's labels — the concrete defence against [[lookahead-bias]].
+- **Honest windows** — klines reach 2017-08 (Binance spot 1h/4h/1d) but Hyperliquid daily only to 2023 and 1m klines only since 2026-03-30; funding is Hyperliquid-hourly since 2023-05, Binance-daily since 2026-03-30; liquidations are Hyperliquid-only since 2026-03-30. Never backtest a leg deeper than its series exists.
+- **Tips** — append `?format=markdown` for readable diffs; pair each replayed signal with the same-date snapshot so the fee/cost schedule matches the period, not today's.
 
 ## Related
 

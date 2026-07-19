@@ -360,6 +360,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-derivatives]], [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [open interest](https://cryptodataapi.com/open-interest) · [liquidations](https://cryptodataapi.com/liquidations) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/derivatives/open-interest?coin=ETH` tracked against its rolling peak; the flush-percentage trigger comes straight off this feed
+- **Filter** — `GET /api/v1/derivatives/funding-rates?coin=ETH` and `GET /api/v1/derivatives/binance/long-short-ratio?symbol=ETHUSDT` confirm the flush washed out crowded longs rather than shorts covering
+- **Regime gate** — `GET /api/v1/regimes/current`; no reversion entries in `Established Bear` or `Structural Shock`
+- **Backtest** — flush-event identification from `/derivatives/binance/history` (90-day rolling) plus `GET /api/v1/backtesting/funding` (Hyperliquid hourly since 2023-05; Binance daily since 2026-03-30); price-path replay from `GET /api/v1/backtesting/klines` 4h bars back to 2017-08
+- **Tips** — cross-reference `GET /api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to separate liquidation-driven flushes (the best setups) from voluntary de-risking
+- **Prompt library** — the "Open Interest Divergence Scanner" prompt (Free tier, [prompt library](https://cryptodataapi.com/prompts)) identifies OI-flush conditions ready for this reversion entry
+
 ## Related
 
 - [[mean-reversion]] — the underlying primitive that generates the edge

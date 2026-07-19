@@ -2,7 +2,7 @@
 title: "Jade Lizard"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, bitcoin, ethereum]
 aliases: ["Jade Lizard Spread", "Crypto Jade Lizard"]
@@ -137,6 +137,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [funding rates](https://cryptodataapi.com/funding-rates) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — sell when `GET /api/v1/volatility/regime` is elevated and `GET /api/v1/derivatives/funding-rates?coin=BTC` is positive: a rich call wing is what makes the credit ≥ call-spread-width (no-upside-risk) condition achievable
+- **Regime gate** — `GET /api/v1/quant/market`: the lizard's open risk is the downside — rising `strong_trend_bear`/`vol_spike` probability vetoes entry regardless of how rich the premium looks
+- **Backtest** — short-put breach frequency and drawdown from `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); tag flush days with `/api/v1/backtesting/liquidations` (Hyperliquid, since 2026-03-30) to study the naked-put tail separately
+- **Tips** — verify the credit ≥ call-spread-width invariant at *fill*, not at quote — legging risk quietly reintroduces upside risk; while short, a `/api/v1/market-intelligence/liquidations` long-liquidation cascade is what tests the naked put, so treat it as the exit bell.
 
 ## Related
 

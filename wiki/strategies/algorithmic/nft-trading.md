@@ -2,7 +2,7 @@
 title: "NFT Trading"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [crypto, nft, floor-sweeping, rarity-sniping, trait-arbitrage, liquidity-provision, opensea, blur, on-chain-analytics, algorithmic]
 aliases: ["NFT Trading Strategies", "NFT Flipping", "Rarity Sniping", "Floor Sweeping", "Trait Arbitrage"]
@@ -274,6 +274,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/nfts/collections
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-nft]]. Item-level listings and trait tables come from marketplace/Reservoir APIs; CryptoDataAPI supplies collection-level floor, volume, correlation, and market-regime context.
+
+**Live dashboards:** [NFT trends](https://cryptodataapi.com/nft-trends) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe** — `GET /api/v1/nfts/collections` + per-slug detail (`GET /api/v1/nfts/collections/{slug}`) for floor/stats screening; `GET /api/v1/nfts/correlations` keeps the book from becoming one concentrated bet
+- **Risk-appetite gate** — `GET /api/v1/nfts/overview` and `GET /api/v1/nfts/volume` as the NFT-specific gauge, cross-checked against `GET /api/v1/quant/market` — NFT bids evaporate first when the broad market flips risk-off
+- **Backtest** — the NFT family serves current state only: build floor/volume history by sampling these endpoints on a schedule, and pair any study with point-in-time market state from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) rather than today's labels
+- **Tips** — sanity-check `/nfts/volume` for wash-trade distortion before trusting momentum reads; `?format=markdown` keeps collection payloads compact in agent context
 
 ## Related
 

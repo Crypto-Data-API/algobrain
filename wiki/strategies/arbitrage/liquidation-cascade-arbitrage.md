@@ -2,7 +2,7 @@
 title: "Liquidation Cascade Arbitrage"
 type: strategy
 created: 2026-04-24
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [arbitrage, crypto, defi, algorithmic]
 aliases: ["Liquidation Bot", "Cascade Front-Run", "Keeper Arbitrage", "MEV Liquidations", "Liquidator Strategy"]
@@ -256,6 +256,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [gamma exposure](https://cryptodataapi.com/quant-gamma) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-intelligence/liquidations` (cross-exchange, top coins) and `GET /api/v1/market-intelligence/liquidations/by-exchange` (per-venue BTC, 4h) show where forced flow is firing right now; a burst of one-sided liquidations is the cascade trigger.
+- **Cascade fuel** — `GET /api/v1/quant/gex` (Pro+) exposes the liquidation profile / squeeze fuel around price, and `GET /api/v1/liquidity/oi-divergence` flags OI-vs-price stress before positions break.
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility score (0-100): cascades only overshoot enough to pay when books are fragile; skip entries in high-depth, low-fragility conditions. Cross-check `GET /api/v1/quant/market` for `vol_spike` probability.
+- **Backtest** — `GET /api/v1/backtesting/liquidations` (Hyperliquid per-symbol long/short flow, since 2026-03-30 only — no deeper liquidation history exists anywhere) plus `GET /api/v1/backtesting/klines` for the overshoot-and-revert price path. Pair with `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time regime state and no [[lookahead-bias]].
+- **Tips** — the on-chain liquidation legs (Aave/Maker position graphs, mempool) are outside CryptoDataAPI; use it for the perp-cascade side and venue-level forced-flow detection. Poll `/api/v1/daily` hourly for background state rather than hammering per-endpoint.
 
 ## Related
 

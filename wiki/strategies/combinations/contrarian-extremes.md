@@ -299,6 +299,38 @@ The strategy can absorb significant capital because it trades liquid instruments
 - Small sample size per year makes statistical validation slow
 - Cannot be the sole strategy — needs to be paired with [[trend-following]] or [[momentum-trading]] for the 75-85% of time spent waiting
 
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/sentiment/fear-greed` — the Crypto Fear & Greed component of the composite (crypto extreme: < 10 / > 90)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — the funding-rate overlay (deeply negative = fear extreme; > +0.1%/8h = greed extreme)
+- `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — positioning data to cross-check against survey sentiment (what traders do vs what they say)
+- `GET /api/v1/sentiment/macro` — yields and gold backdrop for the cyclical-vs-structural distinction
+
+**Historical data:**
+- `GET /api/v1/market-intelligence/fear-greed-history` — the full Fear & Greed timeseries for threshold calibration
+- `GET /api/v1/backtesting/klines` — Binance spot daily candles back to 2017-08 for forward-return tests conditioned on extreme readings
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/sentiment/fear-greed"
+```
+
+*Note: the equity composite inputs (AAII, VIX, NAAIM, put/call) are not on CryptoDataAPI — source those separately.*
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]], [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
+
+**Live dashboards:** [fear & greed](https://cryptodataapi.com/fear-greed) · [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/sentiment/fear-greed` — the crypto leg of the composite; tranche triggers fire at composite < 20/15/10/5
+- **Positioning confirm** — `GET /api/v1/derivatives/funding-rates?coin=BTC` + `GET /api/v1/derivatives/binance/long-short-ratio?symbol=BTCUSDT` — prioritise positioning over survey inputs when they conflict, per the rules above
+- **Structural-crisis check** — `GET /api/v1/regimes/current` + `GET /api/v1/security/regime/score` — halve tranche size when the extreme coincides with Structural Shock or elevated Security Stress (the 2008-style trap)
+- **Backtest** — the untested null hypothesis above is directly testable: condition forward returns from `GET /api/v1/backtesting/klines` (daily back to 2017-08) on `GET /api/v1/market-intelligence/fear-greed-history` readings; use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time composite replays going forward
+- **Tips** — extremes persist: enforce the tranche schedule (25% per threshold/time step) in code rather than deploying on the first trigger
+
 ## Related
 
 - [[contrarian]] — the broader contrarian style this strategy formalises

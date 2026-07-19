@@ -2,7 +2,7 @@
 title: "McClellan Oscillator"
 type: concept
 created: 2026-04-20
-updated: 2026-06-22
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis, market-breadth, market-internals]
 aliases: ["McClellan", "McClellan Osc", "McClellan Oscillator", "NYMO"]
@@ -94,6 +94,34 @@ Like all breadth tools it is a *confirming* and *context* indicator rather than 
 - McClellan Financial Publications (mcoscillator.com) — the family's reference site documenting construction and interpretation.
 - John J. Murphy, *Technical Analysis of the Financial Markets* (NYIF, 1999) — covers breadth oscillators in the market-internals chapter.
 - [[2026-04-20-comprehensive-guide-technical-trading-indicators]] — Comprehensive Guide to Technical Trading Indicators (compiled research).
+
+## Getting the Data (CryptoDataAPI)
+
+There is no exchange-published advance/decline feed for crypto, but the inputs are constructible from [[cryptodataapi|CryptoDataAPI]]'s universe snapshots:
+
+**Live data:**
+- `GET /api/v1/daily/prices` — ~2,500 Binance spot pairs in one call; count advancers vs decliners against the prior snapshot for daily net advances
+- `GET /api/v1/market-health/altcoin-breadth?period=200` — pre-computed % of coins above an N-day MA, a related market-wide breadth read
+
+**Historical data:**
+- `GET /api/v1/backtesting/daily-snapshots` — full daily payload, point-in-time since 2026-03-02, for reconstructing historical net-advance series with the correct dated universe
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/daily/prices"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-health]].
+
+**Live dashboards:** [market health](https://cryptodataapi.com/market)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Compute** — snapshot `GET /api/v1/daily/prices` once per day, tally net advances (advancers − decliners), then run the 19/39 EMA difference exactly as above; ratio-adjust by (Adv − Dec)/(Adv + Dec) since the listed-pair count changes as Binance lists and delists
+- **Live proxy** — `GET /api/v1/market-health/altcoin-breadth` with a short `period` gives a fast participation read without maintaining your own counts (it measures % above an MA, not net advances — related but not identical)
+- **Backtest** — reconstruct historical net advances from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02 only); the dated universe avoids survivorship in the advancer counts, but the window is short — treat crypto-McClellan thresholds as provisional
+- **Tip** — crypto's universe is dominated by low-liquidity pairs that follow BTC mechanically; computing a second oscillator on a volume-filtered subset (e.g. top-200 by quote volume) separates genuine breadth from beta noise
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "Breakout Strategies"
 type: concept
 created: 2026-04-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [technical-analysis, momentum, breakout, volatility, liquidity, liquidations, crypto]
 aliases: ["Breakout Trading", "Breakout Strategy", "breakout-trading"]
@@ -123,6 +123,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 curl -H "X-API-Key: $CDA_KEY" \
   "https://cryptodataapi.com/api/v1/derivatives/open-interest?coin=BTC"
 ```
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations) · [open interest](https://cryptodataapi.com/open-interest) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [funding rates](https://cryptodataapi.com/funding-rates)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — build ranges/channels and detect breaks from `GET /api/v1/market-data/klines`; confirm participation with rising `GET /api/v1/derivatives/open-interest` and `GET /api/v1/market-intelligence/liquidations` clusters firing in the break direction
+- **Compute** — `GET /api/v1/indicators/signum-rgg` (pre-computed ADX/DMI RED/GREY/GREEN) screens the whole universe for assets leaving GREY chop — the breakout candidate list — in one call
+- **Regime gate** — `GET /api/v1/quant/market`: breakout families pay in `strong_trend_*` and `squeeze` states and bleed in `choppy_high_vol`; stand down while chop probability leads
+- **Backtest** — `GET /api/v1/backtesting/klines`: Binance spot 1h/4h/1d back to 2017-08, Hyperliquid daily to 2023 (1m bars only since 2026-03-30); join hourly HMM labels from `/api/v1/quant/regimes/history` (since 2020, Pro Plus) to test the regime filter point-in-time
+- **Tips** — trigger only on closed candles; batch universe scans via `/api/v1/quant/coins/risk` instead of per-symbol loops, and respect `new_listing` flags — young listings produce meaningless "range highs".
 
 ## Related
 - [[support-resistance-breakout]] — the canonical horizontal-level breakout

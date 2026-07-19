@@ -2,7 +2,7 @@
 title: "tastytrade Mechanics (Crypto)"
 type: concept
 created: 2026-05-07
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, methodology, premium-selling, education, bitcoin, ethereum]
 aliases: ["tastytrade Playbook", "tastytrade Rules", "Sosnoff Mechanics", "45-DTE 50% 21-DTE", "tastytrade Methodology"]
@@ -272,6 +272,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [gamma exposure](https://cryptodataapi.com/quant-gamma)
+
+### AI agent workflow
+
+The index-card rule set is a natural agent policy — an AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can execute it without discretion:
+
+- **Entry filter** — `GET /api/v1/volatility/regime` (skip `vol_shock`) + realized vol from `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=1d&limit=90` for the DVOL−RV > 5 check; the DVOL percentile itself comes from Deribit
+- **Wing tilt** — `GET /api/v1/derivatives/funding-rates?coin=BTC` drives the `skew_tilt` branch in the pseudocode (funding > 0.03%/8h → lean the short toward the call wing)
+- **Kill switch** — poll `GET /api/v1/volatility/regime/score` + `GET /api/v1/market-intelligence/liquidations` each cycle; a joint spike is the automated stand-in for the "DVOL +50% in a session" flatten rule the equity playbook lacks
+- **Backtest** — replay the 50%-winner / 10-14-DTE / 2x-credit rules on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d to 2017-08) with point-in-time regimes from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02); a sample that excludes 2020-03 or 2022 is calm-regime-biased by construction
+- **Tips** — enforce "trade small, trade often" as hard per-trade caps in the agent's order layer; the playbook's known failure mode (rolling losers) is precisely what mechanical execution exists to prevent
 
 ## Sources
 

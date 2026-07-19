@@ -2,7 +2,7 @@
 title: "Covered Call (Crypto)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, income, premium-selling, covered-call, derivatives, bitcoin, ethereum]
 aliases: ["Buy-Write", "Covered Call Writing", "Crypto Covered Call", "BTC Covered Call", "ETH Covered Call", "covered-calls", "covered-call-strategy"]
@@ -119,6 +119,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; IV/DVOL from Deribit / [[greeks-live]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — sell calls when `GET /api/v1/volatility/regime` is elevated/`expanding` (rich premium) and `GET /api/v1/market-intelligence/options` max pain sits below the candidate strike
+- **Regime gate** — `GET /api/v1/quant/market`: a leading `strong_trend_bull` probability is the cap-regret veto — move to further strikes or skip a cycle rather than cap a breakout
+- **Backtest** — replay strike-vs-outcome per expiry cycle on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08), pairing each roll date with point-in-time regimes from `/api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Tips** — positive perp funding on `/api/v1/derivatives/funding-rates?coin=BTC` fattens call premium — the best selling windows; use the 60-day `/api/v1/volatility/regime/{symbol}` history to roll into vol pops rather than on a fixed calendar.
 
 ## Related
 

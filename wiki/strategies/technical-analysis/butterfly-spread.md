@@ -2,7 +2,7 @@
 title: "Butterfly Spread"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [options, crypto, derivatives, volatility, mean-reversion, bitcoin, ethereum]
 aliases: ["Long Butterfly", "Call Butterfly", "Put Butterfly", "Crypto Butterfly"]
@@ -123,6 +123,17 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]]; volatility-regime detail on [[cryptodataapi]]. The IV surface and DVOL itself come from Deribit / [[greeks-live]].
+
+**Live dashboards:** [gamma exposure](https://cryptodataapi.com/quant-gamma) · [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — center the body on the `GET /api/v1/market-intelligence/options` max-pain strike into expiry; a long-dealer-gamma read from `GET /api/v1/quant/gex` confirms the pin thesis the fly monetises
+- **Regime gate** — `GET /api/v1/quant/market` with `range_low_vol` probability leading, plus `GET /api/v1/volatility/regime` elevated at entry (rich wings to sell against) and expected to crush toward a quiet outcome
+- **Backtest** — measure pin behavior around monthly expiries with `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08); validate entry vol states against `/api/v1/backtesting/daily-snapshots` (since 2026-03-02) to keep timing point-in-time
+- **Tips** — the fly's P&L is decided in the final days: raise polling of `/api/v1/quant/gex` and max pain in expiry week; a max-pain migration away from the body is the roll signal, not a reason to hope.
 
 ## Related
 

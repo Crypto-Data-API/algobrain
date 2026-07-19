@@ -2,7 +2,7 @@
 title: "Strategy Regime Matrix"
 type: index
 created: 2026-04-10
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [strategies, regime, regime-detection, portfolio-construction]
 aliases: ["Regime Map", "Strategy-Regime Mapping"]
@@ -316,6 +316,8 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/regimes/current"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes)
+
 
 ## Related
 

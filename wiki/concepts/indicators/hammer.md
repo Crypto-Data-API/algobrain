@@ -2,7 +2,7 @@
 title: "Hammer"
 type: concept
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [indicators, technical-analysis]
 aliases: ["Hammer", "Hammer Candlestick", "Inverted Hammer", "Hanging Man"]
@@ -82,6 +82,33 @@ The same geometry carries opposite meaning depending on the preceding trend — 
 - **Low-volume hammers.** A rejection on thin volume reflects little real participation; demand confirmation with elevated [[volume]].
 - **Over-tight stops.** Placing the stop at the body rather than below the wick low invites being shaken out on a normal retest of the lows. The wick extreme is the true invalidation.
 - **Tiny-range candles.** On very low-volatility bars the "2× body" rule is trivially met by noise. The candle should also be of meaningful size relative to recent range.
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100` — OHLCV bars whose open/high/low/close geometry defines the hammer
+- `GET /api/v1/hyperliquid/candles?coin=BTC&interval=4h&limit=100` — the same detection on Hyperliquid perp listings
+- `GET /api/v1/market-data/volume-history?days=30` — daily volume with buy ratio to confirm real participation on the rejection candle
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — full kline archive (Binance spot 1h/4h/1d back to 2017-08) for pattern-frequency and hit-rate studies
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=100"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
+
+**Live dashboards:** [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can work with this indicator directly:
+
+- **Detect** — fetch bars via `GET /api/v1/market-data/klines` and apply the geometry checklist above (lower wick ≥ 2× body, body in the upper third, minimal upper wick) plus the mandatory prior-downtrend context test
+- **Confirm** — only signal after the next candle closes above the hammer body; compare the hammer bar's volume to its 20-bar average from the same kline payload
+- **Backtest** — replay detection over `GET /api/v1/backtesting/klines` (1h/4h/1d Binance spot back to 2017-08) and score follow-through against the "failed hammer" base rate per timeframe
+- **Tip** — crypto wicks are frequently liquidation artifacts; cross-check large lower wicks against `GET /api/v1/market-intelligence/liquidations` — a wick made of forced selling is the strongest version of the rejection story
 
 ## Sources
 

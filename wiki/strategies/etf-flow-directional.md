@@ -2,7 +2,7 @@
 title: "ETF Flow Directional"
 type: strategy
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 tags: [quantitative, momentum, crypto, bitcoin, ethereum, event-driven, market-regime, on-chain]
 aliases: ["ETF Flow Momentum", "Spot ETF Flow Trading", "BTC ETF Flow Signal", "Institutional Flow Directional", "ETF Net-Flow Momentum"]
@@ -263,6 +263,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intellige
 ```
 
 Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [short-term regimes](https://cryptodataapi.com/market-regimes) · [long-term regimes](https://cryptodataapi.com/regimes) · [BTC cycle](https://cryptodataapi.com/bitcoin-cycle-indicators)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/market-intelligence/etf/btc/flows` (and `/etf/eth/flows`) daily after the issuer prints: compute the 20-day z-score and 5-day EMA slope directly from the returned series; `GET /api/v1/market-intelligence/etf/btc/aum` for the AUM trend confirmation.
+- **Confirmation** — `GET /api/v1/market-intelligence/coinbase-premium` (US institutional bid) + `GET /api/v1/on-chain/exchange-flows/BTC` (coins leaving exchanges corroborate accumulation) before acting on a z-score entry.
+- **Regime gate** — `GET /api/v1/regimes/current` + `GET /api/v1/quant/market`: scale up in BTC-led/broad-bull states; prefer flat over short while the structural-bull label holds, per the entry rules above.
+- **Execution** — `GET /api/v1/derivatives/funding-rates?coin=BTC` decides spot vs perp expression (do not pay rich positive funding on a long the flow signal already favours).
+- **Backtest** — the `/etf/{asset}/flows` history is the full life of the signal (US spot BTC ETFs launched Jan 2024); join it to `GET /api/v1/backtesting/klines` for forward-return tests, and use `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) for point-in-time flow/regime states in the recent window to avoid lookahead.
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly (it includes ETF flows) rather than hammering individual endpoints; remember the signal is end-of-day — the hard stop, not the flow exit, is the only defence against intraday macro gaps.
 
 ## Related
 

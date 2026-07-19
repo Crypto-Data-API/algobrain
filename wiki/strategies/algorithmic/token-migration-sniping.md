@@ -2,7 +2,7 @@
 title: "Token Migration Sniping"
 type: strategy
 created: 2026-05-04
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [algorithmic, crypto, scalping, event-driven]
 aliases: ["Migration Sniping", "Pump.fun Migration Snipe", "Bond-to-Raydium Sniping", "Graduation Sniping"]
@@ -250,6 +250,16 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Watchlist** — `GET /api/v1/dex/new-pools` and `GET /api/v1/dex/trending` surface bonding-curve tokens approaching graduation; the migration trigger itself comes from the on-chain program feed (Bitquery/Geyser)
+- **Safety gate** — `GET /api/v1/dex/security/solana/{address}` on every watchlist candidate before the bundle path arms
+- **Regime gate** — `GET /api/v1/meme/regime/score` (`meme_season` flag) gates the whole strategy; per-asset lifecycle from `GET /api/v1/meme/regime/{symbol}` stages the post-migration exit ladder
+- **Backtest** — migration-slot fills are not replayable over REST; use `GET /api/v1/backtesting/klines` (1m only since 2026-03-30) for post-migration decay studies and forward-test the race itself
+- **Tips** — keep CryptoDataAPI calls in the slow pre-trade loop; the latency path is Geyser → Jito bundle, per [[jito-bundle-sniping]]
 
 ## Related
 

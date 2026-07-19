@@ -2,7 +2,7 @@
 title: "Market Making Strategy (CEX)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: draft
 tags: [market-making, crypto, binance, bybit, spread-capture, inventory-management, adverse-selection, quantitative, scalping, perpetual-futures, funding-rate]
 aliases: ["CEX Market Making", "Crypto Market Making", "Spread Capture", "Binance Market Making", "Bybit Market Making"]
@@ -257,6 +257,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/depth"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
+
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [order-book depth](https://cryptodataapi.com/quant-order-books) · [open interest](https://cryptodataapi.com/open-interest) · [liquidations](https://cryptodataapi.com/liquidations)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run the research and risk layers of this book (microsecond quoting itself lives on the exchange gateway):
+
+- **Book context** — `GET /api/v1/liquidity/depth` for per-coin depth/spread at 10/25/50/100 bps (clip sizing, symbol selection), `GET /api/v1/market-intelligence/taker-buy-sell` as a flow-toxicity backdrop per venue
+- **Regime gate** — `GET /api/v1/liquidity/regime` fragility score: widen quotes or pull when the book cannot absorb a shock; `GET /api/v1/derivatives/binance/open-interest` flags the long-skewed, liquidation-prone regimes worth leaning against
+- **Carry** — `GET /api/v1/derivatives/binance/funding-rates?symbol=BTCUSDT` for the 8h funding on warehoused inventory (bias skew toward flat before each stamp)
+- **Backtest** — Binance 1m klines from `GET /api/v1/backtesting/klines` exist only since 2026-03-30 (450+ USDT-perp markets, grows forward) — the only resolution meaningful for quoter replay; 1h bars back to 2017-08 support coarse σ/regime studies only. `GET /api/v1/backtesting/funding` (Binance daily since 2026-03-30) replays inventory carry
+- **Tips** — markout and queue-position measurement require the exchange WS; use CDA to pick symbols where spread > adverse selection and to kill quoting when the liquidity regime turns fragile
 
 ## Related
 

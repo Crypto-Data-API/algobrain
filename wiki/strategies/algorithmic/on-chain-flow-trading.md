@@ -2,7 +2,7 @@
 title: "On-Chain Flow Trading"
 type: strategy
 created: 2026-06-03
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [crypto, bitcoin, ethereum, quantitative, market-regime, algorithmic]
 aliases: ["On-Chain Flow Trading", "Exchange Flow Trading", "On-Chain Signal Trading"]
@@ -238,6 +238,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/on-chain/exchang
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
+
+**Live dashboards:** [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Signal** — `GET /api/v1/on-chain/exchange-flows/BTC` (1h-7d windows) + `GET /api/v1/on-chain/stablecoin-reserves/dry-powder` for the flow/dry-powder composite; `GET /api/v1/on-chain/miners/hash-ribbon` and `GET /api/v1/on-chain/dormancy/btc` for the slower cycle legs
+- **Spike watch** — `GET /api/v1/on-chain/exchange-flows/spike-alerts` (>= $1M transfers) as the real-time whale-deposit trigger
+- **Regime gate** — combine `GET /api/v1/on-chain/score` with `GET /api/v1/quant/market`; flow signals lead price by weeks, so act only when the HMM state agrees with the flow direction
+- **Backtest** — point-in-time discipline is this page's core requirement: replay against `GET /api/v1/backtesting/daily-snapshots/{date}` (full daily payload since 2026-03-02) and `GET /api/v1/quant/regimes/history` (hourly HMM probabilities since 2020, Parquet, Pro Plus); `GET /api/v1/on-chain/whale-score/{symbol}` carries its own accumulation timeseries
+- **Tips** — the weeks-lead cadence means hourly polling of the cached `/api/v1/daily` bundle is plenty; never validate old signals against re-labelled current data — label revision is this strategy's lookahead trap
 
 ## Related
 

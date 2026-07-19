@@ -372,6 +372,18 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [long-term regimes](https://cryptodataapi.com/regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run every gate end-to-end:
+
+- **Trend gate** — daily klines (SMA20 distance), 4h klines (RSI), and `GET /api/v1/derivatives/funding-rates?coin=BTC` 7-day average must all agree before any premium is sold
+- **Vol gate** — `GET /api/v1/market-intelligence/dvol-history` supplies the 52-week IV percentile that decides whether premium is worth selling at all
+- **Regime gate** — `GET /api/v1/regimes/current`; `Structural_Shock` closes the strategy regardless of trend and IV state
+- **Backtest** — regime-classified wing P&L from DVOL history joined to `GET /api/v1/backtesting/klines` (1d/4h back to 2017-08); pair with `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02) so past trend-gate states are point-in-time
+- **Tips** — strikes and fills live on Deribit; re-check all three trend gates at roll time, not just entry — trend decay mid-position is this strategy's main bleed
+
 ## Related
 
 - [[crypto-options-volatility-selling]] — the canonical baseline short-vol book; this page is the trend-conditional wing-selective variant

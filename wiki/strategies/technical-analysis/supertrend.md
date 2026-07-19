@@ -2,7 +2,7 @@
 title: "Supertrend Indicator"
 type: concept
 created: 2026-04-06
-updated: 2026-07-14
+updated: 2026-07-19
 status: good
 domain: [technical-analysis]
 prerequisites: ["[[atr]]", "[[trailing-stop]]"]
@@ -199,6 +199,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 ```
 
 Auth: `X-API-Key` header. Endpoint catalogs: [[cryptodataapi-market-data]], [[cryptodataapi-backtesting]], [[cryptodataapi-indicators]], [[cryptodataapi-hyperliquid]].
+
+**Live dashboards:** [SIGNUM RGG](https://cryptodataapi.com/signum-rgg-coin-trend-indicator) · [technical structure](https://cryptodataapi.com/technical-structure) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run a Supertrend system end-to-end:
+
+- **Compute** — `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=1000` (or `GET /api/v1/hyperliquid/candles?coin=BTC&interval=4h&limit=1000`) → hl2 + ATR bands on closed candles; the live bar repaints, so act on closes only.
+- **MTF gate** — a second klines pull at `interval=1d` supplies the higher-timeframe Supertrend colour — the single filter that lifts the bare system from coin-flip toward a workable trend follower.
+- **Chop filter** — `GET /api/v1/indicators/signum-rgg` — take flips only in GREEN/RED ADX states; GREY marks the whipsaw range regime.
+- **Regime gate** — `GET /api/v1/quant/market` — mute flips in `range_low_vol`/`choppy_high_vol`.
+- **Backtest** — `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08; Hyperliquid daily to 2023) for (period, multiplier) robustness across trend/chop mixes — distrust any setting that only wins in one regime.
+- **Tips** — one universe-wide klines sweep per cycle powers the cross-asset flip scanner; respect `insufficient_history` flags on new listings before trusting ATR(10).
 
 ## Key Takeaways
 

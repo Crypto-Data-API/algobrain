@@ -2,7 +2,7 @@
 title: "Memecoin Sniping"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-13
+updated: 2026-07-19
 status: excellent
 tags: [crypto, memecoins, sniping, pump-fun, raydium, solana, degen, bots, high-risk, token-launch, algorithmic]
 aliases: ["Memecoin Trading", "Token Launch Sniping", "Pump.fun Sniping", "Degen Sniping"]
@@ -299,6 +299,16 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/trending"
 ```
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe** — `GET /api/v1/dex/new-pools` + `GET /api/v1/dex/trending` feed the candidate queue the bot filters
+- **Screening** — `GET /api/v1/dex/security/{chain}/{address}` as the automated rug/honeypot gate on every candidate before capital moves
+- **Regime gate** — `GET /api/v1/meme/regime/score` (`meme_season` flag) sizes the whole book up or down; per-asset `GET /api/v1/meme/regime/{symbol}` (euphoric/distribution/ignition/bleeding/dormant, 60d history) stages the exit ladder
+- **Backtest** — same-block entries are un-replayable from REST; validate the post-entry take-profit ladder on `GET /api/v1/backtesting/klines` (1m only since 2026-03-30, growing forward) and treat naive win-rate backtests as inflated
+- **Tips** — nearly every snipe target carries `new_listing` / `insufficient_history` flags — handle them explicitly; keep discovery/regime polling on cached endpoints and spend the latency budget on execution only
 
 ## Related
 

@@ -265,6 +265,18 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/volatility/regim
 
 For DVOL and the full IV surface, use the Deribit API or [[greeks-live]]. Full catalog: [[cryptodataapi-market-intelligence]] and [[cryptodataapi-regimes]].
 
+**Live dashboards:** [funding rates](https://cryptodataapi.com/funding-rates) · [liquidations](https://cryptodataapi.com/liquidations) · [short-term regimes](https://cryptodataapi.com/market-regimes)
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Entry/roll timing** — `GET /api/v1/volatility/regime/score` + `GET /api/v1/derivatives/funding-rates?coin=BTC`: buy or roll tranches while the vol composite is calm and funding is richly positive (call-skew euphoria cheapens downside puts — the best entry window).
+- **Monetisation watch** — `GET /api/v1/market-intelligence/liquidations` plus `GET /api/v1/volatility/regime` flipping to `vol_shock`: the cascade signature that fires the partial-monetisation and re-strike plan without hesitation.
+- **Regime gate** — `GET /api/v1/quant/market`: when `vol_spike` probability is elevated, puts are rich — trim size 25-50% or float the strike deeper OTM per the rules above.
+- **Backtest** — replay drawdown paths and roll schedules on `GET /api/v1/backtesting/klines` (Binance spot 1h/4h/1d back to 2017-08, spanning 2020-03/LUNA/FTX); pair with point-in-time states from `GET /api/v1/backtesting/daily-snapshots` (full snapshots since 2026-03-02) to keep trigger rules free of [[lookahead-bias]]. CDA holds no options-chain archive — premium histories come from Deribit.
+- **Tips** — poll the cached `GET /api/v1/daily` bundle hourly for funding + vol + liquidation context in one call; the overlay's main failure mode is unreviewed drift, so have the agent verify coverage ratio and DTE ladder on the weekly checklist above.
+
 ## Sources
 
 - [[deribit]] / [[greeks-live]] documentation — BTC/ETH option chain, coin-margined vs USDC-margined (linear) settlement, DVOL.

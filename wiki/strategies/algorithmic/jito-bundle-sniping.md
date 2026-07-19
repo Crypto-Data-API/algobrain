@@ -2,7 +2,7 @@
 title: "Jito Bundle Sniping"
 type: strategy
 created: 2026-05-04
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [algorithmic, crypto, scalping, market-microstructure]
 aliases: ["Jito Bundle Snipe", "Bundle-Protected Sniping", "MEV-Protected Memecoin Snipe"]
@@ -221,6 +221,35 @@ Bundle execution itself has effectively unlimited capacity at the protocol level
 - [[memecoin-sniping]] — broader category context.
 - [[mev-strategies]] — MEV taxonomy.
 - Jito Labs documentation — bundle API, tip accounts, Block Engine.
+
+## Getting the Data (CryptoDataAPI)
+
+Jito-specific feeds (Block Engine RPC, tip floor, leader schedule) come from Jito infrastructure — CryptoDataAPI supplies the upstream launch discovery, safety gating, and regime timing that the underlying sniping strategies this wrapper protects run on.
+
+**Live data:**
+- `GET /api/v1/dex/new-pools` — newest Solana launches (the upstream snipe universe)
+- `GET /api/v1/dex/trending` — where crowd flow is concentrating (a contention proxy for tip sizing)
+- `GET /api/v1/dex/security/{chain}/{address}` — rug/honeypot report; bundles do not protect against rugs, this gate does
+- `GET /api/v1/meme/regime/score` — market-wide meme-hype score + `meme_season` flag (on/off gate for the whole book)
+
+**Historical data:**
+- `GET /api/v1/meme/regime/{symbol}` — per-asset meme lifecycle + 60d history
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/dex/new-pools"
+```
+
+Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
+
+### AI agent workflow
+
+An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
+
+- **Universe** — poll `GET /api/v1/dex/new-pools` for launches worth bundling; run every candidate through `GET /api/v1/dex/security/solana/{address}` before building the bundle — the mandatory pre-trade rug filter this page requires
+- **Contention read** — `GET /api/v1/dex/trending` as a crowd proxy: hot-trending launches justify 75th-percentile tips, quiet flow doesn't warrant a bundle at all (the tip is dead weight)
+- **Regime gate** — `GET /api/v1/meme/regime/score` — when `meme_season` is off, contested launches thin out and the tip auction captures more than it saves
+- **Backtest** — the tip auction and land rate cannot be replayed from REST archives; validate the underlying strategy's post-entry economics on `GET /api/v1/backtesting/klines` (1m only since 2026-03-30) and treat the wrapper's contribution as the live land-rate/tip telemetry it is
+- **Tips** — tip floors, leader schedule, and bundle submission stay on Jito's own endpoints; keep the CryptoDataAPI security check in the pre-trade path, never the latency path
 
 ## Related
 
