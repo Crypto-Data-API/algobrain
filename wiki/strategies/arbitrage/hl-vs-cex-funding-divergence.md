@@ -320,6 +320,19 @@ Re-deploy criteria: all the above clear, plus 14-day average cross-venue spread 
 
 See [[when-to-retire-a-strategy]] for the broader framework. Like [[funding-rate-arbitrage]], this is a *pause-able* strategy: the underlying mechanism (cadence mismatch + flow-base divergence) does not disappear, only the spread level does.
 
+## Instrument Structures
+
+HL vs CEX funding divergence is a pure **cross-venue** strategy — every trade requires simultaneous positions on two different exchanges on the same underlying.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Cross-venue** | The defining and only structure. Long the venue with the lower (or more negative) funding, short the venue with the higher (or more positive) funding. The two legs are on different venue types: Hyperliquid (on-chain perp, 1h reset) and a CEX perp (Binance/Bybit/OKX, 8h reset). The funding-cadence mismatch and the distinct retail bases at each venue create the persistent spread. |
+| Pair | The cross-venue position is a "same-underlying pair" — both legs are on the same token (e.g., BTC) but expressed as perps on different venues. Within-venue pairs are [[pairs-trading]]; this is the cross-venue analogue. |
+| Basket | Extension: running the same cross-venue spread simultaneously on BTC, ETH, SOL, and other large-cap perps creates a basket of cross-venue funding pairs. Each leg-pair is independently sized; the basket reduces event-specific risk on any single asset. |
+| Single-asset | Not deployed. The delta-neutral construction always requires a counterpart leg on the other venue; removing one leg converts the trade into a directional funded bet. |
+
+The mechanics are strictly cross-venue: execution infrastructure must maintain access to both Hyperliquid (Web3 wallet, on-chain settlement) and at least one CEX (API key, custodied collateral). Capital efficiency is lower than single-venue strategies — capital is split across two venues, both of which earn separate funding but require separate margin. See [[multi-venue-capital-management]] for the collateral optimisation that recovers some of the efficiency cost.
+
 ## Advantages
 
 - **High Sharpe in active regimes.** 2.5 target Sharpe vs ~1.4 for single-venue funding arb — the cadence mismatch creates a richer signal than either venue's funding rate alone.

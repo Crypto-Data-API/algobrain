@@ -159,6 +159,7 @@ Pages that live directly in this section rather than a subcategory, grouped by t
 
 ### Crypto & Prediction Markets
 
+- [[pair-universe-spec]] — Canonical specification of AlgoBrain's tradeable pair universe on Hyperliquid (~21,100 candidates → ~150–500 tradeable pairs via five-gate funnel); consumed by all pairs/stat-arb strategies
 - [[stablecoin-yield]] — Earning yield on stablecoins across CeFi/DeFi venues
 - [[alpha-token-arbitrage]] — Exploiting pricing inefficiencies in exchange alpha/launchpad tokens
 - [[bittensor-subnet-rotation]] — Rotating among Bittensor subnets by emissions and fundamentals

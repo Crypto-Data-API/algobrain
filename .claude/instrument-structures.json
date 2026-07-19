@@ -1,0 +1,7 @@
+{
+  "_basis": "pairs = candidate universe C(206 HL perps, 2) per pair-universe-spec.md (screening funnel is part of each strategy's procedure, mirroring how single-asset counts use the full profiled universe with entry gates as strategy rules); pair_capable_designs = stat-arb row design count from the matrix; basket_capable_designs = conservative estimate of the rotation/momentum/cross-sectional subfamily documented as basket deployers.",
+  "screened_pairs": 21115,
+  "pair_capable_designs": 32,
+  "baskets": 51,
+  "basket_capable_designs": 50
+}

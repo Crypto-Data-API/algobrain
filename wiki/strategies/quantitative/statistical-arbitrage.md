@@ -267,6 +267,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
+## Instrument Structures
+
+Statistical arbitrage deploys across multiple structure types, scaling from pair to basket depending on book size and signal diversification.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The atomic unit. Each cointegrated pair is a two-legged dollar-neutral spread; mechanics are identical to [[pairs-trading]]. The bulk of the edge lives here. |
+| **Basket** | Optional extension: a synthetic basket (a portfolio of correlated coins) can substitute for one leg of a pair, allowing an asset to be traded against its sector index rather than a single peer. Reduces idiosyncratic break risk on one leg at the cost of construction complexity. |
+| Single-asset | Not deployed. The market-neutral construction requires at least two legs to cancel BTC-beta. |
+| Cross-venue | Sometimes layered on: the same pair can be expressed on two different venues (HL and Binance) to earn funding carry while the spread reverts. See [[hl-vs-cex-funding-divergence]]. |
+
+A full stat-arb book runs 5–15 concurrent pairs; the portfolio effect across uncorrelated spreads improves the risk-adjusted return and reduces single-pair structural-break exposure. The [[pair-universe-spec]] defines the eligible pair universe from which the book is populated.
+
 ## Related
 
 - [[pairs-trading]] — the simplest two-asset instance

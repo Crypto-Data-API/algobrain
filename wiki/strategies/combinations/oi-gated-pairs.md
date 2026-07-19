@@ -345,6 +345,19 @@ Pause on any of:
 
 See [[when-to-retire-a-strategy]] and [[failure-modes]] for the broader framework.
 
+## Instrument Structures
+
+OI-gated pairs deploys on the **pair** structure with an additional pre-entry check that screens the open-interest composition of the short leg for squeeze-precondition signals.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The defining structure. Long the underperformer, short the overperformer via perps, dollar-neutral by hedge ratio — identical to [[pairs-trading]]. The OI gate operates as an entry-blocking filter on the short leg only. |
+| Single-asset | Not deployed. The market-neutral construction is unchanged — if the OI gate rejects the short leg, the entire spread entry is skipped (not converted to a single-leg directional trade). |
+| Basket | Not deployed. OI screening is per-perp; a basket of short legs would complicate the squeeze-precondition analysis. |
+| Cross-venue | Not deployed in this strategy, though cross-venue OI aggregation (Hyperliquid + Binance OI on the same underlying) would improve the squeeze-precondition signal. |
+
+The mechanical change from [[pairs-trading]]: before entering the short leg, OI on the short leg must satisfy: short OI ≥ 15% of total OI AND OI is not building faster than 20% per 24h on the short side. These checks confirm that a squeeze precondition is not accumulating. An existing position is exited early if the short leg's OI short-side falls below 10%.
+
 ## Advantages
 
 - **Targets the #1 short-term failure mode of running pairs positions.** Spread squeezes — driven by OI build and crowded shorts on the short leg — are empirically the most common cause of stat-arb stop-losses in crypto. The gate addresses this specific, identifiable risk with measurable, observable data.

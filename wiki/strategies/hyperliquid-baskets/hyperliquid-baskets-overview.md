@@ -11,13 +11,13 @@ related: ["[[crypto-market-regime-taxonomy]]", "[[regime-strategy-playbook]]", "
 
 # Hyperliquid Basket Library
 
-A **basket** is one self-contained trading sleeve in the systematic perpetual-futures system on [[hyperliquid|Hyperliquid]]: a defined signal, entry/exit logic, position-sizing rule, and kill criteria, run with its own capital allocation and tracked independently. This page is the index of all **27 baskets**, each documented on its own page following the wiki's standard [[strategies-overview#strategy-page-sections|strategy-page structure]].
+A **basket** is one self-contained trading sleeve in the systematic perpetual-futures system on [[hyperliquid|Hyperliquid]]: a defined signal, entry/exit logic, position-sizing rule, and kill criteria, run with its own capital allocation and tracked independently. This page is the index of all **51 baskets** (27 original + 24 added in Campaign-2 Batch C3), each documented on its own page following the wiki's standard [[strategies-overview#strategy-page-sections|strategy-page structure]].
 
 > **Not investment advice.** These pages document *how each setup is designed to work* — the edge thesis, rules, and failure modes. Positioning, sizing, and deployment are downstream decisions. Every performance figure on the basket pages is a clearly-labelled **illustrative estimate**, not a backtest result.
 
 ## Baskets vs. Regimes — two orthogonal layers
 
-These 27 baskets are **strategies**. They are *not* the same as the **14 regime meta-baskets** in the [[crypto-market-regime-taxonomy|crypto regime taxonomy]] (a [[2026-06-03-cryptodataapi-14-basket-regime-framework|VENTURE AI LABS framework]]), which describe *market states*. The relationship is:
+These 51 baskets are **strategies**. They are *not* the same as the **14 regime meta-baskets** in the [[crypto-market-regime-taxonomy|crypto regime taxonomy]] (a [[2026-06-03-cryptodataapi-14-basket-regime-framework|VENTURE AI LABS framework]]), which describe *market states*. The relationship is:
 
 - The **regime taxonomy** answers *"what state is the market in right now?"* (e.g. full bear, funding-extreme, compressed vol, post-cascade).
 - The **basket library** answers *"given that state, which sleeve do I deploy?"* — the [[regime-strategy-playbook|regime → strategy mapping]] in concrete form.
@@ -90,6 +90,41 @@ Grouped by function. Each row links the basket page, its dominant [[edge-taxonom
 | [[token-unlock-supply-event]] | Informational / structural | [[event-catalyst-regime\|Event]] + [[on-chain-regime\|on-chain]] | Swing |
 | [[cross-sectional-relative-value]] | Analytical / structural | [[derivatives-native-regime\|Derivs]] (market-neutral) | Swing |
 | [[meme-coin-cycle]] | Behavioral | [[meme-speculative-regime\|Meme/spec]] | Swing |
+
+### C3 sector baskets (Campaign-2 Batch C3 additions)
+
+Twenty-four new baskets formalising sector and factor structures as first-class instrument types: 19 sector baskets, 3 factor baskets (dynamic construction), and 2 event baskets (dynamic construction). Each basket page specifies constituents (5–8 HL-listed names for sector baskets; screening criteria for factor/event baskets), selection rule, weighting scheme, rebalance cadence, and regime character.
+
+| Basket | Type | Regime gate | Timeframe |
+|--------|------|-------------|-----------|
+| [[l1-blockchains-basket]] | Sector | Alt-season / ETH bull | Swing |
+| [[l2-rollups-basket]] | Sector | ETH bull / alt-season | Swing |
+| [[defi-bluechip-basket]] | Sector | DeFi-active / alt-season | Swing |
+| [[ai-tokens-basket]] | Sector | AI hype cycle / alt-season | Swing |
+| [[memecoin-majors-basket]] | Sector | [[meme-speculative-regime\|Meme/spec]] | Swing |
+| [[depin-basket]] | Sector | Alt-season / real-world adoption | Swing |
+| [[gaming-gamefi-basket]] | Sector | Late alt-season / risk-on | Swing |
+| [[privacy-basket]] | Sector | Regulatory-uncertainty / counter-surveillance | Swing |
+| [[lst-restaking-basket]] | Sector | ETH bull / yield-positive | Swing |
+| [[rwa-basket]] | Sector | Institutional-adoption narrative | Swing |
+| [[oracle-basket]] | Sector | DeFi-active / infrastructure | Swing |
+| [[dex-tokens-basket]] | Sector | DeFi-active / high on-chain volume | Swing |
+| [[cex-tokens-basket]] | Sector | Bull market / high crypto volume | Swing |
+| [[payments-basket]] | Sector | Institutional / regulatory-positive | Swing |
+| [[storage-compute-basket]] | Sector | AI hype / DePIN active | Swing |
+| [[interoperability-basket]] | Sector | Multi-chain activity / bridge security | Swing |
+| [[solana-ecosystem-basket]] | Sector | Solana-season (SOL > ETH) | Swing |
+| [[cosmos-ibc-basket]] | Sector | Cosmos-season / IBC-active | Swing |
+| [[infrastructure-majors-basket]] | Sector | Early bull / quality-alt | Swing–position |
+| [[high-funding-carry-basket]] | Factor (dynamic) | High-funding perps available | Swing |
+| [[low-vol-majors-basket]] | Factor (dynamic) | Range / early bear | Position |
+| [[high-beta-alt-basket]] | Factor (dynamic) | Alt-season confirmed | Swing |
+| [[new-listing-basket]] | Event-driven | Any (bull preferred) | Intraday |
+| [[unlock-heavy-basket]] | Event-driven | Any macro regime | Swing |
+
+> **Note:** the three factor baskets ([[high-funding-carry-basket]], [[low-vol-majors-basket]], [[high-beta-alt-basket]]) and two event baskets ([[new-listing-basket]], [[unlock-heavy-basket]]) have no fixed constituents — they are rebuilt from screening criteria at each rebalance. The 19 sector baskets have named constituents that are reviewed monthly.
+
+*Instrument-structure context: all C3 baskets deploy on the **basket** structure. Factor baskets additionally form basket-vs-basket spreads via [[cross-sectional-relative-value]]; funding-carry basket pairs with the [[high-funding-carry-basket|long leg of funding-rate-harvest]] to form a cross-venue structure. See [[pair-universe-spec]] for the pair universe that feeds inter-basket spread strategies.*
 
 ## How the baskets fit together
 

@@ -224,6 +224,19 @@ The most likely failure modes (see [[failure-modes]]):
 
 See [[when-to-retire-a-strategy]].
 
+## Instrument Structures
+
+Mean reversion deploys across three structure types depending on the signal and target:
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Single-asset** | The primary deployment. Fade an individual token's overshooting move — long after a sharp decline or short after a sharp rally — holding for a reversion to the short-window mean. Simple entry/exit logic, one leg, no hedge. |
+| **Pair** | The market-neutral extension: when the single-asset move is suspected to be sector-wide (e.g., all L1s sold off together), express the reversion as a pair — long the most oversold asset in the sector, short the least oversold — to strip out the shared beta and isolate the idiosyncratic reversion. This is the [[pairs-trading]] overlap. |
+| **Basket** | Used as a sector-level filter or entry gate: if the sector basket has mean-reverted (returned to its short-window mean) but individual tokens within it have not, the basket-level signal identifies laggards still to catch up — a within-basket relative reversion. |
+| Cross-venue | Not deployed in standard mean reversion. Cross-venue reversion (same token, different venues) is [[cross-exchange-arbitrage]] territory. |
+
+The mechanics differ between structures: single-asset reversion uses raw z-score of returns vs. a 5–20 day window; pair reversion uses the spread z-score and cointegration (see [[pairs-trading]]); basket reversion computes the average z-score across sector constituents to identify over/under-sold sectors rather than single names.
+
 ## Advantages
 
 - High trade frequency gives statistical significance quickly — you learn fast whether the edge is real in the current regime.

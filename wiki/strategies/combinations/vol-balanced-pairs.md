@@ -346,6 +346,19 @@ Pause on any of:
 
 See [[when-to-retire-a-strategy]] for the broader framework.
 
+## Instrument Structures
+
+Vol-balanced pairs deploys on the **pair** structure with a modified position-sizing scheme that replaces dollar-neutral sizing with volatility-neutral sizing.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The only deployment structure. Two perp legs, long and short, with notional sized to equalise *volatility contribution* rather than dollar notional. The long leg and short leg target equal realised-vol contribution, so the spread P&L reflects the spread's own dynamics rather than being dominated by the more-volatile leg's directional drift. |
+| Single-asset | Not deployed. Vol-balancing is a spread-level construction — both legs are held simultaneously. |
+| Basket | Not deployed in base form. Vol-balancing can in principle be extended to a basket-vs-basket spread (one leg is a sector basket), but that extension lives in [[statistical-arbitrage]] and [[cross-sectional-relative-value]]. |
+| Cross-venue | Not deployed. Vol-balancing is an intra-venue construction. |
+
+Mechanical change from [[pairs-trading]]: `notional_A / notional_B ≠ beta` (the cointegration hedge ratio). Instead: `notional_A / notional_B = vol_B / vol_A` (inverse-vol ratio), where vol is the 20-day realised annualised volatility of each leg. In practice this means the lower-volatility leg receives larger notional and the higher-volatility leg receives smaller notional — correcting the systematic dollar-neutral bias toward the high-vol leg.
+
 ## Advantages
 
 - **Eliminates the dollar-neutrality implementation flaw.** The most common failure mode in crypto pairs trading — where the high-vol leg dominates directional P&L — is eliminated by construction. The spread P&L reflects the mean-reversion signal, not the directional drift of the larger-vol asset.

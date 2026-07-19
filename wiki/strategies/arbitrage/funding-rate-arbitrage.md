@@ -328,6 +328,19 @@ Re-deploy criteria (un-kill): all of the above clear, plus 14-day funding averag
 
 See [[when-to-retire-a-strategy]] for the broader framework. Funding-arb is a *pause-able* strategy: the underlying mechanism (perp funding) does not go away, only the rate level does, so killing-but-not-retiring is appropriate.
 
+## Instrument Structures
+
+Funding rate arbitrage deploys on a **cross-venue single-asset pair** (the spot-vs-perp basis) by construction — two legs on the same underlying, with the legs on different instrument types or venues.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Cross-venue** | The defining structure. The long spot leg and the short perpetual leg are on different instrument types (spot vs. perp) and often different venues (CEX spot + HL perp, or spot DEX + centralized perp). The funding spread is the cross-venue price-type differential that drives P&L. |
+| Pair | A degenerate case: when the spot and perp legs are on the same venue, this becomes a within-venue pair (perp-vs-spot). The mechanics are the same — the hedge ratio is 1:1 (spot:perp, equal notional) and the spread is purely the funding rate. |
+| **Basket** | Extension: running funding arb simultaneously on multiple coins (e.g., BTC, ETH, SOL all with positive funding) is a basket-level funding harvest. Position sizing per coin is independent; the basket provides diversification of the entry timing and funding reset risk. The [[high-funding-carry-basket]] is the pure-perp expression of the same concept without the spot leg. |
+| Single-asset | Not deployed. The delta-neutral construction requires both legs; a single perp leg without a spot hedge is a directional bet, not funding arb. |
+
+Mechanics change across venues: on Hyperliquid (1h funding reset), the carry compounds 3× faster than 8h CEX funding — the same rate expressed as 8h-equivalent is 1/3 of the HL rate. Cross-venue versions must normalise funding frequencies before comparing carry income. See [[hl-vs-cex-funding-divergence]] for the pure cross-venue (HL perp vs. CEX perp) version.
+
 ## Advantages
 
 - **Truly delta-neutral when properly hedged.** No directional view required — the only views are on funding persistence and counterparty solvency. This mirrors the Thorp doctrine (Source: [[book-a-man-for-all-markets]]): edge plus disciplined hedging plus Kelly sizing.

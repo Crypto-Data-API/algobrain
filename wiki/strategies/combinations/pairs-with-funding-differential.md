@@ -268,6 +268,19 @@ Pause on any of:
 
 See [[when-to-retire-a-strategy]] for the broader framework.
 
+## Instrument Structures
+
+Pairs with funding differential deploys on the **pair** structure, layering a funding-carry overlay on top of the standard z-score entry logic.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The defining structure. Two perp legs, long/short, dollar-neutral by hedge ratio. The funding differential is the additional filter: the strategy requires that the funding rate on the shorted leg exceeds the funding rate on the longed leg (earning carry alongside the spread reversion). |
+| Single-asset | Not deployed. The carry overlay does not change the market-neutral construction — both legs are always held simultaneously. |
+| Basket | Not deployed. The funding differential check is computed at the individual perp level; basket construction would blur the per-leg funding signal. |
+| Cross-venue | The funding-differential concept extends naturally to [[hl-vs-cex-funding-divergence]], which is a cross-venue pair that earns funding spread between Hyperliquid and a CEX on the same underlying. That is a related but distinct strategy. |
+
+The key mechanical difference from standard [[pairs-trading]]: the entry z-score threshold is *relaxed* when funding agrees (to 2.0σ) and *tightened* when it disagrees (to 2.5σ), so the carry signal affects entry selectivity, not leg sizing or the market-neutral construction itself.
+
 ## Advantages
 
 - **Double confirmation before entry**: both the statistical signal (z-score) and the structural signal (funding differential) must agree, materially reducing false entries relative to z-score alone.

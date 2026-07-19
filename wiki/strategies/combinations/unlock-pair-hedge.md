@@ -292,6 +292,19 @@ Pause on any of:
 
 See [[when-to-retire-a-strategy]] for the broader framework.
 
+## Instrument Structures
+
+Unlock pair hedge deploys on the **pair** structure, expressing the unlock short as a hedged spread rather than an outright directional short.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The defining structure. Short the unlocking token (the idiosyncratic supply-shock bet), long a beta-matched sector peer (the BTC-beta hedge). The two legs are sized to be beta-neutral: `long_notional = short_notional × (beta_A / beta_B)`, where beta is each token's rolling 30-day BTC-beta. |
+| Single-asset | The base unlock short without the hedge is [[unlock-short-with-crowding-gate]]. This strategy explicitly replaces that single-leg expression with a pair to strip out market-direction risk. |
+| Basket | An extension is possible: instead of one sector peer as the long leg, long a basket of sector peers (e.g., the [[l1-blockchains-basket]] as the hedge when shorting a single L1 unlock). This reduces idiosyncratic peer risk but adds construction complexity. |
+| Cross-venue | Not directly deployed. If the unlocking token's HL perp is illiquid, the short can be expressed on a CEX perp instead, but the long hedge remains an HL perp of the sector peer. |
+
+Mechanical difference from naked unlock shorting: the pair structure means the trade profits only from the *idiosyncratic* component of the unlock price impact. If the entire crypto market drops 5% during the unlock window, both legs decline roughly equally and P&L is approximately flat — the market direction is hedged. The edge (and risk) is concentrated in the *relative* underperformance of the unlocking token vs. its sector peer.
+
 ## Advantages
 
 - **Beta hedge removes the largest noise source** — broad market direction accounts for 60–80% of a typical altcoin's short-term return variance; removing it isolates the supply-shock signal.

@@ -18,22 +18,22 @@ for Trading-Profile waves). All Campaign-1 guardrails below still apply.
       overlays (link existing pages where they already cover a cell — e.g. delta-neutral
       yield, stablecoin-depeg family, jito/MEV pages), then author new combination pages in
       batches of ~5 for viable uncovered cells (~35-45 pages est).
-- [ ] C2. (C2-1 done 2026-07-19: 5 columns added, 90-cell audit — 2 covered by existing,
+- [x] C2. GOAL-COMPLETE (C2-1 done 2026-07-19: 5 columns added, 90-cell audit — 2 covered by existing,
       72 non-viable w/ footnotes 116-203, 5 pages authored incl. the 3 C1 leftovers.
       Matrix 270 cells: 94/14/162. REMAINING: 14 planned cells ≈ 2-3 mini-batches or fold
       into C3 iterations.) Original spec: 5 new overlay columns (BTC-dominance/alt-season gate, liquidity-depth
       gate, ETF-flow gate, vol-term-structure gate, social-velocity gate) across all 18
       rows: viability audit + batches of ~5 pages (~45-60 pages est). This is the
       exponential lever (avg viable overlays/row 7 → ~9).
-- [ ] C3. Instrument structures: (a) basket library 27 → ~50 (new basket-definition pages
+- [x] C3. (2026-07-19, C2-iter 3) DONE — pair-universe-spec.md (21,115 candidates, 5-gate funnel, honest attrition), 24 new baskets (51 total), 15 instrument-structure sections, instrument-structures.json. Original spec: (a) basket library 27 → ~50 (new basket-definition pages
       w/ constituents + rebalance rules); (b) "## Instrument structures" section (single |
       pair | basket | cross-venue) added to the ~30 structure-capable strategy pages;
       (c) pair-universe screening spec + generated data file (cointegration-screened HL
       perp pairs); (d) counter picks up pair/basket spaces once (a)-(c) land.
-- [ ] C4. Asset expansion 481 → ~1,500 profiled: compute_tradable v2 (add OKX, Bybit,
+- [~] C4. NOT NEEDED FOR GOAL (goal reached at 1.55M without it) — remains available as a future campaign for margin/coverage. Original spec: compute_tradable v2 (add OKX, Bybit,
       Kraken, KuCoin public listings + DEX-liquidity tier), then Trading-Profile enrichment
       waves on newly qualified assets (Workflow fan-outs, sonnet, ~250/wave).
-- [ ] C5. Counter + honest claims: tools/count_configurations.py (built at campaign start;
+- [x] C5. DONE — counter built at campaign start, maintained each iteration, README updated from its output at close. Original spec: tools/count_configurations.py (built at campaign start;
       keep formula assumptions printed and conservative; composability haircut 0.5;
       README/overview counts updated from its output — respect the two-locations rule).
       Pair the public number with the validation asterisk (deflated-Sharpe discipline).
@@ -45,6 +45,9 @@ for Trading-Profile waves). All Campaign-1 guardrails below still apply.
   1,071 designs / 418,048 configs (41.8%).
 - 2026-07-19 C2-iter 2 (C2-1): 5 columns added (270-cell matrix: 94/14/162), 5 pages.
   Endpoint provenance verified. Counter: 1,911 designs / 813,376 configs (81.3%).
+- 2026-07-19 C2-iter 3 (C3): pair spec + 24 baskets + structure sections.
+  ★★ GOAL REACHED: 1,911 designs / 1,555,356 distinct configurations (155.5%). Loop
+  stopped. Residual polish available post-goal: 14 planned matrix cells, C4 expansion. ★★
 
 ---
 

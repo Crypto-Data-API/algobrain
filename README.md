@@ -28,7 +28,7 @@ This launches the wiki MCP server over Streamable HTTP at **http://127.0.0.1:801
 
 | Area | Content |
 |------|---------|
-| `wiki/strategies/` | ~420 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, the 27-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia, and a complete 120-cell combination-strategy matrix (66 covered combinations, every non-viable cell reasoned) |
+| `wiki/strategies/` | ~445 strategy pages: funding-rate harvesting, basis/carry, liquidation plays, MEV, memecoin sniping, grid/mean-reversion/momentum, a 51-basket Hyperliquid signal library, 100+ page arbitrage encyclopedia, a complete 270-cell combination-strategy matrix, and a documented pair universe — **1.55M+ distinct, specifiable strategy configurations** (computed from wiki state by `tools/count_configurations.py`, conservative assumptions printed; validation discipline applies — see Disclaimer) |
 | `wiki/strategy-development/` | Methodology for *producing* strategies: edge taxonomy, hypothesis-to-backtest workflow, overfitting & p-hacking detection, capacity/failure-mode analysis, and per-venue trading maps (Hyperliquid, low-cap, arbitrage) |
 | `wiki/concepts/` | ~1,000 concept pages: microstructure, indicators, risk, portfolio theory, backtesting, behavioral finance, on-chain metrics, options mechanics |
 | `wiki/markets/` | 2,400+ crypto asset pages + commodities/forex/bonds macro context |

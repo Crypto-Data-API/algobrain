@@ -263,6 +263,19 @@ Numeric kill rules (see [[when-to-retire-a-strategy]]):
 
 **Marking to portfolio value.** Because the strategy holds multiple legs simultaneously across sectors, use Hyperliquid's account portfolio view (see [[hyperliquid-vault-architecture]]) to monitor the cross-leg P&L in aggregate. A leg that looks like a winner on its own may be masking losses elsewhere in the portfolio.
 
+## Instrument Structures
+
+Cross-sectional relative value deploys on **basket-vs-basket** spreads — the only basket in the library that is structurally long-short within a sector rather than directional.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Basket** | The defining structure (both legs). The strategy goes long a top-quintile basket (the sector momentum winners) and short a bottom-quintile basket (the sector momentum losers) within each sector. Dollar-neutral across the long and short baskets means the trade bets on *within-sector spread* rather than sector direction. |
+| Pair | A degenerate case of the basket: if a sector has only 2 assets, the top-vs-bottom quintile collapses to a single pair (one long, one short). In practice this is treated as a [[pairs-trading]] trade, not a basket trade. |
+| Single-asset | Not deployed. The market-neutral construction requires at least two simultaneous legs. |
+| Cross-venue | Not deployed. Both legs are Hyperliquid perps within the same venue; cross-venue versions would introduce basis risk and additional execution complexity without improving the within-sector signal. |
+
+The basket structure changes the mechanics vs. [[pairs-trading]]: there is no single hedge ratio β — instead, equal notional on both sides of the basket constructs the spread. The signal (composite momentum-funding-OI ranking) is applied across all N assets in the sector, so adding more sector assets improves signal stability. Rebalancing is weekly (not event-driven), and the position count scales with sector breadth (more HL-listed sector perps = more diversification).
+
 ## Advantages
 
 - Market-neutral within sectors — the most regime-independent basket in the basket library; earns in bull, bear, and chop.

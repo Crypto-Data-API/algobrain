@@ -224,6 +224,19 @@ Paused or disabled on any of:
 
 Re-engage: correlation regime active again (≥0.4), overlay back to improving risk-adjusted return in walk-forward, and hedge cost below the avoided-drawdown budget. See [[when-to-retire-a-strategy]].
 
+## Instrument Structures
+
+Crypto beta rotation deploys across all structure types, moving between them as the macro-correlation regime shifts.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Single-asset** | The defensive mode: reduce crypto exposure to BTC and ETH only (the highest-liquidity, lowest-idiosyncratic-risk tokens) when the macro-correlation regime activates. BTC-PERP and ETH-PERP carry the book when hedging. |
+| **Basket** | The risk-on mode: when correlation is low and the alt-season gate is active, the book deploys across multiple sector baskets (e.g., [[l1-blockchains-basket]], [[ai-tokens-basket]], [[defi-bluechip-basket]]) for diversified crypto beta exposure. Baskets provide the cross-sectional breadth needed to capture alt-season returns. |
+| Pair | Not the primary deployment, but beta rotation can be expressed as a BTC/ETH pair spread — long ETH-PERP (higher beta, alt-correlated), short BTC-PERP (lower beta, macro-correlated) when rotating into risk-on mode. |
+| Cross-venue | Not deployed. The strategy operates within a single venue (Hyperliquid) for simplicity; cross-venue execution is a tactical add-on, not a structural feature. |
+
+The mechanics change between structures: in single-asset (defensive) mode, position sizing uses [[atr-position-sizing]] at the BTC/ETH level; in basket (risk-on) mode, sizing is per-basket-notional with equal-weight across active baskets, scaled down by the vol-regime overlay from [[volatility-targeting]].
+
 ## Advantages
 
 - **Targets the fat left tail** — cuts crypto's worst macro-driven drawdowns (2022, Aug-2024) that buy-and-hold sits through; asymmetric payoff (large avoided losses).

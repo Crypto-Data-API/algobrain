@@ -222,6 +222,19 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klin
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]].
 
+## Instrument Structures
+
+Pairs trading deploys on exactly one structure: the **pair**.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The defining structure. Every trade is a two-legged long-short spread (long the underperformer, short the outperformer) sized to be dollar-neutral by hedge ratio. The spread is the unit of analysis; single-leg P&L is irrelevant. |
+| Single-asset | Not deployed. Pairs trading is explicitly market-neutral — directional single-asset positions are a signal the hedge ratio or cointegration model has failed. |
+| Basket | Not deployed in this strategy. Cross-sectional basket versions of the same logic live in [[statistical-arbitrage]] and [[cross-sectional-relative-value]]. |
+| Cross-venue | Not deployed here. Cross-venue versions of the spread (same asset, different exchanges) are [[funding-rate-arbitrage]] and [[hl-vs-cex-funding-divergence]]. |
+
+Mechanics specific to the pair structure: the hedge ratio β determines relative leg sizing; the spread z-score is the entry signal; cointegration (not correlation) is the required statistical property; and funding carry on both perp legs must be tracked as the crypto "borrow cost" for each leg independently.
+
 ## Related
 
 - [[statistical-arbitrage]] — the broader category that includes pairs trading

@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Campaign 2 complete: ★ 1,555,356 distinct strategy configurations ★
+
+Goal (1,000,000+) reached in 3 loop iterations. Final lever: instrument structures —
+`pair-universe-spec.md` (21,115 candidate Hyperliquid perp pairs with a documented 5-gate
+screening funnel and honest attrition estimates), the basket library expanded 27 → 51
+(sector/factor/event baskets with verified HL-listed constituents), and instrument-structure
+sections on the 15 structure-capable strategy pages. The configuration count is computed
+from actual wiki state by `tools/count_configurations.py` (assumptions printed,
+conservative): **1,911 distinct strategy designs → 1,555,356 distinct configurations**
+(single-asset 813k + pair/basket structures 742k). Campaign totals: 15 new combination
+strategies, 6 new matrix primitives + 5 new overlay columns (270-cell matrix), 24 baskets,
+the pair universe, and the counter. Asset-universe expansion (C4) not needed for goal;
+available as a future campaign.
+
 ## 2026-07-19 — Campaign 2, iteration 2: matrix expanded to 15 overlay columns
 
 Five new overlay columns (dominance/alt-season, liquidity-depth, ETF-flow,

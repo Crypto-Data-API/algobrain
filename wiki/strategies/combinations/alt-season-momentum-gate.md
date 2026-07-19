@@ -296,6 +296,19 @@ Pause or retire on any of:
 
 See [[when-to-retire-a-strategy]] for the broader framework.
 
+## Instrument Structures
+
+Alt-season momentum gate switches the deployment structure between basket mode and single-asset mode depending on the dominance regime.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Basket** | Activated in falling-dominance (alt-season) mode. The strategy deploys cross-sectional momentum across sector baskets (e.g., [[l1-blockchains-basket]], [[ai-tokens-basket]], [[solana-ecosystem-basket]], [[defi-bluechip-basket]]): long the top-momentum baskets, underweight or short the bottom. The basket structure captures the sector-rotation pattern that characterises genuine alt-seasons. |
+| **Single-asset** | Activated in rising-dominance mode. The strategy shifts to BTC-only trend-following — one single-asset position — because alt baskets produce false signals when BTC is capturing market share. The mechanics simplify to a single trend signal (BTC above/below 50-day MA). |
+| Pair | Not deployed. The strategy is directional in both modes (either long alts or long BTC), not market-neutral. |
+| Cross-venue | Not deployed. |
+
+The critical mechanic is the mode switch itself: the 14-day rate of change in BTC dominance and the altcoin breadth indicator determine which structure is active. Running both modes simultaneously (a basket + a BTC long) is permitted as a transitional position during the first 3 days of a mode change, but not as a steady-state.
+
 ## Advantages
 
 - **Eliminates the most common crypto momentum failure mode** — deploying cross-sectional alt momentum in rising-dominance regimes is the single biggest loss-generator for crypto momentum strategies; this gate cleanly avoids it.

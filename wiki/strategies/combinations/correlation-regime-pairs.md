@@ -346,6 +346,19 @@ curl -H "X-API-Key: $CDA_KEY" \
 
 Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-data]], [[cryptodataapi-derivatives]].
 
+## Instrument Structures
+
+Correlation-regime pairs deploys exclusively on the **pair** structure, adding a live regime gate that validates the pair's statistical relationship before entry.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Pair** | The only deployment structure. Long the underperformer, short the outperformer via perps, dollar-neutral by OLS hedge ratio. The regime gate (correlation ≥ 0.70, cointegration p ≤ 0.10, OU half-life 3–45 days) is evaluated at the pair level, not at a portfolio level. |
+| Single-asset | Not deployed. The regime gate explicitly excludes directional single-leg trades — if correlation breaks, the position is closed, not converted to a single-leg directional bet. |
+| Basket | Not deployed in the base strategy. The pair is always exactly two assets. The [[statistical-arbitrage]] page covers basket-leg extensions. |
+| Cross-venue | Not deployed here. The cross-venue analogue is [[hl-vs-cex-funding-divergence]], which is a composable layer rather than a replacement for the within-venue pair. |
+
+Regime-gate mechanics change how the pair structure behaves relative to naive [[pairs-trading]]: entry is blocked unless all three gates pass on the day of entry; an open position is flattened immediately if correlation drops below 0.60 (a harder threshold than the entry gate), regardless of z-score. The pair structure's mechanics are otherwise identical.
+
 ## Related
 
 - [[pairs-trading]] — the underlying stat-arb primitive; this page adds a three-factor regime gate on top

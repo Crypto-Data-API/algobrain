@@ -217,6 +217,19 @@ Pause the sleeve on any of:
 
 Re-deploy when cross-sectional dispersion returns, BTC reclaims its 200-day MA, and a fresh out-of-sample window shows the net spread positive on the liquid universe. See [[when-to-retire-a-strategy]].
 
+## Instrument Structures
+
+Momentum rotation deploys primarily on **baskets**, with a single-asset mode during BTC-dominance-rising regimes.
+
+| Structure | Role in this strategy |
+|-----------|----------------------|
+| **Basket** | The primary deployment. The strategy buys the top momentum quintile (a long basket of relative winners) and sells the bottom quintile (a short basket of relative losers) within a sector. The basket structure provides diversification across the momentum signal, reducing single-name blow-up risk. Sector baskets from the [[hyperliquid-baskets-overview|basket library]] (e.g., [[l1-blockchains-basket]], [[defi-bluechip-basket]], [[ai-tokens-basket]]) serve as the deployment vehicles. |
+| Single-asset | Reduced role. When BTC dominance is rising ([[alt-season-momentum-gate]] fails), the strategy shifts to BTC-only or ETH-only positioning — single-asset — rather than cross-sectional baskets. |
+| Pair | Not the base form, but a natural extension: within-sector top-vs-bottom pairs from the basket ranking are the atomic units of [[cross-sectional-relative-value]], which is the market-neutral version of the same momentum signal. |
+| Cross-venue | Not deployed. |
+
+The basket structure changes the mechanics: position sizing is per-basket-notional (not per-coin), rebalancing is weekly across the basket, and the edge is the *average* momentum premium across N coins rather than a single-name bet. This distributes the unavoidable momentum-crash risk (when the factor reverses, all positions in the basket are simultaneously wrong) but does not eliminate it.
+
 ## Advantages
 
 - **Documented factor** — cross-sectional momentum is one of the most robust anomalies, confirmed for crypto (Liu, Tsyvinski & Wu 2022).

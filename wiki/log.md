@@ -9,6 +9,76 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Campaign 2 Batch C3: Instrument Structures — PAIRS and BASKETS as First-Class Types
+
+**Scope:** Formalised PAIRS and BASKETS as first-class instrument structures in the AlgoBrain wiki. Four tasks completed: (1) canonical pair-universe specification page; (2) 20 new basket-definition pages; (3) Instrument Structures sections added to 15 strategy pages; (4) basket-overview count updated, pair-universe-spec linked from strategies-overview.
+
+**Pages created (25):**
+
+*Pair universe:*
+- [[pair-universe-spec]] — Canonical pair-universe specification: ~206 HL markets → ~21,100 candidate pairs → 5-gate funnel (rolling correlation ≥ 0.70, Engle-Granger p ≤ 0.10, OU half-life 3–45d, liquidity-depth minimums, funding-differential check) → estimated 2–5% pass rate (~150–500 tradeable pairs). (`wiki/strategies/quantitative/pair-universe-spec.md`)
+
+*Sector baskets (19 sector + 5 additional = 24 new basket pages):*
+- [[l1-blockchains-basket]] — 8 alt-L1 tokens (SOL, AVAX, NEAR, ATOM, APT, SUI, INJ, SEI); equal-weight; alt-season gate (`wiki/strategies/hyperliquid-baskets/l1-blockchains-basket.md`)
+- [[l2-rollups-basket]] — 7 L2 rollup tokens (ARB, OP, STRK, POL, ZK, MNT, BLAST); equal-weight; ETH-bull gate (`wiki/strategies/hyperliquid-baskets/l2-rollups-basket.md`)
+- [[defi-bluechip-basket]] — 8 DeFi majors (AAVE, UNI, CRV, DYDX, GMX, JUP, PENDLE, COMP); equal-weight (`wiki/strategies/hyperliquid-baskets/defi-bluechip-basket.md`)
+- [[ai-tokens-basket]] — 8 AI tokens (TAO, FET, RNDR, WLD, AKT, GRT, ASI, IO); equal-weight (`wiki/strategies/hyperliquid-baskets/ai-tokens-basket.md`)
+- [[memecoin-majors-basket]] — 7 established memecoins (DOGE, SHIB, PEPE, BONK, WIF, FLOKI, BRETT); equal-weight; meme-regime gate (`wiki/strategies/hyperliquid-baskets/memecoin-majors-basket.md`)
+- [[depin-basket]] — 7 DePIN tokens (HNT, RNDR, AKT, IO, HONEY, GEOD, FIL); equal-weight (`wiki/strategies/hyperliquid-baskets/depin-basket.md`)
+- [[gaming-gamefi-basket]] — 6 gaming/GameFi tokens (IMX, AXS, SAND, GALA, ILV, BIGTIME); equal-weight (`wiki/strategies/hyperliquid-baskets/gaming-gamefi-basket.md`)
+- [[privacy-basket]] — 5 privacy tokens (XMR, ZEC, SCRT, ROSE, DUSK); equal-weight; regulatory-risk note (`wiki/strategies/hyperliquid-baskets/privacy-basket.md`)
+- [[lst-restaking-basket]] — 7 LST/restaking tokens (LDO, RPL, ETHFI, REZ, SSV, SWEL, KEP); equal-weight (`wiki/strategies/hyperliquid-baskets/lst-restaking-basket.md`)
+- [[rwa-basket]] — 6 RWA tokens (ONDO, CFG, MPL, TRU, GFI, POLYX); equal-weight (`wiki/strategies/hyperliquid-baskets/rwa-basket.md`)
+- [[oracle-basket]] — 5 oracle tokens (LINK, PYTH, API3, BAND, UMA); equal-weight (`wiki/strategies/hyperliquid-baskets/oracle-basket.md`)
+- [[dex-tokens-basket]] — 8 DEX tokens (UNI, CRV, DYDX, GMX, JUP, VELO, RAY, AERO); equal-weight (`wiki/strategies/hyperliquid-baskets/dex-tokens-basket.md`)
+- [[cex-tokens-basket]] — 5 CEX tokens (BNB, OKB, KCS, GT, MX); equal-weight (`wiki/strategies/hyperliquid-baskets/cex-tokens-basket.md`)
+- [[payments-basket]] — 5 payments tokens (XRP, XLM, XNO, CELO, REQ); equal-weight (`wiki/strategies/hyperliquid-baskets/payments-basket.md`)
+- [[storage-compute-basket]] — 6 storage/compute tokens (FIL, AR, RNDR, AKT, IO, STORJ); equal-weight (`wiki/strategies/hyperliquid-baskets/storage-compute-basket.md`)
+- [[interoperability-basket]] — 6 bridge/interop tokens (LINK, ZRO, AXL, W, SYN, ACE); equal-weight (`wiki/strategies/hyperliquid-baskets/interoperability-basket.md`)
+- [[solana-ecosystem-basket]] — 6 Solana-native tokens (RAY, JUP, PYTH, BONK, WIF, HNT); equal-weight; Solana-season gate (`wiki/strategies/hyperliquid-baskets/solana-ecosystem-basket.md`)
+- [[cosmos-ibc-basket]] — 6 Cosmos/IBC tokens (ATOM, OSMO, INJ, TIA, DYDX, AXL); equal-weight (`wiki/strategies/hyperliquid-baskets/cosmos-ibc-basket.md`)
+- [[infrastructure-majors-basket]] — 6 cross-ecosystem infrastructure tokens (LINK, GRT, TIA, EIGEN, ENS, PYTH); equal-weight (`wiki/strategies/hyperliquid-baskets/infrastructure-majors-basket.md`)
+
+*Factor baskets (3, dynamic construction):*
+- [[high-funding-carry-basket]] — Dynamic: top 5–8 highest-funding HL perps each week; short basket + BTC-long hedge; 0.05%/8h minimum funding; squeeze-precondition checks (`wiki/strategies/hyperliquid-baskets/high-funding-carry-basket.md`)
+- [[low-vol-majors-basket]] — Dynamic: bottom-quintile 30d realised vol, large-cap eligible universe (>$2B MC, >$10M daily vol); inverse-vol weighted; monthly rebalance (`wiki/strategies/hyperliquid-baskets/low-vol-majors-basket.md`)
+- [[high-beta-alt-basket]] — Dynamic: top-quintile 30d BTC-beta, mid-cap eligible (<$5B MC, >$3M daily vol); equal-weight; alt-season gate required (`wiki/strategies/hyperliquid-baskets/high-beta-alt-basket.md`)
+
+*Event baskets (2, dynamic construction):*
+- [[new-listing-basket]] — Dynamic: HL perps listed within prior 7 days meeting volume/price/category criteria; max 3 concurrent; post-listing reversion short; JELLY guard (`wiki/strategies/hyperliquid-baskets/new-listing-basket.md`)
+- [[unlock-heavy-basket]] — Dynamic: HL perps with cliff unlocks ≥ 5% of circulating supply within 7–14 days; short-only; max 4 concurrent; T−1 time stop (`wiki/strategies/hyperliquid-baskets/unlock-heavy-basket.md`)
+
+**Pages updated (18):**
+
+*Strategy pages — Instrument Structures section added (before ## Related or ## Advantages):*
+- [[pairs-trading]] — pair structure; mechanics of hedge ratio and spread z-score
+- [[statistical-arbitrage]] — pair + basket + cross-venue extensions described
+- [[correlation-regime-pairs]] — pair only; regime-gate mechanics that change vs. naive pairs
+- [[pairs-with-funding-differential]] — pair only; how funding signal modifies entry threshold
+- [[vol-balanced-pairs]] — pair only; inverse-vol sizing replaces dollar-neutral sizing
+- [[oi-gated-pairs]] — pair only; OI short-side screen modifies entry gate
+- [[unlock-pair-hedge]] — pair only; beta-neutral construction for idiosyncratic unlock short
+- [[momentum-rotation]] — basket primary, single-asset fallback in rising-dominance regime
+- [[cross-sectional-relative-value]] — basket-vs-basket (long/short within-sector); pair as degenerate case
+- [[crypto-beta-rotation]] — single-asset (defensive) + basket (risk-on) + pair (BTC/ETH spread)
+- [[alt-season-momentum-gate]] — basket (alt-season mode) + single-asset (BTC-only mode) switch
+- [[mean-reversion]] — single-asset primary; pair and basket extensions described
+- [[funding-rate-arbitrage]] — cross-venue primary (spot vs. perp); basket extension
+- [[hl-vs-cex-funding-divergence]] — cross-venue only; basket extension as multi-asset carry
+
+*Overview and navigation updates:*
+- [[hyperliquid-baskets-overview]] — count updated from 27 to 47; C3 sector/factor/event basket table added
+- [[strategies-overview]] — pair-universe-spec linked under Crypto & Prediction Markets section
+- `wiki/log.md` — this entry
+
+**Key design decisions:**
+- Funnel attrition numbers in pair-universe-spec are labeled as estimates throughout; no backtest claimed.
+- Privacy basket: XMR/ZEC HL perp availability flagged as check-before-deploy; regulatory-risk note prominent.
+- Factor baskets (high-funding-carry, low-vol-majors, high-beta-alt): dynamic construction specified; no fixed constituents — rebuilt from screening criteria each rebalance.
+- stat-arb.md is a redirect page only; Instrument Structures section added to [[statistical-arbitrage]] instead.
+- All basket constituents are drawn from tokens with verified or plausible HL perp listings (cross-referenced with the l1/defi/AI-agent sector tables from [[cross-sectional-relative-value]] and [[pairs-trading]]); constituents with thin HL perps flagged with lower volume thresholds.
+- Verified data endpoints only: all basket pages use `/api/v1/hyperliquid/candles`, `/api/v1/derivatives/funding-rates`, `/api/v1/derivatives/open-interest`, `/api/v1/liquidity/depth`, `/api/v1/event/calendar`, `/api/v1/hyperliquid/meta` — all sourced from existing verified pages.
+
 ## 2026-07-19 — Campaign 2 Batch C2-1: Combination Matrix Column Expansion (18×15 = 270 cells)
 
 **Scope:** Expanded the combination-strategy matrix from 18×10 (180 cells) to 18×15 (270 cells) by adding five new overlay columns. Audited all 90 new cells (18 rows × 5 new columns). Authored 5 new combination pages: 3 leftover from C1-1 + 2 strongest new-column cells.
