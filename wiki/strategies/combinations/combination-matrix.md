@@ -6,7 +6,7 @@ updated: 2026-07-19
 status: good
 tags: [index, meta, methodology]
 aliases: ["Combo Matrix", "Strategy Combination Matrix", "Primitive × Overlay Matrix"]
-related: ["[[strategies-overview]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[combinations-overview]]", "[[funding-rate-arbitrage]]", "[[trend-following-cta]]", "[[pairs-trading]]", "[[grid-trading]]", "[[mev-strategies]]", "[[delta-neutral-yield-farming]]", "[[skew-trading]]", "[[prediction-market-strategies]]", "[[stablecoin-depeg-profit-capture]]", "[[copy-trading]]"]
+related: ["[[strategies-overview]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[combinations-overview]]", "[[funding-rate-arbitrage]]", "[[trend-following-cta]]", "[[pairs-trading]]", "[[grid-trading]]", "[[mev-strategies]]", "[[delta-neutral-yield-farming]]", "[[skew-trading]]", "[[prediction-market-strategies]]", "[[stablecoin-depeg-profit-capture]]", "[[copy-trading]]", "[[etf-flow-directional]]", "[[crypto-beta-rotation]]", "[[options-rv-event-calendar]]", "[[alt-season-momentum-gate]]", "[[liquidation-depth-cascade-sizing]]"]
 ---
 
 # Combination Strategy Matrix
@@ -27,26 +27,26 @@ A single cell can hold multiple page references if more than one page exists for
 
 ## Matrix
 
-| Primitive \ Overlay | Regime gate | Funding filter | OI filter | Trend gate | Tail-hedge overlay | Vol targeting | Cross-venue | Unlock/event calendar | Sentiment-extreme filter | Session/time filter |
-|---|---|---|---|---|---|---|---|---|---|---|
-| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | [[vol-scaled-carry-sizing]] ⁵⁷ | [[hl-vs-cex-funding-divergence]] | [[event-calendar-risk-gating]] ²³ | [[crowded-long-funding-fade]] | [[funding-window-timing]] ¹⁷ |
-| **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | — ²⁴ | — ²⁵ | [[carry-with-tail-hedge]] | [[vol-scaled-carry-sizing]] ⁵⁷ | [[hl-vs-cex-funding-divergence]] | [[event-calendar-risk-gating]] ²³ | — ²⁶ | — ²⁷ |
-| **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | [[spot-led-momentum-filter]] | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | [[session-aware-mean-reversion]] ¹² |
-| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | [[pullback-trading]] ²² | [[put-protected-dip-buying]] ¹⁴ | [[vol-gated-mean-reversion]] ⁵⁸ | — ⁵⁹ | — ²⁸ | [[contrarian-extremes]] | [[session-aware-mean-reversion]] |
-| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | — ²⁹ | [[cascade-monetization-rotation]] ¹³ | — ³⁰ | [[cross-venue-cascade-dislocation]] ¹⁸ | [[unlock-cascade-watch]] ³¹ | — ³² | [[off-hours-liquidation-playbook]] |
-| **Narrative / event** | [[regime-adaptive-strategy]] | [[narrative-crowding-exit]] ³³ | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | — ⁶⁰ | [[narrative-position-vol-targeting]] | — ³⁴ | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | — ³⁵ |
-| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | [[low-leverage-vol-selling]] ¹⁵ | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | — ³⁶ | [[event-calendar-risk-gating]] ²³ | [[post-panic-vol-selling]] | — ³⁷ |
-| **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | — ³⁸ | [[leverage-stress-tail-hedge]] | [[long-options-trend-expression]] ¹⁹ | — ⁶ | — ³⁹ | — ⁴⁰ | [[event-vol-buying]] | [[complacency-vol-buying]] ⁴¹ | — ⁴² |
-| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | [[grid-with-tail-hedge]] ²⁰ | [[atr-scaled-grid]] ⁶¹ | — ⁴³ | [[event-calendar-risk-gating]] ²³ | — ⁴⁴ | [[session-overlap-momentum]] ⁸ |
-| **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | [[oi-gated-pairs]] ⁶² | — ⁴⁵ | — ⁶³ | [[vol-balanced-pairs]] ⁴⁶ | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | — ⁴⁷ | — ⁴⁸ |
-| **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | — ⁶⁴ | — ⁴⁹ | — ⁵⁰ | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | — ⁵¹ |
-| **Sentiment** | [[regime-adaptive-strategy]] | [[sentiment-positioning-divergence]] ²¹ | — ⁵² | [[crypto-beta-rotation]] | — ⁶⁵ | — ⁵³ | — ⁵⁴ | — ⁵⁵ | — ¹⁰ | — ⁵⁶ |
-| **MEV / execution** | — ⁶⁶ | — ⁶⁷ | — ⁶⁸ | — ⁶⁹ | — ⁷⁰ | — ⁷¹ | [[mev-strategies]] ⁷² | [[mev-strategies]] ⁷³ | — ⁷⁴ | [[mev-session-density]] |
-| **DeFi yield / LP** | [[defi-yield-regime-gate]] | — ⁷⁵ | — ⁷⁶ | — ⁷⁷ | — ⁷⁸ | [[delta-neutral-yield-farming]] ⁷⁹ | [[concentrated-liquidity]] ⁸⁰ | [[defi-yield-event-calendar]] | [[defi-yield-sentiment-entry]] | — ⁸¹ |
-| **Options RV (skew & term structure)** | [[skew-trading]] ⁸² | [[options-rv-funding-filter]] | — ⁸³ | — ⁸⁴ | — ⁸⁵ | — ⁸⁶ | [[calendar-spread-arbitrage]] ⁸⁷ | [[options-rv-event-calendar]] | — ⁸⁸ | — ⁸⁹ |
-| **Prediction markets** | — ⁹⁰ | — ⁹¹ | — ⁹² | — ⁹³ | — ⁹⁴ | — ⁹⁵ | [[polymarket-prediction-market-arbitrage]] ⁹⁶ | [[prediction-market-strategies]] ⁹⁷ | [[prediction-market-strategies]] ⁹⁷ | — ⁹⁸ |
-| **Stablecoin / peg** | — ⁹⁹ | — ¹⁰⁰ | — ¹⁰¹ | — ¹⁰² | — ¹⁰³ | — ¹⁰⁴ | [[stablecoin-pair-arbitrage]] ¹⁰⁵ | [[stablecoin-depeg-profit-capture]] ¹⁰⁶ | [[stablecoin-sentiment-depeg-entry]] | — ¹⁰⁷ |
-| **Whale / copy-flow** | [[regime-adaptive-strategy]] | [[whale-copy-flow-funding-filter]] | — ¹⁰⁸ | [[smart-money-orderflow-combo]] ¹⁰⁹ | — ¹¹⁰ | — ¹¹¹ | [[on-chain-smart-money-tracking]] ¹¹² | [[copy-trading]] ¹¹³ | [[smart-money-vs-crowd-divergence]] ¹¹⁴ | — ¹¹⁵ |
+| Primitive \ Overlay | Regime gate | Funding filter | OI filter | Trend gate | Tail-hedge overlay | Vol targeting | Cross-venue | Unlock/event calendar | Sentiment-extreme filter | Session/time filter | Dominance/alt-season gate | Liquidity-depth gate | ETF-flow gate | Vol-term-structure gate | Social-velocity gate |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Funding carry** | [[regime-adaptive-strategy]] | — ¹ | [[oi-confirmed-trend]] ² | [[trend-aware-carry]] | [[carry-with-tail-hedge]] | [[vol-scaled-carry-sizing]] ⁵⁷ | [[hl-vs-cex-funding-divergence]] | [[event-calendar-risk-gating]] ²³ | [[crowded-long-funding-fade]] | [[funding-window-timing]] ¹⁷ | — ¹¹⁶ | — ¹¹⁷ | — ¹¹⁸ | planned ¹¹⁹ | — ¹²⁰ |
+| **Basis / cash-and-carry** | [[regime-adaptive-strategy]] | [[funding-vs-basis-rotation]] ¹¹ | — ²⁴ | — ²⁵ | [[carry-with-tail-hedge]] | [[vol-scaled-carry-sizing]] ⁵⁷ | [[hl-vs-cex-funding-divergence]] | [[event-calendar-risk-gating]] ²³ | — ²⁶ | — ²⁷ | — ¹²¹ | — ¹²² | — ¹²³ | — ¹²⁴ | — ¹²⁵ |
+| **Momentum / trend** | [[regime-adaptive-strategy]] | [[funding-filtered-momentum]] | [[oi-confirmed-trend]] | — ³ | [[trend-plus-tail-hedge]] | [[vol-targeted-trend-following]] | [[spot-led-momentum-filter]] | [[unlock-aware-momentum]] | [[contrarian-extremes]] ⁴ | [[session-aware-mean-reversion]] ¹² | [[alt-season-momentum-gate]] | planned ¹²⁶ | [[etf-flow-directional]] ¹²⁷ | planned ¹²⁸ | planned ¹²⁹ |
+| **Mean-reversion** | [[regime-adaptive-strategy]] | [[funding-flush-reversal]] | [[oi-flush-reversion]] | [[pullback-trading]] ²² | [[put-protected-dip-buying]] ¹⁴ | [[vol-gated-mean-reversion]] ⁵⁸ | — ⁵⁹ | — ²⁸ | [[contrarian-extremes]] | [[session-aware-mean-reversion]] | — ¹³⁰ | planned ¹³¹ | — ¹³² | — ¹³³ | — ¹³⁴ |
+| **Liquidation plays** | [[regime-adaptive-strategy]] | [[crowded-long-funding-fade]] | [[oi-confirmed-trend]] | — ²⁹ | [[cascade-monetization-rotation]] ¹³ | — ³⁰ | [[cross-venue-cascade-dislocation]] ¹⁸ | [[unlock-cascade-watch]] ³¹ | — ³² | [[off-hours-liquidation-playbook]] | — ¹³⁵ | [[liquidation-depth-cascade-sizing]] | — ¹³⁶ | — ¹³⁷ | — ¹³⁸ |
+| **Narrative / event** | [[regime-adaptive-strategy]] | [[narrative-crowding-exit]] ³³ | [[oi-confirmed-trend]] | [[narrative-with-trend-confirmation]] | — ⁶⁰ | [[narrative-position-vol-targeting]] | — ³⁴ | [[unlock-short-with-crowding-gate]] | [[contrarian-extremes]] | — ³⁵ | planned ¹³⁹ | — ¹⁴⁰ | planned ¹⁴¹ | — ¹⁴² | planned ¹⁴³ |
+| **Vol selling** | [[regime-adaptive-strategy]] | [[funding-conditioned-vol-selling]] | [[low-leverage-vol-selling]] ¹⁵ | [[trend-aligned-premium-selling]] | — ⁵ | [[volatility-targeting]] | — ³⁶ | [[event-calendar-risk-gating]] ²³ | [[post-panic-vol-selling]] | — ³⁷ | — ¹⁴⁴ | — ¹⁴⁵ | — ¹⁴⁶ | planned ¹⁴⁷ | — ¹⁴⁸ |
+| **Vol buying / tail hedge** | [[regime-adaptive-strategy]] | — ³⁸ | [[leverage-stress-tail-hedge]] | [[long-options-trend-expression]] ¹⁹ | — ⁶ | — ³⁹ | — ⁴⁰ | [[event-vol-buying]] | [[complacency-vol-buying]] ⁴¹ | — ⁴² | — ¹⁴⁹ | — ¹⁵⁰ | — ¹⁵¹ | — ¹⁵² | — ¹⁵³ |
+| **Grid / market-making** | [[regime-gated-grid]] | [[funding-skewed-grid]] | [[oi-aware-grid]] | — ⁷ | [[grid-with-tail-hedge]] ²⁰ | [[atr-scaled-grid]] ⁶¹ | — ⁴³ | [[event-calendar-risk-gating]] ²³ | — ⁴⁴ | [[session-overlap-momentum]] ⁸ | — ¹⁵⁴ | — ¹⁵⁵ | — ¹⁵⁶ | planned ¹⁵⁷ | — ¹⁵⁸ |
+| **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | [[oi-gated-pairs]] ⁶² | — ⁴⁵ | — ⁶³ | [[vol-balanced-pairs]] ⁴⁶ | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | — ⁴⁷ | — ⁴⁸ | — ¹⁵⁹ | planned ¹⁶⁰ | — ¹⁶¹ | — ¹⁶² | — ¹⁶³ |
+| **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | — ⁶⁴ | — ⁴⁹ | — ⁵⁰ | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | — ⁵¹ | — ¹⁶⁴ | — ¹⁶⁵ | planned ¹⁶⁶ | — ¹⁶⁷ | planned ¹⁶⁸ |
+| **Sentiment** | [[regime-adaptive-strategy]] | [[sentiment-positioning-divergence]] ²¹ | — ⁵² | [[crypto-beta-rotation]] | — ⁶⁵ | — ⁵³ | — ⁵⁴ | — ⁵⁵ | — ¹⁰ | — ⁵⁶ | — ¹⁶⁹ | — ¹⁷⁰ | — ¹⁷¹ | — ¹⁷² | — ¹⁷³ |
+| **MEV / execution** | — ⁶⁶ | — ⁶⁷ | — ⁶⁸ | — ⁶⁹ | — ⁷⁰ | — ⁷¹ | [[mev-strategies]] ⁷² | [[mev-strategies]] ⁷³ | — ⁷⁴ | [[mev-session-density]] | — ¹⁷⁴ | — ¹⁷⁵ | — ¹⁷⁶ | — ¹⁷⁷ | — ¹⁷⁸ |
+| **DeFi yield / LP** | [[defi-yield-regime-gate]] | — ⁷⁵ | — ⁷⁶ | — ⁷⁷ | — ⁷⁸ | [[delta-neutral-yield-farming]] ⁷⁹ | [[concentrated-liquidity]] ⁸⁰ | [[defi-yield-event-calendar]] | [[defi-yield-sentiment-entry]] | — ⁸¹ | — ¹⁷⁹ | — ¹⁸⁰ | — ¹⁸¹ | planned ¹⁸² | — ¹⁸³ |
+| **Options RV (skew & term structure)** | [[skew-trading]] ⁸² | [[options-rv-funding-filter]] | — ⁸³ | — ⁸⁴ | — ⁸⁵ | — ⁸⁶ | [[calendar-spread-arbitrage]] ⁸⁷ | [[options-rv-event-calendar]] | — ⁸⁸ | — ⁸⁹ | — ¹⁸⁴ | — ¹⁸⁵ | — ¹⁸⁶ | [[options-rv-event-calendar]] ¹⁸⁷ | — ¹⁸⁸ |
+| **Prediction markets** | — ⁹⁰ | — ⁹¹ | — ⁹² | — ⁹³ | — ⁹⁴ | — ⁹⁵ | [[polymarket-prediction-market-arbitrage]] ⁹⁶ | [[prediction-market-strategies]] ⁹⁷ | [[prediction-market-strategies]] ⁹⁷ | — ⁹⁸ | — ¹⁸⁹ | — ¹⁹⁰ | — ¹⁹¹ | — ¹⁹² | — ¹⁹³ |
+| **Stablecoin / peg** | — ⁹⁹ | — ¹⁰⁰ | — ¹⁰¹ | — ¹⁰² | — ¹⁰³ | — ¹⁰⁴ | [[stablecoin-pair-arbitrage]] ¹⁰⁵ | [[stablecoin-depeg-profit-capture]] ¹⁰⁶ | [[stablecoin-sentiment-depeg-entry]] | — ¹⁰⁷ | — ¹⁹⁴ | — ¹⁹⁵ | — ¹⁹⁶ | — ¹⁹⁷ | — ¹⁹⁸ |
+| **Whale / copy-flow** | [[regime-adaptive-strategy]] | [[whale-copy-flow-funding-filter]] | — ¹⁰⁸ | [[smart-money-orderflow-combo]] ¹⁰⁹ | — ¹¹⁰ | — ¹¹¹ | [[on-chain-smart-money-tracking]] ¹¹² | [[copy-trading]] ¹¹³ | [[smart-money-vs-crowd-divergence]] ¹¹⁴ | — ¹¹⁵ | — ¹⁹⁹ | — ²⁰⁰ | — ²⁰¹ | — ²⁰² | — ²⁰³ |
 
 ---
 
@@ -284,18 +284,233 @@ A single cell can hold multiple page references if more than one page exists for
 
 ---
 
-## Matrix Cell Counts (as of 2026-07-19 — Post C1-1 Row Expansion)
+### Campaign 2 — Column Expansion Footnotes (¹¹⁶–²⁰³)
+
+**¹¹⁶ Funding carry × dominance/alt-season gate = non-viable.** The funding carry trade is delta-neutral (short perp, long spot or funding harvest); BTC dominance is a portfolio-level allocation signal for the intra-crypto BTC vs alt split. The carry book is not directionally long or short alts, so the dominance regime does not selectively improve or harm carry outcomes. The regime gate ([[regime-adaptive-strategy]]) already captures the macro regime conditions that correlate with dominance; adding a separate dominance gate is redundant.
+
+**¹¹⁷ Funding carry × liquidity-depth gate = non-viable.** Carry book sizing by order-book depth at entry is a standard execution parameter, not a strategy-level overlay. The carry trade is sized by the carry P&L volatility (per [[vol-scaled-carry-sizing]]), not by real-time book depth. Depth is a constraint on execution, not a signal for whether to run carry.
+
+**¹¹⁸ Funding carry × ETF-flow gate = non-viable.** ETF flows are a directional demand signal (positive flow = institutional buying); the funding carry trade is direction-agnostic (harvests the funding rate regardless of whether price rises or falls). Conditioning a neutral carry harvest on a directional flow gate introduces directional bias into a market-neutral strategy without a clear mechanism for improving carry outcomes.
+
+**¹¹⁹ Funding carry × vol-term-structure gate = planned.** When the vol term structure is in steep backwardation (near-dated IV significantly above back-dated IV), the market is pricing an imminent vol spike. This is forward-looking event risk that neither the event calendar ([[event-calendar-risk-gating]]) nor the trend gate ([[trend-aware-carry]]) fully captures — the vol surface is the market's real-time aggregation of all forward risk. Reducing carry book size when TS is in steep backwardation provides a market-priced early-warning layer on top of the calendar-based and trend-based carry reduction rules.
+
+**¹²⁰ Funding carry × social-velocity gate = non-viable.** Social attention velocity (rate of change of social mentions) is a narrative/retail sentiment signal with no clear mechanism for predicting carry rate behaviour. Perp funding rates are set by derivative market supply and demand, not by social attention velocity.
+
+**¹²¹ Basis / cash-and-carry × dominance/alt-season gate = non-viable.** Basis / C&C is market-neutral (long spot, short dated futures); the dominance regime signal is about intra-crypto capital flows between BTC and alts. A neutral basis trade is not affected by the BTC vs alt allocation dynamic.
+
+**¹²² Basis / cash-and-carry × liquidity-depth gate = non-viable.** Basis / C&C entries are multi-week trades sized by carry spread magnitude, not by real-time book depth. Depth at entry is a standard execution consideration, not a strategy-level overlay.
+
+**¹²³ Basis / cash-and-carry × ETF-flow gate = non-viable.** See footnote ¹¹⁸. Same reasoning applies: delta-neutral basis harvest is not improved by a directional ETF flow gate.
+
+**¹²⁴ Basis / cash-and-carry × vol-term-structure gate = non-viable.** The basis/C&C trade involves the FUTURES term structure (basis = dated future premium over spot). The vol-term-structure gate references the OPTIONS implied vol term structure — a different instrument on the same underlying. While options vol TS can signal event risk that affects carry, this is already captured by [[event-calendar-risk-gating]]; adding a separate options vol TS gate on top of the calendar gate would be largely redundant for a multi-week basis trade. The overlap with [[options-rv-event-calendar]] is complete: when [[options-rv-event-calendar]] signals near-dated IV richness, the same event should already be on the [[event-calendar-risk-gating]] calendar. Not a distinct viable combination.
+
+**¹²⁵ Basis / cash-and-carry × social-velocity gate = non-viable.** Same reasoning as footnote ¹²⁰. Social attention velocity has no direct mechanism for predicting futures basis dynamics.
+
+**¹²⁶ Momentum / trend × liquidity-depth gate = planned.** Momentum entries gated or sized by order-book depth at the breakout price: entries only when depth above the breakout is sufficient to suggest that the momentum is supply-driven rather than thin-book noise. Distinct from [[spot-led-momentum-filter]] (which gates on Coinbase premium / spot-vs-OI origin of the move, not on bid/ask depth level) and from [[oi-confirmed-trend]] (which gates on OI direction). The depth gate checks whether the market structure at the entry price can support the momentum entry without creating excessive adverse price impact.
+
+**¹²⁷ [[etf-flow-directional]] covers momentum / trend × ETF-flow gate.** That strategy IS the ETF flow as a momentum/directional signal — it goes long when the ETF net-flow z-score is positive and rising, short when it turns negative. The ETF flow is both the signal and the gate for the directional position. A separate "momentum × ETF-flow gate" page would be a thin variant of etf-flow-directional. Cell marked COVERED by existing page.
+
+**¹²⁸ Momentum / trend × vol-term-structure gate = planned.** Momentum entries restricted when the vol term structure is in steep backwardation (near-dated IV significantly above back-dated IV): the market is pricing an imminent directional event that could override or reverse the current momentum signal. This is more forward-looking than the trend gate (which uses lagging indicators) and complementary to [[unlock-aware-momentum]] (which uses specific event dates). The vol TS gate uses the market's aggregate forward-risk pricing to avoid momentum entries ahead of unknown or unscheduled events not captured by the named event calendar.
+
+**¹²⁹ Momentum / trend × social-velocity gate = planned.** Momentum entries gated or confirmed by accelerating social attention (rate-of-change of mentions, not level). Requires BOTH price momentum AND social velocity acceleration to be active simultaneously: the social velocity component identifies the inflection in retail attention that precedes the momentum continuation phase. Distinct from [[contrarian-extremes]] (which uses sentiment LEVEL to fade momentum at extremes) and [[narrative-with-trend-confirmation]] (which gates on price trend, not social velocity).
+
+**¹³⁰ Mean-reversion × dominance/alt-season gate = non-viable.** Mean-reversion is a single-asset strategy (price overshoot fades back to fair value); the dominance/alt-season signal is a portfolio-level allocation between BTC and alts. The dominance regime does not predict which individual assets are most overshot on a given day; applying it to mean-reversion entry selection adds no independent signal.
+
+**¹³¹ Mean-reversion × liquidity-depth gate = planned.** At illiquid panic lows (thin book), price can overshoot its fundamental support level because even small selling exhausts the order book; when depth begins recovering (buyers re-posting bids), the MR entry has structural support. Distinct from [[funding-flush-reversal]] (funding-based signal) and [[oi-flush-reversion]] (OI-based signal): those gates identify when the leveraged crowd has been flushed; the depth gate confirms that passive market liquidity is returning to support the recovery.
+
+**¹³² Mean-reversion × ETF-flow gate = non-viable.** ETF flows are directional (sustained inflow = bull demand); gating mean-reversion entries on ETF flow direction would turn a contrarian strategy into a trend-following one (only MR on the long side when ETF flows are positive). This conflicts with MR's core logic: the best reversion entries often occur when ETF flows are negative (maximum fear, maximum discount from fair value) — exactly when an ETF-flow gate would prohibit entry.
+
+**¹³³ Mean-reversion × vol-term-structure gate = non-viable.** Mean-reversion edge is strongest in high-vol environments (flush events, overshoots). Blocking MR entries when vol TS is in backwardation (high near-dated IV = high vol event likely) would prevent the highest-quality MR entries. The vol TS gate is directionally opposed to the MR strategy's optimal deployment conditions.
+
+**¹³⁴ Mean-reversion × social-velocity gate = non-viable.** Social velocity is too slow for mean-reversion timescales (MR is intraday to 1–3 days; social attention momentum is measured over days to weeks). The two signals operate on incompatible timescales; applying a social velocity gate to a 4-hour MR trade adds noise without signal.
+
+**¹³⁵ Liquidation plays × dominance/alt-season gate = non-viable.** Cascade events are triggered by mechanical liquidation thresholds (price levels, funding rates, OI build) that are independent of the BTC dominance regime. A cascade can occur in alt-season or BTC-dominance regimes; the cascade-fade primitive does not have a dominance-regime dependency.
+
+**¹³⁶ Liquidation plays × ETF-flow gate = non-viable.** Cascade events (real-time, minutes-to-hours) are orthogonal to multi-day ETF flow regime states. The funding and OI confirmation already embedded in cascade-fade triggers are more timely and more directly relevant than the ETF flow state, which is a daily signal.
+
+**¹³⁷ Liquidation plays × vol-term-structure gate = non-viable.** Cascade events are triggered and managed in real time (1-hour to 4-hour windows); the vol term structure is a daily options market signal with multi-day persistence. There is no mechanism for the vol TS shape to predict whether a specific cascade will be revertible; the depth gate ([[liquidation-depth-cascade-sizing]]) and the regime gate ([[regime-adaptive-strategy]]) are the correct cascade-quality filters.
+
+**¹³⁸ Liquidation plays × social-velocity gate = non-viable.** Cascades are executed on sub-hour timescales; social attention velocity is measured over days. No actionable relationship between social mention acceleration and cascade fade entry quality.
+
+**¹³⁹ Narrative / event × dominance/alt-season gate = planned.** Narrative/event trades on altcoins concentrate almost entirely during alt-season (falling BTC dominance) periods; deploying narrative longs into rising-dominance environments typically results in the narrative playing out but the token losing ground to BTC (alt-season-absent narrative). The dominance gate selectively deploys narrative trades when the structural tailwind (alt-season) is aligned with the narrative catalyst.
+
+**¹⁴⁰ Narrative / event × liquidity-depth gate = non-viable.** Narrative trades are directional (long a narrative momentum); order-book depth at entry is a standard execution consideration for sizing, not a strategy-level overlay that changes the narrative thesis. Depth is already implicitly managed via position sizing ([[narrative-position-vol-targeting]]) and entry timing ([[narrative-with-trend-confirmation]]). Not a named combination.
+
+**¹⁴¹ Narrative / event × ETF-flow gate = planned.** Narrative entries confirmed by ETF flow alignment — when a bullish crypto narrative (e.g., "institutional accumulation season") coincides with positive and rising ETF net flow, the institutional and narrative signals are mutually reinforcing. The ETF flow provides the macro-institutional confirmation that the narrative has genuine capital backing beyond retail sentiment. Distinct from [[narrative-with-trend-confirmation]] (price trend gate) and [[etf-flow-directional]] (ETF flow as standalone directional signal without narrative context).
+
+**¹⁴² Narrative / event × vol-term-structure gate = non-viable.** The combination — deploy narrative only when vol TS is NOT in steep backwardation — is partially covered by [[event-calendar-risk-gating]] (pauses narrative entries around known events) and [[options-rv-event-calendar]] (trades the vol TS dimension of events). A separate "narrative × vol TS gate" page would be a thin variant of the event-calendar gating logic applied to narrative entries, without adding a distinct mechanism.
+
+**¹⁴³ Narrative / event × social-velocity gate = planned.** The rate of change of social mentions (social velocity) is the most direct signal that a narrative is gaining retail traction and approaching the momentum phase. Entry when BOTH the narrative has a real catalyst AND social velocity is accelerating (not just at a high level) identifies the early acceleration phase of the retail attention cycle — before the crowd reaches the exit of [[narrative-crowding-exit]]. This is the complement of [[contrarian-extremes]] (which trades extremes of sentiment level, not velocity).
+
+**¹⁴⁴ Vol selling × dominance/alt-season gate = non-viable.** Vol selling on Deribit is limited to BTC and ETH options; the dominance regime (BTC vs alt market share) does not directly affect BTC/ETH implied vol dynamics. DVOL and the VRP are driven by global crypto market vol and institutional option demand, not by the BTC dominance percentage.
+
+**¹⁴⁵ Vol selling × liquidity-depth gate = non-viable.** Vol selling (short Deribit options) is gated by DVOL percentile, VRP, and funding conditions — not by underlying perp market order-book depth. Options market liquidity on Deribit is a separate consideration from CEX perp book depth; a "sell vol only when BTC perp book is deep" gate has no clear mechanism for improving vol-selling outcomes.
+
+**¹⁴⁶ Vol selling × ETF-flow gate = non-viable.** Short-vol entries are gated by IV/RV premium (DVOL vs realized vol spread) and crowd positioning (funding) — not by directional institutional flow. ETF inflows may correlate with elevated IV (institutional hedging demand), but this relationship is already captured by the funding and DVOL gates. Adding an ETF-flow gate to vol selling creates directional bias (only sell vol when institutional is buying) that conflicts with the vol-selling primitive's direction-neutral structure.
+
+**¹⁴⁷ Vol selling × vol-term-structure gate = planned.** Sell vol only when the term structure is in contango (back-dated IV ≥ near-dated IV): the carry from near-to-far convergence accrues to the short-vol position, AND the near-dated IV is not already pricing imminent event risk. When the term structure is in backwardation (near > far), selling near-dated options means selling into event premium that is likely to spike further before reverting — the worst timing for a short-vol entry. This is complementary to [[event-calendar-risk-gating]] (calendar-based halt) and provides the MARKET-PRICED early warning layer (the vol surface aggregates all known and anticipated risks into the TS shape).
+
+**¹⁴⁸ Vol selling × social-velocity gate = non-viable.** Implied vol is set by options market participants (institutional hedgers, vol-arb desks); social attention velocity is a retail signal that does not directly drive Deribit DVOL. No clear mechanism for social velocity to improve vol-selling entry timing beyond what DVOL/VRP/funding already capture.
+
+**¹⁴⁹ Vol buying / tail hedge × dominance/alt-season gate = non-viable.** Tail hedges (long options on Deribit) are purchased on BTC or ETH; the BTC dominance regime does not independently predict the probability of a tail event. Tail events can occur in any dominance regime; the stress gates in [[leverage-stress-tail-hedge]] and [[complacency-vol-buying]] already incorporate the relevant market structure signals.
+
+**¹⁵⁰ Vol buying / tail hedge × liquidity-depth gate = non-viable.** Options purchases on Deribit are not conditioned on underlying perp market order-book depth; the purchase is based on IV level and stress conditions. Depth in the perp market is not a meaningful gate for options accumulation timing.
+
+**¹⁵¹ Vol buying / tail hedge × ETF-flow gate = non-viable.** Tail hedge accumulation (buying puts/straddles) is triggered by stress conditions (elevated OI/funding per [[leverage-stress-tail-hedge]], greed extremes per [[complacency-vol-buying]]), not by ETF flow direction. ETF inflows indicate institutional buying — the opposite of the tail-risk environment when tail hedges are most needed.
+
+**¹⁵² Vol buying / tail hedge × vol-term-structure gate = non-viable.** When the vol term structure is in steep backwardation (near > far IV), the market is already pricing the event risk that vol buying targets. Buying tail hedges at this point (high near-dated IV, event premium already built in) means purchasing expensive insurance at precisely the wrong time — the event premium makes the put purchase unattractive. [[options-rv-event-calendar]] trades this surface dynamic from the RV side (sell near, buy far); a vol buying × vol TS page would describe buying at peak event premium — the structural opposite of that page's thesis. The [[event-vol-buying]] page already covers the pre-event straddle buy (before the premium builds), and [[complacency-vol-buying]] covers buying vol when IV is cheap. Not a viable standalone combination.
+
+**¹⁵³ Vol buying / tail hedge × social-velocity gate = non-viable.** Social velocity is a retail narrative signal; tail hedge accumulation is a structural stress response (OI, funding, leverage). These operate in completely different signal spaces.
+
+**¹⁵⁴ Grid / market-making × dominance/alt-season gate = non-viable.** Grids operate on single assets (typically BTC perp); the dominance regime is a portfolio-level allocation signal. A grid's profitability is determined by the vol/range relationship of the underlying asset, not by whether BTC is gaining or losing market share to alts.
+
+**¹⁵⁵ Grid / market-making × liquidity-depth gate = non-viable.** Grid profitability depends on the spread and depth of the underlying market — an operator would not run a grid in a thin-book market. However, this is a deployment prerequisite, not a named combination strategy: checking that the market is deep enough to run a grid efficiently is standard due diligence, already incorporated into [[regime-gated-grid]]'s deployment conditions. Not a named overlay that generates additional edge.
+
+**¹⁵⁶ Grid / market-making × ETF-flow gate = non-viable.** Grids are range-bound strategies; ETF flows create directional bias that produces the trending regimes that break grids. The regime gate ([[regime-gated-grid]]) already handles the trend-detection logic that ETF flows are a component of. A separate ETF-flow gate on a grid would at best replicate a component of [[regime-gated-grid]]'s signal.
+
+**¹⁵⁷ Grid / market-making × vol-term-structure gate = planned.** Pause the grid when the vol term structure shifts into steep backwardation (near-dated IV significantly above back-dated IV), which signals that the market is pricing an imminent vol spike. This is more forward-looking than [[event-calendar-risk-gating]] (which requires a specific event to be on the calendar) and earlier than [[regime-gated-grid]]'s ADX/BB-width gate (which detects vol expansion after it has begun). The vol TS gate is the market's aggregate forward-pricing of all anticipated risks — including unscheduled events not on the event calendar — providing an additional lead-time warning for grid operators.
+
+**¹⁵⁸ Grid / market-making × social-velocity gate = non-viable.** Grids are mechanical, single-asset strategies; social velocity is a narrative/retail attention signal. No mechanism connects social mention acceleration to grid profitability or grid break risk.
+
+**¹⁵⁹ Stat-arb / pairs × dominance/alt-season gate = non-viable.** Pairs trading is market-neutral within a universe (e.g., BTC/ETH spread, SOL/AVAX spread); the dominance regime affects the absolute level of alts vs BTC but does not predict whether specific asset pairs will converge or diverge in their cointegration relationship. Applying a dominance gate to stat-arb would suppress pairs entries in rising-dominance regimes without a clear mechanism for why the spread mean-reversion is less reliable then.
+
+**¹⁶⁰ Stat-arb / pairs × liquidity-depth gate = planned.** Before entering a pairs trade, verify that both legs (long and short) have sufficient order-book depth to build the position without excessive adverse price impact. Distinct from [[oi-gated-pairs]] (which checks OI/funding for squeeze risk on the short leg — a strategy-level risk) and from [[vol-balanced-pairs]] (which sizes the legs by vol balance). The depth gate is an execution-quality check: do NOT initiate the spread when the short leg has insufficient depth (the position-building itself would move the market against the entry before the spread has time to mean-revert).
+
+**¹⁶¹ Stat-arb / pairs × ETF-flow gate = non-viable.** Market-neutral pairs trading: ETF flow creates directional bias that destroys the neutral structure. Same reasoning as footnote ⁴⁵ (trend gate).
+
+**¹⁶² Stat-arb / pairs × vol-term-structure gate = non-viable.** Vol TS shape (near vs far IV relationship) does not independently predict cointegration relationship stability or spread mean-reversion timing. The regime gate ([[correlation-regime-pairs]]) and OI gate ([[oi-gated-pairs]]) are the appropriate filters for pairs stability; vol TS adds no independent information.
+
+**¹⁶³ Stat-arb / pairs × social-velocity gate = non-viable.** Social velocity is a narrative/retail attention signal. Pairs spreads mean-revert based on cointegrating relationships (fundamental valuation anchors), not based on social attention dynamics. No mechanism connects social velocity to spread mean-reversion timing.
+
+**¹⁶⁴ On-chain flow × dominance/alt-season gate = non-viable.** On-chain flow signals (whale accumulation, exchange inflows/outflows) are per-asset; the dominance regime is a portfolio-level allocation signal. An on-chain whale accumulation signal in ETH is not improved by knowing whether BTC dominance is rising or falling — the whale is accumulating the asset regardless of the dominance regime.
+
+**¹⁶⁵ On-chain flow × liquidity-depth gate = non-viable.** On-chain whale accumulation signals are multi-day to multi-week in horizon (the signal detects slow accumulation over days); order-book depth is an intraday execution signal. Applying a depth gate to a multi-day on-chain signal adds noise without information, as depth can change hourly while the on-chain accumulation thesis plays out over weeks.
+
+**¹⁶⁶ On-chain flow × ETF-flow gate = planned.** Dual institutional demand confirmation: on-chain smart-money accumulation signal active AND ETF net flow positive simultaneously. When both the on-chain large-wallet cohort AND the institutional ETF channel are net buying, the combined demand signal is more durable and has a larger price impact than either signal alone. Distinct from [[smart-money-vs-crowd-divergence]] (which requires the derivative crowd to be bearish — a divergence signal) and from [[etf-flow-directional]] (which uses ETF flow alone without on-chain confirmation).
+
+**¹⁶⁷ On-chain flow × vol-term-structure gate = non-viable.** On-chain accumulation signals are multi-day to multi-week; vol TS shape is a daily options market signal. The two signals operate on comparable timescales but the mechanism is indirect — options market event risk pricing is not meaningfully predictive of whether smart-money on-chain accumulation will succeed. The event gate ([[event-calendar-risk-gating]]) and regime gate ([[regime-adaptive-strategy]]) already incorporate the risk-off signals that vol TS backwardation would add.
+
+**¹⁶⁸ On-chain flow × social-velocity gate = planned.** On-chain smart-money accumulation + social velocity acceleration: the smart money is buying BEFORE the retail attention inflection. Social velocity rising from low levels while on-chain accumulation is active identifies the timing where the whale buying is about to be followed by retail momentum — the most valuable entry window in the information propagation cycle (earlier than [[whale-copy-flow-funding-filter]] which waits for funding neutrality, and complementary to [[smart-money-vs-crowd-divergence]] which requires crowd-short divergence).
+
+**¹⁶⁹ Sentiment × dominance/alt-season gate = non-viable.** Whole-market Fear & Greed sentiment is already directionally correlated with dominance (fear = dominance rises as capital flees to BTC; greed = dominance falls as capital rotates to alts). The two signals are partially redundant; using both would create a double-counting of the same macro cycle signal.
+
+**¹⁷⁰ Sentiment × liquidity-depth gate = non-viable.** Sentiment-extreme strategies (Fear & Greed contrarian entries) are multi-day to multi-week positions; order-book depth is intraday. Same timescale mismatch as footnote ¹³⁴. The sentiment signal is not meaningfully improved by adding an execution-quality depth check.
+
+**¹⁷¹ Sentiment × ETF-flow gate = non-viable.** ETF flows are partly sentiment-driven (inflows correlate with greed; outflows with fear); gating a sentiment-contrarian strategy on ETF flow alignment risks circular logic (greed + ETF inflow = both bearish for contrarian = wait until inflows turn negative before entering — but inflows turning negative is itself a sentiment shift, duplicating the signal). The sentiment pages ([[contrarian-extremes]], [[sentiment-positioning-divergence]]) already incorporate derivative-market positioning that partially subsumes ETF flow information.
+
+**¹⁷² Sentiment × vol-term-structure gate = non-viable.** Sentiment-extreme entries already fire at peak greed or peak fear conditions; vol TS in those conditions is either in contango (greed, low fear) or steep backwardation (panic fear). Adding a vol TS condition would make sentiment entries conditional on the vol surface being in a particular shape — which is already a component of [[complacency-vol-buying]] (enters when sentiment is greedy AND IV is cheap = contango-like condition) and [[post-panic-vol-selling]] (enters when sentiment is fearful AND vol is spiked = backwardation). Not a distinct combination.
+
+**¹⁷³ Sentiment × social-velocity gate = non-viable.** The Fear & Greed index is itself partly derived from social attention and volume signals; adding a separate social velocity overlay on top of sentiment creates redundancy. The distinctive use of social velocity (rate of change, not level) is better paired with the narrative primitive (footnote ¹⁴³) where the acceleration signal directly identifies the narrative momentum phase.
+
+**¹⁷⁴–¹⁷⁸ MEV / execution × all five new columns = non-viable.** MEV strategies (sandwiching, backrunning, JIT, liquidation MEV, DEX arb) are per-block atomic operations. Dominance regime, order-book depth, ETF flows, vol term structure, and social velocity are all multi-hour to multi-week signals; none have actionable relationships to per-block MEV extraction opportunities. Same reasoning as footnotes ⁶⁶–⁷⁴.
+
+**¹⁷⁹ DeFi yield / LP × dominance/alt-season gate = non-viable.** LP positions are pool-specific (deploy into an ETH/USDC pool or a SOL/USDC pool); the dominance regime is a BTC vs alts portfolio-level signal. While alt-season correlates with higher fee income on alt-pool AMMs (more speculative volume), the decision to deploy in an alt pool vs a BTC pool is inherent to pool selection (a deployment parameter), not a named strategy overlay. The vol-regime gate ([[defi-yield-regime-gate]]) already captures the vol condition that drives LP profitability.
+
+**¹⁸⁰ DeFi yield / LP × liquidity-depth gate = non-viable.** Pool liquidity (TVL, pool depth) is inherent to pool selection in DeFi; a "liquidity-depth gate" for LP deployment describes checking that the pool has sufficient TVL before deploying — this is standard due diligence, not a named combination strategy. [[concentrated-liquidity]] and [[delta-neutral-yield-farming]] both incorporate TVL and pool depth as deployment prerequisites.
+
+**¹⁸¹ DeFi yield / LP × ETF-flow gate = non-viable.** ETF flows are off-chain institutional flows; DeFi LP fee income is driven by on-chain DEX trading volume and pool TVL. There is no direct mechanism connecting ETF net flow state to AMM LP profitability. The sentiment filter ([[defi-yield-sentiment-entry]]) and regime gate ([[defi-yield-regime-gate]]) capture the market conditions that drive LP outcomes more directly than ETF flows.
+
+**¹⁸² DeFi yield / LP × vol-term-structure gate = planned.** LP positions are structurally short gamma (LVR ≈ σ²/8 per unit time). When the vol term structure shifts into steep backwardation (near-dated IV significantly above back-dated IV), the options market is pricing an imminent vol spike that will dramatically increase LVR costs. The vol TS gate is more forward-looking than the DVOL-level gate in [[defi-yield-regime-gate]] (which detects vol expansion after DVOL has already risen) — the TS shape shifts into backwardation hours to days before the DVOL level itself reaches the withdrawal threshold. Composable with the regime gate as a lead-indicator layer.
+
+**¹⁸³ DeFi yield / LP × social-velocity gate = non-viable.** LP fee income is driven by DEX trading volume and pool TVL mechanics. Social attention velocity is a narrative signal that may correlate with token trading volume (during meme seasons, narrative-driven pools see higher volume) but this relationship is indirect and is already captured by the sentiment gate ([[defi-yield-sentiment-entry]]) and meme regime signals.
+
+**¹⁸⁴ Options RV (skew & term structure) × dominance/alt-season gate = non-viable.** Options RV trades are executed on BTC and ETH Deribit options; the BTC dominance regime does not directly affect the BTC/ETH vol surface dislocation that options RV trades exploit. Skew and term structure dislocations are driven by derivative market supply/demand and event risk, not by intra-crypto capital allocation between BTC and alts.
+
+**¹⁸⁵ Options RV (skew & term structure) × liquidity-depth gate = non-viable.** Options RV trades are executed on Deribit options (a separate liquidity venue from CEX perp markets). CEX order-book depth is not a meaningful gate for Deribit options liquidity; Deribit bid-ask spread and options OI are the relevant liquidity metrics for RV trades, and these are already incorporated into the kill criteria and entry conditions of [[skew-trading]], [[calendar-spread-arbitrage]], and [[options-rv-funding-filter]].
+
+**¹⁸⁶ Options RV (skew & term structure) × ETF-flow gate = non-viable.** Options RV (skew, term structure) is gated by statistical vol surface dislocation and derivative crowd positioning (funding, OI) — not by ETF flow direction. While ETF inflows correlate with institutional hedging demand (which affects skew), this relationship is already embedded in the DVOL and skew-level conditions of the existing RV pages.
+
+**¹⁸⁷ [[options-rv-event-calendar]] covers Options RV × vol-term-structure gate.** That page IS the vol term structure trade in the context of scheduled events: it positions the IV term structure trade (long back-dated IV vs short near-dated IV) specifically around event catalysts that create near-dated IV richness. The options RV primitive's primary expression is the vol term structure itself; a separate "Options RV × vol TS gate" would be substantively identical to [[options-rv-event-calendar]]. Cell marked COVERED by existing page.
+
+**¹⁸⁸ Options RV (skew & term structure) × social-velocity gate = non-viable.** Options vol surface dynamics are driven by professional vol traders and institutional hedgers; social velocity is a retail narrative signal. No direct mechanism connects social mention acceleration to vol surface dislocation or skew richness.
+
+**¹⁸⁹–¹⁹³ Prediction markets × all five new columns = non-viable.** Prediction market prices are event-outcome probability estimates anchored to real-world binary outcomes. Dominance regime, order-book depth, ETF flows, vol term structure, and social velocity have no direct causal relationship to whether a Polymarket/Kalshi market is mispriced relative to the true probability of the underlying event. Same reasoning as footnotes ⁹⁰–⁹⁸.
+
+**¹⁹⁴–¹⁹⁸ Stablecoin / peg × all five new columns = non-viable.** Stablecoin depeg arbitrage is driven by redemption channel status, pool imbalance, and collateral risk — mechanistic factors unrelated to BTC dominance, CEX order-book depth, ETF flows, vol term structure shape, or social attention velocity. The existing regime gate, sentiment filter, and event calendar pages ([[stablecoin-depeg-profit-capture]], [[stablecoin-sentiment-depeg-entry]], [[stablecoin-pair-arbitrage]]) cover the viable overlay dimensions. Same reasoning as footnotes ⁹⁹–¹⁰⁷.
+
+**¹⁹⁹ Whale / copy-flow × dominance/alt-season gate = non-viable.** Whale on-chain accumulation signals are per-asset; the dominance regime is a portfolio-level allocation signal. A whale accumulating ETH is providing a per-asset signal regardless of the dominance regime. The funding filter ([[whale-copy-flow-funding-filter]]) and divergence signal ([[smart-money-vs-crowd-divergence]]) already incorporate the crowd positioning context that the dominance regime would add.
+
+**²⁰⁰ Whale / copy-flow × liquidity-depth gate = non-viable.** Whale-copy-flow positions are multi-day to multi-week swing entries; order-book depth is an intraday execution signal. Depth at entry is managed via standard position sizing, not as a strategy-level overlay on multi-week whale-copy entries.
+
+**²⁰¹ Whale / copy-flow × ETF-flow gate = non-viable.** Both whale on-chain accumulation and ETF net flow are directional demand signals for the same underlying asset (BTC/ETH). Conditioning whale-copy entries on ETF flow alignment would create an "institutional double-confirmation" signal that is partially redundant: both signals point in the same direction (buy) without adding independent information that the other does not provide. [[on-chain-smart-money-tracking]] (cross-venue whale tracking) and [[smart-money-orderflow-combo]] (order flow confirmation) are more direct and timely second-leg signals than ETF flow.
+
+**²⁰² Whale / copy-flow × vol-term-structure gate = non-viable.** Whale accumulation signals are multi-day to multi-week; vol TS shape is a daily options market signal. While a steep vol-TS backwardation could warn that an imminent event will test the whale's accumulation thesis, the event calendar ([[event-calendar-risk-gating]]) is the more direct and actionable tool for pausing whale-copy positions around scheduled events. Not a distinct combination.
+
+**²⁰³ Whale / copy-flow × social-velocity gate = non-viable.** Whale on-chain accumulation signals are more informed than social velocity (whales buy before retail notices; social velocity rises after the whale signal has fired). Using social velocity as a gate on whale-copy entries would delay entry to the point where the informational advantage of the whale signal has been substantially reduced — the opposite of the goal. The whale signal should PRECEDE social velocity acceleration, making social velocity a lagging confirmation rather than a useful gate.
+
+---
+
+## Matrix Cell Counts (as of 2026-07-19 — Post C2-1 Column Expansion)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 87 |
-| Planned (gap to fill) | **3** |
-| Non-viable (`—`) | 90 |
-| **Total** | **180** |
+| Linked to existing page | 94 |
+| Planned (gap to fill) | **14** |
+| Non-viable (`—`) | 162 |
+| **Total** | **270** |
 
-*C1-1 row expansion (Campaign 2, 2026-07-19): +60 cells (6 new rows × 10 columns). Of those 60 new cells: 16 COVERED by existing pages (mev-strategies × 2, delta-neutral-yield-farming, concentrated-liquidity, skew-trading, calendar-spread-arbitrage, polymarket-prediction-market-arbitrage, prediction-market-strategies × 2, stablecoin-pair-arbitrage, stablecoin-depeg-profit-capture, regime-adaptive-strategy [whale/copy-flow × regime gate], smart-money-orderflow-combo, on-chain-smart-money-tracking, smart-money-vs-crowd-divergence, copy-trading); 8 initially PLANNED; 36 NON-VIABLE with reasoned footnotes (⁶⁶–¹¹⁵). Five planned cells authored as new pages in Campaign 2 Batch C1-1 (see section below); 3 planned cells remain open (defi-yield-event-calendar, defi-yield-sentiment-entry, options-rv-funding-filter).*
+*C2-1 column expansion (Campaign 2, 2026-07-19): +90 cells (18 rows × 5 new overlay columns). Of those 90 new cells: 2 COVERED by existing pages (momentum × ETF-flow gate = [[etf-flow-directional]]; options RV × vol-TS gate = [[options-rv-event-calendar]]); 16 PLANNED (see per-column audit in Campaign 2 section below); 72 NON-VIABLE with reasoned footnotes (¹¹⁶–²⁰³). Two planned cells authored as new pages in C2-1 (alt-season-momentum-gate, liquidation-depth-cascade-sizing). Additionally, 3 leftover C1-1 planned cells authored in this batch (defi-yield-event-calendar, defi-yield-sentiment-entry, options-rv-funding-filter).*
 
-*B8b completion note: all 120 original-matrix cells (12 rows × 10 columns) remain either linked or non-viable. The 3 remaining planned cells are all in the 6 NEW rows added in C1-1.*
+*C1-1 row expansion (Campaign 2, 2026-07-19): +60 cells (6 new rows × 10 columns). Of those 60 new cells: 16 COVERED by existing pages (mev-strategies × 2, delta-neutral-yield-farming, concentrated-liquidity, skew-trading, calendar-spread-arbitrage, polymarket-prediction-market-arbitrage, prediction-market-strategies × 2, stablecoin-pair-arbitrage, stablecoin-depeg-profit-capture, regime-adaptive-strategy [whale/copy-flow × regime gate], smart-money-orderflow-combo, on-chain-smart-money-tracking, smart-money-vs-crowd-divergence, copy-trading); 8 initially PLANNED; 36 NON-VIABLE with reasoned footnotes (⁶⁶–¹¹⁵). All 8 planned cells now authored across C1-1 and C2-1.*
+
+*B8b completion note: all 120 original-matrix cells (12 rows × 10 columns) remain either linked or non-viable.*
+
+---
+
+## Campaign 2 — Column Expansion (2026-07-19, Batch C2-1)
+
+Campaign 2 Batch C2-1 expands the matrix from **10 to 15 overlay columns** by adding five new overlay types. The original 10 columns covered the core primitive-level overlay universe. The five new columns cover structural regime signals that condition deployment of alt-heavy strategies, execution-quality signals (book depth), institutional flow signals (ETF), options-market forward-risk signals (vol term structure), and retail attention dynamics (social velocity).
+
+**New columns added:**
+
+1. **Dominance / alt-season gate** — BTC dominance as a deployment gate for alt-heavy strategies: deploy cross-sectional alt momentum, narrative, and growth-oriented strategies only when dominance is falling (alt-season confirmed); shift to BTC-only or suppress when dominance is rising. Covers 18 rows; 2 planned, 16 non-viable.
+
+2. **Liquidity-depth gate** — entries and sizing conditioned on real-time order-book depth thresholds. Deep books signal structural liquidity supporting the trade; thin books signal cascade continuation risk or execution uneconomics. CryptoDataAPI depth endpoints: `GET /api/v1/liquidity/depth` and `GET /api/v1/liquidity/depth/{coin}`. Covers 18 rows; 4 planned, 14 non-viable.
+
+3. **ETF-flow gate** — deployment conditioned on spot BTC/ETH ETF net-flow state (sustained inflows/outflows as macro-flow regime). CryptoDataAPI: `GET /api/v1/market-intelligence/etf/{asset}/flows`. 1 covered by [[etf-flow-directional]], 2 planned, 15 non-viable.
+
+4. **Vol-term-structure gate** — conditioned on the IV term structure shape (near vs back-dated DVOL/IV: contango / backwardation / event-hump). Backwardation = market pricing imminent event risk; contango = carry accrues safely. Deribit IV surface required; CryptoDataAPI does not provide options surface data. 1 covered by [[options-rv-event-calendar]], 5 planned, 12 non-viable.
+
+5. **Social-velocity gate** — rate-of-change of social attention (mention momentum, not level) gating narrative/momentum entries. Social velocity identifies the inflection in retail attention that precedes momentum continuation. No CryptoDataAPI endpoint for social velocity; noted honestly (Santiment, LunarCrush, or self-built from social APIs). 3 planned, 15 non-viable.
+
+**Per-column audit summary:**
+
+| Column | Covered by existing | Authored new | Planned remaining | Non-viable |
+|---|---|---|---|---|
+| Dominance/alt-season gate | 0 | 1 ([[alt-season-momentum-gate]]) | 1 (narrative×dominance) | 16 |
+| Liquidity-depth gate | 0 | 1 ([[liquidation-depth-cascade-sizing]]) | 3 (momentum, mean-reversion, stat-arb) | 14 |
+| ETF-flow gate | 1 ([[etf-flow-directional]]) | 0 | 2 (narrative×ETF, on-chain×ETF) | 15 |
+| Vol-term-structure gate | 1 ([[options-rv-event-calendar]]) | 0 | 5 (funding-carry, momentum, vol-selling, grid, DeFi-yield) | 12 |
+| Social-velocity gate | 0 | 0 | 3 (momentum, narrative, on-chain) | 15 |
+
+**Pages authored in C2-1 (5 total — 3 leftover C1-1 + 2 new-column strongest):**
+
+- [[defi-yield-event-calendar]] — DeFi yield/LP × unlock/event calendar: withdraw LP and farming positions ahead of scheduled catalysts (token unlocks ≥ 2% supply, protocol upgrades, points-program endings); redeploy after vol stabilises. The forward-looking, calendar-based complement to the vol-regime gate in [[defi-yield-regime-gate]].
+- [[defi-yield-sentiment-entry]] — DeFi yield/LP × sentiment-extreme filter: deploy LP capital after Fear & Greed ≤ 20 fear extremes (pool TVL thin → yields rich, entry price at lows) and de-risk at greed extremes ≥ 75 (TVL crowded → yields compressed, IL exposure maximal at cycle highs).
+- [[options-rv-funding-filter]] — Options RV × funding filter: use perp funding rate as a leading indicator for skew richness. Positive funding → call skew bid (sell risk reversal); negative funding → put skew bid (buy risk reversal). The derivative crowd that causes the funding extreme also drives the skew dislocation via option demand.
+- [[alt-season-momentum-gate]] — Momentum / trend × dominance/alt-season gate: deploy cross-sectional alt-momentum only in falling-dominance (alt-season) regimes; shift to BTC-only trend in rising-dominance regimes. Solves the most common crypto momentum failure mode: deploying alt-relative-strength during dominance-rising regimes where BTC-dominance headwind overwhelms any alt-relative-strength signal.
+- [[liquidation-depth-cascade-sizing]] — Liquidation plays × liquidity-depth gate: size cascade-fade entries proportionally to real-time bid-side order-book depth (as a fraction of its 24-hour average). Depth < 20% of average = no entry; graduated sizing from 25% at 20–39% depth to 100% at ≥ 80% depth. Eliminates the most common cascade-fade failure mode: entering into a thin book that amplifies the next cascade leg.
+
+**Social data note:** The social-velocity gate column references rate-of-change of social mentions. CryptoDataAPI does not currently expose social volume or mention endpoints. Implementations using this gate require external social data providers (Santiment API at `https://api.santiment.net`; LunarCrush at `https://lunarcrush.com/developers`). These are noted honestly in pages that reference the social-velocity gate; no CryptoDataAPI endpoint path is cited for this data.
+
+**14 remaining planned cells (across all 5 new columns):**
+
+| Row | Column | Status |
+|---|---|---|
+| Narrative | Dominance/alt-season gate | planned |
+| Momentum | Liquidity-depth gate | planned |
+| Mean-reversion | Liquidity-depth gate | planned |
+| Stat-arb / pairs | Liquidity-depth gate | planned |
+| Narrative | ETF-flow gate | planned |
+| On-chain flow | ETF-flow gate | planned |
+| Funding carry | Vol-term-structure gate | planned |
+| Momentum | Vol-term-structure gate | planned |
+| Vol selling | Vol-term-structure gate | planned |
+| Grid | Vol-term-structure gate | planned |
+| DeFi yield / LP | Vol-term-structure gate | planned |
+| Momentum | Social-velocity gate | planned |
+| Narrative | Social-velocity gate | planned |
+| On-chain flow | Social-velocity gate | planned |
 
 ---
 

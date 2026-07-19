@@ -4,6 +4,17 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Campaign 2, iteration 2: matrix expanded to 15 overlay columns
+
+Five new overlay columns (dominance/alt-season, liquidity-depth, ETF-flow,
+vol-term-structure, social-velocity) audited across all 18 primitives — 72 of 90 new cells
+honestly ruled non-viable with footnotes; 5 new strategies authored
+(defi-yield-event-calendar, defi-yield-sentiment-entry, options-rv-funding-filter,
+alt-season-momentum-gate, liquidation-depth-cascade-sizing). Matrix now 270 cells
+(94 covered / 14 planned / 162 non-viable). All cited data endpoints verified against
+pre-existing pages. Counter: **1,911 designs / 813,376 distinct configurations — 81.3% of
+the 1M goal**.
+
 ## 2026-07-19 — Campaign 2, iteration 1: matrix expanded to 18 primitives
 
 Six new primitive rows added to the combination matrix (MEV/execution, DeFi-yield/LP,

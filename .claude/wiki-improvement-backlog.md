@@ -18,7 +18,10 @@ for Trading-Profile waves). All Campaign-1 guardrails below still apply.
       overlays (link existing pages where they already cover a cell — e.g. delta-neutral
       yield, stablecoin-depeg family, jito/MEV pages), then author new combination pages in
       batches of ~5 for viable uncovered cells (~35-45 pages est).
-- [ ] C2. Matrix v2 — 5 new overlay columns (BTC-dominance/alt-season gate, liquidity-depth
+- [ ] C2. (C2-1 done 2026-07-19: 5 columns added, 90-cell audit — 2 covered by existing,
+      72 non-viable w/ footnotes 116-203, 5 pages authored incl. the 3 C1 leftovers.
+      Matrix 270 cells: 94/14/162. REMAINING: 14 planned cells ≈ 2-3 mini-batches or fold
+      into C3 iterations.) Original spec: 5 new overlay columns (BTC-dominance/alt-season gate, liquidity-depth
       gate, ETF-flow gate, vol-term-structure gate, social-velocity gate) across all 18
       rows: viability audit + batches of ~5 pages (~45-60 pages est). This is the
       exponential lever (avg viable overlays/row 7 → ~9).
@@ -40,6 +43,8 @@ for Trading-Profile waves). All Campaign-1 guardrails below still apply.
 - 2026-07-19: Campaign armed. Counter baseline: 1,006 designs / 401,128 configs (40.1%).
 - 2026-07-19 C2-iter 1 (C1): 6 rows added, 5 pages, matrix 87/3/90 of 180. Counter:
   1,071 designs / 418,048 configs (41.8%).
+- 2026-07-19 C2-iter 2 (C2-1): 5 columns added (270-cell matrix: 94/14/162), 5 pages.
+  Endpoint provenance verified. Counter: 1,911 designs / 813,376 configs (81.3%).
 
 ---
 

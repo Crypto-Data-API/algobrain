@@ -9,6 +9,48 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Campaign 2 Batch C2-1: Combination Matrix Column Expansion (18×15 = 270 cells)
+
+**Scope:** Expanded the combination-strategy matrix from 18×10 (180 cells) to 18×15 (270 cells) by adding five new overlay columns. Audited all 90 new cells (18 rows × 5 new columns). Authored 5 new combination pages: 3 leftover from C1-1 + 2 strongest new-column cells.
+
+**Matrix updated:** `wiki/strategies/combinations/combination-matrix.md`
+- 5 new overlay columns added: Dominance/alt-season gate, Liquidity-depth gate, ETF-flow gate, Vol-term-structure gate, Social-velocity gate
+- New cell count from column expansion: 2 COVERED by existing pages, 16 PLANNED (14 remaining after 2 authored), 72 NON-VIABLE with footnotes ¹¹⁶–²⁰³
+- Total matrix: 18 rows × 15 columns = 270 cells; 94 linked, 14 planned, 162 non-viable
+
+**Per-column audit summary:**
+
+| Column | Covered by existing | Authored new | Planned remaining | Non-viable |
+|---|---|---|---|---|
+| Dominance/alt-season gate | 0 | 1 | 1 | 16 |
+| Liquidity-depth gate | 0 | 1 | 3 | 14 |
+| ETF-flow gate | 1 | 0 | 2 | 15 |
+| Vol-term-structure gate | 1 | 0 | 5 | 12 |
+| Social-velocity gate | 0 | 0 | 3 | 15 |
+
+**Pages created (5):**
+- [[defi-yield-event-calendar]] — DeFi yield/LP × unlock/event calendar: pre-event LP withdrawal protocol. Tier 1 (≥5% unlock, upgrades) = full withdrawal T−7; Tier 2 (2–4.9% unlock) = 50% withdrawal T−3; re-entry on vol stabilisation + TVL ≥ 50% of pre-event. (`wiki/strategies/combinations/defi-yield-event-calendar.md`)
+- [[defi-yield-sentiment-entry]] — DeFi yield/LP × sentiment-extreme filter: deploy LP at Fear & Greed ≤ 20 for 2+ days when pool TVL ≤ 70% of 30d avg (yields rich) and vol regime stabilising; de-risk at greed ≥ 75. (`wiki/strategies/combinations/defi-yield-sentiment-entry.md`)
+- [[options-rv-funding-filter]] — Options RV × funding filter: positive funding → sell risk reversal (call-rich); negative funding → buy risk reversal (put-rich). Requires Deribit API for RR25; CryptoDataAPI provides funding, OI, L/S, and event risk gates. (`wiki/strategies/combinations/options-rv-funding-filter.md`)
+- [[alt-season-momentum-gate]] — Momentum/trend × dominance/alt-season gate: deploy cross-sectional alt-momentum only when dominance 14d RoC ≤ −0.5 pp/week AND dominance < 50d MA AND altcoin breadth ≥ 45%; BTC-only mode when dominance rising. (`wiki/strategies/combinations/alt-season-momentum-gate.md`)
+- [[liquidation-depth-cascade-sizing]] — Liquidation plays × liquidity-depth gate: size cascade-fade entries by bid-side depth at 25bps vs 24h average. No entry < 20%; 25% size at 20–39%; 50% at 40–59%; 75% at 60–79%; 100% at ≥ 80% depth. (`wiki/strategies/combinations/liquidation-depth-cascade-sizing.md`)
+
+**Files touched:**
+- `wiki/strategies/combinations/combination-matrix.md` — 5 new columns, footnotes ¹¹⁶–²⁰³, Campaign 2 Column Expansion section, updated cell counts (270 total)
+- `wiki/strategies/combinations/defi-yield-event-calendar.md` — new page
+- `wiki/strategies/combinations/defi-yield-sentiment-entry.md` — new page
+- `wiki/strategies/combinations/options-rv-funding-filter.md` — new page
+- `wiki/strategies/combinations/alt-season-momentum-gate.md` — new page
+- `wiki/strategies/combinations/liquidation-depth-cascade-sizing.md` — new page
+- `wiki/log.md` — this entry
+
+**Key design decisions:**
+- Social-velocity gate (column 5): no CryptoDataAPI endpoint exists for social mention velocity. All 3 planned social-velocity cells noted as requiring external providers (Santiment, LunarCrush); this is documented honestly in the matrix and Campaign 2 section. No invented endpoints.
+- Options RV × funding filter (options-rv-funding-filter): requires Deribit API for RR25/vol surface data — explicitly noted; CryptoDataAPI provides derivative positioning inputs (funding, OI, L/S) but not the options surface.
+- Vol-term-structure gate footnotes: 5 planned cells identified (funding carry, momentum, vol selling, grid, DeFi yield). None authored in this batch; all represent distinct viable overlays for future batches.
+- Liquidation plays × liquidity-depth gate selected as strongest new-column pair based on: direct endpoint availability (`/api/v1/liquidity/depth`), clear mechanism (depth confirms cascade exhaustion), and distinct differentiation from all existing cascade pages.
+- Momentum × dominance gate selected as second strongest: [[crypto-beta-rotation]] handles macro beta (Nasdaq correlation) not intra-crypto BTC vs alt allocation; [[momentum-rotation]] has no dominance gate. Genuinely additive.
+
 ## 2026-07-19 — Campaign 2 Batch C1-1: Combination Matrix Row Expansion (18 rows)
 
 **Scope:** Expanded the combination-strategy matrix from 12 to 18 primitive rows. Audited all 60 new cells (6 rows × 10 overlay columns). Authored 5 new combination pages for the highest-value planned cells.
