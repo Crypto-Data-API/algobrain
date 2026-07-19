@@ -9,6 +9,64 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Batch B11-2 (Final): Schema Upgrade of Remaining 24 STRATEGY Pages + 4 Equity-Prose Cleanups
+
+### Task 1 — 24 STRATEGY pages upgraded to buildable schema
+
+Each page received: extended frontmatter (`edge_source`, `edge_mechanism`, `data_required`, `min_capital_usd`, `capacity_usd`, `crowding_risk`, `expected_sharpe`, `expected_max_drawdown`, `breakeven_cost_bps`, `kill_criteria`); any missing schema sections from the 16-section standard (`## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`); `updated: 2026-07-19`; `status: review` if previously `good`. All new content is crypto-scoped (perps/Deribit/DVOL/funding). VIX-named pages (`vix-calls`, `quantitative/vix-trading`) explicitly state no tradeable DVOL future exists in crypto and frame everything via Deribit spot options.
+
+**Upgrade type: frontmatter only (page already had full schema sections)**
+- [[options-income]] — added extended frontmatter fields only
+- [[options-premium-selling]] — added extended frontmatter fields only
+- [[premium-selling-systematic]] — added extended frontmatter fields only
+- [[quantitative/tail-risk-hedging]] — added extended frontmatter fields only (expected_sharpe: -0.3 labeled honest negative standalone)
+
+**Upgrade type: frontmatter + missing schema sections**
+- [[combinations/stop-hunting-and-liquidity-sweeps]] — added full extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[combinations/structural-forced-selling]] — added full extended frontmatter + all schema sections + equity-prose cleanup (Task 2 concurrent)
+- [[combinations/trend-plus-tail-hedge]] — added full extended frontmatter + all schema sections + equity-prose cleanup (Task 2 concurrent)
+- [[conversion-reversal-arbitrage]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[delta-hedged-options]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[fundamental-analysis/news-trading]] — added extended frontmatter + all schema sections + equity-prose cleanup (Task 2 concurrent)
+- [[quantitative/vix-trading]] — added full extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`; explicit "no tradeable DVOL future" statement
+- [[tail-hedging]] — added extended frontmatter + `## Capacity limits`, `## What kills this strategy` (page already had Edge source, Null hypothesis, Kill criteria)
+- [[vix-calls]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## Kill criteria (numeric)`; explicit "no VIX call analog in crypto" statement preserved
+- [[zero-dte-options]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[technical-analysis/0dte-trading]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[technical-analysis/options-selling]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[technical-analysis/turtle-trading]] — added extended frontmatter + `## Edge source`, `## Null hypothesis` (renamed from existing "## Edge and Mechanism"), `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`
+- [[technical-analysis/channel-breakout]] — added full extended frontmatter + all schema sections; markets updated to [crypto,futures,forex]; `## Getting the Data`, `## Related` added
+- [[technical-analysis/macd-crossover]] — added full extended frontmatter + all schema sections; markets updated to [crypto,forex]; `## Getting the Data`, `## Related` added
+- [[technical-analysis/opening-range-breakout]] — added full extended frontmatter + all schema sections; markets updated to [crypto,futures]; crypto adaptation (08:00 UTC Deribit pseudo-open); equity SPY example preserved as labeled TradFi context; `## Getting the Data`, `## Related` added
+- [[technical-analysis/rate-of-change]] — added full extended frontmatter + all schema sections; markets updated to [crypto,forex]; AAPL example replaced with BTC/USDT perp example (AAPL preserved as labeled TradFi context); `## Getting the Data`, `## Related` added
+- [[technical-analysis/rsi-divergence]] — added extended frontmatter + `## Edge source`, `## Null hypothesis`, `## Capacity limits`, `## What kills this strategy`, `## Kill criteria`; `## Getting the Data` already present; funding-rate as confirmation layer added
+- [[technical-analysis/support-resistance-breakout]] — added full extended frontmatter + all schema sections; markets updated to [crypto,forex]; `## Getting the Data`, `## Related` added; liquidation cascade mechanism documented
+- [[technical-analysis/volatility-breakout]] — added full extended frontmatter + all schema sections; markets updated to [crypto,futures]; ES example replaced with BTC perp example (ES preserved as labeled TradFi context); `## Getting the Data`, `## Related` added
+
+### Task 2 — Equity-prose cleanup in 4 pages
+
+Residual equity framing in OLD prose reworked to crypto-primary; equity/TradFi references retained as brief labeled historical context only:
+
+- [[combinations/structural-forced-selling]] — markets=[stocks,bonds] → [crypto,futures]; edge source and "Why It Persists" sections reworked to crypto-primary (perp auto-liquidation, FTX contagion, negative funding cascades); equity examples converted to "TradFi Context (Historical Reference Only)"
+- [[combinations/trend-plus-tail-hedge]] — Component Strategies table reworked to crypto perps + Deribit OTM puts + straddles; Implementation reworked to crypto; explicit "VIX calls: no crypto equivalent; use Deribit straddles" note added; equity SPX/VIX example preserved as labeled historical context
+- [[fundamental-analysis/news-trading]] — markets updated to [crypto,forex]; rules reworked to BTC perps + funding repricing; ES futures example (SPX short at 5175) replaced with BTC perp example; equity/NFP references labeled as TradFi context
+- [[combinations/expiration-and-rebalancing-flows]] — markets=[stocks,futures,crypto] → [crypto,futures]; "The Edge" section reworked to Deribit OpEx pinning as primary + equity rebalancing as labeled TradFi context; "Why It Persists" reworked to crypto market-maker hedging as primary; flow calendar table reworked to crypto events (Deribit monthly/quarterly OpEx, CME BTC roll, on-chain vault rolls) with equity calendar as labeled TradFi context; end-of-month SPX rebalance strategy replaced with Deribit OpEx pinning + CME basis roll strategies; ES futures example replaced with Deribit quarterly OpEx example; "Real-World Examples" reworked to crypto examples (Deribit Dec 2023 OpEx, March 2022 OpEx) with equity examples (TSLA S&P addition, Russell reconstitution) as labeled TradFi context; explicit note added that VIX futures roll trade does not port to crypto (no DVOL future)
+
+### Wire-up
+
+- `wiki/log.md` — this entry prepended
+- `.claude/b11-classification.md` — all 24 B11-2 pages marked `yes (B11-2)` in the B11 column; tally updated to reflect all 34 STRATEGY pages fully upgraded
+
+### Files touched (26 total)
+
+24 strategy pages upgraded + `wiki/log.md` + `.claude/b11-classification.md`
+
+### B11 completion status
+
+All 34 STRATEGY-class pages in the B11 triage list now have complete extended frontmatter and all required schema sections. No STRATEGY pages with missing `edge_source:` remain from the original 99-page triage.
+
+---
+
 ## 2026-07-19 — Batch B11: Triage + First Schema Upgrades (99 pages missing edge_source)
 
 ### Triage counts (all 99 `type: strategy` pages lacking `edge_source:`)

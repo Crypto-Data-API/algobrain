@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 12: strategy-catalog schema upgrade complete
+
+- **All 34 genuine strategies from the triage are now on the buildable schema** — final 24
+  upgraded this iteration (options-income family, tail-hedging family, VIX→DVOL pages with
+  explicit "no tradeable DVOL future" framing, turtle/breakout/MACD/RSI technical family
+  with crypto examples replacing equity ones). Honest metrics kept honest: tail-risk-hedging
+  carries a negative standalone expected Sharpe by design.
+- **4 pages' residual equity prose reworked to crypto-primary** (structural-forced-selling,
+  trend-plus-tail-hedge, news-trading, expiration-and-rebalancing-flows), with TradFi
+  content preserved as labeled context.
+- Catalog state: every `type: strategy` page now either carries full edge characterization
+  (kill criteria, null hypothesis, capacity, worked example) or is one of the 40
+  intentionally-templated options-structure pages.
+
 ## 2026-07-19 — Improvement loop, iteration 11: strategy-catalog triage + upgrades
 
 - **Full triage of the 99 non-schema strategy pages** (classification in

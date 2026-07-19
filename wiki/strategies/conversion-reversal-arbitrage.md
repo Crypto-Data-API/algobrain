@@ -2,8 +2,8 @@
 title: "Conversion & Reversal Arbitrage"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [arbitrage, options, crypto, derivatives, market-microstructure, bitcoin, ethereum]
 aliases: ["Conversion Reversal Arbitrage", "Conversion Arbitrage", "Reversal Arbitrage", "Synthetic Arbitrage", "Crypto Conversion Reversal"]
 strategy_type: quantitative
@@ -12,9 +12,41 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[put-call-parity]]", "[[box-spread]]", "[[volatility-arbitrage]]", "[[cash-and-carry]]", "[[basis-trade]]", "[[deribit]]", "[[greeks-live]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[delta-neutral]]", "[[dvol]]", "[[skew]]", "[[section-1256-contracts]]", "[[leg-risk]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural]
+edge_mechanism: "Put-call parity is a mechanical no-arbitrage identity; the counterparty is whoever created the dislocation — a large directional buyer lifting one option, a forced liquidation dumping a leg, or a market maker skewing inventory — and they are paying for immediacy while the arb desk locks the gap."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, ohlcv-daily, open-interest]
+min_capital_usd: 100000
+capacity_usd: 5000000
+crowding_risk: high
+
+# Performance expectations
+expected_sharpe: 0.5
+expected_max_drawdown: 0.05
+breakeven_cost_bps: 5
+
+# Kill criteria
+kill_criteria: |
+  - average captured parity violation < 0.05% of notional after all fees and funding (edge consumed by costs)
+  - leg-execution fill rate drops below 85% on the harder option leg (infrastructure failing)
+  - Deribit fee structure change causes round-trip cost to exceed the average violation size
+  - rolling 6-month Sharpe < 0.3
 ---
 
 # Conversion & Reversal Arbitrage
+
+## Edge source
+
+**Structural.** See [[edge-taxonomy]].
+
+Put-call parity is a mechanical no-arbitrage constraint. Any dislocation is not a forecast — it is a financing gap created by a participant paying for immediacy (a directional buyer, a forced-liquidation seller, a market maker managing inventory imbalance). The conversion/reversal arb desk supplies liquidity to that participant and locks the gap as risk-free carry to European expiry. The edge requires no directional view; it exists only as long as frictions (execution speed, capital, low fees) keep the violating participant from being immediately offset by competing arb capital.
+
+## Null hypothesis
+
+If parity were continuously maintained by instantaneous arb capital with zero cost, no violation would persist long enough to trade profitably. Under this null the strategy earns nothing: every observable violation is either (a) already closed by faster arb capital, (b) a mismodel of a cost (funding, inverse quanto), or (c) a fee artifact. Empirically, small violations do exist on Deribit — but they are measured in 0.05–0.3% of notional, require near-simultaneous multi-leg execution, and are almost entirely captured by professional market-maker desks with co-located infrastructure and low-cost capital. A retail or semi-institutional operator should model the expected return as near-zero or negative after realistic costs.
 
 ## Overview
 
@@ -115,6 +147,27 @@ There is no tent-shaped payoff — the P&L is **locked at entry** and does not d
 6. **Locked net** ≈ **$110-125 per BTC** (~0.2% of the $60k notional), realised at the 08:00 UTC settlement regardless of where BTC finishes.
 
 **At expiry:** the long call + short put form a synthetic long at $60,000 that exactly offsets the short future; the basis is earned; the net is the locked figure. No early-exercise risk (European), no dividend to pay (crypto) — the two equity hazards are simply absent.
+
+## Capacity limits
+
+The strategy's capacity is tightly bounded by Deribit's option book depth and the size of parity violations. Usable violations — executable at the quoted spread, not the mid-price — require both legs to be fillable simultaneously. Clean execution runs to approximately $200K–$2M per trade at tighter BTC strikes; larger sizes require the [[greeks-live]]/Paradigm RFQ network. Total strategy capacity is a few million dollars per active desk. The strategy does not scale because: (1) the number of qualifying violations per day is small (a handful of events per week at retail latency), and (2) professional desks running the same arb are continuously compressing the available violations.
+
+## What kills this strategy
+
+1. **Latency disadvantage** — market-maker and prop desks co-located on Deribit see and close violations in microseconds; any operator with higher latency is filling behind the arb and paying a worse leg price.
+2. **Mismodeled cost** — treating inverse-quanto curvature or perp funding as zero when it is not; the "violation" is the cost, not profit.
+3. **Leg risk** — a bad fill on the harder option leg while the future is hedged turns a locked profit into an uncertain directional position.
+4. **Funding spike (perp builds)** — a perp-hedged build has an open funding liability; a large funding jump after entry can exceed the locked profit before the option expires.
+5. **Fee increase** — Deribit's taker fee cap at 12.5% of premium already dominates on cheap OTM legs; any fee-structure change that raises this erases the marginal profit.
+6. **VRP compression / liquidity drought** — in a bear market with thin option activity, parity holds more tightly and the available violation pool shrinks to near zero.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Average captured parity violation < 0.05% of notional after all fees and funding
+- Leg-execution fill rate below 85% on the harder option leg
+- Deribit fee structure change causes round-trip cost to exceed the average violation size
+- Rolling 6-month Sharpe < 0.3
 
 ## Sources
 

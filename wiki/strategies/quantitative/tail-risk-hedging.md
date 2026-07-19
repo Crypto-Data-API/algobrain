@@ -2,8 +2,8 @@
 title: "Tail Risk Hedging"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [tail-risk, black-swan, hedging, put-options, crash-protection, asymmetric-payoff, quantitative, crypto, options]
 aliases: ["Tail Risk Strategy", "Black Swan Hedging", "Crash Protection", "Crypto Tail Hedge", "Deribit Put Overlay"]
 strategy_type: quantitative
@@ -12,6 +12,28 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[tail-hedging]]", "[[vix-calls]]", "[[vix-trading]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[variance-risk-premium]]", "[[protective-puts]]", "[[black-swan]]", "[[liquidation-cascade-fade]]", "[[volatility-regime]]", "[[convexity]]", "[[crisis-alpha]]"]
+
+# Edge characterization
+edge_source: [risk-bearing]
+edge_mechanism: "Vol sellers (Deribit strangle writers, on-chain option vaults) chronically underwrite the left tail of crypto's distribution; the tail hedger buys the underpriced wing and collects the convex payoff when the tail fires — the edge is portfolio-level survivorship and rebalancing capital, not standalone positive EV."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, on-chain-flows]
+min_capital_usd: 10000
+capacity_usd: 200000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: -0.3
+expected_max_drawdown: 0.03
+breakeven_cost_bps: 50
+
+# Kill criteria
+kill_criteria: |
+  - annual hedge cost exceeds pre-set budget for the convex variant → re-spec to cheaper strikes/spreads
+  - a realized cascade payoff not monetized within the DVOL-spike window → process failure; fix the rule
+  - skew so rich that modeled cascade payoff < 3× premium spent → reduce or pause adds
+  - DVOL structurally above 85th percentile for > 30 days (buying at a peak; pause new entries)
 ---
 
 # Tail Risk Hedging

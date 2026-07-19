@@ -2,8 +2,8 @@
 title: "Systematic Premium Selling (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, derivatives, volatility, quantitative, algorithmic, risk-management, bitcoin, ethereum]
 aliases: ["Systematic Premium Selling", "Mechanical Premium Selling", "Systematic Short Vol", "Crypto Systematic Premium Selling"]
 strategy_type: quantitative
@@ -12,6 +12,30 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[options-premium-selling]]", "[[crypto-options-volatility-selling]]", "[[options-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[long-vol-overlay]]", "[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[tom-sosnoff]]", "[[tastytrade-mechanics]]", "[[managing-winners]]", "[[volatility-regime-classification]]"]
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral, structural]
+edge_mechanism: "Harvests the crypto variance risk premium (DVOL > realized RV) via mechanically executed 16-delta strangles; the systematic overlay reduces execution variance — the dominant real-world source of premium-seller underperformance — delivering the edge minus the discretionary mistakes."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, ohlcv-daily]
+min_capital_usd: 25000
+capacity_usd: 300000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.9
+expected_max_drawdown: 0.25
+breakeven_cost_bps: 60
+
+# Kill criteria
+kill_criteria: |
+  - DVOL rises > 50% in a single session → flatten short vega immediately
+  - strategy-level drawdown ≥ 20% → halve size; ≥ 30% → halt new entries
+  - rolling 12-month Sharpe < 0 (9+ months data) → halt
+  - realized VRP (DVOL − subsequent RV) negative on 6-month rolling basis → halt new entries
+  - vol shock with overlay covering < 30% of core gamma loss → overlay misspecified; halt and re-architect
+  - discretionary deviation from rules ≥ 3 times per quarter → halt
 ---
 
 Systematic premium selling is the **mechanical, rules-based implementation of [[options-premium-selling]]**, re-scoped to crypto: 21-45 DTE [[deribit]] BTC/ETH strangles, 16-delta short strikes, mechanical entries gated by [[dvol|DVOL]] percentile, exits at 50% of max profit or the crypto gamma-zone time stop (whichever comes first), with an institutional risk-discipline overlay including a permanent [[long-vol-overlay]] and a hard DVOL vol-shock kill switch. The rule set is the tastytrade / [[tom-sosnoff]] research lineage (see [[tastytrade-mechanics]]) cleaned up with institutional risk controls and tightened for crypto's fatter tail. This is the systematic implementation referenced in [[long-vol-vs-short-vol]]'s synthesis section, recommended for traders who cannot reliably make discretionary calls under stress.

@@ -2,8 +2,8 @@
 title: "Options Premium Selling (Crypto)"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, derivatives, volatility, risk-management, premium-selling, bitcoin, ethereum]
 aliases: ["Premium Selling", "Theta Gang", "Short Vol Core", "Selling Premium", "Crypto Premium Selling"]
 strategy_type: quantitative
@@ -12,6 +12,29 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[long-vol-vs-short-vol]]", "[[variance-risk-premium]]", "[[crypto-options-volatility-selling]]", "[[options-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[short-put-spread]]", "[[premium-selling-systematic]]", "[[long-vol-overlay]]", "[[tail-risk-hedging]]", "[[options-portfolio-construction]]", "[[vega-budgeting]]", "[[volatility-regime-classification]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[tom-sosnoff]]", "[[ergodicity]]"]
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral, structural]
+edge_mechanism: "Leveraged spot holders buy crash protection above actuarially fair value and retail buyers overpay for OTM lottery calls; the premium seller collects the variance risk premium in exchange for tail exposure — compensation for absorbing a risk the counterparty is structurally compelled to offload regardless of price."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, ohlcv-daily]
+min_capital_usd: 25000
+capacity_usd: 300000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.6
+expected_max_drawdown: 0.40
+breakeven_cost_bps: 60
+
+# Kill criteria
+kill_criteria: |
+  - DVOL rises > 50% in a single session → flatten short vega immediately
+  - drawdown > 25% → halve size; > 35% → halt new entries
+  - rolling 12-month Sharpe < 0.0 (≥9 months data) → halt
+  - realized VRP (DVOL − subsequent RV) negative on 6-month rolling basis → halt new entries
+  - round-trip cost above 60 bps crypto budget → review; well above → retire
 ---
 
 Options premium selling is the **canonical short-vol strategy**, re-scoped to crypto: the trader systematically sells out-of-the-money puts, calls, [[short-strangle|strangles]], or [[iron-condor|condors]] on [[deribit]] BTC and ETH (plus on-chain vaults and BTC-ETF options) and harvests the [[variance-risk-premium]] (VRP) — the persistent gap between implied volatility ([[dvol|DVOL]]) and subsequently realized volatility. It is the **short-vol core** referenced throughout [[long-vol-vs-short-vol]]: the income engine that, paired with a [[long-vol-overlay]], forms the [[options-portfolio-construction|portfolio construction]] template. In crypto the VRP is structurally wider than in equities (DVOL routinely runs 2-4× the SPX premium), but it underwrites a genuinely fatter tail on a single dominant offshore venue.

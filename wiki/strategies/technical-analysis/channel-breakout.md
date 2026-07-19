@@ -2,8 +2,8 @@
 title: Channel Breakout Strategy
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
-status: good
+updated: 2026-07-19
+status: review
 tags:
   - breakout
   - channels
@@ -11,11 +11,12 @@ tags:
   - ascending-triangle
   - rectangle
   - wedge
+  - crypto
 strategy_type: breakout
 timeframe: swing
 markets:
-  - stocks
   - crypto
+  - futures
   - forex
 complexity: beginner
 backtest_status: untested
@@ -24,9 +25,46 @@ related:
   - "[[volatility-breakout]]"
   - "[[opening-range-breakout]]"
   - "[[trend-following]]"
+  - "[[perpetual-futures]]"
+  - "[[funding-rate]]"
+
+# Edge characterization
+edge_source: [behavioral, analytical]
+edge_mechanism: "Behavioral: price anchoring and herding behavior around geometric consolidation patterns causes participants to cluster stops and orders at the channel boundary; when the boundary breaks with conviction, the stop-cascade and breakout-chasing flow produces a sustained directional move. Analytical: the measured move technique provides an objective, pre-defined exit that removes discretion and exploits the predictable distance of momentum continuation after a consolidation resolution."
+
+# Data and infrastructure requirements
+data_required: [ohlcv, volume, funding-rates]
+min_capital_usd: 1000
+capacity_usd: 200000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.4
+expected_max_drawdown: 0.25
+breakeven_cost_bps: 20
+
+# Kill criteria
+kill_criteria: |
+  - false-breakout rate exceeds 60% over rolling 30 signals → re-examine volume filter or timeframe
+  - rolling 90-day P&L negative → pause and review; the pattern recognition may be too subjective
+  - market regime identified as range-bound with structural factors (e.g., FOMC pinning) → reduce or pause
 ---
 
 # Channel Breakout Strategy
+
+## Edge source
+
+Channel breakouts exploit two reinforcing effects:
+
+**Behavioral (primary)**: Participants anchor to the geometric boundaries of a consolidation pattern and cluster their stops and limit orders around the channel edges. When the boundary breaks on conviction (strong volume), a stop-cascade fires — the stops of those positioned inside the channel trigger market orders in the breakout direction, amplifying the initial move. Additionally, breakout-chasing momentum traders enter on the close above the boundary, further extending the move.
+
+**Analytical (secondary)**: The measured-move technique (project the channel height from the breakout point) is an empirically observed phenomenon — not a physical law — that concentrates profit-taking at a predictable level. By using it as a target, the trader aligns with the cluster of orders that appear naturally at that distance, increasing the probability of a clean exit.
+
+**Crypto-specific note**: On BTC/ETH perps, the 24/7 market means channels form and resolve across sessions without a "close" to lean on; volume must be read relative to the 24-hour rolling average, not a session reference. Funding rate direction is a useful directional bias filter: a channel forming during strongly positive funding (leveraged longs) is biased to break up; negative funding (leveraged shorts) biases down.
+
+## Null hypothesis
+
+Under the null hypothesis, chart patterns are noise — the "channel" is a subjective drawing on random-walk price data, and breakouts are no more predictive of continued movement than a coin flip. The counter-argument is empirical and behavioral: the stop-clustering dynamic is real (observable in orderbook depth around pattern boundaries), and the measured-move concentration of orders at a predictable distance is documented across liquid instruments. However, the null is hard to reject purely from price data without confirming order-flow or liquidity data; the strategy's edge is weaker in low-volume / thin-orderbook conditions where the stop-cascade is insufficient to produce a sustained move.
 
 ## Overview
 
@@ -96,3 +134,48 @@ The Channel Breakout strategy trades price breaking out of well-defined geometri
 - Measured move targets are approximate, not precise; price may overshoot or undershoot
 - In liquid, heavily traded instruments, obvious patterns attract [[stop-hunting]] and liquidity grabs before the true breakout
 - Requires practice and screen time to develop the pattern recognition skill
+
+## Capacity limits
+
+Channel breakout trades in BTC/ETH perps can scale to $5–50M per position before market impact on entry becomes material; pattern recognition strategies are not capital-sensitive in the way options or arb strategies are. Stop placement is the primary risk-control, not position size. For alt perps, capacity drops significantly with thinner orderbooks — avoid running this on assets where a single position is > 1% of 24h volume.
+
+## What kills this strategy
+
+1. **Persistent false breakouts / stop-hunts**: in crypto, large players routinely push through obvious channel boundaries (known to all) to collect stops, then reverse. If false-breakout rate > 60% on a given setup type, the pattern is being actively exploited.
+2. **Low-volume / weekend conditions**: without a session close, thin weekend and late-night hours make channel boundaries unreliable; breakout volume must be confirmed against a 24h rolling baseline.
+3. **Correlated macro regimes**: during FOMC-pinning or broad risk-off events, geometric patterns become irrelevant; BTC/ETH correlate to macro and the channel structure is overridden by macro flow.
+4. **Subjective pattern selection bias**: if the trader is choosing which patterns to trade after seeing how they resolve, the measured win rate is inflated; only patterns identified before resolution count.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- False-breakout rate (price re-enters channel within 3 candles) exceeds 60% over rolling 30 signals → apply stricter volume filter (>2× average) or shift to higher timeframe.
+- Rolling 90-day P&L negative with at least 20 completed trades → pause; the subjective pattern-identification process may be creating selection bias.
+- Crypto vol-regime-score > 75 → avoid initiating new breakout entries; high-vol regimes produce whipsaw patterns.
+
+## Getting the Data (CryptoDataAPI)
+
+Everything the system needs is OHLCV-based with a funding-rate overlay for directional bias on crypto perps.
+
+**Live data:**
+- `GET /api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200` — OHLCV for channel boundary identification and volume comparison
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding rate (directional bias filter)
+- `GET /api/v1/volatility/regime` — vol-regime filter; avoid breakout entries in vol_shock regime
+
+**Historical data:**
+- `GET /api/v1/backtesting/klines` — deep archive for backtesting measured-move performance
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-data/klines?symbol=BTCUSDT&interval=4h&limit=200"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-data]].
+
+## Related
+
+- [[support-resistance-breakout]] — the horizontal-level version of the same breakout logic
+- [[volatility-breakout]] — ATR-based breakout from contraction patterns
+- [[opening-range-breakout]] — the crypto-adapted intraday ORB
+- [[trend-following]] — the broader trend-capture philosophy
+- [[perpetual-futures]] — the primary crypto instrument for this strategy
+- [[funding-rate]] — directional bias filter on perp positions

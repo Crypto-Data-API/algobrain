@@ -2,8 +2,8 @@
 title: "Delta-Hedged Options (Crypto)"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, derivatives, volatility, risk-management, bitcoin]
 aliases: ["Delta-Hedged Options", "Delta-Neutral Options", "Volatility Isolation", "Crypto Delta-Hedged Options"]
 strategy_type: quantitative
@@ -12,9 +12,44 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[delta-hedging]]", "[[gamma-scalping]]", "[[straddle]]", "[[strangle]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[deribit]]", "[[greeks-live]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[dvol]]", "[[gamma-exposure]]", "[[delta]]", "[[gamma]]", "[[theta]]", "[[vega]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [analytical, risk-bearing]
+edge_mechanism: "By neutralizing delta the position isolates the gap between realized and implied volatility; the counterparty is the options seller who priced in excess implied vol (short-gamma loses to the long-gamma hedger when realized beats implied) or the buyer who paid too little for the insurance (long-gamma loses to short-gamma when realized vol disappoints)."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, ohlcv-intraday]
+min_capital_usd: 25000
+capacity_usd: 100000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: 0.7
+expected_max_drawdown: 0.20
+breakeven_cost_bps: 20
+
+# Kill criteria
+kill_criteria: |
+  - long-gamma: realized vol below DVOL for 20+ consecutive days (the IV>RV premium inverted; no edge for long side)
+  - short-gamma: DVOL rises > 50% in a session (vol-shock kill; flatten immediately)
+  - either: delta-hedge costs (spread + funding) exceed the realized vol premium captured for 2 consecutive months
+  - drawdown > 20% on the delta-hedged book → halve size
+  - rolling 6-month Sharpe < 0.3
 ---
 
 # Delta-Hedged Options (Crypto)
+
+## Edge source
+
+**Analytical** and **risk-bearing**. See [[edge-taxonomy]].
+
+Analytical: by continuously neutralizing delta, the position converts a directional bet into a pure view on the realized-vs-implied volatility spread. If the trader can identify when DVOL is systematically mispriced relative to subsequent realized vol (long-gamma when RV will beat IV; short-gamma when IV will beat RV), the analytical edge is in that identification. The tool (delta hedging) itself is not the edge; the view is.
+
+Risk-bearing: the short-gamma configuration accepts negative convexity — losses accelerate in the tails — in exchange for earning the [[variance-risk-premium]] in calm markets. The counterparty is the option buyer paying above fair statistical value for protection.
+
+## Null hypothesis
+
+Under the null where DVOL exactly equals subsequently realized RV on average, delta-hedged P&L from the gamma/theta battle nets to approximately zero before costs. After the perp hedge's bid-ask, funding, and the Deribit option spread, the strategy earns a small but meaningful negative carry under the null. Empirically, BTC/ETH DVOL averages materially above subsequently realized RV (the variance risk premium), which favors the short-gamma configuration in most environments. The null is not fully rejected for the long-gamma configuration except around specific catalysts where realized vol genuinely exceeds the priced-in expectation.
 
 ## Overview
 
@@ -115,6 +150,28 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/quant/gex"
 - [[dvol]] — the residual-vega benchmark
 - [[gamma-exposure]] — dealer positioning that shapes realized vol
 - [[delta]] / [[gamma]] / [[theta]] / [[vega]] — the Greeks managed and left on
+
+## Capacity limits
+
+Delta-hedged option books on BTC/ETH scale to roughly $50–200M vega-notional on Deribit before the hedging flow itself moves the perp market against the book. The binding constraint is the perp hedge — a large delta-hedged short-gamma book hedging 24/7 against the BTC perp will be visible in the OI and can tip its own hedging path. Beyond $200M, institutional desks use the [[greeks-live]]/Paradigm RFQ network for block option fills. The strategy's capacity is one to two orders of magnitude smaller than an SPX volatility book.
+
+## What kills this strategy
+
+1. **Short-gamma vol shock** — a DVOL spike 50%+ in a session while net-short gamma realizes the full convex loss before any hedge can close the gap; crypto gaps overnight with no market close.
+2. **Inverse-delta mismodel** — treating coin-delta as cash-delta on inverse contracts; systematically mis-sizing hedges bleeds P&L invisibly.
+3. **Cost bleed exceeds premium captured** — over-frequent hedging pays spread and funding on noise; the optimal hedge frequency is the key operational parameter.
+4. **Realized vol persistently below IV** — for long-gamma positions, a multi-week period of realized vol well below DVOL forces continued theta bleed with no gamma scalp to compensate.
+5. **Funding regime flip** — a sudden funding spike on the perp hedge can dwarf the vol premium for that period; short-gamma books with net-long perp hedges are especially exposed.
+6. **Operational failure** — 24/7 continuous hedging requires automation; a system outage during a vol spike is a material risk.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Long-gamma: realized vol below DVOL for 20+ consecutive days
+- Short-gamma: DVOL rises > 50% in a session → flatten immediately
+- Either: hedge costs exceed realized vol premium for 2 consecutive months
+- Drawdown > 20% on the delta-hedged book → halve size
+- Rolling 6-month Sharpe < 0.3
 
 ## Sources
 

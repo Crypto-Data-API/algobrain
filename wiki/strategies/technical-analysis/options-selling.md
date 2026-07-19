@@ -2,8 +2,8 @@
 title: "Options Selling Strategies (Crypto)"
 type: strategy
 created: 2026-04-07
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, income, premium-selling, volatility, derivatives, bitcoin, ethereum, theta]
 aliases: ["Premium Selling", "Selling Premium", "Crypto Options Income", "Options Income Strategies"]
 strategy_type: quantitative
@@ -12,9 +12,45 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[crypto-options-volatility-selling]]", "[[covered-call]]", "[[cash-secured-put]]", "[[wheel-strategy]]", "[[iron-condor]]", "[[short-strangle]]", "[[options-income]]", "[[variance-risk-premium]]", "[[volatility-risk-premium]]", "[[deribit]]", "[[greeks-live]]", "[[implied-volatility]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[theta]]", "[[vega]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral, structural]
+edge_mechanism: "The variance risk premium (DVOL > subsequently realized vol) compensates sellers for bearing crash risk; behavioral: retail buyers chronically overpay for crash protection; structural: on-chain vault and ETF demand for covered-call overlays creates a persistent buyer-of-vol base. Crypto VRP is systematically wider than equities', providing a fat structural premium — offset by a genuinely fatter tail."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest]
+min_capital_usd: 5000
+capacity_usd: 100000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.6
+expected_max_drawdown: 0.25
+breakeven_cost_bps: 60
+
+# Kill criteria
+kill_criteria: |
+  - DVOL spikes > 50% in a session → flatten all short-vega immediately
+  - vol-shock regime score > 75 → close or reduce all short-premium positions
+  - position reaches 2× credit received → cut or roll; no averaging
+  - rolling 90-day P&L negative after 3 consecutive months with regime filter → pause and re-examine VRP
 ---
 
 # Options Selling Strategies (Crypto)
+
+## Edge source
+
+The edge has three overlapping components:
+
+**Risk-bearing (primary)**: Options sellers on Deribit are compensated for bearing the tail risk that buyers of crash protection offload. The [[variance-risk-premium]] — DVOL consistently printing above subsequently realized vol — is the systematic compensation; the seller is the insurance underwriter. In crypto, the VRP is structurally wider than in equities because the tail is genuinely fatter and the seller base is smaller and less capitalized.
+
+**Behavioral (secondary)**: Retail participants chronically overpay for OTM puts in bear/panic environments (disaster myopia) and overpay for OTM calls in bull/euphoria environments (FOMO). These regimes of mis-pricing show up as elevated skew (put-rich or call-rich relative to realized drift) that the disciplined seller can exploit.
+
+**Structural (secondary)**: On-chain covered-call vaults (Ribbon, Aevo, etc.) and BTC covered-call ETFs create systematic option-buying demand, particularly on the call side. This demand is persistent and somewhat price-insensitive, keeping call-side IV elevated relative to realized upside vol — a structural premium for the call seller.
+
+## Null hypothesis
+
+Under the null hypothesis, DVOL is a fair estimate of subsequent realized vol, and any premium collected is exactly offset by the expected loss from the tail. The counter-argument is empirical: DVOL has historically exceeded subsequent realized vol by a statistically significant margin over crypto-liquid history (2017–present), confirming that the VRP exists and is not fully explained by a few outlier events. A program that fails to beat the null over a rolling 12-month window (controlling for tail events that should trigger kill switches) is evidence of either model error or a structural regime shift in VRP.
 
 ## Overview
 
@@ -108,6 +144,34 @@ Positive theta / negative vega / negative gamma is the short-vol posture — the
 - **BTC stays $60k-$76k (base case):** condor decays; close at 50% of credit for **+$550/BTC**.
 - **BTC drifts to $58k (put spread tested):** manage/roll near the short put or take a partial loss into the defined wing.
 - **BTC gaps to $52k (tail):** vol-shock kill fires at the open; the long $56,000 put caps the loss near **−$2,900/BTC** — the reason the structure is a *defined-risk condor*, not a naked strangle.
+
+## Capacity limits
+
+Premium-selling capacity scales with Deribit's option depth, which is substantial for BTC/ETH front-month but thins quickly further out the surface or on alts.
+
+- **BTC/ETH front-month (21–45 DTE) ATM/near-ATM options**: the most liquid. A retail/small-fund program can sell $500K–$5M vega-notional without meaningful slippage. A mid-size fund can run $5–25M with care.
+- **OTM wings (put-side)**: thinner; practical per-strike capacity $500K–$2M. Beyond that you move the surface, narrowing your edge.
+- **Total book for a systematic program**: a disciplined individual/small-fund can run $1–5M notional; a vol-specialist hedge fund can scale to $50–100M notional using RFQ, OTC structures, and spread across strikes and tenors.
+- **Crowding risk**: medium — on-chain vaults and covered-call ETFs have industrialized supply on the call side, compressing the call VRP. Put-side premium selling faces less crowding but faces the genuinely fat crash tail without the demand to balance it.
+- **ETH and alts**: BTC has the deepest book; ETH is ~2–3× thinner; altcoin options are too illiquid for systematic premium-selling programs.
+
+## What kills this strategy
+
+1. **Fat-tail gap (Black Thursday / LUNA / FTX style)**: a single cascade can erase months or years of premium; even defined-risk condors hit max loss on their contained wing, and uncapped structures (strangles) can produce devastating losses.
+2. **Vol-shock kill failure**: missing or ignoring the kill switch during a DVOL spike is the most common failure mode — the system must be automated (DVOL threshold triggers an automatic flatten order) and tested before deployment.
+3. **VRP compression**: if on-chain vault supply systematically bids down the IV spread (particularly on calls), the premium no longer compensates for the tail risk taken; the edge inverts.
+4. **Margin spiral**: a DVOL spike inflates portfolio margin on Deribit exactly when liquidity is worst, triggering forced liquidation of otherwise-manageable positions.
+5. **Weekend and 24/7 gaps**: the worst moves often happen Saturday/Sunday when desks are away and books are fully exposed with no ability to hedge until the exchange reopens.
+6. **Behavioral over-sizing**: premium-selling's high hit rate breeds confidence that leads to fatal over-concentration before a blow-up event.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- DVOL spikes > 50% from session open in a single session → flatten all short-vega immediately; this is the signature of a live vol-shock regime where further selling is inadvisable.
+- CryptoDataAPI vol-regime-score > 75 → reduce all short-premium positions to no more than 25% of normal size; do not add.
+- Any individual position reaches 2× the credit received → close or roll immediately; no averaging.
+- Rolling 90-day P&L is negative for 3 consecutive months after applying regime filters as designed → pause the program; re-examine whether VRP has structurally compressed.
+- Deribit margin utilization > 70% during a DVOL spike → reduce short-vega until margin utilization drops below 50% to avoid forced liquidation.
 
 ## Getting the Data (CryptoDataAPI)
 

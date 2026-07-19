@@ -2,19 +2,56 @@
 title: "Crypto Volatility Trading (DVOL)"
 type: strategy
 created: 2026-04-06
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [crypto, options, volatility, dvol, short-volatility, long-volatility, mean-reversion, quantitative, derivatives]
 aliases: ["DVOL Trading", "Crypto Vol Trading", "VIX Trading", "Volatility Trading", "Deribit Volatility Trading"]
 strategy_type: quantitative
-timeframe: swing|position
+timeframe: swing
 markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[vix-calls]]", "[[variance-risk-premium]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[funding-rate]]", "[[volatility-regime]]", "[[liquidation-cascade-fade]]", "[[gamma-exposure]]"]
+
+# Edge characterization
+edge_source: [analytical, risk-bearing]
+edge_mechanism: "DVOL is strongly mean-reverting; the counterparty to a post-spike short-vol position is the panic-buyer who bought crash protection at peak pricing and is now trapped paying rich theta; the short-vol desk collects the mean-reversion of the fear premium — with the caveat that regime breaks (not spikes) result in sustained elevated DVOL and a loss."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, ohlcv-daily]
+min_capital_usd: 25000
+capacity_usd: 200000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.7
+expected_max_drawdown: 0.30
+breakeven_cost_bps: 30
+
+# Kill criteria
+kill_criteria: |
+  - DVOL makes a new high above the spike peak after entry (regime break, not spike) → flatten immediately
+  - short-vol: DVOL rises > 50% in a session → flatten all short-gamma positions
+  - short-vol: drawdown > 25% → halt new entries
+  - long-vol: annual cost exceeds 3% of NAV without cascade payoff → re-spec or pause
+  - rolling 6-month Sharpe < 0.3 on the vol-trading sleeve
 ---
 
 # Crypto Volatility Trading (DVOL)
+
+## Edge source
+
+**Analytical** and **risk-bearing**. See [[edge-taxonomy]].
+
+Analytical: DVOL and the equity VIX share the empirical property of strong mean reversion — spikes that are event-driven (a single cascade) revert within days; spikes that represent regime breaks (LUNA/FTX) stay elevated for weeks. The analytical edge is identifying which type of spike has occurred in real time. The [[volatility-regime]] page and CryptoDataAPI's HMM models provide structured regime-detection support.
+
+Risk-bearing: the short-vol configuration accepts the crypto tail-risk premium (same as [[options-premium-selling]]); the long-vol configuration pays that premium but receives the convex payoff in crashes. Both are risk-bearing trades, but in opposite directions.
+
+**Critical: no tradeable VIX/DVOL future exists in crypto.** Unlike equity vol trading which runs on VIX futures and ETPs, crypto has no DVOL future or DVOL ETP. All vol positions are expressed through Deribit spot options. See the dedicated section below for the translation table.
+
+## Null hypothesis
+
+Under the null where DVOL is unpredictably mean-reverting (spikes are indistinguishable from regime breaks in real time), neither a post-spike short-vol nor a pre-spike long-vol strategy can beat costs. Under this null, the expected return of a systematic DVOL mean-reversion short-vol strategy is approximately the negative of the Deribit bid-ask cost on the options plus the funding paid on any delta hedge. Empirical evidence partially rejecting the null: post-event-driven-spike DVOL has a documented tendency to revert toward its regime baseline within 5–15 days in BTC/ETH (cascade events like 2025-10-10); the null is *not* rejected for regime-break spikes (2022 LUNA/FTX chain), where DVOL stayed elevated for weeks.
 
 ## Overview
 
@@ -109,6 +146,27 @@ With no vol future, [[funding-rate|perp funding]] and open interest are the crud
 - **Regime detection is critical and hard:** distinguishing an event-driven spike (fade it) from a regime break (do not) in real time is the central problem — see [[volatility-regime]] and [[liquidation-cascade-fade]].
 - **Single-venue (Deribit) and inverse-settlement** hazards with no equity equivalent.
 - **Crowding:** on-chain covered-call/put vaults and covered-call ETFs compress the call-side premium over time.
+
+## Capacity limits
+
+DVOL trading capacity is bounded by Deribit's option depth for the specific structures used. Short-vol: similar to [[options-premium-selling]], clean fills to $5–25M vega-notional on BTC front-month; beyond that, RFQ. Long-vol: OTM put wings have thinner books, especially in the wings; capacity is lower (a few million dollars per position) before moving the surface against yourself. Total practical book for a solo operator: $20–100M notional. A dedicated vol fund can run $200M+.
+
+## What kills this strategy
+
+1. **Mistaking a regime break for a spike** — selling vol after a LUNA-style event and watching DVOL stay elevated for months, grinding the short-vol book through continued theta losses and mark-to-market on short vega.
+2. **Short-gamma vol explosion** — entering a post-cascade short position and catching the second leg of a cascade; the new high above the spike peak is the stop that prevents this.
+3. **No tradeable vol future means no clean isolation** — every "DVOL trade" carries option structure baggage (delta, theta, option-specific strike risk) that creates unexpected P&L outside the vol dimension.
+4. **Inverse-settlement wrong-way risk** — trading coin-margined options and watching collateral depreciate as the short-vol position goes against you.
+5. **Crowding** — covered-call ETFs and on-chain put-selling vaults have compressed the call-side VRP systematically; the short-vol edge on calls is thinner than it was pre-2024.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- DVOL makes new high above spike peak after short-vol entry → flatten immediately
+- Short-vol: DVOL rises > 50% in a session → flatten all short-gamma
+- Short-vol: drawdown > 25% → halt new entries
+- Long-vol: annual cost > 3% of NAV without cascade payoff → re-spec
+- Rolling 6-month Sharpe < 0.3
 
 ## Getting the Data (CryptoDataAPI)
 

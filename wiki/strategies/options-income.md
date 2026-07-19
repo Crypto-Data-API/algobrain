@@ -2,8 +2,8 @@
 title: "Options Income (Crypto)"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, income, premium-selling, volatility, derivatives, bitcoin, ethereum, theta]
 aliases: ["Options Income", "Crypto Options Income", "Income from Options", "Premium Income", "Options Income Overlay", "Yield Enhancement", "Premium Selling Overlay"]
 strategy_type: hybrid
@@ -12,6 +12,29 @@ markets: [crypto, options]
 complexity: intermediate
 backtest_status: untested
 related: ["[[options-premium-selling]]", "[[crypto-options-volatility-selling]]", "[[options-selling]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-portfolio-construction]]", "[[short-strangle]]", "[[iron-condor]]", "[[covered-call]]", "[[cash-secured-put]]", "[[wheel-strategy]]", "[[variance-risk-premium]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[long-vol-vs-short-vol]]", "[[expected-shortfall]]", "[[pin-risk]]", "[[gamma-explosion]]", "[[managing-winners]]", "[[expiration-laddering]]", "[[volatility-regime-classification]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral, structural]
+edge_mechanism: "Option buyers — leveraged spot holders, mandate-driven hedgers, retail lottery-call buyers — pay above actuarially fair value for optionality; the income seller absorbs this tail risk and collects the variance risk premium as steady theta carry, while the counterparty is price-insensitive (hedging for survival reasons, not EV optimization)."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, ohlcv-daily]
+min_capital_usd: 10000
+capacity_usd: 300000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.7
+expected_max_drawdown: 0.35
+breakeven_cost_bps: 30
+
+# Kill criteria
+kill_criteria: |
+  - DVOL rises > 50% in a single session → flatten all short vega immediately
+  - realized vol exceeds DVOL for 20+ consecutive days → suspend new entries
+  - drawdown > 25% of capital → halve size; > 40% → full pause
+  - Deribit portfolio-margin utilisation > 60% intraday → cut size 50%
+  - rolling 6-12-month Sharpe < 0 in a non-shock environment → investigate VRP crowding
 ---
 
 # Options Income (Crypto)

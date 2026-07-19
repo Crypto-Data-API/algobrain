@@ -2,8 +2,8 @@
 title: "Tail Hedging"
 type: strategy
 created: 2026-06-22
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [risk-management, options, volatility, derivatives, hedging, crypto]
 aliases: ["Tail Risk Hedging", "Convex Hedging", "Tail Protection", "Crypto Tail Hedge"]
 strategy_type: hybrid
@@ -12,6 +12,28 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[tail-risk]]", "[[long-volatility-strategies]]", "[[protective-puts]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[crypto-options-volatility-selling]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[implied-volatility]]", "[[variance-risk-premium]]", "[[black-swan]]", "[[liquidation-cascade-fade]]", "[[risk-management]]"]
+
+# Edge characterization
+edge_source: [risk-bearing]
+edge_mechanism: "The tail hedger accepts negative expected carry (paying the variance risk premium to vol sellers) in exchange for convex portfolio-level protection; the counterparty is the premium-selling desk that is structurally short the tail, and the edge materializes when that counterparty is forced to cover during a cascade — providing the hedger with liquidity at advantageous prices."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest]
+min_capital_usd: 10000
+capacity_usd: 200000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: -0.3
+expected_max_drawdown: 0.03
+breakeven_cost_bps: 50
+
+# Kill criteria
+kill_criteria: |
+  - annual hedge cost exceeds budget → re-spec to cheaper strikes or OTM spread structures
+  - cascade payoff not monetized within the DVOL spike window → process failure; fix the rule
+  - skew so rich that modeled cascade payoff < 3× premium spent → reduce or pause adds
+  - DVOL structurally above 85th percentile for > 30 days → pause new additions at peak cost
 ---
 
 # Tail Hedging
@@ -107,6 +129,24 @@ A $10,000,000 crypto book allocates ~1% per year (~$100,000) to tail protection,
 - **Perp-funding leakage** — the non-options portion of a tail buffer (short perp, reduced leverage) carries [[funding-rate|funding]] cost/credit and its own liquidation risk, unlike a paid-up put.
 - **Single-venue counterparty tail** — Deribit clears the overwhelming majority of crypto options. A venue outage/insolvency *during* a cascade is an un-hedgeable risk the hedge itself cannot escape; diversify collateral custody and consider a spot-put or exchange-token hedge for exchange-solvency risk (FTX-type events).
 - **On-chain / depeg tail** — stablecoin depegs (UST/LUNA) and DeFi exploits are crypto-native left tails that equity-style index puts do not cover; DVOL spikes on these but the mechanism is counterparty/protocol, not price.
+
+## Capacity limits
+
+Tail hedging scales very differently from alpha strategies — the constraint is not crowding but **cost and liquidity of the instrument wing**.
+
+- **Deribit BTC/ETH OTM put wings** — deep-OTM (20–40% OTM) puts on Deribit have thinner books than at-the-money options. Clean fills up to ~$500K–$1M notional per strike per tenor; beyond that you move the surface against yourself. A program targeting $10M notional tail protection may need to ladder across 3–5 strikes and 3–4 tenors, with some RFQ.
+- **Portfolio-level budget** — the binding constraint is the annual premium budget (typically 0.5–2% of AUM). At $10M AUM the annual budget is $50–200K — consistent with liquid Deribit put markets. At $500M+ AUM the notional in wings necessary to produce a portfolio-material payoff becomes supply-limited.
+- **Practical ceiling**: a dedicated tail-overlay book can run $50–200M notional with careful ladder construction; institutional hedge-fund-sized books ($500M+) face notable slippage on wing adds and should use a mix of spreads, OTC structures, and spot optionality.
+- **Crowding risk**: low — few participants actively buy wings systematically (most are net short vol); this is the opposite of a crowded-long problem.
+
+## What kills this strategy
+
+1. **Vol structurally rich** — if DVOL is persistently elevated (post-cascade regime, e.g., prolonged 2022 bear), the cost of protection stays high and the bleed is unsustainable; the program must either pause or shift to spread structures that cap cost.
+2. **No monetization discipline** — if the hedger does not sell into DVOL spikes and rebalance, the convexity payoff is wasted; the puts decay or expire post-crash without realizing the full payoff. This is a process failure, not a market failure.
+3. **Single-venue concentration** — Deribit clears ~90% of crypto options; an FTX-style venue insolvency *during* a cascade would eliminate the hedge exactly when it should pay (see 2022-11). Collateral custody diversification is non-optional.
+4. **Inverse (coin-margined) settlement wrong-way risk** — BTC-collateralised puts lose USD value when BTC falls; use USDC-margined (linear) Deribit puts if you need clean dollar P&L.
+5. **Budget exhaustion before the cascade** — a multi-year calm can bleed the entire protection budget; systematic rebuilding rules must be defined.
+6. **Regulatory venue risk** — Deribit's regulatory status in key jurisdictions affects accessibility; offshore-only access is a persistent operational risk.
 
 ## Kill criteria (risk discipline, not an alpha spec)
 - Annual hedge cost exceeds the pre-set budget for the convex variant → re-spec to cheaper strikes/spreads or float the strike further OTM.

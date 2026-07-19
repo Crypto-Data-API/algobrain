@@ -2,8 +2,8 @@
 title: "0DTE Options Trading"
 type: strategy
 created: 2026-04-13
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, day-trading, scalping, gamma, 0dte, derivatives]
 aliases: ["Crypto 0DTE", "Same-Day Crypto Options", "BTC 0DTE", "Daily-Expiry Options Trading"]
 strategy_type: technical
@@ -12,9 +12,45 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[zero-dte-options]]", "[[options]]", "[[gamma]]", "[[theta]]", "[[iron-condor]]", "[[iron-fly]]", "[[short-strangle]]", "[[straddle-strangle]]", "[[gamma-scalping]]", "[[gamma-exposure]]", "[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural, behavioral]
+edge_mechanism: "Front-end Deribit implied daily move exceeds realized intraday range on catalyst-free days; the short-credit seller collects the full-day theta in hours. Behavioral component: GEX-informed directional trades exploit the mechanical hedging flows of short-gamma dealers that systematically amplify or dampen moves. Crypto 0DTE edge is distinct from equities — no competing retail-bid compression, perp-funded intraday path, and 08:00 UTC settlement mechanics favor the disciplined seller in calm regimes."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, liquidations]
+min_capital_usd: 5000
+capacity_usd: 10000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: 0.6
+expected_max_drawdown: 0.20
+breakeven_cost_bps: 100
+
+# Kill criteria
+kill_criteria: |
+  - rolling 30-day win rate on short condors < 55% → regime break; pause selling
+  - any single position exceeds 2× credit loss → exit immediately
+  - vol-shock regime score > 70 → no new 0DTE shorts; flatten short-gamma before 08:00 UTC
+  - DVOL intraday spike > 30% from open → flatten all short-gamma immediately
 ---
 
 # 0DTE Options Trading
+
+## Edge source
+
+The 0DTE trading edge has two components:
+
+**Structural (short-credit bias):** Deribit's front-end daily implied move — derived from same-day IV — systematically overstates the intraday realized range on catalyst-free days. The seller collects that discrepancy as theta in hours, not weeks. Unlike SPX 0DTE (where a mass of retail buyers has bid up the front-end surface), crypto 0DTE has no equivalent retail 0DTE demand; the implied move is not inflated by speculative call/put buying, so the structural premium is real and persistent.
+
+**Behavioral / GEX-driven (directional variant):** When dealers are **short gamma** (net short the near-term strikes), their delta hedges are procyclical — they must sell into declines and buy into rallies, mechanically amplifying moves toward the next gamma level. This creates predictable, non-random momentum bursts that a GEX-aware directional 0DTE trade can exploit. See [[gamma-exposure]].
+
+The behavioral risk on the *sell* side is also here: the high hit rate of short condors breeds over-confidence, causing position over-sizing exactly before shock days — a behavioral pattern that periodically concentrates losses.
+
+## Null hypothesis
+
+Under the null (no front-end premium and no GEX signal), a 0DTE short condor is a zero-expectancy bet less transaction costs: the credit received would, on average, equal the realized range minus fees, leaving the seller with a small negative carry. The argument against this null: the Deribit daily-expiry surface is not continuously arb'd by sophisticated vol desks — the front-end is less efficiently priced than SPX — so a persistent implied-realized discrepancy can survive. If a large on-chain vault or market maker begins systematically selling same-day IV to offset the premium, this discrepancy would compress and the null would hold.
 
 0DTE ("zero days to expiration") options are contracts that expire on the **same day** they are traded. In crypto this means [[deribit]] BTC and ETH options on their nearest daily expiry, which settles at **08:00 UTC** to the Deribit index. Deribit lists daily expiries (plus weeklies, monthlies and quarterlies), so on any given day there is a same-day-expiry chain to trade. Crypto 0DTE is far younger and smaller than the equity 0DTE complex — where same-day SPX options are ~40–50% of volume — but short-dated BTC/ETH options are a growing, distinctly-behaved corner of the Deribit tape. This page is the **how-to-trade playbook**; the instrument and market-structure overview lives on [[zero-dte-options]].
 
@@ -105,6 +141,34 @@ A 0DTE short condor is the most concave bet on the surface (maximum negative gam
 - Total credit ≈ **$210** per condor; wings $500 wide → max loss ≈ $500 − $210 = **$290**.
 - *Win:* BTC chops $59.6k–$60.4k into the settle; both spreads expire worthless → keep **$210** (full credit) — a 72% return on the $290 at risk in ~10 hours.
 - *Loss:* a liquidation cascade at 03:00 UTC gaps BTC to $61,400; the call spread goes max — loss ≈ **−$290** realized in minutes, with no session break to react. The defined wings are the only reason the loss is bounded.
+
+## Capacity limits
+
+0DTE capacity is tight — same-day Deribit liquidity is the binding constraint.
+
+- **BTC front-expiry ATM/near-ATM options**: most liquid; $200–500K notional condor/fly works without material slippage. Above $500K, spreads widen and edge narrows.
+- **BTC deep-OTM wings**: thinner market; $50–150K notional per leg before noticeable slippage.
+- **ETH 0DTE**: roughly 2–3× less liquid than BTC; practical per-position max ~$100–200K notional.
+- **Total book**: a systematic 0DTE program should cap at $500K–$2M total notional; larger accounts should extend expiry to weekly/monthly and leave 0DTE as a small high-frequency sleeve only.
+- **Crowding risk**: low — the crypto 0DTE market is not retail-crowded. Risk is capacity exhaustion, not crowding compression.
+
+## What kills this strategy
+
+1. **Intraday liquidation cascade** — BTC/ETH gaps 2–5% in minutes from a headline; the short condor hits max loss before exit is possible. No session break can stop it (crypto is 24/7). The most dangerous time is late Asian / early European session weekends with thin orderbooks.
+2. **08:00 UTC gamma singularity** — positions that are "safe" at 04:00 UTC can be in crisis by 07:30 UTC; extreme gamma in the final hour creates sudden delta whips; bid-ask on tested positions widens dramatically, making clean exits expensive.
+3. **Over-sizing on high hit rate** — the silent killer; the structural high win rate makes sellers habitually over-size, and one shock day destroys multi-month gains in minutes.
+4. **Bid-ask and fee erosion** — wide short-dated spreads (3–8 vol points) plus taker fee (0.03% of underlying, capped at 12.5% of premium) can consume the entire alpha on small credits; the edge only survives at a minimum credit-to-cost ratio.
+5. **Vol-shock regime entry** — selling 0DTE during a live vol-spike regime (DVOL spike > 30% intraday, active cascade) is a donation; the realized range will exceed any condor wing.
+6. **Alt/off-expiry illiquidity** — daily-expiry options barely exist off BTC/ETH; attempting to run 0DTE on altcoins or off-tenor expiries is not viable.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Rolling 30-day win rate on short condors below 55% → regime break; suspend selling until win rate returns above 60% for 10 consecutive days.
+- Any single-position loss exceeds 2× the credit received → exit immediately, no averaging.
+- CryptoDataAPI vol-regime-score > 70 on entry day → no new 0DTE shorts; flatten existing short-gamma before the 08:00 UTC settle.
+- DVOL intraday spike > 30% from session open → flatten all short-gamma immediately; this is a cascade signal.
+- Net P&L from 0DTE is negative for 3 consecutive calendar months with proper regime filters applied → pause and re-examine whether the front-end implied-realized premium has structurally compressed.
 
 ## Getting the Data (CryptoDataAPI)
 

@@ -2,8 +2,8 @@
 title: "Zero DTE Options"
 type: strategy
 created: 2026-05-07
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, crypto, derivatives, volatility, scalping, market-microstructure]
 aliases: ["Zero DTE", "Same-Day Crypto Options", "Daily-Expiry Options", "Crypto 0DTE Overview"]
 strategy_type: quantitative
@@ -12,9 +12,39 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: untested
 related: ["[[0dte-trading]]", "[[crypto-options-volatility-selling]]", "[[short-strangle]]", "[[iron-condor]]", "[[iron-fly]]", "[[gamma]]", "[[theta]]", "[[gamma-exposure]]", "[[gamma-scalping]]", "[[dvol]]", "[[implied-volatility]]", "[[deribit]]", "[[greeks-live]]", "[[funding-rate]]", "[[section-1256-contracts]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural, behavioral]
+edge_mechanism: "Short-dated crypto options are priced to embed a realized-vol premium at the front end of the surface (the front-end implied move typically exceeds the realized intraday move on non-cascade days); seller collects rich theta in hours and the edge persists because there is no competing retail-0DTE demand large enough to cheapen it, and because the market path is driven by the perp tape, not option-dealer hedging. Behavioral element: high hit rate of selling induces over-sizing right before shock days."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest, liquidations]
+min_capital_usd: 5000
+capacity_usd: 20000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: 0.5
+expected_max_drawdown: 0.15
+breakeven_cost_bps: 80
+
+# Kill criteria
+kill_criteria: |
+  - rolling 30-day realized move exceeds 0DTE implied move on > 40% of days → regime break; pause selling
+  - single position loss exceeds 2.5× credit received → exit immediately; no averaging
+  - vol-shock regime score > 70 on CryptoDataAPI → pause all 0DTE selling until regime clears
+  - liquidation cascade signal active (DVOL spike > 30% intraday) → flatten all short-gamma immediately
 ---
 
 # Zero DTE Options
+
+## Edge source
+
+Short-dated crypto options carry a **structural** realized-vol premium at the front end of the Deribit surface: the daily implied move typically exceeds the intraday realized move in non-cascade conditions, making the short-credit seller structurally advantaged. Unlike equity 0DTE — where a mass of retail buyers has compressed premium — crypto 0DTE has no equivalent retail 0DTE bid, so the front-end theta remains rich relative to intraday realized vol. A secondary **behavioral** element: sellers over-size on the back of high hit rates, and that over-confidence is the mechanism that turns quiet-period success into shock-day blowups. The buyer side (long straddles/strangles before catalyst) has a pure informational edge only when the trader has an asymmetric view of the event outcome; without that, buying rich implied vol in 0DTE is a negative-EV donation.
+
+## Null hypothesis
+
+Under the null hypothesis (no edge in the front-end pricing), the 0DTE credit collected would on average equal the realized move less transaction costs, leaving the seller with zero expected return before fees. The argument against this null is that: (1) the crypto vol surface is not continuously arbitraged by sophisticated flow the way SPX is; (2) the Deribit structure (daily cash settlement at 08:00 UTC) creates a gap between equity-style microstructure and crypto's perp-driven price discovery; and (3) there is no reliable mass of retail demand bidding up the 0DTE surface from below. If over time a competitor segment (e.g., large on-chain vaults, structured-product desks) systematically bids same-day IV, this null would flip and the edge would shrink.
 
 Zero-DTE (0DTE) options are options that expire **on the same day they are traded**. In crypto the 0DTE tenor is served by [[deribit]] daily-expiry BTC and ETH options, which settle at **08:00 UTC** to the Deribit index. Deribit lists a full expiry ladder — daily, weekly, monthly, quarterly — so on any day there is a same-day-expiry chain. This page is the **instrument and market-structure overview**; the trading playbook (structures, entries, management) lives on [[0dte-trading]].
 
@@ -101,6 +131,34 @@ Because [[dvol|DVOL]] is a 30-day index and 0DTE has no time for implied vol to 
 - Total credit ≈ **$17** per structure; wings $40 wide → max loss ≈ $40 − $17 = **$23**.
 - *Win:* ETH holds $2.97k–$3.03k into the settle; both spreads expire worthless → keep **$17** (≈ 74% return on the $23 at risk in ~12 hours).
 - *Loss:* a cascade at 02:00 UTC pushes ETH to $3,075; the call spread goes max → loss ≈ **−$23**, realized in minutes. The long wings are the only reason the loss is bounded — the whole point of trading 0DTE defined-risk in crypto.
+
+## Capacity limits
+
+0DTE capacity is **much tighter** than longer-dated premium selling because same-day liquidity is thin.
+
+- **BTC 0DTE at-the-money/near-the-money options**: best liquidity; a small operator can sell $200–500K notional credit spreads without material slippage. Beyond $500K the spreads widen noticeably.
+- **ETH 0DTE**: similar but typically 2–3× less liquid than BTC equivalent strikes; practical cap ~$100–200K notional per position.
+- **Defined-risk structures (condors/flies)**: the wing legs often have thin markets at same-day expiry; realistic working size $50–200K notional before impact becomes problematic.
+- **Aggregate book**: a systematic 0DTE program can run $500K–$2M book without regularly moving the market; above that, the act of entering depresses the credit received, which narrows the edge. Larger accounts should extend to weekly/monthly structures rather than scaling 0DTE.
+- **Crowding risk**: low — the crypto 0DTE market is not retail-crowded like SPX. But the market is small, so the risk is **capacity exhaustion**, not crowding-induced edge compression.
+
+## What kills this strategy
+
+1. **Intraday liquidation cascade** — a BTC/ETH gap of 2–5% in minutes defeats any short-condor before exit is possible; the wing limits the loss but the full max-loss is still 1–2× the credit received. LUNA (2022-05), FTX (2022-11), 2025-10-10 cascade all produced 0DTE-killing moves.
+2. **Regime blindness** — selling 0DTE in a live vol-shock regime where realized daily range already exceeds the implied move; if the vol-regime score is elevated, selling is a negative-EV donation to the cascade.
+3. **08:00 UTC pin risk** — an active gamma-squeeze into the Deribit settlement creates extreme delta whips in the final hour; positions that are "nearly safe" at 06:00 UTC can go max-loss by 08:00 UTC without a chance to exit at a reasonable spread.
+4. **Overconfidence from high hit rate** — 0DTE short-credit has a high win rate (most days are quiet) that breeds over-sizing; the rare loss day can exceed many months of premium.
+5. **Cost drag** — short-dated Deribit spreads (3–8 vol points round-trip) are a permanent friction; if the net edge is narrow, fees consume the entire alpha.
+6. **Thinning liquidity on expiry** — as the 08:00 UTC settle approaches, bid-asks on tested positions widen dramatically; in a real adverse move, getting out cleanly is expensive or impossible.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Rolling 30-day ratio of "realized intraday range > 0DTE implied move" exceeds 40% of days → regime break; suspend selling until ratio falls below 25%.
+- Any single-position loss exceeds 2.5× the credit received → exit immediately, regardless of time to settle; no averaging or holding hope.
+- CryptoDataAPI vol-regime-score > 70 on a selling day → no new 0DTE shorts; clear existing to flat if any approach the short strike.
+- DVOL intraday spike > 30% from the session open → flatten all short-gamma immediately; this is a liquidation-cascade signal.
+- Net 30-day P&L from 0DTE is negative for 3 consecutive months despite disciplined regime filters → pause, review structural assumptions, verify the front-end theta premium still exists.
 
 ## Getting the Data (CryptoDataAPI)
 

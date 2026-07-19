@@ -2,8 +2,8 @@
 title: "Crypto Long-Vol Overlay (DVOL / Deribit)"
 type: strategy
 created: 2026-04-15
-updated: 2026-07-14
-status: good
+updated: 2026-07-19
+status: review
 tags: [options, derivatives, volatility, risk-management, crypto, dvol, hedging]
 aliases: ["Crypto Long-Vol Overlay", "DVOL Long Vol", "Deribit Straddle Hedge", "VIX Calls", "Crypto Volatility Hedge", "BTC Put Wings"]
 strategy_type: technical
@@ -12,11 +12,45 @@ markets: [crypto, options]
 complexity: advanced
 backtest_status: naive-backtested
 related: ["[[dvol]]", "[[deribit]]", "[[greeks-live]]", "[[long-volatility-strategies]]", "[[tail-risk-hedging]]", "[[tail-hedging]]", "[[protective-puts]]", "[[crypto-options-volatility-selling]]", "[[variance-risk-premium]]", "[[realized-volatility]]", "[[implied-volatility]]", "[[funding-rate]]", "[[gamma-exposure]]", "[[risk-reversal]]", "[[volatility-regime]]", "[[liquidation-cascade-fade]]", "[[risk-management]]"]
+
+# Edge characterization
+edge_source: [risk-bearing, behavioral]
+edge_mechanism: "The overlay pays the variance risk premium to vol sellers in exchange for convex crash protection; the behavioral angle is that in positive-funding regimes the crowd ignores downside protection, making OTM put wings temporarily cheap relative to their cascade payoff. Edge is not positive standalone expectancy but portfolio-level convexity and survivorship during liquidation cascades."
+
+# Data and infrastructure requirements
+data_required: [options-chain, funding-rates, volatility-regime, open-interest]
+min_capital_usd: 10000
+capacity_usd: 100000000
+crowding_risk: low
+
+# Performance expectations
+expected_sharpe: -0.4
+expected_max_drawdown: 0.02
+breakeven_cost_bps: 60
+
+# Kill criteria
+kill_criteria: |
+  - DVOL structurally above 80th percentile for > 21 days → suspend new tranches (too expensive)
+  - monetization missed through DVOL spike → process failure; fix rules before next tranche
+  - annual bleed exceeds 2.5% of NAV → reduce tranche size or shift to put spreads
+  - Deribit access restriction (regulatory/operational) → halt program pending venue alternative
 ---
 
 # Crypto Long-Vol Overlay (DVOL / Deribit)
 
 A crypto long-vol overlay buys **convexity on [[bitcoin|BTC]]/[[ethereum|ETH]] volatility** — long OTM put "wings" and long straddles/strangles on [[deribit]] — used primarily as a tail-risk hedge to protect a crypto book against sharp declines and volatility spikes. Because [[dvol|DVOL]] (Deribit's 30-day implied-vol index, the "crypto VIX") spikes violently when crypto sells off — it has jumped from the 50s into the 100s+ during cascades — owning long-vol structures provides convex, leveraged exposure to volatility increases that offset spot losses. Like the equity VIX-call hedge it is modelled on, it is **expensive to hold continuously**: crypto vol mean-reverts hard, option theta bleeds daily, and standalone the overlay has **negative expected value** — it only makes sense as a portfolio overlay funded by carry elsewhere.
+
+## Edge source
+
+The overlay captures a **risk-bearing** edge with a secondary **behavioral** component.
+
+- **Risk-bearing (insurance buyer)**: vol sellers on Deribit (strangle sellers, on-chain vault sellers) are structurally short convexity; the overlay is the counterparty buying that convexity. The expected value is negative (the insurance premium), but the portfolio-level payoff — cash delivered during a cascade when leveraged books are force-liquidated — makes it net-positive for a hedged book. See [[variance-risk-premium]] and [[crypto-options-volatility-selling]].
+- **Behavioral cheapness**: In positive-funding/call-skew regimes, the leveraged crowd is entirely focused on upside; downside puts are relatively unloved and can be bought at a discount to their realized crash value. This cheapness is not permanent — it normalizes after a cascade — but it makes the best overlay entries genuinely cheap relative to intrinsic hedge value.
+- **No clean VIX-future equivalent**: the DVOL index (Deribit's 30-day IV composite) is a reference index only — there is no listed DVOL future or DVOL call to buy. Long-vol exposure is achieved entirely through spot-option structures (put wings, straddles) with their own delta, gamma, and theta. This is a structural limitation vs. the equity VIX-call world.
+
+## Null hypothesis
+
+A systematic long-vol overlay program run without entry discipline or monetization has **negative expected return by construction**: the overlay donor pays the [[variance-risk-premium]] to Deribit vol sellers. Under the null, the overlay costs 1–3% of NAV per year and the payoffs (while convex) do not recoup the bleed over a cycle unless (a) structures are bought when DVOL is genuinely cheap (low-percentile, call-skew regime), and (b) cascade payoffs are *sold quickly* into DVOL spikes rather than held to mean-reversion. A program that fails either discipline should expect pure insurance drag with no convexity benefit.
 
 ## No clean "VIX call" analog in crypto
 
@@ -184,6 +218,24 @@ A desk runs a $500,000 BTC book and budgets ~2% ($10,000)/year for a long-vol ov
 - **Slow grinding alt bleed:** a multi-month −25% drift where each put expires worthless before the strike is hit — the crypto analogue of a slow bear the wing never catches.
 - **Structural change:** compression of the crypto vol premium as covered-call ETFs and on-chain vaults scale, flattening the priced-in spike premium.
 - **Inverse-settlement wrong-way risk** and **Deribit single-venue failure** — crypto-specific.
+
+## Capacity limits
+
+The overlay is wing-buying so its constraint is **Deribit put-wing liquidity**, not capital.
+
+- **Single-strike deep-OTM (20–40% OTM) BTC put**: clean fills to ~$500K–$1M notional per strike per expiry; above that the market widens against you. A $10M notional hedge needs to be laddered across 3–5 strikes.
+- **Full straddle on BTC/ETH**: ATM options are more liquid; $1–5M notional per tenor is achievable without significant slippage. Beyond $5M, use RFQ or split across tenors.
+- **Total overlay book for a retail/small-fund operator**: $1–5M notional per cycle. For a $20–50M hedge fund: $5–20M notional, using a ladder of strikes and tenors. Institutional ($200M+): the wing capacity becomes the binding constraint; spread and OTC structures required.
+- **Crowding risk**: low — there is no systematic over-crowding on the buy side of crypto put wings; structural sellers dominate, making this a buyer's market most of the time.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- DVOL above 80th percentile of trailing-1y range for > 21 calendar days → suspend new tranches; at that cost level the annualized bleed is unsustainable and mean reversion risk dominates.
+- Any cascade payoff not partially monetized within 72 hours of the DVOL spike peak → process failure; address the execution/decision rule before deploying the next tranche.
+- Rolling 12-month bleed exceeds 2.5% of NAV → reduce tranche size by 50% or shift from put wings to put spreads (cap the upside payoff in exchange for lower premium).
+- Deribit access suspended due to regulatory action or operational outage → halt program until an alternative venue (e.g., CME micro futures, OTC dealer puts) is evaluated; do not shift to an untested venue under pressure.
+- DVOL term structure in sustained backwardation (3-month > 1-month) for > 30 days → suspend and reassess — this signals a structural vol regime where new additions are expensive and the spike-reversion thesis is less reliable.
 
 ## Advantages
 

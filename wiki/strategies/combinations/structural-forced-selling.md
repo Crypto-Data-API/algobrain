@@ -2,116 +2,176 @@
 title: Structural Forced Selling
 type: strategy
 created: 2026-04-06
-updated: 2026-04-06
-status: good
-tags: [combinations, alpha-edge, forced-selling, liquidation, fallen-angels, tax-loss-harvesting, institutional-flow]
+updated: 2026-07-19
+status: review
+tags: [combinations, market-microstructure, liquidations, funding-rate, crypto, perpetual-futures, structural, event-driven]
+aliases: ["Forced Seller Flow", "Mandatory Liquidation", "Crypto Forced Selling"]
 strategy_type: hybrid
-markets: [stocks, bonds]
+timeframe: swing
+markets: [crypto, futures]
 complexity: advanced
 backtest_status: untested
-related: [contrarian-extremes, expiration-and-rebalancing-flows, stop-hunting-and-liquidity-sweeps, cross-asset-signals]
+related: ["[[expiration-and-rebalancing-flows]]", "[[stop-hunting-and-liquidity-sweeps]]", "[[cross-asset-signals]]", "[[liquidations]]", "[[funding-rate]]", "[[perpetual-futures]]", "[[cryptodataapi]]"]
+
+# Edge characterization
+edge_source: [structural, risk-bearing]
+edge_mechanism: "Mandate-bound or margin-bound sellers in crypto (auto-liquidated perp longs, funds with FTX contagion, forced OTC redemptions) must sell at any price; the counterparty willing to step in and absorb flow at distressed prices earns the gap between forced-sale price and subsequent fair value as the selling exhausts."
+
+# Data and infrastructure requirements
+data_required: [ohlcv-daily, liquidations, funding-rates, open-interest, on-chain-flows]
+min_capital_usd: 10000
+capacity_usd: 50000000
+crowding_risk: medium
+
+# Performance expectations
+expected_sharpe: 0.8
+expected_max_drawdown: 0.25
+breakeven_cost_bps: 25
+
+# Kill criteria
+kill_criteria: |
+  - forced-selling signal (extreme liquidation + negative funding) fires but post-event price does not recover within 5 days on 3 consecutive occurrences
+  - rolling 6-month Sharpe < 0.3
+  - drawdown > 25% while in a live forced-selling position
+  - on-chain exchange inflow persists > 7 days post-liquidation peak (indicates genuine distribution, not forced-sale)
 ---
 
 # Structural Forced Selling
 
-## The Edge
+## Edge source
 
-The most profitable buying opportunities in markets occur when the seller does not want to sell but MUST. Forced selling is non-economic: the decision is not driven by fundamental analysis, valuation, or technical signals. It is driven by mandates, margin calls, regulatory requirements, or tax optimization. The seller is price-insensitive -- they will accept any bid because they have no choice.
+**Structural** and **risk-bearing**. See [[edge-taxonomy]].
 
-When you buy from a forced seller, you are acquiring an asset that is cheap because of FLOW, not FUNDAMENTALS. The asset's intrinsic value has not changed. A stock is not worth less because a hedge fund facing redemptions must liquidate its position by Friday. A bond is not impaired because an investment-grade mandate forced a fund to sell after a downgrade. Once the forced selling exhausts itself, price recovers to fair value. The gap between forced-sale price and fair value is your alpha.
+The edge is not informational — anyone can read a liquidation tape. It is a *risk-bearing* edge: willing capital steps in to absorb a forced seller's supply at a distressed price, and earns a premium for doing so. In crypto, the forced-selling mechanism is more violent and more frequent than in any equity or bond market:
 
-This is one of the most reliable edges in markets because it is structural -- institutional mandates, margin requirements, and tax codes create forced selling events predictably, repeatedly, and at scale.
+- **Auto-liquidation of leveraged perp positions** — Binance, Bybit, Hyperliquid, and OKX all run automated liquidation engines. When a leveraged position is liquidated, the exchange's insurance fund or socialization mechanism sells the position at market, regardless of price, into whatever liquidity exists. In a cascade, multiple liquidations fire in sequence and reinforce each other. The signal is visible in real time via CryptoDataAPI `/api/v1/market-intelligence/liquidations`.
+- **Counterparty-contagion-forced liquidation** — the FTX collapse (November 2022) forced every fund with FTX exposure to liquidate *all* liquid holdings — not just FTX-token exposure — to meet redemptions. High-quality DeFi tokens dropped 50%+ on pure flow, then recovered 100%+ over the following three months as the forced selling cleared.
+- **Negative funding cascade** — when funding turns sharply negative for multiple consecutive 8-hour windows, it signals that leveraged shorts dominate and that a squeeze recovery can follow the exhaustion of the shorting impulse.
+- **On-chain exchange inflows** — large, concentrated on-chain inflows to exchanges are the crypto analog of a margin-call delivery: coins are being sent to exchanges to sell.
+
+The TradFi analogs — fallen angel bond downgrades, index deletion selling, hedge fund redemption spirals, tax-loss harvesting pressure *(equities, Q4; relevant as historical context for the mechanism only, not as a crypto playbook)* — all express the same underlying principle: **someone else's constraint is your opportunity**.
+
+## Null hypothesis
+
+If crypto markets are efficient enough that forced-selling dislocations are immediately absorbed by anticipated-flow capital, the edge is arbitraged to zero. Under this null, a strategy of buying after a liquidation cascade peak earns roughly the bid-ask spread plus perp funding — neutral at best, slightly negative on average. The counter-evidence: the FTX contagion forced selling produced large, documented recoveries in unrelated assets after the selling exhausted, suggesting that at extreme events the absorber base is genuinely small relative to the supply shock. The strategy's edge is concentrated in tail events rather than routine liquidation noise.
 
 ## Why It Persists
 
-1. **Mandates are inflexible by design** -- an investment-grade bond fund CANNOT hold a high-yield bond after a downgrade. The prospectus says sell. There is no exception for "but it's cheap"
-2. **Margin calls are immediate** -- a leveraged fund that breaches its margin requirement has 24-72 hours to liquidate. They sell whatever is most liquid, regardless of value
-3. **Tax code incentives are structural** -- harvesting losses to offset capital gains is rational behavior codified in law. It creates predictable selling pressure in November-December on the year's biggest losers
-4. **Redemptions cascade** -- when a hedge fund underperforms, investors redeem. The fund sells positions to raise cash. This selling depresses prices, causing more underperformance, triggering more redemptions. A vicious cycle that creates deep dislocations
-5. **Passive indexing is mechanical** -- when a stock is removed from the S&P 500, every passive fund tracking the index sells it on the effective date. Billions in selling, zero fundamental analysis. See also [[expiration-and-rebalancing-flows]]
-6. **No institutional buyer exists at the extreme** -- when everyone is forced to sell simultaneously, there is no large buyer willing to step in at the bottom. The asset trades at a fire-sale price until opportunistic capital (you) absorbs the supply
+1. **Margin calls are immediate** — a leveraged perp position that breaches maintenance margin is liquidated by the exchange engine within milliseconds. The exchange does not pause to find a fair price.
+2. **Contagion cascades** — when a major counterparty fails (FTX, Three Arrows Capital), funds with exposure must sell *all* liquid holdings to meet redemptions, creating collateral damage in assets unrelated to the failed entity.
+3. **Auto-liquidation amplifies at low liquidity** — crypto's worst cascade events occur during weekend and overnight windows when order-book depth is thin. The same liquidation volume creates a larger price dislocation than during peak-liquidity hours.
+4. **No institutional buyer at the extreme** — when everyone is simultaneously forced to sell, the absorber base is small. Price reaches a fire-sale level until opportunistic capital steps in.
+5. **The behavior is self-reinforcing** — forced selling triggers stop losses, which trigger more forced selling, which triggers margin calls, compounding the dislocation before it reverses.
+6. **Mandate rigidity (TradFi context, historical)** — in traditional credit markets, investment-grade funds facing a "fallen angel" downgrade (IG → HY) must sell regardless of price. Index deletion selling is similar. These flows are documented in academic literature and are the historical model for the crypto forced-selling intuition, even though the crypto mechanism operates via liquidation engines rather than prospectus mandates.
 
 ## How to Implement
 
-### Source 1: Margin Call Liquidations
+### Crypto Source 1: Perp Liquidation Cascade
 
 **Identification:**
-- Screen for stocks with >20% short interest AND daily volume 3x+ their 20-day average (signs of forced liquidation)
-- Monitor [[margin-debt]] data from FINRA for spikes in margin calls
-- Watch for hedge fund "blow-up" news -- Archegos (2021), Melvin Capital (2022) -- which forces liquidation of entire portfolios
-- In crypto: track [[funding-rates]] going deeply negative AND large exchange outflows (funds moving to sell)
+- Monitor [[liquidations]] data in real time: CryptoDataAPI `/api/v1/market-intelligence/liquidations` and Coinglass show cross-exchange liquidation spikes.
+- A liquidation cascade signal: >$500M BTC liquidations within 4 hours, accompanied by a price move of >5% and [[funding-rate]] turning sharply negative.
+- Confirm that the decline is liquidation-driven (high liquidation volume, thin order book) rather than fundamental (no major exchange/protocol failure news).
 
-**Entry:** Wait 2-3 days after the liquidation event for the forced selling to exhaust. Enter on the first [[bullish-engulfing]] or [[hammer]] candle after volume normalizes.
+**Entry:** Wait for liquidations to peak and normalize — typically 12–48 hours after the cascade peak. Enter on the first close back above a key intraday support or on a bullish reversal candle with normalizing volume. Use spot or low-leverage perp entry; do not add leverage during the cascade.
 
-### Source 2: Fallen Angel Bond Downgrades
-
-**Identification:**
-- Track Moody's/S&P/Fitch rating actions. When a company is downgraded from BBB- (lowest investment grade) to BB+ (high yield), every IG fund must sell
-- The selling window is typically 30-60 days after the downgrade
-
-**Entry:** Buy the bond (or equity) 30-45 days after the downgrade, when forced selling is 80-90% complete. Historical data shows fallen angels outperform comparable HY bonds by 2-4% annually in the 12 months following downgrade, as the forced-selling discount reverses.
-
-### Source 3: Index Deletions
+### Crypto Source 2: Contagion-Forced Liquidation (Counterparty Failure)
 
 **Identification:**
-- S&P 500, Russell 2000, and MSCI index changes are announced 5-7 days before the effective date
-- Deleted stocks face forced selling from every passive fund tracking the index
+- Major counterparty failures (exchange insolvency, stablecoin depeg, large fund blow-up) force exposed funds to liquidate *all* liquid holdings, not just the directly exposed assets.
+- Monitor on-chain exchange inflows for large, concentrated addresses moving coins to exchanges (CryptoDataAPI `/api/v1/blockchain/exchange-flows`). Elevated inflows across multiple top-50 assets simultaneously signal fund-level liquidation.
+- Track cross-asset correlation compression: quality DeFi tokens, BTC, and ETH all declining simultaneously at high volume on no individual-asset news is the contagion signature.
 
-**Entry:** Short into the deletion event (if front-running the passive flow) or buy 1-2 days after the effective date (if buying the post-deletion recovery). Historically, deleted stocks underperform by 5-10% between announcement and effective date, then recover 3-5% in the following month.
+**Entry:** 3–10 days after the contagion event begins; wait for on-chain exchange inflows to peak and decline, signalling that the selling is exhausting. The FTX contagion (November 2022) example: quality DeFi tokens dropped 50%+ on pure flow, recovered 100%+ over the following three months.
 
-### Source 4: Tax-Loss Harvesting (The January Effect)
-
-**Identification:**
-- Screen for stocks that are down >30% YTD as of November 1st. These are prime candidates for tax-loss selling in November-December
-- Focus on small-caps (less institutional coverage, more extreme selling)
-- Additional filter: stocks with no fundamental deterioration (the decline was sentiment-driven, not earnings-driven)
-
-**Entry:** Buy in the last week of December or first week of January after the tax-selling pressure expires. The [[january-effect]] bounce in beaten-down small-caps has been documented since the 1970s and continues to persist despite being widely known.
-
-### Source 5: Hedge Fund Redemptions
+### Crypto Source 3: Negative Funding Exhaustion
 
 **Identification:**
-- Monitor 13F filings for concentrated hedge fund positions (a fund with 20%+ in a single stock)
-- Track fund performance via investor letters and media reports. Poor performance → redemptions → forced selling
-- Look for "crowded" hedge fund stocks (high hedge fund ownership via Goldman Sachs VIP list) during market drawdowns -- these face the heaviest redemption-driven selling
+- [[funding-rate]] going deeply negative for >3 consecutive 8-hour windows (−0.05%/8h or lower) signals a crowded short/leveraged-sell setup.
+- The forced sellers are the late short-sellers who entered after the move; as they cover, price snaps back.
+- Confirm with OI data: if OI is also declining while funding is negative, shorts are already covering (late). If OI is stable or rising with negative funding, the squeeze is still loading.
 
-**Entry:** When a hedge fund hotel stock drops 20%+ on heavy volume without a fundamental catalyst, it is likely redemption-driven. Wait for volume to normalize (back to 1-2x average), then enter. The recovery typically begins 2-4 weeks after the forced selling completes.
+**Entry:** Buy the perp when funding crosses back through zero from deep negative territory and OI confirms the setup.
 
-## Example Setup
+### TradFi Context (Historical Reference Only)
 
-**Fallen angel trade -- Ford Motor Company (F), March 2020:**
+The equity and credit analogs — fallen angel bond downgrades, index deletion selling (S&P 500, Russell reconstitution), hedge fund redemption cascades, tax-loss harvesting pressure — express the same mechanism: mandate-bound or margin-bound entities sell at any price. These are documented in academic literature (Coval & Stafford on mutual fund fire sales; Mitchell, Pedersen, Pulvino on merger arbitrage) and are the historical model from which the crypto forced-selling intuition derives. They are not directly tradeable via this wiki's crypto scope but are cited as the intellectual foundation.
 
-1. Moody's downgrades Ford from Baa3 (IG) to Ba1 (HY) on March 25, 2020
-2. Every investment-grade bond fund must sell Ford bonds within 30-60 days
-3. Ford's 4.346% 2026 bonds drop from $0.92 to $0.68 (26% decline) in the 30 days following downgrade. The selling is almost entirely forced, not fundamental
-4. **Entry**: buy Ford 2026 bonds at $0.72 in late April, 30 days after downgrade. Forced selling is 80% complete
-5. Ford's underlying business stabilizes. The company has $35B in liquidity and is not at bankruptcy risk
-6. By September 2020, the bonds have recovered to $0.96. Capital gain: 33% in 5 months, plus coupon income
-7. Risk: $0.72 to $0.60 (further stress scenario) = 17% downside. Reward: $0.72 to $0.96 = 33% upside. R:R: ~2:1
+## Example Trade
 
-**Tax-loss harvesting trade -- Small-cap basket, December 2022:**
+**Crypto contagion-forced selling — FTX collapse (November 2022):**
 
-1. Screen on Nov 15: 40 small-cap stocks down >40% YTD with no bankruptcy risk (positive EBITDA, manageable debt)
-2. Build equal-weight basket. Average price decline: -48% YTD
-3. Wait until December 28 (tax-selling exhaustion). Buy the basket
-4. By January 31, 2023: basket has rallied 12.3% on average. The January effect delivered
-5. Sell January 31. Annualized return: ~150% (12.3% in 34 days). The edge was pure flow, not fundamentals
+1. FTX insolvency announced November 8–11, 2022. Crypto funds with FTX exchange exposure faced redemptions and began liquidating all liquid positions.
+2. Quality DeFi tokens (AAVE, UNI, CRV) dropped 50%+ on heavy volume unrelated to their own protocol fundamentals.
+3. **Signal:** on-chain exchange inflows spiked across multiple assets simultaneously; cross-asset correlation near 1.0; liquidation data showed mass perp deleveraging.
+4. **Exhaustion:** by November 20, inflows normalized; daily volumes returned to pre-cascade levels; funding rates stabilized.
+5. **Entry (illustrative):** buy AAVE at $50 on November 21, after 50% decline and flow normalization. Stop below the cascade low at $42.
+6. By February 2023, AAVE recovered to $95. R:R ~3.5:1 with a 15% stop.
+7. The recovery was driven by fundamental value reasserting once forced selling exhausted — the protocol remained functional throughout.
 
 ## Risk Management
 
-- **Distinguish forced selling from fundamental deterioration** -- a stock dropping because of margin-call liquidation is a buying opportunity. A stock dropping because it committed accounting fraud is not. ALWAYS verify that the business fundamentals are intact before buying a forced-selling dip
-- **Wait for the selling to exhaust** -- buying too early into a forced-selling event means you absorb the remaining supply and your position immediately goes underwater. Volume normalization is the key signal that the forced selling is complete
-- **Size for the possibility that the distress is real** -- max 3% of portfolio per forced-selling position. Diversify across 5-10 positions to build a portfolio of forced-selling opportunities
-- **Liquidity matters** -- during forced-selling events, bid-ask spreads widen dramatically. Use limit orders. Accept that you will not catch the exact bottom
-- **Time horizon is 1-3 months** -- forced-selling recoveries are not instant. Price may languish for weeks before the market recognizes the dislocation. Patience is required
-- **Beware of "catching a falling knife" narratives** -- friends, Twitter, and the media will call you crazy for buying a stock that just dropped 40% on heavy volume. This social pressure is the behavioral barrier that preserves the edge. Build conviction through data, not consensus
+- **Distinguish forced selling from fundamental deterioration** — a token falling because of liquidation cascade is a buying opportunity; a token falling because of a rug pull, protocol exploit, or stablecoin depeg is not. Verify protocol health before entering.
+- **Wait for the selling to exhaust** — buying early into a cascade means absorbing remaining supply while price continues down. Volume normalization and on-chain inflow peak are the key signals.
+- **Size for the possibility that the distress is real** — max 3% of portfolio per position. Diversify across 3–5 assets to build a portfolio of forced-selling opportunities rather than betting on one.
+- **Liquidity matters** — bid-ask spreads widen dramatically during cascades. Use limit orders. Accept that entry will not be at the exact bottom.
+- **Time horizon is 1–8 weeks** — forced-selling recoveries are not instant. Price may consolidate for weeks before recovering.
+- **Beware of genuine regime shifts** — the 2022 bear was not purely a forced-selling event; underlying rate-hike pressure created a sustained bear. The correct diagnosis: LUNA/FTX were forced-selling events within a bear trend, requiring shorter holding periods and tighter stops than a bull-market cascade.
 
-## Real-World Examples
+## Real-World Examples (Crypto)
 
-- **Archegos collapse (March 2021)** -- $20B+ in forced liquidation hit ViacomCBS, Discovery, Baidu, and others. VIAC dropped from $100 to $40 in 3 days on pure margin-call selling. It stabilized at $40 and bounced to $45 within 2 weeks. Forced-selling buyers captured the 12% bounce
-- **UK pension crisis (September 2022)** -- leveraged LDI funds faced margin calls on gilts, forcing mass liquidation of UK government bonds. 30-year gilt yields spiked from 3.5% to 5.1% in days. Bank of England intervened, yields collapsed back to 3.7%. Buyers at the extreme earned 30%+ on long-duration gilts in weeks
-- **FTX contagion (November 2022)** -- crypto funds with FTX exposure faced forced liquidation of ALL their holdings (not just FTX-related assets). High-quality DeFi tokens dropped 50%+ on pure flow, then recovered 100%+ in the following 3 months as the forced selling cleared
-- **2015 Third Avenue Focused Credit Fund** -- a junk bond fund froze redemptions, triggering panic selling across the entire HY bond market. HY spreads blew out 200bps beyond what fundamentals justified. Buyers of HY bonds in December 2015 earned 12% total return in 2016
-- **Energy sector downgrades (2020)** -- multiple oil companies were downgraded from IG to HY during the COVID oil crash. Forced selling by IG funds pushed bond prices to levels implying 40% default probability on companies that clearly would survive. Recovery in 2020-2021 generated 20-40% returns for contrarian bond buyers
+- **FTX contagion (November 2022)** — crypto funds with FTX exposure faced forced liquidation of all holdings. High-quality DeFi tokens dropped 50%+ on pure flow, then recovered 100%+ in the following three months as the forced selling cleared.
+- **Three Arrows Capital (June 2022)** — 3AC's insolvency triggered OTC selling of BTC/ETH by creditors and liquidation of its on-chain DeFi positions. BTC dropped from $29,000 to $17,600 in nine days; much of the decline was forced-liquidation-driven; it partially recovered once the flow exhausted.
+- **March 2020 COVID cascade** — BTC −50% in 24 hours as leveraged crypto funds and early crypto firms faced margin calls during global liquidity panic. Price recovered from $3,800 to $6,200 within one week as forced selling exhausted. The recovery was 63% in 7 days — the starkest single crypto forced-selling recovery on record.
+- **2025-10-10 liquidation cascade** — ~$19B in perp liquidations in 60 seconds. BTC fell 12% and recovered most of the loss within 48 hours as the mechanical liquidation exhausted.
 
-The unifying principle: someone else's constraint is your opportunity. Institutional rigidity -- mandates, margin, index rules, tax code -- will never disappear. It is hardwired into the financial system. Every year, billions of dollars are sold at below-fair-value prices by entities that have no choice. Your job is to be the willing buyer.
+The unifying principle: someone else's constraint is your opportunity. Crypto's liquidation mechanics, counterparty-failure contagion, and leverage cycles will not disappear. The willing absorber of forced-sale flow earns the gap between distressed-exit price and fair value.
+
+## Capacity limits
+
+Crypto forced-selling trades are capacity-constrained by: (1) the distressed-exit discount normalizing as more capital chases the same opportunity; (2) cascade duration — cascades lasting >72h are either genuine bear-market continuations or structural events, not recoverable forced-selling setups. Practical capacity: $5–50M per event for a BTC/ETH perp trade; altcoin forced-selling plays are smaller ($500K–$5M per token) due to thin liquidity on recovery. The strategy is a tail-event alpha layer, not a continuous strategy.
+
+## What kills this strategy
+
+1. **Genuine fundamental deterioration** — if the asset's protocol is broken, the exchange is truly insolvent, or the stablecoin truly depegged, forced-selling-style recovery never materializes. This is the primary risk.
+2. **Early entry into a cascade still in progress** — absorbing supply while liquidations continue means immediate mark-to-market losses and potential stop-out before recovery.
+3. **Crowded buy-the-dip culture** — if too many participants have the same forced-selling thesis, the recovery is partially priced in before exhaustion, compressing the reward.
+4. **Bear-market continuation** — a forced-selling event embedded in a sustained macro bear (2022 rate cycle) produces temporary recovery followed by continuation lower; shorter holding windows required.
+5. **Single-venue contagion** — if the cascade is caused by the venue where you hold perps (e.g., an exchange solvency event), your own account may be at risk rather than providing a buying opportunity.
+6. **Liquidity gap on entry** — in the worst moments of a cascade, bid-ask spreads and market-depth can make the intended entry price significantly worse than the quoted price.
+
+## Kill criteria (numeric)
+
+*(From frontmatter — duplicated here for reference)*
+- Forced-selling signal fires but post-event price does not recover within 5 days on 3 consecutive occurrences
+- Rolling 6-month Sharpe < 0.3
+- Drawdown > 25% while in a live forced-selling position
+- On-chain exchange inflow persists > 7 days post-liquidation peak (genuine distribution, not forced-sale)
+
+## Getting the Data (CryptoDataAPI)
+
+**Live data:**
+- `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidation volume (the primary forced-selling signal)
+- `GET /api/v1/derivatives/funding-rates?coin=BTC` — funding rate; deeply negative = crowded forced sellers
+- `GET /api/v1/derivatives/open-interest` — OI trend confirms whether shorts are loading or covering
+- `GET /api/v1/blockchain/exchange-flows` — on-chain exchange inflows: large inflows = coins moved to sell
+
+**Historical:**
+- `GET /api/v1/backtesting/liquidations` — liquidation cascade archive for identifying historical forced-selling windows
+- `GET /api/v1/backtesting/klines?symbol=BTCUSDT&interval=1d&limit=365` — OHLCV to backtest post-cascade recovery patterns
+- `GET /api/v1/backtesting/funding` — historical funding data to identify negative-funding exhaustion setups
+
+```bash
+curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/market-intelligence/liquidations"
+```
+
+Auth: `X-API-Key` header. Full catalog: [[cryptodataapi-market-intelligence]], [[cryptodataapi-derivatives]].
+
+## Related
+
+- [[expiration-and-rebalancing-flows]] — calendar-driven forced flow (complementary)
+- [[stop-hunting-and-liquidity-sweeps]] — micro-level forced exit exploitation
+- [[liquidations]] — the cascade mechanic driving crypto forced selling
+- [[funding-rate]] — negative-funding exhaustion as a forced-selling signal
+- [[perpetual-futures]] — the primary crypto instrument for both the forced-selling event and the recovery entry
+- [[cryptodataapi]] — data layer for liquidations, on-chain flows, and funding

@@ -51,10 +51,23 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       convex-finance.md cleaned to true redirect; dYdX/Convex entity pages retitled
       "(Protocol)".
 - [ ] A9. Same-stem collisions — CLASSIFIED (iter 9), dispositions per bucket:
-      (a) redirect-vs-real (21 stems, incl. gamma-scalping ×3): delete the redirect twin
-          after merging its aliases into the real page (check each redirect's target first —
-          circular ones are broken anyway; sector-rotation's scope-note needs care since
-          indicators/sector-rotation may itself be equity-scoped);
+      (a) redirect-vs-real — AUDITED iter 12, dispositions final: DELETE these redirect
+          twins (merge any unique aliases into the surviving real page first):
+          14 CIRCULAR (self-referencing, broken): entities/protocols/arbitrum.md,
+          concepts/bollinger-bands.md, strategies/calendar-spread.md,
+          concepts/consolidation.md, concepts/options/credit-spread.md,
+          strategies/delta-hedging.md, concepts/anomalies/disposition-effect.md,
+          strategies/gamma-scalping.md + strategies/technical-analysis/gamma-scalping.md,
+          concepts/indicators/point-and-figure.md, ai-trading/infrastructure/python.md,
+          concepts/portfolio-theory/rebalancing.md,
+          concepts/market-microstructure/restaking.md, concepts/statistical-arbitrage.md;
+          7 case-decided deletions: concepts/dca-strategy.md, concepts/funding-rate.md,
+          concepts/options/iron-butterfly.md, concepts/market-timing.md (empty target),
+          concepts/put-call-parity.md (folder-path link), one of the two quantitative.md
+          redirects (keep concepts/, delete market-microstructure/),
+          markets/crypto/polygon.md (entity page owns the stem);
+          1 judgment: sector-rotation — read concepts/indicators/sector-rotation.md; if
+          equity-scoped delete IT and keep the scope-note redirect, else delete the redirect;
       (b) coin-vs-entity (12: aave, uniswap, gmx, blur, eigenlayer, magic-eden, tensor,
           thorchain, augur, beefy-finance, rarible, superrare): MERGE unique entity content
           into the enriched markets/crypto page, then delete the entity file;
@@ -93,7 +106,10 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
 - [x] B10. (2026-07-19, iter 10) DONE — all 10 remaining pages got worked examples
       (mev-execution-guide correctly got a guide-framed "Worked example"). Every buildable
       strategy page now has edge_source + kill criteria + worked example.
-- [ ] B11. Essay→buildable upgrades — TRIAGED iter 11 (full table in
+- [x] B11. (2026-07-19, iters 11–12) COMPLETE — all 34 strategy-class pages upgraded to the
+      buildable schema; 25 guides retyped reference; 40 structure pages preserved by design;
+      4 equity-prose cleanups done. Only the 40 intentional structure pages remain without
+      edge_source. Original note follows. — TRIAGED iter 11 (full table in
       .claude/b11-classification.md): 25 GUIDE pages retyped to `type: reference`;
       40 STRUCTURE pages left on the Wave-3 structure template by design; 34 STRATEGY-class.
       10 upgraded in iter 11 (5-percent-otm-put-overlay, trend-following-cta, nft-arbitrage,
@@ -152,3 +168,7 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   Remaining: B11 triage (99 essays), A9 collisions.
 - 2026-07-19 iter 11 (B11 triage + batch 1): 25 guides→reference, 40 structures preserved,
   10/34 strategies upgraded. 24 strategy-class upgrades remain (+4 equity-prose cleanups).
+- 2026-07-19 iter 12 (B11-2): B11 COMPLETE — final 24 upgrades + 4 equity-prose cleanups.
+  Honest touches: tail-risk-hedging carries negative standalone Sharpe; VIX pages state
+  plainly no DVOL future exists. A9 redirect bucket fully audited (14 circular + 7 decided).
+  ONLY A9 REMAINS.
