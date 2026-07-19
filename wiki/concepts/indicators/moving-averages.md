@@ -8,7 +8,7 @@ tags: [moving-averages, technical-analysis, indicators]
 aliases: [MA, moving-average, "50-day-ma", "50 day MA", "50 DMA"]
 domain: [indicators]
 difficulty: beginner
-prerequisites: ["[[technical-analysis-overview]]"]
+prerequisites: ["[[indicators-ta-primer]]"]
 related:
   - "[[macd]]"
   - "[[bollinger-bands]]"

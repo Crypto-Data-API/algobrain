@@ -5,7 +5,7 @@ created: 2026-04-10
 updated: 2026-06-21
 status: excellent
 tags: [anomalies, volatility, options, risk-premium]
-aliases: ["VRP", "Variance Risk Premium", "Variance Premium", "Implied vs Realized Vol"]
+aliases: ["VRP", "Variance Risk Premium", "Variance Premium", "Implied vs Realized Vol", "Vol Risk Premium", "Volatility Risk Premium"]
 domain: [anomalies, volatility]
 difficulty: advanced
 related: ["[[anomalies-overview]]", "[[volatility]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[vix]]", "[[vol-of-vol]]", "[[vvix]]", "[[volga]]", "[[carry-anomaly]]", "[[edge-taxonomy]]", "[[iron-condor]]", "[[short-strangle]]", "[[gamma-scalping]]"]

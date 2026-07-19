@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://databento.com"
 confidence: high
 related:
-  - "[[data-sources-overview]]"
+  - "[[ai-data-providers-overview]]"
   - "[[paid-data-providers]]"
   - "[[low-latency-trading]]"
   - "[[market-microstructure]]"
@@ -53,7 +53,7 @@ For institutional flows requiring co-located raw feeds and microsecond determini
 
 ## Related
 
-- [[data-sources-overview]] — catalog of trading data providers
+- [[ai-data-providers-overview]] — catalog of trading data providers
 - [[paid-data-providers]] — where Databento sits in the paid landscape
 - [[low-latency-trading]] — when Databento is and isn't fast enough
 - [[high-frequency-trading]] — primary consumer of MBO/L3 data

@@ -5,7 +5,7 @@ created: 2026-04-15
 updated: 2026-06-21
 status: excellent
 tags: [risk-management, bonds, derivatives]
-aliases: ["Interest Rate Risk", "interest-rate-risk", "rate risk"]
+aliases: ["Interest Rate Risk", "interest-rate-risk", "rate risk", "Rate Risk", "duration risk"]
 domain: [risk-management]
 prerequisites: ["[[bonds]]", "[[duration]]"]
 difficulty: intermediate

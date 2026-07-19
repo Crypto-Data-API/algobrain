@@ -5,11 +5,12 @@ created: 2026-04-09
 updated: 2026-07-16
 status: excellent
 tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins, ethereum]
-aliases: ["BLUR"]
-entity_type: protocol
+aliases: ["BLUR", "Blur.io"]
+entity_type: exchange
+founded: 2022
 headquarters: "Decentralized"
 website: "https://blur.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[nft-lending]]", "[[nft]]", "[[paradigm]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[hyperliquid]]", "[[nft-lending]]", "[[nft]]", "[[paradigm]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[crowded-short-funding-fade]]", "[[liquidation-cascade-fade]]", "[[opensea]]", "[[nft-trading]]", "[[wash-trading]]"]
 ---
 
 # Blur
@@ -137,10 +138,10 @@ BLUR has no protocol cash flows accruing to the token (no fee switch live), so i
 
 ## Notable History
 
-- **2022** — Blur marketplace launches in beta, backed by [[paradigm]] and other crypto-native investors.
+- **2022 (Oct)** — Blur marketplace launches, founded by "Pacman" (Tieshun Roquerre), backed by [[paradigm]] at a valuation exceeding $1 billion.
 - **2023-02-14** — BLUR token launches via a large airdrop to active NFT traders; token reaches its all-time high near **$5.02** in the launch window.
 - **2023** — Incentive "seasons" drive Blur to **overtake OpenSea** in Ethereum NFT volume for stretches; OpenSea cuts fees and makes royalties optional in response. **Blend** P2P NFT-lending (with [[paradigm]]) launches.
-- **2023-2025** — NFT volumes decline broadly with the bear market; BLUR drifts far below its launch high as emissions taper.
+- **2023-2025** — NFT volumes decline broadly with the bear market; BLUR drifts far below its launch high as emissions taper. In 2024, Blur expanded beyond NFT trading by launching **Blast**, a Layer 2 blockchain, signaling broader infrastructure ambitions.
 - **2026-06-19** — BLUR prints a **fresh all-time low at $0.01542**.
 - **2026-06-20** — Price ~$0.0158, roughly **-99.7%** from ATH, ranked ~#493.
 

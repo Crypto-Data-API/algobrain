@@ -1,4 +1,4 @@
----
+﻿---
 title: "Corporate Treasury Buys & Sells — Narrative Impact"
 type: concept
 created: 2026-06-04
@@ -144,7 +144,7 @@ Aggregated across all three archetypes — the quant-consumable feature and mech
 - [[bitcoin-treasury-companies]]
 - [[forced-liquidation]]
 - [[death-spiral]]
-- [[bitcoin-halving]]
+- [[bitcoin-halving-narrative]]
 
 ## Sources
 

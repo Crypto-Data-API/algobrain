@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://www.nansen.ai"
 source_author: "Nansen"
 confidence: high
-related: ["[[on-chain-analytics]]", "[[information-arbitrage]]", "[[polymarket]]", "[[polymarket-as-crypto-leading-indicator]]", "[[glassnode]]", "[[cryptoquant]]", "[[dune-analytics]]"]
+related: ["[[on-chain-analytics]]", "[[information-arbitrage]]", "[[polymarket]]", "[[polymarket-as-crypto-leading-indicator]]", "[[glassnode]]", "[[cryptoquant]]", "[[dune-analytics]]", "[[arkham-intelligence]]", "[[santiment]]", "[[defai]]", "[[ai-mev]]"]
 ---
 
 Nansen is a Singapore-based on-chain analytics platform founded in 2019, known for its proprietary wallet-labeling database (covering 300M+ labeled addresses) and "Smart Money" cohort tracking across [[ethereum]], [[polygon]], [[solana]], and other major chains. It sits at the institutional end of the on-chain data spectrum, monetizing the work of attributing pseudonymous blockchain addresses to real-world entities — exchanges, market makers, funds, protocol teams, and MEV bots — and turning that labeled graph into actionable trading signals.
@@ -34,6 +34,21 @@ Nansen is a Singapore-based on-chain analytics platform founded in 2019, known f
 - Query API for custom on-chain queries against the labeled dataset
 - Webhook alerts for real-time integration into trading systems
 - Nansen runs a tiered subscription model (a free tier plus paid Standard / VIP / Enterprise-style tiers). Nansen does not consistently publish full pricing publicly and third-party 2026 sources conflict (entry paid tiers reported around ~$99/month, with VIP/institutional tiers running into the high hundreds-to-low thousands per month for full API access). Treat any quoted number as indicative and verify current rates directly before committing
+
+## Pricing (approximate — verify at nansen.ai)
+
+- **Lite**: ~$150/mo — basic wallet labels, limited Smart Money alerts
+- **Standard**: ~$500/mo — full Smart Money dashboards, token analytics, NFT analytics
+- **Enterprise**: $1,000+/mo — API access, custom alerts, priority support, cross-chain data
+- Free tier is extremely limited (basic portfolio tracking only)
+
+## Key Features
+
+- **Smart Money Dashboard**: aggregated view of top-performing wallet activity
+- **Token God Mode**: one-page deep dive on any token's on-chain fundamentals
+- **Wallet Profiler**: analyze any wallet's full history, PnL, and behavioral patterns
+- **NFT Paradise**: NFT-specific analytics, floor price tracking, whale activity
+- **Alerts Engine**: custom notifications for wallet movements, token flows, smart money activity
 
 ## Comparison to alternatives
 

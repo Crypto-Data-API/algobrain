@@ -1,5 +1,5 @@
 ---
-title: "Backtesting"
+title: "AI & Algorithmic Backtesting — Overview"
 type: index
 created: 2026-04-06
 updated: 2026-07-13

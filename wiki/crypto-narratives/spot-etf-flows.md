@@ -1,4 +1,4 @@
----
+﻿---
 title: "Spot ETF Launches & Daily Flows — Narrative Impact"
 type: concept
 created: 2026-06-04
@@ -138,7 +138,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-market-intellig
 - [[crypto-narratives-overview]]
 - [[bitcoin]]
 - [[ethereum]]
-- [[bitcoin-halving]]
+- [[bitcoin-halving-narrative]]
 - [[gbtc]]
 - [[microstrategy]]
 - [[funding-rate]]

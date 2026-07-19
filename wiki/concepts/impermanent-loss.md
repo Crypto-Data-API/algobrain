@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [defi, crypto, liquidity, risk-management]
 aliases: ["Impermanent Loss", "IL", "Divergence Loss"]
-related: ["[[liquidity-pools]]", "[[uniswap]]", "[[defi]]", "[[automated-market-maker]]", "[[yield-farming]]", "[[hodl]]"]
+related: ["[[liquidity-pools]]", "[[uniswap]]", "[[defi]]", "[[automated-market-maker]]", "[[yield-farming]]", "[[hodl]]", "[[staking]]"]
 domain: [market-microstructure, risk-management]
 prerequisites: ["[[automated-market-maker]]", "[[liquidity-pools]]"]
 difficulty: intermediate
@@ -14,7 +14,6 @@ difficulty: intermediate
 
 Impermanent loss (also called divergence loss) is the reduction in value that [[liquidity-pools|liquidity providers]] (LPs) experience when the price ratio of the assets in an [[automated-market-maker]] (AMM) pool changes relative to when they deposited. It is called "impermanent" because the loss only crystallises if the LP withdraws at the changed price ratio -- if prices return to the original ratio, the loss disappears. In practice, however, prices rarely revert exactly, making impermanent loss a persistent cost of providing liquidity on platforms like [[uniswap|Uniswap]], SushiSwap, and Curve.
 
-> A second, indicator-folder page also covers this topic at wiki/concepts/indicators/impermanent-loss.md; both share the `impermanent-loss` stem. This page is the canonical concept-folder treatment.
 
 ## How It Occurs
 

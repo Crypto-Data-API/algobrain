@@ -9,7 +9,7 @@ aliases: ["EIGEN", "EigenCloud", "EigenLayer"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.eigencloud.xyz/"
-related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[hyperliquid]]", "[[lagrange]]", "[[proof-of-stake]]", "[[restaking]]", "[[ritual-network]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]"]
+related: ["[[artificial-intelligence]]", "[[crypto-markets]]", "[[decentralized-ai]]", "[[depin]]", "[[ethereum]]", "[[hyperliquid]]", "[[lagrange]]", "[[proof-of-stake]]", "[[restaking]]", "[[ritual-network]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[funding-rate-harvest]]", "[[lido]]", "[[staking]]", "[[yield-farming]]", "[[smart-contract-risk]]"]
 ---
 
 # EigenCloud (prev. EigenLayer)
@@ -89,6 +89,28 @@ EIGEN sits in a small cohort of dedicated restaking tokens; its nearest conceptu
 EigenLayer's core innovation is **[[restaking]]**: ETH stakers opt into additional slashing conditions to provide "pooled security" to new services, earning extra yield in exchange for extra risk. This lets new protocols bootstrap economic security from Ethereum's ~$100B+ staked base instead of launching their own token-secured validator set from scratch. The category sits at the intersection of **[[proof-of-stake]]** infrastructure, **[[depin]]**-style verifiable services, and **[[decentralized-ai]]** (verifiable inference / co-processing) — all themes EigenCloud explicitly targets. CoinGecko tags it across Restaking, Infrastructure, Data Availability, AI, and the Ethereum/Base ecosystems.
 
 ---
+
+## How EigenLayer Works
+
+EigenLayer was founded by Sreeram Kannan (former University of Washington professor) and introduces the concept of "pooled security" where Ethereum's existing validator set can opt in to secure new protocols without each protocol bootstrapping its own trust network.
+
+**AVS (Actively Validated Services)** are protocols that need economic security but do not want to build their own validator set. Examples include oracle networks, data availability layers, bridges, and keeper networks. Restakers delegate their staked ETH (or LSTs) to operators who validate these AVSs, earning additional rewards on top of base Ethereum staking yield.
+
+**Yield stack:**
+1. Base ETH staking yield: ~3–5% APY from Ethereum proof-of-stake consensus
+2. LST yield: stETH from [[lido]] captures this base yield in a liquid token
+3. EigenLayer restaking yield: additional 2–10%+ from securing AVSs
+4. Points/token incentives: during early phases, EigenLayer distributed points that converted to EIGEN governance tokens
+
+**EIGEN token intersubjective slashing:** EIGEN enables a novel slashing mechanism for faults that are *observable but not provable on-chain* (e.g., an oracle reporting a wrong price). EIGEN holders can fork the token to slash misbehaving operators — a mechanism that makes the token itself the backstop for subjectively-observable faults.
+
+## Key Competitors
+
+| Protocol | Description |
+|---|---|
+| **Symbiotic** | Competing restaking protocol backed by Lido founders; supports a wider range of collateral types beyond ETH/LSTs |
+| **Karak** | Multichain restaking protocol supporting assets beyond ETH on multiple chains |
+| **Babylon** | Bitcoin-native restaking protocol enabling BTC holders to secure proof-of-stake chains |
 
 ## Notable History
 

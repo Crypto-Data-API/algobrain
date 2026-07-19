@@ -14,7 +14,7 @@ related:
   - "[[free-data-sources]]"
   - "[[information-arbitrage]]"
   - "[[event-driven]]"
-  - "[[data-sources-overview]]"
+  - "[[ai-data-providers-overview]]"
 ---
 
 EDGAR (Electronic Data Gathering, Analysis, and Retrieval) is the U.S. [[sec|SEC]]'s system for receiving and publicly disseminating company filings — 10-Ks, 10-Qs, 8-Ks, proxy statements, Form 4 insider trades, 13F holdings, S-1 prospectuses, and more. It is the canonical, free, primary-source repository of U.S. corporate disclosure, and its machine-readable APIs make it a foundational data feed for fundamental, event-driven, and information-arbitrage strategies.

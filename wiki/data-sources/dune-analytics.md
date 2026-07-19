@@ -10,7 +10,7 @@ source_url: "https://dune.com"
 source_author: "Dune Analytics"
 confidence: high
 aliases: ["Dune", "Dune.com"]
-related: ["[[defi]]", "[[crypto-data-sources]]", "[[token-terminal]]", "[[zapper]]", "[[on-chain-analytics]]"]
+related: ["[[defi]]", "[[crypto-data-sources]]", "[[token-terminal]]", "[[zapper]]", "[[on-chain-analytics]]", "[[etherscan]]", "[[defilama]]", "[[coingecko]]", "[[ai-mev]]"]
 ---
 
 Dune Analytics is a community-powered blockchain analytics platform that allows users to query on-chain data using SQL and build shareable dashboards. Unlike pre-packaged analytics platforms, Dune gives users direct access to decoded blockchain data, enabling custom analysis of any on-chain activity -- from LP fee tracking and [[impermanent-loss]] calculation to [[mev-strategies|MEV]] monitoring, whale tracking, and protocol-specific metrics.
@@ -52,6 +52,18 @@ Dune restructured its tiers in 2024-2025 to a credit-based model. As of June 202
 - **Enterprise (custom):** dedicated compute, private datasets, SLA guarantees
 
 The old "Premium" tier has been retired and folded into the Analyst/Plus/Enterprise structure. Credits are consumed by query executions (datapoints scanned), so cost scales with how heavy your queries are rather than a flat seat fee.
+
+## Python Client
+
+```python
+from dune_client.client import DuneClient
+dune = DuneClient(api_key="YOUR_API_KEY")
+result = dune.get_latest_result(query_id=1234567)
+# Or execute a fresh query
+result = dune.run_query(query_id=1234567)
+```
+
+Install: `pip install dune-client`
 
 ## Limitations
 

@@ -14,7 +14,7 @@ related:
   - "[[alpha-vantage]]"
   - "[[options]]"
   - "[[technical-analysis]]"
-  - "[[backtesting-overview]]"
+  - "[[ai-backtesting-overview]]"
 ---
 
 # TradingView
@@ -86,7 +86,7 @@ if ta.crossunder(fast, slow)
 
 ## Limitations
 
-- **No data export API**: you cannot programmatically pull OHLCV data from TradingView for external backtesting. For systematic [[backtesting-overview|backtesting]], use [[alpha-vantage]], [[polygon]], or [[databento]] instead
+- **No data export API**: you cannot programmatically pull OHLCV data from TradingView for external backtesting. For systematic [[ai-backtesting-overview|backtesting]], use [[alpha-vantage]], [[polygon]], or [[databento]] instead
 - **Pine Script is platform-locked**: strategies written in Pine Script can only run on TradingView's infrastructure — no local execution, no custom data feeds, no integration with Python/C++ trading systems
 - **Backtest engine is naive**: Pine Script's Strategy Tester uses simple fill assumptions (no slippage model, no realistic market impact, fills at bar close). Results should be treated as directional indicators, not production-grade backtests. See [[backtesting-pitfalls]]
 - **Delayed data on free tier**: 15-20 minute delay on most markets. Real-time data requires paid exchange subscriptions ($1-5/mo per exchange)

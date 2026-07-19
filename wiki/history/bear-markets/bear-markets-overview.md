@@ -1,4 +1,4 @@
----
+﻿---
 title: "Bear Markets"
 type: index
 created: 2026-04-06
@@ -39,7 +39,7 @@ A characteristic trap is the **bear-market rally** (a sharp counter-trend bounce
 | **2022 bear** | S&P 500 -25%, Nasdaq -35% | ~10 months | Inflation, Fed hiking from zero, valuation reset |
 | **Crypto winters** | BTC -80% to -85% (2014, 2018, 2022) | 1-2 years each | Bubble unwinds; see [[crypto-winter]] |
 
-Crypto bear markets ("[[crypto-winter|crypto winters]]") are far deeper than equity bears — Bitcoin routinely draws down 80-85% from cycle highs, and altcoins frequently fall 90-99%. The 2022 winter combined a macro tightening cycle with idiosyncratic crypto blow-ups ([[terra-luna]], [[three-arrows-capital]], [[ftx]]).
+Crypto bear markets ("[[crypto-winter|crypto winters]]") are far deeper than equity bears — Bitcoin routinely draws down 80-85% from cycle highs, and altcoins frequently fall 90-99%. The 2022 winter combined a macro tightening cycle with idiosyncratic crypto blow-ups ([[terra-luna-collapse-2022]], [[three-arrows-capital]], [[ftx]]).
 
 ## Trading and Defensive Playbook
 
@@ -71,4 +71,4 @@ SORT updated DESC
 ## Sources
 
 - General market history: S&P 500, Nasdaq, and Dow drawdown records.
-- Cross-referenced wiki case studies: [[covid-crash]], [[global-financial-crisis]], [[terra-luna]], [[crypto-winter]].
+- Cross-referenced wiki case studies: [[covid-crash]], [[global-financial-crisis]], [[terra-luna-collapse-2022]], [[crypto-winter]].

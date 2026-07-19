@@ -7,12 +7,12 @@ status: good
 tags: [technical-analysis, indicators, history]
 aliases: ["Dow Theory", "Dow's Theory"]
 domain: [indicators]
-prerequisites: ["[[technical-analysis-overview]]"]
+prerequisites: ["[[indicators-ta-primer]]"]
 difficulty: beginner
-related: ["[[technical-analysis-overview]]", "[[john-murphy]]", "[[technical-analysis-of-the-financial-markets]]", "[[trend-following]]", "[[chart-patterns]]", "[[volume]]", "[[support-resistance]]", "[[munehisa-homma]]"]
+related: ["[[indicators-ta-primer]]", "[[john-murphy]]", "[[technical-analysis-of-the-financial-markets]]", "[[trend-following]]", "[[chart-patterns]]", "[[volume]]", "[[support-resistance]]", "[[munehisa-homma]]"]
 ---
 
-Dow Theory is the oldest and most fundamental framework in [[technical-analysis-overview|technical analysis]], originating from editorials by Charles Dow -- co-founder of Dow Jones & Company and The Wall Street Journal -- in the late 1890s. Later formalized by William Hamilton (*The Stock Market Barometer*, 1922) and Robert Rhea (*The Dow Theory*, 1932), its principles -- that markets move in trends, trends have three phases, and averages must confirm each other -- remain the philosophical foundation of modern TA. [[john-murphy]] devotes Chapter 2 of *[[technical-analysis-of-the-financial-markets]]* to Dow Theory, treating it as the bedrock upon which all subsequent technical tools are built. (Source: [[book-technical-analysis-of-the-financial-markets]])
+Dow Theory is the oldest and most fundamental framework in [[indicators-ta-primer|technical analysis]], originating from editorials by Charles Dow -- co-founder of Dow Jones & Company and The Wall Street Journal -- in the late 1890s. Later formalized by William Hamilton (*The Stock Market Barometer*, 1922) and Robert Rhea (*The Dow Theory*, 1932), its principles -- that markets move in trends, trends have three phases, and averages must confirm each other -- remain the philosophical foundation of modern TA. [[john-murphy]] devotes Chapter 2 of *[[technical-analysis-of-the-financial-markets]]* to Dow Theory, treating it as the bedrock upon which all subsequent technical tools are built. (Source: [[book-technical-analysis-of-the-financial-markets]])
 
 ## The Six Tenets
 
@@ -107,7 +107,7 @@ Charles Dow (1851-1902) never formally published "Dow Theory" as a unified frame
 
 ## Related
 
-- [[technical-analysis-overview]] -- the discipline Dow Theory founded
+- [[indicators-ta-primer]] -- the discipline Dow Theory founded
 - [[john-murphy]] -- treats Dow Theory as the foundation of modern TA
 - [[technical-analysis-of-the-financial-markets]] -- Chapter 2 is dedicated to Dow Theory
 - [[trend-following]] -- modern strategies that operationalize Dow's trend principles

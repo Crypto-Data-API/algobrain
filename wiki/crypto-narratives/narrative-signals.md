@@ -1,4 +1,4 @@
----
+﻿---
 title: "Narrative Signals — Operational Layer (PM gates + backtester priors)"
 type: index
 created: 2026-06-04
@@ -60,7 +60,7 @@ The **operational** companion to [[narratives-by-direction]]: every narrative ar
     - *Point-in-time:* Look-ahead hazard: the +850% magnitude is one estimate-grade outlier (measured_fraction=0.0, confidence mix includes a low) — treat the magnitude prior as very soft. Bonding-curve % and merger/conversion dates are observable point-in-time on-chain/in-announcement, which is good, but the eventual pump size is not knowable at entry. For the merger leg, only the announcement is point-in-time; the conversion ratio may be disclosed later. Do not assume exchange support before it is announced.
 
 ### Post-Halving Bull Cycle (the 12-18 month parabolic run)
-*[[bitcoin-halving]] · regime: 2 BTC-Cycle, 1 Macro-Trend, 7 On-Chain · n=4 · op-confidence: medium*
+*[[bitcoin-halving-narrative]] · regime: 2 BTC-Cycle, 1 Macro-Trend, 7 On-Chain · n=4 · op-confidence: medium*
 
 **Post-halving 12-18mo uptrend: historically 4/4 green (p_up=1.0) but magnitude decaying hard (9000%->95%); enable trend/momentum/long on BTC+large-caps, but the ETF/macro era is structurally eroding the supply-shock edge.**
 
@@ -82,7 +82,7 @@ The **operational** companion to [[narratives-by-direction]]: every narrative ar
     - *Point-in-time:* Block height and halving date are known point-in-time, but prior_cycle_ath and 'parabolic phase' labels are only confirmed in hindsight — use a lagged trailing ATH, not the realized cycle peak. The magnitude stats (median +700%) are survivorship/look-ahead biased upward by 2012-2016; do NOT use full-history median as a forward magnitude prior — use the most-recent-cycle-weighted (decaying) estimate.
 
 ### Pre-Halving Rally / Buy-the-Rumor
-*[[bitcoin-halving]] · regime: 2 BTC-Cycle, 1 Macro-Trend, 5 Event/Catalyst · n=2 · op-confidence: low*
+*[[bitcoin-halving-narrative]] · regime: 2 BTC-Cycle, 1 Macro-Trend, 5 Event/Catalyst · n=2 · op-confidence: low*
 
 **Pre-halving buy-the-rumor: BTC ran ~+135% into the last 2 halvings (n=2, p_up=1.0 but low confidence); tilt long/event-driven on BTC within 12mo of the date, then de-risk into the day to dodge sell-the-news.**
 
@@ -517,7 +517,7 @@ The **operational** companion to [[narratives-by-direction]]: every narrative ar
     - *Point-in-time:* Severe look-ahead hazard: a 'local minimum' in BTC.D is only knowable in hindsight — require a confirmed upturn (positive 30d slope off the min) before going short, otherwise the backtest will magically short the exact alt-season top. ASI and funding z-scores use trailing windows; compute strictly on closed bars. Only 2 historical instances (2018, 2021) — small sample, high regime-specificity; alt-basket survivorship inflates measured drawdowns (dead coins exit the index).
 
 ### Post-Cycle Bear Market (the deflationary back half of the 4-year cycle)
-*[[bitcoin-halving]] · regime: 2 BTC-Cycle, 4 Derivatives-Native, 11 Security/Black-Swan, 6 Macro-Correlation · n=4 · op-confidence: medium*
+*[[bitcoin-halving-narrative]] · regime: 2 BTC-Cycle, 4 Derivatives-Native, 11 Security/Black-Swan, 6 Macro-Correlation · n=4 · op-confidence: medium*
 
 **Post-cycle bear: 4/4 cycles drew down (p_down=1.0), BTC median ~-63%, alts deeper (ETH -62%, SOL -71%); flip trend-short, enable tail-hedge, flatten funding-carry, disable alt mean-reversion, and fade liquidation cascades only after the washout.**
 
@@ -1087,7 +1087,7 @@ The **operational** companion to [[narratives-by-direction]]: every narrative ar
     - *Point-in-time:* Liquidation and OI prints have reporting lag and exchange-coverage gaps — use only data available at decision time, not revised aggregates. The single largest hazard is fitting on the bounce: the bottom tick is unknowable live, so backtest the long entry off the washout_complete flag (objective: liquidations collapsing + funding negative), NOT off the realized low. Do not use intraday max-drawdown computed with the full session's low to trigger an intraday entry.
 
 ### Cliff Unlock (large discrete insider release)
-*[[token-unlocks]] · regime: 5 Event/Catalyst, 10 Institutional-Flow, 14 Technical/Structural (overlay) · n=7 · op-confidence: medium*
+*[[token-unlocks-narrative]] · regime: 5 Event/Catalyst, 10 Institutional-Flow, 14 Technical/Structural (overlay) · n=7 · op-confidence: medium*
 
 **Large insider vesting cliffs (>=5% of float) drift the named coin down ~17% over the 1-4 weeks INTO the date (86% bearish) then often bottom on the priced-in unlock day — short the anticipation, fade the washout.**
 
@@ -1109,7 +1109,7 @@ The **operational** companion to [[narratives-by-direction]]: every narrative ar
     - *Point-in-time:* Unlock schedules ARE known in advance (DefiLlama/Messari) so no look-ahead there — but DO NOT use realized exchange-inflow or funding from inside the post-decision window. Compute netflow_zscore/funding/OI only on data available at entry. Beware the 'priced-in' trap: backtesting day-of returns overstates edge because the move front-runs into the drift; anchor entries to the pre-unlock window. Survivorship: include tokens that did NOT sell off (DYDX, the 2025 ARB/APT up-cases) to avoid overstating p_down.
 
 ### Continuous / Linear Vesting Emission
-*[[token-unlocks]] · regime: 5 Event/Catalyst, 14 Technical/Structural (overlay), 13 Volatility (overlay) · n=5 · op-confidence: medium*
+*[[token-unlocks-narrative]] · regime: 5 Event/Catalyst, 14 Technical/Structural (overlay), 13 Volatility (overlay) · n=5 · op-confidence: medium*
 
 **Recurring linear emissions are a near coin-flip per event (40/40/20) with big two-sided swings — only short the drift when sector relative strength is weak, fade the relief bounce after, and trade it as a range/vol pattern otherwise.**
 
@@ -1425,7 +1425,7 @@ The **operational** companion to [[narratives-by-direction]]: every narrative ar
     - *Point-in-time:* Realized price / MVRV use on-chain cost-basis that is computed from confirmed chain data with some indexing lag — use vintaged values as-of decision date. Critical regime hazard: thresholds calibrated on 2017-2021 (MVRV-Z>7 tops) FAILED in 2024-25 (peaked ~3-4), so a static high-threshold gate will never fire in the ETF regime and a static backtest will overstate signal frequency. Use adaptive/percentile thresholds and treat the 'flat/no-extreme' branch as a real outcome.
 
 ### Estate / Bankruptcy Locked-Token Distribution
-*[[token-unlocks]] · regime: 5 Event/Catalyst, 10 Institutional-Flow, 11 Security/Black-Swan · n=4 · op-confidence: low*
+*[[token-unlocks-narrative]] · regime: 5 Event/Catalyst, 10 Institutional-Flow, 11 Security/Black-Swan · n=4 · op-confidence: low*
 
 **Estate/bankruptcy locked-token distributions (FTX SOL) are mostly priced-in non-events (75% flat); discounted OTC sales to named institutions are relief-positive buy-the-news, and the only bearish path is the estate actually routing tokens to exchanges — so disable naive overhang shorts.**
 

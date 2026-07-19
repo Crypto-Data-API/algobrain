@@ -7,12 +7,12 @@ status: excellent
 tags: [technical-analysis, indicators, day-trading, methodology]
 aliases: ["Multiple Timeframe Analysis", "Multi-Timeframe Analysis", "MTF Analysis", "Triple Screen", "Top-Down Analysis"]
 domain: [indicators]
-prerequisites: ["[[technical-analysis-overview]]", "[[trend-following]]"]
+prerequisites: ["[[indicators-ta-primer]]", "[[trend-following]]"]
 difficulty: intermediate
-related: ["[[technical-analysis-overview]]", "[[john-murphy]]", "[[technical-analysis-of-the-financial-markets]]", "[[trend-following]]", "[[rsi]]", "[[macd]]", "[[moving-averages]]", "[[support-resistance]]", "[[dow-theory]]", "[[bar-resolution-selection]]", "[[microstructure-noise-low-timeframe]]", "[[intrabar-fill-modeling]]", "[[lookahead-bias]]", "[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[hyperliquid]]"]
+related: ["[[indicators-ta-primer]]", "[[john-murphy]]", "[[technical-analysis-of-the-financial-markets]]", "[[trend-following]]", "[[rsi]]", "[[macd]]", "[[moving-averages]]", "[[support-resistance]]", "[[dow-theory]]", "[[bar-resolution-selection]]", "[[microstructure-noise-low-timeframe]]", "[[intrabar-fill-modeling]]", "[[lookahead-bias]]", "[[crypto-perp-backtesting-pitfalls]]", "[[overfitting]]", "[[hyperliquid]]"]
 ---
 
-Multiple timeframe analysis is the practice of examining the same market across two or more timeframes to align trend direction, identify signals, and time entries with greater precision. [[john-murphy]] emphasizes this as one of the most important principles in [[technical-analysis-overview|technical analysis]]: a signal on a daily chart means more when confirmed by the weekly chart, and a signal on a weekly chart that contradicts the daily should give a trader pause. The concept is rooted in [[dow-theory]], which identified three simultaneous trends (primary, secondary, minor) operating across different time horizons. (Source: [[book-technical-analysis-of-the-financial-markets]])
+Multiple timeframe analysis is the practice of examining the same market across two or more timeframes to align trend direction, identify signals, and time entries with greater precision. [[john-murphy]] emphasizes this as one of the most important principles in [[indicators-ta-primer|technical analysis]]: a signal on a daily chart means more when confirmed by the weekly chart, and a signal on a weekly chart that contradicts the daily should give a trader pause. The concept is rooted in [[dow-theory]], which identified three simultaneous trends (primary, secondary, minor) operating across different time horizons. (Source: [[book-technical-analysis-of-the-financial-markets]])
 
 ## Murphy's Three-Timeframe Framework
 

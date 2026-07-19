@@ -14,7 +14,7 @@ related:
   - "[[quantstats]]"
   - "[[sharpe-sortino-calmar]]"
   - "[[drawdown]]"
-  - "[[backtesting-overview]]"
+  - "[[ai-backtesting-overview]]"
   - "[[options-concentration-risk]]"
 ---
 
@@ -201,7 +201,7 @@ For most backtesting workflows: use `empyrical-reloaded` as the metric layer, `p
 - [[sharpe-ratio]] — why a single number needs pinned conventions
 - [[drawdown]] — empyrical's max-drawdown function is a reference implementation
 - [[vectorbt]] — backtest engine that can feed empyrical a returns series
-- [[backtesting-overview]] — broader backtesting framework comparison
+- [[ai-backtesting-overview]] — broader backtesting framework comparison
 - [[backtesting-pitfalls]] — biased returns make clean metrics meaningless
 - [[when-to-retire-a-strategy]] — rolling-metric kill criteria built on empyrical
 - [[options-concentration-risk]] — empyrical is part of a custom Python risk-system build

@@ -5,11 +5,12 @@ created: 2026-07-16
 updated: 2026-07-16
 status: review
 tags: [crypto, nft, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
-aliases: ["RARE"]
-entity_type: protocol
-headquarters: "Decentralized"
-website: "https://superrare.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
+aliases: ["RARE", "SuperRare", "Super Rare"]
+entity_type: company
+founded: 2018
+headquarters: "New York, USA"
+website: "https://superrare.com"
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]", "[[nft]]", "[[opensea]]", "[[rarible]]", "[[knownorigin]]", "[[makersplace]]", "[[art-blocks]]", "[[cryptopunks]]"]
 ---
 
 # SuperRare
@@ -175,13 +176,49 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 
 ---
 
+## Protocol Overview
+
+SuperRare is a curated [[nft|NFT]] marketplace specializing in single-edition (1/1) digital artworks on [[ethereum|Ethereum]]. Launched in April 2018 by John Crain, Charles Crain, and Jonathan Perkins, SuperRare pioneered the artist-centric model for crypto art by combining curation, on-chain provenance, and creator royalties.
+
+Unlike open marketplaces such as [[opensea|OpenSea]] and [[rarible|Rarible]], SuperRare requires artists to apply and be approved before listing work, creating an exclusive gallery-like environment. Early adopters included prominent digital artists such as **XCOPY**, **Pak**, **Hackatao**, and **Coldie**, whose works achieved significant prices during the 2020–2021 NFT boom.
+
+In August 2021, SuperRare launched the $RARE governance token, transitioning toward a DAO model. The token allows holders to participate in governance decisions including curation through community-run **SuperRare Spaces** — independent storefronts curated by $RARE token holders.
+
+## Business Model
+
+- **Commission**: 15% on primary sales; 10% royalty on secondary sales
+- **Edition type**: Primarily 1/1 unique artworks (distinguishing it from edition-based platforms)
+- **Governance**: $RARE token holders vote on platform decisions and curate Spaces
+- **Blockchain**: Ethereum (ERC-721)
+
+## Competitive Position
+
+SuperRare occupies the "gallery" tier of the NFT marketplace hierarchy, in contrast to:
+- **[[opensea|OpenSea]] / [[rarible|Rarible]]**: Open, permissionless marketplaces with broader reach but less curation
+- **[[knownorigin|KnownOrigin]]**: Similar curated model, but smaller scale (acquired by eBay in 2022)
+- **[[blur|Blur]]**: Trader-focused marketplace optimized for speed and volume rather than art discovery
+
+The 2022–2023 NFT market downturn and the shift toward royalty-optional marketplaces like [[blur|Blur]] threatened SuperRare's royalty-enforcing model. As of 2024–2026, SuperRare continues to lean on curation, Spaces, and artist relationships rather than competing on fees.
+
+## Trading Relevance
+
+SuperRare is a privately held company; traders gain exposure via:
+- **$RARE token** — governance token tracking NFT-market sentiment and SuperRare-specific catalysts; thinly traded and highly volatile
+- **Secondary art liquidity** — collectors hold 1/1 works; floor prices for blue-chip crypto artists (XCOPY, Pak) are the practical "market"
+
 ## See Also
 
 - [[crypto-markets]]
 - [[ethereum]]
+- [[nft]]
+- [[opensea]]
+- [[rarible]]
+- [[knownorigin]]
 
 ---
 
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-07-16]])
+- [SuperRare website](https://superrare.com)
+- Verified via Perplexity (sonar), 2026-06-10

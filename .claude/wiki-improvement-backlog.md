@@ -50,7 +50,12 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
       microstructure/algorithmic-trading.md generic dupe DELETED (same-stem ambiguity);
       convex-finance.md cleaned to true redirect; dYdX/Convex entity pages retitled
       "(Protocol)".
-- [ ] A9. Same-stem collisions — CLASSIFIED (iter 9), dispositions per bucket:
+- [x] A9. (2026-07-19, iter 13) COMPLETE — all four buckets executed: 21 redirect twins
+      deleted (aliases merged to survivors), 12 coin-vs-entity pairs merged into the
+      enriched coin pages, overview stems renamed (ai-backtesting-overview,
+      ai-data-providers-overview), 19 case-by-case pairs merged/renamed
+      (…-narrative, …-token, terra-luna-collapse-2022 renames with scoped link retargets).
+      ZERO same-stem duplicates remain (independently verified). Original plan follows:
       (a) redirect-vs-real — AUDITED iter 12, dispositions final: DELETE these redirect
           twins (merge any unique aliases into the surviving real page first):
           14 CIRCULAR (self-referencing, broken): entities/protocols/arbitrum.md,
@@ -172,3 +177,5 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   Honest touches: tail-risk-hedging carries negative standalone Sharpe; VIX pages state
   plainly no DVOL future exists. A9 redirect bucket fully audited (14 circular + 7 decided).
   ONLY A9 REMAINS.
+- 2026-07-19 iter 13 (A9): collision cleanup complete — zero same-stem duplicates.
+  ★★ BACKLOG COMPLETE — all Phase A (A1–A9) and Phase B (B1–B12) items done. Loop stopped. ★★

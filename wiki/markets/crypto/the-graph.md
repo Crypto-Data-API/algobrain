@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized (developed by Edge & Node, San Francisco)"
 website: "https://thegraph.com/"
-related: ["[[arbitrum]]", "[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]"]
+related: ["[[arbitrum]]", "[[chainlink]]", "[[crypto-markets]]", "[[ethereum]]", "[[narrative-trading]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[liquidation-cascade-fade]]", "[[defai]]", "[[ai-trading-agents]]", "[[on-chain-inference]]", "[[nansen]]", "[[glassnode]]", "[[arkham-intelligence]]"]
 ---
 
 # The Graph

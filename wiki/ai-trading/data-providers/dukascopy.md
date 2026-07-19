@@ -10,7 +10,7 @@ founded: 2004
 headquarters: "Geneva, Switzerland"
 website: "https://www.dukascopy.com"
 aliases: ["Dukascopy", "Dukascopy Bank", "JForex"]
-related: ["[[forex]]", "[[alpha-vantage]]", "[[backtesting-py]]", "[[transaction-cost-modeling]]", "[[data-sources-overview]]"]
+related: ["[[forex]]", "[[alpha-vantage]]", "[[backtesting-py]]", "[[transaction-cost-modeling]]", "[[ai-data-providers-overview]]"]
 ---
 
 # Dukascopy
@@ -69,7 +69,7 @@ Dukascopy data pairs well with Python backtesting frameworks such as [[backtesti
 - [[alpha-vantage]]
 - [[backtesting-py]]
 - [[transaction-cost-modeling]]
-- [[data-sources-overview]]
+- [[ai-data-providers-overview]]
 
 ## Sources
 

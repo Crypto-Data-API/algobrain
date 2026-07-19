@@ -9,6 +9,69 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Batch A9: Same-Stem Filename Collision Cleanup (Final Backlog Batch)
+
+Resolved all same-stem filename collisions in the vault. Every `[[wikilink]]` now resolves to a unique file under `wiki/`. Zero duplicate stems remain.
+
+### Bucket (a) — Redirect twins deleted (circular self-referencing)
+
+14 circular self-referencing redirect pages `git rm`'d (no unique content):
+`entities/protocols/arbitrum`, `concepts/bollinger-bands`, `strategies/calendar-spread`, `concepts/consolidation`, `concepts/options/credit-spread`, `strategies/delta-hedging`, `concepts/anomalies/disposition-effect`, `strategies/gamma-scalping`, `strategies/technical-analysis/gamma-scalping`, `concepts/indicators/point-and-figure`, `ai-trading/infrastructure/python`, `concepts/portfolio-theory/rebalancing`, `concepts/market-microstructure/restaking`, `concepts/statistical-arbitrage`
+
+7 case-decided deletions:
+`concepts/dca-strategy`, `concepts/funding-rate`, `concepts/options/iron-butterfly`, `concepts/market-timing`, `concepts/put-call-parity`, `concepts/market-microstructure/quantitative`, `markets/crypto/polygon`
+
+Judgment calls:
+- `concepts/indicators/sector-rotation` — equity-only (stock sectors, XLE/XLK/SPY); `strategies/fundamental-analysis/sector-rotation` kept as crypto scope-note redirect
+
+### Bucket (b) — Coin-vs-entity merges (12 pairs)
+
+`markets/crypto/<stem>.md` survived as canonical; entity twin `git rm`'d after merging unique content (aliases, founding dates, entity_type, notable history, trading strategies):
+`aave`, `augur`, `beefy-finance`, `blur`, `eigenlayer`, `gmx`, `magic-eden`, `rarible`, `superrare`, `tensor`, `thorchain`, `uniswap`
+
+### Bucket (c) — Overview-stem renames (3 files)
+
+| Old path | New path | Wikilinks retargeted |
+|----------|----------|----------------------|
+| `ai-trading/backtesting/backtesting-overview.md` | `ai-trading/backtesting/ai-backtesting-overview.md` | 9 files under `wiki/ai-trading/**` |
+| `ai-trading/data-providers/data-sources-overview.md` | `ai-trading/data-providers/ai-data-providers-overview.md` | 8 files under `wiki/ai-trading/**` |
+| `concepts/indicators/technical-analysis-overview.md` | `concepts/indicators/indicators-ta-primer.md` | 9 files under `wiki/concepts/indicators/**` |
+
+### Bucket (d) — 19 other real pairs
+
+**Merges + deletions:**
+- `stablecoin-depegs`: merged `concepts/portfolio-theory/` (design types table, arbitrage loop, severity classification, sUSD/HUSD/USDT-2018 cases, monitoring indicators, worked example, risk management, pitfalls) into `crypto-narratives/stablecoin-depegs.md`; `git rm concepts/portfolio-theory/`
+- `cross-margin-vs-isolated-margin`: merged `concepts/market-microstructure/` (aliases, ADL section, pitfalls) into `comparisons/`; `git rm market-microstructure/`
+- `dollar-cost-averaging (trio)`: merged aliases into `strategies/dca-strategy.md`; `git rm market-microstructure/` (redirect) and `strategies/position-trading/` (reference)
+- `hummingbot`: merged backtesting content (order-book replay, Optuna integration, controllers, limitations) into `ai-trading/trading-bots/hummingbot.md`; `git rm ai-trading/backtesting/hummingbot.md`
+- `ai-agent-tokens`: merged sector landscape table and category breakdown into `crypto-narratives/ai-agent-tokens.md`; `git rm markets/crypto/ai-agent-tokens.md`
+- Data-provider pairs (coinglass, dune-analytics, glassnode, nansen): kept `data-sources/<stem>.md`, merged unique content from `ai-trading/data-providers/<stem>.md`, `git rm` ai-trading twins
+- `the-graph`: kept `markets/crypto/the-graph.md`; merged related links; `git rm ai-trading/data-providers/the-graph.md`
+
+**Renames + link retargeting:**
+- `bitcoin-halving` in `crypto-narratives/`: `git mv` → `bitcoin-halving-narrative.md`; retargeted `[[bitcoin-halving]]` in 5 files under `crypto-narratives/**`
+- `token-unlocks` in `crypto-narratives/`: `git mv` → `token-unlocks-narrative.md`; retargeted `[[token-unlocks]]` in 3 files under `crypto-narratives/**`
+- `terra-luna` in `history/crashes/`: `git mv` → `terra-luna-collapse-2022.md`; retargeted `[[terra-luna]]` in 7 files under `history/**`
+- `markets/crypto/liquidity.md` (SN77 token) → `markets/crypto/liquidity-token.md`
+- `markets/crypto/uranium.md` (XU3O8 token) → `markets/crypto/uranium-token.md`
+- `markets/crypto/contango.md` (TANGO token) → `markets/crypto/contango-token.md`
+
+**Additional deletions (support files):**
+- `concepts/indicators/impermanent-loss.md`, `concepts/interest-rate-risk.md`, `concepts/indicators/volatility-risk-premium.md` (duplicates of richer pages elsewhere)
+
+### Verification
+
+- Stem-uniqueness check: **0 duplicate stems** remain under `wiki/`
+- All wikilink retargetings confirmed by search
+
+### Files summary
+
+- **Deleted (git rm)**: ~40 files
+- **Renamed (git mv)**: 9 files
+- **Merged + updated**: ~25 files (coin entity pages, concept pages, data-source pages)
+
+---
+
 ## 2026-07-19 — Batch B11-2 (Final): Schema Upgrade of Remaining 24 STRATEGY Pages + 4 Equity-Prose Cleanups
 
 ### Task 1 — 24 STRATEGY pages upgraded to buildable schema

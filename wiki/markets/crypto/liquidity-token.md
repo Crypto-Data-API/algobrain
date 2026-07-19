@@ -1,5 +1,5 @@
 ---
-title: "Liquidity"
+title: "Liquidity (SN77 Token)"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16

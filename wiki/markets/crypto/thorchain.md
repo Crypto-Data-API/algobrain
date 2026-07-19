@@ -9,7 +9,7 @@ aliases: ["RUNE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://thorchain.org/"
-related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
+related: ["[[bitcoin]]", "[[cross-chain-bridges]]", "[[cross-chain]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[ethereum]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]", "[[lazarus-group]]", "[[crypto-regulation]]", "[[cross-chain-yield-farming]]", "[[automated-market-maker]]", "[[liquidity-pool]]"]
 ---
 
 # THORChain
@@ -195,6 +195,35 @@ Unlike most altcoins, RUNE has a **mechanically enforced relationship to protoco
 | Maya Protocol | Cross-chain DEX | THORChain fork (CACAO) | Yes | Sister protocol; shares architecture |
 
 THORChain's distinctive position is **native-asset, no-wrap cross-chain swaps**; the trade-off is the operational and custody complexity that pure single-chain AMMs avoid.
+
+## How THORChain Works
+
+THORChain uses a continuous liquidity pool model where every pool pairs a native asset with RUNE:
+
+1. **Pool structure**: BTC/RUNE, ETH/RUNE, BNB/RUNE, etc. A swap from BTC to ETH routes through two pools: BTC → RUNE → ETH
+2. **Validator security**: Node operators bond RUNE (minimum 300,000 RUNE) as collateral; misbehavior is slashed. The protocol requires bonded RUNE value exceeds pooled asset value (the "incentive pendulum")
+3. **Native settlement**: THORChain nodes hold private keys for vaults on each supported chain via threshold-signature (TSS) multisig; when a user sends BTC to swap for ETH, the protocol receives BTC and sends ETH from its respective vaults
+4. **Liquidity providers**: LPs deposit native assets (BTC, ETH) or RUNE into pools and earn swap fees plus block rewards (RUNE emissions)
+
+**RUNE deterministic value model**: Every pool is `ASSET:RUNE`, so RUNE demand scales with pooled liquidity. The protocol historically targeted a "deterministic value" of ~3x the value of non-RUNE assets bonded+pooled. This makes RUNE a **leveraged bet on THORChain TVL growth** — if TVL doubles, the minimum RUNE value floor also doubles (3x multiplier).
+
+## Security History
+
+| Date | Event |
+|---|---|
+| **July 2021 (1st exploit)** | $5M drained via fake ETH deposit attack on the Bifrost module |
+| **July 2021 (2nd exploit)** | $8M drained via similar attack targeting the ETH router; protocol paused for patches |
+| **2022** | Various smaller incidents and protocol pauses during upgrades |
+
+## 2025-2026 Lazarus Group / Money-Laundering Controversy
+
+THORChain's permissionless, native, no-KYC cross-chain swap design became a major reputational and regulatory liability:
+
+- **Bybit hack laundering (Feb 2025)**: After North Korea's [[lazarus-group|Lazarus Group]] stole ~$1.5 billion in crypto from Bybit — the largest crypto theft on record — a very large share of the laundered funds was reportedly routed through THORChain to swap ETH into [[bitcoin|BTC]]. The protocol reportedly processed billions in swap volume and earned millions in fees during the laundering window
+- **Governance crisis**: A node-operator vote moved to block the offending addresses, but the decision was reversed amid disputes over decentralization and "code is law" purism; at least one prominent contributor resigned in protest
+- **Regulatory/exchange risk**: The Lazarus association raised risk of OFAC sanctions exposure, exchange delistings, and front-end/relayer takedowns for THORChain-connected interfaces (e.g. THORSwap, wallets) — a structural overhang on RUNE distinct from market risk
+
+The protocol is associated with pseudonymous founder "JP Thor" (John-Paul Thorbjornsen); the core team remains largely pseudonymous.
 
 ## Notable History
 

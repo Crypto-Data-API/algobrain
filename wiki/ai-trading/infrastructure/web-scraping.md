@@ -8,7 +8,7 @@ tags: [data-provider, algorithmic, quantitative]
 aliases: ["Web Scraping", "Web Scraper", "Screen Scraping"]
 domain: [algorithmic]
 difficulty: intermediate
-related: ["[[alternative-data]]", "[[python]]", "[[sentiment-analysis]]", "[[natural-language-processing-finance]]", "[[data-sources-overview]]", "[[nlp-sentiment-analysis]]", "[[the-book-of-alternative-data]]"]
+related: ["[[alternative-data]]", "[[python]]", "[[sentiment-analysis]]", "[[natural-language-processing-finance]]", "[[ai-data-providers-overview]]", "[[nlp-sentiment-analysis]]", "[[the-book-of-alternative-data]]"]
 ---
 
 Web scraping is the automated extraction of data from websites — programmatically fetching pages and parsing their content into structured datasets. In trading it is a primary technique for building [[alternative-data|alternative-data]] pipelines: harvesting information that is publicly visible but not packaged into a clean API or commercial feed, then converting it into tradable signals. Examples range from scraping e-commerce product prices and review counts, to job-posting boards, to regulatory filing portals, to social-media sentiment.
@@ -47,14 +47,14 @@ The edge from scraped data is typically **informational** and **decay-prone**: i
 
 ## Build vs Buy
 
-For widely-used datasets (web traffic, card transactions, satellite imagery), commercial vendors now package what firms once scraped — often with better coverage, point-in-time integrity, and legal indemnification. Scraping is most justified for **niche, idiosyncratic, or short-shelf-life** signals where no vendor exists, or where the cost of a vendor feed is disproportionate to a single strategy's capacity. See [[data-sources-overview]] for the broader provider landscape.
+For widely-used datasets (web traffic, card transactions, satellite imagery), commercial vendors now package what firms once scraped — often with better coverage, point-in-time integrity, and legal indemnification. Scraping is most justified for **niche, idiosyncratic, or short-shelf-life** signals where no vendor exists, or where the cost of a vendor feed is disproportionate to a single strategy's capacity. See [[ai-data-providers-overview]] for the broader provider landscape.
 
 ## Related
 
 - [[alternative-data]] — the broader category scraping feeds
 - [[python]] — the dominant scraping toolchain (requests, Scrapy, Playwright, pandas)
 - [[natural-language-processing-finance]], [[nlp-sentiment-analysis]] — what scraped text often feeds
-- [[data-sources-overview]] — packaged-feed alternatives to scraping
+- [[ai-data-providers-overview]] — packaged-feed alternatives to scraping
 - [[the-book-of-alternative-data]] — reference on the alt-data lifecycle
 
 ## Sources

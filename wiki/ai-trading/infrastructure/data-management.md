@@ -9,7 +9,7 @@ aliases: ["Data Management", "Market Data Management", "Tick Store"]
 domain: [market-microstructure]
 related:
   - "[[databento]]"
-  - "[[data-sources-overview]]"
+  - "[[ai-data-providers-overview]]"
   - "[[backtesting]]"
   - "[[survivorship-bias]]"
   - "[[look-ahead-bias]]"
@@ -42,7 +42,7 @@ Columnar formats (Parquet, ClickHouse, kdb+) dominate because trading queries ar
 
 ## Pipeline Stages
 
-1. **Ingest** — pull from vendors ([[databento]], EDGAR via [[edgar]], exchange feeds; see [[data-sources-overview]]) with idempotent, resumable jobs.
+1. **Ingest** — pull from vendors ([[databento]], EDGAR via [[edgar]], exchange feeds; see [[ai-data-providers-overview]]) with idempotent, resumable jobs.
 2. **Validate** — schema checks, gap detection, outlier flags, cross-vendor reconciliation.
 3. **Normalize** — unified symbology (map across vendor IDs, CUSIP/FIGI), apply corporate actions, build adjusted series.
 4. **Store** — write immutable, versioned, point-in-time datasets.
@@ -56,7 +56,7 @@ Most "alpha decay" surprises trace to data: a backtest used split-adjusted price
 
 - [[databento]] — a normalized market-data source
 - [[edgar]] — fundamentals/filings source
-- [[data-sources-overview]] — provider catalog
+- [[ai-data-providers-overview]] — provider catalog
 - [[backtesting]] — the primary consumer of clean historical data
 - [[survivorship-bias]] / [[look-ahead-bias]] — the failure modes data management prevents
 - [[deployment]] — research/production data parity in live systems

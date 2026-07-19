@@ -7,7 +7,7 @@ status: good
 tags: [technical-analysis, indicators, commodities, portfolio-theory]
 aliases: ["Intermarket Analysis", "Intermarket Technical Analysis", "Cross-Asset Analysis"]
 domain: [indicators, portfolio-theory]
-prerequisites: ["[[technical-analysis-overview]]", "[[commodities]]", "[[futures-overview]]"]
+prerequisites: ["[[indicators-ta-primer]]", "[[commodities]]", "[[futures-overview]]"]
 difficulty: advanced
 related: ["[[john-murphy]]", "[[technical-analysis-of-the-financial-markets]]", "[[cross-asset-signals]]", "[[dxy-commodity-correlation]]", "[[commodity-inflation-link]]", "[[real-interest-rates]]", "[[sector-rotation]]", "[[commodities]]", "[[gold]]", "[[crude-oil]]", "[[global-macro]]", "[[trend-following-cta]]"]
 ---
@@ -83,7 +83,7 @@ Overlay the following on the same chart or dashboard:
 
 ### Timeframe
 
-Intermarket analysis is primarily a weekly/monthly-chart discipline. The lead/lag relationships between asset classes unfold over weeks to months, not days. Murphy recommends using intermarket signals to set the macro context, then applying single-market [[technical-analysis-overview|technical analysis]] for timing within that context.
+Intermarket analysis is primarily a weekly/monthly-chart discipline. The lead/lag relationships between asset classes unfold over weeks to months, not days. Murphy recommends using intermarket signals to set the macro context, then applying single-market [[indicators-ta-primer|technical analysis]] for timing within that context.
 
 ## Criticism
 

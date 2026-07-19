@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://glassnode.com"
 source_author: "Glassnode"
 confidence: high
-related: ["[[on-chain-analytics]]", "[[cryptoquant]]", "[[nansen]]", "[[dune-analytics]]", "[[bitcoin]]", "[[ethereum]]", "[[polymarket-as-crypto-leading-indicator]]"]
+related: ["[[on-chain-analytics]]", "[[cryptoquant]]", "[[nansen]]", "[[dune-analytics]]", "[[bitcoin]]", "[[ethereum]]", "[[polymarket-as-crypto-leading-indicator]]", "[[santiment]]", "[[laevitas]]", "[[point-in-time-data]]", "[[lookahead-bias]]", "[[crypto-perp-backtesting-pitfalls]]", "[[market-regime-detection-ml]]"]
 ---
 
 Glassnode is a Swiss-based [[on-chain-analytics]] provider founded in 2017, specializing in aggregated, statistically-derived indicators on [[bitcoin]], [[ethereum]], and major Layer-1 networks. It differentiates from [[nansen]] (wallet labels), [[dune-analytics]] (custom SQL), and [[cryptoquant]] (exchange-flow granularity) by focusing on derived macro metrics such as SOPR, MVRV, and Realized Cap — the kind of curated, paper-grade indicators that became the lingua franca of institutional on-chain research.
@@ -94,6 +94,26 @@ Glassnode is the natural counterparty data source when testing whether [[polymar
 - Many indicators derive from **public chain data** and can be reproduced via [[dune-analytics]] — Glassnode's value is curation, documentation, and consistency, not exclusive data access
 - Some classic indicators (notably **NVT**) have decayed in signal quality as DeFi, Layer-2s, and off-chain settlement fragment the on-chain footprint of economic activity
 - Indicator methodology occasionally changes; historical backtests should re-pull data rather than rely on cached series
+
+## Point-in-Time Data
+
+Glassnode is one of the few crypto data providers that publishes its on-chain metrics as **versioned, immutable [[point-in-time-data|point-in-time (PiT)]] snapshots**. A PiT snapshot freezes every metric value as it was computed at the historical moment in question — no retroactive revisions are silently applied to past observations.
+
+This matters because most on-chain metrics are *derived* from heuristics and labels that get updated continuously:
+
+- **Entity tags**: a wallet labeled "Binance cold wallet" today may not have been labeled at all in 2022. Backtesting with current data introduces future knowledge.
+- **Exchange wallet classifications**: clusters get re-classified, merged, or split as on-chain forensics improves.
+- **Coin-age based metrics (NUPL, MVRV, Realized Cap)**: depend on the exact UTXO graph snapshot at compute time; small revisions to the cost-basis model retroactively shift levels by 1-3% across history.
+
+Backtests built on the *current-as-of-today* version of a metric inherit a subtle but devastating form of [[lookahead-bias]]. Glassnode's PiT API exposes the metric as it stood at any historical timestamp `t`. A naive backtest on revised data can show a 1.5x Sharpe inflation on entity-flow-based strategies. See [[crypto-perp-backtesting-pitfalls]] for the broader catalogue of crypto-specific lookahead traps.
+
+## Backtesting Use Cases
+
+- **On-chain feature engineering with PiT discipline**: build features (exchange-inflow z-score, long-term-holder supply changes, miner-position index) using the PiT API so signals reflect what was knowable at decision time. Pair with [[walk-forward-optimization]] for an honest validation pipeline.
+- **Regime detection inputs**: NUPL, MVRV Z-Score, and Puell Multiple are common state variables for [[market-regime-detection-ml|ML-based regime detection]] models (HMMs, k-means on standardised metrics). PiT versioning is essential here.
+- **Survivorship-bias correction**: Glassnode covers tokens that have since fallen out of the top-50, including pre-collapse history for failed projects. See [[survivorship-bias]].
+- **Stress-testing on real flow shocks**: the October 10-11, 2025 cascade and April 2026 incidents are both reflected in Glassnode flow data.
+- **Cross-validating funding-rate strategies**: combining Glassnode exchange-balance flows with [[coinglass]] funding/OI data produces a more robust signal than either source alone.
 
 ## Notable use in historical episodes
 

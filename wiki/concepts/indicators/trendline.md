@@ -7,7 +7,7 @@ status: review
 tags: [technical-analysis, indicators, trend-following, price-action]
 aliases: ["trendline", "trend line", "trend lines", "uptrend line", "downtrend line", "trendlines"]
 domain: [indicators]
-prerequisites: ["[[technical-analysis-overview]]", "[[trend]]"]
+prerequisites: ["[[indicators-ta-primer]]", "[[trend]]"]
 difficulty: beginner
 related:
   - "[[support-and-resistance]]"
@@ -24,7 +24,7 @@ related:
   - "[[volume]]"
 ---
 
-A **trendline** is a straight line drawn on a price chart connecting a series of [[swing-high|swing highs]] or [[swing-low|swing lows]] to visualise the direction and slope of a [[trend]]. It is the simplest and oldest tool in [[technical-analysis-overview|technical analysis]] — a diagonal form of [[support-and-resistance]] that acts as a moving floor under an uptrend or a moving ceiling over a downtrend. Trendlines are used to define the trend, to time entries on pullbacks to the line, and to flag a possible trend change when the line breaks.
+A **trendline** is a straight line drawn on a price chart connecting a series of [[swing-high|swing highs]] or [[swing-low|swing lows]] to visualise the direction and slope of a [[trend]]. It is the simplest and oldest tool in [[indicators-ta-primer|technical analysis]] — a diagonal form of [[support-and-resistance]] that acts as a moving floor under an uptrend or a moving ceiling over a downtrend. Trendlines are used to define the trend, to time entries on pullbacks to the line, and to flag a possible trend change when the line breaks.
 
 ## Overview
 

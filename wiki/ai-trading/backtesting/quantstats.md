@@ -13,7 +13,7 @@ related:
   - "[[pyfolio]]"
   - "[[sharpe-sortino-calmar]]"
   - "[[drawdown]]"
-  - "[[backtesting-overview]]"
+  - "[[ai-backtesting-overview]]"
 ---
 
 # QuantStats
@@ -216,5 +216,5 @@ QuantStats is the recommended default for new projects. Use [[pyfolio]] when you
 - [[zipline-framework]] — alternative backtest engine whose returns can be reported here
 - [[sharpe-ratio]] / [[sharpe-sortino-calmar]] — the headline risk-adjusted metrics in the report
 - [[drawdown]] — underwater/drawdown analysis is a signature QuantStats output
-- [[backtesting-overview]] — where QuantStats fits in the overall workflow
+- [[ai-backtesting-overview]] — where QuantStats fits in the overall workflow
 - [[backtesting-pitfalls]] — why a clean tear sheet does not guarantee a real edge

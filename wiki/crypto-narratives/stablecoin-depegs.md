@@ -2,11 +2,11 @@
 title: "Stablecoin Depegs & Contagion — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-07-13
-status: good
-tags: [crypto, defi, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
-aliases: ["Depeg", "Stablecoin Depeg", "Depeg Contagion", "Stablecoin Run", "USDe Depeg", "Algorithmic Stablecoin Collapse"]
-related: ["[[crypto-narratives-overview]]", "[[stablecoin-supply]]", "[[stablecoin-depeg-history]]", "[[cryptodataapi]]"]
+updated: 2026-07-19
+status: excellent
+tags: [crypto, defi, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact, risk-management, history, stablecoins]
+aliases: ["Depeg", "Stablecoin Depeg", "Depeg Contagion", "Stablecoin Run", "USDe Depeg", "Algorithmic Stablecoin Collapse", "De-peg", "Stablecoin De-peg Events", "De-pegging"]
+related: ["[[crypto-narratives-overview]]", "[[stablecoin-supply]]", "[[stablecoin-depeg-history]]", "[[cryptodataapi]]", "[[stablecoins]]", "[[terra-luna-collapse]]", "[[usdc]]", "[[usdt]]", "[[dai]]", "[[risk-management]]", "[[defi]]", "[[stablecoin-regulation]]", "[[arbitrage]]", "[[decentralized-exchanges]]", "[[lido]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -22,6 +22,34 @@ A depeg is a confidence event expressed as a price discount. The discount equals
 - **Algorithmic death spirals** have no hard reserves; once the peg cracks, the redemption mechanism hyperinflates a sister token and the whole thing goes terminal. The other side is late yield-farmers who hold into the spiral and lose ~100%.
 - **Reserve-shock depegs** hit collateralized coins when the market doubts the reserves are redeemable. The other side is arbitrageurs buying the discount betting 1:1 redemption resumes — they win when backing is real (USDC recovered in ~3 days) and lose when it is genuinely gone (USDR ~half permanent). A key read-across: when the trigger is TradFi banking stress (SVB), BTC *rallies* as a banking-system hedge.
 - **Venue-liquidity flash wicks** are mechanical dislocations on a single exchange or imbalanced AMM pool while the coin stays at par everywhere else. The other side is fast arbitrageurs who buy the wick and redeem elsewhere — they almost always win, because the discount is not fundamental.
+
+## De-Peg Severity Classification
+
+- **Minor de-peg** (<2% deviation): Common during high-volatility periods, corrected within minutes to hours by arbitrageurs
+- **Significant de-peg** (2-15% deviation): Indicates real stress on the stablecoin's backing or confidence. May take hours to days to resolve
+- **Catastrophic de-peg** (>50% deviation / total collapse): The stablecoin's mechanism has fundamentally failed. Recovery is unlikely
+
+## Stablecoin Designs and Failure Modes
+
+Different designs have different failure modes; the design dictates whether a deviation is a recoverable liquidity event or a terminal solvency event.
+
+| Design | How the peg is held | Examples | Dominant failure mode |
+|--------|--------------------|----------|----------------------|
+| **Fiat-backed (off-chain reserves)** | Issuer holds cash + T-bills 1:1; mint/redeem at $1 for KYC'd partners; arbitrage closes secondary-market gaps | [[usdc\|USDC]], [[usdt\|USDT]], FDUSD | Banking counterparty failure, reserve opacity, redemption friction |
+| **Crypto-collateralized (overcollateralized)** | On-chain collateral > 100% of supply; liquidations and a peg-stability module defend $1 | [[dai\|DAI]], LUSD | Collateral crash, oracle failure, dependence on a centralized stablecoin as collateral |
+| **Algorithmic / seigniorage** | A volatile sister token absorbs supply changes via mint/burn; *no* hard reserve floor | UST/[[terra-luna-collapse\|LUNA]], Iron/TITAN | Reflexive "death spiral" — collapse feeds on itself |
+| **Yield/synthetic (delta-neutral)** | Backed by a hedged position (e.g., spot + short perp); peg from collateral value + funding | USDe-style designs | Funding-rate inversion, exchange/counterparty risk, collateral custody |
+
+**The single most important distinction:** a fiat- or crypto-backed coin can de-peg on a *liquidity* shock and recover when arbitrage or redemption catches up; an algorithmic coin de-pegs on a *confidence* shock that its own mechanism then amplifies.
+
+### The Arbitrage Loop That Normally Holds the Peg
+
+For a redeemable stablecoin, arbitrage is the restoring force:
+
+- **Below $1**: buy the stablecoin cheap on the open market, redeem with the issuer for $1, pocket the spread. This buying pushes the price back up.
+- **Above $1**: mint new stablecoin from the issuer for $1, sell on the open market above $1. This selling pushes the price back down.
+
+The loop only works if (1) redemption/minting is actually available and fast, (2) the reserves exist, and (3) there is enough on-chain liquidity to absorb the flow. A de-peg is, mechanically, a sign that one of those three has broken or that the market doubts it has.
 
 ## Algorithmic / reflexive death-spiral depeg
 
@@ -92,6 +120,101 @@ A depeg is a confidence event expressed as a price discount. The discount equals
 | 2022-05-12 | USDT Terra-contagion flash wick | USDT | -8% | flash low ~$0.92 on Kraken | medium | [Protos](https://protos.com/history-of-tethers-peg-every-time-usdt-traded-above-or-below-one-dollar/) |
 | 2023-06-15 | USDT Curve 3pool imbalance | USDT | -0.3% | low ~$0.997 | medium | [The Block](https://www.theblock.co/post/234822/tether-depeg-curve-3pool) |
 
+## Additional Historical Cases
+
+### USDT (October 2018) — Moderate
+
+- **October 15, 2018**: Amid growing concerns about Tether's banking relationships and reserve adequacy, USDT traded at **~$0.92-0.95** on multiple exchanges
+- The de-peg lasted several days before gradually recovering
+- [[bitcoin|Bitcoin]] price actually spiked during this event as traders fled USDT into BTC (a "flight to quality" within crypto)
+- This event preceded the NYAG investigation into Tether
+
+### sUSD — Synthetix (Chronic)
+
+The Synthetix protocol's stablecoin sUSD has experienced **repeated de-pegs**:
+
+- sUSD has frequently traded at $0.95-0.98 or below for extended periods
+- Causes: Low liquidity, complex debt-pool mechanism, limited redemption arbitrage
+- sUSD demonstrates that stablecoin mechanism design matters enormously — even backed stablecoins can persistently trade below peg if the arbitrage mechanism is insufficient
+
+### HUSD — Huobi (2022) — Permanent
+
+- HUSD, associated with the Huobi exchange, lost its peg in August 2022
+- Traded as low as $0.80 before being de-listed from most exchanges
+- Reserve composition and management were unclear
+- Highlights the risk of exchange-affiliated stablecoins with poor transparency
+
+## De-Peg Detection and Monitoring
+
+### On-Chain Indicators
+
+- **Curve 3pool ratio**: The USDC/USDT/DAI pool on Curve Finance is a key barometer. A heavily imbalanced pool (e.g., 70% USDC / 15% USDT / 15% DAI) indicates stress on the over-represented stablecoin
+- **DEX price vs CEX price**: If a stablecoin trades at $0.98 on Uniswap but $1.00 on Binance, the DEX price is the "real" price — CEX prices lag during stress
+- **Large redemptions**: On-chain data showing massive burns of a stablecoin (issuers redeeming for USD) can indicate either healthy arbitrage or early panic
+- **Reserve wallet monitoring**: For transparent stablecoins, monitoring the issuer's reserve wallets for unusual outflows
+
+### Market Indicators
+
+- **Funding rates**: Extremely negative [[funding-rates|funding rates]] on stablecoin pairs can indicate severe selling pressure
+- **Options implied volatility**: Rising IV on stablecoin-related assets
+- **Social media sentiment**: Rapid shift in Crypto Twitter sentiment about a specific stablecoin often precedes or accompanies de-pegs
+- **Exchange withdrawal suspensions**: If exchanges suspend stablecoin withdrawals, this is a major red flag
+
+## Worked Example — Reading a Fiat-Backed De-Peg in Real Time
+
+Suppose a major fiat-backed stablecoin trades at **$0.96 on a [[decentralized-exchanges|DEX]]** while still showing **$1.00 on a centralized exchange**, over a weekend, after news that one of its banking partners is in trouble.
+
+A trader works the problem in this order:
+
+1. **Liquidity event or solvency event?** Identify *what fraction* of reserves is exposed to the troubled bank. If the disclosure is "~8% of reserves at one bank" and the rest is in T-bills, the *expected* impairment is small — this looks like a liquidity/confidence shock, not insolvency.
+2. **Where is the real price?** During stress the **DEX price leads** and the CEX price lags. The $0.96 DEX print is the market-clearing price; the $1.00 CEX quote is stale.
+3. **Is redemption open?** If the issuer is still redeeming 1:1 (or credibly will once banks reopen), then buying at $0.96 and redeeming at $1.00 is a ~4% edge *conditional on* the redemption channel reopening.
+4. **Size for the tail.** The reason the discount exists is that the market assigns nonzero probability to a worse outcome. Position sizing must survive the scenario where $0.96 becomes $0.85 before it becomes $1.00.
+5. **Watch the contagion vector.** If a "decentralized" coin uses the distressed coin as collateral, *that* coin will de-peg next (exactly the [[dai|DAI]]/[[usdc|USDC]] linkage from March 2023). Either avoid it or trade the second-order de-peg.
+
+**Outcome logic:** if a government or issuer backstop restores confidence (as the FDIC backstop did for [[usdc|USDC]] in March 2023), the peg snaps back within hours and the discount buyers are paid. If instead it is a UST-style solvency/mechanism failure, the same "buy the dip" reflex is catastrophic. The entire edge lives in correctly diagnosing step 1.
+
+## Risk Management Strategies
+
+### Stablecoin Portfolio Diversification
+
+Never hold 100% of your portfolio in a single stablecoin. A reasonable allocation:
+
+- 40-50% in [[usdc|USDC]] (most transparent, regulatory compliance)
+- 30-40% in [[usdt|USDT]] (deepest liquidity, widest acceptance)
+- 10-20% in [[dai|DAI]] or other decentralised stablecoins (censorship resistance)
+- Consider non-stablecoin cash equivalents: actual fiat on exchange, bank deposits
+
+### Exit Plan
+
+Have a pre-planned response for de-peg scenarios:
+
+1. **Set price alerts**: Configure alerts for any stablecoin trading below $0.995 on DEXs
+2. **Know your swap routes**: Identify the fastest path to swap from a de-pegging stablecoin to an alternative (Curve, Uniswap, 1inch)
+3. **Accept the trade-off**: Selling a de-pegging stablecoin at $0.95 may be better than holding and watching it go to $0.50. However, if the stablecoin is fiat-backed with real reserves, holding through a temporary de-peg and redeeming at $1.00 may be optimal
+4. **Consider hedging**: During high-risk periods, short stablecoin perpetual futures to hedge de-peg exposure
+
+### Due Diligence Checklist
+
+Before holding significant amounts of any stablecoin:
+
+- Understand the backing mechanism (fiat reserves? crypto collateral? algorithmic?)
+- Review reserve attestation/audit history
+- Assess the issuer's regulatory status and jurisdiction
+- Check the redemption mechanism (can you redeem 1:1 for USD? How quickly?)
+- Monitor on-chain reserve data where available
+
+## Common Pitfalls
+
+| Pitfall | Why it bites |
+|---------|-------------|
+| **Treating all de-pegs as buy-the-dip** | Works for redeemable coins on liquidity shocks; fatal for algorithmic coins in a death spiral (UST) |
+| **Trusting the CEX quote** | CEX prices lag the DEX during stress; the stale $1.00 quote masks the real risk |
+| **Ignoring collateral linkages** | A "decentralized" coin backed by a centralized one inherits the latter's de-peg (DAI/USDC, March 2023) |
+| **Underestimating the withdrawal/redemption queue** | The redemption arbitrage only works if redemption is open and timely; queues can stretch days under stress |
+| **Over-concentration** | Holding 100% of cash in one stablecoin turns a single issuer's bad day into a portfolio-level loss |
+| **Chasing yield as a peg signal** | Unsustainable yield (Anchor's 20% on UST) is a *cause* of fragility, not a reward for it |
+
 ## Backtest features
 
 Aggregated across all three archetypes — the quant-consumable feature and analog-mechanism list:
@@ -155,15 +278,20 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-regimes]].
 - [[crypto-narratives-overview]]
 - [[bitcoin]]
 - [[ethereum]]
-- [[stablecoins]]
-- [[terra-luna-collapse]]
-- [[usdc]]
-- [[usdt]]
+- [[stablecoins]] — Stablecoin market overview and types
+- [[terra-luna-collapse]] — Detailed analysis of the UST catastrophe
+- [[usdc]] — USDC and the SVB de-peg
+- [[usdt]] — USDT de-peg history
+- [[dai]] — DAI and its centralisation paradox
 - [[defi-lending]]
 - [[curve-finance]]
 - [[ethena]]
-- [[risk-management]]
+- [[risk-management]] — Portfolio risk management principles
 - [[liquidity]]
+- [[stablecoin-regulation]] — How regulation is shaped by de-peg events
+- [[arbitrage]] — The restoring force that normally holds a peg
+- [[decentralized-exchanges]] — Where the real-time stress price prints first
+- [[lido]] — Soft, redeemability-based peg (contrast with fiat pegs)
 
 ## Sources
 

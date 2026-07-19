@@ -4,6 +4,22 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Improvement loop, iteration 13: collision cleanup — ★ backlog complete ★
+
+- **Same-stem filename collisions eliminated (54 → 0):** 21 broken/redundant redirect twins
+  deleted (aliases preserved on survivors); 12 coin-vs-entity page pairs merged into the
+  enriched coin pages (uniswap, aave, gmx, blur, eigenlayer, thorchain, …); ambiguous
+  overview stems renamed (ai-backtesting-overview, ai-data-providers-overview); token-name
+  collisions renamed (liquidity-token, uranium-token, contango-token); narrative-catalog
+  twins suffixed (…-narrative); terra-luna crash page renamed terra-luna-collapse-2022.
+  Every bare wikilink stem now resolves unambiguously in Obsidian.
+- **This completes the improvement backlog** built from the 2026-07-18 full audit: 13 loop
+  iterations, all Phase A structural items (A1–A9) and all Phase B strategy-depth items
+  (B1–B12) done. Wiki health across the program: orphans 1,339 → 40; lint link issues
+  525 → ~451; broken gap-finder citations 228 → 0; frontmatter/tag/scope/stem hygiene clean;
+  39 new combination strategies + the complete 120-cell matrix; full buildable-schema
+  coverage across the strategy catalog.
+
 ## 2026-07-19 — Improvement loop, iteration 12: strategy-catalog schema upgrade complete
 
 - **All 34 genuine strategies from the triage are now on the buildable schema** — final 24

@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [technical-analysis, concepts]
 aliases: ["TA", "technical-analysis"]
-related: ["[[technical-analysis-overview]]"]
+related: ["[[indicators-ta-primer]]"]
 ---
 
-See [[technical-analysis-overview]].
+See [[indicators-ta-primer]].

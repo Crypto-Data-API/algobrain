@@ -9,7 +9,7 @@ aliases: ["GMX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://gmx.io/"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[perpetual-futures]]", "[[hyperliquid]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[perpetual-futures]]", "[[hyperliquid]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]", "[[dydx]]", "[[chainlink]]", "[[decentralized-exchanges]]", "[[pendle]]"]
 ---
 
 # GMX
@@ -121,6 +121,17 @@ GMX's structural distinction is its **passive-LP-as-counterparty** design: liqui
 
 ---
 
+## Users of GMX Protocol
+
+| User | Goal | Mechanism |
+|---|---|---|
+| **Leveraged traders** | Directional BTC/ETH/alt exposure up to 100x | Open perps vs. the pool at oracle price; pay funding + borrow fees |
+| **Spot swappers** | Self-custody swaps | Swap against GLP/GM inventory at oracle price |
+| **Passive LPs** | "Real yield" on idle capital | Mint GLP / GM / GLV; earn fee share + trader-loss capture |
+| **GMX stakers** | Protocol cash-flow exposure | Stake GMX for ETH/AVAX fee share + esGMX |
+| **Yield engineers** | Fixed-rate or leveraged LP yield | Tokenize GM/GLP via [[pendle]] PT/YT; loop LP tokens as collateral |
+| **Funding arbitrageurs** | CEX-vs-DEX funding spread | Delta-neutral long/short across GMX and a CEX perp |
+
 ## Use Case / Narrative / Category
 
 GMX is a flagship **perp-DEX / DeFi derivatives** token.
@@ -130,6 +141,35 @@ GMX is a flagship **perp-DEX / DeFi derivatives** token.
 - **Categories:** [[defi|DeFi]], Derivatives, [[perpetual-futures|Perpetuals]], [[arbitrum|Arbitrum Ecosystem]], Avalanche Ecosystem. It helped anchor Arbitrum's early DeFi TVL.
 
 ---
+
+## Trading Strategies on GMX
+
+### 1. GM Pool Liquidity Provision ("Real Yield")
+
+Deposit assets into GM pools (e.g., ETH + USDC into the ETH/USD GM pool). Earn fees from every leveraged trade on that market and absorb trader losses when traders lose (or pay out trader gains when traders win). Historical APY: 15–30%+ from organic trading fees (not token emissions). Capital requirement: $10K+ on Arbitrum. Risk: extended trending markets cause GM LPs to pay out more than they collect — LP returns are negatively correlated with directional market moves that benefit traders. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 2. esGMX Staking
+
+Stake GMX tokens to receive 30% of all protocol fees (paid in ETH/AVAX) + esGMX (escrowed GMX) token rewards. APY: 5–15% from real fee revenue. esGMX vesting requires 12-month lock. Advantage: fee revenue is paid in ETH/AVAX, not the protocol's own token — genuine "real yield." (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 3. Leveraged Perp Trading on GMX
+
+Open long or short leveraged positions on BTC, ETH, and altcoins using GMX's oracle-based execution with zero frontrunning (oracle prices, not AMM prices). Advantage over CEX perps: self-custody, no KYC, oracle pricing reduces MEV/sandwich risk. Limitation: fewer markets than [[hyperliquid]] or [[dydx]]; oracle latency can be exploited. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 4. GMX Funding Rate Arbitrage
+
+When GMX funding rates diverge significantly from CEX perpetual funding rates, go long on the lower-funding venue and short on the higher-funding venue to collect the rate differential. Capital requirement: $50K+ (need margin on both venues). Requires cross-venue monitoring and active position management.
+
+## July 2025 Exploit ($42M)
+
+On **2025-07-09** an attacker exploited a **reentrancy vulnerability in GMX v1's GLP pool on Arbitrum**, manipulating short average prices for BTC to drain roughly **$40–42 million**. Key facts:
+
+- GMX halted v1 trading and GLP minting/redemption; **GMX v2 (GM pools) was not affected** and continued operating
+- GMX offered a **10% white-hat bounty (~$5M)**; the attacker accepted and **returned ~$40.5M** within days
+- GMX ran a **~$44M distribution plan** compensating affected GLP holders, combining recovered funds with ~$2M from the GMX treasury; the DAO added $500K of incentives for users holding GLV tokens for 3 months
+- The GMX token dropped ~28% on news; TVL fell from ~$480M to ~$409M before rebounding above **$600M** after funds were returned
+
+Lessons: legacy-version contracts (v1) remained a live attack surface years after v2 launched; "unaffected" newer versions can still suffer token-price and TVL contagion; white-hat bounty resolution has become a common outcome pattern that compresses the post-hack drawdown window.
 
 ## Notable History
 

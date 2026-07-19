@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2017
 headquarters: "Decentralized (Aave Labs: London, UK)"
 website: "https://aave.com/"
-related: ["[[ai-finance]]", "[[arbitrum]]", "[[artificial-intelligence]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defai]]", "[[defi]]", "[[ethena]]", "[[ethereum]]", "[[funding-rate]]", "[[gho]]", "[[hyperliquid]]", "[[layer-2]]", "[[ml-defi-risk-models]]", "[[morpho]]", "[[perpetual-futures]]", "[[cross-sectional-relative-value]]", "[[funding-rate-harvest]]", "[[sky]]", "[[stablecoins]]"]
+related: ["[[ai-finance]]", "[[arbitrum]]", "[[artificial-intelligence]]", "[[compound-governance-token]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defai]]", "[[defi]]", "[[ethena]]", "[[ethereum]]", "[[funding-rate]]", "[[gho]]", "[[hyperliquid]]", "[[layer-2]]", "[[ml-defi-risk-models]]", "[[morpho]]", "[[perpetual-futures]]", "[[cross-sectional-relative-value]]", "[[funding-rate-harvest]]", "[[sky]]", "[[stablecoins]]", "[[lido]]", "[[curve-finance]]", "[[chainlink]]", "[[lending]]", "[[smart-contracts]]"]
 ---
 
 # Aave
@@ -271,6 +271,39 @@ Aave's moat is liquidity depth and the network effect of being the default DeFi 
 - [CoinGecko — Aave](https://www.coingecko.com/en/coins/aave)
 - [CoinMarketCap — Aave](https://coinmarketcap.com/currencies/aave/)
 - Perplexity sonar verification, 2026-06-10 (market cap ~$938–960M, TVL ~$12.43B, UK FCA approval)
+
+## How Traders Use Aave
+
+| User | Goal | Mechanism |
+|---|---|---|
+| **Yield suppliers** | Passive interest on idle assets | Deposit; hold rebasing aTokens |
+| **Leverage / loopers** | Amplified staking or directional exposure | Supply collateral → borrow → re-supply (e-mode boosts LTV) |
+| **Shorts via borrowing** | Bet against a token | Borrow it, sell spot, repay later at a lower price |
+| **Flash-loan engineers** | Capital-free [[arbitrage]], collateral swaps, self-liquidation | Borrow + repay atomically within one transaction |
+| **Liquidators** | Discounted collateral | Repay unhealthy debt, claim collateral + bonus via bots |
+| **GHO borrowers** | Stable-rate, governance-priced credit | Mint [[gho\|GHO]] against collateral (stkAAVE discount) |
+
+## DeFi Trading Strategies
+
+### 1. Supply-Side Yield Farming (Beginner, reliable)
+
+Deposit stablecoins (USDC, USDT, DAI) into Aave lending pools and earn variable interest from borrowers. Example: $50K USDC earns ~4–6% APY, spiking to 10%+ during high-demand periods. Risks: smart-contract risk, stablecoin depeg, rate compression. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 2. e-Mode Capital Efficiency Play (Intermediate)
+
+Supply a liquid staking derivative (e.g., [[lido\|wstETH]]) as collateral, borrow the underlying asset (ETH) at up to 85% LTV in eMode, then stake the borrowed ETH for additional yield or leverage. Returns: 8–15% on the leveraged staking spread. Key risk: wstETH/ETH depeg (the June 2022 stETH depeg hit 5%); oracle risk. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 3. Flash Loan Arbitrage (Expert)
+
+Borrow large capital ($1M–$10M+) within one atomic transaction, execute arbitrage (e.g., stablecoin price discrepancy between [[curve-finance\|Curve]] and [[uniswap\|Uniswap]]), repay loan + 0.05% fee. Reality: dominated by professional MEV bots; retail is unlikely to find consistent edge without sophisticated infrastructure. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 4. Liquidation Hunting (Expert)
+
+Monitor Aave loans approaching liquidation thresholds; call the liquidation function to repay debt and claim collateral at a 5–10% discount. Profit: 2–5% per liquidation. Requires 24/7 bot infrastructure, on-chain monitoring, private mempools, and $50K–$100K+ capital. Not viable for manual execution. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 5. GHO Minting Arbitrage (Intermediate, conditional)
+
+Mint [[gho\|GHO]] against Aave collateral when GHO trades above $1.00 on secondary markets; buy below $1.00 and repay debt at par. Depends on GHO peg deviation frequency and magnitude.
 
 ## Trading Profile
 

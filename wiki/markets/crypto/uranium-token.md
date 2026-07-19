@@ -1,5 +1,5 @@
 ---
-title: "Uranium"
+title: "Uranium (XU3O8 Token)"
 type: entity
 created: 2026-07-16
 updated: 2026-07-16

@@ -6,18 +6,18 @@ updated: 2026-06-12
 status: good
 tags: [data-provider, ai-trading, index]
 aliases: ["Data Providers", "Data Provider Catalog"]
-related: ["[[data-sources-overview]]", "[[alternative-data-alpha]]"]
+related: ["[[ai-data-providers-overview]]", "[[alternative-data-alpha]]"]
 ---
 
 # Data Providers
 
 Market-data sources, APIs, and analytics vendors for trading systems. Good data is the single biggest determinant of model quality, so this section catalogs the major providers of price data, options analytics, on-chain data, alternative data, and institutional risk models — with their coverage, access tiers, and trading use-cases.
 
-For a cost-tier walkthrough that maps the free-to-paid edge boundary by asset class and trading style, start with [[data-sources-overview]]. This page is the directory index for the individual provider write-ups.
+For a cost-tier walkthrough that maps the free-to-paid edge boundary by asset class and trading style, start with [[ai-data-providers-overview]]. This page is the directory index for the individual provider write-ups.
 
 ## Start Here
 
-- [[data-sources-overview]] — complete guide: which sources give alpha at each price tier, by asset class and trading style
+- [[ai-data-providers-overview]] — complete guide: which sources give alpha at each price tier, by asset class and trading style
 - [[bloomberg-terminal]] — the institutional gold standard (~$2K/mo/seat); benchmark everything else against it
 - [[fred]] — Federal Reserve Economic Data; 800K+ macro time series, free
 - [[polygon-io]] — SIP-grade real-time stock + options API for quant/algo builds
@@ -69,5 +69,5 @@ SORT updated DESC
 
 ## Related
 
-- [[data-sources-overview]] — cost-tier guide and recommended stacks by trading style
+- [[ai-data-providers-overview]] — cost-tier guide and recommended stacks by trading style
 - [[alternative-data-alpha]] — combining data sources for informational edge

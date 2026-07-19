@@ -14,7 +14,7 @@ related:
   - "[[sharpe-sortino-calmar]]"
   - "[[drawdown]]"
   - "[[vectorbt]]"
-  - "[[backtesting-overview]]"
+  - "[[ai-backtesting-overview]]"
 ---
 
 # pyfolio

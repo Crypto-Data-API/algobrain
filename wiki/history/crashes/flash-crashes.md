@@ -1,4 +1,4 @@
----
+﻿---
 title: "Flash Crashes"
 type: concept
 created: 2026-04-13
@@ -170,7 +170,7 @@ Despite these reforms, flash crashes continue because the structural causes — 
 - [[flash-crash-2016-gbp]] — October 7, 2016: GBP -6% in 2 minutes
 - [[volmageddon-2018]] — February 5, 2018: VIX +115%, XIV terminated
 - [[crypto-flash-crashes]] — Recurring crypto liquidation cascades
-- [[terra-luna]] — The LUNA/UST death spiral (May 2022)
+- [[terra-luna-collapse-2022]] — The LUNA/UST death spiral (May 2022)
 
 **Structural Concepts:**
 - [[liquidity]] — The resource that vanishes when you need it most

@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Decentralized protocol; Uniswap Labs: New York, USA"
 website: "https://uniswap.org/"
-related: ["[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sky]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[oi-confirmed-trend]]"]
+related: ["[[aave]]", "[[automated-market-maker]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-exchanges]]", "[[ethereum]]", "[[hyperliquid]]", "[[narrative-trading]]", "[[sky]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[cash-and-carry]]", "[[oi-confirmed-trend]]", "[[curve-finance]]", "[[balancer]]", "[[chainlink]]", "[[impermanent-loss]]", "[[smart-contracts]]", "[[lido]]"]
 ---
 
 # Uniswap
@@ -321,6 +321,51 @@ Uniswap's moat: **brand, liquidity depth, and developer mindshare**, now reinfor
 - Uniswap Agora governance, UNIfication proposal — https://vote.uniswapfoundation.org/proposals/93
 - CoinGecko top-1000 snapshot (2026-04-09), original auto-generated data
 - Verified via Perplexity sonar + web search, 2026-06-10
+
+## Fee Tiers
+
+| Fee Tier | Use Case | Example Pairs |
+|---|---|---|
+| **0.01%** | Stable-to-stable pairs | USDC/USDT, DAI/USDC |
+| **0.05%** | Correlated pairs | ETH/stETH, WBTC/BTC |
+| **0.30%** | Standard volatile pairs | ETH/USDC, UNI/ETH |
+| **1.00%** | Exotic/low-liquidity pairs | Long-tail tokens |
+
+## Trading Strategies on Uniswap
+
+### 1. Concentrated Liquidity LP Farming (Intermediate)
+
+Deploy capital in tight price bands around current trading price to maximize fee capture. Example: ETH/USDC LP at a $200-wide band during low-volatility consolidation. APY: 10–40% realized (before [[impermanent-loss]]) on tight ranges for major pairs; higher on volatile new-listing pairs but with proportionally higher IL risk. Capital requirement: $25K+ on mainnet; $5K+ viable on [[arbitrum]] or Base. Tools: Revert Finance, Range Protocol, Arrakis automate rebalancing. Key risk: position goes 100% out-of-range in a 15%+ directional move, stopping all fee accrual. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 2. Fee-Tier Arbitrage (Beginner-Intermediate)
+
+Same token pair trades across different fee tiers with slightly different prices. Arbitrage the spread between the 0.01% tier and the 0.30% tier for the same pair. APY: 8–15% annually. Capital requirement: $10K+. Reality: competition from MEV bots compresses margins; L2 deployments offer better economics for smaller capital. (Source: [[2026-04-22-perplexity-defi-trading-strategies-sweep]])
+
+### 3. New Token Launch LP (High difficulty, high risk)
+
+Provide early liquidity for newly launched tokens that list on Uniswap before centralized exchanges. APY: 100%+ fees possible in the first hours/days, but [[impermanent-loss]] can exceed fee income if the token dumps. Risk: rug pulls, honeypot tokens, extreme IL. Not recommended without smart contract auditing skills.
+
+### 4. JIT (Just-In-Time) Liquidity (Expert)
+
+Sophisticated LPs add concentrated liquidity in the same block as a large pending swap, capture the fees, then immediately withdraw — a form of MEV extraction. Requires $100K+ and custom MEV infrastructure (Flashbots, private transaction submission). Dominated by professional MEV searchers; not viable for retail traders.
+
+## Risk Framework
+
+### Impermanent Loss (IL)
+
+The dominant risk for Uniswap LPs. In concentrated liquidity (v3), IL is amplified — a 20% price move on a tight range position can result in 30–50% capital loss relative to simply holding the underlying tokens. IL is not truly "impermanent" if you withdraw at a loss. See [[impermanent-loss]].
+
+### MEV and Sandwich Attacks
+
+Uniswap trades are visible in the public mempool before execution. MEV bots exploit this via **sandwich attacks** (frontrunning your buy to push price up, then backrunning to sell at the higher price), costing traders an estimated 0.5–2% additional slippage on large swaps. Mitigations: Flashbots Protect, MEV Blocker, or private RPC endpoints.
+
+### Oracle Manipulation
+
+Uniswap pools serve as price oracles (TWAP) for many DeFi protocols. Attackers can manipulate oracle prices via large trades within a single block, causing cascading liquidations on dependent protocols. [[chainlink]] price feeds are generally preferred for lending protocol oracles. See [[oracle-manipulation]].
+
+### Smart Contract Risk
+
+Uniswap v4, being newer code, carries elevated risk until battle-tested. Periphery contracts and integrations have been exploited historically (2023 flash loan exploit on borrowed LP positions).
 
 ## Trading Profile
 

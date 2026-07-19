@@ -5,11 +5,12 @@ created: 2026-04-09
 updated: 2026-07-16
 status: excellent
 tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, altcoins]
-aliases: ["ME"]
-entity_type: protocol
+aliases: ["ME", "Magic Eden"]
+entity_type: exchange
+founded: 2021
 headquarters: "Decentralized"
 website: "https://magiceden.io/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]", "[[opensea]]", "[[blur]]", "[[nft-trading]]"]
 ---
 
 # Magic Eden
@@ -111,8 +112,10 @@ ME has no mechanical cash-flow link (no revenue burn or fee-share that is automa
 
 ## Notable History
 
-- **Solana NFT dominance:** Magic Eden became the leading [[solana|Solana]] NFT marketplace during the 2021–2022 cycle.
-- **Cross-chain expansion:** Added [[bitcoin|Bitcoin]] Ordinals/Runes, [[ethereum|Ethereum]], Base, Polygon and other EVM chains, plus a wallet and marketplace aggregator.
+- **Sep 2021** — Magic Eden launches on [[solana|Solana]], quickly establishing itself as the leading Solana NFT marketplace. Key Solana collections hosted include DeGods, y00ts, and Mad Lads.
+- **Jun 2022** — Raises **$130M Series B at a $1.6 billion valuation**, cementing its position as a major NFT marketplace player.
+- **2023** — Aggressively expands to **Bitcoin Ordinals/BRC-20 tokens**, becoming the leading marketplace for this emerging asset class and differentiating from EVM-focused competitors. Launches the Magic Eden Wallet and creator tools.
+- **Cross-chain expansion:** Added [[bitcoin|Bitcoin]] Ordinals/Runes, [[ethereum|Ethereum]], Base, Polygon and other EVM chains.
 - **ME token launch (Dec 2024):** Airdrop distribution; ME printed its $17.00 ATH on 2024-12-10 amid launch hype, then declined ~99%+ through the subsequent NFT downturn.
 
 ---

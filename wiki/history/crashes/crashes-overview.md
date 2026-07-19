@@ -1,4 +1,4 @@
----
+﻿---
 title: "Market Crashes"
 type: index
 created: 2026-04-06
@@ -47,7 +47,7 @@ Studying crashes is essential preparation. The traders who survive them are thos
 
 ## Crypto Crashes
 
-- [[terra-luna]] — Algorithmic-stablecoin death spiral; $50B+ wiped (May 2022)
+- [[terra-luna-collapse-2022]] — Algorithmic-stablecoin death spiral; $50B+ wiped (May 2022)
 - [[ftx-collapse]] — Exchange insolvency and the $8B hole (Nov 2022)
 - [[crypto-flash-crashes]] — Recurring liquidation cascades hub
 - [[2025-10-crypto-liquidation-cascade]] — Largest forced-liquidation event ever (~$20B); first systemic ADL crisis

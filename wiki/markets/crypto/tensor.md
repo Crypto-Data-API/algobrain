@@ -5,11 +5,12 @@ created: 2026-07-16
 updated: 2026-07-16
 status: review
 tags: [crypto, nft, hyperliquid, perpetual-futures, funding-rate, open-interest, derivatives, altcoins]
-aliases: ["TNSR"]
-entity_type: protocol
+aliases: ["TNSR", "Tensor Trade", "TensorTrade", "tensor.trade"]
+entity_type: exchange
+founded: 2022
 headquarters: "Decentralized"
-website: "https://www.tensor.foundation"
-related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]"]
+website: "https://www.tensor.trade"
+related: ["[[crypto-markets]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[basis-trading]]", "[[magic-eden]]", "[[sudoswap]]", "[[nft]]", "[[nft-trading]]", "[[nft-arbitrage]]"]
 ---
 
 # Tensor
@@ -185,13 +186,51 @@ Auth: `X-API-Key` header. Endpoint catalog: [[cryptodataapi-hyperliquid]]. See a
 
 ---
 
+## How Tensor Works
+
+Tensor supports two parallel liquidity mechanisms on the same collection:
+
+1. **Orderbook listings** — seller-posted fixed-price listings plus collection-wide and trait-level bids; sweep, snipe, and bulk-list flows built in
+2. **AMM pools (TAMM)** — LPs deposit NFTs or SOL into [[sudoswap]]-style bonding curve pools (linear or exponential); the pool quotes a continuously updated bid/ask, making it an on-chain market maker for the collection
+
+Both venues share the same front end, so traders see aggregated best bid/ask across orderbook orders and pool quotes. This hybrid structure is the platform's main differentiator versus pure orderbook venues like [[magic-eden]] and pure AMM protocols like [[sudoswap]].
+
+## What Traders Use Tensor For
+
+- **Solana NFT sweeps** — bulk-buying floors across [[magic-eden]] and Tensor-listed inventory using the aggregator
+- **Trait sniping** — filtered bids on rare traits within popular Solana collections (Mad Lads, DeGods, Tensorians, SMB, y00ts)
+- **Market making via TAMM pools** — providing two-sided liquidity and earning the spread plus TNSR incentives
+- **Cross-venue arbitrage** — capturing spreads between Tensor orderbook, Tensor pools, and [[magic-eden]]'s Solana book
+- **Programmatic trading** — the Tensor API is widely used by Solana NFT bots for automated bidding and sniping
+
+## November 2025 Foundation Acquisition
+
+In **November 2025 the Tensor Foundation acquired the marketplace from Tensor Labs**, making two key changes:
+- **100% of marketplace fees now flow to the TNSR treasury** (previously 50%)
+- **~21.6% of unvested founder/Labs token supply was burned** — a shift favoring token holders
+
+TNSR saw a large speculative price spike in late 2025 driven by these structural changes. The 2026 roadmap centers on activating the Tensor DAO and exploring cross-chain tools.
+
+## Risks
+
+- **Chain-specific liquidity** — Tensor only covers Solana NFTs; Ethereum, Bitcoin Ordinals, and other chains require separate venues
+- **Incentive-driven volume** — a meaningful share of historical Tensor volume was driven by TNSR airdrop farming; compare activity across pre- and post-airdrop windows
+- **AMM pool risk** — TAMM pool LPs face inventory risk: if a collection's floor falls persistently, the pool accumulates NFTs at above-floor prices
+- **Token unlocks/emissions** — circulating supply is only ~1/3 of max supply; scheduled unlocks and emissions are a persistent overhang
+
 ## See Also
 
 - [[crypto-markets]]
 - [[solana]]
+- [[magic-eden]]
+- [[nft]]
+- [[nft-arbitrage]]
 
 ---
 
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-07-16]])
+- Tensor official site: https://www.tensor.trade
+- Messari — Tensor (TNSR) project page
+- Verified via web search, 2026-06-11

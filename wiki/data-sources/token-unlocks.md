@@ -8,7 +8,7 @@ tags: [data-provider, crypto, altcoins, event-driven]
 aliases: ["TokenUnlocks", "Token Unlock Calendar", "Vesting Calendar", "Token Unlock Trackers"]
 source_type: data
 source_url: "https://token.unlocks.app"
-related: ["[[token-unlock-arbitrage]]", "[[token-unlocks]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[whale-alert]]", "[[arkham-intelligence]]", "[[crypto-data-sources]]", "[[cryptodataapi]]"]
+related: ["[[token-unlock-arbitrage]]", "[[token-unlocks-narrative]]", "[[crypto-trading-sessions]]", "[[session-overlap-liquidity]]", "[[crypto-weekday-weekend-etf-era]]", "[[whale-alert]]", "[[arkham-intelligence]]", "[[crypto-data-sources]]", "[[cryptodataapi]]"]
 ---
 
 Token unlock trackers — most prominently **TokenUnlocks** (token.unlocks.app), plus unlock-calendar features on **CryptoRank**, **DefiLlama**, **Tokenomist**, and similar platforms — aggregate and visualize token unlock and vesting schedules across crypto projects. They surface upcoming supply events — cliffs, linear vests, ecosystem unlocks — that intraday and swing traders use to position around predictable supply pressure (Source: [[2026-04-22-gap-finder-crypto-intraday-session-liquidity-effect]]). This page covers the unlock-calendar data category; for the broader directional/narrative impact of unlocks on price see [[token-unlocks|Token Unlocks & Vesting Cliffs (narrative)]]. Note that [[token-terminal|Token Terminal]] is a protocol-fundamentals platform, not an unlock tracker, and is covered separately.

@@ -2,12 +2,15 @@
 title: "Cross Margin vs Isolated Margin"
 type: comparison
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-07-19
 status: good
-tags: [comparisons, margin, leverage, risk-management, crypto]
+tags: [comparisons, margin, leverage, risk-management, crypto, market-microstructure, derivatives]
+aliases: ["cross-margin", "isolated-margin", "cross-vs-isolated", "margin-mode"]
 subjects: ["[[margin]]", "[[leverage]]"]
 comparison_dimensions: [risk-sharing, liquidation, capital-efficiency, use-case, risk]
-related: ["[[liquidation]]", "[[perpetual-futures]]", "[[position-sizing]]", "[[risk-management]]", "[[binance]]"]
+domain: [market-microstructure, risk-management]
+prerequisites: ["[[maintenance-margin]]", "[[leverage]]", "[[liquidation]]"]
+related: ["[[liquidation]]", "[[perpetual-futures]]", "[[position-sizing]]", "[[risk-management]]", "[[binance]]", "[[maintenance-margin]]", "[[mark-price]]", "[[liquidation-cascade]]", "[[crypto-perpetual-futures]]", "[[delta-neutral]]"]
 ---
 
 ## Overview
@@ -74,6 +77,17 @@ Consider a trader with $10,000 in their account who opens two positions:
 - You want to risk only a specific dollar amount per trade
 - You are testing a new strategy and want to contain losses
 - You follow strict [[risk-management]] rules (e.g., risk 1-2% per trade)
+
+## Auto-Deleveraging Interaction
+
+When a liquidation cannot be filled in the market without further loss and the venue's insurance fund is insufficient, exchanges may use **auto-deleveraging (ADL)**: profitable opposing traders are forcibly partially closed at the bankruptcy price to absorb the shortfall. Margin mode interacts with this — large cross positions that blow through their entire account are a common source of ADL events, and traders running winning positions can be deleveraged through no fault of their own during a [[liquidation-cascade]].
+
+## Risks and Pitfalls
+
+- **Cross account wipeouts** — a single mismanaged position can liquidate everything, including unrelated winners
+- **False security under isolated** — capped loss is comforting, but the position liquidates faster, so it is easier to get stopped out by noise
+- **ADL surprises** — even a correct, profitable position can be auto-deleveraged during cascades
+- **Mode-switch mistakes** — flipping modes mid-trade changes the liquidation price; do it deliberately, not in a panic
 
 ## Verdict
 

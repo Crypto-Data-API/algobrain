@@ -1,4 +1,4 @@
----
+﻿---
 title: "FTX Collapse"
 type: news
 created: 2026-04-06
@@ -82,7 +82,7 @@ The collapse sent shockwaves through the entire [[crypto]] ecosystem:
 - **[[bitcoin]]** fell from approximately $21,000 to roughly $15,500, hitting its cycle low.
 - **[[solana]]** (SOL), closely associated with SBF and FTX/Alameda, crashed over 60% in the weeks following the collapse.
 - **FTT** went from approximately $25 to under $1, a near-total loss.
-- **[[contagion|Contagion]] spread rapidly**: [[blockfi]], which had significant exposure to FTX, filed for bankruptcy in late November. [[genesis]] Global Capital halted withdrawals and later filed for bankruptcy. [[voyager-digital]], already weakened by the [[terra-luna]] collapse, saw its acquisition by FTX reversed. The 2022 sequence — [[terra-luna]] (May) → Three Arrows Capital → Celsius/Voyager → FTX (November) — was a daisy chain of interlinked crypto credit, each failure feeding the next.
+- **[[contagion|Contagion]] spread rapidly**: [[blockfi]], which had significant exposure to FTX, filed for bankruptcy in late November. [[genesis]] Global Capital halted withdrawals and later filed for bankruptcy. [[voyager-digital]], already weakened by the [[terra-luna-collapse-2022]] collapse, saw its acquisition by FTX reversed. The 2022 sequence — [[terra-luna-collapse-2022]] (May) → Three Arrows Capital → Celsius/Voyager → FTX (November) — was a daisy chain of interlinked crypto credit, each failure feeding the next.
 - Total [[crypto-market]] capitalization fell below $800 billion, down from nearly $3 trillion at the November 2021 peak.
 
 ## Regulatory Fallout
@@ -106,7 +106,7 @@ The FTX collapse reinforced several critical principles for anyone trading in [[
 
 - [[sam-bankman-fried]], [[alameda-research]], [[ftt]], [[binance]] — the principals and instruments
 - [[bank-run]], [[liquidity-risk]], [[counterparty-risk]], [[contagion]] — the mechanisms
-- [[terra-luna]], [[blockfi]], [[genesis]], [[voyager-digital]] — the 2022 contagion chain
+- [[terra-luna-collapse-2022]], [[blockfi]], [[genesis]], [[voyager-digital]] — the 2022 contagion chain
 - lehman-brothers, [[2008-global-financial-crisis]] — the closest traditional-finance analogues
 - [[self-custody]], [[crypto-winter]], [[solana]], [[bitcoin]]
 

@@ -22,7 +22,7 @@ The field moves fast: transformer-based models, reinforcement learning agents, a
 
 - [[ml-trading-pipeline]] -- End-to-end guide from data to live signals
 - [[xgboost-trading]] -- Gradient-boosted trees, the workhorse of tabular finance ML
-- [[data-sources-overview]] -- Where to get the data your models need
+- [[ai-data-providers-overview]] -- Where to get the data your models need
 - [[freqtrade]] -- Open-source crypto trading bot framework
 - [[backtesting-pitfalls]] -- Mistakes that make backtests lie to you
 
@@ -96,7 +96,7 @@ Autonomous systems that combine multiple AI capabilities (see [[ai-agents]] for 
 | [[zipline]] | Python | Developed by Quantopian, clean API | Event-driven backtesting |
 | [[vectorbt]] | Python | Vectorized (fast), pandas-based | Rapid prototyping, parameter sweeps |
 
-See [[backtesting-overview]] and [[backtrader-vs-zipline-vs-quantconnect]] for detailed comparisons.
+See [[ai-backtesting-overview]] and [[backtrader-vs-zipline-vs-quantconnect]] for detailed comparisons.
 
 ### Trading Bot Platforms
 
@@ -129,13 +129,13 @@ AI trading models are only as good as their data. Key categories:
 
 - **Price data (OHLCV)**: The foundation; available from exchanges, [[databento]], and free APIs
 - **Order book / Level 2 data**: Microstructure features for short-term models (see [[order-books]])
-- **Fundamental data**: Earnings, revenue, balance sheet items (see [[data-sources-overview]])
+- **Fundamental data**: Earnings, revenue, balance sheet items (see [[ai-data-providers-overview]])
 - **Alternative data**: Satellite imagery, web traffic, app downloads, credit card spending
 - **Sentiment data**: News, social media, earnings call transcripts
 - **Options data**: Implied volatility surfaces, unusual activity, put/call ratios (see [[implied-volatility]])
 - **On-chain data (crypto)**: Wallet movements, exchange flows, DeFi TVL (see [[exchange-data-sources]])
 
-See [[data-sources-overview]] and [[data-providers-overview]] for provider catalogs.
+See [[ai-data-providers-overview]] and [[data-providers-overview]] for provider catalogs.
 
 ## Infrastructure Needs
 
@@ -167,7 +167,7 @@ See [[ai-trading-risks]] for a comprehensive treatment of what can go wrong.
 
 - [[ml-models-overview|ML Models]] -- Machine learning models applied to trading
 - [[trading-bots-overview|Trading Bots]] -- Automated trading bot systems
-- [[backtesting-overview|Backtesting]] -- Strategy backtesting frameworks and methodology
+- [[ai-backtesting-overview|Backtesting]] -- Strategy backtesting frameworks and methodology
 - [[data-providers-overview|Data Providers]] -- Market data sources and APIs
 - [[infrastructure-overview|Infrastructure]] -- Trading infrastructure and systems
 

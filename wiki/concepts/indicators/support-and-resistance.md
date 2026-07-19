@@ -7,7 +7,7 @@ status: good
 tags: [technical-analysis, indicators]
 aliases: [support, resistance, "S/R", "support-resistance", "Support Level", "Resistance Level", "S/R Levels"]
 domain: [indicators]
-prerequisites: ["[[technical-analysis-overview]]"]
+prerequisites: ["[[indicators-ta-primer]]"]
 difficulty: beginner
 related:
   - "[[moving-averages]]"
@@ -25,7 +25,7 @@ related:
 
 # Support and Resistance
 
-Support and resistance are **price levels where buying or selling pressure has historically been strong enough to halt or reverse a price move**. Support acts as a floor where demand absorbs selling pressure; resistance acts as a ceiling where supply overwhelms buying pressure. They are the most foundational concept in [[technical-analysis-overview|technical analysis]] — virtually every chart-based strategy references them for entries, exits, and [[stop-loss]] placement.
+Support and resistance are **price levels where buying or selling pressure has historically been strong enough to halt or reverse a price move**. Support acts as a floor where demand absorbs selling pressure; resistance acts as a ceiling where supply overwhelms buying pressure. They are the most foundational concept in [[indicators-ta-primer|technical analysis]] — virtually every chart-based strategy references them for entries, exits, and [[stop-loss]] placement.
 
 ## Overview
 
@@ -78,7 +78,7 @@ Place stops **beyond** the level, not exactly at it, to allow room for wicks and
 ## Related
 
 - [[support-resistance-breakout]] — breakout strategy built on S/R
-- [[technical-analysis-overview]] — broader TA framework
+- [[indicators-ta-primer]] — broader TA framework
 - [[fibonacci-retracement]] — Fibonacci-derived S/R
 - [[volume-profile]] — volume-based S/R
 - [[swing-high]] / [[swing-low]] — the pivots that define horizontal levels

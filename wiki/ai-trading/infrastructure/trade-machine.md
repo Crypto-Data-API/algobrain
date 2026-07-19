@@ -12,7 +12,7 @@ confidence: medium
 related:
   - "[[options-concentration-risk]]"
   - "[[backtesting]]"
-  - "[[backtesting-overview]]"
+  - "[[ai-backtesting-overview]]"
   - "[[options-greeks]]"
   - "[[convex-trading]]"
   - "[[pivolio]]"
@@ -98,7 +98,7 @@ For concentration management, Trade Machine is upstream of the live portfolio �
 
 - [[options-concentration-risk]] — Trade Machine is upstream of concentration management
 - [[backtesting]] — broader backtesting context
-- [[backtesting-overview]] — framework comparison
+- [[ai-backtesting-overview]] — framework comparison
 - [[backtesting-pitfalls]] — overfitting risks particularly relevant to no-code backtesters
 - [[convex-trading]] — comparable third-party options analytics
 - [[pivolio]] — comparable third-party options portfolio tool

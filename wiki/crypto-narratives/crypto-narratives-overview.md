@@ -1,4 +1,4 @@
----
+﻿---
 title: "Crypto Narratives — Impact Catalog Overview"
 type: overview
 created: 2026-06-04
@@ -71,9 +71,9 @@ timing: an unlock is `sell-pressure` / `supply-overhang` (bearish, pre-priced), 
 
 | Category | Bias | Arch | Inst | Headline instance |
 |----------|------|-----:|-----:|-------------------|
-| [[token-unlocks]] | bearish | 3 | 16 | WLD scheduled unlock −9.8% (−21.9% DD), 2025-07-25 |
+| [[token-unlocks-narrative]] | bearish | 3 | 16 | WLD scheduled unlock −9.8% (−21.9% DD), 2025-07-25 |
 | [[stablecoin-supply]] | mixed | 4 | 14 | 2020–21 USDT doubling → BTC +311%; cap record $322B (May-2026) yet BTC −40% YTD (dry powder ≠ timing) |
-| [[bitcoin-halving]] | bullish | 3 | 10 | CYCLE-BREAKER: 2025 = first-ever RED post-halving year (+31% at 1yr vs +300/+567%); ETF flows > supply shock; 2025-26 bear −52% |
+| [[bitcoin-halving-narrative]] | bullish | 3 | 10 | CYCLE-BREAKER: 2025 = first-ever RED post-halving year (+31% at 1yr vs +300/+567%); ETF flows > supply shock; 2025-26 bear −52% |
 | [[bitcoin-dominance-rotation]] | mixed | 2 | 5 | June 2026 = Bitcoin Season (BTC.D ~58.7%, ASI ~49), NOT alt-season |
 | [[corporate-treasury]] | mixed | 3 | 20 | MSTR 843,706 BTC + first SALE since 2022 (32 BTC, "never-sell cracks" → BTC −4.5%); SpaceX 18,712 BTC; Bitmine 5.42M ETH |
 | [[spot-etf-flows]] | mixed | 3 | 16 | BTC ETF → −14%; ETH/SOL ETFs ≠ floor (SOL −57% post-launch); ZEC +180% on ETF filing |

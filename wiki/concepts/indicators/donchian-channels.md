@@ -6,7 +6,7 @@ updated: 2026-06-21
 status: excellent
 tags: [indicators, technical-analysis, volatility, breakout, trend-following]
 aliases: ["Donchian Channel", "Donchian", "Donchian Channels"]
-prerequisites: ["[[technical-analysis-overview]]"]
+prerequisites: ["[[indicators-ta-primer]]"]
 domain: [indicators]
 difficulty: beginner
 related: ["[[richard-donchian]]", "[[donchian-channel-breakout]]", "[[turtle-trading]]", "[[turtle-traders]]", "[[atr]]", "[[average-true-range]]", "[[keltner-channels]]", "[[bollinger-bands]]", "[[breakout]]", "[[consolidation]]", "[[support]]", "[[resistance]]", "[[trend-following]]", "[[trailing-stop]]"]

@@ -163,7 +163,7 @@ For automated and AI-driven strategies, the relevant axis is not the GUI but the
 ### How automated systems use these platforms
 
 1. **Data ingestion** — WebSocket feeds (CEX) or RPC/subgraph queries (DEX) stream order-book depth, trades, funding rates, and on-chain pool state into the strategy. Latency-sensitive systems co-locate or use the lowest-latency endpoint (FIX or direct L1).
-2. **Signal + decision** — the model or rule set consumes that data; an AI agent (e.g., an LLM-driven research/execution loop) may also pull fundamentals and news from separate [[data-sources-overview|data sources]] before deciding.
+2. **Signal + decision** — the model or rule set consumes that data; an AI agent (e.g., an LLM-driven research/execution loop) may also pull fundamentals and news from separate [[ai-data-providers-overview|data sources]] before deciding.
 3. **Execution** — orders are placed via REST/WebSocket (CEX) or as signed transactions to router/perp contracts (DEX). [[dex-aggregators|Aggregators]] like Jupiter or 1inch are called to split orders and minimize price impact.
 4. **Risk + reconciliation** — positions, fills, and balances are polled back to enforce limits, stops, and [[risk-management|risk controls]]; on-chain systems also monitor for [[mev]] / sandwich exposure.
 

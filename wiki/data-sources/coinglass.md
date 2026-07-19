@@ -2,7 +2,7 @@
 title: "Coinglass"
 type: source
 created: 2026-05-14
-updated: 2026-06-12
+updated: 2026-07-19
 status: good
 tags: [data-provider, derivatives, perpetual-futures, funding-rate, liquidations, crypto]
 aliases: ["Coinglass.com", "Bybt", "CoinGlass"]
@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://www.coinglass.com"
 source_author: "Coinglass"
 confidence: high
-related: ["[[funding-rate]]", "[[perpetual-futures]]", "[[open-interest]]", "[[liquidation]]", "[[polymarket-as-crypto-leading-indicator]]", "[[cme-fedwatch]]", "[[information-arbitrage]]"]
+related: ["[[funding-rate]]", "[[perpetual-futures]]", "[[open-interest]]", "[[liquidation]]", "[[polymarket-as-crypto-leading-indicator]]", "[[cme-fedwatch]]", "[[information-arbitrage]]", "[[coingecko]]", "[[dex-screener]]", "[[liquidation-cascade-modeling]]", "[[auto-deleveraging]]", "[[2025-10-crypto-liquidation-cascade]]", "[[crypto-perp-backtesting-pitfalls]]"]
 ---
 
 Coinglass (formerly Bybt, rebranded in 2022) is the de facto aggregator for crypto derivatives data. It pulls feeds from 25+ exchanges — [[binance]], OKX, [[bybit]], [[deribit]], BitMEX, dYdX, [[hyperliquid]], and others — and unifies funding rates, open interest, liquidations, long/short ratios, options metrics, and order-book heatmaps into a single browser dashboard and API surface. For any crypto trader running positioning-aware strategies, Coinglass is the practical first stop.
@@ -47,6 +47,56 @@ Coinglass is the natural counterpart to a Polymarket-leads-crypto thesis because
 - **Sentiment regime** — sustained negative funding across all majors marks a fear regime; sustained extreme-positive funding marks euphoria. Both are mean-revertible.
 - **PM signal corroboration** — when a Polymarket Fed-cut probability spikes intraday, check whether STIR proxies and BTC/ETH funding rates align before acting on PM as a lead.
 - **Open-interest divergence** — price up + OI flat is a weak rally (mostly spot or short-covering); price up + OI up is a leveraged trend (more energy, but more fragile to liquidation cascades).
+
+## Paid Tiers
+
+| Plan | Price | Key Features |
+|------|-------|-------------|
+| Free | $0 | Full web access, basic features |
+| Basic API | $59/mo | API access, historical data |
+| Pro API | $199/mo | Higher limits, more endpoints |
+| Enterprise | Custom | Full data access, dedicated support |
+
+The free web version covers most trader needs. API plans are primarily for building automated systems that consume Coinglass data programmatically.
+
+## API Details
+
+- **Authentication**: API key (paid plans only)
+- **Format**: JSON
+- **Key endpoints**: `/api/futures/funding-rate`, `/api/futures/open-interest`, `/api/futures/liquidation`
+
+```python
+import requests
+headers = {"coinglassSecret": "YOUR_API_KEY"}
+# Get funding rates
+funding = requests.get("https://open-api.coinglass.com/public/v2/funding",
+                       headers=headers).json()
+# Get open interest
+oi = requests.get("https://open-api.coinglass.com/public/v2/open_interest",
+                   headers=headers, params={"symbol": "BTC"}).json()
+```
+
+## Liquidation Cascade Data
+
+Coinglass's most distinctive dataset is its **historical liquidation feed**, aggregated across the major centralized perp venues — Binance, Bybit, OKX, [[hyperliquid]], Bitget, dYdX — with per-trade granularity going back several years. For each forced close it captures: timestamp, exchange, symbol, side, size in USD, price, and (where exposed) the liquidation type (mark-price vs. ADL).
+
+Sub-products built on this feed:
+
+- **Liquidation heatmaps**: estimated cluster of stop and liquidation prices by leverage tier, derived from public OI distributions. Useful for identifying levels where a cascade is mechanically likely.
+- **Funding-rate term-structure dashboards**: 8h, 1d, 7d, 30d annualised funding rates per exchange and per symbol, with cross-venue divergence views.
+- **OI / funding heatmap composites**: overlay of open-interest concentration with funding extremes — flags the venues most exposed to a given crowding regime.
+- **Long/Short ratio histories** per exchange and per account-class (top-trader, all-trader) — useful as a contrarian sentiment filter.
+- **ETF flow reconciliation**: BTC/ETH ETF net-flow data alongside perp positioning, allowing cash-and-carry / basis backtests to use a single, time-aligned dataset.
+
+For perp-strategy researchers this is the closest available public proxy for what a top-tier shop reconstructs from raw exchange feeds (Kaiko, Amberdata).
+
+## Backtesting Use Cases
+
+- **Stress-testing strategies against the Oct 10-11 2025 cascade**: replay the ~$20B liquidation event using the per-minute liquidation feed alongside mark-price data. See [[2025-10-crypto-liquidation-cascade]] and [[liquidation-cascade-modeling]].
+- **Validating ADL exposure assumptions**: by cross-referencing the public liquidation feed with insurance-fund balance changes, a researcher can detect periods when [[auto-deleveraging|ADL]] events likely occurred. Most retail backtests assume liquidations only hit losing positions; ADL invalidates that assumption.
+- **Modelling realistic liquidation triggers**: instead of using a fixed liquidation price, calibrate to the empirical distribution of per-symbol liquidation prices — capturing the real interaction between mark-price methodology, funding flows, and dynamic margin tiers.
+- **Funding-rate regime detection**: feed funding-rate term-structure series into [[market-regime-detection-ml|regime classifiers]].
+- **Capacity calibration**: compare 24h liquidation totals and OI per venue to estimate the ceiling at which a strategy starts to cause the cascades it tries to exploit.
 
 ## Comparison to alternatives
 

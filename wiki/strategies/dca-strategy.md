@@ -2,10 +2,10 @@
 title: "Dollar-Cost Averaging"
 type: strategy
 created: 2026-04-15
-updated: 2026-06-21
+updated: 2026-07-19
 status: excellent
 tags: [position-trading, portfolio-theory, education]
-aliases: ["DCA", "DCA Strategy", "Dollar Cost Averaging"]
+aliases: ["DCA", "DCA Strategy", "Dollar Cost Averaging", "Systematic Investment Plan", "SIP", "Regular Investment"]
 strategy_type: quantitative
 timeframe: long-term
 markets: [crypto, etf]

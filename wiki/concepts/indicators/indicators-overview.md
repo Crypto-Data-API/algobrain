@@ -6,7 +6,7 @@ updated: 2026-07-13
 status: excellent
 tags: [indicators, concepts, index]
 aliases: ["Technical Indicators", "Indicators Overview", "Indicator Index"]
-related: ["[[technical-analysis-overview]]", "[[triple-screen-system]]", "[[regime-matrix]]", "[[rsi]]", "[[macd]]", "[[bollinger-bands]]", "[[vwap]]", "[[cryptodataapi]]"]
+related: ["[[indicators-ta-primer]]", "[[triple-screen-system]]", "[[regime-matrix]]", "[[rsi]]", "[[macd]]", "[[bollinger-bands]]", "[[vwap]]", "[[cryptodataapi]]"]
 ---
 
 # Technical Indicators
@@ -135,7 +135,7 @@ Professional traders typically layer 2-4 complementary indicators across differe
 
 ### Layering across timeframes
 
-The most disciplined way to combine indicators is not just by category but by *timeframe*: use a slow trend tool on a high timeframe to set direction, then a fast oscillator on a lower timeframe to time entries. This is exactly the structure of Elder's [[triple-screen-system|Triple Screen]] (weekly [[macd|MACD]]-Histogram for trend, daily oscillator for timing) and the general principle of [[multi-timeframe-confluence]]. See the [[technical-analysis-overview]] strategy hub for the strategies that operationalise these combinations.
+The most disciplined way to combine indicators is not just by category but by *timeframe*: use a slow trend tool on a high timeframe to set direction, then a fast oscillator on a lower timeframe to time entries. This is exactly the structure of Elder's [[triple-screen-system|Triple Screen]] (weekly [[macd|MACD]]-Histogram for trend, daily oscillator for timing) and the general principle of [[multi-timeframe-confluence]]. See the [[indicators-ta-primer]] strategy hub for the strategies that operationalise these combinations.
 
 ## Choosing an Indicator (decision aid)
 
@@ -209,7 +209,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-indicators]].
 
 ## Related
 
-- [[technical-analysis-overview]] — the strategy hub that turns these indicators into tradeable systems
+- [[indicators-ta-primer]] — the strategy hub that turns these indicators into tradeable systems
 - [[triple-screen-system]] — flagship method layering a trend indicator and an oscillator across timeframes
 - [[multi-timeframe-confluence]] — the principle of confirming signals across timeframes
 - [[regime-matrix]] — which indicator families fit which market regime

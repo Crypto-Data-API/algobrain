@@ -1,4 +1,4 @@
----
+﻿---
 title: "Crypto Flash Crashes"
 type: concept
 created: 2026-04-13
@@ -6,7 +6,7 @@ updated: 2026-06-12
 status: good
 tags: [history, crashes, crypto, market-microstructure, risk-management]
 aliases: ["crypto flash crash", "crypto liquidation cascade", "crypto crash"]
-related: ["[[flash-crashes]]", "[[terra-luna]]", "[[ftx-collapse]]", "[[circuit-breakers]]", "[[liquidity]]", "[[bitcoin]]", "[[ethereum]]", "[[crypto-markets]]", "[[2025-10-crypto-liquidation-cascade]]", "[[auto-deleveraging]]", "[[perpetual-futures]]", "[[liquidation-risk]]"]
+related: ["[[flash-crashes]]", "[[terra-luna-collapse-2022]]", "[[ftx-collapse]]", "[[circuit-breakers]]", "[[liquidity]]", "[[bitcoin]]", "[[ethereum]]", "[[crypto-markets]]", "[[2025-10-crypto-liquidation-cascade]]", "[[auto-deleveraging]]", "[[perpetual-futures]]", "[[liquidation-risk]]"]
 ---
 
 Crypto markets experience flash crashes with a frequency and severity unmatched in traditional finance. The combination of 24/7 trading, no [[circuit-breakers]], extreme leverage (up to 100x on some exchanges), fragmented [[liquidity]], and a large retail participant base creates conditions where 20-50% drops in minutes are a recurring feature rather than a rare anomaly.
@@ -28,7 +28,7 @@ Traditional equity and futures markets have structural safeguards that crypto la
 |------|-------|------|----------|-------|
 | Mar 12-13, 2020 | BTC | -50% ($7,900 → $3,800) | ~24 hours | COVID panic + BitMEX liquidation cascade |
 | May 19, 2021 | BTC | -30% ($43K → $30K) | ~hours | China mining crackdown + Elon Musk tweets + exchange liquidation cascade. Over $8B in liquidations across exchanges. |
-| May 2022 | LUNA | -99.99% | ~7 days | [[terra-luna]] death spiral — algorithmic stablecoin depeg triggered hyperinflation of LUNA token. $50B+ wiped. |
+| May 2022 | LUNA | -99.99% | ~7 days | [[terra-luna-collapse-2022]] death spiral — algorithmic stablecoin depeg triggered hyperinflation of LUNA token. $50B+ wiped. |
 | Nov 2022 | FTT/SOL | -90%+ | days | [[ftx-collapse]]: exchange insolvency exposed. Contagion across entire crypto market. |
 | Sep 2023 | Various | BTC -7% in minutes | minutes | Suspected whale manipulation during low-liquidity period. |
 | Aug 5, 2024 | BTC | -15% ($62K → $49K) | ~hours | Yen carry trade unwind + global equity selloff. $1B+ in crypto liquidations. |
@@ -80,7 +80,7 @@ For traders operating in crypto markets, surviving flash crashes requires struct
 
 - [[flash-crashes]] — Flash crashes across all asset classes
 - [[2025-10-crypto-liquidation-cascade]] — The largest crypto liquidation event and first systemic ADL crisis
-- [[terra-luna]] — The largest crypto collapse by dollar value
+- [[terra-luna-collapse-2022]] — The largest crypto collapse by dollar value
 - [[ftx-collapse]] — Exchange insolvency and contagion
 - [[auto-deleveraging]] — The mechanism that broke neutral books in October 2025
 - [[circuit-breakers]] — The safety mechanism crypto lacks

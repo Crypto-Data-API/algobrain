@@ -8,7 +8,7 @@ tags: [backtesting, algorithmic, python, ai-trading, open-source]
 domain: [backtesting]
 difficulty: intermediate
 aliases: ["PyAlgoTrade", "pyalgotrade"]
-related: ["[[backtrader-framework]]", "[[zipline]]", "[[backtesting]]", "[[event-driven-backtesting]]", "[[walk-forward-validation]]", "[[python]]", "[[quantconnect]]", "[[backtesting-overview]]", "[[algorithmic-trading]]"]
+related: ["[[backtrader-framework]]", "[[zipline]]", "[[backtesting]]", "[[event-driven-backtesting]]", "[[walk-forward-validation]]", "[[python]]", "[[quantconnect]]", "[[ai-backtesting-overview]]", "[[algorithmic-trading]]"]
 ---
 
 PyAlgoTrade is an open-source [[python]] [[event-driven-backtesting|event-driven]] [[backtesting]] framework originally created by Gabriel Becedillas. It supports backtesting, paper trading, and live trading against a small set of broker integrations, and ships with a library of common technical indicators and data-feed adapters. Within the Python backtesting landscape, PyAlgoTrade sits between the lightweight scripted approaches and the heavier institutional frameworks like [[zipline]] — it is roughly comparable in scope to [[backtrader-framework|Backtrader]] but with a smaller surface area and a noticeably slower development cadence in recent years. (Source: [[2026-04-22-gap-finder-options-portfolios]])
@@ -86,7 +86,7 @@ For most new projects in 2026, however, the realistic recommendation is to **pre
 
 - [[backtrader-framework|Backtrader]] — the most direct active alternative
 - [[zipline]] — a more institutional-grade Python backtester
-- [[backtesting]], [[backtesting-overview]] — the broader discipline and tool survey
+- [[backtesting]], [[ai-backtesting-overview]] — the broader discipline and tool survey
 - [[event-driven-backtesting]] — the underlying architectural pattern
 - [[walk-forward-validation]] — validation methodology that pairs with any backtester
 - [[python]] — the host language

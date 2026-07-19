@@ -2,11 +2,11 @@
 title: "AI & Agent Token Narrative — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-07-19
 status: good
 tags: [crypto, ai-trading, event-driven, market-regime, behavioral-finance, liquidity, narrative-impact]
-aliases: []
-related: ["[[crypto-narratives-overview]]"]
+aliases: ["AI Tokens", "AI Agent Tokens"]
+related: ["[[crypto-narratives-overview]]", "[[ai-trading-agents]]", "[[defai]]", "[[ai-narrative-arc]]", "[[eliza-framework]]", "[[artificial-intelligence]]", "[[crypto-markets]]"]
 domain: [market-microstructure, behavioral-finance]
 difficulty: intermediate
 ---
@@ -103,6 +103,38 @@ Who is on the other side: early bonding-curve buyers, whales, and macro-aware "s
 | 2025-03-18 | AIXBT agent dashboard hacked; ~55.5 ETH (~$100K) drained | AIXBT | -16% to -22% | 24h | high | [decrypt](https://decrypt.co/310510/aixbt-ai-influencer-hacked-100k-ethereum) |
 | 2025-02-13 | Bittensor dTAO goes live; every subnet gets an Alpha token + pool | subnet alpha tokens | launch spike then -30% to -70% dip | days after each launch | medium | [oakresearch](https://oakresearch.io/en/analyses/fundamentals/bittensor-tao-dynamic-tao-dtao-upgrade-changes-everything) |
 | 2025-06-04 | TAO trades with the broad AI/alt downtrend (CoinGecko-measured) | TAO | -13.43% (max DD -33.12%) | 2025-06-04 to 2025-06-30 | high | [coingecko](https://www.coingecko.com/en/coins/bittensor) |
+
+## Sector Landscape (April 2026 snapshot)
+
+### Top AI Tokens by Market Cap
+
+| Token | Name | Market Cap | Category | What It Does |
+|-------|------|-----------|----------|-------------|
+| [[bittensor\|TAO]] | Bittensor | ~$3.1B | Infrastructure | Decentralized AI/ML network with subnet architecture |
+| [[artificial-superintelligence-alliance\|FET]] | ASI Alliance | ~$540M | Infrastructure | Merged SingularityNET + Fetch.ai + Ocean Protocol |
+| [[render-token\|RNDR]] | Render | ~$2.5B | Compute | Decentralized GPU rendering for AI/3D |
+| [[akash-network\|AKT]] | Akash | ~$500M | Compute | Decentralized cloud compute marketplace |
+| [[virtuals-protocol\|VIRTUAL]] | Virtuals Protocol | ~$430M | Agent platform | Tokenized AI agent launchpad on Eliza |
+| [[the-graph\|GRT]] | The Graph | ~$1B | Data | Indexing protocol for blockchain data (AI data layer) |
+| [[aethir\|ATH]] | Aethir | ~$300M | Compute | Decentralized GPU cloud for AI |
+| [[aixbt\|AIXBT]] | AIXBT | ~$25M | Agent | AI agent for crypto market analysis |
+
+### Category Breakdown
+
+- **Infrastructure / Compute**: Bittensor (TAO), Render (RNDR), Akash (AKT), Aethir (ATH), io.net — "picks and shovels" that benefit regardless of which specific agents succeed
+- **Data layer**: The Graph (GRT), Ocean Protocol (merged into FET/ASI)
+- **Agent Platforms**: Virtuals Protocol (VIRTUAL), ai16z, Cookie DAO — enable creation, deployment, or tokenization of AI agents
+- **Individual Agent Tokens**: AIXBT, GOAT, and hundreds of pump.fun/Virtuals graduates with minimal differentiation
+- **AI + DeFi ([[defai\|DeFAI]])**: yield optimization agents, automated portfolio management, AI-powered trading execution
+
+### The Honest Assessment
+
+Most AI agent tokens are **narrative plays**, not technology investments. Key evaluation questions:
+1. Does this project need a token? Many AI projects function fine without one — the token is often just fundraising.
+2. Is there genuine AI technology, or is "AI" just marketing for a simple bot?
+3. What's the revenue model? Infrastructure tokens (compute, data) have clearer monetization.
+4. Token distribution: are early investors/team dumping on retail?
+5. Survival beyond hype: did the project exist before the AI mania, or was it launched to ride the wave?
 
 ## Backtest features
 

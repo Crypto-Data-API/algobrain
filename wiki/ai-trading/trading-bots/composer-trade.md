@@ -15,7 +15,7 @@ related:
   - "[[alpaca]]"
   - "[[tradingview-platform]]"
   - "[[freqtrade]]"
-  - "[[backtesting-overview]]"
+  - "[[ai-backtesting-overview]]"
   - "[[trading-platforms]]"
   - "[[traderspost]]"
 ---
@@ -199,7 +199,7 @@ As of 2026:
 
 - [[quantconnect]] -- Code-based alternative with deeper backtesting
 - [[alpaca]] -- Brokerage backend powering Composer's execution
-- [[backtesting-overview]] -- Methodology for testing strategies against historical data
+- [[ai-backtesting-overview]] -- Methodology for testing strategies against historical data
 - [[backtesting-pitfalls]] -- Common mistakes in strategy backtesting
 - [[freqtrade]] -- Open-source alternative for crypto bot trading
 - [[tradingview-platform]] -- Charting platform with signal generation

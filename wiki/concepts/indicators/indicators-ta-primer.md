@@ -1,8 +1,8 @@
 ---
-title: "Technical Analysis"
+title: "Technical Analysis — Indicators & Concepts Primer"
 type: concept
 created: 2026-04-06
-updated: 2026-04-06
+updated: 2026-07-19
 status: good
 confidence: medium
 tags: [technical-analysis, strategies, concepts]

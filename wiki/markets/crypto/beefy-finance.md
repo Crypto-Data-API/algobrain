@@ -5,11 +5,12 @@ created: 2026-07-16
 updated: 2026-07-16
 status: draft
 tags: [crypto, defi]
-aliases: ["BIFI"]
+aliases: ["BIFI", "Beefy Finance", "Beefy"]
 entity_type: protocol
-headquarters: "Decentralized"
+founded: 2020
+headquarters: "Decentralized (no headquarters)"
 website: "https://beefy.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[defi]]", "[[yield-farming]]", "[[defi-yield-farming]]", "[[impermanent-loss]]", "[[smart-contract-risk]]", "[[yearn]]"]
 ---
 
 # Beefy
@@ -155,13 +156,58 @@ There are lots of farms to choose from acro...
 
 ---
 
+## How Beefy Works
+
+Beefy Finance is a multichain [[yield-farming|yield optimizer]] that auto-compounds vault yields across 50+ blockchain networks including [[ethereum]], BNB Chain, Polygon, [[arbitrum]], Optimism, Avalanche, and Fantom. Users deposit LP tokens or single assets into Beefy vaults; the protocol automatically harvests reward tokens and reinvests them to maximize compounding returns.
+
+**Vault model:**
+1. Users deposit LP tokens, single assets, or staked tokens into a Beefy vault
+2. Smart contracts periodically claim reward tokens from the underlying farm
+3. Harvested rewards are swapped back into the deposited asset and reinvested, compounding the position
+4. Fee structure: ~4.5% of harvested rewards (split between treasury, harvest caller, and BIFI stakers)
+
+Auto-compounding saves significant gas costs and removes the need to manually claim and reinvest rewards. A vault compounding every 8 hours dramatically outperforms a farmer compounding weekly.
+
+## BIFI Token
+
+The BIFI governance token has a **fixed supply of 80,000 tokens** (no emissions schedule) used for:
+- **Revenue sharing:** BIFI stakers earn a share of platform performance fees across all vaults and chains
+- **Governance:** Token holders vote on new vault deployments, fee structures, and protocol upgrades
+- **Multichain deployment:** BIFI is available on most chains where Beefy operates, bridgeable across networks
+
+Unlike most DeFi governance tokens, BIFI has no emissions schedule — all 80,000 tokens were minted at launch, making it deflationary relative to protocols with ongoing emissions.
+
+## 2025-2026 Status
+
+- **TVL:** ~$142M across the multichain vault network as of mid-2026 (DefiLlama / Stelareum) — well below cycle peaks, reflecting broader DeFi yield-farming TVL contraction
+- **Binance BIFI delisting (April 2026):** Binance placed BIFI under a monitoring tag in June 2025 and delisted on April 23, 2026, removing a major CEX liquidity venue and pressuring the token. BIFI holders now face narrower CEX access and reliance on DEX/on-chain liquidity
+
+## Risks
+
+- **Smart contract risk (stacked):** Beefy vaults interact with third-party protocols — a bug in either Beefy or the underlying farm can result in loss of funds
+- **Underlying protocol risk:** If the farm Beefy deposits into is exploited or rugged, vault depositors lose their funds
+- **Reward token depreciation:** Auto-compounding into a depreciating reward token can mask real losses
+- **[[impermanent-loss]]:** Vaults based on LP positions are subject to impermanent loss, which Beefy cannot mitigate
+- **Exchange/listing risk:** The Binance delisting narrows liquidity options for BIFI holders
+
+## Competitors
+
+- [[yearn|Yearn Finance]] — Ethereum-focused yield aggregator with more complex vault strategies
+- **Harvest Finance** — similar auto-compounding model, smaller multichain footprint
+- **Autofarm** — BSC-focused yield optimizer
+
 ## See Also
 
 - [[crypto-markets]]
 - [[ethereum]]
+- [[defi]]
+- [[yield-farming]]
+- [[impermanent-loss]]
 
 ---
 
 ## Sources
 
 - (Source: [[coingecko-top-1000-2026-07-16]])
+- [Beefy TVL (DefiLlama)](https://defillama.com/protocol/beefy)
+- Verified via Perplexity (sonar), 2026-06-10 (TVL ~$142M; Binance BIFI delisting scheduled 2026-04-23)

@@ -1,5 +1,5 @@
 ---
-title: "Trading Data Sources — Complete Guide"
+title: "AI-Trading Data Providers — Overview"
 type: concept
 created: 2026-04-06
 updated: 2026-04-06
