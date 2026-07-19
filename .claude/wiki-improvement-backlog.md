@@ -1,3 +1,40 @@
+# ★ CAMPAIGN 2 (armed 2026-07-19): 300k → 1M+ distinct strategy configurations
+
+GOAL GATE: each iteration runs `tools/count_configurations.py`; when distinct
+configurations ≥ 1,000,000, STOP the loop (CronDelete) and summarize. Planner = Fable 5
+(main session); executors = Sonnet sub-agents (one sub-agent per iteration; C4 enrichment
+waves may instead use ONE Workflow fan-out of Sonnet agents — pattern pre-approved by user
+for Trading-Profile waves). All Campaign-1 guardrails below still apply.
+
+- [ ] C1. Matrix v2 — 6 new primitive rows (MEV/execution, DeFi-yield/LP, options-RV
+      (skew/term-structure), prediction-markets, stablecoin/peg, whale/copy-flow): add rows
+      to combination-matrix.md with per-cell viability audit against the 10 existing
+      overlays (link existing pages where they already cover a cell — e.g. delta-neutral
+      yield, stablecoin-depeg family, jito/MEV pages), then author new combination pages in
+      batches of ~5 for viable uncovered cells (~35-45 pages est).
+- [ ] C2. Matrix v2 — 5 new overlay columns (BTC-dominance/alt-season gate, liquidity-depth
+      gate, ETF-flow gate, vol-term-structure gate, social-velocity gate) across all 18
+      rows: viability audit + batches of ~5 pages (~45-60 pages est). This is the
+      exponential lever (avg viable overlays/row 7 → ~9).
+- [ ] C3. Instrument structures: (a) basket library 27 → ~50 (new basket-definition pages
+      w/ constituents + rebalance rules); (b) "## Instrument structures" section (single |
+      pair | basket | cross-venue) added to the ~30 structure-capable strategy pages;
+      (c) pair-universe screening spec + generated data file (cointegration-screened HL
+      perp pairs); (d) counter picks up pair/basket spaces once (a)-(c) land.
+- [ ] C4. Asset expansion 481 → ~1,500 profiled: compute_tradable v2 (add OKX, Bybit,
+      Kraken, KuCoin public listings + DEX-liquidity tier), then Trading-Profile enrichment
+      waves on newly qualified assets (Workflow fan-outs, sonnet, ~250/wave).
+- [ ] C5. Counter + honest claims: tools/count_configurations.py (built at campaign start;
+      keep formula assumptions printed and conservative; composability haircut 0.5;
+      README/overview counts updated from its output — respect the two-locations rule).
+      Pair the public number with the validation asterisk (deflated-Sharpe discipline).
+
+## Campaign 2 progress log
+
+- 2026-07-19: Campaign armed. Counter built; baseline printed below.
+
+---
+
 # Wiki Improvement Backlog
 
 Consumed by the hourly improvement loop. Each iteration: the planner (main session) picks the

@@ -4,6 +4,16 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Campaign 2 armed: 300k → 1M+ distinct strategy configurations
+
+Second improvement campaign launched (hourly loop re-armed, goal-gated): expand the
+combination matrix to 18 primitives × 15 overlays, formalize pair/basket instrument
+structures, and widen the profiled tradable universe toward ~1,500 assets. New
+`tools/count_configurations.py` computes the configuration count from actual wiki state
+with printed conservative assumptions — baseline: **1,006 distinct designs, 401,128
+distinct configurations (40.1% of goal)**. The loop stops itself when the counter crosses
+1,000,000.
+
 ## 2026-07-19 — README: mission statement added
 
 - New opening paragraph: AlgoBrain derives millions of strategy combinations, structured so
