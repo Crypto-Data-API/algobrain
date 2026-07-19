@@ -6,7 +6,13 @@ configurations ≥ 1,000,000, STOP the loop (CronDelete) and summarize. Planner 
 waves may instead use ONE Workflow fan-out of Sonnet agents — pattern pre-approved by user
 for Trading-Profile waves). All Campaign-1 guardrails below still apply.
 
-- [ ] C1. Matrix v2 — 6 new primitive rows (MEV/execution, DeFi-yield/LP, options-RV
+- [x] C1. (2026-07-19, C2-iter 1) DONE in one batch — 6 rows added with honest audit:
+      21 cells covered by existing pages, 36 non-viable (footnotes 66-115), 5 new pages
+      (mev-session-density, defi-yield-regime-gate, options-rv-event-calendar,
+      stablecoin-sentiment-depeg-entry, whale-copy-flow-funding-filter). 3 planned cells
+      remain (defi-yield-event-calendar, defi-yield-sentiment-entry,
+      options-rv-funding-filter) — fold into C2 batch 1. Matrix 180 cells: 87/3/90.
+      Original spec: 6 new primitive rows (MEV/execution, DeFi-yield/LP, options-RV
       (skew/term-structure), prediction-markets, stablecoin/peg, whale/copy-flow): add rows
       to combination-matrix.md with per-cell viability audit against the 10 existing
       overlays (link existing pages where they already cover a cell — e.g. delta-neutral
@@ -31,7 +37,9 @@ for Trading-Profile waves). All Campaign-1 guardrails below still apply.
 
 ## Campaign 2 progress log
 
-- 2026-07-19: Campaign armed. Counter built; baseline printed below.
+- 2026-07-19: Campaign armed. Counter baseline: 1,006 designs / 401,128 configs (40.1%).
+- 2026-07-19 C2-iter 1 (C1): 6 rows added, 5 pages, matrix 87/3/90 of 180. Counter:
+  1,071 designs / 418,048 configs (41.8%).
 
 ---
 

@@ -9,6 +9,39 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-19 — Campaign 2 Batch C1-1: Combination Matrix Row Expansion (18 rows)
+
+**Scope:** Expanded the combination-strategy matrix from 12 to 18 primitive rows. Audited all 60 new cells (6 rows × 10 overlay columns). Authored 5 new combination pages for the highest-value planned cells.
+
+**Matrix updated:** `wiki/strategies/combinations/combination-matrix.md`
+- 6 new primitive rows added: MEV / execution, DeFi yield / LP, Options RV (skew & term structure), Prediction markets, Stablecoin / peg, Whale / copy-flow
+- Cell count: 16 COVERED by existing pages, 8 initially PLANNED (5 authored in this batch, 3 remain), 36 NON-VIABLE with footnotes ⁶⁶–¹¹⁵
+- Total matrix: 18 rows × 10 columns = 180 cells; 87 linked, 3 planned, 90 non-viable
+
+**Per-row audit summary:**
+
+| Row | Covered by existing | Authored new | Planned remaining | Non-viable |
+|---|---|---|---|---|
+| MEV / execution | 2 (mev-strategies ×2) | 1 (mev-session-density) | 0 | 7 |
+| DeFi yield / LP | 2 (delta-neutral-yield-farming, concentrated-liquidity) | 1 (defi-yield-regime-gate) | 2 (defi-yield-event-calendar, defi-yield-sentiment-entry) | 5 |
+| Options RV | 2 (skew-trading, calendar-spread-arbitrage) | 1 (options-rv-event-calendar) | 1 (options-rv-funding-filter) | 6 |
+| Prediction markets | 3 (polymarket-prediction-market-arbitrage, prediction-market-strategies ×2) | 0 | 0 | 7 |
+| Stablecoin / peg | 2 (stablecoin-pair-arbitrage, stablecoin-depeg-profit-capture) | 1 (stablecoin-sentiment-depeg-entry) | 0 | 7 |
+| Whale / copy-flow | 5 (regime-adaptive-strategy, smart-money-orderflow-combo, on-chain-smart-money-tracking, smart-money-vs-crowd-divergence, copy-trading) | 1 (whale-copy-flow-funding-filter) | 0 | 4 |
+
+**Pages created (5):**
+- [[mev-session-density]] — MEV / execution × session/time filter (C:\Websites\algobrain\wiki\strategies\combinations\mev-session-density.md)
+- [[defi-yield-regime-gate]] — DeFi yield / LP × regime gate (C:\Websites\algobrain\wiki\strategies\combinations\defi-yield-regime-gate.md)
+- [[options-rv-event-calendar]] — Options RV × unlock/event calendar (C:\Websites\algobrain\wiki\strategies\combinations\options-rv-event-calendar.md)
+- [[stablecoin-sentiment-depeg-entry]] — Stablecoin / peg × sentiment-extreme filter (C:\Websites\algobrain\wiki\strategies\combinations\stablecoin-sentiment-depeg-entry.md)
+- [[whale-copy-flow-funding-filter]] — Whale / copy-flow × funding filter (C:\Websites\algobrain\wiki\strategies\combinations\whale-copy-flow-funding-filter.md)
+
+**Files touched:**
+- `wiki/strategies/combinations/combination-matrix.md` — 6 new rows, footnotes ⁶⁶–¹¹⁵, Campaign 2 section, updated cell counts
+- `wiki/log.md` — this entry
+
+**Remaining planned cells (2):** [[defi-yield-event-calendar]] (DeFi yield × unlock/event calendar), [[options-rv-funding-filter]] (Options RV × funding filter) — left for future batch.
+
 ## 2026-07-19 — Batch A9: Same-Stem Filename Collision Cleanup (Final Backlog Batch)
 
 Resolved all same-stem filename collisions in the vault. Every `[[wikilink]]` now resolves to a unique file under `wiki/`. Zero duplicate stems remain.

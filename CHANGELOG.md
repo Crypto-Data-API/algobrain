@@ -4,6 +4,16 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — Campaign 2, iteration 1: matrix expanded to 18 primitives
+
+Six new primitive rows added to the combination matrix (MEV/execution, DeFi-yield/LP,
+options relative-value, prediction markets, stablecoin/peg, whale/copy-flow) with an honest
+60-cell audit: 21 cells already covered by existing pages, 36 ruled non-viable with
+footnotes, and 5 new combination strategies authored (mev-session-density,
+defi-yield-regime-gate, options-rv-event-calendar, stablecoin-sentiment-depeg-entry,
+whale-copy-flow-funding-filter). Matrix now 180 cells (87 covered / 3 planned / 90
+non-viable). Counter: **418,048 distinct configurations (41.8% of the 1M goal)**.
+
 ## 2026-07-19 — Campaign 2 armed: 300k → 1M+ distinct strategy configurations
 
 Second improvement campaign launched (hourly loop re-armed, goal-gated): expand the

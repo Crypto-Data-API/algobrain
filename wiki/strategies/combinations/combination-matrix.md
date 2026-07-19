@@ -6,7 +6,7 @@ updated: 2026-07-19
 status: good
 tags: [index, meta, methodology]
 aliases: ["Combo Matrix", "Strategy Combination Matrix", "Primitive × Overlay Matrix"]
-related: ["[[strategies-overview]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[combinations-overview]]", "[[funding-rate-arbitrage]]", "[[trend-following-cta]]", "[[pairs-trading]]", "[[grid-trading]]"]
+related: ["[[strategies-overview]]", "[[edge-taxonomy]]", "[[regime-matrix]]", "[[combinations-overview]]", "[[funding-rate-arbitrage]]", "[[trend-following-cta]]", "[[pairs-trading]]", "[[grid-trading]]", "[[mev-strategies]]", "[[delta-neutral-yield-farming]]", "[[skew-trading]]", "[[prediction-market-strategies]]", "[[stablecoin-depeg-profit-capture]]", "[[copy-trading]]"]
 ---
 
 # Combination Strategy Matrix
@@ -41,6 +41,12 @@ A single cell can hold multiple page references if more than one page exists for
 | **Stat-arb / pairs** | [[correlation-regime-pairs]] | [[pairs-with-funding-differential]] | [[oi-gated-pairs]] ⁶² | — ⁴⁵ | — ⁶³ | [[vol-balanced-pairs]] ⁴⁶ | [[hl-vs-cex-funding-divergence]] | [[unlock-pair-hedge]] | — ⁴⁷ | — ⁴⁸ |
 | **On-chain flow** | [[regime-adaptive-strategy]] | [[smart-money-vs-crowd-divergence]] ¹⁶ | [[oi-confirmed-trend]] | [[smart-money-orderflow-combo]] ⁹ | — ⁶⁴ | — ⁴⁹ | — ⁵⁰ | [[unlock-short-with-crowding-gate]] | [[onchain-capitulation-confluence]] | — ⁵¹ |
 | **Sentiment** | [[regime-adaptive-strategy]] | [[sentiment-positioning-divergence]] ²¹ | — ⁵² | [[crypto-beta-rotation]] | — ⁶⁵ | — ⁵³ | — ⁵⁴ | — ⁵⁵ | — ¹⁰ | — ⁵⁶ |
+| **MEV / execution** | — ⁶⁶ | — ⁶⁷ | — ⁶⁸ | — ⁶⁹ | — ⁷⁰ | — ⁷¹ | [[mev-strategies]] ⁷² | [[mev-strategies]] ⁷³ | — ⁷⁴ | [[mev-session-density]] |
+| **DeFi yield / LP** | [[defi-yield-regime-gate]] | — ⁷⁵ | — ⁷⁶ | — ⁷⁷ | — ⁷⁸ | [[delta-neutral-yield-farming]] ⁷⁹ | [[concentrated-liquidity]] ⁸⁰ | [[defi-yield-event-calendar]] | [[defi-yield-sentiment-entry]] | — ⁸¹ |
+| **Options RV (skew & term structure)** | [[skew-trading]] ⁸² | [[options-rv-funding-filter]] | — ⁸³ | — ⁸⁴ | — ⁸⁵ | — ⁸⁶ | [[calendar-spread-arbitrage]] ⁸⁷ | [[options-rv-event-calendar]] | — ⁸⁸ | — ⁸⁹ |
+| **Prediction markets** | — ⁹⁰ | — ⁹¹ | — ⁹² | — ⁹³ | — ⁹⁴ | — ⁹⁵ | [[polymarket-prediction-market-arbitrage]] ⁹⁶ | [[prediction-market-strategies]] ⁹⁷ | [[prediction-market-strategies]] ⁹⁷ | — ⁹⁸ |
+| **Stablecoin / peg** | — ⁹⁹ | — ¹⁰⁰ | — ¹⁰¹ | — ¹⁰² | — ¹⁰³ | — ¹⁰⁴ | [[stablecoin-pair-arbitrage]] ¹⁰⁵ | [[stablecoin-depeg-profit-capture]] ¹⁰⁶ | [[stablecoin-sentiment-depeg-entry]] | — ¹⁰⁷ |
+| **Whale / copy-flow** | [[regime-adaptive-strategy]] | [[whale-copy-flow-funding-filter]] | — ¹⁰⁸ | [[smart-money-orderflow-combo]] ¹⁰⁹ | — ¹¹⁰ | — ¹¹¹ | [[on-chain-smart-money-tracking]] ¹¹² | [[copy-trading]] ¹¹³ | [[smart-money-vs-crowd-divergence]] ¹¹⁴ | — ¹¹⁵ |
 
 ---
 
@@ -176,21 +182,145 @@ A single cell can hold multiple page references if more than one page exists for
 
 **⁶⁵ Sentiment × tail-hedge overlay = non-viable.** Tail hedges on sentiment-contrarian positions require options on the assets being traded; sentiment strategies typically trade BTC/ETH (where options exist) or the whole market (where BTC/ETH options serve as a proxy). The combination collapses into either [[carry-with-tail-hedge]] (protecting a delta-neutral carry book with options) or [[complacency-vol-buying]] (buying options when sentiment is at a greed extreme). A "sentiment × tail-hedge overlay" page distinct from those two would describe: buy BTC/ETH calls as a hedge on a bearish sentiment fade trade — but sentiment fade entries are typically scaled by [[narrative-position-vol-targeting]]-type sizing, not by purchased options. Not a distinct combination.
 
+**⁶⁶ MEV × regime gate = non-viable.** MEV (sandwiching, backrunning, JIT, liquidation MEV) is purely opportunistic and atomic — a MEV bot must evaluate each block opportunity on its own microstructure merits. Macro regime state (trending/ranging/vol-compressed) has no actionable relevance to the per-block extractable value computation. The "regime gate" concept applies to multi-day/week primitives that need protection from bad macro environments; MEV operates entirely within a single block with no carry-through risk.
+
+**⁶⁷ MEV × funding filter = non-viable.** Funding rates are a multi-hour to multi-day signal; MEV execution windows are sub-second to one-block. The funding state when a sandwich or backrun opportunity appears is causally unrelated to whether that opportunity is profitable. No cross-contamination between the funding carry signal and per-block extraction value.
+
+**⁶⁸ MEV × OI filter = non-viable.** Same reasoning as funding filter: OI is a multi-hour aggregate metric. Per-block MEV opportunities arise from pending transaction sequencing, not from aggregate OI levels.
+
+**⁶⁹ MEV × trend gate = non-viable.** Trend is a multi-day/week signal; MEV extraction is per-block opportunistic. The trend direction does not determine whether a DEX arb, liquidation, or sandwich opportunity exists in the current block.
+
+**⁷⁰ MEV × tail-hedge overlay = non-viable.** MEV positions are atomic (entered and exited within the same block); there is no residual inventory to hedge. Flash-loan-funded MEV paths have zero principal at risk across blocks. Non-atomic MEV that carries inventory (e.g., JIT LP position) is hedged via the LP delta management, not via a separate tail-hedge structure.
+
+**⁷¹ MEV × vol targeting = non-viable.** Vol targeting scales position size by realized volatility to maintain constant daily-risk budget. MEV positions are either atomic (zero carry-through risk) or extremely short-lived scalps; there is no carry-through P&L stream with a vol to target. Size is determined by gas economics and available extractable value, not by a vol-scaling rule.
+
+**⁷² [[mev-strategies]] covers MEV × cross-venue.** The existing MEV strategies page documents cross-venue arbitrage (DEX-to-DEX, DEX-to-CEX) as a core MEV strategy type. A new `planned` page for "MEV × cross-venue" would substantially overlap with mev-strategies and jito-solana-mev-arbitrage. Cell marked COVERED by existing page.
+
+**⁷³ [[mev-strategies]] covers MEV × unlock/event calendar.** Event-driven MEV — including large unlock events that create predictable liquidation cascades and DEX rebalances — is documented within mev-strategies as the "event-driven MEV" sub-category. The event calendar shapes which MEV opportunities appear; this is inherent to MEV strategy design, not a separable overlay requiring a new page.
+
+**⁷⁴ MEV × sentiment-extreme filter = non-viable.** Sentiment extremes (Fear & Greed) are daily metrics with no actionable relationship to per-block MEV extraction opportunities. No mechanism connects daily sentiment readings to the probability of MEV being profitable in the next block.
+
+**⁷⁵ DeFi yield / LP × funding filter = non-viable.** The most natural interpretation — gate LP deployment on funding levels — is non-viable because LP yield (fee income) is determined by trading volume and pool composition, not by perp funding rates. The cross-contamination between funding state and DEX fee income is weak and not a named strategy. The closest genuine combination is [[delta-neutral-yield-farming]] (which already hedges the delta using perps, implicitly incorporating funding as a cost factor) — a separate "LP × funding filter" page would be a thin variant of that page's hedging discussion.
+
+**⁷⁶ DeFi yield / LP × OI filter = non-viable.** OI (open interest in perp markets) has no direct structural relationship to LP profitability. High OI creates cascade risk that can drain LP positions via LVR, but this is already handled by the regime gate ([[defi-yield-regime-gate]]). A standalone OI filter for LP deployment adds no independent edge beyond the regime gate's vol-and-cascade detection.
+
+**⁷⁷ DeFi yield / LP × trend gate = non-viable.** LP positions are market-neutral (both sides of the pool); applying a directional trend gate to a market-neutral LP deployment creates ambiguity. The concentrated-liquidity strategy ([[concentrated-liquidity]]) adjusts range placement based on trend, which is the nearest viable analog — but that is an execution detail of the LP primitive, not a separable overlay. [[defi-yield-regime-gate]] covers the regime-conditional LP deployment framing.
+
+**⁷⁸ DeFi yield / LP × tail-hedge overlay = non-viable.** LP impermanent loss is equivalent to being short gamma (short a straddle on the pool's assets). Purchasing options to hedge this short-gamma exposure is real desk practice, but the cost of that hedge typically exceeds the fee income except in the highest-fee tiers with lowest volatility. The hedged-LP strategy is substantively covered within [[delta-neutral-yield-farming]] (delta-neutral via perp short) and [[concentrated-liquidity]] (range management to reduce IL exposure). A pure "LP + put overlay" page would document an expensive and rare positive-EV setup without distinct mechanism.
+
+**⁷⁹ [[delta-neutral-yield-farming]] covers DeFi yield / LP × vol targeting.** Vol targeting on an LP position is the practice of adjusting the LP range width (concentrated liquidity) or total deployed notional based on current realized volatility. This is a core technique documented in [[delta-neutral-yield-farming]] (which adjusts the perp hedge ratio as vol changes) and [[concentrated-liquidity]] (which discusses range width vs vol). No new standalone page needed.
+
+**⁸⁰ [[concentrated-liquidity]] covers DeFi yield / LP × cross-venue.** Cross-venue LP deployment — deploying across multiple AMMs (Uniswap, Curve, Balancer) to diversify fee income and pool composition risk — is documented within [[concentrated-liquidity]] as a multi-venue LP management topic. The structural cross-venue considerations (which pool, which fee tier, which chain) are inherent to the LP strategy design.
+
+**⁸¹ DeFi yield / LP × session/time filter = non-viable.** LP fee income accrues continuously (24/7 DeFi markets); session filters do not apply to a passive yield-accrual position. Concentration range rebalancing is triggered by price movement and vol, not by session timing.
+
+**⁸² [[skew-trading]] implicitly incorporates a regime gate.** The skew-trading page conditions entries on dislocation of the 25-delta risk reversal from its historical mean — which is equivalent to a regime gate: only trade when the skew is meaningfully dislocated. A separate "Options RV × regime gate" page would be redundant with the existing skew-trading entry conditions. Cell marked COVERED by existing page.
+
+**⁸³ Options RV × OI filter = non-viable.** Options relative value (skew and term structure) is priced on the Deribit options surface; OI in perp markets is not a direct driver of options surface dislocation. The relevant "OI" for options RV is options OI by strike/expiry — which is inherent to the skew-trading and calendar-spread entry conditions, not a separate overlay.
+
+**⁸⁴ Options RV × trend gate = non-viable.** Options RV trades (skew, term structure) are structured to be directionally neutral (delta-hedged). A trend gate on a delta-neutral structure introduces directional bias that conflicts with the market-neutral structure of the trade. The nearest analog — selecting which wing to sell based on trend — is covered by [[trend-aligned-premium-selling]] (which is a vol-selling strategy, not an RV strategy).
+
+**⁸⁵ Options RV × tail-hedge overlay = non-viable.** Options RV positions are already structured as multi-leg spreads (risk reversals, calendar spreads, dispersion trades) that inherently limit max loss via their spread construction. Adding a further tail-hedge overlay on an already-hedged options spread would reduce net vega/theta to near zero, destroying the strategy's P&L source.
+
+**⁸⁶ Options RV × vol targeting = non-viable.** Options RV positions are sized primarily by vega and theta budgets, not by a portfolio-level realized-vol scaling rule. Vol targeting on an options book uses the options Greeks for sizing — which is inherent to options portfolio management, not a separate named combination overlay. [[narrative-position-vol-targeting]] and [[vol-targeted-trend-following]] apply vol targeting to directional positions, not to options spread books.
+
+**⁸⁷ [[calendar-spread-arbitrage]] covers Options RV × cross-venue.** Cross-venue options RV — trading term-structure dislocations between Deribit and CME, or between BTC and ETH term structures — is documented within [[calendar-spread-arbitrage]] as a multi-venue/multi-expiry spread trade. A new "Options RV × cross-venue" page would be a thin variant of calendar-spread-arbitrage's cross-venue section.
+
+**⁸⁸ Options RV × sentiment-extreme filter = non-viable.** Options RV trades (skew, term structure) are triggered by statistical dislocation of the vol surface from its fair value — not by directional sentiment extremes. Sentiment extremes do create vol surface dislocations (panic → rich puts; euphoria → rich calls), but this is already embedded in the skew-trading entry conditions (RR25 dislocation from mean).
+
+**⁸⁹ Options RV × session/time filter = non-viable.** Options RV dislocations are structural and persist for days to weeks (skew persistence, term-structure premium convergence cycles). Session filters do not add meaningful selectivity to positions with multi-day DTE and slow-moving surface dynamics.
+
+**⁹⁰ Prediction markets × regime gate = non-viable.** Prediction market prices are event-probability estimates anchored to a real-world outcome (election result, regulatory decision, price threshold). The macro/vol regime does not determine whether a Polymarket market is mispriced relative to true event probability. The regime affects the perp/spot leg in [[polymarket-as-crypto-leading-indicator]] (which uses prediction markets as a signal, not as the trading venue), but the prediction market itself is not gated by regime state.
+
+**⁹¹ Prediction markets × funding filter = non-viable.** Prediction market odds on Polymarket are denominated in USDC and settle against binary event outcomes, not perp funding rates. Funding rates are not a relevant filter for prediction market entry; there is no mechanism connecting funding state to Polymarket mispricing.
+
+**⁹² Prediction markets × OI filter = non-viable.** Open interest in perp markets has no causal relationship to whether a prediction market is mispriced. These are structurally unrelated instruments.
+
+**⁹³ Prediction markets × trend gate = non-viable.** Prediction market entries are triggered by probability mispricings relative to the true likelihood of binary events. Perp/spot trend state has no mechanism for improving prediction market entry timing; the tail-asset trend does not determine whether the event probability is correctly priced on Polymarket.
+
+**⁹⁴ Prediction markets × tail-hedge overlay = non-viable.** Prediction market positions already have bounded payoffs ($0 or $1 per share); the maximum loss is the capital deployed. There is no tail exposure beyond the position size; options-based tail hedges on prediction market positions would be redundant with the inherent loss limit and are not available as instruments on Polymarket/Kalshi.
+
+**⁹⁵ Prediction markets × vol targeting = non-viable.** Vol targeting as a sizing overlay requires a continuous P&L stream with a measurable realized volatility. Prediction market positions accrue no continuous P&L (they sit at a price and settle binary); applying vol targeting to them would mean sizing each new position by historical Sharpe on prior resolved markets — which is standard position sizing, not a named combination strategy.
+
+**⁹⁶ [[polymarket-prediction-market-arbitrage]] covers Prediction markets × cross-venue.** Cross-venue prediction market arbitrage (Polymarket vs Kalshi vs PredictIt, YES/NO complement arb, cross-market triangulation) is the primary content of the existing page. Cell marked COVERED by existing page.
+
+**⁹⁷ [[prediction-market-strategies]] covers Prediction markets × unlock/event calendar AND sentiment-extreme filter.** The existing page documents event-calendar anchoring of prediction market trades (entering into scheduled binary catalysts) and behavioral bias fading (favorite-longshot bias, recency extremes). Both overlays are inherent to prediction market strategy design and are covered by the existing page. Two cells marked COVERED.
+
+**⁹⁸ Prediction markets × session/time filter = non-viable.** Prediction markets on Polymarket operate continuously; event-driven binary outcomes do not have session-timing structure. Entry timing is driven by odds movement and information, not by geographic session overlaps.
+
+**⁹⁹ Stablecoin / peg × regime gate = non-viable.** Stablecoin depeg arbitrage (buy below peg, sell at peg restoration) is mechanically uncorrelated with macro regime state. A depeg event creates its own local micro-regime regardless of whether the overall crypto market is trending, ranging, or crashing. The [[stablecoin-depeg-profit-capture]] page already conditions entries on redemption channel status and pool composition — the functional equivalent of a regime gate for this specific primitive.
+
+**¹⁰⁰ Stablecoin / peg × funding filter = non-viable.** Perp funding rates are a signal for the leveraged crowd's directional positioning in BTC/ETH. This has no direct causal link to whether a stablecoin is trading at a peg discount or premium. The stablecoin peg mechanic is driven by redemption channel status, pool imbalance, and collateral risk — not by perpetual market funding.
+
+**¹⁰¹ Stablecoin / peg × OI filter = non-viable.** Same reasoning as funding filter: perp OI aggregates directional leverage in BTC/ETH, which is not a meaningful driver of stablecoin peg distance. Stablecoin depeg risk is driven by collateral quality, redemption mechanism, and pool composition.
+
+**¹⁰² Stablecoin / peg × trend gate = non-viable.** Stablecoin depeg opportunities are mean-reverting mechanical trades (buy below $1, profit when peg restores). A trend gate would attempt to condition the entry on a directional trend in stablecoin price — but stablecoins do not trend; they deviate briefly and revert. A "downtrend confirmed" gate on a $0.95 stablecoin would prevent entry at exactly the time the opportunity is largest.
+
+**¹⁰³ Stablecoin / peg × tail-hedge overlay = non-viable.** The largest tail risk in stablecoin depeg trades is not a directional price move but a "zero-recovery" failure (full depegging, algorithmic death spiral, frozen redemptions). Options-based tail hedges against complete stablecoin failure are either unavailable (no liquid puts on USDC, USDT) or extremely expensive. The correct risk management is position sizing (concentration limits, tiered capital deployment) and redemption channel monitoring — both documented in [[stablecoin-depeg-profit-capture]].
+
+**¹⁰⁴ Stablecoin / peg × vol targeting = non-viable.** Vol targeting applies a realized-vol scaling rule to a position's size. Stablecoin depeg trades are sized by the discount magnitude (buy at $0.95, target $1.00) and capital concentration limits — not by a realized-vol budget. The vol of a stablecoin position is not the right denominator for sizing a mean-reversion-to-peg trade.
+
+**¹⁰⁵ [[stablecoin-pair-arbitrage]] covers Stablecoin / peg × cross-venue.** Trading stablecoin cross-venue price dislocations (USDC at $0.998 on one exchange, $1.001 on another) is the primary content of the stablecoin-pair-arbitrage page. Cell marked COVERED by existing page.
+
+**¹⁰⁶ [[stablecoin-depeg-profit-capture]] covers Stablecoin / peg × unlock/event calendar.** Large scheduled events (protocol upgrades, reserve audits, regulatory announcements) that can trigger depeg events are discussed in the depeg-profit-capture page as context for pre-positioning redemption arb capacity. The event calendar is an inherent input to stablecoin depeg monitoring.
+
+**¹⁰⁷ Stablecoin / peg × session/time filter = non-viable.** Stablecoin depeg events occur at any time (often triggered by protocol events, exchange runs, or market panic) independent of geographic session. Session timing adds no meaningful selectivity to depeg entry triggers.
+
+**¹⁰⁸ Whale / copy-flow × OI filter = non-viable.** OI is a market-aggregate metric for the overall leveraged crowd. Whale/copy-flow strategies track specific large-wallet behavior. The combination — "copy whales only when aggregate OI is low" — produces signals that are too rare to be actionable (whale accumulation events with low OI are uncommon) and the OI condition adds no independent information to the whale signal itself. The relevant OI check is already a component of [[smart-money-vs-crowd-divergence]] (funding + L/S gate, which is equivalent to an OI-momentum check).
+
+**¹⁰⁹ [[smart-money-orderflow-combo]] covers Whale / copy-flow × trend gate.** That page combines on-chain smart-money signals with real-time order-flow (trend) confirmation — which is structurally a whale-flow primitive gated by a short-term trend/order-flow overlay. Cell marked COVERED by existing page.
+
+**¹¹⁰ Whale / copy-flow × tail-hedge overlay = non-viable.** Copy-flow positions (following whale trades) are directional perp/spot entries. Tail protection on these positions requires BTC/ETH options (available on Deribit) but the overlay does not add a distinct named combination; it is a position-sizing add-on already covered by general portfolio risk management frameworks ([[carry-with-tail-hedge]], [[put-protected-dip-buying]]) applied to the directional entry. Not a structurally new combination.
+
+**¹¹¹ Whale / copy-flow × vol targeting = non-viable.** Vol targeting on whale-copy positions is a sizing rule (scale down the position when BTC/ETH realized vol is high). This is a standard risk management technique documented in [[vol-targeted-trend-following]] and applicable to any directional position. It does not constitute a distinct strategy-level combination for the whale/copy-flow primitive.
+
+**¹¹² [[on-chain-smart-money-tracking]] covers Whale / copy-flow × cross-venue.** Cross-venue whale tracking (observing wallet flows across Binance, Coinbase, Hyperliquid, DeFi) is documented within on-chain-smart-money-tracking as a core technique. The cross-venue dimension is inherent to on-chain wallet monitoring rather than a separable overlay. Cell marked COVERED by existing page.
+
+**¹¹³ [[copy-trading]] partially covers Whale / copy-flow × unlock/event calendar.** The copy-trading page discusses timing context including major events that affect signal quality. However, the event calendar as a gate — "copy whales only outside major unlock/event windows when their signals are cleanest" — is a meaningful refinement. This cell is marked COVERED (existing page) with note that a planned page could refine further; the existing page's coverage is sufficient to avoid duplication for Campaign 2.
+
+**¹¹⁴ [[smart-money-vs-crowd-divergence]] covers Whale / copy-flow × sentiment-extreme filter.** That combination page (on-chain accumulation + bearish derivative crowd positioning) is structurally a whale-flow primitive gated by a sentiment/positioning extreme overlay. Cell marked COVERED by existing page.
+
+**¹¹⁵ Whale / copy-flow × session/time filter = non-viable.** Whale on-chain activity occurs 24/7 independent of geographic session overlaps. Whale accumulation events are not session-timed; applying a session filter to copy-flow entries would eliminate many high-quality signals that happen to fire during off-hours sessions without any corresponding improvement in signal quality.
+
 ---
 
-## Matrix Cell Counts (as of 2026-07-19 — Program Complete)
+## Matrix Cell Counts (as of 2026-07-19 — Post C1-1 Row Expansion)
 
 | Status | Count |
 |---|---|
-| Linked to existing page | 66 |
-| Planned (gap to fill) | **0** |
-| Non-viable (`—`) | 54 |
+| Linked to existing page | 87 |
+| Planned (gap to fill) | **3** |
+| Non-viable (`—`) | 90 |
+| **Total** | **180** |
 
-*B8b changes: +5 linked (vol-scaled-carry-sizing covers 2 cells — funding carry × vol targeting AND basis × vol targeting; oi-gated-pairs covers stat-arb × OI filter; atr-scaled-grid covers grid × vol targeting; vol-gated-mean-reversion covers mean-reversion × vol targeting); −5 planned (5 to linked); +4 non-viable (mean-reversion × cross-venue, narrative × tail-hedge overlay, stat-arb × tail-hedge overlay, on-chain × tail-hedge overlay all reclassified with reasons in footnotes ⁵⁹–⁶⁵).*
+*C1-1 row expansion (Campaign 2, 2026-07-19): +60 cells (6 new rows × 10 columns). Of those 60 new cells: 16 COVERED by existing pages (mev-strategies × 2, delta-neutral-yield-farming, concentrated-liquidity, skew-trading, calendar-spread-arbitrage, polymarket-prediction-market-arbitrage, prediction-market-strategies × 2, stablecoin-pair-arbitrage, stablecoin-depeg-profit-capture, regime-adaptive-strategy [whale/copy-flow × regime gate], smart-money-orderflow-combo, on-chain-smart-money-tracking, smart-money-vs-crowd-divergence, copy-trading); 8 initially PLANNED; 36 NON-VIABLE with reasoned footnotes (⁶⁶–¹¹⁵). Five planned cells authored as new pages in Campaign 2 Batch C1-1 (see section below); 3 planned cells remain open (defi-yield-event-calendar, defi-yield-sentiment-entry, options-rv-funding-filter).*
 
-*Program completion: all 120 matrix cells are now either linked to a page or marked non-viable with a reasoned footnote. No `planned` cells remain.*
+*B8b completion note: all 120 original-matrix cells (12 rows × 10 columns) remain either linked or non-viable. The 3 remaining planned cells are all in the 6 NEW rows added in C1-1.*
 
-*B8 (prior batch) changes for reference: +8 linked (7 new page cells + basis/unlock covered by event-calendar-risk-gating); −37 planned (8 to linked, 29 to non-viable via Part 2 reclassification); +41 non-viable (29 new reclassifications + 12 existing from footnotes ¹–¹⁰ + new ones added in B8 footnotes ²³–⁵⁶).*
+---
+
+## Campaign 2 — Row Expansion (2026-07-19)
+
+Campaign 2 (Batch C1-1) expands the matrix from 12 to **18 primitive rows** by adding six new primitive families. The original 12 rows covered the core CEX/perp strategy universe. The six new rows cover strategy families that were previously documented as standalone pages but had no systematic overlay analysis:
+
+**New rows added:**
+
+1. **MEV / execution** — Maximal Extractable Value strategies (sandwiching, backrunning, JIT liquidity, liquidation MEV, DEX arbitrage). Primitive pages: [[mev-strategies]], [[jito-solana-mev-arbitrage]], [[jit-liquidity]], [[mev-execution-guide]]. Overlay analysis: nearly all standard overlays are non-viable because MEV is per-block atomic and has no carry-through risk that overlays can gate or size. Only cross-venue (covered by mev-strategies) and session/time (new: [[mev-session-density]]) are viable.
+2. **DeFi yield / LP** — Liquidity provider yield strategies on AMMs and yield protocols. Primitive pages: [[defi-yield-farming]], [[leveraged-yield-farming]], [[concentrated-liquidity]], [[delta-neutral-yield-farming]]. IL is structurally a short-vol position; vol-regime gating is the highest-value overlay. Regime gate ([[defi-yield-regime-gate]]), event calendar ([[defi-yield-event-calendar]]), and sentiment entry ([[defi-yield-sentiment-entry]]) are planned. Vol targeting and cross-venue are covered by existing pages; most others non-viable.
+3. **Options relative-value (skew & term structure)** — Structurally distinct from the vol selling and vol buying rows: those rows cover directional vol exposure (net short or net long vega). This row covers *market-neutral vol surface mispricings* — 25-delta risk reversal dislocation ([[skew-trading]]), inter-expiry basis ([[calendar-spread-arbitrage]]), cross-asset dispersion ([[crypto-options-dispersion]]). Overlays are mostly non-viable because these are already multi-leg delta-neutral structures. Event calendar ([[options-rv-event-calendar]]) and funding filter ([[options-rv-funding-filter]]) are viable planned additions.
+4. **Prediction markets** — Polymarket, Kalshi, and other event-outcome binary markets. Primitive pages: [[prediction-market-strategies]], [[polymarket-prediction-market-arbitrage]], [[polymarket-as-crypto-leading-indicator]]. Most overlays are non-viable by mechanism (bounded-payoff binary markets have no carry-through risk, no funding, no OI to filter on). Cross-venue, event calendar, and sentiment extremes are covered by existing pages.
+5. **Stablecoin / peg** — Stablecoin depeg arbitrage and peg-restoration strategies. Primitive pages: [[stablecoin-depeg-profit-capture]], [[stablecoin-pair-arbitrage]], [[synthetic-stablecoin-depeg-arbitrage]]. Sentiment-extreme filter ([[stablecoin-sentiment-depeg-entry]]) is the highest-value planned combination: panic sentiment creates the optimal depeg entry. Cross-venue and event calendar covered by existing pages.
+6. **Whale / copy-flow** — Following on-chain informed flow (large wallet accumulation) and systematic copy-trading of tracked whales. Primitive pages: [[copy-trading]], [[on-chain-smart-money-tracking]], [[smart-money-vs-crowd-divergence]], [[smart-money-orderflow-combo]]. Funding filter ([[whale-copy-flow-funding-filter]]) is the key new planned page: copy whales only when the derivative crowd is not yet aligned with the whale move (positive carry for the position, not yet squeezed by crowding).
+
+**Pages authored in C1-1 (5 of 7 planned cells):**
+
+- [[mev-session-density]] — MEV / execution × session/time filter: MEV opportunity density is demonstrably session-dependent (CEX-arbitrage MEV peaks at major session opens; liquidation MEV peaks during high-vol periods). A session-aware MEV scheduling algorithm that concentrates infrastructure costs on high-density windows while pausing during low-yield periods.
+- [[defi-yield-regime-gate]] — DeFi yield / LP × regime gate: IL is a short-vol position — deploy LP capital only in low-vol (low-ADV, low-DVOL) regimes; reduce or pause in trending/high-vol regimes. The asymmetry: LP fee income is roughly proportional to vol (good) but LVR loss grows with vol² (bad), so a vol-regime gate that caps deployment above a vol threshold captures most of the fee income while avoiding the worst LVR regimes.
+- [[options-rv-event-calendar]] — Options RV × unlock/event calendar: position term-structure trades ahead of scheduled high-vol events (halvings, ETF decisions, FOMC) to harvest the vol-of-vol premium that builds into near-dated expiries. The event calendar gate selects WHEN to enter (not whether the surface is dislocated), generating a forward-looking calendar overlay on top of the RV entry condition.
+- [[stablecoin-sentiment-depeg-entry]] — Stablecoin / peg × sentiment-extreme filter: Fear & Greed ≤ 15 AND stablecoin discount ≥ 2% simultaneously signals a panic-driven depeg where the discount is not justified by redemption channel failure. The sentiment-extreme filter separates panic-induced depeg (mean-revert to peg) from structural depeg (avoid / short).
+- [[whale-copy-flow-funding-filter]] — Whale / copy-flow × funding filter: copy/follow whale accumulation signals ONLY when funding is flat or negative — i.e., when the derivative crowd is not yet aligned with the whale move. When funding is elevated (crowd has already followed the whale), the edge has largely been captured and entering late carries squeeze risk.
+
+**3 remaining planned cells** (authored in future batches): [[defi-yield-event-calendar]] (DeFi yield × unlock/event calendar), [[defi-yield-sentiment-entry]] (DeFi yield / LP × sentiment-extreme filter — LP deployment at fear extremes when low-vol conditions coincide with panic entry opportunity), and [[options-rv-funding-filter]] (Options RV × funding filter — gate options skew and term-structure entries on funding state as a positioning-crowding check).
 
 ---
 
