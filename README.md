@@ -1,6 +1,6 @@
 # AlgoBrain
 
-> AlgoBrain can derive millions of unique crypto trading strategies, and is specifically structured to ensure the highest quality context is provided to AI Agents through a free local MCP server.
+> *AlgoBrain can derive millions of unique crypto trading strategies, and is specifically structured to ensure the highest quality context is provided to AI Agents through a free local MCP server.*
 
 An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,900 interlinked markdown nodes.
 
