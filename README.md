@@ -1,5 +1,7 @@
 # AlgoBrain
 
+> AlgoBrain can derive millions of strategy combinations, and is deliberately structured (numeric kill criteria, null hypotheses, capacity limits, regime gating, cost-corrected backtest statuses) to ensure only the tiny fraction that survives adversarial validation ever gets capital.
+
 An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,900 interlinked markdown nodes.
 
 [![Obsidian graph view of the AlgoBrain vault](attachments/algobrain-obsidian-graph-view.gif)](attachments/algobrain-obsidian-graph-view.mp4)

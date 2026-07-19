@@ -4,6 +4,12 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-07-19 — README: mission statement added
+
+- New opening paragraph: AlgoBrain derives millions of strategy combinations, structured so
+  only the validated fraction gets capital (kill criteria, null hypotheses, capacity limits,
+  regime gating, cost-corrected backtest statuses).
+
 ## 2026-07-19 — Improvement loop, iteration 13: collision cleanup — ★ backlog complete ★
 
 - **Same-stem filename collisions eliminated (54 → 0):** 21 broken/redundant redirect twins
