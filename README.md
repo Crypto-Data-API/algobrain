@@ -1,6 +1,6 @@
 # AlgoBrain
 
-An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,930 interlinked markdown nodes.
+An LLM Wiki-Brain knowledge base for **crypto trading strategy generation**. Expert knowledge of crypto, blockchain, DeFi, trading, algorithms, markets, macro and AI context. ~4,900 interlinked markdown nodes.
 
 [![Obsidian graph view of the AlgoBrain vault](attachments/algobrain-obsidian-graph-view.gif)](attachments/algobrain-obsidian-graph-view.mp4)
 
@@ -20,7 +20,7 @@ Then start the server with the **`/start-servers`** slash command in Claude Code
 powershell -ExecutionPolicy Bypass -File tools/start_servers.ps1
 ```
 
-This launches the wiki MCP server over Streamable HTTP at **http://127.0.0.1:8010/mcp**, exposing `wiki_search`, `wiki_read`, `wiki_stats`, `wiki_lint`, and `wiki_ingest` over the ~3,500-node vault. It's already registered for this repo via `.mcp.json` — approve it when Claude Code prompts. Stop it again with `tools/stop_servers.ps1`.
+This launches the wiki MCP server over Streamable HTTP at **http://127.0.0.1:8010/mcp**, exposing `wiki_search`, `wiki_read`, `wiki_stats`, `wiki_lint`, and `wiki_ingest` over the full vault. It's already registered for this repo via `.mcp.json` — approve it when Claude Code prompts. Stop it again with `tools/stop_servers.ps1`.
 
 ## What's inside
 
