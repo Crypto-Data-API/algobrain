@@ -138,7 +138,7 @@ if realized_vol(BTC, 20) > 2 * median(realized_vol(BTC, 20), lookback=2160):  # 
 
 ## Indicators / data used
 
-- **Z-score** — the primary signal; standard deviations of price from a 20-bar SMA.
+- **[[z-score]]** — the primary signal; standard deviations of price from a 20-bar SMA. Note the denominator is self-masking: a large dislocation inflates the very σ it is measured against, so extreme moves understate their own z-score. [[median-absolute-deviation|MAD]] is the robust alternative. Choosing the baseline the z-score is measured *from* is a design space in its own right — see [[stretch-revert]] and [[adaptive-moving-averages]].
 - **[[rsi]](2)** — short-lookback RSI for oversold/overbought confirmation; see [[rsi-mean-reversion]].
 - **[[bollinger-bands]]** — volatility-adaptive band touch; see [[bollinger-band-reversion]].
 - **[[funding-rate]]** — extreme perp funding flags a crowded book; deeply negative-and-falling funding is a *do-not-catch-the-knife* filter. See [[funding-rate-arbitrage]].
@@ -296,8 +296,10 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 
 - [[rsi-mean-reversion]]
 - [[bollinger-band-reversion]]
+- [[stretch-revert]] — the baseline-estimator family; same thesis, 14 different definitions of "the mean"
 - [[pairs-trading]]
 - [[momentum]]
+- [[z-score]] · [[median-absolute-deviation]] · [[half-life-of-mean-reversion]] · [[time-stop]] · [[adaptive-moving-averages]]
 - [[statistical-arbitrage]]
 - [[liquidation-cascade-fade]] — the sharpest, most reflexive reversion setup
 - [[funding-rate-arbitrage]] — funding as a crowding signal

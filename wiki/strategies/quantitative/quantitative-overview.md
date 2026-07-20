@@ -27,6 +27,7 @@ Quantitative strategies use mathematics and statistics to identify patterns, tes
 
 - [[mean-reversion]] — The core concept: prices that stretch from fair value tend to snap back.
 - [[bollinger-band-reversion]] — Fading moves beyond volatility bands back toward the mean.
+- [[stretch-revert]] — A 14-member family fading price's deviation from an adaptive baseline; the members share one entry thesis and differ only in which estimator ([[frama|FRAMA]], [[kama|KAMA]], [[theil-sen-regression|Theil-Sen]], [[least-squares-moving-average|LSMA]] …) defines "the mean". See [[adaptive-moving-averages]].
 - [[rsi-mean-reversion]] — Buying oversold / selling overbought readings on the RSI oscillator.
 - [[ornstein-uhlenbeck]] — Modeling spreads as a mean-reverting stochastic process to time entries.
 - [[pairs-trading]] — Long one asset, short a correlated peer when their spread diverges; the classic stat-arb trade.

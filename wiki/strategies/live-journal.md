@@ -60,6 +60,7 @@ The live trading bot runs a six-strategy stack on a perpetual DEX (primarily Ast
 |---|---|---|---|---|
 | funding_arb | [[funding-rate-arbitrage]] | 1x isolated, max 25% per asset, max 3 concurrent | ~7 signals/24h | 2026-04-27 |
 | stock_basis | [[stock-perp-oracle-basis]] | 2x, 11.25% per stock, max 8 stocks | ~17 signals/24h | 2026-04-27 |
+| stretch_revert (10 members) | [[stretch-revert]] | ~3-5x lev, 15m (theilsen 1x; fast_kama 1-5m loop) | 53 fills total; only 4 of 14 members have traded | 2026-07-20 |
 
 ### Paper-traded / OFF (regime-gated)
 
@@ -106,6 +107,23 @@ SORT retire_date DESC
 Append-only chronological log of every lifecycle event. The dataview tables above are derived from frontmatter; this section is the human-readable narrative.
 
 ---
+
+### 2026-07-20 — Stretch Revert family — Documented (already live)
+
+- **Strategy:** [[stretch-revert]] — 14-member baseline-estimator family, 10 members on the real-money prod bot
+- **Status:** active
+- **Capital:** not recorded. Average trade P/L is ~$0.94, so position sizes are very small; sizing policy for this family is undocumented in this vault.
+- **Reason:** Documented retrospectively from a Hyperliquid Trader dashboard snapshot (2026-07-20 11:23:51 AEST). **This family was deployed before it was journaled** — this entry backfills the record, it does not mark a deploy event. Deploy dates for individual members are unknown.
+- **Expected Sharpe:** no research figure exists. The frontmatter carries 0.5 as a literature-informed estimate, not a measured or backtested value.
+- **Realized Sharpe:** not meaningfully computable. 53 fills across 4 of 14 members; the confidence interval spans zero comfortably ([[crypto-short-history-statistical-power]]).
+- **Notes:** Reported snapshot totals: +$50.08 realised, 77% trade-weighted win rate. Both figures are misleading on their own and should not be quoted without the following:
+  - **10 of 14 members have never traded.** The "14 live" count is an installation count, not an evidence count.
+  - **`frama` is 94% of P/L** (+$47.17 of +$50.08 over 28 fills). The family result is the frama result.
+  - **`theilsen`: 80% win rate, −$3.00 net.** High win rate is the *expected* shape for reversion (win small often, give it back in one unreverting move), so win rate is close to uninformative here. `vidya` shows the same tension: PF 1.34, Sharpe −0.06.
+  - **Multiple-comparisons problem.** Fourteen variants were run and the best is being read as a result. [[deflated-sharpe-ratio]] deflation for 14 trials is required before frama's record means anything — and cannot be computed correctly at all for `jma_stretch_revert`, whose baseline is a proprietary black box ([[jurik-moving-average]]).
+  - **Known structural defects** documented on [[stretch-revert]]: the [[z-score]] understates large dislocations, no member uses a robust scale estimator ([[median-absolute-deviation]]), [[zero-lag-exponential-moving-average|ZLEMA]] is biased toward fading accelerating moves, and 4 of 14 baselines share one author ([[john-ehlers]]).
+- **No backtest, walk-forward, or cost-corrected record exists** for any member. `backtest_status: live` reflects deployment, not validation.
+- **Next review:** 2026-08-20 — by then, check whether members other than `frama` have accumulated enough fills to test the defence-in-depth claim.
 
 ### 2026-04-27 — Live bot six-strategy stack — Documentation snapshot
 

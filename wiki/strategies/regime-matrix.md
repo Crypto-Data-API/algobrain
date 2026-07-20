@@ -84,6 +84,7 @@ Reading the matrix through this lens: the cleanest portfolio diversification com
 |---|---|---|---|---|---|---|
 | [[mean-reversion]] | ⬜ | ⬜ | ✅ | ➖ | ✅ | ➖ |
 | [[bollinger-band-reversion]] | ⬜ | ⬜ | ✅ | ⬜ | ✅ | ➖ |
+| [[stretch-revert]] | ➖ | ➖ | ✅ | ❌ | ✅ | ❌ |
 | [[rsi-mean-reversion]] | ➕ | ➕ | ✅ | ➖ | ✅ | ❌ |
 | [[pairs-trading]] | ⬜ | ⬜ | ✅ | ❌ | ✅ | ❌ |
 | [[statistical-arbitrage]] | ⬜ | ⬜ | ✅ | ❌ | ✅ | ❌ |

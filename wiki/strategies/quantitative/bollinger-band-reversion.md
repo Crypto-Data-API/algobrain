@@ -211,6 +211,8 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - [[rsi-mean-reversion]] — the ideal companion for dual confirmation
 - [[bollinger-bands]] — the indicator itself
 - [[mean-reversion]] — the parent strategy family
+- [[stretch-revert]] — the same band-fade thesis generalised: swap the SMA centreline for any of 14 adaptive baselines, which is where "walking the bands" is either mitigated or made worse
+- [[z-score]] · [[median-absolute-deviation]] · [[adaptive-moving-averages]] · [[half-life-of-mean-reversion]] · [[time-stop]]
 - [[regime-detection]] — the ranging/trending gate that makes or breaks this strategy
 - [[volatility]] — the bands are a volatility measure; regime drives everything
 - [[donchian-channel-breakout]] — a breakout (not reversion) channel strategy for contrast

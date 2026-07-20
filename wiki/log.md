@@ -9,6 +9,84 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-07-20 — Stretch Revert cluster: inbound links, findings feedback, lifecycle records
+
+**Scope:** The 33-page cluster was a self-referential island — 35 pages linked to [[stretch-revert]] but only **one** ([[moving-averages]]) pre-dated the build-out. Everything else was written the same day. Fixed that, fed the estimator findings back up to the family page, and filed the missing lifecycle records.
+
+- **Inbound links added** from pre-existing hubs: [[mean-reversion]] (z-score bullet rewritten to link [[z-score]]/[[median-absolute-deviation]], plus Related), [[bollinger-band-reversion]] (Related), [[quantitative-overview]] (Mean Reversion & StatArb list). These pages now surface the family in their backlink panes and in `wiki_search` reversion queries.
+- **[[stretch-revert]] updated** — the page was written *before* its 32 supporting pages existed and did not reflect what they found. Added a "Findings from the estimator build-out" subsection under What kills this strategy (6 structural defects + the missing-robust-quadratic gap + the folklore-parameters note), plus corrections to Entry (z-thresholds are ranking devices, not probabilities), Stops (full reversion is a 3-4 half-life trade, so a one-half-life stop scratches winners), and Disadvantages.
+- **[[regime-matrix]]** — row added. Rated stricter than [[mean-reversion]] on High Vol and Risk-Off (❌ vs ➖): the family runs 3-5x leverage, so an unreverting move is a liquidation rather than a stop-out.
+- **[[live-journal]]** — added to the Currently ON table and a full backfill entry. Recorded explicitly that **this family was deployed before it was journaled**; the entry backfills the record and is not a deploy event. Deploy dates and sizing policy per member are unknown and noted as such.
+- **Pages created:** [[2026-07-20-hyperliquid-trader-stretch-revert-dashboard]] (`type: source`, `confidence: medium`) — the dashboard snapshot now has a source page, so the live figures cite something. 9 claims extracted with confidence markers; win rate independently recomputed from the per-member rows (77.5%, consistent with the reported 77%). Carries a "What the snapshot does NOT establish" section, because the headline figures invite the opposite reading. [[stretch-revert]] Sources section now uses a real `(Source: [[...]])` reference.
+
+**Also:** `.obsidian/graph.default.json` + `tools/restore_obsidian_config.ps1` added — Obsidian rewrites `graph.json` from memory and was silently reverting the entities palette to teal. Script restores `colorGroups` only, leaving view state intact; `-Check` mode reports drift; warns if Obsidian is running (it was, PID 3208). Wired to a `SessionStart` hook in `.claude/settings.json`. Script is ASCII-only by necessity — Windows PowerShell 5.1 reads UTF-8-without-BOM as ANSI, which corrupted em-dashes and broke parsing on the first attempt.
+
+## 2026-07-20 — Created: 19 supporting pages (Stretch Revert cluster completion)
+
+**Scope:** Closed the load-bearing gaps and wrote the people behind the estimators. 19 pages, ~3,900 lines, four parallel agents. Selected from the Obsidian graph's unresolved nodes; the five nodes named for the user's own proprietary strategy groups were **deliberately not written** (see below).
+
+**Concepts — load-bearing (5):** [[z-score]], [[adaptive-moving-averages]], [[half-life-of-mean-reversion]], [[time-stop]], [[weighted-moving-average]]
+**Concepts — supporting (5):** [[fractal-dimension]], [[linear-regression]], [[median-absolute-deviation]], [[chande-momentum-oscillator]], [[macd-v]]
+**Entities — indicator authors (6, `wiki/entities/traders/`):** [[john-ehlers]], [[perry-kaufman]], [[alan-hull]], [[patrick-mulloy]], [[arnaud-legoux]] (stub), [[mark-jurik]] (stub)
+**Entities — mathematicians (3):** [[rudolf-kalman]], [[henri-theil]], [[pranab-sen]]
+
+- Pages updated: [[triple-exponential-moving-average]] — Mulloy citation corrected, see contradiction below.
+- **Verified:** all 19 — no non-whitelisted CryptoDataAPI endpoints; no `.md`/folder paths in wikilinks; the single `(Source: [[...]])` reference used ([[2026-04-20-comprehensive-guide-technical-trading-indicators]]) exists. `statistics` tag restored to the three mathematician pages (agent had misread the approved list, missing the 2026-07-19 audit adoptions on CLAUDE.md line 303).
+
+**Substantive findings:**
+
+- **[[z-score]] — the family's core quantity is self-masking.** An outlier inflates the σ it is measured against: a 10-unit outlier reads z ≈ 7.0, not 10. Measured stretch is understated, and the understatement grows with the size of the dislocation — worst precisely in the liquidation flushes [[stretch-revert]] exists to fade.
+- **[[median-absolute-deviation]] — the other half of the robustness problem.** [[theil-sen-regression]] gives a robust *location* (numerator); nothing in the family gives a robust *scale* (denominator). Recorded as a design observation, explicitly **not** a claim that swapping MAD in would have improved live results.
+- **[[half-life-of-mean-reversion]] — time-stop sizing correction.** Full reversion is a 3–4 half-life trade, so a stop set at one half-life scratches most winners. Estimate is badly identified on short samples: λ = −0.010/−0.005/−0.001 → 69/139/**693** bars.
+- **[[john-ehlers]] — estimator clustering.** Ehlers is behind four of the fourteen baselines (FRAMA, Laguerre, SuperSmoother, ZLEMA w/ Ric Way). A shared weakness in the DSP framing is not diversified away by running four of his filters in parallel — this weakens the family's defence-in-depth argument.
+- **[[perry-kaufman]]** — KAMA's Efficiency Ratio and the [[hurst-exponent]] regime gate are not independent tests of the same thing.
+- **[[macd-v]]** — verified: `[(EMA12 − EMA26)/ATR(26)] × 100`, Alex Spiroglou, **both** the Charles H. Dow Award and the NAAIM Founders Award in 2022; developed 2015. Zone-boundary conventions differ between renderings and are flagged unresolved. Page states it documents the published indicator, **not** the user's undocumented "MACD-V Group".
+
+**Contradiction handled — [[triple-exponential-moving-average]] TEMA attribution.**
+> **Claim A** (encyclopedic sources, confidence: MEDIUM): TEMA and DEMA both introduced in "Smoothing Data With Faster Moving Averages", *TASC* V.12:1, Jan 1994, pp. 11–19.
+> **Claim B** (publisher listings + secondary sources, confidence: MEDIUM): a second article, "Smoothing Data With Less Lag", *TASC* V.12:2, Feb 1994, pp. 72–80, also covers TEMA/DEMA; some sources credit it with TEMA specifically.
+> **Resolution**: Unresolved. Both articles exist and are now cited on the page; neither has been read. The page previously asserted January flatly — corrected to state the ambiguity.
+
+**Biography — what could not be verified (omitted or hedged on-page, not asserted):** Ehlers' Raytheon employment, "private trader since 1976" and the 1978 MESA anecdote (mesasoftware.com and cmtassociation.org both return 403; no PhD claimed — sources say "doctoral work"); Kaufman's 1995 *Smarter Trading* year for KAMA, and "founder" vs "co-founder" of the *Journal of Futures Markets*; all of Hull's biography (self-description only); **all** of Mulloy's biography (no record exists); all of Legoux's (no primary source at all — co-creator's name appears three different ways across sources); Jurik's dates and background (jurikres.com serves an invalid TLS cert, nothing fetched live). [[rudolf-kalman]]: emigration date, PhD-vs-DSc. [[henri-theil]]: Florida appointment year, 1950 journal identity. [[pranab-sen]]: a Padma Shri and honorary DSc appeared in a single uncorroborated fetch and were **omitted**.
+
+- **Apollo claim corrected on [[rudolf-kalman]]**: Kálmán did not work on Apollo. Stanley F. Schmidt at NASA Ames, after a visit from Kálmán, developed the extended/Schmidt–Kalman adaptation, and a version of that went into the Apollo onboard navigation computer.
+- **No pages for Ric Way or Dimitrios Kouzis-Loukas** — public record too thin; both named in prose on [[john-ehlers]] and [[arnaud-legoux]].
+- **Not written, deliberately:** [[bar-break-group]], [[ride-group]], [[clock-group]], [[burst-and-pulse-group]], [[whale-traders-lab]] — these name the user's own proprietary strategy families. Nothing is known about them beyond the names in a dashboard "See also" list; writing them would be invention. They need dashboard content supplied, as [[stretch-revert]] was.
+- Pronouns: all nine entity pages use they/them, no source read stated pronouns.
+
+## 2026-07-20 — Created: 13 baseline-estimator indicator pages (Stretch Revert build-out)
+
+**Scope:** Closed the estimator gap opened by [[stretch-revert]]. Of its 14 baselines only [[kalman-filter-trading]] had a page; the other 13 are now written (2,616 lines total) in `wiki/concepts/indicators/`. Written by four parallel agents grouped so siblings cohere, each given the verified endpoint whitelist rather than left to derive paths.
+
+- **Weighted / lag-cancelling:** [[alma]], [[hull-moving-average]], [[triple-exponential-moving-average]], [[zero-lag-exponential-moving-average]]
+- **Adaptive:** [[frama]], [[vidya]], [[kama]]
+- **Signal-processing filters:** [[laguerre-filter]], [[supersmoother-filter]], [[jurik-moving-average]]
+- **Regression:** [[least-squares-moving-average]], [[theil-sen-regression]], [[quadratic-regression]]
+- Pages updated: [[moving-averages]] — the 9-line "Adaptive and Advanced MAs" section (HMA/DEMA/TEMA/KAMA only) rebuilt as a four-group taxonomy linking all 13, preserving the original prose; [[log]], [[index]] pending prior entry.
+- All `type: concept`, `status: draft`, each with `## Use as a mean-reversion baseline` tying it to [[stretch-revert]], plus `## Getting the Data (CryptoDataAPI)` + `### AI agent workflow`.
+- **Verified:** 13/13 on required sections; every endpoint on the verified whitelist (no inventions); no `.md`/folder paths in wikilinks; no fabricated `(Source: [[...]])` refs — primary literature cited by author/year only (Mulloy 1994; Hull 2005; Legoux & Kouzis-Loukas 2009; Ehlers 2004/2005/2013; Chande 1992; Kaufman 1995; Theil 1950; Sen 1968; Runge 1901).
+
+**Substantive findings recorded on the pages (not just documentation):**
+
+- **[[zero-lag-exponential-moving-average|ZLEMA]] has a structural bias against the family.** Its de-lag correction assumes linear trend, so under acceleration it errs *in the trend direction* — the residual points toward fading a strengthening move. Acceleration is the signature of a liquidation cascade, i.e. the family's home condition. `zlema_stretch_revert` is on the prod bot.
+- **Adaptive baselines suppress the signal they measure.** [[frama]]/[[vidya]]/[[kama]] speed up during fast moves, shrinking measured stretch exactly when it matters — and the z-score's rolling σ shrinks with it. Severity graded FRAMA (moderate) < stdev-VIDYA (acute) < KAMA (worst: a flush is by definition a maximum-efficiency-ratio event).
+- **[[jurik-moving-average|JMA]] is unauditable.** Proprietary, never disclosed; circulating community ports disagree with each other. Page carries no formula and a `## Reproducibility problem` section: the [[deflated-sharpe-ratio]] for that member cannot be computed correctly because the vendor's own search count is unknowable.
+- **[[theil-sen-regression|Theil-Sen]]:** robustness fixes *measurement* failure, not *position* failure — relevant to that member's 80% WR on negative P/L.
+- **Gap surfaced:** no robust *quadratic* estimator exists in the family. [[quadratic-regression]] is *more* leverage-sensitive than [[least-squares-moving-average|LSMA]] (edge-of-window outliers distort curvature disproportionately) and nothing covers it.
+- **Default parameters are folklore.** ALMA 0.85/6, HMA 9/16/55, TEMA/ZLEMA periods — no derivation found for any; each page labels them convention, not derived optima. ALMA, HMA and ZLEMA have no peer-reviewed publication at all.
+
+**Still open:** new forward links created and unresolved — [[adaptive-moving-averages]], [[john-ehlers]], [[perry-kaufman]], [[z-score]], [[time-stop]], [[half-life-of-mean-reversion]], [[fractal-dimension]], [[chande-momentum-oscillator]], [[linear-regression]], [[median-absolute-deviation]], [[outliers]], [[bias-variance-tradeoff]], [[curve-fitting]]. No source-summary page for the dashboard snapshot; no [[live-journal]] entry; no [[regime-matrix]] row.
+
+## 2026-07-20 — Created: Stretch Revert strategy family
+
+**Scope:** New family page for the Stretch Revert group (14 baseline estimators, one mean-reversion thesis) running on the Hyperliquid prod bot. The vault had no coverage — "stretch" appeared ~20 times but always meaning *stretched funding rates*, never price-deviation-from-baseline.
+
+- Pages created: [[stretch-revert]] (`type: strategy`, `status: draft`, `backtest_status: live`) in `wiki/strategies/quantitative/`. Full 16-section strategy schema per CLAUDE.md, incl. edge source, null hypothesis, pseudocode, capacity, kill criteria, and a `## Getting the Data (CryptoDataAPI)` + `### AI agent workflow` block using only verified endpoints (hyperliquid candles/l2-book, derivatives funding/OI, backtesting klines, quant regimes history).
+- Pages updated: [[index]] (Strategies section).
+- Live figures recorded from a Hyperliquid Trader dashboard snapshot (2026-07-20 11:23:51 AEST): 53 fills, +$50.08, 77% trade-weighted WR. Recorded **with explicit caveats** rather than as evidence of edge — 10 of 14 members have zero trades, `frama` is 94% of family P/L, and `theilsen` shows 80% WR on negative P/L (payoff asymmetry). Page argues the 14-variant design is a multiple-comparisons problem requiring [[deflated-sharpe-ratio]] deflation before promotion.
+- **Known gap — 13 new red links, deliberate.** Only [[kalman-filter-trading]] of the 14 estimators has a page. [[alma]], [[frama]], [[vidya]], [[kama]], [[hull-moving-average]], [[triple-exponential-moving-average]], [[zero-lag-exponential-moving-average]], [[jurik-moving-average]], [[least-squares-moving-average]], [[laguerre-filter]], [[supersmoother-filter]], [[theil-sen-regression]], [[quadratic-regression]] do not exist, nor do [[adaptive-moving-averages]], [[john-ehlers]], [[perry-kaufman]], [[z-score]], [[time-stop]], [[half-life-of-mean-reversion]]. Ehlers is absent from the vault entirely. These are forward links marking the gap per CLAUDE.md wikilink conventions.
+- Not yet done: no source-summary page for the dashboard snapshot; no [[live-journal]] entry; no [[regime-matrix]] row.
+
 ## 2026-07-20 — Trading referrals: Hyperliquid + Binance links on 293 venue-relevant pages
 
 **Scope:** Embedded the CryptoDataAPI trading referrals — [Hyperliquid](https://app.hyperliquid.xyz/join/CRYPTODATAAPI) (4% off spot & perp fees) and [Binance](https://www.binance.com/register?ref=RZSKG1XM) (up to 20% off trading fees) — with full disclosure text on every venue-relevant page.

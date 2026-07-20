@@ -1,0 +1,65 @@
+{
+  "_comment": "Canonical AlgoBrain graph settings. Obsidian rewrites .obsidian/graph.json from memory whenever graph settings change, silently reverting hand edits. tools/restore_obsidian_config.ps1 restores colorGroups from this file. Edit THIS file to change the palette, then run the script.",
+  "colorGroups": [
+    {
+      "query": "path:wiki/markets/crypto",
+      "color": { "a": 1, "rgb": 6804839 }
+    },
+    {
+      "query": "path:wiki/markets",
+      "color": { "a": 1, "rgb": 52224 }
+    },
+    {
+      "query": "path:wiki/strategies",
+      "color": { "a": 1, "rgb": 16744448 }
+    },
+    {
+      "query": "path:wiki/concepts",
+      "color": { "a": 1, "rgb": 255 }
+    },
+    {
+      "query": "path:wiki/history",
+      "color": { "a": 1, "rgb": 16711680 }
+    },
+    {
+      "query": "path:wiki/entities/people",
+      "color": { "a": 1, "rgb": 16776960 }
+    },
+    {
+      "query": "path:wiki/entities/traders",
+      "color": { "a": 1, "rgb": 16776960 }
+    },
+    {
+      "query": "path:wiki/entities/companies",
+      "color": { "a": 1, "rgb": 16776960 }
+    },
+    {
+      "query": "path:wiki/entities",
+      "color": { "a": 1, "rgb": 16776960 }
+    },
+    {
+      "query": "path:wiki/ai-trading",
+      "color": { "a": 1, "rgb": 10040319 }
+    },
+    {
+      "query": "path:wiki/artificial-intelligence",
+      "color": { "a": 1, "rgb": 8388736 }
+    },
+    {
+      "query": "path:wiki/sources",
+      "color": { "a": 1, "rgb": 13003884 }
+    },
+    {
+      "query": "path:wiki/news",
+      "color": { "a": 1, "rgb": 16711680 }
+    },
+    {
+      "query": "path:wiki/education",
+      "color": { "a": 1, "rgb": 13003884 }
+    },
+    {
+      "query": "path:wiki/comparisons",
+      "color": { "a": 1, "rgb": 12938348 }
+    }
+  ]
+}

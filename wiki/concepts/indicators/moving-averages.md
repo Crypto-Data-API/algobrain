@@ -59,13 +59,31 @@ Murphy's framework applies moving averages extensively to commodity futures, whe
 
 ## Adaptive and Advanced MAs
 
-Modern variations of moving averages address the classic lag problem inherent in all MA calculations:
+Modern variations of moving averages address the classic lag problem inherent in all MA calculations. They fall into four groups by *how* they attack the lag/noise trade-off — see [[adaptive-moving-averages]] for the full taxonomy, and [[stretch-revert]] for a strategy family whose fourteen members differ only in which of these estimators defines the baseline.
 
-- **Hull Moving Average (HMA)**: Uses weighted moving averages and a square root of the period to dramatically reduce lag while maintaining smoothness. Popular among active commodity traders.
-- **Double Exponential Moving Average (DEMA)** and **Triple Exponential Moving Average (TEMA)**: Patrick Mulloy's designs that reduce lag by applying EMA calculations recursively. TEMA is particularly responsive for fast-moving markets.
-- **Kaufman Adaptive Moving Average (KAMA)**: Adjusts its smoothing based on market noise -- fast in trending markets, slow in choppy ones. This self-adjusting behavior makes it well-suited to commodities that alternate between strong trends and range-bound consolidation.
+**Weighted / lag-cancelling** — fixed weights arranged to cancel lag:
 
-While these advanced MAs offer reduced lag, they also produce more false signals during choppy conditions. The classic SMA and EMA remain dominant in systematic commodity trading because their behavior is well-understood, easily backtested, and robust across different market regimes.
+- **[[hull-moving-average|Hull Moving Average (HMA)]]**: Uses weighted moving averages and a square root of the period to dramatically reduce lag while maintaining smoothness. Popular among active commodity traders. Overshoots at pivots as the price of near-zero lag.
+- **[[triple-exponential-moving-average|Triple Exponential Moving Average (TEMA)]]** and DEMA: Patrick Mulloy's designs that reduce lag by combining EMA calculations recursively. TEMA is particularly responsive for fast-moving markets — algebraically zero-lag under constant slope, at roughly 7× the noise amplification.
+- **[[zero-lag-exponential-moving-average|ZLEMA]]**: De-lags the *input* before smoothing. The correction assumes a linear trend, so it errs in the trend direction during acceleration.
+- **[[alma|ALMA]]**: Gaussian weights whose peak is shifted toward the newest bar by an explicit `offset` parameter — the lag-vs-smoothness dial made a knob.
+
+**Adaptive** — the smoothing constant varies with a measured market property:
+
+- **[[kama|Kaufman Adaptive Moving Average (KAMA)]]**: Adjusts its smoothing based on market noise -- fast in trending markets, slow in choppy ones, via an efficiency ratio. This self-adjusting behavior makes it well-suited to commodities that alternate between strong trends and range-bound consolidation.
+- **[[frama|FRAMA]]**: Adapts on an estimated fractal dimension of recent price (related to, but distinct from, the [[hurst-exponent]]).
+- **[[vidya|VIDYA]]**: [[tushar-chande|Chande]]'s volatility-indexed EMA — smoothing accelerates with volatility or momentum.
+
+**Signal-processing filters** — designed with an explicit frequency response rather than as averages:
+
+- **[[laguerre-filter|Laguerre Filter]]** and **[[supersmoother-filter|SuperSmoother]]**: [[john-ehlers|John Ehlers]]' designs. SuperSmoother's case is that ordinary MAs do not actually remove the high-frequency noise they claim to.
+- **[[jurik-moving-average|JMA]]**: Commercial and **proprietary** — the algorithm has never been disclosed, so it cannot be independently verified or reproduced.
+
+**Regression baselines** — fit a model to the window rather than averaging it, which makes the deviation a true residual with statistical machinery behind it:
+
+- **[[least-squares-moving-average|LSMA]]**: OLS line read at the endpoint. **[[theil-sen-regression|Theil-Sen]]**: median of pairwise slopes, ~29.3% breakdown point versus 0% for OLS. **[[quadratic-regression|Quadratic]]**: a curving baseline, at the cost of endpoint instability.
+
+While these advanced MAs offer reduced lag, they also produce more false signals during choppy conditions. The classic SMA and EMA remain dominant in systematic commodity trading because their behavior is well-understood, easily backtested, and robust across different market regimes. Their default parameters are also, unlike most of the above, not folklore.
 
 ## Getting the Data (CryptoDataAPI)
 
