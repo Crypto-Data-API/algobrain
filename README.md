@@ -108,6 +108,21 @@ Download **[Obsidian](https://obsidian.md/download)** (free — macOS, Windows, 
 
 The graph view is pre-configured with per-folder color groups (`.obsidian/graph.json`). Attachments save to `attachments/`.
 
+## License
+
+AlgoBrain is free and open source, under two licenses — one for the code, one for the knowledge base:
+
+| Path | License |
+|------|---------|
+| `tools/` — MCP server, lint, ingest, generators, counters | [MIT](LICENSE) |
+| `wiki/`, `templates/`, `raw/`, `attachments/` — the ~4,900-node knowledge base | [CC BY 4.0](LICENSE-CONTENT) |
+
+Code is MIT so there's zero friction running the MCP server. Content is CC BY 4.0 because Creative Commons licenses are built for prose, not software (and vice versa) — applying MIT to a wiki creates ambiguity about what "the Software" even means.
+
+**You may use the wiki commercially**, including ingesting it into retrieval, embedding, fine-tuning, or agent pipelines — internal or product. The only condition is attribution: credit AlgoBrain and link the license. See [LICENSE-CONTENT](LICENSE-CONTENT) for the exact wording.
+
+Third-party material quoted or cited within the wiki remains the property of its respective owners.
+
 ## Disclaimer
 
 AlgoBrain is a research and educational knowledge base. **Nothing in this repository is financial, investment, legal, or tax advice.** All content — strategy pages, data recipes, figures, and any linked tools or APIs — is provided **"as is"**, for informational purposes only, and may be inaccurate, incomplete, or out of date.

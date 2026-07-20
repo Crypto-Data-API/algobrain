@@ -1,0 +1,85 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Sam Deering / CryptoDataAPI
+
+
+SCOPE
+-----
+
+This license covers the AlgoBrain *content* — the knowledge base itself:
+
+    wiki/         all markdown pages, JSON catalogs, and indexes
+    templates/    page skeletons
+    raw/          raw ingest material
+    attachments/  images and media
+
+The *code* in this repository — everything under `tools/`, plus repository
+configuration and scripts — is licensed separately under the MIT License. See
+the LICENSE file at the repository root.
+
+Third-party material quoted, excerpted, or cited within the content (including
+data, figures, and passages attributed to external sources) remains the
+property of its respective owners and is used here under fair dealing / fair
+use or the terms of its own license. This license does not purport to grant
+rights in that material.
+
+
+GRANT
+-----
+
+You are free to:
+
+  Share  — copy and redistribute the material in any medium or format
+  Adapt  — remix, transform, and build upon the material
+
+for any purpose, including commercially.
+
+This explicitly includes ingesting the content into retrieval, embedding,
+fine-tuning, agent, or other machine-learning pipelines, whether internal or
+commercial.
+
+The licensor cannot revoke these freedoms as long as you follow the license
+terms below.
+
+
+CONDITION: ATTRIBUTION
+----------------------
+
+You must give appropriate credit, provide a link to the license, and indicate
+if changes were made. You may do so in any reasonable manner, but not in any
+way that suggests the licensor endorses you or your use.
+
+A sufficient attribution:
+
+    Content from AlgoBrain (https://github.com/Crypto-Data-API/ai-crypto-trading-strategy-wiki-brain)
+    by Sam Deering / CryptoDataAPI, licensed under CC BY 4.0
+    (https://creativecommons.org/licenses/by/4.0/). Changes were made.
+
+Omit the final sentence if the material is unmodified.
+
+You may not apply legal terms or technological measures that legally restrict
+others from doing anything the license permits.
+
+
+FULL LEGAL TERMS
+----------------
+
+The complete legal code governing this grant is the Creative Commons
+Attribution 4.0 International Public License, available at:
+
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+Summary (human-readable deed):
+
+    https://creativecommons.org/licenses/by/4.0/
+
+That legal code is incorporated here by reference and controls in the event of
+any conflict with the summary above.
+
+
+NO WARRANTY
+-----------
+
+The content is provided "as is", without warranties of any kind. It is a
+research and educational knowledge base and is not financial, investment,
+legal, or tax advice. See the Disclaimer section of README.md.
