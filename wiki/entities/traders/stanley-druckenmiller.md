@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [traders, person, forex, macro-trading, history]
+tags: [traders, person, forex, macro, history]
 aliases: ["Druck"]
 entity_type: person
 founded: 1953

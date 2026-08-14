@@ -4,6 +4,28 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-15 — Tag audit batch 2: 23 tags adopted, 87 pages consolidated
+
+**Added:** 23 new approved tags to CLAUDE.md/AGENTS.md's "Approved Tags" list (and
+`tools/lint.py`) — `position-sizing`, `sentiment`, `trading-psychology`, `api`, `agents`,
+`prediction-markets`, `free`, `tail-risk`, `hft`, `dex`, `energy`, `etf`, `depin`,
+`validation`, `order-flow`, `bnb`, `market-neutral`, `interest-rates`, `theta`,
+`deep-learning`, `yield`, `alternative-data`, `compliance` — the top 30 non-approved tags
+by page-count, minus 7 that turned out to be duplicates of existing tags.
+
+**Changed:** Consolidated 7 duplicate/variant tag names across 87 pages' frontmatter:
+`hacks`→dropped (duplicate of `exploits`), `psychology`→dropped (duplicate of
+`behavioral-finance`), `meme`/`memecoin`→`memecoins`, `macro-trading`→`macro`,
+`data`→`data-provider`, `technology`→`infrastructure` (on the `ai-trading/infrastructure`
+pages only). No page body content was touched — frontmatter `tags:` lines only.
+
+**Notes:** Second run of the daily improvement loop. Lint's `tags` issue count dropped
+from 1,051 to 851 pages; the remaining ~851 are outside this batch's top-30 threshold or
+were deliberately left flagged (e.g. `wiki/markets/crypto/etherrock.md`'s `meme` tag
+means internet-meme-culture, not a coin — correctly not renamed). Next tag-audit batch
+and the still-open 12-page UTF-8-BOM lint bug (from 2026-08-14) are queued in
+`.claude/wiki-improvement-backlog.md`.
+
 ## 2026-08-14 — Lint tool's type/tag schema resynced to CLAUDE.md
 
 **Fixed:** `tools/lint.py`'s `VALID_TYPES` and `APPROVED_TAGS` constants — and the `type`

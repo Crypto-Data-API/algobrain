@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-06-11
 status: good
-tags: [behavioral-finance, risk-management, psychology]
+tags: [behavioral-finance, risk-management]
 aliases: ["loss aversion theory"]
 domain: [behavioral-finance]
 difficulty: intermediate

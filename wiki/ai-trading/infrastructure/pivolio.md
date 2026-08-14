@@ -4,7 +4,7 @@ type: source
 created: 2026-05-07
 updated: 2026-06-20
 status: good
-tags: [data-provider, options, derivatives, technology, risk-management]
+tags: [data-provider, options, derivatives, infrastructure, risk-management]
 aliases: ["PiVolio", "piVolio", "Pi Volio"]
 source_type: data
 confidence: low

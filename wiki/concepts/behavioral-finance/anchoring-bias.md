@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-22
 updated: 2026-06-11
 status: good
-tags: [behavioral-finance, psychology]
+tags: [behavioral-finance]
 aliases: ["Anchoring", "anchoring effect", "anchoring heuristic", "price anchoring"]
 domain: [behavioral-finance]
 difficulty: beginner

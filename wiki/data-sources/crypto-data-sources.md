@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-10
 updated: 2026-06-21
 status: excellent
-tags: [data, crypto, on-chain]
+tags: [data-provider, crypto, on-chain]
 aliases: ["Crypto Market Data", "Blockchain Data Sources"]
 related: ["[[data-sources-overview]]", "[[free-data-sources]]", "[[paid-data-providers]]", "[[alternative-data-providers]]"]
 ---

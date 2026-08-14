@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-21
 status: excellent
-tags: [education, book, macro-trading, behavioral-finance, reflexivity]
+tags: [education, book, macro, behavioral-finance, reflexivity]
 related:
   - "[[george-soros]]"
   - "[[behavioral-finance]]"

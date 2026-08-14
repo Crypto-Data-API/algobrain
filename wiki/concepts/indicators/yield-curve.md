@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [bonds, macro-trading, fundamental-analysis]
+tags: [bonds, macro, fundamental-analysis]
 aliases: ["Term Structure"]
 domain: [macro-trading, fundamental-analysis]
 prerequisites: ["[[treasury-bonds]]", "[[interest-rates]]"]

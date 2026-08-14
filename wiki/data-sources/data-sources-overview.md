@@ -4,7 +4,7 @@ type: overview
 created: 2026-04-10
 updated: 2026-04-20
 status: good
-tags: [data, data-providers, infrastructure]
+tags: [data-provider, data-providers, infrastructure]
 aliases: ["Market Data", "Data Providers", "Data Feeds", "data-providers"]
 related: ["[[free-data-sources]]", "[[paid-data-providers]]", "[[alternative-data-providers]]", "[[crypto-data-sources]]", "[[transaction-cost-modeling]]", "[[backtesting-overview]]", "[[fundamental-analysis-overview]]"]
 ---

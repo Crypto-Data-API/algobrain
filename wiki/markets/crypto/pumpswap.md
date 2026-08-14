@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-04
 updated: 2026-06-12
 status: draft
-tags: [crypto, defi, solana, sniping, memecoin]
+tags: [crypto, defi, solana, sniping, memecoins]
 aliases: ["Pump.fun DEX", "PumpSwap DEX"]
 entity_type: exchange
 headquarters: "Decentralized"

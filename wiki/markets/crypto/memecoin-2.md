@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-20
 status: excellent
-tags: [crypto, meme, nft, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest]
+tags: [crypto, nft, memecoins, altcoins, hyperliquid, perpetual-futures, funding-rate, open-interest]
 aliases: ["MEME"]
 entity_type: protocol
 headquarters: "Decentralized"

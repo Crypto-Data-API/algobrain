@@ -301,6 +301,9 @@ regime-detection, methodology, event-driven, hyperliquid
 
 # Adopted 2026-07-19 (tag audit)
 anomalies, australia, bittensor, combinations, crashes, execution, exploits, gamefi, hedge-funds, hedging, macro, market-making, meta-strategy, narrative-impact, options-structures, privacy, python, real-world-assets, security, sniping, solana, statistics, strategy-development, tax, trading-bots, volume
+
+# Adopted 2026-08-15 (tag audit batch 2)
+agents, alternative-data, api, bnb, compliance, deep-learning, depin, dex, energy, etf, free, hft, interest-rates, market-neutral, order-flow, position-sizing, prediction-markets, sentiment, tail-risk, theta, trading-psychology, validation, yield
 ```
 
 ## Content Guidelines

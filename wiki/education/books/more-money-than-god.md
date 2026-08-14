@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-06-22
 status: excellent
-tags: [education, book, history, hedge-funds, macro-trading, quantitative]
+tags: [education, book, history, hedge-funds, macro, quantitative]
 related:
   - "[[george-soros]]"
   - "[[paul-tudor-jones]]"

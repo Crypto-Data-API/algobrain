@@ -57,6 +57,11 @@ APPROVED_TAGS = {
     "gamefi", "hedging", "macro", "market-making", "meta-strategy", "narrative-impact",
     "options-structures", "privacy", "python", "real-world-assets", "security",
     "sniping", "solana", "statistics", "strategy-development", "tax", "volume",
+    # Adopted 2026-08-15 (tag audit batch 2)
+    "agents", "alternative-data", "api", "bnb", "compliance", "deep-learning",
+    "depin", "dex", "energy", "etf", "free", "hft", "interest-rates",
+    "market-neutral", "order-flow", "position-sizing", "prediction-markets",
+    "sentiment", "tail-risk", "theta", "trading-psychology", "validation", "yield",
 }
 
 

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-20
 status: excellent
-tags: [crypto, meme, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins]
+tags: [crypto, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, memecoins]
 aliases: ["MOODENG"]
 entity_type: protocol
 headquarters: "Decentralized"

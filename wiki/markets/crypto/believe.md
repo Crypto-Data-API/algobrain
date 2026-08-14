@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-04
 updated: 2026-07-16
 status: draft
-tags: [crypto, launchpad, memecoin, sniping, solana]
+tags: [crypto, launchpad, memecoins, sniping, solana]
 aliases: ["BELIEVE", "Believe", "Believe App", "believe.app"]
 entity_type: protocol
 headquarters: "Decentralized"

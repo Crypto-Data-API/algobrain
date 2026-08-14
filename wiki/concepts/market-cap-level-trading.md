@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-04
 updated: 2026-06-11
 status: good
-tags: [crypto, technical-analysis, behavioral-finance, memecoin, support-resistance]
+tags: [crypto, technical-analysis, behavioral-finance, memecoins, support-resistance]
 aliases: ["MC levels", "market cap levels", "round-number MC trading", "MC S/R"]
 domain: [technical-analysis, behavioral-finance]
 difficulty: beginner

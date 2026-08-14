@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-10
 updated: 2026-06-20
 status: excellent
-tags: [data, macro, economic-data]
+tags: [data-provider, macro, economic-data]
 aliases: ["Economic Data Sources", "Macro Data Providers"]
 related: ["[[data-sources-overview]]", "[[free-data-sources]]", "[[lookahead-bias]]", "[[economic-indicators]]", "[[cot-data]]", "[[eia-data]]", "[[usda-data]]", "[[commodity-data-sources]]"]
 ---

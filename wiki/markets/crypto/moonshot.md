@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-04
 updated: 2026-06-12
 status: draft
-tags: [crypto, solana, memecoin, launchpad, sniping]
+tags: [crypto, solana, memecoins, launchpad, sniping]
 aliases: ["Moonshot", "Moonshot App"]
 entity_type: protocol
 headquarters: "Decentralized"

@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-12
 status: good
-tags: [technology, algorithmic, market-microstructure, order-types]
+tags: [infrastructure, algorithmic, market-microstructure, order-types]
 aliases: ["Broker API", "Broker APIs", "Trading API"]
 domain: [market-microstructure]
 related:

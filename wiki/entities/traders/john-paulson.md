@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [traders, person, macro-trading, risk-management, history]
+tags: [traders, person, macro, risk-management, history]
 aliases: ["The Greatest Trade Ever"]
 entity_type: person
 founded: 1955

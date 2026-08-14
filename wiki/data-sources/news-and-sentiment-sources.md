@@ -4,7 +4,7 @@ type: reference
 created: 2026-04-10
 updated: 2026-06-20
 status: excellent
-tags: [data, news, sentiment, nlp]
+tags: [data-provider, news, sentiment, nlp]
 aliases: ["News Data", "Sentiment Data", "News Providers", "Sentiment Providers"]
 related: ["[[data-sources-overview]]", "[[alternative-data-providers]]", "[[sentiment-analysis]]", "[[news-trading]]"]
 ---

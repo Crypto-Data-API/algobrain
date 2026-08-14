@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [bnb, crypto, meme]
+tags: [bnb, crypto, memecoins]
 aliases: ["CHEEMS"]
 entity_type: protocol
 headquarters: "Decentralized"

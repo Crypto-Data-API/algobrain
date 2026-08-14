@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [traders, person, distressed-investing, macro-trading, value-investing]
+tags: [traders, person, distressed-investing, macro, value-investing]
 aliases: ["The Appaloosa Kid"]
 entity_type: person
 founded: 1957

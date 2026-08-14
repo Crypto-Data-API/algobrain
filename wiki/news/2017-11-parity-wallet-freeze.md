@@ -4,7 +4,7 @@ type: news
 created: 2026-04-14
 updated: 2026-04-14
 status: good
-tags: [news, crypto, defi, hacks, exploits, security, ethereum, history]
+tags: [news, crypto, defi, exploits, security, ethereum, history]
 event_date: 2017-11-06
 markets_affected: [crypto]
 impact: high

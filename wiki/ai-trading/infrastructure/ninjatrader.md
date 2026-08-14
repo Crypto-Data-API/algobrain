@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-22
 updated: 2026-06-12
 status: good
-tags: [trading-platforms, futures, backtesting, technology]
+tags: [trading-platforms, futures, backtesting, infrastructure]
 aliases: ["NinjaTrader 8", "NT8"]
 domain: [trading-platforms]
 related: ["[[sierra-chart]]", "[[atas-platform]]", "[[order-flow]]", "[[futures]]", "[[backtesting]]", "[[cme-group]]"]

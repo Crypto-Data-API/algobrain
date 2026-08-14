@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-15
 updated: 2026-06-11
 status: good
-tags: [behavioral-finance, psychology, risk-management]
+tags: [behavioral-finance, risk-management]
 aliases: ["Availability Bias", "availability heuristic", "recency-of-vividness bias"]
 domain: [behavioral-finance]
 prerequisites: ["[[behavioral-finance]]"]

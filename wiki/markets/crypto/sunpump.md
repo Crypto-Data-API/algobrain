@@ -4,7 +4,7 @@ type: entity
 created: 2026-05-04
 updated: 2026-06-12
 status: draft
-tags: [crypto, tron, memecoin, launchpad, sniping]
+tags: [crypto, tron, memecoins, launchpad, sniping]
 aliases: ["SunPump", "Sun Pump"]
 entity_type: protocol
 headquarters: "Decentralized"

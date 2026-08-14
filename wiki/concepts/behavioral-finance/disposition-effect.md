@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-22
 updated: 2026-06-11
 status: good
-tags: [behavioral-finance, psychology, risk-management]
+tags: [behavioral-finance, risk-management]
 aliases: ["disposition bias", "Shefrin-Statman Disposition Effect", "Hold Losers Sell Winners"]
 domain: [behavioral-finance]
 difficulty: intermediate

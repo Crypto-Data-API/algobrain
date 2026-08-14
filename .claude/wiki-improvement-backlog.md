@@ -256,3 +256,25 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   approve (`position-sizing` 23 pages, `trading-psychology` 19, `nlp`/`sentiment`,
   `hft`/`dex`/`etf`/`meme`/`staking`/`mev`/`yield`/`compliance`, etc.) — a real tag-audit
   batch, next in line.
+- 2026-08-15 iter 2 (tag audit batch 2): took the top 30 non-approved tags by page-count
+  (412 of the 1,051 flagged pages) and classified each — ADOPT (23 tags: position-sizing,
+  sentiment, trading-psychology, api, agents, prediction-markets, free, tail-risk, hft,
+  dex, energy, etf, depin, validation, order-flow, bnb, market-neutral, interest-rates,
+  theta, deep-learning, yield, alternative-data, compliance — added to CLAUDE.md/AGENTS.md
+  as "Adopted 2026-08-15 (tag audit batch 2)" + tools/lint.py) or CONSOLIDATE (7 tag
+  names, 87 pages' `tags:` line edited to the existing approved spelling: hacks→dropped
+  (dup of exploits), psychology→dropped (dup of behavioral-finance), meme/memecoin→
+  memecoins, macro-trading→macro, data→data-provider, technology→infrastructure on the 11
+  ai-trading/infrastructure pages). Investigated `free`/`hacks` for content-quality issues
+  per the task brief — both were well-sourced good/excellent pages, no problem found.
+  `wiki/markets/crypto/etherrock.md` deliberately excluded from the meme→memecoins rename
+  (it's an NFT collectible, "meme" there means internet-meme-culture, not a coin — still
+  flagged, correctly). Lint tags: 1051→851 (verified independently, not just sub-agent's
+  report); frontmatter/links/orphans/stale/empty byte-identical (12/460/40/6/58) —
+  confirms zero body-content changes, only `tags:` frontmatter lines + the 3 schema files.
+  Remaining for future batches: `ai-agents` (3 pages, near-dup of newly-adopted `agents`),
+  `data-providers` vs `data-provider` plural/singular inconsistency (3 pages),
+  `high-frequency-trading` vs newly-adopted `hft` inconsistency, `technology` on 3
+  Anthropic/Claude news pages (no clean existing-tag mapping), plus the remaining ~640
+  pages outside this batch's top-30 threshold, and the 12-page UTF-8 BOM lint.py bug
+  flagged in iter 1 (still unfixed).
