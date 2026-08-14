@@ -4,6 +4,26 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-14 — Lint tool's type/tag schema resynced to CLAUDE.md
+
+**Fixed:** `tools/lint.py`'s `VALID_TYPES` and `APPROVED_TAGS` constants — and the `type`
+enum documented in CLAUDE.md/AGENTS.md — had drifted from real wiki usage and from
+CLAUDE.md's own Approved Tags list. Three page types in wide legitimate use (`redirect`,
+201 pages; `reference`, 35; `narrative`, 2) weren't recognized as valid, and roughly 30
+tags CLAUDE.md already approves (funding-rate, hyperliquid, stablecoins, memecoins, the
+full 2026-07-19 tag-audit batch, etc.) weren't in the lint script's list. Together this
+was producing false-positive noise on ~2,100 of 2,676 total lint issues. CLAUDE.md and
+AGENTS.md's `type` line now both read `... | redirect | reference | narrative`, and
+`tools/lint.py` was updated to match (additive only — nothing removed). A full lint pass
+now reports tags 1051 (was 1871) and frontmatter 12 (was 249), both genuine remaining
+debt; links/empty/orphans/stale are unchanged (content wasn't touched).
+
+**Notes:** First run of the new daily improvement loop (`/start-loops` →
+`/improve-algobrain-loop`, armed today). Two follow-ups queued for future iterations: 12
+pages fail the frontmatter check due to a leading UTF-8 BOM breaking `lint.py`'s
+frontmatter regex (not actually missing fields), and ~1,051 pages carry genuinely
+non-approved tags worth a dedicated tag-audit batch.
+
 ## 2026-07-20 — Trading referrals baked across venue-relevant pages
 
 Referral links with automatic fee discounts — Hyperliquid (4% off spot & perp fees) and

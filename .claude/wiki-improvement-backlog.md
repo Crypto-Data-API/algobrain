@@ -232,3 +232,27 @@ pushes. Source: full wiki audit of 2026-07-18 (4,852 pages).
   ONLY A9 REMAINS.
 - 2026-07-19 iter 13 (A9): collision cleanup complete — zero same-stem duplicates.
   ★★ BACKLOG COMPLETE — all Phase A (A1–A9) and Phase B (B1–B12) items done. Loop stopped. ★★
+
+## Daily improvement loop
+
+Armed 2026-08-14 via `/start-loops` (session-scoped, `/loop 24h /improve-algobrain-loop`,
+CronCreate job, auto-expires after 7 days — re-arm before then to continue). Each
+iteration: pick one ~60-min-sub-agent-sized area (full lint pass + this log as the
+source of truth for what's already done), delegate, verify, log here, CHANGELOG, push.
+
+- 2026-08-14 iter 1: `tools/lint.py`'s `VALID_TYPES`/`APPROVED_TAGS` constants (and the
+  `type` enum documented in CLAUDE.md/AGENTS.md) had drifted badly from real usage and
+  from CLAUDE.md's own Approved Tags list — 3 in-use page types (`redirect` 201 pages,
+  `reference` 35, `narrative` 2) weren't recognized, and ~30 already-approved tags
+  (`funding-rate`, `hyperliquid`, `stablecoins`, the whole 2026-07-19 tag-audit batch,
+  etc.) weren't in the lint script's copy of the list. This was producing false-positive
+  noise on ~2,100 of 2,676 total lint issues — masking the real signal this loop needs
+  every day. Fixed by syncing CLAUDE.md → AGENTS.md → tools/lint.py (additive only,
+  nothing removed). Lint issue counts: tags 1871→1051, frontmatter 249→12 (both now
+  genuine debt), links/empty/orphans/stale unchanged (452/58/40/6 — content untouched).
+  Remaining genuine debt for future iterations: 12 pages fail the frontmatter check not
+  because fields are missing but because they carry a leading UTF-8 BOM that breaks
+  `lint.py`'s `^---` regex (list in the commit); ~1,051 pages carry tags CLAUDE.md doesn't
+  approve (`position-sizing` 23 pages, `trading-psychology` 19, `nlp`/`sentiment`,
+  `hft`/`dex`/`etf`/`meme`/`staking`/`mev`/`yield`/`compliance`, etc.) — a real tag-audit
+  batch, next in line.

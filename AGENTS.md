@@ -58,7 +58,7 @@ Every wiki page MUST have YAML frontmatter. The schema varies by page type:
 ```yaml
 ---
 title: "Human-Readable Title"
-type: concept | strategy | entity | market | comparison | news | source | index | overview
+type: concept | strategy | entity | market | comparison | news | source | index | overview | redirect | reference | narrative
 created: 2026-04-06
 updated: 2026-04-06
 status: stub | draft | review | good | excellent

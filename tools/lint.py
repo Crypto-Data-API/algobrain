@@ -24,6 +24,7 @@ REQUIRED_FIELDS = ["title", "type", "created", "updated", "status", "tags"]
 VALID_TYPES = {
     "concept", "strategy", "entity", "market", "comparison",
     "news", "source", "index", "overview",
+    "redirect", "reference", "narrative",
 }
 VALID_STATUSES = {"stub", "draft", "review", "good", "excellent"}
 APPROVED_TAGS = {
@@ -38,8 +39,10 @@ APPROVED_TAGS = {
     "risk-management", "portfolio-theory", "market-microstructure", "order-types",
     "indicators", "behavioral-finance", "valuation", "leverage", "margin",
     "derivatives", "volatility", "correlation", "liquidity", "slippage",
+    "on-chain", "funding-rate", "perpetual-futures", "liquidations", "open-interest",
     # Asset-specific
     "bitcoin", "ethereum", "altcoins", "sp500", "nasdaq", "gold", "oil", "treasuries",
+    "stablecoins", "memecoins",
     # Meta
     "history", "news", "education", "book", "person", "company", "exchange",
     "regulation", "ai-trading", "machine-learning", "backtesting", "data-provider",
@@ -48,6 +51,12 @@ APPROVED_TAGS = {
     "trading-bots", "infrastructure", "courses", "resources",
     "crashes", "bull-markets", "bear-markets", "notable-trades", "market-evolution",
     "strategies", "concepts", "entities", "markets",
+    "market-regime", "regime-detection", "methodology", "event-driven", "hyperliquid",
+    # Adopted 2026-07-19 (tag audit)
+    "anomalies", "australia", "bittensor", "combinations", "execution", "exploits",
+    "gamefi", "hedging", "macro", "market-making", "meta-strategy", "narrative-impact",
+    "options-structures", "privacy", "python", "real-world-assets", "security",
+    "sniping", "solana", "statistics", "strategy-development", "tax", "volume",
 }
 
 
