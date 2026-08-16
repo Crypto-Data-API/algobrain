@@ -9,12 +9,12 @@ aliases: ["NUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://neutrl.finance/"
-related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoin]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
+related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[stablecoins]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # Neutrl USD
 
-**Neutrl USD** (ticker **NUSD**) is a market-neutral [[synthetic-dollar|synthetic dollar]] issued by the Neutrl protocol on [[ethereum|Ethereum]], targeting a soft peg of 1 NUSD ≈ US$1. Unlike a fiat-backed [[stablecoin]], NUSD is collateralized by a delta-neutral trading book — combining OTC arbitrage on locked/discounted altcoins, perpetual-futures funding-rate capture, and other hedged DeFi strategies — so the token aims to hold its dollar value while the backing positions generate yield distributable to a staked variant. Conceptually it sits in the same "yield-bearing synthetic dollar" family pioneered by [[ethena-usde|Ethena USDe]].
+**Neutrl USD** (ticker **NUSD**) is a market-neutral [[synthetic-dollar|synthetic dollar]] issued by the Neutrl protocol on [[ethereum|Ethereum]], targeting a soft peg of 1 NUSD ≈ US$1. Unlike a fiat-backed [[stablecoins]], NUSD is collateralized by a delta-neutral trading book — combining OTC arbitrage on locked/discounted altcoins, perpetual-futures funding-rate capture, and other hedged DeFi strategies — so the token aims to hold its dollar value while the backing positions generate yield distributable to a staked variant. Conceptually it sits in the same "yield-bearing synthetic dollar" family pioneered by [[ethena-usde|Ethena USDe]].
 
 > **Subject note / disambiguation:** "nUSD" / "NUSD" has been used by several unrelated projects (e.g. Synthetix's legacy nUSD, Nexus Mutual contexts). *This* page is specifically **Neutrl USD** issued by the **Neutrl protocol** (neutrl.finance). Do not graft other nUSD histories onto it.
 
@@ -197,7 +197,7 @@ NUSD sits in the **delta-neutral synthetic-dollar / "internet bond"** narrative 
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]]
+- [[stablecoins]] / [[stablecoins]]
 - [[synthetic-dollar]]
 - [[ethena-usde]] — the reference yield-bearing synthetic dollar
 - [[crypto-markets]]

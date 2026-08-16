@@ -9,12 +9,12 @@ aliases: ["RSR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://reserve.org/"
-related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[stablecoin]]", "[[perpetual-futures]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[funding-rate]]", "[[hyperliquid]]", "[[stablecoins]]", "[[perpetual-futures]]", "[[hl-vs-cex-funding-divergence]]", "[[cash-and-carry]]"]
 ---
 
 # Reserve Rights
 
-**Reserve Rights** (ticker **RSR**) is an [[ethereum|Ethereum]] ERC-20 token that powers the **Reserve protocol**, a platform for creating asset-backed, overcollateralized [[stablecoin|stablecoins]] called **RTokens**. RSR serves two core functions: (1) it is **staked as first-loss capital** to overcollateralize and backstop RTokens against collateral defaults, and (2) it is the **[[governance-token|governance token]]** used to propose and vote on RToken configurations. Stakers earn a share of RToken revenue in exchange for absorbing collateral risk.
+**Reserve Rights** (ticker **RSR**) is an [[ethereum|Ethereum]] ERC-20 token that powers the **Reserve protocol**, a platform for creating asset-backed, overcollateralized [[stablecoins|stablecoins]] called **RTokens**. RSR serves two core functions: (1) it is **staked as first-loss capital** to overcollateralize and backstop RTokens against collateral defaults, and (2) it is the **[[governance-token|governance token]]** used to propose and vote on RToken configurations. Stakers earn a share of RToken revenue in exchange for absorbing collateral risk.
 
 ---
 
@@ -39,7 +39,7 @@ Context: with the market in **extreme fear** (Crypto [[fear-and-greed-index|Fear
 
 ## Technology & Protocol
 
-Reserve is a **stablecoin factory**, not a lending market or [[dex|DEX]]. Anyone can permissionlessly deploy an **RToken** — an [[stablecoin|asset-backed stablecoin]] defined by a configurable basket:
+Reserve is a **stablecoin factory**, not a lending market or [[dex|DEX]]. Anyone can permissionlessly deploy an **RToken** — an [[stablecoins|asset-backed stablecoin]] defined by a configurable basket:
 
 - **Collateral baskets** — an RToken (e.g., eUSD, an ETF-style index dollar) is fully backed by a basket of collateral that can include yield-bearing stablecoins (aUSDC, cUSDC), tokenized real-world assets, and other tokens. The basket earns yield, a portion of which flows to RSR stakers and RToken holders.
 - **Mint / redeem arbitrage** — RTokens are minted by depositing the underlying basket and redeemed for it 1:1, so arbitrageurs keep the RToken near the value of its backing — the peg mechanism is *collateral redemption*, not an order book or algorithmic seigniorage.
@@ -73,13 +73,13 @@ RSR has a very large fixed supply (100B max), with ~62.55B circulating — about
 
 **Protocol context:** Reserve is **not a [[dex|DEX]]** — RSR's primary on-chain "use" is staking to overcollateralize RTokens, not trading on a native venue. RTokens themselves are baskets of collateral (yield-bearing stablecoins, tokenized real-world assets) that can be minted/redeemed against their backing, which is the protocol's core arbitrage / peg-maintenance mechanism rather than an order book.
 
-**Derivatives:** RSR is listed as a perpetual on [[hyperliquid|Hyperliquid]] (RSR-PERP). As a low-priced, small-cap token, its perp [[funding-rate|funding rate]] and open interest can be volatile, especially around RWA-narrative momentum or [[stablecoin]]-sector news; the sub-cent price and thin spot depth make the perp prone to sharp liquidation moves (see [[perpetual-futures]]).
+**Derivatives:** RSR is listed as a perpetual on [[hyperliquid|Hyperliquid]] (RSR-PERP). As a low-priced, small-cap token, its perp [[funding-rate|funding rate]] and open interest can be volatile, especially around RWA-narrative momentum or [[stablecoins]]-sector news; the sub-cent price and thin spot depth make the perp prone to sharp liquidation moves (see [[perpetual-futures]]).
 
 ---
 
 ## Narrative & Category
 
-Reserve sits in the **[[stablecoin]] infrastructure + Real World Assets (RWA)** category — a framework for permissionlessly launching overcollateralized, yield-bearing stablecoins backed by diversified collateral baskets including tokenized RWAs. RSR's narrative is leveraged to two strong themes: the growth of on-chain stablecoins and the tokenization of real-world assets. The token thesis is that as RTokens grow in market cap and revenue, demand to stake RSR (for yield and governance) rises with the collateral backstop required.
+Reserve sits in the **[[stablecoins]] infrastructure + Real World Assets (RWA)** category — a framework for permissionlessly launching overcollateralized, yield-bearing stablecoins backed by diversified collateral baskets including tokenized RWAs. RSR's narrative is leveraged to two strong themes: the growth of on-chain stablecoins and the tokenization of real-world assets. The token thesis is that as RTokens grow in market cap and revenue, demand to stake RSR (for yield and governance) rises with the collateral backstop required.
 
 ---
 
@@ -125,7 +125,7 @@ RSR is a **leveraged call option on RToken adoption**. Its value should, in theo
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[defi]]
 - [[olympus]]
 - [[hyperliquid]]

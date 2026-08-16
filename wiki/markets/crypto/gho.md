@@ -15,7 +15,7 @@ related: ["[[aave]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-yields
 
 # GHO
 
-**GHO** (ticker **GHO**, native to [[ethereum|Ethereum]]) is [[aave|Aave]]'s decentralized, overcollateralized USD [[stablecoin]], launched on Ethereum mainnet in July 2023 and minted against collateral supplied to Aave markets, with interest paid by minters flowing to the Aave DAO treasury. For traders, GHO matters less as a directional asset than as DeFi plumbing: its borrow rate is set by Aave governance (a policy lever, not a market rate), its peg behavior signals Aave-ecosystem stress, and its **sGHO** savings wrapper anchors the DeFi stablecoin yield curve.
+**GHO** (ticker **GHO**, native to [[ethereum|Ethereum]]) is [[aave|Aave]]'s decentralized, overcollateralized USD [[stablecoins]], launched on Ethereum mainnet in July 2023 and minted against collateral supplied to Aave markets, with interest paid by minters flowing to the Aave DAO treasury. For traders, GHO matters less as a directional asset than as DeFi plumbing: its borrow rate is set by Aave governance (a policy lever, not a market rate), its peg behavior signals Aave-ecosystem stress, and its **sGHO** savings wrapper anchors the DeFi stablecoin yield curve.
 
 ---
 

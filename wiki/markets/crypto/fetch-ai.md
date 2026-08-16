@@ -114,7 +114,7 @@ The combined pitch: agents (Fetch) + AI services/AGI research (SingularityNET) +
 
 ## Trading Relevance
 
-- **Narrative basket**: anchor of the **AI-crypto basket** ([[narrative-trading]]) with [[bittensor|TAO]], [[render|RENDER]], NEAR, [[worldcoin|WLD]] — FET historically trades with very high beta to AI news cycles (e.g., NVIDIA earnings, OpenAI announcements). With Fear & Greed at 23, the whole basket is risk-off.
+- **Narrative basket**: anchor of the **AI-crypto basket** ([[narrative-trading]]) with [[bittensor|TAO]], [[render-token|RENDER]], NEAR, [[worldcoin|WLD]] — FET historically trades with very high beta to AI news cycles (e.g., NVIDIA earnings, OpenAI announcements). With Fear & Greed at 23, the whole basket is risk-off.
 - **Venues**: deep spot liquidity on Binance, Kraken, Bitget, KuCoin, Crypto.com (~$50.8M daily volume on 2026-06-20, down sharply from ~$124M in April 2026 as interest cools); **FET-PERP on [[hyperliquid|Hyperliquid]]** and Binance futures — ample for both directions.
 - **Idiosyncratic risk now matters**: post-Ocean-exit, FET carries alliance-governance headline risk on top of sector beta — supply shocks from member treasuries are a demonstrated hazard.
 - **Catalysts**: AI-sector rotation, alliance restructurings, ASI model/agent product launches, large-treasury movements (watch the returned 286M FET tranche).
@@ -171,7 +171,7 @@ Bottom line: value FET as "AI-narrative beta with a real (if early) agent/AI pro
 |---|---|---|---|---|
 | **FET (ASI Alliance)** | Agents + AGI + data + compute (federated) | ~0.83, low dilution | Most diversified AI stack; deepest liquidity | Multi-foundation governance fragility |
 | **[[bittensor|TAO]]** | Decentralized ML subnets / incentivized intelligence | Emission-heavy | Single coherent protocol; strong dev mindshare | High inflation; complex subnet economics |
-| **[[render|RENDER]]** | Decentralized GPU rendering/compute | Mature float | Real compute demand; clear use case | Narrower (compute only) |
+| **[[render-token|RENDER]]** | Decentralized GPU rendering/compute | Mature float | Real compute demand; clear use case | Narrower (compute only) |
 | **NEAR** | L1 with AI/agent positioning | Mature | General-purpose L1 distribution | AI angle is secondary to L1 thesis |
 | **[[worldcoin|WLD]]** | Proof-of-personhood / identity for AI age | Large locked supply | Sam Altman halo; identity moat | Heavy unlock overhang; regulatory scrutiny |
 
@@ -282,7 +282,7 @@ The April→June 2026 path (rank #97 → #114, volume halved) tracks the broader
 - [[ocean-protocol]] — former alliance member, exited Oct 2025
 - [[artificial-superintelligence-alliance]] — entity page for the alliance organization
 - [[artificial-intelligence]] — sector context
-- [[bittensor]], [[render]], [[worldcoin]] — AI-crypto peers
+- [[bittensor]], [[render-token]], [[worldcoin]] — AI-crypto peers
 - [[narrative-trading]] — AI basket
 - [[hyperliquid]] — FET-PERP venue
 - [[perpetual-futures]] — derivatives context
@@ -323,7 +323,7 @@ FET is a genuine two-venue perp market. It trades on **Binance** (FET/USDT spot 
 - [[funding-rate-harvest]] — FET funding mean-reverts around neutral but turns positive on AI-narrative FOMO spikes, letting a delta-neutral long-spot/short-perp book harvest carry without punitive drag.
 - [[cash-and-carry]] — deep Binance spot plus a liquid perp makes long-spot / short-perp basis capture straightforward when narrative pops push perp premium positive.
 - [[hl-vs-cex-funding-divergence]] — with FET quoted on both Hyperliquid and Binance perps, funding can dislocate between venues, offering a market-neutral spread to arbitrage.
-- [[pairs-trading]] — long/short FET against another AI-basket name ([[bittensor|TAO]], [[render|RENDER]]) isolates idiosyncratic alpha and strips out shared sector beta.
+- [[pairs-trading]] — long/short FET against another AI-basket name ([[bittensor|TAO]], [[render-token|RENDER]]) isolates idiosyncratic alpha and strips out shared sector beta.
 - [[narrative-trading]] — FET is the deepest, most liquid pure play on the AI-crypto narrative, making it the natural expression vehicle for AI-sector rotation views.
 - [[range-mean-reversion]] — in the current Extreme-Fear / bear regime FET oscillates in compressed ranges, favoring fading extremes over chasing breakouts.
 

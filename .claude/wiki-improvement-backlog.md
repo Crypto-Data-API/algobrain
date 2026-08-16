@@ -302,3 +302,22 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   9p/18refs, `usde`→`ethena-usde` 8p/26refs, `near-protocol`→`near`). Next in line:
   fix the `[[stablecoin]]`→`[[stablecoins]]` rename batch (highest leverage, ~230
   single-target references, likely scriptable) plus the other rename mismatches above.
+- 2026-08-17 iter 4 (wikilink rename-mismatch batch): fixed all 9 mismatches queued in
+  iter 3 — `stablecoin`→`stablecoins` (82 files/230 refs), `decentralized-finance`→`defi`
+  (18f/40r), `non-fungible-token`→`nft` (8f/23r), `binance-coin`→`bnb` (8f/35r),
+  `render`→`render-token` (9f/27r, carefully scoped so plain prose "Render"/"RENDER" in
+  tables stayed untouched — only actual `[[render]]`/`[[render|...]]` links moved),
+  `bitcoin-etf`→`bitcoin-etfs` (9f/14r), `on-chain-analytics`→`on-chain-analysis` (9f/18r),
+  `usde`→`ethena-usde` (8f/26r), `near-protocol`→`near` (3f/12r). 150 unique wiki pages
+  touched, 425 reference instances fixed, mechanical target-only rewrites (aliases,
+  section anchors, and all surrounding content preserved verbatim) — confirmed via
+  spot-read diffs and independently grepping for zero remaining references to any of the
+  9 old names. Lint links: 283→247 (verified independently). Smaller-than-raw-instance-
+  count drop is expected and correct: `check_wikilinks` flags a whole page only once it
+  has >5 broken links total, so 36 pages dropped below threshold entirely while 31 more
+  had their count reduced but stayed flagged due to other, unrelated broken links on the
+  same page (e.g. `jupiter-jlp`, `gbtc`, `cme-fedwatch` — not part of this batch).
+  tags/empty/orphans/stale unchanged (852/58/39/6). Remaining 247 links flags are mostly
+  genuine forward-link gaps (fine per CLAUDE.md) plus whatever other rename-mismatches or
+  real typos exist beyond this batch's 9 — worth another characterization pass in a
+  future iteration before assuming it's all forward-link gaps now.

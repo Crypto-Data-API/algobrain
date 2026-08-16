@@ -9,7 +9,7 @@ aliases: ["MHYPER", "mHYPER"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://midas.app/mhyper"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]"]
 ---
 
 # Midas mHYPER
@@ -141,7 +141,7 @@ mHYPER sits in the **tokenized-fund / RWA yield** category — bringing a profes
 
 - [[real-world-assets]]
 - [[tokenization]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[crypto-markets]]
 
 ---

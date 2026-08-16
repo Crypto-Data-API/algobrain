@@ -6,7 +6,7 @@ updated: 2026-06-11
 status: good
 tags: [bitcoin, crypto, company, education]
 aliases: ["Swan Bitcoin", "Swan"]
-related: ["[[bitcoin]]", "[[dca-strategy]]", "[[dollar-cost-averaging]]", "[[self-custody]]", "[[coinbase]]", "[[bitcoin-etf]]", "[[exchanges]]"]
+related: ["[[bitcoin]]", "[[dca-strategy]]", "[[dollar-cost-averaging]]", "[[self-custody]]", "[[coinbase]]", "[[bitcoin-etfs]]", "[[exchanges]]"]
 entity_type: company
 founded: 2019
 headquarters: "Los Angeles, USA"
@@ -30,7 +30,7 @@ Swan does not list altcoins and has been publicly critical of multi-coin platfor
 
 - **DCA as strategy, not speculation.** Swan exists because [[dollar-cost-averaging]] into a volatile asset removes timing risk and behavioural error — relevant to the [[dca-strategy]] and [[dca-technical-hybrid]] wiki entries as a real-world implementation channel.
 - **Counterparty and custody risk.** Swan's self-custody emphasis is a direct response to exchange-failure events (FTX, Celsius); the page is a useful reference point when evaluating [[exchanges|exchange]] vs self-custody trade-offs.
-- **On-ramp economics.** Fee structure (spread/commission on recurring buys) matters for net DCA returns versus a [[bitcoin-etf|spot Bitcoin ETF]] or a low-fee exchange — a cost comparison any systematic accumulator should run.
+- **On-ramp economics.** Fee structure (spread/commission on recurring buys) matters for net DCA returns versus a [[bitcoin-etfs|spot Bitcoin ETF]] or a low-fee exchange — a cost comparison any systematic accumulator should run.
 - **Not a trading venue.** Swan offers no leverage, derivatives, or active-trading tooling; it is irrelevant to short-term or [[algorithmic-trading|algorithmic]] strategies and is best understood as a long-horizon savings rail.
 
 ## Related
@@ -38,7 +38,7 @@ Swan does not list altcoins and has been publicly critical of multi-coin platfor
 - [[bitcoin]] — the only asset Swan supports
 - [[dca-strategy]], [[dollar-cost-averaging]] — the core methodology
 - [[self-custody]] — Swan's custody philosophy
-- [[bitcoin-etf]], [[coinbase]], [[exchanges]] — alternative accumulation channels
+- [[bitcoin-etfs]], [[coinbase]], [[exchanges]] — alternative accumulation channels
 
 ## Sources
 

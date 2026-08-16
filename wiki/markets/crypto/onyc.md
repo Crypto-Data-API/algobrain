@@ -9,12 +9,12 @@ aliases: ["ONYC", "ONyc", "Onchain Yield Coin"]
 entity_type: protocol
 headquarters: "Decentralized (OnRe protocol)"
 website: "https://onre.finance"
-related: ["[[crypto-markets]]", "[[ethena]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[ethena]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoins]]"]
 ---
 
 # OnRe Tokenized Reinsurance
 
-**OnRe Tokenized Reinsurance** (ticker **ONYC**, branded "ONyc") is a yield-bearing, multi-collateral token on **[[solana|Solana]]** that channels capital into the real-world **reinsurance** market. It is a [[real-world-assets|real-world asset]] (RWA) / yield-bearing [[stablecoin]] product: holders earn yield sourced from reinsurance premiums (largely uncorrelated to crypto cycles) **plus** the yield on the underlying collateral. OnRe positions ONYC as on-chain, composable access to the ~$750B reinsurance industry — an asset class historically gated behind institutional allocators and insurance-linked-securities (ILS) funds. The token is designed to drift up in value as yield accrues (a "rebasing-in-price" model) rather than trade as a free-floating governance coin, which is why it sits just above its $1 reference.
+**OnRe Tokenized Reinsurance** (ticker **ONYC**, branded "ONyc") is a yield-bearing, multi-collateral token on **[[solana|Solana]]** that channels capital into the real-world **reinsurance** market. It is a [[real-world-assets|real-world asset]] (RWA) / yield-bearing [[stablecoins]] product: holders earn yield sourced from reinsurance premiums (largely uncorrelated to crypto cycles) **plus** the yield on the underlying collateral. OnRe positions ONYC as on-chain, composable access to the ~$750B reinsurance industry — an asset class historically gated behind institutional allocators and insurance-linked-securities (ILS) funds. The token is designed to drift up in value as yield accrues (a "rebasing-in-price" model) rather than trade as a free-floating governance coin, which is why it sits just above its $1 reference.
 
 ---
 
@@ -67,7 +67,7 @@ The token's NAV rises as both layers compound, which is why ONYC prints just abo
 
 Tokens are **minted on deposit** and **burned on redemption**, so circulating supply tracks protocol AUM rather than a fixed emission schedule. There is no inflation cliff and no vesting unlock — new ONYC only exists because new collateral was deposited. The mint/redeem path (not the secondary market) is the protocol's intended primary liquidity mechanism; redemption is gated by the collateral being unwound from live reinsurance commitments, which is the key liquidity caveat (see Risks).
 
-See [[real-world-assets]], [[stablecoin]], and [[ethena]] for the broader category and the collateral dependency.
+See [[real-world-assets]], [[stablecoins]], and [[ethena]] for the broader category and the collateral dependency.
 
 ---
 
@@ -156,7 +156,7 @@ This is a **hold-to-earn, NAV-accreting instrument**, not a trade. The playbook 
 ## Related
 
 - [[real-world-assets]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[ethena]]
 - [[crypto-markets]]
 - [[solana]]

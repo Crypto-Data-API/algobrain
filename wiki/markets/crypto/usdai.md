@@ -155,7 +155,7 @@ USDai is a **credit-backed synthetic dollar** — its backing is a loan book, no
 
 - [[crypto-markets]]
 - [[arbitrum]]
-- [[stablecoins]] / [[stablecoin]]
+- [[stablecoins]] / [[stablecoins]]
 - [[synthetic-dollar]]
 - [[stablecoin-yields]]
 - [[real-world-assets]]

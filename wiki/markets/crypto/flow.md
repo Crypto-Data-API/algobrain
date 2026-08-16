@@ -9,7 +9,7 @@ aliases: ["FLOW"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://flow.com"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[non-fungible-token]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[layer-1]]", "[[nft]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[cash-and-carry]]"]
 ---
 
 # Flow
@@ -250,7 +250,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[non-fungible-token]]
+- [[nft]]
 - [[gamefi]]
 - [[layer-1]]
 - [[proof-of-stake]]

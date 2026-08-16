@@ -106,7 +106,7 @@ Most retail allocators ask "what's the APR?" The professional question is **"wha
 
 ### Aave aUSDC
 
-**You are short:** Aave bad-debt accumulation, **plus** [[stablecoin|stablecoin]] depeg of underlying USDC.
+**You are short:** Aave bad-debt accumulation, **plus** [[stablecoins|stablecoin]] depeg of underlying USDC.
 
 - [[aave|Aave]] is the **most battle-tested DeFi lending protocol**, live since 2020 (V1) with V3 since 2022. Multi-billion-dollar TVL, multiple audits, on-chain insurance via the [[aave|Safety Module]].
 - Yield comes from borrowers paying interest. APR is typically **4-8%** on USDC depending on utilization.

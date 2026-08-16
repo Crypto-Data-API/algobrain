@@ -90,7 +90,7 @@ NIL is well-listed for its cap, having launched via **Binance Launchpool** and *
 NIL trades within the **privacy-infrastructure / DeAI** slice of the AI-coin basket. In the current tape (2026-06-22, Fear & Greed 21 / Extreme Fear, established bear market) AI/privacy small-caps are high-beta both ways. NIL-specific catalysts:
 - **Private-AI / blind-compute usage** — real fee-paying demand for blind computation (private inference, encrypted DB queries) is the metric that converts narrative into value accrual.
 - **Unlock schedule** — scheduled investor/team/ecosystem unlocks are recurring supply events that tend to pressure price.
-- **AI-basket beta** — moves in [[bittensor|TAO]]/[[render|RENDER]] and broad AI/privacy sentiment spill into NIL.
+- **AI-basket beta** — moves in [[bittensor|TAO]]/[[render-token|RENDER]] and broad AI/privacy sentiment spill into NIL.
 - **Perp positioning** — the [[hyperliquid|Hyperliquid]] NIL-PERP can drive funding-squeeze moves and liquidation cascades disproportionate to the token's cap.
 
 ## History & Timeline
@@ -108,7 +108,7 @@ NIL trades within the **privacy-infrastructure / DeAI** slice of the AI-coin bas
 - **Regime awareness** — at Fear & Greed 21 (Extreme Fear) in an established bear market, AI/privacy small-caps carry elevated downside beta; size small and expect multiples of [[bitcoin|BTC]] volatility.
 - **Perp caution** — the [[hyperliquid|Hyperliquid]] NIL-PERP amplifies both directions; watch funding and open interest for squeeze/liquidation risk, and avoid oversized leverage in a thin underlying.
 - **Unlock calendar** — track scheduled unlocks; rallies into unlock dates frequently fade as supply hits the market.
-- **Basket correlation** — gauge entries against AI-leader momentum ([[bittensor|TAO]], [[render|RENDER]]) rather than NIL alone; broad-basket capitulation tends to offer better risk/reward.
+- **Basket correlation** — gauge entries against AI-leader momentum ([[bittensor|TAO]], [[render-token|RENDER]]) rather than NIL alone; broad-basket capitulation tends to offer better risk/reward.
 - **Catalyst vs noise** — separate genuine blind-compute usage (fee revenue) from announcement-driven pumps, which mean-revert.
 
 ---
@@ -248,7 +248,7 @@ NIL is a **two-venue perp market**, unusually deep for a sub-$20M-cap token. It 
 
 ### Volatility & regime character
 
-NIL is a **high-beta AI / privacy-infrastructure altcoin** — a small-cap DeAI token whose swings run at a multiple of [[bitcoin|BTC]]/[[ethereum|ETH]]. It is strongly correlated to the broad AI-coin basket (moves in [[bittensor|TAO]]/[[render|RENDER]] and privacy/DeAI sentiment spill directly into NIL) and shows amplified downside beta in risk-off tape. Direction is driven by narrative rotation and emissions far more than by fundamentals, and the levered perps add reflexive squeeze/cascade behavior on top of the underlying alt beta.
+NIL is a **high-beta AI / privacy-infrastructure altcoin** — a small-cap DeAI token whose swings run at a multiple of [[bitcoin|BTC]]/[[ethereum|ETH]]. It is strongly correlated to the broad AI-coin basket (moves in [[bittensor|TAO]]/[[render-token|RENDER]] and privacy/DeAI sentiment spill directly into NIL) and shows amplified downside beta in risk-off tape. Direction is driven by narrative rotation and emissions far more than by fundamentals, and the levered perps add reflexive squeeze/cascade behavior on top of the underlying alt beta.
 
 ### Risk flags
 

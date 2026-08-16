@@ -15,7 +15,7 @@ related: ["[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[stablecoin-dep
 
 # First Digital USD
 
-**First Digital USD** (FDUSD) is a fiat-backed USD [[stablecoin]] launched in June 2023 by Hong Kong's First Digital group (issuer FD121 Limited, reserves custodied by First Digital Trust), deployed natively on [[ethereum|Ethereum]] and BNB Chain, which rose to a >$2B supply almost entirely on the back of [[binance|Binance]] zero-fee trading promotions. It is now best known to traders as the subject of one of the defining [[stablecoin-depegs|stablecoin depeg]] events of 2025: Justin Sun's April 2025 insolvency allegations against First Digital Trust knocked FDUSD to ~$0.87 intraday, and although the peg recovered within days, supply collapsed roughly 80% — from ~$2B to ~$350M by mid-2026.
+**First Digital USD** (FDUSD) is a fiat-backed USD [[stablecoins]] launched in June 2023 by Hong Kong's First Digital group (issuer FD121 Limited, reserves custodied by First Digital Trust), deployed natively on [[ethereum|Ethereum]] and BNB Chain, which rose to a >$2B supply almost entirely on the back of [[binance|Binance]] zero-fee trading promotions. It is now best known to traders as the subject of one of the defining [[stablecoin-depegs|stablecoin depeg]] events of 2025: Justin Sun's April 2025 insolvency allegations against First Digital Trust knocked FDUSD to ~$0.87 intraday, and although the peg recovered within days, supply collapsed roughly 80% — from ~$2B to ~$350M by mid-2026.
 
 ---
 

@@ -9,12 +9,12 @@ aliases: ["GUSD", "Gemini USD"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://gemini.com/dollar/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gemini]]", "[[paxos-standard]]", "[[paypal-usd]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gemini]]", "[[paxos-standard]]", "[[paypal-usd]]", "[[stablecoins]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # Gemini Dollar
 
-**Gemini Dollar** (ticker **GUSD**, ERC-20 on [[ethereum|Ethereum]]) is a fiat-collateralized [[stablecoin]] pegged 1:1 to the U.S. dollar, issued by [[gemini|Gemini Trust Company, LLC]], a New York trust company regulated by the New York State Department of Financial Services (NYDFS). Launched on **10 September 2018** alongside [[paxos-standard|Pax Dollar (then PAX)]], GUSD was one of the first regulated, fiat-backed dollar stablecoins to receive explicit approval from a U.S. state regulator. Reserves are held at a U.S. bank with monthly independent attestations, and the contract was audited by Trail of Bits at launch.
+**Gemini Dollar** (ticker **GUSD**, ERC-20 on [[ethereum|Ethereum]]) is a fiat-collateralized [[stablecoins]] pegged 1:1 to the U.S. dollar, issued by [[gemini|Gemini Trust Company, LLC]], a New York trust company regulated by the New York State Department of Financial Services (NYDFS). Launched on **10 September 2018** alongside [[paxos-standard|Pax Dollar (then PAX)]], GUSD was one of the first regulated, fiat-backed dollar stablecoins to receive explicit approval from a U.S. state regulator. Reserves are held at a U.S. bank with monthly independent attestations, and the contract was audited by Trail of Bits at launch.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -112,7 +112,7 @@ GUSD sits in the **regulated fiat-backed dollar stablecoin** category. Catalysts
 - **Liquidity risk** — Low circulating supply and volume can widen spreads and increase slippage versus larger stablecoins.
 - **Smart-contract risk** — Audited ERC-20 contract, but upgradeable/pausable design concentrates control with the issuer.
 
-See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
+See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 
 ---
 
@@ -127,7 +127,7 @@ See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[gemini]]
 - [[usdc]]
 - [[tether]]

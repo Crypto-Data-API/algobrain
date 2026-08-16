@@ -9,12 +9,12 @@ aliases: ["MUSD", "MetaMask USD", "mUSD"]
 entity_type: protocol
 headquarters: "Decentralized (Consensys / MetaMask)"
 website: "https://metamask.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[linea]]", "[[metamask]]", "[[pyusd]]", "[[stablecoin]]", "[[tether]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[linea]]", "[[metamask]]", "[[pyusd]]", "[[stablecoins]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # MetaMask USD
 
-**MetaMask USD** (ticker **MUSD / mUSD**) is a **fiat-reserve [[stablecoin]]** designed to hold a 1:1 peg to the U.S. dollar, built as the wallet-native dollar for the [[metamask|MetaMask]] ecosystem on [[ethereum|Ethereum]] and **Linea**. MetaMask itself does not custody reserves; issuance runs through specialist stablecoin infrastructure — **Bridge** (the stablecoin-issuance platform acquired by Stripe) and the **M0** shared-issuance framework — while MetaMask supplies distribution, in-wallet swaps, fiat on/off-ramps, and real-world spend via the MetaMask Card. In substance MUSD is a distribution play: a recognized consumer wallet brand wrapped around a regulated issuer's reserves, competing with [[usdc]], [[tether]], and [[pyusd|PayPal USD]] for the default in-app dollar balance.
+**MetaMask USD** (ticker **MUSD / mUSD**) is a **fiat-reserve [[stablecoins]]** designed to hold a 1:1 peg to the U.S. dollar, built as the wallet-native dollar for the [[metamask|MetaMask]] ecosystem on [[ethereum|Ethereum]] and **Linea**. MetaMask itself does not custody reserves; issuance runs through specialist stablecoin infrastructure — **Bridge** (the stablecoin-issuance platform acquired by Stripe) and the **M0** shared-issuance framework — while MetaMask supplies distribution, in-wallet swaps, fiat on/off-ramps, and real-world spend via the MetaMask Card. In substance MUSD is a distribution play: a recognized consumer wallet brand wrapped around a regulated issuer's reserves, competing with [[usdc]], [[tether]], and [[pyusd|PayPal USD]] for the default in-app dollar balance.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -117,7 +117,7 @@ MUSD's primary venue is the **MetaMask wallet itself** — in-app swaps, ramps, 
 - **Smart-contract / framework risk** — Exposure to the M0 framework and the deployed ERC-20 contracts on Ethereum and Linea.
 - **Regulatory risk** — Stablecoin regulation could constrain branded/wallet-distributed dollars and their issuance partners.
 
-See [[stablecoin]] and [[depeg]] for the general framework.
+See [[stablecoins]] and [[depeg]] for the general framework.
 
 ---
 
@@ -131,7 +131,7 @@ See [[stablecoin]] and [[depeg]] for the general framework.
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[metamask]]
 - [[usdc]]
 - [[tether]]

@@ -14,7 +14,7 @@ related: ["[[crypto-markets]]", "[[ethereum]]", "[[stablecoins]]", "[[yield-bear
 
 # USP Yield Optimized Stablecoin
 
-**USP** is a **yield-optimized (yield-bearing) [[stablecoin|stablecoin]]** issued within the Piku ecosystem and governed by PikuDAO on [[ethereum|Ethereum]]. It combines the stability of a dollar-pegged unit with the value growth of a yield-generating reserve basket. USP launches fully backed 1:1 by USD stablecoins (a $1.00 starting value); PikuDAO then diversifies that backing into an on- and off-chain basket of yield assets, and the accrued yield is reflected **directly in the token's price** rather than paid out separately.
+**USP** is a **yield-optimized (yield-bearing) [[stablecoins|stablecoin]]** issued within the Piku ecosystem and governed by PikuDAO on [[ethereum|Ethereum]]. It combines the stability of a dollar-pegged unit with the value growth of a yield-generating reserve basket. USP launches fully backed 1:1 by USD stablecoins (a $1.00 starting value); PikuDAO then diversifies that backing into an on- and off-chain basket of yield assets, and the accrued yield is reflected **directly in the token's price** rather than paid out separately.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* USP trades at **$1.10** (rank **#865**, market cap **$18,279,292**, 24h **-0.08%**, 7d **+0.13%**). The price sitting **above $1.00 is by design, not a [[depeg]]**: USP is a value-accruing stablecoin, so accumulated yield raises the per-token unit value over time. The near-flat 24h/7d moves are consistent with a stable instrument whose price drifts upward only as yield accrues. See [[yield-bearing-stablecoin]] for how this "price-accrual" model differs from a fixed $1.00 [[rebasing]] design.
 

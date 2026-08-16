@@ -45,7 +45,7 @@ FIUSD tokenizes **Fidelity International's Institutional Liquidity Fund (ILF) �
 
 The token is a **wrapper**: each FIUSD is a tokenized claim on units of the underlying [[money-market-fund]]. Its on-chain price therefore tracks the fund's **per-unit NAV**, not crypto supply/demand. Because the underlying is an **accumulating** ("Acc") share class, distributions are reinvested into NAV, so the unit price rises gradually over time (its all-time low of $11,251.76 on 2025-01-21 reflects an earlier, lower NAV base, not a de-peg).
 
-FIUSD belongs to the **tokenized money-market fund / tokenized cash** branch of [[real-world-assets|real-world assets]] — a category distinct from both algorithmic and crypto-collateralized [[stablecoin|stablecoins]]. Rather than minting a new dollar unit, it puts an *existing regulated fund share* on-chain. That distinction drives everything about how it behaves: the unit price is whatever the fund administrator strikes as NAV, the yield is the fund's underlying T-bill / repo carry net of fund fees, and the holder list is gated to investors who can legally hold the underlying fund. This is the same structural template used by [[blackrock-buidl|BlackRock's BUIDL]] (tokenized via Securitize), Franklin Templeton's BENJI, and Ondo's [[ondo-finance|OUSG]] — though FIUSD differs in that it inherits the underlying fund's four-digit per-share denomination rather than re-basing to $1.00.
+FIUSD belongs to the **tokenized money-market fund / tokenized cash** branch of [[real-world-assets|real-world assets]] — a category distinct from both algorithmic and crypto-collateralized [[stablecoins|stablecoins]]. Rather than minting a new dollar unit, it puts an *existing regulated fund share* on-chain. That distinction drives everything about how it behaves: the unit price is whatever the fund administrator strikes as NAV, the yield is the fund's underlying T-bill / repo carry net of fund fees, and the holder list is gated to investors who can legally hold the underlying fund. This is the same structural template used by [[blackrock-buidl|BlackRock's BUIDL]] (tokenized via Securitize), Franklin Templeton's BENJI, and Ondo's [[ondo-finance|OUSG]] — though FIUSD differs in that it inherits the underlying fund's four-digit per-share denomination rather than re-basing to $1.00.
 
 ---
 
@@ -215,7 +215,7 @@ The minimal volatility is expected: FIUSD tracks a money-market fund's NAV and h
 - [[ondo-finance]] — OUSG, peer tokenized-Treasury issuer
 - [[compounding-open-dollar]] — cUSDO, peer T-bill-backed yield dollar
 - [[yield-bearing-stablecoin]]
-- [[stablecoin]]
+- [[stablecoins]]
 
 ---
 

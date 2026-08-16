@@ -207,7 +207,7 @@ Traders must understand SEC regulations around pattern day trading (PDT rule), s
 - [[asic]] — Australian analogue with a broader single-regulator mandate
 - [[regulation]] — Overview of financial regulation and how it shapes trading
 - [[bitcoin]] — Spot BTC ETF approval transformed institutional access
-- [[bitcoin-etf]] — The 11 spot BTC ETFs the SEC approved in Jan 2024
+- [[bitcoin-etfs]] — The 11 spot BTC ETFs the SEC approved in Jan 2024
 - [[ethereum]] — ETH ETF approval and commodity vs. security debate
 - [[hyperliquid]] — DEX perps platform with regulatory exposure
 - [[hype-token]] — HYPE token risk includes SEC/CFTC enforcement

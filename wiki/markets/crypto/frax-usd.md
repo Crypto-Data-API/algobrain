@@ -9,7 +9,7 @@ aliases: ["FRXUSD", "Frax USD", "frxUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://frax.com"
-related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[frax]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[frax]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Frax USD
@@ -105,7 +105,7 @@ frxUSD sits in the **fully-collateralized DeFi-native dollar** category, with a 
 ## Trading Playbook
 
 - **Parking + yield** — hold frxUSD as a risk-off dollar; wrap into **sfrxUSD** to earn reserve/T-bill yield on idle balances in DeFi.
-- **Peg reads** — treat the $0.976–$1.007 band as the historical envelope; only a sustained, widening discount tied to custodian/reserve doubt signals a genuine [[stablecoin|depeg]].
+- **Peg reads** — treat the $0.976–$1.007 band as the historical envelope; only a sustained, widening discount tied to custodian/reserve doubt signals a genuine [[stablecoins|depeg]].
 - **Chain awareness** — prefer native deployments (Ethereum/Fraxtal); on bridged chains, account for bridge/representation risk and thinner depth.
 - **Ecosystem dependence** — frxUSD's utility is tightly tied to Fraxtal/Frax; weigh ecosystem health alongside reserve quality.
 
@@ -113,7 +113,7 @@ frxUSD sits in the **fully-collateralized DeFi-native dollar** category, with a 
 
 ## Related
 
-- [[stablecoin]] / [[stablecoins]] — category overview
+- [[stablecoins]] / [[stablecoins]] — category overview
 - [[frax]] — Frax ecosystem governance/utility token
 - [[usdc]] — fiat-backed peer
 - [[dai]] — decentralized, crypto-overcollateralized peer

@@ -9,7 +9,7 @@ aliases: ["YUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://app.aegis.im"
-related: ["[[basis-trade]]", "[[bitcoin]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[noon-usn]]", "[[stablecoin]]", "[[synthetic-dollar]]"]
+related: ["[[basis-trade]]", "[[bitcoin]]", "[[crypto-markets]]", "[[delta-neutral]]", "[[depeg]]", "[[ethena-usde]]", "[[ethereum]]", "[[funding-rate]]", "[[noon-usn]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # Aegis YUSD
@@ -101,7 +101,7 @@ YUSD sits in the **delta-neutral synthetic-dollar / "internet bond"** narrative 
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[synthetic-dollar]]
 - [[delta-neutral]]
 - [[funding-rate]]

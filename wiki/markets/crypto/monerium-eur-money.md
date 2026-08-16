@@ -9,12 +9,12 @@ aliases: ["EURE", "EURe", "Monerium EUR emoney"]
 entity_type: protocol
 headquarters: "Reykjavik, Iceland / EEA"
 website: "https://monerium.com/tokens/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[gnosis-chain]]", "[[mica]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[euro]]", "[[forex]]", "[[gnosis-chain]]", "[[mica]]", "[[stablecoins]]"]
 ---
 
 # Monerium EURe
 
-**Monerium EURe** (ticker **EURE**) is a fully-regulated, fiat-backed [[euro]] [[stablecoin]] issued by Monerium ehf., the first company authorized to issue **electronic money (e-money) on public blockchains** under European Economic Area (EEA) financial regulation. EURe is a redeemable on-chain claim on euros held 1:1 in segregated, safeguarded accounts — a regulatory model (the **e-money / EMI** wrapper) distinct from the commercial-paper or offshore-reserve structures common to USD stablecoins. It is deployed primarily on [[ethereum|Ethereum]], [[gnosis-chain|Gnosis Chain]] (xDai), and Polygon. EURe ranks **#689** by market capitalization.
+**Monerium EURe** (ticker **EURE**) is a fully-regulated, fiat-backed [[euro]] [[stablecoins]] issued by Monerium ehf., the first company authorized to issue **electronic money (e-money) on public blockchains** under European Economic Area (EEA) financial regulation. EURe is a redeemable on-chain claim on euros held 1:1 in segregated, safeguarded accounts — a regulatory model (the **e-money / EMI** wrapper) distinct from the commercial-paper or offshore-reserve structures common to USD stablecoins. It is deployed primarily on [[ethereum|Ethereum]], [[gnosis-chain|Gnosis Chain]] (xDai), and Polygon. EURe ranks **#689** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -251,7 +251,7 @@ EURe sits at the intersection of three themes: **regulated stablecoins**, **MiCA
 - [[crypto-markets]]
 - [[ethereum]]
 - [[gnosis-chain]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[euro]]
 - [[forex]]
 - [[depeg]]

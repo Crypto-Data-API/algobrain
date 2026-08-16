@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2022
 headquarters: "Issuer: Circle (New York, USA)"
 website: "https://www.circle.com/eurc"
-related: ["[[base]]", "[[circle]]", "[[crypto-markets]]", "[[ethereum]]", "[[mica]]", "[[solana]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
+related: ["[[base]]", "[[circle]]", "[[crypto-markets]]", "[[ethereum]]", "[[mica]]", "[[solana]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # EURC
 
-**EURC** (formerly EUROC, launched June 2022; ticker **EURC**) is [[circle|Circle]]'s euro-pegged [[stablecoin]], issued under the same full-reserve model as [[usdc|USDC]] and redeemable 1:1 for euros. It is the **largest [[mica|MiCA]]-compliant euro stablecoin** (~41% of the euro-stablecoin market as of early 2026) and the main on-chain instrument for euro cash legs — making it the closest thing to an on-chain EUR/USD FX market for traders.
+**EURC** (formerly EUROC, launched June 2022; ticker **EURC**) is [[circle|Circle]]'s euro-pegged [[stablecoins]], issued under the same full-reserve model as [[usdc|USDC]] and redeemable 1:1 for euros. It is the **largest [[mica|MiCA]]-compliant euro stablecoin** (~41% of the euro-stablecoin market as of early 2026) and the main on-chain instrument for euro cash legs — making it the closest thing to an on-chain EUR/USD FX market for traders.
 
 ---
 
@@ -158,7 +158,7 @@ EURC is not valued for upside — its USD "return" is purely the EUR/USD exchang
 - [[circle]] — issuer (NYSE: CRCL)
 - [[usdc]] — sister USD stablecoin
 - [[mica]] — the regulation that defines EURC's moat
-- [[stablecoin]], [[stablecoins]], [[stablecoin-supply]], [[usdt]], [[usdd]]
+- [[stablecoins]], [[stablecoins]], [[stablecoin-supply]], [[usdt]], [[usdd]]
 - [[ethereum]], [[base]], [[solana]], [[crypto-markets]]
 
 ---

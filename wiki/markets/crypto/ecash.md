@@ -94,7 +94,7 @@ Notably, eCash has a strong presence on **Korean exchanges (Upbit, XEC/KRW)**, w
 
 ## Use Case / Narrative / Category
 
-CoinGecko categorises XEC under **Smart Contract Platform, Layer 1, Bitcoin Fork, and Proof of Work (PoW).** The core narrative is **scalable electronic cash**: the published roadmap targets scaling throughput from ~100 tps toward 5,000,000 tps, sub-3-second finality, and fork-free upgradeability — all enabled by the PoW + Avalanche hybrid. The staking-reward layer is unusual for a Bitcoin-derived chain and is meant to fund Avalanche node operation. eCash therefore sits in the "fast, cheap Bitcoin-style payments" camp, competing with [[bitcoin-cash|Bitcoin Cash]], [[litecoin|Litecoin]] and [[stablecoin|stablecoin]] payment rails.
+CoinGecko categorises XEC under **Smart Contract Platform, Layer 1, Bitcoin Fork, and Proof of Work (PoW).** The core narrative is **scalable electronic cash**: the published roadmap targets scaling throughput from ~100 tps toward 5,000,000 tps, sub-3-second finality, and fork-free upgradeability — all enabled by the PoW + Avalanche hybrid. The staking-reward layer is unusual for a Bitcoin-derived chain and is meant to fund Avalanche node operation. eCash therefore sits in the "fast, cheap Bitcoin-style payments" camp, competing with [[bitcoin-cash|Bitcoin Cash]], [[litecoin|Litecoin]] and [[stablecoins|stablecoin]] payment rails.
 
 ---
 

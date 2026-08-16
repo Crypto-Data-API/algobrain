@@ -9,12 +9,12 @@ aliases: ["Abracadabra.money", "MIM", "SPELL", "Spell Token"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://abracadabra.money/"
-related: ["[[arbitrum]]", "[[avalanche]]", "[[binance]]", "[[collateralized-debt-position]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[lending]]", "[[liquity]]", "[[makerdao]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
+related: ["[[arbitrum]]", "[[avalanche]]", "[[binance]]", "[[collateralized-debt-position]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[lending]]", "[[liquity]]", "[[makerdao]]", "[[stablecoins]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # Spell (Abracadabra.money)
 
-**Spell** (SPELL) is the governance and incentive token of **Abracadabra.money**, a multi-chain DeFi [[lending|lending]] protocol that lets users deposit interest-bearing and other collateral to **mint MIM (Magic Internet Money)**, a USD-pegged [[stablecoin|stablecoin]]. MIM is created via isolated [[collateralized-debt-position|collateralized debt positions]] (called "cauldrons"). As of 2026-06-22 SPELL trades at **$0.00011811**, ranking **#823** by market capitalization with a market cap of roughly **$20.24M**.
+**Spell** (SPELL) is the governance and incentive token of **Abracadabra.money**, a multi-chain DeFi [[lending|lending]] protocol that lets users deposit interest-bearing and other collateral to **mint MIM (Magic Internet Money)**, a USD-pegged [[stablecoins|stablecoin]]. MIM is created via isolated [[collateralized-debt-position|collateralized debt positions]] (called "cauldrons"). As of 2026-06-22 SPELL trades at **$0.00011811**, ranking **#823** by market capitalization with a market cap of roughly **$20.24M**.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* SPELL: $0.00011811, rank #823, market cap $20,244,959, 24h -2.27%, 7d -8.22%. Market backdrop: Fear & Greed Index at 21 (Extreme Fear).
 
@@ -64,7 +64,7 @@ Abracadabra's lending engine is built on **isolated "cauldron" markets**, each a
 
 ### The MIM peg mechanism
 
-MIM is **over-collateralized soft-pegged** to $1. The peg is maintained by (1) arbitrage against the cauldron mint/redeem mechanics, (2) deep MIM liquidity on [[curve-finance|Curve]] (the MIM-3CRV pool historically), and (3) the protocol's ability to adjust cauldron parameters and incentivize liquidity. Unlike a fully redeemable fiat-backed [[stablecoin]], MIM has no centralized 1:1 redemption guarantee — its stability rests entirely on collateral quality and market liquidity, which is precisely why it has depegged under stress.
+MIM is **over-collateralized soft-pegged** to $1. The peg is maintained by (1) arbitrage against the cauldron mint/redeem mechanics, (2) deep MIM liquidity on [[curve-finance|Curve]] (the MIM-3CRV pool historically), and (3) the protocol's ability to adjust cauldron parameters and incentivize liquidity. Unlike a fully redeemable fiat-backed [[stablecoins]], MIM has no centralized 1:1 redemption guarantee — its stability rests entirely on collateral quality and market liquidity, which is precisely why it has depegged under stress.
 
 ---
 
@@ -274,7 +274,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[collateralized-debt-position]]
 - [[lending]]
 - [[makerdao]]

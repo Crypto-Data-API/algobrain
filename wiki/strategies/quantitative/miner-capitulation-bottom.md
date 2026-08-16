@@ -292,7 +292,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - [[crypto-market-regime-taxonomy]] — the 14-basket framework
 - [[bitcoin-halving]] — the protocol event that periodically halves miner revenue
 - [[on-chain-analysis]] — the metric family (hashrate, Puell, reserves, difficulty)
-- [[on-chain-analytics]] — the broader on-chain data discipline
+- [[on-chain-analysis]] — the broader on-chain data discipline
 - [[on-chain-flow-trading]] — the aggregate-flow directional cousin of this signal
 - [[institutional-flow-regime]] — ETF / industrial-miner forces that may dampen the signal
 - [[behavioral-finance]] — the panic-selling-climax side of the edge

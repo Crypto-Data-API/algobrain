@@ -10,7 +10,7 @@ source_url: "https://dune.com"
 source_author: "Dune Analytics"
 confidence: high
 aliases: ["Dune", "Dune.com"]
-related: ["[[defi]]", "[[crypto-data-sources]]", "[[token-terminal]]", "[[zapper]]", "[[on-chain-analytics]]", "[[etherscan]]", "[[defilama]]", "[[coingecko]]", "[[ai-mev]]"]
+related: ["[[defi]]", "[[crypto-data-sources]]", "[[token-terminal]]", "[[zapper]]", "[[on-chain-analysis]]", "[[etherscan]]", "[[defilama]]", "[[coingecko]]", "[[ai-mev]]"]
 ---
 
 Dune Analytics is a community-powered blockchain analytics platform that allows users to query on-chain data using SQL and build shareable dashboards. Unlike pre-packaged analytics platforms, Dune gives users direct access to decoded blockchain data, enabling custom analysis of any on-chain activity -- from LP fee tracking and [[impermanent-loss]] calculation to [[mev-strategies|MEV]] monitoring, whale tracking, and protocol-specific metrics.

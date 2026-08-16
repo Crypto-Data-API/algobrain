@@ -9,12 +9,12 @@ aliases: ["BOLD", "LQTY", "LUSD", "Liquity"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.liquity.org/"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoin]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[dai]]", "[[defi]]", "[[depeg]]", "[[ethereum]]", "[[frax-share]]", "[[governance-token]]", "[[liquid-staking]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[liquidation-cascade-fade]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Liquity
 
-**Liquity** is a decentralized borrowing protocol that lets users draw **interest-free** loans against [[ethereum|Ether]] collateral, denominated in its native [[stablecoin]] **LUSD** (which targets a soft $1.00 peg). **LQTY** is the protocol's secondary token: it captures protocol fee revenue via staking and incentivizes early liquidity. Liquity is notable for being **immutable and governance-free** at its core — the original v1 contracts cannot be upgraded — and for a [[collateralization|collateral]] ratio as low as 110%. It ranks **#836** by market capitalization. The protocol later launched **Liquity v2**, issuing a separate stablecoin, **BOLD**, with user-set interest rates.
+**Liquity** is a decentralized borrowing protocol that lets users draw **interest-free** loans against [[ethereum|Ether]] collateral, denominated in its native [[stablecoins]] **LUSD** (which targets a soft $1.00 peg). **LQTY** is the protocol's secondary token: it captures protocol fee revenue via staking and incentivizes early liquidity. Liquity is notable for being **immutable and governance-free** at its core — the original v1 contracts cannot be upgraded — and for a [[collateralization|collateral]] ratio as low as 110%. It ranks **#836** by market capitalization. The protocol later launched **Liquity v2**, issuing a separate stablecoin, **BOLD**, with user-set interest rates.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -44,7 +44,7 @@ As of 2026-06-22, the LQTY token trades at **$0.20051** with a market cap of abo
 
 ## Overview
 
-Liquity (launched 2021) lets a borrower deposit ETH into a position called a **Trove** and mint **LUSD** against it at **0% interest**, paying only a one-time borrowing fee, while maintaining a minimum [[collateralization|collateral]] ratio of **110%** — far more capital-efficient than collateral-heavy peers. LUSD is a decentralized [[stablecoin]] redeemable against the system's ETH collateral, which gives it a hard arbitrage-enforced peg mechanism.
+Liquity (launched 2021) lets a borrower deposit ETH into a position called a **Trove** and mint **LUSD** against it at **0% interest**, paying only a one-time borrowing fee, while maintaining a minimum [[collateralization|collateral]] ratio of **110%** — far more capital-efficient than collateral-heavy peers. LUSD is a decentralized [[stablecoins]] redeemable against the system's ETH collateral, which gives it a hard arbitrage-enforced peg mechanism.
 
 The protocol is **non-custodial, immutable, and governance-free**: the v1 smart contracts are fixed and cannot be changed by any DAO or admin, removing a major attack/centralization surface but also meaning the system cannot be patched if a flaw is found. LQTY is the protocol's secondary token, earned by Stability Pool depositors and others, and stakeable to receive a share of borrowing and redemption fees.
 
@@ -94,7 +94,7 @@ In 2025, Liquity launched **v2**, introducing the **BOLD** stablecoin. Unlike v1
 
 ## Token Roles
 
-- **LUSD** — the v1 decentralized [[stablecoin]] (the product). Targets $1.00 via the redemption mechanism above.
+- **LUSD** — the v1 decentralized [[stablecoins]] (the product). Targets $1.00 via the redemption mechanism above.
 - **BOLD** — the v2 stablecoin with market-set borrow rates.
 - **LQTY** — the protocol's value-accrual/fee token. Stakers earn a pro-rata share of borrowing and redemption fees; LQTY also funded early Stability Pool / liquidity incentives. LQTY is **not** a stablecoin and is freely volatile.
 
@@ -266,7 +266,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[collateralization]]
 - [[depeg]]
 - [[defi]]

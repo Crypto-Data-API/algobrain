@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2018
 headquarters: "Issuer: Techteryx Ltd. (BVI); originally TrustToken/TrueCoin, San Francisco"
 website: "https://tusd.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[first-digital-usd]]", "[[real-world-assets]]", "[[stablecoin-depegs]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[first-digital-usd]]", "[[real-world-assets]]", "[[stablecoin-depegs]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]", "[[usdt]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # TrueUSD
 
-**TrueUSD** (TUSD) is a USD-pegged fiat-backed [[stablecoin]] launched in March 2018 by TrustToken (TrueCoin LLC) and sold to the offshore entity **Techteryx** in December 2020, issued primarily on [[ethereum|Ethereum]] and Tron. Once a top-3 stablecoin by Binance volume, TUSD is now primarily a **counterparty-risk case study**: an SEC fraud settlement (2024), a ~$456M reserve shortfall quietly bailed out by Justin Sun (revealed 2025), and ongoing litigation against its Hong Kong trustee First Digital Trust make it one of the most-watched depeg/blowup candidates among traders. See [[stablecoin-depegs]].
+**TrueUSD** (TUSD) is a USD-pegged fiat-backed [[stablecoins]] launched in March 2018 by TrustToken (TrueCoin LLC) and sold to the offshore entity **Techteryx** in December 2020, issued primarily on [[ethereum|Ethereum]] and Tron. Once a top-3 stablecoin by Binance volume, TUSD is now primarily a **counterparty-risk case study**: an SEC fraud settlement (2024), a ~$456M reserve shortfall quietly bailed out by Justin Sun (revealed 2025), and ongoing litigation against its Hong Kong trustee First Digital Trust make it one of the most-watched depeg/blowup candidates among traders. See [[stablecoin-depegs]].
 
 ---
 
@@ -158,7 +158,7 @@ Versus yield-bearing alternatives ([[ylds|YLDS]], [[ousg|OUSG]], BUIDL, [[usx|US
 
 ## Related
 
-- [[stablecoins]], [[stablecoin]], [[stablecoin-depegs]], [[stablecoin-supply]]
+- [[stablecoins]], [[stablecoins]], [[stablecoin-depegs]], [[stablecoin-supply]]
 - [[usdt]], [[usdc]], [[first-digital-usd]] — competing USD stablecoins
 - [[ylds]], [[ousg]] — yield-bearing dollar alternatives
 - [[real-world-assets]], [[tokenized-treasuries]]
@@ -252,7 +252,7 @@ Versus yield-bearing alternatives ([[ylds|YLDS]], [[ousg|OUSG]], BUIDL, [[usx|US
 
 ## Trading Profile
 
-**Venues & liquidity.** TUSD is a USD-pegged [[stablecoin]] traded primarily on [[binance]] (TUSD/USDT spot), with secondary depth on Bitget, KuCoin and Upbit, plus Uniswap V2/V3 pools on-chain. It is a **peg / cash-management instrument, NOT a directional asset** — the trade is about peg stability, backing/reserves, depeg risk and yield/arbitrage, not momentum. Practically nobody trades TUSD for price appreciation; a fiat-backed stablecoin has no directional thesis and leveraged directional exposure makes little sense. What matters for execution is that secondary depth sits far below its 2023 peak (24h volume in the tens of millions), so venue availability and pool liquidity directly cap how much size can be arbitraged into or out of a depeg before slippage eats the basis. Sizing should assume slow, thin exits during stress — the same conditions under which a depeg is most likely.
+**Venues & liquidity.** TUSD is a USD-pegged [[stablecoins]] traded primarily on [[binance]] (TUSD/USDT spot), with secondary depth on Bitget, KuCoin and Upbit, plus Uniswap V2/V3 pools on-chain. It is a **peg / cash-management instrument, NOT a directional asset** — the trade is about peg stability, backing/reserves, depeg risk and yield/arbitrage, not momentum. Practically nobody trades TUSD for price appreciation; a fiat-backed stablecoin has no directional thesis and leveraged directional exposure makes little sense. What matters for execution is that secondary depth sits far below its 2023 peak (24h volume in the tens of millions), so venue availability and pool liquidity directly cap how much size can be arbitraged into or out of a depeg before slippage eats the basis. Sizing should assume slow, thin exits during stress — the same conditions under which a depeg is most likely.
 
 **Applicable strategies.**
 - [[stablecoin-depeg-profit-capture]] — TUSD trades at a persistent small discount and carries elevated, headline-driven depeg risk (Sun backstop, court rulings), making it a prime candidate for buying the discount and capturing mean-reversion to par if backing holds.

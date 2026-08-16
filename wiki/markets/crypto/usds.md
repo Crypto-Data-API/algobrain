@@ -15,7 +15,7 @@ related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[makerdao]]", "[[st
 
 # USDS
 
-**USDS** (ticker **USDS**, native to [[ethereum|Ethereum]]) is the dollar [[stablecoin]] of the **[[sky|Sky]]** ecosystem — the protocol formerly known as [[makerdao|MakerDAO]] — and the successor to [[dai|DAI]], making it the **largest decentralized (crypto-collateralized) stablecoin**. For traders it matters less as a position and more as infrastructure: its **Sky Savings Rate (SSR)** is a key DeFi rates benchmark, and its supply is a gauge of on-chain dollar demand. It ranks in the **top 15 by market capitalization**.
+**USDS** (ticker **USDS**, native to [[ethereum|Ethereum]]) is the dollar [[stablecoins]] of the **[[sky|Sky]]** ecosystem — the protocol formerly known as [[makerdao|MakerDAO]] — and the successor to [[dai|DAI]], making it the **largest decentralized (crypto-collateralized) stablecoin**. For traders it matters less as a position and more as infrastructure: its **Sky Savings Rate (SSR)** is a key DeFi rates benchmark, and its supply is a gauge of on-chain dollar demand. It ranks in the **top 15 by market capitalization**.
 
 ---
 

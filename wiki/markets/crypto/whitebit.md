@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2018
 headquarters: "Europe (founded in Ukraine)"
 website: "https://whitebit.com/wbt"
-related: ["[[binance-coin]]", "[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hype]]", "[[leo-token]]", "[[mx-token]]", "[[tron]]"]
+related: ["[[bnb]]", "[[binance]]", "[[crypto-markets]]", "[[ethereum]]", "[[exchange-tokens]]", "[[hype]]", "[[leo-token]]", "[[mx-token]]", "[[tron]]"]
 ---
 
 # WhiteBIT Coin
@@ -78,7 +78,7 @@ Trading competitions, airdrops, bounties, beneficial holding programs, and acces
 | **Fully Diluted Valuation** | ~$20.9B |
 | **Market Cap / FDV Ratio** | ~0.30 |
 
-**Deflationary burn model.** WBT supply is capped at **400M tokens with no new issuance**, and is shrunk over time by **weekly burns of 33% of trading fees + 5% of service income** (historically on the order of several million WBT removed per year). This is a stronger structural burn than the discretionary buyback used by [[mx-token|MX]], and closer in spirit to [[binance-coin|BNB]]'s burn program.
+**Deflationary burn model.** WBT supply is capped at **400M tokens with no new issuance**, and is shrunk over time by **weekly burns of 33% of trading fees + 5% of service income** (historically on the order of several million WBT removed per year). This is a stronger structural burn than the discretionary buyback used by [[mx-token|MX]], and closer in spirit to [[bnb|BNB]]'s burn program.
 
 **Treasury overhang.** A large block of treasury tokens (originally ~200M, designed to back the supply) sits between the ~118M circulating float and the ~294M total / 400M max. The low ~0.30 MC/FDV ratio reflects this gap; how and when treasury tokens enter circulation is the key dilution variable and a recurring transparency concern.
 
@@ -178,7 +178,7 @@ Trading competitions, airdrops, bounties, beneficial holding programs, and acces
 | [[hype\|HYPE]] | HYPE | Hyperliquid (DEX) | #10 | $70.43 | $15.67B | ~0.22 | Fee→buyback |
 | **WhiteBIT Coin** | WBT | WhiteBIT | #17 | $52.35 | $6.19B | ~0.30 | 400M cap + weekly burns |
 | [[leo-token\|LEO]] | LEO | Bitfinex | — | — | — | — | Buyback-and-burn |
-| [[binance-coin\|BNB]] | BNB | Binance | — | — | — | — | Auto-burn |
+| [[bnb\|BNB]] | BNB | Binance | — | — | — | — | Auto-burn |
 | [[mx-token\|MX]] | MX | MEXC | #196 | $1.75 | $0.16B | ~0.22 | Discretionary buyback/burn |
 
 *WBT's hard-capped supply and fee-funded weekly burns make it one of the more deflationary exchange tokens, but its liquidity is the thinnest relative to cap in this set. [[hype|HYPE]] is the only decentralized-exchange peer and the only one with a mechanical on-chain fee→buyback bid.*
@@ -193,7 +193,7 @@ Trading competitions, airdrops, bounties, beneficial holding programs, and acces
 - [[tron]]
 - [[leo-token]]
 - [[binance]]
-- [[binance-coin]]
+- [[bnb]]
 - [[mx-token]]
 
 ---

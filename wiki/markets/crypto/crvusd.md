@@ -24,7 +24,7 @@ related: ["[[crypto-markets]]", "[[curve-finance]]", "[[ethereum]]", "[[liquidat
 | Field | Detail |
 |---|---|
 | **Ticker** | crvUSD (ERC-20 on [[ethereum]]; bridged to Arbitrum, Optimism, Base, BNB Chain, Polygon, Gnosis, Fraxtal, Taiko) |
-| **Type** | Crypto-backed CDP [[stablecoin]], USD peg, overcollateralized (collateral: WBTC, WETH, wstETH, sfrxETH, tBTC, etc.) |
+| **Type** | Crypto-backed CDP [[stablecoins]], USD peg, overcollateralized (collateral: WBTC, WETH, wstETH, sfrxETH, tBTC, etc.) |
 | **Market Cap Rank** | #172 |
 | **Market Cap / Supply** | $207.64M / ~207.88M crvUSD |
 | **Current Price** | $0.998957 (effectively pegged at $1.00) |

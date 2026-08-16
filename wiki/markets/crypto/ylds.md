@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2025
 headquarters: "Issuer: Figure Certificate Corp (Figure Technology Solutions), San Francisco, USA"
 website: "https://www.figuremarkets.com/c/ylds"
-related: ["[[crypto-markets]]", "[[ousg]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoin]]", "[[stablecoins]]", "[[tokenized-treasuries]]"]
+related: ["[[crypto-markets]]", "[[ousg]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoins]]", "[[stablecoins]]", "[[tokenized-treasuries]]"]
 ---
 
 # YLDS
 
-**YLDS** is the first **SEC-registered, yield-bearing [[stablecoin]]** — a USD-pegged digital certificate issued by Figure Certificate Corp (a Figure Markets/Figure Technology Solutions subsidiary) that pays **SOFR minus 0.50%**, accrued daily and paid monthly. Launched February 2025 on the Provenance blockchain, it is a landmark for the regulated-stablecoin/[[real-world-assets|RWA]] sector: a stablecoin that is legally a public security, transferable peer-to-peer, and now deployed across Provenance, [[solana]] and Stellar. Its issuer's parent, Figure Technology Solutions, trades on Nasdaq as **FIGR**.
+**YLDS** is the first **SEC-registered, yield-bearing [[stablecoins]]** — a USD-pegged digital certificate issued by Figure Certificate Corp (a Figure Markets/Figure Technology Solutions subsidiary) that pays **SOFR minus 0.50%**, accrued daily and paid monthly. Launched February 2025 on the Provenance blockchain, it is a landmark for the regulated-stablecoin/[[real-world-assets|RWA]] sector: a stablecoin that is legally a public security, transferable peer-to-peer, and now deployed across Provenance, [[solana]] and Stellar. Its issuer's parent, Figure Technology Solutions, trades on Nasdaq as **FIGR**.
 
 ---
 
@@ -153,7 +153,7 @@ YLDS is purchased and redeemed via Figure Markets (USD or stablecoin funding) ra
 ## Related
 
 - [[crypto-markets]]
-- [[stablecoins]], [[stablecoin]]
+- [[stablecoins]], [[stablecoins]]
 - [[ousg]], [[blackrock-usd-institutional-digital-liquidity-fund]] — tokenized-MMF route to on-chain yield
 - [[real-world-assets]], [[tokenized-treasuries]], yield
 - [[solana]]

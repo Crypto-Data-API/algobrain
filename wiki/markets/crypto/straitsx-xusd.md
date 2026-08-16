@@ -9,12 +9,12 @@ aliases: ["XUSD"]
 entity_type: protocol
 headquarters: "Singapore (StraitsX)"
 website: "https://www.straitsx.com/xusd"
-related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[regulation]]", "[[stablecoin]]", "[[usdc]]", "[[xsgd]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
+related: ["[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[regulation]]", "[[stablecoins]]", "[[usdc]]", "[[xsgd]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]"]
 ---
 
 # StraitsX XUSD
 
-**StraitsX XUSD** (XUSD) is a fiat-backed, USD-pegged [[stablecoin]] issued by **StraitsX**, a **Singapore-based** payments-infrastructure provider. Each XUSD is intended to be backed 1:1 by US dollar reserves, and StraitsX has positioned XUSD to comply with **Singapore's Monetary Authority (MAS) stablecoin regulatory framework**, bridging ASEAN payments with a dollar-denominated settlement asset. It is the USD counterpart to StraitsX's Singapore-dollar coin **XSGD**.
+**StraitsX XUSD** (XUSD) is a fiat-backed, USD-pegged [[stablecoins]] issued by **StraitsX**, a **Singapore-based** payments-infrastructure provider. Each XUSD is intended to be backed 1:1 by US dollar reserves, and StraitsX has positioned XUSD to comply with **Singapore's Monetary Authority (MAS) stablecoin regulatory framework**, bridging ASEAN payments with a dollar-denominated settlement asset. It is the USD counterpart to StraitsX's Singapore-dollar coin **XSGD**.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -151,7 +151,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[crypto-markets]]
 - [[ethereum]]
 - [[usdc]]

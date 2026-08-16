@@ -9,12 +9,12 @@ aliases: ["XT Stablecoin", "XT.com USD", "XTUSD"]
 entity_type: protocol
 headquarters: "Centralized (exchange-issued)"
 website: "https://www.xtusd.pro/main"
-related: ["[[crypto-markets]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[stablecoins]]"]
 ---
 
 # XT Stablecoin XTUSD
 
-**XTUSD** is a U.S.-dollar [[stablecoin]] issued by the **XT.com** cryptocurrency exchange. It is designed to trade at ~$1.00 and serve as a settlement, trading-pair, and on-platform unit of account within the XT.com ecosystem. As an *exchange-issued* stablecoin it is centralized: holders rely on a single corporate counterparty (XT.com) to honor redemptions and maintain backing — a materially different risk profile from decentralized or independently-audited stablecoins. It ranks **#612** by market capitalization. The closest analogues are other **exchange-native dollars** (Binance's historical BUSD, Bybit/OKX house stablecoins) rather than independent issuers like [[usdc|Circle's USDC]].
+**XTUSD** is a U.S.-dollar [[stablecoins]] issued by the **XT.com** cryptocurrency exchange. It is designed to trade at ~$1.00 and serve as a settlement, trading-pair, and on-platform unit of account within the XT.com ecosystem. As an *exchange-issued* stablecoin it is centralized: holders rely on a single corporate counterparty (XT.com) to honor redemptions and maintain backing — a materially different risk profile from decentralized or independently-audited stablecoins. It ranks **#612** by market capitalization. The closest analogues are other **exchange-native dollars** (Binance's historical BUSD, Bybit/OKX house stablecoins) rather than independent issuers like [[usdc|Circle's USDC]].
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).* XTUSD trades at **$0.999395 — effectively on-peg (≈$1.00)** — with market cap **$32,784,566**, **-0.00% (24h)** and **-0.01% (7d)**, holding the peg even as broader sentiment is fearful (BTC $64,508; Fear & Greed 21 / Extreme Fear).
 
@@ -184,7 +184,7 @@ XTUSD belongs to the **exchange-native stablecoin** category — a house dollar 
 ## See Also
 
 - [[crypto-markets]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[usdt]], [[usdc]] — independent fiat-backed peers (verified reserves)
 
 ---

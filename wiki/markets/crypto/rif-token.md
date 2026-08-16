@@ -9,7 +9,7 @@ aliases: ["RIF"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://rif.technology/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[rootstock]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[defi]]", "[[rootstock]]", "[[stablecoins]]", "[[binance]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[funding-rate-harvest]]", "[[oi-confirmed-trend]]"]
 ---
 
 # Rootstock Infrastructure Framework
@@ -147,7 +147,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-derivatives]], [[cryptodataap
 - [[crypto-markets]]
 - [[bitcoin]]
 - [[rootstock]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[stablecoins]]
 
 ---

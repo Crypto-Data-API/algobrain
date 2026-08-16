@@ -130,7 +130,7 @@ The 2026-06-18 ATL and the still-discounted 2026-06-21 print together represent 
 - [[stablecoins]] — overview of the stablecoin landscape
 - [[real-world-assets]] — RWA / yield-bearing dollar context
 - [[usdc]], [[usdt]], [[dai]] — fiat-reserve and crypto-collateralized peers
-- [[ethena-usde]], [[usde]] — synthetic-dollar peers
+- [[ethena-usde]], [[ethena-usde]] — synthetic-dollar peers
 - [[ethereum]], [[base]] — host chains
 - [[crypto-markets]]
 

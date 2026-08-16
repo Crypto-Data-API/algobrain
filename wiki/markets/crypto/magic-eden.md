@@ -10,7 +10,7 @@ entity_type: exchange
 founded: 2021
 headquarters: "Decentralized"
 website: "https://magiceden.io/"
-related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[non-fungible-token]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]", "[[opensea]]", "[[blur]]", "[[nft-trading]]"]
+related: ["[[bitcoin]]", "[[crypto-markets]]", "[[ethereum]]", "[[nft]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[hl-vs-cex-funding-divergence]]", "[[narrative-trading]]", "[[opensea]]", "[[blur]]", "[[nft-trading]]"]
 ---
 
 # Magic Eden
@@ -202,7 +202,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade M
 
 - [[crypto-markets]]
 - [[solana]]
-- [[non-fungible-token]]
+- [[nft]]
 - [[nft]]
 - [[nft-aggregators]]
 - [[bitcoin]]

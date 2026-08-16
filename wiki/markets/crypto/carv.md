@@ -85,7 +85,7 @@ CARV sits at the intersection of the **AI-data** and **[[gamefi|GameFi]]** narra
 - **Game integrations / CARV ID adoption** — growth in integrated games and active CARV IDs (verified on-chain, not just issuer-reported) supports the data-supply side.
 - **Animoca / ecosystem signals** — backing and distribution from [[gamefi|GameFi]] investor Animoca Brands.
 - **Unlock schedule** — ~47% of max supply unlocking over time is a recurring supply event.
-- **AI/GameFi-basket beta** — moves in [[bittensor|TAO]]/[[render|RENDER]] and broad AI/gaming sentiment spill into CARV.
+- **AI/GameFi-basket beta** — moves in [[bittensor|TAO]]/[[render-token|RENDER]] and broad AI/gaming sentiment spill into CARV.
 
 ## History & Timeline
 
@@ -100,7 +100,7 @@ CARV sits at the intersection of the **AI-data** and **[[gamefi|GameFi]]** narra
 > Educational framing only — not financial advice. CARV is a high-beta small-cap.
 
 - **Regime awareness** — at Fear & Greed 21 (Extreme Fear) in an established bear market, AI/GameFi small-caps carry elevated downside beta; size small and expect multiples of [[bitcoin|BTC]] volatility.
-- **Two-narrative beta** — CARV reacts to *both* AI-data and GameFi sentiment; a rotation out of either can drag it. Gauge entries against AI-leader momentum ([[bittensor|TAO]], [[render|RENDER]]) and GameFi sentiment together.
+- **Two-narrative beta** — CARV reacts to *both* AI-data and GameFi sentiment; a rotation out of either can drag it. Gauge entries against AI-leader momentum ([[bittensor|TAO]], [[render-token|RENDER]]) and GameFi sentiment together.
 - **Korea flow** — watch the Upbit CARV/KRW book; Korean retail can drive gaps detached from global order books.
 - **Unlock calendar** — track scheduled unlocks (~47% of supply still to enter circulation); rallies into unlocks often fade.
 - **Catalyst vs noise** — discount issuer-reported user/node/game counts; weight verifiable on-chain data-service usage and CARV ID growth. Announcement pumps mean-revert.
@@ -227,7 +227,7 @@ With roughly half of the maximum supply still to enter circulation, **future tok
 - [[artificial-intelligence]]
 - [[the-graph]]
 - [[bittensor]]
-- [[render]]
+- [[render-token]]
 
 ---
 

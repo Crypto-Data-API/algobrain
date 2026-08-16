@@ -81,7 +81,7 @@ SkyAI does not publish a verified, on-chain value-accrual mechanism in the wiki'
 | **Bittensor** | TAO | Subtensor | Decentralised ML subnets | Emission-based | Incentivised compute/intelligence markets |
 | **io.net** | IO | Solana | Decentralised GPU (DePIN) | Low float, unlock-heavy | Aggregated GPU compute supply |
 
-SkyAI's structural edge versus peers is the **absence of an unlock overhang** — VIRTUAL, FET, TAO and IO all carry either ongoing emissions or scheduled unlocks. Its weakness is the **thinnest verifiable product**: VIRTUAL, FET and TAO have demonstrably live ecosystems and on-chain activity, whereas SkyAI's MCP-ecosystem claims remain largely self-reported. See [[virtuals-protocol]], [[fetch-ai]], [[bittensor]], [[render]], [[io-net]].
+SkyAI's structural edge versus peers is the **absence of an unlock overhang** — VIRTUAL, FET, TAO and IO all carry either ongoing emissions or scheduled unlocks. Its weakness is the **thinnest verifiable product**: VIRTUAL, FET and TAO have demonstrably live ecosystems and on-chain activity, whereas SkyAI's MCP-ecosystem claims remain largely self-reported. See [[virtuals-protocol]], [[fetch-ai]], [[bittensor]], [[render-token]], [[io-net]].
 
 ---
 

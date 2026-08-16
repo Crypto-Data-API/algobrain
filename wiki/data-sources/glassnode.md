@@ -10,10 +10,10 @@ source_type: data
 source_url: "https://glassnode.com"
 source_author: "Glassnode"
 confidence: high
-related: ["[[on-chain-analytics]]", "[[cryptoquant]]", "[[nansen]]", "[[dune-analytics]]", "[[bitcoin]]", "[[ethereum]]", "[[polymarket-as-crypto-leading-indicator]]", "[[santiment]]", "[[laevitas]]", "[[point-in-time-data]]", "[[lookahead-bias]]", "[[crypto-perp-backtesting-pitfalls]]", "[[market-regime-detection-ml]]"]
+related: ["[[on-chain-analysis]]", "[[cryptoquant]]", "[[nansen]]", "[[dune-analytics]]", "[[bitcoin]]", "[[ethereum]]", "[[polymarket-as-crypto-leading-indicator]]", "[[santiment]]", "[[laevitas]]", "[[point-in-time-data]]", "[[lookahead-bias]]", "[[crypto-perp-backtesting-pitfalls]]", "[[market-regime-detection-ml]]"]
 ---
 
-Glassnode is a Swiss-based [[on-chain-analytics]] provider founded in 2017, specializing in aggregated, statistically-derived indicators on [[bitcoin]], [[ethereum]], and major Layer-1 networks. It differentiates from [[nansen]] (wallet labels), [[dune-analytics]] (custom SQL), and [[cryptoquant]] (exchange-flow granularity) by focusing on derived macro metrics such as SOPR, MVRV, and Realized Cap — the kind of curated, paper-grade indicators that became the lingua franca of institutional on-chain research.
+Glassnode is a Swiss-based [[on-chain-analysis]] provider founded in 2017, specializing in aggregated, statistically-derived indicators on [[bitcoin]], [[ethereum]], and major Layer-1 networks. It differentiates from [[nansen]] (wallet labels), [[dune-analytics]] (custom SQL), and [[cryptoquant]] (exchange-flow granularity) by focusing on derived macro metrics such as SOPR, MVRV, and Realized Cap — the kind of curated, paper-grade indicators that became the lingua franca of institutional on-chain research.
 
 ## Overview
 
@@ -122,7 +122,7 @@ Backtests built on the *current-as-of-today* version of a metric inherit a subtl
 
 ## Related
 
-- [[on-chain-analytics]]
+- [[on-chain-analysis]]
 - [[cryptoquant]]
 - [[nansen]]
 - [[dune-analytics]]

@@ -9,7 +9,7 @@ aliases: ["VELVET", "Velvet Capital"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.velvet.capital/"
-related: ["[[base]]", "[[bnb]]", "[[crypto-markets]]", "[[decentralized-finance]]"]
+related: ["[[base]]", "[[bnb]]", "[[crypto-markets]]", "[[defi]]"]
 ---
 
 # Velvet (Velvet Capital)
@@ -94,7 +94,7 @@ Takeaway: Velvet pairs a **conventional, well-understood revenue model** (fees o
 
 ## Narrative / category & catalysts
 
-Velvet sits squarely in the **DeFAI (AI + DeFi)** and **on-chain asset-management** narratives, with a Base-ecosystem and YZi Labs angle. It outperformed over the trailing week (+9.4%) and rallied 24h (+5.1%) against the soft tape — high-beta behaviour. Despite the bounce it remains ~74% below its mid-June 2026 ATH. See [[decentralized-finance]] and [[ai-trading]].
+Velvet sits squarely in the **DeFAI (AI + DeFi)** and **on-chain asset-management** narratives, with a Base-ecosystem and YZi Labs angle. It outperformed over the trailing week (+9.4%) and rallied 24h (+5.1%) against the soft tape — high-beta behaviour. Despite the bounce it remains ~74% below its mid-June 2026 ATH. See [[defi]] and [[ai-trading]].
 
 **Catalysts (potential, unverified):** disclosed AUM/TVL and fee growth; activation/confirmation of a token fee-share or buy-back; further CEX listings or a perp market; broad DeFAI-meta strength. Negative catalysts: large scheduled unlocks, DeFAI rotation, or evidence the token does not capture protocol fees.
 
@@ -131,7 +131,7 @@ Velvet sits squarely in the **DeFAI (AI + DeFi)** and **on-chain asset-managemen
 - [[crypto-markets]]
 - [[bnb]]
 - [[base]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[defai]]
 - [[ai-trading]]
 - [[token-unlocks]]

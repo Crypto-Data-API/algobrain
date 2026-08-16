@@ -277,7 +277,7 @@ The key lesson from comparing MakerDAO to [[terra-luna-collapse|Terra]]: over-co
 - [[usds]] — Sky Dollar, the USDS upgrade of DAI
 - [[spark-protocol]] — Maker/Sky's lending market (SparkLend)
 - [[real-world-assets]] — Treasury-backed collateral powering the savings rate
-- [[stablecoin]] — General stablecoin concept
+- [[stablecoins]] — General stablecoin concept
 - [[stablecoin-depeg-history]] — Master depeg timeline (DAI appears via Black Thursday and SVB)
 - [[depeg-risk]] — Framework for peg-break risk
 - [[oracle-manipulation]] — Oracle risk relevant to the OSM/`Spot` system

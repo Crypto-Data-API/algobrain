@@ -9,12 +9,12 @@ aliases: ["PAX", "Pax Dollar", "Paxos Standard", "USDP"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://www.paxos.com/standard/"
-related: ["[[base]]", "[[binance]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[tether]]", "[[usdc]]"]
+related: ["[[base]]", "[[binance]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoins]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[tether]]", "[[usdc]]"]
 ---
 
 # Pax Dollar
 
-**Pax Dollar** (ticker **USDP**, ERC-20 on [[ethereum|Ethereum]]) is a fiat-collateralized [[stablecoin]] pegged 1:1 to the U.S. dollar and issued by [[paxos|Paxos Trust Company, LLC]]. Originally launched in September 2018 as **Paxos Standard (PAX)**, it was one of the first regulated dollar stablecoins — Paxos was an early holder of a limited-purpose trust charter from the New York State Department of Financial Services (NYDFS), and PAX/GUSD were greenlit by NYDFS in the same 2018 cohort. The token was rebranded from PAX to USDP in 2021. Backing is held in cash and short-dated U.S. Treasury instruments, with monthly third-party attestations.
+**Pax Dollar** (ticker **USDP**, ERC-20 on [[ethereum|Ethereum]]) is a fiat-collateralized [[stablecoins]] pegged 1:1 to the U.S. dollar and issued by [[paxos|Paxos Trust Company, LLC]]. Originally launched in September 2018 as **Paxos Standard (PAX)**, it was one of the first regulated dollar stablecoins — Paxos was an early holder of a limited-purpose trust charter from the New York State Department of Financial Services (NYDFS), and PAX/GUSD were greenlit by NYDFS in the same 2018 cohort. The token was rebranded from PAX to USDP in 2021. Backing is held in cash and short-dated U.S. Treasury instruments, with monthly third-party attestations.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -112,7 +112,7 @@ USDP sits in the **regulated fiat-backed dollar stablecoin** category. Its forwa
 - **Liquidity risk** — Small supply and modest volume can widen spreads and slippage, especially on-chain.
 - **Smart-contract risk** — Standard audited ERC-20 exposure.
 
-See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
+See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 
 ---
 
@@ -127,7 +127,7 @@ See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
 
 ## Related
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[paxos]]
 - [[binance-usd]]
 - [[gemini-dollar]]
@@ -151,7 +151,7 @@ See [[stablecoin]] and [[depeg]] for the general failure-mode taxonomy.
 
 ### Venues & liquidity
 
-USDP is a USD-pegged [[stablecoin]] traded on [[binance]] and other centralized venues, and it is a **PEG / cash-management instrument, NOT a directional asset** — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because it is fully fiat-reserved and pegged 1:1, there is no directional thesis and no meaningful use for leverage; it functions as quote-side or parking liquidity rather than a position to be long or short. With a small float, secondary-market depth is thin relative to [[usdc|USDC]] and [[tether|USDT]], so venue availability directly shapes execution: on Binance and deep CEX order books, tight spreads permit larger arbitrage clips at par, while on-chain pools and minor venues force smaller sizing to avoid slippage. Primary-market mint/redeem is gated to onboarded institutions, so retail execution and sizing are constrained to whatever secondary liquidity a given venue offers.
+USDP is a USD-pegged [[stablecoins]] traded on [[binance]] and other centralized venues, and it is a **PEG / cash-management instrument, NOT a directional asset** — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because it is fully fiat-reserved and pegged 1:1, there is no directional thesis and no meaningful use for leverage; it functions as quote-side or parking liquidity rather than a position to be long or short. With a small float, secondary-market depth is thin relative to [[usdc|USDC]] and [[tether|USDT]], so venue availability directly shapes execution: on Binance and deep CEX order books, tight spreads permit larger arbitrage clips at par, while on-chain pools and minor venues force smaller sizing to avoid slippage. Primary-market mint/redeem is gated to onboarded institutions, so retail execution and sizing are constrained to whatever secondary liquidity a given venue offers.
 
 ### Applicable strategies
 

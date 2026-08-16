@@ -9,7 +9,7 @@ aliases: ["FIDD", "Fidelity Digital Dollar"]
 entity_type: protocol
 headquarters: "United States (Fidelity Digital Assets)"
 website: "https://www.fidelitydigitalassets.com/stablecoin"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[money-market-fund]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[treasuries]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[money-market-fund]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[treasuries]]"]
 ---
 
 # Fidelity Digital Dollar
@@ -229,7 +229,7 @@ As a $1-pegged digital dollar, FIDD shows only minor deviations around its peg; 
 - [[real-world-assets]]
 - [[tokenization]]
 - [[money-market-fund]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[openeden-open-dollar]] / [[midas-mtbill]] — peer RWA dollars/wrappers
 
 ---

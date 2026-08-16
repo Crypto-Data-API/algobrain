@@ -9,12 +9,12 @@ aliases: ["Open Dollar", "OpenDollar", "USDO"]
 entity_type: protocol
 headquarters: "Bermuda (OpenEden Digital, BMA-licensed)"
 website: "https://openeden.com/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[midas-mtbill]]", "[[ondo-u-s-dollar-token]]", "[[real-world-assets]]", "[[stablecoin]]", "[[tokenization]]", "[[tokenized-treasuries]]", "[[treasuries]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[midas-mtbill]]", "[[ondo-u-s-dollar-token]]", "[[real-world-assets]]", "[[stablecoins]]", "[[tokenization]]", "[[tokenized-treasuries]]", "[[treasuries]]"]
 ---
 
 # OpenEden OpenDollar
 
-**OpenEden OpenDollar** (ticker **USDO**) is a **yield-bearing, US-dollar [[stablecoin]] backed by tokenized US Treasury bills**, issued by OpenEden Digital ("OED"), a Bermuda Monetary Authority (BMA) licensed digital-asset issuer. It is deployed on [[ethereum|Ethereum]] and [[base|Base]]. Unlike a conventional non-interest-bearing stablecoin, USDO is a **rebasing** token: holders accrue the yield earned on the underlying [[treasuries]] portfolio directly as a growing wallet balance, making it a [[real-world-assets]] (RWA) instrument as much as a payment dollar. The real-world asset it represents is a reserve of short-dated US government debt — primarily T-bills and reverse repurchase agreements.
+**OpenEden OpenDollar** (ticker **USDO**) is a **yield-bearing, US-dollar [[stablecoins]] backed by tokenized US Treasury bills**, issued by OpenEden Digital ("OED"), a Bermuda Monetary Authority (BMA) licensed digital-asset issuer. It is deployed on [[ethereum|Ethereum]] and [[base|Base]]. Unlike a conventional non-interest-bearing stablecoin, USDO is a **rebasing** token: holders accrue the yield earned on the underlying [[treasuries]] portfolio directly as a growing wallet balance, making it a [[real-world-assets]] (RWA) instrument as much as a payment dollar. The real-world asset it represents is a reserve of short-dated US government debt — primarily T-bills and reverse repurchase agreements.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -202,7 +202,7 @@ USDO sits squarely in the **tokenized-Treasury / yield-bearing-stablecoin** narr
 
 - [[crypto-markets]]
 - [[ethereum]] / [[base]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[real-world-assets]]
 - [[treasuries]] / [[tokenized-treasuries]]
 - [[tokenization]]

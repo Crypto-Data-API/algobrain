@@ -9,12 +9,12 @@ aliases: ["ANVL"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.anvil.xyz"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]"]
 ---
 
 # Anvil
 
-**Anvil** (ANVL) is an [[ethereum|Ethereum]]-based [[decentralized-finance|DeFi]] protocol — a system of smart contracts that manages collateral and issues fully secured credit. Its primary instrument is the **letter of credit (LOC)**: an on-chain analogue of a bank cheque drawing verified funds, providing an economic guarantee of payment. Anvil is built by the **Acronym Foundation** and is a credit/collateral primitive, **not** a gaming or NFT token. ANVL is the protocol's native token.
+**Anvil** (ANVL) is an [[ethereum|Ethereum]]-based [[defi|DeFi]] protocol — a system of smart contracts that manages collateral and issues fully secured credit. Its primary instrument is the **letter of credit (LOC)**: an on-chain analogue of a bank cheque drawing verified funds, providing an economic guarantee of payment. Anvil is built by the **Acronym Foundation** and is a credit/collateral primitive, **not** a gaming or NFT token. ANVL is the protocol's native token.
 
 ---
 
@@ -168,7 +168,7 @@ CoinGecko categories: **Decentralized Finance (DeFi), Ethereum Ecosystem.** Anvi
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[decentralized-finance]]
+- [[defi]]
 
 ---
 

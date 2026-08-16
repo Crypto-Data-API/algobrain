@@ -9,12 +9,12 @@ aliases: ["BRZ"]
 entity_type: protocol
 headquarters: "Brazil / Switzerland (Transfero Group)"
 website: "https://transfero.com/stablecoins/brz/"
-related: ["[[brazilian-real]]", "[[brla-digital-brla]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoin]]"]
+related: ["[[brazilian-real]]", "[[brla-digital-brla]]", "[[crown-brlv]]", "[[crypto-markets]]", "[[depeg]]", "[[ethereum]]", "[[forex]]", "[[stablecoins]]"]
 ---
 
 # Brazilian Digital
 
-**Brazilian Digital** (BRZ) is a fiat-backed [[stablecoin]] that tracks the **[[brazilian-real|Brazilian real]] (BRL)**, not the US dollar. Issued by the **Transfero Group**, BRZ lets users hold, move, and trade the Brazilian currency on-chain across many blockchains, and is one of the longest-standing and most widely distributed BRL stablecoins. It is the BRL counterpart to dollar coins like [[usdt]] / [[usdc]] and competes directly with [[brla-digital-brla|BRLA]] and [[crown-brlv|Crown BRLV]] inside the Brazilian on-chain economy.
+**Brazilian Digital** (BRZ) is a fiat-backed [[stablecoins]] that tracks the **[[brazilian-real|Brazilian real]] (BRL)**, not the US dollar. Issued by the **Transfero Group**, BRZ lets users hold, move, and trade the Brazilian currency on-chain across many blockchains, and is one of the longest-standing and most widely distributed BRL stablecoins. It is the BRL counterpart to dollar coins like [[usdt]] / [[usdc]] and competes directly with [[brla-digital-brla|BRLA]] and [[crown-brlv|Crown BRLV]] inside the Brazilian on-chain economy.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -105,7 +105,7 @@ BRZ sits in the **regional / FX-denominated stablecoin** category. Catalysts tha
 
 ## See Also
 
-- [[stablecoin]]
+- [[stablecoins]]
 - [[brazilian-real]]
 - [[forex]]
 - [[brla-digital-brla]]

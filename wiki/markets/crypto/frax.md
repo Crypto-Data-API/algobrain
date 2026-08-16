@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2020
 headquarters: "Decentralized"
 website: "https://frax.finance"
-related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[frax-share]]", "[[frax-usd]]", "[[stablecoin]]", "[[stablecoins]]"]
+related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[frax-share]]", "[[frax-usd]]", "[[stablecoins]]", "[[stablecoins]]"]
 ---
 
 # Legacy Frax Dollar
@@ -24,7 +24,7 @@ related: ["[[crypto-markets]]", "[[ethena-usde]]", "[[ethereum]]", "[[frax-share
 | Field | Value |
 |---|---|
 | **Ticker** | FRAX (legacy stablecoin; ticker now also used by the ex-FXS gas token — check which asset a venue lists) |
-| **Asset class** | USD [[stablecoin]] (deprecated/legacy; migration to [[frax-usd\|frxUSD]]) |
+| **Asset class** | USD [[stablecoins]] (deprecated/legacy; migration to [[frax-usd\|frxUSD]]) |
 | **Native Chain** | [[ethereum\|Ethereum]], bridged to 14+ chains |
 | **Market Cap Rank** | #149 |
 | **Market Cap** | $240.05M |

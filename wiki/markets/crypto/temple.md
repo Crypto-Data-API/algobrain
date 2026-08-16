@@ -9,7 +9,7 @@ aliases: ["TEMPLE"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.templedao.link/rituals"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[real-world-assets]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[real-world-assets]]"]
 ---
 
 # TempleDAO
@@ -139,7 +139,7 @@ Framing only — not advice. Against the 2026-06-23 macro backdrop (Fear & Greed
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[real-world-assets]]
 - [[defi]]
 

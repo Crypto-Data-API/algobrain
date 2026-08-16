@@ -9,13 +9,13 @@ aliases: ["BEAM", "BEAMX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://onbeam.com"
-related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[non-fungible-token]]", "[[binance]]", "[[breakout-and-retest]]", "[[narrative-trading]]"]
+related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[ethereum]]", "[[gamefi]]", "[[nft]]", "[[binance]]", "[[breakout-and-retest]]", "[[narrative-trading]]"]
 founded: 2019
 ---
 
 # Beam
 
-**Beam** (BEAM, base chain **Avalanche L1**) is the native gas and governance token of the **Beam Network**, a [[gaming-tokens|gaming]]-focused blockchain ecosystem incubated by the gaming DAO **Merit Circle**. Beam launched in 2023 as an [[avalanche|Avalanche]] subnet (now an Avalanche L1) and has since become a multi-chain ERC-20 asset bridged to [[ethereum|Ethereum]], [[bnb|BNB Chain]], and [[base|Base]]. BEAM powers transaction fees, validator staking, and developer incentives across the network's catalogue of Web3 games, NFT marketplaces, and gaming-related dApps. It is a classic [[gamefi|GameFi]] / [[non-fungible-token|NFT]] infrastructure token — a gaming **L1** play rather than a single game.
+**Beam** (BEAM, base chain **Avalanche L1**) is the native gas and governance token of the **Beam Network**, a [[gaming-tokens|gaming]]-focused blockchain ecosystem incubated by the gaming DAO **Merit Circle**. Beam launched in 2023 as an [[avalanche|Avalanche]] subnet (now an Avalanche L1) and has since become a multi-chain ERC-20 asset bridged to [[ethereum|Ethereum]], [[bnb|BNB Chain]], and [[base|Base]]. BEAM powers transaction fees, validator staking, and developer incentives across the network's catalogue of Web3 games, NFT marketplaces, and gaming-related dApps. It is a classic [[gamefi|GameFi]] / [[nft|NFT]] infrastructure token — a gaming **L1** play rather than a single game.
 
 ---
 
@@ -197,7 +197,7 @@ Auth: `X-API-Key` header. Catalog: [[cryptodataapi-market-data]].
 - [[avalanche]]
 - [[gamefi]]
 - [[gaming-tokens]]
-- [[non-fungible-token]]
+- [[nft]]
 - [[base]]
 - [[bnb]]
 

@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2023
 headquarters: "Decentralized"
 website: "https://app.ethena.fi/"
-related: ["[[aave]]", "[[binance]]", "[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[stablecoin]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
+related: ["[[aave]]", "[[binance]]", "[[bitcoin]]", "[[carry-trade]]", "[[crypto-markets]]", "[[ethena]]", "[[ethereum]]", "[[funding-rates]]", "[[hyperliquid]]", "[[stablecoins]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # Ethena USDe
 
-**Ethena USDe** (USDe) is a **"synthetic dollar"** — not a fiat-backed [[stablecoin]] but a **delta-neutral** position: [[ethena|Ethena]] holds staked ETH/BTC/SOL collateral and shorts an equal notional in perpetual futures, capturing staking yield plus perp funding rates and passing it to holders of staked USDe (sUSDe). For traders, USDe is effectively the tokenized crypto [[carry-trade|carry trade]] — its supply is a real-time gauge of how crowded the basis/funding trade is, and its growth/contraction cycles move [[funding-rates|funding rates]] across the entire perp market.
+**Ethena USDe** (USDe) is a **"synthetic dollar"** — not a fiat-backed [[stablecoins]] but a **delta-neutral** position: [[ethena|Ethena]] holds staked ETH/BTC/SOL collateral and shorts an equal notional in perpetual futures, capturing staking yield plus perp funding rates and passing it to holders of staked USDe (sUSDe). For traders, USDe is effectively the tokenized crypto [[carry-trade|carry trade]] — its supply is a real-time gauge of how crowded the basis/funding trade is, and its growth/contraction cycles move [[funding-rates|funding rates]] across the entire perp market.
 
 ---
 
@@ -248,7 +248,7 @@ A pegged asset is not "valued" by price — the analytical questions are about *
 - [[hyperliquid]] — perp venue used for hedging; HyperEVM USDe deployment
 - [[aave]] — center of the 2025 looping trade
 - [[funding-rates]] — the revenue engine and the key risk variable
-- [[stablecoin]] — synthetic vs fiat-backed dollar context
+- [[stablecoins]] — synthetic vs fiat-backed dollar context
 - [[ethena]] — issuer / ENA governance token
 - [[carry-trade]] — the underlying basis/funding trade USDe tokenizes
 

@@ -9,12 +9,12 @@ aliases: ["AVUSD", "avUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.avantprotocol.com/"
-related: ["[[avalanche]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[stablecoins]]", "[[usde]]"]
+related: ["[[avalanche]]", "[[crypto-markets]]", "[[ethena-usde]]", "[[stablecoins]]", "[[ethena-usde]]"]
 ---
 
 # Avant USD
 
-**Avant USD** (ticker AVUSD, styled "avUSD") is a DeFi stable-value dollar token issued by the **Avant** protocol, primarily on **[[avalanche|Avalanche]]**. It targets a soft peg of **1 avUSD ≈ US$1**. avUSD is the transactional, non-yield token; **savUSD** is its staked, yield-bearing counterpart. Avant was established in June 2024 with the stated goal of bridging DeFi and TradFi yield within a single stable-value token family. It belongs to the **yield-bearing / synthetic-dollar** category alongside [[ethena-usde]]'s [[usde]], rather than to fiat-reserve dollars like [[usdc]].
+**Avant USD** (ticker AVUSD, styled "avUSD") is a DeFi stable-value dollar token issued by the **Avant** protocol, primarily on **[[avalanche|Avalanche]]**. It targets a soft peg of **1 avUSD ≈ US$1**. avUSD is the transactional, non-yield token; **savUSD** is its staked, yield-bearing counterpart. Avant was established in June 2024 with the stated goal of bridging DeFi and TradFi yield within a single stable-value token family. It belongs to the **yield-bearing / synthetic-dollar** category alongside [[ethena-usde]]'s [[ethena-usde]], rather than to fiat-reserve dollars like [[usdc]].
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -45,7 +45,7 @@ Avant uses a **two-token, stake-for-yield design** that has become the standard 
 
 ### Where the yield comes from
 
-Avant's stated model generates yield from **DeFi strategies and stable-value deployment** rather than from a single pass-through fiat-reserve interest stream. This places it in the same broad family as synthetic / yield-bearing dollars such as [[usde]], where returns are produced from on-chain and market-based strategies. The crucial implication for risk: unlike a fiat-reserve dollar whose yield is bank/T-bill interest on safe assets, a strategy-based yield dollar's backing and return depend on the **performance and solvency of those strategies** — if they underperform or take a loss, both savUSD yield and the avUSD backing can be impaired. (The precise current strategy mix is set by the protocol and is not detailed in the CoinGecko snapshot.)
+Avant's stated model generates yield from **DeFi strategies and stable-value deployment** rather than from a single pass-through fiat-reserve interest stream. This places it in the same broad family as synthetic / yield-bearing dollars such as [[ethena-usde]], where returns are produced from on-chain and market-based strategies. The crucial implication for risk: unlike a fiat-reserve dollar whose yield is bank/T-bill interest on safe assets, a strategy-based yield dollar's backing and return depend on the **performance and solvency of those strategies** — if they underperform or take a loss, both savUSD yield and the avUSD backing can be impaired. (The precise current strategy mix is set by the protocol and is not detailed in the CoinGecko snapshot.)
 
 ### Mint / redeem
 
@@ -58,11 +58,11 @@ avUSD is minted and redeemed through the Avant protocol against its backing; sav
 | Token | Yield source | Stable / yield split | Backing | Issuer |
 |---|---|---|---|---|
 | **avUSD / savUSD** | DeFi strategies + stable-value deployment | avUSD (flat) + savUSD (yield) | On-chain strategy collateral | Avant |
-| [[usde]] / [[susde]] | Delta-neutral basis (staked-ETH yield + perp funding) | USDe (flat) + sUSDe (yield) | Crypto collateral + short perps | [[ethena-usde]] |
+| [[ethena-usde]] / [[susde]] | Delta-neutral basis (staked-ETH yield + perp funding) | USDe (flat) + sUSDe (yield) | Crypto collateral + short perps | [[ethena-usde]] |
 | [[usdm]] | Tokenized US Treasuries (rebasing) | Single rebasing token | Off-chain T-bills | Mountain Protocol |
 | [[usdc]] | Reserve interest (kept by issuer) | Single token, no holder yield | Off-chain cash + T-bills | Circle |
 
-avUSD's closest structural peer is **[[usde]]**: both split a flat "money" token from a staked yield token, and both source yield from market/on-chain strategies rather than from passed-through bank interest. The principal difference is the **strategy engine** — Ethena's is a specific, transparent delta-neutral basis trade, whereas Avant's is a broader, protocol-managed DeFi strategy book — and scale, where avUSD (~$111M) is a fraction of USDe's size, implying thinner liquidity and a smaller arbitrage backstop.
+avUSD's closest structural peer is **[[ethena-usde]]**: both split a flat "money" token from a staked yield token, and both source yield from market/on-chain strategies rather than from passed-through bank interest. The principal difference is the **strategy engine** — Ethena's is a specific, transparent delta-neutral basis trade, whereas Avant's is a broader, protocol-managed DeFi strategy book — and scale, where avUSD (~$111M) is a fraction of USDe's size, implying thinner liquidity and a smaller arbitrage backstop.
 
 ---
 
@@ -80,7 +80,7 @@ Contract address:
 
 ## Narrative & catalysts
 
-avUSD rides the **2024–2026 "yield-bearing dollar" narrative** — the migration of stablecoin demand from non-yielding fiat dollars toward tokens that route DeFi/TradFi yield back to stakers. Catalysts that would matter for avUSD specifically: growth of the [[avalanche|Avalanche]] DeFi ecosystem where it is native; integrations that make savUSD usable as collateral and in money markets (driving demand for the yield leg); and the competitiveness of its yield versus [[usde]] and tokenized-Treasury dollars. The main headwind is the regulatory trajectory for yield-bearing dollar tokens, which is still being defined across jurisdictions and could constrain distribution.
+avUSD rides the **2024–2026 "yield-bearing dollar" narrative** — the migration of stablecoin demand from non-yielding fiat dollars toward tokens that route DeFi/TradFi yield back to stakers. Catalysts that would matter for avUSD specifically: growth of the [[avalanche|Avalanche]] DeFi ecosystem where it is native; integrations that make savUSD usable as collateral and in money markets (driving demand for the yield leg); and the competitiveness of its yield versus [[ethena-usde]] and tokenized-Treasury dollars. The main headwind is the regulatory trajectory for yield-bearing dollar tokens, which is still being defined across jurisdictions and could constrain distribution.
 
 ---
 
@@ -116,7 +116,7 @@ avUSD rides the **2024–2026 "yield-bearing dollar" narrative** — the migrati
 ## Related
 
 - [[stablecoins]] — landscape overview
-- [[ethena-usde]], [[usde]] — synthetic / yield-bearing dollar peers (closest analog)
+- [[ethena-usde]], [[ethena-usde]] — synthetic / yield-bearing dollar peers (closest analog)
 - [[usdc]], [[usdt]], [[dai]] — peer dollars
 - [[avalanche]] — host chain
 - [[crypto-markets]]

@@ -9,7 +9,7 @@ aliases: ["DEEP"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://deepbook.tech/"
-related: ["[[clob]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[decentralized-finance]]", "[[liquidity]]", "[[order-book]]", "[[serum]]", "[[sui]]"]
+related: ["[[clob]]", "[[crypto-markets]]", "[[decentralized-exchange]]", "[[defi]]", "[[liquidity]]", "[[order-book]]", "[[serum]]", "[[sui]]"]
 ---
 
 # DeepBook
@@ -123,7 +123,7 @@ DEEP is a **bet on Sui DeFi throughput, levered to an unlock schedule**. The qua
 - [[order-book]]
 - [[serum]]
 - [[hyperliquid]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[liquidity]]
 
 ---

@@ -9,7 +9,7 @@ aliases: ["BR"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://bedrockdao.com/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[liquid-staking]]", "[[restaking]]"]
 ---
 
 # Bedrock
@@ -125,7 +125,7 @@ BR is a **small-cap, multi-asset** entrant whose distinctive angle is extending 
 - [[ethereum]] · [[bitcoin]]
 - [[restaking]]
 - [[liquid-staking]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[puffer-finance]] · [[etherfi]] · [[renzo]] — peer LRT protocols
 - [[fear-and-greed-index]]
 

@@ -9,12 +9,12 @@ aliases: ["JPY Coin", "JPY Coin v1", "JPYC"]
 entity_type: protocol
 headquarters: "Tokyo, Japan"
 website: "https://jpyc.jp/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[forex]]", "[[japanese-yen]]", "[[mica]]", "[[stablecoin]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[forex]]", "[[japanese-yen]]", "[[mica]]", "[[stablecoins]]"]
 ---
 
 # JPYC
 
-**JPYC** is a **Japanese-yen [[stablecoin]]** issued out of Japan, pegged to the [[japanese-yen|yen (JPY)]] at roughly 1 JPYC = ¥1. It is one of the most prominent yen-denominated stablecoins and is associated with Japan's regulated stablecoin framework, which (following 2023 amendments to the Payment Services Act) permits licensed issuers to offer fiat-backed stablecoins. JPYC is deployed across [[ethereum|Ethereum]], Polygon, Gnosis Chain (xDai), and other networks. It ranks **#870** by market capitalization.
+**JPYC** is a **Japanese-yen [[stablecoins]]** issued out of Japan, pegged to the [[japanese-yen|yen (JPY)]] at roughly 1 JPYC = ¥1. It is one of the most prominent yen-denominated stablecoins and is associated with Japan's regulated stablecoin framework, which (following 2023 amendments to the Payment Services Act) permits licensed issuers to offer fiat-backed stablecoins. JPYC is deployed across [[ethereum|Ethereum]], Polygon, Gnosis Chain (xDai), and other networks. It ranks **#870** by market capitalization.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -239,7 +239,7 @@ JPYC sits within the **regulated non-USD stablecoin** narrative alongside euro t
 
 - [[crypto-markets]]
 - [[ethereum]]
-- [[stablecoin]]
+- [[stablecoins]]
 - [[japanese-yen]]
 - [[forex]]
 - [[depeg]]

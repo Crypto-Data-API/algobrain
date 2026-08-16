@@ -9,12 +9,12 @@ aliases: ["HAY", "Helio Protocol", "LISUSD", "Lista USD", "lisUSD"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://helio.money/"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[dai]]", "[[lista]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dai]]", "[[lista]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # Lista USD
 
-**Lista USD** (ticker **LISUSD / lisUSD**, formerly **HAY** from **Helio Protocol**) is a **crypto-overcollateralized USD-pegged [[stablecoin]]** on **[[bnb|BNB Chain]]**, targeting a soft 1 USD peg. Its issuer describes it as a **"destablecoin"**: an over-collateralized asset where 1 lisUSD is redeemable for $1 *of cryptocurrency collateral* (primarily BNB and liquid-staked BNB), not fiat. Users mint and borrow lisUSD by depositing collateral, then use it to stake for yield, provide liquidity, or transfer value.
+**Lista USD** (ticker **LISUSD / lisUSD**, formerly **HAY** from **Helio Protocol**) is a **crypto-overcollateralized USD-pegged [[stablecoins]]** on **[[bnb|BNB Chain]]**, targeting a soft 1 USD peg. Its issuer describes it as a **"destablecoin"**: an over-collateralized asset where 1 lisUSD is redeemable for $1 *of cryptocurrency collateral* (primarily BNB and liquid-staked BNB), not fiat. Users mint and borrow lisUSD by depositing collateral, then use it to stake for yield, provide liquidity, or transfer value.
 
 > **Scope note:** This page covers the **lisUSD stablecoin asset** (ticker LISUSD). The issuing protocol, its **LISTA governance token**, the slisBNB liquid-staking product, and the Helio→Lista rebrand are covered in depth on **[[lista|Lista DAO]]**. lisUSD is a distinct tradeable asset (rank ~#333, ~$1) from the LISTA token (rank ~#761, ~$0.055); this page is the stablecoin reference and defers to [[lista]] for governance/tokenomics of the DAO.
 
@@ -124,7 +124,7 @@ In the current Extreme-Fear environment (Fear & Greed 21), BNB-collateralized st
 
 - [[lista]] — the issuing DAO, LISTA governance token, and slisBNB liquid staking (governance/tokenomics reference)
 - [[dai]] — the canonical crypto-overcollateralized stablecoin (closest design analog)
-- [[stablecoin]] / [[stablecoins]] — category overview
+- [[stablecoins]] / [[stablecoins]] — category overview
 - [[bnb]] — the primary collateral asset and host chain
 - [[usdc]] — fiat-backed peer (for peg-stability contrast)
 - [[satoshi-stablecoin|Satoshi Stablecoin]], [[usdx|USDX]] — other crypto-collateralized peers

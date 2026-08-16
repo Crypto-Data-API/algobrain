@@ -74,7 +74,7 @@ Naoris competes in an unusual niche: decentralized cybersecurity is far less cro
 |---|---|---|---|---|
 | **Naoris (NAORIS)** | Decentralized cybersecurity mesh ([[depin\|DePIN]]) | Post-quantum (Sub-Zero) + devices-as-validators (dPoSec) | Validation rewards, staking, access, governance | — |
 | **[[quant-network\|Quant]] / Hacken-type security tokens** | Audit / security services | Centralized security tooling, audits | Service payment | Centralized incumbents Naoris must outperform |
-| **General [[depin\|DePIN]] infra (e.g. Helium, [[render\|Render]])** | Wireless / compute resource networks | Physical-resource mesh | Resource payment, rewards | Same DePIN model, different (non-security) resource |
+| **General [[depin\|DePIN]] infra (e.g. Helium, [[render-token\|Render]])** | Wireless / compute resource networks | Physical-resource mesh | Resource payment, rewards | Same DePIN model, different (non-security) resource |
 | **Post-quantum L1s / privacy chains** | Quantum-resistant settlement | PQ cryptography at the chain layer | Gas, staking | Share the PQ narrative; Naoris targets security attestation, not settlement |
 
 Naoris's narrowest differentiator is the **combination** of a post-quantum cryptographic stack with a mutually-validating device mesh aimed specifically at *security posture* — a distinct narrative, but one whose conservative enterprise/government buyers adopt slowly.
@@ -89,7 +89,7 @@ NAORIS sits at the intersection of three narratives — **[[depin|DePIN]]**, **p
 - **Enterprise / government adoption** — the make-or-break driver; real paying deployments of the security mesh would be a fundamental re-rating, but procurement is slow.
 - **Post-quantum narrative rotation** — quantum-threat headlines or NIST PQ-standard news can rotate attention into PQ-branded tokens.
 - **Listing catalysts** — given the single-CEX base, any tier-1 listing would be an outsized volume event.
-- **DePIN-basket beta** — broad DePIN sentiment ([[render|RENDER]], Helium) spills into NAORIS.
+- **DePIN-basket beta** — broad DePIN sentiment ([[render-token|RENDER]], Helium) spills into NAORIS.
 
 ## History & Timeline
 
@@ -217,7 +217,7 @@ NAORIS sits at the intersection of three narratives — **[[depin|DePIN]]**, **p
 - [[post-quantum-cryptography]]
 - [[artificial-intelligence]]
 - [[staking]]
-- [[render]]
+- [[render-token]]
 - [[crypto-markets]]
 - [[ethereum]]
 - [[bnb]]

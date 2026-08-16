@@ -15,7 +15,7 @@ related: ["[[binance]]", "[[bnb]]", "[[crypto-markets]]", "[[narrative-trading]]
 
 # USD1 (World Liberty Financial)
 
-**USD1** (ticker **USD1**, native to [[bnb|BNB Chain]]) is the fiat-backed, Treasury-reserve [[stablecoin]] issued by **[[world-liberty-financial|World Liberty Financial]] (WLFI)**, the Trump-family-affiliated crypto venture. Launched in March 2025, it became the fastest-growing fiat-backed stablecoin of the period — but its growth is dominated by a single event (the $2B MGX→[[binance|Binance]] investment settled in USD1) and ~87% of supply reportedly sits on Binance. For traders it is less a neutral settlement asset than a **political-risk instrument** inside the "Trump trade" basket.
+**USD1** (ticker **USD1**, native to [[bnb|BNB Chain]]) is the fiat-backed, Treasury-reserve [[stablecoins]] issued by **[[world-liberty-financial|World Liberty Financial]] (WLFI)**, the Trump-family-affiliated crypto venture. Launched in March 2025, it became the fastest-growing fiat-backed stablecoin of the period — but its growth is dominated by a single event (the $2B MGX→[[binance|Binance]] investment settled in USD1) and ~87% of supply reportedly sits on Binance. For traders it is less a neutral settlement asset than a **political-risk instrument** inside the "Trump trade" basket.
 
 ---
 
@@ -290,7 +290,7 @@ As a pegged asset USD1 is not "valued"; the economics accrue to **WLFI** (reserv
 
 ### Venues & liquidity
 
-USD1 is a USD-pegged, fiat-backed [[stablecoin]] whose float is overwhelmingly concentrated on [[binance|Binance]] (reportedly ~87% of supply), with the core **USD1/USDT** book there plus thinner listings on Kraken, Bitget, KuCoin and a Uniswap V3 (Ethereum) pool. It is a **peg / cash-management instrument, not a directional asset** — trading is about peg tightness, backing/reserves, depeg risk, and yield/arbitrage rather than momentum. Because liquidity is single-venue-dominant, peg defense leans on Binance market-making rather than broad on-chain redemption arbitrage: execution and sizing should assume that a Binance-specific shock (halt, delisting, or thin book) is the binding constraint, and cross-venue/on-chain quotes (Curve/Uniswap discounts) are the earliest depeg tell. Leverage on a pegged asset is low-utility and best reserved for tight arbitrage spreads, not speculation.
+USD1 is a USD-pegged, fiat-backed [[stablecoins]] whose float is overwhelmingly concentrated on [[binance|Binance]] (reportedly ~87% of supply), with the core **USD1/USDT** book there plus thinner listings on Kraken, Bitget, KuCoin and a Uniswap V3 (Ethereum) pool. It is a **peg / cash-management instrument, not a directional asset** — trading is about peg tightness, backing/reserves, depeg risk, and yield/arbitrage rather than momentum. Because liquidity is single-venue-dominant, peg defense leans on Binance market-making rather than broad on-chain redemption arbitrage: execution and sizing should assume that a Binance-specific shock (halt, delisting, or thin book) is the binding constraint, and cross-venue/on-chain quotes (Curve/Uniswap discounts) are the earliest depeg tell. Leverage on a pegged asset is low-utility and best reserved for tight arbitrage spreads, not speculation.
 
 ### Applicable strategies
 

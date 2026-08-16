@@ -183,7 +183,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-on-chain]].
 - [[whale-alert]]
 - [[cryptoquant]]
 - [[arkham]]
-- [[bitcoin-etf]]
+- [[bitcoin-etfs]]
 - [[microstrategy]]
 - [[galaxy-digital]]
 - [[on-chain-analysis]]

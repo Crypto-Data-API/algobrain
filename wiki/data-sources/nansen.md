@@ -10,7 +10,7 @@ source_type: data
 source_url: "https://www.nansen.ai"
 source_author: "Nansen"
 confidence: high
-related: ["[[on-chain-analytics]]", "[[information-arbitrage]]", "[[polymarket]]", "[[polymarket-as-crypto-leading-indicator]]", "[[glassnode]]", "[[cryptoquant]]", "[[dune-analytics]]", "[[arkham-intelligence]]", "[[santiment]]", "[[defai]]", "[[ai-mev]]"]
+related: ["[[on-chain-analysis]]", "[[information-arbitrage]]", "[[polymarket]]", "[[polymarket-as-crypto-leading-indicator]]", "[[glassnode]]", "[[cryptoquant]]", "[[dune-analytics]]", "[[arkham-intelligence]]", "[[santiment]]", "[[defai]]", "[[ai-mev]]"]
 ---
 
 Nansen is a Singapore-based on-chain analytics platform founded in 2019, known for its proprietary wallet-labeling database (covering 300M+ labeled addresses) and "Smart Money" cohort tracking across [[ethereum]], [[polygon]], [[solana]], and other major chains. It sits at the institutional end of the on-chain data spectrum, monetizing the work of attributing pseudonymous blockchain addresses to real-world entities — exchanges, market makers, funds, protocol teams, and MEV bots — and turning that labeled graph into actionable trading signals.
@@ -84,7 +84,7 @@ Both are also documented in [[information-arbitrage]] §On-chain analytics histo
 
 ## Related
 
-- [[on-chain-analytics]]
+- [[on-chain-analysis]]
 - [[information-arbitrage]]
 - [[polymarket]]
 - [[polymarket-as-crypto-leading-indicator]]

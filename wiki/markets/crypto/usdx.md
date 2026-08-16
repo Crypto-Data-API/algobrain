@@ -9,12 +9,12 @@ aliases: ["Kava USDX", "USDX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.kava.io/overview"
-related: ["[[bnb]]", "[[crypto-markets]]", "[[dai]]", "[[kava]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
+related: ["[[bnb]]", "[[crypto-markets]]", "[[dai]]", "[[kava]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # USDX
 
-**USDX** is the crypto-collateralized, native US-dollar [[stablecoin]] of the **[[kava|Kava]]** DeFi hub (a Cosmos-SDK chain with EVM co-chain compatibility), designed to target a 1 USD soft peg. Users mint USDX by locking crypto collateral via Kava's CDP (collateralized-debt-position) system, in the same overcollateralized spirit as [[dai]]. It is bridged into the broader Cosmos ecosystem (e.g. Osmosis via IBC). As of the latest snapshot USDX is **trading materially below peg**, so it should be treated as a depegged / impaired stablecoin rather than a reliable dollar proxy.
+**USDX** is the crypto-collateralized, native US-dollar [[stablecoins]] of the **[[kava|Kava]]** DeFi hub (a Cosmos-SDK chain with EVM co-chain compatibility), designed to target a 1 USD soft peg. Users mint USDX by locking crypto collateral via Kava's CDP (collateralized-debt-position) system, in the same overcollateralized spirit as [[dai]]. It is bridged into the broader Cosmos ecosystem (e.g. Osmosis via IBC). As of the latest snapshot USDX is **trading materially below peg**, so it should be treated as a depegged / impaired stablecoin rather than a reliable dollar proxy.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -59,7 +59,7 @@ A common misconception is that overcollateralization alone pins the price to $1.
 | **USDX** | Crypto-overcollateralized CDP | **No (~$0.67)** | Kava protocol | Depegged, near-zero liquidity |
 | [[dai]] | Crypto-overcollateralized CDP (+ RWA, PSM) | Yes (~$1.00) | MakerDAO / Sky | Canonical design analog; far deeper liquidity & PSM backstop |
 | [[usdc]] | Fiat reserves (cash + T-bills) | Yes (~$1.00) | Circle | Centralized, attested reserves, instant primary redemption |
-| [[usde]] / [[ethena-usde]] | Synthetic delta-neutral (collateral + short perps) | Typically yes | Ethena | Yield-bearing; different risk surface (funding, exchange) |
+| [[ethena-usde]] / [[ethena-usde]] | Synthetic delta-neutral (collateral + short perps) | Typically yes | Ethena | Yield-bearing; different risk surface (funding, exchange) |
 
 The key contrast with [[dai]] is not the minting design — they are siblings — but the **depth of the arbitrage backstop**. Dai benefits from a Peg Stability Module (direct 1:1 swaps with [[usdc]]) and very deep liquidity, which mechanically anchors its market price. USDX has neither at present, which is why the same CDP architecture can leave one token at par and the other 33% under.
 
@@ -73,7 +73,7 @@ USDX is the native stablecoin of the Kava chain and is also present in the Cosmo
 
 ## Narrative & category
 
-USDX sits in the **legacy crypto-collateralized stablecoin** category — the first-generation, MakerDAO-style design that predates the 2023–2025 wave of yield-bearing synthetic dollars ([[usde]]) and tokenized-Treasury dollars ([[usdm]]). Its current trajectory is a cautionary case study: a CDP dollar whose host protocol's focus and liquidity have ebbed, leaving the token stranded below peg. The relevant catalysts for any normalization would be renewed protocol support, restored liquidity, and a credible redemption path — none of which are evident in the snapshot. In the current macro backdrop (crypto Fear & Greed at 21, "Extreme Fear", market in a bottoming/accumulation regime as of 2026-06-22), there is especially little incentive for arbitrageurs to deploy scarce risk capital to restore a small, illiquid peg.
+USDX sits in the **legacy crypto-collateralized stablecoin** category — the first-generation, MakerDAO-style design that predates the 2023–2025 wave of yield-bearing synthetic dollars ([[ethena-usde]]) and tokenized-Treasury dollars ([[usdm]]). Its current trajectory is a cautionary case study: a CDP dollar whose host protocol's focus and liquidity have ebbed, leaving the token stranded below peg. The relevant catalysts for any normalization would be renewed protocol support, restored liquidity, and a credible redemption path — none of which are evident in the snapshot. In the current macro backdrop (crypto Fear & Greed at 21, "Extreme Fear", market in a bottoming/accumulation regime as of 2026-06-22), there is especially little incentive for arbitrageurs to deploy scarce risk capital to restore a small, illiquid peg.
 
 ---
 
@@ -100,10 +100,10 @@ USDX sits in the **legacy crypto-collateralized stablecoin** category — the fi
 ## Related
 
 - [[dai]] — the canonical crypto-overcollateralized stablecoin (closest design analog)
-- [[stablecoin]] / [[stablecoins]] — category overview
+- [[stablecoins]] / [[stablecoins]] — category overview
 - [[kava]] — the host DeFi hub / chain
 - [[usdc]] — fiat-backed peer (for peg-stability contrast)
-- [[usde]] / [[ethena-usde]] — synthetic yield-bearing dollar peer
+- [[ethena-usde]] / [[ethena-usde]] — synthetic yield-bearing dollar peer
 - [[crypto-markets]]
 
 ---

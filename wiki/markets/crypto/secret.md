@@ -38,7 +38,7 @@ related: ["[[cosmos]]", "[[crypto-markets]]", "[[layer-1]]", "[[privacy-coins]]"
 
 ## Overview
 
-Secret Network is a decentralized network for private, secure computation. "Secret nodes" (validators) perform generalizable computations over encrypted data, allowing smart contracts — "secret contracts" — to take private and sensitive data as inputs without exposing it to validators, observers, or even the contract's own counterparties. The project's emphasis is **computational privacy**, not merely transactional privacy: balances, contract state, and message payloads can be kept confidential by default. Developers build privacy-preserving "Secret Apps" (sApps) for use cases spanning [[decentralized-finance|DeFi]], NFTs with private content, access control, gaming, and confidential data markets.
+Secret Network is a decentralized network for private, secure computation. "Secret nodes" (validators) perform generalizable computations over encrypted data, allowing smart contracts — "secret contracts" — to take private and sensitive data as inputs without exposing it to validators, observers, or even the contract's own counterparties. The project's emphasis is **computational privacy**, not merely transactional privacy: balances, contract state, and message payloads can be kept confidential by default. Developers build privacy-preserving "Secret Apps" (sApps) for use cases spanning [[defi|DeFi]], NFTs with private content, access control, gaming, and confidential data markets.
 
 The network traces its roots to the **Enigma** project (founded by MIT researchers, ~2015–2017) and later relaunched as Secret Network in 2020. It is supported by independent contributors including SCRT Labs (formerly Enigma), the Secret Foundation, and a broad validator set.
 

@@ -9,12 +9,12 @@ aliases: ["MapleStory N", "NXPC"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://msu.io/"
-related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[non-fungible-token]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[cash-and-carry]]"]
+related: ["[[avalanche]]", "[[bnb]]", "[[crypto-markets]]", "[[gamefi]]", "[[gaming-tokens]]", "[[hyperliquid]]", "[[nft]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[cash-and-carry]]"]
 ---
 
 # Nexpace
 
-**Nexpace** (ticker **NXPC**, on its own [[avalanche|Avalanche]] L1) is the native token of the **MapleStory Universe (MSU)** — a blockchain gaming ecosystem built by Korean game giant **Nexon** around its iconic MMORPG franchise *MapleStory*. The flagship title, **MapleStory N**, is an on-chain version of the game where in-game items and characters are tokenized as [[non-fungible-token|NFTs]]. NXPC is the ecosystem's utility and governance token, used for in-game economy, item synthesis, and fees. It is a [[gamefi|GameFi]] / NFT [[gaming-tokens|gaming token]] launched as a dedicated Avalanche L1. NXPC rose to prominence after a [[binance|Binance]] HODLer Airdrop listing.
+**Nexpace** (ticker **NXPC**, on its own [[avalanche|Avalanche]] L1) is the native token of the **MapleStory Universe (MSU)** — a blockchain gaming ecosystem built by Korean game giant **Nexon** around its iconic MMORPG franchise *MapleStory*. The flagship title, **MapleStory N**, is an on-chain version of the game where in-game items and characters are tokenized as [[nft|NFTs]]. NXPC is the ecosystem's utility and governance token, used for in-game economy, item synthesis, and fees. It is a [[gamefi|GameFi]] / NFT [[gaming-tokens|gaming token]] launched as a dedicated Avalanche L1. NXPC rose to prominence after a [[binance|Binance]] HODLer Airdrop listing.
 
 ---
 
@@ -136,7 +136,7 @@ Among gaming/IP small-caps here, NXPC stands out for its genuine AAA-publisher b
 - [[crypto-markets]]
 - [[gamefi]]
 - [[gaming-tokens]]
-- [[non-fungible-token]]
+- [[nft]]
 - [[hyperliquid]]
 - [[avalanche]]
 

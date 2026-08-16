@@ -9,12 +9,12 @@ aliases: ["Solstice Finance", "Solstice USX", "USX"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://solstice.finance/"
-related: ["[[crypto-markets]]", "[[ethena]]", "[[solana]]", "[[stablecoin-depegs]]", "[[stablecoin-yields]]", "[[stablecoin]]", "[[stablecoins]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethena]]", "[[solana]]", "[[stablecoin-depegs]]", "[[stablecoin-yields]]", "[[stablecoins]]", "[[stablecoins]]", "[[usdc]]"]
 ---
 
 # USX
 
-**USX** is a [[solana|Solana]]-native [[stablecoin]] issued by Solstice Finance, fully collateralized 1:1 by [[usdc|USDC]] and USDT and positioned as a settlement/liquidity layer for Solana DeFi, with a yield-bearing variant (eUSX) and a native token (SLX, TGE May 2026). For traders it matters less as a directional asset (it pegs to $1) and more as Solana stablecoin infrastructure: a yield venue, a [[stablecoin-depegs|depeg-risk]] monitor, and — via SLX — a tradable claim on the protocol.
+**USX** is a [[solana|Solana]]-native [[stablecoins]] issued by Solstice Finance, fully collateralized 1:1 by [[usdc|USDC]] and USDT and positioned as a settlement/liquidity layer for Solana DeFi, with a yield-bearing variant (eUSX) and a native token (SLX, TGE May 2026). For traders it matters less as a directional asset (it pegs to $1) and more as Solana stablecoin infrastructure: a yield venue, a [[stablecoin-depegs|depeg-risk]] monitor, and — via SLX — a tradable claim on the protocol.
 
 ---
 
@@ -157,7 +157,7 @@ USX's niche is being a **Solana-native, stablecoin-collateralized dollar with a 
 ## Related
 
 - [[solana]] — host chain
-- [[stablecoins]], [[stablecoin]], [[stablecoin-yields]], [[stablecoin-depegs]], [[usdc]]
+- [[stablecoins]], [[stablecoins]], [[stablecoin-yields]], [[stablecoin-depegs]], [[usdc]]
 - [[ethena]] — comparable yield-dollar design on Ethereum
 - [[ylds]] — regulated yield-bearing dollar
 - [[crypto-markets]], [[defi]]

@@ -14,7 +14,7 @@ related: ["[[blackrock-usd-institutional-digital-liquidity-fund]]", "[[crypto-ma
 
 # USDtb
 
-**USDtb** (ticker **USDTB**) is [[ethena|Ethena]]'s fully-reserved, fiat/treasury-backed [[stablecoin]], launched in December 2024 on [[ethereum|Ethereum]] and [[solana|Solana]] with the majority of reserves held in [[blackrock|BlackRock]]'s tokenized money-market fund [[blackrock-usd-institutional-digital-liquidity-fund|BUIDL]] — at launch the highest BUIDL allocation of any stablecoin (~90%). Its landmark moment came in 2025 when **Anchorage Digital began issuing USDtb in the US, making it the first stablecoin compliant with the [[genius-act|GENIUS Act]]** — a fact that matters to traders as a template for how offshore stablecoins onshore under US federal regulation. Within the Ethena system it also acts as the safety valve: USDe backing rotates into USDtb when perp [[funding-rate|funding]] turns negative.
+**USDtb** (ticker **USDTB**) is [[ethena|Ethena]]'s fully-reserved, fiat/treasury-backed [[stablecoins]], launched in December 2024 on [[ethereum|Ethereum]] and [[solana|Solana]] with the majority of reserves held in [[blackrock|BlackRock]]'s tokenized money-market fund [[blackrock-usd-institutional-digital-liquidity-fund|BUIDL]] — at launch the highest BUIDL allocation of any stablecoin (~90%). Its landmark moment came in 2025 when **Anchorage Digital began issuing USDtb in the US, making it the first stablecoin compliant with the [[genius-act|GENIUS Act]]** — a fact that matters to traders as a template for how offshore stablecoins onshore under US federal regulation. Within the Ethena system it also acts as the safety valve: USDe backing rotates into USDtb when perp [[funding-rate|funding]] turns negative.
 
 ---
 
@@ -157,7 +157,7 @@ USDtb is a **fully-reserved, fiat/treasury-backed** stablecoin — structurally 
 
 - [[ethena]] — issuer (ENA governance token)
 - [[ethena-usde]] — sister synthetic dollar; USDtb is its negative-funding hedge
-- [[stablecoins]] / [[stablecoin]] / [[usdc]] / [[usdt]] — competitive set
+- [[stablecoins]] / [[stablecoins]] / [[usdc]] / [[usdt]] — competitive set
 - [[falcon-finance]] — overcollateralized synthetic-dollar peer
 - [[genius-act]] — regulatory framework USDtb pioneered compliance under
 - [[blackrock-usd-institutional-digital-liquidity-fund]] — primary reserve asset

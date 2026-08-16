@@ -9,12 +9,12 @@ aliases: ["WEMIX Dollar", "WEMIX USD", "WEMIX$"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.wemix.com/en"
-related: ["[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[gamefi]]", "[[stablecoin]]"]
+related: ["[[collateralization]]", "[[crypto-markets]]", "[[depeg]]", "[[gamefi]]", "[[stablecoins]]"]
 ---
 
 # WEMIX Dollar
 
-**WEMIX Dollar** (WEMIX$) is the USD-pegged [[stablecoin]] of the **WEMIX** blockchain ecosystem, a [[gamefi|gaming-focused]] (GameFi) layer-1 platform developed by South Korea's Wemade. WEMIX$ is designed to serve as the dollar-denominated unit of account inside the WEMIX gaming and DeFi economy — used for in-game settlement, liquidity provision, and as a stable trading pair within the ecosystem's native DEX and DeFi services.
+**WEMIX Dollar** (WEMIX$) is the USD-pegged [[stablecoins]] of the **WEMIX** blockchain ecosystem, a [[gamefi|gaming-focused]] (GameFi) layer-1 platform developed by South Korea's Wemade. WEMIX$ is designed to serve as the dollar-denominated unit of account inside the WEMIX gaming and DeFi economy — used for in-game settlement, liquidity provision, and as a stable trading pair within the ecosystem's native DEX and DeFi services.
 
 > *Market data as of 2026-06-22 (cryptodataapi.com / CoinGecko).*
 
@@ -195,7 +195,7 @@ In the 2026-06-24 backdrop — Fear & Greed 22 (Extreme Fear), an established be
 ## See Also
 
 - [[crypto-markets]]
-- [[stablecoin]] · [[collateralization]] · [[depeg]] · [[gamefi]]
+- [[stablecoins]] · [[collateralization]] · [[depeg]] · [[gamefi]]
 
 ---
 

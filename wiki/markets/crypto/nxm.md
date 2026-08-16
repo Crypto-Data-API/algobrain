@@ -9,7 +9,7 @@ aliases: ["NXM"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://nexusmutual.io/"
-related: ["[[crypto-markets]]", "[[decentralized-finance]]", "[[ethereum]]", "[[risk-management]]"]
+related: ["[[crypto-markets]]", "[[defi]]", "[[ethereum]]", "[[risk-management]]"]
 ---
 
 # Nexus Mutual
@@ -122,7 +122,7 @@ Nexus Mutual is by capital and reputation the **dominant on-chain risk-transfer 
 - [[ethereum]]
 - [[insurance]]
 - [[risk-management]]
-- [[decentralized-finance]]
+- [[defi]]
 - [[defi]]
 
 ---

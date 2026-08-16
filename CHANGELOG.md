@@ -4,6 +4,25 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-17 — 9 wikilink rename-mismatches fixed across 150 pages
+
+**Fixed:** Retargeted 9 wikilinks that pointed to a page name close to, but not exactly
+matching, an existing page — `stablecoin`→`stablecoins` (the big one: 82 pages, 230
+references), `decentralized-finance`→`defi`, `non-fungible-token`→`nft`,
+`binance-coin`→`bnb`, `render`→`render-token`, `bitcoin-etf`→`bitcoin-etfs`,
+`on-chain-analytics`→`on-chain-analysis`, `usde`→`ethena-usde`, `near-protocol`→`near`.
+150 pages touched, 425 reference instances fixed. Mechanical, target-only rewrites —
+alias text, section anchors, and surrounding content preserved verbatim; verified no
+remaining references to any of the 9 old names anywhere in the wiki.
+
+**Notes:** Fourth run of the daily improvement loop, continuing from the rename-mismatch
+list surfaced 2026-08-16. Lint's `links` issue count dropped from 283 to 247 pages
+(verified independently before committing). The remaining flags are mostly genuine
+forward-link gaps (expected — CLAUDE.md treats these as fine, signaling future
+page-creation opportunities, not bugs), though a further characterization pass is queued
+in `.claude/wiki-improvement-backlog.md` to confirm that and catch any other
+rename-mismatches beyond this batch's 9.
+
 ## 2026-08-16 — Two lint.py parsing bugs fixed: escaped-pipe wikilinks, UTF-8 BOM
 
 **Fixed:** `tools/lint.py`'s `extract_wikilinks()` didn't account for the escaped pipe
