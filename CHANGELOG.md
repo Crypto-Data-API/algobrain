@@ -4,6 +4,27 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-16 — Two lint.py parsing bugs fixed: escaped-pipe wikilinks, UTF-8 BOM
+
+**Fixed:** `tools/lint.py`'s `extract_wikilinks()` didn't account for the escaped pipe
+(`\|`) that markdown tables require on aliased wikilinks (`[[target\|Display Text]]`),
+so every such link was captured with a stray trailing backslash and flagged as pointing
+to a nonexistent page even when the target existed. This was the root cause of most
+false-positive "broken link" noise (both the `links` and `orphans` checks share this
+function). Fixed by stripping the trailing backslash from extracted targets — verified
+safe wiki-wide (all 2,815 backslash-suffixed matches were this escaping artifact, none a
+legitimate target). Also fixed the UTF-8 BOM bug flagged 2026-08-14: 12 pages read with
+plain `utf-8` kept a leading BOM that broke the frontmatter regex; switched to
+`utf-8-sig`.
+
+**Notes:** Third run of the daily improvement loop. Lint counts: links 460→283,
+frontmatter 12→0, orphans 40→39, tags 851→852 (one previously BOM-hidden page's tags
+became visible — expected, not a regression). Characterizing the remaining 283 `links`
+flags surfaced the next high-leverage target: `[[stablecoin]]` (singular, no such page)
+should point to `[[stablecoins]]` — 82 pages, ~230 references, the largest single
+rename-mismatch pattern found. Queued in `.claude/wiki-improvement-backlog.md` along with
+several smaller ones.
+
 ## 2026-08-15 — Tag audit batch 2: 23 tags adopted, 87 pages consolidated
 
 **Added:** 23 new approved tags to CLAUDE.md/AGENTS.md's "Approved Tags" list (and

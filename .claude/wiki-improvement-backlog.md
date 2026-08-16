@@ -278,3 +278,27 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   Anthropic/Claude news pages (no clean existing-tag mapping), plus the remaining ~640
   pages outside this batch's top-30 threshold, and the 12-page UTF-8 BOM lint.py bug
   flagged in iter 1 (still unfixed).
+- 2026-08-16 iter 3 (lint.py parsing bugs, not tags this time): found the actual root
+  cause of most "broken link" noise — `extract_wikilinks()`'s regex didn't strip the
+  backslash from escaped-pipe aliases (`[[target\|Display]]`, required syntax inside
+  markdown tables since a bare `|` would break the table), so every such link was
+  captured with a trailing `\` and treated as pointing to a nonexistent page even when
+  the real target existed. Fixed with `.rstrip("\\")` on extracted targets — verified
+  safe by checking all 2,815 backslash-suffixed matches wiki-wide were escaped-pipe
+  artifacts, zero legitimate targets end in `\`. Same function feeds both the `links`
+  and `orphans` checks. Also fixed the iter-1-flagged UTF-8 BOM bug (12 pages):
+  `read_text(encoding="utf-8")` → `"utf-8-sig"`, a no-op for non-BOM files. Verified
+  independently (not just sub-agent's report): links 460→283, frontmatter 12→0,
+  orphans 40→39 (one page picked up a previously-uncredited inbound link), tags 851→852
+  (+1 correct — `stablecoin-depeg-history.md` was BOM-broken so its non-approved tags
+  were invisible to the tags check too; now visible), empty/stale unchanged (58/6).
+  Characterized the 283 pages still flagged for links: most are genuine forward-link
+  gaps (fine per CLAUDE.md), but one large rename-mismatch pattern stands out —
+  `[[stablecoin]]` (singular, no page) should point to `[[stablecoins]]` (82 pages, 230
+  references) — by far the biggest single remaining pattern, plus smaller ones
+  (`decentralized-finance`→`defi` 18p/40refs, `non-fungible-token`→`nft` 8p/23refs,
+  `binance-coin`→`bnb` 8p/35refs, `render`→`render-token` 9p/27refs,
+  `bitcoin-etf`→`bitcoin-etfs` 9p/14refs, `on-chain-analytics`→`on-chain-analysis`
+  9p/18refs, `usde`→`ethena-usde` 8p/26refs, `near-protocol`→`near`). Next in line:
+  fix the `[[stablecoin]]`→`[[stablecoins]]` rename batch (highest leverage, ~230
+  single-target references, likely scriptable) plus the other rename mismatches above.

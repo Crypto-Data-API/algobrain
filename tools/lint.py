@@ -88,7 +88,7 @@ def load_pages() -> list[dict]:
     """Load all wiki pages."""
     pages = []
     for md_file in WIKI_ROOT.rglob("*.md"):
-        content = md_file.read_text(encoding="utf-8", errors="ignore")
+        content = md_file.read_text(encoding="utf-8-sig", errors="ignore")
         fm = parse_frontmatter(content)
         body = get_body(content)
         rel_path = str(md_file.relative_to(WIKI_ROOT.parent))
@@ -105,7 +105,8 @@ def load_pages() -> list[dict]:
 
 def extract_wikilinks(text: str) -> list[str]:
     """Extract all [[wikilink]] targets from text."""
-    return re.findall(r"\[\[([^\]|]+?)(?:\|[^\]]+?)?\]\]", text)
+    raw = re.findall(r"\[\[([^\]|]+?)(?:\|[^\]]+?)?\]\]", text)
+    return [t.rstrip("\\") for t in raw]
 
 
 def check_frontmatter(pages: list[dict]) -> list[dict]:
