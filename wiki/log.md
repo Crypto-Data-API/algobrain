@@ -2,12 +2,44 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-07-19
+updated: 2026-08-19
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-19 — Expanded 7 L2/infrastructure stubs, left over from the 2026-07-19 A3 batch
+
+**Scope:** Daily improvement loop, Build track (first Build iteration after 4 straight Fix
+iterations rebalanced the loop). The 2026-07-19 A3 batch created a wave of concept stubs
+to resolve broken links and explicitly deferred expanding them ("stay as intentional
+stubs — expand opportunistically"). Nobody had. Picked the 7 highest-inbound-demand
+survivors of that batch and brought them to full concept pages at the quality bar of the
+existing [[depin]]/[[liquidations]]/[[governance-token]] pages (mechanism, concrete
+named examples with real dates/figures, AlgoBrain trading-relevance links, honest
+unsourced-knowledge disclosure — `status: draft`, not `good`, matching that precedent).
+
+- **Pages updated (all `type: concept`, stub → draft):** [[cross-chain]] (863 words — the
+  general taxonomy of why/how assets move between chains), [[centralized-exchange]] (874
+  words — CEX business model and custody risk, FTX/Mt. Gox as case studies),
+  [[zk-rollup]] (943 words — sequencer→prover→verifier architecture, zkEVM Type 1-4),
+  [[exchange-tokens]] (917 words — explicitly differentiated from [[governance-token]];
+  BNB/OKB/KCS/BGB, FTT as the cautionary tale), [[cross-chain-bridge]] (1,154 words —
+  lock-mint/burn-mint/liquidity-network mechanisms plus Ronin $625M, Wormhole $325M,
+  Nomad $190M, Multichain $130M+, cross-referenced against the deeper existing
+  [[cross-chain-bridges]] comparison page rather than duplicating it), [[interoperability]]
+  (911 words — IBC/LayerZero/Wormhole messaging-standard philosophy, explicit
+  "related but distinct" note vs. the other two), [[optimistic-rollup]] (930 words —
+  fraud-proof/challenge-window mechanics, mirrored against [[zk-rollup]]).
+- **Verified:** every wikilink added across all 7 pages resolves to a real existing page
+  (spot-checked ~20, zero fabricated targets); only CLAUDE.md-approved tags used; full
+  lint pass after the change shows zero regressions (tags 852, links 247, orphans 39,
+  stale 6 all unchanged; empty pages 58→55 as three former near-empty stubs crossed the
+  content threshold).
+- **Not done:** no "Getting the Data (CryptoDataAPI)" sections — these are
+  infrastructure/mechanism concepts, not data-mapped instruments, and no genuinely
+  applicable documented endpoint exists for them.
 
 ## 2026-07-20 — Stretch Revert cluster: inbound links, findings feedback, lifecycle records
 

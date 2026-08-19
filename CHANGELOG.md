@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-19 — 7 infrastructure concept stubs expanded to full pages
+
+**Added:** Expanded `cross-chain`, `centralized-exchange`, `zk-rollup`, `exchange-tokens`,
+`cross-chain-bridge`, `interoperability`, and `optimistic-rollup` from ~200-400 character
+placeholder stubs into full concept pages (863-1,154 words each) — real mechanism
+explanations, named protocols/events with dates and figures (the Ronin/Wormhole/Nomad/
+Multichain bridge-hack timeline, OKB's August 2025 supply burn, the FTT/FTX
+concentration-risk case), and trading-relevance links to existing AlgoBrain strategy
+pages. These were the highest-demand survivors of a 2026-07-19 batch that created the
+stubs to fix broken links and explicitly deferred filling them in.
+
+**Notes:** First "Build" iteration of the daily improvement loop — the loop's prior 4
+iterations were all lint fixes, so its instructions were updated to require balancing
+fix work against real content growth (see the 2026-08-19 "Add Fix/Build balance" commit
+to `.claude/commands/improve-algobrain-loop.md`). All added wikilinks verified to resolve
+to real pages; a full lint pass afterward shows no regressions.
+
 ## 2026-08-17 — 9 wikilink rename-mismatches fixed across 150 pages
 
 **Fixed:** Retargeted 9 wikilinks that pointed to a page name close to, but not exactly

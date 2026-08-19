@@ -321,3 +321,32 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   genuine forward-link gaps (fine per CLAUDE.md) plus whatever other rename-mismatches or
   real typos exist beyond this batch's 9 — worth another characterization pass in a
   future iteration before assuming it's all forward-link gaps now.
+- 2026-08-19 iter 5 (Build): first Build-track iteration — the loop's own instructions
+  were rebalanced today after iters 1-4 were all Fix (see the "Add Fix/Build balance"
+  commit). Initial candidate scan of `status: draft` pages by inbound-link count was a
+  false lead — the top ones (crypto-markets.md at 5,069 inbound, base.md, layer-1.md,
+  crypto-fear-and-greed-index.md, depin.md, gamefi.md, liquidations.md,
+  governance-token.md) turned out to already be comprehensive, well-cited pages from the
+  2026-07-19 B12 batch, just intentionally left at `draft` status (unsourced-knowledge
+  precedent, not thin content). Filtered to TRUE `status: stub` pages instead (44 total,
+  ~200-430 char placeholders) and picked the 7 highest-inbound survivors of the
+  2026-07-19 A3 batch, which was explicitly logged as "expand opportunistically" and
+  never followed up: [[cross-chain]] (60 inbound), [[centralized-exchange]] (56),
+  [[zk-rollup]] (56), [[exchange-tokens]] (53), [[cross-chain-bridge]] (51),
+  [[interoperability]] (46), [[optimistic-rollup]] (44). All 7 expanded to full pages
+  (863-1,154 words each) at the [[depin]]/[[liquidations]]/[[governance-token]] quality
+  bar — real mechanism explanations, named protocols/events/dates/figures (Ronin $625M,
+  Wormhole $325M, Nomad $190M, Multichain $130M+ bridge-hack timeline; OKB's Aug 2025 52%
+  supply burn; FTT/FTX as the exchange-token concentration-risk case), AlgoBrain
+  trading-relevance links to real existing strategy pages, `status: draft` (matching the
+  unsourced-knowledge precedent, not overclaiming `good`). Deliberately differentiated
+  the three closely-related ones to avoid overlap: cross-chain = general taxonomy,
+  cross-chain-bridge = the specific lock-mint/burn-mint/liquidity-network mechanism layer
+  (explicitly deferring to the existing deeper [[cross-chain-bridges]] comparison page
+  rather than duplicating it), interoperability = the messaging-standard philosophy layer
+  above both. Verified independently: every added wikilink (~20 spot-checked) resolves to
+  a real page, only approved tags used, full lint pass shows zero regressions (tags 852,
+  links 247, orphans 39, stale 6 unchanged; empty 58→55). `wiki/log.md` updated per
+  CLAUDE.md's rules (first Build iteration to actually touch wiki content). 37 stub pages
+  remain (list rankable via the same inbound-count method) — next Build iteration should
+  continue down that list, and Fix is due again per the balance rule after this.
