@@ -89,7 +89,11 @@ curl -X POST https://cryptodataapi.com/api/v1/auth/keys \
   -d '{"email":"you@example.com"}'
 ```
 
-Rate limits: Free 5 req/min · Pro 30 · Pro Plus 60.
+Rate limits: Free 10 req/min · Pro 30 · Pro Plus 60.
+
+The free tier is 1,000 requests/day once you **confirm your email** (100/day until you do).
+That confirmation click also switches on 24 hours of full Pro access and emails you a
+discount code — all on the same key, nothing to re-install.
 
 ## The LLM Wiki pattern
 
