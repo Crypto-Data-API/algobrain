@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-06-11
 status: good
-tags: [volatility, options, variance-risk-premium, regime, premium-selling]
+tags: [volatility, options, variance-risk-premium, market-regime, premium-selling]
 aliases: ["VRP Decay", "Variance Risk Premium Decay", "VRP Compression", "Vol Premium Decay"]
 related: ["[[volatility-regime]]", "[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[volatility-term-structure]]", "[[variance-risk-premium]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[options-premium-selling]]", "[[long-vol-vs-short-vol]]", "[[volmageddon]]", "[[covid-crash]]", "[[vix-august-2024-spike]]", "[[short-strangle]]", "[[iron-condor]]"]
 domain: [options, volatility]

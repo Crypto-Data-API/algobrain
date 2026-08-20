@@ -4,7 +4,7 @@ type: source
 created: 2026-04-22
 updated: 2026-06-12
 status: good
-tags: [data-provider, on-chain-analytics, defi]
+tags: [data-provider, on-chain, defi]
 source_type: data
 source_url: "https://dune.com"
 source_author: "Dune Analytics"

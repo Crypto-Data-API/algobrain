@@ -304,6 +304,9 @@ anomalies, australia, bittensor, combinations, crashes, execution, exploits, gam
 
 # Adopted 2026-08-15 (tag audit batch 2)
 agents, alternative-data, api, bnb, compliance, deep-learning, depin, dex, energy, etf, free, hft, interest-rates, market-neutral, order-flow, position-sizing, prediction-markets, sentiment, tail-risk, theta, trading-psychology, validation, yield
+
+# Adopted 2026-08-21 (tag audit batch 3)
+agricultural, ai, alpha-edge, amm, calendar-effects, contrarian, crisis, cross-chain, defined-risk, depeg, digital-art, diversification, factor-investing, fixed-income, gamma, governance, greeks, grid-trading, income, industrial-metals, informational-edge, institutional, launchpad, layer-2, lending, llm, mev, monetary-policy, nlp, open-source, oracle, payments, performance, portfolio-construction, premium-selling, price-action, restaking, short-selling, smart-contracts, staking, vix, yield-farming
 ```
 
 ## Content Guidelines

@@ -4,7 +4,7 @@ type: comparison
 created: 2026-05-04
 updated: 2026-07-13
 status: excellent
-tags: [crypto, solana, memecoins, launchpad, comparison]
+tags: [crypto, solana, memecoins, launchpad, comparisons]
 subjects: ["[[pump-fun]]", "[[letsbonk]]", "[[believe]]", "[[moonshot]]", "[[heaven-launchpad]]"]
 comparison_dimensions: [chain, fee-model, bonding-curve, graduation-threshold, target-audience, mobile-support, revenue-burn, ecosystem-stickiness]
 related: ["[[bonding-curve-analysis]]", "[[memecoin-sniping]]", "[[token-migration-sniping]]", "[[low-cap-crypto-trading-map]]", "[[axiom-pro]]", "[[gmgn]]", "[[bitquery]]", "[[raydium]]", "[[pumpswap]]", "[[solana]]", "[[cryptodataapi]]"]

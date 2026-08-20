@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, course, machine-learning, free, foundational]
+tags: [education, courses, machine-learning, free, foundational]
 related:
   - "[[ml-for-trading-specialization]]"
   - "[[fast-ai-for-trading]]"

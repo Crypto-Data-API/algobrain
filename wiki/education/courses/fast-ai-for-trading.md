@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, course, deep-learning, free]
+tags: [education, courses, deep-learning, free]
 related:
   - "[[nlp-sentiment-analysis]]"
   - "[[cnn-chart-recognition]]"

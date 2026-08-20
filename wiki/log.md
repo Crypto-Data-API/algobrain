@@ -2,12 +2,47 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-20
+updated: 2026-08-21
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-21 — Tag audit batch 3 (daily loop iter 7, Fix)
+
+**Scope:** Daily improvement loop, Fix track. Fresh lint run showed 852 pages carrying
+non-approved tags (flat since iter 3) — by far the largest lint category, versus 247
+broken links, 51 empty pages, 39 orphans, 6 stale. Continued the tag audit begun in batch 2 (2026-08-15).
+
+- **Adopted 42 new tags** into CLAUDE.md/AGENTS.md's Approved Tags list and
+  `tools/lint.py` (additive, "Adopted 2026-08-21 (tag audit batch 3)"): DeFi/crypto
+  infrastructure vocabulary the approved list had never picked up (staking, lending,
+  restaking, yield-farming, smart-contracts, mev, oracle, amm, cross-chain, layer-2,
+  governance, launchpad, depeg), AI/ML sub-domains (ai, nlp, llm), options vocabulary
+  (premium-selling, defined-risk, income, greeks, gamma), quant/strategy-methodology
+  terms (factor-investing, alpha-edge, informational-edge, performance, diversification,
+  portfolio-construction, contrarian, price-action, grid-trading, calendar-effects),
+  macro/commodities (fixed-income, monetary-policy, vix, crisis, industrial-metals,
+  agricultural, payments), and standalone themes (institutional, digital-art,
+  short-selling, open-source).
+- **Consolidated 7 near-duplicate tags** across 50 pages: artificial-intelligence→ai,
+  regime→market-regime, api-trading→api, on-chain-analytics→on-chain,
+  comparison→comparisons, liquidation→liquidations, course→courses. Zero duplicate-tag
+  lines introduced (verified).
+- **Skipped:** research, banking, economics — too generic or ambiguous to classify
+  mechanically; left for a future batch with more editorial judgment.
+- **Verified independently:** re-ran `tools/lint.py` before and after (not just the
+  sub-agent's report) — `[tags]` 852→659; `[links]`/`[orphans]`/`[stale]`/`[empty]`
+  byte-identical (247/39/6/51), confirming zero content regressions. Spot-read 2
+  consolidated pages and 1 adopt-only page for correct, isolated `tags:` line edits.
+- **Note:** the local wiki MCP server showed "Connected" via `claude mcp list` but its
+  tools were unreachable from this session (same gap as iter 6, survived a re-registration
+  attempt). Worked via `tools/lint.py` run directly with the repo's venv Python instead of
+  `wiki_lint` — a fully adequate substitute, now the preferred fallback.
+
+797 distinct non-approved tags remain (mostly long-tail 1-3-occurrence ones) for future
+batches.
 
 ## 2026-08-20 — Expanded 6 more concept stubs (daily loop iter 6, Build)
 

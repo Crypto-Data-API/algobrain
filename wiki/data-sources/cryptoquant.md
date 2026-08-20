@@ -4,7 +4,7 @@ type: source
 created: 2026-04-22
 updated: 2026-06-12
 status: good
-tags: [data-provider, on-chain-analytics, crypto, bitcoin]
+tags: [data-provider, on-chain, crypto, bitcoin]
 source_type: data
 source_url: "https://cryptoquant.com"
 source_author: "Ki Young Ju"

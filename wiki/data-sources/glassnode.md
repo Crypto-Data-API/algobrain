@@ -4,7 +4,7 @@ type: source
 created: 2026-05-14
 updated: 2026-06-12
 status: good
-tags: [data-provider, on-chain-analytics, bitcoin, ethereum, crypto]
+tags: [data-provider, on-chain, bitcoin, ethereum, crypto]
 aliases: ["Glassnode.com"]
 source_type: data
 source_url: "https://glassnode.com"

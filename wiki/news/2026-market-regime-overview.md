@@ -4,7 +4,7 @@ type: news
 created: 2026-04-07
 updated: 2026-07-13
 status: good
-tags: [news, regime, macro, oil, tariffs, fed, bitcoin, ai, energy, stagflation, overview]
+tags: [news, market-regime, macro, oil, tariffs, fed, bitcoin, ai, energy, stagflation, overview]
 event_date: 2026-04-07
 markets_affected: [stocks, crypto, commodities, bonds, forex]
 impact: medium

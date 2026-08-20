@@ -4,7 +4,7 @@ type: index
 created: 2026-04-10
 updated: 2026-07-19
 status: excellent
-tags: [strategies, regime, regime-detection, portfolio-construction]
+tags: [strategies, market-regime, regime-detection, portfolio-construction]
 aliases: ["Regime Map", "Strategy-Regime Mapping"]
 related: ["[[market-regime]]", "[[regime-detection]]", "[[regime-adaptive-strategy]]", "[[multi-strategy-portfolio]]", "[[strategy-correlation-matrix]]", "[[crypto-market-regime-taxonomy]]", "[[long-vol-vs-short-vol]]", "[[long-volatility-strategies]]", "[[short-volatility-strategies]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[cryptodataapi]]"]
 ---

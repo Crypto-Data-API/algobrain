@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-21 — Tag audit batch 3: adopt 42 tags, consolidate 7 duplicates
+
+**Added:** 42 new tags to CLAUDE.md/AGENTS.md's Approved Tags list and `tools/lint.py` —
+mostly DeFi/crypto infrastructure vocabulary (staking, lending, restaking, mev, oracle,
+amm, cross-chain, layer-2, governance, launchpad, depeg, and more) that had been in
+everyday use across the wiki without ever being formally approved, plus AI/ML, options,
+quant-methodology, and macro terms.
+
+**Changed:** Consolidated 7 near-duplicate tags across 50 pages (artificial-intelligence→ai,
+regime→market-regime, api-trading→api, on-chain-analytics→on-chain, comparison→comparisons,
+liquidation→liquidations, course→courses) — frontmatter-only edits, no page content touched.
+
+**Notes:** Fix-track iteration of the daily improvement loop. Non-approved-tag lint issues
+dropped from 852 to 659 pages; all other lint categories (links, orphans, stale, empty)
+verified byte-identical before/after. 797 distinct non-approved tags remain, mostly
+long-tail one-off usages, for future batches.
+
 ## 2026-08-20 — 6 more concept stubs expanded to full pages
 
 **Added:** Expanded `altcoins`, `gaming-tokens`, `data-availability`, `modular-blockchains`,

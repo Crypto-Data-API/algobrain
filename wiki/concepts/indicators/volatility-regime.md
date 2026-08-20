@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-07
 updated: 2026-07-19
 status: good
-tags: [volatility, indicators, options, risk-management, regime]
+tags: [volatility, indicators, options, risk-management, market-regime]
 aliases: ["Volatility Regimes", "Vol Regime"]
 related: ["[[volatility-regime-classification]]", "[[volatility-regime-switching]]", "[[volatility-term-structure]]", "[[volatility-risk-premium-decay]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[vix]]", "[[theta-targeting]]", "[[vega-budgeting]]", "[[long-vol-vs-short-vol]]", "[[options-premium-selling]]", "[[cryptodataapi]]"]
 domain: [volatility, indicators]

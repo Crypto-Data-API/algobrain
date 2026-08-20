@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-06
 updated: 2026-07-20
 status: excellent
-tags: [crypto, exchange, defi, derivatives, algorithmic, api-trading]
+tags: [crypto, exchange, defi, derivatives, algorithmic, api]
 aliases: ["HL", "Hyperliquid DEX"]
 entity_type: exchange
 founded: 2022

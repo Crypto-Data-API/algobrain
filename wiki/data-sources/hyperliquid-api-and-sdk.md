@@ -4,7 +4,7 @@ type: source
 created: 2026-06-20
 updated: 2026-07-20
 status: draft
-tags: [data-provider, crypto, hyperliquid, market-microstructure, algorithmic, api-trading]
+tags: [data-provider, crypto, hyperliquid, market-microstructure, algorithmic, api]
 aliases: ["Hyperliquid API", "Hyperliquid WebSocket API", "Hyperliquid Python SDK", "hyperliquid-python-sdk"]
 source_type: data
 source_url: "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket"

@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [ai-agent-tokens, artificial-intelligence, crypto]
+tags: [ai-agent-tokens, ai, crypto]
 aliases: ["OpenServ AI", "SERV"]
 entity_type: protocol
 headquarters: "Decentralized"

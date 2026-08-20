@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-20
 status: excellent
-tags: [artificial-intelligence, crypto, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
+tags: [ai, crypto, machine-learning, hyperliquid, perpetual-futures, funding-rate, open-interest, liquidations, derivatives, defi, altcoins]
 aliases: ["$NIL", "NIL", "Nillion Network"]
 entity_type: protocol
 headquarters: "Decentralized"

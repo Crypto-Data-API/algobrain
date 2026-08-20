@@ -4,7 +4,7 @@ type: source
 created: 2026-05-14
 updated: 2026-06-12
 status: good
-tags: [data-provider, on-chain-analytics, whale-tracking, crypto, defi]
+tags: [data-provider, on-chain, whale-tracking, crypto, defi]
 aliases: ["Nansen.ai"]
 source_type: data
 source_url: "https://www.nansen.ai"

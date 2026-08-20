@@ -374,4 +374,45 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   the chosen 6 touched. 15 concept stubs remain from this batch's 21-candidate list, plus
   the 6 entity stubs and ~7-10 source-ingestion stubs still outstanding for future
   iterations. Per the balance rule, Fix is due next (last 3 will be iter4 Fix, iter5 Build,
+  iter6 Build -- 2 of 3 Build).
+- 2026-08-21 iter 7 (Fix -- tag audit batch 3): balance check -- last 3 entries (iter4 Fix,
+  iter5 Build, iter6 Build) had 2 of 3 Build, so this iteration switched to Fix as
+  predicted. MCP server again showed "Connected" via `claude mcp list` but its tools
+  weren't reachable from this session even after a `claude mcp remove`/`add` re-registration
+  attempt -- same unresolved indexing gap as iter6. Worked via Grep/Glob plus running
+  `tools/lint.py` directly with the repo's venv Python (`.venv/Scripts/python.exe
+  tools/lint.py`), which turned out to be a fully adequate substitute for `wiki_lint` and
+  should be the go-to fallback going forward. Fresh lint run: 852 `[tags]` issues (flat
+  since iter3) dwarfed every other category (links 247, empty 51, orphans 39, stale 6) --
+  clear Fix target, continuing the batch-2 tag audit. Distribution was far more fragmented
+  than batch 2 (846 distinct non-approved tags, top-30 covering only ~16% of mentions vs
+  batch 2's ~40%), so the batch covered all 51 tags with >=6 occurrences instead of stopping
+  at 30. **Adopted 42 new tags** (CLAUDE.md/AGENTS.md/tools/lint.py, additive, "Adopted
+  2026-08-21 (tag audit batch 3)"): core DeFi/crypto infrastructure vocabulary the approved
+  list had never picked up despite being central to the wiki's scope (staking, lending,
+  restaking, yield-farming, smart-contracts, mev, oracle, amm, cross-chain, layer-2,
+  governance, launchpad, depeg), AI/ML sub-domains (ai, nlp, llm -- `ai` deliberately broad
+  rather than folded into `ai-trading`, since its actual usage is the AI-crypto-agent-token
+  sector), options vocabulary (premium-selling, defined-risk, income, greeks, gamma --
+  gamma following the theta precedent from batch 2), quant/strategy-methodology terms
+  (factor-investing, alpha-edge, informational-edge, performance, diversification,
+  portfolio-construction, contrarian, price-action, grid-trading, calendar-effects),
+  macro/commodities (fixed-income, monetary-policy, vix, crisis, industrial-metals,
+  agricultural, payments), and a few standalone themes (institutional, digital-art,
+  short-selling, open-source). **Consolidated 7 near-duplicate tags** across 50 pages/51
+  replacements: artificial-intelligence->ai (9p), regime->market-regime (9p),
+  api-trading->api (7p), on-chain-analytics->on-chain (7p), comparison->comparisons (7p),
+  liquidation->liquidations (6p), course->courses (6p) -- verified zero duplicate-tag lines
+  introduced. **Skipped** research (too generic/scattershot), banking (mixed TradFi
+  regulator/history/depeg pages, no consistent meaning), economics (bad fit for `macro`,
+  not tight enough standalone). Verified independently: re-ran `tools/lint.py` myself
+  (not just trusting the sub-agent's report) -- tags 852->659, links/orphans/stale/empty
+  byte-identical (247/39/6/51); spot-read 2 consolidated pages + 1 adopt-only page for
+  correct tags: line edits with no other content touched; confirmed CLAUDE.md/AGENTS.md
+  approved-tags sections are byte-identical (diff empty) and tools/lint.py's constant
+  matches. 797 distinct non-approved tags remain for future batches (mostly long-tail
+  1-3-occurrence ones now). Per the balance rule, Build is due next (last 3 will be iter5
+  Build, iter6 Build, iter7 Fix -- 1 of 3 Fix, so either track is technically available,
+  but iter6 already flagged Build-track work remaining: 15 concept stubs, 6 entity stubs,
+  ~7-10 source-ingestion stubs). (last 3 will be iter4 Fix, iter5 Build,
   iter6 Build → 2 of 3 Build).

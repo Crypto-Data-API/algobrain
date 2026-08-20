@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-14
 updated: 2026-06-21
 status: excellent
-tags: [commodities, comparison]
+tags: [commodities, comparisons]
 aliases: ["Physical vs Financial Commodities", "Paper Gold vs Physical Gold"]
 subjects: ["[[commodities]]", "[[futures-overview]]"]
 comparison_dimensions: [counterparty-risk, storage, cost, liquidity, tax]

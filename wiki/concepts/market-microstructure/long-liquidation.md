@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-06
 updated: 2026-06-11
 status: good
-tags: [liquidation, market-microstructure, leverage, margin, crypto]
+tags: [liquidations, market-microstructure, leverage, margin, crypto]
 aliases: ["Long Liquidation", "Forced Selling", "Liquidation Cascade", "Liquidation Waterfall"]
 domain: [market-microstructure]
 prerequisites: ["[[leverage]]", "[[margin]]", "[[liquidation]]"]

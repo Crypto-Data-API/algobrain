@@ -4,7 +4,7 @@ type: concept
 created: 2026-05-05
 updated: 2026-07-19
 status: excellent
-tags: [options, volatility, indicators, regime]
+tags: [options, volatility, indicators, market-regime]
 aliases: ["Vol Regime", "Volatility Regimes", "Vol Environment Classification"]
 related: ["[[iv-rank-and-iv-percentile]]", "[[volatility-cone]]", "[[term-structure]]", "[[implied-volatility]]", "[[realized-volatility]]", "[[variance-risk-premium]]", "[[vix]]", "[[vega-budgeting]]", "[[theta-targeting]]", "[[long-vol-vs-short-vol]]", "[[options-portfolio-construction]]", "[[crypto-market-regime-taxonomy]]", "[[technical-structural-regime]]", "[[cryptodataapi]]"]
 domain: [volatility, indicators]

@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, course, python, beginner]
+tags: [education, courses, python, beginner]
 related:
   - "[[python-quant-stack]]"
   - "[[ml-for-trading-specialization]]"

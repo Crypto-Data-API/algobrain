@@ -4,7 +4,7 @@ type: comparison
 created: 2026-05-05
 updated: 2026-06-21
 status: excellent
-tags: [crypto, defi, vaults, comparison, yield, hyperliquid, gmx, jupiter, ethena, aave, liquity]
+tags: [crypto, defi, vaults, comparisons, yield, hyperliquid, gmx, jupiter, ethena, aave, liquity]
 aliases: ["DeFi Yield Vault Comparison", "HLP vs GLP vs JLP vs sUSDe"]
 related: ["[[hyperliquid-hlp-basis-arbitrage]]", "[[hyperliquid-vault-architecture]]", "[[ethena-usde]]", "[[ethena]]", "[[aave]]", "[[liquity]]", "[[gmx]]", "[[hlp-cascade-alongside-playbook]]", "[[hyperliquid]]", "[[hlp]]", "[[liquidity-provider]]", "[[liquidity-pool]]", "[[multi-venue-capital-management]]", "[[counterparty-risk]]", "[[smart-contract-risk]]"]
 subjects: ["[[hyperliquid-hlp-basis-arbitrage|HLP]]", "[[gmx|GLP/GM]]", "[[jupiter-jlp|JLP]]", "[[ethena-usde|sUSDe]]", "[[aave|aUSDC]]", "[[liquity|Stability Pool]]"]

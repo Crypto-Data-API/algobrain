@@ -4,7 +4,7 @@ type: entity
 created: 2026-04-09
 updated: 2026-07-16
 status: excellent
-tags: [artificial-intelligence, crypto]
+tags: [ai, crypto]
 aliases: ["ALCH", "Alchemist"]
 entity_type: protocol
 headquarters: "Decentralized"

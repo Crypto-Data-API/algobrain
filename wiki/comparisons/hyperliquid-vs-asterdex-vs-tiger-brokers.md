@@ -4,7 +4,7 @@ type: comparison
 created: 2026-04-13
 updated: 2026-06-21
 status: excellent
-tags: [comparison, exchange, defi, derivatives, brokerage, api-trading]
+tags: [comparisons, exchange, defi, derivatives, brokerage, api]
 subjects: ["[[hyperliquid]]", "[[asterdex]]", "tiger-brokers"]
 comparison_dimensions: [platform-type, assets, automation, fees, leverage, security, regulation]
 related: ["[[perpetual-futures]]", "[[decentralized-exchanges]]", "[[ai-trading-agents]]", "[[cex-vs-dex]]", "[[hype]]", "[[hype-token]]", "[[funding-rate]]", "[[liquidation]]", "[[counterparty-risk]]", "[[hip-3-builder-deployed-perps]]"]

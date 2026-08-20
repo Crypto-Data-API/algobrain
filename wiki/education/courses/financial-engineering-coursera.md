@@ -4,7 +4,7 @@ type: concept
 created: 2026-04-07
 updated: 2026-04-07
 status: good
-tags: [education, course, quantitative, options, free]
+tags: [education, courses, quantitative, options, free]
 related:
   - "[[ml-for-trading-specialization]]"
   - "[[cfa-cmt-frm]]"
