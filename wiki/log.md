@@ -2,12 +2,46 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-19
+updated: 2026-08-20
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-20 — Expanded 6 more concept stubs (daily loop iter 6, Build)
+
+**Scope:** Daily improvement loop, Build track (second Build iteration, continuing from
+2026-08-19). Of the 37 `status: stub` pages remaining after iter 5, 21 were genuine
+concept-page candidates. Ranked all 21 by inbound wikilink count and picked the 6
+highest, verifying each was still a genuine ~200-430 char placeholder before committing.
+
+- **Pages updated (all `type: concept`, stub → draft):** [[altcoins]] (33 inbound links,
+  916 words — asset-class definition, BTC-dominance rotation mechanics, alt-season
+  breadth), [[gaming-tokens]] (33 inbound links, 1,045 words — token-taxonomy angle
+  deliberately distinct from the already-substantive [[gamefi]]/[[play-to-earn]] pages:
+  governance vs. reward vs. chain-native vs. interop tokens), [[data-availability]]
+  (30 inbound links, 1,022 words — DAS/erasure coding, EIP-4844 blobs, Celestia, EigenDA,
+  validiums), [[modular-blockchains]] (28 inbound links, 977 words — the 4-function
+  execution/settlement/consensus/DA split vs. Solana's monolithic design), [[sequencer]]
+  (28 inbound links, 996 words — centralization risk, MEV chokepoint, based/shared
+  sequencing decentralization paths), [[consensus-mechanism]] (28 inbound links, 1,095
+  words — PoW/PoS/DPoS/BFT/PoA taxonomy, the Merge as reference case).
+- **Getting the Data (CryptoDataAPI) added** to [[altcoins]] (`/market-health/altcoin-breadth`,
+  `/coins/top`) and [[gaming-tokens]] (`/coins/category-groups`) — the other 4 are
+  infrastructure/mechanism concepts with no direct data-mapped endpoint, matching the
+  2026-08-19 precedent of omitting the section rather than forcing a weak fit.
+- **Rejected after inspection:** [[crypto-market-regimes]] (28 inbound links, would have
+  ranked in the top 6) — dropped because the topic is already exhaustively covered by the
+  existing `status: good` [[crypto-market-regime-taxonomy]] page (which even carries
+  "Crypto Market Regimes" as an alias) plus a 14-page `market-regimes/` subdirectory;
+  fully expanding the stub would have duplicated that content rather than adding to it.
+  [[consensus-mechanism]] was promoted from the tier below to fill the 6th slot.
+- **Verified:** every wikilink added across all 6 pages resolves to a real existing page
+  (checked via Glob/Grep before adding, not just assumed); one near-miss caught and fixed
+  — `[[memecoins]]` does not exist as a file (only `[[meme-coins]]`/`[[meme-coin]]`
+  redirect stubs do, themselves pointing at the same missing target — a pre-existing
+  wiki-wide gap left untouched); only CLAUDE.md-approved tags used.
 
 ## 2026-08-19 — Expanded 7 L2/infrastructure stubs, left over from the 2026-07-19 A3 batch
 

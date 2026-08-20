@@ -4,6 +4,23 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-20 — 6 more concept stubs expanded to full pages
+
+**Added:** Expanded `altcoins`, `gaming-tokens`, `data-availability`, `modular-blockchains`,
+`sequencer`, and `consensus-mechanism` from ~200-400 character placeholder stubs into full
+concept pages (916-1,095 words each) — real mechanism explanations, named protocols/events
+with dates and figures (Ethereum's September 2022 Merge, the March 2024 Dencun/EIP-4844
+blob upgrade, Celestia's October 2023 mainnet), and trading-relevance links to existing
+AlgoBrain strategy pages. These were the 6 highest-inbound-link survivors of the 21
+concept-page candidates among the 37 `status: stub` pages left after the 2026-08-19 batch.
+
+**Notes:** Second "Build" iteration of the daily improvement loop. Dropped one initially
+top-ranked candidate (`crypto-market-regimes`) after finding its topic already covered in
+depth by an existing `status: good` page under a different filename — expanding it would
+have duplicated content rather than added to it. All added wikilinks verified against the
+actual file tree before use (one near-miss caught: `memecoins` doesn't exist as a page,
+only `meme-coins`/`meme-coin` redirect stubs do).
+
 ## 2026-08-19 — 7 infrastructure concept stubs expanded to full pages
 
 **Added:** Expanded `cross-chain`, `centralized-exchange`, `zk-rollup`, `exchange-tokens`,

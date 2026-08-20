@@ -350,3 +350,28 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   CLAUDE.md's rules (first Build iteration to actually touch wiki content). 37 stub pages
   remain (list rankable via the same inbound-count method) — next Build iteration should
   continue down that list, and Fix is due again per the balance rule after this.
+- 2026-08-20 iter 6 (Build): balance check — last 3 entries (iter3 Fix, iter4 Fix, iter5
+  Build) had 2 of 3 Fix, so this iteration stayed Build, continuing straight down iter5's
+  stub list. MCP server showed "Connected" via `claude mcp list` but its tools weren't
+  reachable from this session (registered mid-session, never indexed) — worked via
+  Grep/Glob/Read/Write/Edit directly instead, noted here per the skill's fallback rule.
+  Of the 37 remaining `status: stub` pages, 21 were genuine concept-page candidates (rest
+  are entity/source stubs, out of scope for this batch); ranked all 21 by inbound wikilink
+  count and expanded the top 6: [[altcoins]] (33 inbound, 916 words), [[gaming-tokens]] (33,
+  1,045 words), [[data-availability]] (30, 1,022 words), [[modular-blockchains]] (28, 977
+  words), [[sequencer]] (28, 996 words), [[consensus-mechanism]] (28, 1,095 words) — all
+  stub→draft, real mechanism explanations with named protocols/dates/figures (the Merge,
+  Dencun/EIP-4844, Celestia's mainnet), trading-relevance links to existing strategy pages.
+  Dropped [[crypto-market-regimes]] (28 inbound, would've ranked top-6) after finding it
+  already covered by the existing `good`-status [[crypto-market-regime-taxonomy]] page —
+  promoted consensus-mechanism into its slot instead. `Getting the Data` sections added
+  only where a real CryptoDataAPI endpoint exists (altcoins, gaming-tokens); omitted on the
+  4 pure-infrastructure pages rather than forcing a weak fit. Every added wikilink verified
+  against the actual file tree (one near-miss caught: `memecoins` doesn't exist as a page,
+  only `meme-coins`/`meme-coin` redirects do — left that pre-existing gap untouched).
+  Verified independently via `git diff --stat` and spot-reads of altcoins.md/sequencer.md —
+  full frontmatter (domain/prerequisites/difficulty), only approved tags, no pages outside
+  the chosen 6 touched. 15 concept stubs remain from this batch's 21-candidate list, plus
+  the 6 entity stubs and ~7-10 source-ingestion stubs still outstanding for future
+  iterations. Per the balance rule, Fix is due next (last 3 will be iter4 Fix, iter5 Build,
+  iter6 Build → 2 of 3 Build).
