@@ -118,7 +118,7 @@ DeSo sits in the **[[socialfi|SocialFi]] / DeSoc** narrative — a recurring but
 | **24h Change** | -0.65% |
 | **7d Change** | -8.37% |
 
-> DESO is down sharply from its 2021 launch-era peak and now trades only modestly above its all-time low, with a tight market-cap-to-FDV ratio (~0.97) indicating most supply is already circulating. The 7-day decline of -8.37% tracks the broader **Extreme Fear** regime (Fear & Greed 22, [[btc-bitcoin|BTC]] ~$64,180 on 2026-06-21).
+> DESO is down sharply from its 2021 launch-era peak and now trades only modestly above its all-time low, with a tight market-cap-to-FDV ratio (~0.97) indicating most supply is already circulating. The 7-day decline of -8.37% tracks the broader **Extreme Fear** regime (Fear & Greed 22, [[bitcoin|BTC]] ~$64,180 on 2026-06-21).
 
 ---
 
@@ -193,7 +193,7 @@ DeSo sits in the **[[socialfi|SocialFi]] / DeSoc** narrative — a recurring but
 
 ## Trading Playbook (Bear / Extreme-Fear, Bottoming Regime)
 
-Context: as of 2026-06-23 the market is in **Extreme Fear** (Fear & Greed = 21) with a long-horizon regime read of **Bottoming / Accumulation**; [[btc-bitcoin|BTC]] ~$64.6K. For a near-illiquid SocialFi micro-cap like DESO:
+Context: as of 2026-06-23 the market is in **Extreme Fear** (Fear & Greed = 21) with a long-horizon regime read of **Bottoming / Accumulation**; [[bitcoin|BTC]] ~$64.6K. For a near-illiquid SocialFi micro-cap like DESO:
 
 - **Liquidity first:** the ~$19K daily volume is the binding constraint — position sizing, not direction, is the main risk. Assume you cannot exit at quoted price under stress; size for total loss tolerance.
 - **No leverage:** no meaningful perp market exists, and the spot book is too thin to manage a leveraged exit anyway.

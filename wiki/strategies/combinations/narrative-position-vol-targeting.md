@@ -33,7 +33,7 @@ kill_criteria: |
   - portfolio heat cap (concurrent narrative exposure) is maxed > 50% of trading days in a rolling 90-day window (the strategy is over-deployed; reduce heat cap threshold)
   - vol-targeted position sizing produces sizes below minimum viable trade (< 0.1% of portfolio) for > 60% of narrative candidates screened (book is too large relative to available liquid narrative plays)
 
-related: ["[[vol-targeted-trend-following]]", "[[narrative-trading]]", "[[narrative-with-trend-confirmation]]", "[[meme-coin-cycle]]", "[[risk-budgeting]]", "[[volatility-targeting]]", "[[unlock-aware-momentum]]", "[[funding-filtered-momentum]]", "[[behavioral-finance]]", "[[perpetual-futures]]", "[[altcoins]]", "[[memecoins]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
+related: ["[[vol-targeted-trend-following]]", "[[narrative-trading]]", "[[narrative-with-trend-confirmation]]", "[[meme-coin-cycle]]", "[[risk-budgeting]]", "[[volatility-targeting]]", "[[unlock-aware-momentum]]", "[[funding-filtered-momentum]]", "[[behavioral-finance]]", "[[perpetual-futures]]", "[[altcoins]]", "[[meme-coins]]", "[[edge-taxonomy]]", "[[failure-modes]]", "[[when-to-retire-a-strategy]]", "[[cryptodataapi]]"]
 ---
 
 # Narrative Position Vol Targeting
@@ -380,7 +380,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run thi
 - [[funding-filtered-momentum]] — momentum entries gated by funding; applicable to perp-expressed narrative positions
 - [[behavioral-finance]] — the psychological mechanisms driving narrative price momentum
 - [[altcoins]] — the primary universe for narrative trading
-- [[memecoins]] — the high-vol tail of the narrative universe
+- [[meme-coins]] — the high-vol tail of the narrative universe
 - [[perpetual-futures]] — the perp instrument for narrative positions where available
 - [[edge-taxonomy]] — behavioral + informational + analytical classification
 - [[failure-modes]] — narrative alpha decay, vol underestimation, correlated crash

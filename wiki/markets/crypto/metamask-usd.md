@@ -9,12 +9,12 @@ aliases: ["MUSD", "MetaMask USD", "mUSD"]
 entity_type: protocol
 headquarters: "Decentralized (Consensys / MetaMask)"
 website: "https://metamask.io/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[linea]]", "[[metamask]]", "[[pyusd]]", "[[stablecoins]]", "[[tether]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[linea]]", "[[metamask]]", "[[pyusd]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # MetaMask USD
 
-**MetaMask USD** (ticker **MUSD / mUSD**) is a **fiat-reserve [[stablecoins]]** designed to hold a 1:1 peg to the U.S. dollar, built as the wallet-native dollar for the [[metamask|MetaMask]] ecosystem on [[ethereum|Ethereum]] and **Linea**. MetaMask itself does not custody reserves; issuance runs through specialist stablecoin infrastructure — **Bridge** (the stablecoin-issuance platform acquired by Stripe) and the **M0** shared-issuance framework — while MetaMask supplies distribution, in-wallet swaps, fiat on/off-ramps, and real-world spend via the MetaMask Card. In substance MUSD is a distribution play: a recognized consumer wallet brand wrapped around a regulated issuer's reserves, competing with [[usdc]], [[tether]], and [[pyusd|PayPal USD]] for the default in-app dollar balance.
+**MetaMask USD** (ticker **MUSD / mUSD**) is a **fiat-reserve [[stablecoins]]** designed to hold a 1:1 peg to the U.S. dollar, built as the wallet-native dollar for the [[metamask|MetaMask]] ecosystem on [[ethereum|Ethereum]] and **Linea**. MetaMask itself does not custody reserves; issuance runs through specialist stablecoin infrastructure — **Bridge** (the stablecoin-issuance platform acquired by Stripe) and the **M0** shared-issuance framework — while MetaMask supplies distribution, in-wallet swaps, fiat on/off-ramps, and real-world spend via the MetaMask Card. In substance MUSD is a distribution play: a recognized consumer wallet brand wrapped around a regulated issuer's reserves, competing with [[usdc]], [[usdt|Tether]], and [[pyusd|PayPal USD]] for the default in-app dollar balance.
 
 > *Market data as of 2026-06-21 (cryptodataapi.com / CoinGecko).*
 
@@ -55,7 +55,7 @@ Because the backing dollars and short-dated cash-equivalents sit with the regula
 
 ### Distribution and utility layer
 
-MetaMask (developed by Consensys) supplies everything the end user touches: in-wallet token swaps, fiat on/off-ramps, and the **MetaMask Card** for spending MUSD at real-world merchants. The strategic logic is that the wallet that already holds a user's keys can make its own dollar the path-of-least-resistance balance — earning issuance economics on float that would otherwise accrue to [[usdc]] or [[tether]].
+MetaMask (developed by Consensys) supplies everything the end user touches: in-wallet token swaps, fiat on/off-ramps, and the **MetaMask Card** for spending MUSD at real-world merchants. The strategic logic is that the wallet that already holds a user's keys can make its own dollar the path-of-least-resistance balance — earning issuance economics on float that would otherwise accrue to [[usdc]] or [[usdt|Tether]].
 
 ### Peg-maintenance mechanism
 
@@ -75,10 +75,10 @@ MUSD has **no fixed supply** — like other fiat-backed stables, supply expands 
 |---|---|---|---|---|
 | **MUSD** (this page) | Fiat reserves via Bridge / M0 | MetaMask wallet + MetaMask Card | Mint/redeem at par | Wallet-native dollar; small cap (~$36M) |
 | **[[usdc]]** | Cash + short-dated Treasuries (Circle) | Broad CEX/DeFi + Coinbase | Mint/redeem at par | Largest regulated fiat stable; deep liquidity |
-| **[[tether]] (USDT)** | Mixed reserves (Tether) | Largest CEX footprint | Mint/redeem at par | Largest stablecoin by cap; less reserve transparency |
+| **[[usdt|Tether]] (USDT)** | Mixed reserves (Tether) | Largest CEX footprint | Mint/redeem at par | Largest stablecoin by cap; less reserve transparency |
 | **[[pyusd]] (PayPal USD)** | Fiat reserves (Paxos) | PayPal/Venmo consumer rails | Mint/redeem at par | Closest analog — a consumer-brand wallet dollar |
 
-MUSD's nearest strategic comparable is **[[pyusd|PayPal USD]]**: both are consumer-brand dollars riding an existing user base and a regulated issuer (Paxos for PYUSD; Bridge/M0 for MUSD), rather than competing primarily on liquidity depth. Against [[usdc]] / [[tether]] it is a tiny entrant whose only durable advantage is wallet integration.
+MUSD's nearest strategic comparable is **[[pyusd|PayPal USD]]**: both are consumer-brand dollars riding an existing user base and a regulated issuer (Paxos for PYUSD; Bridge/M0 for MUSD), rather than competing primarily on liquidity depth. Against [[usdc]] / [[usdt|Tether]] it is a tiny entrant whose only durable advantage is wallet integration.
 
 ---
 
@@ -92,7 +92,7 @@ MUSD's primary venue is the **MetaMask wallet itself** — in-app swaps, ramps, 
 
 - **Category:** wallet-distributed / consumer-brand fiat stablecoin — alongside [[pyusd|PayPal USD]] — competing for default in-app dollar balances.
 - **Bull catalysts:** MetaMask Card adoption and merchant spend; making MUSD the default swap-settlement and ramp currency in-wallet; Linea growth lowering transfer costs; the broader trend of consumer brands launching own-stablecoins to capture reserve float.
-- **Bear catalysts:** users defaulting to deeper, more liquid [[usdc]]/[[tether]] balances; stablecoin regulation tightening issuance for branded/wallet dollars; reliance on third-party issuers (Bridge/M0) whose terms MetaMask does not fully control.
+- **Bear catalysts:** users defaulting to deeper, more liquid [[usdc]]/[[usdt|Tether]] balances; stablecoin regulation tightening issuance for branded/wallet dollars; reliance on third-party issuers (Bridge/M0) whose terms MetaMask does not fully control.
 
 ---
 
@@ -134,7 +134,7 @@ See [[stablecoins]] and [[depeg]] for the general framework.
 - [[stablecoins]]
 - [[metamask]]
 - [[usdc]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[pyusd]]
 - [[depeg]]
 - [[collateralization]]

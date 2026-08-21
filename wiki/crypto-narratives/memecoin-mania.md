@@ -132,7 +132,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-dex]].
 - [[dogecoin]]
 - [[shiba-inu]]
 - [[solana]]
-- [[memecoins]]
+- [[meme-coins]]
 - [[pump-fun]]
 - [[btc-dominance]]
 - [[altseason]]

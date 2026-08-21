@@ -11,7 +11,7 @@ impact: high
 verified: true
 aliases: ["Dot-Com Bubble", "Dotcom Bubble", "Internet Bubble", "Tech Bubble", "Dot-Com Crash"]
 sources_count: 3
-related: ["[[george-soros]]", "[[quantum-fund]]", "[[federal-reserve]]", "[[market-bubbles]]", "[[bubble]]", "[[nvidia]]"]
+related: ["[[george-soros]]", "[[quantum-fund]]", "[[federal-reserve]]", "[[market-bubbles]]", "[[bubble]]", "[[nvidia-ai|Nvidia]]"]
 ---
 
 # Dot-Com Bubble
@@ -91,7 +91,7 @@ The technology thesis was *right*; most of the equities expressing it were *wron
 
 ## Trading Relevance
 
-The dot-com bubble is essential context for evaluating the current AI-driven market, where [[nvidia]] and other AI beneficiaries have seen parabolic price appreciation. The parallels (and differences) between the dot-com era and the AI era are actively debated — see ai-capex-vs-cash-flow-divergence. A key distinction often raised: today's mega-cap AI leaders generate enormous real cash flow, unlike the revenue-less dot-coms of 1999, while the bears point to circular vendor financing and capex running ahead of demonstrated demand. [[george-soros]]' [[quantum-fund]] lost approximately $3 billion when the bubble burst, illustrating that even the greatest traders can be caught. The episode reinforced warren-buffett's principle of staying within one's circle of competence and [[nassim-taleb]]'s warnings about the fragility of consensus narratives.
+The dot-com bubble is essential context for evaluating the current AI-driven market, where [[nvidia-ai|Nvidia]] and other AI beneficiaries have seen parabolic price appreciation. The parallels (and differences) between the dot-com era and the AI era are actively debated — see ai-capex-vs-cash-flow-divergence. A key distinction often raised: today's mega-cap AI leaders generate enormous real cash flow, unlike the revenue-less dot-coms of 1999, while the bears point to circular vendor financing and capex running ahead of demonstrated demand. [[george-soros]]' [[quantum-fund]] lost approximately $3 billion when the bubble burst, illustrating that even the greatest traders can be caught. The episode reinforced warren-buffett's principle of staying within one's circle of competence and [[nassim-taleb]]'s warnings about the fragility of consensus narratives.
 
 ## Trader Takeaways
 

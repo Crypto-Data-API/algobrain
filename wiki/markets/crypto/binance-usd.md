@@ -9,7 +9,7 @@ aliases: ["BUSD", "Binance USD"]
 entity_type: protocol
 headquarters: "New York, USA (issuer Paxos)"
 website: "https://www.paxos.com/busd/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[paxos-standard]]", "[[paxos]]", "[[stablecoins]]", "[[tether]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[paxos-standard]]", "[[paxos]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # Binance USD
@@ -49,7 +49,7 @@ On **13 February 2023**, NYDFS directed Paxos to **cease minting new BUSD**, cit
 - Stopping all new BUSD issuance.
 - Continuing to **honor redemptions** of existing BUSD 1:1 for USD through a defined wind-down period, supported by reserves.
 
-Because no new tokens can be created and holders steadily redeem, BUSD's supply and market cap have declined monotonically toward the ~$38M residual seen on 2026-06-21. Binance itself has migrated users toward other stablecoins (including its own branded alternatives and [[tether]]/[[usdc]]).
+Because no new tokens can be created and holders steadily redeem, BUSD's supply and market cap have declined monotonically toward the ~$38M residual seen on 2026-06-21. Binance itself has migrated users toward other stablecoins (including its own branded alternatives and [[usdt|Tether]]/[[usdc]]).
 
 This history is the defining fact about BUSD: it is a **regulator-ordered sunset of a fiat-backed stablecoin**, and a case study in how stablecoins carry issuer and regulatory risk even when reserves are sound.
 
@@ -84,7 +84,7 @@ See [[stablecoins]] and [[depeg]] for the general framework, and [[paxos-standar
 - [[stablecoins]]
 - [[paxos]]
 - [[paxos-standard]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[usdc]]
 - [[depeg]]
 - [[collateralization]]

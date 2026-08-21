@@ -10,12 +10,12 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://usd.ai"
-related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethena]]", "[[nvidia]]", "[[real-world-assets]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
+related: ["[[arbitrum]]", "[[crypto-markets]]", "[[ethena]]", "[[nvidia-ai|Nvidia]]", "[[real-world-assets]]", "[[stablecoins]]", "[[synthetic-dollar]]"]
 ---
 
 # USDai
 
-**USDai** (ticker **USDAI**) is a yield-bearing [[synthetic-dollar|synthetic dollar]] issued by the **USD.AI** protocol (developed by **Permian Labs**), native to [[arbitrum|Arbitrum One]] and backed by loans collateralized with AI hardware — primarily [[nvidia|Nvidia]] GPUs — plus compute and DePIN assets. It targets 15–25% APR via its staked token **sUSDai** and functions like a tokenized high-yield credit index on income-generating AI infrastructure, making it the flagship of the "AI-collateral stablecoin" niche at the intersection of the [[stablecoins|stablecoin]], [[real-world-assets|RWA-credit]], and AI-infrastructure narratives.
+**USDai** (ticker **USDAI**) is a yield-bearing [[synthetic-dollar|synthetic dollar]] issued by the **USD.AI** protocol (developed by **Permian Labs**), native to [[arbitrum|Arbitrum One]] and backed by loans collateralized with AI hardware — primarily [[nvidia-ai|Nvidia]] GPUs — plus compute and DePIN assets. It targets 15–25% APR via its staked token **sUSDai** and functions like a tokenized high-yield credit index on income-generating AI infrastructure, making it the flagship of the "AI-collateral stablecoin" niche at the intersection of the [[stablecoins|stablecoin]], [[real-world-assets|RWA-credit]], and AI-infrastructure narratives.
 
 ---
 
@@ -162,7 +162,7 @@ USDai is a **credit-backed synthetic dollar** — its backing is a loan book, no
 - [[ethena]] / [[ethena-usde]]
 - [[falcon-finance]]
 - [[usdtb]]
-- [[nvidia]]
+- [[nvidia-ai|Nvidia]]
 
 ---
 

@@ -4,6 +4,20 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-22 — Fix 5 wikilink rename-mismatches across 60 pages
+
+**Fixed:** Rewrote wikilink targets on 60 pages (150 total changes) that pointed at
+near-miss filenames instead of the real page: memecoins→meme-coins, btc-bitcoin→bitcoin,
+nvidia→nvidia-ai, rwa→real-world-assets (dropping redundant duplicate links), and
+tether→usdt/tether-limited split by whether the sentence meant the stablecoin or the
+issuing company.
+
+**Notes:** Fix-track iteration of the daily improvement loop. Broken-link lint issues
+dropped from 247 to 240 pages; other lint categories unchanged. A wider tally (1,226
+distinct broken link targets wiki-wide) also surfaced several genuine missing-concept
+gaps rather than rename-mismatches — `depeg`, `dao`, `tokenization`, `tokenomics`, and
+the BNB Layer-1 chain page — queued for a future Build iteration.
+
 ## 2026-08-21 — Tag audit batch 3: adopt 42 tags, consolidate 7 duplicates
 
 **Added:** 42 new tags to CLAUDE.md/AGENTS.md's Approved Tags list and `tools/lint.py` —

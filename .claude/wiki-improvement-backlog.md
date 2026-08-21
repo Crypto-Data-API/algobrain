@@ -414,5 +414,45 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   1-3-occurrence ones now). Per the balance rule, Build is due next (last 3 will be iter5
   Build, iter6 Build, iter7 Fix -- 1 of 3 Fix, so either track is technically available,
   but iter6 already flagged Build-track work remaining: 15 concept stubs, 6 entity stubs,
-  ~7-10 source-ingestion stubs). (last 3 will be iter4 Fix, iter5 Build,
-  iter6 Build → 2 of 3 Build).
+  ~7-10 source-ingestion stubs).
+- 2026-08-22 iter 8 (Fix -- wikilink rename-mismatch batch): balance check -- last 3
+  entries at the time (iter5 Build, iter6 Build, iter7 Fix) had 2 of 3 Build, triggering
+  the reverse rule ("Fix due"). NOTE: iter7's own log entry mis-stated this as "Build is
+  due next" (miscounted "1 of 3 Fix" without checking the Build-dominance reverse rule) --
+  corrected the reasoning here rather than propagating the error; also fixed a stray
+  duplicate text fragment left in this file's iter7 entry from an earlier bad Edit match.
+  MCP server tools still unreachable this session (3rd iteration in a row) -- used
+  `tools/lint.py` via venv Python directly per the now-standard fallback. Rather than a
+  4th straight tags-focused iteration, wrote a small standalone script
+  (importing lint.py's own extract_wikilinks/load_pages) to tally ALL broken-link targets
+  wiki-wide by distinct source-page count -- lint.py's own report only shows pages with
+  >5 broken links and truncates each list to 5 targets, hiding the real cross-wiki
+  patterns. Found 1,226 distinct broken targets across 4,352 broken-link instances; the
+  top of the list separated cleanly into two categories after sampling usage context:
+  genuine rename-mismatches (target exists under a different filename) vs genuine
+  missing-concept gaps (Build-track, not fixable by renaming). Verified and delegated 5
+  rename-mismatches: [[memecoins]]->[[meme-coins]] (8 files/13 refs, 2 self-referencing
+  refs on meme-coins.md itself correctly left alone), [[btc-bitcoin]]->[[bitcoin]] (10f/
+  15r, alias |BTC preserved), [[nvidia]]->[[nvidia-ai]] (16f/37r, |Nvidia alias added
+  where none existed; 3 refs on nvidia-ai.md itself left alone -- deliberate forward-link
+  to a distinct not-yet-existing equity/fundamentals page), [[rwa]]->[[real-world-assets]]
+  (9f/13r, all were redundant duplicates alongside an existing [[real-world-assets]] link
+  on the same page -- deleted rather than renamed to avoid creating duplicate links),
+  [[tether]]->[[usdt]] or [[tether-limited]] by context (17f/72r, ~50 token/market-context
+  refs to usdt, ~22 issuer/company/regulatory-context refs to tether-limited -- read every
+  occurrence individually rather than a blind global replace). 60 files touched, 150 net
+  link-target changes. Ruled OUT as rename-mismatches after checking usage: [[bnb-chain]]
+  (10p) -- genuinely means the BNB Layer-1 chain itself, distinct from bnb.md (the token/
+  market page), which even links to [[bnb-chain]] as a separate related concept --
+  confirms it's a real missing-page gap, not a typo. Also confirmed as genuine Build-track
+  gaps, NOT renames (queued for iter9+): [[depeg]] (43 pages/135 refs -- very high
+  leverage; `depeg` was just adopted as an approved TAG in iter7 but has no page at all),
+  [[dao]] (9p), [[tokenization]] (15p), [[tokenomics]] (10p). Verified independently: re-
+  ran `tools/lint.py` myself before and after -- links 247->240 (smaller than the 150-ref
+  count because check_wikilinks only flags pages with >5 broken links, so several pages
+  dropped below threshold and vanished from the report while still carrying a few
+  unrelated broken links, unchanged from before); tags/orphans/stale/empty byte-identical
+  (659/39/6/51). Spot-read the rwa-dedup and tether-split diffs on 2 files directly --
+  clean, contextually correct. Per the balance rule, either track is technically open
+  next (last 3 will be iter6 Build, iter7 Fix, iter8 Fix -- 2 of 3 Fix -- so iter9 MUST be
+  Build); [[depeg]] is the clear highest-leverage Build candidate queued above.

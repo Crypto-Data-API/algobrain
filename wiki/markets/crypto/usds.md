@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2024
 headquarters: "Decentralized"
 website: "https://sky.money/"
-related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[makerdao]]", "[[stablecoins]]", "[[tether]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
+related: ["[[crypto-markets]]", "[[dai]]", "[[ethereum]]", "[[makerdao]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[binance]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-yield]]"]
 ---
 
 # USDS
@@ -77,7 +77,7 @@ Supply is **demand-elastic** — minted against collateral, burned on repayment 
 
 - **Not a directional asset** — USDS is a cash leg and yield instrument. Uses: parking dry powder in **sUSDS at the SSR** (3.75–4.5% in early 2026), collateral in DeFi money markets, and **basis/peg arbitrage** when USDS trades off $1.00 on [[uniswap]], Curve, or Orca (deployed on Ethereum, Base, Arbitrum, and Solana).
 - **As a signal** — USDS supply growth = on-chain dollar/leverage demand; **SSR changes are a governance-set "DeFi Fed funds"** that ripple through lending rates on Spark, [[aave|Aave]], and Morpho.
-- **Relative-value context** — competes with [[tether|USDT]] and USDC for float; the decentralized-issuer premium/discount is a recurring DeFi narrative.
+- **Relative-value context** — competes with [[usdt|USDT]] and USDC for float; the decentralized-issuer premium/discount is a recurring DeFi narrative.
 
 ### Exchange Listings
 
@@ -103,7 +103,7 @@ Supply is **demand-elastic** — minted against collateral, burned on repayment 
 
 ## Narrative & Category
 
-USDS is the flagship **decentralized, crypto-+-RWA-backed stablecoin** — category peers are [[gho|GHO]] (Aave), [[dai|DAI]] (its own legacy form), and [[usual-usd|USD0]]; the contrast is fiat-backed [[tether|USDT]]/USDC and the political/fiat-backed [[usd1-wlfi|USD1]]. The Sky thesis is "self-sovereign dollar at scale," with the SSR as a transparent on-chain savings rate and Sky Stars extending utility into institutional credit. Its size (top-15) makes USDS a systemic DeFi building block.
+USDS is the flagship **decentralized, crypto-+-RWA-backed stablecoin** — category peers are [[gho|GHO]] (Aave), [[dai|DAI]] (its own legacy form), and [[usual-usd|USD0]]; the contrast is fiat-backed [[usdt|USDT]]/USDC and the political/fiat-backed [[usd1-wlfi|USD1]]. The Sky thesis is "self-sovereign dollar at scale," with the SSR as a transparent on-chain savings rate and Sky Stars extending utility into institutional credit. Its size (top-15) makes USDS a systemic DeFi building block.
 
 ---
 
@@ -167,7 +167,7 @@ USDS itself is a peg asset and is not "valued"; the economics accrue to **SKY** 
 - [[makerdao]], [[sky]]
 - [[dai]]
 - [[gho]] — Aave's decentralized stablecoin peer
-- [[tether]] — fiat-backed contrast
+- [[usdt|Tether]] — fiat-backed contrast
 - [[aave]], [[uniswap]]
 - [[stablecoin-depegs]], [[stablecoin-yield]]
 

@@ -189,7 +189,7 @@ Auth: `X-API-Key` header. Full endpoint catalog: [[cryptodataapi-sentiment]].
 - [[crypto-narratives-overview]]
 - [[bitcoin]]
 - [[ethereum]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[usdc]]
 - [[stablecoins]]
 - [[terra-luna-collapse]]

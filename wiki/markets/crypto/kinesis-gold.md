@@ -9,7 +9,7 @@ aliases: ["KAU", "Kinesis gold"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://kinesis.money/"
-related: ["[[crypto-markets]]", "[[gold]]", "[[kinesis-silver]]", "[[paxg]]", "[[real-world-assets]]", "[[rwa]]", "[[stellar]]", "[[tether-gold]]", "[[tokenized-commodities]]"]
+related: ["[[crypto-markets]]", "[[gold]]", "[[kinesis-silver]]", "[[paxg]]", "[[real-world-assets]]", "[[stellar]]", "[[tether-gold]]", "[[tokenized-commodities]]"]
 ---
 
 # Kinesis Gold
@@ -200,7 +200,7 @@ Liquidity is concentrated on the native Kinesis Exchange; no major CEX spot list
 - [[paxg]], [[tether-gold]] — the liquid tokenized-gold alternatives
 - [[kinesis-silver]] — sister token (KAG, 1 oz silver)
 - [[gold]], [[gold-standard-mechanics]], [[commodities]]
-- [[real-world-assets]], [[rwa]], [[tokenized-commodities]], [[crypto-markets]]
+- [[real-world-assets]], [[tokenized-commodities]], [[crypto-markets]]
 - [[fear-and-greed-index]]
 
 ---

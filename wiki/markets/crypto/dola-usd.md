@@ -9,7 +9,7 @@ aliases: ["DOLA", "DOLA USD", "Inverse Finance DOLA"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://www.inverse.finance/"
-related: ["[[collateralization]]", "[[crvusd]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[stablecoins]]", "[[tether]]", "[[usdc]]"]
+related: ["[[collateralization]]", "[[crvusd]]", "[[crypto-markets]]", "[[curve]]", "[[dai]]", "[[defi]]", "[[ethereum]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # DOLA
@@ -51,7 +51,7 @@ DOLA is issued by **Inverse Finance**, a decentralized, DAO-governed protocol wi
 Protocol-controlled smart contracts called **"Feds"** mint or burn DOLA directly into liquidity venues (e.g. [[curve|Curve]] pools) to add or remove supply. A **Fed expansion** mints DOLA into a pool to deepen liquidity; a **contraction** burns DOLA to tighten supply and support the peg. This is an open-market-operations-style mechanism that lets the DAO actively manage where DOLA's price sits relative to $1.
 
 ### Peg maintenance
-Because DOLA is debt-backed rather than fiat-redeemable, its peg is **soft**: defended by collateralization, by arbitrage in DOLA/[[usdc|USDC]]/[[tether|USDT]] liquidity pools, and by Fed expansion/contraction — **not** by a 1:1 cash redemption guarantee. The small discount ($0.9954) is the expected behavior of a soft-pegged CDP stablecoin. See [[collateralization]].
+Because DOLA is debt-backed rather than fiat-redeemable, its peg is **soft**: defended by collateralization, by arbitrage in DOLA/[[usdc|USDC]]/[[usdt|USDT]] liquidity pools, and by Fed expansion/contraction — **not** by a 1:1 cash redemption guarantee. The small discount ($0.9954) is the expected behavior of a soft-pegged CDP stablecoin. See [[collateralization]].
 
 ---
 
@@ -129,7 +129,7 @@ See [[stablecoins]], [[depeg]], and [[collateralization]] for the general framew
 - [[dai]]
 - [[crvusd]]
 - [[usdc]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[curve]]
 - [[ethereum]]
 - [[crypto-markets]]

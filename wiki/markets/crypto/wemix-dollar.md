@@ -47,11 +47,11 @@ WEMIX$ is the stable settlement asset of the WEMIX ecosystem, the blockchain net
 
 WEMIX$ is intended to track $1.00 through a collateralized model maintained within WEMIX.Fi: it is issued against on-chain reserves of other crypto-assets (including stablecoins and ecosystem tokens) held by the protocol, with an arbitrage/redemption design meant to keep market price near par. Because the protocol's own materials are the primary public source for reserve composition and the live reserve figures are not independently verified here, **specific reserve amounts and the precise collateral basket are left qualitative** in this page rather than stated as hard numbers. The key point for a reader is that, like other [[collateralization|collateral-backed]] stablecoins, WEMIX$ depends on the value and liquidity of its reserves and on functioning arbitrage to hold peg.
 
-In design terms WEMIX$ is a **crypto-collateralized, ecosystem-local stablecoin** rather than a fiat-reserve-backed one. That places it in the same broad family as [[dai|DAI]] (over-collateralized, multi-asset) and algorithmic/hybrid designs, and away from fully fiat-backed coins like [[usdc|USDC]] or [[tether|USDT]] whose backing is off-chain bank reserves and short-dated Treasuries. The practical consequences:
+In design terms WEMIX$ is a **crypto-collateralized, ecosystem-local stablecoin** rather than a fiat-reserve-backed one. That places it in the same broad family as [[dai|DAI]] (over-collateralized, multi-asset) and algorithmic/hybrid designs, and away from fully fiat-backed coins like [[usdc|USDC]] or [[usdt|USDT]] whose backing is off-chain bank reserves and short-dated Treasuries. The practical consequences:
 
 - **Peg defense relies on arbitrage, not redemption-at-bank.** There is no fiat off-ramp that lets an arbitrageur reliably buy under-par WEMIX$ and redeem it for exactly $1 from a regulated issuer. Peg correction depends on in-ecosystem mint/redeem incentives and DEX arbitrage, which are only as strong as the depth of WEMIX.Fi liquidity.
 - **Reflexivity to the WEMIX token.** If any portion of reserves is held in the volatile native WEMIX token (or other ecosystem assets), the backing value falls precisely when the ecosystem is stressed — the classic correlated-collateral weakness that has broken other ecosystem stablecoins.
-- **No independent attestation surfaced here.** Unlike [[usdc|USDC]] (monthly attestations) or [[tether|USDT]] (quarterly), no third-party reserve attestation for WEMIX$ is ingested in this wiki, so backing rests on protocol disclosure.
+- **No independent attestation surfaced here.** Unlike [[usdc|USDC]] (monthly attestations) or [[usdt|USDT]] (quarterly), no third-party reserve attestation for WEMIX$ is ingested in this wiki, so backing rests on protocol disclosure.
 
 ### Comparison vs other stablecoin designs
 
@@ -59,7 +59,7 @@ In design terms WEMIX$ is a **crypto-collateralized, ecosystem-local stablecoin*
 |---|---|---|---|---|
 | **WEMIX$** | Crypto-collateralized, ecosystem-local (WEMIX.Fi reserves) | In-ecosystem mint/redeem + DEX arbitrage | Protocol disclosure only (no independent attestation surfaced) | Mild soft discount (~$0.97), thin liquidity |
 | **[[usdc|USDC]]** | Fiat reserves (cash + short Treasuries) | Issuer redemption at $1 via regulated rails | Monthly third-party attestations | Tight peg, deep liquidity |
-| **[[tether|USDT]]** | Mixed fiat/Treasury/other reserves | Issuer redemption (large minimums) | Quarterly attestations | Tight peg, deepest liquidity |
+| **[[usdt|USDT]]** | Mixed fiat/Treasury/other reserves | Issuer redemption (large minimums) | Quarterly attestations | Tight peg, deepest liquidity |
 | **[[dai|DAI]]** | Over-collateralized crypto + RWA | Maker vaults, liquidations, PSM arbitrage | Fully on-chain, public | Tight peg, broad DeFi integration |
 
 The table makes WEMIX$'s position clear: it is structurally closer to DAI than to USDC/USDT, but **without** DAI's deep liquidity, public over-collateralization data, and broad cross-protocol integration — which is why it can drift a few percent under par where DAI does not.
@@ -175,7 +175,7 @@ WEMIX$ sits at the intersection of two narratives: **stablecoins** and **GameFi*
 
 In the 2026-06-24 backdrop — Fear & Greed 22 (Extreme Fear), an established bear market, BTC ~18% below its 200-day MA — the relevant framing for WEMIX$ is **peg-stability, not directional alpha**:
 
-- **Not a USD parking spot.** A coin already trading ~2.9% under par with sub-$1K daily volume is not a safe place to hold "dollars." For cash-equivalent stability in a bear regime, deeply liquid coins ([[usdc|USDC]], [[tether|USDT]], [[dai|DAI]]) are the appropriate vehicles.
+- **Not a USD parking spot.** A coin already trading ~2.9% under par with sub-$1K daily volume is not a safe place to hold "dollars." For cash-equivalent stability in a bear regime, deeply liquid coins ([[usdc|USDC]], [[usdt|USDT]], [[dai|DAI]]) are the appropriate vehicles.
 - **Discount-watch, not buy-the-discount.** A ~3% discount on a thin, ecosystem-local crypto-collateralized stablecoin is **not** a clean arbitrage — there is no reliable $1 redemption to capture, and the discount can persist or widen. Treat the discount as an information signal about ecosystem liquidity, not a guaranteed convergence trade.
 - **Liquidity-first sizing.** With ~$500 of daily volume, any position is effectively illiquid; exit slippage dominates. Size for the assumption that you may not be able to get out near mark.
 - **Headline risk binary.** Watch for any disclosure/governance news on Wemade or WEMIX reserves; the 2023 precedent shows the ecosystem can move sharply on transparency concerns.

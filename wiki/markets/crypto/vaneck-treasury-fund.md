@@ -131,7 +131,7 @@ VBILL sits in the fast-growing **tokenized Treasuries / tokenized cash** segment
 
 ## See Also
 
-- [[real-world-assets]] / [[rwa]]
+- [[real-world-assets]]
 - [[tokenized-treasuries]]
 - [[ousg]], [[buidl]], [[hashnote-usyc]] — peer tokenized Treasury / MMF products
 - [[securitize]] — tokenization platform / transfer agent

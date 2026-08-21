@@ -10,7 +10,7 @@ entity_type: protocol
 founded: 2019
 headquarters: "Decentralized"
 website: "https://www.bitfinex.com/"
-related: ["[[bitcoin]]", "[[bitfinex]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[tether]]", "[[whitebit]]"]
+related: ["[[bitcoin]]", "[[bitfinex]]", "[[centralized-exchange]]", "[[crypto-markets]]", "[[ethereum]]", "[[tether-limited|Tether]]", "[[whitebit]]"]
 ---
 
 # LEO Token
@@ -75,7 +75,7 @@ Holding LEO entitles users to fee reductions and perks across the iFinex ecosyst
 
 - **Trading-fee discounts:** reduced taker/maker fees on Bitfinex scaled to LEO holdings.
 - **Lending, withdrawal and deposit perks:** reduced fees on crypto withdrawals and on Bitfinex's peer-to-peer lending, plus fee credits on fiat operations.
-- **Tether-complex linkage:** iFinex is the parent of both Bitfinex and [[tether|Tether]] (USDT), so LEO is also an indirect proxy on the broader iFinex/stablecoin-issuer complex.
+- **Tether-complex linkage:** iFinex is the parent of both Bitfinex and [[tether-limited|Tether]] (USDT), so LEO is also an indirect proxy on the broader iFinex/stablecoin-issuer complex.
 
 ### Buyback-and-burn mechanics
 
@@ -116,7 +116,7 @@ LEO's supply trajectory is the inverse of most tokens: rather than inflating, it
 - **Bitfinex fee utility:** trading, lending, withdrawal and deposit fee discounts.
 - **Deflation/buyback claim:** a structural claim on iFinex revenue via the burn mechanism — the primary reason to hold.
 - **Hack-recovery one-off:** the 2016-hack 80% buyback clause turned LEO into a discrete event-driven instrument in 2025-2026.
-- **iFinex/Tether complex proxy:** indirect exposure to the [[tether|USDT]] issuer's parent group.
+- **iFinex/Tether complex proxy:** indirect exposure to the [[tether-limited|USDT]] issuer's parent group.
 
 ---
 
@@ -145,7 +145,7 @@ LEO is valued less like a token and more like a **structured corporate buyback c
 
 1. **Burn-model fair value.** Discount the future stream of iFinex buybacks (≥27% of monthly revenue) plus the one-off 80% hack-fund buyback against the contracting supply. This gives a "policy-driven" fair value independent of market sentiment.
 2. **Event premium.** During 2025-2026, LEO traded at an estimated premium (reported ~60% over burn-model fair value at one point) as the market front-ran the 18-month hack-fund buyback — the bear case is that this premium over-discounts a one-off flow.
-3. **iFinex revenue beta.** Long-run value tracks Bitfinex's trading-fee revenue and the health of the iFinex/[[tether|Tether]] complex.
+3. **iFinex revenue beta.** Long-run value tracks Bitfinex's trading-fee revenue and the health of the iFinex/[[tether-limited|Tether]] complex.
 4. **Liquidity discount.** The near-absence of off-Bitfinex liquidity should attach a discount for any holder who needs to exit at size.
 
 ---
@@ -175,7 +175,7 @@ LEO is valued less like a token and more like a **structured corporate buyback c
 
 | Token | Exchange | Value mechanism | Distinctive feature | Liquidity profile |
 |---|---|---|---|---|
-| **LEO** | [[bitfinex\|Bitfinex]]/iFinex | Buyback-to-zero (≥27% revenue) + hack-fund burn | Burn-to-zero design; quasi-debt; [[tether]] complex link | Extremely venue-concentrated (Bitfinex) |
+| **LEO** | [[bitfinex\|Bitfinex]]/iFinex | Buyback-to-zero (≥27% revenue) + hack-fund burn | Burn-to-zero design; quasi-debt; [[tether-limited|Tether]] complex link | Extremely venue-concentrated (Bitfinex) |
 | BNB | [[binance\|Binance]] | Periodic burns + chain utility (BNB Chain) | Largest CEX token; full smart-contract chain | Deep, multi-venue |
 | OKB | OKX | Buyback/burn + chain utility | OKX ecosystem token | Moderate |
 | [[whitebit\|WBT]] | WhiteBIT | Buyback/burn + fee utility | EU-focused exchange token | Moderate |
@@ -206,7 +206,7 @@ LEO is *sui generis* among [[centralized-exchange]] tokens: where BNB/OKB/WBT/BG
 ## Risks
 
 - **Liquidity / venue concentration:** ~$0.5M daily volume, almost entirely on Bitfinex — severe slippage and exit risk at size.
-- **Counterparty:** value depends on iFinex honoring buyback commitments and on the health of the [[bitfinex|Bitfinex]]/[[tether|Tether]] complex.
+- **Counterparty:** value depends on iFinex honoring buyback commitments and on the health of the [[bitfinex|Bitfinex]]/[[tether-limited|Tether]] complex.
 - **Premium / event risk:** much of the 2025-2026 move priced in the one-off hack-fund buyback; once that flow completes, the structural bid weakens.
 - **Litigation risk:** any dispute over the returned BTC could disrupt the buyback timeline.
 - **Regulatory:** iFinex/Tether complex carries ongoing regulatory scrutiny.
@@ -218,7 +218,7 @@ LEO is *sui generis* among [[centralized-exchange]] tokens: where BNB/OKB/WBT/BG
 - [[crypto-markets]]
 - [[ethereum]]
 - [[bitfinex]]
-- [[tether]]
+- [[tether-limited|Tether]]
 - [[centralized-exchange]]
 - [[whitebit]]
 

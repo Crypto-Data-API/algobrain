@@ -9,7 +9,7 @@ aliases: ["RENDER", "RNDR", "Render Network"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "http://renderfoundation.com"
-related: ["[[ai-narrative-arc]]", "[[artificial-intelligence]]", "[[artificial-superintelligence-alliance]]", "[[bittensor]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[nvidia]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[cash-and-carry]]"]
+related: ["[[ai-narrative-arc]]", "[[artificial-intelligence]]", "[[artificial-superintelligence-alliance]]", "[[bittensor]]", "[[crypto-markets]]", "[[depin]]", "[[ethereum]]", "[[nvidia-ai|Nvidia]]", "[[solana]]", "[[hyperliquid]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[momentum-investing]]", "[[cash-and-carry]]"]
 ---
 
 # Render
@@ -159,7 +159,7 @@ The network runs natively on Solana while retaining an [[ethereum|Ethereum]] ERC
 | **Spot CEX** | Binance (RENDER/USDT), Kraken (RENDER/USD), Upbit (RENDER/KRW — Korean retail flow), Coinbase, Bitget, KuCoin, Crypto.com |
 | **Spot DEX** | Uniswap V3/V2 (Ethereum), Orca (Solana) |
 | **Perps** | RENDER-PERP on [[hyperliquid|Hyperliquid]]; perpetuals also on Binance/Bybit futures |
-| **Funding / OI** | As a high-beta AI name, RENDER funding swings sharply with the AI narrative — positive (longs paying) during rallies, sharply negative during washouts. Open interest concentrates on Binance and Hyperliquid; monitor for crowded longs ahead of [[nvidia]] earnings |
+| **Funding / OI** | As a high-beta AI name, RENDER funding swings sharply with the AI narrative — positive (longs paying) during rallies, sharply negative during washouts. Open interest concentrates on Binance and Hyperliquid; monitor for crowded longs ahead of [[nvidia-ai|Nvidia]] earnings |
 | **Liquidity** | ~$45M/day spot at the 2026-06-20 snapshot — thinner than the 2024 peak, widening slippage on large orders |
 
 Because RENDER is dual-chain (Solana native + Ethereum ERC-20), liquidity is fragmented across Solana DEXs ([[jupiter-exchange-solana|Jupiter]]-routed) and Ethereum DEXs; CEX spot remains the deepest venue.
@@ -174,7 +174,7 @@ RENDER lacks cash flows in the equity sense, so valuation leans on **network-usa
 - **RENDER burned vs minted (BME net flow)** — the cleanest fundamental signal. Sustained net burn implies usage outpacing emission (token deflationary, bullish on fundamentals); sustained net mint implies the network is subsidizing operators.
 - **Node-operator count and GPU capacity online** — supply side health; over-supply relative to demand compresses operator economics.
 - **Fee revenue / FDV** — a rough "price-to-usage" gauge; compare against [[akash-network|Akash]] and [[io-net|io.net]] for relative value within DePIN compute.
-- **MC vs realized cloud-GPU spot rates** — Render's pricing must stay competitive with AWS/GCP/[[nvidia|NVIDIA]] DGX Cloud spot pricing or demand migrates off-network.
+- **MC vs realized cloud-GPU spot rates** — Render's pricing must stay competitive with AWS/GCP/[[nvidia-ai|NVIDIA]] DGX Cloud spot pricing or demand migrates off-network.
 
 *(No invented values: the wiki does not currently hold a live BME burn series; track via the Render Network explorer.)*
 
@@ -197,12 +197,12 @@ Render's edge is its **pre-existing professional rendering user base (Octane/OTO
 
 ## Trading Playbook
 
-**Bullish catalysts:** [[nvidia]] earnings beats / raised GPU guidance; major model releases from [[openai|OpenAI]], [[anthropic|Anthropic]], Google, Meta; rising Render job/burn metrics; new studio or AI-company partnerships; [[solana]] ecosystem strength.
+**Bullish catalysts:** [[nvidia-ai|Nvidia]] earnings beats / raised GPU guidance; major model releases from [[openai|OpenAI]], [[anthropic|Anthropic]], Google, Meta; rising Render job/burn metrics; new studio or AI-company partnerships; [[solana]] ecosystem strength.
 
 **Bearish catalysts:** cloud-GPU price deflation eroding Render's value prop; centralized clouds capturing AI demand; AI-narrative fatigue; thin liquidity amplifying drawdowns; BME net-mint regimes.
 
 **Setups:**
-- **AI-beta proxy** — express bullish AI views via RENDER for higher beta than spot SOL/ETH; pair against [[nvidia]] for a crypto-vs-tradfi compute spread.
+- **AI-beta proxy** — express bullish AI views via RENDER for higher beta than spot SOL/ETH; pair against [[nvidia-ai|Nvidia]] for a crypto-vs-tradfi compute spread.
 - **DePIN rotation** — RENDER leads the [[depin|DePIN]] basket; a RENDER breakout often drags [[akash-network|AKT]], [[filecoin|FIL]], [[helium|HNT]] with a lag.
 - **Mean-reversion in extreme fear** — at a Fear & Greed of 23, washed-out high-beta names can snap back hard on any AI headline; size small and use [[risk-management|stops]].
 
@@ -241,7 +241,7 @@ RENDER's fundamental value proposition is directly tied to demand for GPU comput
 
 **The fundamental thesis**: If GPU compute demand grows (which all secular trends suggest), and Render captures a meaningful share of that demand through its decentralized marketplace, then RENDER token accrues value as the payment medium for the network.
 
-**The counter-thesis**: Centralized cloud providers (AWS, Google Cloud, Azure, [[nvidia|NVIDIA's]] DGX Cloud) and other decentralized competitors ([[akash-network|Akash]], [[io-net|io.net]]) may capture most of the demand, leaving Render with a niche market.
+**The counter-thesis**: Centralized cloud providers (AWS, Google Cloud, Azure, [[nvidia-ai|NVIDIA's]] DGX Cloud) and other decentralized competitors ([[akash-network|Akash]], [[io-net|io.net]]) may capture most of the demand, leaving Render with a niche market.
 
 ### Solana Migration Impact
 
@@ -266,7 +266,7 @@ RENDER is one of the most AI-correlated tokens in crypto. Its price behavior fol
 | Event Type | RENDER Response | Typical Magnitude |
 |---|---|---|
 | [[openai|OpenAI]] product launch | Rally | +10-30% over 1-5 days |
-| [[nvidia|NVIDIA]] earnings beat | Rally | +5-20% same day |
+| [[nvidia-ai|NVIDIA]] earnings beat | Rally | +5-20% same day |
 | AI conference announcements (NeurIPS, etc.) | Mild rally | +5-10% |
 | AI safety concerns / regulation fears | Selloff | -10-20% |
 | Crypto-specific AI news ([[ai-agent-tokens]]) | Moderate rally | +5-15% |
@@ -345,7 +345,7 @@ DePIN tokens trade as a sector — when one rallies on news, others tend to foll
 ## Risks
 
 - **Narrative beta / volatility** — RENDER is among the most AI-correlated crypto assets; it amplifies AI-narrative drawdowns (currently -87% from ATH).
-- **Centralized-cloud competition** — AWS/GCP/Azure and [[nvidia|NVIDIA]] DGX Cloud can undercut on price and reliability; GPU-spot deflation directly weakens Render's value proposition.
+- **Centralized-cloud competition** — AWS/GCP/Azure and [[nvidia-ai|NVIDIA]] DGX Cloud can undercut on price and reliability; GPU-spot deflation directly weakens Render's value proposition.
 - **DePIN-rival displacement** — [[io-net|io.net]] and [[akash-network|Akash]] target the same AI-compute demand.
 - **Demand realization risk** — much of the AI thesis is forward-looking; if paid usage (render jobs, BME burn) stalls, valuation rests on narrative.
 - **Solana dependency** — network outages or congestion on [[solana]] impair operations and payments.
@@ -365,17 +365,17 @@ RENDER is a deep, liquid two-venue derivatives market. It trades on **[[binance|
 - [[funding-rate-harvest]] — RENDER perp funding swings hard with the AI narrative (longs paying in rallies, negative in washouts), so systematically collecting the dominant funding side is a repeatable carry on this high-beta name.
 - [[hl-vs-cex-funding-divergence]] — with an active perp on both Hyperliquid and Binance, funding often diverges between venues; long the cheaper-funding leg / short the richer one to capture the spread.
 - [[cash-and-carry]] — deep Binance spot plus a USD-margined perp lets you hold spot RENDER against a short perp to harvest positive basis when the AI-narrative crowd pays up for leverage.
-- [[crowded-long-funding-fade]] — ahead of [[nvidia|NVIDIA]] earnings and major model launches, RENDER longs crowd and funding turns sharply positive; fading over-extended longs into rich funding is a recurring edge.
+- [[crowded-long-funding-fade]] — ahead of [[nvidia-ai|NVIDIA]] earnings and major model launches, RENDER longs crowd and funding turns sharply positive; fading over-extended longs into rich funding is a recurring edge.
 - [[liquidation-cascade-fade]] — as a ~1.5-2x BTC-beta AI proxy, RENDER produces violent liquidation flushes on broad crypto drawdowns; fading capitulation wicks after forced selling is a defined setup.
 - [[momentum-investing]] — RENDER leads the [[depin|DePIN]]/AI-compute basket and trends cleanly on narrative rotations, making trend/momentum entries effective when the AI theme is in favor.
 
 ### Volatility & regime character
 
-RENDER is a **high-beta AI / [[depin|DePIN]] infrastructure alt**. It carries a genuine (not purely narrative) link to GPU-compute demand, so it trades with elevated but not memecoin-grade reflexivity — lower than pure AI-agent tokens, higher than large-cap majors. Beta to BTC/ETH runs roughly 1.5-2x on broad drawdowns, and it is unusually correlated with tradfi AI proxies ([[nvidia|NVIDIA]]) versus most crypto. Regime is narrative-driven: expansive during AI risk-on rotations, sharply de-risking when the AI theme cools or macro turns risk-off.
+RENDER is a **high-beta AI / [[depin|DePIN]] infrastructure alt**. It carries a genuine (not purely narrative) link to GPU-compute demand, so it trades with elevated but not memecoin-grade reflexivity — lower than pure AI-agent tokens, higher than large-cap majors. Beta to BTC/ETH runs roughly 1.5-2x on broad drawdowns, and it is unusually correlated with tradfi AI proxies ([[nvidia-ai|NVIDIA]]) versus most crypto. Regime is narrative-driven: expansive during AI risk-on rotations, sharply de-risking when the AI theme cools or macro turns risk-off.
 
 ### Risk flags
 
-- **Narrative dependence** — price is tightly coupled to the AI/DePIN narrative and to [[nvidia|NVIDIA]]/model-release headlines; theme fatigue drives outsized drawdowns (already ~87% off ATH).
+- **Narrative dependence** — price is tightly coupled to the AI/DePIN narrative and to [[nvidia-ai|NVIDIA]]/model-release headlines; theme fatigue drives outsized drawdowns (already ~87% off ATH).
 - **Liquidity concentration & thinning** — spot volume has compressed in the bear market, widening slippage on large orders; depth is concentrated in Binance and Hyperliquid.
 - **Perp funding dislocations** — funding can whip sharply positive into hyped events then flip negative on washouts; crowded-side funding is a live risk for leveraged carry.
 - **Emissions / BME supply** — in low-usage regimes the Burn-and-Mint Equilibrium net-mints, adding mild supply pressure; monitor the ~519M circulating vs ~644M max gap.
@@ -422,7 +422,7 @@ An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can trade R
 - [[solana]] — Current chain (post-migration)
 - [[artificial-intelligence]] — AI section hub
 - [[ai-narrative-arc]] — AI hype cycle context
-- [[nvidia]] — Tradfi AI compute proxy; RENDER correlates with NVDA
+- [[nvidia-ai|Nvidia]] — Tradfi AI compute proxy; RENDER correlates with NVDA
 - [[bittensor]] — Decentralized AI network (related sector)
 - [[artificial-superintelligence-alliance]] — ASI Alliance (related sector)
 - [[depin]] — Decentralized physical infrastructure network category

@@ -213,7 +213,7 @@ WAX's relative strengths are a mature low-cost NFT stack and seamless onboarding
 
 ## Trading Playbook (bear / Extreme-Fear regime)
 
-> Context: F&G = 21 (Extreme Fear), established bear market, [[btc-bitcoin|BTC]] ~$64k (~16% below 200-day MA). Small-cap GameFi tokens are the highest-beta, lowest-liquidity corner of the market right now.
+> Context: F&G = 21 (Extreme Fear), established bear market, [[bitcoin|BTC]] ~$64k (~16% below 200-day MA). Small-cap GameFi tokens are the highest-beta, lowest-liquidity corner of the market right now.
 
 - **Bias:** capital-preservation. WAXP is a high-beta, sector-dependent micro-cap deep in a structural drawdown; it has no near-term fundamental catalyst priced in.
 - **Longs:** only as small, asymmetric "sector-recovery option" positions sized for total loss. The thesis requires a broad NFT/gaming narrative revival *and* WAX-specific traction — both speculative. Prefer accumulation near prior ATL zones rather than chasing CEX-driven spikes.

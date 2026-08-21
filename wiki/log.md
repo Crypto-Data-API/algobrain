@@ -2,12 +2,40 @@
 title: "Wiki Operations Log"
 type: index
 created: 2026-07-13
-updated: 2026-08-21
+updated: 2026-08-22
 status: good
 tags: [meta, log]
 ---
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
+
+## 2026-08-22 — Wikilink rename-mismatch batch (daily loop iter 8, Fix)
+
+**Scope:** Daily improvement loop, Fix track. Wrote a standalone tally script (reusing
+`tools/lint.py`'s own wikilink-extraction logic) to find broken-link targets referenced
+from many pages at once — `lint.py`'s own report only shows pages with >5 broken links
+and truncates each list to 5 targets, hiding cross-wiki patterns. Found 1,226 distinct
+broken targets; sampled usage context on the top ones to separate real rename-mismatches
+from genuine missing-concept gaps.
+
+- **Fixed 5 rename-mismatches, 60 files, 150 link-target changes:**
+  [[memecoins]]→[[meme-coins]] (8 files), [[btc-bitcoin]]→[[bitcoin]] (10 files, `|BTC`
+  alias preserved), [[nvidia]]→[[nvidia-ai]] (16 files, `|Nvidia` alias added where
+  missing), [[rwa]]→[[real-world-assets]] (9 files — all were redundant duplicates
+  alongside an existing real-world-assets link, so deleted rather than renamed),
+  [[tether]]→[[usdt]] or [[tether-limited]] by context (17 files, 72 refs — split roughly
+  50 token/market-context refs to `usdt` and 22 issuer/company/regulatory-context refs to
+  `tether-limited`, read individually rather than blind-replaced).
+- **Ruled out** [[bnb-chain]] (10 pages) as a rename-mismatch after checking usage — it
+  genuinely means the BNB Layer-1 chain itself, distinct from [[bnb]] the token/market
+  page (which even links to `[[bnb-chain]]` separately). A real missing-page gap, not a
+  typo.
+- **Queued for Build (iter9+):** [[depeg]] (43 pages/135 refs — very high leverage; `depeg`
+  was adopted as an approved tag in iter7 but has no page at all), [[dao]] (9 pages),
+  [[tokenization]] (15 pages), [[tokenomics]] (10 pages), [[bnb-chain]] (10 pages).
+- **Verified independently:** re-ran `tools/lint.py` before and after — `[links]` 247→240;
+  `[tags]`/`[orphans]`/`[stale]`/`[empty]` byte-identical (659/39/6/51). Spot-read the
+  rwa-dedup and tether-split diffs directly.
 
 ## 2026-08-21 — Tag audit batch 3 (daily loop iter 7, Fix)
 

@@ -9,7 +9,7 @@ aliases: ["PAX", "Pax Dollar", "Paxos Standard", "USDP"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://www.paxos.com/standard/"
-related: ["[[base]]", "[[binance]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoins]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[tether]]", "[[usdc]]"]
+related: ["[[base]]", "[[binance]]", "[[binance-usd]]", "[[crypto-markets]]", "[[ethereum]]", "[[gemini-dollar]]", "[[paxos]]", "[[paypal-usd]]", "[[stablecoins]]", "[[stablecoin-depeg-profit-capture]]", "[[stablecoin-pair-arbitrage]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # Pax Dollar
@@ -46,7 +46,7 @@ As of 2026-06-21, USDP trades at **$0.998971**, holds market-cap rank **#619**, 
 USDP is a **fiat-reserve (custodial) stablecoin** — the simplest and most conservative stablecoin design. There is no algorithmic mechanism and no crypto collateral; each token is a digital claim on a dollar held in reserve by a regulated trust company. Contrast this with debt-backed designs like [[dola-usd|DOLA]] or over-collateralized [[dai|DAI]].
 
 ### Reserve model and attestation
-Reserves backing circulating USDP are held in **U.S. dollar deposits and short-dated U.S. Treasury bills / overnight reverse repo** collateralized by Treasuries, segregated for the benefit of token holders under New York trust law. Because Paxos operates as a limited-purpose trust company (not a fractional-reserve bank), reserves are held 1:1 and are not lent out. Paxos publishes **monthly reserve attestation reports** prepared by an independent accounting firm, listing reserve composition and confirming that reserves meet or exceed tokens outstanding. This is a higher transparency bar than [[tether|USDT]] historically met, and comparable to [[usdc|USDC]] and [[gemini-dollar|GUSD]].
+Reserves backing circulating USDP are held in **U.S. dollar deposits and short-dated U.S. Treasury bills / overnight reverse repo** collateralized by Treasuries, segregated for the benefit of token holders under New York trust law. Because Paxos operates as a limited-purpose trust company (not a fractional-reserve bank), reserves are held 1:1 and are not lent out. Paxos publishes **monthly reserve attestation reports** prepared by an independent accounting firm, listing reserve composition and confirming that reserves meet or exceed tokens outstanding. This is a higher transparency bar than [[usdt|USDT]] historically met, and comparable to [[usdc|USDC]] and [[gemini-dollar|GUSD]].
 
 ### Regulatory wrapper
 Paxos holds a **NYDFS limited-purpose trust charter**, which subjects it to state-level reserve standards, capital requirements, custody rules, AML/KYC obligations, and periodic examination. This is the same regulatory framework under which Paxos issued [[binance-usd|BUSD]] and the white-label [[paypal-usd|PayPal USD (PYUSD)]]. The charter is a state trust charter, not a federal bank charter — an important distinction as the U.S. moves toward a federal stablecoin framework.
@@ -63,7 +63,7 @@ This guaranteed convertibility lets arbitrageurs profit from any secondary-marke
 
 ## Tokenomics & Supply
 
-USDP supply is **fully reserve-backed and elastic** — it expands when institutions mint and contracts when they redeem, so circulating supply tracks net dollar inflows. There is no fixed max supply and no token-emission or seigniorage model; Paxos earns yield on the reserve assets (the float), the standard fiat-stablecoin business model. At ~$32M market cap, USDP is a small-cap stablecoin, well below its multi-billion-dollar peak as PAX in 2021. Supply has structurally declined as institutional demand migrated to [[usdc|USDC]], [[tether|USDT]], and Paxos's own [[paypal-usd|PYUSD]] / [[usdg|Global Dollar]] products.
+USDP supply is **fully reserve-backed and elastic** — it expands when institutions mint and contracts when they redeem, so circulating supply tracks net dollar inflows. There is no fixed max supply and no token-emission or seigniorage model; Paxos earns yield on the reserve assets (the float), the standard fiat-stablecoin business model. At ~$32M market cap, USDP is a small-cap stablecoin, well below its multi-billion-dollar peak as PAX in 2021. Supply has structurally declined as institutional demand migrated to [[usdc|USDC]], [[usdt|USDT]], and Paxos's own [[paypal-usd|PYUSD]] / [[usdg|Global Dollar]] products.
 
 ---
 
@@ -83,13 +83,13 @@ USDP and GUSD are the two original NYDFS-regulated dollar stablecoins. USDP's di
 
 ## How & Where It Trades / Is Used
 
-USDP has historically been listed on major exchanges (Binance, KuCoin, Gate.io and others) as a regulated alternative to [[tether|USDT]], and trades in [[ethereum|Ethereum]] DEX pools (e.g. Uniswap USDP/[[usdc|USDC]] and USDP/[[tether|USDT]]). It is also bridged to Solana. Composability is standard ERC-20: it can be supplied to lending markets and stable pools, though its small float means depth is thin. With a ~$32M market cap it is a small-cap stablecoin; liquidity is real but far below [[usdc|USDC]] and [[tether|USDT]]. Primary use cases are regulated dollar settlement and as a stablecoin pair on venues that prefer NYDFS-overseen assets.
+USDP has historically been listed on major exchanges (Binance, KuCoin, Gate.io and others) as a regulated alternative to [[usdt|USDT]], and trades in [[ethereum|Ethereum]] DEX pools (e.g. Uniswap USDP/[[usdc|USDC]] and USDP/[[usdt|USDT]]). It is also bridged to Solana. Composability is standard ERC-20: it can be supplied to lending markets and stable pools, though its small float means depth is thin. With a ~$32M market cap it is a small-cap stablecoin; liquidity is real but far below [[usdc|USDC]] and [[usdt|USDT]]. Primary use cases are regulated dollar settlement and as a stablecoin pair on venues that prefer NYDFS-overseen assets.
 
 ---
 
 ## Narrative, Category & Catalysts
 
-USDP sits in the **regulated fiat-backed dollar stablecoin** category. Its forward catalysts are primarily regulatory: U.S. federal stablecoin legislation (which would advantage trust-chartered, fully-reserved issuers like Paxos), the growth of Paxos's broader stablecoin franchise ([[paypal-usd|PYUSD]], the Global Dollar Network / [[usdg|USDG]]), and institutional/payments adoption of regulated on-chain dollars. The counter-narrative is consolidation: capital concentrates in [[usdc|USDC]] and [[tether|USDT]], and Paxos's own newer products may cannibalize standalone USDP demand. In the current **Extreme Fear / bottoming-accumulation** macro regime (Fear & Greed 21), aggregate stablecoin supply is the key proxy for capital entering or leaving crypto; small regulated coins like USDP are a minor share of that flow.
+USDP sits in the **regulated fiat-backed dollar stablecoin** category. Its forward catalysts are primarily regulatory: U.S. federal stablecoin legislation (which would advantage trust-chartered, fully-reserved issuers like Paxos), the growth of Paxos's broader stablecoin franchise ([[paypal-usd|PYUSD]], the Global Dollar Network / [[usdg|USDG]]), and institutional/payments adoption of regulated on-chain dollars. The counter-narrative is consolidation: capital concentrates in [[usdc|USDC]] and [[usdt|USDT]], and Paxos's own newer products may cannibalize standalone USDP demand. In the current **Extreme Fear / bottoming-accumulation** macro regime (Fear & Greed 21), aggregate stablecoin supply is the key proxy for capital entering or leaving crypto; small regulated coins like USDP are a minor share of that flow.
 
 ---
 
@@ -119,7 +119,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 ## Trading Playbook
 
 - **As a parking asset** — A regulated, fully-reserved dollar suitable for risk-off positioning; in the current bottoming regime, treat stablecoin balances as dry powder.
-- **Mind the float** — At ~$32M, USDP is far thinner than [[usdc|USDC]]/[[tether|USDT]]; size on-chain trades to pool depth to avoid slippage.
+- **Mind the float** — At ~$32M, USDP is far thinner than [[usdc|USDC]]/[[usdt|USDT]]; size on-chain trades to pool depth to avoid slippage.
 - **Peg reads** — Treat $0.997–$1.001 as normal; only a sustained, widening discount with redemption friction signals a genuine [[depeg]].
 - **Regulatory headline sensitivity** — Watch NYDFS / U.S. federal stablecoin news, which moves regulated issuers like Paxos more than offshore peers.
 
@@ -133,7 +133,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 - [[gemini-dollar]]
 - [[paypal-usd]]
 - [[usdc]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[depeg]]
 - [[collateralization]]
 - [[ethereum]]
@@ -151,12 +151,12 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 
 ### Venues & liquidity
 
-USDP is a USD-pegged [[stablecoins]] traded on [[binance]] and other centralized venues, and it is a **PEG / cash-management instrument, NOT a directional asset** — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because it is fully fiat-reserved and pegged 1:1, there is no directional thesis and no meaningful use for leverage; it functions as quote-side or parking liquidity rather than a position to be long or short. With a small float, secondary-market depth is thin relative to [[usdc|USDC]] and [[tether|USDT]], so venue availability directly shapes execution: on Binance and deep CEX order books, tight spreads permit larger arbitrage clips at par, while on-chain pools and minor venues force smaller sizing to avoid slippage. Primary-market mint/redeem is gated to onboarded institutions, so retail execution and sizing are constrained to whatever secondary liquidity a given venue offers.
+USDP is a USD-pegged [[stablecoins]] traded on [[binance]] and other centralized venues, and it is a **PEG / cash-management instrument, NOT a directional asset** — the profile is about peg stability, backing/reserves, depeg risk, and yield/arbitrage, not momentum. Because it is fully fiat-reserved and pegged 1:1, there is no directional thesis and no meaningful use for leverage; it functions as quote-side or parking liquidity rather than a position to be long or short. With a small float, secondary-market depth is thin relative to [[usdc|USDC]] and [[usdt|USDT]], so venue availability directly shapes execution: on Binance and deep CEX order books, tight spreads permit larger arbitrage clips at par, while on-chain pools and minor venues force smaller sizing to avoid slippage. Primary-market mint/redeem is gated to onboarded institutions, so retail execution and sizing are constrained to whatever secondary liquidity a given venue offers.
 
 ### Applicable strategies
 
 - [[stablecoin-depeg-profit-capture]] — Buy USDP below par during a depeg episode when the trust-charter backing and institutional redemption support a snap-back to $1.
-- [[stablecoin-pair-arbitrage]] — Arb USDP against [[usdc|USDC]]/[[tether|USDT]] across CEX pairs and DEX pools, capturing spreads between regulated dollar tokens.
+- [[stablecoin-pair-arbitrage]] — Arb USDP against [[usdc|USDC]]/[[usdt|USDT]] across CEX pairs and DEX pools, capturing spreads between regulated dollar tokens.
 - [[mint-parity-arbitrage]] — For onboarded institutions, mint/redeem USDP at par with Paxos to close any secondary-market deviation against $1.
 - [[stablecoin-yield]] — Deploy idle USDP into lending markets and stable pools to earn yield on a fully-reserved, NYDFS-regulated dollar.
 - [[carry-trade]] — Hold USDP as the funding/parking leg while harvesting yield differentials, given its conservative fiat-reserve backing.

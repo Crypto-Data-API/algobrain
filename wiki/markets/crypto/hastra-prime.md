@@ -9,7 +9,7 @@ aliases: ["Hastra", "Hastra PRIME", "PRIME"]
 entity_type: protocol
 headquarters: "Decentralized"
 website: "https://hastra.io/"
-related: ["[[chainlink]]", "[[crypto-markets]]", "[[figure-heloc]]", "[[kamino]]", "[[private-credit]]", "[[real-world-assets]]", "[[rwa]]", "[[solana]]", "[[stablecoin-yields]]"]
+related: ["[[chainlink]]", "[[crypto-markets]]", "[[figure-heloc]]", "[[kamino]]", "[[private-credit]]", "[[real-world-assets]]", "[[solana]]", "[[stablecoin-yields]]"]
 ---
 
 # PRIME (Hastra)
@@ -183,7 +183,7 @@ On-chain only as of the April 2026 snapshot: Solana DEX routing (Raydium/Jupiter
 
 - [[figure-heloc]] — the underlying lending machine
 - [[solana]], [[kamino]], [[raydium]], [[jupiter-exchange-solana]]
-- [[real-world-assets]], [[rwa]], [[private-credit]], [[stablecoin-yields]], [[chainlink]]
+- [[real-world-assets]], [[private-credit]], [[stablecoin-yields]], [[chainlink]]
 - [[janus-henderson-anemoy-aaa-clo-fund]] — peer RWA yield token
 - [[crypto-markets]], [[defi]]
 

@@ -10,14 +10,14 @@ entity_type: protocol
 founded: 2025
 headquarters: "Decentralized (Stable Foundation; Bitfinex/Tether-backed)"
 website: "https://www.stable.xyz/"
-related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[tether]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[crowded-long-funding-fade]]"]
+related: ["[[crypto-markets]]", "[[hyperliquid]]", "[[stablecoins]]", "[[tether-limited|Tether]]", "[[perpetual-futures]]", "[[funding-rate]]", "[[token-unlock-supply-event]]", "[[crowded-long-funding-fade]]"]
 ---
 
 # Stable
 
-**Stable** (STABLE) is a Bitfinex-backed, EVM-compatible Layer 1 ("StableChain") purpose-built for stablecoin payments, using [[tether|Tether]]'s USDT as the native gas token; its mainnet and STABLE governance token launched on **2025-12-08**. For traders, STABLE is the flagship listed expression of the **stablecoin-infrastructure narrative** — effectively a quasi-Tether-ecosystem equity proxy — and one of the few late-2025 launches that immediately received broad CEX listings plus a [[hyperliquid|Hyperliquid]] perp.
+**Stable** (STABLE) is a Bitfinex-backed, EVM-compatible Layer 1 ("StableChain") purpose-built for stablecoin payments, using [[tether-limited|Tether]]'s USDT as the native gas token; its mainnet and STABLE governance token launched on **2025-12-08**. For traders, STABLE is the flagship listed expression of the **stablecoin-infrastructure narrative** — effectively a quasi-Tether-ecosystem equity proxy — and one of the few late-2025 launches that immediately received broad CEX listings plus a [[hyperliquid|Hyperliquid]] perp.
 
-> **Important distinction:** STABLE is *not itself a stablecoin*. It is the **governance and staking token of a stablecoin-optimized blockchain**. The dollar that moves on StableChain is [[tether|USDT]], which also pays gas. STABLE captures network-governance value, not a dollar peg — so it trades as a volatile altcoin (boom/retrace history below), not a ~$1 asset. Do not confuse it with the various "USD"-suffixed tokens in this peer set.
+> **Important distinction:** STABLE is *not itself a stablecoin*. It is the **governance and staking token of a stablecoin-optimized blockchain**. The dollar that moves on StableChain is [[usdt|USDT]], which also pays gas. STABLE captures network-governance value, not a dollar peg — so it trades as a volatile altcoin (boom/retrace history below), not a ~$1 asset. Do not confuse it with the various "USD"-suffixed tokens in this peer set.
 
 ---
 
@@ -45,7 +45,7 @@ Stable is the first Layer 1 blockchain purpose-built for the USDT ecosystem, lev
 
 StableChain is a **stablecoin-native settlement layer** rather than a general-purpose smart-contract platform retrofitted for payments. The design choices all serve one goal: make moving a dollar (USDT) feel like sending an email.
 
-- **USDT as native gas.** On most EVM chains, a user holding only a stablecoin still needs the chain's volatile native coin (ETH, BNB, etc.) to pay gas. StableChain removes that friction by making **[[tether|USDT]] the gas token itself** — fees are quoted and paid in dollars, so balances are predictable and a user never has to acquire a separate "gas coin." For simple USDT-to-USDT transfers the chain targets **gasless / near-zero-fee** transactions, subsidized at the protocol/foundation level.
+- **USDT as native gas.** On most EVM chains, a user holding only a stablecoin still needs the chain's volatile native coin (ETH, BNB, etc.) to pay gas. StableChain removes that friction by making **[[usdt|USDT]] the gas token itself** — fees are quoted and paid in dollars, so balances are predictable and a user never has to acquire a separate "gas coin." For simple USDT-to-USDT transfers the chain targets **gasless / near-zero-fee** transactions, subsidized at the protocol/foundation level.
 - **STABLE's role is governance and security, not gas.** The STABLE token secures the network via **staking/validation** and confers governance over protocol parameters. This is the crux of the value-capture question (see Risks): the token does **not** directly collect the transaction-fee stream, because that stream is denominated in USDT and largely minimized by design.
 - **EVM compatibility.** StableChain is EVM-compatible, so existing Solidity contracts, wallets, and tooling port over with minimal changes — important for bootstrapping DeFi, RWA, and payment-processor integrations quickly.
 - **Compliance-oriented rails.** Positioning emphasizes enterprise/fintech use (payment processors, neobanks, custody), implying screening/compliance hooks aimed at institutional settlement rather than purely permissionless DeFi.
@@ -57,7 +57,7 @@ STABLE is best understood against the small cohort of **purpose-built stablecoin
 
 | Chain (token) | Backer / orbit | Gas model | Niche | Differentiator |
 |---|---|---|---|---|
-| **Stable (STABLE)** | Bitfinex / [[tether|Tether]] | **USDT as gas** | USDT-native payments & settlement | Closest listed proxy to Tether ecosystem |
+| **Stable (STABLE)** | Bitfinex / [[tether-limited|Tether]] | **USDT as gas** | USDT-native payments & settlement | Closest listed proxy to Tether ecosystem |
 | **Plasma (XPL)** | Tether-aligned / Bitfinex orbit | USDT-fee-abstracted | High-throughput stablecoin payments | Earlier-mover stablecoin-chain narrative |
 | **Tempo** | Stripe / Paradigm-linked | Stablecoin-fee-abstracted | Enterprise/fintech stablecoin settlement | TradFi/payments distribution |
 | **[[tron]] (TRX)** | Justin Sun ecosystem | TRX as gas | Dominant incumbent for USDT transfers | Largest live USDT settlement volume today |
@@ -206,7 +206,7 @@ The incumbent to beat is **[[tron|Tron]]**, which already settles an enormous sh
 - **Value-capture risk (structural).** STABLE accrues **governance/staking value, not the fee stream** — gas is paid in USDT and largely minimized by design. Whether network growth translates into token value is **unproven**; this is the single biggest fundamental question for the asset.
 - **Unlock / dilution risk.** ~50% of supply is allocated to **team + investors**, with the cliff ending **December 2026**. Low float today (MC/FDV ≈ 0.22) means meaningful forward dilution and a classic unlock overhang.
 - **Competitive risk.** The stablecoin-chain niche is crowded — **Plasma (XPL)**, **Tempo (Stripe/Paradigm-linked)**, and incumbent **[[tron|Tron]]** (which already settles the bulk of real-world USDT) all contest the same flows.
-- **Tether-dependency / counterparty risk.** STABLE's thesis is tied to [[tether|Tether]]/USDT growth and reputation; adverse USDT regulatory or reserve news would hit STABLE directly.
+- **Tether-dependency / counterparty risk.** STABLE's thesis is tied to [[tether-limited|Tether]]/USDT growth and reputation; adverse USDT regulatory or reserve news would hit STABLE directly.
 - **Liquidity / volatility risk.** Thin 24h volume (~$14M at snapshot) and high beta to a fearful macro tape (Fear & Greed 21) make it prone to sharp drawdowns.
 - **Regulatory risk.** Stablecoin-payment infrastructure is squarely in the path of evolving stablecoin and money-transmission regulation globally.
 
@@ -215,7 +215,7 @@ The incumbent to beat is **[[tron|Tron]]**, which already settles an enormous sh
 ## Related
 
 - [[crypto-markets]]
-- [[tether]] — issuer of USDT, the chain's gas token
+- [[tether-limited|Tether]] — issuer of USDT, the chain's gas token
 - [[stablecoins]], [[stablecoin-supply]]
 - [[hyperliquid]] — STABLE-PERP venue
 - [[gho|GHO]], [[usual-usd|Usual USD]] — other stablecoin-ecosystem assets
@@ -275,7 +275,7 @@ STABLE is a **perp-first asset**. It trades as **STABLE-PERP on [[hyperliquid|Hy
 
 ### Volatility & regime character
 
-STABLE is a **high-beta, low-float L1 governance token** (stablecoin-infrastructure narrative), explicitly **not a stablecoin/peg asset** — it trades like a speculative altcoin, not a ~$1 instrument. Realized volatility is very high: ~4x from ATL ($0.0092) to ATH ($0.0389) in roughly nine weeks, then a retrace to the mid-$0.02s. As a speculative alt it is **high-beta to BTC/ETH risk-on/risk-off**, bleeding hardest in fear regimes and ripping hardest on relief. Its idiosyncratic driver is the **stablecoin-infrastructure / payments-chain narrative** (peers: Plasma/XPL, Tempo) and any [[tether|Tether]]/USDT news.
+STABLE is a **high-beta, low-float L1 governance token** (stablecoin-infrastructure narrative), explicitly **not a stablecoin/peg asset** — it trades like a speculative altcoin, not a ~$1 instrument. Realized volatility is very high: ~4x from ATL ($0.0092) to ATH ($0.0389) in roughly nine weeks, then a retrace to the mid-$0.02s. As a speculative alt it is **high-beta to BTC/ETH risk-on/risk-off**, bleeding hardest in fear regimes and ripping hardest on relief. Its idiosyncratic driver is the **stablecoin-infrastructure / payments-chain narrative** (peers: Plasma/XPL, Tempo) and any [[tether-limited|Tether]]/USDT news.
 
 ### Risk flags
 

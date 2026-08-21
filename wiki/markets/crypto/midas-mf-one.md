@@ -129,7 +129,7 @@ mF-ONE sits in the **tokenized private credit** segment of the RWA narrative, wi
 
 ## See Also
 
-- [[real-world-assets]] / [[rwa]]
+- [[real-world-assets]]
 - [[morpho]] — DeFi lending market where mF-ONE is composable
 - [[apollo-diversified-credit-securitize-fund]], [[securitize-tokenized-aaa-clo-fund]] — peer tokenized-credit products
 - [[tokenized-treasuries]] — contrast: cash-equivalent vs. private-credit RWA

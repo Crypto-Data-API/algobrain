@@ -42,7 +42,7 @@ GHO holds its **soft peg** tightly at ~$0.998 (within ~0.15% of $1), consistent 
 
 ## Technology / Protocol
 
-GHO is the native stablecoin of the [[aave|Aave Protocol]]. Unlike fiat-backed stablecoins ([[tether|USDT]], USDC), GHO is **created when users borrow it against overcollateralized positions on Aave**, and all interest paid on GHO debt accrues to the Aave DAO rather than to suppliers.
+GHO is the native stablecoin of the [[aave|Aave Protocol]]. Unlike fiat-backed stablecoins ([[usdt|USDT]], USDC), GHO is **created when users borrow it against overcollateralized positions on Aave**, and all interest paid on GHO debt accrues to the Aave DAO rather than to suppliers.
 
 - **Facilitators** — governance-whitelisted contracts (e.g., the Aave V3 Ethereum market, the Flash Minter) that can each mint up to a **bucket cap**, giving the DAO direct, granular control over supply growth.
 - **Governance-set borrow rate** — the GHO borrow APR is a *policy lever* set by Aave governance, not a market-cleared rate. This lets the DAO steer GHO supply and peg.
@@ -115,7 +115,7 @@ Supply is **demand-elastic, not pre-minted** — every GHO is matched by Aave de
 
 ## Narrative & Category
 
-GHO is a **DeFi-native, decentralized, overcollateralized stablecoin** — the same category as Sky's [[usds|USDS]]/[[dai|DAI]] and Usual's [[usual-usd|USD0]], and a contrast to fiat-backed [[tether|USDT]]/USDC and the political/fiat-backed [[usd1-wlfi|USD1]]. Its strategic role is to (1) capture interest revenue for the Aave DAO that previously leaked to external stablecoin issuers, and (2) give Aave a controllable monetary lever. The narrative is "Aave's own dollar," and its health is read as a proxy for Aave-ecosystem strength.
+GHO is a **DeFi-native, decentralized, overcollateralized stablecoin** — the same category as Sky's [[usds|USDS]]/[[dai|DAI]] and Usual's [[usual-usd|USD0]], and a contrast to fiat-backed [[usdt|USDT]]/USDC and the political/fiat-backed [[usd1-wlfi|USD1]]. Its strategic role is to (1) capture interest revenue for the Aave DAO that previously leaked to external stablecoin issuers, and (2) give Aave a controllable monetary lever. The narrative is "Aave's own dollar," and its health is read as a proxy for Aave-ecosystem strength.
 
 ---
 
@@ -185,7 +185,7 @@ As a peg asset, GHO itself is not "valued" — the relevant valuation lens is on
 - [[stablecoin-depegs]], [[stablecoin-depeg-history]]
 - [[usds]], [[dai]] — Sky's decentralized stablecoins
 - [[usual-usd|Usual USD (USD0)]] — competing DeFi-native stablecoin
-- [[tether]] — fiat-backed contrast
+- [[usdt|Tether]] — fiat-backed contrast
 
 ---
 

@@ -9,7 +9,7 @@ aliases: ["GUSD", "Gemini USD"]
 entity_type: protocol
 headquarters: "New York, USA"
 website: "https://gemini.com/dollar/"
-related: ["[[crypto-markets]]", "[[ethereum]]", "[[gemini]]", "[[paxos-standard]]", "[[paypal-usd]]", "[[stablecoins]]", "[[tether]]", "[[usdc]]"]
+related: ["[[crypto-markets]]", "[[ethereum]]", "[[gemini]]", "[[paxos-standard]]", "[[paypal-usd]]", "[[stablecoins]]", "[[usdt|Tether]]", "[[usdc]]"]
 ---
 
 # Gemini Dollar
@@ -49,7 +49,7 @@ GUSD is a **fiat-reserve (custodial) stablecoin**: each token is intended to be 
 Reserves backing circulating GUSD are held in **U.S. dollar deposits at a U.S. bank** (historically supplemented by money-market funds / short-dated instruments), structured under New York trust law so that they back tokens 1:1 rather than being lent out. Gemini has historically published **monthly attestation reports** from an independent accounting firm confirming that the dollar value of reserves equals or exceeds GUSD outstanding. The GUSD ERC-20 contract was **audited by Trail of Bits** at launch and uses an upgradeable, custodian-controlled design that allows the issuer to pause or upgrade the token — a feature that aids compliance but adds issuer trust assumptions.
 
 ### Regulatory wrapper
-Gemini operates as a **New York limited-purpose trust company under NYDFS supervision**, the same regulatory category as [[paxos-standard|Paxos]]. NYDFS approval covers the issuance framework, reserve requirements, and custody — but it is a state trust charter, not a federal bank charter. This regulatory posture historically distinguished GUSD (and [[paxos-standard|USDP]]) from offshore, less-transparent issuers such as [[tether|Tether (USDT)]].
+Gemini operates as a **New York limited-purpose trust company under NYDFS supervision**, the same regulatory category as [[paxos-standard|Paxos]]. NYDFS approval covers the issuance framework, reserve requirements, and custody — but it is a state trust charter, not a federal bank charter. This regulatory posture historically distinguished GUSD (and [[paxos-standard|USDP]]) from offshore, less-transparent issuers such as [[usdt|Tether (USDT)]].
 
 ### Peg-maintenance / mint-redeem
 The peg is maintained through a **mint/redeem arbitrage loop** anchored at par:
@@ -63,7 +63,7 @@ Because users can create or destroy GUSD at par, secondary-market deviations cre
 
 ## Tokenomics & Supply
 
-GUSD supply is **fully reserve-backed and elastic**, expanding and contracting with net dollar deposits and redemptions. There is no fixed max supply, no emissions, and no seigniorage; the issuer earns yield on the reserve float, the standard fiat-stablecoin business model. At ~$39M market cap, GUSD is a small-cap stablecoin, well below its earlier scale. Supply has structurally declined as institutional and retail dollar demand consolidated into [[usdc|USDC]] and [[tether|USDT]].
+GUSD supply is **fully reserve-backed and elastic**, expanding and contracting with net dollar deposits and redemptions. There is no fixed max supply, no emissions, and no seigniorage; the issuer earns yield on the reserve float, the standard fiat-stablecoin business model. At ~$39M market cap, GUSD is a small-cap stablecoin, well below its earlier scale. Supply has structurally declined as institutional and retail dollar demand consolidated into [[usdc|USDC]] and [[usdt|USDT]].
 
 ---
 
@@ -83,13 +83,13 @@ GUSD and USDP are the two original NYDFS-regulated dollar stablecoins (both appr
 
 ## How & Where It Trades / Is Used
 
-GUSD historically traded on the [[gemini|Gemini]] exchange and several centralized venues, with on-chain liquidity concentrated in [[ethereum|Ethereum]] DEX pools (e.g. Uniswap V3 GUSD/[[usdc|USDC]]). As a standard ERC-20 it can be supplied to lending markets and stable pools, but its ~$39M cap and modest daily volume make it a small-cap stablecoin relative to [[usdc|USDC]] and [[tether|USDT]]; thinner liquidity can amplify intraday ticks away from $1.00. Primary use cases are settlement on/around the Gemini ecosystem and as a regulated dollar pair.
+GUSD historically traded on the [[gemini|Gemini]] exchange and several centralized venues, with on-chain liquidity concentrated in [[ethereum|Ethereum]] DEX pools (e.g. Uniswap V3 GUSD/[[usdc|USDC]]). As a standard ERC-20 it can be supplied to lending markets and stable pools, but its ~$39M cap and modest daily volume make it a small-cap stablecoin relative to [[usdc|USDC]] and [[usdt|USDT]]; thinner liquidity can amplify intraday ticks away from $1.00. Primary use cases are settlement on/around the Gemini ecosystem and as a regulated dollar pair.
 
 ---
 
 ## Narrative, Category & Catalysts
 
-GUSD sits in the **regulated fiat-backed dollar stablecoin** category. Catalysts are largely regulatory and franchise-driven: U.S. federal stablecoin legislation would advantage trust-chartered issuers; growth in Gemini's regulated dollar rails and any payments/institutional adoption would lift demand. The dominant counter-trend is consolidation into [[usdc|USDC]] and [[tether|USDT]] plus newer entrants like [[paypal-usd|PYUSD]]. In the current **Extreme Fear / bottoming-accumulation** regime (Fear & Greed 21), aggregate stablecoin supply proxies capital entering or leaving crypto; small regulated coins like GUSD are a minor share of that flow.
+GUSD sits in the **regulated fiat-backed dollar stablecoin** category. Catalysts are largely regulatory and franchise-driven: U.S. federal stablecoin legislation would advantage trust-chartered issuers; growth in Gemini's regulated dollar rails and any payments/institutional adoption would lift demand. The dominant counter-trend is consolidation into [[usdc|USDC]] and [[usdt|USDT]] plus newer entrants like [[paypal-usd|PYUSD]]. In the current **Extreme Fear / bottoming-accumulation** regime (Fear & Greed 21), aggregate stablecoin supply proxies capital entering or leaving crypto; small regulated coins like GUSD are a minor share of that flow.
 
 ---
 
@@ -130,7 +130,7 @@ See [[stablecoins]] and [[depeg]] for the general failure-mode taxonomy.
 - [[stablecoins]]
 - [[gemini]]
 - [[usdc]]
-- [[tether]]
+- [[usdt|Tether]]
 - [[paxos-standard]]
 - [[paypal-usd]]
 - [[depeg]]

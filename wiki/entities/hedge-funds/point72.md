@@ -10,7 +10,7 @@ founded: 2014
 headquarters: "Stamford, Connecticut, USA"
 website: "https://www.point72.com"
 aliases: ["Point72 Asset Management", "Point72, L.P.", "SAC Capital (predecessor)"]
-related: ["[[steve-cohen]]", "[[millennium-management]]", "[[citadel]]", "[[pod-shop]]", "[[multi-strategy-funds]]", "[[sac-capital]]", "[[insider-trading]]", "[[ai-bubble]]", "[[nvidia]]", "[[risk-management]]", "[[hedge-funds-overview]]"]
+related: ["[[steve-cohen]]", "[[millennium-management]]", "[[citadel]]", "[[pod-shop]]", "[[multi-strategy-funds]]", "[[sac-capital]]", "[[insider-trading]]", "[[ai-bubble]]", "[[nvidia-ai|Nvidia]]", "[[risk-management]]", "[[hedge-funds-overview]]"]
 ---
 
 Point72 Asset Management is **Steve Cohen**'s Stamford, Connecticut multi-strategy hedge fund, successor to SAC Capital. With roughly **$41.5 billion in AUM (year-end 2025)** across long/short equity pods, the Cubist quant unit, macro, and venture arms, it is one of the "big three" [[pod-shop|pod shops]] alongside [[citadel|Citadel]] and [[millennium-management|Millennium]] — and since 2024 it has been the most aggressive of the three in dedicated AI investing via its **Turion** fund.
@@ -21,7 +21,7 @@ Point72 Asset Management is **Steve Cohen**'s Stamford, Connecticut multi-strate
 - **Scale**: AUM grew from $33.2 billion (March 2024) to about $42 billion in November 2025; management deliberately capped the firm near **$41.5 billion** at year-end 2025 by returning $3-5 billion of profits to investors — explicit capacity discipline.
 - **Performance**: **+19% in 2024** (after returning capital) and approximately **+17.5% in 2025**, outpacing Citadel (~10.2%) and Millennium (~10.5%) in 2025.
 - **Cohen steps back**: On **September 17, 2024**, Point72 announced Cohen had stopped trading his own book — ending one of the most-watched personal track records in the industry — to focus on running the firm, strategic initiatives, and mentoring. He remains co-CIO with **Harry Schwefel**. Cohen also owns the New York Mets (purchased 2020, ~$2.4 billion).
-- **Turion AI fund**: Launched October 2024 under PM **Eric Sanchez** with ~$150 million of Cohen's personal capital; an AI-focused long-biased equity vehicle that returned **14.2% in Q4 2024** and about **30% through November 2025**, growing to roughly **$3 billion** AUM. Turion is a defining institutional trade of the AI infrastructure boom (long [[nvidia]] / AI hardware complex with hedging flexibility).
+- **Turion AI fund**: Launched October 2024 under PM **Eric Sanchez** with ~$150 million of Cohen's personal capital; an AI-focused long-biased equity vehicle that returned **14.2% in Q4 2024** and about **30% through November 2025**, growing to roughly **$3 billion** AUM. Turion is a defining institutional trade of the AI infrastructure boom (long [[nvidia-ai|Nvidia]] / AI hardware complex with hedging flexibility).
 - **2026 direction**: reported plans to expand new credit strategies and deepen AI integration across the platform, alongside the firm's Hyperscale unit (AI tooling for portfolio companies) and Point72 Ventures.
 
 ## Trading Relevance
@@ -46,7 +46,7 @@ Point72 Asset Management is **Steve Cohen**'s Stamford, Connecticut multi-strate
 - [[pod-shop]] / [[multi-strategy-funds]] — the model
 - [[insider-trading]] — the SAC chapter
 - [[ai-bubble]] — the macro trade Turion expresses
-- [[nvidia]] — core AI infrastructure name
+- [[nvidia-ai|Nvidia]] — core AI infrastructure name
 - [[risk-management]] — pod drawdown discipline
 - [[hedge-funds-overview]]
 

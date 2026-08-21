@@ -110,7 +110,7 @@ Status's structural edge is that it bundles **private messaging + non-custodial 
 | **24h Change** | +1.76% |
 | **7d Change** | -1.88% |
 
-> Like most 2017-era infrastructure tokens, SNT sits far below its bull-market peak, reflecting both the broad market cycle and the difficulty of monetizing a free, open-source mobile client. The current **Extreme Fear** market backdrop (Fear & Greed Index 22 on 2026-06-21, [[btc-bitcoin|BTC]] ~$64,180) weighs on small-cap altcoin liquidity.
+> Like most 2017-era infrastructure tokens, SNT sits far below its bull-market peak, reflecting both the broad market cycle and the difficulty of monetizing a free, open-source mobile client. The current **Extreme Fear** market backdrop (Fear & Greed Index 22 on 2026-06-21, [[bitcoin|BTC]] ~$64,180) weighs on small-cap altcoin liquidity.
 
 ---
 
@@ -237,7 +237,7 @@ Status's structural edge is that it bundles **private messaging + non-custodial 
 
 ## Trading Playbook (bear / Extreme-Fear regime)
 
-> Context: F&G = 21 (Extreme Fear), established bear market, [[btc-bitcoin|BTC]] ~$64k. SNT is a thin ERC-20 small-cap with weak token demand sinks.
+> Context: F&G = 21 (Extreme Fear), established bear market, [[bitcoin|BTC]] ~$64k. SNT is a thin ERC-20 small-cap with weak token demand sinks.
 
 - **Bias:** capital-preservation. SNT is a "good tech, weak token" infrastructure play with no proven demand sink large enough to anchor value; its bull case hinges on speculative L2 adoption.
 - **Longs:** treat as a small asymmetric bet on the Status Network L2 actually creating SNT demand — size for total loss. Prefer accumulation near historical support rather than chasing Upbit-driven spikes.

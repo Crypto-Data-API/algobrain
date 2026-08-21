@@ -12,7 +12,7 @@ prerequisites: ["[[correlation]]", "[[options-greeks]]"]
 difficulty: advanced
 ---
 
-Concentration risk in an options portfolio is the gap between *apparent* diversification (many tickers, many expiries, many strikes) and *actual* diversification (independent sources of P&L). A book of eight short strangles across [[nvidia|NVDA]], AVGO, AMD, TSM, MU, ASML, ARM, and MRVL looks like eight positions; in a vol shock or AI sector unwind it acts like one position with eight times the size. Ticker-level diversification deceives because it ignores [[correlation]], factor exposure, sector clustering, and the dominant truth that nearly every short premium book is just a single bet on vol staying contained. Recognizing and measuring these stacked exposures is what separates a [[options-portfolio-construction|professionally constructed book]] from a collection of trades.
+Concentration risk in an options portfolio is the gap between *apparent* diversification (many tickers, many expiries, many strikes) and *actual* diversification (independent sources of P&L). A book of eight short strangles across [[nvidia-ai|NVDA]], AVGO, AMD, TSM, MU, ASML, ARM, and MRVL looks like eight positions; in a vol shock or AI sector unwind it acts like one position with eight times the size. Ticker-level diversification deceives because it ignores [[correlation]], factor exposure, sector clustering, and the dominant truth that nearly every short premium book is just a single bet on vol staying contained. Recognizing and measuring these stacked exposures is what separates a [[options-portfolio-construction|professionally constructed book]] from a collection of trades.
 
 ## The Diversification Illusion
 
@@ -34,7 +34,7 @@ Consider a book of short strangles, sized "small" at $500 max risk per name:
 
 The trader sized each position at $500 risk. The book's *apparent* risk: $4,000 (8 × $500). The book's *actual* risk:
 
-- A single bad print from one of the leading names ([[nvidia|NVDA]], AVGO) drags every other name with it via [[correlation]] cascade — historically observed pairwise daily correlations within US semis run 0.6-0.8 in calm tape and spike to 0.9+ on stress days
+- A single bad print from one of the leading names ([[nvidia-ai|NVDA]], AVGO) drags every other name with it via [[correlation]] cascade — historically observed pairwise daily correlations within US semis run 0.6-0.8 in calm tape and spike to 0.9+ on stress days
 - All 8 are short [[vega]]; an [[implied-volatility]] regime shift adds losses across every position simultaneously
 - All 8 have above-1 beta; a 5% SPX drawdown produces an 8-9% sector drawdown, and short strangles with 16-delta strikes will be tested on roughly all of them at once
 - Six of the eight earnings dates fall within a 60-day window — the book has a concentrated earnings cluster

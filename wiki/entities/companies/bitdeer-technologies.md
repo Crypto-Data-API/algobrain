@@ -127,7 +127,7 @@ Bitdeer carries a meaningful cash and digital-asset balance, but ASIC manufactur
 - [[riot-platforms]]
 - [[cleanspark]]
 - [[cipher-mining]]
-- [[nvidia]]
+- [[nvidia-ai|Nvidia]]
 
 ## Sources
 
