@@ -4,6 +4,33 @@ All notable changes to **AlgoBrain** are recorded here, newest first. This track
 project/tooling/data changes; `wiki/log.md` remains the fine-grained record of
 individual wiki page operations.
 
+## 2026-08-24 — Sync the wiki to the data layer's API changelog (first Sync iteration)
+
+**Fixed:** Every row of the documented plans/rate-limits table was wrong — the free tier
+is 1,000 requests/day and 10/min (documented as 50/day and 5/min), and the top tier is
+50,000/day and 120/min (documented as "Unlimited" and 60/min). Corrected the spot-ETF
+endpoints (flows cover BTC/ETH/SOL only, XRP now returns 400; the BTC AUM route is a
+reconstructed estimate with `_from_flows` field names, not a bare total), added the
+venue-coverage caveat to the by-exchange liquidations route, and documented a breaking
+June change to the dealer-gamma endpoint whose single-symbol query now returns the bulk
+envelope narrowed to one coin. Also corrected a pre-existing error where the backtesting
+snapshots data route and its type-discovery route were documented backwards, alongside a
+path that never existed.
+
+**Added:** The email-verification mechanic on the free tier (an unverified key sits on a
+smaller starter allowance; confirming unlocks the full allowance plus a 24-hour Pro
+trial), the resend-verification endpoint, and the effective-limits fields that let an
+agent read its own true quota rather than the tier headline.
+
+**Notes:** 5 of the 10 retained releases were absorbed; the other 5 introduce entirely new
+endpoint families (news, volume scanner, supply/unlocks, exchange directory) that need
+their own category pages and are queued as the next Sync batch. Separately, a
+template-aware sweep of every endpoint path cited anywhere in the wiki against the live
+OpenAPI spec found 24 distinct paths that do not exist across 166 citations — predating
+this work and queued for a dedicated batch. Also fixed the root cause of four
+consecutive iterations reporting the local MCP server unreachable: the virtualenv the
+start script requires had never been created.
+
 ## 2026-08-24 — Reconcile the upstream API changelog every improvement-loop iteration
 
 **Added:** `tools/check_api_changelog.py`, a watcher for the data layer's public, key-free

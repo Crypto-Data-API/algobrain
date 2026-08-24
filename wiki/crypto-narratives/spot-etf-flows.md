@@ -2,7 +2,7 @@
 title: "Spot ETF Launches & Daily Flows — Narrative Impact"
 type: concept
 created: 2026-06-04
-updated: 2026-07-13
+updated: 2026-08-24
 status: good
 tags: [crypto, bitcoin, ethereum, event-driven, market-regime, liquidity, market-microstructure, behavioral-finance, narrative-impact]
 aliases: ["Bitcoin ETF Flows", "ETH ETF Flows", "IBIT Flows", "GBTC Outflows", "Spot ETF Net Flow Signal"]
@@ -117,12 +117,12 @@ Analog mechanisms (for cross-narrative tagging): `sentiment-shock`, `reflexive-d
 **Live data:**
 - `GET /api/v1/market-intelligence/liquidations` — cross-exchange liquidations (top coins)
 - `GET /api/v1/market-intelligence/options` — BTC options OI, volume, max pain
-- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF total AUM
+- `GET /api/v1/market-intelligence/etf/btc/aum` — BTC ETF AUM, a reconstructed estimate from cumulative flows (`aum_usd_from_flows`, not a bare `aum_usd`; understates true AUM by roughly GBTC's pre-conversion seed stake)
 - `GET /api/v1/market-intelligence/exchange-balance` — exchange BTC balance + flow
 - `GET /api/v1/market-intelligence/taker-buy-sell` — taker buy/sell ratio by exchange (4h window)
 
 **Historical data:**
-- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL/XRP ETF flow history
+- `GET /api/v1/market-intelligence/etf/{asset}/flows` — BTC/ETH/SOL ETF flow history. **XRP is not supported** (`400`) — no free source publishes XRP spot-ETF flow data, so a future XRP ETF launch (see "Recurrence" above) would need a different data source
 - `GET /api/v1/market-intelligence/coinbase-premium` — Coinbase premium index history
 - `GET /api/v1/market-intelligence/btc/cycle-indicators` — all 8 BTC cycle indicators, historical
 - `GET /api/v1/backtesting/liquidations` — liquidation records archive

@@ -94,7 +94,7 @@ Estimated per-feature rank-IC for durable crypto features sits in the 0.02-0.06 
 - `GET /api/v1/backtesting/klines` — OHLCV archive (returns, realized vol)
 - `GET /api/v1/backtesting/funding` — deep funding archive
 - `GET /api/v1/backtesting/daily-snapshots/{date}` — point-in-time daily snapshot (defeats survivorship bias)
-- `GET /api/v1/backtesting/snapshots/{type}` — historical snapshot by type
+- `GET /api/v1/backtesting/snapshots?data_type={type}&start=...` — historical snapshots for one data type (list types via `/api/v1/backtesting/snapshots/types`)
 
 ```bash
 curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/liquidity/oi-divergence"

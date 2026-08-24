@@ -2,7 +2,7 @@
 title: Gamma Exposure (GEX) Trading
 type: strategy
 created: 2026-04-06
-updated: 2026-07-19
+updated: 2026-08-24
 status: review
 tags: [combinations, alpha-edge, options, gamma, dealer-hedging, market-microstructure, volatility, crypto, derivatives]
 strategy_type: hybrid
@@ -162,8 +162,8 @@ Full catalog: [[cryptodataapi-market-intelligence]].
 
 An AI agent connected to the [[cryptodataapi-mcp|CryptoDataAPI MCP]] can run this strategy end-to-end:
 
-- **Signal** — `GET /api/v1/quant/gex` — native Gamma Exposure with MM inventory and liquidation profile (Pro+); the positive/negative gamma regime read
+- **Signal** — `GET /api/v1/quant/gex` — native Gamma Exposure with MM inventory and liquidation profile (**Pro**, not Pro+ — Pro keys stopped 403'ing on this endpoint 2026-07-10); the positive/negative gamma regime read. A single-symbol query (`?symbol=X`) returns the same bulk envelope as the unfiltered call (`{scope, note, timestamp, meta, coins:{...}}`), narrowed to one coin — read `coins[X]`, not a bare object (breaking change 2026-06-27). `regime.confidence` (0-1) and per-coin `distribution_context` (30d percentile ranks) are now available to weight thin-sample reads
 - **Strike context** — `GET /api/v1/market-intelligence/options` — BTC/ETH options OI, volume, and max pain for expiry and pin mapping; per-strike gamma still requires Deribit or [[greeks-live]]
 - **Cross-check** — `GET /api/v1/volatility/regime` — verify the realized-vol state (mean_reverting vs expanding) agrees with what the GEX regime implies
-- **Backtest** — no GEX history archive exists on CryptoDataAPI: validate GEX-conditional behaviour forward, or replay price action around expiries with `GET /api/v1/backtesting/klines` (1h/4h back to 2017-08) plus point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
+- **Backtest** — the backtesting archive now includes a `gamma_exposure` snapshot type (5-min cadence, Pro Plus) via `GET /api/v1/backtesting/snapshots?data_type=gamma_exposure&start=...`, archiving the `/quant/gex` MM-lens per-coin map for point-in-time replay; alternatively replay price action around expiries with `GET /api/v1/backtesting/klines` (1h/4h back to 2017-08) plus point-in-time context from `GET /api/v1/backtesting/daily-snapshots` (since 2026-03-02)
 - **Tips** — GEX flips sign fast around large expiries: re-poll `/api/v1/quant/gex` after each Deribit expiry rather than on a fixed clock

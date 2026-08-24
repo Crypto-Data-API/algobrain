@@ -19,6 +19,7 @@ CryptoDataAPI ([cryptodataapi.com](https://cryptodataapi.com), Australia) is the
 
 - **Base URL**: `https://cryptodataapi.com`
 - **Auth**: `X-API-Key` header on every request (create a key via `POST /api/v1/auth/keys`; rotate via `POST /api/v1/auth/keys/rotate`)
+- **Effective limits**: `GET /api/v1/auth/keys/me` reports the calling key's *effective* limits (not the tier headline numbers) — fields include `per_minute_limit`, `email_verified`, and `verified_daily_limit`
 - **Docs**: https://cryptodataapi.com/api/docs · OpenAPI JSON: https://cryptodataapi.com/api · changelog: https://cryptodataapi.com/changelog — same JSON as the public, key-free `GET /api/v1/changelog` (CalVer releases newest-first with a `breaking` flag; last 10 only) · status: https://cryptodataapi.com/status
 - **MCP server**: hosted at `https://cryptodataapi.com/mcp` — AI agents connect via [[cryptodataapi-mcp]] (setup, free keys, agent loop, prompt library, live dashboards, backtest data availability)
 - **Site surfaces**: live dashboards for every major data family (funding, OI, liquidations, whales, GEX, order books, regimes, market health, ETF flows, cycle indicators), a [50 meta-strategy catalog](https://cryptodataapi.com/trading-strategies), and a [14-prompt AI library](https://cryptodataapi.com/prompts) — wiki data sections deep-link the relevant views per page
@@ -31,9 +32,13 @@ curl -H "X-API-Key: $CDA_KEY" "https://cryptodataapi.com/api/v1/derivatives/fund
 
 | Tier | Requests | Burst | Unlocks |
 |------|----------|-------|---------|
-| Free | 50/day | 5/min | Core live endpoints |
+| Free | 1,000/day | 10/min | Core live endpoints |
 | Pro | 10,000/day | 30/min | Per-coin quant matrices, trader profiles, copy signals, DEX promoted feed |
-| Pro Plus | Unlimited | 60/min | Point-in-time quant history, Parquet regime archive (2020+), whale history, refresh triggers |
+| Pro Plus | 50,000/day | 120/min | Point-in-time quant history, Parquet regime archive (2020+), whale history, refresh triggers |
+
+Free was raised from 50/day + 5/min on 2026-08-20; Pro Plus burst was raised from 60/min to 120/min on 2026-08-22 — its daily cap is **50,000**, not unlimited, despite it being the top tier.
+
+**Email verification unlocks the full free allowance.** A freshly created, unverified free key sits on a smaller starter allowance below the 1,000/day headline. Confirming the key's email address unlocks the full 1,000/day free tier **and** grants 24 hours of Pro-tier access as a trial. `POST /api/v1/auth/resend-verify` re-sends the confirmation link for the calling key's own address (10-minute cooldown between sends). The daily-quota `429` response for an unverified free key over its starter cap carries `upgrade_available: "verify_email"`, `upgrade_message`, and `verified_daily_limit` so an agent can detect and act on the gate programmatically.
 
 ## Category map
 

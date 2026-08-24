@@ -39,12 +39,20 @@ A [[hidden-markov-models|Hidden Markov Model]] engine refreshed every 15 minutes
 | GET | /api/v1/quant/regimes/history | Full 6-regime Parquet download (2020-yesterday) | — | Pro Plus |
 | GET | /api/v1/quant/timeline | Daily market regime labels (2019-now) | — | Pro Plus |
 | GET | /api/v1/quant/positioning | Trader type split (MM/whale/other) | per-coin optional | Pro |
-| GET | /api/v1/quant/gex | Gamma Exposure (MM inventory + liquidation profile) | per-coin optional | Pro+ |
+| GET | /api/v1/quant/gex | Gamma Exposure (MM inventory + liquidation profile) | per-coin optional | Pro |
 | GET | /api/v1/quant/whales | >=$100k account whale activity summary | — | Pro+ |
 | GET | /api/v1/quant/whales/history | Daily whale positioning timeseries | days 7-540 | Pro Plus |
 | GET | /api/v1/quant/model | Model transparency (version, metrics, sha256) | — | — |
 | GET | /api/v1/quant/regimes | 6-regime taxonomy (id, label, stance) | — | — |
 | POST | /api/v1/quant/refresh | Force immediate inference | — | Pro Plus |
+
+`/quant/gex` and `/quant/positioning` moved to the **Pro** tier on 2026-07-10 — Pro keys had been incorrectly 403'ing on both before the fix.
+
+**`/quant/gex` breaking change (2026-06-27):** a single-symbol query (`?symbol=X`) now returns the same bulk envelope as the unfiltered call — `{scope, note, timestamp, meta, coins:{X:{...}}}` — narrowed to one coin, rather than a bare per-coin object. Any integration or example that expects `?symbol=X` to return a flat per-coin object needs updating to read `coins[X]` out of the envelope. The response also gained:
+- **`regime.confidence`** (0-1) — scales with market-maker account count and gross book depth behind the read, so thin-sample regimes can be down-weighted
+- **Capped `regime.flip_price` / `gamma_flip`** — now bounded to within +/-30% of mark and returns `null` when there is no in-band liquidation crossover, instead of the previously possible absurd out-of-range levels
+- **Per-coin `distribution_context`** — trailing-30-day percentile ranks of near-mark cluster density, `|distance to flip|`, normalized MM skew (`mm_net_delta/mm_gross`), regime score, and funding rate; history is forward-only from the change date, hourly samples
+- **`regime.inputs.realized_liq`** now populates for Hyperliquid's 1000x-multiplier meme perps (kPEPE, kBONK, etc.), which previously had no realized-liquidation input
 
 ### Volatility Regime
 

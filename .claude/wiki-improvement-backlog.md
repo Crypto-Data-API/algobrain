@@ -456,3 +456,64 @@ source of truth for what's already done), delegate, verify, log here, CHANGELOG,
   clean, contextually correct. Per the balance rule, either track is technically open
   next (last 3 will be iter6 Build, iter7 Fix, iter8 Fix -- 2 of 3 Fix -- so iter9 MUST be
   Build); [[depeg]] is the clear highest-leverage Build candidate queued above.
+- 2026-08-24 iter 9 (Sync -- first run of the new changelog-reconciliation step): the
+  loop gained a Sync track this session, and its first run found the wiki badly out of
+  date against the data layer. All 10 releases the feed retains were unprocessed (the
+  watcher was seeded empty rather than baselined, deliberately, so nothing was skipped).
+  MCP server tools unreachable again (4th iteration running) -- root cause finally found
+  and fixed: `.venv` did not exist, so `tools/start_servers.ps1` had been failing its
+  interpreter check every time. Created the venv, installed `tools/requirements.txt`, and
+  started the server (it cannot register into an already-running session, so this
+  iteration still used the Grep/OpenAPI fallback; future sessions get the real tools).
+  **Triage:** split the 10 releases on a clean boundary -- "correct what the wiki already
+  documents" (processed) vs "document what is new" (deferred). Processed 5 as material:
+  2026-08-22 (breaking), 2026-08-20, 2026-07-10, 2026-07-06, 2026-06-27 (breaking).
+  Deferred 5, all of which need entirely NEW `cryptodataapi-*` category pages and are a
+  natural iter-10 batch: 2026-08-23 (`/exchanges` venue directory, public), 2026-08-21
+  (news policy-catalyst categories + `/market-intelligence/squeeze-alerts`), 2026-08-19
+  (`/supply/float`, `/supply/unlocks`), 2026-08-18 (the whole `/news/*` family -- pulse,
+  market-moving, coin/{symbol}, sources, plus `/backtesting/news-events`), 2026-08-17
+  (`/volume/scanner`). **Verified before delegating**, not after: pulled the live
+  OpenAPI spec (204 paths) and confirmed every path in the brief; independently confirmed
+  all three rate-limit rows from the changelog's own burst-ratio arithmetic
+  (per_day/1440 vs per_minute gives Free 14x, Pro 4.3x, Pro Plus 1.7x pre-change ->
+  Free 1,000/day+10/min, Pro 10,000/day+30/min, Pro Plus 50,000/day+120/min). Every row
+  of the wiki's tier table was wrong, including "Unlimited" for a tier that caps at
+  50,000/day. **Changed (8 files):** cryptodataapi.md (tier table + email-verification
+  mechanic + `/auth/resend-verify` + effective-limits bullet), cryptodataapi-market-
+  intelligence.md (ETF flows btc/eth/sol only -- XRP now 400 not 503; `/etf/btc/aum`
+  reframed from "total AUM" to a reconstructed estimate with its real `_from_flows`
+  field names; venue-coverage caveat on `/liquidations/by-exchange`), cryptodataapi-
+  regimes.md (gex tier Pro not Pro+, breaking single-symbol envelope, `regime.confidence`,
+  capped/nullable `gamma_flip`, `distribution_context`), spot-etf-flows.md, gamma-
+  explosion.md, gamma-exposure-trading.md, cryptodataapi-backtesting.md, feature-
+  engineering-crypto.md. **Caught in my own verification pass, not the sub-agent's:** it
+  wrote `GET /api/v1/backtesting/snapshots/gamma_exposure` in 3 places -- an invented
+  path. It flagged the uncertainty honestly in its report rather than asserting it, which
+  is what let me catch it. The spec has no such route: `/backtesting/snapshots` IS the
+  data endpoint (required `data_type` + `start` params) and `/backtesting/snapshots/types`
+  is the discovery route. Corrected to the query form. That also exposed a PRE-EXISTING
+  error on cryptodataapi-backtesting.md, which had the two routes documented backwards
+  and listed a `/snapshots/{type}` path that has never existed -- fixed there and on
+  feature-engineering-crypto.md. **Sub-agent correctly rejected one brief premise:**
+  hyperliquid-market-making.md has no stale CryptoDataAPI rate-limit quote (my grep had
+  matched on `10,000/day`, which is Pro's cap and unchanged) -- no edit made, correctly.
+  **QUEUED FOR NEXT FIX ITERATION (high leverage, newly discovered):** wrote a template-
+  aware sweep (scratchpad, reusable) matching every `/api/v1/...` path cited anywhere in
+  the wiki against the live OpenAPI spec, treating `{param}` segments as wildcards so
+  concrete values like `/BTC` match `/{symbol}`. Result: **24 distinct endpoint paths
+  that do not exist, 166 citations.** Worst offenders with confirmed correct
+  replacements: `/market-intelligence/dvol-history` (55 citations, 11 pages -- no dvol
+  endpoint exists at all; the real series is `/volatility/index/history`),
+  `/on-chain/whale-score/{symbol}` and `/on-chain/whale-score/BTC` (39 citations, 27
+  pages -- renamed to `/on-chain/whales/accumulation-score/{symbol}`), `/volatility/dvol`
+  (17x -> `/volatility/index`), `/sentiment/fear-greed-index` (8x -> `/sentiment/fear-
+  greed`), `/derivatives/hyperliquid/funding-rates` (7x -> `/hyperliquid/funding-rates`),
+  and `/market-intelligence/borrow-interest` (10x) plus `/market-intelligence/grayscale/*`
+  which appear to have been retired outright with no replacement. This is a direct
+  violation of CLAUDE.md's never-invent-an-endpoint rule sitting in the wiki at scale,
+  and it is exactly what the new Sync step exists to surface. Per the balance rule, Sync
+  does not create balance debt: the last 3 Fix/Build entries remain iter6 Build, iter7
+  Fix, iter8 Fix, so iter 10 is still owed a **Build** -- but this endpoint sweep is a
+  strong Fix candidate competing with it, and the deferred 5 releases are Sync work that
+  outranks both.

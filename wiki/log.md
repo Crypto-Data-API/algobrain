@@ -9,6 +9,43 @@ tags: [meta, log]
 
 Chronological, append-only record of all wiki operations. Newest entries at the top.
 
+## 2026-08-24 — API changelog sync: tier limits, ETF/liquidation endpoints, gex breaking change (daily loop iter 9, Sync)
+
+**Scope:** First Sync-track iteration. Reconciled the wiki against the data layer's
+release feed, which had never been checked before today. Of the 10 retained releases,
+processed the 5 that change facts the wiki already documented; deferred the 5 that
+introduce entirely new endpoint families needing their own category pages.
+
+- Pages updated:
+  - [[cryptodataapi]] — every row of the plans/rate-limits table was wrong. Free is
+    1,000/day + 10/min (was 50/day + 5/min); Pro Plus is 50,000/day + 120/min (the page
+    claimed "Unlimited" + 60/min). Added the email-verification mechanic (an unverified
+    free key sits on a smaller starter allowance; confirming unlocks the full free tier
+    plus a 24-hour Pro trial), `POST /api/v1/auth/resend-verify`, and the effective-limits
+    fields on `GET /api/v1/auth/keys/me`.
+  - [[cryptodataapi-market-intelligence]] — `/etf/{asset}/flows` supports BTC/ETH/SOL only
+    (XRP now returns 400, not 503; SOL was restored 2026-08-22). `/etf/btc/aum` reframed
+    from "total AUM" to the reconstructed estimate it is, with its real field names
+    (`aum_usd_from_flows`, `btc_held_from_flows`) and the GBTC-seed understatement.
+    Added the OKX/Bybit/Hyperliquid venue-coverage caveat to `/liquidations/by-exchange`.
+  - [[cryptodataapi-regimes]] — `/quant/gex` is Pro tier, not Pro Plus. Documented the
+    2026-06-27 breaking change (a single-symbol query now returns the bulk envelope
+    narrowed to one coin, not a bare per-coin object) plus `regime.confidence`, the
+    capped/nullable `gamma_flip`, and per-coin `distribution_context`.
+  - [[cryptodataapi-backtesting]] — corrected a pre-existing error: `/backtesting/snapshots`
+    is the data endpoint (requires `data_type` and `start`), and `/backtesting/snapshots/types`
+    is the discovery route. The page had the two backwards and listed a `/snapshots/{type}`
+    path that does not exist in the API.
+  - [[spot-etf-flows]], [[gamma-explosion]], [[gamma-exposure-trading]],
+    [[feature-engineering-crypto]] — corrected the same endpoint and tier claims.
+- Every path written was verified against the live OpenAPI spec (204 paths) before the
+  edit, per CLAUDE.md's never-invent-an-endpoint rule.
+- **Known gap, queued:** a wiki-wide sweep against the spec found 24 distinct endpoint
+  paths cited that do not exist, across 166 citations — most notably
+  `/market-intelligence/dvol-history` (55 citations) and `/on-chain/whale-score/{symbol}`
+  (39 citations, since renamed to `/on-chain/whales/accumulation-score/{symbol}`). These
+  predate this iteration and are scheduled for a dedicated Fix batch.
+
 ## 2026-08-24 — Tooling: CryptoDataAPI changelog reconciliation added to the improvement loop
 
 **Scope:** Loop/tooling change, not a content batch. The daily improvement loop now

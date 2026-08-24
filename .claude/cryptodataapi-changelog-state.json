@@ -1,5 +1,36 @@
 {
   "last_checked": "2026-08-24",
   "api_version_seen": "2026-08-23",
-  "processed": []
+  "processed": [
+    {
+      "version": "2026-08-22",
+      "processed_on": "2026-08-24",
+      "disposition": "material",
+      "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
+    },
+    {
+      "version": "2026-08-20",
+      "processed_on": "2026-08-24",
+      "disposition": "material",
+      "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
+    },
+    {
+      "version": "2026-07-10",
+      "processed_on": "2026-08-24",
+      "disposition": "material",
+      "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
+    },
+    {
+      "version": "2026-07-06",
+      "processed_on": "2026-08-24",
+      "disposition": "material",
+      "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
+    },
+    {
+      "version": "2026-06-27",
+      "processed_on": "2026-08-24",
+      "disposition": "material",
+      "note": "iter9 Sync: tier/rate-limit table (all 3 rows), auth email-verification + resend-verify, ETF flows/aum + liquidations/by-exchange corrections, quant/gex breaking envelope + new fields"
+    }
+  ]
 }

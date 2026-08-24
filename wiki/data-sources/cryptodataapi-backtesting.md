@@ -2,7 +2,7 @@
 title: "CryptoDataAPI — Backtesting Archive"
 type: source
 created: 2026-07-13
-updated: 2026-07-14
+updated: 2026-08-24
 status: good
 tags: [data-provider, crypto, api, backtesting, historical-data, point-in-time, parquet, klines, funding, liquidations]
 aliases: ["CryptoDataAPI Backtesting", "CDA Backtesting", "CryptoDataAPI Historical Archive", "CryptoDataAPI Archives"]
@@ -21,8 +21,8 @@ CryptoDataAPI's Backtesting section is the historical arm of the API: a full arc
 | GET | /api/v1/backtesting/klines | OHLCV candles, full archive | — | — |
 | GET | /api/v1/backtesting/funding | Funding rates, historical | — | — |
 | GET | /api/v1/backtesting/liquidations | Liquidation records, historical | — | — |
-| GET | /api/v1/backtesting/snapshots | Snapshot types list | — | — |
-| GET | /api/v1/backtesting/snapshots/{type} | Snapshot by type, historical | type | — |
+| GET | /api/v1/backtesting/snapshots | Historical JSON snapshots for one data type, streamed | data_type*, start*, end, bounds, limit, universe | — |
+| GET | /api/v1/backtesting/snapshots/types | Available snapshot types with row counts and date ranges | — | — |
 | GET | /api/v1/backtesting/symbols | Backtest-available symbols | — | — |
 | GET | /api/v1/backtesting/status | Collector status | — | — |
 | GET | /api/v1/backtesting/export | Export data, custom range | — | — |
@@ -36,7 +36,7 @@ Historical depth: Parquet archive from 2020.
 
 ## Live Data
 
-Only `/backtesting/status` is about the present — it reports collector health so you know whether the archive is up to date. `/backtesting/symbols`, `/backtesting/snapshots`, and `/backtesting/archives-index` are discovery endpoints listing what is currently available to query or download.
+Only `/backtesting/status` is about the present — it reports collector health so you know whether the archive is up to date. `/backtesting/symbols`, `/backtesting/snapshots/types`, and `/backtesting/archives-index` are discovery endpoints listing what is currently available to query or download.
 
 ## Historical Data
 
